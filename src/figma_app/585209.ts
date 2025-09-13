@@ -4,7 +4,7 @@ import { useMemo, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RI, We } from "../figma_app/770088";
 import { mz } from "../figma_app/12220";
-import { _X } from "../figma_app/62612";
+import { getViewportInfo } from "../figma_app/62612";
 import { selectCurrentUser } from "../905/372672";
 import { _ as _$$_ } from "../figma_app/433187";
 import { NS, Cs } from "../905/603628";
@@ -70,7 +70,7 @@ export function $$E1(e) {
   let b = useCallback(e => {
     E(We(e));
   }, [E]);
-  let T = _X({
+  let T = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let I = useMemo(() => e.viewportInfo ? e.viewportInfo : e.useWindowAsViewport ? {

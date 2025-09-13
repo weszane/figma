@@ -1,7 +1,7 @@
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { Lk, mp, qm, a7 } from "../figma_app/162807";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { s as _$$s } from "../905/77553";
 let $$l0 = {
   viewId: "search-files",
@@ -10,14 +10,14 @@ let $$l0 = {
   tabletListSortKeys: [Lk.NAME, Lk.TOUCHED_AT],
   mobileListSortKeys: [Lk.NAME],
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [Lk.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [Lk.NAME]: renderI18nText("search.sort_option.name"),
       [Lk.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
       [Lk.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
       [Lk.OWNER]: renderI18nText("search.sort_option.owner")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [Lk.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [Lk.NAME]: renderI18nText("search.sort_option.name"),
       [Lk.TOUCHED_AT]: renderI18nText("search.sort_option.touched_at"),
@@ -26,7 +26,7 @@ let $$l0 = {
     }
   },
   defaultOptions: {
-    viewMode: XU.GRID,
+    viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: Lk.RELEVANCY,
       sortDesc: !1
@@ -43,19 +43,19 @@ let $$d1 = {
   tabletListSortKeys: [mp.NAME],
   mobileListSortKeys: [mp.NAME],
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [mp.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [mp.NAME]: renderI18nText("search.sort_option.name"),
       [mp.CREATED_AT]: renderI18nText("search.sort_option.created_at")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [mp.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [mp.NAME]: renderI18nText("search.sort_option.name"),
       [mp.CREATED_AT]: renderI18nText("search.sort_option.created_at")
     }
   },
   defaultOptions: {
-    viewMode: XU.GRID,
+    viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: mp.RELEVANCY,
       sortDesc: !1
@@ -70,14 +70,14 @@ let $$c2 = {
   tabletListSortKeys: [qm.NAME, qm.FILES_LAST_TOUCHED_AT, qm.MEMBER_COUNT, _$$s.SPACER],
   mobileListSortKeys: [qm.NAME],
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [qm.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [qm.NAME]: renderI18nText("search.sort_option.name"),
       [qm.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
       [qm.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
       [qm.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [qm.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [qm.NAME]: renderI18nText("search.sort_option.name"),
       [qm.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
@@ -86,7 +86,7 @@ let $$c2 = {
     }
   },
   defaultOptions: {
-    viewMode: XU.GRID,
+    viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: qm.RELEVANCY,
       sortDesc: !1
@@ -102,19 +102,19 @@ let $$u3 = {
   tabletListSortKeys: [a7.NAME, a7.EMAIL],
   mobileListSortKeys: [a7.NAME],
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [a7.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [a7.NAME]: renderI18nText("search.sort_option.name"),
       [a7.EMAIL]: renderI18nText("search.sort_option.email")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [a7.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [a7.NAME]: renderI18nText("search.sort_option.name"),
       [a7.EMAIL]: renderI18nText("search.sort_option.email")
     }
   },
   defaultOptions: {
-    viewMode: XU.GRID,
+    viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: a7.RELEVANCY,
       sortDesc: !1

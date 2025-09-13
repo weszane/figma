@@ -7,7 +7,7 @@ import { W as _$$W } from "../figma_app/462192";
 import { VariableResolvedDataType, SpacingMode, Fullscreen, SnapMode, StackBindingsCpp } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import u from "classnames";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
@@ -15,7 +15,7 @@ import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker } from "../905/
 import { kl, lJ } from "../905/275640";
 import { F } from "../905/258517";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Se } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
 import { ow } from "../905/188421";
@@ -132,7 +132,7 @@ export function $$M0({
       "data-tooltip-max-width": 200,
       "data-tooltip-proxy-element-id": consumedVariable ? $ : void 0,
       "data-tooltip-show-on-target-only": !0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dataTestId: u.inputTestId,
       dispatch: M,
       forwardedRef: K,
@@ -165,10 +165,10 @@ export function $$M0({
       squareRightBorder: u.squareRightBorder,
       value: Q,
       wheelMultiplier: smallNudgeAmount,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: p()(QK, u.svgClassName),
         svg: Y,
-        "data-tooltip-type": consumedVariable ? Ib.TEXT : void 0,
+        "data-tooltip-type": consumedVariable ? KindEnum.TEXT : void 0,
         "data-tooltip": consumedVariable ? et : void 0,
         "data-tooltip-max-width": consumedVariable ? 200 : void 0,
         id: consumedVariable ? $ : void 0

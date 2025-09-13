@@ -28,7 +28,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { I as _$$I } from "../5421/927984";
 import { _P } from "../figma_app/2590";
 import { zy } from "../figma_app/915202";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { ht } from "../figma_app/741785";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
@@ -38,7 +38,7 @@ import { YT, Oz, Qe, dJ, eG as _$$eG, uU, n6, iC, zt } from "../figma_app/84580"
 import { hh } from "../905/417232";
 import { AutoLayout } from "../905/470281";
 import { rp, Zk, fI, U8, JU, nV } from "../figma_app/626177";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { ex as _$$ex } from "../905/524523";
 import { A as _$$A2 } from "../svg/420906";
@@ -65,7 +65,7 @@ import { Um } from "../905/848862";
 import { l6, c$, sK } from "../905/794875";
 import { Ay, HS } from "../figma_app/976110";
 import { dU, sQ, BX, Lp, Gl, Ym, vE, eU as _$$eU } from "../897/934363";
-import { IK, $n } from "../905/521428";
+import { ButtonWide, Button } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { Label } from "../905/270045";
 import { k as _$$k2 } from "../905/582200";
@@ -84,7 +84,7 @@ var f = y;
 let Y = _$$ex("prototype_action_info", function () {
   return jsxs("div", {
     className: _$$s.flex.itemsCenter.justifyCenter.$,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: "prototype_action_info_tooltip--prototypeDestinationInfoIcon--GeQWS",
       svg: _$$A2
     }), jsx("span", {
@@ -143,7 +143,7 @@ function es({
   return jsx(rp, {
     ref: p,
     className: "prototype_key_capture_field--root--bD21s",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": u && u.length > 10 ? u : null,
     onFocus: () => c(!0),
     onBlur: () => c(!1),
@@ -341,7 +341,7 @@ function ew(e) {
       children: [x && eA(getI18nString("proto.delay"), jsx(W4, {
         className: Lp,
         "data-tooltip": getI18nString("proto.trigger.after_delay_timeout"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dataTestId: "timeout-input",
         dispatch: t,
         inputClassName: Gl,
@@ -369,7 +369,7 @@ function ew(e) {
       }), c), g && eA(getI18nString("proto.time"), jsx(qd, {
         className: Ym,
         "data-tooltip": getI18nString("proto.trigger.video_hit_time"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dataTestId: "mediaHitTime-input",
         dispatch: t,
         displayFractions: !0,
@@ -390,7 +390,7 @@ function ew(e) {
         allowEmpty: !0,
         className: Lp,
         "data-tooltip": getI18nString("proto.trigger.after_delay_timeout"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dataTestId: "duration-input",
         dispatch: t,
         inputClassName: Gl,
@@ -581,7 +581,7 @@ function e$({
 }) {
   let l = useDispatch();
   let s = YT() === Oz.SINGLE_COL;
-  let d = s ? IK : $n;
+  let d = s ? ButtonWide : Button;
   let c = 1 === o ? jsx(d, {
     variant: "secondary",
     onClick: () => {
@@ -1198,7 +1198,7 @@ let e7 = memo(function ({
     recordingKey: generateRecordingKey(dJ, "actionDeleteButton"),
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.delete"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$O, {})
   });
@@ -1502,7 +1502,7 @@ function te({
       "data-tooltip": getI18nString("proto.interaction_details.select_n_matching_interactions", {
         total_num_interactions: c
       }),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$A, {})
   });

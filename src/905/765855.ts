@@ -1,13 +1,13 @@
-import { createActionCreator } from "../905/73481";
-import { zr, Zj } from "../905/129884";
-import { PluginIframeMode } from "../905/968269";
-import { Y } from "../905/696438";
-import { createOptimistThunk } from "../905/350402";
-let $$l5 = createActionCreator("TOOLTIP_SET_TARGET_REF");
-let $$d2 = createActionCreator("TOOLTIP_UPDATE");
+import { createActionCreator } from '../905/73481';
+import { StatusEnum, PositionEnum } from '../905/129884';
+import { createOptimistThunk } from '../905/350402';
+import { Y } from '../905/696438';
+import { PluginIframeMode } from '../905/968269';
+let $$l5 = createActionCreator('TOOLTIP_SET_TARGET_REF');
+let $$d2 = createActionCreator('TOOLTIP_UPDATE');
 let c = createOptimistThunk((e, t) => {
   let i = e.getState();
-  null !== i.tooltip.timeoutID && i.tooltip.timeoutID != t.tooltip.timeoutID && clearTimeout(i.tooltip.timeoutID);
+  i.tooltip.timeoutID !== null && i.tooltip.timeoutID != t.tooltip.timeoutID && clearTimeout(i.tooltip.timeoutID);
   e.dispatch($$d2(t));
 });
 let $$u4 = createOptimistThunk(e => {
@@ -21,7 +21,7 @@ let $$u4 = createOptimistThunk(e => {
 });
 let $$p0 = createOptimistThunk((e, t) => {
   let i = e.getState();
-  if (null === i.tooltip.timeoutID) {
+  if (i.tooltip.timeoutID === null) {
     let n = setTimeout(() => {
       e.dispatch($$m3());
     }, t.timeoutDelay);
@@ -37,8 +37,8 @@ let $$m3 = createOptimistThunk(e => {
   g(!1);
   e.dispatch(c({
     tooltip: {
-      state: zr.NONE,
-      position: Zj.BELOW,
+      state: StatusEnum.NONE,
+      position: PositionEnum.BELOW,
       target: null,
       targetRect: void 0,
       timeoutID: null,
@@ -50,7 +50,7 @@ let $$h1 = createOptimistThunk((e, t) => {
   g(!0);
   e.dispatch(c({
     tooltip: {
-      state: zr.SHOWING,
+      state: StatusEnum.SHOWING,
       position: t.position,
       target: t.target,
       tipAlign: t.tipAlign,
@@ -92,7 +92,7 @@ export let $$f6 = createOptimistThunk((e, t) => {
   }, t.timeoutDelay);
   e.dispatch(c({
     tooltip: {
-      state: zr.PENDING,
+      state: StatusEnum.PENDING,
       position: t.position,
       tipAlign: t.tipAlign,
       target: t.target,

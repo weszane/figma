@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useStore } from "react-redux";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 var $$s0 = (e => (e.START = "start", e.STOP = "stop", e.IGNORE = "ignore", e))($$s0 || {});
 export function $$o1() {
   let e = useStore();
@@ -11,7 +11,7 @@ export function $$o1() {
     let s = r.allUsers.find(e => e.sessionID === r.sessionID);
     let o = r.allUsers.length;
     let l = s?.userID;
-    ds("Spotlight CTA Clicked", n, i, {
+    trackFileEvent("Spotlight CTA Clicked", n, i, {
       userId: l,
       numFileUsers: o,
       eventType: t

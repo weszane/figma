@@ -15,7 +15,7 @@ import { _l } from "../figma_app/976345";
 import { A } from "../1250/724587";
 import { b as _$$b } from "../905/985254";
 import { z } from "../905/373223";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { HE, O_ } from "../905/967587";
 import { DtmMigrationInfo, UserFlagByName } from "../figma_app/43951";
 import { hasExternalRestrictedOrgId } from "../figma_app/12796";
@@ -125,7 +125,7 @@ export function $$A1({
       I && w && b?.planParentId === l.plan_id && t(_$$b({
         seen_dtm_post_migration_badge: !0
       }));
-      uE("Plan Switcher Plan Clicked", {
+      trackUserEvent("Plan Switcher Plan Clicked", {
         user: e
       }, {
         currentOrgId: c,

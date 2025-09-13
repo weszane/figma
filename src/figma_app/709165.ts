@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export function ignore(_e) {
+export function ignore() {
   return z.any().transform(e => e)
 }
 export let coerce = {

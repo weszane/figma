@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useStore, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
-import { $n } from "../905/521428";
-import { bL } from "../905/38914";
+import { Button } from "../905/521428";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { getResourceDataOrFallback } from "../905/663269";
 import { xf } from "../figma_app/416935";
@@ -13,14 +13,14 @@ import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { ks } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { qc } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
-import { xr, _J } from "../figma_app/314264";
+import { trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
 import { N as _$$N } from "../905/98916";
 import { TeamHasPublishedSite } from "../figma_app/43951";
 import { mg, nX } from "../figma_app/336853";
@@ -116,9 +116,9 @@ function B(e) {
     n(popModalStack());
   };
   useEffect(() => {
-    en && (em ? xr("Project transfer error", em, eh, o.getState(), {
+    en && (em ? trackFolderEvent("Project transfer error", em, eh, o.getState(), {
       error: en
-    }) : _J("Team transfer error", eh, o.getState(), {
+    }) : trackTeamEvent("Team transfer error", eh, o.getState(), {
       error: en
     }));
   }, [en, eh, o, em]);
@@ -182,14 +182,14 @@ function B(e) {
         return renderI18nText("asset_transfers.request_modal.errors.this_links_to_a_team_that_isn't_able_to_receive_transfers");
     }
   };
-  let ev = ea ? jsx($n, {
+  let ev = ea ? jsx(Button, {
     disabled: !0,
-    children: jsx(qc, {})
-  }) : e.shouldTransferCopy ? jsx($n, {
+    children: jsx(LoadingOverlay, {})
+  }) : e.shouldTransferCopy ? jsx(Button, {
     disabled: 2 === G && (!(Y && H) || !eo) || ea,
     onClick: eI,
     children: 1 === G ? renderI18nText("asset_transfers.request_modal.next") : renderI18nText("asset_transfers.request_modal.send")
-  }) : jsx($n, {
+  }) : jsx(Button, {
     disabled: 2 === G && (!(Y && H) || !eo) || ea,
     onClick: eI,
     children: 1 === G ? renderI18nText("asset_transfers.request_modal.next") : renderI18nText("asset_transfers.request_modal.request_transfer")
@@ -202,7 +202,7 @@ function B(e) {
       teamId: eh,
       entryPoint: e.entryPoint
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: ed,
       width: "lg",
       children: jsxs(vo, {
@@ -333,7 +333,7 @@ function B(e) {
                 className: Pv,
                 children: jsxs("div", {
                   className: Gu,
-                  children: [jsx(_$$B, {
+                  children: [jsx(SvgComponent, {
                     className: Kk,
                     svg: _$$A
                   }), jsx("div", {
@@ -377,7 +377,7 @@ function B(e) {
               }), " "]
             }), jsxs("div", {
               className: _$$s.flex.gap8.itemsCenter.$,
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 onClick: 1 === G ? eT : () => {
                   V(1);

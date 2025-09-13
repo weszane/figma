@@ -13,7 +13,7 @@ import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { FAuthProviderType } from "../figma_app/191312";
 import { LibraryPresetSubscriptionsV2 } from "../figma_app/43951";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Rs as _$$Rs } from "../905/991973";
 import { N as _$$N2 } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -188,7 +188,7 @@ export function $$L0({
     }, [n, i]);
     if (u || a) return {
       "data-tooltip": C,
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip-interactive": !0,
       "data-tooltip-max-width": 200,
       ...m
@@ -198,7 +198,7 @@ export function $$L0({
         let t = o?.[e]?.author_name;
         return {
           "data-tooltip": N,
-          "data-tooltip-type": Ib.SPECIAL,
+          "data-tooltip-type": KindEnum.SPECIAL,
           "data-tooltip-interactive": !0,
           "data-tooltip-max-width": 210,
           "data-tooltip-author-name": t,
@@ -209,7 +209,7 @@ export function $$L0({
         case FAuthProviderType.APPLE:
           return {
             "data-tooltip": S,
-            "data-tooltip-type": Ib.SPECIAL,
+            "data-tooltip-type": KindEnum.SPECIAL,
             "data-tooltip-interactive": !0,
             "data-tooltip-max-width": 200,
             ...m
@@ -217,7 +217,7 @@ export function $$L0({
         case FAuthProviderType.GOOGLE:
           return {
             "data-tooltip": k,
-            "data-tooltip-type": Ib.SPECIAL,
+            "data-tooltip-type": KindEnum.SPECIAL,
             "data-tooltip-interactive": !0,
             "data-tooltip-max-width": 210,
             ...m
@@ -225,7 +225,7 @@ export function $$L0({
         case FAuthProviderType.FIGMA:
           return {
             "data-tooltip": T,
-            "data-tooltip-type": Ib.SPECIAL,
+            "data-tooltip-type": KindEnum.SPECIAL,
             "data-tooltip-interactive": !0,
             "data-tooltip-max-width": 210,
             ...m

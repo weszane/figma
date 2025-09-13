@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { g as _$$g } from "../figma_app/777171";
 import { m0 } from "../figma_app/976749";
 import { z4 } from "../905/37051";
-import { ni } from "../figma_app/62612";
+import { getBasicViewportRect } from "../figma_app/62612";
 import { t as _$$t2 } from "../905/192333";
 import { O } from "../figma_app/71774";
 import { F } from "../figma_app/603239";
@@ -33,7 +33,7 @@ let $$D12 = 1;
 let $$k2 = 2;
 export function $$M8(e) {
   let t = function () {
-    let e = ni();
+    let e = getBasicViewportRect();
     return useMemo(() => new Point(e.x + C, e.y + C), [e.x, e.y]);
   }();
   let r = m0();

@@ -2,10 +2,10 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
-import { qc } from "../figma_app/858013";
+import { Button } from "../905/521428";
+import { LoadingOverlay } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -33,7 +33,7 @@ let b = registerModal(function (e) {
     properties: {
       resourceConnectionId: e.resourceConnectionId
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
       children: jsxs(vo, {
@@ -48,7 +48,7 @@ let b = registerModal(function (e) {
             children: renderI18nText("resource_connection.disconnect_success_modal.you_deactivated_the_connected_project", {
               connectedPlanName: e.connectedPlanName,
               projectName: e.projectName,
-              shareACopyLink: jsx($n, {
+              shareACopyLink: jsx(Button, {
                 variant: "link",
                 onClick: () => {
                   t();
@@ -86,7 +86,7 @@ let $$v0 = registerModal(function (e) {
     properties: {
       resourceConnectionId: e.resourceConnectionId
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
       children: jsxs(vo, {
@@ -122,16 +122,16 @@ let $$v0 = registerModal(function (e) {
           })]
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: () => {
                 t(popModalStack());
               },
               children: renderI18nText("resource_connection.request_modal.cancel")
-            }), f ? jsx($n, {
+            }), f ? jsx(Button, {
               disabled: !0,
-              children: jsx(qc, {})
-            }) : jsx($n, {
+              children: jsx(LoadingOverlay, {})
+            }) : jsx(Button, {
               variant: "destructiveSecondary",
               onClick: () => {
                 A(!0);

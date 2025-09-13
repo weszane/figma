@@ -4,7 +4,7 @@ import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../fig
 import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { A } from "../905/920142";
-import { oA, Xm, gB } from "../905/723791";
+import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
 import { dl } from "../figma_app/307841";
 import { CT } from "../figma_app/297957";
 import { n as _$$n } from "../1577/959155";
@@ -17,11 +17,11 @@ let m = createRemovableAtomFamily(({
 })).transform(({
   org: e
 }) => {
-  let l = !!oA(e?.isSalesAssistedPlanProperty)?.value;
-  let i = !!oA(e?.subscriptionShouldNotAutoRenewPlanProperty);
+  let l = !!getResourceDataOrFallback(e?.isSalesAssistedPlanProperty)?.value;
+  let i = !!getResourceDataOrFallback(e?.subscriptionShouldNotAutoRenewPlanProperty);
   return {
     isSalesAssisted: l,
-    noTosAcceptanceKey: oA(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025,
+    noTosAcceptanceKey: getResourceDataOrFallback(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025,
     shouldNotAutoRenew: i
   };
 }) : resourceUtils.disabled()));
@@ -51,7 +51,7 @@ export function $$f0(e) {
   let v = useAtomWithSubscription(useMemo(() => m({
     orgId: l
   }), [l]));
-  let b = oA(v.data);
+  let b = getResourceDataOrFallback(v.data);
   let x = function ({
     orgCreatedAt: e,
     isSalesAssisted: l,

@@ -36,14 +36,14 @@ import { l6, c$, sK } from "../905/794875";
 import { TN, Cm } from "../figma_app/334459";
 import { DxS } from "../figma_app/27776";
 import { X7 } from "../897/50897";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Y1 } from "../905/143116";
 import { p8 } from "../figma_app/722362";
 import { KN } from "../figma_app/741785";
 import { Op } from "../figma_app/405038";
 import { YT, Oz, zt, LH, kM, uU, hU, oc, GB, Fp } from "../figma_app/84580";
 import { Ad } from "../figma_app/811257";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { AutoLayout } from "../905/470281";
 import { P as _$$P } from "../5421/146016";
 import { t as _$$t2 } from "../5421/711842";
@@ -82,7 +82,7 @@ import { iv, Uj, mc, UC as _$$UC } from "../905/872285";
 import { B as _$$B3 } from "../905/950875";
 import { k as _$$k2 } from "../905/582200";
 import { In } from "../905/672640";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { zZ } from "../figma_app/299859";
 import { N as _$$N } from "../905/438674";
 import { ks } from "../figma_app/637027";
@@ -369,7 +369,7 @@ function ep({
     children: [y ? jsx("span", {
       className: "prototype_conditional_controls--conditionIconUI3--zcwx0",
       children: renderI18nText("proto.else")
-    }) : jsx(_$$B, {
+    }) : jsx(SvgComponent, {
       className: el,
       svg: _$$A2
     }), !y && x.length > 0 && jsx("div", {
@@ -382,7 +382,7 @@ function ep({
       })
     })]
   });
-  let C = y ? jsx(_$$E, {
+  let C = y ? jsx(ButtonPrimitive, {
     className: "prototype_conditional_controls--elseBlockRowUI3--VXjmO",
     onClick: c,
     children: I
@@ -401,14 +401,14 @@ function ep({
           children: jsxs(AutoLayout, {
             direction: "horizontal",
             spacing: 0,
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               className: el,
               svg: _$$A3
             }), jsx(AutoLayout, {
               direction: "horizontal",
               spacing: 0,
               children: isValidValue(g) && b
-            }), jsx(_$$B, {
+            }), jsx(SvgComponent, {
               className: "prototype_conditional_controls--icon--JV1i0",
               svg: $$default
             })]
@@ -567,7 +567,7 @@ function eh({
       position: "relative"
     } : void 0,
     children: [isInvalidValue(i.conditionalActions) && jsx(Y1, {
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         className: "prototype_conditional_controls--mixedConditionalText--6O32b",
         onClick: () => {
           var e = [];
@@ -1140,7 +1140,7 @@ function te({
       })
     })]
   }) : jsx("div", {
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip": e7,
     "data-tooltip-interactive": !0,
     "data-tooltip-show-immediately": !0,
@@ -1377,7 +1377,7 @@ function tc({
   let x = jsx(gq, {
     bigNudgeAmount,
     "data-tooltip": getI18nString("proto.trigger.y_offset"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: c,
     inputClassName: oM,
     onValueChange: p(h, "y"),
@@ -1395,7 +1395,7 @@ function tc({
   let g = jsx(gq, {
     bigNudgeAmount,
     "data-tooltip": getI18nString("proto.trigger.x_offset"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: c,
     inputClassName: oM,
     onValueChange: p(h, "x"),
@@ -1539,7 +1539,7 @@ function tf({
   let O = jsx(qd, {
     className: "prototype_video_action_options--timestampContainer---DdaI",
     "data-tooltip": getI18nString("proto.trigger.timestamp_to_set_to"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: "mediaSkipToTime-input",
     dispatch: _,
     displayFractions: !0,
@@ -1557,7 +1557,7 @@ function tf({
   let R = jsx(dE, {
     className: "prototype_video_action_options--timeAmountContainer--5kpHn",
     "data-tooltip": D,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: "mediaSkipByAmount-input",
     dispatch: _,
     max: 3600,

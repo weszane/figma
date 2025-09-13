@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { K } from "../905/443068";
@@ -35,7 +35,7 @@ function C() {
     eventHandlers
   } = ZQ(x, x);
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: "mcp_sse_deprecation_banner--deprecationModalTriggerButton--NXqHh",
       onClick: function (n) {
         let {

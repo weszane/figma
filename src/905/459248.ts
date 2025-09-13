@@ -2,10 +2,10 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { $n, IK } from "../905/521428";
+import { Button, ButtonWide } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { K as _$$K } from "../905/443068";
 import { r as _$$r } from "../905/571562";
@@ -21,14 +21,14 @@ import E from "../vendor/223926";
 import S from "../vendor/128080";
 import C from "../vendor/523035";
 import { parsePxNumber } from "../figma_app/783094";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { bG } from "../905/149328";
 import { Point } from "../905/736624";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -42,10 +42,10 @@ import { J as _$$J2 } from "../905/445197";
 import { fullscreenValue } from "../figma_app/455680";
 import { h_, Ie, qG, jb, _D, Cj } from "../905/291654";
 import { Kk, Rt } from "../905/777093";
-import { q as _$$q } from "../905/807667";
+import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { Um } from "../905/848862";
 import { QR } from "../figma_app/623300";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { pn } from "../905/714538";
 import { e0 as _$$e2 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -66,7 +66,7 @@ import { Us } from "../figma_app/637027";
 import { Bq } from "../figma_app/482142";
 import { b as _$$b } from "../905/985254";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { TeamCanAdmin } from "../figma_app/43951";
@@ -129,7 +129,7 @@ function eS(e) {
       forwardToDatadog: !0
     });
   }), Kk()) ? jsx(Fragment, {}) : jsx(ev, {
-    icon: jsx(_$$B, {
+    icon: jsx(SvgComponent, {
       svg: _$$A2,
       className: "missing_fonts_modal_no_agent_banner--warningIcon--AfKIM"
     }),
@@ -160,7 +160,7 @@ function ej(e) {
     })
   });
   return jsx(ev, {
-    icon: jsx(_$$B, {
+    icon: jsx(SvgComponent, {
       className: _$$s.m2.colorIcon.$,
       svg: _$$A3
     }),
@@ -229,7 +229,7 @@ export let $$eZ0 = registerModal(function (e) {
   let g = useDispatch();
   let f = Um();
   let v = useSelector(e => e.fonts);
-  let E = _$$U();
+  let E = trackFileEventWithStore();
   let [S, C] = useState();
   let T = sO();
   let k = useIsFullscreenSitesView();
@@ -287,7 +287,7 @@ export let $$eZ0 = registerModal(function (e) {
         error: !1,
         icon: VisualBellIcon.IMAGE_BACKED_SPINNER,
         delay: 1500
-      })), _$$q(PluginModalType.MISSING_FONTS).then(() => {
+      })), handleLoadAllPagesWithVersionCheck(PluginModalType.MISSING_FONTS).then(() => {
         new Promise(e => {
           Fonts.fontsAreLoading() ? $$eq2 = e : e();
         }).then(() => {
@@ -459,7 +459,7 @@ export let $$eZ0 = registerModal(function (e) {
   let eM = useRef(null);
   let ej = function () {
     let e = _$$f("seen_missing_fonts_org_upsell_banner");
-    let t = sZ() ?? null;
+    let t = useCurrentUserOrg() ?? null;
     let i = selectCurrentFile()?.team ?? null;
     let n = selectCurrentUser();
     let r = useIsFullscreenSitesView();
@@ -558,13 +558,13 @@ export let $$eZ0 = registerModal(function (e) {
               });
             },
             versionsForStyles
-          }, e)), eE && missingFontsInfoForCurrentScope.missingFonts.some(e => !e.inSelection) && jsxs(_$$E, {
+          }, e)), eE && missingFontsInfoForCurrentScope.missingFonts.some(e => !e.inSelection) && jsxs(ButtonPrimitive, {
             className: I()(_$$s.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.px12.colorTextSecondary.$, ey),
             onClick: () => {
               ex(!1);
               setScope(PageSelectionType.CURRENT_PAGE);
             },
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: _$$A5,
               className: "missing_fonts_modal--overflowDotsIcon--nOli9"
             }), renderI18nText("fullscreen.toolbar.missing_fonts_modal.show_other_missing_fonts")]
@@ -582,7 +582,7 @@ export let $$eZ0 = registerModal(function (e) {
             children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.replace_on_the_whole_page")
           })
         }), e0 && !eE && jsxs(Fragment, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: eT,
             variant: "secondary",
             ref: eM,
@@ -606,11 +606,11 @@ export let $$eZ0 = registerModal(function (e) {
           })]
         }), jsxs("div", {
           className: _$$s.flex.justifyEnd.$,
-          children: [!e1 && jsx($n, {
+          children: [!e1 && jsx(Button, {
             variant: "secondary",
             onClick: onClose,
             children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.close")
-          }), e1 && jsxs($n, {
+          }), e1 && jsxs(Button, {
             recordingKey: generateRecordingKey(h, "replaceFonts"),
             disabled: !e1 || isReplacing || isLoadingMissingFonts,
             onClick: onApply,
@@ -664,7 +664,7 @@ function eX({
         b(x?.family, m.missingFonts.filter(e => e.family === x?.family).map(e => e.style));
       },
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": N
       },
       "aria-label": N,
@@ -680,7 +680,7 @@ function eX({
     className: I()(_$$s.flex.itemsStretch.flexNone.$$if(s, _$$s.flexColumn, _$$s.itemsCenter).py4.px12.$, s ? "" : eb),
     children: [jsxs("div", {
       className: I()(_$$s.flex.flexGrow1.itemsCenter.textBodyMedium.minH32.$, eb),
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         className: I()(_$$s.flex.flexGrow1.itemsCenter.alignLeft.textBodyMedium.minH32.$, ey, "missing_fonts_modal--fontFamilyRowButton--TTmK3"),
         onClick: () => {
           l(!s);
@@ -705,7 +705,7 @@ function eX({
             children: [jsx("div", {
               className: _$$s.flex.itemsCenter.$,
               children: e.style
-            }), jsx(_$$B, {
+            }), jsx(SvgComponent, {
               svg: _$$A4,
               className: I()(e_, _$$s.mr8.$)
             })]
@@ -757,7 +757,7 @@ function eX({
                   b(e.family, e.style);
                 },
                 htmlAttributes: {
-                  "data-tooltip-type": Ib.TEXT,
+                  "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": a
                 },
                 "aria-label": a,
@@ -769,7 +769,7 @@ function eX({
         }, e.index);
       })
     }), !s && jsxs(Fragment, {
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A4,
         className: I()(e_, _$$s.mr8.$)
       }), jsxs("div", {
@@ -777,7 +777,7 @@ function eX({
         style: sx.add({
           width: ef
         }).$,
-        children: [S.length > 1 ? jsx(IK, {
+        children: [S.length > 1 ? jsx(ButtonWide, {
           onClick: () => l(!s),
           variant: "secondary",
           children: jsx("div", {
@@ -786,7 +786,7 @@ function eX({
           })
         }) : jsxs(Fragment, {
           children: [R && jsxs(Fragment, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               onClick: D,
               children: getI18nString("fullscreen.toolbar.missing_fonts_modal.enable_font")
             }), jsx("span", {

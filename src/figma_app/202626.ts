@@ -2,7 +2,7 @@ import { hV, PA } from "../figma_app/387100";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { e as _$$e } from "../905/986107";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 var $$l4 = (e => (e[e.FORWARD = 0] = "FORWARD", e[e.BACKWARD = 1] = "BACKWARD", e))($$l4 || {});
 let $$d2 = "exp_tooltips_plus_onboarding";
 let c = "product page";
@@ -98,7 +98,7 @@ export async function $$y9({
   guidToSelect: r
 }) {
   clearSelection();
-  await e(QZ({
+  await e(computeFullscreenViewportForNode({
     nodeId: t || r,
     alwaysPan: !1,
     minSizePx: t ? 200 : 32

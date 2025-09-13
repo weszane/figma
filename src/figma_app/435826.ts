@@ -5,7 +5,7 @@ import { ey } from "../905/859698";
 import { LibraryPubSub, VariablesBindings, Fullscreen } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { PerfTimer } from "../905/609396";
@@ -281,7 +281,7 @@ export function $$G6(e, t = aD.ALL, r) {
       message: getI18nString("variables.authoring_modal.default_mode_changed")
     }));
   }, [ee, V, H, z, sessionId, W, $, r, a]);
-  let eo = _$$U();
+  let eo = trackFileEventWithStore();
   return {
     updateComponent: en,
     updateStateGroup: ei,

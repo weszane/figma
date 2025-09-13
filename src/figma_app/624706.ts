@@ -3,7 +3,7 @@ import { memo, useState, useRef, useEffect, useMemo, Suspense, useCallback, crea
 import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { b as _$$b, bL, mc, N_, q7, wv } from "../figma_app/860955";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
@@ -21,7 +21,7 @@ import { RecordingPureComponent, setupPlayback, generateRecordingKey, handleMous
 import { I7 } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { useModalManager } from "../905/437088";
-import { bL as _$$bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { A as _$$A2 } from "../figma_app/849799";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -52,7 +52,7 @@ import { UserWithTeams } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { mapFileTypeToEditorTypeNullable, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { aG } from "../figma_app/728657";
 import { H as _$$H } from "../905/75186";
@@ -71,7 +71,7 @@ import { lk2, Yd_, FR6, nRk } from "../figma_app/6204";
 import { jH, cl, bb } from "../figma_app/926950";
 import { qf } from "../905/817095";
 import { g as _$$g2 } from "../905/687265";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { P as _$$P } from "../vendor/348225";
 import { Z1 } from "../905/401885";
@@ -92,10 +92,10 @@ import { hK } from "../5132/334833";
 import { Jn } from "../905/17223";
 import { sx as _$$sx } from "../905/941192";
 import { AutoLayout, Spacer } from "../905/470281";
-import { E as _$$E3 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { NJ } from "../figma_app/419216";
 import { e as _$$e2 } from "../905/916195";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { N as _$$N2 } from "../905/438674";
 import { k as _$$k3 } from "../905/888808";
 import { A as _$$A3 } from "../svg/745787";
@@ -128,7 +128,7 @@ let d = memo(function (e) {
 var h = _;
 let D = registerModal(function (e) {
   let t = useModalManager(e);
-  return jsx(_$$bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
     children: jsxs(vo, {
@@ -308,7 +308,7 @@ function eM({
       children: _$$A(t.updatedAt).format("MMM D, YYYY h:mm A")
     }), jsx("span", {
       ...Ay.props(eF.action),
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         onClick: () => i(e),
         children: renderI18nText("reset_user_flags_modal.reset")
@@ -488,7 +488,7 @@ let eU = {
 let eB = registerModal(function (e) {
   let t = useModalManager(e);
   let r = useSelector(e => e.userFlags);
-  return jsx(_$$bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     height: "dynamic",
@@ -617,7 +617,7 @@ function te({
       children: [jsxs(AutoLayout, {
         verticalAlignItems: "center",
         padding: 12,
-        children: [jsx(_$$E3, {
+        children: [jsx(TextWithTruncation, {
           fontWeight: "medium",
           fontSize: 13,
           children: r
@@ -635,7 +635,7 @@ function te({
         })
       }), jsx("div", {
         style: _$$sx.p16.pb0.$,
-        children: jsx(_$$E3, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           children: t
         })
@@ -714,12 +714,12 @@ function ti({
       shouldNotWrapInParagraphTag: !0,
       children: jsxs(AutoLayout, {
         direction: "vertical",
-        children: [jsx(_$$E3, {
+        children: [jsx(TextWithTruncation, {
           fontWeight: "semi-bold",
           fontSize: 13,
           color: "onbrand",
           children: renderI18nText("help_widget.collective_upsells_widget_tooltip.header_text")
-        }), jsx(_$$E3, {
+        }), jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           color: "onbrand",
@@ -2140,7 +2140,7 @@ function tC({
       children: jsxs("button", {
         className: "figjam_try_faq_modal--topLevelSection--7Qwg9",
         onClick: r,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: t
         }), jsx("h2", {
           className: "figjam_try_faq_modal--subTitle--Q-kIg",
@@ -2159,7 +2159,7 @@ let tw = registerModal(function () {
   });
   return jsx(fu, {
     name: "figjam_try_faq_modal",
-    children: jsx(_$$bL, {
+    children: jsx(ModalRootComponent, {
       manager: s,
       width: 480,
       children: jsx(vo, {
@@ -3427,13 +3427,13 @@ function rr({
   return jsxs(Fragment, {
     children: [e && jsxs(bL, {
       manager,
-      children: [jsx(_$$E, {
+      children: [jsx(ButtonPrimitive, {
         ...getTriggerProps(),
         ...Ay.props(rt.buttonStyle, manager.isOpen && rt.buttonStyleActive),
         "aria-label": getI18nString("fullscreen.menu.help_menu"),
         "aria-expanded": manager.isOpen,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("help_widget.tooltip"),
           "data-tooltip-submenu-open": manager.isOpen
         },

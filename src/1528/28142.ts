@@ -3,7 +3,7 @@ import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { B } from "../figma_app/539422";
 export function $$c0(e) {
   let {
@@ -25,7 +25,7 @@ export function $$c0(e) {
         },
         htmlAttributes: {
           "data-tooltip": getI18nString("dev_handoff.code.options"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(J, {})
       })

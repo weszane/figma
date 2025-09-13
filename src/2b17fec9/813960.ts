@@ -1,20 +1,20 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, forwardRef } from "react";
 import { createPortal } from "react-dom";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Fullscreen, AlignmentPosition, Command } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import c from "classnames";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { W6 } from "../905/125333";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { S as _$$S } from "../figma_app/552746";
 import { n as _$$n } from "../905/734251";
 import { F } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
-import { Pl } from "../figma_app/62612";
-import { Ib } from "../905/129884";
+import { getViewportZoom } from "../figma_app/62612";
+import { KindEnum } from "../905/129884";
 import { Yt } from "../figma_app/955650";
 import { zG, C2 } from "../figma_app/47958";
 import { Jc, Qd, lx } from "../figma_app/27927";
@@ -81,7 +81,7 @@ export function $$N0({
     children: [jsx(_$$n.div, {
       onPointerDown: j ? void 0 : onInsertableResourcePointerDown,
       "data-testid": `outer-${w}`,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         className: u()({
           [Fu]: !B && "large" === x,
           [o1]: !B && "small" === x,
@@ -93,7 +93,7 @@ export function $$N0({
         "aria-current": B,
         "aria-label": M.name,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": M.name,
           "data-testid": w,
           onDoubleClick: P,
@@ -120,13 +120,13 @@ function A({
   size: t
 }) {
   let i = "MINDMAP_TREE_NUCLEUS" === e;
-  return "small" === t ? i ? jsx(B, {
+  return "small" === t ? i ? jsx(SvgComponent, {
     svg: CO(e),
     className: oF
-  }) : jsx(B, {
+  }) : jsx(SvgComponent, {
     svg: CO(e),
     className: Y2
-  }) : jsx(B, {
+  }) : jsx(SvgComponent, {
     svg: CO(e),
     className: $E,
     style: i ? {
@@ -140,7 +140,7 @@ let O = forwardRef(function ({
   color: i,
   strokeStyleType: r
 }, s) {
-  let o = Pl({
+  let o = getViewportZoom({
     subscribeToUpdates_expensive: !1
   });
   if (!e?.dragPosition) return null;

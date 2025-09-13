@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { K } from "../905/443068";
 import { LinkPrimitive } from "../figma_app/496441";
-import { E } from "../905/632989";
-import { B } from "../905/714743";
+import { ButtonPrimitive } from "../905/632989";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../svg/545021";
 let m = {
   brand: "brand-tertiary",
@@ -46,13 +46,13 @@ export function $$h0({
           className: _$$s.flex.flexRow.itemsCenter.flexGrow1.overflowHidden.gap16.$,
           children: [s && jsx("span", {
             className: _$$s.flexShrink0.$,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               fontWeight: "semi-bold",
               color: "default",
               truncate: "end",
               children: s
             })
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "default",
             truncate: "end",
             children: t
@@ -66,7 +66,7 @@ export function $$h0({
         }), _ && jsx(K, {
           "aria-label": getI18nString("general.close"),
           onClick: _,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: _$$A
           })
         })]
@@ -92,11 +92,11 @@ export function $$h0({
           children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
-            children: [s && jsx(_$$E, {
+            children: [s && jsx(TextWithTruncation, {
               fontWeight: "semi-bold",
               color: "default",
               children: s
-            }), jsx(_$$E, {
+            }), jsx(TextWithTruncation, {
               color: "default",
               children: t
             })]
@@ -107,7 +107,7 @@ export function $$h0({
         }), _ && jsx(K, {
           "aria-label": getI18nString("general.close"),
           onClick: _,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: _$$A
           })
         })]
@@ -117,7 +117,7 @@ export function $$h0({
 function g({
   svg: e
 }) {
-  return jsx(B, {
+  return jsx(SvgComponent, {
     className: _$$s.w24.h24.flex.itemsCenter.justifyCenter.flexShrink0.colorIcon.$,
     svg: e
   });
@@ -143,7 +143,7 @@ function f({
     className: i,
     trusted: !0,
     children: t.label
-  }) : jsx(E, {
+  }) : jsx(ButtonPrimitive, {
     onClick: t.onClick,
     className: i,
     children: t.label

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { dm } from "../905/535224";
 import { nR, $$ } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { b } from "../905/985254";
@@ -24,7 +24,7 @@ export let $$_0 = registerModal(function () {
     tintedModalBackground: !0,
     children: [jsxs("div", {
       className: DD,
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         svg: A,
         useOriginalSrcFills_DEPRECATED: !0,
         className: sx

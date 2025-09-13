@@ -29,8 +29,8 @@ import { t as _$$t2 } from "../905/414363";
 import { n as _$$n } from "../905/402643";
 import O from "../vendor/923386";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { B as _$$B } from "../905/714743";
-import { Ib } from "../905/129884";
+import { SvgComponent } from "../905/714743";
+import { KindEnum } from "../905/129884";
 import { yu, Lp } from "../905/712714";
 import { A as _$$A2 } from "../5724/600086";
 var c = d;
@@ -77,10 +77,10 @@ function B({
   return o ? jsxs(Fragment, {
     children: [jsxs("div", {
       className: "stats_for_missing_files_view--heading--giOj- text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A2,
         className: "stats_for_missing_files_view--infoIcon--4-RnW",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("design_systems.dsa.not_visible_help")
       }), renderI18nText("design_systems.dsa.not_visible"), jsx(Ph, {
         newTab: !0,

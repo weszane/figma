@@ -16,9 +16,9 @@ import { r } from "../905/620668";
 import { FFileType } from "../figma_app/191312";
 import { XG } from "../figma_app/350203";
 import { getPluginVersion } from "../figma_app/300692";
-import { aL } from "../figma_app/45218";
+import { ShelfViewType } from "../figma_app/45218";
 import { dt } from "../figma_app/162807";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { V } from "../905/480825";
 import { y2 } from "../905/776312";
 import { Qi } from "../figma_app/599917";
@@ -49,14 +49,14 @@ let $$D3 = {
   tabletListSortKeys: [dt.NAME, dt.INSTALL_COUNT],
   mobileListSortKeys: [dt.NAME, dt.INSTALL_COUNT],
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [dt.NAME]: renderI18nText("search.sort_option.name"),
       [dt.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
       [dt.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
       [dt.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
       [dt.RELEVANCY]: renderI18nText("search.sort_option.relevance")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [dt.NAME]: renderI18nText("search.sort_option.name"),
       [dt.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
       [dt.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
@@ -65,7 +65,7 @@ let $$D3 = {
     }
   },
   defaultOptions: {
-    viewMode: XU.GRID,
+    viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: dt.RELEVANCY,
       sortDesc: !1
@@ -167,7 +167,7 @@ export function $$F1(e, t) {
                   return r() || FFileType.DESIGN;
               }
             }(this.props.tab) : void 0,
-            context: aL.SEARCH
+            context: ShelfViewType.SEARCH
           })
         })]
       }) : null;
@@ -221,8 +221,8 @@ class j extends PureComponent {
     publishedPlugin: e.publishedPlugins[t.searchResult.model.id] || null
   });
   e.SearchResult = _$$h({
-    [XU.GRID]: connect(r)(n),
-    [XU.LIST]: connect(r)(i)
+    [ViewMode.GRID]: connect(r)(n),
+    [ViewMode.LIST]: connect(r)(i)
   });
 })($$r0 || ($$r0 = {}));
 export const g8 = $$r0;

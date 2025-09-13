@@ -1,7 +1,7 @@
 import { legacyMerge } from '@stylexjs/stylex';
 import { useEffect, useRef } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { registerModal } from '../905/102752';
 import { h as _$$h } from '../905/207101';
 import { renderI18nText } from '../905/303541';
@@ -34,7 +34,7 @@ function I(e) {
       t(i.current, !1);
     });
   }();
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 340,
     children: jsxs(vo, {

@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { c as _$$c } from "../905/640510";
 import { _ } from "../905/465535";
 import { Tj } from "../figma_app/342207";
 import { _ as _$$_ } from "../905/613863";
 import { Y } from "../905/347011";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { t as _$$t } from "../905/433510";
 export function $$p0({
   favoriteType: e,
@@ -22,11 +22,11 @@ export function $$p0({
     resourceId: i,
     setFavorite: p
   });
-  return "loaded" !== g.status ? (h = "favorite-star-placeholder", jsx(E, {
+  return "loaded" !== g.status ? (h = "favorite-star-placeholder", jsx(ButtonPrimitive, {
     disabled: !0,
     "aria-label": f.tooltip,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": f.tooltip,
       "data-tooltip-timeout-delay": 50,
       "data-testid": h
@@ -39,7 +39,7 @@ export function $$p0({
       })
     })
   })) : jsxs(Fragment, {
-    children: [jsx(E, {
+    children: [jsx(ButtonPrimitive, {
       ref: f.buttonRef,
       onClick: e => {
         f.toggle();
@@ -48,7 +48,7 @@ export function $$p0({
       "aria-label": f.tooltip,
       "aria-pressed": !!g.favorite,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": f.tooltip,
         "data-tooltip-timeout-delay": 50,
         "data-testid": h

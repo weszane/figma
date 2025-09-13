@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/53857";
@@ -19,7 +19,7 @@ import { getUserId } from "../905/372672";
 import { ColorPalettesForTeam } from "../figma_app/43951";
 import { cD } from "../figma_app/598018";
 import { fJ } from "../figma_app/616107";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
@@ -133,7 +133,7 @@ function L({
             }),
             htmlAttributes: {
               "data-testid": "edit-color-palette-button-" + e.uuid,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("whiteboard.color_palettes.modal.edit_named_palette_tooltip", {
                 palette_name: l
               })
@@ -153,7 +153,7 @@ function L({
             }),
             htmlAttributes: {
               "data-testid": "delete-color-palette-button-" + e.uuid,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("whiteboard.color_palettes.modal.delete_named_palette_tooltip", {
                 palette_name: l
               })
@@ -203,7 +203,7 @@ export let $$B0 = registerModal(function ({
       userId: d,
       teamId: u
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       width: "fit-content",
       height: "dynamic",
       manager: _,

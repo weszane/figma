@@ -7,9 +7,9 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { CY, ks, nR } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { WJ } from "../figma_app/671547";
+import { PluginModalTypeEnum } from "../figma_app/671547";
 import { Kx } from "../figma_app/546509";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Eu, Gf, yV, se, Vy, Ms, iO, wK, IO, GW, Xg, Rq, ts, Y$, _q, Kk, _Q, Dp } from "../3276/770360";
 let _ = () => {
   let e = [{
@@ -67,7 +67,7 @@ export function $$g0(e) {
       onSuccess();
       return;
     }
-    CV(x, n, WJ.MODAL).valid ? (g(!1), onSuccess()) : (g(!0), y.current?.focus(), y.current?.select());
+    CV(x, n, PluginModalTypeEnum.MODAL).valid ? (g(!1), onSuccess()) : (g(!0), y.current?.focus(), y.current?.select());
   }, [x, onSuccess, n]);
   let y = useRef(null);
   let C = useCallback(e => {
@@ -111,7 +111,7 @@ export function $$g0(e) {
             className: _ ? IO : GW
           }), _ && jsx("div", {
             className: Xg,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("whiteboard.embeds.insert_embed_modal.invalid_link_error_message"),
             "data-tooltip-show-above": !0,
             "data-tooltip-show-immediately": !0,
@@ -151,7 +151,7 @@ function v() {
         children: jsx("a", {
           className: _Q,
           href: e.url,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip-show-immediately": !0,
           "data-tooltip-hide-immediately": !0,
           "data-tooltip": e.name,

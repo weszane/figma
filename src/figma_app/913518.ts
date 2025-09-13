@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SessionStatus } from "../figma_app/763686";
 import { atom, Xr, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { H1 } from "../figma_app/124493";
 import { XM } from "../905/486443";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
@@ -14,7 +14,7 @@ export let $$m4 = setupRemovableAtomFamily(() => atom(!1));
 var $$g0 = (e => (e.OPEN = "meetings_panel_open", e.CLOSE = "meetings_panel_close", e))($$g0 || {});
 var $$f3 = (e => (e.MEETINGS_TOOLBAR = "meetings_toolbar", e.MEETINGS_MINIMIZED = "meetings_minimized", e.MEETINGS_PANEL = "meetings_panel", e.INSERTS_MENU = "inserts_menu", e.QUICK_ACTIONS = "quick_actions", e.IPAD_MENU = "ipad_menu", e.MAKE_SOMETHING_V2_ONBOARDING = "make_something_v2_onboarding", e))($$f3 || {});
 let E = () => {
-  let e = am();
+  let e = trackFileEventWithUser();
   return useCallback((t, r) => {
     e(t, {
       source: r

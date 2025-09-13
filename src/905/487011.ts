@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
-import { v5 } from "../figma_app/314264";
+import { getProductType } from "../figma_app/314264";
 import { dd } from "../figma_app/604494";
 import { F1 } from "../figma_app/171177";
 import { n as _$$n } from "../905/347702";
@@ -81,7 +81,7 @@ export function $$k5(e, t) {
     clientLifecycleId: generateUUIDv4(),
     quick_actions_session_id: n,
     file_key: r.openFile?.key ?? null,
-    product_type: v5(r.selectedView, null),
+    product_type: getProductType(r.selectedView, null),
     selected_node_ids: a.length > 0 ? a : void 0,
     selected_node_depths: o.length > 0 ? o : void 0,
     ...t
@@ -96,7 +96,7 @@ export function $$R6({
   let a = useAtomWithSubscription(dd);
   let o = debugState.getState();
   let d = o.openFile?.key ?? null;
-  let m = v5(o.selectedView, null);
+  let m = getProductType(o.selectedView, null);
   return useMemo(() => ({
     action: e,
     source: r,

@@ -23,7 +23,7 @@ import { G6, P1 } from "../905/246310";
 import { lW } from "../figma_app/11182";
 import { j7 } from "../905/929976";
 import { Sl } from "../figma_app/8833";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { VZ } from "../figma_app/727192";
 import { A as _$$A, x as _$$x } from "../905/141226";
 import { IG, GM } from "../905/236606";
@@ -70,7 +70,7 @@ export function $$U1({
     "aria-label": u["aria-label"] ?? r,
     htmlAttributes: {
       "data-tooltip": r,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       onMouseEnter: o,
       onMouseLeave: d
     },
@@ -81,7 +81,7 @@ export function $$U1({
     "aria-label": u["aria-label"] ?? r,
     htmlAttributes: {
       "data-tooltip": r,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       onMouseEnter: o,
       onMouseLeave: d
     },

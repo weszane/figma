@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { createRef } from "react";
 import { EventShield } from "../905/821217";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { handleAtomEvent } from "../905/502364";
 import { hx } from "../figma_app/290668";
 import { BK } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { FH, u as _$$u } from "../905/38438";
 var d = l;
 export function $$g0({
@@ -29,7 +29,7 @@ export function $$g0({
   let A = E || createRef();
   return jsx(EventShield, {
     eventListeners: ["onClick", "onMouseDown"],
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       ref: A,
       actionOnPointerDown: !f,
       "aria-expanded": v.showing,
@@ -40,7 +40,7 @@ export function $$g0({
       "data-onboarding-key": b,
       "data-testid": y,
       "data-tooltip": l,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       htmlAttributes: {
         onKeyDown: e => hx({
           e,

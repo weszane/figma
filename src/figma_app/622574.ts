@@ -4,13 +4,13 @@ import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { selectWithShallowEqual } from "../905/103090";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { ye, Gi as _$$Gi } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
 import { PaginatedTemplatesByOrgWorkspace, PaginatedTemplatesByOrg, PaginatedTemplatesByTeam, BrowseTemplatesView, PaginatedTemplatesSearch } from "../figma_app/43951";
 import { M4 } from "../905/713695";
@@ -34,7 +34,7 @@ function L() {
   return useMemo(() => r?.key.type === FOrganizationLevelType.ORG ? ar(!!r?.customTemplatesAllowed, !!t) : r?.key.type === FOrganizationLevelType.TEAM && !!r && !!e && r.tier !== FPlanNameType.STARTER && (e === FFileType.SLIDES || (e === FFileType.WHITEBOARD ? !!getFeatureFlags().pro_templates_figjam : e === FFileType.COOPER || e === FFileType.FIGMAKE)), [t, r, e]);
 }
 export function $$P2() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   let t = ol();
   if (L()) {
     if (e) return {
@@ -146,7 +146,7 @@ export function $$V1(e, t) {
       myTeamsOnly: !1
     });
   }, [b]);
-  let T = _$$A(b, 300);
+  let T = useDebouncedCallback(b, 300);
   let I = useCallback(t => {
     e && (S.current = {}, g(!0), i(t.ids), s(t.myTeamsOnly), T(t));
   }, [e, T]);
@@ -223,7 +223,7 @@ export function $$z5({
   numTemplatesPerTeam: r,
   revalidateOnMount: i
 }) {
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let s = a?.id ?? null;
   let [o, l] = useState(null);
   let [c, u] = useState(!1);
@@ -280,7 +280,7 @@ export function $$z5({
     l(e.ids);
     u(e.myTeamsOnly);
   }, []);
-  let S = _$$A(I, 300);
+  let S = useDebouncedCallback(I, 300);
   return {
     teamTemplates,
     requestLoadMoreForOrg,

@@ -4,7 +4,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { C as _$$C } from '../905/180';
 import { s_ } from '../905/17223';
 import { X as _$$X } from '../905/33014';
-import { fN, PN, Uv } from '../905/54385';
+import { SubscriptionInterval, ProductStatus, isSubscription } from '../905/54385';
 import { registerModal } from '../905/102752';
 import { Ey, To } from '../905/148137';
 import { hideModal } from '../905/156213';
@@ -24,7 +24,7 @@ import { OJ } from '../905/519092';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { logError, logWarning } from '../905/714362';
-import { B as _$$B } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { n as _$$n } from '../905/861286';
 import { XHR } from '../905/910117';
 import { sf } from '../905/929976';
@@ -37,7 +37,7 @@ import { A as _$$A5 } from '../6828/325173';
 import { A as _$$A3 } from '../6828/871993';
 import { s as _$$s } from '../cssbuilder/589278';
 import { tgj } from '../figma_app/27776';
-import { U as _$$U, m3 } from '../figma_app/45218';
+import { hasClientMeta, hasMonetizedResourceMetadata } from '../figma_app/45218';
 import { FDomainVerificationStatusType } from '../figma_app/191312';
 import { a6 } from '../figma_app/198840';
 import { getPluginVersion } from '../figma_app/300692';
@@ -51,12 +51,12 @@ import { AC, Ul } from '../figma_app/777551';
 import { parsePxNumber } from '../figma_app/783094';
 import { bV, up } from '../figma_app/808294';
 import { createEmptyAddress, DEFAULT_COUNTRY, JAPAN_COUNTRY } from '../figma_app/831101';
-import { kt, nt, qc } from '../figma_app/858013';
+import { LoadingSpinner, LargeLoadingSpinner, LoadingOverlay } from '../figma_app/858013';
 import { ey as _$$ey } from '../figma_app/918700';
 import { Ex, zE } from '../figma_app/919079';
 import { A as _$$A4 } from '../svg/228383';
 import { A as _$$A8 } from '../svg/675271';
-import { A as _$$A } from '../vendor/90566';
+import { useDebouncedCallback } from 'use-debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import classNames from 'classnames';
 function j({
@@ -110,7 +110,7 @@ function q({
   resource: e,
   promo_code: t
 }) {
-  return t ? Uv(e.monetized_resource_metadata) ? t.duration === -1 ? renderI18nText('community.buyer.sub_percent_off__forever', {
+  return t ? isSubscription(e.monetized_resource_metadata) ? t.duration === -1 ? renderI18nText('community.buyer.sub_percent_off__forever', {
     percent_off: t.percent_off
   }) : renderI18nText('community.buyer.sub_percent_off', {
     percent_off: t.percent_off,
@@ -135,7 +135,7 @@ function Z({
     p(null);
     a(null);
   };
-  if (!e || !('third_party_m10n_status' in e) || e.third_party_m10n_status !== PN.MIGRATING) return null;
+  if (!e || !('third_party_m10n_status' in e) || e.third_party_m10n_status !== ProductStatus.MIGRATING) return null;
   let f = (() => {
     if (s === 'possibly_valid' || s === 'too_short') {
       return jsx('button', {
@@ -168,12 +168,12 @@ function Z({
     return s === 'valid' ? jsxs('button', {
       className: 'checkout_promo_code_input--promoCodeApplyButton__validHover--KWTpH checkout_promo_code_input--promoCodeApplyButton--x6XvK',
       onClick: t,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: 'checkout_promo_code_input--promoCodeCheckmark--ig7bR',
         svg: _$$A3
       }), jsx('div', {
         className: W,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A4
         })
       })]
@@ -182,13 +182,13 @@ function Z({
       onClick: t,
       children: jsx('div', {
         className: W,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A4
         })
       })
     }) : s === 'loading' ? jsx('button', {
       className: 'checkout_promo_code_input--promoCodeApplyButton__loading--LAoMT checkout_promo_code_input--promoCodeApplyButton--x6XvK',
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     }) : void 0;
   })();
   return jsx(Fragment, {
@@ -241,7 +241,7 @@ function X(e) {
       onClick: e.submit,
       disabled: e.disabled || e.isLoading,
       fullWidth: !0,
-      children: e.isLoading ? jsx(qc, {
+      children: e.isLoading ? jsx(LoadingOverlay, {
         shouldMatchTextColor: !0
       }) : renderI18nText('community.buyer.complete_purchase')
     }), jsx('span', {
@@ -300,7 +300,7 @@ function J(e) {
     className: nv,
     children: getI18nString('community.buyer.tbd')
   });
-  isSubscription && priceInCents && (t = subscriptionInterval === fN.MONTHLY ? renderI18nText('community.buyer.price_x_month', {
+  isSubscription && priceInCents && (t = subscriptionInterval === SubscriptionInterval.MONTHLY ? renderI18nText('community.buyer.price_x_month', {
     priceString: up(priceInCents)
   }) : renderI18nText('community.buyer.price_x_year', {
     priceString: up(priceInCents, !0)
@@ -375,25 +375,25 @@ var ep = (e => (e.AMEX = 'amex', e.MASTERCARD = 'mastercard', e.VISA = 'visa', e
 function em(e) {
   switch (e.brand) {
     case 'amex':
-      return jsx(_$$B, {
+      return jsx(SvgComponent, {
         svg: _$$A5,
         className: Ie,
         useOriginalSrcFills_DEPRECATED: !0
       });
     case 'mastercard':
-      return jsx(_$$B, {
+      return jsx(SvgComponent, {
         svg: _$$A6,
         className: Ie,
         useOriginalSrcFills_DEPRECATED: !0
       });
     case 'visa':
-      return jsx(_$$B, {
+      return jsx(SvgComponent, {
         svg: _$$A8,
         className: Ie,
         useOriginalSrcFills_DEPRECATED: !0
       });
     default:
-      return jsx(_$$B, {
+      return jsx(SvgComponent, {
         svg: _$$A7,
         className: Ie,
         useOriginalSrcFills_DEPRECATED: !0
@@ -438,7 +438,7 @@ function eh(e) {
           [r9]: e.disabled
         }),
         children: renderI18nText('general.remove')
-      }), jsx(kt, {
+      }), jsx(LoadingSpinner, {
         className: classNames(w1, {
           [xc]: e.isRemoveLoading
         }),
@@ -560,12 +560,12 @@ function ef({
       children: jsxs('div', {
         className: AG,
         children: [jsx(_$$c, {
-          value: fN.MONTHLY,
+          value: SubscriptionInterval.MONTHLY,
           label: jsx(Label, {
             children: renderI18nText('community.buyer.monthly')
           })
         }), jsx(_$$c, {
-          value: fN.ANNUALLY,
+          value: SubscriptionInterval.ANNUALLY,
           label: jsxs(Label, {
             className: _$$s.flex.flexRow.itemsCenter.$,
             children: [renderI18nText('community.buyer.yearly'), jsx('div', {
@@ -638,19 +638,19 @@ function eS({
   resource: e,
   subscriptionInterval: t
 }) {
-  let i = _$$U(e) ? a6(e) : getPluginVersion(e);
+  let i = hasClientMeta(e) ? a6(e) : getPluginVersion(e);
   let r = VH(e);
   let a = i.name;
-  let s = _$$U(e) ? e.thumbnail_url : i.redirect_icon_url;
+  let s = hasClientMeta(e) ? e.thumbnail_url : i.redirect_icon_url;
   let o = jsx('img', {
     src: s,
     alt: 'Resource thumbnail'
   });
   let l = '';
-  if (m3(e)) {
+  if (hasMonetizedResourceMetadata(e)) {
     if (e.monetized_resource_metadata.is_subscription) {
       let i = e.monetized_resource_metadata.trial_length_in_days || 0;
-      let n = t === fN.MONTHLY;
+      let n = t === SubscriptionInterval.MONTHLY;
       let r = n ? up(e.monetized_resource_metadata.price) : up(e.monetized_resource_metadata.annual_price || 0, !0);
       let a = e?.community_resource_payment && e.community_resource_payment.subscription_expires_at;
       l = i > 0 && !a ? renderI18nText(n ? 'community.buyer.free_trial_then_price_month' : 'community.buyer.free_trial_then_price_year', {
@@ -751,8 +751,8 @@ export let $$eN0 = registerModal(e => {
   let [ex, eS] = useState(!L);
   let [ew, eC] = useState(null);
   let [eT, ek] = useState(!1);
-  let [eN, eP] = useState(fN.MONTHLY);
-  t = F?.is_subscription && F?.annual_discount_active_at && eN === fN.ANNUALLY ? F?.annual_price || 0 : F?.price || 0;
+  let [eN, eP] = useState(SubscriptionInterval.MONTHLY);
+  t = F?.is_subscription && F?.annual_discount_active_at && eN === SubscriptionInterval.ANNUALLY ? F?.annual_price || 0 : F?.price || 0;
   let eO = useRef(null);
   let eD = useCallback((e, t = {}) => ({
     message: e.message,
@@ -808,7 +808,7 @@ export let $$eN0 = registerModal(e => {
   let eM = ei / 100 * t;
   let ej = resource?.community_resource_payment && resource.community_resource_payment.subscription_expires_at ? void 0 : F?.trial_length_in_days;
   let eU = er === null || ew === null ? null : er / 100 * (t * (1 - ew.percent_off / 100));
-  let eB = _$$A(useCallback(e => {
+  let eB = useDebouncedCallback(useCallback(e => {
     el(!1);
     _$$C.getBuyerTax({
       userId,
@@ -967,7 +967,7 @@ export let $$eN0 = registerModal(e => {
   let eH = !!em.length;
   let eW = L || es && (z || e_) && $;
   let eK = !!(L || eT);
-  let eY = ev ? jsx(nt, {}) : jsx(eg, {
+  let eY = ev ? jsx(LargeLoadingSpinner, {}) : jsx(eg, {
     address: W,
     disabled: eK,
     hideReusePaymentUi: L || !eH,

@@ -17,13 +17,13 @@ import { k as _$$k2 } from "../905/582200";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, Uv, u1 } from "../figma_app/91703";
 import { qj } from "../figma_app/451499";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { a2 } from "../figma_app/762558";
 import { f as _$$f } from "../905/135117";
@@ -76,7 +76,7 @@ import { N as _$$N2 } from "../905/720559";
 import { D as _$$D2 } from "../905/225412";
 import { So } from "../figma_app/580959";
 import { BT, wM, x7, n1 } from "../figma_app/228217";
-import { E as _$$E2 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { rM } from "../905/95091";
 import { b as _$$b, O as _$$O2 } from "../905/916974";
@@ -257,7 +257,7 @@ function ep(e) {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.blur.start_blur"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
       max: aO,
@@ -290,7 +290,7 @@ function ep(e) {
           autoFocus: !0,
           bigNudgeAmount: e.bigNudgeAmount,
           "data-tooltip": isProgressiveBlur ? getI18nString("properties_panel.effects.blur.end_blur") : getI18nString("properties_panel.effects.blur_radius"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
           inputClassName: ea,
           max: isProgressiveBlur ? aO : void 0,
@@ -347,7 +347,7 @@ function em(e) {
             (n || r) && analyticsEventManager.trackDefinedEvent("illustration.web_progressive_blur_toggle", {
               changedToProgressive: n,
               blurType: "FOREGROUND_BLUR" === t.type ? "layer" : "background",
-              productType: Dc(debugState.getState().selectedView.editorType)
+              productType: mapEditorTypeToProductType(debugState.getState().selectedView.editorType)
             });
             let a = UF(e.effect, t.type, i);
             e.onChange({
@@ -398,7 +398,7 @@ function eh(e) {
             autoFocus: !0,
             bigNudgeAmount: e.bigNudgeAmount,
             "data-tooltip": getI18nString("properties_panel.effects.blur_radius"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             dispatch: e.dispatch,
             inputClassName: ea,
             min: 0,
@@ -442,7 +442,7 @@ function ek(e, t, i) {
           return getI18nString("properties_panel.effects.already_applied");
       }
     }(e, r, t),
-    tooltipType: Ib.TEXT,
+    tooltipType: KindEnum.TEXT,
     "data-tooltip-show-left": !0,
     "data-tooltip-offset-x": -8
   }, `${r}`));
@@ -882,7 +882,7 @@ function e1(e) {
         children: [jsx(_$$Z2, {
           "aria-label": t,
           "data-tooltip": t,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           incrementDirection: yb.Clockwise,
           onChange: (t, i) => {
             e.onChange({
@@ -910,7 +910,7 @@ function e2(e) {
   return jsx(_$$N, {
     "aria-label": i,
     "data-tooltip": i,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     value: 100 * (e.effect.specularIntensity || 0),
     onChange: (t, i) => e.onChange({
       ...e.effect,
@@ -993,7 +993,7 @@ function e8(e) {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.texture.noise_size"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
       max: ml,
@@ -1018,7 +1018,7 @@ function e8(e) {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.texture.radius"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
       max: aO,
@@ -1244,7 +1244,7 @@ function to(e) {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.noise.noise_size"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
       max: ml,
@@ -1268,7 +1268,7 @@ function to(e) {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.noise.density"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
       onValueChange: onDensityChange,
@@ -1289,7 +1289,7 @@ function to(e) {
       autoFocus: !0,
       bigNudgeAmount: e.bigNudgeAmount,
       "data-tooltip": getI18nString("properties_panel.effects.noise.opacity"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: e.dispatch,
       inputClassName: ea,
       onValueChange: onOpacityChange,
@@ -1490,7 +1490,7 @@ function tp(e) {
   } = e;
   let d = {
     bigStep: e.bigNudgeAmount,
-    dataTooltipType: Ib.TEXT,
+    dataTooltipType: KindEnum.TEXT,
     fullWidth: !0,
     inputMax: 3e4,
     inputMin: -3e4,
@@ -1589,7 +1589,7 @@ function tm(e) {
           bigNudgeAmount: e.bigNudgeAmount,
           className: ei,
           "data-tooltip": getI18nString("properties_panel.effects.x"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
           inputClassName: ea,
           max: 3e4,
@@ -1617,7 +1617,7 @@ function tm(e) {
           bigNudgeAmount: e.bigNudgeAmount,
           className: ei,
           "data-tooltip": getI18nString("properties_panel.effects.y"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
           inputClassName: ea,
           max: 3e4,
@@ -1646,7 +1646,7 @@ function tm(e) {
       children: jsx($j, {
         bigNudgeAmount: e.bigNudgeAmount,
         "data-tooltip": getI18nString("properties_panel.effects.blur_radius"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: e.dispatch,
         inputClassName: ea,
         max: 250,
@@ -1677,7 +1677,7 @@ function tm(e) {
       children: jsx(gq, {
         bigNudgeAmount: e.bigNudgeAmount,
         "data-tooltip": spreadTooltipText,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         disabled: !e.selectionContainsOnlySpreadEligibleNodes,
         dispatch: e.dispatch,
         inputClassName: ea,
@@ -1804,7 +1804,7 @@ function th(e) {
       let i = e.effect.colorVar?.value?.alias;
       return i ? jsxs("div", {
         className: eo,
-        children: [jsx(_$$E2, {
+        children: [jsx(ButtonPrimitive, {
           onClick: c,
           actionOnPointerDown: !0,
           children: jsx(rM, {
@@ -2145,7 +2145,7 @@ export function $$tF0(e) {
     Sprig
   } = useSprigWithSampling();
   let r = debugState.getState().selectedView;
-  let a = Dc(r.editorType);
+  let a = mapEditorTypeToProductType(r.editorType);
   return jsx(dD.Provider, {
     value: {
       useGrid: t
@@ -2480,7 +2480,7 @@ class tV extends PureComponent {
         htmlAttributes: {
           onMouseDown: this.stopPropagation,
           "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$O, {})
       })

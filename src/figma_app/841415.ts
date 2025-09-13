@@ -12,7 +12,7 @@ import { RK } from "../figma_app/815170";
 import { z3 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
-import { MW, Ib } from "../905/129884";
+import { PositionEnum, KindEnum } from "../905/129884";
 import { N as _$$N } from "../905/984200";
 import { $x } from "../905/780715";
 import { hp, u5, Vc, XH, ty, A9, zD, $t, oh } from "../905/163841";
@@ -31,12 +31,12 @@ let $$S2 = memo(e => {
   let o = z3();
   let l = useDispatch();
   return jsx(CY, {
-    "data-tooltip": MW.HYPERLINK_POPUP,
+    "data-tooltip": PositionEnum.HYPERLINK_POPUP,
     "data-tooltip-editor-type": o,
     "data-tooltip-interactive": !0,
     "data-tooltip-precise": !0,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip-unconstrain-width": !0,
     "data-tooltip-url-string": hyperlink,
     onClick: () => {
@@ -59,7 +59,7 @@ let $$v0 = memo(e => {
     "data-mention-user-id": userId,
     "data-tooltip": _$$N,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip-unconstrain-width": !0,
     "data-tooltip-user-handle": handle,
     "data-tooltip-user-img-url": imgUrl,
@@ -83,7 +83,7 @@ let A = memo(function (e) {
   return jsx(CY, {
     "data-tooltip": _$$N,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip-unconstrain-width": !0,
     "data-tooltip-user-handle": p,
     "data-tooltip-user-img-url": profileImgUrl,

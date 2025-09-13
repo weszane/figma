@@ -3,16 +3,16 @@ import { memo, useCallback, useContext, createContext, useMemo, useEffect } from
 import { lQ } from "../905/934246";
 import { d as _$$d } from "../905/976845";
 import { k as _$$k } from "../905/443820";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { u as _$$u } from "../905/65923";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { bL } from "../905/163832";
 import { vo } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
 import { X } from "../905/319582";
 import { A as _$$A } from "../905/891805";
 import A from "classnames";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -21,11 +21,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { z5, TI } from "../905/713722";
 import { e } from "../905/621515";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { ol } from "../figma_app/598018";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { N as _$$N } from "../figma_app/268271";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { p as _$$p } from "../figma_app/353099";
 import { y as _$$y } from "../905/129046";
@@ -79,8 +79,8 @@ export function $$Z0({
   recordingKey: i,
   panelID: a
 }) {
-  let o = hC();
-  let l = dq();
+  let o = trackDefinedFileEventWithStore();
+  let l = useCurrentUserOrgId();
   let d = ol()?.id;
   let c = useCallback(() => {
     o("color_contrast.toggle", {
@@ -139,8 +139,8 @@ export function $$Q2({
   onColorChange: t,
   id: i
 }) {
-  let a = hC();
-  let u = dq();
+  let a = trackDefinedFileEventWithStore();
+  let u = useCurrentUserOrgId();
   let p = ol()?.id;
   let m = useContext($$X1);
   let {
@@ -302,12 +302,12 @@ export function $$Q2({
   if (isUnavailable || !foregroundColor || !backgroundColor) {
     let e = toolStatus === j$.LOADING ? jsx(_$$k, {
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.color_contrast.loading")
       }
     }) : toolStatus === j$.TIMED_OUT ? jsx("div", {
       className: "color_contrast_info--timeoutButtonWrapper--m30OZ",
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         onClick: eg,
         children: getI18nString("fullscreen.properties_panel.color_contrast.check_contrast_button")
@@ -358,7 +358,7 @@ export function $$Q2({
       }
     }(unavailableReason);
     let r = {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": i,
       "data-tooltip-max-width": 225
     };
@@ -391,7 +391,7 @@ export function $$Q2({
         "color_contrast_info--selected--y60q5": !!showColorSwatchInfoFlyout
       }),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.color_contrast_info.view_colors"),
         "data-tooltip-show-above": !0
       },
@@ -409,12 +409,12 @@ export function $$Q2({
       })]
     }), jsxs("div", {
       className: "color_contrast_info--rightButtons--IUZ03",
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         "aria-label": ei,
         disabled: !Q,
         htmlAttributes: {
           "data-tooltip": en,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-testid": "contrast-standard-wrapper",
           "data-tooltip-show-above": !0,
           onMouseEnter: eu,
@@ -438,7 +438,7 @@ export function $$Q2({
           "aria-label": getI18nString("fullscreen.properties_panel.color_contrast.settings"),
           htmlAttributes: {
             "data-tooltip": getI18nString("fullscreen.properties_panel.color_contrast.settings"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip-show-above": !0
           },
           recordingKey: generateRecordingKey(e, "color_contrast_settings_button"),

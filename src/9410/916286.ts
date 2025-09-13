@@ -6,7 +6,7 @@ import o from "classnames";
 import { Y } from "../905/506207";
 import { co } from "../figma_app/958735";
 import { isVsCodeEnvironment } from "../905/858738";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
 import { G } from "../1250/269770";
 import { Xr } from "../figma_app/27355";
@@ -169,7 +169,7 @@ export function $$F0({
   let c = useSelector(e => e.modalShown);
   let f = isVsCodeEnvironment();
   let g = getObservableValue(AppStateTsApi?.devHandoffState()?.focusMode, !1);
-  let _ = dq();
+  let _ = useCurrentUserOrgId();
   let x = useRef(!1);
   return jsx(_$$d, {
     children: jsx(Y, {

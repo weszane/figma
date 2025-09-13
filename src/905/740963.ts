@@ -15,7 +15,7 @@ import { n as _$$n } from "../905/624711";
 import { f as _$$f } from "../figma_app/882858";
 import { L as _$$L } from "../905/713563";
 import { selectCurrentUser } from "../905/372672";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import v from "classnames";
 import { M3 } from "../figma_app/119475";
 import { getI18nString } from "../905/303541";
@@ -50,7 +50,7 @@ function C({
     path: o
   });
   let p = w(e);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     ref: setKeyboardNavigationElement,
     className: I()("faceted_search_preview_suggestion_row--row--mtRkj", isFauxFocused && "faceted_search_preview_suggestion_row--fauxFocus--Hm52U"),
     "aria-label": p,

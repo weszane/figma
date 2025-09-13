@@ -7,13 +7,13 @@ import { ChatMessageType } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { openFileAtom } from "../figma_app/516028";
 import { wW } from "../figma_app/656450";
 import { F as _$$F } from "../1156/295005";
 import { useState } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { a as _$$a } from "../905/964520";
 import { H } from "../905/999677";
 import { L } from "../1156/365427";
@@ -84,7 +84,7 @@ function C({
       maxHeight: n,
       overflowY: "auto"
     } : void 0,
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       className: "x78zum5 x6s0dn4 x167g77z x1ypdohk x87ps6o x1qughib x1n0bwc9",
       onClick: () => c(!o),
       children: [jsx("span", {
@@ -128,7 +128,7 @@ function E({
         children: getI18nString("figmake.edits.lines_removed", {
           count: e.removedLines
         })
-      }), i && jsx(_$$E, {
+      }), i && jsx(ButtonPrimitive, {
         className: "xfawy5m x12oqio5 xet2fuk x1ypdohk x1n0bwc9 xjbqb8w x1gs6z28 x78zum5 x6s0dn4 xl56j7k xvy4d1p xxk0z11 x12tve8b x1c5oinq",
         onClick: i,
         children: jsx(H, {
@@ -341,7 +341,7 @@ function F() {
       className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
       children: [jsx("div", {
         className: "xvy4d1p xxk0z11 x78zum5 xl56j7k x6s0dn4",
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: _$$A,
           useOriginalSrcFills_DEPRECATED: !0,
           svgWidth: "14px",

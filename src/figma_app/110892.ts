@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { UserActionState } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { f4 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
@@ -33,10 +33,10 @@ export function $$y0() {
     children: jsx(Ad, {
       appendedClassName: _$$s.pt4.$,
       label: null,
-      input: jsx(IK, {
+      input: jsx(ButtonWide, {
         variant: "secondary",
         onClick: () => {
-          Cu({
+          logAndTrackCTA({
             trackingContext: "Slides conversion properties panel entrypoint",
             name: "slides_conversion_properties_panel_entrypoint"
           });

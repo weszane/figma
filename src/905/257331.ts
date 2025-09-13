@@ -4,7 +4,7 @@ import { LinkPrimitive } from "../figma_app/496441";
 import s from "classnames";
 import { NG } from "../figma_app/709893";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var o = s;
 export function $$u0({
   href: e,
@@ -23,7 +23,7 @@ export function $$u0({
     ref: u,
     href: e,
     htmlAttributes: {
-      "data-tooltip-type": i && p && Ib.TEXT,
+      "data-tooltip-type": i && p && KindEnum.TEXT,
       "data-tooltip": i,
       "data-tooltip-show-immediately": !0
     },

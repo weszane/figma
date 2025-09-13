@@ -1,181 +1,180 @@
-import _require2 from "../0c62c2fd/586544";
-import _require from "../0c62c2fd/322783";
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useMemo, useCallback, useRef, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { throwTypeError } from "../figma_app/465776";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { N as _$$N } from "../905/438674";
-import { b as _$$b } from "../905/946806";
-import { getFeatureFlags } from "../905/601108";
-import { useSubscription } from "../figma_app/288654";
-import { Xm, gB, oA } from "../905/723791";
-import { kt } from "../figma_app/858013";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { AutoLayout } from "../905/470281";
-import { d as _$$d } from "../469e6e40/744116";
-import { y3 } from "../figma_app/307841";
-import { R as _$$R } from "../905/304671";
-import { i as _$$i } from "../469e6e40/549061";
-import { M as _$$M } from "../469e6e40/490222";
-import { g as _$$g } from "../figma_app/638694";
-import { Agb, zRx } from "../figma_app/822011";
-import E from "classnames";
-import { s as _$$s } from "../cssbuilder/589278";
-import { sx } from "../905/941192";
-import { E as _$$E } from "../905/984674";
-import { k as _$$k2 } from "../469e6e40/952112";
-import { sf, oB } from "../905/929976";
-import { jm, fu, kp } from "../figma_app/831799";
-import { UserFlagByName, TeamById, TeamAdminSettingsPage } from "../figma_app/43951";
-import { useTeamPlanFeatures, useTeamPlanPublicInfo, useIsStudentPlan, useTeamPlanUser, useIsTeamAdminUser } from "../figma_app/465071";
-import { ck } from "../905/952832";
-import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
-import { ER } from "../figma_app/102449";
-import { ps } from "../figma_app/845611";
-import { F as _$$F } from "../469e6e40/308608";
-import { ProductAccessMap } from "../figma_app/765689";
-import { resourceUtils } from "../905/989992";
-import z from "../vendor/529640";
-import { A as _$$A } from "../905/920142";
-import { VisualBellActions } from "../905/302958";
-import { b_, sH, Ji } from "../figma_app/149367";
-import { tb as _$$tb } from "../905/848667";
-import { If, wv } from "../figma_app/121751";
-import { adminPermissionConfig } from "../905/654645";
-import { useShadowReadLoaded } from "../figma_app/391338";
-import { FBillingPeriodType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
-import { k_, BP, TG } from "../1881/866163";
-import { Ok, Vc, UW, d2 } from "../469e6e40/142718";
-import { _6 } from "../figma_app/386952";
-import { $n } from "../905/521428";
-import { wv as _$$wv } from "../figma_app/860955";
-import { parsePxInt } from "../figma_app/783094";
-import { bv, IU } from "../figma_app/421401";
-import { h1 } from "../905/986103";
-import { y2 } from "../figma_app/563413";
-import { p as _$$p } from "../469e6e40/348454";
-import { Js, yG } from "../469e6e40/488538";
-import { A as _$$A3 } from "../905/658244";
-import { registerModal, createModalConfig } from "../905/102752";
-import { J as _$$J } from "../469e6e40/564885";
-import { v as _$$v } from "../4452/562448";
-import { b as _$$b2 } from "../4452/320061";
-import { B as _$$B } from "../4452/541264";
-import { E as _$$E2 } from "../469e6e40/190466";
-import { s as _$$s2 } from "../905/411990";
-import { createOptimistThunk } from "../905/350402";
-import { II } from "../figma_app/11182";
-import { showModalHandler } from "../905/156213";
-import { _E, yJ, tk as _$$tk, m$ } from "../figma_app/240735";
-import { z as _$$z } from "../905/595507";
-import { C3, vt } from "../figma_app/297957";
-import { z as _$$z2 } from "../figma_app/369596";
-import { hasValidSubscription, isTeamInGracePeriod, getFutureDateOrNull } from "../figma_app/345997";
-import { $S } from "../905/351260";
-import { yN } from "../905/727738";
-import { ol, Rq, pe } from "../figma_app/598018";
-import { IX } from "../905/712921";
-import { O as _$$O } from "../905/833838";
-import { AccessLevelEnum } from "../905/557142";
-import { d as _$$d2 } from "../figma_app/135698";
-import { i9 } from "../figma_app/805373";
-import { r as _$$r } from "../469e6e40/505264";
-import { b as _$$b3 } from "../905/173822";
-import { Cj } from "../905/270084";
-import { zx, VU } from "../4452/650793";
-import { Dd } from "../905/519092";
-import { h as _$$h } from "../905/207101";
-import { fB, Of, l4 } from "../figma_app/982327";
-import { c as _$$c } from "../905/370443";
-import { e as _$$e3 } from "../905/621515";
-import { N as _$$N2 } from "../figma_app/268271";
-import { rq } from "../905/425180";
-import { F_, EL } from "../905/858282";
-import { L69, iq7 } from "../figma_app/6204";
-import { v as _$$v2 } from "../figma_app/899624";
-import { cE, oi } from "../figma_app/527041";
-import { fAD } from "../figma_app/27776";
-import { Mc, nM, Gb, r2, dG, U0, nf, Hy, kL } from "../469e6e40/504232";
-import { B as _$$B2 } from "../905/950875";
-import { getResourceDataOrFallback } from "../905/663269";
-import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { S as _$$S } from "../469e6e40/679996";
-import { logError } from "../905/714362";
-import { Ex, zE } from "../figma_app/919079";
-import { CY } from "../figma_app/637027";
-import { FlashActions } from "../905/573154";
-import { V as _$$V } from "../905/223767";
-import { p as _$$p2 } from "../4452/321313";
-import { I as _$$I } from "../469e6e40/815692";
-import { S as _$$S2 } from "../4452/304860";
-import { l as _$$l, m as _$$m } from "../469e6e40/61410";
-import { T_, Kz, x8, bX } from "../469e6e40/336248";
-import { Bq, WX } from "../figma_app/482142";
-import { Hq, C8, BO, Be } from "../figma_app/920435";
-import { UC, mL } from "../905/563637";
-import { ProductAccessTypeEnum } from "../905/513035";
-import { N_ } from "../905/332483";
-import { L as _$$L } from "../c5e2cae0/262856";
-import { u as _$$u } from "../469e6e40/510414";
-import { Ti, bQ } from "../figma_app/658324";
-import { d as _$$d3 } from "../7021/966231";
-import { UpsellModalType } from "../905/165519";
-import { createEmptyAddress } from "../figma_app/831101";
-import { isTeamEligibleForUpgrade } from "../figma_app/630077";
-import { Ib } from "../905/129884";
-import { fm } from "../c5e2cae0/453906";
-import { $ as _$$$ } from "../905/834575";
-import { h as _$$h2 } from "../469e6e40/689859";
-import { v as _$$v3 } from "../905/621749";
-import { E as _$$E3 } from "../469e6e40/510393";
-import { q as _$$q } from "../469e6e40/977739";
-import { Dg } from "../469e6e40/615314";
-import { gb } from "../figma_app/422062";
-import { wr, Sn } from "../469e6e40/875985";
-import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
-import { S as _$$S3 } from "../4452/606725";
-import { r as _$$r2 } from "../905/398386";
-import { bE } from "../figma_app/375098";
-import { selectCurrentUser } from "../905/372672";
-import { M4, IT } from "../905/713695";
-import { VP, D2 } from "../905/18797";
-import { canPerformActionBasedOnLevel } from "../figma_app/12796";
-import { vS } from "../figma_app/846003";
-import { EntityType } from "../figma_app/707808";
-import { R as _$$R2 } from "../figma_app/522082";
-import { p as _$$p3 } from "../figma_app/353099";
-import { X as _$$X } from "../905/482718";
-import { Q as _$$Q } from "../905/11928";
-import { isNotNullish } from "../figma_app/95419";
-import { t as _$$t2 } from "../905/150656";
-import ar from "../vendor/635";
-import ao from "../469e6e40/341785";
-import { R as _$$R3 } from "../7021/67076";
-import { s as _$$s4 } from "../905/645504";
-import { p as _$$p4 } from "../469e6e40/470485";
-import { V as _$$V2 } from "../905/965990";
-import { yE } from "../469e6e40/471025";
-import { K as _$$K } from "../905/628118";
-import { qH } from "../figma_app/934005";
-import { e0 as _$$e4 } from "../905/696396";
-import { k as _$$k3 } from "../905/443820";
-import { Q as _$$Q2 } from "../469e6e40/825225";
-import { S as _$$S4 } from "../469e6e40/885592";
-import { vn } from "../figma_app/109538";
-import { k as _$$k4 } from "../figma_app/618031";
-import { E as _$$E4 } from "../469e6e40/82885";
-import { hY, ww } from "../figma_app/80683";
-import { i as _$$i2 } from "../469e6e40/375056";
-import { G6, j2 } from "../figma_app/84966";
-import { k as _$$k5 } from "../469e6e40/115523";
-import { b as _$$b5 } from "../905/388233";
-import { k as _$$k6, Q as _$$Q3 } from "../figma_app/527200";
-import { w as _$$w } from "../4452/417339";
-import { nc, J as _$$J2 } from "../figma_app/915977";
+import E from 'classnames';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import _require from '../0c62c2fd/322783';
+import _require2 from '../0c62c2fd/586544';
+import { l as _$$l, m as _$$m } from '../469e6e40/61410';
+import { E as _$$E4 } from '../469e6e40/82885';
+import { k as _$$k5 } from '../469e6e40/115523';
+import { d2, Ok, UW, Vc } from '../469e6e40/142718';
+import { E as _$$E2 } from '../469e6e40/190466';
+import { F as _$$F } from '../469e6e40/308608';
+import { bX, Kz, T_, x8 } from '../469e6e40/336248';
+import ao from '../469e6e40/341785';
+import { p as _$$p } from '../469e6e40/348454';
+import { i as _$$i2 } from '../469e6e40/375056';
+import { p as _$$p4 } from '../469e6e40/470485';
+import { yE } from '../469e6e40/471025';
+import { Js, yG } from '../469e6e40/488538';
+import { M as _$$M } from '../469e6e40/490222';
+import { dG, Gb, Hy, kL, Mc, nf, nM, r2, U0 } from '../469e6e40/504232';
+import { r as _$$r } from '../469e6e40/505264';
+import { E as _$$E3 } from '../469e6e40/510393';
+import { u as _$$u } from '../469e6e40/510414';
+import { i as _$$i } from '../469e6e40/549061';
+import { J as _$$J } from '../469e6e40/564885';
+import { Dg } from '../469e6e40/615314';
+import { S as _$$S } from '../469e6e40/679996';
+import { h as _$$h2 } from '../469e6e40/689859';
+import { d as _$$d } from '../469e6e40/744116';
+import { _ as _$$_, Y as _$$Y2 } from '../469e6e40/781142';
+import { I as _$$I } from '../469e6e40/815692';
+import { Q as _$$Q2 } from '../469e6e40/825225';
+import { Sn, wr } from '../469e6e40/875985';
+import { S as _$$S4 } from '../469e6e40/885592';
+import { k as _$$k2 } from '../469e6e40/952112';
+import { q as _$$q } from '../469e6e40/977739';
+import { Q as _$$Q } from '../905/11928';
+import { D2, VP } from '../905/18797';
+import { createModalConfig, registerModal } from '../905/102752';
+import { KindEnum } from '../905/129884';
+import { t as _$$t2 } from '../905/150656';
+import { showModalHandler } from '../905/156213';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { UpsellModalType } from '../905/165519';
+import { b as _$$b3 } from '../905/173822';
+import { h as _$$h } from '../905/207101';
+import { V as _$$V } from '../905/223767';
+import { Cj } from '../905/270084';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString, renderI18nText } from '../905/303541';
+import { R as _$$R } from '../905/304671';
+import { N_ } from '../905/332483';
+import { createOptimistThunk } from '../905/350402';
+import { $S } from '../905/351260';
+import { c as _$$c } from '../905/370443';
+import { selectCurrentUser } from '../905/372672';
+import { b as _$$b5 } from '../905/388233';
+import { r as _$$r2 } from '../905/398386';
+import { s as _$$s2 } from '../905/411990';
+import { rq } from '../905/425180';
+import { N as _$$N } from '../905/438674';
+import { k as _$$k3 } from '../905/443820';
+import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
+import { AutoLayout } from '../905/470281';
+import { X as _$$X } from '../905/482718';
+import { ProductAccessTypeEnum } from '../905/513035';
+import { Dd } from '../905/519092';
+import { Button } from '../905/521428';
+import { BillingSections, DashboardSections, MemberSections } from '../905/548208';
+import { AccessLevelEnum } from '../905/557142';
+import { mL, UC } from '../905/563637';
+import { FlashActions } from '../905/573154';
+import { z as _$$z } from '../905/595507';
+import { getFeatureFlags } from '../905/601108';
+import { e as _$$e3 } from '../905/621515';
+import { v as _$$v3 } from '../905/621749';
+import { K as _$$K } from '../905/628118';
+import { s as _$$s4 } from '../905/645504';
+import { adminPermissionConfig } from '../905/654645';
+import { A as _$$A3 } from '../905/658244';
+import { e0 as _$$e4 } from '../905/696396';
+import { IX } from '../905/712921';
+import { IT, M4 } from '../905/713695';
+import { logError } from '../905/714362';
+import { gB, getResourceDataOrFallback, Xm } from '../905/723791';
+import { yN } from '../905/727738';
+import { O as _$$O } from '../905/833838';
+import { $ as _$$$ } from '../905/834575';
+import { tb as _$$tb } from '../905/848667';
+import { EL, F_ } from '../905/858282';
+import { A as _$$A } from '../905/920142';
+import { oB, sf } from '../905/929976';
+import { sx } from '../905/941192';
+import { b as _$$b } from '../905/946806';
+import { B as _$$B2 } from '../905/950875';
+import { ck } from '../905/952832';
+import { V as _$$V2 } from '../905/965990';
+import { TextWithTruncation } from '../905/984674';
+import { h1 } from '../905/986103';
+import { resourceUtils } from '../905/989992';
+import { BP, k_, TG } from '../1881/866163';
+import { S as _$$S2 } from '../4452/304860';
+import { b as _$$b2 } from '../4452/320061';
+import { p as _$$p2 } from '../4452/321313';
+import { w as _$$w } from '../4452/417339';
+import { B as _$$B } from '../4452/541264';
+import { v as _$$v } from '../4452/562448';
+import { S as _$$S3 } from '../4452/606725';
+import { VU, zx } from '../4452/650793';
+import { R as _$$R3 } from '../7021/67076';
+import { d as _$$d3 } from '../7021/966231';
+import { L as _$$L } from '../c5e2cae0/262856';
+import { fm } from '../c5e2cae0/453906';
+import { s as _$$s } from '../cssbuilder/589278';
+import { iq7, L69 } from '../figma_app/6204';
+import { II } from '../figma_app/11182';
+import { canPerformActionBasedOnLevel } from '../figma_app/12796';
+import { fAD } from '../figma_app/27776';
+import { TeamAdminSettingsPage, TeamById, UserFlagByName } from '../figma_app/43951';
+import { hY, ww } from '../figma_app/80683';
+import { G6, j2 } from '../figma_app/84966';
+import { isNotNullish } from '../figma_app/95419';
+import { ER } from '../figma_app/102449';
+import { vn } from '../figma_app/109538';
+import { isCutover, LegacyConfigGroups } from '../figma_app/121751';
+import { UserFieldEnum } from '../figma_app/135698';
+import { b_, Ji, sH } from '../figma_app/149367';
+import { FBillingPeriodType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
+import { tk as _$$tk, _E, m$, yJ } from '../figma_app/240735';
+import { N as _$$N2 } from '../figma_app/268271';
+import { useSubscription } from '../figma_app/288654';
+import { C3, vt } from '../figma_app/297957';
+import { y3 } from '../figma_app/307841';
+import { getFutureDateOrNull, hasValidSubscription, isTeamInGracePeriod } from '../figma_app/345997';
+import { p as _$$p3 } from '../figma_app/353099';
+import { z as _$$z2 } from '../figma_app/369596';
+import { bE } from '../figma_app/375098';
+import { _6 } from '../figma_app/386952';
+import { useShadowReadLoaded } from '../figma_app/391338';
+import { bv, IU } from '../figma_app/421401';
+import { gb } from '../figma_app/422062';
+import { useIsStudentPlan, useIsTeamAdminUser, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
+import { throwTypeError } from '../figma_app/465776';
+import { Bq, WX } from '../figma_app/482142';
+import { R as _$$R2 } from '../figma_app/522082';
+import { cE, oi } from '../figma_app/527041';
+import { k as _$$k6, Q as _$$Q3 } from '../figma_app/527200';
+import { y2 } from '../figma_app/563413';
+import { ol, pe, Rq } from '../figma_app/598018';
+import { k as _$$k4 } from '../figma_app/618031';
+import { isTeamEligibleForUpgrade } from '../figma_app/630077';
+import { CY } from '../figma_app/637027';
+import { g as _$$g } from '../figma_app/638694';
+import { bQ, Ti } from '../figma_app/658324';
+import { EntityType } from '../figma_app/707808';
+import { ProductAccessMap } from '../figma_app/765689';
+import { parsePxInt } from '../figma_app/783094';
+import { i9 } from '../figma_app/805373';
+import { Agb, zRx } from '../figma_app/822011';
+import { createEmptyAddress } from '../figma_app/831101';
+import { fu, jm, kp } from '../figma_app/831799';
+import { ps } from '../figma_app/845611';
+import { vS } from '../figma_app/846003';
+import { LoadingSpinner } from '../figma_app/858013';
+import { wv as _$$wv } from '../figma_app/860955';
+import { v as _$$v2 } from '../figma_app/899624';
+import { J as _$$J2, nc } from '../figma_app/915977';
+import { Ex, zE } from '../figma_app/919079';
+import { Be, BO, C8, Hq } from '../figma_app/920435';
+import { qH } from '../figma_app/934005';
+import { fB, l4, Of } from '../figma_app/982327';
+import ar from '../vendor/635';
+import z from '../vendor/529640';
 let n;
 let s;
-var C = E;
+let C = E;
 function $({
   team: e
 }) {
@@ -193,17 +192,17 @@ function B({
   let a = useSelector(e => e.avatarEditorState);
   let n = useTeamPlanFeatures().unwrapOr(null);
   let s = useSubscription(UserFlagByName, {
-    name: "seen_connected_project_in_admin_dashboard_banner"
+    name: 'seen_connected_project_in_admin_dashboard_banner'
   });
-  let o = !useMemo(() => "loaded" !== s.status || !!s.data?.currentUser?.userFlagByName, [s]) && n?.tier === Agb.PRO && getFeatureFlags().fc_initial_onboarding_enabled;
-  return jsxs("div", {
-    style: sx.add({
-      width: "780px",
-      marginLeft: "auto",
-      marginRight: "auto"
+  let o = !useMemo(() => s.status !== 'loaded' || !!s.data?.currentUser?.userFlagByName, [s]) && n?.tier === Agb.PRO && getFeatureFlags().fc_initial_onboarding_enabled;
+  return jsxs('div', {
+    'style': sx.add({
+      width: '780px',
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }).$,
-    "data-testid": "admin-dashboard-tab",
-    children: [jsxs("div", {
+    'data-testid': 'admin-dashboard-tab',
+    'children': [jsxs('div', {
       className: _$$s.flex.flexRow.gap24.py24.px16.justifyStart.$,
       children: [jsx(ER, {
         dispatch: t,
@@ -211,39 +210,39 @@ function B({
         entity: e,
         size: 80,
         avatarEditorState: a
-      }), jsxs("div", {
+      }), jsxs('div', {
         className: _$$s.flex.flexColumn.justifyCenter.itemsStart.$,
-        children: [jsx(_$$E, {
-          fontWeight: "regular",
+        children: [jsx(TextWithTruncation, {
+          fontWeight: 'regular',
           fontSize: 24,
           children: e.name
         }), e.community_profile_handle && jsxs(jm, {
-          className: C()(_$$s.lh24.font13.cursorPointer.$, "admin_dashboard_tab--communityHandle--uBlsg"),
+          className: C()(_$$s.lh24.font13.cursorPointer.$, 'admin_dashboard_tab--communityHandle--uBlsg'),
           onClick: () => {
             t(sf({
-              view: "communityHub",
-              subView: "handle",
+              view: 'communityHub',
+              subView: 'handle',
               handle: e.community_profile_handle
             }));
           },
-          children: ["@", e.community_profile_handle]
+          children: ['@', e.community_profile_handle]
         })]
       })]
     }), o && jsx(_$$k2, {
       openConnectedProjects: () => {
         t(sf({
-          view: "teamAdminConsole",
-          teamId: n?.key.parentId ?? "",
+          view: 'teamAdminConsole',
+          teamId: n?.key.parentId ?? '',
           teamAdminConsoleViewTab: DashboardSections.CONTENT,
           teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
         }));
       }
-    }), jsx("div", {
+    }), jsx('div', {
       className: _$$s.mb16.$
     }), e.pro_team && jsx(AutoLayout, {
       spacing: 16,
-      direction: "vertical",
-      children: jsx("div", {
+      direction: 'vertical',
+      children: jsx('div', {
         className: _$$s.mb16.$,
         children: jsx($, {
           team: e
@@ -252,8 +251,8 @@ function B({
     })]
   });
 }
-var V = z;
-let eq = registerModal(function (e) {
+let V = z;
+let eq = registerModal(e => {
   let {
     team
   } = e;
@@ -264,7 +263,7 @@ let eq = registerModal(function (e) {
   let s = e.members.length;
   let r = e.members.filter(e => e.id).map(e => e.id).join();
   return jsx(fu, {
-    name: "Team Remove Members Modal",
+    name: 'Team Remove Members Modal',
     properties: {
       memberCount: s,
       memberIds: r,
@@ -272,22 +271,22 @@ let eq = registerModal(function (e) {
     },
     children: jsx(Dd, {
       destructive: !0,
-      title: getI18nString("team_view.remove_members_modal.title", {
+      title: getI18nString('team_view.remove_members_modal.title', {
         member_count: s,
         member_identity: e.members[0]?.name || e.members[0]?.email
       }),
-      confirmText: getI18nString("team_view.remove_members_modal.confirmation"),
+      confirmText: getI18nString('team_view.remove_members_modal.confirmation'),
       onConfirm: e.onConfirm,
-      children: jsx("p", {
-        children: e.includesPendingTeamRole ? getI18nString("team_view.remove_members_modal.pending_role_removal_copy", {
+      children: jsx('p', {
+        children: e.includesPendingTeamRole ? getI18nString('team_view.remove_members_modal.pending_role_removal_copy', {
           member_count: s,
           user_name_or_email: e.members[0]?.name || e.members[0]?.email,
           team_name: name
-        }) : getFeatureFlags().ext_figma_apps ? getI18nString("team_view.remove_members_modal.confirmed_role_removal_copy_v2", {
+        }) : getFeatureFlags().ext_figma_apps ? getI18nString('team_view.remove_members_modal.confirmed_role_removal_copy_v2', {
           member_count: s,
           user_name_or_email: e.members[0]?.name || e.members[0]?.email,
           team_name: name
-        }) : getI18nString("team_view.remove_members_modal.confirmed_role_removal_copy", {
+        }) : getI18nString('team_view.remove_members_modal.confirmed_role_removal_copy', {
           member_count: s,
           user_name_or_email: e.members[0]?.name || e.members[0]?.email,
           team_name: name
@@ -295,7 +294,7 @@ let eq = registerModal(function (e) {
       })
     })
   });
-}, "ConfirmMembersRemoveModal");
+}, 'ConfirmMembersRemoveModal');
 function eJ() {
   let e = ol();
   let t = e?.pro_team === void 0 ? Xm() : gB(e.pro_team);
@@ -314,21 +313,21 @@ function eJ() {
   });
   return jsx(rq, {
     arrowPosition: F_.BOTTOM,
-    description: e?.pro_team ? renderI18nText("admin_settings.people.onboarding.click_on_a_person") : renderI18nText("admin_settings.people.onboarding.click_on_a_person.no_paid_status"),
+    description: e?.pro_team ? renderI18nText('admin_settings.people.onboarding.click_on_a_person') : renderI18nText('admin_settings.people.onboarding.click_on_a_person.no_paid_status'),
     emphasized: !0,
     isShowing,
     onClose: complete,
     primaryCta: {
-      label: renderI18nText("general.got_it"),
+      label: renderI18nText('general.got_it'),
       ctaTrackingDescriptor: _$$c.GOT_IT,
-      type: "button",
+      type: 'button',
       onClick: complete
     },
     shouldCenterArrow: EL.BEST_EFFORT,
     targetKey: fB,
-    title: renderI18nText("admin_settings.people.onboarding.easily_manage_people"),
+    title: renderI18nText('admin_settings.people.onboarding.easily_manage_people'),
     trackingContextName: `${Of} flyout tooltip`
-  }, "flyout");
+  }, 'flyout');
 }
 let e0 = createOptimistThunk((e, {
   member: t,
@@ -338,25 +337,25 @@ let e0 = createOptimistThunk((e, {
     id
   } = s;
   e.dispatch(showModalHandler({
-    type: n ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), createModalConfig("ConfirmDowngradeEditorsModal")), "ConfirmDowngradeEditorsModal"),
+    type: n ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), createModalConfig('ConfirmDowngradeEditorsModal')), 'ConfirmDowngradeEditorsModal'),
     data: {
       editors: [t],
       team: s,
       onConfirm: () => {
-        let a = t.last_active ? new Date(1e3 * t.last_active).toDateString() : "never";
+        let a = t.last_active ? new Date(1e3 * t.last_active).toDateString() : 'never';
         t.id && e.dispatch(_$$z({
           editor: {
             id: t.id,
             img_url: t.img_url,
-            name: t.name ?? "",
+            name: t.name ?? '',
             email: t.email,
             last_active: a,
             team_id: id
           }
         }));
         e.dispatch(VisualBellActions.enqueue({
-          type: "team-editors-downgraded",
-          message: getI18nString("downgrade_member_visual_bell.text", {
+          type: 'team-editors-downgraded',
+          message: getI18nString('downgrade_member_visual_bell.text', {
             numMembers: t.id ? 1 : 0,
             userName: t.name ?? t.email
           })
@@ -377,13 +376,13 @@ function e1(e) {
   };
 }
 function e2(e) {
-  return jsx("span", {
-    className: e.className || "",
-    children: e.cellContent || "\u2013"
+  return jsx('span', {
+    className: e.className || '',
+    children: e.cellContent || '\u2013'
   });
 }
-let e4 = "TeamMemberFlyout";
-let e5 = kp(function (e) {
+let e4 = 'TeamMemberFlyout';
+let e5 = kp(e => {
   let {
     billing,
     dispatch,
@@ -466,12 +465,12 @@ let e5 = kp(function (e) {
               newLevel: AccessLevelEnum.NONE
             });
           });
-          let t = 1 === e.length ? e[0].name || e[0].email : getI18nString("team_view.upgrade.members_length_users", {
+          let t = e.length === 1 ? e[0].name || e[0].email : getI18nString('team_view.upgrade.members_length_users', {
             memberLength: e.length
           });
           dispatch(VisualBellActions.enqueue({
-            type: "team-users-removed",
-            message: getI18nString("team_view.upgrade.members_removed_text_removed_from_this_props_team_name", {
+            type: 'team-users-removed',
+            message: getI18nString('team_view.upgrade.members_removed_text_removed_from_this_props_team_name', {
               membersRemovedText: t,
               teamName: team.name
             })
@@ -491,7 +490,7 @@ let e5 = kp(function (e) {
   let y = () => {
     let t = e.team;
     return [{
-      name: Rq(_$$d2.NAME),
+      name: Rq(UserFieldEnum.NAME),
       className: Mc,
       getSortValue: e => e.member.name || e.member.email,
       cellComponent: M
@@ -502,13 +501,13 @@ let e5 = kp(function (e) {
       currency: e.billing.summary.currency,
       forceHidePendingSeats: e.forceHidePendingSeats
     }) : []), ...(j ? [{
-      name: Rq(_$$d2.BILLING_INTERVAL),
+      name: Rq(UserFieldEnum.BILLING_INTERVAL),
       className: Mc,
-      getSortValue: e => "current_seat_billing_interval" in e.member ? e.member.current_seat_billing_interval?.toString() ?? "-" : "-",
+      getSortValue: e => 'current_seat_billing_interval' in e.member ? e.member.current_seat_billing_interval?.toString() ?? '-' : '-',
       sortReversed: !0,
       cellComponent: D
     }] : []), {
-      name: Rq(_$$d2.ACTIVE_AT),
+      name: Rq(UserFieldEnum.ACTIVE_AT),
       className: dG,
       getSortValue: e => e.member.last_active || 0,
       sortNumerically: !0,
@@ -553,7 +552,7 @@ let e5 = kp(function (e) {
   let R = useCallback(e => !(e.member.team_role?.pending && !e.member.team_user), []);
   let O = useCallback(e => {
     dispatch(showModalHandler({
-      type: s ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), createModalConfig("MemberEditAccessModal")), "MemberEditAccessModal"),
+      type: s ??= registerModal(_$$A3.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), createModalConfig('MemberEditAccessModal')), 'MemberEditAccessModal'),
       data: {
         memberEmail: e.email,
         teamId: team.id,
@@ -574,51 +573,51 @@ let e5 = kp(function (e) {
     let d = t.member.canRemoveUser;
     let _ = (e, t) => e ? [t] : [];
     let m = [..._(R(t), {
-      text: getI18nString("team_view.settings.manage"),
-      innerText: "Manage (menu cell)",
+      text: getI18nString('team_view.settings.manage'),
+      innerText: 'Manage (menu cell)',
       callback: () => {
         setHighlightedItemId(t.member.email);
       }
     }), ..._(canAdmin && R(t), {
-      text: getI18nString("team_view.settings.see_edit_access"),
+      text: getI18nString('team_view.settings.see_edit_access'),
       callback: () => {
         O(t.member);
       }
     }), {
-      text: getI18nString("team_view.settings.copy_email"),
+      text: getI18nString('team_view.settings.copy_email'),
       callback: () => {
         c([t.member.email]);
       }
     }, ..._(a && canEdit && !n, {
-      text: getI18nString("team_view.settings.invite_to_team"),
+      text: getI18nString('team_view.settings.invite_to_team'),
       callback: () => {
         p(t.member);
       }
-    }), ..._("revoke" === i, {
-      text: getI18nString("team_view.settings.revoke_admin_access"),
+    }), ..._(i === 'revoke', {
+      text: getI18nString('team_view.settings.revoke_admin_access'),
       callback: () => u({
         member: t.member,
         newLevel: AccessLevelEnum.EDITOR
       })
-    }), ..._("grant" === i, {
-      text: getI18nString("team_view.settings.grant_admin_access"),
+    }), ..._(i === 'grant', {
+      text: getI18nString('team_view.settings.grant_admin_access'),
       callback: () => u({
         member: t.member,
         newLevel: AccessLevelEnum.ADMIN
       })
     })];
     let x = [..._(n && o, {
-      text: getI18nString("team_view.settings.resend_invite"),
+      text: getI18nString('team_view.settings.resend_invite'),
       callback: () => {
         v(t.member);
       }
     }), ..._(!t.isCurrentMember && d, {
-      text: getI18nString("team_view.settings.remove"),
+      text: getI18nString('team_view.settings.remove'),
       callback: () => {
         b([t.member]);
       }
     }), ..._(t.isCurrentMember && !s, {
-      text: getI18nString("team_view.settings.leave_team"),
+      text: getI18nString('team_view.settings.leave_team'),
       callback: () => {
         g(t.member);
       }
@@ -629,7 +628,7 @@ let e5 = kp(function (e) {
     return m;
   }, [R, c, p, g, u, b, v, e.team, setHighlightedItemId, O]);
   let D = e => {
-    let t = "current_seat_billing_interval" in e.member && e.member.current_seat_billing_interval ? e.member.current_seat_billing_interval === FBillingPeriodType.YEAR ? getI18nString("team_view.team_members_table.billing_interval_annual") : getI18nString("team_view.team_members_table.billing_interval_monthly") : getI18nString("team_view.team_members_table.billing_interval_empty");
+    let t = 'current_seat_billing_interval' in e.member && e.member.current_seat_billing_interval ? e.member.current_seat_billing_interval === FBillingPeriodType.YEAR ? getI18nString('team_view.team_members_table.billing_interval_annual') : getI18nString('team_view.team_members_table.billing_interval_monthly') : getI18nString('team_view.team_members_table.billing_interval_empty');
     return jsx(e2, {
       cellContent: t
     });
@@ -641,31 +640,31 @@ let e5 = kp(function (e) {
     } = e;
     let l = e1(member);
     let o = BP(member);
-    let d = 0 === n ? fB : void 0;
+    let d = n === 0 ? fB : void 0;
     return member.team_role?.pending ? jsx(i9, {
-      badge: o,
-      "data-onboarding-key": d,
-      defaultText: "-",
-      entity: l,
-      overrideHandle: l.email,
-      showIsMe: !1
+      'badge': o,
+      'data-onboarding-key': d,
+      'defaultText': '-',
+      'entity': l,
+      'overrideHandle': l.email,
+      'showIsMe': !1
     }) : jsx(_$$r, {
-      className: U0,
-      "data-onboarding-key": d,
-      dispatch: e.dispatch,
-      entity: l,
-      showIsMe: isCurrentMember,
-      showTooltip: !0,
-      size: 24,
-      badge: o
+      'className': U0,
+      'data-onboarding-key': d,
+      'dispatch': e.dispatch,
+      'entity': l,
+      'showIsMe': isCurrentMember,
+      'showTooltip': !0,
+      'size': 24,
+      'badge': o
     });
   };
   let P = t => {
     let {
       member
     } = t;
-    return member.last_active ? jsx($n, {
-      variant: "link",
+    return member.last_active ? jsx(Button, {
+      variant: 'link',
       onClick: t => {
         t.stopPropagation();
         e.dispatch(showModalHandler({
@@ -675,7 +674,7 @@ let e5 = kp(function (e) {
             planId: e.team.id,
             planUserId: member.id,
             planUserDisplayName: member.name || member.email,
-            activityType: "all"
+            activityType: 'all'
           }
         }));
       },
@@ -689,50 +688,50 @@ let e5 = kp(function (e) {
     let t = () => {
       e.onFilter(Ok);
     };
-    let a = renderI18nText("team_view.team_members_table.default_empty_state");
-    let n = jsx("span", {
-      children: renderI18nText("team_view.team_members_table.member_filter_empty_state", {
-        reset_link: jsx("a", {
+    let a = renderI18nText('team_view.team_members_table.default_empty_state');
+    let n = jsx('span', {
+      children: renderI18nText('team_view.team_members_table.member_filter_empty_state', {
+        reset_link: jsx('a', {
           className: nf,
           onClick: () => t(),
-          children: getI18nString("team_view.team_members_table.member_filter_empty_reset_link")
+          children: getI18nString('team_view.team_members_table.member_filter_empty_reset_link')
         })
       })
     });
-    let s = renderI18nText("team_view.team_members_table.search_empty_state");
+    let s = renderI18nText('team_view.team_members_table.search_empty_state');
     let r = Object.values(e.filters).some(e => !!e);
     return r && e.searchQuery ? e.lastFilterAction === Vc.SEARCH ? s : n : r ? n : e.searchQuery ? s : a;
   };
-  let F = () => jsx("div", {
+  let F = () => jsx('div', {
     className: Hy,
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: cE,
-      children: [jsx("div", {
+      children: [jsx('div', {
         className: _$$s.pr8.$,
         children: jsx(y2, {
           onChange: e.onSearch,
           query: e.searchQuery,
           clearSearch: () => {
-            e.onSearch("");
+            e.onSearch('');
           },
-          placeholder: getI18nString("team_view.search_bar.search_members_with_ellipsis")
+          placeholder: getI18nString('team_view.search_bar.search_members_with_ellipsis')
         })
       }), jsx(bv, {
-        label: Rq(_$$d2.ACTIVE_AT),
+        label: Rq(UserFieldEnum.ACTIVE_AT),
         dispatch: e.dispatch,
         dropdownShown: e.dropdownShown,
-        dropdownType: "FILTER_LAST_ACTIVE_DROPDOWN",
+        dropdownType: 'FILTER_LAST_ACTIVE_DROPDOWN',
         selectedValue: e.filters.lastActiveFilter,
         values: [UW.MORE_SEVEN_DAYS, UW.MORE_THIRTY_DAYS, UW.MORE_THREE_MONTHS],
         getCount: t => e.filterCounts.lastActive[t],
         getDisplayText: e => function (e) {
           switch (e) {
             case UW.MORE_SEVEN_DAYS:
-              return getI18nString("team_view.team_members_table.filters.last_active..more_than_7_days_ago");
+              return getI18nString('team_view.team_members_table.filters.last_active..more_than_7_days_ago');
             case UW.MORE_THIRTY_DAYS:
-              return getI18nString("team_view.team_members_table.filters.last_active..more_than_30_days_ago");
+              return getI18nString('team_view.team_members_table.filters.last_active..more_than_30_days_ago');
             case UW.MORE_THREE_MONTHS:
-              return getI18nString("team_view.team_members_table.filters.last_active..more_than_3_months_ago");
+              return getI18nString('team_view.team_members_table.filters.last_active..more_than_3_months_ago');
             default:
               throwTypeError(e);
           }
@@ -747,14 +746,14 @@ let e5 = kp(function (e) {
         filterCounts: e.filterCounts,
         onFilter: e.onFilter
       }), j && jsx(bv, {
-        label: Rq(_$$d2.BILLING_INTERVAL),
+        label: Rq(UserFieldEnum.BILLING_INTERVAL),
         dispatch: e.dispatch,
         dropdownShown: e.dropdownShown,
-        dropdownType: "FILTER_BILLING_INTERVAL_DROPDOWN",
+        dropdownType: 'FILTER_BILLING_INTERVAL_DROPDOWN',
         selectedValue: e.filters.billingIntervalFilter ?? null,
         values: [FBillingPeriodType.MONTH, FBillingPeriodType.YEAR],
         getCount: t => e.filterCounts.billingInterval?.[t] ?? 0,
-        getDisplayText: e => e === FBillingPeriodType.MONTH ? getI18nString("team_view.team_members_table.billing_interval_monthly") : getI18nString("team_view.team_members_table.billing_interval_annual"),
+        getDisplayText: e => e === FBillingPeriodType.MONTH ? getI18nString('team_view.team_members_table.billing_interval_monthly') : getI18nString('team_view.team_members_table.billing_interval_annual'),
         updateFilter: t => e.onFilter({
           billingIntervalFilter: t ?? void 0
         })
@@ -763,7 +762,7 @@ let e5 = kp(function (e) {
   });
   let q = t => {
     let a = t.map(e => e.member);
-    if (0 === a.length) return jsx(Fragment, {});
+    if (a.length === 0) return jsx(Fragment, {});
     let n = a.map(e => e.email);
     let s = a.every(e => e.canRemoveUser);
     let r = a.some(e => e.team_role?.pending) && a.some(e => !e.team_user);
@@ -778,8 +777,8 @@ let e5 = kp(function (e) {
     };
     let m = _.join();
     return jsxs(Fragment, {
-      children: [canAdmin && !r && 1 === a.length && jsx(IU, {
-        label: getI18nString("team_view.settings.see_edit_access"),
+      children: [canAdmin && !r && a.length === 1 && jsx(IU, {
+        label: getI18nString('team_view.settings.see_edit_access'),
         onClick: () => {
           O(a[0]);
         }
@@ -788,14 +787,14 @@ let e5 = kp(function (e) {
           ...u,
           copiedUserIds: m
         },
-        label: getI18nString("team_view.settings.copy_get_plural_or_singular_selected_members_length_email", {
+        label: getI18nString('team_view.settings.copy_get_plural_or_singular_selected_members_length_email', {
           numEmails: a.length
         }),
         onClick: () => {
           c(n);
         }
       }), s && !o && jsx(IU, {
-        label: getI18nString("team_view.settings.remove"),
+        label: getI18nString('team_view.settings.remove'),
         trackingProperties: {
           ...u,
           removedUserIds: m
@@ -805,7 +804,7 @@ let e5 = kp(function (e) {
         },
         disabled: l,
         ...(l ? {
-          tooltip: getI18nString("team_view.settings.you_can_only_remove_limit_users_at_a_time", {
+          tooltip: getI18nString('team_view.settings.you_can_only_remove_limit_users_at_a_time', {
             batchLimit: 20
           })
         } : {})
@@ -821,12 +820,12 @@ let e5 = kp(function (e) {
       }, e.text))
     });
   }, [L]);
-  let B = jsx("div", {
-    className: kL,
-    "data-testid": "team-members-table",
-    children: jsx(e3, {
+  let B = jsx('div', {
+    'className': kL,
+    'data-testid': 'team-members-table',
+    'children': jsx(e3, {
       initialSortState: {
-        columnName: Rq(_$$d2.NAME),
+        columnName: Rq(UserFieldEnum.NAME),
         isReversed: !1
       },
       items: w,
@@ -836,8 +835,8 @@ let e5 = kp(function (e) {
         columns: y(),
         emptyContent: jsx(AutoLayout, {
           height: 200,
-          verticalAlignItems: "center",
-          horizontalAlignItems: "center",
+          verticalAlignItems: 'center',
+          horizontalAlignItems: 'center',
           children: U()
         }),
         getItemKey: f,
@@ -847,8 +846,8 @@ let e5 = kp(function (e) {
         },
         isRowClickable: R,
         itemTypeContext: {
-          itemType: "user",
-          getSelectedCountString: e => getI18nString("multi_select_list.selected_count_user", {
+          itemType: 'user',
+          getSelectedCountString: e => getI18nString('multi_select_list.selected_count_user', {
             numSelected: e
           })
         },
@@ -860,7 +859,7 @@ let e5 = kp(function (e) {
         onScroll: () => e.dispatch(oB()),
         onSetSortState: a,
         rightActionColumns: [{
-          name: "menu-cell",
+          name: 'menu-cell',
           className: oi,
           cellComponent: $
         }, VU],
@@ -901,7 +900,7 @@ let e5 = kp(function (e) {
       })
     })]
   });
-}, "Pro Team Members Table");
+}, 'Pro Team Members Table');
 function e3({
   initialSortState: e,
   items: t,
@@ -916,14 +915,14 @@ function e8(e) {
     let e = _6();
     let [t, a] = useState({
       ...Ok,
-      ...("teamAdminConsole" === e.view ? e.membersTabInitialFilters : void 0)
+      ...(e.view === 'teamAdminConsole' ? e.membersTabInitialFilters : void 0)
     });
     return [t, a];
   }();
-  let [n, s] = useState("");
+  let [n, s] = useState('');
   let [l, o] = useState(Vc.FILTER);
   let d = TG(e.team.id);
-  let c = If("migrate_team_data_to_livegraph", wv.GROUP_1);
+  let c = isCutover('migrate_team_data_to_livegraph', LegacyConfigGroups.GROUP_1);
   let _ = useShadowReadLoaded({
     oldValue: resourceUtils.useMemoizedLoaded(e.membersList),
     newValue: d,
@@ -935,15 +934,15 @@ function e8(e) {
     },
     maxReports: 5
   });
-  var u = {};
-  if ("loading" === _.status) return jsx(kt, {});
-  "errors" === _.status ? e.dispatch(VisualBellActions.enqueue({
-    message: getI18nString("file_browser.file_browser_actions.team_member_fetch_error"),
+  let u = {};
+  if (_.status === 'loading') return jsx(LoadingSpinner, {});
+  _.status === 'errors' ? e.dispatch(VisualBellActions.enqueue({
+    message: getI18nString('file_browser.file_browser_actions.team_member_fetch_error'),
     error: !0
   })) : u = _.data || {};
-  let m = _$$A().subtract(3, "days");
-  let p = _$$A().subtract(30, "days");
-  let x = _$$A().subtract(3, "months");
+  let m = _$$A().subtract(3, 'days');
+  let p = _$$A().subtract(30, 'days');
+  let x = _$$A().subtract(3, 'months');
   let b = Object.values(u);
   n && (d2.set(Object.values(u)), b = d2.search(n));
   b = b.filter(e => {
@@ -951,7 +950,7 @@ function e8(e) {
       let a = e.last_active ? _$$A(1e3 * e.last_active) : 0;
       if (t.lastActiveFilter === UW.MORE_SEVEN_DAYS && a > m || t.lastActiveFilter === UW.MORE_THIRTY_DAYS && a > p || t.lastActiveFilter === UW.MORE_THREE_MONTHS && a > x) return !1;
     }
-    return !!b_(e, t.seatTypeFilter) && (!t.billingIntervalFilter || !("current_seat_billing_interval" in e) || e.current_seat_billing_interval === t.billingIntervalFilter);
+    return !!b_(e, t.seatTypeFilter) && (!t.billingIntervalFilter || !('current_seat_billing_interval' in e) || e.current_seat_billing_interval === t.billingIntervalFilter);
   });
   let v = {
     lastActive: {
@@ -967,13 +966,13 @@ function e8(e) {
   };
   Object.values(b).forEach(e => {
     let t = e.last_active ? _$$A(1e3 * e.last_active) : 0;
-    if (t < x && (v.lastActive[UW.MORE_THREE_MONTHS] += 1), t < p && (v.lastActive[UW.MORE_THIRTY_DAYS] += 1), t < m && (v.lastActive[UW.MORE_SEVEN_DAYS] += 1), Ji(e, v), "current_seat_billing_interval" in e && e.current_seat_billing_interval && v.billingInterval) {
+    if (t < x && (v.lastActive[UW.MORE_THREE_MONTHS] += 1), t < p && (v.lastActive[UW.MORE_THIRTY_DAYS] += 1), t < m && (v.lastActive[UW.MORE_SEVEN_DAYS] += 1), Ji(e, v), 'current_seat_billing_interval' in e && e.current_seat_billing_interval && v.billingInterval) {
       let t = e.current_seat_billing_interval;
       v.billingInterval[t] ??= 0;
       v.billingInterval[t] += 1;
     }
   });
-  return jsx("div", {
+  return jsx('div', {
     className: _$$s.flex.flexColumn.$,
     children: jsx(e5, {
       billing: e.billing,
@@ -1001,37 +1000,37 @@ function e8(e) {
     })
   });
 }
-let e6 = ["user", "user_id", "team_id"];
-let e7 = ["id", "name", "img_url", "ecc_upgrading_locked"];
-let e9 = ["team_id", "pending_email", "invite"];
-let te = ["last_design_active", "last_whiteboard_active", "edit_roles", "view_roles", "seat_type", "edu_edit_access_allowed"];
-let tt = ["whiteboard_paid_status", "design_paid_status", "drafts_folder_id", "show_figjam_user_onboarding", "created_at", "updated_at", "_internal_only_written_by_backfill", "has_shown_figjam_admin_onboarding"];
-let ta = ["upgrade_method", "billable_product_key", "prev_billable_product_key", "seat_id", "_internal_only_written_by_backfill", "team_user_id", "downgrade_actor_id", "downgrade_reason", "downgraded_at", "account_type_request_id", "entry_point", "batch_timestamp", "updated_at", "resource_name"];
+let e6 = ['user', 'user_id', 'team_id'];
+let e7 = ['id', 'name', 'img_url', 'ecc_upgrading_locked'];
+let e9 = ['team_id', 'pending_email', 'invite'];
+let te = ['last_design_active', 'last_whiteboard_active', 'edit_roles', 'view_roles', 'seat_type', 'edu_edit_access_allowed'];
+let tt = ['whiteboard_paid_status', 'design_paid_status', 'drafts_folder_id', 'show_figjam_user_onboarding', 'created_at', 'updated_at', '_internal_only_written_by_backfill', 'has_shown_figjam_admin_onboarding'];
+let ta = ['upgrade_method', 'billable_product_key', 'prev_billable_product_key', 'seat_id', '_internal_only_written_by_backfill', 'team_user_id', 'downgrade_actor_id', 'downgrade_reason', 'downgraded_at', 'account_type_request_id', 'entry_point', 'batch_timestamp', 'updated_at', 'resource_name'];
 function tn(e, t, a, n, s) {
-  if ("created_at" === n || "assigned_at" === n || "updated_at" === n) {
+  if (n === 'created_at' || n === 'assigned_at' || n === 'updated_at') {
     let i = _$$tb(V()(t, n))?.getTime();
     let r = _$$tb(V()(a, n))?.getTime();
     if (i === r) return;
     i && r || e.push({
       newValue: r,
       oldValue: i,
-      severity: "high",
+      severity: 'high',
       path: s
     });
     Math.floor(r / 1e3) !== Math.floor(i / 1e3) && e.push({
       newValue: r,
       oldValue: i,
-      severity: "high",
+      severity: 'high',
       path: s
     });
     return;
   }
   let i = V()(t, n);
   let r = V()(a, n);
-  (null !== i || null !== r) && (void 0 !== i || void 0 !== r) && (null !== i || void 0 !== r) && (void 0 !== i || null !== r) && i !== r && e.push({
+  (i !== null || r !== null) && (void 0 !== i || void 0 !== r) && (i !== null || void 0 !== r) && (void 0 !== i || r !== null) && i !== r && e.push({
     newValue: r,
     oldValue: i,
-    severity: "high",
+    severity: 'high',
     path: s
   });
 }
@@ -1043,7 +1042,7 @@ function ts(e, t) {
       a.push({
         newValue: n,
         oldValue: s,
-        severity: "high",
+        severity: 'high',
         path: [e]
       });
       return;
@@ -1051,12 +1050,12 @@ function ts(e, t) {
     let i = n.team_role?.pending && !n.team_user;
     Object.entries(n).forEach(([t, r]) => {
       if (!(i && e7.includes(t)) && !te.includes(t)) {
-        if ("team_user" === t && n.team_user) {
+        if (t === 'team_user' && n.team_user) {
           let i = n.team_user;
           let r = s.team_user;
           Object.entries(i).forEach(([n, s]) => {
             if (!tt.includes(n)) {
-              if ("active_seat_type" === n) {
+              if (n === 'active_seat_type') {
                 let s = i?.active_seat_type;
                 let l = r?.active_seat_type;
                 if (s !== l && !s != !l) {
@@ -1064,42 +1063,46 @@ function ts(e, t) {
                     a.push({
                       newValue: l,
                       oldValue: s,
-                      severity: "high",
+                      severity: 'high',
                       path: [e, t, n]
                     });
                     return;
                   }
                   Object.entries(s).forEach(([t, n]) => {
-                    tn(a, s, l, "key", [e, "team_user", "active_seat_type", t]);
+                    tn(a, s, l, 'key', [e, 'team_user', 'active_seat_type', t]);
                   });
                 }
-              } else tn(a, i, r, n, [e, "team_user", n]);
+              } else {
+                tn(a, i, r, n, [e, 'team_user', n]);
+              }
             }
           });
-        } else if ("team_role" === t && n.team_role) {
+        } else if (t === 'team_role' && n.team_role) {
           let t = n.team_role;
           let i = s.team_role;
           Object.entries(t).forEach(([s, r]) => {
             if (!(n.team_role.pending && e6.includes(s) || e9.includes(s))) {
-              if ("user" === s) {
+              if (s === 'user') {
                 let n = t.user;
                 let s = i?.user;
                 Object.entries(n).forEach(([t, i]) => {
-                  tn(a, n, s, t, [e, "team_role", "user"]);
+                  tn(a, n, s, t, [e, 'team_role', 'user']);
                 });
-              } else tn(a, t, i, s, [e, "team_role", s]);
+              } else {
+                tn(a, t, i, s, [e, 'team_role', s]);
+              }
             }
           });
-        } else if ("design_editor_upgrade" === t || "whiteboard_editor_upgrade" === t) {
+        } else if (t === 'design_editor_upgrade' || t === 'whiteboard_editor_upgrade') {
           let i = V()(n, t);
           let r = V()(s, t);
           if (i === r) return;
           if (!i || !r) {
-            if (null === i && null === r || void 0 === i && void 0 === r || null === i && void 0 === r || void 0 === i && null === r) return;
+            if (i === null && r === null || void 0 === i && void 0 === r || i === null && void 0 === r || void 0 === i && r === null) return;
             a.push({
               newValue: r,
               oldValue: i,
-              severity: "high",
+              severity: 'high',
               path: [e, t]
             });
             return;
@@ -1107,7 +1110,9 @@ function ts(e, t) {
           Object.entries(i).forEach(([n, s]) => {
             ta.includes(n) || tn(a, i, r, n, [e, t, n]);
           });
-        } else tn(a, n, s, t, [e, t]);
+        } else {
+          tn(a, n, s, t, [e, t]);
+        }
       }
     });
   });
@@ -1116,24 +1121,24 @@ function ts(e, t) {
     s || a.push({
       newValue: s,
       oldValue: n,
-      severity: "high",
+      severity: 'high',
       path: [t]
     });
   });
   return a;
 }
-let tF = "settings_table--link--mol4m";
-let tq = "settings_table--boldText--wLdS9 settings_table--modalText--7TuKM";
+let tF = 'settings_table--link--mol4m';
+let tq = 'settings_table--boldText--wLdS9 settings_table--modalText--7TuKM';
 let t$ = {
-  aiFeaturesToggle: "ai-features-setting-toggle",
-  aiDataSharingToggle: "ai-data-sharing-toggle",
-  aiFeaturesEnableButton: "ai-features-enable-button"
+  aiFeaturesToggle: 'ai-features-setting-toggle',
+  aiDataSharingToggle: 'ai-data-sharing-toggle',
+  aiFeaturesEnableButton: 'ai-features-enable-button'
 };
 function tB(e) {
-  return e ? _$$A(e).format("MMMM D, YYYY") : "";
+  return e ? _$$A(e).format('MMMM D, YYYY') : '';
 }
 function tG(e) {
-  var t;
+  let t;
   let {
     team,
     settingsData
@@ -1190,10 +1195,10 @@ function tG(e) {
         },
         userInitiated: !0
       }));
-      let t = e ? getI18nString("admin_settings.ai.disable_success") : getI18nString("admin_settings.ai.enable_success");
+      let t = e ? getI18nString('admin_settings.ai.disable_success') : getI18nString('admin_settings.ai.enable_success');
       r(FlashActions.flash(t));
     } catch {
-      r(FlashActions.error(getI18nString("file_browser.file_browser_actions.team_update_error")));
+      r(FlashActions.error(getI18nString('file_browser.file_browser_actions.team_update_error')));
     }
   };
   let v = async e => {
@@ -1202,13 +1207,13 @@ function tG(e) {
         teamId: team.id,
         enabled: e
       });
-      trackEventAnalytics("ai_data_sharing_toggled", {
+      trackEventAnalytics('ai_data_sharing_toggled', {
         team_id: team.id,
         enabled: e
       });
-      r(FlashActions.flash(getI18nString("admin_settings.ai.data_sharing.update_success")));
+      r(FlashActions.flash(getI18nString('admin_settings.ai.data_sharing.update_success')));
     } catch (e) {
-      r(FlashActions.error(getI18nString("admin_settings.ai.data_sharing.update_error")));
+      r(FlashActions.error(getI18nString('admin_settings.ai.data_sharing.update_error')));
     }
   };
   let j = getFeatureFlags().ai_ga;
@@ -1226,14 +1231,14 @@ function tG(e) {
       testId: t$.aiFeaturesEnableButton
     })
   })) : y.push(jsx(T_, {
-    label: getI18nString("admin_settings.ai.features_toggle.label"),
-    description: jsx("p", {
-      children: renderI18nText("admin_settings.ai.features_toggle.description.team", {
+    label: getI18nString('admin_settings.ai.features_toggle.label'),
+    description: jsx('p', {
+      children: renderI18nText('admin_settings.ai.features_toggle.description.team', {
         learnMoreLink: jsx(CY, {
           href: _$$d3.aiFeatures,
-          target: "_blank",
+          target: '_blank',
           trusted: !0,
-          children: renderI18nText("general.learn_more")
+          children: renderI18nText('general.learn_more')
         })
       })
     }),
@@ -1242,16 +1247,16 @@ function tG(e) {
     onToggle: e => {
       b(!e);
     }
-  }, getI18nString("admin_settings.ai.features_toggle.label")));
+  }, getI18nString('admin_settings.ai.features_toggle.label')));
   y.push(jsx(T_, {
-    label: getI18nString("admin_settings.ai.data_sharing.label"),
-    description: jsx("p", {
-      children: renderI18nText("admin_settings.ai.data_sharing.description.team", {
+    label: getI18nString('admin_settings.ai.data_sharing.label'),
+    description: jsx('p', {
+      children: renderI18nText('admin_settings.ai.data_sharing.description.team', {
         learnMoreLink: jsx(CY, {
           href: _$$d3.aiDataSharing,
-          target: "_blank",
+          target: '_blank',
           trusted: !0,
-          children: renderI18nText("general.learn_more")
+          children: renderI18nText('general.learn_more')
         })
       })
     }),
@@ -1259,28 +1264,28 @@ function tG(e) {
     testId: t$.aiDataSharingToggle,
     onToggle: v,
     disabled: p,
-    tooltipText: p ? getI18nString("admin_settings.ai.data_sharing.disabled_for_student_teams") : void 0
-  }, getI18nString("admin_settings.ai.data_sharing.label")));
+    tooltipText: p ? getI18nString('admin_settings.ai.data_sharing.disabled_for_student_teams') : void 0
+  }, getI18nString('admin_settings.ai.data_sharing.label')));
   return jsx(Fragment, {
     children: jsx(fu, {
-      name: "Team Admin Console Settings Table",
+      name: 'Team Admin Console Settings Table',
       properties: {
         teamId: e.team.id
       },
-      children: jsxs("div", {
-        className: Dg,
-        "data-testid": "admin-console-settings-table",
-        children: [e.team.pro_team && jsx(Kz, {
-          title: getI18nString("settings_table.team_profile"),
+      children: jsxs('div', {
+        'className': Dg,
+        'data-testid': 'admin-console-settings-table',
+        'children': [e.team.pro_team && jsx(Kz, {
+          title: getI18nString('settings_table.team_profile'),
           settings: tV({
             team: e.team,
             teamName: e.team.name,
-            legalName: e.team.legal_name ?? "",
+            legalName: e.team.legal_name ?? '',
             canSeeBillingAddressExp: m,
             dispatch: r
           })
         }), jsx(Kz, {
-          title: getI18nString("settings_table.plan"),
+          title: getI18nString('settings_table.plan'),
           settings: tz({
             teamBillingSummary: e.billing.summary,
             dispatch: r,
@@ -1288,7 +1293,7 @@ function tG(e) {
             canSeeBillingAddressExp: m
           })
         }), e.team.pro_team && jsx(Kz, {
-          title: getI18nString("plan_settings.billing_section_header"),
+          title: getI18nString('plan_settings.billing_section_header'),
           description: tW(c, d),
           settings: tH({
             annualSub: d,
@@ -1304,34 +1309,34 @@ function tG(e) {
             isBillingRemodelEnabled: s
           })
         }), isTeamEligibleForUpgrade(e.team) && jsx(Kz, {
-          title: getI18nString("settings_table.resources"),
+          title: getI18nString('settings_table.resources'),
           settings: [jsx(T_, {
-            label: getI18nString("settings_tab.ui_kits_toggle_label"),
-            description: getI18nString("settings_tab.ui_kits_toggle_description"),
+            label: getI18nString('settings_tab.ui_kits_toggle_label'),
+            description: getI18nString('settings_tab.ui_kits_toggle_description'),
             isActive: !e.team.figma_provided_libraries_disabled,
-            testId: "figma-provided-libraries-setting-toggle",
+            testId: 'figma-provided-libraries-setting-toggle',
             onToggle: t => {
               r(_$$tk({
                 figma_provided_libraries_disabled: !t,
                 teamId: e.team.id
               }));
-              analyticsEventManager.trackDefinedEvent("preset_libraries.team_status_changed", {
+              analyticsEventManager.trackDefinedEvent('preset_libraries.team_status_changed', {
                 userId: e.userId,
                 teamId: e.team.id,
                 isEnabled: t
               });
             }
-          }, "figma_libraries")]
+          }, 'figma_libraries')]
         }), jsx(Kz, {
-          title: getI18nString("admin_settings.ai.section_title"),
+          title: getI18nString('admin_settings.ai.section_title'),
           badge: j ? void 0 : jsxs(Fragment, {
             children: [jsx(Ex, {
               color: zE.BRAND,
-              text: getI18nString("general.beta")
+              text: getI18nString('general.beta')
             }), jsx(_$$B2, {
-              "data-tooltip-type": Ib.TEXT,
-              "data-tooltip": getI18nString("admin_settings.ai.section_title.free_in_beta"),
-              "data-tooltip-timeout-delay": 50
+              'data-tooltip-type': KindEnum.TEXT,
+              'data-tooltip': getI18nString('admin_settings.ai.section_title.free_in_beta'),
+              'data-tooltip-timeout-delay': 50
             })]
           }),
           settings: y
@@ -1361,29 +1366,29 @@ let tz = ({
     planType: FOrganizationLevelType.TEAM
   });
   if (!monthly_subscription && !annual_subscription) {
-    let e = jsx("span", {
-      children: renderI18nText("settings_table.upgrade_to_the_professional_plan_or_to_an_organization_and_get_access_to_shared_team_libraries_advanced_security_features_and_more", {
-        more: jsx("a", {
+    let e = jsx('span', {
+      children: renderI18nText('settings_table.upgrade_to_the_professional_plan_or_to_an_organization_and_get_access_to_shared_team_libraries_advanced_security_features_and_more', {
+        more: jsx('a', {
           className: tF,
-          href: "/pricing",
+          href: '/pricing',
           onClick: e => {
             e.stopPropagation();
           },
-          target: "_blank",
-          children: renderI18nText("settings_table.more")
+          target: '_blank',
+          children: renderI18nText('settings_table.more')
         })
       })
     });
     if (u) {
       let t = new Date(a.grace_period_end);
-      e = jsx("span", {
-        children: renderI18nText("settings_table.to_keep_using_paid_features_like_unlimited_team_figma_files_projects_and_team_libraries_after_your_free_professional_plan_expires_on_date_purchase_the_professional_plan_for_your_team", {
+      e = jsx('span', {
+        children: renderI18nText('settings_table.to_keep_using_paid_features_like_unlimited_team_figma_files_projects_and_team_libraries_after_your_free_professional_plan_expires_on_date_purchase_the_professional_plan_for_your_team', {
           date: t
         })
       });
     }
     _.push(jsx(x8, {
-      label: u ? getI18nString("settings_table.purchase_professional_plan") : getI18nString("settings_table.upgrade_your_plan"),
+      label: u ? getI18nString('settings_table.purchase_professional_plan') : getI18nString('settings_table.upgrade_your_plan'),
       onClick: () => {
         u ? tJ(t, c) : tK(t, c, UpsellModalType.BILLING_SETTINGS);
       },
@@ -1392,15 +1397,15 @@ let tz = ({
     return _;
   }
   if (_.push(jsx(x8, {
-    label: getI18nString("settings_table.upgrade_your_plan"),
-    description: jsx("span", {
-      children: renderI18nText("settings_table.consolidate_your_teams_access_shared_libraries_enable_advanced_security_features_and_more", {
-        more: jsx("a", {
+    label: getI18nString('settings_table.upgrade_your_plan'),
+    description: jsx('span', {
+      children: renderI18nText('settings_table.consolidate_your_teams_access_shared_libraries_enable_advanced_security_features_and_more', {
+        more: jsx('a', {
           className: tF,
-          href: "/organization",
-          target: "_blank",
+          href: '/organization',
+          target: '_blank',
           onClick: e => e.stopPropagation(),
-          children: renderI18nText("settings_table.more")
+          children: renderI18nText('settings_table.more')
         })
       })
     }),
@@ -1412,8 +1417,8 @@ let tz = ({
     }
   })), plan_canceled || !monthly_subscription) {
     _.push(jsx(x8, {
-      label: getI18nString("settings_table.reactivate_plan"),
-      description: getI18nString("settings_table.reactivate_your_subscription_of_professional"),
+      label: getI18nString('settings_table.reactivate_plan'),
+      description: getI18nString('settings_table.reactivate_your_subscription_of_professional'),
       onClick: () => {
         C8({
           team: a,
@@ -1436,8 +1441,8 @@ let tz = ({
   switch (p?.id) {
     case _$$m.ADD_ANNUAL_PLAN:
       _.push(jsx(x8, {
-        label: getI18nString("settings_table.add_an_annual_plan"),
-        description: getI18nString("settings_table.convert_all_monthly_seats"),
+        label: getI18nString('settings_table.add_an_annual_plan'),
+        description: getI18nString('settings_table.convert_all_monthly_seats'),
         onClick: () => {
           p.perform({
             dispatch: t
@@ -1447,8 +1452,8 @@ let tz = ({
       break;
     case _$$m.TRIAL_READ_ONLY:
       _.push(jsx(bX, {
-        label: getI18nString("settings_table.add_an_annual_plan"),
-        description: getI18nString("settings_table.your_annual_plan_starts", {
+        label: getI18nString('settings_table.add_an_annual_plan'),
+        description: getI18nString('settings_table.your_annual_plan_starts', {
           date: new Date(p.trialEnd)
         })
       }));
@@ -1456,9 +1461,9 @@ let tz = ({
     case _$$m.ADJUST_COTERM_SEATS:
     case _$$m.ADJUST_RENEWAL_SEATS:
       _.push(jsx(x8, {
-        testId: "settings-table-add-seats-setting",
-        label: getI18nString("settings_table.add_additional_seats"),
-        description: getI18nString("settings_table.add_seats_to_your_annual_plan"),
+        testId: 'settings-table-add-seats-setting',
+        label: getI18nString('settings_table.add_additional_seats'),
+        description: getI18nString('settings_table.add_seats_to_your_annual_plan'),
         onClick: () => {
           p.perform({
             dispatch: t
@@ -1467,8 +1472,8 @@ let tz = ({
       }));
   }
   _.push(jsx(x8, {
-    label: getI18nString("settings_table.cancel_plan"),
-    description: getI18nString("settings_table.cancel_your_subscription_of_professional"),
+    label: getI18nString('settings_table.cancel_plan'),
+    description: getI18nString('settings_table.cancel_your_subscription_of_professional'),
     onClick: () => {
       t(showModalHandler({
         type: _$$v3,
@@ -1479,8 +1484,8 @@ let tz = ({
     }
   }));
   n || _.push(jsx(x8, {
-    label: getI18nString("settings_table.change_payment_method"),
-    description: getI18nString("settings_table.change_and_update_the_payment_method_on_file"),
+    label: getI18nString('settings_table.change_payment_method'),
+    description: getI18nString('settings_table.change_and_update_the_payment_method_on_file'),
     onClick: () => C8({
       team: a,
       dispatch: t,
@@ -1492,8 +1497,8 @@ let tz = ({
     })
   }));
   show_vat_gst && !n && _.push(jsx(x8, {
-    label: getI18nString("settings_table.vat_gst"),
-    description: getI18nString("settings_table.change_vat_gst_id"),
+    label: getI18nString('settings_table.vat_gst'),
+    description: getI18nString('settings_table.change_vat_gst_id'),
     onClick: () => Hq({
       team: a,
       dispatch: t
@@ -1510,13 +1515,13 @@ let tV = ({
 }) => {
   let r = [];
   r.push(jsx(x8, {
-    label: n ? getI18nString("settings_table.display_name.label") : getI18nString("settings_table.names"),
-    description: n ? getI18nString("settings_table.change_display_name") : getI18nString("settings_table.change_names"),
+    label: n ? getI18nString('settings_table.display_name.label') : getI18nString('settings_table.names'),
+    description: n ? getI18nString('settings_table.change_display_name') : getI18nString('settings_table.change_names'),
     onClick: () => {
       s(showModalHandler({
         type: _$$L,
         data: {
-          modalTitle: n ? getI18nString("settings_table.update_team_profile") : getI18nString("settings_table.edit_names"),
+          modalTitle: n ? getI18nString('settings_table.update_team_profile') : getI18nString('settings_table.edit_names'),
           displayName: t,
           legalName: a,
           updateNameImmediately: !0,
@@ -1529,50 +1534,56 @@ let tV = ({
   return r;
 };
 let tW = (e, t) => {
-  let a = null != e && null != e.current_period_end && null == e.canceled_at;
-  let n = null != t && null != t.current_period_end && null == t.canceled_at;
-  let s = null != e && e.canceled_at;
-  let r = null != t && t.canceled_at;
+  let a = e != null && e.current_period_end != null && e.canceled_at == null;
+  let n = t != null && t.current_period_end != null && t.canceled_at == null;
+  let s = e != null && e.canceled_at;
+  let r = t != null && t.canceled_at;
   let l = null;
   if (n && a) {
     let a = tB(e?.current_period_end);
     let n = tB(t?.current_period_end);
-    l = renderI18nText("team_view.settings_table.multiple_subscription_renewal", {
-      monthly_billing_date: jsx("span", {
+    l = renderI18nText('team_view.settings_table.multiple_subscription_renewal', {
+      monthly_billing_date: jsx('span', {
         className: tq,
-        children: renderI18nText("team_view.settings_table.billing_date", {
+        children: renderI18nText('team_view.settings_table.billing_date', {
           billing_date: a
         })
       }),
-      annual_billing_date: jsx("span", {
+      annual_billing_date: jsx('span', {
         className: tq,
-        children: renderI18nText("team_view.settings_table.billing_date", {
+        children: renderI18nText('team_view.settings_table.billing_date', {
           billing_date: n
         })
       })
     });
   } else if (n) {
     let e = tB(t.current_period_end);
-    l = renderI18nText("team_view.settings_table.single_subscription_renewal_annual", {
-      billing_date: jsx("span", {
+    l = renderI18nText('team_view.settings_table.single_subscription_renewal_annual', {
+      billing_date: jsx('span', {
         className: tq,
-        children: renderI18nText("team_view.settings_table.billing_date", {
+        children: renderI18nText('team_view.settings_table.billing_date', {
           billing_date: e
         })
       })
     });
   } else if (a) {
     let t = tB(e.current_period_end);
-    l = renderI18nText("team_view.settings_table.single_subscription_renewal_monthly", {
-      billing_date: jsx("span", {
+    l = renderI18nText('team_view.settings_table.single_subscription_renewal_monthly', {
+      billing_date: jsx('span', {
         className: tq,
-        children: renderI18nText("team_view.settings_table.billing_date", {
+        children: renderI18nText('team_view.settings_table.billing_date', {
           billing_date: t
         })
       })
     });
-  } else if (r && s) l = renderI18nText("team_view.settings_table.renewal_information_canceled_team_annual_and_monthly");else if (r) l = renderI18nText("team_view.settings_table.renewal_information_canceled_team_annual");else if (s) l = renderI18nText("team_view.settings_table.renewal_information_canceled_team_monthly");else if (null != e || null != t) {
-    logError("billing", "Ambiguous pro team renewal status", {
+  } else if (r && s) {
+    l = renderI18nText('team_view.settings_table.renewal_information_canceled_team_annual_and_monthly');
+  } else if (r) {
+    l = renderI18nText('team_view.settings_table.renewal_information_canceled_team_annual');
+  } else if (s) {
+    l = renderI18nText('team_view.settings_table.renewal_information_canceled_team_monthly');
+  } else if (e != null || t != null) {
+    logError('billing', 'Ambiguous pro team renewal status', {
       monthly_period_end: e?.current_period_end,
       monthly_canceled_at: e?.canceled_at,
       annual_period_end: t?.current_period_end,
@@ -1580,9 +1591,9 @@ let tW = (e, t) => {
     });
     return jsx(Fragment, {});
   }
-  return jsx("div", {
-    className: "settings_table--sectionDescription--jmGd-",
-    children: jsx("span", {
+  return jsx('div', {
+    className: 'settings_table--sectionDescription--jmGd-',
+    children: jsx('span', {
       children: l
     })
   });
@@ -1602,8 +1613,8 @@ let tH = ({
 }) => {
   let u = [];
   if (d && u.push(jsx(x8, {
-    label: getI18nString("team_view.settings_table.update_payment_details.payment_details"),
-    description: getI18nString("team_view.settings_table.update_payment_details.update_payment_method"),
+    label: getI18nString('team_view.settings_table.update_payment_details.payment_details'),
+    description: getI18nString('team_view.settings_table.update_payment_details.update_payment_method'),
     onClick: () => C8({
       team: n,
       dispatch: a,
@@ -1614,20 +1625,20 @@ let tH = ({
       canSeeBillingAddressExp: d
     })
   })), d && u.push(jsx(x8, {
-    label: getI18nString("team_view.settings_table.update_invoice_details.invoice_details"),
-    description: getI18nString("team_view.settings_table.update_invoice_details.update_invoice_details"),
+    label: getI18nString('team_view.settings_table.update_invoice_details.invoice_details'),
+    description: getI18nString('team_view.settings_table.update_invoice_details.update_invoice_details'),
     onClick: () => a(showModalHandler({
       type: _$$u,
       data: {
         teamId: n.id,
         shippingAddress: o || createEmptyAddress(),
-        legalCompanyName: n.legal_name || "",
+        legalCompanyName: n.legal_name || '',
         canSeeBillingAddressExp: d
       }
     }))
   })), l && d && u.push(jsx(x8, {
-    label: getI18nString("settings_table.vat_gst"),
-    description: getI18nString("settings_table.change_vat_gst_id"),
+    label: getI18nString('settings_table.vat_gst'),
+    description: getI18nString('settings_table.change_vat_gst_id'),
     onClick: () => Hq({
       team: n,
       dispatch: a
@@ -1635,32 +1646,34 @@ let tH = ({
   })), c) {
     let n = e && !t || e && t ? IX.MONTH : IX.YEAR;
     u.push(jsx(x8, {
-      label: getI18nString("plan_settings.auto_approval_settings"),
-      description: getI18nString("plan_settings.auto_approval_settings_description"),
+      label: getI18nString('plan_settings.auto_approval_settings'),
+      description: getI18nString('plan_settings.auto_approval_settings_description'),
       onClick: _$$S2({
         dispatch: a,
         currency: r,
         renewalTerm: n
       })
-    }, "auto-approval-settings"));
-  } else u.push(jsx(x8, {
-    label: getI18nString("plan_settings.default_role"),
-    description: renderI18nText("plan_settings.default_role_description", {
-      plan_type: getI18nString("settings_table.team")
-    }),
-    onClick: () => {
-      a(showModalHandler({
-        type: _$$h2,
-        data: {
-          planType: fm.TEAM,
-          planId: n.id
-        }
-      }));
-    }
-  }, "default-role"));
+    }, 'auto-approval-settings'));
+  } else {
+    u.push(jsx(x8, {
+      label: getI18nString('plan_settings.default_role'),
+      description: renderI18nText('plan_settings.default_role_description', {
+        plan_type: getI18nString('settings_table.team')
+      }),
+      onClick: () => {
+        a(showModalHandler({
+          type: _$$h2,
+          data: {
+            planType: fm.TEAM,
+            planId: n.id
+          }
+        }));
+      }
+    }, 'default-role'));
+  }
   u.push(jsx(x8, {
-    label: getI18nString("plan_settings.seat_upgrade_digests"),
-    description: getI18nString("plan_settings.seat_upgrade_digests_description"),
+    label: getI18nString('plan_settings.seat_upgrade_digests'),
+    description: getI18nString('plan_settings.seat_upgrade_digests_description'),
     disabled: !_,
     currentValue: _ ? null : jsx(_$$I, {}),
     onClick: () => {
@@ -1674,10 +1687,10 @@ let tH = ({
     }
   }));
   u.push(jsx(x8, {
-    label: getI18nString("settings_table.billing_contacts"),
-    description: getI18nString("settings_table.billing_contacts_description"),
+    label: getI18nString('settings_table.billing_contacts'),
+    description: getI18nString('settings_table.billing_contacts_description'),
     onClick: () => {
-      tY(a, n, s || "");
+      tY(a, n, s || '');
     }
   }));
   return u;
@@ -1702,7 +1715,7 @@ let tJ = (e, t) => {
     teamId: t,
     openInNewTab: !1,
     selectedView: {
-      view: "team",
+      view: 'team',
       teamId: t
     }
   }));
@@ -1732,20 +1745,20 @@ function an() {
   return jsx(_$$X, {
     isShowing,
     position: _$$Q.CENTER,
-    trackingContextName: "TeamAdminAuthorityOverlay",
-    title: renderI18nText("team_admin_authority_overlay.title"),
-    description: renderI18nText("team_admin_authority_overlay.description"),
+    trackingContextName: 'TeamAdminAuthorityOverlay',
+    title: renderI18nText('team_admin_authority_overlay.title'),
+    description: renderI18nText('team_admin_authority_overlay.description'),
     primaryCta: {
-      label: renderI18nText("general.got_it"),
+      label: renderI18nText('general.got_it'),
       ctaTrackingDescriptor: _$$c.GOT_IT,
-      type: "button",
+      type: 'button',
       onClick: complete
     },
     onClose: complete
   });
 }
-var al = ar;
-var ad = ao;
+let al = ar;
+let ad = ao;
 function ah({
   selectedTab: e,
   teamId: t,
@@ -1763,38 +1776,38 @@ function ah({
     initialView: 0,
     canAdmin: !0
   }), [t, _]);
-  return jsxs("div", {
-    "data-testid": "team-admin-console-header",
-    children: [jsx(_$$K, {
-      title: e === DashboardSections.MEMBERS ? renderI18nText("team_admin.members_tab.header") : pe(e),
+  return jsxs('div', {
+    'data-testid': 'team-admin-console-header',
+    'children': [jsx(_$$K, {
+      title: e === DashboardSections.MEMBERS ? renderI18nText('team_admin.members_tab.header') : pe(e),
       rightActions: jsxs(Fragment, {
         children: [e === DashboardSections.MEMBERS && jsxs(AutoLayout, {
-          width: "hug-contents",
-          direction: "horizontal",
+          width: 'hug-contents',
+          direction: 'horizontal',
           spacing: 8,
           children: [l && !d && jsxs(Fragment, {
             children: [jsx(yE, {
               planParentId: t,
               planType: FOrganizationLevelType.TEAM,
               isActiveAnnualPlan: c
-            }), jsx("div", {
+            }), jsx('div', {
               className: _$$s.mr8.$
             })]
           }), jsx(_$$V2, {
-            icon: "plus-32",
-            variant: "primary",
+            icon: 'plus-32',
+            variant: 'primary',
             onClick: u,
             trackingProperties: {
-              action: "Add members to team"
+              action: 'Add members to team'
             },
-            children: jsx(_$$E, {
-              children: renderI18nText("team_admin.members_tab.invite_users")
+            children: jsx(TextWithTruncation, {
+              children: renderI18nText('team_admin.members_tab.invite_users')
             })
           })]
         }), n]
       })
-    }), a && jsx("div", {
-      className: "team_admin_console_header--secondaryTabs--FRPCy",
+    }), a && jsx('div', {
+      className: 'team_admin_console_header--secondaryTabs--FRPCy',
       children: a
     })]
   });
@@ -1803,7 +1816,7 @@ function ay(e) {
   let t = _$$R3();
   return jsx(_$$Q2, {
     minContentWidth: 1024,
-    children: jsx("div", {
+    children: jsx('div', {
       className: _$$s.pb36.$,
       children: jsx(_$$S4, {
         invoices: e.planInvoices,
@@ -1819,10 +1832,10 @@ function aw(e) {
     planType: FOrganizationLevelType.TEAM,
     planId: e.teamId
   });
-  return "loaded" !== t.status || e.isLoading ? jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
-    "data-testid": "invoices-tab-loading",
-    children: jsx(_$$k3, {})
+  return t.status !== 'loaded' || e.isLoading ? jsx('div', {
+    'className': _$$s.flex.alignCenter.justifyCenter.p24.$,
+    'data-testid': 'invoices-tab-loading',
+    'children': jsx(_$$k3, {})
   }) : jsx(ay, {
     planInvoices: t.data,
     billingSummary: e.billingSummary,
@@ -1857,14 +1870,14 @@ function aA(e) {
   let p = ww(u ? {
     teamId: e.team.id
   } : null);
-  let g = useMemo(() => u && "disabled" !== p.status ? p.transform(e => ({
-    split: "billing_interval",
+  let g = useMemo(() => u && p.status !== 'disabled' ? p.transform(e => ({
+    split: 'billing_interval',
     data: e
   })) : m.transform(e => ({
-    split: "none",
+    split: 'none',
     data: e
   })), [u, m, p]);
-  let h = useMemo(() => u && "disabled" !== p.status ? p.transform(e => {
+  let h = useMemo(() => u && p.status !== 'disabled' ? p.transform(e => {
     let t = {
       available: 0,
       total: 0,
@@ -1887,7 +1900,7 @@ function aA(e) {
   }, [e.setActiveTab]);
   let v = useMemo(() => _ && n && s(_) ? () => {
     t(sf({
-      view: "teamAdminConsole",
+      view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.MEMBERS,
       membersTabInitialFilters: {
@@ -1898,7 +1911,7 @@ function aA(e) {
   let f = useCallback(() => {
     if (!n && _) return null;
     t(sf({
-      view: "teamAdminConsole",
+      view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.MEMBERS,
       membersTabInitialFilters: s(_) ? {
@@ -1908,7 +1921,7 @@ function aA(e) {
   }, [t, e.team.id, n, _, s]);
   let j = useCallback(() => {
     t(sf({
-      view: "teamAdminConsole",
+      view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.MEMBERS
     }));
@@ -1939,10 +1952,10 @@ function aA(e) {
       }
     }));
   } : null, [w.data?.show, E, k, t]);
-  return "loaded" !== a.status || "loaded" !== g.status || "loaded" !== h.status || "loading" === w.status || e.isLoading ? jsx("div", {
-    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
-    "data-testid": "billing-overview-tab-loading",
-    children: jsx(_$$k3, {})
+  return a.status !== 'loaded' || g.status !== 'loaded' || h.status !== 'loaded' || w.status === 'loading' || e.isLoading ? jsx('div', {
+    'className': _$$s.flex.alignCenter.justifyCenter.p24.$,
+    'data-testid': 'billing-overview-tab-loading',
+    'children': jsx(_$$k3, {})
   }) : jsx(_$$i2, {
     adjustAnnualSeatsAction: e.adjustAnnualSeatsAction,
     adjustRenewalSeats: N,
@@ -1989,7 +2002,7 @@ function aO(e) {
   let a = _$$R3();
   let n = useCallback((a, n) => {
     t(sf({
-      view: "teamAdminConsole",
+      view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.BILLING,
       teamAdminConsoleViewSecondaryTab: a,
@@ -2018,7 +2031,7 @@ function aO(e) {
     let r = al()(i, e => _$$A(e).valueOf());
     return r ? _$$A(r).toDate() : null;
   }(e.billingSummary, a), [e.billingSummary, a]);
-  let u = useMemo(() => e.isBillingSummaryLoading || "loaded" !== c.status ? null : _$$l({
+  let u = useMemo(() => e.isBillingSummaryLoading || c.status !== 'loaded' ? null : _$$l({
     teamBillingSummary: e.billingSummary,
     hasOpenInvoice: !!c.data.find(e => e.state === qH.OPEN),
     currentDate: a
@@ -2033,7 +2046,7 @@ function aO(e) {
       properties: {
         teamId: e.team.id
       },
-      children: jsxs("div", {
+      children: jsxs('div', {
         className: _$$s.hFull.flex.flexColumn.$,
         children: [jsx(ah, {
           selectedTab: DashboardSections.BILLING,
@@ -2042,18 +2055,18 @@ function aO(e) {
             manager: d,
             children: [jsx(_$$t2.Tab, {
               ...s.overview,
-              "data-onboarding-key": l4,
-              children: getI18nString("team_view.toolbar.billing.overview")
+              'data-onboarding-key': l4,
+              'children': getI18nString('team_view.toolbar.billing.overview')
             }), jsx(_$$t2.Tab, {
               ...s.invoices,
-              children: getI18nString("team_view.toolbar.billing.invoices")
+              children: getI18nString('team_view.toolbar.billing.invoices')
             })]
           }),
           rightContent: jsx(_$$p4, {
             isLoading: e.isBillingSummaryLoading
           })
-        }), jsxs("div", {
-          className: "billing_view--tabPanelContainer--Y7VJk",
+        }), jsxs('div', {
+          className: 'billing_view--tabPanelContainer--Y7VJk',
           children: [jsx(_$$t2.TabPanel, {
             ...o.overview,
             children: jsx(aR, {
@@ -2083,11 +2096,11 @@ function aP(e) {
   let a = useTeamPlanPublicInfo();
   let n = a?.data?.tier === FPlanNameType.STUDENT;
   let [s, o, d] = _$$t2.useManagedTabs({
-    "abandoned-drafts": !0,
-    "connected-projects": !n
+    'abandoned-drafts': !0,
+    'connected-projects': !n
   }, e.activeTab, useCallback(a => {
     t(sf({
-      view: "teamAdminConsole",
+      view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.CONTENT,
       teamAdminConsoleViewSecondaryTab: a
@@ -2099,7 +2112,7 @@ function aP(e) {
     properties: {
       teamId: e.team.id
     },
-    children: jsxs("div", {
+    children: jsxs('div', {
       className: _$$s.hFull.flex.flexColumn.$,
       children: [jsx(ah, {
         selectedTab: DashboardSections.CONTENT,
@@ -2107,27 +2120,27 @@ function aP(e) {
         secondaryTabs: jsxs(_$$t2.TabStrip, {
           manager: d,
           children: [jsx(_$$t2.Tab, {
-            ...s["abandoned-drafts"],
-            children: getI18nString("team_view.toolbar.drafts")
+            ...s['abandoned-drafts'],
+            children: getI18nString('team_view.toolbar.drafts')
           }), jsxs(_$$t2.Tab, {
-            ...s["connected-projects"],
+            ...s['connected-projects'],
             ...(c && {
-              "data-onboarding-key": _$$k6
+              'data-onboarding-key': _$$k6
             }),
-            children: [getI18nString("team_view.toolbar.connected_projects"), c && jsx(_$$Q3, {})]
+            children: [getI18nString('team_view.toolbar.connected_projects'), c && jsx(_$$Q3, {})]
           })]
         })
-      }), jsxs("div", {
-        className: "content_view--tabPanelContainer--2h2yj",
+      }), jsxs('div', {
+        className: 'content_view--tabPanelContainer--2h2yj',
         children: [jsx(_$$t2.TabPanel, {
-          ...o["abandoned-drafts"],
+          ...o['abandoned-drafts'],
           children: jsx(_$$M, {
             planType: _$$O.TEAM,
             team: e.team
           })
         }), jsx(_$$t2.TabPanel, {
-          ...o["connected-projects"],
-          height: "fill",
+          ...o['connected-projects'],
+          height: 'fill',
           children: jsx(_$$k5, {
             showResourceConnectionInviteModal: e.showResourceConnectionInviteModal,
             showResourceConnectionFlyout: e.showResourceConnectionFlyout
@@ -2137,7 +2150,7 @@ function aP(e) {
     })
   });
 }
-let aq = "dismissed_dangling_team_user_backfill_banner";
+let aq = 'dismissed_dangling_team_user_backfill_banner';
 let a$ = M4.Query({
   fetch: async ({
     teamId: e
@@ -2174,7 +2187,7 @@ export function $$aG0(e) {
   let s = n[e.teamId];
   let k = useTeamPlanUser();
   let E = useIsTeamAdminUser(k);
-  let C = "loaded" === E.status && gb({
+  let C = E.status === 'loaded' && gb({
     isAdminTeam: E.data,
     teamId: e.teamId,
     teamAdminConsoleViewTab: e.selectedTab,
@@ -2184,7 +2197,7 @@ export function $$aG0(e) {
   let N = vS(S);
   useEffect(() => {
     C && a(sf({
-      view: "resourceUnavailable",
+      view: 'resourceUnavailable',
       resourceType: N
     }));
   }, [C, a, N]);
@@ -2212,7 +2225,7 @@ export function $$aG0(e) {
     });
     let {
       show_banner
-    } = "loaded" === s.status ? s.data.meta : {
+    } = s.status === 'loaded' ? s.data.meta : {
       show_banner: !1
     };
     return e && show_banner && !n ? jsx(wr, {
@@ -2227,21 +2240,21 @@ export function $$aG0(e) {
           }]
         }));
       },
-      trackingContext: "Team Admin Console View Banner",
+      trackingContext: 'Team Admin Console View Banner',
       trackingProperties: {
         teamId: e,
-        source: "team_admin_dangling_team_user_backfill_banner"
+        source: 'team_admin_dangling_team_user_backfill_banner'
       },
       children: jsx(AutoLayout, {
-        horizontalAlignItems: "end",
-        width: "fill-parent",
+        horizontalAlignItems: 'end',
+        width: 'fill-parent',
         children: jsxs(AutoLayout, {
-          horizontalAlignItems: "start",
-          children: [jsx(_$$b, {}), jsx("span", {
-            children: renderI18nText("team_admin.members_tab.fixed_issue_members_list")
+          horizontalAlignItems: 'start',
+          children: [jsx(_$$b, {}), jsx('span', {
+            children: renderI18nText('team_admin.members_tab.fixed_issue_members_list')
           }), jsx(_$$N, {
-            href: "https://help.figma.com/hc/articles/26628690415255",
-            children: renderI18nText("team_admin.members_tab.fixed_issue_members_list_read_more")
+            href: 'https://help.figma.com/hc/articles/26628690415255',
+            children: renderI18nText('team_admin.members_tab.fixed_issue_members_list_read_more')
           })]
         })
       })
@@ -2300,15 +2313,17 @@ export function $$aG0(e) {
   }, {
     enabled: e.selectedTab === DashboardSections.SETTINGS
   });
-  let Y = oA(H.data?.team);
+  let Y = getResourceDataOrFallback(H.data?.team);
   let J = useMemo(() => F.unwrapOr({}), [F]);
-  if (!I || "loaded" === R.status && !R.data.canAdmin || !s) return jsx(_$$S3, {
-    resourceType: EntityType.TEAM
-  });
+  if (!I || R.status === 'loaded' && !R.data.canAdmin || !s) {
+    return jsx(_$$S3, {
+      resourceType: EntityType.TEAM
+    });
+  }
   let K = !1;
   let X = !0;
   let Q = e.selectedTab;
-  switch (e.selectedTab === DashboardSections.DASHBOARD && (!(s.pro_team && "loaded" === R.status && R.data?.canAdmin) || s.student_team) && (Q = DashboardSections.MEMBERS), Q) {
+  switch (e.selectedTab === DashboardSections.DASHBOARD && (!(s.pro_team && R.status === 'loaded' && R.data?.canAdmin) || s.student_team) && (Q = DashboardSections.MEMBERS), Q) {
     case DashboardSections.DASHBOARD:
       if ($) {
         t = jsx(_$$i, {
@@ -2326,7 +2341,7 @@ export function $$aG0(e) {
       }));
       break;
     case DashboardSections.MEMBERS:
-      K = "loading" === F.status || "loading" === R.status || VP(D, m$.loadingKeyForPayload({
+      K = F.status === 'loading' || R.status === 'loading' || VP(D, m$.loadingKeyForPayload({
         teamId: s.id
       })) || VP(D, Be.loadingKeyForPayload({
         teamId: s.id
@@ -2388,21 +2403,21 @@ export function $$aG0(e) {
     default:
       return throwTypeError(Q);
   }
-  V && (K ||= "loading" === W.status);
-  let en = K || "loading" === R.status || C;
+  V && (K ||= W.status === 'loading');
+  let en = K || R.status === 'loading' || C;
   return jsx(_$$r2, {
-    containerClass: "team_admin_console_view--fileBrowserContentContainer---V4EB",
-    scrollableContainerClass: "team_admin_console_view--fileBrowserScrollableContainer--njnP5",
+    containerClass: 'team_admin_console_view--fileBrowserContentContainer---V4EB',
+    scrollableContainerClass: 'team_admin_console_view--fileBrowserScrollableContainer--njnP5',
     toolbar: jsx(_$$g, {}),
     banner: $ && !G ? jsx(_$$_, {
       entryPoint: _$$Y2.FILE_BROWSER
     }) : null,
     belowToolbarBanner: q,
     content: jsxs(Fragment, {
-      children: [en ? jsx("div", {
-        className: "admin_settings_page--container--LZSr8",
-        children: jsx(kt, {
-          className: "admin_settings_page--innerLoadingSpinner--cXsGF"
+      children: [en ? jsx('div', {
+        className: 'admin_settings_page--container--LZSr8',
+        children: jsx(LoadingSpinner, {
+          className: 'admin_settings_page--innerLoadingSpinner--cXsGF'
         })
       }) : jsxs(Fragment, {
         children: [X && jsx(ah, {
@@ -2419,7 +2434,7 @@ export function $$aG0(e) {
     }),
     errorBoundaryConfig: {
       figmaTeam: _$$e.SCALE,
-      boundaryKeySuffix: "TeamAdminConsoleView"
+      boundaryKeySuffix: 'TeamAdminConsoleView'
     }
   });
 }

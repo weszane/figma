@@ -5,12 +5,12 @@ import { defaultLanguage, languageCodes, subsetLanguages, allLanguages } from ".
 import { getLanguageDisplayName, getI18nResourceKey } from "../905/528121";
 import { throwError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { captureException } from "../vendor/288996";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -141,10 +141,10 @@ export let $$P0 = registerModal(function ({
   });
   return jsx(fu, {
     name: "Language Selector",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: P,
       width: "lg",
-      children: jsxs(Rq, {
+      children: jsxs(ModalFormContents, {
         onSubmit: e => {
           if (e.preventDefault(), !B || B === U) {
             t();
@@ -189,12 +189,12 @@ export let $$P0 = registerModal(function ({
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               disabled: G,
               onClick: t,
               children: renderI18nText("settings.language_selector.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               disabled: G,
               type: "submit",
               children: renderI18nText("settings.language_selector.save")

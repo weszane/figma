@@ -19,10 +19,10 @@ import { K } from "../905/135526";
 import { canRunPlugin, getRelaunchablePlugins } from "../figma_app/300692";
 import { O as _$$O2 } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, hasLocalFileId, relaunchMixedDescription } from "../figma_app/155287";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { checkCanRunExtensions } from "../905/622391";
 import { V } from "../905/480825";
 import { VZ } from "../figma_app/727192";
@@ -67,7 +67,7 @@ let P = class e extends PureComponent {
     this.fetchPlugin = e => {
       this.props.dispatch(af({
         id: e,
-        resourceType: bD.PLUGIN
+        resourceType: ResourceType.PLUGIN
       }));
     };
     this.renderRelaunchRows = e => {
@@ -162,7 +162,7 @@ function B(e) {
         children: [jsx(Yo, {
           className: "plugin_panel--relaunchButton--sEH4s",
           onClick: () => e.onRelaunch(e.relaunchData),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": plugin.name,
           children: jsxs("div", {
             className: _$$s.flex.itemsCenter.$,
@@ -187,7 +187,7 @@ function B(e) {
             "aria-label": getI18nString("properties_panel.plugin.remove_tooltip"),
             onClick: () => e.onRemoveRelaunchData(e.relaunchData.plugin.plugin_id),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("properties_panel.plugin.remove_tooltip")
             },
             children: jsx(_$$O, {})

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { CH, g4 } from "../figma_app/770359";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Yy } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { N as _$$N } from "../905/438674";
@@ -45,7 +45,7 @@ function q({
   isDisabled: n,
   isIgnored: o
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     onClick: e,
     variant: "destructiveSecondary",
     disabled: n,
@@ -191,7 +191,7 @@ function J({
       className: "component_browser_detail_view--emptySourceCodeTabTitle--FGecJ",
       children: [jsx("span", {
         children: getI18nString("dev_handoff.component_browser.source_code")
-      }), jsx($n, {
+      }), jsx(Button, {
         onClick: () => {
           n({
             row: {
@@ -605,7 +605,7 @@ export function $$Z0({
               handleDeleteMapping: K,
               isDisabled: F,
               isIgnored: A
-            }) : A ? jsx($n, {
+            }) : A ? jsx(Button, {
               onClick: K,
               variant: "secondary",
               children: getI18nString("dev_handoff.component_browser.has_code_equivalent")

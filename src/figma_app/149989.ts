@@ -13,7 +13,7 @@ import { Uz } from "../905/63728";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { tH } from "../905/751457";
 import { Nt, c2, yn, lv, dP } from "../figma_app/119475";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { Fl } from "../figma_app/236178";
@@ -23,7 +23,7 @@ import { kf, u5, Rb, yp, pN } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { dH } from "../figma_app/722362";
 import { useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { Oe } from "../figma_app/336853";
 import { PrimaryWorkflowEnum, LibraryItemTypeEnum } from "../figma_app/633080";
 import { t as _$$t2 } from "../905/62933";
@@ -544,7 +544,7 @@ export function $$el3({
   }), [k, u]);
   let ef = A ? [LibraryItemTypeEnum.VARIABLE, LibraryItemTypeEnum.STYLE] : [LibraryItemTypeEnum.VARIABLE];
   let eE = _$$A(eg, l?.type !== "CMS_FIELD" ? l : null, ef);
-  let ey = sZ();
+  let ey = useCurrentUserOrg();
   let eb = Fl();
   let eT = Oe(ey) && NX(eb);
   let eI = ed({
@@ -801,7 +801,7 @@ function ed({
   }), [r, t]);
   let s = n ? [LibraryItemTypeEnum.VARIABLE, LibraryItemTypeEnum.STYLE] : [LibraryItemTypeEnum.VARIABLE];
   let o = _$$A(a, e?.type !== "CMS_FIELD" ? e : null, s);
-  let l = sZ();
+  let l = useCurrentUserOrg();
   let d = Fl();
   let c = Oe(l) && NX(d);
   return useMemo(() => {
@@ -895,7 +895,7 @@ function ep({
   });
   return jsxs("div", {
     className: ON,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: qc,
       svg: _$$A2
     }), jsx(jT, {

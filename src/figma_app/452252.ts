@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
@@ -27,7 +27,7 @@ import { selectCurrentFile, selectOpenFile, useCurrentFile } from "../figma_app/
 import { selectCurrentUser } from "../905/372672";
 import { o3 as _$$o, nt } from "../905/226610";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { l as _$$l, O as _$$O } from "../figma_app/471586";
 import { V1 } from "../figma_app/834392";
 import { A as _$$A } from "../905/79603";
@@ -85,7 +85,7 @@ class W extends RecordingPureComponent {
     let t = getI18nString("fullscreen.filename_view.file_input_title.aria_label", {
       fileName: this.props.name
     });
-    return jsx(_$$E, {
+    return jsx(ButtonPrimitive, {
       className: _()("filename_view--title--6TS7L ellipsis--ellipsis--Tjyfa", {
         "filename_view--signedIn--kbu48": !!this.props.user
       }),
@@ -93,7 +93,7 @@ class W extends RecordingPureComponent {
       ref: this.nameRef,
       htmlAttributes: {
         "data-tooltip": e ? this.props.name : void 0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-testid": this.props.dataTestId || "filename",
         onKeyDown: e => hx({
           e,

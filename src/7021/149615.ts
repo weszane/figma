@@ -7,7 +7,7 @@ import { r as _$$r } from "../905/571838";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { C as _$$C } from "../905/520159";
 import { a as _$$a } from "../905/964520";
@@ -39,7 +39,7 @@ function v({
   useBillingRemodelEduStyling: y = !1,
   hideClose: T = !1
 }) {
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: l,
     width: v,
     children: jsx(Wk, {

@@ -10,13 +10,13 @@ import { kl } from "../905/275640";
 import { SG } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { fl } from "../figma_app/178475";
 import { JV } from "../figma_app/260445";
 import { p as _$$p } from "../905/427409";
 import { u3, lC, Ek } from "../figma_app/152690";
 import { MH, eF } from "../figma_app/394327";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { sK, c$ } from "../905/794875";
 import { y8 } from "../figma_app/409807";
 import { vP, wO } from "../figma_app/100987";
@@ -115,7 +115,7 @@ export function $$C0({
   let eI = function (e, t, r) {
     let i = [...e];
     if (t) {
-      let e = jsx(_$$B, {
+      let e = jsx(SvgComponent, {
         className: vP,
         svg: $$default
       });
@@ -141,7 +141,7 @@ export function $$C0({
       "data-tooltip-max-width": 200,
       "data-tooltip-proxy-element-id": consumedVariable ? R : void 0,
       "data-tooltip-show-on-target-only": E || void 0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dataTestId: q,
       disableSelectFocus: !0,
       disabled: P,

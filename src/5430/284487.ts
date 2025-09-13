@@ -5,7 +5,7 @@ import o from "classnames";
 import { m as _$$m } from "../5430/656485";
 import { qD } from "../figma_app/471982";
 import { fu } from "../figma_app/831799";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { a as _$$a } from "../905/329735";
 import { bN, cS, Yw, Cv } from "../figma_app/795938";
 import { z3, wS } from "../figma_app/583284";
@@ -41,7 +41,7 @@ export function $$f0({
       className: a()(t || z3, wS),
       children: b.map((e, t) => "is_widget" in e ? e.is_widget ? jsx(g, {
         resourceId: e.id,
-        resourceType: vt.WIDGET,
+        resourceType: ResourceTypeNoComment.WIDGET,
         resourceName: qD(e).name,
         children: jsx(bN, {
           index: t,
@@ -51,7 +51,7 @@ export function $$f0({
         }, `widget-${e.id}`)
       }, `widget-${e.id}`) : r ? jsx(g, {
         resourceId: e.id,
-        resourceType: vt.PLUGIN,
+        resourceType: ResourceTypeNoComment.PLUGIN,
         resourceName: qD(e).name,
         children: jsx(_$$m, {
           index: t,
@@ -61,7 +61,7 @@ export function $$f0({
         }, `pluginRow-${e.id}`)
       }, `pluginRow-${e.id}`) : jsx(g, {
         resourceId: e.id,
-        resourceType: vt.PLUGIN,
+        resourceType: ResourceTypeNoComment.PLUGIN,
         resourceName: qD(e).name,
         children: jsx(cS, {
           index: t,
@@ -80,7 +80,7 @@ export function $$f0({
         }, `profileRow-${e.model.id}`)
       }, `profileRow-${e.model.id}`) : jsx(g, {
         resourceId: e.id,
-        resourceType: vt.HUB_FILE,
+        resourceType: ResourceTypeNoComment.HUB_FILE,
         resourceName: qD(e).name,
         children: jsx(Cv, {
           index: t,

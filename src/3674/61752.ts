@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
@@ -48,7 +48,7 @@ export function $$z0({
     let u = n?.key.type === FUserTypeClassification.ORG_USER && n?.planKey.parentId === t?.parentOrgId;
     let g = ol();
     let x = hasTeamPaidAccess(g) && !g?.org_id;
-    let y = _$$U();
+    let y = trackFileEventWithStore();
     let C = useDispatch();
     let L = _$$J2();
     let [R, O] = useAtomValueAndSetter(_$$t);

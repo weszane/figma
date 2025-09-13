@@ -2,13 +2,13 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Uz } from "../905/63728";
 import { ks } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { popModalStack } from "../905/156213";
 export function $$g0(e) {
   let t = useDispatch();
@@ -42,7 +42,7 @@ function h(e) {
   let w = () => {
     A() || (onRename(j), T());
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: S,
     width: "md",
     children: jsxs(vo, {
@@ -64,7 +64,7 @@ function h(e) {
           }
         }), maxLength && jsx("div", {
           className: "resource_rename_modal--lengthCount--n2dbN",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("resource_rename_modal.lengthCount", {
               currentLength: j.length,
@@ -74,11 +74,11 @@ function h(e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: T,
             variant: "secondary",
             children: renderI18nText("resource_rename_modal.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             disabled: A(),
             onClick: w,

@@ -5,14 +5,14 @@ import { Et } from "../figma_app/397267";
 import { W as _$$W } from "../figma_app/462192";
 import { VariableResolvedDataType, Fullscreen, SnapMode } from "../figma_app/763686";
 import d from "classnames";
-import { am } from "../figma_app/901889";
-import { B as _$$B } from "../905/714743";
+import { trackFileEventWithUser } from "../figma_app/901889";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, AUTO_MARKER, isAutoMarker, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Se } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
 import { ow } from "../905/188421";
@@ -40,7 +40,7 @@ export function $$M0({
   let [L, R] = lJ("stackCounterSpacing");
   let O = kl("stackCounterSpacingSynced");
   let [D, F] = lJ("stackCounterAlignContent");
-  let B = am();
+  let B = trackFileEventWithUser();
   let K = useRef(!1);
   let G = isInvalidValue(D) ? MIXED_MARKER : "SPACE_BETWEEN" === D ? AUTO_MARKER : L;
   let H = useRef(null);
@@ -141,7 +141,7 @@ export function $$M0({
       bigNudgeAmount,
       "data-tooltip": Y,
       "data-tooltip-proxy-element-id": consumedVariable ? X : void 0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dataTestId: d.inputTestId,
       dispatch: M,
       forwardedRef: H,
@@ -176,10 +176,10 @@ export function $$M0({
       squareRightBorder: d.squareRightBorder,
       value: J ? void 0 : G,
       wheelMultiplier: smallNudgeAmount,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: c()(QK, d.svgClassName),
         svg: A,
-        "data-tooltip-type": consumedVariable ? Ib.TEXT : void 0,
+        "data-tooltip-type": consumedVariable ? KindEnum.TEXT : void 0,
         "data-tooltip": consumedVariable ? Y : void 0,
         id: X
       })

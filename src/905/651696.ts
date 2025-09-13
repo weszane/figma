@@ -1,9 +1,9 @@
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText } from "../905/303541";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { uG } from "../905/31837";
 export function $$o0() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   return uG() && e ? renderI18nText("auth.two-factor-setup.mfa_required_org.description", {
     orgName: e.name
   }) : renderI18nText("auth.two-factor-setup.this_will_disable_two_factor_authentication_entirely");

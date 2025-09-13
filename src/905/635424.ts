@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { A as _$$A } from "../905/410311";
 import { trackEventAnalytics } from "../905/449184";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { UF, Jd } from "../figma_app/494261";
 import { AccessLevelEnum } from "../905/557142";
 import { aD, zg } from "../905/452667";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import h from "classnames";
 import { vd } from "../figma_app/637027";
 import { fu } from "../figma_app/831799";
@@ -92,7 +92,7 @@ function w(e) {
   } = e.getEditRequestHandlers(e);
   return jsxs("div", {
     className: "role_request_row--roleRequestButtons--UalWl",
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       onClick: handleDeny,
       className: "role_request_row--roleRequestButton--lj7fY",
       children: renderI18nText("request_row.deny")
@@ -315,7 +315,7 @@ function L(e) {
           requestType: zg(e.requestType)
         })
       });
-    }, {}), jsx(B, {
+    }, {}), jsx(SvgComponent, {
       svg: _$$A2,
       className: t
     })]

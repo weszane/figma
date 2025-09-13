@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { AIScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -39,7 +39,7 @@ export let $$f0 = registerModal(function (e) {
       hubFileName: e.file_name
     });
   }, [addCommunityAttribution]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
     children: jsxs(vo, {

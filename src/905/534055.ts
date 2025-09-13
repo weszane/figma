@@ -5,7 +5,7 @@ import { J } from "../905/125993";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Di, j_, ii } from "../905/217142";
 export function $$p0(e) {
   let t = useRef(null);
@@ -32,7 +32,7 @@ export function $$p0(e) {
         },
         "aria-label": getI18nString("universal_insert.more_options"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("universal_insert.more_options")
         },
         children: jsx(J, {})

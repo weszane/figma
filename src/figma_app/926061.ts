@@ -11,10 +11,10 @@ import { wv as _$$wv, rr, gw } from "../figma_app/236327";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { oB, j7 } from "../905/929976";
 import { jm, j6 } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { g1 } from "../905/504727";
 import { km, LF, hX } from "../905/701417";
 import { p3 } from "../905/759151";
@@ -106,10 +106,10 @@ export function $$O1({
             spacing: 4,
             height: d,
             verticalAlignItems: "center",
-            children: [jsx(_$$E, {
+            children: [jsx(TextWithTruncation, {
               fontSize: 12,
               children: t.text
-            }), t.subtext && jsx(_$$E, {
+            }), t.subtext && jsx(TextWithTruncation, {
               fontSize: 11,
               color: "menu-disabled",
               children: t.subtext
@@ -232,7 +232,7 @@ export function $$L2({
   let g = useCallback(e => {
     let t = parseInt(e);
     r(isNaN(t) ? e : t);
-    _ && Cu({
+    _ && logAndTrackCTA({
       ..._.properties,
       trackingContext: _.name,
       newValue: e

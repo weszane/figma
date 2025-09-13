@@ -6,11 +6,11 @@ import { HistoryChangesBindings, ChangeType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { A } from "../905/920142";
-import { qc } from "../figma_app/858013";
-import { B } from "../905/714743";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cU } from "../figma_app/841351";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { K0 } from "../figma_app/778125";
 import { A as _$$A } from "../6828/315990";
@@ -111,14 +111,14 @@ export function $$S0({
           children: renderI18nText("collaboration.feedback.compare_changes_m2")
         }), jsx(K0, {
           onClick: L,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("collaboration.feedback.close_tooltip"),
           recordingKey: "button-close",
           children: jsx(_$$L, {})
         })]
       }), !c && jsx("div", {
         className: "diffing_compare_summary--comparingDetailsSpinnerContainer--DWjiP",
-        children: jsx(qc, {})
+        children: jsx(LoadingOverlay, {})
       }), !!c && jsxs("div", {
         children: [c && function (e) {
           let t = e.label;
@@ -127,7 +127,7 @@ export function $$S0({
             children: [jsx("div", {
               className: "diffing_compare_summary--versionName--NyScQ",
               children: t || $$b1(e.created_at)
-            }), jsx(B, {
+            }), jsx(SvgComponent, {
               svg: _$$A,
               className: "diffing_compare_summary--arrowLeftRightIcon--XdePz"
             }), jsx("div", {

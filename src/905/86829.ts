@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { f } from "../905/257420";
 export function $$s0(e) {
-  return jsx($n, {
+  return jsx(Button, {
     onClick: e.onClick,
     "data-testid": e.dataTestId ? `${e.dataTestId}-show-more-button` : "show-more-button",
     variant: "ghost",

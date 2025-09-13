@@ -3,7 +3,7 @@ import { useSelector, useStore, useDispatch } from "react-redux";
 import { AppStateTsApi, HandoffBindingsCpp, AutosaveEventType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "../vendor/523035";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { useCanAccessDevModeEntryPoint } from "../figma_app/473493";
 import { D } from "../905/882262";
@@ -85,7 +85,7 @@ export function $$D2() {
 }
 export function $$k6() {
   let e = useStore();
-  let t = U();
+  let t = trackFileEventWithStore();
   let r = !useCanAccessDevModeEntryPoint();
   let [, a] = useAtomValueAndSetter(_o);
   let o = useDispatch();

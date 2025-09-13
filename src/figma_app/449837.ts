@@ -15,7 +15,7 @@ import { wY, cU } from "../figma_app/708845";
 import { h as _$$h } from "../905/207101";
 import { Uz } from "../905/63728";
 import { Point } from "../905/736624";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Q1 } from "../905/619652";
 import { Z } from "../905/823863";
@@ -657,7 +657,7 @@ export function $$B4(e) {
     "aria-label": "ZOOM_IN" === t ? getI18nString("collaboration.branching.zoom_in") : getI18nString("collaboration.branching.zoom_out"),
     className: i ? "zoom_pan--zoomSelectorButtonDisabled--MWZWz" : "zoom_pan--zoomSelectorButtonEnabled--ILrv-",
     onClick: r,
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg: e,
       useOriginalSrcFills_DEPRECATED: !0
     })

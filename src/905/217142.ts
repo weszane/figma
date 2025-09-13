@@ -10,7 +10,7 @@ import { le } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { Ro } from "../figma_app/564095";
 import { BK } from "../905/848862";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { FMemberRoleType } from "../figma_app/191312";
 import { useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071";
@@ -22,7 +22,7 @@ import { H } from "../figma_app/441663";
 import { j } from "../905/834956";
 export function $$S2() {
   let e = getUserId();
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let i = useCurrentPlanUser("useCanAdminOrgQuery");
   return useMemo(() => i.transform(i => !!t && !!e && checkOrgUserPermission(i, FMemberRoleType.ADMIN)), [i, t, e]);
 }

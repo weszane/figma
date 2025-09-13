@@ -5,9 +5,9 @@ import { getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { BF, dZ } from "../figma_app/459490";
+import { getOrgLlamaConfig, isLlamaEnabledForOrg } from "../figma_app/459490";
 import { lg, u8 } from "../figma_app/976749";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFigmaAi, FileCanUseFigmakeAi } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
@@ -18,7 +18,7 @@ let y = atom(!0);
 export function $$b1(e, t) {
   let r;
   r = !1;
-  !isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic && t && "enabled_for_gated_users" === BF(t) && getFeatureFlags().ai_user_use_llama && (r = !0);
+  !isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic && t && "enabled_for_gated_users" === getOrgLlamaConfig(t) && getFeatureFlags().ai_user_use_llama && (r = !0);
   let u = useSubscription(r ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmaAi, {
     key: e
   }, {
@@ -39,8 +39,8 @@ export function $$v3(e) {
   let t = e?.editorType === FFileType.FIGMAKE;
   let r = e?.key ?? "";
   let i = Xr(y);
-  let s = sZ();
-  let d = useSubscription(dZ(s) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
+  let s = useCurrentUserOrg();
+  let d = useSubscription(isLlamaEnabledForOrg(s) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseFigmakeAi, {
     key: r
   }, {
     enabled: !!r && t

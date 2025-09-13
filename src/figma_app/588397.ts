@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, memo, forwardRef, useContext } from "react";
 import { useSelector } from "react-redux";
 import { EventShield } from "../905/821217";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { ScreenReaderOnly } from "../905/172252";
 import { Fullscreen } from "../figma_app/763686";
 import { Ay } from "@stylexjs/stylex";
@@ -32,7 +32,7 @@ import { a3 } from "../figma_app/645694";
 import { uW, pw } from "../905/187165";
 import { cleanAssetName } from "../905/722604";
 import { PrimaryWorkflowEnum, StagingStatusEnum, hasAssetId } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { M as _$$M } from "../905/771870";
 import { JA } from "../figma_app/608944";
 import { i as _$$i } from "../905/415810";
@@ -234,11 +234,11 @@ let en = memo(forwardRef(function (e, t) {
   let E = (f || g || m) && !e.shouldHideTooltip;
   let y = useMemo(() => e.isFigJam || e.isSlides || e.isCooper ? {
     "data-tooltip": e.isDragged || e.shouldHideTooltip ? void 0 : e.tooltipOverride ?? getBasename(e.item.name),
-    "data-tooltip-type": e.isDragged || e.shouldHideTooltip ? void 0 : Ib.TEXT,
+    "data-tooltip-type": e.isDragged || e.shouldHideTooltip ? void 0 : KindEnum.TEXT,
     "data-tooltip-timeout-delay": e.isDragged ? void 0 : 500,
     "data-tooltip-show-above": e.tooltipShownAbove
   } : _ ? {
-    "data-tooltip-type": E ? Ib.SPECIAL : void 0,
+    "data-tooltip-type": E ? KindEnum.SPECIAL : void 0,
     "data-tooltip": E ? _$$B : void 0,
     "data-tooltip-component-name": g ? e.tooltipOverride ?? getBasename(e.item.name) : void 0,
     "data-tooltip-file-name": e.fileName,
@@ -350,7 +350,7 @@ function ei(e) {
       },
       className: _$$s.hFull.borderBox.$,
       "data-testid": p,
-      children: e.buttonProps ? e.buttonProps ? jsx(_$$E, {
+      children: e.buttonProps ? e.buttonProps ? jsx(ButtonPrimitive, {
         className: m,
         htmlAttributes: {
           onContextMenu: _,
@@ -483,7 +483,7 @@ function eo({
     children: [jsx("div", {
       className: e ? hs : xC,
       "data-tooltip": r,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0,
       "data-tooltip-timeout-delay": 500,
       "data-tooltip-hide-immediately": !0,

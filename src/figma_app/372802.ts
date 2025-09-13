@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { Point } from "../905/736624";
-import { Cj } from "../figma_app/62612";
+import { getViewportRectWithRuler } from "../figma_app/62612";
 import { M, W } from "../905/306196";
 export function $$o0(e) {
-  let t = Cj();
+  let t = getViewportRectWithRuler();
   let r = Point.scale(-1, t);
   return jsx("div", {
     className: M,

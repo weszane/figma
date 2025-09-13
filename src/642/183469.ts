@@ -13,7 +13,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, createRemovableAtomFamily, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
 import g from "classnames";
 import x from "../vendor/128080";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
@@ -71,7 +71,7 @@ import { X as _$$X, C as _$$C } from "../642/70391";
 import { s as _$$s } from "../cssbuilder/589278";
 import { gz, el as _$$el, Rp, $V } from "../figma_app/605071";
 import { Qr, pZ, Wm, nM, bV, ct, j3, cb, sc } from "../figma_app/622978";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { iy, N1, eT as _$$eT, g2, bm, OL, g$, Lc, U$, GN, Uw, Mq, Gs, M3, SV } from "../figma_app/116234";
 import { A as _$$A3 } from "../2854/630701";
 import { n as _$$n } from "../figma_app/583890";
@@ -351,7 +351,7 @@ function eO(e) {
       style: p
     }), jsx("span", {
       className: "layer_expansion_row--iconWrapper--J3NJb object_row--iconWrapper--ivRSW",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3
       })
     }), jsx("span", {
@@ -1290,7 +1290,7 @@ function eW(e) {
   } = useContext(y0);
   SV();
   let [P, R] = useAtomValueAndSetter(_$$C);
-  let O = _$$A(R, 200);
+  let O = useDebouncedCallback(R, 200);
   let D = Fk(e => e.getCurrentPage()?.responsiveSetSettings?.faviconID);
   let B = Fk(e => {
     let t = e.getCurrentPage();

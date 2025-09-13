@@ -10,7 +10,7 @@ import { XP } from "../figma_app/655139";
 import { canAccessFullDevMode } from "../figma_app/473493";
 import { mapPlatformToFramework } from "../905/359509";
 import { b as _$$b } from "../905/985254";
-import { GS } from "../figma_app/314264";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
 import { Jr } from "../figma_app/624361";
 import { selectOpenFileLibraryKey, selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
@@ -72,7 +72,7 @@ function R({
   imageHeight: t,
   constraint: i
 }) {
-  GS("mcp.get_image.constraint_hit", debugState.getState().openFile?.key || "", debugState.getState(), {
+  trackDefinedFileEvent("mcp.get_image.constraint_hit", debugState.getState().openFile?.key || "", debugState.getState(), {
     imageWidth: e,
     imageHeight: t,
     constraint: i
@@ -220,7 +220,7 @@ export async function $$z1(e, t, i, d) {
     let e = {
       tools: ["write-to-disk" === atomStoreManager.get(pe) ? eZ : CM, q, If, Qn, ...(getFeatureFlags().dt_mcp_get_metadata ? [Y9] : []), ...(getFeatureFlags().dt_my_cool_plugin_internal ? [Zj] : []), ...(getFeatureFlags().dt_mcp_link_node_via_code_connect ? [rV] : []), ...(getFeatureFlags().dt_mcp_design_system_rules_tool ? [sl] : [])]
     };
-    GS("mcp.get_tools_call", i.getState().openFile?.key || "", i.getState(), {
+    trackDefinedFileEvent("mcp.get_tools_call", i.getState().openFile?.key || "", i.getState(), {
       availableTools: JSON.stringify(e.tools.map(e => e.name)),
       clientName: d?.name
     });
@@ -387,7 +387,7 @@ export async function $$z1(e, t, i, d) {
     }(promptName, args);
   }
   let I = M.includes(e) ? e : "unknown";
-  if (GS("mcp.client_tool_call", i.getState().openFile?.key || "", i.getState(), {
+  if (trackDefinedFileEvent("mcp.client_tool_call", i.getState().openFile?.key || "", i.getState(), {
     toolArgs: JSON.stringify(t),
     currentSelection: JSON.stringify(Object.keys(i.getState().mirror.sceneGraphSelection)),
     rawToolName: e,
@@ -403,7 +403,7 @@ export async function $$z1(e, t, i, d) {
         text: CN
       }]
     };
-    GS("mcp.client_tool_call_completed", i.getState().openFile?.key || "", i.getState(), {
+    trackDefinedFileEvent("mcp.client_tool_call_completed", i.getState().openFile?.key || "", i.getState(), {
       toolArgs: JSON.stringify(t),
       currentSelection: JSON.stringify(Object.keys(i.getState().mirror.sceneGraphSelection)),
       rawToolName: e,
@@ -453,7 +453,7 @@ export async function $$z1(e, t, i, d) {
     durationMs: i
   }) {
     G[e] = (G[e] || 0) + 1;
-    GS("mcp.client_tool_call_duration", t.getState().openFile?.key || "", t.getState(), {
+    trackDefinedFileEvent("mcp.client_tool_call_duration", t.getState().openFile?.key || "", t.getState(), {
       toolName: e,
       durationMs: i,
       toolCallCount: G[e],
@@ -469,7 +469,7 @@ export async function $$z1(e, t, i, d) {
 export function $$H0() {
   console.warn("SSE is deprecated, please use localhost/mcp instead");
   atomStoreManager.set(_$$A, !0);
-  GS("mcp.deprecated_sse_query", debugState.getState().openFile?.key || "", debugState.getState(), {});
+  trackDefinedFileEvent("mcp.deprecated_sse_query", debugState.getState().openFile?.key || "", debugState.getState(), {});
 }
 async function W({
   validatedArgs: e,
@@ -504,7 +504,7 @@ async function W({
           let c = $w(l);
           let u = Z(c) > E4;
           if (getFeatureFlags().dt_mcp_get_code_returns_metadata && (u || t.length > 1)) {
-            GS("mcp.get_code_returns_metadata", d.getState().openFile?.key || "", d.getState(), {
+            trackDefinedFileEvent("mcp.get_code_returns_metadata", d.getState().openFile?.key || "", d.getState(), {
               numNodes: c,
               isOutputSizeTooLarge: u,
               isMultiSelect: t.length > 1,

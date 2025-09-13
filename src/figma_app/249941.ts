@@ -66,13 +66,13 @@ import { getFeatureFlags } from "../905/601108";
 import { LRUCache } from "../905/196201";
 import { memoizeByArgs } from "../figma_app/815945";
 import ef from "classnames";
-import { B as _$$B2, V as _$$V2 } from "../905/714743";
+import { SvgComponent, V as _$$V2 } from "../905/714743";
 import { t as _$$t2 } from "../905/331623";
 import { getI18nString } from "../905/303541";
 import { U as _$$U } from "../905/492359";
 import { s$ } from "../905/432493";
 import { NO } from "../905/619652";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { g$ } from "../figma_app/116234";
 import { i as _$$i } from "../905/415810";
 import { n as _$$n3 } from "../figma_app/859750";
@@ -644,7 +644,7 @@ export function $$tI2(e) {
       });
     }
     renderVariableCollectionIcon() {
-      return jsx(_$$B2, {
+      return jsx(SvgComponent, {
         svg: _$$A52,
         className: this.props.className,
         autosize: !0
@@ -658,24 +658,24 @@ export function $$tI2(e) {
       switch (node.styleType) {
         case "GRID":
           let r = s$(node);
-          return jsx(_$$B2, {
+          return jsx(SvgComponent, {
             svg: r,
             className,
             autosize: !0,
             width: "10px"
           });
         case "FILL":
-          return jsx(_$$B2, {
+          return jsx(SvgComponent, {
             svg: _$$A5,
             className
           });
         case "EFFECT":
-          return jsx(_$$B2, {
+          return jsx(SvgComponent, {
             svg: _$$A4,
             className
           });
         case "TEXT":
-          return jsx(_$$B2, {
+          return jsx(SvgComponent, {
             svg: _$$A6,
             className
           });
@@ -696,7 +696,7 @@ export function $$tI2(e) {
         node,
         className
       } = this.props;
-      return node.styleType ? this.renderStyleIcon() : "VARIABLE" === node.type ? this.renderVariableIcon() : "VARIABLE_SET" === node.type ? this.renderVariableCollectionIcon() : "CANVAS" === node.type ? jsx(_$$B2, {
+      return node.styleType ? this.renderStyleIcon() : "VARIABLE" === node.type ? this.renderVariableIcon() : "VARIABLE_SET" === node.type ? this.renderVariableCollectionIcon() : "CANVAS" === node.type ? jsx(SvgComponent, {
         svg: _$$A7,
         className
       }) : this.renderBaseIcon();
@@ -748,7 +748,7 @@ export function $$tI2(e) {
       }(node));
       let b = !E && "ABSOLUTE" === node.stackPositioning && (this.props.useUI3Icon ? jsx(_$$I2, {
         className: E7
-      }) : jsx(_$$B2, {
+      }) : jsx(SvgComponent, {
         className: E7,
         svg: _$$A8
       }));
@@ -759,7 +759,7 @@ export function $$tI2(e) {
         onDoubleClick: isPatternSourceIcon ? void 0 : onDoubleClick,
         "data-tooltip": isPatternSourceIcon ? null : y || null,
         "data-tooltip-show-above": !0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "aria-label": y,
         role: "img",
         children: ["string" == typeof e ? jsx(_$$t2, {

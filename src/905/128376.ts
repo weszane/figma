@@ -7,7 +7,7 @@ import { updateRefOrCallback } from '../905/177375'
  * @param autofocus - Whether to set autofocus (original: t, default: true)
  * @returns A memoized callback for ref assignment
  */
-export function setupAutofocusHandler(ref: any, autofocus: boolean = true) {
+export function setupAutofocusHandler(ref?: any, autofocus: boolean = true) {
   return useCallback((element: any) => {
     updateRefOrCallback(ref, element)
     if (element) {

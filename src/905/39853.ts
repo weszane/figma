@@ -10,7 +10,7 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { yF, M1 } from "../905/777093";
 import { GK } from "../905/37051";
 import { C as _$$C } from "../905/991119";
@@ -1831,7 +1831,7 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
     }(file, r, f);
     l = f.file?.fileKey;
     d = t.extension;
-    ".pdf" === d && (ds("pdf_import_successful", l, e.getState(), u, {
+    ".pdf" === d && (trackFileEvent("pdf_import_successful", l, e.getState(), u, {
       forwardToDatadog: !0
     }), Ij({
       type: "success"

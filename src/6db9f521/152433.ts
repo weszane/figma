@@ -5,7 +5,7 @@ import { N as _$$N } from "../905/430294";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { V } from "../figma_app/144634";
 import { K0 } from "../figma_app/439493";
 import { A } from "../svg/436725";
@@ -43,7 +43,7 @@ export function $$g0() {
     children: [jsx(K0, {
       svg: A,
       tooltip: "toggle-bold",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       active: e ? "LOUD" : void 0,
       onClick: () => fullscreenValue.triggerActionInUserEditScope("toggle-bold"),
       recordingKey: "bold",
@@ -52,7 +52,7 @@ export function $$g0() {
     }), jsx(K0, {
       svg: _$$A,
       tooltip: "text-toggle-strikethrough",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       active: t ? "LOUD" : void 0,
       onClick: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-strikethrough"),
       recordingKey: "strikethrough",

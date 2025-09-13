@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { customHistory } from "../905/612521";
 import { Ph, Kz, vd } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../905/339549";
 import { V8, $c, Wy, Um } from "../figma_app/681712";
@@ -267,7 +267,7 @@ export function $$E0(e) {
         },
         disabled: k,
         dataTestId: "confirm-purchase-button",
-        children: x.submitPending ? jsx(kt, {
+        children: x.submitPending ? jsx(LoadingSpinner, {
           className: _$$S2
         }) : buttonText
       })]

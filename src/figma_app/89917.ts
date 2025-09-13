@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { L3 } from "../figma_app/806075";
 import { E3 } from "../figma_app/976749";
 import { E as _$$E2 } from "../905/453826";
@@ -23,7 +23,7 @@ let v = yl;
 let $$A1 = "open-playground-file-onboarding-event";
 function x() {
   let e = useSelector(e => e.selectedView);
-  let t = jsx(_$$E, {
+  let t = jsx(TextWithTruncation, {
     fontWeight: "bold",
     children: renderI18nText("rcs.playground_file.ready_to_try")
   });

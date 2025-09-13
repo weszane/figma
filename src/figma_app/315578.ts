@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { J } from "../905/125993";
 import { D } from "../905/716990";
 import { Fullscreen } from "../figma_app/763686";
@@ -16,7 +16,7 @@ import { hideModalHandler, showModal } from "../905/156213";
 import { isVsCodeEnvironment } from "../905/858738";
 import { _6 } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { P } from "../905/647955";
 import { WP, W8, iB, wR, E6, Gw, vl, b6 } from "../905/560959";
@@ -33,7 +33,7 @@ function x({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.variables.details_button_aria_label"),
       onClick: t,
       className: e ? Zh : g_,
@@ -41,7 +41,7 @@ function x({
       recordingKey: r,
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.variables.details_button_aria_label"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(J, {})
     })
@@ -61,7 +61,7 @@ function N({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
         count: a
       }),
@@ -73,7 +73,7 @@ function N({
         "data-tooltip": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
           count: a
         }),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(D, {})
     })
@@ -91,7 +91,7 @@ function C({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.styles.details_button_aria_label"),
       onClick: t,
       className: e ? Zh : g_,
@@ -99,7 +99,7 @@ function C({
       recordingKey: r,
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.styles.details_button_aria_label"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(J, {})
     })

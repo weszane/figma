@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { memo, forwardRef } from "react";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import s from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 var o = s;
 let $$d0 = "dlt_banner_shortcut_button";
 let $$c2 = memo(forwardRef(function (e, t) {
@@ -32,7 +32,7 @@ export function $$u1({
 }) {
   return jsx("div", {
     className: "dlt_banner_inline_elements--iconInline--0YsSs",
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg: e
     })
   });

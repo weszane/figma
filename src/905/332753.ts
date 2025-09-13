@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { createRemovableAtomFamily, atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { revokeThumbnailUrl, generateNodeThumbnail } from "../figma_app/80990";
 import { Fk } from "../figma_app/167249";
 import { J } from "../905/273120";
@@ -29,7 +29,7 @@ export function $$m0(e) {
       } else console.warn("Attempted page thumbnail url generation without a page thumbnail");
     });
   }, [h, m]);
-  let _ = A(f, 2e3, {
+  let _ = useDebouncedCallback(f, 2e3, {
     leading: !0,
     trailing: !0
   });

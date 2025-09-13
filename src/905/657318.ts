@@ -3,7 +3,7 @@ import { createRef, memo } from "react";
 import { useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/976845";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { O as _$$O } from "../905/487602";
 import { o as _$$o } from "../905/530496";
@@ -38,7 +38,7 @@ import { Lh, D8 } from "../figma_app/242339";
 import { Q as _$$Q } from "../figma_app/104130";
 import { nm, j_ } from "../figma_app/745458";
 import { _Q } from "../figma_app/141508";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { f as _$$f } from "../905/135117";
 import { $$ei1 } from "../905/759609";
@@ -221,7 +221,7 @@ class eA extends RecordingPureComponent {
           onClick: this.detachStyle,
           htmlAttributes: {
             "data-tooltip": getI18nString("design_systems.styles.detach_style"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$U, {})
         })
@@ -234,7 +234,7 @@ class eA extends RecordingPureComponent {
           htmlAttributes: {
             onMouseDown: this.stopPropagation,
             "data-tooltip": getI18nString("fullscreen.properties_panel.remove"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$O, {})
         })
@@ -270,7 +270,7 @@ class eA extends RecordingPureComponent {
         selected: this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID,
         onClick: this.toggleDropdown,
         onMouseDown: this.stopPropagation,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("design_systems.styles.update_available"),
         recordingKey: generateRecordingKey(this.props, ""),
         children: jsx(_$$o, {})
@@ -296,7 +296,7 @@ class eA extends RecordingPureComponent {
         htmlAttributes: {
           onMouseDown: this.stopPropagation,
           "data-tooltip": this.props.advancedSettingsTooltip,
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$A, {})
       })
@@ -369,7 +369,7 @@ class eA extends RecordingPureComponent {
               recordingKey: generateRecordingKey(this.props, "showStylesButton"),
               onClick: this.toggleShowingStyles,
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": A,
                 "data-onboarding-key": this.props.stylesButtonDataTag,
                 onMouseDown: this.stopPropagation
@@ -392,7 +392,7 @@ class eA extends RecordingPureComponent {
                 htmlAttributes: {
                   onMouseDown: this.stopPropagation,
                   "data-tooltip": this.props.overrideAddPropertyTooltip ?? getI18nString("fullscreen.properties_panel.add"),
-                  "data-tooltip-type": Ib.TEXT
+                  "data-tooltip-type": KindEnum.TEXT
                 },
                 children: jsx(_$$e, {})
               })
@@ -458,7 +458,7 @@ class eA extends RecordingPureComponent {
       });
     } else r = jsx(_$$Q2, {
       ...v,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         ...E,
         className: yr,
         htmlAttributes: {

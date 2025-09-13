@@ -4,7 +4,7 @@ import a from "classnames";
 import { M } from "../figma_app/648761";
 import { Uz } from "../905/63728";
 import { lt, GG } from "../905/511649";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { tf } from "../figma_app/831799";
 import { dD } from "../figma_app/941824";
@@ -30,7 +30,7 @@ forwardRef(function (e, t) {
         style: {
           fill: e.fill
         }
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         className: ai,
         svg: A
       })]

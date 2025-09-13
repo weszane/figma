@@ -5,7 +5,7 @@ import { useCallback, useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, r1, nB, wi, jk, Y9, hE } from "../figma_app/272243";
 import { w as _$$w } from "../905/770105";
 import { J } from "../469e6e40/577626";
@@ -368,7 +368,7 @@ function B(e) {
   let n = useCallback(() => e.setStep("if_you_cancel_more"), [e.setStep]);
   let s = useCallback(() => e.setStep("confirm_cancel"), [e.setStep]);
   let i = getI18nString("general.learn_more");
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -479,7 +479,7 @@ function G(e) {
     trackingDescriptor: _$$c2.SECURITY
   }];
   let n = useCallback(() => e.setStep("confirm_cancel"), [e.setStep]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -579,7 +579,7 @@ function z(e) {
       a(!1);
     });
   }, [s, e.orgId, e.onClose, e.orgName, e.scheduledCancellationDate]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: n,
     width: "md",
     children: jsxs(vo, {
@@ -703,7 +703,7 @@ function W(e) {
     properties: {
       orgId: e.orgId
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: "md",
       children: jsxs(vo, {

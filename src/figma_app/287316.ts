@@ -9,7 +9,7 @@ import { DesignGraphElements, Fullscreen, AppStateTsApi, ImageCppBindings } from
 import { scopeAwareFunction } from "../905/189185";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import _ from "../vendor/73823";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { F as _$$F } from "../figma_app/954027";
@@ -1639,7 +1639,7 @@ let ef = async e => {
 };
 export function $$eE0() {
   let e = Ef();
-  let t = _$$A(t => {
+  let t = useDebouncedCallback(t => {
     e?.nativeToolbarUpdateVisible?.(t);
   }, 250);
   let r = !WC();

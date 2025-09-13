@@ -13,7 +13,7 @@ import { n1 } from "../figma_app/657017";
 import { compareWithKey } from "../905/760074";
 import { NX, k9 } from "../figma_app/777207";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { eO } from "../figma_app/518077";
 import { gi, r9, fc } from "../figma_app/646357";
@@ -225,7 +225,7 @@ function D({
 export function $$L3(e, t = !1) {
   let i = [];
   let a = useDispatch();
-  let o = sZ();
+  let o = useCurrentUserOrg();
   let c = useCurrentPlanUser("useLibrariesViewFilterStates");
   let p = useIsOrgMemberOrAdminUser(c).unwrapOr(!1);
   let g = !!o?.workspaces_count;

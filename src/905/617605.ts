@@ -2,7 +2,7 @@ import { Fullscreen, AppStateTsApi, SlideConstantsCppBindings } from "../figma_a
 import { parsePxInt } from "../figma_app/783094";
 import { FEditorType } from "../figma_app/53721";
 import { XC } from "../905/512783";
-import { QZ, Z0 } from "../figma_app/62612";
+import { computeFullscreenViewportForNode, viewportToScreen } from "../figma_app/62612";
 import { rY4, PXB } from "../figma_app/27776";
 let d = parsePxInt(rY4) + parsePxInt(PXB);
 export function $$c0(e, t, i, r, a) {
@@ -11,7 +11,7 @@ export function $$c0(e, t, i, r, a) {
 let u = (e, t, i, n, r) => {
   let a = e.page;
   let s = m(e);
-  return s && a ? QZ({
+  return s && a ? computeFullscreenViewportForNode({
     nodeId: a,
     nodeAbsoluteBounds: s,
     alwaysPan: !1,
@@ -23,9 +23,9 @@ let u = (e, t, i, n, r) => {
 let p = (e, t, i) => {
   if (!e.canvasPosition || "communityHub" !== i.view && "prototype" !== i.view) return null;
   let n = t.getViewportInfo();
-  let r = Z0(n, e.canvasPosition);
+  let r = viewportToScreen(n, e.canvasPosition);
   let a = e.comments[0].client_meta?.selection_box_anchor;
-  let s = a ? Z0(n, a) : r;
+  let s = a ? viewportToScreen(n, a) : r;
   if (!((e, t) => {
     let i = n.width;
     let r = n.height;

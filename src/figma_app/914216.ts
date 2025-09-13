@@ -3,7 +3,7 @@ import { memo, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b, bL, mc, YJ, hE } from "../figma_app/860955";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { DesignGraphElements, UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -16,7 +16,7 @@ import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yh, TY, vg } from "../figma_app/357047";
 import { xn } from "../figma_app/108168";
 import { t as _$$t } from "../figma_app/856638";
@@ -145,11 +145,11 @@ function F({
   }, e.recordingKey));
   return jsxs(bL, {
     manager,
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       ...getTriggerProps(),
       "aria-label": e.getTitle(),
       "data-tooltip": e.getTitle(),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       className: _()(NT, {
         [ZS]: manager.isOpen
       }),

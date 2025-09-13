@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { createElement, useState, useCallback, useEffect } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { a as _$$a } from "../905/462280";
@@ -15,7 +15,7 @@ import { getI18nString } from "../905/303541";
 import { gI } from "../figma_app/396464";
 import { PU, aK } from "../figma_app/334505";
 import { clearSelection } from "../figma_app/741237";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { I9 } from "../figma_app/151869";
 import { oW } from "../905/675859";
 function E({
@@ -186,10 +186,10 @@ export function $$R0({
     className: "x1n2onr6",
     onMouseEnter: () => x(!0),
     onMouseLeave: () => x(!1),
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       ...Ay.props(A.containerBase, h && A.containerEnabled, N && A.containerMapped, u && N && A.containerMappedHovered),
       "data-tooltip": h || 0 !== a ? "" : getI18nString("buzz.bulk_create.disabled_field_tooltip"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-right": !0,
       "aria-pressed": N,
       onClick: w,

@@ -26,7 +26,7 @@ import { fG, C4, yH, l7 as _$$l2 } from "../figma_app/540726";
 import { valueOrFallback, isValidValue, isInvalidValue, normalizeValue, MIXED_MARKER } from "../905/216495";
 import { zy } from "../figma_app/915202";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { f as _$$f3 } from "../905/135117";
 import { JH } from "../figma_app/479313";
@@ -107,7 +107,7 @@ function Z(e) {
     "aria-expanded": e.isStylesPickerShown,
     onClick: s,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.properties_panel.style"),
       onMouseDown: o
     },
@@ -121,7 +121,7 @@ function X(e) {
     onClick: e.onResetInteractions,
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.reset_interactions"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(p, {})
   });
@@ -136,7 +136,7 @@ function Q(e) {
       onClick: e.addProperty,
       htmlAttributes: {
         "data-tooltip": e.overrideAddPropertyTooltip ?? getI18nString("fullscreen.draggable_list.add"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$e, {
         className: c9
@@ -156,7 +156,7 @@ function J(e) {
         onMouseDown: t,
         "data-testid": "scroll-behavior-button",
         "data-tooltip": getI18nString("fullscreen.draggable_list.scroll_behavior"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$J, {})
     })
@@ -173,7 +173,7 @@ function ee(e) {
       e.toggleVisibleFlows?.(i.event);
     },
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.toolbar.prototyping-visibility"),
       "data-tooltip-shortcut-key": "toggle-prototyping-info",
       "data-onboarding-key": "visible-flows-toggle"

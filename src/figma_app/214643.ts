@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useId } from "react";
 import { useDispatch } from "react-redux";
-import { qc } from "../figma_app/858013";
-import { B } from "../905/714743";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Um } from "../905/848862";
 import { j } from "../905/694231";
@@ -99,7 +99,7 @@ export function $$g0({
     E(!0);
   }).catch(() => {
     E(!0);
-  }), b) ? jsx(qc, {}) : jsxs("div", {
+  }), b) ? jsx(LoadingOverlay, {}) : jsxs("div", {
     children: [!e && jsxs("div", {
       className: wx,
       children: [jsx("h2", {
@@ -114,7 +114,7 @@ export function $$g0({
       children: t.map(t => jsx("div", {
         className: nk,
         children: e ? jsxs(Fragment, {
-          children: [jsx(B, {
+          children: [jsx(SvgComponent, {
             className: oS,
             svg: A
           }), jsx("span", {

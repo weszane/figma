@@ -2,9 +2,9 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { p as _$$p } from "../905/185998";
 import { setupToggleButton } from "../905/167712";
 import { _ as _$$_ } from "../905/263184";
@@ -319,10 +319,10 @@ let $$O0 = registerModal(function (e) {
       children: getI18nString("general.learn_more")
     })
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     width: 386,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: B,
       children: [jsx(Y9, {
         children: jsx(hE, {
@@ -352,7 +352,7 @@ let $$O0 = registerModal(function (e) {
           children: [C && jsx("p", {
             ...Ay.props(F.textBodyMediumSecondary),
             children: getI18nString("figmake.supabase.creating_project.subtitle")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "secondary",
             onClick: () => s.props.close({
               source: "button"
@@ -361,7 +361,7 @@ let $$O0 = registerModal(function (e) {
           }), C ? jsx(lV, {
             variant: "primary",
             children: getI18nString("figmake.settings.create_project_modal.button.submit.loading")
-          }) : jsx($n, {
+          }) : jsx(Button, {
             variant: "primary",
             type: "submit",
             disabled: M,

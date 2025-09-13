@@ -24,7 +24,7 @@ import { F } from "../905/382217";
 import { l3, DX } from "../figma_app/798540";
 import { Tm, mD, cR, Ne } from "../figma_app/955528";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { jD } from "../figma_app/322845";
 import { qM, qU } from "../figma_app/913518";
 import { Hd, bu, Vz, Jd } from "../figma_app/878113";
@@ -42,7 +42,7 @@ function L() {
       forceClose: !1
     });
   }, [e, t, s, r, a]);
-  return jsx($n, {
+  return jsx(Button, {
     variant: "secondary",
     onClick: d,
     recordingKey: "adjust-tone-button",

@@ -6,7 +6,7 @@ import { oU, Sr, B3 } from "../905/535224";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s_ } from "../905/17223";
 import { N_, CY } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { getI18nString } from "../905/303541";
 import { rH } from "../figma_app/49598";
@@ -27,7 +27,7 @@ import { FFileType } from "../figma_app/191312";
 import { CommunityUniversalPostingModalRecentFileKeysView } from "../figma_app/43951";
 import { IT } from "../905/713695";
 import { Yj } from "../figma_app/951233";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
 import { S as _$$S } from "../figma_app/787550";
 import { registerModal } from "../905/102752";
@@ -51,7 +51,7 @@ function H(e) {
     }), jsx(N_, {
       onClick: () => {
         trackEventAnalytics(t ? "community_publish_open_desktop_clicked" : "community_publish_get_desktop_clicked", {
-          resourceType: e.tab === gr.PLUGINS ? bD.PLUGIN : bD.WIDGET
+          resourceType: e.tab === gr.PLUGINS ? ResourceType.PLUGIN : ResourceType.WIDGET
         });
         t && Sr(location.href, B3.UNIVERSAL_POSTING_MODAL);
       },
@@ -350,7 +350,7 @@ let $$Q0 = registerModal(function (e) {
       hideScrollbar: !0,
       children: [!ep && jsx("div", {
         className: g4,
-        children: jsx(kt, {
+        children: jsx(LoadingSpinner, {
           size: "small"
         })
       }), eo && jsx(fp, {
@@ -390,7 +390,7 @@ let $$Q0 = registerModal(function (e) {
             if (ea === gr.FILES) ee && (trackEventAnalytics("community_publish_modal", {
               user: t.id,
               step: WX.DETAILS,
-              resourceType: bD.HUB_FILE,
+              resourceType: ResourceType.HUB_FILE,
               fileKey: ee.key,
               fileName: ee.name
             }), r(_$$t2({
@@ -405,7 +405,7 @@ let $$Q0 = registerModal(function (e) {
               trackEventAnalytics("community_publish_modal", {
                 user: t.id,
                 step: WX.DETAILS,
-                resourceType: ea === gr.PLUGINS ? bD.PLUGIN : bD.WIDGET,
+                resourceType: ea === gr.PLUGINS ? ResourceType.PLUGIN : ResourceType.WIDGET,
                 pluginId: e.plugin_id,
                 pluginName: e.name,
                 localFileId: n

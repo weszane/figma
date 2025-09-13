@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo } from "react";
 import { lQ } from "../905/934246";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { s as _$$s } from "../905/403855";
 import { r as _$$r } from "../905/619088";
 import { AppStateTsApi, HandoffBindingsCpp, StylesBindings } from "../figma_app/763686";
@@ -12,11 +12,11 @@ import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27
 import h from "classnames";
 import { debugState } from "../905/407919";
 import { selectWithShallowEqual } from "../905/103090";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { O as _$$O } from "../figma_app/140784";
 import { $R } from "../figma_app/883490";
-import { GS } from "../figma_app/314264";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
 import { removeFromSelection, addToSelection, selectNodesInRange, updateHoveredNode, currentSessionLocalIDString } from "../figma_app/741237";
 import { eY } from "../figma_app/722362";
@@ -24,7 +24,7 @@ import { S as _$$S } from "../figma_app/106763";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { assetTypeEnum } from "../figma_app/198712";
-import { Ib as _$$Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { m as _$$m } from "../905/70820";
 import { J as _$$J } from "../905/273120";
 import { Bf } from "../figma_app/249941";
@@ -97,7 +97,7 @@ function j(e) {
   });
 }
 export function $$U2(e) {
-  return jsx(B, {
+  return jsx(SvgComponent, {
     onMouseDown: e.visible ? t => {
       t.preventDefault();
       t.stopPropagation();
@@ -175,7 +175,7 @@ function K({
   name: r
 }) {
   let i = Fk((e, t) => e.get(t)?.isLockedInDevMode, t);
-  return i || e ? jsx(_$$E, {
+  return i || e ? jsx(ButtonPrimitive, {
     actionOnPointerDown: !0,
     onClick: () => {
       let e = getSingletonSceneGraph().get(t);
@@ -183,7 +183,7 @@ function K({
         e.isLockedInDevMode = !e.isLockedInDevMode;
         let t = debugState.getState();
         let r = t.openFile?.key;
-        r && GS("dev_mode.set_node_locked", r, t, {
+        r && trackDefinedFileEvent("dev_mode.set_node_locked", r, t, {
           locked: e.isLockedInDevMode,
           nodeId: e.guid,
           nodeType: e.type,
@@ -199,7 +199,7 @@ function K({
     htmlAttributes: {
       "data-testid": `devHandoffLayersRow.lockIcon-${r}`,
       "data-tooltip": getI18nString("dev_handoff.layers_panel.locked_tooltip"),
-      "data-tooltip-type": _$$Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-right": !0
     },
     children: i ? jsx(_$$s, {}) : jsx(_$$r, {})

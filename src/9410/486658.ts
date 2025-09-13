@@ -6,7 +6,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, atom } from "../figma_app/27355";
 import c from "../vendor/128080";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { initializeStub } from "../figma_app/757801";
 import { Ns, isInteractionPathCheck } from "../figma_app/897289";
 import { kG } from "../figma_app/327588";
@@ -178,7 +178,7 @@ export function $$w2({
     let [C, v] = useState(null);
     let [T, w] = useState(!1);
     let [S, j] = useState(0);
-    let I = U();
+    let I = trackFileEventWithStore();
     let k = "DRAGGING" === _ || "PENDING_CANVAS_GRID_UPDATE" === _;
     let N = "CLICKING" === _;
     let A = e => {
@@ -222,9 +222,9 @@ export function $$w2({
       w(!1);
       D();
     }), l) ? {
-      onMouseDown: () => { },
-      onMouseMove: () => { },
-      onCarouselItemReorder: () => { },
+      onMouseDown: () => {},
+      onMouseMove: () => {},
+      onCarouselItemReorder: () => {},
       isDraggingCarouselItems: !1,
       isClickingCarouselItems: !1,
       detachedCarouselItemGuids: [],

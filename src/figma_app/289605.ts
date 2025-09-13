@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect, useCallback, useId } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
 import { L as _$$L } from "../905/704296";
 import { E as _$$E2 } from "../905/235326";
@@ -31,7 +31,7 @@ import { u as _$$u, G6, Kd, BQ, t8, Xv, hg } from "../figma_app/852050";
 import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
 import { B as _$$B2 } from "../905/506188";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { np, rh } from "../figma_app/803932";
 import { Cj } from "../figma_app/151869";
@@ -235,14 +235,14 @@ function ea({
   } = _$$X2(e.name);
   let d = a ? {
     "data-tooltip": getI18nString("variables.variable_was_deleted"),
-    "data-tooltip-type": Ib.TEXT
+    "data-tooltip-type": KindEnum.TEXT
   } : void 0;
   let c = useCallback(() => {
     t && (r("row_copied", {
       type: "name"
     }), t());
   }, [t, r]);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: L$,
     onClick: c,
     htmlAttributes: o ?? d,
@@ -453,18 +453,18 @@ function ep({
     children: jsx(_$$K, {
       "aria-label": getI18nString("dev_handoff.variables.details_view_in_collection"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.variables.details_view_in_collection")
       },
       onClick: b,
       children: jsx(_$$E2, {})
     })
-  }) : g.data?.type === "community" ? jsx(_$$E, {
+  }) : g.data?.type === "community" ? jsx(ButtonPrimitive, {
     disabled: !0,
     className: E()(WF, Iw),
     "aria-label": getI18nString("dev_handoff.variables.details_from_community"),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("dev_handoff.variables.details_from_community")
     },
     children: jsx(_$$U, {})
@@ -483,7 +483,7 @@ function ep({
       onClick: b,
       "aria-label": getI18nString("dev_handoff.variables.details_view_in_collection"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.variables.details_view_in_collection")
       },
       children: jsx(_$$E2, {})
@@ -552,7 +552,7 @@ function e_({
       }), c && jsx("div", {
         className: _Z,
         children: C && jsx(_$$B, {
-          "data-tooltip-type": Ib.SPECIAL,
+          "data-tooltip-type": KindEnum.SPECIAL,
           "data-tooltip": eu,
           "data-tooltip-mode": C.modeName,
           "data-tooltip-collection": C.collectionName,
@@ -568,7 +568,7 @@ function e_({
       children: jsx(_$$Q, {})
     }) : s ? jsxs("div", {
       className: E()(my, D && mH),
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         onClick: u,
         "aria-label": getI18nString("dev_handoff.variables.details_value_expand_aria_label"),
         className: X1,
@@ -581,7 +581,7 @@ function e_({
           children: w
         })]
       }), d && jsx(_$$B, {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.variables.details_values_not_all_from_same_mode"),
         className: Kk
       })]
@@ -608,7 +608,7 @@ function eh({
     case VariableDataType.STRING:
     case VariableDataType.BOOLEAN:
     case VariableDataType.FLOAT:
-      return jsx(_$$E, {
+      return jsx(ButtonPrimitive, {
         onClick: c,
         className: E()(Uq, e.type === VariableDataType.STRING && TQ),
         htmlAttributes: {
@@ -755,7 +755,7 @@ function eE({
         children: i
       }), jsx("div", {
         "data-tooltip": getI18nString("dev_handoff.variables.details_scope_info"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         className: Kk,
         children: jsx(_$$B, {})
       })]

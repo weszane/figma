@@ -13,14 +13,14 @@ import { customHistory } from "../905/612521";
 import { generateUUIDv4 } from "../905/871474";
 import { sendUrlToParent } from "../figma_app/564528";
 import { Ex, zE, vj } from "../figma_app/919079";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { b as _$$b2 } from "../905/985254";
 import { fu, tf } from "../figma_app/831799";
 import { r1 } from "../figma_app/545877";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c$ } from "../905/794875";
 import { w as _$$w } from "../figma_app/654279";
 import { v as _$$v } from "../figma_app/759243";
@@ -161,7 +161,7 @@ export function $$Y1() {
               tooltipOverrides
             } = e;
             let c = tooltipOverrides?.tooltip || (disabled && disabledTooltipText ? disabledTooltipText : void 0);
-            let p = tooltipOverrides?.tooltipType || Ib.TEXT;
+            let p = tooltipOverrides?.tooltipType || KindEnum.TEXT;
             let h = Ef(e);
             return type === Uj.OPEN_CLUSTER_BY_MORE_MENU ? jsx($, {
               disabled
@@ -292,12 +292,12 @@ let J = tf(function ({
     role: "combobox",
     testId: "inline_menu_organize_dropdown_button",
     tooltip: l ? _$$w : void 0,
-    tooltipType: l ? Ib.SPECIAL : void 0,
+    tooltipType: l ? KindEnum.SPECIAL : void 0,
     children: jsxs("div", {
       className: "organize_actions_control--withBadge--2qE6m",
       children: [jsx("div", {
         className: "organize_actions_control--buttonIconContainer--7BE5y",
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A3,
           className: f()("organize_actions_control--svgIcon--Y27OU", {
             "organize_actions_control--svgIconDisabled--siNy6": l
@@ -454,7 +454,7 @@ let Q = tf(function ({
   ariaLabel: _
 }) {
   let y = p?.tooltip || (o && a ? a : "");
-  let v = p?.tooltipType || Ib.TEXT;
+  let v = p?.tooltipType || KindEnum.TEXT;
   return jsx(Fragment, {
     children: jsx("div", {
       "aria-label": _ ?? i,
@@ -475,7 +475,7 @@ let Q = tf(function ({
       children: jsx(c$, {
         children: jsxs("div", {
           className: _$$s.flex.justifyBetween.itemsCenter.gap8.$,
-          children: [jsx(_$$E2, {
+          children: [jsx(TextWithTruncation, {
             truncate: !0,
             children: i
           }), h && jsx(EventShield, {
@@ -491,7 +491,7 @@ let Q = tf(function ({
             })
           }), m && jsx("span", {
             className: _$$s.pl4.mr0.$,
-            children: jsx(_$$B, {
+            children: jsx(SvgComponent, {
               svg: _$$A2
             })
           })]
@@ -557,7 +557,7 @@ function $({
               children: [svgSrc && jsx(Q$, {
                 children: jsx("div", {
                   className: "x30jfuo",
-                  children: jsx(_$$B, {
+                  children: jsx(SvgComponent, {
                     svg: svgSrc
                   })
                 })

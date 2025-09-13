@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { CommunityHubLikeForProfile, CommunityHubLikeForProfileFromResourceId } from "../figma_app/43951";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 export function $$l1(e, t, i = !0) {
   let r = useSelector(e => e.authedActiveCommunityProfile);
   let d = {
@@ -10,7 +10,7 @@ export function $$l1(e, t, i = !0) {
     hubFileId: null,
     pluginId: null
   };
-  t === vt.HUB_FILE ? d.hubFileId = e || null : d.pluginId = e || null;
+  t === ResourceTypeNoComment.HUB_FILE ? d.hubFileId = e || null : d.pluginId = e || null;
   return useSubscription(CommunityHubLikeForProfile, d, {
     enabled: !!d.profileId && i
   }).transform(e => [!!e.communityHubLike, e.communityHubLike?.id || null]);

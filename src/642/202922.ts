@@ -20,7 +20,7 @@ import { wP } from "../9410/845608";
 import { fullscreenValue } from "../figma_app/455680";
 import { s as _$$s } from "../figma_app/874592";
 import { Dr, Ct } from "../figma_app/803787";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { Nu } from "../figma_app/23780";
 import { Cf } from "../905/504727";
@@ -38,7 +38,7 @@ import { K as _$$K } from "../905/443068";
 import { y as _$$y } from "../905/582657";
 import { f as _$$f } from "../905/335032";
 import { S as _$$S2 } from "../figma_app/552746";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { dG } from "../figma_app/753501";
 import { t8, R$, e6 } from "../figma_app/545190";
 import { K4, Z3 } from "../figma_app/461594";
@@ -135,7 +135,7 @@ function et({
       },
       recordingKey: i,
       label: jsx(Label, {
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           truncate: "line-clamp",
           lineClamp: 2,
           children: e.name
@@ -180,7 +180,7 @@ function es({
         recordingKey: s,
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.component_properties.unbubble_instance"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           onMouseDown: dG
         },
         children: jsx(_$$f, {})
@@ -465,7 +465,7 @@ function ef({
       children: jsx(_$$d, {
         "aria-expanded": e,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("design_systems.component_panel.create_component_property")
         },
         "aria-label": getI18nString("design_systems.component_panel.create_component_property"),

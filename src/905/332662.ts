@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { kL, m, nP, wx, IE, UU, h_, qw, qr } from "../figma_app/32844";
 var $$a = r;
 export function $$d0(e) {
@@ -32,7 +32,7 @@ export function $$d0(e) {
       })]
     }), jsxs("div", {
       className: UU,
-      children: [e.titleSubtitle, jsx(E, {
+      children: [e.titleSubtitle, jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 13,
         fontFamily: "primary",

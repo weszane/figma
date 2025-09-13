@@ -13,7 +13,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { UD } from "../figma_app/624361";
 import { tB } from "../figma_app/731583";
 import { dh } from "../figma_app/186343";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
@@ -23,7 +23,7 @@ import { v as _$$v, Z } from "../6401/653234";
 import { U } from "../6401/846751";
 var p = m;
 export function $$w0() {
-  let e = _X({
+  let e = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let t = p8("isReadOnly");
@@ -86,7 +86,7 @@ let R = memo(({
   if (!e || !e.position || !t) return jsx(Fragment, {});
   let E = getSingletonSceneGraph().get(e.guid);
   if (!E) return null;
-  let g = Yb(t, e.position);
+  let g = scaleRect(t, e.position);
   let y = "ALIGNMENT" === e.type || "POLL" === e.type || "FACEPILE" === e.type || "EMBED" === e.type && !getFeatureFlags().slides_iframe_embedded_prototypes_thumbnail;
   return jsxs("div", {
     "data-testid": `flapp-${e.guid}`,

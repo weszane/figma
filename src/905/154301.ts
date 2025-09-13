@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { Uz } from "../905/63728";
 import { nR, qM } from "../figma_app/637027";
 import { L } from "../905/408237";
-import { nt } from "../figma_app/858013";
+import { LargeLoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
@@ -13,7 +13,7 @@ import { yH } from "../figma_app/240735";
 import { fu } from "../figma_app/831799";
 import { FlashActions } from "../905/573154";
 import { $ } from "../905/834575";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { Dd, OJ } from "../905/519092";
 import { v as _$$v } from "../905/621749";
@@ -139,7 +139,7 @@ export let $$E0 = registerModal(function (e) {
         style: sx.add({
           height: "200px"
         }).$,
-        children: jsx(nt, {})
+        children: jsx(LargeLoadingSpinner, {})
       })
     })
   });
@@ -253,7 +253,7 @@ export let $$E0 = registerModal(function (e) {
               disabled: O,
               children: jsx("span", {
                 "data-tooltip": getI18nString("team_delete_modal.to_confirm_please_enter_the_name_of_the_team"),
-                "data-tooltip-type": O ? Ib.TEXT : null,
+                "data-tooltip-type": O ? KindEnum.TEXT : null,
                 children: renderI18nText("team_delete_modal.delete_team")
               })
             })]

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { k as _$$k } from "../905/443820";
-import { E as _$$E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { e } from "../905/149844";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
@@ -20,7 +20,7 @@ import { ZH, AW, oT } from "../1156/250784";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
 import { N as _$$N } from "../905/438674";
@@ -122,7 +122,7 @@ function P({
     children: [jsx("p", {
       ...Ay.props(U.textBodyMediumSecondary),
       children: getI18nString("figmake.supabase.pausing_project.subtitle")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       onClick: () => e.onClose(),
       disabled: !0,
@@ -132,11 +132,11 @@ function P({
       children: getI18nString("figmake.pause_project_modal.button.loading")
     })]
   }) : jsxs(Fragment, {
-    children: [jsx($n, {
+    children: [jsx(Button, {
       variant: "secondary",
       onClick: () => e.onClose(),
       children: getI18nString("figmake.pause_project_modal.button.cancel")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "destructive",
       onClick: o,
       disabled: !t,
@@ -168,7 +168,7 @@ let G = registerModal(function (e) {
   let s = useDispatch();
   let a = !!e.toolCallId && !!e.toolName;
   let [l, o] = useState(void 0);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 394,
     children: jsxs(vo, {
@@ -256,7 +256,7 @@ let V = registerModal(function (e) {
     trackingContext: e.trackingContext,
     source: e.source
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 386,
     children: jsxs(vo, {
@@ -278,11 +278,11 @@ let V = registerModal(function (e) {
       }), jsx(wi, {
         children: jsxs(jk, {
           className: "x78zum5 x1q0g3np x13a6bvl x167g77z xhxeiv9 xh8yej3 x9f619",
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
             children: getI18nString("figmake.supabase.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "destructive",
             onClick: () => {
               e.onClose();
@@ -378,7 +378,7 @@ export function $$X0({
   if (isLoading) return jsx(_$$k, {});
   let x = existingProjects.filter(e => e.status.toLowerCase() !== TL.REMOVED);
   return jsxs("div", {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       "aria-label": getI18nString("figmake.settings.connect_existing_project.create_project.button"),
       onClick: u,
       children: jsxs("div", {
@@ -540,7 +540,7 @@ function Y({
             })
           })]
         })]
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         onClick: b,
         children: getI18nString("figmake.settings.connect_existing_project.project.button")

@@ -3,9 +3,9 @@ import { forwardRef } from "react";
 import { oY } from "../figma_app/387100";
 import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
-import { V, B } from "../905/714743";
+import { V, SvgComponent } from "../905/714743";
 import { Dm } from "../figma_app/8833";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { D, GN } from "../figma_app/249941";
 import { V_, F, sQ, Io, HR, rH, Pn, Ok, ue } from "../3682/933480";
 import { A } from "../3850/108557";
@@ -25,12 +25,12 @@ export let $$x0 = forwardRef(function (e, t) {
     isFigmaPurple
   } = e.node;
   let i = function (e, t, a, o) {
-    let s = _X({
+    let s = getViewportInfo({
       subscribeToUpdates_expensive: !0
     });
     if (!s) return null;
     let i = {};
-    let n = Yb(s, {
+    let n = scaleRect(s, {
       x: e.x,
       y: e.y,
       width: e.w,
@@ -113,7 +113,7 @@ export function $$b1({
     oY(e.type) && e.hasEnabledStaticImagePaint && (t = _$$A3);
     return t;
   }(e);
-  return s ? jsx(B, {
+  return s ? jsx(SvgComponent, {
     className: ue,
     svg: s
   }) : null;

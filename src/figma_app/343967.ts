@@ -2,10 +2,10 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { createContext, useContext, useState, useLayoutEffect, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { updateRefOrCallback } from "../905/177375";
-import { A } from "../905/268204";
+import { isBrowser } from "../905/268204";
 import { g } from "../905/319892";
 let d = new Set();
-let c = createContext(A ? document.body : null);
+let c = createContext(isBrowser ? document.body : null);
 export function $$u2() {
   return Array.from(d);
 }

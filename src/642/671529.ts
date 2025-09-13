@@ -45,11 +45,11 @@ import { s4 } from "../figma_app/276332";
 import { useHandleFocusEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { eE as _$$eE } from "../905/709171";
+import { compareLibraryItemWithKey } from "../905/709171";
 import { getPropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { IW, Gj } from "../figma_app/646357";
 import { VF } from "../figma_app/679183";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -185,12 +185,12 @@ function ef({
       verticalAlignItems: "center",
       spacing: f.current ? "auto" : void 0,
       padding: 8,
-      children: [f.current && jsx($n, {
+      children: [f.current && jsx(Button, {
         variant: "link",
         onClick: () => y(!x),
         recordingKey: generateRecordingKey("createStyleModal", "moreOptions"),
         children: x ? renderI18nText("design_systems.create_style.hide_options") : renderI18nText("design_systems.create_style.show_more_options")
-      }), getFeatureFlags().ce_tv_fpl_create_style_modal ? jsx($n, {
+      }), getFeatureFlags().ce_tv_fpl_create_style_modal ? jsx(Button, {
         onClick: w,
         disabled: !T || !styleRef,
         children: renderI18nText("design_systems.create_style.create_style")
@@ -335,7 +335,7 @@ function eS({
   let m = normalizeValue(u);
   let g = valueOrFallback(p, s4.NONE);
   if (null === m) return null;
-  let f = !_$$eE(d.style, s);
+  let f = !compareLibraryItemWithKey(d.style, s);
   let x = sessionLocalIDToString(m);
   if (!(a.local.styles[x] && !a.local.styles[x]?.is_soft_deleted) && !f) return null;
   let y = s?.canEdit ?? !1;

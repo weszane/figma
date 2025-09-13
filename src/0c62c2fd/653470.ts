@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { U } from "../905/807535";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
@@ -54,7 +54,7 @@ export function $$x0({
     onClose: r,
     preventUserClose: !0
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: j,
     width: "fit-content",
     children: jsxs(vo, {

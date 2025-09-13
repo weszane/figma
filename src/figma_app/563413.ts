@@ -15,14 +15,14 @@ import { getInitialOptions } from "../figma_app/169182";
 import { Uz } from "../905/63728";
 import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { L as _$$L } from "../905/408237";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { m0 } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vq, rk, qc, mn, $7, W1, p3, Rt, mh, Gh, r3, nP, lm, sb, vs, Ck, HD, RT, qX, Cs, nk, CC, Vl, ZG, MU, uD, ax, JU, Qm, S_, nA, tL, i3 } from "../905/956371";
 import { A as _$$A2 } from "../5724/415132";
 import { A as _$$A3 } from "../1617/187124";
@@ -144,7 +144,7 @@ let $$D1 = forwardRef((e, t) => {
     className: `${h} ${e.className || ""}`,
     children: [e.withUI3Icon ? jsx(_$$h, {
       className: e.iconClassName
-    }) : jsx(B, {
+    }) : jsx(SvgComponent, {
       className: e.iconClassName ?? qc,
       svg: _$$A2
     }), jsx(_$$L, {
@@ -265,7 +265,7 @@ let $$F0 = forwardRef((e, t) => {
       e.target.matches("input") || e.preventDefault();
     },
     onMouseUp,
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       className: mh,
       svg: _$$A2
     }), jsx(_$$L, {
@@ -377,7 +377,7 @@ let $$U9 = forwardRef((e, t) => {
       placeholder: e.placeholder || getI18nString("general.search"),
       spellCheck: !1,
       value: e.query
-    }), jsx(B, {
+    }), jsx(SvgComponent, {
       className: Ck,
       svg: _$$A3,
       onClick: e.onSubmit
@@ -403,7 +403,7 @@ let $$B2 = forwardRef((e, t) => {
       [qX]: e.extraSpacing,
       [Cs]: e.hideSearchIcon
     }),
-    children: [!e.hideSearchIcon && jsx(B, {
+    children: [!e.hideSearchIcon && jsx(SvgComponent, {
       svg: _$$A4,
       className: nk
     }), jsx(_$$L, {
@@ -443,7 +443,7 @@ let $$G5 = forwardRef((e, t) => {
   return jsxs("div", {
     "data-onboarding-key": e["data-onboarding-key"],
     className: `${ZG} ${e.className || ""}`,
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A4,
       className: MU
     }), jsx(_$$L, {
@@ -496,7 +496,7 @@ let $$V8 = forwardRef((e, t) => {
     children: [!loggedOutSearchBarActivated && !e.query && jsx("div", {
       className: JU,
       onClick: () => onSearchClick(!0),
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         className: Qm,
         svg: _$$A3
       })
@@ -574,7 +574,7 @@ function z({
       "aria-label": getI18nString("search.search_bar.clear"),
       recordingKey: s,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("search.search_bar.clear"),
         "data-testid": "clearSearchButton"
       },

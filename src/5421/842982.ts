@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import { Ay } from "@stylexjs/stylex";
 import s from "classnames";
@@ -15,7 +15,7 @@ let $$c2 = forwardRef(function ({
   tooltipShowAbove: c = !0,
   ...p
 }, u) {
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     ref: u,
     ...p,
     className: d()("menu_button--iconButton--KPBE2 menu_button--baseIconButton--cJj85", "menu_button--ghost--PZTUp", {
@@ -50,7 +50,7 @@ let p = forwardRef(function ({
     noBorder,
     ...c
   } = a;
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ref: s,
     ...c,
     ...Ay.props(m.container, i, a["aria-expanded"] ? m.container_active : null, a.noBorder ? m.container_noBorder : null, t ? null : m.containerLeftPaddingWithoutIconPrefix, n ? null : m.containerRightPaddingWithoutIconSuffix),

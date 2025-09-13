@@ -34,7 +34,7 @@ import { A as _$$A } from "../905/891805";
 import { E as _$$E2 } from "../905/277716";
 import { Gt } from "../905/275640";
 import { Um } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Kt } from "../figma_app/156285";
 import { _2 } from "../905/185121";
 let $$N = memo(function (e) {
@@ -152,7 +152,7 @@ function X(e) {
     let t = useDispatch();
     let r = U();
     return useCallback(() => {
-      if (r) t(XE()); else {
+      if (r) t(XE());else {
         if (!e || !e.current) return;
         let r = cn(e.current);
         t(u1({
@@ -177,7 +177,7 @@ function X(e) {
       htmlAttributes: {
         onMouseDown: e => e.stopPropagation(),
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$A, {})
     })

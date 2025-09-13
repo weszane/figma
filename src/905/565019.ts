@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { lQ } from "../905/934246";
-import { R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { getI18nString } from "../905/303541";
 export let $$l0 = registerModal(function ({
   comment: e,
@@ -21,7 +21,7 @@ export let $$l0 = registerModal(function ({
     i();
     t?.();
   }, [i, t]);
-  return jsx(R, {
+  return jsx(ConfirmationModal, {
     autofocusConfirm: !0,
     onCancel: p,
     onConfirm: u,

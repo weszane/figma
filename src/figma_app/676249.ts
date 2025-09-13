@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { l4 } from "../905/124270";
@@ -89,7 +89,7 @@ export function $$I0({
       children: !w || II(w) ? T(t) : yA(w)
     }), jsx("div", {
       className: k,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: _$$A2,
         className: `facet_dropdown_entry--caret--XFove tile_sort_filter--caret--AJHA9 ${C ? "facet_dropdown_entry--caretDown--ez1jh tile_sort_filter--caretDown--hIOid" : ""}`
       })

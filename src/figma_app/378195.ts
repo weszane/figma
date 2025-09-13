@@ -10,7 +10,7 @@ import { SH } from "../figma_app/790714";
 import { hM, A9 } from "../905/851937";
 import { handlePluginError } from "../905/753206";
 import { hasLocalFileId } from "../figma_app/155287";
-import { c as _$$c } from "../905/949750";
+import { incrementCounter } from "../905/949750";
 import { o as _$$o } from "../905/938553";
 import { Ij, fy } from "../figma_app/559491";
 let $$E0 = createActionCreator("PLUGIN_INITIALIZE_LOCAL");
@@ -116,7 +116,7 @@ let $$S3 = createOptimistThunk(async e => {
             "codegen" !== i && A9({
               newTriggeredFrom: null
             });
-            _$$c();
+            incrementCounter();
           })();
         }
       });

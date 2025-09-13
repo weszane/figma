@@ -3,16 +3,16 @@ import { TU, xw, zw } from "../905/585727";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
-import { dZ } from "../figma_app/459490";
+import { isLlamaEnabledForOrg } from "../figma_app/459490";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { JT } from "../figma_app/632248";
 export function $$p0(e, t) {
   switch (e) {
     case JT.EDIT_IMAGE:
       return function (e) {
         let t = [];
-        getFeatureFlags().aip_edit_image_model_picker && (dZ(e) || t.push({
+        getFeatureFlags().aip_edit_image_model_picker && (isLlamaEnabledForOrg(e) || t.push({
           label: getI18nString("image_ai.model_type.gpt_image_1"),
           value: TU.OPENAI_GPT_IMAGE_1
         }), t.push({
@@ -24,7 +24,7 @@ export function $$p0(e, t) {
     case JT.GENERATE_IMAGE:
       return function (e) {
         let t = [];
-        dZ(e) || t.push({
+        isLlamaEnabledForOrg(e) || t.push({
           label: getI18nString("image_ai.model_type.gpt_image_1"),
           value: xw.GPT_4O_IMAGE
         });
@@ -41,7 +41,7 @@ export function $$p0(e, t) {
     case JT.IMAGE_FILL:
       return function (e) {
         let t = [];
-        dZ(e) || t.push({
+        isLlamaEnabledForOrg(e) || t.push({
           label: getI18nString("image_ai.model_type.gpt_image_1"),
           value: zw.GPT_4O_IMAGE
         });
@@ -66,7 +66,7 @@ export function $$m1({
   setModelType: t,
   action: i
 }) {
-  let r = $$p0(i, sZ());
+  let r = $$p0(i, useCurrentUserOrg());
   if (!r[0]) return null;
   let o = e ?? r[0].value;
   return jsxs(bL, {

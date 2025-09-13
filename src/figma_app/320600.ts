@@ -40,7 +40,7 @@ import { useCurrentFileKey, useOpenFileObjectWithSinatraType } from "../figma_ap
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
 import { isInvalidValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ht } from "../figma_app/178475";
 import { uw, i$ } from "../figma_app/582377";
 import { hF, Pf as _$$Pf, kL as _$$kL } from "../905/875676";
@@ -118,7 +118,7 @@ function q(e) {
     bigNudgeAmount: e.bigNudgeAmount,
     className: hF,
     "data-tooltip": e.propertyDescription,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: o,
     max: e.maxVal,
     min: e.minVal,

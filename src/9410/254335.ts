@@ -5,14 +5,14 @@ import { x as _$$x } from "../905/587214";
 import { r as _$$r } from "../905/571562";
 import { WorkspaceType } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { lg } from "../figma_app/976749";
 import { Te } from "../1250/12342";
 import { rE } from "../figma_app/186343";
 import { FFileType } from "../figma_app/191312";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { B as _$$B } from "../figma_app/539422";
 import { K0 } from "../figma_app/778125";
 import { A } from "../svg/871428";
@@ -50,7 +50,7 @@ export function $$v0({
     editorType: FFileType.WHITEBOARD,
     icon: jsx("div", {
       className: b,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: A
       })
     }),
@@ -81,7 +81,7 @@ export function $$v0({
     }), jsx(K0, {
       className: "new_page_dropdown--newPageButton--sYJsl",
       recordingKey: generateRecordingKey(e, "newPageDropdown"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.pages_panel.add_new_page"),
       "data-tooltip-show-above": !0,
       onMouseDown: toggleDropdown,

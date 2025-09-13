@@ -10,7 +10,7 @@ import { qZ } from "../figma_app/451396";
 import { XP } from "../figma_app/655139";
 import { mapPlatformToFramework } from "../905/359509";
 import { r as _$$r } from "../figma_app/821179";
-import { GS } from "../figma_app/314264";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { selectOpenFileKey, selectOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { Q } from "../905/618914";
 import { PreloadCodeConnectLk, FileCanAccessFullCodeConnect } from "../figma_app/43951";
@@ -258,7 +258,7 @@ async function O({
       continue;
     }
     if (Array.isArray(y) && (y = kN(y, p.nodeToFetch)), !y) continue;
-    y.source || y.templateData.imports?.length || GS("mcp.get_code_connect_mapping.missing_data", n, debugState.getState(), {
+    y.source || y.templateData.imports?.length || trackDefinedFileEvent("mcp.get_code_connect_mapping.missing_data", n, debugState.getState(), {
       componentName: y.component || "",
       source: y.source || ""
     });

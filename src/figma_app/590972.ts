@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { N as _$$N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import _ from "../vendor/241899";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { H as _$$H } from "../905/620380";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -62,10 +62,10 @@ import { j6, fu } from "../figma_app/831799";
 import { Yw, Of } from "../905/201596";
 import { Rv, mN } from "../figma_app/599979";
 import { eY } from "../figma_app/722362";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { e0 } from "../905/696396";
 import { t as _$$t3 } from "../figma_app/305141";
 import { _t } from "../figma_app/171413";
@@ -410,15 +410,15 @@ function eO({
     })]
   });
   _ = ev || draftSubmissionResult?.result !== "success" ? ev || draftSubmissionResult?.result !== "failure" ? jsxs(Fragment, {
-    children: [ea.isOnFirstTab ? jsx($n, {
+    children: [ea.isOnFirstTab ? jsx(Button, {
       variant: "secondary",
       onClick: q,
       children: getI18nString("general.cancel")
-    }) : !ev && jsx($n, {
+    }) : !ev && jsx(Button, {
       variant: "secondary",
       onClick: ea.selectPreviousTab,
       children: getI18nString("general.back")
-    }), ea.isOnLastTab ? jsx($n, {
+    }), ea.isOnLastTab ? jsx(Button, {
       disabled: draftSubmissionResult?.result === "pending" || ev,
       onClick: () => {
         checkProgress() && submit?.();
@@ -427,7 +427,7 @@ function eO({
       children: draftSubmissionResult?.result === "pending" || ev ? jsx(_$$k, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
-    }) : jsx($n, {
+    }) : jsx(Button, {
       onClick: () => {
         checkProgress() && ea.selectNextTab();
       },
@@ -455,7 +455,7 @@ function eO({
         successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
       children: getI18nString("general.go_back")
@@ -482,7 +482,7 @@ function eO({
     });
   }, [X]);
   let ex = Lz(e.fieldStates.name, "");
-  let eN = _$$A(() => {
+  let eN = useDebouncedCallback(() => {
     X.current($$in, {
       step: WX.EDIT_NAME
     });
@@ -491,7 +491,7 @@ function eO({
     ex && J.name.touched && eN();
   }, [ex, eN, J.name.touched]);
   let eO = Lz(e.fieldStates.description, "");
-  let eR = _$$A(() => {
+  let eR = useDebouncedCallback(() => {
     X.current($$in, {
       step: WX.EDIT_DESCRIPTION
     });
@@ -539,7 +539,7 @@ function eR(e) {
   } = e;
   let n = selectUser();
   let o = useSelector(e => xw(e) ?? void 0, deepEqual);
-  let l = sZ();
+  let l = useCurrentUserOrg();
   let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
@@ -570,7 +570,7 @@ export function $$eL0(e) {
     properties: {
       userId: t.user.id,
       orgId: t.org?.id,
-      resourceType: vt.HUB_FILE,
+      resourceType: ResourceTypeNoComment.HUB_FILE,
       resourceId: e.existingHubFile?.id,
       fileKey: e.figFile?.key,
       editorType: e.figFile?.editor_type,

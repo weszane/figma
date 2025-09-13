@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import a from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -13,7 +13,7 @@ export let $$u0 = forwardRef(function ({
   recordingKey: n,
   ...a
 }, u) {
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     actionOnPointerDown: !0,
     ref: u,
     className: o()("slides_flyout_input--input--cM6kp ellipsis--ellipsis--Tjyfa", _$$t, {

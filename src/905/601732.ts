@@ -9,7 +9,7 @@ import { H8, nl } from "../905/590952";
 import { Lz, Zc } from "../905/497882";
 import { LG } from "../905/448440";
 import { jr, j4, Z7, MO } from "../figma_app/599979";
-import { mr } from "../figma_app/45218";
+import { isWidgetOrPlugin } from "../figma_app/45218";
 import { o1 } from "../figma_app/10554";
 import { A as _$$A } from "../905/567946";
 import { iy, uK, O0, Ee, I1 } from "../905/916525";
@@ -22,7 +22,7 @@ export function $$$$A0({
   } = e.deps;
   let a = Lz(e, void 0);
   let s = useMemo(() => LG(existingResourceContent) ? allowedAuthors.filter(e => jr(e)) : [...allowedAuthors].sort((e, t) => v(e) - v(t)), [allowedAuthors, existingResourceContent]);
-  return existingResourceContent && mr(existingResourceContent) && !Zc(e) ? jsx(x, {
+  return existingResourceContent && isWidgetOrPlugin(existingResourceContent) && !Zc(e) ? jsx(x, {
     existingResourceContent
   }) : jsx(_$$A, {
     label: getI18nString("community.publishing.author_share_as"),
@@ -60,7 +60,7 @@ function y({
       className: I1,
       children: I(e)
     })]
-  }) : t && mr(t) ? jsx(S, {
+  }) : t && isWidgetOrPlugin(t) ? jsx(S, {
     publisher: t.publisher,
     value: r
   }) : null;

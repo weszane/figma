@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { q } from "../905/600041";
 import { F, y } from "../905/171275";
 import s from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A } from "../5724/971107";
 var o = s;
 function c(e) {
@@ -11,7 +11,7 @@ function c(e) {
       "locked_key_circle--keyCircle--UzcaU": !0,
       [e.additionalClassName || ""]: !!e.additionalClassName
     }),
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       className: o()({
         "locked_key_circle--keyIcon--mJECd": !0,
         [e.iconClassName || ""]: !!e.iconClassName

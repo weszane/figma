@@ -4,10 +4,10 @@ import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { T as _$$T } from "../905/909590";
-import { E as _$$E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { RecordingComponent, handleFocusEvent, generateRecordingKey } from "../figma_app/878298";
@@ -154,7 +154,7 @@ let x = class e extends RecordingComponent {
           children: jsx(B, {})
         }), jsx("div", {
           className: _$$u,
-          children: !this.props.isHistoryMode && !this.props.hideShowFullVersionHistoryCTA && jsx(_$$E, {
+          children: !this.props.isHistoryMode && !this.props.hideShowFullVersionHistoryCTA && jsx(ButtonPrimitive, {
             className: R,
             onClick: this.goHistoryMode,
             children: renderI18nText("fullscreen.savepoint_modal.show_full_version_history")
@@ -162,11 +162,11 @@ let x = class e extends RecordingComponent {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: this.onCancel,
             children: r
-          }), jsx($n, {
+          }), jsx(Button, {
             type: "submit",
             disabled: e,
             "data-testid": "savepoint-modal-submit",
@@ -198,7 +198,7 @@ let $$C1 = registerModal(function (e) {
   let f = r?.key;
   let y = fk(f);
   let b = N(c, h);
-  return r && null != f ? jsx(bL, {
+  return r && null != f ? jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -229,7 +229,7 @@ let $$w0 = registerModal(function (e) {
   let r = useDispatch();
   let s = useModalManager(e);
   let o = N(e.savepointID, !1);
-  return t ? jsx(bL, {
+  return t ? jsx(ModalRootComponent, {
     manager: s,
     width: "lg",
     children: jsxs(vo, {

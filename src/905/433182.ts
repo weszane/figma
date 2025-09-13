@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { SX } from "../figma_app/199513";
 import { Ah } from "../905/316062";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { rm } from "../905/989969";
 export function $$p0(e) {
   let t = useDispatch();
@@ -16,7 +16,7 @@ export function $$p0(e) {
   return jsxs("button", {
     className: rm,
     disabled: !p,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": p ? void 0 : getI18nString("file_browser.file_move.you_dont_have_edit_access_to_this_team"),
     "data-tooltip-show-above": !0,
     "data-tooltip-timeout-delay": 100,

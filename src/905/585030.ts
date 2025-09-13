@@ -11,7 +11,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { rY, XA } from "../905/985490";
 import { handleModalError, handleError, getDiffVersion } from "../905/760074";
-import { q } from "../905/807667";
+import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { Jr } from "../figma_app/624361";
 import { subscribeToContainingPages } from "../figma_app/582924";
 import { enterPreviewDetachedState, abandonBranchingChanges } from "../905/346794";
@@ -245,7 +245,7 @@ let j = async (e, t, i, n) => {
 };
 let U = e => {
   let t = performance.now();
-  return q(PluginModalType.BRANCHING_MODAL_OPEN).then(() => {
+  return handleLoadAllPagesWithVersionCheck(PluginModalType.BRANCHING_MODAL_OPEN).then(() => {
     rY.trackGranularLoadTime({
       durationMs: performance.now() - t,
       functionName: "waitForPagesToLoad",

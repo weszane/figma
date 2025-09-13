@@ -1,6 +1,6 @@
 import { qg } from "../vendor/149334";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { SiteMount } from "../figma_app/43951";
 let o = "dns_verification";
 export function $$l0(e) {
@@ -55,7 +55,7 @@ export function $$m3(e) {
     fileKey: e
   });
   if ("loaded" !== t.status) return null;
-  let r = oA(t.data?.siteMount);
+  let r = getResourceDataOrFallback(t.data?.siteMount);
   let o = r?.customDomain;
   let l = r?.siteDomain;
   if (!r || !l) return null;

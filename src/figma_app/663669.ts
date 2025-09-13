@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getSingletonSceneGraph } from "../905/700578";
 import { A } from "../vendor/850789";
-import { qc, _X } from "../figma_app/62612";
+import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
 let $$o0 = "1.2";
 let l = {
   noPanningZoomingMs: 300,
@@ -47,7 +47,7 @@ export function $$c3(e, t) {
     let {
       width,
       height
-    } = qc(t);
+    } = getVisibleArea(t);
     let a = width * height;
     let o = [];
     let l = [{
@@ -76,7 +76,7 @@ export function $$c3(e, t) {
         y,
         width,
         height
-      } = qc(t);
+      } = getVisibleArea(t);
       return Math.sqrt(Math.pow(x + width / 2 - (e.absoluteBoundingBox.x + e.absoluteBoundingBox.w / 2), 2) + Math.pow(y + height / 2 - (e.absoluteBoundingBox.y + e.absoluteBoundingBox.h / 2), 2));
     }(e, t));
     let i = e.map(e => m(e, t));
@@ -101,7 +101,7 @@ export function $$u2(e = {}) {
 }
 export function $$p4(e, t) {
   let r = $$u2(t);
-  let n = _X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: !e
   });
   let [i, {

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useState } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
@@ -222,7 +222,7 @@ function U({
   }) : jsxs("div", {
     children: [jsxs("div", {
       className: "codebase_suggestions_onboarding_step--buttons--VXcCO",
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "secondary",
         onClick: () => g("generate-token"),
         disabled: _,
@@ -230,7 +230,7 @@ function U({
         "data-tooltip": getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generate_token_tooltip"),
         "data-tooltip-type": "text",
         children: getI18nString("dev_handoff.codebase_suggestions.onboarding_step_2_generate_token")
-      }), n && jsx($n, {
+      }), n && jsx(Button, {
         variant: "link",
         onClick: () => g("use-existing-token"),
         disabled: _,
@@ -258,7 +258,7 @@ function $({
 }) {
   return jsx("div", {
     className: "codebase_suggestions_onboarding_steps--continueButtonContainer--hX-IW",
-    children: jsx($n, {
+    children: jsx(Button, {
       onClick: e,
       variant: "primary",
       children: getI18nString("dev_handoff.component_browser_onboarding.continue_button")

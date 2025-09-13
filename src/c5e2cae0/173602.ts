@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import r from "classnames";
 import { CY, $$ } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
-import { B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getLocalizedPath } from "../905/303541";
 import { vr } from "../figma_app/514043";
 import { jg, M7, Et, cc, O2, W as _$$W, Jo, Qv, aK, N5, I1, iv, Ed, nm, Xq } from "../c5e2cae0/763339";
@@ -42,7 +42,7 @@ export function $$h1(e) {
       className: i()(M7, Et),
       children: [jsxs("div", {
         className: cc,
-        children: [jsx(B, {
+        children: [jsx(SvgComponent, {
           svg: A,
           className: O2,
           useOriginalSrcFills_DEPRECATED: !0,
@@ -85,7 +85,7 @@ export function $$h1(e) {
           }), jsxs("div", {
             className: Ed,
             children: [!e.orgMigrated && jsxs(Fragment, {
-              children: [jsx(kt, {}), jsx("div", {
+              children: [jsx(LoadingSpinner, {}), jsx("div", {
                 className: nm,
                 children: renderI18nText("org_self_serve.confirmation_step.we_re_setting_up_your_organization")
               })]

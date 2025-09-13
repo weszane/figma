@@ -11,7 +11,7 @@ import { F as _$$F } from "../905/989956";
 import { z5 } from "../905/713722";
 import { F as _$$F2 } from "../905/258517";
 import { Yv } from "../figma_app/616107";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Z9, iN } from "../figma_app/634656";
 import { $n } from "../figma_app/439493";
 import { Fn, wM } from "../figma_app/769101";
@@ -254,7 +254,7 @@ export function $$L1({
   return a ? createElement(GG, {
     id: e,
     ...(t ? {} : {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("whiteboard.colors.custom"),
       "data-tooltip-show-above": !0
     }),
@@ -451,7 +451,7 @@ function P({
     }) => createElement(GG, {
       id: r,
       ...(H ? {} : {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.tooltip || V_(e.option, O),
         "data-tooltip-show-above": !0
       }),

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -180,7 +180,7 @@ function b(e) {
     selectedProduct,
     ...a
   } = e;
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     onClick,
     ...Ay.props(g.answerButton, selected && g.selectedAnswerButton, selected && selectedProduct === FFileType.FIGMAKE && g.selectedAnswerButtonMake),
     ...a,

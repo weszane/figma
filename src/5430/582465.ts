@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { parsePxNumber } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { AG } from "../figma_app/999312";
@@ -13,7 +13,7 @@ import { Fm } from "../figma_app/275462";
 import { PF } from "../figma_app/930386";
 import { G } from "../5430/654859";
 import { useDispatch } from "react-redux";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { ky, Dy, Je } from "../figma_app/925970";
 import { A as _$$A } from "../1617/586892";
 import { h63 } from "../figma_app/27776";
@@ -37,7 +37,7 @@ function b({
         })));
         u(!d);
       },
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         className: "search_input_mobile--searchIcon--ExTte",
         svg: _$$A
       })
@@ -87,7 +87,7 @@ export function $$w0({
   let L = useAtomWithSubscription(E);
   let T = getI18nString("community.search.placeholder");
   f && (T = Fm() ? getI18nString("community.search.search_templates_and_tools") : getI18nString("community.search.search_community_placeholder"));
-  let I = A(e, t ? 600 : 400);
+  let I = useDebouncedCallback(e, t ? 600 : 400);
   let N = useCallback(() => {
     C("");
   }, []);

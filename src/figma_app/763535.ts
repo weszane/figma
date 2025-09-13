@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { a as _$$a } from "../905/948337";
 import { mT } from "../figma_app/680166";
 import { G } from "../figma_app/35473";
@@ -12,7 +12,7 @@ export function $$$$c0(e) {
   } = mT(e.licenseType);
   let [c, u] = useState(!0);
   if (!c) return null;
-  let p = e.shouldShowCurf ? jsx($n, {
+  let p = e.shouldShowCurf ? jsx(Button, {
     variant: "primary",
     onClick: curfCtaHandler,
     children: curfCtaLabel

@@ -11,7 +11,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { q, l as _$$l } from "../905/190247";
 import { N as _$$N } from "../905/200059";
 import { s as _$$s } from "../905/817498";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { ds } from "../905/87821";
 import { f as _$$f } from "../905/70820";
@@ -58,7 +58,7 @@ export function $$W16() {
   $$R31?.setFileInfo(null, "unknown");
 }
 export function $$K4(e, t) {
-  $$R31 && ($$R31.setFileInfo(e, Dc(t)), $$R31.startRecording(!0), Jr().setPendingImagesCallback($$R31.pendingImagesChanged));
+  $$R31 && ($$R31.setFileInfo(e, mapEditorTypeToProductType(t)), $$R31.startRecording(!0), Jr().setPendingImagesCallback($$R31.pendingImagesChanged));
   A = e;
   N = performance.now();
   x++;
@@ -73,7 +73,7 @@ export function $$K4(e, t) {
   });
 }
 export function $$Y1(e) {
-  $$R31?.setFileInfo(A, Dc(e));
+  $$R31?.setFileInfo(A, mapEditorTypeToProductType(e));
 }
 export function $$$15() {
   $$R31?.stopRecordingAndLog("about-to-rebuild-scene");
@@ -179,7 +179,7 @@ function eb(e) {
   w = performance.now();
   O = e.duration;
 }
-function eT(...e) { }
+function eT(...e) {}
 export function $$eI18() {
   if (!fullscreenValue?.isReady()) return;
   let e = {};

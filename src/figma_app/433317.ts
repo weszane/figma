@@ -1,4 +1,4 @@
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { SiteBundles, SiteMountWithPublishEvents } from "../figma_app/43951";
 export function $$s0(e) {
@@ -11,8 +11,8 @@ export function $$s0(e) {
   if ("loaded" !== t.status || "loaded" !== r.status) return {
     isLoading: !0
   };
-  let s = oA(t.data?.siteBundles);
-  let o = oA(r.data?.siteMount);
+  let s = getResourceDataOrFallback(t.data?.siteBundles);
+  let o = getResourceDataOrFallback(r.data?.siteMount);
   let l = s?.find(e => "succeeded" === e.status) || null;
   let d = s?.find(e => null == e.completedAt) || null;
   let c = !o || "published" !== o.status;

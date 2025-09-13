@@ -1,19 +1,19 @@
 import a from 'classnames';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { Uv } from '../905/54385';
-import { Ib } from '../905/129884';
+import { isSubscription } from '../905/54385';
+import { KindEnum } from '../905/129884';
 import { renderI18nText } from '../905/303541';
 import { trackEventAnalytics } from '../905/449184';
 import { e0 } from '../905/696396';
 import { O as _$$O } from '../905/791978';
 import { s as _$$s } from '../cssbuilder/589278';
-import { aL, BS, I0, m3, U, xQ, zF } from '../figma_app/45218';
+import { ShelfViewType, isMonetizedWithClientMeta, isPlugin, hasMonetizedResourceMetadata, hasClientMeta, isWidget, isThirdPartyMonetized } from '../figma_app/45218';
 import { EditorType } from '../figma_app/155287';
 import { FTemplateCategoryType } from '../figma_app/191312';
 import { Dl } from '../figma_app/471982';
 import { e6 } from '../figma_app/617427';
 import { bV, Lt } from '../figma_app/808294';
-import { Z_ } from '../figma_app/858013';
+import { DefaultLoadingSpinner } from '../figma_app/858013';
 let s = a;
 let b = 'purchase_button_view--primaryText--TzFkq';
 export function $$T3(e, t, r, n) {
@@ -46,10 +46,10 @@ export function $$S1({
   enableWideButtonForStickyFooter: S,
   enableCondensedWideButtonForStickyFooter: A
 }) {
-  if (!m3(e) && !zF(e)) return null;
-  let x = m3(e);
-  let N = !!(U(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || (I0(e) || xQ(e)) && e.editor_type === EditorType.FIGJAM);
-  let C = r === aL.DETAIL && BS(e);
+  if (!hasMonetizedResourceMetadata(e) && !isThirdPartyMonetized(e)) return null;
+  let x = hasMonetizedResourceMetadata(e);
+  let N = !!(hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || (isPlugin(e) || isWidget(e)) && e.editor_type === EditorType.FIGJAM);
+  let C = r === ShelfViewType.DETAIL && isMonetizedWithClientMeta(e);
   let w = renderI18nText('community.buyer.preview');
   let O = jsx(e6, {
     onClick: I,
@@ -62,24 +62,24 @@ export function $$S1({
       children: w
     })
   });
-  let R = r === aL.PLUGIN_ROW || r === aL.REDESIGNED_PLUGIN_ROW;
+  let R = r === ShelfViewType.PLUGIN_ROW || r === ShelfViewType.REDESIGNED_PLUGIN_ROW;
   return jsxs('div', {
     className: s()('purchase_button_view--purchaseButtonView--ZeLJW', {
-      'purchase_button_view--purchaseButtonViewCondensed--M5D0j': r === aL.INSERTS
+      'purchase_button_view--purchaseButtonViewCondensed--M5D0j': r === ShelfViewType.INSERTS
     }),
     children: [jsxs('div', {
       className: 'purchase_button_view--buttonRow--ZYajj',
       children: [jsxs('button', {
-        'data-tooltip-type': o && !p && a ? Ib.TEXT : void 0,
+        'data-tooltip-type': o && !p && a ? KindEnum.TEXT : void 0,
         'data-tooltip': o && !p && a ? a : void 0,
         'data-tooltip-show-immediately': !0,
         'className': s()({
           'purchase_button_view--purchaseButton--wzhif': !R,
-          'purchase_button_view--purchaseButtonInPluginRowFigma--xHcMN purchase_button_view--pluginRowButton--3-urM': r === aL.PLUGIN_ROW && !N,
-          'purchase_button_view--purchaseButtonInPluginRowFigjam--6ClQE purchase_button_view--pluginRowButton--3-urM': r === aL.PLUGIN_ROW && N,
-          'purchase_button_view--purchaseButtonInRedesignedPluginRow--XjXwF text--fontPos11--2LvXf text--_fontBase--QdLsd': r === aL.REDESIGNED_PLUGIN_ROW,
-          'purchase_button_view--purchaseButtonLarge--iCRT- text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L': r !== aL.INSERTS && r !== aL.REDESIGNED_PLUGIN_ROW,
-          'purchase_button_view--purchaseButtonSmall--lodYh text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa': r === aL.INSERTS,
+          'purchase_button_view--purchaseButtonInPluginRowFigma--xHcMN purchase_button_view--pluginRowButton--3-urM': r === ShelfViewType.PLUGIN_ROW && !N,
+          'purchase_button_view--purchaseButtonInPluginRowFigjam--6ClQE purchase_button_view--pluginRowButton--3-urM': r === ShelfViewType.PLUGIN_ROW && N,
+          'purchase_button_view--purchaseButtonInRedesignedPluginRow--XjXwF text--fontPos11--2LvXf text--_fontBase--QdLsd': r === ShelfViewType.REDESIGNED_PLUGIN_ROW,
+          'purchase_button_view--purchaseButtonLarge--iCRT- text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L': r !== ShelfViewType.INSERTS && r !== ShelfViewType.REDESIGNED_PLUGIN_ROW,
+          'purchase_button_view--purchaseButtonSmall--lodYh text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa': r === ShelfViewType.INSERTS,
           'purchase_button_view--purchaseButtonWide--ZXR-S': S,
           'purchase_button_view--purchaseButtonWideCondensed--AssEb': A,
           'purchase_button_view--figjam--alLiu': !R && N,
@@ -88,7 +88,7 @@ export function $$S1({
         'disabled': p || o,
         'onClick': T,
         'data-testid': 'community-purchase-button',
-        'children': [p && jsx(Z_, {}), zF(e) && jsx(_$$O, {
+        'children': [p && jsx(DefaultLoadingSpinner, {}), isThirdPartyMonetized(e) && jsx(_$$O, {
           style: {
             '--color-icon': 'white'
           }
@@ -97,20 +97,20 @@ export function $$S1({
             opacity: p ? 0 : 1
           },
           className: b,
-          children: x && Uv(e.monetized_resource_metadata) ? renderI18nText('community.buyer.subscribe') : zF(e) ? renderI18nText('community.buyer.buy_third_party_monetized') : renderI18nText('community.buyer.buy')
+          children: x && isSubscription(e.monetized_resource_metadata) ? renderI18nText('community.buyer.subscribe') : isThirdPartyMonetized(e) ? renderI18nText('community.buyer.buy_third_party_monetized') : renderI18nText('community.buyer.buy')
         }), jsx('div', {
           style: {
             opacity: p ? 0 : 1
           },
           className: s()({
             'purchase_button_view--secondaryText--P5Gzo': !R,
-            [b]: r === aL.PLUGIN_ROW,
-            [_$$s.colorText.$]: r === aL.REDESIGNED_PLUGIN_ROW
+            [b]: r === ShelfViewType.PLUGIN_ROW,
+            [_$$s.colorText.$]: r === ShelfViewType.REDESIGNED_PLUGIN_ROW
           }),
           children: x && bV(e.monetized_resource_metadata)
         })]
       }), C && O]
-    }), r === aL.DETAIL && x && Lt({
+    }), r === ShelfViewType.DETAIL && x && Lt({
       resource: e,
       payment: t
     }) && jsx($$v0, {

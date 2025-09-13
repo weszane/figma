@@ -19,7 +19,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { G_ } from "../figma_app/99826";
 import { Point } from "../905/736624";
 import { N_, CY, ks } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { handleAtomEvent } from "../905/502364";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -38,7 +38,7 @@ import { showModalHandler, popModalStack, hideModal } from "../905/156213";
 import { WX } from "../figma_app/350203";
 import { tf as _$$tf, fu } from "../figma_app/831799";
 import { A as _$$A2 } from "../905/72153";
-import { ye } from "../figma_app/314264";
+import { trackGenericEvent } from "../figma_app/314264";
 import { D as _$$D, HN, oH } from "../figma_app/740025";
 import { o0, Ro, jY } from "../figma_app/564095";
 import { j4, UU, of, f7, kN, Dd, $W, oB as _$$oB, xw } from "../figma_app/599979";
@@ -51,9 +51,9 @@ import { getPermissionsState, canMemberOrg, canAdminOrg } from "../figma_app/642
 import { getPluginVersion, pluginMetadata, validateAndResizeIconImage, getFirstFileOrThrow, getFullscreenViewEditorType, getPublishingRole, hasRoleOrOrgChanged, getLocalFileId, getOrgRole, isDevModePlugin, getPublishingErrors, validatePublishingData, validatePublishingDataLengths, getPublishedResourceOrNull, getPublishedResource, getPublishingData } from "../figma_app/300692";
 import { qu, UR } from "../905/671449";
 import { w3 } from "../905/481915";
-import { dj, bD, hE, vt } from "../figma_app/45218";
+import { FileInputType, ResourceType, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
 import { kM, k2, aP } from "../figma_app/10554";
-import { PN } from "../905/54385";
+import { ProductStatus } from "../905/54385";
 import { PublisherType, ManifestEditorType } from "../figma_app/155287";
 import { SourceType } from "../figma_app/175992";
 import { e0 as _$$e2 } from "../905/696396";
@@ -72,8 +72,8 @@ import { gI } from "../905/277373";
 import { sU, WM, Wh } from "../905/838765";
 import { z as _$$z } from "../905/255946";
 import { dn } from "../figma_app/994403";
-import { B as _$$B } from "../905/714743";
-import { E as _$$E } from "../905/984674";
+import { SvgComponent } from "../905/714743";
+import { TextWithTruncation } from "../905/984674";
 import { y$ } from "../figma_app/835219";
 import { A as _$$A3 } from "../1617/45452";
 import { yX, Vl } from "../905/540198";
@@ -87,7 +87,7 @@ import { K as _$$K } from "../905/443068";
 import { J as _$$J3 } from "../905/125993";
 import { c$ } from "../figma_app/236327";
 import { Um } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Cf } from "../905/504727";
 import { A as _$$A6 } from "../905/794518";
 import { O as _$$O } from "../905/483217";
@@ -96,7 +96,7 @@ import { Oc, EY as _$$EY, Fu, YK, KG, iS as _$$iS, YT, r9, $h, er as _$$er, j as
 import { t as _$$t2 } from "../905/331623";
 import { A as _$$A7 } from "../1617/805095";
 import { v as _$$v } from "../905/442517";
-import { A as _$$A8 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { v as _$$v2 } from "../905/318279";
 import { jE } from "../figma_app/639088";
 import { A as _$$A9 } from "../5724/965092";
@@ -181,7 +181,7 @@ function eR() {
         opacity: "0.3"
       }).$,
       children: jsx(y$, {})
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       color: "default",
       fontSize: 11,
       children: renderI18nText("community.cards.generating_widget_thumbnail")
@@ -203,9 +203,9 @@ function eN(e) {
   });
   return jsxs("div", {
     className: ey()(_$$s4.cursorDefault.flex.flexColumn.gap10.itemsCenter.justifyCenter.bRadius8.p12.wFull.$),
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A3
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       color: "default",
       fontSize: 11,
       children: renderI18nText("upload" === e.cardType ? "community.cards.upload_your_widget_thumbnail" : "community.cards.update_your_widget_thumbnail", {
@@ -303,15 +303,15 @@ let eF = registerModal(function (e) {
     cancelText: getI18nString("general.go_back"),
     popStack: !0,
     children: isWidget ? jsxs(Fragment, {
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.close_confirmation_modal.data_security_body_1.widget")
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.close_confirmation_modal.data_security_body_2.widget")
       })]
     }) : jsxs(Fragment, {
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.close_confirmation_modal.data_security_body_1.plugin")
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.close_confirmation_modal.data_security_body_2.plugin")
       })]
     })
@@ -343,7 +343,7 @@ function eZ(e) {
         }));
       },
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.publishing.playground_file.tooltip")
       },
       children: jsx(_$$J3, {})
@@ -450,14 +450,14 @@ function e2({
               href: "https://www.figma.com/community/file/1174497187775558195",
               target: "_blank",
               onClick: () => {
-                ye("playground_template_link_click", {
+                trackGenericEvent("playground_template_link_click", {
                   isWidget: t,
                   userId: u,
                   pluginId: e
                 });
               },
               trusted: !0,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "brand",
                 children: renderI18nText("community.publishing.use_our_template")
               })
@@ -495,12 +495,12 @@ function e5({
           c(oB());
           o();
         },
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "brand",
           children: renderI18nText("community.publishing.playground_file.dropdown.update_to_latest_version")
         })
       }), m && jsx("div", {
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: "regular",
           color: "secondary",
           children: renderI18nText("community.publishing.playground_file.updated_version_confirmation", {
@@ -510,7 +510,7 @@ function e5({
                 c(oB());
                 l();
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "brand",
                 children: renderI18nText("community.undo")
               })
@@ -584,14 +584,14 @@ let e9 = function ({
     let e = c.current;
     e && (await f({
       files: e.files,
-      src: dj.FILE_INPUT
+      src: FileInputType.FILE_INPUT
     }));
   };
   let A = async e => {
     await f({
       files: e.clipboardData?.files,
       allowScaling: !0,
-      src: dj.PASTE
+      src: FileInputType.PASTE
     });
   };
   let y = async e => {
@@ -599,7 +599,7 @@ let e9 = function ({
     e.stopPropagation();
     await f({
       files: e.dataTransfer?.files,
-      src: dj.DROP
+      src: FileInputType.DROP
     });
   };
   let b = () => {
@@ -742,7 +742,7 @@ function ta({
       currentVersionReleaseNotes: i
     });
   }, [e, t]);
-  let u = _$$A8(c, 200);
+  let u = useDebouncedCallback(c, 200);
   let p = n ? getI18nString("community.publishing.whats_changed_in_this_new_version") : getI18nString("community.publishing.what_can_users_expect_in_this_current_version");
   return jsx(_$$A6, {
     label: getI18nString("community.publishing.version_release_notes"),
@@ -785,15 +785,15 @@ let to = registerModal(function (e) {
 }, "ConfirmChangePluginProfileModal");
 let tl = registerModal(function (e) {
   let t = {
-    authorName: jsx(_$$E, {
+    authorName: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: e.authorName
     }),
-    orgName: jsx(_$$E, {
+    orgName: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: e.parentOrgName
     }),
-    publishers: jsx(_$$E, {
+    publishers: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: e.usersToRemove.map(e => e.handle).join(", ")
     })
@@ -804,7 +804,7 @@ let tl = registerModal(function (e) {
     confirmText: getI18nString("community.publishing.confirm_remove_non_org_publishers_modal.publish_anyway"),
     onConfirm: e.onConfirm,
     popStack: !0,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText(e.isWidget ? "community.publishing.confirm_remove_non_org_publishers_modal.permissions_removed_body.widget" : "community.publishing.confirm_remove_non_org_publishers_modal.permissions_removed_body.plugin", t)
     })
   });
@@ -814,7 +814,7 @@ function tc() {
     className: Fu,
     children: jsxs("div", {
       className: "plugin_publish_modal--warningBannerContainerFreemium--Kwqq3 publish_modal--warningBannerContainer--xPWDk publish_modal--infoBannerContainer--4XOeF",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: YK,
         svg: _$$A9
       }), jsx("span", {
@@ -865,13 +865,13 @@ let tC = registerModal(function (e) {
     onConfirm: e.onConfirm,
     onCancel: e.onCancel,
     popStack: !0,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: renderI18nText("file_browser.modal.are_you_sure_to_transfer_ownership", {
         newOwnerName: e.newOwnerName,
         resourceName: e.resourceName
       })
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       children: renderI18nText("file_browser.modal.cannot_undo_warning")
     })]
   });
@@ -909,7 +909,7 @@ function tP({
         user: e
       })
     }), jsx("div", {
-      children: jsxs(_$$E, {
+      children: jsxs(TextWithTruncation, {
         color: t ? "tertiary" : void 0,
         children: [tN(e), " ", t && renderI18nText("community.publish.pending"), " ", i && renderI18nText("role_row.you_label"), " "]
       })
@@ -1017,7 +1017,7 @@ function tD({
         isPending: !1,
         isCurrentUser: !0,
         user: t
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.publisher_role_owner")
       })]
     })]
@@ -1029,7 +1029,7 @@ function tL({
   let t = Ts(e.content) ? e.content.handle : e.content;
   return jsx("span", {
     className: _$$s4.maxW300.overflowHidden.ellipsis.noWrap.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: t
     })
   });
@@ -1075,7 +1075,7 @@ function tM({
   useEffect(() => {
     m !== k2.RESOURCE_PAGE && A(uX({
       resourceId: d.id,
-      resourceType: d.is_widget ? bD.WIDGET : bD.PLUGIN
+      resourceType: d.is_widget ? ResourceType.WIDGET : ResourceType.PLUGIN
     }));
   }, [A, d.id, d.is_widget, m]);
   let b = !!d.roles.org && !d.roles.is_public && d.publishing_status === FPublicationStatusType.ORG_PRIVATE;
@@ -1220,11 +1220,11 @@ function tj({
   isPrivateResource: t,
   gotoCreatedBySection: i
 }) {
-  return e.includes(KM.PUBLISH) ? getFeatureFlags().ext_plugin_publish_rearch ? jsx(_$$E, {
+  return e.includes(KM.PUBLISH) ? getFeatureFlags().ext_plugin_publish_rearch ? jsx(TextWithTruncation, {
     children: t ? getI18nString("community.publishing.permissions.org_private_info_text") : getI18nString("community.publishing.anyone_you_invite_can_publish")
-  }) : t ? jsx(_$$E, {
+  }) : t ? jsx(TextWithTruncation, {
     children: renderI18nText("community.publishing.permissions.org_private_info_text")
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     children: renderI18nText("community.publishing.people_given_update_permissions_are_not_visible_to_the_public", {
       createdByLink: jsx("button", {
         onClick: i,
@@ -1337,7 +1337,7 @@ function tK({
   }) : jsxs("div", {
     children: [jsx("div", {
       className: _$$s4.h32.flex.flexRow.itemsCenter.ellipsis.noWrap.overflowHidden.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 12,
         children: renderI18nText("community.community")
       })
@@ -1355,7 +1355,7 @@ function tY({
   let n = e.roles;
   let a = e.is_widget;
   if (Ul(e) || t === PublisherType.ORG) return null;
-  if (null != n.org && t === PublisherType.PUBLIC) i = jsx(_$$E, {
+  if (null != n.org && t === PublisherType.PUBLIC) i = jsx(TextWithTruncation, {
     children: renderI18nText(a ? "community.publishing.figma_reviews_all_resources_published_to_community_org_private.widget" : "community.publishing.figma_reviews_all_resources_published_to_community_org_private.plugin", {
       orgName: n.org.name
     })
@@ -1366,7 +1366,7 @@ function tY({
       trusted: !0,
       children: renderI18nText("community.publishing.see_our_guidelines_here")
     });
-    i = jsx(_$$E, {
+    i = jsx(TextWithTruncation, {
       children: renderI18nText(a ? "community.publishing.resources_published_to_the_public_will_be_reviewed.widget" : "community.publishing.resources_published_to_the_public_will_be_reviewed.plugin", {
         seeOurGuidelinesLink: e
       })
@@ -1702,7 +1702,7 @@ function iE({
 }) {
   let s = null;
   if (qu(t) && !e) s = jsx(ix, {
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("community.publishing.data_security.initial", {
         buttonText: jsx(iS, {
           text: i ? getI18nString("community.publishing.data_security.initial_button.widget") : getI18nString("community.publishing.data_security.initial_button.plugin"),
@@ -1713,18 +1713,18 @@ function iE({
   });else if (t) {
     let o = UR(t, e);
     s = a && e ? e.status === FRequestStatusType.APPROVED ? jsx(ix, {
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText(i ? "community.publishing.data_security.opted_out.approved.widget" : "community.publishing.data_security.opted_out.approved.plugin")
       })
     }) : jsx(ix, {
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.data_security.opted_out.pending_rejected")
       })
     }) : 0 === o ? jsxs(ix, {
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: _$$s4.colorIcon.$,
         svg: _$$A26
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.data_security.ready_to_submit", {
           buttonText: jsx(iS, {
             text: getI18nString("community.publishing.data_security.security_details_button"),
@@ -1748,7 +1748,7 @@ function iE({
             horizontal: 8
           },
           cornerRadius: 3,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "danger",
             children: renderI18nText("community.publishing.data_security.number_of_errors", {
               num: o
@@ -1760,10 +1760,10 @@ function iE({
   } else if (e) switch (e.status) {
     case FRequestStatusType.PENDING:
       s = jsxs(ix, {
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: _$$s4.colorIcon.$,
           svg: _$$A26
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText("community.publishing.data_security.pending", {
             buttonText: jsx(iS, {
               text: getI18nString("community.publishing.data_security.security_details_button"),
@@ -1775,7 +1775,7 @@ function iE({
       break;
     case FRequestStatusType.APPROVED:
       s = jsxs(ix, {
-        children: [jsx(_$$_, {}), jsx(_$$E, {
+        children: [jsx(_$$_, {}), jsx(TextWithTruncation, {
           children: renderI18nText("community.publishing.data_security.approved", {
             buttonText: jsx(iS, {
               text: getI18nString("community.publishing.data_security.security_details_button"),
@@ -1787,7 +1787,7 @@ function iE({
       break;
     case FRequestStatusType.REJECTED:
       s = jsx(ix, {
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText("community.publishing.data_security.rejected", {
             buttonText: jsx(iS, {
               text: getI18nString("community.publishing.security_form.learn_more_arrow"),
@@ -1865,7 +1865,7 @@ function iO({
       value: e,
       onChange: t,
       spellCheck: !1,
-      placeholder: i === bD.WIDGET ? getI18nString("community.publishing.widget_tagline_input_placeholder") : getI18nString("community.publishing.plugin_tagline_input_placeholder")
+      placeholder: i === ResourceType.WIDGET ? getI18nString("community.publishing.widget_tagline_input_placeholder") : getI18nString("community.publishing.plugin_tagline_input_placeholder")
     })
   });
 }
@@ -2160,7 +2160,7 @@ class iW extends Component {
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
-          isSubscription: e === hE.SUBSCRIPTION
+          isSubscription: e === PaymentType.SUBSCRIPTION
         }
       }));
     };
@@ -2269,7 +2269,7 @@ class iW extends Component {
       });
       this.props.validPluginId || reportError(_$$e.COMMUNITY, Error("validPluginId is undefined but should have been validated already"));
       let i = this.props.validPluginId ?? "";
-      let n = this.props.publishedPlugin.third_party_m10n_status === PN.FLAGGED && metadata.isPaid;
+      let n = this.props.publishedPlugin.third_party_m10n_status === ProductStatus.FLAGGED && metadata.isPaid;
       if (!this.isInEditPageMode() && (this.state.shouldIncrementVersion || n) && this.props.localPlugin) {
         trackEventAnalytics("plugin_publish_details_view_publish", {
           pluginId: this.props.publishedPlugin?.id,
@@ -2644,7 +2644,7 @@ class iW extends Component {
     this.getPricingDisabledMessage = (e, t) => {
       let i = null;
       let n = !!e.hasPaymentsApi;
-      !t.current_plugin_version_id || t.monetized_resource_metadata || n || t.third_party_m10n_status === PN.FLAGGED ? "org_id" in e.author ? i = renderI18nText("community.seller.orgs_cannot_sell") : "team_id" in e.author ? i = renderI18nText("community.seller.teams_cannot_sell") : this.isPrivateResource() && (i = renderI18nText("community.seller.resource_is_private")) : i = renderI18nText("community.seller.only_new_resources_can_be_sold_on_community");
+      !t.current_plugin_version_id || t.monetized_resource_metadata || n || t.third_party_m10n_status === ProductStatus.FLAGGED ? "org_id" in e.author ? i = renderI18nText("community.seller.orgs_cannot_sell") : "team_id" in e.author ? i = renderI18nText("community.seller.teams_cannot_sell") : this.isPrivateResource() && (i = renderI18nText("community.seller.resource_is_private")) : i = renderI18nText("community.seller.only_new_resources_can_be_sold_on_community");
       return i;
     };
     this.canUserSellPluginOnCmty = () => {
@@ -2655,7 +2655,7 @@ class iW extends Component {
       if (!this.canUserSellPluginOnCmty()) return null;
       let i = this.props.publishedPlugin;
       let n = !!e.hasPaymentsApi;
-      if (i.current_plugin_version_id && !i.monetized_resource_metadata && !n && i.third_party_m10n_status !== PN.FLAGGED) return null;
+      if (i.current_plugin_version_id && !i.monetized_resource_metadata && !n && i.third_party_m10n_status !== ProductStatus.FLAGGED) return null;
       let a = e.isPaid || this.isPaidResource();
       let s = this.isPrivateResource();
       let o = this.isPaidResource();
@@ -2751,7 +2751,7 @@ class iW extends Component {
         children: renderI18nText("community.publishing.you_can_also_invite_other_people_to_update", {
           inviteOtherPeopleLink: jsx(CY, {
             onClick: () => {
-              ye("plugin_publish_invite_others_click", {
+              trackGenericEvent("plugin_publish_invite_others_click", {
                 userId: this.props.user.id,
                 pluginId: t.id,
                 isWidget: this.isWidget()
@@ -2774,7 +2774,7 @@ class iW extends Component {
           children: renderI18nText("community.publishing.see_our_guidelines_here")
         });
         return {
-          title: s === bD.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.plugin") : getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.widget"),
+          title: s === ResourceType.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.plugin") : getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.widget"),
           description: jsxs(Fragment, {
             children: [jsx("p", {
               className: e0,
@@ -2787,13 +2787,13 @@ class iW extends Component {
               })
             }), jsxs("p", {
               className: e0,
-              children: [s === bD.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.once_approved"), s === bD.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.once_approved")]
+              children: [s === ResourceType.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.once_approved"), s === ResourceType.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.once_approved")]
             }), o, l]
           })
         };
       }
       return n.org ? {
-        title: s === bD.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin.to_organization") : getI18nString("community.publishing.success_your_resource_has_been_published.widget.to_organization"),
+        title: s === ResourceType.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin.to_organization") : getI18nString("community.publishing.success_your_resource_has_been_published.widget.to_organization"),
         description: jsxs(Fragment, {
           children: [jsx("p", {
             className: e0,
@@ -2806,11 +2806,11 @@ class iW extends Component {
             })
           }), jsxs("p", {
             className: e0,
-            children: [s === bD.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.with_your_teammates"), s === bD.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.with_your_teammates")]
+            children: [s === ResourceType.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.with_your_teammates"), s === ResourceType.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.with_your_teammates")]
           }), o, l]
         })
       } : {
-        title: s === bD.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin") : getI18nString("community.publishing.success_your_resource_has_been_published.widget"),
+        title: s === ResourceType.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin") : getI18nString("community.publishing.success_your_resource_has_been_published.widget"),
         description: jsxs(Fragment, {
           children: [jsx("p", {
             className: e0,
@@ -2822,7 +2822,7 @@ class iW extends Component {
             })
           }), jsxs("p", {
             className: e0,
-            children: [s === bD.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin"), s === bD.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget")]
+            children: [s === ResourceType.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin"), s === ResourceType.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget")]
           }), o, l]
         })
       };
@@ -2834,9 +2834,9 @@ class iW extends Component {
         children: [jsx("div", {
           className: "plugin_publish_modal--publishHeader--xNFHi publish_modal--publishHeader--SA7W2 text--fontPos14--OL9Hp text--_fontBase--QdLsd",
           children: renderI18nText("general.error")
-        }), this.resourceType() === bD.PLUGIN && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.plugin", {
+        }), this.resourceType() === ResourceType.PLUGIN && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.plugin", {
           filename: "manifest.json"
-        }), this.resourceType() === bD.WIDGET && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.widget", {
+        }), this.resourceType() === ResourceType.WIDGET && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.widget", {
           filename: "manifest.json"
         }), jsx(_$$M, {
           onClick: () => this.close(),
@@ -2960,7 +2960,7 @@ class iW extends Component {
       ...validatePublishingData(metadata, this.getPluginManifest(), this.isWidget(), this.props.publishedPlugin)
     });
     let a = this.props.localPlugin?.manifest;
-    a?.enableProposedApi && (i.usesProposedApi = this.resourceType() === bD.PLUGIN ? getI18nString("community.publishing.cannot_publish_using_enableProposedApi.plugin") : getI18nString("community.publishing.cannot_publish_using_enableProposedApi.widget"));
+    a?.enableProposedApi && (i.usesProposedApi = this.resourceType() === ResourceType.PLUGIN ? getI18nString("community.publishing.cannot_publish_using_enableProposedApi.plugin") : getI18nString("community.publishing.cannot_publish_using_enableProposedApi.widget"));
     (!this.canUserSellPluginOnCmty() || !this.props.user.stripe_account_status) && a?.permissions?.includes("payments") && (i.notApprovedSeller = getI18nString("community.publishing.cannot_use_payments_api_if_non_approved"));
     this.isPublishingLegoPlugin() && this.props.localPlugin?.manifest.editorType?.includes(ManifestEditorType.INSPECT) && (i.lego = getI18nString("community.publishing.cannot_publish_with_inspect_editor_type"));
     $i(a) && (a?.containsWidget || this.isFirstTimePublish()) && (i.incrementalMode = getI18nString("community.publishing.cannot_publish_without_document_access"));
@@ -2996,25 +2996,25 @@ class iW extends Component {
   }
   renderIsPaidPricingSection(e, t, i, n) {
     return jsxs(Fragment, {
-      children: [this.resourceType() === bD.PLUGIN && jsx(_$$A6, {
+      children: [this.resourceType() === ResourceType.PLUGIN && jsx(_$$A6, {
         label: getI18nString("community.seller.payment_type"),
         labelId: "plugin-publish-modal-payment-type-label",
         disabled: i || !n,
         children: jsx("form", {
           children: jsx(_$$b, {
-            value: this.props.publishingState.metadata.isSubscription ? hE.SUBSCRIPTION : hE.ONE_TIME,
+            value: this.props.publishingState.metadata.isSubscription ? PaymentType.SUBSCRIPTION : PaymentType.ONE_TIME,
             onChange: this.onSubscriptionSettingChange,
             "aria-labelledby": "plugin-publish-modal-payment-type-label",
             children: jsxs("div", {
               className: "plugin_publish_modal--paymentTypeRadioOptions--gguqu",
               children: [jsx(_$$c, {
-                value: hE.ONE_TIME,
+                value: PaymentType.ONE_TIME,
                 readonly: !!i || !n || void 0,
                 label: jsx(Label, {
                   children: renderI18nText("community.seller.one_time_payment")
                 })
               }), jsx(_$$c, {
-                value: hE.SUBSCRIPTION,
+                value: PaymentType.SUBSCRIPTION,
                 readonly: !!i || !n || void 0,
                 label: jsx(Label, {
                   children: renderI18nText("community.seller.monthly_subscription")
@@ -3252,7 +3252,7 @@ class iW extends Component {
         name: metadata.name,
         orgId: this.getOrgIdFromPublisherOrRole(),
         resourceId: this.getLocalFileIdOrPluginId(),
-        resourceType: this.props.publishedPlugin && this.props.publishedPlugin.is_widget ? vt.WIDGET : vt.PLUGIN,
+        resourceType: this.props.publishedPlugin && this.props.publishedPlugin.is_widget ? ResourceTypeNoComment.WIDGET : ResourceTypeNoComment.PLUGIN,
         updateCarouselMedia: this.updateCarouselMedia,
         userId: this.props.user.id
       })
@@ -3294,7 +3294,7 @@ class iW extends Component {
                 });
                 i || this.onPublishClick();
               },
-              children: i ? jsx(kt, {
+              children: i ? jsx(LoadingSpinner, {
                 className: "plugin_publish_modal--spinner--ycI09 publish_modal--spinner--7DaqW"
               }) : this.getPublishFormPrimaryButtonText()
             })]
@@ -3491,7 +3491,7 @@ let $$iq0 = registerModal(function (e) {
     unpublishedPlugins: n ?? void 0,
     unpublishedWidgets: s ?? void 0,
     existingSecurityFormResponse: l.data
-  }) : jsx(kt, {});
+  }) : jsx(LoadingSpinner, {});
 }, "PluginPublishModal", ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalPostFormFlow = function (e) {
   let t = useDispatch();

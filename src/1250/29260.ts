@@ -6,12 +6,12 @@ import { K } from "../905/443068";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { bL, DZ, mc, c$ } from "../905/493196";
-import { Pw, $n } from "../905/521428";
+import { ButtonLargeWide, Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { A as _$$A } from "../905/251970";
 import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { buildUploadUrl } from "../figma_app/169182";
 import { getAtomWithEnabledCheck } from "../figma_app/566371";
 import { oW } from "../905/675859";
@@ -289,12 +289,12 @@ function z({
             children: e.name
           }, e.id))
         })]
-      }), jsx(Pw, {
+      }), jsx(ButtonLargeWide, {
         variant: "primary",
         disabled: !d || m.isLoading,
         onClick: h,
         children: getFeatureFlags().dt_component_browser_inline_suggestions ? getI18nString("dev_handoff.component_browser_onboarding.continue_button") : getI18nString("dev_handoff.component_browser_onboarding.github_connect_repository")
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "link",
         onClick: o,
         children: getI18nString("dev_handoff.component_browser_onboarding.cancel")
@@ -357,7 +357,7 @@ function $({
       })]
     }), jsx("div", {
       className: U,
-      children: jsx(Pw, {
+      children: jsx(ButtonLargeWide, {
         variant: "primary",
         onClick: () => {
           o.mutate({
@@ -379,7 +379,7 @@ function q({
   let [s, l] = useState(!1);
   let d = OG(t);
   let c = d?.selectedRepositories[0]?.id;
-  let m = hC();
+  let m = trackDefinedFileEventWithStore();
   let {
     directories,
     isLoading,
@@ -450,12 +450,12 @@ function q({
         })]
       }), jsxs("div", {
         className: "github_settings_modal--directoryButtonContainer--lj-1R",
-        children: [jsx(Pw, {
+        children: [jsx(ButtonLargeWide, {
           variant: "primary",
           disabled: isLoading || s || !x,
           onClick: k,
           children: directories.length > 0 ? getI18nString("dev_handoff.component_browser_onboarding.directory_selection_update") : getI18nString("dev_handoff.component_browser_onboarding.directory_selection_connect")
-        }), jsx(Pw, {
+        }), jsx(ButtonLargeWide, {
           variant: "secondary",
           onClick: () => {
             m("component_browser.directory_picker_skipped");

@@ -4,7 +4,7 @@ import i from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { x$, cn } from "../figma_app/141320";
 import { Us, vd } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Dw } from "../figma_app/976345";
@@ -78,7 +78,7 @@ export let $$k0 = registerModal(function (e) {
       onClose: S,
       children: [jsxs("div", {
         className: o()(_$$s.flex.itemsCenter.p8.$, _$$s.$$if(C > 0, _$$s.colorBgWarningTertiary, _$$s.colorBgDangerTertiary).$),
-        children: [jsx(B, {
+        children: [jsx(SvgComponent, {
           className: _$$s.p8.colorIcon.$,
           svg: _$$A
         }), jsx("p", {

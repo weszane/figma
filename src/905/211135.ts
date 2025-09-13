@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
-import { $n } from "../905/521428";
-import { bL } from "../905/38914";
+import { Button } from "../905/521428";
+import { ModalRootComponent } from "../905/38914";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
@@ -30,7 +30,7 @@ export let $$y0 = registerModal(function (e) {
     f && hasPasswordOrSSO(f) && b(Ve({
       token: f.password_token
     }));
-  }), f) ? jsx(bL, {
+  }), f) ? jsx(ModalRootComponent, {
     manager: v,
     width: "lg",
     children: hasPasswordOrSSO(f) ? jsxs(vo, {
@@ -59,7 +59,7 @@ export let $$y0 = registerModal(function (e) {
       }), jsx(wi, {
         children: jsxs("div", {
           className: Hx,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "link",
             onClick: () => {
               b(MV());
@@ -67,14 +67,14 @@ export let $$y0 = registerModal(function (e) {
             children: renderI18nText("auth.two-factor-setup.regenerate_codes")
           }), jsxs("div", {
             className: G6,
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: e => {
                 e.preventDefault();
                 b(popModalStack());
               },
               children: renderI18nText("auth.two-factor-setup.close")
-            }), jsx($n, {
+            }), jsx(Button, {
               onClick: () => {
                 b(popModalStack());
                 b(Yu());

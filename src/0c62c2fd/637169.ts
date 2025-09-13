@@ -15,7 +15,7 @@ import { e as _$$e } from "../905/621515";
 import { z4 } from "../905/37051";
 import { Z } from "../905/104740";
 import { EE, lB } from "../figma_app/731583";
-import { _X, QZ } from "../figma_app/62612";
+import { getViewportInfo, computeFullscreenViewportForNode } from "../figma_app/62612";
 import { N as _$$N } from "../figma_app/268271";
 import { F_ } from "../905/858282";
 import { NJ } from "../figma_app/419216";
@@ -32,7 +32,7 @@ function k({
 }) {
   let [r, n] = useState(null);
   let o = useRef(null);
-  let l = _X({
+  let l = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let d = useCallback(() => {
@@ -126,7 +126,7 @@ export function $$$$A1() {
     }
   });
   async function U() {
-    c && r && SceneGraphHelpers && (await getSingletonSceneGraph().setCurrentPageAsync(r), SceneGraphHelpers.replaceSelection([c], !0), await F(await QZ({
+    c && r && SceneGraphHelpers && (await getSingletonSceneGraph().setCurrentPageAsync(r), SceneGraphHelpers.replaceSelection([c], !0), await F(await computeFullscreenViewportForNode({
       nodeId: c,
       alwaysPan: !0
     }), {

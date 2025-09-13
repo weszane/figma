@@ -19,8 +19,8 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { useSprigWithSampling } from "../905/99656";
 import { CY, N_ } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -52,7 +52,7 @@ import { M4 } from "../905/713695";
 import { getExplicitRoleForUserAndFile, getPermissionsState } from "../figma_app/642025";
 import { Ef } from "../905/81982";
 import { Np } from "../figma_app/193867";
-import { dj, vt, bD } from "../figma_app/45218";
+import { FileInputType, ResourceTypeNoComment, ResourceType } from "../figma_app/45218";
 import { mN } from "../905/71785";
 import { k2, aP } from "../figma_app/10554";
 import { LibrarySourceEnum } from "../figma_app/633080";
@@ -648,7 +648,7 @@ class ts extends Component {
           resourceType: "hub_file",
           resourceId: this.props?.hubFile?.id,
           isPaid: this.props.publishingState.metadata.isPaid,
-          src: dj.FILE_INPUT
+          src: FileInputType.FILE_INPUT
         });
       } catch (e) {
         this.setFormErrors({
@@ -928,7 +928,7 @@ class ts extends Component {
       onCustomThumbnailChange: this.onCarouselUploadThumbnailChange,
       onRestore: this.restoreCarouselFileThumbnail,
       resourceId: this.props.hubFile?.id,
-      resourceType: vt.HUB_FILE,
+      resourceType: ResourceTypeNoComment.HUB_FILE,
       thumbnail: o,
       updateCarouselMedia: this.updateCarouselMedia,
       userId: this.props.user.id
@@ -964,7 +964,7 @@ class ts extends Component {
         isEditHubFilePageMode: this.props.isEditHubFilePageMode,
         children: [jsx("div", {
           className: i1,
-          children: this.state.isGeneratingThumbnail ? jsx(kt, {
+          children: this.state.isGeneratingThumbnail ? jsx(LoadingSpinner, {
             size: "medium",
             className: _$$S
           }) : d
@@ -1012,7 +1012,7 @@ class ts extends Component {
                 description: vK(e)
               });
             },
-            resourceType: bD.HUB_FILE,
+            resourceType: ResourceType.HUB_FILE,
             error: n.description
           }), this.state.allCategories && (!this.isSlidePublish() || metadata.categoryId) && jsx(SE, {
             categoryId: metadata.categoryId,
@@ -1049,7 +1049,7 @@ class ts extends Component {
                 creatorPolicy: Rj(e)
               });
             },
-            resourceType: bD.HUB_FILE,
+            resourceType: ResourceType.HUB_FILE,
             error: n.creatorPolicy
           }), jsx(_$$A8, {
             showToSCheckbox: this.props.showToSCheckbox,
@@ -1096,7 +1096,7 @@ class ts extends Component {
             }
           }), jsx(_$$A17, {
             isPaid: this.props.isPaid,
-            resourceType: bD.HUB_FILE
+            resourceType: ResourceType.HUB_FILE
           })]
         })]
       }), jsx("div", {
@@ -1105,7 +1105,7 @@ class ts extends Component {
           children: [$W(tr, n) ? jsxs("div", {
             className: g()(PJ, YN),
             "data-testid": "publish-modal-footer-text",
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: _$$A19
             }), renderI18nText("community.publish.fix_errors")]
           }) : jsx(eC, {
@@ -1117,7 +1117,7 @@ class ts extends Component {
               onClick: this.onClose,
               children: this.isUniversalPosting() ? getI18nString("general.back") : getI18nString("general.cancel")
             }), a || this.state.isGeneratingThumbnail ? jsx(UC, {
-              children: jsx(kt, {
+              children: jsx(LoadingSpinner, {
                 className: u1
               })
             }) : jsx(UC, {
@@ -1365,7 +1365,7 @@ let $$tl0 = registerModal(function (e) {
     let t = e.figFilePublishedAsHubFile[i.key];
     return t ? e.hubFiles[t] ?? null : null;
   });
-  let a = _$$W(n?.id, vt.HUB_FILE);
+  let a = _$$W(n?.id, ResourceTypeNoComment.HUB_FILE);
   let o = useAtomWithSubscription(_g);
   let l = Xr(pz);
   return i ? _$$W2(i.editor_type) ? jsx(_$$T, {
@@ -1501,7 +1501,7 @@ let $$tl0 = registerModal(function (e) {
           children: s ? renderI18nText("community.publishing.feel_free_to_edit_your_page.file") : a ? renderI18nText("community.publishing.help_people_discover_your_template") : renderI18nText("community.publishing.help_people_discover_your_file")
         }), e.hubFile && !e.isPaid ? jsx(_$$R, {
           author: Lj(e.hubFile),
-          resourceType: vt.HUB_FILE,
+          resourceType: ResourceTypeNoComment.HUB_FILE,
           resourceURL: DV(e.hubFile),
           resourceId: e.hubFile.id,
           resourceName: qD(e.hubFile).name,

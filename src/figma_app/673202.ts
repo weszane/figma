@@ -7,11 +7,11 @@ import { wY, cU } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { Yo } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText, getLocalizedPath } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { j6, fu } from "../figma_app/831799";
-import { Ws } from "../figma_app/314264";
+import { CTA_CLICKED } from "../figma_app/314264";
 import { P4, L3, Dr, S6 } from "../905/18800";
 import { V } from "../905/182752";
 import { a as _$$a } from "../905/720941";
@@ -35,7 +35,7 @@ function I(e) {
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
-    trackEvent(Ws, {
+    trackEvent(CTA_CLICKED, {
       trackingDescriptor: _$$c.COOKIE_BANNER_EXPLICIT_CONSENT_OPT_OUT
     });
   };
@@ -45,7 +45,7 @@ function I(e) {
       consentRegion: "explicit",
       cookiesEnabled: !0
     });
-    trackEvent(Ws, {
+    trackEvent(CTA_CLICKED, {
       trackingDescriptor: _$$c.COOKIE_BANNER_EXPLICIT_CONSENT_OPT_IN
     });
   };
@@ -55,7 +55,7 @@ function I(e) {
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
-    trackEvent(Ws, {
+    trackEvent(CTA_CLICKED, {
       trackingDescriptor: _$$c.COOKIE_BANNER_EXPLICIT_CONSENT_DISMISS
     });
   };
@@ -90,7 +90,7 @@ function I(e) {
         onClick: v,
         type: "button",
         "data-testid": "cookie-dismiss-button",
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           className: MW,
           svg: e.dismissIcon
         })

@@ -8,7 +8,7 @@ import { Z } from "../905/498136";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { uV } from "../905/34809";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 function h({
   viewMode: e,
   onViewModeChange: t,
@@ -16,15 +16,15 @@ function h({
 }) {
   let i = () => {
     trackEventAnalytics("file_browser_view_mode_toggle", {
-      newViewMode: XU.GRID
+      newViewMode: ViewMode.GRID
     });
-    t(XU.GRID);
+    t(ViewMode.GRID);
   };
   let a = () => {
     trackEventAnalytics("file_browser_view_mode_toggle", {
-      newViewMode: XU.LIST
+      newViewMode: ViewMode.LIST
     });
-    t(XU.LIST);
+    t(ViewMode.LIST);
   };
   return jsx("form", {
     children: jsxs(bL, {
@@ -34,14 +34,14 @@ function h({
       }),
       readonly: r,
       onChange: e => {
-        e === XU.GRID.toString() ? i() : a();
+        e === ViewMode.GRID.toString() ? i() : a();
       },
       children: [jsx(c$, {
-        value: XU.GRID.toString(),
+        value: ViewMode.GRID.toString(),
         icon: jsx(_$$t, {}),
         "aria-label": getI18nString("fullscreen.view_mode.show_as_grid")
       }), jsx(c$, {
-        value: XU.LIST.toString(),
+        value: ViewMode.LIST.toString(),
         icon: jsx(Z, {}),
         "aria-label": getI18nString("fullscreen.view_mode.show_as_list")
       })]

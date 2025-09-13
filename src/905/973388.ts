@@ -2,9 +2,9 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -22,7 +22,7 @@ export let $$g0 = registerModal(function (e) {
     properties: {
       inviteId: e.resourceConnectionInvite.id
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
       children: jsxs(vo, {
@@ -46,13 +46,13 @@ export let $$g0 = registerModal(function (e) {
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: () => {
                 t(popModalStack());
               },
               children: renderI18nText("resource_connection.request_modal.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "destructive",
               onClick: () => {
                 _$$c.revokeResourceConnectionInvite(e.resourceConnectionInvite.id).then(() => {

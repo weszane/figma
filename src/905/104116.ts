@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useState, useCallback, useMemo, useId, useImperativeHandle, useEffect } from "react";
 import { y4I } from "../figma_app/822011";
-import { $n } from "../905/521428";
-import { E as _$$E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { f as _$$f } from "../905/54715";
 import { _ as _$$_ } from "../vendor/853977";
 import c from "../vendor/116389";
@@ -120,7 +120,7 @@ export let $$C0 = forwardRef(function ({
     labelHtmlFor: W,
     error: O,
     errorId: K,
-    afterLabelContent: Y && jsx($n, {
+    afterLabelContent: Y && jsx(Button, {
       ref: G,
       variant: "link",
       onClick: B,
@@ -193,7 +193,7 @@ export let $$C0 = forwardRef(function ({
           }), "video" === e.type && jsx("div", {
             className: "carousel_media_uploader--videoThumbnailOverlay--JFyTq",
             children: jsx(_$$p, {})
-          }), deleteMedia && jsx(_$$E, {
+          }), deleteMedia && jsx(ButtonPrimitive, {
             ref: t === q.length - 1 ? z : void 0,
             className: "carousel_media_uploader--deleteMediumButton--1lrRj",
             "aria-label": getI18nString("community.publishing.remove_carousel_media"),
@@ -209,7 +209,7 @@ export let $$C0 = forwardRef(function ({
           value: null,
           drag: !1,
           role: "presentation",
-          children: jsx(_$$E, {
+          children: jsx(ButtonPrimitive, {
             htmlAttributes: {
               tabIndex: -1
             },

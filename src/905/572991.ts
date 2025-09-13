@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { _M, W_ } from "../figma_app/162807";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { F9 } from "../905/636775";
 import { h as _$$h } from "../905/971482";
 var $$n2;
@@ -19,15 +19,15 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
     mobileListSortKeys: [_M.RELEVANCY],
     tabletListSortKeys: [_M.RELEVANCY],
     sortKeyDescriptions: {
-      [XU.GRID]: {
+      [ViewMode.GRID]: {
         [_M.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       },
-      [XU.LIST]: {
+      [ViewMode.LIST]: {
         [_M.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       }
     },
     defaultOptions: {
-      viewMode: XU.GRID,
+      viewMode: ViewMode.GRID,
       sortMode: {
         sortKey: _M.RELEVANCY,
         sortDesc: !0
@@ -50,15 +50,15 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
     mobileListSortKeys: [W_.RELEVANCY],
     tabletListSortKeys: [W_.RELEVANCY],
     sortKeyDescriptions: {
-      [XU.GRID]: {
+      [ViewMode.GRID]: {
         [W_.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       },
-      [XU.LIST]: {
+      [ViewMode.LIST]: {
         [W_.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       }
     },
     defaultOptions: {
-      viewMode: XU.GRID,
+      viewMode: ViewMode.GRID,
       sortMode: {
         sortKey: W_.RELEVANCY,
         sortDesc: !0
@@ -90,10 +90,10 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
     }
   };
   e.SearchResult = _$$h({
-    [XU.GRID]: connect((e, t) => ({
+    [ViewMode.GRID]: connect((e, t) => ({
       publishedWidget: e.publishedWidgets[t.searchResult.model.id] || null
     }))(i),
-    [XU.LIST]: () => jsx(Fragment, {})
+    [ViewMode.LIST]: () => jsx(Fragment, {})
   });
 })($$a0 || ($$a0 = {}));
 export const Ru = $$a0;

@@ -10,7 +10,7 @@ import { e as _$$e } from "../905/713353";
 import { getI18nString } from "../905/303541";
 import { j7 } from "../905/929976";
 import { Um } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ZU, Wg } from "../figma_app/986347";
 import { Jo, VA, r1, m5 } from "../figma_app/152690";
 import { bt, R } from "../figma_app/767318";
@@ -42,7 +42,7 @@ export function $$b0({
     "aria-label": N ? w : C,
     htmlAttributes: {
       "data-testid": "applyModeButton",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": N ? w : C,
       onMouseDown: e => e.stopPropagation()
     },

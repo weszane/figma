@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { AC } from "../figma_app/777551";
 import { et, zn } from "../figma_app/559491";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { yX } from "../figma_app/918700";
 export let $$u0 = registerModal(function ({
@@ -30,7 +30,7 @@ export let $$u0 = registerModal(function ({
       pluginId: e.id,
       role: e.roles
     })) : h();
-  }) : (m3(e) ? (r = getI18nString("community.plugins.delist_your_resource_type", {
+  }) : (hasMonetizedResourceMetadata(e) ? (r = getI18nString("community.plugins.delist_your_resource_type", {
     resourceType: _
   }), t = getI18nString("community.resource.delisting_this_resource_will_prevent_people_from_discovering_or_purchasing_this_resource"), d = getI18nString("community.resource.delist")) : (r = getI18nString("community.plugins.unpublish_resource_type", {
     resourceType: _

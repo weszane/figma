@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { e as _$$e } from "../905/678389";
 import { c as _$$c } from "../905/90943";
 import { h as _$$h } from "../905/510194";
@@ -84,7 +84,7 @@ export function $$C1(e) {
         animationType: JR.LIGHT_SHIMMER
       });
   }
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     "aria-label": getI18nString("layer_icon.button.pan_to_node"),
     htmlAttributes: {
       onDoubleClick: t => {

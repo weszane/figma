@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { b as _$$b } from "../figma_app/556971";
 import { renderI18nText } from "../905/303541";
@@ -21,7 +21,7 @@ var l = o;
 function C(e) {
   return jsx("div", {
     className: "static_repo_name--container--6SAYd",
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       className: "static_repo_name--button--4ZBh2 ellipsis--ellipsis--Tjyfa",
       onClick: () => e.dispatch(oz({
         trackingContextName: e.trackingContextName
@@ -119,7 +119,7 @@ export function $$N1({
 function A() {
   let e = useDispatch();
   let t = useContext(X);
-  return null === t || t < 1 ? null : jsx(_$$E, {
+  return null === t || t < 1 ? null : jsx(ButtonPrimitive, {
     className: "left_panel_header_components--button--zghbk",
     onClick: () => e(o5({
       trackingContextName: e0.EDITOR_TOOLBAR_ACTION

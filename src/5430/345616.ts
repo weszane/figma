@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { J } from "../905/614223";
 import n from "classnames";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { n as _$$n } from "../5430/496973";
 import { $z } from "../figma_app/831799";
 import { tt, Vi, uw, uD } from "../5430/774694";
@@ -30,7 +30,7 @@ export function $$u0({
       dataTestId: m || "community-duplicate-button",
       children: jsx("div", {
         className: uD,
-        children: _ ? jsx(kt, {
+        children: _ ? jsx(LoadingSpinner, {
           shouldMatchTextColor: !0,
           size: "small"
         }) : e

@@ -17,11 +17,11 @@ import { Lx } from "../figma_app/474636";
 import { s as _$$s } from "../figma_app/961559";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { registerModal } from "../905/102752";
 var C = (e => (e.STOP_AUTO_RUN_FROM_USER = "stop-auto-run-from-user", e.STOP_AUTO_RUN_FROM_ORG = "stop-auto-run-from-org", e.CONFIRM_REPLACE = "confirm-replace", e.ENABLE_AUTO_RUN = "enable-auto-run", e))(C || {});
 let w = registerModal(function ({
@@ -41,30 +41,30 @@ let w = registerModal(function ({
   let p = useCurrentPrivilegedPlan("AutoRunConfirmModal").unwrapOr(null);
   let h = p?.key.type === FOrganizationLevelType.ORG ? p.name : void 0;
   let g = {
-    currentAutoRunPluginName: jsx(_$$E, {
+    currentAutoRunPluginName: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: e.currentAutoRunPluginName
     })
   };
   let f = {
-    orgName: jsx(_$$E, {
+    orgName: jsx(TextWithTruncation, {
       children: h || ""
     }),
-    orgPluginName: jsx(_$$E, {
+    orgPluginName: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: e.orgPluginName
     })
   };
   let E = {
-    orgPluginName: jsx(_$$E, {
+    orgPluginName: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: e.orgPluginName
     }),
-    newPluginName: jsx(_$$E, {
+    newPluginName: jsx(TextWithTruncation, {
       fontWeight: "bold",
       children: t
     }),
-    orgName: jsx(_$$E, {
+    orgName: jsx(TextWithTruncation, {
       children: h || ""
     })
   };
@@ -72,18 +72,18 @@ let w = registerModal(function ({
     case "stop-auto-run-from-user":
       s = jsxs(Fragment, {
         children: [jsx(nB, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.stop_auto_run_desc", g)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
               children: getI18nString("dev_handoff.autorun_confirm_modal.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "primary",
               onClick: () => {
                 c();
@@ -104,18 +104,18 @@ let w = registerModal(function ({
     case "enable-auto-run":
       s = jsxs(Fragment, {
         children: [jsx(nB, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.enable_auto_run_desc", f)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
               children: getI18nString("dev_handoff.autorun_confirm_modal.dont_enable")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "primary",
               onClick: () => {
                 _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.INHERIT);
@@ -130,18 +130,18 @@ let w = registerModal(function ({
     case "confirm-replace":
       s = jsxs(Fragment, {
         children: [jsx(nB, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.confirm_replace", E)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
               children: getI18nString("dev_handoff.autorun_confirm_modal.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "primary",
               onClick: () => {
                 _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.OVERRIDE);
@@ -156,18 +156,18 @@ let w = registerModal(function ({
     case "stop-auto-run-from-org":
       s = jsxs(Fragment, {
         children: [jsx(nB, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             children: renderI18nText("dev_handoff.autorun_confirm_modal.stop_auto_run_from_org", f)
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: u,
               children: getI18nString("dev_handoff.autorun_confirm_modal.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "primary",
               onClick: c,
               children: getI18nString("dev_handoff.autorun_confirm_modal.stop_auto_run")
@@ -199,7 +199,7 @@ let w = registerModal(function ({
     open: n,
     onClose: () => d(popModalStack())
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: N,
     width: "md",
     htmlAttributes: {

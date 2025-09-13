@@ -7,14 +7,14 @@ import { RD } from "../figma_app/198840";
 import { mC, oh } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt } from "../figma_app/979658";
-import { cS, bD } from "../figma_app/45218";
+import { CommunityPageType, ResourceType } from "../figma_app/45218";
 import { $A } from "../905/862883";
 import { cd } from "../905/381612";
 import { K } from "../1291/825015";
 import { i8 } from "../1291/533467";
 import { S as _$$S } from "../1291/885929";
 import { bL, gZ } from "../905/598775";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Gi, wv } from "../figma_app/622574";
@@ -41,7 +41,7 @@ function C() {
         })
       }), jsx(gZ, {
         className: jy,
-        children: jsx($n.Link, {
+        children: jsx(Button.Link, {
           onClick: () => {
             setSelectedCategory({
               id: e?.type === "team" ? e.entity.id : "",
@@ -107,7 +107,7 @@ export function $$I0(e) {
   } = Fz();
   let s = useRef(null);
   let f = oh(sz.loadingKeyForPayload({
-    shelfType: cS.FIGJAM_TEMPLATES_PICKER
+    shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER
   }));
   let b = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: $A.FigJam
@@ -117,8 +117,8 @@ export function $$I0(e) {
     children: jsxs(fu, {
       name: "templates",
       children: [jsx($, {}), jsx(C, {}), jsx(K, {
-        resourceType: bD.HUB_FILE,
-        shelfType: cS.FIGJAM_TEMPLATES_PICKER,
+        resourceType: ResourceType.HUB_FILE,
+        shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER,
         renderResource: s => jsx(_$$S, {
           template: {
             template: s,

@@ -1,89 +1,135 @@
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { D, U } from '../905/270904';
-import { ModalRoot } from '../905/437088';
-import { P } from '../905/536340';
-import { Vg, W_ } from '../905/893109';
-import { Jn, vo } from '../figma_app/272243';
-import { A as _$$A } from '../vendor/723372';
-let d = 'screen and (max-height: 20rem)';
-let c = D(`screen and (max-width: 32rem), ${d}`);
-let u = D(`screen and (max-width: 22rem), ${d}`);
-let p = D(d);
-let h = {
+import classNames from 'classnames'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { createMediaQuery, useMediaQuery } from '../905/270904'
+import { ModalRoot } from '../905/437088'
+import { identity, toRem } from '../905/893109'
+import { Jn, vo } from '../figma_app/272243'
+
+// Original: let d = 'screen and (max-height: 20rem)';
+const MAX_HEIGHT_MEDIA_QUERY = 'screen and (max-height: 20rem)'
+
+// Original: let c = createMediaQuery(`screen and (max-width: 32rem), ${d}`);
+const LARGE_BREAKPOINT_MEDIA_QUERY = createMediaQuery(`screen and (max-width: 32rem), ${MAX_HEIGHT_MEDIA_QUERY}`)
+
+// Original: let u = createMediaQuery(`screen and (max-width: 22rem), ${d}`);
+const MEDIUM_BREAKPOINT_MEDIA_QUERY = createMediaQuery(`screen and (max-width: 22rem), ${MAX_HEIGHT_MEDIA_QUERY}`)
+
+// Original: let p = createMediaQuery(d);
+const SMALL_BREAKPOINT_MEDIA_QUERY = createMediaQuery(MAX_HEIGHT_MEDIA_QUERY)
+
+// Original: let h = { ... };
+const MODAL_SIZE_CLASSES = {
   'fit-content': void 0,
   'sm': 'modal__sm__izkk-',
   'md': 'modal__md__rrfZR',
-  'lg': 'modal__lg__wd2Q-'
-};
-export function $$g1({
-  children: e,
-  width: t,
-  height: i = 'fixed',
-  overrideCloseButtonColor: d,
-  htmlAttributes: m,
-  ...g
+  'lg': 'modal__lg__wd2Q-',
+}
+
+/**
+ * Modal root component (original: $$g1).
+ * @param children - The modal content.
+ * @param width - Width of the modal.
+ * @param height - Height type.
+ * @param overrideCloseButtonColor - Color override for close button.
+ * @param htmlAttributes - Additional HTML attributes.
+ * @param manager - Manager object.
+ */
+export function ModalRootComponent({
+  children,
+  width,
+  height = 'fixed',
+  overrideCloseButtonColor,
+  htmlAttributes,
+  ...props
+}: {
+  children: React.ReactNode
+  width: number | 'fit-content' | 'sm' | 'md' | 'lg'
+  height?: 'fixed' | 'dynamic' | 'fullscreen' | 'full'
+  overrideCloseButtonColor?: string
+  htmlAttributes?: React.HTMLAttributes<HTMLElement>
+  manager: { preventUserClose: boolean }
+  [key: string]: any
 }) {
-  let f;
-  let _;
-  let A;
-  f = typeof t == 'number' || t === 'fit-content' ? 'lg' : t;
-  let y = U(function (e) {
-    switch (e) {
-      case 'sm':
-        return p;
-      case 'md':
-        return u;
-      case 'lg':
-        return c;
-    }
-  }(f));
-  typeof t == 'number' ? A = {
-    [Vg('--fpl-modal-width')]: W_(t)
-  } : _ = h[t];
-  let b = g.manager.preventUserClose;
+  // Determine size based on width (original: f = typeof t == 'number' || t === 'fit-content' ? 'lg' : t;)
+  const size = typeof width === 'number' || width === 'fit-content' ? 'lg' : width
+
+  // Get media query for size (original: y = useMediaQuery(...))
+  const isFullscreen = useMediaQuery(
+    size === 'sm'
+      ? SMALL_BREAKPOINT_MEDIA_QUERY
+      : size === 'md'
+        ? MEDIUM_BREAKPOINT_MEDIA_QUERY
+        : LARGE_BREAKPOINT_MEDIA_QUERY,
+  )
+
+  // Set styles or class based on width (original: typeof t == 'number' ? A = ... : _ = h[t];)
+  let style: React.CSSProperties | undefined
+  let sizeClass: string | undefined
+  if (typeof width === 'number') {
+    style = { [identity('--fpl-modal-width')]: toRem(width) }
+  }
+  else {
+    sizeClass = MODAL_SIZE_CLASSES[width]
+  }
+
+  const preventUserClose = props.manager.preventUserClose
+
   return jsxs(ModalRoot, {
-    ...g,
-    style: A,
+    ...props,
+    style,
     htmlAttributes: {
-      ...m,
-      'data-modal-fullscreen': y || void 0
+      ...htmlAttributes,
+      'data-modal-fullscreen': isFullscreen || void 0,
     },
     theme: {
-      root: _$$A('modal__root__37yc9', _, {
-        modal__topAligned__Gtw5q: i === 'dynamic',
-        modal__borderedFullscreen__3m9q3: i === 'fullscreen'
+      root: classNames('modal__root__37yc9', sizeClass, {
+        modal__topAligned__Gtw5q: height === 'dynamic',
+        modal__borderedFullscreen__3m9q3: height === 'fullscreen',
       }),
-      contents: _$$A('modal__contents__sJsR3', {
-        modal__full__KNiPx: i === 'full'
+      contents: classNames('modal__contents__sJsR3', {
+        modal__full__KNiPx: height === 'full',
       }),
-      backdrop: 'modal__backdrop__PcWm1'
+      backdrop: 'modal__backdrop__PcWm1',
     },
-    children: [e, !b && jsx(Jn, {
-      overrideColor: d
-    })]
-  });
+    children: [
+      children,
+      !preventUserClose && jsx(Jn, { overrideColor: overrideCloseButtonColor }),
+    ],
+  })
 }
-export function $$f0({
-  children: e,
-  htmlAttributes: t,
-  onSubmit: i,
-  ...r
+
+/**
+ * Modal form contents component (original: $$f0).
+ * @param children - The form content.
+ * @param htmlAttributes - Additional HTML attributes.
+ * @param onSubmit - Submit handler.
+ */
+export function ModalFormContents({
+  children,
+  htmlAttributes,
+  onSubmit,
+  ...props
+}: {
+  children: React.ReactNode
+  htmlAttributes?: React.HTMLAttributes<HTMLFormElement>
+  onSubmit: (e: React.FormEvent) => void
+  [key: string]: any
 }) {
   return jsx('form', {
-    ...t,
-    className: P,
-    onSubmit: e => {
-      i(e);
-      e.preventDefault();
+    ...htmlAttributes,
+    className: 'utils__contents__try7q',
+    onSubmit: (e) => {
+      onSubmit(e)
+      e.preventDefault()
     },
-    ...r,
-    children: jsx(vo, {
-      ...r,
-      children: e
-    })
-  });
+    ...props,
+    children: jsx(vo, { ...props, children }),
+  })
 }
-$$g1.displayName = 'Modal.Root';
-$$f0.displayName = 'Modal.FormContents';
-export const Rq = $$f0;
-export const bL = $$g1;
+
+ModalRootComponent.displayName = 'Modal.Root'
+ModalFormContents.displayName = 'Modal.FormContents'
+
+// Original exports: export const Rq = $$f0; export const bL = $$g1;
+export const Rq = ModalFormContents
+export const bL = ModalRootComponent

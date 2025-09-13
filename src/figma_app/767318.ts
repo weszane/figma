@@ -8,10 +8,10 @@ import d from "../vendor/181640";
 import u from "../vendor/104014";
 import _ from "lodash-es/mapValues";
 import { customHistory } from "../905/612521";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { hA } from "../figma_app/88239";
 import { N as _$$N } from "../figma_app/673778";
@@ -59,7 +59,7 @@ export function $$G0(e) {
     let N = useCallback((e, t, r, i, a) => {
       let c = r ?? (i ? UE : Ws);
       let u = i === Mo ? getI18nString("variables.mode_properties_panel.select.option.mixed") : t.find(e => deepEqual(e.modeId, i))?.name;
-      let p = jsx(B, {
+      let p = jsx(SvgComponent, {
         className: F,
         svg: _$$A2
       });
@@ -90,7 +90,7 @@ export function $$G0(e) {
         }
       }]), ...function (e, t, r, i, a, o, d, c) {
         if (!e.length) return [];
-        let u = jsx(B, {
+        let u = jsx(SvgComponent, {
           className: F,
           svg: _$$A2
         });
@@ -239,7 +239,7 @@ export function $$G0(e) {
     }, [O, r, N, z, H, G, M, o, g, d, T, W]);
   }(showLibrarySets, consumptionTarget, recordingKey);
   let M = Um();
-  let G = hC();
+  let G = trackDefinedFileEventWithStore();
   let H = hA();
   let z = Fk((e, t) => {
     let r = e.get(t);
@@ -280,7 +280,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
     displayText: getI18nString("variables.mode_properties_panel.select.option.default_with_name", {
       modeName: t.name
     }),
-    rightIcon: t.isCompatible ? void 0 : jsx(B, {
+    rightIcon: t.isCompatible ? void 0 : jsx(SvgComponent, {
       className: F,
       svg: _$$A2
     }),
@@ -305,7 +305,7 @@ function V(e, t, r, i, a, s, o, l, d, c) {
         }
       })) : s(e, t.modeId, t.name);
     },
-    rightIcon: t.isCompatible ? void 0 : jsx(B, {
+    rightIcon: t.isCompatible ? void 0 : jsx(SvgComponent, {
       className: F,
       svg: _$$A2
     })

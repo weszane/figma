@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useMemo, useState, useEffect, useCallback } from "react";
 import i from "classnames";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { dG } from "../figma_app/753501";
 var s = i;
 function d(e) {
@@ -72,7 +72,7 @@ export function $$c0({
     setSelection: i
   }) {
     let [s, l] = useState("");
-    let d = A(() => {
+    let d = useDebouncedCallback(() => {
       l("");
     }, 200);
     let c = useCallback(a => {

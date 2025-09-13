@@ -11,7 +11,7 @@ import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
 import { w4 } from "../905/445814";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { handleAtomEvent } from "../905/502364";
 import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -23,13 +23,13 @@ import { gX } from "../905/504768";
 import { o8 } from "../figma_app/12220";
 import { E as _$$E } from "../905/881732";
 import { hL } from "../905/697795";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FeedPostWithDetails } from "../figma_app/43951";
 import { M8 } from "../905/772425";
 import { Dr } from "../905/530837";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/375499";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { p as _$$p } from "../figma_app/353099";
@@ -218,7 +218,7 @@ function eC() {
 }
 export let $$eb0 = registerModal(function (e) {
   let t = useDispatch();
-  let n = dq();
+  let n = useCurrentUserOrgId();
   let u = _6();
   useEffect(() => {
     "teamFeed" !== u.view && "user" !== u.view && ("fullscreen" === u.view && e.inFileView || t(hideModal()));
@@ -346,7 +346,7 @@ export let $$eb0 = registerModal(function (e) {
 function eT(e) {
   let t = useDispatch();
   let n = selectCurrentUser();
-  let a = dq();
+  let a = useCurrentUserOrgId();
   let d = useCallback(() => {
     t(hideModal());
   }, [t]);
@@ -367,21 +367,21 @@ function eT(e) {
       })
     }), jsx("button", {
       onClick: m,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fig_feed.copy_link_to_post"),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3,
         className: e_
       })
     }), jsx("button", {
       onClick: e.onSidebarToggle,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A2,
         className: e_
       })
     }), jsx("button", {
       onClick: d,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A4,
         className: "feed_post_detail_modal--closeX--NwlcU"
       })
@@ -533,7 +533,7 @@ function eI(e) {
         onClick: c,
         role: "button",
         tabIndex: 0,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A,
           className: "feed_post_detail_modal--arrowDown--XpvZj"
         }), renderI18nText("fig_feed.num_comments", {

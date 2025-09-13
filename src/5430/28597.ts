@@ -35,13 +35,13 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { IW } from "../figma_app/563413";
 import { lH, r4 } from "../figma_app/229259";
 import { o as _$$o } from "../905/451156";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { Av, Kw, og, LX } from "../figma_app/646357";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/273120";
 import { sortByWithOptions, sortByPropertyWithOptions } from "../figma_app/656233";
 import { lM, dm } from "../figma_app/463500";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { nh } from "../figma_app/707943";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { zi, iL } from "../905/824449";
@@ -51,7 +51,7 @@ import { getFeatureFlags } from "../905/601108";
 import { xf } from "../figma_app/416935";
 import { h1 } from "../905/986103";
 import { X2 } from "../figma_app/808294";
-import { U as _$$U, m3, PM, zF, I0 } from "../figma_app/45218";
+import { hasClientMeta, hasMonetizedResourceMetadata, hasFreemiumCode, isThirdPartyMonetized, isPlugin } from "../figma_app/45218";
 import { dx } from "../5430/309696";
 import { OJ } from "../905/519092";
 import { F as _$$F } from "../5430/373843";
@@ -83,8 +83,8 @@ import { A as _$$A6 } from "../5430/728674";
 import { AG } from "../figma_app/999312";
 import { L as _$$L, I as _$$I } from "../1577/16430";
 import { k as _$$k3 } from "../905/443820";
-import { $n } from "../905/521428";
-import { E as _$$E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
 import { B as _$$B2 } from "../905/950875";
 import { T as _$$T2 } from "../5430/528285";
@@ -227,7 +227,7 @@ function Y(e) {
   });
   return isLoading ? jsxs("div", {
     className: W,
-    children: [g, jsx(kt, {
+    children: [g, jsx(LoadingSpinner, {
       className: q
     })]
   }) : jsxs("div", {
@@ -251,7 +251,7 @@ function J({
 }) {
   return jsx("div", {
     className: "library_detail_page_viewer--libraryViewerComponentTile--R5qQm",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e.name,
     children: jsx("div", {
       className: "library_detail_page_viewer--libraryViewerComponentThumbnailWrapper--P2sR3",
@@ -310,7 +310,7 @@ function el({
 }) {
   if (t) return jsx("div", {
     className: Z,
-    children: jsx(kt, {
+    children: jsx(LoadingSpinner, {
       className: q
     })
   });
@@ -338,7 +338,7 @@ function ec({
     }), jsx("div", {
       className: "library_detail_page_viewer--libraryViewerStylesList--8HwJW",
       children: t.map(e => jsx("div", {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.name,
         children: jsx(zi, {
           dsStyle: e,
@@ -398,7 +398,7 @@ function eu({
       })
     }), jsxs("div", {
       className: "library_detail_page_viewer--libraryViewerEmptyState--2o6bb",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: ed,
         useOriginalSrcFills_DEPRECATED: !0,
         className: "library_detail_page_viewer--libraryViewerEmptyIcon--6OLZt"
@@ -618,7 +618,7 @@ function eF({
         resourceType: e.resource_type
       }, t))
     });
-    if (_$$U(e)) return jsx(_$$_, {
+    if (hasClientMeta(e)) return jsx(_$$_, {
       hubFileEditorType: JJ(e.viewer_mode)
     });
     let t = qD(e).manifest.editorType;
@@ -661,7 +661,7 @@ function eF({
 function eH() {
   return jsxs("div", {
     className: qS,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A4,
       svgClassName: Uk,
       useOriginalSrcFills_DEPRECATED: !0
@@ -723,10 +723,10 @@ function eZ({
   }
   return r ? jsxs("div", {
     className: UH,
-    children: [renderI18nText("community.detail_view.third_party_badge.off_platform"), jsx(_$$B, {
+    children: [renderI18nText("community.detail_view.third_party_badge.off_platform"), jsx(SvgComponent, {
       svg: _$$A5,
       className: _$$G2,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("community.detail_view.resource_outside_of_figma"),
       "data-tooltip-show-immediately": !0
     })]
@@ -798,9 +798,9 @@ function eY({
   let r = XW(e) ? qY(e) : e;
   if (!r) return null;
   let i = $l(r);
-  let n = m3(r);
-  let o = n && PM(r);
-  let a = zF(r);
+  let n = hasMonetizedResourceMetadata(r);
+  let o = n && hasFreemiumCode(r);
+  let a = isThirdPartyMonetized(r);
   return jsxs("div", {
     className: tJ,
     "data-testid": "metadata-container",
@@ -982,11 +982,11 @@ function ts({
       className: "related_content--relatedContentTilesContainer--L8KiC",
       children: r.map(e => {
         let t = e.id;
-        return _$$U(e) ? jsx(e6, {
+        return hasClientMeta(e) ? jsx(e6, {
           resource: e,
           rdpImpressionId: a,
           openLightboxRDP: l
-        }, t) : I0(e) ? jsx(te, {
+        }, t) : isPlugin(e) ? jsx(te, {
           resource: e,
           rdpImpressionId: a,
           openLightboxRDP: l
@@ -1168,7 +1168,7 @@ function tb({
           children: [jsx(_$$B2, {}), jsx("span", {
             children: getI18nString("community.site_preview.error_message")
           })]
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "secondary",
           onClick: j,
           children: getI18nString("community.site_preview.retry")
@@ -1189,7 +1189,7 @@ function tb({
         sandbox: "allow-scripts allow-same-origin allow-forms allow-popups allow-presentation allow-top-navigation-by-user-activation",
         src: e,
         title: h ?? void 0
-      }), jsx(_$$E, {
+      }), jsx(ButtonPrimitive, {
         "aria-label": getI18nString("community.site_preview.reload"),
         onClick: j,
         className: "x19y5rnk xz16r55 xsqpjig xn0whsw x78zum5 x6s0dn4 xl56j7k x1jnr06f x2lah0s x10l6tqk x191j7n5 x1qpfodn x100vrsf x1vqgdyp x1mh6rdz",

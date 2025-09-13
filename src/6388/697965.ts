@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
 import { generateRecordingKey } from "../figma_app/878298";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { E as _$$E } from "../905/730894";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
@@ -89,7 +89,7 @@ function b({
       className: "back_to_current_carousel_item_button--backToCurrentCarouselItemGradient--DVFhy"
     }), jsx("div", {
       className: "back_to_current_carousel_item_button--backToCurrentCarouselItemButton--mvFb9",
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         onClick: t,
         iconPrefix: jsx(_$$E, {}),

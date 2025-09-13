@@ -8,12 +8,12 @@ import { r } from "../905/398386";
 import { HI, ej as _$$ej, w2, $P, qv, PP, Dy, PI, _z, ky, Ns } from "../905/977218";
 import { VP, GH, aF, Fl } from "../905/18797";
 import { uH, hf, Rr, uR, Rx } from "../figma_app/162807";
-import { XU, t2 } from "../figma_app/756995";
+import { ViewMode, FileType } from "../figma_app/756995";
 import { o as _$$o } from "../905/668706";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
 import { x as _$$x } from "../905/211326";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../905/799228";
 import { p as _$$p } from "../figma_app/837956";
@@ -111,7 +111,7 @@ class U extends Component {
   }
   renderContent() {
     let e;
-    if (this.props.viewMode === XU.LIST) e = j[this.props.searchModelType] ?? p_;else if (this.props.viewMode === XU.GRID) switch (this.props.searchModelType) {
+    if (this.props.viewMode === ViewMode.LIST) e = j[this.props.searchModelType] ?? p_;else if (this.props.viewMode === ViewMode.GRID) switch (this.props.searchModelType) {
       case uH.FILES:
       case uH.TEAMS:
       case uH.PROJECTS:
@@ -172,7 +172,7 @@ class U extends Component {
     });
   }
   render() {
-    let e = this.props.searchModelType === uH.FILES ? void 0 : this.props.viewMode === XU.LIST ? UL : G2;
+    let e = this.props.searchModelType === uH.FILES ? void 0 : this.props.viewMode === ViewMode.LIST ? UL : G2;
     return jsxs(Q0, {
       isDropdown: !1,
       ...this.props,
@@ -233,7 +233,7 @@ export function $$G6(e) {
       children: [" in the ", jsx("span", {
         className: xV,
         children: c.name
-      }), " workspace", jsx("br", {}), jsx(_$$E, {
+      }), " workspace", jsx("br", {}), jsx(ButtonPrimitive, {
         className: YF,
         onClick: () => {
           u && u();
@@ -245,7 +245,7 @@ export function $$G6(e) {
   }), [query, u, c, resourceTypeDisplayString]);
   return jsxs("div", {
     className: p$,
-    children: [e.illustration && jsx(_$$B, {
+    children: [e.illustration && jsx(SvgComponent, {
       className: IC,
       svg: e.illustration,
       useOriginalSrcFills_DEPRECATED: !0
@@ -316,21 +316,21 @@ class V extends Component {
     return this.props.searchModelType === uH.FILES ? e.filter(e => {
       let r = e.model;
       switch (t.filters.fileType) {
-        case t2.ANY:
+        case FileType.ANY:
           return !0;
-        case t2.DESIGN:
+        case FileType.DESIGN:
           return "design" === r.editor_type;
-        case t2.FIGJAM:
+        case FileType.FIGJAM:
           return "whiteboard" === r.editor_type;
-        case t2.SITES:
+        case FileType.SITES:
           return "sites" === r.editor_type;
-        case t2.SLIDES:
+        case FileType.SLIDES:
           return "slides" === r.editor_type;
-        case t2.COOPER:
+        case FileType.COOPER:
           return "cooper" === r.editor_type;
-        case t2.MAKE:
+        case FileType.MAKE:
           return "figmake" === r.editor_type;
-        case t2.PROTOTYPE:
+        case FileType.PROTOTYPE:
           return !1;
         default:
           throwTypeError(t.filters.fileType);
@@ -526,7 +526,7 @@ function eh(e) {
         e.target.matches("input") || e.preventDefault();
       },
       onMouseUp,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: "search_bar--searchIcon--V3JlY",
         svg: _$$A6,
         ariaHidden: !0
@@ -544,11 +544,11 @@ function eh(e) {
         placeholder: getI18nString("desktop_new_tab.search.search_for_files_placeholder"),
         spellCheck: !1,
         value: e.query
-      }), !!e.query && jsx(_$$E, {
+      }), !!e.query && jsx(ButtonPrimitive, {
         className: "search_bar--xIconButton--sKqOL",
         onClick: onClearSearchClick,
         "aria-label": getI18nString("search.search_bar.clear"),
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: "search_bar--xIcon--XpjH6",
           svg: _$$A7
         })
@@ -889,7 +889,7 @@ export function $$e53({
     children: jsx(dP, {
       children: jsx(_$$Y, {})
     })
-  }) : jsxs(_$$E, {
+  }) : jsxs(ButtonPrimitive, {
     className: $()("faceted_search_entrypoint--inputWrapper--HwKpk search--searchContainerSidebarWithSelection--I54MO search--_expandingSearchBoxSidebarContainerBase--Mj7Ol search--searchContainerSidebar--JLCAb", {
       [e1]: getFeatureFlags().file_browser_sidebar_row_ui
     }),

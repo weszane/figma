@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import m from "classnames";
 import g from "../vendor/523035";
 import { trackEventAnalytics } from "../905/449184";
@@ -24,7 +24,7 @@ import { sx as _$$sx } from "../905/941192";
 import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
 import { In } from "../905/672640";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
 import { k as _$$k } from "../figma_app/618031";
 import { sf } from "../905/929976";
@@ -39,7 +39,7 @@ import { AG } from "../figma_app/217457";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { DashboardSections } from "../905/548208";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N2 } from "../905/809096";
 import { g as _$$g } from "../905/119656";
@@ -115,20 +115,20 @@ function J(e) {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
-      name: jsx(_$$E2, {
+      name: jsx(TextWithTruncation, {
         color: "secondary",
         children: getI18nString("billing_modals.team_renewal.table.header.renewal_cost")
       }),
       textAlign: "right",
       gridColumnWidth: "92px",
-      cellComponent: e => jsx(_$$E2, {
+      cellComponent: e => jsx(TextWithTruncation, {
         color: "secondary",
         truncate: !0,
         children: localizeCurrency.formatMoney(a[e] || 0, {
           showCents: !1
         })
       }),
-      getAggregate: () => jsx(_$$E2, {
+      getAggregate: () => jsx(TextWithTruncation, {
         truncate: !0,
         children: localizeCurrency.formatMoney(f()(Object.values(a)), {
           showCents: !1
@@ -156,10 +156,10 @@ function J(e) {
   let ei = () => {
     q(!1);
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: 600,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: () => {
         q(!0);
         H3({
@@ -217,7 +217,7 @@ function J(e) {
           items: N_.toArray().sort(AG),
           columns: [{
             id: "billableProductKey",
-            name: jsx(_$$E2, {
+            name: jsx(TextWithTruncation, {
               color: "secondary",
               truncate: !0,
               children: getI18nString("billing_modals.renewal.table.header.seat_type")
@@ -238,7 +238,7 @@ function J(e) {
               children: getI18nString("billing_modals.team_renewal.table.header.monthly")
             }),
             textAlign: "right",
-            cellComponent: e => jsx(_$$E2, {
+            cellComponent: e => jsx(TextWithTruncation, {
               color: "secondary",
               truncate: !0,
               children: Math.max(0, (v[e] || 0) - (D[e] || 0))
@@ -258,7 +258,7 @@ function J(e) {
             cellComponent: e => jsxs("div", {
               className: _$$s.flex.flexRow.gap4.$,
               children: [e === ProductAccessTypeEnum.COLLABORATOR && !m && !C && jsxs("div", {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("billing_modals.team_renewal.table.collab_tooltip"),
                 "data-tooltip-timeout-delay": 500,
                 "data-testid": "collab_annual_seat_tooltip",
@@ -275,7 +275,7 @@ function J(e) {
                 })
               })]
             }),
-            getAggregate: () => jsx(_$$E2, {
+            getAggregate: () => jsx(TextWithTruncation, {
               truncate: !0,
               children: J
             })
@@ -286,7 +286,7 @@ function J(e) {
           noAnnualSeat: 0 === J
         }), X && jsx("div", {
           className: _$$s.pt16.$,
-          children: jsx(_$$E2, {
+          children: jsx(TextWithTruncation, {
             color: "danger",
             children: X
           })
@@ -322,7 +322,7 @@ function ee(e) {
     iconSrc: _$$A,
     dataTestId: "team-renewal-disclaimer",
     children: renderI18nText(e.noAnnualSeat ? "billing_modals.team_renewal.disclaimer_banner.no_seat" : "billing_modals.team_renewal.disclaimer_banner", {
-      peoplePageLink: jsx(_$$E, {
+      peoplePageLink: jsx(ButtonPrimitive, {
         className: h()(h7, _$$s.inline.$),
         style: _$$sx.add({
           backgroundColor: "unset"

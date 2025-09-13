@@ -3,7 +3,7 @@ import { useRef } from "react";
 import n from "classnames";
 import { getI18nString } from "../905/303541";
 import { C, W } from "../5430/92864";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var o = n;
 export function $$d0(e) {
   let t = useRef(null);
@@ -21,7 +21,7 @@ export function $$d0(e) {
     onClick: e.onClick,
     "aria-label": getI18nString("community.like"),
     "data-tooltip": getI18nString("community.like"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-testid": "like-button",
     children: jsx("div", {
       className: "base_like_button--likeIcon--70nFu text--fontPos18--rYXJb text--_fontBase--QdLsd",

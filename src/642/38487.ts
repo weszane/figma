@@ -8,7 +8,7 @@ import { k as _$$k2 } from '../905/44647';
 import { Uz } from '../905/63728';
 import { l as _$$l } from '../905/103989';
 import { Z as _$$Z } from '../905/104740';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { setupToggleButton } from '../905/167712';
 import { R as _$$R } from '../905/256203';
@@ -20,11 +20,11 @@ import { useIsFullscreenSitesView } from '../905/561485';
 import { e as _$$e2 } from '../905/579635';
 import { getFeatureFlags } from '../905/601108';
 import { r as _$$r2 } from '../905/619088';
-import { E as _$$E } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { f as _$$f2 } from '../905/640587';
 import { g as _$$g } from '../905/687265';
 import { getSingletonSceneGraph } from '../905/700578';
-import { B as _$$B } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { getFilteredFeatureFlags } from '../905/717445';
 import { k as _$$k3 } from '../905/749197';
 import { sx } from '../905/941192';
@@ -41,7 +41,7 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { sO } from '../figma_app/21029';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { gdM, yj4 } from '../figma_app/27776';
-import { QZ } from '../figma_app/62612';
+import { computeFullscreenViewportForNode } from '../figma_app/62612';
 import { eC as _$$eC, Fj } from '../figma_app/76123';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { g$, qW } from '../figma_app/116234';
@@ -75,7 +75,7 @@ function W({
   return jsx('div', {
     'className': Io,
     'data-testid': 'variable-mode-pill',
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('variables.mode_pill.tooltip', {
       listOfModes: formatList(e)
     }),
@@ -114,17 +114,17 @@ class ea extends PureComponent {
       e.push(jsx('span', {
         className: pZ
       }, t));
-      n ? e.push(jsx(_$$B, {
+      n ? e.push(jsx(SvgComponent, {
         svg: a ? _$$A5 : _$$A6,
         className: o
-      }, `${t}-mask`)) : i ? e.push(jsx(_$$B, {
+      }, `${t}-mask`)) : i ? e.push(jsx(SvgComponent, {
         svg: a ? _$$A4 : _$$A3,
         className: o
-      }, `${t}-mask`)) : l && e.push(jsx(_$$B, {
+      }, `${t}-mask`)) : l && e.push(jsx(SvgComponent, {
         svg: a ? _$$A2 : _$$A,
         className: o
       }, `${t}-mask`));
-      this.props.hasBullet && t === this.props.level ? e.push(jsx(_$$E, {
+      this.props.hasBullet && t === this.props.level ? e.push(jsx(ButtonPrimitive, {
         recordingKey: generateRecordingKey(this.props, 'expandCaret'),
         className: OI,
         actionOnPointerDown: !0,
@@ -133,7 +133,7 @@ class ea extends PureComponent {
           'data-testid': this.props.isMeasurementNode ? void 0 : 'new-frame-bullet'
         },
         children: jsx(el, {})
-      }, 'expand-caret')) : a && e.push(jsx(_$$E, {
+      }, 'expand-caret')) : a && e.push(jsx(ButtonPrimitive, {
         recordingKey: generateRecordingKey(this.props, 'expandCaret'),
         className: g()(GE, Fq),
         actionOnPointerDown: !0,
@@ -213,14 +213,14 @@ function ex({
   disabled: e
 }) {
   let t = useMemo(() => ({
-    'data-tooltip-type': Ib.SPECIAL,
+    'data-tooltip-type': KindEnum.SPECIAL,
     'data-tooltip-show-above': !0,
     'data-tooltip-timeout-delay': 50,
     'data-tooltip': _$$S,
     'data-tooltip-ai-beta-text': getI18nString('fullscreen.context_menu.auto_rename_layers'),
     'data-tooltip-ai-beta-action': JT.AUTO_RENAME_LAYERS
   }), []);
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: J0,
     onClick: () => {
       Br({
@@ -425,10 +425,10 @@ function eM(e) {
       panelType: e.panelType,
       scrollLeft: e.scrollLeft,
       useUI3Icon: e.useUI3Icons
-    }), (e.isThumbnail || e.isFavicon || e.isSocialImage) && jsx(_$$B, {
+    }), (e.isThumbnail || e.isFavicon || e.isSocialImage) && jsx(SvgComponent, {
       'data-tooltip': e.isFavicon ? getI18nString('fullscreen.object_row.favicon') : e.isSocialImage ? getI18nString('fullscreen.object_row.social_image') : getI18nString('fullscreen.object_row.file_thumbnail'),
       'data-tooltip-show-above': !0,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'className': V3,
       'svg': _$$A7
     }), e.isRenaming && jsx(ks, {
@@ -690,7 +690,7 @@ let eA = memo(e => {
   let e5 = !e.hideRowActions && !e.isRenaming && !e.isReadOnly && !e.isDragging && !eD;
   let e6 = jsx('div', {
     'className': u4,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': $ ? Q : null,
     'data-tooltip-max-lines': 4,
     'data-tooltip-show-immediately': !0,
@@ -742,7 +742,7 @@ let eA = memo(e => {
           useUI3Icons: !0
         }), e.hasWarning && jsx('div', {
           'className': g()(_$$s.flex.alignCenter.mr16.$, QW),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': e.warningMessage,
           'data-tooltip-max-lines': 4,
           'data-tooltip-show-immediately': !0,
@@ -808,7 +808,7 @@ export let $$eP1 = memo(e => {
   let s = e.hasRefToHoveredDef || t || e.isTemporarilyHovered;
   let l = _$$Z('prototype_sections_zoom');
   let a = useCallback(e => {
-    l(QZ({
+    l(computeFullscreenViewportForNode({
       nodeId: e,
       alwaysPan: !0
     }));

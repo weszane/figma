@@ -7,7 +7,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { cn } from "../figma_app/141320";
 import { MS } from "../figma_app/797994";
-import { _X, Pw } from "../figma_app/121751";
+import { isReduxDeprecationShadowreadOrCutover, ConfigGroups } from "../figma_app/121751";
 import { FFileType, FResourceCategoryType, FProductAccessType } from "../figma_app/191312";
 import { TeamFileLimitsInfo, FileCanEditIgnorePaidStatus, TeamById } from "../figma_app/43951";
 import { aW, sK, cD, FQ } from "../figma_app/598018";
@@ -73,9 +73,9 @@ import { canCreateFileType } from "../figma_app/687776";
 import { V3 } from "../figma_app/976345";
 import { zE, uM } from "../905/738636";
 import { XZ } from "../figma_app/176973";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { getNewFileConfig } from "../905/766303";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { M4 } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
@@ -85,7 +85,7 @@ import { i as _$$i2 } from "../905/46262";
 import { k as _$$k3 } from "../905/443820";
 import { J as _$$J } from "../905/614223";
 import { xk, Ay as _$$Ay2 } from "@stylexjs/stylex";
-import { B as _$$B2 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A as _$$A } from "../svg/546647";
 import { A as _$$A2 } from "../svg/831814";
 import { throwTypeError } from "../figma_app/465776";
@@ -135,7 +135,7 @@ import { g as _$$g3 } from "../905/125190";
 import { C as _$$C } from "../905/520159";
 import { ScreenReaderOnly } from "../905/172252";
 import { useModalManager, ModalRoot } from "../905/437088";
-import { bL as _$$bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { wY } from "../figma_app/708845";
 import { getI18nResourceKey } from "../905/528121";
@@ -672,7 +672,7 @@ function eJ(e) {
         openNewFileIn: d,
         fileName,
         callback: e => {
-          Cu({
+          logAndTrackCTA({
             userId: i.user?.id,
             fileKey: e
           }, eventName);
@@ -756,7 +756,7 @@ function eJ(e) {
     source: e
   }) {
     let r = useStore();
-    let t = dq() ?? void 0;
+    let t = useCurrentUserOrgId() ?? void 0;
     let i = cD();
     let s = FC();
     let n = _6();
@@ -780,7 +780,7 @@ function eJ(e) {
         });
         t.editorType = FFileType.DESIGN;
         t.callback = e => {
-          Cu({
+          logAndTrackCTA({
             fileKey: e,
             experiment: "exp_tooltips_plus_onboarding"
           }, "Failed to open captive file");
@@ -1015,12 +1015,12 @@ let e3 = forwardRef(function (e, r) {
   return jsx("div", {
     className: "nux_dynamic_preview_icon--iconContainer--MjZgL",
     ref: r,
-    children: e.hasFigJamIntent ? jsx(_$$B2, {
+    children: e.hasFigJamIntent ? jsx(SvgComponent, {
       svg: _$$A,
       useOriginalSrcFills_DEPRECATED: !0,
       autosize: !0,
       width: "32px"
-    }) : jsx(_$$B2, {
+    }) : jsx(SvgComponent, {
       svg: _$$A2,
       useOriginalSrcFills_DEPRECATED: !0,
       autosize: !0,
@@ -1909,7 +1909,7 @@ function rH() {
       multiple: 2
     }), jsxs("div", {
       className: XI,
-      children: [jsx(_$$B2, {
+      children: [jsx(SvgComponent, {
         svg: _$$A3,
         className: Q2,
         autosize: !0,
@@ -2766,7 +2766,7 @@ function tm(e) {
     },
     trusted: !0,
     className: `team_welcome--copyLinkText--NZlNM ${e.adtlClassName}`,
-    children: [jsx(_$$B2, {
+    children: [jsx(SvgComponent, {
       svg: _$$A4
     }), renderI18nText("rcs.team_welcome.copy_to_invite")]
   });
@@ -4276,7 +4276,7 @@ function i_({
     "data-testid": OO,
     "aria-label": getI18nString("new_user_experience.button.back"),
     RUMEnabled: !0,
-    children: jsx(_$$B2, {
+    children: jsx(SvgComponent, {
       svg: _$$A5,
       className: "x1ypdohk xw4jnvo x1rg5ohu x1qo6gao",
       autosize: !0
@@ -4331,12 +4331,12 @@ function ip(e) {
             }), jsx("div", {
               className: "x1uysmmv xnr0r3r x1849jeq xqvfhly",
               ref: c,
-              children: e.hasFigJamIntent ? jsx(_$$B2, {
+              children: e.hasFigJamIntent ? jsx(SvgComponent, {
                 svg: _$$A,
                 useOriginalSrcFills_DEPRECATED: !0,
                 autosize: !0,
                 width: "32px"
-              }) : jsx(_$$B2, {
+              }) : jsx(SvgComponent, {
                 svg: _$$A2,
                 useOriginalSrcFills_DEPRECATED: !0,
                 autosize: !0,
@@ -4407,7 +4407,7 @@ function im(e) {
       entryPoint: e.entryPoint
     },
     children: jsx("div", {
-      children: jsx(_$$bL, {
+      children: jsx(ModalRootComponent, {
         manager: l,
         width: "fit-content",
         height: "fixed",
@@ -4425,7 +4425,7 @@ function im(e) {
                   children: jsx("div", {
                     className: "xw4jnvo x1gnnpzl",
                     ref: t,
-                    children: jsx(_$$B2, {
+                    children: jsx(SvgComponent, {
                       svg: _$$A2,
                       useOriginalSrcFills_DEPRECATED: !0,
                       autosize: !0,
@@ -4600,13 +4600,13 @@ export function $$ij0(e) {
   let i = getIsAndroidOrIphoneNotFigmaMobile();
   let a = useSelector(e => MS(e.userFlags));
   let m = useSelector(e => e.currentTeamId);
-  let E = useSubscription(TeamById(_X(Pw.GROUP_7) && m ? {
+  let E = useSubscription(TeamById(isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && m ? {
     teamId: m
   } : null));
   let b = useMemo(() => E.transform(({
     team: e
   }) => e), [E]);
-  let j = useSelector(r => e.isGen1 || _X(Pw.GROUP_7) && "loaded" !== b.status ? null : FQ(r, b.data));
+  let j = useSelector(r => e.isGen1 || isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && "loaded" !== b.status ? null : FQ(r, b.data));
   let C = useSelector(e => null !== e.user && cn(e.user));
   let w = useRef();
   let k = useIsSelectedFigmakeFullscreen();

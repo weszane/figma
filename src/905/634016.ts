@@ -10,7 +10,7 @@ import { ensureContext } from "../905/61417";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { P } from "../905/143421";
 import { defaultComponentAttribute } from "../905/577641";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 let l = "[role=option]";
 let f = Math.floor(1e3 / 60);
 let _ = createContext(null);
@@ -232,7 +232,7 @@ function k({
   htmlAttributes: e,
   ...t
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ...t,
     htmlAttributes: {
       tabIndex: -1,

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useEffect } from "react";
 import { k } from "../905/443820";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
 var l = s;
 export let $$d0 = forwardRef(function ({
@@ -27,7 +27,7 @@ export let $$d0 = forwardRef(function ({
       className: "component_browser_input_dropdown--list--m1Kui",
       children: t.map((e, t) => jsx("li", {
         ref: t === s ? _ : null,
-        children: jsx(E, {
+        children: jsx(ButtonPrimitive, {
           className: l()("component_browser_input_dropdown--item--7nu7x", {
             "component_browser_input_dropdown--selected--CWEgq": t === s
           }),

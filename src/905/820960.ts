@@ -13,8 +13,8 @@ import { H as _$$H } from "../905/474029";
 import { DN, ox } from "../figma_app/909778";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { _J } from "../figma_app/314264";
-import { DQ, Pw } from "../figma_app/121751";
+import { trackTeamEvent } from "../figma_app/314264";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { useShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { FC } from "../figma_app/212807";
 import { FEntityType, FAccessLevelType } from "../figma_app/191312";
@@ -22,8 +22,8 @@ import { VP } from "../905/18797";
 import { x as _$$x } from "../905/695363";
 import { p9 } from "../figma_app/88768";
 import { hasViewerRoleAccessOnTeam, canMemberOrg, canManageNonSecretOrgTeam } from "../figma_app/642025";
-import { G as _$$G } from "../figma_app/471068";
-import { Ib } from "../905/129884";
+import { ViewTypeEnum } from "../figma_app/471068";
+import { KindEnum } from "../905/129884";
 import { $ as _$$$ } from "../905/442144";
 import { H as _$$H2 } from "../905/209153";
 import { Ys } from "../figma_app/697906";
@@ -47,7 +47,7 @@ export function $$O2(e) {
     oldValue: hasViewerRoleAccessOnTeam(e.team.id, D),
     newValue: e.teamPermissions?.isInTeam ?? !1,
     newValueReady: void 0 !== e.teamPermissions,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       teamId: e.team.id
     }
@@ -59,7 +59,7 @@ export function $$O2(e) {
     oldValue: W,
     newValue: e.teamPermissions?.canView ?? !1,
     newValueReady: void 0 !== e.teamPermissions,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     label: adminPermissionConfig.TeamTile.canUserViewTeam,
     contextArgs: {
       teamId: e.team.id,
@@ -120,8 +120,8 @@ export function $$O2(e) {
         $(e.team);
         return;
       }
-      _J("file_browser_team_click", e.team.id, D, {
-        selectedView: "recentsAndSharing" === M.view ? M.tab || _$$G.RECENTLY_VIEWED : M.view,
+      trackTeamEvent("file_browser_team_click", e.team.id, D, {
+        selectedView: "recentsAndSharing" === M.view ? M.tab || ViewTypeEnum.RECENTLY_VIEWED : M.view,
         viewMode: "grid"
       });
       i(kg({
@@ -160,7 +160,7 @@ export function $$O2(e) {
     style: {
       marginLeft: "4px"
     },
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": t,
     "data-tooltip-offset-y": -4,
     "data-tooltip-timeout-delay": 50,

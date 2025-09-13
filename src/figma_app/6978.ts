@@ -8,7 +8,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ad } from "../figma_app/811257";
 export function $$m0(e) {
   let [t, r] = lJ("frameMaskDisabled");
@@ -34,7 +34,7 @@ export function $$m0(e) {
       }),
       disabled: g,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": g ? getI18nString("sites.panel.interactions_panel.clip_contents_disabled") : void 0,
         "data-tooltip-show-above": !0,
         "data-testid": "clip-content-checkbox"

@@ -1,6 +1,6 @@
 import { getInitialOptions } from "../figma_app/169182";
 import { canAccessFullDevMode } from "../figma_app/473493";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { FFileActivityType } from "../figma_app/191312";
 import { FEditorType } from "../figma_app/53721";
 import { L } from "../905/657783";
@@ -14,7 +14,7 @@ export function $$c1(e, t, r, u, p = {}) {
     ...p
   };
   let g = e.openFile?.key;
-  if (ds(_ ? "Enter Inspect Mode" : h ? "Enter Illustration Mode" : $$d0, g, e, m, {
+  if (trackFileEvent(_ ? "Enter Inspect Mode" : h ? "Enter Illustration Mode" : $$d0, g, e, m, {
     forwardToDatadog: u
   }), getInitialOptions().org_id && g && "init" !== r) {
     if (h) return;

@@ -4,7 +4,7 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { H3 } from "../figma_app/994725";
-import { Fr } from "../figma_app/314264";
+import { trackOrgEvent } from "../figma_app/314264";
 import { J } from "../905/298764";
 let u = e => {
   let t = debugState.getState();
@@ -61,7 +61,7 @@ let $$g1 = createOptimistThunk((e, t) => {
       logs: _,
       cursor: p
     }));
-    Fr("Activity Logs Fetched", u.currentUserOrgId, u, {
+    trackOrgEvent("Activity Logs Fetched", u.currentUserOrgId, u, {
       teamIdFilter: teamId,
       eventNamesFilter: eventName,
       startDateFilter: date.start,

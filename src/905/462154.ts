@@ -11,7 +11,7 @@ import { reportError } from "../905/11";
 import { logDebug } from "../905/714362";
 import { hW } from "../figma_app/594947";
 import { fullscreenValue } from "../figma_app/455680";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { Zh } from "../figma_app/2590";
 import { bA, kC, k9, Pe, dT, LI, ft } from "../figma_app/365713";
 import { Ll } from "../figma_app/144974";
@@ -193,7 +193,7 @@ export function $$T0(e, t) {
   }(e, t);
   let n = t.getCurrentPage();
   let r = n?.guid;
-  return i && r ? QZ({
+  return i && r ? computeFullscreenViewportForNode({
     nodeId: r,
     nodeAbsoluteBounds: i,
     alwaysPan: !0,

@@ -3,7 +3,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { c as _$$c } from "../905/370443";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { j } from "../905/881708";
 import { w } from "../figma_app/106955";
 import { BQ } from "../figma_app/500946";
@@ -32,7 +32,7 @@ export class $$p0 extends j {
     if (t && i) {
       let t = debugState.dispatch;
       let n = getSingletonSceneGraph().get(this.sectionId);
-      BQ(n, t) && (e.accept(this), Cu({
+      BQ(n, t) && (e.accept(this), logAndTrackCTA({
         nodeId: this.sectionId,
         trackingDescriptor: _$$c.SECTION_PRESET_PICKER_CLICKED
       }));

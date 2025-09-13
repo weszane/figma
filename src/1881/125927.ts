@@ -12,7 +12,7 @@ import { showModalHandler, popModalStack } from "../905/156213";
 import { MB } from "../figma_app/996356";
 import { fu } from "../figma_app/831799";
 import { ViewAccessTypeEnum } from "../905/513035";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { OrgInviteModalView } from "../figma_app/43951";
 import { H_ } from "../figma_app/336853";
@@ -38,7 +38,7 @@ export function $$U3({
 }) {
   var l;
   let p = useDispatch();
-  let E = sZ();
+  let E = useCurrentUserOrg();
   let T = useSelector(e => e.orgDomains.domains);
   let R = useSelector(({
     licenseGroups: i
@@ -195,7 +195,7 @@ let $$y1 = registerModal(function ({
   licenseGroupId: e,
   workspaceId: i
 }) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let a = useDispatch();
   let o = useSelector(e => e.selectedView);
   if (!t) return jsx(Fragment, {});

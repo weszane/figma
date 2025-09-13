@@ -6,7 +6,7 @@ import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Point } from "../905/736624";
 import { GI, IZ, SK } from "../905/125333";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { F } from "../905/989956";
 import { jS, Pv } from "../905/619652";
 import { R as _$$R } from "../figma_app/640506";
@@ -124,7 +124,7 @@ export function $$N2({
   let d = o.strokeWeight === Iz;
   if (i) switch (e) {
     case "Washi tape":
-      return jsx(B, {
+      return jsx(SvgComponent, {
         svg: _$$A,
         className: cf
       });

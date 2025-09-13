@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { isInvalidValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { $j } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
@@ -69,7 +69,7 @@ export function $$I0({
     children: jsx($j, {
       bigNudgeAmount: y,
       "data-tooltip": getI18nString("fullscreen.type_panel.paragraph_spacing"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: c,
       dispatch: C,
       inputClassName: KY,

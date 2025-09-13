@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { y8 } from "../figma_app/459490";
+import { isEditDisabled } from "../figma_app/459490";
 import { u4 } from "../figma_app/991591";
 import { zE } from "../905/738636";
 import { s5 } from "../figma_app/223206";
@@ -96,7 +96,7 @@ export function $$v1() {
 function A({
   checkIsViewer: e
 }) {
-  if (y8({
+  if (isEditDisabled({
     isDisabledForViewers: e
   })) return !1;
   if (!e) {

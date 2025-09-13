@@ -3,8 +3,8 @@ import { A } from "../905/17894";
 import { Lz } from "../905/497882";
 import { AC } from "../figma_app/777551";
 import { Kc, Fh } from "../905/448740";
-import { mr } from "../figma_app/45218";
-import { PN } from "../905/54385";
+import { isWidgetOrPlugin } from "../figma_app/45218";
+import { ProductStatus } from "../905/54385";
 import { SourceType } from "../figma_app/175992";
 export let $$u1 = {
   displayName: "PriceField",
@@ -13,7 +13,7 @@ export let $$u1 = {
     localExtension: t
   }) => {
     let i = e ? vf(e.monetized_resource_metadata) ?? 0 : 0;
-    if (!((!e || mr(e)) && Kc(t, e)) || i) return i;
+    if (!((!e || isWidgetOrPlugin(e)) && Kc(t, e)) || i) return i;
   },
   validate: ({
     authorField: e,
@@ -22,7 +22,7 @@ export let $$u1 = {
     localExtension: r
   }, c) => {
     if (0 === c) {
-      if ((!t || mr(t)) && Kc(r, t)) return [{
+      if ((!t || isWidgetOrPlugin(t)) && Kc(r, t)) return [{
         key: "FREEMIUM_EXTENSION_MUST_BE_PAID",
         data: {}
       }];
@@ -72,7 +72,7 @@ export let $$u1 = {
       isSubscriptionField: i,
       currentValue: r
     }) {
-      if (!e || !mr(e)) return [];
+      if (!e || !isWidgetOrPlugin(e)) return [];
       let c = [];
       if (!AC(e) && !Kc(t, e)) {
         let t = e.monetized_resource_metadata?.price;
@@ -85,7 +85,7 @@ export let $$u1 = {
           data: {}
         });
       }
-      t && !t.manifest.permissions?.includes("payments") && e.third_party_m10n_status === PN.FLAGGED && c.push({
+      t && !t.manifest.permissions?.includes("payments") && e.third_party_m10n_status === ProductStatus.FLAGGED && c.push({
         key: "FREEMIUM_REQUIRED_FOR_MIGRATION",
         data: {}
       });
@@ -105,7 +105,7 @@ export let $$u1 = {
       publishRoleField,
       localExtension
     } = e;
-    return publishRoleField && (!existingResourceContent || mr(existingResourceContent)) ? 0 === $$m3({
+    return publishRoleField && (!existingResourceContent || isWidgetOrPlugin(existingResourceContent)) ? 0 === $$m3({
       user,
       publishRoleField,
       existingResourceContent,
@@ -202,7 +202,7 @@ export function $$f0(e) {
   return !!e?.monetized_resource_metadata?.price;
 }
 export function $$_4(e, t) {
-  return Kc(e, t) || t?.third_party_m10n_status === PN.FLAGGED;
+  return Kc(e, t) || t?.third_party_m10n_status === ProductStatus.FLAGGED;
 }
 export const LG = $$f0;
 export const WN = $$u1;

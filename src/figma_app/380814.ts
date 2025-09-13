@@ -5,7 +5,7 @@ import { assertNotNullish } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { U as _$$U } from "../905/708285";
@@ -26,7 +26,7 @@ import { Oe } from "../figma_app/933328";
 import { BQ, yp, rW } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { getLocalVariableInfo } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { JU } from "../figma_app/626177";
 import { l6, c$ as _$$c$ } from "../905/794875";
 import { NF } from "../figma_app/406976";
@@ -217,13 +217,13 @@ export function $$J0({
       horizontalAlignItems: "end",
       verticalAlignItems: "center",
       padding: 16,
-      children: jsx($n, {
+      children: jsx(Button, {
         type: "submit",
         disabled: !d,
         recordingKey: generateRecordingKey(r, "createButton"),
         htmlAttributes: {
           "data-tooltip": getI18nString("variables.create_modal.invalid_variable_name"),
-          "data-tooltip-type": d ? void 0 : Ib.TEXT
+          "data-tooltip-type": d ? void 0 : KindEnum.TEXT
         },
         children: renderI18nText("variables.create_modal.create_button")
       })
@@ -315,7 +315,7 @@ export function $$Z1({
             onClick: () => b(T),
             recordingKey: generateRecordingKey(e, "detachVariableButton"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
             },
             children: jsx(_$$U, {})

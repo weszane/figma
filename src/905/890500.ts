@@ -9,7 +9,7 @@ import { Df, Mv, AY, QY } from "../figma_app/770088";
 import { showModalHandler } from "../905/156213";
 import { I_ } from "../905/234821";
 import { selectCurrentUser } from "../905/372672";
-import { kT } from "../905/380385";
+import { ThreadType } from "../905/380385";
 import { v } from "../905/266815";
 import { E as _$$E } from "../905/565019";
 import { VX } from "../905/50151";
@@ -110,11 +110,11 @@ export function $$y0(e) {
   let P = e.comment.parent_id ? [R, N] : [R];
   let O = [];
   if (e.thread && e.thread.id === e.comment.id) switch (e.thread.sidebarItemType) {
-    case kT.FEED_POST:
+    case ThreadType.FEED_POST:
       O = [k];
       break;
-    case kT.COMMENT_THREAD:
-    case kT.LITMUS_COMMENT_THREAD:
+    case ThreadType.COMMENT_THREAD:
+    case ThreadType.LITMUS_COMMENT_THREAD:
       O = e.comment.user_id === A?.id ? [T, k, N] : [T, k];
       break;
     default:

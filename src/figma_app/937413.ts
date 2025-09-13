@@ -14,7 +14,7 @@ import { Rh } from "../905/844322";
 import { showModalHandler } from "../905/156213";
 import { i as _$$i } from "../905/182187";
 import { an } from "../905/81009";
-import { ak } from "../figma_app/314264";
+import { trackFileCopied } from "../figma_app/314264";
 import { F as _$$F2 } from "../905/224";
 import { x as _$$x } from "../905/439650";
 import { _ as _$$_ } from "../905/780571";
@@ -241,7 +241,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
         }));
       }
       let a = t.map(e => null != e.resolve ? e.resolve.data.meta : null).filter(e => null != e).map(e => e);
-      ak(copyFiles, a, e.getState());
+      trackFileCopied(copyFiles, a, e.getState());
     }
   });
 });

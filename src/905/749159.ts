@@ -1,7 +1,7 @@
 import { registerLegacyModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
 import { Command, DesignGraphElements } from "../figma_app/763686";
@@ -47,7 +47,7 @@ function _({
     onClose: () => f(popModalStack()),
     preventUserClose: _
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: v,
     width: 420,
     height: "dynamic",

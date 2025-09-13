@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { k as _$$k } from "../905/443820";
-import { E as _$$E } from "../905/632989";
-import { $n, IK } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button, ButtonWide } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { Q } from "../1250/220026";
 import { q } from "../905/838985";
@@ -24,7 +24,7 @@ import { Q as _$$Q } from "../905/978641";
 import { ce, Lm, U_, mF } from "../figma_app/755939";
 import { c as _$$c } from "../905/370443";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { zA, o6, VU } from "../1250/322393";
 var h = f;
 let O = "cooper_template_ui--tile--jISg-";
@@ -73,7 +73,7 @@ export function $$q8({
   }) : getI18nString("cooper.templates.view_n_templates", {
     numTemplates: numComponents
   }) : l ? getI18nString("cooper.templates.view") : getI18nString("cooper.templates.view_templates");
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     onClick: i,
     htmlAttributes: {
       "data-testid": `templateDetailTile.${e}`
@@ -212,7 +212,7 @@ export function $$Y2({
 }) {
   let t = useCurrentPrivilegedPlan("useAllowInternalTemplatesCooper");
   let n = "loaded" === t.status ? t.data?.name : void 0;
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     onClick: e,
     className: P,
     "data-testid": "create-new-template-tile",
@@ -290,13 +290,13 @@ export function $$Z5({
   } = e;
   let l = useRef(null);
   let d = o6(l) ? {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": name,
     "data-tooltip-timeout-delay": 300
   } : {};
   return jsx("div", {
     className: D,
-    children: jsxs(_$$E, {
+    children: jsxs(ButtonPrimitive, {
       onClick: n,
       actionOnPointerDown: !0,
       htmlAttributes: {
@@ -336,7 +336,7 @@ export function $$X4({
 }) {
   return jsx("div", {
     className: D,
-    children: jsxs(_$$E, {
+    children: jsxs(ButtonPrimitive, {
       onClick: e,
       actionOnPointerDown: !0,
       className: L,
@@ -389,7 +389,7 @@ function et({
 }) {
   let n = useRef(null);
   let i = o6(n) ? {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e,
     "data-tooltip-timeout-delay": 300
   } : {};
@@ -504,7 +504,7 @@ function ea({
       className: "cooper_template_ui--templateTileHoverOverlay--TZ2iV",
       "aria-label": n || t,
       role: "button",
-      children: "add" === e ? jsx($n, {
+      children: "add" === e ? jsx(Button, {
         iconPrefix: jsx(_$$e, {
           style: {
             "--color-icon": "white"
@@ -515,7 +515,7 @@ function ea({
         },
         variant: "primary",
         children: t
-      }) : jsx(_$$E, {
+      }) : jsx(ButtonPrimitive, {
         className: "cooper_template_ui--hoverOverlayWhiteButton--ePHj2",
         htmlAttributes: {
           tabIndex: -1
@@ -528,7 +528,7 @@ function ea({
 export function $$er3({
   isWide: e = !1
 }) {
-  return e ? jsx(IK, {
+  return e ? jsx(ButtonWide, {
     variant: "secondary",
     onClick: () => FJ($$G0, "_blank"),
     children: renderI18nText("cooper.templates.show_me_how")

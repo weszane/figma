@@ -40,7 +40,7 @@ import { e0 as _$$e2 } from '../905/696396';
 import { G as _$$G } from '../905/750789';
 import { AutoLayout } from '../905/470281';
 import { O as _$$O } from '../905/833838';
-import { sZ } from '../905/845253';
+import { useCurrentUserOrg } from '../905/845253';
 import { sf } from '../905/929976';
 import { lQ } from '../905/934246';
 import { O as _$$O2 } from '../905/936515';
@@ -95,7 +95,7 @@ import { EQ, MX } from '../figma_app/684446';
 import { wY } from '../figma_app/708845';
 import { fu } from '../figma_app/831799';
 import { ps, V7, Xv, z7, ZY } from '../figma_app/845611';
-import { kt } from '../figma_app/858013';
+import { LoadingSpinner } from '../figma_app/858013';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { Ex, vj, zE } from '../figma_app/919079';
 import es from '../vendor/923386';
@@ -255,7 +255,7 @@ function X(e) {
 }
 function Q(e) {
   let t = Xf(e.orgId);
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let i = useMemo(() => a ? uE({
     invoices: t.data?.invoices ?? [],
     org: a,
@@ -1316,7 +1316,7 @@ function tu({
           className: 'seat_requests_table_mini_view--requestContainer---8XA1',
           children: e2 ? jsx('div', {
             className: 'seat_requests_table_mini_view--loadingView--FAKIu',
-            children: jsx(kt, {
+            children: jsx(LoadingSpinner, {
               className: _$$s.selfCenter.$
             })
           }) : jsx(Fragment, {

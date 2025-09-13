@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -35,7 +35,7 @@ export function $$_0(e) {
         children: [jsx("span", {
           children: e.provisioningApiToken
         }), (s = e.provisioningApiToken, document.queryCommandSupported("copy") && jsx("span", {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "link",
             onClick: () => a(s),
             children: renderI18nText("org_settings.sso.copy")

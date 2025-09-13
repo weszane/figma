@@ -21,7 +21,7 @@ import { isValidValue, normalizeValue, valueOrFallback, isInvalidValue } from ".
 import { Um as _$$Um } from "../905/848862";
 import { _P } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { W4 } from "../figma_app/178475";
 import { R as _$$R } from "../897/631032";
 import { PQ, F4, xX } from "../897/564585";
@@ -320,7 +320,7 @@ export function $$q2({
     children: [Q && jsx(W4, {
       className: Lp,
       "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: d,
       inputClassName: Gl,
       onValueChange: t => {
@@ -347,7 +347,7 @@ export function $$q2({
       children: ([e]) => jsx(W4, {
         className: Lp,
         "data-tooltip": getI18nString("proto.animation_panel.easing_duration_tooltip"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: d,
         inputClassName: Gl,
         onValueChange: P,

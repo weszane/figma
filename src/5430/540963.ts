@@ -31,8 +31,8 @@ import { X as _$$X } from "../5430/966412";
 import { Vq } from "../figma_app/342207";
 import { buildUploadUrl } from "../figma_app/169182";
 import { generateUUIDv4 } from "../905/871474";
-import { qc, kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingOverlay, LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { CS } from "../figma_app/275462";
 import { Ai, _8, dL, aP } from "../figma_app/530167";
 import { YU, M0, Zs, gZ, xj, si, E1 } from "../figma_app/740025";
@@ -73,7 +73,7 @@ import { t as _$$t2 } from "../5430/535653";
 import { tx as _$$tx2 } from "../figma_app/395505";
 import { oB, j7, sf } from "../905/929976";
 import { selectCurrentUser } from "../905/372672";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { H as _$$H } from "../5430/997712";
 import { a as _$$a2 } from "../905/925868";
 import { p as _$$p } from "../figma_app/353099";
@@ -100,7 +100,7 @@ import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
 import { N as _$$N3 } from "../905/696711";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { CommunityResourceStat, UserMonetizationMetadata } from "../figma_app/43951";
 import { StatusType, SourceType, PayoutMetric } from "../figma_app/175992";
 import { s as _$$s3 } from "../5430/114211";
@@ -112,7 +112,7 @@ import { A as _$$A4 } from "../svg/815368";
 import { Hl } from "../905/840929";
 import { dxy, ZI8, g8m, d8i, wOr } from "../figma_app/27776";
 import { A as _$$A5 } from "../1617/230645";
-import { Ch } from "../figma_app/45218";
+import { getResourceWithMeta } from "../figma_app/45218";
 import { Cv, cS, bN } from "../figma_app/795938";
 import { A6 } from "../905/350234";
 import { vr } from "../figma_app/514043";
@@ -254,11 +254,11 @@ let X = function ({
       style: {
         display: "none"
       }
-    }), jsx(_$$B, {
+    }), jsx(SvgComponent, {
       svg: _$$A2,
       className: "profile_header--uploadIcon--FFtoL",
       onClick: d
-    }), c && jsx(qc, {})]
+    }), c && jsx(LoadingOverlay, {})]
   });
 };
 function J({
@@ -787,7 +787,7 @@ let tE = registerModal(function () {
     hideCancel: !0,
     children: a ? jsx("div", {
       className: "creator_payout_statements_modal--loadingSpinner--HMTTZ",
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     }) : jsxs("div", {
       children: [0 === r.length && jsx("div", {
         children: renderI18nText("community.seller.no_payout_statements_yet")
@@ -808,7 +808,7 @@ let tE = registerModal(function () {
             className: "creator_payout_statements_modal--payoutStatementRow--4fDH3",
             href: e.signed_s3_url,
             download: `payout_statement_${e.year}_${e.month}.csv`,
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: _$$A4
             }), f(e)]
           }, `payout-statement-${e.year}-${e.month}`))
@@ -849,10 +849,10 @@ function t3({
     query: `(min-width: ${t2}px)`,
     children: jsx("span", {
       className: "profile_metrics_stats--infoTooltipContainer---MeEH",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e,
       "data-tooltip-max-width": "250",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A5,
         className: "profile_metrics_stats--infoTooltip--lsZkn"
       })
@@ -1043,7 +1043,7 @@ function rx() {
     className: ri,
     children: [jsx("div", {
       className: "resource_stat_row--emptyThumbnailWrapper--NNO1Y resource_stat_row--thumbnailWrapper--M0vtN",
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     }), jsx(_$$z2, {
       query: `(min-width: ${ru}px)`,
       children: jsxs("div", {
@@ -1162,7 +1162,7 @@ function rg({
     }), e.map((e, t, r) => jsxs("div", {
       className: "resource_stats_list--resourceStatContainer--GxfxK",
       children: [jsx(ry, {
-        resource: Ch(e)
+        resource: getResourceWithMeta(e)
       }), t < r.length - 1 && jsx("div", {
         className: "resource_stats_list--divider--F4HpT"
       }, `${e.id}-divider`)]
@@ -1241,7 +1241,7 @@ function rj({
   };
   let b = () => {
     l(!0);
-    Cu({
+    logAndTrackCTA({
       user_id: s.id
     }, "stripe_dasbhboard_link_clicked");
     r(tg({
@@ -1261,7 +1261,7 @@ function rj({
           className: t$,
           children: [a && jsx("div", {
             className: tz,
-            children: jsx(kt, {
+            children: jsx(LoadingSpinner, {
               shouldMatchTextColor: !0
             })
           }), renderI18nText("community.seller.view_stripe_dashboard")]
@@ -1286,7 +1286,7 @@ function rj({
           className: t$,
           children: [a && jsx("div", {
             className: tz,
-            children: jsx(kt, {
+            children: jsx(LoadingSpinner, {
               shouldMatchTextColor: !0
             })
           }), jsx("div", {
@@ -1517,7 +1517,7 @@ function rP(e) {
       },
       "aria-label": getI18nString("community.profiles.profile_actions"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.profiles.profile_actions")
       },
       children: jsx(_$$J2, {})
@@ -1684,7 +1684,7 @@ function rQ() {
         children: jsx(rq, {})
       }), jsx("div", {
         className: "profile_resources_grid--loadingMoreContainer--jp4W1 profile_resources_grid--loadingContainer--hsPEQ",
-        children: ("loading" === l || "loading" === m) && jsx(kt, {})
+        children: ("loading" === l || "loading" === m) && jsx(LoadingSpinner, {})
       })]
     })
   });
@@ -2097,10 +2097,10 @@ function se({
           onClick: this.onSavesTabClick,
           tabIndex: 0,
           "data-onboarding-key": "cmty-profile-save-tab",
-          children: [renderI18nText("community.profiles.saved"), jsx(_$$B, {
+          children: [renderI18nText("community.profiles.saved"), jsx(SvgComponent, {
             svg: _$$A9,
             className: tK,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("community.only_visible_to_you")
           })]
         })
@@ -2147,10 +2147,10 @@ function se({
                 onClick: this.onMetricsTabClick,
                 role: "button",
                 tabIndex: 0,
-                children: [renderI18nText("community.seller.profiles.metrics"), jsx(_$$B, {
+                children: [renderI18nText("community.seller.profiles.metrics"), jsx(SvgComponent, {
                   svg: _$$A9,
                   className: tK,
-                  "data-tooltip-type": Ib.TEXT,
+                  "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": getI18nString("community.only_visible_to_you")
                 })]
               })
@@ -2186,7 +2186,7 @@ function se({
               children: [jsx("span", {
                 "data-onboarding-key": eX,
                 children: renderI18nText("community.seller.profiles.metrics")
-              }), jsx(_$$B, {
+              }), jsx(SvgComponent, {
                 svg: _$$A9,
                 className: tK
               })]

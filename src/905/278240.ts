@@ -8,7 +8,7 @@ import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Oe } from "../figma_app/933328";
 import { Lk } from "../figma_app/975811";
@@ -17,7 +17,7 @@ import { sT } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { Um } from "../905/848862";
 import { TK } from "../905/129660";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vD } from "../figma_app/178475";
 import { a2 } from "../figma_app/762558";
 import { ow } from "../905/188421";
@@ -31,7 +31,7 @@ import { u3, y$ } from "../figma_app/152690";
 import { MH } from "../figma_app/394327";
 import { k as _$$k2 } from "../905/67286";
 import { Ej, hE } from "../905/71683";
-class L extends c$ { }
+class L extends c$ {}
 let F = [10, 11, 12, 13, 14, 15, 16, 20, 24, 32, 36, 40, 48, 64, 96, 128];
 export function $$M0({
   id: e,
@@ -144,12 +144,12 @@ function j({
     children: e
   }, `font-size-${e}`)));
   M || $.push(jsx(sK, {}, "divider"), jsx(L, {
-    icon: jsx(_$$B, {
+    icon: jsx(SvgComponent, {
       svg: _require
     }),
     value: -1,
     tooltip: getI18nString("fullscreen.properties_panel.apply_variable"),
-    tooltipType: Ib.TEXT
+    tooltipType: KindEnum.TEXT
   }, "apply-variable"));
   return jsx(Fragment, {
     children: jsx(ow, {
@@ -166,7 +166,7 @@ function j({
           bigNudgeAmount,
           className: Ej,
           "data-tooltip": getI18nString("fullscreen.type_panel.font_size"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           disabled: g,
           dispatch: G,
           dropdownClassName: hE,

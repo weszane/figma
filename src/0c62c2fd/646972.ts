@@ -1,7 +1,7 @@
 import { throwTypeError } from "../figma_app/465776";
 import { nn } from "../figma_app/186343";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { cT } from "../figma_app/32128";
 import { Qy } from "../figma_app/146384";
@@ -9,7 +9,7 @@ if (443 == require.j) {}
 let c = /^Page \d+$/;
 var u = (e => (e.FILE_LOADING = "fileLoading", e.K_12 = "k12", e.READ_ONLY = "readOnly", e.PERSONAL_DRAFT = "personalDraft", e))(u || {});
 export function $$m1() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   let t = !!e?.k12_google_org;
   let r = selectCurrentUser()?.profile?.job_title;
   return t && "student" === r;

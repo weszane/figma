@@ -9,12 +9,12 @@ import { createOptimistThunk } from "../905/350402";
 import { Qi, fy } from "../figma_app/559491";
 import { showModal, showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { canRunExtensions } from "../figma_app/12796";
 import { getPermissionsState } from "../figma_app/642025";
 import { getPublishingData } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
 import { U as _$$U } from "../905/424668";
@@ -58,7 +58,7 @@ export let $$x0 = createOptimistThunk(async (e, {
   } = R;
   let U = (r ? publishedPlugins[r] : void 0) || (r ? publishedWidgets[r] : void 0);
   let B = null != t ? localPlugins[t] : void 0;
-  if (U && !m3(U) && Ul(U) && B && B.manifest.permissions?.includes("payments") && user && !user.has_passed_visual_compliance) {
+  if (U && !hasMonetizedResourceMetadata(U) && Ul(U) && B && B.manifest.permissions?.includes("payments") && user && !user.has_passed_visual_compliance) {
     e.dispatch(showModal({
       type: _$$O.type
     }));
@@ -123,7 +123,7 @@ export let $$x0 = createOptimistThunk(async (e, {
     }));
     return;
   }
-  if (Fullscreen && Fullscreen.triggerAction("set-tool-default", null), uE("show_publish_plugin_modal", R, {
+  if (Fullscreen && Fullscreen.triggerAction("set-tool-default", null), trackUserEvent("show_publish_plugin_modal", R, {
     entryPoint: c,
     userId: R.user?.id,
     orgId: R.currentUserOrgId,

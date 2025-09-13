@@ -8,7 +8,7 @@ import { AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import u from "classnames";
 import { _ as _$$_ } from "../905/569825";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -28,14 +28,14 @@ import { Zr } from "../figma_app/678782";
 import { BK } from "../905/848862";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { q } from "../figma_app/57000";
 import { $A } from "../905/782918";
 import { XR, uA, FQ } from "../figma_app/781512";
 import { A as _$$A } from "../905/79603";
 import { j as _$$j } from "../905/834956";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { n$, Mg, UF, zj, hF, l4, wg, Jk, Y7, S0, i5, FH, WB, sH } from "../905/709864";
 var $$p = u;
 let $$H = "zoom-input-dropdown";
@@ -45,7 +45,7 @@ function z({
   toggleZoomMenu: r,
   recordingKey: s
 }) {
-  let l = am();
+  let l = trackFileEventWithUser();
   useEffect(() => {
     l("View Menu Opened");
   }, [l]);
@@ -71,7 +71,7 @@ function z({
   let $ = getObservableOrFallback(AppStateTsApi.editorPreferences().showPropertyLabels);
   let X = getObservableOrFallback(AppStateTsApi.editorPreferences().showFrameGrids);
   let q = getObservableOrFallback(_$$d().showFrameGridsViewOnly);
-  let J = Td();
+  let J = useIsCanvasEditDisabled();
   let Z = !J;
   let Q = Z ? "showFrameGrids" : "showFrameGridsViewOnly";
   let ee = getObservableOrFallback(getFeatureFlags().figjam_snap_to_dot_grid_reset ? UK().snapToDotGridStagingReset : UK().snapToDotGrid);
@@ -592,7 +592,7 @@ export let $$K0 = memo(function ({
         }),
         className: g,
         "data-tooltip": getI18nString("fullscreen.zoom_menu.zoom_view_options"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         enabled: !0,
         isUI3: !0,
         onClick: h,

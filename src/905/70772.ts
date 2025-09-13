@@ -14,7 +14,7 @@ import { popModalStack } from "../905/156213";
 import { jD } from "../905/765855";
 import { Dm, DT } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { UR } from "../905/301347";
 import { b as _$$b } from "../905/168657";
@@ -196,7 +196,7 @@ export let $$k0 = registerModal(function (e) {
               ...C
             }), !!getFeatureFlags().comments_media_alt_text && (e.canEdit || O[i].altText) && jsx("button", {
               className: O.length > 1 ? "attachment_detail_modal--altTextAboveThumbnails--wloH- attachment_detail_modal--altText--n00JY feed_post_detail_modal--contentOverlayPill--1jsoj" : "attachment_detail_modal--altText--n00JY feed_post_detail_modal--contentOverlayPill--1jsoj",
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": k ? void 0 : getI18nString("comments.add_description"),
               "data-tooltip-show-above": !0,
               onClick: () => k ? K(O[i].altText) : W(),

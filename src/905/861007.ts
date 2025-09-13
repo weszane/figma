@@ -7,9 +7,9 @@ import { g as _$$g2 } from "../905/687226";
 import { V } from "../905/900932";
 import { e as _$$e } from "../905/483726";
 import u from "classnames";
-import { kt, dW } from "../figma_app/858013";
+import { LoadingSpinner, ImageBackedLoading } from "../figma_app/858013";
 import { k } from "../905/700890";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { OT } from "../905/70369";
 import { VisualBellIcon, VisualBellShape } from "../905/576487";
 import { Kk, hR, Nl, H0, Xy, m$ } from "../figma_app/143628";
@@ -26,13 +26,13 @@ export function $$I0({
 }) {
   if (t === VisualBellIcon.SPINNER) return jsx("div", {
     className: Kk,
-    children: jsx(kt, {})
+    children: jsx(LoadingSpinner, {})
   });
   if (t === VisualBellIcon.IMAGE_BACKED_SPINNER) return jsx("div", {
     className: Kk,
-    children: jsx(dW, {})
+    children: jsx(ImageBackedLoading, {})
   });
-  if (t === VisualBellIcon.CHECK) return jsx(B, {
+  if (t === VisualBellIcon.CHECK) return jsx(SvgComponent, {
     className: Kk,
     svg: _$$A2
   });
@@ -42,14 +42,14 @@ export function $$I0({
     }
   });
   if (t === VisualBellIcon.CHECK_WITH_CIRCLE) return jsx(W, {});
-  if (t === VisualBellIcon.EXCLAMATION) return jsx(B, {
+  if (t === VisualBellIcon.EXCLAMATION) return jsx(SvgComponent, {
     className: Kk,
     svg: _$$A3
   });
-  if (t === VisualBellIcon.RETURN_TO_INSTANCE) return jsx(B, {
+  if (t === VisualBellIcon.RETURN_TO_INSTANCE) return jsx(SvgComponent, {
     className: Kk,
     svg: _$$A
-  });else if (t === VisualBellIcon.UNDO) return jsx(B, {
+  });else if (t === VisualBellIcon.UNDO) return jsx(SvgComponent, {
     className: Kk,
     svg: _$$A
   });else if (t === VisualBellIcon.PROGRESS) return jsx(k, {

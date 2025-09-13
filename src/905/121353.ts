@@ -3,12 +3,12 @@ import { useCallback, useMemo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { t as _$$t } from "../905/150656";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import p from "../vendor/241899";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { H as _$$H } from "../905/620380";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -54,10 +54,10 @@ import { $$in, WX } from "../figma_app/350203";
 import { j6, fu } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
 import { eY } from "../figma_app/722362";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { e0 } from "../905/696396";
 import { KT, Cd, ME, jc, DK, $o } from "../905/54042";
 var m = p;
@@ -331,15 +331,15 @@ function ep({
     })]
   });
   i = ex || draftSubmissionResult?.result !== "success" ? ex || draftSubmissionResult?.result !== "failure" ? jsxs(Fragment, {
-    children: [eg.isOnFirstTab ? jsx($n, {
+    children: [eg.isOnFirstTab ? jsx(Button, {
       variant: "secondary",
       onClick: Q,
       children: getI18nString("general.cancel")
-    }) : !ex && jsx($n, {
+    }) : !ex && jsx(Button, {
       variant: "secondary",
       onClick: eg.selectPreviousTab,
       children: getI18nString("general.back")
-    }), eg.isOnLastTab ? jsx($n, {
+    }), eg.isOnLastTab ? jsx(Button, {
       disabled: draftSubmissionResult?.result === "pending" || ex,
       onClick: () => {
         checkProgress() && submit?.();
@@ -348,7 +348,7 @@ function ep({
       children: draftSubmissionResult?.result === "pending" || ex ? jsx(_$$k, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
-    }) : jsx($n, {
+    }) : jsx(Button, {
       onClick: () => {
         checkProgress() && eg.selectNextTab();
       },
@@ -376,7 +376,7 @@ function ep({
         successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
       children: getI18nString("general.go_back")
@@ -406,7 +406,7 @@ function ep({
     });
   }, [Y]);
   let ew = Lz(e.fieldStates.name, "");
-  let eC = _$$A(() => {
+  let eC = useDebouncedCallback(() => {
     Y.current($$in, {
       step: WX.EDIT_NAME
     });
@@ -415,7 +415,7 @@ function ep({
     ew && er.name.touched && eC();
   }, [ew, eC, er.name.touched]);
   let eT = Lz(e.fieldStates.description, "");
-  let ek = _$$A(() => {
+  let ek = useDebouncedCallback(() => {
     Y.current($$in, {
       step: WX.EDIT_DESCRIPTION
     });
@@ -464,7 +464,7 @@ export function $$em0(e) {
   let o = selectUser();
   let l = _$$h2(figFile);
   let d = useSelector(e => xw(e) ?? void 0, deepEqual);
-  let c = sZ();
+  let c = useCurrentUserOrg();
   let u = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let p = useSelector(e => e.authedProfilesById);
   let m = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
@@ -487,7 +487,7 @@ export function $$em0(e) {
     properties: {
       userId: o.id,
       orgId: c?.id,
-      resourceType: vt.HUB_FILE,
+      resourceType: ResourceTypeNoComment.HUB_FILE,
       resourceId: existingHubFile?.id,
       fileKey: figFile?.key,
       editorType: figFile?.editor_type,

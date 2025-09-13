@@ -7,7 +7,7 @@ import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_a
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { F } from "../905/680873";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Ih } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -62,7 +62,7 @@ function O(e) {
       className: t,
       children: [jsx("div", {
         className: "memory_warning--memoryWarningContentIconContainer--CeqsI",
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           className: n,
           svg: r
         })
@@ -91,7 +91,7 @@ export function $$R0(e) {
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: "memory_warning--usageBarContainer--F67OB",
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         style: {
           left: `${xk}%`
         },
@@ -302,7 +302,7 @@ function D(e) {
               e.closeManageMemoryModal();
               e.setRecoveryMemDisplay(!1);
             },
-            children: jsx(B, {
+            children: jsx(SvgComponent, {
               svg: _$$A6
             })
           })

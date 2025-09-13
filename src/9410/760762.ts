@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { zN } from "../figma_app/579169";
 import { UQ } from "../figma_app/864723";
 import { useCurrentFileKey, selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
@@ -17,9 +17,9 @@ import { QY, xw, Zk } from "../9410/351585";
 import y from "classnames";
 import { fu, $z } from "../figma_app/831799";
 import { l as _$$l, I as _$$I } from "../9410/990893";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { y as _$$y } from "../1250/295724";
-import { DQ, Pw } from "../figma_app/121751";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { useShadowRead } from "../figma_app/391338";
 import { jd } from "../figma_app/528509";
@@ -31,7 +31,7 @@ import { canEditTeam } from "../figma_app/642025";
 import { ng } from "../figma_app/205827";
 import { jn } from "../figma_app/522082";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { vd } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
@@ -41,7 +41,7 @@ import { h as _$$h } from "../905/864281";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { EL } from "../905/748636";
 import { CR, uv } from "../figma_app/419216";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { iG } from "../figma_app/231614";
 import { t as _$$t2 } from "../figma_app/32680";
 var b = y;
@@ -89,7 +89,7 @@ function T({
   }(e.editorType);
   let a = {
     fileKey: e.key,
-    productType: pi(e)
+    productType: mapFileToProductType(e)
   };
   return t ? jsx(w, {
     trackingProperties: a
@@ -169,7 +169,7 @@ function ee(e) {
     trigger: UpsellModalType.FILE_TRACKER_MODAL
   });
   if (!l || "loaded" !== o.status) return null;
-  if (u) t = oA(o.data.team?.teamFileCounts?.totalFileCount) ?? 0;else switch (l.editorType) {
+  if (u) t = getResourceDataOrFallback(o.data.team?.teamFileCounts?.totalFileCount) ?? 0;else switch (l.editorType) {
     case "design":
       t = o.data.team?.teamFileCounts?.designFileCount ?? 0;
       break;
@@ -193,7 +193,7 @@ function ee(e) {
   let y = {
     fileTeamId: teamId,
     numFiles: t,
-    productType: pi(l),
+    productType: mapFileToProductType(l),
     ...p
   };
   return jsx(fu, {
@@ -285,7 +285,7 @@ function ei({
       children: jsxs("div", {
         className: "pro_trial_upsell_modal--container--vCFd5",
         children: [jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 13,
             fontWeight: "semi-bold",
             children: renderI18nText("fullscreen.pro_trial_upsell_modal.title", {
@@ -294,7 +294,7 @@ function ei({
           })
         }), jsx("p", {
           className: "pro_trial_upsell_modal--textContainer--kGoDm",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 11,
             children: renderI18nText("fullscreen.pro_trial_upsell_modal.description")
           })
@@ -339,7 +339,7 @@ function ea({
     newValue: c,
     newValueReady: o,
     label: adminPermissionConfig.TeamPaidStatusBadge.canEditStarterTeam,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       canEdit: t.canEdit,
       planTier: e.plan?.tier,
@@ -351,7 +351,7 @@ function ea({
   let m = {
     fileKey: e.key,
     fileTeamId: t.id,
-    productType: pi(e)
+    productType: mapFileToProductType(e)
   };
   return ng.canSeeProTrialUxInFile(n, e) ? jsx(eo, {
     trackingProperties: m,
@@ -371,7 +371,7 @@ function ea({
 }
 function es() {
   let [e, t] = useState(!1);
-  return [e, _$$A(e => {
+  return [e, useDebouncedCallback(e => {
     t(e);
   }, 200, {
     leading: !0,

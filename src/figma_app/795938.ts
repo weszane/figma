@@ -17,7 +17,7 @@ import { cB, G8, rZ } from "../figma_app/777551";
 import { xn } from "../905/934145";
 import { o3 } from "../figma_app/831799";
 import { FTemplateCategoryType } from "../figma_app/191312";
-import { vt, xQ, I0 } from "../figma_app/45218";
+import { ResourceTypeNoComment, isWidget, isPlugin } from "../figma_app/45218";
 import { V } from "../905/480825";
 import { dn } from "../figma_app/994403";
 import { Wc } from "../figma_app/947784";
@@ -108,7 +108,7 @@ export function $$R0({
       })
     }), !t && jsx(my, {
       resource: e,
-      type: vt.HUB_FILE
+      type: ResourceTypeNoComment.HUB_FILE
     })]
   });
 }
@@ -163,7 +163,7 @@ export function $$L4({
       })
     }), !t && jsx(my, {
       resource: e,
-      type: vt.PLUGIN
+      type: ResourceTypeNoComment.PLUGIN
     })]
   });
 }
@@ -212,7 +212,7 @@ export function $$P3({
       })
     }), !t && jsx(my, {
       resource: e,
-      type: vt.WIDGET
+      type: ResourceTypeNoComment.WIDGET
     })]
   });
 }
@@ -274,14 +274,14 @@ export function $$D2({
       })]
     }), jsx("div", {
       className: jm,
-      children: resources.length > 0 ? resources.slice(0, 3).map(e => xQ(e) ? jsx("div", {
+      children: resources.length > 0 ? resources.slice(0, 3).map(e => isWidget(e) ? jsx("div", {
         className: vR,
         children: jsx("img", {
           alt: qD(e).name,
           src: qD(e).redirect_snapshot_url ?? void 0,
           loading: "lazy"
         })
-      }, e.id) : (I0(e), jsx("div", {
+      }, e.id) : (isPlugin(e), jsx("div", {
         className: vR,
         children: jsx("img", {
           alt: qD(e).name,

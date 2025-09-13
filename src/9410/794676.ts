@@ -21,10 +21,10 @@ import { HQ, gr, vZ, aF } from "../figma_app/147952";
 import { NX } from "../figma_app/568591";
 import { fu, T8 } from "../figma_app/831799";
 import { o as _$$o } from "../905/808775";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { E3 } from "../figma_app/976749";
-import { ds, Dc, oP } from "../figma_app/314264";
+import { trackFileEvent, mapEditorTypeToProductType, getFileEditInfo } from "../figma_app/314264";
 import { i as _$$i } from "../1250/937941";
 import { Cn, e_ as _$$e_ } from "../figma_app/936061";
 import { y as _$$y2 } from "../905/320282";
@@ -41,7 +41,7 @@ import { gN, SH } from "../figma_app/790714";
 import { y4 } from "../figma_app/298277";
 import { XS } from "../figma_app/178752";
 import { selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
-import { dq, sZ } from "../905/845253";
+import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { resetTrackedAtoms } from "../figma_app/615482";
 import { KeyboardLayout, SchemaJoinStatus, Multiplayer, FullscreenPerfInfo, CorePerfInfo, AppStateTsApi, Fullscreen } from "../figma_app/763686";
@@ -78,7 +78,7 @@ import { FileByKey } from "../figma_app/43951";
 import { U2 } from "../figma_app/193867";
 import { K as _$$K } from "../905/12775";
 import { M as _$$M2 } from "../figma_app/333189";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import eY from "classnames";
 import { w as _$$w } from "../figma_app/922802";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -117,7 +117,7 @@ import { BI, m0 as _$$m, pt, Ef } from "../figma_app/546509";
 import { Yh } from "../figma_app/357047";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getResourceDataOrFallback } from "../905/419236";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { au } from "../figma_app/124493";
 import { rE, CQ } from "../figma_app/186343";
 import { C3 } from "../figma_app/587765";
@@ -283,7 +283,7 @@ let eB = atom(null, (e, t, i) => {
       default:
         e = "non-initialized";
     }
-    ds("active_time_spent_event", fileKey, state, {
+    trackFileEvent("active_time_spent_event", fileKey, state, {
       currentState: e,
       activeState: i
     }, {
@@ -350,7 +350,7 @@ function e6(e) {
           className: eJ()(_$$s2.mt24.$, "mfa_required--secondaryText--eCIsl"),
           children: renderI18nText("mfa_required_modal.account_switcher.text", {
             userEmail: e.email,
-            link: jsx($n, {
+            link: jsx(Button, {
               variant: "link",
               onClick: () => {
                 o(!0);
@@ -536,7 +536,7 @@ let t5 = memo(({
   let c = useAtomWithSubscription(_$$h2);
   let u = useSelector(e => e.openFile?.canEdit ?? !1);
   let p = p8("isReadOnly");
-  let h = dq();
+  let h = useCurrentUserOrgId();
   let f = E3();
   let g = useLatestRef(f);
   f !== g && g && d(PQ([]));
@@ -671,7 +671,7 @@ export function $$t80({
   }) {
     let t = useSelector(e => U2(e.selectedView));
     let i = getUserId();
-    let r = dq();
+    let r = useCurrentUserOrgId();
     let [s, o] = useState(!1);
     let d = _$$K();
     let c = useSubscription(FileByKey, {
@@ -848,7 +848,7 @@ export function $$t80({
         mode: e
       });
     }, [e]);
-    let i = _$$A(t, 1e3, {
+    let i = useDebouncedCallback(t, 1e3, {
       leading: !0,
       trailing: !1
     });
@@ -882,7 +882,7 @@ export function $$t80({
       let i = rE();
       let r = C3();
       let s = useDispatch();
-      let o = am();
+      let o = trackFileEventWithUser();
       let l = r ? getResourceDataOrFallback(r.pageNodeId) : void 0;
       useEffect(() => {
         t && (t._select_page = async e => {
@@ -1243,7 +1243,7 @@ export function $$t80({
     name: "editor",
     alsoTrack: () => ({
       editorType: mapEditorTypeToStringWithObfuscated(h),
-      productType: Dc(h),
+      productType: mapEditorTypeToProductType(h),
       uiVersion: x.version,
       fileKey: d?.key || "",
       slideView: C ? atomStoreManager.get(v2) ? "ssv" : "grid" : void 0
@@ -1310,12 +1310,12 @@ function t9({
     updateWatchedStablePaths,
     getPageIdsForNodes: h,
     children: g
-  }) : g, _$$e.EDITOR, null != t ? oP(t) : {}, null != t && s && o);
+  }) : g, _$$e.EDITOR, null != t ? getFileEditInfo(t) : {}, null != t && s && o);
 }
 function ie({
   file: e
 }) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   return useSelector(e => e.modalShown?.type === _$$M2) || !t ? null : jsx(e6, {
     org: t,
     fileKey: e?.key

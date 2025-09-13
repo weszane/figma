@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { Pw } from "../905/521428";
+import { ButtonLargeWide } from "../905/521428";
 import n from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { getCookieOrStorage } from "../905/414007";
@@ -100,7 +100,7 @@ export function $$v0(e) {
                 className: h,
                 children: renderI18nText("file_browser.mobile_prompt.browser_title")
               })
-            }), jsx(Pw, {
+            }), jsx(ButtonLargeWide, {
               onClick: I,
               variant: "secondary",
               children: renderI18nText("file_browser.mobile_prompt.browser_action")

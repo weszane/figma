@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -20,7 +20,7 @@ export function $$u0({
       children: s
     }), jsx(Ad, {
       label: null,
-      input: jsx($n, {
+      input: jsx(Button, {
         variant: "secondary",
         onClick: () => {
           Fullscreen.upgradeToLatestVectorOperationVersion();

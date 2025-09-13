@@ -7,7 +7,7 @@ import { K } from "../905/443068";
 import { t as _$$t } from "../905/947268";
 import { Z as _$$Z } from "../905/498136";
 import { VariableResolvedDataType } from "../figma_app/763686";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { j } from "../905/918929";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -16,9 +16,9 @@ import { FX } from "../figma_app/12491";
 import { sF } from "../figma_app/777207";
 import { t as _$$t3 } from "../905/511388";
 import { P as _$$P } from "../figma_app/582341";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { Oe } from "../figma_app/336853";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { fI } from "../figma_app/626177";
 import { zz, b8, aX } from "../905/794523";
 var w = (e => (e.ALL_LIBRARIES = "ALL_LIBRARIES", e.LOCAL_VARIABLES = "LOCAL_VARIABLES", e.SUBSCRIBED_VARIABLES = "SUBSCRIBED_VARIABLES", e))(w || {});
@@ -33,8 +33,8 @@ function T({
   subscribedLibraries: i,
   onSetSelect: a
 }) {
-  let l = U();
-  let d = Oe(sZ());
+  let l = trackFileEventWithStore();
+  let d = Oe(useCurrentUserOrg());
   let {
     pass,
     fail
@@ -144,7 +144,7 @@ function P({
       onClick: r,
       disabled: isNotNullish(s),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": i
       },
       children: "list" === t.layout ? jsx(_$$t, {}) : jsx(_$$Z, {})

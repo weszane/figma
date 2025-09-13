@@ -7,7 +7,7 @@ import { A as _$$A2 } from "../vendor/850789";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { IW } from "../figma_app/563413";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { A as _$$A3 } from "../1291/23528";
 import { LR } from "../figma_app/120210";
@@ -192,7 +192,7 @@ export function $$z0({
     className: XV,
     children: [jsxs("div", {
       className: kb,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A4,
         className: Gv,
         onClick: BrowserInfo.isIpad ? void 0 : u,

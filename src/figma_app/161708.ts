@@ -12,7 +12,7 @@ import { Oe } from "../figma_app/933328";
 import { sT } from "../figma_app/740163";
 import { getCommonValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { SG } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ig, $j } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
 import { Gz } from "../905/62223";
@@ -89,7 +89,7 @@ export function $$L3(e) {
           [py]: e.gridRight
         }),
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.stroke_width"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dataTestId: e.dataTestId,
         disabled: e.disabled,
         dispatch: s,
@@ -110,7 +110,7 @@ export function $$L3(e) {
           [py]: e.gridRight
         }),
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.stroke_width"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dataTestId: e.dataTestId,
         disabled: e.disabled,
         dispatch: s,

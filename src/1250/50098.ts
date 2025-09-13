@@ -2,21 +2,21 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
-import { WW } from "../905/521428";
+import { ButtonLarge } from "../905/521428";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { Kz, ks } from "../figma_app/637027";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { selectUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
@@ -29,7 +29,7 @@ import { Xg } from "../7021/854265";
 import { CAe } from "../figma_app/6204";
 import { A as _$$A } from "../905/920142";
 import { HB } from "../3973/538504";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { A as _$$A2 } from "../svg/831814";
 let L = "Job Title Prompt";
@@ -40,7 +40,7 @@ export function $$F0({
     let e = useCurrentPublicPlan("useIsEligibleForJobTitleReprompt");
     let t = useIsStarterPlan(e).unwrapOr(!1);
     let n = selectUser();
-    let a = sZ();
+    let a = useCurrentUserOrg();
     let i = n.profile.job_title;
     let o = HB(i);
     return useCallback(() => !(a && a.k12_google_org || n.email.endsWith(".edu") || t || _$$A(n.email_validated_at).add(14, "day").isAfter(_$$A(Date.now()))) && (!i || ("something_else" === i ? !!_$$A(n.email_validated_at).isBefore(_$$A(new Date("2024-12-10"))) : "other" === o && (!a || !a.saml_sso_only))), [a, t, o, i, n.email, n.email_validated_at]);
@@ -99,7 +99,7 @@ function B({
     onClose: ({
       source: e
     }) => {
-      Cu({
+      logAndTrackCTA({
         trackingContext: L,
         text: "Dismiss Job Title Prompt",
         source: e,
@@ -116,7 +116,7 @@ function B({
       jobTitleList: B,
       source: n
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: U,
       width: "fit-content",
       height: "fixed",
@@ -125,7 +125,7 @@ function B({
           className: "job_title_prompt_overlay--container--Chyt7",
           children: [jsxs("div", {
             className: "job_title_prompt_overlay--leftContainer--J7Zlz",
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: _$$A2,
               useOriginalSrcFills_DEPRECATED: !0,
               autosize: !0,
@@ -163,7 +163,7 @@ function B({
               multiple: 3
             }), jsx("span", {
               className: "job_title_prompt_overlay--submitButton--uVeNa",
-              children: jsx(WW, {
+              children: jsx(ButtonLarge, {
                 variant: "primary",
                 onClick: () => {
                   let [e] = j;
@@ -184,7 +184,7 @@ function B({
                     source: n,
                     jobTitleSeenList: B
                   });
-                  Cu({
+                  logAndTrackCTA({
                     trackingContext: L,
                     text: "Submit Job Title",
                     jobTitle: t,

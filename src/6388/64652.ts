@@ -36,7 +36,7 @@ import { rY } from "../figma_app/524655";
 import { debugState } from "../905/407919";
 import { F as _$$F } from "../905/680873";
 import { $ as _$$$2 } from "../9410/841699";
-import { ds, Cu } from "../figma_app/314264";
+import { trackFileEvent, logAndTrackCTA } from "../figma_app/314264";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { QU } from "../1250/559338";
 import { g as _$$g } from "../642/216228";
@@ -56,7 +56,7 @@ import { xG, n8 } from "../figma_app/121043";
 import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { O as _$$O2 } from "../905/666679";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { sx } from "../905/941192";
 import { b_ } from "../figma_app/835688";
 import { A as _$$A2 } from "../svg/910906";
@@ -88,7 +88,7 @@ function Z() {
   let m = _$$F(isOpen);
   let v = useCallback(() => {
     let e = !m.current;
-    ds("pages_panel_open_toggle", x, debugState.getState(), {
+    trackFileEvent("pages_panel_open_toggle", x, debugState.getState(), {
       isPagesOpen: e
     }, {
       forwardToDatadog: !0
@@ -124,11 +124,11 @@ function ep() {
   let e = getObservableValue(AppStateTsApi?.singleSlideView().isInFocusedNodeView, !0);
   let t = useCurrentFileKey();
   let l = useCallback(e => {
-    "GRID" === e ? (fullscreenValue.triggerAction("exit-focus-view"), Cu({
+    "GRID" === e ? (fullscreenValue.triggerAction("exit-focus-view"), logAndTrackCTA({
       trackingContext: "grid_view_toggle",
       productType: "slides",
       fileKey: t
-    })) : (fullscreenValue.triggerAction("enter-focus-view"), Cu({
+    })) : (fullscreenValue.triggerAction("enter-focus-view"), logAndTrackCTA({
       trackingContext: "single_slide_view_toggle",
       productType: "slides",
       fileKey: t
@@ -172,7 +172,7 @@ function eg({
   isSelected: e
 }) {
   let t = e ? _$$s.colorIcon.$ : _$$s.colorIconSecondary.$;
-  return jsx(_$$B, {
+  return jsx(SvgComponent, {
     className: t,
     svg: _$$A2
   });

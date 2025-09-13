@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -21,7 +21,7 @@ import { D8 } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { E as _$$E2 } from "../905/277716";
 import { XHR } from "../905/910117";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { XE, Uv, u1 } from "../figma_app/91703";
@@ -38,7 +38,7 @@ import { Xo } from "../figma_app/482495";
 import { f as _$$f } from "../905/940356";
 import { getObservableValue } from "../figma_app/84367";
 import { Lh, D8 as _$$D } from "../figma_app/242339";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { a3 } from "../905/188421";
 import { Cn } from "../905/882267";
@@ -227,7 +227,7 @@ export function $$em2({
             "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
             htmlAttributes: {
               "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(_$$U, {})
           })
@@ -244,7 +244,7 @@ export function $$em2({
       let o = eG || (ep ?? getI18nString("fullscreen.mixed"));
       let u = jsx(_$$E2, {
         name: "open_font_picker_button",
-        children: jsxs(_$$E, {
+        children: jsxs(ButtonPrimitive, {
           actionOnPointerDown: !0,
           "aria-autocomplete": "none",
           "aria-controls": eo,
@@ -263,7 +263,7 @@ export function $$em2({
           },
           onClick: eU,
           recordingKey: generateRecordingKey(r, "openFontPickerButton"),
-          children: [eV && jsx(_$$B, {
+          children: [eV && jsx(SvgComponent, {
             svg: _$$A,
             className: q_
           }), jsx(uQ, {

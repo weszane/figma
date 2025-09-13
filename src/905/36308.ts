@@ -7,7 +7,7 @@ import { R as _$$R2 } from '../905/16785';
 import { A as _$$A } from '../905/24328';
 import { m as _$$m } from '../905/37328';
 import { _ as _$$_3 } from '../905/38543';
-import { bL, Rq } from '../905/38914';
+import { ModalRootComponent, ModalFormContents } from '../905/38914';
 import { J as _$$J2, x as _$$x4 } from '../905/61366';
 import { W as _$$W } from '../905/63398';
 import { s as _$$s2 } from '../905/66404';
@@ -94,7 +94,7 @@ import { l as _$$l3 } from '../905/509505';
 import { h as _$$h6 } from '../905/510194';
 import { h as _$$h2 } from '../905/513745';
 import { updateCodeExtensionPreferences } from '../905/515076';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { F as _$$F2 } from '../905/544329';
 import { s as _$$s } from '../905/551945';
 import { A as _$$A4, x as _$$x2 } from '../905/553642';
@@ -151,7 +151,7 @@ import { N as _$$N3 } from '../905/825967';
 import { z as _$$z4 } from '../905/828520';
 import { D as _$$D2 } from '../905/829855';
 import { q as _$$q } from '../905/838985';
-import { td as _$$td } from '../905/845253';
+import { getOrgByCurrentUserId } from '../905/845253';
 import { r as _$$r } from '../905/857502';
 import { u as _$$u } from '../905/866761';
 import { b as _$$b2 } from '../905/874849';
@@ -3328,7 +3328,7 @@ function iY(e) {
     URL.revokeObjectURL(t);
   }, [u]);
   let b = !r || s === 1;
-  return jsxs(bL, {
+  return jsxs(ModalRootComponent, {
     manager: t,
     width: 'lg',
     height: 'dynamic',
@@ -3354,7 +3354,7 @@ function iY(e) {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: g,
             disabled: b,
             children: renderI18nText('auto_suggest.eval.start_button')
@@ -3406,15 +3406,15 @@ function iY(e) {
         }), jsx('br', {})]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: f,
             disabled: b || !u,
             children: renderI18nText('auto_suggest.eval.results.copy_summary')
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: A,
             disabled: b || !u,
             children: renderI18nText('auto_suggest.eval.results.copy_details')
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: y,
             disabled: b || !u,
             children: renderI18nText('auto_suggest.eval.results.download')
@@ -3574,10 +3574,10 @@ function no(e) {
       fullscreenValue.setMissingFont(t, r);
     }), onClose());
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: 'sm',
     manager: l,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: c,
       children: [jsx(Y9, {
         children: jsx(hE, {
@@ -3608,7 +3608,7 @@ function no(e) {
         })]
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: 'primary',
             type: 'submit',
             recordingKey: generateRecordingKey(na, 'setMissingFontButton'),
@@ -3787,7 +3787,7 @@ let nS = registerModal(e => {
     onClose
   } = e;
   let n = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: n,
     width: 'md',
     children: jsxs(vo, {
@@ -3799,11 +3799,11 @@ let nS = registerModal(e => {
         children: renderI18nText('cms_file_operations_import_export.local_copies_of_sites_files')
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: onClose,
             children: renderI18nText('cms_file_operations_import_export.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'primary',
             onClick: () => {
               onSaveClick();
@@ -5594,7 +5594,7 @@ export function $$nN0(e) {
     }
   }(pluginAndWidgetMenuArgs)) : []), ...(pluginAndWidgetMenuArgs ? nT(pluginAndWidgetMenuArgs && !pluginAndWidgetMenuArgs.isReadOnly ? [Vd(pluginAndWidgetMenuArgs, 'filemenu')] : []) : []), ...function () {
     let e = debugState.getState();
-    let t = _$$td(e.currentUserOrgId, e.orgById);
+    let t = getOrgByCurrentUserId(e.currentUserOrgId, e.orgById);
     let i = [{
       name: 'see-all-plugins',
       displayText: getI18nString('fullscreen_actions.see-all-plugins'),

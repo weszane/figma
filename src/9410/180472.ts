@@ -22,7 +22,7 @@ import { v as _$$v, m as _$$m } from "../3276/99493";
 import { Ys, xL } from "../9410/995608";
 import { oC, zi, yn } from "../9410/960980";
 import { EE, lB } from "../figma_app/731583";
-import { _X, Yb, ZT } from "../figma_app/62612";
+import { getViewportInfo, scaleRect, isRectInside } from "../figma_app/62612";
 import { $tX } from "../figma_app/27776";
 import { UD, yM, wx, cG, W0, sI, hQ, TK, C0, D9, QE, WK, _v, SD, nT, fK, Qf, EA, iG, O8 } from "../3276/10897";
 function I({
@@ -30,11 +30,11 @@ function I({
   isExpanded: t,
   children: i
 }) {
-  let a = _X({
+  let a = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
-  let s = useMemo(() => Yb(a, e.absoluteBounds), [e.absoluteBounds, a]);
-  let o = useMemo(() => ZT(s, a), [s, a]);
+  let s = useMemo(() => scaleRect(a, e.absoluteBounds), [e.absoluteBounds, a]);
+  let o = useMemo(() => isRectInside(s, a), [s, a]);
   let l = useMemo(() => {
     if (!s) return {};
     let e = s.x + a.x;

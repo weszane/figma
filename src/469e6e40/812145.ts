@@ -8,7 +8,7 @@ import { bv } from "../figma_app/421401";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { B as _$$B } from "../905/261906";
 import { JT, mb } from "../figma_app/847597";
 import { Zq } from "../figma_app/433422";
@@ -295,7 +295,7 @@ function M({
           children: [jsx(_$$B, {
             type: $,
             size: "24"
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             children: B
           })]
         })

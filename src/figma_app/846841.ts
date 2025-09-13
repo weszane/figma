@@ -3,7 +3,7 @@ import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/792988";
 import { q as _$$q } from "../905/820062";
 import { f as _$$f } from "../905/54715";
@@ -22,7 +22,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { CZ, q4 } from "../905/294085";
 import { hO, cN, vz, G4, G1, Hl, d3 } from "../figma_app/545293";
 import { fi } from "../figma_app/913823";
@@ -35,7 +35,7 @@ import { Sh } from "../figma_app/803787";
 import { C as _$$C } from "../905/758411";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { I as _$$I } from "../figma_app/130633";
 import { N2, Ee } from "../figma_app/392189";
 import { b as _$$b } from "../figma_app/598297";
@@ -245,7 +245,7 @@ export function $$eR6({
       }), jsx("span", {
         className: _$$s.truncate.$,
         children: t
-      }), jsx(_$$E, {
+      }), jsx(ButtonPrimitive, {
         recordingKey: generateRecordingKey(tZ, "dismiss"),
         onClick: () => {
           if (!e) switch (t) {
@@ -364,7 +364,7 @@ export function $$eR6({
       onAction: () => tS(Qx.PLAN_FILE_ASSETS),
       htmlAttributes: tC ? {
         "data-tooltip": tN,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       } : void 0,
       children: tN && truncate(tN, 20)
     }), jsx(oz, {
@@ -709,10 +709,10 @@ function eP({
       className: _$$s.flex.gap6.itemsCenter.$,
       children: [!t && jsx(_$$o, {
         recordingKey: generateRecordingKey(l, "backButton")
-      }), jsx(_$$E2, {
+      }), jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("fragment_search.visual_search_results_title")
-      }), jsx(_$$E2, {
+      }), jsx(TextWithTruncation, {
         fontSize: 13,
         color: "secondary",
         children: r
@@ -788,19 +788,19 @@ export function $$ek2({
     children: [jsx(xC, {
       aiTrackingContext: t,
       ref: d
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       ref: s,
       "aria-label": getI18nString("fragment_search.visual_search_icon_button_tooltip"),
       onClick: c,
       htmlAttributes: getFeatureFlags().fragment_search_tweaks ? {
-        "data-tooltip-type": Ib.SPECIAL,
+        "data-tooltip-type": KindEnum.SPECIAL,
         "data-tooltip-show-above": !0,
         "data-tooltip": _$$S2,
         "data-tooltip-ai-beta-text": getI18nString("fragment_search.visual_search_icon_button_tooltip_with_beta_tag"),
         "data-tooltip-ai-beta-action": JT.FIND_INSPIRATION
       } : {
         "data-tooltip": getI18nString("fragment_search.visual_search_icon_button_tooltip"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": !0
       },
       recordingKey: a,

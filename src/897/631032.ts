@@ -7,7 +7,7 @@ import { n as _$$n } from "../897/929006";
 import { cJ } from "../figma_app/976749";
 import { _P } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { nA } from "../905/203369";
 import { y as _$$y } from "../897/572017";
@@ -664,7 +664,7 @@ export let $$Y0 = memo(function (e) {
       bigNudgeAmount: 10,
       className: N,
       "data-tooltip": getI18nString("proto.easing_editor.spring_stiffness"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: t,
       id: "easing-editor-spring-stiffness-input",
       max: wH.MAX_STIFFNESS,
@@ -689,7 +689,7 @@ export let $$Y0 = memo(function (e) {
       bigNudgeAmount: 10,
       className: N,
       "data-tooltip": getI18nString("proto.easing_editor.spring_damping"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: t,
       id: "easing-editor-spring-damping-input",
       max: wH.MAX_DAMPING,
@@ -714,7 +714,7 @@ export let $$Y0 = memo(function (e) {
       bigNudgeAmount: 10,
       className: N,
       "data-tooltip": getI18nString("proto.easing_editor.spring_mass"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: t,
       id: "easing-editor-spring-mass-input",
       max: wH.MAX_MASS,

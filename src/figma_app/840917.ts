@@ -25,7 +25,7 @@ import { getI18nString } from "../905/303541";
 import { NotificationType } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { yJ } from "../figma_app/78808";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { kS } from "../figma_app/864723";
 import { isIncrementalSessionOrValidating, autosaveSubscribeWithRetry } from "../figma_app/582924";
 import { awaitSync } from "../905/412815";
@@ -875,7 +875,7 @@ class ey {
       file_key: fileKey,
       manager_file_key: this.manager.fileKey
     };
-    if (logInfo("Autosave", "commit completed", g), ds("autosave_commit_completed", fileKey, debugState.getState(), g), !this.reportedStorageError && void 0 !== numberOfUncleanRegisters && numberOfUncleanRegisters !== m) {
+    if (logInfo("Autosave", "commit completed", g), trackFileEvent("autosave_commit_completed", fileKey, debugState.getState(), g), !this.reportedStorageError && void 0 !== numberOfUncleanRegisters && numberOfUncleanRegisters !== m) {
       if (m > 0 && 0 === numberOfUncleanRegisters) {
         let e = e => {
           if (!(e.length > 5)) return e;
@@ -936,7 +936,7 @@ class ey {
     this.restoreAnalytics.isIncremental = Multiplayer.isIncrementalSession();
     this.restoreTimer.stop();
     this.restoreAnalytics.time = this.restoreTimer.getElapsedTime();
-    ds("autosave_restore_on_load", this.restoreAnalytics.fileKey, debugState.getState(), this.restoreAnalytics, {
+    trackFileEvent("autosave_restore_on_load", this.restoreAnalytics.fileKey, debugState.getState(), this.restoreAnalytics, {
       forwardToDatadog: !0
     });
     this.restoring = !1;
@@ -997,7 +997,7 @@ class ey {
       await Promise.all(s.map(([e, r]) => t.$$delete([r, e]).catch(e => K(e, "restoreChanges: delete empty node changes"))));
       await Promise.all(Array.from(r.values()).map(t => ec(t, e)));
     }, "readwrite")), this.restoreAnalytics.changesAreAllDerivedData = AutosaveHelpers.changesAreAllDerivedData(), this.restoreAnalytics.nodeFields = AutosaveHelpers.restoredNodeFieldNames(), this.restoreAnalytics.neededToMigrate = AutosaveHelpers.currentFileVersion() > r, isIncrementalSessionOrValidating()) {
-      ds("autosave_load_containing_pages_start", this.manager.fileKey, debugState.getState(), {
+      trackFileEvent("autosave_load_containing_pages_start", this.manager.fileKey, debugState.getState(), {
         node_count: e.size,
         fileKey: this.manager.fileKey
       });
@@ -1005,7 +1005,7 @@ class ey {
       let r = new Set(e.keys());
       for (let e of AutosaveHelpers.getParentIndexChanges()) r.add(e);
       await autosaveSubscribeWithRetry(r);
-      ds("autosave_load_containing_pages_end", this.manager.fileKey, debugState.getState(), {
+      trackFileEvent("autosave_load_containing_pages_end", this.manager.fileKey, debugState.getState(), {
         node_count: e.size,
         timeElapsed: performance.now() - t,
         fileKey: this.manager.fileKey
@@ -1036,7 +1036,7 @@ class ey {
       await awaitSync();
       this.restoreAnalytics.timeToSync = this.restoreTimer.getElapsedTime();
       isLocalFileKey(this.manager.fileKey) || (await maybeCreateSavepoint(this.manager.fileKey, "Offline sync", "After syncing changes", debugState.dispatch).catch(e => {
-        ds("autosave_skip_after_checkpoint", this.manager.fileKey, debugState.getState(), {
+        trackFileEvent("autosave_skip_after_checkpoint", this.manager.fileKey, debugState.getState(), {
           error: e.data?.message
         });
         W6("Failed to create after savepoint", {

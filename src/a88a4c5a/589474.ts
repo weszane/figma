@@ -1,8 +1,8 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useHandleChangeEvent } from "../figma_app/878298";
 import r from "classnames";
-import { B } from "../905/714743";
-import { Ib } from "../905/129884";
+import { SvgComponent } from "../905/714743";
+import { KindEnum } from "../905/129884";
 var s = r;
 let d = "file_upload_icon_input--disabledIcon--JLhI1";
 export function $$u0(e) {
@@ -24,7 +24,7 @@ export function $$u0(e) {
     className: s()("file_upload_icon_input--fileUploadIconLabel--GkBse", {
       [d]: isDisabled
     }),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-immediately": !0,
     "data-tooltip": isDisabled ? null : e["data-tooltip"],
     children: [jsx("input", {
@@ -40,7 +40,7 @@ export function $$u0(e) {
       type: "file"
     }), e.children || svg && jsx("div", {
       className: "file_upload_icon_input--svg--qwaj3",
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         title: svgAltText,
         ariaLabel: svgAltText,
         svg,

@@ -8,7 +8,7 @@ import { useSubscription } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
 import { zE, Ex } from "../figma_app/919079";
 import { tH } from "../905/751457";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { R as _$$R } from "../905/304671";
@@ -24,7 +24,7 @@ import { MX, EQ, Cz, RG } from "../figma_app/684446";
 import { FOrganizationLevelType, FDomainVerificationStatusType, FUserRoleType } from "../figma_app/191312";
 import { AdminRequestDashOrgInfo, AdminNotificationsCountView, OrgTaxIdView } from "../figma_app/43951";
 import { i0, m3, hX, EZ } from "../figma_app/614170";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A as _$$A } from "../svg/57540";
 let R = "admin_notifications_count_badge--yellowIcon--7SC5D";
 export function $$k0(e) {
@@ -216,8 +216,8 @@ function F(e) {
   if (!u) return null;
   let m = `${u.iconStyle} ${e.inlineIcon ? "admin_notifications_count_badge--inline--DETI2" : ""} ${e.alignTop ? "admin_notifications_count_badge--multiLineIcon--6PT9X" : ""}`;
   let p = {};
-  e.showTooltip && (p["data-tooltip-type"] = Ib.TEXT, p["data-tooltip"] = u.tooltipData, p["data-tooltip-show-below"] = !0, p["data-tooltip-timeout-delay"] = 50, p["data-tooltip-max-width"] = 117);
-  let g = jsx(_$$B, {
+  e.showTooltip && (p["data-tooltip-type"] = KindEnum.TEXT, p["data-tooltip"] = u.tooltipData, p["data-tooltip-show-below"] = !0, p["data-tooltip-timeout-delay"] = 50, p["data-tooltip-max-width"] = 117);
+  let g = jsx(SvgComponent, {
     className: `admin_notifications_count_badge--warningSvg--sbgzs ${m}`,
     svg: _$$A,
     useOriginalSrcFills_DEPRECATED: !0,

@@ -18,7 +18,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { getI18nState } from "../figma_app/363242";
 import { useSelector } from "react-redux";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Pf } from "../905/590952";
 import { n as _$$n } from "../figma_app/537817";
@@ -859,7 +859,7 @@ function es({
       })]
     }), jsxs("div", {
       className: "whiteboard--teamSizeContainer--bRiCY",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A,
         style: {
           alignSelf: "center",

@@ -9,7 +9,7 @@ import { Z as _$$Z } from '../905/104740';
 import { t as _$$t3 } from '../905/117577';
 import { xK } from '../905/125218';
 import { J as _$$J } from '../905/125993';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { t as _$$t2 } from '../905/150656';
 import { F as _$$F2 } from '../905/160142';
 import { ox } from '../905/163832';
@@ -45,7 +45,7 @@ import { bL as _$$bL, mc as _$$mc, c$, l9, WL } from '../905/493196';
 import { O as _$$O } from '../905/501876';
 import { lt } from '../905/511649';
 import { C as _$$C } from '../905/520159';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { $ as _$$$ } from '../905/532878';
 import { subscribeAndAwaitData } from '../905/553831';
 import { E6 } from '../905/560959';
@@ -55,13 +55,13 @@ import { getFeatureFlags } from '../905/601108';
 import { V as _$$V2 } from '../905/604512';
 import { PerfTimer } from '../905/609396';
 import { J as _$$J2 } from '../905/614223';
-import { E as _$$E2 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { DP } from '../905/640017';
 import { oW } from '../905/675859';
 import { getSingletonSceneGraph } from '../905/700578';
 import { L as _$$L } from '../905/704296';
 import { $y, Jy, Zu } from '../905/708651';
-import { B as _$$B, V as _$$V } from '../905/714743';
+import { SvgComponent, V as _$$V } from '../905/714743';
 import { Point } from '../905/736624';
 import { od } from '../905/748636';
 import { G as _$$G2 } from '../905/750789';
@@ -125,7 +125,7 @@ import { H as _$$H } from '../figma_app/47866';
 import { y as _$$y2 } from '../figma_app/53571';
 import { FEditorType } from '../figma_app/53721';
 import { Yy } from '../figma_app/59509';
-import { MG, QZ, TZ } from '../figma_app/62612';
+import { getViewportX, computeFullscreenViewportForNode, getViewportY } from '../figma_app/62612';
 import { U as _$$U2 } from '../figma_app/65327';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { l7, US, ZO } from '../figma_app/88239';
@@ -145,7 +145,7 @@ import { L$ } from '../figma_app/241341';
 import { f as _$$f } from '../figma_app/258006';
 import { a as _$$a } from '../figma_app/289605';
 import { y4 } from '../figma_app/298277';
-import { pi } from '../figma_app/314264';
+import { mapFileToProductType } from '../figma_app/314264';
 import { bq, Gn, hY, L_, qt } from '../figma_app/349969';
 import { ut as _$$ut, Ah, Fe, HS, hX, kl, l5, nw, Sq, UB, wR, xY } from '../figma_app/354027';
 import { _$, S7 } from '../figma_app/379850';
@@ -192,12 +192,12 @@ import { desktopAPIInstance } from '../figma_app/876459';
 import { generateRecordingKey, SKIP_RECORDING, useHandleMouseEvent } from '../figma_app/878298';
 import { _6 as _$$_2, _o, c7, oz, wz, zz } from '../figma_app/879363';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
-import { U as _$$U, hC } from '../figma_app/901889';
+import { trackFileEventWithStore, trackDefinedFileEventWithStore } from '../figma_app/901889';
 import { fq, Ou } from '../figma_app/953049';
 import { Em, m0, ow } from '../figma_app/976749';
 import { A as _$$A7 } from '../svg/236983';
 import { A as _$$A6 } from '../svg/674356';
-import { A as _$$A5 } from '../vendor/90566';
+import { useDebouncedCallback } from 'use-debounce';
 import { useDispatch, useSelector } from 'react-redux';
 import { Te } from '../vendor/813803';
 let P = M;
@@ -210,7 +210,7 @@ function B({
   badge: s,
   iconBackgroundStyle: o = 'dark'
 }) {
-  return jsxs(_$$E2, {
+  return jsxs(ButtonPrimitive, {
     disabled: a,
     onClick: i,
     className: P()('onboarding_card--card--tK7Ix', a && 'onboarding_card--cardDisabled--INeUS'),
@@ -290,7 +290,7 @@ function Z({
         }, e.installMethod))
       }), jsx('div', {
         className: 'codebase_suggestions_onboarding--footer--ys3HK',
-        children: jsx($n, {
+        children: jsx(Button, {
           'aria-label': getI18nString('dev_handoff.codebase_suggestions.back_to_all_options'),
           'variant': 'link',
           'onClick': e,
@@ -322,7 +322,7 @@ function Q({
     className: z,
     children: [jsx('div', {
       className: P()('codebase_suggestions_onboarding--backButton--KRIT-', 'codebase_suggestions_onboarding--backButtonTopLeft--52IvP'),
-      children: jsx($n, {
+      children: jsx(Button, {
         'aria-label': getI18nString('dev_handoff.codebase_suggestions.back_to_all_options'),
         'variant': 'link',
         'onClick': t,
@@ -584,7 +584,7 @@ function ea() {
 let ep = 'mcp-unmapped-components';
 function eh({}) {
   let e = useDispatch();
-  let t = hC();
+  let t = trackDefinedFileEventWithStore();
   let i = ox();
   let [s, o] = useState(!1);
   let l = useRef({
@@ -687,7 +687,7 @@ let eG = forwardRef(({
       variableType: s
     });
   }, [c, u, a, s]);
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     ref: l,
     className: P()('variable_cell_content--copyButton--KwbAc ellipsis--ellipsis--Tjyfa', isSelected && 'variable_cell_content--isOnSelected--UH9z4'),
     onClick: t ? p : void 0,
@@ -1222,7 +1222,7 @@ function tu() {
                   children: [renderI18nText('dev_handoff.variables.details_title'), jsx(_$$K, {
                     'aria-label': getI18nString('general.close'),
                     'htmlAttributes': {
-                      'data-tooltip-type': Ib.TEXT,
+                      'data-tooltip-type': KindEnum.TEXT,
                       'data-tooltip': getI18nString('general.close')
                     },
                     'onClick': x,
@@ -1301,7 +1301,7 @@ function th({
       children: [jsx(_$$K, {
         'aria-label': getI18nString('general.close'),
         'htmlAttributes': {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('general.close')
         },
         'onClick': m,
@@ -1563,7 +1563,7 @@ function ij({
 }) {
   let i = useDispatch();
   let n = selectCurrentFile()?.key;
-  let s = _$$U();
+  let s = trackFileEventWithStore();
   let l = async () => {
     let r;
     let a = null;
@@ -1594,7 +1594,7 @@ function ij({
       }
     });
   };
-  return jsx($n, {
+  return jsx(Button, {
     variant: 'secondary',
     onClick: l,
     children: renderI18nText('inspect_panel.history.compare_changes')
@@ -1705,7 +1705,7 @@ function iZ() {
     'recordingKey': 'dev_handoff.workflows.overview.back_button',
     'aria-label': getI18nString('dev_handoff.workflows.overview.back_to_page_tooltip'),
     'data-tooltip': getI18nString('dev_handoff.workflows.overview.back_to_page_tooltip'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': jsx(_$$C, {})
   }) : null;
 }
@@ -1714,7 +1714,7 @@ function iQ() {
   let t = selectCurrentFile()?.key;
   let i = dP();
   isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev && (i = 0);
-  let s = _$$U();
+  let s = trackFileEventWithStore();
   let o = function () {
     let [e, t] = useAtomValueAndSetter(iD);
     return useCallback(i => {
@@ -1746,7 +1746,7 @@ function iQ() {
     searchActive
   } = function () {
     let [e, t] = useAtomValueAndSetter(iA);
-    let i = _$$U();
+    let i = trackFileEventWithStore();
     let r = useMemo(() => function (e) {
       let t = e ? new Ax(e.toLowerCase()) : null;
       return {
@@ -1757,7 +1757,7 @@ function iQ() {
       };
     }(e), [e]);
     let a = useCallback(e => r.filter([e.nodeName, e.pageName, e.description]), [r]);
-    let s = _$$A5(() => {
+    let s = useDebouncedCallback(() => {
       i('Dev Mode Overview Search', {});
     }, 1e3);
     return {
@@ -2081,7 +2081,7 @@ function i$({
   isExpanded: t,
   onExpandCollapseClicked: i
 }) {
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     'className': 'overview--pageHeader--dubsT',
     'onClick': i,
     'aria-label': t ? getI18nString('dev_handoff.workflows.overview.collapse_page', {
@@ -2091,7 +2091,7 @@ function i$({
     }),
     'children': jsxs('div', {
       className: 'overview--pageHeaderContent--Bq-Ol text--fontPos13--xW8hS text--_fontBase--QdLsd',
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: t ? _$$A7 : _$$A8,
         className: 'overview--caretIcon--gssmY'
       }), jsx(_$$A4, {
@@ -2123,7 +2123,7 @@ function i0({
         'aria-label': getI18nString('dev_handoff.workflows.overview.clear_search'),
         'htmlAttributes': {
           'data-tooltip': getI18nString('dev_handoff.workflows.overview.clear_search'),
-          'data-tooltip-type': Ib.TEXT
+          'data-tooltip-type': KindEnum.TEXT
         },
         'children': jsx(_$$L, {})
       })]
@@ -2291,7 +2291,7 @@ function i5({
   nodeCount: s
 }) {
   let o = useDispatch();
-  let l = _$$U();
+  let l = trackFileEventWithStore();
   let {
     nodeId,
     pageId,
@@ -2375,7 +2375,7 @@ function i4({
   let y = function () {
     let [e, t] = useAtomValueAndSetter(iM);
     let [i] = useAtomValueAndSetter(iD);
-    let r = _$$U();
+    let r = trackFileEventWithStore();
     return useCallback(n => {
       if (!e && i) {
         t(!0);
@@ -2460,7 +2460,7 @@ function i8() {
       href: 'https://form.asana.com/?k=dyYqSpHdZqetESFQzNb8hQ&d=10497086658021',
       className: 'overview--betaFeedbackBadge--PUv9s text--fontPos11--2LvXf text--_fontBase--QdLsd',
       newTab: !0,
-      children: [renderI18nText('dev_handoff.workflows.overview.feedback'), jsx(_$$B, {
+      children: [renderI18nText('dev_handoff.workflows.overview.feedback'), jsx(SvgComponent, {
         className: 'overview--badgeIcon--rKOUQ',
         svg: _$$A6
       })]
@@ -2593,7 +2593,7 @@ function rK({
     let e = hY[d].imageSize;
     let t = e.x / e.y;
     return jsx('div', {
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: u,
         svgClassName: P()(Q0, _d, _$$iZ2),
         svgWidth: `${100 * t}%`,
@@ -2602,7 +2602,7 @@ function rK({
       })
     });
   })() : jsx('div', {
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: u,
       svgClassName: _$$iZ2,
       ref: _,
@@ -2642,10 +2642,10 @@ let rX = {
 };
 let rZ = 'inlinePreviewModal';
 let rQ = () => {
-  let e = MG({
+  let e = getViewportX({
     subscribeToUpdates_expensive: !0
   });
-  let t = TZ({
+  let t = getViewportY({
     subscribeToUpdates_expensive: !0
   });
   return useMemo(() => new Point(e + wR, t + wR), [e, t]);
@@ -2808,7 +2808,7 @@ let r0 = memo(({
   }, [_, y]);
   let $ = useCallback(e => {
     if (e) {
-      let t = QZ({
+      let t = computeFullscreenViewportForNode({
         nodeId: e,
         alwaysPan: !0,
         maxScale: 0.6
@@ -3184,7 +3184,7 @@ function r1({
       children: jsx(_$$K, {
         'aria-label': getI18nString('inline_preview.overflow_menu'),
         'htmlAttributes': {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('inline_preview.overflow_menu')
         },
         'actionOnPointerDown': !0,
@@ -3197,7 +3197,7 @@ function r1({
       })
     }), C > kl && jsx(_$$K, {
       'htmlAttributes': {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('inline_preview.new_tab'),
         'data-testid': 'preview-open-in-presentation-view'
       },
@@ -3208,7 +3208,7 @@ function r1({
     }), p && jsx(_$$K, {
       'onClick': P,
       'htmlAttributes': {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('inline_preview.open_fullscreen')
       },
       'aria-label': getI18nString('inline_preview.open_fullscreen'),
@@ -3265,7 +3265,7 @@ function r2({
     }), n <= kl ? null : jsx(_$$K, {
       'aria-label': getI18nString('inline_preview.restart'),
       'htmlAttributes': {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('inline_preview.restart'),
         'data-testid': 'preview-restart-prototype'
       },
@@ -3287,7 +3287,7 @@ function r5() {
   let e = useSelector(e => e.selectedView);
   let t = useCurrentFileKey();
   let i = useSelector(e => e.progressBarState.mode);
-  let r = useSelector(e => pi({
+  let r = useSelector(e => mapFileToProductType({
     editorType: getSelectedFile(e)?.editor_type
   }));
   let o = i !== UIVisibilitySetting.HIDE_UI && i !== UIVisibilitySetting.ON_AND_LOCKED;

@@ -7,7 +7,7 @@ import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
 import { RW } from "../figma_app/684168";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { S } from "../905/404161";
 var $$f1 = (e => (e.FigJamPluginTile = "figjam_plugin_tile", e))($$f1 || {});
@@ -19,7 +19,7 @@ export function $$_0(e) {
     variant
   } = e;
   let x = selectCurrentFile();
-  let g = sZ();
+  let g = useCurrentUserOrg();
   let j = RW();
   let b = _$$a(g?.id, version.plugin_id, j.loaded ? j.data?.workspaceId : void 0);
   if (!x || !x.parentOrgId) return null;

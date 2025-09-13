@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
 import { vj } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
@@ -162,7 +162,7 @@ export function $$P1({
       }), A]
     })
   });
-  return i ? jsx(_$$E, {
+  return i ? jsx(ButtonPrimitive, {
     className: "branching_status_helpers--buttonReset--WCK1W",
     onClick: () => i?.(u),
     children: I

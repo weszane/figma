@@ -7,7 +7,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { H8 } from "../905/590952";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { wo } from "../figma_app/753501";
 import { E as _$$E } from "../905/511388";
 import { D } from "../905/621624";
@@ -24,7 +24,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
     return jsx("div", {
       className: _$$s.flex.overflowHidden.$,
       "data-testid": i,
-      children: "default" === e ? jsx(E, {
+      children: "default" === e ? jsx(TextWithTruncation, {
         fontWeight: "medium",
         color: "default",
         truncate: !0,
@@ -59,7 +59,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
         })
       }), jsxs("div", {
         className: _$$s.inlineFlex.flexRowReverse.overflowHidden.$,
-        children: [jsx(E, {
+        children: [jsx(TextWithTruncation, {
           truncate: !0,
           showTooltipWhenTruncated: !0,
           children: jsx("span", {
@@ -70,7 +70,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
               })
             })
           })
-        }), !n && jsx(E, {
+        }), !n && jsx(TextWithTruncation, {
           truncate: !0,
           showTooltipWhenTruncated: !0,
           children: e.name
@@ -83,7 +83,7 @@ let y = ["37.5%", "12.5%", "50%", "75%", "25%"];
   }) {
     return jsxs("div", {
       className: _$$s.flex.gap2.$,
-      children: [jsx(E, {
+      children: [jsx(TextWithTruncation, {
         truncate: !0,
         showTooltipWhenTruncated: !0,
         children: renderI18nText("community.community_author", {

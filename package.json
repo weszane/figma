@@ -38,8 +38,10 @@
     "@sentry/wasm": "^10.10.0",
     "@stylexjs/stylex": "^0.15.3",
     "@types/node": "^24.3.0",
+    "@uidotdev/usehooks": "^2.4.1",
     "@zip.js/zip.js": "^2.7.72",
     "a11y-dialog": "^8.1.4",
+    "blakejs": "^1.2.1",
     "bowser": "^1.9.4",
     "classnames": "^2.5.1",
     "common-tags": "^1.8.2",
@@ -66,6 +68,7 @@
     "sentry-javascript": "^1.0.3",
     "statsig-js": "^5.1.0",
     "statsig-react": "^2.1.0",
+    "use-debounce": "^10.0.6",
     "uuid": "^13.0.0",
     "zod": "^3.0.0"
   },

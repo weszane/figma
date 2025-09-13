@@ -2,7 +2,7 @@ import { partition } from 'lodash-es';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { c as _$$c } from '../905/73189';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { showModalHandler } from '../905/156213';
@@ -17,7 +17,7 @@ import { D7, rj, T_, V1 } from '../905/946258';
 import { b as _$$b } from '../905/985254';
 import { FEditorType } from '../figma_app/53721';
 import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
-import { pi } from '../figma_app/314264';
+import { mapFileToProductType } from '../figma_app/314264';
 import { selectCurrentFile } from '../figma_app/516028';
 import { $z } from '../figma_app/617427';
 import { FontSourceType } from '../figma_app/763686';
@@ -187,7 +187,7 @@ let k = registerModal(e => {
         fileParentOrgId: r?.parentOrgId ?? void 0,
         fileKey: r?.key,
         asyncModal: i ?? !1,
-        productType: pi(r)
+        productType: mapFileToProductType(r)
       });
     });
   }(trigger, eulaConfig, asyncModal);
@@ -201,7 +201,7 @@ let k = registerModal(e => {
       fileParentOrgId: n?.parentOrgId ?? void 0,
       fileKey: n?.key,
       asyncModal: asyncModal ?? !1,
-      productType: pi(n)
+      productType: mapFileToProductType(n)
     });
   }, [i, n, eulaConfig, trigger, asyncModal]);
   let R = useModalManager({
@@ -209,7 +209,7 @@ let k = registerModal(e => {
     onClose,
     preventUserClose: !0
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: R,
     width: 600,
     children: jsxs(vo, {

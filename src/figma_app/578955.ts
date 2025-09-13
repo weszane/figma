@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getComponentInfoById } from "../figma_app/664063";
 import { z_ } from "../figma_app/338442";
 import { getFeatureFlags } from "../905/601108";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { u as _$$u } from "../figma_app/443973";
 import { generateUUIDv4 } from "../905/871474";
@@ -137,7 +137,7 @@ async function m(e, t, r, n, a) {
 let g = {};
 export function $$f1(e, t, r, c) {
   let u = useCurrentFileKey();
-  let p = U();
+  let p = trackFileEventWithStore();
   let [_, h] = useState(g);
   let [f, y] = useState(!1);
   useEffect(() => {

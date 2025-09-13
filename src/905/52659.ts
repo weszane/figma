@@ -21,11 +21,11 @@ import { _6 } from "../figma_app/386952";
 import { Bp } from "../figma_app/349248";
 import { Mz } from "../vendor/925040";
 import { Dq } from "../905/316062";
-import { C0, ue } from "../figma_app/756995";
+import { SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../figma_app/198885";
 import { h1 } from "../905/986103";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { L as _$$L } from "../905/16143";
 import { n as _$$n } from "../905/502036";
 import { BV } from "../905/811749";
@@ -40,8 +40,8 @@ let k = Mz(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateB
   if ("team" === e.view) {
     let e = n.team;
     return {
-      sortKey: e.sort.key === C0.NAME ? Dq.NAME : Dq.LAST_MODIFIED,
-      sortDesc: e.sort.dir === ue.DESC
+      sortKey: e.sort.key === SortField.NAME ? Dq.NAME : Dq.LAST_MODIFIED,
+      sortDesc: e.sort.dir === SortOrder.DESC
     };
   }
   return i[t];
@@ -54,7 +54,7 @@ function B({
   return "loaded" !== i.status ? jsx(Wi, {
     className: _$$s2.w48.$,
     animationType: JR.NO_SHIMMER
-  }) : jsx(_$$E2, {
+  }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: jsx("span", {
       ...Ay.props(_$$g.textBodyMedium),
@@ -69,7 +69,7 @@ function V(e) {
   let t = e.folder.shared_at;
   return t ? jsx(h1, {
     date: t
-  }) : jsx(_$$E2, {
+  }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: "--"
   });
@@ -83,11 +83,11 @@ function H(e) {
     children: [r && jsx(H8, {
       user: r,
       size: Pf.MEDIUM
-    }), jsx(_$$E2, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       children: t
     })]
-  }) : jsx(_$$E2, {
+  }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: "--"
   });
@@ -96,7 +96,7 @@ function W(e) {
   let t = e.folder.trashed_at;
   return t ? jsx(h1, {
     date: t
-  }) : jsx(_$$E2, {
+  }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: "--"
   });
@@ -109,7 +109,7 @@ let K = {
 let Y = (e, t, i) => ({
   headerCellClassName: _$$s2.wHalf.$,
   field: Dq.NAME,
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_name_column")
   }),
@@ -125,7 +125,7 @@ let Y = (e, t, i) => ({
   }
 });
 let q = {
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_files_column")
   }),
@@ -135,7 +135,7 @@ let q = {
 };
 let $ = {
   field: Dq.LAST_MODIFIED,
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_updated_column")
   }),
@@ -146,7 +146,7 @@ let $ = {
   })
 };
 let Z = {
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_updated_column")
   }),
@@ -158,7 +158,7 @@ let Z = {
 };
 let X = {
   field: Dq.CREATED_AT,
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_created_column")
   }),
@@ -170,7 +170,7 @@ let X = {
 };
 let Q = {
   field: Dq.SHARED_AT,
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_shared_at_column")
   }),
@@ -181,7 +181,7 @@ let Q = {
   })
 };
 let J = {
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_shared_by_column")
   }),
@@ -192,7 +192,7 @@ let J = {
   })
 };
 let ee = {
-  renderHeaderCell: () => jsx(_$$E2, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_trashed_at_column")
   }),

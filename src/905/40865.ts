@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
 import { registerModal } from "../905/102752";
@@ -16,7 +16,7 @@ export let $$m0 = registerModal(function (e) {
     className: Vq,
     children: e.folder.path
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: "md",
     children: jsxs(vo, {
@@ -32,7 +32,7 @@ export let $$m0 = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: () => {
               t(hideModalHandler());

@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
@@ -107,7 +107,7 @@ export let $$w2 = registerModal(function (e) {
     shouldHideLanguagesWithNoAltUnitSupport: !0,
     skipBrowsePlugins: !0
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: I,
     width: "md",
     children: jsxs(vo, {

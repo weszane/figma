@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { reportError } from '../905/11';
 import { d as _$$d } from '../905/44199';
-import { PN } from '../905/54385';
+import { ProductStatus } from '../905/54385';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { C8 } from '../905/216495';
 import { VisualBellActions } from '../905/302958';
@@ -30,7 +30,7 @@ import { Ni } from '../figma_app/188152';
 import { FFileType } from '../figma_app/191312';
 import { DK } from '../figma_app/291892';
 import { xf } from '../figma_app/416935';
-import { eZ, HB, xp } from '../figma_app/455620';
+import { isTrustedPluginId, getPluginDomain, getPluginPermissions } from '../figma_app/455620';
 import { Y5 } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
 import { N6 } from '../figma_app/471982';
@@ -589,8 +589,8 @@ export class PluginPermissions {
       pluginID: plugin.plugin_id,
       requestedPermissions: perms
     });
-    if (eZ(plugin.plugin_id)) {
-      return new PluginPermissions(filterCapabilities(perms, xp(plugin.plugin_id)), HB(plugin.plugin_id));
+    if (isTrustedPluginId(plugin.plugin_id)) {
+      return new PluginPermissions(filterCapabilities(perms, getPluginPermissions(plugin.plugin_id)), getPluginDomain(plugin.plugin_id));
     }
     const filtered = filterCapabilities(perms);
     if (filtered.length < perms.length) reportError(_$$e.UNOWNED, new Error('Untrusted installed plugin denied internal api permissions'));
@@ -1519,7 +1519,7 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
   if (_$$Yp(data.iconSrc).length === 0) errors.iconImageError = getI18nString('community.publishing.icon_cant_be_empty');
   errors.carouselMedia = vC(data.carouselMedia);
   if (!data.categoryId) errors.categoryId = getI18nString('community.publishing.category_cant_be_empty');
-  if (data.price === undefined || manifest.permissions?.includes('payments') || publishedResource?.third_party_m10n_status !== PN.FLAGGED) {
+  if (data.price === undefined || manifest.permissions?.includes('payments') || publishedResource?.third_party_m10n_status !== ProductStatus.FLAGGED) {
     // skip freemiumRequiredForMigrating
   } else {
     errors.freemiumRequiredForMigrating = getI18nString('community.seller.freemium_required_for_migration');

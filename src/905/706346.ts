@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { renderI18nText } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
@@ -23,7 +23,7 @@ export let $$f0 = registerModal(function (e) {
   return jsx(UI3ConditionalWrapper, {
     children: jsx(fu, {
       name: e0.COMMUNITY_REDIRECT_THIRD_PARTY_PLUGIN_MODAL,
-      children: jsx(bL, {
+      children: jsx(ModalRootComponent, {
         manager: h,
         width: 440,
         children: jsx(vo, {
@@ -36,14 +36,14 @@ export let $$f0 = registerModal(function (e) {
               }), jsx("div", {
                 className: jJ,
                 children: renderI18nText("community.detail_view.you_ll_need_to_work_directly_with_this_provider_to_handle_any_issues_or_refunds")
-              }), jsx(E, {
+              }), jsx(ButtonPrimitive, {
                 onClick: e.onContinue,
                 className: b_,
                 children: jsx("span", {
                   className: _s,
                   children: renderI18nText("community.detail_view.continue")
                 })
-              }), jsx(E, {
+              }), jsx(ButtonPrimitive, {
                 className: HE,
                 onClick: i,
                 children: jsx("span", {

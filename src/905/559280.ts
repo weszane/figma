@@ -3,7 +3,7 @@ import { Component, useCallback } from "react";
 import { lQ } from "../905/934246";
 import { i as _$$i } from "../905/718764";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { Point } from "../905/736624";
@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { pW } from "../905/160095";
 import { T8, j6 } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { uF, F_, Ao } from "../905/748636";
 import { CR, NJ, OA } from "../figma_app/419216";
 import { xT } from "../figma_app/195407";
@@ -383,7 +383,7 @@ function N({
   }) => {
     if ("button" === e) {
       let e = s.name;
-      Cu({
+      logAndTrackCTA({
         ...s.properties,
         ...(null != e ? {
           trackingContext: e
@@ -398,7 +398,7 @@ function N({
     open: !0,
     onClose: c
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: u,
     width: t ?? "fit-content",
     children: jsx(vo, {
@@ -418,7 +418,7 @@ function P({
     onClose: t,
     preventUserClose: !0
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: "fit-content",
     children: jsx(vo, {

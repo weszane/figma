@@ -17,7 +17,7 @@ import { m0 } from "../figma_app/976749";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { hU, x6 } from "../figma_app/84580";
 import { _i, E8, U8 } from "../figma_app/800999";
 import { T4 } from "../figma_app/151869";
@@ -163,7 +163,7 @@ let M = e => {
         action: () => o(a[0])
       },
       icon: VisualBellIcon.UNDO,
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }, [s, o, n, t, e]);
 };
@@ -189,7 +189,7 @@ function F(e) {
     onClick: p,
     htmlAttributes: {
       "data-tooltip": m,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-immediately": !0
     },
     "aria-label": m ?? getI18nString("proto.action"),
@@ -200,7 +200,7 @@ function F(e) {
     })),
     htmlAttributes: {
       "data-tooltip": getI18nString("inspect_panel.interactions.new_tab"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-immediately": !0
     },
     "aria-label": getI18nString("inspect_panel.interactions.new_tab"),

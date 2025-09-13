@@ -16,9 +16,9 @@ import { dP } from "../figma_app/740163";
 import { _o } from "../figma_app/701001";
 import { p8 } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
-import { cS } from "../figma_app/45218";
+import { CommunityPageType } from "../figma_app/45218";
 import { $A } from "../905/862883";
 import { cd } from "../905/381612";
 import { Ye } from "../figma_app/32128";
@@ -69,7 +69,7 @@ export function $$V1() {
   let s = _o();
   let l = Ye();
   let m = useDispatch();
-  let f = sZ();
+  let f = useCurrentUserOrg();
   let g = useRef(null);
   if (Y(() => t(!1), {
     closeOnEsc: !0,
@@ -80,7 +80,7 @@ export function $$V1() {
       orgId: f?.id
     }));
     m(sz({
-      shelfType: cS.SLIDES_TEMPLATE_MODAL
+      shelfType: CommunityPageType.SLIDES_TEMPLATE_MODAL
     }));
   }, [f?.id, m]), !e) return null;
   let b = l ? 70 + s : parsePxNumber(M$q) + s;

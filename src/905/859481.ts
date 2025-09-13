@@ -10,7 +10,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { isValidValue, isInvalidValue, getCommonFromArray } from "../905/216495";
 import { Gt } from "../905/275640";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { a2 } from "../figma_app/762558";
 import { om } from "../figma_app/395097";
 import { Ms, Er } from "../905/873331";
@@ -46,13 +46,13 @@ function j(e) {
   let o = Sp(e.leftEndCap, "left");
   let d = jsx("span", {
     className: vc,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": _$$P(getI18nString("fullscreen.properties_panel.fill.start_point")),
     children: jsxs(SO, {
       ariaLabel: getI18nString("fullscreen.properties_panel.fill.start_point"),
       blurOnChange: !0,
       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.start_point"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: t,
       dropdownOverride: s(e.leftEndCap),
       dropdownShown: e.dropdownShown,
@@ -66,7 +66,7 @@ function j(e) {
         if (("CHANGED_END" === e.syncState || "CHANGED_BOTH" === e.syncState) && (r = !1), e.updateSyncState("changed start"), r && -1 !== Gp.indexOf(t)) e.onChange({
           leftEndCap: t,
           rightEndCap: t
-        }, i); else if (e.onChange({
+        }, i);else if (e.onChange({
           leftEndCap: t
         }, i), t === e.rightEndCap) {
           e.updateSyncState("reset");
@@ -107,7 +107,7 @@ function j(e) {
     htmlAttributes: {
       onMouseDown: dG,
       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.swap_start_and_end_points"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$F, {})
   });
@@ -118,7 +118,7 @@ function j(e) {
   let f = Sp(e.rightEndCap, "right");
   let _ = jsx("span", {
     className: Is,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": _$$P(getI18nString("fullscreen.properties_panel.fill.end_point")),
     children: jsxs(SO, {
       ariaLabel: getI18nString("fullscreen.properties_panel.fill.end_point"),
@@ -137,7 +137,7 @@ function j(e) {
         if (("CHANGED_START" === e.syncState || "CHANGED_BOTH" === e.syncState) && (r = !1), e.updateSyncState("changed end"), r && -1 !== Gp.indexOf(t)) e.onChange({
           leftEndCap: t,
           rightEndCap: t
-        }, i); else if (e.onChange({
+        }, i);else if (e.onChange({
           rightEndCap: t
         }, i), e.leftEndCap === t) {
           e.updateSyncState("reset");
@@ -260,7 +260,7 @@ function G({
       htmlAttributes: {
         onMouseDown: o,
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.advanced_stroke_settings"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$A, {})
     })

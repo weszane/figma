@@ -7,7 +7,7 @@ import { _Z, LI, ox, wr, Yt } from '../905/319777';
 import { L as _$$L2 } from '../905/408237';
 import { A9 } from '../905/414242';
 import { K as _$$K } from '../905/443068';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { W as _$$W } from '../905/592530';
 import { DP } from '../905/640017';
 import { L as _$$L } from '../905/704296';
@@ -270,12 +270,12 @@ function R({
   let ee = j === 0 || l === '';
   let et = jsxs('div', {
     className: 'x78zum5 x1q0g3np x1yjdb4r x1jnr06f x13a6bvl',
-    children: [jsx($n, {
+    children: [jsx(Button, {
       variant: 'secondary',
       onClick: W,
       disabled: ee,
       children: getI18nString('sites.code_component.search.replace_next')
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: 'secondary',
       onClick: K,
       disabled: ee,

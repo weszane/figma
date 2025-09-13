@@ -11,9 +11,9 @@ import { createOptimistThunk } from "../905/350402";
 import { xI, Y1 } from "../905/879323";
 import { eK, w2 } from "../905/977218";
 import { XE } from "../figma_app/976749";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
-import { Oo } from "../905/709171";
+import { compareWithGeneratedKey } from "../905/709171";
 import { memoizedProcessLocalComponents, processLocalComponents } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
 import { qp } from "../905/977779";
@@ -124,7 +124,7 @@ let $$G0 = new class extends M {
     this.computeLocalResultsPromise = async (e, t, i) => {
       let n = B0();
       let r = dm(V, e);
-      let a = (await r).filter(e => Oo(e, t));
+      let a = (await r).filter(e => compareWithGeneratedKey(e, t));
       let {
         elapsedTime,
         backgrounded
@@ -186,7 +186,7 @@ let $$G0 = new class extends M {
         entryPoint: c ?? "",
         queryType: "text",
         aiResultsEnabled: x,
-        productType: pi({
+        productType: mapFileToProductType({
           editorType: A.openFile?.editorType
         }),
         libraryKey: _$$l(A.openFile?.libraryKey ?? ""),
@@ -306,7 +306,7 @@ let $$G0 = new class extends M {
         query: s,
         queryId: i.search.queryId
       }));
-      let [S, C] = o()(E.normalizedSearchResults, e => Oo(e, d));
+      let [S, C] = o()(E.normalizedSearchResults, e => compareWithGeneratedKey(e, d));
       null === i.search.sessionId && trackEventAnalytics("asset_search.missing_session_id", {
         previousSessionId: i.search.lastLoadedQuery.sessionId,
         entryPoint: i.library.assetsPanelSearch.entryPoint

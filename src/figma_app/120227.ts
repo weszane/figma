@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { MeasurementUnit } from "../figma_app/763686";
 import s from "../vendor/3757";
 import { debugState } from "../905/407919";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { getI18nString } from "../905/303541";
 import { v4, AC, QN } from "../figma_app/655139";
 import { FIGMA_PROPERTIES, WEB, ANDROID, ANDROID_XML, IOS as _$$p, IOS_UIKIT } from "../905/359509";
@@ -27,7 +27,7 @@ export function $$b15() {
 }
 export function $$T2() {
   let e = useSelector(e => e.mirror.appModel.devHandoffPreferences);
-  let t = U();
+  let t = trackFileEventWithStore();
   return useCallback((r, n, i) => {
     let {
       customSettings,

@@ -6,7 +6,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg } from "../figma_app/967154";
 import { i$ } from "../figma_app/150804";
 import { useMemo, useState, useRef, useCallback, useId } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { e as _$$e } from "../figma_app/763473";
 import { At } from "../905/973142";
 import { deepEqual } from "../905/382883";
@@ -64,7 +64,7 @@ function h(e) {
       ref: d,
       className: o ? "" : "expandable_text_container--truncatedText--Zh19Y ellipsis--ellipsis--Tjyfa",
       children: s
-    }), m && jsx($n, {
+    }), m && jsx(Button, {
       variant: "link",
       onClick: g,
       children: f

@@ -3,20 +3,20 @@ import { createContext, useContext, useCallback, useMemo, useRef, useState, useE
 import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Fk, x3 } from "../figma_app/167249";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { l as _$$l } from "../905/103989";
 import { f as _$$f } from "../905/640587";
 import { J as _$$J } from "../905/614223";
 import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import j from "classnames";
 import { L as _$$L } from "../905/408237";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Qx, Uu } from "../figma_app/8833";
 import { p as _$$p } from "../905/167135";
 import { selectCurrentUser } from "../905/372672";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c as _$$c } from "../905/784033";
 import { aF } from "../441/443466";
 import { A as _$$A } from "../b2835def/807151";
@@ -27,7 +27,7 @@ import { hk } from "../figma_app/632319";
 import { Y as _$$Y } from "../905/246212";
 import { oW } from "../905/675859";
 import { A as _$$A2 } from "../b2835def/363895";
-import { WW } from "../905/521428";
+import { ButtonLarge } from "../905/521428";
 import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
 import { useDispatch } from "react-redux";
@@ -37,10 +37,10 @@ import { FlashActions } from "../905/573154";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { KJ } from "../figma_app/916560";
 import { logError } from "../905/714362";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { r as _$$r } from "../905/955316";
 import { UD } from "../figma_app/624361";
-import { E as _$$E2 } from "../905/695476";
+import { linkMetadataHandlerInstance } from "../905/695476";
 let o = createContext(null);
 function p() {
   let e = useContext(o);
@@ -300,7 +300,7 @@ function V({
     className: "alignment_scale--scaleContainerPseudoBorder--Jj6DE",
     children: [jsx("div", {
       className: "alignment_scale--scaleContainerSolidBackground--s4pRF"
-    }), jsxs(_$$E, {
+    }), jsxs(ButtonPrimitive, {
       className: b()("alignment_scale--scaleContainer--gmwd3", l ? _$$s.cursorPointer.$ : ""),
       ref: n,
       onClick: i,
@@ -391,11 +391,11 @@ function $({
       className: "alignment_scale--voteProfile--Um0e6",
       alt: e.name,
       src: _$$p(e.thumbnailUrl),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.name
     }, e.userId)), n.length > 0 ? jsx("div", {
       className: "alignment_scale--overflowVote--KIoww text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": _$$c,
       "data-tooltip-overflow-user-data": JSON.stringify(i),
       children: `+${n.length}`
@@ -409,10 +409,10 @@ function Q({
 }) {
   return jsxs("div", {
     className: "alignment_scale--resultToggleContainer--euX1O",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: "alignment_scale--resultToggleContainerSvg--PFGWI",
       svg: _$$A
-    }), jsxs(_$$E, {
+    }), jsxs(ButtonPrimitive, {
       className: "alignment_scale--resultToggle--alry6 text--fontPos13--xW8hS text--_fontBase--QdLsd",
       onClick: l,
       recordingKey: e,
@@ -631,7 +631,7 @@ function en({
   tooltipToShow: t,
   onClick: l
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     onClick: l,
     "aria-label": t?.subtext ? getI18nString("slides.flapp.facepile.stamp_with_action", {
       name: e.name,
@@ -640,7 +640,7 @@ function en({
       name: e.name
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t?.text,
       "data-tooltip-subtext": t?.subtext,
       "data-tooltip-offset-y": 8
@@ -663,7 +663,7 @@ function ei({
   }));
   return jsx("div", {
     className: "facepile--overflowStamp--j3fn3 text--fontPos22--4H4Fc text--_fontBase--QdLsd facepile--_stampBase--eCNDB",
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip": _$$c,
     "data-tooltip-overflow-user-data": JSON.stringify(t),
     "data-tooltip-offset-y": 8,
@@ -677,12 +677,12 @@ function er({
   onClick: t,
   disabled: l
 }) {
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: b()("facepile--emptyStampContainer--dAbYv facepile--_fixedStampBase--icx6v facepile--_stampBase--eCNDB", e ? "facepile--displayPreviewOnHover--qPtfX" : ""),
     onClick: t,
     "aria-label": getI18nString("slides.flapp.facepile.add_stamp_button"),
     disabled: l,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: "facepile--emptyStamp--KiqZH",
       svg: _$$A2
     }), e ? jsx("div", {
@@ -789,7 +789,7 @@ function ek({
   }));
   return jsx("div", {
     className: eb,
-    children: jsxs(_$$E, {
+    children: jsxs(ButtonPrimitive, {
       className: b()(ey, "poll--hoverable--uHwKu"),
       recordingKey: r,
       onClick: () => {
@@ -799,7 +799,7 @@ function ek({
         option: e
       }),
       htmlAttributes: {
-        "data-tooltip-type": Ib.SPECIAL,
+        "data-tooltip-type": KindEnum.SPECIAL,
         "data-tooltip": i && f.length > 0 ? _$$c : void 0,
         "data-tooltip-overflow-user-data": JSON.stringify(f),
         "data-tooltip-offset-y": 8
@@ -861,7 +861,7 @@ function eF({
     className: eb,
     children: jsxs("div", {
       className: ey,
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": i && N.length > 0 ? _$$c : void 0,
       "data-tooltip-overflow-user-data": JSON.stringify(N),
       "data-tooltip-offset-y": 8,
@@ -906,7 +906,7 @@ function eU({
     className: b()(eb, eN, "poll--newOptionInvisible--XwjKd")
   }) : jsx("div", {
     className: eb,
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       className: eN,
       onClick: t,
       recordingKey: generateRecordingKey(e, "addOption"),
@@ -928,11 +928,11 @@ function eD({
   setResultsShown: t
 }) {
   let l = e ? getI18nString("slides.flapp.results.results_shown") : getI18nString("slides.flapp.results.results_hidden");
-  return jsx(WW, {
+  return jsx(ButtonLarge, {
     "aria-label": l,
     htmlAttributes: {
       "data-tooltip": l,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     onClick: () => t(!e),
     recordingKey: "resultsButton",
@@ -1146,7 +1146,7 @@ async function eR(e) {
   if (!e) return;
   let t = KJ(e.trim());
   if (t) try {
-    let l = (await _$$E2.getLinkMetadata({
+    let l = (await linkMetadataHandlerInstance.getLinkMetadata({
       text: t.isFromIFrame ? e : t.url,
       useEmbedsAllowList: "true",
       useLinkPreviewsV2: "true"
@@ -1246,7 +1246,7 @@ let eY = {
       });
     }, [configData.url, configData.srcUrl, nodeId, setConfigData, isReadOnly]), configData.url && !configData.srcUrl) ? jsx("div", {
       className: _$$s.absolute.w48.h48.$,
-      children: jsx(kt, {
+      children: jsx(LoadingSpinner, {
         size: "custom",
         className: _$$s.w48.h48.$
       })

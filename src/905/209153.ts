@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { s as _$$s } from "../cssbuilder/589278";
 import { selectCurrentUser } from "../905/372672";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 export function $$d0(e) {
   let t = selectCurrentUser();
@@ -16,7 +16,7 @@ export function $$d0(e) {
   let c = e.hideTooltip ? "" : e.entityName;
   return jsx("div", {
     className: _$$s.inlineFlex.mr4.$,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": c,
     "data-tooltip-timeout-delay": 500,
     "data-tooltip-max-width": 250,

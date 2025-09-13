@@ -6,7 +6,7 @@ import { P } from "../905/697522";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { I7 } from "../figma_app/594947";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -67,7 +67,7 @@ export function $$k9({
     children: [jsx("span", {
       className: t ? _$$s.invisible.$ : "",
       children: e
-    }), t && jsx(kt, {
+    }), t && jsx(LoadingSpinner, {
       className: _$$s.absolute.$,
       shouldMatchTextColor: !0,
       size: "small"

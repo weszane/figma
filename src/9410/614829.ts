@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -50,7 +50,7 @@ export function $$v0({
     onClick: e ? T : void 0,
     hasScrollLine: v,
     children: [M ? jsxs(H, {
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         onClick: T,
         className: Rm,
         htmlAttributes: {
@@ -80,7 +80,7 @@ export function $$v0({
         })
       })]
     }) : jsx(H, {
-      children: jsxs(_$$E, {
+      children: jsxs(ButtonPrimitive, {
         onClick: T,
         className: Rm,
         recordingKey: generateRecordingKey(j, "collapsedRow"),

@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { d as _$$d } from "../4452/230712";
@@ -37,7 +37,7 @@ export function $$h0(e) {
     enabled: !!a
   });
   let f = useMemo(() => {
-    let e = oA(x.data?.resourceConnectionInvite);
+    let e = getResourceDataOrFallback(x.data?.resourceConnectionInvite);
     return e && {
       resourceConnectionInvite: {
         ...e,

@@ -3,7 +3,7 @@ import { createContext, forwardRef, useRef, useState, useMemo } from "react";
 import { A } from "../vendor/723372";
 import { i } from "../905/97346";
 import { ensureContext } from "../905/61417";
-import { GX } from "../905/893109";
+import { toPercent } from "../905/893109";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
 import { qE, n$, RZ, jN, CP } from "../905/875826";
@@ -220,7 +220,7 @@ export function $$y3({
     value,
     thumbRef
   } = ensureContext(_, "Thumb", "SliderPrimitive.Thumb");
-  let c = GX(h(value, min, max));
+  let c = toPercent(h(value, min, max));
   return jsx("div", {
     ...e,
     ...i,
@@ -248,8 +248,8 @@ export function $$b1({
     t = e;
     e = i;
   }
-  let c = GX(h(e, min, max));
-  let u = GX(1 - h(t, min, max));
+  let c = toPercent(h(e, min, max));
+  let u = toPercent(1 - h(t, min, max));
   return jsx("div", {
     ...i,
     ...a,
@@ -270,7 +270,7 @@ export function $$v0({
     min,
     max
   } = ensureContext(f, "Point", "SliderPrimitive.Point");
-  let d = GX(h(e, min, max));
+  let d = toPercent(h(e, min, max));
   return jsx("div", {
     ...t,
     ...r,

@@ -1,6 +1,6 @@
 import { Fullscreen, DesignGraphElements } from "../figma_app/763686";
 import { createActionCreator } from "../905/73481";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { R9 } from "../905/977824";
 import { q } from "../figma_app/403368";
 import { createOptimistThunk } from "../905/350402";
@@ -15,7 +15,7 @@ let $$_0 = createOptimistThunk((e, t) => {
   let r = e.getState();
   0 > [DesignGraphElements.HAND, DesignGraphElements.SELECT, DesignGraphElements.HAND_SELECT].indexOf(r.mirror.appModel.currentTool) && Fullscreen?.triggerAction("set-tool-default", null);
   q().then(e => {
-    e || (Fullscreen?.setIsInCursorChat(!0), ds("Started chatting", r.openFile?.key, r, {
+    e || (Fullscreen?.setIsInCursorChat(!0), trackFileEvent("Started chatting", r.openFile?.key, r, {
       source: t.source
     }));
   });
@@ -30,7 +30,7 @@ let $$g8 = createOptimistThunk((e, t) => {
 let $$f4 = createActionCreator("MULTIPLAYER_EMOJI_TOGGLE_EMOJI_WHEEL");
 let $$E7 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  ds("Toggled emoji wheel", r.openFile?.key, r, {
+  trackFileEvent("Toggled emoji wheel", r.openFile?.key, r, {
     wheelType: t.wheelType,
     ...(t.source && {
       source: t.source

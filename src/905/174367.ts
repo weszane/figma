@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
@@ -17,7 +17,7 @@ import { fu } from "../figma_app/831799";
 import { B2, al, b6 } from "../figma_app/681697";
 import { u as _$$u } from "../905/997541";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { ProjectByIdForConnectedProjectStatus } from "../figma_app/43951";
 function E({
   open: e,
@@ -36,9 +36,9 @@ function E({
     }, {
       enabled: "" !== e
     });
-    return useMemo(() => "loaded" !== t.status ? null : oA(t.data?.project?.activeProjectResourceConnections)?.[0], [t]);
+    return useMemo(() => "loaded" !== t.status ? null : getResourceDataOrFallback(t.data?.project?.activeProjectResourceConnections)?.[0], [t]);
   }(p);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: _,
     width: 560,
     children: jsxs(vo, {

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export class $$s0 extends RecordingComponent {
   constructor(e) {
     super(e);
@@ -34,7 +34,7 @@ export class $$s0 extends RecordingComponent {
       onClick: this.onClick,
       onMouseEnter: this.props.onlyShowTooltipsWhenTruncated ? this.onMouseEnter : void 0,
       "data-testid": this.props.dataTestId,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": this.state.showTooltip ? this.props.tooltipText : void 0,
       "data-text": this.props.dataText,
       children: this.props.children

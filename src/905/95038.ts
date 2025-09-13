@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
 import { L } from "../905/857916";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 let a = memo(function (e) {
   return jsx("svg", {
     width: "24",
@@ -22,7 +22,7 @@ export function $$d0(e) {
       hostPlanName: e.hostPlanName,
       connectedPlanName: e.connectedPlanName
     }),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-timeout": 50,
     "data-tooltip-max-width": 300,
     "data-onboarding-key": e.dataOnboardingKey

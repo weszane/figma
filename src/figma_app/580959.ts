@@ -8,8 +8,8 @@ import { Label } from "../905/270045";
 import { T as _$$T } from "../905/68180";
 import { K as _$$K } from "../905/443068";
 import { EventShield } from "../905/821217";
-import { E as _$$E } from "../905/632989";
-import { $n, IK } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button, ButtonWide } from "../905/521428";
 import { U as _$$U } from "../905/708285";
 import { O as _$$O } from "../905/487602";
 import { A as _$$A } from "../905/24328";
@@ -31,7 +31,7 @@ import { formatCount } from "../figma_app/930338";
 import { k as _$$k2 } from "../905/582200";
 import { Y as _$$Y } from "../905/506207";
 import { tH, H4 } from "../905/751457";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _j } from "../figma_app/843119";
 import { U as _$$U2 } from "../905/492359";
@@ -66,7 +66,7 @@ import { b as _$$b2 } from "../figma_app/882253";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { K as _$$K2 } from "../905/733706";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { Pd } from "../figma_app/178475";
 import { a2 } from "../figma_app/762558";
@@ -205,13 +205,13 @@ let $$ti6 = memo(function (e) {
                   label: jsx(Label, {
                     htmlAttributes: {
                       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
-                      "data-tooltip-type": Ib.TEXT
+                      "data-tooltip-type": KindEnum.TEXT
                     },
                     children: renderI18nText("fullscreen.properties_panel.fill.show_in_exports")
                   }),
                   htmlAttributes: {
                     "data-tooltip": getI18nString("fullscreen.properties_panel.fill.include_the_canvas_or_group_background_in_exports"),
-                    "data-tooltip-type": Ib.TEXT
+                    "data-tooltip-type": KindEnum.TEXT
                   }
                 })
               });
@@ -887,7 +887,7 @@ export class $$tp1 extends PureComponent {
             htmlAttributes: {
               onMouseDown: dG,
               "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(_$$U, {})
           })
@@ -911,7 +911,7 @@ export class $$tp1 extends PureComponent {
           } : this.props.onRemovePaint,
           "aria-label": getI18nString("fullscreen.properties_panel.fill.remove"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.fill.remove"),
             onMouseDown: dG
           },
@@ -1311,7 +1311,7 @@ export function $$tg3(e) {
     property: n,
     recordingKey: generateRecordingKey(e, "colorInput"),
     squareRightBorder: !1
-  }) : jsx(_$$E, {
+  }) : jsx(ButtonPrimitive, {
     className: e.visible ? cD : GI,
     onClick: s,
     actionOnPointerDown: !0,
@@ -1425,7 +1425,7 @@ function tf({
       onClick: q,
       htmlAttributes: {
         "data-tooltip": `Select ${formatCount(r, "item")} using this style`,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$A, {})
     })
@@ -1437,7 +1437,7 @@ function tf({
     onClick: X,
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_style"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$U, {})
   });
@@ -1767,7 +1767,7 @@ $$t_2.displayName = "Paint";
             htmlAttributes: {
               onMouseDown: dG,
               "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(_$$U, {})
           })
@@ -1785,7 +1785,7 @@ $$t_2.displayName = "Paint";
               recordingKey: generateRecordingKey(this.props, "paint", "styleButton"),
               htmlAttributes: {
                 "data-tooltip": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : "style",
-                "data-tooltip-type": t ? Ib.TEXT : Ib.LOOKUP
+                "data-tooltip-type": t ? KindEnum.TEXT : KindEnum.LOOKUP
               },
               children: jsx(_$$y, {})
             })
@@ -1807,7 +1807,7 @@ $$t_2.displayName = "Paint";
               "data-tooltip": getI18nString("fullscreen.properties_panel.select_item_using_this_color", {
                 numItems: this.props.uniqueNodesCount
               }),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(_$$A, {})
           })
@@ -1922,7 +1922,7 @@ export function $$tb4(e) {
     label: null,
     input: jsx("span", {
       className: gr,
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick: () => {
           trackEventAnalytics("Show Selection Paints For Large Selection", {
             fileKey: e.openFile?.key || ""
@@ -2000,7 +2000,7 @@ export function $$tb4(e) {
         className: Hl,
         children: jsx("span", {
           className: g2,
-          children: jsx(IK, {
+          children: jsx(ButtonWide, {
             recordingKey: generateRecordingKey(e, "paintOverflow"),
             actionOnPointerDown: !0,
             onClick: en ? t => {
@@ -2017,7 +2017,7 @@ export function $$tb4(e) {
               L(!R);
             },
             variant: "ghost",
-            iconPrefix: jsx(_$$B, {
+            iconPrefix: jsx(SvgComponent, {
               className: IQ,
               svg: _$$A3
             }),

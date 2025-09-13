@@ -6,7 +6,7 @@ import { Uz } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { j } from "../905/91142";
 import { In } from "../905/672640";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { tf } from "../figma_app/831799";
 var o = s;
 export let $$h0 = forwardRef(function ({
@@ -109,7 +109,7 @@ export let $$h0 = forwardRef(function ({
       children: jsx(In, {
         icon: h
       })
-    }), f && jsx(_$$E, {
+    }), f && jsx(TextWithTruncation, {
       fontSize: 11,
       fontWeight: function (e, t) {
         switch (e) {

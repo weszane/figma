@@ -8,7 +8,7 @@ import { memoizeLRU } from "../figma_app/815945";
 import { generateRecordingKey } from "../figma_app/878298";
 import s from "classnames";
 import { colorToHex } from "../905/436288";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { logger } from "../905/651849";
 import { selectWithShallowEqual } from "../905/103090";
 import { N as _$$N } from "../905/551536";
@@ -20,7 +20,7 @@ import { x as _$$x } from "../905/239551";
 import { Vi, kZ } from "../figma_app/364284";
 import { Um } from "../905/848862";
 import { FEditorType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { l6, c$ } from "../905/794875";
 import { qW } from "../figma_app/932285";
 import { $n, wv } from "../figma_app/439493";
@@ -109,7 +109,7 @@ function S({
     let o = colorToHex(n.option);
     _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, f[o] ?? o);
   });
-  let r = _$$A(l, 100);
+  let r = useDebouncedCallback(l, 100);
   let [c, p] = useState(!1);
   let s = [t.selectedOption, ...t.options.map(e => e.option)];
   let d = {};
@@ -175,7 +175,7 @@ function R({
   return jsx("div", {
     className: p ? void 0 : kL,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e.tooltip,
     children: jsx(E, {
       ariaLabel: e.tooltip,

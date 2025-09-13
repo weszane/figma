@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
 import { D8 } from "../905/511649";
@@ -59,7 +59,7 @@ export function $$h1(e) {
     isPanelBodyCollapsedAtom
   } = e;
   let o = p(e);
-  return getFeatureFlags().eu_fpl_migration_interactive_panel ? jsxs(E, {
+  return getFeatureFlags().eu_fpl_migration_interactive_panel ? jsxs(ButtonPrimitive, {
     ...o,
     tabIndex: -1,
     children: [!doNotReserveSpaceForChevron && jsx(r2, {

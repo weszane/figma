@@ -3,8 +3,8 @@ import { forwardRef, Children, memo } from "react";
 import { J } from "../905/614223";
 import s from "classnames";
 import { GG } from "../905/511649";
-import { B } from "../905/714743";
-import { Ib } from "../905/129884";
+import { SvgComponent } from "../905/714743";
+import { KindEnum } from "../905/129884";
 import { En } from "../figma_app/613182";
 import { _r } from "../905/291714";
 import { bH, zr, EX, $9, x6, BB, _T, Hh, cN, Ec, Pq, k1, F$, zt, gK, bI, LJ, Qq, me, OW, Ln, y9 } from "../905/260831";
@@ -129,7 +129,7 @@ let $$f1 = forwardRef((e, t) => {
     tooltip,
     tooltipShortcutActionKey,
     tooltipType,
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg,
       width: svgWidth,
       height: svgHeight,
@@ -184,7 +184,7 @@ let $$E0 = forwardRef((e, t) => {
     shouldShowTooltips: t,
     tooltipType: r
   }) {
-    return e && t ? r || Ib.TEXT : void 0;
+    return e && t ? r || KindEnum.TEXT : void 0;
   }({
     tooltip,
     shouldShowTooltips: W,
@@ -202,7 +202,7 @@ let $$E0 = forwardRef((e, t) => {
       tooltip: r
     }) {
       return e ?? En({
-        "data-tooltip-type": t ?? Ib.TEXT,
+        "data-tooltip-type": t ?? KindEnum.TEXT,
         "data-tooltip": r ?? ""
       });
     }({
@@ -290,7 +290,7 @@ let T = memo(({
   caret: e,
   animateCaret: t,
   active: r
-}) => jsx(B, {
+}) => jsx(SvgComponent, {
   className: o()({
     [OW]: !0,
     [Ln]: t,

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { SelectionPaintHelpers } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { y as _$$y } from "../figma_app/404310";
@@ -46,7 +46,7 @@ export function $$f0({
     children: [f && jsx(fI, {
       children: jsx("div", {
         className: "selection_colors_panel--ignoreLimitButton--US3qr",
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "secondary",
           onClick: () => {
             trackEventAnalytics("Show Selection Paints For Large Selection", {

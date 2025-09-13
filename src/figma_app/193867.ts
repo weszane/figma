@@ -18,7 +18,7 @@ import { f as _$$f } from '../905/992906'
 import { FEditorType } from '../figma_app/53721'
 import { $T, nw } from '../figma_app/422062'
 import { throwTypeError } from '../figma_app/465776'
-import { G as _$$G } from '../figma_app/471068'
+import { ViewTypeEnum } from '../figma_app/471068'
 import { pk } from '../figma_app/502247'
 
 export let $$A0 = new ViewSelectorGroup([new $T(), new _$$f(), new YY(), new _$$y(), new _$$a(), new _$$m(), new B(), new G(), new _$$_(), new N(), new _$$u(), new _$$i(), new BaseViewManager(), new _$$v()])
@@ -163,7 +163,7 @@ export function $$W8(e) {
   }
 }
 export function $$$$K4(e) {
-  return e.view === 'recentsAndSharing' && (void 0 === e.tab || e.tab === _$$G.RECENTLY_VIEWED)
+  return e.view === 'recentsAndSharing' && (void 0 === e.tab || e.tab === ViewTypeEnum.RECENTLY_VIEWED)
 }
 export function $$Y5(e) {
   return e.view === 'resourceHub' || V(e)

@@ -30,11 +30,11 @@ import { DF } from "../figma_app/861252";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { A5, FI, Yj, J9, Zf, QU, iM, yx, Jm, tL } from "../figma_app/274104";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { serializeQuery } from "../905/634134";
 import { IW } from "../figma_app/563413";
 import { getFeatureFlags } from "../905/601108";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
 import { A as _$$A2 } from "../b2835def/491732";
@@ -46,10 +46,10 @@ import { fullscreenValue } from "../figma_app/455680";
 import { kA, IO } from "../905/962318";
 import { Point } from "../905/736624";
 import { Ao } from "../905/748636";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { C as _$$C } from "../905/520159";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo } from "../figma_app/272243";
 import ey from "../vendor/197638";
 import { clamp } from "../figma_app/492908";
@@ -162,7 +162,7 @@ function G() {
       query: s
     }), s.length > 0 && jsx("div", {
       className: "first_level_resource_search_bar--searchButtonContainer--BADgp",
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "primary",
         type: "submit",
         ref: o,
@@ -222,7 +222,7 @@ let X = memo(function () {
         FJ(e.href, "_blank", "noopener");
         e.onClick?.();
       },
-      iconPrefix: jsx(_$$B, {
+      iconPrefix: jsx(SvgComponent, {
         svg: _$$A2,
         width: "16px",
         className: _$$s2.colorIconBrand.mr8.$
@@ -500,7 +500,7 @@ function em() {
   let s = Xr(J9);
   return jsxs("div", {
     className: _$$s2.flex.flexRow.justifyBetween.p16.pl12.$,
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       onClick: () => {
         s(e - 1);
       },
@@ -633,7 +633,7 @@ function ej({
     open: !!e,
     onClose: t
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     width: "fit-content",
     children: jsx("div", {

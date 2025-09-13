@@ -13,7 +13,7 @@ import { S as _$$S } from "../905/491708";
 import { px } from "../905/201014";
 import { JG } from "../figma_app/852050";
 import { le } from "../figma_app/415217";
-import { R as _$$R } from "../905/949750";
+import { useCounter } from "../905/949750";
 import { d as _$$d } from "../905/485888";
 import { Z0 } from "../905/195478";
 import { getCodegenLanguages } from "../905/661977";
@@ -47,7 +47,7 @@ export function $$E0({
   });
   let [k, R] = useState(!1);
   let [N, P] = useState(!1);
-  let O = _$$R();
+  let O = useCounter();
   let D = useSelector(e => e.versionHistory.activeId);
   let L = getSingletonSceneGraph();
   let F = zL();

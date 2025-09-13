@@ -15,7 +15,7 @@ import { F as _$$F } from "../905/989956";
 import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F2 } from "../905/258517";
 import { Yv } from "../figma_app/616107";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $J, Z9 } from "../figma_app/634656";
 import { Qv } from "../figma_app/967873";
 import { s as _$$s } from "../figma_app/666387";
@@ -444,7 +444,7 @@ export function $$Y1({
       onClick: e,
       inTabOrder: !1,
       "data-tooltip": a,
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       tooltipOffset: o,
       hasOpenSubmenu: !1,
       children: e => jsx(_$$s2, {

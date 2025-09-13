@@ -3,7 +3,7 @@ import { useRef, useCallback, useState } from "react";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { BK } from "../905/848862";
 import { Cf } from "../905/504727";
 import { U, i as _$$i } from "../905/649519";
@@ -41,7 +41,7 @@ export function $$g0({
       ref: h,
       className: ZS,
       onClick: g,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: A
       })
     }), f && (f && b.current ? jsx(U, {

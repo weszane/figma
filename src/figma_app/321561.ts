@@ -14,10 +14,10 @@ import { EO, OY, gn, ej } from "../figma_app/86989";
 import { RW } from "../figma_app/684168";
 import { j } from "../905/813868";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { R as _$$R } from "../figma_app/612938";
-import { aL } from "../figma_app/45218";
+import { ShelfViewType } from "../figma_app/45218";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { manifestContainsWidget } from "../figma_app/155287";
 import { Kp } from "../figma_app/189990";
@@ -50,7 +50,7 @@ export function $$O0({
     let a = ej(e);
     return useCallback(() => {
       if (!e) return;
-      let n = aL.QUICK_ACTIONS;
+      let n = ShelfViewType.QUICK_ACTIONS;
       mG(e, n, t, r?.id);
       a();
     }, [e, t, r, a]);
@@ -98,7 +98,7 @@ export function $$O0({
       data: e
     }));
   }, [D, extension, q, J]);
-  let Q = sZ();
+  let Q = useCurrentUserOrg();
   let ee = _$$a(Q?.id, extension.plugin_id, J.loaded ? J.data?.workspaceId : void 0);
   return useMemo(() => {
     let e = publishedExtension?.monetized_resource_metadata;

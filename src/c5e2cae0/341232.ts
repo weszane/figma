@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
 import { $z } from "../figma_app/831799";
@@ -18,7 +18,7 @@ export function $$m0(e) {
           className: "seat_counter--minusButton--e0dEs",
           onClick: e.decrementSeats,
           dataTestId: `remove-additional-${e.billableProductKey}`,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: A
           })
         }), jsx("input", {
@@ -33,7 +33,7 @@ export function $$m0(e) {
           className: "seat_counter--plusButton--ZEWEz",
           onClick: e.incrementSeats,
           dataTestId: `add-additional-${e.billableProductKey}`,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: _$$A
           })
         })]

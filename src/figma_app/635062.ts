@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { GT } from "../905/711212";
-import { EF } from "../905/709171";
+import { compareLibraryItemsAlias } from "../905/709171";
 import { Um } from "../905/848862";
 import { vG } from "../905/213527";
 export function $$c3(e, t) {
@@ -29,7 +29,7 @@ export function $$p0(e) {
 }
 export function $$_2(e) {
   let t = useSelector(e => e.stylePreviewShown);
-  return useMemo(() => t.isShown && !t.isCreating && t.style.node_id === e.node_id && EF(t.style, e), [t, e]);
+  return useMemo(() => t.isShown && !t.isCreating && t.style.node_id === e.node_id && compareLibraryItemsAlias(t.style, e), [t, e]);
 }
 export const GC = $$p0;
 export const VX = $$u1;

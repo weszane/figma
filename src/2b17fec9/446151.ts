@@ -12,7 +12,7 @@ import { r1 } from "../figma_app/545877";
 import { LR } from "../figma_app/120210";
 import { aV } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Wd_ } from "../figma_app/6204";
 import { oh, Yg } from "../905/526509";
 import { hx } from "../figma_app/630194";
@@ -20,7 +20,7 @@ import { nS } from "../figma_app/274383";
 import { $y } from "../figma_app/544744";
 import { W as _$$W } from "../905/866915";
 import { createPortal } from "react-dom";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { sD, W2 } from "../2b17fec9/873436";
 import { A as _$$A } from "../svg/741686";
@@ -28,14 +28,14 @@ import { A as _$$A2 } from "../svg/776856";
 import { A as _$$A3 } from "../svg/488178";
 import { s as _$$s } from "../figma_app/30255";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import { d as _$$d } from "../vendor/456530";
 import { P as _$$P } from "../vendor/348225";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { jD } from "../905/765855";
-import { Pl } from "../figma_app/62612";
+import { getViewportZoom } from "../figma_app/62612";
 import { $J } from "../figma_app/634656";
 import { s as _$$s3 } from "../figma_app/666387";
 import { br, XI, Qw, XN, ti } from "../figma_app/937735";
@@ -104,7 +104,7 @@ function M() {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: d()("advanced_diagramming_onboarding--flyoutLeft--d-idk", L),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3,
         style: {
           fill: "#FFFFFF",
@@ -113,7 +113,7 @@ function M() {
       })
     }), jsx("div", {
       className: d()("advanced_diagramming_onboarding--flyoutRight--RmOg2", L),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A,
         style: {
           fill: "#FFFFFF",
@@ -122,7 +122,7 @@ function M() {
       })
     }), jsx("div", {
       className: d()("advanced_diagramming_onboarding--flyoutCenter--xXW1g", L),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A2,
         style: {
           fill: "#FFFFFF",
@@ -291,7 +291,7 @@ let ec = memo(function ({
       paddingLeft: 8,
       paddingRight: 4,
       shouldVerticallyCenter: !0,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         onClick: () => L(),
         className: _$$s2.flex.b0.noWrap.gap0.flexRow.hFull.px8.itemsCenter.$,
         recordingKey: generateRecordingKey(e, "MORESHAPES"),
@@ -360,7 +360,7 @@ function ep({
   let [y, v] = useState(0);
   let C = _$$d(.5);
   let T = _$$d(.5);
-  let E = Pl({
+  let E = getViewportZoom({
     subscribeToUpdates_expensive: x
   });
   let w = Yt();
@@ -394,7 +394,7 @@ function ep({
       "data-tooltip": x ? void 0 : A.action,
       "data-tooltip-offset-y": -10,
       "data-tooltip-show-above": !0,
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       drag: !k,
       dragConstraints: {
         top: 0,
@@ -454,7 +454,7 @@ function ep({
           svgToCanvasScale: A.canvasToSvgScale ? 1 / A.canvasToSvgScale : 1
         },
         ref: b
-      }) : jsx(_$$B, {
+      }) : jsx(SvgComponent, {
         svg: _$$eg(e),
         className: d()({
           "dlt_shape_submenu--shapeIcon--o4oZr": !0,
@@ -592,7 +592,7 @@ let eS = memo(function ({
     }),
     "data-tooltip": A ? void 0 : E.action,
     "data-tooltip-offset-y": 0,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: I,
     inTabOrder: !1,
     isSelected: m,
@@ -777,7 +777,7 @@ function eN({
     }),
     "data-tooltip": L ? void 0 : "set-tool-connector-elbowed",
     "data-tooltip-offset-y": 0,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: S,
     inTabOrder: !1,
     isSelected: p,

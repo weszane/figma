@@ -3,7 +3,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { SiteBundles } from "../figma_app/43951";
 import { up } from "../figma_app/903209";
 import { b } from "../905/875374";
@@ -59,7 +59,7 @@ export async function $$p0(e) {
       }, e => {
         try {
           if ("loaded" === e.status) {
-            let r = oA(e.data?.siteBundles);
+            let r = getResourceDataOrFallback(e.data?.siteBundles);
             let o = r?.find(e => e.id === t);
             o?.status === "succeeded" ? (clearTimeout(a), s?.(), n()) : o?.status === "failed" && (clearTimeout(a), s?.(), i(Error(`Site publishing failed: ${o.error || "Unknown error"}`)));
           }

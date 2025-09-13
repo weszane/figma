@@ -7,7 +7,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { N } from "../905/696711";
-import { Gq } from "../905/380385";
+import { getAttachmentChanges } from "../905/380385";
 import { createNoOpValidator } from "../figma_app/181241";
 let h = new class {
   constructor() {
@@ -54,7 +54,7 @@ let $$b4 = createOptimistThunk((e, t) => {
   if (!i || !n || !r) return;
   let l = n.getIdFromUuid("FeedComment", r).then(e => XHR.put(`/api/feed_posts/comments/${e}`, {
     message_meta: t.messageMeta,
-    attachment_updates: Gq(t.attachmentUpdates)
+    attachment_updates: getAttachmentChanges(t.attachmentUpdates)
   }));
   trackEventAnalytics("Team Feed Comment Edited", {
     text: _Z(t.messageMeta)

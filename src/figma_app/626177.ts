@@ -3,9 +3,9 @@ import { useMemo, forwardRef, PureComponent } from "react";
 import a from "classnames";
 import { D8, u2 } from "../905/511649";
 import { L } from "../905/408237";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { jr, W0 } from "../figma_app/896988";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { v } from "../905/694527";
 import { a2, kR, CZ, X0, ht, LE, l$, Zz, co, n1, zU, DS, Z4, O1, PQ, LJ, EA, _Z, fR, Pf, wh, PB } from "../figma_app/973219";
 import { A } from "../5724/388041";
@@ -77,10 +77,10 @@ export function $$v4(e) {
     children: [jsx("div", {
       className: n1,
       children: e.title
-    }), jsx(B, {
+    }), jsx(SvgComponent, {
       className: zU,
       svg: A,
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": e.dataTooltipContentKey,
       "data-tooltip-timeout-delay": e.dataTooltipTimeoutDelay
     })]

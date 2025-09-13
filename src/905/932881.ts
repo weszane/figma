@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { isValidElement, useMemo } from "react";
 import { R } from "../905/621802";
 import { J } from "../905/125993";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $z } from "../figma_app/831799";
 import { P } from "../905/842406";
@@ -20,7 +20,7 @@ export function $$g2(e) {
     children: [isValidElement(e.icon) ? jsx("div", {
       className: e.isSecondaryStyling ? QJ : aL,
       children: e.icon
-    }) : jsx(B, {
+    }) : jsx(SvgComponent, {
       className: e.isSecondaryStyling ? QJ : aL,
       svg: e.icon
     }), jsxs("div", {

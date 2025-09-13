@@ -4,7 +4,7 @@ import a from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { $$ } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 var s = a;
 export function $$u0({
   children: e,
@@ -12,7 +12,7 @@ export function $$u0({
   shouldUseOpaqueBackground: r = !1,
   insertTemplate: a
 }) {
-  let u = Td();
+  let u = useIsCanvasEditDisabled();
   let p = u ? getI18nString("browse_templates_modal.add_template.disabled") : "";
   return jsxs($$, {
     className: s()("insert_template_cta--button--InTLP", r && "insert_template_cta--buttonOpaque--oEwuq"),

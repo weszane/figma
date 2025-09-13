@@ -26,7 +26,7 @@ import { eY } from "../figma_app/722362";
 import { selectOpenFileKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
 import { vp } from "../figma_app/831696";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { QZ } from "../figma_app/727192";
 import { e as _$$e } from "../figma_app/905311";
 import { h6 } from "../905/401389";
@@ -119,7 +119,7 @@ function F({
           },
           "aria-label": getI18nString("proto.flows_panel.select_frame"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("proto.flows_panel.select_frame")
           },
           children: jsx(_$$A, {})
@@ -142,7 +142,7 @@ function F({
           }(i.nodeID),
           "aria-label": getI18nString("proto.flows_panel.copy_link"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("proto.flows_panel.copy_link")
           },
           children: jsx(_$$r, {})
@@ -158,7 +158,7 @@ function F({
           },
           "aria-label": getI18nString("proto.flows_panel.preview"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("proto.flows_panel.preview")
           },
           children: jsx(c, {})

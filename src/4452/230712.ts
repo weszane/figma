@@ -2,13 +2,13 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { B } from "../905/950875";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -18,7 +18,7 @@ import { fu } from "../figma_app/831799";
 import { N as _$$N } from "../figma_app/55043";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c as _$$c } from "../905/32166";
 import { registerModal } from "../905/102752";
 import { fF, yF, Kg, F5, QU, j1, xQ } from "../figma_app/397283";
@@ -67,7 +67,7 @@ export let $$A0 = registerModal(function (e) {
     properties: {
       folderId: e.resourceConnectionInvite.resourceId
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: A,
       width: "lg",
       children: jsxs(vo, {
@@ -137,7 +137,7 @@ export let $$A0 = registerModal(function (e) {
                         connectedProjectLimit: _$$b[S.tier],
                         planType: _$$A(S.tier) ?? ""
                       }),
-                      "data-tooltip-type": Ib.TEXT,
+                      "data-tooltip-type": KindEnum.TEXT,
                       "data-tooltip-interactive": !0,
                       "data-tooltip-show-immediately": !0,
                       "data-tooltip-show-below": !0
@@ -164,14 +164,14 @@ export let $$A0 = registerModal(function (e) {
               href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects",
               target: "_blank",
               className: _$$s.mr8.$,
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: e => e.stopPropagation(),
                 children: renderI18nText("resource_connection.request_modal.learn_more")
               })
             }), jsxs("div", {
               className: _$$s.flex.gap8.itemsCenter.$,
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 onClick: () => {
                   _$$c.denyResourceConnectionInvite(e.resourceConnectionInvite.id).then(() => {
@@ -190,10 +190,10 @@ export let $$A0 = registerModal(function (e) {
                   });
                 },
                 children: renderI18nText("resource_connection.confirm_modal.decline")
-              }), w ? jsx($n, {
+              }), w ? jsx(Button, {
                 disabled: !0,
-                children: jsx(qc, {})
-              }) : jsx($n, {
+                children: jsx(LoadingOverlay, {})
+              }) : jsx(Button, {
                 onClick: k,
                 children: renderI18nText("resource_connection.connect")
               })]

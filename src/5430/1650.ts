@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { z } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
 import { vh } from "../figma_app/99826";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { k } from "../905/22009";
@@ -224,7 +224,7 @@ export function $$f0() {
       spacing: 16,
       children: [jsx(t, {
         href: `${getInitialOptions().figma_url}`,
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: _$$A,
           svgClassName: "footer--wordmark--CrA9E"
         })

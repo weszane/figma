@@ -24,7 +24,7 @@ import { bx } from "../figma_app/8833";
 import { ow } from "../figma_app/976749";
 import { n as _$$n } from "../figma_app/848232";
 import { Np } from "../figma_app/193867";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { p as _$$p } from "../figma_app/353099";
 import { y as _$$y } from "../9410/598921";
 var d = l;
@@ -129,7 +129,7 @@ export function $$M1({
       },
       onContextMenu: B,
       href: p,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": i ? getI18nString("dev_handoff.paywall.org_not_member_hint") : void 0,
       "data-tooltip-text-left": !0,
       recordingKey: "dev_handoff.workflows.overview_entry",

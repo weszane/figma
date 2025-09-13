@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 let l = {
@@ -77,7 +77,7 @@ export function $$o0({
   onClick: t,
   disabled: n
 }) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ...Ay.props(l.suggestion, n ? l.disabled : l.enabled),
     onClick: t,
     disabled: n,

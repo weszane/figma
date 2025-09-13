@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { N as _$$N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -225,7 +225,7 @@ function j({
         href: "https://help.figma.com/hc/articles/360038662654",
         children: renderI18nText("design_systems.assets_panel.learn_more")
       })]
-    }), jsx($n, {
+    }), jsx(Button, {
       onClick: e,
       recordingKey: generateRecordingKey("assetsEmptyState", "exploreLibraries"),
       ref: setKeyboardNavigationElement,

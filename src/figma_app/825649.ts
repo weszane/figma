@@ -28,7 +28,7 @@ import { fu } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { h as _$$h } from "../905/864281";
 import { kD, J3, JU, kN } from "../figma_app/622574";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { isBranchAlt, getRepoByIdAlt, isDefaultFile } from "../905/760074";
 import { t as _$$t2, m as _$$m } from "../905/364535";
@@ -405,7 +405,7 @@ export function $$eO1({
     recordingKey: "copyToFigmaSlides",
     displayText: getI18nString("slides.general.copy_current_page_to_figma_slides"),
     callback: () => {
-      Cu({
+      logAndTrackCTA({
         name: "slides_file_dropdown_entrypoint"
       });
       fx(eM, ej).then(e => {

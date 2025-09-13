@@ -5,7 +5,7 @@ import { qB } from "../905/862321";
 import { s_ } from "../905/17223";
 import { tM } from "../figma_app/637027";
 import { Ak } from "../905/773401";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { showModalHandler } from "../905/156213";
 import { x as _$$x } from "../905/749159";
 import { d_ } from "../figma_app/918700";
@@ -77,7 +77,7 @@ class S extends Component {
           ModalCloseButton: s_,
           BrandButton: Ak,
           ButtonSecondaryTracked: tM,
-          Svg: B
+          Svg: SvgComponent
         }
       })
     });

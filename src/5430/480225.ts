@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { xk } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { C as _$$C } from "../905/237873";
 import { CS } from "../figma_app/275462";
@@ -92,7 +92,7 @@ export function $$j0(e) {
 function w(e) {
   return jsxs("div", {
     className: "empty_search_state--emptyState--2TAUS search_results_view--emptyState--HtHm1 tiles_view--emptyState--jfzsE text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       className: "empty_search_state--emptyStateIllustrations--BnydB search_results_view--emptyStateIllustrations--CN9Y8",
       svg: g[e.resourceType],
       useOriginalSrcFills_DEPRECATED: !0

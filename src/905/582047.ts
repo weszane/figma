@@ -8,7 +8,7 @@ import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { STANDARD_LIMIT } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
@@ -21,7 +21,7 @@ let $$A0 = registerModal(function (e) {
     name: "FileLimitPaywallModal",
     properties: {
       teamId: e.teamId,
-      productType: pi({
+      productType: mapFileToProductType({
         editorType: e.editorType
       }),
       action: e.action

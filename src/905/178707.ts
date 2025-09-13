@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { getSessionStorage } from "../905/657224";
 import l from "classnames";
 import { xf, bs } from "../figma_app/416935";
@@ -14,7 +14,7 @@ import { L } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { j6 } from "../figma_app/831799";
-import { Ws } from "../figma_app/314264";
+import { CTA_CLICKED } from "../figma_app/314264";
 import { createNoOpValidator } from "../figma_app/181241";
 var d = l;
 let _ = forwardRef(function ({
@@ -125,7 +125,7 @@ export function $$w0(e) {
     let e = f.split("@")[0];
     w(`${e}@${t}`);
     i(null);
-    trackEvent(Ws, {
+    trackEvent(CTA_CLICKED, {
       trackingDescriptor: _$$c.USE_SUGGESTED_EMAIL,
       previousDomain: e,
       newDomain: t
@@ -157,7 +157,7 @@ export function $$w0(e) {
       "data-testid": "domain-suggestion",
       className: "form_inputs--domainSuggestion--sBuUE",
       children: renderI18nText("auth.email-domain-suggestion-prompt", {
-        domainSuggestion: jsx(_$$E, {
+        domainSuggestion: jsx(ButtonPrimitive, {
           className: "form_inputs--link--KfGcM",
           onClick: () => C(),
           children: t

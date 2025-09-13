@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { A as _$$A } from "../905/920142";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ import { $n } from "../905/930279";
 import { selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { RepoFiles } from "../figma_app/43951";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/202020";
@@ -40,7 +40,7 @@ function D() {
   });
 }
 function k(e) {
-  let t = (oA(e.recentFileVersions) || []).filter(e => !e.user.isSystemUser).find(e => 7 !== e.view);
+  let t = (getResourceDataOrFallback(e.recentFileVersions) || []).filter(e => !e.user.isSystemUser).find(e => 7 !== e.view);
   if (t) {
     let r = t.checkpoint && _$$A.utc(t.checkpoint?.createdAt).toDate();
     return {
@@ -183,7 +183,7 @@ function F() {
       fileRepoId: k.fileRepoId,
       fileKey: k.key
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: h,
       width: "lg",
       children: jsxs(vo, {
@@ -217,7 +217,7 @@ function F() {
                     }));
                   },
                   htmlAttributes: {
-                    "data-tooltip-type": Ib.TEXT,
+                    "data-tooltip-type": KindEnum.TEXT,
                     "data-tooltip": getI18nString("collaboration.branching_modal.create_branch_tooltip")
                   },
                   children: jsx(_$$e, {})

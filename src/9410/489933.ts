@@ -4,7 +4,7 @@ import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { cW, Be, $1 } from "../figma_app/844435";
 import { getPluginVersion, isDevWithOnlyCodegen, getFullscreenViewEditorType } from "../figma_app/300692";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { r as _$$r } from "../905/319631";
 import { jv } from "../905/525678";
 import { z } from "../905/905430";
@@ -44,7 +44,7 @@ export function $$m1(e, t, i) {
         data: {
           dispatch: g,
           error: C.error,
-          resourceType: bD.PLUGIN
+          resourceType: ResourceType.PLUGIN
         },
         showModalsBeneath: !0
       }));

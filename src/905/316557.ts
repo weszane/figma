@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback, useState, createRef, useRef, useMemo, memo, Fragment as _$$Fragment, forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { gZ, hE, HG, bL } from "../905/598775";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { AppStateTsApi, Fullscreen, VariableDataType } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import { Ay } from "@stylexjs/stylex";
@@ -27,7 +27,7 @@ import { lQ } from "../905/934246";
 import { bL as _$$bL } from "../905/911410";
 import { vo, Y9, hE as _$$hE, jk, nB } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { ScreenReaderOnly } from "../905/172252";
 import { i as _$$i } from "../905/22844";
 import { W as _$$W } from "../905/798224";
@@ -45,7 +45,7 @@ import { Yr } from "../figma_app/8833";
 import { F as _$$F } from "../905/989956";
 import { bL as _$$bL2 } from "../figma_app/852050";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../figma_app/905311";
 import { ks } from "../figma_app/626177";
 import { bf } from "../figma_app/635062";
@@ -135,7 +135,7 @@ function em({
   return jsx(_$$K, {
     htmlAttributes: {
       "data-tooltip": c,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0,
       "data-testid": m
     },
@@ -159,7 +159,7 @@ function eg({
     recordingKey: t,
     onFinish: () => s(!1)
   }) : jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: "slides_edit_theme_modal--themeNameDisplay--i3HaU",
       onClick: () => s(!0),
       recordingKey: generateRecordingKey(t, "editThemeNameButton"),
@@ -406,7 +406,7 @@ function eb({
       style: {
         maxWidth: "10ch"
       },
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": i,
       children: e
     }), jsx("p", {
@@ -691,7 +691,7 @@ function eM({
       "data-onboarding-key": R4,
       children: jsx(hE, {
         className: "x78zum5 x6s0dn4 xh8yej3 x5yr21d",
-        children: jsxs(_$$E, {
+        children: jsxs(ButtonPrimitive, {
           className: "xh8yej3 x5yr21d",
           onClick: h,
           recordingKey: A,
@@ -729,9 +729,9 @@ function eM({
       })
     }), g && jsx(HG, {
       ...Ay.props(eK.chitFloatingRegion, eK.shuffleIconContainer, S && eK.shuffleIconContainerHover),
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("slides.properties_panel.theme.dropdown_tooltip")
         },
         "aria-label": getI18nString("slides.properties_panel.theme.dropdown_tooltip"),
@@ -778,7 +778,7 @@ function eU({
     "data-onboarding-key": R4,
     children: jsx(hE, {
       className: "x78zum5 x6s0dn4 xh8yej3 x5yr21d",
-      children: jsxs(_$$E, {
+      children: jsxs(ButtonPrimitive, {
         onClick: t,
         recordingKey: i,
         children: [jsx(eF, {}), jsxs("div", {
@@ -825,11 +825,11 @@ function eB({
       }, e))
     }), !getFeatureFlags().slides_a11y_template_styles && i && jsx(EventShield, {
       eventListeners: ["onMouseDown"],
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         className: "slides_theme_preview_row--shuffleIcon--o6GHd",
         onClick: () => i(r, Array.from(a)),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("slides.properties_panel.theme.dropdown_tooltip")
         },
         children: jsx(ek, {})
@@ -1322,7 +1322,7 @@ function eJ({
 }) {
   return jsx("div", {
     className: _$$s.p4.$,
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       variant: "secondary",
       onClick: e,
       recordingKey: generateRecordingKey(t, "createThemeButton"),

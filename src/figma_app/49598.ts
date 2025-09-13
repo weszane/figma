@@ -35,7 +35,7 @@ import { Hx } from "../figma_app/147952";
 import { uo } from "../905/98702";
 import { M5 } from "../figma_app/350203";
 import { N as _$$N } from "../figma_app/23271";
-import { f5 } from "../figma_app/314264";
+import { trackFileObjEvent } from "../figma_app/314264";
 import { sD } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { DI } from "../figma_app/557318";
@@ -177,7 +177,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
     data: r
   }) => {
     let i = r.meta;
-    f5("File Created", i, {
+    trackFileObjEvent("File Created", i, {
       selectedView: n.selectedView
     }, {
       source: t.source

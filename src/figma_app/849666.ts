@@ -13,11 +13,11 @@ import { ck } from "../905/87821";
 import { Kx } from "../figma_app/546509";
 import { selectOpenFile, useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { J as _$$J } from "../905/614223";
 import { l as _$$l } from "../905/728491";
 import { useSubscription } from "../figma_app/288654";
-import { B as _$$B2 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { Rh } from "../905/844322";
@@ -49,7 +49,7 @@ import { _6 } from "../figma_app/386952";
 import { C as _$$C } from "../figma_app/198698";
 import { om, x1, MA } from "../figma_app/465413";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import ei from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -66,7 +66,7 @@ import { V as _$$V } from "../905/670859";
 import { FS, DX, Kc, _2, cC, mV, NJ, ZQ, Fx } from "../905/989426";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
 import { ao } from "../figma_app/598952";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { I4, Y9 } from "../figma_app/42724";
 import { yp, c6, J$, jw, GD, Yg, _C, G_, FS as _$$FS, _o, vk, cI } from "../figma_app/624600";
 import { N as _$$N2 } from "../905/438674";
@@ -82,7 +82,7 @@ function D(e) {
   } = e;
   let a = jsx(_$$J, {
     mode: "dark",
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "secondary",
       onClick: buttonOnClick,
       children: e.buttonText
@@ -94,7 +94,7 @@ function D(e) {
       className: qr,
       children: [jsxs("div", {
         className: PU,
-        children: [jsx(_$$B2, {
+        children: [jsx(SvgComponent, {
           svg: _$$A,
           className: hz
         }), jsxs("span", {
@@ -178,7 +178,7 @@ let eE = registerModal(function (e) {
   });
   return jsx(fu, {
     name: "google_device_try_file_claim_modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: p,
       width: 420,
       children: jsx(vo, {
@@ -270,7 +270,7 @@ let eb = registerModal(function (e) {
   });
   return jsx(fu, {
     name: "google_device_try_file_received_email_modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: o,
       width: 420,
       children: jsx(vo, {
@@ -357,7 +357,7 @@ function eS({
   large: t,
   ...r
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: ea()("brand_strong_button--button--dCE92", "brand_strong_button--secondary--M8N-5 brand_strong_button--outlineStyle--3lqJk", t ? "brand_strong_button--large--aPhUI" : "brand_strong_button--regular--hpSQD"),
     ...r,
     children: e
@@ -586,7 +586,7 @@ function eD({
             href: "/",
             newTab: !0,
             trusted: !0,
-            children: jsx(_$$B2, {
+            children: jsx(SvgComponent, {
               svg: y.src,
               useOriginalSrcFills_DEPRECATED: !0
             })
@@ -616,7 +616,7 @@ function eD({
           htmlAttributes: {
             "data-test-id": "google-btn"
           },
-          iconPrefix: jsx(_$$B2, {
+          iconPrefix: jsx(SvgComponent, {
             style: {
               marginLeft: "5px"
             },

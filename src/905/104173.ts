@@ -5,7 +5,7 @@ import { nT } from "../905/448740";
 import { iB } from "../figma_app/188671";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
-import { mr } from "../figma_app/45218";
+import { isWidgetOrPlugin } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
 export function $$p3(e, t) {
   if (t) switch (t) {
@@ -64,7 +64,7 @@ export function $$m0(e) {
     existingResourceContent,
     localExtension
   } = e;
-  let l = existingResourceContent && mr(existingResourceContent) ? existingResourceContent : void 0;
+  let l = existingResourceContent && isWidgetOrPlugin(existingResourceContent) ? existingResourceContent : void 0;
   (localExtension || l) && (t = nT(localExtension, l)?.[0]);
   let d = figFile?.editor_type ?? void 0;
   return iB($$p3(d || t, currentViewerMode));

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, memo, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { WW } from "../905/521428";
+import { ButtonLarge } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { l as _$$l } from "../905/479687";
 import c, { C as _$$C } from "../905/520159";
@@ -19,14 +19,14 @@ import { J9 } from "../905/149328";
 import { Point } from "../905/736624";
 import { or, Ss, BL, xY, qW, u as _$$u } from "../905/720292";
 import { ec } from "../figma_app/449837";
-import { dW } from "../figma_app/858013";
+import { ImageBackedLoading } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { hideModal } from "../905/156213";
 import { eS, aD } from "../figma_app/646357";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { d as _$$d } from "../figma_app/550089";
 import { vL } from "../905/826900";
@@ -128,23 +128,23 @@ function W(e) {
       footer: jsx(Z, {
         navigationProps,
         buttons: jsxs(Fragment, {
-          children: [isUpdatedInstance ? jsx(WW, {
+          children: [isUpdatedInstance ? jsx(ButtonLarge, {
             variant: "secondary",
             disabled: !0,
             iconPrefix: jsx(_$$l, {}),
             children: renderI18nText("design_systems.updates.updated")
-          }) : jsx(WW, {
+          }) : jsx(ButtonLarge, {
             variant: C ? "secondary" : "primary",
             onClick: S,
             htmlAttributes: {
               autoFocus: !0
             },
             children: renderI18nText("design_systems.updates.update_instance")
-          }), !isUpdatedAsset && C && jsx(WW, {
+          }), !isUpdatedAsset && C && jsx(ButtonLarge, {
             variant: "primary",
             onClick: E,
             children: renderI18nText("design_systems.updates.update_all")
-          }), isUpdatedAsset && nextAssetHandler && jsx(WW, {
+          }), isUpdatedAsset && nextAssetHandler && jsx(ButtonLarge, {
             variant: "primary",
             onClick: nextAssetHandler,
             children: renderI18nText("design_systems.libraries_modal.next_component")
@@ -287,7 +287,7 @@ function q({
             assetName: e
           })
         }), r && jsx("div", {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("design_systems.updates.this_instance_is_hidden"),
           children: jsx(_$$j, {})
         })]
@@ -400,25 +400,25 @@ function X({
   isUpdatedAsset: a
 }) {
   return r ? jsxs(Fragment, {
-    children: [jsx(WW, {
+    children: [jsx(ButtonLarge, {
       variant: "secondary",
       disabled: !0,
       iconPrefix: jsx(_$$l, {}),
       children: renderI18nText("design_systems.updates.updated")
-    }), !a && jsx(WW, {
+    }), !a && jsx(ButtonLarge, {
       variant: "primary",
       onClick: t,
       children: renderI18nText("design_systems.updates.update_all")
     })]
   }) : jsxs(Fragment, {
-    children: [jsx(WW, {
+    children: [jsx(ButtonLarge, {
       variant: i ? "secondary" : "primary",
       onClick: e,
       htmlAttributes: {
         autoFocus: !0
       },
       children: renderI18nText("design_systems.updates.update_style")
-    }), i && jsx(WW, {
+    }), i && jsx(ButtonLarge, {
       variant: "primary",
       onClick: t,
       children: renderI18nText("design_systems.updates.update_all")
@@ -512,7 +512,7 @@ let J = memo(function (e) {
           ...e
         }) : jsx("div", {
           className: V,
-          children: jsx(dW, {
+          children: jsx(ImageBackedLoading, {
             size: "large",
             className: G
           })
@@ -546,7 +546,7 @@ let ee = memo(function ({
           selectedOutdatedStyleGUID: t
         }) : jsx("div", {
           className: V,
-          children: jsx(dW, {
+          children: jsx(ImageBackedLoading, {
             size: "large",
             className: G
           })

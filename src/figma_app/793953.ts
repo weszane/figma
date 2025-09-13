@@ -6,7 +6,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { BrowserInfo } from "../figma_app/778880";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { aW, le } from "../figma_app/527873";
 import { getJoinStatusString } from "../figma_app/582924";
 import { h as _$$h } from "../figma_app/276445";
@@ -91,7 +91,7 @@ async function I(e, t, r, i, o) {
       r && (a.cpu_usage = await T());
       let s = dd();
       let c = PH();
-      ds(e, i, debugState.getState(), {
+      trackFileEvent(e, i, debugState.getState(), {
         reporting_interval: t,
         file_key: i,
         is_hidden: document.hidden,

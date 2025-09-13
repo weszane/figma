@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect, useRef } from "react";
-import { A } from "../vendor/90566";
-import { hC } from "../figma_app/901889";
+import { useDebouncedCallback } from "use-debounce";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { useLatestRef } from "../figma_app/922077";
 import { generateUUIDv4 } from "../905/871474";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -21,8 +21,8 @@ export function $$p0({
     org_id,
     user_id
   } = $$u3();
-  let s = hC();
-  let o = A(s, 2e3);
+  let s = trackDefinedFileEventWithStore();
+  let o = useDebouncedCallback(s, 2e3);
   let {
     currentVariableSet
   } = _$$n();

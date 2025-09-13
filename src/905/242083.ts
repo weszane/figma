@@ -10,7 +10,7 @@ import { iM as _$$iM, DB, h5, jP, JR, Sp, SW, Z4, Zt } from '../905/25189';
 import { FU, v6 } from '../905/26824';
 import { P as _$$P } from '../905/35881';
 import { z4 as _$$z, Ln } from '../905/37051';
-import { bL as _$$bL, Rq } from '../905/38914';
+import { ModalRootComponent, ModalFormContents } from '../905/38914';
 import { ae as _$$ae } from '../905/41973';
 import { p as _$$p } from '../905/42189';
 import { e as _$$e3, N as _$$N } from '../905/55273';
@@ -30,7 +30,7 @@ import { xK as _$$xK } from '../905/125218';
 import { ez as _$$ez, lC as _$$lC, _o, GI, HV, IZ, qL, SK, U9, Vi, W6, wp, yE } from '../905/125333';
 import { J as _$$J5 } from '../905/125483';
 import { setupAutofocusHandler } from '../905/128376';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { g as _$$g2 } from '../905/142432';
 import { hO } from '../905/145989';
 import { n as _$$n4 } from '../905/155450';
@@ -73,7 +73,7 @@ import { B as _$$B } from '../905/352524';
 import { LogLevelStr } from '../905/361972';
 import { jp, WS } from '../905/370597';
 import { deepEqual } from '../905/382883';
-import { $ as _$$$2 } from '../905/383708';
+import { generateUniqueKey } from '../905/383708';
 import { x as _$$x4 } from '../905/392802';
 import { isEffectOrGrid } from '../905/405710';
 import { Dn } from '../905/407352';
@@ -84,7 +84,7 @@ import { G as _$$G3 } from '../905/431526';
 import { useModalManager } from '../905/437088';
 import { Y as _$$Y } from '../905/438063';
 import { N as _$$N2 } from '../905/438674';
-import { R as _$$R } from '../905/441305';
+import { ConfirmationModal } from '../905/441305';
 import { ch } from '../905/443517';
 import { s as _$$s8 } from '../905/445054';
 import { trackEventAnalytics } from '../905/449184';
@@ -109,7 +109,7 @@ import { M as _$$M } from '../905/512402';
 import { RR } from '../905/514666';
 import { v as _$$v3 } from '../905/516963';
 import { dD } from '../905/519113';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { oU as _$$oU, B3, dm, Sr } from '../905/535224';
 import { h as _$$h4 } from '../905/537858';
 import { P as _$$P2 } from '../905/540614';
@@ -145,7 +145,7 @@ import { jN } from '../905/612685';
 import { isActiveAtom } from '../905/617744';
 import { getSelectedView, checkCanRunExtensions } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
-import { E as _$$E } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { parseQuery } from '../905/634134';
 import { getSessionStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
@@ -163,7 +163,7 @@ import { y as _$$y } from '../905/705736';
 import { T1 } from '../905/711212';
 import { FR } from '../905/714160';
 import { logDebug, logInfo, logError, logWarning } from '../905/714362';
-import { B as _$$B2 } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { jk as _$$jk } from '../905/715541';
 import { l as _$$l } from '../905/716947';
 import { A as _$$A6 } from '../905/721854';
@@ -195,7 +195,7 @@ import { EventShield } from '../905/821217';
 import { F as _$$F5 } from '../905/827944';
 import { getSceneGraphInstance } from '../905/830071';
 import { parseInteger } from '../905/833686';
-import { td as _$$td } from '../905/845253';
+import { getOrgByCurrentUserId } from '../905/845253';
 import { Um } from '../905/848862';
 import { f8 } from '../905/850476';
 import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
@@ -251,7 +251,7 @@ import { LibraryKeyToFileLink } from '../figma_app/43951';
 import { FEditorType, mapYFToEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { sF as _$$sF, zJ } from '../figma_app/59657';
 import { J as _$$J2 } from '../figma_app/61771';
-import { lc as _$$lc, gc, QZ } from '../figma_app/62612';
+import { resetGlobalViewportPromise, globalViewportPromise, computeFullscreenViewportForNode } from '../figma_app/62612';
 import { xP } from '../figma_app/65182';
 import { XR } from '../figma_app/67099';
 import { gh } from '../figma_app/76123';
@@ -307,7 +307,7 @@ import { loadPluginManifest, getFullscreenViewEditorType, showVisualBell, getWid
 import { Z as _$$Z3 } from '../figma_app/301719';
 import { u1 as _$$u2, zi } from '../figma_app/305244';
 import { Tv, Zl } from '../figma_app/311375';
-import { Cu, Dc, ds, uE, ye } from '../figma_app/314264';
+import { logAndTrackCTA, mapEditorTypeToProductType, trackFileEvent, trackUserEvent, trackGenericEvent } from '../figma_app/314264';
 import { _d, P5 } from '../figma_app/318590';
 import { $I, iP as _$$iP, h$, jD, Jf, KY } from '../figma_app/322845';
 import { c3 } from '../figma_app/327577';
@@ -340,7 +340,7 @@ import { eY as _$$eY2 } from '../figma_app/442259';
 import { U as _$$U } from '../figma_app/449815';
 import { A0, R4 } from '../figma_app/454974';
 import { setFlagValue, fullscreenPromise, setFullscreen, userValue, setSessionValue, setAdditionalValue, setUserValue, setInputValue, fullscreenValue, setModalValue } from '../figma_app/455680';
-import { lt as _$$lt, dZ, y8 } from '../figma_app/459490';
+import { isAIFeaturesDisabled, isLlamaEnabledForOrg, isEditDisabled } from '../figma_app/459490';
 import { EA } from '../figma_app/462456';
 import { debug, throwTypeError } from '../figma_app/465776';
 import { T as _$$T2 } from '../figma_app/472024';
@@ -389,7 +389,7 @@ import { Ju } from '../figma_app/644255';
 import { m3 } from '../figma_app/645694';
 import { CN, Wz } from '../figma_app/651866';
 import { mapFilter } from '../figma_app/656233';
-import { WJ } from '../figma_app/671547';
+import { PluginModalTypeEnum } from '../figma_app/671547';
 import { _p } from '../figma_app/675605';
 import { fS } from '../figma_app/681244';
 import { b6 } from '../figma_app/681697';
@@ -405,7 +405,7 @@ import { renameNode, registerFullscreenEventHandlers, updateFullscreenAppModel, 
 import { WJ as _$$WJ, P1, S9 } from '../figma_app/745458';
 import { s as _$$s4 } from '../figma_app/751989';
 import { w as _$$w2 } from '../figma_app/757236';
-import { RA } from '../figma_app/757723';
+import { cortexAnalyticsPluginIds } from '../figma_app/757723';
 import { PrototypingFacetTsApiGenerated, documentStateTsApi, ImageFormat, ComponentPropsAiCPPBindings, ImageCppBindings, VectorFacetTsApiGenerated, FullscreenWebSocketTsApi, SceneNodeCpp, AutosaveEventType, SaveConnectionIssues, TextEditAction, AppStateTsApi, DesignWorkspace, NodeTsApiGenerated, LayerFacetTsApiGenerated, Fullscreen, Multiplayer, TextFacetTsApiGenerated, CorePerfInfo, ComponentishFacetTsApiGenerated, DocumentColorProfileEnum, AutosaveHelpers, FigmaSite, ConstraintsFacetTsApiGenerated, FrameFacetTsApiGenerated, TabMode, FontSourceType, EmbedPanelType, WidgetFacetTsApiGenerated, StackFacetTsApiGenerated, ViewType, SettingsAction, ImageExportType, SceneGraphTsApi, interactionTestHelpers, PanelType, DesignGraphElements, CanvasFacetTsApiGenerated, FullscreenPerfInfo, EmailAction, DesignSystemsInternalHelpers, RenderableBaseFacetTsApiGenerated, PolygonFacetTsApiGenerated, UserActionState, Command, DocumentMode, NodePropertyCategory, StyleFacetTsApiGenerated, ImageToolsBindings, BaseNodeTsApiGenerated, StateSourceType, FontHelpers, RenderableRectangleFacetTsApiGenerated, DebuggingHelpers, NodeTsApi, ConnectionState, PageSelectionType, Fonts, Thumbnail, EditChangeMode, VisibilityCondition, PrototypingTsApi, ConnectorFacetTsApiGenerated, UserInterfaceElements, BindingsPerfBench, SymbolOverrideType, ColorProfileEnum, CanvasComponentType, WhiteboardAgendaCppBindings, SourceType, TextModificationAction } from '../figma_app/763686';
 import { isNotMobile, BrowserInfo } from '../figma_app/778880';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
@@ -423,7 +423,7 @@ import { mu, Ww, ZG } from '../figma_app/840917';
 import { _b, Eg, HF } from '../figma_app/841351';
 import { z6 } from '../figma_app/846841';
 import { qb } from '../figma_app/857454';
-import { kt } from '../figma_app/858013';
+import { LoadingSpinner } from '../figma_app/858013';
 import { n as _$$n6 } from '../figma_app/860474';
 import { ZW } from '../figma_app/861982';
 import { B3 as _$$B3, Ag } from '../figma_app/862289';
@@ -1089,7 +1089,7 @@ function iR({
   let i = useCallback(() => {
     t(e);
   }, [e, t]);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     onClick: i,
     ..._$$Ay7.props(iT.thumbnailButton),
     children: [jsx('div', {
@@ -1150,7 +1150,7 @@ let iG = {
 let i0 = registerModal(e => {
   let t = useDispatch();
   let i = useModalManager(e);
-  return jsx(_$$bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: 'md',
     children: jsxs(vo, {
@@ -1162,7 +1162,7 @@ let i0 = registerModal(e => {
         children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.to_import_your_sketch_files_please_drag_them_into_your_file_space')
       }), jsx(_$$wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: () => {
               t(hideModal());
             },
@@ -1755,9 +1755,9 @@ function nW() {
           'onValueChange': t,
           'min': 0,
           'dispatch': lQ,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.clients'),
-          'children': jsx(_$$B2, {
+          'children': jsx(SvgComponent, {
             className: nO,
             svg: _$$A3
           })
@@ -1767,9 +1767,9 @@ function nW() {
           'onValueChange': n,
           'formatter': nV,
           'dispatch': lQ,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.frequency'),
-          'children': jsx(_$$B2, {
+          'children': jsx(SvgComponent, {
             className: nO,
             svg: _$$A2
           })
@@ -1780,9 +1780,9 @@ function nW() {
           'min': 5,
           'max': 200,
           'dispatch': lQ,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.steps'),
-          'children': jsx(_$$B2, {
+          'children': jsx(SvgComponent, {
             className: nO,
             svg: _$$A4
           })
@@ -1792,7 +1792,7 @@ function nW() {
           'onValueChange': c,
           'dispatch': lQ,
           'formatter': nG,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.center_x'),
           'children': jsx('span', {
             className: nO,
@@ -1804,7 +1804,7 @@ function nW() {
           'onValueChange': m,
           'dispatch': lQ,
           'formatter': nG,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fake_mp.modal.center_y'),
           'children': jsx('span', {
             className: nO,
@@ -1813,7 +1813,7 @@ function nW() {
         })]
       }), jsxs(_$$e6, {
         className: nD,
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'secondary',
           type: 'submit',
           onClick: () => {
@@ -1822,7 +1822,7 @@ function nW() {
             m(e.offsetY);
           },
           children: renderI18nText('fake_mp.modal.center')
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'secondary',
           type: 'submit',
           onClick: () => {
@@ -1833,7 +1833,7 @@ function nW() {
             m(0);
           },
           children: renderI18nText('fake_mp.modal.reset')
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'primary',
           type: 'submit',
           onClick: lQ,
@@ -1896,9 +1896,9 @@ function nJ() {
             max: 0.5
           }),
           'dispatch': lQ,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('tsmer_config.modal.edit_frame_budget_seconds'),
-          'children': jsx(_$$B2, {
+          'children': jsx(SvgComponent, {
             className: nO,
             svg: _$$A3
           })
@@ -1909,9 +1909,9 @@ function nJ() {
           'min': 250,
           'max': 2e3,
           'dispatch': lQ,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('tsmer_config.modal.edit_frame_budget_framebuffer_switches'),
-          'children': jsx(_$$B2, {
+          'children': jsx(SvgComponent, {
             className: nO,
             svg: _$$A4
           })
@@ -1924,9 +1924,9 @@ function nJ() {
             max: 5
           }),
           'dispatch': lQ,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('tsmer_config.modal.max_edit_frame_time_seconds'),
-          'children': jsx(_$$B2, {
+          'children': jsx(SvgComponent, {
             className: nO,
             svg: _$$A3
           })
@@ -1935,7 +1935,7 @@ function nJ() {
         children: jsx(jk, {
           children: jsx(_$$e6, {
             className: nD,
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: 'secondary',
               type: 'submit',
               onClick: o,
@@ -2210,7 +2210,7 @@ let r7 = registerModal(({
   let u = e === ColorProfileEnum.SRGB ? ColorProfileEnum.DISPLAY_P3 : ColorProfileEnum.SRGB;
   return jsx(fu, {
     name: 'color_management_document_color_profile_modal',
-    children: jsxs(_$$R, {
+    children: jsxs(ConfirmationModal, {
       open: t,
       onClose: i,
       width: 'lg',
@@ -2862,7 +2862,7 @@ let aO = registerModal(e => {
   });
   let T = useMemo(() => p === 'pdf' ? l ? renderI18nText('fullscreen.export.export_slides_to_pdf') : renderI18nText('fullscreen.export.export_frames_to_pdf') : renderI18nText('fullscreen.export.export_slides_to_pptx'), [p, l]);
   let k = p === 'pdf' ? renderI18nText('fullscreen.export.exporting_to_pdf') : renderI18nText('fullscreen.export.exporting_to_pptx');
-  return jsx(_$$bL, {
+  return jsx(ModalRootComponent, {
     manager: o,
     width: 'md',
     children: jsxs(vo, {
@@ -2905,14 +2905,14 @@ let aO = registerModal(e => {
             'pdf_export_settings_modal--exportModalFooterLoaderError--lXi8-': n
           }),
           children: [t && !n && jsxs(Fragment, {
-            children: [jsx(kt, {
+            children: [jsx(LoadingSpinner, {
               imageBacked: !0
             }), k]
           }), !t && n && jsxs(Fragment, {
             children: [jsx(_$$R2, {}), renderI18nText('fullscreen.export.unable_to_export')]
           })]
         }), jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             'variant': 'primary',
             'onClick': E,
             'disabled': t,
@@ -3100,7 +3100,7 @@ class aZ extends PureComponent {
         })
       }), jsxs('div', {
         className: 'rename_modal--patternButtonsContainer--yWDRZ rename_modal--_inputContainer--Sh9ic raw_components--singleRowHeight--dKM4t',
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'secondary',
           onClick: () => {
             this.onPatternButtonClick(0);
@@ -3109,7 +3109,7 @@ class aZ extends PureComponent {
             onMouseDown: this.updateShouldRefocusReplaceInput
           },
           children: this.state.matchPattern ? getI18nString('fullscreen.rename_modal.current_match') : getI18nString('fullscreen.rename_modal.current_name')
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'secondary',
           onClick: () => {
             this.onPatternButtonClick(1);
@@ -3118,7 +3118,7 @@ class aZ extends PureComponent {
             onMouseDown: this.updateShouldRefocusReplaceInput
           },
           children: renderI18nText('fullscreen.rename_modal.number_ascending')
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'secondary',
           onClick: () => {
             this.onPatternButtonClick(2);
@@ -3139,7 +3139,7 @@ class aZ extends PureComponent {
           'onValueChange': this.onSequenceStartChange,
           'disabled': !this.isUsingNumberPattern(),
           'min': 0,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fullscreen.rename_modal.start_ascending_from'),
           'tooltipForScreenReadersOnly': !0,
           'dispatch': this.props.dispatch
@@ -3147,11 +3147,11 @@ class aZ extends PureComponent {
       })]
     });
     this.renderFormButtons = () => jsxs(Fragment, {
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: 'secondary',
         onClick: this.props.onClose,
         children: renderI18nText('fullscreen.rename_modal.cancel')
-      }), jsx($n, {
+      }), jsx(Button, {
         type: 'submit',
         children: renderI18nText('fullscreen.rename_modal.rename')
       })]
@@ -3206,10 +3206,10 @@ class aZ extends PureComponent {
     });
     return jsx(EventShield, {
       eventListeners: ['onClick', 'onKeyDown'],
-      children: jsx(_$$bL, {
+      children: jsx(ModalRootComponent, {
         manager: this.props.manager,
         width: 'lg',
-        children: jsxs(Rq, {
+        children: jsxs(ModalFormContents, {
           onSubmit: this.onSubmit,
           children: [jsx(Y9, {
             children: jsx(hE, {
@@ -3500,7 +3500,7 @@ async function sq(e, t, i) {
   n.start();
   let r = debugState.getState();
   let a = r.openFile?.key;
-  ds('ai_smart_paste_started', a, r, {
+  trackFileEvent('ai_smart_paste_started', a, r, {
     numRows: e.length,
     numCols: e[0].length,
     hasRepeatingContent: t
@@ -3588,7 +3588,7 @@ async function sq(e, t, i) {
       Fullscreen.triggerAction('commit', {});
       n.stop();
       let l = n.getElapsedTime();
-      ds('ai_smart_paste_completed', a, r, {
+      trackFileEvent('ai_smart_paste_completed', a, r, {
         timeToResponse: m,
         timeToCompletion: l,
         numRows: e.length,
@@ -3608,7 +3608,7 @@ async function sq(e, t, i) {
         hasRepeatingContent: t
       }
     });
-    ds('ai_smart_paste_failed', a, r, {
+    trackFileEvent('ai_smart_paste_failed', a, r, {
       error: n,
       numRows: e.length,
       numCols: e[0].length,
@@ -4372,7 +4372,7 @@ async function lN({
   let g = openFile ? openFile.teamId : '';
   let f = teams && g ? teams[g] : null;
   let _ = !openFile?.canEdit;
-  if (RA.has(e) && _$$lt({
+  if (cortexAnalyticsPluginIds.has(e) && isAIFeaturesDisabled({
     currentOrg: h,
     currentTeam: f,
     isViewer: _
@@ -4708,7 +4708,7 @@ function lU(e, t) {
   let u = openFile ? openFile.teamId : '';
   let p = teams && u ? teams[u] : null;
   let m = !openFile?.canEdit;
-  if (RA.has(e) && _$$lt({
+  if (cortexAnalyticsPluginIds.has(e) && isAIFeaturesDisabled({
     currentOrg: c,
     currentTeam: p,
     isViewer: m
@@ -4873,7 +4873,7 @@ class lV {
     } = debugState?.getState();
     if (selectedView.view === 'fullscreen' && selectedView.tryPluginId && selectedView.isPlaygroundFile) {
       let i = e.filter(e => !e.widgetVersionID);
-      i.length > 0 && ye('local_widget_impression_playground_file', {
+      i.length > 0 && trackGenericEvent('local_widget_impression_playground_file', {
         pluginId: selectedView.tryPluginId,
         isWidget: !0,
         localWidgetIds: i.map(e => e.widgetID)
@@ -5500,7 +5500,7 @@ let lX = class e extends sP(sN(sR)) {
       if (!i || !i.team_id) return F7.INVALID;
       let n = this._state.library.publishedByLibraryKey.components;
       let r = F7.INVALID;
-      let a = _$$l(i.library_key ?? _$$$2(e));
+      let a = _$$l(i.library_key ?? generateUniqueKey(e));
       let s = n[i.team_id];
       s?.[a]?.[t] && !s[a][t].unpublished_at && (r = s[a][t].content_hash || F7.INVALID);
       return r;
@@ -5508,7 +5508,7 @@ let lX = class e extends sP(sN(sR)) {
     this.getLatestPublishedVersionForStateGroup = (e, t) => {
       let i = this._state.fileByKey[e];
       if (!i?.team_id) return Rf.INVALID;
-      let n = _$$l(i.library_key ?? _$$$2(e));
+      let n = _$$l(i.library_key ?? generateUniqueKey(e));
       let r = this._state.library.publishedByLibraryKey.stateGroups;
       let a = r[i.team_id]?.[n]?.[t];
       return a && !a.unpublished_at ? a.version : Rf.INVALID;
@@ -5917,7 +5917,7 @@ let lX = class e extends sP(sN(sR)) {
         t.types.includes('image/png') && (e.containsPng = !0);
       }
     } catch (t) {
-      t.message.toLowerCase().includes('permission') && uE('clipboard_permission_denied', this._state);
+      t.message.toLowerCase().includes('permission') && trackUserEvent('clipboard_permission_denied', this._state);
       e.permissionDenied = !0;
     }
     return e;
@@ -6073,7 +6073,7 @@ let lX = class e extends sP(sN(sR)) {
         copy_device_type: a,
         copy_timestamp: s
       };
-      ds(`crossDeviceCopyPaste_${e}`, n.openFile?.key, n, t ? {
+      trackFileEvent(`crossDeviceCopyPaste_${e}`, n.openFile?.key, n, t ? {
         ...i,
         error: t
       } : i);
@@ -6122,7 +6122,7 @@ let lX = class e extends sP(sN(sR)) {
         method: 'get'
       });
       if (n.ok) {
-        ds('crossDeviceCopyPaste_clipboard_data_download_success', this._state.openFile?.key, this._state, {
+        trackFileEvent('crossDeviceCopyPaste_clipboard_data_download_success', this._state.openFile?.key, this._state, {
           copy_device_type: t,
           copy_timestamp: i
         });
@@ -6130,7 +6130,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       throw new Error('Failed to download serialized clipboard data from S3');
     } catch (e) {
-      ds('crossDeviceCopyPaste_clipboard_data_download_failure', this._state.openFile?.key, this._state, {
+      trackFileEvent('crossDeviceCopyPaste_clipboard_data_download_failure', this._state.openFile?.key, this._state, {
         copy_device_type: t,
         copy_timestamp: i,
         error: e.toString()
@@ -6334,7 +6334,7 @@ let lX = class e extends sP(sN(sR)) {
     });
     let o = atomStoreManager.get(dd);
     a.quickActionsSessionId = o;
-    ds('ai_text_gen_toast_available', this._state.openFile?.key, this._state, {
+    trackFileEvent('ai_text_gen_toast_available', this._state.openFile?.key, this._state, {
       nodeId: r,
       pageId: r[0] && Fullscreen ? Fullscreen.getPageIdFromNode(r[0]) : '',
       source: t,
@@ -6964,7 +6964,7 @@ let lX = class e extends sP(sN(sR)) {
       _$$Ts2();
       _$$Ts3('Fullscreen Periodic Metrics', () => this.openFileKey(), () => {
         let e = debugState.getState().selectedView;
-        return Dc(e.editorType);
+        return mapEditorTypeToProductType(e.editorType);
       });
       _$$T();
       setTimeout(() => {
@@ -7226,7 +7226,7 @@ let lX = class e extends sP(sN(sR)) {
           type: 'no_broken_fixed_scrolling_metadata',
           message: 'We finished scanning your document, and everything looks fine.'
         }));
-        ds('Selected Broken Fixed Scrolling Nodes', e, this._state, {
+        trackFileEvent('Selected Broken Fixed Scrolling Nodes', e, this._state, {
           numNodes: 0,
           missingMetadata: !0,
           error: !1
@@ -7239,7 +7239,7 @@ let lX = class e extends sP(sN(sR)) {
           type: 'no_broken_fixed_scrolling_nodes_found',
           message: 'We finished scanning this page, and everything looks fine.'
         }));
-        ds('Selected Broken Fixed Scrolling Nodes', e, this._state, {
+        trackFileEvent('Selected Broken Fixed Scrolling Nodes', e, this._state, {
           numNodes: i,
           missingMetadata: !1,
           error: !1
@@ -7250,7 +7250,7 @@ let lX = class e extends sP(sN(sR)) {
         type: 'selected_broken_fixed_scrolling_nodes',
         message: `We found ${i} layers on this page that look like their scroll setting is incorrect. Select the "fix position when scrolling" checkbox to repair them.`
       }));
-      ds('Selected Broken Fixed Scrolling Nodes', e, this._state, {
+      trackFileEvent('Selected Broken Fixed Scrolling Nodes', e, this._state, {
         numNodes: i,
         missingMetadata: !1,
         error: !1
@@ -7260,7 +7260,7 @@ let lX = class e extends sP(sN(sR)) {
         type: 'error_finding_broken_fixed_scrolling_nodes',
         message: `We ran into an error. Please contact ${getSupportEmail()}`
       }));
-      ds('Selected Broken Fixed Scrolling Nodes', e, this._state, {
+      trackFileEvent('Selected Broken Fixed Scrolling Nodes', e, this._state, {
         numNodes: 0,
         errorMessage: t,
         error: !0
@@ -7435,7 +7435,7 @@ let lX = class e extends sP(sN(sR)) {
       vS(r, t);
     } else {
       let e = this.openFileKey();
-      e && !this.missingFontPopoverReported && (ds('Show Missing Fonts Popover', e, this._state, {
+      e && !this.missingFontPopoverReported && (trackFileEvent('Show Missing Fonts Popover', e, this._state, {
         fontListLoaded: r,
         counts: t,
         timeNow: performance.now()
@@ -7474,7 +7474,7 @@ let lX = class e extends sP(sN(sR)) {
   async showTemplatePublishModal() {
     let e = this._state.openFile;
     if (e) {
-      Cu({
+      logAndTrackCTA({
         name: 'publish-template-fullscreen-actions',
         fileKey: e.key
       });
@@ -7931,7 +7931,7 @@ let lX = class e extends sP(sN(sR)) {
     return U2(e, t);
   }
   generateEmbed(e) {
-    return CV(this._store.dispatch, e, WJ.PASTE).valid;
+    return CV(this._store.dispatch, e, PluginModalTypeEnum.PASTE).valid;
   }
   generateFlappFromPastedText(e) {
     return !function (e) {
@@ -8129,7 +8129,7 @@ let lX = class e extends sP(sN(sR)) {
     H0();
   }
   sendActiveStackRegionAnalytics(e) {
-    uE('Autolayout focused stack region', this._state, {
+    trackUserEvent('Autolayout focused stack region', this._state, {
       region: e
     });
   }
@@ -8137,8 +8137,8 @@ let lX = class e extends sP(sN(sR)) {
     _$$Z(e);
   }
   afterComputeViewportSettings(e) {
-    gc && gc(e);
-    _$$lc();
+    globalViewportPromise && globalViewportPromise(e);
+    resetGlobalViewportPromise();
   }
   movedSingleNodeVisualBell(e, t, i) {
     this.dispatch(VisualBellActions.enqueue({
@@ -8153,7 +8153,7 @@ let lX = class e extends sP(sN(sR)) {
           Initialize() {
             let e = _$$Z2();
             return t => {
-              e(QZ({
+              e(computeFullscreenViewportForNode({
                 nodeId: t,
                 alwaysPan: !0
               }));
@@ -8174,7 +8174,7 @@ let lX = class e extends sP(sN(sR)) {
     return !W7();
   }
   isAiDisabledFigJam() {
-    return y8({
+    return isEditDisabled({
       isDisabledForViewers: !0
     });
   }
@@ -8183,7 +8183,7 @@ let lX = class e extends sP(sN(sR)) {
       currentUserOrgId,
       orgById
     } = debugState.getState();
-    return dZ(_$$td(currentUserOrgId, orgById));
+    return isLlamaEnabledForOrg(getOrgByCurrentUserId(currentUserOrgId, orgById));
   }
   isInAiExperimentOrGrantlist() {
     return $7('bindings');

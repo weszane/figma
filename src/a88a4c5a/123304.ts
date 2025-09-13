@@ -28,7 +28,7 @@ import { Q as _$$Q2 } from '../905/11928';
 import { i$ as _$$i$ } from '../905/15667';
 import { VP } from '../905/18797';
 import { z4 } from '../905/37051';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { $ as _$$$2 } from '../905/43354';
 import { k as _$$k3 } from '../905/44647';
 import { V9 } from '../905/72677';
@@ -39,7 +39,7 @@ import { selectWithShallowEqual } from '../905/103090';
 import { Z as _$$Z2 } from '../905/104740';
 import { Ef } from '../905/107436';
 import { y as _$$y2 } from '../905/129046';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { P as _$$P2 } from '../905/143421';
 import { M as _$$M } from '../905/152487';
 import { ox as _$$ox } from '../905/163832';
@@ -91,7 +91,7 @@ import { l as _$$l4 } from '../905/509505';
 import { E as _$$E6 } from '../905/511388';
 import { M as _$$M3 } from '../905/512402';
 import { C as _$$C2 } from '../905/520159';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { c as _$$c } from '../905/534105';
 import { r6 as _$$r4 } from '../905/542608';
 import { useIsFullscreenSitesView } from '../905/561485';
@@ -107,7 +107,7 @@ import { jN } from '../905/612685';
 import { J as _$$J2 } from '../905/614223';
 import { Pv } from '../905/619652';
 import { e as _$$e2 } from '../905/621515';
-import { E as _$$E5 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { DP } from '../905/640017';
 import { XF } from '../905/661614';
 import { oW as _$$oW } from '../905/675859';
@@ -128,7 +128,7 @@ import { J as _$$J8 } from '../905/799737';
 import { G as _$$G2 } from '../905/800369';
 import { Ih } from '../905/820169';
 import { EventShield } from '../905/821217';
-import { sZ as _$$sZ } from '../905/845253';
+import { useCurrentUserOrg } from '../905/845253';
 import { e as _$$e4 } from '../905/845623';
 import { F_ } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
@@ -151,7 +151,7 @@ import { b as _$$b5 } from '../905/946806';
 import { w as _$$w3 } from '../905/955293';
 import { d$ } from '../905/958097';
 import { O as _$$O4 } from '../905/969533';
-import { E as _$$E7 } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { b as _$$b2 } from '../905/985254';
 import { X as _$$X5 } from '../905/999307';
 import { d as _$$d2 } from '../1156/154963';
@@ -222,7 +222,7 @@ import { pO } from '../figma_app/42945';
 import { FileCanAccessFullDevMode } from '../figma_app/43951';
 import { FEditorType } from '../figma_app/53721';
 import { $ as _$$$ } from '../figma_app/61705';
-import { _X, MG, Pl, QZ, TZ, Yb } from '../figma_app/62612';
+import { getViewportInfo, getViewportX, getViewportZoom, computeFullscreenViewportForNode, getViewportY, scaleRect } from '../figma_app/62612';
 import { U as _$$U2 } from '../figma_app/65327';
 import { io as _$$io, bo } from '../figma_app/73698';
 import { iT as _$$iT, ys } from '../figma_app/74165';
@@ -444,11 +444,11 @@ let O = e => Fk((e, t) => {
 }, e);
 function z(e, t) {
   let l = _$$eY();
-  let n = _X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: t && e.length > 0
   });
   let r = O(e);
-  return useMemo(() => l ? Yb(n, r) : {
+  return useMemo(() => l ? scaleRect(n, r) : {
     x: 0,
     y: 0,
     width: 0,
@@ -473,7 +473,7 @@ let P = () => {
     } = S();
     return isOpen && t.length > 0 ? t : e.length > 0 ? e : [];
   }();
-  let l = _X({
+  let l = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
   let n = z(t, e);
@@ -571,7 +571,7 @@ function U() {
       isOpen
     } = S();
     let l = e === 1 && !isOpen;
-    let n = Pl({
+    let n = getViewportZoom({
       subscribeToUpdates_expensive: l
     });
     return l && n < 0.2;
@@ -681,10 +681,10 @@ function X() {
   let e = U();
   let t = function (e) {
     let t = M(e);
-    let l = MG({
+    let l = getViewportX({
       subscribeToUpdates_expensive: !0
     });
-    let n = TZ({
+    let n = getViewportY({
       subscribeToUpdates_expensive: !0
     });
     return useMemo(() => ({
@@ -735,7 +735,7 @@ function ey({
   let {
     isPositioned
   } = function (e, t) {
-    let l = _X({
+    let l = getViewportInfo({
       subscribeToUpdates_expensive: !0
     });
     let [n, r] = useState(!1);
@@ -1084,7 +1084,7 @@ function eq(e) {
 function eW() {
   let [e, t] = useState(null);
   let [l, r] = useState(null);
-  let s = _X({
+  let s = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let o = Xr(hj);
@@ -1157,7 +1157,7 @@ function eW() {
     show({
       onShow: async () => {
         h(!0);
-        await x(await QZ({
+        await x(await computeFullscreenViewportForNode({
           nodeId: e.properties.nodeId,
           alwaysPan: !0
         }), {
@@ -1377,7 +1377,7 @@ function th() {
           secondaryCtaTrackingDescriptor: secondaryButtonProps?.trackingDescriptor
         },
         enabled: E?.gracePeriod !== void 0,
-        children: jsx(bL, {
+        children: jsx(ModalRootComponent, {
           width: 392,
           manager: S,
           children: jsxs(Wk, {
@@ -2944,7 +2944,7 @@ function ne({
   doesExceedLimit: i,
   isButtonDisabled: r
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     'recordingKey': generateRecordingKey(l6, 'continue-button'),
     'data-testid': `${l6}-continue-button`,
     'onClick': e,
@@ -2960,7 +2960,7 @@ function ne({
         hasNoSelectedNodes: l,
         doesExceedLimit: i
       }),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'disabled': r,
     'children': renderI18nText('general.continue')
@@ -3174,7 +3174,7 @@ function nb() {
   }, [isLibraryModalShown, onToggleLibraryModal]);
   return jsxs('div', {
     ...Ay.props(nj.box),
-    children: [renderI18nText('design_linter.library_selector.no_libraries'), jsx($n, {
+    children: [renderI18nText('design_linter.library_selector.no_libraries'), jsx(Button, {
       onClick: l,
       children: renderI18nText('design_linter.library_selector.manage_libraries')
     })]
@@ -3650,7 +3650,7 @@ function nQ() {
     }, [s, t, l, n, o, d, u]);
   }(t, subscribedLibraries, d, u);
   PV(w);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     width: 385,
     children: jsxs(vo, {
@@ -3676,11 +3676,11 @@ function nQ() {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [w && jsx($n, {
+          children: [w && jsx(Button, {
             variant: 'secondary',
             onClick: r,
             children: renderI18nText('general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             'recordingKey': generateRecordingKey(e, 'continue-button'),
             'data-testid': `${e}-continue-button`,
             'disabled': S,
@@ -4131,7 +4131,7 @@ function iR({
       let t = !!l && l(e);
       return e.type === 'GRID' ? jsxs('div', {
         className: _$$s.textBodyMedium.colorText.truncate.selectNone.mt8.mr16.mb8.$,
-        children: [jsx(_$$E5, {
+        children: [jsx(ButtonPrimitive, {
           className: ls()('design_linter_suggestions_modal--thumbnailContainer--mBL-q', o, t ? a : null),
           onClick: () => {
             s(e.id);
@@ -4339,7 +4339,7 @@ function iP() {
   });
   return jsx('div', {
     className: 'xz9dl7a',
-    children: jsx($n, {
+    children: jsx(Button, {
       disabled: isRunning,
       onClick: handleClick,
       iconPrefix: isRunning ? jsx(_$$k2, {}) : void 0,
@@ -4371,7 +4371,7 @@ function iV() {
   });
   return jsx('div', {
     className: 'xz9dl7a',
-    children: jsx($n, {
+    children: jsx(Button, {
       disabled: isRunning,
       onClick: handleClick,
       iconPrefix: isRunning ? jsx(_$$k2, {}) : void 0,
@@ -4645,7 +4645,7 @@ function iK() {
   let e = _$$r2();
   return jsxs('div', {
     className: _$$s.flex.flexColumn.gap4.py8.w150.$,
-    children: [jsx($n, {
+    children: [jsx(Button, {
       onClick: () => {
         e?.debugLinterState();
       },
@@ -4659,7 +4659,7 @@ function iX() {
     className: _$$s.colorBg.mx16.mt16.flex.flexColumn.b2.bRadius4.colorBorder.p4.wAuto.$,
     children: jsxs('div', {
       className: _$$s.p4.$,
-      children: [jsxs(_$$E5, {
+      children: [jsxs(ButtonPrimitive, {
         className: _$$s.colorBg.wFull.$,
         onClick: () => t(!e),
         children: [jsx('span', {
@@ -4819,13 +4819,13 @@ function i1({
       className: 'x78zum5 x167g77z x2lah0s x6wrskw',
       children: [jsx('div', {
         className: 'xfawy5m',
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: 'link',
           onClick: o,
           disabled: !t,
           children: getI18nString('general.edit')
         })
-      }), jsx($n, {
+      }), jsx(Button, {
         onClick: a,
         disabled: !t,
         children: getI18nString('general.confirm')
@@ -5044,7 +5044,7 @@ let rs = memo(({
     _$$JT(e, 'ALL_GROUPS_VIEW');
   }, [e, r, l, o, s]);
   let c = _$$ac(e);
-  return c ? createElement(_$$E5, {
+  return c ? createElement(ButtonPrimitive, {
     'recordingKey': generateRecordingKey('design-linter-all-groups-view', `item-${t.index}`),
     'data-testid': `design-linter-group-item-${t.index}`,
     'className': 'xf7z5ut x78zum5 xl56j7k xb3r6kr xkzqb9i x19y5rnk x7z60cl x1exxlbk xdd8jsf',
@@ -6727,7 +6727,7 @@ function sk({
 }) {
   return jsx(_$$K, {
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('design_linter.penalty_box.ignore_suggestion_tooltip')
     },
     'onClick': e,
@@ -6741,7 +6741,7 @@ function sE({
 }) {
   return jsx(_$$K, {
     'htmlAttributes': t ? {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('design_linter.penalty_box.apply_suggestion_tooltip')
     } : {},
     'onClick': e,
@@ -7092,7 +7092,7 @@ function sO({
   return jsxs('span', {
     ...Ay.props(sD.selectedSuggestion, i && sD.selectedSuggestionWithValue),
     'data-tooltip': e,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': [jsx('div', {
       ...Ay.props(sD.labelText, l && sD.colorTextTertiary),
       children: e
@@ -7115,11 +7115,11 @@ let sz = forwardRef(({
       r && (typeof r == 'function' ? r(e) : r.current = e);
     },
     ...Ay.props(sD.suggestedValueContent, o && sD.hoveredSuggestedValueContent),
-    children: jsx(_$$E5, {
+    children: jsx(ButtonPrimitive, {
       'onClick': t,
       'className': 'x78zum5 x6s0dn4 xjbqb8w xh8yej3 x1l2q4c8 x98rzlu',
       'data-tooltip': l,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'disabled': i,
       'children': e(o)
     })
@@ -7186,7 +7186,7 @@ function sF({
       'aria-label': getI18nString('design_linter.suggestion_block.ignore_tooltip', {
         section: e.toLowerCase()
       }),
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'children': jsx(sp, {})
     })
   }) : jsx('div', {
@@ -7206,7 +7206,7 @@ function sF({
       'aria-label': getI18nString('design_linter.suggestion_block.apply_tooltip', {
         section: e.toLowerCase()
       }),
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'disabled': t,
       'children': t ? jsx(_$$k2, {
         size: 'sm'
@@ -7240,7 +7240,7 @@ function sP({
     className: 'x78zum5 xdt5ytf',
     onMouseEnter: () => a(!0),
     onMouseLeave: () => a(!1),
-    children: [t && jsxs(_$$E5, {
+    children: [t && jsxs(ButtonPrimitive, {
       'onClick': () => s(e => !e),
       ...Ay.props(sD.rowListHeader),
       'aria-label': r ? getI18nString('design_linter.suggestion_block.expand_list_aria') : getI18nString('design_linter.suggestion_block.collapse_list_aria'),
@@ -7818,7 +7818,7 @@ function s0({
   libraryName: e,
   libraryKey: t
 }) {
-  let l = _$$sZ();
+  let l = useCurrentUserOrg();
   let i = Oe(l);
   let r = fV(t);
   let s = useAtomWithSubscription(V9);
@@ -7936,7 +7936,7 @@ function s5({
   let i = `${l.name}`;
   return jsx('span', {
     'data-tooltip': i,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': i
   });
 }
@@ -7953,7 +7953,7 @@ function s3({
   let r = `${i.name}`;
   return jsx('span', {
     'data-tooltip': r,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': r
   });
 }
@@ -7978,7 +7978,7 @@ function s4({
     }), jsx('span', {
       'className': 'x1iyjqo2 xb3r6kr xlyipyv xuxw1ft x1nx2rwh',
       'data-tooltip': i.name,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'children': i.name
     })]
   });
@@ -8468,7 +8468,7 @@ function oi({
   }(l)}` : ''}`;
   return jsx('span', {
     'data-tooltip': i,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': i
   });
 }
@@ -8698,23 +8698,23 @@ function oa({
         children: d.explanation
       }), jsxs('div', {
         className: 'x78zum5 x1nfngrj x6s0dn4',
-        children: [jsx(_$$E5, {
+        children: [jsx(ButtonPrimitive, {
           ...Ay.props(od.fixButton),
           'onClick': applyFixToBlock,
           'disabled': m,
           'data-tooltip': getI18nString('design_linter.suggestion_block.apply_tooltip', {
             section: l
           }),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'children': isApplying ? 'Applying...' : 'Apply Fix'
-        }), jsx(_$$E5, {
+        }), jsx(ButtonPrimitive, {
           ...Ay.props(od.ignoreButton),
           'onClick': p,
           'disabled': m,
           'data-tooltip': getI18nString('design_linter.suggestion_block.ignore_tooltip', {
             section: l
           }),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'children': getI18nString('general.ignore')
         })]
       })]
@@ -8864,7 +8864,7 @@ function ox({
   let t = parseFloat(e.numericValue.toFixed(2)).toString();
   return jsx('span', {
     'data-tooltip': t,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': t
   });
 }
@@ -9083,7 +9083,7 @@ function o_({
   }(l)}` : ''}`;
   return jsx('span', {
     'data-tooltip': i,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': i
   });
 }
@@ -9349,7 +9349,7 @@ function oE({
   let o = `${fontFamily} ${r}, ${s}`;
   return jsx('span', {
     'data-tooltip': o,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': o
   });
 }
@@ -9575,7 +9575,7 @@ let oR = memo(() => {
   }, []));
   return (fR(), r || e) ? jsxs('div', {
     ...xk(oA.noViolations),
-    children: [renderI18nText('design_linter.modal.group_suggestions_completed'), hasNextGroup ? jsx($n, {
+    children: [renderI18nText('design_linter.modal.group_suggestions_completed'), hasNextGroup ? jsx(Button, {
       'variant': 'primary',
       'data-testid': ow,
       'recordingKey': ow,
@@ -9667,7 +9667,7 @@ function oI({
     'data-testid': 'design-linter-group-view-footer',
     'children': jsxs('div', {
       className: 'xe8ttls x78zum5 x13a6bvl x883omv x2lah0s xxk0z11 xjwf9q1 xqo8coc x1obevfs',
-      children: [jsx($n, {
+      children: [jsx(Button, {
         onClick: t,
         variant: 'secondary',
         htmlAttributes: {
@@ -9675,7 +9675,7 @@ function oI({
         },
         recordingKey: oL,
         children: renderI18nText('design_linter.suggestion_block.ignore_all')
-      }), jsx($n, {
+      }), jsx(Button, {
         onClick: applyAllFixes,
         variant: 'primary',
         htmlAttributes: {
@@ -9882,7 +9882,7 @@ function o$({
     className: 'x78zum5 x1qughib x6s0dn4',
     children: [jsxs('div', {
       className: 'x78zum5 x167g77z x6s0dn4',
-      children: [e && t && jsxs(_$$E5, {
+      children: [e && t && jsxs(ButtonPrimitive, {
         onClick: t,
         recordingKey: 'design-linter-back-button',
         children: [jsx(_$$C2, {}), jsx('div', {
@@ -9951,7 +9951,7 @@ function oP() {
           children: getI18nString('design_linter.library_selector.callout.description')
         }), jsx(_$$wi, {
           children: jsx(jk, {
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: () => s(!1),
               children: getI18nString('design_linter.library_selector.callout.button')
             })
@@ -10342,26 +10342,26 @@ function az(e) {
       className: 'modal_comment_sidebar_announcement--textContainer--btaTy',
       children: [jsx('div', {
         className: 'modal_comment_sidebar_announcement--title--eiyLq',
-        children: jsx(_$$E7, {
+        children: jsx(TextWithTruncation, {
           fontSize: 24,
           fontWeight: 'semi-bold',
           children: getI18nString('rcs.mobile_comment_announcement.title')
         })
       }), jsx('div', {
         className: 'modal_comment_sidebar_announcement--description--Y8AJE',
-        children: jsx(_$$E7, {
+        children: jsx(TextWithTruncation, {
           fontSize: 14,
           children: getI18nString('rcs.mobile_comment_announcement.description')
         })
       })]
     }), jsxs('div', {
       className: 'modal_comment_sidebar_announcement--buttonsContainer--UTcgc',
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: 'secondary',
         onClick: e.onEmailClick,
         iconPrefix: jsx(_$$f2, {}),
         children: getI18nString('rcs.mobile_comment_announcement.email_download_link')
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: 'primary',
         onClick: () => {
           trackEventAnalytics('sidebar_announcement_mobile_app_download_prompt_learn_more_cta_clicked');

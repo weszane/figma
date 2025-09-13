@@ -12,8 +12,8 @@ import { Point } from "../905/736624";
 import { c as _$$c } from "../905/196462";
 import { normalizeUrl, getRelevantSelectionRange, getRelativePosition, isSelectionWithinLink, getSelectionLinkUrl, getRelevantSelectionNode } from "../905/999278";
 import { LinkPrimitive } from "../figma_app/496441";
-import { E as _$$E } from "../905/632989";
-import { B } from "../905/714743";
+import { ButtonPrimitive } from "../905/632989";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { ln, bl, Ae } from "../figma_app/12182";
 import { A as _$$A } from "../svg/690738";
@@ -51,7 +51,7 @@ function I({
     className: "x10l6tqk xqtp20y x8v75bx",
     children: jsxs("div", {
       className: "xon4yw5 xgpcbez x1n2onr6 xn3vecc x1toy1gi x1fgtraw x19y5rnk x78zum5 x1cpjm7i x1hmns74 xgdch9p x16l0ur4 xy5mcqj xqoihek xrvkz08 x1rzapy9 x1s928wv x1j6awrg x16v8oms xrr4ghg x1ox9k1u x73fhqi x1fbm2o4",
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A,
         className: "xamitd3 x1hdptxu xd8780z x15yihhk"
       }), jsx(LinkPrimitive, {
@@ -59,7 +59,7 @@ function I({
         href: normalizeUrl(e),
         className: "xc26acl x1ypdohk x1iyjqo2 xuxw1ft",
         children: i
-      }), jsx(_$$E, {
+      }), jsx(ButtonPrimitive, {
         onClick: t,
         className: "x18tqr4w xet2fuk x11ajrs9 x6xwguf xt0e3qv x19y5rnk x1kax57l xezivpi",
         children: renderI18nText("hyperlink.edit")

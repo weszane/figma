@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { N } from "../905/438674";
 import { xk } from "@stylexjs/stylex";
 import { dl, E as _$$E } from "../905/194276";
 import { qB } from "../905/862321";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { A } from "../6828/865061";
@@ -44,7 +44,7 @@ function h({
   user: e,
   ...t
 }) {
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     "aria-label": e.name,
     className: "x78zum5 x6s0dn4 x1peatla x1kogg8i x1i0f7ym xt0e3qv xh8yej3 xv2f06h x1ptam9a",
     onClick: () => t.onUserSelect(e.id),
@@ -65,7 +65,7 @@ function h({
       children: [t.hints && t.hints[e.id] && jsx("div", {
         className: "x16q51m2 xb3r6kr xlyipyv xfifm61 x1n0bwc9 x1tudf5h x8x9d4c xeaf4i8 x13faqbe",
         children: t.hints[e.id]
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         svg: A,
         className: "xxepmn2 x1akne3o x1ja3g5x"
       })]

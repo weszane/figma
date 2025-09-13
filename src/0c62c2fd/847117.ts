@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
 import { R as _$$R } from "../905/256203";
@@ -16,7 +16,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { useMultiSubscription } from "../figma_app/288654";
 import { Us, Ph } from "../figma_app/637027";
 import { w4, Y8 } from "../905/445814";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
@@ -26,7 +26,7 @@ import { h as _$$h, O as _$$O } from "../905/142086";
 import { hideModal, showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
 import { Gi } from "../figma_app/528509";
 import { cY, yD, _9, AU } from "../905/81459";
@@ -83,7 +83,7 @@ function q(e) {
         o = l.statusMessageSecondary;
         break;
       case uf.ATTACHING_BRANCH:
-        s = jsx(kt, {
+        s = jsx(LoadingSpinner, {
           imageBacked: !0,
           testId: "loadingSpinner"
         });
@@ -150,7 +150,7 @@ function q(e) {
       }) : (T(uf.ERROR), console.error("Missing branch key, branch point key, or main tip key files"));
     }
   }, [f, fileImport.files]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: m,
     width: 480,
     children: jsxs(vo, {
@@ -317,7 +317,7 @@ export function $$ee2({
   let P = useModalManager({
     open: !0,
     onClose: () => {
-      Cu({
+      logAndTrackCTA({
         trackingContext: Q,
         trackingDescriptor: _$$c.FILE_IMPORT_X_BUTTON,
         text: "dismiss"
@@ -326,7 +326,7 @@ export function $$ee2({
     },
     preventUserClose: !g
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: P,
     width: 480,
     children: jsxs(vo, {
@@ -461,7 +461,7 @@ export function $$er5(e, t, r) {
     })
   }), s = jsx(_$$R, {
     "data-testid": "warningIcon"
-  }), t.canceledFiles > 0 && (n = renderI18nText("file_browser.file_import_view.file_import_cancel"))) : (s = jsx(kt, {
+  }), t.canceledFiles > 0 && (n = renderI18nText("file_browser.file_import_view.file_import_cancel"))) : (s = jsx(LoadingSpinner, {
     imageBacked: !0,
     testId: "loadingSpinner"
   }), i = renderI18nText("file_browser.file_import_view.file_import_progress", {
@@ -593,7 +593,7 @@ function en({
   switch (e.status) {
     case mO.BUSY:
     case mO.WAITING:
-      return jsx(kt, {
+      return jsx(LoadingSpinner, {
         imageBacked: !0,
         testId: "fileRowLoadingSpinner"
       });

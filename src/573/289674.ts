@@ -13,7 +13,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { generateUUIDv4 } from "../905/871474";
 import { logger } from "../905/651849";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { F as _$$F } from "../905/422355";
 import { lQ } from "../905/934246";
 import { reportError } from "../905/11";
@@ -563,7 +563,7 @@ export function $$X0() {
   let s = selectCurrentUser();
   let n = Td();
   let o = lg();
-  let l = hC();
+  let l = trackDefinedFileEventWithStore();
   let d = useTeamPlanPublicInfo().unwrapOr(null);
   let c = uQ();
   let u = NM();

@@ -3,8 +3,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { Y9, hE, nB, wi, jk, vo } from "../figma_app/272243";
-import { $n } from "../905/521428";
-import { bL } from "../905/38914";
+import { Button } from "../905/521428";
+import { ModalRootComponent } from "../905/38914";
 import { M, getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { VisualBellActions } from "../905/302958";
@@ -239,13 +239,13 @@ let $$f0 = registerModal(function (e) {
       })
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: () => t.props.close({
             source: "button"
           }),
           children: "Cancel"
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           onClick: S,
           disabled: !_.trim(),
@@ -291,7 +291,7 @@ let $$f0 = registerModal(function (e) {
               className: historyHeader,
               children: [jsx("h4", {
                 children: "Test History:"
-              }), jsx($n, {
+              }), jsx(Button, {
                 variant: "secondary",
                 onClick: x,
                 children: "Copy History"
@@ -310,15 +310,15 @@ let $$f0 = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: A,
             children: "Reset"
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "destructive",
             onClick: () => v(!0),
             children: "Yes - Bug Present"
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: () => v(!1),
             children: "No - Bug Not Present"
@@ -358,7 +358,7 @@ let $$f0 = registerModal(function (e) {
             className: historyHeader,
             children: [jsx("h4", {
               children: "Test History:"
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "secondary",
               onClick: x,
               children: "Copy History"
@@ -377,11 +377,11 @@ let $$f0 = registerModal(function (e) {
       })
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: A,
           children: "Start New Bisection"
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           onClick: () => t.props.close({
             source: "button"
@@ -422,7 +422,7 @@ let $$f0 = registerModal(function (e) {
             className: historyHeader,
             children: [jsx("h4", {
               children: "Test History:"
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "secondary",
               onClick: x,
               children: "Copy History"
@@ -441,11 +441,11 @@ let $$f0 = registerModal(function (e) {
       })
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: A,
           children: "Start New Bisection"
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           onClick: () => t.props.close({
             source: "button"
@@ -455,7 +455,7 @@ let $$f0 = registerModal(function (e) {
       })
     })]
   }) : null;
-  return getFeatureFlags().internal_prototyping_debug_tool || getFeatureFlags().internal_only_debug_tools ? jsx(bL, {
+  return getFeatureFlags().internal_prototyping_debug_tool || getFeatureFlags().internal_only_debug_tools ? jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsx(vo, {

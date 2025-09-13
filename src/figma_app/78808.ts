@@ -14,7 +14,7 @@ import { to as _$$to } from '../905/612685';
 import { serializeQuery } from '../905/634134';
 import { logError } from '../905/714362';
 import { o as _$$o } from '../905/721794';
-import { oA } from '../905/723791';
+import { getResourceDataOrFallback } from '../905/723791';
 import { isBranch } from '../905/760074';
 import { WB } from '../905/761735';
 import { VERSION_HISTORY_SET_FILE_LAST_SEEN_AT } from '../905/784363';
@@ -23,7 +23,7 @@ import { debounce } from '../905/915765';
 import { FileCreationPermissionsView } from '../figma_app/43951';
 import { isDevEnvironment } from '../figma_app/169182';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
-import { ds } from '../figma_app/314264';
+import { trackFileEvent } from '../figma_app/314264';
 import { Lb } from '../figma_app/323326';
 import { Ns, TP, yT } from '../figma_app/349248';
 import { copyTextToClipboard, copyTextWithPlainFallback } from '../figma_app/623293';
@@ -75,7 +75,7 @@ let $$V11 = createOptimistThunk(async (e, t) => {
   let s = t.folderId || a.folderId;
   let o = !1;
   if (s) {
-    let e = oA((await subscribeAndAwaitData(FileCreationPermissionsView, {
+    let e = getResourceDataOrFallback((await subscribeAndAwaitData(FileCreationPermissionsView, {
       projectId: s
     })).project);
     o = !!e && !!a.editorType && canCreateFileType(e, a.editorType);
@@ -91,7 +91,7 @@ let $$V11 = createOptimistThunk(async (e, t) => {
     let s = !!r.openFile;
     if (!i.data.error && i.data.meta && s) {
       let s = i.data.meta;
-      if (ds('File Duplicated', a.key, e.getState(), {
+      if (trackFileEvent('File Duplicated', a.key, e.getState(), {
         duplicatedFileKey: s.key,
         duplicatedContainingFolderId: s.folder_id,
         duplicatedFileTeamId: s.team_id,
@@ -223,7 +223,7 @@ let $$X9 = createOptimistThunk((e, t) => {
 });
 let $$q12 = createOptimistThunk((e, t) => {
   copyTextToClipboard(t.embedCode).then(() => {
-    ds('Embed Code Copied', t.fileKey, e.getState());
+    trackFileEvent('Embed Code Copied', t.fileKey, e.getState());
     e.dispatch(VisualBellActions.enqueue({
       type: 'embeded_code_copied_to_clipboard',
       message: getI18nString('file_browser.file_browser_actions.embed_code_copied')
@@ -263,7 +263,7 @@ let $$Z8 = _$$n(createOptimistThunk((e, t) => {
     r = copyTextToClipboard(n);
   }
   r.then(() => {
-    ds('File Share Link Copied', t.fileKey, e.getState(), {
+    trackFileEvent('File Share Link Copied', t.fileKey, e.getState(), {
       copyLinkSource: _$$d[t.source],
       ...t.trackingProperties
     });
@@ -290,7 +290,7 @@ let $$ee4 = createOptimistThunk((e, t) => {
       file: n,
       userInitiated: !0
     }));
-    ds('File Renamed', n.key, e.getState(), {
+    trackFileEvent('File Renamed', n.key, e.getState(), {
       fileName: n.name
     });
   }

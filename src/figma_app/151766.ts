@@ -23,7 +23,7 @@ import { VI } from "../figma_app/623300";
 import { h as _$$h } from "../905/44234";
 import { S as _$$S } from "../figma_app/787550";
 import { fullscreenValue } from "../figma_app/455680";
-import { q as _$$q } from "../905/807667";
+import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 var l = o;
 export let $$O1 = {
   downloadFile(e, t = null) {
@@ -173,7 +173,7 @@ async function P(e, t, r) {
     trackEventAnalytics("File Export V2 Canceled", D());
   };
   L(_$$h.SaveLocalFile, C, k);
-  let M = _$$q(PluginModalType.SAVE_LOCAL_COPY);
+  let M = handleLoadAllPagesWithVersionCheck(PluginModalType.SAVE_LOCAL_COPY);
   M.catch(() => {
     reportError(_$$e.SCENEGRAPH_AND_SYNC, Error("saveAs: waitForAllPagesPromise rejected"));
     h(VisualBellActions.dequeue({

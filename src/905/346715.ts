@@ -3,17 +3,17 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { xf } from "../figma_app/416935";
 import { isGovCluster, includesGovDomain, buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { ks } from "../figma_app/637027";
-import { qc } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -151,7 +151,7 @@ let $$F0 = registerModal(function (e) {
       folderId: e.folder.id,
       entryPoint: e.entryPoint
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: p,
       width: "lg",
       children: jsxs(vo, {
@@ -193,7 +193,7 @@ let $$F0 = registerModal(function (e) {
                   className: Pv,
                   children: jsxs("div", {
                     className: Gu,
-                    children: [jsx(_$$B, {
+                    children: [jsx(SvgComponent, {
                       className: Kk,
                       svg: _$$A
                     }), jsx("div", {
@@ -258,16 +258,16 @@ let $$F0 = registerModal(function (e) {
               }), " "]
             }), jsxs("div", {
               className: _$$s2.flex.gap8.itemsCenter.$,
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 onClick: 1 === L ? u : () => {
                   F(1);
                 },
                 children: 1 === L ? renderI18nText("resource_connection.request_modal.cancel") : renderI18nText("resource_connection.request_modal.back")
-              }), ee ? jsx($n, {
+              }), ee ? jsx(Button, {
                 disabled: !0,
-                children: jsx(qc, {})
-              }) : jsx($n, {
+                children: jsx(LoadingOverlay, {})
+              }) : jsx(Button, {
                 disabled: !!ee || (1 === L ? !(q && G) || !ei : 2 === L && (!(q && G && j) || !ei)),
                 onClick: () => {
                   if (X(null), J(null), 1 === L) {
@@ -353,7 +353,7 @@ let M = registerModal(function (e) {
       return;
     }
   }, [g, A]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: h,
     width: "lg",
     children: jsxs(vo, {
@@ -399,11 +399,11 @@ let M = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: i,
             children: renderI18nText("resource_connection.request_modal.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             disabled: "" === g || !!A,
             onClick: () => {

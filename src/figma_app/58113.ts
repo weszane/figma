@@ -1,11 +1,11 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { formatNumber } from "../figma_app/930338";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Cg, Gb, sw } from "../figma_app/534676";
 import { Lt } from "../figma_app/808294";
-import { PM, zF } from "../figma_app/45218";
-import { Ib } from "../905/129884";
+import { hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
+import { KindEnum } from "../905/129884";
 import { A } from "../6828/6507";
 import { A as _$$A } from "../5724/693499";
 function _(e) {
@@ -26,8 +26,8 @@ export function $$m0({
   resource: e
 }) {
   let t = e.unique_run_count ?? 0;
-  let r = PM(e);
-  let m = zF(e);
+  let r = hasFreemiumCode(e);
+  let m = isThirdPartyMonetized(e);
   let g = (() => {
     if (r) return jsx(Cg, {
       resource: e,
@@ -54,8 +54,8 @@ export function $$m0({
         numPeople: e.like_count,
         numPeopleStr: E
       }),
-      "data-tooltip-type": Ib.TEXT,
-      children: [jsx(B, {
+      "data-tooltip-type": KindEnum.TEXT,
+      children: [jsx(SvgComponent, {
         svg: _$$A
       }), E]
     }), jsx(h, {}), jsxs(_, {
@@ -63,8 +63,8 @@ export function $$m0({
         numPeople: t,
         numPeopleStr: f
       }),
-      "data-tooltip-type": Ib.TEXT,
-      children: [jsx(B, {
+      "data-tooltip-type": KindEnum.TEXT,
+      children: [jsx(SvgComponent, {
         svg: A
       }), f]
     }), !!g && jsxs(Fragment, {

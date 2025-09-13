@@ -13,7 +13,7 @@ import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { oI } from "../905/854717";
 import { F7, yJ, k8, $T, AB, h2, _V } from "../figma_app/8833";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { k6, Dg, Ug, V } from "../figma_app/682945";
 import { Ed } from "../figma_app/139113";
@@ -38,7 +38,7 @@ let $$F50 = createOptimistThunk((e, t) => {
   let {
     fileKey
   } = r.selectedView;
-  ds(t.name, fileKey ?? null, r, n);
+  trackFileEvent(t.name, fileKey ?? null, r, n);
 });
 let $$j4 = createActionCreator("FULLSCREEN_SET_LEFT_PANEL_TAB");
 let $$U7 = createActionCreator("FULLSCREEN_SHOW_FILE_CREATION_FAILURE_BANNER");

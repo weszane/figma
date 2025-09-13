@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { q } from "../905/600041";
 import { y } from "../905/171275";
 import { renderI18nText } from "../905/303541";
@@ -10,7 +10,7 @@ export function $$c0({
   noBorder: t,
   size: i
 }) {
-  let c = jsx(B, {
+  let c = jsx(SvgComponent, {
     svg: _$$A,
     className: "x3xsitq",
     svgWidth: "50px",
@@ -18,7 +18,7 @@ export function $$c0({
   });
   let u = jsxs("div", {
     className: "x78zum5 xdt5ytf x6s0dn4 xl56j7k",
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A2,
       className: "xayg1ih",
       svgWidth: "100px",

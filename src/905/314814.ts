@@ -8,9 +8,9 @@ import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { S as _$$S } from "../905/794163";
 import { getFeatureFlags } from "../905/601108";
 import A from "../vendor/523035";
@@ -22,7 +22,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { g as _$$g } from "../905/119656";
 import { T as _$$T } from "../905/292816";
 import { H3 } from "../figma_app/920435";
@@ -115,12 +115,12 @@ function H(e) {
       errorMessage: getI18nString("billing_modals.org_renewal.price_error")
     }] : [{
       id: "projectedCost",
-      name: jsx(_$$E2, {
+      name: jsx(TextWithTruncation, {
         color: "secondary",
         children: getI18nString("billing_modals.team_renewal.table.header.annual_cost")
       }),
       textAlign: "right",
-      cellComponent: e => jsx(_$$E2, {
+      cellComponent: e => jsx(TextWithTruncation, {
         color: "secondary",
         truncate: !0,
         children: localizeCurrency.formatMoney(a[e] || 0, {
@@ -138,7 +138,7 @@ function H(e) {
               showCents: !1
             })
           })
-        }), jsx(_$$E2, {
+        }), jsx(TextWithTruncation, {
           truncate: !0,
           children: localizeCurrency.formatMoney(y()(Object.values(a)), {
             showCents: !1
@@ -176,11 +176,11 @@ function H(e) {
   let ee = () => {
     H(!1);
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: 480,
     height: B,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: e => {
         Q || (H(!0), H3({
           teamId: A,
@@ -233,7 +233,7 @@ function H(e) {
           items: N_.toArray().sort(AG),
           columns: [{
             id: "billableProductKey",
-            name: jsx(_$$E2, {
+            name: jsx(TextWithTruncation, {
               color: "secondary",
               truncate: !0,
               children: getI18nString("billing_modals.renewal.table.header.seat_type")
@@ -255,7 +255,7 @@ function H(e) {
               children: getI18nString("billing_modals.team_add_seats.table.header.monthly")
             }),
             textAlign: "right",
-            cellComponent: e => jsx(_$$E2, {
+            cellComponent: e => jsx(TextWithTruncation, {
               color: "secondary",
               truncate: !0,
               children: Math.max(0, (E[e] || 0) - (P[e] || 0))
@@ -276,7 +276,7 @@ function H(e) {
                 maxCount: $$in
               })
             }),
-            getAggregate: () => jsx(_$$E2, {
+            getAggregate: () => jsx(TextWithTruncation, {
               truncate: !0,
               children: X
             }),
@@ -318,18 +318,18 @@ function H(e) {
           })]
         }), K && jsx("div", {
           className: _$$s.pt16.$,
-          children: jsx(_$$E2, {
+          children: jsx(TextWithTruncation, {
             color: "danger",
             children: K
           })
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
             children: getI18nString("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             type: "submit",
             disabled: Q,
             children: renderI18nText("billing_modals.team_start_annual_plan.cta")

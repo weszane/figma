@@ -15,7 +15,7 @@ import { isLocalCluster, getSlidesDefaultBlankTemplate } from "../figma_app/1691
 import { Point } from "../905/736624";
 import { Bs } from "../figma_app/933328";
 import { qY } from "../figma_app/622574";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
@@ -153,7 +153,7 @@ export function $$z15() {
   let i = useCurrentFileKey() || "";
   let a = useCallback(() => {
     n(!0);
-    Cu({
+    logAndTrackCTA({
       fileKey: i,
       productType: "slides",
       name: "new_slide_template_dropdown_opened"

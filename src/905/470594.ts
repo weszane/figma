@@ -4,14 +4,14 @@ import { decodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { N as _$$N } from "../905/438674";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { ET, qW } from "../905/623179";
 import { Ex, zE, vj } from "../figma_app/919079";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
@@ -103,7 +103,7 @@ let N = registerModal(function (e) {
       children: [jsx("span", {
         style: sx.mr8.$,
         children: i
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         svg: _$$A,
         className: "check_network_compatibility--copySvg--1lHmK",
         onClick: () => {
@@ -116,7 +116,7 @@ let N = registerModal(function (e) {
       })]
     }) : null]
   }, e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: 360,
     children: jsxs(vo, {
@@ -131,7 +131,7 @@ let N = registerModal(function (e) {
         }), e.results.map(e => s(e))]
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
             children: renderI18nText("check_network_compatibility.close")

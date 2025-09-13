@@ -7,14 +7,14 @@ import { Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
 import { K } from "../905/443068";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { t as _$$t } from "../905/117577";
 import { useSubscription } from "../figma_app/288654";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { WO } from "../469e6e40/418374";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { yo } from "../figma_app/494261";
@@ -116,7 +116,7 @@ function N({
       "aria-label": getI18nString("general.go_back"),
       onClick: e,
       children: jsx(_$$t, {})
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       color: "default",
       children: t
@@ -146,7 +146,7 @@ export let $$I0 = registerModal(function (e) {
   if ("loading" === o.status || "errors" === o.status || !d) return null;
   let A = c.getInitialExtensionAllowed(d);
   let R = c.getExtensionRequestsAllowed(d);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: l,
     height: hasBackButton ? "fixed" : "dynamic",
     width: 320,
@@ -168,11 +168,11 @@ export let $$I0 = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: v,
             variant: "secondary",
             children: getI18nString("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               if (d.publicPluginsAllowed) {
                 let e = {

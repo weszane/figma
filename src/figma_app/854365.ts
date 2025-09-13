@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { g as _$$g } from "../905/125190";
 import { J } from "../905/614223";
@@ -27,7 +27,7 @@ export function $$T1(e) {
   let T = [renderI18nText("sites.starter_modal.feature.responsive_breakpoints"), renderI18nText("sites.starter_modal.feature.templates"), renderI18nText("sites.starter_modal.feature.preset_interactions", {
     moreLink: renderI18nText("sites.starter_modal.feature.custom.learn_more_link")
   })];
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     width: 408,
     children: jsx(Wk, {

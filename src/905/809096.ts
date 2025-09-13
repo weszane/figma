@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useDelayedTrue } from "../905/815905";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, r1, nB } from "../figma_app/272243";
 import { k } from "../905/443820";
 import { sx } from "../905/941192";
@@ -15,7 +15,7 @@ function p(e) {
       e.onClose();
     }
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     height: e.height,
     manager: t,
     width: e.estimatedWidth,

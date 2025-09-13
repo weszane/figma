@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { u as _$$u, SG } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
 import { S2 } from "../figma_app/328423";
@@ -110,7 +110,7 @@ export function $$R1(e) {
     bigNudgeAmount,
     "data-tooltip": T,
     "data-tooltip-proxy-element-id": e.isBoundToVariable ? t : void 0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: "transform-corner-radius",
     disabled: e.disabled,
     dispatch: u,
@@ -129,7 +129,7 @@ export function $$R1(e) {
     wheelMultiplier,
     children: jsx("div", {
       className: QK,
-      "data-tooltip-type": e.isBoundToVariable ? Ib.TEXT : void 0,
+      "data-tooltip-type": e.isBoundToVariable ? KindEnum.TEXT : void 0,
       "data-tooltip": e.isBoundToVariable ? T : void 0,
       id: t,
       children: e.useSingleRadiusIcon ? jsx(_$$a, {}) : jsx(Q, {})

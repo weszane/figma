@@ -4,7 +4,7 @@ import { shallowEqual } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { h } from "../905/207101";
 import { reportError } from "../905/11";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
@@ -17,7 +17,7 @@ let $$m4 = atom("");
 var $$g3 = (e => (e.ALL = "ALL", e.RECENTLY_VIEWED = "RECENTLY_VIEWED", e.BUILD = "BUILD", e.COMPLETED = "COMPLETED", e))($$g3 || {});
 var $$f0 = (e => (e.RECENT = "RECENT", e.PAGE = "PAGE", e.ALPHABETICAL = "ALPHABETICAL", e))($$f0 || {});
 export function $$E2(e, t, r) {
-  let o = U();
+  let o = trackFileEventWithStore();
   let l = useCanAccessFullDevMode();
   h(() => {
     n = null;
@@ -47,7 +47,7 @@ export function $$E2(e, t, r) {
 }
 export function $$y5(e, t, r) {
   let [n, a] = useAtomValueAndSetter(_);
-  let c = U();
+  let c = trackFileEventWithStore();
   useEffect(() => {
     if (!n) try {
       if (e.length > 0 && t && !t.loading) {

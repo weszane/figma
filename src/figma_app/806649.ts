@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { A } from "../905/251970";
 import { a as _$$a } from "../905/847494";
 import { C } from "../figma_app/938538";
@@ -13,7 +13,7 @@ export function $$u0({
     ariaLabel: getI18nString("fullscreen.toolbar.image_videos_aria_label"),
     children: [jsx(G, {
       children: getI18nString("fullscreen_actions.click_or_drag_to_place")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       actionOnPointerDown: !0,
       onClick: () => e("place-all-images"),

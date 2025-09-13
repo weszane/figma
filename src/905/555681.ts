@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { M } from "../905/850310";
 import { useExposedRef } from "../905/581092";
 import { w } from "../905/955293";
@@ -72,7 +72,7 @@ function A({
   size: e,
   onClick: t
 }) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     onClick: t,
     className: _$$A("search-input__clear__zR1gK", m[e]),
     "aria-hidden": !0,

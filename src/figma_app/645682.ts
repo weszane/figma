@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useCallback, memo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
@@ -220,7 +220,7 @@ function Y({
       children: renderI18nText("design_systems.instance_panel.the_selected_variant_is_missing_in_the_component")
     }), jsx("div", {
       className: ns,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         recordingKey: generateRecordingKey(e, "resetVariantButton"),
         onClick: function () {

@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 export let $$r0 = forwardRef(function ({
   children: e,
   ...t
 }, i) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ...t,
     ref: i,
     className: "icon_button_32--iconButton--gFcI9",

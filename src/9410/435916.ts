@@ -21,7 +21,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
 import { d as _$$d } from "../905/14910";
 import { w as _$$w, tX } from "../figma_app/728657";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { selectWithShallowEqual } from "../905/103090";
 import { oB, ho, j7 } from "../905/929976";
 import { useFullscreenReady } from "../905/924253";
@@ -60,7 +60,7 @@ function M({
         data: {
           selectionToUpdate: SettingsAction.PREFERENCES
         }
-      })); else {
+      }));else {
         let e = s ? 42 : 0;
         i(j7({
           type: pi,
@@ -588,7 +588,7 @@ function q({
 }
 export function $$$$X0() {
   let e = aV();
-  let t = Td();
+  let t = useIsCanvasEditDisabled();
   let i = useSelector(e => e.isMakeSomethingV2Active);
   return t || e || i ? null : jsx(et, {});
 }

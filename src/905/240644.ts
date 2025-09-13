@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
 import { s as _$$s } from "../cssbuilder/589278";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 export function $$o0({
   children: e
 }) {
@@ -13,7 +13,7 @@ export function $$o0({
       children: jsx(k, {})
     }), jsx("div", {
       className: _$$s.overflowHidden.noWrap.ellipsis.$,
-      children: jsx(E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "medium",
         children: e

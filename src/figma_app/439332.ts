@@ -3,10 +3,10 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import s from "classnames";
 import { nR } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { v } from "../905/581647";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { x6, Jp, qS, QW, cI, hI, JL } from "../figma_app/522242";
 import { A } from "../5724/267849";
 var o = s;
@@ -44,9 +44,9 @@ export function $$f2() {
 export function $$E3() {
   return jsx("div", {
     className: QW,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.buyer.update_payment_info_to_retain_access"),
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg: A
     })
   });
@@ -57,7 +57,7 @@ export function $$y1() {
     "data-not-draggable": !0,
     children: [jsx("div", {
       className: QW,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: A
       })
     }), jsx("div", {

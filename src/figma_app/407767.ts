@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { T1 } from "../figma_app/545293";
 import { cJ } from "../figma_app/976749";
-import { qc } from "../figma_app/62612";
+import { getVisibleArea } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Ls, m3, ZA } from "../figma_app/645694";
@@ -392,7 +392,7 @@ export function $$F7(e) {
   });
 }
 export function $$j13(e) {
-  let t = qc(e);
+  let t = getVisibleArea(e);
   return JSON.stringify({
     x: t.x,
     y: t.y,

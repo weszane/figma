@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { getFeatureFlags } from "../905/601108";
-import { xQ, aL, m3, zF, PM } from "../figma_app/45218";
+import { isWidget, ShelfViewType, hasMonetizedResourceMetadata, isThirdPartyMonetized, hasFreemiumCode } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { gz, GJ, X7, dC, l0, vf, Wc, d6 } from "../5430/455879";
 import { I as _$$I } from "../5132/515990";
@@ -25,7 +25,7 @@ import { U3 } from "../figma_app/412189";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan, useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { getCurrentPluginVersion, pluginMetadata, hasOrgRole } from "../figma_app/300692";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { X } from "../5430/785696";
 import { o as _$$o } from "../5430/992445";
 import { WW } from "../figma_app/764679";
@@ -46,14 +46,14 @@ export function $$S0({
   let H = useCurrentPlanUser("PluginTryButton");
   let U = useIsOrgAdminUser(H).unwrapOr(!1);
   let M = kc();
-  let J = xQ(e);
+  let J = isWidget(e);
   let Q = getCurrentPluginVersion(e) || pluginMetadata;
   let X = _$$o(H.unwrapOr(null), S, Q, t ? mapFileTypeToEditorType(t) : void 0);
   let $ = hasOrgRole(e);
   let Y = !!M?.org_id;
   let Z = j && (J ? O : B);
-  E = _$$I() ? "right" : n === aL.DETAIL ? "center" : "left";
-  let z = n === aL.REDESIGNED_PLUGIN_ROW;
+  E = _$$I() ? "right" : n === ShelfViewType.DETAIL ? "center" : "left";
+  let z = n === ShelfViewType.REDESIGNED_PLUGIN_ROW;
   let {
     dropdownIsShown,
     toggleSwitchEditorDropdown,
@@ -62,9 +62,9 @@ export function $$S0({
   let ee = useRef(null);
   let et = Jm();
   if (U3("scroll", () => {
-    (n === aL.PLUGIN_ROW || n === aL.REDESIGNED_PLUGIN_ROW) && toggleSwitchEditorDropdown(ee, !1);
+    (n === ShelfViewType.PLUGIN_ROW || n === ShelfViewType.REDESIGNED_PLUGIN_ROW) && toggleSwitchEditorDropdown(ee, !1);
   }), Q === pluginMetadata) return null;
-  let en = m3(e);
+  let en = hasMonetizedResourceMetadata(e);
   return U && Y && !en && k && Z && !$ ? jsx(v, {
     resource: e,
     orgEntity: k,
@@ -88,7 +88,7 @@ export function $$S0({
       }(X),
       children: [jsx("button", {
         type: "button",
-        className: n === aL.REDESIGNED_PLUGIN_ROW ? gz : n === aL.PLUGIN_ROW ? GJ : X7,
+        className: n === ShelfViewType.REDESIGNED_PLUGIN_ROW ? gz : n === ShelfViewType.PLUGIN_ROW ? GJ : X7,
         onClick: () => {
           if (!P) {
             let t = _$$k2(e);
@@ -109,7 +109,7 @@ export function $$S0({
           }
           trackEventAnalytics("try_it_out_editor_picker_menu_opened", {
             pluginId: e.id,
-            isWidget: xQ(e),
+            isWidget: isWidget(e),
             searchSessionId: et
           });
           toggleSwitchEditorDropdown(ee);
@@ -120,7 +120,7 @@ export function $$S0({
           ref: ee,
           children: jsxs(Fragment, {
             children: [jsx(hJ, {
-              children: X_(J ? vt.WIDGET : vt.PLUGIN, zF(e) || PM(e))
+              children: X_(J ? vt.WIDGET : vt.PLUGIN, isThirdPartyMonetized(e) || hasFreemiumCode(e))
             }), jsx(XY, {
               children: renderI18nText("community.using.open_in_no_ellipses")
             })]
@@ -137,7 +137,7 @@ function v(e) {
   let n;
   let l = ll();
   let o = U6();
-  let r = xQ(e.resource);
+  let r = isWidget(e.resource);
   let u = r ? !!o[e.resource.id] : !!l[e.resource.id];
   u ? (t = renderI18nText("community.plugins.remove"), n = getI18nString("community.plugins.remove_for_org_tooltip", {
     orgName: e.orgEntity.name
@@ -155,7 +155,7 @@ function v(e) {
       };
       u ? X.disableExtensionForOrg(t) : X.enableExtensionForOrg(t);
     },
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": n,
     children: jsx("div", {
       className: e.useShortenedLabel ? d6 : l0,

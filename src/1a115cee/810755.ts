@@ -1,18 +1,18 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { $n } from "../905/521428";
-import { bL } from "../905/38914";
+import { Button } from "../905/521428";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { renderI18nText } from "../905/303541";
 import { rf } from "../1a115cee/533320";
 export function $$c0(e) {
   let a = useModalManager(e);
-  let s = jsx($n, {
+  let s = jsx(Button, {
     variant: "secondary",
     onClick: e.onClose,
     children: renderI18nText("autosave.learn_more.done_button")
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: a,
     width: "lg",
     children: jsxs(vo, {

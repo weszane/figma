@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppStateTsApi, ViewType, DataLoadStatus } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
-import { U, hC } from "../figma_app/901889";
+import { trackFileEventWithStore, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { C as _$$C } from "../figma_app/974443";
 import { useLatestRef } from "../figma_app/922077";
 import { r as _$$r } from "../905/520829";
@@ -46,7 +46,7 @@ export function $$P2({
   let j = getObservableOrFallback(AppStateTsApi.uiState().showInFileMemoryPercentage);
   let k = dh();
   let E = !wK();
-  let I = U();
+  let I = trackFileEventWithStore();
   let A = l7();
   let M = useRef(null);
   let P = Ht();
@@ -222,7 +222,7 @@ function D({
   useEffect(() => {
     R?.created_at && C(_$$r.SUCCESS);
   }, [C, R?.created_at]);
-  let D = hC();
+  let D = trackDefinedFileEventWithStore();
   let L = useLatestRef(S);
   useEffect(() => {
     !L && N && D("figjam_summary_preview.preview_shown", {
@@ -256,7 +256,7 @@ export function $$L1({
 }) {
   let n = Z("page_change_navigator_navigate");
   let a = _$$E();
-  let s = U();
+  let s = trackFileEventWithStore();
   let l = useDispatch();
   let d = _6();
   let _ = dh();
@@ -270,7 +270,7 @@ export function $$F0({
 }) {
   let a = Z("page_change_navigator_navigate");
   let s = _$$E();
-  let l = U();
+  let l = trackFileEventWithStore();
   let d = useDispatch();
   let _ = _6();
   let u = dh(n);

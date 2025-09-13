@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { sanitize } from "../vendor/197638";
-import { M } from "../905/994901";
+import { pasteEmbedThunk } from "../905/994901";
 let s = new Set(["airtable.com", "asana.com", "calendly.com", "chorus.ai", "coda.io", "codepen.io", "docs.google.com", "drive.google.com", "paper.dropbox.com", "figma.com", "framer.com", "github.com", "gmail.com", "atlassian.com", "loom.com", "lottiefiles.com", "lucidchart.com", "maze.co", "office.com", "miro.com", "mode.com", "mural.co", "notion.so", "quip.com", "rollbar.com", "sentry.io", "slab.com", "slideshare.net", "surveymonkey.com", "tableau.com", "trello.com", "typeform.com", "usertesting.com", "whimsical.com", "behance.net", "dribbble.com", "facebook.com", "google.com", "maps.google.com ", "instagram.com", "linkedin.com", "medium.com", "pinterest.com", "soundcloud.com", "spotify.com", "open.spotify.com", "tiktok.com", "twitter.com", "vimeo.com", "youtu.be", "youtube.com"]);
 let o = RegExp("^<iframe[^>]+src\\s*=\\s*(?:(?:\"([^\">]+)\")|(?:'([^'>]+)')).*><\\/iframe>$");
 let l = RegExp("^(?:(?:(?:https?|ftp):)?\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z0-9\\u00a1-\\uffff][a-z0-9\\u00a1-\\uffff_-]{0,62})?[a-z0-9\\u00a1-\\uffff]\\.)+(?:[a-z\\u00a1-\\uffff]{2,}\\.?))(?::\\d{2,5})?(?:[/?#]\\S*)?$", "i");
@@ -39,7 +39,7 @@ export function $$p4(e) {
 }
 export function $$_0(e, t, r) {
   let n = $$p4(t.trim());
-  return n ? (e(M({
+  return n ? (e(pasteEmbedThunk({
     clipboardText: t,
     url: n.url,
     isTextIframe: n.isFromIFrame,

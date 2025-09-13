@@ -8,7 +8,7 @@ import { DP } from "../905/640017";
 import { getAssetBackgroundColor } from "../figma_app/80990";
 import { V as _$$V } from "../figma_app/473391";
 import { uW, pw } from "../905/187165";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { M } from "../905/771870";
 import { L } from "../905/332753";
 import { g_, j3 } from "../figma_app/540964";
@@ -42,7 +42,7 @@ export function $$y0({
   }, `${i}:${_$$V(s)}`);
   return jsx("div", {
     className: "asset_panel_preview--previewThumbnailWrapper--g6zU5",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": I,
     style: {
       height: e - 2 * E,

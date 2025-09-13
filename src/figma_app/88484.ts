@@ -6,7 +6,7 @@ import { WB } from "../905/761735";
 import { uo } from "../figma_app/78808";
 import { q0, Am } from "../905/70982";
 import { uo as _$$uo, nF } from "../905/466026";
-import { OH } from "../figma_app/314264";
+import { trackMultipleFileEvent } from "../figma_app/314264";
 import { FileBrowserRecentFilesByEditorTypeView, FileBrowserRecentFilesView } from "../figma_app/43951";
 import { YN } from "../figma_app/349248";
 import { IT } from "../905/713695";
@@ -50,7 +50,7 @@ export async function $$I1(e) {
   let a = WB().optimisticallyDelete({
     RecentFile2: r
   }, i);
-  OH("File RecentFiles Removed", t);
+  trackMultipleFileEvent("File RecentFiles Removed", t);
   await a;
 }
 export let $$S3 = function () {

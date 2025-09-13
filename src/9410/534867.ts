@@ -12,7 +12,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { RecordingPureComponent, generateRecordingKey, handleKeyboardEvent, handleChangeEvent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { oB } from "../905/929976";
 import { Rw } from "../figma_app/91703";
@@ -23,7 +23,7 @@ import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
 import { createDeferredPromise } from "../905/263346";
 import { R as _$$R } from "../figma_app/612938";
-import { y as _$$y } from "../905/916933";
+import { waitForAllPagesForPlugin } from "../905/916933";
 import { handlePluginError } from "../905/753206";
 import { V } from "../905/480825";
 import { U3 } from "../figma_app/737746";
@@ -453,7 +453,7 @@ class K extends RecordingPureComponent {
     }), this.handler.then(async t => {
       let {
         isCancelled
-      } = await _$$y(this.runArgs);
+      } = await waitForAllPagesForPlugin(this.runArgs);
       isCancelled || t.triggerRunEvent({
         command: "parameters",
         parameters: e
@@ -527,7 +527,7 @@ class K extends RecordingPureComponent {
       children: [jsx($$z1, {
         value: this.state.hidePluginName ? void 0 : this.props.displayName,
         icon: function (e, t, i) {
-          if (!i) return jsx(_$$B, {
+          if (!i) return jsx(SvgComponent, {
             className: nW,
             svg: _$$A,
             ariaLabel: "plugin icon"
@@ -605,7 +605,7 @@ class K extends RecordingPureComponent {
       onKeyDown: this.onKeyDown,
       children: [jsxs("div", {
         className: $P,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A2,
           className: qc
         }), jsxs("div", {

@@ -21,16 +21,16 @@ import { sendUrlToParent } from "../figma_app/564528";
 import { a as _$$a } from "../905/29104";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { wv } from "../figma_app/236327";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b2 } from "../905/985254";
 import { fu, tf } from "../figma_app/831799";
 import { r1 } from "../figma_app/545877";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c$ } from "../905/794875";
 import { w as _$$w } from "../figma_app/654279";
 import { v as _$$v } from "../figma_app/759243";
-import { tG } from "../figma_app/757723";
+import { isHandbrakeDisabledForCurrentUser } from "../figma_app/757723";
 import { f as _$$f } from "../figma_app/481968";
 import { QP } from "../figma_app/761984";
 import { S as _$$S } from "../figma_app/773693";
@@ -188,7 +188,7 @@ export function $$ea0() {
               "aria-label": displayText,
               htmlAttributes: enabled ? void 0 : {
                 "data-tooltip": disabledTooltipText,
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               children: [icon && jsx(Q$, {
                 children: jsx("div", {
@@ -288,7 +288,7 @@ function es(e) {
   let n = !!e.find(e => e && t.includes(e.type));
   return {
     shouldShowBadge: function (e) {
-      let t = tG();
+      let t = isHandbrakeDisabledForCurrentUser();
       let r = useAtomWithSubscription(en).data;
       return !!(t && !r && e);
     }(n),
@@ -334,14 +334,14 @@ let eo = tf(function ({
     role: "combobox",
     testId: "toolbarAIQuickActionsDropdownButton",
     tooltip: _$$w,
-    tooltipType: Ib.SPECIAL,
+    tooltipType: KindEnum.SPECIAL,
     children: jsxs("div", {
       className: b()({
         "ai_quick_actions_control--withBadge--z88DK": shouldShowBadge
       }),
       children: [jsx("div", {
         className: "ai_quick_actions_control--buttonIconContainer--pBGdR",
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A,
           className: b()("ai_quick_actions_control--svgIcon--XDs5m", {
             "ai_quick_actions_control--svgIconDisabled--u4WwB": o
@@ -439,7 +439,7 @@ let ec = tf(function ({
     "data-tooltip-offset-x": 6,
     "data-tooltip-show-right": !0,
     "data-tooltip-tip-align-left": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     id: e,
     role: "option",
     tabIndex: -1,

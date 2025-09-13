@@ -8,7 +8,7 @@ import { e as _$$e } from "../905/280005";
 import { oJ } from "../905/63728";
 import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { S } from "../905/339549";
 import { oB } from "../905/929976";
 import { s4, Dm } from "../figma_app/8833";
@@ -40,7 +40,7 @@ export function $$S3(e) {
         }), jsx("p", {
           children: e.label
         })]
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         className: tZ,
         svg: _$$A
       })]
@@ -399,7 +399,7 @@ export class $$D1 extends RecordingPureComponent {
             mixed: this.props.mixed
           })
         })
-      }) : this.props.checked ? jsx(B, {
+      }) : this.props.checked ? jsx(SvgComponent, {
         className: z6,
         svg: A,
         dataTestId: "dropdown-check-icon"

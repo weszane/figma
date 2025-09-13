@@ -24,7 +24,7 @@ import { J } from "../905/202542";
 import { W as _$$W } from "../905/522628";
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
-import { R as _$$R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { registerModal } from "../905/102752";
 import { DV } from "../905/739964";
 import { W as _$$W2 } from "../905/442612";
@@ -88,7 +88,7 @@ let P = registerModal(function (e) {
   }(e.modalConfig, e.numFilesMoved);
   t = title ?? renderI18nText("modal.are_you_sure");
   n = confirmText ?? renderI18nText("file_browser.file_move.move");
-  return jsx(_$$R, {
+  return jsx(ConfirmationModal, {
     title,
     confirmText,
     onConfirm: e.onConfirm,

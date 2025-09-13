@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { R } from "../figma_app/636548";
 import { W } from "../figma_app/896386";
 import { g } from "../figma_app/103028";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { aj, Zp, XS, sE } from "../figma_app/386160";
 import { R as _$$R } from "../figma_app/360122";
 function x({
@@ -27,7 +27,7 @@ function x({
   return jsx("div", {
     ref: t,
     className: aj,
-    "data-tooltip-type": l ? Ib.TEXT : void 0,
+    "data-tooltip-type": l ? KindEnum.TEXT : void 0,
     "data-tooltip": l ? e : void 0,
     "data-testid": "node-type-display",
     children: e

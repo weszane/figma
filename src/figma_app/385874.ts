@@ -7,7 +7,7 @@ import { s as _$$s } from "../905/583953";
 import d from "../vendor/415955";
 import { whiteColor } from "../figma_app/191804";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ug } from "../905/706046";
 import { isInvalidValue } from "../905/216495";
@@ -77,7 +77,7 @@ export function $$v19(e) {
   if (!$$x11(e.type)) return null;
   if (0 === e.stops.length) {
     let t = debugState.getState();
-    ds("zero_stop_gradient_detected", t.openFile?.key, t);
+    trackFileEvent("zero_stop_gradient_detected", t.openFile?.key, t);
     e.stops.push({
       color: whiteColor,
       position: 0

@@ -1,10 +1,10 @@
 import { getFeatureFlags } from "../905/601108";
 import { atom } from "../figma_app/27355";
-import { h0 } from "../905/845253";
+import { currentUserOrgIdAtom } from "../905/845253";
 import { OrgUserIsMfaRestrictedView } from "../figma_app/43951";
 export let $$o0 = atom(e => {
   let t = getFeatureFlags().mfa_for_guests;
-  let i = e(h0);
+  let i = e(currentUserOrgIdAtom);
   if (!t || !i) return !1;
   let r = e(OrgUserIsMfaRestrictedView.Query({
     orgId: i

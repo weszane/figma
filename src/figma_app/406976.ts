@@ -9,7 +9,7 @@ import { debugState } from "../905/407919";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { logError } from "../905/714362";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { ZR, O8 } from "../905/313095";
 import { X } from "../905/853613";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -110,7 +110,7 @@ export function $$A2(e, t, r) {
         let a = function (e) {
           if (getFeatureFlags().aip_flower_garden_design_logging && LinterCppBindings) return JSON.stringify(Object.fromEntries(LinterCppBindings.getVariableSetConsumptionForHighestNodeContainer(e)));
         }(t);
-        ds("ds_variable_reference_set", f, p, {
+        trackFileEvent("ds_variable_reference_set", f, p, {
           userId: E,
           variable_id: d,
           collection_id: S,
@@ -154,7 +154,7 @@ export function $$A2(e, t, r) {
       let E = ZR(u ?? O8(f), n.openFile);
       let b = X(E);
       let I = n.mirror.selectedStyleProperties.guid;
-      for (let t of (I && (s = [sessionLocalIDToString(I)]), s)) ds("ds_variable_reference_set", o, n, {
+      for (let t of (I && (s = [sessionLocalIDToString(I)]), s)) trackFileEvent("ds_variable_reference_set", o, n, {
         userId: d,
         variable_id: r?.value,
         collection_id: p,
@@ -189,7 +189,7 @@ export function $$x3(e, t) {
     let d = VariablesBindings.getSubscribedVariableInfo(e);
     let u = ZR(o ?? O8(d), r.openFile);
     let p = X(u);
-    for (let i of n) ds("ds_variable_reference_set", a, r, {
+    for (let i of n) trackFileEvent("ds_variable_reference_set", a, r, {
       userId: s,
       variable_id: e,
       value_type: T(t),

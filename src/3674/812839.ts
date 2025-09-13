@@ -14,7 +14,7 @@ import { JT } from "../figma_app/173838";
 import { Vz } from "../figma_app/198840";
 import { X$ } from "../905/612685";
 import { FUserVerificationStatusType, FPublicationStatusType } from "../figma_app/191312";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { LinkPrimitive } from "../figma_app/496441";
 import { customHistory } from "../905/612521";
 import { Gc } from "../905/63728";
@@ -140,7 +140,7 @@ function S({
     "data-tooltip-interactive": !0,
     "data-tooltip-max-width": 300,
     "data-tooltip-offset-y": 0,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     onClick: s ? void 0 : n,
     children: s ? jsx(_$$N, {}) : jsx(_$$m, {})
   });

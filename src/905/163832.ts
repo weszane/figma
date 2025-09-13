@@ -8,7 +8,7 @@ import { useRecording, useIsRecording } from "../905/959312";
 import { bq } from "../905/117474";
 import { F as _$$F } from "../905/768014";
 import { i as _$$i2 } from "../905/718764";
-import { Vg } from "../905/893109";
+import { identity } from "../905/893109";
 import { addEventlistenerWithCleanup, preventAndStopEvent } from "../905/955878";
 import { qE, KY } from "../905/875826";
 import { LI, t6, LC, f2, TX, Io, WQ, gU, VN, Vu, Re, BB, qE as _$$qE } from "../905/268491";
@@ -665,8 +665,8 @@ export function $$q0({
       style: {
         width: E.x,
         height: E.y,
-        [Vg("--fpl-contents-height")]: S ? void 0 : "100%",
-        [Vg("--fpl-contents-max-height")]: S ? void 0 : "100%"
+        [identity("--fpl-contents-height")]: S ? void 0 : "100%",
+        [identity("--fpl-contents-max-height")]: S ? void 0 : "100%"
       },
       onDoubleClick: o ? e => {
         let t = e.target.getAttribute("data-direction");

@@ -3,7 +3,7 @@ import { useRef, useState, useMemo, Component } from "react";
 import { useSelector, connect } from "react-redux";
 import { s_ } from "../905/17223";
 import { nR, $$, CY } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { Uu } from "../figma_app/471982";
 import { n7 } from "../905/926523";
@@ -131,7 +131,7 @@ export function $$O1(e) {
         children: g ? renderI18nText("community.merge_profile_modal.add_an_account_to_connect") : renderI18nText("community.merge_profile_modal.pick_the_account_you_want_to_connect")
       }), jsx("div", {
         className: "merge_profiles--connectUserRowsContainer--36Qzg",
-        children: g ? jsx(B, {
+        children: g ? jsx(SvgComponent, {
           svg: _$$A,
           useOriginalSrcFills_DEPRECATED: !0
         }) : h.map(e => jsx(P, {
@@ -220,7 +220,7 @@ class L extends Component {
               })
             }) : jsx("div", {
               className: T,
-              children: jsx(B, {
+              children: jsx(SvgComponent, {
                 svg: _$$A2,
                 useOriginalSrcFills_DEPRECATED: !0
               })
@@ -270,7 +270,7 @@ class L extends Component {
           children: e ? jsx(Ro, {
             entity: e,
             size: 96
-          }) : jsx(B, {
+          }) : jsx(SvgComponent, {
             svg: _$$A2,
             useOriginalSrcFills_DEPRECATED: !0
           })

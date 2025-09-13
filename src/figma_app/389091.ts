@@ -5,7 +5,7 @@ import { logger } from "../905/651849";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
 import { getRepoById } from "../905/760074";
 import { hL } from "../905/697795";
@@ -252,7 +252,7 @@ let $$ed34 = createOptimistThunk((e, t) => {
   }), t.userInitiated) {
     let r = e.getState();
     let n = r.timer.time?.timeRemainingMs > 0;
-    ds(`timer-modal-${t.state}`, r.openFile?.key, r, {
+    trackFileEvent(`timer-modal-${t.state}`, r.openFile?.key, r, {
       "multiplayer-users": S(r),
       "timer-active": n,
       source: t.source
@@ -277,7 +277,7 @@ let eu = createOptimistThunk((e, t) => {
       let n = Math.round((t.totalTimeMs - r.timer.time.totalTimeMs) / 1e3);
       e["time-added-s"] = n;
     } else "start-timer" === t.eventName && (e["duration-s"] = Math.round(t.totalTimeMs / 1e3));
-    ds(t.eventName, r.openFile?.key, r, e, {
+    trackFileEvent(t.eventName, r.openFile?.key, r, e, {
       forwardToDatadog: !0
     });
   }

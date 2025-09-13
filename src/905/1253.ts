@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { y as _$$y } from "../905/582657";
 import { r as _$$r } from "../905/571562";
 import d from "classnames";
@@ -75,7 +75,7 @@ export function $$k1(e) {
   let $ = useMemo(() => G.isShown && G.id === pickerID ? "instance_swap_toggle--selectedInstanceSwapPickerButton--fNyIE" : disableToggle ? "instance_swap_toggle--disabledInstanceSwapPickerButton--MPdD6 instance_swap_toggle--instanceSwapPickerButton--Yyiv7" : "instance_swap_toggle--instanceSwapPickerButton--Yyiv7", [disableToggle, G, pickerID]);
   let Z = useMemo(() => V ? [V] : [], [V]);
   return jsxs(Fragment, {
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       className: c()($, _$$s.alignLeft.$),
       ref: H,
       onClick: q,

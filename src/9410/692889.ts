@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { K } from "../905/443068";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { g as _$$g } from "../905/757007";
 import { W } from "../905/569454";
 import { getFeatureFlags } from "../905/601108";
@@ -10,7 +10,7 @@ import { useCanAccessFullDevMode, useCanUseDevModeDemoFile } from "../figma_app/
 import { D as _$$D } from "../905/882262";
 import { z4 } from "../905/37051";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export function $$g0({
   nodeId: e,
   sourceForLogging: t,
@@ -63,7 +63,7 @@ export function $$g0({
     disabled: !b,
     "aria-label": L,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": b ? L : R,
       "data-testid": "change-status-icon-button"
     },
@@ -71,13 +71,13 @@ export function $$g0({
   }) : null;
   let D = getFeatureFlags().dt_interactive_inspection_m2 ? w : !hasReadyStatus && !hasCompletedStatus;
   let M = !b || D;
-  return jsx($n, {
+  return jsx(Button, {
     variant: "secondary",
     onClick: N,
     disabled: M,
     "aria-label": L,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": M ? R : void 0,
       "data-tooltip-text-left": !0,
       "data-onboarding-key": i,

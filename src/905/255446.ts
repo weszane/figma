@@ -13,9 +13,9 @@ import { selectWithShallowEqual } from "../905/103090";
 import { Uz } from "../905/63728";
 import { r as _$$r } from "../905/520829";
 import { uP, nh } from "../figma_app/933328";
-import { Oo } from "../905/709171";
+import { compareWithGeneratedKey } from "../905/709171";
 import { Z } from "../905/104740";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { eY } from "../figma_app/722362";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { Av, Dg, eS, aD } from "../figma_app/646357";
@@ -120,7 +120,7 @@ export function $$F1(e) {
   let I = useMemo(() => D(outerArrayIndex, innerArrayIndex + 1, p), [p, outerArrayIndex, innerArrayIndex]);
   let w = useMemo(() => D(outerArrayIndex, innerArrayIndex - 1, p), [p, outerArrayIndex, innerArrayIndex]);
   let C = useCallback(() => {
-    v && t(QZ({
+    v && t(computeFullscreenViewportForNode({
       nodeId: getSingletonSceneGraph().guidFromDeveloperFriendlyId(v.instanceId),
       alwaysPan: !1,
       minSizePx: 32,
@@ -219,7 +219,7 @@ export function $$j2(e) {
     let d = useSelector(e => e.theme.visibleTheme);
     let c = getThemeBackgroundColor(d);
     let g = selectWithShallowEqual(e => selectOpenFileKey(e) || "");
-    let y = Oo(e, g);
+    let y = compareWithGeneratedKey(e, g);
     let b = useMemo(() => {
       if (null == t || "" === t) return Ok();
       let [e, i] = Thumbnail.generateThumbnailForNode(t, 0, 0, 2, {

@@ -2,15 +2,15 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { Hg } from "../figma_app/304955";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { FJ } from "../905/508367";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { selectCurrentFile } from "../figma_app/516028";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { IT, gY } from "../905/713695";
 import { ol } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
@@ -38,7 +38,7 @@ let $$S0 = registerModal(function (e) {
   let V = U.authenticated;
   let H = !!U.isLoading;
   let [z, W] = useState(!1);
-  let K = dq();
+  let K = useCurrentUserOrgId();
   let Y = ol();
   useEffect(() => {
     G || H ? W(!0) : W(!1);
@@ -202,7 +202,7 @@ let $$S0 = registerModal(function (e) {
       W(!1);
     }
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -223,7 +223,7 @@ let $$S0 = registerModal(function (e) {
               border: "1px solid rgba(235, 87, 87, 0.3)",
               borderRadius: "6px"
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: "danger",
               children: E
             })
@@ -235,7 +235,7 @@ let $$S0 = registerModal(function (e) {
               border: "1px solid rgba(39, 174, 96, 0.3)",
               borderRadius: "6px"
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: "success",
               children: v
             })
@@ -256,7 +256,7 @@ let $$S0 = registerModal(function (e) {
                     fontWeight: "bold",
                     marginBottom: "8px"
                   },
-                  children: jsx(_$$E, {
+                  children: jsx(TextWithTruncation, {
                     children: `Connected: ${B.name}`
                   })
                 }), jsx("div", {
@@ -264,7 +264,7 @@ let $$S0 = registerModal(function (e) {
                     fontSize: "12px",
                     color: "#666"
                   },
-                  children: jsx(_$$E, {
+                  children: jsx(TextWithTruncation, {
                     children: `ID: ${B.id} \u2022 Status: ${B.status}`
                   })
                 })]
@@ -282,7 +282,7 @@ let $$S0 = registerModal(function (e) {
                     fontSize: "13px",
                     marginBottom: "12px"
                   },
-                  children: jsx(_$$E, {
+                  children: jsx(TextWithTruncation, {
                     children: "Add Secret"
                   })
                 }), jsxs("div", {
@@ -298,7 +298,7 @@ let $$S0 = registerModal(function (e) {
                         fontSize: "12px",
                         color: "rgba(0, 0, 0, 0.6)"
                       },
-                      children: jsx(_$$E, {
+                      children: jsx(TextWithTruncation, {
                         children: "Secret Name"
                       })
                     }), jsx("input", {
@@ -323,7 +323,7 @@ let $$S0 = registerModal(function (e) {
                         fontSize: "12px",
                         color: "rgba(0, 0, 0, 0.6)"
                       },
-                      children: jsx(_$$E, {
+                      children: jsx(TextWithTruncation, {
                         children: "Secret Value"
                       })
                     }), jsx("input", {
@@ -347,12 +347,12 @@ let $$S0 = registerModal(function (e) {
                       display: "flex",
                       gap: "10px"
                     },
-                    children: [jsx($n, {
+                    children: [jsx(Button, {
                       variant: "secondary",
                       onClick: et,
                       disabled: z,
                       children: z ? "..." : "Add secret"
-                    }), jsx($n, {
+                    }), jsx(Button, {
                       variant: "secondary",
                       onClick: () => FJ(`https://supabase.com/dashboard/project/${B.id}/functions/secrets`),
                       disabled: z,
@@ -365,9 +365,9 @@ let $$S0 = registerModal(function (e) {
               style: {
                 marginBottom: "16px"
               },
-              children: O.length > 0 ? jsx(_$$E, {
+              children: O.length > 0 ? jsx(TextWithTruncation, {
                 children: O
-              }) : 0 === x.length ? jsx(_$$E, {
+              }) : 0 === x.length ? jsx(TextWithTruncation, {
                 children: "No projects available. Create a project in your Supabase dashboard first."
               }) : jsxs("div", {
                 style: {
@@ -378,7 +378,7 @@ let $$S0 = registerModal(function (e) {
                     marginBottom: 8,
                     fontWeight: "bold"
                   },
-                  children: jsx(_$$E, {
+                  children: jsx(TextWithTruncation, {
                     children: "Select a project to connect:"
                   })
                 }), jsx("div", {
@@ -413,7 +413,7 @@ let $$S0 = registerModal(function (e) {
                         style: {
                           fontWeight: "bold"
                         },
-                        children: jsx(_$$E, {
+                        children: jsx(TextWithTruncation, {
                           children: e.name
                         })
                       }), jsx("div", {
@@ -421,7 +421,7 @@ let $$S0 = registerModal(function (e) {
                           fontSize: "12px",
                           color: "#666"
                         },
-                        children: jsx(_$$E, {
+                        children: jsx(TextWithTruncation, {
                           children: `ID: ${e.id} \u2022 Status: ${e.status}`
                         })
                       })]
@@ -437,7 +437,7 @@ let $$S0 = registerModal(function (e) {
                 borderTop: "1px solid rgba(0, 0, 0, 0.1)",
                 paddingTop: "16px"
               },
-              children: [!B && jsx($n, {
+              children: [!B && jsx(Button, {
                 variant: "primary",
                 onClick: q,
                 disabled: z || !C,
@@ -449,32 +449,32 @@ let $$S0 = registerModal(function (e) {
                   gap: "12px",
                   marginTop: B ? "8px" : "0"
                 },
-                children: [B?.status === "ACTIVE_HEALTHY" && jsx($n, {
+                children: [B?.status === "ACTIVE_HEALTHY" && jsx(Button, {
                   variant: "primary",
                   onClick: Z,
                   disabled: z,
                   children: z ? "..." : "Deploy backend"
-                }), B && jsx($n, {
+                }), B && jsx(Button, {
                   variant: "secondary",
                   onClick: () => FJ(`https://supabase.com/dashboard/project/${B.id}/functions/make-server-${r.substring(0, 5)}/logs`),
                   disabled: z,
                   children: z ? "..." : "Server logs \u2197\uFE0F"
-                }), B && jsx($n, {
+                }), B && jsx(Button, {
                   variant: "secondary",
                   onClick: F.refetch,
                   disabled: z,
                   children: z ? "..." : "Refresh status"
-                }), B?.status === "ACTIVE_HEALTHY" && jsx($n, {
+                }), B?.status === "ACTIVE_HEALTHY" && jsx(Button, {
                   variant: "secondary",
                   onClick: Q,
                   disabled: z,
                   children: z ? "..." : "Pause"
-                }), B?.status === "INACTIVE" && jsx($n, {
+                }), B?.status === "INACTIVE" && jsx(Button, {
                   variant: "secondary",
                   onClick: ee,
                   disabled: z,
                   children: z ? "..." : "Restore"
-                }), B && jsx($n, {
+                }), B && jsx(Button, {
                   variant: "secondary",
                   onClick: J,
                   disabled: z,
@@ -487,7 +487,7 @@ let $$S0 = registerModal(function (e) {
                   borderTop: "1px solid rgba(0, 0, 0, 0.1)",
                   paddingTop: "12px"
                 },
-                children: jsx($n, {
+                children: jsx(Button, {
                   variant: "destructive",
                   onClick: $,
                   disabled: z,
@@ -501,7 +501,7 @@ let $$S0 = registerModal(function (e) {
               justifyContent: "center",
               padding: "16px 0"
             },
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "primary",
               onClick: X,
               disabled: z,

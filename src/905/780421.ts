@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { parsePxInt } from "../figma_app/783094";
 import { _A, W2 } from "../figma_app/814196";
 import { Point } from "../905/736624";
@@ -43,11 +43,11 @@ export class $$f0 extends PureComponent {
           children: renderI18nText("desktop_open_views.open_in_desktop_from_now_on_modal.preferences_message")
         }), jsxs("div", {
           className: "open_desktop_app_from_now_on_modal--buttonRow--gtV4g",
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: this.onClose,
             children: renderI18nText("desktop_open_views.modal.dismiss_button")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: this.onAlwaysClick,
             children: renderI18nText("desktop_open_views.open_in_desktop_from_now_on_modal.always_open_in_app_button")
           })]

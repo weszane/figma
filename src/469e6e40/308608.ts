@@ -28,7 +28,7 @@ import { VisualBellIcon } from "../905/576487";
 import { AutoLayout, Spacer } from "../905/470281";
 import { $ as _$$$, V as _$$V2 } from "../905/355181";
 import { In } from "../905/672640";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Y as _$$Y2 } from "../figma_app/515088";
 import { x9 } from "../4452/846771";
 import { Lv, ps, yz, i5, uH, V7, z7, ZY, Xv, r1, OL, L8, Bk, MI, YC, dC, lJ, Zm, k_ } from "../figma_app/845611";
@@ -65,9 +65,9 @@ import { Jn } from "../905/17223";
 import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { lb } from "../3973/538504";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { I1 } from "../figma_app/990058";
 import { r as _$$r2 } from "../469e6e40/505264";
 import { B6G, XMZ } from "../figma_app/27776";
@@ -144,7 +144,7 @@ let ev = registerModal(function ({
     numTotalRequests: t,
     numHiddenRequests: t - a
   }) : renderI18nText("admin_dashboard.requests.approve_all_modal.body", {
-    numRequests: jsx(_$$E, {
+    numRequests: jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: t
     })
@@ -174,7 +174,7 @@ let ev = registerModal(function ({
       })]
     }), jsx("div", {
       className: _$$s2.p16.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: o
       })
     }), jsxs(AutoLayout, {
@@ -307,7 +307,7 @@ let eI = registerModal(function ({
   });
   let b = "loaded" === x.status;
   let v = "disabled" === x.status;
-  let f = b ? oA(x.data?.org)?.baseOrgUserMembersById ?? [] : null;
+  let f = b ? getResourceDataOrFallback(x.data?.org)?.baseOrgUserMembersById ?? [] : null;
   let j = l.length > 0 && f ? l.find(e => e.id === f[0]?.licenseGroupMember?.licenseGroupId) ?? null : null;
   let y = () => {
     _(hideModal());
@@ -318,7 +318,7 @@ let eI = registerModal(function ({
     size: 400,
     padding: 0,
     height: 400,
-    children: jsx(qc, {
+    children: jsx(LoadingOverlay, {
       size: "medium"
     })
   }) : jsx(fu, {
@@ -1174,7 +1174,7 @@ export function $$eD0({
         trusted: !0,
         onClick: q,
         className: _$$s2.fontMedium.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText("admin_dashboard.requests.view_history")
         })
       }), tg > 0 && jsx("div", {

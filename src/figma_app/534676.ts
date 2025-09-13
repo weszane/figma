@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import i from "classnames";
 import { isAnyMobile } from "../figma_app/778880";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { X2 } from "../figma_app/808294";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { m_ } from "../figma_app/209680";
 import { A } from "../6828/154709";
 var a = i;
@@ -28,7 +28,7 @@ export function $$f1({
         children: [jsx("div", {
           className: "small" === r ? m : h,
           children: a
-        }), t && jsx(B, {
+        }), t && jsx(SvgComponent, {
           className: "resource_badge_subtext--caret--weiCk",
           svg: A
         })]
@@ -41,7 +41,7 @@ export function $$E2({
 }) {
   return jsx("div", {
     className: a()(_, "small" === e ? m : h),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.detail_view.this_plugin_requires_third_party_payment_if_you_decide_to_upgrade"),
     "data-tooltip-show-immediately": !0,
     children: renderI18nText("community.buyer.in_app_purchase")

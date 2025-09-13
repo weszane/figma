@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Xr } from "../figma_app/27355";
 import { oJ } from "../905/63728";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
 import { getUserId } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
@@ -41,7 +41,7 @@ export function $$h1({
       folderId: r,
       isDraftsFolder: t,
       callback: e => {
-        Cu({
+        logAndTrackCTA({
           userId: E,
           fileKey: e
         }, i);

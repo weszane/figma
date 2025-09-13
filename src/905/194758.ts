@@ -12,7 +12,7 @@ import { reportError } from "../905/11";
 import { a as _$$a } from "../905/29104";
 import { getI18nString } from "../905/303541";
 import { BK } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { j } from "../905/834956";
 import { JT } from "../figma_app/632248";
 import { B3, Ag } from "../figma_app/862289";
@@ -98,7 +98,7 @@ export function $$C0({
       "aria-label": R,
       onClick: () => i.toggle(),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": R
       },
       children: jsx(V, {})

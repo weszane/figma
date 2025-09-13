@@ -2,7 +2,7 @@ import { ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { WW } from "../905/521428";
+import { ButtonLarge } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import p from "../vendor/223926";
 import { A as _$$A } from "../905/920142";
@@ -16,13 +16,13 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, ManifestEditorType } from "../figma_app/155287";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { _r } from "../905/291714";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O2 } from "../905/969533";
 import { wv } from "../figma_app/439493";
 import { Fn } from "../figma_app/769101";
@@ -72,7 +72,7 @@ function B({
   showChevron: c,
   children: p
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: "whiteboard_inline_menu_icon_button--iconButton40--yjNDz",
     onClick: e,
     recordingKey: t,
@@ -109,10 +109,10 @@ function S(e) {
   }) : tooltipName ?? plugin.name;
   let s = hasMultipleOptions ? {
     tooltip: plugin.name,
-    tooltipType: Ib.TEXT
+    tooltipType: KindEnum.TEXT
   } : {
     tooltip: I,
-    tooltipType: p && tooltipName ? Ib.SPECIAL : void 0,
+    tooltipType: p && tooltipName ? KindEnum.SPECIAL : void 0,
     tooltipName,
     tooltipDescription: "string" == typeof tooltipDescription ? tooltipDescription : String(tooltipDescription)
   };
@@ -158,13 +158,13 @@ function E(e) {
       let p = generateRecordingKey("relaunchMenuSelectorOption", l.pluginTypeAndID, l.relaunchButton.command);
       return jsx("div", {
         "data-tooltip": I,
-        "data-tooltip-type": l.relaunchButton.name && a ? Ib.SPECIAL : void 0,
+        "data-tooltip-type": l.relaunchButton.name && a ? KindEnum.SPECIAL : void 0,
         "data-tooltip-show-right": !0,
         "data-tooltip-name": l.relaunchButton.name,
         "data-tooltip-description": l.relaunchButton.description,
         children: jsx("div", {
           className: "plugin_relaunch_content--menuItem--fZT86",
-          children: jsxs(WW, {
+          children: jsxs(ButtonLarge, {
             variant: "secondary",
             onClick: i,
             recordingKey: p,
@@ -207,7 +207,7 @@ export function $$F0() {
   let I = useDispatch();
   let D = e => I(af({
     id: e,
-    resourceType: n[e]?.is_widget ? bD.WIDGET : bD.PLUGIN
+    resourceType: n[e]?.is_widget ? ResourceType.WIDGET : ResourceType.PLUGIN
   }));
   let k = getRelaunchablePlugins(e, n, r, a, t || 0, (e, t) => C.current.debounceRefresh(e, () => D(e), t), ManifestEditorType.FIGJAM);
   let V = u()(k, e => e.pluginTypeAndID);

@@ -6,7 +6,7 @@ import { useSubscription } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
 import { serializeQuery } from "../905/634134";
 import { K } from "../figma_app/748328";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { FStudentTeamStatusType } from "../figma_app/191312";
 import { OrgTeamsInAdminView, OrgTeamView } from "../figma_app/43951";
 import { Ef } from "../905/81982";
@@ -166,7 +166,7 @@ function v({
   orgId: p
 }) {
   let h = !d && getFeatureFlags().org_teams_in_admin_lg_view && !c;
-  let m = dq();
+  let m = useCurrentUserOrgId();
   let g = useSubscription(h ? OrgTeamsInAdminView : OrgTeamView, {
     orgId: p ?? m,
     firstPageSize: i || 25,

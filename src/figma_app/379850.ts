@@ -4,13 +4,13 @@ import { debugState } from "../905/407919";
 import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
 import { F } from "../905/989956";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
 export function $$p3(e, t, r) {
   if ("fullscreen" !== t.view) return;
   let n = debugState.getState();
-  n.selectedView?.showOverview && "overview_search_clicked" === r && ds("Dev Mode Overview Pages Search Clicked", n.openFile?.key, n, {
+  n.selectedView?.showOverview && "overview_search_clicked" === r && trackFileEvent("Dev Mode Overview Pages Search Clicked", n.openFile?.key, n, {
     pageId: t.nodeId
   });
   "editorType" in t && t.editorType === FEditorType.Design && Ym(n, FEditorType.Design, r);

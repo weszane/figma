@@ -3,7 +3,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { N } from "../905/438674";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -76,7 +76,7 @@ export let $$v0 = registerModal(function (e) {
       planId: plan.key.parentId,
       planType: plan.type
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: I,
       width: "lg",
       children: jsx("div", {

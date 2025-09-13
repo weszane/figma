@@ -1,26 +1,26 @@
-import { useSelector } from "react-redux";
-import { filterNotNullish } from "../figma_app/656233";
-import { throwTypeError } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { memoizeByArgs } from "../figma_app/815945";
-import { subscribeAndAwaitData } from "../905/553831";
-import { Wk, oA } from "../905/723791";
-import { getI18nString } from "../905/303541";
-import { DQ, Pw } from "../figma_app/121751";
-import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
-import { FPlanLimitationType, FFileType, FPaymentHealthStatusType } from "../figma_app/191312";
-import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from "../figma_app/43951";
-import { hasTeamStatePaidAccess, STANDARD_LIMIT } from "../figma_app/345997";
-import { canAdminTeam } from "../figma_app/642025";
-import { t as _$$t2 } from "../905/504360";
-import { AccessLevelEnum } from "../905/557142";
-import { d as _$$d } from "../figma_app/135698";
-import { DashboardSections, MemberSections, BillingSections } from "../905/548208";
-import { D as _$$D } from "../905/347702";
-import { ye } from "../figma_app/528509";
-import { resolveTeamId } from "../905/515860";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { M4 } from "../905/713695";
+import { useSelector } from 'react-redux';
+import { createReduxSubscriptionAtomWithState } from '../905/270322';
+import { getI18nString } from '../905/303541';
+import { extractPropertyFromNestedObjects } from '../905/504360';
+import { resolveTeamId } from '../905/515860';
+import { BillingSections, DashboardSections, MemberSections } from '../905/548208';
+import { subscribeAndAwaitData } from '../905/553831';
+import { AccessLevelEnum } from '../905/557142';
+import { getFeatureFlags } from '../905/601108';
+import { M4 } from '../905/713695';
+import { getResourceDataOrFallback } from '../905/723791';
+import { createLoadedResource } from '../905/957591';
+import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from '../figma_app/43951';
+import { isReduxDeprecationCutover, ConfigGroups } from '../figma_app/121751';
+import { UserFieldEnum } from '../figma_app/135698';
+import { FFileType, FPaymentHealthStatusType, FPlanLimitationType } from '../figma_app/191312';
+import { hasTeamStatePaidAccess, STANDARD_LIMIT } from '../figma_app/345997';
+import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338';
+import { throwTypeError } from '../figma_app/465776';
+import { ye } from '../figma_app/528509';
+import { canAdminTeam } from '../figma_app/642025';
+import { filterNotNullish } from '../figma_app/656233';
+import { memoizeByArgs } from '../figma_app/815945';
 export async function $$x10(e) {
   let t = [];
   let r = {};
@@ -38,9 +38,9 @@ export async function $$x10(e) {
 export let $$N3 = Object.freeze({
   designFileCount: 0,
   whiteboardFileCount: 0,
-  slideFileCount: "0",
-  sitesFileCount: "0",
-  totalFileCount: Wk(0)
+  slideFileCount: '0',
+  sitesFileCount: '0',
+  totalFileCount: createLoadedResource(0)
 });
 export async function $$C19(e) {
   let t = [];
@@ -59,7 +59,7 @@ export async function $$C19(e) {
   }));
   return await w(t, r);
 }
-let w = _$$D(async (e, t) => {
+let w = async (e, t) => {
   let r = {};
   let n = {};
   for (let t of e) {
@@ -88,63 +88,67 @@ let w = _$$D(async (e, t) => {
     }));
   });
   return i?.[0];
-});
+};
 export function $$O0(e) {
   return !!(e.team_role || (e?.edit_roles?.design_files?.length || 0) > 0 || (e?.edit_roles?.whiteboard_files?.length || 0) > 0 || (e?.edit_roles?.folders?.length || 0) > 0 || (e?.view_roles?.file_count || 0) > 0 || (e?.view_roles?.folder_count || 0) > 0);
 }
 let $$R26 = e => !!e?.restrictions_list?.includes(FPlanLimitationType.FILES_LIMITED_LEGACY);
 let $$L16 = e => !!e?.restrictions_list?.includes(FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA);
-var $$P25 = (e => (e[e.ADD_PROJECT = 0] = "ADD_PROJECT", e[e.ADD_EDITOR = 1] = "ADD_EDITOR", e[e.ADD_FILE = 2] = "ADD_FILE", e[e.ADD_N_FILES = 3] = "ADD_N_FILES", e))($$P25 || {});
-var D = (e => (e.NO_RESTRICTIONS = "noRestrictions", e.FULLY_RESTRICTED = "fullyRestricted", e.FILE_COUNT_LIMIT = "fileCountLimit", e))(D || {});
+var $$P25 = (e => (e[e.ADD_PROJECT = 0] = 'ADD_PROJECT', e[e.ADD_EDITOR = 1] = 'ADD_EDITOR', e[e.ADD_FILE = 2] = 'ADD_FILE', e[e.ADD_N_FILES = 3] = 'ADD_N_FILES', e))($$P25 || {});
+var D = (e => (e.NO_RESTRICTIONS = 'noRestrictions', e.FULLY_RESTRICTED = 'fullyRestricted', e.FILE_COUNT_LIMIT = 'fileCountLimit', e))(D || {});
 function k(e) {
   switch (e) {
     case FFileType.DESIGN:
       return {
-        starterRestrictionType: "fileCountLimit",
+        starterRestrictionType: 'fileCountLimit',
         teamRestrictions: new Set([FPlanLimitationType.FILES_LIMITED_LEGACY, FPlanLimitationType.FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "designFileCount"
+        teamFileCountsKey: 'designFileCount'
       };
     case FFileType.WHITEBOARD:
       return {
-        starterRestrictionType: "fileCountLimit",
+        starterRestrictionType: 'fileCountLimit',
         teamRestrictions: new Set([FPlanLimitationType.WHITEBOARD_FILES_LIMITED_BETA, FPlanLimitationType.WHITEBOARD_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "whiteboardFileCount"
+        teamFileCountsKey: 'whiteboardFileCount'
       };
     case FFileType.SLIDES:
       return {
-        starterRestrictionType: "fileCountLimit",
+        starterRestrictionType: 'fileCountLimit',
         teamRestrictions: new Set([FPlanLimitationType.SLIDE_FILES_LIMITED_BETA, FPlanLimitationType.SLIDE_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "slideFileCount"
+        teamFileCountsKey: 'slideFileCount'
       };
     case FFileType.SITES:
-      if (!getFeatureFlags().sts_starter_enabled) return {
-        starterRestrictionType: "fullyRestricted"
-      };
-      if (getFeatureFlags().sites_design_starter_combined_file_limit) return {
-        starterRestrictionType: "fileCountLimit",
-        teamRestrictions: new Set([FPlanLimitationType.FILES_LIMITED_LEGACY, FPlanLimitationType.FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "sitesFileCount"
-      };
+      if (!getFeatureFlags().sts_starter_enabled) {
+        return {
+          starterRestrictionType: 'fullyRestricted'
+        };
+      }
+      if (getFeatureFlags().sites_design_starter_combined_file_limit) {
+        return {
+          starterRestrictionType: 'fileCountLimit',
+          teamRestrictions: new Set([FPlanLimitationType.FILES_LIMITED_LEGACY, FPlanLimitationType.FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
+          teamFileCountsKey: 'sitesFileCount'
+        };
+      }
       return {
-        starterRestrictionType: "fileCountLimit",
+        starterRestrictionType: 'fileCountLimit',
         teamRestrictions: new Set([FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "totalFileCount"
+        teamFileCountsKey: 'totalFileCount'
       };
     case FFileType.COOPER:
       return getFeatureFlags().cooper ? {
-        starterRestrictionType: "fileCountLimit",
+        starterRestrictionType: 'fileCountLimit',
         teamRestrictions: new Set([FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "totalFileCount"
+        teamFileCountsKey: 'totalFileCount'
       } : {
-        starterRestrictionType: "fullyRestricted"
+        starterRestrictionType: 'fullyRestricted'
       };
     case FFileType.FIGMAKE:
       return getFeatureFlags().bake_starter_limit ? {
-        starterRestrictionType: "fileCountLimit",
+        starterRestrictionType: 'fileCountLimit',
         teamRestrictions: new Set([FPlanLimitationType.GLOBAL_FILES_LIMITED, FPlanLimitationType.GLOBAL_FILES_LIMITED_LEGACY]),
-        teamFileCountsKey: "totalFileCount"
+        teamFileCountsKey: 'totalFileCount'
       } : {
-        starterRestrictionType: "fullyRestricted"
+        starterRestrictionType: 'fullyRestricted'
       };
     default:
       throwTypeError(e);
@@ -162,13 +166,13 @@ export function $$M14(e, t) {
       {
         let r = k(t.editorType);
         switch (r.starterRestrictionType) {
-          case "fullyRestricted":
+          case 'fullyRestricted':
             return !1;
-          case "noRestrictions":
+          case 'noRestrictions':
             return !0;
-          case "fileCountLimit":
+          case 'fileCountLimit':
             if (t.isDestinationTeamDrafts) return !0;
-            if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (oA(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
+            if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (getResourceDataOrFallback(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
             if (t.teamFileCounts) {
               let e = Number(t.teamFileCounts[r.teamFileCountsKey]);
               if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? e += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (e += Number(t.teamFileCounts.designFileCount ?? 0))), e >= STANDARD_LIMIT) return !1;
@@ -182,14 +186,14 @@ export function $$M14(e, t) {
       {
         let r = k(t.editorType);
         switch (r.starterRestrictionType) {
-          case "fullyRestricted":
+          case 'fullyRestricted':
             return !1;
-          case "noRestrictions":
+          case 'noRestrictions':
             return !0;
-          case "fileCountLimit":
+          case 'fileCountLimit':
             {
-              if (0 === t.nNonDraftFilesToAdd) return !0;
-              if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (oA(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
+              if (t.nNonDraftFilesToAdd === 0) return !0;
+              if (e.restrictionsList?.some(e => r.teamRestrictions.has(e)) || FPlanLimitationType.GLOBAL_FILES_MUST_CHECK && e.restrictionsList?.includes(FPlanLimitationType.GLOBAL_FILES_MUST_CHECK) && t.teamFileCounts && (getResourceDataOrFallback(t.teamFileCounts.totalFileCount) ?? 0) >= STANDARD_LIMIT) return !1;
               let n = Number(t.teamFileCounts[r.teamFileCountsKey]);
               if (getFeatureFlags().sites_design_starter_combined_file_limit && (t.editorType === FFileType.DESIGN ? n += Number(t.teamFileCounts.sitesFileCount ?? 0) : t.editorType === FFileType.SITES && (n += Number(t.teamFileCounts.designFileCount ?? 0))), n + t.nNonDraftFilesToAdd > STANDARD_LIMIT) return !1;
               return !0;
@@ -215,29 +219,31 @@ export function $$j5(e, t) {
   let r = Object.values(e.teams);
   let n = Object.values(e.authedTeamsById);
   if (setupShadowRead({
-    oldValue: 1 === r.length && canAdminTeam(r[0].id, e),
+    oldValue: r.length === 1 && canAdminTeam(r[0].id, e),
     newValue: t?.canAdmin,
     label: adminPermissionConfig.gen0OnboardingOnlyTeam.canAdmin,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     maxReports: 1,
     contextArgs: {
       currentTeamId: t?.id,
       userId: e.user?.id,
       teams: String(r.map(e => e.id))
     }
-  })) return setupShadowRead({
-    oldValue: r[0],
-    newValue: r.find(e => e.id === t?.id) || null,
-    label: adminPermissionConfig.gen0OnboardingOnlyTeam.currentTeamFromState,
-    enableFullRead: DQ(Pw.GROUP_7),
-    maxReports: 1,
-    contextArgs: {
-      currentTeamId: t?.id,
-      userId: e.user?.id,
-      teams: String(r.map(e => e.id))
-    }
-  });
-  if (0 === r.length && 1 === n.length) {
+  })) {
+    return setupShadowRead({
+      oldValue: r[0],
+      newValue: r.find(e => e.id === t?.id) || null,
+      label: adminPermissionConfig.gen0OnboardingOnlyTeam.currentTeamFromState,
+      enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
+      maxReports: 1,
+      contextArgs: {
+        currentTeamId: t?.id,
+        userId: e.user?.id,
+        teams: String(r.map(e => e.id))
+      }
+    });
+  }
+  if (r.length === 0 && n.length === 1) {
     let t = e.user?.id;
     if (t) return e.teamAdminRolesForAuthedUsers && e.teamAdminRolesForAuthedUsers[t].find(e => e.team_id === n[0].id) ? n[0] : null;
   }
@@ -255,52 +261,52 @@ export function $$B12(e) {
 }
 export function $$G11(e) {
   switch (e) {
-    case _$$d.NAME:
-      return getI18nString("team_view.team_members_table_column.name");
-    case _$$d.ACTIVE_AT:
-      return getI18nString("team_view.team_members_table_column.active_at");
-    case _$$d.DESIGN_PAID_STATUS:
-      return getI18nString("team_view.team_members_table_column.design_role.seat_rename");
-    case _$$d.FIGJAM_PAID_STATUS:
-      return getI18nString("team_view.team_members_table_column.figjam_role.seat_rename");
-    case _$$d.BILLING_INTERVAL:
-      return getI18nString("team_view.team_members_table_column.billing_interval");
+    case UserFieldEnum.NAME:
+      return getI18nString('team_view.team_members_table_column.name');
+    case UserFieldEnum.ACTIVE_AT:
+      return getI18nString('team_view.team_members_table_column.active_at');
+    case UserFieldEnum.DESIGN_PAID_STATUS:
+      return getI18nString('team_view.team_members_table_column.design_role.seat_rename');
+    case UserFieldEnum.FIGJAM_PAID_STATUS:
+      return getI18nString('team_view.team_members_table_column.figjam_role.seat_rename');
+    case UserFieldEnum.BILLING_INTERVAL:
+      return getI18nString('team_view.team_members_table_column.billing_interval');
   }
 }
 export function $$V23(e, t) {
   switch (e) {
     case DashboardSections.DASHBOARD:
-      return getI18nString("team_view.toolbar.dashboard");
+      return getI18nString('team_view.toolbar.dashboard');
     case DashboardSections.MEMBERS:
-      return getI18nString("team_view.toolbar.members");
+      return getI18nString('team_view.toolbar.members');
     case DashboardSections.DRAFTS:
-      return getI18nString("team_view.toolbar.drafts");
+      return getI18nString('team_view.toolbar.drafts');
     case DashboardSections.CONTENT:
       switch (t) {
         case MemberSections.ABANDONED_DRAFTS:
-          return getI18nString("team_view.toolbar.drafts");
+          return getI18nString('team_view.toolbar.drafts');
         case MemberSections.CONNECTED_PROJECTS:
-          return getI18nString("team_view.toolbar.connected_projects");
+          return getI18nString('team_view.toolbar.connected_projects');
         default:
-          return getI18nString("team_view.toolbar.content");
+          return getI18nString('team_view.toolbar.content');
       }
     case DashboardSections.SETTINGS:
-      return getI18nString("team_view.toolbar.settings");
+      return getI18nString('team_view.toolbar.settings');
     case DashboardSections.BILLING:
       switch (t) {
         case BillingSections.OVERVIEW:
-          return getI18nString("team_view.toolbar.billing.overview");
+          return getI18nString('team_view.toolbar.billing.overview');
         case BillingSections.INVOICES:
-          return getI18nString("team_view.toolbar.billing.invoices");
+          return getI18nString('team_view.toolbar.billing.invoices');
         default:
-          return getI18nString("team_view.toolbar.billing");
+          return getI18nString('team_view.toolbar.billing');
       }
     default:
       throwTypeError(e);
   }
 }
-let H = new RegExp(/[https?:?\/\/]?[a-z.]*figma[\-.\da-z:]*\/files\/([A-z0-9]*)\/team\/(\d+)/);
-let z = new RegExp(/[https?:?\/\/]?[a-z.]*figma[\-.\da-z:]*\/files\/team\/(\d+)/);
+let H = new RegExp(/[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/([A-z0-9]*)\/team\/(\d+)/);
+let z = new RegExp(/[htps?:/]?[a-z.]*figma[\-.\da-z:]*\/files\/team\/(\d+)/);
 export function $$W7(e) {
   return H.test(e);
 }
@@ -308,16 +314,16 @@ export function $$K1(e) {
   return z.test(e);
 }
 export function $$Y4(e) {
-  let t = new URL(e).pathname.match("team/([A-z0-9]*)");
+  let t = new URL(e).pathname.match('team/([A-z0-9]*)');
   return t ? t[1] : null;
 }
 export function $$$15() {
-  return useSelector(e => resolveTeamId(e)) || "";
+  return useSelector(e => resolveTeamId(e)) || '';
 }
 export function $$X21() {
   return useSelector(e => {
     let t = resolveTeamId(e);
-    return "" === t || null == e.teams ? null : e.teams[t];
+    return t === '' || e.teams == null ? null : e.teams[t];
   }) || null;
 }
 export let $$q8 = createReduxSubscriptionAtomWithState(e => e.teams[resolveTeamId(e)] || null);
@@ -325,9 +331,9 @@ export function $$J6(e) {
   return e.teams[resolveTeamId(e)] || null;
 }
 export function $$Z13(e, t, r) {
-  return e ? Object.keys(_$$t2(t.byTeamId, e.id)).filter(e => r[e]) : [];
+  return e ? Object.keys(extractPropertyFromNestedObjects(t.byTeamId, e.id)).filter(e => r[e]) : [];
 }
-export let $$Q17 = memoizeByArgs(function (e, t, r) {
+export let $$Q17 = memoizeByArgs((e, t, r) => {
   return e ? $$Z13(e, t, r).map(e => r[e]) : [];
 });
 export function $$ee20(e, t) {
@@ -337,7 +343,7 @@ export function $$ee20(e, t) {
   e.sort((e, r) => {
     let n = t.indexOf(e.id);
     let i = t.indexOf(r.id);
-    return -1 === n && -1 === i ? e.createdAt < r.createdAt ? 1 : -1 : n - i;
+    return n === -1 && i === -1 ? e.createdAt < r.createdAt ? 1 : -1 : n - i;
   });
   return e.map(e => e.id);
 }
@@ -362,7 +368,7 @@ export function $$er2(e, t, r) {
   return n > 1;
 }
 export function $$en18(e) {
-  return !!e && !!e.match(/^[0-9]+$/);
+  return !!e && !!e.match(/^\d+$/);
 }
 export const BU = $$O0;
 export const Cl = $$K1;

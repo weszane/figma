@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { VariableResolvedDataType } from "../figma_app/763686";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { MM, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
@@ -14,7 +14,7 @@ import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
 import { f4 } from "../figma_app/722362";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { $j } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
@@ -33,7 +33,7 @@ export function $$N0({
   recordingKey: o
 }) {
   let l = useDispatch();
-  let c = U();
+  let c = trackFileEventWithStore();
   let u = Um();
   let p = useRef(null);
   let h = lF();
@@ -92,7 +92,7 @@ function P({
       e.stopPropagation();
       e.preventDefault();
     },
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "aria-label": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
     "data-tooltip": getI18nString("fullscreen.properties_panel.borders.border_per_side"),
     dataTestId: `stroke-button-${isInvalidValue(a) ? "mixed" : a.join(",")}`,
@@ -251,7 +251,7 @@ function L({
       bigNudgeAmount,
       className: e,
       "data-tooltip": getI18nString("fullscreen.properties_panel.borders.stroke_width"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dataTestId: d,
       dispatch: _,
       inputClassName: "borders--strokeInput--AhOA8 raw_components--flushLeft--YH-5P",

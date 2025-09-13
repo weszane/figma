@@ -36,7 +36,7 @@ import { JT } from "../figma_app/173838";
 import { Em, m0 } from "../figma_app/976749";
 import { h as _$$h } from "../905/864281";
 import { kD, J3, JU, kN } from "../figma_app/622574";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { getRepoByIdAlt, isDefaultFile, isBranchAlt } from "../905/760074";
 import { m as _$$m, t as _$$t2 } from "../905/364535";
 import { $n } from "../905/930279";
@@ -797,7 +797,7 @@ let ti = memo(function ({
             })]
           }), th && c.canEdit && jsx(Pu, {
             onClick: () => {
-              Cu({
+              logAndTrackCTA({
                 name: "slides_file_dropdown_entrypoint"
               });
               fx(c, u).then(e => {

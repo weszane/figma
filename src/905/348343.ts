@@ -1,13 +1,13 @@
 import { Yp } from "../figma_app/740025";
 import { a6 } from "../figma_app/198840";
 import { getCurrentPluginVersion } from "../figma_app/300692";
-import { mr } from "../figma_app/45218";
+import { isWidgetOrPlugin } from "../figma_app/45218";
 export let $$o0 = {
   displayName: "DescriptionField",
   fetchInitialValue: ({
     existingResourceContent: e
   }) => e ? function (e) {
-    return "description" in e ? e.description || "" : mr(e) ? getCurrentPluginVersion(e)?.description || "" : a6(e).description;
+    return "description" in e ? e.description || "" : isWidgetOrPlugin(e) ? getCurrentPluginVersion(e)?.description || "" : a6(e).description;
   }(e) : "",
   validate: ({
     valueRequired: e

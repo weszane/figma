@@ -3,9 +3,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { atom, Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { z } from "../905/239603";
 import o from "../vendor/260986";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { debugState } from "../905/407919";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { Vg } from "../figma_app/147952";
@@ -13,7 +13,7 @@ import { nl, cW, ZT } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { RecentlyUsedActionsView } from "../figma_app/43951";
 import { getPluginByFileId } from "../figma_app/300692";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { CN } from "../figma_app/915202";
 import { hasLocalFileId, SV } from "../figma_app/155287";
 var l = o;
@@ -28,18 +28,18 @@ export function $$S1() {
   let v = useDispatch();
   let A = [];
   let x = [];
-  let N = _$$A(() => {
+  let N = useDebouncedCallback(() => {
     A.length > 0 && v(Vg({
-      resourceType: bD.PLUGIN,
+      resourceType: ResourceType.PLUGIN,
       resourceIds: A
     }));
     x.length > 0 && v(Vg({
-      resourceType: bD.WIDGET,
+      resourceType: ResourceType.WIDGET,
       resourceIds: x
     }));
   }, 500);
   if (!e.data) return [];
-  let C = oA(e.data.actionsHistory);
+  let C = getResourceDataOrFallback(e.data.actionsHistory);
   if (!C || !C.recentlyUsedActions) return [];
   let w = z.array(CN).safeParse(C.recentlyUsedActions);
   if (!w.success) {

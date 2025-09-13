@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { getThemeContextOrDefault } from "../905/158740";
 function l() {
@@ -25,7 +25,7 @@ export let $$d0 = forwardRef(({
   let {
     version
   } = getThemeContextOrDefault();
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     className: "fake-select--fakeSelect--ocszf",
     ref: r,
     ...i,

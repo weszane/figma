@@ -5,7 +5,7 @@ import { VariableResolvedDataType } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { useStableMemo } from "../905/19536";
 import { getFileKey } from "../905/412913";
-import { Ui } from "../905/709171";
+import { compareLibraryKeyWithString } from "../905/709171";
 import { nR } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { SS } from "../figma_app/936646";
@@ -35,7 +35,7 @@ export function $$$$A0(e, t, i) {
         fileName: r
       }), t.add(e));
     }
-    if (b.data) for (let t of b.data) (y && Ui(y, t.libraryKey) || m && Ui(m, t.libraryKey) || function (e, t, i) {
+    if (b.data) for (let t of b.data) (y && compareLibraryKeyWithString(y, t.libraryKey) || m && compareLibraryKeyWithString(m, t.libraryKey) || function (e, t, i) {
       for (let n of new Set((t ?? [null]).reduce((e, t) => (e.push(...function (e, t) {
         switch (e) {
           case VariableResolvedDataType.BOOLEAN:

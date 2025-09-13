@@ -1,16 +1,16 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import a from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $ } from "../905/355181";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { qD } from "../figma_app/471982";
 import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
 import { XL } from "../figma_app/684168";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { S } from "../905/404161";
 import { pF, Vj, xo, tW, bv, sw } from "../905/427932";
 import { A as _$$A } from "../6828/718668";
@@ -22,12 +22,12 @@ export function $$v0({
   return jsxs("div", {
     className: pF,
     "data-tooltip": e,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-testid": "disabled-text",
     children: [jsx("div", {
       className: Vj,
       children: getI18nString("community.try.unavailable")
-    }), jsx(B, {
+    }), jsx(SvgComponent, {
       svg: _$$A2,
       svgClassName: xo
     })]
@@ -72,7 +72,7 @@ function I(e) {
   if (workspace.publicPluginsOrWidgetDisabled) {
     if (hasPendingRequest) return jsx("div", {
       className: _$$s.mlAuto.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "secondary",
         children: renderI18nText("community.try.pick_workspace.approval_pending")
@@ -103,7 +103,7 @@ function I(e) {
         children: jsx($, {
           disabled: !0,
           "data-tooltip": e,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           children: renderI18nText("community.try.pick_workspace.request_approval")
         })
       });
@@ -115,7 +115,7 @@ function I(e) {
       })
     });
   }
-  return jsx(B, {
+  return jsx(SvgComponent, {
     className: _$$s.pl16.pr16.mlAuto.colorIcon.$,
     svg: _$$A,
     dataTestId: "chevron-right"
@@ -149,12 +149,12 @@ function E({
       className: _$$s.flex.flexColumn.itemsStart.mr8.$,
       children: [jsx("div", {
         className: bv,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 13,
           color: "default",
           children: t.workspaceName
         })
-      }), t.user ? jsx(_$$E, {
+      }), t.user ? jsx(TextWithTruncation, {
         fontSize: 11,
         color: "secondary",
         children: t.user.email
@@ -167,7 +167,7 @@ function x(e) {
     workspace: e.workspace,
     disabled: !1,
     onClick: e.onClick,
-    rowIcon: jsx(B, {
+    rowIcon: jsx(SvgComponent, {
       className: _$$s.pl16.pr16.mlAuto.colorIcon.$,
       svg: _$$A,
       dataTestId: "chevron-right"
@@ -237,12 +237,12 @@ export function $$w2(e) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: _$$s.alignCenter.$,
-      children: "manage_allowlist" === e.mode ? jsx(_$$E, {
+      children: "manage_allowlist" === e.mode ? jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 20,
         color: "default",
         children: renderI18nText("community.allowlist.choose_an_organization")
-      }) : jsx(_$$E, {
+      }) : jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 20,
         color: "default",
@@ -250,11 +250,11 @@ export function $$w2(e) {
       })
     }), jsx("div", {
       className: _$$s.alignCenter.pt6.$,
-      children: "manage_allowlist" === e.mode ? jsx(_$$E, {
+      children: "manage_allowlist" === e.mode ? jsx(TextWithTruncation, {
         fontSize: 13,
         color: "default",
         children: renderI18nText("community.allowlist.select_the_organization_you_would_like")
-      }) : jsx(_$$E, {
+      }) : jsx(TextWithTruncation, {
         fontSize: 13,
         color: "default",
         children: renderI18nText("community.try.pick_workspace.subtitle")

@@ -1,7 +1,7 @@
 import n from "../vendor/3757";
 import { Fh } from "../905/448740";
 import { T$, f7, Tn, jr, MO, Z7 } from "../figma_app/599979";
-import { mr } from "../figma_app/45218";
+import { isWidgetOrPlugin } from "../figma_app/45218";
 var r = n;
 export let $$l0 = {
   displayName: "AuthorField",
@@ -13,7 +13,7 @@ export let $$l0 = {
     authedProfilesById: a,
     authedActiveCommunityProfile: l
   }) => {
-    if (e && mr(e) && i) return i;
+    if (e && isWidgetOrPlugin(e) && i) return i;
     if (r()(n)) return;
     let d = T$(e || null, a, t.id || void 0);
     if (d && n.some(e => f7(e, d))) return d;
@@ -46,6 +46,6 @@ export let $$l0 = {
   isEqual: (e, t) => f7(e, t)
 };
 function d(e, t) {
-  return !!(e && mr(e) && !Fh(e) && e?.creator?.id && e.creator.id !== t.id);
+  return !!(e && isWidgetOrPlugin(e) && !Fh(e) && e?.creator?.id && e.creator.id !== t.id);
 }
 export const q = $$l0;

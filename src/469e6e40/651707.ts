@@ -2,17 +2,17 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K } from "../905/443068";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { x as _$$x } from "../905/811596";
 import { a as _$$a } from "../905/462280";
 import { C } from "../905/520159";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { d as _$$d } from "../905/44199";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
@@ -31,7 +31,7 @@ let $$j0 = registerModal(function (e) {
     let a = e.orgDomains.find(e => e.domain === t);
     return !!a?.verified_at;
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 536,
     height: "dynamic",
@@ -42,7 +42,7 @@ let $$j0 = registerModal(function (e) {
           "aria-label": getI18nString("general.back"),
           children: jsx(C, {})
         }), jsx(hE, {
-          children: jsx(E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("idp_management.domain_mapping_modal.title")
           })
         })]
@@ -57,9 +57,9 @@ let $$j0 = registerModal(function (e) {
           verticalAlignItems: "start",
           horizontalAlignItems: "start",
           width: "100%",
-          children: [jsx(E, {
+          children: [jsx(TextWithTruncation, {
             children: renderI18nText("idp_management.domain_mapping_modal.description")
-          }), jsx(E, {
+          }), jsx(TextWithTruncation, {
             children: renderI18nText("idp_management.domain_mapping_modal.choose_domains")
           }), jsx("div", {
             className: "xh8yej3",
@@ -84,7 +84,7 @@ let $$j0 = registerModal(function (e) {
                   children: [jsx("span", {
                     className: "x78zum5 x6s0dn4 x2lah0s",
                     children: r
-                  }), jsx(E, {
+                  }), jsx(TextWithTruncation, {
                     children: t.domain
                   }), i && jsx("span", {
                     className: "x8x9d4c x1n0bwc9",
@@ -110,7 +110,7 @@ let $$j0 = registerModal(function (e) {
                   children: [e.state !== _$$d.ERROR && jsx("span", {
                     className: "x78zum5 x6s0dn4 x14ju556",
                     children: a
-                  }), jsx(E, {
+                  }), jsx(TextWithTruncation, {
                     children: t
                   })]
                 });
@@ -159,13 +159,13 @@ let $$j0 = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [e.onBack && jsx($n, {
+          children: [e.onBack && jsx(Button, {
             onClick: e.onBack,
             variant: "secondary",
-            children: jsx(E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("idp_management.domain_mapping_modal.cancel")
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               let t = v.tokens.map(e => e.content.id).filter(e => !!e);
               let a = {
@@ -175,7 +175,7 @@ let $$j0 = registerModal(function (e) {
               e.onContinue(a, n || []);
             },
             variant: "primary",
-            children: jsx(E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("general.continue")
             })
           })]

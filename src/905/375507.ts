@@ -2,11 +2,11 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createRef, PureComponent, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { HiddenLabel, Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { trackEventAnalytics } from "../905/449184";
 import { cleanFontVersion } from "../905/165290";
@@ -25,7 +25,7 @@ import { gw, c$ } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
 import T, { N as _$$N } from "../905/551536";
 import { y2, Lp } from "../figma_app/563413";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
@@ -55,7 +55,7 @@ import { useSubscription } from "../figma_app/288654";
 import { P as _$$P } from "../905/347284";
 import { SharedFontsModalTeamPermissions, SharedFontsModalOrgPermissions } from "../figma_app/43951";
 import { g as _$$g } from "../905/763242";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Hj, A3, FO } from "../905/682977";
 import { A as _$$A4 } from "../svg/443105";
 import { l as _$$l } from "../figma_app/121794";
@@ -165,7 +165,7 @@ function H(e) {
           showingDropdown: s,
           type: a,
           hideChevron: !0,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A,
             className: "shared_fonts_table--menuIcon--jIy13"
           }), s && jsx(gw, {
@@ -283,7 +283,7 @@ function en(e) {
     className: "shared_fonts_collision--bullet--ortUn",
     children: e.fontStyle
   }) : jsxs("div", {
-    children: [e.fontFile.family, " ", e.fontFile.style, " ", cleanFontVersion(e.fontFile.version), e.fontFile.variation_axes && jsx(_$$B, {
+    children: [e.fontFile.family, " ", e.fontFile.style, " ", cleanFontVersion(e.fontFile.version), e.fontFile.variation_axes && jsx(SvgComponent, {
       className: J,
       svg: _$$A2
     })]
@@ -320,7 +320,7 @@ function er({
 function ea(e) {
   return jsxs("div", {
     className: "shared_fonts_collision--banner--u1eeS",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: J,
       svg: _$$A3
     }), jsx("div", {
@@ -551,7 +551,7 @@ function eR(e) {
       }, e.filename))]
     }), jsx("div", {
       className: "shared_fonts_modal_content--errorActionContainer--aZAOx shared_fonts_modal_content--footer--LgL5o",
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick: onDismissUploadErrors,
         children: renderI18nText("design_systems.shared_fonts.dismiss_errors")
       })
@@ -612,7 +612,7 @@ function eR(e) {
             "aria-label": getI18nString("design_systems.shared_fonts.upload_new_shared_font"),
             onClick: onUploadClick,
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("design_systems.shared_fonts.upload_new_shared_font")
             },
             children: jsx(_$$e, {})
@@ -639,7 +639,7 @@ function eR(e) {
             }), org && r && jsx("div", {
               className: j ? "shared_fonts_modal_content--orgNullMessageAdmin--gKbAY" : "shared_fonts_modal_content--orgNullMessage--8FdUD shared_fonts_modal_content--orgNullMessageAdmin--gKbAY",
               children: renderI18nText("design_systems.shared_fonts.view_shared_fonts_from_organization", {
-                action: jsx($n, {
+                action: jsx(Button, {
                   variant: "link",
                   onClick: onViewOrgFontsClick,
                   children: renderI18nText("design_systems.shared_fonts.view_shared_fonts_from_organization_action", {
@@ -649,7 +649,7 @@ function eR(e) {
                 orgName: org.name
               })
             })]
-          }), j && jsx($n, {
+          }), j && jsx(Button, {
             onClick: onUploadClick,
             children: renderI18nText("design_systems.shared_fonts.upload_fonts")
           })]
@@ -698,7 +698,7 @@ function eR(e) {
                 children: renderI18nText("design_systems.shared_fonts.num_fonts_selected", {
                   numFontsSelected: e
                 })
-              }), jsx($n, {
+              }), jsx(Button, {
                 variant: "secondary",
                 onClick: onShowDeleteFontsModal,
                 children: renderI18nText("design_systems.shared_fonts.delete")
@@ -715,7 +715,7 @@ function eR(e) {
                 children: jsx("div", {
                   className: "shared_fonts_modal_content--uploadFooterMessage--fYOc9",
                   children: renderI18nText("design_systems.shared_fonts.upload_footer_message", {
-                    linkText: jsx($n, {
+                    linkText: jsx(Button, {
                       variant: "link",
                       onClick: onViewOrgFontsClick,
                       children: renderI18nText("design_systems.shared_fonts.upload_footer_message_link", {
@@ -727,7 +727,7 @@ function eR(e) {
                 })
               });
             }
-            let t = j ? jsx($n, {
+            let t = j ? jsx(Button, {
               onClick: onUploadClick,
               children: renderI18nText("design_systems.shared_fonts.upload_fonts")
             }) : null;
@@ -761,13 +761,13 @@ function eR(e) {
         }), jsx("div", {
           children: jsxs(_$$J2, {
             mode: "dark",
-            children: [jsx($n, {
+            children: [jsx(Button, {
               onClick: onReviewUploadErrors,
               variant: "secondary",
               children: renderI18nText("design_systems.shared_fonts.import_complete_with_errors_review", {
                 numErrors: unsuccessfulUploads.length
               })
-            }), jsx($n, {
+            }), jsx(Button, {
               onClick: onClearFontUploadResults,
               variant: "secondary",
               children: renderI18nText("design_systems.shared_fonts.import_complete_with_errors_ok")
@@ -859,9 +859,9 @@ class eN extends PureComponent {
       }), jsx("div", {
         className: eI,
         children: this.props.isOverridden && jsx("div", {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("design_systems.shared_fonts.this_font_style_was_uploaded_to_your_organization_any_new_text_objects_will_use_the_organization_font"),
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A4
           })
         })
@@ -1201,7 +1201,7 @@ let eU = registerModal(function (e) {
     onCollisionResolved();
     I(popModalStack());
   }, [_, v.collisions, I, resourceType, resourceId, onCollisionResolved]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -1231,11 +1231,11 @@ let eU = registerModal(function (e) {
           })
         }), jsxs("div", {
           className: "shared_fonts--actions---ihpk",
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: E,
             children: renderI18nText("design_systems.shared_fonts.don_t_replace")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: x,
             children: renderI18nText("design_systems.shared_fonts.replace")
           })]
@@ -1260,7 +1260,7 @@ let eB = registerModal(function (e) {
   }, [m, onWarningDismissed]);
   if (!p) return null;
   let g = p.collisions.filter(e => e.teamId && c.teams[e.teamId]).map(e => c.teams[e.teamId]).map(e => e.name);
-  return g.length ? jsx(bL, {
+  return g.length ? jsx(ModalRootComponent, {
     manager: i,
     width: "md",
     children: jsxs(vo, {
@@ -1285,7 +1285,7 @@ let eB = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: h,
             children: renderI18nText("design_systems.shared_fonts.okay")
           })
@@ -1305,7 +1305,7 @@ let eV = registerModal(function (e) {
   let p = useCallback(() => {
     i(popModalStack());
   }, [i]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "md",
     children: jsxs(vo, {
@@ -1319,11 +1319,11 @@ let eV = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: p,
             children: renderI18nText("design_systems.shared_fonts.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: c,
             children: renderI18nText("design_systems.shared_fonts.confirm")
           })]
@@ -1374,7 +1374,7 @@ let eG = registerModal(function (e) {
     onCollisionResolved();
     E(popModalStack());
   }, [A, I.collisions, E, resourceType, resourceId, onCollisionResolved]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -1434,11 +1434,11 @@ let eG = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: x,
             children: renderI18nText("design_systems.shared_fonts.don_t_replace")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: S,
             children: renderI18nText("design_systems.shared_fonts.replace")
           })]

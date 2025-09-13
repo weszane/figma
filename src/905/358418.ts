@@ -3,7 +3,7 @@ import { useId } from "react";
 import { v } from "../905/442517";
 import { JU } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { zm, ad } from "../905/443375";
 export function $$c0() {
   return jsx("div", {
@@ -37,7 +37,7 @@ export function $$u1({
         },
         htmlAttributes: {
           "data-tooltip": c,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip-max-width": u
         },
         className: p

@@ -5,7 +5,7 @@ import { u as _$$u } from "../905/911813";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
 import { D } from "../905/12032";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { FX } from "../figma_app/831569";
 import { p as _$$p } from "../905/427409";
 import { c6, e as _$$e } from "../figma_app/631970";
@@ -34,7 +34,7 @@ export function $$g0({
       htmlAttributes: {
         "data-onboarding-key": FX,
         "data-tooltip": l,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-testid": "variable-binding-icon"
       },
       children: jsx(_$$u, {})

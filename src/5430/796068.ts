@@ -8,7 +8,7 @@ import { XW, qY } from "../figma_app/427318";
 import { bb } from "../figma_app/399472";
 import { MK, Gl } from "../figma_app/599979";
 import { selectCurrentUser } from "../905/372672";
-import { U, xQ, I0, m3 } from "../figma_app/45218";
+import { hasClientMeta, isWidget, isPlugin, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { d as _$$d, NY, EV } from "../5430/309696";
 export function $$h0({
   resource: e
@@ -19,15 +19,15 @@ export function $$h0({
   let x = XW(e) ? qY(e) : e;
   let f = Gl.includes(h) && (e.community_publishers?.accepted || []).length > 1 && r?.primary_user_id;
   let y = useCallback(() => {
-    U(x) ? t(bb({
+    hasClientMeta(x) ? t(bb({
       hub_file_id: x.id
-    })) : xQ(x) ? t(bb({
+    })) : isWidget(x) ? t(bb({
       widget_id: x.id
-    })) : I0(x) && t(bb({
+    })) : isPlugin(x) && t(bb({
       plugin_id: x.id
     }));
   }, [t, x]);
-  let g = m3(x);
+  let g = hasMonetizedResourceMetadata(x);
   let v = I(x);
   let b = selectCurrentUser();
   return jsxs(Fragment, {

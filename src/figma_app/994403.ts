@@ -13,13 +13,13 @@ import { N as _$$N } from "../905/861698";
 import { o as _$$o2 } from "../905/688631";
 import { _ as _$$_ } from "../905/154979";
 import { B } from "../905/548640";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { q } from "../figma_app/277543";
 import { LE } from "../905/71785";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $E, cL, is, G, Wv, p2, QF } from "../905/452765";
 import { A as _$$A } from "../6041/844625";
 import { A as _$$A2 } from "../6041/309527";
@@ -38,35 +38,35 @@ export function $$k1({
   if (!e) return null;
   let n = $E;
   if (t ? n = cL : r && (n = is), !(e instanceof Array)) return M(e, n, t);
-  if (e.includes(ManifestEditorType.FIGMA) && e.includes(ManifestEditorType.FIGJAM) && isDevOrInspect(e)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGMA) && e.includes(ManifestEditorType.FIGJAM) && isDevOrInspect(e)) return jsx(SvgComponent, {
     svg: t ? _$$A7 : _$$A8,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.detail_view.universal"),
     dataTestId: "editor-type-badge-universal"
   });
-  if (e.includes(ManifestEditorType.FIGMA) && e.includes(ManifestEditorType.FIGJAM)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGMA) && e.includes(ManifestEditorType.FIGJAM)) return jsx(SvgComponent, {
     svg: t ? _$$A5 : _$$A6,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.detail_view.made_for_figma_design_and_figjam"),
     dataTestId: "editor-type-badge-figma-figjam"
   });
-  if (e.includes(ManifestEditorType.FIGMA) && isDevOrInspect(e)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGMA) && isDevOrInspect(e)) return jsx(SvgComponent, {
     svg: t ? _$$A3 : _$$A4,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.detail_view.figma_design_and_dev_mode"),
     dataTestId: "editor-type-badge-figma-devmode"
   });
-  if (e.includes(ManifestEditorType.FIGJAM) && isDevOrInspect(e)) return jsx(_$$B, {
+  if (e.includes(ManifestEditorType.FIGJAM) && isDevOrInspect(e)) return jsx(SvgComponent, {
     svg: t ? _$$A : _$$A2,
     className: n,
     useOriginalSrcFills_DEPRECATED: !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.detail_view.made_for_fig_jam_and_dev_mode"),
     dataTestId: "editor-type-badge-figjam-devmode"
   });
@@ -81,7 +81,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-figjam",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.made_for_fig_jam"),
         children: r ? jsx(j, {}) : jsx(_$$C, {})
       });
@@ -91,7 +91,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-figma",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.made_for_figma_design"),
         children: r ? jsx(H, {}) : jsx(_$$e, {})
       });
@@ -101,7 +101,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-devmode",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.dev_mode_only"),
         children: r ? jsx(_$$P, {}) : jsx(_$$o, {})
       });
@@ -111,7 +111,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-slides",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.made_for_slides"),
         children: r ? jsx(_$$p, {}) : jsx(K, {})
       });
@@ -119,7 +119,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-sites",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.made_for_sites"),
         children: r ? jsx(_$$v, {}) : jsx(k, {})
       });
@@ -127,7 +127,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-figmake",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.made_for_figmake"),
         children: r ? jsx(_$$N, {}) : jsx(_$$o2, {})
       });
@@ -136,7 +136,7 @@ function M(e, t, r) {
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-cooper",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.made_for_buzz"),
         children: r ? jsx(_$$_, {}) : jsx(B, {})
       });
@@ -152,7 +152,7 @@ export function $$F0({
     height: "16",
     viewBox: "0 0 16 16",
     fill: "none",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.insert_modal.codegen_plugin_icon_tooltip"),
     className: e ? _$$s.w24.h24.colorBorder.$ : void 0,
     children: [jsx("path", {

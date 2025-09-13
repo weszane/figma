@@ -3,17 +3,17 @@ import { Js } from "../figma_app/916560";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
-import { vO, Ci, yc } from "../figma_app/671547";
+import { parseDomain, LinkRenderType, LinkMetadataEvent } from "../figma_app/671547";
 import { l as _$$l } from "../905/448778";
 import { H as _$$H } from "../905/88863";
 import { De, Vm } from "../figma_app/728075";
 export function $$h2(e, t) {
   let r = getSelectedFile(debugState.getState())?.key ?? "";
-  ds(e, r, debugState.getState(), {
-    domain: null != t ? vO(t) : "",
-    linkRenderType: Ci.LINK_PREVIEW,
+  trackFileEvent(e, r, debugState.getState(), {
+    domain: null != t ? parseDomain(t) : "",
+    linkRenderType: LinkRenderType.LINK_PREVIEW,
     userId: debugState.getState().user?.id
   });
 }
@@ -176,7 +176,7 @@ export function $$A1({
     });
     let G = hasTitleOrDescription ? Js(url) : fullUrlProvider;
     let V = () => {
-      $$h2(yc.OPEN_PREVIEW, url);
+      $$h2(LinkMetadataEvent.OPEN_PREVIEW, url);
       debugState.dispatch(RK({
         rawInput: url
       }));
@@ -213,15 +213,15 @@ export function $$A1({
           V();
           break;
         case "convert_to_text":
-          $$h2(yc.CONVERT_TO_TEXT, url);
+          $$h2(LinkMetadataEvent.CONVERT_TO_TEXT, url);
           Fullscreen?.replaceNodeWithText(A, url);
           break;
         case "vertical":
-          $$h2(yc.SWITCH_ORIENTATION_VERTICAL, url);
+          $$h2(LinkMetadataEvent.SWITCH_ORIENTATION_VERTICAL, url);
           F("vertical");
           break;
         case "horizontal":
-          $$h2(yc.SWITCH_ORIENTATION_HORIZONTAL, url);
+          $$h2(LinkMetadataEvent.SWITCH_ORIENTATION_HORIZONTAL, url);
           F("horizontal");
           break;
         default:

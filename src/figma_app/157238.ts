@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getInitialOptions } from "../figma_app/169182";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { isValidAccessType } from "../905/513035";
 import { TA, Zx } from "../figma_app/217457";
@@ -45,7 +45,7 @@ export function $$p0(e, t, r = !1, n) {
       assigned_at: e.licenseGroupMember.assignedAt ? e.licenseGroupMember.assignedAt.toISOString() : "",
       update_reason: e.licenseGroupMember.updateReason,
       actor_user_id: e.licenseGroupMember.actorUserId,
-      idp_group: oA(e.licenseGroupMember.idpGroup, null)
+      idp_group: getResourceDataOrFallback(e.licenseGroupMember.idpGroup, null)
     } : void 0,
     ecc_upgrading_locked: e.permission === FUserRoleType.GUEST && null !== e.user.externalRestrictedOrgId,
     scim_metadata: o ? function (e) {
@@ -72,7 +72,7 @@ export function $$p0(e, t, r = !1, n) {
     dev_mode_upgrade_reason: g(e.mostRecentDevModeUserUpgrade),
     workspace_users: e.workspaceUsers.map(h),
     is_dev_mode_beta_user: !!e.devModeBetaUsedEvent,
-    is_mfa_restricted: !!oA(e.isMfaRestricted, !1),
+    is_mfa_restricted: !!getResourceDataOrFallback(e.isMfaRestricted, !1),
     active_seat_type: TA(t?.orgUser?.activeSeatTypeUpgrade?.billableProduct),
     scim_seat_type: r ? $$f(o?.seatType) : null,
     active_seat_upgrade_date: E(t?.orgUser?.activeSeatTypeUpgrade, n) || void 0,
@@ -127,7 +127,7 @@ export function $$_1(e, t) {
     case "org_invite":
       let _ = i.orgInvite;
       if (!_) continue;
-      let h = oA(_.billableProductKey, null);
+      let h = getResourceDataOrFallback(_.billableProductKey, null);
       r.push({
         type: Wd.ORG_INVITE,
         id: _.id,
@@ -156,7 +156,7 @@ function h(e) {
     updated_at: e.updatedAt,
     uuid: e.uuid,
     workspace_id: e.workspaceId,
-    idp_group: oA(e.idpGroup, null)
+    idp_group: getResourceDataOrFallback(e.idpGroup, null)
   };
 }
 function m(e, t, r) {

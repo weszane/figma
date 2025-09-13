@@ -6,9 +6,9 @@ import { jm } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
 import { isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { I7 } from "../figma_app/594947";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
-let _ = () => !!dq();
+let _ = () => !!useCurrentUserOrgId();
 export function $$h1(e) {
   return !!e;
 }

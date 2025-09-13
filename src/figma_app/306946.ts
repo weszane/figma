@@ -1,20 +1,22 @@
-import { z, Ip } from "../905/239603";
-import { M } from "../figma_app/70618";
-import { FPublicationStatusType, FTemplateCategoryType, FUserVerificationStatusType } from "../figma_app/191312";
-import { cK } from "../905/604501";
-import { s as _$$s } from "../905/875063";
-import { fe } from "../905/272080";
-import { fileEntityModel } from "../905/806985";
-import { V_, NS } from "../905/71785";
-import { xK, I7 } from "../figma_app/10554";
-import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { ii, UC, PN } from "../905/54385";
-import { PluginMetadataSchema, R2, EditorType, PluginDetailsSchema, PluginInstallStatus, WidgetDetailsSchema } from "../figma_app/155287";
-import { P1, fE, Fy } from "../figma_app/809727";
-import { i as _$$i } from "../905/186961";
-import { q } from "../figma_app/277543";
-import { i as _$$i2 } from "../905/878245";
-var $$y10 = (e => (e.DESIGN_TEMPLATE = "design_template", e.FIGJAM_TEMPLATE = "figjam_template", e.PLUGIN = "plugin", e.WIDGET = "widget", e.SLIDE_TEMPLATE = "slide_template", e.UI_KIT = "ui_kit", e.PROTOTYPE = "prototype", e.SITE_TEMPLATE = "site_template", e.COOPER_TEMPLATE_ASSET = "cooper_template_asset", e.COOPER_TEMPLATE_FILE = "cooper_template_file", e.FIGMAKE_TEMPLATE = "figmake_template", e))($$y10 || {});
+import { z } from 'zod'
+import { productSchema, ProductSource, ProductStatus } from '../905/54385'
+import { NS, V_ } from '../905/71785'
+import { i as _$$i } from '../905/186961'
+import { fe } from '../905/272080'
+import { cK } from '../905/604501'
+import { fileEntityModel } from '../905/806985'
+import { s as _$$s } from '../905/875063'
+import { i as _$$i2 } from '../905/878245'
+import { I7, xK } from '../figma_app/10554'
+import { M } from '../figma_app/70618'
+import { EditorType, PluginDetailsSchema, PluginInstallStatus, PluginMetadataSchema, R2, WidgetDetailsSchema } from '../figma_app/155287'
+import { FPublicationStatusType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312'
+import { q } from '../figma_app/277543'
+import { PrimaryWorkflowEnum } from '../figma_app/633080'
+import * as Ip from '../figma_app/709165'
+import { fE, Fy, P1 } from '../figma_app/809727'
+
+var $$y10 = (e => (e.DESIGN_TEMPLATE = 'design_template', e.FIGJAM_TEMPLATE = 'figjam_template', e.PLUGIN = 'plugin', e.WIDGET = 'widget', e.SLIDE_TEMPLATE = 'slide_template', e.UI_KIT = 'ui_kit', e.PROTOTYPE = 'prototype', e.SITE_TEMPLATE = 'site_template', e.COOPER_TEMPLATE_ASSET = 'cooper_template_asset', e.COOPER_TEMPLATE_FILE = 'cooper_template_file', e.FIGMAKE_TEMPLATE = 'figmake_template', e))($$y10 || {})
 let b = z.object({
   id: z.string(),
   resource_type: z.nativeEnum($$y10),
@@ -38,18 +40,18 @@ let b = z.object({
   thumbnail_src_set: P1.nullish(),
   carousel_media: z.object({
     images: fE,
-    videos: Fy.optional()
+    videos: Fy.optional(),
   }).optional(),
   unpublished_at: z.string().nullable(),
   publishing_status: z.nativeEnum(FPublicationStatusType).nullable(),
   badges: z.array(z.nativeEnum(_$$s)),
-  monetized_resource_metadata: Ip.ignore(ii).optional(),
+  monetized_resource_metadata: Ip.ignore(productSchema).optional(),
   community_resource_payment: fe.optional(),
   is_3rd_party_monetized: z.boolean(),
   third_party_m10n_url: z.string().nullable(),
   support_contact: z.string().nullable(),
-  publish_scope: z.nativeEnum(_$$i2).optional()
-}).and(xK);
+  publish_scope: z.nativeEnum(_$$i2).optional(),
+}).and(xK)
 let T = z.object({
   id: z.string(),
   resource_type: z.nativeEnum($$y10),
@@ -70,8 +72,8 @@ let T = z.object({
   unpublished_at: z.string().nullable(),
   publishing_status: z.nativeEnum(FPublicationStatusType).nullable(),
   like_count: z.number(),
-  publish_scope: z.nativeEnum(_$$i2).optional()
-}).and(xK);
+  publish_scope: z.nativeEnum(_$$i2).optional(),
+}).and(xK)
 z.object({
   id: z.string(),
   versions: z.record(z.string(), V_),
@@ -87,16 +89,16 @@ z.object({
   recently_duplicated: z.boolean().optional(),
   related_content: M(z.lazy(() => Ip.ignore())),
   verification_status: z.nativeEnum(FUserVerificationStatusType).optional(),
-  monetization_status: z.nativeEnum(UC).optional(),
+  monetization_status: z.nativeEnum(ProductSource).optional(),
   community_resource_payment: fe.optional(),
   published_site_url: z.string().nullish(),
   library_key: z.unknown().optional(),
   fig_file_metadata: z.object({
     key: z.string(),
     file: fileEntityModel,
-    roles: z.array(Ip.ignore())
-  }).optional()
-});
+    roles: z.array(Ip.ignore()),
+  }).optional(),
+})
 z.object({
   id: z.string(),
   versions: z.record(PluginMetadataSchema),
@@ -115,12 +117,12 @@ z.object({
   hide_related_content_by_others: z.boolean().optional(),
   install_status: z.nativeEnum(PluginInstallStatus).optional(),
   profile_install_status: z.nativeEnum(PluginInstallStatus).optional(),
-  monetization_status: z.nativeEnum(UC).optional(),
+  monetization_status: z.nativeEnum(ProductSource).optional(),
   community_resource_payment: fe.optional(),
-  third_party_m10n_status: z.nativeEnum(PN).optional(),
+  third_party_m10n_status: z.nativeEnum(ProductStatus).optional(),
   creator_policy: z.string(),
-  plugin_publishers: I7.optional()
-});
+  plugin_publishers: I7.optional(),
+})
 let I = z.object({
   id: z.string(),
   file_key: z.string(),
@@ -134,7 +136,7 @@ let I = z.object({
     node_id: z.string(),
     page_id: z.string(),
     page_name: z.string(),
-    background_color: z.string()
+    background_color: z.string(),
   }),
   min_node_height: z.number(),
   min_node_width: z.number(),
@@ -156,8 +158,8 @@ let I = z.object({
   type: z.nativeEnum(PrimaryWorkflowEnum),
   canvas_url: z.string(),
   thumbnail_url: z.string(),
-  library_key: z.string()
-});
+  library_key: z.string(),
+})
 let S = z.object({
   node_id: z.string(),
   name: z.string(),
@@ -183,8 +185,8 @@ let S = z.object({
   userFacingVersion: z.string().nullable(),
   destination_key: z.string().nullable(),
   isLocal: z.boolean().nullable(),
-  _component_v2_record: I.optional()
-});
+  _component_v2_record: I.optional(),
+})
 let v = z.object({
   id: z.string(),
   file_key: z.string(),
@@ -204,75 +206,75 @@ let v = z.object({
   has_custom_thumbnail: z.boolean().optional(),
   signed_canvas_url: z.string().optional(),
   thumbnail_guid: z.string().optional(),
-  library_key: z.string()
-});
+  library_key: z.string(),
+})
 let A = z.object({
   hub_file: Ip.ignore(NS).optional(),
   plugin: Ip.ignore(PluginDetailsSchema).optional(),
   widget: Ip.ignore(WidgetDetailsSchema).optional(),
   template: Ip.ignore(v).optional(),
-  component_v2: Ip.ignore(S).optional()
-});
+  component_v2: Ip.ignore(S).optional(),
+})
 let $$x4 = b.and(z.object({
   content: A,
   carousel_media: z.object({
     images: fE,
-    videos: Fy.optional()
-  })
-}));
+    videos: Fy.optional(),
+  }),
+}))
 T.and(z.object({
-  content: A
-}));
+  content: A,
+}))
 let $$N8 = z.object({
   dimensions: z.object({
     job_title: z.array(z.string()),
-    paid_status: z.array(z.string())
+    paid_status: z.array(z.string()),
   }),
   recommendations: z.array(z.object({
     resources: z.array(b),
     properties: z.object({
       job_title: z.string(),
-      paid_status: z.string()
-    })
-  }))
-});
+      paid_status: z.string(),
+    }),
+  })),
+})
 let $$C9 = z.object({
   id: z.string(),
   user_id: z.string(),
   resource_id: z.string(),
   created_at: z.string(),
-  updated_at: z.string()
-}).optional();
+  updated_at: z.string(),
+}).optional()
 let w = b.and(z.object({
-  resource_type: z.enum(["design_template", "figjam_template", "slide_template", "cooper_template_file", "figmake_template", "site_template"])
-}));
+  resource_type: z.enum(['design_template', 'figjam_template', 'slide_template', 'cooper_template_file', 'figmake_template', 'site_template']),
+}))
 let $$O0 = z.object({
   recommended_resources: z.array(w),
-  internal_resources: z.array(w)
-});
+  internal_resources: z.array(w),
+})
 let $$R6 = b.and(z.object({
   content: z.optional(A),
   carousel_media: z.object({
     images: fE,
-    videos: Fy.optional()
-  }).optional()
-}));
-let $$L7 = z.array($$R6);
+    videos: Fy.optional(),
+  }).optional(),
+}))
+let $$L7 = z.array($$R6)
 let $$P3 = z.object({
   is_same_creator: z.boolean(),
-  content: z.array(b)
-});
-let $$D5 = ["design_template", "figjam_template", "slide_template", "ui_kit", "prototype", "site_template", "cooper_template_file"];
-let $$k1 = ["plugin"];
-let $$M2 = ["widget"];
-export const Bn = $$O0;
-export const Dm = $$k1;
-export const GT = $$M2;
-export const ME = $$P3;
-export const Q3 = $$x4;
-export const U$ = $$D5;
-export const UL = $$R6;
-export const Y9 = $$L7;
-export const _s = $$N8;
-export const tF = $$C9;
-export const vt = $$y10;
+  content: z.array(b),
+})
+let $$D5 = ['design_template', 'figjam_template', 'slide_template', 'ui_kit', 'prototype', 'site_template', 'cooper_template_file']
+let $$k1 = ['plugin']
+let $$M2 = ['widget']
+export const Bn = $$O0
+export const Dm = $$k1
+export const GT = $$M2
+export const ME = $$P3
+export const Q3 = $$x4
+export const U$ = $$D5
+export const UL = $$R6
+export const Y9 = $$L7
+export const _s = $$N8
+export const tF = $$C9
+export const vt = $$y10

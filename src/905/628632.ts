@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
 import { getUserId } from "../905/372672";
 import { hp, bp } from "../905/913057";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { UE, Ej, o8, Io, dK } from "../905/70359";
 import { A } from "../5724/142155";
 export function $$g0({
@@ -109,13 +109,13 @@ export function $$f1(e) {
       tabIndex: 0,
       onClick: () => g(e, t),
       className: Io,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.email,
       "data-suggestion-idx": t,
       "aria-label": getI18nString("permissions_modal.suggestions.invite_user", {
         userEmail: e.email
       }),
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         svg: A
       }), jsx("span", {
         className: dK,

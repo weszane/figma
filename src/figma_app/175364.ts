@@ -10,7 +10,7 @@ import { c$, wv, MM } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
 import { BK } from "../905/848862";
 import { Jz } from "../905/504727";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { c as _$$c } from "../905/566438";
 import { kz } from "../figma_app/171177";
 var l = o;
@@ -26,7 +26,7 @@ function f({
   ariaControls: d,
   id: c
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     onClick: r,
     variant: i,
     disabled: a,

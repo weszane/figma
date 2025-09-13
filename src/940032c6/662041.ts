@@ -6,7 +6,7 @@ import { W, B } from "../905/841666";
 import { w } from "../5430/495667";
 import { Vm, XW } from "../figma_app/427318";
 import { cs } from "../figma_app/740025";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export function $$p0(e) {
   let {
     resource,
@@ -21,7 +21,7 @@ export function $$p0(e) {
   let _ = XW(resource) ? g.data?.[1] : h.data?.[1];
   let b = w(resource, f, _ || null, viewContext);
   return m ? jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.likes.to_like_switch_to_your_personal_profile"),
     "data-tooltip-show-immediately": !0,
     children: jsx(_$$b, {

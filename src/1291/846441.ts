@@ -17,7 +17,7 @@ import { Cn } from "../905/225265";
 import { FFileType } from "../figma_app/191312";
 import { Ef } from "../905/81982";
 import { Rt } from "../figma_app/979658";
-import { cS } from "../figma_app/45218";
+import { CommunityPageType } from "../figma_app/45218";
 import { p as _$$p } from "../905/42189";
 import { j6, m_, G0, fQ, vh, l7 } from "../9410/335206";
 import { e } from "../1291/352115";
@@ -112,7 +112,7 @@ export function $$z0() {
     shelves,
     hubFiles
   } = selectWithShallowEqual(e => ({
-    shelves: e.communityHub.shelves[cS.FIGJAM_TEMPLATES_PICKER],
+    shelves: e.communityHub.shelves[CommunityPageType.FIGJAM_TEMPLATES_PICKER],
     hubFiles: e.hubFiles,
     initialTab: e.universalInsertModal.initialTab
   }));

@@ -23,12 +23,12 @@ import { debounce } from "../905/915765";
 import { XHR } from "../905/910117";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { L as _$$L } from "../905/408237";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { createOptimistThunk } from "../905/350402";
 import { bE } from "../905/98702";
 import { bE as _$$bE } from "../figma_app/240735";
 import { e5 } from "../figma_app/297957";
-import { _J } from "../figma_app/314264";
+import { trackTeamEvent } from "../figma_app/314264";
 import { getUserId } from "../905/372672";
 import { selectTeams } from "../905/338617";
 import { G } from "../figma_app/66216";
@@ -50,7 +50,7 @@ let L = createOptimistThunk((e, {
     data: t
   }) => (n = "team" in t.meta ? t.meta.team : t.meta, e.dispatch(_$$bE({
     team: n
-  })), _J("Team Created", n.id, e.getState()), G.getTeam({
+  })), trackTeamEvent("Team Created", n.id, e.getState()), G.getTeam({
     teamId: n.id
   }))).then(({
     data: t
@@ -135,7 +135,7 @@ function V(e) {
         className: DI,
         disabled: !h || d,
         onClick: y,
-        children: d ? jsx(kt, {
+        children: d ? jsx(LoadingSpinner, {
           className: u1
         }) : renderI18nText("universal_upgrade_sequence.next")
       })]

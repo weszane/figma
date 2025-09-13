@@ -32,7 +32,7 @@ import { lJ } from "../905/275640";
 import { ax } from "../figma_app/722362";
 import { getObservableValue, getObservableOrFallback } from "../figma_app/84367";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j, M4 } from "../figma_app/178475";
 import { u as _$$u } from "../figma_app/110635";
 import { Tv } from "../figma_app/151869";
@@ -296,7 +296,7 @@ function eI(e) {
     value: e.config.value
   });
   let h = jsx(p, {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTooltip: getLabel(),
     disabled: !1,
     max: e.config.max,
@@ -663,7 +663,7 @@ function eV(e) {
   let ee = jsx($j, {
     bigNudgeAmount: 10,
     "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.dash"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: W,
     dispatch: t,
     forwardedRef: j,
@@ -687,7 +687,7 @@ function eV(e) {
   let et = jsx($j, {
     bigNudgeAmount: 10,
     "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.gap"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: W,
     dispatch: t,
     forwardedRef: G,
@@ -806,7 +806,7 @@ function eG(e) {
         },
         recordingKey: generateRecordingKey(e, "miterAngle"),
         tooltipForScreenReadersOnly: !0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.stroke_settings.miter_angle"),
         dispatch: t,
         children: jsx("div", {
@@ -947,7 +947,7 @@ export function $$ez0(e) {
           truncate: !0,
           label: getI18nString("fullscreen.properties_panel.basic"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.basic"),
             "data-tooltip-timeout-delay": 1e3
           }
@@ -956,7 +956,7 @@ export function $$ez0(e) {
           truncate: !0,
           label: getI18nString("fullscreen.properties_panel.dynamic"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.dynamic"),
             "data-tooltip-timeout-delay": 1e3
           }
@@ -965,7 +965,7 @@ export function $$ez0(e) {
           truncate: !0,
           label: getI18nString("fullscreen.properties_panel.brush"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.brush"),
             "data-tooltip-timeout-delay": 1e3
           }

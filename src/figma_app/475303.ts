@@ -2,7 +2,7 @@ import { KeyboardLayout, Fullscreen } from "../figma_app/763686";
 import { localStorageRef } from "../905/657224";
 import { getI18nString } from "../905/303541";
 import { FU } from "../905/26824";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { debugState } from "../905/407919";
 import { P } from "../905/724705";
@@ -63,7 +63,7 @@ function f(e) {
 export function $$E1(e) {
   try {
     let t = debugState.getState();
-    uE("keyboard_layout_preference", t, {
+    trackUserEvent("keyboard_layout_preference", t, {
       layout: KeyboardLayout[e.layout],
       eventName: e.eventName,
       detectedLayout: e.detectedLayout,

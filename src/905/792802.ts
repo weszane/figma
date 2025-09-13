@@ -1,7 +1,7 @@
 import { zU } from "../figma_app/740025";
 import { canMemberOrg } from "../figma_app/642025";
 import { uH, fS, Rx } from "../figma_app/162807";
-import { t2 } from "../figma_app/756995";
+import { FileType } from "../figma_app/756995";
 export function $$o0(e, t, i) {
   let n = [e];
   i || (n = [e, uH.PUBLIC_PLUGINS, uH.PRIVATE_PLUGINS]);
@@ -34,7 +34,7 @@ export function $$d1(e, t, i) {
   let l = o.get("q");
   let d = o.get("model_type");
   let c = parseInt(o.get("file_type") ?? "", 10);
-  let u = t2.ANY;
+  let u = FileType.ANY;
   isNaN(c) || (u = c);
   let p = Rx.PERSONAL;
   zU(i) ? p = Rx.COMMUNITY : t.currentUserOrgId && (p = canMemberOrg(t.currentUserOrgId, t) ? Rx.ORG : Rx.ORG_GUEST);

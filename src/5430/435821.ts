@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics } from "../905/449184";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { D, _ as _$$_ } from "../figma_app/169991";
@@ -17,7 +17,7 @@ import { g as _$$g } from "../905/356410";
 import { utilityNoop } from "../figma_app/918700";
 import { A } from "../5724/663128";
 import { showModalHandler } from "../905/156213";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A as _$$A } from "../1617/230645";
 let $$b = {
   listStyleType: "disc",
@@ -233,9 +233,9 @@ export function $$P1({
       className: _$$s.flex.gap4.$,
       children: [renderI18nText("community.badge.extension_security_updated_on", {
         date: updatedAt
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         svg: _$$A,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.detail_view.data_security_modal_rejected_tooltip"),
         className: "extension_security_response--infoIcon--miNLG"
       })]

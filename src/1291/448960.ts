@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, createContext, useContext, useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { Kr } from "../vendor/111975";
@@ -238,7 +238,7 @@ function H({
           query: e,
           recordingKey: "browseAllResourcesModalSearchBar",
           selectTextOnMount: !m
-        }), e && jsx($n, {
+        }), e && jsx(Button, {
           onClick: T,
           variant: "ghost",
           "aria-label": getI18nString("whiteboard.inserts.clear_search"),

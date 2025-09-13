@@ -3,7 +3,7 @@ import { useRef, useEffect } from "react";
 import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { BK } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Jz } from "../905/504727";
 import { YW } from "../figma_app/778125";
 export function $$u0(e) {
@@ -19,7 +19,7 @@ export function $$u0(e) {
       backgroundColor: "var(--color-bg-hover, var(--fallback-color-bg-hover))"
     } : void 0,
     selected: t.showing,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fig_feed.more_actions"),
     onClick: e => {
       e.stopPropagation();

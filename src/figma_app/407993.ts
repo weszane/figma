@@ -8,25 +8,25 @@ import { r as _$$r2 } from "../905/216849";
 import { H as _$$H } from "../905/56919";
 import { i as _$$i } from "../905/718764";
 import { N as _$$N } from "../905/130112";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { DesignGraphElements, Fullscreen, SourceType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { P as _$$P } from "../vendor/348225";
 import { fU } from "../905/492004";
 import { useHandleMouseEvent } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Ho, wE, sp } from "../figma_app/308685";
 import { Dm } from "../figma_app/8833";
 import { Tc } from "../905/797478";
 import { CB } from "../figma_app/442259";
 import { l as _$$l } from "../905/831968";
-import { Pl } from "../figma_app/62612";
+import { getViewportZoom } from "../figma_app/62612";
 import { XM } from "../905/486443";
 import { p8, dH } from "../figma_app/722362";
 import { F as _$$F } from "../905/258517";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $L, us } from "../figma_app/136698";
 import { _ as _$$_ } from "../figma_app/433187";
 import { S as _$$S } from "../figma_app/403368";
@@ -63,10 +63,10 @@ let H = createContext({
   finishedAnimating: !1,
   draggedStamp: null,
   shouldDragCancel: !1,
-  setFinishedAnimating: e => { },
-  onDrag: e => { },
-  onDragStart: e => { },
-  onDragEnd: () => { },
+  setFinishedAnimating: e => {},
+  onDrag: e => {},
+  onDragStart: e => {},
+  onDragEnd: () => {},
   wheelContainerRef: {
     current: null
   },
@@ -157,7 +157,7 @@ function ep(e) {
       onMouseLeave,
       d: `M0 ${_$$l}H${_$$l}L0 0V${_$$l}Z`,
       fill: "white",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-offset-x": 30,
       "data-tooltip-offset-y": -50,
       "data-tooltip": !0 === l && "r-chat" === name ? getI18nString("fullscreen_actions.disable-cursor-chat") : null
@@ -173,7 +173,7 @@ function e_({
     className: J,
     children: jsx("div", {
       className: "emoji_wheel--singleCenterReaction--xWX-5 emoji_wheel--singleCenter--X3W61",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3,
         ariaHidden: !0
       })
@@ -183,7 +183,7 @@ function e_({
     className: "emoji_wheel--voteStampsCenter--4F1L3 emoji_wheel--center--5zTgA",
     children: jsx("div", {
       className: "emoji_wheel--singleCenterVoting--N2E5- emoji_wheel--singleCenter--X3W61",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A4,
         ariaHidden: !0
       })
@@ -204,7 +204,7 @@ function e_({
           recordingKey: "emoji-wheel-reaction-button",
           className: E()("emoji_wheel--reactionsButton--H7Rps", "REACTION" === e && q),
           "data-fullscreen-intercept": !0,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A3,
             "aria-label": getI18nString("fullscreen.reaction_wheel")
           })
@@ -213,7 +213,7 @@ function e_({
           recordingKey: "emoji-wheel-stamp-button",
           className: E()("emoji_wheel--stampsButton--XDDR8", "STAMP" === e && q),
           "data-fullscreen-intercept": !0,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A4,
             "aria-label": getI18nString("fullscreen.stamp_wheel")
           })
@@ -231,7 +231,7 @@ function eh({
     className: "emoji_wheel--readonlyReactionsCenterUI3--EWTk3 emoji_wheel--borderedCenterUI3--ShEHr emoji_wheel--centerUI3--40t9X emoji_wheel--center--5zTgA",
     children: jsx("div", {
       className: "emoji_wheel--singleCenterReactionUI3--DXBcL emoji_wheel--singleCenterUI3--eqZib emoji_wheel--singleCenter--X3W61 emoji_wheel--singleCenterReaction--xWX-5 emoji_wheel--singleCenter--X3W61",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3,
         ariaHidden: !0
       })
@@ -240,7 +240,7 @@ function eh({
     className: "emoji_wheel--voteStampsCenterUI3--g1PID emoji_wheel--borderedCenterUI3--ShEHr emoji_wheel--centerUI3--40t9X emoji_wheel--center--5zTgA",
     children: jsx("div", {
       className: "emoji_wheel--singleCenterVotingUI3--JgXPl emoji_wheel--singleCenterUI3--eqZib emoji_wheel--singleCenter--X3W61 emoji_wheel--singleCenterVoting--N2E5- emoji_wheel--singleCenter--X3W61",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A4,
         ariaHidden: !0
       })
@@ -259,7 +259,7 @@ function eh({
           recordingKey: "emoji-wheel-reaction-button",
           className: E()("emoji_wheel--reactionsButtonUI3--dUVKv emoji_wheel--reactionsButton--H7Rps", "REACTION" === e && q),
           "data-fullscreen-intercept": !0,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A3,
             "aria-label": getI18nString("fullscreen.reaction_wheel")
           })
@@ -268,7 +268,7 @@ function eh({
           recordingKey: "emoji-wheel-stamp-button",
           className: E()("emoji_wheel--stampsButtonUI3--CtJMI emoji_wheel--stampsButton--XDDR8", "STAMP" === e && q),
           "data-fullscreen-intercept": !0,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A4,
             "aria-label": getI18nString("fullscreen.stamp_wheel")
           })
@@ -494,7 +494,7 @@ function ef({
       }[s],
       onAnimationStart,
       onAnimationEnd,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         ariaHidden: !0,
         autosize: !0,
         height: `${ec}px`,
@@ -507,7 +507,7 @@ function ef({
         active: o.current === r,
         type: s,
         onMouseEnter: r => {
-          if (o.current = r, null == e) t(r.position); else {
+          if (o.current = r, null == e) t(r.position);else {
             let n = (r.position - e) % 8;
             n < -4 && (n += 8);
             n > 4 && (n -= 8);
@@ -521,7 +521,7 @@ function ef({
         onClick: (e, t) => {
           d(t, e.clientX, e.clientY);
         }
-      }, r.name)), _ && !u && jsx(_$$B, {
+      }, r.name)), _ && !u && jsx(SvgComponent, {
         ariaHidden: !0,
         autosize: !0,
         height: `${ec + 54}px`,
@@ -647,7 +647,7 @@ function ey(e) {
         left: v
       },
       ref: h,
-      children: !c && jsx(_$$E, {
+      children: !c && jsx(ButtonPrimitive, {
         "aria-label": x,
         className: E()("emoji_wheel--emojiButtonContainer--kC-6-", p && "r-chat" === emoji.name && "emoji_wheel--emojiButtonContainerDisabled--zc8XC"),
         "data-fullscreen-intercept": !0,
@@ -711,7 +711,7 @@ function eb(e) {
   }();
   let I = W(stamp.name);
   let S = useContext(H).shouldDragCancel;
-  let v = Pl({
+  let v = getViewportZoom({
     subscribeToUpdates_expensive: I
   });
   let A = useHandleMouseEvent(`emojiWheel.draggableStamp.${stamp.name}`, "mousedown", e.onClick);

@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { y1, w4 } from "../905/445814";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { Jm } from "../figma_app/387599";
@@ -20,7 +20,7 @@ import { U3 } from "../figma_app/412189";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { hasOrgRole, getPluginVersion } from "../figma_app/300692";
-import { zF } from "../figma_app/45218";
+import { isThirdPartyMonetized } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { C as _$$C } from "../905/180";
@@ -195,7 +195,7 @@ function G(e) {
         fileName: e.name,
         onClick: () => {
           t(oB());
-          e.can_run ? zF(resource) ? s0(t, () => p(e)) : p(e) : e.requests_allowed && c(e);
+          e.can_run ? isThirdPartyMonetized(resource) ? s0(t, () => p(e)) : p(e) : e.requests_allowed && c(e);
         }
       }, e.key)) : jsx("div", {
         className: d1,
@@ -225,15 +225,15 @@ function V({
         let t = () => {
           F(i, r, s, d, e);
         };
-        zF(i) ? s0(s, t) : t();
+        isThirdPartyMonetized(i) ? s0(s, t) : t();
       }
     },
-    icon: jsx(B, {
+    icon: jsx(SvgComponent, {
       svg: _$$A2,
       className: K1
     }),
     text: t,
-    rightIcon: e ? jsx(B, {
+    rightIcon: e ? jsx(SvgComponent, {
       svg: _$$A,
       className: Yr
     }) : void 0

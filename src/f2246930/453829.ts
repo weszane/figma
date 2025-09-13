@@ -2,7 +2,7 @@ import _require from "@stylexjs/stylex";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { t as _$$t } from "../905/150656";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K } from "../905/443068";
 import { T } from "../905/909590";
 import { E } from "../905/53857";
@@ -71,12 +71,12 @@ export function $$b0({
         children: "Figmake Scope [INTERNAL]"
       }), jsxs("div", {
         className: "x78zum5 x1q0g3np xg2d0mh",
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           iconPrefix: jsx(X, {}),
           onClick: b,
           children: "Copy"
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "secondary",
           iconPrefix: jsx(_, {}),
           onClick: f,

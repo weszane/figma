@@ -12,7 +12,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { stripHtmlTags } from "../905/491152";
 import { $$ } from "../figma_app/637027";
 import { M3 } from "../figma_app/119475";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -31,17 +31,17 @@ import { t as _$$t3 } from "../469e6e40/489933";
 import { m0 } from "../figma_app/976749";
 import { dR, Gt, RK } from "../figma_app/248118";
 import { $1, b4, cW, Be, j1, nl, kd, ll, YO, ZT, Ud, WK, Ys, yQ, jg, bh, U6, x as _$$x } from "../figma_app/844435";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { tw, ul, EO, OY, gn, J$, lt } from "../figma_app/86989";
 import { BF } from "../figma_app/684168";
 import { j as _$$j } from "../905/813868";
 import { Um } from "../905/848862";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { getPluginVersion, isDevModeWithCodegen, pluginMetadata } from "../figma_app/300692";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { hasLocalFileId } from "../figma_app/155287";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { bE } from "../figma_app/78725";
 import { V as _$$V } from "../905/480825";
 import { z as _$$z } from "../905/255946";
@@ -76,7 +76,7 @@ function em(e) {
     let t = e.resource?.org_id && i[e.resource.org_id]?.name;
     return jsx(_$$s, {
       className: Sx,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t ? getI18nString("community.plugins.private_for_plugin_org_name", {
         orgName: t
       }) : getI18nString("community.plugins.private_for_plugin_org")
@@ -411,7 +411,7 @@ let eF = memo(function (e) {
   let w = !!(p && h) || dropdownIsShown;
   let f = jsx(_W, {
     resourceId: e.pluginId,
-    resourceType: vt.PLUGIN,
+    resourceType: ResourceTypeNoComment.PLUGIN,
     parentView: nN.TILE,
     isFauxFocused: w
   });
@@ -508,7 +508,7 @@ function eN(e) {
   });
   return jsxs(Fragment, {
     children: [jsx(eP, {
-      icon: R ? void 0 : jsx(_$$B, {
+      icon: R ? void 0 : jsx(SvgComponent, {
         svg: _$$A4,
         className: Bx
       }),
@@ -598,7 +598,7 @@ function eP(e) {
   let B = EO(R) && !F;
   let E = OY(R);
   let D = gn(R) && !F;
-  let M = sZ();
+  let M = useCurrentUserOrg();
   let z = ll();
   let U = !F && BF({
     org: M,
@@ -642,7 +642,7 @@ function eP(e) {
           children: jsx(_$$t, {
             svg: e.publishingStatusIcon
           })
-        }), e.showOnClickDropdownChevron && jsx(_$$B, {
+        }), e.showOnClickDropdownChevron && jsx(SvgComponent, {
           svg: _$$A2,
           className: o2
         })]
@@ -657,7 +657,7 @@ function eP(e) {
       onClick: e.onOptionsClick,
       "aria-label": getI18nString("universal_insert.more_options"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("universal_insert.more_options")
       },
       children: jsx(_$$J, {})
@@ -705,7 +705,7 @@ function eP(e) {
     iconUrl: l
   });
   let ee = () => {
-    if (Cu({
+    if (logAndTrackCTA({
       trackingContext: x.name,
       pluginId: e.pluginId
     }), B && !E || U) {
@@ -819,7 +819,7 @@ function eA(e) {
   let F = !!(h && R) || g;
   let N = jsx(_W, {
     resourceId: e.widgetId,
-    resourceType: vt.WIDGET,
+    resourceType: ResourceTypeNoComment.WIDGET,
     parentView: nN.TILE,
     isFauxFocused: F
   });
@@ -1029,7 +1029,7 @@ let eM = memo(function (e) {
   let I = c ? getPluginVersion(c) : null;
   let m = i.name;
   I?.name && I?.name !== "" && (m = I?.name);
-  let x = sZ();
+  let x = useCurrentUserOrg();
   let j = U6();
   let b = !e.localWidget && BF({
     org: x,
@@ -1072,7 +1072,7 @@ let eM = memo(function (e) {
     }), e.onOptionsClick && jsx(_$$K, {
       "aria-label": getI18nString("universal_insert.more_options"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("universal_insert.more_options")
       },
       onClick: e.onOptionsClick,
@@ -1087,7 +1087,7 @@ let eM = memo(function (e) {
   return jsxs("div", {
     className: p()(e.useHorizontalLayout ? Gy : BG, isFauxFocused ? c6 : void 0),
     onClick: i => {
-      Cu({
+      logAndTrackCTA({
         trackingContext: R.name,
         widgetId: e.widgetId
       });
@@ -1175,7 +1175,7 @@ export function $$ez5(e) {
   let _ = e.usePrimaryButtonStyles ? jsxs($$, {
     onClick: w,
     className: lI,
-    children: [renderI18nText("universal_insert.run"), g && jsx(_$$B, {
+    children: [renderI18nText("universal_insert.run"), g && jsx(SvgComponent, {
       svg: _$$A2,
       className: sI
     })]
@@ -1183,7 +1183,7 @@ export function $$ez5(e) {
     className: lO,
     onClick: w,
     ref: e.buttonRef,
-    children: [renderI18nText("universal_insert.run"), g && jsx(_$$B, {
+    children: [renderI18nText("universal_insert.run"), g && jsx(SvgComponent, {
       svg: _$$A2,
       className: zZ
     })]
@@ -1259,7 +1259,7 @@ export function $$eH1(e) {
   let w = jsxs($$, {
     onClick: h,
     className: lI,
-    children: [renderI18nText("universal_insert.add"), o && jsx(_$$B, {
+    children: [renderI18nText("universal_insert.add"), o && jsx(SvgComponent, {
       svg: _$$A2,
       className: sI
     })]

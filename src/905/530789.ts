@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback } from "react";
 import { createPortal } from "react-dom";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { x } from "../905/587214";
 import { permissionScopeHandler } from "../905/189185";
 import { supportedResolvedTypes } from "../905/929949";
@@ -17,7 +17,7 @@ import { Pf, qQ } from "../905/782020";
 import { ay } from "../905/886545";
 import { ZS, Fs } from "../905/24780";
 let $$v2 = "variables-modal-create-variable";
-let I = forwardRef((e, t) => jsxs(E, {
+let I = forwardRef((e, t) => jsxs(ButtonPrimitive, {
   ...e,
   className: ZS,
   ref: t,

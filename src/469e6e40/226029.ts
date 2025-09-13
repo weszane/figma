@@ -11,7 +11,7 @@ import { WZ } from "../905/893645";
 import { F_, EL } from "../905/858282";
 import { rRT, LPt } from "../figma_app/6204";
 import { useDispatch, useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
 import { O as _$$O } from "../905/487602";
 import { J as _$$J } from "../905/125993";
@@ -19,7 +19,7 @@ import { w as _$$w } from "../905/770105";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { P as _$$P2 } from "../905/347284";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { SidebarRow } from "../451de8f0/94979";
 import { sf } from "../905/929976";
 import { a9 } from "../figma_app/741211";
@@ -31,7 +31,7 @@ import { FMemberRoleType, FOrganizationRoleType, FPlanNameType, FOrganizationLev
 import { AdminSettingsSelectorView } from "../figma_app/43951";
 import { kA } from "../figma_app/336853";
 import { FC } from "../figma_app/212807";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { oh } from "../905/18797";
 import { UserRole, GroupType } from "../905/441038";
@@ -242,7 +242,7 @@ function ef(e) {
         }));
       }
     },
-    text: jsx(_$$E2, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: renderI18nText("org_admin_tab.dashboard")
     }),
@@ -318,7 +318,7 @@ function ey(e) {
         children: icon
       }),
       "data-onboarding-key": onboardingKey,
-      text: jsx(_$$E2, {
+      text: jsx(TextWithTruncation, {
         truncate: !0,
         children: jsx("span", {
           "data-onboarding-key": onboardingKey,
@@ -380,7 +380,7 @@ function eI(e) {
       children: r.map(t => jsx("li", {
         children: e.renderFn(t)
       }, t.id))
-    }), o && jsxs(_$$E, {
+    }), o && jsxs(ButtonPrimitive, {
       "aria-label": t ? e.seeLessAriaLabel : e.seeMoreAriaLabel,
       "aria-live": "polite",
       className: "x78zum5 x6s0dn4 x1nfngrj xh8yej3 x8rdmch x1gskr33 x1ihwiht xe0qb83 x12tve8b x1icplyp",
@@ -395,7 +395,7 @@ function eI(e) {
           "aria-hidden": "true",
           style: eN
         })
-      }), jsx(_$$E2, {
+      }), jsx(TextWithTruncation, {
         color: "secondary",
         children: t ? getI18nString("sidebar.see_less") : getI18nString("sidebar.see_all")
       })]
@@ -436,7 +436,7 @@ function eT(e) {
     icon: jsx(ex, {
       children: jsx(_$$w, {})
     }),
-    text: jsx(_$$E2, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: e.name
     }),
@@ -471,7 +471,7 @@ function eA(e) {
       size: 16,
       entity: e
     }),
-    text: jsx(_$$E2, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: e.name
     }),
@@ -497,7 +497,7 @@ let eO = memo(() => jsx(Fragment, {
   }, t))
 }));
 function eL() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   let t = a9();
   let a = _6();
   let s = useRef(!1);

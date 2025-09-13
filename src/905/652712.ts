@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useCallback, useRef, useImperativeHandle, useState, useEffect } from "react";
 import { CheckboxPrimitive } from "../905/549791";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { l as _$$l } from "../905/479687";
 import { J } from "../905/129695";
 import d from "classnames";
@@ -116,7 +116,7 @@ let $$v0 = forwardRef(function ({
         maxTagsPerResource: jI
       }) : getI18nString("community.publishing.select_tags_to_help_people_discover_your_resource"),
       error: x,
-      afterErrorContent: !C && jsx($n, {
+      afterErrorContent: !C && jsx(Button, {
         variant: "link",
         onClick: () => {
           T(!0);

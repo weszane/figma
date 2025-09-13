@@ -2,8 +2,8 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { $n } from "../905/521428";
-import { E as _$$E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { Multiplayer } from "../figma_app/763686";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
@@ -35,7 +35,7 @@ function N(e) {
       children: e.userHandle
     }), jsx("div", {
       className: k
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "primary",
       onClick: e.actionCallback,
       children: e.actionText
@@ -43,7 +43,7 @@ function N(e) {
   });
 }
 function P(e) {
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     onClick: e.actionCallback,
     className: T,
     children: [jsx("span", {
@@ -67,7 +67,7 @@ function O(e) {
   let u = useCallback(e => {
     buttonCallback && (buttonCallback(e), t(jD()));
   }, [buttonCallback, t]);
-  let p = jsxs(_$$E, {
+  let p = jsxs(ButtonPrimitive, {
     onClick: c,
     className: T,
     disabled,
@@ -82,7 +82,7 @@ function O(e) {
     "data-preferred-theme": "secondary" === e.buttonVariant ? "dark" : void 0,
     children: [p, jsx("div", {
       className: k
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: e.buttonVariant,
       onClick: u,
       disabled: "secondary" === e.buttonVariant && !e.buttonCallback,

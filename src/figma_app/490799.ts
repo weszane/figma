@@ -3,7 +3,7 @@ import { isValidElement } from "react";
 import { K } from "../905/443068";
 import { f as _$$f } from "../905/54715";
 import o from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { ZI, z3, $e, hh, pj, Ij, G, YE } from "../905/660757";
@@ -38,7 +38,7 @@ export function $$m1({
     children: [t && isValidElement(t) ? jsx("div", {
       className: G,
       children: t
-    }) : jsx(B, {
+    }) : jsx(SvgComponent, {
       autosize: !0,
       className: G,
       width: "16px",

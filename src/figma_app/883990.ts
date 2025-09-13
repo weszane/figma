@@ -1,7 +1,7 @@
 import d from 'classnames';
 import { forwardRef, useImperativeHandle, useRef } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { Y } from '../905/193977';
 import { b as _$$b } from '../905/222272';
 import { o as _$$o } from '../905/223420';
@@ -14,7 +14,7 @@ import { formatI18nMessage } from '../905/482208';
 import { C as _$$C } from '../905/504203';
 import { $P, qc, Rt } from '../905/590676';
 import { z } from '../905/654860';
-import { B } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { cq } from '../905/794154';
 import { A as _$$A3 } from '../1617/377036';
 import { s as _$$s } from '../cssbuilder/589278';
@@ -36,7 +36,7 @@ function w({
     },
     'htmlAttributes': {
       'data-tooltip': getI18nString('search.search_bar.clear'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(_$$C, {
       style: {
@@ -113,7 +113,7 @@ let $$P2 = forwardRef(({
   z(o);
   _$$y(e, searchInputRef);
   let O = o3(nt.quickActionsA11y);
-  let P = isRoot || o ? jsx(B, {
+  let P = isRoot || o ? jsx(SvgComponent, {
     ariaHidden: O,
     svg: _$$A3,
     className: qc
@@ -173,7 +173,7 @@ let $$D0 = forwardRef(({
   _$$C2(searchInputRef);
   z(d);
   _$$y(e, searchInputRef);
-  let C = jsx(B, {
+  let C = jsx(SvgComponent, {
     svg: _$$A3,
     className: qc
   });

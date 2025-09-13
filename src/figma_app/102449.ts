@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { x } from "../905/211326";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { X } from "../figma_app/91315";
 import { hv } from "../905/952832";
@@ -35,7 +35,7 @@ let _ = (e, t = {}) => function (r) {
   });
   let E = jsx("div", {
     className: `${g} ${r.overlayClass || ""}`,
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       className: `${Lw} ${Kk} ${g} ${r.overlayClass || ""}`,
       svg: r.icon || A
     })
@@ -45,7 +45,7 @@ let _ = (e, t = {}) => function (r) {
     style: h,
     children: [f, E, jsx("div", {
       className: sH,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "ghost",
         onClick: _,
         children: renderI18nText("avatar_editor.edit")

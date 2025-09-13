@@ -9,7 +9,7 @@ import { Point } from "../905/736624";
 import { UK } from "../figma_app/740163";
 import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
-import { _X, Z0 } from "../figma_app/62612";
+import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { symbolUsageEnum } from "../figma_app/198712";
@@ -41,7 +41,7 @@ export function $$E0() {
     }
   }
   let l = !!e && e.length >= 1;
-  let d = _X({
+  let d = getViewportInfo({
     subscribeToUpdates_expensive: l
   });
   return d && e ? jsx(S, {
@@ -83,11 +83,11 @@ function S({
         style: d,
         children: !!t?.length && jsx("div", {
           children: t.map((t, s) => {
-            let r = Z0(e, {
+            let r = viewportToScreen(e, {
               x: t.bounds.x,
               y: t.bounds.y
             });
-            let a = Z0(e, {
+            let a = viewportToScreen(e, {
               x: t.bounds.x + t.bounds.width,
               y: t.bounds.y + t.bounds.height
             });

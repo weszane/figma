@@ -7,7 +7,7 @@ import { zS, qD } from "../figma_app/471982";
 import { Ay } from "../905/506641";
 import { YW } from "../figma_app/350203";
 import { fu } from "../figma_app/831799";
-import { qD as _$$qD } from "../figma_app/314264";
+import { trackContextViewed } from "../figma_app/314264";
 import { Cn } from "../905/862913";
 import { kS } from "../figma_app/864723";
 import { FTemplateCategoryType } from "../figma_app/191312";
@@ -44,12 +44,12 @@ function j({
   useEffect(() => {
     if (!e) return;
     let t = t => {
-      "LOAD_FINISHED" === t.data && (e.querySelector("iframe").classList.add("canvas_viewer--showIframe--uYOO5"), e.setAttribute("data-loaded", "true"), u(!0), _$$qD({
+      "LOAD_FINISHED" === t.data && (e.querySelector("iframe").classList.add("canvas_viewer--showIframe--uYOO5"), e.setAttribute("data-loaded", "true"), u(!0), trackContextViewed({
         name: "hub-file-canvas-loaded"
       }));
     };
     let r = () => {
-      document.activeElement === e.querySelector("iframe") && _$$qD({
+      document.activeElement === e.querySelector("iframe") && trackContextViewed({
         name: "community-LO-embed-iframe-interacted",
         comparisonVariant: m ? "fullscreen" : "thumbnail"
       });
@@ -76,7 +76,7 @@ function j({
       t.style.top = "48px";
       t.style.left = "48px";
     });
-    _$$qD({
+    trackContextViewed({
       name: "community-LO-embed-view-expanded"
     });
     p(!0);

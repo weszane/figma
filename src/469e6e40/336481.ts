@@ -4,12 +4,12 @@ import { useMemo } from "react";
 import { s as _$$s } from "../905/403855";
 import { zN } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { B as _$$B } from "../905/261906";
 import { JT } from "../figma_app/847597";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { hz, cG } from "../469e6e40/123707";
 if (_require, 443 == require.j) {}
 export function $$g0(e) {
@@ -22,13 +22,13 @@ export function $$h2(e) {
   } = e;
   let r = useMemo(() => {
     let s = {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.tooltipText,
       "data-tooltip-show-below": !0,
       "data-tooltip-timeout-delay": 50,
       "data-tooltip-max-width": 210
     };
-    return icon ? jsx(B, {
+    return icon ? jsx(SvgComponent, {
       className: hz,
       svg: icon,
       ...s
@@ -63,7 +63,7 @@ export function $$x1({
     variant: "lock-grey",
     tooltipText: getI18nString("members_table.role_idp_tooltip.seat_rename")
   }) : jsx("span", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("admin_settings.people_tab.seat_invite_pending_tooltip"),
     children: a
   });

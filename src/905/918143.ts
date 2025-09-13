@@ -10,7 +10,7 @@ import { ks } from "../figma_app/637027";
 import { tZ, xe, DK, I$, w, gP, Kz, K_, UW } from "../905/599844";
 import { useDispatch } from "react-redux";
 import g from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { oB, j7 } from "../905/929976";
 import { Um } from "../905/848862";
 import { Cf, it } from "../905/504727";
@@ -84,7 +84,7 @@ function I({
         role: "listbox",
         children: [b ? b.title : a, jsx("span", {
           className: Kz,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: _$$A
           })
         })]

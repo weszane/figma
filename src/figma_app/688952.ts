@@ -2,16 +2,16 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { F as _$$F } from "../905/422355";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 import { openFileKeyAtom } from "../figma_app/516028";
@@ -167,7 +167,7 @@ export let $$y0 = registerModal(function (e) {
       P(!1);
     }
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -188,7 +188,7 @@ export let $$y0 = registerModal(function (e) {
               border: "1px solid rgba(235, 87, 87, 0.3)",
               borderRadius: "6px"
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: "danger",
               children: v
             })
@@ -200,7 +200,7 @@ export let $$y0 = registerModal(function (e) {
               border: "1px solid rgba(39, 174, 96, 0.3)",
               borderRadius: "6px"
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: "success",
               children: x
             })
@@ -218,7 +218,7 @@ export let $$y0 = registerModal(function (e) {
                 marginBottom: "4px",
                 fontSize: "14px"
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: "md5(file_key):"
               })
             }), jsx("div", {
@@ -227,7 +227,7 @@ export let $$y0 = registerModal(function (e) {
                 fontSize: "12px",
                 color: "#666"
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: k || "No file key available"
               })
             })]
@@ -245,7 +245,7 @@ export let $$y0 = registerModal(function (e) {
                 marginBottom: "16px",
                 fontSize: "16px"
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: "Nimbus Foundry"
               })
             }), jsx("div", {
@@ -270,7 +270,7 @@ export let $$y0 = registerModal(function (e) {
                 style: {
                   width: 320
                 },
-                children: jsx($n, {
+                children: jsx(Button, {
                   variant: "primary",
                   onClick: j,
                   disabled: I,
@@ -280,7 +280,7 @@ export let $$y0 = registerModal(function (e) {
                 style: {
                   width: 320
                 },
-                children: jsx($n, {
+                children: jsx(Button, {
                   variant: "secondary",
                   onClick: F,
                   disabled: b,
@@ -290,7 +290,7 @@ export let $$y0 = registerModal(function (e) {
                 style: {
                   width: 320
                 },
-                children: jsx($n, {
+                children: jsx(Button, {
                   variant: "secondary",
                   onClick: U,
                   disabled: L || !C?.urls?.controller,
@@ -312,7 +312,7 @@ export let $$y0 = registerModal(function (e) {
                 marginBottom: "16px",
                 fontSize: "16px"
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: "Devbox Foundry"
               })
             }), jsxs("div", {
@@ -326,7 +326,7 @@ export let $$y0 = registerModal(function (e) {
                 style: {
                   width: 320
                 },
-                children: jsx($n, {
+                children: jsx(Button, {
                   variant: "primary",
                   onClick: M,
                   disabled: r,
@@ -336,7 +336,7 @@ export let $$y0 = registerModal(function (e) {
                 style: {
                   width: 320
                 },
-                children: jsx($n, {
+                children: jsx(Button, {
                   variant: "secondary",
                   onClick: () => FJ("/foundry/preview", "_blank"),
                   children: "Open Foundry Preview"

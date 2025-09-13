@@ -12,10 +12,10 @@ import { zm, Qi } from "../figma_app/49598";
 import { C as _$$C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
 import { s0, M5 } from "../figma_app/350203";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentUser } from "../905/372672";
 import { M4 } from "../905/713695";
-import { U, xQ, vt } from "../figma_app/45218";
+import { hasClientMeta, isWidget, ResourceTypeNoComment } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
 export function $$$$w0(e, t, r, m) {
@@ -24,14 +24,14 @@ export function $$$$w0(e, t, r, m) {
     let o = selectCurrentUser();
     let a = Jm();
     let l = () => {
-      XW(e) || (Cu(b()), U(e) ? n(zm({
+      XW(e) || (logAndTrackCTA(b()), hasClientMeta(e) ? n(zm({
         hubFileId: e.id
-      })) : xQ(e) ? n(_$$C({
+      })) : isWidget(e) ? n(_$$C({
         id: e.id,
-        resourceType: vt.WIDGET
+        resourceType: ResourceTypeNoComment.WIDGET
       })) : n(_$$C({
         id: e.id,
-        resourceType: vt.PLUGIN
+        resourceType: ResourceTypeNoComment.PLUGIN
       })));
     };
     let m = e => {
@@ -53,17 +53,17 @@ export function $$$$w0(e, t, r, m) {
     let g = t => {
       if (!XW(e)) {
         if (t.stopPropagation(), !o) throw Error(`Tried to unlike a ${KH(e)} as a signed out user`);
-        Cu(b());
-        U(e) ? n(Qi({
+        logAndTrackCTA(b());
+        hasClientMeta(e) ? n(Qi({
           hubFileId: e.id,
           likeId: r || void 0
-        })) : xQ(e) ? n($({
+        })) : isWidget(e) ? n($({
           id: e.id,
-          resourceType: vt.WIDGET,
+          resourceType: ResourceTypeNoComment.WIDGET,
           likeId: r || void 0
         })) : n($({
           id: e.id,
-          resourceType: vt.PLUGIN,
+          resourceType: ResourceTypeNoComment.PLUGIN,
           likeId: r || void 0
         }));
       }
@@ -89,7 +89,7 @@ export function $$$$w0(e, t, r, m) {
       if (!XW(e)) return;
       let t = qY(e);
       if (!t) throw Error("Missing resource content");
-      Cu(N());
+      logAndTrackCTA(N());
       let r = v({
         resourceId: e.id,
         contentId: t.id,
@@ -140,7 +140,7 @@ export function $$$$w0(e, t, r, m) {
       let s = qY(e);
       if (!s) throw Error("Missing resource content");
       if (t.stopPropagation(), !p) throw Error("Tried to unlike a resource as a signed out user");
-      Cu(N());
+      logAndTrackCTA(N());
       let n = b({
         resourceId: e.id,
         contentId: s.id,

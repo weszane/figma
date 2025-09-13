@@ -21,7 +21,7 @@ import { F as _$$F4 } from '../905/224';
 import { T as _$$T2 } from '../905/2124';
 import { useMemoStable } from '../905/19536';
 import { zD, zz } from '../905/32188';
-import { bL as _$$bL3 } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { k as _$$k3 } from '../905/44647';
 import { lJ as _$$lJ, GQ } from '../905/50159';
 import { W as _$$W4 } from '../905/63398';
@@ -43,7 +43,7 @@ import { h as _$$h4 } from '../905/123399';
 import { sha1HexFromBytes } from '../905/125019';
 import { J as _$$J4 } from '../905/125483';
 import { J as _$$J3 } from '../905/125993';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { A as _$$A7 } from '../905/139173';
 import { P as _$$P8 } from '../905/143421';
 import { _ as _$$_5 } from '../905/144222';
@@ -126,7 +126,7 @@ import { GG } from '../905/511649';
 import { h as _$$h3 } from '../905/513745';
 import { C as _$$C2 } from '../905/520159';
 import { j as _$$j2 } from '../905/521149';
-import { $n, IK } from '../905/521428';
+import { Button, ButtonWide } from '../905/521428';
 import { j as _$$j3 } from '../905/523935';
 import { q as _$$q3 } from '../905/524117';
 import { A as _$$A9, O as _$$O3 } from '../905/536006';
@@ -154,7 +154,7 @@ import { jS, Q1 } from '../905/619652';
 import { R as _$$R3 } from '../905/621802';
 import { convertTeamToRaw } from '../905/628874';
 import { T as _$$T3 } from '../905/632137';
-import { E as _$$E } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { useSyncedRef } from '../905/633914';
 import { F as _$$F5 } from '../905/634016';
 import { eo as _$$eo, fp as _$$fp2 } from '../905/634218';
@@ -178,7 +178,7 @@ import { U as _$$U2 } from '../905/708285';
 import { n8 as _$$n8, T_ } from '../905/713167';
 import { IT, M4 } from '../905/713695';
 import { pn as _$$pn, If } from '../905/714538';
-import { B as _$$B, V as _$$V2 } from '../905/714743';
+import { SvgComponent, V as _$$V2 } from '../905/714743';
 import { l as _$$l } from '../905/716947';
 import { S as _$$S } from '../905/720922';
 import { E as _$$E7 } from '../905/730894';
@@ -196,7 +196,7 @@ import { z as _$$z6 } from '../905/821223';
 import { vL } from '../905/826900';
 import { Spacer, AutoLayout } from '../905/470281';
 import { q as _$$q } from '../905/838985';
-import { dq as _$$dq, sZ as _$$sZ } from '../905/845253';
+import { useCurrentUserOrgId, useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { $A } from '../905/862883';
@@ -223,7 +223,7 @@ import { a as _$$a4 } from '../905/964520';
 import { O as _$$O } from '../905/969533';
 import { d as _$$d3 } from '../905/976845';
 import { gg, Rk } from '../905/981217';
-import { E as _$$E6 } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { b as _$$b } from '../905/985254';
 import { F as _$$F7 } from '../905/989956';
 import { X as _$$X2 } from '../1250/115566';
@@ -327,7 +327,7 @@ import { TeamCanAdmin } from '../figma_app/43951';
 import { Kk } from '../figma_app/47085';
 import { kF, Q6 } from '../figma_app/48566';
 import { FEditorType } from '../figma_app/53721';
-import { _X, Yb } from '../figma_app/62612';
+import { getViewportInfo, scaleRect } from '../figma_app/62612';
 import { v as _$$v4 } from '../figma_app/79979';
 import { getObservableValue } from '../figma_app/84367';
 import { u1 as _$$u6, XE } from '../figma_app/91703';
@@ -468,7 +468,7 @@ import { s as _$$s0 } from '../figma_app/874592';
 import { generateRecordingKey, SKIP_RECORDING } from '../figma_app/878298';
 import { Sh } from '../figma_app/889655';
 import { isInteractionOrEvalMode, isInteractionPathCheck } from '../figma_app/897289';
-import { U as _$$U } from '../figma_app/901889';
+import { trackFileEventWithStore } from '../figma_app/901889';
 import { j as _$$j, k as _$$k2 } from '../figma_app/904944';
 import { mY } from '../figma_app/915281';
 import { utilityNoop } from '../figma_app/918700';
@@ -487,7 +487,7 @@ import { KD } from '../figma_app/975811';
 import { UN as _$$UN } from '../figma_app/976345';
 import { jv as _$$jv, Wh as _$$Wh } from '../figma_app/985200';
 import { A as _$$A19 } from '../vendor/21595';
-import { A as _$$A8 } from '../vendor/90566';
+import { useDebouncedCallback } from 'use-debounce';
 import { P as _$$P6 } from '../vendor/348225';
 import s, { useDispatch, useSelector } from 'react-redux';
 import { A as _$$A17 } from '../vendor/850789';
@@ -572,7 +572,7 @@ function H({
       useFlushSyncExpensive: !0
     });
   }(useMemo(() => e, [e]));
-  let n = _X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   return n ? jsx(Fragment, {
@@ -592,7 +592,7 @@ function X({
   buzzFrameId: n
 }) {
   let [l, r] = useState(!1);
-  let i = useMemo(() => Yb(t, e), [t, e]);
+  let i = useMemo(() => scaleRect(t, e), [t, e]);
   let s = useCallback(() => {
     r(!0);
   }, []);
@@ -975,7 +975,7 @@ let et = e => {
 };
 let en = (e, t, n, l, r, i, o) => {
   let d = useDispatch();
-  let c = _$$U();
+  let c = trackFileEventWithStore();
   useEffect(() => {
     if (!e) return;
     let {
@@ -1673,7 +1673,7 @@ function tQ({
   }, [e]);
   let u = d ? {
     'data-tooltip': e,
-    'data-tooltip-type': Ib.TEXT
+    'data-tooltip-type': KindEnum.TEXT
   } : void 0;
   return jsxs('div', {
     ...Ay.props(i.container, !l && i.extraPaddingBottom),
@@ -1877,7 +1877,7 @@ function t3() {
   });
 }
 function t9() {
-  let e = _$$sZ();
+  let e = useCurrentUserOrg();
   return e ? jsx('div', {
     className: 'x1057jvv',
     children: jsx(_$$n2, {
@@ -2223,7 +2223,7 @@ function nx({
   let t = nu();
   return jsx(tQ, {
     title: getI18nString('cooper.templates.new_blank_asset'),
-    actions: jsx($n, {
+    actions: jsx(Button, {
       variant: 'secondary',
       onClick: t,
       iconPrefix: jsx(_$$q, {}),
@@ -2617,7 +2617,7 @@ function nH({
       }
     }), jsx('div', {
       ..._$$xk(nZ.headerContainer, isHeaderStickied && isExpanded && nZ.headerStickied),
-      children: jsxs(_$$E, {
+      children: jsxs(ButtonPrimitive, {
         ref: headerRef,
         onClick: () => setIsExpanded(!isExpanded),
         ..._$$xk(nZ.collapsibleHeader, d ? nZ.leftRailHeight : nZ.defaultHeight),
@@ -2771,7 +2771,7 @@ function nQ({
   showAssetTypeName: u = !1
 }) {
   let x = 'insert-cooper-template';
-  let m = _$$U();
+  let m = trackFileEventWithStore();
   let h = Xr(Tw);
   let g = jw();
   let f = v3();
@@ -3320,7 +3320,7 @@ function lj({
   }) : renderI18nText('cooper.templates.no_templates_found');
   return jsxs('div', {
     className: 'x1nz7w5u xyx8554 xzc32ve x1w4f5ud x78zum5 x98rzlu xdt5ytf x6s0dn4',
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A5,
       useOriginalSrcFills_DEPRECATED: !0,
       svgHeight: '120px'
@@ -3416,7 +3416,7 @@ function lT() {
 }
 function lI() {
   let e = Xr(Lm);
-  let t = _$$sZ();
+  let t = useCurrentUserOrg();
   let n = _$$j2();
   let [{
     data: l,
@@ -3890,7 +3890,7 @@ function lD({
   teamId: e,
   displayName: t
 }) {
-  let n = _$$dq();
+  let n = useCurrentUserOrgId();
   let {
     requestLoadMoreForTeam,
     templatesByTeam,
@@ -4672,7 +4672,7 @@ function rO({
     'aria-label': getI18nString('cooper.inline_menu.corners'),
     'aria-pressed': e,
     'tooltip': getI18nString('cooper.inline_menu.corners'),
-    'tooltipType': Ib.TEXT,
+    'tooltipType': KindEnum.TEXT,
     'showCaret': !0,
     'isActive': e,
     'onClick': t,
@@ -4712,7 +4712,7 @@ function rM({
             children: jsx(j5, {
               bigNudgeAmount,
               'data-tooltip': getI18nString('cooper.inline_menu.corners'),
-              'data-tooltip-type': Ib.TEXT,
+              'data-tooltip-type': KindEnum.TEXT,
               'dispatch': t,
               'formatter': d.current,
               'labelWidth': 88,
@@ -4827,14 +4827,14 @@ function r7({
 }) {
   let d = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let c = _$$c5(d, n ?? '');
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     onClick: l,
     ..._$$xk(r6.container, i && r6.containerDisabled),
     recordingKey: r,
     disabled: i,
     htmlAttributes: {
       'data-tooltip': a,
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     children: [jsx('span', {
       ..._$$xk(i && r6.iconContainerDisabled),
@@ -5004,7 +5004,7 @@ function iD() {
         'aria-label': getI18nString('cooper.inline_menu.spacing'),
         'aria-pressed': isPopoverOpen,
         'tooltip': getI18nString('cooper.inline_menu.spacing'),
-        'tooltipType': Ib.TEXT,
+        'tooltipType': KindEnum.TEXT,
         'isActive': isPopoverOpen,
         'onClick': togglePopover,
         'showCaret': !0,
@@ -5099,7 +5099,7 @@ function iq() {
         'aria-label': getI18nString('cooper.inline_menu.layout_control_label'),
         'aria-pressed': isPopoverOpen,
         'tooltip': getI18nString('cooper.inline_menu.layout_control_label'),
-        'tooltipType': Ib.TEXT,
+        'tooltipType': KindEnum.TEXT,
         'showCaret': !0,
         'isActive': isPopoverOpen,
         'onClick': togglePopover,
@@ -5169,7 +5169,7 @@ function iQ({
         children: jsx(_$$ar, {
           'aria-label': n,
           'tooltip': n,
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'tooltipShowAbove': !1,
           'onClick': () => t(e),
           'disabled': !l,
@@ -5211,7 +5211,7 @@ let oO = memo(({
   useEffect(() => {
     C.current || (typeof n == 'string' ? z(n) : z(null));
   }, [n, C]);
-  let N = _$$A8(useCallback(e => {
+  let N = useDebouncedCallback(useCallback(e => {
     let t = UN().getCurrentPage();
     !((t?.directlySelectedNodes?.length ?? 0) > 50) && e && (C.current || (C.current = !0), l(void 0, {
       fontFamily: e
@@ -5242,7 +5242,7 @@ let oO = memo(({
     B.current?.searchInput?.select();
   }, [D]);
   let V = Z7(M, P, E);
-  let G = _$$sZ() ?? null;
+  let G = useCurrentUserOrg() ?? null;
   let U = selectCurrentFile()?.team ?? null;
   let K = selectCurrentFile();
   let W = useSubscription(TeamCanAdmin, {
@@ -5397,7 +5397,7 @@ let oO = memo(({
       }), jsxs(AutoLayout, {
         spacing: 8,
         verticalAlignItems: 'center',
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: _$$s.colorIcon.$,
           svg: _$$A11
         }), jsx('div', {
@@ -5428,7 +5428,7 @@ let oO = memo(({
       className: 'font_picker--fontPickerSearchRow--mC7HF',
       children: [jsxs('div', {
         className: 'font_picker--searchContainer--TjPf8',
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A12,
           className: 'font_picker--searchIcon--ddk2i'
         }), jsx(oB, {
@@ -5472,7 +5472,7 @@ let oO = memo(({
             height: `${parseInt(Ep1) * V.length}px`,
             paddingLeft: '4px'
           },
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$V2(_$$kF)
           })
         }), q.virtualItems.map(e => {
@@ -5536,7 +5536,7 @@ let oO = memo(({
             right: 16
           },
           spacing: '12px',
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: _$$s.colorIcon.$,
             svg: e
           }), jsx('p', {
@@ -5547,7 +5547,7 @@ let oO = memo(({
       })()
     }), !!h && A != null && jsx('div', {
       className: _$$s.bt1.bSolid.colorBorder.p8.$,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: 'secondary',
         onClick: () => {
           eu(void 0, !0, !0);
@@ -5655,7 +5655,7 @@ let oF = memo(({
     'data-tooltip': E ? e.family : void 0,
     'data-tooltip-hide-immediately': !0,
     'data-tooltip-show-right': !0,
-    'data-tooltip-type': E ? Ib.TEXT : void 0,
+    'data-tooltip-type': E ? KindEnum.TEXT : void 0,
     'forwardedRef': h,
     'onBlur': S,
     'onClick': t => y(t, e.family),
@@ -5664,7 +5664,7 @@ let oF = memo(({
     'onMouseLeave': j,
     'recordingKey': i,
     'tabIndex': -1,
-    'children': [n ? jsx(_$$B, {
+    'children': [n ? jsx(SvgComponent, {
       className: ok,
       svg: _$$A1,
       dataTestId: 'font-picker-check-icon'
@@ -5689,7 +5689,7 @@ let oF = memo(({
         className: oA,
         children: getI18nString('fullscreen.properties_panel.font_picker.new_font_badge')
       })
-    }) : '', g === _$$O3.IS_LOADING || x ? '' : jsx(_$$B, {
+    }) : '', g === _$$O3.IS_LOADING || x ? '' : jsx(SvgComponent, {
       className: 'font_picker--fontPickerLoadingPreviewCover--2V5xe',
       svg: _$$V2(_$$sp)
     })]
@@ -6091,7 +6091,7 @@ function al({
                 'recordingKey': 'cooperFontPickerLibraryPickerButton',
                 'htmlAttributes': {
                   'data-tooltip': getI18nString('fullscreen.properties_panel.tooltip_applyStyles'),
-                  'data-tooltip-type': Ib.TEXT
+                  'data-tooltip-type': KindEnum.TEXT
                 },
                 'onClick': () => g(o2, r),
                 'children': jsx(_$$y2, {})
@@ -6245,7 +6245,7 @@ function ap() {
           'aria-label': getI18nString('whiteboard.inline_menu.text_alignment'),
           'aria-pressed': isPopoverOpen,
           'tooltip': getI18nString('whiteboard.inline_menu.text_alignment'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'showCaret': !0,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
@@ -6314,7 +6314,7 @@ function ah({
           'aria-label': r,
           'aria-pressed': a,
           'tooltip': r,
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'tooltipShowAbove': !1,
           'isActive': a,
           'onClick': () => n(t),
@@ -6344,7 +6344,7 @@ function ag({
           'aria-label': r,
           'aria-pressed': a,
           'tooltip': r,
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'tooltipShowAbove': !1,
           'isActive': a,
           'onClick': () => n(t),
@@ -6367,7 +6367,7 @@ function af() {
       'aria-label': getI18nString('type_settings.decoration.underline'),
       'aria-pressed': isUnderlined,
       'tooltip': 'text-toggle-underline',
-      'tooltipType': Ib.LOOKUP,
+      'tooltipType': KindEnum.LOOKUP,
       'isActive': isUnderlined,
       'disabled': !e,
       'onClick': toggleUnderline,
@@ -6396,7 +6396,7 @@ function a_({
       'aria-label': getI18nString('cooper.inline_menu.bold'),
       'aria-pressed': e === iy.ACTIVE,
       'tooltip': 'toggle-bold',
-      'tooltipType': Ib.LOOKUP,
+      'tooltipType': KindEnum.LOOKUP,
       'isActive': e === iy.ACTIVE,
       'disabled': e === iy.DISABLED,
       'onClick': () => fullscreenValue.triggerActionInUserEditScope('toggle-bold'),
@@ -6414,7 +6414,7 @@ function aj({
       'aria-label': getI18nString('cooper.inline_menu.italic'),
       'aria-pressed': e === iy.ACTIVE,
       'tooltip': 'text-toggle-italic',
-      'tooltipType': Ib.LOOKUP,
+      'tooltipType': KindEnum.LOOKUP,
       'isActive': e === iy.ACTIVE,
       'disabled': e === iy.DISABLED,
       'onClick': () => fullscreenValue.triggerActionInUserEditScope('text-toggle-italic'),
@@ -6892,7 +6892,7 @@ function aN({
           'onClick': () => fullscreenValue.triggerActionInUserEditScope('unlock-selected-nodes'),
           'recordingKey': _$$_2.ToggleLock,
           'tooltip': getI18nString('cooper.inline_menu.more_options.unlock_selection'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'children': jsx(rB, {})
         })
       })
@@ -6924,13 +6924,13 @@ function aw({
           'aria-label': e.label,
           ...(e.type === 1 ? {
             tooltip: e.label,
-            tooltipType: Ib.TEXT
+            tooltipType: KindEnum.TEXT
           } : e.customTooltip ? {
             tooltip: e.customTooltip,
-            tooltipType: Ib.TEXT
+            tooltipType: KindEnum.TEXT
           } : {
             tooltip: e.fullscreenAction,
-            tooltipType: Ib.LOOKUP
+            tooltipType: KindEnum.LOOKUP
           }),
           'onClick': e.execute,
           'recordingKey': e.trackingId,
@@ -6957,7 +6957,7 @@ function aL({
           'aria-label': getI18nString('cooper.inline_menu.ai_tools'),
           'aria-pressed': isPopoverOpen,
           'tooltip': getI18nString('cooper.inline_menu.ai_tools'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
           'showCaret': !0,
@@ -7001,7 +7001,7 @@ function aP({
           'aria-label': getI18nString('cooper.inline_menu.more_options'),
           'aria-pressed': isPopoverOpen,
           'tooltip': getI18nString('cooper.inline_menu.more_options'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
           'recordingKey': 'cooperInlineMoreActions',
@@ -7142,7 +7142,7 @@ function aV({
           children: jsx(j5, {
             bigNudgeAmount,
             'data-tooltip': getI18nString('cooper.inline_menu.blur_strength'),
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'dispatch': n,
             'formatter': c.current,
             'labelWidth': 88,
@@ -7668,7 +7668,7 @@ function sl({
   isSelected: l,
   recordingKey: r
 }) {
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     'aria-label': _$$E4(e),
     'aria-pressed': l,
     'onClick': n,
@@ -7690,9 +7690,9 @@ function sl({
 function sr({
   onClick: e
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('cooper.inline_menu.fill_panel.custom_color_picker_button_tooltip')
     },
     'className': _$$s.h32.w32.flex.itemsCenter.justifyCenter.$,
@@ -7709,14 +7709,14 @@ function sa({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     'onClick': e,
     'recordingKey': generateRecordingKey('cooperInlineMenuExpandOptionsButton', t || ''),
     'aria-label': getI18nString('cooper.inline_menu.expand_button_label'),
     'className': 'x78zum5 xl56j7k x6s0dn4 xe5c7bq x1x9btor',
     'htmlAttributes': {
       'data-tooltip': getI18nString('cooper.inline_menu.expand_button_label'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(_$$e7, {})
   });
@@ -7785,7 +7785,7 @@ function sh({
       ref: s,
       children: [getI18nString('cooper.inline_menu.fill_submenu.color.document_colors'), r && jsx(_$$E2, {
         name: _$$_2.LibraryColorPicker,
-        children: jsx(_$$E, {
+        children: jsx(ButtonPrimitive, {
           onClick: () => r(s),
           children: jsx(_$$y2, {})
         })
@@ -8164,7 +8164,7 @@ function sN() {
     'aria-label': getI18nString('fullscreen.properties_panel.gradient_picker.rotate_90'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('fullscreen.properties_panel.gradient_picker.rotate_90'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(_$$R7, {})
   });
@@ -8196,7 +8196,7 @@ function sR({
       colorSpace: l
     });
   }, [e, i, r, l]);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: 'gradient_control_submenu--canvasContainer--NGhNH',
     onClick: t,
     children: [jsxs('div', {
@@ -8220,7 +8220,7 @@ function sL() {
     'aria-label': getI18nString('cooper.inline_menu.floating_panel.adjust_image'),
     'aria-pressed': l,
     'tooltip': getI18nString('cooper.inline_menu.floating_panel.adjust_image'),
-    'tooltipType': Ib.TEXT,
+    'tooltipType': KindEnum.TEXT,
     'isActive': l,
     'onClick': () => togglePanel(eC.ADJUST_IMAGE),
     'children': jsx(_$$A14, {})
@@ -8240,7 +8240,7 @@ function sP() {
   }() ? null : jsx(_$$ar, {
     'aria-label': getI18nString('cooper.inline_menu.floating_panel.adjust_video'),
     'tooltip': getI18nString('cooper.inline_menu.floating_panel.adjust_video'),
-    'tooltipType': Ib.TEXT,
+    'tooltipType': KindEnum.TEXT,
     'isActive': activePanel?.panel === eC.ADJUST_VIDEO,
     'onClick': () => togglePanel(eC.ADJUST_VIDEO),
     'children': jsx(_$$A14, {})
@@ -8655,7 +8655,7 @@ function sZ({
   let l = sW(n, e, t);
   return jsx(_$$E2, {
     name: _$$_2.UploadMedia,
-    children: jsx($n, {
+    children: jsx(Button, {
       'recordingKey': 'cooperInlineMenuFillControlUploadMedia',
       'data-testid': 'cooper-inline-menu-upload-media-button',
       'data-paint-type': t?.type,
@@ -8763,7 +8763,7 @@ function s4() {
           'aria-label': getI18nString('cooper.inline_menu.fill_control'),
           'aria-pressed': isPopoverOpen,
           'tooltip': getI18nString('cooper.inline_menu.fill_control'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'showCaret': !0,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
@@ -8974,7 +8974,7 @@ function dt({
           'aria-label': getI18nString('cooper.inline_menu.image.crop_image'),
           'aria-pressed': isPopoverOpen,
           'tooltip': 'crop-image',
-          'tooltipType': Ib.LOOKUP,
+          'tooltipType': KindEnum.LOOKUP,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
           'showCaret': !0,
@@ -9164,7 +9164,7 @@ function ds({
       children: jsx(_$$ar, {
         'aria-label': getI18nString('cooper.inline_menu.image.rotate_image'),
         'tooltip': getI18nString('cooper.inline_menu.image.rotate_image'),
-        'tooltipType': Ib.TEXT,
+        'tooltipType': KindEnum.TEXT,
         'tooltipShowAbove': !1,
         'onClick': r,
         'disabled': l,
@@ -9183,7 +9183,7 @@ function dd({
       children: jsx(_$$ar, {
         'aria-label': getI18nString('fullscreen_actions.flip-horizontal'),
         'tooltip': 'flip-horizontal',
-        'tooltipType': Ib.LOOKUP,
+        'tooltipType': KindEnum.LOOKUP,
         'tooltipShowAbove': !1,
         'onClick': () => {
           e === LayoutTabType.RASTER && fullscreenValue.triggerActionInUserEditScope('leave-edit-mode');
@@ -9205,7 +9205,7 @@ function dc({
       children: jsx(_$$ar, {
         'aria-label': getI18nString('fullscreen_actions.flip-vertical'),
         'tooltip': 'flip-vertical',
-        'tooltipType': Ib.LOOKUP,
+        'tooltipType': KindEnum.LOOKUP,
         'tooltipShowAbove': !1,
         'onClick': () => {
           e === LayoutTabType.RASTER && fullscreenValue.triggerActionInUserEditScope('leave-edit-mode');
@@ -9242,7 +9242,7 @@ let dh = registerModal(e => {
     _$$l2.user('detach-instances', () => Fullscreen?.detachInstances(l, !0));
     onClose();
   }, [l, onClose]);
-  return jsx(_$$bL3, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 'md',
     children: jsxs(vo, {
@@ -9254,11 +9254,11 @@ let dh = registerModal(e => {
         children: getI18nString('cooper.properties_panel.remove_restrictions.modal_description')
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: onClose,
             children: getI18nString('cooper.properties_panel.remove_restrictions.modal_cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: r,
             recordingKey: 'cooperUnlockTemplateModalButton',
@@ -9337,7 +9337,7 @@ function dE() {
         children: jsx(_$$ar, {
           'aria-label': getI18nString('cooper.inline_menu.remove_guidelines'),
           'tooltip': getI18nString('cooper.inline_menu.remove_guidelines'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'onClick': () => {
             e(showModalHandler({
               type: dh
@@ -9614,7 +9614,7 @@ function dO({
         'value': l,
         'onValueChange': r,
         'data-tooltip': getI18nString('cooper.inline_menu.border_width'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'labelWidth': 88,
         'children': jsx(_$$E5, {})
       })
@@ -9647,7 +9647,7 @@ function dM() {
           'aria-label': getI18nString('cooper.inline_menu.border'),
           'aria-pressed': isPopoverOpen,
           'tooltip': getI18nString('cooper.inline_menu.border'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
           'showCaret': !0,
@@ -9687,7 +9687,7 @@ function d$({
           'aria-label': getI18nString('cooper.inline_menu.video.volume_control'),
           'aria-pressed': isPopoverOpen,
           'tooltip': getI18nString('cooper.inline_menu.video.volume_control'),
-          'tooltipType': Ib.TEXT,
+          'tooltipType': KindEnum.TEXT,
           'isActive': isPopoverOpen,
           'onClick': togglePopover,
           'showCaret': !0,
@@ -9721,7 +9721,7 @@ function dV({
             'data-testid': 'buzz-inline-volume-mute-control',
             'aria-label': getI18nString('cooper.inline_menu.video.mute'),
             'tooltip': getI18nString('cooper.inline_menu.video.mute'),
-            'tooltipType': Ib.TEXT,
+            'tooltipType': KindEnum.TEXT,
             'isActive': t,
             'onClick': () => {
               l(t => {
@@ -10810,7 +10810,7 @@ function c5({
   return jsx('div', {
     'className': 'xh8yej3 x78zum5 x1gcgh60 x1jwbysl x1vamu9a xso031l x1y0btm7 x7z60cl x9f619',
     'data-element-target': 'cooper-inserts-default-text-box',
-    'children': jsx(IK, {
+    'children': jsx(ButtonWide, {
       variant: 'secondary',
       onClick: n,
       actionOnPointerDown: !0,
@@ -11148,7 +11148,7 @@ function uI({
     importFileError: d,
     importLocalFile: c
   });
-  return jsx(IK, {
+  return jsx(ButtonWide, {
     disabled: n,
     variant: 'primary',
     onClick: u,
@@ -11163,7 +11163,7 @@ function uI({
 function uS({
   onUploadCsvClick: e
 }) {
-  let t = _$$U();
+  let t = trackFileEventWithStore();
   let n = useCallback(e => {
     t('buzz_bulk_create_upload_failure', {
       productType: 'buzz',
@@ -11251,13 +11251,13 @@ function uR({
   trailingIcon: i
 }) {
   let a = _$$eY().get(e);
-  let s = _X({
+  let s = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   if (!a || !s) return null;
   let d = a.absoluteBoundingBox;
   let c = {};
-  let u = Yb(s, {
+  let u = scaleRect(s, {
     x: d.x,
     y: d.y,
     width: d.w,
@@ -11346,7 +11346,7 @@ function uF() {
   let [l, r] = useAtomValueAndSetter(_$$v);
   let [i, s] = useState({});
   let c = _$$eY();
-  let u = _$$U();
+  let u = trackFileEventWithStore();
   _$$h5(() => {
     t(uO.SELECT_FILE);
     r({});
@@ -11556,7 +11556,7 @@ function uX() {
       children: jsx(_$$k7, {})
     }), jsx('div', {
       className: 'xuzqwsy xw9jctd x10134s8 x2b8uid',
-      children: jsx(_$$E6, {
+      children: jsx(TextWithTruncation, {
         fontSize: 12,
         color: 'secondary',
         children: getI18nString('cooper.plugins.loading', {
@@ -11618,7 +11618,7 @@ function u4({
   let x = useRef(null);
   let m = _$$eY();
   let h = Th();
-  let g = _$$U();
+  let g = trackFileEventWithStore();
   let f = PE();
   let {
     togglePanel
@@ -11729,7 +11729,7 @@ function u4({
             paintIndex,
             paint,
             variant: 'fieldsPanel'
-          }) : jsx($n, {
+          }) : jsx(Button, {
             variant: 'primary',
             onClick: z,
             children: isVideo ? renderI18nText('cooper.properties_panel.choose_image_video') : renderI18nText('cooper.properties_panel.choose_media')
@@ -11754,7 +11754,7 @@ function xe({
   let x = function (e, t) {
     let n = Th();
     let l = jw();
-    let r = _$$U();
+    let r = trackFileEventWithStore();
     return _$$A19(() => {
       r('edit_template_field', {
         product_type: 'buzz',
@@ -12097,7 +12097,7 @@ function xx({
       })
     }), n.titleIconSvgSrc && jsx('div', {
       className: _$$fp2,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: n.titleIconSvgSrc,
         className: _$$v4
       })
@@ -12257,7 +12257,7 @@ function xI({
       })
     }), jsx('div', {
       className: 'x78zum5 xdt5ytf x1ttywg8',
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         'aria-label': getI18nString('buzz.stock_photos.add_image'),
         'iconPrefix': jsx(_$$x2, {
           style: {
@@ -12366,7 +12366,7 @@ let xN = memo(({
     className: 'x78zum5 xdt5ytf x1n2onr6',
     onMouseEnter: () => i(!0),
     onMouseLeave: () => i(!1),
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: 'xs3i2wk x5hs570 x1g40iwv x19y5rnk xb3r6kr',
       onClick: n,
       htmlAttributes: {
@@ -12732,7 +12732,7 @@ function xH() {
       }));
     }, [b, m, g, i]);
     (function (e, t, n, l) {
-      let r = _$$U();
+      let r = trackFileEventWithStore();
       let i = useSelector(e => e.search.sessionId);
       let o = function () {
         let e = useContext(ch);
@@ -12833,7 +12833,7 @@ function xY({
 }) {
   return getFeatureFlags().buzz_unsplash ? jsx('div', {
     className: 'x78zum5 xdt5ytf x1gskr33 x1ihwiht',
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       'variant': 'secondary',
       'onClick': e,
       'aria-label': getI18nString('buzz.media_panel.make_image'),
@@ -12911,7 +12911,7 @@ function xJ({
   let n = getFeatureFlags().buzz_video_export;
   return t && n ? jsx('div', {
     className: 'x78zum5 xdt5ytf x1gskr33 x1ihwiht',
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       'variant': 'secondary',
       'onClick': e,
       'aria-label': getI18nString('buzz.media_panel.upload_image_or_video'),
@@ -13106,7 +13106,7 @@ function x2() {
               'data-testid': 'internalTab',
               'truncate': !0,
               'htmlAttributes': {
-                'data-tooltip-type': Ib.TEXT,
+                'data-tooltip-type': KindEnum.TEXT,
                 'data-tooltip': I,
                 'data-tooltip-timeout-delay': 1e3
               }
@@ -13389,7 +13389,7 @@ function x6({
 function x7({
   onClickNew: e
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     variant: 'secondary',
     onClick: e,
     iconPrefix: jsx(_$$x2, {}),
@@ -13535,7 +13535,7 @@ function px() {
   let n = Pn();
   let l = Xr(Lm);
   let r = Xr(U_);
-  let i = _$$U();
+  let i = trackFileEventWithStore();
   let c = Xr(_$$az);
   let u = jw();
   let x = useSelector(e => !e.mirror.appModel.isReadOnly);
@@ -13986,7 +13986,7 @@ function pB({
         children: [jsx(hE, {
           children: renderI18nText('cooper.inline_menu.fill_panel.library_color_picker.title')
         }), jsx(jk, {
-          children: jsx(_$$E, {
+          children: jsx(ButtonPrimitive, {
             onClick: onToggleLibraryModal,
             children: jsx(_$$l3, {})
           })
@@ -14056,7 +14056,7 @@ function pK({
             'recordingKey': 'cooperFillPanelLibaryPickerButton',
             'htmlAttributes': {
               'data-tooltip': getI18nString('fullscreen.properties_panel.tooltip_applyStylesAndVariables'),
-              'data-tooltip-type': Ib.TEXT
+              'data-tooltip-type': KindEnum.TEXT
             },
             'onClick': () => u(pF, l, 240),
             'children': jsx(_$$y2, {})
@@ -14180,7 +14180,7 @@ function pX({
       className: pG,
       children: jsx(_$$E2, {
         name: _$$_2.FlipGradient,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: 'secondary',
           onClick: () => {
             if (!e) return;
@@ -14207,7 +14207,7 @@ function pX({
       className: pG,
       children: jsx(_$$E2, {
         name: _$$_2.RotateGradient,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: 'secondary',
           onClick: GradientToolApi?.rotateGradient90Degrees,
           children: jsxs('div', {
@@ -14303,7 +14303,7 @@ function p2({
   onClick: t,
   children: n
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ..._$$xk(rL.effectToggleButtonContainer, e ? rL.effectToggleButtonContainer_active : null),
     onClick: t,
     children: jsx('div', {

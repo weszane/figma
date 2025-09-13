@@ -11,7 +11,7 @@ import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
 import { D } from "../figma_app/335489";
 import { cP, kz, zb } from "../figma_app/264776";
-import { Oo } from "../905/709171";
+import { compareWithGeneratedKey } from "../905/709171";
 import { qp } from "../905/977779";
 import { QL } from "../905/557338";
 export function $$y1(e, t, r, s, o, l, d, c, p = StateHierarchy.NONE, _, g) {
@@ -157,7 +157,7 @@ export function $$S2(e, t, r, n, i, a, s) {
 }
 export function $$v4(e, t, r, n, a, s, d, c) {
   if (e) {
-    if (Oo(e, r)) {
+    if (compareWithGeneratedKey(e, r)) {
       if (e.type === PrimaryWorkflowEnum.COMPONENT) {
         let t = e.node_id;
         Fullscreen.replaceSymbolBackingInstances({

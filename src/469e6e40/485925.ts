@@ -1,13 +1,13 @@
 import _require from "@stylexjs/stylex";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useId } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { p as _$$p } from "../905/185998";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel, Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
 import { v } from "../905/442517";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { d6 } from "../figma_app/246699";
@@ -103,15 +103,15 @@ export function $$j9(e, t) {
   return e.doPublicLinksRequireExpiration ? $$v5(e.maxDuration, e.isTimeMeasuredInDays) ? e.isTimeMeasuredInDays ? 24 * parseInt(e.maxDuration) : parseInt(e.maxDuration) : (t(FlashActions.error(getI18nString("org_actions.an_error_occurred"))), null) : null;
 }
 export function $$y1(e) {
-  let t = A(e.save, 500, {
+  let t = useDebouncedCallback(e.save, 500, {
     leading: !0
   });
   return jsxs(Fragment, {
-    children: [jsx($n, {
+    children: [jsx(Button, {
       variant: "secondary",
       onClick: e.cancel,
       children: renderI18nText("setting_tab.public_sharing.modal.cancel")
-    }), jsx($n, {
+    }), jsx(Button, {
       onClick: t,
       disabled: !e.canSave,
       children: renderI18nText("setting_tab.public_sharing.modal.save")

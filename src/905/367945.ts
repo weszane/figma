@@ -8,7 +8,7 @@ import { U } from "../905/331038";
 import { w } from "../905/113805";
 import { Zc } from "../905/497882";
 import { Zj, Z3, wC } from "../905/448440";
-import { mr } from "../figma_app/45218";
+import { isWidgetOrPlugin } from "../figma_app/45218";
 import { __, tZ } from "../905/271611";
 import { A as _$$A } from "../905/567946";
 let f = e => {
@@ -60,7 +60,7 @@ export function $$A0({
     existingResourceContent,
     localExtension
   } = e.deps;
-  let o = publishRoleField && (!existingResourceContent || mr(existingResourceContent)) ? Zj({
+  let o = publishRoleField && (!existingResourceContent || isWidgetOrPlugin(existingResourceContent)) ? Zj({
     user: e.deps.user,
     publishRoleField,
     existingResourceContent,

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { renderI18nText } from "../905/303541";
 import { dT } from "../figma_app/889655";
@@ -35,7 +35,7 @@ let $$g1 = forwardRef((e, t) => {
     }), jsxs("span", {
       className: kv,
       children: [renderI18nText("inspect_panel.property.text"), "\xa0\xa0"]
-    }), jsx(E, {
+    }), jsx(ButtonPrimitive, {
       className: l()(VZ, kh),
       onClick: o,
       actionOnPointerDown: !0,
@@ -49,7 +49,7 @@ let $$g1 = forwardRef((e, t) => {
     children: [f && jsx(Bf, {
       className: hh,
       guid: f
-    }), jsx(E, {
+    }), jsx(ButtonPrimitive, {
       className: l()(TN, kh),
       ref: t,
       onClick: o,

@@ -4,7 +4,7 @@ import { K } from "../905/443068";
 import { getI18nString } from "../905/303541";
 import { h as _$$h } from "../figma_app/275739";
 import { TI } from "../figma_app/318520";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A } from "../3276/51271";
 export function $$u0({
   userId: e,
@@ -23,7 +23,7 @@ export function $$u0({
   let g = () => i ? getI18nString("collaboration.voice.check_your_microphone_permissions_to_start_chatting") : m ? getI18nString("collaboration.voice.click_to_unmute") : getI18nString("collaboration.voice.click_to_mute");
   return jsx(K, {
     onClick: f,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": g(),
     "data-tooltip-timeout-delay": i ? 50 : void 0,
     "aria-label": g(),

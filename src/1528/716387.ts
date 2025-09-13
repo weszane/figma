@@ -5,7 +5,7 @@ import { z as _$$z } from "../vendor/999105";
 import { lQ } from "../905/934246";
 import { i as _$$i } from "../905/718764";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { T as _$$T } from "../905/745591";
 import { ScreenReaderOnly } from "../905/172252";
 import { h as _$$h } from "../905/994594";
@@ -28,9 +28,9 @@ import { isWhitespace } from "../figma_app/930338";
 import { Wy, ml, Fk, Ch, hw } from "../905/125333";
 import { ph } from "../figma_app/709893";
 import { b as _$$b } from "../figma_app/556971";
-import { dW } from "../figma_app/858013";
+import { ImageBackedLoading } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -43,7 +43,7 @@ import { updateHoveredNode } from "../figma_app/741237";
 import { p8, eY } from "../figma_app/722362";
 import { lH, Fy } from "../figma_app/623300";
 import { _Y } from "../figma_app/162807";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { b as _$$b2, bL, mc } from "../figma_app/860955";
 import { EventShield } from "../905/821217";
 import { H_ } from "../905/963340";
@@ -64,7 +64,7 @@ import { sO } from "../figma_app/21029";
 import { II, EA, SQ, CT, A5, aH, ih, WB, L4 } from "../9410/499229";
 import { a as _$$a } from "../9410/20763";
 import { Od, I_ } from "../9410/542126";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { U5, W0, f7 } from "../figma_app/896988";
 import { A as _$$A2 } from "../6828/523860";
 import { A as _$$A3 } from "../6828/85206";
@@ -92,7 +92,7 @@ let er = memo(function (e) {
     eventListeners: ["onClick"],
     children: jsxs(bL, {
       manager,
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         recordingKey: "figma_design_search_page_scope_dropdown",
         className: Vz,
         "aria-label": getI18nString("canvas_search.scope_dropdown_aria_label", {
@@ -238,7 +238,7 @@ function eg({
 }) {
   return jsxs("div", {
     className: WP,
-    children: [p9(e), jsx(_$$E, {
+    children: [p9(e), jsx(ButtonPrimitive, {
       className: _0,
       onClick: t,
       "aria-label": getI18nString("canvas_search.filter.remove"),
@@ -261,7 +261,7 @@ function eR(e, t, n, a) {
   let o = function () {
     let e = _$$Z("canvas_search_navigate");
     let t = useSelector(e => e.canvasSearch.scope);
-    let n = am();
+    let n = trackFileEventWithUser();
     let a = useContext(EA);
     let i = useCallback(() => {
       n("canvas_search_multi_hierarchy", {
@@ -278,7 +278,7 @@ function eR(e, t, n, a) {
   let d = function () {
     let e = _$$Z("canvas_search_navigate");
     let t = useSelector(e => e.canvasSearch.scope);
-    let n = am();
+    let n = trackFileEventWithUser();
     let a = useContext(EA);
     let i = useCallback(() => {
       n("canvas_search_multi_hierarchy", {
@@ -480,7 +480,7 @@ export let $$eF0 = memo(function ({
             "aria-label": getI18nString("canvas_search.close"),
             recordingKey: "figma_design_search.close",
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("canvas_search.close")
             },
             children: jsx(_$$A, {})
@@ -505,7 +505,7 @@ export let $$eF0 = memo(function ({
         })]
       }), isLoading || z ? jsx("div", {
         className: N()(_$$S, dz),
-        children: jsx(dW, {
+        children: jsx(ImageBackedLoading, {
           size: "medium",
           testId: "canvas-search-loading-spinner"
         })
@@ -563,7 +563,7 @@ function eM({
   let el = function (e, t) {
     let n = _$$Z("canvas_search_navigate");
     let a = useSelector(e => e.canvasSearch.scope);
-    let i = am();
+    let i = trackFileEventWithUser();
     let o = useContext(EA);
     let d = useCallback(l => {
       if (!CanvasSearchHelpers) return;
@@ -774,7 +774,7 @@ function eM({
     let c = function (e, t) {
       let n = _$$Z("canvas_search_navigate");
       let a = useSelector(e => e.canvasSearch.scope);
-      let i = am();
+      let i = trackFileEventWithUser();
       let o = useContext(EA);
       let d = useCallback(() => {
         if (!CanvasSearchHelpers) return;
@@ -866,7 +866,7 @@ function eM({
           recordingKey: "figma_design_search.previous",
           disabled: K.total <= 1,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("canvas_search.previous"),
             "data-tooltip-shortcut-key": "canvas-search-prev"
           },
@@ -879,7 +879,7 @@ function eM({
           recordingKey: "figma_design_search.next",
           disabled: K.total <= 1,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("canvas_search.next"),
             "data-tooltip-shortcut-key": "canvas-search-next"
           },
@@ -945,10 +945,10 @@ function eM({
         })
       }), U && jsx("div", {
         className: _$$S,
-        children: jsx(dW, {
+        children: jsx(ImageBackedLoading, {
           size: "medium"
         })
-      }), o && B === PageViewMode.ACTIVE_PAGE && jsx(_$$E, {
+      }), o && B === PageViewMode.ACTIVE_PAGE && jsx(ButtonPrimitive, {
         recordingKey: "figma_design_search.other_pages_button",
         className: N()(fp, AX),
         onClick: () => {
@@ -1004,7 +1004,7 @@ function ez({
   return jsxs(GG, {
     className: kQ,
     onClick: () => n(!t),
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: _$$eO,
       svg: t ? _$$A2 : _$$A3
     }), jsx("span", {
@@ -1050,12 +1050,12 @@ function eG({
   });
   I ? j = jsx("div", {
     className: v9 + " " + O,
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: _$$A6
     })
   }) : e.guid === f && (j = jsx("div", {
     className: v9 + " " + O,
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: _$$A4
     })
   }));
@@ -1114,10 +1114,10 @@ function eG({
       })
     }), R && jsx("div", {
       className: QF,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.pages_panel.unavailable_offline"),
       "data-onboarding-key": "page-unavailable-offline",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: VQ,
         svg: _$$A5
       })

@@ -46,7 +46,7 @@ import { isExportRestricted } from "../figma_app/12796";
 import { H4 } from "../figma_app/679183";
 import { Dc, hV } from "../figma_app/151766";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { a as _$$a } from "../figma_app/997280";
 import { JH } from "../figma_app/479313";
@@ -216,7 +216,7 @@ let ex = class e extends PureComponent {
         children: jsx(ph, {
           text: this.state.isRenameLayersRunning ? getI18nString("fullscreen.properties_panel.export_generating_name") : e,
           tooltipPropsWhenTruncated: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": e
           }
         })
@@ -526,7 +526,7 @@ let eF = forwardRef(function ({
     onClick: T,
     onMouseDown: dG,
     "data-tooltip": getI18nString("fullscreen.export_panel.export_settings"),
-    "data-tooltip-type": Ib.TEXT
+    "data-tooltip-type": KindEnum.TEXT
   };
   let U = L("settings");
   let B = jsx(_$$E, {
@@ -643,7 +643,7 @@ let eF = forwardRef(function ({
       htmlAttributes: {
         onMouseDown: dG,
         "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$O, {})
     })

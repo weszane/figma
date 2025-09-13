@@ -15,7 +15,7 @@ import { K2 } from "../figma_app/777551";
 import { $9, Vm, rZ, XW, g0, YI, $3, qY, ws, bc, zL } from "../figma_app/427318";
 import { $O, bK } from "../figma_app/701107";
 import { Tm, e5 } from "../figma_app/740025";
-import { U as _$$U, I0, xQ, BS } from "../figma_app/45218";
+import { hasClientMeta, isPlugin, isWidget, isMonetizedWithClientMeta } from "../figma_app/45218";
 import { e0 } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
 import { T as _$$T } from "../5132/203178";
@@ -28,7 +28,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { customHistory } from "../905/612521";
 import { WB } from "../905/761735";
 import { useSubscription } from "../figma_app/288654";
-import { oA, tT } from "../905/723791";
+import { getResourceDataOrFallback, tT } from "../905/723791";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
@@ -43,7 +43,7 @@ import { Om, tv } from "../figma_app/979714";
 import { e as _$$e2 } from "../5430/411458";
 import { d6, uR, s1 } from "../figma_app/304207";
 import { showModalHandler } from "../905/156213";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { ResourceSaveFromResourceId, ResourceSave, PluginInstall, AllowlistedPlugin } from "../figma_app/43951";
 import { UserProfileTab } from "../figma_app/707808";
 import { a as _$$a } from "../figma_app/601188";
@@ -55,7 +55,7 @@ import { j7 } from "../905/929976";
 import { j as _$$j } from "../905/834956";
 import { W as _$$W2, C as _$$C } from "../5430/92864";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../5430/229559";
 import { A as _$$A } from "../5430/838986";
 import { L as _$$L, I as _$$I2 } from "../1577/16430";
@@ -100,7 +100,7 @@ let ee = "save-button-clicked";
 function et(e, t, r, s) {
   return function (r, i) {
     let n = i();
-    if (Cu(eo({
+    if (logAndTrackCTA(eo({
       state: n,
       resourceId: e.id,
       resourceType: Vm(e),
@@ -112,7 +112,7 @@ function et(e, t, r, s) {
       reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
       return;
     }
-    if (_$$U(e)) {
+    if (hasClientMeta(e)) {
       let t = () => {
         let t = XHR.post(`/api/hub_file/${e.id}/save`);
         let s = `optimistic-resource-save-${generateUUIDv4()}`;
@@ -163,7 +163,7 @@ function et(e, t, r, s) {
 function er(e, t, r, s, i) {
   return function (n, o) {
     let a = o();
-    if (Cu(eo({
+    if (logAndTrackCTA(eo({
       state: a,
       resourceId: e.id,
       resourceType: Vm(e),
@@ -285,7 +285,7 @@ function ei(e, t, r, s) {
       reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted save without currentUser"));
       return;
     }
-    (Cu(eo({
+    (logAndTrackCTA(eo({
       state: n,
       resourceId: e.id,
       resourceType: Vm(e),
@@ -293,7 +293,7 @@ function ei(e, t, r, s) {
       action: "unsave",
       loggedIn: !!n.user,
       orgId: s
-    }), ee), _$$U(e)) ? XHR.del(`/api/hub_file/${e.id}/save`).then(() => {
+    }), ee), hasClientMeta(e)) ? XHR.del(`/api/hub_file/${e.id}/save`).then(() => {
       r(VisualBellActions.enqueue({
         message: getI18nString("community.saves.file_removed_from_your_profile"),
         type: "resource-save"
@@ -317,7 +317,7 @@ function en(e, t, r, s) {
       reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted to remove save without currentUser"));
       return;
     }
-    if (Cu(eo({
+    if (logAndTrackCTA(eo({
       state: o,
       resourceId: e.id,
       resourceType: Vm(e),
@@ -399,15 +399,15 @@ function ea(e, t) {
     let r = useSubscription(ResourceSave, {
       hubFileId: e.id
     }, {
-      enabled: !XW(e) && _$$U(e)
+      enabled: !XW(e) && hasClientMeta(e)
     });
     let s = useSubscription(PluginInstall, {
       pluginId: e.id,
       orgIds: []
     }, {
-      enabled: rZ(e) || !XW(e) && (I0(e) || xQ(e))
+      enabled: rZ(e) || !XW(e) && (isPlugin(e) || isWidget(e))
     });
-    return XW(e) ? oA(t.data?.resourceSaveFromResourceId)?.createdAt || null : r.data?.resourceSave?.createdAt || s.data?.pluginInstall?.createdAt || null;
+    return XW(e) ? getResourceDataOrFallback(t.data?.resourceSaveFromResourceId)?.createdAt || null : r.data?.resourceSave?.createdAt || s.data?.pluginInstall?.createdAt || null;
   }(e);
   let o = AG();
   let a = Om();
@@ -457,7 +457,7 @@ function el(e, t, r) {
   let d = useMemo(() => {
     let t;
     if (!g0(e)) return {};
-    t = XW(e) ? oA(l.data?.orgResourceSaves) || [] : a.data?.orgPluginInstalls.status !== tT.Loaded ? [] : a.data?.orgPluginInstalls.data || [];
+    t = XW(e) ? getResourceDataOrFallback(l.data?.orgResourceSaves) || [] : a.data?.orgPluginInstalls.status !== tT.Loaded ? [] : a.data?.orgPluginInstalls.data || [];
     let r = {};
     Object.values(o).forEach(s => {
       (!(YI(e) && s.plugins_whitelist_enforced || $3(e) && s.widgets_whitelist_enforced) || (c.data?.orgAllowlistedPlugins.status !== tT.Loaded ? [] : c.data?.orgAllowlistedPlugins.data || []).some(e => e.orgId === s.id)) && (r[s.id] = t.some(e => e.orgId === s.id));
@@ -763,7 +763,7 @@ function eL({
       },
       "data-testid": "save-button",
       "data-onboarding-key": "save-button",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       ref: f,
       "data-tooltip": b ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
       "aria-label": b ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
@@ -856,7 +856,7 @@ function eM({
 }) {
   let t = _$$M2() ? "mobile_logged_in" : "mobile_logged_out";
   let r = XW(e) ? qY(e) : e;
-  let n = !!r && BS(r);
+  let n = !!r && isMonetizedWithClientMeta(r);
   let o = useMemo(() => r ? g0(e) ? jsxs(Fragment, {
     children: [jsx(eN, {
       resource: e,
@@ -917,7 +917,7 @@ export function $$eF0({
   }();
   let c = K2(e);
   let d = useSelector(e => Tm(e));
-  let x = Qo(t) ? e0.COMMUNITY_HUB_FILE : xQ(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
+  let x = Qo(t) ? e0.COMMUNITY_HUB_FILE : isWidget(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let j = null;
   let w = jsx(_$$q, {
     resource: e,
@@ -926,7 +926,7 @@ export function $$eF0({
   let C = $9(e);
   if (eB && C) {
     let e = qD(C);
-    let t = Object.values(d).some(e => I0(C) && e.plugins_whitelist_enforced || xQ(C) && e.widgets_whitelist_enforced);
+    let t = Object.values(d).some(e => isPlugin(C) && e.plugins_whitelist_enforced || isWidget(C) && e.widgets_whitelist_enforced);
     !(e && "is_private" in e && e.is_private) && t && (j = jsx(eB, {
       resource: C,
       viewContext: x
@@ -947,7 +947,7 @@ export function $$eF0({
     resource: e,
     viewContext: x
   });
-  let E = BS(t) ? L : jsxs(Fragment, {
+  let E = isMonetizedWithClientMeta(t) ? L : jsxs(Fragment, {
     children: [I, T]
   });
   let S = jsx(N, {

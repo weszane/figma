@@ -19,12 +19,12 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { O as _$$O } from "../905/963222";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { LO, Mu } from "../905/901964";
 import { E as _$$E } from "../905/617605";
 import { fullscreenValue } from "../figma_app/455680";
 import { U2 } from "../figma_app/193867";
-import { Gq, hm, EB } from "../905/380385";
+import { getAttachmentChanges, NEW_COMMENT_ID, BusyReadyState } from "../905/380385";
 import { m as _$$m } from "../905/70820";
 import { WE } from "../905/29425";
 import { h as _$$h } from "../905/438683";
@@ -391,7 +391,7 @@ let $$q27 = createOptimistThunk((e, t) => {
   let n = cs(t.messageMeta);
   let i = XHR.put(`/api/file/${r}/comments/${t.comment.id}`, {
     message_meta: t.messageMeta,
-    attachment_updates: Gq(t.attachmentUpdates),
+    attachment_updates: getAttachmentChanges(t.attachmentUpdates),
     share_to_mentions: t.forceWithInvite || !1,
     force: t.forceMention || !1,
     pending_mentions: n
@@ -589,7 +589,7 @@ let $$er40 = createOptimistThunk((e, t) => {
       comment: o,
       userInitiated: !1
     }));
-    ds("Comment Submitted", o.key, r, {
+    trackFileEvent("Comment Submitted", o.key, r, {
       commentId: o.id,
       parentCommentId: o.id,
       selectedView: r.selectedView.view,
@@ -692,7 +692,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
         let t = {
           text: getI18nString("comments.view"),
           action(t, r) {
-            if (e.getState().comments.activeThread?.id === hm && e.getState().comments.newComment.messageMeta.length > 0) {
+            if (e.getState().comments.activeThread?.id === NEW_COMMENT_ID && e.getState().comments.newComment.messageMeta.length > 0) {
               e.dispatch(eA());
               e.dispatch(VisualBellActions.update({
                 id: r,
@@ -766,7 +766,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
       commentId: g.id,
       commentUuid: g.uuid
     }));
-    ds("Comment Submitted", i, r, {
+    trackFileEvent("Comment Submitted", i, r, {
       commentId: g.id,
       locationX: canvasPosition && canvasPosition.x,
       locationY: canvasPosition && canvasPosition.y,
@@ -965,7 +965,7 @@ let eW = createOptimistThunk((e, t) => {
   if (n.user && n.user.id === comment.user_id && !t.userInitiated) {
     if (comment.parent_id) {
       let e = n.comments.threads[comment.parent_id];
-      if (e && e.state === EB.BUSY) {
+      if (e && e.state === BusyReadyState.BUSY) {
         let n = !function (e, t) {
           if (!e) return !t;
           if (!t) return !e;
@@ -986,7 +986,7 @@ let eW = createOptimistThunk((e, t) => {
       }
     } else {
       let e = n.comments.newComment;
-      e && e.state === EB.BUSY && r($$ea23({
+      e && e.state === BusyReadyState.BUSY && r($$ea23({
         force: !0
       }));
       r($$ew1({

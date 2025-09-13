@@ -1,5 +1,5 @@
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FileOrgExtensionSettingsView } from "../figma_app/43951";
 export function $$o0(e = !0) {
@@ -17,7 +17,7 @@ export function $$o0(e = !0) {
     loaded: !0,
     data: null
   };
-  let l = oA(i.data.file, null);
+  let l = getResourceDataOrFallback(i.data.file, null);
   return l && l.org ? {
     loaded: !0,
     data: {

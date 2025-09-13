@@ -11,7 +11,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { defaultSessionLocalID, sessionLocalIDToString, parseSessionLocalID } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VC } from "../figma_app/565242";
@@ -65,7 +65,7 @@ export function $$z0({
   let a = KH();
   let l = eY();
   let s = function () {
-    let e = _$$U();
+    let e = trackFileEventWithStore();
     return useCallback(t => {
       ("URL" === t || "INTERNAL_NODE" === t) && e("sites_add_link", {
         linkType: t
@@ -144,10 +144,10 @@ export function $$z0({
   let C = () => {
     try {
       T();
-    } catch { }
+    } catch {}
     try {
       S();
-    } catch { }
+    } catch {}
   };
   let T = () => {
     let e = N(a, j);
@@ -307,7 +307,7 @@ function W({
   let C = o => {
     if (t && (FD() || nh()) && t(), null === o) e({
       connectionType: "NONE"
-    }); else if ("url" === o.type) {
+    });else if ("url" === o.type) {
       e({
         connectionType: "URL",
         connectionURL: xT(o.url),
@@ -424,7 +424,7 @@ function Z({
       });
     },
     onLinkChange: e => {
-      if (e?.type === "internal_cms_item_page") i(e.collectionId, e.id); else if (e?.type === "cms_link_field_alias") {
+      if (e?.type === "internal_cms_item_page") i(e.collectionId, e.id);else if (e?.type === "cms_link_field_alias") {
         if (!e.collectionId) return;
         permissionScopeHandler.user("dakota-set-link-binding", () => {
           let t = {

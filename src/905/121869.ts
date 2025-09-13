@@ -1,19 +1,19 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { useAtomValue } from "../vendor/525001";
 import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
 import { NY, rb } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { U } from "../905/405962";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { Q } from "../905/467310";
 import { ZG } from "../figma_app/736948";
@@ -22,7 +22,7 @@ import { h as _$$h } from "../905/388624";
 export function $$x0(e) {
   let t = useCurrentPlanUser("OrgSuspensionModal");
   let i = useIsOrgAdminUser(t).unwrapOr(!1);
-  let h = sZ();
+  let h = useCurrentUserOrg();
   let E = Xf(e.currentOrgId, i);
   let x = (E?.data?.invoices ?? []).find(e => "open" === e.status && _$$A(e.past_due_at) < _$$A().subtract(21, "day") && _$$A(e.past_due_at) > _$$A().subtract(90, "day"));
   let T = useModalManager({
@@ -32,7 +32,7 @@ export function $$x0(e) {
   });
   let k = useAtomValue(U(e.currentOrgId));
   if (k.data?.status === Q.EXPIRED) return jsx(Fragment, {});
-  if ("loading" === E.status) return jsx(bL, {
+  if ("loading" === E.status) return jsx(ModalRootComponent, {
     manager: T,
     width: 320,
     children: jsx(vo, {
@@ -41,7 +41,7 @@ export function $$x0(e) {
         width: "100%",
         horizontalAlignItems: "center",
         padding: 16,
-        children: jsx(kt, {})
+        children: jsx(LoadingSpinner, {})
       })
     })
   });
@@ -75,7 +75,7 @@ export function $$x0(e) {
       orgId: h?.id,
       isOrgAdmin: i
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: T,
       width: 320,
       children: jsxs(vo, {
@@ -105,31 +105,31 @@ export function $$x0(e) {
 }
 function S(e) {
   let t = useCurrentPlanUser("OrgSuspensionModalHeader");
-  return useIsOrgAdminUser(t).unwrapOr(!1) && e.overdueInvoice ? jsx(_$$E, {
+  return useIsOrgAdminUser(t).unwrapOr(!1) && e.overdueInvoice ? jsx(TextWithTruncation, {
     fontWeight: "bold",
     fontSize: 11,
     children: renderI18nText("payments_modal.pay_overdue_invoice_to_regain_access")
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     fontWeight: "bold",
     fontSize: 11,
     children: renderI18nText("payments_modal.you_no_longer_have_access_to_this_organization")
   });
 }
 function w(e) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   return e.overdueInvoice ? jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "regular",
       fontSize: 11,
       children: renderI18nText("payments_modal.your_files_are_safe_but_youll_need_to_pay", {
         dueDate: _$$A(e.overdueInvoice.due_at).format("MMM D"),
-        orgName: jsx(_$$E, {
+        orgName: jsx(TextWithTruncation, {
           fontWeight: "bold",
           fontSize: 11,
           children: t?.name
         })
       })
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontWeight: "regular",
       fontSize: 11,
       children: renderI18nText("payments_modal.account_switcher_and_support_cta", {
@@ -138,7 +138,7 @@ function w(e) {
         })
       })
     })]
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     fontWeight: "regular",
     fontSize: 11,
     children: renderI18nText("payments_modal.account_switcher_and_support_cta", {
@@ -150,11 +150,11 @@ function w(e) {
 }
 function C() {
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "regular",
       fontSize: 11,
       children: renderI18nText("payments_modal.please_reach_out_to_your_organization_admin_s_to_resolve_this_billing_issue")
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontWeight: "regular",
       fontSize: 11,
       children: renderI18nText("payments_modal.account_switcher_cta", {

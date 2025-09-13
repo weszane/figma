@@ -8,7 +8,7 @@ import { gI } from "../figma_app/399472";
 import { showModalHandler } from "../905/156213";
 import { EL } from "../figma_app/740025";
 import { getPluginVersion } from "../figma_app/300692";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { aA, Ke } from "../905/636775";
 import { H } from "../figma_app/441663";
 import { j_, Di, ii } from "../905/217142";
@@ -84,7 +84,7 @@ export function $$b0({
     children: [jsx(_$$A, {
       items: E,
       getAriaLabel: y,
-      viewType: XU.GRID,
+      viewType: ViewMode.GRID,
       handleOpenItem: b,
       handleContextMenu: A,
       handleDeleteKey: r.unwrapOr(!1) ? v : void 0,

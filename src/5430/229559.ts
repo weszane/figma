@@ -7,7 +7,7 @@ import { Qo, cX } from "../figma_app/471982";
 import { _K } from "../figma_app/808294";
 import { XW, eO, $9, jB } from "../figma_app/427318";
 import { vt } from "../figma_app/306946";
-import { aL, PM, zF } from "../figma_app/45218";
+import { ShelfViewType, hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
 import { d as _$$d } from "../5430/772148";
 import { I as _$$I } from "../5430/292815";
 import { Cg, Gb } from "../figma_app/534676";
@@ -35,7 +35,7 @@ export function $$y0({
   let y = I(t);
   return _K(t, y) ? jsx(_$$I, {
     resource: t,
-    context: aL.DETAIL,
+    context: ShelfViewType.DETAIL,
     enableWideButtonForStickyFooter: r,
     enableCondensedWideButtonForStickyFooter: x,
     thirdPartyM10nUrl: XW(e) && e.third_party_m10n_url ? e.third_party_m10n_url : void 0
@@ -62,14 +62,14 @@ export function $$y0({
       case vt.PLUGIN:
       case vt.WIDGET:
         if (!(r = $9(e))) return null;
-        let o = PM(r) ? jsx(Cg, {
+        let o = hasFreemiumCode(r) ? jsx(Cg, {
           resource: r,
           showCaret: !1
-        }) : zF(r) ? jsx(Gb, {}) : void 0;
+        }) : isThirdPartyMonetized(r) ? jsx(Gb, {}) : void 0;
         return jsx(f, {
           button: jsx(_$$d, {
             resource: r,
-            context: aL.DETAIL
+            context: ShelfViewType.DETAIL
           }),
           subtext: o
         });
@@ -89,14 +89,14 @@ export function $$y0({
       enableWideButtonForStickyFooter: t
     });
     {
-      let t = PM(e) ? jsx(Cg, {
+      let t = hasFreemiumCode(e) ? jsx(Cg, {
         resource: e,
         showCaret: !1
-      }) : zF(e) ? jsx(Gb, {}) : void 0;
+      }) : isThirdPartyMonetized(e) ? jsx(Gb, {}) : void 0;
       return jsx(f, {
         button: jsx(_$$d, {
           resource: e,
-          context: aL.DETAIL
+          context: ShelfViewType.DETAIL
         }),
         subtext: t
       });

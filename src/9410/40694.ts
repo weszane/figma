@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { SourceType } from "../figma_app/763686";
 import d from "classnames";
 import { Point } from "../905/736624";
@@ -14,7 +14,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../3276/966473";
 import { getUserId } from "../905/372672";
 import { $A, vt } from "../905/862883";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $L, us } from "../figma_app/136698";
 import { LL, xG } from "../figma_app/565197";
 import { b as _$$b } from "../905/635568";
@@ -30,7 +30,7 @@ function S({
     className: c()(HG, ET),
     children: e
   }) : jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": i.name || i.handle || "",
     "data-tooltip-timeout-delay": "500",
     "data-tooltip-show-below": !0,
@@ -149,7 +149,7 @@ function k({
   });
 }
 function N(e) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: RT,
     recordingKey: "facestamp",
     onClick: e.onClick,

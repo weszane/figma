@@ -7,8 +7,8 @@ import { At, vV, CX, UU, Z5 } from "../figma_app/770088";
 import { I_ } from "../905/234821";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
-import { $$, Z0 } from "../figma_app/62612";
-import { hm } from "../905/380385";
+import { applyOffsetToViewport, viewportToScreen } from "../figma_app/62612";
+import { NEW_COMMENT_ID } from "../905/380385";
 import { XC } from "../905/512783";
 import { c4 } from "../figma_app/70421";
 import { s as _$$s } from "../905/518538";
@@ -34,7 +34,7 @@ export function $$E1(e, t, r, a, o) {
   }, [h, m, t, E, r, y, b]);
   useEffect(() => {
     h && (h._add_draft_comment = e => {
-      let t = $$(r.getViewportInfo(), e);
+      let t = applyOffsetToViewport(r.getViewportInfo(), e);
       m(vV({
         anchorPosition: t
       }));
@@ -45,7 +45,7 @@ export function $$E1(e, t, r, a, o) {
     h && (h._deselect_comment = e => {
       m(UU());
     }, h._remove_draft_comment = () => {
-      e === hm && m(UU());
+      e === NEW_COMMENT_ID && m(UU());
     });
   }, [h, e, m]);
   useEffect(() => {
@@ -84,10 +84,10 @@ export function $$y0(e, t, r, s, l) {
   }, [d, s, l]);
   let c = useSelector(e => e.comments.newComment);
   let u = useMemo(() => {
-    if (e === hm) {
+    if (e === NEW_COMMENT_ID) {
       if (!c.anchorPosition) return null;
       {
-        let e = Z0(r.getViewportInfo(), c.anchorPosition);
+        let e = viewportToScreen(r.getViewportInfo(), c.anchorPosition);
         return {
           x: e.x,
           y: e.y,
@@ -98,7 +98,7 @@ export function $$y0(e, t, r, s, l) {
     }
     let n = t.find(t => t.id === e);
     if (!n || !n.canvasPosition) return null;
-    let i = Z0(r.getViewportInfo(), n.canvasPosition);
+    let i = viewportToScreen(r.getViewportInfo(), n.canvasPosition);
     let a = c4(n.comments).length;
     let s = XC.getPinSize(a);
     return {
@@ -111,7 +111,7 @@ export function $$y0(e, t, r, s, l) {
   let g = useLatestRef(e);
   let E = useLatestRef(u);
   useEffect(() => {
-    e && u && e === g && E && !deepEqual(u, E) && (e === hm ? d?.updateDraftCommentPinPosition?.(u) : d?.updateCommentPinPosition?.(e, u));
+    e && u && e === g && E && !deepEqual(u, E) && (e === NEW_COMMENT_ID ? d?.updateDraftCommentPinPosition?.(u) : d?.updateCommentPinPosition?.(e, u));
   }, [d, e, u, E, g]);
 }
 export const $P = $$y0;

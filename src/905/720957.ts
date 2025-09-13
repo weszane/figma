@@ -17,7 +17,7 @@ import { _z, W0 } from "../905/977218";
 import { _6 } from "../figma_app/386952";
 import { uR } from "../figma_app/162807";
 import { isSearchView } from "../figma_app/707808";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { oT, L8, rG, z5, q4 } from "../905/124270";
 import { K as _$$K2 } from "../905/328468";
 import { A as _$$A2 } from "../905/484713";
@@ -179,7 +179,7 @@ export function $$P0({
         "aria-label": getI18nString("search.search_bar.clear"),
         onClick: en,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("search.search_bar.clear")
         },
         children: jsx(_$$A, {})

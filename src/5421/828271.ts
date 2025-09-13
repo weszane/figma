@@ -17,13 +17,13 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import _ from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { useLatestRef } from "../figma_app/922077";
 import { d as _$$d2, s as _$$s } from "../figma_app/429226";
 import { generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { AO, o$ } from "../figma_app/8833";
@@ -38,7 +38,7 @@ import { o3, nt } from "../905/226610";
 import { dK, Xt } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { J as _$$J2 } from "../905/980942";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { ZM } from "../figma_app/505098";
 import { e as _$$e } from "../figma_app/905311";
@@ -171,7 +171,7 @@ let $$eT0 = memo(function ({
     return !!e && !!t && t.selectionOverrides[SymbolOverrideType.PROTOTYPE_INTERACTIONS];
   }();
   let j = selectCurrentFile();
-  let N = _$$U();
+  let N = trackFileEventWithStore();
   let S = cJ();
   let A = useMemo(() => new cP(d), [d]);
   let D = useCallback(e => A.format(e), [A]);
@@ -577,7 +577,7 @@ function eA({
     return o?.interactions[0] ?? null;
   }(V, t, e);
   let eY = useLatestRef(eG);
-  let eq = _$$U();
+  let eq = trackFileEventWithStore();
   if (useEffect(() => {
     null === eY && eG && eq("prototype_interaction_conflict_override_created", {
       interaction_type: t.interactions[0].event?.interactionType,
@@ -607,7 +607,7 @@ function eA({
         recordingKey: generateRecordingKey(B, "interactionIcon"),
         htmlAttributes: {
           onMouseDown: e$,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": e1 ? e2 : eM(t.event, ei, !!U)
         },
         "aria-label": e1 ? e2 : eM(t.event, ei, !!U),
@@ -619,7 +619,7 @@ function eA({
         className: "prototype_interaction_list--ellipsis--ro1zN ellipsis--ellipsis--Tjyfa",
         onMouseEnter: showTooltip,
         children: [eM(t.event, ei, !!U), eR && jsxs("span", {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": tooltipText,
           className: "prototype_interaction_list--summaryText--hGpp4",
           children: ["\xa0\xb7\xa0", eR]
@@ -656,10 +656,10 @@ function eA({
     "aria-haspopup": "dialog",
     "aria-expanded": !!Q,
     recordingKey: B,
-    children: [e1 && jsx(_$$B, {
+    children: [e1 && jsx(SvgComponent, {
       className: "prototype_interaction_list--warningIcon--Mgr5O",
       svg: _$$A,
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": ey,
       "data-tooltip-text": e2
     }), jsx("div", {

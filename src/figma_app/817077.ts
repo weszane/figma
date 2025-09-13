@@ -3,11 +3,11 @@ import { useLatestRef } from "../figma_app/922077";
 import { Point } from "../905/736624";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../905/104740";
-import { $$ } from "../figma_app/62612";
+import { applyOffsetToViewport } from "../figma_app/62612";
 export function $$d2(e) {
   let t = fullscreenValue.getViewportInfo();
   let r = e ? e.subtract(t) : new Point(t.width / 2, t.height / 2);
-  let n = $$(t, r);
+  let n = applyOffsetToViewport(t, r);
   return new Point(n.x, n.y);
 }
 export let $$c1 = 5;

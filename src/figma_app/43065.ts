@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { g as _$$g } from "../905/125190";
 import { J } from "../905/614223";
@@ -39,7 +39,7 @@ export function $$A0(e) {
     })
   }) : renderI18nText("figmake.paywall.footer_credits");
   let w = [renderI18nText("figmake.paywall.feature.prototypes"), renderI18nText("figmake.paywall.feature.prompt_design"), renderI18nText("figmake.paywall.feature.ai_outputs")];
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     width: 408,
     children: jsx(Wk, {

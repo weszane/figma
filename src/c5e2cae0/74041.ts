@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Kz, vd, Us } from "../figma_app/637027";
 import { L } from "../905/408237";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { Fb, b0, F0, Pr, Zy, eA, x } from "../figma_app/81441";
@@ -50,7 +50,7 @@ export function $$_1({
       children: p.subtitle
     }), jsxs("div", {
       className: F0,
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         svg: A,
         className: Pr
       }), jsx(L, {

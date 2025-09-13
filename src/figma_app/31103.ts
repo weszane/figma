@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useCallback, useContext, useMemo, useEffect } from "react";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { v4 } from "../figma_app/655139";
 import { $h } from "../905/191741";
 import { fu } from "../figma_app/831799";
@@ -8,7 +8,7 @@ let d = createContext({});
 let c = "dev_mode.variables.";
 let u = {};
 export function $$p3() {
-  let e = hC();
+  let e = trackDefinedFileEventWithStore();
   return useCallback((t, r, n = {}) => {
     e(c + "performance", {
       name: t,
@@ -18,7 +18,7 @@ export function $$p3() {
   }, [e]);
 }
 export function $$_1() {
-  let e = hC();
+  let e = trackDefinedFileEventWithStore();
   let {
     name,
     enabled = !0,
@@ -33,7 +33,7 @@ export function $$_1() {
   }, [trackingProps, enabled, name, e]);
 }
 export function $$h0(e, t) {
-  let r = hC();
+  let r = trackDefinedFileEventWithStore();
   return useCallback((n = u) => {
     r(c + e, {
       action: "click_on_entry_point",
@@ -49,7 +49,7 @@ export function $$m2({
   name: p,
   trackingProps: _ = u
 }) {
-  let h = hC();
+  let h = trackDefinedFileEventWithStore();
   let m = v4().id;
   let [g] = $h();
   let f = useMemo(() => ({

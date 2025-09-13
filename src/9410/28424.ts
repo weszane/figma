@@ -3,7 +3,7 @@ import { createElement } from "react";
 import { Z } from "../905/279476";
 import { b } from "../figma_app/556971";
 import { s as _$$s } from "../cssbuilder/589278";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export function $$d1() {
   return !1;
 }
@@ -23,7 +23,7 @@ export function $$u0() {
   } = $$c2();
   return shouldShow ? jsx("span", {
     className: _$$s.h32.w32.inlineFlex.itemsCenter.justifyCenter.$,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": label,
     "data-tooltip-show-right": e,
     children: createElement(icon)

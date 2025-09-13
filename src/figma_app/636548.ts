@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { StateHierarchy } from "../figma_app/763686";
 import { E } from "../905/277716";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { renameNode } from "../figma_app/741237";
 import { R as _$$R } from "../figma_app/930125";
@@ -29,7 +29,7 @@ export function $$_0({
       },
       value: f ? getI18nString("design_systems.component_panel.current_variant") : containingProductComponent.name,
       canEdit: !f,
-      icon: t ?? jsx(B, {
+      icon: t ?? jsx(SvgComponent, {
         svg: A,
         className: Kk
       }),

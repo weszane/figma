@@ -7,7 +7,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W } from "../905/95038";
 import { x } from "../905/98916";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0, rm, Ps } from "../905/989969";
 var s = a;
 export function $$g0(e) {
@@ -20,7 +20,7 @@ export function $$g0(e) {
     "aria-pressed": e.checked,
     onClick: e.onSelect,
     disabled: i || e.canDisableForConnectedProject && (e.isConnectedProject || e.hasPendingConnectionInvite),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": (() => {
       if (i) return getI18nString("file_browser.file_move.you_dont_have_edit_access_to_this_project");
       if (e.canDisableForConnectedProject) {

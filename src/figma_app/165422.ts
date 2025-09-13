@@ -9,8 +9,8 @@ import { parsePxNumber } from "../figma_app/783094";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { getInitialOptions } from "../figma_app/169182";
 import { isMobileUA, BrowserInfo, isFigmaMobileApp } from "../figma_app/778880";
-import { nt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LargeLoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { z4 } from "../905/37051";
 import { _6 } from "../figma_app/386952";
 import { aq } from "../figma_app/412189";
@@ -93,7 +93,7 @@ function D(e) {
     case lF.SPINNER:
       return jsx("div", {
         className: AV,
-        children: jsx(nt, {})
+        children: jsx(LargeLoadingSpinner, {})
       });
     case lF.BAR:
     default:
@@ -187,7 +187,7 @@ function j(e) {
         [v0]: i,
         [uq]: t
       }),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: wn,
         svg: _$$A
       })

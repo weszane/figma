@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { K } from "../905/443068";
 import { h } from "../905/994594";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { H1, VK } from "../9410/499229";
 export function $$c0({
   onClick: e
@@ -23,7 +23,7 @@ export function $$c0({
       id: "canvas-search-icon-button",
       "data-onboarding-key": "canvas-search",
       "data-tooltip": "canvas-search",
-      "data-tooltip-type": Ib.LOOKUP
+      "data-tooltip-type": KindEnum.LOOKUP
     },
     children: jsx(h, {})
   });

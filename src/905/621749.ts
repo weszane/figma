@@ -8,7 +8,7 @@ import { a as _$$a } from "../905/676930";
 import { A as _$$A } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { i0 } from "../905/17223";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -345,7 +345,7 @@ export let $$z0 = registerModal(function ({
   };
   if ("loaded" !== t.status) return null;
   let O = t.data?.team?.teamFileCounts?.designFileCount ?? 0;
-  let z = oA(t.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
+  let z = getResourceDataOrFallback(t.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let H = i ? {
     show: z > STANDARD_LIMIT,
     count: z

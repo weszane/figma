@@ -21,7 +21,7 @@ import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F } from "../figma_app/482495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yh } from "../figma_app/357047";
 import { PE } from "../figma_app/251115";
 import { JT } from "../figma_app/632248";
@@ -37,7 +37,7 @@ import { Zz, o2, fG } from "../figma_app/667212";
 import { u as _$$u } from "../figma_app/913494";
 import { G as _$$G } from "../figma_app/682672";
 import { DX, l3, FT } from "../figma_app/798540";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { m as _$$m } from "../905/886380";
 import { getLocaleFallbacks } from "../figma_app/169182";
 import { fp, fm, uG, Ib as _$$Ib, cR, JU, h$, Os, PF, xf, Jp, p$, Cw, cx, o$ } from "../figma_app/955528";
@@ -91,7 +91,7 @@ function W(e) {
     recordingKey,
     children
   } = e;
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: m()("slides_rewrite_toggle_button--presetButton--5vrax", {
       "slides_rewrite_toggle_button--toggled--HPAli": toggled
     }),
@@ -536,7 +536,7 @@ function el() {
         verticalAlign: "bottom"
       }).$,
       target: "_blank",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("whiteboard.ai_modal.learn_more"),
       "aria-label": getI18nString("whiteboard.ai_modal.learn_more"),
       innerText: "learn more",

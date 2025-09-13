@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
-import { tq, yc } from "../figma_app/671547";
+import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { n as _$$n } from "../9410/774045";
@@ -21,9 +21,9 @@ export function $$y1() {
   let e = useDispatch();
   let t = x();
   let i = kl("embedData");
-  let r = tq(i);
+  let r = createEmbedAnalyticsHandler(i);
   return useCallback(() => {
-    t && (r(yc.OPEN_PREVIEW), e(RK({
+    t && (r(LinkMetadataEvent.OPEN_PREVIEW), e(RK({
       rawInput: t
     })));
   }, [t, e, r]);

@@ -2,7 +2,7 @@ import { deepEqual } from "../905/382883";
 import { isNullish } from "../figma_app/95419";
 import a from "classnames";
 import { xM, Bx, x6 } from "../905/403166";
-import { hm, IT } from "../905/380385";
+import { NEW_COMMENT_ID, DEFAULT_COMMENT_STATE } from "../905/380385";
 import { F } from "../905/241044";
 import { escapeHtml } from "../figma_app/930338";
 import { Point } from "../905/736624";
@@ -46,9 +46,9 @@ export function $$T4(e) {
   return $$b2(e) || $$E9(e).length <= 5;
 }
 export function $$I1(e) {
-  let t = !(e.activeThread?.id === hm && e.newComment.discardAttempt < IT);
+  let t = !(e.activeThread?.id === NEW_COMMENT_ID && e.newComment.discardAttempt < DEFAULT_COMMENT_STATE);
   let r = e.activeThread?.id ? e.threads[e.activeThread.id] : null;
-  let n = !(r && !(r && $$T4(r.reply.messageMeta) && 0 === Object.keys(r.reply.attachments || {}).length) && (!r.discardAttempts || r.discardAttempts < IT));
+  let n = !(r && !(r && $$T4(r.reply.messageMeta) && 0 === Object.keys(r.reply.attachments || {}).length) && (!r.discardAttempts || r.discardAttempts < DEFAULT_COMMENT_STATE));
   return t && n;
 }
 export function $$S13(e) {

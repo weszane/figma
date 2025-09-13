@@ -13,7 +13,7 @@ import { d as _$$d } from "../905/49800";
 import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
 import { c$, bL, l9, mc } from "../905/493196";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { bL as _$$bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { K as _$$K2 } from "../figma_app/291291";
@@ -47,7 +47,7 @@ import { selectOpenFileKey } from "../figma_app/516028";
 import { getObservableValue } from "../figma_app/84367";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { qo } from "../905/959568";
 import { e as _$$e2 } from "../905/579635";
 import { j5 } from "../figma_app/178475";
@@ -190,7 +190,7 @@ new class {
     e?.skipFlush !== !0 && (await this.flushBufferAsync());
     this.calls = [];
   }
-  async flushBufferAsync() { }
+  async flushBufferAsync() {}
   addCall(e) {
     this.calls.push(e);
   }
@@ -293,7 +293,7 @@ function eU(e) {
     children: jsx("div", {
       ref: B,
       className: BY,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": ed ? ec : null,
       "data-testid": `component-prop-row-label-${typedPropDef.name}`,
       children: ec
@@ -833,7 +833,7 @@ function e$({
         formatter: b,
         dispatch: f,
         "aria-label": I,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": I
       })
     })
@@ -1035,7 +1035,7 @@ function eJ({
     className: w()(eB(e)),
     children: [jsx("div", {
       className: eG(e),
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         onClick: C,
         className: w()(Zj, {
           [nt]: o

@@ -13,7 +13,7 @@ import { nM, QN, Vu, Kq, jS, f0, jX, Ks, lD, WR, cu, pj, F9, v8, ay, KA } from "
 import { MF } from "../figma_app/646357";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { gJ, Jl, SO, JG } from "../figma_app/190980";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { NO_TEAM } from "../figma_app/633080";
 import { vt, $A, dB } from "../905/862883";
 import { q } from "../figma_app/446378";
@@ -139,7 +139,7 @@ let D = {
 };
 let L = {
   [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, bD.WIDGET),
+  [$A.FigJam]: gJ($A.FigJam, ResourceType.WIDGET),
   [$A.Handoff]: [],
   [$A.Slides]: [],
   [$A.Cooper]: [],
@@ -147,17 +147,17 @@ let L = {
 };
 let F = {
   [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, bD.PLUGIN),
-  [$A.Handoff]: gJ($A.Handoff, bD.PLUGIN),
+  [$A.FigJam]: gJ($A.FigJam, ResourceType.PLUGIN),
+  [$A.Handoff]: gJ($A.Handoff, ResourceType.PLUGIN),
   [$A.Slides]: [],
   [$A.Cooper]: [],
   fetchedResources: {}
 };
 let M = {
   [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, bD.HUB_FILE),
+  [$A.FigJam]: gJ($A.FigJam, ResourceType.HUB_FILE),
   [$A.Handoff]: [],
-  [$A.Slides]: gJ($A.Slides, bD.HUB_FILE),
+  [$A.Slides]: gJ($A.Slides, ResourceType.HUB_FILE),
   [$A.Cooper]: []
 };
 let j = {
@@ -197,7 +197,7 @@ function V(e) {
       } : {})
     },
     type: vt.CommunityResource
-  }, ...c].slice(0, resourceKey === bD.PLUGIN ? 21 : 12);
+  }, ...c].slice(0, resourceKey === ResourceType.PLUGIN ? 21 : 12);
   let p = Jl(editorKey, resourceKey);
   p && localStorageRef?.setItem(p, JSON.stringify(u));
   return u;
@@ -264,7 +264,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let n = bD.WIDGET;
+      let n = ResourceType.WIDGET;
       if (!Jl(storeInRecentsKey, n)) return e;
       let r = V({
         currentUserId: t.payload.currentUserId,
@@ -287,7 +287,7 @@ let $$H0 = HY({
         resourceId,
         storeInRecentsKey
       } = t.payload;
-      let r = G(storeInRecentsKey, bD.WIDGET, resourceId);
+      let r = G(storeInRecentsKey, ResourceType.WIDGET, resourceId);
       return {
         ...e,
         [storeInRecentsKey]: r
@@ -295,7 +295,7 @@ let $$H0 = HY({
     }
     return jS.matches(t) ? {
       ...e,
-      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, bD.WIDGET)
+      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, ResourceType.WIDGET)
     } : f0.matches(t) ? {
       ...e,
       fetchedResources: {
@@ -312,7 +312,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let n = bD.PLUGIN;
+      let n = ResourceType.PLUGIN;
       if (!Jl(storeInRecentsKey, n)) return e;
       let r = V({
         currentUserId: t.payload.currentUserId,
@@ -335,7 +335,7 @@ let $$H0 = HY({
         resourceId,
         storeInRecentsKey
       } = t.payload;
-      let r = G(storeInRecentsKey, bD.PLUGIN, resourceId);
+      let r = G(storeInRecentsKey, ResourceType.PLUGIN, resourceId);
       return {
         ...e,
         [storeInRecentsKey]: r
@@ -343,7 +343,7 @@ let $$H0 = HY({
     }
     return WR.matches(t) ? t.payload.storeInRecentsKey === $A.Design ? e : {
       ...e,
-      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, bD.PLUGIN)
+      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, ResourceType.PLUGIN)
     } : cu.matches(t) ? {
       ...e,
       fetchedResources: {
@@ -361,7 +361,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let o = Jl(storeInRecentsKey, bD.HUB_FILE);
+      let o = Jl(storeInRecentsKey, ResourceType.HUB_FILE);
       if (!o) throw Error("Recently used templates currently only implemented for FigJam and Slides");
       let {
         payload
@@ -370,7 +370,7 @@ let $$H0 = HY({
         type,
         userId
       } = l;
-      let [[u], p] = s()(gJ(storeInRecentsKey, bD.HUB_FILE), e => {
+      let [[u], p] = s()(gJ(storeInRecentsKey, ResourceType.HUB_FILE), e => {
         let {
           type: _type
         } = e;

@@ -4,14 +4,14 @@ import { Label } from "../905/270045";
 import { v } from "../905/442517";
 import { Ph } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { q } from "../905/749058";
 import { UX } from "../figma_app/481749";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { uW, Gf, Kk, IT, uk, px, h_, XI, OW, xm, RU, B6, Pe, qp } from "../469e6e40/615314";
 import { A } from "../6828/865061";
 if (443 == require.j) {}
@@ -24,7 +24,7 @@ export function $$v1(e) {
     className: e.sectionClass ? e.sectionClass : uW,
     children: [jsxs("h2", {
       className: e.headerClass ? e.headerClass : Gf,
-      children: [e.icon && jsx(B, {
+      children: [e.icon && jsx(SvgComponent, {
         className: Kk,
         svg: e.icon
       }), jsx("div", {
@@ -71,7 +71,7 @@ export function $$j4(e) {
       className: XI,
       children: [jsx("div", {
         children: e.currentValue
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         className: OW,
         svg: A
       })]
@@ -109,7 +109,7 @@ export function $$w0(e) {
     }), jsx("div", {
       className: qp,
       "data-tooltip": e.contactSupportTooltipCopy ?? "admin-support@figma.com",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0,
       children: jsx(Ph, {
         trackingEventName: e.label,
@@ -162,7 +162,7 @@ export function $$k2(e) {
       })]
     }), jsx(v, {
       htmlAttributes: e.tooltipText ? {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.tooltipText,
         "data-tooltip-timeout-delay": 50,
         "data-tooltip-show-above": !0,

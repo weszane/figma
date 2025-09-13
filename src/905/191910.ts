@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
 import { nR } from "../figma_app/637027";
@@ -12,7 +12,7 @@ export function $$c0() {
       customHistory.reload("BranchMemoryWarning");
     }
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: e,
     width: "lg",
     children: jsxs(vo, {

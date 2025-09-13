@@ -18,9 +18,9 @@ import { e0 } from "../905/696396";
 import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n, IK } from "../905/521428";
+import { Button, ButtonWide } from "../905/521428";
 import { A as _$$A } from "../905/891805";
 import { s as _$$s2, K as _$$K2 } from "../c5e2cae0/341232";
 import { $z } from "../figma_app/617427";
@@ -29,7 +29,7 @@ import { showModalHandler } from "../905/156213";
 import { AG } from "../figma_app/217457";
 import { registerModal } from "../905/102752";
 import { $$ } from "../c5e2cae0/705272";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
 import { B as _$$B } from "../905/261906";
@@ -57,7 +57,7 @@ let R = registerModal(function (e) {
   let h = p(1);
   let g = p(-1);
   let x = useCallback(e => t => u($$(c, e, t - (c[e] || 0))), [c]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: d,
     width: 264,
     htmlAttributes: {
@@ -100,14 +100,14 @@ let R = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: onClose,
             htmlAttributes: {
               "data-testid": "additional-seats--cancel"
             },
             children: renderI18nText("checkout.additional_seats.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: () => {
               analyticsEventManager.trackDefinedEvent("monetization_upgrades.cart_additional_seats_changed_in_checkout", {
@@ -179,7 +179,7 @@ let H = registerModal(function (e) {
       teamId
     },
     trackingOptions: t,
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: u,
       width: 480,
       htmlAttributes: {
@@ -253,7 +253,7 @@ function Z({
     }));
   };
   if (isNullish(t[a])) return null;
-  let h = jsxs(_$$E, {
+  let h = jsxs(ButtonPrimitive, {
     className: "xh8yej3 x1whlmpv x133fa97 x19y5rnk x1bamp8i xkezfkh",
     "aria-label": getI18nString("checkout.edit_user_seat_name", {
       name: e.handle
@@ -287,7 +287,7 @@ function Z({
       })
     }), jsx("td", {
       className: J,
-      children: u ? h : jsx(IK, {
+      children: u ? h : jsx(ButtonWide, {
         variant: "ghost",
         "aria-label": getI18nString("checkout.edit_user_seat_name", {
           name: e.handle

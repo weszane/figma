@@ -2,7 +2,7 @@ import { getI18nString } from '../905/303541';
 import { J } from '../905/491186';
 import { AccessLevelEnum } from '../905/557142';
 import { getFeatureFlags } from '../905/601108';
-import { _ as _$$_ } from '../905/613917';
+import { findTeamById } from '../905/613917';
 import { mapUserRoleToOrgUserRoleAlias, isExternalRestricted } from '../figma_app/12796';
 import { OrgUserRoleEnum } from '../figma_app/35887';
 import { cn, GU } from '../figma_app/141320';
@@ -107,13 +107,13 @@ export function $$v14(e, t, r) {
 }
 function A(e, t, r) {
   if (r.user && !cn(r.user)) return !1;
-  let n = _$$_(e, r);
+  let n = findTeamById(e, r);
   if (!n) return !1;
   let i = !!r.user && GU(r.userEduGracePeriods, cn(r.user), n.id, n.student_team).showAccessRestricted;
   return t > AccessLevelEnum.VIEWER && i;
 }
 function x(e, t, r) {
-  let i = _$$_(e, r);
+  let i = findTeamById(e, r);
   if (!i) return !1;
   let a = r.user?.id;
   let s = i.org_id;
@@ -208,7 +208,7 @@ export function $$V4(e, t, r) {
     if (!(r = r || t.user?.id) || !e || !t.currentUserOrgId) return !1;
     let n = t.currentUserOrgId && t.user && t.orgUsersByOrgId[t.currentUserOrgId] ? t.orgUsersByOrgId[t.currentUserOrgId][r] : null;
     n === null && (n = J(t, 'org_user', t.currentUserOrgId));
-    let i = _$$_(e, t);
+    let i = findTeamById(e, t);
     if (!i || !n || t.currentUserOrgId !== i.org_id) return !1;
     if ($$M17(e, t)) return !0;
     let s = $$B0(t.currentUserOrgId, t, r);

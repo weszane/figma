@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { hm } from "../905/380385";
+import { NEW_COMMENT_ID } from "../905/380385";
 let $$u10 = createActionCreator("GENERIC_COMMENT_COMMIT_CREATED_COMMENT");
 let $$p8 = createActionCreator("GENERIC_COMMENT_COMMIT_EDITED_COMMENT");
 let $$_5 = createActionCreator("GENERIC_COMMENT_COMMIT_DELETED_COMMENT");
@@ -75,7 +75,7 @@ let $$y7 = createOptimistThunk(async (e, t) => {
     })), parentId ? e.dispatch($$f3({
       commentId: parentId
     })) : e.dispatch($$f3({
-      commentId: hm
+      commentId: NEW_COMMENT_ID
     })), onError && onError());
   });
   e.dispatch($$E11(t));

@@ -5,8 +5,8 @@ import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
-import { E as _$$E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { t as _$$t } from "../905/150656";
 import { s as _$$s } from "../905/403855";
 import { B as _$$B } from "../905/950875";
@@ -18,7 +18,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
 import { lb } from "../3973/538504";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
 import { P as _$$P } from "../905/347284";
@@ -28,7 +28,7 @@ import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { JT, Qi, mb } from "../figma_app/599327";
 import { R as _$$R } from "../905/304671";
 import { BC, E1 } from "../figma_app/149367";
@@ -44,7 +44,7 @@ import { d as _$$d } from "../469e6e40/490120";
 import { zN } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { FSeatAssignmentReasonType, FOrganizationLevelType, FApprovalMethodType, FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { rq as _$$rq } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
 import { v as _$$v } from "../figma_app/899624";
@@ -54,7 +54,7 @@ import { sf } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { C3, UV } from "../figma_app/297957";
 import { j6 } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { x as _$$x } from "../469e6e40/446220";
 import { mm, a3 } from "../figma_app/684446";
@@ -271,7 +271,7 @@ function eL(e) {
   let h = e.disabled && e.disabledTooltipText;
   let x = h ? {
     id: d,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e.disabledTooltipText,
     "data-tooltip-show-below": !0,
     "data-tooltip-max-width": 220,
@@ -322,7 +322,7 @@ function eL(e) {
         inputDataTestId: a,
         inputRef: _,
         onChange: t => {
-          e.disabled || t === e.selectedOption || (Cu({
+          e.disabled || t === e.selectedOption || (logAndTrackCTA({
             ...u.properties,
             trackingContext: u.name,
             name: `dropdown-${e.id}`,
@@ -448,7 +448,7 @@ function eF(e) {
       children: renderI18nText("member_flyout_modal.joined_header")
     }), jsxs("div", {
       className: "x78zum5 x1q0g3np x6s0dn4",
-      children: [jsx(_$$E, {
+      children: [jsx(ButtonPrimitive, {
         className: eI,
         ...getTriggerProps(),
         children: shortText
@@ -495,7 +495,7 @@ function eq(e) {
     "data-tooltip": t.eccUpgradingLocked ? getI18nString("external_collaboration_restricted.members.tooltip.v2", {
       eccDomain: t.eccDomain
     }) : getI18nString("members_table.role_idp_tooltip.seat_rename"),
-    "data-tooltip-type": Ib.TEXT
+    "data-tooltip-type": KindEnum.TEXT
   } : null;
   return jsxs(AutoLayout, {
     spacing: 8,
@@ -517,12 +517,12 @@ function eq(e) {
         children: [jsx(BC, {
           type: t.currentSeatType,
           size: "24"
-        }), jsx(_$$E2, {
+        }), jsx(TextWithTruncation, {
           color: r ? "disabled" : "default",
           children: JT(t.currentSeatType)
         }), jsx("div", {
           className: "member_flyout--changeSeatButtonContainer--UNf6y",
-          children: jsx($n, {
+          children: jsx(Button, {
             disabled: r,
             variant: "secondary",
             onClick: () => {
@@ -606,7 +606,7 @@ function eG(e) {
     case FApprovalMethodType.AUTO_APPROVED_AVAILABLE_SEAT:
     case FApprovalMethodType.MANUAL_APPROVED:
     case FApprovalMethodType.MANUAL_APPROVED_NO_AVAILABLE_SEAT:
-      _ = jsx(_$$E, {
+      _ = jsx(ButtonPrimitive, {
         htmlAttributes: {
           "data-testid": "member-flyout-approval-settings-modal-button"
         },
@@ -617,7 +617,7 @@ function eG(e) {
           currency: e.currency,
           renewalTerm: e.renewalTerm
         }),
-        children: jsx(_$$E2, {
+        children: jsx(TextWithTruncation, {
           color: "brand",
           children: l
         })
@@ -629,14 +629,14 @@ function eG(e) {
     case FApprovalMethodType.ADMIN_SELF_UPGRADE:
       _ = jsx("div", {
         className: eI,
-        children: jsx(_$$E2, {
+        children: jsx(TextWithTruncation, {
           color: "secondary",
           children: l
         })
       });
       break;
     default:
-      _ = jsx(_$$E2, {
+      _ = jsx(TextWithTruncation, {
         color: "secondary",
         children: l
       });
@@ -657,13 +657,13 @@ function eG(e) {
       upgradeDate: u
     });
     a.push(jsxs(Fragment, {
-      children: [jsx(_$$E2, {
+      children: [jsx(TextWithTruncation, {
         color: "secondary",
         "aria-hidden": "true",
         children: a.length > 0 && "\xb7"
       }), jsx("div", {
         ...xk(eB.date),
-        children: jsx(_$$E2, {
+        children: jsx(TextWithTruncation, {
           color: "secondary",
           children: e
         })
@@ -686,19 +686,19 @@ function ez(e) {
         upgradeReason: e.shortReason,
         upgradeDate: e.upgradeDate
       }),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-testid": e.testId,
       "data-tooltip-show-immediately": !0,
       "data-tooltip-hide-immediately": !0,
-      children: jsx(_$$E2, {
+      children: jsx(TextWithTruncation, {
         color: "secondary",
         children: e.paidStatusString
       })
-    }), jsx(_$$E2, {
+    }), jsx(TextWithTruncation, {
       color: "secondary",
       "aria-hidden": !0,
       children: "\xb7"
-    }), jsx(_$$E2, {
+    }), jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("members_table.user_upgrade_date", {
         upgradeDate: e.upgradeDate
@@ -1096,12 +1096,12 @@ function e0(e) {
           "data-testid": "activity-log-table-row",
           children: [jsxs("div", {
             className: `${eA} ${_$$s2.flex.flexColumn.itemsStart.borderBox.$}`,
-            children: [jsx(_$$E2, {
+            children: [jsx(TextWithTruncation, {
               color: "default",
               children: renderI18nText("recent_activity_modal.activity_log_created_at", {
                 creationDate: _$$A(e.created_at).toDate()
               })
-            }), jsx(_$$E2, {
+            }), jsx(TextWithTruncation, {
               color: "secondary",
               children: renderI18nText("recent_activity_modal.activity_log_created_at_time", {
                 creationDate: _$$A(e.created_at).toDate()
@@ -1119,7 +1119,7 @@ function e0(e) {
     }), "orgAdminSettings" === a && jsx("div", {
       className: _$$s2.flex.justifyEnd.p8.bt1.bSolid.colorBorder.$,
       "data-testid": "activity-log-table-footer",
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         disabled: 0 === o.length,
         onClick: () => {
@@ -1135,7 +1135,7 @@ function e0(e) {
     })]
   }) : jsx("div", {
     className: _$$s2.flex.flexColumn.hFull.justifyCenter.itemsCenter.$,
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("recent_activity_modal.no_activity_found")
     })
@@ -1231,7 +1231,7 @@ export let $$e50 = {
         ...t,
         planType: e.planType
       }).transform(t => {
-        let a = oA(t.memberFlyoutInfo);
+        let a = getResourceDataOrFallback(t.memberFlyoutInfo);
         return {
           teamUserId: a?.teamUserId,
           teamUser: a?.teamUser,

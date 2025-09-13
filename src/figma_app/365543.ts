@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { connect } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N } from "../905/438674";
 import { A } from "../905/251970";
 import l from "classnames";
@@ -30,7 +30,7 @@ class T extends RecordingPureComponent {
         panelName: this.props.panelName
       } : void 0;
       let t = null;
-      this.props.hintLinkText && (this.props.hintLinkOnClick ? t = jsx($n, {
+      this.props.hintLinkText && (this.props.hintLinkOnClick ? t = jsx(Button, {
         variant: "secondary",
         onClick: this.props.hintLinkOnClick,
         recordingKey: generateRecordingKey(this.props.recordingKey, "link"),

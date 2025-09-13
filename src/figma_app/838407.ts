@@ -4,7 +4,7 @@ import { flushSync } from "react-dom";
 import { atom, createRemovableAtomFamily, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { logWarning } from "../905/714362";
 import { EE, lB } from "../figma_app/731583";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 let c = atom({});
 let u = atom(null, (e, t, r) => {
   let n = e(c);
@@ -43,7 +43,7 @@ export function $$E0() {
   return useAtomWithSubscription(_) ? jsx(y, {}) : null;
 }
 function y() {
-  let e = _X({
+  let e = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let t = useAtomWithSubscription(m);
@@ -75,7 +75,7 @@ function b({
       lB(`scene-node-overlay-${t.nodeId}`);
     };
   }, [t.nodeId]), !c) return null;
-  let p = Yb(e, c);
+  let p = scaleRect(e, c);
   let _ = {
     x: p.x + r.x,
     y: p.y + r.y

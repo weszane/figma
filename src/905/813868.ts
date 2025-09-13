@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { Q7 } from "../905/15667";
 import { b as _$$b } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
-import { $$ } from "../figma_app/62612";
+import { applyOffsetToViewport } from "../figma_app/62612";
 import { checkZoomWidgetAccess } from "../figma_app/12796";
 import { showVisualBell, getFullscreenViewEditorType } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
@@ -71,7 +71,7 @@ export function $$I0({
         let e = 0;
         fullscreenValue.showUI() && (e = document.getElementById(_$$k2)?.clientWidth ?? 0);
         let n = fullscreenValue.getViewportInfo();
-        let r = $$(n, {
+        let r = applyOffsetToViewport(n, {
           x: n.x + n.width / 2 - e,
           y: n.y + n.height / 2
         });

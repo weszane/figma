@@ -7,7 +7,7 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/273
 import { trackEventAnalytics } from "../905/449184";
 import { lg } from "../figma_app/976749";
 import { _Q } from "../figma_app/67099";
-import { _X, Yb, ZT } from "../figma_app/62612";
+import { getViewportInfo, scaleRect, isRectInside } from "../figma_app/62612";
 import { j as _$$j } from "../905/214564";
 import { ri } from "../905/337179";
 import { ph, KG, kh } from "../905/50769";
@@ -16,7 +16,7 @@ export function $$f0() {
   let [e, t] = useAtomValueAndSetter(ph);
   let s = useAtomWithSubscription(KG);
   let f = useAtomWithSubscription(kh);
-  let x = _X({
+  let x = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let [y, _] = useState(null);
@@ -42,8 +42,8 @@ export function $$f0() {
     t(null);
   }, [t]);
   if (!f || !e || null === s) return null;
-  let v = Yb(x, f);
-  if (!ZT(v, x)) return null;
+  let v = scaleRect(x, f);
+  if (!isRectInside(v, x)) return null;
   let S = {
     top: v.y + x.y - 8,
     bottom: v.y + x.y + v.height + 8,

@@ -10,7 +10,7 @@ import { S as _$$S } from "../figma_app/11182";
 import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
-import { DQ, Pw } from "../figma_app/121751";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { setupShadowRead } from "../figma_app/391338";
 import { FAccessLevelType } from "../figma_app/191312";
@@ -82,7 +82,7 @@ export function $$C0() {
       oldValue: canAdminOrg(C.org_id, e),
       newValue: v.canAdminOrg,
       label: adminPermissionConfig.TeamContextMenuInTeamTiles.canAdminOrg,
-      enableFullRead: DQ(Pw.GROUP_7),
+      enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
       contextArgs: {
         currentTeamId: e.currentTeamId,
         currentUserOrgId: e.currentUserOrgId,

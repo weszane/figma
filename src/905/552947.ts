@@ -6,7 +6,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { AutoLayout } from "../905/470281";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
 var o = s;
 export function $$h0({
@@ -29,7 +29,7 @@ export function $$h0({
         }));
       },
       className: o()(_$$s.relative.colorBgSecondary.b1.bRadius6.colorBorder.p8.wFull.alignLeft.$, "code_suggestion--hoverParent--DV-OL"),
-      children: [jsx(E, {
+      children: [jsx(TextWithTruncation, {
         fontFamily: "monospace",
         children: e
       }), jsx("div", {
@@ -38,7 +38,7 @@ export function $$h0({
           transition: "opacity 200ms ease-out"
         }).$,
         onTransitionEnd: () => g(!1),
-        children: jsx(E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: "bold",
           color: "brand",
           children: renderI18nText(h ? "community.publishing.copied" : "community.publishing.copy")
@@ -46,7 +46,7 @@ export function $$h0({
       })]
     }), jsx("div", {
       className: _$$s.py4.$,
-      children: "string" == typeof t ? jsx(E, {
+      children: "string" == typeof t ? jsx(TextWithTruncation, {
         children: t
       }) : t
     })]

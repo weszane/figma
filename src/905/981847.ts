@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
 import a from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { $K } from "../905/901964";
 import { hr, RS, P3, zG, i3, ig, vi, nL, q_, ck, Xu, VO } from "../905/958668";
@@ -24,7 +24,7 @@ export function $$g1(e) {
     }), jsx("button", {
       className: s()(P3, e.isFigmake && zG),
       onClick: () => e.onDelete(),
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: A,
         className: i3
       })

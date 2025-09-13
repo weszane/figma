@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { TL } from "../figma_app/878651";
 var $$n0;
 (e => {
-  e.SearchResult = t => e.renderSearchResult(t.searchResult, XU.LIST);
+  e.SearchResult = t => e.renderSearchResult(t.searchResult, ViewMode.LIST);
   (e.SortKeys || (e.SortKeys = {})).NAME = "name";
   e.viewBarConfig = {
     viewId: "search-public_profiles",
@@ -14,15 +14,15 @@ var $$n0;
     mobileListSortKeys: ["name"],
     tabletListSortKeys: ["name"],
     sortKeyDescriptions: {
-      [XU.GRID]: {
+      [ViewMode.GRID]: {
         name: renderI18nText("search.sort_option.name")
       },
-      [XU.LIST]: {
+      [ViewMode.LIST]: {
         name: renderI18nText("search.sort_option.name")
       }
     },
     defaultOptions: {
-      viewMode: XU.LIST,
+      viewMode: ViewMode.LIST,
       sortMode: {
         sortKey: "name",
         sortDesc: !1

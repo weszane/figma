@@ -9,7 +9,7 @@ import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
 import { Us, vd } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
@@ -35,7 +35,7 @@ import { A as _$$A } from "../6828/871993";
 var d = n;
 function L(e) {
   return jsxs(Fragment, {
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: e.isArrow ? '<svg xmlns="http://www.w3.org/2000/svg" width="9" height="7" viewBox="0 0 9 7"><path fill="#000" fill-opacity=".8" fill-rule="nonzero" stroke="none" d="m3.586 7 .602-.602L1.71 3.93h6.414v-.86H1.711L4.187.594 3.587 0l-3.5 3.5 3.5 3.5z"/></svg>' : _$$A,
       className: oE
     }), jsx("p", {

@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -18,7 +18,7 @@ import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../vendor/850789";
 import { r as _$$r } from "../905/520829";
 import { L as _$$L } from "../905/408237";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { In } from "../905/672640";
 import { Ki } from "../figma_app/328188";
@@ -28,10 +28,10 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { Kq } from "../figma_app/713624";
 import { c as _$$c } from "../905/32166";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
-import { E as _$$E2 } from "../905/984674";
+import { getResourceDataOrFallback } from "../905/723791";
+import { TextWithTruncation } from "../905/984674";
 import { S as _$$S2 } from "../905/433182";
 import { P as _$$P2 } from "../905/688136";
 import { B as _$$B } from "../905/55104";
@@ -61,7 +61,7 @@ function G({
   }, {
     enabled: !!o
   });
-  let u = useMemo(() => c.data ? oA(c.data.team?.allActiveProjects) : void 0, [c]);
+  let u = useMemo(() => c.data ? getResourceDataOrFallback(c.data.team?.allActiveProjects) : void 0, [c]);
   let h = "loaded" !== c.status;
   let g = u?.length === 0 ? jsx("div", {
     className: _$$s.h300.flex.justifyCenter.itemsCenter.colorTextSecondary.$,
@@ -107,7 +107,7 @@ function G({
         className: _$$s.px12.py8.$,
         children: jsxs("div", {
           className: Yf,
-          children: [jsx(_$$E, {
+          children: [jsx(ButtonPrimitive, {
             className: BY,
             onClick: () => {
               i(null);
@@ -115,7 +115,7 @@ function G({
             },
             children: renderI18nText("resource_connection.all_teams")
           }), !!o && jsxs(Fragment, {
-            children: [jsx(_$$E2, {
+            children: [jsx(TextWithTruncation, {
               children: "/"
             }), jsx("div", {
               className: _$$s.ml6.mr6.ellipsis.noWrap.overflowHidden.$,
@@ -129,7 +129,7 @@ function G({
       children: jsx(_$$P, {
         children: o ? h ? jsx("div", {
           className: _$$s.h350.$,
-          children: jsx(qc, {})
+          children: jsx(LoadingOverlay, {})
         }) : jsxs(Fragment, {
           children: [jsx(_$$S2, {
             team: c.data?.team,
@@ -310,7 +310,7 @@ let z = registerModal(function (e) {
   let er = W && status === _$$r.LOADING || j || !H;
   return jsx(fu, {
     name: "Connected Project Select Project Modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: d,
       width: "lg",
       children: jsxs(vo, {
@@ -324,7 +324,7 @@ let z = registerModal(function (e) {
             className: _$$s.h400.$,
             children: er ? jsx("div", {
               className: _$$s.hFull.$,
-              children: jsx(qc, {})
+              children: jsx(LoadingOverlay, {})
             }) : B ? en : jsx(G, {
               currentPlan: H,
               selectedFolder: c,
@@ -335,11 +335,11 @@ let z = registerModal(function (e) {
           })]
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: i,
               children: renderI18nText("modal.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "primary",
               onClick: et,
               disabled: !c,
@@ -358,7 +358,7 @@ export let $$W0 = registerModal(function (e) {
   let A = e.entryPoint === wR.PROJECT_SETTINGS && e.assetTransferRequestWarning;
   return jsx(fu, {
     name: "Connected Project Intro Modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
       children: jsxs(vo, {
@@ -401,11 +401,11 @@ export let $$W0 = registerModal(function (e) {
               })
             }), jsxs("div", {
               className: FJ,
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 onClick: e.onClose,
                 children: renderI18nText("resource_connection.request_modal.cancel")
-              }), jsx($n, {
+              }), jsx(Button, {
                 variant: "primary",
                 onClick: () => {
                   e.entryPoint === wR.PROJECT_SETTINGS ? _(showModalHandler({

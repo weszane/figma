@@ -11,7 +11,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { V } from "../905/355181";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { L0, jm, fu } from "../figma_app/831799";
 import { SK, Fq } from "../905/84777";
@@ -54,14 +54,14 @@ function z({
       })
     }), jsxs("div", {
       className: _$$s.p12.pl10.pr10.flex.flexColumn.gap2.$,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
         color: "default",
         children: e
       }), jsx("div", {
         className: _$$s.minH32.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
           children: l
@@ -114,12 +114,12 @@ function E() {
       children: [jsxs("div", {
         className: _$$s.wHalf.flex.flexColumn.gap8.$,
         "data-testid": "fullscreen_help_upsells_modal_pricing_text_design",
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           color: "design",
           fontSize: 11,
           fontWeight: "semi-bold",
           children: renderI18nText("help_widget.collective_upsells.fullscreen.price_title.figma_design")
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           fontWeight: "semi-bold",
           fontSize: 18,
           children: r.formatMoney(s)
@@ -129,12 +129,12 @@ function E() {
       }), jsxs("div", {
         className: _$$s.wHalf.flex.flexColumn.gap8.$,
         "data-testid": "fullscreen_help_upsells_modal_pricing_text_figjam",
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           color: "figjam",
           fontSize: 11,
           fontWeight: "semi-bold",
           children: renderI18nText("help_widget.collective_upsells.fullscreen.price_title.figjam")
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           fontWeight: "semi-bold",
           fontSize: 18,
           children: r.formatMoney(c)
@@ -142,7 +142,7 @@ function E() {
       })]
     }), jsx("div", {
       className: _$$s.p4.pt0.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "secondary",
         fontSize: 11,
         children: renderI18nText("help_widget.collective_upsells.fullscreen.price.disclaimer.seat_rename")
@@ -168,14 +168,14 @@ export function $$N0({
   let M = useDispatch();
   let W = 1 === T ? jsx("div", {
     className: _$$s.p16.pt14.pb36.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 18,
       fontWeight: "semi-bold",
       children: l
     })
   }) : jsx("div", {
     className: _$$s.p16.pt14.pb4.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 13,
       color: "secondary",
       children: l
@@ -192,7 +192,7 @@ export function $$N0({
       tab: e.id,
       prevTab: z
     },
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 13,
       children: e.text
     })
@@ -257,7 +257,7 @@ export function $$N0({
                 spacing: 0,
                 children: [jsxs("div", {
                   className: _$$s.pl32.pt24.pb20.$,
-                  children: [c && jsx(_$$E, {
+                  children: [c && jsx(TextWithTruncation, {
                     fontSize: 20,
                     fontWeight: "semi-bold",
                     children: c

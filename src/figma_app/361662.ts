@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { selectCurrentFile, useOpenFileLibraryKey } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
 import { Cn, oA, Rn } from "../905/225265";
@@ -90,7 +90,7 @@ export function $$m0({
     scoreLexical: S,
     isExample: v,
     partnerType: A,
-    productType: pi({
+    productType: mapFileToProductType({
       editorType: x?.editorType
     }),
     queryId: C ?? void 0

@@ -12,7 +12,7 @@ import { B as _$$B } from "../905/907815";
 import { useSubscription } from "../figma_app/288654";
 import p, { generateUUIDv4 } from "../905/871474";
 import { oW } from "../905/675859";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { J as _$$J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
@@ -24,7 +24,7 @@ import { G9, gj } from "../figma_app/12220";
 import { selectCurrentUser } from "../905/372672";
 import { QuickReply_CommentThreadByRootComment } from "../figma_app/43951";
 import { mp } from "../905/772425";
-import { kT, Dw } from "../905/380385";
+import { ThreadType, ComposerType } from "../905/380385";
 import { rf } from "../figma_app/585209";
 import { _B } from "../905/852370";
 import { I as _$$I } from "../905/707866";
@@ -97,7 +97,7 @@ let $$U0 = forwardRef((e, t) => {
 });
 function H(e) {
   let t = selectCurrentUser();
-  return t ? "loading" === e.result.status || "disabled" === e.result.status ? jsx(qc, {
+  return t ? "loading" === e.result.status || "disabled" === e.result.status ? jsx(LoadingOverlay, {
     size: "medium"
   }) : "errors" === e.result.status || null == e.result.data.file ? jsx("div", {
     className: "quick_reply_thread_view--errorState--Re4UD",
@@ -163,7 +163,7 @@ function z(e) {
     replyCount: mobileCommentThread.length - 1,
     isCanvasMention: !1,
     pageName: N.clientMeta?.pageId || null,
-    sidebarItemType: kT.COMMENT_THREAD
+    sidebarItemType: ThreadType.COMMENT_THREAD
   };
   let F = {
     api: d,
@@ -388,7 +388,7 @@ function V(e) {
         });
       },
       placeholderText: getI18nString("comments.reply"),
-      recordingKey: Dw.quickReply,
+      recordingKey: ComposerType.quickReply,
       replyContainerRef: V,
       setHyperlinkEditorRef: z,
       setHyperlinkLocation: U,

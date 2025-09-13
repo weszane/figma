@@ -8,9 +8,9 @@ import { e as _$$e } from "../905/435763";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Q4 } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
 import { A as _$$A } from "../5132/237216";
@@ -33,7 +33,7 @@ import { fu } from "../figma_app/831799";
 import { cs } from "../figma_app/740025";
 import { IE } from "../5430/231178";
 import { TX } from "../figma_app/255679";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { F as _$$F } from "../5430/926195";
 import { T as _$$T } from "../5132/203178";
 import { Q } from "../5430/345616";
@@ -103,14 +103,14 @@ let E = registerModal(function ({
     className: "use_preset_options_modal--presetOptionsModal--MPCAv",
     children: [jsx("div", {
       className: "use_preset_options_modal--presetOptionsModal__header--7Ul9l",
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 20,
         children: renderI18nText("community.preset_modal.header")
       })
     }), jsx("div", {
       className: "use_preset_options_modal--presetOptionsModal__description--GD8wZ",
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("community.preset_modal.description")
       })
@@ -124,27 +124,27 @@ let E = registerModal(function ({
           children: jsx(_$$e, {})
         }), jsx("div", {
           className: L,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 13,
             children: getFeatureFlags().cmty_preset_modal_revised_copy ? renderI18nText("community.preset_modal.use_ui_kit_in_a_new_file") : renderI18nText("community.preset_modal.show_in_figma")
           })
-        }), jsx(_$$B, {
+        }), jsx(SvgComponent, {
           className: T,
           svg: _$$A2
         })]
       }), jsxs("button", {
         className: tW,
         onClick: k,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A3,
           className: "use_preset_options_modal--presetOptionsModal__copyIcon--OFXiM"
         }), jsx("div", {
           className: L,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 13,
             children: getFeatureFlags().cmty_preset_modal_revised_copy ? renderI18nText("community.preset_modal.make_a_copy_of_this_file") : renderI18nText("community.preset_modal.make_a_copy")
           })
-        }), jsx(_$$B, {
+        }), jsx(SvgComponent, {
           className: T,
           svg: _$$A2
         })]
@@ -216,7 +216,7 @@ export function $$Q0({
     let t;
     lT(e) ? t = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked") : m && (t = getI18nString("community.duplicate.to_duplicate_switch_to_your_personal_profile"));
     return jsx("div", {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t,
       "data-tooltip-show-immediately": !0,
       children: jsx(z, {

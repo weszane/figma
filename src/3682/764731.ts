@@ -13,7 +13,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { aV } from "../figma_app/722362";
 import { w$ } from "../9410/635666";
 import { N as _$$N } from "../3682/343085";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { m as _$$m } from "../905/99004";
 import { Id, kg, fI } from "../figma_app/626177";
 import { A as _$$A } from "../3276/51271";
@@ -21,21 +21,21 @@ import { K as _$$K } from "../3276/330497";
 import { QH } from "../9410/132424";
 import { U1 } from "../figma_app/343967";
 import { d as _$$d } from "../905/976845";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { I as _$$I } from "../905/932503";
 import { buildUploadUrl } from "../figma_app/169182";
 import { JL, We } from "../figma_app/165623";
 import { XHR } from "../905/910117";
 import { oB, j7 } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { W as _$$W } from "../905/236903";
 import { WO, X0, Mw, HJ, nN } from "../figma_app/122682";
 import { mt, Wl } from "../figma_app/318520";
 import { Ro } from "../figma_app/805373";
 import { L as _$$L } from "../905/671373";
 import { Ex, zE } from "../figma_app/919079";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { gR } from "../figma_app/976345";
 import { Um } from "../905/848862";
 import { j as _$$j } from "../905/834956";
@@ -64,7 +64,7 @@ import { useMemoShallow } from "../905/19536";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Jn } from "../905/17223";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { VisualBellActions } from "../905/302958";
 import { L0 } from "../figma_app/831799";
 import { Cf } from "../905/504727";
@@ -107,7 +107,7 @@ function j(e) {
             }), userIdsInCall.size]
           }), jsx(_$$K, {
             fileKey: e.fileKey,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("collaboration.voice.join_conversation"),
             isJoinWidget: !0,
             "data-onboarding-key": "audio-nux-key",
@@ -225,7 +225,7 @@ function es({
       })
     }), j && jsx("div", {
       className: ["captions_dialog--bottomDivider--WBbo5 captions_dialog--_divider--m8Skg", p ? q : ""].join(" ")
-    }), j && jsx(_$$E, {
+    }), j && jsx(ButtonPrimitive, {
       onClick: () => O.scrollTo({
         top: O.scrollHeight - O.clientHeight,
         behavior: "smooth"
@@ -235,7 +235,7 @@ function es({
     }), jsxs("div", {
       className: "captions_dialog--header--SA3Wv",
       onClick: () => h(!m),
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: j ? "captions_dialog--closedCaptionsIconMaximized--N-lwT" : "captions_dialog--closedCaptionsIconMinimized--Ou0WE",
         svg: _$$A2
       }), jsx("span", {
@@ -255,7 +255,7 @@ function es({
             type: ee
           }));
         },
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("collaboration.voice.text_size")
       }), b.current && T && jsx(_$$j, {
         dispatch: f,
@@ -289,7 +289,7 @@ function e_(e) {
   }
   return t ? jsx("div", {
     className: e.className,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": t,
     "data-tooltip-show-below": !0,
     "data-tooltip-timeout-delay": 50,
@@ -694,7 +694,7 @@ function eL(e) {
           onToggle && !0 !== e.hideToggleOption && onToggle(!d);
           c(!d);
         },
-        children: [d ? collapsedContent : headerText, !e.hideToggleOption && jsx(_$$B, {
+        children: [d ? collapsedContent : headerText, !e.hideToggleOption && jsx(SvgComponent, {
           svg: d ? _$$A4 : _$$A5,
           className: "voice_collapsible_dropdown--voiceDropdownChevronIcon--JgQxE"
         })]
@@ -978,7 +978,7 @@ function te() {
   });
   t && Mw(e) && (r = renderI18nText("collaboration.voice.setting_up_closed_captions_install_progress", {
     installProgress: e
-  }), l = jsx(kt, {
+  }), l = jsx(LoadingSpinner, {
     className: "device_controls--captionsLoadingSpinner--ivdGQ"
   }), c = jsx(Fragment, {}));
   return jsxs(Label, {
@@ -1012,7 +1012,7 @@ function tt() {
     trackingEventName: "Learn more about captioning",
     children: jsxs(fI, {
       className: "device_controls--deviceControlRowWithHover--KUbHL device_controls--deviceControlRow--kSC19",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: "device_controls--iconContainer--TuXUt",
         svg: _$$A2
       }), jsx("span", {
@@ -1240,19 +1240,19 @@ remote: ${s}`);
     j(!1);
   };
   let ef = async e => {
-    ds("voice_user_mute_toggle", fileKey, v.getState(), {
+    trackFileEvent("voice_user_mute_toggle", fileKey, v.getState(), {
       source: "voice_widget",
       muted: !e
     });
     e ? await call.unmute() : await call.mute();
   };
   let eO = () => {
-    en ? ed(oB()) : (ds("voice_widget_open_settings", fileKey, v.getState()), ed(j7({
+    en ? ed(oB()) : (trackFileEvent("voice_widget_open_settings", fileKey, v.getState()), ed(j7({
       type: ts
     })));
   };
   let ew = O ? O && userIdsInCall.size > 1 && er ? "expanded" : "collapsed" : null;
-  ea && nN(eo) && (ds("voice_caption_download_error", fileKey, v.getState(), {
+  ea && nN(eo) && (trackFileEvent("voice_caption_download_error", fileKey, v.getState(), {
     error_code: eo,
     source: "voice_widget"
   }), HJ(ed, !1), ed(showModalHandler({
@@ -1293,7 +1293,7 @@ remote: ${s}`);
               "aria-expanded": en,
               "aria-label": getI18nString("collaboration.voice.settings"),
               ref: ec,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("collaboration.voice.settings"),
               onClick: () => {
                 eO();
@@ -1304,7 +1304,7 @@ remote: ${s}`);
                 }
               },
               children: jsx(_$$I, {})
-            }), jsx(_$$E, {
+            }), jsx(ButtonPrimitive, {
               className: el || eE ? "voice_widget--leaveButton--UUdxH basic_form--btn--FSrmp ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd" : "voice_widget--joinButton--WvZPr basic_form--btn--FSrmp ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
               onClick: el || eE ? eg : eh,
               disabled: !m || x,

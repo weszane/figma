@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { E } from "../905/53857";
 import { renderI18nText } from "../905/303541";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A } from "../6828/55207";
 import { m_ } from "../figma_app/209680";
 import { s as _$$s } from "../905/875063";
 import { Ex, b3, OQ } from "../905/69098";
 import { RL, kz } from "../figma_app/410936";
 function l() {
-  return jsx(B, {
+  return jsx(SvgComponent, {
     svg: A,
     className: "creator_fund_icon--icon--He--a"
   });

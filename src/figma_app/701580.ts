@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { isEmptyObject } from "../figma_app/493477";
 import { Y9, Wk } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { J as _$$J } from "../905/614223";
 import _ from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -13,19 +13,19 @@ import { j6, fu } from "../figma_app/831799";
 import { _ as _$$_ } from "../905/793009";
 import { Gi, tS, wv } from "../figma_app/622574";
 import { Ou, Fz, b4, WS } from "../figma_app/106207";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { a6, Ve, RD } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
-import { cS } from "../figma_app/45218";
+import { CommunityPageType } from "../figma_app/45218";
 import { vt } from "../905/862883";
 import { registerModal } from "../905/102752";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { fG } from "../figma_app/973927";
 import { FFileType } from "../figma_app/191312";
 import { hT } from "../figma_app/878651";
 import { N as _$$N } from "../905/438674";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/103637";
 import { s as _$$s } from "../cssbuilder/589278";
 import { b as _$$b } from "../905/985254";
@@ -76,7 +76,7 @@ function B({
   }, [c, _, h, l, t, o]);
   let f = e => {
     t(e);
-    Cu({
+    logAndTrackCTA({
       fileKey: u,
       categoryName: e
     }, "template_modal_category_selected");
@@ -121,7 +121,7 @@ function B({
         href: "/community/figjam",
         newTab: !0,
         onClick: () => {
-          Cu({
+          logAndTrackCTA({
             fileKey: u,
             uiSelectedView: "browse_more_sidebar_link",
             name: "Templates Modal Browse More"
@@ -133,7 +133,7 @@ function B({
   });
 }
 function G(e) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: e.isSelected ? X6 : Mo,
     onClick: e.onClick,
     children: e.text
@@ -229,7 +229,7 @@ function K(e) {
       children: [jsx("div", {
         className: $I,
         children: e.categoryTitle
-      }), t && jsx($n, {
+      }), t && jsx(Button, {
         variant: "link",
         onClick: () => t(e.category),
         children: renderI18nText("browse_templates_modal.see_all")
@@ -510,7 +510,7 @@ function em(e) {
     templates: _templates,
     categoryIds: _categoryIds
   } = bg({
-    templatesShelfType: cS.FIGJAM_SIMPLE_TEMPLATES_PICKER
+    templatesShelfType: CommunityPageType.FIGJAM_SIMPLE_TEMPLATES_PICKER
   });
   let L = {
     ..._templates,
@@ -671,7 +671,7 @@ function eg(e) {
   } = e;
   let s = useCallback(() => {
     onClose();
-    Cu({
+    logAndTrackCTA({
       ...properties,
       trackingContext: name,
       text: "Templates Close Button"
@@ -683,7 +683,7 @@ function eg(e) {
   });
   return jsx(_$$J, {
     brand: "whiteboard",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       width: 888,
       manager: o,
       children: jsx(em, {

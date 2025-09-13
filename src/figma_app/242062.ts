@@ -14,7 +14,7 @@ import { lg } from "../figma_app/976749";
 import { x as _$$x } from "../figma_app/943271";
 import { d as _$$d } from "../905/758967";
 import { zw } from "../figma_app/682945";
-import { Z0, _X, bs } from "../figma_app/62612";
+import { viewportToScreen, getViewportInfo, useLatestViewportRef } from "../figma_app/62612";
 import { R9 } from "../905/977824";
 import { XM } from "../905/486443";
 import { p8 } from "../figma_app/722362";
@@ -31,7 +31,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { w as _$$w, L as _$$L } from "../905/842040";
 import { debugState } from "../905/407919";
 import { H as _$$H } from "../figma_app/147959";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { UK } from "../figma_app/740163";
 import { Po } from "../figma_app/412189";
 import { p as _$$p2, I as _$$I } from "../figma_app/210457";
@@ -550,7 +550,7 @@ function eE(e) {
   let l = useRef([]);
   let d = useRef(null);
   let [c, u] = useState([]);
-  let p = am();
+  let p = trackFileEventWithUser();
   let _ = useMemo(() => 0 === content.length ? 0 : ((content.match(/\!+$/g) || [])[0] || "").length, [content]);
   let h = useCallback(e => {
     clearTimeout(o.current);
@@ -749,7 +749,7 @@ function eG(e) {
   let d = useRef(null);
   let c = useRef(null);
   let u = useDispatch();
-  let p = am();
+  let p = trackFileEventWithUser();
   let [{
     currentUserInput: h,
     previousLine: m,
@@ -1017,7 +1017,7 @@ function e1({
   rotation: n = 0,
   scale: a = 1
 }) {
-  let s = Z0(t, e || {
+  let s = viewportToScreen(t, e || {
     x: 0,
     y: 0
   });
@@ -1175,7 +1175,7 @@ function tl({
   viewportInfo: e,
   reactionInfo: t
 }) {
-  let r = Z0(e, t.canvasSpacePosition);
+  let r = viewportToScreen(e, t.canvasSpacePosition);
   let [n] = useState(.5 * Math.random() + 2);
   let [s] = useState(.4 * Math.random() + .3);
   let o = {
@@ -1562,7 +1562,7 @@ function t_() {
       allUsers: e
     }
   }) => e.map(e => e.sessionID));
-  let t = _X({
+  let t = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let r = useContext(viewportNavigatorContext);
@@ -1579,7 +1579,7 @@ function t_() {
   let [h, g, f, y] = function () {
     let [e] = useState(ei);
     !function (e) {
-      let t = am();
+      let t = trackFileEventWithUser();
       let [r, n] = useAtomValueAndSetter(q);
       let i = ed();
       let o = function () {
@@ -1663,11 +1663,11 @@ function t_() {
       Po("pointerup", f, y);
       Po("mousemove", E, y && d);
     }(e.cursorWiggleDetector);
-    let t = am();
+    let t = trackFileEventWithUser();
     let [r, n] = useState([]);
     let [i, o] = useState("HIDDEN");
     let [d, c] = useState(new Set());
-    let u = bs({
+    let u = useLatestViewportRef({
       subscribeToUpdates_expensive: !0
     });
     let p = useRef({
@@ -1888,7 +1888,7 @@ function tm({
   let C = !!getFeatureFlags().ee_text_selection_in_mp && g.focusOnTextCursor;
   let w = p ? "#848484" : o.color;
   let O = g.mouse.canvasSpacePosition;
-  let R = Z0(t, O);
+  let R = viewportToScreen(t, O);
   let L = function ({
     x: e,
     y: t

@@ -11,7 +11,7 @@ import { HZ, Oo } from "../905/926523";
 import { Yp } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { M4 } from "../905/713695";
-import { PN } from "../905/54385";
+import { ProductStatus } from "../905/54385";
 import { H } from "../905/473998";
 var a = r;
 export async function $$y2({
@@ -188,7 +188,7 @@ export async function $$w4(e) {
     } = await H.getStatuses({
       id: e
     });
-    if (third_party_m10n_status !== PN.PENDING_AUTO_VALIDATION) return publishing_status;
+    if (third_party_m10n_status !== ProductStatus.PENDING_AUTO_VALIDATION) return publishing_status;
   }
 }
 export function $$C8(e) {

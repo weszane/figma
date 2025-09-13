@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 import { oB } from "../905/929976";
 import { NJ } from "../figma_app/419216";
@@ -18,7 +18,7 @@ export function $$u3(e) {
         step: e.step,
         totalSteps: e.totalSteps
       })
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       onClick: n => {
         t(n);

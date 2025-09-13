@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { Pw } from "../905/521428";
+import { ButtonLargeWide } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -30,7 +30,7 @@ export function $$I0({
   });
   let w = "loaded" === S.status;
   let C = w ? S.data.currentUser.baseOrgUser?.isMfaRestricted : void 0;
-  let T = !0 === oA(C);
+  let T = !0 === getResourceDataOrFallback(C);
   let k = w && (S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.GUESTS || S.data.currentUser.baseOrgUser?.org?.mfaRequired === CT.ALL_USERS);
   let R = useSubscription(FileByKey, {
     fileKey: I ?? ""
@@ -60,7 +60,7 @@ export function $$I0({
       headerText: N ? getI18nString("mfa_required_modal.regained_access_to_file.title") : getI18nString("mfa_required_modal.mfa_enabled.title"),
       secondaryText: e ? getI18nString("mfa_required_modal.mfa_enabled.subtile_for_file_browser") : getI18nString("mfa_required_modal.mfa_enabled.subtile"),
       unblockFileBrowserSidebar: e,
-      children: jsx(Pw, {
+      children: jsx(ButtonLargeWide, {
         variant: "primary",
         type: "submit",
         onClick: () => {
@@ -80,7 +80,7 @@ export function $$I0({
         orgName: t.name
       }),
       unblockFileBrowserSidebar: e,
-      children: [jsx(Pw, {
+      children: [jsx(ButtonLargeWide, {
         variant: "primary",
         type: "submit",
         onClick: () => {

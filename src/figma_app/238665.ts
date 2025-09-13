@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N } from "../905/438674";
 import { x } from "../905/587214";
 import { w } from "../905/955293";
@@ -49,7 +49,7 @@ function E({
     hide
   } = BK(oU);
   return jsxs(Fragment, {
-    children: [e && jsx($n, {
+    children: [e && jsx(Button, {
       iconPrefix: jsx(x, {}),
       "aria-label": getI18nString("variables.authoring_modal.create_variable_button_label"),
       ref: _,
@@ -91,7 +91,7 @@ export function $$y1({
   return I === I9.filterApplied ? jsx($$f0, {
     title: getI18nString("variables.authoring_modal.no_variables_match_filters"),
     text: getI18nString("variables.authoring_modal.no_variables_match_filters.text"),
-    actions: jsx($n, {
+    actions: jsx(Button, {
       iconPrefix: jsx(w, {}),
       onClick: S,
       variant: "secondary",
@@ -100,7 +100,7 @@ export function $$y1({
   }) : I === I9.queryApplied ? jsx($$f0, {
     title: getI18nString("variables.authoring_modal.no_variables_match_search"),
     text: getI18nString("variables.authoring_modal.no_variables_match_search.text"),
-    actions: jsx($n, {
+    actions: jsx(Button, {
       iconPrefix: jsx(w, {}),
       onClick: o,
       variant: "secondary",

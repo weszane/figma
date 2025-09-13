@@ -3,13 +3,13 @@ import { useMemo, useCallback, useState, useId, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { PluginModalType, Fullscreen } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { dW } from "../figma_app/858013";
+import { ImageBackedLoading } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { setupPlaybackHandler, PluginAction } from "../905/656545";
@@ -17,7 +17,7 @@ import { am } from "../figma_app/430563";
 import { hideModal } from "../905/156213";
 import { J as _$$J2 } from "../905/445197";
 import { getSelectedFile } from "../905/766303";
-import { q as _$$q } from "../905/807667";
+import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { gy, fc } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
 import { kc, Co } from "../figma_app/141508";
@@ -34,7 +34,7 @@ import { useMultiSubscription } from "../figma_app/288654";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { NG } from "../figma_app/709893";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { oB, j7 } from "../905/929976";
 import { n1 } from "../figma_app/657017";
 import { t as _$$t2 } from "../905/511388";
@@ -45,7 +45,7 @@ import { B as _$$B2 } from "../905/506188";
 import { LibraryFileSelect } from "../figma_app/43951";
 import { je } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { lX } from "../figma_app/588397";
 import { Qj } from "../905/825399";
 import { j as _$$j } from "../905/834956";
@@ -289,7 +289,7 @@ function eu({
         children: jsx("div", {
           className: "replace_libraries_modal--fileMapHeaderName--9U1lx ellipsis--ellipsis--Tjyfa",
           children: s ?? jsxs(Fragment, {
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               className: "replace_libraries_modal--missingLibrariesIcon--1oNrW",
               svg: _$$A
             }), renderI18nText("design_systems.libraries_modal.plural.missing_library", {
@@ -454,7 +454,7 @@ function eg({
   return jsx("div", {
     className: "replace_libraries_modal--fileMapRowItemName--41aCr",
     ref: t,
-    "data-tooltip-type": i && Ib.TEXT,
+    "data-tooltip-type": i && KindEnum.TEXT,
     "data-tooltip": e,
     "data-tooltip-max-width": 340,
     "data-tooltip-show-immediately": !0,
@@ -469,7 +469,7 @@ export function $$ef0({
   let [d, C] = useState(!0);
   _$$h(() => {
     _$$J2(() => {
-      _$$q(PluginModalType.REPLACE_LIBRARIES).then(() => {
+      handleLoadAllPagesWithVersionCheck(PluginModalType.REPLACE_LIBRARIES).then(() => {
         Fullscreen.expandInstancesWithStyleOverrides();
         Fullscreen.onFrame();
         C(!1);
@@ -524,7 +524,7 @@ export function $$ef0({
   return jsx("div", {
     className: H ? "subscription_file_replace_libraries_view--wrapperRedesign--qA7NT subscription_file_replace_libraries_view--wrapper--ZStG3" : "subscription_file_replace_libraries_view--wrapper--ZStG3",
     "data-testid": `subscription_file_replace_libraries_view_${e}`,
-    children: d ? jsx(dW, {
+    children: d ? jsx(ImageBackedLoading, {
       size: "large",
       className: "subscription_file_replace_libraries_view--loadingSpinner--o40B1"
     }) : jsxs(Fragment, {
@@ -548,7 +548,7 @@ export function $$ef0({
           className: _$$s.flex.$,
           children: jsx("div", {
             className: "subscription_file_replace_libraries_view--footerButton--KzAD-",
-            children: jsxs($n, {
+            children: jsxs(Button, {
               variant: "secondary",
               recordingKey: "subscriptionFileView.swapToSpecifiedLibrary",
               disabled: !D,

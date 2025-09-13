@@ -3,16 +3,16 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { zE } from "../905/64735";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { AllowlistPluginsSectionView, PluginRequests } from "../figma_app/43951";
 import { J } from "../905/403084";
 import { registerModal } from "../905/102752";
@@ -53,16 +53,16 @@ function w(e) {
   if (0 === numWorkspacesApproved || 0 === workspaceNames.length) return null;
   let c = {
     numWorkspacesApproved,
-    workspaceList: jsx(_$$E, {
+    workspaceList: jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: formatList(workspaceNames)
     })
   };
-  let u = isWidget ? jsx(_$$E, {
+  let u = isWidget ? jsx(TextWithTruncation, {
     color: "default",
     fontWeight: "medium",
     children: renderI18nText("extension_request_modal.widget_approved", c)
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     color: "default",
     fontWeight: "medium",
     children: renderI18nText("extension_request_modal.plugin_approved", c)
@@ -102,13 +102,13 @@ function T({
     return jsx("div", {
       className: _$$s.my8.$,
       "data-testid": "file-request-text",
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "default",
         children: e
       })
     });
   }
-  let l = jsx(_$$E, {
+  let l = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: workspaceName
   });
@@ -122,7 +122,7 @@ function T({
   return jsx("div", {
     className: _$$s.my8.$,
     "data-testid": "file-request-text",
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: "default",
       children: d
     })
@@ -163,7 +163,7 @@ export let $$k0 = registerModal(function ({
     open: x,
     onClose: E
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: U,
     width: "md",
     htmlAttributes: {
@@ -182,7 +182,7 @@ export let $$k0 = registerModal(function ({
             src: iconUrl ?? "",
             alt: "plugin icon",
             className: _$$s.w24.h24.bRadius6.mr8.$
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "medium",
             truncate: !0,
@@ -197,14 +197,14 @@ export let $$k0 = registerModal(function ({
           variant: "warning",
           orientation: "vertical",
           iconSrc: _$$A2,
-          children: [jsxs(_$$E, {
+          children: [jsxs(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: [t ? getI18nString("extension_request_modal.widget_declined_on_string") : getI18nString("extension_request_modal.plugin_declined_on_string"), " ", R.updatedAt.toLocaleDateString("en-US", {
               year: "numeric",
               month: "short",
               day: "numeric"
             })]
-          }), jsx("br", {}), R.declineNote && jsx(_$$E, {
+          }), jsx("br", {}), R.declineNote && jsx(TextWithTruncation, {
             children: '"' + R.declineNote + '"'
           })]
         }), jsxs("div", {
@@ -212,7 +212,7 @@ export let $$k0 = registerModal(function ({
           children: [jsx(T, {
             workspaceDetails: s,
             isWidget: t
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             children: S
           })]
         }), jsx("textarea", {
@@ -225,11 +225,11 @@ export let $$k0 = registerModal(function ({
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: E,
             children: getI18nString("extension_request_modal.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             disabled: !D,
             variant: "primary",
             onClick: () => {

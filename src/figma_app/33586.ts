@@ -10,7 +10,7 @@ import { LR } from "../figma_app/120210";
 import { getUserId } from "../905/372672";
 import { M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory } from "../figma_app/300692";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
 import { ManifestErrorType, manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { KM } from "../figma_app/224019";
@@ -22,7 +22,7 @@ export function $$I1(e) {
   let r = useDispatch();
   let i = getUserId();
   if (!e || i !== e.creator.id) return null;
-  if (AC(e)) t = getI18nString("community.plugins.cancel_review");else if (m3(e)) {
+  if (AC(e)) t = getI18nString("community.plugins.cancel_review");else if (hasMonetizedResourceMetadata(e)) {
     if (Pg(e)) return null;
     t = getI18nString("community.resource.delist");
   } else t = getI18nString("community.resource.unpublish");

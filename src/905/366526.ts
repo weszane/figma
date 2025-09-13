@@ -1,14 +1,15 @@
 import rN from 'classnames';
 import { PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { H as _$$H } from 'react-dom';
+import { H as _$$H, createPortal } from 'react-dom';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
+import eW from 'statsig-js';
+import { Statsig } from 'statsig-react';
 import { reportError, setContextGlobal, setTagGlobal, SeverityLevel } from '../905/11';
 import { WR, X0 } from '../905/2848';
 import { vq as _$$vq } from '../905/8732';
 import { cL as _$$cL4, hZ as _$$hZ2 } from '../905/14223';
-import { createActionCreator } from '../905/73481';
 import { Sc } from '../905/18797';
 import { R as _$$R4 } from '../905/22352';
 import { aj as _$$aj, uf as _$$uf, uu as _$$uu, fJ, Ut, w7 } from '../905/25169';
@@ -20,13 +21,14 @@ import { pB as _$$pB, pg as _$$pg, sf as _$$sf2, _I, bx, DE, HZ, JF, PY } from '
 import { P as _$$P3 } from '../905/35881';
 import { p as _$$p } from '../905/36308';
 import { z4 } from '../905/37051';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { yz } from '../905/42209';
 import { A as _$$A8 } from '../905/47292';
 import { mJ as _$$mJ, CK, SF, TW } from '../905/55862';
 import { u as _$$u2 } from '../905/56919';
 import { m as _$$m4 } from '../905/65216';
 import { $9, cL as _$$cL, ku as _$$ku, q0 as _$$q2, sM as _$$sM, uh as _$$uh, _b, AF, Am, BZ, Mo, Q4, RO, U3, xY, y3 } from '../905/70982';
+import { createActionCreator } from '../905/73481';
 import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
 import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as _$$rj, Fd, Fj, GR, JK, JR, Ud } from '../905/81459';
 import { ck as _$$ck4 } from '../905/87821';
@@ -44,7 +46,7 @@ import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
 import { eo as _$$eo, En, IN, jx, KE, Kl, SI } from '../905/116101';
 import { xK } from '../905/125218';
 import { E as _$$E4 } from '../905/128063';
-import { Zj as _$$Zj, Ib, zr } from '../905/129884';
+import { KindEnum, PopupType, PositionEnum } from '../905/129884';
 import { filterNavigationConfig, navigationConfig } from '../905/139708';
 import { A as _$$A11 } from '../905/142432';
 import { Kz as _$$Kz } from '../905/145989';
@@ -53,7 +55,7 @@ import { Q as _$$Q3 } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
 import { N as _$$N3 } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
-import { useThemeContext, ThemeProvider } from '../905/158740';
+import { ThemeProvider, useThemeContext } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { createFontMetadata, getFontOwner } from '../905/165290';
@@ -89,7 +91,7 @@ import { nE as _$$nE, EU } from '../905/255097';
 import { dK as _$$dK, TE, v9 } from '../905/266289';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { datadogRum } from '../905/270963';
-import { teamOrOrgIdAtom, parentOrgIdAtom } from '../905/276025';
+import { parentOrgIdAtom, teamOrOrgIdAtom } from '../905/276025';
 import { A as _$$A } from '../905/289770';
 import { L as _$$L } from '../905/293182';
 import { Q8, R9 } from '../905/294085';
@@ -117,16 +119,16 @@ import { S as _$$S3 } from '../905/373189';
 import { y as _$$y3 } from '../905/375507';
 import { T as _$$T4 } from '../905/378189';
 import { xH as _$$xH } from '../905/378567';
-import { EB as _$$EB, hm as _$$hm2 } from '../905/380385';
+import { BusyReadyState, NEW_COMMENT_ID } from '../905/380385';
 import { Cs as _$$Cs } from '../905/381612';
-import { $ as _$$$3 } from '../905/383708';
+import { generateUniqueKey } from '../905/383708';
 import { getWAFChallengeType, wafManager } from '../905/394005';
 import { dH as _$$dH, tJ as _$$tJ, uo as _$$uo6, yJ as _$$yJ6, _P, K5 } from '../905/395917';
 import { _ as _$$_ } from '../905/401345';
 import { U as _$$U3 } from '../905/402186';
 import { withParsedMeta } from '../905/405710';
 import { debugState } from '../905/407919';
-import { getFileKey, FileKeySourceEnum } from '../905/412913';
+import { FileKeySourceEnum, getFileKey } from '../905/412913';
 import { getCookieOrStorage } from '../905/414007';
 import { Ok } from '../905/414069';
 import { t as _$$t6 } from '../905/414363';
@@ -167,7 +169,7 @@ import { resolveTeamId } from '../905/515860';
 import { OJ } from '../905/519092';
 import { r as _$$r9 } from '../905/520829';
 import { J as _$$J2 } from '../905/521144';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { ex as _$$ex } from '../905/524523';
 import { UN } from '../905/525678';
 import { oU as _$$oU, B3, Sr } from '../905/535224';
@@ -201,7 +203,7 @@ import { uW as _$$uW, yJ as _$$yJ9, Z as _$$Z3 } from '../905/618921';
 import { _G, Pv } from '../905/619652';
 import { e as _$$e5 } from '../905/621515';
 import { setupFileObject } from '../905/628874';
-import { E as _$$E9 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, removeQueryParam, serializeQuery } from '../905/634134';
 import { A as _$$A0, y as _$$y6 } from '../905/638715';
 import { fileImporter, initializeFileImporter } from '../905/642505';
@@ -231,18 +233,17 @@ import { o as _$$o8 } from '../905/701807';
 import { U as _$$U } from '../905/707331';
 import { S3 } from '../905/708054';
 import { vV } from '../905/709095';
-import { eE as _$$eE } from '../905/709171';
+import { compareLibraryItemWithKey } from '../905/709171';
 import { uiVariantName } from '../905/709735';
 import { us as _$$us2, xp } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
 import { IT, M4 } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { lG as _$$lG } from '../905/714538';
-import { B as _$$B2 } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { H as _$$H6 } from '../905/715533';
 import { l as _$$l6 } from '../905/716947';
 import { I as _$$I2 } from '../905/717213';
-import { oA as _$$oA2 } from '../905/723791';
 import { P as _$$P2 } from '../905/724705';
 import { y as _$$y2 } from '../905/725962';
 import { Point } from '../905/736624';
@@ -255,11 +256,11 @@ import { f as _$$f3 } from '../905/749689';
 import { B as _$$B } from '../905/749933';
 import { tH as _$$tH, As, H4, S1 } from '../905/751457';
 import { handlePluginError } from '../905/753206';
-import { getRepoByIdAlt, isBranchAlt, getRepoById, isBranch } from '../905/760074';
+import { getRepoById, getRepoByIdAlt, isBranch, isBranchAlt } from '../905/760074';
 import { m as _$$m } from '../905/760316';
 import { MV, WB } from '../905/761735';
 import { pP as _$$pP, fW } from '../905/765855';
-import { getSelectedFile, getNewFileConfig } from '../905/766303';
+import { getNewFileConfig, getSelectedFile } from '../905/766303';
 import { handlePropertyState } from '../905/770460';
 import { gD } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
@@ -283,7 +284,7 @@ import { oO as _$$oO, EE, Pq, Rg, XV, Yw } from '../905/837497';
 import { generateOptimistId } from '../905/842794';
 import { o0 as _$$o4, NG } from '../905/844131';
 import { N as _$$N8 } from '../905/844455';
-import { sZ as _$$sZ } from '../905/845253';
+import { useCurrentUserOrg } from '../905/845253';
 import { j as _$$j3 } from '../905/848904';
 import { c as _$$c6 } from '../905/850166';
 import { hM as _$$hM } from '../905/851937';
@@ -334,7 +335,7 @@ import { a6 as _$$a3, cb as _$$cb, oI as _$$oI, rO as _$$rO, t7 as _$$t3, yF as 
 import { Wm } from '../905/990455';
 import { l as _$$l4 } from '../905/997221';
 import { cT as _$$cT, mI as _$$mI, P8, PG, qF, vr } from '../905/997533';
-import { ProviderType, OperationStatus } from '../3973/473379';
+import { OperationStatus, ProviderType } from '../3973/473379';
 import { h as _$$h6, I as _$$I3 } from '../3973/647885';
 import { numericAtom, processSelector } from '../3973/697935';
 import { trackStatsigPlanKeyBootstrap } from '../3973/890507';
@@ -344,7 +345,7 @@ import { DFF } from '../figma_app/6204';
 import { aN as _$$aN, o$ as _$$o$, AB, h2, J6, vu } from '../figma_app/8833';
 import { lW as _$$lW2 } from '../figma_app/11182';
 import { GV as _$$GV, us as _$$us, PK } from '../figma_app/12220';
-import { canRunExtensions, canPerformAction } from '../figma_app/12796';
+import { canPerformAction, canRunExtensions } from '../figma_app/12796';
 import { yJ as _$$yJ, S5, WJ } from '../figma_app/24841';
 import { tP as _$$tP, atom, AtomProvider, atomStoreManager, createLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { YQL } from '../figma_app/27776';
@@ -352,12 +353,12 @@ import { hZ as _$$hZ6, w4, yo } from '../figma_app/28323';
 import { ec as _$$ec } from '../figma_app/29089';
 import { AccountTypeEnum } from '../figma_app/35887';
 import { BlockingUserState, CommunityPaymentsForRealtimeShim, ComponentUpdatesForFile, ComponentUpdatesForProject, ComponentUpdatesForTeam, EduGracePeriodsForUser, FontFileForOrgView, FontFileForTeamView, OpenEditorFileData, OrgByIdForPlanUserView, OrgByIdForPlanView, OrgByIdForRealtimeShim, OrgUsersForRealtimeShim, PluginUpdatesForOrg, RepoByIdForRealtimeShim, ReposForFile, ReposForProject, ReposForTeam, RoleUpdatesForTeam, RoleUpdatesForUser, StateGroupUpdatesForFile, StateGroupUpdatesForProject, StateGroupUpdatesForTeam, StatsigTeamsOrderView, TeamByIdForPlanUserView, TeamByIdForPlanView, TeamByIdForRealtimeShim, UserForRealtimeShim, UserTeamFlagsForRealtimeShim, UserTeamRoleRequestView, WhitelistedPluginsForOrg, WidgetUpdatesForOrg } from '../figma_app/43951';
-import { Qv as _$$Qv, vt as _$$vt } from '../figma_app/45218';
+import { CommentTabType, ResourceTypeNoComment } from '../figma_app/45218';
 import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '../figma_app/49598';
 import { FEditorType, mapEditorTypeToString, mapEditorTypeToStringWithObfuscated, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
 import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
-import { teamLibraryCache, revokeThumbnailUrl } from '../figma_app/80990';
+import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
 import { Wl } from '../figma_app/88239';
@@ -402,7 +403,7 @@ import { getPluginVersion } from '../figma_app/300692';
 import { g3 } from '../figma_app/304207';
 import { RR } from '../figma_app/307841';
 import { mu as _$$mu, sm as _$$sm, V9 as _$$V4, K6, PU, yc } from '../figma_app/308685';
-import { ds as _$$ds, PB as _$$PB, uE as _$$uE, z_ } from '../figma_app/314264';
+import { trackFileCopyEvent, trackFileEvent, trackRoleEvent, trackUserEvent } from '../figma_app/314264';
 import { dO as _$$dO2 } from '../figma_app/318123';
 import { mg as _$$mg, on as _$$on, j3, Ri } from '../figma_app/327577';
 import { E as _$$E6, hZ as _$$hZ4, Lx, MT } from '../figma_app/330108';
@@ -417,7 +418,7 @@ import { Ob as _$$Ob, Po, Zy } from '../figma_app/378195';
 import { Tm } from '../figma_app/385874';
 import { _6, z3 } from '../figma_app/386952';
 import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
-import { setupShadowRead, adminPermissionConfig, setupShadowReadWithConfig } from '../figma_app/391338';
+import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { Au as _$$Au, mX as _$$mX, oF as _$$oF, rx as _$$rx, sZ as _$$sZ2, _L, BG, Bt, fL, GD, hQ, LF, N$, w_, wS } from '../figma_app/415217';
 import { iE as _$$iE, Ng, xf } from '../figma_app/416935';
@@ -430,10 +431,10 @@ import { PI as _$$PI, s6 as _$$s4, AY } from '../figma_app/443991';
 import { fullscreenValue } from '../figma_app/455680';
 import { Cp as _$$Cp } from '../figma_app/457074';
 import { q as _$$q } from '../figma_app/458300';
-import { useCurrentPlanUser, useIsOrgMemberOrAdminUser, useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures } from '../figma_app/465071';
+import { useCurrentPlanUser, useIsOrgAdminUser, useIsOrgMemberOrAdminUser, useTeamPlanFeatures, useTeamPlanUser } from '../figma_app/465071';
 import { assert, debug, noop, throwTypeError } from '../figma_app/465776';
 import { isIntegrationContext, isZoomIntegration } from '../figma_app/469876';
-import { G as _$$G } from '../figma_app/471068';
+import { ViewTypeEnum } from '../figma_app/471068';
 import { Cg, Ug, v7 } from '../figma_app/475303';
 import { $h, Ay as _$$Ay4, eK as _$$eK, Lo as _$$Lo, pv as _$$pv, Qg as _$$Qg, Ts as _$$Ts2, Az, Ef, i, I2, Je, js, M2, MN, Mv, Qe, qU, WG, XS, yy } from '../figma_app/482142';
 import { clamp, randomBetween } from '../figma_app/492908';
@@ -443,7 +444,7 @@ import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640';
 import { up as _$$up2 } from '../figma_app/506364';
 import { LN } from '../figma_app/514043';
 import { Fi, YD } from '../figma_app/515363';
-import { selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
+import { openFileKeyAtom, selectCurrentFile } from '../figma_app/516028';
 import { df as _$$df, Sb as _$$Sb, De, WM } from '../figma_app/519839';
 import { A as _$$A9 } from '../figma_app/526287';
 import { P as _$$P, Z as _$$Z } from '../figma_app/529847';
@@ -459,7 +460,7 @@ import { aZ as _$$aZ2 } from '../figma_app/613182';
 import { a as _$$a } from '../figma_app/620913';
 import { copyTextToClipboard } from '../figma_app/623293';
 import { Fy } from '../figma_app/623300';
-import { LIBRARY_PREFERENCES_MODAL, SubscriptionStatusEnum, LibraryAgeEnum, PublishStatusEnum, PrimaryWorkflowEnum, LibraryPublishStatusEnum, getDraftsSidebarString, initialLibraryStats, NO_TEAM } from '../figma_app/633080';
+import { getDraftsSidebarString, initialLibraryStats, LIBRARY_PREFERENCES_MODAL, LibraryAgeEnum, LibraryPublishStatusEnum, NO_TEAM, PrimaryWorkflowEnum, PublishStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
 import { _d, J7 } from '../figma_app/650409';
@@ -482,7 +483,7 @@ import { LQ } from '../figma_app/741211';
 import { consumeFullscreenEventState, setPropertiesPanelTab } from '../figma_app/741237';
 import { WJ as _$$WJ } from '../figma_app/745458';
 import { R_ } from '../figma_app/749805';
-import { cT as _$$cT2, rJ as _$$rJ, t2 as _$$t7, ue as _$$ue, C0, Jh, XU } from '../figma_app/756995';
+import { FileType, FilterType, PermissionAction, PermissionType, SortField, SortOrder, ViewMode } from '../figma_app/756995';
 import { aU as _$$aU } from '../figma_app/757606';
 import { nx as _$$nx } from '../figma_app/761870';
 import { AppStateTsApi, BackgroundPattern, colorManagementStateJs, ColorProfileEnum, DataLoadStatus, DesignWorkspace, EditAction, Fonts, Fullscreen, HandoffBindingsCpp, IMixedValues, ItemType, KeyboardLayout, LayoutTabType, PageViewMode, perfTimerFrameManagerBindings, SceneGraphHelpers, SchemaJoinStatus, SessionStatus, UIVisibilitySetting, UserInterfaceElements, ViewType, WhiteboardIntegrationType } from '../figma_app/763686';
@@ -539,12 +540,9 @@ import uW from '../vendor/223926';
 import { n_ as _$$n_ } from '../vendor/235095';
 import ag from '../vendor/239910';
 import uy from '../vendor/241899';
-import eW from 'statsig-js';
 import mI from '../vendor/643300';
 import { A as _$$A4 } from '../vendor/718327';
-import { Statsig } from 'statsig-react';
 import { Q as _$$Q } from '../vendor/912394';
-import { createPortal } from 'react-dom';
 import _require from '../vscode/70443';
 function m({
   children: e,
@@ -1965,7 +1963,7 @@ let iz = e => t => function (i) {
         type: BEGIN,
         id: a
       };
-      _$$PB(n ? 'File Trashed' : 'File Deleted', s, e.getState());
+      trackFileCopyEvent(n ? 'File Trashed' : 'File Deleted', s, e.getState());
     }
   } else if (_$$D2.matches(i)) {
     let n = XHR.put(`/api/versions/${i.payload.fileKey}/${i.payload.savepointID}`, {
@@ -2157,7 +2155,7 @@ let i2 = e => t => function (i) {
     if (i.payload.userInitiated) {
       if (!n.user) return t(i);
       let r = n.roles.byTeamId[i.payload.team.id][n.user.id];
-      z_('Role Deleted', r);
+      trackRoleEvent('Role Deleted', r);
       return _$$Q3({
         requestPromise: XHR.del(`/api/roles/${r.id}`).then(() => {
           e.dispatch(FlashActions.flash(getI18nString('leave_team_modal.post_leave_flash', {
@@ -2314,7 +2312,7 @@ let ns = e => t => function (i) {
       })), i.payload.subView === 'hubFile' || i.payload.subView === 'plugin' || i.payload.subView === 'widget') {
         let t = !1;
         i.payload.subView === 'hubFile' ? t = selectedView.view === 'communityHub' && selectedView.subView === 'hubFile' && i.payload.hubFileId === selectedView.hubFileId : i.payload.subView === 'plugin' ? t = selectedView.view === 'communityHub' && selectedView.subView === 'plugin' && i.payload.publishedPluginId === selectedView.publishedPluginId : i.payload.subView === 'widget' && (t = selectedView.view === 'communityHub' && selectedView.subView === 'widget' && i.payload.widgetId === selectedView.widgetId);
-        t || (e.dispatch(Zj(_$$Qv.ALL)), e.dispatch(_F()));
+        t || (e.dispatch(Zj(CommentTabType.ALL)), e.dispatch(_F()));
       }
       user && _$$I(user.id);
     } else {
@@ -2561,7 +2559,7 @@ let nS = e => t => function (i) {
 let nK = registerModal(e => {
   let t;
   let i = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: 'lg',
     children: jsxs(_$$vo, {
@@ -2586,7 +2584,7 @@ let nK = registerModal(e => {
         }) : void 0)
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: 'primary',
             onClick: e.onClose,
             children: renderI18nText('webgl_error.message.got_it')
@@ -3084,7 +3082,7 @@ function r0({
     libraryFiles,
     onSearchQueryChange
   } = TW(t.files);
-  let _ = _$$sZ();
+  let _ = useCurrentUserOrg();
   let A = useDispatch();
   useEffect(() => {
     (async () => {
@@ -3266,7 +3264,7 @@ function r7({
   let o = useSelector(e => e.modalShown);
   let [l, c] = useState(o?.type === LIBRARY_PREFERENCES_MODAL && o.data?.fileKey && {
     fileKey: o.data?.fileKey,
-    libraryKey: _$$$3(o.data?.fileKey)
+    libraryKey: generateUniqueKey(o.data?.fileKey)
   } || null);
   let [u, p] = useState(null);
   let [m, h] = useState(null);
@@ -3415,7 +3413,7 @@ class aa extends _$$o5 {}
 let as = registerModal(e => {
   let t = useDispatch();
   let i = _6();
-  let r = _$$sZ();
+  let r = useCurrentUserOrg();
   let a = useSelector(e => e.sharedFonts);
   let o = useSelector(e => getPermissionsStateMemoized(e));
   let l = useCurrentPlanUser('OrgViewModal');
@@ -3665,7 +3663,7 @@ function aF(e, t) {
           for (let e of i) {
             let i = n === PrimaryWorkflowEnum.COMPONENT ? e.component_key : e.key;
             let s = e.destination_key;
-            i && s && (r.openFile && _$$eE(e, r.openFile) ? a[e.node_id] = s : t[i] = s);
+            i && s && (r.openFile && compareLibraryItemWithKey(e, r.openFile) ? a[e.node_id] = s : t[i] = s);
           }
           e.dispatch(_$$dC({
             subscribedOldKeyToNewKey: t,
@@ -5101,7 +5099,7 @@ let sS = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.currentUser.teamRoleRequestUpdates) return [];
-    let i = _$$oA2(t.currentUser.teamRoleRequestUpdates);
+    let i = getResourceDataOrFallback(t.currentUser.teamRoleRequestUpdates);
     if (!i) return [];
     let n = [];
     for (let t of i) {
@@ -5967,7 +5965,7 @@ let s6 = {
     workspaceFilter: null,
     idpGroupFilter: null,
     planFilter: null,
-    fileTypeFilter: _$$t7.ANY,
+    fileTypeFilter: FileType.ANY,
     facetFilters: null,
     sortState: {
       [_$$uH.PUBLIC_PROFILES]: {},
@@ -6053,15 +6051,15 @@ let s6 = {
 };
 let s9 = 'sort-filter-prefs-v1';
 let oe = {
-  viewMode: XU.GRID,
+  viewMode: ViewMode.GRID,
   sort: {
-    key: C0.NAME,
-    dir: _$$ue.DESC
+    key: SortField.NAME,
+    dir: SortOrder.DESC
   },
   filters: {
-    creator: _$$rJ.ANY,
-    fileType: _$$t7.ANY,
-    orgDeletedDrafts: _$$cT2.ALL
+    creator: PermissionType.ANY,
+    fileType: FileType.ANY,
+    orgDeletedDrafts: FilterType.ALL
   }
 };
 let ot = {
@@ -6069,22 +6067,22 @@ let ot = {
     ...oe,
     filters: {
       ...oe.filters,
-      creator: _$$rJ.SELF
+      creator: PermissionType.SELF
     },
     sort: {
       ...oe.sort,
-      key: C0.TRASHED_AT
+      key: SortField.TRASHED_AT
     }
   },
   trashedFolders: {
     ...oe,
     sort: {
       ...oe.sort,
-      key: C0.TRASHED_AT
+      key: SortField.TRASHED_AT
     },
     filters: {
       ...oe.filters,
-      role: Jh.CAN_BE_RESTORED_DELETED
+      role: PermissionAction.CAN_BE_RESTORED_DELETED
     }
   },
   folders: {
@@ -6092,7 +6090,7 @@ let ot = {
       ...oe,
       sort: {
         ...oe.sort,
-        key: C0.TOUCHED_AT
+        key: SortField.TOUCHED_AT
       }
     },
     byId: Object.create(null)
@@ -6101,14 +6099,14 @@ let ot = {
     ...oe,
     sort: {
       ...oe.sort,
-      key: C0.SEARCH_RELEVANCE
+      key: SortField.SEARCH_RELEVANCE
     }
   },
   user: {
     ...oe,
     sort: {
       ...oe.sort,
-      key: C0.TOUCHED_AT
+      key: SortField.TOUCHED_AT
     }
   },
   sharedWithYou: {
@@ -6119,7 +6117,7 @@ let ot = {
     },
     sort: {
       ...oe.sort,
-      key: C0.SHARED_AT
+      key: SortField.SHARED_AT
     }
   },
   recentsAndSharing: {
@@ -6127,7 +6125,7 @@ let ot = {
       ...oe,
       sort: {
         ...oe.sort,
-        key: C0.ACCESSED_AT
+        key: SortField.ACCESSED_AT
       }
     },
     sharedFiles: {
@@ -6138,7 +6136,7 @@ let ot = {
       },
       sort: {
         ...oe.sort,
-        key: C0.SHARED_AT
+        key: SortField.SHARED_AT
       }
     },
     sharedProjects: {
@@ -6149,7 +6147,7 @@ let ot = {
       },
       sort: {
         ...oe.sort,
-        key: C0.SHARED_AT
+        key: SortField.SHARED_AT
       }
     }
   },
@@ -6157,7 +6155,7 @@ let ot = {
     ...oe,
     sort: {
       ...oe.sort,
-      key: C0.TOUCHED_AT
+      key: SortField.TOUCHED_AT
     }
   }
 };
@@ -6210,7 +6208,7 @@ function on(e = ot, t) {
       return t && function (e) {
         let t;
         function i(e) {
-          let t = C0[C0[e]];
+          let t = SortField[SortField[e]];
           if (void 0 !== e) {
             return {
               ...oe,
@@ -6267,19 +6265,19 @@ function on(e = ot, t) {
     if (i.view === 'recentsAndSharing') {
       let i;
       switch (t.payload.tab) {
-        case _$$G.RECENTLY_VIEWED:
+        case ViewTypeEnum.RECENTLY_VIEWED:
           i = {
             ...e.recentsAndSharing,
             recents: t.payload.config
           };
           break;
-        case _$$G.SHARED_FILES:
+        case ViewTypeEnum.SHARED_FILES:
           i = {
             ...e.recentsAndSharing,
             sharedFiles: t.payload.config
           };
           break;
-        case _$$G.SHARED_PROJECTS:
+        case ViewTypeEnum.SHARED_PROJECTS:
           i = {
             ...e.recentsAndSharing,
             sharedProjects: t.payload.config
@@ -6311,7 +6309,7 @@ function on(e = ot, t) {
         ...e.search,
         filters: {
           ...e.search.filters,
-          fileType: t.payload.fileTypeFilter ?? _$$t7.ANY
+          fileType: t.payload.fileTypeFilter ?? FileType.ANY
         }
       }
     };
@@ -6670,7 +6668,7 @@ let oG = HY({
       id: t.payload.threadId,
       source: t.payload.source
     } : $0.matches(t) ? {
-      id: _$$hm2
+      id: NEW_COMMENT_ID
     } : _$$yH4.matches(t) && t.payload.comment.id === e?.id ? null : e;
   },
   threads(e = {}, t) {
@@ -6748,7 +6746,7 @@ let oG = HY({
         [t.payload.threadId]: {
           ..._$$us(),
           ...e[t.payload.threadId],
-          state: _$$EB.BUSY
+          state: BusyReadyState.BUSY
         }
       };
     } else if (_$$sQ.matches(t)) {
@@ -6769,7 +6767,7 @@ let oG = HY({
         [t.payload.threadId]: {
           ..._$$us(),
           ...e[t.payload.threadId],
-          state: _$$EB.READY,
+          state: BusyReadyState.READY,
           ...(t.payload.resetStatusOnly ? {} : {
             reply: {
               messageMeta: [],
@@ -6833,27 +6831,27 @@ let oG = HY({
     if (_$$lI.matches(t)) {
       return {
         ...e,
-        state: _$$EB.BUSY
+        state: BusyReadyState.BUSY
       };
     } else if (zs.matches(t) && !t.payload.parentId && t.payload.pageId) {
       return {
         ...e,
-        state: _$$EB.BUSY
+        state: BusyReadyState.BUSY
       };
     } else if ($M.matches(t)) {
       return t.payload.resetStatusOnly ? {
         ...e,
-        state: _$$EB.READY
+        state: BusyReadyState.READY
       } : _$$GV;
     } else if (_$$PB2.matches(t)) {
       return {
         ...t.payload,
-        state: _$$EB.READY
+        state: BusyReadyState.READY
       };
-    } else if (_$$TW.matches(t) && t.payload.commentId === _$$hm2) {
+    } else if (_$$TW.matches(t) && t.payload.commentId === NEW_COMMENT_ID) {
       return {
         ...e,
-        state: _$$EB.READY
+        state: BusyReadyState.READY
       };
     } else if (_$$xH3.matches(t)) {
       return {
@@ -7002,7 +7000,7 @@ function oH(e) {
     return Qv.matches(i) ? {} : t;
   };
 }
-let oW = _$$Qv.ALL;
+let oW = CommentTabType.ALL;
 let oK = {};
 let oY = {};
 let oq = {
@@ -7015,7 +7013,7 @@ let oZ = {};
 let oX = {};
 let oQ = HY({
   activeFeedType(e = oW, t) {
-    return Zj.matches(t) ? t.payload : _F.matches(t) ? _$$Qv.ALL : e;
+    return Zj.matches(t) ? t.payload : _F.matches(t) ? CommentTabType.ALL : e;
   },
   authorsById(e = oK, t) {
     if (_$$r6.matches(t)) {
@@ -7244,20 +7242,20 @@ let oQ = HY({
       let n = {
         ...e
       };
-      n[_$$Qv.ALL] = {
-        ...n[_$$Qv.ALL],
-        feed: (n[_$$Qv.ALL]?.feed || []).filter(e => e !== commentId),
-        totalNumberOfComments: o$(n[_$$Qv.ALL], -1),
-        pagination: n[_$$Qv.ALL]?.pagination?.selected_comment?.id === commentId ? {
-          ...(n[_$$Qv.ALL]?.pagination || {}),
+      n[CommentTabType.ALL] = {
+        ...n[CommentTabType.ALL],
+        feed: (n[CommentTabType.ALL]?.feed || []).filter(e => e !== commentId),
+        totalNumberOfComments: o$(n[CommentTabType.ALL], -1),
+        pagination: n[CommentTabType.ALL]?.pagination?.selected_comment?.id === commentId ? {
+          ...(n[CommentTabType.ALL]?.pagination || {}),
           selected_comment: void 0
-        } : n[_$$Qv.ALL]?.pagination
+        } : n[CommentTabType.ALL]?.pagination
       };
       return n;
     } else if (_F.matches(t)) {
       return {
         ...e,
-        [_$$Qv.ALL]: {
+        [CommentTabType.ALL]: {
           feed: []
         }
       };
@@ -7279,7 +7277,7 @@ let oQ = HY({
             ...e[comment.parent_id],
             replyIds: [...(e[comment.parent_id]?.replyIds || []), comment.id],
             newReplyMessage: '',
-            status: _$$EB.READY
+            status: BusyReadyState.READY
           }
         };
       }
@@ -7325,22 +7323,22 @@ let oQ = HY({
         ...e,
         [t.payload.parentId]: {
           ...e[t.payload.parentId],
-          status: _$$EB.BUSY
+          status: BusyReadyState.BUSY
         }
       };
-    } else if (_$$TW.matches(t) && t.payload.commentId !== _$$hm2) {
+    } else if (_$$TW.matches(t) && t.payload.commentId !== NEW_COMMENT_ID) {
       return {
         ...e,
         [t.payload.commentId]: {
           ...e[t.payload.commentId],
-          status: _$$EB.READY
+          status: BusyReadyState.READY
         }
       };
     }
     return e;
   },
   selectedCommentId(e = null, t) {
-    return _$$r6.matches(t) ? t.payload.selectedCommentId || e : _$$Fm.matches(t) ? t.payload.threadId : _$$cL3.matches(t) ? null : $0.matches(t) ? _$$hm2 : e;
+    return _$$r6.matches(t) ? t.payload.selectedCommentId || e : _$$Fm.matches(t) ? t.payload.threadId : _$$cL3.matches(t) ? null : $0.matches(t) ? NEW_COMMENT_ID : e;
   },
   type(e = null, t) {
     return gT.matches(t) ? t.payload.type : _$$tG2.matches(t) ? t.payload.resourceType : e;
@@ -7992,7 +7990,7 @@ function lD(e) {
       return a;
     }
     if (_$$ru.matches(i)) {
-      let e = _$$$3(i.payload.fileKey);
+      let e = generateUniqueKey(i.payload.fileKey);
       for (let i in t) {
         if (e in t[i]) {
           let n = {
@@ -8010,7 +8008,7 @@ function lD(e) {
     if (P6.matches(i)) {
       let e;
       for (let n in i.payload.fileKeys) {
-        let r = _$$$3(n);
+        let r = generateUniqueKey(n);
         let a = i.payload.fileKeys[n].team_id || NO_TEAM;
         a in t && r in t[a] && (e || (e = {
           ...t
@@ -10587,7 +10585,7 @@ let uD = Oi((e = {}, t) => {
       resourceType,
       resourceId
     } = t.payload;
-    if (resourceType === _$$vt.PLUGIN) {
+    if (resourceType === ResourceTypeNoComment.PLUGIN) {
       let t = {
         ...e
       };
@@ -10604,7 +10602,7 @@ let uD = Oi((e = {}, t) => {
       resourceId,
       comments
     } = t.payload;
-    if (resourceType === _$$vt.PLUGIN) {
+    if (resourceType === ResourceTypeNoComment.PLUGIN) {
       let t = {
         ...e
       };
@@ -10620,7 +10618,7 @@ let uD = Oi((e = {}, t) => {
       resourceType,
       resourceId
     } = t.payload;
-    if (resourceType === _$$vt.PLUGIN) {
+    if (resourceType === ResourceTypeNoComment.PLUGIN) {
       let t = {
         ...e
       };
@@ -11054,8 +11052,8 @@ let u0 = Oi((e = {}, t) => {
 var u2 = (e => (e.REMOTE_WORK = 'remoteWork', e.ONBOARDING = 'onboarding', e.TEMPLATES_PICKER = 'templatesPicker', e))(u2 || {});
 let u6 = {
   target: null,
-  state: zr.NONE,
-  position: _$$Zj.BELOW,
+  state: PopupType.NONE,
+  position: PositionEnum.BELOW,
   timeoutID: null
 };
 let u9 = {
@@ -12175,7 +12173,7 @@ let pg = {
         resourceId,
         comment
       } = t.payload;
-      if (resourceType === _$$vt.HUB_FILE) {
+      if (resourceType === ResourceTypeNoComment.HUB_FILE) {
         let t = {
           ...e
         };
@@ -12192,7 +12190,7 @@ let pg = {
         resourceId,
         comments
       } = t.payload;
-      if (resourceType === _$$vt.HUB_FILE) {
+      if (resourceType === ResourceTypeNoComment.HUB_FILE) {
         let t = {
           ...e
         };
@@ -12210,7 +12208,7 @@ let pg = {
         resourceType,
         resourceId
       } = t.payload;
-      if (resourceType === _$$vt.HUB_FILE) {
+      if (resourceType === ResourceTypeNoComment.HUB_FILE) {
         let t = {
           ...e
         };
@@ -12931,7 +12929,7 @@ function pv({
     e = requestAnimationFrame(i);
     return () => cancelAnimationFrame(e);
   }, [c]);
-  return jsx(_$$E9, {
+  return jsx(ButtonPrimitive, {
     onClick: i,
     className: py,
     style: {
@@ -12958,7 +12956,7 @@ function pE() {
     children: function () {
       let t = e === 'moving';
       return jsxs(Fragment, {
-        children: [jsx(_$$E9, {
+        children: [jsx(ButtonPrimitive, {
           onClick: r,
           className: `desktop_app_interstitial--logoAnimation--aEDVV desktop_app_interstitial--logo--OqEk7 ${t ? 'desktop_app_interstitial--logoHidden--BJh1-' : ''}`,
           ref: i,
@@ -13018,7 +13016,7 @@ class pS extends PureComponent {
           }) : renderI18nText('desktop_open_views.interstitial.opening_in_app', {
             fileName: t.name
           }) : e ? renderI18nText('desktop_open_views.interstitial.opened_link_in_app') : renderI18nText('desktop_open_views.interstitial.opening_link_in_app')
-        }), jsx(_$$E9, {
+        }), jsx(ButtonPrimitive, {
           className: 'desktop_app_interstitial--link--XNAnR',
           onClick: this.onOpenHereInstead,
           children: renderI18nText('desktop_open_views.interstitial.open_here_instead')
@@ -13434,7 +13432,7 @@ async function my(e) {
         desktopKeyboard: t.desktopLayout,
         predictedLayout: a
       };
-      _$$uE('keyboard_layout', e.getState(), s);
+      trackUserEvent('keyboard_layout', e.getState(), s);
     }(e, {
       ...t,
       userLocale: e.getState().user?.locale
@@ -13574,7 +13572,7 @@ function mB() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let i = _$$sZ();
+  let i = useCurrentUserOrg();
   let n = RR();
   let r = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig');
   let a = _$$D4();
@@ -13902,7 +13900,7 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
       }), jsx('div', {
         className: hI
       })]
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: 'primary',
       onClick: hE,
       children: renderI18nText('frontend_sha_override_indicator.return_to_latest')
@@ -14017,14 +14015,14 @@ function hP() {
   }), () => {
     delete window.frontendCommitPreviewIndicator;
   }), [c, a]), !a || r || l) ? null : jsx(hk, {
-    'data-tooltip-type': Ib.SPECIAL,
+    'data-tooltip-type': KindEnum.SPECIAL,
     'data-tooltip-desired-commit-sha': manifest_commit_sha_override_desired,
     'data-tooltip-max-width': 300,
     'data-tooltip-blocked-reason': manifest_commit_sha_override_blocked_reason,
     'data-tooltip': hx,
     'data-tooltip-interactive': !0,
     'data-tooltip-show-immediately': !0,
-    'children': jsx(_$$B2, {
+    'children': jsx(SvgComponent, {
       svg: _$$A12,
       width: '40px',
       className: rP()('frontend_commit_preview_indicator--icon--aQl-E', o ? 'frontend_commit_preview_indicator--animated--gwUR5' : null, s ? _$$s.colorIconDisabled.$ : _$$s.colorIconDanger.$),
@@ -14072,7 +14070,7 @@ let hj = registerModal(e => {
     properties: {
       minVersion: hM(i)
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: t,
       width: 'md',
       children: jsxs(_$$vo, {
@@ -14086,7 +14084,7 @@ let hj = registerModal(e => {
           }), jsx('br', {})]
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: 'secondary',
               onClick: () => {
                 d();
@@ -14537,7 +14535,7 @@ export async function $$hz0(e, t, d = {
               if (trackEventAnalytics('Desktop Tab Copy Link', t.params || void 0), t.params.source === 'context-menu') {
                 let e = b.getState().openFile?.key;
                 if (e == null || b.getState().selectedView.view !== 'fullscreen') return;
-                _$$ds('File Share Link Copied', e, b.getState(), {
+                trackFileEvent('File Share Link Copied', e, b.getState(), {
                   copyLinkSource: _$$d4[_$$d4.DESKTOP_FILE_TAB_CONTEXT_MENU]
                 });
               }
@@ -14969,7 +14967,7 @@ export async function $$hz0(e, t, d = {
             let c;
             let u = e.getState();
             let p = u.mirror;
-            if (p.appModel.topLevelMode !== ViewType.DEV_HANDOFF) return;
+            if (p.appModel.topLevelMode !== ViewTypeEnum.DEV_HANDOFF) return;
             let m = p.appModel.devHandoffCodeLanguage;
             let h = p.appModel.devHandoffPreferences.codeExtensionPreferences[m.id];
             s = p.sceneGraph;

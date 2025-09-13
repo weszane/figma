@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { b as _$$b, c as _$$c } from '../905/308099';
 import { o as _$$o } from '../905/382697';
 import { FJ } from '../905/508367';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { jN } from '../905/612685';
 import { s as _$$s } from '../905/932270';
 import { sR } from '../905/932881';
@@ -76,7 +76,7 @@ export function $$P1({
     onClick: () => r(ShareAction.SHARE_TO_GOOGLE_CLASSROOM)
   }) : null;
 }
-let D = tf($n);
+let D = tf(Button);
 let k = sx.add({
   color: 'var(--color-text-figjam)',
   cursor: 'pointer',

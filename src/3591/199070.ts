@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { R } from "../3591/975641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { JZ } from "../figma_app/696043";
 import { Pt } from "../figma_app/33586";
 import { cV } from "../3591/656444";
@@ -31,7 +31,7 @@ export function $$c0({
     buttonText
   } = o;
   return jsxs(Fragment, {
-    children: [jsx(E, {
+    children: [jsx(TextWithTruncation, {
       color: "danger",
       children: msg
     }), jsx(g, {
@@ -70,7 +70,7 @@ function h({
           resourceType: e.is_widget ? "widget" : "plugin"
         }));
       },
-      children: jsx(E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("universal_insert.locate_local_version_text")
       })
     })

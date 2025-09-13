@@ -1,14 +1,14 @@
 import { useContext, useRef, useCallback } from "react";
 import { waitForAnimationFrame } from "../905/236856";
-import { A } from "../vendor/90566";
-import { am } from "../figma_app/901889";
+import { useDebouncedCallback } from "use-debounce";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { viewportNavigatorContext } from "../figma_app/298911";
 export function $$l0(e) {
   let t = useContext(viewportNavigatorContext);
   let i = useRef();
   let l = useRef();
   let d = useRef(0);
-  let c = am();
+  let c = trackFileEventWithUser();
   let u = useCallback(e => {
     let i = t.getViewportInfo();
     return !!(5 > Math.abs(i.offsetX - e.centerX) && 5 > Math.abs(i.offsetY - e.centerY) && .1 > Math.abs(i.zoomScale - e.scale));
@@ -51,7 +51,7 @@ export function $$l0(e) {
       d.current -= 1;
     });
   }, [u, e, c, t]);
-  return A(p, 50, {
+  return useDebouncedCallback(p, 50, {
     leading: !0
   });
 }

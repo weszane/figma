@@ -44,7 +44,7 @@ import { h as _$$h } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { c as _$$c } from "../905/370443";
 import { Z as _$$Z } from "../905/104740";
-import { _X, Z0 } from "../figma_app/62612";
+import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { Y as _$$Y } from "../figma_app/80938";
 import { _o } from "../figma_app/701001";
 import { GQ } from "../figma_app/32128";
@@ -358,14 +358,14 @@ function ef(e) {
     preferredName: "Hand Held Button",
     backupNames: [".Desktop / Asset / Visual Media / Key art"]
   }) || _$$eN(t, "INSTANCE");
-  let u = _X({
+  let u = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let {
     top,
     left
   } = ec({
-    nodePosition: Z0(u, s ? s.absoluteBoundingBox : {
+    nodePosition: viewportToScreen(u, s ? s.absoluteBoundingBox : {
       x: 0,
       y: 0
     }, !0),
@@ -615,14 +615,14 @@ function ej(e) {
     preferredName: "Creator",
     backupNames: ["Library Experience"]
   }) || _$$eN(t, "SECTION");
-  let u = _X({
+  let u = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let {
     top,
     left
   } = ec({
-    nodePosition: Z0(u, s ? s.absoluteBoundingBox : {
+    nodePosition: viewportToScreen(u, s ? s.absoluteBoundingBox : {
       x: 0,
       y: 0
     }, !0),

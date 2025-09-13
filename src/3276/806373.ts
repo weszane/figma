@@ -18,7 +18,7 @@ import { AE, Ik, E as _$$E } from "../9410/36414";
 import { FFileType } from "../figma_app/191312";
 import { Vq } from "../figma_app/979658";
 import { $A, vt } from "../905/862883";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { WM } from "../905/838765";
 import { _ as _$$_ } from "../469e6e40/273550";
 import { lX } from "../figma_app/588397";
@@ -151,7 +151,7 @@ function $({
   let a = q(n, e.redirect_icon_url || V);
   return jsx("div", {
     className: O,
-    "data-tooltip-type": t ? void 0 : Ib.TEXT,
+    "data-tooltip-type": t ? void 0 : KindEnum.TEXT,
     "data-tooltip": t ? void 0 : e.name,
     "data-tooltip-timeout-delay": t ? void 0 : 500,
     "data-tooltip-show-above": !t || void 0,
@@ -184,7 +184,7 @@ function K({
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: O,
-      "data-tooltip-type": t ? void 0 : Ib.TEXT,
+      "data-tooltip-type": t ? void 0 : KindEnum.TEXT,
       "data-tooltip": t ? void 0 : e.name,
       "data-tooltip-timeout-delay": t ? void 0 : 500,
       "data-tooltip-show-above": !t || void 0,
@@ -237,7 +237,7 @@ function W({
       className: r()(O, {
         [_$$J]: !!dragState
       }),
-      "data-tooltip-type": t ? void 0 : Ib.TEXT,
+      "data-tooltip-type": t ? void 0 : KindEnum.TEXT,
       "data-tooltip": t ? void 0 : name,
       "data-tooltip-timeout-delay": t ? void 0 : 500,
       "data-tooltip-show-above": !t || void 0,
@@ -301,7 +301,7 @@ function G({
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: O,
-      "data-tooltip-type": n ? void 0 : Ib.TEXT,
+      "data-tooltip-type": n ? void 0 : KindEnum.TEXT,
       "data-tooltip": n ? void 0 : _$$E(e),
       "data-tooltip-timeout-delay": n ? void 0 : 500,
       "data-tooltip-show-above": !n || void 0,

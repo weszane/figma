@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { $ } from "../905/455748";
 import { isInvalidValue } from "../905/216495";
 import { lJ } from "../905/275640";
@@ -15,7 +15,7 @@ import { isFullscreenSitesView } from "../905/561485";
 import { rO } from "../figma_app/409807";
 export function $$E0() {
   let [e, t] = lJ("stackCounterAlignItems");
-  let r = am();
+  let r = trackFileEventWithUser();
   let a = useSelector(Sh);
   let o = T(e, "CENTER", e => !e || isInvalidValue(e) || "BASELINE" === e);
   return useCallback((e, n) => {
@@ -39,7 +39,7 @@ export function $$y2() {
 }
 export function $$b1() {
   let [e, t] = lJ("stackPrimaryAlignItems");
-  let r = am();
+  let r = trackFileEventWithUser();
   let {
     selection,
     selectedChildCount

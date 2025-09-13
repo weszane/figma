@@ -3,7 +3,7 @@ import { lQ } from "../905/934246";
 import a from "classnames";
 import { Lk } from "../figma_app/975811";
 import { dG } from "../figma_app/753501";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Zp, j5, gq, w2 } from "../figma_app/178475";
 import { KG } from "../figma_app/98483";
 var s = a;
@@ -23,7 +23,7 @@ export function $$m0(e) {
     onKeyDown: dG,
     dispatch: lQ,
     className: p(e),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     reverseScrub: !0,
     children: jsx(h, {
@@ -61,7 +61,7 @@ export function $$g1(e) {
     onKeyDown: dG,
     formatter: s,
     dispatch: lQ,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     className: p(e),
     scrubMultiplier: .1,
@@ -85,7 +85,7 @@ export function $$f3(e) {
     ...t,
     ...s,
     onKeyDown: dG,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     "data-tooltip-show-above": dataTooltipShowAbove,
     className: p(e),
@@ -104,7 +104,7 @@ export function $$_2(e) {
     ...a,
     onKeyDown: dG,
     dispatch: lQ,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": dataTooltip,
     hidePercentSign: !1,
     childrenAtEnd: !1,

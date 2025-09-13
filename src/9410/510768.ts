@@ -4,12 +4,12 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 export function $$c0() {
   let e = aV();
   let t = selectCurrentFile();
   let i = VA(t?.project);
-  let c = Td();
+  let c = useIsCanvasEditDisabled();
   let u = !!selectCurrentUser();
   let {
     getProvisionalAccessBanner

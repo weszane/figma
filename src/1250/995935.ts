@@ -3,13 +3,13 @@ import { getFeatureFlags } from "../905/601108";
 import { getSupportEmail, isProdCluster, isDevEnvironment } from "../figma_app/169182";
 import { m0, ow, lg } from "../figma_app/976749";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
-import { dq, sZ } from "../905/845253";
+import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { n as _$$n } from "../1577/959155";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, createRef } from "react";
 import { Agb } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
 import { Z as _$$Z } from "../905/279476";
 import { s as _$$s } from "../905/403855";
@@ -68,7 +68,7 @@ import { sf } from "../905/929976";
 import { Ti } from "../figma_app/658324";
 import { cD, ol } from "../figma_app/598018";
 import { DashboardSections } from "../905/548208";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { R as _$$R2 } from "../figma_app/522082";
 import { h as _$$h } from "../905/142086";
 import { A6 } from "../905/350234";
@@ -114,7 +114,7 @@ import { kD, tS as _$$tS2, ac, J3, kN } from "../figma_app/622574";
 import { b4, WS } from "../figma_app/106207";
 import { vt } from "../905/862883";
 import { H as _$$H } from "../905/548668";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { YM } from "../905/122282";
 import { sO } from "../figma_app/21029";
 import { A as _$$A4 } from "../svg/229796";
@@ -126,7 +126,7 @@ import { Iv as _$$Iv } from "../7222/396421";
 import { B as _$$B } from "../905/352524";
 import { t as _$$t3 } from "../figma_app/32680";
 import { v as _$$v } from "../1250/140227";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { V as _$$V2 } from "../1250/925098";
 import { Q as _$$Q3 } from "../5132/668270";
@@ -157,7 +157,7 @@ function ek({
   let n = useDispatch();
   if (0 === t.length) return null;
   let r = {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("billing.open_invoice_reminder.button_tooltip"),
     "data-tooltip-show-immediately": !0
   };
@@ -261,7 +261,7 @@ function tk({
   userCanEditFile: t,
   isUserConnected: n
 }) {
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: e,
     width: "fit-content",
     children: jsxs(vo, {
@@ -490,7 +490,7 @@ let tz = {
     let d = !!l?.canEdit;
     let _ = r && r.subscription === FPaymentHealthStatusType.PAST_DUE;
     let u = {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("billing.open_invoice_reminder.button_tooltip"),
       "data-tooltip-show-immediately": !0
     };
@@ -503,7 +503,7 @@ let tz = {
         description: o ? getI18nString("banner.pro_team_past_due_revamp.subtitle.can_admin") : getI18nString("banner.pro_team_past_due_revamp.subtitle.no_admin"),
         button: o ? {
           type: MA.CUSTOM,
-          element: jsx($n, {
+          element: jsx(Button, {
             onClick: () => {
               t?.(sf({
                 view: "teamAdminConsole",
@@ -533,7 +533,7 @@ let t$ = {
     let t = useDispatch();
     let n = selectCurrentFile();
     let r = selectCurrentUser();
-    let i = dq();
+    let i = useCurrentUserOrgId();
     let o = isExternalRestricted(r, i);
     let d = useSelector(e => {
       if (!o) return null;
@@ -594,7 +594,7 @@ let tq = {
     let o = n && canAdminTeam(n, i);
     let s = r && r.subscription === FPaymentHealthStatusType.GRACE_PERIOD;
     let l = {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("billing.open_invoice_reminder.button_tooltip"),
       "data-tooltip-show-immediately": !0
     };
@@ -607,7 +607,7 @@ let tq = {
         description: getI18nString("banner.pro_team_charge_failed_revamp.subtitle.can_admin"),
         button: {
           type: MA.CUSTOM,
-          element: jsx($n, {
+          element: jsx(Button, {
             onClick: () => {
               t?.(sf({
                 view: "teamAdminConsole",
@@ -903,7 +903,7 @@ let tY = {
   bannerId: om.OrphanedOrgDraftsFile,
   Banner: function (e) {
     let t = selectCurrentFile();
-    let n = dq();
+    let n = useCurrentUserOrgId();
     let r = useSelector(_$$wA);
     let i = null;
     let o = null;
@@ -937,7 +937,7 @@ let tQ = {
   bannerId: om.TeamAbandonedDraftsFile,
   Banner: function (e) {
     let t = selectCurrentFile();
-    let n = dq();
+    let n = useCurrentUserOrgId();
     let a = getResourceDataOrFallback(t?.isAbandonedDraftFile);
     let r = ol();
     if (r && !n && a) {
@@ -975,7 +975,7 @@ let tZ = {
     let t = selectCurrentFile();
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
-    let i = dq();
+    let i = useCurrentUserOrgId();
     let o = useDispatch();
     let d = FC();
     if (!(i && t?.project && n3(t.project)) && !r && t && hasFolderOrTeamRestrictions(t.folderId, t.teamId, d)) {
@@ -1455,7 +1455,7 @@ let nt = {
     let l = selectCurrentFile();
     let d = _$$tS2();
     let _ = ac();
-    let u = Td();
+    let u = useIsCanvasEditDisabled();
     let m = lg();
     let g = sO();
     let f = useIsSelectedViewFullscreenCooper();
@@ -1471,7 +1471,7 @@ let nt = {
       type: MA.CUSTOM,
       element: jsx("div", {
         className: "x1n2onr6",
-        children: jsxs($n, {
+        children: jsxs(Button, {
           variant: "secondary",
           "data-testid": "banner-cta-button",
           children: [jsx("span", {
@@ -1616,7 +1616,7 @@ let na = {
   bannerId: om.OrgDowngradeBanner,
   Banner: function (e) {
     let t = a9();
-    let n = sZ();
+    let n = useCurrentUserOrg();
     if (!getFeatureFlags().org_downgrade_banner || t?.permission !== FUserRoleType.ADMIN || n?.org_downgrade?.operation_state !== "scheduled") return null;
     let a = n?.org_downgrade?.scheduled_run_at;
     if (!a) return null;
@@ -1653,7 +1653,7 @@ let nr = {
   Banner: function () {
     let e = useDispatch();
     let t = selectCurrentUser();
-    let n = sZ();
+    let n = useCurrentUserOrg();
     let i = !!n?.id;
     let o = getAtomMutate(_$$l);
     let s = getFeatureFlags().terms_of_service_may_2025_update;
@@ -1837,7 +1837,7 @@ let ns = {
   Banner: function () {
     let e = useDispatch();
     let t = selectCurrentUser();
-    let n = sZ();
+    let n = useCurrentUserOrg();
     let r = Az(n);
     let [i, o] = useState(!1);
     let s = createRef();
@@ -1925,7 +1925,7 @@ let nl = {
   bannerId: om.NonAdminBillingTermsBanner,
   Banner: function () {
     let e = selectCurrentUser();
-    let t = sZ();
+    let t = useCurrentUserOrg();
     let n = useAtomWithSubscription(_$$b2(t?.id ?? null));
     let a = useAtomWithSubscription(eg);
     let i = getFeatureFlags().terms_of_service_may_2025_update;
@@ -2106,7 +2106,7 @@ export function $$nb0() {
 }
 export function $$nx1() {
   let e = _$$n();
-  return dq() ? nf : e ? nh : ng;
+  return useCurrentUserOrgId() ? nf : e ? nh : ng;
 }
 export const X = $$nb0;
 export const W = $$nx1;

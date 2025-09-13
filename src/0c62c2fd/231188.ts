@@ -7,7 +7,7 @@ import { Ay } from "@stylexjs/stylex";
 import { _ as _$$_2 } from "../905/613863";
 import { Y } from "../905/347011";
 import { t as _$$t } from "../905/433510";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -37,7 +37,7 @@ export function $$_0({
       size: h,
       "aria-label": v.tooltip,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": v.tooltip,
         "data-tooltip-timeout-delay": 50,
         "data-testid": "favorite-star-placeholder"
@@ -52,7 +52,7 @@ export function $$_0({
       "aria-label": v.tooltip,
       "aria-pressed": !!b.favorite,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": v.tooltip,
         "data-tooltip-timeout-delay": 50,
         "data-testid": x

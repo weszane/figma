@@ -5,7 +5,7 @@ import { Be } from "../figma_app/844435";
 import { xp, aQ } from "../figma_app/86989";
 import { _i } from "../figma_app/120210";
 import { InstalledPlugins } from "../figma_app/43951";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 export function $$u2({
   extensionId: e
 }) {
@@ -17,7 +17,7 @@ export function $$u2({
 }
 export function $$p1(e, t) {
   let r = Be();
-  let n = t === vt.PLUGIN ? r.plugins[e] : r.widgets[e];
+  let n = t === ResourceTypeNoComment.PLUGIN ? r.plugins[e] : r.widgets[e];
   let a = xp(e);
   let d = aQ(e);
   let p = useSelector(t => t.publishedPlugins[e] ? a : d);
@@ -42,7 +42,7 @@ export function $$_0(e) {
   let {
     save,
     unsave
-  } = _i(e.plugin_id, vt.PLUGIN);
+  } = _i(e.plugin_id, ResourceTypeNoComment.PLUGIN);
   let s = useCallback((e, n) => {
     r || (t ? unsave(n) : save(e, n));
   }, [r, t, unsave, save]);

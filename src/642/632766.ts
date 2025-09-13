@@ -7,7 +7,7 @@ import o from "classnames";
 import { sT } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ig } from "../figma_app/178475";
 import { sA } from "../figma_app/841644";
 import { u3 } from "../figma_app/152690";
@@ -97,7 +97,7 @@ export function $$j0({
       "data-tooltip": M,
       "data-tooltip-proxy-element-id": consumedVariable ? E : void 0,
       "data-tooltip-show-on-target-only": !0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dataTestId: inputTestId,
       dispatch: j,
       forwardedRef: A,
@@ -138,7 +138,7 @@ export function $$j0({
       wheelMultiplier: smallNudgeAmount,
       children: jsx("div", {
         className: O,
-        "data-tooltip-type": consumedVariable ? Ib.TEXT : void 0,
+        "data-tooltip-type": consumedVariable ? KindEnum.TEXT : void 0,
         "data-tooltip": consumedVariable ? M : void 0,
         id: E,
         children: jsx(I, {})

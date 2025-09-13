@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { qr, YA, hM } from "../figma_app/827447";
 import { renderI18nText } from "../905/303541";
 import { registerModal } from "../905/102752";
@@ -16,7 +16,7 @@ let $$p0 = registerModal(function (e) {
     duration: u
   };
   let m = hM(e.duration) ? renderI18nText("idle_timeout.warning_modal.body_short_duration", p) : renderI18nText("idle_timeout.warning_modal.body", p);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "md",
     children: jsxs(vo, {
@@ -28,7 +28,7 @@ let $$p0 = registerModal(function (e) {
         children: m
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: e.onHide,
             children: renderI18nText("idle_timeout.warning_modal.button")

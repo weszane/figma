@@ -36,7 +36,7 @@ import { $W } from "../figma_app/681244";
 import { $K, bW, s5 } from "../figma_app/223206";
 import { ky } from "../figma_app/214121";
 import { LQ } from "../figma_app/741211";
-import { ds, f5 } from "../figma_app/314264";
+import { trackFileEvent, trackFileObjEvent } from "../figma_app/314264";
 import { ZG, GT, mu, yn, $3 } from "../figma_app/840917";
 import { fullscreenValue } from "../figma_app/455680";
 import { setupFileObject } from "../905/628874";
@@ -119,7 +119,7 @@ export function $$ev9(e) {
 export function $$eI10(e, t, i) {
   let n = JSON.stringify(getPreviousSelectedView() || {});
   let r = "fullscreen" === t.selectedView.view ? t.selectedView.trackingInfo?.source : "";
-  ds("File Opened", e.key, t, {
+  trackFileEvent("File Opened", e.key, t, {
     randomID: _$$ds(),
     prevView: n,
     source: r,
@@ -160,7 +160,7 @@ function ex(e, t, i, n) {
   o.folderId = r.folder_id;
   o.authenticatedUserIds = n.authedUsers.orderedIds;
   o.offline = `${!navigator.onLine}`;
-  f5("File Created", r, n, o);
+  trackFileObjEvent("File Created", r, n, o);
   return r.key;
 }
 export function $$eS6({
@@ -178,7 +178,7 @@ export function $$eS6({
     isColdBoot
   } = xK.logOpenFileAction(e, o, t, i, n);
   _$$N.loadTimer.logOpenFileAction(e);
-  ds("Fullscreen File Opened", e, a, {
+  trackFileEvent("Fullscreen File Opened", e, a, {
     randomID: _$$ds(),
     fileOpenIndex,
     isColdBoot,

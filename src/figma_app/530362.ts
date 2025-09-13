@@ -35,7 +35,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { Xo } from "../figma_app/482495";
 import { o3, nt } from "../905/226610";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { sJ } from "../figma_app/841644";
 import { v as _$$v } from "../905/318279";
@@ -444,7 +444,7 @@ function eT({
     htmlAttributes: {
       onMouseDown: e => e.stopPropagation(),
       "data-tooltip": a,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$A, {})
   });
@@ -618,7 +618,7 @@ function ex({
       onClick: () => t(a),
       htmlAttributes: {
         "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       recordingKey: generateRecordingKey("componentPropDef", "detachVariableButton"),
       "aria-label": getI18nString("design_systems.component_properties.detach_property"),

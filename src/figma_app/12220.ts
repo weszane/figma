@@ -3,11 +3,11 @@ import { getFeatureFlags } from "../905/601108";
 import { memoizeWeak } from "../figma_app/815945";
 import { L4 } from "../figma_app/819288";
 import { parsePxNumber } from "../figma_app/783094";
-import { gB, oA } from "../905/723791";
+import { gB, getResourceDataOrFallback } from "../905/723791";
 import { isPointInRect, Point } from "../905/736624";
 import { ih } from "../905/201151";
-import { Z0 } from "../figma_app/62612";
-import { EB, hm, kT } from "../905/380385";
+import { viewportToScreen } from "../figma_app/62612";
+import { BusyReadyState, NEW_COMMENT_ID, ThreadType } from "../905/380385";
 import { XC, b1 } from "../905/512783";
 import { NJv, QP5, oGx } from "../figma_app/27776";
 let $$m18 = 1;
@@ -26,7 +26,7 @@ let $$f5 = {
 let $$E3 = {
   messageMeta: [],
   attachments: {},
-  state: EB.READY,
+  state: BusyReadyState.READY,
   anchorPosition: null,
   selectionBoxAnchor: null,
   discardAttempt: 0
@@ -51,24 +51,24 @@ export function $$S4(e, t, r) {
     selectionBoxAnchor
   } = t;
   return {
-    id: hm,
-    key: hm,
-    uuid: hm,
+    id: NEW_COMMENT_ID,
+    key: NEW_COMMENT_ID,
+    uuid: NEW_COMMENT_ID,
     anchored: !0,
     canvasPosition: anchorPosition,
     selectionAnchorCanvasPosition: selectionBoxAnchor,
     page: r,
-    isActive: e === hm,
+    isActive: e === NEW_COMMENT_ID,
     comments: [],
     messageMeta,
     attachments: Object.values(attachments),
     pageName: null,
     isCanvasMention: !1,
-    sidebarItemType: kT.COMMENT_THREAD
+    sidebarItemType: ThreadType.COMMENT_THREAD
   };
 }
 export function $$v7(e) {
-  return e === hm;
+  return e === NEW_COMMENT_ID;
 }
 let $$A12 = memoizeWeak(e => e.map(e => e.user ? {
   user_id: e.user.id,
@@ -210,7 +210,7 @@ export function $$L14(e, t, r, n, a, o, d, c) {
       messageMeta: [],
       attachments: [],
       isCanvasMention: !1,
-      sidebarItemType: kT.COMMENT_THREAD,
+      sidebarItemType: ThreadType.COMMENT_THREAD,
       commentPin: t.commentPin
     };
   });
@@ -220,15 +220,15 @@ export function $$P17(e, t, r, i) {
   let {
     canvasPosition
   } = t;
-  let s = canvasPosition && e ? Z0(e, canvasPosition) : null;
+  let s = canvasPosition && e ? viewportToScreen(e, canvasPosition) : null;
   let o = function (e, t, r, i, a, s) {
     if (!e || !t) return null;
     let o = function (e) {
       switch (e) {
-        case kT.COMMENT_THREAD:
-        case kT.LITMUS_COMMENT_THREAD:
+        case ThreadType.COMMENT_THREAD:
+        case ThreadType.LITMUS_COMMENT_THREAD:
           return XC;
-        case kT.FEED_POST:
+        case ThreadType.FEED_POST:
           return b1;
         default:
           throwTypeError(e);
@@ -275,7 +275,7 @@ export function $$k10(e, t, r) {
       anchored: !1,
       canvasPosition: null,
       selectionAnchorCanvasPosition: null,
-      page: oA(t.pageId, null),
+      page: getResourceDataOrFallback(t.pageId, null),
       pageName: null,
       isActive: n === i,
       isPendingFromSinatra: void 0,
@@ -299,7 +299,7 @@ export function $$k10(e, t, r) {
       attachments: [],
       isCanvasMention: !0,
       replyCount: void 0,
-      sidebarItemType: kT.COMMENT_THREAD,
+      sidebarItemType: ThreadType.COMMENT_THREAD,
       nodeId: t.nodeIdPath[0]
     };
   }(e, t, a, r));
@@ -311,7 +311,7 @@ export function $$M16() {
       messageMeta: [],
       attachments: {}
     },
-    state: EB.READY
+    state: BusyReadyState.READY
   };
 }
 export function $$F1(e) {

@@ -1,11 +1,11 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { useState } from "react";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { ScreenReaderOnly } from "../905/172252";
 import { x as _$$x } from "../905/811596";
 import { _ as _$$_ } from "../469e6e40/422718";
@@ -15,7 +15,7 @@ import { h as _$$h } from "../905/207101";
 import { Ex, vj, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
-import { E as _$$E3 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { B } from "../905/261906";
 import { tI } from "../figma_app/847597";
 import { ViewAccessTypeEnum } from "../905/513035";
@@ -48,7 +48,7 @@ function C(e) {
     trailing: !0
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       "aria-label": getI18nString("admin_settings.people_tab.seat_counts.popover_aria_label", {
         totalSeats: g,
         seatType: tI(e.seatType)
@@ -125,21 +125,21 @@ function S(e) {
         style: E,
         "data-testid": "seat-count-total-seats",
         children: [jsx("span", {
-          children: jsx(_$$E3, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             children: getI18nString("admin_settings.people_tab.seat_counts.total_seats", {
               seatType: tI(e.seatType)
             })
           })
         }), jsx("span", {
-          children: jsx(_$$E3, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             children: e.totalSeats.toLocaleString()
           })
         })]
       }), e.forLicenseGroup && jsx("div", {
         style: E,
-        children: jsx(_$$E3, {
+        children: jsx(TextWithTruncation, {
           color: "secondary",
           children: getI18nString("admin_settings.people_tab.seat_counts.in_this_billing_group")
         })
@@ -151,7 +151,7 @@ function N(e) {
   return jsxs(Fragment, {
     children: [e.billingInterval && jsx("div", {
       style: E,
-      children: jsx(_$$E3, {
+      children: jsx(TextWithTruncation, {
         color: "secondary",
         children: e.billingInterval === FBillingPeriodType.MONTH ? getI18nString("admin_settings.people_tab.seat_counts.billing_interval.month") : getI18nString("admin_settings.people_tab.seat_counts.billing_interval.annual")
       })
@@ -192,14 +192,14 @@ function I({
           style: "assigned" === e ? {
             "--color-icon": "var(--color-icon-secondary)"
           } : void 0
-        }), jsx(_$$E3, {
+        }), jsx(TextWithTruncation, {
           color: "secondary",
           children: s
         })]
       })
     }), jsx("span", {
       "aria-hidden": !0,
-      children: jsx(_$$E3, {
+      children: jsx(TextWithTruncation, {
         color: "secondary",
         children: a.toLocaleString()
       })
@@ -230,7 +230,7 @@ function M(e) {
   let t = _$$d({
     reportErrorsToTeam: _$$e.SCALE
   });
-  if (e.seatCountsByBillingInterval?.status === "loading" || "loading" === e.seatCounts.status) return jsx(kt, {});
+  if (e.seatCountsByBillingInterval?.status === "loading" || "loading" === e.seatCounts.status) return jsx(LoadingSpinner, {});
   if (e.seatCountsByBillingInterval?.status === "loaded" && "loaded" === e.seatCounts.status) {
     let a = II(e.seatCountsByBillingInterval.data, e.seatCounts.data);
     return jsx(AutoLayout, {

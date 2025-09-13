@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useRef } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { selectWithShallowEqual } from '../905/103090';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { getI18nString } from '../905/303541';
 import { sD, Xn } from '../905/429125';
@@ -123,7 +123,7 @@ export function $$N4({
       children: jsx(YW, {
         'recordingKey': generateRecordingKey('applyPropRefButton', e),
         'selected': l,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': u,
         'onMouseDown': I,
         'onClick': c,

@@ -15,7 +15,7 @@ import { registerModal, registerLegacyModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { yH, yJ, bE } from "../905/98702";
 import { P as _$$P } from "../905/595507";
-import { z_ } from "../figma_app/314264";
+import { trackRoleEvent } from "../figma_app/314264";
 import { CI, Gi } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { ZW } from "../figma_app/349248";
@@ -24,11 +24,11 @@ import { AccessLevelEnum } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
 import { oE } from "../905/249410";
 import { throwTypeError } from "../figma_app/465776";
-import { R as _$$R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { getDisplayNameAlt } from "../905/760074";
 import { M4 } from "../905/713695";
 import { p as _$$p } from "../905/195198";
-import { DQ, Pw } from "../figma_app/121751";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { UpsellModalType } from "../905/165519";
 class A extends Component {
   render() {
@@ -142,7 +142,7 @@ function j(e) {
     default:
       throwTypeError(n.resource_type);
   }
-  return jsx(_$$R, {
+  return jsx(ConfirmationModal, {
     confirmText: i,
     onConfirm: e.onConfirmRemove,
     title: getI18nString("confirm_remove_role.confirm_title_file"),
@@ -160,7 +160,7 @@ registerLegacyModal(M, e => jsx(j, {
 let G = createOptimistThunk((e, {
   role: t
 }) => {
-  z_("Role Deleted", t);
+  trackRoleEvent("Role Deleted", t);
   let i = XHR.del(`/api/roles/${t.id}`);
   e.dispatch(handlePromiseError({
     promise: i,
@@ -184,7 +184,7 @@ let z = createOptimistThunk((e, {
   fromDraftsLockdownFileMove: s,
   onSuccess: l
 }) => {
-  z_("Role Permissions Changed", t, {
+  trackRoleEvent("Role Permissions Changed", t, {
     level: t.level
   });
   let d = XHR.put(`/api/roles/${t.id}`, {
@@ -321,7 +321,7 @@ function W(e, t, i) {
   let n = e.getState();
   if (!i) return !1;
   if (t.data && ("NEEDS_UPGRADE" === t.data.reason || "NEEDS_PAYMENT" === t.data.reason)) {
-    if (DQ(Pw.GROUP_7)) e.dispatch(showModalHandler({
+    if (isReduxDeprecationCutover(ConfigGroups.GROUP_7)) e.dispatch(showModalHandler({
       type: _$$t2,
       data: {
         teamId: i,

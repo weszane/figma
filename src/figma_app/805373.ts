@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A } from "../905/410311";
 import o from "classnames";
 import { oW } from "../905/675859";
 import { Ex, zE } from "../figma_app/919079";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E2 } from "../905/984674";
-import { Ib } from "../905/129884";
+import { TextWithTruncation } from "../905/984674";
+import { KindEnum } from "../905/129884";
 import { Xx, us, $L, sC } from "../figma_app/136698";
 import { A as _$$A2 } from "../6828/321914";
 import { A as _$$A3 } from "../6828/666729";
@@ -132,7 +132,7 @@ export function $$et8(e) {
     ...e,
     children: jsx("div", {
       style: t,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: e.svg,
         autosize: !0,
         ariaLabel: e.label
@@ -148,7 +148,7 @@ class er extends Component {
     let t = size ? `${size}px` : void 0;
     let r = Y[this.props.shape || "CIRCLE"];
     let i = this.props.enabled || !0;
-    return jsx(_$$B, {
+    return jsx(SvgComponent, {
       className: `${r} ${this.props.className || ""} ${i ? "" : f}`,
       style: this.props.style || {},
       svg: this.props.src,
@@ -394,7 +394,7 @@ let ef = (e, t) => class extends Component {
   }
   render() {
     let r = this.props["data-tooltip-proxy-element-id"] || `avatar_${this.props.entity.id}_tooltip_proxy`;
-    let i = this.props.onClick ? _$$E : "div";
+    let i = this.props.onClick ? ButtonPrimitive : "div";
     return jsxs(i, {
       className: l()(E, this.props.className, {
         [T]: this.props.onClick,
@@ -405,7 +405,7 @@ let ef = (e, t) => class extends Component {
       "data-onboarding-key": this.props["data-onboarding-key"],
       children: [jsx("div", {
         id: r,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": this.props["data-tooltip"],
         "data-tooltip-offset-x": this.props["data-tooltip-offset-x"],
         "data-tooltip-offset-y": this.props["data-tooltip-offset-y"],
@@ -431,7 +431,7 @@ class eb extends Component {
       labelSize = "default"
     } = this.props;
     let t = ey[labelSize];
-    let r = this.props.showTruncatedTextTooltip ? jsx(_$$E2, {
+    let r = this.props.showTruncatedTextTooltip ? jsx(TextWithTruncation, {
       truncate: !0,
       children: this.props.text
     }) : jsx("span", {

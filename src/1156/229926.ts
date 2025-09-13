@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -68,7 +68,7 @@ let b = registerModal(function (e) {
     open: !0,
     onClose: () => (k(popModalStack()), !0)
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: E,
     width: "fit-content",
     height: "full",

@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N } from "../905/438674";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/443068";
 import { l as _$$l } from "../905/479687";
 import { N as _$$N } from "../905/670143";
@@ -13,7 +13,7 @@ import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tg, Xu, Uo } from "../figma_app/354658";
 import { S as _$$S } from "../figma_app/11182";
-import { Fl, U, mr } from "../figma_app/45218";
+import { hasPublishScope, hasClientMeta, isWidgetOrPlugin } from "../figma_app/45218";
 import { H } from "../905/548668";
 export function $$b3({
   publishedResourceContent: e
@@ -24,7 +24,7 @@ export function $$b3({
   useEffect(() => {
     l(!1);
   }, [i]);
-  return jsx($n, {
+  return jsx(Button, {
     variant: "secondary",
     onClick: async () => {
       await t(_$$S({
@@ -54,7 +54,7 @@ export function $$v2({
   });
 }
 export function $$I0() {
-  return jsx($n, {
+  return jsx(Button, {
     variant: "secondary",
     onClick: () => {
       customHistory.reload("Resource updated on community hub");
@@ -104,7 +104,7 @@ export function $$E5({
       ...w
     }), i && C]
   });
-  return "banner" === o ? jsx(_$$E, {
+  return "banner" === o ? jsx(ButtonPrimitive, {
     onClick: S,
     className: "x78zum5 xjwf9q1 x87zv9k x6s0dn4 xxhr3t x1a33sea x19y5rnk x1r7xphn",
     children: T
@@ -112,7 +112,7 @@ export function $$E5({
     onClick: S,
     "aria-label": getI18nString("community.publishing.copy_link"),
     children: T
-  }) : jsx($n, {
+  }) : jsx(Button, {
     "data-tooltip": getI18nString("community.publishing.copy_template_share_link"),
     "data-tooltip-type": "text",
     variant: o,
@@ -135,9 +135,9 @@ export function $$x1({
   });
 }
 export function $$S4(e) {
-  return Fl(e) ? "" : U(e) ? new Tg({
+  return hasPublishScope(e) ? "" : hasClientMeta(e) ? new Tg({
     resourceId: e.id
-  }).href : mr(e) ? new Xu({
+  }).href : isWidgetOrPlugin(e) ? new Xu({
     resourceId: e.id,
     apiResourceType: e.is_widget ? Uo.WIDGET : Uo.PLUGIN
   }).href : "";

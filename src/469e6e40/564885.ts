@@ -2,23 +2,23 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { h1 } from "../905/986103";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { sf } from "../905/929976";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { O } from "../905/833838";
 import { E as _$$E } from "../figma_app/126651";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/298764";
 import { $ } from "../905/834575";
 export let $$E0 = registerModal(function (e) {
@@ -78,7 +78,7 @@ export let $$E0 = registerModal(function (e) {
   let j = v.every(({
     property: e
   }) => !r[e]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     height: "dynamic",
     width: "lg",
@@ -144,7 +144,7 @@ function S(e) {
       children: (() => {
         if (!e.activity) return jsx(C, {});
         if (e.activity.can_view) return jsx("div", {
-          children: e.activity?.file_key ? jsx($n, {
+          children: e.activity?.file_key ? jsx(Button, {
             variant: "link",
             onClick: () => {
               e.activity && e.activity.file_key && (t(sf({
@@ -154,7 +154,7 @@ function S(e) {
               })), e.onClose());
             },
             children: e.activity.file_name
-          }) : jsx(E, {
+          }) : jsx(TextWithTruncation, {
             children: e.activity.file_name
           })
         });
@@ -165,7 +165,7 @@ function S(e) {
             "data-tooltip-proxy-element-id": t,
             children: jsx("div", {
               id: t,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": a,
               children: getI18nString("general.private_file")
             })

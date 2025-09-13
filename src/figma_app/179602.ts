@@ -1,9 +1,9 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Us } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _8, dL } from "../figma_app/530167";
@@ -67,7 +67,7 @@ export function $$f1(e) {
   };
   let A = f && f.length > 0;
   if (!emptyStateText && !A) return jsx(Fragment, {});
-  if (y) return jsx(kt, {});
+  if (y) return jsx(LoadingSpinner, {});
   let x = A ? jsx(Fragment, {
     children: profileHandle ? getI18nString("community.comments.these_people_can_t_comment_on_any_of_profile_handles_community_files_and_plugins", {
       profileHandle
@@ -88,11 +88,11 @@ export function $$f1(e) {
       className: tB,
       children: f.map(e => jsx(_$$y, {
         profile: e,
-        rightSide: e.is_restricted_by_current_user ? jsx($n, {
+        rightSide: e.is_restricted_by_current_user ? jsx(Button, {
           onClick: v.bind(null, e.id),
           variant: "secondary",
           children: renderI18nText("community.comments.unrestrict")
-        }) : jsx($n, {
+        }) : jsx(Button, {
           onClick: S.bind(null, e.id),
           variant: "primary",
           children: renderI18nText("community.comments.restrict")

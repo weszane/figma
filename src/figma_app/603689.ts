@@ -17,7 +17,7 @@ import { P4 as _$$P2 } from '../905/18800';
 import { useMemoCustom, useMemoStable, useStableMemo } from '../905/19536';
 import { a as _$$a8 } from '../905/29104';
 import { z4 } from '../905/37051';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { yx } from '../905/41973';
 import { d as _$$d7 } from '../905/68441';
 import { TG } from '../905/72677';
@@ -33,7 +33,7 @@ import { g as _$$g4 } from '../905/125190';
 import { xK } from '../905/125218';
 import { GI, Vi } from '../905/125333';
 import { y as _$$y3 } from '../905/129046';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { a as _$$a4, J as _$$J } from '../905/142348';
 import { E as _$$E2 } from '../905/142894';
 import { t as _$$t2 } from '../905/150656';
@@ -124,7 +124,7 @@ import { RR } from '../905/514666';
 import { v as _$$v } from '../905/516963';
 import { dD as _$$dD } from '../905/519113';
 import { r as _$$r3 } from '../905/520829';
-import { $n, WW } from '../905/521428';
+import { Button, ButtonLarge } from '../905/521428';
 import { ex as _$$ex } from '../905/524523';
 import { d as _$$d2 } from '../905/531325';
 import { _T as _$$_T, E5, jv, k4, Yi } from '../905/531551';
@@ -145,7 +145,7 @@ import { c1 as _$$c2, SW } from '../905/589717';
 import { nl as _$$nl2, H8, Pf } from '../905/590952';
 import { K as _$$K } from '../905/591700';
 import { h as _$$h4 } from '../905/593407';
-import { Td as _$$Td } from '../905/595131';
+import { useIsCanvasEditDisabled } from '../905/595131';
 import { bL as _$$bL3, gZ, HG } from '../905/598775';
 import { c as _$$c8 } from '../905/598842';
 import { $z as _$$$z } from '../905/599896';
@@ -158,7 +158,7 @@ import { rl as _$$rl } from '../905/612685';
 import { J as _$$J5 } from '../905/614223';
 import { b as _$$b4, c as _$$c4 } from '../905/618904';
 import { e as _$$e8 } from '../905/621515';
-import { E as _$$E6 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { parseAndNormalizeQuery, parseQuery, parseQuerySimple } from '../905/634134';
 import { eo as _$$eo, fp as _$$fp, TX } from '../905/634218';
 import { dB as _$$dB, DP, yM } from '../905/640017';
@@ -177,13 +177,13 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { IT as _$$IT, M4 } from '../905/713695';
 import { z5 as _$$z, Nv } from '../905/713722';
 import { XA } from '../905/714160';
-import { B as _$$B2 } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { l as _$$l } from '../905/716947';
 import { getFilteredFeatureFlags } from '../905/717445';
 import { N as _$$N2 } from '../905/718123';
 import { S as _$$S3 } from '../905/720922';
 import { a as _$$a3 } from '../905/720941';
-import { oA as _$$oA, tT as _$$tT, gB } from '../905/723791';
+import { getResourceDataOrFallback, tT as _$$tT, gB } from '../905/723791';
 import { Point } from '../905/736624';
 import { Ji } from '../905/739314';
 import { DV } from '../905/739964';
@@ -250,7 +250,7 @@ import { h as _$$h2 } from '../905/943864';
 import { PluginIframeMode } from '../905/968269';
 import { O as _$$O2 } from '../905/969533';
 import { R9 } from '../905/977824';
-import { E as _$$E4 } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { b as _$$b7 } from '../905/985254';
 import { h1 } from '../905/986103';
 import { Q as _$$Q } from '../905/986450';
@@ -258,7 +258,7 @@ import { rn as _$$rn2 } from '../905/988099';
 import { F as _$$F3 } from '../905/989956';
 import { resourceUtils } from '../905/989992';
 import { NONE_SYMBOL } from '../905/992467';
-import { M as _$$M } from '../905/994901';
+import { pasteEmbedThunk } from '../905/994901';
 import { LineBreakProcessor } from '../905/994917';
 import { R as _$$R3 } from '../905/995587';
 import { a as _$$a2, j as _$$j } from '../1577/143479';
@@ -295,7 +295,7 @@ import { useLatestRef } from '../figma_app/922077';
 import { Y9 as _$$Y4 } from '../figma_app/42724';
 import { i as _$$i2 } from '../figma_app/43065';
 import { FileCreationDropdownView, ComponentByKey, PinnedFiles, OpenEditorFileData, DesktopPushNotificationView, ActiveFileUsersForFileView, FolderPageView, LibraryPublish, FileThumbnail, ProductTrialsView, ClientReloadView, LegacySourceStyleData, RecentIdleTimeoutSettingChangeView, DesktopNewTabRecentFilesView, RecentNetworkControlRejectionView, StyleByKey } from '../figma_app/43951';
-import { Zm as _$$Zm } from '../figma_app/45218';
+import { ComposerLocation } from '../figma_app/45218';
 import { e as _$$e11, n as _$$n5 } from '../figma_app/48514';
 import { Q6 } from '../figma_app/48566';
 import { ts as _$$ts } from '../figma_app/49598';
@@ -304,7 +304,7 @@ import { I as _$$I4 } from '../figma_app/51637';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { cV as _$$cV } from '../figma_app/59509';
 import { h as _$$h } from '../figma_app/61485';
-import { D6 as _$$D5, Yb } from '../figma_app/62612';
+import { useFullscreenViewportUpdates, scaleRect } from '../figma_app/62612';
 import { jm } from '../figma_app/67099';
 import { mX } from '../figma_app/76123';
 import { Lk as _$$Lk } from '../figma_app/78808';
@@ -374,7 +374,7 @@ import { XO } from '../figma_app/299859';
 import { I as _$$I } from '../figma_app/304633';
 import { Pp } from '../figma_app/305244';
 import { uQ as _$$uQ } from '../figma_app/311375';
-import { Cu, Dc, qD } from '../figma_app/314264';
+import { logAndTrackCTA, mapEditorTypeToProductType, trackContextViewed } from '../figma_app/314264';
 import { lX as _$$lX, G2 } from '../figma_app/314591';
 import { CX, gT, If, NA } from '../figma_app/319440';
 import { pq as _$$pq } from '../figma_app/319732';
@@ -525,7 +525,7 @@ import { a as _$$a5 } from '../figma_app/850056';
 import { uW as _$$uW2, ux as _$$ux, NY } from '../figma_app/851625';
 import { M as _$$M4 } from '../figma_app/854365';
 import { ip as _$$ip } from '../figma_app/857454';
-import { kt } from '../figma_app/858013';
+import { LoadingSpinner } from '../figma_app/858013';
 import { w as _$$w2 } from '../figma_app/859828';
 import { r as _$$r2 } from '../figma_app/860474';
 import { b as _$$b5, bL as _$$bL, hE as _$$hE, ZP as _$$ZP, g8, mc, MJ, q7, Q$, wv, YJ } from '../figma_app/860955';
@@ -535,7 +535,7 @@ import { t7 as _$$t3 } from '../figma_app/880974';
 import { ld as _$$ld } from '../figma_app/881578';
 import { O1, RW } from '../figma_app/889655';
 import { S as _$$S2 } from '../figma_app/894185';
-import { U as _$$U4 } from '../figma_app/901889';
+import { trackFileEventWithStore } from '../figma_app/901889';
 import { rn as _$$rn } from '../figma_app/903573';
 import { j as _$$j2 } from '../figma_app/911344';
 import { Dt } from '../figma_app/912411';
@@ -606,7 +606,7 @@ function ec(e) {
   });
   let m = useLatestRef(h.activeTab);
   useEffect(() => {
-    h.activeTab !== m && qD({
+    h.activeTab !== m && trackContextViewed({
       name: 'user_notifications_filter_viewed',
       filter_type: h.activeTab,
       dropdown_location: 'desktop_tray'
@@ -648,7 +648,7 @@ function ec(e) {
         tabPropsMap: p,
         notificationFilter: h.activeTab,
         toggleNotificationFilter: e => {
-          Cu({
+          logAndTrackCTA({
             filter_type: e
           }, 'user_notifications_filter_clicked');
         },
@@ -681,7 +681,7 @@ function eu() {
     });
     useEffect(() => {
       if (n.status === 'loaded' && n.data.currentUser.desktopPushNotification.status === _$$tT.Loaded) {
-        let t = _$$oA(n.data.currentUser.desktopPushNotification);
+        let t = getResourceDataOrFallback(n.data.currentUser.desktopPushNotification);
         if (t) {
           if (t.userId !== e.getState().user?.id) {
             trackEventAnalytics('desktop_push_not_current_user');
@@ -1878,7 +1878,7 @@ let nV = memo(() => {
     variant: _$$a3.FILE_VIEWER,
     dismissIcon: _$$A,
     verticalPadding: 32,
-    SecondaryButton: e => jsx($n, {
+    SecondaryButton: e => jsx(Button, {
       'onClick': e.onClick,
       'variant': 'primary',
       'data-testid': e['data-testid'],
@@ -1891,13 +1891,13 @@ let nV = memo(() => {
     variant: _$$a3.FILE_VIEWER,
     dismissIcon: _$$A,
     verticalPadding: 32,
-    PrimaryButton: e => jsx($n, {
+    PrimaryButton: e => jsx(Button, {
       'onClick': e.onClick,
       'variant': 'primary',
       'data-testid': e['data-testid'],
       'children': e.children
     }),
-    SecondaryButton: e => jsx($n, {
+    SecondaryButton: e => jsx(Button, {
       'onClick': e.onClick,
       'variant': 'secondary',
       'data-testid': e['data-testid'],
@@ -2103,7 +2103,7 @@ function iL() {
                   })
                 }), titleIconSvgSrc && jsx('div', {
                   className: _$$fp,
-                  children: jsx(_$$B2, {
+                  children: jsx(SvgComponent, {
                     svg: titleIconSvgSrc,
                     className: _$$v3
                   })
@@ -4048,7 +4048,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         }, e))
       }), jsx('div', {
         className: _$$s3.mt6.flex.justifyEnd.$,
-        children: jsx($n, {
+        children: jsx(Button, {
           disabled: !n,
           variant: 'secondary',
           onClick: () => r(n),
@@ -4218,7 +4218,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
     return jsx(Fragment, {
       children: jsxs('div', {
         className: 'survey_view--surveyComplete--5LM73',
-        children: [jsx(_$$B2, {
+        children: [jsx(SvgComponent, {
           className: 'survey_view--successIcon---l6LH',
           svg: _$$A5
         }), jsx(Kz, {
@@ -4574,7 +4574,7 @@ function oO({
   return jsxs(utilityNoop, {
     'className': ow,
     'size': 360,
-    'title': jsx(_$$E4, {
+    'title': jsx(TextWithTruncation, {
       fontSize: 11,
       fontWeight: 'bold',
       children: renderI18nText('payments_modal.org_trial_expired.title', {
@@ -4585,7 +4585,7 @@ function oO({
     'disableKeyboardEventPropagation': !0,
     'data-testid': 'org_trial_expired_modal',
     'children': [jsx(AutoLayout, {
-      children: jsx(_$$E4, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText('payments_modal.org_trial_expired.description')
       })
     }), jsx(AutoLayout, {
@@ -4647,11 +4647,11 @@ function oj(e) {
   if (orgTrial.status !== _$$Q4.PENDING || o.status !== 'loaded') return null;
   let d = o.data;
   let c = orgTrial.planType === FPlanTierType.ENTERPRISE ? renderI18nText('payments_modal.org_trial.enterprise') : renderI18nText('payments_modal.org_trial.organization');
-  let u = d ? jsx(_$$E4, {
+  let u = d ? jsx(TextWithTruncation, {
     children: renderI18nText('payments_modal.org_trial_pending.welcome_to_your_figma_trial', {
       planText: c
     })
-  }) : jsx(_$$E4, {
+  }) : jsx(TextWithTruncation, {
     children: renderI18nText('payments_modal.org_trial_pending.your_trial_is_almost_ready')
   });
   let p = _$$A6(orgTrial.trialPeriodEnd).utc().format('ll');
@@ -4667,7 +4667,7 @@ function oj(e) {
   return jsxs(utilityNoop, {
     'className': ow,
     'size': d ? 380 : 360,
-    'title': jsx(_$$E4, {
+    'title': jsx(TextWithTruncation, {
       fontSize: 11,
       fontWeight: 'bold',
       children: u
@@ -4681,37 +4681,37 @@ function oj(e) {
       padding: {
         right: 8
       },
-      children: [jsx(_$$E4, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText('payments_modal.org_trial_pending.make_sure_things_look_right', {
           planText: c
         })
       }), jsx(oU, {
-        text: jsx(_$$E4, {
+        text: jsx(TextWithTruncation, {
           children: renderI18nText('payments_modal.org_trial_pending.expiration_date', {
             planText: c,
             endDate: p
           })
         })
       }), jsx(oU, {
-        text: jsx(_$$E4, {
+        text: jsx(TextWithTruncation, {
           children: renderI18nText('payments_modal.org_trial_pending.editor_count.seat_rename', {
             planText: c,
             editorCount: _
           })
         })
       }), jsx(oU, {
-        text: jsx(_$$E4, {
+        text: jsx(TextWithTruncation, {
           children: renderI18nText('payments_modal.org_trial_pending.no_obligation_to_purchase', {
             planText: c
           })
         })
       }), jsx(oU, {
-        text: jsx(_$$E4, {
+        text: jsx(TextWithTruncation, {
           children: renderI18nText('payments_modal.org_trial_pending.terms_and_conditions', {
             ssaLink: h
           })
         })
-      }), jsx(_$$E4, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText('payments_modal.org_trial_pending.by_clicking_agree', {
           agreeText: m,
           ssaLink: h
@@ -4719,7 +4719,7 @@ function oj(e) {
       })]
     }) : jsx('div', {
       className: _$$s3.pr8.$,
-      children: jsx(_$$E4, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText('payments_modal.org_trial_pending.trial_still_needs_admin_approval', {
           planText: c
         })
@@ -4858,14 +4858,14 @@ function oZ({
   let u = formatList(e.productLicenseTypes?.map(e => _$$E5(e)) || []);
   let p = formatList(e.productLicenseTypes?.map(e => _$$$2(e)) || []);
   let _ = e.productLicenseTypes?.length || 0;
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     'manager': a,
     'width': 380,
     'data-testid': 'product_trial_pending_modal',
     'children': jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsx(_$$E4, {
+          children: jsx(TextWithTruncation, {
             fontSize: 11,
             fontWeight: 'bold',
             children: renderI18nText('payments_modal.product_trial_pending.welcome_to_your_figma_trial')
@@ -4878,12 +4878,12 @@ function oZ({
           padding: {
             right: 8
           },
-          children: [jsx(_$$E4, {
+          children: [jsx(TextWithTruncation, {
             children: renderI18nText('payments_modal.product_trial_pending.make_sure_things_look_right', {
               productNames: u
             })
           }), jsx(oQ, {
-            text: jsx(_$$E4, {
+            text: jsx(TextWithTruncation, {
               children: renderI18nText('payments_modal.product_trial_pending.expiration_date', {
                 productNamesShort: p,
                 numProducts: _,
@@ -4891,27 +4891,27 @@ function oZ({
               })
             })
           }), jsx(oQ, {
-            text: jsx(_$$E4, {
+            text: jsx(TextWithTruncation, {
               children: renderI18nText('payments_modal.product_trial_pending.available_to_users_in_org')
             })
           }), jsx(oQ, {
-            text: jsx(_$$E4, {
+            text: jsx(TextWithTruncation, {
               children: renderI18nText('payments_modal.product_trial_pending.no_obligation_to_purchase', {
                 productNames: u,
                 numProducts: _
               })
             })
           }), jsx(oQ, {
-            text: jsx(_$$E4, {
+            text: jsx(TextWithTruncation, {
               children: renderI18nText('payments_modal.org_trial_pending.terms_and_conditions', {
                 ssaLink: d
               })
             })
           }), jsx(oQ, {
-            text: jsx(_$$E4, {
+            text: jsx(TextWithTruncation, {
               children: renderI18nText('payments_modal.product_trial_pending.help_make_decisions')
             })
-          }), jsx(_$$E4, {
+          }), jsx(TextWithTruncation, {
             children: renderI18nText('payments_modal.product_trial_pending.by_clicking_agree', {
               agreeText: c,
               ssaLink: d
@@ -5039,7 +5039,7 @@ function l_({
       mode: 'match',
       children: jsxs(_$$bL, {
         manager,
-        children: [jsx($n, {
+        children: [jsx(Button, {
           'variant': 'ghost',
           'aria-label': getI18nString('desktop_new_tab.create_new_file_in_folder', {
             folderName: p
@@ -5085,7 +5085,7 @@ function l_({
                     }
                   })
                 })
-              }), jsxs(_$$E4, {
+              }), jsxs(TextWithTruncation, {
                 truncate: !0,
                 children: [e.name, ' / ', e.project.path]
               })]
@@ -5114,7 +5114,7 @@ function l_({
                         }
                       })
                     })
-                  }), jsxs(_$$E4, {
+                  }), jsxs(TextWithTruncation, {
                     truncate: !0,
                     children: [e.name, ' / ', e.project.path]
                   })]
@@ -5125,7 +5125,7 @@ function l_({
             onClick: u(null),
             children: [jsx(Q$, {
               children: jsx(_$$A8, {})
-            }), jsx(_$$E4, {
+            }), jsx(TextWithTruncation, {
               truncate: !0,
               children: renderI18nText('sidebar.drafts')
             })]
@@ -5192,7 +5192,7 @@ function lF({
   let f = h || e === FFileType.COOPER || g && e === FFileType.FIGMAKE;
   return jsx(_$$J5, {
     brand: _$$K4(e),
-    children: jsx(_$$E6, {
+    children: jsx(ButtonPrimitive, {
       'ref': setKeyboardNavigationElement,
       'className': j()('new_file_card--fileCard--O7OCx', {
         'new_file_card--disabledCard--HLDVs': u,
@@ -5452,7 +5452,7 @@ function l3({
       }), jsx('p', {
         'className': 'recent_files--titleMetadata--G2Ju6 recent_files--metadata--MhlWS',
         'ref': o,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': d,
         'dir': 'auto',
         'children': s
@@ -5768,7 +5768,7 @@ function dE({
 }) {
   let r = useRef({});
   let n = function (e) {
-    let t = _$$U4();
+    let t = trackFileEventWithStore();
     return useMemo(() => e ?? ((e, r, n) => {
       t('LiveGraph Diff', {
         diffId: e,
@@ -6613,7 +6613,7 @@ function cg() {
       ...xk(ch.header),
       children: [jsx('span', {
         ...xk(ch.folderButton),
-        children: jsx(WW, {
+        children: jsx(ButtonLarge, {
           variant: 'ghost',
           iconPrefix: jsx(_$$e1, {}),
           onClick: () => {
@@ -6789,7 +6789,7 @@ function c2() {
   }, [I, e, d, r, f, c, n?.id, y]);
 }
 let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
-  let e = _$$U4();
+  let e = trackFileEventWithStore();
   let t = selectCurrentUser();
   let r = useCurrentPlanUser('ModeSwitcherTrackedTooltip').unwrapOr(null);
   let n = r?.planKey.type === FOrganizationLevelType.TEAM;
@@ -6817,7 +6817,7 @@ let c6 = _$$ex('dev_mode_toggle_disabled_tracked_tooltip', () => {
 let c7 = _$$ex('devmode_toggle_disabled_personal_draft', ({
   isCurrentUserFileOwner: e
 }) => {
-  let t = _$$U4();
+  let t = trackFileEventWithStore();
   return (_$$h9(() => {
     t('Dev Mode Disabled Tooltip Viewed', {
       reason: e ? 'personal_draft_owner' : 'personal_draft'
@@ -6876,15 +6876,15 @@ function ue({
   let _ = !!s && a?.id === s.creatorId;
   let h = r ?? (t ? getI18nString('dev_handoff.inspect_mode.leave_dev_mode') : getI18nString('general.dev_mode'));
   let m = {
-    'data-tooltip-type': n ?? Ib.TEXT,
+    'data-tooltip-type': n ?? KindEnum.TEXT,
     'data-tooltip': h,
     'data-tooltip-shortcut-key': r ? void 0 : t ? 'enter-design-mode' : 'enter-inspect-mode',
-    'data-tooltip-interactive': n === Ib.SPECIAL,
+    'data-tooltip-interactive': n === KindEnum.SPECIAL,
     'data-tooltip-is-current-user-file-owner': JSON.stringify(_),
     'data-onboarding-key': _$$oR,
     'data-tooltip-offset-y': -4
   };
-  let g = n === Ib.SPECIAL ? getI18nString('general.dev_mode') : h;
+  let g = n === KindEnum.SPECIAL ? getI18nString('general.dev_mode') : h;
   return (newModeWhenLoaded !== 'design' || isDesignViewLoaded) && (newModeWhenLoaded !== 'handoff' || isDevHandoffViewLoaded) ? jsx('div', {
     ...m,
     'data-tooltip-show-above': !0,
@@ -6960,7 +6960,7 @@ function ut({
     onClick_UI3_DO_NOT_REUSE: e,
     disabled: !r || p || _,
     tooltip: p ? h ? c7 : c6 : s ? getI18nString('dev_handoff.paywall.design_mode_disabled') : void 0,
-    tooltipType: p ? Ib.SPECIAL : Ib.TEXT,
+    tooltipType: p ? KindEnum.SPECIAL : KindEnum.TEXT,
     isDevHandoff: c
   });
 }
@@ -7057,7 +7057,7 @@ function uy(e) {
     activeMode,
     illustrationLoading
   } = e;
-  let n = _$$Td();
+  let n = useIsCanvasEditDisabled();
   let {
     show,
     isShowing,
@@ -7124,7 +7124,7 @@ function uT(e) {
     activeMode
   } = e;
   let r = useAtomWithSubscription(ub);
-  let n = _$$Td();
+  let n = useIsCanvasEditDisabled();
   let {
     show,
     isShowing,
@@ -7408,7 +7408,7 @@ function uY() {
         children: getI18nString('auth.sign_up_to_comment_edit_inspect')
       }), jsxs('div', {
         className: 'logged_out_banner--buttonGroup--YGRJ9',
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'secondary',
           onClick: () => {
             UK('SIGN_UP_BUTTON_BANNER');
@@ -7565,7 +7565,7 @@ function ph(e) {
   let a = z0();
   let s = getFilteredFeatureFlags().ce_il_vem_offset_path && Yh(a, 'set-tool-offset-path');
   let o = getFilteredFeatureFlags().ce_il_simplify && Yh(a, 'set-tool-simplify-vector');
-  let d = Dc(debugState.getState().selectedView.editorType);
+  let d = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
   let c = getFilteredFeatureFlags().ce_il_vem_offset_path && jsx(_$$N8, {
     activeToolId,
     disabled: !1,
@@ -7700,7 +7700,7 @@ let pf = memo(e => {
 });
 function pb() {
   let [e, t] = useState(3);
-  let r = Dc(debugState.getState().selectedView.editorType);
+  let r = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
   let n = t => analyticsEventManager.trackDefinedEvent('illustration.simplify', {
     action: t,
     productType: r,
@@ -7722,7 +7722,7 @@ function pb() {
       className: 'design_toolbelt_simplify_vector--sliderAndIconContainer--rxTBg',
       children: [jsx(pg, {
         'data-tooltip': getI18nString('fullscreen.toolbar.simplify_vector.tooltip.simpler'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip-show-above': !0
       }), jsx('div', {
         className: 'design_toolbelt_simplify_vector--sliderContainer--RmzzC',
@@ -7742,19 +7742,19 @@ function pb() {
         })
       }), jsx(pf, {
         'data-tooltip': getI18nString('fullscreen.toolbar.simplify_vector.tooltip.more_detailed'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip-show-above': !0
       })]
     }), jsx(_$$X4, {
       extended: !0
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: 'secondary',
       onClick: () => {
         n('cancel');
         SimplifyVectorToolTsApi?.cancel();
       },
       children: getI18nString('fullscreen.toolbar.simplify_vector.cancel')
-    }), jsx(_$$E6, {
+    }), jsx(ButtonPrimitive, {
       'onClick': () => {
         n('apply');
         SimplifyVectorToolTsApi?.apply();
@@ -7807,7 +7807,7 @@ function pP({
     let n = useCanAccessFullDevMode();
     let i = _$$eY();
     let [a, s] = useState(!1);
-    _$$D5({
+    useFullscreenViewportUpdates({
       subscribeToUpdates_expensive: !0
     }, useCallback(a => {
       if (!n || a.isPanning || a.isZooming || e) return;
@@ -7817,7 +7817,7 @@ function pP({
         s(!1);
         return;
       }
-      let d = Yb(a, {
+      let d = scaleRect(a, {
         x: l.x,
         y: l.y,
         width: l.w,
@@ -7892,7 +7892,7 @@ function pP({
   }) : null;
 }
 function pB() {
-  let e = Dc(debugState.getState().selectedView.editorType);
+  let e = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
   let t = t => analyticsEventManager.trackDefinedEvent('illustration.offset_path', {
     action: t,
     productType: e,
@@ -7957,14 +7957,14 @@ function pB() {
         })]
       }), jsx(_$$X4, {
         extended: !0
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: 'secondary',
         onClick: () => {
           t('cancel');
           OffsetPathTsApi?.cancel();
         },
         children: getI18nString('fullscreen.toolbar.offset-path-cancel-button')
-      }), jsx(_$$E6, {
+      }), jsx(ButtonPrimitive, {
         'onClick': () => {
           t('apply');
           Fullscreen?.triggerAction('set-tool-default', null);
@@ -8062,7 +8062,7 @@ function pz() {
   let _ = o ? FProductAccessType.DEV_MODE : FProductAccessType.DESIGN;
   let h = useMemo(() => getProvisionalAccessBanner(_), [getProvisionalAccessBanner, _]);
   let [m, g] = useState(!1);
-  let f = _$$Td();
+  let f = useIsCanvasEditDisabled();
   let E = selectCurrentFile();
   let y = VA(E?.project);
   let b = _$$I4();
@@ -8251,7 +8251,7 @@ let p4 = {
       showModal: () => e(showModalHandler({
         type: _$$R7,
         data: {
-          source: _$$Zm.IFRAME
+          source: ComposerLocation.IFRAME
         }
       })),
       modalType: _$$R7.type
@@ -8321,7 +8321,7 @@ class _a extends RecordingPureComponent {
       className: i ? 'notification--centeredContainer--KOKEL' : '',
       children: jsxs('div', {
         className: this.notificationStyle(),
-        children: [t && jsx(_$$B2, {
+        children: [t && jsx(SvgComponent, {
           className: r ? 'notification--iconError--aqnJU notification--icon--ZWNx5' : 'notification--icon--ZWNx5',
           svg: t
         }), jsx(_$$T3, {
@@ -8331,7 +8331,7 @@ class _a extends RecordingPureComponent {
           className: 'notification--actions--GUX-p',
           children: [n && jsx(gZ, {
             className: _n,
-            children: jsx(_$$E6, {
+            children: jsx(ButtonPrimitive, {
               onClick: this.onAccept,
               recordingKey: generateRecordingKey(this.props, 'accept'),
               className: _r,
@@ -8339,7 +8339,7 @@ class _a extends RecordingPureComponent {
             })
           }), jsx(HG, {
             className: _n,
-            children: jsx(_$$E6, {
+            children: jsx(ButtonPrimitive, {
               onClick: this.onDismiss,
               className: _r,
               children: renderI18nText('base_notifications.dismiss')
@@ -8535,11 +8535,11 @@ function _I() {
         size: 54
       }), jsx('div', {
         className: 'locked_account_view--spinnerContainer--qmoqQ',
-        children: jsx(kt, {})
+        children: jsx(LoadingSpinner, {})
       })]
     }) : jsx('div', {
       className: 'locked_account_view--worldIllo--ZgRY9',
-      children: jsx(_$$B2, {
+      children: jsx(SvgComponent, {
         svg: _$$A16,
         useOriginalSrcFills_DEPRECATED: !0
       })
@@ -8805,7 +8805,7 @@ let _C = memo(() => {
                 target_user_id: e.targetUserId,
                 client_id: e.clientId
               }, 'livegraph') === 0,
-              reason: _$$oA(e.reason)
+              reason: getResourceDataOrFallback(e.reason)
             };
           }
         }
@@ -8910,7 +8910,7 @@ let _C = memo(() => {
                   }), jsx(iL, {}), jsx(_$$Z, {
                     positioner: Pm
                   }), jsx(_$$pq, {
-                    getLinkMetadata: _$$M
+                    getLinkMetadata: pasteEmbedThunk
                   }), jsx(_$$V, {
                     blockedUILoadingIndicator: i,
                     dispatch: e

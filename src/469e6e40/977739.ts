@@ -4,17 +4,17 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { getAtomMutate } from "../figma_app/566371";
 import { z as _$$z, Z } from "../905/306088";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
@@ -122,7 +122,7 @@ function $$q(e) {
       padding: {
         top: 2
       },
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontWeight: "regular",
         color: "" !== autocomplete.errorMessage ? "danger" : "default",
         fontSize: 11,
@@ -222,13 +222,13 @@ let $$z0 = registerModal(function ({
   let [F, z] = useState(Rs());
   let [V, W] = useState(!1);
   let [H, Y] = useState(!1);
-  let J = "loaded" !== T.status ? jsx(kt, {
+  let J = "loaded" !== T.status ? jsx(LoadingSpinner, {
     className: _$$s.mlAuto.mrAuto.mt32.$
   }) : jsxs(Fragment, {
     children: [jsx(AutoLayout, {
       direction: "vertical",
       spacing: 0,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 11,
         children: renderI18nText("new_editor_notifications_modal.how_often_would_you_like_receive_emails")
@@ -256,13 +256,13 @@ let $$z0 = registerModal(function ({
       children: [jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontWeight: "medium",
           fontSize: 11,
           children: renderI18nText("new_editor_notifications_modal.who_should_get_them")
         }), jsx(hK, {
           height: 1
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           fontWeight: "regular",
           color: "secondary",
           fontSize: 11,
@@ -297,7 +297,7 @@ let $$z0 = registerModal(function ({
                 padding: {
                   left: 4
                 },
-                children: [jsx(_$$E, {
+                children: [jsx(TextWithTruncation, {
                   fontSize: 11,
                   fontWeight: "medium",
                   children: function (e) {
@@ -331,10 +331,10 @@ let $$z0 = registerModal(function ({
   });
   return jsx(fu, {
     name: "new_editor_notifications_modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: C,
       width: "lg",
-      children: jsxs(Rq, {
+      children: jsxs(ModalFormContents, {
         onSubmit: async n => {
           if (n.preventDefault(), P === UI.SPECIFIC_ADMINS && 0 === F.tokens.length && 0 !== M.size) {
             z({
@@ -374,7 +374,7 @@ let $$z0 = registerModal(function ({
               top: 8,
               bottom: 8
             },
-            children: [jsx(_$$E, {
+            children: [jsx(TextWithTruncation, {
               children: renderI18nText("new_editor_notifications_modal.get_emailed_when_members_upgrade_from_free_to_paid")
             }), J]
           })

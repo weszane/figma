@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 let s = window.matchMedia("screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 2dppx)");
 export class $$o0 extends PureComponent {
   constructor() {
@@ -27,7 +27,7 @@ export class $$o0 extends PureComponent {
       ...i
     } = this.props;
     let r = !this.state.matches && fallbackSvg ? fallbackSvg : svg;
-    return jsx(B, {
+    return jsx(SvgComponent, {
       svg: r,
       ...i
     });

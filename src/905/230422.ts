@@ -3,7 +3,7 @@ import { Component, createRef } from "react";
 import { debounce } from "../905/915765";
 import { DEFAULT_PAGE_SIZE, hasMorePages, fetchPaginatedData, PAGINATION_NEXT } from "../figma_app/661371";
 import { isMobileUA } from "../figma_app/778880";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
@@ -221,7 +221,7 @@ class S extends Component {
               }
             }) : void 0,
             hideFollowsYouBadge: this.props.profile.id === this.props.currentUserProfileId && e === UserProfileTab.FOLLOWERS
-          }, t.profile_handle)), t.loading && jsx(kt, {
+          }, t.profile_handle)), t.loading && jsx(LoadingSpinner, {
             className: "follows_list_modal--loadingSpinner--OmkLk"
           })]
         })

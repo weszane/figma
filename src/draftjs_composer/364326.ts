@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { I as _$$I, _Z } from "../figma_app/819288";
 import { getI18nString } from "../905/303541";
-import { Dw, hm } from "../905/380385";
+import { ComposerType, NEW_COMMENT_ID } from "../905/380385";
 import { Uu } from "../figma_app/585209";
 import { _B } from "../905/852370";
 import { C as _$$C } from "../905/937623";
@@ -69,12 +69,12 @@ export function $$g0(e) {
         onCancel: x,
         onSubmit: v,
         placeholderText: e.placeholderText ? e.placeholderText : getI18nString("fig_feed.add_a_comment"),
-        recordingKey: Dw.feed,
+        recordingKey: ComposerType.feed,
         scrollToBottom: e.scrollToBottom ? e.scrollToBottom : lQ,
         setIsEditorFocused: g.setIsEditorFocused,
         submitOnEnter: e.submitOnEnter,
         submitText: getI18nString("comments.post"),
-        threadId: hm,
+        threadId: NEW_COMMENT_ID,
         threadPosition: null,
         typeahead: E,
         updateAttachment: e.updateAttachment,

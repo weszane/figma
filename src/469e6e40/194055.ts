@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { XB } from "../figma_app/481749";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { A as _$$A2 } from "../905/72153";
@@ -32,7 +32,7 @@ import { yX } from "../figma_app/918700";
 import { Ef } from "../905/81982";
 import { l as _$$l } from "../469e6e40/774192";
 import { A as _$$A3 } from "../5724/663128";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { lQ } from "../905/934246";
 import { z as _$$z2 } from "../905/239603";
 import { c$, ms } from "../figma_app/236327";
@@ -44,7 +44,7 @@ import { DV } from "../905/739964";
 import { A as _$$A4 } from "../6828/154709";
 import { h1 } from "../905/986103";
 import { getUserId, selectCurrentUser } from "../905/372672";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A as _$$A5 } from "../5724/933949";
 import { stripHtmlTags } from "../905/491152";
 import { formatNumber } from "../figma_app/930338";
@@ -71,7 +71,7 @@ let L = registerModal(function ({
   extensionType: s
 }) {
   return jsx(yX, {
-    confirmationTitle: jsx(_$$E, {
+    confirmationTitle: jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: renderI18nText("resources_tab.extension_revoke_modal.title", {
         extensionName: e
@@ -80,9 +80,9 @@ let L = registerModal(function ({
     confirmText: getI18nString("resources_tab.extension_revoke_modal.confirmation_button"),
     onConfirm: t,
     popStack: !0,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("widget" === s ? "resources_tab.extension_revoke_modal.body.widget" : "resources_tab.extension_revoke_modal.body.plugin", {
-        orgName: jsx(_$$E, {
+        orgName: jsx(TextWithTruncation, {
           fontWeight: "semi-bold",
           children: a
         })
@@ -102,20 +102,20 @@ function F(e) {
   } = e;
   if (!requesters || 0 === requesters.length) return null;
   let a = null;
-  a = 1 === requesters.length ? jsx(_$$E, {
+  a = 1 === requesters.length ? jsx(TextWithTruncation, {
     fontSize: 11,
     color: "secondary",
     children: renderI18nText("resources_tab.approved_plugins.modal.requested_by.one", {
       requesterName: requesters[0].name
     })
-  }) : 2 === requesters.length ? jsx(_$$E, {
+  }) : 2 === requesters.length ? jsx(TextWithTruncation, {
     fontSize: 11,
     color: "secondary",
     children: renderI18nText("resources_tab.approved_plugins.modal.requested_by.two", {
       requesterName1: requesters[0].name,
       requesterName2: requesters[1].name
     })
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     fontSize: 11,
     color: "secondary",
     children: renderI18nText("resources_tab.approved_plugins.modal.requested_by.many", {
@@ -239,7 +239,7 @@ function q({
             icon: "chevron-left-32",
             onClick: a,
             variant: "text"
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             children: renderI18nText("plugin" === v ? "resources_tab.approved_plugins.modal.approve_plugin" : "resources_tab.approved_plugins.modal.approve_widget")
           })]
         }), jsx(kq, {
@@ -263,7 +263,7 @@ function q({
           },
           dataTestId: "org-allowlist-toggle"
         })
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.approved_plugins.modal.allow_for_all_files_and_drafts_in_org_workspaces", {
           orgName: t.name
         })
@@ -295,7 +295,7 @@ function q({
             })
           }), jsxs("div", {
             className: _$$s.flex.flexColumn.gap4.$,
-            children: [jsx(_$$E, {
+            children: [jsx(TextWithTruncation, {
               children: e.name
             }), jsx(F, {
               requesters: f.get(e.id)
@@ -308,7 +308,7 @@ function q({
       children: ["review" === r && jsxs(Fragment, {
         children: [jsx(_$$$, {
           onClick: a,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("resources_tab.approved_plugins.modal.cancel")
           })
         }), jsx(_$$$, {
@@ -342,14 +342,14 @@ function q({
           },
           disabled: !W,
           dataTestId: "approve-button",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("resources_tab.approved_plugins.modal.approve")
           })
         })]
       }), "manage" === r && jsxs(Fragment, {
         children: [jsx(_$$$, {
           onClick: a,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("resources_tab.approved_plugins.modal.back")
           })
         }), jsx(_$$$, {
@@ -374,7 +374,7 @@ function q({
           },
           dataTestId: "save-changes-button",
           disabled: !V,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("resources_tab.approved_plugins.modal.save_changes")
           })
         })]
@@ -500,17 +500,17 @@ function ea({
     trusted: !0,
     target: "_blank",
     "data-testid": "upgrade-to-enterprise-link",
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 11,
       children: renderI18nText("resources_tab.extension_usage_data.upgrade_enterprise_link")
     })
   });
-  let c = "widget" === a ? jsx(_$$E, {
+  let c = "widget" === a ? jsx(TextWithTruncation, {
     fontSize: 11,
     children: renderI18nText("resources_tab.extension_usage_data.upgrade_enterprise_widgets", {
       upgradeLink: o
     })
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     fontSize: 11,
     children: renderI18nText("resources_tab.extension_usage_data.upgrade_enterprise_plugins", {
       upgradeLink: o
@@ -537,16 +537,16 @@ function ea({
               size: Pf.MEDIUM
             }), t && jsx(Ro, {
               entity: {}
-            }), jsx(_$$E, {
+            }), jsx(TextWithTruncation, {
               fontSize: 11,
               fontWeight: "medium",
               children: e.user_name
             })]
-          }), t && jsx(_$$E, {
+          }), t && jsx(TextWithTruncation, {
             fontSize: 11,
             color: "secondary",
             children: renderI18nText("resources_tab.extension_usage_data.placeholder_runs")
-          }), !t && jsx(_$$E, {
+          }), !t && jsx(TextWithTruncation, {
             fontSize: 11,
             color: "secondary",
             children: renderI18nText("resources_tab.extension_usage_data.runs", {
@@ -576,7 +576,7 @@ function en({
     className: _$$s.flex.flexColumn.pl16.pr16.$,
     children: s.map(e => jsx("div", {
       className: _$$s.pt16.breakWord.alignLeft.pr8.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         children: e
       })
@@ -633,7 +633,7 @@ function ei(e) {
           defaultClass: "",
           onClick: () => v(!b),
           dataTestId: "usage-window-dropdown",
-          children: [et.get(g), jsx(_$$B, {
+          children: [et.get(g), jsx(SvgComponent, {
             svg: _$$A4,
             className: _$$s.colorIconSecondary.inlineBlock.pl8.$
           })]
@@ -648,7 +648,7 @@ function ei(e) {
           defaultClass: "",
           onClick: a ? lQ : () => m(!c),
           dataTestId: "user-workspace-dropdown",
-          children: [0 === l ? renderI18nText("resources_tab.extension_usage_data.users") : renderI18nText("resources_tab.extension_usage_data.workspaces"), !a && jsx(_$$B, {
+          children: [0 === l ? renderI18nText("resources_tab.extension_usage_data.users") : renderI18nText("resources_tab.extension_usage_data.workspaces"), !a && jsx(SvgComponent, {
             svg: _$$A4,
             className: _$$s.colorIconSecondary.inlineBlock.pl8.$
           })]
@@ -666,13 +666,13 @@ function ei(e) {
         className: _$$s.flex.flexColumn.alignCenter.$,
         children: [jsx("div", {
           "data-testid": "total-num-runs",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 14,
             fontWeight: "semi-bold",
             children: a ? "--" : f.n_extension_actions
           })
         }), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 11,
             color: "secondary",
             children: renderI18nText("resources_tab.extension_usage_data.total_runs")
@@ -682,13 +682,13 @@ function ei(e) {
         className: _$$s.flex.flexColumn.alignCenter.$,
         children: [jsx("div", {
           "data-testid": "total-num-users",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 14,
             fontWeight: "semi-bold",
             children: a ? "--" : f.n_extension_users
           })
         }), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 11,
             color: "secondary",
             children: renderI18nText("resources_tab.extension_usage_data.users")
@@ -774,18 +774,18 @@ function ed({
         role: "button",
         tabIndex: 0,
         className: _$$s.noWrap.overflowHidden.ellipsis.cursorPointer.$,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": x,
         "data-tooltip-show-immediately": !0,
         onMouseDown: e => d(e, x),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           children: g.name
         })
       }), jsx("div", {
         className: _$$s.noWrap.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
           children: jsx(h1, {
@@ -795,14 +795,14 @@ function ed({
       })]
     }), jsx("div", {
       className: _$$s.ml32.mt4.overflowBreakWord.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "secondary",
         children: l
       })
     }), c && jsx("div", {
       className: _$$s.ml32.mt4.overflowBreakWord.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "default",
         children: c
@@ -859,12 +859,12 @@ function eu(e) {
     numWorkspaces,
     isOrgAllowlisted
   } = e;
-  return (isOrgAllowlisted ? t = jsx(_$$E, {
+  return (isOrgAllowlisted ? t = jsx(TextWithTruncation, {
     fontSize: 11,
     fontWeight: "regular",
     color: "success",
     children: renderI18nText("resources_tab.approved_plugins.table.approved_for_all_workspaces")
-  }) : numWorkspaces > 0 && (t = jsx(_$$E, {
+  }) : numWorkspaces > 0 && (t = jsx(TextWithTruncation, {
     fontSize: 11,
     fontWeight: "regular",
     color: "success",
@@ -873,7 +873,7 @@ function eu(e) {
     })
   })), t) ? jsxs("div", {
     className: _$$s.colorBg.py12.px16.flex.flexRow.gap8.bb1.bSolid.colorBorder.$,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       width: "16px",
       height: "16px",
       svg: _$$A5,
@@ -898,7 +898,7 @@ function em(e) {
       className: _$$s.colorBg.py12.px16.flex.flexRow.gap16.bb1.bSolid.colorBorder.$,
       children: [jsx("button", {
         onClick: () => p("requests"),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           color: "requests" === m ? "default" : "secondary",
@@ -912,7 +912,7 @@ function em(e) {
           });
         },
         "data-testid": "extension-usage-tab",
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           color: "usage" === m ? "default" : "secondary",
@@ -948,7 +948,7 @@ function ej({
     "data-testid": "extension-allowlist-overview-section",
     children: [jsxs("div", {
       className: _$$s.flex.flexColumn.gap8.$,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "semi-bold",
         truncate: "end",
@@ -957,7 +957,7 @@ function ej({
         className: _$$s.flex.gap4.$,
         children: [jsx(ew, {
           plugin: t
-        }), "review" === e && jsx(_$$E, {
+        }), "review" === e && jsx(TextWithTruncation, {
           color: "secondary",
           children: renderI18nText("resources_tab.approved_plugins.modal.user_count", {
             count: i
@@ -993,10 +993,10 @@ function ey({
   }, [e]);
   return jsxs("div", {
     className: _$$s.flex.flexColumn.$,
-    children: [r ? jsx(_$$E, {
+    children: [r ? jsx(TextWithTruncation, {
       ref: t,
       children: stripHtmlTags(e).trim()
-    }) : jsx(_$$E, {
+    }) : jsx(TextWithTruncation, {
       truncate: "line-clamp",
       lineClamp: 3,
       ref: t,
@@ -1050,18 +1050,18 @@ function ek({
   profiles: e
 }) {
   let [t, a, ...s] = e;
-  return t ? a ? 0 === s.length ? jsx(_$$E, {
+  return t ? a ? 0 === s.length ? jsx(TextWithTruncation, {
     color: "secondary",
     children: renderI18nText("resources_tab.approved_plugins.modal.attribution_two_creators", {
       creator1: t.name,
       creator2: a.name
     })
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     color: "secondary",
     children: renderI18nText("resources_tab.approved_plugins.modal.attribution_multiple_creators", {
       creator1: t.name
     })
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     color: "secondary",
     children: renderI18nText("resources_tab.approved_plugins.modal.attribution_single_creator", {
       creator: t.name
@@ -1082,7 +1082,7 @@ function eE({
   }, [currentPluginVersion?.manifest]);
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap8.$,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("resources_tab.approved_plugins.modal.security")
     }), jsx(_$$b, {
@@ -1102,7 +1102,7 @@ function eC({
 }) {
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap8.$,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("resources_tab.approved_plugins.modal.licenses")
     }), jsx(_$$x, {
@@ -1227,13 +1227,13 @@ function eq(e) {
       },
       dataTestId: "universal-editor-button",
       disabled: w,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": w && y ? getI18nString("resources_tab.approved_plugins.modal.try_it_out_ecc_tooltip", {
         orgName: y
       }) : void 0,
       children: jsxs("div", {
         className: _$$s.flex.itemsCenter.gap4.$,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           children: renderI18nText("resources_tab.approved_plugins.modal.try_it_out")
         }), jsx(_$$I, {
           icon: "chevron-down-16"
@@ -1286,11 +1286,11 @@ function e$(e) {
     },
     dataTestId: "single-editor-button",
     disabled: b,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": b && f ? getI18nString("resources_tab.approved_plugins.modal.try_it_out_ecc_tooltip", {
       orgName: f
     }) : void 0,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.modal.try_it_out")
     })
   });
@@ -1321,7 +1321,7 @@ function eB(e) {
         userId: c
       });
     },
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.modal.decline")
     })
   });
@@ -1343,7 +1343,7 @@ function eG(e) {
   return workspaces.length > 0 ? jsx(_$$$, {
     variant: "primary",
     onClick: goToEditTab,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.modal.approve\u2026")
     })
   }) : jsx(_$$$, {
@@ -1383,7 +1383,7 @@ function eG(e) {
       }
       d(popModalStack());
     },
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.modal.approve")
     })
   });
@@ -1405,7 +1405,7 @@ function ez(e) {
   return workspaces.length > 0 ? jsx(_$$$, {
     variant: "primary",
     onClick: goToEditTab,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.modal.edit_approvals")
     })
   }) : jsx(_$$$, {
@@ -1430,7 +1430,7 @@ function ez(e) {
       });
       d(popModalStack());
     },
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.modal.remove")
     })
   });
@@ -1526,7 +1526,7 @@ export function $$eV0({
                 action: "Open in community"
               });
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("resources_tab.approved_plugins.modal.open_in_community")
             })
           }), "review" === m && jsxs(Fragment, {

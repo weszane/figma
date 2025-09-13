@@ -1,5 +1,5 @@
 import { z } from "../905/239603";
-import { KS } from "../figma_app/45218";
+import { ExtendedCommentSchema } from "../figma_app/45218";
 import { UL } from "../figma_app/306946";
 let $$s3 = -200;
 let $$o0 = 10;
@@ -20,7 +20,7 @@ let $$_7 = z.object({
   total_hits: z.number().optional()
 });
 z.object({
-  comments: z.array(KS).nullable(),
+  comments: z.array(ExtendedCommentSchema).nullable(),
   total_count: z.number().optional()
 });
 export var $$h1 = (e => (e.DescriptionView = "descriptionViewSection", e.CommentsView = "commentsViewSection", e))($$h1 || {});

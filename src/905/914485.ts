@@ -13,7 +13,7 @@ import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { In } from "../905/672640";
 import { Q8, sC, R9 } from "../905/61477";
 import { XW, Yb } from "../905/182534";
@@ -72,7 +72,7 @@ function T({
   });
   return jsx(cr, {
     href: "",
-    icon: jsx(B, {
+    icon: jsx(SvgComponent, {
       className: "faceted_search_preview_recent_row--icon--6eUrW",
       svg: _$$A
     }),

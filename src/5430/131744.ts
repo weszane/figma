@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import o from "classnames";
 import { l as _$$l } from "../905/745972";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
@@ -72,7 +72,7 @@ export function $$x0({
         className: "category_links_container--subcategory--Wzmn3 text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: i
       }, e))
-    }), g && jsx($n, {
+    }), g && jsx(Button, {
       variant: "link",
       onClick: () => {
         y(!0);

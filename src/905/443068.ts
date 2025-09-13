@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 let o = {
   ghost: "icon-button__ghost__1ok6j",
   secondary: "icon-button__secondary__-jfOG",
@@ -17,7 +17,7 @@ let $$l0 = forwardRef(({
   let c = l["aria-label"];
   "data-tooltip" in l ? c = l["data-tooltip"] : "data-tooltip" in i && (c = i["data-tooltip"]);
   let u = l["data-tooltip-type"] || i["data-tooltip-type"] || "text";
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ...l,
     ref: d,
     htmlAttributes: {

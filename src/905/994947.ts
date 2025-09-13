@@ -23,7 +23,7 @@ import { g_ } from "../905/646788";
 import { trackEventAnalytics } from "../905/449184";
 import { getViewState } from "../905/612521";
 import { V3, UN } from "../figma_app/976345";
-import { k1 } from "../figma_app/314264";
+import { trackFileBrowserFileClicked } from "../figma_app/314264";
 import { xS } from "../figma_app/193867";
 import { W as _$$W } from "../905/25249";
 import { VisualBellActions } from "../905/302958";
@@ -118,7 +118,7 @@ function x(e) {
         "fullscreen" === n.view && n.fileKey && e && (trackEventAnalytics("Open File Click", {
           fileKey: n.fileKey,
           uiSelectedView: JSON.stringify(e.view)
-        }), k1(n.fileKey, {
+        }), trackFileBrowserFileClicked(n.fileKey, {
           selectedViewName: e.view
         }));
         t(sf(n));

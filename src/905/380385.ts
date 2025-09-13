@@ -1,77 +1,186 @@
-import { throwTypeError } from "../figma_app/465776";
-import { z, Ip } from "../905/239603";
-export let $$a7 = "at-mentions-typeahead";
-var $$s3 = (e => (e.prevButton = "prevButton", e.nextButton = "nextButton", e.accessibilityCommentPin = "accessibilityCommentPin", e))($$s3 || {});
-var $$o2 = (e => (e[e.BUSY = 0] = "BUSY", e[e.READY = 1] = "READY", e))($$o2 || {});
-let $$l10 = "new-comment-id";
-let $$d5 = 1;
-export function $$c13(e) {
-  switch (e) {
+import { z } from 'zod'
+import { throwTypeError } from '../figma_app/465776'
+import * as Ip from '../figma_app/709165'
+
+/**
+ * Type for at-mentions typeahead identifier.
+ * Original: $$a7
+ */
+export const AT_MENTIONS_TYPEAHEAD = 'at-mentions-typeahead'
+
+/**
+ * Enum for navigation buttons and accessibility pin.
+ * Original: $$s3
+ */
+export const NAVIGATION_BUTTONS = (() => {
+  const obj = {
+    prevButton: 'prevButton',
+    nextButton: 'nextButton',
+    accessibilityCommentPin: 'accessibilityCommentPin',
+  }
+  return obj
+})()
+
+/**
+ * Enum for busy/ready states.
+ * Original: $$o2
+ */
+export enum BusyReadyState {
+  BUSY = 0,
+  READY = 1,
+}
+
+/**
+ * New comment id constant.
+ * Original: $$l10
+ */
+export const NEW_COMMENT_ID = 'new-comment-id'
+
+/**
+ * Default comment state value.
+ * Original: $$d5
+ */
+export const DEFAULT_COMMENT_STATE = 1
+
+/**
+ * Checks if the comment state is active.
+ * Original: $$c13
+ * @param state - The comment state.
+ * @returns True if active, false otherwise.
+ */
+export function isCommentStateActive(state: number): boolean {
+  switch (state) {
     case 1:
-      return !0;
+      return true
     case 2:
     case 0:
-      return !1;
+      return false
     default:
-      throwTypeError(e);
+      throwTypeError(state)
   }
 }
-export function $$u6(e) {
-  switch (e) {
+
+/**
+ * Checks if the comment state is valid for update.
+ * Original: $$u6
+ * @param state - The comment state.
+ * @returns True if valid for update, false otherwise.
+ */
+export function isCommentStateUpdatable(state: number): boolean {
+  switch (state) {
     case 1:
     case 2:
-      return !0;
+      return true
     case 0:
-      return !1;
+      return false
     default:
-      throwTypeError(e);
+      throwTypeError(state)
   }
 }
-export function $$p8(e) {
-  switch (e) {
+
+/**
+ * Checks if the comment state is valid for posting.
+ * Original: $$p8
+ * @param state - The comment state.
+ * @returns True if valid for posting, false otherwise.
+ */
+export function isCommentStatePostable(state: number): boolean {
+  switch (state) {
     case 1:
     case 2:
-      return !0;
+      return true
     case 0:
-      return !1;
+      return false
     default:
-      throwTypeError(e);
+      throwTypeError(state)
   }
 }
-export function $$m9(e) {
-  switch (e) {
+
+/**
+ * Checks if the comment state is valid for moderation.
+ * Original: $$m9
+ * @param state - The comment state.
+ * @returns True if valid for moderation, false otherwise.
+ */
+export function isCommentStateModeratable(state: number): boolean {
+  switch (state) {
     case 1:
-      return !0;
+      return true
     case 2:
     case 0:
-      return !1;
+      return false
     default:
-      throwTypeError(e);
+      throwTypeError(state)
   }
 }
-export var $$h12 = (e => (e[e.FEED_POST = 0] = "FEED_POST", e[e.COMMENT_THREAD = 1] = "COMMENT_THREAD", e[e.LITMUS_COMMENT_THREAD = 2] = "LITMUS_COMMENT_THREAD", e))($$h12 || {});
-export function $$g4(e) {
-  if (e) return {
-    added: Object.values(e.attachments).map(e => e.id),
-    deleted: e.deleted
-  };
+
+/**
+ * Enum for thread types.
+ * Original: $$h12
+ */
+export enum ThreadType {
+  FEED_POST = 0,
+  COMMENT_THREAD = 1,
+  LITMUS_COMMENT_THREAD = 2,
 }
-export var $$f1 = (e => (e.$$new = "newCommentComposer", e.reply = "replyCommentComposer", e.edit = "editCommentComposer", e.feed = "FeedPostThreadCommentComposer", e.feedPopover = "FeedPostPopoverModalThreadCommentComposer", e.quickReply = "quickReplyCommentComposer", e))($$f1 || {});
-export function $$_0(e) {
-  switch (e) {
-    case "newCommentComposer":
-    case "replyCommentComposer":
-    case "editCommentComposer":
-    case "quickReplyCommentComposer":
-      return !1;
-    case "FeedPostThreadCommentComposer":
-    case "FeedPostPopoverModalThreadCommentComposer":
-      return !0;
-    default:
-      throwTypeError(e);
+
+/**
+ * Returns attachment changes for a comment.
+ * Original: $$g4
+ * @param e - The comment object.
+ * @returns Object with added and deleted attachment ids.
+ */
+export function getAttachmentChanges(e: any): { added: string[], deleted: any } | undefined {
+  if (e) {
+    return {
+      added: Object.values(e.attachments).map((attachment: any) => attachment.id),
+      deleted: e.deleted,
+    }
   }
 }
-export let $$A11 = z.object({
+
+/**
+ * Enum for composer types.
+ * Original: $$f1
+ */
+export const ComposerType = (() => {
+  const obj = {
+    new: 'newCommentComposer',
+    reply: 'replyCommentComposer',
+    edit: 'editCommentComposer',
+    feed: 'FeedPostThreadCommentComposer',
+    feedPopover: 'FeedPostPopoverModalThreadCommentComposer',
+    quickReply: 'quickReplyCommentComposer',
+  }
+  return obj
+})()
+
+/**
+ * Checks if the composer type is for feed post.
+ * Original: $$_0
+ * @param type - The composer type.
+ * @returns True if feed post type, false otherwise.
+ */
+export function isFeedPostComposer(type: string): boolean {
+  switch (type) {
+    case 'newCommentComposer':
+    case 'replyCommentComposer':
+    case 'editCommentComposer':
+    case 'quickReplyCommentComposer':
+      return false
+    case 'FeedPostThreadCommentComposer':
+    case 'FeedPostPopoverModalThreadCommentComposer':
+      return true
+    default:
+      throwTypeError(type)
+  }
+}
+
+/**
+ * Zod schema for comment.
+ * Original: $$A11
+ */
+export const CommentSchema = z.object({
   id: z.string(),
   message: z.string(),
   created_at: z.string(),
@@ -79,19 +188,21 @@ export let $$A11 = z.object({
   client_meta: Ip.ignore().nullable(),
   resolved_at: z.string().nullable(),
   edited_at: z.string().nullable(),
-  hidden_at: z.string().nullable()
-});
-export const BL = $$_0;
-export const Dw = $$f1;
-export const EB = $$o2;
-export const Eq = $$s3;
-export const Gq = $$g4;
-export const IT = $$d5;
-export const MV = $$u6;
-export const Qd = $$a7;
-export const Vk = $$p8;
-export const b7 = $$m9;
-export const hm = $$l10;
-export const iG = $$A11;
-export const kT = $$h12;
-export const m = $$c13;
+  hidden_at: z.string().nullable(),
+})
+
+// Export refactored names for external usage
+export const BL = isFeedPostComposer
+export const Dw = ComposerType
+export const EB = BusyReadyState
+export const Eq = NAVIGATION_BUTTONS
+export const Gq = getAttachmentChanges
+export const IT = DEFAULT_COMMENT_STATE
+export const MV = isCommentStateUpdatable
+export const Qd = AT_MENTIONS_TYPEAHEAD
+export const Vk = isCommentStatePostable
+export const b7 = isCommentStateModeratable
+export const hm = NEW_COMMENT_ID
+export const iG = CommentSchema
+export const kT = ThreadType
+export const m = isCommentStateActive

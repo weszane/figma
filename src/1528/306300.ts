@@ -9,7 +9,7 @@ import c from "../vendor/223926";
 import { customHistory } from "../905/612521";
 import { generateRecordingKey } from "../figma_app/878298";
 import { logError } from "../905/714362";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Wo } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
@@ -18,7 +18,7 @@ import { ol } from "../figma_app/852050";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Sh } from "../figma_app/889655";
 import { LibraryTabEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { l6, c$, sK } from "../905/794875";
@@ -211,7 +211,7 @@ export function $$W1(e) {
     let n = [];
     let l = jsx("div", {
       className: F,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: M,
         svg: _$$A
       })
@@ -233,7 +233,7 @@ export function $$W1(e) {
     let i = u()(t, e => e.modeId.collectionKey);
     let s = jsx("div", {
       className: F,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: M,
         svg: _$$A
       })
@@ -344,7 +344,7 @@ export function $$W1(e) {
     actionOnPointerDown: !0,
     htmlAttributes: {
       "data-tooltip": getI18nString("general.remove"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$f, {})
   });

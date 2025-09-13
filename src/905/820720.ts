@@ -12,7 +12,7 @@ import { SupportedPlatforms, WEB, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML }
 import { findUnitSchema, getCodegenLanguagePreference } from "../905/515076";
 import { $1, j8, _P } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { isDevModeWithCodegen } from "../figma_app/300692";
 import { hasLocalFileId, isPluginAllowListed } from "../figma_app/155287";
 import { getCodegenLanguages } from "../905/661977";
@@ -78,7 +78,7 @@ export function $$x0({
   } = _$$n();
   let w = _P(g?.id || "", !!g);
   let C = useSelector(e => e.whitelistedPlugins);
-  let T = sZ() || null;
+  let T = useCurrentUserOrg() || null;
   return useMemo(() => {
     let r = Object.values(I).filter(isDevModeWithCodegen);
     let a = Object.values(x);

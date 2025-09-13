@@ -12,9 +12,9 @@ import { Wx } from "../figma_app/708845";
 import { getI18nString } from "../905/303541";
 import { Ho } from "../figma_app/308685";
 import { EE, lB } from "../figma_app/731583";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { n as _$$n } from "../9410/774045";
 import { S as _$$S } from "../9410/565436";
@@ -75,12 +75,12 @@ let $$O1 = memo(function () {
     };
   }, [t, d]);
   let c = !!d && !!i;
-  let u = _X({
+  let u = getViewportInfo({
     subscribeToUpdates_expensive: c
   });
   let p = useMemo(() => {
     if (!i) return {};
-    let e = Yb(u, i);
+    let e = scaleRect(u, i);
     let t = e.x + u.x;
     let r = e.y + u.y;
     return {
@@ -92,7 +92,7 @@ let $$O1 = memo(function () {
     };
   }, [u, i]);
   return c ? jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": "video" === d || "autoplayable_video" === d ? getI18nString("whiteboard.embeds.tooltip_help_text.video") : "audio" === d || "autoplayable_audio" === d ? getI18nString("whiteboard.embeds.tooltip_help_text.audio") : "file" === d || "figma" === d ? getI18nString("whiteboard.embeds.tooltip_help_text.file") : getI18nString("whiteboard.embeds.tooltip_help_text.generic"),
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 160,
@@ -125,7 +125,7 @@ let R = memo(function (e) {
   let u = useRef(null);
   let p = useRef(null);
   let h = useRef(null);
-  let f = _X({
+  let f = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let g = function (e, t) {
@@ -276,7 +276,7 @@ function P(e, t, i, r, n, a) {
     s.style.transform = "unset";
     s.style.transformOrigin = "unset";
   } else {
-    let e = Yb(t, o);
+    let e = scaleRect(t, o);
     s.style.position = "fixed";
     s.style.height = `${o.height}px`;
     s.style.width = `${o.width}px`;

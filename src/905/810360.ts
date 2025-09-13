@@ -1,6 +1,6 @@
 import { registerModal } from "../905/102752";
 import { jsx } from "react/jsx-runtime";
-import { R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { FRequestStatusType } from "../figma_app/191312";
 export let $$o0 = registerModal(function (e) {
@@ -11,7 +11,7 @@ export let $$o0 = registerModal(function (e) {
     open,
     onClose
   } = e;
-  return jsx(R, {
+  return jsx(ConfirmationModal, {
     title: getI18nString("community.publishing.security_form.opt_out_title"),
     onConfirm,
     confirmText: getI18nString("community.publishing.security_form.opt_out_confirmation"),

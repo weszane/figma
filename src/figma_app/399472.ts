@@ -6,7 +6,7 @@ import { Sb } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { Qi } from "../figma_app/559491";
 import { s as _$$s2 } from "../905/58247";
-import { ye } from "../figma_app/314264";
+import { trackGenericEvent } from "../figma_app/314264";
 import { getFullscreenViewEditorType } from "../figma_app/300692";
 import { R } from "../figma_app/185954";
 import { p as _$$p } from "../905/42189";
@@ -38,7 +38,7 @@ let $$E5 = createOptimistThunk((e, t) => {
   }) => {
     let n = T(t.meta);
     n && e.dispatch(n);
-    ye("plugin_publisher_invite_accepted", {
+    trackGenericEvent("plugin_publisher_invite_accepted", {
       src,
       userId: e.getState().user?.id,
       pluginId: plugin_id ?? widget_id,
@@ -104,7 +104,7 @@ let $$b0 = createOptimistThunk((e, t) => {
     }
     let i = T(n);
     i && e.dispatch(i);
-    ye("plugin_publisher_invite_removed", {
+    trackGenericEvent("plugin_publisher_invite_removed", {
       src: t.src,
       userId: e.getState().user?.id,
       pluginId: t.plugin_id || t.widget_id,

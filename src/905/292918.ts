@@ -45,7 +45,7 @@ import { jS } from "../figma_app/557024";
 import { lQ } from "../905/934246";
 import J from "../vendor/338009";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { x as _$$x } from "../905/211326";
 import { FlashActions } from "../905/573154";
 import { getViewName, isBranchView } from "../905/218608";
@@ -284,7 +284,7 @@ let el = registerModal(function ({
     let {
       file
     } = r.data;
-    file && (u = oA(file.recentFileVersions) || []);
+    file && (u = getResourceDataOrFallback(file.recentFileVersions) || []);
   }
   let m = u.filter(e => !(c || !e.checkpoint?.createdAt || new Date(e.checkpoint?.createdAt) <= a));
   let h = ee()(m, ["updatedAt"], ["desc"]);

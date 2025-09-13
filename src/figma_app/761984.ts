@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { tG } from "../figma_app/757723";
+import { isHandbrakeDisabledForCurrentUser } from "../figma_app/757723";
 export function $$a2() {
   return !!useSelector(e => e.mirror.selectionProperties.whiteboardStickyAIControlsShown);
 }
@@ -14,7 +14,7 @@ export function $$l4() {
 }
 export function $$d0() {
   let e = useSelector(e => e.mirror.selectionProperties.whiteboardSelectionCanShowAiOnboardingBadge);
-  let t = tG();
+  let t = isHandbrakeDisabledForCurrentUser();
   return !!(e && t);
 }
 export const CI = $$d0;

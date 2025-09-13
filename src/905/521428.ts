@@ -1,77 +1,135 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { A } from "../vendor/723372";
-import { E } from "../905/632989";
-import { n as _$$n } from "../905/198890";
-import { icon, shortcut, button, t as _$$t, r as _$$r, buttonText, hasIcon, buttonContent } from "../905/608793";
-function d({
-  children: e
-}) {
-  return jsx("span", {
-    "aria-hidden": !0,
-    className: icon,
-    children: e
-  });
+import type { ReactNode } from 'react'
+import classNames from 'classnames'
+import { forwardRef } from 'react'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { n as _$$n } from '../905/198890'
+import { button, buttonContent, buttonText, hasIcon, icon, shortcut } from '../905/608793'
+import { ButtonPrimitive } from '../905/632989'
+
+// Original: function d (Button.Icon)
+interface ButtonIconProps {
+  children: ReactNode
 }
-function c(e) {
-  return jsx("span", {
+
+/**
+ * ButtonIcon component - renders an icon within a button.
+ * Original name: d (Button.Icon)
+ */
+function ButtonIcon({ children }: ButtonIconProps) {
+  return jsx('span', {
+    'aria-hidden': true,
+    'className': icon,
+    'children': children,
+  })
+}
+
+ButtonIcon.displayName = 'Button.Icon'
+
+// Original: function c (Button.Shortcut)
+interface ButtonShortcutProps {
+  [key: string]: any
+}
+
+/**
+ * ButtonShortcut component - renders a shortcut within a button.
+ * Original name: c (Button.Shortcut)
+ */
+function ButtonShortcut(props: ButtonShortcutProps) {
+  return jsx('span', {
     className: shortcut,
-    ...e
-  });
+    ...props,
+  })
 }
-d.displayName = "Button.Icon";
-c.displayName = "Button.Shortcut";
-let u = forwardRef(function ({
-  className: e,
-  ...t
-}, i) {
-  return jsx(E, {
-    ref: i,
-    className: A(_$$n, e),
-    ...t
-  });
-});
-function p(e, t) {
-  let i = forwardRef(function ({
-    children: e,
-    iconPrefix: i,
-    variant: r = "primary",
-    ...o
-  }, c) {
-    return jsx(E, {
-      className: A(button, _$$t, _$$r),
-      ...o,
-      ref: c,
-      children: jsxs("span", {
-        className: A(buttonText, !!i && hasIcon),
-        children: [i && jsx(d, {
-          children: i
-        }), jsx("span", {
-          className: buttonContent,
-          children: e
-        })]
-      })
-    });
-  });
-  i.displayName = e;
-  return i;
+
+ButtonShortcut.displayName = 'Button.Shortcut'
+
+// Original: let u (Button.Link)
+interface ButtonLinkProps {
+  className?: string
+  [key: string]: any
 }
-u.displayName = "Button.Link";
-let $$m0 = Object.assign(p("Button", "regularSize"), {
-  Icon: d,
-  Shortcut: c,
-  Link: u
-});
-let $$h3 = Object.assign(p("ButtonLarge", "largeSize"), {
-  Icon: d
-});
-let $$g1 = Object.assign(p("ButtonWide", "wideSize"), {
-  Icon: d
-});
-let $$f2 = Object.assign(p("ButtonLargeWide", "largeWideSize"), {
-  Icon: d
-});
-export const $n = $$m0;
-export const IK = $$g1;
-export const Pw = $$f2;
-export const WW = $$h3;
+
+/**
+ * ButtonLink component - a link-styled button.
+ * Original name: u (Button.Link)
+ */
+const ButtonLink = forwardRef<HTMLButtonElement, ButtonLinkProps>(({
+  className,
+  ...props
+}, ref) => {
+  return jsx(ButtonPrimitive, {
+    ref,
+    className: classNames('link__link__n7llU', className),
+    ...props,
+  })
+})
+
+ButtonLink.displayName = 'Button.Link'
+
+// Original: function p (button factory)
+interface ButtonVariantProps {
+  children: ReactNode
+  iconPrefix?: ReactNode
+  variant?: string
+  [key: string]: any
+}
+
+/**
+ * Creates a button variant component.
+ * Original name: p
+ */
+function createButtonVariant(displayName: string, _sizeClass?: string) {
+  const ButtonVariant = forwardRef<HTMLButtonElement, ButtonVariantProps>(({
+    children,
+    iconPrefix,
+    variant = 'primary',
+    ...props
+  }, ref) => {
+    return jsx(ButtonPrimitive, {
+      className: classNames(button),
+      ...props,
+      ref,
+      children: jsxs('span', {
+        className: classNames(buttonText, !!iconPrefix && hasIcon),
+        children: [
+          iconPrefix && jsx(ButtonIcon, { children: iconPrefix }),
+          jsx('span', {
+            className: buttonContent,
+            children,
+          }),
+        ],
+      }),
+    })
+  })
+
+  ButtonVariant.displayName = displayName
+  return ButtonVariant
+}
+
+// Original: let $$m0 (Button with Icon, Shortcut, Link)
+export const Button = Object.assign(createButtonVariant('Button', 'regularSize'), {
+  Icon: ButtonIcon,
+  Shortcut: ButtonShortcut,
+  Link: ButtonLink,
+})
+
+// Original: let $$h3 (ButtonLarge with Icon)
+export const ButtonLarge = Object.assign(createButtonVariant('ButtonLarge', 'largeSize'), {
+  Icon: ButtonIcon,
+})
+
+// Original: let $$g1 (ButtonWide with Icon)
+export const ButtonWide = Object.assign(createButtonVariant('ButtonWide', 'wideSize'), {
+  Icon: ButtonIcon,
+})
+
+// Original: let $$f2 (ButtonLargeWide with Icon)
+export const ButtonLargeWide = Object.assign(createButtonVariant('ButtonLargeWide', 'largeWideSize'), {
+  Icon: ButtonIcon,
+})
+
+// Exports remain the same to maintain compatibility
+export const $n = Button
+export const IK = ButtonWide
+export const Pw = ButtonLargeWide
+export const WW = ButtonLarge

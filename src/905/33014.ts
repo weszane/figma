@@ -3,10 +3,10 @@ import r from "classnames";
 import { logger } from "../905/651849";
 import { Lf } from "../figma_app/637027";
 import { N } from "../905/551536";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { h3 } from "../figma_app/831799";
-import { _R } from "../figma_app/314264";
+import { PopulationStatus } from "../figma_app/314264";
 import { W4, Wg, FB, UA, sf } from "../figma_app/152745";
 import { kL, Os, _5, nO, kh, VG, V$, Fy, Sj, ES } from "../905/734904";
 import { A as _$$A } from "../6828/364616";
@@ -171,7 +171,7 @@ export function $$A0({
           autoComplete: "shipping country",
           onChange: w,
           trackingFieldName: "Country",
-          trackingPopulationLevel: e.country ? _R.POPULATED_COMPLETE : _R.NOT_POPULATED,
+          trackingPopulationLevel: e.country ? PopulationStatus.POPULATED_COMPLETE : PopulationStatus.NOT_POPULATED,
           dataTestId: "stripe-country",
           disabled: i,
           children: [jsx("option", {
@@ -181,7 +181,7 @@ export function $$A0({
             value: e[1],
             children: e[0]
           }, e[1]))]
-        }), jsx(B, {
+        }), jsx(SvgComponent, {
           className: nO,
           svg: _$$A
         })]
@@ -254,7 +254,7 @@ function b({
         autoComplete: "shipping address-level1",
         onChange: r,
         trackingFieldName: i.trackingFieldName,
-        trackingPopulationLevel: e.region ? _R.POPULATED_COMPLETE : _R.NOT_POPULATED,
+        trackingPopulationLevel: e.region ? PopulationStatus.POPULATED_COMPLETE : PopulationStatus.NOT_POPULATED,
         dataTestId: "stripe-region",
         disabled: t,
         children: i.options.map(e => {
@@ -264,7 +264,7 @@ function b({
             children: t
           }, t);
         })
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         className: nO,
         svg: _$$A
       })]

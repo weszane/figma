@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useRef, useCallback, useState, forwardRef, useImperativeHandle } from "react";
 import { useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/443068";
 import { U as _$$U } from "../905/708285";
 import { RR } from "../figma_app/338442";
@@ -17,7 +17,7 @@ import { isValidValue, isInvalidValue } from "../905/216495";
 import { u as _$$u, BQ } from "../figma_app/852050";
 import { Sh } from "../figma_app/889655";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../figma_app/884735";
 import { UT } from "../figma_app/95266";
 import { Lg } from "../figma_app/505098";
@@ -104,7 +104,7 @@ let M = memo(function ({
       recordingKey: generateRecordingKey(i, "detachBindingButton"),
       htmlAttributes: {
         "data-tooltip": G,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-onboarding-key": FX
       },
       children: jsx(_$$U, {})
@@ -127,7 +127,7 @@ export function $$W1({
 }) {
   let l = useContext(_$$p);
   let d = BQ(t.node_id ?? void 0);
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: Cl,
     onClick: function () {
       e.current && l?.showBindingUI(e.current, {
@@ -187,7 +187,7 @@ export function $$K0({
           "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
           htmlAttributes: {
             "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$U, {})
         })
@@ -344,7 +344,7 @@ export function $$X4({
     className: gb,
     svg: $$default,
     selected: s?.isShowingBindingUI,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable"),
     recordingKey: i,
     onClick: () => {

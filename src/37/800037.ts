@@ -14,7 +14,7 @@ import { $isNodeSelection, $getSelection, KEY_ARROW_UP_COMMAND, COMMAND_PRIORITY
 import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { D8 } from "../905/511649";
 import { M3 } from "../figma_app/119475";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { d as _$$d } from "../905/954754";
 import { o as _$$o } from "../905/609215";
@@ -540,7 +540,7 @@ function eo(e) {
 function ea(e, t, r) {
   let n = $getSelection();
   if (n) {
-    if (!t || $isParagraphNode(t) || K(t) && !K(e) || H(t) && !H(e) || V(t) && !V(e) || X(t) && !X(e)) n.insertNodes([e]); else if ($isTextNode(t)) {
+    if (!t || $isParagraphNode(t) || K(t) && !K(e) || H(t) && !H(e) || V(t) && !V(e) || X(t) && !X(e)) n.insertNodes([e]);else if ($isTextNode(t)) {
       let n = t.splitText(r[0], r[1]);
       1 === n.length ? n[0].replace(e) : 2 === n.length ? 0 === r[0] ? n[0].replace(e) : n[1].replace(e) : 3 === n.length ? n[1].replace(e) : logError("expressions", "invalid number of nodes after split to insert variable");
     } else t.replace(e);
@@ -768,7 +768,7 @@ function eh({
       }
       return [];
     }(e, t, n);
-    if (o(r), r.length > 0 && r.some(e => e.type === Yc.EXPRESSION && "LITERAL" !== e.expressionItem.type)) l(null); else if ($isRangeSelection(e)) {
+    if (o(r), r.length > 0 && r.some(e => e.type === Yc.EXPRESSION && "LITERAL" !== e.expressionItem.type)) l(null);else if ($isRangeSelection(e)) {
       let t = eu(e);
       l(t?.trim() ?? null);
     } else if ($isNodeSelection(e)) {
@@ -1037,7 +1037,7 @@ export function $$ev0({
         let t = eo(e);
         let r = "";
         t.forEach(e => {
-          if (V(e)) e.__variable ? e.__modeID ? r += _z(e.__variable.node_id, e.__modeID, new _$$o(!0)) : r += e.__variable?.node_id || "{}" : r += "{}"; else if (X(e)) e.__stablePathToNode && e.__componentProp ? r += bU(e.__stablePathToNode, "COMPONENT_PROP_ASSIGNMENTS", e.__componentProp.explicitDefId) : r += "[]"; else if (H(e)) {
+          if (V(e)) e.__variable ? e.__modeID ? r += _z(e.__variable.node_id, e.__modeID, new _$$o(!0)) : r += e.__variable?.node_id || "{}" : r += "{}";else if (X(e)) e.__stablePathToNode && e.__componentProp ? r += bU(e.__stablePathToNode, "COMPONENT_PROP_ASSIGNMENTS", e.__componentProp.explicitDefId) : r += "[]";else if (H(e)) {
             let t = e.getTextContent().trim();
             "&&" === t ? r += "and" : "||" === t ? r += "or" : "!" === t ? r += "not" : r += e.getTextContent();
           } else ($isTextNode(e) || K(e)) && (r += e.getTextContent());
@@ -1156,7 +1156,7 @@ export function $$ev0({
           className: _()(MT, {
             [Rv]: m && w
           }),
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: zc,
             svg: A
           }), jsx(D8, {

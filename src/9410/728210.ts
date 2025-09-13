@@ -18,7 +18,7 @@ import { hk } from "../figma_app/632319";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { O1, KD } from "../figma_app/317394";
 import { _o } from "../figma_app/701001";
-import { ni } from "../figma_app/62612";
+import { getBasicViewportRect } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { $0, dR, Ww, y as _$$y, oW, D_, HG, By, VA, Pi } from "../figma_app/440875";
@@ -38,7 +38,7 @@ var c = d;
 export let $$U3 = 5;
 var G = (e => (e[e.Default = 0] = "Default", e[e.Mobile = 1] = "Mobile", e[e.Prototype = 2] = "Prototype", e[e.Slide = 3] = "Slide", e))(G || {});
 let K = (e, t) => {
-  let i = ni();
+  let i = getBasicViewportRect();
   let r = Av();
   let a = _o();
   let s = p8("showUi");
@@ -68,7 +68,7 @@ let K = (e, t) => {
 };
 function H(e) {
   let t;
-  let i = ni();
+  let i = getBasicViewportRect();
   let r = _o();
   p8("showUi");
   let a = 0;

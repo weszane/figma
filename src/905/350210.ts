@@ -7,7 +7,7 @@ import { getPermissionsState } from "../figma_app/642025";
 import { o1 as _$$o } from "../figma_app/10554";
 import { A as _$$A } from "../905/61817";
 import { c$ } from "../figma_app/236327";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { oB, j7 } from "../905/929976";
 import { Um } from "../905/848862";
 import { Cf, it } from "../905/504727";
@@ -54,7 +54,7 @@ function A({
       role: "listbox",
       children: [u(i), jsx("span", {
         className: "publishing_metadata_author_select_ui3--authorSelectTriggerIcon--STbr6 publish_modal--categorySelectTriggerIcon--43Irx",
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: _$$A3
         })
       })]

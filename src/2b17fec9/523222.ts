@@ -6,7 +6,7 @@ import { memo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { LR } from "../figma_app/120210";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { pN } from "../9410/983733";
 import { hx } from "../figma_app/630194";
 import { gd } from "../figma_app/837467";
@@ -37,7 +37,7 @@ let j = memo(function () {
     isSelected: e,
     className: uW,
     onClick: i,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": "set-tool-section",
     hasOpenSubmenu: !1,
     onboardingKey: pN,
@@ -66,7 +66,7 @@ let y = memo(function () {
     isSelected: e,
     className: Qq,
     onClick: i,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": "set-tool-type",
     hasOpenSubmenu: !1,
     children: t => jsx(gd, {
@@ -92,7 +92,7 @@ let v = memo(function () {
     isSelected: e,
     className: nK,
     onClick: t,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": "set-tool-comments",
     hasOpenSubmenu: !1,
     children: t => jsx(gd, {
@@ -123,7 +123,7 @@ let N = memo(function () {
       a && CB.closeWheel();
       e();
     },
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": "toggle-menu",
     onboardingKey: D1,
     hasOpenSubmenu: !1,
@@ -152,7 +152,7 @@ let A = memo(function () {
     isSelected: e,
     className: tp,
     onClick: i,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": "set-tool-table",
     hasOpenSubmenu: !1,
     children: t => jsx(gd, {

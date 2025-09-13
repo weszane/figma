@@ -15,7 +15,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
 import { U2 } from "../figma_app/297957";
@@ -153,12 +153,12 @@ function U({
           })
         })
       }) : jsxs(Fragment, {
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontWeight: "medium",
           children: JT(e)
         }), jsx("span", {
           className: "xdpxx8g x1fzhlzt",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "secondary",
             children: o
           })
@@ -182,13 +182,13 @@ function B({
   let s = null;
   return (r ? s = jsx("div", {
     className: _$$s.colorBorder.b1.px4.bRadius5.noWrap.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: "default",
       children: getI18nString("modify_plan_user_seat_modal.current_seat_badge")
     })
   }) : a ? s = jsx("div", {
     className: _$$s.colorBorderBrand.b1.px4.bRadius5.noWrap.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: "brand",
       fontWeight: "medium",
       children: getI18nString("modify_plan_user_seat_modal.available_seat_count", {
@@ -197,7 +197,7 @@ function B({
     })
   }) : e && (s = jsx("span", {
     className: _$$s.noWrap.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       fontWeight: "medium",
       children: e
     })
@@ -252,7 +252,7 @@ export function $$V0({
       }), T && jsx("div", {
         "data-testid": "from-seat-type-message",
         className: $$m()(O, _$$s.flex.flexRow.itemsCenter.colorBgSecondary.$),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "secondary",
           children: d ? L ? getI18nString("modify_plan_user_seat_modal.from_seat_helper_text.will_become_available_prorated") : getI18nString("modify_plan_user_seat_modal.from_seat_helper_text.will_become_prorated_v2", {
@@ -275,7 +275,7 @@ export function $$V0({
       }), k && jsx("div", {
         "data-testid": "to-seat-type-message",
         className: $$m()(O, _$$s.colorBgSelected.$$if(p, _$$s.colorBgWarningTertiary).$),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           color: "default",
           children: i === ViewAccessTypeEnum.VIEW ? null : S ? renderI18nText("modify_plan_user_seat_modal.use_one_available_full_seat_learn_more_info_message", {

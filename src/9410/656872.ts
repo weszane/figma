@@ -8,7 +8,7 @@ import { hideModal, showModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { oW } from "../figma_app/247611";
 import { RD } from "../figma_app/198840";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { PH } from "../figma_app/701580";
 import { Z } from "../9410/200844";
 export let $$g0 = "templates_toolbar";
@@ -27,7 +27,7 @@ export function $$_1() {
   let _ = getI18nString("whiteboard.inserts.templates");
   return jsx(Z, {
     tooltip: {
-      type: Ib.TEXT,
+      type: KindEnum.TEXT,
       text: _
     },
     isActive: t,

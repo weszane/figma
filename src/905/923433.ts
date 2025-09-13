@@ -17,7 +17,7 @@ import { TI } from "../905/713722";
 import { RU, EU } from "../figma_app/740163";
 import { Kd, BQ, u as _$$u, t8 } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { gq, Pd } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
 import { J as _$$J } from "../905/225412";
@@ -159,7 +159,7 @@ export function $$z2(e) {
           children: jsx(gq, {
             bigNudgeAmount: u,
             "data-tooltip": v ?? "",
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             dataTestId: generateRecordingKey(e.recordingKey, "numberInput"),
             disabled: e.isInaccessible,
             dispatch: t,
@@ -279,7 +279,7 @@ function H({
       [F]: o
     }, c),
     ref: m,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": l,
     children: [jsx("div", {
       ref: p,

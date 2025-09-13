@@ -2,7 +2,7 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } fr
 import { useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { a as _$$a } from '../905/38236';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { permissionScopeHandler } from '../905/189185';
 import { g as _$$g3 } from '../905/252386';
 import { f as _$$f, v as _$$v } from '../905/257689';
@@ -14,7 +14,7 @@ import { U5 } from '../905/414242';
 import { D as _$$D2 } from '../905/425476';
 import { useModalManager } from '../905/437088';
 import { analyticsEventManager, getFigmaCluster } from '../905/449184';
-import { $n, WW } from '../905/521428';
+import { Button, ButtonLarge } from '../905/521428';
 import { globalPerfTimer } from '../905/542194';
 import { X as _$$X } from '../905/578754';
 import { getFeatureFlags } from '../905/601108';
@@ -68,7 +68,7 @@ function z() {
         bottom: '20px',
         right: '20px'
       },
-      children: jsx(WW, {
+      children: jsx(ButtonLarge, {
         variant: 'destructive',
         iconPrefix: jsx(Z, {}),
         onClick: () => a(!0),
@@ -76,7 +76,7 @@ function z() {
           errorCount: errors.length
         })
       })
-    }), jsx(bL, {
+    }), jsx(ModalRootComponent, {
       manager: s,
       width: 'lg',
       children: jsxs(vo, {
@@ -102,7 +102,7 @@ function z() {
           })
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: 'secondary',
               onClick: () => {
                 let r = {
@@ -126,7 +126,7 @@ Error: ${e.message}`).join('\n')}`;
                 });
               },
               children: renderI18nText('sites.lint.errors.copy_to_clipboard')
-            }), jsx($n, {
+            }), jsx(Button, {
               onClick: () => a(!1),
               children: renderI18nText('common.close')
             })]

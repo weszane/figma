@@ -17,7 +17,7 @@ import { C as _$$C } from "../figma_app/938538";
 import { X } from "../905/350405";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { vn } from "../figma_app/976749";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { AP } from "../figma_app/755783";
 import { il, w6 } from "../figma_app/789050";
 import { c as _$$c } from "../figma_app/765216";
@@ -191,7 +191,7 @@ export function $$z0({
   let D = il();
   let k = w6();
   let M = !w || !D;
-  let F = Dc(debugState.getState().selectedView.editorType);
+  let F = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
   let j = getFilteredFeatureFlags().ce_il_var_width_points && jsx(_$$N2, {
     activeToolId: e,
     disabled: M,

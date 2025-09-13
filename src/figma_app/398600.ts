@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/851274";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
@@ -27,7 +27,7 @@ function _({
       })));
     } catch (e) {}
   };
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     className: "figmake--workshopRow--cNBoG",
     onClick: i,
     children: [jsx("div", {

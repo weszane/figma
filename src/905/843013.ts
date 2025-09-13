@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { s as _$$s } from "../cssbuilder/589278";
 import { hx } from "../905/66449";
 import { H } from "../905/348433";
@@ -38,7 +38,7 @@ export function $$u0({
   return jsxs("div", {
     className: _$$s.relative.$,
     "data-testid": "library-list-item-container",
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       className: h ? RU : hv,
       onClick: h ? onClickWithFocus : void 0,
       "aria-label": g,

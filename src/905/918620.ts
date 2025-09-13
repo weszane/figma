@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { selectWithShallowEqual } from "../905/103090";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { getRepoById } from "../905/760074";
 import { Ad } from "../figma_app/2023";
 import { FileShareModalPermissionsV3, FileShareModalCurrentUserPermissions, TeamCanEdit, ResourceConnectionSharingGroupUsersByFile } from "../figma_app/43951";
@@ -55,7 +55,7 @@ export function $$f3({
   let t = useSubscription(ResourceConnectionSharingGroupUsersByFile, {
     fileKey: e
   });
-  return ("loaded" === t.status ? oA(t.data?.file?.resourceConnectionSharingGroupUsers) : void 0) ?? void 0;
+  return ("loaded" === t.status ? getResourceDataOrFallback(t.data?.file?.resourceConnectionSharingGroupUsers) : void 0) ?? void 0;
 }
 export function $$_2() {
   return useSelector(e => {

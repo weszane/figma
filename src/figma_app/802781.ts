@@ -13,10 +13,10 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { JF } from "../905/34809";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
-import { nX, FE } from "../figma_app/314264";
+import { trackFileBrowserSharerFilterSelected, trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
 import { wW } from "../figma_app/656450";
-import { G } from "../figma_app/471068";
-import { ue, rR, rJ, Jh, t2, C0 } from "../figma_app/756995";
+import { ViewTypeEnum } from "../figma_app/471068";
+import { SortOrder, SortType, PermissionType, PermissionAction, FileType, SortField } from "../figma_app/756995";
 import { H } from "../905/209153";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { isSitesFeatureEnabled } from "../905/561485";
@@ -46,23 +46,23 @@ export function $$N5(e) {
   });
 }
 export let $$C2 = {
-  sortOptions: [ue.ASC, ue.DESC],
+  sortOptions: [SortOrder.ASC, SortOrder.DESC],
   sortOptionsDisplayText: (e, t) => {
     switch (e) {
-      case ue.ASC:
+      case SortOrder.ASC:
         switch (t) {
-          case rR.TIME:
+          case SortType.TIME:
             return getI18nString("tile.sort_filter.sort_direction_oldest_first");
-          case rR.ALPHABETICAL:
+          case SortType.ALPHABETICAL:
             return getI18nString("tile.sort_filter.sort_direction_a_to_z");
           default:
             return getI18nString("tile.sort_filter.sort_direction_ascending");
         }
-      case ue.DESC:
+      case SortOrder.DESC:
         switch (t) {
-          case rR.TIME:
+          case SortType.TIME:
             return getI18nString("tile.sort_filter.sort_direction_newest_first");
-          case rR.ALPHABETICAL:
+          case SortType.ALPHABETICAL:
             return getI18nString("tile.sort_filter.sort_direction_z_to_a");
           default:
             return getI18nString("tile.sort_filter.sort_direction_descending");
@@ -79,7 +79,7 @@ function w(e) {
     void 0 !== n && (e.onChange(n, r), trackEventAnalytics("Sort Changed - Dropdown", {
       oldValueString: `${e.checkedValue}`,
       newValueString: `${n}`,
-      dir: r === ue.ASC ? "asc" : r === ue.DESC ? "desc" : void 0
+      dir: r === SortOrder.ASC ? "asc" : r === SortOrder.DESC ? "desc" : void 0
     }));
   };
   return jsxs(bL, {
@@ -100,11 +100,11 @@ function w(e) {
 }
 export function $$O3(e) {
   return jsx(w, {
-    filterOptions: [rJ.ANY, rJ.SELF, rJ.OTHER],
+    filterOptions: [PermissionType.ANY, PermissionType.SELF, PermissionType.OTHER],
     filterDisplayText: {
-      [rJ.ANY]: renderI18nText("tile.sort_filter.created_by_anyone"),
-      [rJ.SELF]: renderI18nText("tile.sort_filter.created_by_you"),
-      [rJ.OTHER]: renderI18nText("tile.sort_filter.created_by_others")
+      [PermissionType.ANY]: renderI18nText("tile.sort_filter.created_by_anyone"),
+      [PermissionType.SELF]: renderI18nText("tile.sort_filter.created_by_you"),
+      [PermissionType.OTHER]: renderI18nText("tile.sort_filter.created_by_others")
     },
     checkedValue: e.options.tileSortFilterConfig.filters.creator,
     onChange: t => {
@@ -125,12 +125,12 @@ export function $$O3(e) {
 }
 export function $$R1(e) {
   return jsx(w, {
-    filterOptions: [Jh.CAN_BE_RESTORED_DELETED, Jh.CAN_BE_VIEWED],
+    filterOptions: [PermissionAction.CAN_BE_RESTORED_DELETED, PermissionAction.CAN_BE_VIEWED],
     filterDisplayText: {
-      [Jh.CAN_BE_RESTORED_DELETED]: renderI18nText("tile.sort_filter.can_be_restored_permanently_deleted"),
-      [Jh.CAN_BE_VIEWED]: renderI18nText("tile.sort_filter.can_be_viewed")
+      [PermissionAction.CAN_BE_RESTORED_DELETED]: renderI18nText("tile.sort_filter.can_be_restored_permanently_deleted"),
+      [PermissionAction.CAN_BE_VIEWED]: renderI18nText("tile.sort_filter.can_be_viewed")
     },
-    checkedValue: e.options.tileSortFilterConfig.filters.role ?? Jh.CAN_BE_RESTORED_DELETED,
+    checkedValue: e.options.tileSortFilterConfig.filters.role ?? PermissionAction.CAN_BE_RESTORED_DELETED,
     onChange: t => {
       let r = e.options.tileSortFilterConfig;
       let n = {
@@ -154,20 +154,20 @@ export function $$L8(e) {
   let s = isCooperFeatureEnabled();
   let o = isFigmakeSitesEnabled();
   let l = "recentsAndSharing" === r.view;
-  let d = [t2.ANY, t2.DESIGN, t2.FIGJAM, t2.SLIDES];
-  d = s ? d.concat([t2.COOPER]) : d;
-  d = i ? d.concat([t2.SITES]) : d;
-  d = o ? d.concat([t2.MAKE]) : d;
-  d = l ? d.concat([t2.PROTOTYPE]) : d;
+  let d = [FileType.ANY, FileType.DESIGN, FileType.FIGJAM, FileType.SLIDES];
+  d = s ? d.concat([FileType.COOPER]) : d;
+  d = i ? d.concat([FileType.SITES]) : d;
+  d = o ? d.concat([FileType.MAKE]) : d;
+  d = l ? d.concat([FileType.PROTOTYPE]) : d;
   let c = {
-    [t2.ANY]: renderI18nText("tile.sort_filter.filter_by_all_files"),
-    [t2.DESIGN]: renderI18nText("tile.sort_filter.filter_by_design_files"),
-    [t2.FIGJAM]: renderI18nText("tile.sort_filter.filter_by_figjam_files"),
-    [t2.PROTOTYPE]: renderI18nText("tile.sort_filter.filter_by_prototype_files"),
-    [t2.SITES]: renderI18nText("tile.sort_filter.filter_by_sites_files"),
-    [t2.SLIDES]: renderI18nText("tile.sort_filter.filter_by_slides_files"),
-    [t2.COOPER]: renderI18nText("tile.sort_filter.filter_by_buzz_files"),
-    [t2.MAKE]: renderI18nText("tile.sort_filter.filter_by_make_files")
+    [FileType.ANY]: renderI18nText("tile.sort_filter.filter_by_all_files"),
+    [FileType.DESIGN]: renderI18nText("tile.sort_filter.filter_by_design_files"),
+    [FileType.FIGJAM]: renderI18nText("tile.sort_filter.filter_by_figjam_files"),
+    [FileType.PROTOTYPE]: renderI18nText("tile.sort_filter.filter_by_prototype_files"),
+    [FileType.SITES]: renderI18nText("tile.sort_filter.filter_by_sites_files"),
+    [FileType.SLIDES]: renderI18nText("tile.sort_filter.filter_by_slides_files"),
+    [FileType.COOPER]: renderI18nText("tile.sort_filter.filter_by_buzz_files"),
+    [FileType.MAKE]: renderI18nText("tile.sort_filter.filter_by_make_files")
   };
   return jsx(w, {
     filterOptions: d,
@@ -202,8 +202,8 @@ export function $$P4(e) {
           sharedBy: n
         }
       };
-      let a = "recentsAndSharing" === r.view ? r.tab || G.RECENTLY_VIEWED : r.view;
-      nX(n, a);
+      let a = "recentsAndSharing" === r.view ? r.tab || ViewTypeEnum.RECENTLY_VIEWED : r.view;
+      trackFileBrowserSharerFilterSelected(n, a);
       t(JF({
         selectedView: r,
         config: i,
@@ -264,8 +264,8 @@ export function $$D0(e) {
           }
         }
       };
-      let l = "recentsAndSharing" === r.view ? r.tab || G.RECENTLY_VIEWED : r.view;
-      FE(plan_id, l, plan_type);
+      let l = "recentsAndSharing" === r.view ? r.tab || ViewTypeEnum.RECENTLY_VIEWED : r.view;
+      trackFileBrowserPlanFilterSelected(plan_id, l, plan_type);
       t(JF({
         selectedView: r,
         config: o,
@@ -277,15 +277,15 @@ export function $$D0(e) {
   });
 }
 let k = {
-  [C0.NAME]: ue.ASC,
-  [C0.CREATED_AT]: ue.DESC,
-  [C0.TOUCHED_AT]: ue.DESC,
-  [C0.TRASHED_AT]: ue.DESC,
-  [C0.PROJECT_NAME]: ue.ASC,
-  [C0.ACCESSED_AT]: ue.DESC,
-  [C0.SHARED_AT]: ue.DESC,
-  [C0.OWNER]: ue.DESC,
-  [C0.SEARCH_RELEVANCE]: ue.DESC
+  [SortField.NAME]: SortOrder.ASC,
+  [SortField.CREATED_AT]: SortOrder.DESC,
+  [SortField.TOUCHED_AT]: SortOrder.DESC,
+  [SortField.TRASHED_AT]: SortOrder.DESC,
+  [SortField.PROJECT_NAME]: SortOrder.ASC,
+  [SortField.ACCESSED_AT]: SortOrder.DESC,
+  [SortField.SHARED_AT]: SortOrder.DESC,
+  [SortField.OWNER]: SortOrder.DESC,
+  [SortField.SEARCH_RELEVANCE]: SortOrder.DESC
 };
 export function $$M6(e) {
   let {
@@ -294,7 +294,7 @@ export function $$M6(e) {
     tab,
     dispatch
   } = e;
-  let o = e => k[e] ?? ue.ASC;
+  let o = e => k[e] ?? SortOrder.ASC;
   let _ = useCallback((e, n) => {
     let i = options.tileSortFilterConfig;
     let l = void 0 === n ? o(e) : n;
@@ -315,15 +315,15 @@ export function $$M6(e) {
     options.sortKeys.some(e => e === options.tileSortFilterConfig.sort.key) || _(options.sortKeys[options.sortKeys.length - 1], options.tileSortFilterConfig.sort.dir);
   }, [options.sortKeys, options.tileSortFilterConfig.sort.key, options.tileSortFilterConfig.sort.dir, _]);
   let m = {
-    [C0.CREATED_AT]: renderI18nText("tile.sort_filter.sort_date_created"),
-    [C0.TOUCHED_AT]: renderI18nText("tile.sort_filter.sort_last_modified"),
-    [C0.ACCESSED_AT]: renderI18nText("tile.sort_filter.sort_last_viewed"),
-    [C0.NAME]: renderI18nText("tile.sort_filter.sort_alphabetical"),
-    [C0.TRASHED_AT]: renderI18nText("tile.sort_filter.sort_date_trashed"),
-    [C0.SHARED_AT]: renderI18nText("tile.sort_filter.date_shared"),
-    [C0.OWNER]: renderI18nText("tile.sort_filter.owner"),
-    [C0.SEARCH_RELEVANCE]: renderI18nText("tile.sort_filter.trending"),
-    [C0.PROJECT_NAME]: renderI18nText("tile.sort_filter.team")
+    [SortField.CREATED_AT]: renderI18nText("tile.sort_filter.sort_date_created"),
+    [SortField.TOUCHED_AT]: renderI18nText("tile.sort_filter.sort_last_modified"),
+    [SortField.ACCESSED_AT]: renderI18nText("tile.sort_filter.sort_last_viewed"),
+    [SortField.NAME]: renderI18nText("tile.sort_filter.sort_alphabetical"),
+    [SortField.TRASHED_AT]: renderI18nText("tile.sort_filter.sort_date_trashed"),
+    [SortField.SHARED_AT]: renderI18nText("tile.sort_filter.date_shared"),
+    [SortField.OWNER]: renderI18nText("tile.sort_filter.owner"),
+    [SortField.SEARCH_RELEVANCE]: renderI18nText("tile.sort_filter.trending"),
+    [SortField.PROJECT_NAME]: renderI18nText("tile.sort_filter.team")
   };
   let {
     getTriggerProps,
@@ -333,7 +333,7 @@ export function $$M6(e) {
     trackEventAnalytics("Sort Changed - Dropdown", {
       oldValueString: `${options.tileSortFilterConfig.sort.key}`,
       newValueString: `${e}`,
-      dir: r === ue.ASC ? "asc" : r === ue.DESC ? "desc" : void 0
+      dir: r === SortOrder.ASC ? "asc" : r === SortOrder.DESC ? "desc" : void 0
     });
     _(e, r);
   };

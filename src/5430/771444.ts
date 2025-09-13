@@ -6,11 +6,11 @@ import { _ as _$$_ } from "../905/456042";
 import { I } from "../5132/515990";
 import { Vm } from "../figma_app/427318";
 import { showModalHandler } from "../905/156213";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { Tm } from "../figma_app/740025";
 import { selectCurrentUser } from "../905/372672";
-import { I0, xQ } from "../figma_app/45218";
-import { Ib } from "../905/129884";
+import { isPlugin, isWidget } from "../figma_app/45218";
+import { KindEnum } from "../905/129884";
 export function $$x0({
   resource: e,
   viewContext: t
@@ -18,14 +18,14 @@ export function $$x0({
   let r = useDispatch();
   let x = selectCurrentUser();
   let f = I();
-  let y = Object.values(useSelector(e => Tm(e))).filter(t => I0(e) && t.plugins_whitelist_enforced || xQ(e) && t.widgets_whitelist_enforced);
+  let y = Object.values(useSelector(e => Tm(e))).filter(t => isPlugin(e) && t.plugins_whitelist_enforced || isWidget(e) && t.widgets_whitelist_enforced);
   let g = (e, t) => {
     r(showModalHandler({
       type: W(),
       data: {
         extensionId: e.id,
         orgId: t,
-        extensionType: I0(e) ? "plugin" : "widget",
+        extensionType: isPlugin(e) ? "plugin" : "widget",
         isAllowed: !1,
         resource: f ? e : void 0,
         source: "community"
@@ -35,7 +35,7 @@ export function $$x0({
   return jsx("button", {
     className: "approve_button--buttonContainer--lDvpx cta_button--buttonBase--xMT0c text--fontNeg14--ARPWl text--_fontBase--QdLsd text--_negText--j9g-L",
     onClick: () => {
-      if (Cu({
+      if (logAndTrackCTA({
         viewContext: t,
         resourceId: e.id,
         resourceType: Vm(e),
@@ -67,7 +67,7 @@ export function $$x0({
     },
     "data-testid": "approve-button",
     "data-onboarding-key": "approve-button",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     children: renderI18nText("community.plugins.approve_ellipsis")
   });
 }

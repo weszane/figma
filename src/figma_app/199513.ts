@@ -19,7 +19,7 @@ import { yJ, bE, Kc } from "../figma_app/598926";
 import { showModalHandler } from "../905/156213";
 import { nX } from "../905/466026";
 import { uo as _$$uo } from "../905/98702";
-import { xr } from "../figma_app/314264";
+import { trackFolderEvent } from "../figma_app/314264";
 import { F as _$$F2 } from "../905/224";
 import { SS } from "../figma_app/528509";
 import { convertTeamToRaw } from "../905/628874";
@@ -409,7 +409,7 @@ let $$ei12 = M4.Mutation(({
     e.name = t;
     e.path = t;
   });
-  xr("Folder Renamed", e, null, n.getState(), {
+  trackFolderEvent("Folder Renamed", e, null, n.getState(), {
     folderName: t
   });
   let a = XHR.put("/api/folders/rename", {
@@ -454,7 +454,7 @@ let $$es4 = createOptimistAction("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, 
     sharingAudienceControl: t.sharingAudienceControl
   }).then(() => {
     e.dispatch(createOptimistCommitAction(r));
-    xr("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
+    trackFolderEvent("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
       share_settings_type: "sharing_audience",
       oldSharingAudienceControl: t.folder.sharing_audience_control,
       newSharingAudienceControl: t.sharingAudienceControl
@@ -475,7 +475,7 @@ let $$eo13 = createOptimistAction("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
     teamAccess: t.teamAccess
   }).then(() => {
     e.dispatch(createOptimistCommitAction(r));
-    xr("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
+    trackFolderEvent("Folder Share Settings Updated", t.folder.id, t.folder.team_id, e.getState(), {
       share_settings_type: "team_access",
       oldTeamAccess: t.folder.team_access,
       newTeamAccess: t.teamAccess
@@ -552,7 +552,7 @@ let ed = M4.Mutation((e, {
     folder,
     team
   } = e;
-  xr("Folder Moved", folder.id, null, n.getState(), {
+  trackFolderEvent("Folder Moved", folder.id, null, n.getState(), {
     destTeamId: team.id
   });
   let s = XHR.put("/api/folders/move", {

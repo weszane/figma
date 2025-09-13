@@ -2,18 +2,18 @@ import { jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { z } from "../9410/836234";
 import { AppStateTsApi, Fullscreen } from "../figma_app/763686";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { J as _$$J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
 import { getObservableValue } from "../figma_app/84367";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { CM } from "../905/459248";
 export function $$m1() {
   let e = useSelector(e => e.modalShown);
   let t = e?.type === CM.type;
   let i = getObservableValue(AppStateTsApi?.uiState().showMissingFontsButton, !1);
-  let r = U();
+  let r = trackFileEventWithStore();
   let l = useDispatch();
   return {
     expanded: t,
@@ -39,7 +39,7 @@ export function $$f0({
     "aria-label": getI18nString("fullscreen.toolbar.missing_fonts"),
     htmlAttributes: {
       "data-tooltip": label,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-right": e
     },
     children: jsx(z, {})

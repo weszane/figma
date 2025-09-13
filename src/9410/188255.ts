@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, Xr, useAtomWithSubscription, atom, useAtomValueAndSetter, Rq } from "../figma_app/27355";
 import { BrowserInfo, isAnyMobile } from "../figma_app/778880";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { QI } from "../9410/60600";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useSelector, useDispatch, useStore } from "react-redux";
@@ -17,18 +17,18 @@ import { M as _$$M } from "../905/152487";
 import { RSb, B14, y4J, t_E, qnr, kmj, hsL, JGK, XAb, Ttn, Nwg, BrS, v75, Smd, H2x, DKg, wRI, Kze, MJs, zoI, lLk, kp0, Njd, jRE, Byv, Y2_, KTt, HU3, g4U, uPw, Fq3, a9B, ENg, CVA, IQ, K_h, Fff, uTW, sJD, _5$ } from "../figma_app/6204";
 import { K as _$$K } from "../905/443068";
 import { N as _$$N2 } from "../905/438674";
-import { Pw, $n } from "../905/521428";
+import { ButtonLargeWide, Button } from "../905/521428";
 import { A as _$$A } from "../905/251970";
 import { Positioning, UserInterfaceElements, WhiteboardStarterKitCppBindings, CollaborationType, SchemaJoinStatus, Fullscreen, CustomPosition, LayoutTabType } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { a as _$$a } from "../905/29104";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { FQ } from "../9410/571209";
 import { clearSelection, addToSelection } from "../figma_app/741237";
-import { ni as _$$ni, _X, Z0 } from "../figma_app/62612";
-import { Ib } from "../905/129884";
+import { getBasicViewportRect, getViewportInfo, viewportToScreen } from "../figma_app/62612";
+import { KindEnum } from "../905/129884";
 import { v as _$$v } from "../figma_app/759243";
 import { ss as _$$ss } from "../figma_app/402783";
 import { v as _$$v2, Cw } from "../9410/295369";
@@ -37,9 +37,9 @@ import { Cb } from "../9410/659371";
 import { getSingletonSceneGraph } from "../905/700578";
 import { cF } from "../figma_app/761984";
 import { b7 } from "../figma_app/101849";
-import { A as _$$A2 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { EH, ji, xo as _$$xo, MC, l0, zp } from "../figma_app/847014";
-import { gB, oA as _$$oA } from "../905/723791";
+import { gB, getResourceDataOrFallback } from "../905/723791";
 import { Bl } from "../figma_app/967857";
 import { IntegrationUtils } from "../figma_app/469876";
 import { z4 } from "../905/37051";
@@ -52,7 +52,7 @@ import { mp } from "../figma_app/864723";
 import { f as _$$f } from "../905/940356";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellType, VisualBellIcon } from "../905/576487";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { d as _$$d } from "../figma_app/444297";
 import { $ as _$$$, N as _$$N3 } from "../figma_app/191390";
 import { useAtomValue } from "../vendor/525001";
@@ -117,7 +117,7 @@ import { lR, $z, Me, c as _$$c2 } from "../figma_app/617427";
 import { Q as _$$Q2 } from "../5132/668270";
 import { D as _$$D2 } from "../figma_app/908415";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB as _$$nB } from "../figma_app/272243";
 import { N as _$$N4 } from "../905/482239";
 import { USER_FLAG_V2 } from "../1250/200830";
@@ -169,10 +169,10 @@ import { GoogleClassroomIntegrationView, UserForRcs, TeamCanAdmin } from "../fig
 import { w as _$$w5, tX as _$$tX2, l5, aG as _$$aG } from "../figma_app/728657";
 import { b as _$$b4 } from "../905/799737";
 import { i as _$$i2 } from "../905/718764";
-import { E as _$$E3 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Q as _$$Q3 } from "../1250/220026";
 import { useLatestRef } from "../figma_app/922077";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Ji } from "../figma_app/972736";
 import { zE } from "../905/738636";
 import { Fz } from "../figma_app/106207";
@@ -180,7 +180,7 @@ import { g as _$$g } from "../figma_app/115586";
 import { B as _$$B2 } from "../905/524020";
 import { a6 as _$$a2, RD } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
-import { cS } from "../figma_app/45218";
+import { CommunityPageType } from "../figma_app/45218";
 import { mI, vX, wV, mN, rL as _$$rL, CM } from "../9410/983167";
 import { PH } from "../figma_app/701580";
 import { G as _$$G } from "../9410/656872";
@@ -201,10 +201,10 @@ import { setTagGlobal, captureMessage } from "../905/11";
 import { XZ } from "../figma_app/176973";
 import { WB } from "../905/761735";
 import { kd, mW } from "../figma_app/797994";
-import { dq, sZ as _$$sZ } from "../905/845253";
+import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { IT } from "../905/713695";
 import { ol as _$$ol } from "../figma_app/598018";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { k as _$$k3 } from "../905/443820";
 import { V3 } from "../figma_app/976345";
 import { dO } from "../figma_app/318123";
@@ -287,7 +287,7 @@ import { hX } from "../figma_app/644079";
 import { U as _$$U3 } from "../figma_app/446378";
 import { Nr as _$$Nr } from "../figma_app/524655";
 import { oI as _$$oI, Te, Ug } from "../9410/904355";
-import { tG as _$$tG } from "../figma_app/757723";
+import { isHandbrakeDisabledForCurrentUser } from "../figma_app/757723";
 import { _ as _$$_ } from "../figma_app/91620";
 import { Dm } from "../9410/645772";
 import { p as _$$p3 } from "../figma_app/353099";
@@ -328,7 +328,7 @@ function Y(e = 2e3) {
     hasDebounceSettled: !1,
     numNodesSelected: void 0
   });
-  let a = _$$A2(e => {
+  let a = useDebouncedCallback(e => {
     r({
       hasDebounceSettled: !0,
       numNodesSelected: e
@@ -421,7 +421,7 @@ function q({
   let m = o && l;
   m && (a = getI18nString("whiteboard.ai_summary.nudge.too_many_tokens"));
   let f = useRef(null);
-  let g = _$$ni();
+  let g = getBasicViewportRect();
   let _ = FQ(f, 8);
   useLayoutEffect(() => {
     let e = f.current;
@@ -521,13 +521,13 @@ let X = _$$tf(function ({
     properties: {
       disabled: t
     },
-    children: jsx(Pw, {
+    children: jsx(ButtonLargeWide, {
       onClick: e,
       variant: "primary",
       htmlAttributes: {
         "data-testid": "summarize-button",
         "data-tooltip": t ? i : "",
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       disabled: t,
       children: jsxs("div", {
@@ -553,7 +553,7 @@ function Z({
   return jsxs("div", {
     className: "ai_summary_nudge--numberGraphic--CnM2r",
     "aria-hidden": "true",
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 14,
       color: "secondary",
       children: e
@@ -669,7 +669,7 @@ function ex() {
           e(_$$b({
             [e_]: !0
           }));
-          Cu({
+          logAndTrackCTA({
             trackingContext: "Slides conversion visual bell entrypoint",
             name: "slides_conversion_visual_bell_entrypoint_dismissed"
           });
@@ -1197,7 +1197,7 @@ function tV({
         multiple: 3
       }), jsx(lR, {
         onClick: () => {
-          "loaded" === l.status && _$$oA(l.data?.deviceTryFile) ? t(_$$D2({
+          "loaded" === l.status && getResourceDataOrFallback(l.data?.deviceTryFile) ? t(_$$D2({
             fileKey: i
           })) : t(_$$Q2({
             file_key: i
@@ -1229,7 +1229,7 @@ function tW() {
   }, [i, e]);
   useEffect(() => {
     let t = QL(_$$ao.key) === _$$ao.value;
-    let r = "loaded" === a.status && !!_$$oA(a.data?.deviceTryFile);
+    let r = "loaded" === a.status && !!getResourceDataOrFallback(a.data?.deviceTryFile);
     t && r && !o ? (e.show(), l(!0)) : t && i && !r && e.show();
   }, [e, i, a, o]);
   return jsx(_$$h, {
@@ -1263,7 +1263,7 @@ function tQ() {
   let u = QL(_$$ao.key) === _$$ao.value;
   let p = useAtomWithSubscription(_$$N4);
   useEffect(() => {
-    !e && u && !d && "loaded" === c.status && _$$oA(c.data?.deviceTryFile)?.claimedAt && _$$oA(c.data?.deviceTryFile)?.claimedByUserId !== p.data && show();
+    !e && u && !d && "loaded" === c.status && getResourceDataOrFallback(c.data?.deviceTryFile)?.claimedAt && getResourceDataOrFallback(c.data?.deviceTryFile)?.claimedByUserId !== p.data && show();
   }, [e, d, u, c, show, p]);
   return jsx(_$$M, {
     isShowing,
@@ -1283,7 +1283,7 @@ function t$(e) {
   });
   return jsx(fu, {
     name: "figjam_try_device_already_claimed_overlay",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: t,
       width: 420,
       height: "fixed",
@@ -4177,13 +4177,13 @@ let ni = e => {
     t(_$$tX2.COMPLETED);
   }, [_, a, t]);
   let y = t => {
-    (!e.shouldAcceptClickUseCaseTile || e.shouldAcceptClickUseCaseTile()) && (Cu({
+    (!e.shouldAcceptClickUseCaseTile || e.shouldAcceptClickUseCaseTile()) && (logAndTrackCTA({
       trackingContext: name,
       text: `${t} tile clicked`
     }, "CTA Clicked"), e.onClickUseCaseTile(t));
   };
   function b(t, r) {
-    Cu({
+    logAndTrackCTA({
       trackingContext: name,
       text: `${t} tile hovered`
     }, "CTA Hovered");
@@ -4299,7 +4299,7 @@ let nn = _$$n2(({
     categoryIds,
     isLoading
   } = bg({
-    templatesShelfType: cS.FIGJAM_SIMPLE_TEMPLATES_PICKER,
+    templatesShelfType: CommunityPageType.FIGJAM_SIMPLE_TEMPLATES_PICKER,
     source: "make-something-v2"
   });
   let {
@@ -4540,7 +4540,7 @@ function ns(e) {
               useCase: i,
               previewSvg: n,
               previewType: a
-            }) => jsxs(_$$E3, {
+            }) => jsxs(ButtonPrimitive, {
               className: iy()("browse_templates_make_something_onboarding--useCaseContainer--nnBm-", {
                 [r6]: ![fD.NONE, i].includes(hoveredUseCase)
               }),
@@ -4552,7 +4552,7 @@ function ns(e) {
               },
               children: [jsxs("div", {
                 className: "browse_templates_make_something_onboarding--useCaseHeader--0ad0i text--fontPos11Whyte--wZDnv text--_fontBaseWhyte--efAjI",
-                children: [jsx(_$$B, {
+                children: [jsx(SvgComponent, {
                   svg: e,
                   height: "28px",
                   width: "28px",
@@ -4688,7 +4688,7 @@ function no(e) {
               onMouseLeave: () => setHoveredUseCase(fD.NONE),
               role: "option",
               tabIndex: -1,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: iy()({
                   "browse_templates_make_something_onboarding--brainstormIcon--O0mh5": i === fD.BRAINSTORM
                 }),
@@ -4901,7 +4901,7 @@ function nR(e) {
               children: renderI18nText("rcs.figjam_onboarding.for_more_tips_and_tricks_here_s_a_2_minute_hands_on_tutorial")
             }), jsxs("div", {
               className: "onboard_figjam_viewer--openTutorialBottomContentRow--rVWqG onboard_figjam_viewer--bottomContentRow--PgTeU",
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "ghost",
                 onClick: e.dismissModal,
                 children: renderI18nText("rcs.figjam_onboarding.maybe_later")
@@ -4954,7 +4954,7 @@ function nP(e, t) {
   captureMessage("FigJam onboarding - Failed to load starter files; we did not render open tutorial overlay");
 }
 function nF(e) {
-  let t = dq();
+  let t = useCurrentUserOrgId();
   let i = _$$ol()?.id;
   let [a] = IT(XZ({
     currentOrgId: t || void 0,
@@ -5014,7 +5014,7 @@ function nB() {
     }), r.current) : Promise.resolve(a.current);
   }(UserForRcs, {});
   let c = useAtomWithSubscription(openFileAtom);
-  let u = Td();
+  let u = useIsCanvasEditDisabled();
   let m = !nM({
     openFile: c
   });
@@ -7173,14 +7173,14 @@ function s_({
   isShowing: t,
   complete: i
 }) {
-  let n = _X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let a = getSingletonSceneGraph().get(e);
   if (!a) return null;
   let s = a.sectionPresetPickerCalloutPosition;
   if (isNaN(s.x) || isNaN(s.y)) return null;
-  let o = Z0(n, s, !0);
+  let o = viewportToScreen(n, s, !0);
   let l = parseFloat(_1);
   let d = {
     top: o.y + n.y + l + 2,
@@ -7573,7 +7573,7 @@ function sK() {
         aspectRatio: 16 / 9
       }),
       onClose: e => {
-        "close_button_clicked" !== e && Cu({
+        "close_button_clicked" !== e && logAndTrackCTA({
           eventName: "Overlay Closed",
           trackingContext: `Onboarding Sequence > ${sG} Step 1`,
           overlayStep: 1,
@@ -7607,7 +7607,7 @@ function sK() {
         aspectRatio: 16 / 9
       }),
       onClose: e => {
-        "close_button_clicked" !== e && Cu({
+        "close_button_clicked" !== e && logAndTrackCTA({
           eventName: "Overlay Closed",
           trackingContext: `Onboarding Sequence > ${sG} Step 2`,
           overlayStep: 2,
@@ -8190,7 +8190,7 @@ function oH(e) {
     overlay: K_h,
     priority: _$$N.SECONDARY_MODAL
   });
-  let a = _$$sZ();
+  let a = useCurrentUserOrg();
   let o = useAtomWithSubscription(openFileAtom);
   let l = useAtomWithSubscription(oK)?.type === jS;
   return (_$$E2(i.uniqueId, [q2], () => {
@@ -8474,8 +8474,8 @@ function li({
     isSlidesEditor,
     isDevModeEditor
   } = o9(e);
-  let h = _$$tG();
-  let m = q8();
+  let h = isHandbrakeDisabledForCurrentUser();
+  let m = isAIFeaturesEnabledForCurrentUser();
   let f = useCanUseDevModeDemoFile();
   let g = useIsSelectedFigmakeFullscreen();
   let _ = function (e) {

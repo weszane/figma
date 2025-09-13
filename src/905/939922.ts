@@ -11,7 +11,7 @@ import { c5 } from "../905/93909";
 import { isBranchAlt, findBranchById, isBranch } from "../905/760074";
 import { z4 } from "../905/37051";
 import { Tf, nb } from "../figma_app/543100";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { M4 } from "../905/713695";
@@ -22,7 +22,7 @@ import { ai } from "../figma_app/915202";
 import { O } from "../905/833838";
 export function $$S0() {
   let e = selectCurrentUser();
-  let t = dq();
+  let t = useCurrentUserOrgId();
   let i = cD();
   let a = _6();
   let s = useDispatch();

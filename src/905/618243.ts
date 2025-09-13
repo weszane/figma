@@ -9,11 +9,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { p as _$$p } from "../905/185998";
 import { k as _$$k } from "../905/443820";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Uz } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
@@ -28,7 +28,7 @@ import { FEditorType } from "../figma_app/53721";
 import { registerModal } from "../905/102752";
 import { customHistory } from "../905/612521";
 import { Us } from "../figma_app/637027";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { V as _$$V } from "../905/223767";
@@ -96,7 +96,7 @@ function N(e) {
   };
   let P = useModalManager(e);
   let O = setupAutofocusHandler();
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: P,
     width: "sm",
     children: jsxs(vo, {
@@ -118,13 +118,13 @@ function N(e) {
         })
       }), jsxs(wi, {
         children: [(s || "loading" === R.status) && jsx(_$$k, {}), jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: () => {
               t(hideModal());
             },
             children: renderI18nText("collaboration.branching_create.cancel_button")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             type: "submit",
             onClick: N,
@@ -437,7 +437,7 @@ let X = registerModal(function ({
   });
   let o = t ? void 0 : jsxs("div", {
     className: _$$s.flex.flexRow.gap8.mr36.$,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: _$$s.colorIcon.$,
       svg: _$$A
     }), jsx("div", {

@@ -9,7 +9,7 @@ import { k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Rb } from "../figma_app/852050";
 import { n as _$$n } from "../905/971006";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { x as _$$x } from "../905/346809";
 import { Zk, fI } from "../figma_app/626177";
 import { y } from "../905/855374";
@@ -44,7 +44,7 @@ export function $$_0() {
             "aria-label": getI18nString("variables.local_variables_panel.open_variables_button_tooltip"),
             htmlAttributes: {
               "data-tooltip": getI18nString("variables.local_variables_panel.open_variables_button_tooltip"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(A, {})
           })

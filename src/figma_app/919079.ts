@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { ZN, v, TT, Ww, o9, WH, _W, sM, Dt, JR, uS, Pu, xi, KK, M6, A4, uo, FZ, B4, yZ, C0, KT, zB, ko, Iv, rL, Xo, vg, rJ, vT, Fw, Uu, gL, _X, Sx, t1, aK, rw, W5, eD } from "../905/937197";
 import { A } from "../svg/545021";
 var o = s;
@@ -87,7 +87,7 @@ export class $$h0 extends PureComponent {
         padding: this.props.padding ? `${this.props.padding.y}px ${this.props.padding.x}px` : void 0
       },
       tabIndex: this.props.onClick ? 0 : void 0,
-      children: [this.props.icon, "function" != typeof this.props.text ? this.props.text : jsx(this.props.text, {}), this.props.onClose && jsx(B, {
+      children: [this.props.icon, "function" != typeof this.props.text ? this.props.text : jsx(this.props.text, {}), this.props.onClose && jsx(SvgComponent, {
         className: eD,
         onClick: this.props.onClose,
         svg: A

@@ -1,7 +1,7 @@
 import _require2 from "../formatter/895744";
 import _require from "../formatter/851958";
 import { useState, useCallback, useEffect } from "react";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { aq } from "../figma_app/412189";
 import { parseLoose } from "../905/253473";
 function a(e, t, r) {
@@ -293,7 +293,7 @@ export function $$E1(e, t = !1, r) {
       p() && a(t);
     }
   }, [p, e, r?.parser, r?.semi, r?.printWidth, t]);
-  let m = A(l, 100, {
+  let m = useDebouncedCallback(l, 100, {
     leading: !0
   });
   useEffect(() => {

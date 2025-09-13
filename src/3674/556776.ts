@@ -10,7 +10,7 @@ import { J as _$$J } from "../905/125993";
 import { IAssertResource } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { hh } from "../905/417232";
 import { c$ } from "../figma_app/236327";
 import { tH } from "../905/751457";
@@ -27,8 +27,8 @@ import { Gt } from "../figma_app/248118";
 import { x as _$$x } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { Um } from "../905/848862";
-import { bD } from "../figma_app/45218";
-import { Ib } from "../905/129884";
+import { ResourceType } from "../figma_app/45218";
+import { KindEnum } from "../905/129884";
 import { be } from "../figma_app/474636";
 import { VR } from "../figma_app/545541";
 import { V as _$$V } from "../905/480825";
@@ -127,7 +127,7 @@ function G(e) {
   let b = useMemoStable(() => new Set(pinnedPlugins.map(e => e.plugin_id)), [pinnedPlugins]);
   useEffect(() => {
     p(Vg({
-      resourceType: bD.PLUGIN,
+      resourceType: ResourceType.PLUGIN,
       resourceIds: Array.from(b)
     }));
   }, [b, p]);
@@ -185,7 +185,7 @@ function U({
   let r = Gt(e.plugin_id, "pinned");
   let c = useAtomWithSubscription(be);
   let u = c?.plugin_id ?? null;
-  let f = _$$U();
+  let f = trackFileEventWithStore();
   let x = useRef(null);
   let m = useCanAccessFullDevMode();
   let _ = m0() && !m;
@@ -236,7 +236,7 @@ function U({
     ref: x,
     children: [jsx("button", {
       className: c?.plugin_id === e.plugin_id ? "pinned_plugins--runningPin--SFxzi pinned_plugins--basePin--ivx6q" : "pinned_plugins--pin--QIbCP pinned_plugins--basePin--ivx6q",
-      "data-tooltip-type": H || B ? void 0 : Ib.TEXT,
+      "data-tooltip-type": H || B ? void 0 : KindEnum.TEXT,
       "data-tooltip": H || B ? void 0 : e.name,
       onClick: t => {
         _ ? (setSelectedDevModePropertiesPanelTab(IAssertResource.PLUGIN), y(IN({
@@ -307,7 +307,7 @@ function K({
         "aria-label": getI18nString("dev_handoff.inspect_panel.more_plugins"),
         htmlAttributes: {
           onMouseDown: dG,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("dev_handoff.inspect_panel.more_plugins")
         },
         children: jsx(_$$J, {})

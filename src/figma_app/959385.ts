@@ -12,7 +12,7 @@ import { R as _$$R } from "../figma_app/313269";
 import { reportError } from "../905/11";
 import { formatNumber } from "../figma_app/930338";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -23,7 +23,7 @@ import { S as _$$S } from "../figma_app/11182";
 import { RK } from "../figma_app/815170";
 import { _P } from "../figma_app/844435";
 import { manifestContainsWidget } from "../figma_app/155287";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ox, ab } from "../figma_app/870683";
 import { HW } from "../figma_app/632248";
 import { z as _$$z } from "../905/654860";
@@ -175,7 +175,7 @@ function ee({
           "aria-label": getI18nString("qa.extensions.open_in_community"),
           htmlAttributes: {
             "data-tooltip": getI18nString("qa.extensions.open_in_community"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$N, {})
         }), jsx(_$$K, {
@@ -183,7 +183,7 @@ function ee({
           "aria-label": getI18nString("qa.copy_link"),
           htmlAttributes: {
             "data-tooltip": getI18nString("qa.copy_link"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$W, {})
         })]
@@ -226,7 +226,7 @@ function er({
       className: _$$s.flex.flexRow.itemsCenter.gap8.colorTextSecondary.textBodyMedium.$,
       children: [jsxs("div", {
         className: _$$s.flex.flexRow.gap2.$,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A2,
           className: _$$s.colorIconSecondary.$,
           style: sx.add({
@@ -237,7 +237,7 @@ function er({
         })]
       }), jsxs("div", {
         className: _$$s.flex.flexRow.gap2.$,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A,
           className: _$$s.mx2.colorIconSecondary.$
         }), jsx("div", {

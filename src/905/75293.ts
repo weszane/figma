@@ -17,7 +17,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { Point } from "../905/736624";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { XE } from "../figma_app/91703";
@@ -30,7 +30,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { fl, Ht, Pd } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
@@ -289,7 +289,7 @@ let ec = memo(function ({
       autoFocus: !0,
       className: e,
       "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.count"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: s,
       dropdownShown: d,
       dropdownWidth: 140,
@@ -335,7 +335,7 @@ function eu({
     forwardedRef: l,
     children: [i, jsx(sK, {}, "divider"), jsx(Z0, {
       ignoreCheck: !0,
-      icon: jsx(_$$B, {
+      icon: jsx(SvgComponent, {
         className: "grid_settings--applyVariableOptionIcon--uUF5K",
         svg: $$default
       }),
@@ -372,7 +372,7 @@ let ep = memo(function ({
     autoFocus: !0,
     bigNudgeAmount: s,
     "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.width"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: d,
     dispatch: l,
     min: 0,
@@ -416,7 +416,7 @@ let em = memo(function ({
         bigNudgeAmount: s,
         className: J,
         "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.gutter"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: l,
         isTokenizable: !0,
         min: 0,
@@ -549,7 +549,7 @@ let eg = memo(function ({
     }),
     bigNudgeAmount: s,
     "data-tooltip": getI18nString("fullscreen.grids_panel.grid_settings.offset"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: d,
     dispatch: l,
     min: 0,

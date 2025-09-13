@@ -41,7 +41,7 @@ import { g as _$$g, rd, dO, qh } from "../vendor/130505";
 import { trackEventAnalytics } from "../905/449184";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { Ak } from "../905/773401";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { aJ as _$$aJ, Sz, ZQ } from "../figma_app/673202";
 import { Ml, e2 as _$$e2, C$ } from "../figma_app/971485";
 import { a as _$$a } from "../905/720941";
@@ -55,7 +55,7 @@ import { N_ } from "../vendor/956898";
 import { J as _$$J } from "../5430/284487";
 import { z as _$$z } from "../905/239603";
 import { Vm, HX, XW, zL, qY, ws } from "../figma_app/427318";
-import { vt, cS, U as _$$U } from "../figma_app/45218";
+import { ResourceTypeNoComment, CommunityPageType, hasClientMeta } from "../figma_app/45218";
 import { bo } from "../figma_app/10554";
 import { M4, IT as _$$IT } from "../905/713695";
 import { getRequest } from "../905/910117";
@@ -104,13 +104,13 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Z as _$$Z } from "../905/498136";
 import { l$, gs, Qd } from "../figma_app/275462";
 import { k as _$$k2 } from "../905/22009";
-import { TD } from "../905/499018";
+import { getIconColor } from "../905/499018";
 import { A as _$$A9 } from "../6828/523860";
 import { A as _$$A0 } from "../svg/951803";
 import { A as _$$A1 } from "../svg/228383";
 import { J as _$$J2 } from "../905/614223";
 import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
-import { A as _$$A10 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { Fu, r1 } from "../figma_app/545877";
 import { w4, QK, Xt } from "../figma_app/692865";
 import { E as _$$E2 } from "../905/53857";
@@ -162,7 +162,7 @@ import { A as _$$A28 } from "../svg/442990";
 import { A as _$$A29 } from "../svg/484954";
 import { g as _$$g2 } from "../905/687265";
 import { xk, Ay as _$$Ay5 } from "@stylexjs/stylex";
-import { Cu, qD as _$$qD } from "../figma_app/314264";
+import { logAndTrackCTA, trackContextViewed } from "../figma_app/314264";
 import { e0 as _$$e4 } from "../905/696396";
 import { GS } from "../5430/342380";
 import { q as _$$q2, S as _$$S3 } from "../figma_app/277543";
@@ -176,7 +176,7 @@ import { y$ } from "../figma_app/835219";
 import { Zp } from "../figma_app/188671";
 import { e as _$$e5 } from "../5430/604204";
 import { Ay as _$$Ay6 } from "../figma_app/103728";
-import { WW } from "../905/521428";
+import { ButtonLarge } from "../905/521428";
 import { f6 } from "../figma_app/915202";
 import { AG } from "../figma_app/999312";
 import { O as _$$O } from "../5430/638907";
@@ -538,7 +538,7 @@ let V = memo(function (e) {
       rel: "noopener",
       target: "_blank",
       href: i,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A
       })
     }), jsx("span", {
@@ -628,7 +628,7 @@ let ex = _$$z.object({
 }).nonstrict();
 function e_(e, t) {
   let i = Vm(e);
-  return t?.resources?.length ? (t?.resources).find(t => i === vt.HUB_FILE ? t?.hub_file_id === e.id : i === vt.PLUGIN ? t?.plugin_id === e.id : i === vt.WIDGET ? t?.widget_id === e.id : void 0) : t?.resource ? t?.resource : void 0;
+  return t?.resources?.length ? (t?.resources).find(t => i === ResourceTypeNoComment.HUB_FILE ? t?.hub_file_id === e.id : i === ResourceTypeNoComment.PLUGIN ? t?.plugin_id === e.id : i === ResourceTypeNoComment.WIDGET ? t?.widget_id === e.id : void 0) : t?.resource ? t?.resource : void 0;
 }
 _$$z.object({
   title: _$$z.string().nullable(),
@@ -1124,7 +1124,7 @@ function e2(e) {
               className: "community_collections--metaLeft--9gNAe",
               children: [jsx("div", {
                 className: "community_collections--curatedImage--YDOQy community_collections--metaSpace--9Jcor",
-                children: jsx(_$$B, {
+                children: jsx(SvgComponent, {
                   svg: _$$A6,
                   width: "15px",
                   height: "15px",
@@ -1671,14 +1671,14 @@ function t4({
     children: [jsxs("button", {
       onClick: t,
       className: _$$s.flex.justifyStart.alignLeft.colorText.itemsCenter.$,
-      children: [i.text, jsx(_$$B, {
+      children: [i.text, jsx(SvgComponent, {
         svg: _$$A9,
         className: e9()("mobile_flyout_item_group--mobileFlyoutItemGroupCaret--lbbaU", {
           "mobile_flyout_item_group--mobileFlyoutItemGroupCaretExpanded--P269f": e
         }),
         svgClassName: _$$s.w8.h8.$,
         style: {
-          fill: TD("default")
+          fill: getIconColor("default")
         }
       })]
     }), jsx("div", {
@@ -1726,23 +1726,23 @@ function t7({
           ...d,
           children: [jsxs("div", {
             className: _$$s.flex.justifyBetween.itemsCenter.$,
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: _$$A0,
               className: "mobile_flyout--communitySvgContainer--R6Qs9",
               style: {
-                fill: TD("default")
+                fill: getIconColor("default")
               },
               svgClassName: _$$s.w32.h32.$,
               onClick: () => {
                 customHistory.push("/community");
                 t();
               }
-            }), jsx(_$$B, {
+            }), jsx(SvgComponent, {
               svg: _$$A1,
               svgWidth: "18px",
               onClick: t,
               style: {
-                fill: TD("default")
+                fill: getIconColor("default")
               }
             })]
           }), jsx("div", {
@@ -2869,7 +2869,7 @@ var iI = (e => (e.DesignTemplate = "design_template", e.Websites = "websites", e
 function iA() {
   let [e, t] = useState();
   let i = l$();
-  let n = _$$A10(e => t(e), 50);
+  let n = useDebouncedCallback(e => t(e), 50);
   return jsxs("div", {
     "data-testid": "nav-category-selector",
     className: "nav_category_selector_2--categorySelector--b-k5b",
@@ -2982,10 +2982,10 @@ function iB({
             className: "nav_category_selector_2--newBadge--3isz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: getI18nString("community.badge.new")
           })
-        }), !d && jsx(_$$B, {
+        }), !d && jsx(SvgComponent, {
           svg: _$$A11,
           style: {
-            fill: TD("default")
+            fill: getIconColor("default")
           }
         })]
       }), !d && !!i && jsx("div", {
@@ -3067,7 +3067,7 @@ function iQ() {
       onClick: () => {
         e(rO());
       },
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A12,
         className: "admin_profile_banner--close--ib2wO"
       })
@@ -3402,7 +3402,7 @@ function ng({
     inSearchPath
   } = iM();
   let [o, l] = useState("");
-  let c = _$$A10(onSubmit, 400);
+  let c = useDebouncedCallback(onSubmit, 400);
   let d = useCallback(() => {
     l("");
   }, []);
@@ -3463,7 +3463,7 @@ let nR = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       className: "hero--colorIllustrations--SS5zw",
       svg: _$$A17
     })
@@ -3492,11 +3492,11 @@ let nR = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       className: n_,
       svg: _$$A18,
       style: {
-        fill: TD("default")
+        fill: getIconColor("default")
       }
     })
   },
@@ -3524,11 +3524,11 @@ let nR = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       className: n_,
       svg: _$$A28,
       style: {
-        fill: TD("default")
+        fill: getIconColor("default")
       }
     })
   },
@@ -3556,11 +3556,11 @@ let nR = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       className: n_,
       svg: _$$A23,
       style: {
-        fill: TD("default")
+        fill: getIconColor("default")
       }
     })
   },
@@ -3588,11 +3588,11 @@ let nR = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       className: n_,
       svg: _$$A27,
       style: {
-        fill: TD("default")
+        fill: getIconColor("default")
       }
     })
   },
@@ -3620,7 +3620,7 @@ let nR = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A19,
       useOriginalSrcFills_DEPRECATED: !0,
       className: "hero--colorSwatches--Vz0OG"
@@ -3834,11 +3834,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A21,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -3865,11 +3865,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A22,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -3897,11 +3897,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A20,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -3929,11 +3929,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A16,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -3961,11 +3961,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A25,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -3993,11 +3993,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A24,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -4025,11 +4025,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A14,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -4057,11 +4057,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A26,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   },
@@ -4089,11 +4089,11 @@ let nB = {
       bounce: .4,
       duration: .25
     },
-    element: jsx(_$$B, {
+    element: jsx(SvgComponent, {
       svg: _$$A15,
       style: {
         fill: "none",
-        stroke: TD("default")
+        stroke: getIconColor("default")
       }
     })
   }
@@ -4291,7 +4291,7 @@ function nH({
     trackingProperties: {
       slug: t.pathname
     },
-    children: [e, jsx(_$$B, {
+    children: [e, jsx(SvgComponent, {
       svg: _$$A29,
       className: "homepage_section--chevron--alHAr"
     })]
@@ -4340,7 +4340,7 @@ function nX() {
         }).href,
         className: "x5yr21d xh8yej3 x1hl2dhg",
         onClick: () => {
-          Cu({
+          logAndTrackCTA({
             action: s0.MAKE_BANNER_CLICK,
             viewContext: _$$e4.COMMUNITY_HUB_LANDING
           });
@@ -4983,7 +4983,7 @@ function au() {
     contextClicked: "community-make-page"
   });
   let i = () => {
-    Cu({
+    logAndTrackCTA({
       action: s0.MAKE_SOMETHING_NEW,
       viewContext: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
       loggedIn: !0
@@ -5011,7 +5011,7 @@ function au() {
         })
       }), ("loading" === e.status || "loaded" === e.status && e.canCreateFigmakeFile) && jsx(_$$J2, {
         brand: "bake-filebrowser",
-        children: jsx(WW, {
+        children: jsx(ButtonLarge, {
           disabled: "loading" === e.status,
           variant: "primary",
           onClick: () => {
@@ -5638,7 +5638,7 @@ function aA(e) {
     }
   });
   useEffect(() => {
-    void 0 !== prevActiveTab && prevActiveTab !== tabManager.activeTab && Cu({
+    void 0 !== prevActiveTab && prevActiveTab !== tabManager.activeTab && logAndTrackCTA({
       action: s0.FEATURED_RESOURCES_TAB_CLICK,
       viewContext: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
       tab: tabConfig[tabManager.activeTab]?.tabTitle
@@ -5652,7 +5652,7 @@ function aA(e) {
         E("loading");
         try {
           let e = await _$$A3.getCommunityShelves({
-            shelfType: cS.MAKE_PAGE_FEED
+            shelfType: CommunityPageType.MAKE_PAGE_FEED
           });
           e.data.meta[0] && j(e.data.meta[0]);
           E("success");
@@ -5955,7 +5955,7 @@ function a2({
       }
     })
   });
-  let s = XW(e) ? e.thumbnail_src_set : _$$U(e) && e.resized_thumbnail_urls;
+  let s = XW(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
   return jsx("div", {
     className: aK,
     children: jsx(F5, {
@@ -6136,7 +6136,7 @@ function so() {
   let m = u && XW(u) ? qY(u) : u;
   let p = u && ws(u) ? u.category : void 0;
   useEffect(() => {
-    e && t && u && m && (_$$U(m) ? n(Sb({
+    e && t && u && m && (hasClientMeta(m) ? n(Sb({
       hubFiles: [m],
       src: "resourcePage"
     })) : n(Qi({
@@ -6207,7 +6207,7 @@ function sl() {
     performanceMetricsTracker.initialRenderDurationMs = Math.round(window.performance.now() - performanceMetricsTracker.domContentLoadedMs);
     performanceMetricsTracker.timeToLoadMs = Math.round(performance.now());
     performanceMetricsTracker.report(trackEventAnalytics);
-    _$$qD({
+    trackContextViewed({
       name: "Community Hub"
     });
   }, []);

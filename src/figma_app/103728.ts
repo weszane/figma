@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { useCallback } from "react";
 import { qB } from "../905/862321";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { fu, $z } from "../figma_app/831799";
 import { A } from "../figma_app/722506";
 import { FL } from "../figma_app/248365";
@@ -56,7 +56,7 @@ function _({
             ...e,
             children: e.children
           }),
-          Svg: B
+          Svg: SvgComponent
         }
       })
     })

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, Fragment as _$$Fragment, forwardRef, useState, useMemo, useCallback } from "react";
 import { E as _$$E } from "../905/53857";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { L as _$$L } from "../905/704296";
 import { h as _$$h } from "../905/994594";
@@ -22,14 +22,14 @@ import { A as _$$A } from "../1250/29260";
 import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { S as _$$S } from "../905/711470";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Bt, xV, kZ } from "../figma_app/88239";
 import { bh } from "../1250/224366";
 import { LibraryKeyToFileLink } from "../figma_app/43951";
 import { SelectorType } from "../figma_app/707808";
 import { k1, qd, Mj } from "../1250/428971";
 import { d as _$$d } from "../905/976845";
-import { E as _$$E2 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k2 } from "../905/443820";
 import { J as _$$J2 } from "../905/125993";
 import { g as _$$g } from "../905/757007";
@@ -40,7 +40,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { R as _$$R } from "../905/621802";
 import { f as _$$f } from "../905/54715";
 import { createPortal } from "react-dom";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { KF, r9 } from "../6268/430335";
 import { Tp } from "../1250/282084";
 import { Wq, dx } from "../6658/436658";
@@ -50,7 +50,7 @@ import { w as _$$w } from "../905/433065";
 import { W as _$$W } from "../905/569454";
 import { M as _$$M } from "../1250/358700";
 import { N as _$$N } from "../905/865305";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { useDispatch } from "react-redux";
 import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059";
 import { N as _$$N2 } from "../905/438674";
@@ -66,7 +66,7 @@ import { G as _$$G, A as _$$A4 } from "../1250/975106";
 import { bL as _$$bL, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { useModalManager } from "../905/437088";
-import { bL as _$$bL2 } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { fu } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
@@ -109,7 +109,7 @@ function T({
       ...getTriggerProps(),
       "aria-label": getI18nString("dev_handoff.component_browser.sort_by"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.component_browser.sort_by"),
         "data-testid": "component_browser_sort_by"
       },
@@ -161,7 +161,7 @@ function Q({
       className: "component_browser_chip_search_dropdown--resultsList--J1-7i",
       children: i ? jsxs("li", {
         className: "component_browser_chip_search_dropdown--loadingState--BfIlh",
-        children: [jsx(kt, {}), r]
+        children: [jsx(LoadingSpinner, {}), r]
       }) : a.length > 0 ? a.map((e, n) => jsx(_$$Fragment, {
         children: d(e, n)
       }, n)) : jsx("li", {
@@ -204,7 +204,7 @@ function V({
   isSelected: c
 }) {
   return jsx("li", {
-    children: jsxs(_$$E2, {
+    children: jsxs(ButtonPrimitive, {
       className: u()("component_browser_chip_search_input--item--IGp8Y", {
         "component_browser_chip_search_input--selected--gg3EU": c
       }),
@@ -583,7 +583,7 @@ function em({
       "aria-label": getI18nString("dev_handoff.component_browser.bulk_icon_connect.more_options"),
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.component_browser.bulk_icon_connect.more_options"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       ...getTriggerProps(),
       children: jsx(_$$J2, {})
@@ -687,7 +687,7 @@ function ep({
                     selectedRepositories: v?.selectedRepositories ?? [],
                     location: "list_view",
                     entrypoint: i
-                  }), jsx(_$$E2, {
+                  }), jsx(ButtonPrimitive, {
                     className: "component_browser_bulk_icon_connect--connectButton--QRuMQ",
                     onClick: w,
                     disabled: !a,
@@ -1008,7 +1008,7 @@ function eK({
         })
       }), d.length > 0 && jsx("div", {
         className: eF,
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "secondary",
           onClick: _,
           children: d
@@ -1020,7 +1020,7 @@ function eK({
 function eq({
   onChooseDirectories: e
 }) {
-  let n = hC();
+  let n = trackDefinedFileEventWithStore();
   return jsxs("div", {
     className: eI,
     children: [jsx("div", {
@@ -1048,7 +1048,7 @@ function eq({
         })
       }), jsx("div", {
         className: eF,
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "secondary",
           onClick: () => {
             e();
@@ -1131,7 +1131,7 @@ let nn = registerModal(function (e) {
   let r = _$$G();
   return jsx(fu, {
     name: "Codebase Suggestions Onboarding Modal",
-    children: jsx(_$$bL2, {
+    children: jsx(ModalRootComponent, {
       manager: n,
       width: "lg",
       height: "dynamic",
@@ -1226,7 +1226,7 @@ let np = registerModal(function (e) {
       }
     }
   }, [e, c, _, m]);
-  return jsx(_$$bL2, {
+  return jsx(ModalRootComponent, {
     manager: n,
     width: "md",
     children: jsxs(vo, {
@@ -1247,11 +1247,11 @@ let np = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
             children: getI18nString("dev_handoff.codebase_suggestions.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "destructive",
             disabled: !(r && !a),
             onClick: p,
@@ -1329,7 +1329,7 @@ function nw({
   };
   return jsxs(bL, {
     manager,
-    children: [jsx($n, {
+    children: [jsx(Button, {
       variant: "ghost",
       ...getTriggerProps(),
       children: jsx(_$$J2, {})
@@ -1358,7 +1358,7 @@ function nj() {
     className: "component_browser_settings_panel--setupIngestionButton---keGz",
     children: jsxs(bL, {
       manager,
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "ghost",
         ...getTriggerProps(),
         children: jsx(_$$J2, {})
@@ -1407,7 +1407,7 @@ function nN({
   libraryKey: c
 }) {
   let i = "dark" === DP();
-  let r = hC();
+  let r = trackDefinedFileEventWithStore();
   let a = _$$A4();
   let l = i ? buildUploadUrl("87362980e1543a5db4a0044590b04d5f491a1e75") : buildUploadUrl("a938cc4b8421dc36477282e09f83e9e6770065ed");
   let d = Bt();
@@ -1508,7 +1508,7 @@ function nN({
               }), jsx("div", {
                 className: nx,
                 "data-tooltip": e,
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 children: e
               })]
             }, n)), directories.length > 2 && !v && jsxs("button", {
@@ -1578,7 +1578,7 @@ function nC({
       "aria-label": getI18nString("dev_handoff.component_browser.settings"),
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.codebase_suggestions.open_settings"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       "data-onboarding-key": k1.Step3,
       "aria-expanded": o,
@@ -1660,7 +1660,7 @@ function nR({
       })]
     }), jsxs("div", {
       className: "component_browser_library_view--headerRight--iwCrG",
-      children: [getFeatureFlags().dt_component_browser_suggestions_debug && jsxs($n, {
+      children: [getFeatureFlags().dt_component_browser_suggestions_debug && jsxs(Button, {
         onClick: () => {
           h(!p);
         },
@@ -1916,7 +1916,7 @@ function nM({
         "aria-label": getI18nString("dev_handoff.component_browser.clear_search"),
         htmlAttributes: {
           "data-tooltip": getI18nString("dev_handoff.component_browser.clear_search"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$L, {})
       })

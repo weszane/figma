@@ -1,4 +1,4 @@
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 let i = {
   opens_music_dropdown: "opens_music_dropdown",
   toggles_mute: "toggles_mute",
@@ -9,7 +9,7 @@ let i = {
   stops_song: "stops_song"
 };
 let a = (e, t, r, i) => {
-  ds(e, t.openFile?.key, t, {
+  trackFileEvent(e, t.openFile?.key, t, {
     ...r,
     multiplayer_count: t.multiplayer.allUsers.length
   }, i);

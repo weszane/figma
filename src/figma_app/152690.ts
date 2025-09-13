@@ -22,7 +22,7 @@ import { Q } from "../905/217916";
 import { hA } from "../figma_app/88239";
 import { showModalHandler } from "../905/156213";
 import { m0 } from "../figma_app/976749";
-import { GS } from "../figma_app/314264";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { MIXED_MARKER, normalizeValue, isValidValue, isInvalidValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
 import { A5, lJ, kl } from "../905/275640";
@@ -240,7 +240,7 @@ export function $$ec17(e = 0) {
       1 === e ? VariablesBindings.setExplicitVariableModeForDevModeFocusNode(r, n === $$Y8 || n === $$$10 ? null : n) : VariablesBindings.setExplicitVariableModeForSelection(r, n === $$Y8 || n === $$$10 ? null : n, !0);
     });
     let f = s?.modeOptions.find(e => deepEqual(e.modeId, n));
-    c && isValidValue(c) && GS("variables.explicit_mode_changed", m ?? "", h, {
+    c && isValidValue(c) && trackDefinedFileEvent("variables.explicit_mode_changed", m ?? "", h, {
       numSelected: g,
       numSelectedFrames: c.FRAME ?? 0,
       numSelectedInstances: c.INSTANCE ?? 0,

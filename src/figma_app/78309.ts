@@ -1,7 +1,7 @@
 import E from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { e as _$$e } from '../905/149844';
 import { scopeAwareFunction } from '../905/189185';
 import { isValidValue } from '../905/216495';
@@ -9,7 +9,7 @@ import { E as _$$E2 } from '../905/277716';
 import { getI18nString } from '../905/303541';
 import { K as _$$K } from '../905/443068';
 import { k as _$$k2 } from '../905/582200';
-import { E as _$$E } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { z5 } from '../905/713722';
 import { Point } from '../905/736624';
 import { BK } from '../905/848862';
@@ -263,7 +263,7 @@ function Y({
     'onClick': e,
     'recordingKey': t,
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('slides.properties_panel.color_picker.add_template_color_tooltip')
     },
     'disabled': i,
@@ -316,9 +316,9 @@ function $({
       name: 'slides_add_custom_color',
       children: jsx('div', {
         className: _$$s.flex.justifyCenter.itemsCenter.w32.h32.$,
-        children: jsx(_$$E, {
+        children: jsx(ButtonPrimitive, {
           'htmlAttributes': {
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('slides.properties_panel.color_picker.add_color_aria_label')
           },
           'className': _$$s.w24.h24.$,
@@ -343,7 +343,7 @@ function $({
         onContextMenu: e => y(t, e),
         isSelected: !s && colorsEqual(t.color, e?.color) && t.opacity === e?.opacity,
         recordingKey: generateRecordingKey(o, 'documentColor', _$$F.format(t.color))
-      }, i)), E && jsx(_$$E, {
+      }, i)), E && jsx(ButtonPrimitive, {
         className: _$$s.wFull.h32.flex.itemsCenter.justifyCenter.$,
         onClick: () => u(!0),
         recordingKey: generateRecordingKey(o, 'documentColors', 'more'),
@@ -394,13 +394,13 @@ export function $$q2({
     'className': y()(k8, {
       [wH]: o
     }),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip-show-above': !0,
     'data-tooltip': r,
     'data-tooltip-subtext': i,
     'data-tooltip-text-inline': !0,
     'data-testid': _,
-    'children': [l && c && p && jsx(_$$E, {
+    'children': [l && c && p && jsx(ButtonPrimitive, {
       className: y()(Lq, {
         [Sn]: u,
         [Qo]: isInteractionPathCheck()
@@ -417,7 +417,7 @@ export function $$q2({
       },
       recordingKey: generateRecordingKey(_, 'edit'),
       children: l
-    }), jsxs(_$$E, {
+    }), jsxs(ButtonPrimitive, {
       'htmlAttributes': {
         onContextMenu: h
       },

@@ -1,6 +1,6 @@
 import { Point } from "../905/736624";
 import { U6 } from "../figma_app/591738";
-import { Qt } from "../figma_app/62612";
+import { centeredValue } from "../figma_app/62612";
 import { Sw } from "../figma_app/805373";
 import { G } from "../905/799129";
 import { M } from "../905/84612";
@@ -188,8 +188,8 @@ let g = class e extends HTMLElement {
   static getClusterViewportRect(e, t) {
     if (1 === e.threads.length) {
       let i = e.threads[0];
-      let n = Qt(i.canvasPosition.x, 0, t.zoomScale, 1) - t.offsetX * t.zoomScale + t.width / 2;
-      let r = Qt(i.canvasPosition.y, 0, t.zoomScale, 1) - t.offsetY * t.zoomScale + t.height / 2;
+      let n = centeredValue(i.canvasPosition.x, 0, t.zoomScale, 1) - t.offsetX * t.zoomScale + t.width / 2;
+      let r = centeredValue(i.canvasPosition.y, 0, t.zoomScale, 1) - t.offsetY * t.zoomScale + t.height / 2;
       let s = c4(i.comments);
       let o = XC.getPinSize(s.length);
       return {
@@ -199,8 +199,8 @@ let g = class e extends HTMLElement {
       };
     }
     return {
-      x: Qt(e.x, 0, t.zoomScale, 1) - t.offsetX * t.zoomScale + t.width / 2 - $$p1 / 2,
-      y: Qt(e.y, 0, t.zoomScale, 1) - t.offsetY * t.zoomScale + t.height / 2 - $$p1 / 2,
+      x: centeredValue(e.x, 0, t.zoomScale, 1) - t.offsetX * t.zoomScale + t.width / 2 - $$p1 / 2,
+      y: centeredValue(e.y, 0, t.zoomScale, 1) - t.offsetY * t.zoomScale + t.height / 2 - $$p1 / 2,
       height: $$p1,
       width: $$p1
     };

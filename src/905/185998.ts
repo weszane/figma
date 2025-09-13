@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
 import { M } from "../905/850310";
 import { Y } from "../905/246212";
-import { Vg } from "../905/893109";
+import { identity } from "../905/893109";
 var n = {};
 require.d(n, {
   group: () => g,
@@ -43,7 +43,7 @@ let A = forwardRef(({
   ref: o,
   className: _$$A($$p, n[e], i),
   style: {
-    [Vg("--colspan")]: t
+    [identity("--colspan")]: t
   }
 }));
 A.displayName = "Input.Root";
@@ -56,7 +56,7 @@ let y = forwardRef(({
   ref: a,
   className: _$$A(g, n[e]),
   style: {
-    [Vg("--columns")]: t
+    [identity("--columns")]: t
   }
 }));
 y.displayName = "Input.Group";

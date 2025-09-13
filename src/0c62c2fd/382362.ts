@@ -3,13 +3,13 @@ import { memo, useMemo, useState, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { Uz } from "../905/63728";
 import { useWebLoggerTimerEffect } from "../905/485103";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -34,8 +34,8 @@ import { $i } from "../905/635424";
 import { w as _$$w } from "../905/733703";
 import { $ as _$$$, t as _$$t2 } from "../905/628632";
 import { nH } from "../4452/331328";
-import { E as _$$E } from "../905/632989";
-import { B as _$$B } from "../905/714743";
+import { ButtonPrimitive } from "../905/632989";
+import { SvgComponent } from "../905/714743";
 import { z6 } from "../figma_app/805373";
 import { F as _$$F2, j as _$$j } from "../4452/869669";
 import { ET, mi } from "../figma_app/907616";
@@ -49,13 +49,13 @@ import { E4 } from "../905/144598";
 import { DA, Vq, Zk, st, d3, TS, Lq } from "../figma_app/538002";
 function Y(e) {
   let t = e.canAdmin;
-  let r = jsx(_$$B, {
+  let r = jsx(SvgComponent, {
     className: wk,
     svg: _$$A2
   });
   e.sharingAudienceControl === FPermissionLevelType.ORG_EDIT || e.sharingAudienceControl === FPermissionLevelType.ORG_VIEW ? r = jsx("div", {
     className: AA,
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: _$$A3
     })
   }) : (e.sharingAudienceControl === FPermissionLevelType.WORKSPACE_EDIT || e.sharingAudienceControl === FPermissionLevelType.WORKSPACE_VIEW) && (r = jsx("div", {
@@ -67,7 +67,7 @@ function Y(e) {
   }));
   let s = e.sharingAudienceControl === FPermissionLevelType.INVITE_ONLY && e.isTeamOrgBrowsable;
   let i = s ? Fl : Jt;
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: t ? i : zn,
     onClick: t ? () => e.changeModalView(1) : void 0,
     "data-onboarding-key": _$$F2,
@@ -81,7 +81,7 @@ function Y(e) {
       }), e.org && jsxs("div", {
         className: j7,
         "data-onboarding-key": _$$F2,
-        children: [e.sharingAudienceControl && mi(e.sharingAudienceControl), t && jsx(_$$B, {
+        children: [e.sharingAudienceControl && mi(e.sharingAudienceControl), t && jsx(SvgComponent, {
           svg: _$$A,
           className: $w
         }), t && jsx(_$$j, {})]
@@ -360,7 +360,7 @@ export function $$ee0(e) {
     }, "container")
   }) : jsx("div", {
     className: Lq,
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   }) : er ? ea && jsx(nH, {
     team: K,
     workspace: ei || void 0,
@@ -370,7 +370,7 @@ export function $$ee0(e) {
     goBack: () => ex(0)
   }) : jsx(Fragment, {}) : jsx("div", {
     className: Lq,
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   });
   return jsx(fu, {
     name: "Share Modal",
@@ -378,7 +378,7 @@ export function $$ee0(e) {
       resourceType: FResourceCategoryType.TEAM,
       resourceId: teamId
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: ey,
       width: "lg",
       children: jsxs(vo, {

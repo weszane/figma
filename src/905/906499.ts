@@ -1,9 +1,9 @@
 import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 export let $$d0 = registerModal(function (e) {
   let {
@@ -11,7 +11,7 @@ export let $$d0 = registerModal(function (e) {
     onClose
   } = e;
   let d = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: "sm",
     manager: d,
     children: jsxs(vo, {
@@ -23,7 +23,7 @@ export let $$d0 = registerModal(function (e) {
         children: message
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: onClose,
             children: renderI18nText("autosave.unable_to_leave_document.ok_button")
           })

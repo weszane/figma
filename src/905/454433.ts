@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { pT } from "../figma_app/435995";
 export function $$s0({
   onClick: e,
@@ -11,7 +11,7 @@ export function $$s0({
 }) {
   return jsx("div", {
     className: pT,
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       variant: "secondary",
       recordingKey: o,
       iconPrefix: s,

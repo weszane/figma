@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId, useRef, useCallback } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { bL, O6, hE, HG } from "../905/598775";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { Y } from "../905/506207";
 import { a as _$$a } from "../905/925868";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { A } from "../5724/713301";
 var d = l;
@@ -33,7 +33,7 @@ export function $$y1(e) {
     onDragStart: e.onDragStart,
     ref: o,
     "aria-current": e.isSelected ? "page" : void 0,
-    children: jsxs(E, {
+    children: jsxs(ButtonPrimitive, {
       "aria-labelledby": t,
       className: d()(p, {
         [x]: getFeatureFlags().file_browser_sidebar_row_ui,
@@ -50,7 +50,7 @@ export function $$y1(e) {
       }), jsxs("div", {
         id: t,
         className: v,
-        children: [e.showGrabber && jsx(B, {
+        children: [e.showGrabber && jsx(SvgComponent, {
           svg: A,
           className: "x1epfdc"
         }), e.icon && jsx("div", {
@@ -105,7 +105,7 @@ export function $$C0(e) {
     }), jsxs("div", {
       id: t,
       className: v,
-      children: [e.showGrabber && jsx(B, {
+      children: [e.showGrabber && jsx(SvgComponent, {
         svg: A,
         className: "x1epfdc"
       }), e.icon && jsx("div", {

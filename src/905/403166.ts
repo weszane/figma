@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { FruitTypes } from "../figma_app/763686";
 import { dN } from "../vendor/291472";
 import { buildStaticUrl } from "../figma_app/169182";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 let $$l7 = RegExp("\\p{Emoji_Presentation}+(\\u200D\\p{Emoji_Presentation}+)?", "gu");
 let d = /(?:\:([a-zA-Z0-9_\-\+]+)\:)(?:\:skin-tone-(\d)\:)?/;
 let c = RegExp(d.source, "g");
@@ -144,7 +144,7 @@ export function $$k12(e) {
       let i = Math.random().toString(36).substring(2);
       t.push(jsx("span", {
         className: "inline-emoji",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.meta,
         "data-text": e.unicode,
         children: e.unicode

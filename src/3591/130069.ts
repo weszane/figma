@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N } from "../905/438674";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Nn, dx, MZ } from "../figma_app/399472";
 import { getPluginVersion } from "../figma_app/300692";
 if (443 == require.j) {}
@@ -35,14 +35,14 @@ export function $$m3({
   let i = $$g2(e);
   let t = $$h0(e);
   return jsxs(AutoLayout, {
-    children: [jsx($n, {
+    children: [jsx(Button, {
       onClick: e => {
         e.stopPropagation();
         t();
       },
       variant: "secondary",
       children: renderI18nText("community.detail_view.decline")
-    }), jsx($n, {
+    }), jsx(Button, {
       onClick: e => {
         e.stopPropagation();
         i();
@@ -59,9 +59,9 @@ export function $$x4({
   let t = e.creator;
   let s = e.is_widget ? "widget" : "plugin";
   let l = `/community/${s}/${e.id}`;
-  return jsx(E, {
+  return jsx(TextWithTruncation, {
     children: renderI18nText("universal_insert.invited_you_to_publish", {
-      ownerName: jsx(E, {
+      ownerName: jsx(TextWithTruncation, {
         fontWeight: "medium",
         children: t.handle
       }),
@@ -72,7 +72,7 @@ export function $$x4({
           e.stopPropagation();
         },
         trusted: !0,
-        children: jsx(E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: "medium",
           children: i.name
         })

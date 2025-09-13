@@ -9,7 +9,7 @@ import { BE, Be, qr, QZ } from "../figma_app/844435";
 import { gS } from "../figma_app/740025";
 import { UK } from "../figma_app/740163";
 import { e as _$$e, n as _$$n } from "../figma_app/48514";
-import { td } from "../905/845253";
+import { getOrgByCurrentUserId } from "../905/845253";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { mapEditorTypeToFileType, mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
@@ -22,7 +22,7 @@ export function $$y1(e) {
     allSavedPlugins: E,
     recentlyUsedPlugins: gS(mapFileTypeToEditorType(t), e.recentlyUsed, e.localPlugins),
     localExtensions: e.localPlugins,
-    org: td(e.currentUserOrgId, e.orgById) ?? null,
+    org: getOrgByCurrentUserId(e.currentUserOrgId, e.orgById) ?? null,
     isReadOnly: e.mirror.appModel.isReadOnly,
     userCanViewPlugins: canPerformAction(e),
     userCanRunExtensions: canRunExtensions(e),

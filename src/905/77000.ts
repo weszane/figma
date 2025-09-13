@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useSubscription } from "../figma_app/288654";
 import { _, S } from "../figma_app/490799";
 import { renderI18nText } from "../905/303541";
@@ -64,13 +64,13 @@ export function $$f0({
         connectedProjects: (() => {
           if (e?.length) {
             let t = e[0]?.projectLimitedInfo?.name;
-            return 1 === e.length && t ? jsx($n, {
+            return 1 === e.length && t ? jsx(Button, {
               variant: "link",
               onClick: () => {
                 g(e[0].id);
               },
               children: t
-            }) : jsx($n, {
+            }) : jsx(Button, {
               variant: "link",
               onClick: () => {
                 g();

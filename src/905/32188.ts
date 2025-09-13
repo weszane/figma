@@ -6,7 +6,7 @@ import { documentStateTsApi, FontHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { _r } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
@@ -80,7 +80,7 @@ export function $$N4(e) {
       value: t,
       recordingKey: generateRecordingKey(e.recordingKey, t),
       additionalStylesClassName: Q7,
-      iconToReplaceCheck: i ? jsx(_$$B, {
+      iconToReplaceCheck: i ? jsx(SvgComponent, {
         svg: i
       }) : void 0
     }, `font-style-${t}`);
@@ -88,7 +88,7 @@ export function $$N4(e) {
     let a = [];
     let o = {};
     if (e.fontVariations?.length) {
-      if (isMixedArray(e.fontVariations)) t = w; else {
+      if (isMixedArray(e.fontVariations)) t = w;else {
         let i = B.find(t => t.name === e.fontStyle);
         t = Y(e.fontVariations, i)?.name;
       }
@@ -163,7 +163,7 @@ export function $$N4(e) {
   let q = !1;
   let $ = e.fontVariations;
   if ($?.length) {
-    if (isMixedArray($)) t = w; else {
+    if (isMixedArray($)) t = w;else {
       let i = B.find(t => t.name === e.fontStyle);
       t = Y($, i)?.name;
     }
@@ -192,7 +192,7 @@ export function $$N4(e) {
         text: e
       })
     },
-    icon: G && e.showMissingIcon ? jsx(_$$B, {
+    icon: G && e.showMissingIcon ? jsx(SvgComponent, {
       svg: _$$A
     }) : void 0,
     iconClassName: q_,
@@ -230,13 +230,13 @@ export function $$P3({
   shouldCommit: r,
   fontVariations: a
 }) {
-  if (e === $$C1()) i(); else if (e === $$T2()) n(); else {
+  if (e === $$C1()) i();else if (e === $$T2()) n();else {
     if (a) fullscreenValue.updateSelectionProperties({
       fontVariations: a,
       fontStyle: e
     }, {
       shouldCommit: r
-    }); else {
+    });else {
       let i = {
         fontStyle: e
       };

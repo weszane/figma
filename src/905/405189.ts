@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { k } from "../905/443820";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/241899";
 import { P } from "../905/347284";
 import { fu } from "../figma_app/831799";
@@ -80,7 +80,7 @@ export function $$x0(e) {
               let c = y.data?.[e];
               return jsxs("div", {
                 className: "missing_libraries_view--row--P7plh",
-                children: [jsxs(_$$E, {
+                children: [jsxs(ButtonPrimitive, {
                   className: "missing_libraries_view--rowHeader--Ych4v",
                   onClick: () => i(e),
                   children: [c ?? "Missing library with " + G$({

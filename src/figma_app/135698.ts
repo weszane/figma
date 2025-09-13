@@ -1,2 +1,17 @@
-export var $$n0 = (e => (e.NAME = "Name", e.ACTIVE_AT = "Last active", e.DESIGN_PAID_STATUS = "Design role", e.FIGJAM_PAID_STATUS = "FigJam role", e.BILLING_INTERVAL = "Billing interval", e))($$n0 || {});
-export const d = $$n0;
+/**
+ * Enum representing user-related fields in Figma app.
+ * Original variable: $$n0
+ */
+export enum UserFieldEnum {
+  NAME = 'Name',
+  ACTIVE_AT = 'Last active',
+  DESIGN_PAID_STATUS = 'Design role',
+  FIGJAM_PAID_STATUS = 'FigJam role',
+  BILLING_INTERVAL = 'Billing interval',
+}
+
+/**
+ * Exported alias for UserField enum.
+ * Original export: d
+ */
+export const d = UserFieldEnum

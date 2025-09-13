@@ -1,18 +1,18 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Fullscreen } from "../figma_app/763686";
 import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { RK } from "../figma_app/815170";
 import { Dm, Uu } from "../figma_app/8833";
 import { lg } from "../figma_app/976749";
-import { WJ } from "../figma_app/671547";
+import { PluginModalTypeEnum } from "../figma_app/671547";
 import { fullscreenValue } from "../figma_app/455680";
 import { F4 } from "../905/691205";
 import { FFileType } from "../figma_app/191312";
@@ -61,7 +61,7 @@ function M(e) {
       clipboardText: e.data.url.toString(),
       url: e.data.url.toString(),
       isTextIframe: !1,
-      entrypoint: WJ.MODAL
+      entrypoint: PluginModalTypeEnum.MODAL
     }));
   };
   let M = t => {
@@ -95,7 +95,7 @@ function M(e) {
         let e = data.url.pathname.split(/\//)[3];
         if (e) try {
           i = decodeURI(e).replace(/-/g, " ");
-        } catch (e) { }
+        } catch (e) {}
       }
       t = i ? jsx("div", {
         className: Qq,
@@ -127,7 +127,7 @@ function M(e) {
           children: H
         }), data.secondaryText && jsxs("div", {
           className: Yg,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: FI,
             svg: _$$A2
           }), data.secondaryText]
@@ -203,14 +203,14 @@ function M(e) {
       children: [K, " "]
     }) : null, t]
   });
-  let X = (t, i) => jsxs(_$$E, {
+  let X = (t, i) => jsxs(ButtonPrimitive, {
     className: d()({
       [vk]: t,
       [ho]: !t
     }),
     onClick: M,
     recordingKey: e.recordingKey,
-    children: [t && jsx(_$$B, {
+    children: [t && jsx(SvgComponent, {
       className: Kk,
       style: _$$sx.$$if(r === _$$A, _$$sx.add({
         transform: "rotate(90deg)"
@@ -218,13 +218,13 @@ function M(e) {
       svg: r
     }), i]
   });
-  let q = jsx(_$$E, {
+  let q = jsx(ButtonPrimitive, {
     className: `${ho} ${vk}`,
     recordingKey: generateRecordingKey(e, "secondaryButton"),
     onClick: l,
     children: Y
   });
-  let J = (t, r) => jsxs(_$$E, {
+  let J = (t, r) => jsxs(ButtonPrimitive, {
     className: d()({
       [hc]: !t,
       [Ef]: t,
@@ -234,7 +234,7 @@ function M(e) {
     "data-testid": "hyperlink.edit",
     recordingKey: generateRecordingKey(e, "editHyperlinkPopup"),
     children: [t && jsxs(Fragment, {
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: Kk,
         svg: _$$A6
       }), jsx("div", {
@@ -263,7 +263,7 @@ function M(e) {
             }), W && jsxs(Fragment, {
               children: [jsx("div", {
                 className: yF
-              }), jsx(_$$E, {
+              }), jsx(ButtonPrimitive, {
                 className: hc,
                 recordingKey: generateRecordingKey(e, "unfurlHyperlinkPopup"),
                 onClick: y,

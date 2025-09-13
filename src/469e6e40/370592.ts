@@ -15,7 +15,7 @@ import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { YE, Em, Bs, RH, wQ, SF } from "../figma_app/120227";
 import { BK } from "../905/848862";
 import { AF } from "../figma_app/212807";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { u as _$$u } from "../figma_app/152461";
 import { j as _$$j } from "../905/834956";
 import { VZ } from "../figma_app/727192";
@@ -134,7 +134,7 @@ export function $$R2({
         unit: d
       }),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.alternative_units.dimension_unit"),
         "data-testid": "dimension_unit"
       },

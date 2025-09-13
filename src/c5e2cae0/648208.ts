@@ -8,7 +8,7 @@ import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { up, Vh, kV, N9 } from "../figma_app/692987";
 import { s$ } from "../figma_app/361035";
 import { gS } from "../figma_app/441925";
@@ -67,7 +67,7 @@ export function $$E0({
   let V = O(D);
   let $ = O(B);
   let U = O(L);
-  let z = jsx(_$$E, {
+  let z = jsx(TextWithTruncation, {
     fontWeight: "medium",
     color: "tertiary",
     fontSize: 11,
@@ -116,7 +116,7 @@ export function $$E0({
             isAnnual: F
           })
         })]
-      }), !r && jsx(_$$E, {
+      }), !r && jsx(TextWithTruncation, {
         fontWeight: "regular",
         color: "tertiary",
         fontSize: 11,

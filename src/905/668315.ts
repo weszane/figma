@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { h as _$$h } from "../905/207101";
 import { s_ } from "../905/17223";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { P } from "../905/347284";
 import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/78808";
@@ -76,7 +76,7 @@ export let $$E0 = registerModal(function (e) {
       hideScrollbar: !0,
       children: [!i && jsx("div", {
         className: g4,
-        children: jsx(kt, {
+        children: jsx(LoadingSpinner, {
           size: "small"
         })
       }), C && jsx(fp, {

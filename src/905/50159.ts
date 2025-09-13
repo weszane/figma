@@ -11,7 +11,7 @@ import { $E, w4 } from "../905/445814";
 import { NU } from "../figma_app/204891";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { UN } from "../figma_app/976345";
 import { l as _$$l } from "../905/767868";
 import { A as _$$A } from "../905/100919";
@@ -21,7 +21,7 @@ import { I4 } from "../figma_app/840917";
 import { i4 } from "../905/862913";
 import { fA } from "../figma_app/543100";
 import { O } from "../905/833838";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { W } from "../905/244810";
 import { gO, m2, ag, Vj, vS, q6, SC, Dv, VA, WM, CK, m4, Tr, FR, yl, XK } from "../figma_app/603826";
 var l = o;
@@ -52,7 +52,7 @@ export function $$R1(e) {
             date: e.file.touched_at
           })
         })
-      }), i && jsx(_$$E, {
+      }), i && jsx(TextWithTruncation, {
         truncate: !0,
         showTooltipWhenTruncated: !0,
         children: i
@@ -80,14 +80,14 @@ function N(e) {
       children: !e.disableIconOverlays && jsx(w4, {
         type: i(file),
         size: 24,
-        "data-tooltip-type": t ? Ib.TEXT : void 0,
+        "data-tooltip-type": t ? KindEnum.TEXT : void 0,
         "data-tooltip": t ? getI18nString("tile.file_tile.published_as_library", {
           time: a
         }) : void 0
       })
     }), jsxs("div", {
       className: q6,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: "medium",
         color: e.disabled ? "disabled" : void 0,
         fontSize: e.titleFontSize ? e.titleFontSize : 13,
@@ -173,7 +173,7 @@ export function $$P0(e) {
         children: [jsx("div", {
           className: XK
         }), jsx("div", {
-          "data-tooltip-type": e.tooltipText ? Ib.TEXT : void 0,
+          "data-tooltip-type": e.tooltipText ? KindEnum.TEXT : void 0,
           "data-tooltip": e.tooltipText,
           "data-tooltip-show-immediately": !!e.tooltipText,
           "data-tooltip-show-above": !!e.tooltipText || void 0,

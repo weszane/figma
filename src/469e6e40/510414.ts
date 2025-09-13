@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { SM } from "../figma_app/153916";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -69,10 +69,10 @@ let y = memo(function ({
       }
     });
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: 448,
     manager: C,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: L,
       children: [jsx(Y9, {
         children: jsx(hE, {

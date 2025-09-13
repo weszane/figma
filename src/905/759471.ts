@@ -17,14 +17,14 @@ import { k as _$$k2 } from "../905/582200";
 import { getI18nString } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { ey as _$$ey } from "../figma_app/451499";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { kl } from "../905/275640";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q2 } from "../figma_app/104130";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { a2 } from "../figma_app/762558";
 import { e as _$$e } from "../figma_app/905311";
@@ -274,7 +274,7 @@ function ei(e) {
     value: e.value ?? 0,
     inputClassName: "ui3_transform_modifiers_settings_picker--input--S-N-R",
     onValueChange: e.onValueChange,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": "x" === e.axis ? getI18nString("properties_panel.transform_modifiers.x") : getI18nString("properties_panel.transform_modifiers.y"),
     tooltipForScreenReadersOnly: !0,
     autoFocus: e.autoFocus,
@@ -521,7 +521,7 @@ function eL(e) {
     isUI3
   } = e;
   let S = debugState.getState().selectedView;
-  let T = Dc(S.editorType);
+  let T = mapEditorTypeToProductType(S.editorType);
   let k = valueOrFallback(propertyList, []);
   let R = useCallback(() => {
     atomStoreManager.set(eO, k.length);
@@ -697,14 +697,14 @@ function eB(e) {
     analyticsEventManager.trackDefinedEvent("illustration.web_transform_type_change", {
       oldType: i,
       transformType: e,
-      productType: Dc(debugState.getState().selectedView.editorType)
+      productType: mapEditorTypeToProductType(debugState.getState().selectedView.editorType)
     });
   }, [onChange, transformModifier]);
   let ed = useCallback(e => {
     analyticsEventManager.trackDefinedEvent("illustration.web_transform_toggle_visibility", {
       transformType: transformModifier.type,
       isVisible: e,
-      productType: Dc(debugState.getState().selectedView.editorType)
+      productType: mapEditorTypeToProductType(debugState.getState().selectedView.editorType)
     });
     onChange({
       ...transformModifier,
@@ -781,7 +781,7 @@ function eB(e) {
         htmlAttributes: {
           onMouseDown: et,
           "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_remove"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$O, {})
       })
@@ -886,7 +886,7 @@ function eB(e) {
         onMouseUp: et,
         recordingKey: generateRecordingKey(q, "toggleSettings"),
         selected: !!Z,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("properties_panel.transform_modifiers.transform_modifier_settings")
       }), jsxs(Fragment, {
         children: [jsx(eF, {

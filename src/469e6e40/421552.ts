@@ -18,7 +18,7 @@ import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout, Spacer } from "../905/470281";
 import { In } from "../905/672640";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
 import { m as _$$m } from "../469e6e40/248185";
@@ -27,7 +27,7 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { cX } from "../figma_app/12491";
 import { S0 } from "../905/863795";
 import { E as _$$E2 } from "../905/511388";
-import { dq, sZ } from "../905/845253";
+import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { NJ } from "../figma_app/518077";
 import { E as _$$E3 } from "../905/128063";
 import { LibraryModalVariablesData, CommunityLibraryModalVariablesData, LibraryManagementData, LibraryManagementCommunityData, FileByKeyThumbnailUrl, LibrarySubscriptionView, WorkspaceAdminLibrariesSectionView } from "../figma_app/43951";
@@ -50,9 +50,9 @@ import { parsePxInt } from "../figma_app/783094";
 import { l as _$$l } from "../905/745972";
 import { CY } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S3 } from "../figma_app/490799";
-import { qc } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
-import { $ as _$$$ } from "../905/383708";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
+import { generateUniqueKey } from "../905/383708";
 import { fu } from "../figma_app/831799";
 import { wJ } from "../figma_app/630951";
 import { selectCurrentUser } from "../905/372672";
@@ -122,7 +122,7 @@ function X(e) {
       ...getTriggerProps(),
       children: jsxs(AutoLayout, {
         horizontalAlignItems: "space-between",
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           children: renderI18nText("resources_tab.libraries.filters")
         }), enabledFilterIds.size > 0 && jsx(AutoLayout, {
           backgroundColor: "selected",
@@ -131,7 +131,7 @@ function X(e) {
             left: 4,
             right: 4
           },
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "brand",
             fontWeight: "semi-bold",
             children: renderI18nText("resources_tab.libraries.filters_applied", {
@@ -169,7 +169,7 @@ function X(e) {
             left: 16,
             right: 4
           },
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: renderI18nText("resources_tab.libraries.filters")
           }), jsxs("div", {
@@ -180,7 +180,7 @@ function X(e) {
                 onChange(new Set());
                 c(!1);
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "brand",
                 children: renderI18nText("resources_tab.libraries.clear_all")
               })
@@ -206,7 +206,7 @@ function X(e) {
               },
               children: [jsx("h3", {
                 id: l,
-                children: jsx(_$$E, {
+                children: jsx(TextWithTruncation, {
                   fontWeight: "semi-bold",
                   children: getI18nString("resources_tab.libraries.shared_in")
                 })
@@ -215,7 +215,7 @@ function X(e) {
                 children: jsx(Checkbox, {
                   checked: enabledFilterIds.has($$tp0),
                   label: jsx(Label, {
-                    children: jsx(_$$E, {
+                    children: jsx(TextWithTruncation, {
                       fontWeight: "semi-bold",
                       children: getI18nString("resources_tab.libraries.connected_projects")
                     })
@@ -234,7 +234,7 @@ function X(e) {
               },
               children: [jsx("h3", {
                 id: o,
-                children: jsx(_$$E, {
+                children: jsx(TextWithTruncation, {
                   fontWeight: "semi-bold",
                   children: renderI18nText("resources_tab.libraries.added_by_default")
                 })
@@ -242,7 +242,7 @@ function X(e) {
                 "aria-labelledby": o,
                 children: filters.map(e => jsx(Checkbox, {
                   label: jsx(Label, {
-                    children: jsx(_$$E, {
+                    children: jsx(TextWithTruncation, {
                       children: e.name
                     })
                   }),
@@ -266,7 +266,7 @@ function ej({
     direction: "vertical",
     height: "hug-contents",
     spacing: 0,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       color: "secondary",
       children: e
     }), t]
@@ -349,7 +349,7 @@ let ey = function ({
             email: c.supportContact ?? void 0
           },
           includeUserEmailAddress: !!c.supportContact
-        }), !o && !c && jsx(_$$E, {
+        }), !o && !c && jsx(TextWithTruncation, {
           children: renderI18nText("resources_tab.libraries.file_has_no_owner")
         })]
       })
@@ -364,9 +364,9 @@ let ey = function ({
       target: "_blank",
       children: jsxs(AutoLayout, {
         spacing: 4,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           children: renderI18nText("resources_tab.libraries.open_library_file")
-        }), jsx(_$$B, {
+        }), jsx(SvgComponent, {
           svg: _$$A2,
           className: _$$s.colorIconBrand.$
         })]
@@ -562,7 +562,7 @@ function eX({
   workspaceName: a
 }) {
   let r = useDispatch();
-  let l = dq();
+  let l = useCurrentUserOrgId();
   let o = useCurrentPrivilegedPlan("WorkspaceApprovedLibrarySetting").unwrapOr(null);
   let d = o?.tier === FPlanNameType.ENTERPRISE;
   let c = o?.name;
@@ -726,7 +726,7 @@ function e9({
     enabled: "community" === e.type
   });
   let p = useMemo(() => "file" === e.type ? c?.data?.file?.variableCollections : m.data?.communityLibraryByHubFileId?.variableCollections, [e.type, c.data?.file, m.data?.communityLibraryByHubFileId]);
-  let g = sZ();
+  let g = useCurrentUserOrg();
   let [h, v] = useState({});
   let [f, y] = useState(!1);
   let [k, E] = useState(null);
@@ -826,7 +826,7 @@ function e9({
   return jsxs(AutoLayout, {
     direction: "vertical",
     padding: 16,
-    children: [!O && jsx(_$$E, {
+    children: [!O && jsx(TextWithTruncation, {
       fontWeight: "medium",
       truncate: "line-clamp",
       lineClamp: 2,
@@ -879,12 +879,12 @@ function e9({
             children: [jsx("div", {
               className: _$$s.inlineFlex.pre.maxWFull.$,
               children: renderI18nText("resources_tab.libraries.use_orgs_setting", {
-                orgName: jsx(_$$E, {
+                orgName: jsx(TextWithTruncation, {
                   truncate: !0,
                   children: t.name
                 })
               })
-            }), jsx(_$$E, {
+            }), jsx(TextWithTruncation, {
               color: "secondary",
               children: renderI18nText("resources_tab.libraries.current", {
                 setting: l ? e7(t.librarySubscription) : e8(e3(t.librarySubscription))
@@ -985,7 +985,7 @@ function e9({
     }), a && (p?.length ?? 0) > 0 && jsxs(Fragment, {
       children: [jsx("div", {
         className: _$$s.bt1.bSolid.colorBorder.wFull.h1.mt16.$
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         fontWeight: "medium",
         truncate: "line-clamp",
         lineClamp: 2,
@@ -1009,7 +1009,7 @@ function e9({
           defaultModeId: h[t.key],
           isLibraryFileEnabled: "OFF" !== $
         })]
-      }, t.id)) : jsx(qc, {})]
+      }, t.id)) : jsx(LoadingOverlay, {})]
     })]
   });
 }
@@ -1019,7 +1019,7 @@ function te({
   return jsxs(Fragment, {
     children: [!e && jsx("div", {
       className: _$$s.bb1.bSolid.colorBorder.wFull.h1.mt8.mb8.$
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontWeight: "medium",
       truncate: "line-clamp",
       lineClamp: 2,
@@ -1039,7 +1039,7 @@ function ta({
       }
     }), jsx("div", {
       className: tt.sticky.top0.colorBg.zIndex1.pt8.bRadius4.$$if(t, _$$s.bb1.bSolid.colorBorder).$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         children: e
       })
@@ -1060,12 +1060,12 @@ function tn({
     children: jsxs(AutoLayout, {
       width: "fill-parent",
       spacing: 0,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         truncate: !0,
         children: e
       }), jsx(Spacer, {
         minSize: 4
-      }), t && jsx(_$$E, {
+      }), t && jsx(TextWithTruncation, {
         color: "success",
         children: renderI18nText("resources_tab.libraries.on")
       }), jsx(In, {
@@ -1187,7 +1187,7 @@ let td = registerModal(function ({
     org_browsable: m.permissions.orgBrowsable,
     link_access: m.permissions.linkAccess
   });
-  let y = _$$X(_$$$(e));
+  let y = _$$X(generateUniqueKey(e));
   let k = "loaded" === y.status;
   let E = useMemo(() => ({
     userId: a?.id ?? void 0,
@@ -1206,10 +1206,10 @@ let td = registerModal(function ({
         target: "_blank",
         href: "https://help.figma.com/hc/articles/21310245473815",
         className: _$$s.flex.itemsCenter.fontNormal.$,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: _$$s.colorIconBrand.pr2.$,
           svg: _$$A3
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           color: "brand",
           children: renderI18nText("general.learn_more")
         })]
@@ -1232,7 +1232,7 @@ let td = registerModal(function ({
           verticalAlignItems: "start",
           width: "fill-parent",
           height: 400,
-          children: ["loading" === u.status && jsx(qc, {}), "loaded" === u.status && m && p && jsxs(Fragment, {
+          children: ["loading" === u.status && jsx(LoadingOverlay, {}), "loaded" === u.status && m && p && jsxs(Fragment, {
             children: [!h && jsx(ey, {
               libraryData: m,
               orgData: p
@@ -1294,7 +1294,7 @@ function tg({
           })
         }), jsxs("div", {
           className: _$$s.flex.alignCenter.$,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             truncate: !0,
             children: e.library_name
           }), a]
@@ -1308,13 +1308,13 @@ function tg({
       }), jsx(AutoLayout, {
         width: "10%",
         horizontalAlignItems: "end",
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: e.num_components
         })
       }), jsx(AutoLayout, {
         width: "10%",
         horizontalAlignItems: "end",
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: e.num_styles
         })
       }), jsx(AutoLayout, {
@@ -1360,7 +1360,7 @@ export function $$tx1(e) {
   let et = useSubscription(LibrarySubscriptionView, {
     orgId: org.id
   });
-  let ea = sZ();
+  let ea = useCurrentUserOrg();
   let en = Oe(ea);
   let es = useAtomWithSubscription(S0);
   let ei = useSubscription(WorkspaceAdminLibrariesSectionView, {
@@ -1498,19 +1498,19 @@ export function $$tx1(e) {
   }, [V, W, ed, K, Y]), ed);
   let eg = e => {
     let t = e ? ed[e] : void 0;
-    if (!t || 0 === t.length) return jsx(_$$E, {
+    if (!t || 0 === t.length) return jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("resources_tab.libraries.no_subscriptions")
     });
     let a = t.slice(0, 2).map(e => e.name).join(", ");
-    return t.length > 2 ? jsx(_$$E, {
+    return t.length > 2 ? jsx(TextWithTruncation, {
       truncate: "line-clamp",
       lineClamp: 2,
       children: renderI18nText("resources_tab.libraries.two_or_more_workspaces", {
         workspaceNames: a,
         extraWorkspaceNum: t.length - 2
       })
-    }) : jsx(_$$E, {
+    }) : jsx(TextWithTruncation, {
       truncate: "line-clamp",
       lineClamp: 2,
       children: a
@@ -1566,7 +1566,7 @@ export function $$tx1(e) {
               sortBy: () => updateSortState("NAME"),
               field: "NAME",
               hasArrow: "NAME" === sortState.column,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 fontWeight: "semi-bold",
                 color: "default",
                 children: renderI18nText("resources_tab.libraries.name")
@@ -1582,7 +1582,7 @@ export function $$tx1(e) {
               sortBy: () => updateSortState("ENABLED_FOR"),
               field: "ENABLED_FOR",
               hasArrow: "ENABLED_FOR" === sortState.column,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "default",
                 fontWeight: "semi-bold",
                 children: renderI18nText("resources_tab.libraries.added_by_default")
@@ -1599,7 +1599,7 @@ export function $$tx1(e) {
               sortBy: () => updateSortState("COMPONENTS"),
               field: "COMPONENTS",
               hasArrow: "COMPONENTS" === sortState.column,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "default",
                 fontWeight: "semi-bold",
                 children: renderI18nText("resources_tab.libraries.components")
@@ -1616,7 +1616,7 @@ export function $$tx1(e) {
               sortBy: () => updateSortState("STYLES"),
               field: "STYLES",
               hasArrow: "STYLES" === sortState.column,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "default",
                 fontWeight: "semi-bold",
                 children: renderI18nText("resources_tab.libraries.styles")
@@ -1631,11 +1631,11 @@ export function $$tx1(e) {
         })
       })]
     }), ("loading" === et.status || "loading" === ee.status) && jsx(FO, {}), "loaded" === et.status && "loaded" === ee.status && !sortedItems.length && jsx(_$$p, {
-      children: K ? jsx(_$$E, {
+      children: K ? jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.libraries.search.no_results")
-      }) : Y.size > 0 ? jsx(_$$E, {
+      }) : Y.size > 0 ? jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.libraries.filter.no_results")
-      }) : jsx(_$$E, {
+      }) : jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.libraries.no_libraries_text")
       })
     }), "loaded" === et.status && "loaded" === ee.status && jsxs(Fragment, {
@@ -1677,7 +1677,7 @@ export function $$tx1(e) {
         },
         children: jsx(AutoLayout, {
           horizontalAlignItems: "center",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "brand",
             children: renderI18nText("resources_tab.libraries.show_all_libraries_button")
           })

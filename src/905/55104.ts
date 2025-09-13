@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { nt } from "../figma_app/858013";
+import { LargeLoadingSpinner } from "../figma_app/858013";
 import { B as _$$B } from "../905/295520";
 export function $$o0(e) {
   let {
@@ -18,7 +18,7 @@ export function $$o0(e) {
   return jsxs(Fragment, {
     children: [children, e.isFetchingNextPage && jsx("span", {
       className: "x1yidqsj",
-      children: jsx(nt, {})
+      children: jsx(LargeLoadingSpinner, {})
     }), jsx("div", {
       ref: o,
       style: {

@@ -8,7 +8,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { ViewType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { NotificationType } from "../905/170564";
@@ -79,7 +79,7 @@ function j(e) {
         return !1;
       }
       if (a.sourceCheckpointId === s.checkpointId) return !1;
-      let o = oA(s.recentFileVersions) || [];
+      let o = getResourceDataOrFallback(s.recentFileVersions) || [];
       if (0 === o.length || !a.sourceCheckpointId) return !1;
       let l = S(a.sourceCheckpointId);
       if (null === l) return !1;

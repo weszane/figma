@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, forwardRef } from "react";
 import { J } from "../905/614223";
 import { A } from "../vendor/723372";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { defaultComponentAttribute } from "../905/577641";
 export function $$c3(e) {
@@ -31,7 +31,7 @@ export let $$u2 = forwardRef(({
   htmlAttributes: e,
   children: t,
   ...i
-}, r) => jsx(E, {
+}, r) => jsx(ButtonPrimitive, {
   ...i,
   ref: r,
   htmlAttributes: e,

@@ -6,7 +6,7 @@ import { MentionsCppBindings, Fullscreen, Command, ConfirmationLevel, ShapeSideb
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription, atom, createLocalStorageAtom, Xr, um as _$$um } from "../figma_app/27355";
 import { isMobileNotFigmaMobile, BrowserInfo, isNotMobile, isIpadDevice, isAnyMobile } from "../figma_app/778880";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { VisualBellActions } from "../905/302958";
 import { uO as _$$uO, Gb } from "../figma_app/933328";
@@ -24,12 +24,12 @@ import { Fl, wW } from "../figma_app/656450";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { LQ, MX, h1 as _$$h, wm } from "../905/77316";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { _X as _$$_X, Yb, ZT, Z0, Pl, kE } from "../figma_app/62612";
+import { getViewportInfo, scaleRect, isRectInside, viewportToScreen, getViewportZoom, roundedDivision } from "../figma_app/62612";
 import { E as _$$E } from "../905/486517";
 import { ri as _$$ri, f6 as _$$f } from "../905/337179";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { permissionScopeHandler as _$$l, scopeAwareFunction as _$$nc, zk } from "../905/189185";
-import { U as _$$U, am as _$$am } from "../figma_app/901889";
+import { trackFileEventWithStore, trackFileEventWithUser } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { MZ, Dy } from "../figma_app/925970";
 import { b as _$$b } from "../905/985254";
@@ -58,7 +58,7 @@ import { f as _$$f2 } from "../905/54715";
 import { A as _$$A2 } from "../905/251970";
 import { xk as _$$xk, Ay as _$$Ay } from "@stylexjs/stylex";
 import e_ from "classnames";
-import { A as _$$A3 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { h as _$$h2 } from "../905/207101";
 import { W6, ez as _$$ez, U9, Fk, Ch } from "../905/125333";
@@ -81,8 +81,8 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { h as _$$h3 } from "../2b17fec9/813960";
 import { W as _$$W2 } from "../2b17fec9/185058";
 import { uB as _$$uB, HB, U_, yX as _$$yX, es as _$$es, B8, AE, ke, Yg, OP } from "../9410/757252";
-import { E as _$$E2 } from "../905/632989";
-import { Pw, $n, IK } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { ButtonLargeWide, Button, ButtonWide } from "../905/521428";
 import { l as _$$l2 } from "../1250/91689";
 import { k as _$$k2 } from "../905/888808";
 import { g as _$$g } from "../905/687265";
@@ -91,7 +91,7 @@ import { Te } from "../vendor/813803";
 import { e as _$$e3 } from "../905/916195";
 import { getInitialOptions, getLocaleFallbacks, buildUploadUrl } from "../figma_app/169182";
 import { logError, logDebug } from "../905/714362";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { teamLibraryCache } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -107,7 +107,7 @@ import { gw as _$$gw, wv, c$ as _$$c$ } from "../figma_app/236327";
 import { V6, ew as _$$ew } from "../1250/12342";
 import { dh as _$$dh, nn as _$$nn } from "../figma_app/186343";
 import { o3 as _$$o2, nt as _$$nt } from "../905/226610";
-import { Ib, Zj } from "../905/129884";
+import { KindEnum, PositionEnum } from "../905/129884";
 import { e as _$$e4 } from "../9410/799000";
 import { t as _$$t2 } from "../9410/254335";
 import { bU as _$$bU } from "../1250/506456";
@@ -186,14 +186,14 @@ import { D as _$$D } from "../905/12032";
 import { X as _$$X, Y as _$$Y } from "../figma_app/916469";
 import { XV, Cs } from "../figma_app/684168";
 import { gR as _$$gR, LR, ts as _$$ts, zo } from "../figma_app/120210";
-import { sZ as _$$sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { RD, Ve, a6 as _$$a4 } from "../figma_app/198840";
 import { _Y as _$$_Y, OL, _D as _$$_D } from "../figma_app/191312";
 import { Sc, mC as _$$mC, oh as _$$oh } from "../905/18797";
 import { G7 } from "../figma_app/336853";
 import { n as _$$n4 } from "../905/79930";
 import { Vq, Rt } from "../figma_app/979658";
-import { vt as _$$vt, m3 as _$$m4, bD as _$$bD, cS as _$$cS, aL as _$$aL } from "../figma_app/45218";
+import { ResourceTypeNoComment, hasMonetizedResourceMetadata, ResourceType, CommunityPageType, ShelfViewType } from "../figma_app/45218";
 import { $A } from "../905/862883";
 import { cd as _$$cd } from "../905/381612";
 import { yD as _$$yD } from "../905/92359";
@@ -252,7 +252,7 @@ import { FK, zq, zx } from "../figma_app/961422";
 import { z as _$$z2 } from "../905/255946";
 import { _ as _$$_4 } from "../469e6e40/273550";
 import { J as _$$J8 } from "../469e6e40/985095";
-import { RA, tG as _$$tG } from "../figma_app/757723";
+import { cortexAnalyticsPluginIds, isHandbrakeDisabledForCurrentUser } from "../figma_app/757723";
 import { _0 as _$$_5 } from "../figma_app/957552";
 import { ts as _$$ts2 } from "../1291/62942";
 import { A as _$$A9 } from "../6828/625002";
@@ -383,7 +383,7 @@ import { A as _$$A15 } from "../2b17fec9/467175";
 import { $isAtNodeEnd } from "@lexical/selection";
 import { Fo, vN as _$$vN, xH as _$$xH, Uz, sC as _$$sC, Te as _$$Te } from "../905/63728";
 import { useModalManager } from "../905/437088";
-import { bL as _$$bL2 } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo as _$$vo2, Y9, nB as _$$nB, wi } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
 import { sendUrlToParent } from "../figma_app/564528";
@@ -437,7 +437,7 @@ import { Fk as _$$Fk, g0 as _$$g5 } from "../figma_app/167249";
 import { qq as _$$qq } from "../figma_app/514229";
 import { O as _$$O2 } from "../905/353086";
 import { d as _$$d6 } from "../c5e2cae0/368426";
-import { ds as _$$ds, Cu } from "../figma_app/314264";
+import { trackFileEvent, logAndTrackCTA } from "../figma_app/314264";
 import { z as _$$z5 } from "../905/654860";
 import { y as _$$y4 } from "../905/263077";
 import { y as _$$y5 } from "../figma_app/13082";
@@ -495,7 +495,7 @@ import { A as _$$A29 } from "../svg/687403";
 import { A as _$$A30 } from "../svg/32481";
 import { A as _$$A31 } from "../svg/312185";
 import { A as _$$A32 } from "../svg/848964";
-import { p as _$$p7 } from "../905/71149";
+import { calculateTypography } from "../905/71149";
 import { o1 as _$$o5 } from "../figma_app/975811";
 import { F as _$$F5 } from "../905/258517";
 import { Q7 } from "../905/203369";
@@ -558,7 +558,7 @@ import { A as _$$A46 } from "../svg/16090";
 import { A as _$$A47 } from "../svg/31321";
 import { A as _$$A48 } from "../svg/39247";
 import { O as _$$O3 } from "../905/301080";
-import { tq as _$$tq, yc as _$$yc } from "../figma_app/671547";
+import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { A as _$$A49 } from "../svg/483451";
 import { A as _$$A50 } from "../vendor/850789";
 import { A as _$$A51 } from "../1291/23528";
@@ -722,11 +722,11 @@ function D(e) {
     setTypeahead
   } = e;
   let [c, u] = useState(null);
-  let p = _$$_X({
+  let p = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
-  let h = Yb(p, targetRect);
-  if (!ZT(h, p)) return null;
+  let h = scaleRect(p, targetRect);
+  if (!isRectInside(h, p)) return null;
   let m = {
     top: h.y + p.y + h.height + 8,
     right: h.x + p.x,
@@ -830,7 +830,7 @@ function X() {
       checkPermissions: _$$m.VIEW_OR_PENDING
     });
     let h = useCurrentFileKey();
-    let m = _$$U();
+    let m = trackFileEventWithStore();
     let f = !!i?.mentions;
     let _ = "" === s;
     let x = useStore();
@@ -1107,7 +1107,7 @@ function tl({
   let p = useCallback(() => {
     u(!c);
   }, [c, u]);
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     className: _$$uU,
     onClick: p,
     htmlAttributes: {
@@ -1177,7 +1177,7 @@ function tu({
       children: e ? getI18nString("whiteboard.shapes_sidebar.upgrade_cta.library", {
         libraryTitle: e
       }) : getI18nString("whiteboard.shapes_sidebar.upgrade_cta")
-    }), jsx(Pw, {
+    }), jsx(ButtonLargeWide, {
       onClick: t,
       children: jsx("span", {
         ..._$$xk(_$$g.textBodyMediumStrong),
@@ -1209,7 +1209,7 @@ function tm({
     children: [jsx("span", {
       className: "shapes_sidebar_empty_search_result--emptyResultsLabel--rY-Xq",
       children: n
-    }), t ? jsx(_$$E2, {
+    }), t ? jsx(ButtonPrimitive, {
       onClick: () => i(void 0),
       children: jsx("span", {
         className: "xggk2y7 x1y0c0v0 x2b8uid",
@@ -1312,7 +1312,7 @@ function tS({
   let u = useCallback(() => {
     c(!d);
   }, [d, c]);
-  return jsxs(_$$E2, {
+  return jsxs(ButtonPrimitive, {
     className: WH,
     htmlAttributes: {
       "data-testid": `${a ? `${a}-` : ""}${_$$uI}-${e}`,
@@ -1348,7 +1348,7 @@ function tw({
   onboardingKey: r,
   testIdPrefix: a
 }) {
-  return jsxs(_$$E2, {
+  return jsxs(ButtonPrimitive, {
     className: WH,
     htmlAttributes: {
       "data-testid": `${a ? `${a}-` : ""}${_$$uI}-${e}`,
@@ -1467,7 +1467,7 @@ function tO({
     }),
     "data-testid": `${i}-${t}`,
     "data-svg-no-gray-fill": !0,
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: e,
       className: _$$lO2
     })
@@ -2039,7 +2039,7 @@ function t$() {
     }));
     f(!0);
   }, [T, s, f, h, d, x, t]);
-  let I = _$$A3(w, 200);
+  let I = useDebouncedCallback(w, 200);
   let L = useCallback(() => {
     I.cancel();
     w("");
@@ -2408,7 +2408,7 @@ let i_ = forwardRef(function ({
   isDropdownOpen: e,
   toggleDropdown: t
 }, i) {
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     className: ex()(ic, "pages_dropdown--singlePage--RS1Vj", {
       [iu]: e
     }),
@@ -2418,7 +2418,7 @@ let i_ = forwardRef(function ({
     "aria-pressed": e,
     htmlAttributes: {
       "data-tooltip": getI18nString("pages_panel.toolbar.add_pages_tooltip"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx("span", {
       className: ip,
@@ -2443,7 +2443,7 @@ let ix = forwardRef(function ({
   }) : getI18nString("pages_panel.toolbar.dropdown_trigger.label_without_position", {
     currentPageName: c
   }) : getI18nString("pages_panel.toolbar.view_pages_tooltip"), [c, e, r, a]);
-  return jsxs(_$$E2, {
+  return jsxs(ButtonPrimitive, {
     ref: d,
     "aria-controls": a && n || void 0,
     "aria-expanded": i,
@@ -2456,7 +2456,7 @@ let ix = forwardRef(function ({
     htmlAttributes: {
       "data-testid": "figjam.pages_panel.toolbar.dropdown_trigger",
       "data-tooltip": getI18nString("pages_panel.toolbar.view_pages_tooltip"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       id: a && t || void 0
     },
     children: [jsx("span", {
@@ -2612,7 +2612,7 @@ function iN({
         width: Math.max(150, _ ?? 0)
       },
       children: jsx(_$$o3, {})
-    }) : jsxs(_$$E2, {
+    }) : jsxs(ButtonPrimitive, {
       className: "panel_toggle--button--Z3V1x panel_toggle--containerBase--4sK6N",
       ref: h,
       onClick: () => {
@@ -2639,7 +2639,7 @@ function iN({
           }));
         },
         "data-tooltip": getI18nString("fullscreen_actions.expand-figjam-left-panel"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       recordingKey: "figjam-panel-toggle",
       children: [jsx("span", {
@@ -2667,7 +2667,7 @@ function iO({
   let [i, n] = useState(!1);
   let r = useRef(null);
   let a = U1(r);
-  let s = _$$am();
+  let s = trackFileEventWithUser();
   let d = useMemo(() => e.filter(e => !e.isDivider).length, [e]);
   let c = _$$h4({
     nonDividerPageCount: d
@@ -2836,7 +2836,7 @@ function i1() {
         "aria-label": getI18nString("fullscreen_actions.collapse-figjam-left-panel"),
         htmlAttributes: {
           "data-tooltip": getI18nString("fullscreen_actions.collapse-figjam-left-panel"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         recordingKey: "figjam-collapse-expanded-left-panel",
         children: jsx(_$$C2, {})
@@ -3113,7 +3113,7 @@ function nj() {
     });
   }, [a]);
   useEffect(() => _$$M(d), [d]);
-  let c = _$$_X({
+  let c = getViewportInfo({
     subscribeToUpdates_expensive: !!e
   });
   if (!e) return null;
@@ -3123,7 +3123,7 @@ function nj() {
     height: c.height,
     width: c.width
   };
-  let p = Z0(c, {
+  let p = viewportToScreen(c, {
     x: e.x + 50 / c.zoomScale,
     y: e.y
   });
@@ -3169,12 +3169,12 @@ function nN({
   stamp: e,
   renderChildren: t
 }) {
-  let i = _$$_X({
+  let i = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let [n, r] = useState(null);
   let a = Yk();
-  let [s, d] = useState(Zj.ABOVE);
+  let [s, d] = useState(PositionEnum.ABOVE);
   let [c, u] = useState(null);
   let p = e.guid;
   useEffect(() => {
@@ -3185,23 +3185,23 @@ function nN({
       _$$lB(e);
     };
   }, [p]);
-  let h = useMemo(() => n ? Yb(i, n.absoluteBounds) : null, [n, i]);
+  let h = useMemo(() => n ? scaleRect(i, n.absoluteBounds) : null, [n, i]);
   let m = useMemo(() => h ? {
     ...h,
     x: h.x + i.x,
     y: h.y + i.y
   } : null, [h, i.x, i.y]);
-  let f = useMemo(() => !!h && ZT(h, i), [h, i]);
+  let f = useMemo(() => !!h && isRectInside(h, i), [h, i]);
   let _ = useCallback((e, t, n) => {
     let r;
     let s = i.y + 10;
     let o = i.y + i.height - 10 - a - t.height;
     let l = i.x + 10;
     let d = i.x + i.width - 10 - t.width;
-    let c = Zj.ABOVE;
+    let c = PositionEnum.ABOVE;
     let u = clamp(Al(e, t), l, d);
-    u + nI + nL > e.x + e.width ? (u = clamp(e.x + e.width + n, l, d), c = Zj.RIGHT) : u + t.width - nI - nL < e.x && (u = clamp(e.x - t.width - n, l, d), c = Zj.LEFT);
-    c === Zj.LEFT || c === Zj.RIGHT ? r = _$$tJ(e, t) : (r = T1(e, t, n)) < s && (r = DH(e, t, n), c = Zj.BELOW);
+    u + nI + nL > e.x + e.width ? (u = clamp(e.x + e.width + n, l, d), c = PositionEnum.RIGHT) : u + t.width - nI - nL < e.x && (u = clamp(e.x - t.width - n, l, d), c = PositionEnum.LEFT);
+    c === PositionEnum.LEFT || c === PositionEnum.RIGHT ? r = _$$tJ(e, t) : (r = T1(e, t, n)) < s && (r = DH(e, t, n), c = PositionEnum.BELOW);
     return {
       pos: c,
       x: u,
@@ -3225,22 +3225,22 @@ function nN({
         let a = t.width - 2 * nI - nL;
         let s = t.height - 2 * nI - nL;
         switch (i) {
-          case Zj.ABOVE:
+          case PositionEnum.ABOVE:
             return {
               left: clamp(n - nI, nL, a),
               top: Math.floor(t.height)
             };
-          case Zj.BELOW:
+          case PositionEnum.BELOW:
             return {
               left: clamp(n - nI, nL, a),
               top: -nI
             };
-          case Zj.RIGHT:
+          case PositionEnum.RIGHT:
             return {
               left: -nI,
               top: clamp(r - nI, nL, s)
             };
-          case Zj.LEFT:
+          case PositionEnum.LEFT:
             return {
               left: Math.floor(t.width),
               top: clamp(r - nI, nL, s)
@@ -3277,16 +3277,16 @@ function nN({
 let nA = "stamp_overlay--userText--FdBYI ellipsis--ellipsis--Tjyfa";
 let nO = "stamp_overlay--tRexAvatarForeground--6Qkya";
 let nk = {
-  [Zj.ABOVE]: "stamp_overlay--downArrow--VJLl5 stamp_overlay--arrow--F8-y5",
-  [Zj.BELOW]: "stamp_overlay--upArrow--PCqYY stamp_overlay--arrowInset--8zLXg stamp_overlay--arrow--F8-y5",
-  [Zj.RIGHT]: "stamp_overlay--leftArrow--u3dvc stamp_overlay--arrow--F8-y5",
-  [Zj.LEFT]: "stamp_overlay--rightArrow--G7DIa stamp_overlay--arrow--F8-y5"
+  [PositionEnum.ABOVE]: "stamp_overlay--downArrow--VJLl5 stamp_overlay--arrow--F8-y5",
+  [PositionEnum.BELOW]: "stamp_overlay--upArrow--PCqYY stamp_overlay--arrowInset--8zLXg stamp_overlay--arrow--F8-y5",
+  [PositionEnum.RIGHT]: "stamp_overlay--leftArrow--u3dvc stamp_overlay--arrow--F8-y5",
+  [PositionEnum.LEFT]: "stamp_overlay--rightArrow--G7DIa stamp_overlay--arrow--F8-y5"
 };
 let nR = {
-  [Zj.ABOVE]: "stamp_overlay--animationUp--Pq4mv stamp_overlay--animationBase--a-FJI",
-  [Zj.BELOW]: "stamp_overlay--animationDown--mBXfv stamp_overlay--animationBase--a-FJI",
-  [Zj.RIGHT]: "stamp_overlay--animationRight--2KY5g stamp_overlay--animationBase--a-FJI",
-  [Zj.LEFT]: "stamp_overlay--animationLeft--daYLK stamp_overlay--animationBase--a-FJI"
+  [PositionEnum.ABOVE]: "stamp_overlay--animationUp--Pq4mv stamp_overlay--animationBase--a-FJI",
+  [PositionEnum.BELOW]: "stamp_overlay--animationDown--mBXfv stamp_overlay--animationBase--a-FJI",
+  [PositionEnum.RIGHT]: "stamp_overlay--animationRight--2KY5g stamp_overlay--animationBase--a-FJI",
+  [PositionEnum.LEFT]: "stamp_overlay--animationLeft--daYLK stamp_overlay--animationBase--a-FJI"
 };
 function nM(e) {
   let t = e.mirror.sceneGraph;
@@ -3798,7 +3798,7 @@ function ad(e) {
       onClick: BrowserInfo.isIpad ? void 0 : I,
       onPointerDown: BrowserInfo.isIpad ? I : void 0,
       className: T || isPluginBlockedByAllowlist ? NY : _$$lI,
-      children: [buttonCta, _ && jsx(_$$B, {
+      children: [buttonCta, _ && jsx(SvgComponent, {
         svg: _$$A6,
         className: isNotInHeader || T ? _$$sD : wE
       })]
@@ -3851,7 +3851,7 @@ let av = forwardRef((e, t) => {
       className: am,
       onPointerDown: onInsertableResourcePointerDown,
       ref: t,
-      children: [jsxs(_$$E2, {
+      children: [jsxs(ButtonPrimitive, {
         className: ax,
         onClick: () => m ? setPreviewResource({
           id: h.plugin_id,
@@ -3863,7 +3863,7 @@ let av = forwardRef((e, t) => {
             plugin: h,
             loading: "lazy",
             alt: ""
-          }) : jsx(_$$B, {
+          }) : jsx(SvgComponent, {
             svg: _$$A8
           })
         }), jsxs("div", {
@@ -3899,7 +3899,7 @@ let av = forwardRef((e, t) => {
             },
             "aria-label": getI18nString("whiteboard.inserts.plugin_development_options_tooltip"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("whiteboard.inserts.plugin_development_options_tooltip")
             },
             children: jsx(_$$J6, {})
@@ -3942,7 +3942,7 @@ let aT = memo(function (e) {
   } = e;
   let {
     isSavedForUser
-  } = QK(e.pluginId, _$$vt.PLUGIN);
+  } = QK(e.pluginId, ResourceTypeNoComment.PLUGIN);
   let r = _$$b4();
   let {
     tabManager,
@@ -3951,7 +3951,7 @@ let aT = memo(function (e) {
   } = _$$cX();
   let d = EO(plugin);
   let c = _$$gn(plugin);
-  let p = _$$sZ();
+  let p = useCurrentUserOrg();
   let h = _$$ll();
   let m = XV({
     org: p,
@@ -3975,7 +3975,7 @@ let aT = memo(function (e) {
     resource: plugin,
     validBadges: [_$$op.FREEMIUM, _$$op.OFF_PLATFORM, _$$op.PURCHASED]
   });
-  if (pluginVersion === pluginMetadata || _$$m4(plugin) && (g?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os)) return null;
+  if (pluginVersion === pluginMetadata || hasMonetizedResourceMetadata(plugin) && (g?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os)) return null;
   let y = x ? jsx(WZ, {
     resource: plugin
   }) : d ? jsx(aE, {
@@ -4014,7 +4014,7 @@ let aT = memo(function (e) {
         }), c && jsx("div", {
           className: "browse_plugins_universal_modal_tiles--browsePluginTilePaymentError--A0pCZ",
           children: jsx(_$$xY, {})
-        }), e.showLockIcon && jsx(_$$B, {
+        }), e.showLockIcon && jsx(SvgComponent, {
           svg: _$$A7
         })]
       })
@@ -4031,7 +4031,7 @@ let aT = memo(function (e) {
       className: am,
       onPointerDown: onInsertableResourcePointerDown,
       "data-testid": `figjam-plugin-tile-${e.pluginId}`,
-      children: [jsxs(_$$E2, {
+      children: [jsxs(ButtonPrimitive, {
         className: ax,
         onClick: () => setPreviewResource({
           id: pluginVersion.plugin_id,
@@ -4058,7 +4058,7 @@ let aT = memo(function (e) {
         className: ex()(_$$s.flex.itemsCenter.mr8.$$if(isSavedForUser, _$$s.visible).$),
         children: jsx(_$$_W, {
           resourceId: e.pluginId,
-          resourceType: _$$vt.PLUGIN,
+          resourceType: ResourceTypeNoComment.PLUGIN,
           parentView: _$$nN2.FIGJAM_PLUGIN_ROW
         })
       }), jsx("div", {
@@ -4072,7 +4072,7 @@ let aT = memo(function (e) {
 function aE(e) {
   let t = _$$cX().setPreviewResource;
   let i = _$$lt(e.plugin);
-  return _$$m4(e.plugin) ? jsxs(_$$E2, {
+  return hasMonetizedResourceMetadata(e.plugin) ? jsxs(ButtonPrimitive, {
     className: "browse_plugins_universal_modal_tiles--priceBadgeContainer--Sf172",
     onClick: () => t({
       id: e.plugin.id,
@@ -4157,7 +4157,7 @@ function aH(e) {
               },
               "aria-label": getI18nString("whiteboard.inserts.widget_options"),
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("whiteboard.inserts.widget_options")
               },
               children: jsx(_$$J6, {})
@@ -4252,7 +4252,7 @@ let aV = forwardRef((e, t) => {
             },
             "aria-label": getI18nString("whiteboard.inserts.widget_options"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("whiteboard.inserts.widget_options")
             },
             children: jsx(_$$J6, {})
@@ -4279,7 +4279,7 @@ let aG = memo(function (e) {
   let s = useMemo(() => e.widgetVersion || getPluginVersion(a), [e.widgetVersion, a]);
   let c = EO(a);
   let p = _$$gn(a);
-  let h = _$$sZ();
+  let h = useCurrentUserOrg();
   let f = U6();
   let _ = XV({
     org: h,
@@ -4293,15 +4293,15 @@ let aG = memo(function (e) {
   useEffect(() => {
     a || n(_$$af({
       id: r,
-      resourceType: _$$bD.WIDGET
+      resourceType: ResourceType.WIDGET
     }));
   }, [r, n, a]);
   let j = BI();
   let y = useSelector(e => e.authedActiveCommunityProfile);
   let {
     isSavedForUser
-  } = QK(e.widgetId, _$$vt.WIDGET);
-  return q8() && RA.has(r) || !s || _$$m4(a) && (j?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os) ? null : jsx(_$$sU, {
+  } = QK(e.widgetId, ResourceTypeNoComment.WIDGET);
+  return isAIFeaturesEnabledForCurrentUser() && cortexAnalyticsPluginIds.has(r) || !s || hasMonetizedResourceMetadata(a) && (j?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os) ? null : jsx(_$$sU, {
     className: "browse_widgets_universal_modal_tiles--widgetCardContainer--yzVBr resource_tiles--_parentWithHoverAction--m180X",
     image: jsxs(FK, {
       className: aM,
@@ -4340,7 +4340,7 @@ let aG = memo(function (e) {
         }),
         children: jsx(_$$_W, {
           resourceId: e.widgetId,
-          resourceType: _$$vt.WIDGET,
+          resourceType: ResourceTypeNoComment.WIDGET,
           parentView: _$$nN2.TILE
         })
       })
@@ -4599,7 +4599,7 @@ function sh({
   localizedDescription: n,
   children: r
 }) {
-  let a = e ? jsxs(_$$E2, {
+  let a = e ? jsxs(ButtonPrimitive, {
     className: sr,
     onClick: e,
     children: [jsx("div", {
@@ -4678,7 +4678,7 @@ function sf(e) {
         children: renderI18nText("whiteboard.inserts.widgets")
       }), jsx("div", {
         className: "browse_resources_use_cases--widgetTilesGridContainer--gv30z browse_widgets_view--widgetTilesGridContainer--t5-lL",
-        children: n.map(e => jsx(_$$E2, {
+        children: n.map(e => jsx(ButtonPrimitive, {
           className: sd,
           children: jsx(aG, {
             widgetId: e.id
@@ -4699,7 +4699,7 @@ function sf(e) {
         children: renderI18nText("whiteboard.inserts.plugins")
       }), jsx("div", {
         className: "browse_resources_use_cases--pluginCategoryViewPadding--e1D-M",
-        children: a.map(e => jsx(_$$E2, {
+        children: a.map(e => jsx(ButtonPrimitive, {
           className: sd,
           children: jsx(aC, {
             pluginId: e.id,
@@ -4817,7 +4817,7 @@ function sg(e) {
         backgroundColor: "transparent",
         removeBorder: !0,
         className: "browse_resources_use_cases--widgetImageContainer--diYt5",
-        children: jsx(_$$E2, {
+        children: jsx(ButtonPrimitive, {
           htmlAttributes: {
             onPointerDown: onInsertableResourcePointerDown
           },
@@ -4831,7 +4831,7 @@ function sg(e) {
           })
         })
       }),
-      bottomRow: jsx(_$$E2, {
+      bottomRow: jsx(ButtonPrimitive, {
         className: sc,
         children: jsx("div", {
           className: ss,
@@ -4869,7 +4869,7 @@ function sj(e) {
       width: 90
     }), jsx("div", {
       className: "browse_resources_use_cases--stickerResourceMetadata--vE2eG",
-      children: jsx(_$$E2, {
+      children: jsx(ButtonPrimitive, {
         className: sc,
         children: jsx("div", {
           className: su,
@@ -5187,7 +5187,7 @@ function sX() {
   });
 }
 function sq(e) {
-  return jsxs(_$$E2, {
+  return jsxs(ButtonPrimitive, {
     className: ex()({
       "browse_resources_all_tab--sectionHeaderContainer--2ZoeS": !!e.subtitle,
       "browse_resources_all_tab--sectionHeaderContainerNoSubtitle--qdp9l browse_resources_all_tab--sectionHeaderContainer--2ZoeS": !e.subtitle,
@@ -5311,7 +5311,7 @@ function s6(e) {
       selectedCategory: t
     },
     children: [jsx("div", {
-      className: e.resourceType === _$$bD.WIDGET ? "browse_explore_category_view--widgetTilesGridContainer--U4Dl6 browse_widgets_view--widgetTilesGridContainer--t5-lL" : "browse_explore_category_view--pluginCategoryViewPadding--tst89",
+      className: e.resourceType === ResourceType.WIDGET ? "browse_explore_category_view--widgetTilesGridContainer--U4Dl6 browse_widgets_view--widgetTilesGridContainer--t5-lL" : "browse_explore_category_view--pluginCategoryViewPadding--tst89",
       children: r.shelf_content.map(e => a(e))
     }), jsx(_$$q, {
       resourceType: e.resourceType
@@ -5477,7 +5477,7 @@ var oh = (e => (e.RECENT_AND_SAVED = "recent_and_saved", e.DEVELOPMENT = "develo
 let om = "browse_main_view_selector--mainViewHeader--1tbfQ";
 function of(e) {
   let t = useDispatch();
-  let i = _$$sZ();
+  let i = useCurrentUserOrg();
   let n = useCallback(e => function (e, t) {
     switch (e) {
       case oh.RECENT_AND_SAVED:
@@ -5574,7 +5574,7 @@ function oE() {
   return jsxs("div", {
     className: _$$s.flex.flexColumn.itemsCenter.alignCenter.pl16.pr16.$,
     children: [jsx("div", {
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A0,
         useOriginalSrcFills_DEPRECATED: !0,
         svgWidth: "90px",
@@ -5718,8 +5718,8 @@ function oM() {
 }
 function oD() {
   return jsx(_$$K2, {
-    resourceType: _$$bD.PLUGIN,
-    shelfType: _$$cS.BROWSE_PLUGINS_MODAL,
+    resourceType: ResourceType.PLUGIN,
+    shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL,
     renderResource: e => jsx(aC, {
       pluginId: e.id,
       view: _$$p2.EXPLORE
@@ -5743,7 +5743,7 @@ function oU() {
       children: [jsx(oP, {}), e === oh.DEVELOPMENT && jsx("div", {
         className: _$$s.flex.itemsCenter.pr16.$,
         children: jsx(_$$n7, {
-          resourceType: _$$bD.PLUGIN
+          resourceType: ResourceType.PLUGIN
         })
       })]
     }), e === oh.RECENT_AND_SAVED && jsxs(Fragment, {
@@ -5773,7 +5773,7 @@ function oF() {
   let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : "";
   let i = _$$oh(_$$sz2.loadingKeyForPayload({
-    shelfType: _$$cS.BROWSE_PLUGINS_MODAL
+    shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL
   }));
   let n = useCurrentFileKey();
   let r = _$$oh(getPluginAllowListKey(t, n));
@@ -5828,7 +5828,7 @@ function oQ(e) {
   useEffect(() => {
     p || i(_$$af({
       id: e.pluginId,
-      resourceType: _$$bD.PLUGIN
+      resourceType: ResourceType.PLUGIN
     }));
   }, [i, e.pluginId, p]);
   let R = {};
@@ -5891,8 +5891,8 @@ function oQ(e) {
     name: "detail",
     properties: {
       resourceId: r.id,
-      isMonetized: _$$m4(r),
-      resourceType: _$$bD.PLUGIN,
+      isMonetized: hasMonetizedResourceMetadata(r),
+      resourceType: ResourceType.PLUGIN,
       editorType: "whiteboard"
     },
     children: [jsx(_$$P, {
@@ -5924,7 +5924,7 @@ function oQ(e) {
       className: P0,
       href: `/community/plugin/${e.pluginId}`,
       trusted: !0,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A1,
         className: JX
       }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
@@ -5971,7 +5971,7 @@ function oQ(e) {
               data: {
                 dispatch: i,
                 error: s.error,
-                resourceType: _$$bD.PLUGIN
+                resourceType: ResourceType.PLUGIN
               },
               showModalsBeneath: !0
             }));
@@ -6042,7 +6042,7 @@ function o8(e) {
     name: "detail",
     properties: {
       resourceId: n.id,
-      resourceType: _$$bD.HUB_FILE
+      resourceType: ResourceType.HUB_FILE
     },
     children: [jsxs(_$$P, {
       height: _$$mS(i.pinned, 504, _$$s3, zD),
@@ -6078,7 +6078,7 @@ function o8(e) {
       }),
       target: "_blank",
       trusted: !0,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A1,
         className: "browse_templates_preview--communityLinkIcon--DC-Q4 text--fontPos11--2LvXf text--_fontBase--QdLsd"
       }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
@@ -6113,7 +6113,7 @@ function ln(e) {
     className: "browse_templates_preview_top_bar--topBar--6SkwK",
     children: [jsxs("div", {
       className: "browse_templates_preview_top_bar--left--vErPQ",
-      children: [jsx(_$$E2, {
+      children: [jsx(ButtonPrimitive, {
         className: ex()("browse_templates_preview_top_bar--backButton--d3Iws", "browse_templates_preview_top_bar--hasFocusOutline--le5ti"),
         onClick: BrowserInfo.isIpad ? void 0 : goBack,
         htmlAttributes: {
@@ -6121,7 +6121,7 @@ function ln(e) {
           autoFocus: !0
         },
         "aria-label": getI18nString("general.back"),
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A10,
           "data-not-draggable": !0,
           "data-does-not-dismiss-modal": !0
@@ -6137,7 +6137,7 @@ function ln(e) {
             numPublishers: v.length,
             firstPublisherName: v[0]?.name,
             multiplePublisherSuffix: jsx("span", {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": _$$eg2(v.slice(1), v.length, e => e.name),
               children: renderI18nText("whiteboard.inserts.and_others")
             })
@@ -6233,7 +6233,7 @@ function la(e) {
       query: e.query,
       cta: jsx(_$$_3, {
         url: "/community/figjam",
-        resourceType: _$$bD.HUB_FILE
+        resourceType: ResourceType.HUB_FILE
       })
     })
   });
@@ -6451,7 +6451,7 @@ function lg() {
   return jsxs("div", {
     className: _$$s.flex.flexColumn.itemsCenter.$,
     children: [jsx("div", {
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A12,
         useOriginalSrcFills_DEPRECATED: !0,
         svgWidth: "60px",
@@ -6525,8 +6525,8 @@ function lb({
 }
 function ly() {
   return jsx(_$$K2, {
-    resourceType: _$$bD.WIDGET,
-    shelfType: _$$cS.BROWSE_WIDGETS_MODAL,
+    resourceType: ResourceType.WIDGET,
+    shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL,
     renderResource: e => jsx(aG, {
       widgetId: e.id
     }, e.id)
@@ -6541,7 +6541,7 @@ function lv() {
 }
 function lC() {
   let e = useAtomWithSubscription(o_);
-  let t = _$$sZ();
+  let t = useCurrentUserOrg();
   let i = !!(t && t.widgets_whitelist_enforced);
   return jsxs("div", {
     children: [jsx(lh, {}), jsxs("div", {
@@ -6549,7 +6549,7 @@ function lC() {
       children: [jsx(lv, {}), e === oh.DEVELOPMENT && jsx("div", {
         className: _$$s.flex.itemsCenter.pr16.$,
         children: jsx(_$$n7, {
-          resourceType: _$$bD.WIDGET
+          resourceType: ResourceType.WIDGET
         })
       })]
     }), e === oh.RECENT_AND_SAVED && jsxs(Fragment, {
@@ -6579,7 +6579,7 @@ function lT() {
   let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : "";
   let i = _$$oh(_$$sz2.loadingKeyForPayload({
-    shelfType: _$$cS.BROWSE_WIDGETS_MODAL
+    shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL
   }));
   let n = useCurrentFileKey();
   let r = _$$oh(getWidgetAllowListKey(t, n));
@@ -6641,12 +6641,12 @@ function lk(e) {
   useEffect(() => {
     a || m(_$$af({
       id: resourceId,
-      resourceType: _$$bD.PLUGIN
+      resourceType: ResourceType.PLUGIN
     }));
   }, [m, resourceId, a]);
   let _ = EO(r);
   let x = Object.values($1()).find(t => String(t.plugin_id) === e.resourceId);
-  let g = _$$sZ();
+  let g = useCurrentUserOrg();
   let j = _$$ll();
   let b = !x && XV({
     org: g,
@@ -6659,7 +6659,7 @@ function lk(e) {
     className: _$$XV,
     children: [jsxs("div", {
       className: kb,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A10,
         className: Gv,
         onClick: BrowserInfo.isIpad ? void 0 : goBack,
@@ -6691,7 +6691,7 @@ function lk(e) {
             numPublishers: p.length,
             firstPublisherName: p[0]?.name,
             multiplePublisherSuffix: jsx("span", {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": _$$eg2(p.slice(1), p.length, e => e.name),
               children: renderI18nText("whiteboard.inserts.and_others")
             })
@@ -6704,12 +6704,12 @@ function lk(e) {
         className: _$$s.mr8.$,
         children: _ && !getFeatureFlags().community_hub_admin_reviewer ? jsx(_$$I3, {
           resource: r,
-          context: _$$aL.INSERTS,
+          context: ShelfViewType.INSERTS,
           payment: r.community_resource_payment
         }) : jsx("div", {
-          "data-tooltip-type": c ? Ib.TEXT : void 0,
+          "data-tooltip-type": c ? KindEnum.TEXT : void 0,
           "data-tooltip": c ? getI18nString("whiteboard.inserts.log_in_or_sign_up_to_use", {
-            resourceType: _$$vt.PLUGIN
+            resourceType: ResourceTypeNoComment.PLUGIN
           }) : void 0,
           children: b ? jsx(_$$s4, {
             version: s,
@@ -6723,7 +6723,7 @@ function lk(e) {
         })
       }), jsx(_$$_W, {
         resourceId: r.id,
-        resourceType: _$$vt.PLUGIN,
+        resourceType: ResourceTypeNoComment.PLUGIN,
         parentView: _$$nN2.DETAIL
       }), y ? jsx(_$$O, {
         setPinned: e.setPinned
@@ -6760,7 +6760,7 @@ function lD(e) {
   let C = "whiteboard" === _$$lg();
   let T = F5();
   let E = Object.values($1()).find(t => String(t.plugin_id) === e.resourceId);
-  let S = _$$sZ();
+  let S = useCurrentUserOrg();
   let w = U6();
   let I = !E && XV({
     extension: n,
@@ -6770,7 +6770,7 @@ function lD(e) {
   useEffect(() => {
     n || a(_$$af({
       id: resourceId,
-      resourceType: _$$bD.WIDGET
+      resourceType: ResourceType.WIDGET
     }));
   }, [resourceId, a, n]);
   let L = _$$b4();
@@ -6814,7 +6814,7 @@ function lD(e) {
     className: _$$XV,
     children: [jsxs("div", {
       className: kb,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A10,
         className: Gv,
         onClick: BrowserInfo.isIpad ? void 0 : goBack,
@@ -6846,7 +6846,7 @@ function lD(e) {
             numPublishers: r.length,
             firstPublisherName: r[0]?.name,
             multiplePublisherSuffix: jsx("span", {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": _$$eg2(r.slice(1), r.length, e => e.name),
               children: renderI18nText("whiteboard.inserts.and_others")
             })
@@ -6859,11 +6859,11 @@ function lD(e) {
         className: _$$s.mr8.$,
         children: O && !getFeatureFlags().community_hub_admin_reviewer ? jsx(_$$I3, {
           resource: n,
-          context: _$$aL.INSERTS
+          context: ShelfViewType.INSERTS
         }) : I ? jsx(_$$s4, {
           version: j,
           isPlugin: !1
-        }) : jsx($n, {
+        }) : jsx(Button, {
           onClick: BrowserInfo.isIpad ? void 0 : M,
           actionOnPointerDown: BrowserInfo.isIpad ?? void 0,
           variant: "primary",
@@ -6873,7 +6873,7 @@ function lD(e) {
           },
           children: jsxs("span", {
             className: _$$s.flex.flexRow.justifyCenter.itemsCenter.$,
-            children: [getI18nString("whiteboard.inserts.add_widget"), _ && jsx(_$$B, {
+            children: [getI18nString("whiteboard.inserts.add_widget"), _ && jsx(SvgComponent, {
               svg: _$$A6,
               className: _$$sD
             })]
@@ -6882,7 +6882,7 @@ function lD(e) {
       }), jsx("div", {
         children: jsx(_$$_W, {
           resourceId: n.id,
-          resourceType: _$$vt.WIDGET,
+          resourceType: ResourceTypeNoComment.WIDGET,
           parentView: _$$nN2.DETAIL
         })
       }), k ? jsx(_$$O, {
@@ -6970,7 +6970,7 @@ function lF({
     teamTemplatesFromSearchIsLoading,
     requestLoadMoreTeamTemplatesFromSearch
   } = _$$Ib();
-  let W = _$$sZ();
+  let W = useCurrentUserOrg();
   let z = useAtomWithSubscription(_$$D);
   useEffect(() => {
     z && !_$$l7.has(z) && handleAtomEvent({
@@ -7035,12 +7035,12 @@ function lF({
   }, [$, m?.parentOrgId]);
   useEffect(() => {
     $(_$$sz2({
-      shelfType: _$$cS.FIGJAM_TEMPLATES_PICKER
+      shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER
     }));
   }, [$]);
   let eo = Object.keys(_$$yQ()).join(",");
   let el = selectCurrentUser();
-  let ed = _$$sZ();
+  let ed = useCurrentUserOrg();
   let ec = G7(ed);
   let eu = Gi();
   let ep = useRef(null);
@@ -7105,7 +7105,7 @@ function lF({
     categoryScrollContainerRef: ep,
     categoryViewContent: e ? e.resourceType === Rt.TEMPLATES ? jsx(o1, {
       selectedCategoryId: e.id,
-      shelfType: _$$cS.FIGJAM_TEMPLATES_PICKER,
+      shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER,
       setPreviewHubFile: setPreviewResource,
       renderResource: e => jsx(_$$S2, {
         template: {
@@ -7126,16 +7126,16 @@ function lF({
     }) : e.resourceType === Rt.WIDGETS ? jsx(s6, {
       selectedCategoryId: e.id,
       goBack: () => setSelectedCategory(void 0),
-      resourceType: _$$bD.WIDGET,
-      shelfType: _$$cS.BROWSE_WIDGETS_MODAL,
+      resourceType: ResourceType.WIDGET,
+      shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL,
       renderResource: e => jsx(aG, {
         widgetId: e.id
       }, e.id)
     }) : e.resourceType === Rt.PLUGINS ? jsx(s6, {
       selectedCategoryId: e.id,
       goBack: () => setSelectedCategory(void 0),
-      resourceType: _$$bD.PLUGIN,
-      shelfType: _$$cS.BROWSE_PLUGINS_MODAL,
+      resourceType: ResourceType.PLUGIN,
+      shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL,
       renderResource: e => jsx(aC, {
         pluginId: e.id,
         view: _$$p2.EXPLORE
@@ -7332,7 +7332,7 @@ function lH({
   requestLoadMoreTeamTemplatesFromSearch: w
 }) {
   let I = U5(t);
-  let L = _$$sZ();
+  let L = useCurrentUserOrg();
   let N = _$$ll();
   let A = U6();
   let O = useMemo(() => Cs({
@@ -7489,7 +7489,7 @@ function dl({
   },
   onClick: n
 }) {
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     onClick: n,
     className: ex()(_$$s.flex.justifyBetween.itemsCenter.py16.pl16.pr12.b1.colorBorder.bRadius6.wFull.alignLeft.$, "ai_modal--oneClickButton--VqeLK"),
     htmlAttributes: {
@@ -7509,10 +7509,10 @@ function dl({
       }), jsx("div", {
         className: "ai_modal--oneClickIcon--J1-2k",
         children: wg(i)
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         className: ex()(_$$s.hidden.colorIconBrand.bRadius2.$, "ai_modal--oneClickAiIcon--fQNmm"),
         "data-tooltip": getI18nString("whiteboard.ai_modal.make"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": "true",
         svg: _$$A13
       })]
@@ -7581,7 +7581,7 @@ function dj({
     className: "ai_modal--generateButtonContainer--TZ5A4",
     children: jsx("div", {
       className: "ai_modal--generateButtonContainerInner--LrHTI",
-      children: jsx($n, {
+      children: jsx(Button, {
         disabled: 0 === t.length || i.status === _$$c6.LOADING,
         onClick: () => {
           e(t);
@@ -7675,7 +7675,7 @@ function dZ() {
       target: "_blank",
       className: "ai_announcement_modal--communityLink--CA-Qf",
       trusted: !0,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A16,
         className: "ai_announcement_modal--communityIcon--Gmr2-"
       }), renderI18nText("whiteboard.ai_feature_announcement.more_prompts.community_button")]
@@ -7771,7 +7771,7 @@ function dq({
           className: ex()(_$$s.py4.pl8.pr16.b1.bRadius6.font13.fontMedium.lh24.$, "ai_announcement_modal--primaryBtn--Hp0e- ai_announcement_modal--btn--I8Apa"),
           children: jsxs("div", {
             className: _$$s.flex.flexRow.itemsCenter.$,
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: _$$A13,
               className: "ai_announcement_modal--aiIcon--u4hnd"
             }), getI18nString("whiteboard.ai_modal.make")]
@@ -7784,7 +7784,7 @@ function dq({
 let dJ = registerModal(function (e) {
   let t = useModalManager(e);
   let [i, n] = useState(() => Object.keys(_$$FN())[0] ?? "");
-  return jsx(_$$bL2, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
     children: jsxs(_$$vo2, {
@@ -7837,7 +7837,7 @@ function d1({
       },
       children: [jsx("div", {
         className: "ai_modal--pillSuggestionsGenerated--6JXOL",
-        children: e.map((n, r) => jsx(_$$E2, {
+        children: e.map((n, r) => jsx(ButtonPrimitive, {
           className: u,
           onClick: () => {
             void 0 === l ? a.update(() => {
@@ -7858,13 +7858,13 @@ function d1({
           disabled: s.status === _$$c6.LOADING,
           children: jsxs("div", {
             className: _$$s.flex.itemsCenter.gap6.$,
-            children: [_$$UH(n) && Oo(n.categoryKey), n.title, !_$$UH(n) && jsx(_$$B, {
+            children: [_$$UH(n) && Oo(n.categoryKey), n.title, !_$$UH(n) && jsx(SvgComponent, {
               svg: _$$A18,
               className: _$$s.colorIconTertiary.$
             })]
           })
         }, n.title))
-      }), void 0 === l && 0 === m.length && jsx(_$$E2, {
+      }), void 0 === l && 0 === m.length && jsx(ButtonPrimitive, {
         className: h,
         disabled: s.status === _$$c6.LOADING,
         onClick: () => {
@@ -7874,7 +7874,7 @@ function d1({
         },
         children: jsxs("div", {
           className: _$$s.flex.itemsCenter.gap4.cursorDefault.$,
-          children: [renderI18nText("whiteboard.ai_modal.suggestion.more_prompts"), jsx(_$$B, {
+          children: [renderI18nText("whiteboard.ai_modal.suggestion.more_prompts"), jsx(SvgComponent, {
             svg: _$$A17,
             className: _$$s.colorIconFigjam.$
           })]
@@ -8070,7 +8070,7 @@ function d9({
   return jsxs("section", {
     "aria-label": getI18nString("whiteboard.ai_modal.make_templates_and_diagrams"),
     className: "prompt_editor_v2--editableWrapper---hIpF",
-    children: [jsx(_$$E2, {
+    children: [jsx(ButtonPrimitive, {
       className: "prompt_editor_v2--visuallyHiddenButton--AsyAA",
       htmlAttributes: {
         onKeyDown: e => {
@@ -8224,7 +8224,7 @@ function ct() {
             children: getI18nString("whiteboard.ai_modal.share_trace_nudge_weird_output")
           })
         })
-      }), jsx(_$$E2, {
+      }), jsx(ButtonPrimitive, {
         className: "ai_share_trace_nudge--button--9ZX8n",
         onClick: () => {
           noop(JSON.stringify(e.trace, null, 2), "trace.json");
@@ -8407,7 +8407,7 @@ function cl({
   });
 }
 function cd() {
-  let e = !q8() && Uy();
+  let e = !isAIFeaturesEnabledForCurrentUser() && Uy();
   let t = Xr(_$$yt);
   let i = useAtomWithSubscription(_$$zS) === Wl.TOP_BAR;
   let n = cr();
@@ -8424,7 +8424,7 @@ function cc({
   hasGenerated: t
 }) {
   let i = useCurrentFileKey();
-  let n = _$$tG();
+  let n = isHandbrakeDisabledForCurrentUser();
   let r = ca();
   return jsxs(Fragment, {
     children: [jsx(_$$fu, {
@@ -9205,7 +9205,7 @@ function uE(e, t) {
   });
 }
 function uS() {
-  let e = _$$_X({
+  let e = getViewportInfo({
     subscribeToUpdates_expensive: !1
   });
   let t = _$$Z4();
@@ -9286,7 +9286,7 @@ function uD({
   let v = qI();
   let C = document.activeElement?.tagName === "TEXTAREA";
   kz(Uz.TAB, e => {
-    _ && (!v || C) && (e.preventDefault(), i(n), _$$ds("actions_prompt_tab_completed", y.openFile?.key, y, {
+    _ && (!v || C) && (e.preventDefault(), i(n), trackFileEvent("actions_prompt_tab_completed", y.openFile?.key, y, {
       feature: c,
       suggestion: n
     }));
@@ -9357,12 +9357,12 @@ function uD({
               promptHistory: a,
               onChange: i,
               textAreaRef: f
-            }), r.map((e, t) => jsx($n, {
+            }), r.map((e, t) => jsx(Button, {
               variant: "secondary",
               onClick: () => {
                 i(e.prompt);
                 f.current?.focus();
-                c && _$$ds("actions_prompt_suggestion_clicked", y.openFile?.key, y, {
+                c && trackFileEvent("actions_prompt_suggestion_clicked", y.openFile?.key, y, {
                   feature: c,
                   suggestion: e.prompt
                 });
@@ -9398,7 +9398,7 @@ function uP({
       target: null
     }));
   }, !!e);
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     className: "x16rqkct x1f4uy0e xvy4d1p xxk0z11 x78zum5 x6s0dn4 xl56j7k x1gs6z28",
     onClick: () => e({
       shortcut: null,
@@ -9612,7 +9612,7 @@ function uB() {
         imageFailed: r
       };
     }();
-    let o = _$$sZ();
+    let o = useCurrentUserOrg();
     let d = useMemo(() => {
       let e = _$$O2(JT.GENERATE_IMAGE, o);
       return e[0]?.value;
@@ -10080,7 +10080,7 @@ function uY() {
     }, t, s);
     return (!n || !r) && e && (i || o) && a;
   }();
-  let t = _$$_X({
+  let t = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
   let i = noop(e);
@@ -10122,11 +10122,11 @@ function uX() {
   }();
   let i = _$$dH();
   let n = function (e, t) {
-    let i = _$$_X({
+    let i = getViewportInfo({
       subscribeToUpdates_expensive: e
     });
     let n = _$$Fk((e, t) => uT(t ?? [], e), t);
-    return useMemo(() => Yb(i, n), [i, n]);
+    return useMemo(() => scaleRect(i, n), [i, n]);
   }(t, e);
   let [{
     currentAction: r,
@@ -10481,7 +10481,7 @@ function p0({
               htmlAttributes: {
                 "data-tooltip": e.disabled ? void 0 : e.label,
                 "data-tooltip-show-above": "true",
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip-shortcut-key": e.shortcutKey
               },
               children: jsx("div", {
@@ -10627,7 +10627,7 @@ var hu = (e => (e[e.HUGE = 96] = "HUGE", e[e.EXTRA_LARGE = 64] = "EXTRA_LARGE", 
 let hp = [16, 24, 40, 64, 96];
 let hh = new Set(hp);
 let hm = e => e >= 64 ? 40 : 32;
-let hf = e => _$$p7({
+let hf = e => calculateTypography({
   96: 18,
   64: 16,
   40: 14,
@@ -12079,7 +12079,7 @@ function fl() {
     children: jsx(fa, {})
   }) : jsx(K0, {
     tooltip: "ungroup-selection",
-    tooltipType: Ib.LOOKUP,
+    tooltipType: KindEnum.LOOKUP,
     svg: _$$A37,
     onClick: e,
     recordingKey: "ungroupSelection"
@@ -12218,7 +12218,7 @@ function fh({
       }),
       "data-tooltip": _$$M5(t),
       "data-tooltip-show-above": !0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       id: r,
       role: "option",
       tabIndex: -1,
@@ -12434,7 +12434,7 @@ let fS = (e, t) => {
     return new Map([[WhiteboardFeatures.RESIZE_TO_FIT, ["RESIZE_TO_FIT"]], [WhiteboardFeatures.TEXT_DECORATION, ["TEXT_DECORATION_BOLD", "TEXT_DECORATION_STRIKETHROUGH"]], [WhiteboardFeatures.WHITEBOARD_COLOR, ["WHITEBOARD_COLOR"]], [WhiteboardFeatures.HIGHLIGHT_COLOR, ["HIGHLIGHT_COLOR"]], [WhiteboardFeatures.STICKY_COLOR, ["STICKY_COLOR"]], [WhiteboardFeatures.WASHI_TAPE_PATTERN, ["WASHI_TAPE_PATTERN"]], [WhiteboardFeatures.IMAGE, ["REPLACE_IMAGE", "IMAGE_CONTROLS"]], [WhiteboardFeatures.BORDER, ["IMAGE_BORDER"]], [WhiteboardFeatures.WHITEBOARD_SHAPE, ["WHITEBOARD_SHAPE"]], [WhiteboardFeatures.WHITEBOARD_STROKE, ["WHITEBOARD_STROKE", "PENCIL_STROKE", "HIGHLIGHTER_STROKE"]], [WhiteboardFeatures.FONT_FAMILY, ["FONT_FAMILY"]], [WhiteboardFeatures.WHITEBOARD_TEXT_STYLE, ["WHITEBOARD_TEXT_STYLE"]], [WhiteboardFeatures.TEXT_ALIGN_H, ["TEXT_ALIGN"]], [WhiteboardFeatures.BULLETED_LIST, [e ? "ORDERED_LIST" : "UNORDERED_LIST"]], [WhiteboardFeatures.CONNECTOR_START_CAP, ["CONNECTOR_START_CAP"]], [WhiteboardFeatures.CONNECTOR_END_CAP, ["CONNECTOR_END_CAP"]], [WhiteboardFeatures.CONNECTOR_LINE_STYLE, ["CONNECTOR_LINE_STYLE"]], [WhiteboardFeatures.ADD_TEXT, ["ADD_CONNECTOR_TEXT"]], [WhiteboardFeatures.SECTION_SHOW_HIDE, ["SECTION_SHOW_HIDE"]], [WhiteboardFeatures.SECTION_RENAME, ["SECTION_RENAME"]], [WhiteboardFeatures.EMBED_OPEN_EXTERNAL, ["EMBED_OPEN_EXTERNAL"]], [WhiteboardFeatures.EMBED_CONVERT_TO_TEXT, ["EMBED_CONVERT_TO_TEXT"]], [WhiteboardFeatures.HYPERLINK, ["HYPERLINK"]], [WhiteboardFeatures.AUTHOR_VISIBILITY, ["AUTHOR_VISIBILITY"]], [WhiteboardFeatures.DIVIDER, ["DIVIDER"]]]);
   }();
   let n = function () {
-    let e = q8();
+    let e = isAIFeaturesEnabledForCurrentUser();
     let t = _$$V5();
     let i = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
     return new Map([["TIDY_UP", Zr("tidy-up")], ["GROUP_SELECTION", Zr("group-selection")], ["UNGROUP_SELECTION", fd() ?? !1], ["CREATE_SECTION", Zr("create-section-from-selection")], ["ALIGNMENT", Zr("align-top") && i !== LayoutTabType.RASTER], ["AI_QUICK_ACTIONS", !e && t]]);
@@ -12810,10 +12810,10 @@ let fI = (e, t) => {
   let r = getObservableOrFallback(AppStateTsApi.canvasViewState().inlineMenuTarget);
   let a = r?.boundingBox || n;
   let s = v2();
-  let o = _$$_X({
+  let o = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
-  let u = Yb(o, a);
+  let u = scaleRect(o, a);
   let h = useSelector(({
     mirror: {
       appModel: e
@@ -12847,14 +12847,14 @@ let fI = (e, t) => {
   let P = new _$$M3(u.x, u.y);
   let U = new _$$M3(u.width, u.height);
   let F = g && new _$$r3(M, D).containsIncludingBoundary(new _$$r3(P, U));
-  if (u.y + u.height <= VA() + v || !ZT(u, o) || !i || !h || F || a.x === 1 / 0 || a.y === 1 / 0 || m || f || x && !g || j || b) return null;
+  if (u.y + u.height <= VA() + v || !isRectInside(u, o) || !i || !h || F || a.x === 1 / 0 || a.y === 1 / 0 || m || f || x && !g || j || b) return null;
   let H = _$$j0();
   let B = y ? 0 : H;
   let V = {
     x: a.x + a.width / 2,
     y: a.y
   };
-  let G = Z0(o, V);
+  let G = viewportToScreen(o, V);
   let K = {
     x: G.x,
     y: G.y + H - s - B
@@ -12863,7 +12863,7 @@ let fI = (e, t) => {
     x: a.x + a.width / 2,
     y: a.y + a.height
   };
-  let z = Z0(o, W);
+  let z = viewportToScreen(o, W);
   return {
     above: K,
     below: {
@@ -12885,11 +12885,11 @@ function fL({
   let a = useCallback(() => {
     n?.nativeContextualToolbarUpdateAnchorPoints && t && !deepEqual(e.current, i) && (n.nativeContextualToolbarUpdateAnchorPoints(i), e.current = i);
   }, [i, e, t, n]);
-  let s = _$$A3(() => {
+  let s = useDebouncedCallback(() => {
     a();
     r.current = !1;
   }, 100);
-  let o = _$$_X({
+  let o = getViewportInfo({
     subscribeToUpdates_expensive: !1
   });
   let d = useLatestRef(o.y);
@@ -12903,7 +12903,7 @@ let fN = () => {
   let e = getObservableOrFallback(AppStateTsApi.canvasViewState().selectionBoundingRect);
   let t = getObservableOrFallback(AppStateTsApi.canvasViewState().inlineMenuTarget);
   let i = t?.boundingBox || e;
-  let n = _$$_X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   if (i.x === 1 / 0 || i.y === 1 / 0) return null;
@@ -12911,7 +12911,7 @@ let fN = () => {
     x: i.x + i.width / 2,
     y: i.y + i.height / 2
   };
-  return Z0(n, r);
+  return viewportToScreen(n, r);
 };
 function fA(e) {
   let t = BI();
@@ -13453,7 +13453,7 @@ function f$() {
       e.play();
     });
   }, []);
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     className: "lock_control--buttonWrapper--Xlvr9",
     onClick: () => {
       i ? fullscreenValue.triggerActionInUserEditScope("unlock-selected-nodes") : (n(!0), f(e));
@@ -13528,12 +13528,12 @@ function f1({
   let r = Um();
   return jsx("div", {
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": t,
     className: _$$kL2,
     children: jsx(_$$l9, {
       ariaLabel: e ?? _$$En({
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": t
       }),
       blurOnChange: !0,
@@ -13822,10 +13822,10 @@ function _I(e) {
 function _O(e) {
   let t = _$$uQ3();
   let i = kl("embedData");
-  let n = _$$tq(i);
+  let n = createEmbedAnalyticsHandler(i);
   let [r, a] = useAtomValueAndSetter(_$$n9);
   let s = useCallback(() => {
-    t && (n(_$$yc.EMBED_EXPAND), a({
+    t && (n(LinkMetadataEvent.EMBED_EXPAND), a({
       type: "ACTIVATE_AND_MAXIMIZE",
       payload: {
         embedNodeID: t
@@ -14333,7 +14333,7 @@ function xh({
       };
     }(e, h));
   }, [h]);
-  let L = _$$A3(I, 200);
+  let L = useDebouncedCallback(I, 200);
   let N = useCallback(() => I(""), [I]);
   let O = useCallback(e => "" === e ? N() : L(e), [N, L]);
   let k = useCallback(e => {
@@ -14497,7 +14497,7 @@ function xm({
     variant: "swapper"
   }) : null;
   return jsx(Fragment, {
-    children: jsx(_$$E2, {
+    children: jsx(ButtonPrimitive, {
       onClick: i,
       recordingKey: `whiteboardShapeSwapButton.${e.name}`,
       "data-testid": c,
@@ -14575,7 +14575,7 @@ function xf({
       };
     }(e, p));
   }, [p]);
-  let w = _$$A3(S, 200);
+  let w = useDebouncedCallback(S, 200);
   let I = useCallback(() => S(""), [S]);
   let L = useCallback(e => "" === e ? I() : w(e), [I, w]);
   let N = useCallback(e => {
@@ -14729,7 +14729,7 @@ function x_({
     variant: "swapper"
   }) : null;
   return jsxs(A3, {
-    children: [h, jsx(_$$E2, {
+    children: [h, jsx(ButtonPrimitive, {
       onClick: n,
       recordingKey: `whiteboardShapeSwapButton.${e.name}`,
       "data-testid": `whiteboardShapeSwapButton.${e.name}`,
@@ -14862,7 +14862,7 @@ function xT({
     x(0);
     f(i.filter(t => eB(t).some(t => t.toLowerCase().includes(e.toLowerCase()))));
   }, [t]);
-  let y = _$$A3(b, 200);
+  let y = useDebouncedCallback(b, 200);
   let v = useCallback(() => {
     y.cancel();
     b("");
@@ -14991,7 +14991,7 @@ function xE({
       buttonChildrenStyle: {
         width: "100%"
       },
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$eg3(s),
         className: "whiteboard_shape_selector--sameShapeSvg--JnJli"
       }), renderI18nText("whiteboard.inline_menu.add_same_shape")]
@@ -15245,7 +15245,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   }) : jsx(K0, {
     svg: _$$A53,
     tooltip: "text-edit-hyperlink",
-    tooltipType: Ib.LOOKUP,
+    tooltipType: KindEnum.LOOKUP,
     active: !0 === e ? "LOUD" : void 0,
     onClick: () => fullscreenValue.triggerAction("text-edit-hyperlink"),
     recordingKey: "editHyperlink",
@@ -15278,7 +15278,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     children: t ? jsx(K0, {
       svg: _$$A33,
       tooltip: "text-toggle-ordered-list",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       active: t ? "LOUD" : void 0,
       onClick: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-ordered-list"),
       recordingKey: "orderedListControl",
@@ -15287,7 +15287,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     }) : jsx(K0, {
       svg: _$$A34,
       tooltip: "text-toggle-unordered-list",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       active: e ? "LOUD" : void 0,
       onClick: () => fullscreenValue.triggerActionInUserEditScope("text-toggle-unordered-list"),
       recordingKey: "unorderedListControl",
@@ -15353,7 +15353,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
             value: e,
             "aria-label": r,
             "data-testid": "fontFamilyOption",
-            children: i ? jsx(_$$B, {
+            children: i ? jsx(SvgComponent, {
               svg: i,
               ariaLabel: t.getLabel(),
               className: "xk99fgg"
@@ -15595,7 +15595,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   }) : jsxs("div", {
     className: _$$kL,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": T,
     children: [jsx(_$$r5, {
       setMaxWidth: r,
@@ -15730,7 +15730,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   let n = useId();
   let [r, a] = useState(!1);
   let s = e && isValidValue(e) ? _$$En({
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": p7(e)
   }) : "";
   let d = s ? getI18nString("whiteboard.inline_menu.text_alignment_label", {
@@ -15775,7 +15775,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       active: l
     }) => {
       let d = e && isValidValue(e) ? _$$En({
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         "data-tooltip": p7(e)
       }) : "";
       let c = d ? getI18nString("whiteboard.inline_menu.text_alignment_label", {
@@ -15824,7 +15824,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       role: "option",
       svg: he(e),
       tooltip: p7(e),
-      tooltipType: Ib.LOOKUP
+      tooltipType: KindEnum.LOOKUP
     }, String(e)),
     OptionWrapper: SC(t, n),
     onToggleMenuOpen: a
@@ -15838,7 +15838,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     ht(e);
   });
   let s = e && isValidValue(e) ? _$$En({
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": hi(e)
   }) : "";
   let d = s ? getI18nString("whiteboard.inline_menu.text_alignment_v_label", {
@@ -15860,7 +15860,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     label: getI18nString("fullscreen_actions.text-align-bottom"),
     isSelected: "BOTTOM" === e
   }], [e]);
-  let p = useMemo(() => jsx(_$$B, {
+  let p = useMemo(() => jsx(SvgComponent, {
     svg: hn(e)
   }), [e]);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(p0, {
@@ -15882,7 +15882,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       active: l
     }) => {
       let d = e && isValidValue(e) ? _$$En({
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         "data-tooltip": hi(e)
       }) : "";
       let c = d ? getI18nString("whiteboard.inline_menu.text_alignment_v_label", {
@@ -15931,7 +15931,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
       role: "option",
       svg: hn(e),
       tooltip: hi(e),
-      tooltipType: Ib.LOOKUP
+      tooltipType: KindEnum.LOOKUP
     }, String(e)),
     OptionWrapper: SC(t, i),
     onToggleMenuOpen: r
@@ -16060,7 +16060,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   });
 }], [WhiteboardFeatures.DIVIDER, () => jsx(_$$wv4, {})], [WhiteboardFeatures.CODE_BLOCK_LANGUAGE, function () {
   let [e, t] = _$$lJ2("codeBlockLanguage");
-  let i = _$$am();
+  let i = trackFileEventWithUser();
   let {
     getTriggerProps,
     manager
@@ -16127,7 +16127,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
   });
 }], [WhiteboardFeatures.CODE_BLOCK_THEME, function () {
   let [e, t] = _$$lJ2("codeBlockTheme");
-  let i = _$$am();
+  let i = trackFileEventWithUser();
   let [n, r] = useState(!1);
   return jsx(ZE, {
     ariaLabel: e ? isInvalidValue(e) ? getI18nString("whiteboard.code_blocks.mixed") : getI18nString("whiteboard.inline_menu.code_block_theme", {
@@ -16311,7 +16311,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
           className: "face_stamp_control--userNameOverflow--lNvYi ellipsis--ellipsis--Tjyfa",
           children: [loading ? "" : label, " "]
         })
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         svg: _$$A52,
         className: "face_stamp_control--chevronButton--0T018"
       })]
@@ -16561,7 +16561,7 @@ function xY() {
       role: "option",
       svg: xZ[e],
       tooltip: e,
-      tooltipType: Ib.LOOKUP
+      tooltipType: KindEnum.LOOKUP
     }, e),
     OptionWrapper: SC(getI18nString("whiteboard.inline_menu.alignment_button"), i),
     onToggleMenuOpen: r
@@ -16582,7 +16582,7 @@ function xJ() {
     children: jsx(_$$P5, {})
   }) : jsx(K0, {
     tooltip: "create-section-from-selection",
-    tooltipType: Ib.LOOKUP,
+    tooltipType: KindEnum.LOOKUP,
     svg: _$$A68,
     onClick: e,
     recordingKey: "createSectionFromSelection",
@@ -16689,7 +16689,7 @@ let x4 = memo(function () {
         getTriggerProps,
         ariaLabel: getI18nString("whiteboard.inline_menu.see_variants"),
         recordingKey: "stateSwapOptions",
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A69
         })
       }), jsx(_$$mc2, {
@@ -16731,7 +16731,7 @@ function x7() {
   }) : jsx(K0, {
     svg: _$$A70,
     tooltip: "tidy-up",
-    tooltipType: Ib.LOOKUP,
+    tooltipType: KindEnum.LOOKUP,
     onClick: e,
     recordingKey: "tidyUp",
     testId: "tidyUp"
@@ -16889,7 +16889,7 @@ let gm = memo(function ({
   let L = _$$d4();
   let N = _$$Cb();
   let O = _$$QP2();
-  let k = !q8();
+  let k = !isAIFeaturesEnabledForCurrentUser();
   let R = Zr("align-top");
   let M = Zr("tidy-up");
   let D = R && M && !N;
@@ -17025,7 +17025,7 @@ let g_ = memo(function ({
   }, [E]);
   let O = _$$Cb();
   let k = _$$QP2();
-  let R = !q8() && k;
+  let R = !isAIFeaturesEnabledForCurrentUser() && k;
   if (!u) return null;
   if (f && x) return jsx(u6, {
     setIsEditorOpen: g
@@ -17210,16 +17210,16 @@ let gC = memo(function () {
     return !useSelector(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected) && !e && !n && !i && a && r;
   }();
   let t = useSelector(hE);
-  let i = Pl({
+  let i = getViewportZoom({
     subscribeToUpdates_expensive: !1
   });
   let n = useSelector(hS);
   if (!n) return null;
   let r = function (e, t, i) {
-    let n = kE(168, i);
-    let r = kE(130, i);
-    let a = kE(40, i);
-    let s = kE(4, i);
+    let n = roundedDivision(168, i);
+    let r = roundedDivision(130, i);
+    let a = roundedDivision(40, i);
+    let s = roundedDivision(4, i);
     switch (InteractionCpp.getQuickAddInteraction()) {
       case PointerAction.CLICK:
         {
@@ -17229,7 +17229,7 @@ let gC = memo(function () {
             width: e.absoluteBoundingBox.w,
             height: e.absoluteBoundingBox.h
           };
-          let l = kE(20, i);
+          let l = roundedDivision(20, i);
           let d = {
             x: 0,
             y: 0,
@@ -17392,7 +17392,7 @@ function gP() {
               "aria-label": getI18nString("canvas_search.previous"),
               recordingKey: "canvas_search.previous",
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("canvas_search.previous"),
                 "data-tooltip-shortcut-key": "canvas-search-prev"
               },
@@ -17406,7 +17406,7 @@ function gP() {
               "aria-label": getI18nString("canvas_search.next"),
               recordingKey: "canvas_search.next",
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("canvas_search.next"),
                 "data-tooltip-shortcut-key": "canvas-search-next"
               },
@@ -17425,7 +17425,7 @@ function gP() {
           "aria-label": getI18nString("canvas_search.close"),
           recordingKey: "canvas_search.close",
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("canvas_search.close")
           },
           children: jsx(_$$A2, {})
@@ -19642,7 +19642,7 @@ function jd(e) {
         "turntable--noOpacity--ZKZnl": !e.showMask,
         [jn]: e.useGrayMask
       }),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: "turntable--maskIcon--mZo9b",
         svg: _$$A76
       })
@@ -19687,7 +19687,7 @@ function jh(e) {
     className: ex()("buttons--secondaryButton--Y7X0E", {
       [jp]: e.flexGrow
     }),
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       ...i,
       variant: "secondary",
       children: e.children
@@ -19703,7 +19703,7 @@ function jm(e) {
     className: ex()("buttons--primaryButton--cOfBR", {
       [jp]: e.flexGrow
     }),
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       ...i,
       variant: "primary",
       children: e.children
@@ -19766,7 +19766,7 @@ function jv(e) {
         className: ex()("playback_control_button--playButton--a1I8c playback_control_button--mediaControlButton--Wp3H1", {
           [jb]: !t
         }),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": dataTooltip,
         "data-onboarding-key": dataOnboardingKey,
         disabled,
@@ -19779,7 +19779,7 @@ function jv(e) {
         className: ex()(jj, {
           [jb]: !t
         }),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": dataTooltip,
         "data-onboarding-key": dataOnboardingKey,
         disabled,
@@ -19792,7 +19792,7 @@ function jv(e) {
         className: ex()(jj, {
           [jb]: !t
         }),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": dataTooltip,
         disabled,
         onClick,
@@ -20618,7 +20618,7 @@ function bh({
           "face_pile--facePileOverflowIcon--qL11N": !0,
           [bc]: t
         }),
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: "face_pile--overflowIcon--q-7wp",
           svg: _$$A77
         })
@@ -20762,7 +20762,7 @@ function bC({
         children: c.length > 0 ? renderI18nText("voting.modal.people_voted", {
           numVotes: c.length
         }) : renderI18nText("voting.modal.during_voting_no_ones_voted")
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         className: ex()({
           "users_voted--chevronDown--LWnXw": !0,
           "users_voted--chevronDownActive---IB9j": isDropdownOpen
@@ -20824,7 +20824,7 @@ function bS({
     className: ex()("voting_components--votingSessionTitle--KDhQJ text--fontPos14--OL9Hp text--_fontBase--QdLsd ellipsis--ellipsisAfter3Lines--h405C ellipsis--_ellipsisAfterNLines--LzI7k", {
       "voting_components--smallerText--rtDFU text--fontPos11--2LvXf text--_fontBase--QdLsd": t
     }),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": i ? e : void 0,
     children: e
   });
@@ -20863,7 +20863,7 @@ function bw({
           });
         },
         disabled: r,
-        "data-tooltip-type": r ? Ib.TEXT : void 0,
+        "data-tooltip-type": r ? KindEnum.TEXT : void 0,
         "data-tooltip": r ? getI18nString("voting.modal.end_disabled_logged_out_tooltip") : void 0,
         recordingKey: generateRecordingKey(i, "endVotingSession"),
         children: jsx("span", {
@@ -21574,7 +21574,7 @@ function bH(e) {
         flexGrow: !0,
         onClick: S,
         disabled: p,
-        "data-tooltip-type": r ? Ib.TEXT : void 0,
+        "data-tooltip-type": r ? KindEnum.TEXT : void 0,
         "data-tooltip": r ? getI18nString("voting.modal.start_disabled_logged_out_tooltip") : void 0,
         recordingKey: "votingModalStartVotingSession",
         children: jsx("span", {
@@ -21765,7 +21765,7 @@ function bq({
   let p = useDispatch();
   let h = useCurrentFileKey();
   return jsx("li", {
-    children: jsxs(_$$E2, {
+    children: jsxs(ButtonPrimitive, {
       recordingKey: generateRecordingKey(l, "viewPastVotingSession"),
       className: ex()("previous_votes_view--previousVotesListItem--77yUn", r && "previous_votes_view--showSeparator--nHjDd"),
       onClick: () => {
@@ -22012,7 +22012,7 @@ function b7({
     }));
   }
   return jsx("li", {
-    children: jsxs(_$$E2, {
+    children: jsxs(ButtonPrimitive, {
       className: ex()("voting_results_detail_view--resultsListItemButton--4llQi", {
         "voting_results_detail_view--resultsListItemButtonWinner--6bIhk": i,
         "voting_results_detail_view--resultsListItemButtonSelected--Z3vdm": c,
@@ -22134,7 +22134,7 @@ let yr = memo(e => {
           "aria-label": getI18nString("meetings_panel.header.overflow_menu_aria_label"),
           onClick: f,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("meetings_panel.header.overflow_menu_aria_label")
           },
           recordingKey: generateRecordingKey(recordingKey, "expandMenuItems"),
@@ -22164,7 +22164,7 @@ function ys() {
   let n = Xr(Qs);
   let r = qU();
   let a = useStore();
-  let s = _$$am();
+  let s = trackFileEventWithUser();
   let u = "pastVotingSessions";
   let m = useRef(null);
   let f = useCallback(() => {
@@ -22361,7 +22361,7 @@ function yj(e) {
         "volume_control_button--large--BF5Mq": "large" === size
       }),
       svg: yx(u, p),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       tooltipForScreenReadersOnly: blockTooltip,
       "data-tooltip": p ? getI18nString("whiteboard.timer.timer_unmute_tooltip") : getI18nString("whiteboard.timer.timer_mute_tooltip"),
       "data-tooltip-show-above": !0,
@@ -22633,7 +22633,7 @@ function yF() {
   let u = !s && a > 0;
   return jsx(_$$Z6, {
     tooltip: {
-      type: Ib.LOOKUP,
+      type: KindEnum.LOOKUP,
       key: _$$ec2.action,
       ariaLabel: getI18nString(u ? "fullscreen.accessibility.view_comments_with_unreads" : "fullscreen.accessibility.view_comments")
     },
@@ -22671,7 +22671,7 @@ function yW() {
   }, [s, i]);
   return jsx(_$$Z6, {
     tooltip: {
-      type: Ib.TEXT,
+      type: KindEnum.TEXT,
       text: a
     },
     isActive: e === Wl.TOP_BAR,
@@ -22949,7 +22949,7 @@ function y0() {
         [yq]: !C
       }),
       onClick: useHandleMouseEvent("meetingsPanelToolbar", "click", s),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": T ? getI18nString("meetings_panel.toolbar_tooltip") : getI18nString("meetings_panel.toolbar_tooltip.no_voting"),
       "aria-label": T ? getI18nString("meetings_panel.toolbar.aria_label") : getI18nString("meetings_panel.toolbar.aria_label.no_voting"),
       "aria-pressed": E,
@@ -23074,7 +23074,7 @@ function y8() {
   let u = B4();
   let p = _$$aV();
   let f = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.HISTORY);
-  let _ = !q8() && Uy() && !Cd();
+  let _ = !isAIFeaturesEnabledForCurrentUser() && Uy() && !Cd();
   let x = BrowserInfo.isMeetDevice;
   let g = _$$L2();
   let b = getWorkshopModeStatus(t?.key || "").enabled;
@@ -23537,7 +23537,7 @@ function vC() {
     let r = useSelector(e => e.mirror.appModel.activeUserAction);
     return !!(i && !n && (e || t) && r !== UserActionState.DRAGGING && r !== UserActionState.RESIZING && r !== UserActionState.ROTATING);
   }(e, t);
-  let a = _$$_X({
+  let a = getViewportInfo({
     subscribeToUpdates_expensive: r
   });
   let s = function (e) {
@@ -23547,7 +23547,7 @@ function vC() {
       width: 0,
       height: 0
     });
-    let i = Yb(e, t);
+    let i = scaleRect(e, t);
     return {
       ...i,
       x: i.x + e.x,
@@ -23640,7 +23640,7 @@ function vE({
           "data-tooltip-offset-x": "left" === u ? -4 : 4,
           "data-tooltip-show-right": "right" === u || void 0,
           "data-tooltip-show-left": "left" === u || void 0,
-          "data-tooltip-type": d && p ? Ib.TEXT : void 0,
+          "data-tooltip-type": d && p ? KindEnum.TEXT : void 0,
           "data-tooltip": d,
           "data-tooltip-shortcut-key": c,
           "data-fullscreen-intercept": !0
@@ -24135,7 +24135,7 @@ function vB({
         WhiteboardStarterKitCppBindings.clearFigjamStarterKitPreview();
         return;
       }
-      "templates" !== g.key && (Cu({
+      "templates" !== g.key && (logAndTrackCTA({
         fileKey: n,
         source: h,
         placeholderKey: g.key,
@@ -24164,7 +24164,7 @@ function vB({
         f(e => (e + 1) % vP.length);
         break;
       case TransactionCommand.CLEAR:
-        _ && Cu({
+        _ && logAndTrackCTA({
           fileKey: n,
           source: h,
           placeholderKey: g?.key
@@ -24176,7 +24176,7 @@ function vB({
         break;
       case TransactionCommand.COMMIT:
         if (!g) break;
-        "templates" !== g.key && (Cu({
+        "templates" !== g.key && (logAndTrackCTA({
           fileKey: n,
           source: h,
           placeholderKey: g.key,
@@ -24212,7 +24212,7 @@ function vB({
           u.current && (WhiteboardStarterKitCppBindings.rotateFigjamStarterKitStrings(), u.current = !1);
         },
         children: jsxs(_$$i8, {
-          children: [jsx(_$$E2, {
+          children: [jsx(ButtonPrimitive, {
             className: "starter_kit_ui--closeButton--f40J9",
             onClick: () => s(!0),
             "aria-label": getI18nString("whiteboard.starter_kit.close"),
@@ -24238,7 +24238,7 @@ function vB({
 function vV() {
   let e = Mh();
   let t = _$$nw(e);
-  let i = !q8() && Uy();
+  let i = !isAIFeaturesEnabledForCurrentUser() && Uy();
   let n = !!getFeatureFlags().figjam_generate_handbrake;
   let r = Xr(_$$P6);
   useEffect(() => {
@@ -24255,7 +24255,7 @@ function vK() {
   let i = _$$p("topLevelMode");
   let n = _$$p("currentTool") === DesignGraphElements.COMMENTS;
   let r = i === ViewType.HISTORY;
-  let a = !q8() && Uy();
+  let a = !isAIFeaturesEnabledForCurrentUser() && Uy();
   let s = getFeatureFlags().figjam_quick_actions_v2;
   let h = Xr(_$$H4);
   useEffect(() => {
@@ -24264,7 +24264,7 @@ function vK() {
   return jsxs(Fragment, {
     children: [jsx(nV, {}), jsx(S4, {
       multiplayerEmoji: e
-    }), jsx(cs, {}), a && s && jsx(_$$bY, {}), a && jsx(c_, {}), jsx(vC, {}), !n && !r && jsx(gp, {}), !n && !r && jsx(gC, {}), !q8() && getFeatureFlags().figjam_ai_canvas_expand && jsx(uz, {}), jsx(_$$J, {}), jsx(X, {}), jsx(Nz, {}), jsx(v_, {}), t && jsx(n3, {})]
+    }), jsx(cs, {}), a && s && jsx(_$$bY, {}), a && jsx(c_, {}), jsx(vC, {}), !n && !r && jsx(gp, {}), !n && !r && jsx(gC, {}), !isAIFeaturesEnabledForCurrentUser() && getFeatureFlags().figjam_ai_canvas_expand && jsx(uz, {}), jsx(_$$J, {}), jsx(X, {}), jsx(Nz, {}), jsx(v_, {}), t && jsx(n3, {})]
   });
 }
 let vW = memo(({

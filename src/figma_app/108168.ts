@@ -5,7 +5,7 @@ import { b as _$$b, bL, mc, r1, Q$, Ov, rm } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { K as _$$K } from "../905/443068";
 import { e as _$$e } from "../905/428849";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { V as _$$V } from "../905/291719";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -19,7 +19,7 @@ import { VU } from "../905/625959";
 import { LW, bs } from "../figma_app/553940";
 import { Um } from "../905/848862";
 import { nj } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yh, TY, c1 } from "../figma_app/357047";
 import { c as _$$c } from "../figma_app/740884";
 import { oO } from "../figma_app/467440";
@@ -230,7 +230,7 @@ function V(e) {
     "data-onboarding-key": item.onboardingKey,
     "data-testid": defaultItem.action,
     "data-tooltip": defaultItem.action,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     htmlAttributes: {
       id: y
     },
@@ -246,7 +246,7 @@ function V(e) {
       ...getTriggerProps(),
       "aria-label": F(item.name)
     })]
-  })), w) : (w = jsx(_$$E, {
+  })), w) : (w = jsx(ButtonPrimitive, {
     className: m()(fullHeightSidebarFlyoutButton, {
       [singleItem]: !h
     }),
@@ -262,7 +262,7 @@ function V(e) {
     className: m()(fullHeightSidebarFlyout, _$$M(!0, b), {
       [flyoutDropdownShown]: E
     }),
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": defaultItem.action,
     "data-onboarding-key": item.onboardingKey,
     "data-testid": defaultItem.action,

@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { permissionScopeHandler } from "../905/189185";
 import s from "classnames";
 import { t as _$$t } from "../905/331623";
@@ -32,7 +32,7 @@ export function $$b0(e) {
   });
   let w = hasLocalFileId(e.widget);
   return jsxs(Fragment, {
-    children: [jsxs(E, {
+    children: [jsxs(ButtonPrimitive, {
       className: r()({
         [cJ]: !0,
         [J]: !!dragState,

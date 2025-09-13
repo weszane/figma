@@ -39,7 +39,7 @@ import { g as _$$g } from "../figma_app/391708";
 import { z as _$$z } from "../figma_app/849005";
 import { qW } from "../figma_app/27927";
 import { Ao } from "../figma_app/751648";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { a as _$$a2 } from "../905/948337";
 import { s as _$$s } from "../cssbuilder/589278";
 import { showModalHandler } from "../905/156213";
@@ -56,7 +56,7 @@ import { vt } from "../905/862883";
 import { RJ } from "../figma_app/869006";
 import { _ as _$$_ } from "../905/410717";
 import { n3, Tc } from "../905/797478";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { N as _$$N } from "../figma_app/57000";
 import { hx, aQ, YB, lq, cG, wn } from "../figma_app/630194";
 import { I as _$$I, J as _$$J } from "../figma_app/552397";
@@ -133,7 +133,7 @@ function Q(e) {
     planUser
   } = getPlanAndPlanUser(FProductAccessType.WHITEBOARD);
   if (!i) return null;
-  let h = e.shouldShowCurf ? jsx($n, {
+  let h = e.shouldShowCurf ? jsx(Button, {
     variant: "primary",
     onClick: () => {
       if (!planUser || !plan) return;
@@ -241,7 +241,7 @@ function eb() {
     ButtonLayout: _$$Z,
     className: Lt,
     "data-tooltip": "set-tool-default-desc-figjam",
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: !1,
     isEnabledForViewers: !0,
     isSelected: e,
@@ -266,7 +266,7 @@ function ey() {
     ButtonLayout: _$$Z,
     className: sD,
     "data-tooltip": "set-tool-hand",
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: !1,
     isEnabledForViewers: !0,
     isSelected: e,
@@ -569,7 +569,7 @@ let e9 = memo(function ({
       children: jsx(_$$J, {
         className: wz,
         "data-tooltip": N,
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         hasOpenSubmenu: m,
         isHovered,
         isSelected: m,
@@ -800,7 +800,7 @@ function th({
       children: jsx(_$$J, {
         className: qf,
         "data-tooltip": "set-tool-sticky",
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         hasOpenSubmenu: i,
         isHovered,
         isSelected: i,
@@ -896,7 +896,7 @@ function tb({
     ButtonLayout: _$$Z,
     className: dk,
     "data-tooltip": "straight-line",
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: !1,
     isDisabled: e,
     isSelected: t,
@@ -918,7 +918,7 @@ function tC() {
     ButtonLayout: _$$Z,
     className: tN,
     "data-tooltip": "undo",
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: !1,
     isDisabled: !e,
     isSelected: !1,
@@ -940,7 +940,7 @@ function tT() {
     ButtonLayout: _$$Z,
     className: ZS,
     "data-tooltip": "redo",
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     hasOpenSubmenu: !1,
     isDisabled: !e,
     isSelected: !1,

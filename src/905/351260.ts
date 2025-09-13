@@ -8,7 +8,7 @@ import { createOptimistThunk } from "../905/350402";
 import { cL } from "../905/748726";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { bE, yH } from "../905/98702";
-import { ds, z_ } from "../figma_app/314264";
+import { trackFileEvent, trackRoleEvent } from "../figma_app/314264";
 import { ZW, U5 } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
 import { getRolesForResource, getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
@@ -23,7 +23,7 @@ import { v as _$$v } from "../905/124421";
 import { registerModal } from "../905/102752";
 import { yX } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
-import { DQ, Pw } from "../figma_app/121751";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { UpsellModalType } from "../905/165519";
 let T = registerModal(function (e) {
@@ -262,7 +262,7 @@ let $$M3 = createOptimistThunk((e, {
       initialView: x,
       billableProductKey: w
     };
-    "file" === i ? ds("Invited Emails", o, P, s) : trackEventAnalytics("Invited Emails", {
+    "file" === i ? trackFileEvent("Invited Emails", o, P, s) : trackEventAnalytics("Invited Emails", {
       ...s,
       source: E
     });
@@ -279,7 +279,7 @@ let $$M3 = createOptimistThunk((e, {
     data: t
   }) => {
     for (let n of (e.dispatch(cL()), t.meta.invites)) {
-      z_("Role Invite Sent", n, {
+      trackRoleEvent("Role Invite Sent", n, {
         level: n.level,
         resourceType: i,
         roleUserEmail: n.user?.email
@@ -312,7 +312,7 @@ let $$M3 = createOptimistThunk((e, {
       let n = e.getState();
       let r = getRolesForResource(i, o, n);
       r && (t = getResourceTeamId(r[0], n));
-      let a = DQ(Pw.GROUP_7);
+      let a = isReduxDeprecationCutover(ConfigGroups.GROUP_7);
       let s = setupShadowRead({
         oldValue: t ?? "",
         newValue: C,

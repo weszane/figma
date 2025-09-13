@@ -15,17 +15,17 @@ import { A as _$$A } from "../905/351112";
 import { Fh, Mw, U1 } from "../905/191601";
 import { an, y$ } from "../905/81009";
 import { Tf, nb, hi, c_, Y6, YC } from "../figma_app/543100";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { fileEntityDataMapper } from "../905/943101";
 import { K as _$$K } from "../figma_app/193867";
 import { yH } from "../figma_app/722141";
-import { G as _$$G } from "../figma_app/471068";
-import { ue } from "../figma_app/756995";
+import { ViewTypeEnum } from "../figma_app/471068";
+import { SortOrder } from "../figma_app/756995";
 import { Xg, qf, mM } from "../905/375175";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { E as _$$E2 } from "../905/53857";
 import { z as _$$z } from "../905/947624";
 import { r as _$$r } from "../905/571838";
@@ -38,13 +38,13 @@ import { K as _$$K3 } from "../905/226178";
 import { V as _$$V } from "../905/453937";
 import { e as _$$e2 } from "../905/311297";
 import { H as _$$H } from "../905/209153";
-import { E as _$$E3 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { E as _$$E4 } from "../905/391888";
 import { p as _$$p } from "../905/767868";
 import { M as _$$M } from "../905/269719";
 import { getUserId, selectUser } from "../905/372672";
 import { A as _$$A2 } from "../905/100919";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { trackEventAnalytics } from "../905/449184";
 import { L as _$$L } from "../905/477111";
 import { O as _$$O } from "../905/969533";
@@ -70,7 +70,7 @@ function N(e) {
         borderRadius: 4,
         hideUntilLoaded: !1
       })
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontSize: 13,
       truncate: !0,
       fontWeight: "medium",
@@ -151,7 +151,7 @@ function ee(e) {
   });
   return "deletedFiles" === e.selectedView.view ? jsx(X, {
     tile: e.tile
-  }) : "recentsAndSharing" === e.selectedView.view && e.selectedView.tab === _$$G.SHARED_FILES ? Tf.getSharedBy(e.tile) ? renderI18nText("team_tile.shared_by", {
+  }) : "recentsAndSharing" === e.selectedView.view && e.selectedView.tab === ViewTypeEnum.SHARED_FILES ? Tf.getSharedBy(e.tile) ? renderI18nText("team_tile.shared_by", {
     shared_by_text: Tf.getSharedByName(e.tile)
   }) : renderI18nText("swy_tile.shared_date", {
     shared_date: jsx(_$$M, {
@@ -186,7 +186,7 @@ function et(e) {
   return "loaded" === i.status && r && t ? a ? jsxs(Fragment, {
     children: [r, "\xa0", getI18nString("file_browser.folder.trashed_folder"), "\xa0\xb7\xa0"]
   }) : jsxs("span", {
-    children: [jsx(_$$E3, {
+    children: [jsx(ButtonPrimitive, {
       onClick: e => {
         e.stopPropagation();
         s(t, e);
@@ -311,7 +311,7 @@ function eA(e) {
     let t = `branch-indicator-${e.fileKey}`;
     let i = e_(e.branches, e.selectedBranchKey, s?.key, e.onSelectBranch, o.data, l);
     let a = e.branches.find(t => t.key === (e.selectedBranchKey ?? r?.default_file_key));
-    let d = jsxs(_$$E3, {
+    let d = jsxs(ButtonPrimitive, {
       className: "x78zum5 x6s0dn4 xfawy5m x1jnr06f xon4yw5 x1sxf85j xh8yej3",
       "data-testid": "branch-indicator-dropdown",
       "aria-label": getI18nString("tile.branching.change_default_branch"),
@@ -320,7 +320,7 @@ function eA(e) {
           "--color-icon": "var(--color-icon-menu)",
           flexShrink: 0
         }
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         truncate: !0,
         color: "menu",
         children: a?.name
@@ -420,14 +420,14 @@ function eI({
     }),
     bottomRightContent: e.type === nb.OFFLINE_FILE ? jsx(_$$z, {
       "data-tooltip": getI18nString("tile.offline_file_tile.offline_upload_tooltip"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     }) : !getFeatureFlags().dtm_deprecation_pre_migration_onboarding || _ || A ? jsx(_$$V, {
       tile: e
     }) : jsx(_$$r, {
       style: {
         "--color-icon": "var(--color-icon-secondary)"
       },
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("tile.dtm_onboarding.dtm_files_will_be_relocated_soon"),
       "data-tooltip-timeout-delay": 50,
       "data-tooltip-align": "center"
@@ -545,7 +545,7 @@ export function $$eT0({
 }) {
   let F = useDispatch();
   let M = _6();
-  let j = dq();
+  let j = useCurrentUserOrgId();
   let U = Xr(yH);
   let B = _$$v();
   let V = useAtomWithSubscription(Y6);
@@ -581,7 +581,7 @@ export function $$eT0({
   } = function (e, t) {
     switch (e.view) {
       case "recentsAndSharing":
-        return e.tab === _$$G.SHARED_FILES ? TF : l1(t);
+        return e.tab === ViewTypeEnum.SHARED_FILES ? TF : l1(t);
       case "search":
         return X_(t);
       case "deletedFiles":
@@ -697,7 +697,7 @@ export function $$eT0({
       columns,
       currentSort: {
         field: T.key,
-        isDescending: T.dir === ue.DESC
+        isDescending: T.dir === SortOrder.DESC
       },
       handleSortBy: L,
       renderItemDragImage: e => jsx(N, {

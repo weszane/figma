@@ -6,7 +6,7 @@ import { S as _$$S } from "../905/989967";
 import { S as _$$S2 } from "../905/711470";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { Uz } from "../905/63728";
 import { MM } from "../figma_app/236327";
 import { dP, M3 } from "../figma_app/119475";
@@ -25,10 +25,10 @@ import { cW, ZT, x as _$$x, ll, U6, $1, nl, yQ, sp, Be, pR, YW, jA, op, qr, I5, 
 import { z4 } from "../905/37051";
 import { LR } from "../figma_app/120210";
 import { Um } from "../905/848862";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { M as _$$M } from "../figma_app/170366";
-import { aL, bD, m3, vt } from "../figma_app/45218";
-import { Ib } from "../905/129884";
+import { ShelfViewType, ResourceType, hasMonetizedResourceMetadata, ResourceTypeNoComment } from "../figma_app/45218";
+import { KindEnum } from "../905/129884";
 import { Jz } from "../905/504727";
 import { l6, c$, sK } from "../905/794875";
 import { n as _$$n } from "../2b17fec9/3836";
@@ -47,8 +47,8 @@ import { W as _$$W } from "../905/865092";
 import { getFeatureFlags } from "../905/601108";
 import { R as _$$R } from "../figma_app/313269";
 import { Ph } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { $3, op as _$$op } from "../figma_app/487970";
 import { I as _$$I } from "../5430/750114";
 import { mG } from "../figma_app/15924";
@@ -84,11 +84,11 @@ import { tO as _$$tO, GJ, ff as _$$ff, R7 } from "../7492/487492";
 import { A as _$$A6 } from "../svg/55550";
 import { AutoLayout } from "../905/470281";
 import { N as _$$N2 } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { r as _$$r } from "../905/571562";
 import { Y1 } from "../905/143116";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { kt as _$$kt, Pq } from "../3591/828414";
 import { A as _$$A7 } from "../svg/4102";
 import { $A } from "../905/782918";
@@ -189,7 +189,7 @@ function ec({
     "data-not-draggable": !0,
     children: [jsx("div", {
       className: QW,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A2
       })
     }), jsx("div", {
@@ -199,7 +199,7 @@ function ec({
       className: JL,
       children: jsx("button", {
         onClick: () => {
-          mG(e, aL.INSERTS, s.id, t?.id);
+          mG(e, ShelfViewType.INSERTS, s.id, t?.id);
           r();
         },
         children: renderI18nText("community.buyer.update_payment")
@@ -261,13 +261,13 @@ function ef({
   useEffect(() => {
     void 0 === t || d || (c(t), _(t));
   }, [t, d]);
-  let g = r ? jsx(_$$B, {
+  let g = r ? jsx(SvgComponent, {
     svg: _$$A3,
     className: "rating_star_selector--emptyStar--P-7A1 rating_star_selector--star--ML342",
     "aria-label": getI18nString("community.detail_view.empty_star"),
     dataTestId: "empty-star-big"
   }) : jsx(ep, {});
-  let h = r ? jsx(_$$B, {
+  let h = r ? jsx(SvgComponent, {
     svg: _$$A4,
     className: m ? "rating_star_selector--fullStarHover--JKgxp rating_star_selector--star--ML342" : "rating_star_selector--fullStar--rCWKu rating_star_selector--star--ML342",
     "aria-label": getI18nString("community.detail_view.full_star"),
@@ -288,7 +288,7 @@ function ef({
       onMouseLeave: () => {
         l || u === d || c(u);
       },
-      "data-tooltip-type": l ? Ib.TEXT : void 0,
+      "data-tooltip-type": l ? KindEnum.TEXT : void 0,
       "data-tooltip": l ? o : void 0,
       "data-tooltip-show-immediately": !0,
       "data-testid": "rating-tooltip",
@@ -355,7 +355,7 @@ function eH({
     className: "browse_resource_modal_tab_header--header--MQQB5 text--fontPos11--2LvXf text--_fontBase--QdLsd",
     children: [jsxs("div", {
       className: "browse_resource_modal_tab_header--left--UnLHb",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         "data-not-draggable": !0,
         svg: _$$A5,
         className: "browse_resource_modal_tab_header--backButton--xXsNC fd_browse_resource_modal--backButton--S7dMz",
@@ -379,14 +379,14 @@ function eQ(e) {
   return (useEffect(() => {
     d && d.community_publishers || t(af({
       id: e.resourceId,
-      resourceType: r ? bD.PLUGIN : bD.WIDGET
+      resourceType: r ? ResourceType.PLUGIN : ResourceType.WIDGET
     }));
   }, [t, d, e.resourceId, r]), d) ? jsx(eG, {
     resourceId: e.resourceId,
     resource: d
   }) : jsx("div", {
     className: _$$s.flex.wFull.borderBox.justifyCenter.pt32.$,
-    children: jsx(kt, {
+    children: jsx(LoadingSpinner, {
       size: "medium"
     })
   });
@@ -412,7 +412,7 @@ function eG(e) {
   let j = QQ(g);
   let w = useSelector(e => e.authedActiveCommunityProfile);
   let b = _$$b();
-  let E = sZ();
+  let E = useCurrentUserOrg();
   let P = ll();
   let M = U6();
   let S = Object.values($1()).find(t => String(t.plugin_id) === e.resourceId);
@@ -472,8 +472,8 @@ function eG(e) {
     name: "detail",
     properties: {
       resourceId: e.resourceId,
-      resourceType: r ? bD.PLUGIN : bD.WIDGET,
-      isMonetized: m3(resource),
+      resourceType: r ? ResourceType.PLUGIN : ResourceType.WIDGET,
+      isMonetized: hasMonetizedResourceMetadata(resource),
       editorType: "figma"
     },
     children: [!d && jsx(ez, {}), jsxs(_$$P, {
@@ -531,7 +531,7 @@ function eG(e) {
                 className: "detail_view--ctaContainer--Z5uKT",
                 children: p && !getFeatureFlags().community_hub_admin_reviewer ? jsx(_$$I2, {
                   resource,
-                  context: aL.INSERTS,
+                  context: ShelfViewType.INSERTS,
                   payment: g
                 }) : $ ? jsx(_$$s3, {
                   version: W,
@@ -541,7 +541,7 @@ function eG(e) {
                 className: _$$s.ml8.flex.itemsCenter.$,
                 children: jsx(_W, {
                   resourceId: e.resourceId,
-                  resourceType: r ? vt.PLUGIN : vt.WIDGET,
+                  resourceType: r ? ResourceTypeNoComment.PLUGIN : ResourceTypeNoComment.WIDGET,
                   parentView: nN.DETAIL
                 })
               }), o && isValidForSelectedViewAndWhitelist(W, E, P) ? jsxs(Fragment, {
@@ -550,7 +550,7 @@ function eG(e) {
                   children: jsx(_$$K, {
                     "aria-label": getI18nString("universal_insert.more_options"),
                     htmlAttributes: {
-                      "data-tooltip-type": Ib.TEXT,
+                      "data-tooltip-type": KindEnum.TEXT,
                       "data-tooltip": getI18nString("universal_insert.more_options")
                     },
                     onClick: F,
@@ -559,12 +559,12 @@ function eG(e) {
                 }), Z && jsx(Gq, {
                   resourceId: e.resourceId,
                   plugin: W,
-                  resourceType: r ? vt.PLUGIN : vt.WIDGET
+                  resourceType: r ? ResourceTypeNoComment.PLUGIN : ResourceTypeNoComment.WIDGET
                 })]
               }) : jsx(_$$K, {
                 "aria-label": getI18nString("universal_insert.copy_link"),
                 htmlAttributes: {
-                  "data-tooltip-type": Ib.TEXT,
+                  "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": getI18nString("universal_insert.copy_link")
                 },
                 onClick: O,
@@ -626,7 +626,7 @@ function e$(e) {
       target: "_blank",
       trackingEventName: "Inserts Detail View - Browse More From Community",
       trusted: !0,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A6,
         className: "detail_view--communityLinkIcon--FPd8D fd_browse_resource_modal--communityLinkIcon--gNQIW text--fontPos12--YsUAh text--_fontBase--QdLsd"
       }), renderI18nText("universal_insert.see_more_details_in_community")]
@@ -642,7 +642,7 @@ function e4({
     direction: "vertical",
     verticalAlignItems: "center",
     horizontalAlignItems: "center",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A7,
       className: _$$s.colorIconSecondary.pb24.$,
       autosize: !0,
@@ -666,22 +666,22 @@ function e5({
     children: e ? jsxs(Fragment, {
       children: [jsxs("div", {
         className: _$$s.alignCenter.$,
-        children: [jsx(_$$E2, {
+        children: [jsx(TextWithTruncation, {
           color: "secondary",
           children: renderI18nText("dev_handoff.inspect_panel.create_first_here")
-        }), jsx("br", {}), jsx(_$$E2, {
+        }), jsx("br", {}), jsx(TextWithTruncation, {
           children: renderI18nText("dev_handoff.inspect_panel.learn_more_link", t)
         })]
       }), jsx(e8, {})]
     }) : jsxs("div", {
       className: _$$s.alignCenter.$,
-      children: [jsx(_$$E2, {
+      children: [jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("dev_handoff.inspect_panel.inspect_plugins_go_here")
-      }), jsx("br", {}), jsx(_$$E2, {
+      }), jsx("br", {}), jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("dev_handoff.inspect_panel.use_desktop_to_develop")
-      }), jsx("br", {}), jsx(_$$E2, {
+      }), jsx("br", {}), jsx(TextWithTruncation, {
         children: renderI18nText("dev_handoff.inspect_panel.learn_more_link", t)
       })]
     })
@@ -701,7 +701,7 @@ function e8() {
   }, [e, s]);
   return jsxs("div", {
     className: _$$s.pt16.$,
-    children: [jsx($n, {
+    children: [jsx(Button, {
       onClick: r,
       variant: "secondary",
       children: jsxs(Y1, {
@@ -710,13 +710,13 @@ function e8() {
         padding: 0,
         children: [jsx(_$$e, {
           className: _$$s.pr8.$
-        }), jsx(_$$E2, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText("dev_handoff.inspect_panel.new_plugin")
         }), jsx(_$$r, {})]
       })
     }), s && jsx("div", {
       children: jsx(Pq, {
-        resourceType: bD.PLUGIN
+        resourceType: ResourceType.PLUGIN
       })
     })]
   });
@@ -788,7 +788,7 @@ function tf() {
     trackingEventName: "Inserts - Browse More From Community",
     target: "_blank",
     trusted: !0,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A6,
       className: "fd_browse_resource_modal--communityLinkIcon--gNQIW text--fontPos12--YsUAh text--_fontBase--QdLsd"
     }), renderI18nText("universal_insert.browse_more_in_community")]
@@ -827,7 +827,7 @@ function tj({
     className: "fd_browse_resource_modal--expandedViewHeader--uLZl5",
     children: [jsxs("div", {
       className: "fd_browse_resource_modal--left--si6Cj",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A5,
         className: "fd_browse_resource_modal--backButton--S7dMz",
         onClick: t,
@@ -880,7 +880,7 @@ function tR(e) {
   return s ? jsx(tM, {
     currentOrgId: s,
     viewExpandedList: e.viewExpandedList
-  }) : jsx(kt, {
+  }) : jsx(LoadingSpinner, {
     className: tv
   });
 }
@@ -965,7 +965,7 @@ function tM(e) {
           onClick,
           "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("universal_insert.go_to_community")
           },
           children: jsx(_$$N3, {})
@@ -998,7 +998,7 @@ function tM(e) {
         children: jsx(_$$K, {
           "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("universal_insert.go_to_community")
           },
           onClick,
@@ -1022,7 +1022,7 @@ function tM(e) {
           onClick,
           "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("universal_insert.go_to_community")
           },
           children: jsx(_$$N3, {})
@@ -1044,7 +1044,7 @@ function tB(e) {
     className: "fd_browse_resource_modal--viewExpandedCta--xrZpk text--fontPos12--YsUAh text--_fontBase--QdLsd",
     children: [jsx("span", {
       children: e.ctaText
-    }), jsx(_$$B, {
+    }), jsx(SvgComponent, {
       svg: _$$A8
     })]
   });
@@ -1172,7 +1172,7 @@ function tJ({
             onClick,
             "aria-label": getI18nString("universal_insert.go_to_community"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("universal_insert.go_to_community")
             },
             trackingEventName: "Inserts - Browse More From Community Icon Button",
@@ -1406,7 +1406,7 @@ function st(e) {
   useEffect(() => {
     se.set(eo);
   }, [eo]);
-  let ed = sZ();
+  let ed = useCurrentUserOrg();
   let {
     serverSideSearch,
     isLoading,
@@ -1473,7 +1473,7 @@ function st(e) {
       type: R7.DEVELOPMENT,
       sectionIdx: e
     }, R7.DEVELOPMENT)), e += 1);
-    isLoading && !eL ? t.push(jsx(kt, {
+    isLoading && !eL ? t.push(jsx(LoadingSpinner, {
       className: tv
     }, "Loading spinner")) : (ey && (t.push(jsx(sa, {
       sectionHeader: renderI18nText("universal_insert.saved"),
@@ -1699,7 +1699,7 @@ function sd({
   let E = N && !h;
   let R = LR();
   let M = useCallback(s => "Escape" === s.key && (e ? t("") : R(), !0), [R, e, t]);
-  let B = _$$A(e => {
+  let B = useDebouncedCallback(e => {
     e.length > 0 ? r(Dy({
       entryPoint: "figma:inserts"
     })) : r(ky());
@@ -1760,7 +1760,7 @@ function sd({
           "aria-expanded": h,
           onClick: H,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("dev_handoff.inspect_panel.search_bar_filter")
           },
           "aria-label": getI18nString("dev_handoff.inspect_panel.search_bar_filter"),
@@ -1829,7 +1829,7 @@ function sc(e) {
       }), "development" === e.currentView && jsx("div", {
         className: "fd_browse_resource_modal--mainViewHeaderRightSide--hxfTP text--fontPos12--YsUAh text--_fontBase--QdLsd",
         children: jsx(_$$n, {
-          resourceType: activeTab === _$$s2.WIDGET ? bD.WIDGET : bD.PLUGIN
+          resourceType: activeTab === _$$s2.WIDGET ? ResourceType.WIDGET : ResourceType.PLUGIN
         })
       })]
     }), jsx(_$$P, {
@@ -1847,7 +1847,7 @@ function su({
   let {
     activeTab
   } = IT();
-  let s = sZ()?.id;
+  let s = useCurrentUserOrg()?.id;
   let r = f6();
   let n = wW();
   let i = activeTab === _$$s2.WIDGET ? n : r;
@@ -1865,7 +1865,7 @@ function su({
 function s_(e) {
   let t = useDispatch();
   let s = Um();
-  let r = sZ();
+  let r = useCurrentUserOrg();
   let l = _$$M();
   let o = useCallback(e => function (e, t) {
     switch (e) {

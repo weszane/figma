@@ -19,7 +19,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Dm } from "../figma_app/8833";
 import { UK } from "../figma_app/740163";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Zk } from "../figma_app/626177";
 import { Wv } from "../figma_app/711157";
 import { uQ } from "../figma_app/251115";
@@ -79,14 +79,14 @@ function $({
       onClick: lQ,
       htmlAttributes: {
         "data-tooltip": getI18nString("sites.panel.code_component_multiplayer_warning"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$R, {})
     }), a && i && jsx(_$$K, {
       "aria-label": getI18nString("sites.panel.format_code_tooltip"),
       htmlAttributes: {
         "data-tooltip": getI18nString("sites.panel.format_code_tooltip"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       onClick: h,
       disabled: !!f,

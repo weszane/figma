@@ -2,13 +2,13 @@ import _require from "../2824/40443";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, nB, hE } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { K as _$$K } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { R as _$$R } from "../905/621802";
 import { q as _$$q } from "../905/838985";
 import { W as _$$W } from "../9410/92046";
@@ -28,7 +28,7 @@ import { uQ } from "../figma_app/311375";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { wV } from "../figma_app/779965";
 import { d as _$$d } from "../905/977713";
 import { uQ as _$$uQ, Vr } from "../figma_app/151869";
@@ -492,7 +492,7 @@ export default App
     },
     children: jsx("div", {
       ref: x,
-      children: jsx(bL, {
+      children: jsx(ModalRootComponent, {
         manager: t,
         width: 1300,
         children: jsxs(vo, {
@@ -737,7 +737,7 @@ function ef({
           }), e.current && (e.current.value = ""));
         };
       },
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("dev_handoff.mc.upload_file"),
       children: jsx(_$$e, {})
     }), jsx("div", {
@@ -748,7 +748,7 @@ function ef({
           role: "button",
           tabIndex: 0,
           className: _$$s.cursorPointer.$,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("dev_handoff.mc.remove_file"),
           onClick: () => t(e => e.filter((e, t) => t !== s)),
           children: jsx(_$$q2, {})
@@ -791,7 +791,7 @@ function ey({
   label: e,
   onClick: t
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     onClick: t,
     variant: "secondary",
     "aria-label": e,

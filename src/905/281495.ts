@@ -8,7 +8,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError } from "../905/11";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { Ay as _$$Ay } from "../figma_app/432652";
 import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { JB } from "../905/843553";
@@ -292,7 +292,7 @@ export let $$F4 = async ({
   atomStoreManager.set(uK, {
     autoScroll: !0
   });
-  ds("ai_rename_layers_started", B, U, {
+  trackFileEvent("ai_rename_layers_started", B, U, {
     numItemsTotal: W,
     numItemsNameable: Q,
     source: G,
@@ -375,7 +375,7 @@ export let $$F4 = async ({
     e.signal.aborted ? oZ() : await Promise.all(o);
     let d = M.getElapsedTime();
     M.stop();
-    e.signal.aborted ? (ds("ai_rename_layers_cancelled", B, U, {
+    e.signal.aborted ? (trackFileEvent("ai_rename_layers_cancelled", B, U, {
       timeToFirstToken: j,
       timeToCompletion: d,
       numItemsTotal: W,
@@ -385,7 +385,7 @@ export let $$F4 = async ({
       numItemsWithOrdinals: Y,
       source: G,
       clientLifecycleId: f
-    }), L(Z)) : ds("ai_rename_layers_completed", B, U, {
+    }), L(Z)) : trackFileEvent("ai_rename_layers_completed", B, U, {
       timeToFirstToken: j,
       timeToCompletion: d,
       numItemsTotal: W,
@@ -408,7 +408,7 @@ export let $$F4 = async ({
         source: G
       }
     });
-    ds("ai_rename_layers_failed", B, U, {
+    trackFileEvent("ai_rename_layers_failed", B, U, {
       error: e,
       numItemsTotal: W,
       numItemsNameable: Q,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
-import { B } from "../905/714743";
-import { TD } from "../905/499018";
+import { SvgComponent } from "../905/714743";
+import { getIconColor } from "../905/499018";
 import { jl, I5 } from "../905/112861";
 let o = jl;
 export function $$l0({
@@ -11,9 +11,9 @@ export function $$l0({
 }) {
   let d = e.split("-").join(" ");
   let c = e in o;
-  return jsx(B, {
+  return jsx(SvgComponent, {
     style: {
-      fill: TD(t)
+      fill: getIconColor(t)
     },
     dataTestId: i,
     title: d,

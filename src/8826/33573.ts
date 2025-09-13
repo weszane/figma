@@ -17,7 +17,7 @@ import { Ku } from "../figma_app/740163";
 import { normalizeValue, getCommonFromArray } from "../905/216495";
 import { Tm, rC, Em } from "../figma_app/385874";
 import { selectCurrentFile } from "../figma_app/516028";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { zK } from "../905/182453";
 import { u as _$$u } from "../figma_app/365543";
@@ -143,7 +143,7 @@ function B(e) {
       recordingKey: generateRecordingKey(e, "more"),
       htmlAttributes: {
         onMouseDown: e => e.stopPropagation(),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.pencil_tool.advanced_stroke_settings")
       },
       children: jsx(_$$J, {})

@@ -23,7 +23,7 @@ import { jj, Gc, Mg, NQ } from "../figma_app/952764";
 import { pg, GY } from "../figma_app/78309";
 import { jP, Ph } from "../figma_app/998161";
 import { lQ } from "../905/934246";
-import { E as _$$E2 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import M from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -101,7 +101,7 @@ function D({
   children: s,
   ...n
 }) {
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     className: _$$s.hFull.px4.bgTransparent.$,
     onClick: t => {
       t.stopPropagation();

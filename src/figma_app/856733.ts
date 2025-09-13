@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { jsx, jsxs } from 'react/jsx-runtime';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { N as AppleEulaContent } from '../905/73189';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { renderI18nText } from '../905/303541';
@@ -85,7 +85,7 @@ export function AppleEulaModal({
     preventUserClose: false
   });
   const featureFlags = getFeatureFlags();
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: modalManager,
     width: 600,
     children: jsxs(vo, {

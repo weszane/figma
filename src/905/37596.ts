@@ -1,16 +1,16 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { E as _$$E2 } from "../905/53857";
 import { B as _$$B } from "../905/950875";
 import u from "classnames";
 import { YO } from "../figma_app/672951";
 import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
-import { B as _$$B2 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -20,7 +20,7 @@ import { Lg, Lq } from "../figma_app/392626";
 import { B as _$$B3 } from "../905/900597";
 import { K as _$$K } from "../905/443068";
 import { N as _$$N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { C as _$$C } from "../905/520159";
 import { Hg, Bs } from "../905/672745";
 import { A as _$$A } from "../905/920142";
@@ -45,14 +45,14 @@ import { cm } from "../figma_app/544879";
 import { C as _$$C2 } from "../905/138077";
 import { V as _$$V } from "../905/633585";
 import { d as _$$d } from "../905/693444";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { F as _$$F2 } from "../905/224";
 import { Ct } from "../figma_app/199513";
 import { b as _$$b } from "../905/388233";
 import { N as _$$N2 } from "../figma_app/55043";
 import { ProjectByIdForFolderSettings } from "../figma_app/43951";
 import { Bi } from "../905/652992";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { DV } from "../905/739964";
 var p = u;
 let Y = registerModal(function (e) {
@@ -126,7 +126,7 @@ let Y = registerModal(function (e) {
       resourceConnectionId: i ? null : e.resourceConnection.id,
       resourceConnectionInviteId: i ? e.resourceConnectionInvite.id : null
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: h,
       width: "md",
       children: jsxs(vo, {
@@ -230,7 +230,7 @@ let Y = registerModal(function (e) {
                   }
                 });
                 return t;
-              })().map((e, t) => jsxs(_$$E, {
+              })().map((e, t) => jsxs(ButtonPrimitive, {
                 className: lK,
                 onClick: e.onClick,
                 children: [jsxs("div", {
@@ -244,7 +244,7 @@ let Y = registerModal(function (e) {
                   })]
                 }), jsx("span", {
                   className: zc,
-                  children: jsx(_$$B2, {
+                  children: jsx(SvgComponent, {
                     svg: _$$A2
                   })
                 })]
@@ -262,7 +262,7 @@ let Y = registerModal(function (e) {
               })]
             }) : $, jsx("div", {
               className: _$$s.mb8.mt12.$,
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: () => {
                   t && (t.key.type === FOrganizationLevelType.ORG ? m(sf({
@@ -289,12 +289,12 @@ let Y = registerModal(function (e) {
             children: [jsx("a", {
               href: "https://help.figma.com/hc/articles/30124855491863-Guide-to-connected-projects#h_01JMJDKJFD68CH88F663KG08AJ",
               target: "_blank",
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: e => e.stopPropagation(),
                 children: renderI18nText("resource_connection.request_modal.learn_more")
               })
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "destructiveSecondary",
               onClick: i ? () => {
                 m(showModalHandler({
@@ -581,7 +581,7 @@ let $$el0 = registerModal(function (e) {
   let g = m.data?.project;
   let A = eo(folderId, e.onClose);
   let b = e => () => {
-    !e.disabled && (e.onClick && e.onClick(), (e.trackingEventName || e.trackingProperties) && Cu({
+    !e.disabled && (e.onClick && e.onClick(), (e.trackingEventName || e.trackingProperties) && logAndTrackCTA({
       ...u.properties,
       trackingContext: e.trackingEventName || u.name,
       ...e.trackingProperties
@@ -590,7 +590,7 @@ let $$el0 = registerModal(function (e) {
   if (!g) return jsx(Fragment, {});
   let v = e => e.disabled && e.disabledMessage ? {
     "data-tooltip": e.disabledMessage,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-interactive": !0,
     "data-tooltip-max-width": 210,
     "data-tooltip-show-immediately": !0,
@@ -601,7 +601,7 @@ let $$el0 = registerModal(function (e) {
     properties: {
       folderId: g?.id
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
       children: jsxs(vo, {
@@ -617,7 +617,7 @@ let $$el0 = registerModal(function (e) {
             let a = e.showNewBadge || r || i;
             return e.separator ? jsx("div", {
               className: "folder_settings_modal--separator--19MvF"
-            }, t) : jsxs(_$$E, {
+            }, t) : jsxs(ButtonPrimitive, {
               className: p()("folder_settings_modal--settingsOption--zt1FW", e.disabled && "folder_settings_modal--settingsOptionDisabled--lHgWj"),
               disabled: e.disabled,
               onClick: b(e),
@@ -637,7 +637,7 @@ let $$el0 = registerModal(function (e) {
                   children: renderI18nText("resource_connection.onboarding.new")
                 }), r && jsx("span", {
                   className: "folder_settings_modal--iconContainer--9ZlTr",
-                  children: jsx(_$$B2, {
+                  children: jsx(SvgComponent, {
                     svg: _$$A2
                   })
                 }), i && jsx("div", {

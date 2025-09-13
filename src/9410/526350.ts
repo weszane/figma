@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { fu } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 export function $$l0({
   buttons: e,
   editorType: t,
@@ -56,7 +56,7 @@ function d({
   return jsxs("button", {
     ...xk(c.startFromRowButton, h && h),
     onClick: () => {
-      Cu({
+      logAndTrackCTA({
         name: `${u}.templates.${p}`,
         triggeredFrom: `${u}_template_modal`
       });

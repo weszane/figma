@@ -1,8 +1,8 @@
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { atom } from "../figma_app/27355";
-import { oA } from "../905/723791";
-import { Z } from "../905/296690";
+import { getResourceDataOrFallback } from "../905/723791";
+import { orgSubscriptionAtom } from "../905/296690";
 import { openFileAtom } from "../figma_app/516028";
 import { ApprovedLibrariesForWorkspaceView, ApprovedLibrariesForOrgViewV2 } from "../figma_app/43951";
 import { LM } from "../figma_app/951233";
@@ -10,7 +10,7 @@ import { Oe } from "../figma_app/336853";
 import { Me } from "../figma_app/598018";
 let $$m4 = atom(e => {
   let t = (() => {
-    let t = e(Z);
+    let t = e(orgSubscriptionAtom);
     let i = e(openFileAtom);
     if (i) {
       if (!i.canEdit || !Oe(t)) return;
@@ -31,7 +31,7 @@ let $$h3 = atom(e => {
   return A(t?.approvedLibraries ?? []);
 });
 let $$g2 = atom(e => {
-  let t = e(Z);
+  let t = e(orgSubscriptionAtom);
   if (!t || !Oe(t)) return new Set([]);
   let i = e(ApprovedLibrariesForOrgViewV2.Query({
     orgId: t.id
@@ -40,7 +40,7 @@ let $$g2 = atom(e => {
 });
 let $$f0 = atom(e => {
   {
-    let t = e(Z);
+    let t = e(orgSubscriptionAtom);
     let i = e(LM);
     if (!i || !Oe(t)) return;
     let n = e(ApprovedLibrariesForWorkspaceView.Query({
@@ -54,7 +54,7 @@ let $$_1 = atom(e => {
   return A(t?.approvedLibraries ?? []);
 });
 function A(e) {
-  return new Set(e.map(e => oA(e.libraryKey)).filter(isNotNullish).map(_$$l));
+  return new Set(e.map(e => getResourceDataOrFallback(e.libraryKey)).filter(isNotNullish).map(_$$l));
 }
 export const G7 = $$f0;
 export const Gg = $$_1;

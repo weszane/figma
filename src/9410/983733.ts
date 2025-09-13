@@ -16,7 +16,7 @@ import { Fk } from "../figma_app/167249";
 import { N as _$$N } from "../figma_app/268271";
 import { w as _$$w } from "../905/129046";
 import { rq } from "../905/425180";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { F_ } from "../905/858282";
 import { pjo } from "../figma_app/6204";
 import { rM, dO } from "../figma_app/318123";
@@ -38,7 +38,7 @@ export function $$R2() {
   let D = useAtomWithSubscription($$L0);
   let M = useAtomWithSubscription(_$$w2);
   let P = _$$_();
-  let F = Td();
+  let F = useIsCanvasEditDisabled();
   let B = function () {
     let [e, t] = useState(!1);
     let i = useSelector(e => e.isMakeSomethingV2Active);

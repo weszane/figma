@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { a as _$$a } from "../905/339331";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -9,7 +9,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { f as _$$f } from "../figma_app/109947";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
-import { QU } from "../figma_app/62612";
+import { getViewportWidth } from "../figma_app/62612";
 import { wV } from "../figma_app/779965";
 import { M$q } from "../figma_app/27776";
 var c = d;
@@ -28,7 +28,7 @@ export function $$b0({
 }) {
   let [v, T] = useState(!1);
   let S = useRef(null);
-  let I = QU({
+  let I = getViewportWidth({
     subscribeToUpdates_expensive: !0
   });
   let N = useAtomWithSubscription(_$$f);
@@ -64,7 +64,7 @@ export function $$b0({
         className: c()("floating_layers_panel--header--YtDpH", {
           [y]: v
         }),
-        children: [jsxs(_$$E, {
+        children: [jsxs(ButtonPrimitive, {
           className: c()("floating_layers_panel--headerButton--e-t0D", {
             [y]: v
           }),
@@ -80,7 +80,7 @@ export function $$b0({
               children: renderI18nText("dev_handoff.tag.layers")
             }), !v && t]
           })]
-        }), v && d, jsx(_$$E, {
+        }), v && d, jsx(ButtonPrimitive, {
           className: c()("floating_layers_panel--expandCollapseButton--EOmgJ", {
             [y]: v
           }),

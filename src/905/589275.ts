@@ -1,14 +1,14 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { ComponentPropType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { generateRecordingKey } from "../figma_app/878298";
 import { gw, c$ } from "../figma_app/236327";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../905/734251";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
@@ -26,7 +26,7 @@ import { lL, Cc, T as _$$T } from "../figma_app/270091";
 import { wS, J0, fN, _A } from "../figma_app/65182";
 import { D8 } from "../905/511649";
 import { ph } from "../figma_app/709893";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e, q as _$$q } from "../figma_app/905311";
 import { K0 } from "../figma_app/778125";
 import { A as _$$A } from "../2854/952200";
@@ -93,14 +93,14 @@ function M({
       text: e.name,
       onTruncationChange: c,
       tooltipPropsWhenTruncated: u
-    }), s && jsx(_$$B, {
+    }), s && jsx(SvgComponent, {
       className: "preferred_values_list_view--warningIconList--ivdml preferred_values_instance_picker--warningIconList--aDgpb preferred_values_instance_picker--warningIcon--2TXXz",
       svg: _$$A2
     }), jsx(K0, {
       recordingKey: generateRecordingKey(...fN([i, ...j(e), "removeButton"])),
       className: "preferred_values_list_view--listItemRemoveButton--QevDg preferred_values_instance_picker--listItemRemoveButton--HO05L",
       svg: _$$A,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.draggable_list.remove"),
       tooltipForScreenReadersOnly: !0,
       onClick: () => {
@@ -170,7 +170,7 @@ function Y(e) {
         ref: _,
         onClick: y,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("design_systems.component_properties.select_preferred_values"),
           onKeyDown: b
         },
@@ -247,10 +247,10 @@ function ee({
   }, [i, e]);
   return jsxs("div", {
     className: warningPublish,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: warningIcon,
       svg: _$$A2
-    }), renderI18nText("design_systems.component_properties.unpublished_preferred_values"), jsx($n, {
+    }), renderI18nText("design_systems.component_properties.unpublished_preferred_values"), jsx(Button, {
       onClick: o,
       recordingKey: t,
       variant: "link",

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 export function $$o0({
   thumbnail: e,
   title: t,
@@ -34,14 +34,14 @@ export function $$o0({
       ...xk(l.bottomContainer, u && l.bottomContainerHover),
       children: [r, jsxs("div", {
         className: "x1iyjqo2 x1r8uery x78zum5 xdt5ytf x195vfkc xb3r6kr",
-        children: [jsx(E, {
+        children: [jsx(TextWithTruncation, {
           truncate: !0,
           color: "default",
           children: jsx("span", {
             ...xk(l.title),
             children: t
           })
-        }), jsx(E, {
+        }), jsx(TextWithTruncation, {
           truncate: !0,
           color: "secondary",
           children: jsx("span", {

@@ -10,13 +10,13 @@ import { k2 } from "../figma_app/10554";
 import { $S } from "../905/918620";
 import { deepEqual } from "../905/382883";
 import { t as _$$t2 } from "../905/150656";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import b from "../vendor/241899";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
 import { resolveMessage } from "../905/231762";
@@ -73,10 +73,10 @@ import { hideModal } from "../905/156213";
 import { $$in, WX } from "../figma_app/350203";
 import { j6, fu } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
 import { xw } from "../figma_app/951233";
-import { vt, U as _$$U } from "../figma_app/45218";
+import { ResourceTypeNoComment, hasClientMeta } from "../figma_app/45218";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { e0 as _$$e3 } from "../905/696396";
 import { pz } from "../figma_app/825489";
@@ -660,15 +660,15 @@ function eM({
     })]
   });
   i = ea || draftSubmissionResult?.result !== "success" ? ea || draftSubmissionResult?.result !== "failure" ? jsxs(Fragment, {
-    children: [Z.isOnFirstTab ? jsx($n, {
+    children: [Z.isOnFirstTab ? jsx(Button, {
       variant: "secondary",
       onClick: u,
       children: getI18nString("general.cancel")
-    }) : !ea && jsx($n, {
+    }) : !ea && jsx(Button, {
       variant: "secondary",
       onClick: Z.selectPreviousTab,
       children: getI18nString("general.back")
-    }), Z.isOnLastTab ? jsx($n, {
+    }), Z.isOnLastTab ? jsx(Button, {
       disabled: draftSubmissionResult?.result === "pending" || ea,
       onClick: () => {
         checkProgress() && submit?.();
@@ -676,7 +676,7 @@ function eM({
       children: draftSubmissionResult?.result === "pending" || ea ? jsx(_$$k, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
-    }) : jsx($n, {
+    }) : jsx(Button, {
       onClick: () => {
         checkProgress() && Z.selectNextTab();
       },
@@ -703,7 +703,7 @@ function eM({
         successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
       children: getI18nString("general.go_back")
@@ -732,7 +732,7 @@ function eM({
     });
   }, [c]);
   let eo = Lz(e.fieldStates.name, "");
-  let el = _$$A(() => {
+  let el = useDebouncedCallback(() => {
     c.current($$in, {
       step: WX.EDIT_NAME
     });
@@ -741,7 +741,7 @@ function eM({
     eo && p.name.touched && el();
   }, [eo, el, p.name.touched]);
   let ed = Lz(e.fieldStates.description, "");
-  let ec = _$$A(() => {
+  let ec = useDebouncedCallback(() => {
     c.current($$in, {
       step: WX.EDIT_DESCRIPTION
     });
@@ -789,7 +789,7 @@ function ej(e) {
   } = e;
   let s = selectUser();
   let o = useSelector(e => xw(e) ?? void 0, deepEqual);
-  let l = sZ();
+  let l = useCurrentUserOrg();
   let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
   let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
@@ -836,7 +836,7 @@ function ej(e) {
     properties: {
       userId: s.id,
       orgId: l?.id,
-      resourceType: vt.HUB_FILE,
+      resourceType: ResourceTypeNoComment.HUB_FILE,
       resourceId: existingHubFile?.id,
       fileKey: figFile?.key,
       editorType: figFile?.editor_type,
@@ -854,7 +854,7 @@ function eY({
   let {
     existingResourceContent
   } = t.deps;
-  return _$$U(existingResourceContent) ? jsx("div", {
+  return hasClientMeta(existingResourceContent) ? jsx("div", {
     className: _$$s.pt8.pb8.$,
     children: jsx(_$$A8, {
       pagesList: e,
@@ -1641,15 +1641,15 @@ function td({
     })]
   });
   s = eh || draftSubmissionResult?.result !== "success" ? eh || draftSubmissionResult?.result !== "failure" ? jsxs(Fragment, {
-    children: [er.isOnFirstTab ? jsx($n, {
+    children: [er.isOnFirstTab ? jsx(Button, {
       variant: "secondary",
       onClick: m,
       children: getI18nString("general.cancel")
-    }) : !eh && jsx($n, {
+    }) : !eh && jsx(Button, {
       variant: "secondary",
       onClick: er.selectPreviousTab,
       children: getI18nString("general.back")
-    }), er.isOnLastTab ? jsx($n, {
+    }), er.isOnLastTab ? jsx(Button, {
       disabled: draftSubmissionResult?.result === "pending" || eh,
       onClick: () => {
         checkProgress() && submit?.();
@@ -1658,7 +1658,7 @@ function td({
       children: draftSubmissionResult?.result === "pending" || eh ? jsx(_$$k, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
-    }) : jsx($n, {
+    }) : jsx(Button, {
       onClick: () => {
         checkProgress() && er.selectNextTab();
       },
@@ -1686,7 +1686,7 @@ function td({
         successText: getI18nString("community.publishing.debug_info_copied_to_clipboard")
       }));
     },
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "secondary",
       onClick: clearDraftSubmissionResult,
       children: getI18nString("general.go_back")
@@ -1715,7 +1715,7 @@ function td({
     });
   }, [p]);
   let ef = Lz(e.fieldStates.name, "");
-  let e_ = _$$A(() => {
+  let e_ = useDebouncedCallback(() => {
     p.current($$in, {
       step: WX.EDIT_NAME
     });
@@ -1724,7 +1724,7 @@ function td({
     ef && b.name.touched && e_();
   }, [ef, e_, b.name.touched]);
   let eA = Lz(e.fieldStates.description, "");
-  let ey = _$$A(() => {
+  let ey = useDebouncedCallback(() => {
     p.current($$in, {
       step: WX.EDIT_DESCRIPTION
     });
@@ -1773,7 +1773,7 @@ function tc(e) {
   let s = selectUser();
   let o = _$$h4(figFile);
   let l = useSelector(e => xw(e) ?? void 0, deepEqual);
-  let d = sZ();
+  let d = useCurrentUserOrg();
   let c = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let u = useSelector(e => e.authedProfilesById);
   let p = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
@@ -1796,7 +1796,7 @@ function tc(e) {
     properties: {
       userId: s.id,
       orgId: d?.id,
-      resourceType: vt.HUB_FILE,
+      resourceType: ResourceTypeNoComment.HUB_FILE,
       resourceId: existingHubFile?.id,
       fileKey: figFile?.key,
       editorType: figFile?.editor_type,

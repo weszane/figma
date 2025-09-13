@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { RecordingComponent, setupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { generateSerializableStyleThumbnail, generateThumbnailFromStyleConsumer } from "../figma_app/80990";
@@ -152,7 +152,7 @@ class v extends RecordingComponent {
             className: `${Lu} style_modal--selectButton--t8zHP`,
             onClick: this.onSelectSamePaintClick,
             recordingKey: generateRecordingKey(this.props, "showMe"),
-            children: [jsx(B, {
+            children: [jsx(SvgComponent, {
               className: "style_modal--targetIcon--x4NAU",
               svg: _$$A
             }), renderI18nText("design_systems.create_style.show_me")]

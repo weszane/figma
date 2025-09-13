@@ -26,7 +26,7 @@ import { zD } from "../figma_app/109758";
 import { fullscreenValue } from "../figma_app/455680";
 import { UD } from "../figma_app/624361";
 import { Mo } from "../905/913055";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { XJ, VG, gg, qY } from "../905/23253";
 import { JT, LC } from "../figma_app/632248";
 import { s as _$$s2, w as _$$w } from "../905/286488";
@@ -299,7 +299,7 @@ function eg({
   onImageFailed: o,
   imageResults: l
 }) {
-  let d = sZ();
+  let d = useCurrentUserOrg();
   let c = useIsSelectedViewFullscreenCooper();
   let u = useMemo(() => _$$O(JT.GENERATE_IMAGE, d), [d]);
   let [p, _] = useAtomValueAndSetter(ei);
@@ -533,7 +533,7 @@ function ef({
   onImageFailed: l,
   imageResults: d
 }) {
-  let c = sZ();
+  let c = useCurrentUserOrg();
   let u = useIsSelectedViewFullscreenCooper();
   let p = useMemo(() => _$$O(JT.EDIT_IMAGE, c), [c]);
   let [_, m] = useAtomValueAndSetter(ea);

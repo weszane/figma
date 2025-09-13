@@ -13,8 +13,8 @@ import { WebLoggerTimer } from "../905/485103";
 import { yZ } from "../figma_app/476572";
 import { hW } from "../figma_app/594947";
 import { XE } from "../figma_app/976749";
-import { pi } from "../figma_app/314264";
-import { Ui } from "../905/709171";
+import { mapFileToProductType } from "../figma_app/314264";
+import { compareLibraryKeyWithString } from "../905/709171";
 import { V as _$$V } from "../figma_app/473391";
 import { qp, hN } from "../905/977779";
 import { resolveTeamId } from "../905/515860";
@@ -274,7 +274,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
         libraryKey: _$$l(c?.libraryKey ?? ""),
         query: s,
         searchType: g?.type ?? _$$I.ALL,
-        productType: pi({
+        productType: mapFileToProductType({
           editorType: c?.editorType
         })
       });
@@ -306,7 +306,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
 let eb = async (e, t) => {
   let i = t(ec);
   return {
-    normalizedSearchResults: (await t(eE(e))).filter(e => Ui(e, _$$l(i?.libraryKey ?? ""))),
+    normalizedSearchResults: (await t(eE(e))).filter(e => compareLibraryKeyWithString(e, _$$l(i?.libraryKey ?? ""))),
     unsubscribedSearchResults: []
   };
 };

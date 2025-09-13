@@ -4,7 +4,7 @@ import { a8 } from "../figma_app/559491";
 import { gI } from "../figma_app/399472";
 import { T9 } from "../figma_app/740025";
 import { D2 } from "../905/18797";
-import { xQ } from "../figma_app/45218";
+import { isWidget } from "../figma_app/45218";
 import { getWidgetAllowListKey, hasLocalFileId, PluginInstallStatus } from "../figma_app/155287";
 import { $u, Hr, E2 } from "../905/257019";
 async function p(e) {
@@ -59,10 +59,10 @@ export async function $$f3(e, t) {
   return PluginInstallStatus.PLUGIN_INSTALLABLE;
 }
 export async function $$_1(e, t) {
-  return xQ(e) ? await Hr.canRunExtensionInsideOrg(e, t) : await E2.canRunExtensionInsideOrg(e, t);
+  return isWidget(e) ? await Hr.canRunExtensionInsideOrg(e, t) : await E2.canRunExtensionInsideOrg(e, t);
 }
 export function $$A0(e, t) {
-  return xQ(e) ? t.widget_requests_allowed : t.plugin_requests_allowed;
+  return isWidget(e) ? t.widget_requests_allowed : t.plugin_requests_allowed;
 }
 export const VT = $$A0;
 export const hb = $$_1;

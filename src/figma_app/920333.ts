@@ -14,7 +14,7 @@ import { _ as _$$_ } from "../905/793009";
 import { ZT, cW } from "../figma_app/844435";
 import { qp } from "../905/977779";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { Sc } from "../905/18797";
@@ -97,7 +97,7 @@ export function $$k4() {
   }, [g, m, d]);
 }
 export function $$M8() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   let t = !!(e && e.plugins_whitelist_enforced);
   let r = !!(e && e.widgets_whitelist_enforced);
   return !t && !r;

@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { e2 } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
@@ -20,7 +20,7 @@ export function $$p0(e) {
   return jsxs(Fragment, {
     children: [jsxs(e2, {
       className: _l,
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "primary",
         disabled: p,
         onClick: () => {
@@ -38,7 +38,7 @@ export function $$p0(e) {
           })));
         },
         children: renderI18nText("bug_reporter.profiler.start")
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         disabled: !p,
         onClick: h,

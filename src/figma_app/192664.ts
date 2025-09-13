@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
@@ -12,7 +12,7 @@ import { handleAtomEvent } from "../905/502364";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { Av } from "../figma_app/622881";
@@ -100,7 +100,7 @@ let R = registerModal(function (e) {
   let L = useModalManager(e);
   return jsx(fu, {
     name: "color_management_user_color_profile_modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: L,
       width: "md",
       children: jsxs(vo, {
@@ -142,12 +142,12 @@ let R = registerModal(function (e) {
                 })]
               })
             })
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "secondary",
             children: S
           }), jsx("div", {
             className: jH
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("fullscreen.color_management.user_color_profile_modal.descriptions.affected_files")
           }), jsx("span", {

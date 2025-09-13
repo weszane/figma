@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import { e as _$$e } from "../905/149844";
 import { scopeAwareFunction } from "../905/189185";
@@ -10,7 +10,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { oY } from "../figma_app/524655";
 import { MB } from "../figma_app/835688";
 import { Ei } from "../figma_app/60023";
@@ -32,14 +32,14 @@ let $$C1 = forwardRef(function ({
   return jsxs("div", {
     "data-element-target": $$b0,
     className: "xh8yej3 xxk0z11 x78zum5 xl56j7k",
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       ref: t,
       ...Ay.props(v.addSlideButton, v.newSlideButton, C && v.buttonOpen),
       onClick: toggleTemplatePicker,
       htmlAttributes: {
         "data-fullscreen-intercept": !0,
         "data-tooltip": getI18nString("slides.carousel.add-slide-from-template"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-onboarding-key": MB
       },
       "aria-label": getI18nString("slides.carousel.add-slide-from-template"),
@@ -47,14 +47,14 @@ let $$C1 = forwardRef(function ({
         className: _$$s.noWrap.$,
         children: getI18nString("slides.carousel.new_slide")
       }), jsx(O, {})]
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       className: "x15cczae x1icplyp x1bamp8i x78zum5 x6s0dn4 xww3pen",
       onClick: E,
       recordingKey: generateRecordingKey(e, "addSlideButton"),
       htmlAttributes: {
         "data-fullscreen-intercept": !0,
         "data-tooltip": getI18nString("slides.carousel.add-blank-slide"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-shortcut-key": "create-slide",
         "data-testid": "addSlideButton"
       },

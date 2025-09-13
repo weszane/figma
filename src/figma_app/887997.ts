@@ -9,9 +9,9 @@ import { Xt } from "../figma_app/399472";
 import { showModalHandler } from "../905/156213";
 import { QE } from "../figma_app/831799";
 import { Yo } from "../figma_app/543529";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { getPluginVersion } from "../figma_app/300692";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { H } from "../figma_app/441663";
 import { Ce, Xg } from "../figma_app/878651";
 import { r } from "../905/534055";
@@ -72,7 +72,7 @@ function x({
   let v = useCallback(({
     plugin: e
   }, r) => {
-    Cu({
+    logAndTrackCTA({
       context: t,
       text: "Plugin Tile",
       pluginId: e.id
@@ -116,7 +116,7 @@ function x({
     children: [jsx(_$$A, {
       items: T,
       getAriaLabel: S,
-      viewType: XU.GRID,
+      viewType: ViewMode.GRID,
       handleOpenItem: v,
       handleContextMenu: x,
       handleDeleteKey: o.unwrapOr(!1) ? A : void 0,

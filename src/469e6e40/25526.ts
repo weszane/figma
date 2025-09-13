@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { Xf } from "../figma_app/153916";
 import { useSubscription } from "../figma_app/288654";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { k as _$$k2 } from "../7021/223482";
 import { d as _$$d } from "../469e6e40/744116";
 import { RR, y3 } from "../figma_app/307841";
@@ -17,7 +17,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription, atom, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { qB, eh as _$$eh, u0, Lh, Ks, eI as _$$eI, gx, Iq, Bq, Pz, d1, WF, _R, eN as _$$eN } from "../figma_app/425283";
 import { g as _$$g } from "../4452/983384";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
@@ -66,7 +66,7 @@ import { g7 } from "../905/939482";
 import { vu, YM } from "../figma_app/741211";
 import { N_, Ye, Oq } from "../905/332483";
 import { Um } from "../905/848862";
-import { dq, sZ } from "../905/845253";
+import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { NJ } from "../figma_app/518077";
@@ -141,16 +141,16 @@ import { zx, VU } from "../4452/650793";
 import { IU } from "../figma_app/421401";
 import { hideModal, showModalHandler, showModal, popModalStack } from "../905/156213";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { Y9, hE, nB as _$$nB, wi, jk, vo } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { $z } from "../figma_app/617427";
 import { registerModal } from "../905/102752";
 import { g as _$$g4 } from "../469e6e40/136803";
 import { OJ } from "../905/519092";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { p as _$$p3 } from "../469e6e40/348454";
 import { sx as _$$sx2 } from "../905/941192";
 import { V as _$$V2, $ as _$$$ } from "../905/355181";
@@ -178,7 +178,7 @@ import { yX } from "../figma_app/918700";
 import { A as _$$A3 } from "../svg/57540";
 import { Wi, JR } from "../figma_app/162641";
 import { In } from "../905/672640";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { UNASSIGNED } from "../905/247093";
 import { Eh } from "../figma_app/617654";
 import { Vq, v0, pL } from "../figma_app/639088";
@@ -204,7 +204,7 @@ import { h1 } from "../905/986103";
 import { W as _$$W } from "../5430/573261";
 import { N as _$$N3 } from "../905/551536";
 import { A as _$$A7 } from "../5724/933949";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { H8, Pf } from "../905/590952";
 import { J as _$$J3 } from "../905/403084";
 import { re } from "../469e6e40/421552";
@@ -233,7 +233,7 @@ function V(e) {
       return jsx(rq, {
         arrowPosition,
         clickOutsideToHide: !0,
-        description: jsx(_$$E, {
+        description: jsx(TextWithTruncation, {
           children: renderI18nText("org_admin_onboarding.tooltip.create_first_workspace.description")
         }),
         emphasized: !0,
@@ -241,7 +241,7 @@ function V(e) {
         onClose: complete,
         onTargetLost: complete,
         primaryCta: {
-          label: jsx(_$$E, {
+          label: jsx(TextWithTruncation, {
             children: renderI18nText("general.next")
           }),
           type: "button",
@@ -254,7 +254,7 @@ function V(e) {
           totalNumSteps: 2
         },
         targetKey: l,
-        title: jsx(_$$E, {
+        title: jsx(TextWithTruncation, {
           children: renderI18nText("org_admin_onboarding.tooltip.create_first_workspace.title")
         }),
         trackingContextName: `${_$$eh} - create first workspace`,
@@ -264,7 +264,7 @@ function V(e) {
       return jsx(rq, {
         arrowPosition,
         clickOutsideToHide: !0,
-        description: jsx(_$$E, {
+        description: jsx(TextWithTruncation, {
           children: renderI18nText("org_admin_onboarding.tooltip.create_first_billing_group.description")
         }),
         emphasized: !0,
@@ -272,7 +272,7 @@ function V(e) {
         onClose: complete,
         onTargetLost: complete,
         primaryCta: {
-          label: jsx(_$$E, {
+          label: jsx(TextWithTruncation, {
             children: renderI18nText("general.got_it")
           }),
           type: "button",
@@ -285,7 +285,7 @@ function V(e) {
           totalNumSteps: 2
         },
         targetKey: u0,
-        title: jsx(_$$E, {
+        title: jsx(TextWithTruncation, {
           children: renderI18nText("org_admin_onboarding.tooltip.create_first_billing_group.title")
         }),
         trackingContextName: `${_$$eh} - create first billing group`,
@@ -1417,7 +1417,7 @@ class tZ extends PureComponent {
   handleScroll = () => {
     !this.canLoadMore() || this.scrollContainerRef.getScrollHeight() - (this.scrollContainerRef.getScrollTop() + this.scrollContainerRef.getTrackHeight()) > 300 || this.loadMore();
   };
-  renderLogResults = () => this.props.activityLogs.isLoading && this.props.activityLogs.isNewQuery ? jsx(qc, {}) : this.state.filteredActivityLogs.length > 0 ? jsxs("div", {
+  renderLogResults = () => this.props.activityLogs.isLoading && this.props.activityLogs.isNewQuery ? jsx(LoadingOverlay, {}) : this.state.filteredActivityLogs.length > 0 ? jsxs("div", {
     children: [jsx(zR, {
       logs: this.state.filteredActivityLogs,
       org: this.props.org,
@@ -1425,7 +1425,7 @@ class tZ extends PureComponent {
       hideIpColumn: this.props.hideIpColumn
     }), jsx("div", {
       className: "activity_logs_section--tableNavigation--44R60",
-      children: this.props.activityLogs.isLoading && !this.props.activityLogs.isNewQuery ? jsx(qc, {}) : this.canLoadMore() && jsx($$, {
+      children: this.props.activityLogs.isLoading && !this.props.activityLogs.isNewQuery ? jsx(LoadingOverlay, {}) : this.canLoadMore() && jsx($$, {
         onClick: this.loadMore,
         children: renderI18nText("activity_log.table.load_more")
       })
@@ -1818,10 +1818,10 @@ let aw = registerModal(function (e) {
     properties: {
       numLicenseGroups: e.licenseGroups.length
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: n,
       width: 372,
-      children: jsxs(Rq, {
+      children: jsxs(ModalFormContents, {
         onSubmit: _ ? n => {
           n.preventDefault();
           XHR.del(`/api/orgs/${o}/license_groups`, {
@@ -1861,7 +1861,7 @@ let aw = registerModal(function (e) {
             children: [jsx("h3", {
               children: renderI18nText("billing_groups_table.delete_modal.deleting_the_billing_groups_will_cause", {
                 licenseGroupsCount: e.licenseGroups.length,
-                licenseGroupsNames: jsx(_$$E, {
+                licenseGroupsNames: jsx(TextWithTruncation, {
                   fontWeight: "bold",
                   children: formatList(c)
                 })
@@ -1884,7 +1884,7 @@ let aw = registerModal(function (e) {
           })]
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: e.onClose,
               children: renderI18nText("general.cancel")
@@ -1925,13 +1925,13 @@ function aC({
       children: [!c && jsxs(AutoLayout, {
         direction: "vertical",
         spacing: 0,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           children: renderI18nText("billing_groups_table.edit_billing_group_modal.add_people_to_a_billing_group.seat_rename")
         }), jsx(CY, {
           trusted: !0,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/19100885191191",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("general.learn_more")
           })
         })]
@@ -1941,7 +1941,7 @@ function aC({
           width: "fill-parent",
           direction: "vertical",
           spacing: 8,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             fontWeight: "medium",
             children: renderI18nText("billing_groups_table.name_input")
           }), jsx(ks, {
@@ -1956,10 +1956,10 @@ function aC({
             },
             value: a,
             maxLength: TA
-          }), "unassigned" === r && jsx(_$$E, {
+          }), "unassigned" === r && jsx(TextWithTruncation, {
             color: "danger",
             children: renderI18nText("billing_groups_table.billing_group_name_unassigned_error")
-          }), "duplicated" === r && jsx(_$$E, {
+          }), "duplicated" === r && jsx(TextWithTruncation, {
             color: "danger",
             children: renderI18nText("billing_groups_table.billing_group_name_already_exists_error")
           })]
@@ -1970,7 +1970,7 @@ function aC({
           className: "license_group_edit_modal--inputLabel--ir31K",
           children: renderI18nText("billing_groups_table.admins_input")
         }), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("billing_groups_table.admins_input_help_text")
           })
@@ -2006,8 +2006,8 @@ function aC({
 let aS = registerModal(function (e) {
   let t = useDispatch();
   let [a, n] = useState(null);
-  let l = dq();
-  let o = sZ();
+  let l = useCurrentUserOrgId();
+  let o = useCurrentUserOrg();
   let d = MX();
   let _ = Xr(t7);
   let u = !!e.licenseGroup;
@@ -2199,7 +2199,7 @@ function aL({
     },
     "data-preferred-theme": "light",
     "data-testid": "incomplete-groups-count-badge",
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: "default",
       fontWeight: "medium",
       children: e
@@ -2226,9 +2226,9 @@ function aU(e) {
     }) : jsxs(AutoLayout, {
       spacing: 4,
       padding: 0,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText("workspace_table.unassigned")
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("workspace_table.unassigned_row_default")
       })]
@@ -2383,7 +2383,7 @@ function aU(e) {
               spacing: "4px",
               children: [jsx(aL, {
                 count: g
-              }), jsx(_$$E, {
+              }), jsx(TextWithTruncation, {
                 children: renderI18nText("billing_groups_table.unconfirmed_billing_groups")
               })]
             })
@@ -2433,7 +2433,7 @@ function aB({
       strokeWidth: 1,
       strokeColor: "default"
     }),
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       color: "secondary",
       children: renderI18nText("org_admin_settings.billing.no_billing_groups_yet")
@@ -2442,14 +2442,14 @@ function aB({
       style: _$$sx2.add({
         maxWidth: "540px"
       }).$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("org_admin_settings.billing.billing_groups_empty_text.seat_rename", {
           learnMoreLink: jsx(CY, {
             trusted: !0,
             target: "_blank",
             href: "https://help.figma.com/hc/articles/19100885191191",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("general.learn_more")
             })
           })
@@ -3046,7 +3046,7 @@ let nk = registerModal(function (e) {
         }), a && jsxs("div", {
           className: "workspace_edit_modal--banner--aEtck",
           style: _$$sx2.mb32.p16.flex.itemsCenter.bRadius6.$,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: _$$s.mr16.$,
             svg: _$$A3,
             useOriginalSrcFills_DEPRECATED: !0
@@ -3103,7 +3103,7 @@ function nS() {
   return jsx(rq, {
     arrowPosition: F_.LEFT_TITLE,
     clickOutsideToHide: !0,
-    description: jsx(_$$E, {
+    description: jsx(TextWithTruncation, {
       children: renderI18nText("org_admin_onboarding.tooltip.workspace_add_teams.description")
     }),
     emphasized: !0,
@@ -3147,7 +3147,7 @@ let nL = registerModal(function (e) {
         className: _$$s.font11.p16.$,
         children: [renderI18nText("workspace_table.deleting_the_workspaces_will_cause", {
           licenseGroupsCount: e.workspaces.length,
-          licenseGroupsNames: jsx(_$$E, {
+          licenseGroupsNames: jsx(TextWithTruncation, {
             fontWeight: "bold",
             children: formatList(o)
           })
@@ -3426,11 +3426,11 @@ function n$() {
         })
       }), jsx("div", {
         className: "x2b8uid x1e56ztr",
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 14,
           children: renderI18nText("workspace_table.empty_state.subtitle")
         })
-      }), jsx($n, {
+      }), jsx(Button, {
         "aria-label": getI18nString("settings_tab.add_workspace_label"),
         iconPrefix: jsx(_$$e5, {}),
         onClick: t,
@@ -3451,7 +3451,7 @@ function n$() {
             horizontalAlignItems: "space-between",
             spacing: "64px",
             children: [jsx(nq, {
-              asset: jsx(_$$B, {
+              asset: jsx(SvgComponent, {
                 svg: _$$A4,
                 className: "x1ja3g5x"
               }),
@@ -3462,7 +3462,7 @@ function n$() {
               title: getI18nString("workspace_table.empty_state.approve_libraries_and_assets"),
               subtitle: getI18nString("workspace_table.empty_state.approve_libraries.subtitle")
             }), jsx(nq, {
-              asset: jsx(_$$B, {
+              asset: jsx(SvgComponent, {
                 svg: _$$A5,
                 className: "x1ja3g5x"
               }),
@@ -3518,7 +3518,7 @@ function nz(e) {
       className: _$$s.wFitContent.hFitContent.$,
       children: e.name
     }), e.orgAccess === FAccessLevelType.SECRET && jsx("div", {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("workspace_table.secret_workspace_lock_tooltip"),
       "data-tooltip-subtext": getI18nString("workspace_table.secret_workspace_lock_tooltip_subtext"),
       "data-tooltip-show-above": !0,
@@ -3531,9 +3531,9 @@ function nz(e) {
   }) : jsxs(AutoLayout, {
     spacing: 4,
     padding: 0,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       children: renderI18nText("workspace_table.unassigned")
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("workspace_table.unassigned_row_default")
     })]
@@ -3573,7 +3573,7 @@ function nz(e) {
             backgroundColor: "onselected",
             text: `${a.length}`,
             size: 22
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             truncate: !0,
             children: i
           })]
@@ -3640,7 +3640,7 @@ function nz(e) {
     variant: "primary",
     icon: "plus-32",
     onClick: k,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("workspace_table.create_workspace_button")
     })
   }), [k]);
@@ -3826,7 +3826,7 @@ function nX() {
 function n4(e) {
   let t = useDispatch();
   let a = Z5();
-  let n = e.activeTab === M7.ALL_MEMBERS ? jsx($n, {
+  let n = e.activeTab === M7.ALL_MEMBERS ? jsx(Button, {
     variant: "primary",
     onClick: () => {
       let n = e.filters.workspaceFilter ?? void 0;
@@ -3853,7 +3853,7 @@ function n4(e) {
     "aria-label": getI18nString("members_table.invite_users_button"),
     iconPrefix: jsx(_$$x, {}),
     children: renderI18nText("members_table.invite_users_button")
-  }) : jsx($n, {
+  }) : jsx(Button, {
     variant: "primary",
     onClick: () => {},
     "aria-label": getI18nString("members_table.create_user_group_button"),
@@ -3960,12 +3960,12 @@ function n9(e) {
     onGoToSettings
   } = e;
   let n = "plugin" === extensionType ? renderI18nText("resources_tab.approved_plugins.plugin_approval_banner.text", {
-    settingName: jsx(_$$E, {
+    settingName: jsx(TextWithTruncation, {
       fontWeight: "medium",
       children: renderI18nText("settings_tab.plugin_approval_label")
     })
   }) : renderI18nText("resources_tab.approved_widgets.widget_approval_banner.text", {
-    settingName: jsx(_$$E, {
+    settingName: jsx(TextWithTruncation, {
       fontWeight: "medium",
       children: renderI18nText("settings_tab.widget_admin_approval_label")
     })
@@ -3991,9 +3991,9 @@ function so(e) {
     onAddExtension,
     extensionType
   } = e;
-  let n = "plugin" === extensionType ? jsx(_$$E, {
+  let n = "plugin" === extensionType ? jsx(TextWithTruncation, {
     children: renderI18nText("resources_tab.approved_plugins.no_plugins.text")
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     children: renderI18nText("resources_tab.approved_widgets.no_widgets.text")
   });
   let i = "plugin" === extensionType ? renderI18nText("resources_tab.approved_plugins.no_plugins.add_plugins_button") : renderI18nText("resources_tab.approved_widgets.no_widgets.add_widgets_button");
@@ -4124,7 +4124,7 @@ function su({
     "data-testid": "extension-allowlist-table",
     children: [jsx("div", {
       className: _$$s.pl32.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
         children: renderI18nText("resources_tab.approved_plugins.table.approved_header")
@@ -4213,7 +4213,7 @@ function sm({
         field: "name",
         sortBy: () => t("name"),
         isDescending: !a.isReversed,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "default",
           children: renderI18nText("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
         })
@@ -4222,7 +4222,7 @@ function sm({
       style: _$$sx2.add({
         width: "40%"
       }).$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
@@ -4235,7 +4235,7 @@ function sm({
         field: "approved",
         sortBy: () => t("approved"),
         isDescending: !a.isReversed,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "default",
           children: renderI18nText("resources_tab.approved_plugins.table.approved_column")
         })
@@ -4244,7 +4244,7 @@ function sm({
       style: _$$sx2.add({
         width: "20%"
       }).justifyStart.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.approved_for_column")
       })
@@ -4270,15 +4270,15 @@ function sp({
       src: t ?? "",
       alt: "approved for workspace",
       className: _$$s.w24.h24.bRadius6.$
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       children: e
-    }), !!a && a > 0 && jsx(_$$B, {
+    }), !!a && a > 0 && jsx(SvgComponent, {
       width: "16px",
       height: "16px",
       svg: _$$A7,
       className: "extension_allowlist_table--greenCheck---4jlH",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("resources_tab.approved_plugins.table.already_approved", {
         numWorkspaces: a
       })
@@ -4294,7 +4294,7 @@ function sg({
     style: _$$sx2.add({
       width: "40%"
     }).$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       truncate: !0,
       showTooltipWhenTruncated: !1,
       children: stripHtmlTags(t || e || "")
@@ -4319,7 +4319,7 @@ function sx({
   openAllowlistModal: t
 }) {
   let a = useMemo(() => {
-    if (e.allowlistGroups.some(e => "Org" === e.type)) return jsx(_$$E, {
+    if (e.allowlistGroups.some(e => "Org" === e.type)) return jsx(TextWithTruncation, {
       children: renderI18nText("resources_tab.approved_plugins.table.entire_org")
     });
     let a = e.allowlistGroups[0];
@@ -4327,7 +4327,7 @@ function sx({
     if (e.allowlistGroups.length > 1) {
       let a = e.allowlistGroups.map(e => e.name).join("\n");
       return jsx("button", {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": a,
         "data-tooltip-text-left": !0,
         type: "button",
@@ -4336,7 +4336,7 @@ function sx({
           e.stopPropagation();
           t("edit");
         },
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "brand",
           children: renderI18nText("resources_tab.approved_plugins.table.n_workspaces_approved_for", {
             numberOfWorkspaces: e.allowlistGroups.length
@@ -4398,7 +4398,7 @@ let sy = registerModal(function ({
     open: n,
     onClose: l
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: h,
     width: "md",
     htmlAttributes: {
@@ -4417,14 +4417,14 @@ let sy = registerModal(function ({
             src: iconUrl ?? "",
             alt: "plugin icon",
             className: _$$s.w24.h24.bRadius6.mr8.$
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             fontWeight: "medium",
             truncate: !0,
             children: name
           })]
         }), jsx("div", {
           className: _$$s.mb16.$,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: g
           })
         }), jsx("textarea", {
@@ -4436,11 +4436,11 @@ let sy = registerModal(function ({
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: l,
             children: getI18nString("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: () => p(a),
             children: getI18nString("resources_tab.approved_plugins.modal.decline")
@@ -4525,7 +4525,7 @@ function sC({
         field: "name",
         sortBy: () => t("name"),
         isDescending: !a.isReversed,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "default",
           children: renderI18nText("plugin" === e ? "resources_tab.approved_plugins.table.plugin_name_column" : "resources_tab.approved_plugins.table.widget_name_column")
         })
@@ -4534,7 +4534,7 @@ function sC({
       style: _$$sx2.add({
         width: "40%"
       }).$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.description_column")
       })
@@ -4547,7 +4547,7 @@ function sC({
         field: "last_requested",
         sortBy: () => t("last_requested"),
         isDescending: !a.isReversed,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "default",
           children: renderI18nText("resources_tab.approved_plugins.table.last_requested_column")
         })
@@ -4556,7 +4556,7 @@ function sC({
       style: _$$sx2.add({
         width: "20%"
       }).justifyStart.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "default",
         children: renderI18nText("resources_tab.approved_plugins.table.requested_by_column")
       })
@@ -4594,12 +4594,12 @@ function sN({
         user: t
       }), jsxs("div", {
         className: _$$s.flex.flexColumn.ml8.$,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           color: "default",
           fontSize: 11,
           fontWeight: "medium",
           children: t.name
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           color: "secondary",
           fontSize: 11,
           children: t.email
@@ -4613,10 +4613,10 @@ function sN({
       style: _$$sx2.add({
         backgroundColor: "inherit"
       }).$,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": n,
       "data-tooltip-text-left": !0,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: "brand",
         children: renderI18nText("resources_tab.approved_plugins.table.members", {
@@ -4643,7 +4643,7 @@ function sI() {
       width: "10%"
     }).$,
     children: jsx($$, {
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.approved_plugins.table.review_button")
       })
     })
@@ -4738,7 +4738,7 @@ function sA(e) {
     reportError(_$$e.EXTENSIBILITY, Error("Failed to load plugin requests"));
     return null;
   }
-  let _ = oA(c.data.org);
+  let _ = getResourceDataOrFallback(c.data.org);
   if (!_) return null;
   let {
     pendingPluginRequests
@@ -4752,7 +4752,7 @@ function sA(e) {
     className: _$$s.pb32.$,
     children: [jsx("div", {
       className: _$$s.pl32.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
         children: renderI18nText("resources_tab.approved_plugins.table.requested_header")
@@ -4966,7 +4966,7 @@ export function $$s$0(e) {
   let a = FC();
   let n = useTeamPlanUser();
   let l = useIsOrgAdminUser(n);
-  let o = sZ();
+  let o = useCurrentUserOrg();
   let d = NJ(o.id);
   let c = "loaded" === l.status && _$$nb({
     isAdminOrg: l.data,
@@ -4979,7 +4979,7 @@ export function $$s$0(e) {
       view: "resourceUnavailable"
     }));
   }, [t, c]), "loading" === l.status || "loading" === d.status) ? jsx(_$$p2, {
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   }) : jsx(sB, {
     ...e,
     isOrgAdmin: !!l.data,
@@ -4989,7 +4989,7 @@ export function $$s$0(e) {
 function sB(e) {
   var t;
   let a = useDispatch();
-  let n = sZ();
+  let n = useCurrentUserOrg();
   let v = useSelector(({
     orgDomains: e
   }) => e);
@@ -5109,7 +5109,7 @@ function sB(e) {
     bigma_enabled: R,
     security_add_on_enabled_at: n.security_add_on_enabled_at
   });
-  let es = dq();
+  let es = useCurrentUserOrgId();
   let el = Xf(es);
   let eu = "loading" === el.status;
   let eA = el.data?.invoices;
@@ -5118,13 +5118,13 @@ function sB(e) {
   let eW = el.data?.has_billing_address || !1;
   let eH = null;
   let eY = null;
-  eY = e.selectedTab === J7.DASHBOARD || e.selectedTab === J7.CONTENT ? jsx(qc, {}) : e.selectedTab === J7.RESOURCES ? jsx(_$$p2, {
-    children: jsx(qc, {})
+  eY = e.selectedTab === J7.DASHBOARD || e.selectedTab === J7.CONTENT ? jsx(LoadingOverlay, {}) : e.selectedTab === J7.RESOURCES ? jsx(_$$p2, {
+    children: jsx(LoadingOverlay, {})
   }) : jsxs("div", {
     className: kL,
     children: [jsx(_$$K2, {
       title: _$$O(e.selectedTab, e.selectedSecondaryTab)
-    }), jsx(qc, {})]
+    }), jsx(LoadingOverlay, {})]
   });
   let eJ = useSubscription(OrgTeamsIdAndName({
     orgId: n.id

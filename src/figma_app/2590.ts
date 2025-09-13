@@ -7,7 +7,7 @@ import { reportError } from "../905/11";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { hY, qt } from "../figma_app/349969";
-import { ds, GS } from "../figma_app/314264";
+import { trackFileEvent, trackDefinedFileEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
 import { U2 } from "../figma_app/193867";
@@ -185,7 +185,7 @@ let $$N8 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.params || {};
   let i = U2(r.selectedView);
-  ds(t.name, i, r, n);
+  trackFileEvent(t.name, i, r, n);
 });
 let $$C7 = (() => {
   let e = createOptimistThunk((e, t) => {
@@ -196,7 +196,7 @@ let $$C7 = (() => {
       reportError(_$$e.PROTOTYPING, Error("No file key for prototype event"));
       return;
     }
-    GS(t.name, a, r, n);
+    trackDefinedFileEvent(t.name, a, r, n);
   });
   return ({
     name: t,

@@ -16,7 +16,7 @@ import { Xu, Uo, UF } from "../figma_app/354658";
 import { YW } from "../figma_app/350203";
 import { Dm as _$$Dm } from "../figma_app/8833";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { vt as _$$vt, H0, U, I0, xQ, bD } from "../figma_app/45218";
+import { ResourceTypeNoComment, isMonetizedOrThirdParty, hasClientMeta, isPlugin, isWidget, ResourceType } from "../figma_app/45218";
 import { LE } from "../905/71785";
 import { o1 } from "../figma_app/10554";
 import { createEmptyAddress } from "../figma_app/831101";
@@ -85,8 +85,8 @@ export function $$V34(e) {
   }
 }
 export function $$H31(e, t) {
-  t.resourceType !== _$$L.BrowseResourceTypes.MIXED && (e = e.filter(e => t.resourceType === _$$L.BrowseResourceTypes.FILES ? Vm(e) === _$$vt.HUB_FILE : t.resourceType === _$$L.BrowseResourceTypes.PLUGINS ? Vm(e) === _$$vt.PLUGIN : t.resourceType === _$$L.BrowseResourceTypes.WIDGETS ? Vm(e) === _$$vt.WIDGET : void 0));
-  t.price === _$$C.PAID ? e = e.filter(e => H0(e)) : t.price === _$$C.FREE && (e = e.filter(e => !H0(e)));
+  t.resourceType !== _$$L.BrowseResourceTypes.MIXED && (e = e.filter(e => t.resourceType === _$$L.BrowseResourceTypes.FILES ? Vm(e) === ResourceTypeNoComment.HUB_FILE : t.resourceType === _$$L.BrowseResourceTypes.PLUGINS ? Vm(e) === ResourceTypeNoComment.PLUGIN : t.resourceType === _$$L.BrowseResourceTypes.WIDGETS ? Vm(e) === ResourceTypeNoComment.WIDGET : void 0));
+  t.price === _$$C.PAID ? e = e.filter(e => isMonetizedOrThirdParty(e)) : t.price === _$$C.FREE && (e = e.filter(e => !isMonetizedOrThirdParty(e)));
   t.editor_type && t.editor_type !== _$$k.Editors.ALL && (e = e.filter(e => function (e, t) {
     if ($$W13(e)) return !!(t === _$$k.Editors.FIGMA && $$z26.includes(e.viewer_mode)) || t === _$$k.Editors.FIGJAM && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || t === _$$k.Editors.PROTOTYPE && e.viewer_mode === FTemplateCategoryType.PROTOTYPE || t === _$$k.Editors.SLIDES && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE || t === _$$k.Editors.SITES && e.viewer_mode === FTemplateCategoryType.SITE_TEMPLATE || t === _$$k.Editors.COOPER && e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE || t === _$$k.Editors.FIGMAKE && e.viewer_mode === FTemplateCategoryType.FIGMAKE_TEMPLATE;
     {
@@ -114,11 +114,11 @@ export function $$Y24(e) {
 export function $$$6(e) {
   return function (e) {
     switch (e) {
-      case _$$vt.HUB_FILE:
+      case ResourceTypeNoComment.HUB_FILE:
         return Uo.FILE;
-      case _$$vt.PLUGIN:
+      case ResourceTypeNoComment.PLUGIN:
         return Uo.PLUGIN;
-      case _$$vt.WIDGET:
+      case ResourceTypeNoComment.WIDGET:
         return Uo.WIDGET;
     }
   }(Vm(e));
@@ -148,11 +148,11 @@ export function $$q35(e, {
 } = {}) {
   let r = Vm(e);
   switch (r) {
-    case _$$vt.HUB_FILE:
+    case ResourceTypeNoComment.HUB_FILE:
       return t ? UF.FILE : Uo.FILE;
-    case _$$vt.PLUGIN:
+    case ResourceTypeNoComment.PLUGIN:
       return t ? UF.PLUGIN : Uo.PLUGIN;
-    case _$$vt.WIDGET:
+    case ResourceTypeNoComment.WIDGET:
       return t ? UF.WIDGET : Uo.WIDGET;
     default:
       throwTypeError(r);
@@ -281,7 +281,7 @@ export function $$em12(e) {
   return Object.entries(t).sort(([e], [t]) => parseInt(e) - parseInt(t)).map(([e, t]) => t);
 }
 export function $$eg16(e) {
-  return !!getFeatureFlags().cmty_rdp_creator_nudges && (U(e) && e.viewer_mode !== FTemplateCategoryType.PROTOTYPE ? 1 === Object.keys(e.carousel_media_urls ?? {}).length : !!(I0(e) || xQ(e)) && 0 === Object.keys(e.carousel_videos ?? {}).length);
+  return !!getFeatureFlags().cmty_rdp_creator_nudges && (hasClientMeta(e) && e.viewer_mode !== FTemplateCategoryType.PROTOTYPE ? 1 === Object.keys(e.carousel_media_urls ?? {}).length : !!(isPlugin(e) || isWidget(e)) && 0 === Object.keys(e.carousel_videos ?? {}).length);
 }
 export function $$ef11(e, {
   pluralized: t,
@@ -293,13 +293,13 @@ export function $$ef11(e, {
   } = {}) {
     return ey((() => {
       switch (e) {
-        case _$$vt.PLUGIN:
+        case ResourceTypeNoComment.PLUGIN:
           return "plugin";
-        case _$$vt.WIDGET:
+        case ResourceTypeNoComment.WIDGET:
           return "widget";
         case "comment":
           return "comment";
-        case _$$vt.HUB_FILE:
+        case ResourceTypeNoComment.HUB_FILE:
           return "hub file";
         default:
           throw Error("Unsupported Type");
@@ -317,10 +317,10 @@ export function $$eE30(e, {
   pluralized: t,
   capitalized: r
 } = {}) {
-  return e ? ey(bD.WIDGET, {
+  return e ? ey(ResourceType.WIDGET, {
     pluralized: t,
     capitalized: r
-  }) : ey(bD.PLUGIN, {
+  }) : ey(ResourceType.PLUGIN, {
     pluralized: t,
     capitalized: r
   });

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk, Wk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
 import { U as _$$U } from "../0c62c2fd/547944";
@@ -11,7 +11,7 @@ import { xf } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { ks, wG } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -287,7 +287,7 @@ export function $$er0(e) {
       teamId: el?.id,
       ...H
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: eC,
       width: "lg",
       children: jsxs("div", {
@@ -302,7 +302,7 @@ export function $$er0(e) {
           }), jsx(nB, {
             children: eo ? eS : jsx("div", {
               className: "folder_creation_modal--loading--9KmQd",
-              children: jsx(qc, {})
+              children: jsx(LoadingOverlay, {})
             })
           }), eo && jsxs(wi, {
             children: [jsx("div", {

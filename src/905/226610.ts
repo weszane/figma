@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b } from "../905/985254";
 import { logger } from "../905/651849";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 function y() {
   return debugState || (logDebug("Labs", "No global redux store set, so creating a mock store with empty userFlags"), y$(() => ({
     userFlags: {},
@@ -132,7 +132,7 @@ class b {
     newValue: i,
     source: n
   }) {
-    uE("labs", {
+    trackUserEvent("labs", {
       user: e
     }, {
       name: this.name,

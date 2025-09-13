@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -17,7 +17,7 @@ export function $$v0(e) {
     open: !0,
     onClose: s
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: v,
     width: 360,
     children: jsxs(vo, {
@@ -34,7 +34,7 @@ export function $$v0(e) {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "secondary",
             onClick: s,
             children: renderI18nText("general.ok")

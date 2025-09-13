@@ -14,8 +14,8 @@ import { I8, TA } from "../905/667970";
 import { Hc, p8, sT } from "../905/694658";
 import { T as _$$T } from "../905/745591";
 import A from "classnames";
-import { qc, nt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingOverlay, LargeLoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { c as _$$c } from "../905/370443";
 import { tf, fu } from "../figma_app/831799";
 import { A as _$$A } from "../6828/71291";
@@ -37,7 +37,7 @@ import { popModalStack } from "../905/156213";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { xf } from "../figma_app/416935";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k as _$$k3 } from "../905/443820";
 import { trackEventAnalytics } from "../905/449184";
 import { a as _$$a } from "../905/10468";
@@ -107,7 +107,7 @@ function v(e) {
     },
     ref: i,
     "data-testid": "auth-form",
-    children: e.isLoading ? jsx(qc, {}) : jsxs(Fragment, {
+    children: e.isLoading ? jsx(LoadingOverlay, {}) : jsxs(Fragment, {
       children: [e.header || e.subtitle || e.auth.hint || !e.hideError && e.auth.error ? jsx(Fragment, {
         children: jsxs("div", {
           className: "auth_form--topMatter--M-mkE",
@@ -156,12 +156,12 @@ function k(e) {
     disabled: e.disabled || loading,
     children: jsxs("span", {
       className: y()("brand_buttons--brandButtonContent--HPB3u", "hollow" !== e.use && "brand_buttons--standardButtonContent--5k3-s"),
-      children: ["hollow" === e.use || !loading && e.disabled ? null : loading ? jsx(_$$B, {
+      children: ["hollow" === e.use || !loading && e.disabled ? null : loading ? jsx(SvgComponent, {
         svg: _$$A3,
         width: "24px",
         height: "24px",
         className: S
-      }) : jsx(_$$B, {
+      }) : jsx(SvgComponent, {
         svg: _$$A,
         width: "24px",
         height: "24px",
@@ -183,7 +183,7 @@ let N = tf(function ({
     "data-no-auto-focus": !0,
     children: jsxs("div", {
       className: "brand_buttons--googleButtonInner--rIDqs",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: "brand_buttons--googleIcon--IEI1u",
         autosize: !0,
         width: "18px",
@@ -274,7 +274,7 @@ function j(e) {
       className: "verify_human_form--modalContainer--7IjzI",
       title: " ",
       isCloseHidden: !0,
-      children: [jsx(nt, {}), jsx("h1", {
+      children: [jsx(LargeLoadingSpinner, {}), jsx("h1", {
         className: "verify_human_form--title--iErts",
         children: getI18nString("auth.captcha.captcha_is_loading")
       }), l && jsxs(Fragment, {
@@ -739,7 +739,7 @@ function ey(e) {
         children: [getI18nString("auth.not-seeing-the-browser-tab"), " ", jsx("div", {
           tabIndex: -1,
           className: eg,
-          children: jsx($n.Link, {
+          children: jsx(Button.Link, {
             onClick: () => {
               clearTimeout(t.current);
               s(!1);
@@ -787,7 +787,7 @@ function ey(e) {
         children: [getI18nString("auth.no-account"), " ", jsx("div", {
           tabIndex: -1,
           className: eg,
-          children: jsx($n.Link, {
+          children: jsx(Button.Link, {
             onClick: () => {
               e_(!0, e.appType, d, l);
             },
@@ -908,7 +908,7 @@ function eb(e) {
         logInLink: jsx("div", {
           tabIndex: -1,
           className: eg,
-          children: jsx($n.Link, {
+          children: jsx(Button.Link, {
             onClick: () => {
               I();
               d(_$$E({
@@ -1127,7 +1127,7 @@ function eM({
   }, [t, e, i, s]);
   return jsx("div", {
     className: "google_sso_redirect--redirectOverlay--w8Of5",
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   });
 }
 function ej(e) {

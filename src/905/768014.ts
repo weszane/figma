@@ -1,7 +1,7 @@
-import { A } from "../905/268204";
+import { isBrowser } from "../905/268204";
 let r = ["mouse", "touch", "pen"];
 let a = {
-  element: A ? document.body : null,
+  element: isBrowser ? document.body : null,
   type: "pointer",
   device: "mouse",
   key: "",
@@ -26,5 +26,5 @@ function l(e) {
 function d(e) {
   e?.nodeType === 1 ? a.element = e : a.element = document.body;
 }
-A && (window.addEventListener("pointerdown", o, !0), window.addEventListener("pointerup", o, !0), window.addEventListener("keydown", l, !0), window.addEventListener("keyup", l, !0));
+isBrowser && (window.addEventListener("pointerdown", o, !0), window.addEventListener("pointerup", o, !0), window.addEventListener("keydown", l, !0), window.addEventListener("keyup", l, !0));
 export const F = $$s0;

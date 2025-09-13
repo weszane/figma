@@ -25,7 +25,7 @@ import { $5 } from "../figma_app/869006";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -38,7 +38,7 @@ import { yl, DD, jE, v0 } from "../figma_app/639088";
 import { s_ } from "../905/17223";
 import { nR } from "../figma_app/637027";
 import { Be } from "../905/172516";
-import { Hb } from "../figma_app/314264";
+import { incrementReconnectCounter } from "../figma_app/314264";
 import { qp } from "../905/977779";
 import { J as _$$J } from "../905/915227";
 import { Yq } from "../figma_app/305244";
@@ -119,7 +119,7 @@ function W(e) {
       children: t.message
     }), jsx("div", {
       className: v0,
-      children: jsxs($n, {
+      children: jsxs(Button, {
         onClick: () => {
           e.dispatch(hideModal());
         },
@@ -156,7 +156,7 @@ function K(e) {
       children: renderI18nText("multiplayer_connection_error.too_many_connections.content")
     }), !desktopAPIInstance && jsx("div", {
       className: v0,
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick: t,
         children: renderI18nText("multiplayer_connection_error.too_many_connections.view_only_button")
       })
@@ -409,7 +409,7 @@ export class $$eu0 {
     if (!e) throw Error("buildMultiplayerUrl: fileKey must be defined");
     let m = this.store.getState().selectedView;
     let h = "fullscreen" === m.view ? DH(m.editorType) : void 0;
-    l === FileLoadEvent.RECONNECT && Hb();
+    l === FileLoadEvent.RECONNECT && incrementReconnectCounter();
     let g = new URL(mpGlobal.url({
       fileKey: e,
       role: "editor",

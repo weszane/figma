@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
 import { _ as _$$_, S } from "../figma_app/490799";
@@ -53,7 +53,7 @@ function I(e) {
   let E = e.planName ?? getI18nString("general.fallback_team_name");
   return jsx(fu, {
     name: "Asset Transfer Admin List Modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: a,
       width: "lg",
       children: jsxs(vo, {

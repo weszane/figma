@@ -3,14 +3,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useDialogClose } from "../905/749786";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { setupAutofocusHandler } from "../905/128376";
-import { Rq, bL } from "../905/38914";
+import { ModalFormContents, ModalRootComponent } from "../905/38914";
 import { useModalManager } from "../905/437088";
 import { getResourceDataOrFallback } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { zd, Bb, B7 } from "../905/651696";
-import { R as _$$R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -19,7 +19,7 @@ import { rH, nm, uN } from "../905/264101";
 import { Z } from "../905/854480";
 import { hasPasswordOrSSO, selectCurrentUser } from "../905/372672";
 import { CurrentUserIsMfaRequiredByMembershipOrgView } from "../figma_app/43951";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { _ as _$$_ } from "../905/799322";
 import { t as _$$t2 } from "../905/751495";
@@ -50,22 +50,22 @@ function R({
     }), jsx(wi, {
       children: jsxs("div", {
         className: Hx,
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "link",
           onClick: () => {
             e(!0);
           },
           disabled: d,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": d ? getI18nString("auth.two-factor-setup.disable-two-factor-blocked") : "",
           children: renderI18nText("auth.two-factor-setup.unregister_sms_number")
         }), jsxs("div", {
           className: G6,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: r,
             children: renderI18nText("auth.two-factor-setup.close")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               r();
               i(N$());
@@ -86,7 +86,7 @@ function N({
   let s = useDispatch();
   let u = k();
   let p = setupAutofocusHandler();
-  return jsxs(Rq, {
+  return jsxs(ModalFormContents, {
     onSubmit: e => {
       let t = e.target.elements.namedItem("code");
       t.select();
@@ -114,17 +114,17 @@ function N({
     }), jsx(wi, {
       children: jsxs("div", {
         className: Hx,
-        children: [t ? getI18nString("auth.two-factor-setup.code_resent") : jsx($n, {
+        children: [t ? getI18nString("auth.two-factor-setup.code_resent") : jsx(Button, {
           variant: "link",
           onClick: i,
           children: renderI18nText("auth.two-factor-setup.resend_code")
         }), jsxs("div", {
           className: G6,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: u,
             children: renderI18nText("auth.two-factor-setup.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             type: "submit",
             children: renderI18nText("auth.two-factor-setup.verify")
           })]
@@ -141,7 +141,7 @@ function P({
   let r = Z();
   let s = useDispatch();
   let u = k();
-  return jsxs(Rq, {
+  return jsxs(ModalFormContents, {
     onSubmit: e,
     children: [jsx(Y9, {
       children: jsx(hE, {
@@ -164,7 +164,7 @@ function P({
     }), jsx(wi, {
       children: jsxs("div", {
         className: t.two_factor_app_enabled ? _$$s.flex.wFull.justifyEnd.$ : Hx,
-        children: [!t.two_factor_app_enabled && jsx($n, {
+        children: [!t.two_factor_app_enabled && jsx(Button, {
           variant: "link",
           onClick: () => {
             u();
@@ -176,11 +176,11 @@ function P({
           children: renderI18nText("auth.two-factor-setup.use_an_authenticator_app_instead")
         }), jsxs("div", {
           className: G6,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: u,
             children: renderI18nText("auth.two-factor-setup.close")
-          }), jsx($n, {
+          }), jsx(Button, {
             disabled: r.loading,
             type: "submit",
             children: renderI18nText("auth.two-factor-setup.verify")
@@ -208,7 +208,7 @@ function O({
       phone: n
     }));
   };
-  return o ? jsx(_$$R, {
+  return o ? jsx(ConfirmationModal, {
     title: jsx(zd, {}),
     onConfirm: () => {
       p(uN());
@@ -221,7 +221,7 @@ function O({
     open: i,
     onClose: s,
     children: e.two_factor_app_enabled ? renderI18nText("auth.two-factor-setup.remove-number-with-app-two-factor-on") : jsx(B7, {})
-  }) : jsx(bL, {
+  }) : jsx(ModalRootComponent, {
     width: "lg",
     manager: t,
     children: hasPasswordOrSSO(e) ? e.phone_number ? jsx(R, {

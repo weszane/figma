@@ -1,6 +1,6 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { h1, wm, LQ } from "../905/77316";
 export function $$o1(e, t) {
   let r = atomStoreManager.get(h1);
@@ -10,7 +10,7 @@ export function $$o1(e, t) {
 export function $$l0(e, t, r, n) {
   let s = debugState.getState();
   let o = d(t, e, r, debugState, n);
-  ds("canvas_mention_search_cancelled", s.openFile?.key, s, o);
+  trackFileEvent("canvas_mention_search_cancelled", s.openFile?.key, s, o);
 }
 function d(e, t, r, n, i) {
   return {

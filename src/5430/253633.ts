@@ -5,7 +5,7 @@ import { h as _$$h } from "../905/994594";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { Uz } from "../905/63728";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Dy, ky, Je } from "../figma_app/925970";
 import { x0 } from "../5430/908946";
@@ -16,9 +16,9 @@ import { xn } from "../905/934145";
 import { AG } from "../figma_app/999312";
 import { A as _$$A } from "../svg/355105";
 import { A as _$$A2 } from "../svg/545021";
-if (443 == require.j) { }
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
+if (443 == require.j) {}
 export function $$b0({
   query: e,
   inSearchPath: t,
@@ -55,7 +55,7 @@ export function $$b0({
   let G = W ? "" : j ?? getI18nString("community.search.search_community");
   let $ = S ? jsx(_$$h, {
     className: L
-  }) : jsx(B, {
+  }) : jsx(SvgComponent, {
     svg: _$$A,
     className: L
   });
@@ -116,7 +116,7 @@ export function $$b0({
               entryPoint: "community"
             }));
           }
-        } else if ("Escape" === s.key) A.current?.blur(); else if (s.keyCode === Uz.DOWN_ARROW || s.keyCode === Uz.UP_ARROW) {
+        } else if ("Escape" === s.key) A.current?.blur();else if (s.keyCode === Uz.DOWN_ARROW || s.keyCode === Uz.UP_ARROW) {
           s.preventDefault();
           let e = renderedSelectedIdx === renderedOrder.length - 1 ? renderedSelectedIdx : renderedSelectedIdx + 1;
           let t = renderedSelectedIdx <= 0 ? renderedSelectedIdx : renderedSelectedIdx - 1;
@@ -134,7 +134,7 @@ export function $$b0({
         }
       },
       required: !0
-    }), e && e.length > 0 && jsx(B, {
+    }), e && e.length > 0 && jsx(SvgComponent, {
       svg: _$$A2,
       className: T,
       onClick: () => {

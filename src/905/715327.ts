@@ -36,7 +36,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import B from "../vendor/946678";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -53,7 +53,7 @@ import { fV, Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
 import { SR } from "../figma_app/852050";
 import { selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { gE, DV } from "../905/842072";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
@@ -76,7 +76,7 @@ import { i as _$$i2 } from "../905/565139";
 import { y as _$$y, C as _$$C2 } from "../905/109977";
 import { A as _$$A } from "../905/47292";
 import { aU } from "../figma_app/757606";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { Ex, zE } from "../figma_app/919079";
 import { l as _$$l2 } from "../905/997221";
 import { Pg, y6 } from "../figma_app/803787";
@@ -89,12 +89,12 @@ import { u as _$$u } from "../905/831362";
 import { m as _$$m } from "../905/760316";
 import { Bj, eR as _$$eR, h5, yz } from "../905/42209";
 import { Q as _$$Q } from "../905/711770";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { generateRecordingKey } from "../figma_app/878298";
 import { KP, L1 } from "../figma_app/12491";
 import { E as _$$E2 } from "../905/511388";
 import { createFileLibraryKeys } from "../905/651613";
-import { E as _$$E3 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { w as _$$w } from "../905/768636";
 import { n1 } from "../figma_app/657017";
 import { p as _$$p2 } from "../905/895920";
@@ -345,12 +345,12 @@ function e4({
     children: data?.file?.hasPermission && jsx(_$$I2, {
       entryPoint: RR.LIBRARY_MODAL_OVERVIEW,
       recordingKey: "libraryPublishButton",
-      publishedState: jsx(IK, {
+      publishedState: jsx(ButtonWide, {
         variant: "primary",
         disabled: !0,
         children: renderI18nText("design_systems.libraries_modal.publish")
       }),
-      emptyState: jsx(IK, {
+      emptyState: jsx(ButtonWide, {
         variant: "primary",
         disabled: !0,
         children: renderI18nText("design_systems.libraries_modal.publish")
@@ -391,7 +391,7 @@ function te({
     let t = useSubscription(LibraryIsBranch, {
       libraryKey: e
     });
-    return oA(t?.data?.libraryKeyToFile?.file?.isBranch) ?? !1;
+    return getResourceDataOrFallback(t?.data?.libraryKeyToFile?.file?.isBranch) ?? !1;
   }(f.libraryKey);
   g = !_ && (_$$b2(a, s, o, d) || y);
   let v = _$$Q({
@@ -472,7 +472,7 @@ function tn({
     t(!0);
   }, [t]);
   let a = e.length;
-  return jsxs(_$$E3, {
+  return jsxs(ButtonPrimitive, {
     className: "file_row--missingLibrariesfileRow--XUmzk file_row--fileRow--ZqbUK file_row_styles--fileRowBase--USCNr file_row_styles--fileRowHover--WZeMw",
     onClick: i,
     htmlAttributes: {
@@ -820,7 +820,7 @@ function tS(e) {
   let v = selectCurrentFile();
   let I = sO();
   let E = !!useAtomWithSubscription(_$$t2).data;
-  let x = sZ();
+  let x = useCurrentUserOrg();
   let {
     fileByKey
   } = FC();
@@ -1049,7 +1049,7 @@ function tC({
       source_file_key: e.sourceFileKey
     }) && jsxs("div", {
       className: ty,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A2,
         className: tb
       }), jsx("div", {
@@ -1131,7 +1131,7 @@ function tT({
           source_file_key: e.sourceFileKey
         }) && jsxs("div", {
           className: ty,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A2,
             className: tb
           }), jsx("p", {

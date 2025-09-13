@@ -5,11 +5,11 @@ import { Ay } from "../905/931912";
 import { G } from "../figma_app/714966";
 import { $z } from "../905/62762";
 import { EA } from "../905/18800";
-import { GS } from "../figma_app/314264";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { Nt } from "../figma_app/342355";
 import { a as _$$a } from "../905/882689";
 export function $$m2(e, t, i) {
-  GS("mcp.client_tool_call_duration_split", debugState.getState().openFile?.key || "", debugState.getState(), {
+  trackDefinedFileEvent("mcp.client_tool_call_duration_split", debugState.getState().openFile?.key || "", debugState.getState(), {
     operation: e,
     durationMs: Math.round(t),
     toolName: i
@@ -69,7 +69,7 @@ export function $$h1({
   d.forEach((e, t) => {
     "color" === e && (l.colorVariablesUsed += 1);
   });
-  GS("mcp.client_tool_call_completed", e.getState().openFile?.key || "", e.getState(), {
+  trackDefinedFileEvent("mcp.client_tool_call_completed", e.getState().openFile?.key || "", e.getState(), {
     toolArgs: JSON.stringify(a),
     currentSelection: JSON.stringify(Object.keys(e.getState().mirror.sceneGraphSelection)),
     rawToolName: s,

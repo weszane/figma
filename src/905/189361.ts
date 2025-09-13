@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import { TH } from "../figma_app/171177";
 import { f7 } from "../905/783179";
@@ -22,7 +22,7 @@ export function $$l0({
     }));
   }, !!i && !p);
   let g = t ? f7(t) : null;
-  return jsxs($n, {
+  return jsxs(Button, {
     variant: e,
     onClick: () => i?.({
       shortcut: null,
@@ -35,7 +35,7 @@ export function $$l0({
     htmlAttributes: {
       "data-testid": "actionButton"
     },
-    children: [l, g && jsx($n.Shortcut, {
+    children: [l, g && jsx(Button.Shortcut, {
       children: g
     })]
   });

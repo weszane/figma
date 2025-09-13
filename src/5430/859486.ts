@@ -5,7 +5,7 @@ import { v$ } from "../figma_app/455722";
 import { gM } from "../5430/823351";
 import { ed } from "../figma_app/321395";
 import { Dv } from "../figma_app/805898";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { r } from "../905/571562";
 import m from "classnames";
 import { x6 } from "../5430/478538";
@@ -14,7 +14,7 @@ function h({
   text: e,
   getTriggerProps: t
 }) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     className: _()(x6, "feed_filter_menu_button--filterButton--uqzcw", "feed_filter_menu_button--outline--Ez7yZ"),
     ...t(),
     children: jsxs("span", {

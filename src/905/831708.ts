@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../figma_app/3731";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
@@ -156,7 +156,7 @@ function N({
       appliedSpaces: e[qy.FOLDER],
       baseId: `${t}-project`,
       basePath: [...i, 0],
-      defaultIcon: jsx(B, {
+      defaultIcon: jsx(SvgComponent, {
         className: Kk,
         svg: _$$A3
       }),
@@ -174,7 +174,7 @@ function N({
         team: e,
         size: Pf.MEDIUM
       }),
-      defaultIcon: jsx(B, {
+      defaultIcon: jsx(SvgComponent, {
         className: Kk,
         svg: _$$A2
       }),
@@ -192,7 +192,7 @@ function N({
         userId: h || "",
         orgId: e.id
       }),
-      defaultIcon: jsx(B, {
+      defaultIcon: jsx(SvgComponent, {
         className: Kk,
         svg: _$$A4
       }),

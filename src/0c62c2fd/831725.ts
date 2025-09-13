@@ -8,9 +8,9 @@ import { kg } from "../figma_app/976345";
 import { m3 } from "../905/315794";
 import { a as _$$a } from "../905/332662";
 import { sf } from "../905/929976";
-import { _J } from "../figma_app/314264";
+import { trackTeamEvent } from "../figma_app/314264";
 import { FC } from "../figma_app/212807";
-import { G } from "../figma_app/471068";
+import { ViewTypeEnum } from "../figma_app/471068";
 import { Ro } from "../figma_app/805373";
 import { rP } from "../figma_app/697906";
 function x(e) {
@@ -20,8 +20,8 @@ function x(e) {
   let o = FC();
   let x = e.team;
   let b = () => {
-    _J("file_browser_team_click", x.id, o, {
-      selectedView: "recentsAndSharing" === n.view ? n.tab || G.RECENTLY_VIEWED : n.view,
+    trackTeamEvent("file_browser_team_click", x.id, o, {
+      selectedView: "recentsAndSharing" === n.view ? n.tab || ViewTypeEnum.RECENTLY_VIEWED : n.view,
       viewMode: "grid"
     });
     i(kg({

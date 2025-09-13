@@ -7,11 +7,11 @@ import { Uz } from "../905/63728";
 import { d as _$$d } from "../905/884707";
 import { RecordingComponent, handleMouseEvent, handlePointerEvent } from "../figma_app/878298";
 import { L } from "../905/408237";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tf, h3 } from "../figma_app/831799";
-import { _R } from "../figma_app/314264";
-import { Ib } from "../905/129884";
+import { PopulationStatus } from "../figma_app/314264";
+import { KindEnum } from "../905/129884";
 import { N } from "../905/551536";
 import { GC, zi, xZ, Ij, fY, HM, xJ, oC, ky, OK, I2, rd, FO, OY, Iw, dy, sY, yT, hz, _Z, ki, d1, ri, dQ, QC, z3, G, kv, hP, HI, Eg, Pf, MH, X7, _d } from "../905/190597";
 import { A } from "../5724/663128";
@@ -338,7 +338,7 @@ export class $$en6 extends Component {
         placeholder: this.props.placeholder || this.props.label,
         required: this.props.required,
         trackingFieldName: this.props.trackingFieldName,
-        trackingPopulationLevel: this.props.value ? _R.POPULATED_COMPLETE : _R.NOT_POPULATED,
+        trackingPopulationLevel: this.props.value ? PopulationStatus.POPULATED_COMPLETE : PopulationStatus.NOT_POPULATED,
         type: this.props.type || "text",
         value: this.props.value
       }), !this.props.trackingFieldName && jsx(L, {
@@ -356,10 +356,10 @@ export class $$en6 extends Component {
         required: this.props.required,
         type: this.props.type || "text",
         value: this.props.value
-      }), this.props.tooltip && jsx(_$$B, {
+      }), this.props.tooltip && jsx(SvgComponent, {
         className: G,
         svg: A,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": this.props.tooltip,
         "data-tooltip-timeout-delay": 300
       })]
@@ -492,7 +492,7 @@ export function $$eu4(e) {
 }
 $$ec14.displayName = "BigSelect";
 $$eu4.displayName = "Spacing";
-let $$ep11 = tf(_$$B);
+let $$ep11 = tf(SvgComponent);
 let $$e_15 = tf(e => jsx("a", {
   ...e,
   children: e.children

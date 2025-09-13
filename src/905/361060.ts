@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { c$ } from "../figma_app/236327";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { oB, j7 } from "../905/929976";
 import { Um } from "../905/848862";
 import { Cf, it } from "../905/504727";
@@ -44,7 +44,7 @@ export function $$h2({
       role: "listbox",
       children: [s.format(t || $$p0), jsx("span", {
         className: "publishing_metadata_scaling_mode_select_ui3--selectTriggerIcon--Z1El4 publish_modal--categorySelectTriggerIcon--43Irx",
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: _$$A
         })
       })]

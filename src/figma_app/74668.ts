@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { d as _$$d } from "../905/976845";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { R as _$$R } from "../905/621802";
 import { r as _$$r } from "../905/571562";
 import { I as _$$I } from "../905/763478";
@@ -18,7 +18,7 @@ import { conditionalFeatureFlag } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { M3 } from "../figma_app/119475";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -31,11 +31,11 @@ import { i as _$$i2 } from "../figma_app/85949";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { E as _$$E2 } from "../905/511388";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { Oe } from "../figma_app/336853";
 import { e as _$$e2 } from "../figma_app/882253";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { V9 } from "../905/72677";
 import { J as _$$J } from "../905/225412";
 import { Cq } from "../figma_app/632975";
@@ -278,7 +278,7 @@ let eo = forwardRef(function ({
       [Ke]: 1 === r,
       [wR]: !!e
     }),
-    "data-tooltip-type": o ? Ib.TEXT : void 0,
+    "data-tooltip-type": o ? KindEnum.TEXT : void 0,
     "data-tooltip": o,
     children: [jsx("div", {
       className: y()(gV, {
@@ -302,10 +302,10 @@ function el({
       children: [jsx("span", {
         className: ox,
         children: e
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         className: vm,
         svg: _$$A3,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": t
       })]
     }),
@@ -355,7 +355,7 @@ function ec({
     libraryKey,
     collapsed
   } = e;
-  let d = sZ();
+  let d = useCurrentUserOrg();
   let p = Oe(d);
   let _ = fV(libraryKey);
   let h = useAtomWithSubscription(V9);
@@ -616,12 +616,12 @@ export function $$eh0({
         recordingKey: generateRecordingKey(d, "editStyleButton"),
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.styles.edit_style"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           onMouseDown: dG
         },
         "aria-expanded": M,
         onClick: F,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A2
         })
       })
@@ -1024,7 +1024,7 @@ function eb({
   if ("MIXED" === thumbnailValue || thumbnailValue?.resolvedType !== VariableResolvedDataType.COLOR) return null;
   {
     let t = thumbnailValue.value;
-    return jsx(_$$E, {
+    return jsx(ButtonPrimitive, {
       ref: setKeyboardNavigationElement,
       className: y()(a5, {
         [FL]: a,
@@ -1032,7 +1032,7 @@ function eb({
       }),
       htmlAttributes: {
         "data-tooltip": getBasename(e.name),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         onMouseLeave: T,
         onMouseMove: E
       },
@@ -1107,14 +1107,14 @@ let eI = forwardRef(function ({
   onMouseLeave: o,
   onContextMenu: l
 }, c) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ref: c,
     className: y()(LH, {
       [ut]: r,
       [X$]: t
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": _$$Z,
       "data-tooltip-style-name": getBasename(e.name || ""),
       "data-tooltip-style-description": e.description,

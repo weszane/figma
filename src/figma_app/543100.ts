@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { atom, useAtomWithSubscription, createRemovableAtomFamily } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { findBestBranch, getDisplayNameAlt, findBranchById, generateUrl, hasPassword } from "../905/760074";
 import { fileEntityDataMapper } from "../905/943101";
 import { Z } from "../905/190310";
@@ -565,9 +565,9 @@ let $$C7 = createRemovableAtomFamily(e => atom(t => "FILE" === e.type || "PINNED
   key: e.file.key
 })).transform(e => !!e.file?.hasPermission) : "REPO" === e.type ? t(RepoCanView.Query({
   repoId: e.repo.id
-})).transform(e => !!oA(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(PrototypeCanView.Query({
+})).transform(e => !!getResourceDataOrFallback(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(PrototypeCanView.Query({
   prototypeId: e.prototype.id
-})).transform(e => !!oA(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? resourceUtils.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
+})).transform(e => !!getResourceDataOrFallback(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? resourceUtils.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
 let $$w3 = {
   FILE: _$$F.FILES,
   PROTOTYPE: _$$F.PROTOTYPES,

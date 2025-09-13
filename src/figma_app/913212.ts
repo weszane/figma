@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getI18nString } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { registerModal } from "../905/102752";
@@ -21,7 +21,7 @@ export let $$h0 = registerModal(function () {
     open: !0,
     onClose: r
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: h,
     width: "md",
     children: jsxs(vo, {
@@ -33,11 +33,11 @@ export let $$h0 = registerModal(function () {
         children: getI18nString("figmake.supabase_disconnect_required_modal.body")
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: r,
             children: getI18nString("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: p,
             children: getI18nString("figmake.supabase_disconnect_required_modal.go_to_settings")

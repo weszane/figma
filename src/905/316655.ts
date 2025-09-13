@@ -11,7 +11,7 @@ import { showModalHandler } from "../905/156213";
 import { s0, ZO } from "../figma_app/350203";
 import { cs } from "../figma_app/740025";
 import { VP, GH, aF } from "../905/18797";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { l as _$$l } from "../905/690005";
 import { G$, FF } from "../figma_app/588092";
 import { A as _$$A } from "../6828/373785";
@@ -54,7 +54,7 @@ export function $$v0({
   };
   let M = C && N;
   return cs(x) ? jsx($z, {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.follow.org_and_team_profiles_cannot_follow_other_profiles"),
     "data-tooltip-show-immediately": !0,
     disabled: !0,

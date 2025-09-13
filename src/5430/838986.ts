@@ -1,7 +1,7 @@
 import { w as _$$w } from "../5430/495667";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { formatNumber } from "../figma_app/930338";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { W, B as _$$B } from "../905/841666";
 import { mk, c8 } from "../figma_app/777551";
@@ -44,7 +44,7 @@ export function $$m0({
         children: formatNumber(e.like_count)
       })]
     }), g && jsxs(Fragment, {
-      children: [L, jsx(B, {
+      children: [L, jsx(SvgComponent, {
         dataTestId: "usage-icon",
         svg: _$$A
       }), jsx("div", {

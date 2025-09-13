@@ -6,7 +6,7 @@ import { Uz } from "../905/63728";
 import { XHR } from "../905/910117";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { z, Z } from "../905/306088";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { i as _$$i } from "../469e6e40/651707";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
@@ -463,7 +463,7 @@ function A(e) {
       })()]
     }), c && jsx("div", {
       className: "configure_saml--spinnerContainer--O2wX0",
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     }), !c && jsx(_$$d, {
       onConfirm: () => {
         if (x(!0), "other" === e.idp_name || "google" === e.idp_name) {

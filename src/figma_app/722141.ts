@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 import { useMemo } from 'react';
 import { J, q } from '../905/202542';
 import { getI18nString } from '../905/303541';
-import { oA } from '../905/723791';
+import { getResourceDataOrFallback } from '../905/723791';
 import { HasConnectedPlanUserInOrg, ProjectNameById } from '../figma_app/43951';
 import { FOrganizationLevelType, FProductAccessType } from '../figma_app/191312';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
@@ -54,7 +54,7 @@ export function $$y0(e, t) {
   }, {
     enabled: !!e && !!r && n && !!t
   });
-  let o = oA(oA(i.data)?.hasConnectedPlanUserInOrgFolder);
+  let o = getResourceDataOrFallback(getResourceDataOrFallback(i.data)?.hasConnectedPlanUserInOrgFolder);
   let l = o && o[0]?.hasConnectedPlanUserInOrg;
   return l;
 }

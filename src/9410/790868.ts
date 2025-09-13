@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen, DataLoadStatus } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { handleAtomEvent } from "../905/502364";
 import { Yh } from "../figma_app/888478";
 import { J } from "../905/445197";
@@ -20,7 +20,7 @@ export function $$_0(e) {
   let C = useDispatch();
   let v = rE();
   let E = useSelector(e => e.versionHistory);
-  let T = am();
+  let T = trackFileEventWithUser();
   let w = W();
   let S = Xr(Yh);
   let j = useCallback(e => {

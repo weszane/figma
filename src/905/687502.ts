@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { customHistory } from "../905/612521";
@@ -18,7 +18,7 @@ export function $$c0() {
           children: renderI18nText("general.root_error_boundary_status_page")
         })
       })]
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "primary",
       onClick: () => customHistory.reload("File browser page crash"),
       children: getI18nString("general.root_error_boundary_refresh")

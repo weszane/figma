@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { buildUploadUrl } from "../figma_app/169182";
 import { k } from "../905/585996";
@@ -19,7 +19,7 @@ export let $$f0 = registerModal(function (e) {
   });
   return jsx(fu, {
     name: "google_device_try_file_claim_success_modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       width: 420,
       manager: i,
       children: jsx(vo, {

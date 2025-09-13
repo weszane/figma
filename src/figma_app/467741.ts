@@ -5,7 +5,7 @@ import { RH, gU, Kq, lD } from "../figma_app/147952";
 import { _i } from "../figma_app/120210";
 import { getUserId } from "../905/372672";
 import { U_ } from "../figma_app/190980";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { cq } from "../905/794154";
 import { zX } from "../figma_app/882116";
@@ -62,7 +62,7 @@ function E(e) {
   let r = zX({
     extensionId: extension.plugin_id
   });
-  return _i(extension.plugin_id, manifestContainsWidget(extension) ? vt.WIDGET : vt.PLUGIN, e.publishedExtension, r);
+  return _i(extension.plugin_id, manifestContainsWidget(extension) ? ResourceTypeNoComment.WIDGET : ResourceTypeNoComment.PLUGIN, e.publishedExtension, r);
 }
 function y(e) {
   let t = useDispatch();

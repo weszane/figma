@@ -17,7 +17,7 @@ import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { W } from "../905/95038";
 import { G as _$$G } from "../905/720066";
 import { uF, NE, Xx, e_, hl, KL } from "../905/182534";
@@ -62,7 +62,7 @@ function N({
       folderResult: e
     }),
     elementBesideName: e.model.is_connected_project ? jsx(W, {}) : void 0,
-    icon: jsx(_$$B, {
+    icon: jsx(SvgComponent, {
       className: "faceted_search_preview_folder_row--icon--TnWhg",
       svg: _$$A
     }),
@@ -250,7 +250,7 @@ function V({
           fill: "brand"
         });
       case uH.USERS:
-        return jsx(_$$B, {
+        return jsx(SvgComponent, {
           svg: _$$A2,
           className: "faceted_search_see_all_results--icon--XAyF3"
         });

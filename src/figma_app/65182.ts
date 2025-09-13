@@ -12,7 +12,7 @@ import { Qp, FZ } from "../figma_app/803787";
 import { aR } from "../905/128313";
 import { c5 } from "../figma_app/645694";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { pf } from "../905/221848";
 import { n as _$$n } from "../905/347702";
 import { Lg } from "../figma_app/505098";
@@ -21,11 +21,11 @@ export function $$T2(e) {
 }
 let $$I6 = e => ["preferredValuesInstancePicker", ...e];
 let $$S0 = e => ({
-  "data-tooltip-type": Ib.TEXT,
+  "data-tooltip-type": KindEnum.TEXT,
   "data-tooltip-show-left": !0,
   ...pf(e)
 });
-let v = () => { };
+let v = () => {};
 let A = new Promise(e => {
   v = e;
 });

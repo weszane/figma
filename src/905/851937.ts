@@ -23,7 +23,7 @@ import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { F as _$$F2 } from "../905/827944";
 import { showVisualBell, joinStringSegments, PluginPermissions, getFullscreenViewEditorType, isValidForCooper, isDevModeWithInspectPanel, isValidForCooperSelectedView, isBuzzPlugin, loadLocalPluginSource, loadPluginManifest, isValidForFullscreenView, clearVisualBell, hasSpecialCapability } from "../figma_app/300692";
 import { C3, SH } from "../figma_app/790714";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { G3 } from "../905/272080";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { hasLocalFileId } from "../figma_app/155287";
@@ -42,7 +42,7 @@ import { hM, p1, Tj, Yd, Nq } from "../905/266529";
 import { z as _$$z } from "../905/751771";
 import { ls, a7 } from "../905/917898";
 import { R as _$$R } from "../figma_app/612938";
-import { y as _$$y } from "../905/916933";
+import { waitForAllPagesForPlugin } from "../905/916933";
 import { isGlobalPluginActive, handlePluginError, setResetGlobalPluginAPI, setGlobalPluginCloseFunc, pluginState, generateRandomID, setPluginData, setPluginTriggeredFrom, setFAtom, closeCurrentPlugin, setPluginCloseFunc, resetPluginState } from "../905/753206";
 import { localStorageRef } from "../905/657224";
 import { pS } from "../905/588985";
@@ -500,7 +500,7 @@ export let $$eo4 = _$$n(async e => {
   });
   let {
     isCancelled
-  } = await i.markDuration("waitForAllPagesMs", async () => await _$$y(e));
+  } = await i.markDuration("waitForAllPagesMs", async () => await waitForAllPagesForPlugin(e));
   if (!isCancelled) {
     if (isValidForCooper(e.triggeredFrom)) {
       if (!isDevModeWithInspectPanel(e.plugin)) throw Error('Plugin not compatible to run in dev handoff panel. Make sure you have "dev" as an editorType and "inspect" as a capability in your manifest.json.');
@@ -565,7 +565,7 @@ export let $$eo4 = _$$n(async e => {
           };
           isWidget ? debugState.dispatch(RH(y)) : debugState.dispatch(gU(y));
           let b = debugState.getState().publishedPlugins[e.plugin_id];
-          let v = m3(b);
+          let v = hasMonetizedResourceMetadata(b);
           let x = {
             pluginID: e.plugin_id,
             pluginVersionID: e.id,
@@ -583,7 +583,7 @@ export let $$eo4 = _$$n(async e => {
             isWidget,
             isMonetized: v,
             paidStatus: function (e) {
-              let t = m3(e);
+              let t = hasMonetizedResourceMetadata(e);
               let i = e?.community_resource_payment;
               return t && i ? i.status === G3.TRIALING ? "trial" : "paid" : "none";
             }(b),

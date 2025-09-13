@@ -14,7 +14,7 @@ import { vm, yU, Zr } from "../figma_app/678782";
 import { kl } from "../905/275640";
 import { BK } from "../905/848862";
 import { Xo } from "../figma_app/482495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { a1 } from "../figma_app/23780";
 import { Cf } from "../905/504727";
@@ -186,7 +186,7 @@ export function $$Y0(e) {
         recordingKey: generateRecordingKey(e, "distributeDropdown"),
         htmlAttributes: {
           "data-tooltip": a,
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(Z, {})
       })
@@ -258,7 +258,7 @@ function J(e) {
           r?.id.startsWith("paint") && e.stopPropagation();
         },
         "data-tooltip": e.action,
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         "data-tooltip-max-width": 200
       },
       children: jsx(X, {

@@ -12,7 +12,7 @@ import { b as _$$b } from '../905/985254';
 import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
 import { ts } from '../figma_app/49598';
 import { $2, bn, GF, h0, HQ, JJ, mf, NI, zu } from '../figma_app/61403';
-import { UN, Z0 } from '../figma_app/62612';
+import { isRectInsideViewport, viewportToScreen } from '../figma_app/62612';
 import { getObservableValue } from '../figma_app/84367';
 import { Fz } from '../figma_app/106207';
 import { isColorDark, whiteColor, blackColor } from '../figma_app/191804';
@@ -348,7 +348,7 @@ class L {
       height
     } = e;
     let s = this.getViewportInfo();
-    if (t && UN(e, s)) return;
+    if (t && isRectInsideViewport(e, s)) return;
     let o = s.zoomScale;
     (width * o > s.width || height * o > s.height) && (o = Math.min(s.width / width, s.height / height) / 1.1);
     await this.navigate({
@@ -365,7 +365,7 @@ class L {
   }) {
     if (i === 'canvas') {
       let i = this.getViewportInfo();
-      let r = Z0(i, {
+      let r = viewportToScreen(i, {
         x: e,
         y: t
       });

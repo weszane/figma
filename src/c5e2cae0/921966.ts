@@ -8,7 +8,7 @@ import { O } from "../9420/998877";
 import { o as _$$o } from "../c5e2cae0/371580";
 import { x as _$$x } from "../905/211326";
 import { JR } from "../9420/975542";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
@@ -76,7 +76,7 @@ export function $$b0({
             }));
             e.onCloseOrComplete?.();
           },
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: A,
             className: "edu_review--modalCloseX--PeJlf",
             dataTestId: "close-button"

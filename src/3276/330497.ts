@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch, useStore, useSelector } from "react-redux";
-import { $n } from "../905/521428";
-import { E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { getI18nString } from "../905/303541";
 import { jT, Pp } from "../905/989765";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { selectCurrentFile } from "../figma_app/516028";
 import { h as _$$h } from "../figma_app/275739";
 export function $$u0(e) {
@@ -17,9 +17,9 @@ export function $$u0(e) {
   let _ = {
     onClick: async () => {
       e.hidePopover && e.hidePopover();
-      u && f ? u && t(jT()) : (ds("Context Viewed", e.fileKey, n.getState(), {
+      u && f ? u && t(jT()) : (trackFileEvent("Context Viewed", e.fileKey, n.getState(), {
         name: "should-close-open-audio-nux"
-      }), await _$$h.createInstance(), f && ds("voice_widget_minimized_toggle", e.fileKey, n.getState(), {
+      }), await _$$h.createInstance(), f && trackFileEvent("voice_widget_minimized_toggle", e.fileKey, n.getState(), {
         minimized: !1
       }), t(Pp(!0)));
     },
@@ -38,7 +38,7 @@ export function $$u0(e) {
     } = _;
     return jsx("div", {
       "data-onboarding-key": e["data-onboarding-key"],
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick,
         "aria-label": n,
         variant: "signup",
@@ -49,7 +49,7 @@ export function $$u0(e) {
       })
     });
   }
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ..._,
     className: e.className,
     children: e.children

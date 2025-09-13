@@ -30,7 +30,7 @@ import { M as _$$M } from "../figma_app/339170";
 import { d as _$$d } from "../905/976845";
 import { u as _$$u } from "../905/911813";
 import { u as _$$u2 } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { u3 } from "../figma_app/152690";
 import { ND, $V, $H, AP } from "../figma_app/755783";
 import { RK } from "../1528/277451";
@@ -85,7 +85,7 @@ function K(e) {
       disabled: x,
       htmlAttributes: {
         "data-testid": "visibility-variable-binding-control",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("proto.apply_assignment_property"),
         onMouseDown: b
       },
@@ -108,7 +108,7 @@ function eo(e) {
       actionOnPointerDown: !0,
       htmlAttributes: {
         "data-tooltip": getI18nString("properties.dropdown.apply_blend_mode"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(MK, {
         value: t.property,
@@ -150,7 +150,7 @@ function ec({
     onClick: () => l("PASS_THROUGH"),
     htmlAttributes: {
       "data-tooltip": getI18nString("properties.dropdown.remove_blend_mode"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(MK, {
       value: n,
@@ -207,7 +207,7 @@ function eh({
         "aria-label": getI18nString("properties.dropdown.apply_blend_mode"),
         htmlAttributes: {
           "data-tooltip": getI18nString("properties.dropdown.apply_blend_mode"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         onClick: e => {
           trackEventAnalytics("editor-blend-mode-dropdown-show");
@@ -232,7 +232,7 @@ function eh({
     "aria-label": getI18nString("properties.dropdown.remove_blend_mode"),
     htmlAttributes: {
       "data-tooltip": getI18nString("properties.dropdown.remove_blend_mode"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     onClick: () => n(ep),
     children: jsx(MK, {

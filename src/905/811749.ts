@@ -3,7 +3,7 @@ import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { V as _$$V } from "../905/453937";
 import { e as _$$e } from "../905/311297";
 import { M as _$$M } from "../905/269719";
@@ -17,7 +17,7 @@ import { p as _$$p } from "../905/767868";
 import { H8, Pf } from "../905/590952";
 import { wW } from "../figma_app/656450";
 import { Xg } from "../905/375175";
-import { C0 } from "../figma_app/756995";
+import { SortField } from "../figma_app/756995";
 import { w4 } from "../905/445814";
 import { e as _$$e2 } from "../905/457828";
 import { y as _$$y } from "../905/171275";
@@ -26,7 +26,7 @@ import { A as _$$A } from "../905/100919";
 function _(e) {
   let t = useDispatch();
   let i = Tf.getOwner(e.tile);
-  if (!i) return jsx(_$$E, {
+  if (!i) return jsx(TextWithTruncation, {
     fontSize: 13,
     truncate: !0,
     children: "--"
@@ -64,17 +64,17 @@ function b(e) {
         d && (e.stopPropagation(), s(t, e));
       },
       className: "generic_tile_previous_location--folder_name_clickable--yQN6N",
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: e.fontSize,
         truncate: !0,
         children: r
       })
     })
-  }) : jsxs(_$$E, {
+  }) : jsxs(TextWithTruncation, {
     fontSize: e.fontSize,
     truncate: !0,
     children: [r, "\xa0", a && getI18nString("file_browser.folder.trashed_folder")]
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     fontSize: e.fontSize,
     truncate: !0,
     children: "--"
@@ -89,14 +89,14 @@ function E(e) {
     children: [o && jsx(H8, {
       user: o,
       size: Pf.MEDIUM
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       children: jsx("span", {
         ...Ay.props(_$$g.textBodyMedium),
         children: t
       })
     })]
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     truncate: !0,
     children: jsx("span", {
       ...Ay.props(_$$g.textBodyMedium),
@@ -123,7 +123,7 @@ function N(e) {
       })]
     }), jsx("div", {
       className: _$$s.wFull.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 13,
         truncate: !0,
@@ -163,7 +163,7 @@ export function $$D1({
   truncate: e = !1,
   children: t
 }) {
-  return jsx(_$$E, {
+  return jsx(TextWithTruncation, {
     truncate: e,
     children: jsx("span", {
       ...Ay.props(_$$g.textBodyMedium),
@@ -172,9 +172,9 @@ export function $$D1({
   });
 }
 let L = e => ({
-  field: C0.NAME,
+  field: SortField.NAME,
   headerCellClassName: _$$s.wHalf.$,
-  renderHeaderCell: () => jsx(_$$E, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_name_column")
   }),
@@ -184,8 +184,8 @@ let L = e => ({
   })
 });
 let F = {
-  field: C0.TOUCHED_AT,
-  renderHeaderCell: () => jsx(_$$E, {
+  field: SortField.TOUCHED_AT,
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_last_modified_column")
   }),
@@ -198,8 +198,8 @@ let F = {
   })
 };
 let M = {
-  field: C0.TRASHED_AT,
-  renderHeaderCell: () => jsx(_$$E, {
+  field: SortField.TRASHED_AT,
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_trashed_at_column")
   }),
@@ -212,7 +212,7 @@ let M = {
   })
 };
 let j = {
-  renderHeaderCell: () => jsx(_$$E, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_previous_location_column")
   }),
@@ -224,8 +224,8 @@ let j = {
   })
 };
 let U = {
-  field: C0.CREATED_AT,
-  renderHeaderCell: () => jsx(_$$E, {
+  field: SortField.CREATED_AT,
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_created_column")
   }),
@@ -238,8 +238,8 @@ let U = {
   })
 };
 let B = {
-  field: C0.SHARED_AT,
-  renderHeaderCell: () => jsx(_$$E, {
+  field: SortField.SHARED_AT,
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_shared_at_column")
   }),
@@ -259,7 +259,7 @@ let V = {
   })
 };
 let G = {
-  renderHeaderCell: () => jsx(_$$E, {
+  renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.file_list_view.header_owner_column")
   }),
@@ -282,7 +282,7 @@ export function $$H0(e) {
 export let $$W3 = {
   gutterColumn: P,
   columns: [L(), {
-    renderHeaderCell: () => jsx(_$$E, {
+    renderHeaderCell: () => jsx(TextWithTruncation, {
       truncate: !0,
       children: renderI18nText("file_browser.file_list_view.header_shared_by_column")
     }),

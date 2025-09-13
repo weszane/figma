@@ -6,7 +6,7 @@ import { K as _$$K } from "../905/443068";
 import { Y9, hE, jk, vo, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/911410";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { R as _$$R } from "../905/649743";
 import { i as _$$i } from "../905/22844";
 import { GradientToolApi, VariablesBindings, NodePropertyCategory, LayoutTabType, VariableResolvedDataType } from "../figma_app/763686";
@@ -28,7 +28,7 @@ import { Um } from "../905/848862";
 import { dH, p8 } from "../figma_app/722362";
 import { normalizePath } from "../905/309735";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { qo, S7, sX } from "../figma_app/259578";
 import { T_, n8 } from "../905/713167";
@@ -59,7 +59,7 @@ function Y() {
     "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$R, {})
   });
@@ -286,7 +286,7 @@ function Q({
         type: i,
         label: a,
         optionRecordingKey: s
-      }) => jsx(_$$E, {
+      }) => jsx(ButtonPrimitive, {
         className: e === i ? wH : void 0,
         onClick: () => t(i),
         recordingKey: generateRecordingKey(r, s),

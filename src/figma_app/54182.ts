@@ -8,7 +8,7 @@ import { selectCurrentUser } from "../905/372672";
 import { q } from "../905/495564";
 import { AccessLevelEnum } from "../905/557142";
 import { isIncludedView } from "../figma_app/707808";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { c as _$$c, M } from "../905/57178";
 function g(e, t, r) {
@@ -76,7 +76,7 @@ export function $$f0(e) {
     "data-tooltip-max-width": 300,
     "data-tooltip-offset-y": e.tooltipOffsetY ?? 8,
     "data-tooltip-timeout-delay": 150,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip-user-handle": I,
     "data-tooltip-user-profile-url": v,
     "data-tooltip-user-session-id": "sessionId" in f ? f.sessionId : void 0,

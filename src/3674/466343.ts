@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -24,7 +24,7 @@ import { useState, useEffect } from "react";
 import { FPlanNameType, FOrganizationLevelType, FUserTypeClassification, FMemberRoleType, FProductAccessType } from "../figma_app/191312";
 import { useCurrentPublicPlan, useCurrentPlanUser, useTeamPlanFeatures, useTeamPlanUser, isOrgGuestUser } from "../figma_app/465071";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { w as _$$w } from "../figma_app/171404";
 var h = p;
@@ -392,7 +392,7 @@ function H(e) {
     let n = e?.tier === FPlanNameType.PRO;
     let a = e?.key.type === FOrganizationLevelType.ORG;
     let i = t?.key.type === FUserTypeClassification.ORG_USER && t?.permission === FMemberRoleType.GUEST;
-    let o = sZ();
+    let o = useCurrentUserOrg();
     let {
       isLoading,
       isSuccess,
@@ -585,7 +585,7 @@ export function $$X0({
       secondaryCtaTrackingDescriptor: f?.trackingDescriptor
     },
     enabled: g?.gracePeriod !== void 0,
-    children: jsxs(bL, {
+    children: jsxs(ModalRootComponent, {
       width: 392,
       manager: x,
       children: [jsx(vo, {

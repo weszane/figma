@@ -5,7 +5,7 @@ import { Hg } from "../figma_app/304955";
 import { range } from "../figma_app/492908";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { l as _$$l } from "../905/509505";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
@@ -31,7 +31,7 @@ import { Zr } from "../figma_app/114522";
 import { jx, Ic } from "../figma_app/198516";
 import { FX } from "../figma_app/558805";
 import { useModalManager } from "../905/437088";
-import { bL as _$$bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { D as _$$D } from "../905/169680";
 import { S1, Bo } from "../1156/867089";
 import { nc } from "../figma_app/570630";
@@ -62,7 +62,7 @@ let B = registerModal(function (e) {
     l(hideModalHandler());
     onClose();
   }, [createLibraryImport, l, library, onClose, u]);
-  return jsx(_$$bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     height: "fixed",
@@ -96,7 +96,7 @@ let B = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: x,
             children: getI18nString("figmake.ds_imports.library_selector_warning_modal.continue")
           })
@@ -230,7 +230,7 @@ function H() {
         }), jsx("div", {
           ...Ay.props(_$$g.textBodyMedium, P.textSecondary),
           children: getI18nString("sites.modal.add_guidelines_text")
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           onClick: () => {
             analyticsEventManager.trackDefinedEvent("ds_import.library_selector_empty_state_guidelines_clicked", {

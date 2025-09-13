@@ -1,14 +1,14 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Fragment as _$$Fragment, forwardRef, useRef, useState, useLayoutEffect } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A } from "../905/744692";
 import o from "classnames";
 import { UF } from "../905/403166";
 import { formatCount, formatList } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { dN } from "../vendor/291472";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var l = o;
 let m = [{
   id: "heavy_plus_sign",
@@ -122,7 +122,7 @@ let v = forwardRef(function (e, t) {
       emojiShortcodeToUsers: i
     };
   }
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     ref: t,
     "aria-label": e.reaction.selected ? getI18nString("comments.reaction_selected_descriptive_aria_label_text", {
       num_users: i,
@@ -141,7 +141,7 @@ let v = forwardRef(function (e, t) {
     "data-tooltip": g,
     "data-tooltip-data": JSON.stringify(c),
     "data-tooltip-max-width": 200,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     onClick: e.onClick,
     children: [o.map(e => jsx("span", {
       className: "reactions--emojiUnicode--Tf1hh",
@@ -154,9 +154,9 @@ let v = forwardRef(function (e, t) {
 });
 export function $$I0(e) {
   let t = e.styleClassName ? e.styleClassName : "reactions--addReaction--TDUhu";
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     className: t,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("comments.add_reaction"),
     onClick: e.onClick,
     "aria-label": getI18nString("comments.add_reaction"),

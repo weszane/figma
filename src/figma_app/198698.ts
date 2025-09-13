@@ -12,7 +12,7 @@ import { F as _$$F } from "../905/680873";
 import { BrowserInfo } from "../figma_app/778880";
 import { Jn } from "../905/17223";
 import { tM } from "../figma_app/637027";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { FEditorType } from "../figma_app/53721";
 import { VA } from "../figma_app/844818";
@@ -209,7 +209,7 @@ export function $$w0(e) {
             [J3]: "large" === content.iconSize,
             [v0]: "medium" === content.iconSize
           }),
-          children: "string" == typeof content.icon ? jsx(_$$B, {
+          children: "string" == typeof content.icon ? jsx(SvgComponent, {
             svg: content.icon,
             width: "large" === content.iconSize ? "32px" : "medium" === content.iconSize ? "24px" : "16px",
             autosize: !0

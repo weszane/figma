@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, Suspense } from "react";
 import { k } from "../905/443820";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { sx } from "../905/941192";
 let d = "184px";
 function c() {
@@ -37,7 +37,7 @@ export function $$u0({
   });
   return jsxs("div", {
     style: sx.inlineBlock.$,
-    children: [jsx(E, {
+    children: [jsx(ButtonPrimitive, {
       className: "text_with_popover--textWithPopoverButton--JjWpS",
       style: sx.radiusMedium.$,
       ...getTriggerProps(),

@@ -3,7 +3,7 @@ import { x } from "../905/587214";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { rE } from "../figma_app/186343";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export function $$d1({
   onClick: e,
   recordingKey: t,
@@ -19,7 +19,7 @@ export function $$d1({
     htmlAttributes: {
       "data-testid": "new-page-button",
       "data-tooltip": i,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0
     },
     children: jsx(x, {})

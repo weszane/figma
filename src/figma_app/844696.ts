@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { ro } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
 import { normalizeValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Z, m as _$$m } from "../905/423399";
 import { qg, r5, GZ } from "../figma_app/436286";
 import { X7 } from "../905/713167";
@@ -40,7 +40,7 @@ function N(e) {
         onClick: e,
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode")
         },
         disabled: i.disabled,
@@ -50,7 +50,7 @@ function N(e) {
         tabIndex: -1,
         onPointerDown: dG,
         onMouseDown: e,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         children: r
       });
@@ -142,7 +142,7 @@ function P({
         disabled: t,
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode")
         },
         ...getTriggerProps(),

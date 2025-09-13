@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo, useMemo } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import o from "classnames";
 import { G } from "../905/750789";
@@ -11,7 +11,7 @@ import { isInvalidValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { u as _$$u, t8 } from "../figma_app/852050";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { g7 } from "../figma_app/481857";
 import { uV, Cj, As, uQ, n4 } from "../figma_app/151869";
 import { X } from "../905/839893";
@@ -136,7 +136,7 @@ export function $$U22(e) {
   let r = t.current;
   let n = r && (r.offsetHeight < r.scrollHeight || r.offsetWidth < r.scrollWidth);
   useEffect(() => {
-    r && n && e && (r.setAttribute("data-tooltip", e.toString()), r.setAttribute("data-tooltip-type", Ib.TEXT));
+    r && n && e && (r.setAttribute("data-tooltip", e.toString()), r.setAttribute("data-tooltip-type", KindEnum.TEXT));
   }, [e, r, n]);
   return t;
 }
@@ -262,7 +262,7 @@ export let $$V9 = memo(e => {
       onMouseLeave: U,
       "data-testid": e.dataTestId,
       ref: E,
-      children: [jsx(_$$E, {
+      children: [jsx(ButtonPrimitive, {
         className: "inspection_property--propertyRowButton--7ObeU",
         onClick: H,
         children: t

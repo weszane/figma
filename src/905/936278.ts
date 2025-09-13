@@ -2,7 +2,7 @@ import { useMemo, useState, useRef, useCallback, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getSingletonSceneGraph } from "../905/700578";
 import { blendGradientColors, blendColors } from "../figma_app/191804";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { getFalseValue } from "../figma_app/897289";
 import { sb, bn } from "../figma_app/385874";
@@ -72,7 +72,7 @@ export function $$_4(e, t, i) {
 export function $$A0(e, t, i, r) {
   return function (e, t, i) {
     let r = X7();
-    let a = hC();
+    let a = trackDefinedFileEventWithStore();
     return useMemo(() => {
       let n;
       let s;
@@ -116,7 +116,7 @@ export function $$A0(e, t, i, r) {
   }(function (e, t, i, r) {
     let a = Fk((e, t) => t.map(t => e.get(t)?.absoluteBoundingBox), e);
     let s = Fk(e => e.getCurrentPage()?.guid);
-    let l = hC();
+    let l = trackDefinedFileEventWithStore();
     let c = !getFalseValue() && e.length > 1;
     let p = useMemo(() => {
       if (!c) {

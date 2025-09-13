@@ -3,7 +3,7 @@ import { useCallback, useId, useMemo, memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { YJ, bL, UC } from "../figma_app/57171";
 import { Y9, JU } from "../figma_app/322555";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K as _$$K } from "../905/443068";
 import c, { F as _$$F } from "../905/172964";
 import { DeviceType, AppStateTsApi, Fullscreen, SideType, PrototypingTsApi, ContainerType } from "../figma_app/763686";
@@ -15,7 +15,7 @@ import { logWarning } from "../905/714362";
 import { E as _$$E2 } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { ph } from "../figma_app/709893";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../figma_app/91703";
 import { sE, EZ, fS } from "../figma_app/681244";
@@ -23,7 +23,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { isValidValue, MIXED_MARKER } from "../905/216495";
 import { getObservableValue } from "../figma_app/84367";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Q as _$$Q } from "../905/346809";
 import { v as _$$v } from "../905/694527";
 import { fI, zi, Zk } from "../figma_app/626177";
@@ -37,11 +37,11 @@ import { COOPER_STRING } from "../figma_app/53721";
 import { f6 } from "../figma_app/915202";
 import { cV } from "../figma_app/59509";
 import { Q as _$$Q2 } from "../905/363675";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { camelToSnake } from "../figma_app/930338";
 import { b as _$$b } from "../905/985254";
 import { fu } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { Em } from "../figma_app/976749";
 import { useIsCurrentUserCreator } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
@@ -75,7 +75,7 @@ function $(e) {
         variant: "default",
         icon,
         onDismiss: () => {
-          Cu({
+          logAndTrackCTA({
             trackingContext: `${productName} conversion ${presetType} presets entrypoint`,
             name: `${camelToSnake(productName)}_conversion_${camelToSnake(presetType)}_presets_entrypoint_dismissed`
           });
@@ -91,10 +91,10 @@ function $(e) {
             children: description
           }), jsx("div", {
             className: "frame_presets_entrypoint--bannerCta--Xi6xA",
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "link",
               onClick: e => {
-                Cu({
+                logAndTrackCTA({
                   trackingContext: `${productName} conversion ${presetType} presets entrypoint`,
                   name: `${camelToSnake(productName)}_conversion_${camelToSnake(presetType)}_presets_entrypoint`
                 });
@@ -332,7 +332,7 @@ function eh({
       appendedClassName: (m()(t ? UY : th, "presetHeader"), BA),
       input: jsxs("div", {
         className: EG,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: t ? iw : OW,
           svg: t ? _$$A : _$$A2
         }), jsx("div", {
@@ -458,7 +458,7 @@ class eg extends RecordingPureComponent {
           className: th,
           children: jsxs("div", {
             className: EG,
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               className: this.props.expanded ? iw : OW,
               svg: this.props.expanded ? _$$A : _$$A2
             }), jsx("div", {
@@ -488,7 +488,7 @@ let ef = memo(function ({
       children: [e.map(e => jsx("li", {
         children: jsx(Ad, {
           appendedClassName: so,
-          input: jsxs(_$$E, {
+          input: jsxs(ButtonPrimitive, {
             className: aD,
             onClick: () => t(e),
             actionOnPointerDown: !0,
@@ -654,7 +654,7 @@ export function $$ey0(e) {
       "aria-label": getI18nString("fullscreen_actions.resize-to-fit"),
       htmlAttributes: {
         "data-testid": "resize-to-fit-button",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen_actions.resize-to-fit"),
         "data-tooltip-shortcut-key": "resize-to-fit"
       },

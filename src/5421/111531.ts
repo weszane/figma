@@ -8,7 +8,7 @@ import { Y_, p_, l6, Xs, xJ, UL, iK, ZY, qQ, Wn } from "../figma_app/114522";
 import { deepEqual } from "../905/382883";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
 import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/365108";
@@ -34,7 +34,7 @@ import { Py } from "../figma_app/251814";
 import { cu } from "../figma_app/139865";
 import V from "../vendor/241899";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { SourceMapConsumer } from "../vendor/956116";
 import { createPortal } from "react-dom";
 import { sH, gn } from "../5421/58503";
@@ -55,7 +55,7 @@ import { w as _$$w } from "../905/879280";
 import { t as _$$t2 } from "../905/54003";
 import { ar } from "../7a72fc59/842982";
 import { MIXED_MARKER, isInvalidValue, isValidValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { gq } from "../figma_app/178475";
 import { U1 } from "../figma_app/343967";
 import { W1 } from "../figma_app/439493";
@@ -85,7 +85,7 @@ import { VZ } from "../905/959568";
 import { Cn } from "../905/882267";
 import { UG } from "../figma_app/628987";
 import { FF } from "../905/556648";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { xF, m$, DY, HL } from "../5421/389127";
 import { Y as _$$Y } from "../905/1768";
 import { s as _$$s } from "../905/551945";
@@ -196,7 +196,7 @@ class F {
     } = this.timingMap;
     let s = debugState.getState();
     let d = this.buildMetadata?.isBuildSuccessful ? render_stop : code_bundle_stop;
-    ds("code_component_preview_perf", s.openFile?.key, B()(s, ["selectedView", "fileByKey"]), {
+    trackFileEvent("code_component_preview_perf", s.openFile?.key, B()(s, ["selectedView", "fileByKey"]), {
       total_build_and_render_ms: d && d - this.initTime,
       bundle_code_ms: code_bundle_start && code_bundle_stop && code_bundle_stop - code_bundle_start,
       preview_website_bundle_ms: preview_website_bundle_start && preview_website_bundle_stop && preview_website_bundle_stop - preview_website_bundle_start,
@@ -370,7 +370,7 @@ function eT() {
     target: jsx(ar, {
       "aria-label": getI18nString("figmake.toolbar.corner_radius"),
       tooltip: getI18nString("figmake.toolbar.corner_radius"),
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       showCaret: !0,
       isActive: t,
       children: jsx(_$$a2, {})
@@ -409,7 +409,7 @@ function eS() {
   let N = useMemo(() => jsx(ar, {
     "aria-label": getI18nString("figmake.toolbar.corner_radius.individual_corner_radius"),
     tooltip: getI18nString("figmake.toolbar.corner_radius.individual_corner_radius"),
-    tooltipType: Ib.TEXT,
+    tooltipType: KindEnum.TEXT,
     isActive: v,
     onClick: () => I(e => !e),
     children: jsx(_$$Q, {
@@ -493,7 +493,7 @@ function eS() {
       ...e
     }, t);
   }, [g, T]);
-  let A = e ? jsx($n, {
+  let A = e ? jsx(Button, {
     variant: "secondary",
     disabled: !y,
     onClick: f,
@@ -516,7 +516,7 @@ function eS() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.top_left"),
             children: jsx(_$$a2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -531,7 +531,7 @@ function eS() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.top_right"),
             children: jsx(_$$$, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -546,7 +546,7 @@ function eS() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.bottom_left"),
             children: jsx(_$$w, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -561,7 +561,7 @@ function eS() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius.bottom_right"),
             children: jsx(_$$t2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -572,7 +572,7 @@ function eS() {
           children: [jsx(gq, {
             bigNudgeAmount: 10,
             "data-tooltip": getI18nString("figmake.toolbar.corner_radius"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             dispatch: d,
             onValueChange: (e, t) => {
               S({
@@ -658,7 +658,7 @@ function eB(e) {
     target: jsx(ar, {
       "aria-label": c,
       tooltip: c,
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       showCaret: !0,
       isActive: a,
       children: jsx(_$$A, {
@@ -797,7 +797,7 @@ let e3 = forwardRef(function ({
   iconSuffix: t,
   ...n
 }, i) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ref: i,
     ...n,
     ...Ay.props(e2.buttonContainer, n["aria-expanded"] ? e2.buttonContainer_active : null, e2.buttonContainer_noBorder, e2.buttonContainerLeftPaddingWithoutIconPrefix, t ? null : e2.buttonContainerRightPaddingWithoutIconSuffix),
@@ -950,7 +950,7 @@ function ti() {
     target: jsx(ar, {
       "aria-label": getI18nString("figmake.toolbar.image"),
       tooltip: getI18nString("figmake.toolbar.image"),
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       showCaret: !0,
       caretStyle: p,
       isActive: r,
@@ -1010,7 +1010,7 @@ function tr({
       })]
     }), jsx("div", {
       className: "x10l6tqk x13vifvy xu96u03 x3m8u43 x1ey2m1c xur7f20 x1hc1fzr x78zum5 xl56j7k x1o2pa38 x6s0dn4",
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "primary",
         onClick: () => {
           a.current?.click();
@@ -1030,7 +1030,7 @@ function tm() {
     target: jsx(ar, {
       "aria-label": getI18nString("figmake.toolbar.spacing"),
       tooltip: getI18nString("figmake.toolbar.spacing"),
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       showCaret: !0,
       isActive: t,
       children: jsx(_$$R3, {})
@@ -1096,7 +1096,7 @@ function ty() {
   let B = useMemo(() => jsx(ar, {
     "aria-label": getI18nString("figmake.toolbar.padding.individual_paddings"),
     tooltip: getI18nString("figmake.toolbar.padding.individual_paddings"),
-    tooltipType: Ib.TEXT,
+    tooltipType: KindEnum.TEXT,
     isActive: k,
     onClick: () => P(e => !e),
     children: jsx(_$$s2, {})
@@ -1104,7 +1104,7 @@ function ty() {
   let H = useMemo(() => jsx(ar, {
     "aria-label": getI18nString("figmake.toolbar.margin.individual_margins"),
     tooltip: getI18nString("figmake.toolbar.margin.individual_margins"),
-    tooltipType: Ib.TEXT,
+    tooltipType: KindEnum.TEXT,
     isActive: O,
     onClick: () => L(e => !e),
     children: jsx(_$$s2, {})
@@ -1177,7 +1177,7 @@ function ty() {
         ...n,
         children: [jsxs("div", {
           ...t,
-          children: [getI18nString("figmake.toolbar.padding"), getFeatureFlags().click_to_inspect_reset_styles && jsx($n, {
+          children: [getI18nString("figmake.toolbar.padding"), getFeatureFlags().click_to_inspect_reset_styles && jsx(Button, {
             variant: "secondary",
             disabled: !D,
             onClick: R,
@@ -1195,7 +1195,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.left"),
             children: jsx(_$$R4, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1210,7 +1210,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.top"),
             children: jsx(_$$z2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1225,7 +1225,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.right"),
             children: jsx(_$$M, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1240,7 +1240,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.bottom"),
             children: jsx(_$$v, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1259,7 +1259,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.horizontal"),
             children: jsx(_$$y2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1275,7 +1275,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.padding.vertical"),
             children: jsx(_$$K2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1286,7 +1286,7 @@ function ty() {
         ...n,
         children: [jsxs("div", {
           ...t,
-          children: [getI18nString("figmake.toolbar.margin"), getFeatureFlags().click_to_inspect_reset_styles && jsx($n, {
+          children: [getI18nString("figmake.toolbar.margin"), getFeatureFlags().click_to_inspect_reset_styles && jsx(Button, {
             variant: "secondary",
             disabled: !M,
             onClick: V,
@@ -1304,7 +1304,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.left"),
             children: jsx(_$$R4, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1319,7 +1319,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.top"),
             children: jsx(_$$z2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1334,7 +1334,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.right"),
             children: jsx(_$$M, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1349,7 +1349,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.bottom"),
             children: jsx(_$$v, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1368,7 +1368,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.horizontal"),
             children: jsx(_$$y2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1384,7 +1384,7 @@ function ty() {
             },
             smallNudgeAmount: 1,
             bigNudgeAmount: 10,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("figmake.toolbar.margin.vertical"),
             children: jsx(_$$K2, {
               ...Ay.props(eE.scrubbableInputIconWrapper)
@@ -1463,7 +1463,7 @@ function tC() {
     target: jsx(ar, {
       "aria-label": getI18nString("whiteboard.inline_menu.text_alignment"),
       tooltip: getI18nString("whiteboard.inline_menu.text_alignment"),
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       showCaret: !0,
       isActive: r,
       children: s ? isInvalidValue(s) ? jsx(_$$h3, {}) : a[s].icon() : jsx(_$$h3, {})
@@ -1533,7 +1533,7 @@ function tA() {
     children: jsx(ar, {
       "aria-label": getI18nString("cooper.inline_menu.bold"),
       tooltip: "toggle-bold",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       isActive: r,
       onClick: a,
       children: jsx(noop, {})
@@ -1563,7 +1563,7 @@ function tw() {
     children: jsx(ar, {
       "aria-label": getI18nString("cooper.inline_menu.italic"),
       tooltip: "text-toggle-italic",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       isActive: n,
       onClick: r,
       children: jsx(_$$s3, {})
@@ -1594,7 +1594,7 @@ function tk() {
     children: jsx(ar, {
       "aria-label": getI18nString("type_settings.decoration.underline"),
       tooltip: "text-toggle-underline",
-      tooltipType: Ib.LOOKUP,
+      tooltipType: KindEnum.LOOKUP,
       isActive: r,
       onClick: a,
       children: jsx(_$$W2, {})
@@ -1619,7 +1619,7 @@ function tD({
   return jsxs("div", {
     className: "text_size_nudge_input--nudgeInputContainer--KyT8p",
     "data-testid": "cooper-inline-text-size-control",
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: "text_size_nudge_input--decrementButton--vmC4E text_size_nudge_input--nudgeButtonBase--ctjk3",
       onClick: r,
       disabled: isInvalidValue(e) || e <= tB,
@@ -1636,7 +1636,7 @@ function tD({
         onSizeChanged: t,
         recordingKey: l
       })
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       className: "text_size_nudge_input--incrementButton--f85OX text_size_nudge_input--nudgeButtonBase--ctjk3",
       onClick: a,
       disabled: isInvalidValue(e),
@@ -1848,7 +1848,7 @@ function tJ() {
     children: jsx(ar, {
       "aria-label": getI18nString("sites.panel.copy_make_as_design"),
       tooltip: getI18nString("sites.panel.copy_make_as_design"),
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       onClick: r,
       disabled: isProcessing,
       children: jsx(_$$a, {})
@@ -1914,7 +1914,7 @@ function t9() {
     children: jsx(ar, {
       "aria-label": getI18nString("figmake.toolbar.goToSource"),
       tooltip: getI18nString("figmake.toolbar.goToSource"),
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       onClick: n,
       disabled: !t,
       children: jsx(_$$V, {})
@@ -3396,17 +3396,17 @@ function nU({
           }, e.localGuid))
         })]
       }) : jsx(Fragment, {}),
-      children: [G && z === PanelType.FILE && jsx($n, {
+      children: [G && z === PanelType.FILE && jsx(Button, {
         variant: "secondary",
         "aria-label": getI18nString("fullscreen_actions.return-to-instance"),
         onClick: q,
         children: getI18nString("fullscreen_actions.return-to-instance")
-      }), !$ && z === PanelType.FILE && jsx($n, {
+      }), !$ && z === PanelType.FILE && jsx(Button, {
         variant: "secondary",
         "aria-label": getI18nString("fullscreen_actions.edit-main-component"),
         onClick: Y,
         children: getI18nString("fullscreen_actions.edit-main-component")
-      }), "instance" === e.type && !e.codeInstanceNode.isLayerLikeCodeNode && t && jsx($n, {
+      }), "instance" === e.type && !e.codeInstanceNode.isLayerLikeCodeNode && t && jsx(Button, {
         variant: "secondary",
         "aria-label": getI18nString("sites.code_component.add_to_canvas"),
         onClick: t,

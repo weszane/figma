@@ -14,7 +14,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { XE } from "../figma_app/91703";
 import { Yi } from "../figma_app/933328";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
@@ -79,7 +79,7 @@ class M extends RecordingPureComponent {
       } = this.props;
       if (paint.type === e) return;
       let n = Tm.initPaint(e, this.props.defaultColor, paint, paintId, this.props.nodeDimensions, this.props.hasVisiblePaintBelow);
-      let r = Dc(debugState.getState().selectedView.editorType);
+      let r = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
       let a = "PATTERN" !== paint.type && "PATTERN" === e;
       let l = "PATTERN" === paint.type && "PATTERN" !== e;
       (a || l) && analyticsEventManager.trackDefinedEvent("illustration.web_pattern_paint_change", {

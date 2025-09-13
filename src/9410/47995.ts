@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { a as _$$a } from "../905/964520";
 export function $$s0({
   text: e,
@@ -9,7 +9,7 @@ export function $$s0({
   recordingKey: o,
   rightCaret: l
 }) {
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     onClick: i,
     recordingKey: o,
     className: "native_figjam_action_block--optionContainer--PAZPH",

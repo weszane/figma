@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -21,7 +21,7 @@ import { popModalStack } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { ju } from "../905/389382";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
@@ -61,7 +61,7 @@ export let $$O0 = registerModal(function ({
   let K = useModalManager({
     open: k,
     onClose: () => {
-      Cu({
+      logAndTrackCTA({
         ...D,
         trackingContext: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
         trackingDescriptor: _$$c.CANCEL
@@ -103,7 +103,7 @@ export let $$O0 = registerModal(function ({
       trackingOptions: B,
       children: jsx(J, {
         brand: ju(e),
-        children: jsxs(bL, {
+        children: jsxs(ModalRootComponent, {
           manager: K,
           width: 360,
           children: [jsxs(vo, {

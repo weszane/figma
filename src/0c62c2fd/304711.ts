@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -33,7 +33,7 @@ export function $$x0(e) {
     numFiles: _$$t2(t)
   });
   let T = "loaded" === v.status && 0 === v.data ? renderI18nText("file_browser.delete_project.once_deleted_this_project_can_no_longer_be_restored") : renderI18nText("file_browser.delete_project.once_deleted_this_project_and_its_files_can_no_longer_be_restored");
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: x,
     width: "lg",
     children: jsxs(vo, {
@@ -50,11 +50,11 @@ export function $$x0(e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
             children: renderI18nText("modal.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "destructive",
             onClick: () => {
               trackEventAnalytics("Folder Permanently Delete Confirmation Click", {

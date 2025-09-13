@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { r as _$$r } from "../905/571838";
 import { StateHierarchy, StateGroupErrorType } from "../figma_app/763686";
 import o from "classnames";
@@ -40,7 +40,7 @@ export function $$m1({
               })
             }), jsx("div", {
               className: pV,
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: t,
                 children: renderI18nText("design_systems.states_panel.select_invalid_variants")
@@ -51,7 +51,7 @@ export function $$m1({
           return jsxs(Fragment, {
             children: [renderI18nText("design_systems.states_panel.some_variants_have_the_same_property_values_applied"), jsx("div", {
               className: pV,
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: t,
                 children: renderI18nText("design_systems.states_panel.select_conflicting_variants")
@@ -62,7 +62,7 @@ export function $$m1({
           return jsxs(Fragment, {
             children: [renderI18nText("design_systems.states_panel.some_variants_are_missing_properties"), jsx("div", {
               className: pV,
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: t,
                 children: renderI18nText("design_systems.states_panel.select_invalid_variants")

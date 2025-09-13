@@ -4,7 +4,7 @@ import { flushSync } from "react-dom";
 import { A as _$$A } from "../vendor/723372";
 import { i as _$$i } from "../905/97346";
 import { useExposedRef } from "../905/581092";
-import { Vg, px, GX } from "../905/893109";
+import { identity, toPixels, toPercent } from "../905/893109";
 import { defaultComponentAttribute } from "../905/577641";
 var n = {};
 require.d(n, {
@@ -270,8 +270,8 @@ function N({
     "data-fpl-orientation": e,
     className: x,
     style: {
-      [Vg("--scroll-size")]: px(t),
-      [Vg("--scroll-percent")]: GX(i)
+      [identity("--scroll-size")]: toPixels(t),
+      [identity("--scroll-percent")]: toPercent(i)
     }
   });
 }

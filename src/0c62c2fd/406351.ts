@@ -8,9 +8,9 @@ import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { popModalStack } from "../905/156213";
-import { E9 } from "../figma_app/314264";
+import { trackFileBrowserFileClick } from "../figma_app/314264";
 import { fileEntityDataMapper } from "../905/943101";
 import { AddWorkspacePinnedFileView } from "../figma_app/43951";
 import { p as _$$p } from "../0c62c2fd/698840";
@@ -58,7 +58,7 @@ export function $$y0({
         description: e,
         shouldUpdatePermissions: T
       });
-      E9("file_browser_file_pinned_to_resource", file, {
+      trackFileBrowserFileClick("file_browser_file_pinned_to_resource", file, {
         resourceType: AH,
         resourceId: I.id,
         source: t,
@@ -94,10 +94,10 @@ function w({
   let s = useSelector(({
     orgById: e
   }) => e[r].name);
-  return jsx(E, {
+  return jsx(TextWithTruncation, {
     children: renderI18nText("file_browser.pinning.update_permissions.content", {
       workspaceName: t.name,
-      permission: jsx(E, {
+      permission: jsx(TextWithTruncation, {
         fontWeight: "bold",
         children: renderI18nText("file_browser.pinning.update_permissions.content.permission", {
           orgName: s

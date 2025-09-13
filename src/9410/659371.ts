@@ -9,12 +9,12 @@ import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { Uz } from "../905/63728";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { getI18nString } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { w as _$$w } from "../figma_app/654279";
 import { IR, iX } from "../figma_app/29287";
 import { Gq, MS, bM, ON } from "../figma_app/101849";
@@ -68,7 +68,7 @@ export function $$U1() {
   return v1();
 }
 export function $$G11() {
-  let e = q8();
+  let e = isAIFeaturesEnabledForCurrentUser();
   let t = getFeatureFlags().figjam_synthesize_handbrake || !1;
   let i = [];
   let n = V() && !e;
@@ -80,7 +80,7 @@ export function $$G11() {
   let v = Zr("align-top");
   let E = {
     tooltip: _$$w,
-    tooltipType: Ib.SPECIAL
+    tooltipType: KindEnum.SPECIAL
   };
   p && i.push({
     type: "open_cluster_by_more_menu",
@@ -109,7 +109,7 @@ export function $$G11() {
     fplIcon: jsx(D, {}),
     tooltipOverrides: {
       tooltip: "tidy-up",
-      tooltipType: Ib.LOOKUP
+      tooltipType: KindEnum.LOOKUP
     }
   });
   h && i.push({
@@ -120,7 +120,7 @@ export function $$G11() {
     fplIcon: jsx(_$$c, {}),
     tooltipOverrides: {
       tooltip: "create-section-from-selection",
-      tooltipType: Ib.LOOKUP
+      tooltipType: KindEnum.LOOKUP
     }
   });
   c && i.push({
@@ -139,7 +139,7 @@ export function $$G11() {
 }
 export function $$K6() {
   return [...function () {
-    let e = q8();
+    let e = isAIFeaturesEnabledForCurrentUser();
     let t = v1();
     if (e) return [];
     let i = !!getFeatureFlags().figjam_synthesize_handbrake;
@@ -149,7 +149,7 @@ export function $$K6() {
     });
     let a = {
       tooltip: _$$w,
-      tooltipType: Ib.SPECIAL
+      tooltipType: KindEnum.SPECIAL
     };
     r.push({
       type: "cluster_by_topic",

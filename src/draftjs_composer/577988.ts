@@ -2,10 +2,10 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import l from "classnames";
 import { Point } from "../905/736624";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { i4 } from "../figma_app/770088";
@@ -16,7 +16,7 @@ import { j as _$$j } from "../draftjs_composer/390258";
 import { wT } from "../figma_app/188152";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { CM } from "../figma_app/45218";
+import { NoUserProfileStatus } from "../figma_app/45218";
 import { wV } from "../figma_app/585209";
 import { _B } from "../905/852370";
 import { iX } from "../6443/426443";
@@ -33,7 +33,7 @@ let F = ({
   userId: t,
   dispatch: n
 }) => {
-  if (e === CM.NO_USER) {
+  if (e === NoUserProfileStatus.NO_USER) {
     n(Ts({
       origin: "comments_signed_out"
     }));
@@ -47,7 +47,7 @@ let F = ({
     }));
     return;
   }
-  if (e === CM.NO_PROFILE) {
+  if (e === NoUserProfileStatus.NO_PROFILE) {
     n(showModalHandler({
       type: G$,
       data: {
@@ -72,15 +72,15 @@ function S({
 }) {
   return jsxs("div", {
     className: s ?? "comment_composer--buttonsContainer--VtZKz",
-    children: [t && jsx($n, {
+    children: [t && jsx(Button, {
       variant: "secondary",
       onClick: e,
       children: renderI18nText("general.cancel")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "primary",
       onClick: n,
       disabled: i || a,
-      children: i ? jsx(kt, {
+      children: i ? jsx(LoadingSpinner, {
         className: "comment_composer--buttonLoading--4VkBz publish_modal--spinner--7DaqW"
       }) : t && !l ? getI18nString("community.comments.save") : getI18nString("community.comments.post")
     })]
@@ -109,7 +109,7 @@ export function $$D1(e) {
     editorRef,
     placeholder
   } = e;
-  let P = t ? t.community_profile_id ? null : CM.NO_PROFILE : CM.NO_USER;
+  let P = t ? t.community_profile_id ? null : NoUserProfileStatus.NO_PROFILE : NoUserProfileStatus.NO_USER;
   let z = useCallback(() => {
     F({
       userOnboardingState: P,

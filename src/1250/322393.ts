@@ -34,7 +34,7 @@ import { eY } from '../figma_app/722362';
 import { setNodeExpanded } from '../figma_app/741237';
 import { ce, EC, Fs, Hk, L1, mF, Tw, xB } from '../figma_app/755939';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
-import { U as _$$U } from '../figma_app/901889';
+import { trackFileEventWithStore } from '../figma_app/901889';
 import { ky } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
 import { useSelector, useDispatch } from 'react-redux';
@@ -106,7 +106,7 @@ export function $$X7() {
   return $$Z20() === 'LEFT_RAIL';
 }
 export function $$J18() {
-  let e = _$$U();
+  let e = trackFileEventWithStore();
   let t = useSelector(e => e.search.sessionId);
   let [n, i] = useAtomValueAndSetter(ce);
   let [o, s] = useAtomValueAndSetter(EC);

@@ -22,7 +22,7 @@ import { XE } from "../figma_app/91703";
 import { fullscreenValue } from "../figma_app/455680";
 import { ZH } from "../figma_app/504823";
 import { valueOrFallback } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { fI, JU } from "../figma_app/626177";
 import { dx } from "../figma_app/334459";
 import { Kj, Yj, OK } from "../905/416496";
@@ -147,7 +147,7 @@ export class $$B5 extends PureComponent {
           label: jsx(Label, {
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_layer_names_using_id_attributes"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: renderI18nText("fullscreen.properties_panel.include_id_attribute")
           }),
@@ -161,7 +161,7 @@ export class $$B5 extends PureComponent {
           label: jsx(Label, {
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_text_as_outlined_path_element"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: renderI18nText("fullscreen.properties_panel.outline_text")
           }),
@@ -175,7 +175,7 @@ export class $$B5 extends PureComponent {
           label: jsx(Label, {
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_stroke_as_inlined_path_element"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: renderI18nText("fullscreen.properties_panel.simplify_stroke")
           }),

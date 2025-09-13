@@ -1,6 +1,6 @@
 import { n3 } from "../905/859698";
 import { memoizeWeak } from "../figma_app/815945";
-import { e1, oA, gB } from "../905/723791";
+import { e1, getResourceDataOrFallback, gB } from "../905/723791";
 import { Zt, KC, rZ } from "../figma_app/349248";
 export let $$o0 = memoizeWeak(e => {
   if ("loaded" !== e.status) return {
@@ -15,7 +15,7 @@ export let $$o0 = memoizeWeak(e => {
     hubFile,
     ...o
   } = t.destinationAsset || t;
-  let l = oA(hubFile);
+  let l = getResourceDataOrFallback(hubFile);
   let d = Zt(file, l);
   return d ? {
     result: gB({

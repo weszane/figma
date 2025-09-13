@@ -9,7 +9,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
 import { S as _$$S } from "../905/339549";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { tI } from "../figma_app/599327";
 import { BC } from "../figma_app/149367";
 import { hideModalHandler } from "../905/156213";
@@ -84,12 +84,12 @@ function T({
     children: jsxs(AutoLayout, {
       direction: "vertical",
       spacing: 0,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         color: "default",
         fontWeight: "semi-bold",
         fontSize: 20,
         children: renderI18nText(`org_admin_settings.billing.finalize_invoice_modal.title.${e}`)
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         color: "default",
         fontSize: 13,
         fontWeight: "regular",

@@ -9,7 +9,7 @@ import { q } from '../905/820062';
 import { BK } from '../905/848862';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { s as _$$s } from '../cssbuilder/589278';
-import { $g, _X } from '../figma_app/62612';
+import { addViewportOffset, getViewportInfo } from '../figma_app/62612';
 import { J } from '../figma_app/63663';
 import { isNullish } from '../figma_app/95419';
 import { b as _$$b } from '../figma_app/192260';
@@ -21,7 +21,7 @@ import { K } from '../figma_app/695131';
 import { EE, lB } from '../figma_app/731583';
 import { d as _$$d } from '../figma_app/844319';
 import { generateRecordingKey } from '../figma_app/878298';
-import { am } from '../figma_app/901889';
+import { trackFileEventWithUser } from '../figma_app/901889';
 import { useSelector } from 'react-redux';
 import { flushSync } from 'react-dom';
 let f = g;
@@ -108,10 +108,10 @@ function F({
 }) {
   let t = BK('BREAKPOINTS_HEADER_DROPDOWN');
   let r = t.data?.responsiveSetId || '';
-  let a = am();
+  let a = trackFileEventWithUser();
   let s = useSetAtom(_$$O);
   let o = useSetAtom(K);
-  let m = _X({
+  let m = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let g = useMemo(() => {
@@ -130,7 +130,7 @@ function F({
       let n = r.absoluteBoundingBox;
       let i = n.x + n.w;
       let a = n.y;
-      let s = $g(t, {
+      let s = addViewportOffset(t, {
         x: i,
         y: a
       });

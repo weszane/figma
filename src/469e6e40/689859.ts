@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { V } from "../figma_app/312987";
 import { $$ } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -160,7 +160,7 @@ let $$C0 = registerModal(function (e) {
       onClose: () => t(hideModal()),
       maxWidth: 310,
       minWidth: 310,
-      children: "loaded" !== C.status ? jsx(kt, {
+      children: "loaded" !== C.status ? jsx(LoadingSpinner, {
         className: "default_paid_status--loading_spinner--QKHjF"
       }) : jsxs("div", {
         className: "default_paid_status--modalContainer--PEJw8 modal--container--LVq8G",

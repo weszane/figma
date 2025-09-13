@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { f as _$$f } from "../905/809171";
 import { J as _$$J } from "../905/614223";
 import { AppStateTsApi } from "../figma_app/763686";
@@ -517,7 +517,7 @@ export function $$ex0(e) {
   let W = oW();
   if (K.isInFigmaMakePrototypeTabUpsellExp = W, k) return jsxs("div", {
     className: "announcement--loggedOutSignupCta--qrt2V",
-    children: [jsx(_$$f, {}), getI18nString("auth.create_account_to_view_reply_comments"), jsx($n, {
+    children: [jsx(_$$f, {}), getI18nString("auth.create_account_to_view_reply_comments"), jsx(Button, {
       variant: "link",
       onClick: () => P("SIGN_UP_CTA_COMMENTS_PANEL"),
       children: getI18nString("auth.sign_up")

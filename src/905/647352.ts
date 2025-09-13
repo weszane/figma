@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import o from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { formatList } from "../figma_app/930338";
@@ -12,7 +12,7 @@ import { showModalHandler } from "../905/156213";
 import { processLocalComponents } from "../figma_app/80990";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { cM, MH, dM } from "../figma_app/803787";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ND } from "../figma_app/76115";
 import { Label } from "../905/270045";
 import { getFeatureFlags } from "../905/601108";
@@ -147,7 +147,7 @@ export function $$W0(e) {
     children: [jsx("div", {
       className: "subscription_file_view_footer--footerTextWithEllipsis--ocx7T ellipsis--ellipsis--Tjyfa",
       ref: N,
-      "data-tooltip-type": P && Ib.TEXT,
+      "data-tooltip-type": P && KindEnum.TEXT,
       "data-tooltip": R,
       "data-tooltip-max-width": 340,
       "data-tooltip-show-immediately": !0,
@@ -164,7 +164,7 @@ export function $$W0(e) {
         children: renderI18nText("design_systems.libraries_modal.swap_library")
       }) : jsx("div", {
         className: H,
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "secondary",
           recordingKey: "subscriptionFileView.swapLibrary",
           onClick: e.onRemapLibraryClick,
@@ -202,7 +202,7 @@ export function $$W0(e) {
           children: renderI18nText("design_systems.libraries_modal.unpublish")
         }) : jsx("div", {
           className: H,
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "secondary",
             disabled: E,
             onClick: k,
@@ -212,12 +212,12 @@ export function $$W0(e) {
           className: H,
           children: jsx(_$$I, {
             entryPoint: RR.LIBRARY_MODAL_FILE_VIEW,
-            publishedState: jsx($n, {
+            publishedState: jsx(Button, {
               variant: "primary",
               disabled: !0,
               children: renderI18nText("design_systems.libraries_modal.publish_changes")
             }),
-            emptyState: jsx($n, {
+            emptyState: jsx(Button, {
               variant: "primary",
               disabled: !0,
               children: renderI18nText("design_systems.libraries_modal.publish_changes")
@@ -245,7 +245,7 @@ function K({
   });
   return jsx("div", {
     className: _$$s.ml6.$,
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: i,
       disabled: e,
       onClick: t,

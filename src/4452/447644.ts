@@ -39,7 +39,7 @@ import { s as _$$s3, u as _$$u } from "../4452/791117";
 import { k as _$$k2 } from "../4452/48052";
 import { W as _$$W } from "../4452/420937";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z, Me } from "../figma_app/617427";
@@ -66,7 +66,7 @@ import { MX, EQ } from "../figma_app/684446";
 import { FUserRoleType } from "../figma_app/191312";
 import { AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
 import { Sm } from "../figma_app/482728";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { w as _$$w } from "../905/281010";
 import { az } from "../figma_app/805373";
 import { Cj } from "../905/270084";
@@ -105,7 +105,7 @@ let ee = registerModal(function (e) {
       planType: e.plan.key.type,
       planId: e.plan.key.parentId
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: a,
       width: "lg",
       children: jsxs(vo, {
@@ -768,7 +768,7 @@ export function $$e$0({
   }, []);
   let t3 = useCallback(e => jsx("div", {
     className: e.hasBeenNudged ? cp : void 0,
-    "data-tooltip-type": e.hasBeenNudged ? Ib.TEXT : void 0,
+    "data-tooltip-type": e.hasBeenNudged ? KindEnum.TEXT : void 0,
     "data-tooltip": getI18nString("admin_dashboard.requests.sent_you_a_reminder", {
       requesterName: e.name ?? e.email ?? ""
     }),

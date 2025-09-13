@@ -4,7 +4,7 @@ import { N } from "../905/720559";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
 import { Q } from "../figma_app/104130";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { w2 } from "../figma_app/178475";
 import { fI, JU } from "../figma_app/626177";
 import { WC } from "../figma_app/973219";
@@ -28,7 +28,7 @@ export function $$h0(e) {
           ...xk(m.input, e.positionOverride),
           inputClassName: WC,
           "data-tooltip": getI18nString("fullscreen.scrubbable.opacity"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: t,
           onValueChange: (t, i) => e.onChange({
             ...e.paint,

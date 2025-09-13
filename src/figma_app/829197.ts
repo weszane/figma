@@ -6,7 +6,7 @@ import { debugState } from "../905/407919";
 import { userColorProfileAtomFamily } from "../905/888985";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { FColorSpaceType } from "../figma_app/191312";
 import { M } from "../905/366117";
 let h = {
@@ -61,7 +61,7 @@ export function $$b4({
   if (e === h.colorProfilePreference) return;
   !function (e) {
     let t = debugState.getState();
-    uE("color_profile_preference", t, {
+    trackUserEvent("color_profile_preference", t, {
       userColorProfile: e.userColorProfilePreference.colorProfilePreference,
       userColorProfileId: e.userColorProfilePreference.id,
       eventName: e.eventName,

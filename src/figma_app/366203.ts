@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { colorToHexString } from "../figma_app/191804";
 import { generateUUIDv4 } from "../905/871474";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { isValidValue } from "../905/216495";
@@ -235,7 +235,7 @@ export function $$W3() {
         l && t(e);
       };
       return S && "divider" !== e ? jsx(_$$c, {
-        icon: jsx(_$$B, {
+        icon: jsx(SvgComponent, {
           className: _$$s.colorIconOnbrand.$,
           svg: X(e, c, p, y)
         }),

@@ -6,14 +6,14 @@ import { h as _$$h } from "../905/207101";
 import { usePersistentValue } from "../figma_app/922077";
 import { generateRecordingKey, addInteractionPath, removeInteractionPath } from "../figma_app/878298";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r } from "../905/571562";
 import { SV } from "../figma_app/272902";
 import m from "classnames";
 import { L } from "../figma_app/819472";
 import { jD } from "../905/765855";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yq, wK, OT, Tp, fW } from "../figma_app/769863";
 import { sg } from "../figma_app/48566";
 import { C as _$$C } from "../figma_app/938538";
@@ -41,7 +41,7 @@ function $$I(e) {
   useEffect(() => {
     isSelected && (b(jD()), C());
   }, [isSelected, b, C]);
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ref: A,
     className: g()("tool_group--flyoutChevron--21UP1", {
       "tool_group--flyoutChevronSelected--aAgNx": isSelected,
@@ -49,7 +49,7 @@ function $$I(e) {
     }),
     disabled: N,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": tooltipText,
       "data-tooltip-show-above": !0,
       "data-onboarding-key": onboardingKey,

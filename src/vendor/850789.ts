@@ -1,5 +1,5 @@
 import { useState, useCallback, useRef } from "react";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 function o(e, r) {
   return e === r;
 }
@@ -21,7 +21,7 @@ export function $$d0(e, r, n) {
   var d = h(e);
   var p = d[0];
   var g = d[1];
-  var m = _$$A(useCallback(function (e) {
+  var m = useDebouncedCallback(useCallback(function (e) {
     return g(e);
   }, [g]), r, n);
   var v = useRef(e);

@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { s as _$$s } from "../905/583953";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay, sZ } from "../figma_app/948389";
 import { fk } from "../905/23253";
@@ -43,7 +43,7 @@ export let $$g1 = async ({
     case JT.EDIT_IMAGE:
       A = "image_edit";
   }
-  ds(`${A}_started`, y.openFile?.key, y, {});
+  trackFileEvent(`${A}_started`, y.openFile?.key, y, {});
   let I = 0;
   let E = [...Array(f)].map(async () => {
     try {
@@ -92,7 +92,7 @@ export let $$g1 = async ({
       r(a);
       void 0 === v.time_to_first_response && (v.time_to_first_response = performance.now() - b);
     } catch (e) {
-      if (I++, ds(`${A}_failed`, y.openFile?.key, y, {
+      if (I++, trackFileEvent(`${A}_failed`, y.openFile?.key, y, {
         error: e,
         reason: sZ(e)
       }), a(), I === f) throw e;
@@ -103,7 +103,7 @@ export let $$g1 = async ({
   });
   await Promise.race([Promise.all(E), x]);
   v.completion_time = performance.now() - b;
-  ds(`${A}_complete`, y.openFile?.key, y, {
+  trackFileEvent(`${A}_complete`, y.openFile?.key, y, {
     ...v
   });
 };

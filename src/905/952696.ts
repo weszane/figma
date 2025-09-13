@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { CY } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../6828/364616";
 import { A as _$$A2 } from "../6828/844411";
 import { A as _$$A3 } from "../5724/463194";
@@ -57,18 +57,18 @@ export function $$g0({
     children: [jsxs("button", {
       onClick: () => y(!A),
       className: _$$s.flex.itemsCenter.$,
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         svg: _ ? _$$A4 : _$$A3,
         svgClassName: _ ? _$$s.colorBgSecondary.bRadius4.$ : void 0,
         useOriginalSrcFills_DEPRECATED: !0,
         dataTestId: "network-globe-icon"
       }), jsx("div", {
         className: _ ? _$$s.ml12.alignLeft.$ : _$$s.ml8.alignLeft.$,
-        children: jsx(E, {
+        children: jsx(TextWithTruncation, {
           color: "default",
           children: label
         })
-      }), !g && jsx(B, {
+      }), !g && jsx(SvgComponent, {
         dataTestId: "network-access-chevron-icon",
         svg: b,
         className: _$$s.colorIconSecondary.ml4.$
@@ -78,7 +78,7 @@ export function $$g0({
       style: sx.add({
         maxWidth: "320px"
       }).$,
-      children: [jsx(E, {
+      children: [jsx(TextWithTruncation, {
         fontSize: 11,
         children: description
       }), domains.length > 0 && jsx("ul", {
@@ -93,10 +93,10 @@ export function $$g0({
           })
         }, e))
       }), null != reasoning && jsxs("div", {
-        children: [jsx(E, {
+        children: [jsx(TextWithTruncation, {
           fontSize: 11,
           children: renderI18nText("community_detail_view.creators_note")
-        }), jsx(E, {
+        }), jsx(TextWithTruncation, {
           fontSize: 11,
           children: reasoning
         })]
@@ -104,7 +104,7 @@ export function $$g0({
         href: t ? "https://help.figma.com/hc/articles/4410047809431-Use-widgets-in-files#Network_access" : "https://help.figma.com/hc/articles/360042532714-Use-plugins-in-files#Network_access",
         trusted: !0,
         target: "_blank",
-        children: jsx(E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           children: renderI18nText("community_detail_view.learn_more_network_access")
         })
@@ -116,7 +116,7 @@ function f({
   url: e
 }) {
   let t = e.replace("://", "://\u200B");
-  return jsx(E, {
+  return jsx(TextWithTruncation, {
     fontFamily: "monospace",
     fontSize: 11,
     children: t

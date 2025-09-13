@@ -6,9 +6,9 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Yy } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { S as _$$S } from "../905/794163";
@@ -25,7 +25,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { Pf } from "../905/590952";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { g as _$$g } from "../905/119656";
 import { T as _$$T } from "../905/292816";
 import { wn } from "../figma_app/920435";
@@ -172,7 +172,7 @@ function X(e) {
       children: getI18nString("billing_modals.team_add_seats.table.header.projected_cost")
     }),
     textAlign: "right",
-    cellComponent: e => jsx(_$$E2, {
+    cellComponent: e => jsx(TextWithTruncation, {
       color: "secondary",
       truncate: !0,
       children: w.formatMoney(eo[e] || 0, {
@@ -190,7 +190,7 @@ function X(e) {
             showCents: !1
           })
         })
-      }), jsx(_$$E2, {
+      }), jsx(TextWithTruncation, {
         truncate: !0,
         children: w.formatMoney(ed, {
           showCents: !1
@@ -199,11 +199,11 @@ function X(e) {
     }),
     aggregateColumnSpan: 2
   } : void 0;
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: h,
     width: 480,
     height: K,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: () => {
         er || (et(!0), wn({
           teamId: b,
@@ -255,7 +255,7 @@ function X(e) {
           items: N_.toArray().sort(AG),
           columns: [{
             id: "billableProductKey",
-            name: jsx(_$$E2, {
+            name: jsx(TextWithTruncation, {
               color: "secondary",
               truncate: !0,
               children: getI18nString("billing_modals.renewal.table.header.seat_type")
@@ -277,7 +277,7 @@ function X(e) {
               children: getI18nString("billing_modals.team_add_seats.table.header.monthly")
             }),
             textAlign: "right",
-            cellComponent: e => jsx(_$$E2, {
+            cellComponent: e => jsx(TextWithTruncation, {
               color: "secondary",
               truncate: !0,
               children: Math.max(0, (L[e] || 0) - (ec[e] || 0))
@@ -298,7 +298,7 @@ function X(e) {
                 maxCount: $$in
               })
             }),
-            getAggregate: () => jsx(_$$E2, {
+            getAggregate: () => jsx(TextWithTruncation, {
               truncate: !0,
               children: en
             }),
@@ -313,11 +313,11 @@ function X(e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
             children: getI18nString("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             type: "submit",
             disabled: er,
             children: renderI18nText("billing_modals.team_add_seats.cta")

@@ -7,11 +7,11 @@ import { HiddenLabel } from "../905/270045";
 import { f as _$$f } from "../905/54715";
 import { M3 } from "../figma_app/119475";
 import { L } from "../905/408237";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { I } from "../905/343721";
 import { cr, CO, yY } from "../905/703676";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ON, hF, hj, xQ, Dq } from "../905/954985";
 import { A as _$$A } from "../svg/927263";
 export function $$y0({
@@ -59,7 +59,7 @@ export function $$y0({
           "aria-label": getI18nString("search.search_bar.clear"),
           onClick: b,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("search.search_bar.clear")
           },
           children: jsx(_$$f, {})
@@ -78,7 +78,7 @@ export function $$b2({
     children: jsx(cr, {
       disableRecentSearchOnClick: !0,
       href: "",
-      icon: jsx(B, {
+      icon: jsx(SvgComponent, {
         className: Dq,
         svg: _$$A
       }),

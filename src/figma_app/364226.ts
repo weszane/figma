@@ -2,19 +2,19 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { a as _$$a } from "../905/5627";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { popModalStack } from "../905/156213";
 import { M } from "../figma_app/170366";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export let $$y0 = registerModal(function (e) {
   let {
     localPlugin
@@ -33,7 +33,7 @@ export let $$y0 = registerModal(function (e) {
     desktopVersion: 80
   });
   let S = BrowserInfo.mac ? renderI18nText("universal_insert.show_in_finder") : renderI18nText("universal_insert.show_in_explorer");
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: y,
     width: "md",
     children: jsxs(vo, {
@@ -52,7 +52,7 @@ export let $$y0 = registerModal(function (e) {
             padding: 4,
             width: "fill-parent",
             cornerRadius: 3,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: "secondary",
               fontSize: 13,
               fontFamily: "monospace",
@@ -66,7 +66,7 @@ export let $$y0 = registerModal(function (e) {
             },
             "aria-label": getI18nString("inspect_panel.copy"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("inspect_panel.copy")
             },
             children: jsx(_$$a, {})
@@ -74,11 +74,11 @@ export let $$y0 = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: () => r(popModalStack()),
             variant: "secondary",
             children: renderI18nText("universal_insert.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               I ? T?.openExtensionManifest(localPlugin.localFileId) : T?.openExtensionDirectory(localPlugin.localFileId);
             },

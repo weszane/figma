@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId, useState, useRef } from "react";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { J } from "../905/614223";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/749682";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Mr } from "../figma_app/795938";
 import { dY } from "../905/838765";
 import { Ij, OV } from "../905/988303";
@@ -103,7 +103,7 @@ export function $$f0(e) {
           className: l()("publish_file_resource_modal_card--publishFileResourceModalCardThumbnailCTA--NJyB0", {
             "publish_file_resource_modal_card--ctaNotHovered--nXzOB": (enableRestore || N) && !(D || L)
           }),
-          children: [jsxs(IK, {
+          children: [jsxs(ButtonWide, {
             variant: "secondary",
             type: "button",
             onClick: function () {
@@ -131,12 +131,12 @@ export function $$f0(e) {
             style: {
               display: "none"
             }
-          }), jsx(E, {
+          }), jsx(TextWithTruncation, {
             color: "secondary",
             fontSize: 11,
             fontWeight: "medium",
             children: renderI18nText("templates.publishing.thumbnail_size_dimension_spec")
-          }), uploadError && jsx(E, {
+          }), uploadError && jsx(TextWithTruncation, {
             color: "danger",
             fontSize: 11,
             fontWeight: "medium",

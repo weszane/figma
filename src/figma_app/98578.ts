@@ -4,7 +4,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { $ } from "../905/922405";
-import { v5 } from "../figma_app/314264";
+import { getProductType } from "../figma_app/314264";
 import { l as _$$l } from "../905/202425";
 import { W7 } from "../figma_app/251115";
 import { $L, OW } from "../figma_app/737746";
@@ -123,7 +123,7 @@ export function $$I1(e) {
     let e = debugState.getState();
     let t = _$$l(e);
     let r = e.openFile?.key ?? "";
-    let n = v5(e.selectedView, null);
+    let n = getProductType(e.selectedView, null);
     let l = atomStoreManager.get(dd) ?? "";
     l || reportError(_$$e.EXTENSIBILITY, Error(`No quick actions session ID found when logging ${OW}`));
     let _ = atomStoreManager.get(Rt);

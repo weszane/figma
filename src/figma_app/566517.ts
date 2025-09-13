@@ -12,7 +12,7 @@ import { logWarning, logDebug } from "../905/714362";
 import { XHR } from "../905/910117";
 import { teamLibraryCache } from "../figma_app/80990";
 import { Ay as _$$Ay } from "../figma_app/432652";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
 import { U2 } from "../figma_app/193867";
 import { Gh } from "../figma_app/707567";
@@ -54,7 +54,7 @@ export async function $$C12(e, t) {
   });
   e.removeLocalOpacity();
   let i = PluginHelpers.getViewportZoomScale();
-  let a = await QZ({
+  let a = await computeFullscreenViewportForNode({
     nodeId: e.guid,
     alwaysPan: !0,
     maxScale: 1

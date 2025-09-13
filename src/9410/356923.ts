@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { AppStateTsApi, SlideConstantsCppBindings } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { l as _$$l } from "../905/716947";
@@ -11,12 +11,12 @@ import { Xr, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app
 import h from "classnames";
 import { Point } from "../905/736624";
 import { oW } from "../905/675859";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
 import { wo } from "../figma_app/753501";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { q } from "../905/524117";
@@ -88,7 +88,7 @@ export function $$P2({
       thumbnailUrl: e.thumbnail_url,
       onPointerDown: t => {
         E(t);
-        Cu({
+        logAndTrackCTA({
           moduleId: e.id,
           moduleFileKey: M(e),
           fileKey: u,
@@ -111,7 +111,7 @@ export function $$F1({
   removeBorder: d = !1,
   ...c
 }) {
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: m()(_$$s.flex.flexColumn.itemsStart.hFull.wFull.$, ln),
     onClick: l ? void 0 : a,
     actionOnPointerDown: !0,
@@ -125,7 +125,7 @@ export function $$F1({
         width: i ?? "100%",
         height: n ?? "100%"
       },
-      children: [s && jsx(kt, {
+      children: [s && jsx(LoadingSpinner, {
         className: _$$S
       }), jsx(oW, {
         onDragStart: wo,
@@ -233,7 +233,7 @@ function K({
   if (!libraryKey) return null;
   let h = e => {
     e.stopPropagation();
-    libraryKey && (Cu({
+    libraryKey && (logAndTrackCTA({
       fileKey: libraryKey,
       name: "template_cover_tile",
       productType: "slides"

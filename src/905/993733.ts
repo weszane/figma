@@ -1,19 +1,19 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, memo, Component } from "react";
 import { filterNotNullish } from "../figma_app/656233";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { ComponentPropType, VariablesBindings, LayoutSizingMode, RelationType, LibraryUpdateStatus } from "../figma_app/763686";
 import { isValidSessionLocalID, sessionLocalIDToString, areSessionLocalIDsEqual, defaultSessionLocalIDString } from "../905/871411";
 import d from "classnames";
 import { generateUUIDv4 } from "../905/871474";
 import { R as _$$R } from "../905/307199";
 import { ph } from "../figma_app/709893";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Zy } from "../figma_app/955484";
 import { UK } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { UB } from "../figma_app/249941";
 import { ReviewPhase, formatRenderName, createSinglePropertyRenderTreatment, createMultiPropertyRenderTreatment, createMultiNodeRenderTreatment, createDisplayNodeSinglePropertyRenderTreatment, ProjectDevelopmentPhases, visualAttributes2, visualAttributes, RenderStrategy } from "../905/869235";
 import { relaxedEqual, deepEqual } from "../905/382883";
@@ -26,10 +26,10 @@ import { convertKiwiToVariableIdString } from "../905/805904";
 import { TI } from "../905/713722";
 import { LN, wf } from "../figma_app/975811";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { R as _$$R2 } from "../figma_app/313269";
 import { p as _$$p } from "../905/241044";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { WD } from "../figma_app/571341";
 import { NU, X$, iM } from "../905/945781";
 import { A as _$$A } from "../6828/523860";
@@ -159,7 +159,7 @@ function ec(e, t) {
     let t = e.toString();
     let i = _$$p(t);
     return jsx(_$$R2, {
-      fallback: jsx(kt, {}),
+      fallback: jsx(LoadingSpinner, {}),
       errorFallback: null,
       value: i,
       quillClassName: "treatment_definition_reusables--quill--Z1kJq"
@@ -242,7 +242,7 @@ function e_(e) {
   }
   let p = e => jsx("div", {
     className: c()(q, "treatment_definition_reusables--legoValueCell--V4fq0", ee, "chunk_diff_details--copyableChanges--1LoXJ"),
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "ghost",
       onClick: () => WD(e, s),
       children: jsx("div", {
@@ -957,7 +957,7 @@ let e5 = (e, t, i) => {
   let s = el("borderLeftWeight", e, t, i) ?? 0;
   let o = el("borderRightWeight", e, t, i) ?? 0;
   return jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("collaboration.branching_node_treatments.property.border_weights_tooltip"),
     style: {
       display: "inline-block"
@@ -971,7 +971,7 @@ let e4 = (e, t, i) => {
   let s = el("rectangleBottomRightCornerRadius", e, t, i) ?? 0;
   let o = el("rectangleBottomLeftCornerRadius", e, t, i) ?? 0;
   return jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("collaboration.branching_node_treatments.property.radii_tooltip"),
     style: {
       display: "inline-block"
@@ -1743,7 +1743,7 @@ export function $$tx1({
             onMouseLeave: () => {
               i && i(defaultSessionLocalIDString);
             },
-            children: [jsxs(_$$E, {
+            children: [jsxs(ButtonPrimitive, {
               onClick: () => {
                 o && r && o(r, e);
               },
@@ -1765,7 +1765,7 @@ export function $$tx1({
                   text: p ? `${a} (${sessionLocalIDToString(e.change.guid) || sessionLocalIDToString(e.basis.guid)})` : a,
                   tooltipPropsWhenTruncated: {
                     "data-tooltip": a,
-                    "data-tooltip-type": Ib.TEXT
+                    "data-tooltip-type": KindEnum.TEXT
                   }
                 })]
               }), jsx(tR, {
@@ -1825,7 +1825,7 @@ function tw(e) {
   let s = v(basis, change);
   let o = useMemo(() => ({
     "data-tooltip": s,
-    "data-tooltip-type": Ib.TEXT
+    "data-tooltip-type": KindEnum.TEXT
   }), [s]);
   return jsxs("div", {
     className: "chunk_diff_details--node--c80fZ",
@@ -1924,10 +1924,10 @@ function tN(e) {
 function tP(e) {
   let [t, i] = useState(!0);
   let a = jsxs(Fragment, {
-    children: [t ? jsx(_$$B, {
+    children: [t ? jsx(SvgComponent, {
       svg: _$$A,
       className: K
-    }) : jsx(_$$B, {
+    }) : jsx(SvgComponent, {
       svg: _$$A2,
       className: K
     }), jsx("div", {
@@ -1937,7 +1937,7 @@ function tP(e) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: "chunk_diff_details--mainTitle--vdyvJ text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         className: "chunk_diff_details--disclosure--vEErG",
         onClick: () => {
           i(!t);

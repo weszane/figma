@@ -39,7 +39,7 @@ import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import J from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { o as _$$o2 } from "../9410/935965";
-import { B as _$$B3 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { F as _$$F2 } from "../figma_app/832508";
 import { y as _$$y3 } from "../figma_app/778611";
 import { Q as _$$Q } from "../1291/188959";
@@ -556,7 +556,7 @@ export function $$e20() {
       toolId: DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND,
       shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_DIAMOND),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-diamond"),
-      icon: jsx(_$$B3, {
+      icon: jsx(SvgComponent, {
         className: eO,
         svg: _$$A6
       })
@@ -574,7 +574,7 @@ export function $$e20() {
       toolId: DesignGraphElements.SHAPE_WHITEBOARD_PLUS,
       shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_PLUS),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-plus"),
-      icon: jsx(_$$B3, {
+      icon: jsx(SvgComponent, {
         className: eO,
         svg: _$$A7
       })
@@ -582,7 +582,7 @@ export function $$e20() {
       toolId: DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT,
       shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_ARROW_LEFT),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-left"),
-      icon: jsx(_$$B3, {
+      icon: jsx(SvgComponent, {
         className: eO,
         svg: _$$A4
       })
@@ -590,7 +590,7 @@ export function $$e20() {
       toolId: DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT,
       shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_ARROW_RIGHT),
       text: getI18nString("fullscreen_actions.set-tool-shape-whiteboard-arrow-right"),
-      icon: jsx(_$$B3, {
+      icon: jsx(SvgComponent, {
         className: eO,
         svg: _$$A5
       })
@@ -598,7 +598,7 @@ export function $$e20() {
       toolId: DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE,
       shortcutText: e(DesignGraphElements.SHAPE_WHITEBOARD_SPEECH_BUBBLE),
       text: getI18nString("fullscreen_actions.set-tool-shape-slides-blurb"),
-      icon: jsx(_$$B3, {
+      icon: jsx(SvgComponent, {
         className: K()(eO, eH),
         svg: _$$A8
       })
@@ -617,7 +617,7 @@ export function $$e20() {
       toolId: DesignGraphElements.CONNECTOR_ELBOWED,
       shortcutText: e(DesignGraphElements.CONNECTOR_ELBOWED),
       text: getI18nString("fullscreen_actions.set-tool-connector-elbowed"),
-      icon: jsx(_$$B3, {
+      icon: jsx(SvgComponent, {
         className: K()(eO, eH),
         svg: _$$A9
       })

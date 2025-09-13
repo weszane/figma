@@ -14,7 +14,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/11182";
 import { oB } from "../905/929976";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
 import { Um } from "../905/848862";
@@ -22,7 +22,7 @@ import { Ve } from "../figma_app/198840";
 import { FileCanView } from "../figma_app/43951";
 import { n as _$$n } from "../905/79930";
 import { zq, FK, zx, Wf } from "../figma_app/961422";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { i as _$$i } from "../figma_app/566312";
 import { Ho } from "../figma_app/878651";
 import { hx, jq } from "../figma_app/446435";
@@ -108,7 +108,7 @@ export function $$M0(e) {
     resizedThumbnailUrls
   } = fG()(e.template);
   let u = jq(e.template);
-  let p = Td();
+  let p = useIsCanvasEditDisabled();
   return jsxs(Fragment, {
     children: [jsx(zq, {
       onContextMenu: u,
@@ -171,7 +171,7 @@ export function $$j7({
     href: e,
     newTab: !0,
     onClick: () => {
-      Cu({
+      logAndTrackCTA({
         fileKey: t,
         uiSelectedView: "see_more_button",
         name: "Templates Modal Browse More"

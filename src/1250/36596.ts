@@ -2,8 +2,8 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState, useCallback, Fragment as _$$Fragment, useRef, useMemo, useEffect } from "react";
 import { lQ } from "../905/934246";
 import { K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { k as _$$k } from "../905/44647";
 import { f as _$$f } from "../905/54715";
 import { V } from "../905/900932";
@@ -14,7 +14,7 @@ import { H as _$$H } from "../figma_app/47866";
 import { getI18nString } from "../905/303541";
 import { OG, w6 } from "../1250/340571";
 import { k1 } from "../1250/428971";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { rt } from "../1250/282084";
 import { trackEventAnalytics } from "../905/449184";
@@ -29,7 +29,7 @@ function v({
   return jsx("div", {
     "data-tooltip": e,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     className: "component_browser_hotkey_indicator--hotkeyIcon---Qb3S",
     children: "\u21B5"
   });
@@ -72,7 +72,7 @@ let A = forwardRef(({
     }), jsx("div", {
       className: "component_browser_input_github_dropdown--description--GKHUI",
       children: getI18nString("dev_handoff.component_browser.github_repo_dropdown.description")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "primary",
       onClick: d,
       children: getI18nString("dev_handoff.component_browser.github_repo_dropdown.button")
@@ -270,7 +270,7 @@ export function $$$0({
   let o = g()(M, R, {
     "component_browser_input--suggestion--RaUTH": t
   });
-  return n ? jsx(_$$E, {
+  return n ? jsx(ButtonPrimitive, {
     className: o,
     onClick: n,
     children: i
@@ -289,7 +289,7 @@ export function $$q2({
     className: g()(F, {
       "component_browser_input--hidden--ffbn1": !t
     }),
-    children: jsx($n, {
+    children: jsx(Button, {
       onClick: e,
       disabled: n,
       variant: "primary",

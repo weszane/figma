@@ -4,7 +4,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { selectWithShallowEqual } from "../905/103090";
 import { vx } from "../figma_app/175258";
 import { isValidValue } from "../905/216495";
-import { $$ } from "../figma_app/62612";
+import { applyOffsetToViewport } from "../figma_app/62612";
 import { Fk } from "../figma_app/167249";
 import { Sh } from "../figma_app/889655";
 import { WH } from "../figma_app/836943";
@@ -41,7 +41,7 @@ export function $$E3(e, t, r) {
   let s = i + n.size.y;
   let o = n.absoluteTransform.m02;
   let l = o + n.size.x;
-  let c = $$(r, t);
+  let c = applyOffsetToViewport(r, t);
   let u = c.y > i && c.y < s;
   let p = c.x > o && c.x < l;
   return u && p;

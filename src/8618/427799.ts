@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useRef, Fragment as _$$Fragment, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { C as _$$C } from "../905/504203";
 import { l as _$$l } from "../905/479687";
@@ -10,11 +10,11 @@ import { CooperTemplateTypesTsBindings, SocialMediaFormats, AppStateTsApi } from
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import m from "classnames";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { E as _$$E2 } from "../905/277716";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _ as _$$_ } from "../8618/537054";
 import { j as _$$j } from "../8618/256463";
@@ -26,7 +26,7 @@ import { Cl } from "../figma_app/334505";
 import { UK } from "../figma_app/740163";
 import { isInvalidValue, isValidValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { A as _$$A } from "../905/139173";
 import { A as _$$A2 } from "../6828/364616";
@@ -70,7 +70,7 @@ export function $$Q1({
     target: jsx("div", {
       className: "template_type_dropdown_button--templateTypeContainer--U6f-t",
       "data-testid": "cooper-inline-template-type-control",
-      children: jsxs(_$$E, {
+      children: jsxs(ButtonPrimitive, {
         className: g()("template_type_dropdown_button--templateTypeDropdownButton--z6GN8", e && "template_type_dropdown_button--assetPanelTemplateTypeDropdownButtonOverride--1dFkU", {
           "template_type_dropdown_button--active--RcNoi": isPopoverOpen
         }),
@@ -106,7 +106,7 @@ function z({
   let l = XH();
   let [s, o] = useState("");
   let [a, c] = useAtomValueAndSetter(Ku);
-  let d = _$$U();
+  let d = trackFileEventWithStore();
   let m = useCallback(e => {
     isValidValue(l) && e !== l && (d("cooper_template_asset_type_changed", {
       productType: "buzz",
@@ -275,7 +275,7 @@ function Y({
   o = n.type;
   [SocialMediaFormats.PRINT_US_LETTER, SocialMediaFormats.CARD_HORIZONTAL, SocialMediaFormats.CARD_VERTICAL, SocialMediaFormats.POSTER, SocialMediaFormats.NAME_TAG_LANDSCAPE, SocialMediaFormats.NAME_TAG_PORTRAIT].includes(o) && (UK().renderRulerUnitAsInches.getCopy() ? (_ = " in", m = 300, l && (u += " (inches)")) : UK().renderRulerUnitAsCentimeters.getCopy() && (_ = " cm", m = 300 / 2.54, l && (u += " (cm)")));
   1 !== m && (a = (a / m).toFixed(2) + _, d = (d / m).toFixed(2) + _);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     onClick: () => r(n.type),
     className: "template_type_dropdown_button--templateTypeRow--KFvpj",
     recordingKey: `${U}-${n.type}`,
@@ -338,7 +338,7 @@ function Z() {
     children: [jsx($j, {
       bigNudgeAmount: c,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.width"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: void 0 === t || t === MIXED_MARKER,
       dispatch: e,
       min: a,
@@ -353,7 +353,7 @@ function Z() {
     }), jsx($j, {
       bigNudgeAmount: c,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.height"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: void 0 === s || s === MIXED_MARKER,
       dispatch: e,
       min: a,
@@ -404,7 +404,7 @@ function J({
       },
       onMouseEnter: s(-8),
       onMouseLeave: o,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: D,
         svg: _$$A3
       })
@@ -415,7 +415,7 @@ function J({
       },
       onMouseEnter: s(8),
       onMouseLeave: o,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: D,
         svg: _$$A2
       })

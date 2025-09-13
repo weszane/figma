@@ -6,7 +6,7 @@ import { findContainingResponsiveSet } from '../905/26360';
 import { d as _$$d2 } from '../905/49800';
 import { selectWithShallowEqual } from '../905/103090';
 import { J as _$$J2 } from '../905/125993';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { permissionScopeHandler } from '../905/189185';
 import { isValidValue } from '../905/216495';
 import { C as _$$C } from '../905/217042';
@@ -23,7 +23,7 @@ import { useIsFullscreenSitesView } from '../905/561485';
 import { r as _$$r } from '../905/571562';
 import { k as _$$k2 } from '../905/582200';
 import { getFeatureFlags } from '../905/601108';
-import { E as _$$E2 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { getSingletonSceneGraph } from '../905/700578';
 import { U as _$$U } from '../905/708285';
 import { tV } from '../905/794875';
@@ -308,7 +308,7 @@ function eB() {
   }, r.recordingKey)];
   return jsxs(bL, {
     manager,
-    children: [jsx(_$$E2, {
+    children: [jsx(ButtonPrimitive, {
       ...getTriggerProps(),
       'aria-label': getI18nString('dakota.collection_selector.disconnect_submenu_title'),
       'className': p()('cms_unbind_button--iconButton--ptjPj', {
@@ -570,7 +570,7 @@ function eK({
   return jsx('div', {
     'ref': r,
     'className': aj,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': a ? u : void 0,
     'data-testid': 'node-type-display',
     'children': u
@@ -930,7 +930,7 @@ export function $$to1({
       'recordingKey': generateRecordingKey($$e90, e.recordingKey),
       'htmlAttributes': {
         'data-tooltip': e.getTitle(),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-testid': e.dataTestId
       },
       'disabled': e.disabled,

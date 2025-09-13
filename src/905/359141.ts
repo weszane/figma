@@ -10,7 +10,7 @@ import { n1 } from '../905/55146';
 import { $_, ej as _$$ej, a8, bj, E4, hx, m3, p1, Tq, Y7 } from '../905/66449';
 import { U as _$$U2 } from '../905/103637';
 import { Q$ } from '../905/128313';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { c as _$$c3 } from '../905/144429';
 import { t as _$$t2 } from '../905/150656';
 import { hideModalHandler, showModalHandler } from '../905/156213';
@@ -48,7 +48,7 @@ import { B as _$$B2 } from '../905/506188';
 import { l as _$$l } from '../905/509505';
 import { RR } from '../905/514666';
 import { dD } from '../905/519113';
-import { $n, IK } from '../905/521428';
+import { Button, ButtonWide } from '../905/521428';
 import { o as _$$o } from '../905/530496';
 import { globalPerfTimer } from '../905/542194';
 import { fA, m9 } from '../905/542608';
@@ -60,13 +60,13 @@ import { PerfTimer } from '../905/609396';
 import { S as _$$S } from '../905/612212';
 import { Q as _$$Q3 } from '../905/616985';
 import { d as _$$d, Q as _$$Q } from '../905/620793';
-import { E as _$$E } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { $ as _$$$ } from '../905/636188';
 import { p as _$$p } from '../905/636263';
 import { getResourceDataOrFallback } from '../905/663269';
 import { x as _$$x } from '../905/695363';
 import { m as _$$m } from '../905/701558';
-import { Ui } from '../905/709171';
+import { compareLibraryKeyWithString } from '../905/709171';
 import { Yt } from '../905/712714';
 import { IT } from '../905/713695';
 import { i as _$$i3 } from '../905/718764';
@@ -82,11 +82,11 @@ import { U as _$$U } from '../905/763676';
 import { w as _$$w } from '../905/770105';
 import { _w, Ir, mq } from '../905/789781';
 import { i as _$$i } from '../905/797975';
-import { q as _$$q } from '../905/807667';
+import { handleLoadAllPagesWithVersionCheck } from '../905/807667';
 import { _5, eS as _$$eS2, W as _$$W, b1, mG, Pq, Px, Qj, ry } from '../905/825399';
 import { AutoLayout } from '../905/470281';
 import { V as _$$V } from '../905/843013';
-import { sZ } from '../905/845253';
+import { useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { LH } from '../905/872904';
 import { $z } from '../905/909811';
@@ -149,7 +149,7 @@ import { sF } from '../figma_app/777207';
 import { $c, fA as _$$fA, p9, qN, y6 } from '../figma_app/803787';
 import { z6 } from '../figma_app/805373';
 import { SR } from '../figma_app/852050';
-import { nt as _$$nt } from '../figma_app/858013';
+import { LargeLoadingSpinner } from '../figma_app/858013';
 import { C as _$$C } from '../figma_app/872960';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { tn as _$$tn } from '../figma_app/889655';
@@ -209,7 +209,7 @@ function x() {
     }), jsx('p', {
       className: 'library_modal_error_fallback--errorBody--eE4Rc',
       children: renderI18nText('design_systems.libraries_modal.error_body')
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: 'secondary',
       onClick: i,
       children: renderI18nText('design_systems.libraries_modal.reload')
@@ -666,7 +666,7 @@ function eV({
   useEffect(() => i, [i]);
   return jsx('div', {
     className: 'library_card--buttonContainer--pU8Y-',
-    children: jsx($n, {
+    children: jsx(Button, {
       'onClick': e,
       'variant': 'primary',
       'htmlAttributes': {
@@ -832,7 +832,7 @@ function eK({
         className: _$$s2.textBodyMedium.$,
         text: t ? t.name : getI18nString('design_systems.libraries_modal.draft_libraries'),
         as: 'h3'
-      }), s && jsx(_$$E, {
+      }), s && jsx(ButtonPrimitive, {
         className: 'team_libraries_rows--seeMore--Bv-Bz',
         onClick: onClickWithFocus,
         ref: setKeyboardNavigationElement,
@@ -1318,7 +1318,7 @@ function e7({
     column: r,
     onClick: t
   });
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     onClick: onClickWithFocus,
     className: e1,
     style: {
@@ -1356,7 +1356,7 @@ function e8({
     column: a,
     onClick: i
   });
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     onClick: onClickWithFocus,
     className: e1,
     style: {
@@ -1663,7 +1663,7 @@ function tc() {
       libraryModalSessionId: sessionId
     });
   }, [e, i, t, sessionId]);
-  let o = jsx($n, {
+  let o = jsx(Button, {
     onClick: s,
     children: renderI18nText('design_systems.libraries_modal.upgrade')
   });
@@ -1902,7 +1902,7 @@ function tO({
     path: e,
     column: 1
   });
-  return jsx($n, {
+  return jsx(Button, {
     'aria-label': getI18nString('figmake.design_system_imports.library_extraction_button.text'),
     'variant': 'secondary',
     'onClick': i,
@@ -1956,7 +1956,7 @@ function tz({
   let d = !isPublishingModalEnabled || isBranchAlt(e);
   let c = useMemo(() => isPublishingModalEnabled || isPublished ? {} : {
     'data-tooltip': getI18nString('design_systems.libraries_modal.publishing_disabled_tooltip'),
-    'data-tooltip-type': Ib.TEXT
+    'data-tooltip-type': KindEnum.TEXT
   }, [isPublishingModalEnabled, isPublished]);
   let {
     setKeyboardNavigationElement
@@ -1965,11 +1965,11 @@ function tz({
     column: i,
     disabled: d
   });
-  return publishProgress.state !== LibraryPublishStatusEnum.NONE ? jsx(IK, {
+  return publishProgress.state !== LibraryPublishStatusEnum.NONE ? jsx(ButtonWide, {
     variant: 'secondary',
     disabled: !0,
     children: publishProgress.publishType === PublishStatusEnum.UNPUBLISH ? renderI18nText('design_systems.libraries_modal.unpublishing') : renderI18nText('design_systems.libraries_modal.publishing')
-  }) : jsx(IK, {
+  }) : jsx(ButtonWide, {
     'aria-label': getI18nString('design_systems.libraries_modal.publish_this_file'),
     'variant': 'primary',
     'disabled': d,
@@ -2303,11 +2303,11 @@ function t3() {
   let a = useCallback(() => {
     tabManager.setActiveTab('teams');
   }, [tabManager]);
-  return hasProAccess ? jsx($n, {
+  return hasProAccess ? jsx(Button, {
     variant: 'secondary',
     onClick: i,
     children: renderI18nText('design_systems.libraries_modal.view_recommended_libraries')
-  }) : jsx($n, {
+  }) : jsx(Button, {
     variant: 'secondary',
     onClick: a,
     children: renderI18nText('design_systems.libraries_modal.view_team_libraries')
@@ -2398,7 +2398,7 @@ function id() {
       }), jsx('div', {
         className: 'library_publish_upsell_banner--bannerDescription--viHA8',
         children: o ? jsx(ic, {}) : jsx(iu, {})
-      }), o && jsx($n, {
+      }), o && jsx(Button, {
         variant: 'primary',
         onClick: e,
         children: renderI18nText('design_systems.libraries_modal.publish_this_file')
@@ -2517,7 +2517,7 @@ function ig({
     })
   }) : e.data ? jsx('div', {
     className: t2,
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       variant: 'secondary',
       onClick: onClickWithFocus,
       ref: setKeyboardNavigationElement,
@@ -2831,7 +2831,7 @@ function np({
     }), toggleReviewUpdatesModal ? jsx(bj, {
       kbArgs,
       elementRef: ref,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         'aria-label': getI18nString('design_systems.updates.review_updates'),
         'className': 'updates_list_item--clickableRow--z5oBO',
         'onClick': () => toggleReviewUpdatesModal(p || void 0),
@@ -2843,7 +2843,7 @@ function np({
       children: jsx(AutoLayout, {
         spacing: 16,
         horizontalAlignItems: 'center',
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: 'secondary',
           onClick: i => {
             i.stopPropagation();
@@ -2897,7 +2897,7 @@ function nh({
   index: d
 }) {
   let c;
-  let u = sZ();
+  let u = useCurrentUserOrg();
   let p = Oe(u);
   let m = useMemo(() => e.components.length > 0 ? e.components[0] : e.stateGroups.length > 0 ? e.stateGroups[0] : e.styles.length > 0 ? e.styles[0] : e.variableSets.length > 0 ? e.variableSets[0] : e.codeComponents.length > 0 ? e.codeComponents[0] : null, [e]);
   let h = R8({
@@ -2921,7 +2921,7 @@ function nh({
         }), e.isOpenFile && jsx('div', {
           className: 'updates_checkpoint--helpIcon3--aYJ5e',
           children: jsx(_$$a, {
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': formatI18nMessage('library-updates-from-current-file')
           })
         }), !e.isOpenFile && p && sF(e.libraryKey) && jsx('div', {
@@ -3100,7 +3100,7 @@ function ny({
     isSgShimFFEnabled: !0,
     entrypoint: o,
     switchedTabs: l
-  }), globalPerfTimer.start('updates_modal_load'), g(!0), V && _$$q(PluginModalType.LIBRARY_UPDATES).then(() => {
+  }), globalPerfTimer.start('updates_modal_load'), g(!0), V && handleLoadAllPagesWithVersionCheck(PluginModalType.LIBRARY_UPDATES).then(() => {
     let e = globalPerfTimer.get('updates_modal_load')?.getElapsedTime();
     e && K(e);
     globalPerfTimer.resume('updates_modal_load');
@@ -3139,7 +3139,7 @@ function ny({
   }, [U, G, Y, V, W, c]);
   let Z = useCallback(() => {
     i(aD.ALL);
-    F || _$$q(PluginModalType.LIBRARY_UPDATES).then(() => {
+    F || handleLoadAllPagesWithVersionCheck(PluginModalType.LIBRARY_UPDATES).then(() => {
       _$$J2(() => {
         Fullscreen.expandInstancesWithStyleOverrides();
         Fullscreen.onFrame();
@@ -3177,7 +3177,7 @@ function ny({
       children: c ? jsx(Tq, {
         elementRef: ref,
         kbArgs,
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: 'secondary',
           onClick: e => {
             e.stopPropagation();
@@ -3186,7 +3186,7 @@ function ny({
           ref,
           children: renderI18nText('design_systems.updates.show_all_updates')
         })
-      }) : jsx($n, {
+      }) : jsx(Button, {
         onClick: e => {
           e.stopPropagation();
           Z();
@@ -3260,7 +3260,7 @@ function ny({
           disabled: !Y,
           ref: _ref
         })
-      }), jsx($n, {
+      }), jsx(Button, {
         disabled: !Y || S,
         autoFocus: !c,
         onClick: et,
@@ -3324,7 +3324,7 @@ function nb({
       let h = {};
       let g = (t, i) => {
         let n = VJ(i);
-        let r = Ui({
+        let r = compareLibraryKeyWithString({
           library_key: n
         }, c);
         let a = n ? m[n] : null;
@@ -3426,7 +3426,7 @@ function nv() {
       }, `loading-placholder-${t}`))]
     }), jsxs('div', {
       className: 'updates--loadingSpinnerContainer---E3qg',
-      children: [jsx(_$$nt, {}), jsx('div', {
+      children: [jsx(LargeLoadingSpinner, {}), jsx('div', {
         className: 'updates--loadingText--Fk9e3',
         children: renderI18nText('design_systems.updates.updates_taking_longer_than_expected')
       })]

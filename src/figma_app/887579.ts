@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K } from "../905/443068";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { LinkPrimitive } from "../figma_app/496441";
 import { N as _$$N } from "../905/438674";
@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { aK } from "../figma_app/401069";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanExport } from "../figma_app/43951";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { S } from "../figma_app/787550";
 export function $$b7(e, t) {
   return `/file/${e}/image/${t}/download`;
@@ -125,11 +125,11 @@ function N({
       type: getI18nString("inspect_panel.images.download_type_video")
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     children: p ? b : r
-  }) : jsx($n, {
+  }) : jsx(Button, {
     variant: "link",
     onClick: f,
     disabled: p,
@@ -145,7 +145,7 @@ function N({
       type: getI18nString("inspect_panel.images.download_type_video")
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     children: p ? b : r
@@ -184,7 +184,7 @@ function C({
       type: getI18nString("inspect_panel.images.download_type_image")
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     className: "inspectors--downloadLinkButton--cqFWb",
@@ -198,7 +198,7 @@ function C({
       type: getI18nString("inspect_panel.images.download_type_image")
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("inspect_panel.images.download")
     },
     children: t

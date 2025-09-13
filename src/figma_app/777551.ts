@@ -6,7 +6,7 @@ import { k } from "../905/22009";
 import { L } from "../905/178090";
 import { vt, U$, Dm, GT } from "../figma_app/306946";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
-import { U, I0, xQ } from "../figma_app/45218";
+import { hasClientMeta, isPlugin, isWidget } from "../figma_app/45218";
 import { Rx } from "../figma_app/162807";
 import { qD } from "../figma_app/471982";
 import { l$ } from "../figma_app/275462";
@@ -83,7 +83,7 @@ export function $$S8(e) {
     default:
       return returnSecond(e.resource_type, "");
   } else {
-    if (U(e)) switch (e.viewer_mode) {
+    if (hasClientMeta(e)) switch (e.viewer_mode) {
       case FTemplateCategoryType.WHITEBOARD:
         return renderI18nText("community.detail_view.figjam_board");
       case FTemplateCategoryType.CANVAS:
@@ -102,7 +102,7 @@ export function $$S8(e) {
       default:
         return returnSecond(e.viewer_mode, "");
     }
-    return I0(e) ? renderI18nText("community.detail_view.plugin") : xQ(e) ? renderI18nText("community.detail_view.widget") : renderI18nText("community.detail_view.design_file");
+    return isPlugin(e) ? renderI18nText("community.detail_view.plugin") : isWidget(e) ? renderI18nText("community.detail_view.widget") : renderI18nText("community.detail_view.design_file");
   }
 }
 export function $$v0(e) {

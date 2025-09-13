@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { s as _$$s } from "../905/403855";
 import { U } from "../905/275247";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { Jn } from "../905/17223";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
@@ -32,9 +32,9 @@ function x(e) {
   });
   let I = E9();
   if ("loaded" !== y.status || y.data.team?.stripeCustomerId.status !== "loaded") return null;
-  let S = !!oA(y.data.team?.stripeCustomerId);
+  let S = !!getResourceDataOrFallback(y.data.team?.stripeCustomerId);
   let x = [];
-  let N = oA(y.data.team?.allProjects)?.filter(({
+  let N = getResourceDataOrFallback(y.data.team?.allProjects)?.filter(({
     trashedAt: e
   }) => !e);
   let C = N?.length ?? 0;
@@ -49,7 +49,7 @@ function x(e) {
       limitExceededCount: e - t
     });
   };
-  if (I ? D(oA(y.data.team?.teamFileCounts?.totalFileCount) ?? 0, STANDARD_LIMIT, "global_file_count") : (D(R, STANDARD_LIMIT, "design_file_count"), D(L, STANDARD_LIMIT, "whiteboard_file_count"), D(P, STANDARD_LIMIT, "slides_file_count")), D(C, PRIMARY_LIMIT, "total_project_count"), C <= PRIMARY_LIMIT && (D(w, ZERO_VALUE, "view_only_project_count"), D(O, DEFAULT_ZERO, "invite_only_project_count")), 0 === x.length) return null;
+  if (I ? D(getResourceDataOrFallback(y.data.team?.teamFileCounts?.totalFileCount) ?? 0, STANDARD_LIMIT, "global_file_count") : (D(R, STANDARD_LIMIT, "design_file_count"), D(L, STANDARD_LIMIT, "whiteboard_file_count"), D(P, STANDARD_LIMIT, "slides_file_count")), D(C, PRIMARY_LIMIT, "total_project_count"), C <= PRIMARY_LIMIT && (D(w, ZERO_VALUE, "view_only_project_count"), D(O, DEFAULT_ZERO, "invite_only_project_count")), 0 === x.length) return null;
   let k = m ? renderI18nText("locked_team.card.title") : renderI18nText("locked_team.card.title_viewer");
   let M = m ? S ? renderI18nText("locked_team.card.editor_previously_paid_description") : renderI18nText("locked_team.card.editor_previously_on_trial_description") : renderI18nText("locked_team.card.view_only_description");
   let F = m ? S ? renderI18nText("locked_team.card.editor_previously_paid_cta") : renderI18nText("locked_team.card.editor_previously_on_trial_cta") : null;

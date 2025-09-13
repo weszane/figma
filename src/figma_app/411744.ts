@@ -1,5 +1,5 @@
 import { fM } from "../905/312028";
-import { $ } from "../905/383708";
+import { generateUniqueKey } from "../905/383708";
 import { FEntityType } from "../figma_app/191312";
 import { tT } from "../905/723791";
 export function $$o1(e) {
@@ -27,7 +27,7 @@ export function $$l5(e) {
   return {
     id: e.key,
     key: e.key,
-    libraryKey: e.library_key || $(e.key),
+    libraryKey: e.library_key || generateUniqueKey(e.key),
     name: e.name,
     fileRepoId: e.file_repo_id,
     editorType: e.editor_type,

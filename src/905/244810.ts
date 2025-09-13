@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import r from "classnames";
 import { q3, rR } from "../figma_app/258114";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { f } from "../figma_app/750432";
 import { W as _$$W } from "../figma_app/54182";
@@ -47,7 +47,7 @@ export function $$m0(e) {
         className: a()(yZ, {
           [Ou]: e.overlapped
         }),
-        "data-tooltip-type": Ib.SPECIAL,
+        "data-tooltip-type": KindEnum.SPECIAL,
         "data-tooltip": _$$c,
         "data-tooltip-timeout-delay": 150,
         "data-tooltip-max-width": 300,

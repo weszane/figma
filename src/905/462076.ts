@@ -16,7 +16,7 @@ import { FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { lD } from "../figma_app/831696";
-import { kT } from "../905/380385";
+import { ThreadType } from "../905/380385";
 import { cM } from "../905/530837";
 import { iw } from "../905/222884";
 import { i as _$$i } from "../905/561236";
@@ -218,7 +218,7 @@ export function $$O5(e, t, i, r) {
         messageMeta: [],
         attachments: [],
         isCanvasMention: !1,
-        sidebarItemType: kT.FEED_POST,
+        sidebarItemType: ThreadType.FEED_POST,
         feedPostPublicUuid: e.publicUuid,
         feedPostTitle: e.title,
         feedPostThumbnail: thumbnail,

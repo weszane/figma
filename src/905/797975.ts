@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, Jn, nB, Wk } from "../figma_app/272243";
 import { bL as _$$bL } from "../905/246123";
 import { fI } from "../905/201252";
@@ -22,7 +22,7 @@ import { RL, qy, z8, wj, Ag } from "../figma_app/862289";
 import { nM, NJ } from "../figma_app/570630";
 import { Iq, Qc, mp } from "../905/723429";
 import { tI, Zc, Ul, R6 } from "../905/127813";
-import { WW, $n } from "../905/521428";
+import { ButtonLarge, Button } from "../905/521428";
 import { O as _$$O } from "../905/587457";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
@@ -98,10 +98,10 @@ function P({
           })]
         }), jsxs("div", {
           className: "x78zum5 x1cy8zhl x1v2ro7d",
-          children: [jsx(WW, {
+          children: [jsx(ButtonLarge, {
             onClick: e,
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.cta")
-          }), jsx(WW, {
+          }), jsx(ButtonLarge, {
             variant: "secondary",
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.intro.learn_more")
           })]
@@ -159,7 +159,7 @@ function L({
     }), jsx("span", {
       ...Ay.props(F.errorSubtitle),
       children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.subtitle.failed")
-    }), e && jsx($n, {
+    }), e && jsx(Button, {
       variant: "primary",
       onClick: () => {
         e();
@@ -193,7 +193,7 @@ function W({
       children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.found.subtitle")
     }), jsx("div", {
       className: "x78zum5 x1cy8zhl x167g77z x1a02dak",
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick: () => {
           e(!1);
           t.start();
@@ -245,13 +245,13 @@ function K({
       })]
     }), jsxs("div", {
       className: "x78zum5 x1cy8zhl x167g77z x1a02dak",
-      children: [jsx($n, {
+      children: [jsx(Button, {
         onClick: () => {
           e(!0);
           t.start();
         },
         children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skip")
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         onClick: () => {
           i(popPrevModal());
@@ -373,7 +373,7 @@ function Y({
               children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.step.examples.skipped")
             }), t.taskId === mp.CSS && g && jsx("div", {
               className: "x78zum5 x6s0dn4 xpvyfi4 xeq5yr9 x8x9d4c",
-              children: jsx($n, {
+              children: jsx(Button, {
                 onClick: () => {
                   e(!0);
                 },
@@ -481,7 +481,7 @@ function ei({
             children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.description_bottom")
           }), jsx("div", {
             className: "x14atkfc",
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: e,
               children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.parse_again")
             })
@@ -493,7 +493,7 @@ function ei({
   return jsxs(Fragment, {
     children: [jsx("div", {
       ...getTriggerProps(),
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         iconPrefix: jsx(_$$f, {}),
         onClick: () => i(!0),
@@ -735,7 +735,7 @@ let $$ep0 = registerModal(function (e) {
   }, {
     orientation: "vertical"
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     height: "fullscreen",

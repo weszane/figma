@@ -4,21 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { b as _$$b, q7, bL, mc } from "../figma_app/860955";
 import { K } from "../905/443068";
 import { PopoverOutlet } from "../905/691059";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { I } from "../905/932503";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { getFeatureFlags } from "../905/601108";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectTeams } from "../905/338617";
 import { gN } from "../figma_app/273118";
 import { O as _$$O } from "../905/833838";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { s as _$$s, c as _$$c } from "../905/744710";
 import { A as _$$A } from "../6828/364616";
 import { A as _$$A2 } from "../3850/824007";
@@ -45,7 +45,7 @@ export function $$R1(e) {
   let q = useSelector(e => e.orgById);
   let U = () => {
     R(oB());
-    Cu({
+    logAndTrackCTA({
       userId: B?.id,
       fileKey: E?.key,
       eventName: "Notification Settings Button Clicked"
@@ -66,7 +66,7 @@ export function $$R1(e) {
       "aria-label": getI18nString("user_notifications.settings"),
       htmlAttributes: {
         "data-dropdown-tooltip": getI18nString("user_notifications.settings"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": !0
       },
       onClick: U,
@@ -100,7 +100,7 @@ export function $$R1(e) {
     },
     children: [e === currentPlanFilter && jsx("span", {
       className: "notifs_plan_filter--fillMenu--Ar-HO",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A2
       })
     }), jsx("span", {
@@ -114,7 +114,7 @@ export function $$R1(e) {
     children: [jsx(PopoverOutlet, {
       children: jsxs(bL, {
         manager,
-        children: [jsxs(_$$E, {
+        children: [jsxs(ButtonPrimitive, {
           "aria-label": getI18nString("user_notifications.notif_filter_label", {
             planName: z(currentPlanFilter, V)
           }),
@@ -123,7 +123,7 @@ export function $$R1(e) {
           children: [jsx("span", {
             className: [C, A].join(" "),
             children: gN(z(currentPlanFilter, V), 35)
-          }), jsx(_$$B, {
+          }), jsx(SvgComponent, {
             svg: _$$A,
             className: "notifs_plan_filter--chevronIcon--0Rqnp"
           })]
@@ -137,7 +137,7 @@ export function $$R1(e) {
       "aria-label": getI18nString("user_notifications.settings"),
       htmlAttributes: {
         "data-dropdown-tooltip": getI18nString("user_notifications.settings"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": !0
       },
       onClick: U,

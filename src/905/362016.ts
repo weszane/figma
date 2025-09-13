@@ -11,7 +11,7 @@ import { Gj, Lk } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { LH } from "../905/872904";
 import { LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c as _$$c } from "../905/511370";
 import { lH, Ze } from "../905/297574";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
@@ -339,7 +339,7 @@ function W({
       className: "dsa_file_view_overview--variablesSection--4Nm9y",
       children: o.map(e => jsx("div", {
         className: "dsa_file_view_overview--variableSetThumb--A92GL",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.name,
         "data-tooltip-subtext": getI18nString("design_systems.libraries_modal.plural.num_variables", {
           numVariables: e.variables.length

@@ -20,7 +20,7 @@ import { T as _$$T } from "../905/868547";
 import { Py, AD } from "../figma_app/578768";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Cf } from "../905/504727";
 import { fI, YW } from "../figma_app/626177";
 import { vQ } from "../9410/124657";
@@ -141,7 +141,7 @@ function V(e) {
       children: jsx(_$$u, {
         className: Xg,
         "aria-label": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
         ...getTriggerProps(),
         children: jsx(_$$J, {})
@@ -188,7 +188,7 @@ function V(e) {
               fallbackSvg: _$$A2,
               isBackgroundTransparent: !1,
               selected: q,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("fullscreen.toolbar.multiplayer.more_options"),
               className: u()(hv, {
                 [VQ]: q

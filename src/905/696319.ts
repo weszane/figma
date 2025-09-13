@@ -1,4 +1,4 @@
-import { A as _$$A } from "../905/268204";
+import { isBrowser } from "../905/268204";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useState, useEffect, createContext, useContext, useRef, useCallback, useLayoutEffect } from "react";
 import { A as _$$A2 } from "../vendor/723372";
@@ -16,7 +16,7 @@ import { ae, pW } from "../905/117474";
 import { N as _$$N } from "../905/427996";
 import { l as _$$l } from "../905/490996";
 import { C as _$$C } from "../905/294086";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -117,7 +117,7 @@ function y() {
   m && (m.removeAttribute(p), _(), _ = () => {});
 }
 let b = () => {};
-let x = _$$A && !!document.documentElement.requestPointerLock && !isSafari;
+let x = isBrowser && !!document.documentElement.requestPointerLock && !isSafari;
 async function S(e) {
   let t = e.requestPointerLock();
   t && (await t);
@@ -631,7 +631,7 @@ export function $$X0({
     }, [e]);
   }();
   return jsxs(G, {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": i["aria-label"],
     children: [jsx(K, {
       children: e

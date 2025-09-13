@@ -1,7 +1,18 @@
+import { CodeNode } from '@lexical/code';
+import { $generateNodesFromDOM } from '@lexical/html';
+import { AutoLinkNode, LinkNode } from '@lexical/link';
+import { ListItemNode, ListNode } from '@lexical/list';
+import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $createHeadingNode, $isHeadingNode, HeadingNode, QuoteNode } from '@lexical/rich-text';
+import { $setBlocksType } from '@lexical/selection';
 import { Ay as _$$Ay, xk as _$$xk } from '@stylexjs/stylex';
 import y from 'classnames';
+import { $createParagraphNode, $getRoot, $getSelection, $insertNodes, $isRangeSelection, $isRootOrShadowRoot, $nodesOfType, BLUR_COMMAND, COMMAND_PRIORITY_EDITOR, createCommand, FORMAT_ELEMENT_COMMAND, FORMAT_TEXT_COMMAND, SELECTION_CHANGE_COMMAND } from 'lexical';
 import { Fragment as _$$Fragment, Children, createContext, createElement, forwardRef, lazy, memo, Suspense, useCallback, useContext, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { useDebouncedCallback } from 'use-debounce';
 import { B as _$$B9 } from '../7a72fc59/288229';
 import { _ as _$$_ } from '../441/351942';
 import { u as _$$u } from '../441/357009';
@@ -48,7 +59,7 @@ import { useMemoStable } from '../905/19536';
 import { findContainingResponsiveSet } from '../905/26360';
 import { a as _$$a5 } from '../905/29104';
 import { a as _$$a1 } from '../905/38236';
-import { bL as _$$bL4, Rq } from '../905/38914';
+import { ModalFormContents, ModalRootComponent } from '../905/38914';
 import { k as _$$k0 } from '../905/44647';
 import { i as _$$i4 } from '../905/46262';
 import { d as _$$d5 } from '../905/49800';
@@ -75,7 +86,7 @@ import { J as _$$J5 } from '../905/125993';
 import { A as _$$A3 } from '../905/126947';
 import { setupAutofocusHandler } from '../905/128376';
 import { w as _$$w3, y as _$$y1 } from '../905/129046';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { MM } from '../905/136701';
 import { _ as _$$_9 } from '../905/144222';
 import { Q as _$$Q4 } from '../905/149004';
@@ -166,7 +177,7 @@ import { N as _$$N8 } from '../905/430294';
 import { useModalManager } from '../905/437088';
 import { N as _$$N6 } from '../905/438674';
 import { v as _$$v10 } from '../905/439487';
-import { R as _$$R5 } from '../905/441305';
+import { ConfirmationModal } from '../905/441305';
 import { v as _$$v7 } from '../905/442517';
 import { W as _$$W3 } from '../905/442612';
 import { K as _$$K2 } from '../905/443068';
@@ -196,14 +207,14 @@ import { D8 } from '../905/511649';
 import { h as _$$h9 } from '../905/513745';
 import { C as _$$C6 } from '../905/520159';
 import { Z as _$$Z3 } from '../905/521211';
-import { $n, WW as _$$WW, IK } from '../905/521428';
+import { Button, ButtonLarge, ButtonWide } from '../905/521428';
 import { ex as _$$ex } from '../905/524523';
 import { r6 as _$$r6 } from '../905/542608';
 import { e as _$$e14 } from '../905/545750';
 import { s as _$$s7 } from '../905/551945';
 import { l as _$$l3 } from '../905/556594';
 import { B as _$$B } from '../905/559262';
-import { useIsFullscreenSitesView, isSitesFeatureEnabled } from '../905/561485';
+import { isSitesFeatureEnabled, useIsFullscreenSitesView } from '../905/561485';
 import { N as _$$N9 } from '../905/568293';
 import { r as _$$r2 } from '../905/571562';
 import { N as _$$N7 } from '../905/572042';
@@ -224,7 +235,7 @@ import { J as _$$J } from '../905/614223';
 import { compareVersions } from '../905/616700';
 import { e as _$$e5 } from '../905/621515';
 import { R as _$$R0 } from '../905/621802';
-import { E as _$$E5 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { z as _$$z9 } from '../905/634240';
 import { A as _$$A10 } from '../905/639174';
 import { Bi } from '../905/652992';
@@ -244,12 +255,11 @@ import { G as _$$G6 } from '../905/707993';
 import { M4 } from '../905/713695';
 import { logError } from '../905/714362';
 import { pn as _$$pn } from '../905/714538';
-import { B as _$$B4 } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { i as _$$i7 } from '../905/718764';
 import { h4 as _$$h11, Nz as _$$Nz2 } from '../905/720338';
 import { N as _$$N1 } from '../905/720559';
-import { oA as _$$oA } from '../905/723791';
-import { Mi } from '../905/736624';
+import { Point } from '../905/736624';
 import { DV } from '../905/739964';
 import { A as _$$A22 } from '../905/744692';
 import { T as _$$T3 } from '../905/745591';
@@ -276,7 +286,7 @@ import { z as _$$z4 } from '../905/825185';
 import { vL as _$$vL } from '../905/826900';
 import { dY as _$$dY, sU as _$$sU, Wh as _$$Wh, WM as _$$WM } from '../905/838765';
 import { q as _$$q } from '../905/838985';
-import { sZ as _$$sZ } from '../905/845253';
+import { useCurrentUserOrg } from '../905/845253';
 import { BK, Um } from '../905/848862';
 import { K as _$$K3 } from '../905/851274';
 import { EL, F_ } from '../905/858282';
@@ -286,8 +296,8 @@ import { h as _$$h7 } from '../905/864281';
 import { Ay as _$$Ay7 } from '../905/865071';
 import { bL as _$$bL, c$ as _$$c$2, RT } from '../905/867927';
 import { defaultSessionLocalID, defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID, sessionLocalIDToString } from '../905/871411';
-import { b as _$$b11 } from '../905/874849';
 import { generateUUIDv4 } from '../905/871474';
+import { b as _$$b11 } from '../905/874849';
 import { d as _$$d6 } from '../905/884707';
 import { k as _$$k9 } from '../905/888808';
 import { DM } from '../905/889062';
@@ -324,7 +334,7 @@ import { xp as _$$xp } from '../905/966582';
 import { O as _$$O4 } from '../905/969533';
 import { d as _$$d2 } from '../905/976845';
 import { J as _$$J12 } from '../905/980942';
-import { E as _$$E1 } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { b as _$$b10 } from '../905/985254';
 import { h1 as _$$h5 } from '../905/986103';
 import { resourceUtils } from '../905/989992';
@@ -485,12 +495,11 @@ import { MGP } from '../figma_app/27776';
 import { AssetAtomMap } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
 import { hM as _$$hM, Sn as _$$Sn } from '../figma_app/32891';
-import { useLatestRef } from '../figma_app/922077';
 import { Y9 as _$$Y } from '../figma_app/42724';
 import { pO as _$$pO } from '../figma_app/42945';
 import { c as _$$c7 } from '../figma_app/43065';
-import { SiteBundles, WebFontsForFile, SiteMountWithPublishEvents, SiteMount, FilePublishSitePermissions } from '../figma_app/43951';
-import { vt as _$$vt } from '../figma_app/45218';
+import { FilePublishSitePermissions, SiteBundles, SiteMount, SiteMountWithPublishEvents, WebFontsForFile } from '../figma_app/43951';
+import { ResourceTypeNoComment } from '../figma_app/45218';
 import { H as _$$H3 } from '../figma_app/47866';
 import { z as _$$z } from '../figma_app/47967';
 import { kF as _$$kF2 } from '../figma_app/48566';
@@ -499,7 +508,7 @@ import { R as _$$R7 } from '../figma_app/53049';
 import { FEditorType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { $y, Cs as _$$Cs, cV as _$$cV } from '../figma_app/59509';
 import { cF as _$$cF2, Az } from '../figma_app/61758';
-import { $g, _X as _$$_X, QZ } from '../figma_app/62612';
+import { addViewportOffset, getViewportInfo, computeFullscreenViewportForNode } from '../figma_app/62612';
 import { Q as _$$Q13 } from '../figma_app/67145';
 import { p7 as _$$p8, Ut as _$$Ut } from '../figma_app/72338';
 import { Nw } from '../figma_app/78808';
@@ -582,7 +591,7 @@ import { is as _$$is, Hg } from '../figma_app/304955';
 import { t as _$$t7, z as _$$z5 } from '../figma_app/305141';
 import { v as _$$v2 } from '../figma_app/306727';
 import { vt as _$$vt2 } from '../figma_app/306946';
-import { Cu as _$$Cu, pi as _$$pi, v5 as _$$v5 } from '../figma_app/314264';
+import { getProductType, logAndTrackCTA, mapFileToProductType } from '../figma_app/314264';
 import { N as _$$N2 } from '../figma_app/316881';
 import { KD, O1 } from '../figma_app/317394';
 import { _i as _$$_i } from '../figma_app/319440';
@@ -636,7 +645,7 @@ import { Q as _$$Q10 } from '../figma_app/447352';
 import { cP as _$$cP, dg as _$$dg, vX as _$$vX } from '../figma_app/451499';
 import { o3 as _$$o3, O0 } from '../figma_app/452252';
 import { additionalValue, fullscreenValue } from '../figma_app/455680';
-import { useIsStarterOrProPlan, useTeamPlanFeatures, useTeamPlanPublicInfo, useCurrentPublicPlan, useIsStarterPlan } from '../figma_app/465071';
+import { useCurrentPublicPlan, useIsStarterOrProPlan, useIsStarterPlan, useTeamPlanFeatures, useTeamPlanPublicInfo } from '../figma_app/465071';
 import { assert, debug, throwTypeError } from '../figma_app/465776';
 import { _ as _$$_2 } from '../figma_app/467504';
 import { _t as _$$_t2, VJ } from '../figma_app/471982';
@@ -649,7 +658,7 @@ import { clamp, nearlyEqual } from '../figma_app/492908';
 import { LinkPrimitive } from '../figma_app/496441';
 import { t as _$$t8 } from '../figma_app/501766';
 import { y as _$$y5 } from '../figma_app/504415';
-import { useOpenFileLibraryKey, useCurrentFileKey, useIsCurrentUserCreator, selectCurrentFile } from '../figma_app/516028';
+import { selectCurrentFile, useCurrentFileKey, useIsCurrentUserCreator, useOpenFileLibraryKey } from '../figma_app/516028';
 import { z as _$$z2 } from '../figma_app/516075';
 import { h0 as _$$h10, o3 as _$$o7, Yu as _$$Yu, Zr as _$$Zr, B_ } from '../figma_app/525810';
 import { VA } from '../figma_app/528509';
@@ -662,7 +671,7 @@ import { r1 as _$$r7 } from '../figma_app/545877';
 import { N0 } from '../figma_app/547638';
 import { x as _$$x4 } from '../figma_app/550678';
 import { S as _$$S2 } from '../figma_app/552746';
-import { useToggleFigmakeMode, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
+import { useIsSelectedFigmakeFullscreen, useToggleFigmakeMode } from '../figma_app/552876';
 import { hl as _$$hl } from '../figma_app/553024';
 import { A as _$$A, b as _$$b2 } from '../figma_app/556971';
 import { td as _$$td, EB, FX } from '../figma_app/558805';
@@ -755,7 +764,7 @@ import { Q as _$$Q12 } from '../figma_app/834744';
 import { _S as _$$_S, OS, WH } from '../figma_app/836943';
 import { _j as _$$_j, ap as _$$ap, Cg as _$$Cg, rU as _$$rU, se as _$$se, K5 } from '../figma_app/843119';
 import { W as _$$W8 } from '../figma_app/854365';
-import { kt as _$$kt } from '../figma_app/858013';
+import { LoadingSpinner } from '../figma_app/858013';
 import { n as _$$n1 } from '../figma_app/859750';
 import { q as _$$q7 } from '../figma_app/860297';
 import { b as _$$b5, bL as _$$bL3, mc as _$$mc, q7, Q$ } from '../figma_app/860955';
@@ -768,7 +777,7 @@ import { w as _$$w7 } from '../figma_app/883622';
 import { jr as _$$jr2, W0 as _$$W7 } from '../figma_app/896988';
 import { isInteractionPathCheck, PN } from '../figma_app/897289';
 import { i as _$$i8 } from '../figma_app/901786';
-import { am as _$$am, hC as _$$hC, U as _$$U5 } from '../figma_app/901889';
+import { trackDefinedFileEventWithStore, trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/901889';
 import { $D as _$$$D, up as _$$up, HB, MT } from '../figma_app/903209';
 import { j as _$$j1, k as _$$k1 } from '../figma_app/904944';
 import { cF as _$$cF, iG as _$$iG2, LS as _$$LS, ZH as _$$ZH, P4, PR } from '../figma_app/911880';
@@ -777,8 +786,9 @@ import { zy } from '../figma_app/915202';
 import { KJ } from '../figma_app/916560';
 import { utilityNoop } from '../figma_app/918700';
 import { vj as _$$vj, Ex, zE } from '../figma_app/919079';
+import { useLatestRef } from '../figma_app/922077';
 import { f as _$$f7 } from '../figma_app/924252';
-import { slugify, formatList, capitalize } from '../figma_app/930338';
+import { capitalize, formatList, slugify } from '../figma_app/930338';
 import { nh as _$$nh, Gb, Zl } from '../figma_app/933328';
 import { h as _$$h13 } from '../figma_app/935454';
 import { dA as _$$dA, U_, VR, Ws, zq } from '../figma_app/938628';
@@ -803,7 +813,6 @@ import aQ from '../vendor/3757';
 import { createHeadlessEditor } from '../vendor/24766';
 import { s as _$$s14 } from '../vendor/45699';
 import { V as _$$V3 } from '../vendor/71542';
-import { A as _$$A1 } from '../vendor/90566';
 import { n as _$$n8 } from '../vendor/110313';
 import { FB, qg, ZN } from '../vendor/149334';
 import { vF as _$$vF } from '../vendor/150583';
@@ -812,33 +821,23 @@ import _v from '../vendor/200551';
 import { g as _$$g6 } from '../vendor/202032';
 import { cJ as _$$cJ2 } from '../vendor/210601';
 import { A as _$$A14 } from '../vendor/211731';
-import { ListNode, ListItemNode } from '@lexical/list';
 import { _U as _$$_U, DP } from '../vendor/261608';
 import { j as _$$j8 } from '../vendor/282386';
 import { P as _$$P7 } from '../vendor/348225';
-import { FORMAT_ELEMENT_COMMAND, createCommand, COMMAND_PRIORITY_EDITOR, $createParagraphNode, FORMAT_TEXT_COMMAND, BLUR_COMMAND, $getSelection, $nodesOfType, $insertNodes, $isRangeSelection, $isRootOrShadowRoot, SELECTION_CHANGE_COMMAND, $getRoot } from 'lexical';
-import { $wrapNodeInElement, mergeRegister, $findMatchingParent } from '../vendor/425002';
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext';
+import { $findMatchingParent, $wrapNodeInElement, mergeRegister } from '../vendor/425002';
 import { E as _$$E9 } from '../vendor/464923';
-import { AutoLinkNode, LinkNode } from '@lexical/link';
 import { T as _$$T6 } from '../vendor/513042';
-import { useDispatch, useSelector } from 'react-redux';
 import { Q as _$$Q8 } from '../vendor/568295';
 import { _ as _$$_8 } from '../vendor/646701';
 import { TW as _$$TW, YZ, Zk } from '../vendor/677121';
 import { d as _$$d0 } from '../vendor/683721';
 import { a as _$$a9 } from '../vendor/683966';
-import { BOLD_STAR, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, ITALIC_UNDERSCORE, QUOTE, UNORDERED_LIST, ORDERED_LIST, BOLD_UNDERSCORE, LINK, HEADING, $convertFromMarkdownString, ITALIC_STAR, STRIKETHROUGH } from '../vendor/693164';
-import { $generateNodesFromDOM } from '@lexical/html';
+import { $convertFromMarkdownString, BOLD_ITALIC_STAR, BOLD_ITALIC_UNDERSCORE, BOLD_STAR, BOLD_UNDERSCORE, HEADING, ITALIC_STAR, ITALIC_UNDERSCORE, LINK, ORDERED_LIST, QUOTE, STRIKETHROUGH, UNORDERED_LIST } from '../vendor/693164';
 import { E as _$$E0 } from '../vendor/807288';
-import { $setBlocksType } from '@lexical/selection';
 import { A as _$$A4 } from '../vendor/850789';
-import { CodeNode } from '@lexical/code';
-import { QuoteNode, $createHeadingNode, HeadingNode, $isHeadingNode } from '@lexical/rich-text';
 import { Q as _$$Q7 } from '../vendor/898216';
 import { $ as _$$$3 } from '../vendor/909072';
 import { N as _$$N10 } from '../vendor/930821';
-import { createPortal } from 'react-dom';
 import { G as _$$G7 } from '../vendor/947080';
 import { F as _$$F7 } from '../vendor/961806';
 import { Ec, RZ } from '../vendor/969425';
@@ -1020,7 +1019,7 @@ function F({
   });
 }
 let U = () => {
-  let e = _$$_X({
+  let e = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   return useMemoStable(() => e, [e]);
@@ -1105,7 +1104,7 @@ function q() {
 function Y() {
   let e = BK('DAKOTA_ITEM_DROPDOWN');
   let t = e.data?.layoutSetId || '';
-  let i = _$$_X({
+  let i = getViewportInfo({
     subscribeToUpdates_expensive: !1
   });
   let n = e.data?.dakotaItemId || '';
@@ -1128,7 +1127,7 @@ function Y() {
     let l = n.absoluteBoundingBox;
     let a = l.x;
     let s = l.y;
-    let r = $g(t, {
+    let r = addViewportOffset(t, {
       x: a,
       y: s
     });
@@ -2178,7 +2177,7 @@ function iD({
         height: l
       };
     }
-    let s = useMemo(() => new Mi(e.x, e.y), [e.x, e.y]);
+    let s = useMemo(() => new Point(e.x, e.y), [e.x, e.y]);
     let r = useCallback(({
       x: e,
       y: t,
@@ -2843,7 +2842,7 @@ function nq() {
     'aria-label': getI18nString('left_rail.back_to_canvas'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('left_rail.back_to_canvas'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'onClick': e,
     'recordingKey': 'leftPanelFullscreen.backButton',
@@ -3191,7 +3190,7 @@ function as({
       })
     }), !t && s && r && jsx(_$$b7, {
       'className': _$$s4.mlAuto.colorIconWarningPressed.$,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('sites.toolbar.publish_modal.page_will_unpublish_at_next_update'),
       'data-tooltip-show-above': !0,
       'data-tooltip-max-width': 300,
@@ -3236,7 +3235,7 @@ function ax({
       children: getI18nString('sites.toolbar.publish_modal.error_loading_publish_history')
     });
   }
-  let n = _$$oA(i.data?.siteMount);
+  let n = getResourceDataOrFallback(i.data?.siteMount);
   let a = n?.publishEvents ?? [];
   return a.length === 0 ? jsx('div', {
     children: getI18nString('sites.toolbar.publish_modal.no_publish_history')
@@ -3382,7 +3381,7 @@ function am({
           },
           targetRect: h.current.getBoundingClientRect(),
           lean: 'left'
-        }), k && jsx(_$$E5, {
+        }), k && jsx(ButtonPrimitive, {
           'ref': h,
           'className': 'x1717udv xvy4d1p xxk0z11 x1epfdc xwbv1nw',
           'aria-label': getI18nString('sites.toolbar.publish_modal.version_operations', {
@@ -3482,7 +3481,7 @@ function a_(e) {
       label: getI18nString('sites.toolbar.publish_modal.issues_label'),
       content: a > 0 ? jsx('div', {
         className: _$$s4.flex.justifyBetween.itemsCenter.overflowHidden.$,
-        children: jsx(_$$E5, {
+        children: jsx(ButtonPrimitive, {
           className: v()(_$$s4.wFull.flex.justifyBetween.py4.bRadius5.$),
           onClick: onViewErrors,
           children: jsx(_$$E6, {
@@ -3495,7 +3494,7 @@ function a_(e) {
       }) : jsx('span', {
         children: renderI18nText('sites.lint.no-issues')
       }),
-      action: a > 0 ? jsx(_$$E5, {
+      action: a > 0 ? jsx(ButtonPrimitive, {
         'aria-label': getI18nString('sites.toolbar.publish_modal.review_issues_aria'),
         'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
         'onClick': onViewErrors,
@@ -3670,7 +3669,7 @@ function aD({
       'style': {
         '--color-icon': 'var(--color-icon-secondary)'
       },
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('sites.toolbar.publish_modal.publish_your_site_to_get_your_figma_site_subdomain', {
         domain: _$$nC()
       }),
@@ -3690,7 +3689,7 @@ function aD({
     }),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.toolbar.publish_modal.copy_to_clipboard'),
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip-show-immediately': 'true'
     },
     'children': jsx(_$$a6, {})
@@ -4065,7 +4064,7 @@ let sr = registerModal(({
   entryPoint: t
 }) => {
   let i = selectCurrentUser();
-  let n = _$$sZ();
+  let n = useCurrentUserOrg();
   let {
     status,
     data
@@ -4084,7 +4083,7 @@ let sr = registerModal(({
     properties: {
       userId: i?.id,
       orgId: n?.id,
-      resourceType: _$$vt.HUB_FILE,
+      resourceType: ResourceTypeNoComment.HUB_FILE,
       resourceId: p?.id,
       fileKey: e,
       editorType: _$$_Y.FIGMAKE,
@@ -4160,7 +4159,7 @@ function sp({
   let I = useIsStarterPlan(T).unwrapOr(!1);
   let E = _$$ol();
   let N = selectCurrentUser();
-  let R = _$$sZ();
+  let R = useCurrentUserOrg();
   let A = useIsSelectedFigmakeFullscreen();
   let L = {
     top: _$$f7 + 8,
@@ -4203,7 +4202,7 @@ function sp({
               label: getI18nString('sites.toolbar.publish_modal.pages_label'),
               content: jsx('div', {
                 className: _$$s4.flex.justifyBetween.itemsCenter.overflowHidden.$,
-                children: jsx(_$$E5, {
+                children: jsx(ButtonPrimitive, {
                   className: v()(_$$s4.wFull.flex.justifyBetween.py4.bRadius5.$),
                   onClick: () => C('page-selection'),
                   children: renderI18nText('sites.toolbar.publish_modal.num_pages', {
@@ -4211,7 +4210,7 @@ function sp({
                   })
                 })
               }),
-              action: jsx(_$$E5, {
+              action: jsx(ButtonPrimitive, {
                 'aria-label': getI18nString('sites.toolbar.publish_modal.select_pages_to_publish'),
                 'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
                 'onClick': () => C('page-selection'),
@@ -4259,7 +4258,7 @@ function sp({
                   })]
                 })]
               }),
-              action: getFeatureFlags().sts_revert_publish && y ? jsx(_$$E5, {
+              action: getFeatureFlags().sts_revert_publish && y ? jsx(ButtonPrimitive, {
                 'aria-label': getI18nString('sites.toolbar.publish_modal.publish_history'),
                 'className': v()(_$$s4.wFull.flex.justifyBetween.bRadius5.$, l0),
                 'onClick': () => {
@@ -4399,7 +4398,7 @@ function sp({
             isUpdating: Z
           }), jsxs('div', {
             className: _$$s4.flex.gap8.$,
-            children: [j && !j.hasCustomDomain && jsx(IK, {
+            children: [j && !j.hasCustomDomain && jsx(ButtonWide, {
               'variant': 'secondary',
               'onClick': () => {
                 I ? k(showModalHandler({
@@ -4416,7 +4415,7 @@ function sp({
               },
               'data-testid': 'sitesModalPublishButton',
               'children': renderI18nText('sites.toolbar.publish_modal.connect_a_domain')
-            }), jsx(IK, {
+            }), jsx(ButtonWide, {
               'variant': 'primary',
               'onClick': J,
               'disabled': r || inProgress || z || K || H || X,
@@ -4459,7 +4458,7 @@ function sm({
     case 'page-selection':
       return jsxs(_$$J4, {
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
-        children: [jsx(_$$E5, {
+        children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
           'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
@@ -4473,7 +4472,7 @@ function sm({
     case 'review-issues':
       return jsxs(_$$J4, {
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
-        children: [jsx(_$$E5, {
+        children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
           'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
@@ -4487,7 +4486,7 @@ function sm({
     case 'publish-history':
       return jsxs(_$$J4, {
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
-        children: [jsx(_$$E5, {
+        children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
           'aria-label': getI18nString('general.back'),
           'children': jsx(_$$t6, {})
@@ -4675,7 +4674,7 @@ function sv(e) {
         isPublishingDisabled: t,
         publishButtonTooltipHtmlAttributes: {
           'data-tooltip': e ? getI18nString('fullscreen.toolbar.we_ve_sent_your_request_to_your_team_s_admins_we_ll_let_you_know_when_they_respond') : null,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip-max-width': 200,
           'data-tooltip-show-below': !0
         },
@@ -4686,7 +4685,7 @@ function sv(e) {
       isPublishingDisabled: !0,
       publishButtonTooltipHtmlAttributes: {
         'data-tooltip': upgradeDisabledReason === 'disabled-for-org' ? getI18nString('sites.toolbar.org_disabled_publishing') : upgradeDisabledReason === 'student-team' ? getI18nString('sites.toolbar.publish_modal.publish_disabled_rollout') : upgradeDisabledReason === 'disabled-for-user' ? getI18nString('sites.toolbar.publishing_is_disabled_for_your_account_please_contact_support') : void 0,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip-show-immediately': 'true'
       }
     };
@@ -4759,7 +4758,7 @@ function sT({
     'aria-label': getI18nString('figmake.mobile_preview'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('figmake.mobile_preview'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'onChange': () => i(!t)
   });
@@ -4841,7 +4840,7 @@ function sq(e, t, i = qB.SIGN_IN) {
 }
 function sX() {
   let e = sq('SIGN_UP_BUTTON_BANNER', _$$ty.FIGMA_REV_LOGGED_OUT_HEADER, qB.SIGN_UP);
-  return jsx(_$$WW, {
+  return jsx(ButtonLarge, {
     htmlAttributes: {
       'data-test-id': 'email-btn'
     },
@@ -4894,7 +4893,7 @@ function sG() {
 }
 function sW() {
   let e = sq('SHARE_BUTTON', _$$ty.FIGMA_REV_LOGGED_OUT_HEADER);
-  return jsx(_$$WW, {
+  return jsx(ButtonLarge, {
     variant: 'primary',
     onClick: e,
     children: getI18nString('fullscreen.toolbar.multiplayer.share')
@@ -4915,7 +4914,7 @@ function sJ({
   } = _$$tz();
   let i = sY();
   let n = sq(Command.PAGE_DUPLICATE, _$$ty.FIGMA_REV_LOGGED_OUT_HEADER);
-  return i ? jsx(_$$WW, {
+  return i ? jsx(ButtonLarge, {
     variant: 'secondary',
     onClick: e ? n : duplicateFile,
     htmlAttributes: {
@@ -4952,7 +4951,7 @@ function sQ() {
     'data-testid': 'open-fullscreen-preview-button',
     'htmlAttributes': {
       'data-tooltip': sZ,
-      'data-tooltip-type': Ib.SPECIAL,
+      'data-tooltip-type': KindEnum.SPECIAL,
       'data-tooltip-offset-y': 2,
       'data-onboarding-key': NR
     },
@@ -4972,7 +4971,7 @@ function s0() {
     'data-testid': 'copy-make-for-design-button',
     'htmlAttributes': {
       'data-tooltip': i,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip-max-width': 200
     },
     'disabled': e,
@@ -5034,7 +5033,7 @@ function s5({
           'aria-label': getI18nString('figmake.refresh'),
           'htmlAttributes': {
             'data-tooltip': getI18nString('figmake.refresh'),
-            'data-tooltip-type': Ib.TEXT
+            'data-tooltip-type': KindEnum.TEXT
           },
           'children': jsx(_$$T4, {})
         }), jsx(_$$r4, {
@@ -5051,7 +5050,7 @@ function s5({
           'aria-label': x ? getI18nString('figmake.scope.hide_scope_view') : getI18nString('figmake.scope.show_scope_view'),
           'htmlAttributes': {
             'data-tooltip': x ? getI18nString('figmake.scope.hide_scope_view') : getI18nString('figmake.scope.show_scope_view'),
-            'data-tooltip-type': Ib.TEXT
+            'data-tooltip-type': KindEnum.TEXT
           },
           'children': jsx(n5, {
             style: {
@@ -5072,7 +5071,7 @@ function s5({
           }),
           'onChange': e => {
             t(e);
-            _$$Cu({
+            logAndTrackCTA({
               trackingContext: `make_${e === Ic.PREVIEW ? 'preview' : 'code_view'}_toggle`,
               fileKey: r?.key
             }, void 0, void 0, d);
@@ -5342,7 +5341,7 @@ function ru() {
         children: getI18nString('figmake.settings.auth_expired.badge')
       }),
       actions: jsxs(Fragment, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'primary',
           onClick: i,
           children: getI18nString('figmake.settings.auth_expired.button')
@@ -5471,7 +5470,7 @@ function rw() {
         children: getI18nString('figmake.settings.connected_project.generic_error.badge')
       }),
       actions: jsx(Fragment, {
-        children: connectedProject && jsx($n, {
+        children: connectedProject && jsx(Button, {
           variant: 'primary',
           onClick: () => {
             FJ(_$$kR(connectedProject.id));
@@ -5494,7 +5493,7 @@ function rS() {
         variant: 'dangerOutline',
         children: getI18nString('figmake.settings.connected_project.removed.badge')
       }),
-      actions: jsx($n, {
+      actions: jsx(Button, {
         variant: 'primary',
         onClick: e,
         children: getI18nString('figmake.settings.connected_project.removed.button')
@@ -5526,7 +5525,7 @@ function rC() {
         })]
       }),
       actions: jsxs(Fragment, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'primary',
           onClick: () => {
             connectedProject?.id && FJ(_$$kR(connectedProject.id));
@@ -5567,7 +5566,7 @@ function rI() {
         variant: 'successOutline',
         children: getI18nString('figmake.settings.connected_project.badge')
       }),
-      actions: jsx($n, {
+      actions: jsx(Button, {
         variant: 'destructiveSecondary',
         onClick: i,
         children: getI18nString('figmake.settings.connected_project.disconnect_button')
@@ -5594,7 +5593,7 @@ function rE() {
   let t = _$$A8();
   switch (e) {
     case _$$Ut.INIT:
-      return jsx($n, {
+      return jsx(Button, {
         variant: 'secondary',
         onClick: () => t({
           showVisualBells: !0
@@ -5648,7 +5647,7 @@ function rN({
       'aria-label': getI18nString('figmake.settings.connected_project.dropdown.label'),
       'onClick': () => n.toggle(),
       'htmlAttributes': {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('figmake.settings.connected_project.dropdown.label')
       },
       'children': jsx(_$$J5, {})
@@ -5705,7 +5704,7 @@ function rP() {
             ..._$$Ay.props(rO.textBodyMediumSecondary),
             children: getI18nString('figmake.settings.create_project.subtitle')
           })]
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'primary',
           onClick: e,
           children: getI18nString('figmake.settings.create_project.button')
@@ -5981,7 +5980,7 @@ function rH() {
     className: 'x78zum5 xdt5ytf xl56j7k x6s0dn4 x1v2ro7d xeez02y',
     children: [jsx('div', {
       className: 'x78zum5 x100vrsf x1vqgdyp xl56j7k x6s0dn4 x1mxnbhz x1ci220x',
-      children: jsx(_$$B4, {
+      children: jsx(SvgComponent, {
         svg: _$$A9,
         useOriginalSrcFills_DEPRECATED: !0,
         svgWidth: '16px',
@@ -6000,13 +5999,13 @@ function rH() {
           children: getI18nString('figmake.settings.auth.link')
         })]
       })]
-    }), jsx(_$$WW, {
+    }), jsx(ButtonLarge, {
       variant: 'primary',
       onClick: n,
       disabled: t,
       htmlAttributes: {
         'data-tooltip': t ? getI18nString('figmake.settings.auth.disabled_tooltip') : void 0,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip-show-immediately': 'true'
       },
       children: getI18nString('figmake.settings.auth.button')
@@ -6068,10 +6067,10 @@ let rQ = registerModal(({
     open: i,
     onClose: n
   });
-  return jsx(_$$bL4, {
+  return jsx(ModalRootComponent, {
     manager: m,
     width: 'md',
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: e => {
         e.preventDefault();
         x();
@@ -6089,13 +6088,13 @@ let rQ = registerModal(({
         })
       }), jsx(_$$wi, {
         children: jsxs(_$$jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: n,
             disabled: o,
             ref: c,
             children: renderI18nText('general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             type: 'submit',
             variant: 'destructive',
             disabled: o,
@@ -6121,7 +6120,7 @@ function r1({
 }) {
   return jsx('div', {
     className: 'x78zum5 x13a6bvl',
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: 'secondary',
       disabled: n || t,
       onClick: t => i(t, e),
@@ -7078,7 +7077,7 @@ let oA = ({
     if (n === _$$p6.DOMAINS) return jsx(_$$J8, {});
     if (n === _$$p6.FONTS) return jsx(oj, {});
     if (n === _$$p6.SUPABASE) {
-      return jsx(_$$B4, {
+      return jsx(SvgComponent, {
         svg: _$$A9,
         useOriginalSrcFills_DEPRECATED: !0,
         svgWidth: '24px',
@@ -7092,7 +7091,7 @@ let oA = ({
     className: _$$s4.flexShrink0.$
   }) : n === _$$p6.SUPABASE ? jsx('div', {
     className: 'x78zum5 x6s0dn4 xlup9mm x1kky2od',
-    children: jsx(_$$B4, {
+    children: jsx(SvgComponent, {
       svg: _$$A9,
       useOriginalSrcFills_DEPRECATED: !0,
       svgWidth: '12px',
@@ -7200,7 +7199,7 @@ let oG = registerModal(e => {
       e.onClose();
     }
   });
-  return jsx(_$$bL4, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 'md',
     children: jsxs(_$$vo, {
@@ -7212,13 +7211,13 @@ let oG = registerModal(e => {
         children: renderI18nText('sites.metadata.domains.change_url_confirmation_modal.body')
       }), jsx(_$$wi, {
         children: jsxs(_$$jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: () => t.props.close({
               source: 'button'
             }),
             children: renderI18nText('sites.metadata.domains.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'primary',
             onClick: e.onSubmit,
             children: renderI18nText('sites.metadata.domains.change_url')
@@ -7439,7 +7438,7 @@ function oY({
     enabled: !!d
   });
   let b = useSelector(e => e.modalShown);
-  let y = _$$A1(e => {
+  let y = useDebouncedCallback(e => {
     if (e === '') {
       h(null);
       return;
@@ -7501,7 +7500,7 @@ function oY({
             }).$$finally(() => {
               i(!1);
             });
-            let l = _$$oA(_.data?.siteMount)?.siteDomain?.id ?? '';
+            let l = getResourceDataOrFallback(_.data?.siteMount)?.siteDomain?.id ?? '';
             WB()?.optimisticallyUpdate({
               SiteDomain: {
                 [l]: {
@@ -7564,12 +7563,12 @@ function oY({
     }), jsx('div', {
       className: 'x78zum5 x1q0g3np x6s0dn4 xxk0z11 xztvwtv x1nfngrj',
       children: g ? jsx(_$$k7, {}) : jsxs(Fragment, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'secondary',
           onClick: t,
           type: 'button',
           children: renderI18nText('sites.metadata.domains.cancel')
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'primary',
           disabled: v,
           onClick: j,
@@ -7682,7 +7681,7 @@ function oQ({
       'children': r ? jsxs(Fragment, {
         children: [jsx(Wi, {
           ..._$$xk(oJ.loadingText)
-        }), jsx(_$$kt, {
+        }), jsx(LoadingSpinner, {
           'data-testid': 'loading-spinner'
         })]
       }) : jsx(LinkPrimitive, {
@@ -8059,7 +8058,7 @@ let ds = registerModal(e => {
   let x = c ? renderI18nText('figmake.metadata.domain.confirm_connected_domain_removal') : renderI18nText('sites.metadata.domain.confirm_connected_domain_removal');
   let m = c ? renderI18nText('figmake.metadata.domain.remove_connected_domain_confirmation') : renderI18nText('sites.metadata.domain.you_are_about_to_remove_your_site_s_connected_domain_url_existing_external_links_to_your_site_may_break');
   let h = c ? renderI18nText('figmake.metadata.domain.confirm_connected_domain_removal_button') : renderI18nText('general.confirm');
-  return jsx(_$$bL4, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: 'md',
     children: jsxs(_$$vo, {
@@ -8071,11 +8070,11 @@ let ds = registerModal(e => {
         children: m
       }), jsx(_$$wi, {
         children: jsxs(_$$jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: () => n(hideModalHandler()),
             children: renderI18nText('general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               let e = d({
                 fileKey,
@@ -8307,7 +8306,7 @@ function dy({
   return jsx(_$$R4, {
     'className': 'x1gviqkx xdxz5ap xw8er2b',
     'data-tooltip': t,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip-show-above': !0
   });
 }
@@ -8533,7 +8532,7 @@ function dS({
       'onClick': h,
       'aria-label': getI18nString('sites.metadata.domain.refresh'),
       'data-tooltip': getI18nString('sites.metadata.domain.refresh'),
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip-show-above': !0,
       'disabled': g,
       'children': jsx(_$$T4, {})
@@ -8805,10 +8804,10 @@ function dz({
     enabled: !0
   });
   let n = _$$lg();
-  let r = _$$pi({
+  let r = mapFileToProductType({
     editorType: n
   });
-  let o = useMemo(() => !!(i.status === 'loaded' && _$$oA(i.data?.siteMount)?.pwdConfig?.id), [i]);
+  let o = useMemo(() => !!(i.status === 'loaded' && getResourceDataOrFallback(i.data?.siteMount)?.pwdConfig?.id), [i]);
   let d = useDispatch();
   let c = function () {
     let e = selectCurrentFile();
@@ -8872,7 +8871,7 @@ function dz({
     b(!0);
   }, []);
   let I = useCallback(async e => {
-    if (e.preventDefault(), _$$Cu({
+    if (e.preventDefault(), logAndTrackCTA({
       trackingDescriptor: 'site_password',
       text: 'Save',
       productType: r
@@ -8897,7 +8896,7 @@ function dz({
         await e.optimisticallyCreate({
           SitePwdConfig: {
             [n]: {
-              siteMountId: _$$oA(i.data?.siteMount)?.id || '',
+              siteMountId: getResourceDataOrFallback(i.data?.siteMount)?.id || '',
               setByUserId: null,
               updatedAt: new Date(),
               version: '1',
@@ -8928,7 +8927,7 @@ function dz({
     o || h(!1);
   }, [o]);
   let N = useCallback(() => {
-    _$$Cu({
+    logAndTrackCTA({
       trackingDescriptor: 'site_password',
       text: 'Edit',
       productType: r
@@ -8986,7 +8985,7 @@ function dz({
               ..._$$xk(dB.labelText),
               children: getI18nString('sites.settings.password_protection.password_label')
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             'variant': 'ghost',
             'iconPrefix': jsx(_$$x2, {}),
             'onClick': R,
@@ -9045,15 +9044,15 @@ function dz({
       }), jsx('div', {
         className: 'xehsoiq x78zum5 x1nfngrj',
         children: g ? jsxs(Fragment, {
-          children: [jsx(_$$WW, {
+          children: [jsx(ButtonLarge, {
             variant: 'secondary',
             onClick: E,
             children: getI18nString('sites.settings.password_protection.cancel')
-          }), jsx(_$$WW, {
+          }), jsx(ButtonLarge, {
             type: 'submit',
             children: getI18nString('sites.settings.password_protection.save')
           })]
-        }) : jsx(_$$WW, {
+        }) : jsx(ButtonLarge, {
           variant: 'secondary',
           onClick: N,
           children: getI18nString('sites.settings.password_protection.edit')
@@ -9556,11 +9555,11 @@ function ci({
         })
       }), jsx(_$$wi, {
         children: jsxs(_$$jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: t,
             children: renderI18nText('general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: i,
             disabled: !1,
@@ -9730,7 +9729,7 @@ function co({
           style: {
             maxWidth: '196px'
           },
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: 'destructiveSecondary',
             onClick: p,
             recordingKey: generateRecordingKey(e, 'wipe_chat_history_button'),
@@ -9738,7 +9737,7 @@ function co({
           })
         })]
       })
-    }), jsx(_$$R5, {
+    }), jsx(ConfirmationModal, {
       open: o,
       onClose: m,
       onConfirm: x,
@@ -9808,7 +9807,7 @@ function cu({
         className: 'x78zum5',
         children: [h, o && jsx('span', {
           'data-tooltip': getI18nString('sites.metadata.controls.no_indexing_page.disabled_hover_tooltip'),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'className': 'x1h67ju5',
           'children': jsx(_$$B3, {})
         })]
@@ -10155,7 +10154,7 @@ function cb({
       isPublished: o
     }), jsx('div', {
       className: _$$s4.flex.gap4.$,
-      children: o ? jsx($n, {
+      children: o ? jsx(Button, {
         onClick: () => a(showModalConditional({
           type: ct
         })),
@@ -10731,7 +10730,7 @@ let cJ = forwardRef(({
   children: t,
   type: i = 'button',
   ...n
-}, a) => jsxs(_$$E5, {
+}, a) => jsxs(ButtonPrimitive, {
   ref: a,
   className: 'x78zum5 x1q0g3np x6s0dn4 x167g77z x1yjdb4r xv2f06h x1bamp8i xgqmno8 x10w6t97 x13dej2s x3t71xm x1n2onr6 x9f619 xb3r6kr',
   type: i,
@@ -10776,7 +10775,7 @@ function c5() {
           file_key: e || ''
         });
         let i = t.getBoundingClientRect();
-        let l = new Mi(i.left, i.bottom + 4);
+        let l = new Point(i.left, i.bottom + 4);
         r(!0);
         c(showModalHandler({
           type: _$$u5,
@@ -10905,7 +10904,7 @@ function c8({
               chatMessagesNodeGuid: e,
               createLoadedAttachment
             }), jsx(c5, {})]
-          }), jsx(_$$E5, {
+          }), jsx(ButtonPrimitive, {
             ..._$$Ay.props(c6.sendIcon, f && c6.sendIconDisabled),
             type: 'submit',
             disabled: f,
@@ -10999,7 +10998,7 @@ function c7({
   title: t,
   onClick: i
 }) {
-  return jsxs(_$$E5, {
+  return jsxs(ButtonPrimitive, {
     className: 'x19y5rnk xfp4ol3 x78zum5 xdt5ytf x1i71x30 x1cy8zhl x1ypdohk x1y2ay1z x1dwso5e',
     onClick: i,
     children: [jsx(_$$oW, {
@@ -12428,7 +12427,7 @@ let pw = registerModal(e => {
         throwTypeError(e.type);
     }
   })();
-  return jsx(_$$bL4, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 'lg',
     children: jsxs(_$$vo, {
@@ -12440,11 +12439,11 @@ let pw = registerModal(e => {
         children: n
       }), jsx(_$$wi, {
         children: jsxs(_$$jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: e.onClose,
             children: getI18nString('dakota.table_view.deletion_modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
               e.deleteRecordOrRecords();
@@ -13979,7 +13978,7 @@ function x7({
             })
           }), jsx('div', {
             className: 'xl56j7k x5mp9sv',
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: () => {
                 n.setValue(Ec('UTC'));
                 n.setFocusedDate(Ec('UTC'));
@@ -14202,7 +14201,7 @@ let mi = {
     $$css: !0
   }
 };
-let mo = new Mi(-16, -56);
+let mo = new Point(-16, -56);
 let md = {
   dropArea: {
     position: 'x1n2onr6',
@@ -14316,14 +14315,14 @@ function mu({
         className: 'x1s85apg'
       }), t !== 2 && jsxs('div', {
         className: 'x1j6dyjg x78zum5 xdt5ytf x6s0dn4 x167g77z x1n0bwc9 xmauxvm',
-        children: [jsx(_$$kt, {
+        children: [jsx(LoadingSpinner, {
           size: 'medium',
           className: 'x1i3ajwb'
         }), t === 1 && renderI18nText('dakota.side_panel.uploading')]
       }), t === 2 && !e && jsxs('div', {
         ..._$$xk(md.emptyState, g && md.emptyStateHovered),
         children: [jsx(_$$T2, {}), renderI18nText('dakota.side_panel.add_image')]
-      }), m && t === 2 && e && r && jsx(_$$E5, {
+      }), m && t === 2 && e && r && jsx(ButtonPrimitive, {
         onClick: e => {
           s();
           h(!1);
@@ -14538,7 +14537,7 @@ function mx({
         onChange: f,
         deleteImage: b,
         showDeleteButton: !1,
-        imageHoverButton: jsx($n, {
+        imageHoverButton: jsx(Button, {
           iconPrefix: jsx(_$$A15, {}),
           recordingKey: generateRecordingKey(r, 'uploadButton'),
           variant: 'primary',
@@ -14622,7 +14621,7 @@ function mf({
       }));
     }
   };
-  let y = _$$A1(b, 150);
+  let y = useDebouncedCallback(b, 150);
   let v = (e, t, i, n) => {
     let l = {};
     l[i.id] = {
@@ -15300,14 +15299,14 @@ function mH({
     children: jsxs('div', {
       ref: dropdownTargetRef,
       className: v()(_$$s4.wFull.$),
-      children: [jsx(IK, {
+      children: [jsx(ButtonWide, {
         'variant': 'secondary',
         'onClick': toggleDropdown,
         'recordingKey': 'newDakotaCollection',
         'aria-label': getI18nString('dakota.collection_field_editor.add_field'),
         'htmlAttributes': {
           'data-tooltip': getI18nString('dakota.collection_field_editor.add_field'),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip-show-above': !0
         },
         'iconPrefix': jsx(_$$x5, {}),
@@ -15512,7 +15511,7 @@ let mW = registerModal(({
   let B = collectionFields.find(e => e.id === O);
   return jsx(_$$fu, {
     name: 'Dakota Collection Field Editor',
-    children: jsx(_$$bL4, {
+    children: jsx(ModalRootComponent, {
       manager: d,
       width: 'lg',
       children: jsxs(_$$vo, {
@@ -15567,12 +15566,12 @@ let mW = registerModal(({
           })
         }), jsxs(_$$wi, {
           children: [!1, jsxs(_$$jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               disabled: c,
               variant: 'secondary',
               onClick: t,
               children: i ? renderI18nText('dakota.collection_field_editor.cancel') : renderI18nText('dakota.collection_field_editor.back')
-            }), jsx($n, {
+            }), jsx(Button, {
               disabled: !canSubmit || c,
               variant: 'primary',
               onClick: z,
@@ -15598,10 +15597,10 @@ let mY = registerModal(e => {
   let [r, o] = useState(e.placeholder);
   return jsx(_$$fu, {
     name: 'CMS New Collection Modal',
-    children: jsx(_$$bL4, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: 'md',
-      children: jsxs(Rq, {
+      children: jsxs(ModalFormContents, {
         onSubmit: () => {
           t(showModalHandler({
             type: mW,
@@ -15627,7 +15626,7 @@ let mY = registerModal(e => {
           })
         }), jsx(_$$wi, {
           children: jsx(_$$jk, {
-            children: jsx($n, {
+            children: jsx(Button, {
               disabled: !r || !r.trim(),
               type: 'submit',
               children: renderI18nText('dakota.new_collection_modal.next')
@@ -16019,7 +16018,7 @@ function hr({
     importFileError: o,
     importLocalFile: d
   });
-  return jsx($n, {
+  return jsx(Button, {
     disabled: i,
     variant: 'primary',
     onClick: c,
@@ -16140,7 +16139,7 @@ let hd = registerModal(e => {
   let [c, p] = useState({});
   return jsx(_$$fu, {
     name: 'Dakota CSV Import',
-    children: jsx(_$$bL4, {
+    children: jsx(ModalRootComponent, {
       manager: i,
       width: 'lg',
       children: jsxs(_$$vo, {
@@ -16228,11 +16227,11 @@ let hd = registerModal(e => {
           })
         }), jsx(_$$wi, {
           children: jsxs(_$$jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: 'secondary',
               onClick: e.onClose,
               children: renderI18nText('dakota.import_csv_modal.buttons.cancel')
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: 'primary',
               disabled: !n,
               onClick: () => {
@@ -16406,7 +16405,7 @@ function hp() {
     };
   }();
   let i = Xr(_$$iO);
-  let n = _$$hC();
+  let n = trackDefinedFileEventWithStore();
   let l = t => {
     reportError(_$$e2.CMS, new Error('Failed to import CSV'), {
       extra: {
@@ -16696,7 +16695,7 @@ function hb() {
   let b = () => x(d);
   let y = _ && !n;
   let v = PE();
-  let j = useSelector(e => _$$v5(e.selectedView, null));
+  let j = useSelector(e => getProductType(e.selectedView, null));
   let k = _$$a5();
   if (!m || !v) return null;
   let w = {
@@ -16865,7 +16864,7 @@ function hw() {
       className: 'dakota_view_empty_state--dakotaEmptyStateButtonContainer--InjD9',
       children: [jsx('div', {
         className: hj,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: 'primary',
           onClick: t => {
             t.stopPropagation();
@@ -16875,7 +16874,7 @@ function hw() {
         })
       }), n && jsx('div', {
         className: hj,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: 'secondary',
           onClick: e => {
             e.stopPropagation();
@@ -16888,7 +16887,7 @@ function hw() {
         })
       }), getFeatureFlags().dakota_import_csv && jsx('div', {
         className: hj,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: 'secondary',
           onClick: e => {
             e.stopPropagation();
@@ -16937,7 +16936,7 @@ function hN(e) {
           })]
         }), jsx('div', {
           className: 'x4ipri6 x1ef8nbk xh8yej3 x5yr21d'
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'primary',
           onClick: hE,
           children: getI18nString('dakota.alpha_cta.share_feedback')
@@ -17014,7 +17013,7 @@ function hO({
     children: jsx(hA, {
       children: jsxs('div', {
         className: 'x78zum5 x6s0dn4 x1nfngrj',
-        children: [jsx($n, {
+        children: [jsx(Button, {
           recordingKey: generateRecordingKey(i, 'newItemButton'),
           iconPrefix: jsx(_$$x5, {}),
           variant: 'secondary',
@@ -17024,7 +17023,7 @@ function hO({
             c(new Set([e]));
           },
           children: renderI18nText('dakota.table_view.header.new_item')
-        }), jsx($n, {
+        }), jsx(Button, {
           recordingKey: generateRecordingKey(i, 'editFieldsButton'),
           iconPrefix: jsx(_$$I4, {}),
           variant: 'secondary',
@@ -17376,7 +17375,7 @@ function h1(e) {
   } = e;
   return jsx(_$$B7, {
     children: jsxs(_$$H7, {
-      children: [jsxs(_$$E5, {
+      children: [jsxs(ButtonPrimitive, {
         className: 'code_components_list--toggleButton--eKzaU',
         htmlAttributes: {
           onContextMenu: e => {
@@ -17395,7 +17394,7 @@ function h1(e) {
           'onClick': addButtonProps.onClick,
           'htmlAttributes': {
             'data-testid': addButtonProps.testId,
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': addButtonProps.label,
             'data-tooltip-show-above': !0
           },
@@ -17506,7 +17505,7 @@ function h3({
       }
     }
   }, [n]);
-  return jsxs(_$$E5, {
+  return jsxs(ButtonPrimitive, {
     className: 'x9f619 xoa0rjt x9h44rk xehbxol x78zum5 x688lhu x6s0dn4 x2b8uid x1vc294i xdt5ytf x17aw9rc xv2f06h xe6jlm5',
     onClick: i,
     htmlAttributes: {
@@ -17574,7 +17573,7 @@ function h8() {
     }), jsx('div', {
       className: 'x1n0bwc9 x2b8uid',
       children: getI18nString('left_rail.code_view_empty_state.start_with_example_or_make_anything')
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: 'primary',
       onClick: t => {
         i(t);
@@ -17823,7 +17822,7 @@ function ga() {
             },
             'htmlAttributes': {
               'data-tooltip': getI18nString('sites.panel.pages_panel.add_new_dakota_collection'),
-              'data-tooltip-type': Ib.TEXT,
+              'data-tooltip-type': KindEnum.TEXT,
               'data-tooltip-show-above': !0
             },
             'children': jsx(_$$x5, {})
@@ -18414,7 +18413,7 @@ function gL(e) {
     let i = _$$O6();
     let n = useSelector(e => e.mirror.appModel.currentPage);
     let l = useSelector(e => e.versionHistory);
-    let a = _$$U5();
+    let a = trackFileEventWithStore();
     let o = getSingletonSceneGraph();
     let d = useSelector(e => e.mirror.appModel.pagesList);
     return s => {
@@ -18431,7 +18430,7 @@ function gL(e) {
   }();
   let F = _$$e6();
   let M = useCallback(e => {
-    m(QZ({
+    m(computeFullscreenViewportForNode({
       nodeId: e,
       alwaysPan: !0
     }));
@@ -18444,7 +18443,7 @@ function gL(e) {
   let U = $.filter(e => F !== e);
   F && U.unshift(F);
   let K = Math.min(56 * _$$wk(C).length + 8, Math.round(0.25 * (windowInnerHeight - parsePxInt(MGP) - _$$uF2)));
-  let H = _$$A1(e => {
+  let H = useDebouncedCallback(e => {
     let t = U.indexOf(e);
     let i = (t + 0.5) * 56;
     let n = v.current?.getClipContainer().clientHeight || K;
@@ -18824,8 +18823,8 @@ function gU({
       enabled: !!t
     });
     if (i.status !== 'loaded' || n.status !== 'loaded') return null;
-    let l = _$$oA(i.data?.siteBundles);
-    let a = _$$oA(n.data?.siteMount);
+    let l = getResourceDataOrFallback(i.data?.siteBundles);
+    let a = getResourceDataOrFallback(n.data?.siteMount);
     let s = a?.status !== 'published';
     let r = null;
     l != null && (r = l.find(e => e.completedAt != null) || null);
@@ -18855,7 +18854,7 @@ function gU({
           'data-tooltip': getI18nString('sites.metadata.domain.password_protected'),
           'data-tooltip-show-immediately': !0,
           'data-tooltip-hide-immediately': !0,
-          'data-tooltip-type': Ib.TEXT
+          'data-tooltip-type': KindEnum.TEXT
         })]
       })
     })
@@ -18875,7 +18874,7 @@ function gK() {
   return jsx(_$$K2, {
     'aria-label': getI18nString('sites.metadata.domain.warning_icon_indicating_that_the_custom_domain_has_not_been_verified'),
     'data-tooltip': getI18nString('sites.metadata.domains.unverified_custom_domain'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip-show-above': !0,
     'onClick': () => {
       e(PanelType.SETTINGS);
@@ -19019,7 +19018,7 @@ function g7() {
       onClick: () => _(PanelType.CODE),
       shortcut: y ? 'set-sites-view-code' : void 0,
       customTooltip: y ? void 0 : {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.coming_soon_tooltip.make.title'),
         'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
       }
@@ -19032,7 +19031,7 @@ function g7() {
       onClick: () => _(PanelType.DAKOTA),
       shortcut: v ? 'set-sites-view-cms' : void 0,
       customTooltip: v ? void 0 : {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.coming_soon_tooltip.cms.title'),
         'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.cms.description')
       }
@@ -19055,7 +19054,7 @@ function g7() {
       let t = _$$p2('isReadOnly');
       let i = useAtomWithSubscription(_$$oD);
       let n = _$$D2();
-      let l = _$$am();
+      let l = trackFileEventWithUser();
       let a = i ? getI18nString('sites.panel.hide_unsupported_properties') : getI18nString('sites.panel.see_unsupported_properties');
       return {
         expanded: !!i,
@@ -19260,7 +19259,7 @@ function fa() {
   return duplicatedBreakpointId ? jsx(fs, {}) : null;
 }
 function fs() {
-  let e = _$$am();
+  let e = trackFileEventWithUser();
   let [t, i] = useAtomValueAndSetter(_$$O8);
   let {
     duplicatedBreakpointId,
@@ -19280,7 +19279,7 @@ function fs() {
     i(null);
   }
   return jsx(_$$bL2, {
-    defaultPosition: new Mi(window.innerWidth / 2 - 120, window.innerHeight / 2 - 120),
+    defaultPosition: new Point(window.innerWidth / 2 - 120, window.innerHeight / 2 - 120),
     onClose: g,
     children: jsxs(_$$vo, {
       children: [jsx(Y9, {
@@ -19340,7 +19339,7 @@ function fs() {
             })]
           }), jsx('div', {
             className: 'breakpoints--customFooter--sFCTe',
-            children: jsx($n, {
+            children: jsx(Button, {
               disabled: !m,
               type: 'submit',
               children: renderI18nText('sites.add_breakpoint_modal.button')
@@ -19450,7 +19449,7 @@ function fy() {
     preventUserClose: !0,
     primaryCta: {
       type: 'button',
-      label: jsx(_$$E1, {
+      label: jsx(TextWithTruncation, {
         fontSize: 11,
         children: renderI18nText('sites.onboarding.welcome.accept')
       }),
@@ -19467,7 +19466,7 @@ function fy() {
     },
     secondaryCta: {
       type: 'button',
-      label: jsx(_$$E1, {
+      label: jsx(TextWithTruncation, {
         fontSize: 11,
         children: renderI18nText('sites.onboarding.welcome.decline')
       }),
@@ -19898,8 +19897,8 @@ function fB({
 }
 var f$ = (e => (e.INLINE_EDGE_RESIZE = 'Inline Edge Resize', e.SIZE_INPUT = 'Size Input', e.BREAKPOINT_CHANGE = 'Breakpoint Change', e.FULL_RESIZE_HANDLE = 'Full Preview Resize Handle', e.INLINE_FIT_TO_SCREEN = 'Fit To Screen', e))(f$ || {});
 function fU() {
-  let e = _$$am();
-  return _$$A1(t => {
+  let e = trackFileEventWithUser();
+  return useDebouncedCallback(t => {
     e('sites_resize_preview', {
       mode: atomStoreManager.get(_$$_b)?.mode,
       resizeSource: t
@@ -20011,7 +20010,7 @@ function fq(e) {
     'aria-label': getI18nString('inline_preview.overflow_menu'),
     'ref': n,
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('inline_preview.overflow_menu')
     },
     'onClick': e => {
@@ -20038,7 +20037,7 @@ function fq(e) {
           'aria-label': e.label,
           'htmlAttributes': {
             'data-tooltip': e.label,
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'onClick': m,
             'onKeyDownCapture': h
           }
@@ -20065,7 +20064,7 @@ function fW(e) {
         'bigNudgeAmount': 10,
         'className': fX,
         'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.width'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'disabled': void 0 === e.width,
         'dispatch': t,
         'inputClassName': fV,
@@ -20084,7 +20083,7 @@ function fW(e) {
         'bigNudgeAmount': 10,
         'className': fX,
         'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.height'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'dispatch': t,
         'inputClassName': fV,
         'min': 100,
@@ -20102,7 +20101,7 @@ function fW(e) {
         'bigNudgeAmount': 1,
         'className': fX,
         'data-tooltip': getI18nString('sites.preview.scale'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'dispatch': t,
         'inputClassName': fV,
         'min': 2,
@@ -21290,7 +21289,7 @@ function _B({
           children: jsx(_$$K2, {
             'aria-label': getI18nString('inline_preview.overflow_menu'),
             'htmlAttributes': {
-              'data-tooltip-type': Ib.TEXT,
+              'data-tooltip-type': KindEnum.TEXT,
               'data-tooltip': getI18nString('inline_preview.overflow_menu')
             },
             'actionOnPointerDown': !0,
@@ -21395,7 +21394,7 @@ function _X({
     let [s, r] = useState(() => _r(windowInnerWidth, e.x));
     let [o, d] = useState(() => _o(windowInnerHeight, l, e.y));
     let c = PN() ? 100 : t.x;
-    let [u, p] = useState(new Mi(100, 100));
+    let [u, p] = useState(new Point(100, 100));
     let x = useCallback(e => {
       let t = _r(windowInnerWidth, e);
       r(t);
@@ -21664,7 +21663,7 @@ let bi = () => {
   } = useSprigWithSampling();
   let t = Xr(P4);
   let i = useDispatch();
-  let n = _$$U5();
+  let n = trackFileEventWithStore();
   return {
     onStartFromScratch: () => {
       i(FP({
@@ -21681,7 +21680,7 @@ let bi = () => {
   };
 };
 function bs(e) {
-  let t = _$$U5();
+  let t = trackFileEventWithStore();
   return useCallback((i, n) => {
     t(e, {
       resourceId: i,
@@ -21697,7 +21696,7 @@ function bd({
   onPointerDown: i,
   showLoadingSpinner: n = !1
 }) {
-  return jsx(_$$E5, {
+  return jsx(ButtonPrimitive, {
     className: 'sites_template_tile--sitesTileButtonContainer--mExZF',
     onClick: i,
     actionOnPointerDown: !0,
@@ -21886,7 +21885,7 @@ function bf() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$U5();
+  let t = trackFileEventWithStore();
   let i = Xr(P4);
   let n = useDispatch();
   return jsxs('div', {
@@ -21977,7 +21976,7 @@ function bS({
   let {
     Sprig
   } = useSprigWithSampling();
-  let n = _$$U5();
+  let n = trackFileEventWithStore();
   let a = Xr(P4);
   let d = Xr(_$$ZH);
   let c = useDispatch();
@@ -21997,7 +21996,7 @@ function bS({
         })
       }), jsxs('div', {
         className: 'sites_template_view--templateTitleText--91WCQ text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa',
-        children: [jsx(_$$E5, {
+        children: [jsx(ButtonPrimitive, {
           onClick: p,
           className: 'sites_template_view--templateTitleTextButton--zsfiM',
           children: renderI18nText('slides.templates.templates_modal.templates_title')
@@ -22097,7 +22096,7 @@ function bI({
         className: 'sites_template_view--templateSecondaryButton--XTUPL',
         children: [jsx(_$$V5, {}), renderI18nText('sites.onboarding.templates.preview_in_browser')]
       })
-    }), jsx($n, {
+    }), jsx(Button, {
       onClick: () => {
         n(!0);
         onUseThisTemplate();
@@ -22208,7 +22207,7 @@ function bN() {
 function bA({
   children: e
 }) {
-  let t = _$$U5();
+  let t = trackFileEventWithStore();
   let i = Xr(P4);
   let n = useDispatch();
   _$$h3(() => t('sites_template_picker_shown'));
@@ -22422,7 +22421,7 @@ function yi({
 function yn({
   onInspectStyle: e
 }) {
-  return jsxs(_$$E5, {
+  return jsxs(ButtonPrimitive, {
     'onClick': e,
     'className': 'x1imki4n xh8yej3 x78zum5 xxk0z11 xctkrei x19y5rnk x1bhetga x8srhbo',
     'aria-label': getI18nString('dakota.properties_panel.cms_rich_text_styles.select_style_label'),
@@ -22656,13 +22655,13 @@ function yv({
   let [, n] = useAtomValueAndSetter(_$$iO);
   let a = jsx('div', {
     className: yu,
-    children: jsx(_$$E5, {
+    children: jsx(ButtonPrimitive, {
       'recordingKey': generateRecordingKey(t, 'goToCollectionButton'),
       'className': yx,
       'aria-label': getI18nString('dakota.properties_panel.collection_panel.go_to_collection_label'),
       'htmlAttributes': {
         'data-tooltip': getI18nString('dakota.properties_panel.collection_panel.go_to_collection_label'),
-        'data-tooltip-type': Ib.TEXT
+        'data-tooltip-type': KindEnum.TEXT
       },
       'onClick': () => {
         if (i(PanelType.DAKOTA), e?.id == null) {
@@ -22743,13 +22742,13 @@ function yk({
   let i = t.childrenNodes[0]?.mainComponent?.name;
   let n = jsx('div', {
     className: yu,
-    children: jsx(_$$E5, {
+    children: jsx(ButtonPrimitive, {
       'recordingKey': generateRecordingKey(e, 'goToMainComponentRowButton'),
       'className': yx,
       'aria-label': getI18nString('dakota.properties_panel.collection_panel.go_to_component_label'),
       'htmlAttributes': {
         'data-tooltip': getI18nString('dakota.properties_panel.collection_panel.go_to_component_label'),
-        'data-tooltip-type': Ib.TEXT
+        'data-tooltip-type': KindEnum.TEXT
       },
       'onClick': () => fullscreenValue.triggerActionEnum(Command.GO_TO_REPEATER_COMPONENT),
       'children': jsxs('div', {
@@ -22903,7 +22902,7 @@ function yq({
       'htmlAttributes': {
         'data-test-id': 'visibility-variable-control',
         'data-tooltip': d,
-        'data-tooltip-type': Ib.TEXT
+        'data-tooltip-type': KindEnum.TEXT
       },
       'mixed': !e && s === MIXED_MARKER,
       'offIcon': jsx(_$$_0, {}),
@@ -22994,7 +22993,7 @@ let yY = forwardRef(({
   return jsx($j, {
     bigNudgeAmount,
     'data-tooltip': t,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'disabled': c,
     'dispatch': u,
     'inputClassName': _$$h14,
@@ -23210,7 +23209,7 @@ function ve({
           bigNudgeAmount,
           'className': Ej,
           'data-tooltip': getI18nString('fullscreen.type_panel.font_size'),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'disabled': n,
           'dispatch': d,
           'dropdownClassName': _$$hE3,
@@ -23624,7 +23623,7 @@ function vX() {
   return [e, t];
 }
 function vV(e) {
-  let t = _$$U5();
+  let t = trackFileEventWithStore();
   return useCallback(i => {
     t(e, {
       tagType: i
@@ -24113,7 +24112,7 @@ function jo({
     'recordingKey': generateRecordingKey(n, 'plus_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.add_tooltip'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(_$$e9, {})
   });
@@ -24128,7 +24127,7 @@ function jd({
     'recordingKey': generateRecordingKey(t, 'minus_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.remove_tooltip'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(_$$O1, {})
   });
@@ -24143,7 +24142,7 @@ function jc({
     'recordingKey': generateRecordingKey(t, 'reset_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.reset_tooltip'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(_$$f11, {})
   });
@@ -24158,7 +24157,7 @@ function ju({
     'recordingKey': generateRecordingKey(t, 'edit_accessible_label_button'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.edit_cms_accessibility_label_tooltip'),
-      'data-tooltip-type': Ib.TEXT
+      'data-tooltip-type': KindEnum.TEXT
     },
     'children': jsx(vR, {})
   });
@@ -24238,7 +24237,7 @@ function jm({
       children: [jsxs('div', {
         className: v5,
         children: [getI18nString('sites.panel.accessibility.decorative'), jsx(_$$b7, {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('sites.panel.accessibility.decorative_tooltip'),
           'data-tooltip-show-above': !0,
           'data-tooltip-show-immediately': !0
@@ -24417,26 +24416,26 @@ function jv({
   }, [x, p.data?.link, d]);
   if (!getFeatureFlags().sites || !getFeatureFlags().sts_code || i === 0) return null;
   if (c) {
-    return x ? jsx(IK, {
+    return x ? jsx(ButtonWide, {
       'onClick': m,
       'aria-label': getI18nString('design_systems.playground.open_component_in_library'),
       'htmlAttributes': {
         'data-tooltip': getI18nString('design_systems.playground.open_component_in_library'),
-        'data-tooltip-type': Ib.TEXT
+        'data-tooltip-type': KindEnum.TEXT
       },
       'variant': 'secondary',
       'children': getI18nString('design_systems.playground.open_component_in_library')
     }) : null;
   }
   let h = getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan;
-  return jsx(IK, {
+  return jsx(ButtonWide, {
     'onClick': o,
     'aria-label': n ? getI18nString('fullscreen_actions.edit-main-component') : getI18nString('fullscreen_actions.edit-code'),
     'recordingKey': 'openCodeWindow',
     'variant': 'secondary',
     'disabled': !h,
     ...(!h && {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('sites.coming_soon_tooltip.make.title'),
       'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
     }),
@@ -24464,7 +24463,7 @@ let jj = memo(e => {
           className: 'x1n0bwc9 x1qxcl5b xdmjnt8',
           children: renderI18nText('sites.panel.code_instance_panel.missing_code.description')
         }), r && jsx('div', {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: 'secondary',
             type: 'button',
             onClick: () => {
@@ -24617,7 +24616,7 @@ function jM({
     label: jsxs('label', {
       className: 'x3nfvp2 xg2d0mh',
       children: [jL(e.parameterName), e.parameterName === 'allowcookies' ? jsx(_$$B3, {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.panel.html_widget.youtube.allow_cookies_info')
       }) : null]
     }),
@@ -24684,7 +24683,7 @@ function jz({
         'min': e.min,
         'max': e.max,
         'data-tooltip': jL(e.parameterName),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'dispatch': r,
         'recordingKey': n ? `${n}-input` : void 0
       })]
@@ -24798,7 +24797,7 @@ function jH({
     className: 'text_segmented_control--root--Ov88W',
     children: i.map((i, a) => {
       let s = e === i.value;
-      return jsx(_$$E5, {
+      return jsx(ButtonPrimitive, {
         className: v()('text_segmented_control--option--iiNv3', _$$s4.textBodyMedium.$, {
           'text_segmented_control--selected--K-gRk': s
         }),
@@ -25195,7 +25194,7 @@ function j8({
   let t = _$$kl('responsiveSetScalingMode') ?? 'REFLOW';
   let i = useDispatch();
   let n = Um();
-  let a = _$$U5();
+  let a = trackFileEventWithStore();
   return jsxs(_$$l1, {
     ariaLabelledBy: e,
     id: 'scaling_mode_combobox',
@@ -25829,14 +25828,14 @@ function k2({
         id: t,
         children: e
       })
-    }), jsx(_$$E5, {
+    }), jsx(ButtonPrimitive, {
       'className': 'styles-module--buttonScrollTransformPanel--R2ONQ styles-module--secondary--Ayip9',
       'onClick': n,
       'recordingKey': a ?? void 0,
       'aria-label': getI18nString('sites.panel.interactions_panel.details_tooltip'),
       'htmlAttributes': {
         'data-tooltip': tooltipText ?? void 0,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'onMouseEnter': showTooltip
       },
       'children': jsxs('div', {
@@ -25916,7 +25915,7 @@ function k6(e, t) {
           let t = _$$s13.fromFigMatrix(e.relativeTransform);
           let i = t.offset();
           let n = t.toScale();
-          return new Mi(i.x + n.x * e.size.x / 2, i.y + n.y * e.size.y / 2);
+          return new Point(i.x + n.x * e.size.x / 2, i.y + n.y * e.size.y / 2);
         }(n);
         n.overlayTransform = function (e, t, i) {
           let n = _$$s13.fromNumbers(1, 0, t, 0, 1, i);
@@ -25940,14 +25939,14 @@ function k7({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$E5, {
+  return jsx(ButtonPrimitive, {
     'className': 'styles-module--chevronButton--h6gDU',
     'onClick': e,
     'recordingKey': t,
     'aria-label': getI18nString('sites.panel.interactions_panel.details_tooltip'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('sites.panel.interactions_panel.details_tooltip'),
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip-show-above': !0,
       'data-tooltip-show-below': !1
     },
@@ -25966,7 +25965,7 @@ function wl({
       label: renderI18nText('sites.panel.interactions_panel.transition_delay'),
       input: jsx(W4, {
         'data-tooltip': getI18nString('sites.panel.interactions_panel.transition_delay'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'dispatch': a,
         'min': 0,
         'onValueChange': t,
@@ -26004,7 +26003,7 @@ function wa({
           'onValueChange': x,
           'wheelMultiplier': o / 10,
           'scrubMultiplier': ws,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('proto.animation_panel.easing_duration_tooltip'),
           'tooltipForScreenReadersOnly': !0,
           'recordingKey': generateRecordingKey(a, 'springDurationInput')
@@ -26015,7 +26014,7 @@ function wa({
         'onValueChange': n,
         'wheelMultiplier': o / 10,
         'scrubMultiplier': ws,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('proto.animation_panel.easing_duration_tooltip'),
         'tooltipForScreenReadersOnly': !0,
         'recordingKey': generateRecordingKey(a, 'durationInput')
@@ -26278,7 +26277,7 @@ function wy({
       input: jsx(_$$j0, {
         'bigNudgeAmount': 0.1,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.scale'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'dispatch': m,
         'formatter': wv,
         'inputClassName': kV,
@@ -26302,7 +26301,7 @@ function wy({
         'onValueChange': r,
         'dispatch': m,
         'onMouseDown': g,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.offset_x'),
         'recordingKey': generateRecordingKey(x, 'offsetX'),
         ...h,
@@ -26317,7 +26316,7 @@ function wy({
         'onValueChange': d,
         'dispatch': m,
         'onMouseDown': g,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.offset_y'),
         'recordingKey': generateRecordingKey(x, 'offsetY'),
         ...h,
@@ -26334,7 +26333,7 @@ function wy({
         'onValueChange': p,
         'dispatch': m,
         'onMouseDown': g,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.transform_panel.rotation'),
         'recordingKey': generateRecordingKey(x, 'rotation'),
         ...h,
@@ -27272,7 +27271,7 @@ function Sv(e) {
         'smallNudgeAmount': i,
         'bigNudgeAmount': n,
         'dispatch': t,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.x_coordinate'),
         'children': jsx('span', {
           className: kJ,
@@ -27285,7 +27284,7 @@ function Sv(e) {
         'smallNudgeAmount': i,
         'bigNudgeAmount': n,
         'dispatch': t,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.y_coordinate'),
         'children': jsx('span', {
           className: kJ,
@@ -27410,7 +27409,7 @@ function SN(e) {
           children: jsx(_$$vD2, {
             'bigNudgeAmount': g,
             'data-tooltip': getI18nString('sites.panel.interactions_panel.marquee_speed_tooltip'),
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'dispatch': t,
             'dropdownShown': i,
             'dropdownWidth': x,
@@ -28501,7 +28500,7 @@ function CU(e) {
       input: jsx(_$$w4, {
         'bigNudgeAmount': CV,
         'data-tooltip': getI18nString('sites.panel.interactions_panel.speed'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'decimals': Cq,
         'dispatch': t,
         'max': CH,
@@ -28868,7 +28867,7 @@ function To({
     'onClick': e,
     'recordingKey': t,
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('sites.panel.interactions_panel.back_tooltip')
     },
     'children': jsx(_$$C6, {})
@@ -28890,7 +28889,7 @@ function Td({
     initialY,
     shouldPin
   } = e;
-  let p = _$$I6(initialX, initialY, shouldPin, o, (e, t) => new Mi(e, t));
+  let p = _$$I6(initialX, initialY, shouldPin, o, (e, t) => new Point(e, t));
   if (!codeComponentId) return null;
   let x = CodeComponentIdHandler.fromString(codeComponentId);
   if (!x) return null;
@@ -29030,7 +29029,7 @@ function Tc({
     initialY,
     shouldPin
   } = t;
-  let k = _$$I6(initialX, initialY, shouldPin, b, (e, t) => new Mi(e, t));
+  let k = _$$I6(initialX, initialY, shouldPin, b, (e, t) => new Point(e, t));
   return jsx(Ao, {
     title: jsx('div', {
       className: m ? 'styles-module--behaviorSettingsPickerTitleWithDetails--EdoDD styles-module--behaviorSettingsPickerTitle--U37nj header_modal--headerModalTitle--32hFx' : 'styles-module--behaviorSettingsPickerTitle--U37nj header_modal--headerModalTitle--32hFx',
@@ -29281,7 +29280,7 @@ function Tx({
         label: null,
         leftIcon: jsx(_$$YW, {
           'selected': f,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('sites.panel.interactions_panel.interaction_settings'),
           'recordingKey': generateRecordingKey(g, 'icon'),
           'className': v && !k ? `${zY} ${kQ}` : kQ,
@@ -29312,7 +29311,7 @@ function Tx({
                 behaviorType: e
               }), jsx('span', {
                 'className': 'styles-module--summaryText--NAPGZ',
-                'data-tooltip-type': Ib.TEXT,
+                'data-tooltip-type': KindEnum.TEXT,
                 'data-tooltip': i,
                 'onMouseEnter': n,
                 'children': t && isValidValue(t) && jsxs(Fragment, {
@@ -29367,7 +29366,7 @@ function Tm({
     'onClick': e,
     'recordingKey': t,
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('sites.panel.interactions_panel.remove_tooltip')
     },
     'children': jsx(_$$O1, {})
@@ -30335,7 +30334,7 @@ function TA(e) {
               if (n.length > 0) {
                 Fullscreen?.setSelectedInteractions(n);
                 let e = _$$cn(t.current);
-                let i = new Mi(e.x, e.y);
+                let i = new Point(e.x, e.y);
                 _$$dT(i, !1);
               }
               let l = [...X, ...i, ...ea];
@@ -30637,7 +30636,7 @@ function TY({
             'aria-label': getI18nString('sites.panel.add_interactivity_with_code'),
             'disabled': !m,
             'tooltipAttributes': m ? void 0 : {
-              'data-tooltip-type': Ib.TEXT,
+              'data-tooltip-type': KindEnum.TEXT,
               'data-tooltip': getI18nString('sites.coming_soon_tooltip.make.title'),
               'data-tooltip-subtext': getI18nString('sites.coming_soon_tooltip.make.description')
             },
@@ -30913,8 +30912,8 @@ let T2 = memo(({
       fileKey: e
     });
     if (n.status !== 'loaded' || l.status !== 'loaded' || !getFeatureFlags().sts_ppp) return;
-    let s = _$$oA(n.data?.siteBundles);
-    let o = _$$oA(l.data?.siteMount);
+    let s = getResourceDataOrFallback(n.data?.siteBundles);
+    let o = getResourceDataOrFallback(l.data?.siteMount);
     let d = s?.find(e => e.status === 'succeeded') || null;
     let c = d?.responsiveSetGuids || [];
     let u = !o || o?.status !== 'published';

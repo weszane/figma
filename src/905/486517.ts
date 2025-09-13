@@ -5,7 +5,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { RecordingComponent, generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Hx } from "../figma_app/530167";
-import { Qd } from "../905/380385";
+import { AT_MENTIONS_TYPEAHEAD } from "../905/380385";
 import { Ro } from "../figma_app/805373";
 import { Hn, f6, xD, ri } from "../905/337179";
 import { _ as _$$_ } from "../905/328370";
@@ -139,7 +139,7 @@ class $$E extends RecordingComponent {
         }),
         dataTestId: this.props.dataTestId,
         dispatchTypeahead: this.props.setTypeahead,
-        id: Qd,
+        id: AT_MENTIONS_TYPEAHEAD,
         onClear: this.props.onClear,
         onInsert: this.props.onInsert,
         onPointerMove: e,
@@ -198,7 +198,7 @@ class $$E extends RecordingComponent {
         }),
         dataTestId: this.props.dataTestId,
         dispatchTypeahead: this.props.setTypeahead,
-        id: Qd,
+        id: AT_MENTIONS_TYPEAHEAD,
         onClear: this.props.onClear,
         onInsert: this.props.onInsert,
         onPointerMove: e,

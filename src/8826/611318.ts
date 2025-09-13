@@ -1,16 +1,16 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useMemo, useEffect, useCallback, useId, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n, IK } from "../905/521428";
+import { Button, ButtonWide } from "../905/521428";
 import { Axis, Fullscreen, VariableResolvedDataType, SceneGraphHelpers, StackBindingsCpp, SpacingConstants, SnapMode, documentStateTsApi, AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey, useHandleMouseEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Kl } from "../figma_app/175258";
 import { fullscreenValue } from "../figma_app/455680";
@@ -18,7 +18,7 @@ import { Zr } from "../figma_app/678782";
 import { kl, lJ } from "../905/275640";
 import { KH, f4 } from "../figma_app/722362";
 import { Sh, F4 } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { hw } from "../figma_app/359943";
 import { b7, aW } from "../figma_app/803054";
 import { Zk, fI } from "../figma_app/626177";
@@ -174,7 +174,7 @@ function B(e) {
     ...n,
     className: BP,
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.list_spacing_x"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: "list-spacing-x",
     inputClassName: hF,
     recordingKey: generateRecordingKey(e, "listSpacingX"),
@@ -198,7 +198,7 @@ function B(e) {
     ...n,
     className: h ? sC : BP,
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.list_spacing_y"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: "list-spacing-y",
     inputClassName: hF,
     recordingKey: generateRecordingKey(e, "listSpacingY"),
@@ -761,7 +761,7 @@ function eL({
 }) {
   return jsx("button", {
     className: "alignment_view_v4_ui3--baselineControls--xazGW alignment_view_v4_ui3--_centered--MV2if",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fullscreen.properties_panel.stack_panel.remove_baseline_align"),
     onClick: e,
     children: jsx("div", {
@@ -871,7 +871,7 @@ function eP({
     id: e,
     "data-x": t,
     "data-y": n,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": i,
     "data-tooltip-show-above": !r || void 0
   });
@@ -909,7 +909,7 @@ function ez({
   let [x, v] = useState(void 0);
   let f = sR();
   let w = uV();
-  let C = am();
+  let C = trackFileEventWithUser();
   let S = useSelector(Sh);
   let j = isFullscreenSitesView(_6());
   let b = rO(s);
@@ -1254,7 +1254,7 @@ function td({
         }), jsx(_$$c$, {
           value: "GRID",
           readonly: !o || !a || isGridControlReadOnly || void 0,
-          icon: jsx(_$$B, {
+          icon: jsx(SvgComponent, {
             svgClassName: m7,
             svg: _$$A2,
             dataTestId: "gridLayoutIcon"
@@ -1262,7 +1262,7 @@ function td({
           "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.grid"),
           htmlAttributes: {
             "data-tooltip": tp,
-            "data-tooltip-type": Ib.SPECIAL
+            "data-tooltip-type": KindEnum.SPECIAL
           }
         })]
       }),
@@ -1278,7 +1278,7 @@ function td({
 function tu(e) {
   let t = kl("stackMode");
   let n = kl("stackWrap");
-  let i = am();
+  let i = trackFileEventWithUser();
   let a = useSelector(Sh);
   let c = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   return "HORIZONTAL" !== t ? null : jsx(setupToggleButton, {
@@ -1286,10 +1286,10 @@ function tu(e) {
     "aria-label": getI18nString("fullscreen.properties_panel.stack_panel.wrap"),
     checked: "WRAP" === n,
     disabled: !c,
-    onIcon: jsx(_$$B, {
+    onIcon: jsx(SvgComponent, {
       svg: _$$A3
     }),
-    offIcon: jsx(_$$B, {
+    offIcon: jsx(SvgComponent, {
       svg: _$$A3
     }),
     onChange: () => {
@@ -1338,7 +1338,7 @@ function t_({
     let o = getCommonValue(stackVerticalPadding, stackPaddingBottom);
     n(isInvalidValue(a) || isInvalidValue(o) || c);
   });
-  let u = am();
+  let u = trackFileEventWithUser();
   let g = useSelector(Sh);
   let m = jsx(_$$d, {
     onClick: () => {
@@ -1354,7 +1354,7 @@ function t_({
     recordingKey: generateRecordingKey(e, "showAllPaddingControls"),
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.stack_panel.independent_paddings"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-test-id": "stack-padding-toggle"
     },
     children: jsx(_$$s, {})
@@ -1488,7 +1488,7 @@ function tw(e) {
     recordingKey: generateRecordingKey(e.recordingKey, propertiesPanelShouldShowRemoveAutoLayout ? "removeButton" : "addButton"),
     htmlAttributes: {
       "data-tooltip": n,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-shortcut-key": s
     }
   });
@@ -1628,7 +1628,7 @@ let tI = memo(function ({
 let tA = !1;
 function tE() {
   let e;
-  let t = am();
+  let t = trackFileEventWithUser();
   let [n, r] = useState(!1);
   let {
     isOrInInstance,
@@ -1670,7 +1670,7 @@ function tE() {
       children: renderI18nText("fullscreen.properties_panel.stack_panel.auto_layout_updated")
     }), jsx("span", {
       className: QP,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "ghost",
         onClick: g,
         children: renderI18nText("fullscreen.properties_panel.stack_panel.undo")
@@ -1684,10 +1684,10 @@ function tE() {
     className: A5,
     children: [jsxs("div", {
       className: Yv,
-      children: [renderI18nText("fullscreen.properties_panel.stack_panel.new_auto_layout_version_available"), jsx(_$$B, {
+      children: [renderI18nText("fullscreen.properties_panel.stack_panel.new_auto_layout_version_available"), jsx(SvgComponent, {
         className: zp,
         svg: _$$A4,
-        "data-tooltip-type": Ib.SPECIAL,
+        "data-tooltip-type": KindEnum.SPECIAL,
         "data-tooltip": ev,
         "data-tooltip-interactive": !0,
         "data-tooltip-show-immediately": !0,
@@ -1695,7 +1695,7 @@ function tE() {
       })]
     }), jsx("span", {
       className: Z6,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         onClick: h,
         disabled: isOrInInstance && !f,

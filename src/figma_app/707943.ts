@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { WebLoggerTimer } from "../905/485103";
 import { w0 } from "../figma_app/594947";
 import { JB } from "../figma_app/657017";
-import { Oo } from "../905/709171";
+import { compareWithGeneratedKey } from "../905/709171";
 import { isBranchAlt } from "../905/760074";
 import { Av, ah, uN, f0 } from "../figma_app/646357";
 import { withParsedMeta } from "../905/405710";
@@ -71,7 +71,7 @@ export async function $$N2(e, t, r, i, a, s, o, l, u, p) {
 }
 export function $$C3(e, t, r, n, i) {
   let a = t && (isBranchAlt(t) ? t.sourceFileKey : "");
-  let o = e.filter(e => !Oo(e, a) && r.has(e.library_key)).map(e => ({
+  let o = e.filter(e => !compareWithGeneratedKey(e, a) && r.has(e.library_key)).map(e => ({
     ...e,
     server_score: e.score
   }));

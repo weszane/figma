@@ -10,7 +10,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { xg } from "../figma_app/677646";
-import { GS } from "../figma_app/314264";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { htmlToEditorState } from "../905/902840";
 import { uA } from "../figma_app/781512";
 import { B9, Py } from "../figma_app/346422";
@@ -252,7 +252,7 @@ ${$}`);
     type: "text",
     text: NB
   });
-  GS("mcp.d2r_output_size", debugState.getState().openFile?.key || "", debugState.getState(), {
+  trackDefinedFileEvent("mcp.d2r_output_size", debugState.getState().openFile?.key || "", debugState.getState(), {
     length: $.length,
     numDivs: $.split("<div").length - 1,
     numNodes: t,

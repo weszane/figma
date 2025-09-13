@@ -10,7 +10,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileTemplateView } from "../figma_app/43951";
 import { cD } from "../figma_app/598018";
@@ -61,7 +61,7 @@ let x = registerModal(function ({
   fileKey: t
 }) {
   let i = selectCurrentFile();
-  let s = dq();
+  let s = useCurrentUserOrgId();
   let y = cD();
   let b = useSubscription(FileTemplateView, {
     fileKey: t

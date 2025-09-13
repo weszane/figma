@@ -4,7 +4,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { f } from "../figma_app/436731";
 import { r9 } from "../figma_app/646357";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A } from "../905/913345";
 import { bJ, S0 } from "../905/863795";
 import { UEm } from "../figma_app/27776";
@@ -81,7 +81,7 @@ export function $$f6({
     return _;
   }(i);
   return {
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip": A,
     ...("below" === r ? {
       "data-tooltip-show-below": !0

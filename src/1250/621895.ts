@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 export function $$i0(e) {
-  let t = U();
+  let t = trackFileEventWithStore();
   return useCallback(n => {
     t(e, {
       ...n

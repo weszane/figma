@@ -1,13 +1,13 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { LinkPrimitive } from "../figma_app/496441";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { E as _$$E } from "../905/235326";
 import { U } from "../905/103637";
 import d from "classnames";
 import { getI18nString } from "../905/303541";
 import { e as _$$e } from "../905/194891";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { sD } from "../figma_app/826998";
 var c = d;
 let g = "library_name--libraryLink--RqfiN";
@@ -62,7 +62,7 @@ function y({
     onClick: o,
     htmlAttributes: {
       "data-tooltip": getI18nString("design_systems.instance_panel.view_library_in_community"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: [jsx("span", {
       className: f,
@@ -89,7 +89,7 @@ export function $$b0({
     });
     u?.();
   }, [u, m]);
-  return a ? d ? u ? jsxs(E, {
+  return a ? d ? u ? jsxs(ButtonPrimitive, {
     className: c()(f, _),
     onClick: b,
     htmlAttributes: {

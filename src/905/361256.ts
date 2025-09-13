@@ -35,7 +35,7 @@ import { m as _$$m, Cy } from "../905/571439";
 import { isValidValue, isInvalidValue, MIXED_MARKER, valueOrFallback, AUTO_MARKER, isAutoMarker, toArray, isMixedArray } from "../905/216495";
 import { u as _$$u } from "../figma_app/852050";
 import { a6 } from "../905/129660";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { pn } from "../905/714538";
 import { cn } from "../905/959568";
 import { gq, Se, Jl, $j } from "../figma_app/178475";
@@ -51,7 +51,7 @@ import { e as _$$e } from "../905/2401";
 import { wJ, Ig, XA } from "../905/805224";
 import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
-import { IK, $n } from "../905/521428";
+import { ButtonWide, Button } from "../905/521428";
 import { A as _$$A3 } from "../905/920165";
 import { hE, oq, r1, qj, vo, Y9, nB } from "../figma_app/272243";
 import { bL as _$$bL } from "../905/911410";
@@ -71,7 +71,7 @@ import eN from "classnames";
 import { OPTICAL_SIZE_AXIS_TAG } from "../905/165290";
 import { Point } from "../905/736624";
 import { P as _$$P2 } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Ku, sT } from "../figma_app/740163";
 import { pw, zj, tN as _$$tN, wR, kl } from "../905/275640";
 import { f4 } from "../figma_app/722362";
@@ -93,7 +93,7 @@ import { Ao } from "../905/748636";
 import { W as _$$W } from "../905/378870";
 import { O as _$$O } from "../905/587457";
 import { N as _$$N2 } from "../905/430294";
-import { E as _$$E2 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O4 } from "../905/777187";
 import { rC } from "../figma_app/385874";
 import { Rz, ku } from "../905/149223";
@@ -102,7 +102,7 @@ import { G as _$$G } from "../905/431526";
 import tL from "../vendor/197638";
 import { C as _$$C } from "../905/520159";
 import { rj } from "../905/946258";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { _r } from "../figma_app/451499";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
@@ -626,7 +626,7 @@ let tS = forwardRef(function ({
   children: e,
   ...t
 }, i) {
-  return jsx(_$$E2, {
+  return jsx(ButtonPrimitive, {
     ref: i,
     ...t,
     className: eP()("text_decoration_drill_in_button--drillInButton--1QZaZ text_decoration_drill_in_button--iconButton--gimF7 text_decoration_drill_in_button--baseIconButton--t1Akg", "text_decoration_drill_in_button--ghost--GFegu"),
@@ -1006,7 +1006,7 @@ function tW({
     children: [jsx(_$$K, {
       htmlAttributes: {
         "data-tooltip": getI18nString("general.back"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       "aria-label": getI18nString("general.back"),
       onClick: s,
@@ -1080,7 +1080,7 @@ function tQ({
             bigNudgeAmount: 10,
             className: "variation_axis_slider--variationAxisScrubbable--YIgep",
             "data-tooltip": u.format(mI[e.tag] || e.name || e.tag),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             dataTestId: generateRecordingKey("VariableFontSection.AxisInput", e.tag),
             dispatch: p,
             inputClassName: "variation_axis_slider--variationAxisInput--znVac",
@@ -1164,7 +1164,7 @@ function t2({
   let f = useCallback((e, t, i) => {
     isInvalidValue(e) || n(e, t, i);
   }, [n]);
-  let _ = am();
+  let _ = trackFileEventWithUser();
   let A = useMemo(() => {
     if (isInvalidValue(o)) return o;
     let t = e.find(e => e.tag === OPTICAL_SIZE_AXIS_TAG);
@@ -1202,7 +1202,7 @@ function t2({
           children: jsxs(_$$Q, {
             extended: !0,
             className: "type_settings--variableFontHeader--N5He4",
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               svg: h ? _$$A4 : _$$A5,
               className: "type_settings--expandCaret--CmM8q"
             }), renderI18nText("type_settings.variable_fonts.additional_axes")]
@@ -1289,7 +1289,7 @@ function t3(e) {
         bigNudgeAmount,
         className: td,
         "data-tooltip": getI18nString("type_settings.max_lines"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: t,
         inputClassName: tc,
         min: 1,
@@ -1515,9 +1515,9 @@ function t6(e) {
       },
       children: [jsxs("div", {
         className: th,
-        children: [renderI18nText("type_settings.bidi_update_desc"), jsx(_$$B, {
+        children: [renderI18nText("type_settings.bidi_update_desc"), jsx(SvgComponent, {
           svg: _$$A6,
-          "data-tooltip-type": Ib.LOOKUP,
+          "data-tooltip-type": KindEnum.LOOKUP,
           "data-tooltip": "bidi-update-info",
           className: tg,
           style: {
@@ -1526,7 +1526,7 @@ function t6(e) {
         })]
       }), jsx("span", {
         className: tf,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: "secondary",
           onClick: e4,
           recordingKey: generateRecordingKey(e, "upgrade-text-user-layout-version-bidi"),
@@ -1543,9 +1543,9 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: th,
-      children: [isValidValue(e.textUserLayoutVersion) ? getI18nString("type_settings.older_text_rendering_method_used") : getI18nString("type_settings.older_text_rendering_method_used_for_part_of_the_selection"), jsx(_$$B, {
+      children: [isValidValue(e.textUserLayoutVersion) ? getI18nString("type_settings.older_text_rendering_method_used") : getI18nString("type_settings.older_text_rendering_method_used_for_part_of_the_selection"), jsx(SvgComponent, {
         svg: _$$A6,
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         "data-tooltip": "line-height-update-info",
         className: tg,
         style: {
@@ -1554,7 +1554,7 @@ function t6(e) {
       })]
     }), jsx("span", {
       className: tf,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         onClick: e5,
         recordingKey: generateRecordingKey(e, "upgrade-text-user-layout-version"),
@@ -1568,9 +1568,9 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: "type_settings--lineHeightDowngradeInfo--Ps63T type_settings--lineHeightUpdateInfo--0sHJc",
-      children: [renderI18nText("type_settings.new_text_rendering_method_used"), jsx(_$$B, {
+      children: [renderI18nText("type_settings.new_text_rendering_method_used"), jsx(SvgComponent, {
         svg: _$$A6,
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         "data-tooltip": "line-height-update-info",
         className: tg,
         style: {
@@ -1579,7 +1579,7 @@ function t6(e) {
       })]
     }), jsx("span", {
       className: "type_settings--lineHeightDowngradeButton--XjXG8 type_settings--_lineHeightButton--EiBKy",
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "link",
         onClick: e6,
         recordingKey: generateRecordingKey(e, "downgrade-text-user-layout-version"),
@@ -1594,9 +1594,9 @@ function t6(e) {
     },
     children: [jsxs("div", {
       className: th,
-      children: [renderI18nText("type_settings.explicit_text_layout_update_desc"), getFeatureFlags().ce_mixed_text_spacing && jsx(_$$B, {
+      children: [renderI18nText("type_settings.explicit_text_layout_update_desc"), getFeatureFlags().ce_mixed_text_spacing && jsx(SvgComponent, {
         svg: _$$A6,
-        "data-tooltip-type": Ib.LOOKUP,
+        "data-tooltip-type": KindEnum.LOOKUP,
         "data-tooltip": "explicit-text-layout-version-info",
         className: tg,
         style: {
@@ -1605,7 +1605,7 @@ function t6(e) {
       })]
     }), jsx("span", {
       className: tf,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         onClick: () => {
           e3(!0);
@@ -1644,7 +1644,7 @@ function t6(e) {
               value: "LEFT",
               "aria-label": getI18nString("fullscreen_actions.text-align-left"),
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("fullscreen_actions.text-align-left"),
                 "data-tooltip-shortcut-key": XL.LEFT,
                 "data-tooltip-show-above": !0,
@@ -1656,7 +1656,7 @@ function t6(e) {
               value: "CENTER",
               "aria-label": getI18nString("fullscreen_actions.text-align-center"),
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("fullscreen_actions.text-align-center"),
                 "data-tooltip-shortcut-key": XL.CENTER,
                 "data-tooltip-show-above": !0,
@@ -1668,7 +1668,7 @@ function t6(e) {
               value: "RIGHT",
               "aria-label": getI18nString("fullscreen_actions.text-align-right"),
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("fullscreen_actions.text-align-right"),
                 "data-tooltip-shortcut-key": XL.RIGHT,
                 "data-tooltip-show-above": !0,
@@ -1680,7 +1680,7 @@ function t6(e) {
               value: "JUSTIFIED",
               "aria-label": getI18nString("fullscreen_actions.text-align-justified"),
               htmlAttributes: {
-                "data-tooltip-type": Ib.TEXT,
+                "data-tooltip-type": KindEnum.TEXT,
                 "data-tooltip": getI18nString("fullscreen_actions.text-align-justified"),
                 "data-tooltip-shortcut-key": XL.JUSTIFIED,
                 "data-tooltip-show-above": !0,
@@ -1732,7 +1732,7 @@ function t6(e) {
           children: jsx(tS, {
             htmlAttributes: {
               "data-tooltip": getI18nString("type_settings.decoration.details"),
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip-show-above": !0,
               "data-tooltip-offset-x": 4
             },
@@ -2011,7 +2011,7 @@ function t6(e) {
           bigNudgeAmount,
           className: td,
           "data-tooltip": getI18nString("type_settings.decoration.thickness"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           disabled: _,
           dispatch: t,
           formatter: p,
@@ -2056,7 +2056,7 @@ function t6(e) {
           bigNudgeAmount,
           className: td,
           "data-tooltip": getI18nString("fullscreen.type_panel.underline_offset"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           disabled: _,
           dispatch: t,
           formatter: s,
@@ -2336,7 +2336,7 @@ function t6(e) {
         className: tn,
         children: o
       }) : jsx(UZ, {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("type_settings.not_applicable_for_selected_text"),
         "data-tooltip-timeout-delay": 1200,
         "data-tooltip-show-above": !0,
@@ -2577,7 +2577,7 @@ function t6(e) {
           className: tt,
           children: renderI18nText("type_settings.numeric.style")
         }) : jsx(UZ, {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("type_settings.not_applicable_for_selected_text"),
           "data-tooltip-timeout-delay": 1200,
           "data-tooltip-show-above": !0,
@@ -2792,7 +2792,7 @@ let t8 = forwardRef(function (e, t) {
       "type_settings--scrubbableControlWithVariables--8UGKC": e.hasVariablesEntrypoint
     }),
     "data-tooltip": e.dataTooltip,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: e.disabled,
     dispatch: i,
     forwardedRef: t,
@@ -2869,7 +2869,7 @@ class ip extends PureComponent {
       children: jsx(K0, {
         onClick: this.onClick,
         recordingKey: generateRecordingKey(this.props, "bidiSwitcher"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.type_panel.switch_text_direction"),
         children: e
       })
@@ -3092,7 +3092,7 @@ class iS extends PureComponent {
           onClick: t ? this.toggleSettingsFromLineHeightRow : this.toggleSettingsFromParagraphRow,
           onMouseDown: this.stopPropagation,
           recordingKey: generateRecordingKey(this.props, e + "settings"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.type_panel.type_details")
         };
         i.push(jsx("span", {
@@ -3134,7 +3134,7 @@ class iS extends PureComponent {
           onMouseDown: this.stopPropagation,
           recordingKey: generateRecordingKey(this.props, "settings"),
           "data-onboarding-key": "type-panel-settings",
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.type_panel.type_settings"),
           "aria-label": getI18nString("fullscreen.type_panel.type_settings")
         };
@@ -3592,7 +3592,7 @@ function iw(e) {
       bigNudgeAmount: e.bigNudgeAmount,
       className: hf,
       "data-tooltip": getI18nString("fullscreen.type_panel.list_spacing"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: o,
       dispatch: e.dispatch,
       inputClassName: KY,

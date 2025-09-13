@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 let u = "return_to_instance";
 let p = null;
 let $$m = !1;
@@ -70,7 +70,7 @@ function A({
     additionalTrackingProperties: e
   } = {}) {
     let t = debugState.getState();
-    ds("Return to instance", t.openFile?.key, t, {
+    trackFileEvent("Return to instance", t.openFile?.key, t, {
       ...e
     });
   }({

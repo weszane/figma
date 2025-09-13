@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useImperativeHandle } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { V } from "../figma_app/312987";
 import { getI18nString } from "../905/303541";
@@ -76,7 +76,7 @@ export let $$v0 = forwardRef(function ({
       dispatch: v,
       isMultilevelDropdown: !0,
       isDisabled: !x,
-      children: [jsx(E, {
+      children: [jsx(ButtonPrimitive, {
         ref: N,
         className: "category_select--selectedItem--1HVpe",
         "data-testid": "resource-publishing-category-select-dropdown-toggle",

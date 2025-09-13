@@ -6,7 +6,7 @@ import { _ } from "../905/410717";
 import { getI18nString } from "../905/303541";
 import { dG } from "../figma_app/753501";
 import { MIXED_MARKER } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export function $$p0({
   visible: e,
   onChange: t,
@@ -16,7 +16,7 @@ export function $$p0({
 }) {
   let h = getI18nString("fullscreen.properties_panel.toggle_visibility");
   let g = {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": h
   };
   return jsx(T, {

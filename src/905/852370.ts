@@ -13,10 +13,10 @@ import { I_ } from "../905/234821";
 import { U6 } from "../figma_app/591738";
 import { JG } from "../figma_app/12220";
 import { Z } from "../905/104740";
-import { Z0 } from "../figma_app/62612";
+import { viewportToScreen } from "../figma_app/62612";
 import { eY } from "../figma_app/722362";
 import { getObservableValue } from "../figma_app/84367";
-import { hm } from "../905/380385";
+import { NEW_COMMENT_ID } from "../905/380385";
 import { XC } from "../905/512783";
 import { c4 } from "../figma_app/70421";
 import { s as _$$s } from "../905/518538";
@@ -114,7 +114,7 @@ export function $$R1(e, t, i, l, d) {
   let E = useRef(I);
   E.current = I;
   useEffect(() => {
-    l && !E.current.find(e => e.id === i) && i !== hm && h(UU());
+    l && !E.current.find(e => e.id === i) && i !== NEW_COMMENT_ID && h(UU());
   }, [h, i, l]);
   return useMemo(() => I.filter(e => !!e.canvasPosition && e.page === t && (!d || i === e.id) && !e.isCanvasMention), [I, t, i, d]);
 }
@@ -124,8 +124,8 @@ export function $$N6(e, t) {
     if (0 !== i.length) return i.reduce((e, t) => e.canvasPosition.y < t.canvasPosition.y ? e : t);
   }, [i]);
   return useMemo(() => r ? function (e, t, i) {
-    let n = Z0(i, e).y;
-    let r = e => Math.floor((Z0(i, e.canvasPosition).y - n) / 50);
+    let n = viewportToScreen(i, e).y;
+    let r = e => Math.floor((viewportToScreen(i, e.canvasPosition).y - n) / 50);
     return t.sort((e, t) => {
       if (U6()) {
         if (w(e) && !w(t)) return -1;
@@ -141,7 +141,7 @@ export function $$P5(e, t) {
   let i = useContext(hh);
   let a = useMemo(() => $$k3(i.threads, []), [i.threads]);
   let s = useSelector(e => e.comments.newComment);
-  return useMemo(() => e === hm ? JG(e, s, t) : a.find(t => t.id === e) || null, [s, e, a, t]);
+  return useMemo(() => e === NEW_COMMENT_ID ? JG(e, s, t) : a.find(t => t.id === e) || null, [s, e, a, t]);
 }
 export function $$O4(e, t, i, a, s, o) {
   let [l, d] = useState(!1);
@@ -158,7 +158,7 @@ export function $$O4(e, t, i, a, s, o) {
       if (t) {
         if (o) {
           if (!t.isPendingFromSinatra && t.canvasPosition) {
-            let e = Z0(s.getViewportInfo(), t.canvasPosition);
+            let e = viewportToScreen(s.getViewportInfo(), t.canvasPosition);
             let i = c4(t.comments).length;
             let n = XC.getPinSize(i);
             o(t.id, {

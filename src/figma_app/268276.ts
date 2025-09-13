@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import a from "classnames";
 import { G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
@@ -40,7 +40,7 @@ export function $$u0(e) {
       })
     })]
   });
-  return onClick ? jsx(_$$E, {
+  return onClick ? jsx(ButtonPrimitive, {
     className: y,
     recordingKey,
     actionOnPointerDown: !0,

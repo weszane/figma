@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useMemo, useCallback, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/381239";
 import { l as _$$l } from "../905/241412";
 import { g as _$$g } from "../905/125190";
@@ -13,7 +13,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import g from "classnames";
 import { useHandleKeyboardEvent, SKIP_RECORDING, useHandleChangeEvent, useHandleGenericEvent, generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Yh } from "../figma_app/888478";
@@ -23,7 +23,7 @@ import { pr } from "../figma_app/952446";
 import { Fy } from "../figma_app/623300";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { l as _$$l2 } from "../0c62c2fd/624465";
 import { Uz } from "../905/63728";
 import { jr, W0 } from "../figma_app/896988";
@@ -85,7 +85,7 @@ function F({
     case WorkspaceType.DESIGN:
       return jsx(_$$k, {});
     case WorkspaceType.WHITEBOARD:
-      return jsx(_$$B, {
+      return jsx(SvgComponent, {
         svg: _$$A3
       });
     case WorkspaceType.SLIDES:
@@ -217,13 +217,13 @@ export function $$U1({
   });
   let eA = eu && !eT && jsx("div", {
     className: Nr,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fullscreen.pages_panel.unavailable_offline"),
     "data-onboarding-key": "page-unavailable-offline",
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       className: VQ,
       svg: _$$A2,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.pages_panel.unavailable_offline"),
       "data-onboarding-key": "page-unavailable-offline"
     })
@@ -322,7 +322,7 @@ export function $$G0({
   let l = s.has(e) ? s.get(e) > 0 : Fullscreen.nodeStatusesOnPage(e).includes(BuildStatus.COMPLETED);
   return l && !o ? jsx(_$$g, {
     className: "pages_panel_row--pageCompleted--gzdWd",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("dev_handoff.status.completed"),
     "data-testid": "pageCompletedIndicator"
   }) : o || l ? jsx(_$$O, {
@@ -332,7 +332,7 @@ export function $$G0({
     style: t ? {
       [t]: "8px"
     } : void 0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("dev_handoff.tag.ready_to_build"),
     "data-testid": "pageReadyIndicator"
   }) : i;
@@ -350,7 +350,7 @@ function K({
   useEffect(() => {
     s || l(!1);
   }, [s, l]);
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ref: c,
     "aria-label": e,
     htmlAttributes: d ? void 0 : {
@@ -370,7 +370,7 @@ function K({
       "pages_panel_row--pageMoreActionsButtonActive--2dmC-": a && s,
       "pages_panel_row--pageMoreActionsAbsolutePosition--S-xcp": d
     }),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fullscreen.pages_panel.more_pages_actions"),
     "data-tooltip-show-above": !0,
     children: jsx(_$$A, {

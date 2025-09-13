@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { L } from "../905/857916";
 import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
@@ -80,7 +80,7 @@ export function $$w0() {
         }), jsxs("div", {
           className: "connected_projects_tab_header--buttonContainer--mL5-t",
           children: [jsx("div", {
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: R,
               children: getI18nString("resource_connection.admin_ui.connect_project")
             })

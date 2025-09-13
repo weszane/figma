@@ -11,7 +11,7 @@ import { y } from "../905/978641";
 import { mk } from "../figma_app/777551";
 import { Vm } from "../figma_app/427318";
 import { o3 } from "../figma_app/831799";
-import { vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { Ui, Nr, Sl, t3, pq, DD, h_, qr, ME, vR, uK } from "../af221b13/148820";
 export function $$y0({
   resource: e,
@@ -19,19 +19,19 @@ export function $$y0({
   description: i
 }) {
   switch (Vm(e)) {
-    case vt.HUB_FILE:
+    case ResourceTypeNoComment.HUB_FILE:
       return jsx(f, {
         hubFile: e,
         title: t,
         description: i
       }, e.id);
-    case vt.WIDGET:
+    case ResourceTypeNoComment.WIDGET:
       return jsx(b, {
         widget: e,
         title: t,
         description: i
       }, e.id);
-    case vt.PLUGIN:
+    case ResourceTypeNoComment.PLUGIN:
       return jsx(v, {
         plugin: e,
         title: t,

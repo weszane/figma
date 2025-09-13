@@ -5,10 +5,10 @@ import { CanvasSearchHelpers, PageViewMode, AppStateTsApi, Multiplayer, PluginMo
 import { zeroSessionLocalIDString, defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription, Xr, atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { globalPerfTimer } from "../905/542194";
 import { useEventSubscription } from "../figma_app/516794";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { Uz, Te } from "../905/63728";
 import { yZ } from "../905/407352";
 import { isWhitespace } from "../figma_app/930338";
@@ -18,7 +18,7 @@ import { NY } from "../figma_app/712525";
 import { lg } from "../figma_app/976749";
 import { r as _$$r } from "../figma_app/860474";
 import { jr, W0, VA } from "../figma_app/896988";
-import { q } from "../905/807667";
+import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 import { Z } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
 import { L3 } from "../figma_app/701001";
@@ -130,13 +130,13 @@ export function $$K7() {
   let [k, N] = useState(AppStateTsApi.uiState().isRecovery.getCopy());
   let [A, O] = useState(!1);
   let D = H();
-  let M = am();
+  let M = trackFileEventWithUser();
   let P = yZ();
   let F = useMemo(() => P && lH(b), [P, b]) || P && Multiplayer?.isValidatingIncremental();
   let B = useMemo(() => !P && lH(b), [P, b]);
   useLayoutEffect(() => {
     scope !== PageViewMode.ALL_PAGES || A || !F && k ? CanvasSearchHelpers.setSearchScope(scope) : (O(!0), scheduler.postTask(async () => {
-      F && (await q(PluginModalType.FIND_AND_REPLACE));
+      F && (await handleLoadAllPagesWithVersionCheck(PluginModalType.FIND_AND_REPLACE));
       CanvasSearchHelpers.setSearchScope(scope);
       N(!0);
     }, {
@@ -164,7 +164,7 @@ export function $$K7() {
       resultCount: Object.values(resultsByPage).reduce((e, t) => e += t.length, 0)
     });
   }, [_, e, scope, D, M]);
-  let G = _$$A(U, 300);
+  let G = useDebouncedCallback(U, 300);
   let K = useCallback((e, t = !0) => {
     p(NY(e));
     O(!!e && !isWhitespace(e));
@@ -211,7 +211,7 @@ function H() {
     mode
   } = useSelector(e => e.canvasSearch);
   let r = p8("currentPage");
-  let l = am();
+  let l = trackFileEventWithUser();
   let d = lg();
   let c = useSelector(e => e.mirror.appModel.pagesList);
   let u = iW();

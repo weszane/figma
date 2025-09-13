@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef, forwardRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { sessionLocalIDToString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
@@ -28,7 +28,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Fullscreen, DistributionType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { parsePxNumber } from "../figma_app/783094";
 import { P as _$$P } from "../905/347284";
 import { fullscreenValue } from "../figma_app/455680";
@@ -38,7 +38,7 @@ import { d as _$$d } from "../905/976845";
 import { A as _$$A2 } from "../905/215698";
 import { l as _$$l } from "../905/479687";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ks } from "../figma_app/626177";
 import { mc as _$$mc, RW, wH, pe, vs, pi, nO, Tg, Dq, iT, xT, n$, g5, gW, _J, i$, S3, ri, zH, Gy, FH } from "../figma_app/412796";
 var c = d;
@@ -141,7 +141,7 @@ function Z(e) {
       "aria-label": getI18nString("fullscreen.properties_panel.edit_brush"),
       htmlAttributes: {
         "data-tooltip": getI18nString("fullscreen.properties_panel.edit_brush"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       ...getTriggerProps(),
       children: jsx(_$$A2, {})
@@ -173,7 +173,7 @@ function X(e) {
     className: c()(RW, {
       [wH]: selected
     }),
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: pe,
       htmlAttributes: {
         onMouseEnter: () => {
@@ -245,7 +245,7 @@ function ee(e) {
   let I = useCallback((e, t) => {
     onChange(e, t);
   }, [onChange]);
-  let E = _$$A(t => {
+  let E = useDebouncedCallback(t => {
     previewEnabled && t.guid !== e.selectedBrush?.guid && I(t, yesNoTrackingEnum.NO);
   }, 100);
   let x = useCallback(() => {
@@ -412,7 +412,7 @@ let ei = forwardRef((e, t) => {
         [gW]: r
       }),
       ref: t,
-      children: jsxs(_$$E, {
+      children: jsxs(ButtonPrimitive, {
         onClick: e.onClick,
         className: c()(zH, {
           [Gy]: e.isDropdownOpen

@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { N as _$$N } from "../905/438674";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { CorePerfInfo, DocumentMode } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
@@ -84,7 +84,7 @@ export function $$C2(e) {
     }[BrowserInfo.browserType] || null,
     secondaryButtonExternalLink: null
   };
-  return e.isBranching ? jsx(_$$E, {}) : jsx(bL, {
+  return e.isBranching ? jsx(_$$E, {}) : jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -124,7 +124,7 @@ export function $$C2(e) {
               newTab: !0,
               recordingKey: generateRecordingKey(e, "crash"),
               children: L.buttonCTA
-            }) : jsx($n, {
+            }) : jsx(Button, {
               variant: "primary",
               recordingKey: generateRecordingKey(e, "crash"),
               onClick: () => {

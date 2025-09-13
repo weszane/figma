@@ -1,5 +1,19 @@
-export function $$n0(e, t) {
-  let i = t.orgTeams?.teams.find(t => t.id === e);
-  return t.teams[e] ?? i;
+/**
+ * Finds a team by its ID from either the teams object or the orgTeams array.
+ * @param teamId - The ID of the team to find.
+ * @param context - The context containing teams and orgTeams.
+ * @returns The team object if found, otherwise undefined.
+ * (Original function: $$n0)
+ */
+export function findTeamById(teamId: string, context: {
+  teams: Record<string, any>
+  orgTeams?: { teams: Array<{ id: string }> }
+}): any {
+  // Try to find the team in orgTeams if available
+  const orgTeam = context.orgTeams?.teams.find(team => team.id === teamId)
+  // Return from teams object if exists, otherwise from orgTeams
+  return context.teams[teamId] ?? orgTeam
 }
-export const _ = $$n0;
+
+// Refactored export for compatibility with original code
+export const _ = findTeamById

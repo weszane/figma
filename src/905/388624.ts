@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
 import { Ex, zE } from "../figma_app/919079";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { n as _$$n } from "../figma_app/3731";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -260,7 +260,7 @@ function z() {
                 href: "https://help.figma.com/hc/articles/4404108672663",
                 target: "_blank",
                 className: "workspace_switcher--infoBadgeContainer--5BRbv",
-                children: jsx(_$$B, {
+                children: jsx(SvgComponent, {
                   svg: _$$A,
                   className: "workspace_switcher--infoBadge--kvJnm"
                 })

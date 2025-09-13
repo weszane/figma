@@ -23,7 +23,7 @@ import { CR, kA } from "../figma_app/684168";
 import { p8 } from "../figma_app/722362";
 import { BI } from "../figma_app/546509";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { FPublicationStatusType, FPublisherType, FPinStatusType, FUserRoleType } from "../figma_app/191312";
 import { InstalledPlugins, Plugin } from "../figma_app/43951";
@@ -587,7 +587,7 @@ export function $$ey43(e) {
   }), [e, t]);
 }
 export function $$eb28(e, t) {
-  let r = sZ()?.id ?? null;
+  let r = useCurrentUserOrg()?.id ?? null;
   let i = getUserId();
   let a = useSubscription(Plugin, {
     orgId: r,
@@ -608,7 +608,7 @@ export function $$eb28(e, t) {
 export function $$eT49(e, {
   enabled: t
 }) {
-  let r = sZ()?.id ?? null;
+  let r = useCurrentUserOrg()?.id ?? null;
   let i = getUserId();
   let a = useMemo(() => e.map(e => ({
     orgId: r,
@@ -759,12 +759,12 @@ function eD(e, t, r) {
   return filterEntriesByEditorType(r, n);
 }
 function ek(e) {
-  let t = sZ()?.id ?? "";
+  let t = useCurrentUserOrg()?.id ?? "";
   let r = useDispatch();
   let n = useSelector(t => "plugin" === e ? t.whitelistedPlugins : t.whitelistedWidgets);
   let s = !!t;
   let o = function (e, t = !0) {
-    let r = sZ()?.id ?? "";
+    let r = useCurrentUserOrg()?.id ?? "";
     let n = useCurrentFileKey();
     let i = CR(e, t && !!n);
     let a = kA(r ?? "", e, t && !!r && !n);
@@ -782,7 +782,7 @@ function ek(e) {
 }
 export function $$eM39() {
   let e = my();
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let r = $$$32();
   let a = !!(t && t.plugins_whitelist_enforced);
   let s = ek("plugin");
@@ -797,7 +797,7 @@ export function $$eM39() {
 }
 export function $$eF19() {
   let e = my();
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let r = $$X27();
   let a = !!(t && t.widgets_whitelist_enforced);
   let s = ek("widget");
@@ -1050,7 +1050,7 @@ export function $$eJ3(e) {
   return t !== FEditorType.Slides && t !== FEditorType.Sites && t !== FEditorType.Figmake && t !== FEditorType.Cooper;
 }
 export function $$eZ26(e) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let r = !!(t && t.widgets_whitelist_enforced);
   let a = useSelector(e => e.whitelistedWidgets)[e];
   let s = $$z53();
@@ -1063,7 +1063,7 @@ export function $$eZ26(e) {
 }
 export function $$eQ34(e) {
   let t = useDispatch();
-  let r = sZ();
+  let r = useCurrentUserOrg();
   let a = !!(r && r.plugins_whitelist_enforced);
   let s = useSelector(e => e.whitelistedPlugins)[e];
   let o = $$V0();
@@ -1080,7 +1080,7 @@ export function $$eQ34(e) {
   };
 }
 export function $$e036(e) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let r = !!(t && t.plugins_whitelist_enforced);
   let i = !!(t && t.widgets_whitelist_enforced);
   let a = !!t && !t.public_plugins_allowed;

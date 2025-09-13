@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
 import { D8 } from "../905/511649";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { e as _$$e } from "../905/579635";
 import { V } from "../905/460261";
 import { Aw } from "../figma_app/459377";
@@ -295,7 +295,7 @@ export let $$x5 = forwardRef(function ({
         [kI]: !s
       }),
       "data-testid": "row-grabber",
-      children: (!s || e) && jsx(B, {
+      children: (!s || e) && jsx(SvgComponent, {
         className: y,
         svg: A
       })

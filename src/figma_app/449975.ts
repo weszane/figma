@@ -6,10 +6,10 @@ import { I } from "../figma_app/583780";
 import { useLatestRef } from "../figma_app/922077";
 import { q0 } from "../figma_app/107215";
 import { N } from "../figma_app/659940";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { $K } from "../figma_app/247611";
 import { g as _$$g } from "../figma_app/115586";
-import { _X, qc } from "../figma_app/62612";
+import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { i1 } from "../figma_app/193867";
@@ -77,10 +77,10 @@ function A(e, t) {
   return e.x < t.x + t.width && e.x + e.width > t.x && e.y < t.y + t.height && e.y + e.height > t.y;
 }
 export function $$x2(e, t) {
-  let r = _X({
+  let r = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
-  let n = qc(r);
+  let n = getVisibleArea(r);
   let i = _();
   return !!e && !!t && !!i && (r.zoomScale >= 2 || A({
     x: n.x,
@@ -96,10 +96,10 @@ export function $$x2(e, t) {
 }
 export function $$N7(e, t) {
   let r = _();
-  let n = _X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
-  let i = qc(n);
+  let i = getVisibleArea(n);
   return !!e && !!t && !!r && !A(i, function (e, t) {
     let r = e.x + e.width / 2;
     let n = e.y + e.height / 2;
@@ -123,7 +123,7 @@ export function $$C6(e) {
     showStarterKit
   } = e;
   useEffect(() => {
-    didUserCancel && Cu({
+    didUserCancel && logAndTrackCTA({
       fileKey,
       text: "Close starter kit",
       triggeredFrom: "starter_kit"
@@ -131,7 +131,7 @@ export function $$C6(e) {
   }, [fileKey, didUserCancel]);
   let a = useLatestRef(showStarterKit);
   useEffect(() => {
-    0 === a && 1 === showStarterKit && Cu({
+    0 === a && 1 === showStarterKit && logAndTrackCTA({
       fileKey,
       text: "Close starter kit implicit",
       triggeredFrom: "starter_kit"

@@ -6,13 +6,13 @@ import { x } from "../905/211326";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/697254";
 import { zi, iL } from "../905/824449";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { U } from "../905/604606";
 function m({
   type: e
 }) {
   let t = U(e);
-  return jsx(B, {
+  return jsx(SvgComponent, {
     svg: t
   });
 }

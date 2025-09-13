@@ -7,7 +7,7 @@ import { Bf, Dc, e5, Hx, iy, o0, rK, x$ } from '../469e6e40/616503';
 import { A as _$$A3 } from '../469e6e40/634763';
 import { V as _$$V, Z as _$$Z } from '../469e6e40/658906';
 import { A as _$$A2 } from '../469e6e40/916829';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { o as _$$o, Ph, pW } from '../905/160095';
 import { ScreenReaderOnly } from '../905/172252';
@@ -723,7 +723,7 @@ function ev(e) {
 function ef(e) {
   let t = Jv(e.invoice, e.currentDate);
   let a = _$$R() ? {
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
     'data-tooltip-show-immediately': !0
   } : void 0;

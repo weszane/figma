@@ -12,7 +12,7 @@ import { convertVariableIdToKiwi, convertKiwiToVariableIdString } from "../905/8
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { C as _$$C } from "../905/108595";
 import { useLatestRef } from "../figma_app/922077";
 import { M as _$$M } from "../figma_app/648761";
@@ -31,9 +31,9 @@ import { Ku } from "../figma_app/740163";
 import { sb, bn, c4, x$, aT, JX, OO, Ou, iC, y7, XE as _$$XE, Z3 } from "../figma_app/385874";
 import { Um } from "../905/848862";
 import { dH, eY as _$$eY, s6 } from "../figma_app/722362";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { ol } from "../figma_app/598018";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { vL } from "../905/826900";
 import { Rk } from "../figma_app/844696";
@@ -43,7 +43,7 @@ import { mu, Rh, S7 } from "../figma_app/259578";
 import { SY } from "../figma_app/200284";
 import { b as _$$b } from "../905/22449";
 import { c$ } from "../905/575478";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { H as _$$H } from "../905/762413";
 import { z as _$$z } from "../905/626016";
 import { L as _$$L } from "../905/858162";
@@ -66,7 +66,7 @@ import { Nlr } from "../figma_app/6204";
 import { Te } from "../vendor/813803";
 import { useSessionStorageSync } from "../905/657224";
 import { P as _$$P } from "../905/347284";
-import { Oo } from "../905/709171";
+import { compareWithGeneratedKey } from "../905/709171";
 import { teamLibraryCache } from "../figma_app/80990";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { rt } from "../figma_app/646357";
@@ -120,7 +120,7 @@ import { DP, yM } from "../905/640017";
 import { pw } from "../905/187165";
 import { AN } from "../905/203369";
 import { cS, Zo } from "../figma_app/334459";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { o as _$$o } from "../905/298519";
 import { A as _$$A3 } from "../905/24328";
 import { o as _$$o2 } from "../905/89370";
@@ -292,7 +292,7 @@ function eC({
         }),
         readonly: e !== t && o(t) || void 0,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": ex.format(t),
           "data-onboarding-key": ew(t)
         },
@@ -373,7 +373,7 @@ function ek({
       id: ef
     });
   }, [t, i]);
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     "aria-label": o,
     onClick: c,
     recordingKey: a,
@@ -382,7 +382,7 @@ function ek({
       "paint_type_group_tabs--disabled--QFCRq": l
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": o,
       ...(d && {
         "data-onboarding-key": d
@@ -637,7 +637,7 @@ function e7({
     i || u(e);
   }, [u, i]);
   let h = useCallback(t => {
-    if (Oo(t, o)) {
+    if (compareWithGeneratedKey(t, o)) {
       let i = SharedStyle.getColorForFillStyle({
         nodeId: t.node_id
       });
@@ -959,7 +959,7 @@ function tR({
         }),
         children: jsx(w2, {
           "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.stop_position"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           decimals: 0,
           dispatch: x,
           forwardedRef: y,
@@ -995,7 +995,7 @@ function tR({
           onClick: T,
           "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.delete_stop"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.delete_stop"),
             onMouseDown: dG,
             onBlur: () => A(!1),
@@ -1152,7 +1152,7 @@ function tN({
     "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$R, {})
   });
@@ -1218,7 +1218,7 @@ function tN({
               "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.add_stop"),
               htmlAttributes: {
                 "data-tooltip": getI18nString("fullscreen.properties_panel.gradient_picker.add_stop"),
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               children: jsx(_$$e2, {})
             })
@@ -1363,7 +1363,7 @@ function tz(e) {
         label: renderI18nText("properties_panel.noise.opacity"),
         input: jsx(w2, {
           "data-tooltip": getI18nString("properties_panel.noise.opacity"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
           onValueChange: function (t) {
             e.onChange({
@@ -1379,7 +1379,7 @@ function tz(e) {
         label: renderI18nText("properties_panel.noise.noise_size"),
         input: jsx(gq, {
           "data-tooltip": getI18nString("properties_panel.noise.noise_size"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
           onValueChange: function (t) {
             e.onChange({
@@ -1400,7 +1400,7 @@ function tz(e) {
         label: renderI18nText("properties_panel.noise.density"),
         input: jsx(w2, {
           "data-tooltip": getI18nString("properties_panel.noise.density"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: e.dispatch,
           onValueChange: function (t) {
             e.onChange({
@@ -1527,7 +1527,7 @@ function t9(e) {
         }),
         children: jsx("div", {
           className: "pattern_settings_modal--buttonWrapper---yPaA",
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: () => {
               fullscreenValue.triggerAction("set-tool-pattern-source-selector");
               getFeatureFlags().ce_il_sprig_tracking && Sprig("setAttribute", "is_assets_visual_style_user", !0);
@@ -1609,7 +1609,7 @@ function t9(e) {
       input: jsx(w2, {
         bigNudgeAmount: 10,
         "data-tooltip": getI18nString("properties_panel.pattern.scale"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: e.dispatch,
         inputClassName: WC,
         max: 20,
@@ -1633,7 +1633,7 @@ function t9(e) {
       input: jsx(w2, {
         bigNudgeAmount: 10,
         "data-tooltip": getI18nString("properties_panel.pattern.spacing"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: e.dispatch,
         inputClassName: WC,
         max: 20,
@@ -1662,7 +1662,7 @@ function t9(e) {
       input: jsx(w2, {
         bigNudgeAmount: 10,
         "data-tooltip": getI18nString("properties_panel.pattern.spacing"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: e.dispatch,
         inputClassName: WC,
         max: 20,
@@ -1890,7 +1890,7 @@ export let $$ii1 = forwardRef(function ({
       onClick: ew,
       htmlAttributes: {
         "data-tooltip": getI18nString("variables.binding_ui.create_style_or_variable_button_tooltip"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       disabled: ek && !eR,
       children: jsx(_$$e2, {})
@@ -2064,8 +2064,8 @@ function ia({
   let B = X7();
   let H = _$$C();
   let Y = useRef(null);
-  let q = hC();
-  let $ = dq();
+  let q = trackDefinedFileEventWithStore();
+  let $ = useCurrentUserOrgId();
   let Z = ol()?.id;
   let X = Ou(e);
   let Q = x$(e);
@@ -2282,7 +2282,7 @@ export function $$io0({
               onClick: K,
               htmlAttributes: {
                 "data-tooltip": getI18nString("variables.binding_ui.create_variable_button_tooltip"),
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               children: jsx(_$$e2, {})
             });

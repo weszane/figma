@@ -25,7 +25,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { c$ as _$$c$, bL, l9, mc } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { reportError } from "../905/11";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Vp } from "../figma_app/649254";
 import { Ad } from "../figma_app/811257";
 import { A as _$$A } from "../svg/274066";
@@ -118,7 +118,7 @@ function F({
   });
   return jsxs("div", {
     className: "x78zum5 x12mrbbr xh8yej3",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A,
       className: "xyjf476 x1ja3g5x"
     }), jsx(Ad, {
@@ -128,8 +128,8 @@ function F({
     })]
   });
 }
-class U extends a3 { }
-class G extends c$ { }
+class U extends a3 {}
+class G extends c$ {}
 function K({
   OriginalComponent: e,
   ...t

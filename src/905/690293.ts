@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { createRecordingCallback } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { isInvalidValue, MIXED_MARKER } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { Xs } from "../figma_app/98483";
 import { fn } from "../figma_app/811257";
@@ -39,7 +39,7 @@ function f({
   return jsx($j, {
     className: z,
     "data-tooltip": "width" === u ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: `scale_panel.${u}`,
     disabled: e,
     dispatch: I,

@@ -17,8 +17,8 @@ import { b as _$$b } from "../905/985254";
 import { Ty, pP as _$$pP, yO, I2 } from "../905/331019";
 import { FFileType } from "../figma_app/191312";
 import { fG, oQ } from "../905/772425";
-import { Qd } from "../905/380385";
-import { MW, Ib } from "../905/129884";
+import { AT_MENTIONS_TYPEAHEAD } from "../905/380385";
+import { PositionEnum, KindEnum } from "../905/129884";
 import { xT } from "../figma_app/841415";
 import { tI as _$$tI } from "../905/603628";
 import { il } from "../vendor/291472";
@@ -789,14 +789,14 @@ function tx() {
       }
       return jsx("span", {
         className: tm,
-        "data-tooltip": MW.HYPERLINK_POPUP,
+        "data-tooltip": PositionEnum.HYPERLINK_POPUP,
         "data-tooltip-can-edit": !0,
         "data-tooltip-entity-key": t.entityKey,
         "data-tooltip-interactive": !0,
         "data-tooltip-precise": !0,
         "data-tooltip-show-above": !0,
         "data-tooltip-target-ref-key": n,
-        "data-tooltip-type": Ib.SPECIAL,
+        "data-tooltip-type": KindEnum.SPECIAL,
         "data-tooltip-unconstrain-width": !0,
         "data-tooltip-url-string": e,
         spellCheck: !1,
@@ -814,12 +814,12 @@ function tx() {
       return jsx("span", {
         className: tm,
         "data-testid": `implicit-hyperlink-${n}`,
-        "data-tooltip": MW.HYPERLINK_POPUP,
+        "data-tooltip": PositionEnum.HYPERLINK_POPUP,
         "data-tooltip-can-edit": !1,
         "data-tooltip-interactive": !0,
         "data-tooltip-precise": !0,
         "data-tooltip-show-above": !0,
-        "data-tooltip-type": Ib.SPECIAL,
+        "data-tooltip-type": KindEnum.SPECIAL,
         "data-tooltip-unconstrain-width": !0,
         "data-tooltip-url-string": n,
         spellCheck: !1,
@@ -1569,8 +1569,8 @@ export class $$tA0 extends Component {
       ref: this.wrapperRef,
       children: jsx(Editor, {
         "aria-haspopup": "menu",
-        ariaActiveDescendantID: this.props.typeahead?.type === "mentions" ? Qd : void 0,
-        ariaControls: this.props.typeahead?.type === "mentions" ? Qd : void 0,
+        ariaActiveDescendantID: this.props.typeahead?.type === "mentions" ? AT_MENTIONS_TYPEAHEAD : void 0,
+        ariaControls: this.props.typeahead?.type === "mentions" ? AT_MENTIONS_TYPEAHEAD : void 0,
         ariaDescribedBy: "",
         ariaLabel: this.props.ariaLabel ?? this.props.placeholderText,
         customStyleMap: tI,

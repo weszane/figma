@@ -1,14 +1,14 @@
 import { useState, useRef, useCallback } from "react";
 import { SceneGraphHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { Pe } from "../figma_app/32128";
 export function $$l0(e) {
   let [t, r] = useState([]);
   let l = useRef(null);
   let [d, c] = useState(null);
   let u = t.length > 0;
-  let m = U();
+  let m = trackFileEventWithStore();
   let _ = useCallback(e => {
     r(e);
     c(null);

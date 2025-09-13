@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useEffect, useImperativeHandle, useMemo, useId } from "react";
 import { lQ } from "../905/934246";
 import s from "classnames";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics } from "../905/449184";
 import { N0 } from "../figma_app/416935";
 import { H as _$$H } from "../905/620380";
@@ -11,7 +11,7 @@ import { L as _$$L } from "../905/408237";
 import { S as _$$S } from "../figma_app/552746";
 import { j6 } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { A as _$$A2 } from "../svg/545021";
 var o = s;
@@ -37,7 +37,7 @@ function v(e) {
         e.onDelete(e.index);
       },
       "aria-label": getI18nString("folder_permissions_modal.email_inprogress_invite_remove"),
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: _$$A2,
         ariaHidden: !0
       })
@@ -99,7 +99,7 @@ export function $$E0({
         d.current === i && o(e);
       })) : (d.current = void 0, o(i));
     }, [e, t, o]);
-    let p = _$$A(c, 200);
+    let p = useDebouncedCallback(c, 200);
     useEffect(() => {
       d.current ? p() : c();
     }, [e.inputValue, p, c]);

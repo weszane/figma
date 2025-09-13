@@ -5,13 +5,13 @@ import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
 import { xj, ok } from "../figma_app/851625";
 import { J as _$$J } from "../905/931050";
-import { oA, Xm, gB, e1 as _$$e } from "../905/723791";
+import { getResourceDataOrFallback, Xm, gB, e1 as _$$e } from "../905/723791";
 import { Eh } from "../figma_app/617654";
 import { Rw } from "../figma_app/475472";
 import { Kq, ig, xZ } from "../figma_app/713624";
 import { Ki, _q } from "../figma_app/328188";
 import { lQ } from "../905/934246";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { e as _$$e2 } from "../905/149844";
 import { A as _$$A } from "../905/891805";
 import { v as _$$v } from "../469e6e40/843735";
@@ -23,7 +23,7 @@ import { HL, IU, uw, Vq, bv } from "../figma_app/421401";
 import { nR, vd, tB } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Me, $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -31,7 +31,7 @@ import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout, Spacer } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { p as _$$p } from "../905/597320";
 import { q as _$$q } from "../905/749058";
 import { useAtomWithSubscription } from "../figma_app/27355";
@@ -49,7 +49,7 @@ import { Ql8, YHe } from "../figma_app/6204";
 import { throwTypeError } from "../figma_app/465776";
 import { useSubscription } from "../figma_app/288654";
 import { A as _$$A2 } from "../905/956262";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { FOrganizationRoleType, FAccessLevelType, FPermissionLevelType } from "../figma_app/191312";
 import { WorkspaceAdminOnboardingOverlayView, AddUnassignedTeamsModalView, WorkspaceDefaultTeamsView } from "../figma_app/43951";
 import { U as _$$U } from "../905/455766";
@@ -70,7 +70,7 @@ import { getTeamVisibilityLabels } from "../figma_app/12796";
 import { O as _$$O2 } from "../figma_app/809387";
 import { J7, SN } from "../figma_app/650409";
 import { teamVisibilityEnum } from "../figma_app/630077";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { V0, m2 } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
 import { S as _$$S } from "../4452/747039";
@@ -112,7 +112,7 @@ import t_ from "../vendor/239910";
 import { trackEventAnalytics } from "../905/449184";
 import { EK } from "../4452/90195";
 import { formatCount } from "../figma_app/930338";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { nl, Pf } from "../905/590952";
 import { U as _$$U2 } from "../905/566881";
 import { F as _$$F2 } from "../7021/270993";
@@ -163,7 +163,7 @@ let eo = "seen_workspace_admin_onboarding";
 let ed = r1(eo);
 var ec = (e => (e.AddTeamsToWorkspace = "AddTeamsToWorkspace", e.CheckUnassignedTeams = "CheckUnassignedTeams", e))(ec || {});
 function e_() {
-  let e = dq();
+  let e = useCurrentUserOrgId();
   let t = useSubscription(WorkspaceAdminOnboardingOverlayView({
     orgId: e
   }));
@@ -258,7 +258,7 @@ let eV = registerModal(function ({
   onSubmit: t
 }) {
   let a = useDispatch();
-  let r = dq();
+  let r = useCurrentUserOrgId();
   let [o, d] = useState({
     columnName: Kq.NAME,
     sortingKey: Kq.NAME,
@@ -312,7 +312,7 @@ let eV = registerModal(function ({
   let L = useSubscription(AddUnassignedTeamsModalView, {
     workspaceId: e
   });
-  let P = L.data ? oA(L.data.workspace) : null;
+  let P = L.data ? getResourceDataOrFallback(L.data.workspace) : null;
   let U = P?.name;
   if (!U) return null;
   let F = [{
@@ -330,14 +330,14 @@ let eV = registerModal(function ({
         className: _$$s.flex.flexColumn.minW0.$,
         children: [jsxs(AutoLayout, {
           spacing: "2px",
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             truncate: !0,
             children: e.name
           }), jsx(HL, {
             orgId: r,
             orgAccess: e.org_access
           })]
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           color: "secondary",
           children: renderI18nText("add_unassigned_teams_modal.team_metadata", {
             memberCountInfo: getI18nString("add_unassigned_teams_modal.member_count", {
@@ -392,7 +392,7 @@ let eV = registerModal(function ({
     getSortValue: e => e.owner?.handle ? `a${e.owner.handle}` : `z${e.name}`,
     cellComponent: e => jsx(AutoLayout, {
       width: "fill-parent",
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         truncate: !0,
         children: e.owner?.handle || getI18nString("add_unassigned_teams_modal.no_owner")
       })
@@ -469,7 +469,7 @@ let eV = registerModal(function ({
       children: [jsx(AutoLayout, {
         height: "hug-contents",
         padding: 16,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText("add_unassigned_teams_modal.description", {
             workspaceName: U
           })
@@ -505,7 +505,7 @@ let eV = registerModal(function ({
         columns: F,
         emptyContent: jsx(AutoLayout, {
           padding: 38,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("add_unassigned_teams_modal.no_teams_found")
           })
@@ -1044,7 +1044,7 @@ function tc({
     type: G,
     isRightAligned: !0,
     isMultilevelDropdown: !0,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A3,
       className: "paginated_teams_table--menuIcon--tIIAY admin_settings_page--menuIcon--EE6RZ"
     }), z && t && t?.data?.targetRect && jsx(noop, {
@@ -1130,7 +1130,7 @@ let tN = registerModal(function (e) {
     workspaceId
   } = e;
   let a = useDispatch();
-  let r = dq();
+  let r = useCurrentUserOrgId();
   let l = useAtomWithSubscription(EK);
   let o = useMemo(() => "loaded" !== l.status ? l : {
     status: "loaded",
@@ -1183,7 +1183,7 @@ let tN = registerModal(function (e) {
     minWidth: 500,
     children: jsxs("div", {
       className: "default_teams_edit_modal--container--g5oWi default_teams_edit_modal--flexVerticalGap8px--bbgXh",
-      children: [b && jsx(qc, {}), !b && jsxs(Fragment, {
+      children: [b && jsx(LoadingOverlay, {}), !b && jsxs(Fragment, {
         children: [jsx("span", {
           children: j
         }), jsx("div", {
@@ -1358,7 +1358,7 @@ function tL(e) {
     ed();
   }, [e0, ed]);
   _$$h(() => {
-    onRightActionsChange?.(jsx($n, {
+    onRightActionsChange?.(jsx(Button, {
       iconPrefix: jsx(_$$e2, {}),
       onClick: e1,
       children: renderI18nText("resources_tab.approved_plugins.actions.add_plugin")
@@ -1436,12 +1436,12 @@ function tL(e) {
       });
       return jsx("div", {
         className: "paginated_teams_table--warningIconContainer--b9qou",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": t,
         "data-tooltip-offset-y": -4,
         "data-tooltip-timeout-delay": 2,
         "data-tooltip-max-width": 250,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A4,
           className: "paginated_teams_table--bannerWarningIcon--CqHp-"
         })
@@ -1603,17 +1603,17 @@ function tL(e) {
   }];
   let ti = eJ || eH ? jsxs(AutoLayout, {
     width: "hug-contents",
-    children: [jsx($n, {
+    children: [jsx(Button, {
       iconPrefix: jsx(_$$e2, {}),
       variant: "primary",
       onClick: e1,
       "data-onboarding-key": Pc,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("teams_table.create_team")
       })
-    }), eY && jsx($n, {
+    }), eY && jsx(Button, {
       onClick: e2,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("teams_table.assign_teams")
       })
     }), jsx(Me, {
@@ -1630,14 +1630,14 @@ function tL(e) {
     })]
   }) : jsxs(AutoLayout, {
     width: "hug-contents",
-    children: [jsx($n, {
+    children: [jsx(Button, {
       iconPrefix: jsx(_$$e2, {}),
       onClick: e1,
       "data-onboarding-key": Pc,
       children: renderI18nText("teams_table.team")
-    }), eY && jsx($n, {
+    }), eY && jsx(Button, {
       onClick: e2,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("teams_table.assign_teams")
       })
     }), jsx($z, {
@@ -1702,14 +1702,14 @@ function tL(e) {
       emptyContent: jsx(_$$p, {
         children: (() => {
           let e = jsxs("span", {
-            children: [renderI18nText("teams_table.your_organization_does_not_have_any_teams_yet"), " ", jsx($n, {
+            children: [renderI18nText("teams_table.your_organization_does_not_have_any_teams_yet"), " ", jsx(Button, {
               variant: "link",
               onClick: e1,
               children: renderI18nText("teams_table.create_one")
             })]
           });
           let t = jsxs("span", {
-            children: [getI18nString("teams_table.no_teams_to_show"), " ", jsx($n, {
+            children: [getI18nString("teams_table.no_teams_to_show"), " ", jsx(Button, {
               variant: "link",
               onClick: () => {
                 onFilter({

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useLayoutEffect, useCallback } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
 import { At } from "../905/973142";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -32,7 +32,7 @@ export function $$u0({
       ref: m,
       className: o()("description--description--wc0EY ellipsis--ellipsisAfter2Lines--Qo-Xh ellipsis--_ellipsisAfterNLines--LzI7k", u ? "description--collapsed--3B1Bt" : "description--expanded--qZ3te"),
       children: h
-    }), u && jsx(E, {
+    }), u && jsx(ButtonPrimitive, {
       "aria-label": getI18nString("design_systems.instance_panel.show_more"),
       onClick: f,
       className: "description--seeMore--8DFac blue_link--blueLink--9rlnd",

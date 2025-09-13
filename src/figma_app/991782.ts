@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef, useState, useEffect, useCallback, Suspense } from "react";
 import { assert } from "../figma_app/465776";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K } from "../905/443068";
 import { bL, l9, mc, c$, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
@@ -99,7 +99,7 @@ function z({
   if (0 === t.recommendations.length) return null;
   if (1 === t.recommendations.length) {
     let r = t.recommendations[0];
-    return jsx($n, {
+    return jsx(Button, {
       recordingKey: generateRecordingKey(e, "fix"),
       onClick: () => H(r.action, t.nodeIds),
       variant: "secondary",
@@ -119,7 +119,7 @@ function z({
     }, i));
     return jsxs("div", {
       ref: d,
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "secondary",
         onClick: () => {
           showing ? hide() : show();

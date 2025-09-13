@@ -32,7 +32,7 @@ import { M as _$$M } from "../figma_app/170366";
 import { getFullscreenViewEditorType, getCurrentPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { handlePluginError } from "../905/753206";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
 import { hasLocalFileId } from "../figma_app/155287";
 import { mN, Wh } from "../figma_app/985200";
@@ -420,7 +420,7 @@ export function $$J0(e, t, i) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
-          resourceType: bD.PLUGIN
+          resourceType: ResourceType.PLUGIN
         }
       }));
       return;
@@ -429,7 +429,7 @@ export function $$J0(e, t, i) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
-          resourceType: bD.WIDGET
+          resourceType: ResourceType.WIDGET
         }
       }));
       return;

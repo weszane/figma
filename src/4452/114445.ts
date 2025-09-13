@@ -3,7 +3,7 @@ import { useEffect, forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { k as _$$k } from "../figma_app/618031";
 import { aN, V4, D3 } from "../4452/846771";
@@ -31,7 +31,7 @@ import { G as _$$G } from "../905/750789";
 import { sx as _$$sx } from "../905/941192";
 import { tI, JT } from "../figma_app/599327";
 import { II } from "../figma_app/11182";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { y as _$$y } from "../905/37128";
 import { S as _$$S2 } from "../905/794163";
 import { Xf } from "../figma_app/153916";
@@ -114,7 +114,7 @@ function G({
           seatType: tI(e)
         })
       })]
-    }), !!n.currentSeat && jsx($n, {
+    }), !!n.currentSeat && jsx(Button, {
       onClick: () => E1({
         currency: p,
         dispatch: i,
@@ -370,7 +370,7 @@ function es() {
   });
 }
 let en = (e, t) => {
-  let a = oA(t.data?.org)?.baseOrgUserMembersById;
+  let a = getResourceDataOrFallback(t.data?.org)?.baseOrgUserMembersById;
   if (!a) return;
   let [s] = a;
   let n = e.length > 0 && s ? e.find(e => e.id === s.licenseGroupMember?.licenseGroupId) ?? null : null;

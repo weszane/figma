@@ -19,7 +19,7 @@ import { rZ } from "../figma_app/427318";
 import { Ay } from "../905/506641";
 import { Om, tv } from "../figma_app/979714";
 import { o3 } from "../figma_app/831799";
-import { aL, m3, PM, vt } from "../figma_app/45218";
+import { ShelfViewType, hasMonetizedResourceMetadata, hasFreemiumCode, ResourceTypeNoComment } from "../figma_app/45218";
 import { V as _$$V } from "../905/480825";
 import { FM } from "../5430/773914";
 import { AG } from "../figma_app/999312";
@@ -44,7 +44,7 @@ function M({
   context: t
 }) {
   let r;
-  r = t === aL.REDESIGNED_PLUGIN_ROW ? gz : e.editor_type === EditorType.FIGJAM || e.editor_type === EditorType.UNIVERSAL ? kJ : GJ;
+  r = t === ShelfViewType.REDESIGNED_PLUGIN_ROW ? gz : e.editor_type === EditorType.FIGJAM || e.editor_type === EditorType.UNIVERSAL ? kJ : GJ;
   return jsx(A6, {
     to: UI({
       path: Uo.PLUGIN,
@@ -303,8 +303,8 @@ export function $$ea0({
   let U = tv() ?? void 0;
   let V = BY();
   let W = qD(e);
-  let G = m3(e);
-  let $ = PM(e);
+  let G = hasMonetizedResourceMetadata(e);
+  let $ = hasFreemiumCode(e);
   let z = _$$I(e);
   let Q = QQ(z);
   let ea = rZ(e);
@@ -313,19 +313,19 @@ export function $$ea0({
     ref: el,
     children: jsx(M, {
       resource: e,
-      context: aL.REDESIGNED_PLUGIN_ROW
+      context: ShelfViewType.REDESIGNED_PLUGIN_ROW
     })
   }) : !G || Q || $ ? jsx("div", {
     ref: el,
     children: jsx(_$$d, {
       resource: e,
-      context: aL.REDESIGNED_PLUGIN_ROW
+      context: ShelfViewType.REDESIGNED_PLUGIN_ROW
     })
   }) : jsx("div", {
     ref: el,
     children: jsx(_$$I2, {
       resource: e,
-      context: aL.REDESIGNED_PLUGIN_ROW
+      context: ShelfViewType.REDESIGNED_PLUGIN_ROW
     })
   }), [r, e, G, Q, $]);
   let ed = QP({
@@ -341,7 +341,7 @@ export function $$ea0({
   let em = () => cB("plugin", e.id, a, D, V);
   let e_ = (e.community_publishers.accepted ?? [])[0];
   let ep = RE(e_?.profile_handle ?? "", P, F ?? void 0, U);
-  let eh = !!_$$W(e.id, vt.PLUGIN).data?.[0];
+  let eh = !!_$$W(e.id, ResourceTypeNoComment.PLUGIN).data?.[0];
   if (e_) {
     let e = jsx(_$$e, {
       adtlClassName: "plugin_row--avatarBoxShadowOverride--MBDpQ",
@@ -386,7 +386,7 @@ export function $$ea0({
     }
   }(e);
   let ef = "";
-  if (ex) ef = ex.thumbnail_url; else {
+  if (ex) ef = ex.thumbnail_url;else {
     let t = N6(e);
     ef = t?.length > 0 ? _$$P(t[0])[0] : e.thumbnail_url || "";
   }

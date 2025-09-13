@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { compareIgnoringSpaces } from "../figma_app/930338";
 import { Kk, n8, EY, x as _$$x } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
@@ -61,7 +61,7 @@ function x(e) {
       enabled: !!e
     });
     return "loaded" === t.status && t.data.libraryKeyToFile ? t.data.libraryKeyToFile.hubFile ? {
-      libraryHierarchyPaths: oA(t.data.libraryKeyToFile.hubFile.libraryHierarchyPaths) ?? [],
+      libraryHierarchyPaths: getResourceDataOrFallback(t.data.libraryKeyToFile.hubFile.libraryHierarchyPaths) ?? [],
       assetFile: {
         type: "hubFile",
         file: t.data.libraryKeyToFile.hubFile

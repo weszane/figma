@@ -3,11 +3,11 @@ import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB, Y9, hE, wi, jk } from "../figma_app/272243";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
 import { pW } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -18,7 +18,7 @@ import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { getRepoByIdAlt } from "../905/760074";
 import { F as _$$F } from "../905/224";
-import { DQ, Pw } from "../figma_app/121751";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { jd } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -59,7 +59,7 @@ export let $$V0 = registerModal(function (e) {
     oldValue: resourceUtils.useMemoizedLoaded(d),
     newValue: h,
     label: adminPermissionConfig.UpsellModal.canEditTeam,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       teamId: team?.id,
       userId: l?.id
@@ -69,7 +69,7 @@ export let $$V0 = registerModal(function (e) {
     oldValue: resourceUtils.useMemoizedLoaded(p),
     newValue: g,
     label: adminPermissionConfig.UpsellModal.isFileInTeamWithProFeatures,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       teamId: team?.id,
       userId: l?.id
@@ -127,12 +127,12 @@ function G(e) {
   let b = g && jd(g.project);
   let v = _6();
   if (!g) return jsx(Fragment, {});
-  if ("loaded" !== h.status) return jsx(bL, {
+  if ("loaded" !== h.status) return jsx(ModalRootComponent, {
     manager: i,
     width: "sm",
     children: jsx(vo, {
       children: jsx(nB, {
-        children: jsx(qc, {})
+        children: jsx(LoadingOverlay, {})
       })
     })
   });
@@ -181,7 +181,7 @@ function z(e) {
   let S = e.isFileInTeamWithProFeatures ? renderI18nText("upsell.move_file_publish.move_to_project") : renderI18nText("upsell.move_file_publish.move_to_team");
   return jsx(fu, {
     name: "MoveFilePublishUpsell",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: r,
       width: "md",
       children: jsxs(vo, {

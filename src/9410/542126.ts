@@ -14,7 +14,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { yo } from "../905/125333";
 import { y0, wv, MM } from "../figma_app/236327";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { sV, DI, zx, dY } from "../figma_app/712525";
@@ -22,7 +22,7 @@ import { lg } from "../figma_app/976749";
 import { BK } from "../905/848862";
 import { p8 } from "../figma_app/722362";
 import { b4, _V, kM } from "../figma_app/421886";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Jz } from "../905/504727";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { sW, p9 } from "../figma_app/463678";
@@ -152,7 +152,7 @@ function D({
         "aria-label": getI18nString("canvas_search.settings"),
         recordingKey: generateRecordingKey(i, "settings"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("canvas_search.settings")
         },
         children: jsx(_$$A, {})
@@ -190,7 +190,7 @@ function P({
     buttonRef: s,
     children: jsxs("div", {
       className: wV,
-      children: [t && jsx(_$$B, {
+      children: [t && jsx(SvgComponent, {
         className: H9,
         svg: t
       }), jsx("span", {
@@ -242,7 +242,7 @@ function F({
         "aria-label": getI18nString("canvas_search.settings"),
         recordingKey: generateRecordingKey(a, "settings"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("canvas_search.settings")
         },
         ...getTriggerProps(),
@@ -340,7 +340,7 @@ function B({
         } : {})
       },
       children: [i && jsx(Q$, {
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: H9,
           svg: i
         })

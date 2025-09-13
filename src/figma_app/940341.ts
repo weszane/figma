@@ -18,7 +18,7 @@ import { p8 } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { IW } from "../figma_app/646357";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Nr } from "../figma_app/463500";
 import { zK, zM } from "../905/182453";
 import { Gf, Zv, _f } from "../figma_app/293304";
@@ -71,7 +71,7 @@ export function $$w1() {
             }), jsx(jk, {
               children: jsx(K, {
                 htmlAttributes: {
-                  "data-tooltip-type": Ib.TEXT,
+                  "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": getI18nString("slides.properties_panel.text_style.delete_style")
                 },
                 "aria-label": getI18nString("slides.properties_panel.text_style.delete_style"),

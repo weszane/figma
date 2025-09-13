@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { o as _$$o } from "../figma_app/915774";
 import { X } from "../905/853613";
 import { Hu, GZ } from "../figma_app/361662";
@@ -58,7 +58,7 @@ export function $$C1({
     subscriptionLevel: O,
     isExample: _$$o(e, R),
     partnerType: X(e.library_key),
-    productType: pi({
+    productType: mapFileToProductType({
       editorType: j?.editorType
     })
   }), [e, t, P, j?.editorType, R, N, D, i, O]);

@@ -1,4 +1,4 @@
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { N$ } from "../figma_app/350203";
 import { er, NQ } from "../1250/461992";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
@@ -8,7 +8,7 @@ export function $$l0() {
   let t = e.data?.type === FOrganizationLevelType.TEAM ? e.data?.key.parentId : null;
   let n = e.data?.type === FOrganizationLevelType.ORG ? e.data?.key.parentId : null;
   let l = "loaded" === e.status && e.data?.tier === FPlanNameType.STARTER;
-  let d = e.data?.type !== FOrganizationLevelType.ORG || oA(e.data.customTemplatesAllowed);
+  let d = e.data?.type !== FOrganizationLevelType.ORG || getResourceDataOrFallback(e.data.customTemplatesAllowed);
   let c = er(e.data?.tier ?? null, t, !d, 1);
   let _ = NQ(e.data?.tier ?? null, n, !d, 1);
   let {

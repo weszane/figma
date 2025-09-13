@@ -1,14 +1,14 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef, useState, useContext, useEffect, useMemo, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { TextDecorationType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { A as _$$A } from "../vendor/850789";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { Ui } from "../905/709171";
+import { compareLibraryKeyWithString } from "../905/709171";
 import { isInvalidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { w$ } from "../figma_app/646357";
@@ -16,7 +16,7 @@ import { getBasename } from "../905/309735";
 import { getStyleThumbnail } from "../905/405710";
 import { Q as _$$Q } from "../figma_app/104130";
 import { SubscriptionStatusEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Pc } from "../figma_app/463500";
 import { P as _$$P } from "../905/201667";
 import { xo, zi } from "../905/824449";
@@ -64,7 +64,7 @@ export let $$O0 = memo(function ({
   }(V, H);
   let Y = "TEXT" === P && void 0 !== V && !isInvalidValue(V) && V > 0 && K.length > 0;
   let $ = AH(L?.key || null, L);
-  let X = useMemo(() => L ? Ui(L, t) ? {
+  let X = useMemo(() => L ? compareLibraryKeyWithString(L, t) ? {
     kind: SubscriptionStatusEnum.LOCAL,
     value: L
   } : !getFeatureFlags().ds_zombie_styles_fixes || $ && $.data && $.data.content_hash === L.content_hash ? void 0 : {
@@ -87,17 +87,17 @@ export let $$O0 = memo(function ({
     selected: !!R,
     previewActive: !!R,
     anyNonFrameLikesSelected: W
-  }) : jsxs(_$$E, {
+  }) : jsxs(ButtonPrimitive, {
     className: Z,
     onClick: q,
     htmlAttributes: Q ? {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": Q
     } : {
       "data-tooltip-style-description": L ? L.description : void 0,
       "data-tooltip-style-name": L ? getBasename(L.name) : getI18nString("design_systems.styles.custom"),
       "data-tooltip-style-element-type": k,
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": L && L.description || F ? _$$Z : ""
     },
     children: [L && jsx("div", {

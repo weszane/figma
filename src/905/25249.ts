@@ -8,8 +8,8 @@ import { Cs } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { N as _$$N } from "../905/438674";
 import { oq, vo, Y9, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
-import { bL } from "../905/38914";
+import { Button } from "../905/521428";
+import { ModalRootComponent } from "../905/38914";
 import { L as _$$L } from "../905/857916";
 import { r as _$$r } from "../905/857502";
 import { trackEventAnalytics } from "../905/449184";
@@ -18,7 +18,7 @@ import { useSubscription } from "../figma_app/288654";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
@@ -27,7 +27,7 @@ import { le } from "../figma_app/11182";
 import { hideModal, showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { xT, Q3 } from "../figma_app/199513";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FTeamAccessPermissionType, FResourceCategoryType, FPlanNameType } from "../figma_app/191312";
@@ -47,9 +47,9 @@ import { registerModal } from "../905/102752";
 import { e as _$$e2 } from "../905/393279";
 import { Ni, Dp } from "../905/249410";
 import { o6, gy } from "../905/986349";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { truncate } from "../figma_app/930338";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { z6 } from "../figma_app/805373";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
@@ -190,7 +190,7 @@ function eL(e) {
   let c = !e.audienceAccessRow || e.sharingAudienceControl !== FPermissionLevelType.INVITE_ONLY;
   let u = jsx("div", {
     className: o ? rG : zc,
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: _$$A6
     })
   });
@@ -199,7 +199,7 @@ function eL(e) {
     let i = e.sharingAudienceControl === FPermissionLevelType.WORKSPACE_EDIT || e.sharingAudienceControl === FPermissionLevelType.WORKSPACE_VIEW;
     t && org ? u = jsx("div", {
       className: zc,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A5
       })
     }) : i && (u = e.workspace ? jsx(z6, {
@@ -207,7 +207,7 @@ function eL(e) {
       size: 24
     }) : jsx("div", {
       className: zc,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3
       })
     }));
@@ -215,7 +215,7 @@ function eL(e) {
   let p = c ? jsx("div", {
     className: AA,
     children: u
-  }) : jsx(_$$B, {
+  }) : jsx(SvgComponent, {
     className: wk,
     svg: _$$A4
   });
@@ -228,7 +228,7 @@ function eL(e) {
   let A = Jt;
   let y = zn;
   return jsxs(Fragment, {
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       className: _ ? A : y,
       onClick: _ ? () => e.changeModalView && e.changeModalView() : void 0,
       disabled: !_,
@@ -253,7 +253,7 @@ function eL(e) {
             if (e.audienceAccessRow) return e.org && jsxs("div", {
               className: j7,
               "data-onboarding-key": eE,
-              children: [e.sharingAudienceControl && mi(e.sharingAudienceControl), a && jsx(_$$B, {
+              children: [e.sharingAudienceControl && mi(e.sharingAudienceControl), a && jsx(SvgComponent, {
                 svg: _$$A2,
                 className: $w
               })]
@@ -284,7 +284,7 @@ function eL(e) {
                 "data-onboarding-key": m,
                 children: [renderI18nText("folder_access_row.num_people", {
                   num: e.teamRoles.length.toString()
-                }), jsx(_$$B, {
+                }), jsx(SvgComponent, {
                   svg: _$$A2,
                   className: $w
                 })]
@@ -405,7 +405,7 @@ export let $$eK0 = registerModal(function (e) {
   let ei = FC();
   let en = M4.Folder.useValue(folderId).data;
   let er = useSelector(e => en?.team_id && e.teams[en.team_id] || null);
-  let ea = sZ() || null;
+  let ea = useCurrentUserOrg() || null;
   let [es, eo] = useState(AccessLevelEnum.VIEWER);
   let [el, ed] = useState(0);
   let [ec, eu] = useState(!1);
@@ -562,7 +562,7 @@ export let $$eK0 = registerModal(function (e) {
     autocompleteTokens: Q.tokens
   });
   let e8 = (e, t) => e === _9.ORG && t === J4.EDIT ? FPermissionLevelType.ORG_EDIT : e === _9.ORG && t === J4.VIEW ? FPermissionLevelType.ORG_VIEW : e === _9.WORKSPACE && t === J4.EDIT ? FPermissionLevelType.WORKSPACE_EDIT : e === _9.WORKSPACE && t === J4.VIEW ? FPermissionLevelType.WORKSPACE_VIEW : FPermissionLevelType.INVITE_ONLY;
-  if (!en) return jsx(qc, {});
+  if (!en) return jsx(LoadingOverlay, {});
   let e9 = () => {
     let e = en && en.team_id;
     let t = en && teamAccess && e && jsx(eL, {
@@ -661,7 +661,7 @@ export let $$eK0 = registerModal(function (e) {
       resourceId: folderId,
       currentView: el
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: t,
       width: "lg",
       children: jsxs(vo, {
@@ -672,7 +672,7 @@ export let $$eK0 = registerModal(function (e) {
             });
             switch (el) {
               case 0:
-                let e = jsx($n, {
+                let e = jsx(Button, {
                   onClick: () => {
                     eV();
                     eu(!0);
@@ -706,7 +706,7 @@ export let $$eK0 = registerModal(function (e) {
                 });
               case 2:
                 let t = canEdit && team?.canEdit;
-                let i = jsx($n, {
+                let i = jsx(Button, {
                   variant: "link",
                   onClick: () => ed(3),
                   children: renderI18nText("file_browser.folder_settings.change_team_access")
@@ -854,15 +854,15 @@ export let $$eK0 = registerModal(function (e) {
           }[el] : jsx("div", {
             className: Lq,
             "data-testid": "loading-spinner",
-            children: jsx(qc, {})
+            children: jsx(LoadingOverlay, {})
           })
         }), (1 === el || 3 === el) && jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               onClick: eq,
               variant: "secondary",
               children: renderI18nText("project_creation.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               onClick: () => {
                 if (e0 !== teamAccess) {
                   tt();

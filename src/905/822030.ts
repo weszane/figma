@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useCallback, useMemo, useRef, useContext } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { J } from "../905/614223";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
@@ -80,7 +80,7 @@ let k = memo(function ({
   }, [f]);
   let j = T(C.state, C.name);
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: p()("overlay_highlight--highlight--x-16k", {
         "overlay_highlight--thin--t8yeW": 1 === o,
         "overlay_highlight--dashed--Z34AW": 0 === i,
@@ -109,7 +109,7 @@ let k = memo(function ({
       })
     }), l && C.state && jsx(J, {
       mode: "added" !== C.state ? "light" : "dark",
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         onClick: L,
         htmlAttributes: {
           onMouseEnter: F,

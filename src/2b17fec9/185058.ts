@@ -1,20 +1,20 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback, forwardRef } from "react";
 import { createPortal } from "react-dom";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { DesignGraphElements, Fullscreen, AlignmentPosition, ConfirmationLevel, Command } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import c from "classnames";
 import { wp, SK } from "../905/125333";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { n as _$$n } from "../905/734251";
 import { F } from "../905/989956";
 import { AW } from "../figma_app/451499";
 import { fullscreenValue } from "../figma_app/455680";
-import { Pl } from "../figma_app/62612";
-import { Ib } from "../905/129884";
+import { getViewportZoom } from "../figma_app/62612";
+import { KindEnum } from "../905/129884";
 import { zG, C2, P } from "../figma_app/47958";
 import { Hf } from "../figma_app/204478";
 import { X5, F_ } from "../figma_app/240545";
@@ -72,7 +72,7 @@ export function $$L0({
     children: [jsx(_$$n.div, {
       onPointerDown: m ? void 0 : onInsertableResourcePointerDown,
       "data-testid": `outer-${_}`,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         className: u()({
           [Fu]: !t && "large" === c,
           [o1]: !t && "small" === c,
@@ -84,14 +84,14 @@ export function $$L0({
         "aria-current": t,
         "aria-label": L,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": L,
           "data-testid": _,
           onDoubleClick: H,
           onFocus: M,
           onBlur: D
         },
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: j,
           className: "small" === c ? vl : void 0,
           style: {
@@ -112,7 +112,7 @@ let N = forwardRef(function ({
   color: t,
   Icon: i
 }, r) {
-  let s = Pl({
+  let s = getViewportZoom({
     subscribeToUpdates_expensive: !1
   });
   if (!e?.dragPosition || !i) return null;

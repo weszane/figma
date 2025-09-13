@@ -10,7 +10,7 @@ import { H8, Pf } from "../905/590952";
 import { A } from "../905/563377";
 import { ud } from "../905/862913";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 var s = a;
 let f = "custom_template_publish_nudge_content--thumbnailInnerContainerMd--Emvtj";
 let E = "custom_template_publish_nudge_content--currFileThumbnail--Yo6Lb";
@@ -21,7 +21,7 @@ export function $$I1({
   size: e = 1,
   useCurrentFileAsThumbnail: t = !1
 }) {
-  let r = dq();
+  let r = useCurrentUserOrgId();
   let a = useSelector(e => e.user);
   let o = useCurrentFileKey();
   let d = ud();

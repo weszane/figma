@@ -6,7 +6,7 @@ import { getResourceDataOrFallback } from "../905/663269";
 import { gB } from "../905/723791";
 import { JB } from "../figma_app/657017";
 import { getProviderConfigType } from "../figma_app/155411";
-import { h0 } from "../905/845253";
+import { currentUserOrgIdAtom } from "../905/845253";
 import { DQ } from "../905/872904";
 import { FPlanNameType } from "../figma_app/191312";
 import { LibraryPresetSubscriptionsV2, LibraryOrgSubscriptions, WorkspaceSubscribedLibrariesForTeam, LibrarySubscriptionsForTeam, LibraryTeamSubscriptions, LibraryUserSubscriptions } from "../figma_app/43951";
@@ -42,7 +42,7 @@ let $$A0 = atom(e => {
   return gB(a);
 });
 let $$y4 = createRemovableAtomFamily(e => atom(t => {
-  let i = t(h0);
+  let i = t(currentUserOrgIdAtom);
   let n = !!e && !!i;
   let r = t(JB);
   let a = n ? t(WorkspaceSubscribedLibrariesForTeam.Query({

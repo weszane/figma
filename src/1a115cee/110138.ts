@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $n } from "../905/521428";
-import { bL } from "../905/38914";
+import { Button } from "../905/521428";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
 import x from "../vendor/656470";
@@ -14,7 +14,7 @@ import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
 import { logInfo, logError } from "../905/714362";
 import { h1 } from "../905/986103";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { A as _$$A } from "../905/222027";
 import { y as _$$y } from "../905/171275";
@@ -124,7 +124,7 @@ function Y(e) {
       })]
     }), jsx("div", {
       className: ns,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         onClick,
         children: renderI18nText("autosave.has_changes.open_to_sync")
@@ -206,7 +206,7 @@ function V({
   });
   let k = f && jsxs("div", {
     className: fH,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A2,
       className: QW
     }), jsx("div", {
@@ -214,17 +214,17 @@ function V({
       children: f
     })]
   });
-  let L = i && jsx($n, {
+  let L = i && jsx(Button, {
     variant: "secondary",
     onClick: x,
     children: renderI18nText("autosave.has_changes.dismiss.later")
   });
-  let F = j && N && jsx($n, {
+  let F = j && N && jsx(Button, {
     variant: "primary",
     onClick: N,
     children: renderI18nText("autosave.has_changes.open_to_sync")
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: e,
     width: "lg",
     children: jsxs(vo, {
@@ -284,12 +284,12 @@ function z(e) {
   if (r || j && e.loaded) {
     let s = renderI18nText("autosave.logout.offline_changes");
     let t = r ? renderI18nText("autosave.logout.offline_changes_discarded") : renderI18nText("autosave.logout.offline_changes_synced");
-    let n = jsx($n, {
+    let n = jsx(Button, {
       variant: "secondary",
       onClick: e.onLogOut,
       children: renderI18nText("autosave.logout.log_out")
     });
-    return jsx(bL, {
+    return jsx(ModalRootComponent, {
       width: "md",
       manager: a,
       children: jsxs(vo, {
@@ -320,34 +320,34 @@ function z(e) {
     let i;
     let o = renderI18nText("autosave.has_changes.sync_offline_changes");
     let r = desktopAPIInstance ? getI18nString("autosave.logout.log_out_text.desktop") : getI18nString("autosave.logout.log_out_text.web");
-    desktopAPIInstance ? (t = jsx($n, {
+    desktopAPIInstance ? (t = jsx(Button, {
       variant: "destructiveSecondary",
       onClick: v,
       children: renderI18nText("autosave.logout.discard_and_logout")
-    }), n = jsx($n, {
+    }), n = jsx(Button, {
       variant: "secondary",
       onClick: () => {
         s(popModalStack());
       },
       children: renderI18nText("autosave.logout.cancel")
-    }), i = jsx($n, {
+    }), i = jsx(Button, {
       variant: "secondary",
       onClick: m,
       children: renderI18nText("autosave.logout.show_changes")
-    })) : (t = jsx($n, {
+    })) : (t = jsx(Button, {
       variant: "destructiveSecondary",
       onClick: v,
       children: renderI18nText("autosave.logout.discard")
-    }), n = jsx($n, {
+    }), n = jsx(Button, {
       variant: "secondary",
       onClick: e.onLogOut,
       children: renderI18nText("autosave.logout.log_out")
-    }), i = jsx($n, {
+    }), i = jsx(Button, {
       variant: "primary",
       onClick: m,
       children: renderI18nText("autosave.logout.sync_changes")
     }));
-    return jsx(bL, {
+    return jsx(ModalRootComponent, {
       manager: a,
       width: "lg",
       children: jsxs(vo, {

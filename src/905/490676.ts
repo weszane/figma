@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -19,7 +19,7 @@ export function $$h0({
     onClose: i
   });
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: h,
       width: "lg",
       height: "dynamic",
@@ -31,7 +31,7 @@ export function $$h0({
         }), jsx(nB, {
           children: jsxs("div", {
             className: "x1v877vn x78zum5 xdt5ytf x167g77z x6s0dn4 xl56j7k",
-            children: [renderI18nText("general.root_error_boundary_title"), jsx($n, {
+            children: [renderI18nText("general.root_error_boundary_title"), jsx(Button, {
               onClick: () => {
                 customHistory.reload("Invalid publishing entrypoint for PublishFileToCommunityModal");
               },

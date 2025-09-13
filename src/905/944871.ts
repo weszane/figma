@@ -10,7 +10,7 @@ import { M } from "../figma_app/170366";
 import { canPerformAction } from "../figma_app/12796";
 import { isDevModePlugin, isSingleDevWithCodegen, canRunPlugin, isSamePlugin, isValidForFullscreenView, getMissingEditorTypeError, formatPluginName, getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { SH } from "../figma_app/790714";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, isPrivatePlugin, ManifestErrorType, manifestErrorMessage, manifestContainsWidget } from "../figma_app/155287";
 import { isPluginConfigMatching } from "../905/240440";
@@ -44,7 +44,7 @@ function C(e, t, i) {
   if (!u) return h;
   for (let a of e) if (!(hasLocalFileId(a) || isDevModePlugin(a) && isSingleDevWithCodegen(a))) try {
     let e = publishedPlugins[a.plugin_id];
-    if (m3(e) && Rm(e)) {
+    if (hasMonetizedResourceMetadata(e) && Rm(e)) {
       if (!i.showUnpurchased) continue;
       h.push({
         type: "run-menu-action",

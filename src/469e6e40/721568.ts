@@ -8,7 +8,7 @@ import d from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { Spacer } from "../905/470281";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 var c = d;
 let g = "highlight--container--2-8sY";
 let h = "highlight--background--1B0mj";
@@ -39,7 +39,7 @@ export function $$b1(e) {
       id: t,
       className: g,
       disabled: e.disabled,
-      children: [jsx(E, {
+      children: [jsx(TextWithTruncation, {
         truncate: !0,
         children: e.children
       }), jsx("div", {

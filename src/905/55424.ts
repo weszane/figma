@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import a from "classnames";
 import { MB, Hr, vF, AE } from "../905/549307";
 var s = a;
@@ -8,7 +8,7 @@ export function $$l0({
   onMouseDown: t,
   isLeftColInteractionsPanel: i
 }) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     className: ["!", "(", "not", "Not", "NOT"].includes(e) ? s()({
       [MB]: !0,
       [Hr]: !0,

@@ -2,11 +2,11 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
 import { tM, vd } from "../figma_app/637027";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { hideModal } from "../905/156213";
@@ -42,7 +42,7 @@ export let $$S0 = registerModal(function (e) {
       resourceType: FResourceCategoryType.TEAM,
       resourceId: e.team.id
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: c,
       width: "lg",
       children: jsxs(vo, {
@@ -65,7 +65,7 @@ export let $$S0 = registerModal(function (e) {
             teamSharingSettings: a.teamSharingSettings,
             hideModal: d,
             workspace: n
-          }) : jsx(qc, {
+          }) : jsx(LoadingOverlay, {
             className: Lq
           })
         })]

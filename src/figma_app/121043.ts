@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
 import { K as _$$K } from "../905/443068";
 import { EventShield } from "../905/821217";
@@ -15,7 +15,7 @@ import { Multiplayer, SaveConnectionIssues, SchemaJoinStatus, DesignGraphElement
 import E from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { useConnectionState, ConnectionState } from "../figma_app/288654";
 import { parseQuery } from "../905/634134";
@@ -26,7 +26,7 @@ import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { WN } from "../figma_app/638601";
 import { b as _$$b } from "../figma_app/556971";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t } from "../905/331623";
 import { i as _$$i, L as _$$L } from "../figma_app/942671";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -52,7 +52,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { EO } from "../905/691205";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
 import { x as _$$x } from "../905/749159";
 import { e as _$$e } from "../figma_app/320600";
@@ -130,10 +130,10 @@ export class $$eC6 extends RecordingPureComponent {
     } = this.props;
     return jsx("span", {
       className: dM,
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick: this.props.onClick || this.onClick,
         htmlAttributes: {
-          "data-tooltip-type": Ib.LOOKUP,
+          "data-tooltip-type": KindEnum.LOOKUP,
           "data-tooltip": action
         },
         children: text
@@ -156,7 +156,7 @@ export function $$ew0(e) {
   let p = `toolbar-action-${item.action}`;
   let _ = item.getDisplayAction?.();
   let h = {
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": _ ?? item.action,
     "data-onboarding-key": item.onboardingKey,
     "data-tooltip-submenu-open": isActive,
@@ -166,7 +166,7 @@ export function $$ew0(e) {
   let g = () => VU.get(item.action, "toolbar")?.();
   if (item && item.isActive) {
     let e = "focus-mode-component-set-toggle" === item.action ? {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": isActive ? getI18nString("fullscreen.focus_mode.toggle_variants.exit") : getI18nString("fullscreen.focus_mode.toggle_variants.enter"),
       "data-tooltip-submenu-open": !1,
       "data-tooltip-shortcut-key": "focus-mode-component-set-toggle"
@@ -200,7 +200,7 @@ export function $$ew0(e) {
       className: WT,
       children: [m, showBadge && jsx("div", {
         className: q3,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A5
         })
       })]
@@ -210,10 +210,10 @@ export function $$ew0(e) {
 export function $$eO4() {
   return getObservableOrFallback(_$$d().showTimeSlicingEditRenderingDot) ? jsx("div", {
     className: e1,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("time_sliced_edit_rendering.active"),
     "data-onboarding-key": "tsmer-status",
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       className: by,
       svg: _$$A4
     })
@@ -341,7 +341,7 @@ let $$eD3 = memo(function ({
   return shouldShow ? jsx(_$$T, {
     className: e1,
     "data-tooltip-show-right": e,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": label,
     "data-onboarding-key": "multiplayer-save-status",
     children: tooltipIconComponent
@@ -381,7 +381,7 @@ export function $$ej5(e) {
       "data-fullscreen-intercept": !0,
       "data-onboarding-key": item.onboardingKey,
       "data-tooltip": item.action,
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       fallbackSvg: u || void 0,
       innerSpanRef: _,
       onKeyDown: e => hx({
@@ -441,7 +441,7 @@ let $$eU7 = memo(function (e) {
     "data-tooltip": "main-menu",
     "data-tooltip-offset-x": m ? 8 : 0,
     "data-tooltip-show-right": m,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     fallbackSvg: _$$A8,
     id: "toggle-menu-button",
     isUI3: !0,
@@ -554,7 +554,7 @@ function eG(e) {
   return t;
 }
 memo(function (e) {
-  let t = _$$U();
+  let t = trackFileEventWithStore();
   return jsx(_$$L, {
     ariaLabel: getI18nString("fullscreen.toolbar.missing_fonts"),
     svg: _$$A6,
@@ -564,7 +564,7 @@ memo(function (e) {
       Fullscreen.findMissingFontsAndShowPopover();
     },
     recordingKey: generateRecordingKey(e, "missingFontsButton"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fullscreen.toolbar.missing_fonts")
   }, "missing-fonts-button");
 });

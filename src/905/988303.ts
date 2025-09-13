@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { formatNumber } from "../figma_app/930338";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { lo, TQ, Yd, dq, gu, az, k9, s0, _y, Qe } from "../905/5637";
 import { A } from "../6828/379561";
 import { A as _$$A } from "../5724/322086";
@@ -9,7 +9,7 @@ export function $$d3(e) {
     className: lo,
     children: [jsx("div", {
       className: TQ,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         className: Yd,
         svg: e.icon
       })
@@ -24,7 +24,7 @@ export function $$c2(e) {
     onClick: t,
     children: [jsxs("div", {
       className: TQ,
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         className: (() => {
           let t = [Yd];
           e.hoverIcon && t.push(gu);
@@ -32,10 +32,10 @@ export function $$c2(e) {
           return t.join(" ");
         })(),
         svg: e.icon
-      }), e.hoverIcon && jsx(B, {
+      }), e.hoverIcon && jsx(SvgComponent, {
         className: k9,
         svg: e.hoverIcon
-      }), e.activeIcon && jsx(B, {
+      }), e.activeIcon && jsx(SvgComponent, {
         className: s0,
         svg: e.activeIcon
       })]

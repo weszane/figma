@@ -2,7 +2,7 @@ import { LRUCache } from "../905/196201";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { UV } from "../905/283918";
 import { f } from "../905/666831";
@@ -26,7 +26,7 @@ let g = new class {
     let l = await LE();
     console.log(`[spell-check] using implementation: ${this._current?.name}. Current language: ${t}. Supported languages: ${l}`);
     let d = debugState.getState().selectedView;
-    let c = Dc(d.editorType);
+    let c = mapEditorTypeToProductType(d.editorType);
     trackEventAnalytics("Spell Check Ready", {
       productType: c,
       language: t,

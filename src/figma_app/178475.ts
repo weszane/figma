@@ -7,7 +7,7 @@ import { Lk, X9, ag, i5, NB, PZ, f0, LN, cu, h7 } from "../figma_app/975811";
 import { dG } from "../figma_app/753501";
 import { MIXED_MARKER, isInvalidValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { a3 } from "../905/188421";
 import { p_ } from "../905/203369";
@@ -607,7 +607,7 @@ export function $$G5(e) {
     inputClassName: s()(inputClassName, {
       [Ww]: i
     }),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": a,
     hidePercentSign: i,
     childrenAtEnd: i,

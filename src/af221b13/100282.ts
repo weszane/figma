@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getIsMobile } from "../figma_app/778880";
 import { reportError } from "../905/11";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { s_ } from "../905/17223";
 import { $$ } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
@@ -12,7 +12,7 @@ import { registerModal } from "../905/102752";
 import { d_ } from "../figma_app/918700";
 import { s as _$$s } from "../5430/913603";
 import { zE } from "../905/738636";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
 import { FFileType } from "../figma_app/191312";
 import { f6, ai } from "../figma_app/915202";
@@ -105,7 +105,7 @@ export function $$I0({
   let u = useDispatch();
   let g = B();
   let p = getIsMobile();
-  let w = q8();
+  let w = isAIFeaturesEnabledForCurrentUser();
   let E = (e, t) => {
     u(zE({
       state: g,
@@ -123,7 +123,7 @@ export function $$I0({
   };
   return jsx(T, {
     onClick: () => {
-      Cu({
+      logAndTrackCTA({
         name: "community_collections_figjam_ai",
         prompt: c,
         title: e,

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useLayoutEffect, useCallback, useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { K as _$$K } from "../905/443068";
-import { $n, WW } from "../905/521428";
+import { Button, ButtonLarge } from "../905/521428";
 import { K as _$$K2 } from "../905/851274";
 import { O as _$$O } from "../905/969533";
 import { DocumentColorProfileEnum, Command } from "../figma_app/763686";
@@ -21,7 +21,7 @@ import { hideModalHandler, showModalHandler } from "../905/156213";
 import { selectCurrentFile } from "../figma_app/516028";
 import { isExportRestricted } from "../figma_app/12796";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { useSingleEffect } from "../905/791079";
 import { k as _$$k2 } from "../905/582200";
@@ -41,7 +41,7 @@ import U from "lodash-es/mapValues";
 import { oe } from "../figma_app/376315";
 import { throwTypeError } from "../figma_app/465776";
 import { ZH } from "../figma_app/504823";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { g as _$$g } from "../905/687265";
 import { eI as _$$eI, GC } from "../1528/961203";
 import { _j, kV } from "../9410/486658";
@@ -242,7 +242,7 @@ function J({
       className: "x1n2onr6 x5yr21d x1rife3k x1xzczws xkcv6ua",
       children: jsx("ul", {
         className: "x10l6tqk xu96u03 x13vifvy x78zum5 xdt5ytf x6s0dn4 x1nfngrj xf7z5ut xe8uvvx",
-        children: t.map((t, l) => jsx(_$$E, {
+        children: t.map((t, l) => jsx(ButtonPrimitive, {
           ref: e => {
             e ? i.current.set(t, e) : i.current.$$delete(t);
           },
@@ -733,7 +733,7 @@ let ep = registerModal(function (e) {
     });
     p(e);
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
     children: jsxs(vo, {
@@ -753,7 +753,7 @@ let ep = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: () => {
               let e = [];
@@ -805,7 +805,7 @@ function em() {
   let o = useCallback(() => getFeatureFlags().buzz_video_export || getFeatureFlags().buzz_print_export ? ep : _$$Y, []);
   return jsx("div", {
     className: "x1057jvv xnfn54o",
-    children: jsx(WW, {
+    children: jsx(ButtonLarge, {
       variant: "secondary",
       disabled: i || n.isExporting,
       onClick: () => e(showModalHandler({
@@ -898,7 +898,7 @@ function eF(e) {
               marginLeft: 8,
               marginRight: 8
             },
-            children: jsx(WW, {
+            children: jsx(ButtonLarge, {
               variant: "secondary",
               onClick: () => F("SHARE_BUTTON"),
               children: getI18nString("fullscreen.toolbar.multiplayer.share")

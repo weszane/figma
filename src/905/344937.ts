@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
-import { ii } from "../905/54385";
+import { productSchema } from "../905/54385";
 export let $$a0 = z.object({
-  monetized_resource_metadata: ii.optional()
+  monetized_resource_metadata: productSchema.optional()
 });
 export function $$s1(e) {
   return !!e?.monetized_resource_metadata;

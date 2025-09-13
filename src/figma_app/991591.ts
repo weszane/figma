@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { atomStoreManager, atom, Xr } from "../figma_app/27355";
 import { ResourceStatus } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
-import { q8, dZ } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser, isLlamaEnabledForOrg } from "../figma_app/459490";
 import { lg } from "../figma_app/976749";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseSlidesAi } from "../figma_app/43951";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
@@ -16,7 +16,7 @@ export function $$h0() {
   let {
     isSlidesAiEnabled
   } = $$f3();
-  let n = !q8();
+  let n = !isAIFeaturesEnabledForCurrentUser();
   switch (e) {
     case FFileType.DESIGN:
       return t;
@@ -46,8 +46,8 @@ var E = (e => (e.LOADING = "loading", e.HAS_PERMISSION = "has_permission", e.NO_
 let y = atom("loading");
 export function $$b2(e) {
   let t = Xr(y);
-  let r = sZ();
-  let l = useSubscription(dZ(r) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseSlidesAi, {
+  let r = useCurrentUserOrg();
+  let l = useSubscription(isLlamaEnabledForOrg(r) ? FileCanUseFigmaAiIgnoreAiToggle : FileCanUseSlidesAi, {
     key: e
   }, {
     enabled: !!e

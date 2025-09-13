@@ -7,7 +7,7 @@ import { s_ } from '../905/17223';
 import { d as _$$d2 } from '../905/49800';
 import { rw } from '../905/54367';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { M as _$$M } from '../905/130634';
 import { H as _$$H } from '../905/154301';
 import { hideModal, hideSpecificModal, popModalStack, showModalHandler, updateModal } from '../905/156213';
@@ -21,6 +21,7 @@ import { c as _$$c } from '../905/370443';
 import { selectUser } from '../905/372672';
 import { k as _$$k } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
+import { AutoLayout } from '../905/470281';
 import { OJ } from '../905/519092';
 import { ex as _$$ex } from '../905/524523';
 import { r6 } from '../905/542608';
@@ -36,12 +37,10 @@ import { xN } from '../905/672897';
 import { d as _$$d } from '../905/693444';
 import { S3 } from '../905/708054';
 import { IT } from '../905/713695';
-import { B as _$$B } from '../905/714743';
-import { oA as _$$oA } from '../905/723791';
+import { SvgComponent } from '../905/714743';
 import { yN } from '../905/727738';
 import { Qq } from '../905/736956';
 import { p as _$$p } from '../905/763242';
-import { AutoLayout } from '../905/470281';
 import { $ as _$$$ } from '../905/834575';
 import { P as _$$P } from '../905/842406';
 import { Um } from '../905/848862';
@@ -51,7 +50,7 @@ import { o as _$$o } from '../905/895626';
 import { j7, oB, sf } from '../905/929976';
 import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
-import { E as _$$E } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { j as _$$j } from '../1577/266226';
 import { A as _$$A6 } from '../1617/401431';
 import { A as _$$A7 } from '../1617/442539';
@@ -67,7 +66,7 @@ import { i as _$$i } from '../figma_app/4979';
 import { canPerformActionBasedOnLevel, getPermissionLevelNameCapitalized } from '../figma_app/12796';
 import { PendingAssetTransferRequestByTeam, PendingTeamRoleRequestsByTeamId, TeamAdminSettingsPage, TeamById, TeamMembersModalView, TeamSettings } from '../figma_app/43951';
 import { FL } from '../figma_app/102449';
-import { DQ, Pw } from '../figma_app/121751';
+import { isReduxDeprecationCutover, ConfigGroups } from '../figma_app/121751';
 import { J as _$$J } from '../figma_app/179602';
 import { FAccessLevelType, FMemberRoleType, FOrganizationLevelType, FPermissionLevelType, FPlanNameType, FResourceCategoryType, FUserTypeClassification } from '../figma_app/191312';
 import { c$, MM, ms, wv } from '../figma_app/236327';
@@ -90,7 +89,7 @@ import { filterNotNullish } from '../figma_app/656233';
 import { isMobileUA } from '../figma_app/778880';
 import { az, z6 } from '../figma_app/805373';
 import { $z, fu } from '../figma_app/831799';
-import { kt, qc } from '../figma_app/858013';
+import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { wO } from '../figma_app/907616';
 import { utilityNoop } from '../figma_app/918700';
 import { Ex, zE } from '../figma_app/919079';
@@ -239,7 +238,7 @@ function ea(e) {
         children: x(b, !0)
       }), jsx('div', {
         className: H,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           truncate: !0,
           children: b.email
         })
@@ -248,7 +247,7 @@ function ea(e) {
       className: e.isModal ? U : B,
       children: [(() => {
         if (e.isEduRestrictedLg) {
-          return jsx(_$$B, {
+          return jsx(SvgComponent, {
             'className': 'members_list_row--warningIcon--G9r-7',
             'data-tooltip': F,
             'data-tooltip-max-width': 250,
@@ -258,7 +257,7 @@ function ea(e) {
             'data-tooltip-title': getI18nString('team_view.upgrade.can_only_view', {
               teamMember: 'handle' in e.teamRole.user ? e.teamRole.user.handle : e.teamRole.user.email ?? ''
             }),
-            'data-tooltip-type': Ib.SPECIAL,
+            'data-tooltip-type': KindEnum.SPECIAL,
             'dataTestId': 'restricted-edu-user-tooltip',
             'svg': _$$A4
           });
@@ -293,7 +292,7 @@ function ea(e) {
             onClick: () => m(120 + i),
             children: [jsx('span', {
               children: getPermissionLevelNameCapitalized(e.teamRole.level)
-            }), jsx(_$$B, {
+            }), jsx(SvgComponent, {
               svg: _$$A3,
               className: K
             })]
@@ -454,7 +453,7 @@ function el(e) {
           },
           children: [jsx('span', {
             children: getPermissionLevelNameCapitalized(l)
-          }), u.length > 1 && jsx(_$$B, {
+          }), u.length > 1 && jsx(SvgComponent, {
             svg: _$$A3,
             className: K
           })]
@@ -645,7 +644,7 @@ function eN(e) {
     children: renderI18nText('file_browser.team_settings_modal.paid_status_explanation_no_link')
   }) : jsx('div', {
     className: 'team_settings_modal--membersHeader--Ac-UZ',
-    children: jsxs(_$$E, {
+    children: jsxs(TextWithTruncation, {
       color: 'secondary',
       fontSize: 12,
       children: [e.team.name, renderI18nText('file_browser.team_settings_modal.members_tab_header', {
@@ -666,7 +665,7 @@ let tr = registerModal(() => {
   let a = useSubscription(TeamAdminSettingsPage, {
     teamId: t
   });
-  let n = _$$oA(a.data?.team);
+  let n = getResourceDataOrFallback(a.data?.team);
   let i = !n;
   let l = !!n?.studentTeamAt && !n?.isAiDataSharingEnabled;
   let o = !!n?.aiFeaturesDisabledAt;
@@ -712,17 +711,17 @@ let tr = registerModal(() => {
     children: [jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 4,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: 'medium',
         children: renderI18nText('admin_settings.ai.features_toggle.label')
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('admin_settings.ai.features_toggle.description.team', {
           learnMoreLink: jsx(CY, {
             href: _$$d3.aiFeatures,
             target: '_blank',
             trusted: !0,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText('general.learn_more')
             })
           })
@@ -743,7 +742,7 @@ let tr = registerModal(() => {
       padding: {
         left: 8
       },
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: 'medium',
         children: renderI18nText('admin_settings.ai.section_title')
       }), !u && jsx(Ex, {
@@ -757,7 +756,7 @@ let tr = registerModal(() => {
     fixedTop: !0,
     children: i ? jsx(AutoLayout, {
       padding: 64,
-      children: jsx(qc, {
+      children: jsx(LoadingOverlay, {
         testId: tn.spinner
       })
     }) : jsxs(AutoLayout, {
@@ -775,17 +774,17 @@ let tr = registerModal(() => {
         children: [jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 4,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             fontWeight: 'medium',
             children: renderI18nText('admin_settings.ai.data_sharing.label')
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: 'secondary',
             children: renderI18nText('admin_settings.ai.data_sharing.description.team', {
               learnMoreLink: jsx(CY, {
                 href: _$$d3.aiDataSharing,
                 target: '_blank',
                 trusted: !0,
-                children: jsx(_$$E, {
+                children: jsx(TextWithTruncation, {
                   children: renderI18nText('general.learn_more')
                 })
               })
@@ -799,7 +798,7 @@ let tr = registerModal(() => {
           htmlAttributes: {
             'data-testid': tn.dataSharingEnabledSwitch,
             'data-tooltip': l ? getI18nString('admin_settings.ai.data_sharing.disabled_for_student_teams') : void 0,
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip-show-above': !0,
             'data-tooltip-timeout-delay': 50,
             'data-tooltip-tip-align-right': !0
@@ -852,7 +851,7 @@ function tf(e) {
     oldValue: d,
     newValue: p,
     label: adminPermissionConfig.TeamSettingsView.teamInfo,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       teamId: e.teamId
     }
@@ -1084,13 +1083,13 @@ function tf(e) {
         children: [(() => {
           let e = V(i);
           let t = M || null;
-          let a = jsx(_$$B, {
+          let a = jsx(SvgComponent, {
             className: tp,
             svg: _$$A6
           });
           (e === FPermissionLevelType.ORG_EDIT || e === FPermissionLevelType.ORG_VIEW) && o ? a = jsx('div', {
             className: tp,
-            children: jsx(_$$B, {
+            children: jsx(SvgComponent, {
               svg: _$$A7
             })
           }) : (e === FPermissionLevelType.WORKSPACE_EDIT || e === FPermissionLevelType.WORKSPACE_VIEW) && (a = jsx('div', {
@@ -1124,7 +1123,7 @@ function tf(e) {
           children: renderI18nText('team_view.team_permissions_modal.change')
         })]
       }), !f?.canAdmin && jsx('div', {
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('file_browser.team_settings.team_admins_and_owners_can_change')
         })
@@ -1141,7 +1140,7 @@ function tf(e) {
               text: getI18nString('general.beta')
             })
           }), jsx(_$$B2, {
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('admin_settings.ai.section_title.free_in_beta'),
             'data-tooltip-timeout-delay': 50
           })]
@@ -1261,7 +1260,7 @@ function tf(e) {
         })]
       }), jsxs('div', {
         className: tc,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: tu,
           svg: _$$A5
         }), jsxs('div', {
@@ -1283,7 +1282,7 @@ function tf(e) {
       })]
     }), v?.isProOrStudentTeam && f?.canAdmin && jsxs('div', {
       className: tc,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: tu,
         svg: _$$A5
       }), jsx('div', {
@@ -1462,7 +1461,7 @@ let $$tT0 = registerModal(e => {
           children: jsx(Suspense, {
             fallback: jsx('div', {
               className: 'x1bpp3o7',
-              children: jsx(kt, {})
+              children: jsx(LoadingSpinner, {})
             }),
             children: jsx('div', {
               className: 'team_settings_modal--settingsContainer--rJ9jC',

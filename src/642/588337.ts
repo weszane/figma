@@ -2,8 +2,8 @@ import _require from "../5609/415609";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { $n } from "../905/521428";
-import { E as _$$E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/443820";
 import { _L } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -163,12 +163,12 @@ export function $$I0({
   }];
   let $ = jsx("div", {
     className: "x78zum5 x1jnr06f",
-    children: K ? jsx($n, {
+    children: K ? jsx(Button, {
       variant: "secondary",
       onClick: H,
       children: getI18nString("slides.charts.reupload_file")
     }) : I ? jsxs(Fragment, {
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "secondary",
         onClick: () => {
           if (!I) return;
@@ -177,7 +177,7 @@ export function $$I0({
           t && V(e, t, "City,2011-10-01,2011-10-02,2011-10-03,2011-10-04,2011-10-05,2011-10-06,2011-10-07,2011-10-08,2011-10-09,2011-10-10,2011-10-11,2011-10-12\nNew York,63.4,58.0,53.3,55.7,64.2,58.8,57.9,61.8,69.3,71.2,68.7,61.8\nSan Francisco,53.4,48.0,43.3,45.7,54.2,48.8,47.9,51.8,59.3,61.2,58.7,51.8", I);
         },
         children: getI18nString("slides.charts.start_from_scratch")
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "primary",
         onClick: H,
         children: getI18nString("slides.charts.upload_csv")
@@ -222,7 +222,7 @@ export function $$I0({
           return jsxs("div", {
             className: "x78zum5",
             children: [W.map(e => jsxs("div", {
-              children: [jsx(_$$E, {
+              children: [jsx(ButtonPrimitive, {
                 className: "x78zum5 xdt5ytf x167g77z",
                 onClick: () => A(e.type),
                 children: jsx(oW, {

@@ -14,7 +14,7 @@ import { createOptimistThunk } from "../905/350402";
 import { oB, os, j7, sf } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { e5, Mk } from "../figma_app/297957";
-import { uE, k1 } from "../figma_app/314264";
+import { trackUserEvent, trackFileBrowserFileClicked } from "../figma_app/314264";
 import { d9 } from "../figma_app/740025";
 import { isIntegrationContext } from "../figma_app/469876";
 import { isVsCodeEnvironment } from "../905/858738";
@@ -86,7 +86,7 @@ let $$B11 = createOptimistThunk((e, t) => {
     }));
   }
   if (e.dispatch($$F24()), t.path) {
-    uE("account_switched", r, {
+    trackUserEvent("account_switched", r, {
       newUserId: t.workspace.userId,
       orgId: r.currentUserOrgId,
       newOrgId: t.workspace.orgId,
@@ -101,7 +101,7 @@ let $$B11 = createOptimistThunk((e, t) => {
     d();
     return;
   }
-  uE("account_switched", r, {
+  trackUserEvent("account_switched", r, {
     newUserId: t.workspace.userId,
     orgId: r.currentUserOrgId,
     newOrgId: t.workspace.orgId,
@@ -188,7 +188,7 @@ let $$X8 = createOptimistThunk((e, {
   currentSharedByFilter: i,
   viewMode: a
 }) => {
-  k1(t, {
+  trackFileBrowserFileClicked(t, {
     state: e.getState(),
     entrypoint: r,
     planFilterId: n?.planId,
@@ -198,16 +198,16 @@ let $$X8 = createOptimistThunk((e, {
   });
 });
 let $$q4 = createOptimistThunk(e => {
-  uE("Font Installer Downloaded", e.getState());
+  trackUserEvent("Font Installer Downloaded", e.getState());
 });
 let $$J5 = createOptimistThunk(e => {
-  uE("Font Uninstaller Downloaded", e.getState());
+  trackUserEvent("Font Uninstaller Downloaded", e.getState());
 });
 let $$Z19 = createOptimistThunk((e, {
   clickedResourceType: t,
   resourceIdOrKey: r
 }) => {
-  uE("File Browser Nav Tree Clicked", e.getState(), {
+  trackUserEvent("File Browser Nav Tree Clicked", e.getState(), {
     clickedResourceType: t,
     resourceIdOrKey: r
   });

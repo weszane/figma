@@ -12,7 +12,7 @@ import { reportError } from "../905/11";
 import { XHR } from "../905/910117";
 import { tH, H4 } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { Ph } from "../905/160095";
@@ -50,7 +50,7 @@ import { Mh } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { jv } from "../905/84777";
 import { wn } from "../9420/795870";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { N_ } from "../905/332483";
 import { K as _$$K } from "../905/3140";
 import { Al } from "../9420/394825";
@@ -603,7 +603,7 @@ export class $$eM2 extends Component {
         currency: this.state.currency,
         footer: jsxs("div", {
           className: i9,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A,
             className: $y
           }), jsx("p", {
@@ -901,7 +901,7 @@ export class $$eM2 extends Component {
       }));
       this.state.newTeamName && e.data.meta.new_team && Al(this.props.user.id);
       trackEventAnalytics("Self Serve Org Purchased (GTM)");
-      uE("Self Serve Org Purchased", {
+      trackUserEvent("Self Serve Org Purchased", {
         user: this.props.user
       }, {
         org_name: s.org_name,

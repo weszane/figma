@@ -8,7 +8,7 @@ import { sz } from "../figma_app/216696";
 import { rL } from "../figma_app/49598";
 import { j7 } from "../905/929976";
 import { _ as _$$_ } from "../905/793009";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { a6 } from "../figma_app/198840";
@@ -16,7 +16,7 @@ import { FTemplateCategoryType } from "../figma_app/191312";
 import { oh, mC } from "../905/18797";
 import { Ef } from "../905/81982";
 import { n as _$$n } from "../905/79930";
-import { cS } from "../figma_app/45218";
+import { CommunityPageType } from "../figma_app/45218";
 import { H } from "../905/473998";
 let $$S = {};
 let v = {};
@@ -29,7 +29,7 @@ export function $$A3(e) {
   let [u] = useState(() => new Ef([], {
     keys: ["name"]
   }));
-  let p = templatesShelfType || cS.FIGJAM_TEMPLATES_PICKER;
+  let p = templatesShelfType || CommunityPageType.FIGJAM_TEMPLATES_PICKER;
   let h = sz.loadingKeyForPayload({
     shelfType: p
   });
@@ -73,7 +73,7 @@ export function $$A3(e) {
   }, [O, I, u]);
   useEffect(() => {
     let e;
-    x ? (e = [...new Set(e = u.search(x).map(e => e.hub_file_id))], Cu({
+    x ? (e = [...new Set(e = u.search(x).map(e => e.hub_file_id))], logAndTrackCTA({
       userId: A,
       fileKey: v,
       entry_point: "templates_modal",
@@ -191,7 +191,7 @@ export function $$C1(e) {
       source,
       isDrawMode,
       callback: e => {
-        Cu({
+        logAndTrackCTA({
           fileKey: e,
           templateId,
           productType: i.viewer_mode === FTemplateCategoryType.WHITEBOARD ? "figjam" : "design",

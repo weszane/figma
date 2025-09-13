@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { N } from "../905/438674";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { useSubscription } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -18,7 +18,7 @@ export function $$p0(e) {
   let f = r?.data?.file?.plan?.name;
   return jsx(fu, {
     name: "Block Connected File Move Modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: t,
       width: "md",
       children: jsxs(vo, {

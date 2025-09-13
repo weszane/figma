@@ -4,10 +4,10 @@ import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { WJ } from "../figma_app/671547";
+import { PluginModalTypeEnum } from "../figma_app/671547";
 import { j } from "../905/813868";
 import { U } from "../905/424668";
-import { M } from "../905/994901";
+import { pasteEmbedThunk } from "../905/994901";
 import { KJ, LU } from "../figma_app/916560";
 import { isInteractionPathCheck } from "../figma_app/897289";
 async function m(e, t) {
@@ -106,11 +106,11 @@ let g = createOptimistThunk(async (e, {
 }) => {
   let c = await h(t, a);
   if ("error" === c.status) {
-    let t = M({
+    let t = pasteEmbedThunk({
       clipboardText: l,
       url: a,
       isTextIframe: !1,
-      entrypoint: WJ.PASTE
+      entrypoint: PluginModalTypeEnum.PASTE
     });
     if (c.nodeID && (Fullscreen.deleteNode(c.nodeID), e.dispatch(VisualBellActions.dequeue({
       matchType: "plugins-status"

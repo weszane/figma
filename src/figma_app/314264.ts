@@ -1,364 +1,727 @@
-import { NU } from '../905/11'
-import { n as _$$n } from '../905/347702'
-import { analyticsEventManager, clearAnalyticsStorage, trackEventAnalytics } from '../905/449184'
-import { _ } from '../905/613917'
+// Imports: Refactored to use named exports matching new function names
+import {
+  analyticsEventManager,
+  clearAnalyticsStorage,
+  trackEventAnalytics,
+} from '../905/449184'
+import { findTeamById } from '../905/613917'
 import { logInfo } from '../905/714362'
 import { FEditorType } from '../figma_app/53721'
 import { FFileType, FResourceCategoryType } from '../figma_app/191312'
-import { G } from '../figma_app/471068'
-import { AppStateTsApi, Multiplayer } from '../figma_app/763686'
+import { ViewTypeEnum } from '../figma_app/471068'
+import { AppStateTsApi, LogToConsoleMode, Multiplayer } from '../figma_app/763686'
 
-export function $$p1(e) {
-  switch (e) {
-    case FEditorType.Design:
-      return 'design'
-    case FEditorType.Whiteboard:
-      return 'figjam'
-    case FEditorType.DevHandoff:
-      return 'dev_handoff'
-    case FEditorType.Slides:
-      return 'slides'
-    case FEditorType.Sites:
-      return 'sites'
-    case FEditorType.Figmake:
-      return 'make'
-    case FEditorType.Cooper:
-      return 'buzz'
-    case FEditorType.Illustration:
-      return 'draw'
-    default:
-      return 'unknown'
+/**
+ * Maps FEditorType to product type string.
+ * @param editorType - FEditorType
+ * @returns Product type string
+ * (Original: $$p1)
+ */
+export function mapEditorTypeToProductType(editorType: FEditorType): string {
+  switch (editorType) {
+    case FEditorType.Design: return 'design'
+    case FEditorType.Whiteboard: return 'figjam'
+    case FEditorType.DevHandoff: return 'dev_handoff'
+    case FEditorType.Slides: return 'slides'
+    case FEditorType.Sites: return 'sites'
+    case FEditorType.Figmake: return 'make'
+    case FEditorType.Cooper: return 'buzz'
+    case FEditorType.Illustration: return 'draw'
+    default: return 'unknown'
   }
 }
-export function $$_30(e) {
-  switch (e && e.editorType) {
-    case FFileType.DESIGN:
-      return 'design'
-    case FFileType.WHITEBOARD:
-      return 'figjam'
-    case FFileType.SLIDES:
-      return 'slides'
-    case FFileType.SITES:
-      return 'sites'
-    case FFileType.FIGMAKE:
-      return 'make'
-    case FFileType.COOPER:
-      return 'buzz'
-    default:
-      return 'unknown'
+
+/**
+ * Maps file object/editorType to product type string.
+ * @param file - File object with editorType
+ * @returns Product type string
+ * (Original: $$_30)
+ */
+export function mapFileToProductType(file: { editorType?: FFileType }): string {
+  switch (file && file.editorType) {
+    case FFileType.DESIGN: return 'design'
+    case FFileType.WHITEBOARD: return 'figjam'
+    case FFileType.SLIDES: return 'slides'
+    case FFileType.SITES: return 'sites'
+    case FFileType.FIGMAKE: return 'make'
+    case FFileType.COOPER: return 'buzz'
+    default: return 'unknown'
   }
 }
-export function $$h33(e, t) {
-  return e?.view === 'fullscreen'
-    ? $$p1(e.editorType)
-    : t
-      ? $$_30({
-          editorType: t,
-        })
+
+/**
+ * Determines product type based on view and editorType.
+ * @param selectedView - Selected view object
+ * @param editorType - Editor type
+ * @returns Product type string
+ * (Original: $$h33)
+ */
+export function getProductType(selectedView: any, editorType?: FFileType): string {
+  return selectedView?.view === 'fullscreen'
+    ? mapEditorTypeToProductType(selectedView.editorType)
+    : editorType
+      ? mapFileToProductType({ editorType })
       : 'unknown'
 }
-let m = (e, t) => {
-  switch (t?.selectedView?.view) {
+
+/**
+ * Finds file by key from state.
+ * @param key - File key
+ * @param state - State object
+ * @returns File object or null
+ * (Original: m)
+ */
+export function findFileByKey(key: string, state: any): any | null {
+  switch (state?.selectedView?.view) {
     case 'prototype':
     case 'mobileViewer':
-      if (t.selectedView.file?.key === e)
-        return t.selectedView.file || null
-      return null
+      return state.selectedView.file?.key === key ? state.selectedView.file || null : null
     default:
-      return e && t.fileByKey[e] || null
+      return key && state.fileByKey[key] || null
   }
 }
-let g = null
-export function $$f19() {
-  return g
+
+// Internal state for loadID and reconnectId
+let loadID: string | null = null
+
+/**
+ * Gets current loadID.
+ * (Original: $$f19)
+ */
+export function getLoadID(): string | null {
+  return loadID
 }
-export function $$E36(e) {
-  g = e
+
+/**
+ * Sets loadID.
+ * @param id - Load ID
+ * (Original: $$E36)
+ */
+export function setLoadID(id: string): void {
+  loadID = id
 }
-let y = 0
-export function $$b9() {
-  return y.toString()
+
+// Internal reconnect counter
+let reconnectCounter = 0
+
+/**
+ * Gets reconnect counter as string.
+ * (Original: $$b9)
+ */
+export function getReconnectId(): string {
+  return reconnectCounter.toString()
 }
-export function $$T13() {
-  y = 0
+
+/**
+ * Resets reconnect counter.
+ * (Original: $$T13)
+ */
+export function resetReconnectCounter(): void {
+  reconnectCounter = 0
 }
-export function $$I6() {
-  y++
+
+/**
+ * Increments reconnect counter.
+ * (Original: $$I6)
+ */
+export function incrementReconnectCounter(): void {
+  reconnectCounter++
 }
-let S = (e, t, r, i = {}) => {
-  let a = $$h33(r?.selectedView, t && t.editor_type)
-  let s = {
-    ...i,
-    ...$$v8(a, r?.selectedView?.view),
+
+/**
+ * Builds analytics event payload for file.
+ * @param fileKey - File key
+ * @param fileObj - File object
+ * @param state - State object
+ * @param extra - Extra payload
+ * @returns Analytics payload object
+ * (Original: S)
+ */
+export function buildFileAnalyticsPayload(
+  fileKey: string,
+  fileObj: any,
+  state: any,
+  extra: Record<string, any> = {},
+): Record<string, any> {
+  const productType = getProductType(state?.selectedView, fileObj && fileObj.editor_type)
+  const payload: Record<string, any> = {
+    ...extra,
+    ...getSlideViewAnalytics(productType, state?.selectedView?.view),
+    productType,
+    fileKey: fileKey || 'new',
+    fileParentOrgId: fileObj && fileObj.parent_org_id,
+    fileTeamId: fileObj && fileObj.team_id,
+    containingFolderId: fileObj && fileObj.folder_id,
+    entrypoint: extra.entrypoint,
+    figmaBasicsExperiment: fileObj?.track_tags?.figma_basics_experiment,
+    fileIsIncremental: !!Multiplayer?.isIncrementalSession(),
+    fileIsValidatingIncremental: !!Multiplayer?.isValidatingIncremental(),
+    isStagingChanges: !!Multiplayer?.isStagingChanges(),
   }
-  s.productType = a
-  s.fileKey = e || 'new'
-  s.fileParentOrgId = t && t.parent_org_id
-  s.fileTeamId = t && t.team_id
-  t && t.file_repo_id && (s.fileRepoId = t.file_repo_id)
-  s.fileTeamId = t && t.team_id
-  s.containingFolderId = t && t.folder_id
-  s.entrypoint = i.entrypoint
-  s.figmaBasicsExperiment = t?.track_tags?.figma_basics_experiment
-  g && (s.loadID = g, s.reconnectId = $$b9())
-  s.fileIsIncremental = !!Multiplayer?.isIncrementalSession()
-  s.fileIsValidatingIncremental = !!Multiplayer?.isValidatingIncremental()
-  s.isStagingChanges = !!Multiplayer?.isStagingChanges()
-  return s
+  if (fileObj && fileObj.file_repo_id)
+    payload.fileRepoId = fileObj.file_repo_id
+  if (loadID) {
+    payload.loadID = loadID
+    payload.reconnectId = getReconnectId()
+  }
+  return payload
 }
-export function $$v8(e, t) {
-  return e === FFileType.SLIDES && t === 'fullscreen'
-    ? {
-        slide_view: AppStateTsApi?.singleSlideView()?.isFocusedNodeViewEnabled() ? 'ssv' : 'grid',
-      }
-    : {}
+
+/**
+ * Returns slide view analytics for slides in fullscreen.
+ * @param productType - Product type
+ * @param view - View string
+ * @returns Slide view analytics object
+ * (Original: $$v8)
+ */
+export function getSlideViewAnalytics(productType: string, view: string): Record<string, any> {
+  if (productType === FFileType.SLIDES && view === 'fullscreen') {
+    return {
+      slide_view: AppStateTsApi?.singleSlideView()?.isFocusedNodeViewEnabled() ? 'ssv' : 'grid',
+    }
+  }
+  return {}
 }
-export function $$A12() {
+
+/**
+ * Clears analytics storage.
+ * (Original: $$A12)
+ */
+export function clearAnalytics(): void {
   clearAnalyticsStorage()
 }
-let $$x20 = _$$n((e, t, r, n = {}, a) => {
-  let s = m(t, r)
-  let o = S(t, s, r, n)
-  trackEventAnalytics(e, o, a)
-})
-let $$N21 = _$$n((e, t, r, n = {}, a) => {
-  let s = S(t.key, t, r, n)
-  trackEventAnalytics(e, s, a)
-})
-let $$C5 = _$$n((e, t, r, n) => {
-  let a = m(t, r)
-  let s = S(t, a, r, n)
-  analyticsEventManager.trackDefinedEvent(e, s)
-})
-export function $$w2(e, t, r = {}, n) {
-  r.productType = t && $$_30(t)
-  r.fileKey = t?.key || 'new'
-  r.fileParentOrgId = t?.parentOrgId
-  r.fileTeamId = t?.teamId
-  r.containingFolderId = t?.folderId
-  t && t.fileRepoId && (r.fileRepoId = t.fileRepoId)
-  trackEventAnalytics(e, r, n)
+
+/**
+ * Tracks event analytics for file.
+ * @param event - Event name
+ * @param fileKey - File key
+ * @param state - State object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$x20)
+ */
+export function trackFileEvent(
+  event: string,
+  fileKey: string,
+  state: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const fileObj = findFileByKey(fileKey, state)
+  const payload = buildFileAnalyticsPayload(fileKey, fileObj, state, extra)
+  trackEventAnalytics(event, payload, options)
 }
-export let $$O23 = 'File Browser File Clicked'
-export function $$R25(e, t, r) {
-  if (t.state) {
-    let n
-    $$x20($$O23, e, t.state, {
-      selectedView: (n = t.state).selectedView.view === 'recentsAndSharing' ? n.selectedView.tab || G.RECENTLY_VIEWED : n.selectedView.view === 'folder' && n.selectedView.folderId === n.user?.drafts_folder_id ? 'drafts' : n.selectedView.view,
-      entrypoint: t.entrypoint,
-      planFilterId: t.planFilterId,
-      planFilterType: t.planFilterType,
-      sharedByFilter: t.sharedByFilter,
-      viewMode: t.viewMode,
-    }, r)
+
+/**
+ * Tracks event analytics for file object.
+ * @param event - Event name
+ * @param fileObj - File object
+ * @param state - State object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$N21)
+ */
+export function trackFileObjEvent(
+  event: string,
+  fileObj: any,
+  state: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const payload = buildFileAnalyticsPayload(fileObj.key, fileObj, state, extra)
+  trackEventAnalytics(event, payload, options)
+}
+
+/**
+ * Tracks defined analytics event.
+ * @param event - Event name
+ * @param fileKey - File key
+ * @param state - State object
+ * @param extra - Extra payload
+ * (Original: $$C5)
+ */
+export function trackDefinedFileEvent(
+  event: string,
+  fileKey: string,
+  state: any,
+  extra?: Record<string, any>,
+): void {
+  const fileObj = findFileByKey(fileKey, state)
+  const payload = buildFileAnalyticsPayload(fileKey, fileObj, state, extra)
+  analyticsEventManager.trackDefinedEvent(event, payload)
+}
+
+/**
+ * Tracks file browser file click event.
+ * @param event - Event name
+ * @param fileObj - File object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$w2)
+ */
+export function trackFileBrowserFileClick(
+  event: string,
+  fileObj: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  extra.productType = fileObj && mapFileToProductType(fileObj)
+  extra.fileKey = fileObj?.key || 'new'
+  extra.fileParentOrgId = fileObj?.parentOrgId
+  extra.fileTeamId = fileObj?.teamId
+  extra.containingFolderId = fileObj?.folderId
+  if (fileObj && fileObj.fileRepoId)
+    extra.fileRepoId = fileObj.fileRepoId
+  trackEventAnalytics(event, extra, options)
+}
+
+// Exported constants (Original: $$O23, $$X15, etc.)
+export const FILE_BROWSER_FILE_CLICKED = 'File Browser File Clicked'
+export const CTA_CLICKED = 'CTA Clicked'
+export const DISABLED_TEAM_CREATION_BUTTON_HOVERED = 'Disabled Team Creation Button Hovered'
+export const TEAM_CREATION_BUTTON_HOVERED_TIMEOUT = 5000
+
+// Exported enums (Original: $$J17)
+export enum PopulationStatus {
+  NOT_POPULATED = 'not_populated',
+  POPULATED_INCOMPLETE = 'populated_incomplete',
+  POPULATED_COMPLETE = 'populated_complete',
+}
+
+// Exported functions (Original: $$R25, $$L7, etc.)
+/**
+ * Tracks file browser file click event with state.
+ * @param fileKey - File key
+ * @param params - Params object
+ * @param options - Options
+ * (Original: $$R25)
+ */
+export function trackFileBrowserFileClicked(
+  fileKey: string,
+  params: any,
+  options?: any,
+): void {
+  if (params.state) {
+    let selectedView
+    const n = params.state
+    if (n.selectedView.view === 'recentsAndSharing') {
+      selectedView = n.selectedView.tab || ViewTypeEnum.RECENTLY_VIEWED
+    }
+    else if (n.selectedView.view === 'folder' && n.selectedView.folderId === n.user?.drafts_folder_id) {
+      selectedView = 'drafts'
+    }
+    else {
+      selectedView = n.selectedView.view
+    }
+    trackFileEvent(FILE_BROWSER_FILE_CLICKED, fileKey, params.state, {
+      selectedView,
+      entrypoint: params.entrypoint,
+      planFilterId: params.planFilterId,
+      planFilterType: params.planFilterType,
+      sharedByFilter: params.sharedByFilter,
+      viewMode: params.viewMode,
+    }, options)
   }
   else {
-    t.selectedViewName
-      ? trackEventAnalytics($$O23, {
-          fileKey: e,
-          selectedView: t.selectedViewName,
-          entrypoint: t.entrypoint,
-        }, r)
-      : trackEventAnalytics($$O23, {
-          fileKey: e,
-          entrypoint: t.entrypoint,
-        }, r)
+    if (params.selectedViewName) {
+      trackEventAnalytics(FILE_BROWSER_FILE_CLICKED, {
+        fileKey,
+        selectedView: params.selectedViewName,
+        entrypoint: params.entrypoint,
+      }, options)
+    }
+    else {
+      trackEventAnalytics(FILE_BROWSER_FILE_CLICKED, {
+        fileKey,
+        entrypoint: params.entrypoint,
+      }, options)
+    }
   }
 }
-export function $$L7(e, t, r, n) {
+
+/**
+ * Tracks file browser loaded event.
+ * @param view - View object
+ * @param orgId - Org ID
+ * @param teamId - Team ID
+ * @param isLimitedTeamPlanSpace - Boolean
+ * (Original: $$L7)
+ */
+export function trackFileBrowserLoaded(
+  view: any,
+  orgId: string,
+  teamId: string,
+  isLimitedTeamPlanSpace: boolean,
+): void {
   trackEventAnalytics('file_browser_loaded', {
-    selectedView: e.view,
-    currentOrgId: t,
-    currentTeamId: r,
-    isLimitedTeamPlanSpace: n,
+    selectedView: view.view,
+    currentOrgId: orgId,
+    currentTeamId: teamId,
+    isLimitedTeamPlanSpace,
   })
 }
-export function $$P27(e) {
+
+/**
+ * Tracks file browser page visit event.
+ * @param view - View object
+ * (Original: $$P27)
+ */
+export function trackFileBrowserPageVisit(view: any): void {
   trackEventAnalytics('file_browser_page_visit', {
-    selectedView: e.view,
+    selectedView: view.view,
   })
 }
-export function $$D3(e, t, r) {
+
+/**
+ * Tracks file browser plan filter selected event.
+ * @param planId - Plan ID
+ * @param entryPoint - Entry point
+ * @param planType - Plan type
+ * (Original: $$D3)
+ */
+export function trackFileBrowserPlanFilterSelected(
+  planId: string,
+  entryPoint: string,
+  planType: string,
+): void {
   trackEventAnalytics('file_browser_plan_filter_selected', {
-    planId: e,
-    entryPoint: t,
-    planType: r,
+    planId,
+    entryPoint,
+    planType,
   })
 }
-export function $$k26(e, t) {
+
+/**
+ * Tracks file browser sharer filter selected event.
+ * @param sharerId - Sharer ID
+ * @param entryPoint - Entry point
+ * (Original: $$k26)
+ */
+export function trackFileBrowserSharerFilterSelected(
+  sharerId: string,
+  entryPoint: string,
+): void {
   trackEventAnalytics('file_browser_sharer_filter_selected', {
-    sharerId: e,
-    entryPoint: t,
+    sharerId,
+    entryPoint,
   })
 }
-export function $$M10(e, t, r = {}, n) {
-  r.fileKeys = t.map(e => e.key)
-  r.fileParentOrgIds = []
-  r.fileTeamIds = []
-  r.containingFolderIds = []
-  t.forEach((e) => {
-    r.fileParentOrgIds.push(e.parent_org_id)
-    r.fileTeamIds.push(e.team_id)
-    r.containingFolderIds.push(e.folder_id)
-  })
-  trackEventAnalytics(e, r, n)
+
+/**
+ * Tracks multiple file event analytics.
+ * @param event - Event name
+ * @param files - Array of file objects
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$M10)
+ */
+export function trackMultipleFileEvent(
+  event: string,
+  files: any[],
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  extra.fileKeys = files.map(f => f.key)
+  extra.fileParentOrgIds = files.map(f => f.parent_org_id)
+  extra.fileTeamIds = files.map(f => f.team_id)
+  extra.containingFolderIds = files.map(f => f.folder_id)
+  trackEventAnalytics(event, extra, options)
 }
-export function $$F11(e, t, r, n = {}, a) {
-  let s = t.map(e => r.fileByKey[e])
-  n.fileKeys = t
-  n.fileParentOrgIds = []
-  n.fileTeamIds = []
-  n.containingFolderIds = []
-  s.forEach((e) => {
-    n.fileParentOrgIds.push(e.parent_org_id)
-    n.fileTeamIds.push(e.team_id)
-    n.containingFolderIds.push(e.folder_id)
-  })
-  trackEventAnalytics(e, n, a)
+
+/**
+ * Tracks file copy event analytics.
+ * @param event - Event name
+ * @param fileKeys - Array of file keys
+ * @param state - State object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$F11)
+ */
+export function trackFileCopyEvent(
+  event: string,
+  fileKeys: string[],
+  state: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const files = fileKeys.map(key => state.fileByKey[key])
+  extra.fileKeys = fileKeys
+  extra.fileParentOrgIds = files.map(f => f.parent_org_id)
+  extra.fileTeamIds = files.map(f => f.team_id)
+  extra.containingFolderIds = files.map(f => f.folder_id)
+  trackEventAnalytics(event, extra, options)
 }
-export function $$j29(e, t, r = {}, n) {
-  r.fileKeys = []
-  r.fileParentOrgIds = []
-  r.fileTeamIds = []
-  r.containingFolderIds = []
-  t.forEach((e) => {
-    r.fileKeys.push(e.key)
-    r.fileParentOrgIds.push(e.parentOrgId)
-    r.fileTeamIds.push(e.teamId)
-    r.containingFolderIds.push(e.folderId)
-  })
-  trackEventAnalytics(e, r, n)
+
+/**
+ * Tracks file event for array of file objects.
+ * @param event - Event name
+ * @param files - Array of file objects
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$j29)
+ */
+export function trackFileArrayEvent(
+  event: string,
+  files: any[],
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  extra.fileKeys = files.map(f => f.key)
+  extra.fileParentOrgIds = files.map(f => f.parentOrgId)
+  extra.fileTeamIds = files.map(f => f.teamId)
+  extra.containingFolderIds = files.map(f => f.folderId)
+  trackEventAnalytics(event, extra, options)
 }
-export function $$U18(e, t, r, n) {
-  let i = e.map(e => e.key)
-  let a = []
-  let s = []
-  let o = []
-  i.forEach((e, r) => {
-    let n = t[r]
-    a.push(n.key)
-    s.push(n.folder_id)
-    o.push(n.team_id)
-  })
-  $$F11('File Copied', i, r, {
-    copiedFileKeys: a,
-    copiedContainingFolderIds: s,
-    copiedFileTeamIds: o,
-  }, n)
+
+/**
+ * Tracks file copied event.
+ * @param files - Array of file objects
+ * @param copiedFiles - Array of copied file objects
+ * @param state - State object
+ * @param options - Options
+ * (Original: $$U18)
+ */
+export function trackFileCopied(
+  files: any[],
+  copiedFiles: any[],
+  state: any,
+  options?: any,
+): void {
+  const fileKeys = files.map(f => f.key)
+  const copiedFileKeys = copiedFiles.map(f => f.key)
+  const copiedContainingFolderIds = copiedFiles.map(f => f.folder_id)
+  const copiedFileTeamIds = copiedFiles.map(f => f.team_id)
+  trackFileCopyEvent('File Copied', fileKeys, state, {
+    copiedFileKeys,
+    copiedContainingFolderIds,
+    copiedFileTeamIds,
+  }, options)
 }
-export function $$B34(e, t, r, n, a = {}, s) {
-  let o = n.folders[t]
-  a.folderId = o?.id || t
-  a.folderTeamId = o?.team_id || r
-  trackEventAnalytics(e, a, s)
+
+/**
+ * Tracks folder event analytics.
+ * @param event - Event name
+ * @param folderId - Folder ID
+ * @param teamId - Team ID
+ * @param state - State object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$B34)
+ */
+export function trackFolderEvent(
+  event: string,
+  folderId: string,
+  teamId: string,
+  state: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const folder = state.folders[folderId]
+  extra.folderId = folder?.id || folderId
+  extra.folderTeamId = folder?.team_id || teamId
+  trackEventAnalytics(event, extra, options)
 }
-export function $$G16(e, t, r, n = {}, a) {
-  let s = _(t, r)
-  n.teamId = s?.id
-  n.teamName = s?.name
-  trackEventAnalytics(e, n, a)
+
+/**
+ * Tracks team event analytics.
+ * @param event - Event name
+ * @param teamId - Team ID
+ * @param orgId - Org ID
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$G16)
+ */
+export function trackTeamEvent(
+  event: string,
+  teamId: string,
+  orgId: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const team = findTeamById(teamId, orgId)
+  extra.teamId = team?.id
+  extra.teamName = team?.name
+  trackEventAnalytics(event, extra, options)
 }
-export function $$V4(e, t, r, n = {}, a) {
-  let s = r.orgById[t]
-  n.orgId = s.id
-  n.orgName = s.name
-  trackEventAnalytics(e, n, a)
+
+/**
+ * Tracks org event analytics.
+ * @param event - Event name
+ * @param orgId - Org ID
+ * @param state - State object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$V4)
+ */
+export function trackOrgEvent(
+  event: string,
+  orgId: string,
+  state: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const org = state.orgById[orgId]
+  extra.orgId = org.id
+  extra.orgName = org.name
+  trackEventAnalytics(event, extra, options)
 }
-export function $$H32(e, t, r = {}, n) {
-  r.userId = t.user && t.user.id
-  trackEventAnalytics(e, r, n)
+
+/**
+ * Tracks user event analytics.
+ * @param event - Event name
+ * @param params - Params object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$H32)
+ */
+export function trackUserEvent(
+  event: string,
+  params: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  extra.userId = params.user && params.user.id
+  trackEventAnalytics(event, extra, options)
 }
-let z = {
+
+// Resource type mapping (Original: z)
+const resourceTypeToKey: Record<FResourceCategoryType, string> = {
   [FResourceCategoryType.FILE]: 'fileKey',
   [FResourceCategoryType.FILE_REPO]: 'fileRepoId',
   [FResourceCategoryType.FOLDER]: 'folderId',
   [FResourceCategoryType.TEAM]: 'teamId',
 }
-export function $$W37(e, t, r = {}, n) {
-  let a = z[t.resource_type]
-  r.roleId = t.id
-  r[a] = t.resource_id_or_key
-  t.user_id && (r.roleUserId = t.user_id)
-  trackEventAnalytics(e, r, n)
+
+/**
+ * Tracks role event analytics.
+ * @param event - Event name
+ * @param roleObj - Role object
+ * @param extra - Extra payload
+ * @param options - Options
+ * (Original: $$W37)
+ */
+export function trackRoleEvent(
+  event: string,
+  roleObj: any,
+  extra: Record<string, any> = {},
+  options?: any,
+): void {
+  const key = resourceTypeToKey[roleObj.resource_type]
+  extra.roleId = roleObj.id
+  extra[key] = roleObj.resource_id_or_key
+  if (roleObj.user_id)
+    extra.roleUserId = roleObj.user_id
+  trackEventAnalytics(event, extra, options)
 }
-export function $$K35(e, t) {
-  trackEventAnalytics(e, t)
+
+/**
+ * Tracks generic event analytics.
+ * @param event - Event name
+ * @param payload - Payload object
+ * (Original: $$K35)
+ */
+export function trackGenericEvent(event: string, payload: any): void {
+  trackEventAnalytics(event, payload)
 }
-export function $$Y28(e) {
+
+/**
+ * Returns file edit info.
+ * @param fileObj - File object
+ * @returns Edit info object
+ * (Original: $$Y28)
+ */
+export function getFileEditInfo(fileObj: any): { canEdit: boolean, fileKey: string, productType: string } {
   return {
-    canEdit: e.canEdit,
-    fileKey: e.key,
-    productType: $$_30(e),
+    canEdit: fileObj.canEdit,
+    fileKey: fileObj.key,
+    productType: mapFileToProductType(fileObj),
   }
 }
-var $ = (e => (e.DESIGN = 'DESIGN', e.WHITEBOARD = 'WHITEBOARD', e))($ || {})
-export let $$X15 = 'CTA Clicked'
-export function $$q0(e, t, r, n) {
-  let o = t || $$X15
-  logInfo(o, e.text || '', e, {
-    logToConsole: NU.NEVER,
-  })
-  let l = {
-    ...e,
-    nonInteraction: 0,
-  }
-  trackEventAnalytics(o, l, {
-    forwardToDatadog: !0,
-    sendAsBeacon: r,
-    ...n,
-  })
-}
-export var $$J17 = (e => (e.NOT_POPULATED = 'not_populated', e.POPULATED_INCOMPLETE = 'populated_incomplete', e.POPULATED_COMPLETE = 'populated_complete', e))($$J17 || {})
-export function $$Z22(e, t) {
-  let r = {
-    ...e,
-    nonInteraction: 0,
-  }
-  trackEventAnalytics('Input Blurred', r, t)
-}
-export function $$Q31(e, t = {}) {
-  trackEventAnalytics('Context Viewed', e, {
-    forwardToDatadog: !0,
-    ...t,
+
+/**
+ * Logs CTA click and tracks analytics.
+ * @param payload - Payload object
+ * @param eventName - Event name
+ * @param sendAsBeacon - Send as beacon flag
+ * @param options - Options
+ * (Original: $$q0)
+ */
+export function logAndTrackCTA(
+  payload: any,
+  eventName?: string,
+  sendAsBeacon?: boolean,
+  options?: any,
+): void {
+  const event = eventName || CTA_CLICKED
+  logInfo(event, payload.text || '', payload, { logToConsole: LogToConsoleMode.NEVER })
+  const analyticsPayload = { ...payload, nonInteraction: 0 }
+  trackEventAnalytics(event, analyticsPayload, {
+    forwardToDatadog: true,
+    sendAsBeacon,
+    ...options,
   })
 }
-let $$ee24 = 'Disabled Team Creation Button Hovered'
-let $$et14 = 5e3
-export const Cu = $$q0
-export const Dc = $$p1
-export const E9 = $$w2
-export const FE = $$D3
-export const Fr = $$V4
-export const GS = $$C5
-export const Hb = $$I6
-export const I0 = $$L7
-export const Nb = $$v8
-export const Nq = $$b9
-export const OH = $$M10
-export const PB = $$F11
-export const Pg = $$A12
-export const QM = $$T13
-export const WL = $$et14
-export const Ws = $$X15
-export const _J = $$G16
-export const _R = $$J17
-export const ak = $$U18
-export const cf = $$f19
-export const ds = $$x20
-export const f5 = $$N21
-export const fy = $$Z22
-export const gH = $$O23
-export const jd = $$ee24
-export const k1 = $$R25
-export const nX = $$k26
-export const o5 = $$P27
-export const oP = $$Y28
-export const pf = $$j29
-export const pi = $$_30
-export const qD = $$Q31
-export const uE = $$H32
-export const v5 = $$h33
-export const xr = $$B34
-export const ye = $$K35
-export const ys = $$E36
-export const z_ = $$W37
+
+/**
+ * Tracks input blurred event.
+ * @param payload - Payload object
+ * @param options - Options
+ * (Original: $$Z22)
+ */
+export function trackInputBlurred(payload: any, options?: any): void {
+  const analyticsPayload = { ...payload, nonInteraction: 0 }
+  trackEventAnalytics('Input Blurred', analyticsPayload, options)
+}
+
+/**
+ * Tracks context viewed event.
+ * @param payload - Payload object
+ * @param options - Options
+ * (Original: $$Q31)
+ */
+export function trackContextViewed(payload: any, options: any = {}): void {
+  trackEventAnalytics('Context Viewed', payload, {
+    forwardToDatadog: true,
+    ...options,
+  })
+}
+
+// Exported aliases for backward compatibility (original export names)
+export const Cu = logAndTrackCTA
+export const Dc = mapEditorTypeToProductType
+export const E9 = trackFileBrowserFileClick
+export const FE = trackFileBrowserPlanFilterSelected
+export const Fr = trackOrgEvent
+export const GS = trackDefinedFileEvent
+export const Hb = incrementReconnectCounter
+export const I0 = trackFileBrowserLoaded
+export const Nb = getSlideViewAnalytics
+export const Nq = getReconnectId
+export const OH = trackMultipleFileEvent
+export const PB = trackFileCopyEvent
+export const Pg = clearAnalytics
+export const QM = resetReconnectCounter
+export const WL = TEAM_CREATION_BUTTON_HOVERED_TIMEOUT
+export const Ws = CTA_CLICKED
+export const _J = trackTeamEvent
+export const _R = PopulationStatus
+export const ak = trackFileCopied
+export const cf = getLoadID
+export const ds = trackFileEvent
+export const f5 = trackFileObjEvent
+export const fy = trackInputBlurred
+export const gH = FILE_BROWSER_FILE_CLICKED
+export const jd = DISABLED_TEAM_CREATION_BUTTON_HOVERED
+export const k1 = trackFileBrowserFileClicked
+export const nX = trackFileBrowserSharerFilterSelected
+export const o5 = trackFileBrowserPageVisit
+export const oP = getFileEditInfo
+export const pf = trackFileArrayEvent
+export const pi = mapFileToProductType
+export const qD = trackContextViewed
+export const uE = trackUserEvent
+export const v5 = getProductType
+export const xr = trackFolderEvent
+export const ye = trackGenericEvent
+export const ys = setLoadID
+export const z_ = trackRoleEvent

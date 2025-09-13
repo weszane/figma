@@ -19,11 +19,11 @@ import { tH, H4 } from "../905/751457";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { x as _$$x } from "../figma_app/475340";
 import { C as _$$C } from "../905/196436";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { kg, UN } from "../figma_app/976345";
 import { R as _$$R } from "../905/731725";
 import { W as _$$W } from "../905/95038";
@@ -38,7 +38,7 @@ import { sf, j7 } from "../905/929976";
 import { zE as _$$zE } from "../905/738636";
 import { p4 } from "../905/93909";
 import { an, y$ } from "../905/81009";
-import { xr } from "../figma_app/314264";
+import { trackFolderEvent } from "../figma_app/314264";
 import { eU } from "../figma_app/863319";
 import { Tf, fA } from "../figma_app/543100";
 import { Um } from "../905/848862";
@@ -52,9 +52,9 @@ import { FavoritesByResourceId } from "../figma_app/43951";
 import { Bp } from "../figma_app/349248";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { f6, ai } from "../figma_app/915202";
-import { G as _$$G } from "../figma_app/471068";
+import { ViewTypeEnum } from "../figma_app/471068";
 import { F as _$$F } from "../905/915030";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { P as _$$P } from "../905/200237";
 import { X as _$$X } from "../905/718513";
 import { A as _$$A } from "../5724/361376";
@@ -114,8 +114,8 @@ function em(e) {
     "trashedFolders" !== o.view && (t(kg({
       clickedResourceType: "team",
       resourceIdOrKey: e.folder.id
-    })), xr("file_browser_folder_click", e.folder.id, e.folder.team_id, i, {
-      selectedView: "recentsAndSharing" === o.view ? o.tab || _$$G.RECENTLY_VIEWED : o.view,
+    })), trackFolderEvent("file_browser_folder_click", e.folder.id, e.folder.team_id, i, {
+      selectedView: "recentsAndSharing" === o.view ? o.tab || ViewTypeEnum.RECENTLY_VIEWED : o.view,
       planFilterId: e.currentPlanFilter?.planId || null,
       planFilterType: e.currentPlanFilter?.planType || null,
       viewMode: "grid"
@@ -281,7 +281,7 @@ function e_(e) {
       className: "folder_list_card--folderUpperRow--c-qXp",
       children: [jsxs("div", {
         className: "folder_list_card--folderName--fsdBf text--fontPos13--xW8hS text--_fontBase--QdLsd",
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontSize: 13,
           fontWeight: "medium",
           truncate: !0,
@@ -291,7 +291,7 @@ function e_(e) {
           color: zE.WARNING_TERTIARY,
           text: getI18nString("locked_team.label.view_only"),
           dataTooltip: getI18nString("locked_team.label.tooltip"),
-          dataTooltipType: Ib.TEXT,
+          dataTooltipType: KindEnum.TEXT,
           className: "folder_list_card--viewOnlyLabel--in8ZA"
         }), !r && t.is_connected_project && jsx("div", {
           className: _$$s.pl4.$,
@@ -299,10 +299,10 @@ function e_(e) {
             hostPlanName: t.resource_connection?.hostPlanName,
             connectedPlanName: t.resource_connection?.connectedPlanName
           })
-        }), e.canEdit && e.folder.settings?.legacy_team_root_folder && "Untitled project" === e.folder.path ? jsx(_$$B, {
+        }), e.canEdit && e.folder.settings?.legacy_team_root_folder && "Untitled project" === e.folder.path ? jsx(SvgComponent, {
           className: "folder_list_card--infoIcon--lKQ7I",
           svg: _$$A2,
-          "data-tooltip-type": Ib.SPECIAL,
+          "data-tooltip-type": KindEnum.SPECIAL,
           "data-tooltip-interactive": !0,
           "data-tooltip": eo,
           "data-tooltip-show-immediately": !0,
@@ -342,12 +342,12 @@ function eA({
   });
   return jsxs("div", {
     className: _$$s.flex.flexRow.itemsCenter.justifyStart.$,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 11,
       children: t
     }), null !== t && "" !== t && jsx("div", {
       children: "\xa0\xb7\xa0"
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontSize: 11,
       truncate: !0,
       children: a
@@ -452,7 +452,7 @@ function eb(e) {
       }));
     },
     trusted: !0,
-    children: e.canCreateFile && jsx(_$$B, {
+    children: e.canCreateFile && jsx(SvgComponent, {
       svg: _$$A
     })
   });

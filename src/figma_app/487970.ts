@@ -5,7 +5,7 @@ import { renderI18nText } from "../905/303541";
 import { I } from "../figma_app/4253";
 import { bV, QQ } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
-import { PM, m3, zF } from "../figma_app/45218";
+import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from "../figma_app/45218";
 import { t as _$$t } from "../905/344937";
 function p(e) {
   let t = bV(e.resource.monetized_resource_metadata);
@@ -76,12 +76,12 @@ export function $$b0({
 }) {
   return e ? !(i && cs(i)) && _$$t(e) && e.community_resource_payment && QQ(e.community_resource_payment) ? r.includes("purchased") ? jsx($$h2, {
     size: t
-  }) : null : PM(e) ? r.includes("freemium") ? jsx(g, {
+  }) : null : hasFreemiumCode(e) ? r.includes("freemium") ? jsx(g, {
     size: t
-  }) : null : m3(e) ? r.includes("price") ? jsx(p, {
+  }) : null : hasMonetizedResourceMetadata(e) ? r.includes("price") ? jsx(p, {
     resource: e,
     size: t
-  }) : null : zF(e) ? r.includes("off_platform") ? jsx(m, {
+  }) : null : isThirdPartyMonetized(e) ? r.includes("off_platform") ? jsx(m, {
     size: t
   }) : null : r.includes("free") ? jsx(f, {
     size: t

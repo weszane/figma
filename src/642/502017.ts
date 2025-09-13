@@ -11,7 +11,7 @@ import { Xh } from "../figma_app/803787";
 import { Lc } from "../figma_app/745458";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { D } from "../figma_app/268271";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c as _$$c } from "../905/606579";
 import { Xm } from "../905/935570";
 import { Pf } from "../figma_app/435826";
@@ -90,7 +90,7 @@ export function $$S0({
       ref: t,
       "data-onboarding-key": D,
       "data-tooltip": getI18nString("fullscreen.libraries_button.tooltip.no_updates"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       fallbackSvg: _$$A2,
       innerText: "Team Library",
       onClick,

@@ -16,7 +16,7 @@ import { q0 } from "../figma_app/976345";
 import { U2 } from "../figma_app/545293";
 import { os } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { Pg } from "../figma_app/314264";
+import { clearAnalytics } from "../figma_app/314264";
 import { z$ } from "../figma_app/840917";
 import { d9 } from "../figma_app/740025";
 import { y as _$$y, J } from "../905/235145";
@@ -58,7 +58,7 @@ let N = createOptimistThunk(e => {
   }
   let t = d9(e.getState().selectedView);
   H.logoutAllUsers().then(() => {
-    Pg();
+    clearAnalytics();
     U2.clear();
     new P().sendToAllTabs(_$$y, J);
     customHistory.redirect(`${t ? "/community" : ""}/?fuid=`);
@@ -102,7 +102,7 @@ let O = createOptimistThunk((e, t) => {
   H.logoutOneUser(t.user.id).then(r => {
     e.dispatch(os(r.data.meta));
     e.dispatch(q0(r.data.meta));
-    r.data?.meta?.users?.length === 0 && (Pg(), U2.clear());
+    r.data?.meta?.users?.length === 0 && (clearAnalytics(), U2.clear());
     let n = r.data?.meta?.redirect_url;
     n ? customHistory.redirect(n) : e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("file_browser.file_browser_actions.successfully_logged_out", {

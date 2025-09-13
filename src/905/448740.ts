@@ -1,5 +1,5 @@
 import { getCurrentPluginVersion } from "../figma_app/300692";
-import { xQ } from "../figma_app/45218";
+import { isWidget } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
 import { isNetworkAccessValidationError } from "../905/544659";
 import { ic } from "../905/702716";
@@ -18,7 +18,7 @@ export function $$d10({
   existingExtension: e,
   localExtension: t
 }) {
-  return !!(xQ(e) || t?.manifest.containsWidget);
+  return !!(isWidget(e) || t?.manifest.containsWidget);
 }
 export function $$c6(e, t) {
   return e ? e.manifest : t ? getCurrentPluginVersion(t)?.manifest : void 0;

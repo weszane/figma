@@ -1,13 +1,13 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getI18nString } from "../905/303541";
 import { registerModal } from "../905/102752";
 import { K } from "../1156/668894";
 export let $$d0 = registerModal(function (e) {
   let t = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 386,
     children: jsxs(vo, {

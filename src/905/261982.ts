@@ -1,4 +1,4 @@
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { GA, cE } from "../figma_app/349248";
 export function $$a2(e, t) {
   let i = (e, i) => {
@@ -18,7 +18,7 @@ export function $$a2(e, t) {
     }, t?.variableCollections);
   }
   if ("community" === e.type && e.value?.status === "loaded") {
-    let t = oA(e.value.data.communityLibraryByHubFileId);
+    let t = getResourceDataOrFallback(e.value.data.communityLibraryByHubFileId);
     if (t) return i({
       type: "hubFile",
       file: {
@@ -51,7 +51,7 @@ export function $$l4(e, t) {
     }, t)));
   }
   if ("community" === e.type && e.value?.status === "loaded") {
-    let i = oA(e.value.data.communityLibraryByHubFileId);
+    let i = getResourceDataOrFallback(e.value.data.communityLibraryByHubFileId);
     if (i && i.variableCollections) return $$s3(i.variableCollections.map(e => cE(e, {
       type: "hubFile",
       file: {
@@ -75,7 +75,7 @@ export function $$d0(e, t) {
   if (!i.hubFile) return [];
   {
     let e = i.hubFile;
-    return (oA(e.variableCollections) ?? []).map(i => cE(i, {
+    return (getResourceDataOrFallback(e.variableCollections) ?? []).map(i => cE(i, {
       type: "hubFile",
       file: e
     }, t));
@@ -86,7 +86,7 @@ export function $$c5(e, t) {
   let i = e.data.libraryKeyToFile;
   if (i.hubFile) {
     let e = i.hubFile;
-    let r = oA(e.variableCollections) ?? [];
+    let r = getResourceDataOrFallback(e.variableCollections) ?? [];
     return u({
       type: "hubFile",
       file: e

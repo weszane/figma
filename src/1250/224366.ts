@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
@@ -55,7 +55,7 @@ export function $$f4() {
 export function $$h1(e) {
   let t = $$m0(e);
   let n = useDispatch();
-  let a = U();
+  let a = trackFileEventWithStore();
   let l = n0();
   let u = VS({
     pagesList: l,

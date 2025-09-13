@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { AppStateTsApi } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { gB } from "../905/723791";
+import { createLoadedState } from "../905/723791";
 import { renderI18nText } from "../905/303541";
 import { getObservableValue } from "../figma_app/84367";
 import { WZ } from "../905/893645";
@@ -19,7 +19,7 @@ export function $$j3({
 }) {
   let [t, i] = useAtomValueAndSetter(oh);
   let j = getObservableValue(AppStateTsApi?.figjamState().isShapesSidebarOpen, !1);
-  let b = gB({
+  let b = createLoadedState({
     shapesSidebarOpen: j
   });
   let [y, v] = useState(!1);

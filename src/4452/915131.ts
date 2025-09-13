@@ -11,8 +11,8 @@ import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { ks, tM, vd } from "../figma_app/637027";
-import { qc } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
@@ -202,7 +202,7 @@ export let $$K0 = registerModal(function (e) {
     children: e && e.id !== UNASSIGNED ? jsx(z6, {
       entity: e,
       size: 16
-    }) : jsx(_$$B, {
+    }) : jsx(SvgComponent, {
       svg: _$$A
     })
   });
@@ -335,7 +335,7 @@ export let $$K0 = registerModal(function (e) {
           className: "team_creation_modal--modalSecondStep--L-6u-",
           children: jsx("div", {
             className: "team_creation_modal--loadingState--y80el",
-            children: jsx(qc, {})
+            children: jsx(LoadingOverlay, {})
           })
         }) : jsx("div", {
           children: jsx(Q, {

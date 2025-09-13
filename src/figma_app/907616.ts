@@ -13,11 +13,11 @@ import { getFeatureFlags } from "../905/601108";
 import { truncate } from "../figma_app/930338";
 import { z, Z } from "../905/306088";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FPermissionLevelType, FViewPermissionType, FResourceCategoryType } from "../figma_app/191312";
 import { FEditorType } from "../figma_app/53721";
 import { teamVisibilityEnum } from "../figma_app/630077";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { UNASSIGNED } from "../905/247093";
 import { Ro } from "../figma_app/805373";
 let A = "audience_selector--radioText--OD-3K";
@@ -181,7 +181,7 @@ export function $$M1(e) {
                 children: o[e.value]
               })]
             }), r && jsx(_$$b2, {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": r
             })]
           })
@@ -231,7 +231,7 @@ export function $$F3(e) {
   });
 }
 export function $$j2(e) {
-  return sZ()?.k12_google_org && getFeatureFlags().student_plan_no_hidden_teams ? jsxs(z, {
+  return useCurrentUserOrg()?.k12_google_org && getFeatureFlags().student_plan_no_hidden_teams ? jsxs(z, {
     dataTestId: "org-browsable-team-radio-options",
     value: e.selectedDiscoverability,
     onChange: e.setSelectedDiscoverability,

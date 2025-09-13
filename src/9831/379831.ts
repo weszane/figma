@@ -40,7 +40,7 @@ import { Z as _$$Z } from "../905/27174";
 import eE from "classnames";
 import { R as _$$R2 } from "../905/307199";
 import { dP, M3 } from "../figma_app/119475";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../f2246930/129503";
 import { A as _$$A3 } from "../6828/718668";
 import { o as _$$o } from "../905/153787";
@@ -51,7 +51,7 @@ import { A as _$$A4 } from "../1617/380980";
 import { A as _$$A5 } from "../f2246930/458609";
 import { A as _$$A6 } from "../svg/619883";
 import { A as _$$A7 } from "../svg/821527";
-import { E as _$$E3 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { zr, Pd, _H, io, _t, S3, xK } from "../905/440046";
 var b = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e.NeverFetched = 2] = "NeverFetched", e))(b || {});
 let y = atom(e => {
@@ -790,7 +790,7 @@ function ez({
 function eB(e) {
   let t = {
     className: "toolbar_components--iconButton--1-XNe",
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: e.svg
     }),
     title: e.label,
@@ -1029,15 +1029,15 @@ function e5() {
     padding: 8,
     spacing: 32,
     backgroundColor: "toolbar",
-    children: [name && jsx(_$$E3, {
+    children: [name && jsx(TextWithTruncation, {
       fontWeight: "bold",
       color: "toolbar",
       children: name
     }), metadata && Object.entries(metadata).map(([e, t]) => t && jsxs("span", {
-      children: [jsxs(_$$E3, {
+      children: [jsxs(TextWithTruncation, {
         color: "toolbar-secondary",
         children: [e, ": "]
-      }), jsx(_$$E3, {
+      }), jsx(TextWithTruncation, {
         color: "toolbar",
         fontFamily: "monospace",
         fontWeight: "bold",

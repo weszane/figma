@@ -19,7 +19,7 @@ import { c2 } from "../figma_app/243213";
 import { Uz } from "../905/63728";
 import { sanitizeHtml } from "../905/69245";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { _ as _$$_ } from "../905/142361";
 import { isValidUrl, formatShortcutKey, textToHtmlParagraphs } from "../905/491152";
 import z from "../vendor/128080";
@@ -387,7 +387,7 @@ function H(t) {
     className: t.className,
     "aria-label": `${t.tooltip}`,
     value: t.value,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": `${t.tooltip}${formatShortcutKey(t)}`,
     onKeyDown: t => {
       t.keyCode === Uz.ESCAPE && t.currentTarget.blur();

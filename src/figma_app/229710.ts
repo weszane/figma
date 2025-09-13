@@ -47,13 +47,13 @@ import { V as _$$V } from "../905/823363";
 import { $Y, sI, sH, Yq, Ps, be } from "../figma_app/183248";
 import { logError } from "../905/714362";
 import { g as _$$g } from "../905/151072";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { Xs } from "../figma_app/98483";
 import { hF, QK } from "../figma_app/100987";
 import { z as _$$z } from "../905/282554";
 import eh from "../vendor/805353";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { $1 } from "../905/713371";
 import { f4 } from "../905/690293";
 import { H as _$$H } from "../905/759471";
@@ -107,7 +107,7 @@ function ec(e) {
   return jsx($j, {
     className: _$$z,
     "data-tooltip": "width" === property ? getI18nString("fullscreen.properties_panel.transform_panel.width") : getI18nString("fullscreen.properties_panel.transform_panel.height"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: `scale_panel.${property}`,
     disabled,
     dispatch: _,
@@ -221,7 +221,7 @@ function ey(e) {
     trackScaleToolDismissed,
     trackAnchorPointChange
   } = function () {
-    let e = am();
+    let e = trackFileEventWithUser();
     let t = useCallback(t => {
       e("scale_tool_panel_set_value", {
         key: "height",

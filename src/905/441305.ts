@@ -1,67 +1,148 @@
-import { jsx, jsxs } from 'react/jsx-runtime';
-import { bL, Rq } from '../905/38914';
-import { setupAutofocusHandler } from '../905/128376';
-import { renderI18nText } from '../905/303541';
-import { useModalManager } from '../905/437088';
-import { $n } from '../905/521428';
-import { hE, jk, nB, wi, Y9 } from '../figma_app/272243';
-import { kt } from '../figma_app/858013';
-import { useSetupPlayback } from '../figma_app/878298';
-export function $$p0({
-  open: e,
-  width: t = 'md',
-  title: i = renderI18nText('modal.are_you_sure'),
-  cancelText: p = renderI18nText('modal.cancel'),
-  ...m
-}) {
-  let h = m.autofocusConfirm ?? !m.destructive;
-  let g = useSetupPlayback(m.recordingKey, 'confirm', e => {
-    m.onConfirm(e);
-    e.defaultPrevented || m.onClose();
-  });
-  let f = useSetupPlayback(m.recordingKey, 'cancel', () => {
-    m.onCancel?.();
-    m.onClose();
-  });
-  let _ = useModalManager({
-    open: e,
-    onClose: f
-  });
-  let A = setupAutofocusHandler();
-  return jsx(bL, {
-    manager: _,
-    width: t,
-    height: m.height,
-    children: jsxs(Rq, {
-      onSubmit: g,
-      children: [jsx(Y9, {
-        children: jsx(hE, {
-          children: i
-        })
-      }), jsx(nB, {
-        children: m.children
-      }), jsxs(wi, {
-        children: [m.footerText, jsxs(jk, {
-          children: [jsx($n, {
-            variant: 'secondary',
-            onClick: f,
-            ref: h ? void 0 : A,
-            children: p
-          }), m.isLoading ? jsxs($n, {
-            disabled: !0,
-            children: [jsx(kt, {
-              className: m.loadingText ? 'confirmation_modal--spinnerWithText--8t9yx confirmation_modal--spinner--E3om4' : 'confirmation_modal--spinner--E3om4'
-            }), m.loadingText]
-          }) : jsx($n, {
-            type: 'submit',
-            disabled: m.disableConfirm,
-            variant: m.destructive ? 'destructive' : 'primary',
-            ref: h ? A : void 0,
-            children: m.confirmText
-          })]
-        })]
-      })]
-    })
-  });
+// Original file: /Users/allen/sigma-main/src/905/441305.ts
+// Refactored to improve readability, add types, and organize logic.
+// Original function: $$p0, now renamed to ConfirmationModal for clarity.
+// Original export: R, updated to match new name.
+
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { ModalFormContents, ModalRootComponent } from '../905/38914'
+import { setupAutofocusHandler } from '../905/128376'
+import { renderI18nText } from '../905/303541'
+import { useModalManager } from '../905/437088'
+import { Button } from '../905/521428'
+import { hE, jk, nB, wi, Y9 } from '../figma_app/272243'
+import { LoadingSpinner } from '../figma_app/858013'
+import { useSetupPlayback } from '../figma_app/878298'
+
+// Define props interface for better type safety
+interface ConfirmationModalProps {
+  open: boolean
+  width?: 'sm' | 'md' | 'lg' | string // Assuming common widths, adjust as needed
+  title?: string
+  cancelText?: string
+  autofocusConfirm?: boolean
+  destructive?: boolean
+  recordingKey?: string
+  onConfirm: (event: any) => void
+  onClose: () => void
+  onCancel?: () => void
+  height?: string
+  children?: React.ReactNode
+  footerText?: React.ReactNode
+  isLoading?: boolean
+  loadingText?: string
+  disableConfirm?: boolean
+  confirmText?: string
 }
-export const R = $$p0;
+
+/**
+ * ConfirmationModal component for displaying a modal with confirm/cancel actions.
+ * Original: $$p0
+ * @param props - The props for the modal.
+ * @returns JSX element.
+ */
+export function ConfirmationModal(props: ConfirmationModalProps) {
+  const {
+    open,
+    width = 'md',
+    title = renderI18nText('modal.are_you_sure'),
+    cancelText = renderI18nText('modal.cancel'),
+    autofocusConfirm,
+    destructive,
+    recordingKey,
+    onConfirm,
+    onClose,
+    onCancel,
+    height,
+    children,
+    footerText,
+    isLoading,
+    loadingText,
+    disableConfirm,
+    confirmText,
+  } = props
+
+  // Determine autofocus based on props
+  const shouldAutofocusConfirm = autofocusConfirm ?? !destructive
+
+  // Setup playback handlers
+  const handleConfirm = useSetupPlayback(recordingKey, 'confirm', (event: any) => {
+    onConfirm(event)
+    if (!event.defaultPrevented) {
+      onClose()
+    }
+  })
+
+  const handleCancel = useSetupPlayback(recordingKey, 'cancel', () => {
+    onCancel?.()
+    onClose()
+  })
+
+  // Modal manager
+  const modalManager = useModalManager({
+    open,
+    onClose: handleCancel,
+  })
+
+  // Autofocus handler
+  const autofocusRef = setupAutofocusHandler()
+
+  return jsx(ModalRootComponent, {
+    manager: modalManager,
+    width,
+    height,
+    children: jsxs(ModalFormContents, {
+      onSubmit: handleConfirm,
+      children: [
+        jsx(Y9, {
+          children: jsx(hE, {
+            children: title,
+          }),
+        }),
+        jsx(nB, {
+          children,
+        }),
+        jsxs(wi, {
+          children: [
+            footerText,
+            jsxs(jk, {
+              children: [
+                jsx(Button, {
+                  variant: 'secondary',
+                  onClick: handleCancel,
+                  ref: shouldAutofocusConfirm ? undefined : autofocusRef,
+                  children: cancelText,
+                }),
+                isLoading
+                  ? (
+                      jsxs(Button, {
+                        disabled: true,
+                        children: [
+                          jsx(LoadingSpinner, {
+                            className: loadingText
+                              ? 'confirmation_modal--spinnerWithText--8t9yx confirmation_modal--spinner--E3om4'
+                              : 'confirmation_modal--spinner--E3om4',
+                          }),
+                          loadingText,
+                        ],
+                      })
+                    )
+                  : (
+                      jsx(Button, {
+                        type: 'submit',
+                        disabled: disableConfirm,
+                        variant: destructive ? 'destructive' : 'primary',
+                        ref: shouldAutofocusConfirm ? autofocusRef : undefined,
+                        children: confirmText,
+                      })
+                    ),
+              ],
+            }),
+          ],
+        }),
+      ],
+    }),
+  })
+}
+
+// Update export to match refactored name
+export const R = ConfirmationModal

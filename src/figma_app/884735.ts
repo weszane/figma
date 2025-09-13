@@ -22,7 +22,7 @@ import { j7 } from "../905/929976";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { o3, nt } from "../905/226610";
 import { Sh } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { FX } from "../figma_app/831569";
 import { pG, DE } from "../figma_app/811257";
 import { p as _$$p } from "../905/427409";
@@ -128,7 +128,7 @@ export function $$H0(e) {
     eventListeners: ["onMouseDown"],
     children: jsx("div", {
       className: V_,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-offset-x": (() => {
         if ($.current && q.current) return $.current.offsetLeft + $.current.offsetWidth / 2 - (q.current.offsetLeft + q.current.offsetWidth / 2);
       })(),
@@ -199,7 +199,7 @@ export function $$z1(e) {
     recordingKey: "selectContainingInstance",
     htmlAttributes: {
       "data-tooltip": getI18nString("design_systems.component_properties.go_to_property"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$A, {})
   });
@@ -217,7 +217,7 @@ function W(e) {
     recordingKey: "deleteComponentPropRef",
     htmlAttributes: {
       "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-onboarding-key": FX
     },
     children: jsx(_$$U, {})

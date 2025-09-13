@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Pf, H8 } from "../905/590952";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { W } from "../figma_app/54182";
 let l = Pf.MEDIUM20;
 export function $$o0(e) {
@@ -12,7 +12,7 @@ export function $$o0(e) {
     className: "avatars_pile--viewersList--nxwgy",
     children: [e.totalNum - t.length > 0 && jsx("div", {
       className: "avatars_pile--horizontalPileNumber--6h3zK avatars_pile--baseNumber--Qqq-z",
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": o,
       children: e.totalNum - t.length
     }), t.reverse().map(t => jsx("div", {

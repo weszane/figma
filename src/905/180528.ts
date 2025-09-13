@@ -8,7 +8,7 @@ import { h as _$$h } from "../905/207101";
 import { Uz } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { ph } from "../figma_app/709893";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
@@ -18,9 +18,9 @@ import { L1, KP } from "../figma_app/12491";
 import { b as _$$b } from "../905/217163";
 import { E as _$$E } from "../905/511388";
 import { fd } from "../figma_app/255679";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { B as _$$B } from "../905/506188";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { X } from "../905/257331";
 import { B as _$$B2 } from "../905/146468";
 import { tq, kz, d_ } from "../905/691188";
@@ -151,7 +151,7 @@ export function $$O1({
         children: [jsx(ph, {
           text: j,
           tooltipPropsWhenTruncated: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": j,
             "data-tooltip-show-immediately": !0
           }
@@ -171,7 +171,7 @@ function D({
   teamId: i,
   teamName: r
 }) {
-  let a = dq();
+  let a = useCurrentUserOrgId();
   if (!e && !i) return null;
   let s = `/files/${a}/workspace/${e}/`;
   let o = i ? a ? `/files/${a}/team/${i}` : `/files/team/${i}` : null;
@@ -196,7 +196,7 @@ export function $$L0(e) {
     className: "subscription_file_view_header--componentOrFileViewHeader--jxKql",
     children: [jsx(c, {
       label: getI18nString("design_systems.libraries_modal.header_label_missing")
-    }), jsx(B, {
+    }), jsx(SvgComponent, {
       svg: _$$A,
       className: "subscription_file_view_header--backCaret--nwuU8",
       onMouseDown: e.backToList,
@@ -205,7 +205,7 @@ export function $$L0(e) {
       tabIndex: 0
     }), jsxs("div", {
       className: "subscription_file_view_header--missingLibrariesHeader--hQ7Uu text--fontPos13--xW8hS text--_fontBase--QdLsd",
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         className: "subscription_file_view_header--missingLibrariesIcon--AZ8iW replace_libraries_modal--missingLibrariesIcon--1oNrW",
         svg: _$$A2
       }), renderI18nText("design_systems.libraries_modal.plural.missing_library", {

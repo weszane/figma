@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getSupportEmail } from "../figma_app/169182";
@@ -62,7 +62,7 @@ function j(e) {
       style: {
         marginLeft: "20px"
       },
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "link",
         onClick: () => o(t.id, "saml_tenant_id_copied_to_clipboard"),
         children: renderI18nText("org_settings.sso.copy")
@@ -95,7 +95,7 @@ function j(e) {
   let j = !!e.orgSamlConfig.idp_name;
   let y = useCallback(() => {
     let t = _g(e.org) === Ct.SAML;
-    return jsx($n, {
+    return jsx(Button, {
       disabled: t,
       onClick: a,
       children: j ? "Edit configuration" : "Configure SAML"
@@ -176,7 +176,7 @@ export let $$y0 = registerModal(function (e) {
           orgSamlConfig: s
         }), jsxs("div", {
           className: Yy,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: () => {
               t(showModalHandler({
@@ -190,7 +190,7 @@ export let $$y0 = registerModal(function (e) {
               }));
             },
             children: renderI18nText("org_settings.sso.edit_configuration")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: c,
             children: renderI18nText("org_settings.sso.done")
           })]

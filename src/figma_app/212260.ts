@@ -7,7 +7,7 @@ import l from "classnames";
 import { R as _$$R } from "../figma_app/313269";
 import { c$ } from "../figma_app/236327";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { JZ } from "../figma_app/696043";
 import { af } from "../figma_app/559491";
@@ -22,7 +22,7 @@ import { Kx } from "../figma_app/546509";
 import { oh } from "../905/18797";
 import { getPluginVersion } from "../figma_app/300692";
 import { Vq } from "../figma_app/979658";
-import { bD, m3 } from "../figma_app/45218";
+import { ResourceType, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r } from "../905/319631";
 import { Cf } from "../905/504727";
@@ -54,13 +54,13 @@ export function $$G2(e) {
   useEffect(() => {
     l || w(af({
       id: r,
-      resourceType: bD.WIDGET
+      resourceType: ResourceType.WIDGET
     }));
   }, [r, w, l]);
   let J = _$$b();
   if (oh(af.loadingKeyForPayload({
     id: r,
-    resourceType: bD.WIDGET
+    resourceType: ResourceType.WIDGET
   })) && !l) return jsx(_$$L, {});
   if (!l) return null;
   let Z = getPluginVersion(l);
@@ -68,8 +68,8 @@ export function $$G2(e) {
     name: "detail",
     properties: {
       resourceId: e.id,
-      isMonetized: m3(l),
-      resourceType: bD.WIDGET,
+      isMonetized: hasMonetizedResourceMetadata(l),
+      resourceType: ResourceType.WIDGET,
       editorType: "figjam"
     },
     children: [jsx(_$$P, {
@@ -101,7 +101,7 @@ export function $$G2(e) {
       className: P0,
       href: `/community/widget/${r}`,
       trusted: !0,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A,
         className: JX
       }), renderI18nText("whiteboard.inserts.see_more_details_in_community")]
@@ -119,7 +119,7 @@ export function $$G2(e) {
             data: {
               error: j.error,
               dispatch: w,
-              resourceType: bD.WIDGET
+              resourceType: ResourceType.WIDGET
             },
             showModalsBeneath: !0
           })) : w(showModalHandler({

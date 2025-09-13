@@ -1,14 +1,14 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, Fragment as _$$Fragment } from "react";
 import { bL, gZ } from "../905/598775";
-import { $n } from "../905/521428";
-import { E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { getTranslatedDynamicContent, renderI18nText } from "../905/303541";
 import { d as _$$d } from "../5430/535653";
 import { Rt } from "../figma_app/979658";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { cX } from "../figma_app/920333";
 import { q } from "../1291/18399";
 import { L } from "../figma_app/520315";
@@ -35,21 +35,21 @@ export function $$y0(e) {
   if (!shelves || 0 === shelves.length) return null;
   if (isLoading) return jsx(L, {});
   let S = Rt.PLUGINS;
-  e.resourceType === bD.HUB_FILE ? (t = sk, S = Rt.TEMPLATES) : e.resourceType === bD.WIDGET ? (t = xC, S = Rt.WIDGETS) : t = void 0;
+  e.resourceType === ResourceType.HUB_FILE ? (t = sk, S = Rt.TEMPLATES) : e.resourceType === ResourceType.WIDGET ? (t = xC, S = Rt.WIDGETS) : t = void 0;
   return jsxs(Fragment, {
     children: [shelves.map(s => {
       let d = j[s.id];
       return jsxs(_$$Fragment, {
         children: [jsx(F, {}), getFeatureFlags().fpl_card_primitive_migration ? jsxs(bL, {
           className: c()(H6, {
-            [xO]: e.resourceType === bD.PLUGIN
+            [xO]: e.resourceType === ResourceType.PLUGIN
           }),
           children: [jsx("div", {
             className: bV,
             children: getTranslatedDynamicContent(s.i18n_meta.title, s.title)
           }), jsx(gZ, {
             className: jy,
-            children: jsx($n.Link, {
+            children: jsx(Button.Link, {
               onClick: () => y({
                 id: s.id,
                 title: s.title,
@@ -58,9 +58,9 @@ export function $$y0(e) {
               children: renderI18nText("whiteboard.inserts.see_all")
             })
           })]
-        }) : jsxs(E, {
+        }) : jsxs(ButtonPrimitive, {
           className: c()(a0, {
-            [xO]: e.resourceType === bD.PLUGIN
+            [xO]: e.resourceType === ResourceType.PLUGIN
           }),
           onClick: () => y({
             id: s.id,

@@ -23,8 +23,8 @@ import { n as _$$n, HR, Cj } from "../figma_app/740025";
 import { mapUserRoleToOrgUserRoleAlias } from "../figma_app/12796";
 import { N as _$$N } from "../905/696711";
 import { Il } from "../figma_app/502247";
-import { hm } from "../905/380385";
-import { Qv } from "../figma_app/45218";
+import { NEW_COMMENT_ID } from "../905/380385";
+import { CommentTabType } from "../figma_app/45218";
 import { OrgUserRoleEnum } from "../figma_app/35887";
 import { s as _$$s2 } from "../905/608932";
 import { Oo, HZ, cr } from "../905/926523";
@@ -99,8 +99,8 @@ let K = (e, t) => {
 let $$Y24 = createOptimistThunk((e, t) => {
   if (!hasMorePages(t)) return;
   let r = `/api/${_$$n(t.resourceType)}/${t.resourceId}/comments`;
-  t.selectedCommentId && t.selectedCommentId !== hm && !t.pagination?.selected_comment && (r = K(r, `selected_comment_id=${t.selectedCommentId}`));
-  t.activeFeedType === Qv.ME && (r = K(r, `feed_type=${t.activeFeedType}`), void 0 === t.numCommentsForResource && (r = K(r, "include_total_count=true")));
+  t.selectedCommentId && t.selectedCommentId !== NEW_COMMENT_ID && !t.pagination?.selected_comment && (r = K(r, `selected_comment_id=${t.selectedCommentId}`));
+  t.activeFeedType === CommentTabType.ME && (r = K(r, `feed_type=${t.activeFeedType}`), void 0 === t.numCommentsForResource && (r = K(r, "include_total_count=true")));
   fetchPaginatedData(r, t.pageSizeOverride ?? DEFAULT_PAGE_SIZE, t, PAGINATION_NEXT).then(e => {
     let r = !e.selected_comment || e.comments.find(t => t.id === e.selected_comment?.id);
     let {

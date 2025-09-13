@@ -1,10 +1,10 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { bytesToHex } from "../905/125019";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
 import { RecordingPureComponent, handleKeyboardEvent, handleMouseEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { getFillColor } from "../figma_app/80990";
@@ -84,7 +84,7 @@ let T = forwardRef(function ({
     backgroundColor: "white",
     backgroundImage: background
   };
-  return !i && b4(r) ? jsx(_$$E, {
+  return !i && b4(r) ? jsx(ButtonPrimitive, {
     style: u,
     "aria-label": function (e) {
       if (e) switch (e.type) {
@@ -170,7 +170,7 @@ class L extends RecordingPureComponent {
         shouldGenerateLocalThumbnail: !0,
         className: _$$s.wFull.$
       });
-      return b4(this.props) ? jsx(_$$E, {
+      return b4(this.props) ? jsx(ButtonPrimitive, {
         ...this.generateContainerProps(),
         "aria-label": j(t),
         children: r
@@ -179,16 +179,16 @@ class L extends RecordingPureComponent {
         children: r
       });
     }
-    return b4(this.props) ? jsx(_$$E, {
+    return b4(this.props) ? jsx(ButtonPrimitive, {
       ...this.generateContainerProps(),
       "aria-label": j(t),
-      children: t?.type === "PATTERN" ? jsx(B, {
+      children: t?.type === "PATTERN" ? jsx(SvgComponent, {
         svg: _$$A,
         className: X3
       }) : jsx(Fragment, {})
     }) : jsx("div", {
       ...this.generateContainerProps(),
-      children: t?.type === "PATTERN" ? jsx(B, {
+      children: t?.type === "PATTERN" ? jsx(SvgComponent, {
         svg: _$$A,
         className: X3
       }) : jsx(Fragment, {})
@@ -258,7 +258,7 @@ class F extends RecordingPureComponent {
     return this.props.nonInteractive ? jsx("div", {
       ...this.props.generateContainerProps(),
       children: t
-    }) : jsx(_$$E, {
+    }) : jsx(ButtonPrimitive, {
       ...this.props.generateContainerProps(),
       "aria-label": j(this.props.paint),
       children: t

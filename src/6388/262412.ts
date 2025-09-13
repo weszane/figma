@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { w2 } from "../figma_app/178475";
 export function $$a0({
-  "data-tooltip-type": e = Ib.TEXT,
+  "data-tooltip-type": e = KindEnum.TEXT,
   ...t
 }) {
   return jsx(w2, {

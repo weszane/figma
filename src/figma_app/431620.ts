@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { sg } from "../figma_app/48566";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var l = o;
 var $$u2 = (e => (e[e.Toggle = 0] = "Toggle", e[e.DialogTrigger = 1] = "DialogTrigger", e))($$u2 || {});
 var $$p1 = (e => (e[e.PurpleActive = 0] = "PurpleActive", e[e.RainbowActive = 1] = "RainbowActive", e))($$p1 || {});
@@ -42,7 +42,7 @@ export function $$_0(e) {
     default:
       throwTypeError(buttonType);
   }
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     "aria-disabled": I,
     "aria-hidden": I,
     "aria-label": tooltipText,
@@ -56,7 +56,7 @@ export function $$_0(e) {
     htmlAttributes: {
       "data-onboarding-key": onboardingKey,
       "data-testid": e["data-testid"],
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": !I || showTooltipWhenDisabled ? tooltipText : void 0,
       "data-tooltip-shortcut": tooltipShortcut,
       "data-tooltip-show-above": !0,

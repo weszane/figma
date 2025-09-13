@@ -57,7 +57,7 @@ import { s as _$$s4 } from "../9410/760762";
 import { Lx, v7 } from "../9410/896213";
 import { w as _$$w } from "../9410/519056";
 import { xG } from "../figma_app/121043";
-import { $n, WW, IK } from "../905/521428";
+import { Button, ButtonLarge, ButtonWide } from "../905/521428";
 import { P as _$$P } from "../905/143421";
 import { x as _$$x } from "../905/764527";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManager } from "../figma_app/27355";
@@ -82,7 +82,7 @@ import { F as _$$F2 } from "../905/877554";
 import { Q as _$$Q2, ic as _$$ic } from "../figma_app/688398";
 import { A as _$$A2 } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
-import { sZ as _$$sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { ol as _$$ol } from "../figma_app/598018";
 import { D as _$$D2 } from "../7222/938408";
@@ -100,12 +100,12 @@ import { _r, el as _$$el, VG, J as _$$J3, D as _$$D3 } from "../figma_app/451499
 import { Ro, jK, QD } from "../9410/60886";
 import { isNotNullish } from "../figma_app/95419";
 import { J as _$$J4 } from "../905/129695";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { _ as _$$_3 } from "../905/263184";
 import { x as _$$x2 } from "../905/587214";
 import { N as _$$N } from "../905/7587";
 import { lQ as _$$lQ } from "../905/934246";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Y as _$$Y } from "../905/1768";
 import { g2 } from "../9410/341455";
 import { u as _$$u2 } from "../441/357009";
@@ -206,7 +206,7 @@ import rJ from "../vendor/128080";
 import { analyticsEventManager } from "../905/449184";
 import { reportError } from "../905/11";
 import { u4 } from "../figma_app/991591";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P2 } from "../905/347284";
 import { sx as _$$sx } from "../905/941192";
 import { d as _$$d2 } from "../9410/847929";
@@ -382,7 +382,7 @@ import { wF } from "../figma_app/257798";
 import { deepEqual } from "../905/382883";
 import { t as _$$t4 } from "../905/398894";
 import { y as _$$y2 } from "../905/225297";
-import { B as _$$B6 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Kl, vx, OU } from "../figma_app/175258";
 import { u as _$$u7 } from "../642/560546";
 import { M as _$$M } from "../6388/719644";
@@ -1674,7 +1674,7 @@ function tV({
   onClick: t,
   disabled: i
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     variant: "primary",
     onClick: t,
     disabled: i,
@@ -2202,14 +2202,14 @@ function ie({
 }) {
   return jsxs("div", {
     className: "x78zum5 x1rjybxy x1ger3g x1phlbz0 x1odjw0f xnuq7ks",
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       ...xk(t6.minimizedPromptDisplay),
       onClick: t,
       children: e
-    }), i && jsx(_$$E, {
+    }), i && jsx(ButtonPrimitive, {
       onClick: l,
       children: jsx(_$$k2, {})
-    }), n && jsx(_$$E, {
+    }), n && jsx(ButtonPrimitive, {
       onClick: s,
       children: jsx(_$$_3, {})
     })]
@@ -2239,11 +2239,11 @@ function ii({
 function ir({
   onClick: e
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ...xk(t3.attachmentPlusButton),
     onClick: e,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": "Attachments coming soon"
     },
     children: jsx(_$$x2, {})
@@ -2253,7 +2253,7 @@ function il({
   disabled: e,
   onClick: t
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ...xk(e ? t3.disabledButton : t3.submitButton),
     onClick: t,
     disabled: e,
@@ -2286,11 +2286,11 @@ function ia() {
   let a = useCallback(() => {
     t(e => !e);
   }, [t]);
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     ...Ay.props(is.templateSelect, e ? is.templateSelectActive : null),
     onClick: a,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": "Select a template",
       "data-tooltip-offset-y": "-2px",
       "data-tooltip-show-above": !0
@@ -2418,7 +2418,7 @@ function ip() {
     } = JY();
     let d = function () {
       let e = selectCurrentUser();
-      let t = _$$sZ();
+      let t = useCurrentUserOrg();
       let i = _$$ol();
       return {
         date: new Date().toISOString().split("T")[0] ?? "",
@@ -2480,7 +2480,7 @@ function ip() {
   let {
     state
   } = wj(JT.SLIDES_GENERATE_OUTLINE);
-  return jsx(WW, {
+  return jsx(ButtonLarge, {
     onClick: n,
     iconPrefix: jsx(_$$x, {}),
     disabled: !isTemplateLoaded || !i || tu(i) || state === qy.RUNNING,
@@ -2744,7 +2744,7 @@ var i0 = (e => (e[e.FULL = 0] = "FULL", e[e.OUTLINE_ONLY = 1] = "OUTLINE_ONLY", 
     return jsxs("div", {
       className: iY,
       "data-tooltip": t,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       children: [jsxs(D8, {
         "aria-controls": "expandable-section-content",
         "aria-expanded": l,
@@ -2986,7 +2986,7 @@ function nj({
         children: jsx(W0, {
           ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
           "data-tooltip": getI18nString("slides.properties_panel.object_animations.duration"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: i,
           dropdownShown: n,
           formatter: ny,
@@ -3488,7 +3488,7 @@ function nH({
         "aria-label": getI18nString("slides.properties_panel.object_animations.delete_button.aria_label"),
         htmlAttributes: {
           "data-tooltip": getI18nString("slides.properties_panel.object_animations.delete_button.tooltip"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         recordingKey: i,
         children: jsx(_$$z, {})
@@ -3830,7 +3830,7 @@ function nQ({
     "aria-label": getI18nString("slides.properties_panel.object_animations.bulk_delete_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": getI18nString("slides.properties_panel.object_animations.bulk_delete_button.tooltip"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     onClick: _$$nc.user("delete-selected-slide-object-animations", o),
     recordingKey: generateRecordingKey(n, "bulkDeleteButton"),
@@ -3853,7 +3853,7 @@ function nX({
     "aria-label": getI18nString("slides.properties_panel.object_animations.play_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": getI18nString("slides.properties_panel.object_animations.play_button.tooltip"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     onClick: s,
     recordingKey: generateRecordingKey(t, "playButton"),
@@ -3875,7 +3875,7 @@ function nZ({
     "aria-label": getI18nString("slides.properties_panel.object_animations.plus_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": t,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-immediately": !d,
       "data-tooltip-max-width": "200"
     },
@@ -4011,7 +4011,7 @@ function rh({
 }) {
   return HW() ? jsx("div", {
     className: "xy3p2pi",
-    children: jsx($n, {
+    children: jsx(Button, {
       onClick: _$$nc.user("slides-ungroup", () => {
         let t = getSingletonSceneGraph().get(e);
         t && function (e) {
@@ -4363,7 +4363,7 @@ function lT({
   return jsxs("section", {
     "aria-label": getI18nString("slides.speaker_notes.title"),
     className: "speaker_notes_lexical_editor--editableWrapper--N5dWt",
-    children: [n && jsx(_$$E, {
+    children: [n && jsx(ButtonPrimitive, {
       ref: a,
       className: "speaker_notes_lexical_editor--visuallyHiddenButton--Yxm6k",
       onClick: e => {
@@ -4411,7 +4411,7 @@ function lI({
   onClick: e
 }) {
   return jsx(ScreenReaderOnly, {
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       onClick: e,
       children: getI18nString("slides.toolbar.show_presenter_notes")
     })
@@ -4633,7 +4633,7 @@ function lw({
   };
   let a = useMemo(() => e && isSlidesAiEnabled && i && !n ? jsxs("div", {
     className: _$$s5.flex.justifyBetween.$,
-    children: [getI18nString("slides.speaker_notes.placeholder"), jsxs(_$$E, {
+    children: [getI18nString("slides.speaker_notes.placeholder"), jsxs(ButtonPrimitive, {
       className: "speaker_notes_overlay--generateButton--OoZBZ",
       onClick: () => s(),
       children: [jsx(_$$B2, {}), getI18nString("slides.speaker_notes.draft"), jsx("div", {
@@ -4646,7 +4646,7 @@ function lw({
     })]
   }) : e && isSlidesAiEnabled && n ? jsxs("div", {
     className: _$$s5.flex.gap8.$,
-    children: [jsx(kt, {
+    children: [jsx(LoadingSpinner, {
       size: "small"
     }), getI18nString("slides.speaker_notes.loading")]
   }) : e ? getI18nString("slides.speaker_notes.placeholder") : getI18nString("slides.speaker_notes.no-notes-placeholder"), [e, isSlidesAiEnabled, i, n]);
@@ -5021,7 +5021,7 @@ function sg({
         },
         children: jsx(W0, {
           "data-tooltip": getI18nString("slides.properties_panel.slide_transition.delay"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           dispatch: i,
           dropdownShown: n,
           enablePreview: !0,
@@ -5065,7 +5065,7 @@ function sb({
         children: jsx(W0, {
           ariaLabel: getI18nString("slides.properties_panel.slide_transition.duration"),
           "data-tooltip": getI18nString("slides.properties_panel.slide_transition.duration"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           disabled: st(t),
           dispatch: n,
           dropdownShown: l,
@@ -5206,7 +5206,7 @@ function sP({
         "aria-label": getI18nString("slides.properties_panel.slide_transitions.delete_button.aria_label"),
         htmlAttributes: {
           "data-tooltip": getI18nString("slides.properties_panel.slide_transitions.delete_button.tooltip"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         recordingKey: generateRecordingKey(t, "deleteButton"),
         children: jsx(_$$z, {})
@@ -5445,7 +5445,7 @@ function sU({
           })
         })
       }), jsx(sV, {
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: "secondary",
           onClick: () => {
             var t;
@@ -5511,7 +5511,7 @@ function as({
         recordingKey: e
       }), jsx("div", {
         className: "xq1n1xh x1db2dqx x1xmf6yo x12nagc",
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           onClick: () => {
             fullscreenValue.triggerActionInUserEditScope("insert-slide-numbers-all-slides");
             t(VisualBellActions.enqueue({
@@ -6385,12 +6385,12 @@ function oN({
             spacing: p.current ? "auto" : void 0,
             padding: 16,
             children: p.current && jsxs(Fragment, {
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 onClick: () => h(!x),
                 recordingKey: generateRecordingKey(t, "showHideOptionsButton"),
                 children: x ? renderI18nText("design_systems.create_style.hide_options") : renderI18nText("design_systems.create_style.show_more_options")
-              }), jsx($n, {
+              }), jsx(Button, {
                 onClick: j,
                 disabled: !styleRef,
                 recordingKey: generateRecordingKey(t, "createStyleButton"),
@@ -6545,7 +6545,7 @@ function o$({
           recordingKey: generateRecordingKey(o, "addStyleButton"),
           htmlAttributes: {
             "data-tooltip": getI18nString("slides.properties_panel.text_style.create_new_style"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$e5, {})
         })]
@@ -6704,7 +6704,7 @@ function oG({
     children: [jsx("div", {
       className: oK,
       children: d
-    }), jsxs(_$$E, {
+    }), jsxs(ButtonPrimitive, {
       className: oV,
       onClick: i,
       children: [jsx(_$$l2, {}), c]
@@ -6819,9 +6819,9 @@ function oW({
     })]
   }) : renderI18nText("design_systems.styles.custom");
   return jsxs("div", {
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("slides.properties_panel.text_style.tooltip")
       },
       recordingKey: d,
@@ -7006,7 +7006,7 @@ function o0({
       editScopeType: SourceType.USER
     }), Fullscreen?.selectStyle(_$$n5.INVALID, _$$IA.INVALID), fullscreenValue.triggerAction("commit"));
   };
-  return jsx($n, {
+  return jsx(Button, {
     variant: "primary",
     onClick: h,
     recordingKey: generateRecordingKey(t, "saveButton"),
@@ -7062,7 +7062,7 @@ function o1({
       }), jsx(o8, {
         recordingKey: e
       }), !u && jsx(Ad, {
-        input: jsx(IK, {
+        input: jsx(ButtonWide, {
           variant: "secondary",
           onClick: () => p(!0),
           recordingKey: generateRecordingKey(e, "showDetails"),
@@ -7301,7 +7301,7 @@ function o6({
 }) {
   return jsx(_$$E5, {
     name: s,
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       className: iG()("slides_type_panel--formatButton--71QdB", _$$t3, {
         "slides_type_panel--selected--dHazD": e,
         "slides_type_panel--disabled--Vd8xM": t
@@ -7310,7 +7310,7 @@ function o6({
       "aria-label": l,
       recordingKey: a,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": l
       },
       disabled: t,
@@ -7618,7 +7618,7 @@ function df({
       DASHED_BIG: {
         value: [20, 24],
         displayText: getI18nString("slides.properties_panel.border_panel.style_dashed_big"),
-        icon: jsx(_$$B6, {
+        icon: jsx(SvgComponent, {
           svg: _$$A0,
           className: _$$s5.colorIconSecondary.$
         })
@@ -7626,7 +7626,7 @@ function df({
       DASHED_SMALL: {
         value: [8, 10],
         displayText: getI18nString("slides.properties_panel.border_panel.style_dashed_small"),
-        icon: jsx(_$$B6, {
+        icon: jsx(SvgComponent, {
           svg: _$$A1,
           className: _$$s5.colorIconSecondary.$
         })
@@ -7788,7 +7788,7 @@ function dv({
     children: jsx(YZ, {
       bigNudgeAmount,
       "data-tooltip": getI18nString("slides.properties_panel.border_panel.width_slider_tooltip"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: d,
       dropdownShown: u,
       enablePreview: !0,
@@ -7884,7 +7884,7 @@ function dO({
       },
       children: jsxs(YZ, {
         "data-tooltip": getI18nString("slides.properties_panel.corner_radius"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: n,
         dropdownShown: a,
         enablePreview: !0,
@@ -8334,7 +8334,7 @@ function cd() {
     manager,
     children: [jsx("div", {
       className: "x78zum5 x1ikimyq",
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         ...getTriggerProps(),
         variant: "secondary",
         children: jsxs("span", {
@@ -8830,7 +8830,7 @@ function cL({
             },
             children: jsx(xW, {
               "data-tooltip": getI18nString("slides.properties_panel.opacity"),
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               dispatch: t,
               dropdownShown: i,
               enablePreview: !0,

@@ -1,8 +1,8 @@
 import { canViewTeam } from "../figma_app/642025";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { AccessLevelEnum } from "../905/557142";
-import { C0 } from "../figma_app/756995";
-import { DQ, Pw } from "../figma_app/121751";
+import { SortField } from "../figma_app/756995";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 let $$d = "temp-";
 export function $$c1(e, t) {
@@ -62,7 +62,7 @@ export function $$$$S5(e) {
 export function $$v8(e, t) {
   return {
     tileSortFilterConfig: t.folders.byId[e] || t.folders.$$default,
-    sortKeys: [C0.NAME, C0.CREATED_AT, C0.TOUCHED_AT]
+    sortKeys: [SortField.NAME, SortField.CREATED_AT, SortField.TOUCHED_AT]
   };
 }
 export function $$A9(e, t, r, i, a, s, d) {
@@ -72,7 +72,7 @@ export function $$A9(e, t, r, i, a, s, d) {
     oldValue: c,
     newValue: a,
     enableShadowRead: d,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     maxReports: 5,
     contextArgs: {
       currentTeamId: i.currentTeamId,

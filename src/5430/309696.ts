@@ -9,8 +9,8 @@ import { showModalHandler } from "../905/156213";
 import { R$ } from "../figma_app/86989";
 import { selectCurrentUser } from "../905/372672";
 import { Yj } from "../figma_app/951233";
-import { U, xQ } from "../figma_app/45218";
-import { Uv } from "../905/54385";
+import { hasClientMeta, isWidget } from "../figma_app/45218";
+import { isSubscription } from "../905/54385";
 import { bX } from "../figma_app/792917";
 import { cU, ox, ab } from "../figma_app/870683";
 import { dOH } from "../figma_app/27776";
@@ -35,12 +35,12 @@ parsePxInt(dOH);
 class b extends PureComponent {
   constructor() {
     super(...arguments);
-    this.getSubjectBodyForResource = () => U(this.props.resource) ? {
+    this.getSubjectBodyForResource = () => hasClientMeta(this.props.resource) ? {
       resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_file"),
       resourceBody: getI18nString("community.reporting.i_want_to_report_this_file_for_violating_the_community_guidelines_resource_url", {
         resourceUrl: cU(this.props.resource.id)
       })
-    } : xQ(this.props.resource) ? {
+    } : isWidget(this.props.resource) ? {
       resourceSubject: getI18nString("community.reporting.reporting_an_inappropriate_widget"),
       resourceBody: getI18nString("community.reporting.i_want_to_report_this_widget_for_violating_the_community_guidelines_resource_url", {
         resourceUrl: ox(this.props.resource.id)
@@ -111,7 +111,7 @@ export function $$C1(e) {
   let t = R$(e.resource);
   let r = "Detail View - View Order Details";
   let i = getI18nString("community.buyer.view_order_details");
-  Uv(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = getI18nString("community.buyer.manage_subscription"));
+  isSubscription(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = getI18nString("community.buyer.manage_subscription"));
   return jsx(Ph, {
     className: _1,
     onClick: () => t(),

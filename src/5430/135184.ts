@@ -5,7 +5,7 @@ import { VisualBellActions } from "../905/302958";
 import { dx, Nn, MZ } from "../figma_app/399472";
 import { A, jT } from "../figma_app/711113";
 import { getPluginMetadata } from "../figma_app/300692";
-import { xQ, I0 } from "../figma_app/45218";
+import { isWidget, isPlugin } from "../figma_app/45218";
 import { vR } from "../5430/309696";
 export function $$m0({
   pluginId: e,
@@ -19,8 +19,8 @@ export function $$m0({
     children: jsx(vR, {
       onClickAccept: () => {
         r(dx({
-          widget_id: xQ(m) ? m.id : void 0,
-          plugin_id: I0(m) ? m.id : void 0,
+          widget_id: isWidget(m) ? m.id : void 0,
+          plugin_id: isPlugin(m) ? m.id : void 0,
           src: Nn.COMMUNITY_PAGE
         }));
         r(VisualBellActions.enqueue({
@@ -29,8 +29,8 @@ export function $$m0({
       },
       onClickDecline: () => {
         r(MZ({
-          widget_id: xQ(m) ? m.id : void 0,
-          plugin_id: I0(m) ? m.id : void 0,
+          widget_id: isWidget(m) ? m.id : void 0,
+          plugin_id: isPlugin(m) ? m.id : void 0,
           src: Nn.COMMUNITY_PAGE
         }));
         r(VisualBellActions.enqueue({

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { fu } from "../figma_app/831799";
@@ -36,7 +36,7 @@ export function $$u0({
       children: [d && jsx("div", {
         className: _$$s.colorTextSecondary.pb1.$,
         children: d
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: i ? "secondary" : "primary",
         onClick: () => {
           i && e.sharingGroupId ? c.deleteSharingGroupById({

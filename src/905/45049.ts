@@ -10,7 +10,7 @@ import { CZ } from "../905/294085";
 import { hO, d3, eQ, v2, G4 } from "../figma_app/545293";
 import { popModalStack, hideModalHandler, showModalHandler } from "../905/156213";
 import { fullscreenValue } from "../figma_app/455680";
-import { $$ } from "../figma_app/62612";
+import { applyOffsetToViewport } from "../figma_app/62612";
 import { cq } from "../905/794154";
 import { M$ } from "../figma_app/297822";
 import { dd, TT, Bw } from "../figma_app/604494";
@@ -344,7 +344,7 @@ export function $$$0(e, t, i, y, b) {
           x: e.width / 2,
           y: e.height / 2
         };
-        let a = $$(e, t);
+        let a = applyOffsetToViewport(e, t);
         await v({
           fragment: n,
           dropPosition: new Point(a.x - n.width / 2, a.y - n.height / 2),

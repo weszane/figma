@@ -4,7 +4,7 @@ import { Fullscreen, WhiteboardAiVisualCppBindings, MindmapCppBindings } from ".
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { getTrackingSessionId } from "../905/471229";
 import { getI18nString } from "../905/303541";
@@ -26,7 +26,7 @@ export function $$v0() {
   let S = useAtomWithSubscription(kS);
   let v = useAtomWithSubscription(J);
   let A = um();
-  let x = am();
+  let x = trackFileEventWithUser();
   let N = useDispatch();
   let C = {
     orgId: e,

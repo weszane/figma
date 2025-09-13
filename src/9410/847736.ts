@@ -25,11 +25,11 @@ import { vN, Iv, fK, gH, r$, d$, $N, NG, S7, m4, BX, _8 as _$$_, J_ } from "../7
 import { mp } from "../figma_app/29287";
 import { Ji, Zx, h0, qm } from "../figma_app/553488";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useSetAtom } from "../vendor/525001";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { eE as _$$eE } from "../figma_app/106207";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { FFileType } from "../figma_app/191312";
 import { oh } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
@@ -40,7 +40,7 @@ import { cd } from "../905/381612";
 import { ZW } from "../figma_app/861982";
 import { _ as _$$_2, Q as _$$Q2 } from "../7222/460441";
 import { a as _$$a } from "../905/925868";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { NH, gp } from "../figma_app/973927";
 import { A as _$$A } from "../6828/625002";
 import { me, Tn, GM, HE, m_, qr, Vg, Fj, eg as _$$eg } from "../9410/148230";
@@ -80,13 +80,13 @@ import { R as _$$R } from "../figma_app/53049";
 import { n as _$$n2 } from "../905/347702";
 import { Y as _$$Y, Sk, D1, tO as _$$tO, D0 } from "../9410/989613";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { Um } from "../905/848862";
 import { l6, c$, sK } from "../905/794875";
 import { e as _$$e4 } from "../figma_app/509285";
 import { X as _$$X } from "../1250/115566";
 import { G7 } from "../figma_app/336853";
-import { dq, sZ } from "../905/845253";
+import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { useSubscription } from "../figma_app/288654";
 import { w4, y1 } from "../905/445814";
 import { selectCurrentUser } from "../905/372672";
@@ -334,7 +334,7 @@ function et() {
         source: "template-picker",
         fileNeedsMovingBeforePublish: d
       });
-      Cu({
+      logAndTrackCTA({
         name: "publish-template-template-modal",
         fileKey: a.key
       });
@@ -349,7 +349,7 @@ function ei({
 }) {
   let a = i ? jsx(X, {
     onSeeAllClick: i
-  }) : r ? jsx($n, {
+  }) : r ? jsx(Button, {
     onClick: r,
     recordingKey: "template-picker-publish-template",
     variant: "secondary",
@@ -377,7 +377,7 @@ function eo({
     children: jsx(gu, {})
   }) : 0 === i.length ? jsxs("div", {
     className: _$$s.p10.flex.flex1.flexColumn.itemsCenter.alignCenter.textBodyMedium.colorTextDisabled.$,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: _$$s.h200.$,
       svg: _$$A,
       useOriginalSrcFills_DEPRECATED: !0
@@ -983,7 +983,7 @@ function e9() {
     children: [jsx("div", {
       className: _$$s.fontMedium.overflowHidden.colorTextSecondary.$,
       children: getI18nString("slides.templates.file_picker.page_selector.loading")
-    }), jsx(kt, {})]
+    }), jsx(LoadingSpinner, {})]
   });
 }
 function te({
@@ -994,7 +994,7 @@ function te({
     figjamFileKey
   } = e2();
   return jsx(ta, {
-    children: jsx($n, {
+    children: jsx(Button, {
       iconPrefix: jsx(_$$x, {}),
       variant: "primary",
       onClick: startAction,
@@ -1013,13 +1013,13 @@ function tt({
   } = mp();
   return jsxs("div", {
     className: c()(_$$s.flex.itemsCenter.justifyEnd.py8.pr16.gap8.$, qr),
-    children: [isCreateSlidesOutlineEnabled && jsx($n, {
+    children: [isCreateSlidesOutlineEnabled && jsx(Button, {
       iconPrefix: jsx(_$$V2, {}),
       variant: "secondary",
       onClick: e,
       disabled: i,
       children: renderI18nText("slides.templates.outline_with_template.button")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       onClick: t,
       disabled: i,
@@ -1044,7 +1044,7 @@ function tr() {
     figjamFileKey
   } = e2();
   return jsx(ti, {
-    children: jsx($n, {
+    children: jsx(Button, {
       iconPrefix: jsx(_$$x, {}),
       variant: "primary",
       onClick: startAction,
@@ -1058,7 +1058,7 @@ function tn() {
   let t = Xr(bY);
   let i = useAtomWithSubscription(oQ);
   return jsx(ti, {
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "primary",
       onClick: () => {
         t({
@@ -1261,7 +1261,7 @@ function td({
   addAllSlides: e
 }) {
   return r$() === Ji.PICKER ? jsx(tc, {
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "secondary",
       onClick: e,
       children: renderI18nText("slides.templates.add_all_slides")
@@ -1410,7 +1410,7 @@ function t_({
     scrollRef,
     onScroll
   } = d$(Vf.TEAM);
-  let u = dq();
+  let u = useCurrentUserOrgId();
   return jsxs(x, {
     children: [jsx(em, {
       title: t,
@@ -1673,7 +1673,7 @@ function tI({
 }
 var tk = (e => (e[e.RECENTS = 1] = "RECENTS", e[e.HUB_FILE = 2] = "HUB_FILE", e[e.ORG = 3] = "ORG", e))(tk || {});
 function tN() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   let [t, i] = useState([]);
   let [r, s] = useState(null);
   let [{

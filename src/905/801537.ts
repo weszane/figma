@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Xr } from "../figma_app/27355";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { MZ } from "../figma_app/925970";
 import { wf } from "../905/124270";
 import { IT, M4 } from "../905/713695";
@@ -21,7 +21,7 @@ export function $$p0(e, t) {
     restrictTeamId
   });
   let [f] = IT(g);
-  let _ = A(t => {
+  let _ = useDebouncedCallback(t => {
     d(t);
     e && e.length > 0 && c(MZ());
   }, 500, {

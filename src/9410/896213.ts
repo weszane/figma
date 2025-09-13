@@ -11,11 +11,11 @@ import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import f from "classnames";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { Gc } from "../905/63728";
 import { Vi, B4, tu, oJ } from "../figma_app/385215";
 import { ah, Dv } from "../905/763714";
@@ -44,14 +44,14 @@ import { Z as _$$Z } from "../905/116724";
 import { _P } from "../figma_app/2590";
 import { q as _$$q } from "../905/495564";
 import { YL, gW } from "../figma_app/122682";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { x as _$$x } from "../905/106997";
 import { Q as _$$Q } from "../3276/336897";
 import { Cf } from "../905/504727";
 import { rJv } from "../figma_app/27776";
 import { isIpadDevice } from "../figma_app/778880";
 import { showModalHandler } from "../905/156213";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
 import { FFileType } from "../figma_app/191312";
 import { _2 } from "../9410/635666";
@@ -95,7 +95,7 @@ function eg(e) {
       onClick: () => {
         let e = i.teamId && s[i.teamId];
         if (!e) return;
-        ds("CTA Clicked", i.key, t.getState(), {
+        trackFileEvent("CTA Clicked", i.key, t.getState(), {
           name: "Disabled Voice Call Button"
         });
         let r = o === FEditorType.Whiteboard ? FFileType.WHITEBOARD : FFileType.DESIGN;
@@ -121,7 +121,7 @@ function eg(e) {
     let e = u === gW.DISABLED_BY_ORG ? getI18nString("collaboration.voice.audio_has_been_disabled_by_your_organization") : getI18nString("collaboration.voice.to_use_audio_in_this_file_move_it_to_a_team_on_one_of_our_paid_plans");
     return jsx("span", {
       className: WF,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-immediately": !0,
       "data-tooltip": e,
       children: jsx(_$$A2.HeadphonesIcon, {
@@ -135,7 +135,7 @@ function eg(e) {
     children: jsx(_$$K, {
       fileKey: i.key,
       className: iw,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("collaboration.voice.start_conversation"),
       hidePopover: e.hidePopover,
       children: jsx("span", {
@@ -198,7 +198,7 @@ function eS(e) {
   } = e;
   let [r, a] = useState(usersToSearch);
   let s = useRef(!1);
-  let o = am();
+  let o = trackFileEventWithUser();
   let l = useRef(!1);
   let d = l.current;
   let c = useCallback(async e => {
@@ -210,7 +210,7 @@ function eS(e) {
       }), l.current = !0));
     }
   }, [d, o, usersToSearch]);
-  let u = _$$A(c, 200);
+  let u = useDebouncedCallback(c, 200);
   useEffect(() => (u(query), () => {
     u.cancel();
     s.current = !0;
@@ -301,7 +301,7 @@ function eI({
     onMouseLeave: Y,
     disabled: h,
     "data-dropdown-tooltip": h && f ? f : void 0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-below": !0,
     children: renderI18nText("collaboration.spotlight.tooltip.spotlight_me")
   });
@@ -475,7 +475,7 @@ function ek({
     onMouseLeave: et,
     disabled: d,
     "data-dropdown-tooltip": d && u ? u : void 0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-below": !0,
     children: renderI18nText("collaboration.spotlight.tooltip.spotlight_me")
   });
@@ -674,7 +674,7 @@ let $$eO0 = memo(function (e) {
   } = uC(q, null, !1, es);
   let ed = useMemo(() => [...users, ...overflowUsers].filter(e => e && e.userID !== currentUser.userID), [overflowUsers, users, currentUser]);
   let ec = useMemo(() => I?.filter(e => !ed.some(t => e.userID === t.userID) && e.userID !== currentUser.userID), [ed, I, currentUser]);
-  let eu = am();
+  let eu = trackFileEventWithUser();
   let ep = useCallback(e => {
     if (dG(e), !_.current) return;
     x.current = _.current.getBoundingClientRect();
@@ -771,7 +771,7 @@ let $$eO0 = memo(function (e) {
       "data-tooltip": getI18nString("fullscreen.toolbar.multiplayer.multiplayer_tools"),
       "data-tooltip-offset-x": _.current && j.current ? _.current.offsetWidth / 2 - j.current.offsetWidth / 2 - 1.5 : 0,
       "data-tooltip-offset-y": _.current && f.current ? f.current.clientHeight / 2 - _.current.clientHeight / 2 : 0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       id: "multiplayer-toolbar-container",
       onClick: dG,
       onKeyDown: e => {

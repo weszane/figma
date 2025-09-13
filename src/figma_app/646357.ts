@@ -23,7 +23,7 @@ import { formatList } from "../figma_app/930338";
 import { XHR } from "../905/910117";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
-import { $ as _$$$ } from "../905/383708";
+import { generateUniqueKey } from "../905/383708";
 import { FileKeySourceEnum } from "../905/412913";
 import { notificationActions } from "../905/851662";
 import { NotificationType } from "../905/170564";
@@ -42,7 +42,7 @@ import { e3 } from "../figma_app/275938";
 import { GO, Nn, pD as _$$pD, Lr, zK } from "../905/561897";
 import { generateFileVersionUrl } from "../905/815475";
 import { selectCurrentFile } from "../figma_app/516028";
-import { td as _$$td } from "../905/845253";
+import { getOrgByCurrentUserId } from "../905/845253";
 import { ag, LH } from "../905/872904";
 import { FContainerType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
@@ -371,7 +371,7 @@ export function $$eD4(e) {
     return eO(n) ? gB(n) : r;
   }, [e, t, r]);
 }
-let ek = (e, t) => _$$$(e.key) === t || !!e.source_file_key && _$$$(e.source_file_key) === t;
+let ek = (e, t) => generateUniqueKey(e.key) === t || !!e.source_file_key && generateUniqueKey(e.source_file_key) === t;
 export function $$$$eM69() {
   let e = selectCurrentFile();
   let t = useSelector(e => e.library);
@@ -1272,7 +1272,7 @@ export function $$t864(e) {
 export function $$t691() {
   let e = LH();
   let t = useSelector(e => e.orgById);
-  return _$$td(e, t);
+  return getOrgByCurrentUserId(e, t);
 }
 export function $$t793(e) {
   let t = je();

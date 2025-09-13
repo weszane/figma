@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager } from "../figma_app/27355";
-import { Z } from "../905/296690";
+import { orgSubscriptionAtom } from "../905/296690";
 import { openFileTeamAtom } from "../figma_app/516028";
 import { kA } from "../figma_app/336853";
 import { hasTeamPaidAccess } from "../figma_app/345997";
@@ -11,7 +11,7 @@ function u() {
 }
 export let $$p5 = atom(e => {
   let t = e(openFileTeamAtom);
-  let i = e(Z) ?? null;
+  let i = e(orgSubscriptionAtom) ?? null;
   return u() || (kA(i) ? "enterprise" : i ? "org" : hasTeamPaidAccess(t) ? "pro" : "starter");
 });
 export function $$m0(e) {

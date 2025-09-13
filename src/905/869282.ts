@@ -1,7 +1,7 @@
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
 import { XW } from "../figma_app/162807";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { y2 } from "../905/776312";
 import { p_ } from "../905/573610";
 let $$d1 = {
@@ -11,7 +11,7 @@ let $$d1 = {
   tabletListSortKeys: [XW.NAME, XW.RUN_COUNT],
   mobileListSortKeys: [XW.NAME, XW.RUN_COUNT],
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [XW.NAME]: renderI18nText("search.sort_option.name"),
       [XW.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
       [XW.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
@@ -19,7 +19,7 @@ let $$d1 = {
       [XW.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
       [XW.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [XW.NAME]: renderI18nText("search.sort_option.name"),
       [XW.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
       [XW.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
@@ -29,7 +29,7 @@ let $$d1 = {
     }
   },
   defaultOptions: {
-    viewMode: XU.LIST,
+    viewMode: ViewMode.LIST,
     sortMode: {
       sortKey: XW.RELEVANCY,
       sortDesc: !1

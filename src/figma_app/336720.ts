@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { EventShield } from "../905/821217";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/851274";
 import { LayoutTabType } from "../figma_app/763686";
 import d from "classnames";
 import { BK } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J5, FM } from "../figma_app/835688";
 import { useDispatch } from "react-redux";
 import { r as _$$r } from "../905/857502";
@@ -56,7 +56,7 @@ let $$A0 = {
           message: getI18nString("fullscreen_actions.copy-presentation-link-success")
         }));
       }, [e, t]);
-      return jsx(_$$E, {
+      return jsx(ButtonPrimitive, {
         onClick: r,
         children: jsxs("div", {
           className: _$$s.flex.flexRow.itemsCenter.justifyCenter.$,
@@ -95,13 +95,13 @@ export function $$x2({
       "slides_toolbar_items--flyoutDropdownShown--xV4l7": showing,
       [disabledFullHeightSidebarFlyout]: h
     }),
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     "data-tooltip": t.action,
     "data-onboarding-key": e.onboardingKey,
     "data-testid": t.action,
     children: jsx(EventShield, {
       eventListeners: ["onClick"],
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         actionOnPointerDown: !0,
         htmlAttributes: {
           "data-testid": `${e.name}-button`

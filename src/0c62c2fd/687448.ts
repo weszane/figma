@@ -2,15 +2,15 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { R as _$$R } from "../905/256203";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Kq } from "../figma_app/819288";
 import { w4 } from "../905/445814";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { e as _$$e } from "../905/457828";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -212,7 +212,7 @@ export function $$U0({
       })]
     }) : null]
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: F,
     width: "lg",
     children: jsxs(vo, {
@@ -225,16 +225,16 @@ export function $$U0({
         children: L
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: T,
             children: renderI18nText("modal.cancel")
-          }), N ? jsx($n, {
+          }), N ? jsx(Button, {
             disabled: !0,
-            children: jsx(kt, {
+            children: jsx(LoadingSpinner, {
               className: _$$s.colorIconOnbrand.$
             })
-          }) : jsx($n, {
+          }) : jsx(Button, {
             disabled: !A,
             variant: "primary",
             onClick: O,

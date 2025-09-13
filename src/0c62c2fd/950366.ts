@@ -5,7 +5,7 @@ import { Q } from "../1250/227834";
 import { b as _$$b, bL } from "../figma_app/860955";
 import { f as _$$f } from "../figma_app/859253";
 import { forwardRef } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { e as _$$e } from "../905/149844";
 import { k } from "../905/888808";
 import { xk } from "@stylexjs/stylex";
@@ -14,7 +14,7 @@ import { n as _$$n } from "../0c62c2fd/596856";
 import { k as _$$k } from "../0c62c2fd/421640";
 let f = forwardRef(function (e, t) {
   let r = e["aria-expanded"];
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     ref: t,
     ...xk(g.button, r && "false" !== r && g.buttonActive),
     ...e,

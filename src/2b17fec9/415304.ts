@@ -8,7 +8,7 @@ import { _L } from "../9410/635978";
 import { replaceSelection } from "../figma_app/741237";
 import { tB } from "../figma_app/731583";
 import { y7 } from "../figma_app/385874";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { Mw, KH } from "../figma_app/722362";
 import { wA } from "../figma_app/167249";
 import { isSupportedNodeType } from "../905/321380";
@@ -53,7 +53,7 @@ function w({
       useFlushSyncExpensive: !0
     });
   }(e);
-  let i = _X({
+  let i = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   return i ? jsx(Fragment, {
@@ -74,7 +74,7 @@ function I({
   let S = KH();
   let w = useMemo(() => Object.keys(S), [S]);
   let I = useSelector(e => e.mirror.sceneGraph);
-  let L = useMemo(() => Yb(i, t), [i, t]);
+  let L = useMemo(() => scaleRect(i, t), [i, t]);
   let N = wA((e, t) => {
     let i = e.get(t);
     if (!i || !i.hasEnabledVideoPaint) return null;

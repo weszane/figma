@@ -3,8 +3,8 @@ import { useState, useMemo, useCallback } from "react";
 import { ServiceCategories } from "../905/165054";
 import { t as _$$t } from "../905/150656";
 import { K as _$$K } from "../905/443068";
-import { $n } from "../905/521428";
-import { E as _$$E } from "../905/632989";
+import { Button } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { o as _$$o } from "../905/530496";
 import { C as _$$C } from "../905/520159";
 import { O as _$$O } from "../905/969533";
@@ -19,14 +19,14 @@ import { tH, H4 } from "../905/751457";
 import { x as _$$x } from "../905/868466";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { i6, v2, x$ } from "../905/188715";
 import { C as _$$C2 } from "../905/696698";
 import { rZ } from "../905/971098";
 import { fullscreenValue } from "../figma_app/455680";
 import { dh } from "../figma_app/186343";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { xH as _$$xH } from "../figma_app/249941";
 import { cq } from "../905/794154";
 import { r as _$$r } from "../905/189361";
@@ -98,7 +98,7 @@ export function $$U0() {
           },
           htmlAttributes: {
             "data-tooltip": "Refresh",
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$o, {})
         })]
@@ -325,12 +325,12 @@ function W({
         className: _$$s.cursorPointer.flex.itemsCenter.$,
         children: [c ? jsx(_$$O, {}) : jsx(_$$k, {}), jsx(Y, {
           severity: e.severity
-        }), jsx(_$$E2, {
+        }), jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           children: e.name
         })]
-      }), e.fix && jsx($n, {
+      }), e.fix && jsx(Button, {
         variant: "secondary",
         onClick: b,
         children: E ? "Fixed" : "Autofix"
@@ -340,26 +340,26 @@ function W({
         horizontal: 12
       },
       direction: "vertical",
-      children: [jsx(_$$E2, {
+      children: [jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "regular",
         color: "secondary",
         children: e.warning
-      }), T && jsx($n, {
+      }), T && jsx(Button, {
         variant: "link",
         onClick: () => T(t),
         children: "Select offending layers"
       }), jsxs("button", {
         onClick: () => d(!o),
         className: _$$s.cursorPointer.flex.itemsCenter.$,
-        children: [o ? jsx(_$$O, {}) : jsx(_$$k, {}), jsx(_$$E2, {
+        children: [o ? jsx(_$$O, {}) : jsx(_$$k, {}), jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "medium",
           children: "Show metadata"
         })]
       }), o && jsx("div", {
         className: _$$s.flex.flexColumn.wFull.maxH100.px12.overflowYScroll.$,
-        children: r ? jsx(_$$E2, {
+        children: r ? jsx(TextWithTruncation, {
           fontSize: 11,
           fontWeight: "regular",
           color: "secondary",
@@ -382,7 +382,7 @@ function K({
     node: e,
     useUI3Icon: !0
   }), [e]);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: _$$s.borderBox.h24.flex.px8.gap4.itemsCenter.b1.radiusMedium.maxW150.font11.colorBorder.$,
     onClick: () => {
       Fullscreen.panToNode(e.guid, !1);

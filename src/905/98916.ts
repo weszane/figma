@@ -1,5 +1,5 @@
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { ProjectFileCount, FolderUntrashedFilesAndSitesView } from "../figma_app/43951";
 export function $$o1(e, t) {
@@ -7,7 +7,7 @@ export function $$o1(e, t) {
     projectId: e
   } : null));
   return i.transform(e => {
-    let i = t ? oA(e.project?.trashedWithFolderFiles) || [] : e.project?.untrashedFiles || [];
+    let i = t ? getResourceDataOrFallback(e.project?.trashedWithFolderFiles) || [] : e.project?.untrashedFiles || [];
     let n = 0;
     let a = new Set();
     i.forEach(e => {

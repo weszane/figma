@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { N } from "../905/438674";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getI18nStringAlias } from "../905/303541";
 import { fu } from "../figma_app/831799";
@@ -161,7 +161,7 @@ function E(e) {
       teamId: t?.teamId
     },
     children: renderI18nText("rcs.upsell_libraries.click_in_toolbar_to_turn_into_component", {
-      svg: jsx(B, {
+      svg: jsx(SvgComponent, {
         svg: _$$A,
         className: "upsell_libraries_visual_bell--createComponentSVG--dmDjt",
         title: getI18nString("rcs.upsell_libraries.upsell_libraries.create_component_icon_title"),

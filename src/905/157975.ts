@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { k as _$$k } from "../905/443820";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
@@ -208,7 +208,7 @@ let $$B0 = registerModal(function (e) {
   let b = useSelector(e => Object.values(tK(e)).length);
   let v = useMemo(() => Gk(A, y, b), [A, y, b]);
   let [I] = IT(fv(g));
-  return f ? jsx(bL, {
+  return f ? jsx(ModalRootComponent, {
     manager: c,
     width: "fit-content",
     children: jsxs(vo, {

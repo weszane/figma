@@ -1,7 +1,7 @@
 import { s as _$$s } from "../905/583953";
 import { getCenteredRotation } from "../905/346946";
 import { getI18nString } from "../905/303541";
-import { Yb, HD } from "../figma_app/62612";
+import { scaleRect, addRectOffset } from "../figma_app/62612";
 import { GY } from "../figma_app/348938";
 export function $$l3(e, t) {
   return GY(e, t) || "WIDGET" === t.type;
@@ -48,8 +48,8 @@ let m = {
   angle: 0
 };
 export function $$g5(e) {
-  let t = Yb(e, m);
-  let r = HD(t, e);
+  let t = scaleRect(e, m);
+  let r = addRectOffset(t, e);
   return {
     left: r.x,
     top: r.y,

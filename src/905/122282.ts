@@ -7,9 +7,9 @@ import { n as _$$n, a as _$$a } from "../905/114254";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N as _$$N } from "../905/551536";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ol, cD } from "../figma_app/598018";
@@ -24,7 +24,7 @@ import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr, atomStoreMana
 import C from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { useSubscription } from "../figma_app/288654";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/859195";
@@ -34,7 +34,7 @@ import { T6 } from "../905/201596";
 import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
 import { $x, $W } from "../figma_app/599979";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { OpenEditorFileData } from "../figma_app/43951";
 import { l as _$$l, s as _$$s } from "../905/618307";
@@ -54,7 +54,7 @@ import { X0 } from "../905/784221";
 import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { UI3ConditionalWrapper } from "../905/341359";
-import { A as _$$A4 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { H as _$$H } from "../905/620380";
 import { useSprigWithSampling } from "../905/99656";
 import { resolveMessage } from "../905/231762";
@@ -122,7 +122,7 @@ let y = registerModal(function ({
     open: e,
     onClose: a
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     width: "md",
     children: jsxs(vo, {
@@ -145,11 +145,11 @@ let y = registerModal(function ({
             href: "https://www.figma.com/pricing#figjam",
             target: "_blank",
             trusted: !0,
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "secondary",
               children: renderI18nText("templates.limit_modal.secondary_text")
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: a,
             children: renderI18nText("templates.limit_modal.primary_text")
@@ -281,7 +281,7 @@ function eR() {
 function eU({
   publishScopeField: e
 }) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let i = ol();
   let n = Lz(e, void 0);
   return jsx(_$$A8, {
@@ -557,7 +557,7 @@ function tr({
   let t = selectCurrentFile();
   let i = selectCurrentUser();
   let n = cD();
-  let r = sZ();
+  let r = useCurrentUserOrg();
   let a = t?.template || void 0;
   let s = t?.libraryKey || void 0;
   let {
@@ -699,11 +699,11 @@ function ta({
     })]
   });
   s = N || draftSubmissionResult?.result !== "success" ? N || draftSubmissionResult?.result !== "failure" ? jsxs(Fragment, {
-    children: [jsx($n, {
+    children: [jsx(Button, {
       variant: "secondary",
       onClick: C,
       children: getI18nString("general.cancel")
-    }), jsx($n, {
+    }), jsx(Button, {
       disabled: draftSubmissionResult?.result === "pending" || N,
       onClick: () => {
         checkProgress() && submit?.();
@@ -713,7 +713,7 @@ function ta({
         size: "sm"
       }) : getI18nString("community.publishing.publish")
     })]
-  }) : jsx($n, {
+  }) : jsx(Button, {
     variant: "secondary",
     onClick: clearDraftSubmissionResult,
     children: getI18nString("general.go_back")
@@ -741,7 +741,7 @@ function ta({
     });
   }, [g]);
   let O = Lz(_.fieldStates.name, "");
-  let D = _$$A4(() => {
+  let D = useDebouncedCallback(() => {
     g.current(SS, {
       step: WX.EDIT_NAME
     });
@@ -750,7 +750,7 @@ function ta({
     O && A.name.touched && D();
   }, [O, D, A.name.touched]);
   let L = Lz(_.fieldStates.description, "");
-  let M = _$$A4(() => {
+  let M = useDebouncedCallback(() => {
     g.current(SS, {
       step: WX.EDIT_DESCRIPTION
     });
@@ -934,7 +934,7 @@ function tI({
           hideArrow: !0
         }), jsx("span", {
           className: "template_publish_modal--publishScopeSelectTriggerIcon--37IIw publish_modal--categorySelectTriggerIcon--43Irx",
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A0
           })
         })]
@@ -1026,7 +1026,7 @@ function tN({
   fileKey: e,
   source: t
 }) {
-  let i = sZ();
+  let i = useCurrentUserOrg();
   let n = selectCurrentUser();
   let r = useSubscription(OpenEditorFileData, {
     fileKey: e || ""
@@ -1046,7 +1046,7 @@ function tP({
   source: e
 }) {
   let t = selectCurrentFile();
-  let i = sZ();
+  let i = useCurrentUserOrg();
   let n = selectCurrentUser();
   let r = T6(t, n);
   let a = t?.editorType === FFileType.SLIDES;
@@ -1301,10 +1301,10 @@ function tO({
       orgId: t?.id,
       teamId: h
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: eF,
       width: tC,
-      children: jsxs(Rq, {
+      children: jsxs(ModalFormContents, {
         onSubmit: () => {
           t && A?.orgAccess === FAccessLevelType.SECRET && !getFeatureFlags().pro_templates_lg ? y(showModalHandler({
             type: X0,
@@ -1374,7 +1374,7 @@ function tO({
             children: !!$W(tk, es) && jsxs("div", {
               className: T()("template_publish_modal--footerText--dB9b6 publish_modal--footerText--2Sv9Q publish_modal--_userSelectNone--sP-aW", "template_publish_modal--footerError--AkcLv publish_modal--footerError--06reN text--fontPos11--2LvXf text--_fontBase--QdLsd"),
               "data-testid": "publish-modal-footer-text",
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 svg: _$$A1
               }), renderI18nText("community.publish.fix_errors")]
             })

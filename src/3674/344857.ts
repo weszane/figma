@@ -32,7 +32,7 @@ import { J as _$$J } from "../905/614223";
 import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { isColorDark, colorToRgbaString } from "../figma_app/191804";
 import { useSubscription } from "../figma_app/288654";
-import { oA as _$$oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx as _$$sx2 } from "../905/941192";
 import { J as _$$J2 } from "../905/799737";
@@ -60,7 +60,7 @@ import { i$ as _$$i$ } from "../905/15667";
 import { getThemeContextOrDefault } from "../905/158740";
 import eN from "classnames";
 import { Wi, JR, Qp } from "../figma_app/162641";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Dm, i as _$$i, ak as _$$ak } from "../figma_app/8833";
 import { $ as _$$$ } from "../figma_app/644304";
 import { s as _$$s2 } from "../b2835def/812839";
@@ -73,7 +73,7 @@ import { O as _$$O } from "../905/587457";
 import { t as _$$t3 } from "../905/331623";
 import { ue as _$$ue, n2 as _$$n3, vl, yT } from "../figma_app/332598";
 import { WEB as _$$uz, FIGMA_PROPERTIES, IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML } from "../905/359509";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useAtomValue } from "../vendor/525001";
 import eU from "../vendor/77708";
 import { v4, QN, AC, Pt } from "../figma_app/655139";
@@ -81,7 +81,7 @@ import { fk, B7, Qm, g6, vI, $R, yP, p2 as _$$p2, cZ as _$$cZ, Vx } from "../fig
 import { gP, Ck, $L, W7, F9, yV, jt, lK as _$$lK, u9 as _$$u2, Fr, EN, Tk, Qz, tr as _$$tr, B5 } from "../figma_app/655717";
 import { $h, sQ as _$$sQ } from "../905/191741";
 import { QO, Em, RH, wQ, Bs, gc, ie as _$$ie, fb, qM, $Q } from "../figma_app/120227";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Cj, jY, Tv as _$$Tv } from "../figma_app/151869";
 import { VZ } from "../figma_app/727192";
 import { x$, W3, iV as _$$iV, Rh, Me, PE } from "../figma_app/887579";
@@ -99,7 +99,7 @@ import { Lp, Ph, ux as _$$ux, KE, A7, tq as _$$tq, wR, dn as _$$dn, ew as _$$ew,
 import { Io, yQ } from "../figma_app/875495";
 import { devHandoffComponentPreviewMaxHeight, devHandoffAssetPreviewMaxWidth, devHandoffAssetPreviewMaxHeight } from "../figma_app/786175";
 import { A as _$$A2 } from "../3850/839808";
-import { $n, IK } from "../905/521428";
+import { Button, ButtonWide } from "../905/521428";
 import { Kz } from "../figma_app/637027";
 import { jN } from "../905/612685";
 import { Qn, mz, KQ, lk as _$$lk, qE } from "../figma_app/415217";
@@ -160,13 +160,13 @@ import { O as _$$O3 } from "../9410/414444";
 import { b as _$$b2, W as _$$W2 } from "../b2835def/91751";
 import { oA as _$$oA2, uj as _$$uj, vy } from "../figma_app/856806";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo as _$$vo, Y9, hE as _$$hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { K as _$$K2 } from "../905/443068";
 import { bL as _$$bL, c$ as _$$c$ } from "../905/575478";
 import { q as _$$q2 } from "../905/932270";
 import { A as _$$A5 } from "../905/251970";
-import { am as _$$am2, U as _$$U2, hC as _$$hC } from "../figma_app/901889";
+import { trackFileEventWithUser, trackFileEventWithStore, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { Fu, r1 as _$$r2 } from "../figma_app/545877";
 import { xb } from "../figma_app/910914";
 import { VR } from "../figma_app/545541";
@@ -191,7 +191,7 @@ import { A as _$$A7 } from "../svg/386094";
 import { A as _$$A8 } from "../svg/145768";
 import { A as _$$A9 } from "../svg/117783";
 import { A as _$$A0 } from "../svg/8369";
-import { A as _$$A1 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { oB as _$$oB, j7, sf as _$$sf } from "../905/929976";
 import { RK } from "../figma_app/815170";
 import { Um } from "../905/848862";
@@ -230,7 +230,7 @@ import { dU as _$$dU, xY, Xn } from "../9410/461336";
 import { x as _$$x } from "../905/587214";
 import { y as _$$y3 } from "../figma_app/404310";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E4 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Gw, FB } from "../vendor/149334";
 import { capitalize } from "../figma_app/930338";
 import { Nf, lA as _$$lA, ro as _$$ro, M4, lU as _$$lU, RI } from "../figma_app/624323";
@@ -310,7 +310,7 @@ import { ku, L$ } from "../figma_app/241341";
 import { Yj, kt, xA as _$$xA } from "../figma_app/92985";
 import { n as _$$n8 } from "../figma_app/427950";
 import { QE } from "../figma_app/914216";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { Ov } from "../figma_app/598952";
 import { c as _$$c6 } from "../905/486270";
 import { stripHtmlTags } from "../905/491152";
@@ -352,7 +352,7 @@ import { N as _$$N3 } from "../905/572042";
 import ds from "../vendor/805353";
 import dd from "../vendor/961736";
 import { c as _$$c7 } from "../905/241436";
-import { c as _$$c8 } from "../905/949750";
+import { incrementCounter } from "../905/949750";
 import { ab as _$$ab } from "../figma_app/870683";
 import { BT, q$ } from "../figma_app/644255";
 import { K as _$$K4 } from "../905/918348";
@@ -740,7 +740,7 @@ function e_() {
   } = wH();
   let p = hasPendingRequest(FProductAccessType.DEV_MODE) && getUpgradePathway(FProductAccessType.DEV_MODE) !== _$$J4.AUTO_PATHWAY;
   let h = function (e) {
-    let t = _$$oA(e.data?.file);
+    let t = getResourceDataOrFallback(e.data?.file);
     let n = t?.currentPlanUser?.type === FOrganizationLevelType.ORG;
     let a = t?.currentPlanUser;
     return n ? a?.devModeAccountTypeRequest ?? null : a?.designAccountTypeRequest ?? null;
@@ -824,7 +824,7 @@ function eO() {
           children: renderI18nText("dev_handoff.tag.ready_for_development")
         }), jsxs("div", {
           className: "left_panel--loadingParentRow--9WZnv",
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: "left_panel--chevron--ApMP6",
             svg: _$$A
           }), jsx(Wi, {
@@ -1072,7 +1072,7 @@ function tf() {
   let c = t_(i, "HEIGHT");
   return jsxs("div", {
     className: "box_model--innerSizeBox--fFq-v box_model--_layoutFlex--pL0jp",
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: ek()(e6, {
         [te]: !!o,
         [e9]: !!o || !!l
@@ -1081,7 +1081,7 @@ function tf() {
       htmlAttributes: {
         "data-testid": "layoutWidth",
         "data-tooltip": o?.name,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       "aria-label": d,
       children: o ? jsx(wG, {
@@ -1092,7 +1092,7 @@ function tf() {
     }), jsx("span", {
       className: "box_model--innerSizeBoxX--pxeFw",
       children: "\xd7"
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       className: ek()(e6, {
         [te]: !!l,
         [e9]: !!o || !!l
@@ -1101,7 +1101,7 @@ function tf() {
       htmlAttributes: {
         "data-testid": "layoutHeight",
         "data-tooltip": l?.name,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       "aria-label": c,
       children: l ? jsx(wG, {
@@ -1226,7 +1226,7 @@ function tm({
     }),
     children: [jsx("div", {
       className: tt
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       className: ti,
       onClick: l,
       htmlAttributes: {
@@ -1382,7 +1382,7 @@ function ty({
   let g = Cj(h);
   let x = e9 ? e4 : "box_model--rawValueContainer---osq- box_model--_valueContainerBase--pMK2K";
   let m = Math.min(t ?? 0, Tk - 4);
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     style: {
       "--temp-border-radius": `${m}px`
     },
@@ -1464,7 +1464,7 @@ function tw({
     variableConsumptionField: n ?? "MISSING"
   });
   let d = e9 ? e4 : i ? "box_model--valueContainerVertical--AtQ8B box_model--rawValueContainer---osq- box_model--_valueContainerBase--pMK2K" : "box_model--valueContainerHorizontal--BqOkd box_model--rawValueContainer---osq- box_model--_valueContainerBase--pMK2K";
-  return isValid ? jsx(_$$E, {
+  return isValid ? jsx(ButtonPrimitive, {
     className: d,
     onClick: copyValue,
     "aria-label": ariaLabel,
@@ -1489,12 +1489,12 @@ function tk() {
   let e = Cj("box-sizing: border-box");
   let t = v4();
   let [n] = $h();
-  return ts() || t.id !== _$$uz || "code" !== n ? null : jsx(_$$E, {
+  return ts() || t.id !== _$$uz || "code" !== n ? null : jsx(ButtonPrimitive, {
     className: "box_model--borderBoxMessage--2jJc- text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: e,
     htmlAttributes: {
       "data-tooltip": getI18nString("dev_handoff.box_model.border-box-tooltip"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0
     },
     children: renderI18nText("dev_handoff.box_model.border-box")
@@ -1838,7 +1838,7 @@ function nl({
       className: _$$s.flex.maxWFull.wFull.hFull.$,
       children: [jsx("div", {
         className: _$$s.flex.flexGrow0.flexColumn.pl32.pt32.$,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           dataTestId: "logo",
           title: "logo",
           ariaLabel: "logo",
@@ -1880,16 +1880,16 @@ function nl({
           multiple: 3
         }), jsxs("div", {
           className: "vscode_paywall--vscodePaywallButtons--JWqPr",
-          children: [l && r ? jsx($n, {
+          children: [l && r ? jsx(Button, {
             variant: "signup",
             disabled: !0,
             children: renderI18nText("dev_handoff.paywall.request_pending")
-          }) : jsx($n, {
+          }) : jsx(Button, {
             variant: "signup",
             onClick: c,
             disabled: !l,
             children: renderI18nText("dev_handoff.paywall.get_dev_mode")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "secondary",
             onClick: u,
             children: renderI18nText("dev_handoff.paywall.vscode.view_button")
@@ -2211,7 +2211,7 @@ function nJ({
   }, [d, s]);
   return jsxs("div", {
     className: "variables_side_panel--variableSetsList--by7HP",
-    children: [jsxs(_$$E, {
+    children: [jsxs(ButtonPrimitive, {
       className: "variables_side_panel--header--fc-N2",
       onClick: f,
       "aria-label": d ? getI18nString("dev_handoff.variables.table_collections_local_collapse_aria_label") : getI18nString("dev_handoff.variables.table_collections_local_expand_aria_label"),
@@ -2262,7 +2262,7 @@ function nQ({
     ref: l,
     onMouseEnter: () => u(!0),
     onMouseLeave: () => u(!1),
-    children: jsxs(_$$E, {
+    children: jsxs(ButtonPrimitive, {
       className: ek()("variables_side_panel--button--nNls6", {
         [nH]: n,
         [nV]: c
@@ -2760,7 +2760,7 @@ function nZ({
       } : void 0,
       onClick: y,
       recordingKey: generateRecordingKey("dev_handoff.variables_table.sidebar_row", s),
-      children: [r && jsx(_$$E, {
+      children: [r && jsx(ButtonPrimitive, {
         onClick: t => d(e, t),
         "aria-label": isCollapsed ? getI18nString("dev_handoff.variables.table_groups_expand_aria_label") : getI18nString("dev_handoff.variables.table_groups_collapse_aria_label"),
         className: ek()(nz, "variables_side_panel--rowCaret--MC8Fl"),
@@ -2987,7 +2987,7 @@ function i_({
         svgSrc: n
       }) => jsxs("div", {
         className: "configuration_wizard--preferenceOptionCard--C3ZkW configuration_wizard--preferenceOption--OkUN2",
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: n,
           className: "configuration_wizard--platformIcon--F7N2s"
         }), jsx(_$$c3, {
@@ -3270,7 +3270,7 @@ function iI({
   }, [s, o, t]);
   let d = l ? jsxs("div", {
     className: is,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A6,
       className: ir
     }), renderI18nText("community.plugins.selected")]
@@ -3330,17 +3330,17 @@ function iT({
   useEffect(() => {
     d(s);
   }, [s]);
-  let c = _$$A1(() => {
+  let c = useDebouncedCallback(() => {
     d(!0);
     pinPlugin(l);
   }, 200);
-  let u = _$$A1(() => {
+  let u = useDebouncedCallback(() => {
     d(!1);
     unpinPlugin(l);
   }, 200);
   let p = r ? jsxs("div", {
     className: is,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A6,
       className: ir
     }), renderI18nText("community.plugins.pinned")]
@@ -3356,7 +3356,7 @@ function iT({
 }
 function iO() {
   let e = useDispatch();
-  let t = _$$am2();
+  let t = trackFileEventWithUser();
   return jsxs("div", {
     className: a$,
     children: [jsx("h1", {
@@ -3378,7 +3378,7 @@ function iO() {
         }), jsx("div", {
           className: a7,
           children: renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_vscode_description")
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           onClick: () => {
             t("vscode.install_extension_clicked");
@@ -3428,7 +3428,7 @@ function iM({}) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       ref: l,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "primary",
         onClick: () => {
           s ? e(_$$oB()) : e(j7({
@@ -3437,7 +3437,7 @@ function iM({}) {
         },
         children: jsxs("span", {
           className: "configuration_wizard--installButton--PPj7O",
-          children: [renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install"), jsx(_$$B, {
+          children: [renderI18nText("dev_handoff.configuration_wizard.install_extensions_step.figma_for_messaging_install"), jsx(SvgComponent, {
             svg: _$$A10,
             className: "configuration_wizard--chevronDown--P7ECL"
           })]
@@ -4512,7 +4512,7 @@ function iq() {
     dataFullscreenIntercept: !1,
     children: jsx(_$$fu, {
       name: "Dev Mode Configuration Wizard",
-      children: jsx(bL, {
+      children: jsx(ModalRootComponent, {
         manager: d,
         width: 800,
         children: jsx(_$$vo, {
@@ -4533,7 +4533,7 @@ let iY = () => {
 function iZ({
   dismissModal: e
 }) {
-  let t = _$$U2();
+  let t = trackFileEventWithStore();
   let [n, l] = useState(0);
   let s = useDispatch();
   let r = iY();
@@ -4596,7 +4596,7 @@ function iZ({
             className: a0,
             children: [jsx("div", {
               className: a1
-            }), jsx($n, {
+            }), jsx(Button, {
               onClick: u,
               variant: "primary",
               children: renderI18nText(`dev_handoff.configuration_wizard.${iJ[n]}.next_text`)
@@ -4606,11 +4606,11 @@ function iZ({
           className: a0,
           children: [jsx("div", {
             className: a1
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "secondary",
             onClick: p,
             children: renderI18nText("general.back")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: function () {
               c();
@@ -4625,11 +4625,11 @@ function iZ({
           className: a0,
           children: [jsx("div", {
             className: a1
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "secondary",
             onClick: p,
             children: renderI18nText("general.back")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: u,
             children: renderI18nText(`dev_handoff.configuration_wizard.${iJ[n]}.next_text`)
@@ -4944,7 +4944,7 @@ function o8({
   let h = Nf() ?? "";
   let f = p.get(h);
   let g = t.isInherited || t.isVariant;
-  let x = _$$U2();
+  let x = trackFileEventWithStore();
   let _ = _$$dI({
     navigateToStateGroupIfVariant: !t.isVariant
   });
@@ -5030,7 +5030,7 @@ function o8({
       "aria-label": A,
       htmlAttributes: {
         "data-tooltip": A,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: g ? jsx(_$$K3, {}) : jsx(_$$J5, {})
     })
@@ -5147,7 +5147,7 @@ function o8({
     "data-testid": "developer-related-link-row",
     onMouseEnter: () => P(!0),
     onMouseLeave: () => P(!1),
-    children: [z ? jsx(_$$E, {
+    children: [z ? jsx(ButtonPrimitive, {
       className: "developer_related_link_row--linkInfo--214Y7 developer_related_link_row--linkContentsLayout--mVoUm",
       onClick: W,
       recordingKey: generateRecordingKey(J, "button"),
@@ -5257,7 +5257,7 @@ function lk({
     "aria-label": e.isState ? getI18nString("design_systems.playground.open_variant_in_library") : getI18nString("design_systems.playground.open_component_in_library"),
     htmlAttributes: {
       "data-tooltip": e.isState ? getI18nString("design_systems.playground.open_variant_in_library") : getI18nString("design_systems.playground.open_component_in_library"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$E6, {})
   });
@@ -5389,13 +5389,13 @@ let lD = memo(({
     "aria-label": getI18nString("dev_handoff.playground.select_parent_instance"),
     htmlAttributes: {
       "data-tooltip": getI18nString("dev_handoff.playground.select_parent_instance"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$E5, {})
   }));
   return jsx(_$$fu, {
     name: "Dev Mode Component Playground",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: m,
       width: "fit-content",
       children: jsxs(_$$vo, {
@@ -5425,7 +5425,7 @@ let lD = memo(({
                     onClick: invertTheme,
                     htmlAttributes: {
                       "data-tooltip": getI18nString("design_systems.playground.change_background"),
-                      "data-tooltip-type": Ib.TEXT
+                      "data-tooltip-type": KindEnum.TEXT
                     },
                     trackingProperties: {
                       type: "Background toggle",
@@ -5455,7 +5455,7 @@ let lD = memo(({
                     recordingKey: "resetPlaygroundProps",
                     htmlAttributes: {
                       "data-tooltip": getI18nString("design_systems.playground.reset_properties"),
-                      "data-tooltip-type": Ib.TEXT
+                      "data-tooltip-type": KindEnum.TEXT
                     },
                     children: jsx(_$$m2, {})
                   })]
@@ -5513,7 +5513,7 @@ function lO({
 }) {
   return useDelayedTrue(200) ? jsx(_$$fu, {
     name: "Dev Mode Component Playground",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: e,
       width: "fit-content",
       children: jsxs(_$$vo, {
@@ -5632,7 +5632,7 @@ function lK(e) {
     [ComponentPropType.NONE]: _$$y4
   }[e.type];
   let u = jsx(c, {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("design_systems.component_properties.property_icon_tooltip", {
       propertyType: _$$xb(e.type === ComponentPropType.NONE ? ComponentPropType.VARIANT : e.type)
     })
@@ -5646,7 +5646,7 @@ function lK(e) {
     onMouseLeave: () => {
       o(!1);
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       className: "component_props_list--propertyRowButton--biwBU",
       onClick: t,
       htmlAttributes: {
@@ -5692,7 +5692,7 @@ function lX() {
   return jsx("div", {
     className: "component_props_list--playgroundButtonContainer--q6-lJ",
     "data-test-id": "openInPlaygroundButton",
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       variant: "secondary",
       onClick: n,
       recordingKey: "openInPlayground",
@@ -5925,7 +5925,7 @@ function l8({
   }
   return jsxs(fI, {
     className: l4,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A14,
       className: _$$s.colorIconSecondary.$
     }), jsx(_$$L2, {
@@ -6124,7 +6124,7 @@ let sf = registerModal(function ({
     e.keyCode === Uz.ENTER && !e.shiftKey && p && d ? O() : e.keyCode === Uz.ESCAPE && v(hideModal());
   };
   let F = setupAutofocusHandler();
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: n,
     width: "md",
     children: jsxs(_$$vo, {
@@ -6187,11 +6187,11 @@ let sf = registerModal(function ({
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: () => v(hideModal()),
             children: renderI18nText("dev_handoff.developer_related_links.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: O,
             disabled: M,
             type: "submit",
@@ -6226,7 +6226,7 @@ function s_() {
   let a = useSelector(e => e.mirror.appModel.currentPage);
   let l = t.get(n ?? a);
   let [s, d] = useAtomValueAndSetter(sm);
-  let c = _$$U2();
+  let c = trackFileEventWithStore();
   return useCallback(() => {
     l?.isAlive && (d(!0), c("Dev Handoff Related Links Click Plus Icon", {
       nodeId: e,
@@ -6409,7 +6409,7 @@ function sy({
           recordingKey: "addDevRelatedLink",
           htmlAttributes: {
             "data-tooltip": getI18nString("dev_handoff.developer_related_links.add_link_button"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$x, {})
         })
@@ -6511,7 +6511,7 @@ function sb({
       top: 4,
       left: 16
     },
-    children: Array.from(o).map((e, t) => jsx(_$$E4, {
+    children: Array.from(o).map((e, t) => jsx(TextWithTruncation, {
       children: renderI18nText("dev_handoff.related_links.plugin.auth_required", {
         button: jsx("button", {
           className: _$$s.colorTextBrand.bgTransparent.$,
@@ -6519,7 +6519,7 @@ function sb({
             links: e.links,
             plugin: e.plugin
           }),
-          children: jsx(_$$E4, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("dev_handoff.related_links.plugin.connect_to", {
               pluginName: e.plugin.name
             })
@@ -6554,7 +6554,7 @@ function sO() {
   p && ("hub_file_id" in p ? e = p.hub_file_id : "library_file_key" in p && (e = p.library_file_key));
   let h = useRef(!1);
   !1 === h.current && u && "loading" === u.status && (h.current = !0);
-  let f = _$$U2();
+  let f = trackFileEventWithStore();
   let g = "loaded" === n.status ? n.result : void 0;
   let x = g && g.isExternal ? g.fileKey : e && e !== s ? e : s;
   let m = x !== s;
@@ -6583,7 +6583,7 @@ function sO() {
       recordingKey: "devHandoffNavigateInstanceButton",
       htmlAttributes: {
         "data-tooltip": j ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("dev_handoff.instance_navigation.go_to_main_component"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: j ? jsx(_$$c6, {}) : m ? jsx(_$$E6, {}) : jsx(_$$K3, {})
     })
@@ -6709,7 +6709,7 @@ function s1({
     toggleDropdown();
   }, [toggleDropdown, b]);
   let R = S ? S?.displayText : t;
-  return S ? jsx(_$$E, {
+  return S ? jsx(ButtonPrimitive, {
     className: ek()(tY, "header--noChevron--ikDCm"),
     onClick: P,
     recordingKey: "compareChanges.entrypoint",
@@ -6727,7 +6727,7 @@ function s1({
       recordingKey: "compareChanges.entrypoint",
       children: [!!d && jsx("div", {
         className: "header--overridesDot--31BuQ",
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A16
         })
       }), jsx("div", {
@@ -6746,7 +6746,7 @@ function s1({
     className: ek()(tJ, {
       "header--layerCompareLinkTextDisabled----eEQ": n
     }),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("dev_handoff.compare_changes.entrypoint.multiselect_comparison_hint"),
     "data-testid": "compare-changes-entry-without-dropdown",
     "data-onboarding-key": Ov,
@@ -6762,7 +6762,7 @@ function s2() {
   if (n?.length !== 2) return null;
   let s = n[1];
   let r = n[0];
-  return jsx($n, {
+  return jsx(Button, {
     variant: "secondary",
     onClick: () => {
       e && (trackEventAnalytics("Diff Modal Compare Changes Clicked", {
@@ -6809,7 +6809,7 @@ function s3() {
   let l = s5();
   let s = s_();
   let r = useCanUseDevModeDemoFile();
-  let d = Td();
+  let d = useIsCanvasEditDisabled();
   let c = useDispatch();
   let {
     getTriggerProps,
@@ -6824,7 +6824,7 @@ function s3() {
       "aria-label": getI18nString("dev_handoff.layer_options"),
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.layer_options"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       recordingKey: "headerDropdownTrigger",
       ...getTriggerProps(),
@@ -7146,7 +7146,7 @@ function s9({
       isCodeConnected: e
     }), jsx("span", {
       className: p ? "header--layerTypeSymbol--cMeH3 header--layerType--vaDds ellipsis--ellipsis--Tjyfa" : tX,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": h,
       children: l
     })]
@@ -7168,7 +7168,7 @@ function re() {
   let i = Cj(name);
   if (!e) return null;
   let o = name || getI18nString("fullscreen.layer_panel.layer");
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: ek()(tV, {
       [tW]: !!name
     }),
@@ -7181,7 +7181,7 @@ function re() {
       "data-tooltip": getI18nString("dev_handoff.inspect_panel.copy_layer_name_aria", {
         layerName: o
       }),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx("span", {
       className: showNameAsQuotedText ? "header--quotedLayerNameWrapper--J18fR" : tH,
@@ -7196,7 +7196,7 @@ function rt() {
   let i = Cj(n);
   if (e) return null;
   let o = n || getI18nString("inspect_panel.node_type.page");
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: ek()(tV, {
       [tW]: !!n
     }),
@@ -7209,7 +7209,7 @@ function rt() {
       "data-tooltip": getI18nString("dev_handoff.inspect_panel.copy_page_name_aria", {
         pageName: o
       }),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx("span", {
       className: tH,
@@ -7236,7 +7236,7 @@ function ra() {
   let n = Cj(t);
   return t ? jsx("div", {
     className: "header--linkButtonContainer--ul-r- ellipsis--ellipsis--Tjyfa",
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "ghost",
       onClick: n,
       iconPrefix: jsx("div", {
@@ -7248,7 +7248,7 @@ function ra() {
       }),
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.link.copy_tooltip"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: t
     })
@@ -7487,7 +7487,7 @@ function rg({
   let l = `devHandoffNodesPanel.caret.${t ? "forcedExpanded" : e ? "expanded" : "collapsed"}`;
   return jsxs("div", {
     className: "dev_handoff_layers_panel--layersListHeader--gQFn- text--fontPos11--2LvXf text--_fontBase--QdLsd",
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: "dev_handoff_layers_panel--layersListHeaderButton--MlUHF",
       onClick: () => !t && n(!e),
       actionOnPointerDown: !0,
@@ -7572,7 +7572,7 @@ function rN(e) {
     role: "button",
     tabIndex: 0,
     "data-fullscreen-intercept": !0,
-    children: [hasChildren ? jsx(_$$B, {
+    children: [hasChildren ? jsx(SvgComponent, {
       className: w,
       svg: isExpanded ? _$$A : _$$A17,
       onMouseDown: y
@@ -7671,7 +7671,7 @@ let rk = memo(function (e) {
   let D = C ? {
     backgroundColor: e.thumbnailBackgroundColor
   } : void 0;
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: ek()(isSelected ? sX : sK, "dev_handoff_nodes_panel--itemWithThumbnail--t0s4E"),
     onClick: T,
     htmlAttributes: {
@@ -7833,7 +7833,7 @@ function rI({
   let E = useCallback(() => m(l.current.clientHeight), [m]);
   let C = useCallback(() => m(f), [m, f]);
   return jsxs(Fragment, {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: ek()(RE, "dev_handoff_nodes_panel--focusVisible--KtjCp"),
       "aria-label": getI18nString("dev_handoff.tag.ready_for_development"),
       onClick: () => h(e => !e),
@@ -7912,7 +7912,7 @@ function rI({
   });
 }
 function rE() {
-  return _$$s4() ? jsx($n, {
+  return _$$s4() ? jsx(Button, {
     variant: "secondary",
     iconPrefix: jsx(_$$A11, {}),
     onClick: () => fullscreenValue.triggerAction("add-selection-ready-status"),
@@ -8163,7 +8163,7 @@ function rq() {
         children: jsx(y$, {})
       }), jsx("div", {
         className: _$$s.pt16.px32.alignCenter.$,
-        children: jsx(_$$E4, {
+        children: jsx(TextWithTruncation, {
           fontSize: 12,
           color: "secondary",
           children: renderI18nText("dev_handoff.loading_plugin", {
@@ -8229,7 +8229,7 @@ function r4({
           spacing: 8,
           children: [jsx(_$$d9, {
             plugin: e
-          }), jsx(_$$E4, {
+          }), jsx(TextWithTruncation, {
             fontWeight: "bold",
             truncate: !0,
             showTooltipWhenTruncated: !0,
@@ -8265,7 +8265,7 @@ function r7({
   recordingKey: i,
   isSingle: o
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     recordingKey: generateRecordingKey(i, "tab"),
     onClick: n,
     actionOnPointerDown: !0,
@@ -8469,16 +8469,16 @@ function df({
           children: jsx(_$$d9, {
             plugin: e
           })
-        }), jsx(_$$E4, {
+        }), jsx(TextWithTruncation, {
           fontFamily: "primary",
           children: renderI18nText("fullscreen.plugins.background", {
-            plugin: jsx(_$$E4, {
+            plugin: jsx(TextWithTruncation, {
               fontWeight: "bold",
               children: e.name
             })
           })
         })]
-      }), jsx(IK, {
+      }), jsx(ButtonWide, {
         variant: "secondary",
         onClick: () => {
           handlePluginError();
@@ -8556,7 +8556,7 @@ function dN({
   let h = _$$ie();
   let f = fb();
   let g = useSelector(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
-  let x = _$$U2();
+  let x = trackFileEventWithStore();
   let [m, _] = useState(!1);
   let v = n ?? g;
   let y = useCallback(t => {
@@ -8588,7 +8588,7 @@ function dN({
     plugin: j
   });
   let E = !!n;
-  let C = useMemo(() => dr()(_$$c8, 500), []);
+  let C = useMemo(() => dr()(incrementCounter, 500), []);
   let T = useCallback(({
     id: e,
     regenerateCode: t
@@ -8604,7 +8604,7 @@ function dN({
   let S = useCallback(() => {
     _(!1);
     _$$px().rebuildNodeCache();
-    _$$c8();
+    incrementCounter();
   }, []);
   let L = function (e, t) {
     let [n, a] = useState(e);
@@ -8641,7 +8641,7 @@ function dN({
       children: [jsx(_$$Q2, {
         title: renderI18nText("dev_handoff.code.update_prompt_title"),
         children: renderI18nText("dev_handoff.code.update_prompt")
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         onClick: S,
         children: renderI18nText("dev_handoff.code.update_prompt_action")
@@ -8944,7 +8944,7 @@ function d9({
   focusNodeId: c
 }) {
   let u = useDispatch();
-  let p = _$$U2();
+  let p = trackFileEventWithStore();
   let h = Ak((t ?? 0) * 1e3);
   let f = _$$hA();
   return jsx(jP, {
@@ -9070,14 +9070,14 @@ function ca({
   let f = e.version?.id ?? void 0;
   let g = d7();
   let x = useAtomWithSubscription(wg);
-  let m = _$$U2();
+  let m = trackFileEventWithStore();
   let _ = g && s || f === h.activeId;
   let v = function (e, t, n) {
     let a = _$$hA();
     let s = useDispatch();
     let r = _6();
     let d = d4();
-    let c = _$$U2();
+    let c = trackFileEventWithStore();
     return useCallback((i, o) => {
       if (t && !i) {
         if (n) {
@@ -9255,7 +9255,7 @@ function cf() {
       collapsiblePanelKey: "variables",
       children: jsxs("div", {
         className: "variables_table_entry_point--innerPanelContainer--fMHQK text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: [renderI18nText("variables.inspection_panel_entry_point.description"), jsx(IK, {
+        children: [renderI18nText("variables.inspection_panel_entry_point.description"), jsx(ButtonWide, {
           variant: "secondary",
           onClick: e,
           recordingKey: n,
@@ -9457,11 +9457,11 @@ let c9 = memo(({
       className: ek()("asset_panel--assetRow--0VUJr text--fontPos11--2LvXf text--_fontBase--QdLsd", {
         "asset_panel--forceHovered--GZMWo": manager.isOpen || d
       }),
-      children: [jsx(_$$E, {
+      children: [jsx(ButtonPrimitive, {
         className: "asset_panel--assetPreview--nTOgs",
         style: N.backgroundStyle,
         onClick: V,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("inspect_panel.interactions.select_layer"),
         children: N && jsx(_$$J7, {
           src: N.url,
@@ -9483,7 +9483,7 @@ let c9 = memo(({
           })
         }) : jsxs("div", {
           className: "asset_panel--componentAssetType--oeu0C asset_panel--assetType--hIg9Q ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A2
           }), jsx("div", {
             className: "asset_panel--componentAssetTypeEllipsis--0gm6v ellipsis--ellipsis--Tjyfa",
@@ -9521,11 +9521,11 @@ let c9 = memo(({
             className: "asset_panel--exportIcon--aQQXS",
             children: $ ? jsxs(_$$bL2, {
               manager,
-              children: [jsxs(_$$E, {
+              children: [jsxs(ButtonPrimitive, {
                 "aria-label": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
                 htmlAttributes: {
                   "data-tooltip": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
-                  "data-tooltip-type": Ib.TEXT
+                  "data-tooltip-type": KindEnum.TEXT
                 },
                 disabled: f,
                 className: c$,
@@ -9565,7 +9565,7 @@ let c9 = memo(({
               disabled: f,
               htmlAttributes: {
                 "data-tooltip": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               recordingKey: `export-${assetId}`,
               children: jsx(_$$b7, {})
@@ -9591,16 +9591,16 @@ let c9 = memo(({
             disabled: !0,
             htmlAttributes: {
               "data-tooltip": getI18nString("fullscreen.properties_panel.export_disabled"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             },
             children: jsx(_$$b7, {})
           }) : t.length > 1 ? jsxs(_$$bL2, {
             manager: _manager,
-            children: [jsxs(_$$E, {
+            children: [jsxs(ButtonPrimitive, {
               "aria-label": getI18nString("fullscreen.export.export"),
               htmlAttributes: {
                 "data-tooltip": getI18nString("fullscreen.export.export"),
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               className: c$,
               recordingKey: `export-${assetId}`,
@@ -9620,7 +9620,7 @@ let c9 = memo(({
           "aria-label": et ? getI18nString("design_systems.instance_panel.view_library_in_community") : ee ? getI18nString("dev_handoff.library.view") : getI18nString("design_systems.instance_panel.go_to_main_component"),
           htmlAttributes: {
             "data-tooltip": et ? getI18nString("design_systems.instance_panel.view_library_in_community") : ee ? getI18nString("dev_handoff.library.view") : getI18nString("design_systems.instance_panel.go_to_main_component"),
-            "data-tooltip-type": Ib.TEXT
+            "data-tooltip-type": KindEnum.TEXT
           },
           children: et ? jsx(_$$c6, {}) : ee ? jsx(_$$l4, {}) : jsx(_$$K3, {})
         })]
@@ -9938,7 +9938,7 @@ function ur({
     disabled: tooManyMediaToExport || nothingToExport || u,
     htmlAttributes: {
       "data-tooltip": h ?? p,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     recordingKey: `assets_download_all_${uh(e)}`,
     children: isLocalExporting ? jsx(_$$k2, {
@@ -10057,7 +10057,7 @@ function uu({
       disabled: n,
       htmlAttributes: {
         "data-tooltip": n ? getI18nString("fullscreen.properties_panel.export_disabled") : s,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       recordingKey: `assets_download_open_settings_${uh(e)}`,
       children: jsx(_$$A19, {})
@@ -10114,7 +10114,7 @@ function up({
         "aria-label": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
         htmlAttributes: {
           "data-tooltip": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         disabled: x,
         ...getTriggerProps(),
@@ -10342,11 +10342,11 @@ function uA({
     x: 0,
     y: 0
   });
-  let d = _$$hC();
+  let d = trackDefinedFileEventWithStore();
   let c = _$$ox();
   let u = useRef(null);
   return jsxs(Fragment, {
-    children: [jsx(IK, {
+    children: [jsx(ButtonWide, {
       ref: u,
       variant: "secondary",
       onClick: () => {
@@ -10404,7 +10404,7 @@ function uS({
   });
 }
 function uP() {
-  let e = _$$hC();
+  let e = trackDefinedFileEventWithStore();
   let t = useAtomWithSubscription(mO);
   let n = _$$oA2();
   let {
@@ -10723,12 +10723,12 @@ function uW({
   let N = i > 1 ? jsx("div", {
     className: "typography_preview--label--pJ-5L typography_preview--labelBase--mlEgn ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
     children: renderI18nText("dev_handoff.typography_preview_multiple_styles")
-  }) : styleName ? jsx(_$$E, {
+  }) : styleName ? jsx(ButtonPrimitive, {
     className: "typography_preview--styleName--tA801 typography_preview--labelBase--mlEgn ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: h,
     "aria-label": getI18nString("inspect_panel.code.style"),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": styleDescription,
       "data-tooltip-show-above": !0
     },
@@ -10752,14 +10752,14 @@ function uW({
         },
         children: jsxs("div", {
           className: ek()(uM, "typography_preview--left--wzNxs"),
-          children: [jsx(_$$E, {
+          children: [jsx(ButtonPrimitive, {
             className: uF,
             onClick: p,
             "aria-label": s ? getI18nString("inspect_panel.code.font_size_value", {
               value: s
             }) : getI18nString("inspect_panel.code.font_size"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("inspect_panel.code.font_size"),
               "data-tooltip-show-above": !0
             },
@@ -10797,21 +10797,21 @@ function uW({
           fontFamily: t.family,
           fontStyle: t.style
         }) : getI18nString("dev_handoff.typography_preview_empty_aria_label"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": t ? `${t.family} ${t.style}` : void 0,
         "data-tooltip-show-above": !0
       }), jsx("div", {
         className: uO,
         children: jsxs("div", {
           className: ek()(uM, "typography_preview--right--QhAIw"),
-          children: [jsx(_$$E, {
+          children: [jsx(ButtonPrimitive, {
             className: uF,
             onClick: u,
             "aria-label": l ? getI18nString("inspect_panel.typography.line_height_value", {
               value: l
             }) : getI18nString("inspect_panel.typography.line_height"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("inspect_panel.typography.line_height"),
               "data-tooltip-show-above": !0
             },
@@ -10847,7 +10847,7 @@ function uU({
   return jsx("div", {
     className: "typography_preview--previewError--Kwn7m",
     children: jsx("span", {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": i,
       children: renderI18nText("dev_handoff.typography_preview_not_available")
     })
@@ -11009,7 +11009,7 @@ function pl() {
       children: [jsx("div", {
         className: pa,
         children: getI18nString("dev_handoff.mcp.new_user_banner_description")
-      }), jsx(IK, {
+      }), jsx(ButtonWide, {
         variant: "secondary",
         onClick: e,
         recordingKey: "newUserEnableMcp",
@@ -11151,7 +11151,7 @@ function pp() {
       children: renderI18nText("dev_handoff.mcp.status")
     }), jsxs("div", {
       "data-tooltip": getI18nString("dev_handoff.mcp.to_disable_tooltip"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       className: "mcp_panel--statusDisplay--SL0ss",
       children: [jsx("div", {
         className: "mcp_panel--statusIcon--9wmDn",
@@ -11170,7 +11170,7 @@ function ph() {
     newTab: !0,
     href: "https://form.asana.com/?k=jMdFq_1SBUOyh8_k3q76QA&d=10497086658021",
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("dev_handoff.mcp.beta_feedback_tooltip"),
     onClick: e => e.stopPropagation(),
     children: jsxs("div", {
@@ -11311,7 +11311,7 @@ function pv({
 function py() {
   let e = useDispatch();
   let t = _$$AF();
-  return getFeatureFlags().dt_multi_node && t ? jsx(IK, {
+  return getFeatureFlags().dt_multi_node && t ? jsx(ButtonWide, {
     onClick: () => e(showModalHandler({
       type: cc,
       data: {}
@@ -11508,7 +11508,7 @@ function pA({
       })]
     }), jsx("div", {
       className: _$$s.flex.pt12.pb12.pl16.pr16.itemsCenter.$,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "link",
         onClick: pN,
         children: renderI18nText("dev_handoff.version_history.view_all_versions")
@@ -11789,7 +11789,7 @@ let pG = memo(() => {
     className: "dev_handoff_breadcrumbs--container--BoCAA",
     children: n.map((e, t) => {
       let o = t === n.length - 1;
-      let l = jsx(_$$B, {
+      let l = jsx(SvgComponent, {
         svg: _$$A20,
         className: o ? "dev_handoff_breadcrumbs--chevronIconSelected--NrpAP dev_handoff_breadcrumbs--chevronIcon--MAw4y" : "dev_handoff_breadcrumbs--chevronIcon--MAw4y",
         height: "3px",
@@ -11853,7 +11853,7 @@ function p0() {
       paddingLeft: "10px",
       paddingRight: "10px"
     } : void 0,
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: ek()(pY, NB, {
         [_$$pq]: o
       }),
@@ -11863,7 +11863,7 @@ function p0() {
       disabled: !o,
       "aria-label": getI18nString("dev_handoff.vscode.zoom_control.zoom_out_button"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.vscode.zoom_control.zoom_out_button")
       },
       children: jsx(_$$O7, {
@@ -11877,10 +11877,10 @@ function p0() {
         width: `${Math.max(d.length, 4)}em`
       },
       onClick: toggleDropdown,
-      children: [d, "% ", jsx(_$$B, {
+      children: [d, "% ", jsx(SvgComponent, {
         svg: _$$A21
       })]
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       className: ek()(pY, NB, {
         [_$$pq]: r
       }),
@@ -11890,7 +11890,7 @@ function p0() {
       disabled: !r,
       "aria-label": getI18nString("dev_handoff.vscode.zoom_control.zoom_in_button"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.vscode.zoom_control.zoom_in_button")
       },
       children: jsx(_$$e8, {
@@ -11939,9 +11939,9 @@ function p4({
         }
       },
       "data-tooltip": getI18nString("dev_handoff.tag.layers"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A22
       })
     }), d && jsx(Cf, {
@@ -12112,9 +12112,9 @@ function hp({
   } = _$$X(e);
   let l = t ? {
     "data-tooltip": getI18nString("variables.variable_was_deleted"),
-    "data-tooltip-type": Ib.TEXT
+    "data-tooltip-type": KindEnum.TEXT
   } : void 0;
-  return e ? jsxs(_$$E, {
+  return e ? jsxs(ButtonPrimitive, {
     className: "style_details_modal--nameContainer--lptg- variable_details_view--variableNameContainer--9iRtJ",
     onClick: n,
     htmlAttributes: o ?? l,
@@ -12516,7 +12516,7 @@ function hV({
   let n = Um();
   let s = useRef(null);
   let [d, c] = useAtomValueAndSetter(sg);
-  let u = _$$U2();
+  let u = trackFileEventWithStore();
   let p = Nf() ?? "";
   let h = _$$eY().get(p);
   let f = document.getElementById("dev-handoff-inspect-panel");
@@ -12533,10 +12533,10 @@ function hV({
         "aria-expanded": g,
         htmlAttributes: {
           "data-tooltip": getI18nString("dev_handoff.add_dev_resource"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         "aria-label": getI18nString("dev_handoff.add_dev_resource"),
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A23
         })
       })
@@ -12648,7 +12648,7 @@ function hH() {
         className: "inspect_tabs--rightButtons--HeXhW",
         children: [d && jsx(_$$K2, {
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("dev_handoff.inspect_panel.close_plugin")
           },
           "aria-label": getI18nString("dev_handoff.inspect_panel.close_plugin"),
@@ -12733,8 +12733,8 @@ function hJ() {
           style: {
             width: "32px"
           },
-          children: jsx(_$$B, {
-            "data-tooltip-type": Ib.TEXT,
+          children: jsx(SvgComponent, {
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip-show-above": !0,
             "data-tooltip": e ? getI18nString("dev_handoff.vscode.inspect_panel.hide_inspect_tooltip") : getI18nString("dev_handoff.vscode.inspect_panel.show_inspect_tooltip"),
             svg: e ? _$$A25 : _$$A24,
@@ -12847,7 +12847,7 @@ let fs = memo(function (e) {
     }, e, t);
     let u = QO(void 0, pxValue);
     let p = $Q();
-    let h = _$$hC();
+    let h = trackDefinedFileEventWithStore();
     return {
       value: u,
       setValue: useCallback((i, o) => {
@@ -12891,7 +12891,7 @@ let fs = memo(function (e) {
       ...c,
       "data-tooltip": u,
       "data-tooltip-show-above": !1,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       min: getFeatureFlags().editor_zero_width_input ? _$$ak : void 0,
       noBorderOnHover: !0,
       onBlur: e.onBlur,
@@ -12917,7 +12917,7 @@ function fp() {
       t && Sprig("track", "interactive_inspection_action");
     }, [t, Sprig]);
   }();
-  let e = _$$hC();
+  let e = trackDefinedFileEventWithStore();
   let t = _$$hA();
   let n = Fk((e, t) => {
     let n = e.get(t);
@@ -13045,7 +13045,7 @@ function fh() {
         onClick: toggleDropdown,
         "aria-label": getI18nString("dev_handoff.workflows.more_actions_tooltip"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("dev_handoff.workflows.more_actions_tooltip")
         },
         children: jsx(_$$J5, {})
@@ -13074,7 +13074,7 @@ function ff() {
   let u = useCurrentFileKey();
   let p = useSelector(e => e.versionHistory);
   let h = QV();
-  let f = _$$U2();
+  let f = trackFileEventWithStore();
   let x = _$$U("focus_view_back");
   let v = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
   let [, y] = useAtomValueAndSetter(_o);
@@ -13140,7 +13140,7 @@ function ff() {
           recordingKey: "dev_handoff.workflows.focus.back_link",
           "aria-label": I,
           "data-tooltip": I,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           children: jsx(_$$C2, {})
         }), jsx("div", {
           className: "focus_canvas_ui--pageBreadcrumb--ZLVL8",

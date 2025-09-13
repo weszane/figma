@@ -6,7 +6,7 @@ import { RecordingPureComponent, handleGenericEvent, handleKeyboardEvent, genera
 import { D8 } from "../905/511649";
 import { t as _$$t } from "../905/331623";
 import { normalizeValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { En } from "../figma_app/613182";
 var s = a;
 let h = "segmented_control--ui3FullWidth--PX8yl";
@@ -120,9 +120,9 @@ class f extends PureComponent {
       "segmented_control--segmentUnselected--3DBsl segmented_control--_segment--XQq-a": !this.props.selected,
       "segmented_control--segmentInactive--OjSUb segmented_control--_segment--XQq-a": this.props.inactive
     });
-    let t = Ib.TEXT;
+    let t = KindEnum.TEXT;
     let i = "";
-    this.props.tooltip ? i = this.props.tooltip : this.props.tooltipAction && (t = Ib.LOOKUP, i = this.props.tooltipAction);
+    this.props.tooltip ? i = this.props.tooltip : this.props.tooltipAction && (t = KindEnum.LOOKUP, i = this.props.tooltipAction);
     return jsxs(D8, {
       className: e,
       onMouseDown: this.props.inactive ? void 0 : this.props.onMouseDown,

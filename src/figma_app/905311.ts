@@ -6,7 +6,7 @@ import o from "classnames";
 import { C } from "../figma_app/974443";
 import { RecordingComponent, SKIP_RECORDING, handleMouseEvent, setupPlayback } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { S } from "../figma_app/552746";
 import { H4 } from "../figma_app/679183";
 import { dD, xp } from "../figma_app/941824";
@@ -44,7 +44,7 @@ export let $$E0 = forwardRef(function ({
         [wD]: 1.5 === e,
         [KT]: d
       }),
-      children: (!o || t) && jsx(B, {
+      children: (!o || t) && jsx(SvgComponent, {
         className: T,
         svg: A
       })

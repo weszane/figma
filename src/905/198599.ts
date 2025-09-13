@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
 import { atom, Xr, atomStoreManager } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
@@ -13,7 +13,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { yt, m1, SW, T1 } from "../figma_app/545293";
 import { XE } from "../figma_app/976749";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { qp } from "../905/977779";
 import { selectOpenFile } from "../figma_app/516028";
 import { eD, ET } from "../figma_app/646357";
@@ -48,7 +48,7 @@ export function $$z2({
 }) {
   let i = _$$s();
   let r = Xr($$V3);
-  let a = _$$A($$H1, e);
+  let a = useDebouncedCallback($$H1, e);
   let s = useCallback(() => {
     a.cancel();
     r(() => ({
@@ -115,7 +115,7 @@ export async function $$H1(e, t) {
       entryPoint: L,
       queryType: h.type.replace("input-", ""),
       aiResultsEnabled: f,
-      productType: pi({
+      productType: mapFileToProductType({
         editorType: n?.editorType
       }),
       libraryKey: _$$l(i.openFile?.libraryKey ?? ""),

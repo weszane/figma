@@ -29,7 +29,7 @@ import { Ep } from "../figma_app/504823";
 import { p3 } from "../figma_app/622881";
 import { getBasename } from "../905/309735";
 import { isStyleType, getStyleThumbnail } from "../905/405710";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { M as _$$M } from "../905/968248";
 import { Z as _$$Z3 } from "../905/248978";
 let s = memo(function (e) {
@@ -383,9 +383,9 @@ export function $$ea1({
     className: h,
     ...(u && p ? {
       "data-tooltip": p,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     } : o ? {} : {
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": _$$Z3,
       "data-tooltip-style-name": l ? void 0 : getBasename(e.name || ""),
       "data-tooltip-style-description": e.description

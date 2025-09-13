@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { J } from "../905/614223";
 import o from "classnames";
 import { isGovCluster } from "../figma_app/169182";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { Z } from "../905/224161";
@@ -28,7 +28,7 @@ export function $$E0({
     brand: b,
     children: jsx("div", {
       ref: y,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         htmlAttributes: {
           "data-test-id": "google-btn"
         },
@@ -37,7 +37,7 @@ export function $$E0({
         ...o,
         children: jsxs("span", {
           className: _d,
-          children: [jsx(B, {
+          children: [jsx(SvgComponent, {
             className: Kk,
             svg: A,
             useOriginalSrcFills_DEPRECATED: !0
@@ -60,14 +60,14 @@ export function $$y1(e) {
     brand: o,
     children: jsx("div", {
       ref: r,
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         htmlAttributes: {
           "data-test-id": "google-btn"
         },
         className: "x3nfvp2 x1n2onr6 x1c5tqo3 x8ge37t x19y5rnk xxk0z11",
         "aria-label": getI18nString("footer_banner.continue_with_google"),
         ...e,
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           className: "x78zum5 x6s0dn4 x46zyou",
           svg: A,
           useOriginalSrcFills_DEPRECATED: !0,

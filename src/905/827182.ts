@@ -19,13 +19,13 @@ import { oW } from "../905/675859";
 import { Qp } from "../figma_app/162641";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { DP } from "../905/640017";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { getObservableValue } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { il, X7 } from "../figma_app/789050";
 import { g as _$$g } from "../905/412697";
 import { Kt, $A } from "../figma_app/156285";
@@ -206,7 +206,7 @@ export function $$G1(e) {
         return;
       }
       if (!t || "CUSTOM" === t || "MIXED" === t) return;
-      let n = Dc(debugState.getState().selectedView.editorType);
+      let n = mapEditorTypeToProductType(debugState.getState().selectedView.editorType);
       let r = U[t];
       (i === yesNoTrackingEnum.YES || i === yesNoTrackingEnum.YES_FORCE_TRACKING_AS_EDIT) && analyticsEventManager.trackDefinedEvent("illustration.web_variable_width_stroke_profile_changed", {
         source: e.source,
@@ -257,7 +257,7 @@ export function $$G1(e) {
       }),
       htmlAttributes: {
         "data-tooltip": t ? i : void 0,
-        "data-tooltip-type": t ? Ib.TEXT : void 0
+        "data-tooltip-type": t ? KindEnum.TEXT : void 0
       },
       children: ee
     }), jsxs(mc, {

@@ -43,7 +43,7 @@ import { PluginAction, setupPlaybackHandler } from '../905/656545';
 import { PT } from '../905/669853';
 import { N as _$$N } from '../905/696711';
 import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
-import { N2 } from '../905/709171';
+import { compareLibraryItems } from '../905/709171';
 import { IT, M4 } from '../905/713695';
 import { logError } from '../905/714362';
 import { l as _$$l } from '../905/716947';
@@ -70,7 +70,7 @@ import { LL, OQ } from '../figma_app/141508';
 import o, { VariableSetIdCompatHandler } from '../figma_app/243058';
 import { e as _$$e2 } from '../figma_app/267183';
 import { useSubscription } from '../figma_app/288654';
-import { ds } from '../figma_app/314264';
+import { trackFileEvent } from '../figma_app/314264';
 import { RX } from '../figma_app/409131';
 import { am, F$ } from '../figma_app/430563';
 import { fullscreenValue } from '../figma_app/455680';
@@ -134,7 +134,7 @@ let $$eH49 = createOptimistThunk((e, t) => {
   } = t;
   let c = getSelectedFile(e.getState());
   if (c) {
-    if (!N2(item, c) || alwaysFetch) {
+    if (!compareLibraryItems(item, c) || alwaysFetch) {
       let t = async () => {
         try {
           let e = await $$eV38(item, targetUpsertScene);
@@ -205,7 +205,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
       reportError(_$$e.DESIGN_SYSTEMS_EDITOR, t);
       _$$V(_.key, item, !1, !!e.getState().userFlags.apple_eula_accepted);
     }
-    ds('Instance Swapped To Shared Component', _.key, e.getState(), {
+    trackFileEvent('Instance Swapped To Shared Component', _.key, e.getState(), {
       componentLibraryKey: item.library_key,
       componentId: item.id,
       source: t.sourceForTracking,
@@ -305,7 +305,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
       fullscreenValue.triggerAction('commit');
       fullscreenValue.triggerAction('set-tool-default');
     };
-    if (N2(item, f)) {
+    if (compareLibraryItems(item, f)) {
       let t = I.library.local.components[item.node_id];
       if (!t || !I.mirror.sceneGraph.get(t.node_id)) {
         e.dispatch(showModalHandler({
@@ -317,7 +317,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
         permissionScopeHandler.user('insert-component', () => {
           v(t.node_id, insertLogArgsOverride);
         });
-        ds('Component Local Symbol Inserted', f.key, e.getState(), {
+        trackFileEvent('Component Local Symbol Inserted', f.key, e.getState(), {
           componentLibraryKey: item.library_key,
           componentId: item.id,
           ComponentCanvasPositionX: canvasPosition.x,
@@ -363,7 +363,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
         });
       }).then(() => {
         let i = performance.now() - t;
-        ds('Component Shared Symbol Inserted', f.key, e.getState(), {
+        trackFileEvent('Component Shared Symbol Inserted', f.key, e.getState(), {
           elapsedMs: i,
           componentLibraryKey: item.library_key,
           componentId: item.id,
@@ -454,7 +454,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
       fullscreenValue.triggerAction('set-tool-default');
       return u;
     };
-    if (N2(item, m)) {
+    if (compareLibraryItems(item, m)) {
       let t = I.library.local.stateGroups[item.node_id];
       if (!t || !I.mirror.sceneGraph.get(t.node_id)) {
         e.dispatch(showModalHandler({
@@ -465,7 +465,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
       permissionScopeHandler.user('insert-state-group', () => {
         v(t.node_id, '', insertLogArgsOverride);
       });
-      ds('State Group Local Symbol Inserted', m.key, e.getState(), {
+      trackFileEvent('State Group Local Symbol Inserted', m.key, e.getState(), {
         stateGroupLibraryKey: item.library_key,
         stateGroupId: item.id,
         StateGroupCanvasPositionX: canvasPosition.x,
@@ -498,7 +498,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
         if (!t) throw new Error('An error occurred while adding an instance of this component.');
         v(t, '', insertLogArgsOverride);
       }).then(() => {
-        ds('State Group Shared Symbol Inserted', m.key, e.getState(), {
+        trackFileEvent('State Group Shared Symbol Inserted', m.key, e.getState(), {
           stateGroupLibraryKey: item.library_key,
           stateGroupId: item.id,
           stateGroupName: item.name,
@@ -575,7 +575,7 @@ let $$eJ4 = createOptimistThunk(async (e, t) => {
     return s;
   };
   let T = getSelectedFile(E);
-  if (N2(item, T)) {
+  if (compareLibraryItems(item, T)) {
     b(item.node_id, insertLogArgsOverride);
     e.dispatch(tX());
   } else {
@@ -733,7 +733,7 @@ let $$e22 = createOptimistThunk(async (e, t) => {
       });
       fullscreenValue.triggerAction('commit');
       let h = stateGroups.map(e => e.id);
-      ds('Components Updated', _.key, e.getState(), {
+      trackFileEvent('Components Updated', _.key, e.getState(), {
         stateGroups: h,
         isSgShimFFEnabled: !0
       });
@@ -768,7 +768,7 @@ let $$e543 = createOptimistThunk(async (e, t) => {
       });
       fullscreenValue.triggerAction('commit');
       let m = components.map(e => e.id);
-      ds('Components Updated', h.key, e.getState(), {
+      trackFileEvent('Components Updated', h.key, e.getState(), {
         components: m,
         isShimFFEnabled: !0
       });
@@ -804,7 +804,7 @@ let $$e41 = createOptimistThunk((e, t) => {
   } = t;
   let p = e.getState();
   let _ = getSelectedFile(p);
-  let h = _ && !N2(style, _);
+  let h = _ && !compareLibraryItems(style, _);
   let m = p.openFile;
   let g = ZR(cO(style, h ?? !1), m);
   let f = _$$X(g);
@@ -867,7 +867,7 @@ let $$e841 = createOptimistThunk((e, t) => {
   } = t;
   let a = getSelectedFile(r);
   if (!a) return;
-  let o = !N2(style, a);
+  let o = !compareLibraryItems(style, a);
   let c = style.style_type === 'GRID' && !AppStateTsApi.editorPreferences().showFrameGrids.getCopy();
   if (o) {
     let r = async () => {
@@ -927,7 +927,7 @@ let $$e644 = createOptimistThunk(async (e, t) => {
       });
       fullscreenValue.triggerAction('commit');
       let p = styles.map(e => e.id);
-      ds('Styles Updated', c.openFile?.key, e.getState(), {
+      trackFileEvent('Styles Updated', c.openFile?.key, e.getState(), {
         styles: p
       });
       s.size > 0 && tV(e, Array.from(s), fileSubscribedLibraryKeys);
@@ -956,7 +956,7 @@ let $$e718 = createOptimistThunk((e, t) => {
     if (!content_hash) throw new Error('content_hash not specified on style');
     let l = permissionScopeHandler.user('update-selected-shared-style-consumers', () => LibraryPubSub.updateSelectedSharedStyleConsumers(updateAsset.key, updateAsset.library_key, content_hash, updateAsset.oldSubscribedKeysToUpdate, updateAsset.localIdsToUpdate, consumerGUIDsToUpdate, oldStyleGUID, t, r));
     if (fullscreenValue.triggerAction('commit'), !l) throw new Error('unable to update');
-    ds('Styles Updated', n.openFile?.key, e.getState(), {
+    trackFileEvent('Styles Updated', n.openFile?.key, e.getState(), {
       styles: [updateAsset.id]
     });
   }).catch(t => {

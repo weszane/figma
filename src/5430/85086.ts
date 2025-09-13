@@ -8,7 +8,7 @@ import { cs } from "../figma_app/740025";
 import { MK, ot } from "../figma_app/599979";
 import { M3 } from "../figma_app/198840";
 import { getPluginMetadata } from "../figma_app/300692";
-import { vt, U, xQ, I0 } from "../figma_app/45218";
+import { ResourceTypeNoComment, hasClientMeta, isWidget, isPlugin } from "../figma_app/45218";
 import { vR } from "../5430/309696";
 export function $$h0({
   resourceId: e,
@@ -16,14 +16,14 @@ export function $$h0({
   containerClassName: r
 }) {
   let h = useDispatch();
-  let x = useSelector(r => t === vt.HUB_FILE ? M3(e, r.hubFiles) : getPluginMetadata(e, r.publishedPlugins));
+  let x = useSelector(r => t === ResourceTypeNoComment.HUB_FILE ? M3(e, r.hubFiles) : getPluginMetadata(e, r.publishedPlugins));
   let f = useSelector(e => e.authedActiveCommunityProfile);
   let y = useSelector(e => MK(e, x));
   let g = useCallback(() => {
     h(z8({
-      hub_file_id: U(x) ? x.id : void 0,
-      widget_id: xQ(x) ? x.id : void 0,
-      plugin_id: I0(x) ? x.id : void 0
+      hub_file_id: hasClientMeta(x) ? x.id : void 0,
+      widget_id: isWidget(x) ? x.id : void 0,
+      plugin_id: isPlugin(x) ? x.id : void 0
     }));
     h(VisualBellActions.enqueue({
       message: getI18nString("community.detail_view.accepted_creator_invite")
@@ -31,9 +31,9 @@ export function $$h0({
   }, [h, x]);
   let v = useCallback(() => {
     h(bb({
-      hub_file_id: U(x) ? x.id : void 0,
-      widget_id: xQ(x) ? x.id : void 0,
-      plugin_id: I0(x) ? x.id : void 0
+      hub_file_id: hasClientMeta(x) ? x.id : void 0,
+      widget_id: isWidget(x) ? x.id : void 0,
+      plugin_id: isPlugin(x) ? x.id : void 0
     }));
     h(VisualBellActions.enqueue({
       message: getI18nString("community.detail_view.declined_creator_invite")

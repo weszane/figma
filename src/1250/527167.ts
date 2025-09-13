@@ -7,15 +7,15 @@ import { Ex, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Oe } from "../905/34809";
 import { E as _$$E } from "../7021/427161";
 import { SidebarRow } from "../451de8f0/94979";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/985254";
 import { j0 } from "../1250/524544";
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 let $$x0 = "drafts_to_move_onboarding_key";
 let y = 443 == require.j ? 3e5 : null;
 let v = new Date("2024-06-03");
@@ -42,7 +42,7 @@ export function $$w1(e) {
         },
         type: "long-running-draft-migration",
         timeoutOverride: 1 / 0,
-        onDismiss: () => { }
+        onDismiss: () => {}
       }));
       e(_$$b({
         long_running_draft_migration_toast_shown: !0
@@ -93,7 +93,7 @@ export function $$w1(e) {
     },
     "data-onboarding-key": $$x0,
     icon: jsx(_$$g, {}),
-    text: jsx(E, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: renderI18nText("sidebar.drafts_to_move")
     }),

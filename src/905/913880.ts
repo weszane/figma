@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -32,7 +32,7 @@ export function $$y0() {
       }
     }));
   }, [i]);
-  let v = jsx($n, {
+  let v = jsx(Button, {
     onClick: b,
     variant: "link",
     children: jsx("span", {

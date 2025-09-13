@@ -3,12 +3,12 @@ import { useRef, useId, useMemo, forwardRef, useCallback, useState, useEffect, u
 import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { e as _$$e } from "../905/693478";
 import { VariablesBindings, Fullscreen, StateGroupErrorType, VariableSetErrorType, VariableErrorType } from "../figma_app/763686";
@@ -51,7 +51,7 @@ import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel } from "../figma_app/465
 import { Wz, MW, ju, cM, MH, dM, fA, y6, x$ as _$$x$, oB as _$$oB, JI, Dc, Iy, Mh, Pd } from "../figma_app/803787";
 import { O as _$$O3 } from "../905/566074";
 import { LibraryPublishStatusEnum, LibrarySourceEnum, PrimaryWorkflowEnum, StagingStatusEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Y as _$$Y } from "../905/465068";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
@@ -78,7 +78,7 @@ import { R as _$$R } from "../905/256203";
 import { k as _$$k3 } from "../905/700890";
 import { $z } from "../figma_app/617427";
 import { AutoLayout, Spacer } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { isBranch } from "../905/760074";
 import { M4 } from "../905/713695";
 import { bL as _$$bL, mc, c$ } from "../905/493196";
@@ -87,14 +87,14 @@ import { r as _$$r3 } from "../905/571562";
 import { g as _$$g } from "../905/687265";
 import { selectWithShallowEqual } from "../905/103090";
 import { ms, MM, c$ as _$$c$ } from "../figma_app/236327";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { G as _$$G } from "../905/750789";
 import { p as _$$p } from "../905/927118";
 import { useMemoStable } from "../905/19536";
 import { wA as _$$wA } from "../figma_app/167249";
 import { Nz } from "../figma_app/915774";
 import { LinkPrimitive } from "../figma_app/496441";
-import { B as _$$B3 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { $8, Ni, md as _$$md, i4, $j, nw, Np } from "../905/737988";
 import { A as _$$A } from "../1617/316388";
 import { T as _$$T } from "../905/485734";
@@ -195,7 +195,7 @@ function ey() {
         className: "xet2fuk x1n0bwc9 x17akokd",
         children: getI18nString("figmake.ds_imports.extract_library_subheader_done")
       })]
-    }), jsx($n, {
+    }), jsx(Button, {
       onClick: e => {
         e.preventDefault();
         i && analyticsEventManager.trackDefinedEvent("ds_import.publish_toast_go_to_figmake_clicked", {
@@ -216,7 +216,7 @@ function ey() {
         className: "xiqqdae xkezfkh",
         children: getI18nString("figmake.ds_imports.extract_library_error")
       })]
-    }), jsx($n, {
+    }), jsx(Button, {
       onClick: () => {
         i && analyticsEventManager.trackDefinedEvent("ds_import.publish_toast_retry_clicked", {
           library_key: i
@@ -348,7 +348,7 @@ function eW(e) {
       vertical: 0,
       horizontal: 8
     },
-    children: jsx(kt, {
+    children: jsx(LoadingSpinner, {
       testId: "publish-scope-loading-spinner"
     })
   }) : jsxs("div", {
@@ -458,7 +458,7 @@ function eq({
   let l = o && !_$$Y(t);
   let d = o && s?.org_access === FAccessLevelType.SECRET;
   if (!l && !d) return null;
-  let c = jsx(_$$E, {
+  let c = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: renderI18nText("design_systems.publishing_modal.warning_banner.anyone_in_org", {
       orgName: e.name
@@ -536,7 +536,7 @@ function e$({
         state: u.state,
         progress: u.progress
       }), jsx(Spacer, {}), jsxs(Fragment, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           onClick: t,
           variant: "secondary",
           children: renderI18nText("design_systems.publishing_modal.cancel")
@@ -546,7 +546,7 @@ function e$({
           onClick: () => S ? v?.() : d(),
           recordingKey: "publishingModalPublishButton",
           children: C
-        }), I === LibrarySourceEnum.HUBFILE && getFeatureFlags().cmty_lib_admin_publish && jsx($n, {
+        }), I === LibrarySourceEnum.HUBFILE && getFeatureFlags().cmty_lib_admin_publish && jsx(Button, {
           variant: "signup",
           disabled: !c || w,
           onClick: () => d(c?.id),
@@ -582,7 +582,7 @@ function e4() {
 function e3() {
   return jsxs("div", {
     className: Ni,
-    children: [jsx(_$$B3, {
+    children: [jsx(SvgComponent, {
       className: _$$md,
       svg: _$$A
     }), jsx("div", {
@@ -608,7 +608,7 @@ function e8() {
 function e9() {
   return jsxs("div", {
     className: $j,
-    children: [jsx(_$$B3, {
+    children: [jsx(SvgComponent, {
       className: nw,
       svg: _$$A
     }), jsx("div", {
@@ -810,7 +810,7 @@ function tF({
     case PrimaryWorkflowEnum.MANAGED_STRING:
       _ = jsx("div", {
         className: tT,
-        children: jsx(_$$B3, {
+        children: jsx(SvgComponent, {
           svg: _$$A4,
           className: "library_item_row--variableSetIcon--DEFrO"
         })
@@ -884,41 +884,41 @@ function tF({
     };
   }
   let q = null;
-  l?.publishType === "MOVE" ? q = jsx(_$$B3, {
+  l?.publishType === "MOVE" ? q = jsx(SvgComponent, {
     className: tR,
     svg: _$$A3,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip-file-name-for-move": v[l.fileKey]?.name || getI18nString("design_systems.publishing_modal.filename_fallback"),
     "data-tooltip-move-asset-type": e.type,
     "data-tooltip": tI,
     "data-tooltip-max-width": 240,
     "data-tooltip-tip-align-right": !0
-  }) : l?.publishType === "USER_SELECTED_COPY" ? q = jsx(_$$B3, {
+  }) : l?.publishType === "USER_SELECTED_COPY" ? q = jsx(SvgComponent, {
     className: tR,
     svg: _$$A3,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip": tE,
     "data-tooltip-max-width": 240,
     "data-tooltip-tip-align-right": !0
-  }) : l?.publishType === "FORCED_COPY" && lg(e.status) ? q = jsx(_$$B3, {
+  }) : l?.publishType === "FORCED_COPY" && lg(e.status) ? q = jsx(SvgComponent, {
     className: tR,
     svg: _$$A3,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e.type === PrimaryWorkflowEnum.STYLE ? getI18nString("design_systems.publishing_modal.multiple_paste_style") : getI18nString("design_systems.publishing_modal.multiple_paste"),
     "data-tooltip-max-width": 240,
     "data-tooltip-tip-align-right": !0,
     "data-tooltip-text-left": !0
-  }) : d ? q = jsx(_$$B3, {
+  }) : d ? q = jsx(SvgComponent, {
     className: tR,
     svg: _$$A3,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("design_systems.publishing_modal.unmovable_state_group_with_movable_state"),
     "data-tooltip-tip-align-right": !0,
     "data-tooltip-text-left": !0
-  }) : Y.hasBeenMoved && (q = jsx(_$$B3, {
+  }) : Y.hasBeenMoved && (q = jsx(SvgComponent, {
     className: tR,
     svg: _$$A3,
-    "data-tooltip-type": Ib.SPECIAL,
+    "data-tooltip-type": KindEnum.SPECIAL,
     "data-tooltip-file-name-for-move": Y.fileName,
     "data-tooltip": e.type === PrimaryWorkflowEnum.STYLE ? tw : tS,
     "data-tooltip-max-width": 230,
@@ -955,7 +955,7 @@ function tF({
               onClick: G,
               htmlAttributes: {
                 "data-tooltip": getI18nString("design_systems.publishing_modal.select_component"),
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               children: jsx(_$$A2, {})
             })
@@ -1055,7 +1055,7 @@ function tF({
         },
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.publishing_modal.see_variables"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$e2, {})
       })
@@ -1137,7 +1137,7 @@ function tq({
         recordingKey: "variableCollectionHeader.backButton",
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.publishing_modal.back"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$C2, {})
       }), jsx("div", {
@@ -1578,7 +1578,7 @@ function tJ(e) {
   if (!em) return null;
   let tN = b === LibrarySourceEnum.HUBFILE ? renderI18nText("design_systems.publishing_modal.modal_header_community_library") : renderI18nText("design_systems.publishing_modal.modal_header");
   if (eY.status === _$$r.LOADING) return jsx(Fragment, {
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: g,
       width: "lg",
       height: "fixed",
@@ -1704,7 +1704,7 @@ function tJ(e) {
     })
   });
   return jsx(Fragment, {
-    children: jsxs(bL, {
+    children: jsxs(ModalRootComponent, {
       manager: g,
       width: "lg",
       htmlAttributes: {
@@ -1743,12 +1743,12 @@ function t0({
   let o = Object.values(useSelector(dM));
   let l = !s.length && !o.length;
   let c = !1 === t ? {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("figmake.ds_imports.disabled_publish_button_tooltip"),
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 162
   } : l ? {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("figmake.ds_imports.disabled_publish_button_tooltip_no_components"),
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 205
@@ -1766,7 +1766,7 @@ function t0({
             children: getI18nString("figmake.ds_imports.publish_body")
           }), jsx("div", {
             className: "x1xmf6yo",
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: () => {
                 if (i) {
                   if (analyticsEventManager.trackDefinedEvent("ds_import.publish_button_clicked", {

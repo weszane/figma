@@ -15,7 +15,7 @@ import { _l } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { _J } from "../figma_app/314264";
+import { trackTeamEvent } from "../figma_app/314264";
 import { P8 } from "../figma_app/475472";
 import { getAnnualValue, getMonthlyValue, getBillingCycleFromSubscriptionType } from "../figma_app/345997";
 import { R_ } from "../5885/399780";
@@ -331,7 +331,7 @@ let $$D3 = createOptimistThunk((e, {
       submitPending: !1
     }));
     let o = t.data?.message || t.message;
-    null !== h ? _J("Pro Checkout Error", h, F, {
+    null !== h ? trackTeamEvent("Pro Checkout Error", h, F, {
       error_message: o,
       request_params: JSON.stringify(L)
     }) : trackEventAnalytics("Pro Checkout Error");

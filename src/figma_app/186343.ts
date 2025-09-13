@@ -15,7 +15,7 @@ import { F as _$$F } from "../905/224";
 import { fullscreenValue } from "../figma_app/455680";
 import { renameNode } from "../figma_app/741237";
 import { subscribeToContainingPage } from "../figma_app/582924";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { P3 } from "../figma_app/952446";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -153,7 +153,7 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
           let t = Fullscreen.navigateToFirstVisibleOrClosestChangeForPage(e);
           t === defaultSessionLocalIDString ? n(VisualBellActions.dequeue({
             matchType: "view_changes"
-          })) : (SceneGraphHelpers.setSelectedNodeAndCanvas(t, !0), o(QZ({
+          })) : (SceneGraphHelpers.setSelectedNodeAndCanvas(t, !0), o(computeFullscreenViewportForNode({
             nodeId: t,
             ...ob
           }), kh), p(t));

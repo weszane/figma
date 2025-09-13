@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { k } from "../905/443820";
 import { J } from "../905/614223";
 import s from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6 } from "../figma_app/617427";
 import { HM } from "../905/190597";
@@ -16,12 +16,12 @@ function h(e) {
         children: e.action.displayText
       });
     case 1:
-      return jsx(B, {
+      return jsx(SvgComponent, {
         svg: e.action.icon
       });
     case 2:
       return jsxs(Fragment, {
-        children: [jsx(B, {
+        children: [jsx(SvgComponent, {
           svg: e.action.icon,
           className: e.action.svgStyleClass,
           style: {

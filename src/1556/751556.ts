@@ -5,7 +5,7 @@ import { UP, kc, s_, cs, gc, Tm, cJ } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { q7, Q$, ME, g8, MJ, ZP, r1, hE, YJ, b as _$$b, bL, mc } from "../figma_app/860955";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
@@ -15,7 +15,7 @@ import { Ex, zE } from "../figma_app/919079";
 import { g as _$$g } from "../1556/359896";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { YW } from "../figma_app/350203";
 import { selectUser } from "../905/372672";
 import { E as _$$E3 } from "../1556/957507";
@@ -62,7 +62,7 @@ import { g as _$$g3 } from "../905/687265";
 import { m as _$$m } from "../figma_app/11961";
 import { Dg } from "../figma_app/530167";
 import { K as _$$K } from "../1556/124168";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { X as _$$X } from "../figma_app/91315";
 import { ck } from "../905/952832";
 import { o as _$$o } from "../905/895626";
@@ -78,12 +78,12 @@ import { dG } from "../figma_app/753501";
 import { N as _$$N2 } from "../1577/472492";
 import { selectCurrentFile } from "../figma_app/516028";
 import { X2, td as _$$td } from "../figma_app/273118";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/598952";
 import { iX } from "../905/415545";
 import { ue } from "../af221b13/476940";
 import { useSubscription } from "../figma_app/288654";
-import { tT, oA } from "../905/723791";
+import { tT, getResourceDataOrFallback } from "../905/723791";
 import { CommunityNotificationBellView, PersistentUserNotificationBellData } from "../figma_app/43951";
 import { M as _$$M } from "../1556/569109";
 import { h as _$$h } from "../1556/255035";
@@ -235,7 +235,7 @@ function eT({
       userId: t.id,
       userViewTab: _$$o.INTERNAL_PROFILE
     })));
-    x && Cu({
+    x && logAndTrackCTA({
       trackingContext: _$$e3.FILE_BROWSER,
       context: "job_title",
       text: "Internal Profile"
@@ -268,7 +268,7 @@ function eT({
       onMouseLeave: I,
       tabIndex: -1,
       children: d && cs(c) ? c.name : t.handle
-    }), jsx(_$$E2, {
+    }), jsx(TextWithTruncation, {
       fontSize: 11,
       color: "desktopBackgrounded",
       truncate: !0,
@@ -883,7 +883,7 @@ function eX() {
         user: d && cs(a) ? u : n,
         size: Pf.MEDIUM
       })
-    }), (t ? !m : !h) && jsx(_$$E2, {
+    }), (t ? !m : !h) && jsx(TextWithTruncation, {
       fontSize: 13,
       fontWeight: "medium",
       color: "default",
@@ -934,7 +934,7 @@ function eK({
   return jsx(UI3ConditionalWrapper, {
     children: jsxs(bL, {
       manager: s,
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         ..._$$Ay.props(eG.button, manager.isOpen && eG.buttonActive),
         ...getTriggerProps(),
         "aria-label": e,
@@ -1053,7 +1053,7 @@ function tr(e) {
   let n = useSubscription(CommunityNotificationBellView, {});
   useEffect(() => {
     if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === tT.Loaded) {
-      let e = oA(n.data.currentUser.communityProfileNotificationBell);
+      let e = getResourceDataOrFallback(n.data.currentUser.communityProfileNotificationBell);
       if (e) {
         let n = {
           isBellStateHigh: !!e.bell,
@@ -1090,7 +1090,7 @@ export function $$th1() {
   let m = function () {
     let e = useSubscription(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return {};
-    let t = oA(e.data.persistentUserNotificationBells);
+    let t = getResourceDataOrFallback(e.data.persistentUserNotificationBells);
     let n = {};
     Object.values(t || []).forEach(e => {
       let {
@@ -1108,7 +1108,7 @@ export function $$th1() {
   let x = function () {
     let e = useSubscription(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return td;
-    let t = oA(e.data.persistentUserNotificationBells);
+    let t = getResourceDataOrFallback(e.data.persistentUserNotificationBells);
     let n = t?.find(e => e.notificationSpaceId === _$$td);
     return n ? {
       isHigh: !!n.bell,
@@ -1130,7 +1130,7 @@ export function $$th1() {
       ref: o,
       htmlAttributes: {
         "data-onboarding-key": Ro,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": v,
         "data-tooltip-show-below": !0,
         "data-tooltip-max-width": 300,

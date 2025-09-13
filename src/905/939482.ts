@@ -5,7 +5,7 @@ import { reportError } from "../905/11";
 import { GM } from "../figma_app/275462";
 import { fI, In } from "../figma_app/229259";
 import { selectCurrentFile } from "../figma_app/516028";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { n1 } from "../figma_app/657017";
 let p = Error("useCommunityLibraries: no presets exist but presets are enabled");
 let m = Error("useCommunityLibrariesVisualAssets: no visual assets exist but visual assets are enabled");
@@ -16,7 +16,7 @@ export function $$f1(e) {
   let [i] = setupResourceAtomHandler(fI(void 0), {
     enabled: !e?.disabled && t
   });
-  let o = dq();
+  let o = useCurrentUserOrgId();
   let m = selectCurrentFile();
   useEffect(() => {
     t && "loaded" === i.status && 0 === i.data.length && reportError(_$$e.DESIGN_SYSTEMS_ECOSYSTEM, p, {
@@ -33,7 +33,7 @@ export function $$_2() {
   let [t] = setupResourceAtomHandler(In(void 0), {
     enabled: e
   });
-  let i = dq();
+  let i = useCurrentUserOrgId();
   let u = selectCurrentFile();
   useEffect(() => {
     e && "loaded" === t.status && 0 === t.data.length && reportError(_$$e.COMMUNITY, m, {

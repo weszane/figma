@@ -3,7 +3,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { hE } from "../figma_app/272243";
 import { N } from "../905/438674";
 import { s_ } from "../905/17223";
@@ -36,7 +36,7 @@ export let $$b0 = registerModal(function ({
       }
     }));
   }, [v]);
-  return jsxs(bL, {
+  return jsxs(ModalRootComponent, {
     width: "sm",
     manager: b,
     children: [jsx(hE, {

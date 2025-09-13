@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { sortByPropertyWithOptions, MAX_LENGTH } from "../figma_app/656233";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { g as _$$g } from "../905/687265";
 import { l as _$$l } from "../905/716947";
 import { Ay } from "@stylexjs/stylex";
@@ -10,7 +10,7 @@ import { useMemoStable } from "../905/19536";
 import m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -101,7 +101,7 @@ function Z(e) {
   }, []);
   return jsxs("div", {
     className: _()("library_items_compact_view--librariesTwoColumnsItemPadding--Wl9Nv", e.isResponsive && V),
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       onClick: l,
       className: _()(u.gridClassName, Y, h || f ? "library_items_compact_view--slidesLibraryItemsContainer--1yske" : null, e.isResponsive && V),
       style: {
@@ -139,7 +139,7 @@ function Z(e) {
         libraryKey: e.libraryKey,
         attribution: n[e.libraryKey]?.attribution
       })]
-    }) : jsx(_$$E, {
+    }) : jsx(ButtonPrimitive, {
       onClick: l,
       className: _()("library_items_compact_view--libraryTitle--wIVmD ellipsis--ellipsis--Tjyfa text--fontPos13--xW8hS text--_fontBase--QdLsd", Y),
       children: r
@@ -380,11 +380,11 @@ export function $$eo1({
       className: "libraries_tab--librariesTwoColumns--dSOU-",
       children: ["large" === l && ec && jsx("div", {
         className: "libraries_tab--librariesTwoColumnsItemPadding--YeBjB",
-        children: jsxs(_$$E, {
+        children: jsxs(ButtonPrimitive, {
           className: _()("libraries_tab--toggleLibraryModalContainer--lup1l text--fontPos13--xW8hS text--_fontBase--QdLsd", "libraries_tab--hasFocusOutline--aUlA1"),
           onClick: onToggleLibraryModal,
           "data-onboarding-key": _$$D,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: _$$s.colorIcon.$,
             svg: _$$A2
           }), jsx("span", {

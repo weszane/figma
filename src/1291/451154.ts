@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/443068";
 import { A } from "../905/251970";
 import { Ay } from "@stylexjs/stylex";
 import d from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { LR } from "../figma_app/120210";
 import { rp } from "../figma_app/703988";
@@ -500,7 +500,7 @@ export function $$S0({
     }),
     children: [jsxs("div", {
       className: "browse_explore_category_top_bar--left--XjCF8",
-      children: [jsx(E, {
+      children: [jsx(ButtonPrimitive, {
         className: c()("browse_explore_category_top_bar--backButton--lqLK5", "browse_explore_category_top_bar--hasFocusOutline--RM-Sd"),
         onClick: BrowserInfo.isIpad ? void 0 : e,
         htmlAttributes: {
@@ -508,7 +508,7 @@ export function $$S0({
           autoFocus: !0
         },
         "aria-label": getI18nString("general.back"),
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: _$$A,
           "data-not-draggable": !0,
           "data-does-not-dismiss-modal": !0

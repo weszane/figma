@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent, createRef } from "react";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export class $$o0 extends PureComponent {
   constructor() {
     super(...arguments);
@@ -41,7 +41,7 @@ export class $$o0 extends PureComponent {
       style: {
         width: this.props.maxWidth ? `${this.props.maxWidth}px` : "100%"
       },
-      "data-tooltip-type": this.props.text !== e ? Ib.TEXT : void 0,
+      "data-tooltip-type": this.props.text !== e ? KindEnum.TEXT : void 0,
       "data-tooltip": this.props.text !== e ? this.props.text : void 0,
       "aria-label": this.props.text,
       children: jsx("p", {

@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useSubscription } from "../figma_app/288654";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { KX } from "../469e6e40/623537";
 import { re } from "../469e6e40/421552";
 import { G as _$$G } from "../469e6e40/623116";
@@ -20,7 +20,7 @@ import { EntityType } from "../figma_app/707808";
 import { m2 } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
 import { z6 } from "../figma_app/805373";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { m as _$$m } from "../469e6e40/248185";
 import { FAccessType } from "../figma_app/191312";
@@ -113,7 +113,7 @@ function $({
           finishedLoading: "loaded" === t.status,
           publicLinkControlsSetting: t.data?.workspace?.publicLinkControlsSetting ?? w_.ALLOWED,
           publicLinkControlsMaxExp: t.data?.workspace?.publicLinkControlsMaxExpiration,
-          exportControlsSetting: oA(t.data?.workspace?.fileExportSetting) ?? a?.shared_container_setting?.file_export_setting ?? FAccessType.ALLOWED
+          exportControlsSetting: getResourceDataOrFallback(t.data?.workspace?.fileExportSetting) ?? a?.shared_container_setting?.file_export_setting ?? FAccessType.ALLOWED
         })
       })
     })]
@@ -151,7 +151,7 @@ function G({
   let T = I.data || null;
   let A = Date.now();
   let [R, O] = useState("");
-  let L = jsx(qc, {});
+  let L = jsx(LoadingOverlay, {});
   let D = null;
   switch (t) {
     case m2.MEMBERS:

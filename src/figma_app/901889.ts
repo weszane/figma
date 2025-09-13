@@ -1,65 +1,98 @@
-import { useCallback } from "react";
-import { useStore } from "react-redux";
-import { A } from "../vendor/90566";
-import { ds, GS, Fr } from "../figma_app/314264";
-export function $$o2() {
-  let e = useStore();
-  return useCallback((t, r, n) => {
-    let i = e.getState();
-    ds(t, i.openFile?.key, i, r, n);
-  }, [e]);
+import { useCallback } from 'react'
+import { useStore } from 'react-redux'
+import { useDebouncedCallback } from 'use-debounce'
+import { trackDefinedFileEvent, trackFileEvent, trackOrgEvent } from '../figma_app/314264'
+
+/**
+ * Tracks a file event using the current Redux store state.
+ * Original name: $$o2
+ */
+export function trackFileEventWithStore(): ((eventType: string, payload?: any, options?: any) => void) {
+  const store = useStore()
+  return useCallback((eventType: string, payload?: any, options?: any) => {
+    const state = store.getState() as { openFile: any }
+    trackFileEvent(eventType, state.openFile?.key, state, payload, options)
+  }, [store])
 }
-export function $$l4() {
-  let e = useStore();
-  return useCallback((t, r) => {
-    let n = e.getState();
-    GS(t, n.openFile?.key ?? "", n, r ?? {});
-  }, [e]);
+
+/**
+ * Tracks a defined file event using the current Redux store state.
+ * Original name: $$l4
+ */
+export function trackDefinedFileEventWithStore(): ((eventType: string, payload?: any) => void) {
+  const store = useStore()
+  return useCallback((eventType: string, payload?: any) => {
+    const state = store.getState() as { openFile: any }
+    trackDefinedFileEvent(eventType, state.openFile?.key ?? '', state, payload ?? {})
+  }, [store])
 }
-export function $$d3() {
-  let e = useStore();
-  return useCallback((t, r, n) => {
-    let i = e.getState();
-    let a = i.openFile?.key;
-    let o = i.user && i.user.id;
-    ds(t, a, i, {
-      userId: o,
-      ...r
-    }, n);
-  }, [e]);
+
+/**
+ * Tracks a file event with user information.
+ * Original name: $$d3
+ */
+export function trackFileEventWithUser(): ((eventType: string, payload?: any, options?: any) => void) {
+  const store = useStore()
+  return useCallback((eventType: string, payload?: any, options?: any) => {
+    const state = store.getState() as { openFile: any, user: any }
+    const fileKey = state.openFile?.key
+    const userId = state.user && state.user.id
+    trackFileEvent(eventType, fileKey, state, {
+      userId,
+      ...payload,
+    }, options)
+  }, [store])
 }
-export function $$c0() {
-  let e = useStore();
-  return useCallback((t, r, n) => {
-    let i = e.getState();
-    let a = i.openFile?.key;
-    let o = i.mirror.appModel.currentPage;
-    ds(t, a, i, {
-      pageId: o,
-      ...r
-    }, n);
-  }, [e]);
+
+/**
+ * Tracks a file event with current page information.
+ * Original name: $$c0
+ */
+export function trackFileEventWithPage(): ((eventType: string, payload?: any, options?: any) => void) {
+  const store = useStore()
+  return useCallback((eventType: string, payload?: any, options?: any) => {
+    const state = store.getState() as { openFile: any, mirror: any }
+    const fileKey = state.openFile?.key
+    const pageId = state.mirror.appModel.currentPage
+    trackFileEvent(eventType, fileKey, state, {
+      pageId,
+      ...payload,
+    }, options)
+  }, [store])
 }
-export function $$u5() {
-  let e = useStore();
-  return useCallback((t, r, n) => {
-    let i = e.getState();
-    let a = i.currentUserOrgId ?? "";
-    Fr(t, a, i, {
-      ...r
-    }, n);
-  }, [e]);
+
+/**
+ * Tracks an organization event using the current Redux store state.
+ * Original name: $$u5
+ */
+export function trackOrgEventWithStore(): ((eventType: string, payload?: any, options?: any) => void) {
+  const store = useStore()
+  return useCallback((eventType: string, payload?: any, options?: any) => {
+    const state = store.getState() as { currentUserOrgId: string | null }
+    const orgId = state.currentUserOrgId ?? ''
+    trackOrgEvent(eventType, orgId, state, {
+      ...payload,
+    }, options)
+  }, [store])
 }
-export function $$p1(e) {
-  let t = $$u5();
-  return A(t, e, {
-    leading: !0,
-    trailing: !1
-  });
+
+/**
+ * Returns a debounced organization event tracker.
+ * Original name: $$p1
+ * @param wait - debounce wait time in ms
+ */
+export function debouncedTrackOrgEvent(wait: number) {
+  const trackOrg = trackOrgEventWithStore()
+  return useDebouncedCallback(trackOrg, wait, {
+    leading: true,
+    trailing: false,
+  })
 }
-export const IL = $$c0;
-export const NV = $$p1;
-export const U = $$o2;
-export const am = $$d3;
-export const hC = $$l4;
-export const iT = $$u5;
+
+// Refactored exports to match new function names
+export const IL = trackFileEventWithPage
+export const NV = debouncedTrackOrgEvent
+export const U = trackFileEventWithStore
+export const am = trackFileEventWithUser
+export const hC = trackDefinedFileEventWithStore
+export const iT = trackOrgEventWithStore

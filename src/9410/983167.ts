@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { buildUploadUrl } from "../figma_app/169182";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { handleAtomEvent } from "../905/502364";
 import { renderI18nText } from "../905/303541";
 import { D } from "../figma_app/861252";
@@ -16,7 +16,7 @@ export function $$g1(e) {
     className: hQ,
     children: [e.svg && jsx("div", {
       className: ZS,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: e.svg,
         useOriginalSrcFills_DEPRECATED: !0
       })
@@ -57,7 +57,7 @@ export function $$x4(e) {
         trackingProperties: {
           text: "Skip intro"
         },
-        children: [renderI18nText("figjam_onboarding_make_something.all.skip_intro"), jsx(B, {
+        children: [renderI18nText("figjam_onboarding_make_something.all.skip_intro"), jsx(SvgComponent, {
           svg: A
         })]
       })

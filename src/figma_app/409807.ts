@@ -15,8 +15,8 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { createAtomWithEquality, atom, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
-import { A as _$$A } from "../vendor/90566";
-import { am } from "../figma_app/901889";
+import { useDebouncedCallback } from "use-debounce";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString } from "../905/303541";
 import { ak } from "../figma_app/8833";
@@ -133,7 +133,7 @@ function J(e, t) {
   }
 }
 export function $$Z18() {
-  return _$$A(useCallback((e, t) => {
+  return useDebouncedCallback(useCallback((e, t) => {
     null == e ? StackBindingsCpp.setHoverStackLayoutSize(LayoutSizingMode.FIXED, Axis.X, !1) : StackBindingsCpp.setHoverStackLayoutSize(e, t, !0);
   }, []), 100);
 }
@@ -316,7 +316,7 @@ function eu(e, t, r) {
   });
 }
 export function $$ep13() {
-  let e = am();
+  let e = trackFileEventWithUser();
   let [t, r] = lJ("minHeight");
   let [i, a] = lJ("maxHeight");
   let [s, o] = lJ("minWidth");
@@ -659,7 +659,7 @@ let eB = {
 };
 export function $$eG2() {
   let [e, t] = useAtomValueAndSetter(ej);
-  let r = _$$A(useCallback((t, r, n, i) => {
+  let r = useDebouncedCallback(useCallback((t, r, n, i) => {
     if (i !== eB.count) return;
     let a = !e?.minMaxOnly || "minmax" === t;
     StackBindingsCpp.setMinMaxVisuals(r || (1 !== n && a ? e?.visuals ?? null : r));

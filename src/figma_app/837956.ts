@@ -13,7 +13,7 @@ import { l as _$$l } from "../905/37596";
 import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { j6, fu } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { F } from "../905/224";
 import { k4, jl } from "../figma_app/199513";
 import { rR, sK } from "../figma_app/598018";
@@ -183,7 +183,7 @@ export function $$O0({
       dispatch: s,
       onSelectItem: (e, t) => {
         e.callback && e.callback("", {}, s, t);
-        e.trackingProperties && Cu({
+        e.trackingProperties && logAndTrackCTA({
           ...o.properties,
           trackingContext: e.trackingEventName || o.name,
           ...e.trackingProperties

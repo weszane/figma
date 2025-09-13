@@ -4,7 +4,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { KH } from "../figma_app/722362";
 import { wA } from "../figma_app/167249";
 import { useState } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { Label } from "../905/270045";
 import { permissionScopeHandler } from "../905/189185";
@@ -33,10 +33,10 @@ function C({
   };
   let h = mn(e);
   return jsxs(Zk, {
-    children: [jsx($n, {
+    children: [jsx(Button, {
       onClick: () => i(!0),
       children: getI18nString("react-scenegraph.chart.edit_data")
-    }), h && jsx($n, {
+    }), h && jsx(Button, {
       onClick: () => permissionScopeHandler.user("chart-clearOverrides", () => od(e)),
       children: getI18nString("react-scenegraph.chart.clear_overrides")
     }), jsxs(bL, {

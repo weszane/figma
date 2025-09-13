@@ -9,7 +9,7 @@ import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
 import { yJ, U2 } from "../figma_app/78808";
 import { yJ as _$$yJ } from "../figma_app/240735";
-import { PB, OH } from "../figma_app/314264";
+import { trackFileCopyEvent, trackMultipleFileEvent } from "../figma_app/314264";
 import { isBranch } from "../905/760074";
 import { f as _$$f } from "../905/509236";
 import { sR } from "../905/862913";
@@ -38,7 +38,7 @@ let $$E2 = createOptimistThunk((e, t) => {
     i && isBranch(i) && (c = !0);
   }
   let p = Object.keys(t.fileKeys);
-  PB("File Restored", p, e.getState());
+  trackFileCopyEvent("File Restored", p, e.getState());
   let m = e.optimisticDispatch(YF(t));
   a.then(t => {
     if (207 === t.status) {
@@ -171,7 +171,7 @@ let $$w0 = createOptimistThunk(async (e, t) => {
     newFileFolderId: [n],
     newFileTeamId: [e.getState().folders[n]?.team_id]
   };
-  OH("File Moved", files, s);
+  trackMultipleFileEvent("File Moved", files, s);
   let o = createAtomSetter(S)({
     files,
     isDraftsToMove: t.isDraftsToMove,

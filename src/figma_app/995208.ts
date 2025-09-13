@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { Kz } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -10,7 +10,7 @@ import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { c as _$$c } from "../905/370443";
 import { fu, j6 } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { registerModal } from "../905/102752";
 import { F as _$$F } from "../905/759613";
 import { useEffect } from "react";
@@ -84,7 +84,7 @@ function C(e) {
       switch (r.source) {
         case "button":
           let n = t.name;
-          Cu({
+          logAndTrackCTA({
             ...t.properties,
             ...(null != n ? {
               trackingContext: n
@@ -103,7 +103,7 @@ function C(e) {
     },
     preventUserClose: e.preventUserClose
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     width: e.width ?? 700,
     overrideCloseButtonColor: e.closeButtonColor,
@@ -237,7 +237,7 @@ function D(e) {
   return jsx("div", {
     className: _$$s.absolute.left0.pl8.$,
     hidden: e.hidden,
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "ghost",
       onClick: e.onBack,
       children: jsxs("div", {
@@ -253,7 +253,7 @@ function k(e) {
   return jsx("div", {
     className: _$$s.absolute.right0.pr8.$,
     hidden: e.hidden,
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "ghost",
       onClick: e.onNext,
       children: jsxs("div", {
@@ -269,7 +269,7 @@ function M(e) {
   return jsx("div", {
     className: _$$s.absolute.right0.pr8.$,
     hidden: e.hidden,
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "ghost",
       onClick: e.onDone,
       children: jsx("div", {

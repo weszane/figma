@@ -6,9 +6,9 @@ import { Wn } from "../figma_app/88484";
 import { Uz } from "../905/63728";
 import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { L } from "../905/408237";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { ne } from "../figma_app/563413";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { r7 } from "../figma_app/471982";
 import { Dy } from "../905/977218";
@@ -117,7 +117,7 @@ export function $$P2({
   }) => e.transform(e => !!e.file?.hasPermission)), [E]);
   if (!o) return jsx("div", {
     className: g4,
-    children: jsx(kt, {
+    children: jsx(LoadingSpinner, {
       size: "small"
     })
   });
@@ -216,7 +216,7 @@ export function $$D0(e) {
   }, y);
   return jsxs("div", {
     className: Tm,
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       className: qc,
       svg: _$$A
     }), jsx(L, {
@@ -230,7 +230,7 @@ export function $$D0(e) {
       placeholder: e.placeholderText ?? getI18nString("community.universal_posting_modal.search_bar.placeholder"),
       spellCheck: !1,
       value: query
-    }), !!query && hasCloseButton && jsx(B, {
+    }), !!query && hasCloseButton && jsx(SvgComponent, {
       className: i3,
       svg: _$$A2,
       onClick: onClearSearchClick

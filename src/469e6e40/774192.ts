@@ -5,7 +5,7 @@ import { GG } from "../905/511649";
 import { dG } from "../figma_app/753501";
 import { f7 } from "../figma_app/896988";
 import { isInvalidValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var i = s;
 function u(e) {
   e.keyCode === Uz.TAB && sC(e, xH.SHIFT) || e.keyCode === Uz.ENTER || e.keyCode === Uz.SPACE || f7(e);
@@ -49,7 +49,7 @@ function p({
     "data-tooltip": r,
     "data-tooltip-max-width": d,
     "data-tooltip-timeout-delay": 50,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: a,
     forwardedRef: y,
     onClick: e => {

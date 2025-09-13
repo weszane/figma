@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { defaultSessionLocalIDString, sessionLocalIDToString } from "../905/871411";
 import l from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -331,11 +331,11 @@ function j({
       children: i
     }), jsxs("div", {
       className: "compare_changes_right_panel--propertyDiffLine--3UXAq inspection_property--propertyValue--6HQoD ellipsis--ellipsis--Tjyfa",
-      children: [jsx(_$$E, {
+      children: [jsx(ButtonPrimitive, {
         onClick: e.onClick,
         className: d()("compare_changes_right_panel--basis--jr6Ud", R, M(e.value) && N),
         children: e.value
-      }), jsx(_$$E, {
+      }), jsx(ButtonPrimitive, {
         onClick: t.onClick,
         className: d()("compare_changes_right_panel--change--ARqhy", R, M(t.value) && N),
         children: t.value

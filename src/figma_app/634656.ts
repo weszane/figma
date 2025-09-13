@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { AppliedColorPaletteForFile } from "../figma_app/43951";
-import { _ as _$$_ } from "../905/613917";
+import { findTeamById } from "../905/613917";
 import { canViewTeam } from "../figma_app/642025";
 import { cD } from "../figma_app/598018";
 import { fJ, Yv } from "../figma_app/616107";
@@ -124,7 +124,7 @@ export function $$P6(e, t) {
 }
 export function $$D3() {
   let e = cD();
-  let t = useSelector(t => _$$_(e, t));
+  let t = useSelector(t => findTeamById(e, t));
   let r = useSelector(t => e && canViewTeam(e, t));
   return !!(t?.org_id && r);
 }

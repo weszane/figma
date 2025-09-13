@@ -1,7 +1,10 @@
 import { Ay as _$$Ay2, xk as _$$xk } from '@stylexjs/stylex';
 import B from 'classnames';
 import { Fragment as _$$Fragment, createElement, PureComponent, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { connect, useDispatch, useSelector, useStore } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { useDebouncedCallback } from 'use-debounce';
 import { $ as _$$$6 } from '../0c62c2fd/7113';
 import { z as _$$z } from '../0c62c2fd/27771';
 import { q as _$$q } from '../0c62c2fd/180986';
@@ -45,7 +48,7 @@ import { a as _$$a13 } from '../905/29104';
 import { Oe as _$$Oe, uV as _$$uV, JF, ZR } from '../905/34809';
 import { z4 as _$$z0 } from '../905/37051';
 import { l as _$$l8 } from '../905/37596';
-import { bL as _$$bL2 } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { i as _$$i5 } from '../905/46262';
 import { m as _$$m3 } from '../905/52659';
 import { E as _$$E0 } from '../905/53857';
@@ -60,18 +63,18 @@ import { b as _$$b2, d as _$$d4 } from '../905/91820';
 import { k as _$$k6 } from '../905/93362';
 import { c5 as _$$c6 } from '../905/93909';
 import { W as _$$W } from '../905/95038';
-import { registerModal, ModalSupportsBackground } from '../905/102752';
+import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { U as _$$U4 } from '../905/103637';
 import { J as _$$J } from '../905/125993';
 import { F as _$$F3 } from '../905/126561';
 import { J as _$$J7 } from '../905/129695';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { f as _$$f6, r as _$$r8 } from '../905/136283';
 import { Fp } from '../905/148074';
 import { e as _$$e0 } from '../905/149844';
 import { t as _$$t5 } from '../905/150656';
-import { popPrevModal, updateModal, showModalHandler, hideModalHandler, hideModal, hideSpecificModal, popModalStack } from '../905/156213';
+import { hideModal, hideModalHandler, hideSpecificModal, popModalStack, popPrevModal, showModalHandler, updateModal } from '../905/156213';
 import { i as _$$i } from '../905/159448';
 import { pW as _$$pW } from '../905/160095';
 import { Y5 } from '../905/163189';
@@ -113,7 +116,7 @@ import { $ as _$$$5 } from '../905/293658';
 import { e as _$$e6 } from '../905/295932';
 import { $ as _$$$8 } from '../905/302575';
 import { VisualBellActions } from '../905/302958';
-import { getI18nString, renderI18nText, getTranslatedDynamicContent } from '../905/303541';
+import { getI18nString, getTranslatedDynamicContent, renderI18nText } from '../905/303541';
 import { R as _$$R0 } from '../905/304671';
 import { T as _$$T2, v as _$$v2 } from '../905/309844';
 import { C as _$$C5 } from '../905/314082';
@@ -137,7 +140,7 @@ import { LogLevelStr } from '../905/361972';
 import { Yg } from '../905/362959';
 import { Q as _$$Q2 } from '../905/363675';
 import { c as _$$c3 } from '../905/370443';
-import { selectCurrentUser, selectUser, getUserId } from '../905/372672';
+import { getUserId, selectCurrentUser, selectUser } from '../905/372672';
 import { S as _$$S1 } from '../905/373189';
 import { $ as _$$$4 } from '../905/379902';
 import { FRequestsStr } from '../905/384551';
@@ -156,7 +159,7 @@ import { t as _$$t8 } from '../905/433510';
 import { colorToHex } from '../905/436288';
 import { useModalManager } from '../905/437088';
 import { N as _$$N3 } from '../905/438674';
-import { UserRole, GroupType, DefaultGroups } from '../905/441038';
+import { DefaultGroups, GroupType, UserRole } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
 import { W as _$$W6 } from '../905/442612';
 import { K as _$$K } from '../905/443068';
@@ -168,6 +171,7 @@ import { e as _$$e1 } from '../905/457828';
 import { dy as _$$dy, rS as _$$rS, Zp as _$$Zp, DG } from '../905/462076';
 import { notificationActions } from '../905/463586';
 import { uo as _$$uo2, bE } from '../905/466026';
+import { AutoLayout } from '../905/470281';
 import { H as _$$H7 } from '../905/474029';
 import { R as _$$R4 } from '../905/483499';
 import { e as _$$e9 } from '../905/483726';
@@ -175,7 +179,7 @@ import { bL as _$$bL3, c$ as _$$c$2, l9 as _$$l5, mc as _$$mc3 } from '../905/49
 import { q as _$$q4 } from '../905/495564';
 import { handleAtomEvent } from '../905/502364';
 import { z as _$$z12 } from '../905/502533';
-import { t as _$$t4 } from '../905/504360';
+import { extractPropertyFromNestedObjects } from '../905/504360';
 import { Cf } from '../905/504727';
 import { Y9 as _$$Y6, yu } from '../905/504768';
 import { Y as _$$Y } from '../905/506207';
@@ -185,11 +189,11 @@ import { z as _$$z11 } from '../905/510753';
 import { T as _$$T7 } from '../905/514205';
 import { Dd, OJ } from '../905/519092';
 import { r as _$$r1 } from '../905/520829';
-import { $n, IK, WW } from '../905/521428';
+import { Button, ButtonLarge, ButtonWide } from '../905/521428';
 import { I as _$$I3 } from '../905/531560';
 import { P as _$$P5 } from '../905/537307';
 import { globalPerfTimer } from '../905/542194';
-import { NavigationRoutes, MemberSections, DashboardSections } from '../905/548208';
+import { DashboardSections, MemberSections, NavigationRoutes } from '../905/548208';
 import { AccessLevelEnum } from '../905/557142';
 import { hT as _$$hT, YM as _$$YM } from '../905/561087';
 import { isSitesFeatureEnabled } from '../905/561485';
@@ -212,7 +216,7 @@ import { r1 as _$$r3, jN } from '../905/612685';
 import { J as _$$J2 } from '../905/614223';
 import { e as _$$e3 } from '../905/621515';
 import { Z as _$$Z2 } from '../905/622097';
-import { E as _$$E6 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { A as _$$A30, y as _$$y5 } from '../905/638715';
 import { DP } from '../905/640017';
 import { g_ as _$$g_ } from '../905/646788';
@@ -235,9 +239,9 @@ import { H as _$$H3 } from '../905/706055';
 import { D as _$$D5 } from '../905/711533';
 import { Ju as _$$Ju } from '../905/712921';
 import { gY as _$$gY, IT as _$$IT, M4 } from '../905/713695';
-import { B as _$$B } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { X as _$$X6 } from '../905/718513';
-import { oA as _$$oA, tT as _$$tT } from '../905/723791';
+import { tT as _$$tT } from '../905/723791';
 import { a as _$$a14, hp as _$$hp2 } from '../905/725909';
 import { NA } from '../905/738636';
 import { DV } from '../905/739964';
@@ -245,7 +249,7 @@ import { c as _$$c9, s as _$$s7 } from '../905/744710';
 import { l as _$$l4 } from '../905/745972';
 import { F_ as _$$F_ } from '../905/748636';
 import { tH as _$$tH, H4 } from '../905/751457';
-import { findBranchById, isBranchAlt, isBranch } from '../905/760074';
+import { findBranchById, isBranch, isBranchAlt } from '../905/760074';
 import { l as _$$l2 } from '../905/767868';
 import { u as _$$u4 } from '../905/774364';
 import { _ as _$$_3 } from '../905/780571';
@@ -256,12 +260,11 @@ import { x as _$$x3 } from '../905/796251';
 import { H as _$$H4 } from '../905/799228';
 import { g as _$$g } from '../905/817247';
 import { z as _$$z4 } from '../905/821223';
-import { AutoLayout } from '../905/470281';
 import { O as _$$O2 } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
 import { $ as _$$$3 } from '../905/834575';
 import { Cy } from '../905/844322';
-import { dq as _$$dq, sZ as _$$sZ } from '../905/845253';
+import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { BK, Um } from '../905/848862';
 import { h as _$$h0 } from '../905/857431';
 import { EL, F_ } from '../905/858282';
@@ -269,8 +272,8 @@ import { Cn } from '../905/862913';
 import { w as _$$w4 } from '../905/863010';
 import { h as _$$h3 } from '../905/864281';
 import { u as _$$u5 } from '../905/866761';
-import { S as _$$S5 } from '../905/872825';
 import { generateUUIDv4 } from '../905/871474';
+import { S as _$$S5 } from '../905/872825';
 import { VK, YK } from '../905/880488';
 import { E as _$$E1 } from '../905/881732';
 import { k as _$$k2 } from '../905/888808';
@@ -302,7 +305,7 @@ import { vp } from '../905/967587';
 import { d as _$$d3 } from '../905/976845';
 import { Dy, ky, Rz } from '../905/977218';
 import { i as _$$i3 } from '../905/977961';
-import { E as _$$E } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { b as _$$b } from '../905/985254';
 import { h1 as _$$h6 } from '../905/986103';
 import { resourceUtils } from '../905/989992';
@@ -421,21 +424,20 @@ import { nk as _$$nk } from '../figma_app/2023';
 import { rv as _$$rv, BTz, c6t, cJy, cvy, Duq, fQh, HaT, hxO, I3H, I5n, I$z, j0N, j9$, jQF, K69, kBq, kmq, LB2, LPt, LQ8, Msu, NM0, O5v, O9D, Ob5, Q16, Ql8, Qlc, r3Y, rQs, sqw, tBR, Tp6, tUL, tZO, Ult, UmN, USq, Wb3, X5_, XIg, xPo, YHe, yjU, YPG } from '../figma_app/6204';
 import { S as _$$S } from '../figma_app/11182';
 import { o8 as _$$o1 } from '../figma_app/12220';
-import { isExternalRestricted, getAccessLevelLabels } from '../figma_app/12796';
+import { getAccessLevelLabels, isExternalRestricted } from '../figma_app/12796';
 import { L as _$$L6 } from '../figma_app/23271';
 import { yJ as _$$yJ3 } from '../figma_app/24841';
-import { atom, useAtomValueAndSetter, useAtomWithSubscription, createValidatedLocalStorageAtom, createRemovableAtomFamily, Xr } from '../figma_app/27355';
+import { atom, createRemovableAtomFamily, createValidatedLocalStorageAtom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { ISO, tgj } from '../figma_app/27776';
 import { Jt } from '../figma_app/28323';
 import { o as _$$o7, s as _$$s3 } from '../figma_app/29593';
 import { R as _$$R9 } from '../figma_app/32680';
-import { useLatestRef } from '../figma_app/922077';
-import { SharedWithYouResources, AssetTransferReloadView, FileBrowserDraftsViewBarView, WorkspacePageView, WorkspacesDirectoryView, PinnedFiles, TeamUserStatusAndRequests, UserProfilePageView, TeamPermissions, ActiveFileUsersForFileView, PlanConnectedProjectsForPlanUser, AddWorkspacePinSearchFilesView, FilesInProjectHighLimit, NonEnterpriseOrgMetaContentView, PaginatedFigFeed, TeamCanEdit, FolderPageView, TeamUpgradeBannerView, WorkspaceSuggestedPinsView, WorkspacePageMembersView, EnterpriseOrgMetaContentView, FileBrowserProjectPageTitleView, FileBrowserWorkspacePageTeamsView, TeamRoleRequestView, TrashedFilesPageView, LimitedSpaceSharedProjectsView, UserFlagByName, TeamCanAdmin, FolderCanView, EduOffboardingData, DraftsToMoveFoldersByUserId, AddWorkspacePinnedFileView, TeamById, TeamFileLimitsInfoByProject, FolderBannerView, TeamUpgradePermissions, AddWorkspacePinSuggestedFilesView } from '../figma_app/43951';
-import { cS as _$$cS, I0 as _$$I4, iF as _$$iF } from '../figma_app/45218';
+import { ActiveFileUsersForFileView, AddWorkspacePinnedFileView, AddWorkspacePinSearchFilesView, AddWorkspacePinSuggestedFilesView, AssetTransferReloadView, DraftsToMoveFoldersByUserId, EduOffboardingData, EnterpriseOrgMetaContentView, FileBrowserDraftsViewBarView, FileBrowserProjectPageTitleView, FileBrowserWorkspacePageTeamsView, FilesInProjectHighLimit, FolderBannerView, FolderCanView, FolderPageView, LimitedSpaceSharedProjectsView, NonEnterpriseOrgMetaContentView, PaginatedFigFeed, PinnedFiles, PlanConnectedProjectsForPlanUser, SharedWithYouResources, TeamById, TeamCanAdmin, TeamCanEdit, TeamFileLimitsInfoByProject, TeamPermissions, TeamRoleRequestView, TeamUpgradeBannerView, TeamUpgradePermissions, TeamUserStatusAndRequests, TrashedFilesPageView, UserFlagByName, UserProfilePageView, WorkspacePageMembersView, WorkspacePageView, WorkspacesDirectoryView, WorkspaceSuggestedPinsView } from '../figma_app/43951';
+import { CommunityPageType, isPlugin, UserRole } from '../figma_app/45218';
 import { b as _$$b6 } from '../figma_app/47801';
 import { rL as _$$rL } from '../figma_app/49598';
 import { c as _$$c8 } from '../figma_app/52714';
-import { FEditorType, SITES_STRING, mapFileTypeToEditorType } from '../figma_app/53721';
+import { FEditorType, mapFileTypeToEditorType, SITES_STRING } from '../figma_app/53721';
 import { t as _$$t9 } from '../figma_app/55043';
 import { cV as _$$cV, Cs } from '../figma_app/59509';
 import { $$, nR as _$$nR, vd } from '../figma_app/60079';
@@ -449,7 +451,7 @@ import { F as _$$F8 } from '../figma_app/101188';
 import { j as _$$j3, FL } from '../figma_app/102449';
 import { u3 as _$$u, U6 as _$$U3, HS } from '../figma_app/109538';
 import { Q as _$$Q, v as _$$v } from '../figma_app/113686';
-import { _X as _$$_X, DQ, Pw } from '../figma_app/121751';
+import { isReduxDeprecationShadowreadOrCutover, isReduxDeprecationCutover, ConfigGroups } from '../figma_app/121751';
 import { cn as _$$cn, df as _$$df, eB as _$$eB, hP as _$$hP, Me as _$$Me, x$ as _$$x$, GU, qS, QS } from '../figma_app/141320';
 import { bn as _$$bn, D1, H6, z1 } from '../figma_app/147337';
 import { uk as _$$uk } from '../figma_app/152745';
@@ -461,8 +463,8 @@ import { buildUploadUrl, getInitialOptions, getSupportEmail, isGovCluster } from
 import { XZ } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
 import { Zp } from '../figma_app/188671';
-import { FUserRoleType, FFileType, FResourceCategoryType, FTemplateCategoryType, FPlanNameType, FEntityType, FOrganizationRoleType, FAccessLevelType, FProductAccessType, FStudentTeamStatusType, FOrganizationLevelType, FPlanLimitationType, FPaymentHealthStatusType, FMemberRoleType } from '../figma_app/191312';
-import { areColorsEqual, parseColor, isColorDarkByLuminance, whiteColor } from '../figma_app/191804';
+import { FAccessLevelType, FEntityType, FFileType, FMemberRoleType, FOrganizationLevelType, FOrganizationRoleType, FPaymentHealthStatusType, FPlanLimitationType, FPlanNameType, FProductAccessType, FResourceCategoryType, FStudentTeamStatusType, FTemplateCategoryType, FUserRoleType } from '../figma_app/191312';
+import { areColorsEqual, isColorDarkByLuminance, parseColor, whiteColor } from '../figma_app/191804';
 import { K as _$$K5, xS as _$$xS } from '../figma_app/193867';
 import { a6 as _$$a11 } from '../figma_app/198840';
 import { o as _$$o6 } from '../figma_app/198885';
@@ -490,7 +492,7 @@ import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgO
 import { vt as _$$vt2 } from '../figma_app/306946';
 import { sx as _$$sx3 } from '../figma_app/307841';
 import { hp as _$$hp, vg as _$$vg, xs as _$$xs, DF, LP } from '../figma_app/310688';
-import { E9 as _$$E2, gH as _$$gH, o5 as _$$o, uE as _$$uE, Cu, I0, jd, k1, WL } from '../figma_app/314264';
+import { DISABLED_TEAM_CREATION_BUTTON_HOVERED, FILE_BROWSER_FILE_CLICKED, logAndTrackCTA, TEAM_CREATION_BUTTON_HOVERED_TIMEOUT, trackFileBrowserFileClick, trackFileBrowserFileClicked, trackFileBrowserLoaded, trackFileBrowserPageVisit, trackUserEvent } from '../figma_app/314264';
 import { a4 as _$$a8, ed as _$$ed, vA as _$$vA, ye as _$$ye, RA, Rd } from '../figma_app/321395';
 import { e as _$$e12, H as _$$H2 } from '../figma_app/324237';
 import { fO as _$$fO, ZM } from '../figma_app/329496';
@@ -498,7 +500,7 @@ import { Jt as _$$Jt2, GR, HD } from '../figma_app/330108';
 import { h as _$$h7 } from '../figma_app/334471';
 import { LM as _$$LM, wA as _$$wA, yK } from '../figma_app/336853';
 import { Il, Tj } from '../figma_app/342207';
-import { isGracePeriodEndingSoon, isTeamSubscribed, hasValidSubscription, isTeamLocked, STANDARD_LIMIT, getEditableUnpaidTeams, hasTeamPaidAccess, PRIMARY_LIMIT, isOrgDelinquent, isTeamInGracePeriod, hasFolderRestrictions } from '../figma_app/345997';
+import { getEditableUnpaidTeams, hasFolderRestrictions, hasTeamPaidAccess, hasValidSubscription, isGracePeriodEndingSoon, isOrgDelinquent, isTeamInGracePeriod, isTeamLocked, isTeamSubscribed, PRIMARY_LIMIT, STANDARD_LIMIT } from '../figma_app/345997';
 import { ce as _$$ce, lH as _$$lH, Bb } from '../figma_app/347146';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { aO as _$$aO } from '../figma_app/348887';
@@ -511,7 +513,7 @@ import { bE as _$$bE } from '../figma_app/375098';
 import { V as _$$V3 } from '../figma_app/385855';
 import { _6 as _$$_, z3 } from '../figma_app/386952';
 import { BY, Jm } from '../figma_app/387599';
-import { defaultComparator, useShadowRead, adminPermissionConfig, createComparator, setupShadowRead, useShadowReadLoaded } from '../figma_app/391338';
+import { adminPermissionConfig, createComparator, defaultComparator, setupShadowRead, useShadowRead, useShadowReadLoaded } from '../figma_app/391338';
 import { xF as _$$xF, WG } from '../figma_app/405906';
 import { QJ } from '../figma_app/411744';
 import { aq as _$$aq } from '../figma_app/412189';
@@ -523,14 +525,14 @@ import { $n as _$$$n, wv } from '../figma_app/439493';
 import { zh } from '../figma_app/448654';
 import { e3 as _$$e15, UX, v$ } from '../figma_app/455722';
 import { s1 as _$$s6 } from '../figma_app/464758';
-import { useCurrentPlanUser, useIsOrgUser, useTeamPlanUser, useIsOrgGuestUser, useCurrentPrivilegedPlan, useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useIsOrgAdminUser, useIsOrgMemberOrAdminUser, useTeamPlanPublicInfo, useTeamPlanFeatures, useIsTeamAdminUser, useSuspendCurrentPrivilegedPlan, useIsStarterPlan } from '../figma_app/465071';
-import { throwTypeError, returnSecond, assert } from '../figma_app/465776';
-import { G as _$$G4, o as _$$o0 } from '../figma_app/471068';
+import { getParentOrgIdIfOrgLevel, useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan, useIsOrgAdminUser, useIsOrgGuestUser, useIsOrgMemberOrAdminUser, useIsOrgUser, useIsStarterPlan, useIsTeamAdminUser, useSuspendCurrentPrivilegedPlan, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
+import { assert, returnSecond, throwTypeError } from '../figma_app/465776';
+import { sortOptions, ViewTypeEnum } from '../figma_app/471068';
 import { A as _$$A2, x as _$$x } from '../figma_app/475340';
 import { KQ as _$$KQ, Rw } from '../figma_app/475472';
 import { WX as _$$WX, Bq, Vm } from '../figma_app/482142';
 import { _ as _$$_7, S as _$$S9 } from '../figma_app/490799';
-import { range, clamp } from '../figma_app/492908';
+import { clamp, range } from '../figma_app/492908';
 import { lT as _$$lT } from '../figma_app/494261';
 import { LinkPrimitive } from '../figma_app/496441';
 import { Y9 } from '../figma_app/502247';
@@ -568,7 +570,7 @@ import { hX as _$$hX } from '../figma_app/614170';
 import { $z, c as _$$c2, e6 as _$$e2, Ih, Me } from '../figma_app/617427';
 import { e2 as _$$e13, li as _$$li } from '../figma_app/622574';
 import { A5 as _$$A11, J5, jT } from '../figma_app/623414';
-import { paymentActionRequirementEnum, getTeamUrl, fileActionEnum } from '../figma_app/630077';
+import { fileActionEnum, getTeamUrl, paymentActionRequirementEnum } from '../figma_app/630077';
 import { e2 as _$$e8, eM as _$$eM, il as _$$il, nD as _$$nD, nR as _$$nR2, rb as _$$rb, tM as _$$tM, vd as _$$vd, N_, NY, Ph, qM, Us } from '../figma_app/637027';
 import { Sh, yJ } from '../figma_app/637328';
 import { Gu } from '../figma_app/640564';
@@ -582,14 +584,14 @@ import { Cm as _$$Cm } from '../figma_app/672951';
 import { wH } from '../figma_app/680166';
 import { al as _$$al, ud as _$$ud, B2, b6 } from '../figma_app/681697';
 import { Cz, EQ, MX, RG } from '../figma_app/684446';
-import { canCreateFileType, canCreateAnyFileType, useProjectFileCreationPermissions, getDisabledCreationButtonReason } from '../figma_app/687776';
+import { canCreateAnyFileType, canCreateFileType, getDisabledCreationButtonReason, useProjectFileCreationPermissions } from '../figma_app/687776';
 import { xH as _$$xH, vM, w3 } from '../figma_app/692865';
 import { Vh } from '../figma_app/692987';
 import { A as _$$A9, K as _$$K3 } from '../figma_app/694593';
 import { hF as _$$hF, j as _$$j2, VY as _$$VY, CJ } from '../figma_app/698052';
 import { EO } from '../figma_app/701982';
 import { w as _$$w5 } from '../figma_app/705249';
-import { draftViews, SidebarSection, EntityType, teamViews, UpgradeAction, TeamType } from '../figma_app/707808';
+import { draftViews, EntityType, SidebarSection, TeamType, teamViews, UpgradeAction } from '../figma_app/707808';
 import { wY } from '../figma_app/708845';
 import { q as _$$q2 } from '../figma_app/712384';
 import { hJ as _$$hJ } from '../figma_app/713624';
@@ -598,12 +600,12 @@ import { EZ, X1 } from '../figma_app/736948';
 import { d9 as _$$d5 } from '../figma_app/740025';
 import { a9 as _$$a3, LQ } from '../figma_app/741211';
 import { M as _$$M, s as _$$s4 } from '../figma_app/749682';
-import { _5 as _$$_5, cT as _$$cT, rJ as _$$rJ, t2 as _$$t6, ue as _$$ue, C0, De, GB, Gv, Jh, jq, jx, XU } from '../figma_app/756995';
+import { FileType, FilterType, getFileTypeIndex, getResourceSortField, getSortFieldKey, getSortFieldProperty, getSortOrderKey, getViewModeKey, PermissionAction, PermissionType, SortField, SortOrder, ViewMode } from '../figma_app/756995';
 import { ColorOptions } from '../figma_app/763686';
 import { _4 as _$$_6 } from '../figma_app/773663';
 import { mk as _$$mk2, yl as _$$yl, K2 } from '../figma_app/777551';
 import { K0 } from '../figma_app/778125';
-import { BrowserInfo, isAndroidOrIphoneNotFigmaMobile, isMobilePlatformNotFigmaMobile, getIsAndroidOrIphoneNotFigmaMobile } from '../figma_app/778880';
+import { BrowserInfo, getIsAndroidOrIphoneNotFigmaMobile, isAndroidOrIphoneNotFigmaMobile, isMobilePlatformNotFigmaMobile } from '../figma_app/778880';
 import { parseMsNumber, parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { R as _$$R10 } from '../figma_app/787018';
 import { gY as _$$gY2 } from '../figma_app/797994';
@@ -612,7 +614,7 @@ import { pj as _$$pj, Dv } from '../figma_app/805898';
 import { memoizeByArgs } from '../figma_app/815945';
 import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
-import { UpgradeSteps, BillingCycle, UpsellSourceType } from '../figma_app/831101';
+import { BillingCycle, UpgradeSteps, UpsellSourceType } from '../figma_app/831101';
 import { $z as _$$$z, fu as _$$fu, o3 as _$$o3, tf as _$$tf, j6, L0, T8 } from '../figma_app/831799';
 import { e as _$$e5 } from '../figma_app/831857';
 import { y$ as _$$y$2, Lj } from '../figma_app/835219';
@@ -621,22 +623,23 @@ import { Gg, Rp } from '../figma_app/840917';
 import { xT as _$$xT, E4, Rk } from '../figma_app/841415';
 import { ps as _$$ps, ZY } from '../figma_app/845611';
 import { SW } from '../figma_app/846003';
-import { kt, qc } from '../figma_app/858013';
+import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { _C as _$$_C, dN as _$$dN, V0 } from '../figma_app/858344';
 import { b as _$$b5, bL as _$$bL, mc as _$$mc2, q7, YJ } from '../figma_app/860955';
 import { ds as _$$ds, gV as _$$gV, sb as _$$sb, t$ as _$$t$, D6, kK, R3, T0, TF } from '../figma_app/863319';
 import { VE } from '../figma_app/869776';
-import { OpenTarget, desktopAPIInstance } from '../figma_app/876459';
+import { desktopAPIInstance, OpenTarget } from '../figma_app/876459';
 import { cS as _$$cS2, hT as _$$hT2, Ho } from '../figma_app/878651';
 import { C as _$$C4 } from '../figma_app/887997';
 import { v as _$$v3 } from '../figma_app/899624';
-import { NV } from '../figma_app/901889';
+import { debouncedTrackOrgEvent } from '../figma_app/901889';
 import { $$if, de as _$$de, lF as _$$lF, ox as _$$ox, pS as _$$pS, to as _$$to, DN, Ic, jv, Mv, N9, qP, U6, V1, vg, vr, X7, yH, YI, ZW } from '../figma_app/909778';
 import { ai as _$$ai, f6 as _$$f3 } from '../figma_app/915202';
 import { X$ } from '../figma_app/915977';
 import { yX } from '../figma_app/918700';
 import { _Y as _$$_Y2, Ex, vj, zE } from '../figma_app/919079';
 import { C8 as _$$C, Be } from '../figma_app/920435';
+import { useLatestRef } from '../figma_app/922077';
 import { Dy as _$$Dy, ky as _$$ky } from '../figma_app/925970';
 import { encodeUri } from '../figma_app/930338';
 import { LJ } from '../figma_app/930386';
@@ -663,14 +666,11 @@ import { A as _$$A8 } from '../svg/507015';
 import { A as _$$A18 } from '../svg/616591';
 import { A as _$$A26 } from '../svg/792557';
 import { A as _$$A16 } from '../svg/821527';
-import { A as _$$A12 } from '../vendor/90566';
 import { dO as _$$dO, rd as _$$rd, qh } from '../vendor/130505';
 import gr from '../vendor/223926';
 import { eJ as _$$eJ } from '../vendor/352483';
-import { useSelector, connect, useStore, useDispatch } from 'react-redux';
 import { A as _$$A1 } from '../vendor/850789';
 import oc from '../vendor/879378';
-import { createPortal } from 'react-dom';
 import { z as _$$z9 } from '../vendor/999105';
 let U = B;
 let ev = 'seen_org_admin_moved_unassigned_drafts_onboarding';
@@ -723,7 +723,7 @@ function eN({
   project: e
 }) {
   let t = selectCurrentUser();
-  let r = _$$dq();
+  let r = useCurrentUserOrgId();
   let a = useSelector(e => e.currentTeamId);
   let s = e === 'drafts' ? r : e.team?.org?.id;
   let n = e === 'drafts' ? a : e.team?.id;
@@ -745,7 +745,7 @@ function eO() {
     },
     isSelected: t === 'recentsAndSharing',
     icon: jsx(_$$a2, {}),
-    text: jsx(_$$E, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: renderI18nText('sidebar.recents')
     }),
@@ -813,7 +813,7 @@ function e4(e) {
     'text': jsx('div', {
       'className': _$$s.pr36.$,
       'data-onboarding-key': e.dataOnboardingKey,
-      'children': jsx(_$$E, {
+      'children': jsx(TextWithTruncation, {
         truncate: !0,
         children: renderI18nText('sidebar.admin_dashboard')
       })
@@ -957,7 +957,7 @@ function ta(e) {
     },
     'data-onboarding-key': 'ALL_PROJECTS_LINK_ONBOARIND_KEY',
     'icon': jsx(_$$t2, {}),
-    'text': jsx(_$$E, {
+    'text': jsx(TextWithTruncation, {
       truncate: !0,
       children: renderI18nText('sidebar.all_projects')
     }),
@@ -1101,7 +1101,7 @@ function tv(e) {
       },
       'data-onboarding-key': _$$uZ,
       'icon': jsx(_$$g2, {}),
-      'text': jsx(_$$E, {
+      'text': jsx(TextWithTruncation, {
         truncate: !0,
         children: renderI18nText('sidebar.drafts')
       }),
@@ -1540,7 +1540,7 @@ function rj(e) {
       onDragQuadrantUpdate: e.onDragQuadrantUpdate,
       onDragStart: e.onDragStart,
       showGrabber: e.showGrabber,
-      text: jsx(_$$E, {
+      text: jsx(TextWithTruncation, {
         truncate: !0,
         children: o.name
       }),
@@ -1675,11 +1675,11 @@ function rR(e) {
       onDragQuadrantUpdate: e.onDragQuadrantUpdate,
       onDragStart: e.onDragStart,
       showGrabber: e.showGrabber,
-      text: S !== '' ? jsx(_$$E, {
+      text: S !== '' ? jsx(TextWithTruncation, {
         truncate: !0,
         showTooltipWhenTruncated: !1,
         children: S
-      }) : jsx(_$$E, {
+      }) : jsx(TextWithTruncation, {
         truncate: !0,
         children: renderI18nText(e.favorite.file?.editorType === 'whiteboard' ? 'sidebar.fig_jam_file' : e.favorite.file?.editorType === 'slides' ? 'sidebar.slides_file' : 'sidebar.design_file')
       }),
@@ -1802,7 +1802,7 @@ function rL(e) {
       onDragQuadrantUpdate: e.onDragQuadrantUpdate,
       onDragStart: e.onDragStart,
       showGrabber: e.showGrabber,
-      text: jsx(_$$E, {
+      text: jsx(TextWithTruncation, {
         truncate: !0,
         children: f
       }),
@@ -1896,7 +1896,7 @@ function r$(e) {
       onDragQuadrantUpdate: e.onDragQuadrantUpdate,
       onDragStart: e.onDragStart,
       showGrabber: e.showGrabber,
-      text: jsx(_$$E, {
+      text: jsx(TextWithTruncation, {
         truncate: !0,
         showTooltipWhenTruncated: !1,
         children: e.favorite.prototype.file?.name
@@ -2015,7 +2015,7 @@ function rV(e) {
       onDragQuadrantUpdate: e.onDragQuadrantUpdate,
       onDragStart: e.onDragStart,
       showGrabber: e.showGrabber,
-      text: jsxs(_$$E, {
+      text: jsxs(TextWithTruncation, {
         truncate: !0,
         children: [' ', l.name]
       }),
@@ -2285,7 +2285,7 @@ function rH(e) {
 function rq(e) {
   let t = useDispatch();
   let r = useSelector(e => e.currentTeamId);
-  let n = _$$dq() ?? null;
+  let n = useCurrentUserOrgId() ?? null;
   let o = _$$sb(e.favorites, e.order);
   let l = _$$_();
   let [d, c] = useState(!1);
@@ -2488,7 +2488,7 @@ function rq(e) {
         },
         role: 'button',
         tabIndex: 0,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: 'favorited_section--expandCaretCustomSections--SUjwA',
           svg: p ? _$$A5 : _$$A6
         }), jsx('div', {
@@ -2806,7 +2806,7 @@ function ar(e) {
     'onClick': e.onSelect,
     'children': [jsx('div', {
       className: 'move_favorites_modal--iconContainer--oDATP',
-      children: e.checked ? jsx(_$$B, {
+      children: e.checked ? jsx(SvgComponent, {
         className: _$$s.colorIcon.$,
         svg: _$$A7
       }) : jsx(_$$nl, {
@@ -2885,13 +2885,13 @@ function ai(e) {
           className: _$$s.flex.itemsCenter.justifyBetween.$,
           role: 'button',
           tabIndex: 0,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             className: U()(_$$s.flex.itemsCenter.p6.mr12.colorIcon.$, 'favorited_section--moveFavoritesContainerHeaderLeftBlockItems--pl1Hf'),
             svg: p ? _$$A5 : _$$A6
-          }), renderI18nText('sidebar.move_these_starred_items'), jsx(_$$B, {
+          }), renderI18nText('sidebar.move_these_starred_items'), jsx(SvgComponent, {
             'svg': _$$A8,
             'className': U()('favorited_section--helpIcon--vfl5Y', _$$s.flex.itemsBaseline.ml4.$),
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('file_browser.planless_favorites.your_favorited_items_tooltip'),
             'data-tooltip-timeout-delay': 50,
             'data-tooltip-max-width': 200
@@ -2938,7 +2938,7 @@ function an(e) {
       }));
     },
     icon: jsx(_$$t2, {}),
-    text: jsx(_$$E, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: renderI18nText('sidebar.all_shared_projects')
     }),
@@ -2981,7 +2981,7 @@ function ad({
     icon: jsx(_$$t2, {
       className: _$$s.colorIcon.$
     }),
-    text: jsx(_$$E, {
+    text: jsx(TextWithTruncation, {
       truncate: !0,
       children: l
     }),
@@ -3090,7 +3090,7 @@ function aI({
         }), jsx('div', {
           className: 'x2b8uid xkdneqi',
           children: getI18nString('file_browser.make_file_creation_promos.description')
-        }), jsx(IK, {
+        }), jsx(ButtonWide, {
           onClick: e,
           children: getI18nString('file_browser.make_file_creation_promos.cta')
         })]
@@ -3161,7 +3161,7 @@ function a$(e) {
         children: [e.header, (!e.demure || e.collapsible && !t) && jsx(aW, {})]
       }), !!e.icon && e.icon, e.countDownDaysLeft && jsx('div', {
         className: 'base_upgrade_section--countdownTicker--6YLVt',
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: e.countDownDaysLeft,
           fontWeight: 'medium',
           fontSize: 14
@@ -3287,7 +3287,7 @@ function aX(e) {
         message: getI18nString('view_permissions.request_sent'),
         type: 'request-team-membership'
       }));
-      _$$uE('limited_team_plan_request_upgrade_clicked', {
+      trackUserEvent('limited_team_plan_request_upgrade_clicked', {
         user: l
       }, {
         teamId: e.team.id
@@ -3770,13 +3770,13 @@ function sN() {
       installed: e.outcome === 'accepted'
     });
   };
-  return jsxs(_$$E6, {
+  return jsxs(ButtonPrimitive, {
     ..._$$xk(sC.container, e && sC.containerFadeOut),
     onClick: s,
     children: [jsx('span', {
       className: 'x2lah0s',
       children: jsx(_$$z4, {})
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       color: 'default',
       children: jsx('span', {
@@ -3846,7 +3846,7 @@ function sL() {
             className: 'x1n0bwc9',
             children: getI18nString('community.resource_hub.introducing_templates_and_tools')
           })
-        }), jsx(_$$E6, {
+        }), jsx(ButtonPrimitive, {
           'aria-label': getI18nString('community.resource_hub.take_me_there'),
           ..._$$xk(sD.button),
           'onClick': () => {
@@ -3890,7 +3890,7 @@ function sU() {
       e.stopPropagation();
       t();
     },
-    'children': [jsx(_$$J3, {}), jsx(_$$E, {
+    'children': [jsx(_$$J3, {}), jsx(TextWithTruncation, {
       children: renderI18nText('sidebar.explore_community')
     })]
   });
@@ -3974,7 +3974,7 @@ function sK({
       }));
     },
     'icon': jsx(_$$e6, {}),
-    'text': jsx(_$$E, {
+    'text': jsx(TextWithTruncation, {
       truncate: !0,
       showTooltipWhenTruncated: !1,
       children: r
@@ -4000,7 +4000,7 @@ function sJ() {
       icon: jsx(_$$z5, {}),
       text: jsx('div', {
         className: _$$s.pr36.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText('file_browser.tool_bar.trash')
         })
       }),
@@ -4013,7 +4013,7 @@ let sX = 'sidebar--loading--AITp2';
 let sQ = 'sidebar--divider--sHsz4';
 function sZ(e) {
   let t = useDispatch();
-  let r = _$$dq();
+  let r = useCurrentUserOrgId();
   let n = useSelector(e => e.currentTeamId);
   let l = useSelector(e => e.userFlags);
   let d = FC();
@@ -4087,7 +4087,7 @@ function sZ(e) {
       favoritedProjects: B,
       favoritedTeams: e.sidebarUser?.favoritedTeams ?? null,
       favoritedWorkspaces: e.sidebarUser?.favoritedWorkspaces ?? null,
-      userSidebarSections: e.sidebarUser?.userSidebarSections ? _$$oA(e.sidebarUser.userSidebarSections) : [],
+      userSidebarSections: e.sidebarUser?.userSidebarSections ? getResourceDataOrFallback(e.sidebarUser.userSidebarSections) : [],
       previewYOffset: p
     }) : jsx(Fragment, {
       children: $ && jsx(rQ, {
@@ -4106,7 +4106,7 @@ function sZ(e) {
     })]
   }) : jsx('div', {
     className: sX,
-    children: jsx(kt, {})
+    children: jsx(LoadingSpinner, {})
   });
   let H = sj();
   let K = {
@@ -4244,7 +4244,7 @@ function sZ(e) {
                 })]
               }) : jsx('div', {
                 className: sX,
-                children: jsx(kt, {})
+                children: jsx(LoadingSpinner, {})
               })), O && F(), jsx('div', {
                 className: sQ
               }), V(), J === sl.AFTER_CONTENT && jsx('div', {
@@ -4270,7 +4270,7 @@ function sZ(e) {
 }
 function s0(e) {
   let t = selectCurrentUser();
-  let r = _$$dq();
+  let r = useCurrentUserOrgId();
   let n = _$$d2();
   let o = useSelector(e => e.currentTeamId);
   let l = useDispatch();
@@ -4335,7 +4335,7 @@ function s0(e) {
     sidebarUser: w,
     teamFolderId: b,
     teamFolderName: v,
-    trackScroll: () => _$$uE('Sidebar Scrolled', {
+    trackScroll: () => trackUserEvent('Sidebar Scrolled', {
       user: t
     })
   });
@@ -4398,7 +4398,7 @@ function iy(e) {
   });
 }
 function iw(e) {
-  let t = _$$dq();
+  let t = useCurrentUserOrgId();
   let r = _$$P(t, useSelector(_$$o6));
   let s = ih(r.data === 'Unassigned' ? null : r.data);
   return jsxs('div', {
@@ -4478,7 +4478,7 @@ function iN(e) {
   }) => e);
   let n = _$$E7();
   let d = _$$K2();
-  let u = _$$sZ();
+  let u = useCurrentUserOrg();
   let m = d && u && !draftViews.includes(r.view);
   !function () {
     let e = useStore();
@@ -4615,7 +4615,7 @@ function iD({
     return t;
   }, [e]);
   let f = currentOrgUser && currentOrgUser.permission === FUserRoleType.GUEST;
-  let g = Object.keys(_$$t4(roles.byTeamId, user.id)).filter(e => teams[e]);
+  let g = Object.keys(extractPropertyFromNestedObjects(roles.byTeamId, user.id)).filter(e => teams[e]);
   if (f) {
     let e = g.map(e => teams[e]).filter(e => e.org_id === orgId);
     return jsx(_$$h5, {
@@ -4708,7 +4708,7 @@ function iG({
               style: {
                 wordBreak: 'break-word'
               },
-              children: jsxs(_$$E, {
+              children: jsxs(TextWithTruncation, {
                 color: n,
                 fontSize: 24,
                 truncate: 'line-clamp',
@@ -4742,11 +4742,11 @@ function iV(e) {
   });
 }
 function iY(e) {
-  return jsx($n, {
+  return jsx(Button, {
     'variant': 'secondary',
     'disabled': !0,
     'htmlAttributes': {
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': e.tooltipText,
       'data-tooltip-show-immediately': !0,
       'onPointerEnter': e.onMouseEnter
@@ -4758,22 +4758,22 @@ function iY(e) {
 function iJ({
   backgroundColor: e
 }) {
-  let t = NV(WL);
+  let t = debouncedTrackOrgEvent(TEAM_CREATION_BUTTON_HOVERED_TIMEOUT);
   let r = useSelector(e => e.selectedView.view);
   let s = getI18nString('license_group_view.toolbar.new_team_button');
   let n = () => {
-    t(jd, {
+    t(DISABLED_TEAM_CREATION_BUTTON_HOVERED, {
       placement: r
     });
   };
   return e ? jsx('button', {
     'className': U()('button_custom--buttonBase--H2KEL button--buttonBase---72nl', isColorDarkByLuminance(e) ? 'button_custom--buttonColorsForDarkBackground--CiydL' : 'button_custom--buttonColorsForLightBackground--wejKf', 'button_custom--buttonHugContents--Ntibj'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('license_group_view.toolbar.create_team_disabled'),
     'data-tooltip-show-immediately': !0,
     'onMouseEnter': n,
     'disabled': !0,
-    'children': jsx(_$$E, {
+    'children': jsx(TextWithTruncation, {
       fontSize: 11,
       fontWeight: 'medium',
       truncate: !0,
@@ -4830,7 +4830,7 @@ function iQ({
   } : null;
 }
 function iZ() {
-  let e = _$$sZ();
+  let e = useCurrentUserOrg();
   let t = iQ({
     org: e,
     workspace: null
@@ -4907,7 +4907,7 @@ function ni({
       minItemContentWidth: 192,
       trackedContext: _$$e7.PAGE_HEADER_DROPDOWN,
       onTrackedItemClick: e => {
-        Cu({
+        logAndTrackCTA({
           ...n.properties,
           trackingContext: n.name,
           ...e.trackingProperties
@@ -4954,7 +4954,7 @@ function nn(e) {
       dispatch: t,
       onSelectItem: e => {
         e.callback && e.callback('', null, t);
-        e.trackingProperties && Cu({
+        e.trackingProperties && logAndTrackCTA({
           ...d.properties,
           trackingContext: d.name,
           ...e.trackingProperties
@@ -4976,7 +4976,7 @@ let np = registerModal(({
     title: getI18nString('workspace_view.description_modal.title'),
     subtitle: jsx('div', {
       className: _$$s.mb16.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('workspace_view.description_modal.subtitle', {
           allWorkspacesText: jsx('span', {
@@ -5244,7 +5244,7 @@ let nR = connect(e => ({
     }), r > s && (e.customOverflowRow || jsxs('div', {
       className: 'members_preview--totalMemberCountContainer--wYQwX',
       onClick: e.onClickShowMore,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A0,
         className: 'members_preview--teamIcon--UFW2s'
       }), jsx('div', {
@@ -5302,7 +5302,7 @@ let nD = registerModal(e => {
     e.baseOrgUser && (u[e.baseOrgUser.user.id] = e.permission);
   });
   let m = e => u[e.id] === FOrganizationRoleType.ADMIN && l.activeTab === 'MEMBERS';
-  return jsx(_$$bL2, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 'lg',
     height: 'fixed',
@@ -5455,7 +5455,7 @@ function nB(e) {
       },
       'iconPrefix': jsx(_$$_4, {}),
       'htmlAttributes': {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('file_browser.view_members_with_count', {
           numMembers: h
         })
@@ -5562,7 +5562,7 @@ function nB(e) {
           children: workspace.name
         }),
         badge: workspace.orgAccess === FAccessLevelType.SECRET ? jsx('div', {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('workspace_table.secret_workspace_lock_tooltip'),
           'data-tooltip-subtext': getI18nString('workspace_table.secret_workspace_lock_tooltip_subtext'),
           'data-tooltip-timeout-delay': 500,
@@ -5872,7 +5872,7 @@ let n2 = registerModal(({
       searchQuery: e,
       workspaceId: t
     }) {
-      let r = _$$dq();
+      let r = useCurrentUserOrgId();
       assert(!!r, 'currentUserOrgId must be defined in useSearchWorkspaceFilesQuery');
       let a = useSubscription(AddWorkspacePinSearchFilesView, {
         query: e,
@@ -5934,7 +5934,7 @@ let n2 = registerModal(({
       searchPlaceholder: getI18nString('file_browser.choose_file_modal.search_for_a_file'),
       children: jsx('div', {
         className: U()(_$$s.flex.itemsCenter.justifyCenter.wFull.hFull.flexGrow1.$),
-        children: jsx(qc, {})
+        children: jsx(LoadingOverlay, {})
       })
     });
   }
@@ -5986,7 +5986,7 @@ function os({
   } = _$$L2();
   let c = useCallback((e, t) => {
     customHistory.redirect(_$$r3(e));
-    k1(e.key, {
+    trackFileBrowserFileClicked(e.key, {
       selectedViewName: r.view,
       entrypoint: 'suggested_files_empty_state'
     });
@@ -6052,7 +6052,7 @@ function os({
           isSelected: t
         })
       },
-      viewType: XU.GRID
+      viewType: ViewMode.GRID
     }), showing && data?.tile ? jsx(_$$i4, {
       tileActions: oa,
       openTile: e => c(data.tile.file, e),
@@ -6132,7 +6132,7 @@ function oo({
   }(e);
   t = r.status !== 'loaded' ? jsx('div', {
     className: _$$s.py1.h20.wFull.$,
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   }) : r.data.length > 0 ? jsx(os, {
     suggestedFiles: r.data
   }) : jsx('span', {
@@ -6174,13 +6174,13 @@ function ob({
         className: _$$s.flex.flexColumn.overflowHidden.$,
         children: [jsxs('div', {
           className: _$$s.flex.flexRow.gap8.textBodyLarge.$,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             fontWeight: 'semi-bold',
             truncate: !0,
             children: e.creator.name
           }), jsx('span', {
             className: _$$s.flexBasisAuto.flexGrow1.flexShrink0.$,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: 'secondary',
               children: jsx(_$$h6, {
                 date: e.createdAt
@@ -6358,7 +6358,7 @@ function oE({
   let c = _$$v4();
   let u = useCallback((t, a, s, i) => {
     c(t, s);
-    _$$E2(_$$gH, a.file, {
+    trackFileBrowserFileClick(FILE_BROWSER_FILE_CLICKED, a.file, {
       entrypoint: i,
       selectedView: r.view,
       resourceType: 'workspace',
@@ -6432,7 +6432,7 @@ function oE({
       handleOpenItem: m,
       isDraggable: !0,
       items: h,
-      viewType: XU.GRID
+      viewType: ViewMode.GRID
     }) : jsx(oo, {
       workspaceId: e.id
     }), (() => {
@@ -6479,7 +6479,7 @@ function oN({
     children: [jsx('span', {
       ..._$$xk(oC.fileName),
       children: e.file.name
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       showTooltipWhenTruncated: !0,
       color: 'secondary',
@@ -6539,7 +6539,7 @@ function ok({
           'className': _$$s.flex.flexRow.gap4.itemsCenter.textBodyLargeStrong.cursorDefault.$,
           'onClick': o,
           'children': getI18nString('file_browser.pinning.pinned_files')
-        }), c && jsx($n, {
+        }), c && jsx(Button, {
           variant: 'link',
           onClick: _,
           disabled: u,
@@ -6547,7 +6547,7 @@ function ok({
             'data-tooltip': u ? getI18nString('file_browser.pinning.max_files.add_button_tooltip', {
               maxPins: D1
             }) : void 0,
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip-show-above': !0
           },
           children: getI18nString('file_browser.pinning.add_file')
@@ -6562,7 +6562,7 @@ function ok({
 function oR({
   workspaceId: e
 }) {
-  let t = _$$sZ();
+  let t = useCurrentUserOrg();
   let r = useSubscription(WorkspacePageView, {
     orgId: t.id,
     workspaceId: e
@@ -6618,7 +6618,7 @@ function oR({
     });
     return i;
   }(e);
-  if (r.status === 'loading') return jsx(qc, {});
+  if (r.status === 'loading') return jsx(LoadingOverlay, {});
   if (r.status !== 'loaded') {
     return jsx(_$$S4, {
       resourceType: EntityType.WORKSPACE
@@ -6791,7 +6791,7 @@ function ln({
   isSelected: o
 }) {
   let l = r ? lr(r, s, i) : void 0;
-  return jsx(_$$E6, {
+  return jsx(ButtonPrimitive, {
     'aria-pressed': o,
     'className': U()(_$$x4, Mg, o && _$$wH),
     ...n(),
@@ -7168,7 +7168,7 @@ function lg() {
     key: 'categoryRoute',
     category: LJ.make
   }]).categoryRoute;
-  return t ? jsx(_$$E6, {
+  return t ? jsx(ButtonPrimitive, {
     'aria-label': e,
     'className': U()(_$$x4, Mg, _$$pU),
     'onClick': () => {
@@ -7187,7 +7187,7 @@ function lx() {
   let e = getI18nString('community.profiles.saved');
   let t = Om();
   let r = _$$tv() ?? void 0;
-  return jsx(_$$E6, {
+  return jsx(ButtonPrimitive, {
     'aria-label': e,
     'className': U()(_$$x4, Mg, _$$pU),
     'onClick': () => {
@@ -7769,7 +7769,7 @@ function lH({
   let [c, m] = useState(!1);
   return jsx(_$$J2, {
     brand: o,
-    children: createElement(_$$E6, {
+    children: createElement(ButtonPrimitive, {
       'aria-label': t,
       ..._$$xk(lK.card, o ? lK.cardBrandBorder : lK.cardStrongBorder, e === 'large' ? lK.largeCard : lK.smallCard),
       'onClick': () => {
@@ -8422,7 +8422,7 @@ function l3(e, t) {
   });
   return {
     onIntersectionChange: useCallback((e, t) => {
-      t && (_$$o_(e) ? _trackResourceImpression(e) : ws(e) ? trackResourceImpression(e) : _$$I4(e) && _trackResourceImpression2(e));
+      t && (_$$o_(e) ? _trackResourceImpression(e) : ws(e) ? trackResourceImpression(e) : isPlugin(e) && _trackResourceImpression2(e));
     }, [trackResourceImpression, _trackResourceImpression, _trackResourceImpression2]),
     flushAndResetImpressions: useCallback(() => {
       flushAndResetResourceImpressions();
@@ -8752,7 +8752,7 @@ function db({
     }
     return null;
   }(e);
-  return jsx(_$$E6, {
+  return jsx(ButtonPrimitive, {
     'aria-label': s,
     'className': U()(_$$x4, Mg, _$$pU),
     'onClick': () => {
@@ -9372,7 +9372,7 @@ function dY({
   isSelected: t,
   onClick: r
 }) {
-  return jsx(_$$E6, {
+  return jsx(ButtonPrimitive, {
     'aria-label': e,
     'aria-pressed': t,
     'className': U()(_$$x4, Mg, 'category_link_pill--tagPill--vb98J', t && _$$wH),
@@ -9449,7 +9449,7 @@ function dJ({
           },
           isSelected: c
         }));
-      }), (n || l) && jsx(_$$E6, {
+      }), (n || l) && jsx(ButtonPrimitive, {
         className: 'expansion-button',
         ..._$$xk(dq.expansionButton),
         style: n ? {
@@ -9811,7 +9811,7 @@ function cn({
   let u = d?.search.query;
   let m = useDispatch();
   let [_, p] = useState('');
-  let f = _$$A12(e, 400);
+  let f = useDebouncedCallback(e, 400);
   let [g, h] = useState(!1);
   let x = l && (g || c || _);
   let b = x ? '' : getI18nString('community.search.search_templates_and_tools');
@@ -9853,7 +9853,7 @@ function cn({
       },
       'aria-label': getI18nString('community.search.search_templates_and_tools'),
       'placeholder': b
-    }), _.length > 0 && jsx(_$$E6, {
+    }), _.length > 0 && jsx(ButtonPrimitive, {
       className: 'xt0e3qv xy13l1i',
       onClick: () => {
         p('');
@@ -10084,7 +10084,7 @@ function cj({
   });
   return loading || _loading2 || _loading3 ? jsx('div', {
     className: 'x78zum5 xl56j7k x6s0dn4 x4ygwfs',
-    children: jsx(kt, {})
+    children: jsx(LoadingSpinner, {})
   }) : resources?.length === 0 && _resources2?.length === 0 && _resources3?.length === 0 ? jsx('div', {
     className: dS,
     children: jsx(cv, {})
@@ -10155,7 +10155,7 @@ function cT({
       },
       customLoadingView: jsx('div', {
         className: 'x78zum5 xl56j7k x6s0dn4 x4ygwfs',
-        children: jsx(kt, {})
+        children: jsx(LoadingSpinner, {})
       }),
       emptyResourceStateQuery: e
     }), d && jsx(_$$D4, {
@@ -10401,7 +10401,7 @@ function cD() {
   let c = n.data?.type === FOrganizationLevelType.ORG ? n.data?.key.parentId : void 0;
   let u = n.data?.type === FOrganizationLevelType.TEAM ? n.data?.key.parentId : void 0;
   let m = Fz();
-  let _ = n.data?.type !== FOrganizationLevelType.ORG || _$$oA(n.data.customTemplatesAllowed);
+  let _ = n.data?.type !== FOrganizationLevelType.ORG || getResourceDataOrFallback(n.data.customTemplatesAllowed);
   let p = _$$oi();
   let f = useMemo(() => {
     let e = N$.INTERNAL;
@@ -10938,7 +10938,7 @@ function us(e) {
           feedPost: e.feedPost,
           source: _$$Zp.TILE
         }), x && jsx(K0, {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fig_feed.copy_link_to_post'),
           'onClick': g,
           'children': jsx(In, {
@@ -11024,7 +11024,7 @@ function ui(e) {
       onMouseDown: t => e.onTileMouseDown(t, p),
       onMouseEnter: () => l(!0),
       onMouseLeave: () => l(!1),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A14
       })
     })]
@@ -11204,7 +11204,7 @@ function uu(e) {
       onClick: e.onRefresh,
       role: 'button',
       tabIndex: 0,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A15,
         className: ul
       }), renderI18nText('fig_feed.new_posts')]
@@ -11213,7 +11213,7 @@ function uu(e) {
       onClick: e.onDismiss,
       role: 'button',
       tabIndex: 0,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A16,
         className: ul
       })
@@ -11284,11 +11284,11 @@ function uf(e) {
 }
 let uh = e => ({
   tileSortFilterConfig: e.deletedFiles,
-  sortKeys: [C0.TRASHED_AT]
+  sortKeys: [SortField.TRASHED_AT]
 });
 let ux = e => ({
   tileSortFilterConfig: e.trashedFolders,
-  sortKeys: [C0.TRASHED_AT, C0.NAME]
+  sortKeys: [SortField.TRASHED_AT, SortField.NAME]
 });
 let ub = (e, t, r) => {
   let s = memoizeByArgs(uh)(t);
@@ -11306,7 +11306,7 @@ let ub = (e, t, r) => {
     initialViewMode: s.tileSortFilterConfig.viewMode,
     onViewModeChange: t => {
       trackEventAnalytics('file view toggle', {
-        viewType: t === XU.GRID ? 'grid' : 'list'
+        viewType: t === ViewMode.GRID ? 'grid' : 'list'
       });
       e(JF({
         selectedView: r,
@@ -11332,7 +11332,7 @@ let uv = (e, t, r) => {
     initialViewMode: s.tileSortFilterConfig.viewMode,
     onViewModeChange: t => {
       trackEventAnalytics('folder view toggle', {
-        viewType: t === XU.GRID ? 'grid' : 'list'
+        viewType: t === ViewMode.GRID ? 'grid' : 'list'
       });
       e(JF({
         selectedView: r,
@@ -11431,12 +11431,12 @@ function uS({
       horizontalAlignItems: 'space-between',
       children: [jsxs(AutoLayout, {
         spacing: 4,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontSize: 13,
           fontWeight: 'medium',
           children: e
         }), jsx('div', {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': t,
           'data-tooltip-show-above': !0,
           'data-tooltip-show-immediately': !0,
@@ -11447,7 +11447,7 @@ function uS({
             fill: 'secondary'
           })
         })]
-      }), jsxs(_$$E, {
+      }), jsxs(TextWithTruncation, {
         fontSize: 13,
         fontWeight: 'medium',
         children: [r, '/', s]
@@ -11487,7 +11487,7 @@ let uk = {
     $$css: !0
   }
 };
-let uR = _$$tf($n);
+let uR = _$$tf(Button);
 function uA({
   canEditTeam: e,
   isDraftsFolder: t
@@ -11527,7 +11527,7 @@ function uO({
   let d = i.data.project?.team?.teamFileCounts?.whiteboardFileCount ?? 0;
   let c = i.data.project?.team?.teamFileCounts?.slideFileCount;
   let u = c ? parseInt(c, 10) : 0;
-  let m = _$$oA(i.data.project?.team?.teamFileCounts?.totalFileCount) ?? 0;
+  let m = getResourceDataOrFallback(i.data.project?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let _ = s ? m >= STANDARD_LIMIT : l >= STANDARD_LIMIT || d >= STANDARD_LIMIT;
   return jsx(_$$fu, {
     name: 'Starter Limit Overview',
@@ -11549,7 +11549,7 @@ function uO({
         height: 'hug-contents',
         children: [jsx('div', {
           ...(s ? _$$Ay2.props(uk.title) : {}),
-          children: s ? renderI18nText('file_browser.starter_limit_global.your_plan_files') : jsx(_$$E, {
+          children: s ? renderI18nText('file_browser.starter_limit_global.your_plan_files') : jsx(TextWithTruncation, {
             fontSize: 16,
             fontWeight: 'semi-bold',
             children: renderI18nText('file_browser.starter_limit.your_starter_team_overview')
@@ -11567,7 +11567,7 @@ function uO({
           children: [s ? jsx('div', {
             ..._$$Ay2.props(uk.description),
             children: renderI18nText('file_browser.starter_limit_global.description')
-          }) : jsx(_$$E, {
+          }) : jsx(TextWithTruncation, {
             fontSize: 13,
             children: renderI18nText(_ ? 'file_browser.starter_limit.running_out_of_files' : 'file_browser.starter_limit.enough_for_you_to_get_started')
           }), jsx(uR, {
@@ -11578,7 +11578,7 @@ function uO({
             },
             children: renderI18nText('upgrade.view_plans')
           })]
-        }) : jsx(_$$E, {
+        }) : jsx(TextWithTruncation, {
           fontSize: 13,
           children: renderI18nText('file_browser.starter_limit.trying_things_out')
         })]
@@ -11634,7 +11634,7 @@ function uJ(e) {
   let n = e.canAdminTeam ? r ? getI18nString('billing.open_invoice_reminder.locked_admin_description') : getI18nString('billing.open_invoice_reminder.grace_period_admin_description') : getI18nString('billing.open_invoice_reminder.locked_viewer_description');
   let o = e.canAdminTeam ? getI18nString('billing.open_invoice_reminder.cta') : null;
   let l = {
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('billing.open_invoice_reminder.button_tooltip'),
     'data-tooltip-show-immediately': !0
   };
@@ -11665,7 +11665,7 @@ function uJ(e) {
       children: n
     }), !!o && jsx('div', {
       className: _$$s.flex.justifyEnd.wFull.$,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         onClick: () => t(_$$sf({
           view: 'teamAdminConsole',
           teamId: e.team.id,
@@ -11771,7 +11771,7 @@ function me({
   let A = FC();
   let O = _$$ol();
   let F = T?.team_id || O?.id;
-  let P = useSubscription(TeamById(_$$_X(Pw.GROUP_7) && F ? {
+  let P = useSubscription(TeamById(isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && F ? {
     teamId: F
   } : null));
   let L = useMemo(() => P.transform(({
@@ -11781,7 +11781,7 @@ function me({
     label: adminPermissionConfig.TilesView.canEditTeam,
     oldValue: resourceUtils.useMemoizedLoaded(canEditTeam(T?.team_id || O?.id || '', A)),
     newValue: L,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       folderTeamId: T?.team_id,
       teamFromFileBrowserId: O?.id
@@ -11817,33 +11817,33 @@ function me({
   let G = vt(O?.id);
   let V = !!O && G;
   let z = !!O && !!m;
-  let H = x.tileSortFilterConfig.viewMode ?? XU.GRID;
-  let K = H === XU.LIST;
-  let Y = w.view === 'recentsAndSharing' && w.tab === _$$G4.SHARED_FILES;
-  let J = (e, t, r) => e === _$$rJ.ANY || e === _$$rJ.SELF && r.type === _$$nb.FILE && r.file.creatorId === t || e === _$$rJ.SELF && r.type === _$$nb.REPO && r.branches[0].creator_id === t || e === _$$rJ.OTHER && r.type === _$$nb.FILE && r.file.creatorId !== t || e === _$$rJ.OTHER && r.type === _$$nb.REPO && r.branches[0].creator_id !== t;
+  let H = x.tileSortFilterConfig.viewMode ?? ViewMode.GRID;
+  let K = H === ViewMode.LIST;
+  let Y = w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES;
+  let J = (e, t, r) => e === PermissionType.ANY || e === PermissionType.SELF && r.type === _$$nb.FILE && r.file.creatorId === t || e === PermissionType.SELF && r.type === _$$nb.REPO && r.branches[0].creator_id === t || e === PermissionType.OTHER && r.type === _$$nb.FILE && r.file.creatorId !== t || e === PermissionType.OTHER && r.type === _$$nb.REPO && r.branches[0].creator_id !== t;
   let X = (e, t) => {
     let r = 'design';
     switch (t.type === _$$nb.FILE ? r = t.file.editorType : t.type === _$$nb.PINNED_FILE ? r = t.file.editorType : t.type === _$$nb.OFFLINE_FILE && (r = t.file.editorType), e) {
-      case _$$t6.ANY:
+      case FileType.ANY:
         return !0;
-      case _$$t6.DESIGN:
+      case FileType.DESIGN:
         if (t.type === _$$nb.FILE || t.type === _$$nb.REPO || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'design';
         return !1;
-      case _$$t6.FIGJAM:
+      case FileType.FIGJAM:
         if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'whiteboard';
         return !1;
-      case _$$t6.PROTOTYPE:
+      case FileType.PROTOTYPE:
         return t.type === _$$nb.PROTOTYPE;
-      case _$$t6.SLIDES:
+      case FileType.SLIDES:
         if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'slides';
         return !1;
-      case _$$t6.SITES:
+      case FileType.SITES:
         if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'sites';
         return !1;
-      case _$$t6.COOPER:
+      case FileType.COOPER:
         if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'cooper';
         return !1;
-      case _$$t6.MAKE:
+      case FileType.MAKE:
         if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'figmake';
         return !1;
       default:
@@ -11852,7 +11852,7 @@ function me({
   };
   let Q = (e, t) => !e || e === `${_$$Tf.getSharedBy(t)}`;
   let Z = useCallback((e, t) => {
-    if (w.view === 'recentsAndSharing' && w.tab === _$$G4.SHARED_FILES || !e || !e.planId) return !0;
+    if (w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES || !e || !e.planId) return !0;
     let r = e.planId;
     switch (t.type) {
       case _$$nb.FILE:
@@ -11872,22 +11872,22 @@ function me({
     let a;
     let s;
     let i = e.filter(e => Q(t.filters.sharedBy, e) && X(t.filters.fileType, e) && J(t.filters.creator, A.user?.id, e) && Z(t.filters.plan, e));
-    if (r = Y ? i.filter(e => e.type === _$$nb.FILE || e.type === _$$nb.PROTOTYPE || e.type === _$$nb.REPO) : i.filter(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO || e.type === _$$nb.OFFLINE_FILE), w.view === 'recentsAndSharing' && w.tab === _$$G4.SHARED_FILES) return i;
-    let n = t.sort.dir === _$$ue.DESC;
+    if (r = Y ? i.filter(e => e.type === _$$nb.FILE || e.type === _$$nb.PROTOTYPE || e.type === _$$nb.REPO) : i.filter(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO || e.type === _$$nb.OFFLINE_FILE), w.view === 'recentsAndSharing' && w.tab === ViewTypeEnum.SHARED_FILES) return i;
+    let n = t.sort.dir === SortOrder.DESC;
     switch (t.sort.key) {
-      case C0.ACCESSED_AT:
+      case SortField.ACCESSED_AT:
         a = _$$f5.byComparators(u6);
         s = i;
         break;
-      case C0.CREATED_AT:
+      case SortField.CREATED_AT:
         a = _$$f5.byComparators(u3);
         s = i;
         break;
-      case C0.TOUCHED_AT:
+      case SortField.TOUCHED_AT:
         a = _$$f5.byComparators(u7);
         s = r;
         break;
-      case C0.NAME:
+      case SortField.NAME:
         if (C) {
           a = _$$f5.byComparators(u4, _$$f5.byProperty('type'));
           s = i;
@@ -11897,11 +11897,11 @@ function me({
         a = _$$f5.byComparators(o ? u4 : u2, _$$f5.byProperty('type'), u5, u8);
         s = i;
         break;
-      case C0.TRASHED_AT:
+      case SortField.TRASHED_AT:
         a = _$$f5.byComparators(u9);
         s = r;
         break;
-      case C0.SHARED_AT:
+      case SortField.SHARED_AT:
         return i;
       default:
         console.error('Unknown sort key', t.sort.key);
@@ -12156,7 +12156,7 @@ function me({
       e && !s && a && (analyticsEventManager.trackDefinedEvent('file_browser.visible_tiles_count', {
         totalCount: r,
         visibleCount: a.length,
-        viewMode: jq(t),
+        viewMode: getViewModeKey(t),
         selectedView: n,
         viewportWidth: window.innerWidth,
         viewportHeight: window.innerHeight,
@@ -12276,7 +12276,7 @@ function me({
           items: et,
           sortBy: e => {
             let t = x.tileSortFilterConfig;
-            let r = t.sort.dir === _$$ue.DESC ? _$$ue.ASC : _$$ue.DESC;
+            let r = t.sort.dir === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
             $(JF({
               selectedView: w,
               config: {
@@ -12289,7 +12289,7 @@ function me({
               tab: w.view === 'recentsAndSharing' ? w.tab : void 0
             }));
           },
-          viewType: K ? XU.LIST : XU.GRID,
+          viewType: K ? ViewMode.LIST : ViewMode.GRID,
           updateRenderedItems: el,
           updateVisibleItems: setVisibleTiles,
           handleOpenDropdown: ei,
@@ -12372,7 +12372,7 @@ function ma() {
   let o = _$$R3(t);
   let l = memoizeByArgs(e => ({
     tileSortFilterConfig: e,
-    sortKeys: [C0.TRASHED_AT, C0.NAME, C0.CREATED_AT, C0.TOUCHED_AT]
+    sortKeys: [SortField.TRASHED_AT, SortField.NAME, SortField.CREATED_AT, SortField.TOUCHED_AT]
   }))(r.deletedFiles);
   let {
     creatorFilter,
@@ -12380,13 +12380,13 @@ function ma() {
   } = function (e) {
     let t = 'your_files';
     switch (e.tileSortFilterConfig.filters.creator) {
-      case _$$rJ.SELF:
+      case PermissionType.SELF:
         t = 'your_files';
         break;
-      case _$$rJ.OTHER:
+      case PermissionType.OTHER:
         t = 'other_files';
         break;
-      case _$$rJ.ANY:
+      case PermissionType.ANY:
         t = 'all';
         break;
       default:
@@ -12394,28 +12394,28 @@ function ma() {
     }
     let r = '';
     switch (e.tileSortFilterConfig.filters.fileType) {
-      case _$$t6.DESIGN:
+      case FileType.DESIGN:
         r = 'design';
         break;
-      case _$$t6.FIGJAM:
+      case FileType.FIGJAM:
         r = 'whiteboard';
         break;
-      case _$$t6.PROTOTYPE:
+      case FileType.PROTOTYPE:
         r = 'prototype';
         break;
-      case _$$t6.SLIDES:
+      case FileType.SLIDES:
         r = 'slides';
         break;
-      case _$$t6.SITES:
+      case FileType.SITES:
         r = 'sites';
         break;
-      case _$$t6.COOPER:
+      case FileType.COOPER:
         r = 'cooper';
         break;
-      case _$$t6.MAKE:
+      case FileType.MAKE:
         r = 'figmake';
         break;
-      case _$$t6.ANY:
+      case FileType.ANY:
         r = '';
         break;
       default:
@@ -12494,8 +12494,8 @@ function ma() {
     cursor: null,
     creatorFilter,
     fileTypeFilter,
-    sortType: l.tileSortFilterConfig.sort.key === C0.TRASHED_AT ? 'trashed_at' : 'name',
-    sortDirection: l.tileSortFilterConfig.sort.dir === _$$ue.ASC ? 'asc' : 'desc',
+    sortType: l.tileSortFilterConfig.sort.key === SortField.TRASHED_AT ? 'trashed_at' : 'name',
+    sortDirection: l.tileSortFilterConfig.sort.dir === SortOrder.ASC ? 'asc' : 'desc',
     planId: u?.key.parentId ?? null,
     planType: u?.key.type ?? null,
     queryParams: null
@@ -12637,11 +12637,11 @@ function mc({
         },
         spacing: 0,
         height: 'hug-contents',
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontSize: 13,
           fontWeight: 'medium',
           children: renderI18nText('team_view.folder_upsell.upgrade_to_create_more_projects')
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           fontSize: 11,
           color: 'secondary',
           children: renderI18nText('team_view.folder_upsell.get_unlimited_everything', {
@@ -12761,10 +12761,10 @@ function mm({
         }), jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 0,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             fontSize: 13,
             children: renderI18nText('team_view.folder_upsell.upgrade_to_create_more_projects')
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             fontSize: 11,
             color: 'secondary',
             children: renderI18nText('team_view.folder_upsell.get_unlimited_everything', {
@@ -12784,7 +12784,7 @@ function mx(e) {
   let {
     folderList
   } = e;
-  let o = () => e.viewMode === XU.LIST;
+  let o = () => e.viewMode === ViewMode.LIST;
   let l = vt(e.teamId);
   let d = !!e.teamId && !!e.isEligbileForProTeamLockedRevampUI;
   let c = jn();
@@ -12801,7 +12801,7 @@ function mx(e) {
         children: [jsx('div', {
           className: 'xk50ysn',
           children: renderI18nText('team_view.folder_empty_view.no_projects_yet')
-        }), renderI18nText('team_view.folder_empty_view.projects_help_you_organize'), jsx($n, {
+        }), renderI18nText('team_view.folder_empty_view.projects_help_you_organize'), jsx(Button, {
           variant: 'secondary',
           onClick: e.onCreateNewFolder,
           iconPrefix: jsx(_$$x2, {}),
@@ -12884,43 +12884,43 @@ function mv(e) {
     if (l) {
       let e = m.team;
       return {
-        viewMode: void 0 !== e.viewMode ? e.viewMode : XU.GRID,
+        viewMode: void 0 !== e.viewMode ? e.viewMode : ViewMode.GRID,
         sortKey: function (e) {
           switch (e) {
-            case C0.NAME:
+            case SortField.NAME:
               return 'name';
-            case C0.TOUCHED_AT:
+            case SortField.TOUCHED_AT:
               return 'lastModified';
-            case C0.CREATED_AT:
+            case SortField.CREATED_AT:
               return 'createdAt';
-            case C0.TRASHED_AT:
+            case SortField.TRASHED_AT:
               return 'trashedAt';
-            case C0.ACCESSED_AT:
-            case C0.SHARED_AT:
+            case SortField.ACCESSED_AT:
+            case SortField.SHARED_AT:
               return 'lastModified';
-            case C0.OWNER:
+            case SortField.OWNER:
               return 'owner';
-            case C0.SEARCH_RELEVANCE:
-            case C0.PROJECT_NAME:
+            case SortField.SEARCH_RELEVANCE:
+            case SortField.PROJECT_NAME:
               return 'name';
             default:
               throwTypeError(e);
           }
         }(e.sort.key),
-        sortDesc: e.sort.dir === _$$ue.DESC
+        sortDesc: e.sort.dir === SortOrder.DESC
       };
     }
     if (o) {
       let e = m.trashedFolders;
       return {
-        viewMode: void 0 !== e.viewMode ? e.viewMode : XU.GRID,
-        sortKey: jx(e.sort.key) ?? 'trashedAt',
-        sortDesc: e.sort.dir === _$$ue.DESC
+        viewMode: void 0 !== e.viewMode ? e.viewMode : ViewMode.GRID,
+        sortKey: getSortFieldProperty(e.sort.key) ?? 'trashedAt',
+        sortDesc: e.sort.dir === SortOrder.DESC
       };
     }
     if (!d) {
       return {
-        viewMode: XU.GRID,
+        viewMode: ViewMode.GRID,
         sortKey: 'lastModified',
         sortDesc: !0
       };
@@ -12928,9 +12928,9 @@ function mv(e) {
     {
       let e = m.recentsAndSharing;
       return {
-        viewMode: void 0 !== e.sharedProjects.viewMode ? e.sharedProjects.viewMode : XU.GRID,
-        sortKey: jx(e.sharedProjects.sort.key) ?? 'lastModified',
-        sortDesc: e.sharedProjects.sort.dir === _$$ue.DESC
+        viewMode: void 0 !== e.sharedProjects.viewMode ? e.sharedProjects.viewMode : ViewMode.GRID,
+        sortKey: getSortFieldProperty(e.sharedProjects.sort.key) ?? 'lastModified',
+        sortDesc: e.sharedProjects.sort.dir === SortOrder.DESC
       };
     }
   }, [l, o, d, m.team, m.trashedFolders, m.recentsAndSharing]);
@@ -12950,7 +12950,7 @@ function mv(e) {
     return a;
   }, [d, _.sortKey, _.sortDesc, e.folderList, c, u]);
   return jsxs('div', {
-    children: [o && m.trashedFolders.filters.role === Jh.CAN_BE_VIEWED && jsx('div', {
+    children: [o && m.trashedFolders.filters.role === PermissionAction.CAN_BE_VIEWED && jsx('div', {
       className: 'x1yztbdb x1tudf5h x1m2p0i2',
       children: jsx(_$$_7, {
         dataTestId: 'may-not-restore-or-permanently-delete-banner',
@@ -12969,8 +12969,8 @@ function mv(e) {
       viewMode: _.viewMode,
       onChangeSortOptions: t => {
         if (l) {
-          let r = t.sortKey === Dq.NAME ? C0.NAME : C0.TOUCHED_AT;
-          let a = t.sortDesc ? _$$ue.DESC : _$$ue.ASC;
+          let r = t.sortKey === Dq.NAME ? SortField.NAME : SortField.TOUCHED_AT;
+          let a = t.sortDesc ? SortOrder.DESC : SortOrder.ASC;
           n(JF({
             selectedView: e.selectedView,
             config: {
@@ -13077,7 +13077,7 @@ function mC({
   let r = useSelector(t => t.tileSortFilterStateByView.folders.byId[e] ?? t.tileSortFilterStateByView.folders.$$default);
   let a = useMemo(() => ({
     file_type: mS(r.filters.fileType),
-    sort_order: r.sort.dir === _$$ue.ASC ? 'asc' : 'desc',
+    sort_order: r.sort.dir === SortOrder.ASC ? 'asc' : 'desc',
     sort_column: mk(r.sort.key)
   }), [r.filters.fileType, r.sort.dir, r.sort.key]);
   return setupResourceAtomHandler(BU({
@@ -13089,21 +13089,21 @@ function mC({
 }
 let mS = e => {
   switch (e) {
-    case _$$t6.DESIGN:
+    case FileType.DESIGN:
       return 'design';
-    case _$$t6.FIGJAM:
+    case FileType.FIGJAM:
       return 'whiteboard';
-    case _$$t6.PROTOTYPE:
+    case FileType.PROTOTYPE:
       return 'prototype';
-    case _$$t6.SITES:
+    case FileType.SITES:
       return 'sites';
-    case _$$t6.SLIDES:
+    case FileType.SLIDES:
       return 'slides';
-    case _$$t6.COOPER:
+    case FileType.COOPER:
       return 'cooper';
-    case _$$t6.MAKE:
+    case FileType.MAKE:
       return 'figmake';
-    case _$$t6.ANY:
+    case FileType.ANY:
       return '';
     default:
       throwTypeError(e);
@@ -13111,11 +13111,11 @@ let mS = e => {
 };
 let mk = e => {
   switch (e) {
-    case C0.NAME:
+    case SortField.NAME:
       return 'name';
-    case C0.CREATED_AT:
+    case SortField.CREATED_AT:
       return 'created_at';
-    case C0.TOUCHED_AT:
+    case SortField.TOUCHED_AT:
       return 'touched_at';
     default:
       reportError(_$$e.WAYFINDING, new Error(`Attempting to sort by an unsupported sort key: ${e}`));
@@ -13181,7 +13181,7 @@ function m3(e, t, r) {
     oldValue: resourceUtils.useMemoizedLoaded(i),
     newValue: d,
     label: r,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       callsite: 'useOrgBannerContentQuery'
     }
@@ -13250,7 +13250,7 @@ function m9(e, t, r, i, n, l) {
   let c = useShadowReadLoaded({
     oldValue: resourceUtils.useMemoizedLoaded(d),
     newValue: function (e) {
-      let t = useSubscription(TeamById(_$$_X(Pw.GROUP_7) && e ? {
+      let t = useSubscription(TeamById(isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && e ? {
         teamId: e
       } : null));
       return useMemo(() => t.status === 'disabled' ? resourceUtils.loaded({
@@ -13268,7 +13268,7 @@ function m9(e, t, r, i, n, l) {
       })), [t]);
     }(r),
     label: l,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       callsite: 'useBannerContentQuery',
       resourceType: e,
@@ -13773,7 +13773,7 @@ function _s(e) {
     },
     children: jsxs('div', {
       className: mz,
-      children: [svg && jsx(_$$B, {
+      children: [svg && jsx(SvgComponent, {
         svg,
         useOriginalSrcFills_DEPRECATED: !0
       }), jsxs('div', {
@@ -13848,7 +13848,7 @@ function _s(e) {
     },
     children: jsxs('div', {
       className: `${mz} ${contentStyles}`,
-      children: [!e.hideIcon && jsx(_$$B, {
+      children: [!e.hideIcon && jsx(SvgComponent, {
         svg: _$$A22,
         className: 'banners--warningIcon--A5YS-',
         autosize: severity === _$$c7.WARN_SOFT
@@ -13974,7 +13974,7 @@ function _o() {
     initialViewMode: d.tileSortFilterConfig.viewMode,
     onViewModeChange: e => {
       trackEventAnalytics('file view toggle', {
-        viewType: e === XU.GRID ? 'grid' : 'list'
+        viewType: e === ViewMode.GRID ? 'grid' : 'list'
       });
       t(JF({
         selectedView: l,
@@ -14182,7 +14182,7 @@ let _b = registerModal(e => {
       'data-tooltip': getI18nString('file_browser.draft_delete_modal.draft_deletion_tooltip', {
         deletionString: getI18nString('file_browser.draft_delete_modal.button_delete')
       }),
-      'data-tooltip-type': j ? Ib.TEXT : null,
+      'data-tooltip-type': j ? KindEnum.TEXT : null,
       'data-tooltip-max-width': 180,
       'data-tooltip-show-above': !0,
       'children': getFeatureFlags().ps_trashed_drafts_enabled ? getI18nString('file_browser.draft_delete_modal.button_permanently_delete_files', {
@@ -14310,7 +14310,7 @@ function _P(e) {
   };
   let r = t => {
     let r = _O[t].replace(/-/g, '_');
-    Cu({
+    logAndTrackCTA({
       text: r,
       name: 'Drafts to move tab switch'
     }, 'cta_clicked');
@@ -14394,7 +14394,7 @@ function _D({
 }) {
   let t = DP() === 'dark';
   let r = e => jsxs(Fragment, {
-    children: [jsx(kt, {
+    children: [jsx(LoadingSpinner, {
       size: 'large'
     }), jsx('p', {
       className: 'drafts_to_move_page_view--transferContentHeader--ljikD',
@@ -14422,7 +14422,7 @@ function _D({
       })]
     })
   });
-  let i = () => jsx(kt, {
+  let i = () => jsx(LoadingSpinner, {
     size: 'large'
   });
   return jsx('div', {
@@ -14843,7 +14843,7 @@ function _B({
         orgId: e.id,
         orgViewTab: _$$X.HOME
       }));
-      Cu({
+      logAndTrackCTA({
         clickedResourceType: 'org',
         clickedResourceId: e.id,
         currentResource: t,
@@ -14862,7 +14862,7 @@ function _W({
       entityId: e.id,
       entityName: e.name,
       imgUrl: e.imgUrl ?? void 0
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontSize: 13,
       color: 'secondary',
       children: e.name
@@ -14883,7 +14883,7 @@ function _$({
         view: 'team',
         teamId: e.id
       }));
-      Cu({
+      logAndTrackCTA({
         clickedResourceType: 'workspace',
         clickedResourceId: e.id,
         currentResource: t,
@@ -14906,7 +14906,7 @@ function _V({
     text: n ? getI18nString('breadcrumbs.unassigned_license_group') : o ? getI18nString('breadcrumbs.private_workspace_ellipses') : e.name,
     onClick: a => {
       i(e.id, a);
-      Cu({
+      logAndTrackCTA({
         clickedResourceType: 'workspace',
         clickedResourceId: e.id,
         currentResource: t,
@@ -14924,7 +14924,7 @@ function _z({
     projectId: e
   });
   let r = t.data?.project || null;
-  let s = _$$dq();
+  let s = useCurrentUserOrgId();
   let i = useCurrentPublicPlan('FolderPageBreadcrumbs').unwrapOr(null);
   let n = i?.key.type === FOrganizationLevelType.ORG;
   if (!r?.team) return null;
@@ -14962,7 +14962,7 @@ function _q({
 }) {
   let t = useAtomWithSubscription(_J);
   let r = useMemo(() => {
-    let t = _$$oA(e.mostRecentResourceConnection);
+    let t = getResourceDataOrFallback(e.mostRecentResourceConnection);
     let r = !!t && !!t.disconnectedAt;
     let a = !!t && !t.assetTransferRequestId;
     let s = e.canTransferCopy;
@@ -14989,8 +14989,8 @@ function _q({
     arrowPosition: F_.TOP,
     clickOutsideToHide: !0,
     description: renderI18nText('resource_connection.onboarding.share_a_project_copy_onboarding_description', {
-      hostPlanName: l(_$$oA(e.mostRecentResourceConnection)?.hostPlanName),
-      connectedPlanName: l(_$$oA(e.mostRecentResourceConnection)?.connectedPlanName)
+      hostPlanName: l(getResourceDataOrFallback(e.mostRecentResourceConnection)?.hostPlanName),
+      connectedPlanName: l(getResourceDataOrFallback(e.mostRecentResourceConnection)?.connectedPlanName)
     }),
     emphasized: !0,
     isShowing,
@@ -15096,7 +15096,7 @@ function _Z({
   let _ = useCallback((t, r, a) => {
     m(t, r);
     let s = t.type === _$$nb.PINNED_FILE ? t.file : null;
-    _$$E2(_$$gH, s, {
+    trackFileBrowserFileClick(FILE_BROWSER_FILE_CLICKED, s, {
       entrypoint: a,
       selectedView: o.view,
       resourceType: 'folder',
@@ -15148,7 +15148,7 @@ function _Z({
       items: b,
       doNotFocusOnLoad: !0,
       getAriaLabel: e => e.file.name,
-      viewType: XU.GRID,
+      viewType: ViewMode.GRID,
       handleOpenItem: p,
       handleDeleteKey: g,
       gridViewProps: {
@@ -15197,7 +15197,7 @@ function _1({
     children: [jsx('span', {
       className: _$$s.ellipsis.textBodyLargeStrong.truncate.$,
       children: e.file.name
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       truncate: !0,
       showTooltipWhenTruncated: !0,
       color: 'secondary',
@@ -15222,10 +15222,10 @@ let _2 = {
 };
 let pt = new Set(['PM', 'ENG', 'DES', 'MKT', 'UR']);
 let pr = (e, t) => e ? _$$Dw.loadingKeyForPayload({
-  shelfType: _$$cS.FILE_BROWSER_RECOMMENDED_TEMPLATES,
+  shelfType: CommunityPageType.FILE_BROWSER_RECOMMENDED_TEMPLATES,
   filterLabel: t
 }) : _$$sz.loadingKeyForPayload({
-  shelfType: _$$cS.FILE_BROWSER_RECOMMENDED_TEMPLATES
+  shelfType: CommunityPageType.FILE_BROWSER_RECOMMENDED_TEMPLATES
 });
 let pa = _$$n4(e => function (e) {
   if (!e) return 'OTH';
@@ -15260,18 +15260,18 @@ function pc(e) {
   let n = pr(!1, r);
   let o = _$$oh(n);
   let l = _$$mC(n);
-  let d = pt.has(r) ? r : _$$iF.ALL;
+  let d = pt.has(r) ? r : UserRole.ALL;
   let c = Xr(pd);
   useEffect(() => (c(!0), () => c(!1)), [c]);
   useEffect(() => {
     if (!o && !l) {
       return t(_$$Dw({
-        shelfType: _$$cS.FILE_BROWSER_TEMPLATES_BAR,
+        shelfType: CommunityPageType.FILE_BROWSER_TEMPLATES_BAR,
         filterLabel: d
       }));
     }
   }, [o, l, t, r, d]);
-  let u = useSelector(e => e.communityHub.shelves[_$$cS.FILE_BROWSER_TEMPLATES_BAR] || []);
+  let u = useSelector(e => e.communityHub.shelves[CommunityPageType.FILE_BROWSER_TEMPLATES_BAR] || []);
   let m = useMemo(() => {
     let e = new Map();
     u.forEach(t => {
@@ -15436,7 +15436,7 @@ function pp(e) {
       source: _$$f3.FILE_BROWSER_TEMPLATES_BAR,
       callback: t => {
         e.setDuplicatingHubId(null);
-        Cu({
+        logAndTrackCTA({
           fileKey: t,
           rank: e.rank,
           templateId: s,
@@ -15475,7 +15475,7 @@ function pp(e) {
           tabIndex: -1,
           children: jsx(_$$J2, {
             brand: p_(r.viewer_mode),
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: d,
               disabled: n,
               children: o ? jsx(_$$k3, {}) : renderI18nText('file_browser.new_file_creation_topbar.use_templates')
@@ -15515,12 +15515,12 @@ function pf(e) {
   });
 }
 function pg(e) {
-  return jsx(_$$E6, {
+  return jsx(ButtonPrimitive, {
     className: U()('templates_bar--tab---drzF text--fontPos11--2LvXf text--_fontBase--QdLsd', {
       'templates_bar--activeTab--c7Hid': e.isActive
     }),
     onClick: () => {
-      Cu({
+      logAndTrackCTA({
         triggeredFrom: 'file-browser',
         category: e.tab.tabTitle
       }, 'template_shelf_category_toggled');
@@ -15553,7 +15553,7 @@ function pI(e) {
   let _ = lgFolder.canCreateDesignFileWithReasons.result && lgFolder.canEdit;
   let p = (e => {
     let t = getUpgradeEligibility(FProductAccessType.DESIGN, _);
-    return t === _$$q5.CAN_UPGRADE ? (Cu({
+    return t === _$$q5.CAN_UPGRADE ? (logAndTrackCTA({
       ...properties,
       trackingDescriptor: _$$c3.CREATE_FILE,
       licenseType: FProductAccessType.DESIGN,
@@ -15639,7 +15639,7 @@ function pN(e) {
     'disabled': t,
     'onClick': t ? void 0 : n,
     'data-tooltip': e.isDisabled && !e.hideDisabledTooltip && o ? o : void 0,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': [jsx('div', {
       className: 'connected_folder_empty_view--creationIcon--ieYan',
       children: jsx(_$$e0, {})
@@ -15697,7 +15697,7 @@ function pS(e) {
     children: [jsx('div', {
       className: 'folder_page_view--pinnedHeader--YJufT',
       onMouseDown: o,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 13,
         color: 'secondary',
         children: renderI18nText('file_browser.folder.pinned')
@@ -15755,7 +15755,7 @@ function pk({
         n(_$$b({
           [t]: !0
         }));
-        Cu({
+        logAndTrackCTA({
           userId: o,
           opening: !1
         }, 'topbar_recommended_templates_toggled');
@@ -15847,7 +15847,7 @@ function p$(e) {
   if (l.status !== 'loaded') {
     return jsx('div', {
       className: _$$s.flex.itemsCenter.colorIcon.$,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A23
       })
     });
@@ -15864,7 +15864,7 @@ function p$(e) {
   p.push(jsx(_$$c$, {
     children: jsxs('div', {
       className: _$$s.flex.justifyBetween.itemsCenter.w150.$,
-      children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(_$$B, {
+      children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(SvgComponent, {
         svg: _$$A24
       })]
     }),
@@ -15881,7 +15881,7 @@ function p$(e) {
     }
   }, 'add-to-favorites-section'));
   return jsxs('span', {
-    children: [jsx(_$$E6, {
+    children: [jsx(ButtonPrimitive, {
       className: U()(_$$s.flex.itemsCenter.colorIcon.$, HM),
       ref: r,
       onClick: r => {
@@ -15905,7 +15905,7 @@ function p$(e) {
       resourceType: FEntityType.FOLDER,
       favoriteId: d?.id,
       orgId: o,
-      sections: _$$oA(l.data?.currentUser?.userSidebarSections) ?? [],
+      sections: getResourceDataOrFallback(l.data?.currentUser?.userSidebarSections) ?? [],
       customSectionOrdering: l.data.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? [],
       userHasMaxFavorites: c
     })]
@@ -16013,7 +16013,7 @@ function p5({
   }, [x, n, p]);
   let k = jm(g, h);
   let R = l ? getI18nString('locked_team.label.tooltip') : void 0;
-  let A = l ? Ib.TEXT : void 0;
+  let A = l ? KindEnum.TEXT : void 0;
   let O = (t, r, a) => {
     let s = {
       folder: e,
@@ -16261,7 +16261,7 @@ function p8({
     teamId: c?.teamId,
     shadowReadLabel: adminPermissionConfig.FolderPageView.hasBanner
   }).unwrapOr(!1) && w;
-  let T = _$$dq();
+  let T = useCurrentUserOrgId();
   let E = memoizeByArgs(_$$ZN);
   let N = useSelector(t => E(e, t.tileSortFilterStateByView));
   let C = !d || !c || n.status !== 'loaded' || t.status !== 'loaded';
@@ -16275,7 +16275,7 @@ function p8({
   }), C) {
     return jsx('div', {
       className: 'folder_page_view--loading--ZkDG0',
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     });
   }
   let S = {
@@ -16296,7 +16296,7 @@ function p8({
       initialViewMode: N.tileSortFilterConfig.viewMode,
       onViewModeChange: e => {
         trackEventAnalytics('file view toggle', {
-          viewType: e === XU.GRID ? 'grid' : 'list'
+          viewType: e === ViewMode.GRID ? 'grid' : 'list'
         });
         u(JF({
           selectedView: _,
@@ -16359,7 +16359,7 @@ function p6() {
   });
   if (!getFeatureFlags().limited_plan_spaces) return null;
   if (s.status !== 'loaded') {
-    e = jsx(qc, {});
+    e = jsx(LoadingOverlay, {});
   } else {
     let i = (s.data.currentUser.status === 'loaded' && s.data.currentUser.data.teamProjectRoles || []).filter(e => !!e.project && (!getFeatureFlags().dtm_deprecation_org_downgrade || e.project.path !== '')).map(e => {
       let t = e.project;
@@ -16438,7 +16438,7 @@ function p7({
     action: {
       kind: _$$A9.CUSTOM,
       key: iq.NEW_TEAM,
-      element: jsx($n, {
+      element: jsx(Button, {
         'aria-label': getI18nString('license_group_view.toolbar.new_team_button_aria_label'),
         'variant': 'primary',
         'onClick': () => {
@@ -16474,7 +16474,7 @@ function p9({
 }
 function fr() {
   let e = useDispatch();
-  let t = _$$dq();
+  let t = useCurrentUserOrgId();
   let r = m3(selectWithShallowEqual(e => ({
     ...getPermissionsState(e),
     selectedView: e.selectedView,
@@ -16508,8 +16508,8 @@ function fn() {
   }, {
     enabled: t !== null
   });
-  let o = useMemo(() => i.status !== 'loaded' ? [] : (_$$oA(i.data?.planConnectedProjectsForUser) || []).map(e => {
-    let t = _$$oA(e.project);
+  let o = useMemo(() => i.status !== 'loaded' ? [] : (getResourceDataOrFallback(i.data?.planConnectedProjectsForUser) || []).map(e => {
+    let t = getResourceDataOrFallback(e.project);
     return t != null ? W2(t) : null;
   }).filter(e => e !== null), [i]);
   return e.status !== 'loaded' || i.status !== 'loaded' ? jsx('div', {
@@ -16533,7 +16533,7 @@ function fn() {
           folderList: o,
           dataOnboardingKeyIndex: void 0,
           onChangeSortOptions: _$$lQ,
-          viewType: XU.GRID,
+          viewType: ViewMode.GRID,
           isSharerInfoIncluded: !1
         })
       })
@@ -16549,7 +16549,7 @@ function fc({
     children: [jsx(Ro, {
       entity: e,
       size: 36
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       fontWeight: 'medium',
       fontSize: 13,
       children: e.name
@@ -16572,7 +16572,7 @@ function fu({
         handle: e
       })));
     },
-    children: jsxs(_$$E, {
+    children: jsxs(TextWithTruncation, {
       fontSize: 11,
       children: ['@', e]
     })
@@ -16600,7 +16600,7 @@ function f_({
   org: e,
   orgStats: t
 }) {
-  let r = t ? jsxs(_$$E, {
+  let r = t ? jsxs(TextWithTruncation, {
     fontSize: 11,
     color: 'secondary',
     children: [renderI18nText('org_home_view_meta.member_count', {
@@ -16672,7 +16672,7 @@ function fg({
       })
     }) : null, jsx('span', {
       className: _$$s.mt4.$,
-      children: jsxs(_$$E, {
+      children: jsxs(TextWithTruncation, {
         fontSize: 11,
         color: 'secondary',
         children: [renderI18nText('payments_modal.guest_permission_disclaimer'), ' ', jsx('a', {
@@ -16747,7 +16747,7 @@ function fw({
   isDropdownOpen: r
 }) {
   let s = nf();
-  let n = _$$sZ();
+  let n = useCurrentUserOrg();
   let o = useDispatch();
   if (!n || !r || !t) return null;
   let l = s({
@@ -16903,7 +16903,7 @@ function fk(e) {
   });
   let E = workspace.orgAccess === FAccessLevelType.SECRET ? jsx('div', {
     'className': _$$s.ml4.$,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': getI18nString('workspace_table.secret_workspace_lock_tooltip'),
     'data-tooltip-subtext': getI18nString('workspace_table.secret_workspace_lock_tooltip_subtext'),
     'data-tooltip-timeout-delay': 500,
@@ -16940,7 +16940,7 @@ function fk(e) {
 function fR() {
   let e = useDispatch();
   let t = FC();
-  let r = _$$dq();
+  let r = useCurrentUserOrgId();
   let n = Au(r);
   let {
     canCreateTeam
@@ -17029,7 +17029,7 @@ function fR() {
   let j = currentWorkspace && jsxs(Fragment, {
     children: [jsx('div', {
       className: 'x1tudf5h',
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: 'secondary',
         fontSize: 11,
         children: renderI18nText('org_view.your_workspace')
@@ -17046,7 +17046,7 @@ function fR() {
   return jsxs(Fragment, {
     children: [j, currentWorkspace && jsx('div', {
       className: 'x1tudf5h',
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: 'secondary',
         fontSize: 11,
         children: renderI18nText('org_view.other_workspaces')
@@ -17119,7 +17119,7 @@ function fA({
   }), [t, n, i, r]);
   return jsxs(Fragment, {
     children: [jsx(_$$A10, {
-      viewType: XU.GRID,
+      viewType: ViewMode.GRID,
       isDraggable: !1,
       items: e,
       multiselectDisabled: !0,
@@ -17260,14 +17260,14 @@ function fV(e) {
   let r = _$$O5();
   return jsx(_$$J2, {
     brand: e.brand,
-    children: jsx(_$$E6, {
+    children: jsx(ButtonPrimitive, {
       ..._$$xk(fz.button, e.brand === 'bake-filebrowser' && fz.buttonFigmake, t && fz.buttonDisabled),
       'onClick': e.onClick,
       'data-testid': e.isLoading ? void 0 : e.dataTestId,
       'disabled': t,
       'data-onboarding-key': e.dataOnboardingKey,
       'data-tooltip': e.tooltipText,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip-timeout-delay': 50,
       'children': jsx(_$$x, {
         loaded: !e.isLoading,
@@ -17465,13 +17465,13 @@ function fZ({
   });
 }
 function f1(e) {
-  return jsx(_$$E6, {
+  return jsx(ButtonPrimitive, {
     'className': 'x2lah0s x1d36bvo xb3r6kr xbzrb6o x1v8gsql x13bsb82 xpzxyvc x1aqsfbg x6bkol7 x622810 xsfrc4e x13nvs6n',
     'onClick': e.onClick,
     'data-testid': e.isLoading ? void 0 : e.dataTestId,
     'data-onboarding-key': e.dataOnboardingKey,
     'data-tooltip': e.tooltipText,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'children': jsx(_$$x, {
       loaded: !e.isLoading,
       loadingSkeletonElement: jsx('div', {
@@ -17684,7 +17684,7 @@ function g_({
   title: r,
   author: s
 }) {
-  return jsxs(_$$E6, {
+  return jsxs(ButtonPrimitive, {
     className: 'home_shelf_resource_tile--resourceTileButton--meEFU',
     ...e,
     children: [jsxs('div', {
@@ -17819,7 +17819,7 @@ function gb() {
         className: 'xzkaem6 x156by65 x1366x3a x10l6tqk xm6i5cn x2e2xj7 x19y5rnk xbngzmg xgk9eko',
         src: buildUploadUrl('1922e9623fd798bcb563e1f4e9ae105b54d904b4'),
         alt: ''
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         svg: _$$A26,
         className: 'x10l6tqk xoegz02 xh8yej3 xqmqy1e xb9t1mx',
         svgWidth: '100%',
@@ -18441,7 +18441,7 @@ function gD({
 function gM() {
   return jsxs('div', {
     className: 'x1q0g3np x6s0dn4 x1nfngrj x78zum5 xi0feg2',
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A27,
       style: {
         fill: Tj.icon
@@ -18498,12 +18498,12 @@ function gU() {
       brand: 'bake-filebrowser',
       children: jsx(_$$J2, {
         mode: 'light',
-        children: jsx(WW, {
+        children: jsx(ButtonLarge, {
           onClick: e,
           disabled: l,
           htmlAttributes: {
             'data-tooltip': d,
-            'data-tooltip-type': Ib.TEXT
+            'data-tooltip-type': KindEnum.TEXT
           },
           children: getI18nString('banner.marketing_promo.figmake_launch.cta')
         })
@@ -18539,7 +18539,7 @@ function gz(e) {
   let n = t.view === 'recentsAndSharing' ? r.recentsAndSharing.sharedFiles : r.sharedWithYou;
   let o = {
     tileSortFilterConfig: n,
-    sortKeys: [C0.SHARED_AT]
+    sortKeys: [SortField.SHARED_AT]
   };
   let {
     subscription,
@@ -18637,28 +18637,28 @@ function gz(e) {
     planType: n.filters.plan?.planType ?? '',
     fileType: (e => {
       switch (e) {
-        case _$$t6.DESIGN:
+        case FileType.DESIGN:
           return 'design';
-        case _$$t6.FIGJAM:
+        case FileType.FIGJAM:
           return 'whiteboard';
-        case _$$t6.PROTOTYPE:
+        case FileType.PROTOTYPE:
           return 'prototype';
-        case _$$t6.SITES:
+        case FileType.SITES:
           return 'sites';
-        case _$$t6.SLIDES:
+        case FileType.SLIDES:
           return 'slides';
-        case _$$t6.COOPER:
+        case FileType.COOPER:
           return 'cooper';
-        case _$$t6.MAKE:
+        case FileType.MAKE:
           return 'figmake';
-        case _$$t6.ANY:
+        case FileType.ANY:
           return null;
         default:
           throwTypeError(e);
       }
     })(n.filters.fileType) ?? '',
-    sortOrder: n.sort.dir === _$$ue.ASC ? 'asc' : 'desc',
-    sortKey: De(n.sort.key) ?? 'shared_at'
+    sortOrder: n.sort.dir === SortOrder.ASC ? 'asc' : 'desc',
+    sortKey: getResourceSortField(n.sort.key) ?? 'shared_at'
   });
   let u = useMemo(() => subscription.unwrapOr([]), [subscription]);
   let {
@@ -18783,8 +18783,8 @@ function gH(e) {
     planId: d.filters.plan?.planId ?? '',
     planType: d.filters.plan?.planType ?? '',
     orgDeletedDrafts: '',
-    sortOrder: d.sort.dir === _$$ue.ASC ? 'asc' : 'desc',
-    sortKey: De(d.sort.key) ?? 'shared_at'
+    sortOrder: d.sort.dir === SortOrder.ASC ? 'asc' : 'desc',
+    sortKey: getResourceSortField(d.sort.key) ?? 'shared_at'
   });
   let _ = useMemo(() => subscription.unwrapOr([]), [subscription]);
   let f = useMemo(() => _.map(e => e.id), [_]);
@@ -18916,15 +18916,15 @@ function g2({
     sort: e,
     viewMode: t
   }) {
-    let r = t ?? XU.GRID;
+    let r = t ?? ViewMode.GRID;
     let a = useRef(e);
     let i = useRef(r);
     i.current = r;
     useEffect(() => {
       getFeatureFlags().recents_sort_tracking && analyticsEventManager.trackDefinedEvent('file_browser.recents_sort_on_load', {
-        sortKey: _$$_5(a.current.key),
-        sortDir: GB(a.current.dir),
-        viewMode: jq(i.current)
+        sortKey: getSortFieldKey(a.current.key),
+        sortDir: getSortOrderKey(a.current.dir),
+        viewMode: getViewModeKey(i.current)
       });
     }, []);
     let n = useRef(!0);
@@ -18935,14 +18935,14 @@ function g2({
           return;
         }
         analyticsEventManager.trackDefinedEvent('file_browser.recents_sort_updated', {
-          sortKey: _$$_5(e.key),
-          sortDir: GB(e.dir),
-          viewMode: jq(i.current)
+          sortKey: getSortFieldKey(e.key),
+          sortDir: getSortOrderKey(e.dir),
+          viewMode: getViewModeKey(i.current)
         });
       }
     }, [e.dir, e.key]);
   }(t);
-  let r = Gv(t.filters.fileType);
+  let r = getFileTypeIndex(t.filters.fileType);
   let n = ql({
     _editorTypeRaw: r
   });
@@ -18961,7 +18961,7 @@ function g2({
   let _ = useMemo(() => resourceUtils.merge([d, c], u, m), [m, d, c, u]);
   let p = useMemo(() => ({
     tileSortFilterConfig: t,
-    sortKeys: [C0.NAME, C0.CREATED_AT, C0.ACCESSED_AT]
+    sortKeys: [SortField.NAME, SortField.CREATED_AT, SortField.ACCESSED_AT]
   }), [t]);
   let f = _.status === 'loaded';
   kF('RecentFiles');
@@ -19032,14 +19032,14 @@ function g9() {
     '': getI18nString('shared_with.you.filters.anyone')
   };
 }
-let he = [_$$G4.RECENTLY_VIEWED, _$$G4.SHARED_FILES, _$$G4.SHARED_PROJECTS];
+let he = [ViewTypeEnum.RECENTLY_VIEWED, ViewTypeEnum.SHARED_FILES, ViewTypeEnum.SHARED_PROJECTS];
 let ht = e => {
   switch (e) {
-    case _$$G4.RECENTLY_VIEWED:
+    case ViewTypeEnum.RECENTLY_VIEWED:
       return getI18nString('file_browser.recents_and_sharing_view.recent_files_tab_name');
-    case _$$G4.SHARED_PROJECTS:
+    case ViewTypeEnum.SHARED_PROJECTS:
       return getI18nString('file_browser.recents_and_sharing_view.shared_projects_tab_name');
-    case _$$G4.SHARED_FILES:
+    case ViewTypeEnum.SHARED_FILES:
       return getI18nString('file_browser.recents_and_sharing_view.shared_files_tab_name');
     default:
       throwTypeError(e);
@@ -19079,7 +19079,7 @@ function ha(e) {
   let r = useDispatch();
   let n = _$$_();
   let l = useSelector(e => e.tileSortFilterStateByView);
-  let d = t === _$$G4.SHARED_PROJECTS ? ['folder'] : ['file', 'file_repo', 'prototype'];
+  let d = t === ViewTypeEnum.SHARED_PROJECTS ? ['folder'] : ['file', 'file_repo', 'prototype'];
   let c = function (e) {
     let [t, r] = useState(g9());
     let a = e.join('&resource_type[]=');
@@ -19141,26 +19141,26 @@ function ha(e) {
     return r.data || g3();
   }(d);
   let _ = {
-    [_$$cT.ALL]: getI18nString('shared_with_you.filters.org_deleted_drafts.all'),
-    [_$$cT.SHARED]: getI18nString('shared_with_you.filters.org_deleted_drafts.shared'),
-    [_$$cT.ORG_DELETED_DRAFTS]: getI18nString('shared_with_you.filters.org_deleted_drafts.deleted_user_drafts')
+    [FilterType.ALL]: getI18nString('shared_with_you.filters.org_deleted_drafts.all'),
+    [FilterType.SHARED]: getI18nString('shared_with_you.filters.org_deleted_drafts.shared'),
+    [FilterType.ORG_DELETED_DRAFTS]: getI18nString('shared_with_you.filters.org_deleted_drafts.deleted_user_drafts')
   };
   let p = {
-    sharer: t !== _$$G4.RECENTLY_VIEWED ? c : void 0,
-    plan: t === _$$G4.RECENTLY_VIEWED ? u : m,
-    fileType: t !== _$$G4.SHARED_PROJECTS,
-    orgDeletedDrafts: t === _$$G4.SHARED_PROJECTS ? _ : void 0
+    sharer: t !== ViewTypeEnum.RECENTLY_VIEWED ? c : void 0,
+    plan: t === ViewTypeEnum.RECENTLY_VIEWED ? u : m,
+    fileType: t !== ViewTypeEnum.SHARED_PROJECTS,
+    orgDeletedDrafts: t === ViewTypeEnum.SHARED_PROJECTS ? _ : void 0
   };
   let f = useMemo(() => {
     let e;
     switch (t) {
-      case _$$G4.RECENTLY_VIEWED:
+      case ViewTypeEnum.RECENTLY_VIEWED:
         e = l.recentsAndSharing.recents;
         break;
-      case _$$G4.SHARED_FILES:
+      case ViewTypeEnum.SHARED_FILES:
         e = l.recentsAndSharing.sharedFiles;
         break;
-      case _$$G4.SHARED_PROJECTS:
+      case ViewTypeEnum.SHARED_PROJECTS:
         e = l.recentsAndSharing.sharedProjects;
         break;
       default:
@@ -19168,11 +19168,11 @@ function ha(e) {
     }
     return {
       tileSortFilterConfig: e,
-      sortKeys: _$$o0[t]
+      sortKeys: sortOptions[t]
     };
   }, [t, l]);
   let g = e => {
-    e === _$$G4.SHARED_FILES ? trackEventAnalytics('file_browser_shared_files') : e === _$$G4.SHARED_PROJECTS && trackEventAnalytics('file_browser_shared_projects');
+    e === ViewTypeEnum.SHARED_FILES ? trackEventAnalytics('file_browser_shared_files') : e === ViewTypeEnum.SHARED_PROJECTS && trackEventAnalytics('file_browser_shared_projects');
     r(_$$sf({
       view: 'recentsAndSharing',
       tab: e
@@ -19184,16 +19184,16 @@ function ha(e) {
       initialViewMode: f.tileSortFilterConfig.viewMode,
       onViewModeChange: e => {
         trackEventAnalytics('file view toggle', {
-          viewType: e === XU.GRID ? 'grid' : 'list'
+          viewType: e === ViewMode.GRID ? 'grid' : 'list'
         });
-        Object.keys(_$$G4).map(t => {
+        Object.keys(ViewTypeEnum).map(t => {
           r(JF({
             selectedView: n,
             config: {
               ...f.tileSortFilterConfig,
               viewMode: e
             },
-            tab: _$$G4[t]
+            tab: ViewTypeEnum[t]
           }));
         }, r(_$$uV({
           viewId: 'shared-with-you-projects',
@@ -19218,9 +19218,9 @@ function ha(e) {
     tab: t
   }, 'recentsAndSharingTileFilters');
   let [y, w, j] = _$$t5.useManagedTabs({
-    [_$$G4.RECENTLY_VIEWED]: !0,
-    [_$$G4.SHARED_FILES]: !0,
-    [_$$G4.SHARED_PROJECTS]: !0
+    [ViewTypeEnum.RECENTLY_VIEWED]: !0,
+    [ViewTypeEnum.SHARED_FILES]: !0,
+    [ViewTypeEnum.SHARED_PROJECTS]: !0
   }, e.selectedTab, e => {
     g(e);
   });
@@ -19312,15 +19312,15 @@ function hi(e) {
     viewBarSticky: !0,
     content: function (e, t) {
       switch (e) {
-        case _$$G4.SHARED_FILES:
+        case ViewTypeEnum.SHARED_FILES:
           return jsx(gz, {
             isEligbileForProTeamLockedRevampUI: t?.isEligbileForProTeamLockedRevampUI
           });
-        case _$$G4.SHARED_PROJECTS:
+        case ViewTypeEnum.SHARED_PROJECTS:
           return jsx(gH, {
             isEligbileForProTeamLockedRevampUI: t?.isEligbileForProTeamLockedRevampUI
           });
-        case _$$G4.RECENTLY_VIEWED:
+        case ViewTypeEnum.RECENTLY_VIEWED:
           return jsx(g2, {
             isEligbileForProTeamLockedRevampUI: t?.isEligbileForProTeamLockedRevampUI
           });
@@ -19339,7 +19339,7 @@ function ho({
     teamId: e
   });
   let r = t.data?.team || null;
-  let s = _$$dq();
+  let s = useCurrentUserOrgId();
   if (!r?.org) return null;
   if (s !== r.org.id) {
     return jsx(_W, {
@@ -19367,7 +19367,7 @@ function h_() {
     className: _$$s.flex.p12.colorBgSelected.bRadius6.$,
     children: [jsx('div', {
       className: _$$s.mr12.colorIcon.itemSelfCenter.$,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A28
       })
     }), jsxs('div', {
@@ -19451,7 +19451,7 @@ function hf(e) {
   if (l.status !== 'loaded') {
     return jsx('div', {
       className: _$$s.flex.itemsCenter.colorIcon.$,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A23
       })
     });
@@ -19472,7 +19472,7 @@ function hf(e) {
   p.push(jsx(_$$c$, {
     children: jsxs('div', {
       className: _$$s.flex.justifyBetween.itemsCenter.w150.$,
-      children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(_$$B, {
+      children: [renderI18nText('favorited_resources.add_to_sidebar'), jsx(SvgComponent, {
         svg: _$$A24
       })]
     }),
@@ -19489,7 +19489,7 @@ function hf(e) {
     }
   }, 'add-to-favorites-section'));
   return jsxs('span', {
-    children: [jsx(_$$E6, {
+    children: [jsx(ButtonPrimitive, {
       className: U()(_$$s.flex.itemsCenter.colorIcon.$, HM),
       ref: r,
       onClick: r => {
@@ -19513,7 +19513,7 @@ function hf(e) {
       resourceType: FEntityType.TEAM,
       favoriteId: d?.id,
       orgId: o,
-      sections: (l.data?.currentUser?.userSidebarSections ? _$$oA(l.data.currentUser.userSidebarSections) : null) ?? [],
+      sections: (l.data?.currentUser?.userSidebarSections ? getResourceDataOrFallback(l.data.currentUser.userSidebarSections) : null) ?? [],
       userHasMaxFavorites: c,
       customSectionOrdering: l.data.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? []
     })]
@@ -19551,7 +19551,7 @@ let hk = registerModal(({
 }, 'ProFeaturesModal');
 let hA = e => ({
   tileSortFilterConfig: e.team,
-  sortKeys: [C0.NAME, C0.TOUCHED_AT]
+  sortKeys: [SortField.NAME, SortField.TOUCHED_AT]
 });
 let hO = (e, t, r) => {
   let s = memoizeByArgs(hA)(t);
@@ -19563,7 +19563,7 @@ let hO = (e, t, r) => {
     initialViewMode: s.tileSortFilterConfig.viewMode,
     onViewModeChange: t => {
       trackEventAnalytics('team folder view toggle', {
-        viewType: t === XU.GRID ? 'grid' : 'list'
+        viewType: t === ViewMode.GRID ? 'grid' : 'list'
       });
       e(JF({
         selectedView: r,
@@ -19623,7 +19623,7 @@ function hL({
   let o = useShadowReadLoaded({
     oldValue: resourceUtils.loaded(canAdminOrg(t, r)),
     newValue: useIsOrgAdminUser(n),
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     label: adminPermissionConfig.TeamNonMemberJoinView.canAdminOrg
   }).unwrapOr(!1);
   let l = YP(e, s, r, o);
@@ -19816,7 +19816,7 @@ function hD({
     selectedTab: t
   }) : jsx(hL, {
     team: l
-  }) : null : jsx(qc, {});
+  }) : null : jsx(LoadingOverlay, {});
 }
 function hM({
   team: e,
@@ -19943,7 +19943,7 @@ function hM({
       teamId: y,
       viewId: `team-${y}`
     }), jsx(_$$cx, {})]
-  }) : jsx(qc, {}) : jsx(Fragment, {
+  }) : jsx(LoadingOverlay, {}) : jsx(Fragment, {
     children: v ? jsxs(Fragment, {
       children: [jsx(mv, {
         canAdminTeam,
@@ -19956,7 +19956,7 @@ function hM({
         teamId: y,
         viewId: `team-${y}`
       }), jsx(_$$cx, {})]
-    }) : jsx(qc, {})
+    }) : jsx(LoadingOverlay, {})
   });
   let V = t.canAdminTeam ? jsx(FL, {
     entity: e,
@@ -20063,7 +20063,7 @@ function hM({
             children: getI18nString('file_browser.team.join_team')
           })
         });
-        let f = c ? Ib.TEXT : void 0;
+        let f = c ? KindEnum.TEXT : void 0;
         let g = c ? getI18nString('locked_team.label.tooltip') : void 0;
         i.canEditTeam && !isExternalRestricted(r, e.org_id) ? u.push({
           kind: _$$A9.CUSTOM,
@@ -20153,7 +20153,7 @@ function hM({
         direction: 'horizontal',
         children: [O ? jsx('div', {
           'className': _$$s.ml4.mr4.$,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': O,
           'data-tooltip-offset-y': -4,
           'data-tooltip-timeout-delay': 50,
@@ -20377,7 +20377,7 @@ function h5(e) {
         onClick: e.canView ? r => t(r, e.id) : void 0,
         className: e.canView ? 'org_user_meta_content--project--t-Nos org_user_meta_content--projectBase--ofeuj text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa' : 'org_user_meta_content--dimProject--a1lrh org_user_meta_content--dim--aNVfK org_user_meta_content--projectBase--ofeuj text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa',
         children: jsx('span', {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': e.canView ? void 0 : getI18nString('internal_profile.you_must_be_a_member_of_team_name', {
             teamName: e.teamName
           }),
@@ -20420,7 +20420,7 @@ function h6(e) {
             entityType: _$$ck2.CURRENT_USER,
             shape: 'CIRCLE'
           }));
-          Cu({
+          logAndTrackCTA({
             trackingContext: _$$e7.FILE_BROWSER,
             context: 'job_title',
             text: 'Update Photo'
@@ -20469,7 +20469,7 @@ let h3 = connect((e, t) => ({
           'hideFallbackInitial': !0,
           'onClick': t ? o : void 0,
           'className': `org_user_meta_content--teamListItem--gXcF- text--fontPos13--xW8hS text--_fontBase--QdLsd ${t ? '' : 'org_user_meta_content--dim--aNVfK'}`,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': t ? void 0 : getI18nString('internal_profile.you_re_not_a_member_of_this_team'),
           'data-tooltip-offset-y': 4
         }, e.id);
@@ -20565,16 +20565,16 @@ let xr = e => {
   let x = useMemo(() => ({
     srcTileSortFilterConfig: {
       filters: {
-        creator: _$$rJ.ANY,
-        fileType: _$$t6.ANY
+        creator: PermissionType.ANY,
+        fileType: FileType.ANY
       },
       sort: {
-        key: C0.ACCESSED_AT,
-        dir: _$$ue.DESC
+        key: SortField.ACCESSED_AT,
+        dir: SortOrder.DESC
       }
     },
     tileSortFilterConfig: h,
-    sortKeys: [C0.NAME, C0.CREATED_AT, C0.ACCESSED_AT]
+    sortKeys: [SortField.NAME, SortField.CREATED_AT, SortField.ACCESSED_AT]
   }), [h]);
   let b = useMemo(() => {
     let e = new URLSearchParams();
@@ -20675,21 +20675,21 @@ let xr = e => {
   });
   let W = useMemo(() => v.filter(e => {
     switch (h.filters.fileType) {
-      case _$$t6.ANY:
+      case FileType.ANY:
         return !0;
-      case _$$t6.DESIGN:
+      case FileType.DESIGN:
         return e.editor_type === 'design';
-      case _$$t6.FIGJAM:
+      case FileType.FIGJAM:
         return e.editor_type === 'whiteboard';
-      case _$$t6.PROTOTYPE:
+      case FileType.PROTOTYPE:
         return !1;
-      case _$$t6.SITES:
+      case FileType.SITES:
         return e.editor_type === 'sites';
-      case _$$t6.SLIDES:
+      case FileType.SLIDES:
         return e.editor_type === 'slides';
-      case _$$t6.COOPER:
+      case FileType.COOPER:
         return e.editor_type === 'cooper';
-      case _$$t6.MAKE:
+      case FileType.MAKE:
         return e.editor_type === 'figmake';
       default:
         throwTypeError(h.filters.fileType);
@@ -20814,7 +20814,7 @@ let xr = e => {
             handleOpenTile: q,
             handleOpenDropdown: ee,
             sortConfig: h.sort,
-            viewType: XU.GRID,
+            viewType: ViewMode.GRID,
             gridContainerStyle: xs.grid,
             sortBy: _$$lQ
           }), (() => {
@@ -20838,7 +20838,7 @@ let xr = e => {
             });
           })()]
         })]
-      }) : jsx(qc, {})), f === _$$o9.INTERNAL_PROFILE_POSTS && m && jsx(un, {
+      }) : jsx(LoadingOverlay, {})), f === _$$o9.INTERNAL_PROFILE_POSTS && m && jsx(un, {
         currentOrgId: m.id,
         selectedUser: e.user
       })]
@@ -20955,7 +20955,7 @@ function xd(e) {
 function xc({
   workspaceId: e
 }) {
-  let t = _$$sZ();
+  let t = useCurrentUserOrg();
   let r = _$$P(t.id, e);
   return r.status !== 'loaded' ? null : r.data === 'Unassigned' ? jsx(_$$A11, {
     children: jsx(xm, {
@@ -20997,7 +20997,7 @@ function xm({
         orgId: e.id,
         orgViewTab: _$$X.HOME
       }));
-      Cu({
+      logAndTrackCTA({
         clickedResourceType: 'org',
         clickedResourceId: e.id,
         currentResource: t,
@@ -21011,15 +21011,15 @@ function x_({
 }) {
   let t = _$$_();
   useEffect(() => {
-    _$$o(t);
+    trackFileBrowserPageVisit(t);
   }, [t]);
   let r = function () {
     let e = useDispatch();
     let t = selectUser();
-    let r = _$$dq();
+    let r = useCurrentUserOrgId();
     let n = _$$_();
     let o = _$$cD();
-    let l = _$$sZ();
+    let l = useCurrentUserOrg();
     let d = useSelector(e => e.search);
     let c = function () {
       let e = eN({
@@ -21233,7 +21233,7 @@ function x_({
           })
         };
       case 'recentsAndSharing':
-        let _ = n.tab ?? _$$G4.RECENTLY_VIEWED;
+        let _ = n.tab ?? ViewTypeEnum.RECENTLY_VIEWED;
         let p = c({
           from: _$$f3.FILE_BROWSER_TOPBAR_RECENTS
         });
@@ -21411,13 +21411,13 @@ function xp(e) {
     className: _$$s.flex.columnGap8.$,
     children: [jsx('span', {
       className: _$$s.flexShrink0.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('search.search_results_for')
       })
     }), jsxs('div', {
       className: _$$s.flex.fontMedium.minW0.$,
-      children: ['\u201C', jsx(_$$E, {
+      children: ['\u201C', jsx(TextWithTruncation, {
         truncate: !0,
         children: e.query
       }), '\u201D']
@@ -21426,7 +21426,7 @@ function xp(e) {
     className: _$$s.flex.columnGap8.$,
     children: jsx('span', {
       className: _$$s.flexShrink0.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('search.search_results')
       })
@@ -21512,7 +21512,7 @@ function xT({
       children: jsxs(_$$O6, {
         menu: jsx(_$$X7, {
           onClick: c,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A16,
             className: 'add_collaborators--modalCloseX--sJGp5'
           })
@@ -21616,7 +21616,7 @@ function xP(e) {
   let g = c ? renderI18nText('autosave.notification.action_review') : renderI18nText('autosave.notification.action_open_to_sync');
   return jsxs('div', {
     className: 'autosave_notification--notification--u3sx0 text--_negText--j9g-L',
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: 'autosave_notification--icon--uvtXB',
       svg: _$$A29,
       width: '24',
@@ -21667,7 +21667,7 @@ function xM(e) {
           type: xD
         }));
       },
-      children: [getAccessLevelLabels()[e.orgAccess], jsx(_$$B, {
+      children: [getAccessLevelLabels()[e.orgAccess], jsx(SvgComponent, {
         svg: _$$A5,
         className: 'team_org_access_dropdown--downCaret--INuva'
       })]
@@ -21750,7 +21750,7 @@ function xU({
         view: 'recentsAndSharing'
       }));
     },
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: _$$A16,
       className: 'team_creation--modalCloseX--TTg32'
     })
@@ -21835,7 +21835,7 @@ function xW({
   selectedView: e
 }) {
   let t = useDispatch();
-  let r = _$$dq();
+  let r = useCurrentUserOrgId();
   let s = useSelector(e => e.orgById);
   let n = selectCurrentUser();
   let o = useSelector(e => e.currentTeamId);
@@ -21923,7 +21923,7 @@ function xz({
         className: x$,
         children: jsx('div', {
           className: xG,
-          children: jsx(kt, {})
+          children: jsx(LoadingSpinner, {})
         })
       });
     }
@@ -21940,7 +21940,7 @@ function xz({
       teamId: d
     },
     children: jsx(_$$O6, {
-      menu: jsx(_$$B, {
+      menu: jsx(SvgComponent, {
         svg: _$$A16,
         onClick: u,
         className: 'team_restore--modalCloseX--XNErW'
@@ -22035,7 +22035,7 @@ function xq(e) {
               view: e.selectedView.previousView || s
             })) : l(_$$sf(e.selectedView.previousView || s));
           },
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A16,
             className: 'legacy_upgrade--closeButton--zJ0JO'
           })
@@ -22294,7 +22294,7 @@ let bi = 'file_browser_view--filebrowserBody--6MX2i';
 let bn = 'file_browser_view--desktop--5VrC1';
 export function $$bo0() {
   let e = useDispatch();
-  let t = _$$dq();
+  let t = useCurrentUserOrgId();
   let r = Um();
   let E = selectCurrentUser();
   let I = _$$_();
@@ -22312,7 +22312,7 @@ export function $$bo0() {
     });
     useEffect(() => {
       if (r.status === 'loaded' && r.data.currentUser.assetTransferReload.status === _$$tT.Loaded) {
-        let t = _$$oA(r.data.currentUser.assetTransferReload);
+        let t = getResourceDataOrFallback(r.data.currentUser.assetTransferReload);
         if (!t) return;
         let a = getInitialOptions().user_data?.id;
         let s = e.getState();
@@ -22373,7 +22373,7 @@ export function $$bo0() {
   let [F, P] = useState(0);
   let [L, D] = useState(0);
   let [M, B] = useState(!1);
-  _$$h(() => (document.body.classList.add(bi), document.documentElement.classList.add(bs), $o(), I0(I, t, k, R), _$$hW('exp_aa_test_file_browser_view').catch(_$$lQ), () => {
+  _$$h(() => (document.body.classList.add(bi), document.documentElement.classList.add(bs), $o(), trackFileBrowserLoaded(I, t, k, R), _$$hW('exp_aa_test_file_browser_view').catch(_$$lQ), () => {
     document.body.classList.remove(bi);
     document.documentElement.classList.remove(bs);
     $E();

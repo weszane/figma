@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { useLatestRef } from "../figma_app/922077";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { iT } from "../figma_app/74165";
 import { FileRecentViewers } from "../figma_app/43951";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -116,7 +116,7 @@ export function $$T8() {
   });
   return useMemo(() => {
     if ("loaded" !== r.status) return;
-    let e = oA(r.data?.file?.fileViewHistory);
+    let e = getResourceDataOrFallback(r.data?.file?.fileViewHistory);
     return (e?.map(e => ({
       userID: e.user.id,
       name: e.user.name,

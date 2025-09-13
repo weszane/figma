@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logInfo, logWarning } from "../905/714362";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { II } from "../905/687477";
 import { xK } from "../905/125218";
 let h = null;
@@ -86,7 +86,7 @@ export let $$A0 = {
         xK.logWsMsg("mp-ws-onopen");
       });
     } else {
-      if (ds("multiplayer_connect_attempt_ws_start", E?.openFile?.key, E, {
+      if (trackFileEvent("multiplayer_connect_attempt_ws_start", E?.openFile?.key, E, {
         url: e,
         urlLength: e.length,
         connectAttemptId: m,
@@ -127,7 +127,7 @@ export let $$A0 = {
           consecutiveInitFailureCount: g,
           shortened_url: !0
         };
-        ds("multiplayer_connect_truncate_ws_url", E?.openFile?.key, E, n);
+        trackFileEvent("multiplayer_connect_truncate_ws_url", E?.openFile?.key, E, n);
         logInfo("multiplayer", "Truncating websocket url to force full loading", n);
       }
       (h = new WebSocket(e)).binaryType = "arraybuffer";
@@ -135,7 +135,7 @@ export let $$A0 = {
         g = 0;
         f();
         xK.logWsMsg("mp-ws-onopen");
-        ds("multiplayer_connect_ws_open", E?.openFile?.key, E, {
+        trackFileEvent("multiplayer_connect_ws_open", E?.openFile?.key, E, {
           connectAttemptId: m
         });
         logInfo("multiplayer", "Websocket opened");
@@ -152,7 +152,7 @@ export let $$A0 = {
     h.onerror = () => {
       navigator.onLine ? g++ : g = 0;
       T("socket.onerror");
-      ds("multiplayer_connect_ws_error", E?.openFile?.key, E, {
+      trackFileEvent("multiplayer_connect_ws_error", E?.openFile?.key, E, {
         connectAttemptId: m,
         consecutiveInitFailureCount: g,
         online: navigator.onLine

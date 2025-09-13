@@ -20,7 +20,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Zr, vm, yU } from "../figma_app/678782";
 import { Xo } from "../figma_app/482495";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { ei as _$$ei } from "../figma_app/795674";
 import { c as _$$c } from "../905/370443";
 import { Em } from "../figma_app/976749";
@@ -409,7 +409,7 @@ let en = () => {
   return useCallback((t, r, n) => ({
     "aria-label": formatI18nMessage(t),
     "data-tooltip": t,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     children: r,
     readonly: !n || void 0,
     value: t,
@@ -425,7 +425,7 @@ let ei = () => {
   return useCallback((t, r, n) => ({
     "aria-label": formatI18nMessage(t),
     "data-tooltip": t,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     children: r,
     disabled: !n,
     onMouseDown: t => {

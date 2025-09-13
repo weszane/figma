@@ -3,8 +3,8 @@ import { useState, useCallback, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { u as _$$u } from "../905/65923";
-import { E as _$$E } from "../905/632989";
-import { bL } from "../905/38914";
+import { ButtonPrimitive } from "../905/632989";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
@@ -19,7 +19,7 @@ import { areColorArraysEqual, areColorsEqual, parseHex, multiplayerColors, black
 import { generateUUIDv4 } from "../905/871474";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { showModal, popModalStack } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { O1, KD } from "../figma_app/317394";
@@ -84,7 +84,7 @@ function V({
           paletteType: "base",
           background: "light"
         }, e + "-" + i)
-      }), jsx(_$$E, {
+      }), jsx(ButtonPrimitive, {
         className: k()({
           "edit_color_palette_modal--deleteColorButton--rWqOY": !0,
           "edit_color_palette_modal--deleteColorButtonDisabled--dwsFr": n
@@ -194,7 +194,7 @@ function Q({
   let es = Q.length >= I_;
   let ec = k && k.trim() && Q.length > 0 && (!i || K || k !== i.name);
   let ed = i ? getI18nString("whiteboard.color_palettes.modal.edit_palette") : getI18nString("whiteboard.color_palettes.modal.create_palette");
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: "fit-content",
     height: "dynamic",
     manager: s,
@@ -267,7 +267,7 @@ function Q({
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx(_$$E2, {
+          children: [jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("whiteboard.color_palettes.modal.palettes_visible_to_everyone")
           }), jsx($z, {

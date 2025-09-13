@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { tM, $$, vd, Us } from "../figma_app/637027";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { D as _$$D } from "../905/251759";
@@ -15,11 +15,11 @@ import { Hw } from "../figma_app/698052";
 import { PRICING_URL } from "../figma_app/345997";
 import { PlanType, SubscriptionType } from "../figma_app/831101";
 import { DA, $$ as _$$$$, Qw, RO, X9, Q1, SO, Zy, zS, UJ, qT, Lh } from "../905/472146";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../figma_app/141320";
 import { a as _$$a } from "../905/925868";
 import { m0 } from "../figma_app/976749";
-import { qD } from "../figma_app/314264";
+import { trackContextViewed } from "../figma_app/314264";
 import { In } from "../905/672640";
 import { lk } from "../figma_app/109538";
 import { B as _$$B2 } from "../905/380801";
@@ -31,7 +31,7 @@ import W from "lodash-es/mapValues";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
 import { sx as _$$sx } from "../905/941192";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { SK, Fq, vu } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
@@ -207,7 +207,7 @@ function er({
     });
   } else if (e === FPlanNameType.PRO && i) return jsx("strong", {
     className: d,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("plan_comparison.plans.current_trial")
     })
   });
@@ -374,7 +374,7 @@ function eo({
       "data-tooltip-offset-y": -8,
       "data-tooltip-show-above": !0,
       "data-tooltip-show-immediately": !0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: !0,
       onClick: lQ,
       style: _$$sx.wFull.h32.$,
@@ -515,7 +515,7 @@ export function $$em0({
   let W = function (e) {
     let [t, i] = useState(!0);
     let a = useCallback(() => {
-      qD({
+      trackContextViewed({
         name: T,
         action: "scrolled"
       });
@@ -533,7 +533,7 @@ export function $$em0({
       onIntersectionChange: ({
         isIntersecting: e
       }) => {
-        e && (qD({
+        e && (trackContextViewed({
           name: T,
           action: "bottom_visible"
         }), i(!1));
@@ -662,7 +662,7 @@ function eh({
   let [a, s] = useState(!1);
   let d = useRef();
   let c = void 0 !== qT[e].tooltipSpecialKey;
-  let u = c ? Ib.SPECIAL : Ib.TEXT;
+  let u = c ? KindEnum.SPECIAL : KindEnum.TEXT;
   let p = c ? qT[e].tooltipSpecialKey : qT[e].details?.();
   return jsxs("tr", {
     children: [jsx("td", {
@@ -703,7 +703,7 @@ function eg({
   feature: t
 }) {
   let i = Lh[e][t];
-  return "boolean" == typeof i ? i ? jsx(_$$B, {
+  return "boolean" == typeof i ? i ? jsx(SvgComponent, {
     svg: _$$A,
     className: "comparison_chart--featureIcon--KVLwL",
     title: getI18nString("plan_comparison.chart.included")

@@ -7,7 +7,7 @@ import { $A } from '../905/862883';
 import { aP } from '../figma_app/10554';
 import { c as _$$c } from '../figma_app/11961';
 import { OrgUserRoleEnum } from '../figma_app/35887';
-import { bD, Ug, vt } from '../figma_app/45218';
+import { ResourceType, ResourceTypeNoComment2, ResourceTypeNoComment } from '../figma_app/45218';
 import { FEditorType } from '../figma_app/53721';
 import { Ni } from '../figma_app/188152';
 import { FPublicationStatusType, FTemplateCategoryType } from '../figma_app/191312';
@@ -170,10 +170,10 @@ let $$q24 = 10;
 let $$J3 = 60;
 let $$Z9 = 100;
 function Q(e) {
-  return 'is_widget' in e && e.is_widget ? vt.WIDGET : 'current_plugin_version_id' in e ? vt.PLUGIN : vt.HUB_FILE;
+  return 'is_widget' in e && e.is_widget ? ResourceTypeNoComment.WIDGET : 'current_plugin_version_id' in e ? ResourceTypeNoComment.PLUGIN : ResourceTypeNoComment.HUB_FILE;
 }
 export function $$ee55(e) {
-  return Q(e) === vt.HUB_FILE ? Ug.HUB_FILE : Q(e) === vt.WIDGET ? Ug.WIDGET : Ug.PLUGIN;
+  return Q(e) === ResourceTypeNoComment.HUB_FILE ? ResourceTypeNoComment2.HUB_FILE : Q(e) === ResourceTypeNoComment.WIDGET ? ResourceTypeNoComment2.WIDGET : ResourceTypeNoComment2.PLUGIN;
 }
 export function $$et12(e) {
   return e >= $$q24 - 1 ? getI18nString('community.publishing.cannot_have_more_than_max_publishers', {
@@ -320,13 +320,13 @@ export function $$eS27(e, t) {
 }
 export function $$ev42(e) {
   switch (e) {
-    case bD.PLUGIN:
+    case ResourceType.PLUGIN:
       return 'plugins';
-    case bD.WIDGET:
+    case ResourceType.WIDGET:
       return 'widgets';
-    case bD.COMMENT:
+    case ResourceType.COMMENT:
       return 'comments';
-    case bD.HUB_FILE:
+    case ResourceType.HUB_FILE:
       return 'hub_files';
     default:
       throw new Error('Unsupported Type');

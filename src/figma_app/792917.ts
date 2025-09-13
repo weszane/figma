@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
@@ -17,7 +17,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { vi } from "../figma_app/808294";
 import { c9, oW } from "../figma_app/395505";
 import { showModalHandler, hideModal } from "../905/156213";
-import { bG, JV } from "../905/54385";
+import { CancellationReason, DEFAULT_PRICE } from "../905/54385";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
 import { yX, ey } from "../figma_app/918700";
@@ -70,19 +70,19 @@ let $$N0 = registerModal(function (e) {
           legend: jsx(q, {
             children: renderI18nText("community.buyer.refund_reason")
           }),
-          children: Object.values(bG).map(e => jsx(_$$c, {
+          children: Object.values(CancellationReason).map(e => jsx(_$$c, {
             value: e,
             label: jsx(Label, {
               children: vi(e)
             })
           }, e))
-        }), f === bG.OTHER ? jsx("div", {
+        }), f === CancellationReason.OTHER ? jsx("div", {
           className: _$$s.mt8.$,
           children: jsx(_$$v, {
             value: S,
             onChange: e => x(e.target.value),
             placeholder: getI18nString("community.buyer.refund_reason.add_additional_details"),
-            maxLength: JV
+            maxLength: DEFAULT_PRICE
           })
         }) : null]
       }) : jsxs("div", {
@@ -92,18 +92,18 @@ let $$N0 = registerModal(function (e) {
           onChange: e => {
             b(e);
           },
-          children: Object.values(bG).map(e => jsx(Z, {
+          children: Object.values(CancellationReason).map(e => jsx(Z, {
             className: _$$s.font11.selectNone.$,
             value: e,
             children: vi(e)
           }, e))
-        }), f === bG.OTHER ? jsx("div", {
+        }), f === CancellationReason.OTHER ? jsx("div", {
           className: _$$s.mt8.$,
           children: jsx(_$$v, {
             value: S,
             onChange: e => x(e.target.value),
             placeholder: getI18nString("community.buyer.refund_reason.add_additional_details"),
-            maxLength: JV
+            maxLength: DEFAULT_PRICE
           })
         }) : null]
       })]
@@ -147,7 +147,7 @@ let C = registerModal(function (e) {
     children: [jsx(s_, {
       dispatch: r
     }), renderI18nText("community.buyer.keep_an_eye_out", {
-      here: jsx($n.Link, {
+      here: jsx(Button.Link, {
         onClick: () => {
           c9(user);
           r(hideModal());

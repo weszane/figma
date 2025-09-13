@@ -1,12 +1,12 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, Fragment, Children, isValidElement, cloneElement } from "react";
 import { U1 } from "../figma_app/343967";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { m as _$$m } from "../905/270214";
 import { Ay } from "@stylexjs/stylex";
 import { M } from "../figma_app/749682";
 import { aV } from "../figma_app/722362";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Oh } from "../figma_app/144692";
 import { xG } from "../figma_app/121043";
 import { _ } from "../figma_app/658134";
@@ -104,7 +104,7 @@ $$h0.IconButton = function ({
   customTooltip: b
 }) {
   let [v, y] = M();
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     className: "xh8yej3 x78zum5 xl56j7k x9dqhi0",
     "aria-label": t,
     "aria-pressed": e,
@@ -112,7 +112,7 @@ $$h0.IconButton = function ({
     htmlAttributes: {
       "data-show-tooltip": !0,
       "data-tooltip": t,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-right": !0,
       "data-tooltip-shortcut-key": u,
       "data-tooltip-offset-y": x ? 4 : p ? -4 : 0,

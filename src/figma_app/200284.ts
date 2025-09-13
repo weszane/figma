@@ -3,7 +3,7 @@ import { useEffect, Component, PureComponent, useId, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
-import { $n, IK } from "../905/521428";
+import { Button, ButtonWide } from "../905/521428";
 import { c$, bL, l9, mc } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
@@ -36,7 +36,7 @@ import { J as _$$J } from "../905/95677";
 import { selectCurrentFile } from "../figma_app/516028";
 import { canEditBasedOnPlan } from "../figma_app/12796";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { qo } from "../905/959568";
 import { X7 } from "../905/713167";
 import { p as _$$p } from "../905/725707";
@@ -437,7 +437,7 @@ class eI extends Component {
         recordingKey: generateRecordingKey(this.props, "rotateClockwise"),
         htmlAttributes: {
           "data-tooltip": getI18nString("fullscreen.properties_panel.rotate_90"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$R, {})
       })
@@ -485,7 +485,7 @@ class eI extends Component {
             },
             children: [e && t && jsx("span", {
               className: QY,
-              children: jsx($n, {
+              children: jsx(Button, {
                 onClick: this.uploadMediaPaint,
                 htmlAttributes: {
                   onFocus: this.onImageButtonFocus,
@@ -685,7 +685,7 @@ function eC({
   }, [e]);
   return Zr(JT.EDIT_IMAGE) ? jsx("div", {
     className: "x1xk1jr8",
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       onClick: t,
       variant: "secondary",
       children: jsxs("div", {

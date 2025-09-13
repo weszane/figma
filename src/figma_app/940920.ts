@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { VP } from "../905/18797";
 import { _A } from "../figma_app/65182";
@@ -17,7 +17,7 @@ export function $$_0({
     className: warningOfflineContainer,
     children: jsxs("div", {
       className: warning,
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         className: offlineIcon,
         svg: A
       }), jsx("span", {
@@ -25,7 +25,7 @@ export function $$_0({
       }), r ? jsx("span", {
         className: trying,
         children: getI18nString("design_systems.component_properties.trying")
-      }) : jsx($n, {
+      }) : jsx(Button, {
         onClick: e,
         variant: "link",
         recordingKey: generateRecordingKey(t, "preferredValues", "tryAgain"),

@@ -7,7 +7,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { i as _$$i, C } from "../905/64217";
 import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
-import { ni } from "../figma_app/62612";
+import { getBasicViewportRect } from "../figma_app/62612";
 import { Cf, it } from "../905/504727";
 import { Xr, qN, Fb } from "../905/235109";
 export let $$m0 = "customElements" in window;
@@ -59,7 +59,7 @@ export let $$f1 = memo(e => {
     onCancel,
     targetRect
   } = e;
-  let o = ni();
+  let o = getBasicViewportRect();
   let l = useCallback(e => {
     onInsert(e);
     trackEventAnalytics("emojiIndex.EmojiData Inserted");

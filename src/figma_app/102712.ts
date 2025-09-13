@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { K } from "../905/443068";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
 import { H } from "../905/999677";
@@ -104,7 +104,7 @@ export function $$g0(e) {
   });
 }
 export function $$f2(e) {
-  return jsxs(E, {
+  return jsxs(ButtonPrimitive, {
     className: e.className,
     onClick: e.onClick,
     recordingKey: e.recordingKey,

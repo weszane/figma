@@ -27,7 +27,7 @@ import { kP, Y6, XQ, ho } from "../figma_app/91703";
 import { showModalHandler, hideModal, hideModalHandler } from "../905/156213";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { c as _$$c } from "../905/370443";
-import { GS, Cu } from "../figma_app/314264";
+import { trackDefinedFileEvent, logAndTrackCTA } from "../figma_app/314264";
 import { mu, yn } from "../figma_app/840917";
 import { isBranchAlt } from "../905/760074";
 import { Xg } from "../figma_app/199513";
@@ -596,7 +596,7 @@ let eH = createOptimistThunk(async (e, {
       type: "http",
       statusCode: i
     }) : 404 === i ? A7(getI18nString("user_facing_error.404_loading_a_file"), e.dispatch) : A7(getI18nString("user_facing_error.opening_editor"), e.dispatch);
-    GS("scenegraph_and_sync.fullscreen_open_error", t.key, A, {
+    trackDefinedFileEvent("scenegraph_and_sync.fullscreen_open_error", t.key, A, {
       error: n instanceof Error ? void 0 !== n.cause ? `${n.message}: ${n.cause.message}` : n.message : JSON.stringify(n),
       statusCode: Number.isNaN(i) ? void 0 : i
     });
@@ -642,7 +642,7 @@ export async function $$eW1(e, t, i, n, r) {
       button: {
         text: l,
         action: () => {
-          Cu({
+          logAndTrackCTA({
             text: "Publish components",
             name: "Publish draft after team upgrade",
             trackingDescriptor: _$$c.PUBLISH_COMPONENTS_AFTER_TEAM_UPGRADE,

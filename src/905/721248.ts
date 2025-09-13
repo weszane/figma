@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import o, { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
-import { IK, $n } from "../905/521428";
+import { ButtonWide, Button } from "../905/521428";
 import { LibraryUpdateStatus, VariablesBindings, GitReferenceType, PropertyScope, FileAndBranchTipType, SceneGraphHelpers, PreviewStage, ViewType, SchemaJoinStatus, DocumentMode } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
@@ -52,7 +52,7 @@ import { l as _$$l } from "../905/728491";
 import { vj } from "../figma_app/919079";
 import { h1 } from "../905/986103";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { VisualBellIcon } from "../905/576487";
@@ -69,7 +69,7 @@ import { DP } from "../905/640017";
 import { B8 } from "../905/993733";
 import { ProjectDevelopmentPhases } from "../905/869235";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A as _$$A } from "../3850/839808";
 import { A as _$$A2 } from "../3850/204081";
 import { A as _$$A3 } from "../2854/952200";
@@ -84,7 +84,7 @@ import { U as _$$U } from "../905/506188";
 import { bL as _$$bL, Y9 as _$$Y, JU, UC } from "../figma_app/57171";
 import { o as _$$o } from "../905/605383";
 import { FS } from "../905/491806";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { w as _$$w2 } from "../905/835474";
 import { Qp, JR } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -126,13 +126,13 @@ import { J as _$$J3 } from "../905/125993";
 import i$ from "../vendor/946678";
 import { Uz } from "../905/63728";
 import { MM, ms } from "../figma_app/236327";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { jq } from "../figma_app/563413";
 import { fileEntityDataMapper } from "../905/943101";
 import { H as _$$H } from "../905/706055";
 import { fG } from "../905/772425";
 import { zW } from "../905/162414";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { EditorLocation } from "../figma_app/175992";
 import { Um } from "../figma_app/349248";
 import { A as _$$A0 } from "../905/920142";
@@ -367,7 +367,7 @@ function eO({
   });
   if (t && $2(t)) {
     let e = s$(t);
-    return jsx(_$$B, {
+    return jsx(SvgComponent, {
       svg: e,
       className: "chunk_diff--grid--80il5",
       autosize: !0,
@@ -531,12 +531,12 @@ function eH(e) {
         let r = getI18nString("collaboration.branching_chunk.phase_updated_library");
         return jsxs("div", {
           className: t.join(" "),
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A,
             className: i,
             autosize: !0,
             width: "10px",
-            "data-tooltip-type": e.hideLabel ? Ib.TEXT : void 0,
+            "data-tooltip-type": e.hideLabel ? KindEnum.TEXT : void 0,
             "data-tooltip": r
           }), !e.hideLabel && jsx("span", {
             className: eU,
@@ -550,12 +550,12 @@ function eH(e) {
         let r = getI18nString("collaboration.branching_chunk.phase_created");
         return jsxs("div", {
           className: t.join(" "),
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A4,
             className: i,
             autosize: !0,
             width: "8px",
-            "data-tooltip-type": e.hideLabel ? Ib.TEXT : void 0,
+            "data-tooltip-type": e.hideLabel ? KindEnum.TEXT : void 0,
             "data-tooltip": r
           }), !e.hideLabel && jsx("span", {
             className: eU,
@@ -569,12 +569,12 @@ function eH(e) {
         let r = getI18nString("collaboration.branching_chunk.phase_removed");
         return jsxs("div", {
           className: t.join(" "),
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A3,
             className: i,
             autosize: !0,
             width: "8px",
-            "data-tooltip-type": e.hideLabel ? Ib.TEXT : void 0,
+            "data-tooltip-type": e.hideLabel ? KindEnum.TEXT : void 0,
             "data-tooltip": r
           }), !e.hideLabel && jsx("span", {
             className: eU,
@@ -588,12 +588,12 @@ function eH(e) {
         let r = getI18nString("collaboration.branching_chunk.phase_updated");
         return jsxs("div", {
           className: t.join(" "),
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A2,
             className: i,
             autosize: !0,
             width: "8px",
-            "data-tooltip-type": e.hideLabel ? Ib.TEXT : void 0,
+            "data-tooltip-type": e.hideLabel ? KindEnum.TEXT : void 0,
             "data-tooltip": r
           }), !e.hideLabel && jsx("span", {
             className: eU,
@@ -944,7 +944,7 @@ let tc = memo(function (e) {
     textAlign: "left"
   };
   return jsx(Fragment, {
-    children: jsxs(_$$E, {
+    children: jsxs(ButtonPrimitive, {
       className: I,
       onClick,
       children: [jsxs("div", {
@@ -964,7 +964,7 @@ let tc = memo(function (e) {
           } = e;
           if ("GRID" === u) {
             let e = s$(displayNode);
-            return jsx(_$$B, {
+            return jsx(SvgComponent, {
               svg: e,
               className: "chunk_tile--gridIcon--BISRZ",
               autosize: !0,
@@ -1027,7 +1027,7 @@ function th({
   children: e,
   onClick: t
 }) {
-  return t ? jsx(_$$E, {
+  return t ? jsx(ButtonPrimitive, {
     onClick: t,
     className: ev()(tm, "chunk_row--containerClickable--jquBH chunk_tile--clickable---Aa4s", _$$s.wFull.$),
     children: e
@@ -1063,7 +1063,7 @@ function t_({
         className: "variable_set_chunk_row--rowLeftChildren--wqINC",
         children: [jsx(tg, {
           assetName: e,
-          icon: jsx(_$$B, {
+          icon: jsx(SvgComponent, {
             svg: _$$A5
           })
         }), jsx(eH, {
@@ -1167,10 +1167,10 @@ let tx = memo(function (e) {
   });
   let v = jsxs("div", {
     className: tA,
-    children: [renderI18nText("collaboration.branching_chunk.section_file_optimization"), jsx(_$$B, {
+    children: [renderI18nText("collaboration.branching_chunk.section_file_optimization"), jsx(SvgComponent, {
       svg: _$$A6,
       className: ty,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("collaboration.branching_chunk.section_file_optimization_tooltip"),
       autosize: !0,
       width: "11px"
@@ -1195,10 +1195,10 @@ let tx = memo(function (e) {
       }), jsxs(UC, {
         children: [(e.systemImprovements || []).includes("file_improvement") && (y ? b : v), (e.systemImprovements || []).includes("interrupted_merge_recovery") && jsxs("div", {
           className: tA,
-          children: [renderI18nText("collaboration.branching_chunk.section_system_improvement"), jsx(_$$B, {
+          children: [renderI18nText("collaboration.branching_chunk.section_system_improvement"), jsx(SvgComponent, {
             svg: _$$A6,
             className: ty,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("collaboration.branching_chunk.section_system_improvement_tooltip"),
             autosize: !0,
             width: "11px"
@@ -1229,7 +1229,7 @@ let tx = memo(function (e) {
           })
         }), c && jsx("div", {
           className: "chunk_section--nextPageButtonContainer--qjP0o",
-          children: jsx(IK, {
+          children: jsx(ButtonWide, {
             variant: "secondary",
             onClick: () => {
               d(Math.min(l + 120, displayGroups.length));
@@ -1587,7 +1587,7 @@ function tK(e) {
         children: renderI18nText("collaboration.branching_merge_modal.calculating_conflicts")
       })]
     }) : jsxs(Fragment, {
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A8,
         className: tG
       }), jsx("div", {
@@ -1607,7 +1607,7 @@ function tY(e) {
   } = e;
   let l = t => jsx("div", {
     className: tV,
-    children: jsx($n, {
+    children: jsx(Button, {
       onClick: e.switchToUpdateFromMain,
       children: t
     })
@@ -1653,7 +1653,7 @@ function tY(e) {
         text: m,
         button: (u = getI18nString("collaboration.branching_merge_modal.update_from_main_file"), jsx("div", {
           className: tV,
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "secondary",
             onClick: e.switchToUpdateFromMain,
             children: u
@@ -1946,7 +1946,7 @@ function ix({
     }), e && t && jsx("div", {
       className: im,
       "data-testid": "diff-arrow",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A9
       })
     }), t && jsx("div", {
@@ -1973,7 +1973,7 @@ function iS({
         children: r
       }), r && t && jsx("div", {
         className: im,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A9
         })
       }), t && jsx("div", {
@@ -2005,7 +2005,7 @@ function iC({
   value: e
 }) {
   return jsx("span", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e,
     children: e
   });
@@ -2283,7 +2283,7 @@ let iW = registerModal(function (e) {
     }
   });
   let b = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: b,
     width: "lg",
     height: "fixed",
@@ -2365,7 +2365,7 @@ let iK = registerModal(function (e) {
   });
   let s = getI18nString("collaboration.branching_reviews.add_context_optional");
   let o = e.existingMergeRequest ? getI18nString("collaboration.branching_reviews.give_reviewers_more_context_for_your_latest_changes") : getI18nString("collaboration.branching_reviews.give_reviewers_more_context_for_your_changes");
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: "md",
     manager: a,
     children: jsxs(vo, {
@@ -2488,7 +2488,7 @@ function np(e) {
   });
 }
 function nm(e) {
-  let t = jsx($n, {
+  let t = jsx(Button, {
     variant: "secondary",
     onClick: e.onClickAdd,
     children: renderI18nText("collaboration.branching_to_source.add")
@@ -2508,7 +2508,7 @@ function nh(e) {
     children: jsx(_$$K, {
       onClick: e.onClickRemove,
       "aria-label": getI18nString("collaboration.branching_to_source.remove"),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3,
         className: "reviewer_row--icon--dxdcf"
       })
@@ -2666,11 +2666,11 @@ function nf(e) {
             value: l
           }), jsxs("div", {
             className: "reviewer_row--editNotesSubmitButtons--7nTpT",
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: g,
               children: renderI18nText("collaboration.branching_to_source.cancel")
-            }), jsx($n, {
+            }), jsx(Button, {
               onClick: _,
               children: renderI18nText("collaboration.branching_to_source.save")
             })]
@@ -2804,7 +2804,7 @@ function nA(e) {
         }) : jsx(Fragment, {
           children: m ? jsx("div", {
             className: nl,
-            children: jsx(qc, {})
+            children: jsx(LoadingOverlay, {})
           }) : 0 === R.length ? jsx("div", {
             className: nl,
             children: renderI18nText("collaboration.branching_to_source.no_results_matching_query", {
@@ -2841,8 +2841,8 @@ function ny(e) {
     }, {
       enabled: !!e
     }).transform(e => {
-      let n = oA(e.repo)?.roles || [];
-      let r = oA(e.repo)?.team?.roles || [];
+      let n = getResourceDataOrFallback(e.repo)?.roles || [];
+      let r = getResourceDataOrFallback(e.repo)?.team?.roles || [];
       let a = new Map();
       for (let e of [...n, ...r]) {
         if (a.size >= i) break;
@@ -2920,7 +2920,7 @@ function ny(e) {
               A(e => !e);
             },
             "aria-label": getI18nString("collaboration.branching_to_source.add_reviewers"),
-            children: jsx(_$$B, {
+            children: jsx(SvgComponent, {
               svg: _$$A1,
               className: "sidebar_details--plusIcon--AHH1Y"
             })
@@ -3089,12 +3089,12 @@ function nS(e) {
       }
     }));
   };
-  let d = t => t ? jsx($n, {
+  let d = t => t ? jsx(Button, {
     variant: "primary",
     onClick: e.onMerge,
     disabled: e.mergeDisabled,
     children: renderI18nText("collaboration.branching_to_source.merge_branch")
-  }) : jsx($n, {
+  }) : jsx(Button, {
     variant: "secondary",
     onClick: e.onMerge,
     disabled: e.mergeDisabled,
@@ -3102,12 +3102,12 @@ function nS(e) {
   });
   let c = (t, i) => {
     let r = i ? getI18nString("collaboration.branching_to_source.resend_review_request") : getI18nString("collaboration.branching_to_source.request_review");
-    return t ? jsx($n, {
+    return t ? jsx(Button, {
       variant: "primary",
       onClick: o,
       disabled: e.requestReviewDisabled,
       children: r
-    }) : jsx($n, {
+    }) : jsx(Button, {
       variant: "secondary",
       onClick: o,
       disabled: e.requestReviewDisabled,
@@ -3116,11 +3116,11 @@ function nS(e) {
   };
   let u = (e, t) => {
     let i = t ? getI18nString("collaboration.branching_to_source.review_again") : getI18nString("collaboration.branching_to_source.add_your_review");
-    return e ? jsx($n, {
+    return e ? jsx(Button, {
       variant: "primary",
       onClick: l,
       children: i
-    }) : jsx($n, {
+    }) : jsx(Button, {
       variant: "secondary",
       onClick: l,
       children: i
@@ -3564,7 +3564,7 @@ let nw = memo(function (e) {
   let eU = () => jsxs("div", {
     children: [jsxs("div", {
       className: "to_source_view--reviewTitleContainer--kPDvw",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: UT,
         svg: _$$A10
       }), jsx("div", {
@@ -3989,10 +3989,10 @@ let nF = memo(function (e) {
     children: [jsx("div", {
       className: "changes_review--sidebar--N8-46 changes_review--sidebarBorder--Xs026",
       children: e.didResolveConflicts ? jsxs(Fragment, {
-        children: [jsxs(_$$E, {
+        children: [jsxs(ButtonPrimitive, {
           className: "changes_review--reviewConflictChanges--nqttn changes_review--reviewChanges--uhXd5",
           onClick: e.uncompleteResolution,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A11,
             className: "changes_review--reviewChevron--TWKyU",
             width: "10px",
@@ -4037,7 +4037,7 @@ let nF = memo(function (e) {
       })
     }), jsx("div", {
       className: "changes_review--sidebarFooter--HtGs6 changes_review--sidebarBorder--Xs026",
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "primary",
         type: "submit",
         onClick: e.applyChanges,
@@ -4382,7 +4382,7 @@ function ri({
 }) {
   if (t && $2(t)) {
     let e = s$(t);
-    return jsx(_$$B, {
+    return jsx(SvgComponent, {
       svg: e,
       className: "conflict_group_diff--grid--ojJey",
       autosize: !0,
@@ -4556,7 +4556,7 @@ function rs({
       className: ev()("conflict_group_diff--diffHeaderRight--9h2Uw conflict_group_diff--diffHeaderItem--TWJfb conflict_resolution--branchHeader--zbjpj conflict_resolution--headerBorder--mFV8I", t === BranchType.BRANCH && n5),
       children: [jsxs("div", {
         className: n4,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: "conflict_group_diff--diffHeaderIcon--mn8Ej",
           svg: _$$A12
         }), jsx(_$$R, {
@@ -4624,7 +4624,7 @@ function rl({
   return (ra(s), a) ? null : jsxs(Fragment, {
     children: [jsx("div", {
       className: ev()("conflict_group_diff--diffFooterLeft--gdTe1 conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--mainFooter--ramGe", t === BranchType.MAIN && n5),
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         iconPrefix: jsx(_$$r2, {
           className: n7
@@ -4637,7 +4637,7 @@ function rl({
       })
     }), jsx("div", {
       className: ev()("conflict_group_diff--diffFooterRight--adX-Z conflict_group_diff--diffFooterItem--A5WYQ conflict_resolution--branchFooter--8jDG8", t === BranchType.BRANCH && n5),
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "secondary",
         iconPrefix: jsx(_$$r2, {
           className: n7
@@ -4710,7 +4710,7 @@ function rg(e) {
   }(e.choice);
   return jsxs("div", {
     className: ev()("conflict_list--resolvedBadge--7rjR5 text--fontPos9--naThA text--_fontBase--QdLsd", t ? null : "conflict_list--hiddenBadge--a3sEO"),
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A13,
       className: "conflict_list--checkIcon--GOZ0X"
     }), " ", t]
@@ -4721,7 +4721,7 @@ function rf(e) {
   let i = _$$w2(t.name || "");
   let a = useMemo(() => ({
     "data-tooltip": i,
-    "data-tooltip-type": Ib.TEXT
+    "data-tooltip-type": KindEnum.TEXT
   }), [i]);
   return jsxs("div", {
     className: "conflict_list--rowChunkDisplay--r3So6",
@@ -4884,7 +4884,7 @@ function rI(e) {
         children: jsx("div", {
           className: "conflict_list--sectionCloseOpenControl--lU2j5",
           onClick: () => setIsOpen(!isOpen),
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: isOpen ? _$$A15 : _$$A11
           })
         })
@@ -4916,7 +4916,7 @@ function rE(e) {
     onClick: () => {
       setToCurrentPage();
     },
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: "conflict_list--pageRowSvg--SF5s1",
       svg: _$$A14
     }), jsx("div", {
@@ -5359,7 +5359,7 @@ let rR = memo(function (e) {
       })]
     }), !viewOnly && jsx("div", {
       className: "conflict_resolution--sidebarFooter--be5Kq conflict_resolution--sidebarBorder--6T7B7",
-      children: pickedAllFromBranch && !hasNonConflictDisplayGroups ? jsx(IK, {
+      children: pickedAllFromBranch && !hasNonConflictDisplayGroups ? jsx(ButtonWide, {
         onClick: function (i) {
           if (!D) {
             L(!0);
@@ -5381,7 +5381,7 @@ let rR = memo(function (e) {
         },
         disabled: viewOnly || D,
         children: renderI18nText("collaboration.branching_from_source.confirm_picks")
-      }) : jsx(IK, {
+      }) : jsx(ButtonWide, {
         onClick: e.completeResolution,
         disabled: !e.hasPicksForAll || D,
         children: renderI18nText("collaboration.branching_from_source.next")
@@ -5595,7 +5595,7 @@ function rO({
         return renderI18nText("collaboration.branching_merge_modal.title_merge_from_source");
     }
   }, [e, t]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: 1056,
     height: "fixed",
     manager: o,
@@ -5653,7 +5653,7 @@ function rD(e) {
           })
         }), jsx("div", {
           className: kd,
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: () => customHistory.reload("cannot parse diff"),
             children: renderI18nText("collaboration.branching_merge_modal.refresh_required_action")
@@ -5931,7 +5931,7 @@ function rM(e) {
         text: eI,
         button: l === SourceDirection.TO_SOURCE ? (t = renderI18nText("collaboration.branching_merge_modal.button_review_conflicts"), jsx("div", {
           className: tV,
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: e_,
             children: t
           })

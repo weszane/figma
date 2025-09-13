@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { Z } from "../905/521211";
 import { Fk } from "../figma_app/167249";
 import { OG } from "../figma_app/876589";
@@ -32,7 +32,7 @@ export function $$u1({
   isSite: t
 }) {
   let r = OG(t ? "title" : "page_title");
-  let o = A(t => {
+  let o = useDebouncedCallback(t => {
     permissionScopeHandler.user("set-responsive-set-settings", () => {
       Fullscreen?.setResponsiveSetSettings({
         title: t.trim()

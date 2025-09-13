@@ -12,10 +12,10 @@ import { zm, Qi } from "../figma_app/49598";
 import { C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
 import { s0, M5 } from "../figma_app/350203";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentUser } from "../905/372672";
 import { M4 } from "../905/713695";
-import { U, xQ, vt } from "../figma_app/45218";
+import { hasClientMeta, isWidget, ResourceTypeNoComment } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
 export function $$k0(e, t, i, p) {
@@ -24,14 +24,14 @@ export function $$k0(e, t, i, p) {
     let s = selectCurrentUser();
     let r = Jm();
     let o = () => {
-      XW(e) || (Cu(v()), U(e) ? a(zm({
+      XW(e) || (logAndTrackCTA(v()), hasClientMeta(e) ? a(zm({
         hubFileId: e.id
-      })) : xQ(e) ? a(C({
+      })) : isWidget(e) ? a(C({
         id: e.id,
-        resourceType: vt.WIDGET
+        resourceType: ResourceTypeNoComment.WIDGET
       })) : a(C({
         id: e.id,
-        resourceType: vt.PLUGIN
+        resourceType: ResourceTypeNoComment.PLUGIN
       })));
     };
     let p = e => {
@@ -53,17 +53,17 @@ export function $$k0(e, t, i, p) {
     let b = t => {
       if (!XW(e)) {
         if (t.stopPropagation(), !s) throw Error(`Tried to unlike a ${KH(e)} as a signed out user`);
-        Cu(v());
-        U(e) ? a(Qi({
+        logAndTrackCTA(v());
+        hasClientMeta(e) ? a(Qi({
           hubFileId: e.id,
           likeId: i || void 0
-        })) : xQ(e) ? a($({
+        })) : isWidget(e) ? a($({
           id: e.id,
-          resourceType: vt.WIDGET,
+          resourceType: ResourceTypeNoComment.WIDGET,
           likeId: i || void 0
         })) : a($({
           id: e.id,
-          resourceType: vt.PLUGIN,
+          resourceType: ResourceTypeNoComment.PLUGIN,
           likeId: i || void 0
         }));
       }
@@ -89,7 +89,7 @@ export function $$k0(e, t, i, p) {
       if (!XW(e)) return;
       let t = qY(e);
       if (!t) throw Error("Missing resource content");
-      Cu(I());
+      logAndTrackCTA(I());
       let i = y({
         resourceId: e.id,
         contentId: t.id,
@@ -140,7 +140,7 @@ export function $$k0(e, t, i, p) {
       let n = qY(e);
       if (!n) throw Error("Missing resource content");
       if (t.stopPropagation(), !m) throw Error("Tried to unlike a resource as a signed out user");
-      Cu(I());
+      logAndTrackCTA(I());
       let a = v({
         resourceId: e.id,
         contentId: n.id,

@@ -4,7 +4,7 @@ import { a as _$$a } from "../905/29104";
 import { Ex, zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var a = i;
 export function $$u0({
   location: e,
@@ -16,7 +16,7 @@ export function $$u0({
   let p = !!i || !!u;
   let _ = p ? {
     dataTooltip: getI18nString("qa.learn_more"),
-    dataTooltipType: Ib.TEXT,
+    dataTooltipType: KindEnum.TEXT,
     dataTooltipShowAbove: !0
   } : {};
   let h = _$$a() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");

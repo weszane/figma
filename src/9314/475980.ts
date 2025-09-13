@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { k as _$$k2 } from '../905/44647';
 import { Fo, Uz } from '../905/63728';
 import { G as _$$G } from '../905/117393';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { e as _$$e2 } from '../905/149844';
 import { lk } from '../905/182453';
 import { permissionScopeHandler } from '../905/189185';
@@ -21,10 +21,10 @@ import { Cf } from '../905/504727';
 import { k as _$$k } from '../905/582200';
 import { x as _$$x } from '../905/587214';
 import { getFeatureFlags } from '../905/601108';
-import { E as _$$E } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { localStorageRef } from '../905/657224';
 import { e as _$$e3 } from '../905/678389';
-import { EF } from '../905/709171';
+import { compareLibraryItemsAlias } from '../905/709171';
 import { GT } from '../905/711212';
 import { _f } from '../905/760682';
 import { zi } from '../905/824449';
@@ -303,7 +303,7 @@ function en({
     }));
   }, [D, t.name, t.styleTypeSection, R]);
   return jsx(el, {
-    childLeft: jsx(_$$E, {
+    childLeft: jsx(ButtonPrimitive, {
       onClick: M,
       className: 'styles--caretContainer--4-dqw',
       ref: B,
@@ -319,7 +319,7 @@ function en({
         'aria-label': getI18nString('design_systems.styles.tooltips.create'),
         'onClick': q,
         'htmlAttributes': {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('design_systems.styles.tooltips.create')
         },
         'children': jsx(_$$x, {})
@@ -390,7 +390,7 @@ function eu({
   let U = useCallback(() => {
     a && g(E.node_id, !0, E.style_type);
   }, [g, E.node_id, E.style_type, a]);
-  let Y = _.isShown && !_.isCreating && _.style.node_id === E.node_id && EF(_.style, E);
+  let Y = _.isShown && !_.isCreating && _.style.node_id === E.node_id && compareLibraryItemsAlias(_.style, E);
   let W = (N || B) && !i || Y;
   let q = useCallback(() => {
     let e = F.current;
@@ -416,7 +416,7 @@ function eu({
   let X = K.current;
   let G = !!X && X.offsetWidth < X.scrollWidth;
   let Z = useMemo(() => !r && E.description && G ? {
-    'data-tooltip-type': Ib.SPECIAL,
+    'data-tooltip-type': KindEnum.SPECIAL,
     'data-tooltip': _$$Z,
     'data-tooltip-style-name': getBasename(E.name),
     'data-tooltip-style-description': E.description,
@@ -442,7 +442,7 @@ function eu({
         'aria-expanded': Y,
         'onClick': q,
         'htmlAttributes': {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': a ? getI18nString('design_systems.styles.edit_style') : getI18nString('design_systems.styles.view_style'),
           'onMouseDown': dG,
           'tabIndex': 0,
@@ -545,7 +545,7 @@ function em({
         }),
         'onClick': c,
         'htmlAttributes': {
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('design_systems.styles.tooltips.create_style_from_section', {
             kind: XV(e).toLowerCase()
           })
@@ -760,7 +760,7 @@ function eP({
         'onMouseDown': C,
         'onClick': e => e.stopPropagation(),
         'className': u ? 'styles--stylesHeaderButtonHighlight--WTeWy raw_components--iconButtonSelected--bJibL raw_components--_iconButton---ybo6' : 'styles--stylesHeaderButton--jhpA5 draggable_list--addButton--D0q--',
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('design_systems.create_style.create_style'),
         'recordingKey': generateRecordingKey(m, 'addButton'),
         'children': jsx(_$$e2, {})

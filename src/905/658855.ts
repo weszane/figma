@@ -8,8 +8,8 @@ import { f as _$$f } from "../905/54715";
 import c from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
 import { trackEventAnalytics } from "../905/449184";
-import { kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -298,7 +298,7 @@ function F({
     onClick: () => o(!s),
     role: "button",
     tabIndex: 0,
-    children: [renderI18nText("community.publishing.thumbnail"), e && i ? jsx(_$$B, {
+    children: [renderI18nText("community.publishing.thumbnail"), e && i ? jsx(SvgComponent, {
       svg: _$$A,
       className: "publish_resource_card_preview--ellipses--ZhnQN"
     }) : jsx(_$$I, {
@@ -541,7 +541,7 @@ export function $$V0({
       userId: f
     }), I && jsx("div", {
       className: "publish_resource_card_preview--loadingSpinnerContainer--rKGPJ",
-      children: jsx(kt, {
+      children: jsx(LoadingSpinner, {
         className: "publish_resource_card_preview--loadingSpinner--p4-1E"
       })
     })]

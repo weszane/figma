@@ -13,9 +13,9 @@ import { ZT, WK, Ud, ll, $1, B7 } from "../figma_app/844435";
 import { j } from "../905/813868";
 import { LR } from "../figma_app/120210";
 import { Um } from "../905/848862";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getPluginVersion, isValidForSelectedViewAndWhitelist } from "../figma_app/300692";
-import { bD, vt } from "../figma_app/45218";
+import { ResourceType, ResourceTypeNoComment } from "../figma_app/45218";
 import { ManifestErrorType } from "../figma_app/155287";
 import { bE, aY } from "../figma_app/78725";
 import { VR } from "../figma_app/545541";
@@ -45,7 +45,7 @@ export function $$w2(e) {
           data: {
             error: d.error,
             dispatch: t,
-            resourceType: bD.WIDGET
+            resourceType: ResourceType.WIDGET
           },
           showModalsBeneath: !0
         })) : t(showModalHandler({
@@ -119,19 +119,19 @@ export function $$L1(e) {
   let r = Um();
   let s = m0();
   let o = VR();
-  let d = sZ();
+  let d = useCurrentUserOrg();
   let u = ll();
   let _ = R({
     plugin: e.plugin
   });
   let m = useCallback(() => {
     t(_$$S({
-      url: e.resourceType === vt.PLUGIN ? ab(e.resourceId) : ox(e.resourceId),
-      linkType: e.resourceType === vt.PLUGIN ? "plugin" : "widget"
+      url: e.resourceType === ResourceTypeNoComment.PLUGIN ? ab(e.resourceId) : ox(e.resourceId),
+      linkType: e.resourceType === ResourceTypeNoComment.PLUGIN ? "plugin" : "widget"
     }));
   }, [t, e.resourceType, e.resourceId]);
   let g = [];
-  return (e.resourceType === vt.PLUGIN && (isValidForSelectedViewAndWhitelist(e.plugin, d, u) && o.loaded && g.push(O({
+  return (e.resourceType === ResourceTypeNoComment.PLUGIN && (isValidForSelectedViewAndWhitelist(e.plugin, d, u) && o.loaded && g.push(O({
     pluginId: e.plugin.plugin_id,
     preferences: o
   })), _ && g.push(_)), g.push({
@@ -154,7 +154,7 @@ export function $$D0(e) {
   let t = Um();
   let r = VR();
   let i = m0();
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let s = ll();
   let o = R({
     plugin: e.plugin

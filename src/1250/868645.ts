@@ -7,7 +7,7 @@ import { oW } from "../905/675859";
 import { a as _$$a } from "../905/29104";
 import { Ph } from "../905/160095";
 import { renderI18nText } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
@@ -81,7 +81,7 @@ export function $$I1() {
     preventUserClose: !0,
     primaryCta: {
       type: "button",
-      label: jsx(E, {
+      label: jsx(TextWithTruncation, {
         fontSize: 11,
         children: renderI18nText("figmake.legal_onboarding_modal.try_figmake_button")
       }),

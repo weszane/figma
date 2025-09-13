@@ -5,11 +5,11 @@ import { k as _$$k } from "../905/443820";
 import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { tH } from "../905/751457";
 import { renderI18nText } from "../905/303541";
 import { EE, lB } from "../figma_app/731583";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { OF } from "../figma_app/562352";
 import { m as _$$m } from "../9410/643761";
 import { fullscreenValue } from "../figma_app/455680";
@@ -59,7 +59,7 @@ let L = memo(({
   setIsMaximized: a
 }) => {
   RJ(t);
-  let s = am();
+  let s = trackFileEventWithUser();
   let [o, l] = useState(null);
   let [d, p, h, m] = function () {
     let [e, t] = useState(!1);
@@ -181,7 +181,7 @@ let D = memo(function (e) {
   } = e;
   let s = useRef(null);
   let o = useRef(null);
-  let l = _X({
+  let l = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let [d, u] = useState(!1);
@@ -249,7 +249,7 @@ function F({
   mediaHash: e
 }) {
   let t = C.useValue(e);
-  let i = am();
+  let i = trackFileEventWithUser();
   useEffect(() => {
     i("figjam_gif_started_playing");
   }, [i]);
@@ -276,7 +276,7 @@ function B(e, t, i, r) {
     n.style.pointerEvents = "all";
   } else {
     let e = i.current;
-    let r = Yb(t, e);
+    let r = scaleRect(t, e);
     n.style.height = `${r.height}px`;
     n.style.width = `${r.width}px`;
     n.style.transform = `translate(${r.x + t.x}px, ${r.y + t.y}px) rotate(${e.angle}deg)`;

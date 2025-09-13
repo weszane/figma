@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { getI18nString } from "../905/303541";
@@ -20,7 +20,7 @@ export function $$c0({
     preventUserClose: !0
   });
   let u = useRef(null);
-  return jsxs(bL, {
+  return jsxs(ModalRootComponent, {
     manager: c,
     ...i,
     children: [e, jsx("div", {

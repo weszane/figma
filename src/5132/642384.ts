@@ -16,7 +16,7 @@ import { F as _$$F } from "../905/504462";
 import { to } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { Y9 } from "../figma_app/502247";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { $A, vt } from "../905/862883";
 import { H } from "../905/548668";
 async function j(e, l, i, t, a, r) {
@@ -69,7 +69,7 @@ let $$T1 = (e, l = {
       data: c
     }) => {
       let d = c.meta;
-      let h = m3(i);
+      let h = hasMonetizedResourceMetadata(i);
       let f = !0 !== h ? "none" : !0 === l.isFreemiumPreview ? "trial" : "paid";
       trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
         hubFileId: i.id,

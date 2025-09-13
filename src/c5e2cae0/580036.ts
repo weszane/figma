@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
-import { Pw } from "../905/521428";
+import { ButtonLargeWide } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
@@ -23,7 +23,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
-let N = tf(Pw);
+let N = tf(ButtonLargeWide);
 export function $$b0({
   title: e,
   countByBillableProductKey: t,

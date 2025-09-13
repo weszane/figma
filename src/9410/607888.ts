@@ -13,7 +13,7 @@ import { VisualBellIcon } from "../905/576487";
 import { zE } from "../905/738636";
 import { Uf, $K } from "../figma_app/223206";
 import { J3, JU } from "../figma_app/622574";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { getPermissionsAndView } from "../905/766303";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
@@ -94,7 +94,7 @@ export function $$k0() {
         text: getI18nString("community.publishing.publish"),
         action: () => {
           openCooperPublishFlow("send-to-buzz-from-design-success-bell");
-          Cu({
+          logAndTrackCTA({
             trackingContext: "SendToBuzzFromDesignSuccessBell",
             text: getI18nString("community.publishing.publish")
           });

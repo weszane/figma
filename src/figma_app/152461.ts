@@ -9,7 +9,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { gc } from "../figma_app/120227";
 import { FOverrideType } from "../figma_app/191312";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { VR } from "../figma_app/545541";
 export function $$g1() {
   let {
@@ -25,7 +25,7 @@ export function $$g1() {
     children: [jsx(_$$d, {
       "aria-label": getI18nString("dev_handoff.code.settings.options"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.code.settings.options")
       },
       ...getTriggerProps(),

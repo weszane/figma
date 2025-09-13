@@ -5,26 +5,26 @@ import _require from "../9410/947615";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useState, forwardRef, useMemo } from "react";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { C as _$$C } from "../905/520159";
 import { A } from "../905/251970";
 import { SlidesEmbeddedPrototypeBindings } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import p from "classnames";
 import { O8 } from "../figma_app/88484";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { ks } from "../figma_app/637027";
 import { f as _$$f } from "../figma_app/109947";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { Tc } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
 import { pb, zU, Ik, qS } from "../figma_app/831696";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { R } from "../figma_app/53049";
 import { Y } from "../905/1768";
 var h = p;
@@ -42,7 +42,7 @@ async function L({
   return i && SlidesEmbeddedPrototypeBindings?.getPrototypeFileStructureData(e, i, t) || {};
 }
 export function $$R2() {
-  let e = _$$U();
+  let e = trackFileEventWithStore();
   let [t, i] = useAtomValueAndSetter($$A3);
   let a = useRef(null);
   let s = useCallback((e = !1) => {
@@ -208,7 +208,7 @@ function B({
   onSelected: i,
   recordingKey: n
 }) {
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: _$$s.flex.flexColumn.gap8.$,
     onClick: i,
     recordingKey: n,
@@ -244,11 +244,11 @@ function G({
   let i = Ik(e);
   let n = i || !e ? void 0 : getI18nString("slides.flapp.embed.add_button_invalid_link_tooltip");
   return jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": n,
     "data-tooltip-show-above": !0,
     "data-tooltip-show-immediately": !0,
-    children: jsx($n, {
+    children: jsx(Button, {
       variant: "primary",
       disabled: !i,
       onClick: () => {
@@ -293,7 +293,7 @@ function z({
       }), jsx(G, {
         prototypeUrl: t,
         onClick: () => {
-          t && (Cu({
+          t && (logAndTrackCTA({
             name: "slides.flapps.embed.add_prototype_link_button_clicked",
             fileKey: pb(t),
             productType: "slides"
@@ -318,7 +318,7 @@ function V({
         title: e.name,
         subtitle: e.fig_file.name,
         onClick: () => {
-          Cu({
+          logAndTrackCTA({
             name: "slides.flapps.embed.recent_prototype_tile_clicked",
             fileKey: e.file_key,
             productType: "slides"
@@ -335,7 +335,7 @@ function W({
   subtitle: i,
   onClick: n
 }) {
-  return jsxs(_$$E, {
+  return jsxs(ButtonPrimitive, {
     className: "slides_insert_embed_modal--recentPrototypeTileContainer--ig9io",
     onClick: n,
     children: [e ? jsx("img", {

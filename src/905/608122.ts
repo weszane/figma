@@ -3,7 +3,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { Y7 } from "../figma_app/553184";
 import { BrowserInfo } from "../figma_app/778880";
 import { setTagGlobal } from "../905/11";
-import { v5 } from "../figma_app/314264";
+import { getProductType } from "../figma_app/314264";
 import { isActiveAtom } from "../905/617744";
 import { y as _$$y } from "../905/913008";
 import { le } from "../figma_app/527873";
@@ -82,7 +82,7 @@ export class $$m1 extends $$p0 {
       editingFileKey: this.openFileKey(),
       isReadOnly: this._state.mirror.appModel.isReadOnly,
       appType: "editor",
-      productType: v5(this._state.selectedView, null)
+      productType: getProductType(this._state.selectedView, null)
     });
     let E = atomStoreManager.get(isActiveAtom);
     _$$y.showMemoryCrashModal({

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { z5, a6, jM, J, P_ } from "../905/124270";
 import { jN, nX, Aj, S2 } from "../905/171315";
@@ -43,7 +43,7 @@ export function $$y0({
       onClickCallback: e => w(e, null),
       path: [...t, 0],
       rowHeight: CO.SHORT,
-      sideElement: v && v.value !== $L.ALL_FILES ? void 0 : jsx(B, {
+      sideElement: v && v.value !== $L.ALL_FILES ? void 0 : jsx(SvgComponent, {
         svg: _$$A,
         className: Kk
       }),
@@ -59,7 +59,7 @@ export function $$y0({
         onClickCallback: e => w(e, i),
         path: [...t, 1, r],
         rowHeight: CO.SHORT,
-        sideElement: o ? jsx(B, {
+        sideElement: o ? jsx(SvgComponent, {
           svg: _$$A,
           className: Kk
         }) : void 0,

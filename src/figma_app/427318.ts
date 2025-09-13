@@ -7,35 +7,35 @@ import { Uo } from "../figma_app/354658";
 import { TX } from "../figma_app/255679";
 import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "../figma_app/191312";
 import { n as _$$n } from "../905/79930";
-import { U, vt as _$$vt, xQ, I0, m3 } from "../figma_app/45218";
+import { hasClientMeta, ResourceTypeNoComment, isWidget, isPlugin, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { LE as _$$LE } from "../905/71785";
 import { l$ } from "../figma_app/275462";
 export function $$m15(e) {
-  return $$L32(e) || $$P4(e) ? e.resource_type : U(e) ? _$$vt.HUB_FILE : xQ(e) ? _$$vt.WIDGET : I0(e) ? _$$vt.PLUGIN : void throwTypeError(e);
+  return $$L32(e) || $$P4(e) ? e.resource_type : hasClientMeta(e) ? ResourceTypeNoComment.HUB_FILE : isWidget(e) ? ResourceTypeNoComment.WIDGET : isPlugin(e) ? ResourceTypeNoComment.PLUGIN : void throwTypeError(e);
 }
 export function $$g20(e) {
-  return U(e) ? $$W25(e.viewer_mode) : xQ(e) ? vt.WIDGET : I0(e) ? vt.PLUGIN : void throwTypeError(e);
+  return hasClientMeta(e) ? $$W25(e.viewer_mode) : isWidget(e) ? vt.WIDGET : isPlugin(e) ? vt.PLUGIN : void throwTypeError(e);
 }
 export function $$f3(e) {
-  return $$D16(e) ? e.resource_type === vt.UI_KIT && TX(e.content.hub_file?.id) : U(e) && e.viewer_mode === FTemplateCategoryType.LIBRARY && TX(e.id);
+  return $$D16(e) ? e.resource_type === vt.UI_KIT && TX(e.content.hub_file?.id) : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.LIBRARY && TX(e.id);
 }
 export function $$E22(e) {
-  return $$D16(e) ? e.resource_type === vt.SLIDE_TEMPLATE : U(e) && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
+  return $$D16(e) ? e.resource_type === vt.SLIDE_TEMPLATE : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
 }
 export function $$y10(e) {
-  return $$D16(e) ? e.resource_type === vt.PROTOTYPE : U(e) && e.viewer_mode === FTemplateCategoryType.PROTOTYPE;
+  return $$D16(e) ? e.resource_type === vt.PROTOTYPE : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.PROTOTYPE;
 }
 export function $$b9(e) {
   return e.resource_type === vt.COOPER_TEMPLATE_ASSET;
 }
 export function $$T31(e) {
-  return $$L32(e) ? e.resource_type === vt.COOPER_TEMPLATE_FILE : U(e) && e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE;
+  return $$L32(e) ? e.resource_type === vt.COOPER_TEMPLATE_FILE : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE;
 }
 export function $$I0(e) {
-  return $$L32(e) ? e.resource_type === vt.WIDGET : xQ(e);
+  return $$L32(e) ? e.resource_type === vt.WIDGET : isWidget(e);
 }
 export function $$S17(e) {
-  return $$D16(e) ? e.resource_type === vt.PLUGIN : I0(e);
+  return $$D16(e) ? e.resource_type === vt.PLUGIN : isPlugin(e);
 }
 export function $$v24(e) {
   return $$S17(e) || $$I0(e);
@@ -46,16 +46,16 @@ export function $$A29(e) {
   return !!t && !!t.publishing_status && [FPublicationStatusType.ORG_PRIVATE, FPublicationStatusType.ORG_PRIVATE_PENDING_PUBLIC].includes(t.publishing_status);
 }
 export function $$x18(e) {
-  return $$D16(e) ? e.resource_type === vt.SITE_TEMPLATE : U(e) && e.viewer_mode === FTemplateCategoryType.SITE_TEMPLATE;
+  return $$D16(e) ? e.resource_type === vt.SITE_TEMPLATE : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.SITE_TEMPLATE;
 }
 export function $$N34(e) {
-  return $$D16(e) ? e.resource_type === vt.FIGMAKE_TEMPLATE : U(e) && e.viewer_mode === FTemplateCategoryType.FIGMAKE_TEMPLATE;
+  return $$D16(e) ? e.resource_type === vt.FIGMAKE_TEMPLATE : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.FIGMAKE_TEMPLATE;
 }
 export function $$C12(e) {
   return void 0 !== $$F23(e);
 }
 export function $$w11(e, t) {
-  return $$D16(e) ? e.resource_type === vt.FIGJAM_TEMPLATE && m3(t) : U(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD && m3(e);
+  return $$D16(e) ? e.resource_type === vt.FIGJAM_TEMPLATE && hasMonetizedResourceMetadata(t) : hasClientMeta(e) && e.viewer_mode === FTemplateCategoryType.WHITEBOARD && hasMonetizedResourceMetadata(e);
 }
 function O(e) {
   return !!e.publishing_status && [FPublicationStatusType.ORG_PRIVATE, FPublicationStatusType.ORG_PRIVATE_PENDING_PUBLIC].includes(e.publishing_status);
@@ -83,13 +83,13 @@ export function $$M28(e) {
   });
 }
 export function $$F23(e) {
-  return null == e ? void 0 : $$D16(e) ? e.content.hub_file : U(e) ? e : void 0;
+  return null == e ? void 0 : $$D16(e) ? e.content.hub_file : hasClientMeta(e) ? e : void 0;
 }
 export function $$j21(e) {
-  return $$D16(e) ? e.content.plugin : I0(e) ? e : void 0;
+  return $$D16(e) ? e.content.plugin : isPlugin(e) ? e : void 0;
 }
 export function $$U30(e) {
-  return $$D16(e) ? e.content.widget : xQ(e) ? e : void 0;
+  return $$D16(e) ? e.content.widget : isWidget(e) ? e : void 0;
 }
 export function $$B1(e) {
   return $$S17(e) ? $$j21(e) : $$I0(e) ? $$U30(e) : void 0;
@@ -219,9 +219,9 @@ export function $$Y8(e) {
   }
 }
 export let $$$19 = {
-  [_$$vt.HUB_FILE]: Uo.FILE,
-  [_$$vt.PLUGIN]: Uo.PLUGIN,
-  [_$$vt.WIDGET]: Uo.WIDGET
+  [ResourceTypeNoComment.HUB_FILE]: Uo.FILE,
+  [ResourceTypeNoComment.PLUGIN]: Uo.PLUGIN,
+  [ResourceTypeNoComment.WIDGET]: Uo.WIDGET
 };
 export function $$X33() {
   return function () {

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Gw, FB } from "../vendor/149334";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Kf, Jk } from "../figma_app/99826";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { IT, M4 } from "../905/713695";
 import { $ } from "../905/479092";
@@ -45,7 +45,7 @@ export function $$g1({
     }),
     className: p,
     src: r
-  }) : jsx(B, {
+  }) : jsx(SvgComponent, {
     svg: A,
     className: "link_favicon--faviconPlaceholder--CFVEV"
   });

@@ -2,7 +2,7 @@ import { sha1Hex } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ET, qW } from "../905/623179";
 import { reportError } from "../905/11";
-import { BL } from "../905/380385";
+import { isFeedPostComposer } from "../905/380385";
 import { CN } from "../905/966582";
 import { J } from "../905/375499";
 import { l as _$$l } from "../905/348437";
@@ -78,8 +78,8 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
     file_name: A
   };
   let x = sha1Hex(thumbnailByteArray ?? y);
-  let S = BL(e) ? J.post(h, b, x, f, E) : _$$l.post(g, h, b, x, f, E);
-  let w = BL(e) ? _$$e.WAYFINDING : _$$e.FEEDBACK;
+  let S = isFeedPostComposer(e) ? J.post(h, b, x, f, E) : _$$l.post(g, h, b, x, f, E);
+  let w = isFeedPostComposer(e) ? _$$e.WAYFINDING : _$$e.FEEDBACK;
   return S.then(n => {
     if (200 !== n.status) {
       p(CN);
@@ -97,7 +97,7 @@ export async function $$m1(e, t, i, p, m, h, g, f, A) {
       isUploading: !0
     };
     t(d);
-    let c = BL(e) ? "uploadImageFeedCommentAttachment" : "uploadImageFileCommentAttachment";
+    let c = isFeedPostComposer(e) ? "uploadImageFeedCommentAttachment" : "uploadImageFileCommentAttachment";
     let u = Promise.all([ET(w, `${c}.image`, n.data.meta.image_presigned_post.upload_url, n.data.meta.image_presigned_post.fields, y, h), ET(w, `${c}.thumbnail`, n.data.meta.thumbnail_presigned_post.upload_url, n.data.meta.thumbnail_presigned_post.fields, thumbnailByteArray ?? y, h)]);
     i(e => ({
       ...e,

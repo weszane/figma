@@ -6,11 +6,11 @@ import o from "classnames";
 import { colorToRgbaString } from "../figma_app/191804";
 import { D8 } from "../905/511649";
 import { Point } from "../905/736624";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { getI18nString } from "../905/303541";
 import { jS, Pv } from "../905/619652";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Cz } from "../figma_app/153399";
 import { A as _$$A } from "../1617/954184";
 import { A as _$$A2 } from "../1617/546131";
@@ -85,7 +85,7 @@ export let $$L0 = forwardRef(({
         onClick: o,
         recordingKey: d,
         "data-tooltip-show-above": !0,
-        "data-tooltip-type": u ? Ib.TEXT : void 0,
+        "data-tooltip-type": u ? KindEnum.TEXT : void 0,
         "data-tooltip": u,
         "data-testid": "colorCircle",
         "data-clickable": !0
@@ -119,7 +119,7 @@ export function $$P1({
         "aria-label": c,
         htmlAttributes: {
           "data-tooltip": o,
-          "data-tooltip-type": o ? Ib.TEXT : void 0,
+          "data-tooltip-type": o ? KindEnum.TEXT : void 0,
           "data-tooltip-show-above": !0,
           "data-clickable": !0,
           "data-testid": "colorCircle"
@@ -148,7 +148,7 @@ export function $$D2({
 }) {
   return jsx(D8, {
     ...(i ? {} : {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("whiteboard.colors.custom"),
       "data-tooltip-show-above": !0
     }),
@@ -186,7 +186,7 @@ export function $$k5({
   return jsx("div", {
     className: l()(E, "large" === c && N),
     children: jsx("div", {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": a,
       "data-tooltip-offset-y": o,
       "data-tooltip-show-above": !0,
@@ -237,7 +237,7 @@ let $$M4 = forwardRef(({
       onPointerUp: s,
       recordingKey: o,
       "data-tooltip-show-above": !0,
-      "data-tooltip-type": d ? Ib.TEXT : void 0,
+      "data-tooltip-type": d ? KindEnum.TEXT : void 0,
       "data-tooltip": d
     })
   })
@@ -272,7 +272,7 @@ let $$F3 = forwardRef(({
     },
     onMouseEnter: d,
     onMouseLeave: c,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("whiteboard.delightful_toolbar.custom_upload"),
     "data-tooltip-show-above": !0,
     children: [jsx($$M4, {
@@ -284,7 +284,7 @@ let $$F3 = forwardRef(({
       ref: f
     }), s && jsx("div", {
       className: "swatch--swatchOverlayContainer--0Ye8z",
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: _$$A,
         style: {
           fill: "dark" === t ? "white" : void 0

@@ -6,7 +6,7 @@ import { Xr, useAtomWithSubscription, atomStoreManager } from "../figma_app/2735
 import { debugState } from "../905/407919";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl, isGovCluster, getLocaleFallbacks } from "../figma_app/169182";
-import { lt } from "../figma_app/459490";
+import { isAIFeaturesDisabled } from "../figma_app/459490";
 import { CY } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
@@ -15,7 +15,7 @@ import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { d2 } from "../figma_app/579169";
-import { Z } from "../905/296690";
+import { orgSubscriptionAtom } from "../905/296690";
 import { fullscreenValue } from "../figma_app/455680";
 import { getObservableValue } from "../figma_app/84367";
 import { Me } from "../figma_app/598018";
@@ -107,12 +107,12 @@ export function $$H1({
   }();
   let v = useDispatch();
   let T = x.data === qo.ORG;
-  let S = atomStoreManager.get(Z);
+  let S = atomStoreManager.get(orgSubscriptionAtom);
   let j = atomStoreManager.get(Me);
   let k = debugState.getState().openFile;
   let N = !k || !k.canEdit;
   let A = isGovCluster();
-  let O = lt({
+  let O = isAIFeaturesDisabled({
     currentOrg: S,
     currentTeam: j,
     isViewer: N

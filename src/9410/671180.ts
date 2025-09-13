@@ -6,7 +6,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { DraftState } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { sendBatchedHistograms } from "../905/485103";
 import { observabilityClient } from "../905/602906";
 import { reportError, NU } from "../905/11";
@@ -231,7 +231,7 @@ export function $$E1({
       T.current.isRunning = !1;
     }
   }, [e, g, C]);
-  let O = _$$A(A, 500, {
+  let O = useDebouncedCallback(A, 500, {
     leading: !0,
     maxWait: 1e3
   });

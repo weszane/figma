@@ -3,7 +3,7 @@ import { useEffect, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { HistoryChangesBindings, FileSourceType } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
@@ -19,7 +19,7 @@ import { tT } from "../905/723791";
 import { reportError } from "../905/11";
 import { Ss } from "../905/720292";
 import { Nf, ec } from "../figma_app/449837";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { renderI18nText } from "../905/303541";
 import { t as _$$t } from "../905/241707";
 import { lW } from "../figma_app/11182";
@@ -169,7 +169,7 @@ export function $$$2({
     windowInnerWidth
   } = _$$l();
   let c = parsePxNumber(compareChangesModalPadding);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: a,
     width: windowInnerWidth - c,
     height: "full",
@@ -233,7 +233,7 @@ export function $$q4(e) {
 export function $$J3() {
   return jsx("div", {
     className: GE,
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   });
 }
 export function $$Z5(e, t) {

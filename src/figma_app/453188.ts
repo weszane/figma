@@ -3,7 +3,7 @@ import { N } from "../905/438674";
 import { c as _$$c } from "../905/486270";
 import { getI18nString } from "../905/303541";
 import { X$ } from "../905/612685";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { eH } from "../figma_app/318590";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -39,7 +39,7 @@ export function $$m0({
         href: X$(hubFileId),
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.instance_panel.open_community_page"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         newTab: !0,
         children: jsxs("div", {

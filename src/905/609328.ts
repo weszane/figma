@@ -10,7 +10,7 @@ import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
 import { j7, oB } from "../905/929976";
 import { sw, rk } from "../figma_app/914957";
-import { EF, Oo, eE } from "../905/709171";
+import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { teamLibraryCache } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
@@ -56,9 +56,9 @@ export function $$I1() {
         dsStyle: n,
         position: a
       }) {
-        if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r();else {
+        if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && compareLibraryItemsAlias(i.style, n)) r();else {
           debug(null != n.content_hash, "style does not have a hash");
-          let i = Oo(n, t) ? n.node_id : StylesBindings.getStyleNodeId(n.key, n.content_hash);
+          let i = compareWithGeneratedKey(n, t) ? n.node_id : StylesBindings.getStyleNodeId(n.key, n.content_hash);
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : teamLibraryCache.getCanvas(n).then(e => {
             Fullscreen.selectExternalStyle(e);
           });
@@ -71,7 +71,7 @@ export function $$I1() {
       },
       hideStyleDetails: r,
       deleteStyle: function (e) {
-        Oo(e, t) && (Fullscreen.deleteNode(e.node_id), fullscreenValue.triggerAction("commit"));
+        compareWithGeneratedKey(e, t) && (Fullscreen.deleteNode(e.node_id), fullscreenValue.triggerAction("commit"));
       }
     };
   }, [e, t, i, hideStyleContextMenu, showStyleContextMenu]);
@@ -95,7 +95,7 @@ export function $$E2({
     if (a.data?.type === "team") return a.data.link;
   }, [a.data]);
   if (s) return null;
-  let f = eE(e, m);
+  let f = compareLibraryItemWithKey(e, m);
   return f || h ? jsx(ms, {
     style: {
       top: t.y,

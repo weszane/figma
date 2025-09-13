@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, memo } from "react";
 import { useDispatch } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { l as _$$l } from "../6401/369764";
 import { AppStateTsApi, RotationType, FlappBindings, PresetType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -246,7 +246,7 @@ export let $$F4 = memo(({
   let u = a && getFeatureFlags().slides_iframe_embedded_prototypes_thumbnail ? {
     backgroundImage: `url(${a})`
   } : {};
-  return e ? jsx(_$$E, {
+  return e ? jsx(ButtonPrimitive, {
     className: f()(d, _$$s.cursorPointer.$),
     style: u,
     onClick: i,

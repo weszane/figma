@@ -1,6 +1,6 @@
 import { V } from '../905/84612';
 import { getI18nString } from '../905/303541';
-import { m as _$$m } from '../905/380385';
+import { isCommentStateActive } from '../905/380385';
 import { x as _$$x } from '../905/437800';
 import { $N, S as _$$S, b9, C_, CA, Fm, Gb, gy, i1, ij, KV, kW, Nz, pd, rC, rX, se, sz, T7, tu, Ud, v3, V_, VH, wH, zn, Zr, ZR } from '../905/540111';
 import { globalPerfTimer } from '../905/542194';
@@ -491,10 +491,10 @@ let T = class e extends HTMLElement {
       });
       (this._lastRenderPosition?.x !== n.x || this._lastRenderPosition?.y !== n.y) && (this.style.setProperty('transform', `translate3d(${n.x}px, ${n.y}px, 0px) scale(var(--scale, 1))`), this._lastRenderPosition = n);
       let a = this._selectionBoxAnchor ? this.getSelectionBoxPosition(n, this._zoomScale, this._selectionBoxAnchor) : null;
-      if (C.updateSelectionBoxById(this, a, `${this.id}_box_main`, !!this._data && !_$$m(this._data.type)), getFeatureFlags().xr_debounce_threshold) {
+      if (C.updateSelectionBoxById(this, a, `${this.id}_box_main`, !!this._data && !isCommentStateActive(this._data.type)), getFeatureFlags().xr_debounce_threshold) {
         for (let e of new Set(Object.keys(this._otherBoundingBoxes).concat(Object.keys(this._lastOtherBoundingBoxes)))) {
           let t = this._otherBoundingBoxes[e];
-          C.updateSelectionBoxById(this, t ? this.getSelectionBoxPositionFromRect(t, this._zoomScale, n) : null, `${this.id}_box_${e}`, !!this._data && !_$$m(this._data.type));
+          C.updateSelectionBoxById(this, t ? this.getSelectionBoxPositionFromRect(t, this._zoomScale, n) : null, `${this.id}_box_${e}`, !!this._data && !isCommentStateActive(this._data.type));
         }
       }
       this._lastPosition = this._position;

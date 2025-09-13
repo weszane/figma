@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { buildUploadUrl } from "../figma_app/169182";
 import { d as _$$d } from "../905/884707";
 import { $$, nR, tB, CY, N_ } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { v } from "../905/755077";
 import { P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -68,14 +68,14 @@ export function $$v3(e) {
       }), jsxs("div", {
         className: GC,
         children: [e.secondaryButton && (e.secondaryButton.spinner ? jsx($$y1, {
-          children: jsx(kt, {})
+          children: jsx(LoadingSpinner, {})
         }) : jsx($$y1, {
           onClick: e.secondaryButton.onClick,
           disabled: e.secondaryButton.disabled,
           dataTestId: e.secondaryButton.dataTestId,
           children: e.secondaryButton.text
         })), e.primaryButton.spinner ? jsx($$A2, {
-          children: jsx(kt, {
+          children: jsx(LoadingSpinner, {
             className: u1
           })
         }) : jsx($$A2, {

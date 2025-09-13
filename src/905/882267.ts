@@ -3,7 +3,7 @@ import { useId, useRef, useCallback, useMemo, useState, useEffect, memo, forward
 import { useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { isNullish } from "../figma_app/95419";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { S as _$$S } from "../905/720922";
 import { D as _$$D } from "../905/716990";
@@ -21,7 +21,7 @@ import { Point } from "../905/736624";
 import { L as _$$L } from "../905/408237";
 import { P as _$$P } from "../905/347284";
 import { ne } from "../figma_app/563413";
-import { B as _$$B, V as _$$V } from "../905/714743";
+import { SvgComponent, V as _$$V } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { S as _$$S2 } from "../figma_app/552746";
@@ -41,7 +41,7 @@ import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { TeamCanAdmin } from "../figma_app/43951";
@@ -50,7 +50,7 @@ import { hasValidSubscription } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { Bi } from "../905/652992";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { If } from "../905/714538";
 import { cn } from "../905/959568";
 import { e0 } from "../905/696396";
@@ -62,7 +62,7 @@ import { Ao } from "../905/748636";
 import { DV } from "../905/739964";
 import { O as _$$O, A as _$$A } from "../905/536006";
 import { getSingletonSceneGraph } from "../905/700578";
-import { A as _$$A2 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { Uh as _$$Uh, K1, YQ } from "../905/956994";
 import { R4, y8, jX, Z7, kh, oh } from "../905/188169";
 import { k as _$$k3, P as _$$P2 } from "../905/437398";
@@ -221,7 +221,7 @@ function eL({
     useEffect(() => {
       n.current || ("string" == typeof e ? s(e) : s(null));
     }, [e, n]);
-    let o = _$$A2(useCallback(e => {
+    let o = useDebouncedCallback(useCallback(e => {
       if (i) return;
       let r = getSingletonSceneGraph().getCurrentPage();
       !((r?.directlySelectedNodes?.length ?? 0) > 50) && e && (n.current || (n.current = !0), t(void 0, {
@@ -264,7 +264,7 @@ function eL({
     z.current?.searchInput?.select();
   }, [eD, z]);
   let eU = Z7(eO, ek, el);
-  let eV = sZ() ?? null;
+  let eV = useCurrentUserOrg() ?? null;
   let eG = selectCurrentFile()?.team ?? null;
   let eH = selectCurrentFile();
   let eW = selectCurrentUser();
@@ -482,7 +482,7 @@ function eL({
         className: "font_picker--fontPickerSearchRow--cnskM",
         children: jsxs("div", {
           className: "font_picker--searchContainer--gbRUl",
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A7,
             className: "font_picker--searchIcon--0a3sK"
           }), jsx(ej, {
@@ -531,7 +531,7 @@ function eL({
               height: `${parseInt(Ep1) * eU.length}px`,
               paddingLeft: "4px"
             },
-            children: jsx(_$$B, {
+            children: jsx(SvgComponent, {
               svg: _$$V(kF)
             })
           }), e$.virtualItems.map(e => {
@@ -557,7 +557,7 @@ function eL({
         })
       }), !!P && null != selectedFontBeforePreviews && jsx("div", {
         className: _$$s.bt1.bSolid.colorBorder.p8.$,
-        children: jsx(IK, {
+        children: jsx(ButtonWide, {
           variant: "secondary",
           onClick: () => {
             tn(void 0, !0, !0);
@@ -672,7 +672,7 @@ let eM = memo(function ({
     "data-tooltip": x ? t.family : void 0,
     "data-tooltip-hide-immediately": !0,
     "data-tooltip-show-right": !0,
-    "data-tooltip-type": x ? Ib.TEXT : void 0,
+    "data-tooltip-type": x ? KindEnum.TEXT : void 0,
     forwardedRef: A,
     id: `${i}-${e.index}`,
     onBlur: k,
@@ -690,7 +690,7 @@ let eM = memo(function ({
       transform: `translateY(${e.start}px)`
     },
     tabIndex: -1,
-    children: [a ? jsx(_$$B, {
+    children: [a ? jsx(SvgComponent, {
       className: ex,
       svg: _$$A4,
       dataTestId: "font-picker-check-icon"
@@ -718,7 +718,7 @@ let eM = memo(function ({
         className: ew,
         children: getI18nString("fullscreen.properties_panel.font_picker.new_font_badge")
       })
-    }) : "", y === _$$O.IS_LOADING || f ? "" : jsx(_$$B, {
+    }) : "", y === _$$O.IS_LOADING || f ? "" : jsx(SvgComponent, {
       className: "font_picker--fontPickerLoadingPreviewCover--h6OmW",
       svg: _$$V(sp)
     })]
@@ -857,7 +857,7 @@ function eG({
       right: 16
     },
     spacing: "12px",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: _$$s.colorIcon.$,
       svg: a
     }), jsx("p", {
@@ -880,7 +880,7 @@ function ez({
     }), jsxs(AutoLayout, {
       spacing: 8,
       verticalAlignItems: "center",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: _$$s.colorIcon.$,
         svg: _$$A6
       }), jsx("div", {
@@ -931,7 +931,7 @@ function eW({
     recordingKey: e,
     onClick: l,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable")
     },
     children: jsx(_$$D, {})

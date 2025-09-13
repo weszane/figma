@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A } from "../6828/313994";
 var a = r;
 export function $$l0({
@@ -11,7 +11,7 @@ export function $$l0({
       "medium_icon--small--XIffS": "small" === e
     }),
     "aria-hidden": !0,
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg: A
     })
   });

@@ -1,78 +1,276 @@
-import { Ip, z } from "../905/239603";
-import { Y9 } from "../figma_app/306946";
-import { iG } from "../905/380385";
-import { PN } from "../905/54385";
-var $$o14 = (e => (e.HUB_FILE = "hub_file", e.PLUGIN = "plugin", e.WIDGET = "widget", e.COMMENT = "comment", e))($$o14 || {});
-var $$l17 = (e => (e.SUBSCRIPTION = "subscription", e.ONE_TIME = "one_time", e))($$l17 || {});
-var $$d13 = (e => (e.DETAIL = "detail", e.INSERTS = "inserts", e.QUICK_ACTIONS = "quick_actions", e.PLUGIN_ROW = "plugin_row", e.REDESIGNED_PLUGIN_ROW = "redesigned_plugin_row", e.SEARCH = "search", e))($$d13 || {});
-var $$c1 = (e => (e[e.NO_USER = 0] = "NO_USER", e[e.NO_PROFILE = 1] = "NO_PROFILE", e))($$c1 || {});
-var $$u23 = (e => (e.HUB_FILE = "hub_file", e.PLUGIN = "plugin", e.WIDGET = "widget", e))($$u23 || {});
-var $$p10 = (e => (e.HUB_FILE = "hub_file", e.PLUGIN = "plugin", e.WIDGET = "widget", e))($$p10 || {});
-export let $$_6 = iG.extend({
+import { z } from 'zod'
+import { ProductStatus } from '../905/54385'
+import { CommentSchema } from '../905/380385'
+import { Y9 as ShelfContentSchema } from '../figma_app/306946'
+import * as Ip from '../figma_app/709165'
+
+/**
+ * ResourceType enum (original: $$o14)
+ */
+export enum ResourceType {
+  HUB_FILE = 'hub_file',
+  PLUGIN = 'plugin',
+  WIDGET = 'widget',
+  COMMENT = 'comment',
+}
+
+/**
+ * PaymentType enum (original: $$l17)
+ */
+export enum PaymentType {
+  SUBSCRIPTION = 'subscription',
+  ONE_TIME = 'one_time',
+}
+
+/**
+ * ShelfViewType enum (original: $$d13)
+ */
+export enum ShelfViewType {
+  DETAIL = 'detail',
+  INSERTS = 'inserts',
+  QUICK_ACTIONS = 'quick_actions',
+  PLUGIN_ROW = 'plugin_row',
+  REDESIGNED_PLUGIN_ROW = 'redesigned_plugin_row',
+  SEARCH = 'search',
+}
+
+/**
+ * NoUserProfileStatus enum (original: $$c1)
+ */
+export enum NoUserProfileStatus {
+  NO_USER = 0,
+  NO_PROFILE = 1,
+}
+
+/**
+ * ResourceTypeNoComment enum (original: $$u23)
+ */
+export enum ResourceTypeNoComment {
+  HUB_FILE = 'hub_file',
+  PLUGIN = 'plugin',
+  WIDGET = 'widget',
+}
+
+/**
+ * ResourceTypeNoComment2 enum (original: $$p10)
+ */
+export enum ResourceTypeNoComment2 {
+  HUB_FILE = 'hub_file',
+  PLUGIN = 'plugin',
+  WIDGET = 'widget',
+}
+
+/**
+ * ExtendedCommentSchema (original: $$_6)
+ */
+export const ExtendedCommentSchema = CommentSchema.extend({
   author: Ip.ignore(),
   parent_id: z.string().nullable(),
   reply_count: z.number(),
   last_replied_at: z.string().nullable(),
   resource_version_id: z.string(),
   message_meta: z.array(Ip.ignore()),
-  rating_value: z.number().optional()
-});
-z.object({
-  plugin: Ip.ignore().nullish(),
-  plugin_install: Ip.ignore().nullish(),
-  whitelisted_plugin: Ip.ignore().nullish(),
-  hub_file: Ip.ignore().nullish(),
-  profile: Ip.ignore().nullish(),
-  community_comment: Ip.ignore().nullish(),
-  widget: Ip.ignore().nullish(),
-  community_resource_payment: Ip.ignore().nullish()
-});
-var h = (e => (e[e.SHOW_404 = 0] = "SHOW_404", e[e.REDIRECT_TO_INTERNAL_PROFILE = 1] = "REDIRECT_TO_INTERNAL_PROFILE", e))(h || {});
-var $$m8 = (e => (e.ALL = "ALL", e.ME = "ME", e.RATINGS_REVIEWS = "RATINGS_REVIEWS", e.COMMENTS = "COMMENTS", e))($$m8 || {});
-var $$g15 = (e => (e.COMMUNITY_LANDING = "community_landing", e.FILE_BROWSER_RECOMMENDED_TEMPLATES = "file_browser_recommended_templates", e.FIGJAM_TEMPLATES_PICKER = "figjam_templates_picker", e.BROWSE_PLUGINS_MODAL = "browse_plugins_modal", e.BROWSE_WIDGETS_MODAL = "browse_widgets_modal", e.CURATED_PAGE = "curated_page", e.NA = "na", e.CONFIG_VOTE = "config_vote", e.COMMUNITY_WIDGETS_PAGE = "community_widgets_page", e.FIGJAM_SIMPLE_TEMPLATES_PICKER = "figjam_simple_templates_picker", e.FIGMA_INSERTS_NUX = "figma_inserts_nux", e.FILE_BROWSER_TEMPLATES_BAR = "file_browser_templates_bar", e.COMMUNITY_LIBRARIES_QUICKSTART = "community_libraries_quickstart", e.FIGJAM_SECTION_PRESET_PICKER = "figjam_section_preset_picker", e.CATEGORY_PAGE = "category_page", e.SLIDES_TEMPLATE_MODAL = "slides_template_modal", e.SITES_TEMPLATE_MODAL = "sites_template_modal", e.MAKE_PAGE_FEED = "make_page_feed", e.BUZZ_TEMPLATE_PICKER = "buzz_template_picker", e))($$g15 || {});
-var $$f18 = (e => (e.PM = "PM", e.DES = "DES", e.ENG = "ENG", e.MKT = "MKT", e.UR = "UR", e.OTH = "OTH", e.ALL = "ALL", e.STARTER = "STARTER", e))($$f18 || {});
-export function $$E24(e) {
-  return null != e && "is_widget" in e && e.is_widget;
+  rating_value: z.number().optional(),
+})
+
+/**
+ * ProfileRedirectStatus enum (original: h)
+ */
+export enum ProfileRedirectStatus {
+  SHOW_404 = 0,
+  REDIRECT_TO_INTERNAL_PROFILE = 1,
 }
-export function $$y5(e) {
-  return null != e && "current_plugin_version_id" in e && !e.is_widget;
+
+/**
+ * CommentTabType enum (original: $$m8)
+ */
+export enum CommentTabType {
+  ALL = 'ALL',
+  ME = 'ME',
+  RATINGS_REVIEWS = 'RATINGS_REVIEWS',
+  COMMENTS = 'COMMENTS',
 }
-export function $$b20(e) {
-  return "is_widget" in e || "current_plugin_version_id" in e;
+
+/**
+ * CommunityPageType enum (original: $$g15)
+ */
+export enum CommunityPageType {
+  COMMUNITY_LANDING = 'community_landing',
+  FILE_BROWSER_RECOMMENDED_TEMPLATES = 'file_browser_recommended_templates',
+  FIGJAM_TEMPLATES_PICKER = 'figjam_templates_picker',
+  BROWSE_PLUGINS_MODAL = 'browse_plugins_modal',
+  BROWSE_WIDGETS_MODAL = 'browse_widgets_modal',
+  CURATED_PAGE = 'curated_page',
+  NA = 'na',
+  CONFIG_VOTE = 'config_vote',
+  COMMUNITY_WIDGETS_PAGE = 'community_widgets_page',
+  FIGJAM_SIMPLE_TEMPLATES_PICKER = 'figjam_simple_templates_picker',
+  FIGMA_INSERTS_NUX = 'figma_inserts_nux',
+  FILE_BROWSER_TEMPLATES_BAR = 'file_browser_templates_bar',
+  COMMUNITY_LIBRARIES_QUICKSTART = 'community_libraries_quickstart',
+  FIGJAM_SECTION_PRESET_PICKER = 'figjam_section_preset_picker',
+  CATEGORY_PAGE = 'category_page',
+  SLIDES_TEMPLATE_MODAL = 'slides_template_modal',
+  SITES_TEMPLATE_MODAL = 'sites_template_modal',
+  MAKE_PAGE_FEED = 'make_page_feed',
+  BUZZ_TEMPLATE_PICKER = 'buzz_template_picker',
 }
-export function $$T9(e) {
-  return null != e && "client_meta" in e;
+
+/**
+ * UserRole enum (original: $$f18)
+ */
+export enum UserRole {
+  PM = 'PM',
+  DES = 'DES',
+  ENG = 'ENG',
+  MKT = 'MKT',
+  UR = 'UR',
+  OTH = 'OTH',
+  ALL = 'ALL',
+  STARTER = 'STARTER',
 }
-export function $$I3(e) {
-  return !!e && "publishScope" in e;
+
+/**
+ * Checks if resource is a widget (original: $$E24)
+ * @param resource
+ */
+export function isWidget(resource: any): boolean {
+  return resource != null && 'is_widget' in resource && resource.is_widget
 }
-export function $$S11(e) {
-  return "fig_file_metadata" in e;
+
+/**
+ * Checks if resource is a plugin (original: $$y5)
+ * @param resource
+ */
+export function isPlugin(resource: any): boolean {
+  return resource != null && 'current_plugin_version_id' in resource && !resource.is_widget
 }
-export function $$v0(e) {
-  return ($$A19(e) || $$C25(e)) && $$T9(e) && "whiteboard" !== e.viewer_mode;
+
+/**
+ * Checks if resource is either widget or plugin (original: $$b20)
+ * @param resource
+ */
+export function isWidgetOrPlugin(resource: any): boolean {
+  return 'is_widget' in resource || 'current_plugin_version_id' in resource
 }
-export function $$A19(e) {
-  return !!e?.monetized_resource_metadata;
+
+/**
+ * Checks if resource has client meta (original: $$T9)
+ * @param resource
+ */
+export function hasClientMeta(resource: any): boolean {
+  return resource != null && 'client_meta' in resource
 }
-export function $$x4(e) {
-  return $$C25(e) || $$A19(e);
+
+/**
+ * Checks if resource has publishScope (original: $$I3)
+ * @param resource
+ */
+export function hasPublishScope(resource: any): boolean {
+  return !!resource && 'publishScope' in resource
 }
-export function $$N7(e) {
-  return !!e?.monetized_resource_metadata?.has_freemium_code;
+
+/**
+ * Checks if resource has fig_file_metadata (original: $$S11)
+ * @param resource
+ */
+export function hasFigFileMetadata(resource: any): boolean {
+  return 'fig_file_metadata' in resource
 }
-export function $$C25(e) {
-  return "third_party_m10n_status" in e && e.third_party_m10n_status === PN.FLAGGED || "is_3rd_party_monetized" in e && !!e.is_3rd_party_monetized;
+
+/**
+ * Checks if resource is monetized and has client meta, and is not a whiteboard (original: $$v0)
+ * @param resource
+ */
+export function isMonetizedWithClientMeta(resource: any): boolean {
+  return (hasMonetizedResourceMetadata(resource) || isThirdPartyMonetized(resource))
+    && hasClientMeta(resource)
+    && resource.viewer_mode !== 'whiteboard'
 }
-export function $$w2(e) {
-  $$T9(e) || $$E24(e);
-  return e;
+
+/**
+ * Checks if resource has monetized_resource_metadata (original: $$A19)
+ * @param resource
+ */
+export function hasMonetizedResourceMetadata(resource: any): boolean {
+  return !!resource?.monetized_resource_metadata
 }
-var $$O12 = (e => (e.POST_COMPOSER = "POST_COMPOSER", e.NAVBAR = "NAVBAR", e.RECENT_FILES_DIRECT_LINK = "RECENT_FILES_DIRECT_LINK", e.IFRAME = "IFRAME", e))($$O12 || {});
-var $$R22 = (e => (e.ACTIVE = "active", e.INACTIVE = "inactive", e))($$R22 || {});
-var $$L16 = (e => (e.PASTE = "paste", e.DROP = "drop", e.FILE_INPUT = "file_input", e))($$L16 || {});
-var P = (e => (e[e.TRY_IT_OUT = 0] = "TRY_IT_OUT", e[e.OPEN = 1] = "OPEN", e))(P || {});
-z.object({
+
+/**
+ * Checks if resource is monetized or third party monetized (original: $$x4)
+ * @param resource
+ */
+export function isMonetizedOrThirdParty(resource: any): boolean {
+  return isThirdPartyMonetized(resource) || hasMonetizedResourceMetadata(resource)
+}
+
+/**
+ * Checks if resource has freemium code (original: $$N7)
+ * @param resource
+ */
+export function hasFreemiumCode(resource: any): boolean {
+  return !!resource?.monetized_resource_metadata?.has_freemium_code
+}
+
+/**
+ * Checks if resource is third party monetized (original: $$C25)
+ * @param resource
+ */
+export function isThirdPartyMonetized(resource: any): boolean {
+  return (
+    ('third_party_m10n_status' in resource && resource.third_party_m10n_status === ProductStatus.FLAGGED)
+    || ('is_3rd_party_monetized' in resource && !!resource.is_3rd_party_monetized)
+  )
+}
+
+/**
+ * Returns resource after checking client meta or widget (original: $$w2)
+ * @param resource
+ */
+export function getResourceWithMeta(resource: any): any {
+  hasClientMeta(resource) || isWidget(resource)
+  return resource
+}
+
+/**
+ * ComposerLocation enum (original: $$O12)
+ */
+export enum ComposerLocation {
+  POST_COMPOSER = 'POST_COMPOSER',
+  NAVBAR = 'NAVBAR',
+  RECENT_FILES_DIRECT_LINK = 'RECENT_FILES_DIRECT_LINK',
+  IFRAME = 'IFRAME',
+}
+
+/**
+ * ResourceStatus enum (original: $$R22)
+ */
+export enum ResourceStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+}
+
+/**
+ * FileInputType enum (original: $$L16)
+ */
+export enum FileInputType {
+  PASTE = 'paste',
+  DROP = 'drop',
+  FILE_INPUT = 'file_input',
+}
+
+/**
+ * TryItOutStatus enum (original: P)
+ */
+export enum TryItOutStatus {
+  TRY_IT_OUT = 0,
+  OPEN = 1,
+}
+
+/**
+ * RatingStatsSchema (anonymous, not exported originally)
+ */
+export const RatingStatsSchema = z.object({
   id: z.string().nullish(),
   hubFileId: z.string().nullish(),
   pluginId: z.string().nullish(),
@@ -85,9 +283,13 @@ z.object({
   totalRatings: z.number(),
   avgRating: z.number().nullish(),
   createdAt: z.date().nullish(),
-  updatedAt: z.date().nullish()
-});
-export let $$D21 = z.object({
+  updatedAt: z.date().nullish(),
+})
+
+/**
+ * ShelfSchema (original: $$D21)
+ */
+export const ShelfSchema = z.object({
   id: z.string(),
   updated_at: z.string(),
   title: z.string(),
@@ -95,34 +297,36 @@ export let $$D21 = z.object({
   description: z.string(),
   order: z.number().optional(),
   shelf_meta: z.any(),
-  shelf_content: Y9,
+  shelf_content: ShelfContentSchema,
   total_shelf_content_count: z.number().optional(),
   url_slug: z.string().nullable(),
-  i18n_meta: z.record(z.string())
-});
-export const BS = $$v0;
-export const CM = $$c1;
-export const Ch = $$w2;
-export const Fl = $$I3;
-export const H0 = $$x4;
-export const I0 = $$y5;
-export const KS = $$_6;
-export const PM = $$N7;
-export const Qv = $$m8;
-export const U = $$T9;
-export const Ug = $$p10;
-export const Uz = $$S11;
-export const Zm = $$O12;
-export const aL = $$d13;
-export const bD = $$o14;
-export const cS = $$g15;
-export const dj = $$L16;
-export const hE = $$l17;
-export const iF = $$f18;
-export const m3 = $$A19;
-export const mr = $$b20;
-export const nn = $$D21;
-export const po = $$R22;
-export const vt = $$u23;
-export const xQ = $$E24;
-export const zF = $$C25;
+  i18n_meta: z.record(z.string()),
+})
+
+// Export refactored names
+export const BS = isMonetizedWithClientMeta
+export const CM = NoUserProfileStatus
+export const Ch = getResourceWithMeta
+export const Fl = hasPublishScope
+export const H0 = isMonetizedOrThirdParty
+export const I0 = isPlugin
+export const KS = ExtendedCommentSchema
+export const PM = hasFreemiumCode
+export const Qv = CommentTabType
+export const U = hasClientMeta
+export const Ug = ResourceTypeNoComment2
+export const Uz = hasFigFileMetadata
+export const Zm = ComposerLocation
+export const aL = ShelfViewType
+export const bD = ResourceType
+export const cS = CommunityPageType
+export const dj = FileInputType
+export const hE = PaymentType
+export const iF = UserRole
+export const m3 = hasMonetizedResourceMetadata
+export const mr = isWidgetOrPlugin
+export const nn = ShelfSchema
+export const po = ResourceStatus
+export const vt = ResourceTypeNoComment
+export const xQ = isWidget
+export const zF = isThirdPartyMonetized

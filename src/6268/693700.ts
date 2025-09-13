@@ -18,7 +18,7 @@ import { I as _$$I } from "../6658/358099";
 import { s as _$$s } from "../6658/286262";
 import { b as _$$b } from "../905/217163";
 import { B as _$$B } from "../905/506188";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { sD, P8 } from "../1250/807901";
 import { i7, yO, oE, yS, LU, jU, RA, T$, sp, of, f_, v6, Kk, I$, V3, TQ, b0, IO, fI, $M, WD, fo, AT, YS, MO, K4, WX, Gh, t5, OC, dg, L3, hP, YQ, Gd, xw, SR, dl } from "../6268/430335";
 import { Wi, JR } from "../figma_app/162641";
@@ -104,7 +104,7 @@ function T({
   }, [i, o, c]);
   return n ? jsx("span", {
     className: i7,
-    children: jsx(kt, {})
+    children: jsx(LoadingSpinner, {})
   }) : jsx("span", {
     className: i7,
     children: r
@@ -431,7 +431,7 @@ function B({
     if ("connected" === e.code_connect_info.v1.state) try {
       let o = JSON.parse(e.code_connect_info.v1.figmadoc ?? "");
       n = Array.isArray(o) ? o[0] : o;
-    } catch (e) { }
+    } catch (e) {}
     let o = k && _$$I(e) === _$$I(k);
     let t = null;
     let s = null;
@@ -752,7 +752,7 @@ export function $$W0({
     }), jsx(w, {
       selectedCount: (A ?? new Set()).size,
       onBulkConnectComponents: () => {
-        (K ?? (() => { }))({
+        (K ?? (() => {}))({
           selectedComponents: n.filter(e => (A ?? new Set()).has(e.component.node_id)),
           bulkSuggestions: D,
           trackingProps: {
@@ -765,7 +765,7 @@ export function $$W0({
         F?.(new Set());
       },
       onBulkIgnoreComponents: () => {
-        (K ?? (() => { }))({
+        (K ?? (() => {}))({
           selectedComponents: n.filter(e => (A ?? new Set()).has(e.component.node_id)),
           bulkSuggestions: D,
           trackingProps: {

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription, useLoggedSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { FileBrowserSidebarData } from "../figma_app/43951";
 function c(e) {
@@ -11,7 +11,7 @@ function c(e) {
     newValue
   } = useMemo(() => ({
     oldValue: e.transform(e => (e.org?.workspaces?.length || 0) > 0),
-    newValue: e.transform(e => oA(e.org?.hasWorkspaces, null))
+    newValue: e.transform(e => getResourceDataOrFallback(e.org?.hasWorkspaces, null))
   }), [e]);
   useShadowReadLoaded({
     oldValue,

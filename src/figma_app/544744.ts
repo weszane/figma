@@ -1,7 +1,7 @@
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { N } from "../figma_app/59312";
 import { aV } from "../figma_app/722362";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { oh } from "../905/526509";
 import { sT } from "../figma_app/955650";
 import { gT } from "../figma_app/822177";
@@ -10,7 +10,7 @@ export function $$c2(e = {}) {
     isEnabledForViewers
   } = e;
   let r = aV();
-  let n = Td();
+  let n = useIsCanvasEditDisabled();
   let o = N();
   return r || n && !isEnabledForViewers || o && !isEnabledForViewers;
 }
@@ -21,7 +21,7 @@ export function $$u1() {
   return !!t || r;
 }
 export function $$p0() {
-  let e = Td();
+  let e = useIsCanvasEditDisabled();
   let t = useAtomWithSubscription(gT);
   return !e && !t;
 }

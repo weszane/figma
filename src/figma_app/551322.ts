@@ -13,7 +13,7 @@ import { reportError } from "../905/11";
 import { Ve, c$ } from "../figma_app/236327";
 import { tM, vd } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -33,7 +33,7 @@ import { MoveDraftsTeamData, MoveDraftsNudgeV2OverlayRecentFilesView, MoveDrafts
 import { YN } from "../figma_app/349248";
 import { vL, Bi } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { eg, O0, Lh } from "../figma_app/452252";
 import { s as _$$s2 } from "../figma_app/825649";
@@ -307,9 +307,9 @@ export function $$ee2({
             })
           }), $(e) && jsx("div", {
             className: "move_drafts_nudge_rcs_steps--warningIcon--KHIj5",
-            children: jsx(_$$B, {
+            children: jsx(SvgComponent, {
               svg: _$$A,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("file_browser.file_move.paywall_team_tooltip")
             })
           })]

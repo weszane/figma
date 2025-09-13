@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { N } from "../905/7587";
 import { A as _$$A } from "../905/410311";
 import o from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { e6 } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { nl, Pf } from "../905/590952";
@@ -13,7 +13,7 @@ import { getPermissionLevelName } from "../figma_app/12796";
 import { useCurrentPlanUser, useIsAdminUser } from "../figma_app/465071";
 import { AccessLevelEnum } from "../905/557142";
 import { ShareAction } from "../figma_app/707808";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { HU } from "../figma_app/926061";
 import { o as _$$o } from "../905/382697";
 import { zn, H, $S, NE, UU, yR, iA, QW, qD, mL, C1 as _$$C, e0, my, dz, dT, kk, f1, Zk } from "../905/372455";
@@ -66,13 +66,13 @@ export function $$x2(e) {
           e.setSelectedRoleToUpdateSeat && e.setSelectedRoleToUpdateSeat();
           o(ShareAction.UPDATE_SEAT);
         },
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("role_row.upgrade_seat.tooltip"),
         "data-tooltip-timeout-delay": 50,
         "aria-label": getI18nString("role_row.upgrade_seat"),
         children: [jsxs("span", {
           className: iA,
-          children: [jsx(B, {
+          children: [jsx(SvgComponent, {
             className: QW,
             svg: _$$A2
           }), jsx(N, {
@@ -80,17 +80,17 @@ export function $$x2(e) {
           })]
         }), getI18nString("role_row.upgrade_seat")]
       }) : jsxs(Fragment, {
-        children: [e.warningMessage && jsx(B, {
+        children: [e.warningMessage && jsx(SvgComponent, {
           className: QW,
           svg: _$$A2,
           "data-tooltip-timeout-delay": 50,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": e.warningMessage,
           "aria-label": e.warningMessage
-        }), e.warningTooltipId && jsx(B, {
+        }), e.warningTooltipId && jsx(SvgComponent, {
           className: QW,
           svg: _$$A2,
-          "data-tooltip-type": Ib.SPECIAL,
+          "data-tooltip-type": KindEnum.SPECIAL,
           "data-tooltip": e.warningTooltipId,
           "data-tooltip-timeout-delay": 50,
           "data-tooltip-interactive": !0,
@@ -128,7 +128,7 @@ export function $$S0(e) {
   return jsxs("div", {
     className: e0,
     children: [jsx("img", {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": user.email,
       src: user.img_url,
       className: my,
@@ -154,14 +154,14 @@ export function $$w3(e) {
   } = e;
   let r = !1 === pending && user.img_url;
   return r && !pending ? jsx("img", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e.user.email,
     src: r,
     className: l()(my, e.small && dT, e.border && kk),
     alt: ""
   }, `avatar-${e.id}`) : jsx("div", {
     className: l()(f1, e.small && dT, e.border && kk),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e.user.email,
     children: jsx(_$$A, {
       className: l()(Zk, e.small && dT)

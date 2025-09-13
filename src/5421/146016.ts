@@ -23,7 +23,7 @@ import { ZM } from "../figma_app/505098";
 import { useIsFullscreenSitesView } from "../905/561485";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { areSessionLocalIDsEqual, defaultSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { Y1 } from "../905/143116";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -328,7 +328,7 @@ function Y({
     "prototype_action_verbose_title--iconContainer--jqarD": !0,
     "prototype_action_verbose_title--iconContainerUI3--yBP0-": a
   });
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     className: C,
     onClick: r,
     children: jsxs(Y1, {

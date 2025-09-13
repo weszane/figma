@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { r as _$$r } from "../905/534055";
 import { s as _$$s } from "../905/328136";
@@ -16,7 +16,7 @@ import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
 import { k as _$$k } from "../905/882646";
 import { selectCurrentUser } from "../905/372672";
-import { xQ } from "../figma_app/45218";
+import { isWidget } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
 import { WW } from "../figma_app/764679";
 import { x as _$$x } from "../905/423181";
@@ -36,7 +36,7 @@ function T(e) {
     PluginTrySwitchEditorDropdown
   } = WW(e.resource, "left", e.viewContext);
   let d = useRef(null);
-  let c = xQ(e.resource);
+  let c = isWidget(e.resource);
   let u = getPluginVersion(e.resource);
   let m = u.manifest.editorType?.[0] ?? ManifestEditorType.FIGMA;
   return e.isDisabled ? jsx(x8, {
@@ -148,7 +148,7 @@ export function $$L1({
       children: r ? jsx(dY.ButtonWrapper, {
         children: jsxs("div", {
           className: m_,
-          children: [jsx(B, {
+          children: [jsx(SvgComponent, {
             className: hz,
             svg: _$$A2
           }), renderI18nText("community.cards.private"), "OrgWidgetsView" === i && jsx(_$$r, {

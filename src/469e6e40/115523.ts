@@ -3,7 +3,7 @@ import { useState, useMemo, forwardRef, useEffect, useRef, useCallback } from "r
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { AutoLayout } from "../905/470281";
 import { wR } from "../905/346715";
 import { b as _$$b } from "../905/168239";
@@ -21,7 +21,7 @@ import { K as _$$K2 } from "../4452/401058";
 import { A as _$$A } from "../4452/239888";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { d as _$$d } from "../c5e2cae0/368426";
 import { Q as _$$Q } from "../905/553231";
 import I from "classnames";
@@ -37,7 +37,7 @@ import { jT } from "../4452/650793";
 import { e as _$$e } from "../905/295932";
 import { zE, Ex, vj } from "../figma_app/919079";
 import { t as _$$t3 } from "../905/150656";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Bs, Hg } from "../905/672745";
 import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
@@ -46,7 +46,7 @@ import { N as _$$N } from "../905/438674";
 import { _ as _$$_ } from "../7021/243271";
 import { A as _$$A2 } from "../905/920142";
 import { h1 } from "../905/986103";
-import { B as _$$B2 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { nl, Pf } from "../905/590952";
 import { Lg, Lq } from "../figma_app/392626";
 import { h as _$$h } from "../905/973388";
@@ -177,7 +177,7 @@ function ey(e) {
       })
     })]
   });
-  let N = jsxs(_$$E, {
+  let N = jsxs(ButtonPrimitive, {
     className: T()(K, _$$s.mb8.$),
     onClick: e.openPeopleTab,
     children: [jsxs("div", {
@@ -218,13 +218,13 @@ function ey(e) {
       })]
     }), jsx("span", {
       className: W,
-      children: jsx(_$$B2, {
+      children: jsx(SvgComponent, {
         svg: _$$A3
       })
     })]
   });
   let I = jsxs(Fragment, {
-    children: [N, isHostPlanAdmin && resourceTeamId && jsxs(_$$E, {
+    children: [N, isHostPlanAdmin && resourceTeamId && jsxs(ButtonPrimitive, {
       className: T()(K, _$$s.mb4.$),
       onClick: () => {
         resourceTeamId && h(showModalHandler({
@@ -255,7 +255,7 @@ function ey(e) {
         })]
       }), jsx("span", {
         className: W,
-        children: jsx(_$$B2, {
+        children: jsx(SvgComponent, {
           svg: _$$A3
         })
       })]
@@ -271,7 +271,7 @@ function ey(e) {
       })]
     }), S, w, jsx("div", {
       className: _$$s.py12.$,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "destructiveSecondary",
         onClick: () => {
           if (!resourceTeamId) {
@@ -309,7 +309,7 @@ function ey(e) {
       })]
     }), w, jsx("div", {
       className: _$$s.py12.$,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "destructiveSecondary",
         onClick: () => {
           h(showModalHandler({
@@ -342,7 +342,7 @@ function ey(e) {
         }) : getI18nString("resource_connection.admin_sent_a_copy_no_admin_name", {
           connectedPlanName: connectingPlan.name
         }) : renderI18nText("resource_connection.you_can_send_a_copy", {
-          shareACopyButton: jsx($n, {
+          shareACopyButton: jsx(Button, {
             variant: "link",
             onClick: () => {
               resourceTeamId && h(showModalHandler({
@@ -363,7 +363,7 @@ function ey(e) {
     })]
   });
   let D = projectDescription && "" !== projectDescription;
-  let P = jsxs(_$$E, {
+  let P = jsxs(ButtonPrimitive, {
     className: K,
     onClick: () => {
       h(showModalHandler({
@@ -390,7 +390,7 @@ function ey(e) {
       })]
     }), jsx("span", {
       className: W,
-      children: jsx(_$$B2, {
+      children: jsx(SvgComponent, {
         svg: _$$A3
       })
     })]
@@ -572,7 +572,7 @@ function eO(e) {
       children: [jsx("div", {
         className: "connected_projects_flyout--description--yNN6h",
         children: isHostPlanAdmin ? renderI18nText("resource_connection.people.manage_peoples_access_on_the_project_page", {
-          projectPageLink: jsx(_$$E, {
+          projectPageLink: jsx(ButtonPrimitive, {
             className: "connected_projects_flyout--projectLink--spvwE",
             onClick: () => {
               o(sf({
@@ -705,7 +705,7 @@ let eM = {
                 }), jsx(ee, {
                   resourceConnection: e.resourceConnection
                 })]
-              }), e.resourceConnection.status === eP.ACTIVE && x && jsx(_$$E, {
+              }), e.resourceConnection.status === eP.ACTIVE && x && jsx(ButtonPrimitive, {
                 className: _$$s.colorTextBrand.cursorPointer.$,
                 onClick: () => {
                   l(sf({
@@ -807,14 +807,14 @@ function eU(e) {
         resourceConnectionInvite: e,
         hostInviter: {
           name: e.hostInviterName || "",
-          imgUrl: oA(e.hostInviterPublic)?.userPublicImgUrl || null
+          imgUrl: getResourceDataOrFallback(e.hostInviterPublic)?.userPublicImgUrl || null
         },
         status: "pending",
         updatedAt: t,
         isHostPlanAdmin: e.isHostPlanAdmin
       } : null;
     }).filter(e => null !== e);
-    let s = new Map(t.map(e => [e.id, oA(e.assetTransferRequest)]));
+    let s = new Map(t.map(e => [e.id, getResourceDataOrFallback(e.assetTransferRequest)]));
     return [...[...t, ...a].map(e => {
       let t = e.disconnectedAt ? "disconnected" : "active";
       return !e.projectLimitedInfo || n.find(t => t.hostPlan.id === e.hostPlanId && t.connectingPlan.id === e.connectedPlanId && t.resourceId === e.resourceId && "pending" === t.status) ? null : {
@@ -972,7 +972,7 @@ function eU(e) {
         className: "connected_projects_table--iconColumn--RU6JC",
         cellComponent: e => jsx("div", {
           className: "connected_projects_table--iconColumnContainer--lbzmx",
-          children: v(e) ? jsx($n, {
+          children: v(e) ? jsx(Button, {
             onClick: () => x(e),
             children: renderI18nText("connected_projects_table.review_request")
           }) : jsx(jT, {})
@@ -991,7 +991,7 @@ function eU(e) {
       }
     }), h && g && jsx("div", {
       className: _$$s.px32.pb32.$,
-      children: jsx($n, {
+      children: jsx(Button, {
         iconPrefix: _ ? jsx(_$$d, {}) : jsx(_$$Q, {}),
         variant: "ghost",
         onClick: () => u(!_),
@@ -1041,10 +1041,10 @@ export function $$eq0(e) {
   let I = "loading" === E.status;
   let T = useMemo(() => {
     let e = E.data?.plan;
-    let t = oA(e?.hostPlanResourceConnections) ?? [];
-    let a = oA(e?.connectedPlanResourceConnections) ?? [];
-    let n = oA(e?.hostPlanPendingResourceConnectionInvites) ?? [];
-    let s = oA(e?.connectingPlanPendingResourceConnectionInvites) ?? [];
+    let t = getResourceDataOrFallback(e?.hostPlanResourceConnections) ?? [];
+    let a = getResourceDataOrFallback(e?.connectedPlanResourceConnections) ?? [];
+    let n = getResourceDataOrFallback(e?.hostPlanPendingResourceConnectionInvites) ?? [];
+    let s = getResourceDataOrFallback(e?.connectingPlanPendingResourceConnectionInvites) ?? [];
     return t.length + a.length + n.length + s.length;
   }, [E]);
   return t ? jsxs(fu, {

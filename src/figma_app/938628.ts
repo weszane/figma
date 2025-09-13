@@ -10,12 +10,12 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import g from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cJ } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
@@ -27,7 +27,7 @@ import { f4 } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { Q as _$$Q } from "../figma_app/104130";
 import { Sh, dK } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $$, gq, $j, Ht, w2, Zp } from "../figma_app/178475";
 import { Xw } from "../figma_app/201694";
 import { Tv, I9 } from "../figma_app/151869";
@@ -49,7 +49,7 @@ import { D8 } from "../905/511649";
 import { Ay } from "@stylexjs/stylex";
 import { Ij } from "../figma_app/359943";
 import { b as _$$b, bL as _$$bL2, mc as _$$mc, wv, r1 as _$$r2, YJ } from "../figma_app/860955";
-import { E as _$$E2 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { EventShield } from "../905/821217";
 import { H_, z6, CU } from "../905/963340";
 import { r as _$$r3 } from "../905/571562";
@@ -373,7 +373,7 @@ function Q(e) {
   let D = jsx($$, {
     bigNudgeAmount,
     "data-tooltip": P(u.horizontalConstraint, "horizontal"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: t,
     inputClassName: LI,
     onValueChange: (e, t) => {
@@ -392,7 +392,7 @@ function Q(e) {
   let k = jsx($$, {
     bigNudgeAmount,
     "data-tooltip": P(u.verticalConstraint, "vertical"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: t,
     inputClassName: LI,
     onValueChange: (e, t) => {
@@ -479,7 +479,7 @@ function el(e) {
     let t = new X(e.axis, !0).format(e.constraint);
     return jsxs("div", {
       className: f()(e.className, "constraint_select--flexContainer--a9ZPi"),
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: "HORIZONTAL" === e.axis ? _$$A2 : _$$A,
         className: Vb
       }), jsx("span", {
@@ -1127,7 +1127,7 @@ function eA(e) {
     childrenAtEnd: !0,
     className: "MIN" === u.verticalConstraint || "STRETCH" === u.verticalConstraint ? eS : ev,
     "data-tooltip": getI18nString("sites.panel.position_panel.top"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
@@ -1152,7 +1152,7 @@ function eA(e) {
     childrenAtEnd: !0,
     className: "MAX" === u.verticalConstraint || "STRETCH" === u.verticalConstraint ? eS : ev,
     "data-tooltip": getI18nString("sites.panel.position_panel.bottom"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
@@ -1177,7 +1177,7 @@ function eA(e) {
     childrenAtEnd: !0,
     className: "MIN" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint ? eS : ev,
     "data-tooltip": getI18nString("sites.panel.position_panel.left"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
@@ -1202,7 +1202,7 @@ function eA(e) {
     childrenAtEnd: !0,
     className: "MAX" === u.horizontalConstraint || "STRETCH" === u.horizontalConstraint ? eS : ev,
     "data-tooltip": getI18nString("sites.panel.position_panel.right"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: t,
     inputClassName: eI,
     onBlur: () => {
@@ -1380,7 +1380,7 @@ function eH(e) {
     name: "frame_preset_select",
     children: jsxs(_$$bL2, {
       manager,
-      children: [jsxs(_$$E2, {
+      children: [jsxs(ButtonPrimitive, {
         "aria-label": getI18nString("presets.selection_trigger_with_selected", {
           selected: ej(isMixedOverride ? MIXED_MARKER : x)
         }),
@@ -1613,7 +1613,7 @@ function tp(e) {
   let s = {
     "data-testid": "aspect-ratio-lock-toggle",
     "data-tooltip": a,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-onboarding-key": to
   };
   let o = generateRecordingKey(e, "aspectRatioLockToggle");
@@ -2112,7 +2112,7 @@ function t4(e) {
         ..._,
         "data-tooltip": u ? strings.dim.resizing : strings.dim.fixed,
         "data-tooltip-show-on-target-only": !0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dataTestId: `transform-${key}`,
         min: getFeatureFlags().editor_zero_width_input ? ak : void 0,
         noBorderOnHover: !0,
@@ -2174,7 +2174,7 @@ function t6(e, t, r) {
 }
 let t7 = [];
 function t9() {
-  let e = am();
+  let e = trackFileEventWithUser();
   let t = useSelector(Sh);
   let r = useSelector(dK);
   let n = kl("stackMode");
@@ -2250,7 +2250,7 @@ function re(e) {
           iconToReplaceCheck: jsx(h, {}),
           dataTestId: `${LayoutSizingMode[size]}-${Axis[_axis]}`,
           tooltip: g,
-          tooltipType: Ib.TEXT
+          tooltipType: KindEnum.TEXT
         }, LayoutSizingMode[size]));
       }), o && r.push(jsx(sK, {}, "ui3-divider")), o && (_minMaxOptions.forEach(t => {
         let [i, a] = XO[t];
@@ -2419,7 +2419,7 @@ function rd(e) {
   let [o, l] = useState(!1);
   let d = t6(Tv(), e.axis, LayoutSizingMode.FILL_CONTAINER);
   let c = useSelector(e => !!e.mirror.selectionProperties.isNonEditableInstanceSublayerSelected);
-  let u = am();
+  let u = trackFileEventWithUser();
   let h = useSelector(Sh);
   let m = useSelector(dK);
   let g = kl("stackMode");
@@ -2482,7 +2482,7 @@ function rd(e) {
       recordingKey: generateRecordingKey(e.recordingKey, "select", r),
       disabled: a,
       tooltip: s,
-      tooltipType: Ib.TEXT,
+      tooltipType: KindEnum.TEXT,
       dataTestId: `${r}-${Axis[e.axis]}`
     }, t.size);
   });
@@ -2891,7 +2891,7 @@ function rF(e) {
   let t = G7();
   let r = CC();
   let [i, s] = lJ("stackPositioning");
-  let o = am();
+  let o = trackFileEventWithUser();
   let l = kl("isNonEditableInstanceSublayerSelected");
   let d = useSelector(Sh);
   let c = useSelector(dK);
@@ -2903,7 +2903,7 @@ function rF(e) {
   let h = {
     disabled: !!l,
     "data-tooltip": getI18nString("properties.tooltip.ignore_auto_layout"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     recordingKey: generateRecordingKey(e, "absolutePosition")
   };
   return jsx(setupToggleButton, {
@@ -2958,7 +2958,7 @@ function rz(e) {
       inputClassName: hF,
       value: t,
       disabled: e.disabled,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("properties.tooltip.xposition"),
       recordingKey: generateRecordingKey(e.recordingKey, "xInput"),
       children: jsx("span", {
@@ -3024,7 +3024,7 @@ function r$(e) {
       inputClassName: hF,
       value: t,
       disabled: e.disabled,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("properties.tooltip.yposition"),
       recordingKey: generateRecordingKey(e.recordingKey, "yInput"),
       children: jsx("span", {
@@ -3271,7 +3271,7 @@ export function $$r48(e) {
     onClick: () => f(!g),
     "aria-label": getI18nString("fullscreen.properties_panel.constraints_panel.constraints"),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.properties_panel.constraints_panel.constraints")
     },
     children: jsx(rf, {})
@@ -3323,7 +3323,7 @@ export function $$r87(e) {
   let [a, s] = useAtomValueAndSetter(Md);
   let o = AY();
   let l = Fp();
-  let d = am();
+  let d = trackFileEventWithUser();
   let c = hl();
   let u = kl("height");
   let p = Jo().size;
@@ -3417,7 +3417,7 @@ export function $$r62(e) {
     bigNudgeAmount: 10,
     className: BP,
     "data-tooltip": m,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dataTestId: "count-input",
     disabled: e.countDisabled,
     dispatch: u,
@@ -3434,10 +3434,10 @@ export function $$r62(e) {
     smallNudgeAmount,
     value: t,
     wheelMultiplier,
-    children: [e.starInnerScaleShown && jsx(_$$B, {
+    children: [e.starInnerScaleShown && jsx(SvgComponent, {
       className: QK,
       svg: _$$A13
-    }), !e.starInnerScaleShown && jsx(_$$B, {
+    }), !e.starInnerScaleShown && jsx(SvgComponent, {
       className: QK,
       svg: _$$A12
     })]
@@ -3447,7 +3447,7 @@ export function $$r62(e) {
     bigNudgeAmount,
     className: sC,
     "data-tooltip": f,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     disabled: e.starInnerScaleDisabled,
     dispatch: u,
     inputClassName: hF,
@@ -3462,7 +3462,7 @@ export function $$r62(e) {
     smallNudgeAmount,
     value: i,
     wheelMultiplier,
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       className: QK,
       svg: _$$A14
     })
@@ -3501,7 +3501,7 @@ export let $$r70 = memo(function (e) {
         bigNudgeAmount,
         className: fm,
         "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.start"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         disabled: e.arcDataDisabled,
         dispatch: _,
         inputClassName: hF,
@@ -3512,7 +3512,7 @@ export let $$r70 = memo(function (e) {
         smallNudgeAmount,
         value: t,
         wheelMultiplier,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: QK,
           svg: _$$A10
         })
@@ -3520,7 +3520,7 @@ export let $$r70 = memo(function (e) {
         bigNudgeAmount,
         className: _$$t2,
         "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.sweep"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: _,
         inputClassName: PK,
         min: -1,
@@ -3536,7 +3536,7 @@ export let $$r70 = memo(function (e) {
         bigNudgeAmount,
         className: _$$eC,
         "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.ratio"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: _,
         inputClassName: PK,
         noBorderOnFocus: !1,
@@ -3649,7 +3649,7 @@ function nr(e) {
     value: e.x,
     ...i,
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.x"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: e.dispatch,
     mixedMathCallback: scopeAwareFunction.user("apply-mixed-method-for-vector-network", e => {
       SceneGraphHelpers.applyMixedMathForSelectedVectorNetwork(Axis.X, e);
@@ -3674,7 +3674,7 @@ function nr(e) {
     value: e.y,
     ...i,
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.x"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: e.dispatch,
     mixedMathCallback: scopeAwareFunction.user("apply-mixed-method-for-vector-network", e => {
       SceneGraphHelpers.applyMixedMathForSelectedVectorNetwork(Axis.Y, e);
@@ -3711,9 +3711,9 @@ function nr(e) {
     },
     dispatch: e.dispatch,
     recordingKey: generateRecordingKey(e, "cornerRadiusInput"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.corner_radius"),
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       className: QK,
       svg: _$$A11
     })

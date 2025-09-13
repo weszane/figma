@@ -7,7 +7,7 @@ import { T } from "../7492/468457";
 import { H } from "../7492/428990";
 import u from "classnames";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { QK } from "../figma_app/882116";
 import { Xb, ez, _P } from "../figma_app/968638";
 if (443 == require.j) {}
@@ -55,7 +55,7 @@ function j(e) {
       "aria-label": e.isSaved ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
       "aria-pressed": e.isSaved,
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.isSaved ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save")
       },
       children: e.isSaved ? jsx(SaveIconFilled, {}) : jsx(SaveIcon, {})

@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { lB, $$if } from "../figma_app/97020";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { sF } from "../figma_app/357655";
 import { a as _$$a } from "../905/38236";
@@ -45,7 +45,7 @@ let $$x6 = atom(e => e(f), (e, t, r) => {
     let t = debugState.getState();
     let r = t.openFile?.key;
     let n = t.user && t.user.id;
-    ds("sites_view_preview", r, t, {
+    trackFileEvent("sites_view_preview", r, t, {
       userId: n,
       mode: e
     });

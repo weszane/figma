@@ -21,7 +21,7 @@ import { tc } from "../905/15667";
 import { E as _$$E } from "../figma_app/61705";
 import { c as _$$c } from "../905/370443";
 import { j6 } from "../figma_app/831799";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { F2 } from "../905/389382";
 import { T9 } from "../figma_app/528509";
 import { i as _$$i } from "../905/46262";
@@ -232,7 +232,7 @@ export function $$R0({
           trackingContextProperties: properties
         });
         return e => {
-          Cu(c);
+          logAndTrackCTA(c);
           d(e);
         };
       }, [a, properties, r, handleUpgrade]);

@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { d as _$$d } from "../905/976845";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { T as _$$T } from "../figma_app/300269";
@@ -27,7 +27,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sT } from "../figma_app/740163";
 import { BK } from "../905/848862";
 import { kG } from "../figma_app/482495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { $j } from "../figma_app/178475";
 import { Cf, it } from "../905/504727";
@@ -287,7 +287,7 @@ function ee({
               },
               dispatch: o,
               "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width"),
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               min: 1,
               smallNudgeAmount: u.smallNudgeAmount,
               bigNudgeAmount: u.bigNudgeAmount,
@@ -299,12 +299,12 @@ function ee({
             leftLabel: void 0,
             rightLabel: void 0,
             icon: g && jsx(Z, {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")
             })
           }), jsx("div", {
             className: "responsive_text_style_variants--row--pcVq- ui3_rows--_row--DnZFk ui3_rows--_grid--cP2Wu",
-            children: jsx($n, {
+            children: jsx(Button, {
               onClick: () => {
                 a(h, p);
               },
@@ -333,7 +333,7 @@ function et({
       input: jsxs("div", {
         className: (_$$s.alignLeft.$, "responsive_text_style_variants--breakpointIconAndText--yCSLI"),
         children: [d && jsx(Z, {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")
         }), e.name, jsxs("span", {
           className: "responsive_text_style_variants--breakpointText--Pleoi",
@@ -396,7 +396,7 @@ function er({
     });
   });
   let R = useHandleKeyboardEvent("responsiveTextStyleVariantName", "keydown", t => {
-    if ("Tab" === t.key || "Enter" === t.key) O(); else {
+    if ("Tab" === t.key || "Enter" === t.key) O();else {
       if ("Escape" !== t.key) return SKIP_RECORDING;
       flushSync(() => {
         m(e.name);
@@ -456,7 +456,7 @@ function er({
               },
               dispatch: p,
               "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width"),
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               min: 1,
               smallNudgeAmount: _.smallNudgeAmount,
               bigNudgeAmount: _.bigNudgeAmount,
@@ -466,7 +466,7 @@ function er({
               })
             }),
             icon: b && jsx(Z, {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("sites.panel.responsive_text_style.min_width_conflicts")
             }),
             leftLabel: void 0,

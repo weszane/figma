@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { PropertyScope } from "../figma_app/763686";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import d from "classnames";
@@ -115,7 +115,7 @@ export function $$B2(e) {
         ref: e.tooltipRef,
         children: e.label
       })
-    }), jsx(_$$E, {
+    }), jsx(ButtonPrimitive, {
       className: cu,
       ref: r,
       onClick: e.onClick,

@@ -5,7 +5,7 @@ import { atom } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { getTrackingSessionId } from "../905/471229";
-import { y8 } from "../figma_app/459490";
+import { isEditDisabled } from "../figma_app/459490";
 import { b as _$$b } from "../905/985254";
 import { B as _$$B } from "../figma_app/750676";
 import { T as _$$T } from "../905/793009";
@@ -44,7 +44,7 @@ let U = atom(null, (e, t) => {
   t(V);
   t($$j17, !0);
 });
-let B = createReduxSubscriptionAtomWithState(() => Uy() && !getFeatureFlags().figjam_generate_handbrake && !y8({
+let B = createReduxSubscriptionAtomWithState(() => Uy() && !getFeatureFlags().figjam_generate_handbrake && !isEditDisabled({
   isDisabledForViewers: !0
 }));
 let $$G22 = atom(e => e(B) ? e(k) ? "top-bar" : e(P) !== iH.TRUE || e($$j17) || e(l5) !== fD.NONE ? "none" : "new-file" : "none");

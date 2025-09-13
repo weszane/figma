@@ -7,7 +7,7 @@ import { P as _$$P } from "../905/724705";
 import { XHR } from "../905/910117";
 import { U2 } from "../figma_app/545293";
 import { hideSpecificModal, showModalHandler } from "../905/156213";
-import { Pg } from "../figma_app/314264";
+import { clearAnalytics } from "../figma_app/314264";
 import { z4 } from "../905/37051";
 import { $g } from "../figma_app/415217";
 import { N as _$$N } from "../905/517193";
@@ -47,7 +47,7 @@ function A(e, t, r, i, l, A) {
   };
   let M = () => !!A && A.getState().modalShown?.type === xn;
   let F = () => {
-    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (Pg(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed");else if (O) {
+    if (A && A?.getState().authedUsers.orderedIds.length === 1 && (clearAnalytics(), U2.clear()), w) customHistory.reload("idleSessionTimeout-embed");else if (O) {
       let {
         pathname,
         search

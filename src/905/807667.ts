@@ -3,20 +3,31 @@ import { ServiceCategories } from '../905/165054'
 import { debugState } from '../905/407919'
 import { loadAllPagesAndTrack } from '../figma_app/582924'
 import { PluginModalType } from '../figma_app/763686'
-import { un, V_ } from '../figma_app/841351'
+import { un } from '../figma_app/841351'
 
-export function $$d0(e) {
-  let t = debugState.getState()
-  if (t.versionHistory.activeId && t.versionHistory.activeId !== V_) {
-    switch (e) {
+// Original function name: $$d0
+// Original export name: q
+
+/**
+ * Handles loading all pages, considering version history state.
+ * If in version history mode, performs actions based on the modal type.
+ * @param modalType - The type of plugin modal triggering the load.
+ * @returns A promise resolving when the load is complete.
+ */
+export function handleLoadAllPagesWithVersionCheck(modalType: PluginModalType) {
+  const state = debugState.getState()
+  if (state.versionHistory.activeId && state.versionHistory.activeId !== 'current_version') {
+    switch (modalType) {
       case PluginModalType.SAVE_LOCAL_COPY:
       case PluginModalType.FIND_AND_REPLACE:
         return un()
       default:
-        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(`Unexpected reason for loading all pages from version history (${e})`))
+        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(`Unexpected reason for loading all pages from version history (${modalType})`))
         return Promise.resolve()
     }
   }
-  return loadAllPagesAndTrack(e)
+  return loadAllPagesAndTrack(modalType)
 }
-export const q = $$d0
+
+// Refactored export name to match the new function name
+export const q = handleLoadAllPagesWithVersionCheck

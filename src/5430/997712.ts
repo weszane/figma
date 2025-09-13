@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { N_ } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { S3 } from "../905/708054";
@@ -51,7 +51,7 @@ class _ extends Component {
         className: cI,
         children: [jsx("div", {
           className: zc,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: A,
             className: q3
           })

@@ -21,7 +21,7 @@ import { VY, yj } from '../905/966582';
 import { O_ } from '../905/967587';
 import { i as _$$i } from '../905/970229';
 import { o1 as _$$o } from '../figma_app/10554';
-import { I0, m3, U, Uz, xQ } from '../figma_app/45218';
+import { isPlugin, hasMonetizedResourceMetadata, hasClientMeta, hasFigFileMetadata, isWidget } from '../figma_app/45218';
 import { PublisherType } from '../figma_app/155287';
 import { Bg } from '../figma_app/246699';
 import { g0, Qc } from '../figma_app/427318';
@@ -48,12 +48,12 @@ export function $$B25(e, t) {
 }
 export function $$G19(e) {
   let t = useSelector(t => $$V13(t, e));
-  let r = useSelector(r => U(e) ? $$U29(t) : $$B25(r, e));
-  let i = useSelector(t => I0(e) || xQ(e) ? _$$A(t, e) : null);
-  let a = Uz(e) ? e.fig_file_metadata?.key : null;
+  let r = useSelector(r => hasClientMeta(e) ? $$U29(t) : $$B25(r, e));
+  let i = useSelector(t => isPlugin(e) || isWidget(e) ? _$$A(t, e) : null);
+  let a = hasFigFileMetadata(e) ? e.fig_file_metadata?.key : null;
   let s = M4.File.useValue(a);
   let o = !!a && !!s;
-  return U(e) ? r && o : !!(I0(e) || xQ(e)) && (r || E3(i));
+  return hasClientMeta(e) ? r && o : !!(isPlugin(e) || isWidget(e)) && (r || E3(i));
 }
 export function $$V13(e, t) {
   let r = qA(e, t);
@@ -76,7 +76,7 @@ export function $$H34(e, t) {
 }
 export let $$z17 = e => !0 === e.is_public || e.org != null;
 export function $$W41(e, t, r, n) {
-  return m3(e) || n ? PublisherType.PUBLIC : $$z17(e.roles) ? e.roles.is_public || AC(e) ? PublisherType.PUBLIC : PublisherType.ORG : t != null && r ? PublisherType.ORG : PublisherType.PUBLIC;
+  return hasMonetizedResourceMetadata(e) || n ? PublisherType.PUBLIC : $$z17(e.roles) ? e.roles.is_public || AC(e) ? PublisherType.PUBLIC : PublisherType.ORG : t != null && r ? PublisherType.ORG : PublisherType.PUBLIC;
 }
 export function $$K31(e, t, r, n) {
   let i = $$en21(t.team_id, r, e, t.parent_org_id || null);

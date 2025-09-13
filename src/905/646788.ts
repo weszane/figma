@@ -69,25 +69,25 @@ import { KV } from "../figma_app/548615";
 import { u as _$$u } from "../905/712485";
 import { A as _$$A } from "../905/389851";
 import { T as _$$T } from "../905/909590";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { X as _$$X } from "../905/999307";
 import { truncate } from "../figma_app/930338";
 import { L as _$$L } from "../figma_app/288254";
 import { j as _$$j } from "../figma_app/398600";
 import { p as _$$p } from "../905/536283";
 import { getWorkshopModeStatus } from "../figma_app/789";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
 import { Q9, M_, kA } from "../905/32091";
 import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
 import { KM, Ku } from "../figma_app/877449";
 import { trackEventAnalytics } from "../905/449184";
-import { B as _$$B } from "../905/714743";
-import { Ib } from "../905/129884";
+import { SvgComponent } from "../905/714743";
+import { KindEnum } from "../905/129884";
 import { Qy } from "../figma_app/146384";
 import { m as _$$m2 } from "../905/636019";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -123,7 +123,7 @@ import { $t, HZ } from "../figma_app/29287";
 import { n as _$$n2 } from "../905/796896";
 import { J3, JU, kD, kN } from "../figma_app/622574";
 import { j as _$$j2 } from "../905/521149";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { t as _$$t3 } from "../905/825647";
 import { x as _$$x2 } from "../905/619833";
 import { i$ as _$$i$, YM, rg as _$$rg } from "../905/122282";
@@ -144,11 +144,11 @@ import { R as _$$R4 } from "../905/256203";
 import { B as _$$B2 } from "../905/950875";
 import { A as _$$A5 } from "../905/920142";
 import { b as _$$b3 } from "../905/966382";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { ks, nR as _$$nR, $$, tM as _$$tM, vd, s6, Ph as _$$Ph, qM } from "../figma_app/637027";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E3 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
 import { Oi, QZ } from "../905/862913";
 import { Q3, Cy, Bg } from "../figma_app/246699";
@@ -198,7 +198,7 @@ import { HF, a6 as _$$a2, ow, M3 as _$$M3 } from "../figma_app/198840";
 import { getPermissionsState } from "../figma_app/642025";
 import { Np } from "../figma_app/193867";
 import { qG } from "../figma_app/803787";
-import { vt as _$$vt } from "../figma_app/45218";
+import { ResourceTypeNoComment } from "../figma_app/45218";
 import { Jd } from "../905/71785";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { n as _$$n4, a as _$$a3 } from "../905/114254";
@@ -245,7 +245,7 @@ import { ul } from "../905/635424";
 import { O as _$$O2 } from "../905/833838";
 import { A as _$$A14 } from "../1617/984457";
 import { w as _$$w } from "../905/770105";
-import { E as _$$E4 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { R as _$$R5 } from "../905/621802";
 import { e as _$$e6 } from "../905/295932";
 import { L as _$$L5 } from "../905/657783";
@@ -273,7 +273,7 @@ import { xf as _$$xf } from "../figma_app/416935";
 import { H as _$$H2 } from "../905/674803";
 import { t as _$$t9 } from "../figma_app/32680";
 import { F as _$$F3 } from "../905/154112";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { N as _$$N4 } from "../905/572042";
 import { BI, m0 as _$$m3 } from "../figma_app/546509";
 import { Z as _$$Z2 } from "../905/116724";
@@ -553,11 +553,11 @@ function eM({
         })
       }), jsxs("div", {
         className: "embed--embedCodeButtons--k-Ye6",
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: o,
           children: getI18nString("permissions.embed.cancel_embed")
-        }), jsx($n, {
+        }), jsx(Button, {
           onClick: u,
           children: getI18nString("permissions.embed.copy_embed_code")
         })]
@@ -582,7 +582,7 @@ function eZ(e) {
     onSubmit();
     onClose();
   }, [onSubmit, onClose]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager,
     width: 450,
     height: "dynamic",
@@ -595,11 +595,11 @@ function eZ(e) {
         children: content
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: onClose,
             children: cancelText
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: c,
             children: submitText
@@ -623,7 +623,7 @@ let eX = registerModal(function (e) {
   let d = selectCurrentUser();
   let c = d?.id;
   let u = useCallback(() => {
-    Cu({
+    logAndTrackCTA({
       name: "Jam Session Button Confirm Start",
       fileKey,
       userId: c
@@ -678,7 +678,7 @@ let eQ = registerModal(function (e) {
   let l = selectCurrentUser();
   let d = l?.id;
   let c = useCallback(() => {
-    Cu({
+    logAndTrackCTA({
       name: "Jam Session Button Confirm Stop",
       fileKey,
       userId: d
@@ -710,7 +710,7 @@ function eJ({
   let c = getWorkshopModeStatus(l);
   let u = () => {
     let i = e ? hasTeamPaidAccess(e) : !!t.parent_org_id;
-    if (Cu({
+    if (logAndTrackCTA({
       name: `Jam Session Button ${c.enabled ? "Stop" : "Start"}`,
       fileKey: l,
       userId: o,
@@ -761,11 +761,11 @@ function eJ({
       })]
     }), jsx("div", {
       className: "file_workshop_row--workshopRowAction--Glb-8",
-      children: t.canEdit ? c.enabled ? jsx($n, {
+      children: t.canEdit ? c.enabled ? jsx(Button, {
         onClick: u,
         variant: "destructiveSecondary",
         children: renderI18nText("whiteboard.open_sessions.end_now")
-      }) : jsx($n, {
+      }) : jsx(Button, {
         onClick: u,
         htmlAttributes: {
           "data-onboarding-key": "file-workshop-button"
@@ -855,7 +855,7 @@ let to = registerModal(function (e) {
   let f = "loaded" === h.status && !!i;
   return t ? jsx(fu, {
     name: "google_device_screenshare_modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: m,
       width: "fit-content",
       children: jsxs(vo, {
@@ -948,7 +948,7 @@ let to = registerModal(function (e) {
             })
           }), jsx(wi, {
             children: jsxs(jk, {
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 onClick: p,
                 children: renderI18nText("general.cancel")
@@ -1025,13 +1025,13 @@ function tu({
         }), jsx("div", {
           className: _$$s.flex.alignRight.$,
           "aria-label": getI18nString("file_permissions_modal.screenshare_to_google_device.aria_label"),
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             className: _$$s.colorIconSecondary.p6.$,
             svg: _$$A2,
             height: "12px",
             width: "12px",
             autosize: !0,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": t,
             dataTestId: "cast-to-google-tooltip"
           })
@@ -1174,7 +1174,7 @@ let tW = registerModal(function (e) {
   let i = useDispatch();
   let [s, o] = useState(!1);
   let [l, d] = useState(!1);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 350,
     children: jsxs(vo, {
@@ -1213,7 +1213,7 @@ let tW = registerModal(function (e) {
             children: getI18nString("confirm_prototype_share_modal.dont_show_again")
           })
         }), jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: () => {
               l && i(_$$b2({
@@ -1247,7 +1247,7 @@ function tK(e) {
     "data-tooltip-show-above": !0,
     "data-tooltip-subtext": getI18nString("file_permissions_modal.share_as.will_open_in_new_tab"),
     "data-tooltip-timeout-delay": 50,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     onClick: t => {
       e.nodeID && s(_$$K2({
         fileKey: e.fileKey,
@@ -1338,7 +1338,7 @@ function t9({
 }
 function ie(e) {
   let t = kD();
-  let i = dq();
+  let i = useCurrentUserOrgId();
   let r = cD();
   let a = t ? jsx(tQ, {}) : jsx(_$$n2, {});
   let s = t ? getI18nString("file_permissions_modal.share_as.publish_template.published") : getI18nString("file_permissions_modal.share_as.publish_template");
@@ -2012,10 +2012,10 @@ function iM({
     label: jsx(Label, {
       children: getI18nString("permissions_modal.file_share_settings.viewers_can_copy_save_export")
     }),
-    children: l ? jsx(_$$E3, {
+    children: l ? jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("permissions_modal.file_share_settings.this_setting_applies_to_members_viewers")
-    }) : jsx(_$$E3, {
+    }) : jsx(TextWithTruncation, {
       color: o ? "disabled" : "secondary",
       children: renderI18nText("permissions_modal.file_share_settings.this_setting_applies_to_anyone_with_view_access", {
         strongCanView: jsx("span", {
@@ -2090,7 +2090,7 @@ function i$(e) {
             type: "success"
           })));
         },
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("permissions.link_autogen_password_copy"),
         children: jsx(_$$a, {})
       })
@@ -2187,7 +2187,7 @@ function i7(e) {
   return jsxs(Fragment, {
     children: [e.orgMaxExpirationInHrs && e.orgMaxExpirationInHrs > 24 && !e.isSharingClarity && jsx("div", {
       className: _O,
-      children: jsx(_$$E3, {
+      children: jsx(TextWithTruncation, {
         color: "secondary",
         truncate: "line-clamp",
         lineClamp: 3,
@@ -2492,7 +2492,7 @@ class nn extends PureComponent {
     return jsxs("p", {
       className: this.props.textClassName || _V,
       "data-testid": "password-info-row",
-      children: [e, " ", canResetPassword && jsx($n, {
+      children: [e, " ", canResetPassword && jsx(Button, {
         variant: "ghost",
         onClick: disabled ? void 0 : onReset,
         disabled,
@@ -2514,7 +2514,7 @@ function na({
   currentUser: u
 }) {
   let p = useDispatch();
-  let g = _$$U();
+  let g = trackFileEventWithStore();
   let _ = _$$L();
   let b = _$$o();
   let v = HW();
@@ -2971,11 +2971,11 @@ function ns(e) {
         })
       }), jsx("div", {
         children: renderI18nText("file_permissions_modal.library_warning_banner.share_settings_will_change_library_publish_audience", {
-          originalShareAudience: jsx(_$$E3, {
+          originalShareAudience: jsx(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: t
           }),
-          newShareAudience: jsx(_$$E3, {
+          newShareAudience: jsx(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: renderI18nText("file_permissions_modal.library_warning_banner.everyone_at_team", {
               teamName: e.team?.name
@@ -3117,7 +3117,7 @@ let nR = registerModal(function () {
     open: !0,
     onClose: t
   });
-  return "loaded" !== s.status ? null : jsx(bL, {
+  return "loaded" !== s.status ? null : jsx(ModalRootComponent, {
     manager: o,
     width: "md",
     children: jsxs(vo, {
@@ -3163,7 +3163,7 @@ let nN = registerModal(function () {
     open: !0,
     onClose: i
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: o,
     width: "md",
     children: jsxs(vo, {
@@ -3175,11 +3175,11 @@ let nN = registerModal(function () {
         children: getI18nString("community.sites_publish_required_modal.body")
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: i,
             children: getI18nString("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: s,
             children: getI18nString("community.sites_publish_required_modal.publish_button")
@@ -3673,7 +3673,7 @@ class rt extends Component {
         className: HO,
         children: [jsx("div", {
           className: Zq,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A0,
             className: QW
           })
@@ -3692,7 +3692,7 @@ class rt extends Component {
         }), a ? jsxs(Fragment, {
           children: [jsx("div", {
             className: O6,
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "destructiveSecondary",
               onClick: this.showUnpublishModal,
               children: getI18nString("community.permissions_modal_publish_tab.footer.remove")
@@ -3700,13 +3700,13 @@ class rt extends Component {
           }), jsx("a", {
             target: "_blank",
             href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "primary",
               children: getI18nString("community.permissions_modal_publish_tab.footer.learn_more")
             })
           })]
         }) : jsx("div", {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             disabled: !0,
             "data-testid": "community-publish-button",
@@ -3719,7 +3719,7 @@ class rt extends Component {
       className: HO,
       children: [jsx("div", {
         className: Zq,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A7,
           className: hz
         })
@@ -3727,7 +3727,7 @@ class rt extends Component {
         className: mq,
         children: renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_default_file")
       }), jsx("div", {
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "primary",
           disabled: !0,
           "data-testid": "community-publish-button",
@@ -3738,7 +3738,7 @@ class rt extends Component {
       className: HO,
       children: [jsx("div", {
         className: Zq,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A7,
           className: hz
         })
@@ -3746,7 +3746,7 @@ class rt extends Component {
         className: mq,
         children: renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_remix")
       }), jsx("div", {
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "primary",
           disabled: !0,
           "data-testid": "community-publish-button",
@@ -3757,7 +3757,7 @@ class rt extends Component {
       className: HO,
       children: [jsx("div", {
         className: Zq,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A7,
           className: hz
         })
@@ -3765,7 +3765,7 @@ class rt extends Component {
         className: mq,
         children: renderI18nText("community.permissions_modal_publish_tab.footer.cannot_publish_remix_from_paid_file")
       }), jsx("div", {
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "primary",
           disabled: !0,
           "data-testid": "community-publish-button",
@@ -3795,11 +3795,11 @@ class rt extends Component {
           })]
         }), jsxs("div", {
           className: Uo,
-          children: [!Pg(this.props.editingHubFile) && jsx($n, {
+          children: [!Pg(this.props.editingHubFile) && jsx(Button, {
             variant: "destructiveSecondary",
             onClick: this.showUnpublishModal,
             children: t
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             disabled: this.props.disablePublish,
             onClick: this.publish,
@@ -4018,7 +4018,7 @@ function rn(e) {
     }
     return !1;
   })();
-  let A = !!_$$W2(d, _$$vt.HUB_FILE).data?.[0];
+  let A = !!_$$W2(d, ResourceTypeNoComment.HUB_FILE).data?.[0];
   let y = o?.editorType === _YF.SLIDES;
   let b = o && _$$W(o.editorType);
   let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!HF(h) || Pg(h)) && b;
@@ -4072,7 +4072,7 @@ function rc({
       className: "publish_tab--publishTabIconAndTextContainer--5NEIC",
       children: [jsx("div", {
         className: "publish_tab--publishTabItemIconContainer--OPAAq",
-        children: "string" == typeof i ? jsx(_$$B, {
+        children: "string" == typeof i ? jsx(SvgComponent, {
           svg: i,
           className: ra()(a && !s && rl, s && ro)
         }) : i
@@ -4571,7 +4571,7 @@ function rG(e) {
     name: "Drafts Move Banner",
     children: jsxs("div", {
       className: W5,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: _$$RA,
         svg: _$$A13
       }), r, jsx(_$$Ph, {
@@ -4596,7 +4596,7 @@ function rG(e) {
 function rq(e) {
   return jsxs("div", {
     className: xf,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: AA,
       svg: _$$A14
     }), jsx("div", {
@@ -4761,7 +4761,7 @@ function r5(e) {
   });
   let l = !(e.isBranch || e.isPrototype) && e.hasEditRole;
   return jsxs(Fragment, {
-    children: [jsxs(_$$E4, {
+    children: [jsxs(ButtonPrimitive, {
       className: ra()({
         [Jt]: r,
         [bU]: !r
@@ -4898,7 +4898,7 @@ function ad(e) {
   let d = l && o;
   let c = l && !o;
   return jsxs(Fragment, {
-    children: [jsxs(_$$E4, {
+    children: [jsxs(ButtonPrimitive, {
       className: ra()({
         [bU]: r,
         [Jt]: !r
@@ -4971,7 +4971,7 @@ function ad(e) {
             "data-testid": "file-share-audience-settings",
             "data-onboarding-key": l && (o ? an : tF),
             children: [mi(lG(e.sharingAudience, e.audienceAccessLevel)), !r && jsx(_$$R5, {}), e.isBranch && jsx("div", {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("file_audience_row.settings_are_managed_in_the_main_file"),
               "data-tooltip-timeout-delay": 50,
               "data-tooltip-max-width": 300,
@@ -5727,7 +5727,7 @@ function aZ({
 function aQ() {
   return jsx("div", {
     className: "invite_tab_loading--container--GcUFO",
-    children: jsx(kt, {})
+    children: jsx(LoadingSpinner, {})
   });
 }
 function aJ({
@@ -6018,7 +6018,7 @@ function a6({
       start(4e3);
     });
   }, [d, start]);
-  return jsx($n, {
+  return jsx(Button, {
     "data-testid": "file-permissions-copy-link",
     onClick: u,
     htmlAttributes: {

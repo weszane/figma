@@ -1,17 +1,17 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { o as _$$o } from "../905/530496";
 import { Xr } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { z } from "../905/239603";
 import c from "classnames";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
 import { reportError } from "../905/11";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { lv } from "../figma_app/204891";
 import { V } from "../figma_app/385855";
 import { getI18nString } from "../905/303541";
@@ -29,7 +29,7 @@ export function $$w0({
   isLoading: d
 }) {
   let c = selectCurrentFile();
-  let h = hC();
+  let h = trackDefinedFileEventWithStore();
   let m = Xr(qp);
   if (!c || !t.current || !e.current) return null;
   let g = t.current.getBoundingClientRect().left + t.current.getBoundingClientRect().width;
@@ -64,7 +64,7 @@ export function $$w0({
             clientMeta: l?.thumbnail_meta ?? c.clientMeta,
             noBorder: !0
           })
-        }), jsx(_$$E, {
+        }), jsx(ButtonPrimitive, {
           "aria-label": getI18nString("pages_panel.summary_preview.update_preview"),
           className: u()("page_summary_preview--refreshButton--XAvPe", {
             "page_summary_preview--alwaysShowRefreshButton--M3IDC": !l
@@ -83,7 +83,7 @@ export function $$w0({
             "data-tooltip-type": "text",
             "data-testid": "RefreshPreviewButton"
           },
-          children: d ? jsx(kt, {
+          children: d ? jsx(LoadingSpinner, {
             testId: "LoadingSpinner",
             size: "small",
             className: "page_summary_preview--loadingSpinner--FXocO"

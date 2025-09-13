@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { K as _$$K } from "../905/443068";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { r as _$$r } from "../905/857502";
 import { V as _$$V } from "../1577/311426";
@@ -30,7 +30,7 @@ import { Om, tv as _$$tv } from "../figma_app/979714";
 import { showModalHandler, hideModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { S as _$$S } from "../5430/743953";
@@ -84,7 +84,7 @@ function z({
         setTimeout(() => r(!1), 2e3);
       },
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("file_browser.copy_link")
       },
       "aria-label": getI18nString("file_browser.copy_link"),
@@ -120,7 +120,7 @@ function Q({
       });
     },
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("file_browser.open_in_new_tab")
     },
     className: "lightbox_rdp--link--x0gtt lightbox_rdp--iconButton--kEwkm lightbox_rdp--baseIconButton--rtsxU",
@@ -220,7 +220,7 @@ let Z = registerModal(function (e) {
       children: jsx(fu, {
         name: e0.RESOURCE_HUB_LIGHTBOX_RDP,
         properties: en,
-        children: jsx(bL, {
+        children: jsx(ModalRootComponent, {
           manager: et,
           width: 1048,
           height: "full",

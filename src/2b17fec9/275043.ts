@@ -38,7 +38,7 @@ import F from "classnames";
 import { ez as _$$ez, U9, SK, wp, GI, IZ, qL } from "../905/125333";
 import { LH } from "../figma_app/384673";
 import { F as _$$F2 } from "../905/989956";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yt, Uo } from "../figma_app/955650";
 import { zG, C2, P as _$$P } from "../figma_app/47958";
 import { EJ, Mm, vO } from "../figma_app/827329";
@@ -56,12 +56,12 @@ import { N as _$$N } from "../vendor/930821";
 import { P as _$$P2 } from "../vendor/348225";
 import { jD } from "../905/765855";
 import { oW } from "../figma_app/247611";
-import { Pl } from "../figma_app/62612";
+import { getViewportZoom } from "../figma_app/62612";
 import { $R, X as _$$X2, iT as _$$iT, p3, pZ, Xc } from "../figma_app/765161";
 import { w as _$$w2, fo, hj, zK } from "../9410/307066";
 import { YCy, zuZ } from "../figma_app/27776";
 import { W as _$$W, v0, Dm } from "../9410/645772";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Yk, iy as _$$iy, Z9 as _$$Z, AO } from "../2b17fec9/441720";
 import { Y as _$$Y } from "../figma_app/916469";
 import { GQ, BG, JE, L as _$$L } from "../figma_app/634288";
@@ -72,7 +72,7 @@ import { a as _$$a2 } from "../905/847494";
 import { W as _$$W2 } from "../2b17fec9/185058";
 import { DP, vz } from "../figma_app/351862";
 import { h as _$$h } from "../2b17fec9/813960";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { ZE } from "../figma_app/932285";
 import { s as _$$s } from "../figma_app/666387";
 import { W1 } from "../figma_app/439493";
@@ -114,7 +114,7 @@ import { L as _$$L2 } from "../905/453756";
 import { g as _$$g3 } from "../905/125190";
 import { BrowserInfo } from "../figma_app/778880";
 import { lO } from "../9410/28761";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { I as _$$I } from "../figma_app/827540";
 import { rX, UJ as _$$UJ } from "../figma_app/801324";
 import { k as _$$k2 } from "../905/545760";
@@ -392,7 +392,7 @@ let ef = memo(function ({
     document.body.classList.remove(bz);
   }), [A]);
   let M = useRef(null);
-  let D = Pl({
+  let D = getViewportZoom({
     subscribeToUpdates_expensive: A
   });
   let U = function (e) {
@@ -665,7 +665,7 @@ let ew = memo(function ({
     }),
     "data-tooltip": g ? void 0 : f.action,
     "data-tooltip-submenu-open": y,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     disabled: a,
     inTabOrder: !1,
     isActive: u,
@@ -799,7 +799,7 @@ function eO({
     }),
     "data-tooltip": h ? void 0 : "set-tool-connector-elbowed",
     "data-tooltip-submenu-open": x,
-    "data-tooltip-type": Ib.LOOKUP,
+    "data-tooltip-type": KindEnum.LOOKUP,
     disabled: i,
     inTabOrder: !1,
     isActive: l,
@@ -839,7 +839,7 @@ function eM(e) {
     draggedTool
   } = useAtomWithSubscription(Q);
   let f = !!draggedTool || e.secondaryToolbeltId === activeSecondaryToolbeltId;
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     "aria-disabled": u,
     "aria-hidden": u,
     "aria-label": e.tooltipText,
@@ -854,7 +854,7 @@ function eM(e) {
     htmlAttributes: {
       "data-onboarding-key": onboardingKey,
       "data-testid": e["data-testid"],
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.tooltipText,
       "data-tooltip-shortcut": e.tooltipShortcut,
       "data-tooltip-show-above": !0,
@@ -1001,7 +1001,7 @@ function eG({
 }
 function eX() {
   let e = _$$C2();
-  return jsx($n, {
+  return jsx(Button, {
     onClick: () => e(),
     variant: "secondary",
     recordingKey: generateRecordingKey(d6, "MORESHAPES"),
@@ -1158,7 +1158,7 @@ function tn(e) {
       "whiteboard_secondary_toolbelt_radio_group--radioOptionDisabled--yAXJq": disabled
     }),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": disabled ? void 0 : tooltipText,
       "data-tooltip-shortcut": tooltipShortcut,
       "data-tooltip-show-above": !0,
@@ -3908,7 +3908,7 @@ function iT({
   let p = !(t || i);
   return jsx("div", {
     className: "stamps--peekingVotingWheelContainer--hP2CU",
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       ref: o,
       className: H()("stamps--peekingVotingWheel--JsL1l", {
         "stamps--peekingVotingWheelInactive---J5D8": p,
@@ -3944,7 +3944,7 @@ function iw({
   });
   return jsx("div", {
     className: "stamps--remainingVotesIndicatorContainer--0hRva",
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       className: H()("stamps--remainingVotesIndicator--8Rl3H text--fontPos12--YsUAh text--_fontBase--QdLsd", a ? "stamps--remainingVotesIndicatorInProgress--6-a5V" : "stamps--remainingVotesIndicatorDone--Qas38"),
       htmlAttributes: {
         onMouseEnter: () => pZ() && o(!0),
@@ -4047,7 +4047,7 @@ function iO({
   toolbarState: e,
   disabled: t
 }) {
-  let i = !q8();
+  let i = !isAIFeaturesEnabledForCurrentUser();
   let r = _$$I();
   return jsx(_$$iy, {
     staticToolConfig: Yk.ACTIONS,

@@ -8,7 +8,7 @@ import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import u from "../vendor/260986";
 import { useSubscription, useSubscriptionAnalytics } from "../figma_app/288654";
-import { gB, oA } from "../905/723791";
+import { gB, getResourceDataOrFallback } from "../905/723791";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
@@ -145,7 +145,7 @@ export function $$D0({
                 currentUser: (t = e.currentUser) ? {
                   ...t,
                   orgAwareTeamRoles: t.orgAwareTeamRoles.map(e => {
-                    let t = oA(e.team?.libraryTeamSubscriptionsForFigJam);
+                    let t = getResourceDataOrFallback(e.team?.libraryTeamSubscriptionsForFigJam);
                     return {
                       ...e,
                       team: e.team && t ? {
@@ -182,7 +182,7 @@ export function $$D0({
                 currentUser: (t = e.currentUser) ? {
                   ...t,
                   orgAwareTeamRoles: t.orgAwareTeamRoles.map(e => {
-                    let t = oA(e.team?.libraryTeamSubscriptionsForSlides);
+                    let t = getResourceDataOrFallback(e.team?.libraryTeamSubscriptionsForSlides);
                     return {
                       ...e,
                       team: e.team && t ? {
@@ -219,7 +219,7 @@ export function $$D0({
                 currentUser: (t = e.currentUser) ? {
                   ...t,
                   orgAwareTeamRoles: t.orgAwareTeamRoles.map(e => {
-                    let t = oA(e.team?.libraryTeamSubscriptionsForBuzz);
+                    let t = getResourceDataOrFallback(e.team?.libraryTeamSubscriptionsForBuzz);
                     return {
                       ...e,
                       team: e.team && t ? {

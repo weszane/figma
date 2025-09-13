@@ -12,7 +12,7 @@ import { yJ as _$$yJ, bE } from "../figma_app/598926";
 import { OB } from "../figma_app/91703";
 import { yJ as _$$yJ2 } from "../905/466026";
 import { Rz } from "../905/977218";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { getRepoById } from "../905/760074";
 import { Qr, hL, OR } from "../905/697795";
 import { B8 } from "../figma_app/682945";
@@ -167,7 +167,7 @@ let $$P0 = e => t => function (r) {
       ...t,
       jsCommitHash: Qr()
     }), OR(P, t));
-  } else Oe.matches(r) ? uE("File Browser Sidebar Clicked", e.getState(), {
+  } else Oe.matches(r) ? trackUserEvent("File Browser Sidebar Clicked", e.getState(), {
     clickedResourceType: r.payload.clickedResourceType,
     resourceIdOrKey: r.payload.resourceIdOrKey
   }) : 0 === L && (L = setTimeout(function () {

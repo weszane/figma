@@ -37,7 +37,7 @@ import { lc, dk } from "../905/278499";
 import { dd } from "../figma_app/604494";
 import { o as _$$o } from "../905/223420";
 import { t as _$$t2 } from "../905/605191";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { _ as _$$_ } from "../905/144222";
 import { f as _$$f } from "../905/54715";
 import { sx as _$$sx } from "../905/941192";
@@ -87,7 +87,7 @@ function Y(e) {
     children: [i, jsx("span", {
       className: _$$s2.truncate.$,
       children: pill.name
-    }), e.onDismiss && jsx(_$$E, {
+    }), e.onDismiss && jsx(ButtonPrimitive, {
       recordingKey: generateRecordingKey(e.recordingKey, "dismiss"),
       onClick: e.onDismiss,
       className: _$$s2.bgTransparent.$,

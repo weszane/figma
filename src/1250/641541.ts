@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { b as _$$b, bL, mc, YJ, hE, Q$, Ov, q7 } from "../figma_app/860955";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r as _$$r } from "../905/571562";
 import { x as _$$x } from "../905/587214";
@@ -15,7 +15,7 @@ import { g as _$$g } from "../1556/359896";
 import { n as _$$n } from "../figma_app/3731";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../1250/724587";
 import { b as _$$b2 } from "../905/985254";
 import { hr } from "../905/352022";
@@ -59,7 +59,7 @@ export function $$G1() {
       personalSpaceIcon1x: _$$A4
     }), jsx("div", {
       className: "x78zum5 x1q0g3np xet2fuk xb3r6kr",
-      children: jsx(_$$E2, {
+      children: jsx(TextWithTruncation, {
         fontSize: 13,
         fontWeight: "medium",
         color: "default",
@@ -128,7 +128,7 @@ function W({
   return jsxs(bL, {
     manager: T,
     children: [jsxs($, {
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         ...xk(V.menuTrigger, manager.isOpen && V.menuTriggerActive),
         ...getTriggerProps(),
         children: [e, jsx(_$$r, {

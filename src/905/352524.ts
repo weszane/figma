@@ -2,9 +2,9 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useId, useCallback, memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { b as _$$b } from "../905/946806";
 import { FileFormat, FillType, StickyTableConfig, AppStateTsApi, Fullscreen } from "../figma_app/763686";
 import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
@@ -23,7 +23,7 @@ import U from "classnames";
 import { A as _$$A } from "../905/639174";
 import { b as _$$b2, c as _$$c } from "../905/308099";
 import { q as _$$q } from "../905/932270";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { SD, ZF } from "../905/920793";
 let I = {
   PNG: FileFormat.PNG,
@@ -285,7 +285,7 @@ function $(e) {
         let i = disabledFileTypes.includes(e) ? {
           readonly: !0,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("whiteboard.figjam_export.csv_disabled")
           }
         } : {};
@@ -382,11 +382,11 @@ let J = memo(function (e) {
       }
     }));
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: A,
     height: "dynamic",
     width: 364,
-    children: jsxs(Rq, {
+    children: jsxs(ModalFormContents, {
       onSubmit: G,
       children: [jsx(Y9, {
         children: jsx(hE, {
@@ -440,7 +440,7 @@ let J = memo(function (e) {
           className: "figjam_export_pickers--exportWarning--KzT0q",
           children: [jsx(_$$b, {}), renderI18nText("whiteboard.figjam_export.exporting_may_take_a_minute_or_two")]
         }), jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             type: "submit",
             disabled: B,

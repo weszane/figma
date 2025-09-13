@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { AppStateTsApi, BuzzCloneHelpers } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -174,7 +174,7 @@ export function $$C0({
   }, [c, L, w, l, k]), w);
   return jsx("div", {
     className: "x78zum5 xr1yuqi xl56j7k x6s0dn4 xi4r6k5 xdyg6lv",
-    children: jsx(IK, {
+    children: jsx(ButtonWide, {
       variant: "primary",
       onClick: () => {
         A(!0);

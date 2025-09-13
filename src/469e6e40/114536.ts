@@ -9,7 +9,7 @@ import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan, useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { o0 } from "../905/844131";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { UnclaimedDomainUserView, DomainOrgAdminsToRemove, OrgDomainManagementPage } from "../figma_app/43951";
@@ -20,15 +20,15 @@ import { a as _$$a } from "../905/964520";
 import { Ph } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { selectUser } from "../905/372672";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { VisualBellActions } from "../905/302958";
 import { Eh } from "../figma_app/617654";
 import { registerModal } from "../905/102752";
@@ -50,7 +50,7 @@ import { v as _$$v } from "../4452/562448";
 import { b as _$$b2 } from "../4452/320061";
 import { B as _$$B } from "../4452/541264";
 import { ResourceStatus, getResourceDataOrFallback } from "../905/663269";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { zE } from "../figma_app/919079";
 import { tH, H4 } from "../905/751457";
 import { y2 } from "../figma_app/563413";
@@ -62,7 +62,7 @@ import { Cj } from "../905/270084";
 import { z as _$$z2 } from "../figma_app/369596";
 import { Um } from "../905/848862";
 import { cd, zx, VU } from "../4452/650793";
-import { qc } from "../figma_app/858013";
+import { LoadingOverlay } from "../figma_app/858013";
 import { CT } from "../figma_app/736948";
 import { oi } from "../figma_app/527041";
 function D() {
@@ -71,7 +71,7 @@ function D() {
     rel: "noopener",
     className: _$$s.colorTextBrand.cursorPointer.$,
     href: "https://help.figma.com/hc/articles/360045953273",
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("general.learn_more")
     })
   });
@@ -116,13 +116,13 @@ let F = registerModal(function (e) {
       d(!1);
     }
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("domain_management.domain_capture_modal.title")
           })
         })
@@ -139,10 +139,10 @@ let F = registerModal(function (e) {
             spacing: 16,
             children: [jsxs(AutoLayout, {
               direction: "vertical",
-              children: [jsx(_$$E, {
+              children: [jsx(TextWithTruncation, {
                 fontWeight: "bold",
                 children: renderI18nText("domain_management.domain_capture_modal.body_title")
-              }), jsx(_$$E, {
+              }), jsx(TextWithTruncation, {
                 children: renderI18nText("domain_management.domain_capture_modal.body", {
                   orgName: e.orgName,
                   learnMoreLink: jsx(D, {})
@@ -157,17 +157,17 @@ let F = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: e.onClose,
             variant: "secondary",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("domain_management.domain_capture_modal.cancel_button")
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             disabled: !r || o,
             onClick: m,
             variant: "primary",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("domain_management.domain_capture_modal.save_button")
             })
           })]
@@ -206,29 +206,29 @@ function $(e) {
           verticalAlignItems: "center",
           horizontalAlignItems: "start",
           spacing: 4,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             color: "default",
             children: renderI18nText("domain_management.domain_capture.enabled_label")
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "success",
             children: renderI18nText("domain_management.domain_capture.enabled_status")
           })]
-        }) : jsx(_$$E, {
+        }) : jsx(TextWithTruncation, {
           color: "default",
           children: renderI18nText("domain_management.domain_capture.label")
         }), "loaded" === e.loadingStatus && jsx("span", {
           className: _$$s.alignLeft.$,
-          children: e.enabled ? jsx(_$$E, {
+          children: e.enabled ? jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("domain_management.domain_capture.domain_capture_enabled_body", {
               learnMoreLink: jsx(D, {})
             })
-          }) : e.allDomainsVerified ? jsxs(_$$E, {
+          }) : e.allDomainsVerified ? jsxs(TextWithTruncation, {
             color: "secondary",
             children: [renderI18nText("domain_management.domain_capture.all_domains_verified_body", {
               learnMoreLink: jsx(D, {})
             }), " "]
-          }) : jsx(_$$E, {
+          }) : jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("domain_management.domain_capture.some_domains_verified_body", {
               learnMoreLink: jsx(D, {})
@@ -238,7 +238,7 @@ function $(e) {
       }), e.enabled && jsx("div", {
         className: "org_domain_management_page_view--contactSupport---Trie",
         "data-tooltip": getI18nString("domain_management.domain_capture.support_email"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": !0,
         "data-tooltip-width": 152,
         children: jsx(Ph, {
@@ -267,7 +267,7 @@ function $(e) {
         verticalAlignItems: "center",
         horizontalAlignItems: "end",
         spacing: 0,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           color: e.allDomainsVerified ? "default" : "secondary",
           children: renderI18nText("settings_tab.disabled")
         }), t && jsx(_$$b, {
@@ -275,7 +275,7 @@ function $(e) {
             "--color-icon": "var(--color-icon-secondary)"
           },
           "data-tooltip": getI18nString("domain_management.domain_capture.info_tooltip_text"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip-width": 152,
           "data-tooltip-show-immediately": !0
         }), jsx(_$$a, {
@@ -302,11 +302,11 @@ function V(e) {
       direction: "vertical",
       children: [jsx("span", {
         className: _$$s.breakWord.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontFamily: "monospace",
           children: e.dnsToken
         })
-      }), jsx($n, {
+      }), jsx(Button, {
         onClick: () => {
           r || copyTextToClipboard(e.dnsToken).then(() => {
             l(!0);
@@ -331,7 +331,7 @@ function V(e) {
             style: {
               "--color-icon": "var(--color-icon-brand)"
             }
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             fontWeight: "regular",
             color: "brand",
             children: r ? renderI18nText("domain_management.dns_token.copied") : renderI18nText("domain_management.dns_token.copy")
@@ -345,7 +345,7 @@ function H(e) {
   return jsx("ul", {
     className: q,
     children: e.domains.sort().map(e => jsx("li", {
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: e
       })
     }, e))
@@ -353,13 +353,13 @@ function H(e) {
 }
 let Y = registerModal(function (e) {
   let t = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("VERIFY" === e.actionType ? "domain_management.error_modal.header_verifying" : "domain_management.error_modal.header_adding", {
               domainCount: e.failedDomains.length
             })
@@ -373,7 +373,7 @@ let Y = registerModal(function (e) {
           horizontalAlignItems: "start",
           direction: "vertical",
           spacing: 16,
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             children: (() => {
               switch (e.actionType) {
                 case "ADD":
@@ -402,10 +402,10 @@ let Y = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: e.onClose,
             variant: "secondary",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("domain_management.error_modal.got_it_button")
             })
           })
@@ -512,13 +512,13 @@ let Q = registerModal(function (e) {
   let m = d.tokens.some(({
     errorMessage: e
   }) => !!e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: l,
     width: "lg",
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("domain_management.add_domain_modal.title")
           })
         })
@@ -532,7 +532,7 @@ let Q = registerModal(function (e) {
           spacing: 16,
           children: [e.domainsRequireVerification ? jsx(et, {
             dnsToken: e.dnsToken
-          }) : jsx(_$$E, {
+          }) : jsx(TextWithTruncation, {
             children: renderI18nText("domain_management.add_domain_modal.body_text")
           }), jsx("div", {
             className: _$$s.wFull.$,
@@ -568,20 +568,20 @@ let Q = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: e.onClose,
             variant: "secondary",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("domain_management.modals_shared.cancel_button")
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             disabled: 0 === d.tokens.length || m,
             onClick: () => {
               u();
               e.onClose();
             },
             variant: "primary",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: e.domainsRequireVerification ? renderI18nText("domain_management.add_domain_modal.confirm_button_dc_enabled") : renderI18nText("domain_management.add_domain_modal.confirm_button")
             })
           })]
@@ -594,7 +594,7 @@ let Z = /^\b([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z
 function ee(e) {
   return jsx("span", {
     className: _$$s.breakWord.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: e.token.content
     })
   });
@@ -605,10 +605,10 @@ function et(e) {
     spacing: 16,
     children: [jsxs(AutoLayout, {
       direction: "vertical",
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: "bold",
         children: renderI18nText("domain_management.modals_shared.update_dns_record_header")
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("domain_management.add_domain_modal.update_dns_record_sub_text", {
           learnMoreLink: jsx(D, {})
         })
@@ -617,10 +617,10 @@ function et(e) {
       dnsToken: e.dnsToken
     }), jsxs(AutoLayout, {
       direction: "vertical",
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: "bold",
         children: renderI18nText("domain_management.add_domain_modal.next_add_domains_header")
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("domain_management.add_domain_modal.next_add_domains_sub_text")
       })]
     })]
@@ -646,16 +646,16 @@ function ea(e) {
       horizontalAlignItems: "space-between",
       verticalAlignItems: "center",
       direction: "horizontal",
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontSize: 24,
         children: renderI18nText("domain_management.domain", {
           domainCount: 2
         })
-      }), jsx($n, {
+      }), jsx(Button, {
         onClick: a,
         variant: "primary",
         iconPrefix: jsx(_$$J, {}),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText("domain_management.domain", {
             domainCount: 1
           })
@@ -726,7 +726,7 @@ function ek({
       });
     }
   }];
-  let j = _$$A(l, 300);
+  let j = useDebouncedCallback(l, 300);
   let y = jsx(y2, {
     styleOverrides: {
       width: "100%",
@@ -776,7 +776,7 @@ function ek({
         height: 200,
         verticalAlignItems: "center",
         horizontalAlignItems: "center",
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText("domain_insights.unclaimed_users.no_unclaimed_users")
         })
       }),
@@ -824,7 +824,7 @@ function eE({
       }));
     },
     className: _$$s.bgNone.colorTextBrand.cursorPointer.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("domain_insights.unclaimed_users.enable_domain_capture")
     })
   });
@@ -838,7 +838,7 @@ function eC({
   return jsxs("div", {
     children: [jsx("div", {
       className: _$$s.textBodyMedium.p16.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "default",
         children: renderI18nText("domain_insights.unclaimed_users.description")
       })
@@ -852,7 +852,7 @@ function eC({
           children: jsx(_$$b, {})
         }), jsx("span", {
           className: _$$s.pt4.$,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             children: renderI18nText("domain_insights.unclaimed_users.domain_capture_notice", {
               enableDomainCaptureLink: jsx(eE, {
@@ -872,14 +872,14 @@ function eC({
           children: [jsx("span", {
             className: _$$s.ml2.$,
             children: jsx(_$$b, {})
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "default",
             fontWeight: "bold",
             children: renderI18nText("domain_insights.unclaimed_users.verify_domains_note")
           })]
         }), jsx("span", {
           className: _$$s.ml32.mr16.$,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "default",
             children: renderI18nText("domain_insights.unclaimed_users.verify_domains_note_body")
           })
@@ -962,13 +962,13 @@ let eO = registerModal(function (e) {
   });
   let c = "loading" === d.status || d.data?.domainOrgAdminsToRemove?.status !== ResourceStatus.Loaded;
   let _ = "loaded" === d.status && d.data?.domainOrgAdminsToRemove && d.data?.domainOrgAdminsToRemove?.status === ResourceStatus.Loaded && d.data?.domainOrgAdminsToRemove.data ? d.data?.domainOrgAdminsToRemove.data : [];
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: l,
     width: "lg",
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontWeight: "bold",
             children: renderI18nText("domain_management.remove_domain_modal.modal_body_title", {
               domainCount: e.domainIds.length
@@ -983,13 +983,13 @@ let eO = registerModal(function (e) {
           horizontalAlignItems: "start",
           direction: "vertical",
           spacing: 0,
-          children: e.mfaRequired === CT.GUESTS || e.mfaRequired === CT.ALL_USERS ? jsx(_$$E, {
+          children: e.mfaRequired === CT.GUESTS || e.mfaRequired === CT.ALL_USERS ? jsx(TextWithTruncation, {
             children: _.length > 0 ? renderI18nText("domain_management.remove_domain_modal.body_text_with_mfa_with_warning", {
               domainCount: e.domainIds.length
             }) : renderI18nText("domain_management.remove_domain_modal.modal_body_text_with_mfa", {
               domainCount: e.domainIds.length
             })
-          }) : jsx(_$$E, {
+          }) : jsx(TextWithTruncation, {
             children: _.length > 0 ? renderI18nText("domain_management.remove_domain_modal.body_text_with_warning", {
               domainCount: e.domainIds.length
             }) : renderI18nText("domain_management.remove_domain_modal.modal_body_text", {
@@ -1003,10 +1003,10 @@ let eO = registerModal(function (e) {
           horizontalAlignItems: "start",
           direction: "vertical",
           spacing: 16,
-          children: c ? jsx(qc, {}) : jsx("ul", {
+          children: c ? jsx(LoadingOverlay, {}) : jsx("ul", {
             className: q,
             children: _.map(e => jsx("li", {
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: renderI18nText("domain_management.remove_domain_modal.org_admin_info", {
                   name: e.user?.name,
                   email: e.user?.email
@@ -1017,17 +1017,17 @@ let eO = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: e.onClose,
             variant: "secondary",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("domain_management.remove_domain_modal.cancel_button")
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             disabled: a || c,
             onClick: o,
             variant: "destructive",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText("domain_management.remove_domain_modal.remove_button")
             })
           })]
@@ -1044,7 +1044,7 @@ let eL = registerModal(function (e) {
       domain: e
     }) => e), !0, a);
   }(e.orgId, e.domains);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -1063,7 +1063,7 @@ let eL = registerModal(function (e) {
           children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
-            children: [jsx(_$$E, {
+            children: [jsx(TextWithTruncation, {
               fontWeight: "bold",
               children: renderI18nText("domain_management.modals_shared.update_dns_record_header")
             }), renderI18nText("domain_management.verify_domain_modal.body", {
@@ -1074,7 +1074,7 @@ let eL = registerModal(function (e) {
           }), e.domains.length > 1 && jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 8,
-            children: [jsx(_$$E, {
+            children: [jsx(TextWithTruncation, {
               color: "secondary",
               children: renderI18nText("domain_management.domain", {
                 domainCount: e.domains.length
@@ -1088,11 +1088,11 @@ let eL = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: e.onClose,
             variant: "secondary",
             children: renderI18nText("domain_management.modals_shared.cancel_button")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               a();
               e.onVerify && e.onVerify();
@@ -1195,7 +1195,7 @@ function eU() {
     height: 200,
     verticalAlignItems: "center",
     horizontalAlignItems: "center",
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("domain_management.error_fetching_domains")
     })
   });
@@ -1208,7 +1208,7 @@ function eF({
 }) {
   let r = useDispatch();
   return jsx(cd, {
-    children: !t.verifiedAt && jsx($n, {
+    children: !t.verifiedAt && jsx(Button, {
       onClick: n => {
         n.stopPropagation();
         r(showModalHandler({
@@ -1282,7 +1282,7 @@ function e$(e) {
   let t = [{
     name: getI18nString("domain_management.column_header.name"),
     className: _$$s.flex1.$,
-    cellComponent: e => jsx(_$$E, {
+    cellComponent: e => jsx(TextWithTruncation, {
       children: e.domain
     }),
     getSortValue: e => e.domain
@@ -1299,7 +1299,7 @@ function e$(e) {
           "--color-icon": "var(--color-icon-tertiary)"
         }
       });
-      let l = e.verifiedAt ? jsx(_$$E, {
+      let l = e.verifiedAt ? jsx(TextWithTruncation, {
         children: renderI18nText("domain_management.domain_verified")
       }) : jsx("button", {
         className: el()("org_domain_management_page_view--unverifiedHover--9SaqO", _$$s.colorTextTertiary.bgTransparent.$),
@@ -1331,7 +1331,7 @@ function e$(e) {
   }, {
     name: getI18nString("domain_management.column_header.unclaimed_users"),
     nameElement: function () {
-      let e = jsx(_$$E, {
+      let e = jsx(TextWithTruncation, {
         color: "default",
         children: getI18nString("domain_management.column_header.unclaimed_users")
       });
@@ -1343,7 +1343,7 @@ function e$(e) {
           className: _$$s.ml2.$,
           children: jsx(_$$b, {
             "data-tooltip": getI18nString("domain_management.column_header.unclaimed_users_tooltip"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip-width": 152,
             "data-tooltip-show-immediately": !0
           })
@@ -1351,14 +1351,14 @@ function e$(e) {
       });
     }(),
     className: _$$s.flex1.$,
-    cellComponent: e => e.verifiedAt ? void 0 !== e.unclaimedUserCount ? jsx(_$$E, {
+    cellComponent: e => e.verifiedAt ? void 0 !== e.unclaimedUserCount ? jsx(TextWithTruncation, {
       children: renderI18nText("domain_management.unclaimed_user_count", {
         userCount: e.unclaimedUserCount ?? 0
       })
     }) : jsx(Wi, {
       className: _$$s.h12.$,
       animationType: JR.SHIMMER
-    }) : jsx(_$$E, {
+    }) : jsx(TextWithTruncation, {
       color: "tertiary",
       children: renderI18nText("domain_management.requires_verification")
     })
@@ -1466,7 +1466,7 @@ function e$(e) {
       height: 200,
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: renderI18nText("domain_management.you_have_no_domains")
       })
     }),
@@ -1507,7 +1507,7 @@ function eB(e) {
   let [r, l] = useState("");
   let [o, d] = useState({});
   let [c, _] = useState(0);
-  let u = (t = i.data?.org ? oA(i.data.org) : null) ? {
+  let u = (t = i.data?.org ? getResourceDataOrFallback(i.data.org) : null) ? {
     domainCaptureEnabled: !!t.domainCapture,
     allDomainsVerified: !((a = t.orgDomains).length < 1) && a.every(e => !!e.verifiedAt),
     orgDomains: t.orgDomains,

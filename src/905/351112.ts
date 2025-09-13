@@ -7,11 +7,11 @@ import { getInitialOptions } from "../figma_app/169182";
 import { LivegraphProvider } from "../905/436043";
 import { s as _$$s } from "../cssbuilder/589278";
 import { le } from "../905/904854";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { g as _$$g } from "../905/607862";
 import h from "classnames";
 import { sx } from "../905/941192";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { lQ } from "../905/934246";
 import { xk } from "@stylexjs/stylex";
 import { Te } from "../vendor/813803";
@@ -47,7 +47,7 @@ function $$A(e) {
         top: "-12px",
         left: "-12px"
       }).$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         color: "onbrand",
         truncate: !0,
         children: e.selectedItems.length > 100 ? "99+" : e.selectedItems.length
@@ -495,7 +495,7 @@ export function $$O0(e) {
     i(null);
   };
   switch (e.viewType) {
-    case XU.LIST:
+    case ViewMode.LIST:
       return jsx(N, {
         canSelectItem: e.canSelectItem,
         columns: e.listViewProps.columns,
@@ -517,7 +517,7 @@ export function $$O0(e) {
         updateRenderedItems: e.updateRenderedItems,
         updateVisibleItems: e.updateVisibleItems
       });
-    case XU.GRID:
+    case ViewMode.GRID:
       return jsx(_$$g, {
         canSelectItem: e.canSelectItem,
         containerStyle: e.gridViewProps.containerStyle,

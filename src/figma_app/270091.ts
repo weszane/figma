@@ -5,7 +5,7 @@ import { debounce } from "../905/915765";
 import { isNotNullish } from "../figma_app/95419";
 import { Et } from "../figma_app/397267";
 import { k as _$$k } from "../905/443820";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { l as _$$l } from "../905/509505";
 import { t as _$$t } from "../905/947268";
@@ -38,8 +38,8 @@ import { jD } from "../905/765855";
 import { b as _$$b } from "../905/985254";
 import { dG } from "../figma_app/753501";
 import { n1 } from "../figma_app/657017";
-import { pi } from "../figma_app/314264";
-import { Ui, EF } from "../905/709171";
+import { mapFileToProductType } from "../figma_app/314264";
+import { compareLibraryKeyWithString, compareLibraryItemsAlias } from "../905/709171";
 import { getCommonLibraryKey, memoizedProcessComponentsAndStateGroups, getFullComponentBreadcrumbs, getAssetBackgroundColor } from "../figma_app/80990";
 import { Fl } from "../figma_app/236178";
 import { FX } from "../figma_app/12491";
@@ -50,7 +50,7 @@ import { P as _$$P } from "../figma_app/582341";
 import { u as _$$u } from "../905/290607";
 import { g5 } from "../figma_app/178752";
 import { useOpenFileLibraryKey, selectOpenFile } from "../figma_app/516028";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { Gj, X0, Av, fc, El, Mb } from "../figma_app/646357";
 import { V as _$$V } from "../905/342732";
 import { Cn } from "../905/225265";
@@ -62,7 +62,7 @@ import { Fk } from "../figma_app/167249";
 import { He } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
 import { $A } from "../905/862883";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { _A } from "../figma_app/65182";
 import { CK } from "../figma_app/517115";
 import { j as _$$j2 } from "../figma_app/904819";
@@ -241,7 +241,7 @@ function eW(e) {
   let th = useStore();
   let tm = Nv(!0);
   let tg = _$$S.useOpenFileProperties();
-  let tf = useCallback(e => tc.type === iN.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && Ui(e.item, tc.libraryKey) && Av(e.item)) : tc.type === iN.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
+  let tf = useCallback(e => tc.type === iN.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && compareLibraryKeyWithString(e.item, tc.libraryKey) && Av(e.item)) : tc.type === iN.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
   let tE = useMemo(() => tc.type === iN.FILE ? tc.libraryKey === e4 ? {
     type: _$$I.LOCAL
   } : {
@@ -456,7 +456,7 @@ function eW(e) {
       isSearching
     });
   }, [tm, e.searchBarRef, eY, tg, sessionId, e4, pickerType, isSearching]);
-  let tj = sZ();
+  let tj = useCurrentUserOrg();
   let tU = Oe(tj);
   let tB = tc.type === iN.FILE ? tc.libraryKey : void 0;
   let tG = Fl();
@@ -480,7 +480,7 @@ function eW(e) {
     } = e;
     if (tp && !multiselect) {
       let e = Ml(tp, Object.keys(sceneGraphSelection));
-      if (VP(loadingState, e)) return item.node_id === tp.node_id && EF(item, tp);
+      if (VP(loadingState, e)) return item.node_id === tp.node_id && compareLibraryItemsAlias(item, tp);
     }
     return selectedItems.some(e => item.type === PrimaryWorkflowEnum.COMPONENT && e.type === PrimaryWorkflowEnum.COMPONENT ? !!item.component_key && item.component_key === e.component_key || !item.component_key && !e.component_key && item.node_id === e.node_id : item.type === PrimaryWorkflowEnum.STATE_GROUP && e.type === PrimaryWorkflowEnum.STATE_GROUP && (!!item.key && item.key === e.key || !item.key && !e.key && item.node_id === e.node_id));
   }, [tp, sceneGraphSelection, loadingState, multiselect, selectedItems]);
@@ -547,7 +547,7 @@ function eW(e) {
       libraryKey: o,
       libraryType: d,
       viewMode: isListView ? "list" : "grid",
-      productType: pi({
+      productType: mapFileToProductType({
         editorType: openFile?.editorType
       })
     };
@@ -765,7 +765,7 @@ function eW(e) {
       children: renderI18nText("design_systems.instance_swap_picker.no_components")
     }), jsx("div", {
       className: _$$s2.mt8.$$if(!eY, _$$s2.flex.itemsCenter.justifyCenter.mt12).$,
-      children: jsx($n, {
+      children: jsx(Button, {
         onClick: tH,
         variant: "secondary",
         iconPrefix: jsx(_$$l, {
@@ -1071,7 +1071,7 @@ export function $$e$0({
     htmlAttributes: {
       onMouseDown: dG,
       "data-tooltip": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: c ? jsx(_$$t, {}) : jsx(_$$Z, {})
   });
@@ -1082,7 +1082,7 @@ function eX({
 }) {
   if (t === iN.RECENT) return null;
   let r = renderI18nText("design_systems.instance_swap_picker.search_all_libraries");
-  return jsx($n, {
+  return jsx(Button, {
     onClick: e,
     variant: "secondary",
     children: r

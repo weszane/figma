@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useState, useCallback, useId, useImperativeHandle, useMemo } from "react";
-import { E as _$$E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { A as _$$A } from "../905/251970";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
@@ -173,7 +173,7 @@ export let $$T0 = forwardRef(function ({
                 noop(e);
             }
           })(G)
-        }), jsx(_$$E, {
+        }), jsx(ButtonPrimitive, {
           ref: q,
           className: "thumbnail_uploader--deleteThumbnailButton--4XZZf",
           "aria-label": getI18nString("community.publishing.clear_thumbnail_image"),
@@ -189,7 +189,7 @@ export let $$T0 = forwardRef(function ({
         className: "thumbnail_uploader--emptyStateContainer--agHad",
         children: [jsx(L, {}), jsxs("div", {
           className: "thumbnail_uploader--emptyStateControlsContainer--ABJwm",
-          children: [restoreDefaultThumbnailMedium && jsx($n, {
+          children: [restoreDefaultThumbnailMedium && jsx(Button, {
             disabled: H,
             onClick: e => {
               i?.();
@@ -197,7 +197,7 @@ export let $$T0 = forwardRef(function ({
               e.stopPropagation();
             },
             children: "file_thumbnail" === defaultThumbnailMediumSource ? getI18nString("community.publishing.use_file_thumbnail") : getI18nString("community.publishing.use_default_thumbnail")
-          }), jsx($n, {
+          }), jsx(Button, {
             ref: $,
             variant: restoreDefaultThumbnailMedium ? "link" : void 0,
             onClick: K,

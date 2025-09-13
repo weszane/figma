@@ -14,7 +14,7 @@ import { B } from "../905/330741";
 import { fullscreenValue } from "../figma_app/455680";
 import { bL, u as _$$u } from "../figma_app/852050";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { Nw, y7 } from "../figma_app/505098";
 import { k } from "../905/689791";
@@ -70,7 +70,7 @@ function P({
         onClick: N,
         htmlAttributes: {
           "data-tooltip": e,
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$e, {})
       });

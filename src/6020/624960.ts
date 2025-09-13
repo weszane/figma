@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { EventShield } from "../905/821217";
 import { e as _$$e } from "../905/149844";
 import { r as _$$r } from "../905/857502";
@@ -21,7 +21,7 @@ import { lJ } from "../905/275640";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
 import { vp } from "../figma_app/831696";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { uQ, Tv } from "../figma_app/151869";
 import { Q as _$$Q } from "../905/346809";
 import { parsePxInt } from "../figma_app/783094";
@@ -177,7 +177,7 @@ export function $$F1(t) {
       F(!0);
     },
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("proto.starting_points.edit_description")
     },
     "aria-label": getI18nString("proto.starting_points.edit_description"),
@@ -216,7 +216,7 @@ export function $$F1(t) {
             }));
           }(Q),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("proto.flows_panel.copy_link")
           },
           "aria-label": getI18nString("proto.flows_panel.copy_link"),
@@ -227,7 +227,7 @@ export function $$F1(t) {
         children: jsx(_$$K, {
           onClick: W,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("proto.starting_points.delete_starting_point_tooltip")
           },
           "aria-label": getI18nString("proto.starting_points.delete_starting_point_tooltip"),
@@ -253,7 +253,7 @@ export function $$F1(t) {
       children: [jsx(_$$Q, {
         faded: !0,
         extended: !0,
-        children: jsx(_$$E, {
+        children: jsx(ButtonPrimitive, {
           className: "prototype_starting_point_panel--panelTitleText--F75N0 draggable_list--panelTitleText--SwKez",
           onClick: tt,
           recordingKey: generateRecordingKey(t, "panelTitle"),
@@ -267,7 +267,7 @@ export function $$F1(t) {
           children: jsx(_$$K, {
             onClick: tt,
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("proto.starting_points.add_starting_point_tooltip")
             },
             "aria-label": getI18nString("proto.starting_points.add_starting_point_tooltip"),

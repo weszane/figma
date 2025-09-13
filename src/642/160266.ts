@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { kG } from "../figma_app/482495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 export let $$h0 = memo(function ({
   rowRef: e,
@@ -28,7 +28,7 @@ export let $$h0 = memo(function ({
     },
     htmlAttributes: {
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.corner_smoothing"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-testid": "cornerSmoothingToggle"
     },
     children: jsx(A, {})

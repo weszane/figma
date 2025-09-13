@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, forwardRef, useState } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { wY } from "../figma_app/708845";
@@ -13,7 +13,7 @@ import { a as _$$a } from "../5430/14230";
 import { qD, N6, z$ } from "../figma_app/471982";
 import { Q as _$$Q } from "../905/978641";
 import { XW, cX, eO, tv, ZA, Vm, qY } from "../figma_app/427318";
-import { U } from "../figma_app/45218";
+import { hasClientMeta } from "../figma_app/45218";
 import { Z4 } from "../figma_app/809727";
 import { A as _$$A } from "../5430/202447";
 import { O7 } from "../figma_app/578832";
@@ -598,7 +598,7 @@ export function $$U0({
       }), w && S && jsxs(Fragment, {
         children: [jsx("div", {
           className: sp
-        }), jsx(_$$E, {
+        }), jsx(ButtonPrimitive, {
           "aria-label": getI18nString("community.detail_view.previous_item"),
           className: T9,
           htmlAttributes: {
@@ -612,7 +612,7 @@ export function $$U0({
       }), w && k && jsxs(Fragment, {
         children: [jsx("div", {
           className: jp
-        }), jsx(_$$E, {
+        }), jsx(ButtonPrimitive, {
           "aria-label": getI18nString("community.detail_view.next_item"),
           className: aT,
           htmlAttributes: {
@@ -641,7 +641,7 @@ function V({
   });
   if (t !== Z4.EMBED) {
     let t = e.thumbnail_url ?? void 0;
-    let i = XW(e) ? e.thumbnail_src_set : U(e) && e.resized_thumbnail_urls;
+    let i = XW(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
     let a = cX(e);
     return jsxs(Fragment, {
       children: [jsx(A, {

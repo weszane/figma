@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
@@ -16,7 +16,7 @@ import { conditionalFeatureFlag } from "../figma_app/169182";
 import { Fj, jI } from "../905/763714";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { fK } from "../905/469533";
 import { lg } from "../figma_app/976749";
 import { y as _$$y } from "../905/810168";
@@ -56,7 +56,7 @@ export let $$C0 = registerModal(function ({
     "data-enhanced-contrast": ""
   }, {});
   let H = D === FFileType.WHITEBOARD || getFeatureFlags().a11y_design_dom_mirror && D === FFileType.DESIGN || B;
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: U,
     width: "md",
     ...V,
@@ -86,7 +86,7 @@ export let $$C0 = registerModal(function ({
             children: ["platform_error" === P ? getI18nString("fullscreen.accessibility.platform_error") : G, "render_error" === P && jsx("span", {
               role: "alert",
               className: _$$s.block.mt8.$,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: "danger",
                 children: renderI18nText("fullscreen.accessibility.dom_error")
               })

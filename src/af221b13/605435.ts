@@ -15,7 +15,7 @@ import { Vm } from "../figma_app/427318";
 import { selectCurrentUser } from "../905/372672";
 import { Pg, lT, AC } from "../figma_app/777551";
 import { MK, cN, Wd, RB } from "../figma_app/599979";
-import { U as _$$U, xQ, I0, bD, m3, mr, Uz } from "../figma_app/45218";
+import { hasClientMeta, isWidget, isPlugin, ResourceType, hasMonetizedResourceMetadata, isWidgetOrPlugin, hasFigFileMetadata } from "../figma_app/45218";
 import { useRef, useEffect } from "react";
 import { U as _$$U2 } from "../905/103637";
 import { customHistory } from "../905/612521";
@@ -32,7 +32,7 @@ import { j7 } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { x2, OX } from "../figma_app/33586";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { Sz } from "../figma_app/12535";
 import { E as _$$E } from "../1556/957507";
 import { k2 } from "../figma_app/10554";
@@ -139,10 +139,10 @@ function V(e) {
   let p = useSelector(e => e.currentUserOrgId);
   let h = Jm();
   let y = U0(resource);
-  let f = _$$U(e.resource) ? e0.COMMUNITY_HUB_FILE : xQ(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
+  let f = hasClientMeta(e.resource) ? e0.COMMUNITY_HUB_FILE : isWidget(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let v = selectCurrentUser();
-  let w = _$$U(e.resource);
-  let E = I0(e.resource);
+  let w = hasClientMeta(e.resource);
+  let E = isPlugin(e.resource);
   let G = x2(void 0, resource, void 0, k2.RESOURCE_PAGE);
   let q = OX(resource);
   if (useEffect(() => {
@@ -150,16 +150,16 @@ function V(e) {
       hubFileId: e.resource.id
     })) : r(af({
       id: e.resource.id,
-      resourceType: E ? bD.PLUGIN : bD.WIDGET
+      resourceType: E ? ResourceType.PLUGIN : ResourceType.WIDGET
     }));
   }, [r, e.resource.id, p, w, E]), !v) return null;
-  let V = m3(resource);
+  let V = hasMonetizedResourceMetadata(resource);
   let K = [];
   let Z = getI18nString("community.resource.edit_this_page");
   if (K.push({
     displayText: Z,
     callback: () => {
-      _$$U(resource) ? (Cu({
+      hasClientMeta(resource) ? (logAndTrackCTA({
         name: gK.EDIT_THIS_PAGE,
         hubFileId: resource.id,
         isMonetized: V,
@@ -173,7 +173,7 @@ function V(e) {
         isEditHubFilePageMode: !0,
         entryPoint: k2.RESOURCE_PAGE,
         canvasThumbnailPromise: Sz(fileKey, v)
-      }))) : (Cu({
+      }))) : (logAndTrackCTA({
         pluginId: resource.id,
         name: gK.EDIT_THIS_PAGE,
         isMonetized: V,
@@ -186,12 +186,12 @@ function V(e) {
         entryPoint: k2.RESOURCE_PAGE
       })));
     }
-  }), getFeatureFlags().ext_plugin_publish_rearch && mr(resource) && (K.push(G), q && K.push(q)), _$$U(resource)) {
+  }), getFeatureFlags().ext_plugin_publish_rearch && isWidgetOrPlugin(resource) && (K.push(G), q && K.push(q)), hasClientMeta(resource)) {
     let e = getI18nString("community.hub_files.open_original_file");
     if (K.push({
       displayText: e,
       callback: () => {
-        Cu({
+        logAndTrackCTA({
           name: gK.OPEN_ORIGINAL_FILE,
           hubFileId: resource.id,
           isMonetized: V,
@@ -212,7 +212,7 @@ function V(e) {
       K.push({
         displayText: e,
         callback: () => {
-          Cu({
+          logAndTrackCTA({
             name: V ? gK.DELIST : gK.UNPUBLISH,
             hubFileId: resource.id,
             isMonetized: V,
@@ -243,7 +243,7 @@ function V(e) {
     ref: c,
     buttonClassName: "show_resource_creator_banner--manageResourceCTA--lYOcA text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: () => {
-      d || (Cu({
+      d || (logAndTrackCTA({
         name: gK.MANAGE_RESOURCE,
         resourceId: resource.id,
         has_carousel_media_nudge: y,
@@ -262,7 +262,7 @@ function V(e) {
     icon: jsx(_$$U2, {}),
     iconSize: "medium",
     mainText: getI18nString("community.resource.your_resource_is_live"),
-    description: y ? _$$U(resource) ? getI18nString("community.resource.next_we_recommend_adding_more_images") : xQ(resource) ? getI18nString("community.resource.next_we_recommend_adding_more_images_and_videos", {
+    description: y ? hasClientMeta(resource) ? getI18nString("community.resource.next_we_recommend_adding_more_images") : isWidget(resource) ? getI18nString("community.resource.next_we_recommend_adding_more_images_and_videos", {
       resourceType: getI18nString("community.plugins.widget")
     }) : getI18nString("community.resource.next_we_recommend_adding_more_images_and_videos", {
       resourceType: getI18nString("community.plugins.plugin")
@@ -303,22 +303,22 @@ export function $$K0(e) {
     resource
   } = e;
   let i = useSelector(e => MK(e, resource));
-  let o = useSelector(e => _$$U(resource) ? cN(i) : Wd(e, resource));
+  let o = useSelector(e => hasClientMeta(resource) ? cN(i) : Wd(e, resource));
   let l = RB(resource);
-  let c = Uz(resource) ? resource.fig_file_metadata?.key : void 0;
+  let c = hasFigFileMetadata(resource) ? resource.fig_file_metadata?.key : void 0;
   return getFeatureFlags().community_hub_admin && lT(resource) ? jsx(E, {
     resource
-  }) : getFeatureFlags().community_hub_admin_reviewer && m3(resource) ? jsx(w, {
+  }) : getFeatureFlags().community_hub_admin_reviewer && hasMonetizedResourceMetadata(resource) ? jsx(w, {
     resource
   }) : resource.publishing_status ? o && AC(resource) ? jsx(y, {
     resource
   }) : Pg(resource) ? jsx(h, {
     hasPublisherAdminAccess: o,
     resource
-  }) : _$$U(resource) && l ? jsx(V, {
+  }) : hasClientMeta(resource) && l ? jsx(V, {
     resource,
     fileKey: c
-  }) : (I0(resource) || xQ(resource)) && l ? jsx(V, {
+  }) : (isPlugin(resource) || isWidget(resource)) && l ? jsx(V, {
     resource
   }) : jsx(_$$S, {}) : jsx(f, {
     resource

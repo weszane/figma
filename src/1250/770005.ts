@@ -8,7 +8,7 @@ import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { oW } from "../905/675859";
 import { useProjectFileCreationPermissions } from "../figma_app/687776";
 import { renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { $ as _$$$ } from "../figma_app/61705";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
@@ -112,7 +112,7 @@ export function $$I0() {
     onClose: complete,
     primaryCta: {
       type: "button",
-      label: jsx(_$$E, {
+      label: jsx(TextWithTruncation, {
         children: renderI18nText("figmake.marketing_modal.button")
       }),
       onClick: () => {

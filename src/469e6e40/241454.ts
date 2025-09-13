@@ -6,13 +6,13 @@ import { P as _$$P } from "../905/697522";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { k as _$$k2 } from "../figma_app/618031";
 import { q as _$$q } from "../905/749058";
 import { Wq } from "../figma_app/481749";
@@ -109,7 +109,7 @@ export let $$z2 = registerModal(function (e) {
           children: c
         }), a ? jsx("p", {
           className: F,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: getI18nString("org_settings.remove_user_modal.any_available_seats_free_up", {
               userCount: s
             })
@@ -179,25 +179,25 @@ function V(e) {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.design.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.design.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.design.access_all_templates_and_libraries")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), jsx("span", {
@@ -222,19 +222,19 @@ function V(e) {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.figjam.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.figjam.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
@@ -252,19 +252,19 @@ function V(e) {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.dev_mode.advanced_inspect")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.dev_mode.integrations")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIcon.mr8.$,
                 svg: _$$A
               }), renderI18nText("confirm_account_change.generic.dev_mode.annotations")]
@@ -298,31 +298,31 @@ function V(e) {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.design.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.design.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.design.access_all_templates_and_libraries")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.downgrade.design.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), jsx("span", {
@@ -347,25 +347,25 @@ function V(e) {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.figjam.edit_share_or_create")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.figjam.give_access_to_drafts")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.figjam.access_all_templates_and_libraries")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.downgrade.design.give_access_to_drafts")]
@@ -381,19 +381,19 @@ function V(e) {
             className: _$$s.mt8.$,
             children: [jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.dev_mode.advanced_inspect")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.dev_mode.integrations")]
             }), jsxs("li", {
               className: _$$s.flex.ml2.mt8.$,
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: _$$s.colorIconDanger.mr8.$,
                 svg: _$$A2
               }), renderI18nText("confirm_account_change.generic.dev_mode.annotations")]
@@ -684,7 +684,7 @@ let $$Y0 = registerModal(function (e) {
         loadingText: getI18nString("org_join_request.loading_confirmation_button_text"),
         children: [y && jsxs("div", {
           className: "confirm_org_user_actions--alertBanner--7G9Lr confirm_org_user_actions--banner--T7B90",
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             width: "16px",
             height: "16px",
             useOriginalSrcFills_DEPRECATED: !1,

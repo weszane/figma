@@ -17,12 +17,12 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P } from '../905/347284';
 import { N as _$$N } from '../905/438674';
 import { Y as _$$Y } from '../905/506207';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
 import { v as _$$v } from '../905/596134';
 import { getFeatureFlags } from '../905/601108';
 import { J as _$$J2 } from '../905/639674';
-import { B as _$$B } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { Point } from '../905/736624';
 import { l as _$$l } from '../905/745972';
 import { Ao, uF } from '../905/748636';
@@ -543,7 +543,7 @@ function ep(e) {
     onTargetDrop: e => ev(e),
     children: [Y && jsxs('div', {
       className: $1,
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A
       }), renderI18nText('bug_reporter.drop_attachments')]
     }), jsx(_$$P, {
@@ -573,7 +573,7 @@ function ep(e) {
               try {
                 Q(t);
                 eg(t);
-              } catch { }
+              } catch {}
             },
             onKeyDown: ew,
             maxLength: 150
@@ -721,7 +721,7 @@ function ep(e) {
               className: HI,
               children: [e.shareFileLabel, jsxs('div', {
                 className: kB,
-                children: [jsx(_$$B, {
+                children: [jsx(SvgComponent, {
                   svg: _$$A4
                 }), jsx('div', {
                   className: dX,
@@ -732,11 +732,11 @@ function ep(e) {
           })
         }), jsxs(e2, {
           className: GC,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: e.onClose,
             children: renderI18nText('bug_reporter.modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'primary',
             type: 'submit',
             disabled: !em(),
@@ -786,7 +786,7 @@ function e_(e) {
         })]
       }), jsx('button', {
         onClick: r => d(r, t, e.url),
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: Yz,
           svg: _$$A6
         })
@@ -794,7 +794,7 @@ function e_(e) {
     }, t)), jsx('label', {
       className: UM,
       htmlFor: 'file-upload',
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3
       })
     }), jsx('input', {
@@ -810,7 +810,7 @@ function e_(e) {
 }
 function eh(e) {
   let t = useDispatch();
-  let r = useHandleMouseEvent(generateRecordingKey(e.recordingKey, 'asana-link'), 'click', () => { });
+  let r = useHandleMouseEvent(generateRecordingKey(e.recordingKey, 'asana-link'), 'click', () => {});
   return jsxs('div', {
     className: yl,
     children: [jsx('div', {
@@ -820,7 +820,7 @@ function eh(e) {
       className: U3,
       children: [jsxs('div', {
         className: AX,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A5
         }), jsx(_$$N, {
           newTab: !0,
@@ -831,9 +831,9 @@ function eh(e) {
         })]
       }), jsxs('div', {
         className: AX,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           svg: _$$A2
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'link',
           onClick: () => {
             t(lW({

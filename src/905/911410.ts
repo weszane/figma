@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
 import { Jn } from "../figma_app/272243";
-import { W_ } from "../905/893109";
+import { toRem } from "../905/893109";
 import { bL as _$$bL, cM } from "../905/163832";
 let d = {
   sm: "window__sm__f5wSc"
@@ -17,9 +17,9 @@ let $$c1 = forwardRef(({
   let p;
   let m = {};
   let h = !1;
-  if ("number" == typeof e ? m.width = W_(e) : e && (p = d[e]), t) {
+  if ("number" == typeof e ? m.width = toRem(e) : e && (p = d[e]), t) {
     let e;
-    "full" === t ? h = !0 : e = "number" == typeof t ? W_(t) : t;
+    "full" === t ? h = !0 : e = "number" == typeof t ? toRem(t) : t;
     m["--fpl-contents-max-height"] = e;
   }
   return jsxs(_$$bL, {

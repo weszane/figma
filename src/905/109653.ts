@@ -11,11 +11,11 @@ import { getI18nString } from "../905/303541";
 import { Lz } from "../905/497882";
 import { AC, Y5 } from "../figma_app/777551";
 import { uX, Rk, Un, MY, I_ } from "../905/759470";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
 import { getCurrentPluginVersion } from "../figma_app/300692";
 import { ol } from "../figma_app/598018";
-import { mr } from "../figma_app/45218";
+import { isWidgetOrPlugin } from "../figma_app/45218";
 import { i as _$$i } from "../905/186961";
 import { T as _$$T } from "../905/943304";
 import { x as _$$x } from "../905/956141";
@@ -213,7 +213,7 @@ function P({
   publishRoleField: a
 }) {
   let s;
-  let l = sZ();
+  let l = useCurrentUserOrg();
   let d = ol();
   let p = k(e, t);
   i && (s = "publishing_status" in i ? i.publishing_status : FPublicationStatusType.ORG_PRIVATE);
@@ -259,7 +259,7 @@ function P({
             if (s === FPublicationStatusType.ORG_PRIVATE && a) {
               let e = l?.name || "";
               let t = "";
-              i && mr(i) && (t = getCurrentPluginVersion(i)?.name || "");
+              i && isWidgetOrPlugin(i) && (t = getCurrentPluginVersion(i)?.name || "");
               return I_.privateExtension({
                 resourceName: t,
                 orgName: e

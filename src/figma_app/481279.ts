@@ -7,7 +7,7 @@ import { e } from "../905/478588";
 import { y as _$$y } from "../905/292472";
 import { o as _$$o } from "../905/347208";
 import { VariableResolvedDataType, NodePropertyCategory, PropertyScope, NodeType } from "../figma_app/763686";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { A as _$$A } from "../2854/374356";
 import { A as _$$A2 } from "../2854/731650";
@@ -28,21 +28,21 @@ let A = [{
   type: "scope",
   scope: PropertyScope.CORNER_RADIUS,
   name: renderI18nText("variables.scopes.corner_radius"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A
   })
 }, {
   type: "scope",
   scope: PropertyScope.WIDTH_HEIGHT,
   name: renderI18nText("variables.scopes.width_height"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A5
   })
 }, {
   type: "scope",
   scope: PropertyScope.GAP,
   name: renderI18nText("variables.scopes.gap"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A3
   }),
   subLabel: renderI18nText("variables.scopes.auto_layout")
@@ -50,14 +50,14 @@ let A = [{
   type: "scope",
   scope: PropertyScope.TEXT_CONTENT,
   name: renderI18nText("variables.scopes.text_content"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A7
   })
 }, {
   type: "scope",
   scope: PropertyScope.STROKE_FLOAT,
   name: renderI18nText("variables.scopes.stroke"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A6
   })
 }, {
@@ -69,7 +69,7 @@ let A = [{
   type: "scope",
   scope: PropertyScope.EFFECT_FLOAT,
   name: renderI18nText("variables.scopes.effects"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A2
   })
 }, {
@@ -105,7 +105,7 @@ let A = [{
   type: "scope",
   scope: PropertyScope.PARAGRAPH_INDENT,
   name: renderI18nText("variables.scopes.paragraph_indent"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A4
   })
 }];
@@ -152,7 +152,7 @@ let N = [{
   type: "scope",
   scope: PropertyScope.TEXT_CONTENT,
   name: renderI18nText("variables.scopes.text_content"),
-  iconElement: jsx(B, {
+  iconElement: jsx(SvgComponent, {
     svg: _$$A7
   })
 }, {

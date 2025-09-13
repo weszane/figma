@@ -47,8 +47,8 @@ import { N as _$$N2 } from "../905/438674";
 import { $ as _$$$ } from "../905/692618";
 import { Yy } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
-import { $n, WW } from "../905/521428";
-import { E as _$$E } from "../905/632989";
+import { Button, ButtonLarge } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
 import { f as _$$f } from "../905/949464";
 import { t as _$$t2 } from "../5132/435788";
 import { Z as _$$Z } from "../905/279476";
@@ -135,7 +135,7 @@ import { Wv } from "../figma_app/711157";
 import { y as _$$y4 } from "../figma_app/13082";
 import { z as _$$z } from "../vendor/999105";
 import { W as _$$W4 } from "../905/592530";
-import { A as _$$A5 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { P as _$$P4 } from "../905/347284";
 import { selectCurrentUser } from "../905/372672";
 import { L as _$$L2 } from "../1156/365427";
@@ -145,7 +145,7 @@ import { z as _$$z2 } from "../905/788559";
 import { H as _$$H3 } from "../figma_app/414056";
 import { F as _$$F3 } from "../1156/295005";
 import { S as _$$S2 } from "../1156/720801";
-import { B as _$$B3 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { kS, C4 } from "../figma_app/325912";
 import { oU, oR, XJ, IB, qE } from "../1156/418246";
 import { Kj } from "../1156/201513";
@@ -377,7 +377,7 @@ function eU() {
             }), jsx("div", {})]
           })]
         })]
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         disabled: isConnectedNonOwner,
         onClick: () => m({
@@ -643,7 +643,7 @@ function tN() {
         })
       }), jsxs("div", {
         className: "xeq5yr9 x78zum5 x13a6bvl x167g77z x3psx0u",
-        children: [jsx(_$$E, {
+        children: [jsx(ButtonPrimitive, {
           onClick: () => {
             UK("SIGN_UP_BUTTON_BANNER");
             e({
@@ -1274,7 +1274,7 @@ function tK() {
             "--color-icon": "currentColor"
           }
         }), getI18nString("figmake.supabase_error.title")]
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         onClick: e,
         children: getI18nString("figmake.supabase_error.button")
@@ -1326,7 +1326,7 @@ function tX({
         })]
       }), c && n && jsx("div", {
         className: "x1yjdb4r x78zum5 x1q0g3np x6s0dn4 x167g77z x19y5rnk",
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "secondary",
           onClick: n,
           children: getI18nString("ai.try_again")
@@ -1364,7 +1364,7 @@ function tY({
   return jsxs(eB, {
     variant: a,
     onClose: e,
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       onClick: () => {
         l(!0);
         o("console");
@@ -1386,7 +1386,7 @@ function tY({
       })
     }), jsx("div", {
       className: "x78zum5 x1q0g3np x6s0dn4 x167g77z x19y5rnk x1yjdb4r",
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         onClick: t,
         disabled: n,
@@ -2154,11 +2154,11 @@ function nS({
     subtitle: getI18nString("figmake.supabase.cta.auth.body_text"),
     interaction: jsxs("div", {
       className: "x78zum5 x167g77z",
-      children: [jsx(WW, {
+      children: [jsx(ButtonLarge, {
         variant: "primary",
         onClick: a,
         children: getI18nString("figmake.supabase.connect")
-      }), jsx(WW, {
+      }), jsx(ButtonLarge, {
         variant: "secondary",
         onClick: () => e(),
         children: getI18nString("figmake.supabase.cancel")
@@ -2189,7 +2189,7 @@ function nw({
       subtitle: getI18nString("figmake.supabase.cta.connect_to_existing_projects.subtitle"),
       interaction: jsxs("div", {
         className: "x78zum5 x167g77z",
-        children: [jsx(WW, {
+        children: [jsx(ButtonLarge, {
           variant: "primary",
           onClick: () => {
             l(showModalHandler({
@@ -2204,7 +2204,7 @@ function nw({
             }));
           },
           children: getI18nString("figmake.supabase.cta.connect_to_existing_projects.button")
-        }), jsx(WW, {
+        }), jsx(ButtonLarge, {
           variant: "secondary",
           onClick: () => n(),
           children: getI18nString("figmake.supabase.cancel")
@@ -2282,7 +2282,7 @@ function nL({
       subtitle: getI18nString("figmake.supabase.cta.create_project.subtitle"),
       interaction: jsxs("div", {
         className: "x78zum5 x167g77z",
-        children: [jsx(WW, {
+        children: [jsx(ButtonLarge, {
           variant: "primary",
           onClick: () => {
             l(showModalHandler({
@@ -2297,7 +2297,7 @@ function nL({
             }));
           },
           children: getI18nString("figmake.supabase.cta.create_project.button")
-        }), jsx(WW, {
+        }), jsx(ButtonLarge, {
           variant: "secondary",
           onClick: () => n(),
           children: getI18nString("figmake.supabase.cancel")
@@ -2427,7 +2427,7 @@ function nD({
     className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
     children: [jsx("div", {
       className: "xvy4d1p xxk0z11 x78zum5 xl56j7k x6s0dn4",
-      children: jsx(_$$B3, {
+      children: jsx(SvgComponent, {
         svg: _$$A6,
         useOriginalSrcFills_DEPRECATED: !0,
         svgWidth: "14px",
@@ -2446,7 +2446,7 @@ function nB() {
       className: "x78zum5 x1q0g3np x6s0dn4 x167g77z",
       children: [jsx("div", {
         className: "xvy4d1p xxk0z11 x78zum5 xl56j7k x6s0dn4",
-        children: jsx(_$$B3, {
+        children: jsx(SvgComponent, {
           svg: _$$A6,
           useOriginalSrcFills_DEPRECATED: !0,
           svgWidth: "14px",
@@ -2648,12 +2648,12 @@ function nJ({
       children: getI18nString("figmake.supabase.create_secret_cta.body.button")
     }) : jsxs("div", {
       className: "x78zum5 x167g77z",
-      children: [jsx(WW, {
+      children: [jsx(ButtonLarge, {
         type: "submit",
         variant: "primary",
         onClick: h,
         children: getI18nString("figmake.supabase.create_secret_cta.body.button")
-      }), jsx(WW, {
+      }), jsx(ButtonLarge, {
         variant: "secondary",
         onClick: () => l(),
         children: getI18nString("figmake.supabase.cancel")
@@ -2926,7 +2926,7 @@ function rp({
   let u = o || !t;
   return jsxs("div", {
     className: "x78zum5 xdt5ytf",
-    children: [t ? jsxs(_$$E, {
+    children: [t ? jsxs(ButtonPrimitive, {
       ...Ay.props(rg.reasoningTitle, o && rg.reasoningTitleExpanded),
       onClick: () => c(!o),
       "aria-expanded": o,
@@ -3414,7 +3414,7 @@ function rL({
     requestScrollToBottom,
     scrollContainerRef: h
   });
-  let w = useMemo(() => showScrollToBottomButton ? jsx(_$$E, {
+  let w = useMemo(() => showScrollToBottomButton ? jsx(ButtonPrimitive, {
     className: "x78zum5 x6s0dn4 xl56j7k x10l6tqk x1td3qas x10w6t97 x1c7jfne x1nrll8i xuuh30 x1yjdb4r x16rqkct x16a2w50 x1ypdohk x1epfdc x1vjfegm xk82a7y",
     onClick: handleScrollToBottomClick,
     children: jsx(_$$W4, {})
@@ -3427,7 +3427,7 @@ function rL({
     overscan: 10
   });
   g.current = T;
-  let I = _$$A5(() => {
+  let I = useDebouncedCallback(() => {
     g.current && !b.current && g.current.measure();
   }, 16);
   let L = useCallback((e, t) => {
@@ -3762,7 +3762,7 @@ function rD({
     requestScrollToBottom,
     scrollContainerRef: h
   });
-  let v = useMemo(() => showScrollToBottomButton ? jsx(_$$E, {
+  let v = useMemo(() => showScrollToBottomButton ? jsx(ButtonPrimitive, {
     className: "x78zum5 x6s0dn4 xl56j7k x10l6tqk x1td3qas x10w6t97 x1c7jfne x1nrll8i xuuh30 x1yjdb4r x16rqkct x16a2w50 x1ypdohk x1epfdc x1vjfegm xk82a7y",
     onClick: handleScrollToBottomClick,
     children: jsx(_$$W4, {})
@@ -4510,7 +4510,7 @@ function iy({
   };
   let D = jsxs(bL, {
     manager,
-    children: [createElement(_$$E, {
+    children: [createElement(ButtonPrimitive, {
       ...Ay.props(ih.editButton, !a && A && ih.editButtonFrozen),
       disabled: a,
       key: "editButton",
@@ -4554,7 +4554,7 @@ function iy({
   return A ? jsxs("div", {
     ref: k,
     ...Ay.props(ih.libraryImportContainer, ih.libraryImportButtonTextDisabledContainer),
-    children: [createElement(_$$E, {
+    children: [createElement(ButtonPrimitive, {
       className: "xuk1p4z xv2f06h xmdyj57 x1lqa7cf x1ug7bdz xxhr3t",
       disabled: !0,
       key: "libraryImportButton",
@@ -4570,7 +4570,7 @@ function iy({
       targetKey: oD,
       isShowing,
       onComplete: complete
-    }), createElement(_$$E, {
+    }), createElement(ButtonPrimitive, {
       ...Ay.props(ih.libraryImportButtonText, a && ih.libraryImportButtonTextDisabled),
       disabled: a,
       key: "libraryImportButton",

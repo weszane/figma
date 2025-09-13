@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import r from "../vendor/523035";
 import { customHistory } from "../905/612521";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/355181";
@@ -12,7 +12,7 @@ import { k } from "../figma_app/618031";
 import { R } from "../905/304671";
 import { showModalHandler } from "../905/156213";
 import { hs, G6, j2 } from "../figma_app/84966";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { aD, Sn, EC } from "../469e6e40/875985";
@@ -42,7 +42,7 @@ export function $$E1(e) {
   }
 }
 function C(e) {
-  let t = sZ();
+  let t = useCurrentUserOrg();
   let a = hs(t);
   if (!a.data?.show || !t) return null;
   let s = a.data.totalFloorSeatCount;
@@ -129,7 +129,7 @@ function N(e) {
       }) : e.shouldAutoRenew ? a ? renderI18nText("org_admin_settings.banners.renewal.body", {
         date: e.nextRenewalDate
       }) : renderI18nText("org_admin_settings.banners.renewal.body.legacy") : renderI18nText("org_admin_settings.banners.renewal.body.non_auto"),
-      icon: jsx(B, {
+      icon: jsx(SvgComponent, {
         svg: A,
         className: _$$s.p8.$
       }),

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription, Rq } from "../figma_app/27355";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { renderI18nText } from "../905/303541";
 import { ow } from "../figma_app/976749";
 import { e as _$$e } from "../905/621515";
@@ -22,7 +22,7 @@ export function $$C3() {
   let i = useAtomWithSubscription($$x2);
   let C = useAtomWithSubscription($$y1);
   let v = PE();
-  let E = !q8();
+  let E = !isAIFeaturesEnabledForCurrentUser();
   let T = ow();
   let w = v || getFeatureFlags().figjam_ai_menu_items_all_access && T && E;
   let {

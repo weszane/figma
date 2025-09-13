@@ -3,13 +3,13 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useDialogClose } from "../905/749786";
 import { useModalManager } from "../905/437088";
-import { bL, Rq } from "../905/38914";
+import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { setupAutofocusHandler } from "../905/128376";
 import { hp } from "../vendor/565136";
-import { R as _$$R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { Yu } from "../905/355291";
@@ -48,7 +48,7 @@ let $$C0 = registerModal(function (e) {
       onClose();
     }
   });
-  return s ? s.email_validated_at ? jsx(bL, {
+  return s ? s.email_validated_at ? jsx(ModalRootComponent, {
     width: "lg",
     manager: u,
     children: hasPasswordOrSSO(s) ? s.two_factor_secret_loaded ? s.two_factor_app_enabled ? jsx(k, {}) : jsx(N, {}) : jsx(R, {}) : jsx(_$$_, {
@@ -56,7 +56,7 @@ let $$C0 = registerModal(function (e) {
       fplModal: !0,
       title: renderI18nText("auth.two-factor-setup.set_up_two_factor_authentication")
     })
-  }) : jsx(_$$R, {
+  }) : jsx(ConfirmationModal, {
     title: getI18nString("auth.two-factor-setup.a_verified_email_is_required"),
     onConfirm: () => {
       r(qC());
@@ -86,11 +86,11 @@ function k() {
       children: renderI18nText("auth.two-factor-setup.continue-to-recovery-code-setup")
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: t,
           children: renderI18nText("auth.two-factor-setup.close")
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           onClick: () => {
             t();
@@ -141,7 +141,7 @@ function R() {
     }), jsx(wi, {
       children: jsxs("div", {
         className: Hx,
-        children: ["gov" !== window.INITIAL_OPTIONS.cluster_name && jsx($n, {
+        children: ["gov" !== window.INITIAL_OPTIONS.cluster_name && jsx(Button, {
           variant: "link",
           onClick: () => {
             r();
@@ -150,11 +150,11 @@ function R() {
           children: renderI18nText("auth.two-factor-setup.send_me_an_sms_instead")
         }), jsxs("div", {
           className: G6,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: r,
             children: renderI18nText("auth.two-factor-setup.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               hasPasswordOrSSO(t) && e(lJ({
                 token: t.password_token,
@@ -179,7 +179,7 @@ function N() {
   let h = () => {
     u(!o);
   };
-  return jsxs(Rq, {
+  return jsxs(ModalFormContents, {
     onSubmit: t => {
       t.preventDefault();
       let i = t.target.elements.namedItem("otp");
@@ -204,7 +204,7 @@ function N() {
             size: 200
           })
         }), jsx("div", {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "link",
             onClick: h,
             children: renderI18nText("auth.two-factor-setup.click_here_to_manually_type_the_code_instead")
@@ -216,7 +216,7 @@ function N() {
         }), jsx("div", {
           className: aY,
           children: r6().secret?.match(/.{4}/g)?.join(" ")
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "link",
           onClick: h,
           children: renderI18nText("auth.two-factor-setup.click_here_to_scan_a_qr_code_instead")
@@ -238,11 +238,11 @@ function N() {
       })]
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: s,
           children: renderI18nText("auth.two-factor-setup.cancel")
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "primary",
           type: "submit",
           disabled: t.loading,

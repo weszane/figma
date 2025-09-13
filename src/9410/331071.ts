@@ -21,7 +21,7 @@ import { q as _$$q4, w as _$$w4 } from '../905/112768';
 import { sha1HexFromBytes } from '../905/125019';
 import { g as _$$g3 } from '../905/125190';
 import { J as _$$J5 } from '../905/125993';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { _ as _$$_5 } from '../905/136246';
 import { $W } from '../905/144933';
 import { e as _$$e2 } from '../905/149844';
@@ -92,7 +92,7 @@ import { $7 } from '../905/509613';
 import { D8 } from '../905/511649';
 import { q as _$$q } from '../905/516087';
 import { C as _$$C3 } from '../905/520159';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { globalPerfTimer } from '../905/542194';
 import { U as _$$U3 } from '../905/544380';
 import { PluginApiMetrics } from '../905/545265';
@@ -113,7 +113,7 @@ import { _G, Pv } from '../905/619652';
 import { getSelectedView } from '../905/622391';
 import { VU } from '../905/625959';
 import { T as _$$T3 } from '../905/632137';
-import { E as _$$E6 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { M as _$$M } from '../905/637515';
 import { DP } from '../905/640017';
 import { X as _$$X } from '../905/647103';
@@ -125,7 +125,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { y as _$$y } from '../905/705736';
 import { M4 } from '../905/713695';
 import { logInfo, logWarning } from '../905/714362';
-import { B as _$$B2 } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { i as _$$i } from '../905/718764';
 import { E as _$$E5, x as _$$x5 } from '../905/719609';
 import { A as _$$A2 } from '../905/721854';
@@ -146,7 +146,7 @@ import _require from '../905/802325';
 import { j as _$$j2 } from '../905/813868';
 import { Z as _$$Z3 } from '../905/829242';
 import { AutoLayout } from '../905/470281';
-import { sZ as _$$sZ, dq } from '../905/845253';
+import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { Um } from '../905/848862';
 import { V as _$$V3 } from '../905/849455';
 import { E9 } from '../905/851937';
@@ -179,7 +179,7 @@ import { a as _$$a4 } from '../905/964520';
 import { xp } from '../905/966582';
 import { qp } from '../905/977779';
 import { v as _$$v3 } from '../905/981847';
-import { E as _$$E } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { b as _$$b5 } from '../905/985254';
 import { e as _$$e5 } from '../905/987482';
 import { F as _$$F4 } from '../905/989956';
@@ -244,7 +244,7 @@ import { atom, atomStoreManager, AY, createLocalStorageAtom, createRemovableAtom
 import { Pt as _$$Pt2, NV, OX, qu, x2, xZ } from '../figma_app/33586';
 import { ms } from '../figma_app/38430';
 import { useLatestRef } from '../figma_app/922077';
-import { bD } from '../figma_app/45218';
+import { ResourceType } from '../figma_app/45218';
 import { YJ } from '../figma_app/50224';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { getObservableOrFallback } from '../figma_app/84367';
@@ -287,7 +287,7 @@ import { _p } from '../figma_app/297957';
 import { filterArrayByEditorType, getCurrentPluginVersion, getPluginByFileId, injectHtmlOrUiFiles, PluginPermissions } from '../figma_app/300692';
 import { vt } from '../figma_app/306946';
 import { Tv } from '../figma_app/311375';
-import { v5 } from '../figma_app/314264';
+import { getProductType } from '../figma_app/314264';
 import { bJ } from '../figma_app/318123';
 import { eH as _$$eH } from '../figma_app/318590';
 import { m as _$$m2 } from '../figma_app/321561';
@@ -307,7 +307,7 @@ import { C as _$$C2 } from '../figma_app/444297';
 import { g as _$$g5, o as _$$o5 } from '../figma_app/449363';
 import { a as _$$a5 } from '../figma_app/453187';
 import { fullscreenValue } from '../figma_app/455680';
-import { dZ, q8 } from '../figma_app/459490';
+import { isLlamaEnabledForOrg, isAIFeaturesEnabledForCurrentUser } from '../figma_app/459490';
 import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { rH as _$$rH } from '../figma_app/467741';
@@ -398,7 +398,7 @@ import { A as _$$A7 } from '../svg/499035';
 import { A as _$$A14 } from '../svg/586486';
 import { A as _$$A13 } from '../svg/617101';
 import { A as _$$A4 } from '../vendor/21595';
-import { A as _$$A } from '../vendor/90566';
+import { useDebouncedCallback } from 'use-debounce';
 import ih from '../vendor/104014';
 import iu from '../vendor/223926';
 import ez from '../vendor/260986';
@@ -1102,7 +1102,7 @@ let t3 = registerModal(({
         overflowX: 'scroll',
         overflowY: 'scroll'
       },
-      children: [jsx($n, {
+      children: [jsx(Button, {
         onClick: () => {
           navigator.clipboard.writeText(JSON.stringify(e, void 0, 2));
         },
@@ -2056,7 +2056,7 @@ function n$({
     'recordingKey': generateRecordingKey(recordingKey, i),
     'htmlAttributes': useMemo(() => ({
       'data-tooltip': e,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip-show-above': !0,
       'data-clickable': !0
     }), [e]),
@@ -2256,21 +2256,21 @@ function n9(e) {
         }), jsx(n$, {
           tab: nq.RADIUS,
           label: getI18nString('first_draft.theme_panel.radius'),
-          children: jsx(_$$B2, {
+          children: jsx(SvgComponent, {
             svg: r,
             className: 'theme_editor--svgIcon--ongu6'
           })
         }), jsx(n$, {
           tab: nq.SPACING,
           label: getI18nString('first_draft.theme_panel.spacing'),
-          children: jsx(_$$B2, {
+          children: jsx(SvgComponent, {
             svg: s,
             className: nZ
           })
         }), jsx(n$, {
           tab: nq.FONT,
           label: getI18nString('first_draft.theme_panel.font'),
-          children: jsx(_$$B2, {
+          children: jsx(SvgComponent, {
             svg: _$$A7,
             className: nZ
           })
@@ -2471,9 +2471,9 @@ function ai({
         'htmlAttributes': {
           'data-tooltip': r,
           'data-tooltip-show-above': !0,
-          'data-tooltip-type': Ib.TEXT
+          'data-tooltip-type': KindEnum.TEXT
         },
-        'children': jsx(_$$B2, {
+        'children': jsx(SvgComponent, {
           svg: a
         })
       }, t))
@@ -4707,7 +4707,7 @@ function sc({
               htmlAttributes: {
                 ...(C && {
                   'data-tooltip': b,
-                  'data-tooltip-type': Ib.TEXT
+                  'data-tooltip-type': KindEnum.TEXT
                 })
               },
               children: renderI18nText('first_draft.kits.org_libraries', {
@@ -4818,7 +4818,7 @@ function sh() {
         onClick: e => e.stopPropagation(),
         htmlAttributes: {
           'data-tooltip': getI18nString('qa.learn_more'),
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip-show-above': !0
         },
         children: renderI18nText('qa.learn_more')
@@ -5176,7 +5176,7 @@ function sg({
   let y = useCallback(() => e.prompt.length !== 0, [e]);
   let b = getFeatureFlags().first_draft_direct_gen;
   let C = useRef(null);
-  let v = () => r && jsx($n, {
+  let v = () => r && jsx(Button, {
     'aria-label': sp(r),
     'iconPrefix': jsx(_$$i4, {
       style: {
@@ -6863,7 +6863,7 @@ let oi = [{
                 children: jsxs(AutoLayout, {
                   direction: 'vertical',
                   spacing: 8,
-                  children: [jsx(_$$E, {
+                  children: [jsx(TextWithTruncation, {
                     children: i
                   }), jsx('textarea', {
                     className: _$$s3.resizeNone.wFull.colorBgSecondary.px12.py8.bRadius5.$,
@@ -6918,7 +6918,7 @@ let oi = [{
             direction: 'vertical',
             spacing: 'auto',
             padding: 8,
-            children: [jsx(_$$E, {
+            children: [jsx(TextWithTruncation, {
               fontSize: 14,
               fontWeight: 'medium',
               children: 'Make First Draft Kit (Debug)'
@@ -6945,7 +6945,7 @@ let oi = [{
               })]
             }), jsxs(_$$B, {
               gap: 8,
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: 'secondary',
                 onClick: async () => {
                   await aJ({
@@ -6955,11 +6955,11 @@ let oi = [{
                   });
                 },
                 children: 'Eval componentize on page'
-              }), jsx($n, {
+              }), jsx(Button, {
                 variant: 'secondary',
                 onClick: () => c(!0),
                 children: 'Run on current selection'
-              }), jsx($n, {
+              }), jsx(Button, {
                 variant: 'secondary',
                 onClick: () => aY({
                   componentizePromptOverride: inputs.componentizePrompt.enabled ? inputs.componentizePrompt.override : void 0,
@@ -7505,14 +7505,14 @@ let oi = [{
 })];
 function or() {
   let e = PE();
-  let t = !q8();
+  let t = !isAIFeaturesEnabledForCurrentUser();
   let i = _$$ow();
   let r = e || getFeatureFlags().figjam_ai_menu_items_all_access && i && t;
   let s = GM();
   let o = _$$V4();
   let l = Vr();
   let d = _$$eH();
-  let c = _$$sZ();
+  let c = useCurrentUserOrg();
   return useMemo(() => oi.reduce((e, t) => {
     for (let i of t.featureFlags || []) {
       if (!getFeatureFlags()[i]) return e;
@@ -7523,7 +7523,7 @@ function or() {
         ...t
       };
       getFeatureFlags().fragment_search_tweaks && l?.name && !l?.isSlide && (i.displayNode = renderI18nText('fullscreen_actions.quick_actions.find-inspiration-with-selection', {
-        frameName: jsx(_$$E, {
+        frameName: jsx(TextWithTruncation, {
           color: 'secondary',
           children: l?.name
         })
@@ -7531,7 +7531,7 @@ function or() {
       e.push(i);
       return e;
     }
-    t.action === _$$JT.EDIT_IMAGE && dZ(c) || (t.action === _$$JT.GENERATE_IMAGE || t.action === _$$JT.EDIT_IMAGE || t.action === _$$JT.UPSCALE_IMAGE || t.action === _$$JT.REMOVE_BACKGROUND) && !s || r && e.push(t);
+    t.action === _$$JT.EDIT_IMAGE && isLlamaEnabledForOrg(c) || (t.action === _$$JT.GENERATE_IMAGE || t.action === _$$JT.EDIT_IMAGE || t.action === _$$JT.UPSCALE_IMAGE || t.action === _$$JT.REMOVE_BACKGROUND) && !s || r && e.push(t);
     return e;
   }, []), [r, s, o, l, d, c]);
 }
@@ -7793,7 +7793,7 @@ function oN(e) {
     canRequest,
     canRun
   } = e;
-  let a = _$$sZ();
+  let a = useCurrentUserOrg();
   let s = RW();
   let o = _$$a5(a?.id, extension.plugin_id, s.loaded ? s.data?.workspaceId : void 0);
   if (isPrivatePlugin(extension) && a && a.name) {
@@ -7851,7 +7851,7 @@ function oO(e) {
   return jsx('div', {
     'className': _$$s3.ml8.colorTextSecondary.noWrap.$,
     'data-tooltip': [details, r].filter(Boolean).join('\n'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip-max-width': 300,
     'data-testid': 'search-debug-info',
     'children': o
@@ -7882,7 +7882,7 @@ function oF({
   let _ = useCallback(() => {
     close();
   }, [close]);
-  let x = _$$A(_, 300);
+  let x = useDebouncedCallback(_, 300);
   useEffect(() => () => {
     x.cancel();
   }, [x]);
@@ -8046,7 +8046,7 @@ function oF({
   let M = R ? WJ(c, e) : void 0;
   let B = _$$h2('plugin');
   let U = _$$h2('widget');
-  let G = _$$sZ();
+  let G = useCurrentUserOrg();
   let H = e.name === 'go-to-page' ? `go-to-page-${e.args?.pageName}` : e.name || e.action;
   useEffect(() => {
     e.onRender && e.onRender(!!t);
@@ -8089,7 +8089,7 @@ function oF({
             className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
             plugin: t,
             role: 'presentation'
-          }) : jsx(_$$B2, {
+          }) : jsx(SvgComponent, {
             className: _$$s3.colorIcon.w20.h20.bRadius4.$,
             svg: _$$A14,
             ariaLabel: `${e.name} icon`,
@@ -8098,7 +8098,7 @@ function oF({
         }
         if (e.iconType && typeof e.iconType == 'string') {
           let t;
-          return (t = e.iconType) === 'external_link' ? jsx(_$$B2, {
+          return (t = e.iconType) === 'external_link' ? jsx(SvgComponent, {
             svg: _$$A13,
             className: _$$s3.colorIcon.$
           }) : t === 'import' ? jsx(_$$R, {}) : t === 'plus' ? jsx(_$$e2, {}) : t === 'widget' ? jsx(_$$v, {}) : void 0;
@@ -8126,7 +8126,7 @@ function oF({
         children: 'REPAIR'
       }) : e.action === _$$JT.FIRST_DRAFT && e.disabled ? jsx('div', {
         'data-tooltip': getI18nString('qa.unavailable'),
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'style': {
           '--color-icon': 'var(--color-icon-disabled)'
         },
@@ -8153,7 +8153,7 @@ function oF({
           'aria-hidden': !0,
           'id': 'tab-hint',
           'children': renderI18nText('whiteboard.ai_modal.hint_tab')
-        }), jsx(_$$B2, {
+        }), jsx(SvgComponent, {
           'svg': _$$A12,
           'className': _$$s3.colorIcon.$,
           'aria-describedby': 'tab-hint'
@@ -8242,7 +8242,7 @@ function oB({
         iconType: jsx(ic, {}),
         displayNode: jsx(Fragment, {
           children: renderI18nText('fullscreen_actions.quick_actions.go-to-page', {
-            pageName: jsx(_$$E, {
+            pageName: jsx(TextWithTruncation, {
               color: 'secondary',
               children: e.name
             })
@@ -8257,7 +8257,7 @@ function oB({
         let e = getSingletonSceneGraph().getDirectlySelectedNodes();
         return _$$j(e.map(e => e.name)) ?? null;
       }();
-      let r = useMemo(() => i ? jsx(_$$E, {
+      let r = useMemo(() => i ? jsx(TextWithTruncation, {
         color: 'secondary',
         children: i
       }) : null, [i]);
@@ -8569,12 +8569,12 @@ function oB({
             },
             callback: () => {},
             displayNode: m ? renderI18nText('fullscreen_actions.quick_actions.find-in-community', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
             }) : renderI18nText('fullscreen_actions.quick_actions.find-community-matching', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
@@ -8607,26 +8607,26 @@ function oB({
             },
             callback: () => {},
             displayNode: m ? o ? renderI18nText('fullscreen_actions.quick_actions.find-at-plan-file', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               }),
-              planFileName: jsx(_$$E, {
+              planFileName: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: g
               })
             }) : renderI18nText('fullscreen_actions.quick_actions.find-components', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
             }) : o ? renderI18nText('fullscreen_actions.quick_actions.find-components-matching', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
             }) : renderI18nText('fullscreen_actions.quick_actions.find-assets-matching', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
@@ -8663,7 +8663,7 @@ function oB({
             },
             callback: () => {},
             displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-at-plan-file-and-community' : 'fullscreen_actions.quick_actions.find-at-plan-file-and-community', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText('fullscreen_actions.quick_actions.quoted-query', {
                   searchQuery: e
@@ -8671,12 +8671,12 @@ function oB({
               }),
               planFileName: g
             }) : o ? renderI18nText('fullscreen_actions.quick_actions.find-components-matching', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
             }) : renderI18nText('fullscreen_actions.quick_actions.find-assets-matching', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
@@ -8713,7 +8713,7 @@ function oB({
             },
             callback: () => {},
             displayNode: renderI18nText('fullscreen_actions.assistant-chat-query', {
-              query: jsx(_$$E, {
+              query: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
@@ -8739,14 +8739,14 @@ function oB({
               searchQuery: e
             },
             displayNode: m ? renderI18nText(getFeatureFlags().actions_prioritize_search ? 'fullscreen_actions.quick_actions.search-plugins-widgets' : 'fullscreen_actions.quick_actions.find-plugins-widgets', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: getFeatureFlags().actions_prioritize_search_v3 || getFeatureFlags().actions_prioritize_search ? renderI18nText('fullscreen_actions.quick_actions.quoted-query', {
                   searchQuery: e
                 }) : e
               })
             }) : renderI18nText('fullscreen_actions.quick_actions.find-extensions-matching', {
-              searchQuery: jsx(_$$E, {
+              searchQuery: jsx(TextWithTruncation, {
                 color: 'secondary',
                 children: e
               })
@@ -8891,7 +8891,7 @@ function oH({
   setExtensionFilter: t,
   canViewWidgets: i
 }) {
-  let r = _$$sZ();
+  let r = useCurrentUserOrg();
   let s = Cb();
   let o = useMemo(() => ({
     [BY.ALL]: getI18nString('qa.filter.all'),
@@ -8981,7 +8981,7 @@ function la({
     'aria-hidden': t,
     'plugin': a,
     'className': _$$s3.colorIcon.w20.h20.m2.bRadius4.$
-  }) : jsx(_$$B2, {
+  }) : jsx(SvgComponent, {
     ariaHidden: t,
     svg: _$$A14,
     className: _$$s3.colorIcon.w20.h20.m2.bRadius4.$,
@@ -9136,11 +9136,11 @@ function lT({
   let {
     extension
   } = e;
-  let o = manifestContainsWidget(extension) ? jsx(_$$E, {
+  let o = manifestContainsWidget(extension) ? jsx(TextWithTruncation, {
     color: 'tertiary',
     fontSize: 11,
     children: renderI18nText('qa.extensions.widget')
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     color: 'tertiary',
     fontSize: 11,
     children: renderI18nText('qa.extensions.plugin')
@@ -9204,7 +9204,7 @@ function lw({
 }) {
   return jsx('div', {
     className: _$$s3.alignLeft.font11.lh16.pl32.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: 'danger',
       children: e.displayText
     })
@@ -9418,7 +9418,7 @@ function lk(e) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h5,
         data: {
-          resourceType: bD.PLUGIN
+          resourceType: ResourceType.PLUGIN
         }
       }));
     }
@@ -9431,7 +9431,7 @@ function lk(e) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h5,
         data: {
-          resourceType: bD.WIDGET
+          resourceType: ResourceType.WIDGET
         }
       }));
     }
@@ -9513,7 +9513,7 @@ let lQ = forwardRef(({
   size: i = 'regularSize',
   variant: a,
   ...s
-}, o) => jsx(_$$E6, {
+}, o) => jsx(ButtonPrimitive, {
   className: rB()({
     [lL]: !0,
     [r[a ?? 'primary']]: !0,
@@ -9594,14 +9594,14 @@ function l1({
         action: i,
         dataTestId: 'decline-invite-button',
         variant: 'secondary',
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           children: renderI18nText('community.detail_view.decline')
         })
       }), jsx(l0, {
         action: t,
         dataTestId: 'accept-invite-button',
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontSize: 11,
           children: renderI18nText('community.detail_view.accept')
         })
@@ -9667,7 +9667,7 @@ function l8({
     className: _$$s3.flex.flexColumn.colorTextSecondary.textBodyMedium.$,
     children: jsxs('div', {
       className: _$$s3.flex.flexRow.$,
-      children: [r, jsx(l9, {}), jsx(_$$B2, {
+      children: [r, jsx(l9, {}), jsx(SvgComponent, {
         svg: _$$A15,
         className: _$$s3.mx2.colorIconSecondary.$
       }), jsx('div', {
@@ -9676,7 +9676,7 @@ function l8({
           numUsers: a,
           numUsersStr: formatNumber(a)
         })
-      }), jsx(l9, {}), jsx(_$$B2, {
+      }), jsx(l9, {}), jsx(SvgComponent, {
         svg: _$$A16,
         className: _$$s3.colorIconSecondary.$,
         style: _$$sx.add({
@@ -10026,7 +10026,7 @@ function dl({
 function dd({
   extensions: e
 }) {
-  let t = _$$sZ();
+  let t = useCurrentUserOrg();
   return t && e.length !== 0 ? jsx(di, {
     augmentedExtensions: e,
     header: getI18nString('qa.other_extensions_from_org', {
@@ -10129,7 +10129,7 @@ function dv({
         }
       }(my());
       let i = U5();
-      let r = dq() ?? void 0;
+      let r = useCurrentUserOrgId() ?? void 0;
       let [{
         status: n,
         data: a,
@@ -10297,7 +10297,7 @@ function dv({
 function dE({
   extensions: e
 }) {
-  let t = _$$sZ();
+  let t = useCurrentUserOrg();
   if (!t || e.length === 0) return null;
   let [i, r] = du()(e, e => e.types.has(Ag.ORG_SAVED));
   let a = [...i, ...r];
@@ -10689,7 +10689,7 @@ function dO(e) {
   return e === DesignGraphElements.SELECT;
 }
 function dM(e) {
-  let t = _$$A(KY, e.timeoutMs);
+  let t = useDebouncedCallback(KY, e.timeoutMs);
   let i = _$$el();
   let [r, s] = useState(!1);
   let o = useRef(null);
@@ -10714,7 +10714,7 @@ function dP() {
   let e = debugState.getState();
   let t = _$$l(e);
   let i = e.openFile?.key ?? '';
-  let r = v5(e.selectedView, null);
+  let r = getProductType(e.selectedView, null);
   let s = _$$FX();
   let o = [...or(), ...s];
   let l = eP();
@@ -10798,7 +10798,7 @@ function dP() {
                   align: 'center',
                   children: [jsx('span', {
                     className: _$$s3.textBodyMediumStrong.$,
-                    children: jsx(_$$E, {
+                    children: jsx(TextWithTruncation, {
                       color: 'brand',
                       children: x
                     })

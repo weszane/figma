@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { connect } from "react-redux";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
@@ -41,7 +41,7 @@ class f extends RecordingPureComponent {
   }
   render() {
     if (!this.props.openFile || isBranchAlt(this.props.openFile)) return null;
-    if (this.props.library.publishProgress.state !== LibraryPublishStatusEnum.NONE) return jsx(IK, {
+    if (this.props.library.publishProgress.state !== LibraryPublishStatusEnum.NONE) return jsx(ButtonWide, {
       variant: "secondary",
       disabled: !0,
       children: this.props.library.publishProgress.publishType === PublishStatusEnum.UNPUBLISH ? renderI18nText("design_systems.libraries_modal.unpublishing") : renderI18nText("design_systems.libraries_modal.publishing")
@@ -52,7 +52,7 @@ class f extends RecordingPureComponent {
     return e ? t || i ? jsx(bj, {
       elementRef: this.props.buttonRef,
       kbArgs: this.props.kbArgs,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "primary",
         disabled: this.props.isPublishingModalDisabled,
         onClick: this.showModal,
@@ -65,7 +65,7 @@ class f extends RecordingPureComponent {
     }) : this.props.publishedState : t ? jsx(bj, {
       elementRef: this.props.buttonRef,
       kbArgs: this.props.kbArgs,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         variant: "primary",
         disabled: this.props.isPublishingModalDisabled,
         onClick: this.showModal,

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 export function $$a0() {
-  let e = U();
+  let e = trackFileEventWithStore();
   return useCallback(t => {
     e("figjam_onboarding_event", t, {
       batchRequest: !1

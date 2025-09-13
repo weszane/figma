@@ -11,7 +11,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { TQ, Zl } from "../905/211621";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
 import { zE } from "../905/8732";
@@ -20,7 +20,7 @@ import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { B9 } from "../figma_app/722362";
 import { getBasename } from "../905/309735";
 import { XV } from "../figma_app/383828";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { VZ } from "../905/959568";
 import { xP } from "../figma_app/65182";
 import { u as _$$u } from "../figma_app/940920";
@@ -206,7 +206,7 @@ export function $$J2({
   onlyInstances ? eC = instanceSwapPickerShown.isShown && instanceSwapPickerShown.id === Q ? sK : shouldHideButtons ? qw : vS : onlyInstanceSublayers && (eC = ey ? EA : me);
   let ew = useRef(null);
   let eO = _$$R(ew);
-  let eR = M ?? jsx(_$$B, {
+  let eR = M ?? jsx(SvgComponent, {
     className: t4,
     svg: _$$A3
   });
@@ -235,9 +235,9 @@ export function $$J2({
       doNotReserveSpaceForChevron: u,
       ...(eO ? {
         "data-tooltip": eI,
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       } : void 0),
-      children: [!D && jsx(_$$B, {
+      children: [!D && jsx(SvgComponent, {
         className: $C,
         svg: _$$A
       }), jsx("div", {
@@ -246,12 +246,12 @@ export function $$J2({
         ref: ew,
         children: eI
       }), !shouldHideButtons && jsxs(Fragment, {
-        children: [!onlyInstanceSublayers && eR, ey && jsx(_$$B, {
+        children: [!onlyInstanceSublayers && eR, ey && jsx(SvgComponent, {
           className: N1,
           width: "24px",
           height: "24px",
           svg: _$$A2,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("design_systems.instance_panel.select_instance")
         })]
       })]

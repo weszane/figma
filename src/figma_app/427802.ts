@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
 import { Ay } from "@stylexjs/stylex";
@@ -42,7 +42,7 @@ export function $$_0(e) {
   });
 }
 function h(e) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     "aria-label": e.ariaLabel,
     onClick: e.onClick,
     disabled: e.disabled,

@@ -8,12 +8,12 @@ import { l as _$$l } from "../905/479687";
 import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { AC, Pt as _$$Pt, v4 } from "../figma_app/655139";
 import { gB } from "../905/294543";
 import { Z } from "../905/820720";
 import { aq } from "../figma_app/399472";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { isPluginAllowListed } from "../figma_app/155287";
 import { d as _$$d } from "../905/480825";
 import { _d, mL, ZU, aC } from "../905/79137";
@@ -29,7 +29,7 @@ export function $$I1({
 }) {
   let d = AC(e);
   let c = _$$Pt(d);
-  let u = sZ();
+  let u = useCurrentUserOrg();
   let p = useSelector(e => e.whitelistedPlugins);
   let _ = isPluginAllowListed(d, p, u) ? e : {
     type: "first-party",
@@ -106,7 +106,7 @@ let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? js
       children: e.icon
     }), jsx("div", {
       className: _d,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: e.displayText
       })
     })]
@@ -120,7 +120,7 @@ let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? js
     children: e.icon
   }), jsx("div", {
     className: _d,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: e.displayText
     })
   })]
@@ -138,7 +138,7 @@ let A = (e, t, r) => e.separator ? jsx(wv, {}, `${t}_separator`) : e.header ? js
       children: e.icon
     }), jsx("div", {
       className: _d,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         children: e.displayText
       })
     })]

@@ -5,7 +5,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { H8 } from "../905/590952";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { o1 } from "../figma_app/10554";
 export function $$p0({
   profile: e,
@@ -39,7 +39,7 @@ export function $$p0({
         direction: "vertical",
         spacing: 0,
         verticalAlignItems: "center",
-        children: [jsxs(E, {
+        children: [jsxs(TextWithTruncation, {
           color: isPending ? "tertiary" : void 0,
           children: [(e => {
             switch (entity_type) {
@@ -55,7 +55,7 @@ export function $$p0({
                 return e;
             }
           })(name), " ", isPending && getI18nString("community.publish.pending")]
-        }), t && jsxs(E, {
+        }), t && jsxs(TextWithTruncation, {
           color: "tertiary",
           children: ["@", t]
         })]

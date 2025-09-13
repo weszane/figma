@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { e as _$$e } from "../905/149844";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
@@ -48,7 +48,7 @@ export function $$h0(e) {
         learnMore: x
       })
     }), h && jsxs(Fragment, {
-      children: [jsx($n, {
+      children: [jsx(Button, {
         iconPrefix: jsx(_$$e, {}),
         variant: "primary",
         onClick: () => {

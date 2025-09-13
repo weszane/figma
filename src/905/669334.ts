@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { t as _$$t } from "../905/150656";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { r as _$$r } from "../905/571562";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
@@ -146,7 +146,7 @@ let $$k0 = memo(({
           children: [jsx("span", {
             className: "dsa_file_view_tabs--assetTypeText--7-2SQ dsa_file_view_tabs--durationText--oKwcG text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: renderI18nText("design_systems.libraries_modal.type")
-          }), jsxs(_$$E, {
+          }), jsxs(ButtonPrimitive, {
             onClick: B,
             className: "dsa_file_view_tabs--assetType--XSwaT dsa_file_view_tabs--duration--wcSV6 text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: [x[k], jsx("div", {

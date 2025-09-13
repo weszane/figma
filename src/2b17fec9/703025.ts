@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { _X, Yb } from '../figma_app/62612';
+import { getViewportInfo, scaleRect } from '../figma_app/62612';
 import { getObservableValue } from '../figma_app/84367';
 import { AppStateTsApi } from '../figma_app/763686';
 export function $$o0(e) {
-  let t = _X({
+  let t = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
   let i = getObservableValue(AppStateTsApi?.canvasViewState().selectionBoundingRect, {
@@ -12,6 +12,6 @@ export function $$o0(e) {
     width: 0,
     height: 0
   });
-  return useMemo(() => Yb(t, i), [t, i]);
+  return useMemo(() => scaleRect(t, i), [t, i]);
 }
 export const j = $$o0;

@@ -6,7 +6,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL, DZ, mc, c$, wv } from "../905/493196";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -15,7 +15,7 @@ import { isInvalidValue } from "../905/216495";
 import { kl, lJ } from "../905/275640";
 import { Um } from "../905/848862";
 import { Sh } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { L as _$$L } from "../905/158054";
 import { k as _$$k2 } from "../905/336528";
 import { l6, c$ as _$$c$ } from "../905/794875";
@@ -439,7 +439,7 @@ function J({
   let n = useDispatch();
   let o = Um();
   let [c, k] = lJ("stackReverseZIndex");
-  let y = am();
+  let y = trackFileEventWithUser();
   let S = useSelector(Sh);
   let j = getI18nState()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
   let b = isInvalidValue(c);
@@ -558,7 +558,7 @@ function ee({
         });
       },
       "data-tooltip": r ? getI18nString("fullscreen.properties_panel.stack_panel.only_applicable_for_horizontal_layout") : void 0,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     })
   });
 }
@@ -569,7 +569,7 @@ function et({
   let n = useDispatch();
   let a = Um();
   let [o, c] = lJ("bordersTakeSpace");
-  let m = am();
+  let m = trackFileEventWithUser();
   let k = useSelector(Sh);
   let y = isInvalidValue(o);
   let S = !0 === o;

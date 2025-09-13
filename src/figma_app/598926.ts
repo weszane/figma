@@ -7,7 +7,7 @@ import { VisualBellActions } from "../905/302958";
 import { bx } from "../905/34809";
 import { sf } from "../905/929976";
 import { popModalStack } from "../905/156213";
-import { xr } from "../figma_app/314264";
+import { trackFolderEvent } from "../figma_app/314264";
 import { SS, d as _$$d } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { rq } from "../905/351260";
@@ -40,7 +40,7 @@ let $$I15 = createOptimistThunk((e, t) => {
 let $$S1 = createActionCreator("FOLDER_PIN_FILE");
 let $$v8 = createOptimistThunk(async (e, t) => {
   let r = e.optimisticDispatch($$S1(t));
-  xr("file_browser_folder_pin_file", t.folderId, null, e.getState(), {
+  trackFolderEvent("file_browser_folder_pin_file", t.folderId, null, e.getState(), {
     fileKey: t.fileKey
   });
   await XHR.post(`/api/folders/${t.fileKey}/pin`).then(() => {
@@ -107,7 +107,7 @@ let $$w11 = createOptimistThunk((e, t) => {
     for (let r of i) if (r.name === t.name) {
       e.dispatch($$k7(r));
       t.onFolderCreated && t.onFolderCreated(r.id, r.name);
-      xr("Folder Created", r.id, r.team_id, e.getState(), {
+      trackFolderEvent("Folder Created", r.id, r.team_id, e.getState(), {
         sharingAudienceControl: t.sharingAudienceControl,
         teamAccess: t.teamAccess
       });
@@ -153,7 +153,7 @@ createOptimistThunk((e, {
   isSubscribed: n
 }) => {
   let s = n ? "Folder Subscriber Added" : "Folder Subscriber Deleted";
-  xr(s, t, r, e.getState());
+  trackFolderEvent(s, t, r, e.getState());
   let l = XHR.put(`/api/folders/${t}`, {
     is_subscribed: n
   });

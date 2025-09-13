@@ -1,6 +1,6 @@
 import { FontSourceType } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 export let $$n2;
 let o = !1;
 let l = !1;
@@ -19,7 +19,7 @@ export function $$p3() {
 export function $$_4(e, t) {
   let r = debugState.getState();
   let n = r.openFile?.key;
-  n && !c && (ds("Show Missing Fonts Popover", n, r, {
+  n && !c && (trackFileEvent("Show Missing Fonts Popover", n, r, {
     fontListLoaded: e,
     counts: t,
     timeNow: performance.now()
@@ -33,7 +33,7 @@ function h() {
     let n = e.figFileDuplicatedFromHubFile;
     let o = !1;
     void 0 !== r && void 0 !== n && (o = null != n[r]);
-    ds("has_missing_font", r, e, {
+    trackFileEvent("has_missing_font", r, e, {
       has_google_fonts: t.has(FontSourceType.GOOGLE),
       has_local_fonts: t.has(FontSourceType.LOCAL),
       has_shared_fonts: t.has(FontSourceType.SHARED),

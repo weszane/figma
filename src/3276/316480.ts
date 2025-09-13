@@ -5,7 +5,7 @@ import s from "../vendor/223926";
 import l from "../vendor/239910";
 import c from "../vendor/946678";
 import u from "../vendor/260986";
-import { q8 } from "../figma_app/459490";
+import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { op, qr } from "../figma_app/844435";
 import { eE } from "../figma_app/106207";
 import { gp } from "../figma_app/973927";
@@ -114,7 +114,7 @@ export function $$D1() {
     }(c, u, productComponents, t, n, i, s, l), [c, u, productComponents, t, n, i, s, l]);
   }();
   let t = function () {
-    let e = q8();
+    let e = isAIFeaturesEnabledForCurrentUser();
     let t = useSelector(e => e.currentUserOrgId);
     let [n] = IT(E(t));
     return useMemo(() => "loaded" !== n.status ? [] : function (e) {
@@ -156,12 +156,12 @@ export function $$D1() {
     }(n.data), [n]).filter(t => !!getFeatureFlags().jamgpt_recents_pin && !e || t.id && !S.has(t.id));
   }();
   let n = function (e) {
-    let t = q8();
+    let t = isAIFeaturesEnabledForCurrentUser();
     if (!getFeatureFlags().jamgpt_recents_pin || t) return null;
     for (let t of e) if (t.id && S.has(t.id)) return t;
     return null;
   }(t);
-  let s = q8();
+  let s = isAIFeaturesEnabledForCurrentUser();
   return useMemo(() => {
     let o = [];
     n ? (o.push(n), e.forEach(e => {

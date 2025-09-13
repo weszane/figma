@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { J } from "../905/799737";
 import { K } from "../905/443068";
 import { wi, jk, vo, Y9, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { t } from "../905/117577";
 import { N as _$$N } from "../905/865305";
 import { B } from "../905/950875";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { getI18nString } from "../905/303541";
 import { z } from "../6268/891724";
 import { OG, kt, FS } from "../1250/340571";
@@ -43,7 +43,7 @@ function C({
   searchSessionId: k,
   entrypoint: C
 }) {
-  let N = hC();
+  let N = trackDefinedFileEventWithStore();
   let S = _$$l(x ?? "");
   useEffect(() => {
     N("component_browser.in_context.window_seen");
@@ -167,7 +167,7 @@ function E({
         })
       })]
     }), jsx(jk, {
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         onClick: () => {
           e({
@@ -189,7 +189,7 @@ function E({
       className: I7,
       children: [jsx(B, {}), getI18nString("dev_handoff.component_browser.github_footer_cta")]
     }), jsx(jk, {
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "primary",
         onClick: () => g(),
         children: getI18nString("dev_handoff.component_browser.settings.connect_github")

@@ -1,9 +1,9 @@
 import { jsx } from "react/jsx-runtime";
 import { trackEventAnalytics } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { ng } from "../figma_app/205827";
 import { A } from "../c5e2cae0/180390";
 import { A as _$$A } from "../c5e2cae0/302396";
@@ -29,7 +29,7 @@ let $$I0 = {
 let $$A5 = [{
   teamType: "freelancer",
   imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.freelancer"),
-  descriptionText: jsx(_$$E, {
+  descriptionText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.freelancer")
@@ -37,7 +37,7 @@ let $$A5 = [{
 }, {
   teamType: "agency",
   imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.agency"),
-  descriptionText: jsx(_$$E, {
+  descriptionText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.agency")
@@ -45,7 +45,7 @@ let $$A5 = [{
 }, {
   teamType: "product",
   imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.product"),
-  descriptionText: jsx(_$$E, {
+  descriptionText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.product")
@@ -53,90 +53,90 @@ let $$A5 = [{
 }, {
   teamType: "other",
   imageAltText: () => getI18nString("pro_trials_v3.pro_trial_initiation_modal.other_team_type"),
-  descriptionText: jsx(_$$E, {
+  descriptionText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.other_team_type")
   })
 }];
 let $$j6 = {
-  unlimited_files: jsx(B, {
+  unlimited_files: jsx(SvgComponent, {
     svg: A
   }),
-  component_libraries: jsx(B, {
+  component_libraries: jsx(SvgComponent, {
     svg: _$$A5
   }),
-  organizing_files: jsx(B, {
+  organizing_files: jsx(SvgComponent, {
     svg: _$$A
   }),
-  voting_workshops: jsx(B, {
+  voting_workshops: jsx(SvgComponent, {
     svg: _$$A7
   }),
-  playing_videos: jsx(B, {
+  playing_videos: jsx(SvgComponent, {
     svg: _$$A6
   }),
-  sharing_files: jsx(B, {
+  sharing_files: jsx(SvgComponent, {
     svg: _$$A4
   }),
-  inviting_visitors: jsx(B, {
+  inviting_visitors: jsx(SvgComponent, {
     svg: _$$A2
   }),
-  audio: jsx(B, {
+  audio: jsx(SvgComponent, {
     svg: _$$A3
   })
 };
 let $$P3 = [{
   featureType: "unlimited_files",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.unlimited_files")
   })
 }, {
   featureType: "component_libraries",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.component_libraries")
   })
 }, {
   featureType: "organizing_files",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.organizing_files")
   })
 }, {
   featureType: "voting_workshops",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.voting_workshopping")
   })
 }, {
   featureType: "playing_videos",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.playing_videos")
   })
 }, {
   featureType: "sharing_files",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.sharing_files")
   })
 }, {
   featureType: "inviting_visitors",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.inviting_visitors")
   })
 }, {
   featureType: "audio",
-  featureText: jsx(_$$E, {
+  featureText: jsx(TextWithTruncation, {
     fontSize: 14,
     fontWeight: "medium",
     children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.using_audio")

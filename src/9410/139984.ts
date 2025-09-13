@@ -42,8 +42,8 @@ import { Z as _$$Z } from "../9410/452531";
 import X from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { Kz } from "../figma_app/637027";
-import { ni, _X, Yb } from "../figma_app/62612";
-import { Ib } from "../905/129884";
+import { getBasicViewportRect, getViewportInfo, scaleRect } from "../figma_app/62612";
+import { KindEnum } from "../905/129884";
 import { e as _$$e2 } from "../905/107855";
 import { CL, KB, gd } from "../figma_app/234505";
 let N = [wn.CREATE_FRAME, wn.FORMAT_FRAME, wn.CREATE_TEXT, wn.FORMAT_TEXT];
@@ -390,7 +390,7 @@ let en = memo(({
       animation: `50% center ${e}ms linear`
     };
   }
-  let h = ni();
+  let h = getBasicViewportRect();
   let m = useMemo(() => ({
     top: h.y + hH + 4
   }), [h.y]);
@@ -425,7 +425,7 @@ let en = memo(({
               stopTrigger: mf.STOP_BTN
             });
           },
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("cursor_bot.stop_tutorial"),
           trackingProperties: {
             trackingDescriptor: _$$c.STOP_TUTORIAL,
@@ -440,7 +440,7 @@ let en = memo(({
 });
 let ea = "create_frame_animation--frameCornerSquare--TEcO4";
 function es() {
-  let e = _X({
+  let e = getViewportInfo({
     subscribeToUpdates_expensive: !1
   });
   let t = useAtomWithSubscription(Dh);
@@ -452,7 +452,7 @@ function es() {
     height,
     duration
   } = t;
-  let d = Yb(e, {
+  let d = scaleRect(e, {
     x,
     y,
     width,

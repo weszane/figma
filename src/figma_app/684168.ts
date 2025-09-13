@@ -1,6 +1,6 @@
 import { ResourceStatus } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { c } from "../905/587163";
 import { AllowlistPluginsSectionView, CurrentWorkspaceView } from "../figma_app/43951";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -103,7 +103,7 @@ export function $$g3() {
     loaded: !0,
     data: {
       workspaceId: r.data?.file?.workspaceId || void 0,
-      workspaceName: oA(r.data?.file?.computedWorkspace)?.workspace?.name,
+      workspaceName: getResourceDataOrFallback(r.data?.file?.computedWorkspace)?.workspace?.name,
       fileKey: e.key,
       fileName: e.name
     }

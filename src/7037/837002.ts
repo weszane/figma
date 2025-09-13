@@ -7,16 +7,16 @@ import { parseColor } from "../figma_app/191804";
 import { M as _$$M } from "../figma_app/749682";
 import { pz } from "../figma_app/60079";
 import { x as _$$x } from "../905/211326";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $ as _$$$ } from "../905/355181";
 import { cU } from "../905/966582";
 import { cM, aT } from "../905/530837";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { OQ, Zp } from "../905/462076";
 import { m as _$$m } from "../905/561236";
 import { dp, DH } from "../905/508893";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { lD } from "../figma_app/831696";
 import { lQ } from "../905/934246";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
@@ -75,7 +75,7 @@ function P(e) {
       justifyContent: "center",
       backgroundColor: "black"
     },
-    children: [s && jsx(kt, {}), t ? jsx("iframe", {
+    children: [s && jsx(LoadingSpinner, {}), t ? jsx("iframe", {
       title: "Prototype Viewer",
       style: s ? {
         width: 0,
@@ -326,7 +326,7 @@ function H(e) {
           minute: "2-digit",
           second: "2-digit"
         })
-      }), t.current.muted && jsx(_$$B, {
+      }), t.current.muted && jsx(SvgComponent, {
         svg: _$$A,
         className: "feed_video_player--mutedBadge--K8Mfa"
       })]
@@ -633,12 +633,12 @@ export function $$ea0(e) {
           className: "feed_post_content--editPreviewButton--Z9MT5",
           children: renderI18nText("fig_feed.edit_preview")
         })
-      }), deleteSelectedItemCallback && jsx(_$$B, {
+      }), deleteSelectedItemCallback && jsx(SvgComponent, {
         svg: _$$A3,
         className: "feed_post_content--deleteContentItemIcon--XF-w3",
         onClick: deleteSelectedItemCallback,
         autosize: !0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fig_feed.delete"),
         dataTestId: "delete-content-item"
       })]
@@ -775,7 +775,7 @@ function ed(e) {
         onMouseDown: e.setAddingActive,
         role: "button",
         tabIndex: 0,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A2
         })
       })]

@@ -18,8 +18,8 @@ import { kC } from "../905/428519";
 import { UP } from "../figma_app/740025";
 import { getUserId } from "../905/372672";
 import { getObservableValue } from "../figma_app/84367";
-import { kT } from "../905/380385";
-import { Qv } from "../figma_app/45218";
+import { ThreadType } from "../905/380385";
+import { CommentTabType } from "../figma_app/45218";
 import { Ld } from "../905/301347";
 import { mW } from "../905/123443";
 var c = d;
@@ -58,8 +58,8 @@ export function $$P1(e) {
   }[e];
 }
 let D = e => !e.comments[0].resolved_at;
-let k = e => e.sidebarItemType === kT.COMMENT_THREAD;
-let M = e => e.sidebarItemType === kT.FEED_POST;
+let k = e => e.sidebarItemType === ThreadType.COMMENT_THREAD;
+let M = e => e.sidebarItemType === ThreadType.FEED_POST;
 let F = {
   currentPage: !1,
   currentNode: !1,
@@ -164,7 +164,7 @@ export function $$V5(e) {
     })), d && r(mH(K.resolved)));
     "yours" === e && (r(RO({
       showOnlyParticipating: !K.yours
-    })), d && r(Zj(K.yours ? Qv.ALL : Qv.ME)));
+    })), d && r(Zj(K.yours ? CommentTabType.ALL : CommentTabType.ME)));
     Y(t => (t[e] = !t[e], {
       ...t
     }));

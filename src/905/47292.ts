@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useSubscription } from "../figma_app/288654";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { WorkspacesDirectoryView } from "../figma_app/43951";
 import { wM } from "../figma_app/329496";
 import { useMemo, useCallback } from "react";
 import { bL, gZ } from "../905/598775";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { e as _$$e } from "../905/916195";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
@@ -102,7 +102,7 @@ function x({
       })
     }), jsx(gZ, {
       className: "x78zum5 x1useyqa xdt5ytf x6s0dn4 x1ja3g5x x1epfdc",
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         "aria-label": getI18nString("design_systems.libraries_modal.plural.view_libraries_within", {
           count: t,
           filterDisplayName: x
@@ -112,7 +112,7 @@ function x({
         children: jsx(_$$e, {})
       })
     })]
-  }) : jsxs(_$$E, {
+  }) : jsxs(ButtonPrimitive, {
     className: "filter_row--rowWithBorder--SuTTQ filter_row--row--jgf08 file_row_styles--fileRowBase--USCNr file_row_styles--fileRowHover--WZeMw",
     onClick: S,
     children: [jsx(h5, {
@@ -134,7 +134,7 @@ export function $$w0({
   showingDefaultSubscriptionsForUser: d,
   isSearching: c
 }) {
-  let u = dq();
+  let u = useCurrentUserOrgId();
   let p = t?.find(e => "workspace" === e.type);
   let m = p && "workspace" === p.type && p.id;
   let h = useSubscription(WorkspacesDirectoryView, {

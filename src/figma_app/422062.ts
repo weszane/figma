@@ -24,7 +24,7 @@ import { kA, wA } from '../figma_app/336853';
 import { hasTeamPaidAccess } from '../figma_app/345997';
 import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338';
 import { debug, throwTypeError } from '../figma_app/465776';
-import { G } from '../figma_app/471068';
+import { ViewTypeEnum } from '../figma_app/471068';
 import { CI } from '../figma_app/528509';
 import { OA, rT } from '../figma_app/585126';
 import { canAdminTeam, getPermissionsStateMemoized } from '../figma_app/642025';
@@ -755,7 +755,7 @@ export class $$q1 {
       case 'recentsAndSharing':
         {
           let e;
-          if (t.length >= 4 && (e = K(G, t[t.length - 1])), !e) {
+          if (t.length >= 4 && (e = K(ViewTypeEnum, t[t.length - 1])), !e) {
             return {
               view: 'recentsAndSharing'
             };

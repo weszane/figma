@@ -3,9 +3,9 @@ import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { DesignGraphElements, Fullscreen } from "../figma_app/763686";
 import { KE, En } from "../905/116101";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { IntegrationUtils } from "../figma_app/469876";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { hx } from "../figma_app/630194";
 import { gd } from "../figma_app/837467";
 import { I } from "../figma_app/552397";
@@ -26,7 +26,7 @@ export function $$E0() {
     }), E(En({
       initialX: 0,
       initialY: 0
-    })), Cu({
+    })), logAndTrackCTA({
       source: fK
     }, $$f1));
   }, [E, r]);
@@ -39,7 +39,7 @@ export function $$E0() {
       isSelected: r,
       className: IntegrationUtils.isGoogleClassroomIntegration() ? vy : pN,
       onClick: y,
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       "data-tooltip": "browse-all-resources-dlt",
       hasOpenSubmenu: r,
       onboardingKey: yl,

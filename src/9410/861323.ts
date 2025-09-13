@@ -10,11 +10,11 @@ import { fC } from "../figma_app/968813";
 import { fG } from "../figma_app/973927";
 import { IntegrationUtils } from "../figma_app/469876";
 import { XM } from "../905/486443";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { oh } from "../905/18797";
 import { $A } from "../905/862883";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cd } from "../905/381612";
 import { p as _$$p } from "../905/42189";
 import { c5 } from "../905/526509";
@@ -145,7 +145,7 @@ function U({
       isSelected: t,
       hasOpenSubmenu: !1,
       onClick: e,
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       "data-tooltip": "browse-all-resources-dlt",
       "data-tooltip-offset-y": -2,
       children: jsx(gd, {
@@ -212,7 +212,7 @@ function H({
   let d = NT();
   let c = useAtomWithSubscription(c5);
   let u = XM();
-  let b = sZ();
+  let b = useCurrentUserOrg();
   let S = useSelector(e => e.universalInsertModal.showing);
   let I = fG();
   let A = _$$r(S, c?.stage !== "FULL" ? _$$p.MORE : void 0);

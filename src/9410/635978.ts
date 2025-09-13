@@ -3,20 +3,20 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { clamp } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { p as _$$p } from "../905/673591";
 import { O as _$$O } from "../905/301080";
 import { P } from "../905/547523";
 import { L as _$$L } from "../905/473569";
 import h from "classnames";
 import { R7 } from "../905/508367";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { M as _$$M } from "../figma_app/749682";
 import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
 import { getI18nString } from "../905/303541";
 import { Uu, Dm } from "../figma_app/8833";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vx, jJ, bb, _v, YC, TN, yG, zR, TJ, z9, BT, qD, sf, Ct, It, tS, xE, CN, Yq, CY, ct, gJ } from "../9410/269644";
 var m = h;
 let T = {
@@ -67,7 +67,7 @@ export function $$j1({
   let [H, z] = useState(null);
   let [V, W] = useState(!1);
   let [Y, J] = useState(!1);
-  let q = am();
+  let q = trackFileEventWithUser();
   let [X, Z] = _$$M();
   let [Q, $] = _$$M();
   let ee = T || !e;
@@ -215,12 +215,12 @@ function I({
     className: i
   });
   return jsx("div", {
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       onClick: t,
       className: TJ,
       htmlAttributes: {
         "data-tooltip": e ? getI18nString("whiteboard.video.minimize_tooltip") : getI18nString("whiteboard.video.fullscreen_tooltip"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx("span", {
         "aria-hidden": !0,
@@ -252,14 +252,14 @@ function k({
   });
   return jsxs("div", {
     ref: i,
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       onClick: y,
       className: m()(TJ, z9, _ && BT),
       htmlAttributes: {
         onMouseEnter: () => d(!0),
         onMouseLeave: () => d(!1),
         "data-tooltip": g ? getI18nString("whiteboard.video.unmute_tooltip") : getI18nString("whiteboard.video.mute_tooltip"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx("span", {
         "aria-hidden": !0,

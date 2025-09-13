@@ -2,7 +2,7 @@ import T from 'classnames';
 import { memo, useCallback, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { ScreenReaderOnly } from '../905/172252';
 import { S as _$$S } from '../905/177206';
 import { permissionScopeHandler } from '../905/189185';
@@ -10,12 +10,12 @@ import { isAutoMarker, isInvalidValue, isValidValue } from '../905/216495';
 import { kl, lJ } from '../905/275640';
 import { getI18nString } from '../905/303541';
 import { getFeatureFlags } from '../905/601108';
-import { E as _$$E2 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { E as _$$E } from '../905/658074';
 import { PopoverPrimitiveContainer, usePopoverPrimitive } from '../905/691059';
 import { N as _$$N } from '../905/696319';
 import { getSingletonSceneGraph } from '../905/700578';
-import { B as _$$B } from '../905/714743';
+import { SvgComponent } from '../905/714743';
 import { i as _$$i } from '../905/718764';
 import { lQ } from '../905/934246';
 import { o as _$$o } from '../8826/796619';
@@ -157,7 +157,7 @@ function W({
     });
   };
   return jsxs(Fragment, {
-    children: [jsxs(_$$E2, {
+    children: [jsxs(ButtonPrimitive, {
       actionOnPointerDown: !0,
       ...getTriggerProps({
         className: 'grid_picker--gridWidget--e47iU',
@@ -293,7 +293,7 @@ let q = memo(({
   return jsx(Ht, {
     'className': hF,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_columns'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-columns',
     'dispatch': lQ,
     'id': 'grid-columns',
@@ -310,7 +310,7 @@ let q = memo(({
     },
     'recordingKey': generateRecordingKey(e, 'colInput'),
     'value': t,
-    'children': jsx(_$$B, {
+    'children': jsx(SvgComponent, {
       svg: _$$A,
       className: QK
     })
@@ -326,7 +326,7 @@ let J = memo(({
   return jsx(Ht, {
     'className': hF,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.number_of_rows'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-rows',
     'dispatch': lQ,
     'id': 'grid-rows',
@@ -343,7 +343,7 @@ let J = memo(({
     },
     'recordingKey': generateRecordingKey(e, 'rowInput'),
     'value': t,
-    'children': jsx(_$$B, {
+    'children': jsx(SvgComponent, {
       svg: _$$A2,
       className: QK
     })
@@ -369,7 +369,7 @@ function ee({
     cellCol: i,
     cellRow: n
   });
-  return jsxs(_$$E2, {
+  return jsxs(ButtonPrimitive, {
     'className': 'grid_picker--gridCellButton--g7VBU',
     'data-idx': t,
     'onClick': () => {
@@ -380,7 +380,7 @@ function ee({
     },
     'recordingKey': e,
     'data-tooltip': p,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip-offset-y': 4,
     'data-tooltip-timeout-delay': 300,
     'aria-pressed': a,
@@ -593,7 +593,7 @@ function ec({
         'recordingKey': generateRecordingKey(e, 'grid-rows'),
         'id': 'grid-rows',
         'dispatch': lQ,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.row_index'),
         'children': jsx('span', {
           className: `${QK} svg`,
@@ -606,7 +606,7 @@ function ec({
         'recordingKey': generateRecordingKey(e, 'grid-columns'),
         'id': 'grid-columns',
         'dispatch': lQ,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.column_index'),
         'children': jsx('span', {
           className: `${QK} svg`,
@@ -623,9 +623,9 @@ function ec({
         'recordingKey': generateRecordingKey(e, 'grid-rows'),
         'id': 'grid-rows',
         'dispatch': lQ,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.vertical_span'),
-        'children': jsx(_$$B, {
+        'children': jsx(SvgComponent, {
           svg: _$$A6,
           className: QK
         })
@@ -636,9 +636,9 @@ function ec({
         'recordingKey': generateRecordingKey(e, 'grid-columns'),
         'id': 'grid-columns',
         'dispatch': lQ,
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('fullscreen.properties_panel.grid.horizontal_span'),
-        'children': jsx(_$$B, {
+        'children': jsx(SvgComponent, {
           svg: _$$A5,
           className: QK
         })
@@ -698,7 +698,7 @@ function ed({
           a(Axis.X, e, t);
         },
         'disabled': !t.columnSpanEnabled,
-        'icon': jsx(_$$B, {
+        'icon': jsx(SvgComponent, {
           svg: _$$A3,
           className: QK
         }),
@@ -715,7 +715,7 @@ function ed({
           a(Axis.Y, e, t);
         },
         'disabled': !t.rowSpanEnabled,
-        'icon': jsx(_$$B, {
+        'icon': jsx(SvgComponent, {
           svg: _$$A4,
           className: QK
         }),
@@ -783,7 +783,7 @@ function eg({
   let m = jsx($j, {
     bigNudgeAmount,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_columns'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-col-spacing-control',
     'dispatch': lQ,
     'inputClassName': hF,
@@ -829,7 +829,7 @@ function e_({
   let m = jsx($j, {
     bigNudgeAmount,
     'data-tooltip': getI18nString('fullscreen.properties_panel.grid.gap_between_rows'),
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'dataTestId': 'grid-row-spacing-control',
     'dispatch': lQ,
     'inputClassName': hF,

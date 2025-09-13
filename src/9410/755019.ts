@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect, useEffect } from "react";
 import { deepEqual } from "../905/382883";
 import { useLatestRef } from "../figma_app/922077";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Hj, W$ } from "../9410/534867";
 import { ON } from "../figma_app/627977";
 import { VU, D6 } from "../figma_app/575164";
@@ -33,7 +33,7 @@ export function $$p1({
     children: e[0]
   });
   let g = e.slice(1, e.length - 1);
-  let _ = jsx(B, {
+  let _ = jsx(SvgComponent, {
     svg: A,
     className: VU,
     dataTestId: "rightChevron"

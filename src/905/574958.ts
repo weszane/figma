@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { MZ } from "../figma_app/925970";
 import { qB } from "../905/124270";
-import { k1 } from "../figma_app/314264";
+import { trackFileBrowserFileClicked } from "../figma_app/314264";
 import { O } from "../905/833838";
 import { L0, uH, f9, Rr } from "../figma_app/162807";
 var $$n1;
@@ -97,7 +97,7 @@ function I(e, t) {
           fileRepoId: e.file_repo_id,
           uiSelectedView: "search"
         });
-        k1(e.key, {
+        trackFileBrowserFileClicked(e.key, {
           selectedViewName: "search"
         });
       }

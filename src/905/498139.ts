@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useId, useState, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { VariableDataType, VariableResolvedDataType, ComponentPropType, VariablesBindings } from "../figma_app/763686";
 import { resolveVariableValue } from "../905/929949";
 import { parsePxNumber } from "../figma_app/783094";
@@ -12,7 +12,7 @@ import { AutoLayout } from "../905/470281";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
 import { Sh } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { DD } from "../905/211095";
 import { vS } from "../figma_app/323320";
 import { l6, c$ } from "../905/794875";
@@ -92,7 +92,7 @@ function D({
             onClick: () => l(c),
             recordingKey: generateRecordingKey(e, "detachVariableButton"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
             },
             children: jsx(_$$U, {})
@@ -275,13 +275,13 @@ function U({
         horizontalAlignItems: "end",
         verticalAlignItems: "center",
         padding: 16,
-        children: jsx($n, {
+        children: jsx(Button, {
           type: "submit",
           disabled: !Y,
           recordingKey: generateRecordingKey(A, "createButton"),
           htmlAttributes: {
             "data-tooltip": getI18nString("variables.create_modal.invalid_variable_name"),
-            "data-tooltip-type": Y ? void 0 : Ib.TEXT
+            "data-tooltip-type": Y ? void 0 : KindEnum.TEXT
           },
           children: M() ? renderI18nText("variables.create_modal.create_component_property") : renderI18nText("variables.create_modal.create_file_variable")
         })

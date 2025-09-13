@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { N_ } from "../vendor/956898";
 import a from "classnames";
 import { formatNumber } from "../figma_app/930338";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
 import { bV, QQ } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
-import { PM, m3, zF } from "../figma_app/45218";
+import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from "../figma_app/45218";
 import { t as _$$t } from "../905/344937";
 import { W, B as _$$B } from "../905/841666";
 import { Jm } from "../figma_app/387599";
@@ -65,9 +65,9 @@ function v({
   resource: e
 }) {
   let t = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  return e ? !(t && cs(t)) && _$$t(e) && e.community_resource_payment && QQ(e.community_resource_payment) ? jsx(A, {}) : PM(e) ? jsx(y, {}) : m3(e) ? jsx(_, {
+  return e ? !(t && cs(t)) && _$$t(e) && e.community_resource_payment && QQ(e.community_resource_payment) ? jsx(A, {}) : hasFreemiumCode(e) ? jsx(y, {}) : hasMonetizedResourceMetadata(e) ? jsx(_, {
     resource: e
-  }) : zF(e) ? jsx(y, {}) : jsx(b, {}) : null;
+  }) : isThirdPartyMonetized(e) ? jsx(y, {}) : jsx(b, {}) : null;
 }
 export function $$O1({
   likeCount: e,
@@ -89,7 +89,7 @@ export function $$D2({
   let r = i ? void 0 : t ? Yr : Vh;
   return jsxs("div", {
     className: s()(Au, r),
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A
     }), formatNumber(e)]
   });

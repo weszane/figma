@@ -3,8 +3,8 @@ import { getI18nString } from "../905/303541";
 import { h } from "../905/142086";
 import { showModalHandler } from "../905/156213";
 import { jsx } from "react/jsx-runtime";
-import { R } from "../905/441305";
-import { E } from "../905/984674";
+import { ConfirmationModal } from "../905/441305";
+import { TextWithTruncation } from "../905/984674";
 import { YM } from "../905/122282";
 let d = registerModal(function (e) {
   let {
@@ -15,14 +15,14 @@ let d = registerModal(function (e) {
     onClose,
     title
   } = e;
-  return jsx(R, {
+  return jsx(ConfirmationModal, {
     title,
     confirmText,
     onConfirm,
     open,
     onClose,
     recordingKey: "moveTemplateConfirmationModal",
-    children: jsx(E, {
+    children: jsx(TextWithTruncation, {
       children: content
     })
   });

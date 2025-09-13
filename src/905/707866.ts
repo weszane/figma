@@ -10,12 +10,12 @@ import { useLatestRef } from "../figma_app/922077";
 import { h1 } from "../905/986103";
 import { A as _$$A } from "../905/920142";
 import { getI18nState } from "../figma_app/363242";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Df, uy, pD, z$, RI } from "../figma_app/770088";
 import { b as _$$b } from "../905/985254";
 import { AK, I_, Tv } from "../905/234821";
-import { Dw } from "../905/380385";
+import { ComposerType } from "../905/380385";
 import { Ro } from "../figma_app/805373";
 import { a as _$$a } from "../905/844092";
 import { HH } from "../figma_app/841415";
@@ -37,7 +37,7 @@ function f(e) {
     }).format(_$$A.utc(e).toDate());
   }(e.date, e.locale);
   return jsx("span", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": t,
     children: e.children
   });
@@ -263,7 +263,7 @@ export function $$L0(e) {
       onCancel: m,
       onSubmit: () => e.submitEdit(comment, messageMeta, attachmentUpdates),
       placeholderText: getI18nString("comments.comment_n"),
-      recordingKey: Dw.edit,
+      recordingKey: ComposerType.edit,
       setHyperlinkEditorRef: e.setHyperlinkEditorRef,
       setHyperlinkLocation: e.setHyperlinkLocation,
       setIsEditorFocused: e.setIsEditorFocused,

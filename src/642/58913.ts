@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J, N } from "../642/436925";
 import { sL, qg } from "../figma_app/436286";
 import { DE } from "../figma_app/811257";
@@ -40,7 +40,7 @@ export function $$f0({
     icon: f && qg(y, "PASS_THROUGH") ? null : jsx(K, {
       htmlAttributes: {
         "data-tooltip": getI18nString("general.remove"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       "aria-label": getI18nString("general.remove"),
       onClick: () => _("PASS_THROUGH"),

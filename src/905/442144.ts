@@ -3,9 +3,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { ks } from "../905/773401";
@@ -57,7 +57,7 @@ export let $$b0 = registerModal(function (e) {
     children: team.name
   });
   let P = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: P,
     width: "lg",
     children: jsxs(vo, {
@@ -100,11 +100,11 @@ export let $$b0 = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: g,
             variant: "secondary",
             children: renderI18nText("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             "data-testid": "submitButton",
             onClick: T,
             children: R

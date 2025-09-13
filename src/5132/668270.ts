@@ -1,5 +1,5 @@
 import { subscribeAndAwaitData } from "../905/553831";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
@@ -16,7 +16,7 @@ let $$f0 = createOptimistThunk(async (e, l, {
 }) => {
   let s = !1;
   try {
-    s = !!oA((await subscribeAndAwaitData(DeviceTryFileView, {
+    s = !!getResourceDataOrFallback((await subscribeAndAwaitData(DeviceTryFileView, {
       fileKey: l.file_key
     })).deviceTryFile);
   } catch (e) {

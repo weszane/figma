@@ -2,10 +2,10 @@ import { xk } from '@stylexjs/stylex';
 import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { Ln } from '../905/84777';
 import { registerModal } from '../905/102752';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { V as _$$V } from '../905/223084';
@@ -19,7 +19,7 @@ import { N as _$$N } from '../905/438674';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
 import { ProductAccessTypeEnum } from '../905/513035';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { VisualBellIcon } from '../905/576487';
 import { getResourceDataOrFallback } from '../905/663269';
 import { g as _$$g } from '../905/687265';
@@ -75,7 +75,7 @@ function ee({
       'data-tooltip-show-immediately': !0,
       'data-tooltip-show-left': !0,
       'data-tooltip-text-left': !0,
-      'data-tooltip-type': Ib.TEXT,
+      'data-tooltip-type': KindEnum.TEXT,
       'children': jsx(c$, {
         id: `${e}_${t}`,
         onClick: () => n(e, t),
@@ -300,7 +300,7 @@ function er(e) {
       orgId: z.key.type === FOrganizationLevelType.ORG ? z.key.parentId : void 0,
       teamId: z.key.type === FOrganizationLevelType.TEAM ? z.key.parentId : void 0
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: p,
       width: 480,
       children: jsxs(vo, {
@@ -455,7 +455,7 @@ let eu = registerModal(e => {
   let a = useModalManager(e);
   return jsx(fu, {
     name: 'Auto Approval Settings Modal (CURF All Users)',
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: a,
       width: 480,
       children: jsxs(vo, {
@@ -481,7 +481,7 @@ let eu = registerModal(e => {
           })
         }), jsx(wi, {
           children: jsx(jk, {
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: 'primary',
               onClick: () => a.props?.close({
                 source: 'button'

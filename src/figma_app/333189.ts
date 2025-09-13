@@ -6,7 +6,7 @@ import { vd } from "../figma_app/637027";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { registerModal } from "../905/102752";
 import { K } from "../905/12775";
 import { H } from "../905/444904";
@@ -19,7 +19,7 @@ let $$y0 = registerModal(function () {
     frame_context
   } = getInitialOptions();
   let t = GZ() && frame_context?.type === "embed";
-  let r = sZ();
+  let r = useCurrentUserOrg();
   return K() && r ? jsx(H, {
     org: r
   }) : jsx(_$$u, {

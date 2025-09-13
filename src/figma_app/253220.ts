@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { localStorageRef } from "../905/657224";
 import { BrowserInfo } from "../figma_app/778880";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { oi } from "../figma_app/598952";
@@ -26,7 +26,7 @@ function g({
   (function (e) {
     try {
       let t = debugState.getState();
-      uE("navigation_preferences", t, {
+      trackUserEvent("navigation_preferences", t, {
         navigationPreference: e.navigationPreference,
         enabled: e.enabled,
         eventOrigin: e.eventOrigin

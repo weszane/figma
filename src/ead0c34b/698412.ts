@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, Suspense } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
 import { tH } from "../905/751457";
 import { reportError } from "../905/11";
@@ -45,7 +45,7 @@ function C(e) {
     return r;
   }().status ? jsx(_, {
     reason: "data_load_error"
-  }) : jsx(bL, {
+  }) : jsx(ModalRootComponent, {
     manager: r,
     width: 480,
     children: jsxs(vo, {

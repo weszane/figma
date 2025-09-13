@@ -19,7 +19,7 @@ import { e as _$$e2 } from "../905/107684";
 import { hib } from "../figma_app/6204";
 import { useState, useCallback } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk, hE } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
 import { g as _$$g } from "../905/687265";
@@ -27,7 +27,7 @@ import { Ay as _$$Ay } from "@stylexjs/stylex";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { V } from "../905/355181";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 let D = {
   body: {
@@ -62,7 +62,7 @@ function L({
       }
     }
   }, [t, e]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     width: "md",
     "data-testid": "tos_agreement_modal",
@@ -70,7 +70,7 @@ function L({
       children: [jsx("div", {
         className: "x78zum5 x6s0dn4 x1ilnypm x8rdmch x1eqcisn",
         children: jsx(hE, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontSize: 11,
             fontWeight: "bold",
             children: getI18nString("tos_agreement.modal_title")

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { oA } from '../905/723791';
+import { getResourceDataOrFallback } from '../905/723791';
 import { resourceUtils } from '../905/989992';
 import { FileCanUseSlidesDesignToggle } from '../figma_app/43951';
 import { getObservableValue } from '../figma_app/84367';
@@ -23,7 +23,7 @@ export function $$m2() {
     }, {
       enabled: !!t
     });
-    let n = resourceUtils.useTransform(r, e => !!oA(e.file)?.hasPermission);
+    let n = resourceUtils.useTransform(r, e => !!getResourceDataOrFallback(e.file)?.hasPermission);
     return !!isInteractionOrEvalMode() || n.unwrapOr(!1);
   }();
   useEffect(() => {

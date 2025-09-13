@@ -4,7 +4,7 @@ import { tB, ll, U6, cW, ZT, $1 } from "../figma_app/844435";
 import { Ro } from "../figma_app/564095";
 import { Dd } from "../figma_app/599979";
 import { FP, Y8 } from "../figma_app/86989";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { isPluginVersionPublished } from "../figma_app/300692";
 import { hasLocalFileId, isPrivatePlugin, manifestContainsWidget } from "../figma_app/155287";
@@ -18,7 +18,7 @@ export function $$m4() {
   let s = ZT();
   let o = FP();
   let c = $1();
-  let _ = sZ();
+  let _ = useCurrentUserOrg();
   return useCallback((n, a) => function ({
     extension: e,
     org: t,

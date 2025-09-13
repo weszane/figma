@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { _m } from "../vendor/891888";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNullish } from "../figma_app/95419";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
 import { k as _$$k } from "../905/443820";
@@ -36,7 +36,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { sw, rk } from "../figma_app/914957";
 import { jD } from "../905/765855";
 import { dG } from "../figma_app/753501";
-import { EF, Oo, eE as _$$eE } from "../905/709171";
+import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { formatFontMetrics, teamLibraryCache } from "../figma_app/80990";
 import { b as _$$b } from "../905/217163";
 import { fullscreenValue } from "../figma_app/455680";
@@ -46,7 +46,7 @@ import { bO, SS } from "../figma_app/936646";
 import { QT } from "../figma_app/646357";
 import { je } from "../figma_app/155728";
 import { LIBRARY_PREFERENCES_MODAL, LibraryTabEnum } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -70,7 +70,7 @@ import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { kl } from "../905/275640";
 import { Um } from "../905/848862";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { getBasename } from "../905/309735";
 import { Oe } from "../figma_app/336853";
 import { F as _$$F2 } from "../905/258517";
@@ -182,7 +182,7 @@ let eD = memo(function ({
           "data-tooltip": r ? _$$Z2 : void 0,
           "data-tooltip-style-description": e.description,
           "data-tooltip-style-name": getBasename(e.name),
-          "data-tooltip-type": Ib.SPECIAL,
+          "data-tooltip-type": KindEnum.SPECIAL,
           recordingKey: t,
           children: [jsx("div", {
             ref: K,
@@ -195,7 +195,7 @@ let eD = memo(function ({
             className: zm,
             recordingKey: generateRecordingKey(t, "clearTextStyleOverridesButton"),
             "data-tooltip": getI18nString("design_systems.styles.clear_overrides_over_text_style"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             svg: _$$A3,
             onClick: B
           })]
@@ -204,7 +204,7 @@ let eD = memo(function ({
           children: jsx(_$$d, {
             recordingKey: generateRecordingKey(t, "editStyleButton"),
             "data-tooltip": getI18nString("design_systems.styles.edit_style"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             onClick: j,
             "aria-label": getI18nString("design_systems.styles.edit_style"),
             "aria-expanded": L,
@@ -235,7 +235,7 @@ let eD = memo(function ({
         className: zm,
         recordingKey: generateRecordingKey(t, "clearTextStyleOverridesButton"),
         "data-tooltip": getI18nString("design_systems.styles.clear_overrides_over_text_style"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         svg: _$$A3,
         onClick: B,
         onMouseDown: e => e.stopPropagation()
@@ -243,7 +243,7 @@ let eD = memo(function ({
         className: em()(q, Z),
         recordingKey: generateRecordingKey(t, "editStyleButton"),
         "data-tooltip": getI18nString("design_systems.styles.edit_style"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         svg: _$$A2,
         selected: L,
         onClick: j,
@@ -279,7 +279,7 @@ function ek({
   index: c
 }) {
   let u = s[c];
-  let p = sZ();
+  let p = useCurrentUserOrg();
   let _ = Oe(p);
   let h = fV(u?.type === _$$b2.LibraryName ? u.libraryKey : void 0);
   if (!u) return null;
@@ -537,7 +537,7 @@ function eU({
         children: r
       }), i && !a && jsx("span", {
         className: "style_picker--browseLibrariesButton--KtnxN",
-        children: jsx($n, {
+        children: jsx(Button, {
           onClick: i,
           recordingKey: generateRecordingKey(e, "browseLibraries"),
           variant: "secondary",
@@ -661,7 +661,7 @@ function eG({
         t.modal && n();
       },
       showStyleDetails(e, t, n) {
-        if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i();else {
+        if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && compareLibraryItemsAlias(stylePreviewShown.style, e)) i();else {
           debug(null != e.content_hash, "style does not have a hash");
           let i = e.isLocal ? e.node_id : StylesBindings.getStyleNodeId(e.key, e.content_hash);
           isValidSessionLocalID(parseSessionLocalID(i)) ? Fullscreen.selectStyleByGuid(i) : teamLibraryCache.getCanvas(e).then(e => {
@@ -689,7 +689,7 @@ function eG({
         }));
       },
       deleteStyle(e) {
-        Oo(e, X) && (permissionScopeHandler.user("delete-style", () => Fullscreen.deleteNode(e.node_id)), fullscreenValue.triggerAction("commit"), trackEventAnalytics("Style Deleted", {
+        compareWithGeneratedKey(e, X) && (permissionScopeHandler.user("delete-style", () => Fullscreen.deleteNode(e.node_id)), fullscreenValue.triggerAction("commit"), trackEventAnalytics("Style Deleted", {
           styleType: e.style_type,
           from: "stylePickerContextMenu"
         }));
@@ -746,7 +746,7 @@ function eG({
                 onClick: h,
                 "aria-expanded": em,
                 htmlAttributes: {
-                  "data-tooltip-type": Ib.TEXT,
+                  "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": getI18nString("design_systems.styles.tooltips.library")
                 },
                 children: jsx(_$$l, {}),
@@ -758,7 +758,7 @@ function eG({
                 disabled: l,
                 htmlAttributes: {
                   "data-tooltip": S ? getI18nString("design_systems.styles.tooltips.show_as_grid") : getI18nString("design_systems.styles.tooltips.show_as_list"),
-                  "data-tooltip-type": Ib.TEXT
+                  "data-tooltip-type": KindEnum.TEXT
                 },
                 children: S ? jsx(_$$E, {}) : jsx(_$$Z, {})
               }), !O && jsx("span", {
@@ -771,7 +771,7 @@ function eG({
                   htmlAttributes: {
                     onMouseDown: dG,
                     "data-tooltip": getI18nString("design_systems.styles.tooltips.create"),
-                    "data-tooltip-type": Ib.TEXT
+                    "data-tooltip-type": KindEnum.TEXT
                   },
                   children: jsx(_$$e, {})
                 })
@@ -846,7 +846,7 @@ function eW({
     deleteStyle
   } = assertNotNullish(useContext(_$$G), "Must be inside <StylePickerActionsContext>");
   let s = selectCurrentFile();
-  let o = _$$eE(e, s);
+  let o = compareLibraryItemWithKey(e, s);
   let d = _$$b({
     libraryKey: e.library_key,
     nodeId: e.node_id

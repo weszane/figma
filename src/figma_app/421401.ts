@@ -12,7 +12,7 @@ import { K } from "../905/135526";
 import { Um } from "../905/848862";
 import { RG } from "../figma_app/684446";
 import { FAccessLevelType } from "../figma_app/191312";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { g1 } from "../905/504727";
 import { sI } from "../figma_app/527041";
 import { km, hX } from "../905/701417";
@@ -29,7 +29,7 @@ export function $$N3(e) {
     trackingProperties: e.trackingProperties,
     disabled: e.disabled,
     ...(e.tooltip ? {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.tooltip,
       "data-tooltip-show-above": !0
     } : {}),
@@ -176,7 +176,7 @@ export function $$P4({
   orgAccess: e
 }) {
   return e === FAccessLevelType.PRIVATE || e === FAccessLevelType.SECRET ? jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": e === FAccessLevelType.PRIVATE ? getI18nString("teams_table.closed_team_tooltip_header") : getI18nString("teams_table.secret_team_tooltip_header"),
     "data-tooltip-subtext": e === FAccessLevelType.PRIVATE ? getI18nString("teams_table.closed_team_tooltip_subtitle") : getI18nString("teams_table.secret_team_tooltip_subtitle"),
     "data-tooltip-show-above": !0,

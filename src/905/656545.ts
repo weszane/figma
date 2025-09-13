@@ -16,7 +16,7 @@ import { FAuthProviderType } from '../figma_app/191312'
 import { RegisteredAppleEulaModal } from '../figma_app/856733'
 
 // Original: $$b1 - Enum-like object for plugin actions
-enum PluginAction {
+export enum PluginAction {
   PLUGIN_INSERT_COMPONENT = 'PLUGIN_INSERT_COMPONENT',
   PLUGIN_INSERT_STATE_GROUP = 'PLUGIN_INSERT_STATE_GROUP',
   PLUGIN_INSERT_STYLE = 'PLUGIN_INSERT_STYLE',

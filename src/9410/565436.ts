@@ -6,7 +6,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { getI18nString } from "../905/303541";
-import { tq, yc } from "../figma_app/671547";
+import { createEmbedAnalyticsHandler, LinkMetadataEvent } from "../figma_app/671547";
 import { normalizeValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { n as _$$n } from "../9410/774045";
@@ -45,10 +45,10 @@ export function $$b1(e) {
   let t = uQ() || "";
   let i = kl("embedData");
   let r = decodeURIComponent(normalizeValue(i)?.originalText || "");
-  let a = tq(i);
+  let a = createEmbedAnalyticsHandler(i);
   let s = Xr(_$$n);
   return useCallback(() => {
-    r && (a(yc.CONVERT_TO_TEXT), s({
+    r && (a(LinkMetadataEvent.CONVERT_TO_TEXT), s({
       type: "MINIMIZE"
     }), permissionScopeHandler(e, "convert-embed-to-text", () => Fullscreen?.replaceNodeWithText(t, r)));
   }, [r, a, s, t, e]);

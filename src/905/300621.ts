@@ -3,7 +3,7 @@ import { useMemo, Fragment as _$$Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ import { u as _$$u } from "../figma_app/187359";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { ev } from "../905/909811";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { createFileLibraryKeys } from "../905/651613";
 import { b as _$$b } from "../905/937225";
 import { a as _$$a } from "../905/426262";
@@ -33,7 +33,7 @@ import { S as _$$S } from "../905/711770";
 import { kz } from "../905/691188";
 import { A as _$$A } from "../svg/562176";
 import { Tn } from "../figma_app/933328";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { Z as _$$Z } from "../905/939602";
 import { getFeatureFlags } from "../905/601108";
@@ -86,7 +86,7 @@ function j({
       src: o ?? "",
       className: F,
       alt: ""
-    }) : jsx(_$$B, {
+    }) : jsx(SvgComponent, {
       className: F,
       svg: _$$A
     }), jsxs("div", {
@@ -117,7 +117,7 @@ function j({
   });
 }
 function z() {
-  let e = dq();
+  let e = useCurrentUserOrgId();
   return Tn({
     currentOrgId: e
   });
@@ -425,7 +425,7 @@ let $$eu0 = registerModal(function (e) {
   let y = M4.useFile(_?.fileKey ?? null).data;
   let b = on(_?.libraryKey ?? null).data;
   let v = parsePxInt(PXO);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: f,
     width: v,
     height: "dynamic",

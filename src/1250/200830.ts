@@ -58,14 +58,14 @@ import { $z } from "../figma_app/617427";
 import { y as _$$y } from "../905/129046";
 import { s as _$$s } from "../cssbuilder/589278";
 import { D6 } from "../figma_app/863319";
-import { Z as _$$Z } from "../905/296690";
+import { orgSubscriptionAtom } from "../905/296690";
 import { RG } from "../figma_app/684446";
 import { sortByPropertyWithOptions, shuffle } from "../figma_app/656233";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { reportError } from "../905/11";
 import { Z1 } from "../905/401885";
 import { g as _$$g } from "../1250/695038";
-import { sZ, dq } from "../905/845253";
+import { useCurrentUserOrg, useCurrentUserOrgId } from "../905/845253";
 import { WorkspaceSelectorView, TeamFileCountsByTeamId } from "../figma_app/43951";
 import { useCurrentPlanUser, useTeamPlanFeatures } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
@@ -86,7 +86,7 @@ import { O as _$$O } from "../905/833838";
 import { WZ } from "../905/893645";
 import { EL, F_ as _$$F_ } from "../905/858282";
 import { customHistory } from "../905/612521";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { rq } from "../905/425180";
 import { xX, j9 } from "../figma_app/211146";
 import { _6 } from "../figma_app/386952";
@@ -94,7 +94,7 @@ import { f as _$$f2 } from "../905/940356";
 import { ng as _$$ng, u_, $g, Jy, v$ } from "../figma_app/205827";
 import { AutoLayout } from "../905/470281";
 import { In } from "../905/672640";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A as _$$A2 } from "../svg/831814";
 import { hideModal, showModalHandler } from "../905/156213";
 import { bE } from "../figma_app/375098";
@@ -132,7 +132,7 @@ import { A as _$$A6 } from "../1250/545022";
 import { C as _$$C } from "../1250/50098";
 import { NuxOnboardingOverlay } from "../4452/529989";
 import { A as _$$A7 } from "../1250/318790";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { I7 } from "../figma_app/594947";
 import { FPlanNameType } from "../figma_app/191312";
 import { _l, B$ } from "../figma_app/995208";
@@ -686,7 +686,7 @@ function eW(e) {
 }
 function eK() {
   let e = useSelector(e => e.currentUserOrgId);
-  let t = useAtomWithSubscription(_$$Z);
+  let t = useAtomWithSubscription(orgSubscriptionAtom);
   let n = RG();
   let r = renderI18nText("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
   D6(e) ? r = n ? renderI18nText("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : renderI18nText("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = renderI18nText("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
@@ -748,7 +748,7 @@ function ti({
   let o = useSelector(({
     selectedView: e
   }) => e);
-  let s = sZ();
+  let s = useCurrentUserOrg();
   if (!s) throw Error("org is not defined");
   ("fullscreen" === o.view || "prototype" === o.view) && t();
   let l = jsxs("div", {
@@ -877,7 +877,7 @@ let td = createRemovableAtomFamily(e => Z1(WorkspaceSelectorView.Query({
   return t;
 }));
 function tc() {
-  let e = dq();
+  let e = useCurrentUserOrgId();
   let t = useCurrentPlanUser("OrgSelectWorkspaceOverlay");
   let n = "loaded" === t.status ? t?.data?.key.parentId ?? void 0 : void 0;
   let r = useRef();
@@ -916,41 +916,41 @@ function tc() {
     })
   }) : (reportError(_$$e2.SCALE, Error("workspaceSelectorOptionsAtomQuery.data not present after OrgSelectWorkspace overlay is showing")), complete(), null) : null;
 }
-let tw = (e, t) => e ? jsx(_$$E2, {
+let tw = (e, t) => e ? jsx(TextWithTruncation, {
   fontSize: 20,
   fontWeight: "medium",
   children: renderI18nText("rcs.plan_spaces.drafts_have_a_new_home")
-}) : t ? jsx(_$$E2, {
+}) : t ? jsx(TextWithTruncation, {
   fontSize: 20,
   fontWeight: "medium",
   children: renderI18nText("rcs.plan_spaces.a_simpler_switcher_menu")
-}) : jsx(_$$E2, {
+}) : jsx(TextWithTruncation, {
   fontSize: 20,
   fontWeight: "medium",
   children: renderI18nText("rcs.plan_spaces.changes_to_your_drafts")
 });
-let tT = (e, t) => e ? jsx(_$$E2, {
+let tT = (e, t) => e ? jsx(TextWithTruncation, {
   fontSize: 14,
   children: renderI18nText("rcs.plan_spaces.drafts_lived_in_separate_area")
-}) : t ? jsx(_$$E2, {
+}) : t ? jsx(TextWithTruncation, {
   fontSize: 14,
   children: renderI18nText("rcs.plan_spaces.a_simpler_switcher_menu.description")
-}) : jsx(_$$E2, {
+}) : jsx(TextWithTruncation, {
   fontSize: 14,
   children: renderI18nText("rcs.plan_spaces.starter_pro.onboarding_modal_description")
 });
-let tj = (e, t) => e ? jsx(_$$E2, {
+let tj = (e, t) => e ? jsx(TextWithTruncation, {
   fontSize: 14,
   children: renderI18nText("rcs.plan_spaces.nothing_else_has_changed")
-}) : t ? jsx(_$$E2, {
+}) : t ? jsx(TextWithTruncation, {
   fontSize: 14,
   color: "secondary",
   children: renderI18nText("rcs.plan_spaces.user_help_migrating_drafts_awareness")
-}) : jsx(_$$E2, {
+}) : jsx(TextWithTruncation, {
   fontSize: 14,
   children: renderI18nText("rcs.plan_spaces.starter_pro.onboarding_modal_body")
 });
-let tk = (e, t) => jsx(_$$E2, {
+let tk = (e, t) => jsx(TextWithTruncation, {
   fontSize: 13,
   children: renderI18nText(t || e ? "rcs.plan_spaces.got_it" : "rcs.plan_spaces.show_me_what_changed")
 });
@@ -999,7 +999,7 @@ let tC = memo(({
           children: i
         }), jsx($9, {
           onClick: l,
-          children: jsx(_$$E2, {
+          children: jsx(TextWithTruncation, {
             fontSize: 13,
             children: renderI18nText("rcs.plan_spaces.learn_more")
           })
@@ -1240,7 +1240,7 @@ function tV(e) {
     className: "pro_trial_form_modal--container--Wv6Lg",
     children: [jsxs("div", {
       className: "pro_trial_form_modal--header--yEBLV",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A2,
         className: "pro_trial_form_modal--icon--CKqnw",
         useOriginalSrcFills_DEPRECATED: !0
@@ -1252,7 +1252,7 @@ function tV(e) {
       className: "pro_trial_form_modal--content--cB6wt text--fontPos13--xW8hS text--_fontBase--QdLsd",
       children: [jsxs("div", {
         className: "pro_trial_form_modal--titleTextContainer--Whf8N",
-        children: [stepProps && jsx(_$$E2, {
+        children: [stepProps && jsx(TextWithTruncation, {
           color: "secondary",
           fontSize: 13,
           children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.step_counter", {
@@ -1280,13 +1280,13 @@ function tV(e) {
 function t0() {
   let [e, t] = useState();
   let n = useMemo(() => [{
-    title: jsx(_$$E2, {
+    title: jsx(TextWithTruncation, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.title", {
         maxNumOfFiles: STANDARD_LIMIT,
         maxNumOfProjects: PRIMARY_LIMIT
       })
     }),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.description")
     }),
     leftComponent: jsx(AutoLayout, {
@@ -1295,16 +1295,16 @@ function t0() {
       padding: {
         top: 8
       },
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3,
         className: _$$s.colorIconDanger.$
       })
     })
   }, {
-    title: jsx(_$$E2, {
+    title: jsx(TextWithTruncation, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.title")
     }),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.description")
     }),
     leftComponent: jsx(AutoLayout, {
@@ -1313,16 +1313,16 @@ function t0() {
       padding: {
         top: 8
       },
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A4,
         className: _$$s.colorIconDanger.$
       })
     })
   }, {
-    title: jsx(_$$E2, {
+    title: jsx(TextWithTruncation, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.other.title")
     }),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       children: renderI18nText("pro_trials_v3.downgrade_modal.feature_downgrade.other.description")
     }),
     leftComponent: jsx(AutoLayout, {
@@ -1331,7 +1331,7 @@ function t0() {
       padding: {
         top: 8
       },
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A4,
         className: _$$s.colorIconDanger.$
       })
@@ -1394,12 +1394,12 @@ let t1 = registerModal(function ({
     trackingName: Mm,
     hideModal: n,
     children: jsx(tV, {
-      titleText: jsx(_$$E2, {
+      titleText: jsx(TextWithTruncation, {
         fontSize: 24,
         fontWeight: "bold",
         children: renderI18nText("pro_trials_v3.downgrade_modal.title")
       }),
-      descriptionText: jsx(_$$E2, {
+      descriptionText: jsx(TextWithTruncation, {
         color: "secondary",
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.downgrade_modal.description")
@@ -1407,11 +1407,11 @@ let t1 = registerModal(function ({
       middleContent: jsx(t0, {}),
       ctaOnClick: n,
       ctaDisabled: !1,
-      ctaText: jsx(_$$E2, {
+      ctaText: jsx(TextWithTruncation, {
         children: renderI18nText("pro_trials_v3.downgrade_modal.cta.text")
       }),
       textCtaOnClick: r,
-      textCtaText: jsx(_$$E2, {
+      textCtaText: jsx(TextWithTruncation, {
         children: renderI18nText("pro_trials_v3.downgrade_modal.text_cta.text")
       }),
       hideModal: n
@@ -1432,10 +1432,10 @@ function t3(e) {
     children: jsx(tV, {
       ctaDisabled: 0 === selectedFeatures.size,
       ctaOnClick: onClickCTA,
-      ctaText: jsx(_$$E2, {
+      ctaText: jsx(TextWithTruncation, {
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.finish")
       }),
-      descriptionText: jsx(_$$E2, {
+      descriptionText: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.you_have_14_days", {
           proTrialDuration: $g
@@ -1461,11 +1461,11 @@ function t3(e) {
         totalSteps: h3
       },
       textCtaOnClick: onBack,
-      textCtaText: jsx(_$$E2, {
+      textCtaText: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.go_back")
       }),
-      titleText: jsx(_$$E2, {
+      titleText: jsx(TextWithTruncation, {
         fontSize: 24,
         fontWeight: "bold",
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.what_are_you_excited")
@@ -1515,10 +1515,10 @@ function t8(e) {
     children: jsx(tV, {
       ctaDisabled: void 0 === selectedTeamType,
       ctaOnClick: onClickCTA,
-      ctaText: jsx(_$$E2, {
+      ctaText: jsx(TextWithTruncation, {
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.continue")
       }),
-      descriptionText: jsx(_$$E2, {
+      descriptionText: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.not_being_nosy")
       }),
@@ -1550,11 +1550,11 @@ function t8(e) {
         totalSteps: h3
       },
       textCtaOnClick: onBack,
-      textCtaText: jsx(_$$E2, {
+      textCtaText: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.go_back")
       }),
-      titleText: jsx(_$$E2, {
+      titleText: jsx(TextWithTruncation, {
         fontSize: 24,
         fontWeight: "bold",
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.what_type_of_team", {
@@ -1602,10 +1602,10 @@ function nt(e) {
     children: jsx(tV, {
       ctaDisabled: void 0 === selectedTeamID,
       ctaOnClick: onClickCTA,
-      ctaText: jsx(_$$E2, {
+      ctaText: jsx(TextWithTruncation, {
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.upgrade_to_pro")
       }),
-      descriptionText: jsx(_$$E2, {
+      descriptionText: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.everyone_will_be_upgraded")
       }),
@@ -1625,11 +1625,11 @@ function nt(e) {
         totalSteps: h3
       },
       textCtaOnClick: onBack,
-      textCtaText: jsx(_$$E2, {
+      textCtaText: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.cancel")
       }),
-      titleText: jsx(_$$E2, {
+      titleText: jsx(TextWithTruncation, {
         fontSize: 24,
         fontWeight: "bold",
         children: renderI18nText("pro_trials_v3.pro_trial_initiation_modal.pick_a_team")
@@ -1654,14 +1654,14 @@ function nn(e) {
         size: _$$P3.LARGE
       }), jsx("div", {
         className: "pro_trial_form_modal--teamNameContainer--cwtSb",
-        children: jsx(_$$E2, {
+        children: jsx(TextWithTruncation, {
           children: team.name,
           fontSize: 14,
           truncate: "end",
           fontWeight: "medium"
         })
       })]
-    }), jsx(_$$E2, {
+    }), jsx(TextWithTruncation, {
       color: "secondary",
       fontSize: 14,
       fontWeight: "medium",
@@ -1747,7 +1747,7 @@ function no(e) {
   } = e;
   let n = useDispatch();
   let r = jsxs(Fragment, {
-    children: [jsx(_$$E2, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.entry_modal_explanation")
     }), jsx(nc, {})]
@@ -1760,13 +1760,13 @@ function no(e) {
       }));
     },
     trackingProperties: _$$ng.getTrackingProperties("Start professional trial"),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.entry_modal_cta_text")
     })
   });
   return jsx(nd, {
-    titleText: jsx(_$$E2, {
+    titleText: jsx(TextWithTruncation, {
       fontSize: 24,
       fontWeight: "bold",
       children: renderI18nText("pro_trials_v3.entry_modal_title")
@@ -1783,7 +1783,7 @@ function ns(e) {
   } = e;
   let r = useDispatch();
   let i = jsxs(Fragment, {
-    children: [jsx(_$$E2, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.team_welcome_modal_explanation")
     }), jsx(nc, {})]
@@ -1797,14 +1797,14 @@ function ns(e) {
       }));
     },
     trackingProperties: _$$ng.getTrackingProperties("Team welcome to Professional trial"),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.team_welcome_modal_cta")
     })
   });
   return jsx(nd, {
     descriptionText: i,
-    titleText: jsx(_$$E2, {
+    titleText: jsx(TextWithTruncation, {
       fontSize: 24,
       fontWeight: "bold",
       children: renderI18nText("pro_trials_v3.team_welcome_modal_title")
@@ -1832,7 +1832,7 @@ function nl(e) {
       }));
     },
     trackingProperties: _$$ng.getTrackingProperties("Upgrade from Pro trial expiry modal"),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.expiry_modal_cta_text")
     })
@@ -1847,18 +1847,18 @@ function nl(e) {
       }));
     },
     trackingProperties: _$$ng.getTrackingProperties("Go back to Starter from Pro trial expiry modal"),
-    children: jsx(_$$E2, {
+    children: jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.expiry_modal_secondary_cta_text")
     })
   });
   return jsx(nd, {
-    titleText: jsx(_$$E2, {
+    titleText: jsx(TextWithTruncation, {
       fontSize: 24,
       fontWeight: "bold",
       children: renderI18nText("pro_trials_v3.expiry_modal_title")
     }),
-    descriptionText: jsx(_$$E2, {
+    descriptionText: jsx(TextWithTruncation, {
       fontSize: 13,
       children: renderI18nText("pro_trials_v3.expiry_modal_explanation")
     }),
@@ -2311,7 +2311,7 @@ function n0() {
     getConfig
   } = I7("starter_global_file_limits");
   let t = useTeamPlanFeatures();
-  let n = oA(t?.data?.tier);
+  let n = getResourceDataOrFallback(t?.data?.tier);
   let {
     show,
     isShowing,
@@ -2519,7 +2519,7 @@ function a_() {
   return null;
 }
 export function $$au2() {
-  let e = !!dq();
+  let e = !!useCurrentUserOrgId();
   return jsxs(Fragment, {
     children: [jsx(_$$p2, {
       children: jsx(_$$$, {})

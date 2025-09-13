@@ -5,7 +5,7 @@ import { VariableResolvedDataType, Fullscreen } from "../figma_app/763686";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { Ez } from "../figma_app/766708";
-import { $ } from "../905/383708";
+import { generateUniqueKey } from "../905/383708";
 import { kiwiParserCodec } from "../905/294864";
 import { Rb, yp, kf, u5 } from "../figma_app/852050";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -84,7 +84,7 @@ export function $$I1(e) {
   let a = u5(i ? e : null);
   let l = useMemo(() => i ? {
     fileKey: e,
-    libraryKey: $(e)
+    libraryKey: generateUniqueKey(e)
   } : null, [i, e]);
   let p = Bh(l);
   let y = useMemo(() => resourceUtils.from(p).transform(e => oz(e, "FILL")), [p]);

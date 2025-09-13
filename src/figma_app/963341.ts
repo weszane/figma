@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { createLocalStorageAtom, atom, useAtomValueAndSetter, useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { getFalseValue } from "../figma_app/897289";
@@ -136,7 +136,7 @@ class I {
 }
 function S(e, t) {
   if (!e.data) return null;
-  let r = oA(e.data.actionsHistory);
+  let r = getResourceDataOrFallback(e.data.actionsHistory);
   return r && r.frecencyHistory ? function (e, t) {
     let r = function (e) {
       let t;

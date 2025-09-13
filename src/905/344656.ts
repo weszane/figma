@@ -8,7 +8,7 @@ import { Hh } from "../figma_app/553184";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { wZ } from "../figma_app/701982";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { G } from "../905/674940";
 import { createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
@@ -31,7 +31,7 @@ let y = e => {
       isStagingChanges: Multiplayer.isStagingChanges(),
       stagedRegisters: getFeatureFlags().use_registers_with_staged_value
     };
-    ds("unsaved_changes_bell", e, debugState.getState(), t);
+    trackFileEvent("unsaved_changes_bell", e, debugState.getState(), t);
   }
 };
 let b = createOptimistThunk((e, t) => {

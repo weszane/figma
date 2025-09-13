@@ -11,7 +11,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
 import { gs } from "../figma_app/624706";
 import { EventShield } from "../905/821217";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { x as _$$x } from "../905/587214";
 import { f as _$$f } from "../905/335032";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -20,7 +20,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
 import { aV } from "../figma_app/722362";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../figma_app/57000";
 import { P4 } from "../905/18800";
 import { jl } from "../figma_app/471982";
@@ -88,7 +88,7 @@ function R(e) {
     recordingKey,
     canZoom
   } = e;
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     recordingKey: generateRecordingKey(recordingKey, "zoomInButton"),
     className: p()("zoom_menu--zoomPlus--zMtgE", {
       [C]: canZoom
@@ -98,7 +98,7 @@ function R(e) {
       fullscreenValue.triggerAction("zoom-in");
     },
     htmlAttributes: {
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       "data-tooltip": "zoom-in"
     },
     "aria-label": getI18nString("fullscreen_actions.zoom-in"),
@@ -117,7 +117,7 @@ function L(e) {
     recordingKey,
     canZoom
   } = e;
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     recordingKey: generateRecordingKey(recordingKey, "zoomOutButton"),
     className: p()("zoom_menu--zoomMinus--BrHt4", {
       [C]: canZoom
@@ -127,7 +127,7 @@ function L(e) {
       fullscreenValue.triggerAction("zoom-out");
     },
     htmlAttributes: {
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       "data-tooltip": "zoom-out"
     },
     "aria-label": getI18nString("fullscreen_actions.zoom-out"),
@@ -144,7 +144,7 @@ function L(e) {
 function B() {
   let e = aV();
   let t = useSelector(e => e.mirror.appModel.showUi);
-  return !e && t ? jsxs(_$$E, {
+  return !e && t ? jsxs(ButtonPrimitive, {
     className: "x78zum5 x153ncpu x1q0g3np xl56j7k x6s0dn4 x1jnr06f xgqmno8 xsqpjig",
     onClick: () => {
       customHistory.unsafeRedirect(_$$m, "_blank");

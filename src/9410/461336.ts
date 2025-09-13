@@ -4,7 +4,7 @@ import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { BJ } from "../figma_app/9054";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { wS } from "../figma_app/221240";
 import { uQ } from "../figma_app/311375";
 import { d as _$$d } from "../9410/441456";
@@ -45,7 +45,7 @@ export function $$v2(e) {
   let t = wS();
   let i = uQ();
   let a = useDispatch();
-  let s = U();
+  let s = trackFileEventWithStore();
   return useCallback(() => {
     i && "loaded" === t.status && (s("Diff Modal Compare Changes Clicked", {
       nodeId: i,

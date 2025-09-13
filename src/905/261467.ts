@@ -20,7 +20,7 @@ import { A as _$$A } from '../1617/568132';
 import { W_ } from '../figma_app/8833';
 import { atomStoreManager } from '../figma_app/27355';
 import { tui } from '../figma_app/27776';
-import { $g, Nd } from '../figma_app/62612';
+import { addViewportOffset, viewportWithDelta } from '../figma_app/62612';
 import { sX } from '../figma_app/212767';
 import { hasInspectOrPanelCapability } from '../figma_app/300692';
 import { fullscreenValue } from '../figma_app/455680';
@@ -281,7 +281,7 @@ export class PluginUIManager {
    */
   buildXYPosition(x: number, y: number): Point {
     const viewport = fullscreenValue.getViewportInfo();
-    const pos = $g(viewport, {
+    const pos = addViewportOffset(viewport, {
       x,
       y
     });
@@ -452,7 +452,7 @@ export class PluginUIManager {
     const {
       x,
       y
-    } = Nd(viewport, windowSpace);
+    } = viewportWithDelta(viewport, windowSpace);
     return {
       canvasSpace: new Point(x, y),
       windowSpace

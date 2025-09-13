@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, Fragment as _$$Fragment, useCallback, useMemo, useState } from "react";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { K } from "../905/443068";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { S as _$$S } from "../905/711470";
 import { L as _$$L } from "../905/704296";
 import { xk } from "@stylexjs/stylex";
@@ -11,7 +11,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { e6, hH } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { e as _$$e } from "../figma_app/522702";
 import { v as _$$v } from "../905/213481";
 import { Ay } from "../vendor/159563";
@@ -57,7 +57,7 @@ function y(e) {
     direction: "horizontal",
     spacing: 8,
     width: "hug-contents",
-    children: [a.length > 1 && jsx($n, {
+    children: [a.length > 1 && jsx(Button, {
       variant: "link",
       onClick: () => {
         let t = Object.fromEntries(Object.keys(e.currentFilters).map(e => [e, null]));
@@ -196,7 +196,7 @@ function R(e) {
       className: "xh8yej3 x78zum5 x1q0g3np x6s0dn4 x1qughib",
       children: [jsx(Label, {
         htmlFor: label,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: "secondary",
           children: label
         })
@@ -472,7 +472,7 @@ function $(e) {
           className: "x2lah0s"
         }), jsx("span", {
           className: "xuxw1ft",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "secondary",
             children: e.display
           })
@@ -626,7 +626,7 @@ function G({
     direction: "vertical",
     children: [jsxs("div", {
       ...xk(F.popoverHeader),
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: "medium",
         fontSize: 11,
         children: getI18nString("people_table_filters.popover_header")
@@ -649,13 +649,13 @@ function G({
       }, e.title))
     }), jsxs("div", {
       ...xk(F.popoverFooter),
-      children: [!E && jsx($n, {
+      children: [!E && jsx(Button, {
         variant: "link",
         onClick: resetFilters,
         children: getI18nString("people_table_filters.button_text.clear_all")
       }), jsx("span", {
         ...xk(F.footerSpacing),
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "primary",
           onClick: k,
           children: getI18nString("people_table_filters.button_text.apply")

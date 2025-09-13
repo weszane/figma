@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { W0 as _$$W, Dy as _$$Dy, ky as _$$ky, NR as _$$NR, Pj as _$$Pj, r0 as _$$r, Je as _$$Je, pY as _$$pY } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
-import { FE } from "../figma_app/314264";
+import { trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
 import { zU } from "../figma_app/740025";
 import { N } from "../905/696711";
 import { Or, Lk, Lr, uH, j9, Rr, Rx } from "../figma_app/162807";
@@ -83,7 +83,7 @@ let $$E27 = createOptimistThunk(e => {
   }));
 });
 let $$x17 = createOptimistThunk((e, t) => {
-  e.getState().search.parameters.planFilter !== t.planFilter && (FE(t.planFilter, "search", void 0), e.dispatch($$L0({
+  e.getState().search.parameters.planFilter !== t.planFilter && (trackFileBrowserPlanFilterSelected(t.planFilter, "search", void 0), e.dispatch($$L0({
     parameters: {
       ...t,
       workspaceFilter: null

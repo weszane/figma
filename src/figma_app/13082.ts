@@ -4,7 +4,7 @@ import { a as _$$a } from "../905/29104";
 import { N_ } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { JT, pY, rr, zw, LC, gj, Xy, KL, TJ, GI, IA, iP, d7, UW } from "../figma_app/632248";
 import { E } from "../905/719609";
 export function $$p1({
@@ -17,7 +17,7 @@ export function $$p1({
     className: _$$s.hAuto.flexShrink0.$,
     "data-tooltip": getI18nString("qa.learn_more"),
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     href: function (e) {
       switch (e) {
         case JT.TRANSLATE_TEXT:

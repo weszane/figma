@@ -3,7 +3,7 @@ import { useRef, useState, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { i } from "../905/718764";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { ComponentPropType, Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
@@ -37,7 +37,7 @@ import { vo, Y9, nB } from "../figma_app/272243";
 import { p as _$$p } from "../905/185998";
 import { Label } from "../905/270045";
 import { A as _$$A } from "../vendor/850789";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { u as _$$u } from "../905/419626";
 import { useHideContextMenu } from "../figma_app/380814";
 function W({
@@ -150,13 +150,13 @@ function K({
       values: i
     }), jsx("div", {
       className: "x78zum5 xc26acl x13a6bvl xnm25rq xyfqnmn",
-      children: jsx($n, {
+      children: jsx(Button, {
         type: "submit",
         disabled: !p,
         recordingKey: generateRecordingKey(s, "createButton"),
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.component_properties.slot_create_modal.invalid_property_name"),
-          "data-tooltip-type": p ? void 0 : Ib.TEXT
+          "data-tooltip-type": p ? void 0 : KindEnum.TEXT
         },
         children: renderI18nText("design_systems.component_properties.slot_create_modal.create_component_property")
       })
@@ -384,7 +384,7 @@ let $$X0 = registerModal(function (e) {
         values: es
       }), jsx("span", {
         className: "create_component_prop_modal--createButton--yBOru",
-        children: jsx($n, {
+        children: jsx(Button, {
           recordingKey: "createComponentProperty",
           htmlAttributes: {
             "data-testid": "create-component-prop-button"

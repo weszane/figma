@@ -9,7 +9,7 @@ import { p as _$$p } from "../905/185998";
 import { T as _$$T } from "../905/909590";
 import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
-import { WW } from "../905/521428";
+import { ButtonLarge } from "../905/521428";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { J as _$$J2 } from "../905/614223";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -256,7 +256,7 @@ export let $$L0 = function (e) {
               });
               return jsx("div", {
                 className: "form-module--submitButtonContainer--9Tc0g",
-                children: jsxs(WW, {
+                children: jsxs(ButtonLarge, {
                   variant: "primary",
                   onClick: e,
                   disabled: !t || r,

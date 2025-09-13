@@ -7,7 +7,7 @@ import { logger } from "../905/651849";
 import { useLatestRef } from "../figma_app/922077";
 import { Point } from "../905/736624";
 import { aB, uz } from "../905/284552";
-import { nt } from "../figma_app/858013";
+import { LargeLoadingSpinner } from "../figma_app/858013";
 import { jS, Pv } from "../905/619652";
 import { _P } from "../figma_app/2590";
 import { S } from "../figma_app/787550";
@@ -217,7 +217,7 @@ export function $$$$A0(e) {
       }), jsx("div", {
         className: "video_paint_thumbnail--loadingSpinner--Y3IqF",
         hidden: !N,
-        children: jsx(nt, {})
+        children: jsx(LargeLoadingSpinner, {})
       })]
     })
   });

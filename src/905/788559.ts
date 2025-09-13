@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { K } from "../905/443068";
 import { y as _$$y } from "../905/37128";
 import { getFeatureFlags } from "../905/601108";
@@ -88,7 +88,7 @@ let T = registerModal(function (e) {
         children: renderI18nText("qa.we_use_this_to_improve")
       }), jsx(_$$B, {
         justify: "end",
-        children: jsx($n, {
+        children: jsx(Button, {
           type: "submit",
           disabled: !l.length,
           children: getI18nString("qa.submit_feedback")
@@ -167,7 +167,7 @@ export function $$L0({
         justify: "space-between",
         children: D.selectedFeedback && D.shouldShowAdditionalFeedback && getFeatureFlags().qa_user_additional_feedback ? jsx("div", {
           className: _$$s.ml4.textBodyMedium.$,
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "link",
             onClick: () => {
               F(showModalHandler({

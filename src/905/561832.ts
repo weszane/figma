@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { SchemaJoinStatus } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { logger } from "../905/651849";
@@ -202,7 +202,7 @@ function M(e) {
             children: secondaryLinkButton.text
           }), secondaryButtonText && secondaryAction && jsx("span", {
             className: _$$s.ml8.$,
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "secondary",
               onClick: () => {
                 h(hideModal());
@@ -217,7 +217,7 @@ function M(e) {
             })
           }), jsx("span", {
             className: _$$s.ml8.$,
-            children: jsx($n, {
+            children: jsx(Button, {
               variant: "primary",
               onClick: () => {
                 h(hideModal());

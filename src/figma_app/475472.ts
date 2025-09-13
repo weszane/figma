@@ -13,7 +13,7 @@ import { x2, of } from "../figma_app/714946";
 import { bE } from "../905/98702";
 import { r1, bE as _$$bE, $w, aB, mw, ii } from "../figma_app/240735";
 import { b as _$$b } from "../905/493664";
-import { _J } from "../figma_app/314264";
+import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { p9, n1 } from "../figma_app/88768";
 import { rq } from "../905/351260";
@@ -52,7 +52,7 @@ export let $$N1 = createOptimistThunk((e, t) => {
     data: r
   }) => {
     let n = "team" in r.meta ? r.meta.team : r.meta;
-    _J("Team Created", n.id, e.getState(), {
+    trackTeamEvent("Team Created", n.id, e.getState(), {
       sharing_audience_control: sharingAudienceControl,
       org_browsable: orgBrowsable,
       hidden
@@ -154,7 +154,7 @@ let $$w0 = createOptimistThunk((e, t) => {
   let n = r.id;
   let o = r.name;
   let d = t.name;
-  _J("Team Renamed", n, e.getState());
+  trackTeamEvent("Team Renamed", n, e.getState());
   let u = XHR.put(`/api/teams/${n}`, {
     name: t.name
   }).then(({
@@ -194,7 +194,7 @@ let $$w0 = createOptimistThunk((e, t) => {
 });
 let $$O6 = createOptimistThunk((e, t) => {
   let r = t.team.id;
-  _J("Team Share Settings Updated", r, e.getState(), {
+  trackTeamEvent("Team Share Settings Updated", r, e.getState(), {
     share_settings_type: "share_audience",
     oldSharingAudienceControl: t.team.sharing_audience_control,
     newSharingAudienceControl: t.sharingAudienceControl,

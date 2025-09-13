@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { hideModal } from "../905/156213";
 import { bE } from "../figma_app/375098";
 import { c as _$$c } from "../905/370443";
@@ -28,7 +28,7 @@ function y() {
 function T({
   user: e
 }) {
-  return jsx(E, {
+  return jsx(TextWithTruncation, {
     fontSize: 24,
     fontWeight: "bold",
     children: renderI18nText("pro_onboarding.welcome_to_professional", {
@@ -64,7 +64,7 @@ export let $$b0 = registerModal(function ({
   };
   let f = jsxs(Fragment, {
     children: [renderI18nText("pro_onboarding.you_successfully_upgraded_team_name_to_a_professional_plan", {
-      teamName: jsx(E, {
+      teamName: jsx(TextWithTruncation, {
         fontWeight: "bold",
         children: i.name
       })
@@ -78,7 +78,7 @@ export let $$b0 = registerModal(function ({
     media: jsx(v, {}),
     primaryCta: {
       type: "button",
-      label: jsx(E, {
+      label: jsx(TextWithTruncation, {
         fontSize: 13,
         children: renderI18nText("pro_onboarding.get_started")
       }),

@@ -29,7 +29,7 @@ import { showModalHandler } from "../905/156213";
 import { Fr } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
-import { DQ, Pw } from "../figma_app/121751";
+import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { useShadowRead } from "../figma_app/391338";
 import { p8 } from "../figma_app/722362";
@@ -137,7 +137,7 @@ function W({
     newValue: y,
     newValueReady: m,
     label: adminPermissionConfig.PageTrackerUpsell.canEditStarterTeam,
-    enableFullRead: DQ(Pw.GROUP_7),
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     contextArgs: {
       planId: _?.id,
       isOpenFileLoadedFromLiveGraph: m

@@ -14,7 +14,7 @@ import { h7 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
 import { SG } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { Jl } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
@@ -85,7 +85,7 @@ export function $$N0({
         [kL]: U
       }) : void 0,
       "data-tooltip": _$$P(getI18nString("fullscreen.type_panel.letter_spacing")),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: t,
       dispatch: L,
       formatter: new O({

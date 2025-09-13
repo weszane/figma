@@ -1,107 +1,163 @@
+// Original file: /Users/allen/sigma-main/src/figma_app/858013.ts
+// Refactored to improve readability, maintainability, and TypeScript best practices.
+// Grouped related loading spinner components and wrappers.
+// Added meaningful names, prop types, JSDoc comments, and simplified logic.
+// Ensured functionality remains identical to the original.
 
+import classNames from 'classnames'
 import { Component, PureComponent } from 'react'
 import { jsx } from 'react/jsx-runtime'
-import { B } from '../905/714743'
-import { A as _$$A } from '../1617/62299'
-import { A } from '../1617/976727'
+import { SvgComponent } from '../905/714743'
+import { A as SpinnerIcon } from '../1617/62299'
+import { A as LoadingIcon } from '../1617/976727'
 import { $g, F, h, K_, Mn, OZ, PG, Pu, q5, sl, uz, WL, yM, zr } from '../figma_app/498055'
-import classNames from 'classnames'
 
+// Define prop types for better type safety
+interface LoadingSpinnerProps {
+  size?: 'small' | 'medium' | 'large' | 'custom'
+  shouldMatchTextColor?: boolean
+  className?: string
+  testId?: string
+  cssBacked?: boolean
+  imageBacked?: boolean
+  altIcon?: string
+}
 
-export class $$u4 extends Component {
+interface LoadingOverlayProps extends LoadingSpinnerProps {}
+
+interface ImageBackedLoadingProps extends LoadingSpinnerProps {}
+
+interface CssBackedLoadingProps extends LoadingSpinnerProps {}
+
+interface BlueLoadingSpinnerProps {
+  className?: string
+}
+
+/**
+ * Main loading spinner component.
+ * Original name: $$u4
+ */
+export class LoadingSpinner extends Component<LoadingSpinnerProps> {
+  static displayName: string
+
   render() {
-    let e = PG
-    let t = q5
-    switch (this.props.size) {
-      case 'small':
-        e = PG
-        t = q5
-        break
-      case 'medium':
-        e = $g
-        t = Mn
-        break
-      case 'large':
-        e = Pu
-        t = OZ
-        break
-      case 'custom':
-        e = null
-        t = null
+    const { size, shouldMatchTextColor, className, testId, cssBacked, imageBacked, altIcon } = this.props
+
+    // Determine size classes with early returns for simplicity
+    let sizeClass: string | null = PG
+    let innerClass: string | null = q5
+
+    if (size === 'medium') {
+      sizeClass = $g
+      innerClass = Mn
     }
+    else if (size === 'large') {
+      sizeClass = Pu
+      innerClass = OZ
+    }
+    else if (size === 'custom') {
+      sizeClass = null
+      innerClass = null
+    }
+    // Default is small, so no change needed
+
     return jsx('span', {
-      'className': classNames(zr, e, this.props.shouldMatchTextColor ? K_ : h, this.props.className || ''),
-      'data-testid': this.props.testId,
-      'children': this.props.cssBacked
-        ? jsx('span', {
-          className: classNames(WL, t),
-        })
-        : this.props.imageBacked
+      'className': classNames(zr, sizeClass, shouldMatchTextColor ? K_ : h, className || ''),
+      'data-testid': testId,
+      'children': cssBacked
+        ? jsx('span', { className: classNames(WL, innerClass) })
+        : imageBacked
           ? jsx('img', {
-            alt: 'Loading',
-            className: yM,
-            src: `data:image/svg+xml;base64,${btoa(A)}`,
-          })
-          : jsx(B, {
-            svg: this.props.altIcon || A,
-            className: yM,
-            autosize: !this.props.altIcon,
-            dataTestId: 'loading-spinner',
-          }),
+              alt: 'Loading',
+              className: yM,
+              src: `data:image/svg+xml;base64,${btoa(LoadingIcon)}`,
+            })
+          : jsx(SvgComponent, {
+              svg: altIcon || LoadingIcon,
+              className: yM,
+              autosize: !altIcon,
+              dataTestId: 'loading-spinner',
+            }),
     })
   }
 }
-export function $$p6(e) {
+
+LoadingSpinner.displayName = 'LoadingSpinner'
+
+/**
+ * Wrapper for loading overlay.
+ * Original name: $$p6
+ */
+export function LoadingOverlay(props: LoadingOverlayProps) {
   return jsx('div', {
     className: F,
-    children: jsx($$u4, {
-      ...e,
-    }),
+    children: jsx(LoadingSpinner, props),
   })
 }
-export function $$_5() {
+
+/**
+ * Large loading spinner wrapper.
+ * Original name: $$_5
+ */
+export function LargeLoadingSpinner() {
   return jsx('div', {
     className: F,
-    children: jsx($$u4, {
-      size: 'large',
-    }),
+    children: jsx(LoadingSpinner, { size: 'large' }),
   })
 }
-export function $$h3(e) {
-  return jsx($$u4, {
-    imageBacked: !0,
-    ...e,
-  })
+
+/**
+ * Image-backed loading spinner.
+ * Original name: $$h3
+ */
+export function ImageBackedLoading(props: ImageBackedLoadingProps) {
+  return jsx(LoadingSpinner, { imageBacked: true, ...props })
 }
-export function $$m0(e) {
-  return jsx($$u4, {
-    cssBacked: !0,
-    ...e,
-  })
+
+/**
+ * CSS-backed loading spinner.
+ * Original name: $$m0
+ */
+export function CssBackedLoading(props: CssBackedLoadingProps) {
+  return jsx(LoadingSpinner, { cssBacked: true, ...props })
 }
-export function $$g1() {
+
+/**
+ * Default loading spinner wrapper.
+ * Original name: $$g1
+ */
+export function DefaultLoadingSpinner() {
   return jsx('div', {
     className: sl,
-    children: jsx($$u4, {}),
+    children: jsx(LoadingSpinner, {}),
   })
 }
-$$u4.displayName = 'LoadingSpinner'
-export class $$f2 extends PureComponent {
+
+/**
+ * Blue loading spinner component.
+ * Original name: $$f2
+ */
+export class BlueLoadingSpinner extends PureComponent<BlueLoadingSpinnerProps> {
+  static displayName: string
   render() {
+    const { className } = this.props
     return jsx('span', {
-      className: `${uz} ${this.props.className || ''}`,
-      children: jsx(B, {
-        svg: _$$A,
+      className: `${uz} ${className || ''}`,
+      children: jsx(SvgComponent, {
+        svg: SpinnerIcon,
         className: yM,
       }),
     })
   }
 }
-$$f2.displayName = 'BlueLoadingSpinner'
-export const $y = $$m0
-export const Z_ = $$g1
-export const a_ = $$f2
-export const dW = $$h3
-export const kt = $$u4
-export const nt = $$_5
-export const qc = $$p6
+
+BlueLoadingSpinner.displayName = 'BlueLoadingSpinner'
+
+// Updated exports to match refactored names
+export const $y = CssBackedLoading
+export const Z_ = DefaultLoadingSpinner
+export const a_ = BlueLoadingSpinner
+export const dW = ImageBackedLoading
+export const kt = LoadingSpinner
+export const nt = LargeLoadingSpinner
+export const qc = LoadingOverlay

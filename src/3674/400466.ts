@@ -21,9 +21,9 @@ import { getThemeContextOrDefault } from "../905/158740";
 import { useMemoStable, useStableMemo } from "../905/19536";
 import k from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { IL, am as _$$am, hC } from "../figma_app/901889";
+import { trackFileEventWithPage, trackFileEventWithUser, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { getInitialOptions } from "../figma_app/169182";
-import { _X, qc } from "../figma_app/62612";
+import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { mJ, uQ } from "../figma_app/311375";
 import { isDevModeFocusViewActive, isInteractiveInspectionResizing } from "../figma_app/544649";
 import { UU } from "../figma_app/770088";
@@ -57,7 +57,7 @@ import { g as _$$g } from "../8826/914688";
 import { C as _$$C } from "../8826/771306";
 import { t as _$$t3 } from "../905/947268";
 import { rO } from "../figma_app/409807";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { A as _$$A } from "../svg/299062";
 import { Gp, w$ } from "../figma_app/646357";
 import { J as _$$J } from "../905/225412";
@@ -83,7 +83,7 @@ import { bL as _$$bL, mc as _$$mc, YJ, q7 as _$$q } from "../figma_app/860955";
 import { d as _$$d2 } from "../905/976845";
 import { N as _$$N } from "../905/438674";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { J as _$$J2 } from "../905/125993";
 import { A as _$$A11 } from "../905/251970";
 import { w as _$$w2 } from "../905/442596";
@@ -102,13 +102,13 @@ import { showModalHandler } from "../905/156213";
 import { b as _$$b2 } from "../905/985254";
 import { m0, Em } from "../figma_app/976749";
 import { Fu } from "../figma_app/545877";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { B as _$$B2 } from "../figma_app/539422";
 import { useModalManager } from "../905/437088";
-import { bL as _$$bL2 } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { x as _$$x } from "../905/587214";
 import { O as _$$O } from "../905/487602";
@@ -250,7 +250,7 @@ function eT({
 function eO({
   svg: e
 }) {
-  return jsx(_$$B, {
+  return jsx(SvgComponent, {
     svg: e,
     className: A()(ey, ev)
   });
@@ -840,7 +840,7 @@ let td = e => {
   }
 };
 function tc() {
-  return jsx(_$$B, {
+  return jsx(SvgComponent, {
     svg: _$$A3,
     className: A()(ey, ev)
   });
@@ -1874,7 +1874,7 @@ function tD({
   }) : null;
 }
 function tO() {
-  let e = IL();
+  let e = trackFileEventWithPage();
   let t = Xr(_$$m);
   let n = !!hA();
   return useCallback((a, i) => {
@@ -1907,7 +1907,7 @@ function tB(e) {
   let u = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.ANNOTATIONS), []);
   let h = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let f = XR();
-  let g = _$$am();
+  let g = trackFileEventWithUser();
   let x = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
   let m = {
     displayText: getI18nString("dev_handoff.annotations.hide_annotations"),
@@ -2099,12 +2099,12 @@ function nk({
     }),
     recordingKey: e,
     dataTestId: e,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: "annotation_categories_edit_window--grabber--mQN70",
       svg: _$$A15
     }), jsxs(MenuRoot, {
       manager,
-      children: [jsx(_$$E, {
+      children: [jsx(ButtonPrimitive, {
         className: A()("annotation_categories_edit_window--colorSelectTrigger--AJgOU", {
           "annotation_categories_edit_window--active---7kjY": manager.isOpen
         }),
@@ -2128,7 +2128,7 @@ function nk({
             style: {
               backgroundColor: r?.color
             }
-          }), jsx(_$$B, {
+          }), jsx(SvgComponent, {
             className: "annotation_categories_edit_window--caret--7QFy-",
             svg: _$$A14
           })]
@@ -2188,12 +2188,12 @@ function nk({
             children: getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_dialog_body")
           }), jsx(wi, {
             children: jsxs(jk, {
-              children: [jsx($n, {
+              children: [jsx(Button, {
                 variant: "secondary",
                 recordingKey: generateRecordingKey(e, "removeCategoryCancel"),
                 onClick: () => L(!1),
                 children: getI18nString("general.cancel")
-              }), jsx($n, {
+              }), jsx(Button, {
                 variant: "destructive",
                 recordingKey: generateRecordingKey(e, "removeCategoryConfirm"),
                 onClick: () => {
@@ -2210,7 +2210,7 @@ function nk({
   });
 }
 let nA = registerModal(function (e) {
-  let t = IL();
+  let t = trackFileEventWithPage();
   let {
     open,
     onClose,
@@ -2394,7 +2394,7 @@ let nA = registerModal(function (e) {
     c(e);
     onClose();
   }, [y, u, d, c, onClose, h, g, m, t]);
-  return jsx(_$$bL2, {
+  return jsx(ModalRootComponent, {
     width: "md",
     manager: r,
     htmlAttributes: {
@@ -2449,12 +2449,12 @@ let nA = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: W,
             recordingKey: generateRecordingKey(recordingKey, "cancel"),
             children: renderI18nText("general.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: G,
             disabled: !!y,
             recordingKey: generateRecordingKey(recordingKey, "done"),
@@ -2658,7 +2658,7 @@ function nX({
   stringKey: i
 }) {
   let l = useDispatch();
-  let s = hC();
+  let s = trackDefinedFileEventWithStore();
   let r = e => {
     e && (clearSelection(), _$$S3("annotations"), addToSelection([e]), getSelectedDevModePropertiesPanelTab()?.getCopy() !== IAssertResource.STRING_MANAGEMENT && setSelectedDevModePropertiesPanelTab(IAssertResource.STRING_MANAGEMENT));
   };
@@ -2667,7 +2667,7 @@ function nX({
       [ek]: t,
       [eg]: e
     }),
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       onClick: () => r(n),
       className: A()(eC, "annotation--managedStringLabel--fWb5O"),
       children: i
@@ -2687,7 +2687,7 @@ function nX({
         });
       },
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("general.back")
       },
       children: jsx(_$$O2, {})
@@ -2698,7 +2698,7 @@ let nJ = forwardRef(({
   children: e,
   variant: t,
   ...n
-}, i) => jsx(_$$E, {
+}, i) => jsx(ButtonPrimitive, {
   ref: i,
   ...n,
   className: A()(eC, "annotation--iconButton--w7kfn", "annotation--ghost--thK4p"),
@@ -2799,7 +2799,7 @@ function n$({
   isEditingAnnotation: k,
   isInCentralTLF: I
 }) {
-  let C = IL();
+  let C = trackFileEventWithPage();
   let T = useRef(null);
   let [P, L] = useState(!1);
   let R = LZ();
@@ -2903,7 +2903,7 @@ function n2({
   isLeftAligned: m
 }) {
   let v = function () {
-    let e = IL();
+    let e = trackFileEventWithPage();
     let {
       Sprig
     } = useSprigWithSampling();
@@ -3018,7 +3018,7 @@ function n5({
   let {
     Sprig
   } = useSprigWithSampling();
-  let y = IL();
+  let y = trackFileEventWithPage();
   let b = Em();
   let j = !!hA();
   let w = m0();
@@ -3288,7 +3288,7 @@ function n5({
       recordingKey: "createAnnotationMoreActions",
       htmlAttributes: {
         "data-tooltip": getI18nString("dev_handoff.annotations.more_actions"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       ...getTriggerProps({}),
       children: jsx(_$$J2, {})
@@ -3346,14 +3346,14 @@ function n5({
               onKeyDown: e => {
                 ("Enter" === e.code || "Space" === e.code) && el(e);
               },
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("dev_handoff.annotations.category_selector_tooltip"),
               recordingKey: "createAnnotationCategorySelectorButton",
               "aria-expanded": isDropdownShown,
               children: [jsx("span", {
                 className: "annotation--categorySelectorButtonLabel--xGX7w annotation--_ellipsis--8F1VE",
                 children: er ? uA(er) : getI18nString("dev_handoff.annotations.no_category_option_label")
-              }), jsx(_$$B, {
+              }), jsx(SvgComponent, {
                 className: "annotation--caret--noLOu",
                 svg: _$$A14
               })]
@@ -3407,7 +3407,7 @@ function n5({
             })]
           }), jsx("div", {
             className: "annotation--createAnnotationFooter--wx9JM",
-            children: jsxs(_$$E, {
+            children: jsxs(ButtonPrimitive, {
               className: A()("annotation--pinPropertyButton--OTLW3", {
                 "annotation--pinPropertyButtonActive---nkvq": _isDropdownShown
               }),
@@ -3417,10 +3417,10 @@ function n5({
                 _toggleDropdown();
               },
               "aria-label": getI18nString("dev_handoff.annotations.pin_properties_tooltip"),
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("dev_handoff.annotations.pin_properties_tooltip"),
               recordingKey: "createAnnotationPinPropertyButton",
-              children: [jsx(_$$B, {
+              children: [jsx(SvgComponent, {
                 className: "annotation--pinPropertyButtonIcon--dgnI0",
                 svg: _$$A17
               }), renderI18nText("dev_handoff.annotations.pin_properties_label")]
@@ -3501,7 +3501,7 @@ function n4({
         children: jsx(_$$K, {
           recordingKey: `removeAnnotation${n.type}`,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("dev_handoff.annotations.remove_property")
           },
           "aria-label": getI18nString("dev_handoff.annotations.remove_property"),
@@ -3614,7 +3614,7 @@ let aa = memo(function ({
       annotationIndex
     }
   } = t;
-  let f = IL();
+  let f = trackFileEventWithPage();
   let x = uQ();
   let m = dH();
   let v = x === nodeId;
@@ -3942,7 +3942,7 @@ function aj() {
   let t = uQ();
   let n = useSelector(e => e.isFullscreenDocumentLoaded);
   let c = dH();
-  let f = _X({
+  let f = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let g = useSelector(e => e.dropdownShown);
@@ -4149,7 +4149,7 @@ function aj() {
           y: topLevelFrameBounds.y,
           width: topLevelFrameBounds.width + 2 * as,
           height: topLevelFrameBounds.height
-        }, qc(e))) return null;
+        }, getVisibleArea(e))) return null;
         let o = function (e, t) {
           let n = {
             x: t.x + t.width / 2,
@@ -4166,7 +4166,7 @@ function aj() {
         });
         t++;
         let l = function (e, t) {
-          let n = qc(t);
+          let n = getVisibleArea(t);
           return Math.min(e.width * t.zoomScale, n.width) * Math.min(e.height * t.zoomScale, n.height) / (n.width * n.height);
         }(topLevelFrameBounds, e);
         return {
@@ -4362,7 +4362,7 @@ function aj() {
       }, t, newAnnotationNode, e)
     };
   }(f, A);
-  let z = IL();
+  let z = trackFileEventWithPage();
   let V = annotationsBeingViewed.length;
   let H = annotationsBeingViewed.reduce((e, t) => e + t.numNodes, 0);
   useEffect(() => {

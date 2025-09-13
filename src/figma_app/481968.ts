@@ -3,7 +3,7 @@ import { StickyClusteringCppBindings, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
@@ -14,7 +14,7 @@ import { J as _$$J } from "../905/915227";
 import { kS } from "../figma_app/864723";
 import { Z } from "../905/104740";
 import { renameNode } from "../figma_app/741237";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { l0 } from "../figma_app/610446";
 import { um, E$, ez } from "../figma_app/835718";
@@ -31,7 +31,7 @@ export function $$x1() {
     Sprig
   } = useSprigWithSampling();
   let [x, N] = useState(!1);
-  let C = am();
+  let C = trackFileEventWithUser();
   let w = useRef();
   let O = Z("figjam_summary_navigate");
   let R = um();
@@ -72,7 +72,7 @@ export function $$x1() {
         renameNode(e, u);
         return e;
       });
-      p && (O(QZ({
+      p && (O(computeFullscreenViewportForNode({
         nodeId: p,
         alwaysPan: !1
       })), w.current = setInterval(() => {
@@ -142,7 +142,7 @@ export function $$N0(e, t = !1) {
         if (StickyClusteringCppBindings) return StickyClusteringCppBindings.createPlaceholder(n);
       });
       if (!o) return;
-      c(QZ({
+      c(computeFullscreenViewportForNode({
         nodeId: o,
         alwaysPan: !1
       }));

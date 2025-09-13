@@ -10,7 +10,7 @@ import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
 import { Us, vd } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
@@ -197,7 +197,7 @@ let ee = buildUploadUrl("fc0fcfadcfe50c96f4dcf859aabe1952c822ae2a");
 function et(e) {
   return jsxs("div", {
     className: "org_upgrade_multi_team_modal--planItem--P4LRr",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A2,
       className: "org_upgrade_multi_team_modal--checkIcon--KnZJe"
     }), jsx("p", {
@@ -272,7 +272,7 @@ function ea(e) {
         }), jsx("div", {
           className: "org_upgrade_multi_team_modal--teamListOrgName--EKk6-",
           children: renderI18nText("org_upgrade.multi_team.acme_inc")
-        }), jsx(_$$B, {
+        }), jsx(SvgComponent, {
           svg: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="#000" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M12 16.05V9h1v7.05c1.141.232 2 1.24 2 2.45 0 1.21-.859 2.218-2 2.45V23h-1v-2.05c-1.141-.232-2-1.24-2-2.45 0-1.21.859-2.218 2-2.45m2 2.45c0 .828-.672 1.5-1.5 1.5-.828 0-1.5-.672-1.5-1.5 0-.828.672-1.5 1.5-1.5.828 0 1.5.672 1.5 1.5m5 4.5h1v-7.05c1.141-.232 2-1.24 2-2.45 0-1.21-.859-2.218-2-2.45V9h-1v2.05c-1.141.232-2 1.24-2 2.45 0 1.21.859 2.218 2 2.45zm2-9.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5 0 .828.672 1.5 1.5 1.5.828 0 1.5-.672 1.5-1.5"/></svg>',
           className: "org_upgrade_multi_team_modal--multiTeamOrgUpgradeAdjustSvg--V4dem"
         })]

@@ -14,7 +14,7 @@ import { K9 } from "../figma_app/8833";
 import { E3 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { W } from "../905/898204";
 import { f as _$$f } from "../905/299537";
 import { l as _$$l } from "../905/600666";
@@ -324,7 +324,7 @@ export function $$j2({
         e.preventDefault();
       },
       onFocus: e => {
-        e.target !== e.currentTarget || e.relatedTarget === e.currentTarget || eu || (clearSelection(), addToSelection([k]), fullscreenValue.commit(), F(QZ({
+        e.target !== e.currentTarget || e.relatedTarget === e.currentTarget || eu || (clearSelection(), addToSelection([k]), fullscreenValue.commit(), F(computeFullscreenViewportForNode({
           nodeId: k,
           ...$$R0
         }), $$L4));

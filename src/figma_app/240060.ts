@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, PureComponent } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { parsePxInt } from "../figma_app/783094";
 import { Sr, B3 } from "../905/535224";
 import { hW, vn, _p } from "../figma_app/814196";
@@ -83,11 +83,11 @@ export class $$b0 extends PureComponent {
           })]
         }), jsxs("div", {
           className: K,
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: this.onClose,
             children: renderI18nText("desktop_open_views.modal.dismiss_button")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: this.onClickOpenInApp,
             children: renderI18nText("desktop_open_views.open_in_desktop_modal.open_in_app_button")

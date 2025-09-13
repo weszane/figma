@@ -20,7 +20,7 @@ import { openFileAtom } from "../figma_app/516028";
 import { eS, aD } from "../figma_app/646357";
 import { ij } from "../figma_app/745458";
 import { bd } from "../905/557338";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c1, Yh } from "../figma_app/357047";
 import { $H } from "../figma_app/323320";
 import { AX } from "../905/542608";
@@ -182,14 +182,14 @@ export function $$H1(e) {
         selected: dropdownShown,
         onMouseDown: V,
         svg: _$$A,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("design_systems.instance_panel.update_available"),
         recordingKey: O
       }) : jsx(YW, {
         onClick: toggleDropdown,
         selected: dropdownShown,
         onMouseDown: V,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("design_systems.instance_panel.instance_options"),
         svg: _$$A2,
         recordingKey: O,

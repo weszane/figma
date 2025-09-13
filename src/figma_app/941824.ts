@@ -5,7 +5,7 @@ import { fh } from "../905/127493";
 import { b, bL, mc } from "../figma_app/860955";
 import { SV } from "../figma_app/272902";
 import d from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { e as _$$e } from "../905/579635";
 import { Rv, _v, es, Wy, PU, Kk, hF, PO, wH, eK, nB, E3, q0, H_, KW, yr, cB, Vb, Pv, Hq, cd, ig, by, o as _$$o, yU, Sk, tp, kI, gB } from "../905/454970";
 import { A } from "../5724/713301";
@@ -386,7 +386,7 @@ function S({
       }),
       "data-testid": "row-grabber",
       ...getContextMenuTriggerProps(),
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         className: gB,
         svg: A
       })

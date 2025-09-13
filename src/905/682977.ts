@@ -2,10 +2,10 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import a from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tf } from "../figma_app/831799";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yd, XH, zp, nf, U1, nM, z5, tk, e4, LI } from "../905/832675";
 var s = a;
 export class $$m2 extends PureComponent {
@@ -14,7 +14,7 @@ export class $$m2 extends PureComponent {
       ...this.props.style
     };
     let t = this.props.tooltipText ? {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": this.props.tooltipText,
       "data-tooltip-show-below": !0,
       "data-tooltip-timeout-delay": 50,
@@ -57,7 +57,7 @@ export class $$g1 extends PureComponent {
   render() {
     return jsx($$m2, {
       className: `${tk} ${this.props.className || ""}`,
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     });
   }
 }

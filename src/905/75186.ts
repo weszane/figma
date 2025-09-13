@@ -2,14 +2,14 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useModalManager } from "../905/437088";
 import { setupAutofocusHandler } from "../905/128376";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { registerModal } from "../905/102752";
 import { A7, EL } from "../905/932769";
 let _ = getInitialOptions().release_manifest_git_commit;
@@ -39,7 +39,7 @@ let $$A0 = registerModal(function (e) {
     "Enter" === e.key && x();
   };
   let w = _ ? `commit-sha (default: ${_})` : "commit-sha";
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     children: jsxs(vo, {
@@ -53,7 +53,7 @@ let $$A0 = registerModal(function (e) {
         },
         children: [y && jsx("div", {
           className: _$$s.mb8.$,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "danger",
             children: y
           })
@@ -77,7 +77,7 @@ let $$A0 = registerModal(function (e) {
         })]
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: x,
             htmlAttributes: {

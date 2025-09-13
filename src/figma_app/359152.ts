@@ -2,18 +2,18 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { bL, gZ } from "../905/598775";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import d from "classnames";
 import { rr, Jn, wv, Ve } from "../figma_app/236327";
 import { a as _$$a } from "../905/925868";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { qI, GR, L_ } from "../figma_app/622574";
 import { gp } from "../figma_app/973927";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { G7 } from "../figma_app/336853";
 import { s as _$$s2 } from "../905/82276";
@@ -200,7 +200,7 @@ export function $$P2(e) {
       onClick: () => r(!t),
       ref: a,
       children: jsxs("h2", {
-        children: [jsx(B, {
+        children: [jsx(SvgComponent, {
           className: _$$s.relative.inlineFlex.justifyCenter.colorIconTertiary.mx2.w16.$,
           style: {
             top: "-2px"
@@ -244,7 +244,7 @@ export function $$D1(e) {
         }), e.teamName]
       }), jsx(gZ, {
         className: jy,
-        children: jsx($n.Link, {
+        children: jsx(Button.Link, {
           onClick: e.onSeeAllClick,
           children: renderI18nText("whiteboard.inserts.see_all")
         })
@@ -270,7 +270,7 @@ export function $$D1(e) {
 }
 export function $$k3(e) {
   let t = useRef(null);
-  let r = sZ();
+  let r = useCurrentUserOrg();
   let a = G7(r);
   let {
     filterOptions,

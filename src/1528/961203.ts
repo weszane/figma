@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState, useEffect, forwardRef, useRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/587457";
 import { k as _$$k } from "../905/888808";
 import { O as _$$O2 } from "../905/969533";
@@ -27,10 +27,10 @@ import { DP } from "../905/640017";
 import { ic } from "../figma_app/688398";
 import { x as _$$x } from "../9410/705473";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z7 } from "../9410/626378";
 import { Vi } from "../figma_app/955650";
@@ -106,7 +106,7 @@ function U(e) {
     children: [jsx("div", {
       className: "carousel_comment--commentCount--8Fpe6",
       children: d
-    }), jsx(_$$B, {
+    }), jsx(SvgComponent, {
       className: "carousel_comment--carouselCommentPin--yBJwH",
       svg: _$$A,
       onClick: o
@@ -244,7 +244,7 @@ function et({
       p || E(!0);
     },
     recordingKey: generateRecordingKey(n, "rowTitle"),
-    children: [e ? jsx(_$$E, {
+    children: [e ? jsx(ButtonPrimitive, {
       onClick: e => {
         e.preventDefault();
         e.stopPropagation();
@@ -298,7 +298,7 @@ function et({
       }) : jsx("div", {
         ...xk(ee.rowTitleContent, u && (j ? ee.stateGroupTitleContentDarkMode : ee.stateGroupTitleContent), u && _$$g.textBodyMedium, !C && ee.rowTitleContentGrey),
         "data-tooltip": i,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-above": !0,
         children: i
       })]
@@ -442,7 +442,7 @@ let $$el0 = forwardRef(function ({
       className: _$$s.wFull.relative.$,
       "data-testid": J ? "mini-carousel-item" : "carousel-item",
       "data-tooltip": children.length > 0 && isCollapsed ? W(eN, ey) : void 0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       drag: !F,
       dragConstraints: {
         left: -50,
@@ -640,7 +640,7 @@ function ei({
     className: _$$s.relative.h16.wFull.$,
     children: [jsx("div", {
       ...Ay.props(t ? er.rowDividerWithCaret : er.rowDividerWithoutCaret)
-    }), t && !n && jsx(_$$E, {
+    }), t && !n && jsx(ButtonPrimitive, {
       onClick: t => {
         t.preventDefault();
         t.stopPropagation();

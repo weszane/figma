@@ -1,10 +1,10 @@
 import { getFeatureFlags } from "../905/601108";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { useCurrentPlanUser, useIsOrgGuestUser } from "../figma_app/465071";
 import { CT } from "../figma_app/736948";
 export function $$l0() {
-  let e = sZ();
+  let e = useCurrentUserOrg();
   return e?.mfa_required === CT.GUESTS || e?.mfa_required === CT.ALL_USERS;
 }
 function d() {

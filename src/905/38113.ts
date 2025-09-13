@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { f0 } from "../figma_app/975811";
 import { RU } from "../figma_app/740163";
 import { _P } from "../figma_app/2590";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { qd } from "../figma_app/178475";
 import { X7 } from "../905/713167";
 import { fI } from "../figma_app/626177";
@@ -53,7 +53,7 @@ export function $$E0(e) {
         [vn]: P
       }),
       "data-tooltip": getI18nString("fullscreen.properties_panel.video_time"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dataTestId: "editorVideoPreview-input",
       disabled,
       dispatch: R,

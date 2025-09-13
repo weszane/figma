@@ -13,7 +13,7 @@ import { DP } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
 import { browserCapabilities } from "../905/409121";
-import { QU } from "../figma_app/62612";
+import { getViewportWidth } from "../figma_app/62612";
 import { f as _$$f } from "../905/940356";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { U as _$$U } from "../figma_app/825971";
@@ -66,7 +66,7 @@ export function $$L0({
   });
 }
 function P() {
-  let e = QU({
+  let e = getViewportWidth({
     subscribeToUpdates_expensive: !0
   });
   return jsx(fu, {

@@ -6,7 +6,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { Yi } from "../figma_app/933328";
 import { valueOrFallback, isInvalidValue } from "../905/216495";
 import { SG, u as _$$u } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { VZ } from "../905/959568";
 import { $j } from "../figma_app/178475";
 import { sJ } from "../figma_app/841644";
@@ -200,7 +200,7 @@ let T = forwardRef(({
       bigNudgeAmount,
       "data-tooltip": s,
       "data-tooltip-proxy-element-id": consumedVariable ? w : void 0,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       dispatch: x,
       inputClassName: _$$h,
       isTokenizable: !0,
@@ -214,7 +214,7 @@ let T = forwardRef(({
       wheelMultiplier,
       children: jsx("div", {
         className: _$$k,
-        "data-tooltip-type": consumedVariable ? Ib.TEXT : void 0,
+        "data-tooltip-type": consumedVariable ? KindEnum.TEXT : void 0,
         "data-tooltip": consumedVariable ? s : void 0,
         id: w,
         children: c

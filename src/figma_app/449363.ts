@@ -1,11 +1,11 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { X2, Lt } from "../figma_app/808294";
-import { PM, zF } from "../figma_app/45218";
-import { Ib } from "../905/129884";
+import { hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
+import { KindEnum } from "../905/129884";
 import { A } from "../6828/154709";
 function p({
   publishedExtension: e,
@@ -17,19 +17,19 @@ function p({
     "data-testid": "freemium-text",
     className: _$$s.flex.itemsCenter.gap4.$,
     "data-tooltip": r,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-below": !0,
     "data-tooltip-show-immediately": !0,
-    children: [jsx(E, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 11,
       children: renderI18nText("community.buyer.in_app_purchases")
-    }), jsx(B, {
+    }), jsx(SvgComponent, {
       svg: A,
       className: _$$s.colorIconSecondary.$
     })]
   }) : jsx("div", {
     "data-testid": "freemium-text",
-    children: jsx(E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 11,
       children: renderI18nText("community.buyer.in_app_purchases")
     })
@@ -40,7 +40,7 @@ function _({
 }) {
   return e.monetized_resource_metadata ? jsx("div", {
     "data-testid": "free-trial-text",
-    children: jsx(E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 11,
       children: renderI18nText("community.resource.free_trial_days", {
         days: e.monetized_resource_metadata.trial_length_in_days
@@ -55,35 +55,35 @@ function h({
     "data-testid": "off-platform-text",
     className: _$$s.flex.itemsCenter.gap4.$,
     "data-tooltip": getI18nString("community.detail_view.resource_outside_of_figma"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip-show-below": !0,
     "data-tooltip-show-immediately": !0,
-    children: [jsx(E, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 11,
       children: renderI18nText("community.detail_view.third_party_badge.off_platform")
-    }), jsx(B, {
+    }), jsx(SvgComponent, {
       svg: A,
       className: _$$s.colorIconSecondary.$
     })]
   }) : jsx("div", {
     "data-testid": "off-platform-text",
-    children: jsx(E, {
+    children: jsx(TextWithTruncation, {
       fontSize: 11,
       children: renderI18nText("community.detail_view.third_party_badge.off_platform")
     })
   });
 }
 export function $$m0(e) {
-  return !!e && (PM(e) || Lt({
+  return !!e && (hasFreemiumCode(e) || Lt({
     resource: e,
     payment: e.community_resource_payment
-  }) || zF(e));
+  }) || isThirdPartyMonetized(e));
 }
 export function $$$$g1({
   publishedExtension: e,
   showTooltip: t
 }) {
-  return PM(e) ? jsx(p, {
+  return hasFreemiumCode(e) ? jsx(p, {
     publishedExtension: e,
     showTooltip: t
   }) : Lt({
@@ -91,7 +91,7 @@ export function $$$$g1({
     payment: e.community_resource_payment
   }) ? jsx(_, {
     publishedExtension: e
-  }) : zF(e) ? jsx(h, {
+  }) : isThirdPartyMonetized(e) ? jsx(h, {
     showTooltip: t
   }) : null;
 }

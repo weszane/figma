@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { EventShield } from "../905/821217";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
 import { oO, Ad, Y9 } from "../figma_app/811257";
@@ -19,7 +19,7 @@ export let $$p0 = forwardRef((e, t) => {
   let r = jsx(EventShield, {
     eventListeners: ["onFocus"],
     display: "contents",
-    children: jsxs(E, {
+    children: jsxs(ButtonPrimitive, {
       className: l()(_f, {
         [nr]: e.selected && !e.hasFocus,
         [HQ]: e.selected && e.hasFocus

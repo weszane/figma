@@ -8,8 +8,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { E as _$$E } from "../905/53857";
-import { E as _$$E2 } from "../905/632989";
-import { IK, $n, WW } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { ButtonWide, Button, ButtonLarge } from "../905/521428";
 import { cV } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { $ as _$$$ } from "../905/692618";
@@ -53,7 +53,7 @@ import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { bj } from "../905/420347";
 import { M4 } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Vr } from "../figma_app/151869";
 import { VZ } from "../figma_app/727192";
 import { l6, c$ } from "../905/794875";
@@ -63,11 +63,11 @@ import { HX, _3, zi } from "../figma_app/97042";
 import { QU, bf } from "../figma_app/856806";
 import { useModalManager } from "../905/437088";
 import { H as _$$H } from "../905/56919";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
 import { r as _$$r } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { lW } from "../figma_app/11182";
 import { RK } from "../figma_app/815170";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -630,7 +630,7 @@ function eN() {
 }
 let eC = registerModal(function (e) {
   let [t, r] = useState("React");
-  let s = hC();
+  let s = trackDefinedFileEventWithStore();
   let o = useDispatch();
   let l = useCallback(e => {
     "HTML" !== e && s("code_connect.connect_to_codebase.language_selected", {
@@ -651,7 +651,7 @@ let eC = registerModal(function (e) {
     Compose: !0,
     HTML: !0
   }, t, l);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     htmlAttributes: {
       "data-testid": "upgrade_choose_plan_modal"
     },
@@ -698,7 +698,7 @@ let eC = registerModal(function (e) {
             className: jH
           }), jsx("span", {
             className: Iw,
-            children: jsx(IK, {
+            children: jsx(ButtonWide, {
               variant: "primary",
               onClick: () => {
                 s("code_connect.connect_to_codebase.view_docs_github_clicked");
@@ -741,7 +741,7 @@ function eR({
           children: e.source
         })]
       })]
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       onClick: t ? () => t() : void 0,
       children: getI18nString("dev_handoff.component_browser_mapping_panel.editButton")
@@ -810,7 +810,7 @@ function ej({
     variant: "componentOutline",
     children: renderI18nText("dev_handoff.figmadocs.connected")
   }) : jsxs(Fragment, {
-    children: [jsx(_$$E2, {
+    children: [jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.figmadocs.connected"),
       ...getTriggerProps(),
       children: jsx(_$$E, {
@@ -839,7 +839,7 @@ function eU() {
     ...eF
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$E2, {
+    children: [jsx(ButtonPrimitive, {
       "aria-label": getI18nString("dev_handoff.figmadocs.not_connected"),
       ...getTriggerProps(),
       children: jsx(_$$E, {
@@ -883,7 +883,7 @@ function eV() {
     children: [jsx("div", {
       className: "figmadocs--emptyCodeConnectCardHeader--S8h2p",
       children: getI18nString("dev_handoff.code_connect.title")
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "link",
       onClick: () => {
         e(showModalHandler({
@@ -947,7 +947,7 @@ function eW({
   return jsx("div", {
     className: "figmadocs--fileLinkWrapper--UCOD2",
     "data-tooltip": o,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     children: jsx(_$$N, {
       href: e,
       newTab: !0,
@@ -1146,7 +1146,7 @@ function eY({
 }) {
   return jsx("div", {
     className: "figmadocs--goToParentButtonWrapper--ZAPci",
-    children: jsx(WW, {
+    children: jsx(ButtonLarge, {
       variant: "secondary",
       onClick: () => replaceSelection([e.guid ?? ""]),
       iconPrefix: jsx(r, {}),

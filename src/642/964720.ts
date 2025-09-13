@@ -6,7 +6,7 @@ import { K as _$$K } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { a as _$$a } from "../905/5627";
 import { J as _$$J2 } from "../905/125993";
@@ -258,7 +258,7 @@ export function $$A0({
             gap: 8,
             marginBottom: 16
           },
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: () => ei(p),
             children: Q ? "Update node" : "Create node"
           }), jsx(Checkbox, {

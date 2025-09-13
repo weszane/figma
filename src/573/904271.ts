@@ -24,7 +24,7 @@ import { t as _$$t } from "../905/150656";
 import { $ as _$$$2 } from "../905/455748";
 import { F as _$$F } from "../905/680873";
 import { $ as _$$$3 } from "../9410/841699";
-import { uE, ds } from "../figma_app/314264";
+import { trackUserEvent, trackFileEvent } from "../figma_app/314264";
 import { dh, nn } from "../figma_app/186343";
 import { isVsCodeEnvironment } from "../905/858738";
 import { o3, nt } from "../905/226610";
@@ -36,14 +36,14 @@ import { NotificationType } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { E as _$$E } from "../905/95280";
 import { Z as _$$Z } from "../905/104740";
-import { QZ } from "../figma_app/62612";
-import { Ib } from "../905/129884";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
+import { KindEnum } from "../905/129884";
 import { K0 } from "../figma_app/778125";
 import { ob, kh, ee as _$$ee } from "../figma_app/571341";
 import { ZI } from "../figma_app/597338";
 import { wt, R4 } from "../figma_app/74043";
 import { localStorageRef, useStorageEventSync, useLocalStorageSync } from "../905/657224";
-import { A as _$$A2 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
@@ -51,7 +51,7 @@ import { useSubscription } from "../figma_app/288654";
 import { Av } from "../905/149328";
 import { O as _$$O } from "../905/257139";
 import { dP, q_, M3 } from "../figma_app/119475";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { cr, gP } from "../905/879323";
 import { showModalHandler } from "../905/156213";
 import { Hz } from "../figma_app/591738";
@@ -110,7 +110,7 @@ import { V as _$$V } from "../figma_app/473391";
 import { useLatestRef } from "../figma_app/922077";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { NG } from "../figma_app/709893";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { AutoLayout } from "../905/470281";
 import { jD } from "../905/765855";
 import { fd, o3 as _$$o, Ag } from "../figma_app/255679";
@@ -166,7 +166,7 @@ function V() {
   let l = _$$E();
   let d = useCallback(e => {
     SceneGraphHelpers.setSelectedNodeAndCanvas(e, !0);
-    o(QZ({
+    o(computeFullscreenViewportForNode({
       nodeId: e,
       ...ob
     }), kh);
@@ -202,7 +202,7 @@ function V() {
           e.stopPropagation();
           d(Fullscreen.navigateToNextChange(-1));
         },
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.previous_change"),
         recordingKey: "change_stepper.previous",
         disabled: 0 === i
@@ -212,7 +212,7 @@ function V() {
           e.stopPropagation();
           d(Fullscreen.navigateToNextChange(1));
         },
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.next_change"),
         recordingKey: "change_stepper.next",
         disabled: 0 === i
@@ -424,7 +424,7 @@ function eY({
   return jsx(K0, {
     ref: s,
     recordingKey: generateRecordingKey(a, "toggleComponentsSidebarViewMode"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": i,
     svg: t ? '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="#454545" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M4 1H1v3h3zM0 0v5h5V0zm11 1H8v3h3zM7 0v5h5V0zM4 8H1v3h3zM0 7v5h5V7zm11 1H8v3h3zM7 7v5h5V7z"/></svg>' : '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#000" fill-opacity="1" fill-rule="nonzero" stroke="none" d="M6 6h2v1H6zm0 10h2v1H6zm0-5h2v1H6zm4-5h8v1h-8zm0 10h8v1h-8zm0-5h8v1h-8z"/></svg>',
     onClick: r,
@@ -566,7 +566,7 @@ function tS({
         className: UU,
         ref: C,
         children: j
-      }), D && jsx(_$$B, {
+      }), D && jsx(SvgComponent, {
         ariaHidden: !0,
         className: OW,
         svg: _$$A3
@@ -608,7 +608,7 @@ function tS({
         },
         children: "(L:" + (e.lexical_score?.toFixed(2) ?? "N/A") + ", AI:" + (e.ai_score?.toFixed(2) ?? "N/A") + ", F:" + (e.fuse_score?.toFixed(2) ?? "N/A") + ")"
       })]
-    }), D && F && jsx(_$$B, {
+    }), D && F && jsx(SvgComponent, {
       ariaHidden: !0,
       className: Ki,
       svg: _$$A3
@@ -664,7 +664,7 @@ class tK extends Component {
       trackingTargets: _$$K2.RCS,
       children: jsxs("div", {
         className: eN()(s, e, t, r),
-        children: [tO(this.props) && jsx(_$$B, {
+        children: [tO(this.props) && jsx(SvgComponent, {
           className: this.props.isExpanded ? "library_section_header--expandCaretOpen--083vU library_section_header--expandCaret--20Tzs object_row--expandCaret--f1MjE object_row--indent--uZlad" : "library_section_header--expandCaret--20Tzs object_row--expandCaret--f1MjE object_row--indent--uZlad",
           svg: this.props.isExpanded ? _$$A4 : _$$A5
         }), tO(this.props) && this.props.breadcrumbPath && !this.props.isFixed && jsxs("div", {
@@ -1059,9 +1059,9 @@ function t6({
   let s = selectCurrentUser();
   let a = selectCurrentFile();
   let [i, l] = useAtomValueAndSetter(e0);
-  let d = _$$A2(e => {
+  let d = useDebouncedCallback(e => {
     l(e);
-    s && uE("action_left_panel_scroll", {
+    s && trackUserEvent("action_left_panel_scroll", {
       user: s
     }, {
       assetsPanelVersion: 2,
@@ -1512,7 +1512,7 @@ function t9({
       validAssetTypeOptions
     }), eN ? jsx("div", {
       className: "component_sidebar--loadingSpinnerContainerWithDropdown--9b8ZI",
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     }) : jsxs("div", {
       className: "component_sidebar--assetPanelSection--mYuo2",
       children: [jsx(_$$O, {
@@ -1708,7 +1708,7 @@ function sw({
   let Y = useStore();
   let J = useCallback(e => {
     v.showLayersPanel();
-    ds("pages_panel_open_toggle", y?.key, Y.getState(), {
+    trackFileEvent("pages_panel_open_toggle", y?.key, Y.getState(), {
       isPagesOpen: e
     }, {
       forwardToDatadog: !0

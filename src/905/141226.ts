@@ -1,10 +1,10 @@
 import { jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { B } from "../905/950875";
 import s from "classnames";
 import { getI18nString } from "../905/303541";
 import { eo } from "../905/49095";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var o = s;
 export function $$u1(e) {
   switch (e.id) {
@@ -64,12 +64,12 @@ export function $$p0({
     className: o()("code_hints--hintButton--Zdf0R", {
       "code_hints--hidden--Ka-iU": t
     }),
-    children: jsx(E, {
+    children: jsx(ButtonPrimitive, {
       className: "code_hints--hintButtonInner--uLch1",
       "aria-label": e,
       htmlAttributes: {
         "data-tooltip": e,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-show-immediately": !0
       },
       children: jsx(B, {})

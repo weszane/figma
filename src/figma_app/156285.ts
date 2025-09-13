@@ -12,7 +12,7 @@ import { debugState } from "../905/407919";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { buildUploadUrl } from "../figma_app/169182";
 import { GI, Vi } from "../905/125333";
-import { Dc } from "../figma_app/314264";
+import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { toArray, normalizeMixedValue } from "../905/216495";
 import { Gt } from "../905/275640";
@@ -258,7 +258,7 @@ export function $$z7(e, t) {
     brushGuid: e?.guid || "-1:-1",
     brushName: e?.name || "",
     numNodes: t.length,
-    productType: Dc(debugState.getState().selectedView.editorType)
+    productType: mapEditorTypeToProductType(debugState.getState().selectedView.editorType)
   });
 }
 export const $A = $$D0;

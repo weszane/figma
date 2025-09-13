@@ -5,7 +5,7 @@ import { useAtomWithSubscription, atomStoreManager, atom, createValidatedLocalSt
 import { z } from "../905/239603";
 import { trackEventAnalytics } from "../905/449184";
 import { globalPerfTimer } from "../905/542194";
-import { v5 } from "../figma_app/314264";
+import { getProductType } from "../figma_app/314264";
 import { wg } from "../figma_app/101956";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { PE } from "../figma_app/251115";
@@ -51,7 +51,7 @@ export function $$b0() {
       searchQueryResults: g,
       source: a,
       rankingAlgorithm: $$T8(_),
-      productType: v5(t, null),
+      productType: getProductType(t, null),
       role: o,
       hasAiFeatureAccess: u
     };

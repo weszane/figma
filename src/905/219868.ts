@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, r1, nB } from "../figma_app/272243";
 import { registerModal } from "../905/102752";
 let $$l1 = "/legal/privacy";
@@ -9,7 +9,7 @@ let $$c2 = "/legal/reader-mode/privacy";
 let $$u4 = "/legal/reader-mode/tos";
 let $$p0 = registerModal(function (e) {
   let t = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: 420,
     children: jsxs(vo, {

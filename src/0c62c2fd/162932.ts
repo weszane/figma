@@ -2,18 +2,18 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo, createRef } from "react";
 import { connect, useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { EventShield } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { k as _$$k } from "../905/443820";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { P as _$$P } from "../905/537307";
 import { getFeatureFlags } from "../905/601108";
 import { c$, ms, MM } from "../figma_app/236327";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -23,7 +23,7 @@ import { $$do, F1, Nw, ui, LN, Kq } from "../905/941249";
 import { S as _$$S } from "../1e926454/283343";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { AccessLevelEnum } from "../905/557142";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { Cf } from "../905/504727";
 import { b8 } from "../figma_app/926061";
@@ -85,7 +85,7 @@ let $$L0 = connect(e => ({
       source: Kq.TEAM_PERMISSIONS_MODAL
     }));
   }, [dispatch, e.teamId, m]);
-  let h = useMemo(() => e.includeCopyLinkButton ? jsx($n, {
+  let h = useMemo(() => e.includeCopyLinkButton ? jsx(Button, {
     onClick: g,
     disabled: !m,
     children: renderI18nText("team_join_links.copy_link")
@@ -150,7 +150,7 @@ function D(e) {
           }));
         },
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("team_join_links.team_invite_link_settings")
         },
         children: jsx(_$$P, {})
@@ -184,7 +184,7 @@ function M(e) {
         children: e.url
       })]
     }), jsxs("div", {
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         onClick: a => {
           a.stopPropagation();
           e.url && (e.dropdownShown ? t(oB()) : t(j7({
@@ -196,7 +196,7 @@ function M(e) {
           children: getPermissionLevelName(e.currentLevel)
         }), jsx("div", {
           className: "team_join_link_permissions--caretWrapper--OXpki role_row--caretWrapper--P1Mak",
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A
           })
         })]
@@ -252,7 +252,7 @@ let U = "RESET_LINKS_CONFIRMATION_MODAL";
 registerModal(function (e) {
   let t = useDispatch();
   let r = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     width: "md",
     manager: r,
     children: jsxs(vo, {

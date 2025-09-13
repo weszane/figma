@@ -12,7 +12,7 @@ import { isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { lJ } from "../905/275640";
 import { SG, u as _$$u } from "../figma_app/852050";
 import { Sh } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Tn, On } from "../figma_app/323320";
 import { JQ } from "../figma_app/841644";
 import { u3 } from "../figma_app/152690";
@@ -64,7 +64,7 @@ export function $$S0(e) {
         htmlAttributes: {
           "data-test-id": "visibility-variable-control",
           "data-tooltip": D,
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         mixed: !R && isInvalidValue(T),
         offIcon: jsx(_$$_, {}),

@@ -1,7 +1,7 @@
 import { useMemo, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { generateUUIDv4 } from "../905/871474";
 import { hU, ZI, EJ } from "../figma_app/934707";
 import { NotificationExperimentInfoView } from "../figma_app/43951";
@@ -13,7 +13,7 @@ export function $$u0(e = !1) {
   }));
   useEffect(() => {
     if ("loaded" !== c.status) return;
-    let i = oA(c.data.currentUser.notificationExperimentInfo);
+    let i = getResourceDataOrFallback(c.data.currentUser.notificationExperimentInfo);
     i && ("exp_notification_catfile" === i.experimentName || "exp_notification_catfic" === i.experimentName) && ("prompt_to_opt_in" === i.type ? t((e ? hU : ZI)({
       userId: i.userId,
       fileKey: i.fileKey,

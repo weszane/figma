@@ -13,7 +13,7 @@ import { reportError, SeverityLevel } from "../905/11";
 import { tH } from "../905/751457";
 import { ks, nR, vd } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { getRumLoggingConfig } from "../905/16237";
@@ -24,7 +24,7 @@ import { Nu } from "../905/584989";
 import { c as _$$c } from "../905/370443";
 import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { VG, A7, F2, E2, ju } from "../905/389382";
 import { throwTypeError } from "../figma_app/465776";
 import { ProductAccessTypeEnum } from "../905/513035";
@@ -45,11 +45,11 @@ import { N as _$$N } from "../905/438674";
 import { a as _$$a } from "../905/948337";
 import { A as _$$A } from "../vendor/737188";
 import { oW } from "../905/675859";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { e as _$$e2 } from "../905/579755";
 import { iq } from "../figma_app/976749";
 import { DP } from "../905/640017";
@@ -214,10 +214,10 @@ function eh(e) {
           verticalAlignItems: "center",
           width: "hug-contents",
           spacing: 0,
-          children: [jsx(_$$B, {
+          children: [jsx(SvgComponent, {
             svg: _$$A3,
             className: "request_upgrade_modal--figmaLogo--JQUp4 request_upgrade_modal--logo--CjTol"
-          }), jsx(_$$B, {
+          }), jsx(SvgComponent, {
             svg: _$$A2,
             className: "request_upgrade_modal--arrowLogo--F3-Ch request_upgrade_modal--logo--CjTol"
           }), jsx(_$$e2, {
@@ -236,7 +236,7 @@ function eh(e) {
         requestUpgradeInstructions: getI18nString("org_upgrade.action_text.configurable_request_upgrade_instructions")
       }) : getI18nString("org_upgrade.action_text.configurable_request_upgrade_instructions"), jsx("div", {
         className: _$$s.mt16.mb8.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: "semi-bold",
           children: renderI18nText("configured_upgrade_request_modal.from_the_admins", {
             orgName
@@ -268,7 +268,7 @@ function eh(e) {
         children: jsx(_$$$, {
           variant: "secondary",
           onClick: T,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("general.got_it")
           })
         })
@@ -456,7 +456,7 @@ export function $$eb0(e) {
     er && eI("");
   });
   let ek = () => {
-    Cu({
+    logAndTrackCTA({
       ...eM,
       trackingContext: eF,
       trackingDescriptor: _$$c.CANCEL
@@ -482,7 +482,7 @@ export function $$eb0(e) {
     transparentBackground: $,
     children: jsx("div", {
       className: "request_upgrade_modal--loadingContainer--tG4tR",
-      children: jsx(kt, {
+      children: jsx(LoadingSpinner, {
         testId: "curf-modal-loading-spinner"
       })
     })

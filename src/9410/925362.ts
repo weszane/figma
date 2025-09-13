@@ -7,7 +7,7 @@ import { F } from "../905/680873";
 import { d as _$$d } from "../905/86829";
 import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { dh } from "../figma_app/186343";
 import { isVsCodeEnvironment } from "../905/858738";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -46,7 +46,7 @@ export function $$j0() {
   let P = useCallback(() => {
     if (t.current) return;
     let e = !D.current;
-    ds("pages_panel_open_toggle", I, M.getState(), {
+    trackFileEvent("pages_panel_open_toggle", I, M.getState(), {
       isPagesOpen: e
     }, {
       forwardToDatadog: !0

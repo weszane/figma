@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
@@ -15,7 +15,7 @@ import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { VisualBellActions } from "../905/302958";
-import { E9, pf } from "../figma_app/314264";
+import { trackFileBrowserFileClick, trackFileArrayEvent } from "../figma_app/314264";
 import { restoreFiles, generateUrlAlt } from "../905/760074";
 import { createOptimistThunk } from "../905/350402";
 import { oB, j7, sf } from "../905/929976";
@@ -24,7 +24,7 @@ import { kj } from "../905/191601";
 import { showModalHandler, hideModal } from "../905/156213";
 import { d as _$$d2 } from "../905/91820";
 import { FEditorType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { Ro } from "../figma_app/805373";
 import { e as _$$e } from "../905/225961";
@@ -59,7 +59,7 @@ let x = createOptimistThunk(async (e, t) => {
     let i = t.data.message || getI18nString("collaboration.branching.an_error_occurred_while_renaming_this_file");
     e.dispatch(FlashActions.error(i));
   });
-  E9("File Renamed", t.branch, {
+  trackFileBrowserFileClick("File Renamed", t.branch, {
     fileName: t.name
   });
 });
@@ -71,7 +71,7 @@ let S = createOptimistThunk(async (e, t) => {
       branchCount: t.branches.length
     })
   }));
-  pf("File Restored", t.branches);
+  trackFileArrayEvent("File Restored", t.branches);
 });
 let w = createOptimistThunk(async (e, t) => {
   let i = XHR.del("/api/files_batch", {
@@ -128,7 +128,7 @@ let w = createOptimistThunk(async (e, t) => {
       })));
     }
   }
-  pf("File Trashed", t.branches);
+  trackFileArrayEvent("File Trashed", t.branches);
 });
 let U = (e, t) => e ? [t] : [];
 function B(e) {
@@ -292,7 +292,7 @@ export function $$V0(e) {
       })]
     }), jsx("div", {
       className: "branch_row--buttonColumn--UJ-mZ",
-      children: !e.isCurrentBranch && jsx($n, {
+      children: !e.isCurrentBranch && jsx(Button, {
         variant: "ghost",
         onClick: () => {
           t(hideModal());
@@ -326,7 +326,7 @@ export function $$V0(e) {
         },
         "aria-label": getI18nString("collaboration.branching.options"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("collaboration.branching.options")
         },
         ref: A,

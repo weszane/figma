@@ -21,7 +21,7 @@ import { FPlanNameType } from "../figma_app/191312";
 import { _Z, B9 } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
 import { SubscriptionType } from "../figma_app/831101";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { hK } from "../figma_app/211706";
 import { qC, Wb, pr, Qu, j_ } from "../905/948828";
 import { Y } from "../905/26051";
@@ -313,7 +313,7 @@ function D({
     },
     htmlAttributes: {
       "data-testid": `plan-information-${r}-button`,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": a ? getI18nString("plan_comparison.plans.starter.you_already_have_a_starter_team") : void 0,
       "data-tooltip-show-immediately": !0,
       "data-tooltip-show-above": !0,

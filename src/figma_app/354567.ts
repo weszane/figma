@@ -1,7 +1,7 @@
 import { useAtomWithSubscription, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { qB } from "../905/862321";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -25,7 +25,7 @@ export function $$m1() {
   let l = $$_0();
   let [c, u] = useAtomValueAndSetter(h);
   if ("loaded" !== l.status) return () => {};
-  if (oA(l.data?.deviceTryFile) && e && t && !a && !c) {
+  if (getResourceDataOrFallback(l.data?.deviceTryFile) && e && t && !a && !c) {
     if ("signup" === t) return () => {
       u(!0);
       r({

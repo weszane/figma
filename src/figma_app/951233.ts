@@ -3,7 +3,7 @@ import { zE } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
 import { FUserRoleType } from "../figma_app/191312";
 import { AccountTypeEnum } from "../figma_app/35887";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { x } from "../905/439650";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 export function $$u5(e) {
@@ -36,7 +36,7 @@ export function $$E7(e, t) {
   } : e.is_email_validated ? e.permission === FUserRoleType.GUEST && e.is_mfa_restricted ? {
     color: zE.DEFAULT,
     text: getI18nString("members_table.badge_label.blocked"),
-    dataTooltipType: Ib.TEXT,
+    dataTooltipType: KindEnum.TEXT,
     dataTooltip: getI18nString("members_table.badge_label.blocked.description"),
     dataTooltipTimeout: 50,
     dataTooltipShowAbove: !0

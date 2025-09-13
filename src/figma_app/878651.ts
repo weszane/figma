@@ -11,7 +11,7 @@ import { Ts } from "../905/194276";
 import { Ex, zE } from "../figma_app/919079";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -32,9 +32,9 @@ import { Ni } from "../figma_app/188152";
 import { selectCurrentUser } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
-import { vt, xQ } from "../figma_app/45218";
+import { ResourceTypeNoComment, isWidget } from "../figma_app/45218";
 import { PluginInstallStatus } from "../figma_app/155287";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { Ro } from "../figma_app/805373";
 import { f as _$$f2 } from "../figma_app/750432";
@@ -220,7 +220,7 @@ let e_ = e => e !== Ni.ALL_DISABLED;
 function eh(e) {
   return jsxs("div", {
     className: Z2,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: Ls,
       svg: _$$A3
     }), " ", e.count]
@@ -229,7 +229,7 @@ function eh(e) {
 function em() {
   return jsx("div", {
     className: jq,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.profiles.boosted_by_the_figma_team"),
     "data-tooltip-show-immediately": !0,
     children: jsx(Ex, {
@@ -252,7 +252,7 @@ export function $$eg3() {
 function ef() {
   return jsx("div", {
     className: o_,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.profiles.made_in_fig_jam"),
     "data-tooltip-show-immediately": !0,
     children: jsx(_$$t, {
@@ -363,7 +363,7 @@ export function $$eb5({
   let S = useCallback(t => {
     if (t?.stopPropagation(), t?.preventDefault(), _) m && (f(s1({
       id: e.id,
-      resourceType: vt.PLUGIN,
+      resourceType: ResourceTypeNoComment.PLUGIN,
       source: uR.COMMUNITY_HUB
     })), f(VisualBellActions.enqueue({
       message: getI18nString("community.profiles.removed_from_saved_plugins"),
@@ -373,7 +373,7 @@ export function $$eb5({
         action: () => {
           f(oj({
             id: e.id,
-            resourceType: vt.PLUGIN,
+            resourceType: ResourceTypeNoComment.PLUGIN,
             orgId: void 0
           }));
         }
@@ -399,7 +399,7 @@ export function $$eb5({
       }
       f(oj({
         id: e.id,
-        resourceType: vt.PLUGIN,
+        resourceType: ResourceTypeNoComment.PLUGIN,
         orgId: void 0
       }));
     }
@@ -410,7 +410,7 @@ export function $$eb5({
       className: Rw,
       children: [h && (r || T), !h && jsxs("div", {
         className: Wf,
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: hz,
           svg: _$$A4
         }), renderI18nText("community.cards.private")]
@@ -680,7 +680,7 @@ function eT(e, t) {
           userId: r.id,
           onFinish: () => e(_$$C2({
             id: t.pluginId,
-            resourceType: vt.PLUGIN
+            resourceType: ResourceTypeNoComment.PLUGIN
           }))
         }
       }));
@@ -773,7 +773,7 @@ $$ev7.defaultProps = {
     }
     render() {
       let e = getPluginVersion(this.props.resource);
-      let t = xQ(this.props.resource);
+      let t = isWidget(this.props.resource);
       return jsx("div", {
         className: Yt,
         children: jsx("div", {
@@ -799,7 +799,7 @@ $$ev7.defaultProps = {
   t.displayName = "PublicProfilePluginTile";
   e.PublicProfileBasePluginTile = connect(null, (e, t) => ({
     onResourceClick: () => {
-      xQ(t.resource) ? e(sf({
+      isWidget(t.resource) ? e(sf({
         view: "communityHub",
         subView: "widget",
         widgetId: t.resource.id
@@ -896,12 +896,12 @@ $$ev7.defaultProps = {
           children: [this.props.resources.map(e => {
             let t = Vm(e);
             switch (t) {
-              case vt.HUB_FILE:
+              case ResourceTypeNoComment.HUB_FILE:
                 return jsx(a.PublicProfileHubFileTile, {
                   hubFile: e
                 }, e.id);
-              case vt.PLUGIN:
-              case vt.WIDGET:
+              case ResourceTypeNoComment.PLUGIN:
+              case ResourceTypeNoComment.WIDGET:
                 return jsx(s.PublicProfileBasePluginTile, {
                   resource: e
                 }, e.id);

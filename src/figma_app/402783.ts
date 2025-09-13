@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
@@ -17,7 +17,7 @@ import { kS } from "../figma_app/864723";
 import { zp } from "../figma_app/847014";
 import { Gw, WN } from "../figma_app/274571";
 import { Z } from "../905/104740";
-import { QZ } from "../figma_app/62612";
+import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { D } from "../905/347702";
 import { AM } from "../figma_app/610446";
@@ -139,7 +139,7 @@ export function $$L0(e, t = !0, r) {
     Sprig
   } = useSprigWithSampling();
   let g = function () {
-    let e = am();
+    let e = trackFileEventWithUser();
     return useCallback((t, r, n) => {
       let i = sh(r);
       e(mr.REQUEST, {
@@ -150,7 +150,7 @@ export function $$L0(e, t = !0, r) {
     }, [e]);
   }();
   let f = function () {
-    let e = am();
+    let e = trackFileEventWithUser();
     return useCallback((t, r, n) => {
       let i = {
         local_summary_id: n,
@@ -176,7 +176,7 @@ export function $$L0(e, t = !0, r) {
       permissionScopeHandler.user("insert-ai-summary-loading-node", () => {
         E.setWidgetSyncedState("syncedState:loading", "true");
       });
-      _(QZ({
+      _(computeFullscreenViewportForNode({
         nodeId: u,
         alwaysPan: !1
       }));

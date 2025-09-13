@@ -1,5 +1,5 @@
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
-import { A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics } from "../905/449184";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
@@ -22,7 +22,7 @@ export function $$c2(e) {
 }
 export function $$u1(e) {
   let t = useIsSelectedFigmakeFullscreen();
-  return A(() => {
+  return useDebouncedCallback(() => {
     trackEventAnalytics("sites_change_webpage_metadata", {
       fieldName: e,
       productType: t ? "figmake" : "sites"

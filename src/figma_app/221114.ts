@@ -3,7 +3,7 @@ import { useMemo, useEffect, createRef, useRef, useCallback, useState } from "re
 import { connect, useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { b as _$$b, bL, mc, r1 } from "../figma_app/860955";
 import { K as _$$K } from "../905/443068";
 import { u as _$$u } from "../905/65923";
@@ -32,12 +32,12 @@ import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { Ph } from "../figma_app/637027";
 import { h1 } from "../905/986103";
-import { kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { E as _$$E2 } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { V as _$$V } from "../905/223767";
 import { D0 } from "../figma_app/867292";
 import { sf } from "../905/929976";
@@ -60,7 +60,7 @@ import { V_, Nb, Eg, vF, _h } from "../figma_app/841351";
 import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { shouldShowView, isBranchView } from "../905/218608";
 import { $A } from "../905/782918";
 import { C as _$$C2 } from "../905/870666";
@@ -212,7 +212,7 @@ export class $$eR4 extends RecordingComponent {
     };
     this.generateEditorName = (e, t) => jsx("div", {
       className: Lw,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t,
       "data-tooltip-show-left": !0,
       "data-tooltip-max-width": 1e3,
@@ -223,7 +223,7 @@ export class $$eR4 extends RecordingComponent {
       if (!this.props.fileByKey || !this.props.branchFileKey) return null;
       {
         let t = this.props.fileByKey[this.props.branchFileKey];
-        return t && !t.deleted_at ? jsx(_$$E, {
+        return t && !t.deleted_at ? jsx(ButtonPrimitive, {
           className: qC,
           onClick: this.onBranchClick,
           children: e || (t.name ?? renderI18nText("collaboration.feedback.branch"))
@@ -379,7 +379,7 @@ export class $$eR4 extends RecordingComponent {
       children: [jsx("div", {
         className: sh,
         children: T[0]
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         svg: _$$A,
         className: KD
       }), jsx("div", {
@@ -415,7 +415,7 @@ export class $$eR4 extends RecordingComponent {
     });
     let A = !s && this.props.time && jsxs("span", {
       className: DS,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": xX(this.props.time),
       children: [" ", this.props.isLinked ? jsx($$eO1, {
         onChange: this.setFormattedTime,
@@ -504,7 +504,7 @@ export class $$eR4 extends RecordingComponent {
                 versionId: this.props.versionId
               }), this.props.hoverMenu, this.props.showCompareChanges && !this.props.isCurrentVersionActive && !this.props.isComparingLoading && a && w, this.props.showCompareChanges && this.props.isCurrentVersionActive && !this.props.isComparingLoading && !a && !this.props.isComparing && C, this.props.showCompareChanges && this.props.isCurrentVersionActive && !this.props.isComparingLoading && this.props.isComparing && O, this.props.showCompareChanges && this.props.isCurrentVersionActive && this.props.isComparingLoading && !a && !this.props.isComparing && jsx("div", {
                 className: Ob,
-                children: jsx(kt, {})
+                children: jsx(LoadingSpinner, {})
               })]
             })]
           })
@@ -543,7 +543,7 @@ function eL({
     className: BI,
     children: jsxs(bL, {
       manager,
-      children: [jsxs(_$$E, {
+      children: [jsxs(ButtonPrimitive, {
         ...(r ? {} : getContextMenuTriggerProps()),
         onClick: e,
         "aria-label": getI18nString("collaboration.feedback.view_version_button_label"),
@@ -570,7 +570,7 @@ function eP({
     manager,
     children: [jsx(_$$K, {
       "aria-label": getI18nString("collaboration.feedback.more_options"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("collaboration.feedback.more_options"),
       recordingKey: generateRecordingKey(e, "versonContext"),
       "data-test-id": "dots-menu-icon-button",
@@ -596,11 +596,11 @@ function eD({
     },
     children: jsxs("div", {
       className: NM,
-      children: [jsx(_$$E2, {
+      children: [jsx(TextWithTruncation, {
         fontWeight: "semi-bold",
         children: renderI18nText(r ? "upsell.history.need_to_travel_back_in_time" : "upsell.history.everything_else_is_history")
       }), jsx("div", {
-        children: e ? jsx(_$$E2, {
+        children: e ? jsx(TextWithTruncation, {
           children: renderI18nText("upsell.history.upsell_upgrade_description", {
             upgradeLink: jsx(Ph, {
               className: s6,
@@ -611,12 +611,12 @@ function eD({
                 canUserAccessProFeature: !1
               },
               trusted: !0,
-              children: jsx(_$$E2, {
+              children: jsx(TextWithTruncation, {
                 children: renderI18nText("upsell.history.upsell_upgrade")
               })
             })
           })
-        }) : jsx(_$$E2, {
+        }) : jsx(TextWithTruncation, {
           children: renderI18nText("upsell.history.upsell_learn_more_description", {
             upgradeLink: jsx(Ph, {
               className: s6,
@@ -997,7 +997,7 @@ class eM extends RecordingComponent {
     let _ = i - r + 1;
     let h = !0;
     if (1 === _ && (p = !0, h = !1), c = s && (1 === _ || !p) ? a ? y5 : p8 : a ? pi : N5, h && o && e.push(jsx("li", {
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         recordingKey: generateRecordingKey(this.props, `autoVersionBatch.${r}`),
         className: u.disabled ? Ao : QQ,
         onClick: this.toggleAutoItemById.bind(this, u.id),
@@ -1068,7 +1068,7 @@ class eM extends RecordingComponent {
     }));
     let u = jsx("div", {
       className: UX,
-      children: !this.props.versionHistory.loading && hasMorePages(this.props.versionHistory) && jsx(_$$E, {
+      children: !this.props.versionHistory.loading && hasMorePages(this.props.versionHistory) && jsx(ButtonPrimitive, {
         className: nf,
         onClick: this.loadMore,
         children: renderI18nText("collaboration.feedback.show_older")
@@ -1152,7 +1152,7 @@ class eM extends RecordingComponent {
                 view: _.view ? _.view : null
               }), this.props.versionHistory.loading && jsx("li", {
                 className: u1,
-                children: jsx(kt, {})
+                children: jsx(LoadingSpinner, {})
               }), p && jsx($$eR4, {
                 addSavepoint: this.addSavepoint,
                 dispatch: this.props.dispatch,
@@ -1217,7 +1217,7 @@ export function $$ej5(e) {
       }), !isViewOnly && jsx(_$$K, {
         onClick: addSavepoint,
         "aria-label": getI18nString("collaboration.feedback.add_to_version_history_tooltip"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.add_to_version_history_tooltip"),
         "data-testid": "versions-add-savepoint",
         recordingKey: generateRecordingKey(e, "plusVersion"),
@@ -1226,7 +1226,7 @@ export function $$ej5(e) {
       }), jsx(_$$K, {
         onClick: onClose,
         "aria-label": getI18nString("collaboration.feedback.close_tooltip"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("collaboration.feedback.close_tooltip"),
         recordingKey: generateRecordingKey(e, "button-close"),
         ref: l,
@@ -1335,7 +1335,7 @@ function eG({
   let [o, d] = useState(t && !!e.find(e => e.id === t.id));
   let c = "SECTION" === rb();
   return jsxs("div", {
-    children: [jsx(_$$E, {
+    children: [jsx(ButtonPrimitive, {
       className: QQ,
       onClick: () => d(!o),
       "aria-expanded": !!o,

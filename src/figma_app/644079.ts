@@ -11,7 +11,7 @@ import { isInteractionReady } from "../figma_app/433958";
 import { hA } from "../figma_app/88239";
 import { ow, m0 } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
-import { TZ } from "../figma_app/62612";
+import { getViewportY } from "../figma_app/62612";
 import { isVsCodeEnvironment } from "../905/858738";
 import { kd } from "../figma_app/546509";
 import { getObservableValue } from "../figma_app/84367";
@@ -28,7 +28,7 @@ let w = parsePxInt(xEX);
 let O = atom(0);
 export function $$R4() {
   let e = useSelector(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
-  let t = TZ({
+  let t = getViewportY({
     subscribeToUpdates_expensive: !0
   });
   e && (t += w);

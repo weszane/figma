@@ -1,7 +1,7 @@
 import { MatchCriteria, CanvasSearchHelpers, NodeType } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { CN } from "../905/81982";
 export let $$l3 = {
   includeMatches: !0,
@@ -46,7 +46,7 @@ export let $$_0 = new class {
     let t = CanvasSearchHelpers.getSearchableNodes(!0).map(c);
     let r = debugState.getState();
     this.searchLibrary.set(t);
-    ds("canvas_search_index_create", r.openFile?.key, r, {
+    trackFileEvent("canvas_search_index_create", r.openFile?.key, r, {
       timeElapsedMs: Math.round(performance.now() - e),
       numberOfNodes: t.length
     });

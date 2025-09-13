@@ -1,7 +1,7 @@
 import { Multiplayer } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { P8 } from "../905/270781";
-import { v5, Nb, cf, Nq } from "../figma_app/314264";
+import { getProductType, getSlideViewAnalytics, getLoadID, getReconnectId } from "../figma_app/314264";
 export let $$o0 = P8([({
   openFile: e,
   fileByKey: t,
@@ -13,7 +13,7 @@ export let $$o0 = P8([({
     key: n,
     teamId: r?.team_id,
     creatorId: r?.creator_id,
-    productType: v5(i, r && r.editor_type)
+    productType: getProductType(i, r && r.editor_type)
   };
 }], ({
   key: e,
@@ -30,10 +30,10 @@ export function $$l1(e) {
   if (e ??= {}, debugState) {
     let t = debugState.getState();
     Object.assign(e, $$o0(t));
-    Object.assign(e, Nb(e.productType, t.selectedView?.view));
+    Object.assign(e, getSlideViewAnalytics(e.productType, t.selectedView?.view));
   }
-  let t = cf();
-  null !== t && (e.loadID = t, e.reconnectId = Nq());
+  let t = getLoadID();
+  null !== t && (e.loadID = t, e.reconnectId = getReconnectId());
   e.fileIsIncremental = !!Multiplayer?.isIncrementalSession();
   e.fileIsValidatingIncremental = !!Multiplayer?.isValidatingIncremental();
   e.isStagingChanges = !!Multiplayer?.isStagingChanges();

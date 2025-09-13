@@ -12,7 +12,7 @@ import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Pg } from "../905/149328";
 import { Point } from "../905/736624";
 import { ms, wv } from "../figma_app/236327";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { oB } from "../905/929976";
 import { vL } from "../905/826900";
 import { W as _$$W } from "../905/187396";
@@ -28,7 +28,7 @@ import { D8 } from "../905/511649";
 import { S as _$$S } from "../figma_app/420927";
 import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Q7 } from "../905/203369";
 import { it, g1, Cf, UV } from "../905/504727";
 import { km, hX } from "../905/701417";
@@ -221,7 +221,7 @@ class H extends z {
         }),
         onPointerDown: this.props.isActive ? void 0 : this.onPointerDown,
         onPointerUp: this.props.isActive ? void 0 : this.onPointerUp,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-dropdown-tooltip": getI18nString("fullscreen.properties_panel.tooltip_moreActions"),
         "data-tooltip-show-below": !0,
         children: jsx(_$$J2, {
@@ -756,7 +756,7 @@ let er = class e extends RecordingPureComponent {
       onFocus: this.props.onFocus,
       textAlign: "center",
       propagateCloseClick: !0,
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     });else if (this.props.items && 0 !== this.props.items.length) {
       let t = this.props.depth > 0;
       e = jsx(vL, {

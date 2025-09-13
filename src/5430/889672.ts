@@ -15,7 +15,7 @@ import { StatusType } from "../figma_app/175992";
 import { WE, BY, Q7 } from "../figma_app/625596";
 import { C as _$$C } from "../figma_app/198698";
 import { CY } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { om, x1 } from "../figma_app/465413";
 import { $J, mj, hL } from "../figma_app/600310";
 import { sl } from "../figma_app/498055";
@@ -33,7 +33,7 @@ function I({
     },
     children: [e ? jsx("div", {
       className: sl,
-      children: jsx(kt, {
+      children: jsx(LoadingSpinner, {
         shouldMatchTextColor: !0
       })
     }) : void 0, jsx("span", {

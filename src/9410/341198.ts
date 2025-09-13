@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { E } from "../905/632989";
-import { B } from "../905/714743";
+import { ButtonPrimitive } from "../905/632989";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { jN } from "../905/612685";
@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 import { O } from "../905/501876";
 import { L } from "../1250/681431";
 import { o as _$$o } from "../9410/925362";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { v as _$$v } from "../0c62c2fd/181448";
 import { A } from "../svg/391812";
 import { A as _$$A } from "../2854/769773";
@@ -42,7 +42,7 @@ function C({
       className: "vscode_extension_page_picker--pagePickerButton--xunuS",
       onClick: () => d(!l),
       "data-tooltip": getI18nString("dev_handoff.pages_list"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       children: [a ? jsxs(Fragment, {
         children: [jsx(O, {
           className: "vscode_extension_page_picker--readyIcon--MjlB1"
@@ -54,7 +54,7 @@ function C({
         children: [jsx(_$$v, {
           pageGuid: C,
           margin: "marginRight",
-          fallback: jsx(B, {
+          fallback: jsx(SvgComponent, {
             svg: A,
             className: "vscode_extension_page_picker--pagePickerIcon--miPBV"
           })
@@ -62,7 +62,7 @@ function C({
           className: _,
           children: v?.name || ""
         })]
-      }), jsx(B, {
+      }), jsx(SvgComponent, {
         svg: _$$A,
         className: "vscode_extension_page_picker--pagePickerButtonChevron--MpjMi"
       })]
@@ -89,13 +89,13 @@ export function $$E0({
       isOnReadyForDevPage: t
     }), jsxs("div", {
       className: "vscode_extension_header--children--sHtI3",
-      children: [jsx(E, {
+      children: [jsx(ButtonPrimitive, {
         onClick: u,
         "aria-label": getI18nString("dev_handoff.overview_mode.open_in_figma"),
         className: "vscode_extension_header--focusVisible--NjfH0",
         children: jsxs("div", {
           className: "vscode_extension_header--openFigmaText--e2tMf",
-          children: [getI18nString("dev_handoff.overview_mode.open_in_figma"), jsx(B, {
+          children: [getI18nString("dev_handoff.overview_mode.open_in_figma"), jsx(SvgComponent, {
             svg: _$$A2,
             className: "vscode_extension_header--openFigmaSVG--02Jd3"
           })]

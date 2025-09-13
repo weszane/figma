@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { y as _$$y } from "../905/582657";
 import { U } from "../905/103637";
 import { U as _$$U } from "../905/275247";
@@ -13,7 +13,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { isInvalidValue } from "../905/216495";
 import { dT } from "../figma_app/889655";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { Yj, kt, xA, _F } from "../figma_app/92985";
 import { $ } from "../905/330495";
@@ -75,14 +75,14 @@ export function $$A0(e) {
       className: h()("ui3_instance_attribution_button--instanceAttributionHeader--QC-Fh", {
         "ui3_instance_attribution_button--loading--g-7o4": C.current
       }),
-      children: jsx(_$$E, {
+      children: jsx(ButtonPrimitive, {
         className: "ui3_instance_attribution_button--ui3DescriptionButton--ikoS6",
         onClick: function () {
           Fullscreen && (backingSymbolGUID && !isInvalidValue(backingSymbolGUID) ? Fullscreen.goToSymbolOrStateGroupById(backingSymbolGUID, !0) : backingStateGroupGUID && !isInvalidValue(backingStateGroupGUID) && Fullscreen.goToSymbolOrStateGroupById(backingStateGroupGUID, !0));
         },
         recordingKey: generateRecordingKey(e.recordingKey, "instanceAttributionButton"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": tooltip
         },
         children: jsxs("div", {

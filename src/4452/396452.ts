@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { xk } from "@stylexjs/stylex";
 import { Xf } from "../figma_app/153916";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { qf } from "../4452/780544";
@@ -111,7 +111,7 @@ export function $$E1({
     children: [jsx("div", {
       ...xk(S.text, t && S.invisibleText),
       children: e
-    }), t && jsx(kt, {
+    }), t && jsx(LoadingSpinner, {
       shouldMatchTextColor: !0,
       size: "small",
       className: "x10l6tqk"

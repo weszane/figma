@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
 import { fullscreenValue } from "../figma_app/455680";
 import { Zr } from "../figma_app/678782";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { t as _$$t2 } from "../figma_app/480016";
 import { fn } from "../figma_app/811257";
 import { a as _$$a } from "../905/361302";
@@ -51,7 +51,7 @@ function x(e) {
       value: t,
       disabled: e.disabled,
       ...o,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.properties_panel.transform_panel.rotation"),
       recordingKey: generateRecordingKey(e, "angleInput"),
       children: jsx("div", {
@@ -87,7 +87,7 @@ let $$N0 = memo(function (e) {
 let C = (e, t, r, n) => ({
   "aria-label": formatI18nMessage(e),
   "data-tooltip": e,
-  "data-tooltip-type": Ib.LOOKUP,
+  "data-tooltip-type": KindEnum.LOOKUP,
   children: t,
   disabled: !r,
   recordingKey: n,

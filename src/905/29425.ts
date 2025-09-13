@@ -7,10 +7,10 @@ import { z8 } from "../905/709095";
 import { getInitialOptions } from "../figma_app/169182";
 import { Zv } from "../905/760682";
 import { ye } from "../figma_app/682945";
-import { qc, kE } from "../figma_app/62612";
+import { getVisibleArea, roundedDivision } from "../figma_app/62612";
 import { nt } from "../905/226610";
 import { requestDeferredExecution } from "../905/561433";
-import { kT, hm } from "../905/380385";
+import { ThreadType, NEW_COMMENT_ID } from "../905/380385";
 import { Sw } from "../figma_app/805373";
 import { UU } from "../905/807385";
 import y from "../vendor/907065";
@@ -254,8 +254,8 @@ let D = class e extends HTMLElement {
     this.getWrapperOffset = e;
   }
   set initialViewport(e) {
-    let t = qc(e);
-    let i = kE(78, e.zoomScale);
+    let t = getVisibleArea(e);
+    let i = roundedDivision(78, e.zoomScale);
     this.slidingWindow.updateWindow(t, i);
     this.renderWrapperPosition(e);
     this.currentViewport = e;
@@ -410,8 +410,8 @@ let D = class e extends HTMLElement {
         replies: o,
         numUnreadReplies: s.numUnreadReplies,
         draft: s.isDraft,
-        feedPostTitle: s.type === kT.FEED_POST ? s.feedPostTitle : void 0,
-        pinVerticalStagger: s.type === kT.FEED_POST ? s.pinVerticalStagger : void 0,
+        feedPostTitle: s.type === ThreadType.FEED_POST ? s.feedPostTitle : void 0,
+        pinVerticalStagger: s.type === ThreadType.FEED_POST ? s.pinVerticalStagger : void 0,
         numAttachments: s.numAttachments,
         isPinnedToFile: s.isPinnedToFile
       },
@@ -467,13 +467,13 @@ let D = class e extends HTMLElement {
       let r = t.pins[0];
       let a = new XC();
       switch (r.type) {
-        case kT.COMMENT_THREAD:
+        case ThreadType.COMMENT_THREAD:
           a = new aT();
           break;
-        case kT.FEED_POST:
+        case ThreadType.FEED_POST:
           a = new b1();
           break;
-        case kT.LITMUS_COMMENT_THREAD:
+        case ThreadType.LITMUS_COMMENT_THREAD:
           break;
         default:
           throwTypeError(r);
@@ -578,8 +578,8 @@ let D = class e extends HTMLElement {
     this.clusterElementsById.$$delete(e.id);
   }
   updateViewportVisibleClusters(e) {
-    let t = qc(e);
-    let i = kE(78, e.zoomScale);
+    let t = getVisibleArea(e);
+    let i = roundedDivision(78, e.zoomScale);
     let n = this.slidingWindow.updateWindow(t, i);
     n.additions.forEach(t => this.addClusterToDom(t, e, "viewport_visible"));
     n.removals.forEach(t => {
@@ -591,7 +591,7 @@ let D = class e extends HTMLElement {
     i && i.updateDragLocation(t);
   }
   getPinViewportRect(e) {
-    if (e === hm) return {
+    if (e === NEW_COMMENT_ID) return {
       x: 0,
       y: 0,
       height: 32,

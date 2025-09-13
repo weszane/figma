@@ -7,7 +7,7 @@ import { H } from "../905/222445";
 import { J } from "../905/125993";
 import { getI18nString } from "../905/303541";
 import { _I, PY } from "../905/34809";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export function $$p0(e) {
   let t = useDispatch();
   let i = useSelector(({
@@ -34,7 +34,7 @@ export function $$p0(e) {
           },
           "aria-label": i ? getI18nString("mobile_tool_bar.hide_navigation") : getI18nString("mobile_tool_bar.show_navigation"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": i ? getI18nString("mobile_tool_bar.hide_navigation") : getI18nString("mobile_tool_bar.show_navigation")
           },
           children: i ? jsx(f, {}) : jsx(H, {})
@@ -51,7 +51,7 @@ export function $$p0(e) {
           onClick: e => e.preventDefault(),
           "aria-label": getI18nString("mobile_tool_bar.more_options"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("mobile_tool_bar.more_options")
           },
           children: jsx(J, {})

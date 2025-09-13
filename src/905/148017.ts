@@ -24,7 +24,7 @@ import { c6 } from "../905/950959";
 import { valueOrFallback } from "../905/216495";
 import { o3, nt } from "../905/226610";
 import { Q as _$$Q } from "../figma_app/104130";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { f as _$$f } from "../905/135117";
 import { zK, zM } from "../905/182453";
@@ -379,7 +379,7 @@ class es extends PureComponent {
             this.props.useFPLGrid && " " === e.key && e.shiftKey && e.preventDefault();
           },
           onMouseUp: dG,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.grid_panel.layout_guide_settings")
         },
         children: e

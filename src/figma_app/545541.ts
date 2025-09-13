@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
-import { U, iT } from "../figma_app/901889";
+import { trackFileEventWithStore, trackOrgEventWithStore } from "../figma_app/901889";
 import { x as _$$x } from "../figma_app/256637";
 import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
@@ -350,7 +350,7 @@ export function $$F0() {
     pinnedPluginsEnabled
   } = G();
   let u = useDispatch();
-  let h = U();
+  let h = trackFileEventWithStore();
   let m = m0();
   let y = useCanAccessFullDevMode();
   let b = m && !y;
@@ -433,7 +433,7 @@ export function $$j1() {
     ...M,
     codegenSettings: null
   }, null, null));
-  let d = iT();
+  let d = trackOrgEventWithStore();
   let [c, p] = useAtomValueAndSetter(_$$D);
   let _ = useCallback(e => {
     l(e);

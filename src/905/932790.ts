@@ -11,7 +11,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { Timer } from "../905/609396";
 import { reportError } from "../905/11";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { IL, Lg, SA, YK, Aq } from "../905/843553";
 import { logInfo } from "../905/714362";
 import { Ay, c6 } from "../figma_app/432652";
@@ -171,7 +171,7 @@ async function N(e, t, i, n, a, s, o, d = !1) {
         exampleNodesLength: e.length
       }
     });
-    ds("ai_text_gen_request_failed", debugState.getState().openFile?.key, debugState.getState(), {
+    trackFileEvent("ai_text_gen_request_failed", debugState.getState().openFile?.key, debugState.getState(), {
       error: i,
       requestType: "From examples",
       replaceableNodesLength: t.length,
@@ -318,7 +318,7 @@ export let $$B0 = async ({
     hasImageNodes: SZ(I)
   };
   try {
-    ds("ai_text_gen_started", debugState.getState().openFile?.key, debugState.getState(), {
+    trackFileEvent("ai_text_gen_started", debugState.getState().openFile?.key, debugState.getState(), {
       ...V
     });
     let {
@@ -330,14 +330,14 @@ export let $$B0 = async ({
     }, userPrompt);
     k = attempt;
     V.timeToCompletion = l.getElapsedTime();
-    cancelled ? ds("ai_text_gen_cancelled", debugState.getState().openFile?.key, debugState.getState(), {
+    cancelled ? trackFileEvent("ai_text_gen_cancelled", debugState.getState().openFile?.key, debugState.getState(), {
       ...V
-    }) : ds("ai_text_gen_completed", debugState.getState().openFile?.key, debugState.getState(), {
+    }) : trackFileEvent("ai_text_gen_completed", debugState.getState().openFile?.key, debugState.getState(), {
       ...V
     });
   } catch (e) {
     V.timeToCompletion = l.getElapsedTime();
-    ds("ai_text_gen_failed", debugState.getState().openFile?.key, debugState.getState(), {
+    trackFileEvent("ai_text_gen_failed", debugState.getState().openFile?.key, debugState.getState(), {
       error: e,
       ...V
     });

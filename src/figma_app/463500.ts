@@ -1,7 +1,7 @@
 import { debug } from "../figma_app/465776";
 import { Fullscreen } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
-import { Oo } from "../905/709171";
+import { compareWithGeneratedKey } from "../905/709171";
 import { splitPath, getDirname, getBasename } from "../905/309735";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 export function $$d13(e, t) {
@@ -118,7 +118,7 @@ export function $$T15(e) {
   return e.type === PrimaryWorkflowEnum.STYLE ? splitPath(e.name).length : e.level;
 }
 export function $$I2(e, t) {
-  Oo(e, t) && (Fullscreen.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
+  compareWithGeneratedKey(e, t) && (Fullscreen.deleteNode(e.node_id), trackEventAnalytics("Style Deleted", {
     styleType: e.style_type,
     from: "styleListContextMenu"
   }));

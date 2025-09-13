@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { SeverityLevel } from "../905/11";
 import { tH, H4 } from "../905/751457";
 import { renderI18nText } from "../905/303541";
@@ -23,7 +23,7 @@ export function $$u0(e) {
         disableAutoAppearingTooltips: e?.disableAutoAppearingTooltips
       }), jsx("div", {
         className: "ask_to_edit_button--hiddenButtonSpacer--oz10-",
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: "primary",
           children: renderI18nText("fullscreen.toolbar.request.request_sent")
         })

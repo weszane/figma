@@ -8,7 +8,7 @@ import { l as _$$l } from "../905/190247";
 import { reportError } from "../905/11";
 import { startPerformanceSpan, endPerformanceSpan } from "../905/670985";
 import { getTrackingSessionId, incrementSessionCounter } from "../905/471229";
-import { ys, QM, Nq } from "../figma_app/314264";
+import { setLoadID, resetReconnectCounter, getReconnectId } from "../figma_app/314264";
 import { ds } from "../905/87821";
 import { dd, PH } from "../905/550523";
 class f {
@@ -195,7 +195,7 @@ let $$y1 = new class {
     this.timeEvents.reactFullscreenViewIsRenderedDuration = this.timeEvents.reactFullscreenViewIsRendered - (this.isColdBoot ? 0 : this.timeEvents.openFileActionStart);
   }
   logOpenFileAction(e, t, i, n, r) {
-    for (let t in this.fileKey = e, this.folderId = i, this.teamId = n, this.orgId = r, this._loadID = this.newLoadID(), ys(this._loadID), QM(), this.numTimesLoaded++, this.fileOpenIndex = this.numTimesLoaded, this.timeEvents) A.has(t) || delete this.timeEvents[t];
+    for (let t in this.fileKey = e, this.folderId = i, this.teamId = n, this.orgId = r, this._loadID = this.newLoadID(), setLoadID(this._loadID), resetReconnectCounter(), this.numTimesLoaded++, this.fileOpenIndex = this.numTimesLoaded, this.timeEvents) A.has(t) || delete this.timeEvents[t];
     this.fsHitsManager.clear();
     this.mark("openFileActionStart");
     this.installListeners();
@@ -396,7 +396,7 @@ let $$y1 = new class {
     null === this._loadID && reportError(_$$e.FIGFILE_PLATFORM, Error("reporting client-rendered metadata without load ID"));
     return {
       loadID: this._loadID ?? "",
-      reconnectId: Nq(),
+      reconnectId: getReconnectId(),
       trackingSessionId: getTrackingSessionId(),
       trackingSessionSequenceId: incrementSessionCounter()
     };

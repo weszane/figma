@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useMemo, useRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { T as _$$T } from "../905/745591";
 import r from "classnames";
 import { colorToString } from "../905/436288";
@@ -12,7 +12,7 @@ import { wY } from "../figma_app/708845";
 import { isAnyMobile } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { GG } from "../905/511649";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { m as _$$m } from "../905/99004";
 import { throwTypeError } from "../figma_app/465776";
@@ -22,7 +22,7 @@ import { Bn, BI, Uj, Gy, kS } from "../3276/256210";
 import { A as _$$A } from "../svg/25493";
 import { A as _$$A2 } from "../svg/194200";
 import { E as _$$E2 } from "../vendor/45699";
-import { A as _$$A3 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { A as _$$A4 } from "../svg/821527";
 var l = r;
 function I(e) {
@@ -40,7 +40,7 @@ function I(e) {
         boxShadow: n,
         transition: `box-shadow ${Bn}s linear`
       },
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: t,
         style: {
           fill: e.color,
@@ -166,7 +166,7 @@ function A({
       }
     });
   }, [i]);
-  let l = _$$A3(r, 5e3);
+  let l = useDebouncedCallback(r, 5e3);
   useEffect(() => {
     s();
     e ? l() : l.isPending() && l.cancel();
@@ -273,7 +273,7 @@ export function $$O0(e) {
                   },
                   ref: q,
                   "aria-live": "polite",
-                  children: message.onClick ? jsx(_$$E, {
+                  children: message.onClick ? jsx(ButtonPrimitive, {
                     className: l()(B),
                     recordingKey: generateRecordingKey(e, "message"),
                     onClick: message.onClick,
@@ -303,7 +303,7 @@ export function $$O0(e) {
                         duration: Gy,
                         delay: kS
                       },
-                      children: jsx(_$$E, {
+                      children: jsx(ButtonPrimitive, {
                         className: l()(O),
                         recordingKey: generateRecordingKey(e, "button"),
                         onClick: button.onClick,
@@ -319,7 +319,7 @@ export function $$O0(e) {
                           D(!0);
                         },
                         "aria-label": getI18nString("collaboration.spotlight.bell.dismiss"),
-                        children: jsx(_$$B, {
+                        children: jsx(SvgComponent, {
                           svg: _$$A4
                         })
                       })

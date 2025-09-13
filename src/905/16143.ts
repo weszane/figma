@@ -6,11 +6,11 @@ import { NU } from "../figma_app/204891";
 import { y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { R } from "../905/731725";
 import { CI } from "../figma_app/528509";
 import { _6 } from "../figma_app/386952";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var s = a;
 export function $$_0(e) {
   let t = _6();
@@ -31,7 +31,7 @@ export function $$_0(e) {
       }, `Thumbnail${e.key}`))
     }), jsxs("div", {
       className: "folder_name_and_preview--fileNameContainer--8lvc-",
-      children: [jsx(E, {
+      children: [jsx(TextWithTruncation, {
         fontSize: e.fontSize ?? 13,
         fontWeight: "medium",
         truncate: !0,
@@ -40,7 +40,7 @@ export function $$_0(e) {
         color: zE.WARNING_TERTIARY,
         text: getI18nString("locked_team.label.view_only"),
         dataTooltip: getI18nString("locked_team.label.tooltip"),
-        dataTooltipType: Ib.TEXT,
+        dataTooltipType: KindEnum.TEXT,
         className: "folder_name_and_preview--viewOnlyLabel--G3IV1"
       })]
     })]

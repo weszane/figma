@@ -12,7 +12,7 @@ import { aQ } from "../figma_app/672951";
 import { L as _$$L } from "../905/406205";
 import { ProjectTilePermissions, TeamTilePermissions, TeamOrphanedStatus } from "../figma_app/43951";
 import { x as _$$x } from "../905/695363";
-import { XU, C0, ue } from "../figma_app/756995";
+import { ViewMode, SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../905/971482";
 import { GR, hZ } from "../figma_app/330108";
 import { cD } from "../figma_app/598018";
@@ -29,7 +29,7 @@ import { y as _$$y } from "../905/171275";
 import { UN, dm } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { to } from "../905/612685";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { o as _$$o } from "../905/895626";
@@ -45,14 +45,14 @@ import { ci } from "../figma_app/643789";
 import { W as _$$W } from "../905/307631";
 import { h2, $b } from "../905/820960";
 import { showModalHandler } from "../905/156213";
-import { _J } from "../figma_app/314264";
+import { trackTeamEvent } from "../figma_app/314264";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { VP } from "../905/18797";
 import { p9 } from "../figma_app/88768";
 import { hasViewerRoleAccessOnTeam, canMemberOrg } from "../figma_app/642025";
-import { G as _$$G2 } from "../figma_app/471068";
+import { ViewTypeEnum } from "../figma_app/471068";
 import { p as _$$p2 } from "../905/195198";
 import { Ru } from "../905/572991";
 import { debug } from "../figma_app/465776";
@@ -111,7 +111,7 @@ function y(e) {
   });
 }
 let b = _$$h({
-  [XU.GRID]: function (e) {
+  [ViewMode.GRID]: function (e) {
     let t = e.searchResult.model;
     let i = t.id;
     let r = useSubscription(ProjectTilePermissions, {
@@ -126,7 +126,7 @@ let b = _$$h({
       useLGPerms: !0
     });
   },
-  [XU.LIST]: () => jsx(Fragment, {})
+  [ViewMode.LIST]: () => jsx(Fragment, {})
 });
 function z(e, t) {
   let i = useDispatch();
@@ -156,7 +156,7 @@ function z(e, t) {
   }), [i, e, t]);
 }
 let H = _$$h({
-  [XU.GRID]: function (e) {
+  [ViewMode.GRID]: function (e) {
     let [t, i] = useState(!1);
     let a = to(e.searchResult.model);
     let {
@@ -174,14 +174,14 @@ let H = _$$h({
       })
     });
   },
-  [XU.LIST]: function (e) {
+  [ViewMode.LIST]: function (e) {
     let t = to(e.searchResult.model);
     let {
       onClick,
       onClickOwner
     } = z(e.searchResult.model, e.viewMode);
     let a = function (e) {
-      let t = dq();
+      let t = useCurrentUserOrgId();
       return t ? `/files/${t}/user/${e}` : `/files/user/${e}`;
     }(e.searchResult.model.owner?.id);
     return jsx(W, {
@@ -317,8 +317,8 @@ let ep = memo(function (e) {
   let c = _6();
   let u = Gc(t => {
     t.preventDefault();
-    _J("file_browser_team_click", e.searchResult.model.id, d, {
-      selectedView: "recentsAndSharing" === c.view ? c.tab || _$$G2.RECENTLY_VIEWED : c.view,
+    trackTeamEvent("file_browser_team_click", e.searchResult.model.id, d, {
+      selectedView: "recentsAndSharing" === c.view ? c.tab || ViewTypeEnum.RECENTLY_VIEWED : c.view,
       viewMode: "list"
     });
     onClick();
@@ -385,7 +385,7 @@ function em(e, t) {
   }), [i, e, t]);
 }
 let eh = _$$h({
-  [XU.GRID]: function (e) {
+  [ViewMode.GRID]: function (e) {
     let t = e.searchResult.model;
     let {
       canUserViewTeam,
@@ -427,7 +427,7 @@ let eh = _$$h({
       })
     });
   },
-  [XU.LIST]: function (e) {
+  [ViewMode.LIST]: function (e) {
     let t = e.searchResult.model;
     let i = useSubscription(TeamTilePermissions, {
       teamId: t.id
@@ -499,15 +499,15 @@ let eD = {
 };
 let eL = e => {
   switch (e) {
-    case C0.NAME:
+    case SortField.NAME:
       return Lk.NAME;
-    case C0.CREATED_AT:
+    case SortField.CREATED_AT:
       return Lk.CREATED_AT;
-    case C0.TOUCHED_AT:
+    case SortField.TOUCHED_AT:
       return Lk.TOUCHED_AT;
-    case C0.OWNER:
+    case SortField.OWNER:
       return Lk.OWNER;
-    case C0.SEARCH_RELEVANCE:
+    case SortField.SEARCH_RELEVANCE:
       return Lk.RELEVANCY;
     default:
       debug(!0, "Should not try to sort by any other key in search list view");
@@ -517,15 +517,15 @@ let eL = e => {
 let eF = e => {
   switch (e) {
     case Lk.NAME:
-      return C0.NAME;
+      return SortField.NAME;
     case Lk.CREATED_AT:
-      return C0.CREATED_AT;
+      return SortField.CREATED_AT;
     case Lk.TOUCHED_AT:
-      return C0.TOUCHED_AT;
+      return SortField.TOUCHED_AT;
     case Lk.OWNER:
-      return C0.OWNER;
+      return SortField.OWNER;
     case Lk.RELEVANCY:
-      return C0.SEARCH_RELEVANCE;
+      return SortField.SEARCH_RELEVANCE;
   }
 };
 function eM(e) {
@@ -589,7 +589,7 @@ function eM(e) {
       sortBy: m,
       sortConfig: {
         key: eF(i.files.sortKey),
-        dir: i.files.sortDesc ? ue.DESC : ue.ASC
+        dir: i.files.sortDesc ? SortOrder.DESC : SortOrder.ASC
       },
       updateRenderedItems: l,
       viewType: e.viewMode
@@ -673,7 +673,7 @@ function eH(e) {
     children: t => jsx(_$$m, {
       searchResults: !0,
       folderList: s,
-      onContextMenuOverride: e.viewMode === XU.GRID ? void 0 : (i, n, r) => {
+      onContextMenuOverride: e.viewMode === ViewMode.GRID ? void 0 : (i, n, r) => {
         t.onContextMenuClick({
           data: e.results[r],
           index: r
@@ -838,7 +838,7 @@ function e7(e) {
   return jsxs("div", {
     className: _$$s.mb32.mx32.$,
     children: [jsx(_$$A, {
-      viewType: XU.GRID,
+      viewType: ViewMode.GRID,
       getAriaLabel: e => e.handle,
       items: t,
       isDraggable: !1,
@@ -968,9 +968,9 @@ export function $$tt0(e) {
     results: t,
     checksForViewOnlyLabels: f,
     viewMode: e.viewMode
-  }) : e.viewMode === XU.GRID && e.searchModelType === uH.TEAMS ? jsx(eK, {
+  }) : e.viewMode === ViewMode.GRID && e.searchModelType === uH.TEAMS ? jsx(eK, {
     results: t
-  }) : e.viewMode === XU.GRID && e.searchModelType === uH.USERS ? jsx(e7, {
+  }) : e.viewMode === ViewMode.GRID && e.searchModelType === uH.USERS ? jsx(e7, {
     results: t
   }) : e.searchModelType === uH.PUBLIC_PLUGINS || e.searchModelType === uH.PRIVATE_PLUGINS ? jsx(eU, {
     results: t

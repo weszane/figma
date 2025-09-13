@@ -11,7 +11,7 @@ import { NotificationType } from "../905/170564";
 import { lg } from "../figma_app/976749";
 import { FDeviceType } from "../figma_app/191312";
 import { LatestClipboardData } from "../figma_app/43951";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { aq } from "../figma_app/412189";
 export function $$E0(e, t) {
   return !!(e?.is_ipad_user || jm(t));
@@ -34,7 +34,7 @@ export function $$y1() {
       copy_device_type: n.deviceType,
       copy_timestamp: n.timestamp
     };
-    ds("crossDeviceCopyPaste_s3_header_fetch_start", i.openFile?.key, i, o);
+    trackFileEvent("crossDeviceCopyPaste_s3_header_fetch_start", i.openFile?.key, i, o);
     let l = generateUUIDv4();
     t.current = l;
     T(() => fetch(n.presignedDownloadUrl, {
@@ -46,14 +46,14 @@ export function $$y1() {
     }) => {
       if (a()) {
         if (!s) {
-          ds("crossDeviceCopyPaste_s3_header_fetch_failure", i.openFile?.key, i, {
+          trackFileEvent("crossDeviceCopyPaste_s3_header_fetch_failure", i.openFile?.key, i, {
             ...o,
             error: _,
             retryCount: d
           });
           return;
         }
-        ds("crossDeviceCopyPaste_s3_header_fetch_success", i.openFile?.key, i, {
+        trackFileEvent("crossDeviceCopyPaste_s3_header_fetch_success", i.openFile?.key, i, {
           ...o,
           retryCount: d
         });
@@ -68,9 +68,9 @@ export function $$y1() {
             deviceType: n.deviceType,
             timestamp: n.timestamp,
             isFigJam: r,
-            acceptCallback: () => ds("crossDeviceCopyPaste_dialog_paste_tapped", i.openFile?.key, i, o),
-            dismissCallback: () => ds("crossDeviceCopyPaste_dialog_dismiss_tapped", i.openFile?.key, i, o),
-            displayCallback: () => ds("crossDeviceCopyPaste_dialog_shown", i.openFile?.key, i, o)
+            acceptCallback: () => trackFileEvent("crossDeviceCopyPaste_dialog_paste_tapped", i.openFile?.key, i, o),
+            dismissCallback: () => trackFileEvent("crossDeviceCopyPaste_dialog_dismiss_tapped", i.openFile?.key, i, o),
+            displayCallback: () => trackFileEvent("crossDeviceCopyPaste_dialog_shown", i.openFile?.key, i, o)
           }
         }));
         setTimeout(() => {

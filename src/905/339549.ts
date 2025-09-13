@@ -4,7 +4,7 @@ import { w } from "../905/442596";
 import { l as _$$l } from "../905/479687";
 import o from "classnames";
 import { u2 } from "../905/511649";
-import { EY } from "../905/838445";
+import { TextWithTruncation } from "../905/838445";
 import { A } from "../6828/954206";
 import { A as _$$A } from "../6828/482039";
 var l = o;
@@ -55,7 +55,7 @@ export let $$m0 = forwardRef((e, t) => {
       }), label && jsx("label", {
         className: "checkbox--label--ev6kh",
         htmlFor: v,
-        children: jsx(EY, {
+        children: jsx(TextWithTruncation, {
           ...(e.truncateLabel ?? {}),
           fontSize: 11,
           color: disabled ? "disabled" : "default",
@@ -65,7 +65,7 @@ export let $$m0 = forwardRef((e, t) => {
     }), description && jsx("div", {
       className: "checkbox--description--AZF1u",
       id: I,
-      children: jsx(EY, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         color: disabled ? "disabled" : "secondary",
         children: description

@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { Pw } from "../905/521428";
+import { ButtonLargeWide } from "../905/521428";
 import { s_ } from "../905/17223";
 import { Lf } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
@@ -114,11 +114,11 @@ export let $$w0 = registerModal(function (e) {
       })]
     }), jsx("div", {
       className: "collect_tax_info_modal--buttonWrapper--fl7ot",
-      children: jsxs(Pw, {
+      children: jsxs(ButtonLargeWide, {
         onClick: O,
         children: [P && jsx("span", {
           className: "collect_tax_info_modal--loadingIcon--iCbii",
-          children: jsx(kt, {
+          children: jsx(LoadingSpinner, {
             shouldMatchTextColor: !0
           })
         }), renderI18nText("community.seller.collect_tax_info_modal.continue_to_stripe")]

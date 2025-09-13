@@ -5,7 +5,7 @@ import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
 import { fu } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
-import { LE } from "../figma_app/62612";
+import { isViewportPanning } from "../figma_app/62612";
 import { N } from "../figma_app/268271";
 import { e0 } from "../905/696396";
 import { M } from "../905/152487";
@@ -20,7 +20,7 @@ function C({
   onClose: e
 }) {
   let t = Cb();
-  let i = LE({
+  let i = isViewportPanning({
     subscribeToUpdates_expensive: t
   });
   useEffect(() => {

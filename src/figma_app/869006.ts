@@ -3,8 +3,8 @@ import { useState, useContext, useRef, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
-import { kt } from "../figma_app/858013";
+import { getResourceDataOrFallback } from "../905/723791";
+import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V, $ as _$$$ } from "../905/355181";
 import { tc } from "../905/15667";
@@ -21,7 +21,7 @@ import { Gv } from "../figma_app/736948";
 import { J as _$$J, q as _$$q } from "../905/202542";
 import { getRumLoggingConfig } from "../905/16237";
 import { fu } from "../figma_app/831799";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { A as _$$A } from "../3850/566892";
 import { E as _$$E } from "../905/370356";
 import { TH } from "../figma_app/95367";
@@ -44,7 +44,7 @@ import { qm, q0 } from "../figma_app/431689";
 function C(e) {
   return jsx("div", {
     children: jsx(_$$V, {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.toolTipMessage,
       "data-onboarding-key": e.onboardingKey,
       variant: e.variant,
@@ -107,7 +107,7 @@ function R({
           "data-tooltip": getI18nString("fullscreen.toolbar.pending-edit-request-tooltip"),
           "data-tooltip-show-above": !0,
           "data-tooltip-timeout-delay": 15,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           onClick: g,
           recordingKey: r,
           trackingEventName: "Edit Request Button Clicked",
@@ -270,7 +270,7 @@ function Z(e) {
           "data-testid": "pending-upgrade-request-button",
           "data-onboarding-key": f,
           "data-tooltip": g,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip-show-above": !0,
           "data-tooltip-max-width": 200
         },
@@ -306,7 +306,7 @@ export function $$et3(e) {
   let u = t.canEdit;
   let v = useCurrentFile();
   let A = !!(v && v.editorType === FFileType.WHITEBOARD && v.org?.figjamDisabledAt);
-  let x = t.editorType === FFileType.SLIDES && !!oA(t.org?.isSlidesDisabled);
+  let x = t.editorType === FFileType.SLIDES && !!getResourceDataOrFallback(t.org?.isSlidesDisabled);
   let N = t.editorType === FFileType.SITES && (!!t.org?.isSitesDisabled || !!t?.team?.studentTeamAt);
   let C = t.editorType === FFileType.COOPER && !!t.org?.isCooperDisabled;
   let w = A || x || N || C;
@@ -468,7 +468,7 @@ function ei({
           children: [jsx("span", {
             className: "view_permission--editButtonTextHidden--QK3P3",
             children: getI18nString("fullscreen.toolbar.edit-file-button")
-          }), jsx(kt, {
+          }), jsx(LoadingSpinner, {
             className: "view_permission--editButtonLoadingSpinner--itMwO"
           })]
         })

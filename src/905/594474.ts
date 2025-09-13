@@ -5,11 +5,11 @@ import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { t as _$$t } from "../905/150656";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { customHistory } from "../905/612521";
 import { H as _$$H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
@@ -53,7 +53,7 @@ import { Vq, EX, Wh, Rc, nT, J9, Fh, Kc, bo, Gl } from "../905/448740";
 import { Qi, uT, n1, se, fd } from "../figma_app/559491";
 import { showModalHandler, hideModal } from "../905/156213";
 import { generatePluginId, getCurrentPluginVersion, getLocalFileId, getOrgRole, validatePluginCodeSize, validateExtensionIconImage, hasRoleOrOrgChanged, mapToFileType, loadPluginManifest, loadLocalPluginSource, validateAndResizeIconImage, getPublishedResourceOrNull } from "../figma_app/300692";
-import { bD, dj, hE as _$$hE, vt } from "../figma_app/45218";
+import { ResourceType, FileInputType, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
 import { A as _$$A8 } from "../905/552947";
 import { gG, ic as _$$ic } from "../905/702716";
 import { u as _$$u } from "../905/952696";
@@ -65,11 +65,11 @@ import { A as _$$A9 } from "../905/562488";
 import { EventShield } from "../905/821217";
 import { b as _$$b2, c as _$$c2 } from "../905/308099";
 import { ks } from "../figma_app/637027";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { FRequestStatusType } from "../figma_app/191312";
 import { G6, ir as _$$ir } from "../905/671449";
 import { g as _$$g } from "../905/356410";
-import { E as _$$E2 } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A0 } from "../905/251970";
 import { oW } from "../905/675859";
 import { S as _$$S2 } from "../905/872825";
@@ -88,7 +88,7 @@ import { b as _$$b4, bL, mc, q7 } from "../figma_app/860955";
 import { J as _$$J4 } from "../905/125993";
 import { NU } from "../figma_app/204891";
 import { J as _$$J5 } from "../905/896954";
-import { ye } from "../figma_app/314264";
+import { trackGenericEvent } from "../figma_app/314264";
 import { getUserId, selectUser } from "../905/372672";
 import { IT as _$$IT, M4 } from "../905/713695";
 import { W as _$$W } from "../905/985740";
@@ -150,7 +150,7 @@ import { J as _$$J7 } from "../905/296347";
 import { _e, gI } from "../905/277373";
 import { Fk } from "../figma_app/167249";
 import { A as _$$A11 } from "../905/72153";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { xw } from "../figma_app/951233";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { k2 } from "../figma_app/10554";
@@ -393,7 +393,7 @@ function ey({
   let o = useDispatch();
   let l = async () => {
     if (!s) return;
-    let e = r ? bD.WIDGET : bD.PLUGIN;
+    let e = r ? ResourceType.WIDGET : ResourceType.PLUGIN;
     let i = await generatePluginId(e);
     o(Qi({
       publishedPlugins: [i],
@@ -572,11 +572,11 @@ function eF({
       t = getI18nString("community.publishing.security_banner.rejected.title");
       i = jsxs(Fragment, {
         children: [jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: getI18nString("community.publishing.security_banner.rejected.description")
           })
         }), jsx("div", {}), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: getI18nString("community.publishing.security_banner.rejected.description.check_email")
           })
         })]
@@ -598,7 +598,7 @@ function eF({
 function eM({
   text: e
 }) {
-  return jsx(_$$E, {
+  return jsx(TextWithTruncation, {
     "data-testid": "extension-security-form-error",
     color: "danger",
     children: e
@@ -654,7 +654,7 @@ function eU({
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z",
     children: [jsx(_$$b2, {
-      legend: jsx(_$$E, {
+      legend: jsx(TextWithTruncation, {
         fontWeight: "semi-bold",
         children: prompt
       }),
@@ -694,7 +694,7 @@ function eB({
   let l = shouldShowErrors && G6(e);
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z",
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: prompt
     }), options.map((e, a) => jsxs(_$$Fragment, {
@@ -804,12 +804,12 @@ let eX = forwardRef(function ({
     onDrop: e => {
       if (e.currentTarget.removeAttribute("data-droppable"), !setIconFromFile) return;
       let t = e.dataTransfer.items[0]?.getAsFile();
-      t && (i?.(), setIconFromFile(t, dj.DROP), e.preventDefault());
+      t && (i?.(), setIconFromFile(t, FileInputType.DROP), e.preventDefault());
     },
     onPaste: e => {
       if (!setIconFromFile) return;
       let t = e.clipboardData?.files[0];
-      t && (i?.(), setIconFromFile(t, dj.PASTE), e.preventDefault());
+      t && (i?.(), setIconFromFile(t, FileInputType.PASTE), e.preventDefault());
     },
     onKeyDown: e => {
       "Backspace" === e.key && (i?.(), deleteIcon?.(), e.preventDefault());
@@ -835,7 +835,7 @@ let eX = forwardRef(function ({
           alt: getI18nString("community.publishing.extension_icon_image"),
           draggable: !1
         })
-      }), jsx(_$$E2, {
+      }), jsx(ButtonPrimitive, {
         ref: _,
         className: "icon_uploader--deleteIconButton--EhbEQ",
         onClick: e => {
@@ -850,7 +850,7 @@ let eX = forwardRef(function ({
       className: "icon_uploader--emptyStateContainer--uVY6F",
       children: [jsx(_$$L, {}), jsx("div", {
         className: "icon_uploader--emptyStateControlsContainer--6aAvE",
-        children: jsx($n, {
+        children: jsx(Button, {
           ref: A,
           onClick: f,
           disabled: h || !setIconFromInput,
@@ -889,17 +889,17 @@ let e1 = forwardRef(function ({
     children: jsxs(_$$b3, {
       className: _$$iy,
       readonly: s,
-      value: Lz(e, !1) ? _$$hE.SUBSCRIPTION : _$$hE.ONE_TIME,
+      value: Lz(e, !1) ? PaymentType.SUBSCRIPTION : PaymentType.ONE_TIME,
       onChange: i => {
         t?.();
-        let n = i === _$$hE.SUBSCRIPTION;
+        let n = i === PaymentType.SUBSCRIPTION;
         e.setValue?.(n);
       },
       children: [jsx(e2, {
-        value: _$$hE.ONE_TIME,
+        value: PaymentType.ONE_TIME,
         title: getI18nString("community.seller.one_time_payment")
       }), jsx(e2, {
-        value: _$$hE.SUBSCRIPTION,
+        value: PaymentType.SUBSCRIPTION,
         title: getI18nString("community.seller.monthly_subscription")
       })]
     })
@@ -1064,7 +1064,7 @@ let tu = forwardRef(function ({
         useTemplateLink: jsx(_$$N2, {
           href: "https://www.figma.com/community/file/1174497187775558195",
           onClick: () => {
-            ye("playground_template_link_click", {
+            trackGenericEvent("playground_template_link_click", {
               isWidget,
               userId: s,
               pluginId: v
@@ -1093,7 +1093,7 @@ function tp({
   } = _$$b4();
   return jsxs(bL, {
     manager,
-    children: [jsx(_$$E2, {
+    children: [jsx(ButtonPrimitive, {
       className: "playground_file_select--playgroundFileOverflowMenuButton--IQqZM",
       ref: a,
       ...getTriggerProps(),
@@ -1364,7 +1364,7 @@ let tP = forwardRef(function ({
               draggable: !1,
               crossOrigin: "use-credentials"
             })
-          }), jsx(_$$E2, {
+          }), jsx(ButtonPrimitive, {
             ref: d,
             className: "snapshot_uploader--deleteSnapshotButton--0wAYZ",
             onClick: e => {
@@ -1379,7 +1379,7 @@ let tP = forwardRef(function ({
           className: "snapshot_uploader--emptyStateContainer--Wbbto",
           children: [jsx(_$$L, {}), jsxs("div", {
             className: "snapshot_uploader--emptyStateControlsContainer--VkPcp",
-            children: [restoreDefaultSnapshot && jsx($n, {
+            children: [restoreDefaultSnapshot && jsx(Button, {
               disabled: h,
               onClick: e => {
                 i?.();
@@ -1387,7 +1387,7 @@ let tP = forwardRef(function ({
                 e.stopPropagation();
               },
               children: getI18nString("community.publishing.use_default_snapshot")
-            }), jsx($n, {
+            }), jsx(Button, {
               ref: u,
               variant: restoreDefaultSnapshot ? "link" : void 0,
               onClick: m,
@@ -2599,7 +2599,7 @@ function iM({
     }, [e]);
     let o = useMemo(() => async function (e, t) {
       if (a) try {
-        let n = t === dj.PASTE;
+        let n = t === FileInputType.PASTE;
         let r = await validateAndResizeIconImage(e, n, !0);
         let [s, o] = await Promise.all([l8(URL.createObjectURL(r)), _$$c4(r)]);
         let l = new Uint8Array(o);
@@ -2621,7 +2621,7 @@ function iM({
     }, [a, i]);
     let l = useMemo(() => {
       if (o) return async function (e) {
-        e.files && e.files[0] && (await o(e.files[0], dj.FILE_INPUT), e.value = "");
+        e.files && e.files[0] && (await o(e.files[0], FileInputType.FILE_INPUT), e.value = "");
       };
     }, [o]);
     return {
@@ -3246,15 +3246,15 @@ function iM({
     })]
   });
   o = eA || draftSubmissionResult?.result !== "success" ? eA || draftSubmissionResult?.result !== "failure" ? jsxs(Fragment, {
-    children: [J.isOnFirstTab ? jsx($n, {
+    children: [J.isOnFirstTab ? jsx(Button, {
       variant: "secondary",
       onClick: ec,
       children: getI18nString("general.cancel")
-    }) : !eA && jsx($n, {
+    }) : !eA && jsx(Button, {
       variant: "secondary",
       onClick: J.selectPreviousTab,
       children: getI18nString("general.back")
-    }), J.isOnLastTab ? jsx($n, {
+    }), J.isOnLastTab ? jsx(Button, {
       disabled: draftSubmissionResult?.result === "pending" || eA,
       onClick: () => {
         checkProgress() && submit?.();
@@ -3262,13 +3262,13 @@ function iM({
       children: draftSubmissionResult?.result === "pending" || eA ? jsx(_$$k, {
         size: "sm"
       }) : getI18nString("community.publishing.publish")
-    }) : jsx($n, {
+    }) : jsx(Button, {
       onClick: () => {
         checkProgress() && J.selectNextTab();
       },
       children: getI18nString("general.next")
     })]
-  }) : jsx($n, {
+  }) : jsx(Button, {
     variant: "secondary",
     onClick: clearDraftSubmissionResult,
     children: getI18nString("general.go_back")
@@ -3298,7 +3298,7 @@ function iM({
     });
   }, [A]);
   let eb = Lz(e.fieldStates.name, "");
-  let ev = _$$A(() => {
+  let ev = useDebouncedCallback(() => {
     A.current($$in, {
       step: WX.EDIT_NAME
     });
@@ -3307,7 +3307,7 @@ function iM({
     eb && V.name.touched && ev();
   }, [eb, ev, V.name.touched]);
   let eI = Lz(e.fieldStates.description, "");
-  let eE = _$$A(() => {
+  let eE = useDebouncedCallback(() => {
     A.current($$in, {
       step: WX.EDIT_DESCRIPTION
     });
@@ -3392,7 +3392,7 @@ function ij(e) {
   }, [existingSecurityFormResponse]);
   let m = selectUser();
   let h = useSelector(e => xw(e) ?? void 0, deepEqual);
-  let g = sZ();
+  let g = useCurrentUserOrg();
   let f = useCurrentPlanUser("ExtensionPublishingModal");
   let A = useIsOrgMemberOrAdminUser(f).unwrapOr(!1);
   let y = useSelector(e => UU(e, existingExtension), deepEqual);
@@ -3430,7 +3430,7 @@ function ij(e) {
       userId: m.id,
       orgId: g?.id,
       localExtensionId: localExtension?.localFileId,
-      resourceType: isWidget ? vt.WIDGET : vt.PLUGIN,
+      resourceType: isWidget ? ResourceTypeNoComment.WIDGET : ResourceTypeNoComment.PLUGIN,
       resourceId: existingExtension?.id,
       isPaid: wC(x.fieldStates.price)
     },

@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { Us, M7 } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
@@ -28,7 +28,7 @@ export let $$w0 = registerModal(function (e) {
     teamId
   });
   let j = E9();
-  let k = oA(T.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
+  let k = getResourceDataOrFallback(T.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let E = T.data?.team?.teamFileCounts?.designFileCount ?? 0;
   let C = T.data?.team?.teamFileCounts?.whiteboardFileCount ?? 0;
   let I = useSelector(e => e.teams[teamId]);
@@ -51,7 +51,7 @@ export let $$w0 = registerModal(function (e) {
       size: "medium",
       children: [jsx("div", {
         className: "locked_team_usage_modal--modalBar--wjRk6",
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           className: "locked_team_usage_modal--modalCloseX--aPcCQ",
           svg: _$$A,
           onClick: A

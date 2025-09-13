@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { xf } from "../figma_app/416935";
 import { ks } from "../figma_app/637027";
@@ -41,7 +41,7 @@ let $$w0 = registerModal(function (e) {
   let C = () => v.tokens.filter(e => e.state === _$$d.ERROR).length > 0;
   return jsx(fu, {
     name: e0.CHANGE_BILLING_CONTACT_MODAL,
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: t,
       width: 341,
       children: jsxs(vo, {

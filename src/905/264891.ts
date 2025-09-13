@@ -4,7 +4,7 @@ import { F } from "../905/427107";
 import { getI18nString } from "../905/303541";
 import { dG } from "../figma_app/753501";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { H } from "../905/777871";
 import { oV, Zb } from "../905/706046";
 export function $$p0({
@@ -32,7 +32,7 @@ export function $$p0({
     htmlAttributes: {
       onMouseDown: dG,
       "data-tooltip": getI18nString("fullscreen.properties_panel.flip_gradient"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(F, {})
   });

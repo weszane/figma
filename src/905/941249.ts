@@ -4,7 +4,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { _J } from "../figma_app/314264";
+import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { N } from "../905/696711";
 import { _M, jx, wZ, OL } from "../figma_app/869776";
@@ -69,7 +69,7 @@ let $$A4 = createOptimistThunk((e, t) => {
   });
 });
 let $$y2 = createOptimistThunk((e, t) => {
-  _J("Team Join Link Copied", t.teamId, e.getState(), {
+  trackTeamEvent("Team Join Link Copied", t.teamId, e.getState(), {
     userId: e.getState().user?.id,
     teamJoinLink: t.url,
     resourceType: FResourceCategoryType.TEAM,

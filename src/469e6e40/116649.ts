@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { R as _$$R } from "../905/304671";
 import { i as _$$i } from "../469e6e40/549061";
 import { ps, oc, ZY } from "../figma_app/845611";
@@ -12,7 +12,7 @@ import { l as _$$l } from "../4452/447644";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { g as _$$g2 } from "../905/817247";
 import { MX, EQ } from "../figma_app/684446";
 import { useTeamPlanUser, useTeamPlanFeatures, useIsOrgAdminUser } from "../figma_app/465071";
@@ -55,7 +55,7 @@ export function $$D0({
   selectedTab: e
 }) {
   let t = useDispatch();
-  let a = sZ();
+  let a = useCurrentUserOrg();
   useSelector(({
     selectedView: e
   }) => e);
@@ -109,7 +109,7 @@ export function $$D0({
           avatarEditorState: S
         }), jsx("div", {
           className: "dashboard--handle--4QXt-",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontWeight: "regular",
             fontSize: 24,
             children: a.name

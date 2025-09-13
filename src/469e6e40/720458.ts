@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { vd, tM } from "../figma_app/637027";
 import { z as _$$z, Z } from "../905/306088";
-import { qc } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingOverlay } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -182,7 +182,7 @@ export function $$I0(e) {
   };
   let Y = R ? jsx(vd, {
     disabled: !0,
-    children: jsx(qc, {})
+    children: jsx(LoadingOverlay, {})
   }) : jsxs(Fragment, {
     children: [jsx(tM, {
       onClick: 1 !== M && q ? () => {
@@ -237,13 +237,13 @@ export function $$I0(e) {
       maxWidth: 380,
       children: L ? jsx("div", {
         className: "handle_asset_transfer_request_modal--loadingContainer--7cpm-",
-        children: jsx(qc, {})
+        children: jsx(LoadingOverlay, {})
       }) : T ? "pending" === T.status ? jsxs(Fragment, {
         children: [!T?.is_transfer_copy && 1 === M && jsx("div", {
           className: "handle_asset_transfer_request_modal--warningBanner--wMFwV",
           children: jsxs("div", {
             className: "handle_asset_transfer_request_modal--bannerLeft--36YoS",
-            children: [jsx(_$$B, {
+            children: [jsx(SvgComponent, {
               className: "handle_asset_transfer_request_modal--icon--THX6F",
               svg: _$$A
             }), jsx("div", {

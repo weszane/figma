@@ -33,8 +33,8 @@ import { F as _$$F } from "../905/241044";
 import { WN } from "../figma_app/638601";
 import { useCurrentFileKey, selectCurrentFile, selectOpenFileKey } from "../figma_app/516028";
 import { getUserId, selectCurrentUser } from "../905/372672";
-import { MV, m as _$$m, kT, Vk } from "../905/380385";
-import { E as _$$E } from "../905/632989";
+import { isCommentStateUpdatable, isCommentStateActive, ThreadType, isCommentStatePostable } from "../905/380385";
+import { ButtonPrimitive } from "../905/632989";
 import { q7, mc, b as _$$b, bL as _$$bL, Ov, ME, rm, wv, hE, r1 } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
@@ -43,8 +43,8 @@ import { W as _$$W } from "../905/569454";
 import { H as _$$H } from "../905/855344";
 import K from "classnames";
 import { I as _$$I } from "../figma_app/819288";
-import { B as _$$B } from "../905/714743";
-import { Ib } from "../905/129884";
+import { SvgComponent } from "../905/714743";
+import { KindEnum } from "../905/129884";
 import { HH } from "../figma_app/841415";
 import { Ro } from "../figma_app/805373";
 import { f as _$$f } from "../figma_app/750432";
@@ -93,7 +93,7 @@ import { L as _$$L2 } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { lQ } from "../905/934246";
 import { H_, z6, CU, $Q, a2 } from "../905/963340";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
@@ -327,7 +327,7 @@ function ex(e) {
     }));
   }, [h, onDeleteThread, onDeleteThreadCancel, onDeleteThreadComplete, thread]);
   let y = useMemo(() => {
-    if (_ === thread.comments[0].user_id && !thread.isCanvasMention && MV(thread.sidebarItemType)) return jsx(q7, {
+    if (_ === thread.comments[0].user_id && !thread.isCanvasMention && isCommentStateUpdatable(thread.sidebarItemType)) return jsx(q7, {
       onClick: b,
       children: renderI18nText("comments.delete_thread")
     }, "deleteThread");
@@ -337,7 +337,7 @@ function ex(e) {
     m && f && thread.isCanvasMention ? e.push(jsx(q7, {
       onClick: v,
       children: isUnread ? renderI18nText("comments.mark_as_read") : renderI18nText("comments.mark_as_unread")
-    }, "toggleUnreadCanvasMention")) : commentReceipts && f && !thread.isCanvasMention && _$$m(thread.sidebarItemType) && e.push(jsx(q7, {
+    }, "toggleUnreadCanvasMention")) : commentReceipts && f && !thread.isCanvasMention && isCommentStateActive(thread.sidebarItemType) && e.push(jsx(q7, {
       onClick: g,
       children: isUnread ? renderI18nText("comments.mark_as_read") : renderI18nText("comments.mark_as_unread")
     }, "toggleUnreadComment"));
@@ -415,25 +415,25 @@ let eS = memo(function (e) {
   let w = e.thread.attachments?.length || e.thread.comments.map(e => e.attachments?.length || 0).reduce((e, t) => e + t, 0) || 0;
   let j = e.avatars[0].avatar_user_handle;
   let k = e.hideResolve || !userCanResolveThread || isPendingFromSinatra;
-  let P = thread.sidebarItemType === kT.FEED_POST && !_$$y();
+  let P = thread.sidebarItemType === ThreadType.FEED_POST && !_$$y();
   let I = y ? jsx(HG, {
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       "aria-label": getI18nString("comments.unavailable_offline"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("comments.unavailable_offline"),
       "data-onboarding-key": "page-unavailable-offline",
       children: jsx("span", {
         "aria-hidden": "true",
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A
         })
       })
     })
   }) : jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("comments.unavailable_offline"),
     "data-onboarding-key": "page-unavailable-offline",
-    children: jsx(_$$B, {
+    children: jsx(SvgComponent, {
       svg: _$$A
     })
   });
@@ -462,7 +462,7 @@ let eS = memo(function (e) {
   let D = jsx(K0, {
     svg: isResolved ? _$$A4 : _$$A3,
     className: W()(isResolved ? "comments_row_presentation--resolvedButton--EJTu4 comments_row_presentation--button--wBibN" : !T && eb, e.isUnread ? "" : "comments_row_presentation--buttonRead--zeH0O"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": T ? getI18nString("comments.pinning.cannot_resolve") : isResolved ? getI18nString("comments.mark_as_unresolved") : getI18nString("comments.mark_as_resolved"),
     onClick: onChangeResolveState,
     onMouseDown: eN,
@@ -472,7 +472,7 @@ let eS = memo(function (e) {
   let A = jsx(K0, {
     svg: _$$A6,
     className: eb,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fig_feed.view_post"),
     onClick: openPostDetailModal,
     onMouseDown: eN
@@ -486,7 +486,7 @@ let eS = memo(function (e) {
       className: ey,
       ref: optionsMenuRef,
       children: S
-    })), e.thread.sidebarItemType === kT.FEED_POST && (y ? jsx(HG, {
+    })), e.thread.sidebarItemType === ThreadType.FEED_POST && (y ? jsx(HG, {
       className: ey,
       ref: optionsMenuRef,
       children: A
@@ -514,13 +514,13 @@ let eS = memo(function (e) {
         children: jsx(_$$H, {})
       }), jsxs("span", {
         className: "comments_row_presentation--commentHeader---8DED",
-        children: [e.thread.sidebarItemType === kT.FEED_POST && jsx(_$$B, {
+        children: [e.thread.sidebarItemType === ThreadType.FEED_POST && jsx(SvgComponent, {
           svg: _$$A5,
           className: "comments_row_presentation--postIcon--VsaAl"
         }), jsx(eo, {
           maxAvatarsShown: 4,
           avatars: e.avatars,
-          grayscale: !e.isUnread && e.thread.sidebarItemType !== kT.LITMUS_COMMENT_THREAD
+          grayscale: !e.isUnread && e.thread.sidebarItemType !== ThreadType.LITMUS_COMMENT_THREAD
         }), jsx("div", {
           className: manager.isOpen ? "comments_row_presentation--buttonsVisible--m7qED comments_row_presentation--buttons--qc-Yn" : "comments_row_presentation--buttons--qc-Yn",
           children: isUnavailable ? I : L
@@ -535,7 +535,7 @@ let eS = memo(function (e) {
         thread: e.thread,
         hideOrphanedState: e.hideOrphanedState,
         metaAddon: e.metaAddon?.(e.thread)
-      }), e.thread.sidebarItemType === kT.FEED_POST && jsxs("div", {
+      }), e.thread.sidebarItemType === ThreadType.FEED_POST && jsxs("div", {
         className: "comments_row_presentation--postThumbnailContainer--NjgZy",
         children: [jsx("img", {
           src: e.thread.feedPostThumbnail,
@@ -547,7 +547,7 @@ let eS = memo(function (e) {
           }
         }), e.thread.feedPostNumContent > 1 && jsx("div", {
           className: "comments_row_presentation--numContent--HmWiu comments_row_presentation--postThumbnailOverlay--pPIMf feed_post_popover_modal--postThumbnailOverlay--vDoKP",
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A2,
             className: "comments_row_presentation--overlayIcon--91i3d"
           })
@@ -557,7 +557,7 @@ let eS = memo(function (e) {
         messageMeta: e.thread.comments[0].message_meta,
         replyCount: C,
         attachmentCount: w,
-        postTitle: e.thread.sidebarItemType === kT.FEED_POST ? e.thread.feedPostTitle : void 0
+        postTitle: e.thread.sidebarItemType === ThreadType.FEED_POST ? e.thread.feedPostTitle : void 0
       })]
     })
   });
@@ -769,7 +769,7 @@ let e0 = memo(function (e) {
       }, [m, o, n, r]),
       onCanvasMentionCopyLink: S,
       openPostDetailModal: useCallback(() => {
-        e.sidebarItemType === kT.FEED_POST && o(showModalHandler({
+        e.sidebarItemType === ThreadType.FEED_POST && o(showModalHandler({
           type: _$$K,
           data: {
             postUuid: e.feedPostPublicUuid,
@@ -789,7 +789,7 @@ let e0 = memo(function (e) {
     b.current || !isActive || x || scrollableRef.current?.scrollToRow(H);
   }, [isActive, H, x, scrollableRef]);
   let ee = w?.id;
-  let et = useMemo(() => !!Vk(element.sidebarItemType) && (!_$$m(element.sidebarItemType) || (j && ee ? To(element, j, ee) : null)), [j, ee, element]);
+  let et = useMemo(() => !!isCommentStatePostable(element.sidebarItemType) && (!isCommentStateActive(element.sidebarItemType) || (j && ee ? To(element, j, ee) : null)), [j, ee, element]);
   let en = useHandleMouseEvent(`comment-sidebar-comment-${element.id}`, "click", onCommentSelect);
   let eo = _$$k2();
   let ea = WN();
@@ -1097,7 +1097,7 @@ function tp() {
   }, []);
   let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let _ = c1(f, "toggle-show-comments");
-  let v = am();
+  let v = trackFileEventWithUser();
   if (useEffect(() => {
     v("Properties Panel Comments Tab Settings Opened");
   }, [v]), !e || !t) return null;
@@ -1301,7 +1301,7 @@ function tb({
     children: [jsx(_$$d, {
       ...getTriggerProps(),
       "aria-label": getI18nString("comments.sort_filter"),
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         className: W()(m ? "comments_sidebar_header--sortButtonActive--sPnuw" : tf, manager.isOpen && t_),
         svg: m ? _$$A8 : _$$A7
       })
@@ -1356,7 +1356,7 @@ function tw(e) {
     className: "empty_state_message_view--emptyStateWrapper--QSOXE",
     children: jsxs("div", {
       className: "empty_state_message_view--emptyStateInner--XVxQ0",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: "empty_state_message_view--commentTool--lg4bm",
         svg: _$$A9
       }), jsx("div", {

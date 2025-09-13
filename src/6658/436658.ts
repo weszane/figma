@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { vF } from "../vendor/150583";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { getAtomMutate, setupResourceAtomHandler } from "../figma_app/566371";
 import { useSprigWithSampling } from "../905/99656";
 import { getI18nString } from "../905/303541";
@@ -61,7 +61,7 @@ export function $$E2({
       libraryKey: e,
       repositoryId: o?.id || ""
     });
-    let r = hC();
+    let r = trackDefinedFileEventWithStore();
     return useCallback(({
       suggestions: n,
       path: o,
@@ -87,7 +87,7 @@ export function $$E2({
     }, [directories, e, r]);
   }();
   let W = Xr(mO);
-  let Y = hC();
+  let Y = trackDefinedFileEventWithStore();
   let j = useCallback(e => {
     if (void 0 !== e) for (let o = e + 1; o < x.current.length; o++) {
       let e = n[o];

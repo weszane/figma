@@ -1,15 +1,16 @@
-import { z, Ip } from "../905/239603";
-import { M } from "../figma_app/70618";
-import { Ni } from "../figma_app/188152";
-import { FFileType, FTemplateCategoryType, FPublicationStatusType, FUserVerificationStatusType, FPublisherType } from "../figma_app/191312";
-import { xK, o1 } from "../figma_app/10554";
-import { n as _$$n, s as _$$s } from "../905/875063";
-import { q } from "../905/796201";
-import { Y } from "../905/344937";
-import { fe } from "../905/272080";
-import { UC, PN } from "../905/54385";
-import { P1, fE } from "../figma_app/809727";
-var $$h2 = (e => (e[e.FIGMA = FFileType.DESIGN] = "FIGMA", e[e.FIGJAM = FFileType.WHITEBOARD] = "FIGJAM", e[e.SLIDES = FFileType.SLIDES] = "SLIDES", e[e.SITES = FFileType.SITES] = "SITES", e[e.COOPER = FFileType.COOPER] = "COOPER", e[e.FIGMAKE = FFileType.FIGMAKE] = "FIGMAKE", e))($$h2 || {});
+import { z } from 'zod';
+import { ProductSource, ProductStatus } from '../905/54385';
+import { fe } from '../905/272080';
+import { Y } from '../905/344937';
+import { CommunityRatingStatsContainerSchema } from '../905/796201';
+import { n as _$$n, s as _$$s } from '../905/875063';
+import { o1, xK } from '../figma_app/10554';
+import { M } from '../figma_app/70618';
+import { Ni } from '../figma_app/188152';
+import { FFileType, FPublicationStatusType, FPublisherType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312';
+import * as Ip from '../figma_app/709165';
+import { fE, P1 } from '../figma_app/809727';
+var $$h2 = (e => (e[e.FIGMA = FFileType.DESIGN] = 'FIGMA', e[e.FIGJAM = FFileType.WHITEBOARD] = 'FIGJAM', e[e.SLIDES = FFileType.SLIDES] = 'SLIDES', e[e.SITES = FFileType.SITES] = 'SITES', e[e.COOPER = FFileType.COOPER] = 'COOPER', e[e.FIGMAKE = FFileType.FIGMAKE] = 'FIGMAKE', e))($$h2 || {});
 let $$g5 = z.object({
   id: z.string(),
   hub_file_id: z.string(),
@@ -55,13 +56,13 @@ let $$f3 = z.object({
   related_content: M(z.lazy(() => Ip.ignore($$f3))).optional(),
   verification_status: z.nativeEnum(FUserVerificationStatusType).optional(),
   commenting_is_restricted: z.boolean().optional(),
-  monetization_status: z.nativeEnum(UC).nullish(),
+  monetization_status: z.nativeEnum(ProductSource).nullish(),
   community_resource_payment: fe.optional(),
   support_contact: z.string().nullish(),
   published_site_url: z.string().nullish(),
   library_key: z.custom().optional(),
-  third_party_m10n_status: z.nativeEnum(PN).nullish()
-}).and(xK).and(_$$n).and(Y).and(q);
+  third_party_m10n_status: z.nativeEnum(ProductStatus).nullish()
+}).and(xK).and(_$$n).and(Y).and(CommunityRatingStatsContainerSchema);
 export function $$_7(e) {
   if (!e) return null;
   let t = e.current_hub_file_version_id;
@@ -85,19 +86,19 @@ export function $$A0(e) {
       createdAt: new Date(t.created_at)
     },
     publishingStatus: e.publishing_status,
-    libraryKey: e.library_key ?? "",
+    libraryKey: e.library_key ?? '',
     publishingStatusUpdatedAt: null,
     publishedByUser: null
   };
 }
-export var $$y6 = (e => (e[e.USER_UPLOADED = 0] = "USER_UPLOADED", e[e.USER_CANVAS = 1] = "USER_CANVAS", e[e.DEFAULT_CANVAS = 2] = "DEFAULT_CANVAS", e))($$y6 || {});
+export var $$y6 = (e => (e[e.USER_UPLOADED = 0] = 'USER_UPLOADED', e[e.USER_CANVAS = 1] = 'USER_CANVAS', e[e.DEFAULT_CANVAS = 2] = 'DEFAULT_CANVAS', e))($$y6 || {});
 export function $$b1(e) {
   if (!e) return null;
   let t = e.currentHubFileVersion;
   let i = {};
   t && (i[t.id] = {
     id: t.id,
-    hub_file_id: t.hubFileId ?? "",
+    hub_file_id: t.hubFileId ?? '',
     name: t.name,
     version: t.version,
     release_notes: t.releaseNotes,
@@ -114,17 +115,17 @@ export function $$b1(e) {
     publishing_status: e.publishingStatus,
     verification_status: e.verificationStatus,
     unpublished_at: e.unpublishedAt?.toISOString() ?? null,
-    current_hub_file_version_id: e.currentHubFileVersionId ?? "",
-    thumbnail_url: e.thumbnailUrl ?? "",
+    current_hub_file_version_id: e.currentHubFileVersionId ?? '',
+    thumbnail_url: e.thumbnailUrl ?? '',
     viewer_mode: e.viewerMode,
     community_publishers: $$v4(e)?.community_publishers ?? {
       accepted: []
     },
     creator: {
-      id: e.publishedByUser?.id ?? "",
-      handle: e.publishedByUser?.handle ?? "",
-      img_url: e.publishedByUser?.imgUrl ?? "",
-      description: e.publishedByUser?.description ?? ""
+      id: e.publishedByUser?.id ?? '',
+      handle: e.publishedByUser?.handle ?? '',
+      img_url: e.publishedByUser?.imgUrl ?? '',
+      description: e.publishedByUser?.description ?? ''
     },
     view_count: e.viewCount,
     like_count: e.likeCount,
@@ -157,14 +158,14 @@ export function $$v4(e) {
       current_user_is_followed: e.profile.currentUserIsFollowed,
       entity_type: function (e) {
         switch (e) {
-          case "user":
+          case 'user':
             return o1.USER;
-          case "team":
+          case 'team':
             return o1.TEAM;
-          case "org":
+          case 'org':
             return o1.ORG;
           default:
-            throw Error(`Failed to convert string to CommunityProfileEntityType str:${e}`);
+            throw new Error(`Failed to convert string to CommunityProfileEntityType str:${e}`);
         }
       }(e.profile.entityType),
       primary_user_id: e.profile.primaryUserId,
@@ -183,16 +184,16 @@ export function $$v4(e) {
 }
 function I(e) {
   switch (e) {
-    case "figma_partner":
+    case 'figma_partner':
       return _$$s.FIGMA_PARTNER;
-    case "trusted":
+    case 'trusted':
       return _$$s.TRUSTED;
-    case "creator_fund":
+    case 'creator_fund':
       return _$$s.CREATOR_FUND;
-    case "award_2023":
+    case 'award_2023':
       return _$$s.AWARD_2023;
     default:
-      throw Error(`Failed to convert string to CommunityBadges enum str:${e}`);
+      throw new Error(`Failed to convert string to CommunityBadges enum str:${e}`);
   }
 }
 export const B4 = $$A0;
@@ -202,4 +203,4 @@ export const NS = $$f3;
 export const Se = $$v4;
 export const V_ = $$g5;
 export const mN = $$y6;
-export const oA = $$_7; 
+export const oA = $$_7;

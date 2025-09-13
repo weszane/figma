@@ -5,13 +5,13 @@ import { convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
 import { colorToHex } from "../905/436288";
 import { generateRecordingKey } from "../figma_app/878298";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { X } from "../905/190511";
 import { sD } from "../905/937198";
 import { dG } from "../figma_app/753501";
 import { u as _$$u } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J } from "../905/225412";
 import { eF } from "../figma_app/394327";
 import { s as _$$s } from "../figma_app/268276";
@@ -77,7 +77,7 @@ export function $$x1({
       htmlAttributes: {
         onMouseDown: dG,
         "data-tooltip": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
-        "data-tooltip-type": Ib.TEXT
+        "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(U, {})
     })
@@ -109,9 +109,9 @@ function S({
       selected: p,
       hasFocus: m,
       styleIcon: A || jsx("div", {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("variables.variable_was_deleted"),
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           className: Bx,
           svg: _$$A
         })

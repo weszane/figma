@@ -1,6 +1,6 @@
 import { debugState } from "../905/407919";
 import { generateUUIDv4 } from "../905/871474";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 let s = class e {
   constructor(e, t) {
     this.sessionId = generateUUIDv4();
@@ -24,13 +24,13 @@ let s = class e {
     return this.activeSessions.get(e);
   }
   trackOpened() {
-    ds("code_editor_opened", this.fileKey, debugState.getState(), {
+    trackFileEvent("code_editor_opened", this.fileKey, debugState.getState(), {
       codeEditorSessionId: this.sessionId,
       codeFileId: this.codeFileId
     });
   }
   trackClosed() {
-    ds("code_editor_closed", this.fileKey, debugState.getState(), {
+    trackFileEvent("code_editor_closed", this.fileKey, debugState.getState(), {
       codeEditorSessionId: this.sessionId,
       codeFileId: this.codeFileId,
       hasErrors: this.hasErrors,

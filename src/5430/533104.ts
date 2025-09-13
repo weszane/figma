@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/197638";
 import { R } from "../5430/455826";
 import { renderI18nText } from "../905/303541";
@@ -46,7 +46,7 @@ export function $$$$_1({
         children: renderI18nText("community.resource_page.about")
       }), jsx($$m0, {
         description: e
-      }), !a && p && jsx(E, {
+      }), !a && p && jsx(ButtonPrimitive, {
         className: $$u,
         onClick: () => {
           _(!0);
@@ -55,7 +55,7 @@ export function $$$$_1({
       })]
     }), a && jsx("div", {
       className: "truncated_description_view--readMoreWrapper--4ruCR text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-      children: jsx(E, {
+      children: jsx(ButtonPrimitive, {
         className: $$u,
         onClick: () => {
           _(!1);

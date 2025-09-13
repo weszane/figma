@@ -22,7 +22,7 @@ import { getI18nString } from "../905/303541";
 import { Dy } from "../figma_app/925970";
 import { B as _$$B } from "../1291/448960";
 import { b as _$$b2 } from "../figma_app/300024";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { s as _$$s2 } from "../1291/549862";
 import { I as _$$I } from "../905/542485";
 import { lW } from "../figma_app/370763";
@@ -156,7 +156,7 @@ function z({
   children: l,
   recordingKey: o
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     onClick: e,
     className: "slides_overflow_inserts--button--y9IJK",
     recordingKey: o,

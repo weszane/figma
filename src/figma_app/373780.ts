@@ -17,14 +17,14 @@ import { e as _$$e } from "../905/810168";
 import { k4 } from "../figma_app/290668";
 import { UK } from "../figma_app/740163";
 import { gf } from "../figma_app/682945";
-import { QZ, _X } from "../figma_app/62612";
+import { computeFullscreenViewportForNode, getViewportInfo } from "../figma_app/62612";
 import { getObservableValue, subscribeObservable, getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { lQ } from "../905/934246";
-import { A as _$$A2 } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { c1 } from "../figma_app/357047";
 import { Q as _$$Q } from "../905/249555";
-import { Td } from "../905/595131";
+import { useIsCanvasEditDisabled } from "../905/595131";
 import { EO, q4, dl, xR, U3, sh, qJ, ZG, it } from "../figma_app/536669";
 import { documentStateTsApi, AccessibilityHelpers, AppMode, AppStateTsApi, SelectionMode, DesignGraphElements, CustomFocusHelpers, Fullscreen, SceneGraphHelpers, SceneNodeCpp, NodeTsApi, StateSourceType, LayoutTabType } from "../figma_app/763686";
 import { deepEqual } from "../905/382883";
@@ -63,7 +63,7 @@ function O({
   children: e
 }) {
   let [t, r] = useState(null);
-  let a = _$$A2(() => r(!0), 500);
+  let a = useDebouncedCallback(() => r(!0), 500);
   let s = t ? lQ : a;
   useEffect(s);
   return t && jsx("div", {
@@ -102,7 +102,7 @@ function z({
   let c = Fk(e => e.getCurrentPage()?.guid);
   let u = c ? documentStateTsApi.getActiveDocument() : void 0;
   let p = useRef({});
-  let _ = _$$A2(() => {
+  let _ = useDebouncedCallback(() => {
     if (!c) return;
     let e = documentStateTsApi.getActiveDocument();
     let t = AccessibilityHelpers.flushChangedNodes(e);
@@ -444,7 +444,7 @@ function eE({
   let d = useRef(null);
   let c = _$$s2();
   let u = useCallback(t => {
-    t.target !== t.currentTarget || t.relatedTarget === t.currentTarget || n || (replaceSelection([e]), fullscreenValue.commit(), l(QZ({
+    t.target !== t.currentTarget || t.relatedTarget === t.currentTarget || n || (replaceSelection([e]), fullscreenValue.commit(), l(computeFullscreenViewportForNode({
       nodeId: e,
       ...B5
     }), tp));
@@ -1255,7 +1255,7 @@ function e8() {
     let s = useMemo(() => SceneNodeCpp && NodeTsApi?.exists(StateSourceType.REDUX) ? SceneNodeCpp.getSelectedTextRange(StateSourceType.REDUX)?.textNodeId : null, []);
     let o = n || s;
     useEffect(() => {
-      o && getLastEventWasTab() && t(QZ({
+      o && getLastEventWasTab() && t(computeFullscreenViewportForNode({
         nodeId: o,
         ...B5
       }), tp);
@@ -1325,7 +1325,7 @@ function e6({
   accessibleAreaRef: t,
   loadAction: r
 }) {
-  let o = _X({
+  let o = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   !function () {
@@ -1407,7 +1407,7 @@ function e6({
     trailing: !0
   });
   let _ = getObservableOrFallback(UK().accessibilityDomDebug);
-  let m = Td();
+  let m = useIsCanvasEditDisabled();
   gf();
   let f = useDispatch();
   useEffect(() => {

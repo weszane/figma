@@ -6,8 +6,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import c from "../vendor/635";
-import { A as _$$A } from "../vendor/90566";
-import { am } from "../figma_app/901889";
+import { useDebouncedCallback } from "use-debounce";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { useLatestRef } from "../figma_app/922077";
 import { reportError } from "../905/11";
 import { Point } from "../905/736624";
@@ -23,13 +23,13 @@ import { Zz } from "../figma_app/12220";
 import { E as _$$E } from "../905/617605";
 import { sT } from "../figma_app/740163";
 import { Z as _$$Z } from "../905/104740";
-import { PD, Z0, HD, ni, D6 } from "../figma_app/62612";
+import { useViewportWithDelta, viewportToScreen, addRectOffset, getBasicViewportRect, useFullscreenViewportUpdates } from "../figma_app/62612";
 import { BI } from "../figma_app/546509";
 import { selectCurrentUser } from "../905/372672";
 import { o3, nt } from "../905/226610";
 import { getObservableValue } from "../figma_app/84367";
 import { viewportNavigatorContext } from "../figma_app/298911";
-import { hm, kT } from "../905/380385";
+import { NEW_COMMENT_ID, ThreadType } from "../905/380385";
 import { v as _$$v } from "../905/99004";
 import { s as _$$s } from "../905/518538";
 import { R as _$$R } from "../905/780757";
@@ -116,7 +116,7 @@ let er = memo(function (e) {
   let J = useSelector(e => e.mirror.appModel.currentTool);
   let ee = getObservableValue(AppStateTsApi?.editorState().handToolTemporarilyEnabled, !1);
   let et = BI();
-  let eo = e.activeThread?.id === hm;
+  let eo = e.activeThread?.id === NEW_COMMENT_ID;
   let er = eo ? null : e.activeThread?.id || null;
   let el = useSelector(e => e.comments.emphasizedPinIds);
   let {
@@ -124,7 +124,7 @@ let er = memo(function (e) {
     deltaOffsetX,
     deltaOffsetY,
     deltaZoomScale
-  } = PD({
+  } = useViewportWithDelta({
     subscribeToUpdates_expensive: t
   });
   let {
@@ -173,7 +173,7 @@ let er = memo(function (e) {
     }));
     T.setHovering(null);
   }, [T, P]);
-  let eH = am();
+  let eH = trackFileEventWithUser();
   let eV = useCallback((e, t) => ev ? () => Promise.resolve(ex("COMMENT_PIN_CLICK")) : async () => {
     eH("Comment Cluster Clicked", {
       clusterSize: t.length,
@@ -196,14 +196,14 @@ let er = memo(function (e) {
     if (!n) return;
     let o = T.getViewportInfo();
     let a = z.current.getPinViewportRect(n.id);
-    let i = Z0(o, a);
+    let i = viewportToScreen(o, a);
     let s = {
       x: i.x + a.height / 2,
       y: i.y - a.width / 2,
       height: 0,
       width: 0
     };
-    let r = HD(s, o);
+    let r = addRectOffset(s, o);
     P(j7({
       type: Z7,
       data: {
@@ -213,7 +213,7 @@ let er = memo(function (e) {
     }));
   }, [P, T, eD]);
   let ez = z.current;
-  let eZ = ni();
+  let eZ = getBasicViewportRect();
   let e$ = useCallback(e => {
     if (ez) {
       if ("function" != typeof ez.onViewportUpdate) {
@@ -230,7 +230,7 @@ let er = memo(function (e) {
   useEffect(() => {
     t && e$(T.getViewportInfo());
   }, [e$, t, T]);
-  D6({
+  useFullscreenViewportUpdates({
     subscribeToUpdates_expensive: t
   }, e$);
   useEffect(() => {
@@ -277,17 +277,17 @@ let er = memo(function (e) {
       numAttachments: e.comments.map(e => e.attachments?.length || 0).reduce((e, t) => e + t, 0),
       isPinnedToFile: U6() ? !!e.commentPin : void 0
     };
-    return e.sidebarItemType === kT.COMMENT_THREAD ? {
+    return e.sidebarItemType === ThreadType.COMMENT_THREAD ? {
       ...r,
-      type: kT.COMMENT_THREAD
-    } : e.sidebarItemType === kT.FEED_POST ? {
+      type: ThreadType.COMMENT_THREAD
+    } : e.sidebarItemType === ThreadType.FEED_POST ? {
       ...r,
-      type: kT.FEED_POST,
+      type: ThreadType.FEED_POST,
       feedPostTitle: e.feedPostTitle,
       pinVerticalStagger: e.pinVerticalStagger
-    } : e.sidebarItemType === kT.LITMUS_COMMENT_THREAD ? {
+    } : e.sidebarItemType === ThreadType.LITMUS_COMMENT_THREAD ? {
       ...r,
-      type: kT.LITMUS_COMMENT_THREAD
+      type: ThreadType.LITMUS_COMMENT_THREAD
     } : void throwTypeError(e);
   }, [n, eF, eB, eU]);
   let eW = useMemo(() => e.threads.reduce((e, t) => {
@@ -347,7 +347,7 @@ let er = memo(function (e) {
       hasJumped: 1 === e
     });
   }, [T]);
-  let e6 = _$$A(e4, m.rebuildClustersZoomDelay);
+  let e6 = useDebouncedCallback(e4, m.rebuildClustersZoomDelay);
   let e7 = useMemo(() => {
     let e = e3(eW, eE.viewport);
     e.applyInstant = eE.hasJumped;

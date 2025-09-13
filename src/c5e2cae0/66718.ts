@@ -7,7 +7,7 @@ import { XHR } from "../905/910117";
 import { Jn } from "../905/17223";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { Lf, VE, Kz, tM, vd } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { fu } from "../figma_app/831799";
@@ -84,7 +84,7 @@ let w = registerModal(function ({
         className: "upgrade_contact_sales_modal--successModalWrapper--xA5Mp",
         children: [jsxs("div", {
           className: "upgrade_contact_sales_modal--successModalTitle--Xgt1f upgrade_contact_sales_modal--modalTitle--7k87R text--fontPos13--xW8hS text--_fontBase--QdLsd",
-          children: [jsx(B, {
+          children: [jsx(SvgComponent, {
             className: "upgrade_contact_sales_modal--successIcon---zT4I",
             svg: _$$A2
           }), renderI18nText("universal_upgrade.contact_sales.thank_you")]
@@ -211,7 +211,7 @@ export function $$E0(e) {
             },
             required: !0,
             children: a
-          }), jsx(B, {
+          }), jsx(SvgComponent, {
             className: nO,
             svg: _$$A
           })]

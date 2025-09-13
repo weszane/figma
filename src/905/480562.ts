@@ -23,9 +23,9 @@ import { o as _$$o } from "../905/918279";
 import { k as _$$k2 } from "../905/443820";
 import { A as _$$A } from "../905/920142";
 import { G5, S6 } from "../figma_app/795674";
-import { B as _$$B2 } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Ph } from "../905/160095";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { PT } from "../905/669853";
 import { A as _$$A2 } from "../1617/380980";
 import { resourceUtils } from "../905/989992";
@@ -411,7 +411,7 @@ class eg extends PureComponent {
           className: H,
           "data-tooltip-show-above": !0,
           "data-tooltip-show-immediately": !0,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": [getI18nString("design_systems.libraries_modal.dsa_graph_tooltip", {
             numInsertions: e[r].value
           }), e[r].date.toLocaleDateString()].join("\n"),
@@ -484,9 +484,9 @@ class eg extends PureComponent {
               className: H,
               "data-tooltip-show-above": !0,
               "data-tooltip-show-immediately": !0,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": `No data before ${data.length > 0 ? L(data[data.length - 1].date) : L(new Date())}`,
-              children: jsx(_$$B2, {
+              children: jsx(SvgComponent, {
                 svg: _$$A2
               })
             })
@@ -1016,7 +1016,7 @@ function eO({
       className: H,
       "data-tooltip-show-above": !0,
       "data-tooltip-show-immediately": !0,
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip-dsa-graph-num-insertions": e[o].value,
       "data-tooltip-dsa-graph-date-string": e[o].date.toLocaleDateString(),
       "data-tooltip": eS,

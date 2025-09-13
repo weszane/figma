@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from "react";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var $$a0 = (e => (e[e.NEVER = 0] = "NEVER", e[e.ALWAYS = 1] = "ALWAYS", e[e.WHEN_TRUNCATED = 2] = "WHEN_TRUNCATED", e))($$a0 || {});
 export function $$s1(e, t, i) {
   let [a, s] = useState(1 === t);
@@ -11,7 +11,7 @@ export function $$s1(e, t, i) {
     d("function" == typeof e ? e(n) : e);
   }, [i, t, e]);
   return a && "" !== l ? {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": l
   } : {};
 }

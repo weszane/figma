@@ -15,7 +15,7 @@ import { DevModeActivity } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { j } from '../figma_app/172303';
 import { FEventType } from '../figma_app/191312';
-import { ds } from '../figma_app/314264';
+import { trackFileEvent } from '../figma_app/314264';
 import { S7 } from '../figma_app/379850';
 import { fullscreenValue } from '../figma_app/455680';
 import { canAccessFullDevMode } from '../figma_app/473493';
@@ -36,7 +36,7 @@ function w({
   isEdited: d
 }) {
   let c = debugState.getState();
-  ds('dev_handoff_edit_status', c.openFile?.key, c, {
+  trackFileEvent('dev_handoff_edit_status', c.openFile?.key, c, {
     status: e,
     prevStatus: t,
     source: r,
@@ -81,7 +81,7 @@ async function O(e, t, r, n, d) {
       reportError(_$$e.DEVELOPER_TOOLS, new Error(`[Dev mode activity] Error creating activity: ${e.stack}`));
     }).$$finally(() => {
       let t = performance.now() - g;
-      ds('dev_handoff_status_activity', h, _, {
+      trackFileEvent('dev_handoff_status_activity', h, _, {
         elapsedMs: t,
         status: r,
         source: n,
@@ -214,10 +214,10 @@ export async function $$P0({
       fileHasCurrentTeamUser: !!s?.currentTeamUser,
       hasEditRole: s?.hasEditRole?.data
     };
-    ds('temp_debug_set_status_view_only', s?.key, d, o);
+    trackFileEvent('temp_debug_set_status_view_only', s?.key, d, o);
     let l = !1;
     setTimeout(() => {
-      l || ds('temp_debug_set_status_view_only_failed', s?.key, d, o);
+      l || trackFileEvent('temp_debug_set_status_view_only_failed', s?.key, d, o);
     }, 2e3);
     Multiplayer.sendSetNodeStatus(e, t, r ?? '', S);
     let [c] = await Promise.all([$$L(k, E), _$$n()]);

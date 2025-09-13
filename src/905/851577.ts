@@ -8,7 +8,7 @@ import { jD } from "../905/765855";
 import { O1, KD } from "../figma_app/317394";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection } from "../figma_app/741237";
-import { $$, Z0 } from "../figma_app/62612";
+import { applyOffsetToViewport, viewportToScreen } from "../figma_app/62612";
 import { L as _$$L } from "../figma_app/608876";
 import { T } from "../905/645480";
 import { M, Y } from "../figma_app/822893";
@@ -96,7 +96,7 @@ export function $$b0(e, t) {
       let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
       let n = new Point(e.clientX, e.clientY).subtract(i);
-      let r = $$(t, n);
+      let r = applyOffsetToViewport(t, n);
       return {
         shiftKey: e.shiftKey,
         metaKey: e.metaKey,
@@ -106,7 +106,7 @@ export function $$b0(e, t) {
     playbackMetadata: e => {
       let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
-      let n = Z0(t, e.canvasPosition);
+      let n = viewportToScreen(t, e.canvasPosition);
       let r = Point.add(n, i);
       return {
         shiftKey: e.shiftKey,
@@ -144,7 +144,7 @@ export function $$b0(e, t) {
       let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
       let n = new Point(e.clientX, e.clientY).subtract(i);
-      let r = $$(t, n);
+      let r = applyOffsetToViewport(t, n);
       return {
         shiftKey: e.shiftKey,
         metaKey: e.metaKey,
@@ -154,7 +154,7 @@ export function $$b0(e, t) {
     playbackMetadata: e => {
       let t = fullscreenValue.getViewportInfo();
       let i = new Point(t.x, t.y);
-      let n = Z0(t, e.canvasPosition);
+      let n = viewportToScreen(t, e.canvasPosition);
       let r = Point.add(n, i);
       return {
         shiftKey: e.shiftKey,

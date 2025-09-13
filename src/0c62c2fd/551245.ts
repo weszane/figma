@@ -5,10 +5,10 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
-import { R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { E9 } from "../figma_app/314264";
+import { trackFileBrowserFileClick } from "../figma_app/314264";
 import { getUserId } from "../905/372672";
 import { FContainerKindType } from "../figma_app/191312";
 import { DeleteWorkspacePinnedFileView } from "../figma_app/43951";
@@ -51,7 +51,7 @@ export function $$b0({
       await _$$p.deletePin({
         pinnedFileId: e
       });
-      E9("file_browser_file_unpinned_from_resource", pinnedFile.file, {
+      trackFileBrowserFileClick("file_browser_file_unpinned_from_resource", pinnedFile.file, {
         resourceId: pinnedFile.resourceId,
         resourceType: pinnedFile.resourceType,
         isPinCreator: pinnedFile.creator?.id === b,
@@ -65,7 +65,7 @@ export function $$b0({
       j(!1);
     }
   };
-  return jsx(R, {
+  return jsx(ConfirmationModal, {
     title: getI18nString("file_browser.pinning.delete_pin_modal.header"),
     confirmText: getI18nString("file_browser.pinning.delete_pin_modal.confirm"),
     onConfirm: I,

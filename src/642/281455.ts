@@ -2,7 +2,7 @@ import { PureComponent, useMemo, useRef } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { Uz } from '../905/63728';
 import { h as _$$h } from '../905/65944';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { getThemeContextOrDefault } from '../905/158740';
 import { isInvalidValue, isValidValue, MIXED_MARKER, normalizeValue } from '../905/216495';
 import { B as _$$B } from '../905/229357';
@@ -246,13 +246,13 @@ export function $$G0(e) {
           label: jsx(Label, {
             htmlAttributes: {
               'data-tooltip': getI18nString('fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports'),
-              'data-tooltip-type': Ib.TEXT
+              'data-tooltip-type': KindEnum.TEXT
             },
             children: renderI18nText('fullscreen.properties_panel.show_in_exports')
           }),
           htmlAttributes: {
             'data-tooltip': getI18nString('fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports'),
-            'data-tooltip-type': Ib.TEXT
+            'data-tooltip-type': KindEnum.TEXT
           }
         })
       }) : jsxs(fI, {
@@ -266,7 +266,7 @@ export function $$G0(e) {
         }), jsx(JU, {
           'className': 'background_panel--checkboxLabel--ITthj',
           'htmlFor': 'export-background-disabled',
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('fullscreen.properties_panel.include_the_canvas_or_group_background_in_exports'),
           'children': renderI18nText('fullscreen.properties_panel.show_in_exports')
         })]

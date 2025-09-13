@@ -8,12 +8,12 @@ import { reportError } from "../905/11";
 import { capitalize } from "../figma_app/930338";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { Cs } from "../905/420347";
 import { M4 } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { S as _$$S } from "../figma_app/787550";
-import { E as _$$E } from "../905/695476";
+import { linkMetadataHandlerInstance } from "../905/695476";
 import { k4, Yi } from "../figma_app/164212";
 let b = z.object({
   id: z.string(),
@@ -189,7 +189,7 @@ export async function $$A3({
 export async function $$x11(e) {
   let t;
   try {
-    let r = await _$$E.getLinkMetadata({
+    let r = await linkMetadataHandlerInstance.getLinkMetadata({
       text: e
     });
     let n = r?.data?.meta;
@@ -254,7 +254,7 @@ export async function $$C2({
       }
     }
   }, g);
-  return g.then(e => (ds("Dev Handoff Related Links Added New Link Success", r, debugState.getState(), {
+  return g.then(e => (trackFileEvent("Dev Handoff Related Links Added New Link Success", r, debugState.getState(), {
     nodeId: t,
     nodeType: a,
     source: c,
@@ -322,7 +322,7 @@ export function $$O1({
       }
     }
   }, m);
-  return m.then(r => (ds("Dev Handoff Related Links Edit Link Success", e, debugState.getState(), {
+  return m.then(r => (trackFileEvent("Dev Handoff Related Links Edit Link Success", e, debugState.getState(), {
     nodeId: t,
     nodeType: d,
     source: u,
@@ -371,7 +371,7 @@ export function $$L8({
       [r]: null
     }
   }, s);
-  return s.then(r => (ds("Dev Handoff Related Links Delete Link Success", e, debugState.getState(), {
+  return s.then(r => (trackFileEvent("Dev Handoff Related Links Delete Link Success", e, debugState.getState(), {
     nodeId: t,
     nodeType: n,
     source: a,

@@ -75,9 +75,9 @@ import { V as _$$V } from "../905/223084";
 import { Q as _$$Q } from "../figma_app/113686";
 import { Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { x as _$$x } from "../c5e2cae0/907085";
-import { _R } from "../figma_app/314264";
+import { PopulationStatus } from "../figma_app/314264";
 import { lB } from "../905/148137";
 import { S as _$$S3 } from "../9420/724099";
 import { ri } from "../905/190597";
@@ -233,7 +233,7 @@ function eB(e) {
       children: [jsx(eO, {
         name: "selected_saved_payment_method",
         trackingFieldName: "SelectExistingPaymentMethod",
-        trackingPopulationLevel: e.selectedPaymentMethod?.id && e.enableSavedPaymentMethods ? _R.POPULATED_COMPLETE : _R.NOT_POPULATED,
+        trackingPopulationLevel: e.selectedPaymentMethod?.id && e.enableSavedPaymentMethods ? PopulationStatus.POPULATED_COMPLETE : PopulationStatus.NOT_POPULATED,
         onChange: t => {
           let a = t.target.value;
           let s = e.paymentMethods.find(e => e.id === a);
@@ -243,7 +243,7 @@ function eB(e) {
         children: jsx(eD, {
           paymentMethods: e.paymentMethods
         })
-      }), jsx(_$$B, {
+      }), jsx(SvgComponent, {
         style: _$$sx.add({
           position: "absolute",
           right: "16px",

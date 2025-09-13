@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useRef, useState, useCallback } from "react";
 import { useStore } from "react-redux";
 import { K as _$$K } from "../905/443068";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { A as _$$A } from "../905/593436";
 import { C as _$$C } from "../905/520159";
 import { A as _$$A2 } from "../905/251970";
@@ -17,7 +17,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { Dm } from "../figma_app/8833";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { C as _$$C2 } from "../figma_app/523506";
 import { z } from "../905/654860";
 import { y as _$$y } from "../905/263077";
@@ -187,7 +187,7 @@ export function $$H3({
   let ea = qI();
   let es = document.activeElement?.tagName === "TEXTAREA";
   kz(Uz.TAB, e => {
-    J && (!ea || es) && (e.preventDefault(), r(l), ds("actions_prompt_tab_completed", ei.openFile?.key, ei, {
+    J && (!ea || es) && (e.preventDefault(), r(l), trackFileEvent("actions_prompt_tab_completed", ei.openFile?.key, ei, {
       feature: A,
       suggestion: l
     }));
@@ -305,12 +305,12 @@ export function $$H3({
         promptHistory: _,
         onChange: r,
         textAreaRef: X
-      }), er && u.map((e, t) => jsx($n, {
+      }), er && u.map((e, t) => jsx(Button, {
         variant: "secondary",
         onClick: () => {
           r(e.prompt);
           X.current?.focus();
-          A && ds("actions_prompt_suggestion_clicked", ei.openFile?.key, ei, {
+          A && trackFileEvent("actions_prompt_suggestion_clicked", ei.openFile?.key, ei, {
             feature: A,
             suggestion: e.prompt
           });

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { tH } from "../905/751457";
@@ -25,7 +25,7 @@ function h() {
     appendedClassName: Bg,
     children: [e ? getI18nString("fullscreen.error.generic_panel_error_desktop") : getI18nString("fullscreen.error.generic_panel_error_web"), jsx("div", {
       className: _$$s.mt8.$,
-      children: jsx($n, {
+      children: jsx(Button, {
         variant: "secondary",
         onClick: () => customHistory.reload("Reload due to properties panel error"),
         children: e ? getI18nString("fullscreen.error.reload_tab") : getI18nString("fullscreen.error.refresh_page")

@@ -3,7 +3,7 @@ import { K } from "../905/443068";
 import { U } from "../905/708285";
 import { getI18nString } from "../905/303541";
 import { u as _$$u, BQ } from "../figma_app/852050";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { DE } from "../figma_app/811257";
 import { u3 } from "../figma_app/152690";
 import { eF } from "../figma_app/394327";
@@ -41,7 +41,7 @@ export function $$$$m0() {
         "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
         recordingKey: "detachVisibilityVariable",
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip")
         },
         children: jsx(U, {})

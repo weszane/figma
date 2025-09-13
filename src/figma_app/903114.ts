@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB, wi, jk } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
@@ -19,7 +19,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { j as _$$j } from "../905/584270";
 import { l as _$$l, m as _$$m } from "../905/602189";
 import { JT, Qi, mb } from "../figma_app/847597";
@@ -111,7 +111,7 @@ function $$Z(e) {
   let q = f.key.type === FOrganizationLevelType.TEAM && !y && w === FBillingPeriodType.YEAR && e.planUser.currentSeatType === ProductAccessTypeEnum.EXPERT && a === ProductAccessTypeEnum.DEVELOPER && D[ProductAccessTypeEnum.DEVELOPER] < 1;
   return jsx(fu, {
     name: "Modify Plan User Seat Modal",
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       height: "dynamic",
       manager: t,
       width: "lg",
@@ -347,7 +347,7 @@ function et({
   let r = null;
   return (e && t ? r = getI18nString("modify_plan_user_seat_modal.error.missing_pricing_and_seat_avability") : e ? r = getI18nString("modify_plan_user_seat_modal.error.missing_seat_availability") : t && (r = getI18nString("modify_plan_user_seat_modal.error.missing_pricing")), r) ? jsx("div", {
     "data-testid": "modify-seat-modal-error-message",
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: "danger",
       children: r
     })
@@ -375,14 +375,14 @@ function er({
       className: "x78zum5 x6s0dn4",
       children: i && jsxs(Fragment, {
         children: [u && jsxs(Fragment, {
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             color: "secondary",
             children: getI18nString("modify_plan_user_seat_modal.role", {
               jobTitle: lb(l)
             })
           }), jsx("div", {
             className: "x2lah0s xuxw1ft xt9pc3i",
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: "secondary",
               "aria-hidden": "true",
               children: " \xb7 "
@@ -394,16 +394,16 @@ function er({
           "data-tooltip-show-immediately": !0,
           "data-tooltip-hide-immediately": !0,
           className: "xujl8zx xev0dqp xykb3jb x5ek575 x1sxf85j xxk0z11 x78zum5 x6s0dn4 xilkfi8 x1cmmqis x11yfylt xjbqb8w xv2f06h x1ptam9a",
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             color: "secondary",
             children: mb(i)
           })
         }), c && jsxs(Fragment, {
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             color: "secondary",
             "aria-hidden": "true",
             children: " "
-          }), jsx(_$$E, {
+          }), jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("members_table.user_upgrade_date", {
               upgradeDate: c
@@ -411,7 +411,7 @@ function er({
           })]
         })]
       })
-    }), d && jsx(_$$E, {
+    }), d && jsx(TextWithTruncation, {
       color: "secondary",
       children: renderI18nText("modify_plan_user_seat_modal.last_active", {
         lastActiveAt: jsx(h1, {

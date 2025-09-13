@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback, useEffect, forwardRef, useLayoutEffect } from "react";
 import { lQ } from "../905/934246";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { J } from "../905/614223";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { useAtomValueAndSetter } from "../figma_app/27355";
@@ -15,7 +15,7 @@ import { $z, tf } from "../figma_app/831799";
 import { Yk } from "../figma_app/644079";
 import { DP } from "../905/640017";
 import { EE, lB } from "../figma_app/731583";
-import { _X, Yb } from "../figma_app/62612";
+import { getViewportInfo, scaleRect } from "../figma_app/62612";
 import { Jn } from "../905/927294";
 import { F_ } from "../905/748636";
 import { P7, gm as _$$gm, my } from "../905/383548";
@@ -26,7 +26,7 @@ var u = c;
 export let $$C7 = parsePxInt(W8e);
 export function $$w0(e) {
   let t = Yk();
-  let r = _X({
+  let r = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let n = useRef({
@@ -56,7 +56,7 @@ export function $$w0(e) {
       s(null);
       return;
     }
-    let i = Yb(r, n.current.absoluteBounds);
+    let i = scaleRect(r, n.current.absoluteBounds);
     let a = {
       x: i.x + r.x,
       y: i.y + r.y,
@@ -563,7 +563,7 @@ function U(e) {
   });
 }
 let B = tf(function (e) {
-  return jsx($n, {
+  return jsx(Button, {
     ...e,
     variant: "primary"
   });

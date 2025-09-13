@@ -3,7 +3,7 @@ import { useMemo, useEffect, useState } from "react";
 import { FontSourceType } from "../figma_app/763686";
 import { rO } from "../905/535224";
 import { XHR } from "../905/910117";
-import { B, V } from "../905/714743";
+import { SvgComponent, V } from "../905/714743";
 import { fj, Aw } from "../905/690539";
 import { q9 } from "../905/698759";
 let u = "font_preview--scaledFontPreview--hDNAV";
@@ -35,7 +35,7 @@ export function $$g0({
         });
       case FontSourceType.GOOGLE:
         if (i) {
-          if (e.previewSVG && !h(e.previewSVG) && !fj(e.family)) return jsx(B, {
+          if (e.previewSVG && !h(e.previewSVG) && !fj(e.family)) return jsx(SvgComponent, {
             className: u,
             svg: V(e.previewSVG)
           });
@@ -94,10 +94,10 @@ function _({
   let A = c && !h(c);
   return (useEffect(() => {
     g && (c && A ? t(1) : t(2));
-  }, [c, g, A, t]), e.previewPath && f[e.previewPath]) ? jsx(B, {
+  }, [c, g, A, t]), e.previewPath && f[e.previewPath]) ? jsx(SvgComponent, {
     className: u,
     svg: V(f[e.previewPath])
-  }) : g ? A ? jsx(B, {
+  }) : g ? A ? jsx(SvgComponent, {
     className: u,
     svg: V(c)
   }) : jsx("p", {

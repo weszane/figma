@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import n from "classnames";
 import { P as _$$P } from "../5430/455826";
 import { tM, vd } from "../figma_app/637027";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -118,7 +118,7 @@ function w({
           })]
         }), P && !$ && jsxs("div", {
           className: UD,
-          children: [D && jsx(kt, {
+          children: [D && jsx(LoadingSpinner, {
             className: u1
           }), jsx(tM, {
             onClick: G,

@@ -18,7 +18,7 @@ import { hideModal } from "../905/156213";
 import { no } from "../figma_app/701001";
 import { Tm, Zz, xk } from "../figma_app/952446";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { GQ } from "../figma_app/32128";
 import { Ao } from "../905/748636";
@@ -140,7 +140,7 @@ function R(e) {
         children: [renderI18nText("manage_memory_modal.show_memory_in_layers_panel"), jsx(K, {
           "aria-label": getI18nString("manage_memory_modal.show_memory_in_layers_panel_warning"),
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip-show-immediately": !0,
             "data-tooltip": getI18nString("manage_memory_modal.show_memory_in_layers_panel_warning")
           },

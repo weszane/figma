@@ -9,7 +9,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/217163";
 import { isInvalidValue } from "../905/216495";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $ } from "../905/330495";
 export function $$f0(e) {
   let {
@@ -57,7 +57,7 @@ export function $$f0(e) {
     href: url,
     newTab: !0,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": dataTooltip
     },
     className: "navigate_to_primary_component_icon--link--wMyz4 navigate_to_primary_component_icon--iconButton--6QIIs navigate_to_primary_component_icon--baseIconButton--ilwdm",
@@ -72,7 +72,7 @@ export function $$f0(e) {
     actionOnPointerDown: !0,
     recordingKey: generateRecordingKey(e, "findComponentButton", backingSymbolGUID),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": dataTooltip
     },
     children: ui3Icon

@@ -5,7 +5,7 @@ import { m as _$$m, y as _$$y } from "../9410/643761";
 import { PN } from "../figma_app/897289";
 import { Fe, uz } from "../905/284552";
 import { fullscreenValue } from "../figma_app/455680";
-import { qc, _X } from "../figma_app/62612";
+import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
 import { wA } from "../figma_app/167249";
 import { S } from "../figma_app/787550";
 var r;
@@ -40,7 +40,7 @@ let y = 1 / 15;
 export function $$b2(e) {
   let [t, i] = useState(!0);
   let r = v(e);
-  let a = qc(_X({
+  let a = getVisibleArea(getViewportInfo({
     subscribeToUpdates_expensive: !1
   }));
   useEffect(() => {
@@ -55,7 +55,7 @@ export function $$C0(e, {
 } = {}) {
   let [i, r] = useState(!0);
   let a = v(e);
-  let s = _X({
+  let s = getViewportInfo({
     subscribeToUpdates_expensive: !1
   });
   useEffect(() => {

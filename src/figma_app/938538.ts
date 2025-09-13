@@ -1,11 +1,11 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useContext, useCallback } from "react";
 import { lQ } from "../905/934246";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import l from "classnames";
 import { dG } from "../figma_app/753501";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Yq } from "../figma_app/769863";
 import { sg } from "../figma_app/48566";
 var d = l;
@@ -21,7 +21,7 @@ export function $$g0(e) {
   let l = useCallback(e => {
     !o && ["Space", "Enter"].includes(e.code) && (e.preventDefault(), onClick(), Yq(e));
   }, [o, onClick]);
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ref: r,
     "aria-disabled": o,
     "aria-hidden": o,
@@ -37,7 +37,7 @@ export function $$g0(e) {
     htmlAttributes: {
       "data-onboarding-key": e.onboardingKey,
       "data-testid": e["data-testid"],
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": e.tooltipText,
       "data-tooltip-shortcut": e.tooltipShortcut,
       "data-tooltip-show-above": !0,
@@ -82,7 +82,7 @@ export function $$f1({
     "data-tooltip": e,
     "data-tooltip-shortcut": t,
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     id: b,
     onClick: A,
     onMouseDown: l ? lQ : v,

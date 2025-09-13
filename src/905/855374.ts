@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { h4, Nz, hh } from "../905/417232";
 import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey, useHandleMouseEvent, useHandleGenericEvent, useHandleInputEvent } from "../figma_app/878298";
@@ -36,7 +36,7 @@ import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c$, wv, l4, gw } from "../figma_app/236327";
 import { Cf } from "../905/504727";
 import { tq as _$$tq, lo } from "../905/386270";
@@ -72,7 +72,7 @@ import { VZ } from "../905/959568";
 import { Gx } from "../figma_app/260445";
 import { He, ED, kL, ok, qr } from "../905/24780";
 import { fr } from "../905/530789";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k3 } from "../905/44647";
 import { O as _$$O2 } from "../905/969533";
 import { toggleElement } from "../figma_app/656233";
@@ -86,8 +86,8 @@ import { dG, wo } from "../figma_app/753501";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { J as _$$J2 } from "../905/125993";
 import { debugState } from "../905/407919";
-import { B as _$$B2 } from "../905/714743";
-import { GS } from "../figma_app/314264";
+import { SvgComponent } from "../905/714743";
+import { trackDefinedFileEvent } from "../figma_app/314264";
 import { l6, c$ as _$$c$ } from "../905/794875";
 import { setupToggleButton } from "../905/167712";
 import { C as _$$C } from "../905/771975";
@@ -121,7 +121,7 @@ import { j$ } from "../figma_app/238665";
 import { O as _$$O4 } from "../905/301080";
 import { p as _$$p } from "../905/673591";
 import { al } from "../905/176258";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { x as _$$x2 } from "../905/587214";
 import { H as _$$H } from "../905/404052";
 import { e as _$$e2 } from "../905/428849";
@@ -321,7 +321,7 @@ function J({
         onClick: l,
         recordingKey: generateRecordingKey(o, "createToken"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("variables.edit_modal.add_code_syntax")
         },
         children: jsx(_$$e, {})
@@ -421,7 +421,7 @@ function ee({
           recordingKey: generateRecordingKey(s, "removeButton"),
           onClick: _,
           htmlAttributes: {
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("variables.edit_modal.remove_code_syntax")
           },
           children: jsx(_$$O, {})
@@ -561,7 +561,7 @@ function ed(e) {
         onClick: e.clearVariableOverride,
         recordingKey: generateRecordingKey(e.recordingKey, "clearOverrideButton"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
         },
         children: jsx(_$$m, {})
@@ -573,7 +573,7 @@ function ed(e) {
         },
         recordingKey: generateRecordingKey(e.recordingKey, "detachVariableButton"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("variables.authoring_modal.table.detach_alias")
         },
         children: jsx(_$$U2, {})
@@ -1524,7 +1524,7 @@ function tk({
   let I = _$$rN(useCallback(() => {
     i?.(!0);
     hide();
-    GS("reorder_collections.ds_reorder_variable_collection_menu_opened", v ?? "", b, {
+    trackDefinedFileEvent("reorder_collections.ds_reorder_variable_collection_menu_opened", v ?? "", b, {
       collection_id: e.node_id
     });
   }, [i, hide, v, b, e.node_id]), !!i);
@@ -1561,12 +1561,12 @@ function tk({
         "aria-label": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
         htmlAttributes: {
           "data-tooltip": getI18nString("variables.authoring_modal.more_variable_set_options_tooltip"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         recordingKey: generateRecordingKey(d, "moreOptionsButton"),
         onClick: () => {
           toggle();
-          GS("reorder_collections.ds_variable_collection_dropdown_opened", v ?? "", b, {
+          trackDefinedFileEvent("reorder_collections.ds_variable_collection_dropdown_opened", v ?? "", b, {
             collection_id: e.node_id
           });
         },
@@ -1600,7 +1600,7 @@ function tP({
     isEqual: (e, t) => e.node_id === t.node_id
   }), [t]);
   return jsxs(Fragment, {
-    children: [isExtension(e) && jsx(_$$B2, {
+    children: [isExtension(e) && jsx(SvgComponent, {
       svg: _$$A,
       className: "variables_modal_set_header--extendedSetIcon--wnidP",
       "data-tooltip": u ? getI18nString("variables.authoring_modal.extended_collection.extension_based_off_library_tooltip", {
@@ -1609,7 +1609,7 @@ function tP({
       }) : getI18nString("variables.authoring_modal.extended_collection.extension_based_off_local_tooltip", {
         collectionName: c?.name ?? getI18nString("variables.authoring_modal.extended_collection.missing_base_collection_name")
       }),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     }), m ? jsx(tR, {
       ariaLabel: getI18nString("variables.binding_ui.variable_set"),
       className: "variables_modal_set_header--picker--JfS-D",
@@ -1876,7 +1876,7 @@ let t$ = forwardRef(function ({
             ref: W,
             htmlAttributes: {
               "data-tooltip": getI18nString("variables.authoring_modal.edit_variable_button_tooltip"),
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-test-id": generateRecordingKey(e, "editVariableModalIcon")
             },
             children: jsx(_$$P4, {})
@@ -2136,7 +2136,7 @@ function t2({
       style: {
         "--group-indent-amount": `${16 * v}px`
       },
-      children: [!_ && e.subgroups.length > 0 && jsx(_$$E, {
+      children: [!_ && e.subgroups.length > 0 && jsx(ButtonPrimitive, {
         className: "variables_modal_sidebar--caret--SgjnT",
         onClick: a,
         recordingKey: generateRecordingKey(h, "groupCaret"),
@@ -2233,7 +2233,7 @@ let t8 = forwardRef(function ({
           onCancel: () => d?.(!1),
           originalValue: m
         })
-      }) : jsx(_$$E, {
+      }) : jsx(ButtonPrimitive, {
         className: "variables_modal_table_group_name--leafGroupNameWrapper--sv220",
         htmlAttributes: {
           onDoubleClick: () => d?.(!0)
@@ -2422,7 +2422,7 @@ function ie({
         onlyAllowDeletion: !!e
       }
     });
-    GS("reorder_modes.ds_variable_mode_dropdown_opened", ep ?? "", eu, {
+    trackDefinedFileEvent("reorder_modes.ds_variable_mode_dropdown_opened", ep ?? "", eu, {
       collection_id: C,
       mode_id: i
     });
@@ -2765,7 +2765,7 @@ function it({
                 "data-tooltip": en ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
                   modeLimit
                 }) : getI18nString("variables.authoring_modal.new_mode_tooltip"),
-                "data-tooltip-type": Ib.TEXT
+                "data-tooltip-type": KindEnum.TEXT
               },
               children: jsx(_$$e, {})
             })
@@ -2826,7 +2826,7 @@ function id({
 }) {
   let o = e.modes.length >= s;
   let l = o && !a(e.modes.length);
-  return t ? jsx($n, {
+  return t ? jsx(Button, {
     variant: "secondary",
     recordingKey: i,
     iconPrefix: jsx(_$$x2, {}),
@@ -2841,7 +2841,7 @@ function id({
       "data-tooltip": l ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
         modeLimit: s
       }) : getI18nString("variables.authoring_modal.new_mode_tooltip"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: renderI18nText("variables.authoring_modal.action_bar.new_mode")
   }) : null;
@@ -2856,7 +2856,7 @@ function ic({
 }) {
   return jsx(fr, {
     id: "action-bar-create-variable-button",
-    buttonComponent: forwardRef((e, t) => jsx($n, {
+    buttonComponent: forwardRef((e, t) => jsx(Button, {
       ...e,
       ref: t,
       variant: "primary",
@@ -3135,7 +3135,7 @@ let iD = forwardRef((e, t) => {
 function iL({
   onClick: e
 }) {
-  return jsx(_$$E, {
+  return jsx(ButtonPrimitive, {
     onClick: e,
     className: "xmauxvm xvy4d1p xxk0z11 xt0e3qv x1bh537i",
     "aria-hidden": !0,
@@ -4144,7 +4144,7 @@ export let $$i50 = registerModal(function () {
     hide,
     data
   } = BK("variables-modal-context-menu");
-  let B = _$$U();
+  let B = trackFileEventWithStore();
   let V = useCallback((e, n, r, a) => {
     t && actions.toggleEditVariableModal(null);
     let s = selectedVariableIDs;

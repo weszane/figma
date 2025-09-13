@@ -20,7 +20,7 @@ import { bG } from "../905/149328";
 import { generateUUIDv4 } from "../905/871474";
 import { R as _$$R } from "../905/307199";
 import { gw, wv } from "../figma_app/236327";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
@@ -30,7 +30,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { jr } from "../figma_app/896988";
 import { isValidValue, MIXED_MARKER, normalizeValue, isAutoMarker } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { D as _$$D } from "../905/225412";
 import { dD } from "../figma_app/941824";
 import { r as _$$r2 } from "../905/211029";
@@ -726,7 +726,7 @@ class et extends RecordingPureComponent {
     let t = this.props.role ?? "listbox";
     let i = this.props.tooltip ? {
       "data-tooltip": this.props.tooltip,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     } : {};
     if (this.isDisabled()) return jsx("div", {
       className: e,
@@ -841,7 +841,7 @@ function ei({
   icon: s
 }) {
   return jsxs(Fragment, {
-    children: [!e && !t && !i && (r ? jsx(_$$B, {
+    children: [!e && !t && !i && (r ? jsx(SvgComponent, {
       className: z6,
       svg: a || _$$A3
     }) : jsx("span", {
@@ -933,7 +933,7 @@ export class $$en1 extends RecordingPureComponent {
       }), this.props.rightLabel && jsx("span", {
         className: h()(ZM, this.props.rightLabelStyle),
         children: this.props.rightLabel
-      }), this.props.rightSettingsIcon, !this.props.ignoreCheck && !this.props.iconToReplaceCheck && this.props.rightCheck && this.props.selected && jsx(_$$B, {
+      }), this.props.rightSettingsIcon, !this.props.ignoreCheck && !this.props.iconToReplaceCheck && this.props.rightCheck && this.props.selected && jsx(SvgComponent, {
         className: JB,
         svg: this.props.checkSvg || _$$A3
       })]
@@ -991,7 +991,7 @@ class es extends PureComponent {
         onMouseDown: dG,
         onClick: dG,
         onWheel: this.onWheelIndicator,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: w$,
           svg: _$$A2
         })
@@ -1003,7 +1003,7 @@ class es extends PureComponent {
         onMouseDown: dG,
         onClick: dG,
         onWheel: this.onWheelIndicator,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           className: w$,
           svg: _$$A
         })

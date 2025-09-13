@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, createContext, useContext, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Fullscreen } from "../figma_app/763686";
 import d from "classnames";
 import { jB, My } from "../vendor/46587";
@@ -32,7 +32,7 @@ import { sf } from "../905/929976";
 import { isVsCodeEnvironment } from "../905/858738";
 import { _6 } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { P as _$$P } from "../905/647955";
 var c = d;
@@ -273,7 +273,7 @@ function Q({
             } = e;
             i.push(jsx("span", {
               className: "token instance-pill",
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("dev_handoff.inspect_panel.inspect_nested_component"),
               "data-id": id,
               children: name
@@ -300,7 +300,7 @@ function Q({
             }));
             i.push(jsx("span", {
               className: "token error-pill",
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": s,
               "data-id": id,
               children: getI18nString("dev_handoff.code_connect.error_pill_text")
@@ -369,7 +369,7 @@ function ee({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       ref: h,
       className: c()("bound-variable", A && "bound-variable-deleted", _ && "bound-variable-active"),
       onClick: g,
@@ -451,7 +451,7 @@ function et({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       ref: m,
       className: c()("bound-variable", C && "bound-variable-active"),
       onClick: w,
@@ -501,9 +501,9 @@ function ei({
     sentryTags: {
       area: _$$e.DEVELOPER_TOOLS
     },
-    children: jsx(_$$E, {
+    children: jsx(ButtonPrimitive, {
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("dev_handoff.code_panel.suggested_vars_tooltip", {
           count: f
         }),

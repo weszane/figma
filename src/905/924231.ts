@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { h as _$$h } from "../905/207101";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Rw } from "../figma_app/91703";
 import { E3 } from "../figma_app/976749";
 import { cW, $1 } from "../figma_app/844435";
@@ -11,7 +11,7 @@ import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { C3 } from "../figma_app/790714";
 import { createDeferredPromise } from "../905/263346";
 import { R as _$$R } from "../figma_app/612938";
-import { y as _$$y } from "../905/916933";
+import { waitForAllPagesForPlugin } from "../905/916933";
 import { handlePluginError } from "../905/753206";
 import { V } from "../905/480825";
 import { ch } from "../905/443517";
@@ -72,7 +72,7 @@ export function $$E0({
         };
         let {
           isCancelled
-        } = await _$$y(n);
+        } = await waitForAllPagesForPlugin(n);
         isCancelled || (n && (n.queryMode = !1, n.deferRunEvent = !1, n.parameterValues = i.parameters, w && (P(Rw({
           currentDisplayName: w,
           newCommand: {
@@ -107,7 +107,7 @@ export function $$E0({
   });
 }
 function x(e, t, i, r = nW) {
-  if (!i) return jsx(B, {
+  if (!i) return jsx(SvgComponent, {
     className: r,
     svg: _$$A,
     ariaLabel: "plugin icon"

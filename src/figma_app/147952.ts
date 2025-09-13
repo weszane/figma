@@ -10,7 +10,7 @@ import { n as _$$n } from "../figma_app/740025";
 import { Vi } from "../figma_app/364284";
 import { getPluginVersion, resolveFrameworkType } from "../figma_app/300692";
 import { gJ, ul } from "../figma_app/190980";
-import { bD, xQ } from "../figma_app/45218";
+import { ResourceType, isWidget } from "../figma_app/45218";
 import { dB, Lx } from "../905/862883";
 let $$f3 = createActionCreator("SET_RECENT_WHITEBOARD_TOOLS");
 let $$E25 = createOptimistThunk((e, t) => {
@@ -32,28 +32,28 @@ let $$T18 = createOptimistThunk((e, t) => {
 let $$I0 = createActionCreator("ADD_FACE_STAMP_TO_RECENTS");
 let $$S11 = createActionCreator("SYNC_RECENT_PLUGINS");
 let $$v1 = createOptimistThunk((e, t) => {
-  let r = gJ(t.storeInRecentsKey, bD.PLUGIN);
+  let r = gJ(t.storeInRecentsKey, ResourceType.PLUGIN);
   e.dispatch($$N5({
     storeInRecentsKey: t.storeInRecentsKey,
     recentResources: r
   }));
   let n = r.map(e => e.id);
   e.dispatch($$D9({
-    resourceType: bD.PLUGIN,
+    resourceType: ResourceType.PLUGIN,
     resourceIds: n
   }));
   e.dispatch($$S11(t));
 });
 let $$A19 = createActionCreator("SYNC_RECENT_WIDGETS");
 let $$x12 = createOptimistThunk((e, t) => {
-  let r = gJ(t.storeInRecentsKey, bD.WIDGET);
+  let r = gJ(t.storeInRecentsKey, ResourceType.WIDGET);
   e.dispatch($$C10({
     storeInRecentsKey: t.storeInRecentsKey,
     recentResources: r
   }));
   let n = r.map(e => e.id);
   e.dispatch($$D9({
-    resourceType: bD.WIDGET,
+    resourceType: ResourceType.WIDGET,
     resourceIds: n
   }));
   e.dispatch($$A19(t));
@@ -71,7 +71,7 @@ let $$D9 = createOptimistThunk((e, t) => {
 let $$k20 = createActionCreator("ADD_PLUGIN_TO_RECENTS");
 let $$M17 = createOptimistThunk((e, t) => {
   e.dispatch($$D9({
-    resourceType: bD.PLUGIN,
+    resourceType: ResourceType.PLUGIN,
     resourceIds: [t.id]
   }));
   t.skipPluginRun || G(t.id, t.currentUserId, e.getState().currentUserOrgId, e.getState().publishedPlugins[t.id], e.getState().recentlyUsed.plugins[t.storeInRecentsKey], !!t.isDevelopment, e.dispatch);
@@ -80,7 +80,7 @@ let $$M17 = createOptimistThunk((e, t) => {
 let $$F6 = createActionCreator("ADD_WIDGETS_TO_RECENTS");
 let $$j7 = createOptimistThunk((e, t) => {
   e.dispatch($$D9({
-    resourceType: bD.WIDGET,
+    resourceType: ResourceType.WIDGET,
     resourceIds: [t.id]
   }));
   t.skipPluginRun || G(t.id, t.currentUserId, e.getState().currentUserOrgId, e.getState().publishedWidgets[t.id], e.getState().recentlyUsed.widgets[t.storeInRecentsKey], !!t.isDevelopment, e.dispatch);
@@ -107,7 +107,7 @@ let G = (e, t, r, n, o, l, d) => {
 let $$V16 = (e, t) => r => {
   let n = getPluginVersion(e);
   let i = (n.manifest?.editorType ?? []).map(resolveFrameworkType);
-  let a = xQ(e) ? $$j7 : $$M17;
+  let a = isWidget(e) ? $$j7 : $$M17;
   i.forEach(i => r(a({
     storeInRecentsKey: i,
     id: e.id,
@@ -122,7 +122,7 @@ export function $$H8(e, t) {
     version: i,
     status: a
   }) => {
-    let s = t.resourceType === bD.PLUGIN ? $$L14 : $$P15;
+    let s = t.resourceType === ResourceType.PLUGIN ? $$L14 : $$P15;
     i && (r[n] = i);
     return e.dispatch(s({
       id: n,
@@ -132,7 +132,7 @@ export function $$H8(e, t) {
   };
   let i = [];
   if (t.resourceIds.forEach(a => {
-    let s = t.resourceType === bD.PLUGIN ? e.getState().installedPluginVersions.plugins[a] : void 0;
+    let s = t.resourceType === ResourceType.PLUGIN ? e.getState().installedPluginVersions.plugins[a] : void 0;
     if (s) {
       n({
         id: a,
@@ -141,7 +141,7 @@ export function $$H8(e, t) {
       });
       return;
     }
-    let o = t.resourceType === bD.PLUGIN ? e.getState().recentlyUsed.plugins.fetchedResources[a] : e.getState().recentlyUsed.widgets.fetchedResources[a];
+    let o = t.resourceType === ResourceType.PLUGIN ? e.getState().recentlyUsed.plugins.fetchedResources[a] : e.getState().recentlyUsed.widgets.fetchedResources[a];
     o && o.status !== Lx.NOT_FETCHED && o.status !== Lx.FETCHING && (o.status !== Lx.FETCHED || o.version) ? o.version && (r[a] = o.version) : i.push(a);
   }), !i.length) return Promise.resolve(r);
   i.forEach(e => {

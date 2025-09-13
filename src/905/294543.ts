@@ -1,10 +1,10 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { createOptimistThunk } from "../905/350402";
 import { gU } from "../figma_app/147952";
 import { cW } from "../figma_app/844435";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
 import { getUserId } from "../905/372672";
 import { s as _$$s } from "../905/506024";
@@ -31,13 +31,13 @@ export let $$A0 = createOptimistThunk((e, t) => {
     version: plugin.version,
     currentUserId: a
   }));
-  ds("Dev Mode Language Changed", i.openFile?.key, i, {
+  trackFileEvent("Dev Mode Language Changed", i.openFile?.key, i, {
     languageType: s.type,
     languageId: s.id
   });
 });
 export function $$y1() {
-  let e = U();
+  let e = trackFileEventWithStore();
   let t = cW();
   let i = useDispatch();
   let s = getUserId() ?? void 0;
@@ -63,7 +63,7 @@ export function $$y1() {
   }, [s, i, t, e]);
 }
 export function $$b2() {
-  let e = U();
+  let e = trackFileEventWithStore();
   return useCallback(t => {
     let i = _(t);
     e("Dev Mode Language Changed", {

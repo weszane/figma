@@ -18,7 +18,7 @@ import { JR } from "../figma_app/217457";
 import { h as _$$h } from "../figma_app/496854";
 import { jd } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
 import { OrgSharedSettingView, ExpOneClickAskToEditTeamView, ExpOneClickAskToEditOrgView, ExpSocialProofExpansionTeamView, ExpSocialProofExpansionOrgView } from "../figma_app/43951";
@@ -27,7 +27,7 @@ import { cD } from "../figma_app/598018";
 import { AccessLevelEnum } from "../905/557142";
 import { c as _$$c } from "../905/606579";
 import { w as _$$w } from "../905/917761";
-let L = () => !!dq();
+let L = () => !!useCurrentUserOrgId();
 export function $$P11() {
   let {
     getConfig
@@ -137,7 +137,7 @@ export function $$q36() {
   let t = useTeamPlanPublicInfo();
   let r = useIsStarterOrStudentPlan(t);
   let i = useTeamPlanUser().unwrapOr(null);
-  let a = dq();
+  let a = useCurrentUserOrgId();
   let s = !!a;
   let l = cD();
   let u = !s;

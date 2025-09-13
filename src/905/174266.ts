@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
-import { E } from "../905/632989";
-import { $n } from "../905/521428";
+import { ButtonPrimitive } from "../905/632989";
+import { Button } from "../905/521428";
 import { K } from "../905/443068";
 import { L } from "../905/704296";
 import { x } from "../905/404412";
@@ -138,7 +138,7 @@ export function $$S2({
   let o = useFplStrings("dismiss");
   let c = "ui2" === getThemeContextOrDefault().version;
   let u = () => i("dismiss");
-  return c ? jsx(E, {
+  return c ? jsx(ButtonPrimitive, {
     htmlAttributes: e,
     ...t,
     className: "toast__ui2DismissButton__clf9D",
@@ -167,7 +167,7 @@ export function $$w0({
   let c = (...e) => {
     !1 !== t?.(...e) && l("action");
   };
-  return d ? jsx(E, {
+  return d ? jsx(ButtonPrimitive, {
     ...a,
     htmlAttributes: i,
     className: "toast__ui2Button__OgkDa",
@@ -175,7 +175,7 @@ export function $$w0({
     children: e
   }) : jsx("div", {
     className: b,
-    children: jsx($n, {
+    children: jsx(Button, {
       ...a,
       htmlAttributes: i,
       onClick: c,

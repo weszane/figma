@@ -1,19 +1,19 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useId, useContext, useRef, useCallback, memo } from "react";
 import { K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { m as _$$m } from "../905/886380";
 import { o as _$$o } from "../905/949628";
 import { Ay } from "../figma_app/272902";
 import c from "classnames";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { D8 } from "../905/511649";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { i as _$$i } from "../figma_app/85949";
 import { SG } from "../figma_app/852050";
 import { BK } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { _X } from "../figma_app/260445";
 import { p as _$$p } from "../905/427409";
 import { v as _$$v, G as _$$G } from "../905/77111";
@@ -263,7 +263,7 @@ let $$w0 = forwardRef(function ({
     onMouseDownCapture: I,
     onContextMenu: S,
     "data-testid": l,
-    "data-tooltip-type": h ? Ib.TEXT : void 0,
+    "data-tooltip-type": h ? KindEnum.TEXT : void 0,
     "data-tooltip": h ?? void 0,
     children: s
   });
@@ -278,7 +278,7 @@ function O({
     onClick: e,
     recordingKey: t,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
     },
     children: jsx(_$$m, {})
@@ -290,19 +290,19 @@ function R({
   handlePickerOpen: r,
   recordingKey: i
 }) {
-  return e ? jsx(_$$E, {
+  return e ? jsx(ButtonPrimitive, {
     className: u()(AM, Ab),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("variables.binding_ui.detach_variable_tooltip")
     },
     "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
     onClick: t,
     children: jsx(_$$o, {})
-  }) : jsx(_$$E, {
+  }) : jsx(ButtonPrimitive, {
     className: UU,
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("fullscreen.properties_panel.apply_variable"),
       "data-test-id": generateRecordingKey("variable-control-icon", i ?? ""),
       tabIndex: -1
@@ -310,7 +310,7 @@ function R({
     "aria-label": getI18nString("fullscreen.properties_panel.apply_variable"),
     onClick: r,
     recordingKey: generateRecordingKey(i, "comboBoxButton"),
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg: $$default
     })
   });

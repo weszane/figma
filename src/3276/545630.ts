@@ -4,7 +4,7 @@ import { useDispatch, useSelector, useStore } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import c, { Point, expandRect } from "../905/736624";
 import { tH as _$$tH, H4 } from "../905/751457";
 import { handleAtomEvent } from "../905/502364";
@@ -22,17 +22,17 @@ import { t as _$$t } from "../905/656351";
 import { selectCurrentUser, selectUser, getUserId } from "../905/372672";
 import { zW, Qt } from "../905/162414";
 import { viewportNavigatorContext } from "../figma_app/298911";
-import { hm, kT, Dw, Eq, EB, m as _$$m } from "../905/380385";
+import { NEW_COMMENT_ID, ThreadType, ComposerType, NAVIGATION_BUTTONS, BusyReadyState, isCommentStateActive } from "../905/380385";
 import { p as _$$p } from "../figma_app/353099";
 import { xw, IN } from "../3276/297268";
 import { s as _$$s } from "../905/518538";
 import { hh } from "../figma_app/42945";
 import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
-import { A as _$$A } from "../vendor/90566";
+import { useDebouncedCallback } from "use-debounce";
 import { j7 } from "../905/929976";
 import { Z7, Dm, Uu } from "../figma_app/8833";
 import { k as _$$k2 } from "../figma_app/564183";
-import { Pl, _X, qc, kE, PD, Z0, HD, $$, th as _$$th, ni as _$$ni } from "../figma_app/62612";
+import { getViewportZoom, getViewportInfo, getVisibleArea, roundedDivision, useViewportWithDelta, viewportToScreen, addRectOffset, applyOffsetToViewport, memoizedRect, getBasicViewportRect } from "../figma_app/62612";
 import { getObservableValue } from "../figma_app/84367";
 import { n as _$$n } from "../3276/582222";
 import { Z5 as _$$Z } from "../figma_app/582377";
@@ -82,7 +82,7 @@ import { kc } from "../figma_app/740025";
 import { C_ as _$$C_ } from "../figma_app/290668";
 import { dP } from "../figma_app/740163";
 import { o3, nt as _$$nt } from "../905/226610";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { t as _$$t4 } from "../905/192333";
 import { l as _$$l } from "../905/348437";
 import { iZ as _$$iZ } from "../905/29425";
@@ -100,12 +100,12 @@ import { iX } from "../905/415545";
 import { ym } from "../905/807385";
 import { ue } from "../af221b13/476940";
 import { sO } from "../figma_app/21029";
-import { kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { Pf } from "../905/590952";
 import { showModalHandler } from "../905/156213";
 import { gX } from "../905/504768";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { FEditorType } from "../figma_app/53721";
 import { J as _$$J } from "../905/375499";
 import { HH } from "../figma_app/841415";
@@ -469,7 +469,7 @@ let eE = memo(function ({
   let {
     selectionBoxAnchor
   } = e;
-  let n = Pl({
+  let n = getViewportZoom({
     subscribeToUpdates_expensive: !!selectionBoxAnchor
   });
   if (!selectionBoxAnchor) return null;
@@ -767,7 +767,7 @@ function eL({
   disableFilteringPinsOnViewportChanges: f
 }) {
   let _ = useContext(viewportNavigatorContext);
-  let g = _X({
+  let g = getViewportInfo({
     subscribeToUpdates_expensive: l
   });
   let v = useMemo(() => _.getCommentsWrapperOffset(g), [_, g]);
@@ -808,8 +808,8 @@ function eL({
   }(i, y), [i, y]);
   let w = useMemo(() => {
     let e = function (e, t) {
-      let n = qc(t);
-      let o = kE(78, t.zoomScale);
+      let n = getVisibleArea(t);
+      let o = roundedDivision(78, t.zoomScale);
       let a = expandRect(n, o);
       return e.filter(({
         cluster: e
@@ -910,7 +910,7 @@ let eU = memo(function (e) {
   let _ = useAtomWithSubscription(_$$R);
   let g = BI();
   let v = useSelector(e => ![LayoutTabType.DESIGN_LAYOUT, LayoutTabType.WHITEBOARD_LAYOUT, LayoutTabType.HISTORY, LayoutTabType.PREVIEW, LayoutTabType.COMMENTS, LayoutTabType.DEV_HANDOFF, LayoutTabType.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== UserActionState.DEFAULT) && (!g || g?.shouldOptimizeForIpadApp && g?.shouldFadeCommentsDuringEdit);
-  let x = e.activeThread?.id === hm;
+  let x = e.activeThread?.id === NEW_COMMENT_ID;
   let y = x ? null : e.activeThread?.id || null;
   let C = useSelector(e => e.comments.emphasizedPinIds);
   let {
@@ -918,7 +918,7 @@ let eU = memo(function (e) {
     deltaOffsetX,
     deltaOffsetY,
     deltaZoomScale
-  } = PD({
+  } = useViewportWithDelta({
     subscribeToUpdates_expensive: t
   });
   let {
@@ -952,7 +952,7 @@ let eU = memo(function (e) {
     }));
     u.setHovering(null);
   }, [u, m]);
-  let ei = am();
+  let ei = trackFileEventWithUser();
   let es = useCallback((e, t) => () => {
     ei("Comment Cluster Clicked", {
       clusterSize: t.length,
@@ -973,14 +973,14 @@ let eU = memo(function (e) {
     let o = X(e);
     if (!o) return;
     let a = u.getViewportInfo();
-    let i = Z0(a, t);
+    let i = viewportToScreen(a, t);
     let s = {
       x: i.x + t.height / 2,
       y: i.y - t.width / 2,
       height: 0,
       width: 0
     };
-    let r = HD(s, a);
+    let r = addRectOffset(s, a);
     m(j7({
       type: Z7,
       data: {
@@ -1017,7 +1017,7 @@ let eU = memo(function (e) {
       label: e.comments[0].order_id || "",
       updatedAt: e.comments[e.comments.length - 1].created_at,
       selectionBoxAnchor: a,
-      type: kT.COMMENT_THREAD,
+      type: ThreadType.COMMENT_THREAD,
       numAttachments: e.comments.map(e => e.attachments?.length || 0).reduce((e, t) => e + t, 0),
       isPinnedToFile: !!e.commentPin
     };
@@ -1038,7 +1038,7 @@ let eU = memo(function (e) {
       hasJumped: 1 === e
     });
   }, [u]);
-  let em = _$$A(ec, r.rebuildClustersZoomDelay);
+  let em = useDebouncedCallback(ec, r.rebuildClustersZoomDelay);
   let eu = useMemo(() => {
     let e = new Set(ed.map(e => e.id));
     let t = K.viewport;
@@ -1167,7 +1167,7 @@ function tV(e) {
   let r = n && s[n] || null;
   let l = r?.reply.messageMeta || [];
   let d = useSelector(e => e.comments.editingComment);
-  let c = sZ();
+  let c = useCurrentUserOrg();
   let {
     dispatch
   } = e;
@@ -1286,13 +1286,13 @@ function tV(e) {
           }
         }), feedPost.feedPostNumContent > 1 && jsx("div", {
           className: "feed_post_popover_modal--numContent--S8q68 feed_post_popover_modal--postThumbnailOverlay--vDoKP",
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A2,
             className: tR
           })
         }), D && jsx("div", {
           className: "feed_post_popover_modal--expand--cHMgw feed_post_popover_modal--postThumbnailOverlay--vDoKP",
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A3,
             className: tR
           })
@@ -1338,7 +1338,7 @@ function tV(e) {
       }, t.id))
     }), e.isLoading && jsx("div", {
       className: wG,
-      children: jsx(kt, {
+      children: jsx(LoadingSpinner, {
         size: "small"
       })
     }), jsx(_$$K, {
@@ -1366,7 +1366,7 @@ function tV(e) {
       onEditStart: S,
       onSubmit: E,
       placeholderText: getI18nString("comments.reply"),
-      recordingKey: Dw.feedPopover,
+      recordingKey: ComposerType.feedPopover,
       replyContainerRef: F,
       setHyperlinkEditorRef: e.setHyperlinkEditorRef,
       setHyperlinkLocation: e.setHyperlinkLocation,
@@ -1440,13 +1440,13 @@ function t6(e) {
       htmlAttributes: {
         "data-onboarding-key": s ? "unpin-comment-icon" : "pin-comment-icon",
         "data-testId": "pin-comment-button-thread-header",
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": s ? getI18nString("comments.pinning.unpin_comment") : getI18nString("comments.pinning.pin_comment")
       },
       "aria-label": getI18nString("comments.pinning.pin_comment"),
       onClick: d,
       recordingKey: "threadHeader.pinCommentButton",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: s ? _$$A5 : _$$A4
       })
     })
@@ -1458,13 +1458,13 @@ function t8(e) {
   let s = useSelector(e => e.comments.activeThread?.source);
   useEffect(() => {
     if (s && !e.mountUnfocused) switch (s) {
-      case Eq.prevButton:
+      case NAVIGATION_BUTTONS.prevButton:
         t.current?.focus();
         break;
-      case Eq.nextButton:
+      case NAVIGATION_BUTTONS.nextButton:
         n.current?.focus();
         break;
-      case Eq.accessibilityCommentPin:
+      case NAVIGATION_BUTTONS.accessibilityCommentPin:
         break;
       default:
         throwTypeError(s);
@@ -1501,7 +1501,7 @@ function t8(e) {
       }), !e.hideResolve && jsx(K0, {
         disabled: r,
         "data-fullscreen-intercept": !0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e.resolved ? r ? getI18nString("comments.pinning.cannot_unresolve") : getI18nString("comments.mark_as_unresolved") : r ? getI18nString("comments.pinning.cannot_resolve") : getI18nString("comments.mark_as_resolved"),
         onClick: () => {
           e.setResolved({
@@ -1806,11 +1806,11 @@ function nr(e) {
   _$$C_(P);
   useEffect(() => {
     if (n && !e.mountUnfocused) switch (n) {
-      case Eq.accessibilityCommentPin:
+      case NAVIGATION_BUTTONS.accessibilityCommentPin:
         P.current?.focus();
         break;
-      case Eq.prevButton:
-      case Eq.nextButton:
+      case NAVIGATION_BUTTONS.prevButton:
+      case NAVIGATION_BUTTONS.nextButton:
         break;
       default:
         throwTypeError(n);
@@ -1832,7 +1832,7 @@ function nr(e) {
     eP && (a.x -= y, a.width += y);
     let i = jsx(K0, {
       svg: _$$A6,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("comments.dock_to_side"),
       recordingKey: "activeThread.dockToSideButton",
       onClick: eH,
@@ -1926,7 +1926,7 @@ function nr(e) {
             resolved: !!comments[0].resolved_at,
             setResolved: e.setResolved,
             thread: t
-          }), thread.sidebarItemType === kT.COMMENT_THREAD ? jsxs(_$$P, {
+          }), thread.sidebarItemType === ThreadType.COMMENT_THREAD ? jsxs(_$$P, {
             ref: ep,
             maxHeight: c,
             onMouseDown: no,
@@ -1999,7 +1999,7 @@ function nr(e) {
               onEditStart: eh,
               onSubmit: er,
               placeholderText: getI18nString("comments.reply"),
-              recordingKey: Dw.reply,
+              recordingKey: ComposerType.reply,
               replyContainerRef: eq,
               setHyperlinkEditorRef: eL,
               setHyperlinkLocation: eD,
@@ -2013,7 +2013,7 @@ function nr(e) {
               user: ee,
               viewportPositionFromClientPosition: e.viewportPositionFromClientPosition
             })]
-          }) : thread.sidebarItemType === kT.FEED_POST ? jsx(tV, {
+          }) : thread.sidebarItemType === ThreadType.FEED_POST ? jsx(tV, {
             comments: e.comments,
             dispatch,
             editorOnClear: e.editorOnClear,
@@ -2033,7 +2033,7 @@ function nr(e) {
             user: e.user,
             viewportInfo: e.viewportInfo,
             viewportPositionFromClientPosition: e.viewportPositionFromClientPosition
-          }) : thread.sidebarItemType === kT.LITMUS_COMMENT_THREAD ? null : void throwTypeError(thread)]
+          }) : thread.sidebarItemType === ThreadType.LITMUS_COMMENT_THREAD ? null : void throwTypeError(thread)]
         })]
       })]
     });
@@ -2105,11 +2105,11 @@ function nu(e) {
     let i = n.computeDropLocation(o, t.mouseOffset);
     if (!n.isInViewport(i)) return;
     let s = Point.add(o, t.mouseOffset);
-    if (n.thread.id === hm) {
+    if (n.thread.id === NEW_COMMENT_ID) {
       let e = n.viewport.current;
       if (!e) return;
       l(vV({
-        anchorPosition: $$(e, s)
+        anchorPosition: applyOffsetToViewport(e, s)
       }));
     } else r && (l(UU()), m(s));
   }, [u, viewportPositionFromClientPosition, p, l, r]);
@@ -2125,7 +2125,7 @@ function nu(e) {
     let i = n.computeDropLocation(o, t.mouseOffset);
     if (!n.isInViewport(i)) return p(null);
     let l = s.getCommentDestinationForCanvasPosition(i, n.pageId);
-    n.thread.id === hm || n.setClientMeta({
+    n.thread.id === NEW_COMMENT_ID || n.setClientMeta({
       thread: n.thread,
       clientMeta: {
         x: i.x,
@@ -2218,11 +2218,11 @@ function np(e) {
   let s = useContext(viewportNavigatorContext);
   let r = useCallback((e, n) => {
     let o = Point.add(e, n);
-    return $$(t.current, o);
+    return applyOffsetToViewport(t.current, o);
   }, [t]);
   let l = useCallback(e => {
     let n = s.getValidCommentsRect();
-    let o = Z0(t.current, e);
+    let o = viewportToScreen(t.current, e);
     return rN(o, n);
   }, [s, t]);
   let d = selectCurrentUser();
@@ -2439,7 +2439,7 @@ function nP(e) {
   let j = thread.id;
   let k = e.thread.comments.length;
   useEffect(() => {
-    j !== hm && u();
+    j !== NEW_COMMENT_ID && u();
   }, [u, j, k]);
   let [P, T] = useState(null);
   let M = useCallback(e => {
@@ -2476,7 +2476,7 @@ function nP(e) {
     })), R());
   }, [S, discardAttempts, e.editorRef, d, R]);
   let F = useSelector(e => e.comments.threads);
-  let B = F[e.thread.id]?.state === EB.BUSY;
+  let B = F[e.thread.id]?.state === BusyReadyState.BUSY;
   if (!w) return null;
   let {
     x: _x2,
@@ -2485,7 +2485,7 @@ function nP(e) {
   let V = `translate(${_x2}px, ${_y2}px)`;
   let q = `calc(${e.viewportBounds.height}px - (2 * ${nj}px))`;
   let z = !0 === e.disablePointerEvents ? "new_comment_container--translatedThreadContainerNoPointerEvents--9z1L5 new_comment_container--translatedThreadContainer--2xkOH" : `new_comment_container--translatedThreadContainer--2xkOH ${Dm}`;
-  let Z = e.thread.id === hm ? "new_comment_container--newCommentContainerNext--bCfo7 new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7" : "new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7";
+  let Z = e.thread.id === NEW_COMMENT_ID ? "new_comment_container--newCommentContainerNext--bCfo7 new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7" : "new_comment_container--threadContainer--XIsVX text--fontPos11--2LvXf text--_fontBase--QdLsd overflow--overflowYAuto--nfK38 overflow--momentumScroll--qtsu7";
   let $ = getI18nString("comments.add_a_comment");
   return jsx(ny, {
     onDragUpdate: e => {
@@ -2545,13 +2545,13 @@ function nP(e) {
               onComposeFocus: e.onComposeFocus,
               onSubmit: A,
               placeholderText: $,
-              recordingKey: Dw.$$new,
+              recordingKey: ComposerType.$$new,
               scrollToBottom: u,
               setHyperlinkEditorRef: lQ,
               setHyperlinkLocation: T,
               setIsEditorFocused: e.setIsEditorFocused,
               submitText: getI18nString("comments.post"),
-              threadId: hm,
+              threadId: NEW_COMMENT_ID,
               threadPosition: e.thread.threadPosition,
               typeahead: e.typeahead,
               updateAttachment: E,
@@ -2571,7 +2571,7 @@ function nI(e) {
   let s = useCallback(() => {
     n.current?.selectAll();
   }, [n]);
-  let r = _$$th(e.viewportInfo);
+  let r = memoizedRect(e.viewportInfo);
   return jsxs("div", {
     children: [jsx(np, {
       thread: e.thread,
@@ -2607,8 +2607,8 @@ function nI(e) {
 }
 let nN = "comment_selection_box--selectionBox--bg--z";
 function nS(e) {
-  let t = Z0(e.viewportInfo, e.pinCanvasPosition);
-  let n = Z0(e.viewportInfo, e.selectionBoxAnchorCanvasPosition);
+  let t = viewportToScreen(e.viewportInfo, e.pinCanvasPosition);
+  let n = viewportToScreen(e.viewportInfo, e.selectionBoxAnchorCanvasPosition);
   let [i, s] = useState(void 0);
   let [r, l] = useState(void 0);
   let [d, c] = useState(n.x - 10);
@@ -2640,13 +2640,13 @@ function nS(e) {
       mousePosition: o,
       startZoomScale: i.startZoomScale
     });
-    let a = Z0(e.viewportInfo, o);
+    let a = viewportToScreen(e.viewportInfo, o);
     let l = a.x - n.x + 2500;
     let d = a.y - n.y + 2500;
     v(`translate(${l}px, ${d}px)`);
   }, [i, s, v, r, n.x, n.y, viewportPositionFromClientPosition, e.viewportInfo]);
   let j = useCallback((e, t) => {
-    let n = Z0(e, t);
+    let n = viewportToScreen(e, t);
     s(void 0);
     l(void 0);
     c(n.x - 10);
@@ -2667,7 +2667,7 @@ function nS(e) {
   useEffect(() => {
     i && i.startZoomScale !== e.viewportInfo.zoomScale && j(e.viewportInfo, e.selectionBoxAnchorCanvasPosition);
   }, [i, e.viewportInfo, e.selectionBoxAnchorCanvasPosition, j]);
-  let P = i ? Z0(e.viewportInfo, i.mousePosition) : n;
+  let P = i ? viewportToScreen(e.viewportInfo, i.mousePosition) : n;
   let I = Math.min(t.x, P.x);
   let T = Math.min(t.y, P.y);
   let M = Math.max(t.x - I, P.x - I);
@@ -2707,7 +2707,7 @@ function nS(e) {
 }
 function nD(e, t, n, o, a) {
   let i = n(new Point(e, t));
-  let s = $$(o, i);
+  let s = applyOffsetToViewport(o, i);
   if (!a) return new Point(s.x, s.y);
   let r = pV(s, a);
   return new Point(r.x, r.y);
@@ -2761,7 +2761,7 @@ function nR({
 }
 function nO(e) {
   let t = useDispatch();
-  let n = _X({
+  let n = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let s = _B();
@@ -2806,7 +2806,7 @@ function nO(e) {
       y: _$$hx.y - height
     };
   }, [pinOffset]);
-  let N = _$$y() && l.sidebarItemType === kT.FEED_POST;
+  let N = _$$y() && l.sidebarItemType === ThreadType.FEED_POST;
   let S = m ? _$$j : zW({
     feedPostUuid: N ? l.feedPostPublicUuid : void 0
   });
@@ -2880,7 +2880,7 @@ function nO(e) {
         thread: l,
         viewportInfo: n,
         viewportPositionFromClientPosition: e.viewportPositionFromClientPosition
-      }) : l.sidebarItemType === kT.COMMENT_THREAD || l.sidebarItemType === kT.FEED_POST && _$$y() ? jsx(nr, {
+      }) : l.sidebarItemType === ThreadType.COMMENT_THREAD || l.sidebarItemType === ThreadType.FEED_POST && _$$y() ? jsx(nr, {
         commentCreationDisabled: e.commentCreationDisabled,
         comments: U,
         disableDragging: H && !V,
@@ -2889,7 +2889,7 @@ function nO(e) {
         editorOnInsert: s.editorOnInsert,
         hideEmojiPicker: R,
         hideReactions: H,
-        hideResolve: e.hideResolve || !_$$m(l.sidebarItemType),
+        hideResolve: e.hideResolve || !isCommentStateActive(l.sidebarItemType),
         ignoreThreadContainerScrollOnLoad: H,
         isLoading: e.isLoading,
         mentionables: S,
@@ -3043,9 +3043,9 @@ function nK(e) {
   let x = useMemo(() => "communityHub" === d ? {} : {
     canDrag: () => l(UU()),
     onDragStart: e => {
-      let n = $$(t.getRawViewportInfo(), e.start);
+      let n = applyOffsetToViewport(t.getRawViewportInfo(), e.start);
       v(n);
-      p($$(t.getRawViewportInfo(), e.position));
+      p(applyOffsetToViewport(t.getRawViewportInfo(), e.position));
       _(r(n));
     },
     onDragCancel: () => {
@@ -3055,7 +3055,7 @@ function nK(e) {
     },
     onDragUpdate: e => {
       if (!g || !u) return;
-      let n = $$(t.getRawViewportInfo(), e.position);
+      let n = applyOffsetToViewport(t.getRawViewportInfo(), e.position);
       if (f) {
         let e = pV(n, f);
         (e.x !== u.x || e.y !== u.y) && p(e);
@@ -3065,7 +3065,7 @@ function nK(e) {
     },
     onDragEnd: e => {
       if (g && u) {
-        if (n($$(t.getRawViewportInfo(), e.start))) {
+        if (n(applyOffsetToViewport(t.getRawViewportInfo(), e.start))) {
           s();
           v(null);
           p(null);
@@ -3073,7 +3073,7 @@ function nK(e) {
           return;
         }
         canvasPositionClick(u, !0) && l(a$({
-          selectionBoxAnchor: $$(t.getRawViewportInfo(), e.start)
+          selectionBoxAnchor: applyOffsetToViewport(t.getRawViewportInfo(), e.start)
         }));
         v(null);
         p(null);
@@ -3084,8 +3084,8 @@ function nK(e) {
   useEffect(() => {
     dragEventHandler.dragCallbacks = x;
   }, [x, dragEventHandler]);
-  let b = u ? Z0(t.getRawViewportInfo(), u) : null;
-  let y = g ? Z0(t.getRawViewportInfo(), g) : null;
+  let b = u ? viewportToScreen(t.getRawViewportInfo(), u) : null;
+  let y = g ? viewportToScreen(t.getRawViewportInfo(), g) : null;
   if (!b || !y) return null;
   let C = Math.min(y.x, b.x);
   let w = Math.min(y.y, b.y);
@@ -3109,7 +3109,7 @@ function nG(e) {
     requestToDeselectCommentPin,
     requestToAddDraftCommentPin
   } = e;
-  let s = _$$ni();
+  let s = getBasicViewportRect();
   let r = useSelector(e => e.selectedView.view);
   let d = useAtomWithSubscription(_$$R);
   let c = void 0 !== e.isActiveCommentPinned ? e.isActiveCommentPinned : d;
@@ -3144,7 +3144,7 @@ function nG(e) {
       touchEvents
     } = eventPreferences || {};
     let y = useCallback((e, t) => {
-      let n = Z0(m.getViewportInfo(), e);
+      let n = viewportToScreen(m.getViewportInfo(), e);
       let {
         replace
       } = t || nW;
@@ -3164,7 +3164,7 @@ function nG(e) {
         return e;
       }
     }, [x, _requestToAddDraftCommentPin, touchEvents, m, u, p, f]);
-    let C = useCallback((e, t) => y($$(m.getRawViewportInfo(), e), t), [m, y]);
+    let C = useCallback((e, t) => y(applyOffsetToViewport(m.getRawViewportInfo(), e), t), [m, y]);
     return function (e, t, n, o, i, s) {
       let {
         touchEvents,
@@ -3290,7 +3290,7 @@ export function $$nY1(e, t, n) {
 }
 let nJ = e => {
   let t = Xr(_$$R);
-  let n = am();
+  let n = trackFileEventWithUser();
   return useCallback(o => {
     t(o);
     o && n("Comment Pinned", {
@@ -3342,7 +3342,7 @@ function n0(e) {
     return new Point(0, 0);
   }, []);
   let [U, H] = useState(null);
-  let V = !(e.requestToSelectCommentPin && S?.id !== hm);
+  let V = !(e.requestToSelectCommentPin && S?.id !== NEW_COMMENT_ID);
   let q = nJ(S?.id);
   return jsxs(Fragment, {
     children: [getFeatureFlags().comments_react ? jsx(eH, {

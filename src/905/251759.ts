@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { c$ } from "../figma_app/236327";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { tf } from "../figma_app/831799";
@@ -78,7 +78,7 @@ export function $$A0(e) {
     }), jsx("div", {
       className: "currency_switcher--caretContainer--8KG1H",
       ref: t,
-      children: jsx(B, {
+      children: jsx(SvgComponent, {
         svg: A,
         className: o()("currency_switcher--caret--hshB4", l ? "currency_switcher--caretDown--ISJvk" : "")
       })

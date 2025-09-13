@@ -14,7 +14,7 @@ import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { trackEventAnalytics } from "../905/449184";
 import { wv as _$$wv, c$ } from "../figma_app/236327";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { fullscreenValue } from "../figma_app/455680";
@@ -476,7 +476,7 @@ function et(e) {
       className: "image_controls--overflowInner--7-ktg",
       children: [jsx("div", {
         className: "image_controls--iconContainer--1VyEZ",
-        children: e.selected && jsx(B, {
+        children: e.selected && jsx(SvgComponent, {
           svg: _$$A2
         })
       }), e.cropName]

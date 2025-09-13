@@ -5,7 +5,7 @@ import { K } from "../905/443068";
 import { J } from "../905/125993";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { I } from "../figma_app/94664";
 import { l as _$$l } from "../figma_app/856638";
 export function $$_0(e) {
@@ -21,7 +21,7 @@ export function $$_0(e) {
       recordingKey: generateRecordingKey(e, "toggleOverflowMenu"),
       "aria-label": getI18nString("fullscreen.properties_panel.tooltip_moreActions"),
       htmlAttributes: {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("fullscreen.properties_panel.tooltip_moreActions"),
         "data-testid": "selection-actions-overflow-menu-button"
       },

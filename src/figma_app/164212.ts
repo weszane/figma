@@ -12,7 +12,7 @@ import { s as _$$s } from '../905/551945';
 import { h as _$$h } from '../905/565502';
 import { O as _$$O } from '../905/599243';
 import { getFeatureFlags } from '../905/601108';
-import { Oo } from '../905/709171';
+import { compareWithGeneratedKey } from '../905/709171';
 import { p as _$$p } from '../905/730229';
 import { V } from '../905/735518';
 import { X } from '../905/737763';
@@ -186,7 +186,7 @@ export function $$V25(e, t, r) {
   }
 }
 export function $$H27(e, t, r) {
-  return Oo(e, r) ? Fullscreen.getDefaultStateForLocalStateGroup(t) : Fullscreen.getDefaultStateForSubscribedStateGroup(t, e.default_state_key);
+  return compareWithGeneratedKey(e, r) ? Fullscreen.getDefaultStateForLocalStateGroup(t) : Fullscreen.getDefaultStateForSubscribedStateGroup(t, e.default_state_key);
 }
 export function $$z17(e) {
   if (e) {

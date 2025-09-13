@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
 import { getStorage } from "../905/657224";
@@ -24,7 +24,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { cq } from "../figma_app/107215";
 import { fu } from "../figma_app/831799";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { BI } from "../figma_app/546509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -79,7 +79,7 @@ function V({
         userName: s,
         file_key: t.key
       }))) : $$K2(u, e.email);
-      Cu({
+      logAndTrackCTA({
         name: "Jam Session access file button",
         isAnonymous: p,
         isFigjamTry: _,
@@ -297,7 +297,7 @@ export function $$W0(e) {
       userID: t?.id ?? null,
       fileKey: r?.key
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: u,
       width: 400,
       height: "fixed",

@@ -5,7 +5,7 @@ import { jsx, jsxs } from 'react/jsx-runtime';
 import { N as _$$N } from '../905/7587';
 import { i as _$$i } from '../905/50151';
 import { q as _$$q2 } from '../905/70772';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { fP, mr, o1, OX, q9, Sg, U0, xu } from '../905/149906';
 import { showModalHandler } from '../905/156213';
 import { h as _$$h } from '../905/207101';
@@ -18,7 +18,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { MZ } from '../905/470594';
 import { Y as _$$Y } from '../905/506207';
 import { E as _$$E } from '../905/508367';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { s as _$$s } from '../905/551945';
 import { getFeatureFlags } from '../905/601108';
 import { tI } from '../905/603628';
@@ -40,7 +40,7 @@ import { eR as _$$eR } from '../figma_app/12220';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { FFileType } from '../figma_app/191312';
 import { y as _$$y } from '../figma_app/297957';
-import { uE } from '../figma_app/314264';
+import { trackUserEvent } from '../figma_app/314264';
 import { $W, KD } from '../figma_app/317394';
 import { Y as _$$Y2 } from '../figma_app/433187';
 import { throwTypeError } from '../figma_app/465776';
@@ -110,7 +110,7 @@ export function $$eo0(e) {
     'recordingKey': generateRecordingKey(e, 'submit'),
     'disabled': e.disabled,
     'onClick': e.onClick,
-    'data-tooltip-type': Ib.TEXT,
+    'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': t,
     'aria-label': t,
     'htmlAttributes': {
@@ -194,7 +194,7 @@ export function $$ed1(e) {
   let eA = useStore();
   useEffect(() => {
     let t = !_$$eR(e.threadId);
-    uE('Comment composer opened', eA.getState(), {
+    trackUserEvent('Comment composer opened', eA.getState(), {
       isThread: t
     });
     Z || eA.dispatch(_$$b({
@@ -452,7 +452,7 @@ export function $$ed1(e) {
             }));
           },
           'ref': g,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('comments.add_emoji'),
           'aria-label': getI18nString('comments.add_emoji'),
           'htmlAttributes': {
@@ -463,7 +463,7 @@ export function $$ed1(e) {
           'children': jsx(_$$A, {})
         }), jsx(_$$K, {
           'onClick': eH,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('comments.add_mention'),
           'aria-label': getI18nString('comments.add_mention'),
           'disabled': e6,
@@ -476,7 +476,7 @@ export function $$ed1(e) {
           'inputRef': eJ,
           'inputId': `fileUploadIconInput-${e.recordingKey}`,
           'onFileInputChange': e5,
-          'data-tooltip-type': Ib.TEXT,
+          'data-tooltip-type': KindEnum.TEXT,
           'data-tooltip': getI18nString('comments.upload_images'),
           'children': jsx('span', {
             'aria-hidden': !0,
@@ -485,11 +485,11 @@ export function $$ed1(e) {
         })]
       }), !e.hideSubmitButton && (e.editingExistingComment ? jsxs('div', {
         className: q9,
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: 'secondary',
           onClick: e$,
           children: renderI18nText('comments.cancel')
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: 'primary',
           onClick: eF,
           disabled: e8,

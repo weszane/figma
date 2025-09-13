@@ -8,16 +8,16 @@ import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { Uz } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
-import { oA, Xm, gB } from "../905/723791";
+import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
 import { getAtomMutate } from "../figma_app/566371";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { ms, c$, wv } from "../figma_app/236327";
 import { ks, $$, nR, vd } from "../figma_app/637027";
 import { p as _$$p } from "../905/991924";
 import { L as _$$L } from "../905/408237";
-import { a_ } from "../figma_app/858013";
+import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { R as _$$R } from "../905/304671";
@@ -43,7 +43,7 @@ import { n$, Cz, aW, sK } from "../figma_app/598018";
 import { b as _$$b, A as _$$A } from "../figma_app/965813";
 import { X as _$$X } from "../905/698965";
 import { O as _$$O } from "../905/833838";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0 as _$$e2 } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
 import { NB } from "../905/826900";
@@ -451,7 +451,7 @@ function eH(e) {
             openInNewTab: !desktopAPIInstance
           }))) : (d(!1), o(xH()));
         },
-        children: [jsx(_$$B, {
+        children: [jsx(SvgComponent, {
           className: "file_move--newProjectIconFileMove--V9037 sidebar--icon--wMzUY",
           svg: _$$A2
         }), jsx("span", {
@@ -610,7 +610,7 @@ export function $$e83(e) {
       let m = e && e.org ? e.org : null;
       if (m) {
         if (t) {
-          let e = oA(t.project);
+          let e = getResourceDataOrFallback(t.project);
           e && e.canEdit && u(e);
         }
         m.teams && m.teams.forEach(e => {
@@ -631,7 +631,7 @@ export function $$e83(e) {
             };
             c.push(id);
           }
-          let a = oA(orgEditProjects);
+          let a = getResourceDataOrFallback(orgEditProjects);
           a && a.forEach(e => {
             u(e);
           });
@@ -1067,7 +1067,7 @@ export class $$e32 extends PureComponent {
       truncateTitleText: !0,
       children: jsx("div", {
         className: eU,
-        children: jsx(a_, {
+        children: jsx(BlueLoadingSpinner, {
           className: "file_move--spinner--eDfAF"
         })
       })
@@ -1277,7 +1277,7 @@ export class $$e74 extends PureComponent {
       className: "file_move--searchContainer--VZId9",
       children: [jsx("div", {
         className: eW,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A6
         })
       }), jsx(_$$L, {
@@ -1328,7 +1328,7 @@ export function $$e95(e) {
       onMouseLeave: o,
       children: [(teamId === iK || teamId === HK) && jsx("div", {
         className: eW,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A8
         })
       }), jsxs("div", {
@@ -1343,9 +1343,9 @@ export function $$e95(e) {
             children: teamId === iK || teamId === HK ? getI18nString("file_browser.shared_projects") : team.name
           }), c && jsx("div", {
             className: "file_move--warningIcon--MVFCa",
-            children: jsx(_$$B, {
+            children: jsx(SvgComponent, {
               svg: _$$A4,
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("file_browser.file_move.paywall_team_tooltip")
             })
           })]
@@ -1488,7 +1488,7 @@ function tr(e) {
         className: eG,
         children: [jsx("div", {
           className: eW,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: i ? _$$A3 : n
           })
         }), jsx("span", {
@@ -1496,7 +1496,7 @@ function tr(e) {
           children: CI(t)
         }), jsx("div", {
           className: eW,
-          children: s && jsx(_$$B, {
+          children: s && jsx(SvgComponent, {
             svg: _$$A7
           })
         })]

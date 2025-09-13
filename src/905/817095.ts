@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useMemo, useRef, useEffect, useReducer, useCallback } from "react";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { M4, IT } from "../905/713695";
@@ -10,7 +10,7 @@ import { registerModal } from "../905/102752";
 import { setupAutofocusHandler } from "../905/128376";
 import { setupToggleButton } from "../905/167712";
 import { N as _$$N } from "../905/438674";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { $ } from "../905/953280";
 import { Te } from "../vendor/813803";
 import { getFeatureFlags, M as _$$M } from "../905/601108";
@@ -28,7 +28,7 @@ import { x as _$$x } from "../905/149501";
 import { g as _$$g } from "../905/125190";
 import { F as _$$F } from "../905/422355";
 import { VisualBellActions } from "../905/302958";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { customHistory } from "../905/612521";
 let D = memo(function (e) {
   let t = useDispatch();
@@ -67,11 +67,11 @@ let D = memo(function (e) {
                 }));
               },
               "data-tooltip": getI18nString("feature_flag_overrides.copy_to_clipboard"),
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             }), !e.status && a && e.enabled !== i && jsx(Z, {
               className: _$$s.cursorPointer.$,
               "data-tooltip": `This flag is ${i ? "enabled" : "disabled"} in the current tab, but ${e.enabled ? "enabled" : "disabled"} in statsig. Refresh the tab to apply the change.`,
-              "data-tooltip-type": Ib.TEXT
+              "data-tooltip-type": KindEnum.TEXT
             })]
           })]
         }), e.status ? jsxs("div", {
@@ -197,7 +197,7 @@ function F(e) {
           iconPrefix: jsx($, {}),
           href: `https://go/statsig-override/${encodeURIComponent(getInitialOptions().user_data?.email || "")}`,
           children: renderI18nText("feature_flag_overrides.view_current_overrides")
-        }), jsx($n, {
+        }), jsx(Button, {
           disabled: 0 === Object.keys(pendingChanges).length,
           onClick: e.onReviewChanges,
           children: renderI18nText("feature_flag_overrides.review_changes")
@@ -277,11 +277,11 @@ function V(e) {
       })
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: e.onBack,
           children: renderI18nText("feature_flag_overrides.back")
-        }), jsx($n, {
+        }), jsx(Button, {
           disabled: a || m,
           onClick: () => {
             s(!0);
@@ -332,7 +332,7 @@ let $$W0 = registerModal(function (e) {
     flagName: e,
     enabled: t
   }), [A]);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
     height: "dynamic",

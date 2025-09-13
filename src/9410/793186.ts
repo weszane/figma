@@ -16,7 +16,7 @@ import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { debugState } from "../905/407919";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { kF } from "../figma_app/915202";
 import { $2 } from "../3276/545630";
 import { yL } from "../figma_app/242062";
@@ -43,10 +43,10 @@ import { Fo } from "../905/63728";
 import { useHandleChangeEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { Dm } from "../figma_app/8833";
 import { f7 } from "../figma_app/896988";
-import { _X, Z0 } from "../figma_app/62612";
+import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
 import { permissionScopeHandler as _$$l2, scopeAwareFunction } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
-import { U as _$$U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 import { handleAtomEvent } from "../905/502364";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { renameNode } from "../figma_app/741237";
@@ -77,7 +77,7 @@ function X(e, t, i) {
     margin,
     ...h
   } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-  let m = _X({
+  let m = getViewportInfo({
     subscribeToUpdates_expensive: !0
   });
   let g = m?.zoomScale || 1;
@@ -162,7 +162,7 @@ function X(e, t, i) {
   });
   if (!m) return null;
   let N = {};
-  let A = Z0(m, {
+  let A = viewportToScreen(m, {
     x: h.x,
     y: h.y
   }, !1);
@@ -545,7 +545,7 @@ function eg() {
   let l = useRef(!o?.freeText);
   let d = isDevModeFocusViewActive();
   let c = function () {
-    let e = _$$U();
+    let e = trackFileEventWithStore();
     return useCallback((t, i, r) => {
       let n = t.findContainingTopLevelFrameOrSelf();
       let a = t.containingCanvas;
@@ -581,7 +581,7 @@ function e_() {
     varWidthNodeId,
     varWidthIndex
   } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
-  let i = _$$U();
+  let i = trackFileEventWithStore();
   let n = getSingletonSceneGraph().get(varWidthNodeId);
   if (!n) return null;
   let s = n.variableWidthPoints;
@@ -678,7 +678,7 @@ function ey(e) {
     let i = e.mirror.appModel.currentPage;
     let r = !!t?.isResponsiveSet;
     return t && ("SECTION" === t.type || r) && t.parentGuid === i;
-  }), Math.round(100 * _X({
+  }), Math.round(100 * getViewportInfo({
     subscribeToUpdates_expensive: !0
   }).zoomScale));
   if (!l || !o) return null;
@@ -886,7 +886,7 @@ export function $$eF5(e, t, i) {
     if (t === DesignGraphElements.VECTOR_PENCIL || t === DesignGraphElements.ERASER || t === DesignGraphElements.HIGHLIGHTER) {
       var i;
       i = "figjam";
-      uE("Pointer Input", debugState.getState(), {
+      trackUserEvent("Pointer Input", debugState.getState(), {
         inputSource: e.pointerType,
         tool: function (e) {
           switch (e) {

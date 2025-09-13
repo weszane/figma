@@ -6,7 +6,7 @@ import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { BrowserInfo } from "../figma_app/778880";
 import { handleAtomEvent } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
@@ -31,7 +31,7 @@ import { hasTeamStatePaidAccess } from "../figma_app/345997";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { wH, KI } from "../figma_app/680166";
 import { FEditorType } from "../figma_app/53721";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/202542";
 import { jn } from "../figma_app/522082";
 import { v as _$$v } from "../905/596134";
@@ -67,7 +67,7 @@ export function $$et0({
     folderId: e.folderId
   });
   let Z = e.editorType === FFileType.WHITEBOARD && !!e.org?.figjamDisabledAt;
-  let ee = l === FEditorType.Slides && oA(e.org?.isSlidesDisabled);
+  let ee = l === FEditorType.Slides && getResourceDataOrFallback(e.org?.isSlidesDisabled);
   let et = l === FEditorType.Sites && !!e.org?.isSitesDisabled;
   let er = l === FEditorType.Cooper && !!e.org?.isCooperDisabled;
   let en = _$$e();
@@ -149,7 +149,7 @@ export function $$et0({
   let eR = eT ? getI18nString("fullscreen.toolbar.multiplayer.sharing_figmake_files_disabled") : Z ? getI18nString("fullscreen.toolbar.multiplayer.sharing_fig_jam_files_disabled_by_your_organization") : ee ? getI18nString("fullscreen.toolbar.multiplayer.sharing_slides_files_disabled_by_your_organization") : et ? getI18nString("fullscreen.toolbar.multiplayer.sharing_sites_files_disabled_by_your_organization") : er ? getI18nString("fullscreen.toolbar.multiplayer.sharing_buzz_files_disabled_by_your_organization") : eA ? getI18nString("fullscreen.toolbar.multiplayer.open_session_in_progress") : eh ? _$$r : e_ ? getI18nString("fullscreen.toolbar.multiplayer.sharing_has_current_upgrade_request") : null;
   let eD = {
     "data-tooltip-is-current-user-file-owner": JSON.stringify(ex),
-    "data-tooltip-type": eh ? Ib.SPECIAL : Ib.TEXT,
+    "data-tooltip-type": eh ? KindEnum.SPECIAL : KindEnum.TEXT,
     "data-tooltip-interactive": !!eh,
     "data-tooltip": eR,
     "data-tooltip-show-immediately": !0,
@@ -158,7 +158,7 @@ export function $$et0({
   let eM = l === FEditorType.Whiteboard;
   let eP = eM || o || eI;
   let eF = eP ? lT : _$$m;
-  let eB = e.hasEditRole && oA(e.hasEditRole);
+  let eB = e.hasEditRole && getResourceDataOrFallback(e.hasEditRole);
   let eU = !el && !eR && eu && ex && (eO || eS);
   let eG = eM ? parsePxNumber(M$q) : void 0;
   return jsxs(Fragment, {

@@ -3,7 +3,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
-import { E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { r1 } from "../figma_app/545877";
@@ -52,7 +52,7 @@ export function $$y0(e) {
     },
     children: [jsx("div", {
       children: renderI18nText("file_browser.drafts_to_move.which_is_going_away_august_21", {
-        boldedText: jsx(E, {
+        boldedText: jsx(TextWithTruncation, {
           fontWeight: "semi-bold",
           children: renderI18nText("file_browser.drafts_to_move.this_file_is_in_a_section_called_drafts_to_move")
         })

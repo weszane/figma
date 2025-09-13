@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { n5, zE, HF } from "../figma_app/646357";
@@ -46,7 +46,7 @@ export function $$f0() {
     let t = n5(e, s);
     return t && !HF(t.status);
   });
-  return validNodeIds.size ? jsx($n, {
+  return validNodeIds.size ? jsx(Button, {
     variant: "secondary",
     onClick,
     children: n ? getI18nString("design_systems.updates.publish") : getI18nString("design_systems.component_panel.publish_new_changes")

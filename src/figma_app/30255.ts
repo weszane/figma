@@ -13,7 +13,7 @@ import { D8 } from "../905/511649";
 import { jD } from "../905/765855";
 import { F as _$$F } from "../905/989956";
 import { oW } from "../figma_app/247611";
-import { Pl } from "../figma_app/62612";
+import { getViewportZoom } from "../figma_app/62612";
 import { hx } from "../figma_app/630194";
 import { nS } from "../figma_app/274383";
 import { T as _$$T } from "../905/355691";
@@ -75,7 +75,7 @@ export let $$x0 = memo(function ({
     document.body.classList.remove(bz);
   }), [V]);
   let J = useRef(null);
-  let Z = Pl({
+  let Z = getViewportZoom({
     subscribeToUpdates_expensive: V
   });
   let Q = function (e) {

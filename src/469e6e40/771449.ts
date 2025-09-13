@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Xf } from "../figma_app/153916";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { KX } from "../469e6e40/623537";
 import { g as _$$g } from "../figma_app/638694";
 import { $N } from "../figma_app/422062";
@@ -92,11 +92,11 @@ export function $$C0(e) {
         strokeColor: "default",
         strokeWidth: 1,
         padding: 20,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           color: "secondary",
           fontWeight: "semi-bold",
           children: renderI18nText("license_group_admin.members.no_members_yet")
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           color: "secondary",
           children: renderI18nText("license_group_admin.members.no_members_yet.subtitle")
         })]

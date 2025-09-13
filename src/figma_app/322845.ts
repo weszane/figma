@@ -10,7 +10,7 @@ import { VisualBellActions } from "../905/302958";
 import { q4 } from "../905/294085";
 import { j7, oB } from "../905/929976";
 import { JV } from "../figma_app/976749";
-import { v5 } from "../figma_app/314264";
+import { getProductType } from "../figma_app/314264";
 import { T as _$$T } from "../905/868547";
 import { l as _$$l } from "../905/202425";
 import { FEditorType } from "../figma_app/53721";
@@ -55,7 +55,7 @@ export function $$M0({
     keyboardShortcut: "",
     currentSelection: _$$l(a),
     fileKey: a.openFile?.key ?? "",
-    productType: v5(a.selectedView, null),
+    productType: getProductType(a.selectedView, null),
     role: WZ(),
     hasAiFeatureAccess: W7(),
     ...e

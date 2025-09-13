@@ -2,12 +2,12 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import s from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Y } from "../905/315917";
 import { J, Z } from "../905/420117";
 import { m as _$$m } from "../905/658204";
@@ -96,9 +96,9 @@ export let $$v2 = forwardRef(({
 });
 export function $$I0() {
   return jsx("div", {
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("variables.variable_was_deleted"),
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       className: Bx,
       svg: _$$A
     })

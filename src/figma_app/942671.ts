@@ -5,7 +5,7 @@ import { O } from "../905/969533";
 import { cZ } from "../figma_app/272902";
 import l from "classnames";
 import { RecordingComponent, handleMouseEvent } from "../figma_app/878298";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { wH, Sn, r9, Pf, Qq, q3, VI, FH, cN, Ot, sc } from "../905/99033";
 import { A } from "../2854/769773";
@@ -61,11 +61,11 @@ export class $$f0 extends RecordingComponent {
       }) : this.props.positionOnChevron ? jsx("div", {
         className: FH,
         ref: this.props.chevronRef,
-        children: jsx(B, {
+        children: jsx(SvgComponent, {
           svg: A,
           className: d()(cN, Ot)
         })
-      }) : jsx(B, {
+      }) : jsx(SvgComponent, {
         svg: A,
         className: cN
       })), this.props.children]

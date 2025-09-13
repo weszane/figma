@@ -3,7 +3,7 @@ import { Component } from "react";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
 import { getInitialOptions } from "../figma_app/169182";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Dm } from "../figma_app/8833";
 import { Rf } from "../figma_app/546509";
 import { XY, Tc, b1, pj, DY, jT, Gv, OW, ZS, TK, Yg } from "../905/362959";
@@ -26,13 +26,13 @@ export class $$h0 extends Component {
           className: Gv,
           type: "button",
           "data-testid": "back-button",
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             svg: A,
             className: OW
           })
         }), this.props.headerImage, this.props.imageSrc && jsx("div", {
           className: this.props.imageClassName ? this.props.imageClassName : ZS,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             useOriginalSrcFills_DEPRECATED: this.props.useOriginalSrcFills,
             svg: this.props.imageSrc,
             autosize: !0

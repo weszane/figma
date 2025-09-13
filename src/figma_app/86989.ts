@@ -18,7 +18,7 @@ import { showModal, showModalHandler } from "../905/156213";
 import { fR } from "../figma_app/147952";
 import { cW, ZT } from "../figma_app/844435";
 import { G } from "../905/11536";
-import { I0, xQ, m3, PM, U, zF } from "../figma_app/45218";
+import { isPlugin, isWidget, hasMonetizedResourceMetadata, hasFreemiumCode, hasClientMeta, isThirdPartyMonetized } from "../figma_app/45218";
 import { G3 } from "../905/272080";
 import { isMigratingPlugin, manifestContainsWidget } from "../figma_app/155287";
 import { x as _$$x } from "../905/749159";
@@ -37,7 +37,7 @@ function P(e, t, r, n) {
         resource: t,
         onSuccess: () => {
           i(r => {
-            (I0(t) || xQ(t)) && r(fR(t, e.id));
+            (isPlugin(t) || isWidget(t)) && r(fR(t, e.id));
           });
           r && r();
         },
@@ -73,7 +73,7 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
           }));
           return;
         }
-        m3(r) ? e(P(t, r, () => a(), () => a())) : logger.error("Can only initiate checkout for a monetized or local resource.");
+        hasMonetizedResourceMetadata(r) ? e(P(t, r, () => a(), () => a())) : logger.error("Can only initiate checkout for a monetized or local resource.");
       } else {
         e(e => {
           e(Ts({
@@ -111,7 +111,7 @@ export function $$k10(e) {
   return useCallback(() => {
     if (!e) return;
     let n = QQ(s);
-    let i = m3(e);
+    let i = hasMonetizedResourceMetadata(e);
     if (trackEventAnalytics("cmty_resource_usage_action", {
       resourceType: Dl(e),
       resourceId: e.id,
@@ -153,7 +153,7 @@ export function $$k10(e) {
   }, [e, s, r, a, t]);
 }
 export function $$M8(e, t, r) {
-  if (!m3(r)) return !1;
+  if (!hasMonetizedResourceMetadata(r)) return !1;
   let n = G({
     authedActiveCommunityProfile: e,
     authedUsers: t
@@ -182,7 +182,7 @@ export function $$U17(e, t) {
   return publishers.length > 0;
 }
 function B(e, t, r) {
-  return !(!e || !m3(e) || PM(e) || !U(e) && (isMigratingPlugin(e) || zF(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !function (e, t) {
+  return !(!e || !hasMonetizedResourceMetadata(e) || hasFreemiumCode(e) || !hasClientMeta(e) && (isMigratingPlugin(e) || isThirdPartyMonetized(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !function (e, t) {
     let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment;
     return r && UO(r);
   }(e, t));
@@ -195,7 +195,7 @@ export function $$V0(e) {
 }
 export function $$H3(e) {
   let t = $$G1();
-  return m3(e) && $$j16(e, t);
+  return hasMonetizedResourceMetadata(e) && $$j16(e, t);
 }
 export function $$z6(e) {
   return B(e, debugState && debugState.getState().communityPayments, debugState && debugState.getState().user || void 0);
@@ -209,7 +209,7 @@ export function $$$4(e) {
   getStorage().set(W, e);
 }
 function X(e, t) {
-  if (t && m3(t)) return e?.[t.monetized_resource_metadata.id] || t.community_resource_payment;
+  if (t && hasMonetizedResourceMetadata(t)) return e?.[t.monetized_resource_metadata.id] || t.community_resource_payment;
 }
 export function $$q13(e) {
   return X($$G1(), e);

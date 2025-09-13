@@ -2,16 +2,16 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { CY } from "../figma_app/637027";
 import { z } from "../905/284530";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { AC } from "../figma_app/777551";
 import { Qi } from "../figma_app/559491";
 import { showModalHandler } from "../905/156213";
 import { getPluginVersion, getMissingEditorTypeError, generatePluginId } from "../figma_app/300692";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { ManifestErrorType, ManifestEditorType } from "../figma_app/155287";
 import { isNetworkAccessValidationError } from "../905/544659";
 import { A as _$$A } from "../905/552947";
@@ -38,8 +38,8 @@ export function $$N1({
   updatePluginPublishingMetadata: o
 }) {
   let c = {
-    [bD.PLUGIN]: getI18nString("community.publishing.resource_id.plugin"),
-    [bD.WIDGET]: getI18nString("community.publishing.resource_id.widget")
+    [ResourceType.PLUGIN]: getI18nString("community.publishing.resource_id.plugin"),
+    [ResourceType.WIDGET]: getI18nString("community.publishing.resource_id.widget")
   };
   let u = AC(a) ? jsx("div", {
     className: _$$s.mb8.$,
@@ -98,11 +98,11 @@ function P({
     orientation: "horizontal",
     children: jsxs("div", {
       className: _$$s.flex.flexRowNoWrap.itemsCenter.justifyBetween.$,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText("community.publishing.awaiting_review")
       }), jsx("span", {
         className: _$$s.w300.flexShrink1.$
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("community.publishing.submitted_with_date", {
           date: new Date(e).toLocaleDateString()
@@ -173,14 +173,14 @@ function F({
     });
   };
   return t ? jsx(Fragment, {
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       children: t
     })
   }) : e ? jsx(_$$A, {
     suggestion: getI18nString("community.publishing.id_with_number", {
       pendingId: e
     }),
-    instruction: jsx(_$$E, {
+    instruction: jsx(TextWithTruncation, {
       color: "danger",
       children: renderI18nText("community.publishing.add_this_id_to_your_file", {
         filename: "manifest.json"
@@ -266,11 +266,11 @@ function j({
         width: "hug-contents",
         direction: "horizontal",
         verticalAlignItems: "center",
-        children: [jsx(B, {
+        children: [jsx(SvgComponent, {
           className: _$$s.bRadius4.overflowHidden.$,
           svg: svgSrc,
           useOriginalSrcFills_DEPRECATED: !0
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: label
         })]
       }, e);
@@ -285,14 +285,14 @@ function U({
   return i ? jsxs(Fragment, {
     children: [jsx(_$$u, {
       networkAccess: i,
-      isWidget: e === bD.WIDGET
+      isWidget: e === ResourceType.WIDGET
     }), i.allowedDomains.includes("*") && null == i.reasoning && jsx("div", {
       className: _$$s.mt8.$,
       children: jsx(z, {
         variant: "danger",
         iconSrc: _$$A9,
         orientation: "vertical",
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText("community.publishing.allowed_domains_reasoning_not_specified")
         })
       })
@@ -301,9 +301,9 @@ function U({
     suggestion: '"networkAccess": { "allowedDomains": [...] }',
     dataTestId: "networkAccessSuggestion",
     instruction: jsxs("div", {
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         color: "danger",
-        children: renderI18nText(e === bD.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
+        children: renderI18nText(e === ResourceType.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
           filename: "manifest.json"
         })
       }), jsx(CY, {
@@ -319,7 +319,7 @@ export function $$B2() {
     suggestion: '"documentAccess": "dynamic-page"',
     dataTestId: "documentAccessSuggestion",
     instruction: jsxs("div", {
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         color: "danger",
         children: renderI18nText("community.publishing.please_add_this_to_your_manifest_period", {
           filename: "manifest.json"

@@ -28,11 +28,11 @@ import { s as _$$s6 } from '../469e6e40/993242';
 import { F as _$$F3 } from '../905/224';
 import { K as _$$K2 } from '../905/3140';
 import { Jn } from '../905/17223';
-import { bL } from '../905/38914';
+import { ModalRootComponent } from '../905/38914';
 import { Fq, ic, vK } from '../905/84777';
 import { registerModal } from '../905/102752';
 import { t as _$$t3 } from '../905/117577';
-import { Ib } from '../905/129884';
+import { KindEnum } from '../905/129884';
 import { M as _$$M } from '../905/130634';
 import { P as _$$P } from '../905/143421';
 import { Ey, To } from '../905/148137';
@@ -42,7 +42,7 @@ import { resolveMessage } from '../905/231762';
 import { Label } from '../905/270045';
 import { Checkbox } from '../905/274480';
 import { z as _$$z2 } from '../905/284530';
-import { Z as _$$Z2 } from '../905/296690';
+import { orgSubscriptionAtom } from '../905/296690';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { R as _$$R } from '../905/304671';
@@ -65,7 +65,7 @@ import { FJ } from '../905/508367';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { getCodegenLanguagePreference } from '../905/515076';
 import { Dd, OJ } from '../905/519092';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { subscribeAndAwaitData } from '../905/553831';
 import { mL, UC } from '../905/563637';
 import { r as _$$r3 } from '../905/571562';
@@ -73,7 +73,7 @@ import { FlashActions } from '../905/573154';
 import { VisualBellIcon } from '../905/576487';
 import { getFeatureFlags } from '../905/601108';
 import { K as _$$K } from '../905/628118';
-import { E as _$$E3 } from '../905/632989';
+import { ButtonPrimitive } from '../905/632989';
 import { F as _$$F2 } from '../905/634016';
 import { Bi } from '../905/652992';
 import { ResourceStatus } from '../905/663269';
@@ -82,8 +82,8 @@ import { g as _$$g2 } from '../905/687265';
 import { X as _$$X } from '../905/698965';
 import { S3 } from '../905/708054';
 import { Ju as _$$Ju, IX } from '../905/712921';
-import { B as _$$B2 } from '../905/714743';
-import { oA } from '../905/723791';
+import { SvgComponent } from '../905/714743';
+import { getResourceDataOrFallback } from '../905/723791';
 import { DV } from '../905/739964';
 import { q as _$$q } from '../905/749058';
 import { tH as _$$tH } from '../905/751457';
@@ -91,7 +91,7 @@ import { s as _$$s4 } from '../905/761565';
 import { u as _$$u2 } from '../905/774364';
 import { N as _$$N2 } from '../905/809096';
 import { AutoLayout } from '../905/470281';
-import { sZ } from '../905/845253';
+import { useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { n as _$$n } from '../905/861286';
 import { $A } from '../905/862883';
@@ -102,7 +102,7 @@ import { q as _$$q3 } from '../905/932270';
 import { sx as _$$sx } from '../905/941192';
 import { B as _$$B } from '../905/950875';
 import { a as _$$a2 } from '../905/964520';
-import { E as _$$E } from '../905/984674';
+import { TextWithTruncation } from '../905/984674';
 import { h1 } from '../905/986103';
 import { A as _$$A7 } from '../1617/40021';
 import { A as _$$A4 } from '../1617/230645';
@@ -173,10 +173,10 @@ import { r as _$$r, hM, N_, qr, Rc, vS } from '../figma_app/827447';
 import { createEmptyAddress } from '../figma_app/831101';
 import { fu } from '../figma_app/831799';
 import { mf } from '../figma_app/844435';
-import { kt, qc } from '../figma_app/858013';
+import { LoadingSpinner, LoadingOverlay } from '../figma_app/858013';
 import { Nz, Yp } from '../figma_app/870683';
 import { desktopAPIInstance } from '../figma_app/876459';
-import { iT } from '../figma_app/901889';
+import { trackOrgEventWithStore } from '../figma_app/901889';
 import { ey as _$$ey, yX } from '../figma_app/918700';
 import { Ex, zE } from '../figma_app/919079';
 import { V3 as _$$V4 } from '../figma_app/926061';
@@ -285,7 +285,7 @@ let G = registerModal(() => {
           orgSamlConfig: a.config
         }), jsx('div', {
           className: Yy,
-          children: jsx($n, {
+          children: jsx(Button, {
             onClick: r,
             variant: 'secondary',
             children: renderI18nText('org_settings.sign_in_method.done')
@@ -368,7 +368,7 @@ function e_(e) {
       })
     }), !d && c && jsx('div', {
       className: _$$s.mt16.$,
-      children: e.isLoading ? jsx(qc, {}) : jsx($y, {
+      children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx($y, {
         variant: 'warn',
         children: jsxs(_$$Q, {
           title: renderI18nText('org_settings.mfa_for_members.warning_title', {
@@ -462,13 +462,13 @@ let eu = registerModal(() => {
       })]
     }), jsxs('div', {
       className: J()(_$$qr, v ? void 0 : _$$s.mt2.$),
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: 'secondary',
         onClick: f,
         children: renderI18nText('general.cancel')
       }), jsx('div', {
         className: Tg,
-        children: jsx($n, {
+        children: jsx(Button, {
           variant: 'primary',
           onClick: () => {
             l === Ct.GOOGLE ? e(Xw({
@@ -520,7 +520,7 @@ let eC = registerModal(e => {
         className: ef,
         children: [jsx('div', {
           className: ej,
-          children: jsx(_$$B2, {
+          children: jsx(SvgComponent, {
             svg: _$$A2
           })
         }), jsxs('div', {
@@ -543,7 +543,7 @@ let eC = registerModal(e => {
         className: ef,
         children: [jsx('div', {
           className: ej,
-          children: jsx(_$$B2, {
+          children: jsx(SvgComponent, {
             svg: _$$A3
           })
         }), jsxs('div', {
@@ -576,7 +576,7 @@ let eC = registerModal(e => {
   });
 }, 'BillingEmailsInfo');
 let eT = atom(e => {
-  let t = e(_$$Z2);
+  let t = e(orgSubscriptionAtom);
   if (t) {
     return e(OrgWorkspacesWithControlSettingsView.Query({
       orgId: t.id
@@ -590,7 +590,7 @@ let te = registerModal(e => {
   let t = useDispatch();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     width: 364,
     children: jsxs(vo, {
@@ -604,13 +604,13 @@ let te = registerModal(e => {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: () => {
               t(popModalStack());
             },
             variant: 'secondary',
             children: renderI18nText('modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               t(popModalStack());
               t(q4({
@@ -627,7 +627,7 @@ let te = registerModal(e => {
 }, 'DELETE_ORG_MODAL');
 let tt = registerModal(e => {
   let t = useDispatch();
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let r = useModalManager(e);
   let [l, o] = useState(_$$Rs());
   let d = useCallback(e => {
@@ -638,7 +638,7 @@ let tt = registerModal(e => {
     o(e);
   }, [a?.id]);
   let c = l.tokens.length === 0;
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     width: 364,
     children: jsxs(vo, {
@@ -657,13 +657,13 @@ let tt = registerModal(e => {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: () => {
               t(popModalStack());
             },
             variant: 'secondary',
             children: renderI18nText('modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             disabled: c,
             onClick: () => {
               t(popModalStack());
@@ -686,7 +686,7 @@ let ta = registerModal(e => {
   let t = useDispatch();
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = useModalManager(e);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     width: 364,
     children: jsxs(vo, {
@@ -707,13 +707,13 @@ let ta = registerModal(e => {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: () => {
               t(popModalStack());
             },
             variant: 'secondary',
             children: renderI18nText('modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               t(popModalStack());
               t(ye({
@@ -894,7 +894,7 @@ function ty({
 }
 function tw(e) {
   let t = useId();
-  return jsxs(_$$E3, {
+  return jsxs(ButtonPrimitive, {
     'onClick': e.onClick,
     'className': 'x1gskr33 x1ihwiht x78zum5 x1q0g3np xh8yej3 x6s0dn4 x1nfngrj x1qhtx96 x13iak60 x1ypdohk xv2f06h',
     'aria-label': getI18nString('org_settings.view_workspace_settings', {
@@ -911,7 +911,7 @@ function tw(e) {
         direction: 'vertical',
         verticalAlignItems: 'center',
         spacing: 0,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           children: e.mainText
         }), jsx('span', {
           id: t,
@@ -1084,7 +1084,7 @@ let tS = registerModal(e => {
       })
     });
   }, []);
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     height: 'dynamic',
     width: 'lg',
@@ -1109,11 +1109,11 @@ let tS = registerModal(e => {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: onClose,
             children: renderI18nText('org_settings.general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: () => {
               l(yo({
                 payload: {
@@ -1151,14 +1151,14 @@ let tN = registerModal(({
     open: e,
     onClose: t
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: _,
     height: 'dynamic',
     width: 'lg',
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsxs(_$$E3, {
+          children: jsxs(ButtonPrimitive, {
             onClick: t,
             ...Ay.props(tg.goBackButton),
             children: [jsx(_$$t3, {}), a.name]
@@ -1171,16 +1171,16 @@ let tN = registerModal(({
           setAiControlsSetting: d
         })
       }), jsxs(wi, {
-        children: [tR(a) && jsx(_$$E3, {
+        children: [tR(a) && jsx(ButtonPrimitive, {
           onClick: c,
           ...Ay.props(tg.removeCustomSettingsButton),
           children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
         }), jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: t,
             children: renderI18nText('org_settings.general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'primary',
             onClick: () => {
               _$$u2.updateAiControls({
@@ -1210,7 +1210,7 @@ let tI = registerModal(({
     open: !0,
     onClose: e
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     height: 'dynamic',
     width: 'lg',
@@ -1225,11 +1225,11 @@ let tI = registerModal(({
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: e,
             children: renderI18nText('org_settings.general.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
               _$$u2.updateAiControls({
@@ -1329,14 +1329,14 @@ let tU = registerModal(() => {
           value: 'custom',
           labelClassName: tD,
           disabled: r.status === 'loading',
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.autogen_password_controls.custom_passwords_button')
           }), jsx('span', {
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               color: 'secondary',
               children: renderI18nText('org_settings.autogen_password_controls.default')
             })
-          }), jsx('br', {}), jsx(_$$E, {
+          }), jsx('br', {}), jsx(TextWithTruncation, {
             color: 'secondary',
             children: renderI18nText('org_settings.autogen_password_controls.custom_passwords_description')
           })]
@@ -1344,9 +1344,9 @@ let tU = registerModal(() => {
           value: 'autogen',
           labelClassName: tD,
           disabled: r.status === 'loading',
-          children: [jsx(_$$E, {
+          children: [jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.autogen_password_controls.autogen_passwords_button')
-          }), jsx('br', {}), jsx(_$$E, {
+          }), jsx('br', {}), jsx(TextWithTruncation, {
             color: 'secondary',
             children: renderI18nText('org_settings.autogen_password_controls.autogen_passwords_description')
           })]
@@ -1356,14 +1356,14 @@ let tU = registerModal(() => {
         variant: 'brand',
         iconSrc: _$$A4,
         dataTestId: 'password-info-banner',
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText('org_settings.autogen_password_controls.banner')
         })
       }), jsxs('div', {
         className: 'autogen_password_controls_modal--modalButtons--3GOXX',
         children: [jsx(_$$nR2, {
           onClick: l,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.autogen_password_controls.cancel')
           })
         }), jsx(_$$$$, {
@@ -1375,7 +1375,7 @@ let tU = registerModal(() => {
               successMessage: t
             })), l());
           },
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.autogen_password_controls.save')
           })
         })]
@@ -1692,7 +1692,7 @@ function tX(e) {
           numScopes: e.token.scopes?.length ?? 1
         })
       })]
-    }), e.onClick && jsx(_$$B2, {
+    }), e.onClick && jsx(SvgComponent, {
       svg: _$$A5,
       className: 'connected_apps--caret--94bA6'
     })]
@@ -1766,7 +1766,7 @@ let tZ = registerModal(e => {
   let d = null;
   d = l ? jsx('div', {
     className: 'connected_apps--loading--335P4',
-    children: jsx(kt, {})
+    children: jsx(LoadingSpinner, {})
   }) : a.length === 0 ? jsx('p', {
     className: 'connected_apps--noToken--giQ0J',
     children: renderI18nText('settings_tab.connected_apps.this_org_does_not_have_any_connected_apps', {
@@ -1913,7 +1913,7 @@ function aj({
   return jsxs(Fragment, {
     children: [jsxs('div', {
       className: _$$s.flex.flexColumn.gap8.py8.$,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText('settings_tab.paste_plugin_link', {
           orgLink: _,
           communityLink: u
@@ -1980,7 +1980,7 @@ function aD({
 }) {
   return jsx('div', {
     className: _$$s.mx8.$,
-    children: jsx(_$$E, {
+    children: jsx(TextWithTruncation, {
       color: 'default',
       children: e
     })
@@ -2022,7 +2022,7 @@ function aM({
             },
             'onMouseDown': dG,
             'recordingKey': 'overflow_pins',
-            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip-type': KindEnum.TEXT,
             'data-tooltip': getI18nString('settings_tab.pinned_plugins_remove'),
             'variant': 'text',
             'dataTestId': 'remove-pinned-plugin-button'
@@ -2033,17 +2033,17 @@ function aM({
   });
 }
 function aP(e) {
-  let t = sZ() || null;
+  let t = useCurrentUserOrg() || null;
   return jsxs('div', {
     className: _$$s.flex.justifyBetween.py8.$,
     children: [jsxs('div', {
       children: [jsx('div', {
         className: _$$s.mb4.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: e.label
         })
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: e.description
       })]
     }), jsx(_$$l2, {
@@ -2064,7 +2064,7 @@ function aP(e) {
 function aU({
   preferences: e
 }) {
-  let t = sZ() || null;
+  let t = useCurrentUserOrg() || null;
   let a = useSelector(e => e.whitelistedPlugins);
   let [r, l] = useState(!1);
   let [o, d] = useAtomValueAndSetter(aE);
@@ -2102,16 +2102,16 @@ function aU({
     }) : jsxs(Fragment, {
       children: [jsx('div', {
         className: _$$s.mb4.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: renderI18nText('settings_tab.pinned_plugins_label')
         })
       }), jsx('div', {
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText('settings_tab.pinned_plugins_description')
         })
       })]
-    }), o && !e.loaded ? jsx(kt, {
+    }), o && !e.loaded ? jsx(LoadingSpinner, {
       className: _$$s.pt8.flex.alignCenter.justifyCenter.$
     }) : getFeatureFlags().dev_mode_org_pinned_plugins_ent ? o && jsxs(Fragment, {
       children: [jsx(aM, {
@@ -2124,14 +2124,14 @@ function aU({
             className: _$$s.flex.$,
             children: [jsx('div', {
               className: _$$s.flex.mx8.$,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: 'secondary',
                 fontWeight: 'medium',
                 children: renderI18nText('settings_tab.pinned_plugins_inspect')
               })
             }), jsx('div', {
               className: _$$s.flex.mx8.$,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 color: 'secondary',
                 fontWeight: 'medium',
                 children: renderI18nText('settings_tab.pinned_plugins_plugins')
@@ -2183,13 +2183,13 @@ function aU({
           className: _$$s.flex.itemsCenter.justifyBetween.wFull.px8.$,
           children: [jsx('div', {
             className: _$$s.flex.mx8.$,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               fontWeight: 'bold',
               children: renderI18nText('settings_tab.pinned_plugins_inspect')
             })
           }), jsx('div', {
             className: _$$s.flex.mx8.$,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               fontWeight: 'regular',
               children: renderI18nText('settings_tab.pinned_plugins_plugins')
             })
@@ -2210,7 +2210,7 @@ function aF() {
     orientation: 'vertical',
     iconSrc: _$$A7,
     children: renderI18nText('settings_tab.pinned_plugins_downgrade_warning', {
-      noteLabel: jsx(_$$E, {
+      noteLabel: jsx(TextWithTruncation, {
         fontWeight: 'semi-bold',
         children: renderI18nText('settings_tab.pinned_plugins_dowgrade_warning.note')
       })
@@ -2233,7 +2233,7 @@ function aq({
   return jsxs('div', {
     'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-language-row',
-    'children': [jsx(_$$E, {
+    'children': [jsx(TextWithTruncation, {
       fontWeight: 'medium',
       children: renderI18nText('settings_tab.codegen_language_dropdown_label')
     }), jsx('div', {
@@ -2252,7 +2252,7 @@ function a$({
   return Em() ? jsxs('div', {
     'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-unit-row',
-    'children': [jsx(_$$E, {
+    'children': [jsx(TextWithTruncation, {
       fontWeight: 'medium',
       children: renderI18nText('settings_tab.codegen_language_unit_dropdown_label')
     }), jsx('div', {
@@ -2288,7 +2288,7 @@ function aG({
   return jsxs('div', {
     'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-plugin-settings-row',
-    'children': [jsx(_$$E, {
+    'children': [jsx(TextWithTruncation, {
       fontWeight: 'medium',
       children: e.displayText
     }), jsx('div', {
@@ -2302,7 +2302,7 @@ function aG({
 function az({
   preferences: e
 }) {
-  let t = sZ() || null;
+  let t = useCurrentUserOrg() || null;
   let a = useDispatch();
   let [r, l] = useAtomValueAndSetter(aS);
   let [o, d] = useState(null);
@@ -2402,7 +2402,7 @@ function az({
           }
         })]
       })]
-    }) : jsx(kt, {
+    }) : jsx(LoadingSpinner, {
       className: _$$s.m16.pt8.flex.alignCenter.justifyCenter.$
     }))]
   });
@@ -2417,7 +2417,7 @@ function aV({
       plugin: e
     }), jsx('div', {
       className: _$$s.mx8.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontWeight: 'semi-bold',
         children: e.name
       })
@@ -2425,7 +2425,7 @@ function aV({
   }) : null;
 }
 function aW() {
-  let e = sZ() || null;
+  let e = useCurrentUserOrg() || null;
   let t = JA();
   let a = useSelector(e => e.whitelistedPlugins);
   let [r, l] = useAtomValueAndSetter(aC);
@@ -2497,14 +2497,14 @@ function aW() {
           error: m,
           buttonText: getI18nString('settings_tab.dev_mode_setting_set')
         })
-      }) : jsx(kt, {
+      }) : jsx(LoadingSpinner, {
         className: _$$s.pt8.flex.alignCenter.justifyCenter.$
       })
     })]
   });
 }
 let aH = registerModal(() => {
-  let e = sZ() || null;
+  let e = useCurrentUserOrg() || null;
   let t = useDispatch();
   let a = IE();
   let [r, l] = useAtomValueAndSetter(aC);
@@ -2540,7 +2540,7 @@ let aH = registerModal(() => {
     pinnedPluginsEnabled: f.data?.pluginPreferences?.pinnedPluginsEnabled
   }), [f.data, k, y]);
   let N = ol();
-  let I = iT();
+  let I = trackOrgEventWithStore();
   let A = () => {
     a?.setCodegenSettings(null);
     t(popModalStack());
@@ -2583,10 +2583,10 @@ let aH = registerModal(() => {
         orientation: 'vertical',
         iconSrc: _$$A6,
         variant: 'gray',
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: renderI18nText('settings_tab.customize_dev_mode')
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText('settings_tab.upgrade_to_enterprise_plan_text')
         }), jsx(CY, {
           onClick: () => {
@@ -2602,7 +2602,7 @@ let aH = registerModal(() => {
             }));
           },
           trusted: !0,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('settings_tab.upgrade_to_enterprise_learn_more_link')
           })
         })]
@@ -2689,11 +2689,11 @@ function a5({
       }), jsx(_$$c2, {
         value: 'allowed',
         label: jsx(Label, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.export_controls.by_all_viewers')
           })
         }),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('org_settings.export_controls.all_viewers_description')
         })
@@ -2702,11 +2702,11 @@ function a5({
       }), jsx(_$$c2, {
         value: 'members_only',
         label: jsx(Label, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.export_controls.prevent_by_guest_viewers')
           })
         }),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('org_settings.export_controls.prevent_guest_viewers_description')
         })
@@ -2715,11 +2715,11 @@ function a5({
       }), jsx(_$$c2, {
         value: 'banned',
         label: jsx(Label, {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('org_settings.export_controls.prevent_by_all_viewers')
           })
         }),
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('org_settings.export_controls.prevent_all_viewers_description')
         })
@@ -2736,7 +2736,7 @@ let a3 = registerModal(e => {
   let [l, o] = useState(r.shared_container_setting?.file_export_setting ?? 'allowed');
   let d = useModalManager(e);
   let c = r.tier === FPlanNameType.ENTERPRISE;
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: d,
     height: 'dynamic',
     width: 'lg',
@@ -2750,7 +2750,7 @@ let a3 = registerModal(e => {
           style: {
             padding: '4px'
           }
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText('org_settings.export_controls.org_description', {
             learnMoreLink: jsx(CY, {
               'href': 'https://help.figma.com/hc/articles/31825370509591#restrict-file-exports',
@@ -2772,13 +2772,13 @@ let a3 = registerModal(e => {
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: e.onClose,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText('org_settings.export_controls.cancel')
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'primary',
             onClick: () => {
               t($w({
@@ -2788,7 +2788,7 @@ let a3 = registerModal(e => {
               }));
               e.onClose();
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText('org_settings.export_controls.save')
             })
           })]
@@ -2818,17 +2818,17 @@ let a8 = registerModal(({
     open: e,
     onClose: t
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: u,
     height: 'dynamic',
     width: 'lg',
     children: jsxs(vo, {
       children: [jsx(Y9, {
         children: jsx(hE, {
-          children: jsxs(_$$E3, {
+          children: jsxs(ButtonPrimitive, {
             onClick: t,
             ...Ay.props(tg.goBackButton),
-            children: [jsx(_$$t3, {}), jsx(_$$E, {
+            children: [jsx(_$$t3, {}), jsx(TextWithTruncation, {
               truncate: !0,
               color: 'default',
               children: a.name
@@ -2840,7 +2840,7 @@ let a8 = registerModal(({
           style: {
             padding: '4px'
           }
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText('org_settings.export_controls.workspace_modal_description')
         }), jsx(a5, {
           exportControlSetting: d,
@@ -2850,20 +2850,20 @@ let a8 = registerModal(({
         children: jsxs('div', {
           className: 'x78zum5 x6s0dn4 x1qughib xh8yej3',
           children: [jsx('div', {
-            children: a.workspaceSharedSetting?.fileExportSetting && jsx(_$$E3, {
+            children: a.workspaceSharedSetting?.fileExportSetting && jsx(ButtonPrimitive, {
               onClick: _,
               ...Ay.props(tg.removeCustomSettingsButton),
               children: renderI18nText('org_settings.export_controls_modal.remove_custom_settings')
             })
           }), jsxs('div', {
             className: 'x78zum5 x167g77z',
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: 'secondary',
               onClick: t,
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: renderI18nText('org_settings.export_controls.cancel')
               })
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: 'primary',
               onClick: () => {
                 r(KA({
@@ -2874,7 +2874,7 @@ let a8 = registerModal(({
                   onClose: t
                 }));
               },
-              children: jsx(_$$E, {
+              children: jsx(TextWithTruncation, {
                 children: renderI18nText('org_settings.export_controls.save')
               })
             })]
@@ -2896,7 +2896,7 @@ let a6 = registerModal(({
     open: e,
     onClose: t
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: o,
     height: 'dynamic',
     width: 'lg',
@@ -2910,7 +2910,7 @@ let a6 = registerModal(({
           style: {
             padding: '4px'
           }
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText('org_settings.export_controls.remove_workspace_export_controls_body', {
             workspaceName: a.name
           })
@@ -2921,13 +2921,13 @@ let a6 = registerModal(({
         })]
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: t,
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText('org_settings.export_controls.cancel')
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
               s(vs({
@@ -2941,7 +2941,7 @@ let a6 = registerModal(({
                 }
               }));
             },
-            children: jsx(_$$E, {
+            children: jsx(TextWithTruncation, {
               children: renderI18nText('org_settings.export_controls.remove')
             })
           })]
@@ -2976,7 +2976,7 @@ let nr = registerModal(() => {
         className: 'external_collaboration_controls_modal--modalContent--A4isS',
         children: [jsxs('div', {
           className: 'external_collaboration_controls_modal--warningBanner--LnUtG',
-          children: [jsx(_$$B2, {
+          children: [jsx(SvgComponent, {
             className: 'external_collaboration_controls_modal--icon--8UTH3',
             svg: _$$A8
           }), jsx('p', {
@@ -3095,7 +3095,7 @@ function n_(e) {
       })
     }), !d && c && jsx('div', {
       className: _$$s.mb10.$,
-      children: e.isLoading ? jsx(qc, {}) : jsx($y, {
+      children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx($y, {
         variant: 'warn',
         children: jsxs(_$$Q, {
           title: renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_warning.title', {
@@ -3389,7 +3389,7 @@ function nE(e) {
 }
 let nC = registerModal(e => {
   let t = useDispatch();
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let r = !!a?.security_add_on_enabled_at;
   let l = nh(r);
   let [o, d] = useState(e.idleTimeoutDurationInSecs ? ng.CONFIGURED : ng.DEFAULT);
@@ -3625,10 +3625,10 @@ let nT = registerModal(e => {
       className: _$$s.flex.itemsCenter.justifyBetween.mb16.$,
       children: [jsxs('div', {
         className: _$$s.flex.flexColumn.$,
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: renderI18nText('settings_tab.ip_allowlist_modal.enable')
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           children: renderI18nText('settings_tab.ip_allowlist_modal.enable_description')
         })]
       }), jsx(_$$l2, {
@@ -3638,13 +3638,13 @@ let nT = registerModal(e => {
       })]
     }), r && jsxs('div', {
       children: [jsx('p', {
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           fontWeight: 'bold',
           children: renderI18nText('settings_tab.ip_allowlist_modal.allowed_ranges')
         })
       }), jsx('p', {
         className: _$$s.mb8.$,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           color: 'secondary',
           children: renderI18nText('settings_tab.ip_allowlist_modal.input_instructions')
         })
@@ -3665,7 +3665,7 @@ let nT = registerModal(e => {
         orientation: 'vertical',
         variant: 'brand',
         iconSrc: _$$A4,
-        children: jsx(_$$E, {
+        children: jsx(TextWithTruncation, {
           children: renderI18nText('settings_tab.ip_allowlist_modal.not_applied_to_guests')
         })
       })
@@ -3673,10 +3673,10 @@ let nT = registerModal(e => {
   });
 }, 'IpAllowlistModal');
 function nO(e) {
-  return jsxs(_$$E3, {
+  return jsxs(ButtonPrimitive, {
     onClick: e.goBack,
     ...xk(tg.goBackButton),
-    children: [jsx(_$$t3, {}), jsx(_$$E, {
+    children: [jsx(_$$t3, {}), jsx(TextWithTruncation, {
       truncate: !0,
       color: 'default',
       children: e.workspace.name
@@ -3707,7 +3707,7 @@ let nL = registerModal(({
     open: !0,
     onClose: e
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: u,
     height: 'dynamic',
     width: 'lg',
@@ -3745,7 +3745,7 @@ let nL = registerModal(({
           })]
         })
       }), jsxs(wi, {
-        children: [a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null && jsx(_$$E3, {
+        children: [a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null && jsx(ButtonPrimitive, {
           onClick: _,
           ...xk(tg.removeCustomSettingsButton),
           children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
@@ -3785,7 +3785,7 @@ let nD = registerModal(({
     open: !0,
     onClose: t
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: s,
     height: 'dynamic',
     width: 'lg',
@@ -3803,11 +3803,11 @@ let nD = registerModal(({
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: t,
             variant: 'secondary',
             children: renderI18nText('setting_tab.public_sharing.modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
               _$$u2.updatePublicLinkControlsSetting({
@@ -3876,7 +3876,7 @@ let nU = registerModal(() => {
     onClose: o,
     open: !0
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: m,
     width: 'lg',
     height: 'dynamic',
@@ -4004,7 +4004,7 @@ let nF = registerModal(e => {
     open: !0,
     onClose: l
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: o,
     width: 'lg',
     height: 'dynamic',
@@ -4017,11 +4017,11 @@ let nF = registerModal(e => {
         children: s
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: 'secondary',
             onClick: l,
             children: getI18nString('modal.cancel')
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: 'destructive',
             onClick: () => {
               e.onConfirm();
@@ -4259,11 +4259,11 @@ function n6({
 }
 let n9 = registerModal(e => {
   let t = useDispatch();
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let r = useSubscription(OrgAdminSettingsPage, {
     orgId: a.id
   });
-  let l = oA(r.data?.org) ?? null;
+  let l = getResourceDataOrFallback(r.data?.org) ?? null;
   let o = () => t(popModalStack());
   let d = !!l?.sitesPublishingDisabled;
   let [c, _] = useState(d);
@@ -4278,7 +4278,7 @@ let n9 = registerModal(e => {
       prevValue: d,
       value: c
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       width: 'lg',
       manager: u,
       children: jsxs(vo, {
@@ -4343,11 +4343,11 @@ let n9 = registerModal(e => {
 }, 'SitesPublishingToggleModal');
 let se = registerModal(e => {
   let t = useDispatch();
-  let a = sZ();
+  let a = useCurrentUserOrg();
   let r = useSubscription(OrgAdminSettingsPage, {
     orgId: a.id
   });
-  let l = oA(r.data?.org) ?? null;
+  let l = getResourceDataOrFallback(r.data?.org) ?? null;
   let o = () => t(popModalStack());
   let d = !!l?.supabaseDisabled;
   let [c, _] = useState(d);
@@ -4362,7 +4362,7 @@ let se = registerModal(e => {
       prevValue: d,
       value: c
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       width: 'lg',
       manager: u,
       children: jsxs(vo, {
@@ -4539,7 +4539,7 @@ export function $$sr0(e) {
       case ProductAccessTypeEnum.DEVELOPER:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsDeveloper === r.zRx.INSTANT_APPROVAL;
       case ProductAccessTypeEnum.CONTENT:
-        return e || oA(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === r.zRx.INSTANT_APPROVAL;
+        return e || getResourceDataOrFallback(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === r.zRx.INSTANT_APPROVAL;
       case ProductAccessTypeEnum.COLLABORATOR:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === r.zRx.INSTANT_APPROVAL;
       default:
@@ -4580,7 +4580,7 @@ export function $$sr0(e) {
   }), {
     enabled: !0
   });
-  let eb = oA(e_.data?.org) ?? null;
+  let eb = getResourceDataOrFallback(e_.data?.org) ?? null;
   let ev = getFeatureFlags().ai_ga;
   useEffect(() => {
     Eh.getShowVatGst({
@@ -4679,7 +4679,7 @@ export function $$sr0(e) {
     description: jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 8,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText('settings_tab.discovery.description', {
           learnMoreLink: jsx('a', {
             'target': '_blank',
@@ -4690,7 +4690,7 @@ export function $$sr0(e) {
             'children': renderI18nText('file_browser.team_settings.learn_more')
           })
         })
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText('resources_tab.libraries.current', {
           setting: org.discovery_enabled ? getI18nString('settings_tab.enabled') : getI18nString('settings_tab.disabled')
         })
@@ -4703,9 +4703,9 @@ export function $$sr0(e) {
     description: jsxs(AutoLayout, {
       direction: 'vertical',
       spacing: 8,
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText('settings_tab.data_storage.description')
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText('settings_tab.data_storage.current_location', {
           currentLocation: eN
         })
@@ -4888,12 +4888,12 @@ export function $$sr0(e) {
       disabled: !e && !t,
       description: jsxs(Fragment, {
         children: [jsx('span', {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText('settings_tab.ip_allowlist_description')
           })
         }), ec.length !== 0 && t && jsx('span', {
           className: i0,
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             truncate: 'end',
             children: renderI18nText('settings_tab.ip_allowlist_ranges_list', {
               ranges: jsx(_$$T, {
@@ -4927,7 +4927,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.idle_session_timeout_label'),
     description: getI18nString('settings_tab.idle_session_timeout_description'),
     contactSupportTooltipCopy: getI18nString('settings_tab.contact_support_to_change'),
-    contactSupportCopy: jsx(_$$E, {
+    contactSupportCopy: jsx(TextWithTruncation, {
       color: 'tertiary',
       children: si(org.shared_container_setting?.idle_timeout_duration_in_secs)
     })
@@ -4955,7 +4955,7 @@ export function $$sr0(e) {
           'newTab': !0,
           'href': 'https://help.figma.com/hc/articles/7249713835799',
           'aria-label': getI18nString('settings_tab.learn_more_about_workspace_selector'),
-          'children': [jsx('br', {}), jsx(_$$E, {
+          'children': [jsx('br', {}), jsx(TextWithTruncation, {
             children: renderI18nText('general.learn_more')
           })]
         })]
@@ -5236,7 +5236,7 @@ export function $$sr0(e) {
         color: zE.BRAND,
         text: getI18nString('general.beta')
       }), jsx(_$$B, {
-        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('admin_settings.ai.section_title.free_in_beta'),
         'data-tooltip-timeout-delay': 50
       })]
@@ -5560,7 +5560,7 @@ export function $$so1() {
         icon: 'info-16',
         fill: 'secondary'
       })
-    }), jsx(_$$E, {
+    }), jsx(TextWithTruncation, {
       color: 'secondary',
       children: renderI18nText('settings_tab.disabled')
     })]
@@ -5582,10 +5582,10 @@ function sd(e) {
         icon: 'info-16',
         fill: 'secondary'
       })
-    }), e.setting ? jsx(_$$E, {
+    }), e.setting ? jsx(TextWithTruncation, {
       color: a,
       children: renderI18nText('settings_tab.enabled')
-    }) : jsx(_$$E, {
+    }) : jsx(TextWithTruncation, {
       color: a,
       children: renderI18nText('settings_tab.disabled')
     })]

@@ -27,7 +27,7 @@ import { HiddenLabel, Label } from "../905/270045";
 import { atomStoreManager } from "../figma_app/27355";
 import { hY, yr, $X, Fh, r6, J_, AG, $w, dr } from "../figma_app/349969";
 import { TI, z5 } from "../905/713722";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { $j } from "../figma_app/178475";
 import { Q as _$$Q } from "../905/346809";
 import { Point } from "../905/736624";
@@ -47,7 +47,7 @@ import { A as _$$A2 } from "../6020/624960";
 import { Checkbox } from "../905/274480";
 import { setupToggleButton } from "../905/167712";
 import { L as _$$L } from "../905/473569";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { pG } from "../figma_app/811257";
 import { eT as _$$eT, To, pc } from "../figma_app/210983";
 import { A as _$$A3 } from "../svg/983040";
@@ -381,7 +381,7 @@ function Q(e) {
     bigNudgeAmount: e.bigNudgeAmount,
     className: "prototype_device_panel--scrubbableInputLeftCol--P2T66 prototype_device_panel--scrubbableInput--0TFVb",
     "data-tooltip": getI18nString("presets.device_panel.device_width_tooltip"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: e.dispatch,
     inputClassName: "prototype_device_panel--leftColInput--pAJSy prototype_device_panel--input--vNirJ",
     onValueChange: t,
@@ -398,7 +398,7 @@ function Q(e) {
     bigNudgeAmount: e.bigNudgeAmount,
     className: "prototype_device_panel--scrubbableInput--0TFVb",
     "data-tooltip": getI18nString("presets.device_panel.device_height_tooltip"),
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: e.dispatch,
     inputClassName: "prototype_device_panel--input--vNirJ",
     onValueChange: n,
@@ -591,21 +591,21 @@ function eg({
 }) {
   let n = null;
   isInvalidValue(e) && isInvalidValue(t) ? n = renderI18nText("proto.prototype_panel.replace_mixed_muted_and_loop_video_playback", {
-    loopSvg: jsx(_$$B, {
+    loopSvg: jsx(SvgComponent, {
       svg: _$$A3,
       className: _$$eT
     }),
-    speakerSvg: jsx(_$$B, {
+    speakerSvg: jsx(SvgComponent, {
       svg: _$$A4,
       className: To
     })
   }) : isInvalidValue(e) ? n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
-    svg: jsx(_$$B, {
+    svg: jsx(SvgComponent, {
       svg: _$$A3,
       className: _$$eT
     })
   }) : isInvalidValue(t) && (n = renderI18nText("proto.prototype_panel.replace_mixed_video_playback", {
-    svg: jsx(_$$B, {
+    svg: jsx(SvgComponent, {
       svg: _$$A4,
       className: To
     })
@@ -625,7 +625,7 @@ let e_ = function (e) {
       label: jsx(Label, {
         htmlAttributes: {
           "data-tooltip": getI18nString("proto.prototype_panel.default_video_playback_state"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: renderI18nText("proto.prototype_panel.autoplay")
       }),
@@ -671,7 +671,7 @@ let e_ = function (e) {
     "aria-label": getI18nString("proto.prototype_panel.loop"),
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.loop"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     }
   });
   let i = jsx(setupToggleButton, {
@@ -698,7 +698,7 @@ let e_ = function (e) {
     "aria-label": getI18nString("proto.prototype_panel.sound"),
     htmlAttributes: {
       "data-tooltip": getI18nString("proto.prototype_panel.sound"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     }
   });
   let r = jsx(pG, {
@@ -724,7 +724,7 @@ function eD(e) {
   } = e;
   return jsxs("div", {
     className: _$$s.flex.justifyCenter.itemsCenter.$,
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       className: _$$s.flexGrow1.mx12.$,
       useOriginalSrcFills_DEPRECATED: !0,
       svg: "horizontal" === type ? _$$A5 : _$$A6
@@ -839,7 +839,7 @@ function ez({
       })
     }), a && jsx("div", {
       className: "scroll_behavior_panel--infoIcon--FeXbf",
-      "data-tooltip-type": Ib.SPECIAL,
+      "data-tooltip-type": KindEnum.SPECIAL,
       "data-tooltip": d(),
       "data-tooltip-show-immediately": !0,
       children: jsx(_$$r, {})

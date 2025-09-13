@@ -2,11 +2,11 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { t as _$$t } from "../905/117577";
@@ -100,7 +100,7 @@ export let $$M0 = registerModal(function (e) {
       inBuzzPrint: !!getFeatureFlags().buzz_print_export && "PDF Print" === q
     }, H)
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: u,
     width: "fit-content",
     children: jsxs(vo, {
@@ -125,7 +125,7 @@ export let $$M0 = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($n, {
+          children: jsx(Button, {
             variant: "primary",
             onClick: () => {
               i(!0);
@@ -216,7 +216,7 @@ function j({
         }), void 0 !== m && jsx(Fragment, {
           children: jsxs("div", {
             className: "x78zum5 x1q0g3np x1nfngrj xl56j7k x6s0dn4 x1n0bwc9",
-            children: [jsx(_$$E, {
+            children: [jsx(ButtonPrimitive, {
               onClick: () => p(c - 1),
               disabled: f,
               "aria-label": getI18nString("cooper.toolbar.export_modal.previous_asset"),
@@ -231,7 +231,7 @@ function j({
                 current: 0 === o.length ? 0 : c + 1,
                 total: o.length
               })
-            }), jsx(_$$E, {
+            }), jsx(ButtonPrimitive, {
               onClick: () => p(c + 1),
               disabled: _,
               "aria-label": getI18nString("cooper.toolbar.export_modal.next_asset"),

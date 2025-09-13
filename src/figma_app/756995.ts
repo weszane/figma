@@ -1,122 +1,233 @@
-import { throwTypeError } from "../figma_app/465776";
-var $$i0 = (e => (e[e.NAME = 0] = "NAME", e[e.CREATED_AT = 1] = "CREATED_AT", e[e.TOUCHED_AT = 2] = "TOUCHED_AT", e[e.TRASHED_AT = 3] = "TRASHED_AT", e[e.OWNER = 4] = "OWNER", e[e.SEARCH_RELEVANCE = 5] = "SEARCH_RELEVANCE", e[e.PROJECT_NAME = 6] = "PROJECT_NAME", e[e.ACCESSED_AT = 7] = "ACCESSED_AT", e[e.SHARED_AT = 8] = "SHARED_AT", e))($$i0 || {});
-export function $$a6(e) {
-  switch (e) {
-    case 0:
-      return "name";
-    case 1:
-      return "created_at";
-    case 2:
-      return "touched_at";
-    case 3:
-      return "trashed_at";
-    case 4:
-      return "owner";
-    case 5:
-      return "search_relevance";
-    case 6:
-      return "project_name";
-    case 7:
-      return "accessed_at";
-    case 8:
-      return "shared_at";
+// Original file: /Users/allen/sigma-main/src/figma_app/756995.ts
+// Refactored to improve readability, add types, group related functionality, and add documentation.
+// Maintained original functionality and mappings.
+// Renamed obfuscated names to descriptive ones for clarity.
+// Added JSDoc comments and traced back to original names.
+
+import { throwTypeError } from '../figma_app/465776'
+
+// Enums and types for sorting fields
+export enum SortField {
+  NAME = 0,
+  CREATED_AT = 1,
+  TOUCHED_AT = 2,
+  TRASHED_AT = 3,
+  OWNER = 4,
+  SEARCH_RELEVANCE = 5,
+  PROJECT_NAME = 6,
+  ACCESSED_AT = 7,
+  SHARED_AT = 8,
+}
+
+/**
+ * Maps SortField enum values to string keys.
+ * Original name: $$a6
+ * @param field - The SortField enum value
+ * @returns The corresponding string key
+ */
+export function getSortFieldKey(field: SortField): string {
+  switch (field) {
+    case SortField.NAME:
+      return 'name'
+    case SortField.CREATED_AT:
+      return 'created_at'
+    case SortField.TOUCHED_AT:
+      return 'touched_at'
+    case SortField.TRASHED_AT:
+      return 'trashed_at'
+    case SortField.OWNER:
+      return 'owner'
+    case SortField.SEARCH_RELEVANCE:
+      return 'search_relevance'
+    case SortField.PROJECT_NAME:
+      return 'project_name'
+    case SortField.ACCESSED_AT:
+      return 'accessed_at'
+    case SortField.SHARED_AT:
+      return 'shared_at'
     default:
-      throwTypeError(e);
+      throwTypeError(field)
   }
 }
-export var $$s14 = (e => (e[e.ASC = 0] = "ASC", e[e.DESC = 1] = "DESC", e))($$s14 || {});
-export function $$o2(e) {
-  switch (e) {
-    case 0:
-      return "asc";
-    case 1:
-      return "desc";
+
+// Enums and types for sort order
+export enum SortOrder {
+  ASC = 0,
+  DESC = 1,
+}
+
+/**
+ * Maps SortOrder enum values to string keys.
+ * Original name: $$o2
+ * @param order - The SortOrder enum value
+ * @returns The corresponding string key
+ */
+export function getSortOrderKey(order: SortOrder): string {
+  switch (order) {
+    case SortOrder.ASC:
+      return 'asc'
+    case SortOrder.DESC:
+      return 'desc'
     default:
-      throwTypeError(e);
+      throwTypeError(order)
   }
 }
-var $$l11 = (e => (e[e.ANY = 0] = "ANY", e[e.SELF = 1] = "SELF", e[e.OTHER = 2] = "OTHER", e))($$l11 || {});
-var $$d4 = (e => (e[e.CAN_BE_VIEWED = 0] = "CAN_BE_VIEWED", e[e.CAN_BE_RESTORED_DELETED = 1] = "CAN_BE_RESTORED_DELETED", e))($$d4 || {});
-var $$c13 = (e => (e[e.ANY = 0] = "ANY", e[e.DESIGN = 1] = "DESIGN", e[e.FIGJAM = 2] = "FIGJAM", e[e.PROTOTYPE = 3] = "PROTOTYPE", e[e.SLIDES = 4] = "SLIDES", e[e.SITES = 5] = "SITES", e[e.COOPER = 6] = "COOPER", e[e.MAKE = 7] = "MAKE", e))($$c13 || {});
-var $$u5 = (e => (e[e.LIST = 0] = "LIST", e[e.GRID = 1] = "GRID", e))($$u5 || {});
-export function $$p8(e) {
-  switch (e) {
-    case 0:
-      return "list";
-    case 1:
-      return "grid";
+
+// Enums for permissions
+export enum PermissionType {
+  ANY = 0,
+  SELF = 1,
+  OTHER = 2,
+}
+
+export enum PermissionAction {
+  CAN_BE_VIEWED = 0,
+  CAN_BE_RESTORED_DELETED = 1,
+}
+
+// Enums for file types
+export enum FileType {
+  ANY = 0,
+  DESIGN = 1,
+  FIGJAM = 2,
+  PROTOTYPE = 3,
+  SLIDES = 4,
+  SITES = 5,
+  COOPER = 6,
+  MAKE = 7,
+}
+
+// Enums for view modes
+export enum ViewMode {
+  LIST = 0,
+  GRID = 1,
+}
+
+/**
+ * Maps ViewMode enum values to string keys.
+ * Original name: $$p8
+ * @param mode - The ViewMode enum value
+ * @returns The corresponding string key
+ */
+export function getViewModeKey(mode: ViewMode): string {
+  switch (mode) {
+    case ViewMode.LIST:
+      return 'list'
+    case ViewMode.GRID:
+      return 'grid'
     default:
-      throwTypeError(e);
+      throwTypeError(mode)
   }
 }
-export var $$_7 = (e => (e.ALL = "", e.SHARED = "shared", e.ORG_DELETED_DRAFTS = "deleted_user_drafts", e))($$_7 || {});
-export function $$h1(e) {
-  switch (e) {
-    case 0:
-      return "resource_name";
-    case 1:
-      return "resource_created_at";
-    case 8:
-      return "shared_at";
+
+// Enums for filter types
+export enum FilterType {
+  ALL = '',
+  SHARED = 'shared',
+  ORG_DELETED_DRAFTS = 'deleted_user_drafts',
+}
+
+/**
+ * Maps SortField to resource sort field strings.
+ * Original name: $$h1
+ * @param field - The SortField enum value
+ * @returns The corresponding resource sort field or null
+ */
+export function getResourceSortField(field: SortField): string | null {
+  switch (field) {
+    case SortField.NAME:
+      return 'resource_name'
+    case SortField.CREATED_AT:
+      return 'resource_created_at'
+    case SortField.SHARED_AT:
+      return 'shared_at'
     default:
-      return null;
+      return null
   }
 }
-export function $$m9(e) {
-  switch (e) {
-    case 3:
-      return "trashedAt";
-    case 0:
-      return "name";
-    case 1:
-      return "createdAt";
+
+/**
+ * Maps SortField to property names.
+ * Original name: $$m9
+ * @param field - The SortField enum value
+ * @returns The corresponding property name or null
+ */
+export function getSortFieldProperty(field: SortField): string | null {
+  switch (field) {
+    case SortField.TRASHED_AT:
+      return 'trashedAt'
+    case SortField.NAME:
+      return 'name'
+    case SortField.CREATED_AT:
+      return 'createdAt'
     default:
-      return null;
+      return null
   }
 }
-export function $$g10(e) {
-  switch (e) {
-    case 1:
+
+/**
+ * Maps PermissionAction to string keys.
+ * Original name: $$g10
+ * @param action - The PermissionAction enum value
+ * @returns The corresponding string key
+ */
+export function getPermissionActionKey(action: PermissionAction): string {
+  switch (action) {
+    case PermissionAction.CAN_BE_VIEWED:
+      return 'can_be_viewed'
     default:
-      return "can_be_restored_deleted";
-    case 0:
-      return "can_be_viewed";
+      return 'can_be_restored_deleted'
   }
 }
-export function $$f3(e) {
-  switch (e) {
-    case 1:
-      return "0";
-    case 2:
-      return "1";
-    case 4:
-      return "2";
-    case 5:
-      return "3";
-    case 6:
-      return "4";
-    case 7:
-      return "5";
-    case 3:
-    case 0:
-      return null;
+
+/**
+ * Maps FileType to index strings.
+ * Original name: $$f3
+ * @param type - The FileType enum value
+ * @returns The corresponding index string or null
+ */
+export function getFileTypeIndex(type: FileType): string | null {
+  switch (type) {
+    case FileType.DESIGN:
+      return '0'
+    case FileType.FIGJAM:
+      return '1'
+    case FileType.SLIDES:
+      return '2'
+    case FileType.SITES:
+      return '3'
+    case FileType.COOPER:
+      return '4'
+    case FileType.MAKE:
+      return '5'
+    case FileType.PROTOTYPE:
+    case FileType.ANY:
+      return null
     default:
-      throwTypeError(e);
+      throwTypeError(type)
   }
 }
-export var $$E12 = (e => (e[e.TIME = 0] = "TIME", e[e.ALPHABETICAL = 1] = "ALPHABETICAL", e[e.OTHER = 2] = "OTHER", e))($$E12 || {});
-export const C0 = $$i0;
-export const De = $$h1;
-export const GB = $$o2;
-export const Gv = $$f3;
-export const Jh = $$d4;
-export const XU = $$u5;
-export const _5 = $$a6;
-export const cT = $$_7;
-export const jq = $$p8;
-export const jx = $$m9;
-export const mo = $$g10;
-export const rJ = $$l11;
-export const rR = $$E12;
-export const t2 = $$c13;
-export const ue = $$s14;
+
+// Enums for sort types
+export enum SortType {
+  TIME = 0,
+  ALPHABETICAL = 1,
+  OTHER = 2,
+}
+
+// Refactored exports to match new names, maintaining original alias names
+export const C0 = SortField
+export const De = getResourceSortField
+export const GB = getSortOrderKey
+export const Gv = getFileTypeIndex
+export const Jh = PermissionAction
+export const XU = ViewMode
+export const _5 = getSortFieldKey
+export const cT = FilterType
+export const jq = getViewModeKey
+export const jx = getSortFieldProperty
+export const mo = getPermissionActionKey
+export const rJ = PermissionType
+export const rR = SortType
+export const t2 = FileType
+export const ue = SortOrder

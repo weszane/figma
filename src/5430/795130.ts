@@ -18,7 +18,7 @@ import { fu } from "../figma_app/831799";
 import { IE } from "../5430/231178";
 import { selectCurrentUser } from "../905/372672";
 import { LE } from "../905/71785";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { T as _$$T } from "../5132/203178";
 import { nu, uD } from "../5430/774694";
 export function $$T0({
@@ -75,7 +75,7 @@ export function $$T0({
         isEnabled: !1
       },
       children: jsx("div", {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": e,
         "data-tooltip-show-immediately": !0,
         children: A

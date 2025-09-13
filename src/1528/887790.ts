@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
 import r from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { hx } from "../figma_app/290668";
 import { A } from "../6828/523860";
 import { A as _$$A } from "../6828/85206";
@@ -33,7 +33,7 @@ function u({
       }),
       role: "button",
       tabIndex: 0,
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         className: "collapse--expandCaret--FzvQ9 library_section_header--expandCaret--20Tzs object_row--expandCaret--f1MjE object_row--indent--uZlad",
         svg: u ? A : _$$A
       }), n]

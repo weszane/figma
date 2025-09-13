@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { m3 } from "../905/315794";
 export class $$o0 extends Component {
   constructor() {
@@ -30,7 +30,7 @@ export class $$o0 extends Component {
       className: e ? "redirecting_org_team_action--containerLoading--MCEAV redirecting_org_team_action--_container--2dOl4" : "redirecting_org_team_action--container--XlCia redirecting_org_team_action--_container--2dOl4",
       children: [jsx("div", {
         className: `redirecting_org_team_action--spinner--2rFX8 ${this.props.spinnerClassName || ""}`,
-        children: e && jsx(kt, {})
+        children: e && jsx(LoadingSpinner, {})
       }), jsx("div", {
         className: "redirecting_org_team_action--button--ISpcA",
         children: jsx(m3, {

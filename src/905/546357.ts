@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
 import { Cv } from "../figma_app/795938";
 import { gw } from "../figma_app/162807";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 export function $$l1(e) {
   let {
     searchResult
@@ -19,17 +19,17 @@ let $$c2 = {
   tabletListSortKeys: d,
   mobileListSortKeys: d,
   sortKeyDescriptions: {
-    [XU.GRID]: {
+    [ViewMode.GRID]: {
       [gw.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
       [gw.RECENCY]: renderI18nText("tile.sort_filter.recent")
     },
-    [XU.LIST]: {
+    [ViewMode.LIST]: {
       [gw.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
       [gw.RECENCY]: renderI18nText("tile.sort_filter.recent")
     }
   },
   defaultOptions: {
-    viewMode: XU.GRID,
+    viewMode: ViewMode.GRID,
     sortMode: {
       sortKey: gw.POPULARITY,
       sortDesc: !1

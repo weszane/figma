@@ -2,9 +2,9 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 import { M } from "../905/456042";
 import { hideModal } from "../905/156213";
@@ -34,7 +34,7 @@ export let $$f0 = registerModal(function (e) {
   return jsx(fu, {
     name: "Plan Picker",
     properties: y,
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: E,
       width: "lg",
       children: jsx(vo, {
@@ -52,7 +52,7 @@ export let $$f0 = registerModal(function (e) {
               editorType: payload.editorType,
               useCase: payload.useCase
             })
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "ghost",
             onClick: r,
             children: renderI18nText("community.try.pick_workspace.cancel")

@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -41,7 +41,7 @@ export function $$f0(e) {
     properties: {
       pendingInviteId: x
     },
-    children: jsx(bL, {
+    children: jsx(ModalRootComponent, {
       manager: h,
       width: "lg",
       children: jsxs(vo, {
@@ -69,11 +69,11 @@ export function $$f0(e) {
           })]
         }), jsx(wi, {
           children: jsxs(jk, {
-            children: [jsx($n, {
+            children: [jsx(Button, {
               variant: "secondary",
               onClick: e.onClose,
               children: getI18nString("revoke_transfer_modal.go_back")
-            }), jsx($n, {
+            }), jsx(Button, {
               variant: "destructive",
               onClick: () => {
                 w();

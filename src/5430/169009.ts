@@ -9,10 +9,10 @@ import { PR, MK, Cw } from "../figma_app/599979";
 import { nI, ej as _$$ej, Ng as _$$Ng, Ni } from "../figma_app/188152";
 import { selectCurrentUser } from "../905/372672";
 import { useRef, useEffect, useState, useCallback, cloneElement, useMemo } from "react";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { hasMorePages } from "../figma_app/661371";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { x as _$$x } from "../905/211326";
 import { a as _$$a } from "../905/925868";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ import { hJ, XY } from "../905/506641";
 import { Zj, _8, dL, e6, X2, p4, vr, cO } from "../figma_app/530167";
 import { zn } from "../figma_app/350203";
 import { t0 } from "../figma_app/198840";
-import { Qv, vt } from "../figma_app/45218";
+import { CommentTabType, ResourceTypeNoComment } from "../figma_app/45218";
 import { E as _$$E, d as _$$d } from "../5430/165157";
 import { oB, j7 } from "../905/929976";
 import { mH, BV, eG, Tu } from "../figma_app/703138";
@@ -35,12 +35,12 @@ import { K as _$$K } from "../905/443068";
 import { J as _$$J } from "../905/125993";
 import H from "classnames";
 import { h1 } from "../905/986103";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { Ex, zE } from "../figma_app/919079";
 import { AG } from "../figma_app/999312";
 import { y as _$$y } from "../905/158417";
 import { CS } from "../figma_app/275462";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { HH } from "../figma_app/841415";
 import { ky } from "../figma_app/99826";
@@ -70,7 +70,7 @@ function p(e) {
     ref: t,
     children: [e.children, e.showLoader && jsx("div", {
       className: "infinite_scroll_container--loadingSpinner--UMKR8",
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     })]
   });
 }
@@ -126,7 +126,7 @@ let M = function ({
   useEffect(() => {
     f && _(f);
   }, [f]);
-  let g = Object.keys(h).filter(e => r || e !== Qv.ME).filter(e => e !== Qv.RATINGS_REVIEWS && e !== Qv.COMMENTS).map(e => ({
+  let g = Object.keys(h).filter(e => r || e !== CommentTabType.ME).filter(e => e !== CommentTabType.RATINGS_REVIEWS && e !== CommentTabType.COMMENTS).map(e => ({
     displayText: x(h[e]),
     name: e,
     isChecked: e === a
@@ -629,7 +629,7 @@ function eI(e) {
             })]
           }), jsxs("div", {
             className: "comment_tile--commentOptions--hNQQM",
-            children: [P && jsx(_$$B, {
+            children: [P && jsx(SvgComponent, {
               className: "comment_tile--isHiddenIcon--isUzt",
               svg: _$$A
             }), jsx("div", {
@@ -648,7 +648,7 @@ function eI(e) {
                 },
                 "aria-label": getI18nString("community.comments.comment_actions"),
                 htmlAttributes: {
-                  "data-tooltip-type": Ib.TEXT,
+                  "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": getI18nString("community.comments.comment_actions")
                 },
                 children: jsx(_$$J, {})
@@ -811,7 +811,7 @@ function eS(e) {
     isTeamOrOrgProfileActive: l
   });
   let p = [];
-  if ((_ === vt.PLUGIN || _ === vt.WIDGET) && e.resource?.versions && e.resource.current_plugin_version_id) {
+  if ((_ === ResourceTypeNoComment.PLUGIN || _ === ResourceTypeNoComment.WIDGET) && e.resource?.versions && e.resource.current_plugin_version_id) {
     let r = e.resource;
     let i = r.versions[r.current_plugin_version_id].id;
     m.forEach(n => {
@@ -898,7 +898,7 @@ function eA(e) {
   let U = useSelector(e => e.selectedView.commentThreadId);
   let V = useSelector(e => !!e.user?.community_profile_id);
   let W = H || U;
-  let G = P === Qv.ALL ? e.numCommentsForResource : B[P]?.totalNumberOfComments;
+  let G = P === CommentTabType.ALL ? e.numCommentsForResource : B[P]?.totalNumberOfComments;
   let {
     resource
   } = e;
@@ -1030,7 +1030,7 @@ function eA(e) {
               pagination
             }) && jsx("div", {
               className: "comments_view--mobileLoadMore--tqxIs",
-              children: jsx($n, {
+              children: jsx(Button, {
                 variant: "link",
                 onClick: X,
                 children: renderI18nText("community.comments.load_more_comments")

@@ -1,8 +1,20 @@
-import { z } from "../905/239603";
-export function $$r3(e) {
-  return e.is_subscription;
+import { z } from 'zod'
+
+/**
+ * Checks if the given object represents a subscription.
+ * @param obj - The object to check.
+ * @returns True if is_subscription is true.
+ * @originalName $$r3
+ */
+export function isSubscription(obj: { is_subscription: boolean }): boolean {
+  return obj.is_subscription
 }
-export let $$a6 = z.object({
+
+/**
+ * Zod schema for product details.
+ * @originalName $$a6
+ */
+export const productSchema = z.object({
   id: z.string(),
   price: z.number(),
   is_subscription: z.boolean(),
@@ -12,17 +24,62 @@ export let $$a6 = z.object({
   price_updated_at: z.string().optional(),
   annual_discount_percentage: z.number().optional(),
   annual_discount_active_at: z.date().optional(),
-  annual_price: z.number().optional()
-});
-export var $$s4 = (e => (e.DOESNT_MEET_NEEDS = "doesnt_meet_needs", e.TECHNICAL_ISSUES = "technical_issues", e.TOO_EXPENSIVE = "too_expensive", e.FOUND_ALTERNATIVE = "found_alternative", e.OTHER = "other", e))($$s4 || {});
-export let $$o0 = 500;
-var $$l2 = (e => (e.FIGMA_FIRST_PARTY = "figma_first_party", e.FIGMA_PARTNER = "figma_partner", e.OFF_PLATFORM = "off_platform", e.HAS_FREEMIUM_CODE = "has_freemium_code", e))($$l2 || {});
-var $$d1 = (e => (e.FLAGGED = "flagged", e.PENDING_AUTO_VALIDATION = "pending_auto_validation", e.MIGRATING = "migrating", e))($$d1 || {});
-var $$c5 = (e => (e.MONTHLY = "monthly", e.ANNUALLY = "annually", e))($$c5 || {});
-export const JV = $$o0;
-export const PN = $$d1;
-export const UC = $$l2;
-export const Uv = $$r3;
-export const bG = $$s4;
-export const fN = $$c5;
-export const ii = $$a6; 
+  annual_price: z.number().optional(),
+})
+
+/**
+ * Enum for cancellation reasons.
+ * @originalName $$s4
+ */
+export enum CancellationReason {
+  DOESNT_MEET_NEEDS = 'doesnt_meet_needs',
+  TECHNICAL_ISSUES = 'technical_issues',
+  TOO_EXPENSIVE = 'too_expensive',
+  FOUND_ALTERNATIVE = 'found_alternative',
+  OTHER = 'other',
+}
+
+/**
+ * Default price value.
+ * @originalName $$o0
+ */
+export const DEFAULT_PRICE = 500
+
+/**
+ * Enum for product source types.
+ * @originalName $$l2
+ */
+export enum ProductSource {
+  FIGMA_FIRST_PARTY = 'figma_first_party',
+  FIGMA_PARTNER = 'figma_partner',
+  OFF_PLATFORM = 'off_platform',
+  HAS_FREEMIUM_CODE = 'has_freemium_code',
+}
+
+/**
+ * Enum for product status.
+ * @originalName $$d1
+ */
+export enum ProductStatus {
+  FLAGGED = 'flagged',
+  PENDING_AUTO_VALIDATION = 'pending_auto_validation',
+  MIGRATING = 'migrating',
+}
+
+/**
+ * Enum for subscription interval.
+ * @originalName $$c5
+ */
+export enum SubscriptionInterval {
+  MONTHLY = 'monthly',
+  ANNUALLY = 'annually',
+}
+
+// Refactored exports with original variable names mapped
+export const JV = DEFAULT_PRICE
+export const PN = ProductStatus
+export const UC = ProductSource
+export const Uv = isSubscription
+export const bG = CancellationReason
+export const fN = SubscriptionInterval
+export const ii = productSchema

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { ColorSpaceEnum } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { F } from "../905/989956";
@@ -48,7 +48,7 @@ export let $$f1 = forwardRef(function ({
   } : {
     backgroundColor: F.format(b)
   };
-  return S ? jsx(_$$E, {
+  return S ? jsx(ButtonPrimitive, {
     style: A,
     "aria-label": $$$$E0(e),
     ref: o,

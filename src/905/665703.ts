@@ -3,14 +3,14 @@ import { reportError } from "../905/11";
 import { createNoOpValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
 import { z } from "../905/239603";
 import { M4 } from "../905/713695";
-import { nn } from "../figma_app/45218";
+import { ShelfSchema } from "../figma_app/45218";
 export let $$d0 = new class {
   constructor() {
     this.CommunityShelvesSchemaValidator = createNoOpValidator();
     this.getCommunityShelfById = e => this.CommunityShelvesSchemaValidator.validate(async ({
       xr: t
     }) => await t.get(`/api/community_shelves/id/${e.categoryId}`));
-    this.CommunityShelfV2SchemaValidator = createPaginatedValidator("CommunityShelfV2SchemaValidator", z.array(nn), null, !0);
+    this.CommunityShelfV2SchemaValidator = createPaginatedValidator("CommunityShelfV2SchemaValidator", z.array(ShelfSchema), null, !0);
     this.ShelfContentPaginatedQuery = M4.PaginatedQuery({
       fetch: async (e, {
         pageParam: t

@@ -9,7 +9,7 @@ import { q, v as _$$v } from "../905/476456";
 import { LS } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { a3, ow, G7 } from "../905/188421";
 import { fI } from "../figma_app/626177";
 import { c$, tV } from "../905/794875";
@@ -18,8 +18,8 @@ import { t as _$$t } from "../905/1946";
 import { sH, sI, Yq } from "../figma_app/183248";
 import { QK } from "../figma_app/100987";
 let I = [.25, .5, .75, 1, 2, 3, 4, 5, 10];
-class E extends a3 { }
-class x extends c$ { }
+class E extends a3 {}
+class x extends c$ {}
 let S = new class {
   constructor() {
     this.MAX_SCALE = sH;
@@ -92,7 +92,7 @@ let $$w0 = forwardRef((e, t) => {
     postWheelMultiplier: .1,
     resolution: .01,
     "data-tooltip": "",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     dispatch: u,
     value: {
       value: scale

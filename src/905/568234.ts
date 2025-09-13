@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { CY } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { aY } from "../figma_app/350203";
-import { bD } from "../figma_app/45218";
+import { ResourceType } from "../figma_app/45218";
 import { A as _$$A } from "../905/794518";
 import { Jm } from "../905/599844";
 function c({
@@ -27,7 +27,7 @@ export function $$u0({
         learnMoreLink: jsx(c, {
           link: aY.PAID_RESOURCE_LICENSE
         })
-      }) : e === bD.HUB_FILE ? renderI18nText("community.publishing.creative_commons_license", {
+      }) : e === ResourceType.HUB_FILE ? renderI18nText("community.publishing.creative_commons_license", {
         learnMoreLink: jsx(c, {
           link: aY.FREE_HUB_FILE_LICENSE
         })

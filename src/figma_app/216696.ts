@@ -5,7 +5,7 @@ import { Qi } from "../905/172918";
 import { createOptimistThunk } from "../905/350402";
 import { x1 as _$$x } from "../figma_app/740025";
 import { N } from "../905/696711";
-import { Ug } from "../figma_app/45218";
+import { ResourceTypeNoComment2 } from "../figma_app/45218";
 import { A } from "../905/665703";
 let $$p2 = createActionCreator("COMMUNITY_SET_SHELVES_FOR_SHELF_TYPE");
 let $$_1 = createOptimistThunk((e, {
@@ -73,7 +73,7 @@ function m(e, t) {
   let i = [];
   t.forEach(e => {
     let t = _$$x(e);
-    t === Ug.HUB_FILE ? r.push(e) : t === Ug.PLUGIN ? n.push(e) : t === Ug.WIDGET && i.push(e);
+    t === ResourceTypeNoComment2.HUB_FILE ? r.push(e) : t === ResourceTypeNoComment2.PLUGIN ? n.push(e) : t === ResourceTypeNoComment2.WIDGET && i.push(e);
   });
   e(Sb({
     hubFiles: r,

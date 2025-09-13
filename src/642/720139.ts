@@ -20,7 +20,7 @@ import { AutoLayout } from "../905/470281";
 import { vq } from "../905/8732";
 import { FU, b$, Bs } from "../figma_app/933328";
 import { T1 } from "../905/711212";
-import { pi } from "../figma_app/314264";
+import { mapFileToProductType } from "../figma_app/314264";
 import { getAssetBackgroundColor, generateNodeThumbnail } from "../figma_app/80990";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
@@ -28,7 +28,7 @@ import { V as _$$V, q as _$$q } from "../figma_app/473391";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
 import { RR } from "../figma_app/307841";
-import { _X, Pw, DQ } from "../figma_app/121751";
+import { isReduxDeprecationShadowreadOrCutover, ConfigGroups, isReduxDeprecationCutover } from "../figma_app/121751";
 import { useShadowReadLoaded, adminPermissionConfig, setupShadowRead } from "../figma_app/391338";
 import { selectCurrentFile, selectOpenFile } from "../figma_app/516028";
 import { FUserTypeClassification, FProductAccessType, FPlanAccessType, FTeamType } from "../figma_app/191312";
@@ -60,7 +60,7 @@ import { q as _$$q2 } from "../figma_app/58251";
 import { b as _$$b } from "../905/217163";
 import { E as _$$E } from "../905/511388";
 import { fd } from "../figma_app/255679";
-import { sZ } from "../905/845253";
+import { useCurrentUserOrg } from "../905/845253";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { ol } from "../figma_app/598018";
 import { fO } from "../figma_app/329496";
@@ -70,18 +70,18 @@ import { Fullscreen, VariablesBindings } from "../figma_app/763686";
 import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k4 } from "../905/582200";
 import { MO } from "../1528/85853";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { N as _$$N } from "../905/120979";
 import { NG } from "../figma_app/709893";
 import { $$ } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { b as _$$b2 } from "../1528/176770";
 import { x as _$$x2 } from "../1528/887790";
 import { T3, q0 } from "../figma_app/722362";
 import { getBasename } from "../905/309735";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { O2 } from "../figma_app/164212";
 import { Y as _$$Y2 } from "../905/411989";
 import { K0 } from "../figma_app/778125";
@@ -118,14 +118,14 @@ function H(e) {
   } = r;
   let d = !!(currentUserOrgId && canGuestOrg(currentUserOrgId, r));
   let c = useSubscription(CurrentUserInStudentPlanView, {}, {
-    enabled: _X(Pw.GROUP_7)
+    enabled: isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7)
   });
   let p = !!(a && hasActiveEduTeam(r, a));
   let h = useShadowReadLoaded({
     oldValue: resourceUtils.loaded(p),
     newValue: c.transform(e => e?.currentUser.inStudentPlan),
     label: adminPermissionConfig.CanViewPlayground.hasActiveEduTeam,
-    enableFullRead: DQ(Pw.GROUP_7)
+    enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7)
   });
   return useMemo(() => resourceUtils.transformAll([s, h], (s, r) => {
     if (!l || !a) return !1;
@@ -138,7 +138,7 @@ function H(e) {
         planUserType: s.key.type,
         planUserParentId: s.key.parentId
       },
-      enableFullRead: DQ(Pw.GROUP_7),
+      enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
       maxReports: 10
     })) return !0;
     if (t) {
@@ -154,7 +154,7 @@ function e_({
   assetNodeId: t
 }) {
   let s = ol();
-  let l = sZ();
+  let l = useCurrentUserOrg();
   let a = !!l || hasTeamPaidAccess(s);
   let o = l?.id;
   let {
@@ -415,7 +415,7 @@ function e4({
       children: [jsx("h2", {
         className: "component_flyout_body--header--3LXSQ text--fontPos14--OL9Hp text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa",
         "data-tooltip": f ? m : void 0,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         ref: g,
         children: m
       }), !!h && h > 1 && jsx("div", {
@@ -439,7 +439,7 @@ function e4({
       })
     }), jsx("div", {
       className: "component_flyout_body--buttonWrapper--Sb1Mq component_flyout_body--_bodyPadding--KrB6p",
-      children: getFeatureFlags().dse_fpl_wave_1 ? jsx(IK, {
+      children: getFeatureFlags().dse_fpl_wave_1 ? jsx(ButtonWide, {
         onClick: i,
         recordingKey: "component_flyout_insert",
         children: C
@@ -496,7 +496,7 @@ function e5({
     className: "component_flyout_body--playgroundHeader--lQfDc",
     children: [jsxs("div", {
       className: "component_flyout_body--flyoutLabel--6Y6lR text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: [jsx(_$$B, {
+      children: [jsx(SvgComponent, {
         className: "component_flyout_body--headerIcon--FHdrw",
         svg: _$$A
       }), renderI18nText("design_systems.assets_panel.playground_label")]
@@ -509,7 +509,7 @@ function e5({
         recordingKey: "resetPlaygroundProps",
         htmlAttributes: {
           "data-tooltip": getI18nString("design_systems.playground.reset_properties"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         children: jsx(_$$N, {})
       })
@@ -518,7 +518,7 @@ function e5({
       svg: _$$A3,
       onClick: t,
       "data-tooltip": getI18nString("design_systems.playground.reset_properties"),
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       disabled: !e.hasChangesToReset,
       recordingKey: "resetPlaygroundProps"
     })]
@@ -770,7 +770,7 @@ export function $$tu1({
       partnerType: _$$X(e.library_key),
       sectionDepth: A,
       sourceSection: E ?? void 0,
-      productType: pi({
+      productType: mapFileToProductType({
         editorType: eu?.editorType
       })
     };

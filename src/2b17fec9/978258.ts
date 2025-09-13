@@ -9,7 +9,7 @@ import { A as _$$A } from "../vendor/850789";
 import { FQ } from "../9410/571209";
 import { lg } from "../figma_app/976749";
 import { kl } from "../905/275640";
-import { _X, Yb, $$, ZT } from "../figma_app/62612";
+import { getViewportInfo, scaleRect, applyOffsetToViewport, isRectInside } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { f as _$$f } from "../905/299537";
 import { Al, tJ, T1, DH, Dl, Yh, lM } from "../figma_app/90441";
@@ -43,7 +43,7 @@ export function $$j0({
       appModel: e
     }
   }) => e.isReadOnly);
-  let I = _X({
+  let I = getViewportInfo({
     subscribeToUpdates_expensive: t
   });
   let L = getObservableOrFallback(AppStateTsApi.canvasViewState().selectionBoundingRect);
@@ -110,7 +110,7 @@ function b({
   let k = a ? 0 : O;
   let R = useRef(null);
   let M = FQ(R, S);
-  let D = Yb(t, h);
+  let D = scaleRect(t, h);
   let P = useMemo(() => ({
     ...D,
     x: D.x + t.x,
@@ -120,7 +120,7 @@ function b({
     if (t) {
       let a = e - t.x;
       let s = i - t.y;
-      let l = $$(t, {
+      let l = applyOffsetToViewport(t, {
         x: a,
         y: s - r / window.devicePixelRatio
       });
@@ -163,7 +163,7 @@ function b({
     d === o || C || (o = M(d, a, r));
     return [o.left(), o.top()];
   }, [f, C, t.height, t.width, t.x, t.y, M, H, B]);
-  let [G] = _$$A(ZT(D, t), 500);
+  let [G] = _$$A(isRectInside(D, t), 500);
   if (!G) return jsx(C_, {
     disableAnimation: T,
     ref: i,

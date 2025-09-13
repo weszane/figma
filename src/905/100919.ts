@@ -8,16 +8,16 @@ import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
 import { Ex, zE } from "../figma_app/919079";
 import { p as _$$p } from "../905/991924";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { Nw } from "../figma_app/78808";
 import { NN } from "../905/466026";
 import { b_, oE } from "../figma_app/840917";
 import { Y6, nb, Tf } from "../figma_app/543100";
 import { FileCanEdit } from "../figma_app/43951";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Cu, ol } from "../figma_app/603826";
 import { A as _$$A } from "../5724/663128";
 export function $$S0(e) {
@@ -71,11 +71,11 @@ export function $$S0(e) {
     return jsxs("div", {
       className: e.isListView ? Cu : _$$s.flex.flexRow.itemsCenter.gap4.$,
       onMouseEnter: r,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t,
       "aria-disabled": e.disabled,
       dir: "auto",
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         truncate: !0,
         children: jsx("span", {
           ...Ay.props(_$$g.textBodyMediumStrong),
@@ -87,7 +87,7 @@ export function $$S0(e) {
         color: zE.WARNING_TERTIARY,
         text: getI18nString("locked_team.label.view_only"),
         dataTooltip: getI18nString("locked_team.label.tooltip"),
-        dataTooltipType: Ib.TEXT,
+        dataTooltipType: KindEnum.TEXT,
         className: ol
       })]
     });
@@ -96,10 +96,10 @@ export function $$S0(e) {
 function w({
   tile: e
 }) {
-  return C(e, useSelector(e => e.currentTeamId), useSelector(e => e.currentUserOrgId)) ? jsx(B, {
+  return C(e, useSelector(e => e.currentTeamId), useSelector(e => e.currentUserOrgId)) ? jsx(SvgComponent, {
     className: _$$s.colorIconBrand.$,
     svg: _$$A,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("tile.tooltip.external_file"),
     "data-tooltip-show-immediately": !0,
     "data-tooltip-show-above": !0

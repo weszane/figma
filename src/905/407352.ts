@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Multiplayer, SchemaJoinStatus } from "../figma_app/763686";
-import { U } from "../figma_app/901889";
+import { trackFileEventWithStore } from "../figma_app/901889";
 export function $$s1() {
   let [e, t] = useState(navigator.onLine);
   useEffect(() => {
@@ -15,7 +15,7 @@ export function $$s1() {
   return e;
 }
 export function $$o2() {
-  let e = U();
+  let e = trackFileEventWithStore();
   let t = Multiplayer?.getSessionState();
   let i = $$s1();
   useEffect(() => {

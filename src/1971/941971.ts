@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { SceneGraphHelpers, ComponentPropsAiCPPBindings, FirstDraftHelpers, LayoutSizingMode, DraftState } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { logError, logWarning } from "../905/714362";
@@ -12,7 +12,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { AutoLayout } from "../905/470281";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { qV, nY, oT, xF } from "../figma_app/566517";
 import { tV, au } from "../figma_app/445976";
 import { TM, WX } from "../9410/423538";
@@ -33,7 +33,7 @@ import { C2 } from "../9410/671180";
 import { Ol } from "../figma_app/193952";
 import { IT, M4 } from "../905/713695";
 import { Xh } from "../figma_app/803787";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Gh, Xs } from "../figma_app/707567";
 import { m as _$$m } from "../figma_app/175364";
 import { permissionScopeHandler } from "../905/189185";
@@ -300,7 +300,7 @@ function ei() {
     direction: "horizontal",
     children: [jsx("div", {
       className: _$$s.cursorPointer.flex.itemsCenter.wFull.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "medium",
         children: "IP Conflict"
@@ -317,7 +317,7 @@ function ei() {
         text: e.label,
         value: e
       }))
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       onClick: () => {
         s.$$function();
@@ -492,7 +492,7 @@ function ec({
       vertical: 12
     },
     direction: "vertical",
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 11,
       fontWeight: "medium",
       children: "Evals"
@@ -524,7 +524,7 @@ function ec({
           value: e,
           text: e.name
         }))
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         onClick: q,
         children: "Run evals"
@@ -571,7 +571,7 @@ function ec({
           children: "Use published kit version"
         })
       }), G && _ && jsx(_$$Z, {
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": "You currently have unpublished changes to your library kit.\nPublish library updates before running evals to ensure the current kit version is used."
       })]
     })]
@@ -592,7 +592,7 @@ function eu({
     svgAltText: "Upload eval",
     inputId: "first-draft-eval-upload",
     inputRef: a,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": "Upload eval",
     onFileInputChange: e => () => {
       let a = e.current?.files?.[0];
@@ -958,7 +958,7 @@ function eS({
     direction: "vertical",
     children: [jsx("button", {
       className: _$$s.cursorPointer.flex.itemsCenter.wFull.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 11,
         fontWeight: "medium",
         children: "Examples Debug"
@@ -969,7 +969,7 @@ function eS({
       value: s,
       placeholder: "Enter a prompt to retrieve examples",
       onChange: e => r(e.target.value)
-    }), jsx($n, {
+    }), jsx(Button, {
       variant: "secondary",
       onClick: async () => {
         try {
@@ -1176,7 +1176,7 @@ function eI({
       vertical: 12
     },
     direction: "vertical",
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontSize: 11,
       fontWeight: "medium",
       children: "Serialize & Insert"
@@ -1210,7 +1210,7 @@ function eI({
         })
       })
     }), jsxs(AutoLayout, {
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "secondary",
         onClick: async () => {
           await N();
@@ -1219,7 +1219,7 @@ function eI({
           }));
         },
         children: "Insert streaming"
-      }), jsx($n, {
+      }), jsx(Button, {
         variant: "secondary",
         onClick: async () => {
           await T(m);
@@ -1228,7 +1228,7 @@ function eI({
           }));
         },
         children: "Insert all"
-      }), c && c.length > 1 && jsx($n, {
+      }), c && c.length > 1 && jsx(Button, {
         variant: "secondary",
         onClick: async () => {
           for (let e of c) {

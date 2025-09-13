@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import s from "classnames";
 import { Q } from "../905/911623";
 import { useHandleMouseEvent } from "../figma_app/878298";
@@ -37,7 +37,7 @@ export function $$u0({
   });
   return jsxs("div", {
     className: o()(i ? u : s, "file_row_styles--fileRowContainer--5uxdH"),
-    children: [jsx(E, {
+    children: [jsx(ButtonPrimitive, {
       "aria-label": f,
       className: "file_row_styles--fileRowContainerButton---kQS9",
       children: null,

@@ -13,9 +13,9 @@ import { fileEntityDataMapper } from "../905/943101";
 import { SiteMount, FileLastPublishedAt } from "../figma_app/43951";
 import { M4 } from "../905/713695";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { R as _$$R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { renderI18nText } from "../905/303541";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { registerModal } from "../905/102752";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -35,17 +35,17 @@ let I = registerModal(function (e) {
     open,
     onClose
   } = e;
-  let o = jsx(_$$E, {
+  let o = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: firstFileName
   });
-  let l = jsx(_$$E, {
+  let l = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: renderI18nText("file_browser.confirm_file_delete_modal.num_files", {
       numFiles
     })
   });
-  return jsx(_$$R, {
+  return jsx(ConfirmationModal, {
     width: "md",
     title: renderI18nText("file_browser.confirm_file_delete_forever_modal.title", {
       numFiles
@@ -59,13 +59,13 @@ let I = registerModal(function (e) {
     onClose,
     destructive: !0,
     children: jsx("div", {
-      children: showUnsyncedFileWarning ? jsx(_$$E, {
+      children: showUnsyncedFileWarning ? jsx(TextWithTruncation, {
         children: renderI18nText("file_browser.confirm_permanently_delete_file_modal.about_to_delete_offline", {
           numFiles,
           numFilesText: l,
           fileNameText: o
         })
-      }) : jsx(_$$E, {
+      }) : jsx(TextWithTruncation, {
         children: renderI18nText("file_browser.confirm_permanently_delete_file_modal.about_to_delete_online", {
           numFiles,
           numFilesText: l,
@@ -81,17 +81,17 @@ function k({
   numFiles: t,
   firstFileName: i
 }) {
-  let n = jsx(_$$E, {
+  let n = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: i
   });
-  let a = jsx(_$$E, {
+  let a = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: renderI18nText("file_browser.confirm_file_delete_modal.num_files", {
       numFiles: t
     })
   });
-  if (0 === e.length) return jsx(_$$E, {
+  if (0 === e.length) return jsx(TextWithTruncation, {
     children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_no_warnings", {
       fileNameText: n,
       numFiles: t,
@@ -105,42 +105,42 @@ function k({
         children: jsx(Q, {
           children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_banner_warning")
         })
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_intro", {
           fileNameText: n
         })
       }), jsxs("ul", {
         className: "confirm_file_delete_modal--libraryDeletionBulletList--sMlkg confirm_file_delete_modal--bulletList--MzHlN",
         children: [jsx("li", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_access_lost")
           })
         }), jsx("li", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_warning_updates_lost")
           })
         })]
       })]
-    }) : jsx(_$$E, {
+    }) : jsx(TextWithTruncation, {
       children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_component_unpublish", {
         fileNameText: n
       })
     });
     if ("published_sites" === e[0]) return jsxs(Fragment, {
-      children: [jsx(_$$E, {
+      children: [jsx(TextWithTruncation, {
         children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_file", {
           fileNameText: n
         })
-      }), jsx(_$$E, {
+      }), jsx(TextWithTruncation, {
         children: renderI18nText("file_browser.confirm_file_trash_modal.site_published_warning")
       })]
     });
-    if ("team_template" === e[0]) return jsx(_$$E, {
+    if ("team_template" === e[0]) return jsx(TextWithTruncation, {
       children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_team_template", {
         fileNameText: n
       })
     });
-    if ("unsynced_file" === e[0]) return jsx(_$$E, {
+    if ("unsynced_file" === e[0]) return jsx(TextWithTruncation, {
       children: renderI18nText("file_browser.confirm_file_delete_forever_modal.about_to_delete_offline", {
         fileNameText: n,
         numFiles: t,
@@ -150,7 +150,7 @@ function k({
   }
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap12.$,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_multiple_warnings", {
         numFilesText: a
       })
@@ -158,33 +158,33 @@ function k({
       className: "confirm_file_delete_modal--bulletList--MzHlN",
       children: e.map(e => jsx("li", {
         children: {
-          team_template: jsx(_$$E, {
+          team_template: jsx(TextWithTruncation, {
             children: renderI18nText("file_browser.confirm_file_delete_modal.warning_team_template", {
-              templatesText: jsx(_$$E, {
+              templatesText: jsx(TextWithTruncation, {
                 fontWeight: "semi-bold",
                 children: renderI18nText("file_browser.confirm_file_delete_modal.templates")
               })
             })
           }),
-          published_assets: jsx(_$$E, {
+          published_assets: jsx(TextWithTruncation, {
             children: renderI18nText("file_browser.confirm_file_delete_modal.warning_component_unpublish", {
-              componentsText: jsx(_$$E, {
+              componentsText: jsx(TextWithTruncation, {
                 fontWeight: "semi-bold",
                 children: renderI18nText("file_browser.confirm_file_delete_modal.components")
               })
             })
           }),
-          published_sites: jsx(_$$E, {
+          published_sites: jsx(TextWithTruncation, {
             children: renderI18nText("file_browser.confirm_file_delete_modal.warning_published_sites", {
-              sitesText: jsx(_$$E, {
+              sitesText: jsx(TextWithTruncation, {
                 fontWeight: "semi-bold",
                 children: renderI18nText("file_browser.confirm_file_delete_modal.sites")
               })
             })
           }),
-          unsynced_file: jsx(_$$E, {
+          unsynced_file: jsx(TextWithTruncation, {
             children: renderI18nText("file_browser.confirm_file_delete_modal.warning_unsynced_file", {
-              offlineFilesText: jsx(_$$E, {
+              offlineFilesText: jsx(TextWithTruncation, {
                 fontWeight: "semi-bold",
                 children: renderI18nText("file_browser.confirm_file_delete_modal.offline_files")
               })
@@ -220,16 +220,16 @@ let R = registerModal(function ({
   useEffect(() => {
     1 === e && "unsynced_file" === f && reportError(_$$e.WAYFINDING, Error("ConfirmFileDeleteModal shown for single file with single warning of FileDeleteWarningType.UNSYNCED_FILE"));
   }, [e, f]);
-  let v = jsx(_$$E, {
+  let v = jsx(TextWithTruncation, {
     fontWeight: "semi-bold",
     children: renderI18nText("file_browser.confirm_file_trash_modal.trash_section")
   });
-  let I = m ? jsx(_$$E, {
+  let I = m ? jsx(TextWithTruncation, {
     children: renderI18nText("file_browser.confirm_file_trash_modal.description_restore_drafts", {
       numFiles: e,
       trashText: v
     })
-  }) : jsx(_$$E, {
+  }) : jsx(TextWithTruncation, {
     children: renderI18nText("file_browser.confirm_file_trash_modal.description_restore", {
       numFiles: e,
       trashText: v
@@ -238,7 +238,7 @@ let R = registerModal(function ({
   let S = () => {
     h(hideModal());
   };
-  return jsx(_$$R, {
+  return jsx(ConfirmationModal, {
     width: "md",
     title: renderI18nText("file_browser.confirm_file_trash_modal.title", {
       numFiles: e

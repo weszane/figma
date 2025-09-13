@@ -19,7 +19,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { FProductAccessType } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { AppView } from "../figma_app/707808";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../905/202542";
 import { C5, h5 } from "../figma_app/812915";
 import { s0 } from "../figma_app/115923";
@@ -87,7 +87,7 @@ export function $$D1({
     recordingKey: generateRecordingKey(e, "websiteSettingsButton"),
     htmlAttributes: {
       "data-tooltip": getI18nString("sites.metadata.modal_button_site"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$I, {})
   }) : null;
@@ -117,7 +117,7 @@ export function $$M0({
       recordingKey: E,
       htmlAttributes: {
         "data-tooltip": c,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip-max-width": 200,
         "data-tooltip-show-below": !0
       },
@@ -139,7 +139,7 @@ export function $$M0({
     recordingKey: E,
     htmlAttributes: {
       "data-tooltip": c,
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(l, {})
   });

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { CheckboxPrimitive } from "../905/549791";
 import a from "classnames";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 var s = a;
 export let $$l0 = "toolbelt_toggle_id";
 export function $$d1(e) {
@@ -17,7 +17,7 @@ export function $$d1(e) {
   } = e;
   return jsx("div", {
     className: "toolbelt_toggle--container--GCPUG",
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": tooltipText,
     "data-tooltip-shortcut": tooltipShortcut,
     "data-tooltip-show-above": !0,

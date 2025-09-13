@@ -14,7 +14,7 @@ import { reportError, setTagGlobal } from "../905/11";
 import g, { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { on, Gc } from "../figma_app/456871";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { c6 } from "../figma_app/432652";
 import { Ay, Gx } from "../figma_app/948389";
 import { fullscreenValue } from "../figma_app/455680";
@@ -142,11 +142,11 @@ export async function $$M0({
   }
   parameters && "prompt" in parameters && parameters.prompt && "string" == typeof parameters.prompt && (X.promptLength = parameters.prompt.length);
   parameters && "language" in parameters && parameters.language && "string" == typeof parameters.language && (X.language = parameters.language);
-  ds("ai_text_tools_started", K, W, X);
+  trackFileEvent("ai_text_tools_started", K, W, X);
   let q = e => (onError?.(e), e);
   let J = e => {
     X.timeToCompletion = p.getElapsedTime();
-    ds("ai_text_tools_failed", K, W, {
+    trackFileEvent("ai_text_tools_failed", K, W, {
       ...X,
       error: e
     });
@@ -162,7 +162,7 @@ export async function $$M0({
     return q(e);
   }
   if (0 === targets.length) {
-    ds("ai_text_tools_complete", K, W, X);
+    trackFileEvent("ai_text_tools_complete", K, W, X);
     onSuccess?.(parameters);
     return;
   }
@@ -296,7 +296,7 @@ export async function $$M0({
     A || (e = fullscreenValue.commit());
     let N = Z.filter(e => e.state === z8.FAILED);
     if (N.length > 0 && N[0].state === z8.FAILED) throw q(N[0].error);
-    if (X.timeToCompletion = p.getElapsedTime(), ds("ai_text_tools_complete", K, W, X), onSuccess?.(parameters), e) {
+    if (X.timeToCompletion = p.getElapsedTime(), trackFileEvent("ai_text_tools_complete", K, W, X), onSuccess?.(parameters), e) {
       let t = Zr(e, () => {
         t();
         mg(aiTrackingContext);
@@ -323,7 +323,7 @@ export async function $$M0({
   } finally {
     X.timeToCompletion = p.getElapsedTime();
     p.stop();
-    t.signal.aborted && ds("ai_text_tools_cancelled", K, W, X);
+    t.signal.aborted && trackFileEvent("ai_text_tools_cancelled", K, W, X);
     clearAllLoadingStates();
     ei?.cancel();
   }

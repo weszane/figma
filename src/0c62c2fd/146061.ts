@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import n from "classnames";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { nR, vd } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../0c62c2fd/277163";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -181,7 +181,7 @@ export function $$M0(e) {
               className: "folder_move--warningBanner--Tnfff",
               children: [jsx("div", {
                 className: "folder_move--warningSectionIcon--gOcDL",
-                children: jsx(_$$B, {
+                children: jsx(SvgComponent, {
                   svg: _$$A3
                 })
               }), jsxs("div", {
@@ -192,14 +192,14 @@ export function $$M0(e) {
                   tabIndex: 0,
                   children: [renderI18nText("file_browser.folder_move.view_team"), jsx("div", {
                     className: "folder_move--arrowRightIcon--xIk7X",
-                    children: jsx(_$$B, {
+                    children: jsx(SvgComponent, {
                       svg: _$$A
                     })
                   })]
                 })]
               })]
             })
-          }), (o || isFigmakeSitesEnabled()) && !A && M && $ && "loaded" === P.status && P.data?.project?.hasPublishedSite.status === "loaded" && oA(P.data?.project?.hasPublishedSite) && jsx("div", {
+          }), (o || isFigmakeSitesEnabled()) && !A && M && $ && "loaded" === P.status && P.data?.project?.hasPublishedSite.status === "loaded" && getResourceDataOrFallback(P.data?.project?.hasPublishedSite) && jsx("div", {
             className: O,
             children: jsx(_$$_, {
               dataTestId: "project-move-site-unpublish-banner",
@@ -262,7 +262,7 @@ function U(e) {
     tabIndex: 0,
     children: [jsx("div", {
       className: A,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: e.isCurrentTeam ? _$$A2 : _$$A4
       })
     }), jsx("div", {
@@ -273,7 +273,7 @@ function U(e) {
       })
     }), e.selectedTeamId === team.id && !r && jsx("div", {
       className: A,
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: _$$A3
       })
     })]

@@ -2,9 +2,9 @@ import { j } from "../905/918929";
 import { getI18nString } from "../905/303541";
 import { D } from "../figma_app/690075";
 import { vr } from "../figma_app/514043";
-import { I0, xQ, m3, zF, U, PM } from "../figma_app/45218";
+import { isPlugin, isWidget, hasMonetizedResourceMetadata, isThirdPartyMonetized, hasClientMeta, hasFreemiumCode } from "../figma_app/45218";
 import { G3, QK } from "../905/272080";
-import { Uv, bG } from "../905/54385";
+import { isSubscription, CancellationReason } from "../905/54385";
 let $$c15 = 2;
 let $$u19 = 1e3;
 export function $$p17(e) {
@@ -55,7 +55,7 @@ export function $$y14(e, t = !1) {
 }
 export function $$b10(e) {
   let t = $$y14(e);
-  let r = Uv(e) ? getI18nString("community.buyer.subscribe") : getI18nString("community.buyer.buy");
+  let r = isSubscription(e) ? getI18nString("community.buyer.subscribe") : getI18nString("community.buyer.buy");
   return `${r} ${t}`;
 }
 export function $$T9(e) {
@@ -77,15 +77,15 @@ export function $$I16(e, t = !1) {
 }
 export function $$S18(e) {
   switch (e) {
-    case bG.DOESNT_MEET_NEEDS:
+    case CancellationReason.DOESNT_MEET_NEEDS:
       return getI18nString("community.buyer.refund_reason.doesnt_meet_needs");
-    case bG.TECHNICAL_ISSUES:
+    case CancellationReason.TECHNICAL_ISSUES:
       return getI18nString("community.buyer.refund_reason.technical_issues");
-    case bG.TOO_EXPENSIVE:
+    case CancellationReason.TOO_EXPENSIVE:
       return getI18nString("community.buyer.refund_reason.too_expensive");
-    case bG.FOUND_ALTERNATIVE:
+    case CancellationReason.FOUND_ALTERNATIVE:
       return getI18nString("community.buyer.refund_reason.found_alternative");
-    case bG.OTHER:
+    case CancellationReason.OTHER:
       return getI18nString("community.buyer.refund_reason.other");
   }
 }
@@ -106,7 +106,7 @@ export function $$$$C0(e) {
   return $$A4(e) && !v(e) && new Date(e.purchased_at).getTime() >= t;
 }
 export function $$w6(e, t) {
-  if (I0(t) || xQ(t)) {
+  if (isPlugin(t) || isWidget(t)) {
     let r = (t.plugin_publishers?.accepted || []).map(e => e.id);
     let i = (t.plugin_publishers?.pending || []).map(e => e.id);
     let a = new Set(r.concat(i));
@@ -136,12 +136,12 @@ export function $$O2({
   payment: t
 }) {
   let r = e.monetized_resource_metadata;
-  return !!(r && Uv(r)) && !!r.trial_length_in_days && (!t || !t.subscription_expires_at);
+  return !!(r && isSubscription(r)) && !!r.trial_length_in_days && (!t || !t.subscription_expires_at);
 }
 export function $$R12(e, t) {
-  let r = m3(e);
-  let n = zF(e) && U(e);
-  let i = r && PM(e);
+  let r = hasMonetizedResourceMetadata(e);
+  let n = isThirdPartyMonetized(e) && hasClientMeta(e);
+  let i = r && hasFreemiumCode(e);
   let a = $$A4(t);
   return r && !i && !a || n;
 }

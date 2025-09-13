@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { N_, u4 } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
@@ -111,7 +111,7 @@ export function $$g0({
       onClick: b,
       children: jsxs("div", {
         className: "empty_development_view--buttonContent--kb5Nb",
-        children: [jsx(B, {
+        children: [jsx(SvgComponent, {
           className: "empty_development_view--plusIcon--h23yu",
           svg: _$$A
         }), jsx("div", {
@@ -119,7 +119,7 @@ export function $$g0({
           children: renderI18nText("community.plugins.new")
         }), jsx("div", {
           ref: j,
-          children: jsx(B, {
+          children: jsx(SvgComponent, {
             className: "empty_development_view--caretIcon--jjHPA",
             svg: A
           })

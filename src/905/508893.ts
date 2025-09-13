@@ -7,7 +7,7 @@ import { A as _$$A } from "../vendor/850789";
 import { colorToRgbaString, parseColor, getThemeBackgroundColor } from "../figma_app/191804";
 import { useLatestRef } from "../figma_app/922077";
 import { l as _$$l } from "../905/745972";
-import { kt } from "../figma_app/858013";
+import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString } from "../905/303541";
 import { DP } from "../905/640017";
 import { Z as _$$Z } from "../905/823863";
@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { r as _$$r } from "../figma_app/67145";
 import { Dm } from "../figma_app/8833";
 import { Um, BK } from "../905/848862";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { l6, c$, uQ } from "../905/794875";
 import { ZE } from "../figma_app/932285";
 import { wv, $n } from "../figma_app/439493";
@@ -136,7 +136,7 @@ function j(e) {
   return jsxs("div", {
     className: "edit_preview_toolbar--zoomPanPresetSelectorContainer--45Nn2",
     "data-tooltip-show-above": !0,
-    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("fig_feed.zoom_pan_preset.tooltip"),
     children: [u, c, jsx(O, {
       ...d,
@@ -274,7 +274,7 @@ function J({
           fallbackSvg: _$$A3,
           disabled: !_,
           onClick: y,
-          "data-tooltip-type": Ib.LOOKUP,
+          "data-tooltip-type": KindEnum.LOOKUP,
           "data-tooltip": "zoom-out"
         }), jsxs(_$$L, {
           ariaLabel: getI18nString("fullscreen.zoom_menu.zoom_view_options"),
@@ -282,7 +282,7 @@ function J({
           selected: o.showing,
           className: l()(LY, o.showing && vu),
           onboardingKey: _$$q,
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen.zoom_menu.zoom_view_options"),
           children: [jsx("div", {
             className: cm,
@@ -309,7 +309,7 @@ function J({
           fallbackSvg: _$$A5,
           disabled: !f,
           onClick: A,
-          "data-tooltip-type": Ib.LOOKUP,
+          "data-tooltip-type": KindEnum.LOOKUP,
           "data-tooltip": "zoom-in"
         })]
       })
@@ -846,7 +846,7 @@ export function $$ec1(e) {
       style: {
         display: eg ? "none" : "block"
       },
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     }), jsx("div", {
       className: "feed_post_zoom_pan--zoomPanInteractionLayer--8w-cl",
       style: {

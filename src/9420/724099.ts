@@ -6,8 +6,8 @@ import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { Lf } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S2 } from "../figma_app/490799";
-import { kt } from "../figma_app/858013";
-import { B as _$$B } from "../905/714743";
+import { LoadingSpinner } from "../figma_app/858013";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -78,7 +78,7 @@ export function $$N0({
   }, [G]);
   return M?.code === dl.UNINITIALIZED_STRIPE_ELEMENTS_ERROR ? jsxs("div", {
     className: "stripe_payment_and_address--errorContainer--vjs9-",
-    children: [jsx(_$$B, {
+    children: [jsx(SvgComponent, {
       svg: _$$A2,
       className: "stripe_payment_and_address--errorIcon--vMQyn"
     }), jsx("p", {
@@ -192,7 +192,7 @@ export function $$N0({
       })]
     }) : jsx("div", {
       className: "stripe_payment_and_address--spinnerContainer--hg5Vy",
-      children: jsx(kt, {})
+      children: jsx(LoadingSpinner, {})
     })]
   });
 }

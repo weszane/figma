@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { IK } from "../905/521428";
+import { ButtonWide } from "../905/521428";
 import { T } from "../905/632137";
 import o from "classnames";
 import { renderI18nText } from "../905/303541";
@@ -33,14 +33,14 @@ export function $$b0({
     className: l()(sn, {
       [Xb]: i
     }),
-    children: [jsx(IK, {
+    children: [jsx(ButtonWide, {
       onClick: e,
       recordingKey: t,
       ref: o,
       children: E ? renderI18nText("slides.properties_panel.replace_media") : renderI18nText("fullscreen.properties_panel.image_settings.upload_new")
     }), S && !b && jsx("div", {
       className: zr,
-      children: jsx(IK, {
+      children: jsx(ButtonWide, {
         onClick: () => {
           v?.();
           close();

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { oW } from "../905/675859";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getPluginUploadUrl } from "../figma_app/455620";
 import { hasLocalFileId } from "../figma_app/155287";
@@ -12,7 +12,7 @@ export function $$p1({
 }) {
   return jsx("div", {
     className: _$$s.py4.flex.alignCenter.justifyCenter.$,
-    children: hasLocalFileId(e) ? jsx(B, {
+    children: hasLocalFileId(e) ? jsx(SvgComponent, {
       svg: A,
       className: _$$s.colorIcon.$
     }) : jsx($$m0, {

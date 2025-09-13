@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { q7 } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { oA } from "../905/723791";
+import { getResourceDataOrFallback } from "../905/723791";
 import { FlashActions } from "../905/573154";
 import { fk } from "../figma_app/618433";
 import { SQ, PF, YW } from "../figma_app/78808";
@@ -23,9 +23,9 @@ import { fileActionEnum } from "../figma_app/630077";
 import { isBranchView } from "../905/218608";
 import { $A } from "../905/782918";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { restoreFiles } from "../905/760074";
 import { registerModal } from "../905/102752";
@@ -71,7 +71,7 @@ function $$D(e) {
       savedAt: version.touched_at
     });
   };
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: i,
     width: "sm",
     children: jsxs(vo, {
@@ -83,11 +83,11 @@ function $$D(e) {
         children: renderI18nText("collaboration.branching.undo_merge_description")
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             variant: "secondary",
             onClick: () => t(hideModal()),
             children: renderI18nText("collaboration.branching.undo_merge_cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             variant: "primary",
             onClick: f,
             disabled: s,
@@ -106,7 +106,7 @@ let F = registerModal(function (e) {
     onClose,
     onConfirm
   } = e;
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: t,
     width: "md",
     children: jsxs(vo, {
@@ -120,11 +120,11 @@ let F = registerModal(function (e) {
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx($n, {
+          children: [jsx(Button, {
             onClick: onClose,
             variant: "secondary",
             children: getI18nString("cms_file_operations.cancel")
-          }), jsx($n, {
+          }), jsx(Button, {
             onClick: onConfirm,
             variant: "primary",
             children: getI18nString("cms_file_operations.continue_anyway")
@@ -151,7 +151,7 @@ export function $$B0(e) {
       "data-test-id": `savepoint-menu-item-${e}`,
       children: formatI18nMessage(e)
     }, e);
-    let a = T.editorType === FEditorType.Slides && oA(t.org?.isSlidesDisabled) || T.editorType === FEditorType.Whiteboard && !!t.org?.figjamDisabledAt || T.editorType === FEditorType.Sites && !!t.org?.isSitesDisabled || T.editorType === FEditorType.Cooper && !!t.org?.isCooperDisabled;
+    let a = T.editorType === FEditorType.Slides && getResourceDataOrFallback(t.org?.isSlidesDisabled) || T.editorType === FEditorType.Whiteboard && !!t.org?.figjamDisabledAt || T.editorType === FEditorType.Sites && !!t.org?.isSitesDisabled || T.editorType === FEditorType.Cooper && !!t.org?.isCooperDisabled;
     let u = r("savepoint-compare", () => {
       k(_$$D({
         fileKey: t.key,

@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { S } from "../5132/724052";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { G } from "../905/750789";
 import { getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
@@ -29,7 +29,7 @@ export function $$p5({
       height: "40px",
       border: "1px solid var(--color-border)"
     },
-    children: jsx(B, {
+    children: jsx(SvgComponent, {
       svg: A,
       useOriginalSrcFills_DEPRECATED: !0,
       svgWidth: "16px",
@@ -139,7 +139,7 @@ export function $$v3({
   variant: e,
   children: t
 }) {
-  return jsx($n, {
+  return jsx(Button, {
     variant: e,
     disabled: !0,
     children: jsxs("div", {

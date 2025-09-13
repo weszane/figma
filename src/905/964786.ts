@@ -24,7 +24,7 @@ import { widgetErrorTracker } from "../905/250412";
 import { j } from "../905/813868";
 import { hasKey, getArrayLength } from "../905/764747";
 import { canPerformAction } from "../figma_app/12796";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { hasLocalFileId, manifestContainsWidget, manifestErrorMessage } from "../figma_app/155287";
 import { Zm } from "../figma_app/201703";
 import { q } from "../905/276489";
@@ -41,7 +41,7 @@ function L(e, t, i) {
   let s = debugState.getState();
   for (let t of e) if (!hasLocalFileId(t) && canRunPluginWithinOrg(s, t)) try {
     let e = publishedWidgets ? publishedWidgets[t.plugin_id] : void 0;
-    if (m3(e) && Rm(e)) {
+    if (hasMonetizedResourceMetadata(e) && Rm(e)) {
       if (!i.showUnpurchased) continue;
       a.push({
         type: "run-menu-action",

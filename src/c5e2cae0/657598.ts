@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { useModal } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { up } from "../figma_app/692987";
@@ -14,8 +14,8 @@ import { lo, wn, Ix } from "../9420/795870";
 import { _6 } from "../figma_app/386952";
 import { ub } from "../figma_app/514043";
 import { Np } from "../figma_app/193867";
-let v = tf($n);
-let y = tf($n);
+let v = tf(Button);
+let y = tf(Button);
 export function $$j0(e) {
   let {
     upsellSource,
@@ -71,7 +71,7 @@ export function $$j0(e) {
     properties: {
       upsellSource
     },
-    children: [jsx(bL, {
+    children: [jsx(ModalRootComponent, {
       manager: R,
       width: "fit-content",
       children: jsxs(vo, {

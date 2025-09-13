@@ -5,7 +5,7 @@ import { Ql } from "../figma_app/387100";
 import { selectWithShallowEqual } from "../905/103090";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { $A } from "../905/782918";
 import { selectCurrentFile } from "../figma_app/516028";
 let _ = null;
@@ -94,7 +94,7 @@ export function $$h1(e) {
         isDevModeFocusView: v,
         componentKey
       };
-      ds(e.eventName, fileKey, A.getState(), d);
+      trackFileEvent(e.eventName, fileKey, A.getState(), d);
     }
   }, [topLevelMode, urlNodeId, isTeamFile, sceneGraph, selectedPageId, selectedNodeId, numberOfNodesSelected, e.topLevelMode, e.eventName, e.teamFilesOnly, fileKey, A, topLevelNodeId, topLevelNodeType, S, v]);
 }

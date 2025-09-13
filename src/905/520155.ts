@@ -2,7 +2,7 @@ import { useContext, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { At } from "../figma_app/770088";
 import { viewportNavigatorContext } from "../figma_app/298911";
-import { Eq } from "../905/380385";
+import { NAVIGATION_BUTTONS } from "../905/380385";
 import { s as _$$s } from "../905/518538";
 export function $$d0(e) {
   let t = _$$s();
@@ -13,7 +13,7 @@ export function $$d0(e) {
       thread: n,
       viewport: i,
       config: t,
-      source: Eq.accessibilityCommentPin,
+      source: NAVIGATION_BUTTONS.accessibilityCommentPin,
       navigate: e
     }));
   }, [i, t, e, d]);

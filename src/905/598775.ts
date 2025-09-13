@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useState, useCallback, useEffect, useId } from "react";
 import { A } from "../vendor/723372";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { S } from "../905/823680";
 import { ensureContext } from "../905/61417";
 import { LinkPrimitive } from "../figma_app/496441";
@@ -60,7 +60,7 @@ export let $$g2 = forwardRef(({
   let {
     labeledById
   } = ensureContext(u, "CardPrimitive.Main", "CardPrimitive.Root");
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     "aria-labelledby": labeledById,
     className: A("card-primitive__button__jv46G", e),
     ref: i,

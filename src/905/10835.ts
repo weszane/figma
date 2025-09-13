@@ -1,10 +1,10 @@
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { l as _$$l } from '../905/241412';
 import { renderI18nText } from '../905/303541';
-import { $n } from '../905/521428';
+import { Button } from '../905/521428';
 import { s as _$$s } from '../cssbuilder/589278';
 import { B7, My } from '../figma_app/143628';
-import { Cu } from '../figma_app/314264';
+import { logAndTrackCTA } from '../figma_app/314264';
 import { selectCurrentFile } from '../figma_app/516028';
 import { fx, PF } from '../figma_app/657972';
 import { fu } from '../figma_app/831799';
@@ -27,10 +27,10 @@ export function $$g0() {
       className: My,
       children: [jsx(_$$l, {
         className: B7
-      }), renderI18nText('slides.visual_bell.making_a_presentation'), jsx($n, {
+      }), renderI18nText('slides.visual_bell.making_a_presentation'), jsx(Button, {
         variant: 'secondary',
         onClick: () => {
-          Cu({
+          logAndTrackCTA({
             trackingContext: 'Slides conversion visual bell entrypoint',
             name: 'slides_conversion_visual_bell_entrypoint'
           });

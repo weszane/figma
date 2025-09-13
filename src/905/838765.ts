@@ -1,9 +1,9 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, memo, useRef } from "react";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import l from "classnames";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
@@ -253,7 +253,7 @@ function R(e) {
     });
   };
   e.TextMetadataLayout = function (e) {
-    return jsx(_$$E, {
+    return jsx(ButtonPrimitive, {
       onClick: e.onClick,
       className: QH,
       children: jsxs("div", {
@@ -387,10 +387,10 @@ function R(e) {
                 children: [jsx("div", {
                   className: gW,
                   children: t.name
-                }), t.showLockIcon && jsx(B, {
+                }), t.showLockIcon && jsx(SvgComponent, {
                   svg: _$$A2,
                   className: xB
-                }), t.onClick && jsx(B, {
+                }), t.onClick && jsx(SvgComponent, {
                   svg: _$$A,
                   className: i2
                 }), t.showPaymentError && jsx("div", {

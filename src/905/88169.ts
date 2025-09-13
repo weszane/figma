@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import o from "classnames";
 import { zq } from "../905/193529";
 import { l as _$$l } from "../905/600666";
@@ -29,7 +29,7 @@ export function $$m0({
       lastCreatedCommentId: null
     })));
   }, [v, i, b, A]);
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     htmlAttributes: {
       id: `accessibility-comment-pin-${i}`,
       role: "button",

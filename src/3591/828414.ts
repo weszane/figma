@@ -10,7 +10,7 @@ import { s_ } from "../905/17223";
 import { c$, wv, ms } from "../figma_app/236327";
 import { $$ } from "../figma_app/637027";
 import { R as _$$R } from "../3591/975641";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -27,8 +27,8 @@ import { Um } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { R as _$$R2 } from "../figma_app/612938";
-import { bD } from "../figma_app/45218";
-import { Ib } from "../905/129884";
+import { ResourceType } from "../figma_app/45218";
+import { KindEnum } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { Cf } from "../905/504727";
 import { YW } from "../figma_app/626177";
@@ -82,7 +82,7 @@ export function $$ed0(e) {
   let i = useDispatch();
   let t = useSelector(e => e.dropdownShown);
   let n = V2();
-  let s = e.resourceType === bD.WIDGET;
+  let s = e.resourceType === ResourceType.WIDGET;
   return t?.data?.targetRect ? jsxs(Cf, {
     minWidth: 163,
     targetRect: t?.data.targetRect,
@@ -94,7 +94,7 @@ export function $$ed0(e) {
         i(showModalHandler({
           type: _$$h,
           data: {
-            resourceType: e.resourceType || bD.PLUGIN
+            resourceType: e.resourceType || ResourceType.PLUGIN
           }
         }));
       },
@@ -238,7 +238,7 @@ let eu = class e extends PureComponent {
             className: cV,
             text: this.props.plugin.localFilePath.replace("/manifest.json", "")
           })]
-        }), error && jsx(_$$B, {
+        }), error && jsx(SvgComponent, {
           className: rs,
           svg: BrowserInfo.mac ? _$$A7 : _$$A8
         })]
@@ -248,7 +248,7 @@ let eu = class e extends PureComponent {
         className: c()(q6, this.shouldShowPointingDropdown() ? Yh : ""),
         onClick: this.onDotsClick,
         ref: this.dotsIconRef,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": getI18nString("community.plugins.options"),
         selected: this.shouldShowPointingDropdown()
       }), this.shouldShowContextMenu() && jsx(ms, {
@@ -323,7 +323,7 @@ function eg(e) {
         onClick: e.onOptionsClick,
         "aria-expanded": e.isSelected,
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("community.plugins.options")
         },
         "aria-label": getI18nString("community.plugins.options"),
@@ -362,7 +362,7 @@ function eg(e) {
       optionsIconRef: s,
       pluginIcon: jsx("div", {
         className: TM,
-        children: e.plugin.error ? jsx(_$$B, {
+        children: e.plugin.error ? jsx(SvgComponent, {
           className: QW,
           svg: _$$A12
         }) : jsx(_$$t, {
@@ -388,19 +388,19 @@ function eg(e) {
     });
     if (hasOrgRole(e)) {
       let i = e.roles.org?.name;
-      return jsx(_$$B, {
+      return jsx(SvgComponent, {
         svg: _$$A9,
         className: kQ,
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         "data-tooltip": i ? getI18nString("community.plugins.private_for_plugin_org_name", {
           orgName: i
         }) : getI18nString("community.plugins.private_for_plugin_org")
       });
     }
-    if (e.roles.is_public) return jsx(_$$B, {
+    if (e.roles.is_public) return jsx(SvgComponent, {
       className: Ac,
       svg: _$$A10,
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("community.plugins.published_to_community")
     });
   }

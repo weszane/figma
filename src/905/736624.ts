@@ -9,7 +9,6 @@
 
 import { isNotNullish } from '../figma_app/95419'
 
-
 /**
  * Interface for a 2D point or vector.
  */
@@ -84,7 +83,7 @@ export class Point implements IPoint {
    * @param points - The points to add.
    * @returns A new Point with the total sum.
    */
-  static add(...points: (Point | null | undefined)[]): Point {
+  static add(...points: (IPoint | null | undefined)[]): Point {
     return points
       .filter(isNotNullish)
       .reduce((acc, p) => new Point(acc.x + p.x, acc.y + p.y), new Point(0, 0))
@@ -230,7 +229,7 @@ export class Point implements IPoint {
    * @param point - The point to round.
    * @returns A new rounded Point.
    */
-  static rounded(point: Point): Point {
+  static rounded(point: IPoint): Point {
     return new Point(Math.round(point.x), Math.round(point.y))
   }
 

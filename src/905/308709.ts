@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { N_ } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { e1, $F, et } from "../905/305240";
 import { A } from "../svg/619883";
@@ -35,7 +35,7 @@ export function $$c0({
   }
   return jsxs("div", {
     className: $F,
-    children: [jsx(B, {
+    children: [jsx(SvgComponent, {
       className: et,
       svg: A
     }), jsx("p", {

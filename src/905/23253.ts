@@ -10,7 +10,7 @@ import { WB } from "../905/761735";
 import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { u1 } from "../figma_app/91703";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
 import { JB } from "../905/843553";
@@ -152,7 +152,7 @@ export async function $$M0({
     already_max_upscaled_error_count: 0,
     total_error_count: 0
   };
-  ds(`${i}_started`, d.openFile?.key, d, m);
+  trackFileEvent(`${i}_started`, d.openFile?.key, d, m);
   let E = performance.now();
   let x = {};
   let S = [];
@@ -249,7 +249,7 @@ export async function $$M0({
         reportToSentry: !0
       });
     }
-    ds(`${i}_completed`, d.openFile?.key, d, {
+    trackFileEvent(`${i}_completed`, d.openFile?.key, d, {
       total_time_ms: performance.now() - E,
       ...m,
       ...A
@@ -260,7 +260,7 @@ export async function $$M0({
   } catch (t) {
     let e = sZ(t);
     t instanceof $$k1 && (e = B.METER_EXCEEDED);
-    ds(`${i}_failed`, d.openFile?.key, d, {
+    trackFileEvent(`${i}_failed`, d.openFile?.key, d, {
       total_time_ms: performance.now() - E,
       reason: e,
       ...m,

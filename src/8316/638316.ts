@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { fM, Uj, mG } from "../figma_app/15924";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { l as _$$l } from "../905/745972";
 import { hideModalHandler, showModalHandler } from "../905/156213";
@@ -21,7 +21,7 @@ import { cs } from "../figma_app/740025";
 import { ej } from "../figma_app/86989";
 import { G } from "../905/11536";
 import { getUserId } from "../905/372672";
-import { m3, zF, U as _$$U } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata, isThirdPartyMonetized, hasClientMeta } from "../figma_app/45218";
 var j = (e => (e.PATREON = "Patreon", e.GUMROAD = "Gumroad", e.UI8 = "UI8", e.LEMONSQUEEZY = "Lemon Squeezy", e))(j || {});
 let w = {
   "patreon.com/": "Patreon",
@@ -43,7 +43,7 @@ let v = registerModal(function (e) {
   return jsx(UI3ConditionalWrapper, {
     children: jsx(fu, {
       name: e0.COMMUNITY_REDIRECT_PURCHASE_MODAL,
-      children: jsx(bL, {
+      children: jsx(ModalRootComponent, {
         manager: s,
         width: j,
         children: jsx(vo, {
@@ -69,7 +69,7 @@ let v = registerModal(function (e) {
                     }(e.thirdPartyM10nUrl)
                   })
                 })
-              }), jsx(_$$E, {
+              }), jsx(ButtonPrimitive, {
                 className: HE,
                 onClick: n,
                 children: jsx("span", {
@@ -99,9 +99,9 @@ export function $$P0({
   let y = ej(e);
   let b = _$$A(e, !0);
   let x = useDispatch();
-  if (!m3(e) && !zF(e)) return null;
+  if (!hasMonetizedResourceMetadata(e) && !isThirdPartyMonetized(e)) return null;
   let f = !1;
-  if (cs(_) && !zF(e)) {
+  if (cs(_) && !isThirdPartyMonetized(e)) {
     f = !0;
     u = getI18nString("community.buyer.cannot_make_purchase_on_behalf_of_team_or_org");
   } else {
@@ -109,7 +109,7 @@ export function $$P0({
       authedActiveCommunityProfile: _,
       authedUsers: m
     });
-    if (m3(e)) {
+    if (hasMonetizedResourceMetadata(e)) {
       let {
         usersCanPurchase,
         publishers
@@ -131,7 +131,7 @@ export function $$P0({
     resource: e,
     context: t,
     onClick: () => {
-      zF(e) && _$$U(e) ? (Uj(e, t, d, _?.id), j()) : (mG(e, t, d, _?.id), y());
+      isThirdPartyMonetized(e) && hasClientMeta(e) ? (Uj(e, t, d, _?.id), j()) : (mG(e, t, d, _?.id), y());
     },
     onGetFreePreview: b,
     disabled: f,

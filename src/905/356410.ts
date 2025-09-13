@@ -12,7 +12,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { $ } from "../905/355181";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { FRequestStatusType } from "../figma_app/191312";
 import { IT, M4 } from "../905/713695";
@@ -175,7 +175,7 @@ function N(e, t) {
 function D({
   text: e
 }) {
-  return jsx(_$$E, {
+  return jsx(TextWithTruncation, {
     "data-testid": "extension-security-form-error",
     color: "danger",
     children: e
@@ -239,7 +239,7 @@ function j(e) {
   let o = L(question);
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap16.$,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: prompt
     }), jsx(Fragment, {
@@ -294,7 +294,7 @@ function U(e) {
   let o = L(question);
   return jsxs("div", {
     className: _$$s.flex.flexColumn.gap16.$,
-    children: [jsx(_$$E, {
+    children: [jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: prompt
     }), jsx(Fragment, {
@@ -388,7 +388,7 @@ function V(e) {
     "data-testid": "extension-security-form",
     children: [jsx("div", {
       className: _$$s.pb16.$,
-      children: jsx(_$$E, {
+      children: jsx(TextWithTruncation, {
         fontSize: 14,
         fontWeight: "medium",
         children: renderI18nText("community.publishing.security_form.header")
@@ -489,12 +489,12 @@ function z({
     case FRequestStatusType.APPROVED:
       t = jsxs(Fragment, {
         children: [jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: renderI18nText("community.publishing.security_banner.approved.title")
           })
         }), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("community.publishing.security_banner.approved.description")
           })
         })]
@@ -505,12 +505,12 @@ function z({
     case FRequestStatusType.PENDING:
       t = jsxs(Fragment, {
         children: [jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: renderI18nText("community.publishing.security_banner.pending.title")
           })
         }), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("community.publishing.security_banner.pending.description")
           })
         })]
@@ -521,16 +521,16 @@ function z({
     case FRequestStatusType.REJECTED:
       t = jsxs(Fragment, {
         children: [jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             fontWeight: "semi-bold",
             children: renderI18nText("community.publishing.security_banner.rejected.title")
           })
         }), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("community.publishing.security_banner.rejected.description")
           })
         }), jsx("div", {}), jsx("div", {
-          children: jsx(_$$E, {
+          children: jsx(TextWithTruncation, {
             children: renderI18nText("community.publishing.security_banner.rejected.description.check_email")
           })
         })]

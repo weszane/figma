@@ -7,7 +7,7 @@ import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
 import { Ex, zE } from "../figma_app/919079";
 import { ks, nR, vd, Us } from "../figma_app/637027";
-import { a_ } from "../figma_app/858013";
+import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -33,7 +33,7 @@ import { Dd, OJ } from "../905/519092";
 import { hK } from "../figma_app/211706";
 import { bUL } from "../figma_app/822011";
 import { FlashActions } from "../905/573154";
-import { E as _$$E } from "../905/984674";
+import { TextWithTruncation } from "../905/984674";
 import { KQ } from "../figma_app/475472";
 import { A as _$$A } from "../6828/7452";
 import { A as _$$A2 } from "../1617/567223";
@@ -144,11 +144,11 @@ let Q = registerModal(function (e) {
       title: getI18nString("file_browser.draft_move_modal.creating_your_new_team_header"),
       truncateTitleText: !0,
       children: jsxs(Fragment, {
-        children: [jsx(_$$E, {
+        children: [jsx(TextWithTruncation, {
           children: renderI18nText("file_browser.draft_move_modal.before_we_move_your_drafts")
         }), jsx(hK, {
           height: 16
-        }), jsx(_$$E, {
+        }), jsx(TextWithTruncation, {
           fontWeight: "medium",
           children: renderI18nText("file_browser.draft_move_modal.team_name")
         }), jsx(hK, {
@@ -336,7 +336,7 @@ export let $$en0 = registerModal(function (e) {
     truncateTitleText: !0,
     children: jsx("div", {
       className: z,
-      children: jsx(a_, {
+      children: jsx(BlueLoadingSpinner, {
         className: "draft_move_modal--spinner--G4CKo"
       })
     })

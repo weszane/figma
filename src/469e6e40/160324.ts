@@ -5,7 +5,7 @@ import { lg } from "../figma_app/976749";
 import { ZT } from "../figma_app/844435";
 import { EO } from "../figma_app/86989";
 import { j as _$$j } from "../905/813868";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { t as _$$t } from "../905/851577";
 import { N } from "../905/645480";
 import { x as _$$x } from "../469e6e40/671704";
@@ -15,7 +15,7 @@ import { p as _$$p } from "../905/42189";
 import { J } from "../469e6e40/985095";
 import { F5, oM } from "../905/192343";
 export function $$v0(e) {
-  let t = dq() || void 0;
+  let t = useCurrentUserOrgId() || void 0;
   let a = "whiteboard" === lg();
   let i = F5();
   let v = ZT();

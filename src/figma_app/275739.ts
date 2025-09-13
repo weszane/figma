@@ -6,7 +6,7 @@ import { buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { We } from "../figma_app/165623";
 import { reportError } from "../905/11";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 import { R9 } from "../905/977824";
 import { b as _$$b } from "../905/154029";
 import { T as _$$T } from "../905/312425";
@@ -279,7 +279,7 @@ let I = class e {
       await e.leave();
       return t;
     } finally {
-      ds("voice_user_joined", m, h.getState(), {
+      trackFileEvent("voice_user_joined", m, h.getState(), {
         callId: r,
         userId: o,
         encryptionKey: d,

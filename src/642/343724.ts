@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { bL, Y9, JU, X0, UC } from "../figma_app/57171";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { K } from "../905/443068";
 import { f as _$$f } from "../905/257420";
 import { _ as _$$_ } from "../905/821768";
@@ -16,7 +16,7 @@ import { formatI18nMessage } from "../905/482208";
 import { jo } from "../figma_app/753501";
 import { A0, Br } from "../figma_app/454974";
 import { selectCurrentFile } from "../figma_app/516028";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { BZ } from "../642/998522";
 import { X } from "../642/70391";
@@ -95,7 +95,7 @@ export function $$M0({
       })]
     }), n.reserveBottomHeight && n.showAllLayers && jsx("div", {
       className: "x78zum5 xl56j7k x10l6tqk x1ey2m1c xu96u03 x3m8u43 xsdox4t x1yjdb4r xoegz02",
-      children: jsxs(_$$E, {
+      children: jsxs(ButtonPrimitive, {
         onClick: n.showAllLayers,
         ...Ay.props(E.showAllLayersButton),
         children: [jsx(_$$f, {}), renderI18nText("sites.layer_view.show_all_layers")]
@@ -144,7 +144,7 @@ function A(e) {
     onClick: l,
     recordingKey: generateRecordingKey(e.recordingKey, i),
     htmlAttributes: {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": formatI18nMessage(i)
     },
     children: jsx(_$$_, {})

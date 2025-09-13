@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { iL, Hl, Fi } from "../905/687992";
 import { r as _$$r } from "../905/571562";
 import { a as _$$a } from "../905/339331";
 import { A } from "../vendor/723372";
-import { px, Vg } from "../905/893109";
+import { toPixels, identity } from "../905/893109";
 import { preventEvent } from "../905/955878";
 p("stack__row__-rJHV").displayName = "Stack.Row";
 let u = p("stack__col__4xLd-");
@@ -26,8 +26,8 @@ function p(e) {
     }),
     style: {
       ...l,
-      gap: "number" == typeof i ? px(i) : i,
-      [Vg("--wrap")]: r ? "wrap" : "nowrap",
+      gap: "number" == typeof i ? toPixels(i) : i,
+      [identity("--wrap")]: r ? "wrap" : "nowrap",
       justifyContent: s,
       alignItems: a
     },
@@ -73,13 +73,13 @@ export let $$h0 = forwardRef(({
   };
   return jsxs(u, {
     ref: c,
-    children: [jsx(E, {
+    children: [jsx(ButtonPrimitive, {
       className: "stepper__up__z53LA",
       onClick: e => g(e, 1),
       disabled: null != max && Fi(i, e, max),
       htmlAttributes: f,
       children: jsx(_$$a, {})
-    }), jsx(E, {
+    }), jsx(ButtonPrimitive, {
       className: "stepper__down__zob3i",
       onClick: e => g(e, -1),
       disabled: null != min && Fi(i, e, min),

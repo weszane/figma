@@ -1,12 +1,12 @@
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
-import { $ } from "../905/383708";
+import { generateUniqueKey } from "../905/383708";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { FU } from "../figma_app/933328";
 import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
-import { $$ } from "../figma_app/62612";
+import { applyOffsetToViewport } from "../figma_app/62612";
 import { HK } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
 import { n as _$$n } from "../905/64411";
@@ -27,7 +27,7 @@ let $$g1 = createOptimistThunk((e, t) => {
             let r = fullscreenValue.getViewportInfo();
             let s = new Point(r.x, r.y);
             let o = new Point(t.clientX, t.clientY).subtract(s);
-            let l = $$(r, o);
+            let l = applyOffsetToViewport(r, o);
             e.dispatch($$f0({
               fileKey: i,
               nodeId: a,
@@ -52,12 +52,12 @@ let $$f0 = createOptimistThunk(async (e, t) => {
   let f = null;
   if (g && g.key === fileKey) f = m.library.local.components[nodeId] ?? null;else {
     m.fileByKey[fileKey] || (await e.dispatch(_$$n({
-      libraryKey: $(fileKey)
+      libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState());
     let t = m.fileByKey[fileKey];
     let n = t ? _$$l(t) : void 0;
     !n || (f = HK(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null) || (await e.dispatch(_$$n({
-      libraryKey: $(fileKey)
+      libraryKey: generateUniqueKey(fileKey)
     })), m = e.getState(), f = HK(m.library.publishedByLibraryKey.components, n)[nodeId] ?? null);
   }
   f ? e.dispatch(FU({

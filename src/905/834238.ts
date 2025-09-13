@@ -5,11 +5,11 @@ import { setupAutofocusHandler } from "../905/128376";
 import { analyticsEventManager } from "../905/449184";
 import { HB, VA, ZS } from "../3973/538504";
 import { ks } from "../figma_app/637027";
-import { R as _$$R } from "../905/441305";
+import { ConfirmationModal } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { yJ } from "../figma_app/24841";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { Um } from "../905/848862";
 import { e0 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -52,7 +52,7 @@ function I(e) {
       source: n,
       jobTitleSeenList: k.toString()
     });
-    Cu({
+    logAndTrackCTA({
       trackingContext: e0.FILE_BROWSER,
       context: "job_title",
       text: "Change Role",
@@ -61,7 +61,7 @@ function I(e) {
     });
   };
   let N = setupAutofocusHandler();
-  return jsxs(_$$R, {
+  return jsxs(ConfirmationModal, {
     ...e,
     title: getI18nString("settings.account_settings.change_job_title_modal_title"),
     onConfirm: () => R(),

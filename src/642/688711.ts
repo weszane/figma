@@ -10,7 +10,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { replaceSelection } from "../figma_app/741237";
 import { s } from "../figma_app/874592";
 import { Dr, Ct } from "../figma_app/803787";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { O2, OE } from "../figma_app/164212";
 import { e6 } from "../figma_app/545190";
 import { I9 } from "../figma_app/151869";
@@ -80,7 +80,7 @@ function A(e) {
     },
     htmlAttributes: {
       "data-tooltip": getI18nString("design_systems.component_panel.select_component"),
-      "data-tooltip-type": Ib.TEXT
+      "data-tooltip-type": KindEnum.TEXT
     },
     children: jsx(_$$r, {})
   }) : null;

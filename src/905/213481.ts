@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A as _$$A } from "../vendor/723372";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { bL, hE, O6, HG } from "../905/598775";
 import { useRecording } from "../905/959312";
 import { ensureContext } from "../905/61417";
@@ -90,7 +90,7 @@ let _ = forwardRef((e, t) => {
     trailing: e.trailing || e.hasCloseButton ? jsxs(Fragment, {
       children: [e.trailing, e.hasCloseButton && jsx(HG, {
         className: "chip__closeButtonWrapper__DJlYV",
-        children: jsx(E, {
+        children: jsx(ButtonPrimitive, {
           className: "chip__closeButton__qGt5t",
           "aria-label": a,
           disabled: e.disabled,

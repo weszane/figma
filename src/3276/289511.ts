@@ -4,7 +4,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { handleAtomEvent } from "../905/502364";
 import { jD } from "../905/765855";
 import { KE, En } from "../905/116101";
-import { Cu } from "../figma_app/314264";
+import { logAndTrackCTA } from "../figma_app/314264";
 import { fK, tV } from "../figma_app/300024";
 export function $$m0(e, t) {
   let n = useDispatch();
@@ -20,7 +20,7 @@ export function $$m0(e, t) {
       initialX: 0,
       initialY: 0,
       initialTab: t
-    })), Cu({
+    })), logAndTrackCTA({
       source: fK
     }, tV));
   }, [e, t, n]);

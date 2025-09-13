@@ -8,7 +8,7 @@ import { fu, $z } from "../figma_app/831799";
 import { Cn } from "../905/862913";
 import { t0 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
-import { m3 } from "../figma_app/45218";
+import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { PreviewMode } from "../figma_app/707808";
 import { Ho } from "../figma_app/878651";
 import { Dy } from "../figma_app/165422";
@@ -27,13 +27,13 @@ import { jJ } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
-import { E as _$$E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/487602";
 import { e as _$$e } from "../905/149844";
 import { ms, rr, c$, wv } from "../figma_app/236327";
 import { p as _$$p } from "../905/991924";
 import { S as _$$S } from "../figma_app/420927";
-import { B as _$$B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -41,7 +41,7 @@ import { mT } from "../figma_app/976345";
 import { A as _$$A } from "../5132/237216";
 import { UU } from "../figma_app/770088";
 import { oB, j7 } from "../905/929976";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { j as _$$j } from "../905/834956";
 import { H as _$$H } from "../905/404982";
@@ -156,7 +156,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
   }) {
     return jsx("div", {
       className: "hub_file_viewer--fullscreen--DzTCl hub_file_viewer--_embedControl--g0n7j hub_file_viewer--_embedControlNoHover--npgKi text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      children: jsx(_$$B, {
+      children: jsx(SvgComponent, {
         svg: t ? _$$A4 : _$$A3,
         onClick: e,
         className: "hub_file_viewer--fullscreenIcon--gHWvt",
@@ -260,7 +260,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
         children: c
       }), jsx("div", {
         className: eg,
-        children: jsx(_$$B, {
+        children: jsx(SvgComponent, {
           svg: _$$A2,
           className: ef,
           title: getI18nString("community.hub_file_viewer.view_file_pages"),
@@ -313,7 +313,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
         "aria-label": getI18nString("fullscreen_actions.zoom-out"),
         onClick: adjustZoomOutFactory("clickFromViewerButtons"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen_actions.zoom-out")
         },
         children: jsx(_$$O, {})
@@ -337,7 +337,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
           zoomPercent: d
         }), jsx("div", {
           className: eg,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A2,
             className: ef,
             title: getI18nString("community.hub_file_viewer.select_zoom_level"),
@@ -349,7 +349,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
         "aria-label": getI18nString("fullscreen_actions.zoom-in"),
         onClick: adjustZoomInFactory("clickFromViewerButtons"),
         htmlAttributes: {
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("fullscreen_actions.zoom-in")
         },
         children: jsx(_$$e, {})
@@ -451,7 +451,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let r = useSelector(e => e.dropdownShown?.type === ec);
     let n = 1;
     e.viewer && (n = e.getCurrentZoomScale());
-    return jsx(_$$E, {
+    return jsx(ButtonPrimitive, {
       className: _$$s.bgTransparent.h100.$,
       onClick: e => {
         if (e.stopPropagation(), r) {
@@ -468,7 +468,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
           zoomPercent: Math.round(100 * n)
         }), jsx("div", {
           className: eg,
-          children: jsx(_$$B, {
+          children: jsx(SvgComponent, {
             svg: _$$A2,
             className: ef,
             title: getI18nString("community.hub_file_viewer.select_zoom_level"),
@@ -812,7 +812,7 @@ function ex(e) {
     $ || H("grab");
   }, [$, H]);
   let X = $ ? `/community/file/${hubFile.id}/embed` : `/embed?embed_host=hub_file_detail_view&community_viewer=true&hub_file_id=${hubFile.id}&hide_ui=true`;
-  let q = m3(hubFile);
+  let q = hasMonetizedResourceMetadata(hubFile);
   let J = _$$I(hubFile);
   let Z = QQ(J);
   return jsxs("div", {
@@ -1320,7 +1320,7 @@ export class $$eJ0 extends Component {
     return 2 === this.state.fullscreenTransitionState;
   }
   isPaidFigjamWithoutPurchase() {
-    let e = m3(this.props.hubFile);
+    let e = hasMonetizedResourceMetadata(this.props.hubFile);
     let t = this.props.hubFile.community_resource_payment;
     let r = QQ(t);
     return this.props.hubFile.viewer_mode === FTemplateCategoryType.WHITEBOARD && e && !r;

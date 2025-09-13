@@ -1,14 +1,14 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { o as _$$o } from "../905/89370";
 import { CanvasSearchHelpers, FilterOption, PageViewMode } from "../figma_app/763686";
 import { scopeAwareFunction } from "../905/189185";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { globalPerfTimer } from "../905/542194";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { Uz, Fo } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Fk } from "../905/125333";
@@ -19,7 +19,7 @@ import { lg } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
 import { Z } from "../905/104740";
 import { aq } from "../figma_app/412189";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { H as _$$H } from "../9410/748457";
 import { v9, ei, N6, Sq, Z9, _E } from "../9410/733790";
 var p = u;
@@ -42,7 +42,7 @@ export function $$I0({
   let [M, P] = useState(!1);
   let F = _$$b();
   let B = e.toLocaleLowerCase() !== t.toLocaleLowerCase();
-  let U = am();
+  let U = trackFileEventWithUser();
   let G = !e || !total;
   let K = scopeAwareFunction.user("canvas-search-replace", i => {
     if (k) {
@@ -127,17 +127,17 @@ export function $$I0({
       })
     }), jsxs("div", {
       className: _E,
-      children: [jsx($n, {
+      children: [jsx(Button, {
         variant: "secondary",
         disabled: G,
         htmlAttributes: {
           "data-tooltip": getI18nString("canvas_search.replace_one"),
-          "data-tooltip-type": Ib.TEXT
+          "data-tooltip-type": KindEnum.TEXT
         },
         onClick: () => K("button"),
         recordingKey: generateRecordingKey(I, "replace_one"),
         children: renderI18nText("canvas_search.replace_one")
-      }), jsx($n, {
+      }), jsx(Button, {
         disabled: G,
         variant: "secondary",
         onClick: H,

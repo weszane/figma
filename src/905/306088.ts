@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Children, cloneElement } from "react";
 import { Uz } from "../905/63728";
 import { RecordingComponent, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 export class $$l0 extends RecordingComponent {
   render() {
     return jsx("div", {
@@ -34,7 +34,7 @@ export class $$d1 extends RecordingPureComponent {
     this.props.iconClassName && (t += ` ${this.props.iconClassName}`);
     this.props.disabled && (t += " radio--iconDisabled--fmY5f");
     let i = this.props.tooltipText ? {
-      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": this.props.tooltipText,
       "data-tooltip-show-below": !0,
       "data-tooltip-timeout-delay": 50,

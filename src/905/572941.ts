@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { N } from "../905/438674";
 import { useModalManager } from "../905/437088";
@@ -18,7 +18,7 @@ export function $$h0() {
     onClose: () => {},
     preventUserClose: !0
   });
-  return e ? jsx(bL, {
+  return e ? jsx(ModalRootComponent, {
     manager: t,
     width: "md",
     children: jsxs(vo, {
@@ -50,7 +50,7 @@ export function $$h0() {
         })
       })]
     })
-  }) : jsx(bL, {
+  }) : jsx(ModalRootComponent, {
     manager: t,
     width: "md",
     children: jsxs(vo, {

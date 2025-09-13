@@ -1,8 +1,8 @@
 import { tf } from "../figma_app/831799";
 import { jsx } from "react/jsx-runtime";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 export let $$o0 = tf(function (e) {
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     onClick: e.onClick,
     children: e.children
   });

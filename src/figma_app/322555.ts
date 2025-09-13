@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useState } from "react";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { ensureContext } from "../905/61417";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
@@ -80,7 +80,7 @@ export let $$m0 = forwardRef(({
   ...t
 }, r) => {
   let i = ensureContext($$d6, "CollapseContext", "Collapse.Root");
-  return jsx(E, {
+  return jsx(ButtonPrimitive, {
     ref: r,
     ...defaultComponentAttribute,
     ...e,

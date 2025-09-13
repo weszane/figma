@@ -1,7 +1,7 @@
 import { atom, atomStoreManager } from "../figma_app/27355";
 import r from "../vendor/241899";
 import { debugState } from "../905/407919";
-import { ds } from "../figma_app/314264";
+import { trackFileEvent } from "../figma_app/314264";
 var a = r;
 let l = atom(!1);
 export class $$d0 {
@@ -34,7 +34,7 @@ export class $$d0 {
         this.hasTracked = !0;
         let u = debugState.getState();
         let p = atomStoreManager.get(this.sitePreviewStateAtom);
-        ds("sites_preview_perf", u.openFile?.key, a()(u, ["selectedView", "fileByKey"]), {
+        trackFileEvent("sites_preview_perf", u.openFile?.key, a()(u, ["selectedView", "fileByKey"]), {
           click_to_runtime_load_ms: runtime_loaded - this.initTime,
           runtime_load_to_json_load_ms: page_json_loaded - runtime_loaded,
           json_load_to_render_ms: rendered - page_json_loaded,

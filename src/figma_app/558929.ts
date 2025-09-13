@@ -22,7 +22,7 @@ import { F as _$$F2 } from "../905/504462";
 import { canMemberOrg } from "../figma_app/642025";
 import { hasOrgRole, getCurrentPluginVersion, getPluginVersion } from "../figma_app/300692";
 import { Y9 } from "../figma_app/502247";
-import { xQ, m3 } from "../figma_app/45218";
+import { isWidget, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { O as _$$O2 } from "../905/833838";
 import { ManifestEditorType } from "../figma_app/155287";
@@ -270,7 +270,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
   } = r;
   let s = wr(r);
   let l = Ux(r);
-  let u = xQ(t.resource);
+  let u = isWidget(t.resource);
   let p = getPluginVersion(t.resource);
   if (!user) {
     e.dispatch($$V2({
@@ -316,7 +316,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
     pluginId: t.resource.id,
     isWidget: u,
     editorType: t.fullscreenEditorType,
-    isMonetized: m3(t.resource),
+    isMonetized: hasMonetizedResourceMetadata(t.resource),
     fileKey: t.fileKey,
     search_session_id: s,
     query_id: l

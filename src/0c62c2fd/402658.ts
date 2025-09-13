@@ -4,9 +4,9 @@ import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { nB, vo, Y9, hE, wi, jk } from "../figma_app/272243";
 import { k } from "../905/443820";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { setupAutofocusHandler } from "../905/128376";
-import { $n } from "../905/521428";
+import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getAtomMutate } from "../figma_app/566371";
 import { _ as _$$_, S } from "../figma_app/490799";
@@ -40,7 +40,7 @@ export function $$T0(e) {
       children: jsx(k, {})
     })
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: r,
     width: "lg",
     height: "fixed",
@@ -145,14 +145,14 @@ function E(e) {
       })]
     }), jsx(wi, {
       children: jsxs(jk, {
-        children: [jsx($n, {
+        children: [jsx(Button, {
           variant: "secondary",
           onClick: () => {
             e.onClose();
           },
           ref: r,
           children: getI18nString("modal.cancel")
-        }), jsx($n, {
+        }), jsx(Button, {
           variant: "destructive",
           onClick: () => C(folder),
           children: T

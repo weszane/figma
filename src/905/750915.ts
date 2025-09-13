@@ -12,10 +12,10 @@ import { Dl } from "../figma_app/471982";
 import { V4, QQ } from "../figma_app/808294";
 import { c as _$$c } from "../figma_app/11961";
 import { G } from "../905/11536";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { C as _$$C } from "../905/180";
 import A from "classnames";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { YE, Aq, sw, tW, pV, a_, Bi, iG, z_, lf, dS } from "../905/427932";
 import { A as _$$A } from "../6828/718668";
 import { A as _$$A2 } from "../figma_app/122760";
@@ -59,9 +59,9 @@ function E(e) {
           }), e.disabledText ? jsx("div", {
             className: lf,
             "data-tooltip": e.disabledText.tooltipText,
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             children: e.disabledText.displayText
-          }) : jsx(B, {
+          }) : jsx(SvgComponent, {
             className: dS,
             svg: _$$A
           })]
@@ -79,7 +79,7 @@ function w(e) {
       id: e.resource.monetized_resource_metadata.id
     }).then(e => {
       p(e.data.meta);
-    }).catch(() => { });
+    }).catch(() => {});
   });
   let A = useMemo(() => G({
     authedActiveCommunityProfile: t,
@@ -97,7 +97,7 @@ function w(e) {
         className: workspaceTitleWrapper,
         children: [i.name, !_$$c(t) && r && jsx("div", {
           "data-tooltip": getI18nString("community.buyer.this_account_has_already_purchased"),
-          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-type": KindEnum.TEXT,
           children: jsx(V6, {})
         })]
       }),

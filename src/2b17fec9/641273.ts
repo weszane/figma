@@ -5,7 +5,7 @@ import { DesignGraphElements, SessionStatus } from "../figma_app/763686";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { L as _$$L } from "../figma_app/819472";
 import { renderI18nText } from "../905/303541";
 import { Ho } from "../figma_app/308685";
@@ -13,7 +13,7 @@ import { H1 } from "../figma_app/124493";
 import { CB } from "../figma_app/442259";
 import { LR } from "../figma_app/120210";
 import { XM } from "../905/486443";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { hx } from "../figma_app/630194";
 import { gd } from "../figma_app/837467";
 import { I as _$$I } from "../figma_app/552397";
@@ -63,7 +63,7 @@ let $$R0 = memo(function () {
       className: iE,
       "data-tooltip": "set-tool-stamp",
       "data-tooltip-bottom-flip-margin": o ? 0 : void 0,
-      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip-type": KindEnum.LOOKUP,
       hasOpenSubmenu: !1,
       isSelected: i,
       onClick: O,
@@ -124,7 +124,7 @@ function M({
         numVotes: i
       })
     }) : jsxs(Fragment, {
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         className: oE,
         svg: _$$A
       }), jsx("span", {
@@ -192,9 +192,9 @@ function P({
       easing: "cubic-bezier(0.37, 0, 0.48, 1.33)"
     }));
     n.play();
-    n.finished.then(() => r.play()).catch(() => { });
-    r.finished.then(() => a.play()).catch(() => { });
-    a.finished.then(() => s.play()).catch(() => { });
+    n.finished.then(() => r.play()).catch(() => {});
+    r.finished.then(() => a.play()).catch(() => {});
+    a.finished.then(() => s.play()).catch(() => {});
     return () => {
       n.cancel();
       a.cancel();

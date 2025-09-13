@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { shuffle } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
-import { am } from "../figma_app/901889";
+import { trackFileEventWithUser } from "../figma_app/901889";
 import { BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
 import { y } from "../figma_app/297957";
@@ -44,7 +44,7 @@ export function $$_1(e) {
     isFigmaDesign: !0,
     inOrg: !1
   });
-  let u = am();
+  let u = trackFileEventWithUser();
   useEffect(() => {
     u("comments_suggestions_picker_opened");
   }, [u]);

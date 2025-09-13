@@ -7,7 +7,7 @@ import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { ks, vd, Us } from "../figma_app/637027";
-import { B } from "../905/714743";
+import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -68,7 +68,7 @@ function I({
         },
         children: jsxs("span", {
           className: "share_link_modal--buttonContent--xZNXo",
-          children: [jsx(B, {
+          children: [jsx(SvgComponent, {
             svg: A,
             className: "share_link_modal--linkIcon--lwYrP"
           }), I ? getI18nString("figjam_try.link_copied") : getI18nString("figjam_try.copy_link")]
@@ -76,7 +76,7 @@ function I({
       })
     }), C && jsxs("div", {
       className: "share_link_modal--anonymousUserSection--tS-rc",
-      children: [jsx(B, {
+      children: [jsx(SvgComponent, {
         svg: _$$A,
         className: "share_link_modal--teamIcon--1LdNm"
       }), jsxs("span", {

@@ -24,7 +24,7 @@ import { getPermissionsState } from "../figma_app/642025";
 import { F as _$$F } from "../905/827944";
 import { validateExtensionIconImage, validateArtworkImage, loadPluginManifest, loadLocalPluginSource, validatePluginCodeSize, getResourceRoleInfo, getPublishingData } from "../figma_app/300692";
 import { N as _$$N } from "../905/696711";
-import { bD, xQ } from "../figma_app/45218";
+import { ResourceType, isWidget } from "../figma_app/45218";
 import { aP, kM } from "../figma_app/10554";
 import { w as _$$w } from "../905/771986";
 import { pluginAPIService } from "../905/3209";
@@ -99,7 +99,7 @@ let $$G32 = createOptimistThunk(async (e, {
   resourceId: t,
   resourceType: r
 }) => {
-  let n = r === bD.WIDGET ? U.getWidgets({
+  let n = r === ResourceType.WIDGET ? U.getWidgets({
     id: t
   }) : pluginAPIService.getPlugins({
     id: t
@@ -304,7 +304,7 @@ async function Z(e, t, r) {
   void 0 !== E && (f = _$$c(E).then(e => Ac(g.iconUploadUrl, E, e)).then(() => !0).catch(t => {
     reportError(_$$e.COMMUNITY, t);
     let r = resolveMessage(t, getI18nString("community.actions.could_not_connect_to_the_server"));
-    throw Error(xQ(e) ? getI18nString("community.actions.error_uploading_widget_icon_error", {
+    throw Error(isWidget(e) ? getI18nString("community.actions.error_uploading_widget_icon_error", {
       error: r
     }) : getI18nString("community.actions.error_uploading_plugin_icon_error", {
       error: r
@@ -314,7 +314,7 @@ async function Z(e, t, r) {
   let b = t.coverBlob;
   void 0 !== b && (y = _$$c(b).then(e => Ac(g.coverImageUploadUrl, b, e)).then(() => !0).catch(t => {
     reportError(_$$e.COMMUNITY, t);
-    return Error(xQ(e) ? getI18nString("community.actions.error_uploading_widget_artwork_image_error", {
+    return Error(isWidget(e) ? getI18nString("community.actions.error_uploading_widget_artwork_image_error", {
       error: resolveMessage(t, t.data?.message || "unknown error")
     }) : getI18nString("community.actions.error_uploading_plugin_artwork_image_error", {
       error: resolveMessage(t, t.data?.message || "unknown error")
@@ -768,7 +768,7 @@ let $$ed17 = createOptimistThunk((e, {
     });
   }).catch(r => {
     e.dispatch(VisualBellActions.enqueue({
-      message: xQ(t) ? getI18nString("community.actions.could_not_publish_widget_error", {
+      message: isWidget(t) ? getI18nString("community.actions.could_not_publish_widget_error", {
         error: resolveMessage(r, r.data?.message)
       }) : getI18nString("community.actions.could_not_publish_plugin_error", {
         error: resolveMessage(r, r.data?.message)
@@ -789,7 +789,7 @@ let $$ec15 = createOptimistThunk((e, {
     src: "getResourceVersions",
     overrideInstallStatus: !0
   }));
-  let a = r === bD.WIDGET ? U.getVersions({
+  let a = r === ResourceType.WIDGET ? U.getVersions({
     widgetId: t
   }) : pluginAPIService.getVersions({
     pluginId: t

@@ -2,18 +2,18 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { debounce } from "../905/915765";
-import { E } from "../905/632989";
+import { ButtonPrimitive } from "../905/632989";
 import { O } from "../905/969533";
 import { k } from "../905/44647";
 import { P } from "../905/347284";
 import { G } from "../905/750789";
 import { renderI18nText } from "../905/303541";
-import { uE } from "../figma_app/314264";
+import { trackUserEvent } from "../figma_app/314264";
 import { selectCurrentFile } from "../figma_app/516028";
 import { x } from "../figma_app/584132";
 let g = "asset_panel_shared_components--sectionHeader--URtCn";
 let f = debounce((e, t, r, n) => {
-  uE("action_left_panel_scroll", {
+  trackUserEvent("action_left_panel_scroll", {
     user: e
   }, {
     assetsPanelVersion: 3,
@@ -58,7 +58,7 @@ export function $$y2({
   });
   return (t && renderI18nText("design_systems.assets_panel.num_results_parenthesis", {
     numResults: t
-  }), i) ? jsxs(E, {
+  }), i) ? jsxs(ButtonPrimitive, {
     className: g,
     "data-onboarding-key": r,
     onClick: s,

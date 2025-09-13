@@ -14,7 +14,7 @@ import { M } from '../905/807529';
 import { Dm } from '../figma_app/8833';
 import { qM, tM, vd } from '../figma_app/637027';
 import { j6 } from '../figma_app/831799';
-import { kt } from '../figma_app/858013';
+import { LoadingSpinner } from '../figma_app/858013';
 import { useHandleMouseEvent, useSetupPlayback } from '../figma_app/878298';
 import { useDispatch } from 'react-redux';
 let l = o;
@@ -164,7 +164,7 @@ export function $$A0(e) {
 }
 let x = {
   playback: () => ({
-    preventDefault: () => { }
+    preventDefault: () => {}
   })
 };
 export function $$N2(e) {
@@ -244,7 +244,7 @@ export function $$N2(e) {
           className: LO,
           disabled: !0,
           trackingProperties: e.trackedConfirmationProperties || {},
-          children: [jsx(kt, {
+          children: [jsx(LoadingSpinner, {
             size: 'small',
             className: e.loadingText ? FQ : u1
           }), e.loadingText]

@@ -2,7 +2,7 @@ import { registerModal } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { bL } from "../905/38914";
+import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Xf } from "../figma_app/153916";
 import { $z } from "../figma_app/617427";
@@ -41,7 +41,7 @@ export let $$h0 = registerModal(function (e) {
       children: renderI18nText("admin_dashboard.seat_requests.approve_all_modal.body")
     })]
   });
-  return jsx(bL, {
+  return jsx(ModalRootComponent, {
     manager: a,
     width: "lg",
     children: jsx(fu, {

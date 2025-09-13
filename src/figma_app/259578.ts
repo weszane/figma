@@ -9,7 +9,7 @@ import { ColorFormatEnum, DesignGraphElements } from "../figma_app/763686";
 import u from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { c2 } from "../figma_app/243213";
-import { hC } from "../figma_app/901889";
+import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey, RecordingPureComponent } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
@@ -18,12 +18,12 @@ import { z5, rC } from "../905/713722";
 import { o1 } from "../figma_app/975811";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
-import { dq } from "../905/845253";
+import { useCurrentUserOrgId } from "../905/845253";
 import { Xo } from "../figma_app/482495";
 import { F as _$$F2 } from "../905/258517";
 import { ol } from "../figma_app/598018";
 import { yesNoTrackingEnum } from "../figma_app/198712";
-import { Ib } from "../905/129884";
+import { KindEnum } from "../905/129884";
 import { Pd, j5 } from "../figma_app/178475";
 import { $z } from "../figma_app/297733";
 import { D as _$$D } from "../905/225412";
@@ -115,8 +115,8 @@ export function $$Q2({
   let L = useRef(t.colorFormat);
   let k = Xo();
   let V = X7();
-  let W = hC();
-  let K = dq();
+  let W = trackDefinedFileEventWithStore();
+  let K = useCurrentUserOrgId();
   let $ = ol()?.id;
   let Q = useSelector(e => !!e.eyedropper) || t.preventAutoFocus;
   let et = {
@@ -210,7 +210,7 @@ export function $$Q2({
             selected: i,
             onPointerDown: ed,
             recordingKey: generateRecordingKey(e, "dropperButton"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.color_controls.eyedropper"),
             tooltipForScreenReadersOnly: !0,
             className: p()({
@@ -296,7 +296,7 @@ export function $$Q2({
             "aria-expanded": t.currentTool === DesignGraphElements.DROPPER_COLOR,
             "aria-label": getI18nString("fullscreen.properties_panel.color_picker.sample_color"),
             htmlAttributes: {
-              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip-type": KindEnum.TEXT,
               "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.sample_color")
             },
             recordingKey: generateRecordingKey(e, "dropperButton"),
@@ -306,7 +306,7 @@ export function $$Q2({
             selected: t.currentTool === DesignGraphElements.DROPPER_COLOR,
             onMouseDown: ed,
             recordingKey: generateRecordingKey(e, "dropperButton"),
-            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("fullscreen.properties_panel.color_picker.eyedropper"),
             tooltipForScreenReadersOnly: !0,
             children: jsx(_$$G, {})
@@ -452,7 +452,7 @@ export class $$en3 extends RecordingPureComponent {
         autoFocus: !this.props.preventAutoFocus,
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.red"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter,
         minimizeScrubTargetWidth: !0,
@@ -465,7 +465,7 @@ export class $$en3 extends RecordingPureComponent {
       }), jsx(j5, {
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.green"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter,
         minimizeScrubTargetWidth: !0,
@@ -479,7 +479,7 @@ export class $$en3 extends RecordingPureComponent {
       }), jsx(j5, {
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.blue"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter,
         minimizeScrubTargetWidth: !0,
@@ -565,7 +565,7 @@ export class $$ea5 extends RecordingPureComponent {
         autoFocus: !this.props.preventAutoFocus,
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.hue"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter360,
         minimizeScrubTargetWidth: !0,
@@ -578,7 +578,7 @@ export class $$ea5 extends RecordingPureComponent {
       }), jsx(j5, {
         className: Qh,
         "data-tooltip": getI18nString("fullscreen.color_controls.saturation"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter100,
         minimizeScrubTargetWidth: !0,
@@ -592,7 +592,7 @@ export class $$ea5 extends RecordingPureComponent {
       }), jsx(j5, {
         className: Qh,
         "data-tooltip": "l" in this.props.value ? getI18nString("fullscreen.color_controls.lightness") : getI18nString("fullscreen.color_controls.brightness"),
-        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip-type": KindEnum.TEXT,
         dispatch: this.props.dispatch,
         formatter: this.formatter100,
         minimizeScrubTargetWidth: !0,

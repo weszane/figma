@@ -9,7 +9,7 @@ import { mk, K2 } from "../figma_app/777551";
 import { o_, Qd, ws, bc, $3, tv, Tv, B2, Gk } from "../figma_app/427318";
 import { Om } from "../figma_app/979714";
 import { useCurrentPrivilegedPlan, useCurrentPlanUser } from "../figma_app/465071";
-import { XU } from "../figma_app/756995";
+import { ViewMode } from "../figma_app/756995";
 import { w4, y1 } from "../905/445814";
 import { V } from "../figma_app/385855";
 import { q } from "../905/600041";
@@ -319,7 +319,7 @@ export function $$F0({
       handleOpenItem: t ? () => {} : (e, t) => S(e, t),
       items: t ? A : e,
       multiselectDisabled: !0,
-      viewType: XU.GRID,
+      viewType: ViewMode.GRID,
       gridViewProps: {
         tileBorderRadius: "large",
         nestedFocus: !0,
