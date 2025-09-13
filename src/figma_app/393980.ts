@@ -11,7 +11,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import _ from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -189,13 +189,13 @@ function X({
     }));
   };
   let U = useHandleKeyboardEvent(p, "keydown", e => {
-    if (e.keyCode === Uz.TAB) k();else if (e.keyCode === Uz.ENTER) {
+    if (e.keyCode === KeyCodes.TAB) k();else if (e.keyCode === KeyCodes.ENTER) {
       k();
       D === zM.EDIT_STYLE && "" === g || h?.();
       e.preventDefault();
       e.stopPropagation();
     } else {
-      if (e.keyCode !== Uz.ESCAPE) return SKIP_RECORDING;
+      if (e.keyCode !== KeyCodes.ESCAPE) return SKIP_RECORDING;
       flushSync(() => {
         y(t ? getBasename(t) : "");
       });

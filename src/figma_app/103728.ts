@@ -3,7 +3,7 @@ import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27
 import { useCallback } from "react";
 import { qB } from "../905/862321";
 import { SvgComponent } from "../905/714743";
-import { fu, $z } from "../figma_app/831799";
+import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { A } from "../figma_app/722506";
 import { FL } from "../figma_app/248365";
 import { A as _$$A } from "../figma_app/122760";
@@ -16,7 +16,7 @@ function _({
   let i = useCallback(() => {
     $$m1();
   }, []);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "community auth modal",
     properties: {
       source: r
@@ -48,11 +48,11 @@ function _({
             onClick: i,
             children: "\xd7"
           }),
-          BrandButton: e => jsx($z, {
+          BrandButton: e => jsx(TrackedButton, {
             ...e,
             children: e.children
           }),
-          ButtonSecondaryTracked: e => jsx($z, {
+          ButtonSecondaryTracked: e => jsx(TrackedButton, {
             ...e,
             children: e.children
           }),

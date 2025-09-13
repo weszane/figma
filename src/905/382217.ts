@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -29,7 +29,7 @@ export function $$g0({
   let v = g ? jsx(_$$r, {
     variant: "secondary",
     shortcuts: [{
-      key: Uz.ESCAPE
+      key: KeyCodes.ESCAPE
     }],
     recordingKey: generateRecordingKey(A, "cancel"),
     onAction: e => {
@@ -44,7 +44,7 @@ export function $$g0({
   }) : i ? jsx(_$$r, {
     variant: "secondary",
     shortcuts: [{
-      key: Uz.ESCAPE
+      key: KeyCodes.ESCAPE
     }],
     recordingKey: generateRecordingKey(A, "stop"),
     onAction: e => {

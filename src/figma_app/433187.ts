@@ -4,7 +4,7 @@ import { LC } from "../vendor/291472";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
-import { i as _$$i, C } from "../905/64217";
+import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
 import { Dm } from "../figma_app/8833";
 import { getBasicViewportRect } from "../figma_app/62612";
@@ -92,8 +92,8 @@ export let $$f1 = memo(e => {
         onClick: e => {
           e.stopPropagation();
         },
-        children: jsx(_$$i, {
-          displayAs: C.Block,
+        children: jsx(TabLoop, {
+          displayAs: TabLoopDisplayAs.Block,
           children: jsx(g, {
             set: "native",
             onEmojiSelect: l,

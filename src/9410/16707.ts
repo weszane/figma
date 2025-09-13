@@ -7,7 +7,7 @@ import { debugState } from "../905/407919";
 import { h as _$$h } from "../905/207101";
 import { buildUploadUrl, isGovCluster, getLocaleFallbacks } from "../figma_app/169182";
 import { isAIFeaturesDisabled } from "../figma_app/459490";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { b as _$$b } from "../905/985254";
@@ -122,27 +122,27 @@ export function $$H1({
   let M = "ja" === getLocaleFallbacks()[0] ? renderI18nText("slides.onboarding.welcome.title.jp") : renderI18nText("slides.onboarding.welcome.title");
   d = C ? renderI18nText("slides.onboarding.ga.billable_seat.welcome.description") : renderI18nText("slides.onboarding.ga.welcome.description");
   let B = T ? O ? renderI18nText("slides.onboarding.welcome.org.footer.no_ai", {
-    services_agreement: jsx(CY, {
+    services_agreement: jsx(SecureLink, {
       href: R,
       target: "_blank",
       trusted: !0,
       children: renderI18nText("slides.onboarding.services_agreement")
     })
   }) : renderI18nText("slides.onboarding.welcome.org.footer.ai", {
-    subprocessors: jsx(CY, {
+    subprocessors: jsx(SecureLink, {
       href: L,
       target: "_blank",
       trusted: !0,
       children: renderI18nText("slides.onboarding.subprocessors")
     }),
-    services_agreement: jsx(CY, {
+    services_agreement: jsx(SecureLink, {
       href: R,
       target: "_blank",
       trusted: !0,
       children: renderI18nText("slides.onboarding.services_agreement")
     })
   }) : O ? void 0 : renderI18nText("slides.onboarding.welcome.starter.footer", {
-    subprocessors: jsx(CY, {
+    subprocessors: jsx(SecureLink, {
       href: L,
       target: "_blank",
       trusted: !0,

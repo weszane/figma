@@ -22,7 +22,7 @@ import { FFileType } from '../figma_app/191312';
 import { vt } from '../figma_app/306946';
 import { e as _$$e } from '../figma_app/324237';
 import { LU } from '../figma_app/327588';
-import { Qp } from '../figma_app/349248';
+import { mapComponentProperties } from '../figma_app/349248';
 import { gI, Wn } from '../figma_app/396464';
 import { fullscreenValue } from '../figma_app/455680';
 import { useIsProOrStudentPlan, useCurrentPublicPlan } from '../figma_app/465071';
@@ -363,7 +363,7 @@ export function $$ei9(e) {
     let {
       groupingMap,
       containingFrameMap
-    } = $(t.libraryHierarchyPaths.flatMap(e => e.components).map(t => Qp(t, {
+    } = $(t.libraryHierarchyPaths.flatMap(e => e.components).map(t => mapComponentProperties(t, {
       type: 'team',
       file: {
         key: '',

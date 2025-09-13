@@ -15,7 +15,7 @@ import p from "classnames";
 import { O8 } from "../figma_app/88484";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { f as _$$f } from "../figma_app/109947";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -282,7 +282,7 @@ function z({
       children: renderI18nText("slides.flapp.embed.add_prototype_link_header")
     }), jsxs("div", {
       className: "slides_insert_embed_modal--prototypePasteContainer--PozcZ",
-      children: [jsx(ks, {
+      children: [jsx(BigTextInputForwardRef, {
         className: "slides_insert_embed_modal--prototypeLinkInput--9Jynj",
         type: "url",
         onChange: e => {

@@ -2,7 +2,8 @@ import type { Store } from 'redux'
 import type { EarlyArgs, Fig as FigType, InitialOptions } from './global.d.ts'
 
 declare global {
-
+  type Fn = (...args: any[]) => void
+  interface ObjectOf<T = any> { [key: string]: T }
   let scheduler: any
   let createFileImporter: any
   let Fig: FigType

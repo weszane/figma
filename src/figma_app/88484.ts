@@ -8,7 +8,7 @@ import { q0, Am } from "../905/70982";
 import { uo as _$$uo, nF } from "../905/466026";
 import { trackMultipleFileEvent } from "../figma_app/314264";
 import { FileBrowserRecentFilesByEditorTypeView, FileBrowserRecentFilesView } from "../figma_app/43951";
-import { YN } from "../figma_app/349248";
+import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { IT } from "../905/713695";
 import { f as _$$f } from "../905/289690";
 import { Ip } from "../905/239603";
@@ -95,9 +95,9 @@ export function $$v2({
   let i = useMemo(() => r.transform(e => "recentFiles2ByEditorType" in e.currentUser ? e.currentUser.recentFiles2ByEditorType : e.currentUser.recentFiles2), [r]);
   "loaded" === i.status && (T = i.data);
   useEffect(() => {
-    "loaded" === i.status && $$A0(YN(i.data));
+    "loaded" === i.status && $$A0(mapRecentFilesAndRepos(i.data));
   }, [i]);
-  return useMemo(() => i.transform(e => YN(e).recent_files), [i]);
+  return useMemo(() => i.transform(e => mapRecentFilesAndRepos(e).recent_files), [i]);
 }
 export function $$A0(e) {
   let t = e.recent_repos.map(e => e.files).reduce((e, t) => e.concat(t), []);

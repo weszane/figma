@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { zS, qD } from "../figma_app/471982";
 import { Ay } from "../905/506641";
 import { YW } from "../figma_app/350203";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { trackContextViewed } from "../figma_app/314264";
 import { Cn } from "../905/862913";
 import { kS } from "../figma_app/864723";
@@ -191,7 +191,7 @@ export function $$L0({
   resource: e,
   enableEmbedOnSmallScreens: t
 }) {
-  return "current_hub_file_version_id" in e ? jsx(fu, {
+  return "current_hub_file_version_id" in e ? jsx(TrackingProvider, {
     name: "Canvas Embed",
     children: jsx(w, {
       resource: e,

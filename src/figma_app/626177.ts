@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, forwardRef, PureComponent } from "react";
 import a from "classnames";
-import { D8, u2 } from "../905/511649";
-import { L } from "../905/408237";
+import { RecordableDiv, RecordableInput } from "../905/511649";
+import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { jr, W0 } from "../figma_app/896988";
 import { KindEnum } from "../905/129884";
@@ -17,7 +17,7 @@ let g = (e, t) => ({
 });
 function f(e) {
   let t = useMemo(() => v(e, "ModalPanel"), [e]);
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     ...g(t, a2),
     "data-non-interactive": !0
   });
@@ -33,13 +33,13 @@ export function $$y11(e) {
   });
 }
 let $$b7 = forwardRef(function (e, t) {
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     ...v(g(e, "propertiesPanel"), "Panel"),
     forwardedRef: t,
     "data-non-interactive": !0
   });
 });
-let $$T15 = forwardRef((e, t) => jsx(D8, {
+let $$T15 = forwardRef((e, t) => jsx(RecordableDiv, {
   ...v(g(e, "propertiesPanel"), "Panel"),
   forwardedRef: t,
   "data-non-interactive": !0
@@ -54,14 +54,14 @@ let $$I8 = forwardRef(function ({
   let l = t ? kR : e ? CZ : null;
   s = 2 === r ? X0 : 1.25 === r ? ht : 1.5 === r ? LE : l$;
   l && (s += " " + l);
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     ...g(i, s),
     "data-non-interactive": !0,
     forwardedRef: a
   });
 });
 export function $$S9(e) {
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     ...g(e, Zz),
     "data-non-interactive": !0
   });
@@ -71,7 +71,7 @@ export function $$v4(e) {
   delete t.title;
   delete t.dataTooltipContentKey;
   delete t.dataTooltipTimeoutDelay;
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     ...e,
     "data-non-interactive": !0,
     children: [jsx("div", {
@@ -114,7 +114,7 @@ function x({
 }
 export let $$N10 = forwardRef(function (e, t) {
   let r = x(e);
-  return jsx(u2, {
+  return jsx(RecordableInput, {
     autoComplete: "false",
     spellCheck: !1,
     forwardedRef: t,
@@ -130,7 +130,7 @@ export class $$C12 extends PureComponent {
   }
   render() {
     let e = x(this.props);
-    return jsx(L, {
+    return jsx(LazyInputForwardRef, {
       "data-testid": this.props.dataTestId,
       type: "text",
       spellCheck: !1,
@@ -165,7 +165,7 @@ export let $$L14 = forwardRef((e, t) => {
     className,
     ...i
   } = x(e);
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     ...i,
     className: s()(className, PB),
     forwardedRef: t,

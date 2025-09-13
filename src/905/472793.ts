@@ -93,7 +93,7 @@ import { eG as _$$eG, oJ } from '../figma_app/334505';
 import { hasReachedPageLimit } from '../figma_app/345997';
 import { J3 } from '../figma_app/360163';
 import { _1, ne as _$$ne, Qv, Vk, VV } from '../figma_app/389091';
-import { Qn } from '../figma_app/415217';
+import { openInBrowser } from '../figma_app/415217';
 import { Ay as _$$Ay2 } from '../figma_app/432652';
 import { getOpenExternalPluginIds } from '../figma_app/455620';
 import { fullscreenValue } from '../figma_app/455680';
@@ -9880,7 +9880,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           zSchema: _$$z.string(),
           property: 'url'
         });
-        isVsCodeEnvironment() ? Qn(t) : customHistory.unsafeRedirect(t, '_blank', undefined);
+        isVsCodeEnvironment() ? openInBrowser(t) : customHistory.unsafeRedirect(t, '_blank', undefined);
         return this.vm.undefined;
       },
       isAllowedInReadOnly: !0,

@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import o from "classnames";
 import { xf } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { T as _$$T } from "../figma_app/257703";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { cL } from "../905/748726";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { MB } from "../figma_app/996356";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { useCurrentUserOrg } from "../905/845253";
 import { FPlanFeatureType } from "../figma_app/191312";
@@ -22,7 +22,7 @@ import { um } from "../figma_app/761870";
 import { registerModal } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 import { OJ } from "../905/519092";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 var l = o;
 export function $$I0(e) {
@@ -97,7 +97,7 @@ export function $$U3({
     }) : renderI18nText("org_invite.email_input_description.multiple_domains.with_expand_link", {
       orgName: E.name,
       domain: i,
-      expandLink: jsx(CY, {
+      expandLink: jsx(SecureLink, {
         onClick: () => U(!0),
         trusted: !0,
         children: renderI18nText("org_invite.email_input_description.multiple_domains.expand_link", {
@@ -201,7 +201,7 @@ let $$y1 = registerModal(function ({
   if (!t) return jsx(Fragment, {});
   let l = S(t, o.view);
   let d = L(t, l);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Org Invite Modal",
     children: jsx(OJ, {
       title: d,
@@ -218,7 +218,7 @@ let $$y1 = registerModal(function ({
   });
 }, "ORG_INVITE_MODAL");
 let C = registerModal(function (e) {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("org_invite.pending_guest_confirmation.title"),
     confirmText: getI18nString("org_invite.pending_guest_confirmation.button"),
     disableClickOutsideToHide: !0,

@@ -5,7 +5,7 @@ import { getResourceDataOrFallback } from "../905/723791";
 import { orgSubscriptionAtom } from "../905/296690";
 import { openFileAtom } from "../figma_app/516028";
 import { ApprovedLibrariesForWorkspaceView, ApprovedLibrariesForOrgViewV2 } from "../figma_app/43951";
-import { LM } from "../figma_app/951233";
+import { mainWorkspaceIdAtom } from "../figma_app/951233";
 import { Oe } from "../figma_app/336853";
 import { Me } from "../figma_app/598018";
 let $$m4 = atom(e => {
@@ -15,7 +15,7 @@ let $$m4 = atom(e => {
     if (i) {
       if (!i.canEdit || !Oe(t)) return;
       let n = i.team?.workspaceId;
-      return i.parentOrgId && !n ? e(LM) : n;
+      return i.parentOrgId && !n ? e(mainWorkspaceIdAtom) : n;
     }
     let n = e(Me);
     if (Oe(t)) return n?.workspace_id;
@@ -41,7 +41,7 @@ let $$g2 = atom(e => {
 let $$f0 = atom(e => {
   {
     let t = e(orgSubscriptionAtom);
-    let i = e(LM);
+    let i = e(mainWorkspaceIdAtom);
     if (!i || !Oe(t)) return;
     let n = e(ApprovedLibrariesForWorkspaceView.Query({
       workspaceId: i

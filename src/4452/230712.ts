@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b, A as _$$A } from "../905/723768";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { N as _$$N } from "../figma_app/55043";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
@@ -62,7 +62,7 @@ export let $$A0 = registerModal(function (e) {
       }));
     });
   }, e.resourceConnectionInvite.id);
-  return S ? jsx(fu, {
+  return S ? jsx(TrackingProvider, {
     name: "Project Connection Confirm Modal",
     properties: {
       folderId: e.resourceConnectionInvite.resourceId

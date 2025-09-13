@@ -20,7 +20,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { isMobileUA } from "../figma_app/778880";
 import { XHR } from "../905/910117";
 import { HL, IU, uw, Vq, bv } from "../figma_app/421401";
-import { nR, vd, tB } from "../figma_app/637027";
+import { ButtonSecondary, ButtonBasePrimaryTracked, FocusCheckbox } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
@@ -62,16 +62,16 @@ import { W as _$$W } from "../469e6e40/695836";
 import { m as _$$m } from "../469e6e40/248185";
 import { K as _$$K } from "../905/628118";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
-import { fu, jm } from "../figma_app/831799";
+import { TrackingProvider, TrackedDiv } from "../figma_app/831799";
 import { m as _$$m2 } from "../figma_app/369596";
 import { O as _$$O } from "../figma_app/748328";
 import { NJ } from "../figma_app/518077";
 import { getTeamVisibilityLabels } from "../figma_app/12796";
 import { O as _$$O2 } from "../figma_app/809387";
-import { J7, SN } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { teamVisibilityEnum } from "../figma_app/630077";
 import { KindEnum } from "../905/129884";
-import { V0, m2 } from "../figma_app/858344";
+import { DUserRole, SectionType } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
 import { S as _$$S } from "../4452/747039";
 import { CH, rE } from "../figma_app/805373";
@@ -455,7 +455,7 @@ let eV = registerModal(function ({
       })
     });
   }
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Add Unassigned Teams Modal",
     children: jsxs(OJ, {
       title: getI18nString("add_unassigned_teams_modal.title", {
@@ -1240,16 +1240,16 @@ let tN = registerModal(function (e) {
         })]
       }), jsxs("div", {
         className: "default_teams_edit_modal--buttonContainer--dyJDe default_teams_edit_modal--flexHorizontalGap8px--BmbPK",
-        children: [jsx(nR, {
+        children: [jsx(ButtonSecondary, {
           onClick: v,
           children: getI18nString("workspace.cancel")
-        }), jsx(fu, {
+        }), jsx(TrackingProvider, {
           name: "Edit Default Teams Modal Submit",
           properties: {
             workspaceId,
             orgId: r
           },
-          children: jsx(vd, {
+          children: jsx(ButtonBasePrimaryTracked, {
             onClick: () => {
               if (c) {
                 let e = {
@@ -1343,10 +1343,10 @@ function tL(e) {
     selectedView: e
   }) => e);
   let eG = "orgAdminSettings" === eB.view;
-  let eH = "workspace" === eB.view && eB.subView === V0.ADMIN;
+  let eH = "workspace" === eB.view && eB.subView === DUserRole.ADMIN;
   let eY = useSelector(({
     selectedView: e
-  }) => "workspace" === e.view && e.subView === V0.ADMIN ? e.workspaceId : null);
+  }) => "workspace" === e.view && e.subView === DUserRole.ADMIN ? e.workspaceId : null);
   let eJ = !eH;
   let eK = !isMobileUA && eG;
   let eX = NJ(org.id);
@@ -1654,14 +1654,14 @@ function tL(e) {
   });
   return jsxs(Fragment, {
     children: [!eH && !getFeatureFlags().ff_a11y_page_tab_fix && jsx(_$$K, {
-      title: eJ ? _$$O2(J7.CONTENT) : _$$O2(J7.TEAMS),
+      title: eJ ? _$$O2(DashboardSection.CONTENT) : _$$O2(DashboardSection.TEAMS),
       rightActions: eJ ? void 0 : ti
     }), eJ && !getFeatureFlags().ff_a11y_page_tab_fix && jsx(_$$b, {
-      tab: J7.CONTENT,
-      selectedSecondaryTab: SN.TEAMS,
+      tab: DashboardSection.CONTENT,
+      selectedSecondaryTab: WorkspaceTab.TEAMS,
       rightActions: ti
     }), eH && jsx(_$$m, {
-      selectedSecondaryTab: m2.TEAMS,
+      selectedSecondaryTab: SectionType.TEAMS,
       rightActions: ti
     }), jsx(Cj, {
       actionBar: e => {
@@ -1811,7 +1811,7 @@ function tL(e) {
                 }),
                 values: Object.values(ig),
                 dispatch: en
-              }), jsxs(jm, {
+              }), jsxs(TrackedDiv, {
                 className: $u,
                 onClick: () => onFilter({
                   orphanedTeamFilter: !filters.orphanedTeamFilter
@@ -1820,7 +1820,7 @@ function tL(e) {
                   filterType: "OrphanedTeamFilter",
                   isFilterEnabled: !filters.orphanedTeamFilter
                 },
-                children: [jsx(tB, {
+                children: [jsx(FocusCheckbox, {
                   checked: filters.orphanedTeamFilter,
                   onChange: lQ
                 }), renderI18nText("teams_table.teams_without_owners")]

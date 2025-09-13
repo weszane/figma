@@ -111,7 +111,7 @@ import { s as _$$s3 } from "../905/702260";
 import { W as _$$W2 } from "../905/378870";
 import { f as _$$f2 } from "../905/335032";
 import { x as _$$x2 } from "../905/587214";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { lQ } from "../905/934246";
 import { bL as _$$bL, c$ as _$$c$ } from "../905/867927";
 import { q as _$$q3 } from "../905/932270";
@@ -1659,7 +1659,7 @@ function tR({
   useEffect(() => {
     l(tM(e));
   }, [e]);
-  return jsx(_$$L, {
+  return jsx(LazyInputForwardRef, {
     ref: r,
     className: "text_size_nudge_input--textSizeInput--pGLXJ",
     type: "text",

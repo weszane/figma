@@ -12,7 +12,7 @@ import { J } from "../905/844906";
 import { l as _$$l } from "../905/37596";
 import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { F } from "../905/224";
 import { k4, jl } from "../figma_app/199513";
@@ -164,7 +164,7 @@ export function $$O0({
 }) {
   let a = useSelector(e => e.dropdownShown);
   let s = useDispatch();
-  let o = j6();
+  let o = useTracking();
   let l = $$w1(t.id);
   let d = a?.data?.targetRect;
   if (!d) return null;
@@ -172,7 +172,7 @@ export function $$O0({
     folder: t,
     useLGPerms: r
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Folder Context Menu",
     children: jsx(j, {
       className: e,

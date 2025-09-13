@@ -10,7 +10,7 @@ import { wg, zo, pQ } from "../figma_app/101956";
 import { t as _$$t, d2 } from "../figma_app/579169";
 import { qG } from "../figma_app/545877";
 import { mW, jj } from "../figma_app/797994";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { MoveDraftsTeamData } from "../figma_app/43951";
@@ -52,7 +52,7 @@ export function $$C0() {
     !r || e.current || k || n || j.show({
       canShow(e, r, n, i, a, s) {
         let o = 0 === (s?.currentUser?.teamEditRoles?.map(e => e.team) ?? []).filter(e => e && e.projects && !e.deletedAt && e.projects.length > 0).length;
-        let d = !!t && jd(t.project);
+        let d = !!t && isTeamFolderV2(t.project);
         let c = C === FFileType.WHITEBOARD && n || C === FFileType.DESIGN && O;
         return e && (r || d) && c && i === qo.PERSONAL && !o && !mW(a, "ran_move_drafts_nudge_v2_num_3") && (mW(a, "ran_move_drafts_nudge_v2_num_2") ? !jj(a, "ran_move_drafts_nudge_v2_num_2") && (F(_$$b({
           ran_move_drafts_nudge_v2_num_3: !0

@@ -10,11 +10,11 @@ import { sf } from "../905/929976";
 import { Q9 } from "../905/70982";
 import { z4 } from "../905/37051";
 import { m as _$$m } from "../905/575846";
-import { ge } from "../figma_app/349248";
+import { mapFileSummary } from "../figma_app/349248";
 import { _P, Zh, qb, Rv } from "../figma_app/2590";
 import { vp } from "../figma_app/831696";
 import { s6 } from "../905/91038";
-import { Qn } from "../figma_app/415217";
+import { openInBrowser } from "../figma_app/415217";
 let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   liveStore: i
 }) => {
@@ -80,14 +80,14 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
     if (_$$m) {
       e.dispatch(sf({
         view: "prototype",
-        file: ge(n),
+        file: mapFileSummary(n),
         scalingInfo: O,
         nodeId: T
       }));
       return;
     }
     if (F = `${n.prototype_url}${L}`.replace(/proto/, isPresenterViewWithPopoutAudienceView ? "presenter" : isSlides ? "deck" : "proto"), z4.getIsExtension()) {
-      Qn(F);
+      openInBrowser(F);
       return;
     }
   }

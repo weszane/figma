@@ -10,7 +10,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { l as _$$l } from "../905/745972";
 import { hideModalHandler, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
@@ -41,7 +41,7 @@ let v = registerModal(function (e) {
   let x = _$$l();
   let j = x.windowInnerWidth && x.windowInnerWidth < 550 ? "md" : 440;
   return jsx(UI3ConditionalWrapper, {
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: e0.COMMUNITY_REDIRECT_PURCHASE_MODAL,
       children: jsx(ModalRootComponent, {
         manager: s,

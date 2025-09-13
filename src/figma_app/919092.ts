@@ -4,13 +4,13 @@ import { G } from "../905/289770";
 import { J } from "../905/614223";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 function c({
   text: e,
   disabled: t
 }) {
-  return jsx(Ex, {
-    color: t ? zE.DISABLED : zE.DEFAULT_TRANSLUCENT,
+  return jsx(Badge, {
+    color: t ? BadgeColor.DISABLED : BadgeColor.DEFAULT_TRANSLUCENT,
     text: e
   });
 }

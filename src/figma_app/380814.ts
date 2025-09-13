@@ -19,7 +19,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
 import { generateRecordingKey, useHandleFocusEvent } from "../figma_app/878298";
 import { logError } from "../905/714362";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { Oe } from "../figma_app/933328";
@@ -282,7 +282,7 @@ export function $$Z1({
       })
     }), jsx($$$3, {
       label: renderI18nText("variables.create_modal.name_label"),
-      input: jsx(_$$L, {
+      input: jsx(LazyInputForwardRef, {
         className: _Z,
         name: "variableName",
         value: s.varName,

@@ -11,7 +11,7 @@ import { Fullscreen, PrototypingTsApi } from "../figma_app/763686";
 import { permissionScopeHandler, scopeAwareFunction } from "../905/189185";
 import $$m from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey, useHandleChangeEvent, useHandleGenericEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { lW } from "../figma_app/11182";
@@ -289,7 +289,7 @@ export function $$z0(t) {
   });
   let a = useHandleGenericEvent(t.recordingKey, "blur", scopeAwareFunction.user("rename-starting-point", () => t.submitRename(e)));
   let l = useHandleKeyboardEvent(t.recordingKey, "keydown", o => {
-    "Enter" === o.key ? t.submitRename(e) : "Escape" === o.key ? t.submitRename("") : t.shouldListenForTabKeyboardEvent && o.keyCode === Uz.TAB && (o.preventDefault(), t.submitRename(e), t.onTabKeyboardEvent?.(o.shiftKey));
+    "Enter" === o.key ? t.submitRename(e) : "Escape" === o.key ? t.submitRename("") : t.shouldListenForTabKeyboardEvent && o.keyCode === KeyCodes.TAB && (o.preventDefault(), t.submitRename(e), t.onTabKeyboardEvent?.(o.shiftKey));
   });
   return jsx(EventShield, {
     eventListeners: ["onMouseDown"],

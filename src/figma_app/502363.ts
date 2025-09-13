@@ -7,7 +7,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { r } from "../905/398386";
 import { HI, ej as _$$ej, w2, $P, qv, PP, Dy, PI, _z, ky, Ns } from "../905/977218";
 import { VP, GH, aF, Fl } from "../905/18797";
-import { uH, hf, Rr, uR, Rx } from "../figma_app/162807";
+import { PublicModelType, getModelTypeEmptyStateI18n, SearchTypeMode, InputType, SpaceAccessType } from "../figma_app/162807";
 import { ViewMode, FileType } from "../figma_app/756995";
 import { o as _$$o } from "../905/668706";
 import { ButtonPrimitive } from "../905/632989";
@@ -38,13 +38,13 @@ import { h as _$$h } from "../905/207101";
 import { h1 } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { M3, dP } from "../figma_app/119475";
-import { L as _$$L2 } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { XW } from "../905/182534";
 import { gt, Ri, j3, Gb, ht } from "../figma_app/327577";
 import { yJ } from "../figma_app/78808";
 import { r as _$$r } from "../905/520829";
-import { rl } from "../905/612685";
+import { getDesignFileUrl } from "../905/612685";
 import { uQ, eM as _$$eM, J1 } from "../figma_app/20203";
 import { Fm, Cg, nS } from "../figma_app/476677";
 import { A as _$$A6 } from "../1617/586892";
@@ -84,23 +84,23 @@ import { useCurrentPublicPlan, isOrgOrEnterprisePlan, checkOrgUserPermission } f
 import { g as _$$g } from "../905/210813";
 import { l as _$$l } from "../figma_app/676249";
 let F = {
-  [uH.HUB_FILES]: _$$A2,
-  [uH.PUBLIC_PLUGINS]: _$$A3,
-  [uH.PRIVATE_PLUGINS]: null,
-  [uH.PUBLIC_PROFILES]: _$$A,
-  [uH.FILES]: null,
-  [uH.PROJECTS]: null,
-  [uH.TEAMS]: null,
-  [uH.USERS]: null,
-  [uH.PUBLIC_WIDGETS]: _$$A4,
-  [uH.PRIVATE_WIDGETS]: null
+  [PublicModelType.HUB_FILES]: _$$A2,
+  [PublicModelType.PUBLIC_PLUGINS]: _$$A3,
+  [PublicModelType.PRIVATE_PLUGINS]: null,
+  [PublicModelType.PUBLIC_PROFILES]: _$$A,
+  [PublicModelType.FILES]: null,
+  [PublicModelType.PROJECTS]: null,
+  [PublicModelType.TEAMS]: null,
+  [PublicModelType.USERS]: null,
+  [PublicModelType.PUBLIC_WIDGETS]: _$$A4,
+  [PublicModelType.PRIVATE_WIDGETS]: null
 };
 let j = {
-  [uH.PUBLIC_PLUGINS]: _$$Of,
-  [uH.PRIVATE_PLUGINS]: Of,
-  [uH.PUBLIC_PROFILES]: hP,
-  [uH.PUBLIC_WIDGETS]: nD.listStyle,
-  [uH.PRIVATE_WIDGETS]: uB.listStyle
+  [PublicModelType.PUBLIC_PLUGINS]: _$$Of,
+  [PublicModelType.PRIVATE_PLUGINS]: Of,
+  [PublicModelType.PUBLIC_PROFILES]: hP,
+  [PublicModelType.PUBLIC_WIDGETS]: nD.listStyle,
+  [PublicModelType.PRIVATE_WIDGETS]: uB.listStyle
 };
 class U extends Component {
   componentDidMount() {
@@ -112,18 +112,18 @@ class U extends Component {
   renderContent() {
     let e;
     if (this.props.viewMode === ViewMode.LIST) e = j[this.props.searchModelType] ?? p_;else if (this.props.viewMode === ViewMode.GRID) switch (this.props.searchModelType) {
-      case uH.FILES:
-      case uH.TEAMS:
-      case uH.PROJECTS:
-      case uH.PUBLIC_PLUGINS:
-      case uH.PRIVATE_PLUGINS:
-      case uH.PUBLIC_WIDGETS:
-      case uH.PRIVATE_WIDGETS:
-      case uH.USERS:
+      case PublicModelType.FILES:
+      case PublicModelType.TEAMS:
+      case PublicModelType.PROJECTS:
+      case PublicModelType.PUBLIC_PLUGINS:
+      case PublicModelType.PRIVATE_PLUGINS:
+      case PublicModelType.PUBLIC_WIDGETS:
+      case PublicModelType.PRIVATE_WIDGETS:
+      case PublicModelType.USERS:
         break;
-      case uH.PUBLIC_PROFILES:
-      case uH.HUB_FILES:
-      case uH.PUBLIC_PROFILES:
+      case PublicModelType.PUBLIC_PROFILES:
+      case PublicModelType.HUB_FILES:
+      case PublicModelType.PUBLIC_PROFILES:
         e = Vg;
         break;
       default:
@@ -144,7 +144,7 @@ class U extends Component {
         onResetWorkspaceFilter: this.props.onResetWorkspaceFilter
       }) : t ? jsx($$G6, {
         illustration: F[this.props.searchModelType],
-        resourceTypeDisplayString: hf(this.props.searchModelType),
+        resourceTypeDisplayString: getModelTypeEmptyStateI18n(this.props.searchModelType),
         searchModelType: this.props.searchModelType,
         query: this.props.query,
         activePlan: this.props.activePlan,
@@ -172,14 +172,14 @@ class U extends Component {
     });
   }
   render() {
-    let e = this.props.searchModelType === uH.FILES ? void 0 : this.props.viewMode === ViewMode.LIST ? UL : G2;
+    let e = this.props.searchModelType === PublicModelType.FILES ? void 0 : this.props.viewMode === ViewMode.LIST ? UL : G2;
     return jsxs(Q0, {
       isDropdown: !1,
       ...this.props,
       children: [jsx("div", {
         className: e,
         children: this.renderContent()
-      }), this.props.searchModelType === uH.PROJECTS && this.renderProjectContextMenu()]
+      }), this.props.searchModelType === PublicModelType.PROJECTS && this.renderProjectContextMenu()]
     });
   }
 }
@@ -298,7 +298,7 @@ class V extends Component {
     window.removeEventListener("scroll", this.onScroll, !0);
   }
   componentDidUpdate(e) {
-    if (this.props.searchModelType === uH.FILES) {
+    if (this.props.searchModelType === PublicModelType.FILES) {
       let t = e.searchResults ?? H;
       let r = this.props.searchResults ?? H;
       let n = t.length !== r.length;
@@ -313,7 +313,7 @@ class V extends Component {
     }
   }
   getFilteredResults(e, t) {
-    return this.props.searchModelType === uH.FILES ? e.filter(e => {
+    return this.props.searchModelType === PublicModelType.FILES ? e.filter(e => {
       let r = e.model;
       switch (t.filters.fileType) {
         case FileType.ANY:
@@ -390,7 +390,7 @@ let z = connect((e, t) => {
 }))(V);
 export function $$W5() {
   let e = useSelector(e => e.search.parameters);
-  let t = e.facetFilters?.searchModelType ? e.facetFilters.searchModelType : uH.FILES;
+  let t = e.facetFilters?.searchModelType ? e.facetFilters.searchModelType : PublicModelType.FILES;
   return jsx(z, {
     searchModelType: t
   });
@@ -403,7 +403,7 @@ export function $$e_0() {
   let e = useDispatch();
   let t = useSelector(e => e.desktopNewTab.isSearchBarFocused);
   let r = useSelector(e => e.desktopNewTab.searchQuery);
-  let s = useSelector(e => e.search.completedQueries[uH.FILES]);
+  let s = useSelector(e => e.search.completedQueries[PublicModelType.FILES]);
   let o = useSelector(e => "" !== e.desktopNewTab.searchQuery && e.desktopNewTab.isSearchBarFocused);
   let {
     isLoading,
@@ -416,7 +416,7 @@ export function $$e_0() {
     });
     let n = useSelector(e => e.loadingState[r]);
     let i = useSelector(e => e.desktopNewTab.searchQuery);
-    let s = e.completedQueries[uH.FILES];
+    let s = e.completedQueries[PublicModelType.FILES];
     return {
       isLoading: n === _$$r.LOADING || i !== s,
       searchResults: (e.responses.files?.results ?? []).slice(0, 5)
@@ -430,10 +430,10 @@ export function $$e_0() {
     e(Ri(t));
     e(PI({
       query: t,
-      searchModelType: uH.FILES,
+      searchModelType: PublicModelType.FILES,
       searchScope: u,
       debounce: !0,
-      searchTypeBehavior: Rr.ONE_TYPE,
+      searchTypeBehavior: SearchTypeMode.ONE_TYPE,
       precacheInactiveTypes: !1
     }));
   }, [e, r, u]);
@@ -530,7 +530,7 @@ function eh(e) {
         className: "search_bar--searchIcon--V3JlY",
         svg: _$$A6,
         ariaHidden: !0
-      }), jsx(_$$L2, {
+      }), jsx(LazyInputForwardRef, {
         ref: e => {
           searchInputRef.current = e;
           setKeyboardNavigationElement(e);
@@ -655,7 +655,7 @@ function eg(e) {
       "data-faux-focused": isFauxFocused
     },
     ref: setKeyboardNavigationElement,
-    href: rl(l),
+    href: getDesignFileUrl(l),
     onClick: d,
     children: jsxs("div", {
       className: $()({
@@ -685,7 +685,7 @@ function ef(e) {
   let t = useDispatch();
   let r = useSelector(e => e.desktopNewTab.searchQuery);
   let s = useSelector(e => e.currentUserOrgId);
-  let o = XW(r, s, uH.FILES);
+  let o = XW(r, s, PublicModelType.FILES);
   let l = useMemo(() => [J1, e.numSearchResults], [e.numSearchResults]);
   let {
     onFocus,
@@ -758,7 +758,7 @@ let eK = registerModal(function () {
   }, [r]);
   let u = useCallback(() => {
     e(_$$ky());
-    o && (l(null), c(uR.DROPDOWN, o));
+    o && (l(null), c(InputType.DROPDOWN, o));
   }, [e, l, o, c]);
   if (!t) return null;
   let _ = t.data.width ? {
@@ -840,7 +840,7 @@ export function $$e53({
       let i = isOrgOrEnterprisePlan(r);
       let a = checkOrgUserPermission(n, FMemberRoleType.MEMBER);
       e(Ns({
-        searchScope: t ? Rx.COMMUNITY : i ? a ? Rx.ORG : Rx.ORG_GUEST : Rx.PERSONAL
+        searchScope: t ? SpaceAccessType.COMMUNITY : i ? a ? SpaceAccessType.ORG : SpaceAccessType.ORG_GUEST : SpaceAccessType.PERSONAL
       }));
     }, [e, t]);
   }();
@@ -902,7 +902,7 @@ export function $$e53({
     "aria-label": getI18nString("search.search_bar.placeholder"),
     children: [jsx(_$$h2, {}), jsxs("div", {
       className: "faceted_search_entrypoint--contentContainer--hu0Ox",
-      children: [jsx(_$$K, {}), jsx(_$$L2, {
+      children: [jsx(_$$K, {}), jsx(LazyInputForwardRef, {
         className: "faceted_search_entrypoint--input--UBJpm faceted_search_bar--input--V5ksZ",
         placeholder: 0 === _.length ? getI18nString("search.search_bar.placeholder") : "",
         value: d

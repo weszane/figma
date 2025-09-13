@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import { i } from "../905/890459";
+import { getOrgOrTeamPath } from "../905/890459";
 export function $$a0(e) {
   let {
     currentUserOrgId
   } = e;
-  currentUserOrgId || i(e);
+  currentUserOrgId || getOrgOrTeamPath(e);
   return `/${currentUserOrgId}`;
 }
 export function $$s1() {

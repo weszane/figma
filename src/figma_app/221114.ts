@@ -23,14 +23,14 @@ import v from "classnames";
 import x from "../vendor/805353";
 import { trackEventAnalytics } from "../905/449184";
 import { j as _$$j } from "../905/564614";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { PAGINATION_NEXT, hasMorePages } from "../figma_app/661371";
 import { BrowserInfo } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
 import { RecordingComponent, handleMouseEvent, generateRecordingKey, handleKeyboardEvent } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
-import { Ph } from "../figma_app/637027";
+import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { h1 } from "../905/986103";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
@@ -46,7 +46,7 @@ import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/852057";
 import { Dm } from "../figma_app/8833";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { removeOptimist } from "../905/766303";
 import { F as _$$F2 } from "../905/224";
@@ -589,7 +589,7 @@ function eD({
   let i = _$$h.useTrackingContext({
     trigger: UpsellModalType.HISTORY_UPSELL
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Version History Paywall Panel",
     properties: {
       ...i
@@ -602,7 +602,7 @@ function eD({
       }), jsx("div", {
         children: e ? jsx(TextWithTruncation, {
           children: renderI18nText("upsell.history.upsell_upgrade_description", {
-            upgradeLink: jsx(Ph, {
+            upgradeLink: jsx(clickableBaseLinkTracked, {
               className: s6,
               onClick: t,
               trackingProperties: {
@@ -618,7 +618,7 @@ function eD({
           })
         }) : jsx(TextWithTruncation, {
           children: renderI18nText("upsell.history.upsell_learn_more_description", {
-            upgradeLink: jsx(Ph, {
+            upgradeLink: jsx(clickableBaseLinkTracked, {
               className: s6,
               href: "/pricing",
               trusted: !0,
@@ -758,7 +758,7 @@ class eM extends RecordingComponent {
     this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
     this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
-        if (e.keyCode === Uz.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg());else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
+        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg());else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
           if (!this.isAllowedToChangeVersion()) return;
           let t = this.props.versionHistory.versions.length;
           this.setState({
@@ -766,9 +766,9 @@ class eM extends RecordingComponent {
           });
           this.autoExpandGroupId = "";
           let r = -1;
-          if (this.props.versionHistory.activeId === V_) e.keyCode === Uz.DOWN_ARROW && (r = 0);else {
+          if (this.props.versionHistory.activeId === V_) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0);else {
             let t = this.props.versionHistory.versions.findIndex(e => e.id === this.props.versionHistory.activeId);
-            -1 !== t && (r = e.keyCode === Uz.UP_ARROW ? t - 1 : t + 1);
+            -1 !== t && (r = e.keyCode === KeyCodes.UP_ARROW ? t - 1 : t + 1);
           }
           if (r < 0) {
             this.props.dispatch(Nb({
@@ -1083,7 +1083,7 @@ class eM extends RecordingComponent {
     let E = !this.canEditFile();
     let y = i.map(e => shouldShowView(e) ? 1 : 0).reduce((e, t) => e + t, 0);
     return jsx("div", {
-      children: this.props.progressBarState.mode !== UIVisibilitySetting.ON_AND_LOCKED && jsx(fu, {
+      children: this.props.progressBarState.mode !== UIVisibilitySetting.ON_AND_LOCKED && jsx(TrackingProvider, {
         name: "Version History Panel",
         properties: {
           teamId: t?.id

@@ -29,7 +29,7 @@ import { z as _$$z } from "../c5e2cae0/580036";
 import { y as _$$y, I as _$$I2 } from "../c5e2cae0/74041";
 import { f as _$$f } from "../c5e2cae0/279252";
 import { kR, vU } from "../c5e2cae0/894125";
-import { Kz, il, Us, vd, Ph as _$$Ph } from "../figma_app/637027";
+import { Spacing, BigTextInput, linkWithTracking, ButtonBasePrimaryTracked, clickableBaseLinkTracked } from "../figma_app/637027";
 import { Fb, b0 } from "../figma_app/81441";
 import { W as _$$W } from "../c5e2cae0/300137";
 import { U as _$$U } from "../905/815805";
@@ -48,7 +48,7 @@ import { S_, gk } from "../5885/925885";
 import { b as _$$b } from "../905/985254";
 import { e5, Mh, Dj } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { h3, fu } from "../figma_app/831799";
+import { withTrackedInput, TrackingProvider } from "../figma_app/831799";
 import { jv, vu } from "../905/84777";
 import { lo, wn, dl } from "../9420/795870";
 import { isCollaboratorType, ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
@@ -100,22 +100,22 @@ function D({
     children: [jsx("h1", {
       className: Fb,
       children: renderI18nText("pro_cart.add_collaborators.add_collaborators_to_your_team")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: .5
     }), jsx("h2", {
       className: b0,
       children: renderI18nText("pro_cart.add_collaborators.well_add_them_to_your_team")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 4
     }), jsxs("div", {
       style: _$$sx.flex.flexColumn.add({
         maxWidth: "400px"
       }).mlAuto.mrAuto.gap12.$,
-      children: [t.map((e, t) => jsx(il, {
+      children: [t.map((e, t) => jsx(BigTextInput, {
         value: e,
         onChange: e => l(e.target.value, t),
         placeholder: getI18nString("pro_cart.add_collaborators.email")
-      }, `collaborator-email-input-${t}`)), jsx(Us, {
+      }, `collaborator-email-input-${t}`)), jsx(linkWithTracking, {
         onClick: () => {
           a([...t, ""]);
         },
@@ -125,7 +125,7 @@ function D({
       })]
     }), jsxs("div", {
       style: _$$sx.flex.flexColumn.itemsCenter.mlAuto.mrAuto.mt24.gap24.fontMedium.font14.$,
-      children: [jsx(vd, {
+      children: [jsx(ButtonBasePrimaryTracked, {
         disabled: !!e,
         style: _$$sx.font14.add({
           height: "44px",
@@ -133,7 +133,7 @@ function D({
         }).$,
         onClick: r,
         children: renderI18nText("pro_cart.add_collaborators.sent_invites")
-      }), jsx(_$$Ph, {
+      }), jsx(clickableBaseLinkTracked, {
         trusted: !0,
         onClick: i,
         style: _$$sx.colorTextSecondary.alignCenter.$,
@@ -172,7 +172,7 @@ function F({
     }), jsx(_$$L, {})]
   });
 }
-let eO = h3(e => {
+let eO = withTrackedInput(e => {
   let {
     dataTestId,
     children,
@@ -784,7 +784,7 @@ function eY(e) {
     teamId: eP,
     userId: a.id
   })?.is3DS;
-  return e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) ? jsx(Fragment, {}) : jsx(fu, {
+  return e.selectedView.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE && (tb || cannotCreateTeamReason === z4.TEAM_CREATION_CONTROL) ? jsx(Fragment, {}) : jsx(TrackingProvider, {
     name: e0.TEAM_CHECKOUT_FLOW,
     properties: {
       teamId: e.selectedView.teamId,

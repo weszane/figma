@@ -3,8 +3,8 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { y as _$$y } from "../905/175043";
 import { h as _$$h } from "../905/207101";
-import { e as _$$e } from "../905/280005";
-import { Uz, xH } from "../905/63728";
+import { handleUrlAction } from "../905/280005";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -37,7 +37,7 @@ function E({
     close();
   }, [e, close]);
   let f = useCallback(e => {
-    _$$e(e) || h(RK({
+    handleUrlAction(e) || h(RK({
       rawInput: e
     }));
   }, [h]);
@@ -66,7 +66,7 @@ function E({
           onAction: g,
           variant: "secondary",
           shortcuts: [{
-            key: Uz.ESCAPE
+            key: KeyCodes.ESCAPE
           }],
           recordingKey: "cancel-instruction",
           children: renderI18nText("ai.cancel")
@@ -166,8 +166,8 @@ export function $$x0({
           iconPrefix: t,
           recordingKey: "instructionView",
           shortcuts: [{
-            key: Uz.ENTER,
-            modifier: [xH.META]
+            key: KeyCodes.ENTER,
+            modifier: [ModifierKeyCodes.META]
           }],
           children: i
         })]

@@ -14,7 +14,7 @@ import { aK } from "../figma_app/401069";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanExport } from "../figma_app/43951";
 import { KindEnum } from "../905/129884";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 export function $$b7(e, t) {
   return `/file/${e}/image/${t}/download`;
 }
@@ -32,7 +32,7 @@ export async function $$I3({
 }) {
   if (!t || "VIDEO" !== e.type) return null;
   let r = $$T6(e);
-  return r ? (await S.getVideosDownload({
+  return r ? (await fileApiHandler.getVideosDownload({
     hexHash: r,
     fileKey: t
   })).data.meta.signed_url : null;
@@ -96,7 +96,7 @@ function N({
   let u = $$T6(e);
   let [p, m] = useState(!1);
   let f = useCallback(() => {
-    u && (m(!0), S.getVideosDownload({
+    u && (m(!0), fileApiHandler.getVideosDownload({
       hexHash: u,
       fileKey: c
     }).then(t => {

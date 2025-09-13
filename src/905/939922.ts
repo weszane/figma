@@ -19,7 +19,7 @@ import { cD } from "../figma_app/598018";
 import { U } from "../905/18613";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai } from "../figma_app/915202";
-import { O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 export function $$S0() {
   let e = selectCurrentUser();
   let t = useCurrentUserOrgId();
@@ -155,7 +155,7 @@ let T = async ({
   let d = "recentsAndSharing" === r.view || "folder" === r.view ? r : void 0;
   i(c5({
     planId: n || o,
-    planType: n ? O.ORG : O.TEAM
+    planType: n ? OrganizationType.ORG : OrganizationType.TEAM
   }));
   let f = {
     user: l,

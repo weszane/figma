@@ -17,7 +17,7 @@ import { V } from "../figma_app/385855";
 import { getI18nString } from "../905/303541";
 import { selectCurrentFile } from "../figma_app/516028";
 import { PageThumbnailsByFileKeyView } from "../figma_app/43951";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { qp } from "../figma_app/932601";
 var u = c;
 export function $$w0({
@@ -72,7 +72,7 @@ export function $$w0({
           onClick: () => {
             c && !d && (h("figjam_pages_summary.preview_refreshed", {
               previewPageId: i
-            }), m(_$$r.LOADING), _$$S.updatePageCheckpointThumbnails({
+            }), m(_$$r.LOADING), fileApiHandler.updatePageCheckpointThumbnails({
               fileKey: c.key
             }).catch(() => {
               h("figjam_summary_preview.page_thumbnails_request_failed_increment_metric", {});

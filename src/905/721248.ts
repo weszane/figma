@@ -23,7 +23,7 @@ import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/929976";
 import { ov, S2 } from "../905/300250";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { rY } from "../905/985490";
 import { b_, gf, _l, ds, n6 as _$$n, Ur, YH } from "../905/585030";
 import { handleModalError } from "../905/760074";
@@ -49,7 +49,7 @@ import { getFeatureFlags } from "../905/601108";
 import { waitForAnimationFrame } from "../905/236856";
 import Q from "../vendor/961736";
 import { l as _$$l } from "../905/728491";
-import { vj } from "../figma_app/919079";
+import { BadgeSize } from "../figma_app/919079";
 import { h1 } from "../905/986103";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
@@ -124,7 +124,7 @@ import { v as _$$v } from "../905/318279";
 import { b as _$$b2, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
 import { J as _$$J3 } from "../905/125993";
 import i$ from "../vendor/946678";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { MM, ms } from "../figma_app/236327";
 import { LoadingOverlay } from "../figma_app/858013";
 import { jq } from "../figma_app/563413";
@@ -134,7 +134,7 @@ import { fG } from "../905/772425";
 import { zW } from "../905/162414";
 import { getResourceDataOrFallback } from "../905/723791";
 import { EditorLocation } from "../figma_app/175992";
-import { Um } from "../figma_app/349248";
+import { mapUserProperties } from "../figma_app/349248";
 import { A as _$$A0 } from "../905/920142";
 import { Ro } from "../figma_app/805373";
 import { A as _$$A1 } from "../1617/954184";
@@ -2642,7 +2642,7 @@ function nf(e) {
           className: "reviewer_row--statusBadge--N4PHD",
           children: jsx($T, {
             mergeRequestStatus: u,
-            size: vj.LARGE,
+            size: BadgeSize.LARGE,
             outdated: !!h
           })
         }), i && !s && jsx(ni, {
@@ -2743,18 +2743,18 @@ function nA(e) {
   let R = C(x);
   let N = t => {
     switch (t.keyCode) {
-      case Uz.ESCAPE:
+      case KeyCodes.ESCAPE:
         t.preventDefault();
         t.stopPropagation();
         e.showDropdown(!1);
         break;
-      case Uz.DOWN_ARROW:
+      case KeyCodes.DOWN_ARROW:
         _(u + 1, w);
         break;
-      case Uz.UP_ARROW:
+      case KeyCodes.UP_ARROW:
         _(u - 1, w);
         break;
-      case Uz.ENTER:
+      case KeyCodes.ENTER:
         t.preventDefault();
         t.stopPropagation();
         b(w[u]);
@@ -2849,7 +2849,7 @@ function ny(e) {
         if (!e.pending && e.userId && e.userId !== t?.id && e.user && !a.has(e.userId) && e.level >= AccessLevelEnum.EDITOR) {
           let t = "file_repo" === e.resourceType ? EditorLocation.EDITOR_ON_MAIN : EditorLocation.EDITOR_ON_TEAM;
           a.set(e.userId, {
-            ...Um(e.user),
+            ...mapUserProperties(e.user),
             editorContext: t
           });
         }
@@ -3580,7 +3580,7 @@ let nw = memo(function (e) {
       className: "to_source_view--statusIndicator--iUkm8",
       children: jsx($T, {
         mergeRequestStatus: ej,
-        size: vj.LARGE
+        size: BadgeSize.LARGE
       })
     })]
   });
@@ -3627,7 +3627,7 @@ let nw = memo(function (e) {
             unreadCommentCount: e.unreadCommentCount,
             hasDuplicateConflictingGuids: e.hasDuplicateConflictingGuids
           }), jsx(wy, {
-            children: jsxs(fu, {
+            children: jsxs(TrackingProvider, {
               name: _$$e2.BRANCHING_REVIEW_MODAL,
               properties: {
                 fileKey: branch.key,
@@ -3710,7 +3710,7 @@ let nw = memo(function (e) {
         let a = t?.to;
         return jsxs(qj, {
           children: [jsxs(wy, {
-            children: [jsx(fu, {
+            children: [jsx(TrackingProvider, {
               name: _$$e2.BRANCH_DIFF_DETAIL,
               properties: {
                 fileKey: branch.source_file_key,
@@ -4516,10 +4516,10 @@ function ra(e) {
       if (!document.activeElement) return;
       let i = !0;
       switch (t.keyCode) {
-        case Uz.BRACKET_LEFT:
+        case KeyCodes.BRACKET_LEFT:
           e(BranchType.MAIN);
           break;
-        case Uz.BRACKET_RIGHT:
+        case KeyCodes.BRACKET_RIGHT:
           e(BranchType.BRANCH);
           break;
         default:
@@ -5289,10 +5289,10 @@ let rR = memo(function (e) {
       if (!document.activeElement) return;
       let t = !0;
       switch (e.keyCode) {
-        case Uz.UP_ARROW:
+        case KeyCodes.UP_ARROW:
           Q();
           break;
-        case Uz.DOWN_ARROW:
+        case KeyCodes.DOWN_ARROW:
           X();
           break;
         default:
@@ -5322,7 +5322,7 @@ let rR = memo(function (e) {
       chooseForConflict: J,
       fileName: e.fileName,
       group: M
-    }), jsxs(fu, {
+    }), jsxs(TrackingProvider, {
       name: _$$e2.BRANCHING_CONFLICT_GROUP,
       properties: {
         conflictGroup: M.id,
@@ -5481,7 +5481,7 @@ let rN = memo(function (e) {
   };
   return _ ? jsx(qj, {
     children: jsx(wy, {
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: _$$e2.BRANCHING_CONFLICT_RESOLUTION_MODAL,
         properties: {
           ...z,
@@ -5527,7 +5527,7 @@ let rN = memo(function (e) {
         })
       })
     })
-  }) : jsx(fu, {
+  }) : jsx(TrackingProvider, {
     name: _$$e2.BRANCHING_UPDATE_FROM_MAIN_MODAL,
     properties: {
       ...z,
@@ -5919,7 +5919,7 @@ function rM(e) {
     mergeDirection: l,
     sourceCheckpointKey: e.sourceCheckpointKey,
     onClose: eb,
-    children: [ev && jsx(fu, {
+    children: [ev && jsx(TrackingProvider, {
       name: _$$e2.BRANCHING_CONFLICTING_GUIDS_BUG,
       properties: {
         fileKey: eh.key,

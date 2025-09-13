@@ -7,7 +7,7 @@ import { S as _$$S2 } from "../905/711470";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
 import { useDebouncedCallback } from "use-debounce";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { MM } from "../figma_app/236327";
 import { dP, M3 } from "../figma_app/119475";
 import { P as _$$P } from "../905/347284";
@@ -19,7 +19,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { N as _$$N } from "../3271/584206";
 import { RB } from "../figma_app/69680";
 import { oB, j7 } from "../905/929976";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { m0, lg } from "../figma_app/976749";
 import { cW, ZT, x as _$$x, ll, U6, $1, nl, yQ, sp, Be, pR, YW, jA, op, qr, I5, SG, Tg, f6, wW } from "../figma_app/844435";
 import { z4 } from "../905/37051";
@@ -46,7 +46,7 @@ import { J as _$$J } from "../905/125993";
 import { W as _$$W } from "../905/865092";
 import { getFeatureFlags } from "../905/601108";
 import { R as _$$R } from "../figma_app/313269";
-import { Ph } from "../figma_app/637027";
+import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { $3, op as _$$op } from "../figma_app/487970";
@@ -64,7 +64,7 @@ import { QQ } from "../figma_app/808294";
 import { Ul } from "../figma_app/777551";
 import { af, Qi } from "../figma_app/559491";
 import { S as _$$S3 } from "../figma_app/11182";
-import { y as _$$y } from "../905/850671";
+import { getVsCodeLinkProps } from "../905/850671";
 import { XV, Cs } from "../figma_app/684168";
 import { isVsCodeEnvironment } from "../905/858738";
 import { E as _$$E } from "../469e6e40/167556";
@@ -468,7 +468,7 @@ function eG(e) {
   }) : jsx(GJ, {
     widgetId: e.resourceId
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "detail",
     properties: {
       resourceId: e.resourceId,
@@ -617,9 +617,9 @@ function e$(e) {
   let {
     href,
     onClick
-  } = _$$y(`/community/${s}/${e.resourceId}`);
+  } = getVsCodeLinkProps(`/community/${s}/${e.resourceId}`);
   return jsxs(Fragment, {
-    children: [jsxs(Ph, {
+    children: [jsxs(clickableBaseLinkTracked, {
       className: "detail_view--communityLink--e-ixL fd_browse_resource_modal--communityLinkBase---qAie text--fontPos11--2LvXf text--_fontBase--QdLsd",
       href,
       onClick,
@@ -734,7 +734,7 @@ function e7() {
   let l = n ? r : s;
   let o = _$$M();
   let d = sp(n);
-  return o && (Object.keys(l).length > 0 || d.length > 0) ? jsxs(fu, {
+  return o && (Object.keys(l).length > 0 || d.length > 0) ? jsxs(TrackingProvider, {
     name: "Development",
     children: [Object.keys(l).map((e, t) => jsx(_$$ff, {
       resourceId: e,
@@ -780,8 +780,8 @@ function tf() {
   let {
     href,
     onClick
-  } = _$$y(`/community/${activeTab === _$$s2.PLUGIN ? "plugins" : "widgets/figma_design"}${s ? "/devmode" : ""}`);
-  return t?.shouldOptimizeForIpadApp ? null : jsxs(Ph, {
+  } = getVsCodeLinkProps(`/community/${activeTab === _$$s2.PLUGIN ? "plugins" : "widgets/figma_design"}${s ? "/devmode" : ""}`);
+  return t?.shouldOptimizeForIpadApp ? null : jsxs(clickableBaseLinkTracked, {
     className: "fd_browse_resource_modal--communityLink--gI-Ei fd_browse_resource_modal--communityLinkBase---qAie text--fontPos12--YsUAh text--_fontBase--QdLsd",
     href,
     onClick,
@@ -952,7 +952,7 @@ function tM(e) {
   let {
     href,
     onClick
-  } = _$$y(`/community/${c ? "widgets" : "plugins"}`);
+  } = getVsCodeLinkProps(`/community/${c ? "widgets" : "plugins"}`);
   let $ = g && jsxs(Fragment, {
     children: [jsx("div", {
       className: tu
@@ -1033,7 +1033,7 @@ function tM(e) {
       children: c ? renderI18nText("universal_insert.no_saved_widgets") : renderI18nText("universal_insert.no_saved_plugins")
     })]
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "Org",
     children: [W, X, $]
   });
@@ -1150,7 +1150,7 @@ function tJ({
   let {
     href,
     onClick
-  } = _$$y(`/community/${activeTab === _$$s2.PLUGIN ? "plugins" : "widgets"}`);
+  } = getVsCodeLinkProps(`/community/${activeTab === _$$s2.PLUGIN ? "plugins" : "widgets"}`);
   return useMemo(() => {
     if (hasAllowList ? allowListIsLoading : S) return jsx("div", {
       className: "xqui205 xh8yej3 x1o2pa38",
@@ -1158,7 +1158,7 @@ function tJ({
     });
     if (!(null !== B) && !hasAllowList) return null;
     let n = hasAllowList ? f : B.map(e => e.id);
-    return publicExtensionsDisallowed || 0 === n.length ? null : jsxs(fu, {
+    return publicExtensionsDisallowed || 0 === n.length ? null : jsxs(TrackingProvider, {
       name: hasAllowList ? "Approved plugins" : "From Community",
       children: [jsx("div", {
         className: s ? tc : tu
@@ -1220,7 +1220,7 @@ function t3(e) {
   let t = t1(e.isWidget);
   let [s, r] = useState(!1);
   let i = useMemo(() => s ? t : t.slice(0, 40), [t, s]);
-  return 0 === t.length ? null : jsxs(fu, {
+  return 0 === t.length ? null : jsxs(TrackingProvider, {
     name: "saved",
     children: [jsx("div", {
       className: to,
@@ -1251,7 +1251,7 @@ function t2(e) {
   let c = l ? r : s;
   c = filterByPublicResourcesAllowed(c = filterByAllowlist(c));
   c = bT(c);
-  let u = useMemo(() => c.length > 0 ? jsxs(fu, {
+  let u = useMemo(() => c.length > 0 ? jsxs(TrackingProvider, {
     name: "recents",
     children: [jsx("div", {
       className: to,
@@ -1264,7 +1264,7 @@ function t2(e) {
     }, e.plugin_id))]
   }) : jsx(Fragment, {}), [c]);
   let _ = t1(l);
-  if (!0 === i.loaded && c.length + _.length === 0) return jsxs(fu, {
+  if (!0 === i.loaded && c.length + _.length === 0) return jsxs(TrackingProvider, {
     name: "Recents and saved",
     children: [jsx(_$$H, {
       isWidget: activeTab === _$$s2.WIDGET
@@ -1278,7 +1278,7 @@ function t2(e) {
   });
   let x = c.length > 0;
   let p = _.length > 0;
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "Recents and saved",
     children: [u, p && x && jsx("div", {
       className: tc
@@ -1503,7 +1503,7 @@ function st(e) {
     onScroll: eh,
     onMouseDown: e => e.stopPropagation(),
     onPointerDown: e => e.stopPropagation(),
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "search",
       properties: {
         searchQuery: o,
@@ -1603,7 +1603,7 @@ export function $$so0() {
   let [p, h] = useState(initialFdView ? "" : r || "");
   let [v, f] = useState(_$$Y.MAIN);
   let j = useCallback(e => {
-    if (e.keyCode === Uz.ENTER) {
+    if (e.keyCode === KeyCodes.ENTER) {
       let t = e.target;
       let s = t?.querySelector("button");
       s?.click();
@@ -1623,14 +1623,14 @@ export function $$so0() {
   }), [activeTab, setCurrentViewOrTab]);
   let b = useMemo(() => {
     let t = ta;
-    return (u ? t = tn : _ && (t = ti), activeTab === _$$s2.COMPONENT) ? jsx(fu, {
+    return (u ? t = tn : _ && (t = ti), activeTab === _$$s2.COMPONENT) ? jsx(TrackingProvider, {
       name: activeTab,
       children: jsx($, {
         header: w,
         query: p,
         setQuery: h
       })
-    }) : jsxs(fu, {
+    }) : jsxs(TrackingProvider, {
       name: activeTab,
       children: [!u && !_ && w, jsx("div", {
         onMouseDown: e => e.stopPropagation(),

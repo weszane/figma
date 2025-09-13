@@ -4,7 +4,7 @@ import a from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 import { Yd, XH, zp, nf, U1, nM, z5, tk, e4, LI } from "../905/832675";
 var s = a;
@@ -52,7 +52,7 @@ export class $$m2 extends PureComponent {
   }
 }
 $$m2.displayName = "TableRow";
-export let $$h4 = tf($$m2);
+export let $$h4 = withTrackedClick($$m2);
 export class $$g1 extends PureComponent {
   render() {
     return jsx($$m2, {

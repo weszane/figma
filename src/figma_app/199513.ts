@@ -21,7 +21,7 @@ import { nX } from "../905/466026";
 import { uo as _$$uo } from "../905/98702";
 import { trackFolderEvent } from "../figma_app/314264";
 import { F as _$$F2 } from "../905/224";
-import { SS } from "../figma_app/528509";
+import { validateFolderName } from "../figma_app/528509";
 import { convertTeamToRaw } from "../905/628874";
 import { FFolderType } from "../figma_app/191312";
 import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
@@ -400,7 +400,7 @@ let $$ei12 = M4.Mutation(({
   objects: r,
   reduxStore: n
 }) => {
-  let i = SS(t);
+  let i = validateFolderName(t);
   if (i) {
     n.dispatch(FlashActions.error(i));
     return;

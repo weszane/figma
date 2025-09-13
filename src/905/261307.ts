@@ -19,7 +19,7 @@ import { k as _$$k2 } from "../figma_app/618031";
 import { getRumLoggingConfig } from "../905/16237";
 import { popModalStack } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { ju } from "../905/389382";
@@ -97,7 +97,7 @@ export let $$O0 = registerModal(function ({
         error: !0
       }));
     },
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: e0.ADMIN_AUTO_UPGRADE_CONFIRMATION_MODAL,
       properties: D,
       trackingOptions: B,

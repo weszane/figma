@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, createRef } from "react";
 import { cZ } from "../figma_app/272902";
 import s from "classnames";
-import { Uz, sC, xH } from "../905/63728";
+import { KeyCodes, isModifierMatch, ModifierKeyCodes } from "../905/63728";
 import { By } from "../905/777187";
 import { BrowserInfo } from "../figma_app/778880";
 import { SKIP_RECORDING } from "../figma_app/878298";
@@ -84,17 +84,17 @@ export class $$I3 extends PureComponent {
       if (jr(e, this.shouldForwardUndo()) || (this.props.onKeyDown?.(e), e.defaultPrevented)) return;
       this.didIncrement = !1;
       let t = this.inputRef.current;
-      if (e.keyCode === Uz.ESCAPE) {
+      if (e.keyCode === KeyCodes.ESCAPE) {
         this.setState({
           editingValue: null
         });
         setTimeout(() => t.blur(), 0);
         e.preventDefault();
-      } else if (e.keyCode === Uz.ENTER) {
+      } else if (e.keyCode === KeyCodes.ENTER) {
         t.blur();
         e.preventDefault();
         return SKIP_RECORDING;
-      } else if (e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.DOWN_ARROW) {
+      } else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
         if (this.context?.boundVariableId || (e.preventDefault(), !this.props.formatter.incrementBy)) return;
         let i = this.props.property;
         try {
@@ -104,7 +104,7 @@ export class $$I3 extends PureComponent {
         if (isValidValue(i)) {
           let n = _L(this.props.formatter, t);
           let r = e.shiftKey;
-          let a = e.keyCode === Uz.DOWN_ARROW ? -1 : 1;
+          let a = e.keyCode === KeyCodes.DOWN_ARROW ? -1 : 1;
           let s = mb(this.props.formatter, r, i);
           let o = ql(this.props.formatter, i, s * a, {
             incrementTargets: n
@@ -118,7 +118,7 @@ export class $$I3 extends PureComponent {
           if (null == this.inputRef.current?.value) return;
           let t = this.props.mixedMathHandler.getValue();
           this.props.mixedMathHandler.onChange(t, t => {
-            let i = e.keyCode === Uz.DOWN_ARROW ? -1 : 1;
+            let i = e.keyCode === KeyCodes.DOWN_ARROW ? -1 : 1;
             let n = e.shiftKey;
             let r = mb(this.props.formatter, n, t);
             return ql(this.props.formatter, t, r * i);
@@ -133,7 +133,7 @@ export class $$I3 extends PureComponent {
         this.context?.showBindingUI(t, {
           currentFieldValue: this.props.property
         });
-      } else if (e.keyCode !== Uz.TAB) return SKIP_RECORDING;
+      } else if (e.keyCode !== KeyCodes.TAB) return SKIP_RECORDING;
     };
     this.onKeyUp = e => {
       if (jr(e, this.shouldForwardUndo())) return SKIP_RECORDING;
@@ -145,7 +145,7 @@ export class $$I3 extends PureComponent {
         let n = i.length > 0 && t.selectionStart === i.length && t.selectionEnd === i.length;
         let r = e.key && 1 === e.key.length;
         let a = 32 === e.keyCode || e.keyCode >= 65 && e.keyCode <= 90;
-        if (n && (r || a) && sC(e, xH.SHIFT)) {
+        if (n && (r || a) && isModifierMatch(e, ModifierKeyCodes.SHIFT)) {
           let e = this.props.formatter.autocomplete(i);
           null !== e && (t.value = e, t.setSelectionRange(i.length, e.length));
         }

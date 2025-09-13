@@ -10,7 +10,7 @@ import u from "classnames";
 import { _ as _$$_ } from "../905/569825";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { wv } from "../figma_app/236327";
 import { L as _$$L } from "../figma_app/942671";
@@ -504,7 +504,7 @@ export function $$W1({
     }), jsx("div", {
       className: zj,
       onKeyDown: e => {
-        (e.keyCode === Uz.ENTER || e.keyCode === Uz.ESCAPE) && t && _(oB());
+        (e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.ESCAPE) && t && _(oB());
       },
       children: jsx(_$$A, {
         className: hF,

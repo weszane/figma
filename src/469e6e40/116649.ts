@@ -13,13 +13,13 @@ import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { useCurrentUserOrg } from "../905/845253";
-import { g as _$$g2 } from "../905/817247";
+import { getGroupOrDefault } from "../905/817247";
 import { MX, EQ } from "../figma_app/684446";
 import { useTeamPlanUser, useTeamPlanFeatures, useIsOrgAdminUser } from "../figma_app/465071";
 import { ck } from "../905/952832";
 import { FRequestsStr } from "../905/384551";
-import { UserRole, GroupType } from "../905/441038";
-import { J7 } from "../figma_app/650409";
+import { UserGroupRole, GroupType } from "../905/441038";
+import { DashboardSection } from "../figma_app/650409";
 import { o0 } from "../905/844131";
 import { ER } from "../figma_app/102449";
 import { useSubscription } from "../figma_app/288654";
@@ -80,12 +80,12 @@ export function $$D0({
   useEffect(() => {
     T ? t(sf({
       view: "orgAdminSettings",
-      orgAdminSettingsViewTab: J7.DASHBOARD
+      orgAdminSettingsViewTab: DashboardSection.DASHBOARD
     })) : !D && A && R ? t(sf(o0)) : P || (groupsUserIsAdminOf.length > 0 ? t(sf({
       view: "licenseGroup",
-      subView: UserRole.ADMIN,
+      subView: UserGroupRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
-      selectedTab: _$$g2(GroupType.MEMBERS)
+      selectedTab: getGroupOrDefault(GroupType.MEMBERS)
     })) : t(sf(o0)));
   });
   let $ = _$$s.wFull.flex.justifyBetween.px16.py24.$;

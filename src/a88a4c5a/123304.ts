@@ -103,7 +103,7 @@ import { O as _$$O3 } from '../905/599243';
 import { getFeatureFlags } from '../905/601108';
 import { QL } from '../905/609392';
 import { customHistory } from '../905/612521';
-import { jN } from '../905/612685';
+import { buildFileUrl } from '../905/612685';
 import { J as _$$J2 } from '../905/614223';
 import { Pv } from '../905/619652';
 import { e as _$$e2 } from '../905/621515';
@@ -343,7 +343,7 @@ import { generateRecordingKey } from '../figma_app/878298';
 import { eBU } from '../figma_app/822011';
 import { dL as _$$dL } from '../figma_app/825489';
 import { oV as _$$oV, FR, xp } from '../figma_app/827216';
-import { $z as _$$$z, fu } from '../figma_app/831799';
+import { TrackedButton, TrackingProvider } from '../figma_app/831799';
 import { bL as _$$bL2, wi as _$$wi, gR } from '../figma_app/861123';
 import { UQ } from '../figma_app/864723';
 import { C as _$$C } from '../figma_app/872960';
@@ -1369,7 +1369,7 @@ function th() {
     isShowing,
     children: jsxs(_$$J2, {
       brand: 'dev-handoff',
-      children: [jsx(OM, {}), jsx(fu, {
+      children: [jsx(OM, {}), jsx(TrackingProvider, {
         name: 'RFD Upsell Modal',
         properties: {
           ...E,
@@ -1542,11 +1542,11 @@ function tW() {
     });
   }, [l, r, d, a, isShowing, s, o, t, show]), isShowing) ? jsx(_$$M, {
     isShowing,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: 'DevModeDemoFileEntryPoint',
       children: jsx(tq, {
         onClick: () => {
-          d && customHistory.redirect(jN({
+          d && customHistory.redirect(buildFileUrl({
             file: {
               key: d
             },
@@ -1675,7 +1675,7 @@ function t4() {
   });
   return jsx(_$$M, {
     isShowing,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: 'FigmaMakeUpsellInDesignEditor',
       children: jsx(_$$J2, {
         brand: 'seascape',
@@ -1884,7 +1884,7 @@ function lw({
       id: 'starting_points_template_inserted'
     }), e(), d(!1));
   };
-  let D = jsx(_$$$z, {
+  let D = jsx(TrackedButton, {
     onClick: () => V('basics'),
     trackingProperties: {
       trackingDescriptor: _$$c2.LEARN_THE_BASICS
@@ -1927,7 +1927,7 @@ function lw({
       isPreview: !0
     });
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Starting Points Modal',
     children: jsx('div', {
       className: 'starting_points_templates_modal--startingPointsTemplatesModalPositioner--R8g3u',
@@ -1959,7 +1959,7 @@ function lw({
             })]
           }), jsxs('div', {
             className: 'starting_points_templates_modal--optionContainer--mYEsG',
-            children: [jsxs(_$$$z, {
+            children: [jsxs(TrackedButton, {
               className: lb,
               onClick: () => V('website'),
               onMouseEnter: () => H('website'),
@@ -1975,7 +1975,7 @@ function lw({
                 src: buildUploadUrl(b.website),
                 alt: 'Website template'
               })]
-            }), jsxs(_$$$z, {
+            }), jsxs(TrackedButton, {
               className: lb,
               onClick: () => V('mobile'),
               onMouseEnter: () => H('mobile'),
@@ -1991,7 +1991,7 @@ function lw({
                 src: buildUploadUrl(b.mobile),
                 alt: 'Mobile app template'
               })]
-            }), jsxs(_$$$z, {
+            }), jsxs(TrackedButton, {
               className: lb,
               onClick: () => V('desktop'),
               onMouseEnter: () => H('desktop'),

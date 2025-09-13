@@ -9,7 +9,7 @@ import { d as _$$d } from "../vendor/456530";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { SKIP_RECORDING } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { jD } from "../905/765855";
 import { F as _$$F } from "../905/989956";
 import { oW } from "../figma_app/247611";
@@ -108,7 +108,7 @@ export let $$x0 = memo(function ({
       a: e.a
     }));
   }
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     recordingKey: hx(`${e}.animatedIcon`),
     className: c()(ke, {
       [zO]: r,

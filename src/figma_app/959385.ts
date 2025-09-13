@@ -7,7 +7,7 @@ import { C as _$$C } from "../905/520159";
 import { N as _$$N } from "../905/301843";
 import { W as _$$W } from "../905/865092";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { e as _$$e2 } from "../905/280005";
+import { handleUrlAction } from "../905/280005";
 import { R as _$$R } from "../figma_app/313269";
 import { reportError } from "../905/11";
 import { formatNumber } from "../figma_app/930338";
@@ -139,7 +139,7 @@ function ee({
     let t = useDispatch();
     let r = manifestContainsWidget(e) ? ox(e.plugin_id) : ab(e.plugin_id);
     return useCallback(() => {
-      _$$e2(r) || t(RK({
+      handleUrlAction(r) || t(RK({
         rawInput: r
       }));
     }, [t, r]);

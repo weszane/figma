@@ -10,7 +10,7 @@ import { permissionScopeHandler } from "../905/189185";
 import g from "classnames";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { stripHtmlTags } from "../905/491152";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { M3 } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
@@ -26,7 +26,7 @@ import { bV, Lt } from "../figma_app/808294";
 import { G8, AC } from "../figma_app/777551";
 import { oB, j7 } from "../905/929976";
 import { b as _$$b } from "../905/985254";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { t as _$$t3 } from "../469e6e40/489933";
 import { m0 } from "../figma_app/976749";
 import { dR, Gt, RK } from "../figma_app/248118";
@@ -590,7 +590,7 @@ function eP(e) {
     isFauxFocused,
     keyboardNavigationButtonRef
   } = ef(`plugin_${t}`, keyboardNavigationPath, !!shouldFocusFirstItem);
-  let x = j6();
+  let x = useTracking();
   let R = ul(e.pluginId);
   let F = Object.values($1()).find(i => String(i.plugin_id) === e.pluginId);
   let N = getPluginVersion(R);
@@ -1038,7 +1038,7 @@ let eM = memo(function (e) {
     allowlistedExtensions: j
   });
   let T = !!(g || b);
-  let R = j6();
+  let R = useTracking();
   let F = T ? void 0 : e => e.stopPropagation();
   let N = e.metadataOverrideNode ?? jsxs(Fragment, {
     children: [jsxs("div", {
@@ -1172,7 +1172,7 @@ export function $$ez5(e) {
   }, [validatePublishedPluginInOrgAllowlist, g, h, i, I, e.dropdownShownType, e.pluginId, u, o]);
   if (a && !d) return null;
   let y = t.current?.getBoundingClientRect();
-  let _ = e.usePrimaryButtonStyles ? jsxs($$, {
+  let _ = e.usePrimaryButtonStyles ? jsxs(ButtonBasePrimary, {
     onClick: w,
     className: lI,
     children: [renderI18nText("universal_insert.run"), g && jsx(SvgComponent, {
@@ -1256,7 +1256,7 @@ export function $$eH1(e) {
     });
   }, [x, I, o]);
   if (!t) return null;
-  let w = jsxs($$, {
+  let w = jsxs(ButtonBasePrimary, {
     onClick: h,
     className: lI,
     children: [renderI18nText("universal_insert.add"), o && jsx(SvgComponent, {

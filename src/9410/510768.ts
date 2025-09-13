@@ -1,4 +1,4 @@
-import { VA } from "../figma_app/528509";
+import { hasRootPathOptional } from "../figma_app/528509";
 import { aV } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -8,7 +8,7 @@ import { useIsCanvasEditDisabled } from "../905/595131";
 export function $$c0() {
   let e = aV();
   let t = selectCurrentFile();
-  let i = VA(t?.project);
+  let i = hasRootPathOptional(t?.project);
   let c = useIsCanvasEditDisabled();
   let u = !!selectCurrentUser();
   let {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import n from "classnames";
 import { P as _$$P } from "../5430/455826";
-import { tM, vd } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -120,17 +120,17 @@ function w({
           className: UD,
           children: [D && jsx(LoadingSpinner, {
             className: u1
-          }), jsx(tM, {
+          }), jsx(ButtonSecondaryTracked, {
             onClick: G,
             children: renderI18nText("change_payment.cancel")
-          }), jsx(vd, {
+          }), jsx(ButtonBasePrimaryTracked, {
             tabIndex: 0,
             type: "submit",
             disabled: D,
             children: renderI18nText("change_payment.save")
           })]
         })]
-      }), $ && jsx(tM, {
+      }), $ && jsx(ButtonSecondaryTracked, {
         onClick: G,
         children: renderI18nText("change_payment.close_window")
       })]

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, forwardRef, useState, useCallback } from "react";
 import a from "classnames";
 import { Q } from "../905/911623";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { getBasename } from "../905/309735";
 import { KindEnum } from "../905/129884";
 import { Z } from "../905/248978";
@@ -45,7 +45,7 @@ let $$$$h0 = memo(forwardRef(function ({
     I(!0);
     _?.(e);
   }, [_]);
-  return jsxs(GG, {
+  return jsxs(RecordableButton, {
     className: "style_icon_button--button--Cf7v2",
     forwardedRef: A,
     onBlur: () => I(!1),
@@ -97,7 +97,7 @@ let $$g1 = forwardRef(function ({
     onClick: h,
     onMouseLeave: y
   });
-  return jsxs(GG, {
+  return jsxs(RecordableButton, {
     className: s()("style_icon_button--rowButton--dTT9X", {
       "style_icon_button--selected--6KJiJ": r,
       "style_icon_button--fauxFocused--LWkh-": a

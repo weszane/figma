@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
 import { M3 } from "../figma_app/91703";
 import { tc as _$$tc } from "../905/15667";
-import { fu, L0 } from "../figma_app/831799";
+import { TrackingProvider, TrackedAnchor } from "../figma_app/831799";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { Ir, nk as _$$nk, m1 } from "../figma_app/2023";
 import { selectCurrentUser, selectUser } from "../905/372672";
@@ -47,7 +47,7 @@ import { Wl, l7, hA, ZO, NZ } from "../figma_app/88239";
 import { $A } from "../905/782918";
 import { o as _$$o } from "../905/382697";
 import { r as _$$r } from "../905/857502";
-import { b as _$$b, d as _$$d } from "../905/91820";
+import { combineWithHyphen, ShareContext } from "../905/91820";
 import { iO as _$$iO, s5, t9 as _$$t2, yI } from "../905/915142";
 import { dR } from "../905/508367";
 import { selectWithShallowEqual } from "../905/103090";
@@ -55,8 +55,8 @@ import { e as _$$e } from "../905/383776";
 import { A8 } from "../figma_app/617506";
 import { S as _$$S, Yn, Rh, rA as _$$rA, og } from "../figma_app/78808";
 import { generateUrl, isBranch, isDefaultFile } from "../905/760074";
-import { jN } from "../905/612685";
-import { EO, Ml } from "../905/691205";
+import { buildFileUrl } from "../905/612685";
+import { replaceColonWithDash, normalizeVariableId } from "../905/691205";
 import { lD, qI } from "../figma_app/831696";
 import { Hz as _$$Hz } from "../905/366346";
 import { wD, B1, mu, $Y, $S, h1 } from "../905/918620";
@@ -133,7 +133,7 @@ import { $u } from "../figma_app/524655";
 import { fS, st as _$$st, d3, dG, QU as _$$QU, VA, bV, ts as _$$ts, Fk, pi, tl as _$$tl2, Ph, ER, p3, fA, U5, WZ as _$$WZ, ix as _$$ix, G as _$$G, HL, HO, Zq, QW, mq, O6, hz, ZD, Ac, Uo, Kz, oT, hC, N1, TK, i1 as _$$i3, IH, iA as _$$iA, UB, KN, Cr, E_, BA, QA, eF as _$$eF, Zk, Ed, Sc, Bd, v7, DA, IE, vv } from "../figma_app/538002";
 import { throwTypeError, assert, debug } from "../figma_app/465776";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
-import { Uz, Gc } from "../905/63728";
+import { KeyCodes, ignoreCommandOrShift } from "../905/63728";
 import { i as _$$i4 } from "../905/385727";
 import { n as _$$n3 } from "../figma_app/537817";
 import { xf, H as _$$H, $S as _$$$S, UU, N8, p4, R8, _O, RA, gJ, C9, x7, B5, A as _$$A3, gY, _V, AA, j7, sH, Jt, bU, rG as _$$rG, qj, ec as _$$ec, jq, JZ, H7, to as _$$to2, vQ } from "../905/372455";
@@ -146,7 +146,7 @@ import { A as _$$A5 } from "../905/920142";
 import { b as _$$b3 } from "../905/966382";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { reportError } from "../905/11";
-import { ks, nR as _$$nR, $$, tM as _$$tM, vd, s6, Ph as _$$Ph, qM } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary, ButtonSecondaryTracked, ButtonBasePrimaryTracked, ButtonSecondaryNegative, clickableBaseLinkTracked, ButtonNegativeTracked } from "../figma_app/637027";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { lW } from "../figma_app/11182";
@@ -162,7 +162,7 @@ import { og as _$$og } from "../905/466026";
 import { K as _$$K3 } from "../905/443068";
 import { a as _$$a } from "../905/5627";
 import { copyTextToClipboard } from "../figma_app/623293";
-import { L as _$$L3 } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { VisualBellIcon } from "../905/576487";
 import { Dp, yJ, ml, hP, U as _$$U2, W7, cH, nM as _$$nM, M3 as _$$M, Fn, $j, d4 as _$$d2, lX } from "../905/759412";
 import { Um } from "../905/848862";
@@ -209,7 +209,7 @@ import { cX } from "../figma_app/471982";
 import { sG } from "../905/686934";
 import { ZS } from "../figma_app/519839";
 import { pz } from "../figma_app/825489";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { UM, F4 } from "../figma_app/60023";
 import { ke } from "../905/58274";
 import { br, U7 } from "../905/149895";
@@ -242,7 +242,7 @@ import { A as _$$A13 } from "../5724/267849";
 import { r as _$$r3, X as _$$X3 } from "../905/308709";
 import { iF as _$$iF } from "../905/452667";
 import { ul } from "../905/635424";
-import { O as _$$O2 } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { A as _$$A14 } from "../1617/984457";
 import { w as _$$w } from "../905/770105";
 import { ButtonPrimitive } from "../905/632989";
@@ -331,7 +331,7 @@ function en({
   let r = i?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && i.publishedHubFile || null;
   let a = r ? jsx(_$$m, {}) : jsx(_$$Y, {});
   let s = r ? getI18nString("file_permissions_modal.share_as.publish.published") : getI18nString("file_permissions_modal.share_as.publish");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Publish Community Row",
     children: jsx(_$$sR, {
       icon: a,
@@ -377,7 +377,7 @@ function eA({
     let y;
     let b = !(getFeatureFlags().show_copy_link_to_editor && A) && (l || a);
     let v = {};
-    o && (v["node-id"] = EO(o));
+    o && (v["node-id"] = replaceColonWithDash(o));
     !o && b && _ && Object.assign(v, lD({
       ..._,
       nodeId: void 0,
@@ -385,18 +385,18 @@ function eA({
     }));
     let I = d || r === _$$iO.DEV_MODE;
     let E = r === _$$iO.AUTO;
-    if (y = t ? generateUrl(e, t, b ? "proto" : "file") : b ? qI(e.prototype_url, e.editor_type || FFileType.DESIGN) : jN({
+    if (y = t ? generateUrl(e, t, b ? "proto" : "file") : b ? qI(e.prototype_url, e.editor_type || FFileType.DESIGN) : buildFileUrl({
       file: e,
       isDevHandoff: I,
       allowDefaulting: E,
       nodeId: o
     }), !d) {
-      let e = _$$b(i, _$$d.SHARE_MODAL);
+      let e = combineWithHyphen(i, ShareContext.SHARE_MODAL);
       e && (v.t = e);
     }
-    p ? (v.vars = 1, f && (v["var-id"] = Ml(f))) : c ? v["ready-for-dev"] = 1 : u ? v["focus-id"] = EO(u) : m && (v["component-browser"] = 1, g && (v["component-key"] = g));
+    p ? (v.vars = 1, f && (v["var-id"] = normalizeVariableId(f))) : c ? v["ready-for-dev"] = 1 : u ? v["focus-id"] = replaceColonWithDash(u) : m && (v["component-browser"] = 1, g && (v["component-key"] = g));
     s && (v.view = _$$Hz(s));
-    n && (v["code-node-id"] = EO(n));
+    n && (v["code-node-id"] = replaceColonWithDash(n));
     return dR(y, v);
   }, [i, g, o, n, s, e, t, l, d, p, f, c, u, _, m]);
 }
@@ -426,7 +426,7 @@ function ey({
       url: l,
       label: conditionalFeatureFlag("ce_copy_labelled_links", e.name, void 0),
       skipVisualBell: r,
-      source: t || _$$d.SHARE_MODAL,
+      source: t || ShareContext.SHARE_MODAL,
       trackingProperties: {
         link_access_mode: e.link_access
       }
@@ -853,7 +853,7 @@ let to = registerModal(function (e) {
     return () => clearInterval(e);
   });
   let f = "loaded" === h.status && !!i;
-  return t ? jsx(fu, {
+  return t ? jsx(TrackingProvider, {
     name: "google_device_screenshare_modal",
     children: jsx(ModalRootComponent, {
       manager: m,
@@ -1010,7 +1010,7 @@ function tu({
       case Q9.ERROR:
         t = getI18nString("file_permissions_modal.screenshare_to_google_device.generic_error");
     }
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: td,
       properties: {
         isEnabled: !1,
@@ -1051,7 +1051,7 @@ function tu({
     className: _$$aL,
     children: jsx(e1, {})
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: td,
     properties: {
       isEnabled: !0
@@ -1342,7 +1342,7 @@ function ie(e) {
   let r = cD();
   let a = t ? jsx(tQ, {}) : jsx(_$$n2, {});
   let s = t ? getI18nString("file_permissions_modal.share_as.publish_template.published") : getI18nString("file_permissions_modal.share_as.publish_template");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Publish Template Row",
     properties: {
       orgId: i,
@@ -1543,7 +1543,7 @@ function is({
       onClick: () => a({
         linkQueryMode: _$$iO.DEV_MODE,
         skipVisualBell: !0,
-        source: _$$d.SHARE_MODAL_COPY_DEV_ROW
+        source: ShareContext.SHARE_MODAL_COPY_DEV_ROW
       })
     });
   }({
@@ -1574,7 +1574,7 @@ function is({
       onClick: () => o({
         linkQueryMode: _$$iO.DESIGN,
         skipVisualBell: !0,
-        source: _$$d.SHARE_MODAL_COPY_PROTO_ROW,
+        source: ShareContext.SHARE_MODAL_COPY_PROTO_ROW,
         shouldLinkToPrototype: !0
       }),
       fileKey: e.key,
@@ -1608,7 +1608,7 @@ function is({
       onClick: () => s({
         linkQueryMode: _$$iO.SLIDES,
         skipVisualBell: !0,
-        source: _$$d.SHARE_MODAL_COPY_PRESENTATION_ROW,
+        source: ShareContext.SHARE_MODAL_COPY_PRESENTATION_ROW,
         shouldLinkToPrototype: !0
       }),
       fileKey: e.key,
@@ -1753,7 +1753,7 @@ function is({
         i({
           linkQueryMode: _$$iO.DESIGN,
           skipVisualBell: !0,
-          source: _$$d.SHARE_MODAL,
+          source: ShareContext.SHARE_MODAL,
           shouldLinkToPrototype: !1,
           shouldLinkToEditor: !0
         });
@@ -1829,7 +1829,7 @@ function iu({
   return jsx("div", {
     className: "tab_contents_container--container--3H4IC",
     onKeyDown: e => {
-      e.keyCode !== Uz.ESCAPE && e.stopPropagation();
+      e.keyCode !== KeyCodes.ESCAPE && e.stopPropagation();
     },
     children: e
   }, "container");
@@ -2068,7 +2068,7 @@ function iG({
 function i$(e) {
   let t = useDispatch();
   return jsxs(Fragment, {
-    children: [jsx(_$$L3, {
+    children: [jsx(LazyInputForwardRef, {
       disabled: e.sharedContainerSetting?.autogen_password_controls,
       className: e.inputClassName,
       value: e.password || "",
@@ -2206,7 +2206,7 @@ function i7(e) {
           left: 36
         },
         spacing: 8,
-        children: [jsx(ks, {
+        children: [jsx(BigTextInputForwardRef, {
           type: "date",
           className: h,
           onChange: t => {
@@ -2259,14 +2259,14 @@ function i7(e) {
           top: 8,
           bottom: 8
         } : {},
-        children: [jsx(_$$nR, {
+        children: [jsx(ButtonSecondary, {
           onClick: () => {
             e.onCancelRequiredExpiration && e.onCancelRequiredExpiration();
             e.setErrorMessage(null);
           },
           className: x7,
           children: renderI18nText("file_access_row.expiration.cancel")
-        }), jsx($$, {
+        }), jsx(ButtonBasePrimary, {
           className: e.displayState === i0.EDIT_EXP ? B5 : void 0,
           onClick: () => u(a, l),
           disabled: !!e.errorMessage || e.disableSetExpiration,
@@ -2335,11 +2335,11 @@ function i8(e) {
         top: 8,
         bottom: 8
       } : {},
-      children: [jsx(_$$nR, {
+      children: [jsx(ButtonSecondary, {
         className: x7,
         onClick: e.onCancelRequiredExpiration,
         children: renderI18nText("file_access_row.expiration.cancel")
-      }), jsx($$, {
+      }), jsx(ButtonBasePrimary, {
         className: e.displayState === i0.EDIT_EXP ? B5 : void 0,
         onClick: () => s(t),
         disabled: e.disableSetExpiration,
@@ -2867,10 +2867,10 @@ function na({
       className: _$$WZ,
       children: jsxs("div", {
         className: _$$ix,
-        children: [jsx(_$$tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: _,
           children: renderI18nText("project_creation.cancel")
-        }), jsx(vd, {
+        }), jsx(ButtonBasePrimaryTracked, {
           onClick: () => {
             if (v && E !== FEditorType.Slides && T) {
               if (!isSlidesOrWhiteboardOrDesignOrIllustration(E)) {
@@ -3011,7 +3011,7 @@ function ns(e) {
 function nc(e) {
   let t = useDispatch();
   let i = Xr(ti);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "google_device_screenshare_disclaimer_modal",
     children: jsxs("div", {
       className: _$$s.flex.flexColumn.$,
@@ -3024,7 +3024,7 @@ function nc(e) {
         children: [jsx("div", {
           className: _$$s.colorTextSecondary.pb8.$,
           children: renderI18nText("file_permissions_modal.google_confirmation_modal.subtext", {
-            link: jsx(L0, {
+            link: jsx(TrackedAnchor, {
               target: "_blank",
               rel: "noopener",
               href: "",
@@ -3251,9 +3251,9 @@ let n2 = registerModal(function ({
     onUnpublishHubFileSuccess: l,
     onUnpublishHubFileError: d
   }, [u, e, d, l, o, p]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Community Unpublish Confirmation Modal",
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       isLoading: m,
       confirmationTitle: t,
       content: i,
@@ -3601,7 +3601,7 @@ class rt extends Component {
         })
       });
     };
-    this.onHubFileClick = Gc(e => {
+    this.onHubFileClick = ignoreCommandOrShift(e => {
       e.preventDefault();
       e.stopPropagation();
       this.props.editingHubFile && this.props.dispatch(sf({
@@ -3815,7 +3815,7 @@ class rt extends Component {
             trusted: !0,
             children: ["\xa0", getI18nString("general.learn_more")]
           })]
-        }), jsx(fu, {
+        }), jsx(TrackingProvider, {
           name: "Community Publish Button",
           children: jsx($z, {
             disabled: !!this.props.canPublishError || !this.state.thumbnail || !!this.props.disablePublish,
@@ -4114,7 +4114,7 @@ function rg({
     ...d,
     sha1: "buffer" in d ? sha1Hex(d.buffer) : void 0
   }, [d, t.thumbnailUrl]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e5.TEMPLATE_DETAILS,
     children: jsxs("div", {
       className: "publish_tab--publishedTemplate--nQEjl",
@@ -4136,10 +4136,10 @@ function rg({
           })
         }), jsxs("div", {
           className: "publish_tab--publishedTemplateButtons--BXhdu",
-          children: [jsx(s6, {
+          children: [jsx(ButtonSecondaryNegative, {
             onClick: yz(o, t.fileKey),
             children: renderI18nText("templates.detail.unpublish_button")
-          }), jsx(vd, {
+          }), jsx(ButtonBasePrimaryTracked, {
             innerText: "Publish",
             onClick: () => {
               i && YM(o, t.fileKey, s, "published-template-details");
@@ -4200,7 +4200,7 @@ function rb() {
   return E === kN.NOT_ENABLED ? jsx(rn, {}) : e && b ? (i === ShareAction.PUBLISH_TEMPLATE || "template" === l) && u ? jsx(rg, {
     file: e,
     template: u
-  }) : i === ShareAction.PUBLISH_COMMUNITY || "community" === l ? jsx(rn, {}) : jsx(fu, {
+  }) : i === ShareAction.PUBLISH_COMMUNITY || "community" === l ? jsx(rn, {}) : jsx(TrackingProvider, {
     name: _$$e5.SHARE_MODAL_PUBLISH_TAB,
     children: jsxs("div", {
       className: "publish_tab--publishTab--FVuph",
@@ -4542,7 +4542,7 @@ function rM({
     },
     children: renderI18nText("fullscreen.toolbar_banner.provisional_access.curf.cta")
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Draft Share Provisional Awareness Banner",
     properties: {
       fileKey: e,
@@ -4567,14 +4567,14 @@ function rG(e) {
   let r = jsx("p", {
     children: renderI18nText("drafts_move_banner.to_add_editors_first_move_this_file_from_drafts_into_a_project.seat_rename")
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Drafts Move Banner",
     children: jsxs("div", {
       className: W5,
       children: [jsx(SvgComponent, {
         className: _$$RA,
         svg: _$$A13
-      }), r, jsx(_$$Ph, {
+      }), r, jsx(clickableBaseLinkTracked, {
         className: MC,
         onClick: () => {
           i ? _$$h(e.file, e.repo, t, void 0, jsx(_$$t7, {})) : t(showModalHandler({
@@ -4601,7 +4601,7 @@ function rq(e) {
       svg: _$$A14
     }), jsx("div", {
       className: UU,
-      children: e.planType === _$$O2.ORG ? renderI18nText("file_permissions_modal.org_admin", {
+      children: e.planType === OrganizationType.ORG ? renderI18nText("file_permissions_modal.org_admin", {
         orgName: e.planName
       }) : renderI18nText("file_permissions_modal.team_admin", {
         teamName: e.planName
@@ -4669,7 +4669,7 @@ let r1 = registerModal(function (e) {
       })
     }), jsxs("div", {
       className: E_,
-      children: [jsx(_$$tM, {
+      children: [jsx(ButtonSecondaryTracked, {
         onClick: i,
         children: renderI18nText("file_permissions.enable_folder_access.cancel")
       }), jsx(_$$vd, {
@@ -4709,10 +4709,10 @@ let r2 = registerModal(function (e) {
       })
     }), jsxs("div", {
       className: E_,
-      children: [jsx(_$$tM, {
+      children: [jsx(ButtonSecondaryTracked, {
         onClick: i,
         children: renderI18nText("file_permissions.disable_folder_access.cancel")
-      }), jsx(qM, {
+      }), jsx(ButtonNegativeTracked, {
         onClick: () => {
           e.onSave();
           i();
@@ -5180,10 +5180,10 @@ function ab({
   }) {
     return e.isAbandonedDraftFile ? t ? {
       planName: t.name,
-      planType: _$$O2.ORG
+      planType: OrganizationType.ORG
     } : i && hasValidSubscription(i) ? {
       planName: i.name,
-      planType: _$$O2.TEAM
+      planType: OrganizationType.TEAM
     } : null : null;
   }({
     file: e,
@@ -6460,7 +6460,7 @@ function sp({
     dataLoaded,
     planTier
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Share Modal",
     properties: {
       resourceType: FResourceCategoryType.FILE,

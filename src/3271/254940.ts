@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { nR } from "../figma_app/637027";
+import { ButtonSecondary } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -25,7 +25,7 @@ export function $$g0(e) {
   if (!h || !h.parentOrgId) return null;
   if (C) {
     let e = "figjam_plugin_tile" === variant ? renderI18nText("universal_insert.request") : renderI18nText("universal_insert.approval_pending");
-    return jsx(nR, {
+    return jsx(ButtonSecondary, {
       disabled: !0,
       className: _$$s.wFull.$,
       dataTestId: "request-button-approval-pending",
@@ -45,7 +45,7 @@ export function $$g0(e) {
     fullscreenEditorType: mapFileTypeToEditorType(h.editorType)
   };
   let y = "figjam_plugin_tile" === variant ? renderI18nText("universal_insert.request") : renderI18nText("universal_insert.request_approval");
-  return jsx(nR, {
+  return jsx(ButtonSecondary, {
     onClick: () => {
       t(showModalHandler({
         type: S,

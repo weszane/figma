@@ -1,6 +1,6 @@
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 export function $$r0(e, t) {
-  return e.plan_type === _$$O.ORG ? {
+  return e.plan_type === OrganizationType.ORG ? {
     userId: t,
     orgId: e.plan_id,
     teamId: null
@@ -16,7 +16,7 @@ export function $$a1(e) {
     currentUserOrgId,
     currentTeamId
   } = e;
-  return currentUserOrgId ? plans.find(e => e.plan_type === _$$O.ORG && e.plan_id === currentUserOrgId) : currentTeamId ? plans.find(e => e.plan_type === _$$O.TEAM && e.plan_id === currentTeamId) : void 0;
+  return currentUserOrgId ? plans.find(e => e.plan_type === OrganizationType.ORG && e.plan_id === currentUserOrgId) : currentTeamId ? plans.find(e => e.plan_type === OrganizationType.TEAM && e.plan_id === currentTeamId) : void 0;
 }
 export const O = $$r0;
 export const S = $$a1;

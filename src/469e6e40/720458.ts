@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { vd, tM } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
 import { z as _$$z, Z } from "../905/306088";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
@@ -10,7 +10,7 @@ import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { R as _$$R } from "../905/304671";
 import { popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FPlanFeatureType } from "../figma_app/191312";
 import { S as _$$S } from "../4452/747039";
 import { OJ } from "../905/519092";
@@ -180,16 +180,16 @@ export function $$I0(e) {
   let H = () => {
     t(popModalStack());
   };
-  let Y = R ? jsx(vd, {
+  let Y = R ? jsx(ButtonBasePrimaryTracked, {
     disabled: !0,
     children: jsx(LoadingOverlay, {})
   }) : jsxs(Fragment, {
-    children: [jsx(tM, {
+    children: [jsx(ButtonSecondaryTracked, {
       onClick: 1 !== M && q ? () => {
         P(1);
       } : H,
       children: 1 !== M && q ? renderI18nText("asset_transfers.request_modal.back") : renderI18nText("asset_transfers.request_modal.cancel")
-    }), jsx(vd, {
+    }), jsx(ButtonBasePrimaryTracked, {
       onClick: 1 === M && q ? () => P(2) : () => {
         O(!0);
         _$$S.approveAssetTransferRequest({
@@ -224,7 +224,7 @@ export function $$I0(e) {
     })
   });
   let K = T?.transfer_type === "project" && T?.is_transfer_copy ? renderI18nText("asset_transfers.handle_request_modal.accept_this_transfer") : renderI18nText("asset_transfers.handle_request_modal.manage_this_transfer");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: T?.transfer_type === "project" ? "Handle Project Transfer Request Modal" : "Handle Team Transfer Request Modal",
     properties: {
       assetTransferRequestId: e.selectedAssetTransferRequest,

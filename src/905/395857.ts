@@ -3,7 +3,7 @@ import { wF, Xe, Sm, j6 } from "../905/859698";
 import { z } from "../905/239603";
 import { getResourceDataOrFallback } from "../905/663269";
 import { FComponentType } from "../figma_app/191312";
-import { U7, Qp, uW, SS, KC, GA, cE } from "../figma_app/349248";
+import { mapFrameProperties, mapComponentProperties, mapTemplateAndModuleProperties, mapStateGroupProperties, mapStyleProperties, mapVariableProperties, mapVariableSetProperties } from "../figma_app/349248";
 import { PrimaryWorkflowEnum as _$$PW } from "../905/497152";
 import { getLibraryAssetSchema, getLibraryAssetThumbnailUrl, getLibraryAssetCanvasUrl, getSubscribedAssetSchema } from "../905/808701";
 import { isFullPageBlock } from "../905/722604";
@@ -32,7 +32,7 @@ export function $$m1(e, t) {
       width: Number.parseInt(getResourceDataOrFallback(t.mainNodeWidth) ?? "0")
     },
     canvasUrl: getLibraryAssetCanvasUrl(e, i, a),
-    containingFrame: U7(getResourceDataOrFallback(t.containingFrame) ?? null) ?? null,
+    containingFrame: mapFrameProperties(getResourceDataOrFallback(t.containingFrame) ?? null) ?? null,
     updatedAt: t.updatedAt,
     fullPage: isFullPageBlock(t.name)
   };
@@ -62,7 +62,7 @@ export function $$g0(e, t) {
       width: Number.parseInt(getResourceDataOrFallback(t.mainNodeWidth) ?? "0")
     },
     canvasUrl: getLibraryAssetCanvasUrl(e, i, a),
-    containingFrame: U7(getResourceDataOrFallback(t.containingFrame) ?? null) ?? null,
+    containingFrame: mapFrameProperties(getResourceDataOrFallback(t.containingFrame) ?? null) ?? null,
     updatedAt: getResourceDataOrFallback(t.updatedAt) ?? new Date(),
     codePresetMetadata: t.codePresetMetadata ?? null
   };
@@ -72,13 +72,13 @@ let f = getSubscribedAssetSchema("code_component");
 let _ = getSubscribedAssetSchema("responsive_set");
 z.union([f.passthrough(), _.passthrough()]);
 export let $$A2 = {
-  [_$$PW.COMPONENT]: Qp,
-  [_$$PW.MODULE]: uW,
+  [_$$PW.COMPONENT]: mapComponentProperties,
+  [_$$PW.MODULE]: mapTemplateAndModuleProperties,
   [_$$PW.RESPONSIVE_SET]: $$m1,
-  [_$$PW.STATE_GROUP]: SS,
-  [_$$PW.STYLE]: KC,
-  [_$$PW.VARIABLE]: GA,
-  [_$$PW.VARIABLE_SET]: cE,
+  [_$$PW.STATE_GROUP]: mapStateGroupProperties,
+  [_$$PW.STYLE]: mapStyleProperties,
+  [_$$PW.VARIABLE]: mapVariableProperties,
+  [_$$PW.VARIABLE_SET]: mapVariableSetProperties,
   [_$$PW.CODE_COMPONENT]: $$g0
 };
 export const Zi = $$g0;

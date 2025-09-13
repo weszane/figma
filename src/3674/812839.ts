@@ -12,12 +12,12 @@ import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { JT } from "../figma_app/173838";
 import { Vz } from "../figma_app/198840";
-import { X$ } from "../905/612685";
+import { getCommunityFileUrl } from "../905/612685";
 import { FUserVerificationStatusType, FPublicationStatusType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
 import { LinkPrimitive } from "../figma_app/496441";
 import { customHistory } from "../905/612521";
-import { Gc } from "../905/63728";
+import { ignoreCommandOrShift } from "../905/63728";
 import { ex } from "../905/524523";
 import { n8, xG } from "../figma_app/121043";
 import { $0 } from "../1556/751556";
@@ -37,7 +37,7 @@ let I = ex("hub_file_in_review", function (e) {
   let {
     url
   } = e;
-  let n = Gc(e => {
+  let n = ignoreCommandOrShift(e => {
     e.preventDefault();
     customHistory.redirect(url, "_blank");
   });
@@ -65,7 +65,7 @@ let E = ex("hub_file_info", function (e) {
     lastPublishedAt,
     url
   } = e;
-  let i = Gc(e => {
+  let i = ignoreCommandOrShift(e => {
     e.preventDefault();
     customHistory.redirect(url, "_blank");
   });
@@ -135,7 +135,7 @@ function S({
     "data-testid": "filename-view-public-icon",
     "data-tooltip": t,
     "data-tooltip-hub-file-last-published-at": o,
-    "data-tooltip-hub-file-url": X$(e.id),
+    "data-tooltip-hub-file-url": getCommunityFileUrl(e.id),
     "data-tooltip-hub-file-verification-status": l,
     "data-tooltip-interactive": !0,
     "data-tooltip-max-width": 300,

@@ -4,15 +4,15 @@ import { lQ } from "../905/934246";
 import { J } from "../905/614223";
 import { Ay } from "../figma_app/272902";
 import l from "classnames";
-import { e as _$$e } from "../905/280005";
-import { oJ } from "../905/63728";
+import { handleUrlAction } from "../905/280005";
+import { isCommandOrShift } from "../905/63728";
 import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { SvgComponent } from "../905/714743";
 import { S } from "../905/339549";
 import { oB } from "../905/929976";
 import { s4, Dm } from "../figma_app/8833";
-import { fu, tf } from "../figma_app/831799";
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { ft, dG, wo } from "../figma_app/753501";
 import { gD, FR, Rp, Ts, E7, zT, ep, Vi, tZ, DE, Wh, fG, Wm, DY, _S, rU, IZ, wY, uK, me, se, jv, o6 as _$$o, cY, z6, pH, bv } from "../905/255309";
 import { A } from "../6828/954206";
@@ -52,7 +52,7 @@ export function $$S3(e) {
         onClick: e.stayOpenOnSelect ? void 0 : () => r(!t),
         role: "menu",
         tabIndex: 0,
-        children: jsx(fu, {
+        children: jsx(TrackingProvider, {
           name: e.menuTrackingContextName || "",
           enabled: !!e.menuTrackingContextName,
           properties: e.menuTrackingProperties,
@@ -296,7 +296,7 @@ export class $$w7 extends RecordingPureComponent {
       }
     };
     this.onClick = handleMouseEvent(this, "click", e => {
-      this.props.href && oJ(e) || (this.props.href ? _$$e(this.props.href, e) : clearTimeout(this.mouseUpTimer), this.props.onClick?.(e));
+      this.props.href && isCommandOrShift(e) || (this.props.href ? handleUrlAction(this.props.href, e) : clearTimeout(this.mouseUpTimer), this.props.onClick?.(e));
     });
     this.ariaRole = () => this.props.header ? "presentation" : "role" in this.props ? this.props.role ?? "menuitem" : "menuitem";
   }
@@ -336,7 +336,7 @@ export class $$w7 extends RecordingPureComponent {
   }
 }
 $$w7.displayName = "Option";
-export let $$O8 = tf($$w7);
+export let $$O8 = withTrackedClick($$w7);
 export class $$R14 extends PureComponent {
   constructor() {
     super(...arguments);
@@ -426,8 +426,8 @@ export class $$k15 extends RecordingPureComponent {
     });
   }
 }
-let $$M12 = tf($$D1);
-let $$F13 = tf($$k15);
+let $$M12 = withTrackedClick($$D1);
+let $$F13 = withTrackedClick($$k15);
 export class $$j9 extends RecordingPureComponent {
   render() {
     return jsxs(Fragment, {

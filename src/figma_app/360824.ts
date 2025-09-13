@@ -10,7 +10,7 @@ import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import h from "classnames";
 import { h as _$$h } from "../905/207101";
-import { Uz, sN, xH } from "../905/63728";
+import { KeyCodes, getModifierBitmask, ModifierKeyCodes } from "../905/63728";
 import { useHandleChangeEvent, generateRecordingKey } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -99,7 +99,7 @@ export let $$V5 = forwardRef(({
   _$$h(() => {
     let e = m?.current;
     e && !c && (e.focus(), e.setSelectionRange(e.value.length, e.value.length), e.addEventListener("keydown", e => {
-      e.keyCode === Uz.ENTER && 0 === sN(e) && e.stopPropagation();
+      e.keyCode === KeyCodes.ENTER && 0 === getModifierBitmask(e) && e.stopPropagation();
     }));
     let t = T.current;
     t && t.scrollToBottom();
@@ -186,7 +186,7 @@ export function $$H3({
   let ei = useStore().getState();
   let ea = qI();
   let es = document.activeElement?.tagName === "TEXTAREA";
-  kz(Uz.TAB, e => {
+  kz(KeyCodes.TAB, e => {
     J && (!ea || es) && (e.preventDefault(), r(l), trackFileEvent("actions_prompt_tab_completed", ei.openFile?.key, ei, {
       feature: A,
       suggestion: l
@@ -384,8 +384,8 @@ export function $$W4({
       justify: "end",
       children: jsx(_$$r, {
         shortcuts: [{
-          key: Uz.ENTER,
-          modifier: [xH.META]
+          key: KeyCodes.ENTER,
+          modifier: [ModifierKeyCodes.META]
         }],
         onAction: e => {
           o && SX({

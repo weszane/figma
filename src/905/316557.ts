@@ -11,7 +11,7 @@ import { createAtomWithEquality, atom, useAtomWithSubscription, useAtomValueAndS
 import { useMemoStable } from "../905/19536";
 import h from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { D8, GG } from "../905/511649";
+import { RecordableDiv, RecordableButton } from "../905/511649";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -355,7 +355,7 @@ function ey({
     b(sw());
   }, [b]);
   let D = generateRecordingKey(c, "textStyleRow", t.node_id);
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     "aria-controls": _$$W2,
     "aria-expanded": E,
     "aria-haspopup": "menu",
@@ -1292,7 +1292,7 @@ let eQ = forwardRef((e, t) => {
       themeId,
       width
     })
-  }) : jsx(GG, {
+  }) : jsx(RecordableButton, {
     className: g()(_$$t2, _$$s.h48.flex.my8.wFull.radiusMedium.b1.colorBorder.borderBox.alignLeft.$$if(isActive, _$$s.colorBgSecondary, _$$s.colorBg).$),
     onMouseDown: e => {
       e.stopPropagation();
@@ -1345,7 +1345,7 @@ function e0({
     }),
     ref: e => a(t, e),
     children: e
-  }) : jsx(D8, {
+  }) : jsx(RecordableDiv, {
     onClick: () => i(t, Array.from(l[t] || eZ)),
     className: g()(eq, {
       [e$]: r === t

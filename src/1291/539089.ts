@@ -16,7 +16,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { fC } from "../figma_app/968813";
 import { fi, zK } from "../figma_app/913823";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
 import { g5 } from "../figma_app/178752";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -318,7 +318,7 @@ export function $$eo1({
   let ex = useMemo(() => Ow(V.results.normalizedSearchResults), [V.results.normalizedSearchResults]);
   let eh = useSelector(MH);
   let ef = useMemoStable(() => Object.values(eh), [eh]);
-  return V.query && e ? V.isLoading ? jsx(ZA, {}) : jsx(fu, {
+  return V.query && e ? V.isLoading ? jsx(ZA, {}) : jsx(TrackingProvider, {
     name: "stickers",
     properties: {
       query: e,
@@ -340,7 +340,7 @@ export function $$eo1({
         showAttribution: !0
       })
     })
-  }) : jsxs(fu, {
+  }) : jsxs(TrackingProvider, {
     name: "stickers",
     children: [!e_ && !V.query && !Y && jsx(_$$W, {
       dismissable: !0,
@@ -430,7 +430,7 @@ export function $$eo1({
 function el() {
   let e = useSelector(MH);
   let t = selectCurrentFile();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "detail",
     properties: {
       resourceId: t?.libraryKey,
@@ -456,7 +456,7 @@ export function $$ed2({
   let o = hY();
   let l = selectCurrentFile();
   let c = o.libraryKeyToSubscribedItems[_$$l(e.id)];
-  return l && e.id === l.libraryKey ? jsx(el, {}) : c ? jsx(fu, {
+  return l && e.id === l.libraryKey ? jsx(el, {}) : c ? jsx(TrackingProvider, {
     name: "detail",
     properties: {
       resourceId: e.id,

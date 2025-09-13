@@ -11,7 +11,7 @@ import { xf } from "../figma_app/416935";
 import { isGovCluster } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
@@ -19,7 +19,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
 import { N as _$$N } from "../905/98916";
 import { TeamHasPublishedSite } from "../figma_app/43951";
@@ -195,7 +195,7 @@ function B(e) {
     children: 1 === G ? renderI18nText("asset_transfers.request_modal.next") : renderI18nText("asset_transfers.request_modal.request_transfer")
   });
   let eA = e.shouldTransferCopy ? renderI18nText("asset_transfers.request_modal.transfer_a_copy") : renderI18nText("asset_transfers.request_modal.start_this_transfer");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: ep ? "Project Transfer Request Modal" : "Team Transfer Request Modal",
     properties: {
       folderId: ep ? em : "",
@@ -280,7 +280,7 @@ function B(e) {
                   destinationType: eb,
                   learnMore: eg(renderI18nText("asset_transfers.request_modal.learn_how_to_find_the_link"))
                 })
-              }), jsx(ks, {
+              }), jsx(BigTextInputForwardRef, {
                 onChange: e => $(e.currentTarget.value),
                 onBlur: e => {
                   q(null);
@@ -352,7 +352,7 @@ function B(e) {
                 fontWeight: 600
               },
               children: renderI18nText("asset_transfers.request_modal.who_to_notify")
-            }), jsx(ks, {
+            }), jsx(BigTextInputForwardRef, {
               onChange: e => z(e.currentTarget.value),
               className: "email_format" === en || "email_match" === en ? Xu : QL,
               value: H,
@@ -360,7 +360,7 @@ function B(e) {
             }), ("email_format" === en || "email_match" === en) && jsxs("span", {
               className: _$$s.colorTextDanger.$,
               children: [" ", eS(), " "]
-            }), jsx(ks, {
+            }), jsx(BigTextInputForwardRef, {
               onChange: e => K(e.currentTarget.value),
               className: iU,
               value: W,

@@ -13,7 +13,7 @@ import { ud } from "../905/862913";
 import { fileEntityDataMapper } from "../905/943101";
 import { mapToFileType } from "../figma_app/300692";
 import { registerModal } from "../905/102752";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { IW, ql, fp, fV } from "../figma_app/257005";
 import { M4, UC } from "../905/561298";
 import { Yk, vu, g8, aq, jG, g4, qr, PJ, GC } from "../figma_app/312949";
@@ -63,7 +63,7 @@ export let $$E0 = registerModal(function (e) {
   let [C, T] = useState("");
   let [k, R] = useState(null);
   let N = e.pluginManifestEditorType.map(mapToFileType);
-  return jsxs(ey, {
+  return jsxs(ModalView, {
     size: "any",
     className: aq,
     hide: _,

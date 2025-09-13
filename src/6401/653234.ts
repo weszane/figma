@@ -9,7 +9,7 @@ import { f as _$$f } from "../905/640587";
 import { J as _$$J } from "../905/614223";
 import { scopeAwareFunction, permissionScopeHandler } from "../905/189185";
 import j from "classnames";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -181,7 +181,7 @@ function T({
   prompt: t,
   setPrompt: l
 }) {
-  return jsx(_$$L, {
+  return jsx(LazyInputForwardRef, {
     className: b()(E, Qx, Uu),
     type: "text",
     placeholder: getI18nString("slides.flapp.alignment.prompt_placeholder"),

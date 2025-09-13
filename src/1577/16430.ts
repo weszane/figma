@@ -1,10 +1,10 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { N_ } from "../vendor/956898";
+import { Link } from "react-router-dom";
 import { kc } from "../figma_app/835219";
 import { RE } from "../figma_app/471982";
 import { Om, tv } from "../figma_app/979714";
 import { e as _$$e } from "../figma_app/661119";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/579755";
 import { C2 } from "../figma_app/699310";
 import { AG } from "../figma_app/999312";
@@ -27,7 +27,7 @@ export function $$h0({
       return jsxs("div", {
         className: f,
         "data-testid": "resource-header-avatar-" + n,
-        children: [jsx(o3, {
+        children: [jsx(TrackedLink, {
           to: l.to,
           trackingEventName: "resource_creator_click",
           trackingProperties: {
@@ -58,7 +58,7 @@ export function $$h0({
       return jsxs("div", {
         className: f,
         "data-testid": "resource-header-avatar-" + t,
-        children: [jsx(N_, {
+        children: [jsx(Link, {
           to: o.to,
           onClick: e => e.stopPropagation(),
           children: jsx(_$$e2, {

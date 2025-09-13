@@ -4,7 +4,7 @@ import { sf } from "../905/929976";
 import { yJ, bE, sF } from "../figma_app/78808";
 import { OB, M3, ST } from "../figma_app/91703";
 import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
-import { ge } from "../figma_app/349248";
+import { mapFileSummary } from "../figma_app/349248";
 import { generateAnonymouseName } from "../905/301652";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 export let $$p1 = {
@@ -41,7 +41,7 @@ export function $$m0(e = $$p1, t) {
   if ((yJ.matches(t) || bE.matches(t) || sF.matches(t)) && "prototype" === e.view) {
     if (t.payload.file.key === e.file.key) return {
       ...e,
-      file: ge({
+      file: mapFileSummary({
         ...e.file,
         ...t.payload.file
       })

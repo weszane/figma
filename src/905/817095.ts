@@ -16,7 +16,7 @@ import { Te } from "../vendor/813803";
 import { getFeatureFlags, M as _$$M } from "../905/601108";
 import { A as _$$A } from "../vendor/850789";
 import { getFeatureFlagRulesExport, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
 import { d as _$$d } from "../905/49800";
@@ -131,7 +131,7 @@ function F(e) {
       className: _$$s.sticky.top0.zIndex1.colorBg.pt8.$,
       children: [renderI18nText("feature_flag_overrides.description"), jsxs("div", {
         className: _$$s.flex.gap8.pt8.$,
-        children: [jsx(ks, {
+        children: [jsx(BigTextInputForwardRef, {
           placeholder: getI18nString("feature_flag_overrides.search_feature_flags"),
           value: i,
           onChange: e => a(e.target.value),

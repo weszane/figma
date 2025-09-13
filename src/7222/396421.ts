@@ -21,13 +21,13 @@ import { getUserId } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { FFileType } from "../figma_app/191312";
 import { EditorFilePickerRecentFilesByEditorTypeView } from "../figma_app/43951";
-import { YN } from "../figma_app/349248";
+import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { IT } from "../905/713695";
 import { Fk } from "../figma_app/167249";
 import { CN } from "../905/81982";
 import { n as _$$n } from "../905/79930";
 import { mapFileTypeToNumericString } from "../figma_app/53721";
-import { Lk, uH } from "../figma_app/162807";
+import { Lk, PublicModelType } from "../figma_app/162807";
 import { $W } from "../905/144933";
 import { uW } from "../figma_app/409131";
 import { E as _$$E } from "../figma_app/999099";
@@ -309,7 +309,7 @@ export function $$el8(e) {
         desc: !0,
         sort: Lk.RELEVANCY,
         isGlobal: !0,
-        searchModelType: uH.FILES
+        searchModelType: PublicModelType.FILES
       }).then(({
         data: {
           meta: e
@@ -330,7 +330,7 @@ let en = getFeatureFlags().editor_file_picker_recent_files_standalone_view ? fun
   let [t] = IT(EditorFilePickerRecentFilesByEditorTypeView({
     _editorTypeRaw: mapFileTypeToNumericString(e)
   }));
-  let r = useMemo(() => t.transform(e => YN(e.currentUser.recentFiles2ByEditorType)), [t]);
+  let r = useMemo(() => t.transform(e => mapRecentFilesAndRepos(e.currentUser.recentFiles2ByEditorType)), [t]);
   useEffect(() => {
     "loaded" === r.status && Wn(r.data);
   }, [r]);

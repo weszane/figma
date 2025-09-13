@@ -18,7 +18,7 @@ import { j7 } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { Ct } from "../figma_app/199513";
 import { _6 } from "../figma_app/386952";
-import { Bp } from "../figma_app/349248";
+import { mapProjectProperties } from "../figma_app/349248";
 import { Mz } from "../vendor/925040";
 import { Dq } from "../905/316062";
 import { SortField, SortOrder } from "../figma_app/756995";
@@ -326,7 +326,7 @@ export function $$ea0(e) {
         type: _$$B,
         data: {
           folder: {
-            ...Bp(i),
+            ...mapProjectProperties(i),
             isSubscribed: i.is_favorited
           },
           targetRect: n

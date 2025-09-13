@@ -11,7 +11,7 @@ import { hO } from "../figma_app/545293";
 import { xH, eB } from "../905/546357";
 import { t } from "../905/150656";
 import { useLatestRef } from "../figma_app/922077";
-import { fS, q6, qy, tC, Lk, uH, WY, Wr, $L } from "../figma_app/162807";
+import { ModelTypeConfigs, getModelTypeHeaderI18n, FolderType, FileBrowserAction, Lk, PublicModelType, CreatorResourceType, convertModelTypeToSearchModelType, $L } from "../figma_app/162807";
 import { oB, j7 } from "../905/929976";
 import { HI, vj, qv, c3, tw, MB } from "../905/977218";
 import { Um } from "../905/848862";
@@ -56,7 +56,7 @@ function A(e) {
   let {
     onChange
   } = e;
-  let i = fS[e.searchScope].modelTypes;
+  let i = ModelTypeConfigs[e.searchScope].modelTypes;
   let [n,, s] = t.useTabs(i.reduce((e, t) => (e[t] = !0, e), {}), {
     defaultActive: e.searchModelType
   });
@@ -74,7 +74,7 @@ function A(e) {
       children: i.map(e => createElement(t.Tab, {
         ...n[e],
         key: e
-      }, q6(e)))
+      }, getModelTypeHeaderI18n(e)))
     })
   });
 }
@@ -256,7 +256,7 @@ function em(e) {
   });
   let u = [];
   let p = useAtomWithSubscription(P_);
-  return useMemo(() => p && !p.value[qy.FOLDER].length && !p.value[qy.TEAM].length && 1 === p.value[qy.ORG].length, [p]) && e.planId && "NON_ORG_TEAMS" !== e.planId && viewableWorkspaces?.length ? (currentWorkspace && u.push(currentWorkspace.id), viewableWorkspaces?.sort(ep).forEach(e => {
+  return useMemo(() => p && !p.value[FolderType.FOLDER].length && !p.value[FolderType.TEAM].length && 1 === p.value[FolderType.ORG].length, [p]) && e.planId && "NON_ORG_TEAMS" !== e.planId && viewableWorkspaces?.length ? (currentWorkspace && u.push(currentWorkspace.id), viewableWorkspaces?.sort(ep).forEach(e => {
     e.id !== currentWorkspace?.id && u.push(e.id);
     eu[e.id] = e.name;
   }), jsxs("div", {
@@ -285,12 +285,12 @@ function eh(e) {
   return jsxs("div", {
     className: e.sortControlsDisabled && "ALL" === e.checkedValue ? es : ea,
     onMouseDown: n => {
-      o ? (t(oB()), e.onClickDropdown(tC.CLOSE)) : i.current && (t(j7({
+      o ? (t(oB()), e.onClickDropdown(FileBrowserAction.CLOSE)) : i.current && (t(j7({
         type: e.dropdownId,
         data: {
           targetRect: i.current.getBoundingClientRect()
         }
-      })), e.onClickDropdown(tC.OPEN));
+      })), e.onClickDropdown(FileBrowserAction.OPEN));
       l(n);
     },
     onClick: l,
@@ -361,12 +361,12 @@ function eT(e) {
   return jsxs("div", {
     className: e.sortControlsDisabled && "ALL" === e.checkedValue ? es : ea,
     onMouseDown: n => {
-      o ? (t(oB()), e.onClickDropdown(tC.CLOSE)) : i.current && (t(j7({
+      o ? (t(oB()), e.onClickDropdown(FileBrowserAction.CLOSE)) : i.current && (t(j7({
         type: e.dropdownId,
         data: {
           targetRect: i.current.getBoundingClientRect()
         }
-      })), e.onClickDropdown(tC.OPEN));
+      })), e.onClickDropdown(FileBrowserAction.OPEN));
       c(n);
     },
     onClick: c,
@@ -450,44 +450,44 @@ function eT(e) {
   }
   e.SearchSortDropdown = function (e) {
     switch (e.searchModelType) {
-      case uH.HUB_FILES:
+      case PublicModelType.HUB_FILES:
         return jsx(t, {
           ...e,
           ...xH
         });
-      case uH.PUBLIC_PLUGINS:
+      case PublicModelType.PUBLIC_PLUGINS:
         return jsx(t, {
           ...e,
           ..._$$xH2
         });
-      case uH.PRIVATE_PLUGINS:
+      case PublicModelType.PRIVATE_PLUGINS:
         return jsx(t, {
           ...e,
           ..._$$xH
         });
-      case uH.FILES:
+      case PublicModelType.FILES:
         return jsx(t, {
           ...e,
           ...KJ
         });
-      case uH.PROJECTS:
+      case PublicModelType.PROJECTS:
         return jsx(t, {
           ...e,
           ...$T
         });
-      case uH.TEAMS:
+      case PublicModelType.TEAMS:
         return jsx(t, {
           ...e,
           ...Vx
         });
-      case uH.USERS:
+      case PublicModelType.USERS:
         return jsx(t, {
           ...e,
           ...V0
         });
-      case uH.PUBLIC_PROFILES:
-      case uH.PUBLIC_WIDGETS:
-      case uH.PRIVATE_WIDGETS:
+      case PublicModelType.PUBLIC_PROFILES:
+      case PublicModelType.PUBLIC_WIDGETS:
+      case PublicModelType.PRIVATE_WIDGETS:
         return null;
       default:
         throwTypeError(e.searchModelType);
@@ -497,68 +497,68 @@ function eT(e) {
 let eN = n.SearchSortDropdown;
 function eP(e) {
   switch (e.searchModelType) {
-    case uH.FILES:
+    case PublicModelType.FILES:
       return jsx(Kc, {
         ...e,
         ...KJ
       });
-    case uH.PROJECTS:
+    case PublicModelType.PROJECTS:
       return jsx(Kc, {
         ...e,
         ...$T
       });
-    case uH.TEAMS:
+    case PublicModelType.TEAMS:
       return jsx(Kc, {
         ...e,
         ...Vx
       });
-    case uH.USERS:
+    case PublicModelType.USERS:
       return jsx(Kc, {
         ...e,
         ...V0
       });
-    case uH.HUB_FILES:
-    case uH.PUBLIC_PLUGINS:
-    case uH.PRIVATE_PLUGINS:
-    case uH.PUBLIC_PROFILES:
-    case uH.PUBLIC_WIDGETS:
-    case uH.PRIVATE_WIDGETS:
+    case PublicModelType.HUB_FILES:
+    case PublicModelType.PUBLIC_PLUGINS:
+    case PublicModelType.PRIVATE_PLUGINS:
+    case PublicModelType.PUBLIC_PROFILES:
+    case PublicModelType.PUBLIC_WIDGETS:
+    case PublicModelType.PRIVATE_WIDGETS:
       return null;
     default:
       return throwTypeError(e.searchModelType);
   }
 }
 export let $$eO1 = {
-  [uH.FILES]: (e, t) => ({
+  [PublicModelType.FILES]: (e, t) => ({
     sortMode: e.sortState.files,
     viewMode: y2(KJ.viewId, t, KJ.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
-  [uH.PROJECTS]: (e, t) => ({
+  [PublicModelType.PROJECTS]: (e, t) => ({
     sortMode: e.sortState.projects,
     viewMode: y2($T.viewId, t, $T.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
-  [uH.TEAMS]: (e, t) => ({
+  [PublicModelType.TEAMS]: (e, t) => ({
     sortMode: e.sortState.teams,
     viewMode: y2(Vx.viewId, t, Vx.defaultOptions.viewMode),
     shouldShowGroupFilter: !0,
     shouldShowPlanFilter: !0
   }),
-  [uH.USERS]: (e, t) => ({
+  [PublicModelType.USERS]: (e, t) => ({
     sortMode: e.sortState.users,
     viewMode: y2(V0.viewId, t, V0.defaultOptions.viewMode),
     shouldShowGroupFilter: !1,
     shouldShowPlanFilter: !0
   }),
-  [uH.HUB_FILES]: eB,
-  [uH.PUBLIC_PLUGINS]: _$$zQ2,
-  [uH.PRIVATE_PLUGINS]: _$$zQ,
-  [uH.PUBLIC_PROFILES]: _$$g.getValidOptions,
-  [uH.PUBLIC_WIDGETS]: nD.getValidOptions,
-  [uH.PRIVATE_WIDGETS]: uB.getValidOptions
+  [PublicModelType.HUB_FILES]: eB,
+  [PublicModelType.PUBLIC_PLUGINS]: _$$zQ2,
+  [PublicModelType.PRIVATE_PLUGINS]: _$$zQ,
+  [PublicModelType.PUBLIC_PROFILES]: _$$g.getValidOptions,
+  [PublicModelType.PUBLIC_WIDGETS]: nD.getValidOptions,
+  [PublicModelType.PRIVATE_WIDGETS]: uB.getValidOptions
 };
 export function $$eD0(e) {
   let t = useDispatch();
@@ -567,12 +567,12 @@ export function $$eD0(e) {
   let [o, l] = useAtomValueAndSetter(R9);
   let d = useAtomWithSubscription(P_);
   let p = useAtomWithSubscription(_$$J);
-  let h = o ?? uH.FILES;
+  let h = o ?? PublicModelType.FILES;
   let g = r4(h);
-  let f = g.includes(WY.RESOURCE);
-  let y = g.includes(WY.CREATOR);
-  let v = g.includes(WY.SPACE);
-  let I = v && (h === uH.FILES || h === uH.PROJECTS || h === uH.TEAMS);
+  let f = g.includes(CreatorResourceType.RESOURCE);
+  let y = g.includes(CreatorResourceType.CREATOR);
+  let v = g.includes(CreatorResourceType.SPACE);
+  let I = v && (h === PublicModelType.FILES || h === PublicModelType.PROJECTS || h === PublicModelType.TEAMS);
   let E = $$eO1[h](i, n);
   let k = E.viewMode;
   let R = !v && (E.shouldShowPlanFilter ?? !1);
@@ -580,15 +580,15 @@ export function $$eD0(e) {
   let P = useAtomWithSubscription(sC);
   let O = _$$L(N ? "fragment_search_modal" : "file_browser", P, !1);
   let D = useAtomWithSubscription(Q8);
-  let L = Xr(l4(WY.RESOURCE));
+  let L = Xr(l4(CreatorResourceType.RESOURCE));
   let F = useCallback(e => {
     if (e === h) return;
-    let i = Wr(e);
+    let i = convertModelTypeToSearchModelType(e);
     let n = jN(i);
     L(n);
     l(e);
-    let r = r4(e).includes(WY.CREATOR);
-    let a = r4(e).includes(WY.SPACE);
+    let r = r4(e).includes(CreatorResourceType.CREATOR);
+    let a = r4(e).includes(CreatorResourceType.SPACE);
     (n?.value === $L.PLUGINS || n?.value === $L.WIDGETS) && t(HI({}));
     let s = nX(n, r ? p : null, a ? d : null, e);
     O(D, e, s, !0, !0, !1);
@@ -634,17 +634,17 @@ export function $$eD0(e) {
   });
   let V = f && jsx(_$$l, {
     dropdownId: "full-search-results-resource-facet-dropdown",
-    facetType: WY.RESOURCE
+    facetType: CreatorResourceType.RESOURCE
   }, "search-view-bar-file-type-dropdown");
   let G = y && jsx(_$$l, {
     dropdownId: "full-search-results-creator-facet-dropdown",
-    facetType: WY.CREATOR
+    facetType: CreatorResourceType.CREATOR
   }, "search-view-bar-creator-facet-dropdown");
   let z = v && jsx(_$$l, {
     dropdownId: "full-search-results-space-facet-dropdown",
-    facetType: WY.SPACE
+    facetType: CreatorResourceType.SPACE
   }, "search-view-bar-space-facet-dropdown");
-  let H = d && 1 === d.value[qy.ORG].length ? d.value[qy.ORG][0].id : void 0;
+  let H = d && 1 === d.value[FolderType.ORG].length ? d.value[FolderType.ORG][0].id : void 0;
   let W = [B, V, G, z, I && jsx("div", {
     className: _$$s.flex.itemsCenter.mlAuto.$,
     children: jsx(em, {

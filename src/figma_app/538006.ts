@@ -3,7 +3,7 @@ import { useRef, useContext, useMemo, createContext } from "react";
 import { c as _$$c } from "../905/34525";
 import { b } from "../905/22449";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { H } from "../905/286442";
@@ -45,7 +45,7 @@ export function $$b2({
   });
   let A = useMemo(() => ({
     shortcuts: [{
-      key: Uz.ENTER
+      key: KeyCodes.ENTER
     }],
     onAction: t
   }), [t]);

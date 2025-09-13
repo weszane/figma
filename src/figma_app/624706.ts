@@ -15,7 +15,7 @@ import { A as _$$A } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl, isDevEnvironment, isGovCluster, isLocalCluster, isStagingCluster } from "../figma_app/169182";
-import { vN, xH } from "../905/63728";
+import { isExactModifier, ModifierKeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { RecordingPureComponent, setupPlayback, generateRecordingKey, handleMouseEvent } from "../figma_app/878298";
 import { I7 } from "../figma_app/594947";
@@ -27,9 +27,9 @@ import { A as _$$A2 } from "../figma_app/849799";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler, hideModal } from "../905/156213";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { c$, wv as _$$wv, X3 } from "../figma_app/236327";
-import { RW } from "../figma_app/637027";
+import { trackedSvgComponent } from "../figma_app/637027";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { serializeQuery } from "../905/634134";
 import { selectCurrentUser, getUserId } from "../905/372672";
@@ -84,7 +84,7 @@ import { V as _$$V2 } from "../905/223767";
 import { dR } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
 import { WX } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { LN } from "../figma_app/514043";
 import { UpsellModalType } from "../905/165519";
 import { SubscriptionType } from "../figma_app/831101";
@@ -562,7 +562,7 @@ let e4 = registerModal(function ({
     },
     children: getI18nString("help_widget.collective_upsells.fullscreen.compare_plans")
   });
-  return flagNumberVal > r ? null : jsx(fu, {
+  return flagNumberVal > r ? null : jsx(TrackingProvider, {
     name: "CollectiveUpsellsFullscreenModal",
     children: jsx(_$$n, {
       ...s,
@@ -597,7 +597,7 @@ function te({
   clickSecondaryBtn: l = e,
   clickPrimaryBtn: d
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "help_card_widget_base",
     children: jsxs(_$$P.div, {
       className: "help_card_widget_base--modal--w6-oq",
@@ -671,7 +671,7 @@ function tr({
   let [u, p] = useState(e || flagNumberVal > r);
   return (_$$h(() => {
     !u && r !== 1 / 0 && flagNumberVal <= r && incrementFlag();
-  }), u) ? null : jsx(fu, {
+  }), u) ? null : jsx(TrackingProvider, {
     name: "CollectiveUpsellsWidget",
     properties: {
       value: flagNumberVal
@@ -704,7 +704,7 @@ function ti({
   targetKey: e,
   dismissModal: t
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "collective_upsells_widget_tooltip",
     children: jsx(NJ, {
       width: 302,
@@ -2157,7 +2157,7 @@ let tw = registerModal(function () {
     open: r,
     onClose: () => a(!1)
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "figjam_try_faq_modal",
     children: jsx(ModalRootComponent, {
       manager: s,
@@ -2801,7 +2801,7 @@ let t7 = class e extends RecordingPureComponent {
     this.zendeskRef = createRef();
     this.dropdownID = generateUUIDv4();
     this.onKeyDown = e => {
-      "Divide" === e.key && vN(e, xH.CONTROL | xH.SHIFT) && (e.preventDefault(), e.stopPropagation());
+      "Divide" === e.key && isExactModifier(e, ModifierKeyCodes.CONTROL | ModifierKeyCodes.SHIFT) && (e.preventDefault(), e.stopPropagation());
     };
     this.documentMouseUp = e => {
       this.props.dropDownOpen && !this.rootRef.current?.contains(e.target) && this.props.setDropDownOpen(!1);
@@ -3210,10 +3210,10 @@ let t7 = class e extends RecordingPureComponent {
         });
       },
       label: jsxs(Fragment, {
-        children: [renderI18nText("help_widget.menu.discover_more_features"), jsx(Ex, {
+        children: [renderI18nText("help_widget.menu.discover_more_features"), jsx(Badge, {
           className: `help_widget--proBadge--9d3JS ${this.state.discoverMoreOptionHovered ? "help_widget--proBadgeHovered--KoXjg" : ""}`,
           text: getI18nString("help_widget.menu.discover_more_features.pro"),
-          color: zE.INVERT,
+          color: BadgeColor.INVERT,
           subtle: !0
         })]
       })
@@ -3304,7 +3304,7 @@ let t7 = class e extends RecordingPureComponent {
     return jsxs(Fragment, {
       children: [s && jsx("section", {
         className: t ? z : K,
-        children: jsx(RW, {
+        children: jsx(trackedSvgComponent, {
           "aria-controls": this.dropdownID,
           "aria-expanded": this.props.dropDownOpen,
           "aria-haspopup": !0,
@@ -3331,7 +3331,7 @@ let t7 = class e extends RecordingPureComponent {
           this.rootRef.current?.setAttribute("aria-hidden", "false");
         },
         "data-onboarding-key": J_,
-        children: [jsx(RW, {
+        children: [jsx(trackedSvgComponent, {
           "aria-controls": this.dropdownID,
           "aria-expanded": this.props.dropDownOpen,
           "aria-haspopup": !0,

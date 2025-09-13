@@ -10,11 +10,11 @@ import { getFeatureFlags } from "../905/601108";
 import { cZ } from "../figma_app/272902";
 import m from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
 import { RecordingPureComponent, handleMouseEvent, handleKeyboardEvent, SKIP_RECORDING, handleGenericEvent, generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { bG } from "../905/149328";
 import { generateUUIDv4 } from "../905/871474";
@@ -99,7 +99,7 @@ function X(e) {
       overrideKey: "chevron"
     })]
   });
-  return e.recordingKey ? jsx(D8, {
+  return e.recordingKey ? jsx(RecordableDiv, {
     "aria-hidden": e.screenreaderVisible ? void 0 : "true",
     className: h()(s, e.inputClassName),
     "data-testid": e.dataTestId,
@@ -154,7 +154,7 @@ let $$Q5 = forwardRef(function ({
     })
   });
 });
-let J = [Uz.UP_ARROW, Uz.DOWN_ARROW, Uz.SPACE, Uz.ENTER];
+let J = [KeyCodes.UP_ARROW, KeyCodes.DOWN_ARROW, KeyCodes.SPACE, KeyCodes.ENTER];
 export function $$ee2({
   targetDomNode: e,
   ...t
@@ -450,15 +450,15 @@ class et extends RecordingPureComponent {
         let i = this.optionIndexByFormattedValue[t];
         let n = !1;
         switch (e.keyCode) {
-          case Uz.UP_ARROW:
-          case Uz.TAB:
-          case Uz.DOWN_ARROW:
+          case KeyCodes.UP_ARROW:
+          case KeyCodes.TAB:
+          case KeyCodes.DOWN_ARROW:
             {
               let t;
               if (this.props.disableSelectFocus && e.metaKey) break;
               let a = i ?? -1;
               let s = Children.toArray(this.props.children);
-              let o = e.keyCode === Uz.UP_ARROW ? -1 : 1;
+              let o = e.keyCode === KeyCodes.UP_ARROW ? -1 : 1;
               do {
                 a += o;
                 (t = s[a]) && (n = !!t.props.disabled);
@@ -470,17 +470,17 @@ class et extends RecordingPureComponent {
               e.preventDefault();
               break;
             }
-          case Uz.ENTER:
+          case KeyCodes.ENTER:
             null != this.state.focusedOptionValue && this.submitValue(this.state.focusedOptionValue);
             e.stopPropagation();
             break;
-          case Uz.ESCAPE:
+          case KeyCodes.ESCAPE:
             this.hiddenInput && (this.hideDropdown(!1, !0), e.stopPropagation());
             break;
           default:
             this.addInputChar(e.keyCode);
         }
-      } else if (e.keyCode === Uz.ESCAPE) !this.props.isInFPLGridCell && this.hiddenInput && this.hiddenInput.blur();else {
+      } else if (e.keyCode === KeyCodes.ESCAPE) !this.props.isInFPLGridCell && this.hiddenInput && this.hiddenInput.blur();else {
         if (this.props.isInFPLGridCell && "Space" === e.code && e.shiftKey) return;
         (this.props.openOnKeyPressed ? this.props.openOnKeyPressed.includes(e.keyCode) : J.includes(e.keyCode)) ? (e.preventDefault(), e.stopPropagation(), this.showDropdown(), this.setState({
           allowSelection: !0

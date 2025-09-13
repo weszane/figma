@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { k } from "../905/443820";
 import s from "classnames";
-import { L } from "../905/408237";
-import { tf } from "../figma_app/831799";
+import { LazyInputForwardRef } from "../905/408237";
+import { withTrackedClick } from "../figma_app/831799";
 var o = s;
 export class $$c0 extends Component {
   render() {
@@ -33,7 +33,7 @@ $$c0.displayName = "Button";
 $$c0.defaultProps = {
   fullWidth: !0
 };
-export let $$u1 = tf($$c0);
+export let $$u1 = withTrackedClick($$c0);
 export class $$p2 extends Component {
   render() {
     let e = `landing_form--textInput--QhVAu landing_form--input--yxoaP ${this.props.className || ""}`;
@@ -41,7 +41,7 @@ export class $$p2 extends Component {
       ...this.props,
       className: e
     };
-    return jsx(L, {
+    return jsx(LazyInputForwardRef, {
       ...t
     });
   }

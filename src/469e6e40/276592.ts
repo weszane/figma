@@ -1,20 +1,20 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
-import { g } from "../905/817247";
-import { UserRole, GroupType } from "../905/441038";
+import { getGroupOrDefault } from "../905/817247";
+import { UserGroupRole, GroupType } from "../905/441038";
 function _(e) {
   let t = useDispatch();
-  return jsx(CY, {
+  return jsx(SecureLink, {
     onClick: () => {
       t(sf({
         view: "licenseGroup",
-        subView: UserRole.ADMIN,
+        subView: UserGroupRole.ADMIN,
         licenseGroupId: e.billingGroupId,
-        selectedTab: g(GroupType.MEMBERS)
+        selectedTab: getGroupOrDefault(GroupType.MEMBERS)
       }));
     },
     className: "billing_group_dashboard_billing_banner--billingGroupLink--aRY-4",

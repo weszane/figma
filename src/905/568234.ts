@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { aY } from "../figma_app/350203";
 import { ResourceType } from "../figma_app/45218";
@@ -8,7 +8,7 @@ import { Jm } from "../905/599844";
 function c({
   link: e
 }) {
-  return jsx(CY, {
+  return jsx(SecureLink, {
     href: e,
     target: "_blank",
     className: Jm,

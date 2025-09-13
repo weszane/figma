@@ -78,8 +78,8 @@ import { O as _$$O2 } from "../905/969533";
 import { toggleElement } from "../figma_app/656233";
 import { range, clamp } from "../figma_app/492908";
 import e4 from "../vendor/626715";
-import { Fo } from "../905/63728";
-import { D8 } from "../905/511649";
+import { isCommandEvent } from "../905/63728";
+import { RecordableDiv } from "../905/511649";
 import { G as _$$G } from "../905/750789";
 import { i as _$$i } from "../905/186077";
 import { dG, wo } from "../figma_app/753501";
@@ -133,7 +133,7 @@ import { noop } from "../905/419236";
 import { h as _$$h2 } from "../905/994594";
 import { w as _$$w } from "../905/955293";
 import { g as _$$g2 } from "../905/687265";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { deepEqual } from "../905/382883";
 import { ox, bL as _$$bL2 } from "../905/163832";
@@ -1294,7 +1294,7 @@ function e8(e) {
   let n = useRef(e);
   n.current = e;
   return useCallback((e, r) => {
-    let a = r.shiftKey ? 1 : Fo(r) ? 2 : 0;
+    let a = r.shiftKey ? 1 : isCommandEvent(r) ? 2 : 0;
     switch (a) {
       case 0:
         if (t.current = e, i.current = null, n.current.includes(e)) return [...n.current];
@@ -2113,7 +2113,7 @@ function t2({
   let C = dragType === tJ ? position : Nz.INSIDE;
   let T = !t && e.subgroups.length > 0;
   let k = C === Nz.AFTER && T ? v + 1 : v;
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     forwardedRef: g,
     id: t3(e.name),
     recordingKey: generateRecordingKey(h, "nameValue"),
@@ -3105,7 +3105,7 @@ let iD = forwardRef((e, t) => {
       style: A,
       children: [jsx(_$$h2, {
         ...Ay.props(iF.searchIcon, e.query || isFocused ? iF.searchIconPrimary : iF.searchIconSecondary)
-      }), jsx(_$$L, {
+      }), jsx(LazyInputForwardRef, {
         ref: searchInputRef,
         "aria-label": y,
         "data-testid": "search-bar-input",

@@ -115,7 +115,7 @@ import { K as _$$K3 } from "../905/443068";
 import { z as _$$z } from "../940032c6/265110";
 import { defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { generateRecordingKey, SKIP_RECORDING, useHandleFocusEvent, useHandleGenericEvent } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { logError } from "../905/714362";
 import { s as _$$s5 } from "../cssbuilder/589278";
 import { updateHoveredNode, replaceSelection } from "../figma_app/741237";
@@ -2745,7 +2745,7 @@ var i0 = (e => (e[e.FULL = 0] = "FULL", e[e.OUTLINE_ONLY = 1] = "OUTLINE_ONLY", 
       className: iY,
       "data-tooltip": t,
       "data-tooltip-type": KindEnum.TEXT,
-      children: [jsxs(D8, {
+      children: [jsxs(RecordableDiv, {
         "aria-controls": "expandable-section-content",
         "aria-expanded": l,
         "aria-labelledby": f,
@@ -3236,7 +3236,7 @@ function n$({
   }, [f, E]);
   return jsxs("div", {
     className: _$$s5.flex.wFull.py4.$,
-    children: [jsx(D8, {
+    children: [jsx(RecordableDiv, {
       className: _$$s5.h32.w16.flex.itemsCenter.$$if(b, _$$s5.opacity1, _$$s5.opacity0).$,
       style: {
         "--color-icon": "var(--color-icon-secondary)"
@@ -3355,7 +3355,7 @@ function nB({
     className: _$$s5.flex.wFull.py4.$,
     onMouseEnter: () => f(!0),
     onMouseLeave: () => f(!1),
-    children: [jsx(D8, {
+    children: [jsx(RecordableDiv, {
       className: _$$s5.h32.w16.flex.itemsCenter.$$if(v, _$$s5.opacity1, _$$s5.opacity0).$,
       style: {
         "--color-icon": "var(--color-icon-secondary)"
@@ -3903,7 +3903,7 @@ function n1({
   onMouseUp: n,
   alwaysHideNumber: l
 }) {
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     className: "slides_object_animations_panel--sectionHeader--HitXp",
     onMouseMove: i,
     onMouseUp: n,
@@ -6622,7 +6622,7 @@ function oz({
   let j = createRef();
   let b = bf(e);
   let E = !n && (_ || b);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     forwardedRef: j,
     className: iG()(oV, {
       [_$$s5.colorBgHover.$]: i || _ && !n
@@ -6722,7 +6722,7 @@ function oH({
     children: [jsx("div", {
       className: oK,
       children: renderI18nText("slides.properties_panel.text_style.custom")
-    }), jsxs(D8, {
+    }), jsxs(RecordableDiv, {
       className: oV,
       onClick: e,
       recordingKey: generateRecordingKey(t, "custom"),

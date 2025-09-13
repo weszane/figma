@@ -3,20 +3,20 @@ import { PureComponent } from "react";
 import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { Jn } from "../905/17223";
-import { tM, rb, Us, vd } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonLinkTracked, linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
-import { T8, fu } from "../figma_app/831799";
+import { wrapWithTracking, TrackingProvider } from "../figma_app/831799";
 import { F } from "../905/224";
 import { SECONDARY_LIMIT, STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { Bi } from "../905/652992";
 import { DashboardSections } from "../905/548208";
 import { projectPermissionEnum, fileActionEnum } from "../figma_app/630077";
 import { registerLegacyModal, registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { bP } from "../905/739964";
 import { v0, pL } from "../figma_app/639088";
 let x = "upsell_modals--contactAdmins--Jb-3g";
@@ -36,7 +36,7 @@ function T(e) {
   let h = i.canEdit;
   let g = i.canAdmin;
   let f = o ? getI18nString("payments_modal.upgrade_to_professional") : getI18nString("payments_modal.update_your_payment");
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     children: [jsx("div", {
       className: "upsell_modals--title---QZg6 modal--title--sEkWg",
@@ -58,14 +58,14 @@ function T(e) {
         })
       }), jsxs("div", {
         className: v0,
-        children: [jsx(tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: s,
           trackingProperties: {
             teamId: i.id,
             trackingDescriptor: _$$c.CANCEL
           },
           children: renderI18nText("payments_modal.cancel")
-        }), h && jsx(rb, {
+        }), h && jsx(ButtonLinkTracked, {
           className: pL,
           onClick: () => {
             r();
@@ -87,14 +87,14 @@ function T(e) {
         children: renderI18nText("payments_modal.contact_an_admin_to_update_your_payment_source")
       }), jsxs("div", {
         className: v0,
-        children: [jsx(tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: s,
           trackingProperties: {
             teamId: i.id,
             trackingDescriptor: _$$c.CANCEL
           },
           children: renderI18nText("payments_modal.cancel")
-        }), g && jsx(rb, {
+        }), g && jsx(ButtonLinkTracked, {
           className: pL,
           onClick: () => {
             r();
@@ -165,7 +165,7 @@ let k = class e extends PureComponent {
         maxFreeEditors: SECONDARY_LIMIT
       }), jsx("br", {}), jsx("br", {}), renderI18nText("payments_modal.you_may_give_them_edit_access_later_if_you_upgrade_to_the_professional_plan_or_downgrade_other_editors_on_your_team_to_viewers.seat_rename")]
     });
-    return T8(jsx(T, {
+    return wrapWithTracking(jsx(T, {
       message: t,
       ...this.props
     }), e.displayName, {
@@ -206,13 +206,13 @@ registerModal(function (e) {
     maxFreeFiles: STANDARD_LIMIT,
     maxFreeFolders: PRIMARY_LIMIT
   }));
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "SimpleFileLimitUpsellModal",
     properties: {
       teamId: g.id,
       action: e.action
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       title: t,
       titleClassName: "upsell_modals--titleSmall--L92xE modal--title--sEkWg",
       size: 360,
@@ -227,7 +227,7 @@ registerModal(function (e) {
       }), !g.subscription && jsxs(Fragment, {
         children: [jsx("br", {}), jsx("span", {
           children: renderI18nText("payments_modal.if_you_d_like_you_can_upgrade_your_plan_now_or_learn_more_about_our_paid_plans", {
-            learnMoreAboutOurPaidPlans: jsx(Us, {
+            learnMoreAboutOurPaidPlans: jsx(linkWithTracking, {
               target: "_blank",
               href: "/pricing",
               trusted: !0,
@@ -237,13 +237,13 @@ registerModal(function (e) {
         })]
       }), jsxs("div", {
         className: v0,
-        children: [jsx(tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: c,
           trackingProperties: {
             trackingDescriptor: _$$c.CANCEL
           },
           children: renderI18nText("payments_modal.cancel")
-        }), jsx(vd, {
+        }), jsx(ButtonBasePrimaryTracked, {
           className: pL,
           onClick: () => {
             c();

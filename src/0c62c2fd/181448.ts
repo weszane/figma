@@ -25,7 +25,7 @@ import { getObservableOrFallback } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { l as _$$l2 } from "../0c62c2fd/624465";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { jr, W0 } from "../figma_app/896988";
 import { ks } from "../figma_app/626177";
 import { n6, vu, mB, oG, sl, sR, Pl, Dq, As, wH, iB, Nr, VQ, Sp, jE, Nz, YW, KE, q8, hi, VC } from "../0c62c2fd/214758";
@@ -51,14 +51,14 @@ function F({
     o.current?.select();
   }, []);
   let l = useHandleKeyboardEvent(r, "keydown", e => {
-    if (e.keyCode === Uz.ESCAPE) {
+    if (e.keyCode === KeyCodes.ESCAPE) {
       n(!1);
       e.stopPropagation();
-    } else if (e.keyCode === Uz.ENTER) {
+    } else if (e.keyCode === KeyCodes.ENTER) {
       e.preventDefault();
       n(!0);
     } else {
-      if (e.keyCode !== Uz.TAB) {
+      if (e.keyCode !== KeyCodes.TAB) {
         jr(e, W0.NO);
         return SKIP_RECORDING;
       }

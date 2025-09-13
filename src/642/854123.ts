@@ -12,7 +12,7 @@ import { aV, p8 } from "../figma_app/722362";
 import { selectCurrentUser, selectUser } from "../905/372672";
 import { debounce } from "../905/915765";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
@@ -117,7 +117,7 @@ function D() {
   });
 }
 function G() {
-  let e = j6();
+  let e = useTracking();
   let t = selectUser().locale;
   let [s, i] = useState("");
   let [l, a] = useState(!1);
@@ -318,7 +318,7 @@ function Q(e) {
 function ee({
   resource: e
 }) {
-  let t = j6();
+  let t = useTracking();
   let s = Yj();
   let n = Xr(J9);
   let i = Xr(Zf);
@@ -443,7 +443,7 @@ function eo({
   isFloatingModal: e
 }) {
   return jsx("div", {
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: "First Level",
       children: [jsxs("div", {
         className: _$$s2.flex.flexColumn.gap16.p16.pb8.$,
@@ -523,7 +523,7 @@ function eC({
 }) {
   let {
     name
-  } = j6();
+  } = useTracking();
   let s = useAtomWithSubscription(Zf);
   let i = useAtomWithSubscription(J9);
   let l = useAtomWithSubscription(QU);
@@ -595,7 +595,7 @@ function eC({
     }
     c();
   }, [l]), l) ? jsx("div", {
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: "Help Center Article",
       properties: {
         articleId: l.id
@@ -683,7 +683,7 @@ function ev() {
       }
     }(t.resource)
   }), jsx("div", {
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: "Second Level",
       children: [jsx(em, {}), jsxs("div", {
         className: _$$s2.flex.flexColumn.p16.pt8.pb0.$,
@@ -823,12 +823,12 @@ function eP({
     });
     window.addEventListener("resize", e);
     return () => window.removeEventListener("resize", e);
-  }, [inProductHelpViewType, e, updateInProductHelpViewOnWindowWidthResize]), useEffect(() => () => hideInProductHelpView(), [hideInProductHelpView]), "side_panel" === inProductHelpViewType) ? jsx(fu, {
+  }, [inProductHelpViewType, e, updateInProductHelpViewOnWindowWidthResize]), useEffect(() => () => hideInProductHelpView(), [hideInProductHelpView]), "side_panel" === inProductHelpViewType) ? jsx(TrackingProvider, {
     name: "In Product Help Panel",
     children: jsx(eA, {
       view: t
     })
-  }) : "floating_modal" === inProductHelpViewType ? jsx(fu, {
+  }) : "floating_modal" === inProductHelpViewType ? jsx(TrackingProvider, {
     name: "In Product Help Floating",
     children: jsx(eu, {
       propertiesPanelWidth: e,

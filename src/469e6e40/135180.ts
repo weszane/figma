@@ -13,7 +13,7 @@ import { vS } from "../figma_app/846003";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { useSubscription } from "../figma_app/288654";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { h1 } from "../905/986103";
 import { y2 } from "../figma_app/563413";
 import { lv } from "../figma_app/204891";
@@ -25,10 +25,10 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { p as _$$p } from "../905/597320";
 import { V3 } from "../figma_app/976345";
 import { K as _$$K } from "../905/628118";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { PaginatedAbandonedDraftFilesView, ProjectNameById } from "../figma_app/43951";
-import { J7, SN } from "../figma_app/650409";
-import { O as _$$O } from "../905/833838";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
+import { OrganizationType } from "../905/833838";
 import { DashboardSections } from "../905/548208";
 import { e0 } from "../905/696396";
 import { Cj } from "../905/270084";
@@ -243,14 +243,14 @@ function ee(e) {
   let U = useSubscription(ProjectNameById, {
     projectId: e.abandonedDraftFolderId
   });
-  ("errors" === p.status || "errors" === U.status) && (e.planType === _$$O.TEAM ? t(sf({
+  ("errors" === p.status || "errors" === U.status) && (e.planType === OrganizationType.TEAM ? t(sf({
     view: "teamAdminConsole",
     teamId: e.planId,
     teamAdminConsoleViewTab: DashboardSections.DRAFTS
   })) : t(sf({
     view: "orgAdminSettings",
-    orgAdminSettingsViewTab: J7.CONTENT,
-    orgAdminSettingsViewSecondaryTab: SN.ABANDONED_DRAFTS
+    orgAdminSettingsViewTab: DashboardSection.CONTENT,
+    orgAdminSettingsViewSecondaryTab: WorkspaceTab.ABANDONED_DRAFTS
   })));
   let F = useMemo(() => U.data?.project, [U]);
   let q = "loaded" === U.status ? _$$b(F) : "";
@@ -262,7 +262,7 @@ function ee(e) {
       url: e.url
     }));
   }, [t]);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e0.ABANDONED_DRAFT_FILES_TABLE,
     properties: {
       folderId: e.abandonedDraftFolderId,
@@ -292,8 +292,8 @@ function ee(e) {
             })
           }), jsx("span", {
             children: e.name
-          }), e.trashedAt && jsx(Ex, {
-            color: zE.DEFAULT,
+          }), e.trashedAt && jsx(Badge, {
+            color: BadgeColor.DEFAULT,
             text: getI18nString("abandoned_drafts_table.trashed")
           })]
         })

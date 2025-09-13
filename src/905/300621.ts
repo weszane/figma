@@ -17,7 +17,7 @@ import { C as _$$C } from "../905/520159";
 import { l as _$$l } from "../905/716947";
 import { selectWithShallowEqual } from "../905/103090";
 import { P as _$$P } from "../905/347284";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { u as _$$u } from "../figma_app/187359";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { ev } from "../905/909811";
@@ -167,7 +167,7 @@ function K(e) {
     let e = T.data?.libraryThumbnailByLibraryKey;
     return e?.[i];
   }, [T.data?.libraryThumbnailByLibraryKey, i, k, w]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "FigjamSubscriptionFileView",
     properties: {
       libraryKey: i

@@ -14,7 +14,7 @@ import { formatI18nMessage } from '../905/482208';
 import { E as _$$E, t7 } from '../905/508367';
 import { $L, TN } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
-import { F4 } from '../905/691205';
+import { isFigmaDomain } from '../905/691205';
 import { Point } from '../905/736624';
 import { EE, EF, GQ, Hv, IA, IC, kb, LE, mG, Ox, pG, Qq, Qs, v5, W$, xU } from '../905/736956';
 import { ac, eB, jD, kA, xE } from '../905/765855';
@@ -101,7 +101,7 @@ function W(e) {
       try {
         let e = new URL(urlString);
         r = {
-          type: e.protocol === 'mailto:' ? _$$F.MAILTO : e.protocol === 'tel:' ? _$$F.TEL : F4(e.hostname) || F4(e.host) ? Sh(e.pathname) ? _$$F.FIGMA_PROTOTYPE : e.searchParams.has('version-id') ? _$$F.FIGMA_VERSION : _$$F.FIGMA_FILE : _$$F.GENERIC,
+          type: e.protocol === 'mailto:' ? _$$F.MAILTO : e.protocol === 'tel:' ? _$$F.TEL : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? Sh(e.pathname) ? _$$F.FIGMA_PROTOTYPE : e.searchParams.has('version-id') ? _$$F.FIGMA_VERSION : _$$F.FIGMA_FILE : _$$F.GENERIC,
           url: e
         };
       } catch (e) {

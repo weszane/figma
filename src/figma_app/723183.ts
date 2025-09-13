@@ -3,7 +3,7 @@ import { VideoCppBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { XHR } from "../905/910117";
 import { C } from "../905/991119";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { fullscreenValue } from "../figma_app/455680";
 import { xY } from "../figma_app/624361";
 import { thumbnailGenerator } from "../905/435722";
@@ -81,7 +81,7 @@ class _ {
   }
   async getAllVideoUrls() {
     if (!getFeatureFlags().cross_env_paste) return;
-    let e = await S.getVideos({
+    let e = await fileApiHandler.getVideos({
       fileKey: await this.getEditingFileKey()
     });
     this.allVideos = e.data.meta.videos;

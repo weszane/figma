@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "react-redux";
-import { N_ } from "../figma_app/637027";
+import { BaseLinkComponent } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -63,14 +63,14 @@ class _ extends Component {
             children: [ctaPreText, " "]
           }), showProfileCta && jsx(Fragment, {
             children: renderI18nText("community.banner.to_follow_creators_and_like_resources", {
-              link: jsxs(N_, {
+              link: jsxs(BaseLinkComponent, {
                 onClick: this.onProfileCreateClick,
                 className: nf,
                 trusted: !0,
                 children: [getI18nString("community.banner.create_your_own_profile"), "\xa0\u2192", " "]
               })
             })
-          }), showAccountCta && jsxs(N_, {
+          }), showAccountCta && jsxs(BaseLinkComponent, {
             href: "https://www.figma.com/signup",
             target: "_blank",
             className: nf,
@@ -78,7 +78,7 @@ class _ extends Component {
             children: [getI18nString("community.banner.get_started_with_a_free_account"), "\xa0\u2192", " "]
           }), showPluginDocsCta && jsx(Fragment, {
             children: renderI18nText("community.banner.to_create_your_own_plugin", {
-              link: jsxs(N_, {
+              link: jsxs(BaseLinkComponent, {
                 href: "https://www.figma.com/plugin-docs",
                 target: "_blank",
                 className: nf,

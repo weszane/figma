@@ -31,7 +31,7 @@ import { Dl } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { ju } from "../figma_app/88239";
 import { n6 } from "../905/234821";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { Em, m0 } from "../figma_app/976749";
 import { h as _$$h } from "../905/864281";
@@ -87,7 +87,7 @@ import { VK } from "../905/880488";
 import { isRestrictedPlanAccess } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/300562";
 import { T0, gV, t$ } from "../figma_app/863319";
-import { cU } from "../figma_app/528509";
+import { getProjectUrl } from "../figma_app/528509";
 import { FC } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
@@ -545,7 +545,7 @@ let ti = memo(function ({
       return useMemo(() => {
         if (!e) return;
         let r = e.project;
-        return r && r.path && "" !== r.path ? cU(r.id, r.orgId ?? null, r.teamId, t, !!r?.team?.canView, "filename_view_dropdown_helpers.useProjectUrl", i) : null;
+        return r && r.path && "" !== r.path ? getProjectUrl(r.id, r.orgId ?? null, r.teamId, t, !!r?.team?.canView, "filename_view_dropdown_helpers.useProjectUrl", i) : null;
       }, [e, t, i]);
     }(),
     publish: function () {
@@ -736,7 +736,7 @@ let ti = memo(function ({
     selectedView: i,
     dispatch: _
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e.EDITOR_FILENAME_DROPDOWN,
     properties: {
       ...ty,

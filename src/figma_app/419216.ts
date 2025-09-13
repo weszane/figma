@@ -11,7 +11,7 @@ import { ww } from "../figma_app/194956";
 import { pW } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { $z, tf } from "../figma_app/831799";
+import { TrackedButton, withTrackedClick } from "../figma_app/831799";
 import { Yk } from "../figma_app/644079";
 import { DP } from "../905/640017";
 import { EE, lB } from "../figma_app/731583";
@@ -292,7 +292,7 @@ export function $$D5(e) {
             variant: "secondary",
             children: e.secondaryCtaText
           })
-        }), e.secondaryCtaText && e.onClickSecondaryCta && jsx($z, {
+        }), e.secondaryCtaText && e.onClickSecondaryCta && jsx(TrackedButton, {
           className: l ? jS : dC,
           onClick: e.onClickSecondaryCta,
           "aria-hidden": !0,
@@ -562,7 +562,7 @@ function U(e) {
     children: [e.connectorPosition === F_.TOP && t, e.connectorPosition === F_.BOTTOM && r, e.connectorPosition === F_.LEFT_TITLE && i, e.connectorPosition === F_.RIGHT_TITLE && a, e.connectorPosition === F_.RIGHT_BODY && a]
   });
 }
-let B = tf(function (e) {
+let B = withTrackedClick(function (e) {
   return jsx(Button, {
     ...e,
     variant: "primary"

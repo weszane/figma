@@ -1,4 +1,4 @@
-import { b5, Fo, Uz, wQ } from '../905/63728';
+import { isNavigationKey, isCommandEvent, KeyCodes, isArrowKey } from '../905/63728';
 import { eb, IL, No, pP, xC } from '../905/392533';
 import { debugState } from '../905/407919';
 import { browserCapabilities } from '../905/409121';
@@ -343,7 +343,7 @@ function F(e, t, i, n, a) {
 let U = new Set(['date', 'datetime-local', 'email', 'month', 'number', 'password', 'search', 'tel', 'text', 'week']);
 function B(e) {
   let t = e.keyCode;
-  return t === Uz.ENTER || t === Uz.SPACE;
+  return t === KeyCodes.ENTER || t === KeyCodes.SPACE;
 }
 export function $$V1() {
   let e = !document.hidden;
@@ -483,10 +483,10 @@ class W {
     document.addEventListener('keydown', G(e => {
       if (!(el(e) || this.lastKeydownEventForwarded || this.isElementOwnedByFullscreen(e.target) || e.code === 'Tab' || !(e.target instanceof HTMLElement) || !e.target.closest('[data-fpl-component],[data-fullscreen-bubble-phase]') || function (e) {
         if (isEventProcessed(e)) return !1;
-        if (e.keyCode === Uz.TAB) return !0;
+        if (e.keyCode === KeyCodes.TAB) return !0;
         let t = e.target;
         if (!(t instanceof HTMLElement)) return !1;
-        if (b5(e.keyCode)) {
+        if (isNavigationKey(e.keyCode)) {
           let e = t.closest('[data-fpl-scroll-y]');
           if (e && e.getAttribute('data-fpl-scroll-y') !== 'none') return !0;
         }
@@ -496,11 +496,11 @@ class W {
           case 'INPUT':
           case 'TEXTAREA':
             {
-              if (t.readOnly) return Fo(e) && e.keyCode === Uz.A;
+              if (t.readOnly) return isCommandEvent(e) && e.keyCode === KeyCodes.A;
               if (i === 'TEXTAREA' || i === 'INPUT' && U.has(t.type)) return BI(e);
               let n = t.type;
               if (n === 'checkbox' || n === 'submit') return B(e);
-              if (n === 'radio') return B(e) || wQ(e.keyCode);
+              if (n === 'radio') return B(e) || isArrowKey(e.keyCode);
               return !0;
             }
           case 'BUTTON':
@@ -509,7 +509,7 @@ class W {
           case 'SELECT':
             return !0;
           case 'A':
-            return !!t.href && e.keyCode === Uz.ENTER;
+            return !!t.href && e.keyCode === KeyCodes.ENTER;
           default:
             return !1;
         }

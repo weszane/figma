@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
 import { Cv } from "../figma_app/795938";
-import { gw } from "../figma_app/162807";
+import { SimpleSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
 export function $$l1(e) {
   let {
@@ -11,7 +11,7 @@ export function $$l1(e) {
     resource: searchResult.model
   }, `hub_file-${searchResult.model.id}`);
 }
-let d = [gw.POPULARITY, gw.RECENCY];
+let d = [SimpleSortField.POPULARITY, SimpleSortField.RECENCY];
 let $$c2 = {
   viewId: "search-hub_files",
   sortKeys: d,
@@ -20,18 +20,18 @@ let $$c2 = {
   mobileListSortKeys: d,
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [gw.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
-      [gw.RECENCY]: renderI18nText("tile.sort_filter.recent")
+      [SimpleSortField.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
+      [SimpleSortField.RECENCY]: renderI18nText("tile.sort_filter.recent")
     },
     [ViewMode.LIST]: {
-      [gw.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
-      [gw.RECENCY]: renderI18nText("tile.sort_filter.recent")
+      [SimpleSortField.POPULARITY]: renderI18nText("tile.sort_filter.trending"),
+      [SimpleSortField.RECENCY]: renderI18nText("tile.sort_filter.recent")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
-      sortKey: gw.POPULARITY,
+      sortKey: SimpleSortField.POPULARITY,
       sortDesc: !1
     }
   },

@@ -5,7 +5,7 @@ import { l as _$$l } from "../905/509505";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { u as _$$u } from "../905/389684";
 import { Xh } from "../figma_app/803787";
 import { Lc } from "../figma_app/745458";
@@ -100,6 +100,6 @@ export function $$S0({
     })
   }) : null;
 }
-let k = tf(_$$d);
+let k = withTrackedClick(_$$d);
 export const b = $$S0;
 export const A = $$v1;

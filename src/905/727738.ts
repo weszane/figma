@@ -1,47 +1,47 @@
-import { handleOptimistTransaction } from "../905/842794";
-import { WB } from "../905/761735";
-import { XHR } from "../905/910117";
-import { handlePromiseError, FlashActions } from "../905/573154";
-import { VisualBellActions } from "../905/302958";
-import { h as _$$h } from "../905/142086";
-import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
-import { createActionCreator } from "../905/73481";
-import { showModalHandler, hideModalHandler } from "../905/156213";
-import { jsx } from "react/jsx-runtime";
-import { Component } from "react";
-import { getI18nString } from "../905/303541";
-import { registerModal, registerLegacyModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
-import { yH, yJ, bE } from "../905/98702";
-import { P as _$$P } from "../905/595507";
-import { trackRoleEvent } from "../figma_app/314264";
-import { CI, Gi } from "../figma_app/528509";
-import { FResourceCategoryType } from "../figma_app/191312";
-import { ZW } from "../figma_app/349248";
-import { getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
-import { AccessLevelEnum } from "../905/557142";
-import { t as _$$t2 } from "../figma_app/32680";
-import { oE } from "../905/249410";
-import { throwTypeError } from "../figma_app/465776";
-import { ConfirmationModal } from "../905/441305";
-import { getDisplayNameAlt } from "../905/760074";
-import { M4 } from "../905/713695";
-import { p as _$$p } from "../905/195198";
-import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
-import { UpsellModalType } from "../905/165519";
+import { Component } from 'react';
+import { jsx } from 'react/jsx-runtime';
+import { createActionCreator } from '../905/73481';
+import { bE, yH, yJ } from '../905/98702';
+import { registerLegacyModal, registerModal } from '../905/102752';
+import { h as _$$h } from '../905/142086';
+import { hideModalHandler, showModalHandler } from '../905/156213';
+import { UpsellModalType } from '../905/165519';
+import { p as _$$p } from '../905/195198';
+import { oE } from '../905/249410';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString } from '../905/303541';
+import { createOptimistThunk } from '../905/350402';
+import { ConfirmationModal } from '../905/441305';
+import { AccessLevelEnum } from '../905/557142';
+import { FlashActions, handlePromiseError } from '../905/573154';
+import { P as _$$P } from '../905/595507';
+import { M4 } from '../905/713695';
+import { getDisplayNameAlt } from '../905/760074';
+import { WB } from '../905/761735';
+import { handleOptimistTransaction } from '../905/842794';
+import { XHR } from '../905/910117';
+import { sf } from '../905/929976';
+import { t as _$$t2 } from '../figma_app/32680';
+import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751';
+import { FResourceCategoryType } from '../figma_app/191312';
+import { trackRoleEvent } from '../figma_app/314264';
+import { mapResourceCategoryToRole } from '../figma_app/349248';
+import { throwTypeError } from '../figma_app/465776';
+import { getSidebarPath, isRootPath } from '../figma_app/528509';
+import { getResourceTeamId, hasAdminRoleAccessOnTeam, hasEditorRoleAccessOnTeam } from '../figma_app/642025';
+import { ConfirmationModal2 } from '../figma_app/918700';
 class A extends Component {
   render() {
     let e;
     let t;
     let i = this.props.fileSeenState.user;
     let n = this.props.fileName;
-    i.id === this.props.user.id ? (e = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
+    i.id === this.props.user.id ? (e = getI18nString('confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore', {
       fileName: n
-    }), t = getI18nString("confirm_remove_role.leave")) : (e = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore", {
+    }), t = getI18nString('confirm_remove_role.leave')) : (e = getI18nString('confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore', {
       userHandle: i.handle
-    }), t = getI18nString("confirm_remove_role.remove"));
-    return jsx(yX, {
+    }), t = getI18nString('confirm_remove_role.remove'));
+    return jsx(ConfirmationModal2, {
       content: e,
       confirmText: t,
       onConfirm: this.props.onConfirmRemove,
@@ -49,15 +49,15 @@ class A extends Component {
     });
   }
 }
-A.displayName = "ConfirmRemoveRoleModal";
-let y = registerModal(A, "ConfirmRemoveSeenStateModal");
+A.displayName = 'ConfirmRemoveRoleModal';
+let y = registerModal(A, 'ConfirmRemoveSeenStateModal');
 let b = createOptimistThunk((e, {
   fileSeenState: t
 }) => {
   let i = XHR.del(`/api/file_seen_state/${t.id}`);
   e.dispatch(handlePromiseError({
     promise: i,
-    fallbackError: "An error occurred while removing this user."
+    fallbackError: 'An error occurred while removing this user.'
   }));
   handleOptimistTransaction(i, e.dispatch, I({
     fileSeenState: t
@@ -84,7 +84,7 @@ let v = createOptimistThunk(async (e, {
       fileSeenState: t,
       onConfirmRemove: () => {
         user && t.user_id === user.id ? e.dispatch(sf({
-          view: "recentsAndSharing"
+          view: 'recentsAndSharing'
         })) : modalShown && e.dispatch(showModalHandler(modalShown));
         e.dispatch(b({
           fileSeenState: t
@@ -99,10 +99,10 @@ let v = createOptimistThunk(async (e, {
     }
   }));
 });
-createActionCreator("FILE_SEEN_STATE_POST");
-let I = createActionCreator("FILE_SEEN_STATE_DELETE");
-createActionCreator("FILE_SEEN_STATE_SET");
-let M = "confirm-remove-role-modal";
+createActionCreator('FILE_SEEN_STATE_POST');
+let I = createActionCreator('FILE_SEEN_STATE_DELETE');
+createActionCreator('FILE_SEEN_STATE_SET');
+let M = 'confirm-remove-role-modal';
 function j(e) {
   let t;
   let i;
@@ -112,31 +112,31 @@ function j(e) {
   let s = M4.File.useValue(a).data;
   switch (n.resource_type) {
     case FResourceCategoryType.FILE:
-      r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
-        fileName: s?.name || ""
-      }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore", {
+      r.id === e.user.id ? (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore', {
+        fileName: s?.name || ''
+      }), i = getI18nString('confirm_remove_role.leave')) : (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_file_anymore', {
         userHandle: r.handle
-      }), i = getI18nString("confirm_remove_role.remove"));
+      }), i = getI18nString('confirm_remove_role.remove'));
       break;
     case FResourceCategoryType.FILE_REPO:
       {
         let a = e.repos[n.resource_id_or_key];
         let s = getDisplayNameAlt(a);
-        r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore", {
+        r.id === e.user.id ? (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore', {
           fileName: s
-        }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_main_file_and_the_branches_anymore", {
+        }), i = getI18nString('confirm_remove_role.leave')) : (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_this_main_file_and_the_branches_anymore', {
           userHandle: r.handle
-        }), i = getI18nString("confirm_remove_role.remove"));
+        }), i = getI18nString('confirm_remove_role.remove'));
         break;
       }
     case FResourceCategoryType.FOLDER:
       {
         let a = e.folders[n.resource_id_or_key];
-        r.id === e.user.id ? (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_leave_folder_name_you_may_not_be_able_to_access_files_in_this_project_anymore", {
+        r.id === e.user.id ? (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_leave_folder_name_you_may_not_be_able_to_access_files_in_this_project_anymore', {
           folderName: a.name
-        }), i = getI18nString("confirm_remove_role.leave")) : (t = getI18nString("confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_files_in_this_project_anymore", {
+        }), i = getI18nString('confirm_remove_role.leave')) : (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_remove_user_to_remove_handle_they_may_not_be_able_to_access_files_in_this_project_anymore', {
           userHandle: r.handle
-        }), i = getI18nString("confirm_remove_role.remove"));
+        }), i = getI18nString('confirm_remove_role.remove'));
         break;
       }
     default:
@@ -145,7 +145,7 @@ function j(e) {
   return jsx(ConfirmationModal, {
     confirmText: i,
     onConfirm: e.onConfirmRemove,
-    title: getI18nString("confirm_remove_role.confirm_title_file"),
+    title: getI18nString('confirm_remove_role.confirm_title_file'),
     onClose: e.onCancel,
     open: !1,
     ...e,
@@ -160,23 +160,25 @@ registerLegacyModal(M, e => jsx(j, {
 let G = createOptimistThunk((e, {
   role: t
 }) => {
-  trackRoleEvent("Role Deleted", t);
+  trackRoleEvent('Role Deleted', t);
   let i = XHR.del(`/api/roles/${t.id}`);
   e.dispatch(handlePromiseError({
     promise: i,
-    fallbackError: "An error occurred while removing this user."
+    fallbackError: 'An error occurred while removing this user.'
   }));
   handleOptimistTransaction(i, e.dispatch, yH({
     role: t
   }));
-  let o = ZW(t.resource_type);
-  if (o) try {
-    WB().optimisticallyDelete({
-      [o]: {
-        [t.id]: null
-      }
-    }, i);
-  } catch (e) {}
+  let o = mapResourceCategoryToRole(t.resource_type);
+  if (o) {
+    try {
+      WB().optimisticallyDelete({
+        [o]: {
+          [t.id]: null
+        }
+      }, i);
+    } catch (e) {}
+  }
 });
 let z = createOptimistThunk((e, {
   role: t,
@@ -184,7 +186,7 @@ let z = createOptimistThunk((e, {
   fromDraftsLockdownFileMove: s,
   onSuccess: l
 }) => {
-  trackRoleEvent("Role Permissions Changed", t, {
+  trackRoleEvent('Role Permissions Changed', t, {
     level: t.level
   });
   let d = XHR.put(`/api/roles/${t.id}`, {
@@ -202,17 +204,17 @@ let z = createOptimistThunk((e, {
       hasEduEditAccess: i.data.meta.edu_edit_access_allowed
     })), m && u && p) {
       let i = t.user.email;
-      "handle" in t.user && (i = t.user.handle);
+      'handle' in t.user && (i = t.user.handle);
       e.dispatch(VisualBellActions.enqueue({
-        type: "file-moved",
-        message: `${i} can now edit '${u.name}' in ${CI(p)}`
+        type: 'file-moved',
+        message: `${i} can now edit '${u.name}' in ${getSidebarPath(p)}`
       }));
     }
     l?.();
   }).catch(i => {
     m && u && p && e.dispatch(VisualBellActions.enqueue({
-      type: "file-moved",
-      message: `Moved '${u.name}' to ${CI(p)}`
+      type: 'file-moved',
+      message: `Moved '${u.name}' to ${getSidebarPath(p)}`
     }));
     W(e, i, getResourceTeamId(t, c)) || K(e, i, u || null, () => {
       e.dispatch($$q0({
@@ -227,7 +229,7 @@ let z = createOptimistThunk((e, {
     role: t,
     cascade: i
   }));
-  let h = ZW(t.resource_type);
+  let h = mapResourceCategoryToRole(t.resource_type);
   h && WB()?.optimisticallyUpdate({
     [h]: {
       [t.id]: {
@@ -253,7 +255,7 @@ let H = createOptimistThunk((e, {
   let u = e.getState();
   let p = u.fileByKey[t.file_key];
   let m = p?.folder_id && u.folders[p.folder_id];
-  let h = m && Gi(m);
+  let h = m && isRootPath(m);
   let g = i && s >= AccessLevelEnum.EDITOR;
   let f = t.user.handle || t.user.email;
   if (d && h) {
@@ -268,13 +270,13 @@ let H = createOptimistThunk((e, {
   });
   _.then(() => {
     g && p && m && e.dispatch(VisualBellActions.enqueue({
-      type: "file-moved",
-      message: `${f} can now edit '${p.name}' in ${CI(m)}`
+      type: 'file-moved',
+      message: `${f} can now edit '${p.name}' in ${getSidebarPath(m)}`
     }));
   }).catch(t => {
     g && p && m && e.dispatch(VisualBellActions.enqueue({
-      type: "file-moved",
-      message: `Moved '${p.name}' to ${CI(m)}`
+      type: 'file-moved',
+      message: `Moved '${p.name}' to ${getSidebarPath(m)}`
     }));
     W(e, t, p.team_id) || K(e, t, p, c);
   });
@@ -295,12 +297,12 @@ let H = createOptimistThunk((e, {
   handleOptimistTransaction(_, e.dispatch, bE({
     role: A
   }));
-  ZW(FResourceCategoryType.FILE) && (WB().optimisticallyCreate({
+  mapResourceCategoryToRole(FResourceCategoryType.FILE) && (WB().optimisticallyCreate({
     FileRole: {
       [A.id]: {
         createdAt: new Date(),
         userId: t.user_id,
-        resourceType: "file",
+        resourceType: 'file',
         resourceId: t.file_key,
         level: s,
         updatedAt: new Date(),
@@ -320,14 +322,16 @@ let H = createOptimistThunk((e, {
 function W(e, t, i) {
   let n = e.getState();
   if (!i) return !1;
-  if (t.data && ("NEEDS_UPGRADE" === t.data.reason || "NEEDS_PAYMENT" === t.data.reason)) {
-    if (isReduxDeprecationCutover(ConfigGroups.GROUP_7)) e.dispatch(showModalHandler({
-      type: _$$t2,
-      data: {
-        teamId: i,
-        canEditTeam: void 0
-      }
-    }));else {
+  if (t.data && (t.data.reason === 'NEEDS_UPGRADE' || t.data.reason === 'NEEDS_PAYMENT')) {
+    if (isReduxDeprecationCutover(ConfigGroups.GROUP_7)) {
+      e.dispatch(showModalHandler({
+        type: _$$t2,
+        data: {
+          teamId: i,
+          canEditTeam: void 0
+        }
+      }));
+    } else {
       let t = {
         ...n.teams[i],
         canEdit: hasEditorRoleAccessOnTeam(i, n),
@@ -347,8 +351,8 @@ function W(e, t, i) {
   return !1;
 }
 function K(e, t, i, n) {
-  e.dispatch(FlashActions.error(t.data?.message || "An error occurred while changing this user's permissions."));
-  t.data?.message === "Unable to assign the editor level on a draft file" && _$$h(i || null, null, e.dispatch, {
+  e.dispatch(FlashActions.error(t.data?.message || 'An error occurred while changing this user\'s permissions.'));
+  t.data?.message === 'Unable to assign the editor level on a draft file' && _$$h(i || null, null, e.dispatch, {
     handlesVisualBell: !1,
     callback: n
   });
@@ -365,7 +369,7 @@ function Y(e, t) {
       roleToRemove: t,
       onConfirmRemove: () => {
         user && t.user_id === user.id ? e.dispatch(sf({
-          view: "recentsAndSharing"
+          view: 'recentsAndSharing'
         })) : modalShown && e.dispatch(showModalHandler(modalShown));
         e.dispatch(G({
           role: t

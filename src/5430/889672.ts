@@ -14,7 +14,7 @@ import { FEditorType } from "../figma_app/53721";
 import { StatusType } from "../figma_app/175992";
 import { WE, BY, Q7 } from "../figma_app/625596";
 import { C as _$$C } from "../figma_app/198698";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { om, x1 } from "../figma_app/465413";
 import { $J, mj, hL } from "../figma_app/600310";
@@ -66,7 +66,7 @@ export function $$E0(e) {
       onClick: t,
       showCTA: r
     }) {
-      let i = jsx(CY, {
+      let i = jsx(SecureLink, {
         className: $J,
         target: "_blank",
         href: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources",

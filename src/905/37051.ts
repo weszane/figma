@@ -12,7 +12,7 @@ import { L } from "../figma_app/53571";
 import { wz } from "../figma_app/879363";
 import { j7, sf } from "../905/929976";
 import { WJ, AM, XX } from "../figma_app/8833";
-import { pY } from "../figma_app/415217";
+import { sendAsset } from "../figma_app/415217";
 import { FEditorType } from "../figma_app/53721";
 import { isVsCodeEnvironment } from "../905/858738";
 export let $$b2 = {
@@ -115,7 +115,7 @@ export function $$I1() {
       });
     },
     forwardExportsToExtension(e, t) {
-      pY({
+      sendAsset({
         assetName: e,
         buffer: t
       });

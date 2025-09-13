@@ -17,7 +17,7 @@ import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
 import { r as _$$r } from "../905/786998";
 import { tH, H4 } from "../905/751457";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { b as _$$b } from "../figma_app/246400";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -34,7 +34,7 @@ import { T as _$$T } from "../905/292816";
 import { zz } from "../figma_app/80683";
 import { sf } from "../905/929976";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { YL, Zz } from "../figma_app/84966";
 import { ViewAccessTypeEnum } from "../905/513035";
@@ -43,7 +43,7 @@ import { AG } from "../figma_app/217457";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
-import { J7 } from "../figma_app/650409";
+import { DashboardSection } from "../figma_app/650409";
 import { Eh } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N } from "../905/809096";
@@ -174,7 +174,7 @@ function ea(e) {
       forwardToDatadog: !0
     });
   }, [ei]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Org Renewal Modal",
     properties: {
       orgId: p
@@ -265,7 +265,7 @@ function ea(e) {
                   children: getI18nString("billing_modals.org_renewal.table.header.unassigned")
                 }),
                 popoverText: renderI18nText("billing_modals.renewal.table.tooltip.unassigned", {
-                  learnMoreLink: jsx(Us, {
+                  learnMoreLink: jsx(linkWithTracking, {
                     trusted: !0,
                     target: "_blank",
                     href: "https://help.figma.com/hc/articles/360040328293",
@@ -347,9 +347,9 @@ function es(e) {
           backgroundColor: "unset"
         }).$,
         onClick: function () {
-          ("orgAdminSettings" !== i.view || i.orgAdminSettingsViewTab !== J7.MEMBERS) && t(sf({
+          ("orgAdminSettings" !== i.view || i.orgAdminSettingsViewTab !== DashboardSection.MEMBERS) && t(sf({
             view: "orgAdminSettings",
-            orgAdminSettingsViewTab: J7.MEMBERS
+            orgAdminSettingsViewTab: DashboardSection.MEMBERS
           }));
           e.onClose();
         },

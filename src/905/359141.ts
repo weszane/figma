@@ -153,7 +153,7 @@ import { LargeLoadingSpinner } from '../figma_app/858013';
 import { C as _$$C } from '../figma_app/872960';
 import { generateRecordingKey, useHandleMouseEvent } from '../figma_app/878298';
 import { tn as _$$tn } from '../figma_app/889655';
-import { Ex, zE } from '../figma_app/919079';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { R8 } from '../figma_app/933221';
 import iC from '../vendor/3757';
 import eg from '../vendor/73823';
@@ -637,9 +637,9 @@ function eB({
         height: c,
         width: d
       },
-      children: jsx(Ex, {
+      children: jsx(Badge, {
         text: renderI18nText('design_systems.libraries_modal.added'),
-        color: zE.DEFAULT,
+        color: BadgeColor.DEFAULT,
         className: 'library_card--addedBadge--r21-V'
       })
     }), H && jsx('div', {
@@ -1925,11 +1925,11 @@ function tM({
     className: 'local_library_list_item_header--localLibraryListItemHeader--LOnYm',
     children: [jsx(_$$G, {
       text: e.name
-    }), t && jsx(Ex, {
+    }), t && jsx(Badge, {
       text: i === 0 ? getI18nString('design_systems.libraries_modal.no_changes') : getI18nString('design_systems.libraries_modal.x_changes', {
         numChanges: i
       }),
-      color: i > 0 ? zE.BRAND : zE.TERTIARY,
+      color: i > 0 ? BadgeColor.BRAND : BadgeColor.TERTIARY,
       className: i > 0 ? 'local_library_list_item_header--badgeWithChanges--4K7ow local_library_list_item_header--badge--w7Dh5' : 'local_library_list_item_header--badge--w7Dh5'
     })]
   });

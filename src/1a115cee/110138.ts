@@ -27,11 +27,11 @@ import { cu, Zt } from "../905/25189";
 import { y8 } from "../905/327522";
 import { hp, a as _$$a } from "../905/725909";
 import { selectCurrentUser, getUserId } from "../905/372672";
-import { r1 } from "../905/612685";
+import { getDesignFileUrlConditional } from "../905/612685";
 import { fileEntityDataMapper } from "../905/943101";
 import { U as _$$U } from "../905/18613";
 import { ai } from "../figma_app/915202";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { O2, ho, Ay as _$$Ay, DA, hL, ns, dd, eX, Vz, MV, DD, Jm, fH, QW, IC } from "../1a115cee/533320";
 import { A as _$$A2 } from "../svg/619883";
 var v = x;
@@ -49,7 +49,7 @@ async function G(e, a) {
   try {
     let {
       data
-    } = await _$$S.getFiles({
+    } = await fileApiHandler.getFiles({
       includePerms: !0,
       fileKey: a.fileKey,
       args: {
@@ -70,7 +70,7 @@ async function G(e, a) {
   };
 }
 let P = (e, a) => debounce(() => {
-  let s = new URL(r1(fileEntityDataMapper.toLiveGraph(e), !0));
+  let s = new URL(getDesignFileUrlConditional(fileEntityDataMapper.toLiveGraph(e), !0));
   s.searchParams.append("fuid", a);
   customHistory.redirect(s.toString(), "_blank");
 });

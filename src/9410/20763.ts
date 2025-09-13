@@ -9,7 +9,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
 import { globalPerfTimer } from "../905/542194";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { Uz, Fo } from "../905/63728";
+import { KeyCodes, isCommandEvent } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Fk } from "../905/125333";
 import { b as _$$b } from "../figma_app/556971";
@@ -113,7 +113,7 @@ export function $$I0({
         u?.(e, !A());
       },
       onKeyDown: e => {
-        e.keyCode === Uz.ENTER ? (K("enter"), e.stopPropagation()) : M && Fo(e) && jr(e, W0.YES) && e.stopPropagation();
+        e.keyCode === KeyCodes.ENTER ? (K("enter"), e.stopPropagation()) : M && isCommandEvent(e) && jr(e, W0.YES) && e.stopPropagation();
       },
       shiftEnterInsertsNewline: !0
     })]

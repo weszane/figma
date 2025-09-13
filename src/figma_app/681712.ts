@@ -1,9 +1,9 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import a from "classnames";
-import { Ex, zE, vj } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { G } from "../figma_app/361869";
-import { Kz, Us } from "../figma_app/637027";
+import { Spacing, linkWithTracking } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { m as _$$m } from "../figma_app/160942";
@@ -207,9 +207,9 @@ export function $$A4({
         })]
       })]
     }), _ && jsxs(Fragment, {
-      children: [jsx(Kz, {
+      children: [jsx(Spacing, {
         multiple: .2
-      }), jsx(G, {}), jsx(Kz, {
+      }), jsx(G, {}), jsx(Spacing, {
         multiple: .1
       })]
     }), jsxs("div", {
@@ -220,10 +220,10 @@ export function $$A4({
         children: p
       }), t && jsx("span", {
         "data-testid": h("discount-percentage"),
-        children: jsx(Ex, {
+        children: jsx(Badge, {
           className: qS,
-          color: zE.SUCCESS,
-          size: vj.LARGE,
+          color: BadgeColor.SUCCESS,
+          size: BadgeSize.LARGE,
           subtle: !0,
           text: renderI18nText("pro_cart.sidebar.annual_savings_percentage", {
             percentage: t
@@ -301,13 +301,13 @@ export function $$C0(e) {
     children: [jsx(x, {
       ...e,
       editorType: FFileType.DESIGN
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 2
     }), jsx(x, {
       ...e,
       editorType: FFileType.WHITEBOARD,
       numPaidFigjamEditors: e.payment.numWhiteboardEditors
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 2
     })]
   });
@@ -320,7 +320,7 @@ export function $$w2() {
   });
 }
 function O() {
-  return jsx(Us, {
+  return jsx(linkWithTracking, {
     href: "/tos",
     target: "_blank",
     trusted: !0,
@@ -328,7 +328,7 @@ function O() {
   });
 }
 function R() {
-  return jsx(Us, {
+  return jsx(linkWithTracking, {
     href: "/privacy",
     target: "_blank",
     trusted: !0,
@@ -336,7 +336,7 @@ function R() {
   });
 }
 function L() {
-  return jsx(Us, {
+  return jsx(linkWithTracking, {
     href: "/pricing-faq/#how-do-i-cancel-my-paid-plan",
     target: "_blank",
     trusted: !0,

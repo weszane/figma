@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { K as _$$K } from "../905/443068";
 import { f as _$$f } from "../905/54715";
-import { L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { getI18nString } from "../905/303541";
 export let $$c0 = forwardRef((e, t) => {
@@ -20,7 +20,7 @@ export let $$c0 = forwardRef((e, t) => {
   return jsxs("div", {
     "data-onboarding-key": e["data-onboarding-key"],
     className: "asset_panel_search_bar--inputWrapper--NcEYI asset_panel_search_bar--horizontalFlex--VBaAx",
-    children: [jsx(L, {
+    children: [jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       "aria-label": f,
       dataTestId: "asset-panel-search-bar-input",

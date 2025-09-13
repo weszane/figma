@@ -3,7 +3,7 @@ import { Q } from "../905/149004";
 import { k } from "../905/44647";
 import o from "classnames";
 import { _ } from "../5430/511077";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 var a = o;
 export function $$d0({
   breadcrumbs: e,
@@ -16,7 +16,7 @@ export function $$d0({
     }),
     children: jsxs("div", {
       className: "community_breadcrumbs--breadcrumbs--S2TN8",
-      children: [jsx(o3, {
+      children: [jsx(TrackedLink, {
         trackingEventName: "cmty_category",
         trackingProperties: {
           name: "community_breadcrumbs_home_clicked"
@@ -31,7 +31,7 @@ export function $$d0({
         children: [jsx("div", {
           className: "community_breadcrumbs--chevronIcon--rXeJw",
           children: jsx(k, {})
-        }), jsx(o3, {
+        }), jsx(TrackedLink, {
           ...e.linkProps,
           className: "community_breadcrumbs--breadcrumb--Op180 text--fontPos13--xW8hS text--_fontBase--QdLsd",
           children: e.text

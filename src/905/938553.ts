@@ -18,7 +18,7 @@ import { reportError } from "../905/11";
 import { useSprigWithSampling } from "../905/99656";
 import { G_ } from "../figma_app/99826";
 import { Point } from "../905/736624";
-import { N_, CY, ks } from "../figma_app/637027";
+import { BaseLinkComponent, SecureLink, BigTextInputForwardRef } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { handleAtomEvent } from "../905/502364";
@@ -36,7 +36,7 @@ import { oB, j7, sf } from "../905/929976";
 import { s as _$$s2 } from "../905/58247";
 import { showModalHandler, popModalStack, hideModal } from "../905/156213";
 import { WX } from "../figma_app/350203";
-import { tf as _$$tf, fu } from "../figma_app/831799";
+import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { A as _$$A2 } from "../905/72153";
 import { trackGenericEvent } from "../figma_app/314264";
 import { D as _$$D, HN, oH } from "../figma_app/740025";
@@ -77,7 +77,7 @@ import { TextWithTruncation } from "../905/984674";
 import { y$ } from "../figma_app/835219";
 import { A as _$$A3 } from "../1617/45452";
 import { yX, Vl } from "../905/540198";
-import { yX as _$$yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A4 } from "../905/356410";
 import { NU } from "../figma_app/204891";
 import { A as _$$A5 } from "../905/567946";
@@ -123,7 +123,7 @@ import { A as _$$A11 } from "../1617/579393";
 import { A as _$$A12 } from "../1617/582870";
 import { k as _$$k2 } from "../905/391967";
 import { v_, E3, Qw } from "../905/70909";
-import { y as _$$y } from "../905/850671";
+import { getVsCodeLinkProps } from "../905/850671";
 import { ox, ab } from "../figma_app/870683";
 import { A as _$$A13 } from "../905/419640";
 import { A as _$$A14 } from "../905/796878";
@@ -224,7 +224,7 @@ let eP = function ({
     cardType: "upload"
   });
 };
-let eD = _$$tf(function (e) {
+let eD = withTrackedClick(function (e) {
   let [t, i] = useState(!1);
   let [n, s] = useState(!0);
   let {
@@ -295,7 +295,7 @@ let eF = registerModal(function (e) {
     onConfirm,
     onCancel
   } = e;
-  return jsx(_$$yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("community.publishing.close_confirmation_modal.title"),
     confirmText: getI18nString("general.close_anyway"),
     onConfirm,
@@ -445,7 +445,7 @@ function e2({
         }), jsx("p", {
           className: ey()("playground_file_row--playgroundFileContentRow--MfIQq", e$),
           children: renderI18nText("community.publishing.plugin_playground_file_help_text_new", {
-            useTemplateLink: jsx(N_, {
+            useTemplateLink: jsx(BaseLinkComponent, {
               className: ey()("playground_file_row--playgroundLink--dRxMt", e$),
               href: "https://www.figma.com/community/file/1174497187775558195",
               target: "_blank",
@@ -761,7 +761,7 @@ function ta({
   });
 }
 let to = registerModal(function (e) {
-  return jsx(_$$yX, {
+  return jsx(ConfirmationModal2, {
     destructive: !0,
     confirmationTitle: getI18nString("community.publishing.confirm_change_plugin_profile_modal.profile_will_be_removed", {
       profileName: e.prevProfileName
@@ -798,7 +798,7 @@ let tl = registerModal(function (e) {
       children: e.usersToRemove.map(e => e.handle).join(", ")
     })
   };
-  return jsx(_$$yX, {
+  return jsx(ConfirmationModal2, {
     destructive: !0,
     confirmationTitle: getI18nString("community.publishing.confirm_remove_non_org_publishers_modal.permissions_removed"),
     confirmText: getI18nString("community.publishing.confirm_remove_non_org_publishers_modal.publish_anyway"),
@@ -858,7 +858,7 @@ function tx({
   };
 }
 let tC = registerModal(function (e) {
-  return jsxs(_$$yX, {
+  return jsxs(ConfirmationModal2, {
     destructive: !0,
     confirmationTitle: e.isWidget ? getI18nString("community.publishing.confirm_plugin_ownership_transfer_modal.transfer_plugin_ownership.widget") : getI18nString("community.publishing.confirm_plugin_ownership_transfer_modal.transfer_plugin_ownership.plugin"),
     confirmText: getI18nString("file_browser.modal.transfer_ownership_cta"),
@@ -967,7 +967,7 @@ function tO({
                 resource: l
               }));
             },
-            onCancel: () => {}
+            onCancel: () => { }
           },
           showModalsBeneath: !0
         })) : (c(wx({
@@ -1359,8 +1359,8 @@ function tY({
     children: renderI18nText(a ? "community.publishing.figma_reviews_all_resources_published_to_community_org_private.widget" : "community.publishing.figma_reviews_all_resources_published_to_community_org_private.plugin", {
       orgName: n.org.name
     })
-  });else {
-    let e = jsx(CY, {
+  }); else {
+    let e = jsx(SecureLink, {
       href: "https://help.figma.com/hc/articles/360039958914",
       target: "_blank",
       trusted: !0,
@@ -1414,7 +1414,7 @@ function t0({
   let {
     href,
     onClick
-  } = _$$y(n);
+  } = getVsCodeLinkProps(n);
   return jsx("div", {
     className: "plugin_share_link--successContentParagraph--lALMC publish_modal--successContentParagraph---jcpl",
     children: jsx("a", {
@@ -1520,7 +1520,7 @@ function ia({
     children: [jsx("div", {
       className: _$$s4.wFull.$,
       ...getComboboxProps(),
-      children: jsx(ks, {
+      children: jsx(BigTextInputForwardRef, {
         className: "plugin_publish_modal--textInputUI3--YaTWB publish_modal--textInputUI3--bgKs8",
         placeholder: getI18nString("community.publishing.type_name_or_handle"),
         ...getInputProps()
@@ -1710,7 +1710,7 @@ function iE({
         })
       })
     })
-  });else if (t) {
+  }); else if (t) {
     let o = UR(t, e);
     s = a && e ? e.status === FRequestStatusType.APPROVED ? jsx(ix, {
       children: jsx(TextWithTruncation, {
@@ -1858,7 +1858,7 @@ function iO({
     }),
     error: n,
     required: a,
-    children: jsx(ks, {
+    children: jsx(BigTextInputForwardRef, {
       className: ey()(xe, {
         [_$$e3]: !!n
       }),
@@ -1879,7 +1879,7 @@ forwardRef(function ({
       value: i.value,
       maxLength: e,
       warningLength: t
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       ..._$$d2(i),
       className: "plugin_publish_modal--textInput--E1F0C publish_modal--textInput--ru4I2 publish_modal--rightColumn--m4M9Z modal--textInput---r1fJ",
       ref: n
@@ -2175,7 +2175,7 @@ class iW extends Component {
       }
       let t = "";
       let i = this.props.publishingState.metadata.author;
-      if ("org_id" in i) t = i.org_id;else if ("team_id" in i) {
+      if ("org_id" in i) t = i.org_id; else if ("team_id" in i) {
         let e = this.props.teams[i.team_id];
         t = e?.org_id ?? "";
       }
@@ -2243,7 +2243,7 @@ class iW extends Component {
           onConfirm: () => {
             this.createOrUpdatePluginVersion(i);
           },
-          onCancel: () => {}
+          onCancel: () => { }
         },
         showModalsBeneath: !0
       })) : this.createOrUpdatePluginVersion(i);
@@ -2695,7 +2695,7 @@ class iW extends Component {
       try {
         let e = await ec.getPermissions(i);
         if (200 === e.status) return e.data.meta;
-      } catch (e) {}
+      } catch (e) { }
     };
     this.getPublishFormPrimaryButtonText = () => {
       let e = this.getReviewStatus();
@@ -2749,7 +2749,7 @@ class iW extends Component {
       let l = jsx("div", {
         className: e0,
         children: renderI18nText("community.publishing.you_can_also_invite_other_people_to_update", {
-          inviteOtherPeopleLink: jsx(CY, {
+          inviteOtherPeopleLink: jsx(SecureLink, {
             onClick: () => {
               trackGenericEvent("plugin_publish_invite_others_click", {
                 userId: this.props.user.id,
@@ -2767,7 +2767,7 @@ class iW extends Component {
         })
       });
       if (a) {
-        let e = jsx(CY, {
+        let e = jsx(SecureLink, {
           href: "https://help.figma.com/hc/articles/360039958914",
           target: "_blank",
           trusted: !0,
@@ -3346,7 +3346,7 @@ class iW extends Component {
         role: publishedPlugin.roles,
         initialStep: l
       })) : e = this.renderErrorScreen();
-    } else if (this.state.activeTab === KM.PUBLISH) e = this.renderForm();else if (this.state.activeTab === KM.PERMISSIONS) e = jsx(tU, {
+    } else if (this.state.activeTab === KM.PUBLISH) e = this.renderForm(); else if (this.state.activeTab === KM.PERMISSIONS) e = jsx(tU, {
       allowedTabs: this.state.allowedTabs,
       closePluginPublishModal: this.close,
       contacts: this.props.contacts,
@@ -3358,7 +3358,7 @@ class iW extends Component {
       pluginName: this.props.publishingState.metadata.name,
       publishedPlugin: this.props.publishedPlugin,
       userIsAdmin: this.props.isAdminOfPrivateOrgPlugin
-    });else if (this.state.activeTab === KM.DATA_SECURITY) {
+    }); else if (this.state.activeTab === KM.DATA_SECURITY) {
       let t = getPublishedResourceOrNull(this.props.unpublishedPlugins, this.props.unpublishedWidgets, this.props.localPlugin);
       e = jsx(_$$A4, {
         localSecurityFormResponse: this.state.localSecurityFormResponse,
@@ -3373,7 +3373,7 @@ class iW extends Component {
         extensionId: this.props.publishedPlugin.id ? this.props.publishedPlugin.id : t?.id ? t.id : null
       });
     }
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: _$$e2.COMMUNITY_HUB_PLUGIN_PUBLISH_MODAL,
       properties: {
         entryPoint: this.props.entryPoint,
@@ -3575,7 +3575,7 @@ let $$iq0 = registerModal(function (e) {
     title: e.title,
     body: e.description,
     footerLeftSide: e.role.org ? null : renderI18nText("community.publishing.review_our_community_guidelines", {
-      communityGuidelinesLink: jsx(N_, {
+      communityGuidelinesLink: jsx(BaseLinkComponent, {
         href: u ? "https://www.figma.com/aup" : "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
         target: "_blank",
         trusted: !0,

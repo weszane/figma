@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { K } from "../905/807535";
+import { findMatchingValue } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { R } from "../905/165069";
@@ -31,8 +31,8 @@ export function $$y0() {
   let E = v && null !== T && "in_editor" === k;
   let C = E || isCollaboratorType(k);
   C && (e = E ? getProductAccessTypeOrDefault(T.editorType) : ProductAccessTypeMap[k]);
-  let I = K(tc, j) ?? tc.UNKNOWN_DEEP_LINK;
-  let A = K(_$$i, j) ?? _$$i.UNKNOWN_DEEP_LINK;
+  let I = findMatchingValue(tc, j) ?? tc.UNKNOWN_DEEP_LINK;
+  let A = findMatchingValue(_$$i, j) ?? _$$i.UNKNOWN_DEEP_LINK;
   let {
     handleUpgrade,
     getPendingRequest,

@@ -33,10 +33,10 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { XHR } from "../905/910117";
 import { z as _$$z } from "../905/239603";
 import { registerLegacyModal, registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { yl, DD, jE, v0 } from "../figma_app/639088";
 import { s_ } from "../905/17223";
-import { nR } from "../figma_app/637027";
+import { ButtonSecondary } from "../figma_app/637027";
 import { Be } from "../905/172516";
 import { incrementReconnectCounter } from "../figma_app/314264";
 import { qp } from "../905/977779";
@@ -107,7 +107,7 @@ function H(e) {
 function W(e) {
   let t = e.modalShown.data;
   H(e.dispatch);
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     className: yl,
     ...e,
@@ -144,7 +144,7 @@ function K(e) {
   };
   let i = e.modalShown.data;
   H(e.dispatch);
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     className: yl,
     ...e,
@@ -177,7 +177,7 @@ let Z = registerModal(function () {
     target: "_blank",
     children: renderI18nText("multiplayer_limit.help_center")
   });
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     title: getI18nString("multiplayer_limit.editor_limit_modal_title.seat_rename"),
     children: [jsx(s_, {
@@ -192,7 +192,7 @@ let Z = registerModal(function () {
         })
       }), jsx("div", {
         className: v0,
-        children: jsx(nR, {
+        children: jsx(ButtonSecondary, {
           onClick: () => {
             e(hideModal());
           },
@@ -210,7 +210,7 @@ let X = registerModal(function () {
     target: "_blank",
     children: renderI18nText("multiplayer_limit.help_center")
   });
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     title: getI18nString("multiplayer_limit.cursor_limit_modal_title"),
     children: [jsx(s_, {
@@ -226,7 +226,7 @@ let X = registerModal(function () {
       })]
     }), jsx("div", {
       className: v0,
-      children: jsx(nR, {
+      children: jsx(ButtonSecondary, {
         onClick: () => {
           e(hideModal());
         },

@@ -24,7 +24,7 @@ import { RR } from "../905/514666";
 import { Wu } from "../905/221848";
 import { lL, Cc, T as _$$T } from "../figma_app/270091";
 import { wS, J0, fN, _A } from "../figma_app/65182";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { ph } from "../figma_app/709893";
 import { KindEnum } from "../905/129884";
 import { e as _$$e, q as _$$q } from "../figma_app/905311";
@@ -34,7 +34,7 @@ import { A as _$$A2 } from "../1617/316388";
 import { d as _$$d } from "../905/976845";
 import { x as _$$x } from "../905/587214";
 import { Zl } from "../905/211621";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { zE } from "../905/8732";
 import { dG } from "../figma_app/753501";
 import { TS } from "../905/959568";
@@ -83,7 +83,7 @@ function M({
   let o = useDispatch();
   let [l, c] = useState(!1);
   let u = useMemo(() => l ? J0(e) : void 0, [e, l]);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: "preferred_values_list_view--listItemContainer--HQ71E preferred_values_instance_picker--listItemContainer--a4t-g",
     recordingKey: generateRecordingKey(...fN([i, ...j(e)])),
     children: [jsx("div", {
@@ -152,7 +152,7 @@ function Y(e) {
       children: renderI18nText("design_systems.component_properties.preferred_values")
     }), jsx("span", {
       className: learnMore,
-      children: jsx(CY, {
+      children: jsx(SecureLink, {
         href: "https://help.figma.com/hc/articles/5579474826519-Explore-component-properties#preferred",
         target: "_blank",
         onClick: dG,

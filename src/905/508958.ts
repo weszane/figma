@@ -143,7 +143,7 @@ function transformFieldName(fieldName: string, strategy: symbol): string | null 
 /**
  * Data mapper interface
  */
-interface DataMapper<TSource = any, TTarget = any> {
+export interface DataMapper<TSource = any, TTarget = any> {
   toLiveGraph: (data: TSource) => TTarget
   toSinatra: (data: TTarget) => TSource
   getFields: () => any

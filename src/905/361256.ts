@@ -28,7 +28,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { h2, AB, Pr } from "../figma_app/8833";
-import { L0 } from "../figma_app/831799";
+import { TrackedAnchor } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { Kk } from "../905/777093";
 import { m as _$$m, Cy } from "../905/571439";
@@ -3372,7 +3372,7 @@ class iS extends PureComponent {
               children: renderI18nText("fullscreen.type_panel.update_agent_cta", {
                 link: jsx("div", {
                   className: kx,
-                  children: jsx(L0, {
+                  children: jsx(TrackedAnchor, {
                     target: "_blank",
                     className: nf,
                     href: "https://www.figma.com/downloads/",

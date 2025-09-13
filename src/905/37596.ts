@@ -30,10 +30,10 @@ import { nl, Pf } from "../905/590952";
 import { h as _$$h } from "../905/973388";
 import { sf } from "../905/929976";
 import { hideModal, popModalStack, showModalHandler } from "../905/156213";
-import { fu, j6 } from "../figma_app/831799";
+import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FPermissionDenialReason } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
-import { J7, SN } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
 import { registerModal } from "../905/102752";
 import { r6 } from "../905/542608";
@@ -120,7 +120,7 @@ let Y = registerModal(function (e) {
       })
     })]
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Manage Project Connection Modal",
     properties: {
       resourceConnectionId: i ? null : e.resourceConnection.id,
@@ -267,8 +267,8 @@ let Y = registerModal(function (e) {
                 onClick: () => {
                   t && (t.key.type === FOrganizationLevelType.ORG ? m(sf({
                     view: "orgAdminSettings",
-                    orgAdminSettingsViewTab: J7.CONTENT,
-                    orgAdminSettingsViewSecondaryTab: SN.CONNECTED_PROJECTS,
+                    orgAdminSettingsViewTab: DashboardSection.CONTENT,
+                    orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS,
                     showResourceConnectionFlyout: e.resourceConnection.id
                   })) : t.key.type === FOrganizationLevelType.TEAM && m(sf({
                     view: "teamAdminConsole",
@@ -574,7 +574,7 @@ let $$el0 = registerModal(function (e) {
   let {
     folderId
   } = e;
-  let u = j6();
+  let u = useTracking();
   let m = useSubscription(ProjectByIdForFolderSettings, {
     projectId: folderId
   });
@@ -596,7 +596,7 @@ let $$el0 = registerModal(function (e) {
     "data-tooltip-show-immediately": !0,
     "data-tooltip-show-below": !0
   } : {};
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Folder Settings Modal",
     properties: {
       folderId: g?.id

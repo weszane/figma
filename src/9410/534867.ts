@@ -7,7 +7,7 @@ import { encodeStringToBase64, encodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
 import c from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { vN, xH, Uz } from "../905/63728";
+import { isExactModifier, ModifierKeyCodes, KeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { RecordingPureComponent, generateRecordingKey, handleKeyboardEvent, handleChangeEvent, handleMouseEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { reportError } from "../905/11";
@@ -206,17 +206,17 @@ class K extends RecordingPureComponent {
         let t = this.state.activeItemIndex + e;
         return t < 0 ? this.state.items.length - 1 : t % this.state.items.length;
       };
-      let i = BrowserInfo.mac ? vN(e, xH.META) : vN(e, xH.CONTROL);
+      let i = BrowserInfo.mac ? isExactModifier(e, ModifierKeyCodes.META) : isExactModifier(e, ModifierKeyCodes.CONTROL);
       switch (e.keyCode) {
-        case Uz.ENTER:
+        case KeyCodes.ENTER:
           e.preventDefault();
           this.onSelectItem(this.state.activeItemIndex, "enter");
           break;
-        case Uz.TAB:
+        case KeyCodes.TAB:
           e.preventDefault();
           this.onSelectItem(this.state.activeItemIndex, "tab");
           break;
-        case Uz.DOWN_ARROW:
+        case KeyCodes.DOWN_ARROW:
           if (e.preventDefault(), this.state.items.length > 0) {
             let e = t(1);
             this.setState({
@@ -225,7 +225,7 @@ class K extends RecordingPureComponent {
             this.scrollContainerRef.current?.scrollElementAtIndexIntoView(e);
           }
           break;
-        case Uz.UP_ARROW:
+        case KeyCodes.UP_ARROW:
           if (e.preventDefault(), this.state.items.length > 0) {
             let e = t(-1);
             this.setState({
@@ -234,27 +234,27 @@ class K extends RecordingPureComponent {
             this.scrollContainerRef.current?.scrollElementAtIndexIntoView(e);
           }
           break;
-        case Uz.BACKSPACE:
+        case KeyCodes.BACKSPACE:
           0 === this.state.searchQuery.length ? (e.preventDefault(), this.onBackspace(), e.stopPropagation()) : ("final" === this.state.activeParameterIndex || "middle" === this.state.activeParameterIndex) && e.preventDefault();
           break;
-        case Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           e.preventDefault();
           this.props.dispatch(oB());
           break;
-        case Uz.P:
-        case Uz.FORWARD_SLASH:
+        case KeyCodes.P:
+        case KeyCodes.FORWARD_SLASH:
           i && (e.preventDefault(), this.props.dispatch(oB()));
           break;
-        case Uz.EQUALS:
-        case Uz.DASH:
+        case KeyCodes.EQUALS:
+        case KeyCodes.DASH:
           i && (e.preventDefault(), "-" === e.key ? fullscreenValue.triggerAction("zoom-out") : fullscreenValue.triggerAction("zoom-in"));
           break;
-        case Uz.R:
-        case Uz.S:
-        case Uz.D:
-        case Uz.E:
-        case Uz.F:
-        case Uz.O:
+        case KeyCodes.R:
+        case KeyCodes.S:
+        case KeyCodes.D:
+        case KeyCodes.E:
+        case KeyCodes.F:
+        case KeyCodes.O:
           if (i) {
             e.preventDefault();
             let t = this.state.searchQuery + e.key;

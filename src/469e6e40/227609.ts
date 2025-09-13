@@ -85,7 +85,7 @@ import { IT, M4 } from '../905/713695';
 import { logError } from '../905/714362';
 import { gB, getResourceDataOrFallback, Xm } from '../905/723791';
 import { yN } from '../905/727738';
-import { O as _$$O } from '../905/833838';
+import { OrganizationType } from '../905/833838';
 import { $ as _$$$ } from '../905/834575';
 import { tb as _$$tb } from '../905/848667';
 import { EL, F_ } from '../905/858282';
@@ -150,7 +150,7 @@ import { y2 } from '../figma_app/563413';
 import { ol, pe, Rq } from '../figma_app/598018';
 import { k as _$$k4 } from '../figma_app/618031';
 import { isTeamEligibleForUpgrade } from '../figma_app/630077';
-import { CY } from '../figma_app/637027';
+import { SecureLink } from '../figma_app/637027';
 import { g as _$$g } from '../figma_app/638694';
 import { bQ, Ti } from '../figma_app/658324';
 import { EntityType } from '../figma_app/707808';
@@ -159,14 +159,14 @@ import { parsePxInt } from '../figma_app/783094';
 import { i9 } from '../figma_app/805373';
 import { Agb, zRx } from '../figma_app/822011';
 import { createEmptyAddress } from '../figma_app/831101';
-import { fu, jm, kp } from '../figma_app/831799';
+import { TrackingProvider, TrackedDiv, withTracking } from '../figma_app/831799';
 import { ps } from '../figma_app/845611';
 import { vS } from '../figma_app/846003';
 import { LoadingSpinner } from '../figma_app/858013';
 import { wv as _$$wv } from '../figma_app/860955';
 import { v as _$$v2 } from '../figma_app/899624';
-import { J as _$$J2, nc } from '../figma_app/915977';
-import { Ex, zE } from '../figma_app/919079';
+import { getMemberSection, getBillingSection } from '../figma_app/915977';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { Be, BO, C8, Hq } from '../figma_app/920435';
 import { qH } from '../figma_app/934005';
 import { fB, l4, Of } from '../figma_app/982327';
@@ -216,7 +216,7 @@ function B({
           fontWeight: 'regular',
           fontSize: 24,
           children: e.name
-        }), e.community_profile_handle && jsxs(jm, {
+        }), e.community_profile_handle && jsxs(TrackedDiv, {
           className: C()(_$$s.lh24.font13.cursorPointer.$, 'admin_dashboard_tab--communityHandle--uBlsg'),
           onClick: () => {
             t(sf({
@@ -262,7 +262,7 @@ let eq = registerModal(e => {
   } = t;
   let s = e.members.length;
   let r = e.members.filter(e => e.id).map(e => e.id).join();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Team Remove Members Modal',
     properties: {
       memberCount: s,
@@ -382,7 +382,7 @@ function e2(e) {
   });
 }
 let e4 = 'TeamMemberFlyout';
-let e5 = kp(e => {
+let e5 = withTracking(e => {
   let {
     billing,
     dispatch,
@@ -670,7 +670,7 @@ let e5 = kp(e => {
         e.dispatch(showModalHandler({
           type: _$$J,
           data: {
-            planType: _$$O.TEAM,
+            planType: OrganizationType.TEAM,
             planId: e.team.id,
             planUserId: member.id,
             planUserDisplayName: member.name || member.email,
@@ -1234,7 +1234,7 @@ function tG(e) {
     label: getI18nString('admin_settings.ai.features_toggle.label'),
     description: jsx('p', {
       children: renderI18nText('admin_settings.ai.features_toggle.description.team', {
-        learnMoreLink: jsx(CY, {
+        learnMoreLink: jsx(SecureLink, {
           href: _$$d3.aiFeatures,
           target: '_blank',
           trusted: !0,
@@ -1252,7 +1252,7 @@ function tG(e) {
     label: getI18nString('admin_settings.ai.data_sharing.label'),
     description: jsx('p', {
       children: renderI18nText('admin_settings.ai.data_sharing.description.team', {
-        learnMoreLink: jsx(CY, {
+        learnMoreLink: jsx(SecureLink, {
           href: _$$d3.aiDataSharing,
           target: '_blank',
           trusted: !0,
@@ -1267,7 +1267,7 @@ function tG(e) {
     tooltipText: p ? getI18nString('admin_settings.ai.data_sharing.disabled_for_student_teams') : void 0
   }, getI18nString('admin_settings.ai.data_sharing.label')));
   return jsx(Fragment, {
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: 'Team Admin Console Settings Table',
       properties: {
         teamId: e.team.id
@@ -1330,8 +1330,8 @@ function tG(e) {
         }), jsx(Kz, {
           title: getI18nString('admin_settings.ai.section_title'),
           badge: j ? void 0 : jsxs(Fragment, {
-            children: [jsx(Ex, {
-              color: zE.BRAND,
+            children: [jsx(Badge, {
+              color: BadgeColor.BRAND,
               text: getI18nString('general.beta')
             }), jsx(_$$B2, {
               'data-tooltip-type': KindEnum.TEXT,
@@ -1843,7 +1843,7 @@ function aw(e) {
   });
 }
 function ak(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e4.BILLING_INVOICES_TAB,
     properties: {
       teamId: e.teamId
@@ -1987,7 +1987,7 @@ function aA(e) {
   });
 }
 function aR(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e4.BILLING_OVERVIEW_TAB,
     properties: {
       teamId: e.team.id
@@ -2041,7 +2041,7 @@ function aO(e) {
       children: jsx(_$$s4, {
         planType: FOrganizationLevelType.TEAM
       })
-    }), jsx(fu, {
+    }), jsx(TrackingProvider, {
       name: _$$e4.BILLING_VIEW,
       properties: {
         teamId: e.team.id
@@ -2107,7 +2107,7 @@ function aP(e) {
     }));
   }, [t, e.team.id]));
   let c = _$$b5(a?.data?.tier);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e4.CONTENT_VIEW,
     properties: {
       teamId: e.team.id
@@ -2135,7 +2135,7 @@ function aP(e) {
         children: [jsx(_$$t2.TabPanel, {
           ...o['abandoned-drafts'],
           children: jsx(_$$M, {
-            planType: _$$O.TEAM,
+            planType: OrganizationType.TEAM,
             team: e.team
           })
         }), jsx(_$$t2.TabPanel, {
@@ -2368,7 +2368,7 @@ export function $$aG0(e) {
       X = !1;
       t = jsx(aO, {
         team: s,
-        activeTab: nc(e.selectedSecondaryTab),
+        activeTab: getBillingSection(e.selectedSecondaryTab),
         billingSummary: P.summary,
         isBillingSummaryLoading: VP(D, et) || !D2(D, et),
         nextPostBillingRemodelGaRenewal: P.summary.analyze_data_contract_v2_start
@@ -2389,14 +2389,14 @@ export function $$aG0(e) {
       X = !1;
       t = jsx(aP, {
         team: s,
-        activeTab: _$$J2(e.selectedSecondaryTab),
+        activeTab: getMemberSection(e.selectedSecondaryTab),
         showResourceConnectionInviteModal: e.showResourceConnectionInviteModal,
         showResourceConnectionFlyout: e.showResourceConnectionFlyout
       });
       break;
     case DashboardSections.DRAFTS:
       t = jsx(_$$M, {
-        planType: _$$O.TEAM,
+        planType: OrganizationType.TEAM,
         team: s
       });
       break;

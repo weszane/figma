@@ -16,7 +16,7 @@ import { w as _$$w } from "../905/113805";
 import { Zc, Lz } from "../905/497882";
 import { Vb, wj } from "../905/759470";
 import { WX } from "../figma_app/350203";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
 import { VY, yj, Mr } from "../905/966582";
 import { L } from "../905/597048";
@@ -34,7 +34,7 @@ export let $$T0 = forwardRef(function ({
 }, k) {
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let {
     setThumbnailMediumFromFile,
     setThumbnailMediumFromInput,

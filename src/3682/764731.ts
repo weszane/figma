@@ -34,7 +34,7 @@ import { WO, X0, Mw, HJ, nN } from "../figma_app/122682";
 import { mt, Wl } from "../figma_app/318520";
 import { Ro } from "../figma_app/805373";
 import { L as _$$L } from "../905/671373";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { gR } from "../figma_app/976345";
 import { Um } from "../905/848862";
@@ -66,7 +66,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { Jn } from "../905/17223";
 import { LoadingSpinner } from "../figma_app/858013";
 import { VisualBellActions } from "../905/302958";
-import { L0 } from "../figma_app/831799";
+import { TrackedAnchor } from "../figma_app/831799";
 import { Cf } from "../905/504727";
 import { l6, c$ } from "../905/794875";
 import { aHA } from "../figma_app/27776";
@@ -241,10 +241,10 @@ function es({
       }), jsx("span", {
         className: "captions_dialog--label---1DXk",
         children: renderI18nText("collaboration.voice.closed_captions")
-      }), jsx(Ex, {
+      }), jsx(Badge, {
         text: getI18nString("collaboration.voice.beta"),
         className: "captions_dialog--betaTag--qFyxq",
-        color: zE.BRAND
+        color: BadgeColor.BRAND
       }), jsx(K0, {
         svg: _$$A3,
         ref: b,
@@ -971,10 +971,10 @@ function te() {
   let n = useId();
   let l = jsx(eB, {});
   let r = renderI18nText("collaboration.voice.closed_captioning");
-  let c = jsx(Ex, {
+  let c = jsx(Badge, {
     text: getI18nString("collaboration.voice.beta"),
     className: "device_controls--betaTag---VTFI",
-    color: zE.BRAND
+    color: BadgeColor.BRAND
   });
   t && Mw(e) && (r = renderI18nText("collaboration.voice.setting_up_closed_captions_install_progress", {
     installProgress: e
@@ -1005,7 +1005,7 @@ function te() {
 }
 function tt() {
   let e = AM.ACCESSIBILITY;
-  return jsx(L0, {
+  return jsx(TrackedAnchor, {
     target: "_blank",
     rel: "noopener",
     href: e,

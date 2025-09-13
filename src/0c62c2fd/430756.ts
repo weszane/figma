@@ -9,7 +9,7 @@ import { U as _$$U } from "../0c62c2fd/547944";
 import { getFeatureFlags } from "../905/601108";
 import { xf } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
-import { ks, wG } from "../figma_app/637027";
+import { BigTextInputForwardRef, BUTTON_INTERNAL_CONST_Q33 } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -19,13 +19,13 @@ import { bx } from "../905/34809";
 import { vt } from "../figma_app/598926";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { b as _$$b2 } from "../905/388233";
 import { selectCurrentUser } from "../905/372672";
 import { FTeamAccessPermissionType, FPlanNameType, FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { FolderCreation, UserFlagByName } from "../figma_app/43951";
-import { vy } from "../figma_app/349248";
+import { mapOrgDomainProperties } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { t9, yI } from "../905/915142";
@@ -129,7 +129,7 @@ export function $$er0(e) {
       id: t.org.id,
       name: t.org.name,
       img_url: t.org.imgUrl,
-      org_domains: vy(t.org.orgDomains),
+      org_domains: mapOrgDomainProperties(t.org.orgDomains),
       domain_capture: t.org.domainCapture,
       invite_whitelist_guest_invite_setting: t.org.inviteWhitelist?.guestInviteSetting
     };
@@ -209,11 +209,11 @@ export function $$er0(e) {
     children: [jsx("div", {
       className: "folder_creation_modal--nameHeader--MgNL8 folder_creation_modal--sectionHeader--EcWYc text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: getI18nString("project_creation.name")
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       "aria-label": getI18nString("project_creation.project_name"),
       autoFocus: !0,
       className: "folder_creation_modal--folderNameInput--Lcn4c",
-      maxLength: wG,
+      maxLength: BUTTON_INTERNAL_CONST_Q33,
       minLength: 1,
       onBlur: () => $(!1),
       onChange: e => U(e.target.value),
@@ -281,7 +281,7 @@ export function $$er0(e) {
       })
     });
   })();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.CREATE_NEW_PROJECT_MODAL,
     properties: {
       teamId: el?.id,

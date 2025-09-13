@@ -25,7 +25,7 @@ import { selectCurrentUser } from "../905/372672";
 import { FProductAccessType, FUserRoleType, FPlanNameType, FMemberRoleType, FOrganizationLevelType, FFileType } from "../figma_app/191312";
 import { UpgradeEligibilityView, UpgradeEligibilityFolderView, IdpUserView, ConfiguredUpgradeRequestModalView, UserLicensesForFile } from "../figma_app/43951";
 import { b as _$$b } from "../905/376877";
-import { Sm } from "../figma_app/482728";
+import { UpgradeRequestSetting } from "../figma_app/482728";
 import { J as _$$J, q as _$$q } from "../905/202542";
 import { R as _$$R } from "../905/712060";
 import { x as _$$x } from "../905/749159";
@@ -205,7 +205,7 @@ export function $$B5(e) {
       let t = e.result.data?.currentUser?.baseOrgUser?.org;
       let r = t?.orgSharedSetting?.configuredUpgradeRequestSetting;
       let n = e.args.permission === FUserRoleType.GUEST;
-      let i = r === Sm.ALL_USERS || r === Sm.MEMBERS && !n;
+      let i = r === UpgradeRequestSetting.ALL_USERS || r === UpgradeRequestSetting.MEMBERS && !n;
       s[e.args.orgId] = i;
     });
     Object.values(FProductAccessType).forEach(t => {

@@ -14,7 +14,7 @@ import { isNullish } from "../figma_app/95419";
 import { ScreenReaderOnly } from "../905/172252";
 import { t as _$$t } from "../905/150656";
 import b from "../vendor/116389";
-import { Ex, vj, zE } from "../figma_app/919079";
+import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { $z, rb, e6 } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { B as _$$B } from "../905/261906";
@@ -22,7 +22,7 @@ import { RR } from "../figma_app/307841";
 import { tI } from "../figma_app/599327";
 import { P8, a8, vt } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { fu, tf } from "../figma_app/831799";
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
 import { FOrganizationLevelType, FBillingPeriodType, FTeamStatusType, FPlanNameType } from "../figma_app/191312";
@@ -66,8 +66,8 @@ import eH from "../vendor/781591";
 import { RG } from "../figma_app/684446";
 import { returnSecond } from "../figma_app/465776";
 import { sf } from "../905/929976";
-import { J7 } from "../figma_app/650409";
-import { Od } from "../figma_app/967319";
+import { DashboardSection } from "../figma_app/650409";
+import { ColumnName } from "../figma_app/967319";
 import { H as _$$H } from "../469e6e40/325100";
 import { A as _$$A2 } from "../469e6e40/916829";
 var v = b;
@@ -141,16 +141,16 @@ function q(e) {
           }), i]
         }), jsxs("div", {
           className: _$$s.flex.itemsCenter.noWrap.gap8.$,
-          children: [!e.isELA && available > 0 && jsx(Ex, {
-            size: vj.LARGE,
-            color: zE.BRAND,
+          children: [!e.isELA && available > 0 && jsx(Badge, {
+            size: BadgeSize.LARGE,
+            color: BadgeColor.BRAND,
             subtle: !0,
             text: getI18nString("admin_settings.seat_counts.available_seats", {
               quantity: available.toLocaleString()
             })
-          }), jsx(Ex, {
-            size: vj.LARGE,
-            color: zE.DEFAULT,
+          }), jsx(Badge, {
+            size: BadgeSize.LARGE,
+            color: BadgeColor.DEFAULT,
             subtle: !0,
             text: e.isELA ? (total - available).toLocaleString() : total.toLocaleString(),
             className: L
@@ -181,9 +181,9 @@ function $(e) {
           children: [jsx("span", {
             className: "xt0psk2 xb3r6kr xlyipyv xuxw1ft",
             children: getI18nString("admin_settings.seat_counts.total_paid_seats")
-          }), jsx(Ex, {
-            size: vj.LARGE,
-            color: zE.DEFAULT,
+          }), jsx(Badge, {
+            size: BadgeSize.LARGE,
+            color: BadgeColor.DEFAULT,
             dataTestId: "total-paid-seats",
             subtle: !0,
             text: r,
@@ -248,7 +248,7 @@ function G(e) {
     }), a.map(t => createElement(_$$t.TabPanel, {
       ...u[t],
       key: t
-    }, jsx(fu, {
+    }, jsx(TrackingProvider, {
       name: B[t],
       properties: o,
       children: jsx(q, {
@@ -1030,7 +1030,7 @@ function eB(e) {
     }, eD()]
   });
 }
-let eG = tf(_$$$);
+let eG = withTrackedClick(_$$$);
 function ez(e) {
   let {
     onReactivateClick
@@ -1105,9 +1105,9 @@ function e3(e) {
         onClick: () => {
           t(sf({
             view: "orgAdminSettings",
-            orgAdminSettingsViewTab: J7.MEMBERS,
+            orgAdminSettingsViewTab: DashboardSection.MEMBERS,
             orgAdminMembersTabSort: {
-              columnName: Od.BILLABLE_PRODUCT_SEAT,
+              columnName: ColumnName.BILLABLE_PRODUCT_SEAT,
               isReversed: !1
             }
           }));

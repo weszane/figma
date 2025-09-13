@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch, useStore } from "react-redux";
 import { OpenTarget } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { Fo } from "../905/63728";
+import { isCommandEvent } from "../905/63728";
 import { gN } from "../figma_app/976345";
 import { oB } from "../905/929976";
 import { xS } from "../figma_app/193867";
@@ -11,7 +11,7 @@ export function $$u0() {
   let t = useStore();
   return useCallback(async (i, n) => {
     e(oB());
-    let r = Fo(n);
+    let r = isCommandEvent(n);
     let u = null;
     if (r && n.shiftKey ? u = OpenTarget.FOCAL_TAB : r ? u = OpenTarget.BACKGROUND_TAB : n.shiftKey && (u = OpenTarget.NEW_WINDOW), null != u) {
       n.preventDefault();

@@ -2,15 +2,15 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
-import { Uz } from "../905/63728";
-import { nR, qM } from "../figma_app/637027";
-import { L } from "../905/408237";
+import { KeyCodes } from "../905/63728";
+import { ButtonSecondary, ButtonNegativeTracked } from "../figma_app/637027";
+import { LazyInputForwardRef } from "../905/408237";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { yH } from "../figma_app/240735";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FlashActions } from "../905/573154";
 import { $ } from "../905/834575";
 import { KindEnum } from "../905/129884";
@@ -100,7 +100,7 @@ export let $$E0 = registerModal(function (e) {
     e.preventDefault();
     y(hideModal());
   };
-  if (!e.team.org_id && e.subscriptionStatus) return jsx(fu, {
+  if (!e.team.org_id && e.subscriptionStatus) return jsx(TrackingProvider, {
     name: "Blocked Pro Team Delete Modal",
     children: jsx(Dd, {
       title: getI18nString("team_delete_modal.pro_plan_cancel_modal_header"),
@@ -122,7 +122,7 @@ export let $$E0 = registerModal(function (e) {
       })
     })
   });
-  if (!isLoaded) return jsx(fu, {
+  if (!isLoaded) return jsx(TrackingProvider, {
     name: "Team Delete Modal",
     properties: {
       teamid: e.team.id
@@ -144,7 +144,7 @@ export let $$E0 = registerModal(function (e) {
     })
   });
   let O = e.team.name !== t;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team Delete Modal",
     properties: {
       teamid: e.team.id
@@ -218,12 +218,12 @@ export let $$E0 = registerModal(function (e) {
             i("");
           },
           children: [jsx("div", {
-            children: jsx(L, {
+            children: jsx(LazyInputForwardRef, {
               className: _Z,
               type: "text",
               value: t,
               onKeyDown: e => {
-                e.keyCode === Uz.ENTER && e.preventDefault();
+                e.keyCode === KeyCodes.ENTER && e.preventDefault();
               },
               onChange: e => {
                 i(e.currentTarget.value);
@@ -244,10 +244,10 @@ export let $$E0 = registerModal(function (e) {
             })]
           }), jsxs("div", {
             className: v0,
-            children: [jsx(nR, {
+            children: [jsx(ButtonSecondary, {
               onClick: P,
               children: renderI18nText("general.cancel")
-            }), jsx(qM, {
+            }), jsx(ButtonNegativeTracked, {
               type: "submit",
               className: pL,
               disabled: O,

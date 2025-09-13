@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { xZ, HM, AJ } from "../905/190597";
 export function $$s0(e) {
   let {
@@ -13,7 +13,7 @@ export function $$s0(e) {
     children: e.children
   });
 }
-export let $$o4 = tf($$s0);
+export let $$o4 = withTrackedClick($$s0);
 export function $$l1(e) {
   let {
     className,
@@ -26,7 +26,7 @@ export function $$l1(e) {
     children: e.children
   });
 }
-export let $$d3 = tf($$l1);
+export let $$d3 = withTrackedClick($$l1);
 export function $$c2(e) {
   let {
     className,

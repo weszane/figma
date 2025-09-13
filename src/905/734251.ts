@@ -1,4 +1,4 @@
-import { D8, oj } from "../905/511649";
+import { RecordableDiv, RecordableSpan } from "../905/511649";
 import { G } from "../905/268314";
 export let $$a0 = {
   div: G("SecondaryActionTrigger", "div", {
@@ -7,10 +7,10 @@ export let $$a0 = {
   span: G("SecondaryActionTrigger", "span", {
     "data-fpl-audit": !0
   }),
-  recordableDiv: G("SecondaryActionTrigger", D8, {
+  recordableDiv: G("SecondaryActionTrigger", RecordableDiv, {
     "data-fpl-audit": !0
   }),
-  recordableSpan: G("SecondaryActionTrigger", oj, {
+  recordableSpan: G("SecondaryActionTrigger", RecordableSpan, {
     "data-fpl-audit": !0
   })
 };

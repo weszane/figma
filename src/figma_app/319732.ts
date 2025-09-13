@@ -14,7 +14,7 @@ import { Dm, Uu } from "../figma_app/8833";
 import { lg } from "../figma_app/976749";
 import { PluginModalTypeEnum } from "../figma_app/671547";
 import { fullscreenValue } from "../figma_app/455680";
-import { F4 } from "../905/691205";
+import { isFigmaDomain } from "../905/691205";
 import { FFileType } from "../figma_app/191312";
 import { UA } from "../905/250387";
 import { F as _$$F } from "../905/162860";
@@ -91,7 +91,7 @@ function M(e) {
         case _$$F.FIGMA_PROTOTYPE:
           r = _$$A0;
       }
-      if (F4(data.url.host) && G && B[2] && B[3]) {
+      if (isFigmaDomain(data.url.host) && G && B[2] && B[3]) {
         let e = data.url.pathname.split(/\//)[3];
         if (e) try {
           i = decodeURI(e).replace(/-/g, " ");

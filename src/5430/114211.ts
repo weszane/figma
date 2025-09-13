@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ButtonLargeWide } from "../905/521428";
 import { s_ } from "../905/17223";
-import { Lf } from "../figma_app/637027";
+import { EnhancedInput } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -15,7 +15,7 @@ import { qE } from "../figma_app/152745";
 import { H } from "../905/216861";
 import { createEmptyAddress } from "../figma_app/831101";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
 export let $$w0 = registerModal(function (e) {
@@ -70,7 +70,7 @@ export let $$w0 = registerModal(function (e) {
       vatId: S
     }));
   }, [N, w, r, t, C, P, k, T, e, g, S]);
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     className: "collect_tax_info_modal--container--F6VXQ",
     children: [jsx(s_, {
       dispatch: t
@@ -82,7 +82,7 @@ export let $$w0 = registerModal(function (e) {
       children: renderI18nText("community.seller.collect_tax_info_modal.body")
     }), jsxs("div", {
       className: "xh8yej3",
-      children: [jsx(Lf, {
+      children: [jsx(EnhancedInput, {
         value: C,
         htmlName: "firstName",
         label: getI18nString("community.seller.collect_tax_info_modal.first_name"),
@@ -91,7 +91,7 @@ export let $$w0 = registerModal(function (e) {
         },
         trackingFieldName: "First name",
         dataTestId: "first-name"
-      }), jsx(Lf, {
+      }), jsx(EnhancedInput, {
         value: T,
         htmlName: "lastName",
         label: getI18nString("community.seller.collect_tax_info_modal.last_name"),

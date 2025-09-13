@@ -11,7 +11,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { J } from "../1577/181415";
 import { getI18nString } from "../905/303541";
 import { tc } from "../905/15667";
-import { tf, fu } from "../figma_app/831799";
+import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { q } from "../figma_app/590592";
 import { replaceSelection } from "../figma_app/741237";
@@ -92,7 +92,7 @@ export function $$D1({
     children: jsx(_$$I, {})
   }) : null;
 }
-let k = tf(J);
+let k = withTrackedClick(J);
 export function $$M0({
   recordingKey: e
 }) {
@@ -110,7 +110,7 @@ export function $$M0({
   let d = getUpgradeEligibility(FProductAccessType.FIGMAKE);
   let c = getI18nString("figmake.metadata.modal_button_site");
   let E = generateRecordingKey(e, "websiteSettingsButton");
-  if (getFeatureFlags().bake_monetization_plan && d === _$$q.CAN_UPGRADE) return jsx(fu, {
+  if (getFeatureFlags().bake_monetization_plan && d === _$$q.CAN_UPGRADE) return jsx(TrackingProvider, {
     name: "site_settings_button_upgrade_entry_point",
     children: jsx(k, {
       "aria-label": c,

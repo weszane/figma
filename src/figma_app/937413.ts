@@ -16,7 +16,7 @@ import { i as _$$i } from "../905/182187";
 import { an } from "../905/81009";
 import { trackFileCopied } from "../figma_app/314264";
 import { F as _$$F2 } from "../905/224";
-import { x as _$$x } from "../905/439650";
+import { extractValuesByKey } from "../905/439650";
 import { _ as _$$_ } from "../905/780571";
 import { FFileType } from "../figma_app/191312";
 import { FileOperationsView } from "../figma_app/43951";
@@ -134,7 +134,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
   let s = r.user?.personal_drafts_folder_id;
   let o = r.user?.drafts_folder_id;
   let c = [s];
-  a && (c.push(..._$$x(r.orgUsersByOrgId, a).map(e => e.drafts_folder_id)), c.push(..._$$_(r.teamUserByTeamId, a).map(e => e.drafts_folder_id || void 0)));
+  a && (c.push(...extractValuesByKey(r.orgUsersByOrgId, a).map(e => e.drafts_folder_id)), c.push(..._$$_(r.teamUserByTeamId, a).map(e => e.drafts_folder_id || void 0)));
   let h = Object.keys(r.tileSelect && r.tileSelect[_$$F3.FILES] || {}).concat(Object.keys(r.tileSelect && r.tileSelect[_$$F3.PINNED_FILES] || {}));
   let g = Object.keys(r.tileSelect && r.tileSelect[_$$F3.REPOS] || {});
   (await Promise.all(g.map(e => M4.fetchRepo(e)))).forEach(e => {

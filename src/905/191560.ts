@@ -17,11 +17,11 @@ import A from "classnames";
 import { LoadingOverlay, LargeLoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { c as _$$c } from "../905/370443";
-import { tf, fu } from "../figma_app/831799";
+import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { A as _$$A } from "../6828/71291";
 import { A as _$$A2 } from "../5724/643251";
 import { A as _$$A3 } from "../5724/332367";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { getI18nString, renderI18nText, getLocalizedPath, getI18nStringAlias } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { ZD } from "../905/519092";
@@ -170,8 +170,8 @@ function k(e) {
     })
   });
 }
-let R = tf(k, !0);
-let N = tf(function ({
+let R = withTrackedClick(k, !0);
+let N = withTrackedClick(function ({
   svg: e,
   onClick: t,
   text: i
@@ -282,7 +282,7 @@ function j(e) {
           className: "verify_human_form--timeoutText---iomJ",
           "data-testid": "help-text",
           children: renderI18nText("auth.captcha.timed_out_while_loading", {
-            helpCenterLink: jsx(Us, {
+            helpCenterLink: jsx(linkWithTracking, {
               href: "https://help.figma.com/hc/articles/30659048904983",
               target: "_blank",
               trusted: !0,
@@ -482,7 +482,7 @@ function Q(e) {
       })
     })
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Request org access modal",
     properties: {
       orgId: u,
@@ -956,7 +956,7 @@ function eb(e) {
     className: S,
     children: jsx("div", {
       className: ep,
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: "App Auth Grant Form",
         children: o
       })
@@ -1081,7 +1081,7 @@ function eP(e) {
 }
 function eD() {
   let e = useSelector(e => e.auth);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Enable Cookies",
     children: jsx(v, {
       auth: e,
@@ -2155,7 +2155,7 @@ export function $$to0(e) {
     style: {
       display: "contents"
     },
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "AuthView",
       properties: {
         formState: e.auth.formState
@@ -2266,7 +2266,7 @@ function tl(e) {
     onFormSubmit: r,
     ...e
   });
-  if (e.auth.formState === qB.SIGN_IN) return jsx(fu, {
+  if (e.auth.formState === qB.SIGN_IN) return jsx(TrackingProvider, {
     name: "Sign In",
     children: jsx(eH, {
       onFormSubmit: r,
@@ -2275,7 +2275,7 @@ function tl(e) {
   });
   if (e.auth.formState === qB.SIGN_UP) {
     let t = "true" === new URLSearchParams(customHistory.location.search).get("with_community_header");
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: "Sign Up",
       children: jsx(eQ, {
         onFormSubmit: r,
@@ -2284,7 +2284,7 @@ function tl(e) {
       })
     });
   }
-  if (e.auth.formState === qB.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT) return jsx(fu, {
+  if (e.auth.formState === qB.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT) return jsx(TrackingProvider, {
     name: "Google SSO Redirect",
     children: jsx(eM, {
       formId: e.id

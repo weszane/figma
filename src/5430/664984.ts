@@ -9,7 +9,7 @@ import { g } from "../905/347448";
 import { nm } from "../905/352022";
 import { selectCurrentUser } from "../905/372672";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
-import { O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 var $$h3 = (e => (e.SITES_DISABLED_FOR_STARTER = "sites_disabled_for_starter", e.SITES_DISABLED_FOR_ORG = "sites_disabled_for_org", e.COOPER_DISABLED_FOR_ORG = "cooper_disabled_for_org", e.FIGMAKE_DISABLED_FOR_ORG = "figmake_disabled_for_org", e))($$h3 || {});
 function x(e) {
   let t = useAtomWithSubscription(g);
@@ -91,16 +91,16 @@ export function $$g0(e) {
     if (!r || 0 === r.length) return {
       isDisabled: !0
     };
-    let s = r.filter(e => e.plan_type === O.TEAM).reduce((e, r) => {
+    let s = r.filter(e => e.plan_type === OrganizationType.TEAM).reduce((e, r) => {
       let s = t.find(e => e.id === r.plan_id);
       s && (e[r.plan_id] = s);
       return e;
     }, {});
-    var i = r.filter(e => e.plan_type !== O.TEAM || s[e.plan_id]?.pro_team);
+    var i = r.filter(e => e.plan_type !== OrganizationType.TEAM || s[e.plan_id]?.pro_team);
     return 0 === i.length ? {
       isDisabled: !0,
       disabledReason: "sites_disabled_for_starter"
-    } : 0 === (i = i.filter(e => e.plan_type !== O.ORG || !e.is_sites_disabled)).length ? {
+    } : 0 === (i = i.filter(e => e.plan_type !== OrganizationType.ORG || !e.is_sites_disabled)).length ? {
       isDisabled: !0,
       disabledReason: "sites_disabled_for_org"
     } : {
@@ -112,7 +112,7 @@ export function $$g0(e) {
     disabledReason: _disabledReason
   } = e !== vt.COOPER_TEMPLATE_FILE ? {
     isDisabled: !1
-  } : r && 0 !== r.length ? r.some(e => e.plan_type === O.TEAM || !e.is_cooper_disabled) ? {
+  } : r && 0 !== r.length ? r.some(e => e.plan_type === OrganizationType.TEAM || !e.is_cooper_disabled) ? {
     isDisabled: !1
   } : {
     isDisabled: !0,
@@ -125,7 +125,7 @@ export function $$g0(e) {
     disabledReason: _disabledReason2
   } = e !== vt.FIGMAKE_TEMPLATE ? {
     isDisabled: !1
-  } : r && 0 !== r.length ? r.some(e => e.plan_type === O.TEAM || !e.is_figmake_disabled) ? {
+  } : r && 0 !== r.length ? r.some(e => e.plan_type === OrganizationType.TEAM || !e.is_figmake_disabled) ? {
     isDisabled: !1
   } : {
     isDisabled: !0,

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { customHistory } from "../905/612521";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { getI18nString } from "../905/303541";
 import { hideModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/217163";
@@ -30,7 +30,7 @@ export function $$f0({
     let n = {
       text: getI18nString("design_systems.assets_panel.insert"),
       shortcuts: _ ? [] : [{
-        key: Uz.ENTER
+        key: KeyCodes.ENTER
       }],
       onAction: () => {
         i({
@@ -47,8 +47,8 @@ export function $$f0({
     let n = v ? {
       text: getI18nString("design_systems.instance_panel.swap_instance"),
       shortcuts: _ ? [] : [{
-        key: Uz.ENTER,
-        modifier: [xH.ALT]
+        key: KeyCodes.ENTER,
+        modifier: [ModifierKeyCodes.ALT]
       }],
       onAction: () => {
         i({
@@ -73,15 +73,15 @@ export function $$f0({
       return t ? M$({
         text: getI18nString("design_systems.assets_panel.go_to_main"),
         shortcuts: _ ? [] : [{
-          key: Uz.ENTER,
-          modifier: [xH.META]
+          key: KeyCodes.ENTER,
+          modifier: [ModifierKeyCodes.META]
         }],
         onAction: () => A(e.node_id)
       }, f) : i?.link ? M$({
         text: "community" === i.type ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("design_systems.assets_panel.go_to_main"),
         shortcuts: _ ? [] : [{
-          key: Uz.ENTER,
-          modifier: [xH.META]
+          key: KeyCodes.ENTER,
+          modifier: [ModifierKeyCodes.META]
         }],
         onAction: () => customHistory.redirect(i.link, "_blank")
       }, f) : void 0;

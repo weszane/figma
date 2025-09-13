@@ -8,7 +8,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { D, _ as _$$_ } from "../figma_app/169991";
 import { Fragment as _$$Fragment } from "react";
 import { s_ } from "../905/17223";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { sx as _$$sx } from "../905/941192";
 import { FRequestStatusType } from "../figma_app/191312";
@@ -59,7 +59,7 @@ let w = registerModal(function ({
   isWidget: t
 }) {
   let r = useDispatch();
-  let n = jsx(Us, {
+  let n = jsx(linkWithTracking, {
     href: "https://help.figma.com/hc/articles/16354660649495",
     target: "_blank",
     trusted: !0,

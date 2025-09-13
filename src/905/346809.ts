@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { r2 } from "../figma_app/479313";
 import { Dn, Tz, iY, bW, sI, BI } from "../figma_app/317723";
 var o = s;
@@ -43,7 +43,7 @@ export function $$m0(e) {
     children: [!doNotReserveSpaceForChevron && jsx(r2, {
       isPanelBodyCollapsedAtom: isPanelBodyCollapsedAtom || null
     }), e.children]
-  }) : jsxs(D8, {
+  }) : jsxs(RecordableDiv, {
     ...s,
     forwardedRef: innerRef,
     tabIndex: -1,
@@ -65,7 +65,7 @@ export function $$h1(e) {
     children: [!doNotReserveSpaceForChevron && jsx(r2, {
       isPanelBodyCollapsedAtom: isPanelBodyCollapsedAtom || null
     }), e.children]
-  }) : jsxs(D8, {
+  }) : jsxs(RecordableDiv, {
     ...o,
     forwardedRef: innerRef,
     tabIndex: -1,

@@ -1,25 +1,25 @@
 import { isVsCodeEnvironment } from "../905/858738";
-import { bf } from "../figma_app/415217";
+import { extensionMessages } from "../figma_app/415217";
 export class $$a0 {
   toggleDevTools(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendToggleDevToolsMessage();
+    return extensionMessages.sendToggleDevToolsMessage();
   }
   getLocalFileExtensionSource(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendGetLocalFileExtensionSourceMessage(e);
+    return extensionMessages.sendGetLocalFileExtensionSourceMessage(e);
   }
   getLocalFileExtensionManifest(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendGetLocalFileExtensionManifest(e);
+    return extensionMessages.sendGetLocalFileExtensionManifest(e);
   }
   openExtensionDirectory(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    bf.sendOpenExtensionDirectoryMessage(e);
+    extensionMessages.sendOpenExtensionDirectoryMessage(e);
   }
   openExtensionManifest(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    bf.sendOpenExtensionManifestMessage(e);
+    extensionMessages.sendOpenExtensionManifestMessage(e);
   }
   openDevTools(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
@@ -38,39 +38,39 @@ export class $$a0 {
   }
   getLocalManifestFileExtensionIdsToCachedMetadataMap() {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendGetLocalManifestFileExtensionIdsToCachedMetadataMap();
+    return extensionMessages.sendGetLocalManifestFileExtensionIdsToCachedMetadataMap();
   }
   getLocalManifestFileExtensionIdsToCachedContainsWidgetMap() {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendGetLocalManifestFileExtensionIdsToCachedContainsWidgetMapMessage();
+    return extensionMessages.sendGetLocalManifestFileExtensionIdsToCachedContainsWidgetMapMessage();
   }
   getAllLocalFileExtensionIds() {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendGetAllLocalFileExtensionIdsMessage();
+    return extensionMessages.sendGetAllLocalFileExtensionIdsMessage();
   }
   registerManifestChangeObserver(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendRegisterManifestChangeObserverMessage(e);
+    return extensionMessages.sendRegisterManifestChangeObserverMessage(e);
   }
   registerCodeChangeObserver(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendRegisterCodeChangeObserverMessage(e);
+    return extensionMessages.sendRegisterCodeChangeObserverMessage(e);
   }
   registerUiChangeObserver(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendRegisterUIChangeObserverMessage(e);
+    return extensionMessages.sendRegisterUIChangeObserverMessage(e);
   }
   createMultipleNewLocalFileExtensions(e, t) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendCreateMultipleNewLocalFileExtensions(e, t);
+    return extensionMessages.sendCreateMultipleNewLocalFileExtensions(e, t);
   }
   removeLocalFileExtension(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    bf.sendRemoveFileExtensionMessage(e);
+    extensionMessages.sendRemoveFileExtensionMessage(e);
   }
   writeNewExtensionDirectoryToDisk(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    return bf.sendWriteNewExtensionDirectoryToDiskMessage(e);
+    return extensionMessages.sendWriteNewExtensionDirectoryToDiskMessage(e);
   }
   writeNewExtensionToDisk(e, t) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
@@ -82,7 +82,7 @@ export class $$a0 {
   }
   updateCachedContainsWidget(e) {
     isVsCodeEnvironment() || this.throwNoVsCodeErrorMessage();
-    bf.sendUpdateCachedContainsWidget(e);
+    extensionMessages.sendUpdateCachedContainsWidget(e);
   }
   throwNoVsCodeErrorMessage() {
     throw Error("[VsCodeLocalPluginMananger] VS Code extension not available");

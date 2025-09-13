@@ -20,7 +20,7 @@ import { B as _$$B } from "../905/261906";
 import { JT, tI } from "../figma_app/847597";
 import { U2 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
 import { Ye } from "../905/332483";
@@ -30,7 +30,7 @@ import { useTeamPlanFeatures } from "../figma_app/465071";
 var $$m = p;
 let O = "seat_options--seatChangeInformationContainer--XoAO5";
 let D = "seat_options--seatChangeOptionContainer--yYwT5";
-let L = tf(O6);
+let L = withTrackedClick(O6);
 let F = "https://help.figma.com/hc/articles/360039960434-Manage-seats-in-Figma";
 export function $$M1({
   currentSeatType: e,

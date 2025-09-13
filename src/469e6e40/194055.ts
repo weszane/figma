@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
-import { CY, u4 } from "../figma_app/637027";
+import { SecureLink, ButtonBase } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -28,7 +28,7 @@ import { kq } from "../figma_app/563413";
 import { Pf, H8 } from "../905/590952";
 import { q as _$$q } from "../905/749058";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { Ef } from "../905/81982";
 import { l as _$$l } from "../469e6e40/774192";
 import { A as _$$A3 } from "../5724/663128";
@@ -70,7 +70,7 @@ let L = registerModal(function ({
   orgName: a,
   extensionType: s
 }) {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: jsx(TextWithTruncation, {
       fontWeight: "semi-bold",
       children: renderI18nText("resources_tab.extension_revoke_modal.title", {
@@ -481,7 +481,7 @@ function ea({
 }) {
   let s = useDispatch();
   let l = e.sort((e, t) => e.org_rank - t.org_rank);
-  let o = jsx(CY, {
+  let o = jsx(SecureLink, {
     onClick: () => {
       s(showModalHandler({
         type: DV,
@@ -629,7 +629,7 @@ function ei(e) {
       className: _$$s.flex.justifyBetween.py8.$,
       children: [jsxs("div", {
         className: _$$s.block.$,
-        children: [jsxs(u4, {
+        children: [jsxs(ButtonBase, {
           defaultClass: "",
           onClick: () => v(!b),
           dataTestId: "usage-window-dropdown",
@@ -644,7 +644,7 @@ function ei(e) {
         })]
       }), jsxs("div", {
         className: _$$s.block.$,
-        children: [jsxs(u4, {
+        children: [jsxs(ButtonBase, {
           defaultClass: "",
           onClick: a ? lQ : () => m(!c),
           dataTestId: "user-workspace-dropdown",
@@ -725,7 +725,7 @@ function ed({
       o(VisualBellActions.enqueue({
         message: `Copied ${t}`
       }));
-    }).catch(() => {});
+    }).catch(() => { });
   }, [o]);
   try {
     r = JSON.parse(e.metadata);
@@ -1002,7 +1002,7 @@ function ey({
       ref: t,
       showTooltipWhenTruncated: !1,
       children: stripHtmlTags(e).trim()
-    }), a && jsx(CY, {
+    }), a && jsx(SecureLink, {
       trusted: !0,
       onClick: () => l(e => !e),
       children: r ? getI18nString("resources_tab.approved_plugins.modal.show_less") : getI18nString("resources_tab.approved_plugins.modal.show_more")
@@ -1511,7 +1511,7 @@ export function $$eV0({
           })]
         }), jsxs("div", {
           className: _$$s.flex.itemsCenter.p16.bt1.colorBorder.bSolid.gap8.$,
-          children: [jsx(CY, {
+          children: [jsx(SecureLink, {
             className: _$$s.mrAuto.$,
             href: A,
             target: "_blank",

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { N_ } from "../vendor/956898";
+import { Link } from "react-router-dom";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -12,7 +12,7 @@ import { y } from "../905/158417";
 import { Jm } from "../figma_app/387599";
 import { Dm } from "../figma_app/471982";
 import { M } from "../905/722875";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { L } from "../905/606555";
 export function $$y2({
   profileId: e,
@@ -113,7 +113,7 @@ export function $$T0({
     className: "author_dropdown_preview--hoverCard--enM76",
     children: [jsxs("div", {
       className: "author_dropdown_preview--authorMeta--FtpFs",
-      children: [jsxs(o3, {
+      children: [jsxs(TrackedLink, {
         to: h.to,
         trackingEventName: "community_hub_profile_preview__profile_visit",
         trackingProperties: {
@@ -129,7 +129,7 @@ export function $$T0({
             showBorder: !0
           })
         })]
-      }), jsxs(o3, {
+      }), jsxs(TrackedLink, {
         to: h.to,
         trackingEventName: "community_hub_profile_preview__profile_visit",
         trackingProperties: {
@@ -172,7 +172,7 @@ function S({
   author: e
 }) {
   let t = y(e.profile_handle);
-  return jsxs(N_, {
+  return jsxs(Link, {
     className: "author_dropdown_preview--authorPreviewListRow--XiWec text--fontPos12--YsUAh text--_fontBase--QdLsd",
     to: t.to,
     children: [jsx(_$$e, {

@@ -13,7 +13,7 @@ import { P as _$$P } from "../905/16832";
 import { F as _$$F } from "../905/801537";
 import { R9 } from "../905/61477";
 import { nv } from "../905/182534";
-import { WY, dC, uR, jD } from "../figma_app/162807";
+import { CreatorResourceType, TeamSpaceType, InputType, PillType } from "../figma_app/162807";
 import { HY, b3, kI } from "../905/779036";
 import { Ze, p$ } from "../905/954985";
 export function $$v0({
@@ -22,8 +22,8 @@ export function $$v0({
   setFacetValue: i
 }) {
   let [l, v] = useState("");
-  let E = _$$F(l, WY.CREATOR);
-  let x = nv(E.data, dC.USERS);
+  let E = _$$F(l, CreatorResourceType.CREATOR);
+  let x = nv(E.data, TeamSpaceType.USERS);
   let S = useAtomWithSubscription(J);
   let w = useAtomWithSubscription(jM);
   let C = useAtomWithSubscription(P_);
@@ -34,12 +34,12 @@ export function $$v0({
   let O = _$$k();
   let D = _$$P();
   useEffect(() => {
-    "loaded" === E.status && l.length > 0 && R !== k && (N(k), D(l, WY.CREATOR, uR.DROPDOWN));
+    "loaded" === E.status && l.length > 0 && R !== k && (N(k), D(l, CreatorResourceType.CREATOR, InputType.DROPDOWN));
   }, [E]);
   let L = useCallback((e, t, n) => {
     if (!t || void 0 === n) {
       i(e, null, nX(w, null, C, T ?? void 0));
-      O({}, jD.CLEAR_ALL, uR.DROPDOWN);
+      O({}, PillType.CLEAR_ALL, InputType.DROPDOWN);
       return;
     }
     let r = S ? n ? S.value.filter(e => !deepEqual(e, t)) : S.value.concat(t) : [t];
@@ -48,7 +48,7 @@ export function $$v0({
     i(e, s, o);
     n ? O({
       creatorId: t.id
-    }, jD.SELECTION, uR.DROPDOWN) : P({
+    }, PillType.SELECTION, InputType.DROPDOWN) : P({
       creatorId: t.id
     }, l);
   }, [S, w, C, T, i, P, O, l]);

@@ -10,7 +10,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
-import { ks, tM, vd } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -18,7 +18,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { um } from "../905/14223";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { KQ as _$$KQ } from "../figma_app/475472";
 import { selectCurrentUser } from "../905/372672";
 import { FPermissionLevelType, FAccessLevelType, FBasicPermissionType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
@@ -189,7 +189,7 @@ export let $$K0 = registerModal(function (e) {
     value: ew,
     placeholder: getI18nString("team_creation.optional"),
     id: eC
-  }) : jsx(ks, {
+  }) : jsx(BigTextInputForwardRef, {
     className: "team_creation_modal--descriptionInput--cLVf4",
     type: "textarea",
     onChange: e => eN(e.target.value),
@@ -239,7 +239,7 @@ export let $$K0 = registerModal(function (e) {
   });
   let eO = useId();
   let eL = jsx(Fragment, {
-    children: jsx(ks, {
+    children: jsx(BigTextInputForwardRef, {
       autoFocus: !0,
       className: "team_creation_modal--teamNameInputSC--bbcKV",
       "data-testid": "team_creation_modal_title",
@@ -277,7 +277,7 @@ export let $$K0 = registerModal(function (e) {
     t(popModalStack());
     t(cL());
   }
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team Creation",
     children: jsx(OJ, {
       title: 1 === er ? getI18nString("team_creation.add_people_to_team_name", {
@@ -355,10 +355,10 @@ export let $$K0 = registerModal(function (e) {
             })
           }), jsxs("div", {
             className: "team_creation_modal--buttons--jSrKt",
-            children: [jsx(tM, {
+            children: [jsx(ButtonSecondaryTracked, {
               onClick: eD,
               children: renderI18nText("project_creation.cancel")
-            }), jsx(vd, {
+            }), jsx(ButtonBasePrimaryTracked, {
               onClick: function () {
                 if (0 === er) ei(1);else {
                   let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => xf(e) && !H_(k.domains, e)) : [];

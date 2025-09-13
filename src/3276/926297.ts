@@ -2,11 +2,11 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
-import { VA } from "../figma_app/528509";
+import { hasRootPathOptional } from "../figma_app/528509";
 import { t as _$$t } from "../figma_app/579169";
 import { useCurrentFileKey, selectOpenFileObject } from "../figma_app/516028";
 import { FileWithRoleRequests, FilePermissionsV2 } from "../figma_app/43951";
-import { Xs } from "../figma_app/349248";
+import { mapRepoSummary } from "../figma_app/349248";
 export function $$u1() {
   let e = useCurrentFileKey();
   let t = useSubscription(FileWithRoleRequests, {
@@ -31,11 +31,11 @@ export function $$p0() {
     let e = "loaded" === u.status && u.data.file;
     if (!e) return null;
     let o = e.project;
-    let a = VA(o);
+    let a = hasRootPathOptional(o);
     return {
       file: t,
       repo: e.repo ? {
-        ...Xs(e.repo),
+        ...mapRepoSummary(e.repo),
         canEdit: e.repo.canEdit
       } : null,
       hasOrg: !!e.org,

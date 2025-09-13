@@ -5,7 +5,7 @@ import { DimensionErrorType } from "../figma_app/763686";
 import o from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { M } from "../figma_app/648761";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { S as _$$S } from "../figma_app/552746";
@@ -102,17 +102,17 @@ export function $$v0(e) {
       if (e.onKeyDown?.(i), 0 === E) return;
       let n = C.current;
       switch (i.keyCode) {
-        case Uz.DELETE:
-        case Uz.BACKSPACE:
+        case KeyCodes.DELETE:
+        case KeyCodes.BACKSPACE:
           null !== x && (i.preventDefault(), C.current?.focus?.(), S(null), t?.onVariableSelected?.());
           break;
-        case Uz.ENTER:
+        case KeyCodes.ENTER:
           null !== x && (i.preventDefault(), t?.showBindingUI(n));
           break;
-        case Uz.RIGHT_ARROW:
+        case KeyCodes.RIGHT_ARROW:
           null !== x && (i.preventDefault(), x + 1 === E ? (S(null), C.current?.focus?.()) : S(x + 1));
           break;
-        case Uz.LEFT_ARROW:
+        case KeyCodes.LEFT_ARROW:
           i.preventDefault();
           R();
       }
@@ -166,13 +166,13 @@ export function $$v0(e) {
         onFocus: e.onFocus,
         onKeyDown: i => {
           if (e.onKeyDown?.(i), !i.defaultPrevented && ("=" === i.key && (i.preventDefault(), O()), 0 !== E)) switch (i.keyCode) {
-            case Uz.BACKSPACE:
+            case KeyCodes.BACKSPACE:
               {
                 let e = C.current;
                 e && e === document.activeElement && 0 === e.selectionStart && 0 === e.selectionEnd && (i.preventDefault(), C.current?.focus?.(), S(null), t?.onVariableSelected?.(), k(!0));
                 break;
               }
-            case Uz.LEFT_ARROW:
+            case KeyCodes.LEFT_ARROW:
               i.preventDefault();
               R();
           }

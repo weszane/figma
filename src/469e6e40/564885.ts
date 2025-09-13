@@ -16,7 +16,7 @@ import { sf } from "../905/929976";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { E as _$$E } from "../figma_app/126651";
 import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/298764";
@@ -41,7 +41,7 @@ export let $$E0 = registerModal(function (e) {
     }
   }(e.activityType, e.planUserDisplayName);
   useEffect(() => {
-    (e.planType === O.ORG ? _$$J.getLastEdit({
+    (e.planType === OrganizationType.ORG ? _$$J.getLastEdit({
       orgUserId: e.planUserId
     }) : $.getUsersLastActive({
       teamId: e.planId,

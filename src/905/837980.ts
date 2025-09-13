@@ -5,7 +5,7 @@ import { isSubscription } from '../905/54385';
 import { registerModal } from '../905/102752';
 import { hideModal } from '../905/156213';
 import { renderI18nText } from '../905/303541';
-import { GG } from '../905/511649';
+import { RecordableButton } from '../905/511649';
 import { ButtonLargeWide } from '../905/521428';
 import { DP } from '../905/640017';
 import { Point } from '../905/736624';
@@ -559,7 +559,7 @@ export let FreemiumApiPreCheckoutModal = registerModal((props: FreemiumApiPreChe
         onClick: onContinue,
         variant: 'primary',
         children: buttonText
-      }), jsx(GG, {
+      }), jsx(RecordableButton, {
         recordingKey: generateRecordingKey('freemiumApiPreCheckoutModal', 'cancel'),
         onClick: handleClose,
         className: 'freemium_api_pre_checkout_modal--link--SCOub text--fontPos13--xW8hS text--_fontBase--QdLsd',

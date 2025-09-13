@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { S } from "../4452/747039";
 export function $$f0(e) {
   let {
@@ -36,7 +36,7 @@ export function $$f0(e) {
       }));
     });
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Asset Transfer Revoke Modal",
     properties: {
       pendingInviteId: x

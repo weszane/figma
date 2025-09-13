@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import s from "classnames";
-import { nR } from "../figma_app/637027";
+import { ButtonSecondary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { v } from "../905/581647";
@@ -22,7 +22,7 @@ export function $$g0(e) {
   });
   return jsx("div", {
     "data-not-draggable": !0,
-    children: jsx(nR, {
+    children: jsx(ButtonSecondary, {
       onClick: r,
       className: d,
       children: e.children

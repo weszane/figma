@@ -38,7 +38,7 @@ import { D as _$$D } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { _6 } from "../figma_app/386952";
 import { getObservableValue } from "../figma_app/84367";
-import { Yj } from "../figma_app/951233";
+import { hasOrgUsersForUser } from "../figma_app/951233";
 import { dE } from "../figma_app/598018";
 import { m as _$$m2 } from "../905/99004";
 import { x as _$$x2 } from "../905/106997";
@@ -253,7 +253,7 @@ export function $$em2() {
     isEditingFile: !!getSelectedFile(e),
     isDevHandoff: $A(e.selectedView),
     modalShown: e.modalShown,
-    orgUser: Yj(e),
+    orgUser: hasOrgUsersForUser(e),
     user: e.user,
     unsortedTeams: dE(e.user, e.roles, e.teams)
   }));

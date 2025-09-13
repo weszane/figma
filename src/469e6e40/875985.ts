@@ -7,7 +7,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { I } from "../figma_app/638694";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { z1, wL, tD, D9, wv, bW, EM, vK, Rk, Nt, _9, zK, LD, Up, G } from "../469e6e40/878707";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -62,7 +62,7 @@ export function $$v2(e) {
 export function $$f3(e) {
   let t = h(e.color ?? 2);
   let a = I();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e.trackingContext,
     properties: e.trackingProperties,
     children: jsxs("div", {

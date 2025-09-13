@@ -16,13 +16,13 @@ import x from "classnames";
 import { e6, $z } from "../figma_app/617427";
 import { j as _$$j } from "../905/261906";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Hl, YT } from "../figma_app/217457";
 import { a as _$$a2 } from "../905/584964";
 import { vr } from "../figma_app/514043";
 import { e0 } from "../905/696396";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 var b = x;
 function v({
   children: e,
@@ -148,21 +148,21 @@ function O(e) {
     })))
   });
 }
-let E = jsx(Us, {
+let E = jsx(linkWithTracking, {
   href: "https://figma.com/ssa",
   target: "_blank",
   trusted: !0,
   "data-testid": "seat-billing-terms-ssa-link",
   children: renderI18nText("seat_billing_terms.modal.tos.ssa_link_text")
 });
-let A = jsx(Us, {
+let A = jsx(linkWithTracking, {
   href: "https://help.figma.com/hc/articles/27468498501527-Updates-to-Figma-s-billing-and-pricing-prod-link",
   target: "_blank",
   trusted: !0,
   "data-testid": "seat-billing-terms-updated-seats-link",
   children: renderI18nText("seat_billing_terms.modal.tos.faq_link")
 });
-let I = jsx(Us, {
+let I = jsx(linkWithTracking, {
   href: "https://help.figma.com/hc/requests/new?ticket_form_id=360001731233",
   target: "_blank",
   trusted: !0,
@@ -292,7 +292,7 @@ export function $$B0({
   let q = useMemo(() => k.some(({
     licenseTypes: e
   }) => e.length > 4) ? "16" : "24", [k]);
-  return a ? jsx(fu, {
+  return a ? jsx(TrackingProvider, {
     name: e0.SEAT_BILLING_TERMS_MODAL,
     properties: {
       orgId: e

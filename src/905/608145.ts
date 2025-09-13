@@ -8,7 +8,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
-import { e as _$$e2 } from "../905/280005";
+import { handleUrlAction } from "../905/280005";
 import { reportError } from "../905/11";
 import { VisualBellActions } from "../905/302958";
 import { zM } from "../figma_app/580736";
@@ -412,7 +412,7 @@ export function $$J0(e, t, i) {
     case "view-api-docs":
       {
         let e = "https://www.figma.com/plugin-docs/api/api-reference/";
-        _$$e2(e) || open(e, "_blank");
+        handleUrlAction(e) || open(e, "_blank");
         return;
       }
     case "create-new-plugin":

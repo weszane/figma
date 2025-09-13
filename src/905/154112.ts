@@ -4,7 +4,7 @@ import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { registerLegacyModal } from "../905/102752";
 import { Of } from "../905/31837";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 import { YQ, v_ } from "../figma_app/538002";
 export let $$p0 = "confirm-org-guest-invite-modal";
@@ -18,7 +18,7 @@ class m extends PureComponent {
       emails,
       orgName
     } = this.props;
-    return jsx(yX, {
+    return jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("permissions.confirm_guest_invite.share_externally"),
       confirmText: getI18nString("permissions.confirm_guest_invite.send_invite"),
       disableClickOutsideToHide: !0,

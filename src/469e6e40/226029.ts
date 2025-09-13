@@ -34,8 +34,8 @@ import { FC } from "../figma_app/212807";
 import { useCurrentUserOrg } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { oh } from "../905/18797";
-import { UserRole, GroupType } from "../905/441038";
-import { V0, m2 } from "../figma_app/858344";
+import { UserGroupRole, GroupType } from "../905/441038";
+import { DUserRole, SectionType } from "../figma_app/858344";
 import { z6 } from "../figma_app/805373";
 import { lQ } from "../905/934246";
 import { _ as _$$_ } from "../7021/243271";
@@ -61,7 +61,7 @@ import { Mn, e9 } from "../4452/961065";
 import { m$ } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
 import { FRequestsStr } from "../905/384551";
-import { J7 } from "../figma_app/650409";
+import { DashboardSection } from "../figma_app/650409";
 import { DashboardSections } from "../905/548208";
 import { K as _$$K } from "../905/443068";
 import { t as _$$t2 } from "../905/117577";
@@ -156,19 +156,19 @@ function ev(e) {
       text: renderI18nText("org_admin_tab.people"),
       selectViewArgs: {
         view: s,
-        orgAdminSettingsViewTab: J7.MEMBERS
+        orgAdminSettingsViewTab: DashboardSection.MEMBERS
       },
-      onboardingKey: Ii[J7.MEMBERS]
+      onboardingKey: Ii[DashboardSection.MEMBERS]
     }, {
       icon: jsx(_$$S, {}),
       id: 3,
       text: renderI18nText("org_admin_tab.billing"),
       selectViewArgs: {
         view: s,
-        orgAdminSettingsViewTab: J7.BILLING
+        orgAdminSettingsViewTab: DashboardSection.BILLING
       },
       preNavAction: t,
-      onboardingKey: Ii[J7.BILLING],
+      onboardingKey: Ii[DashboardSection.BILLING],
       disabled: a
     }, {
       icon: jsx(_$$e2, {}),
@@ -176,36 +176,36 @@ function ev(e) {
       text: renderI18nText("org_admin_tab.content"),
       selectViewArgs: {
         view: s,
-        orgAdminSettingsViewTab: J7.CONTENT
+        orgAdminSettingsViewTab: DashboardSection.CONTENT
       },
-      onboardingKey: Ii[J7.CONTENT]
+      onboardingKey: Ii[DashboardSection.CONTENT]
     }, {
       icon: jsx(_$$l, {}),
       id: 7,
       text: renderI18nText("org_admin_tab.resources"),
       selectViewArgs: {
         view: s,
-        orgAdminSettingsViewTab: J7.RESOURCES
+        orgAdminSettingsViewTab: DashboardSection.RESOURCES
       },
-      onboardingKey: Ii[J7.RESOURCES]
+      onboardingKey: Ii[DashboardSection.RESOURCES]
     }, {
       icon: jsx(_$$d, {}),
       id: 8,
       text: renderI18nText("org_admin_tab.activity"),
       selectViewArgs: {
         view: s,
-        orgAdminSettingsViewTab: J7.ACTIVITY
+        orgAdminSettingsViewTab: DashboardSection.ACTIVITY
       },
-      onboardingKey: Ii[J7.ACTIVITY]
+      onboardingKey: Ii[DashboardSection.ACTIVITY]
     }, {
       icon: jsx(_$$A, {}),
       id: 9,
       text: renderI18nText("org_admin_tab.settings"),
       selectViewArgs: {
         view: s,
-        orgAdminSettingsViewTab: J7.SETTINGS
+        orgAdminSettingsViewTab: DashboardSection.SETTINGS
       },
-      onboardingKey: Ii[J7.SETTINGS],
+      onboardingKey: Ii[DashboardSection.SETTINGS],
       webEventId: _$$o
     }];
   }(0, d, c), [isEnterprise, d, c]);
@@ -215,7 +215,7 @@ function ev(e) {
 }
 function ef(e) {
   let t = useDispatch();
-  let a = "orgAdminSettings" === e.selectedView.view && e.selectedView.orgAdminSettingsViewTab === J7.DASHBOARD;
+  let a = "orgAdminSettings" === e.selectedView.view && e.selectedView.orgAdminSettingsViewTab === DashboardSection.DASHBOARD;
   let s = "billingGroupDashboard" === e.selectedView.view && e.selectedView.selectedTab === FRequestsStr.REQUESTS;
   let i = a || s;
   return jsx(SidebarRow, {
@@ -224,7 +224,7 @@ function ef(e) {
     }),
     onClick: () => {
       if (e.isOrgAdmin) {
-        let e = J7.DASHBOARD;
+        let e = DashboardSection.DASHBOARD;
         t(sf({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: e
@@ -425,7 +425,7 @@ function eT(e) {
     t(sf({
       view: "licenseGroup",
       licenseGroupId: e,
-      subView: UserRole.ADMIN,
+      subView: UserGroupRole.ADMIN,
       selectedTab: GroupType.MEMBERS
     }));
   }, [t]);
@@ -458,8 +458,8 @@ function eA(e) {
     t(sf({
       view: "workspace",
       workspaceId: e,
-      subView: V0.ADMIN,
-      selectedTab: m2.MEMBERS
+      subView: DUserRole.ADMIN,
+      selectedTab: SectionType.MEMBERS
     }));
   }, [t]);
   let r = useCallback(e => jsx(SidebarRow, {

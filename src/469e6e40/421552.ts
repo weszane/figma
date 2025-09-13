@@ -35,8 +35,8 @@ import { Oe } from "../figma_app/336853";
 import { Ef } from "../905/81982";
 import { isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { O as _$$O } from "../figma_app/809387";
-import { J7, _d } from "../figma_app/650409";
-import { m2 } from "../figma_app/858344";
+import { DashboardSection, FigResourceType } from "../figma_app/650409";
+import { SectionType } from "../figma_app/858344";
 import { qq, TG } from "../905/72677";
 import { Hj, A3, tD, FO } from "../905/682977";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
@@ -48,12 +48,12 @@ import { A as _$$A } from "../905/251970";
 import { $z } from "../figma_app/617427";
 import { parsePxInt } from "../figma_app/783094";
 import { l as _$$l } from "../905/745972";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S3 } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { generateUniqueKey } from "../905/383708";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { wJ } from "../figma_app/630951";
 import { selectCurrentUser } from "../905/372672";
 import { Y as _$$Y2 } from "../905/465068";
@@ -63,7 +63,7 @@ import { X as _$$X, U as _$$U } from "../905/77000";
 import { EntityType } from "../905/806400";
 import { l as _$$l2 } from "../905/716947";
 import { h1 } from "../905/986103";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FPlanNameType, FMemberRoleType } from "../figma_app/191312";
 import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPrivilegedPlan, useTeamPlanUser, useIsOrgAdminUser, checkOrgUserPermission } from "../figma_app/465071";
 import { az } from "../figma_app/805373";
@@ -355,7 +355,7 @@ let ey = function ({
       })
     }), "file" === e.type && jsx("a", {
       className: _$$s.cursorPointer.colorTextBrand.$,
-      href: jN({
+      href: buildFileUrl({
         file: {
           key: e.fileKey,
           name: e.name
@@ -1194,14 +1194,14 @@ let td = registerModal(function ({
     orgId: r ?? void 0,
     libraryResourceId: e
   }), [r, e, a?.id]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Library Management Modal",
     properties: E,
     children: jsxs(OJ, {
       title: m && h ? m.name : getI18nString("resources_tab.libraries.manage_this_library"),
       maxWidth: 648,
       onClose: g,
-      customButton: jsxs(CY, {
+      customButton: jsxs(SecureLink, {
         trusted: !0,
         target: "_blank",
         href: "https://help.figma.com/hc/articles/21310245473815",
@@ -1687,14 +1687,14 @@ export function $$tx1(e) {
   });
   return jsxs(Fragment, {
     children: [workspaceId ? jsx(_$$m, {
-      selectedSecondaryTab: m2.LIBRARIES,
+      selectedSecondaryTab: SectionType.LIBRARIES,
       rightActions: ex
     }) : !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K, {
-        title: _$$O(J7.RESOURCES)
+        title: _$$O(DashboardSection.RESOURCES)
       }), jsx(_$$b, {
-        tab: J7.RESOURCES,
-        selectedSecondaryTab: _d.LIBRARIES,
+        tab: DashboardSection.RESOURCES,
+        selectedSecondaryTab: FigResourceType.LIBRARIES,
         rightActions: ex
       })]
     }), isLoading ? jsx("div", {

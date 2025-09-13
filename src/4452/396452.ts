@@ -14,7 +14,7 @@ import { c as _$$c } from "../905/370443";
 import { z3 } from "../figma_app/386952";
 import { FVisibilityType } from "../figma_app/191312";
 import { IX } from "../905/712921";
-import { J7 } from "../figma_app/650409";
+import { DashboardSection } from "../figma_app/650409";
 if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$b2() {
@@ -25,7 +25,7 @@ export function $$b2() {
     onClick: () => {
       e(sf({
         view: "orgAdminSettings",
-        orgAdminSettingsViewTab: J7.ACTIVITY,
+        orgAdminSettingsViewTab: DashboardSection.ACTIVITY,
         activityTabInitialEventOptionId: "activity_log.filter.upgrade_requests_and_activity"
       }));
     },

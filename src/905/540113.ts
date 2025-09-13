@@ -2,13 +2,13 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 export function $$d0({
   asset: e,
   editorType: t = FFileType.DESIGN
 }) {
-  let i = useMemo(() => jN({
+  let i = useMemo(() => buildFileUrl({
     file: {
       key: e.file_key,
       editorType: t

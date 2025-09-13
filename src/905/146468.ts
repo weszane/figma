@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Button } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { defaultValidator } from "../figma_app/181241";
 let c = new class {
   createResourceConnectionSharingGroupForLibrary(e) {
@@ -29,7 +29,7 @@ export function $$u0({
 }) {
   let i = !!e.sharingGroupId;
   let d = useMemo(() => t ? i ? getI18nString("design_systems.libraries_modal.available_to_external_teams_in_connected_project") : getI18nString("design_systems.libraries_modal.unavailable_to_external_teams_in_connected_project") : null, [t, i]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Library Subscription Toggle",
     children: jsxs("div", {
       className: _$$s.flex.flexRow.itemsCenter.gap10.maxW250.$,

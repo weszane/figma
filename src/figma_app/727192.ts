@@ -11,7 +11,7 @@ import { n as _$$n } from "../vendor/547481";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { j } from "../905/296640";
 import { selectWithShallowEqual } from "../905/103090";
-import { Fo, Uz, sN } from "../905/63728";
+import { isCommandEvent, KeyCodes, getModifierBitmask } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { y as _$$y } from "../figma_app/404310";
 import { Me } from "../figma_app/617427";
@@ -75,9 +75,9 @@ function P({
     className: C,
     onKeyDown: e => {
       let t = !1;
-      if (Fo(e) && e.keyCode === Uz.C ? (t = !0, x({
+      if (isCommandEvent(e) && e.keyCode === KeyCodes.C ? (t = !0, x({
         action: "copy"
-      })) : Fo(e) && e.keyCode === Uz.A ? (t = !0, x({
+      })) : isCommandEvent(e) && e.keyCode === KeyCodes.A ? (t = !0, x({
         action: "select_all"
       })) : BrowserInfo.mac ? "Meta" === e.key && (t = !0) : "Control" === e.key && (t = !0), (e.target?.type === "text" || e.target?.type === "textarea" || e.target?.tabIndex === 0) && (t = !0), t) ;else {
         let e = window.getSelection();
@@ -91,7 +91,7 @@ function P({
           name: e,
           x: r.clientX,
           y: r.clientY,
-          modifiers: sN(r),
+          modifiers: getModifierBitmask(r),
           fileKey: t,
           editor_type: editorType
         });
@@ -111,7 +111,7 @@ function P({
           name: e,
           x: r.clientX,
           y: r.clientY,
-          modifiers: sN(r),
+          modifiers: getModifierBitmask(r),
           fileKey: t,
           selectedPageId,
           selectedNodeId,

@@ -7,9 +7,9 @@ import { trackEventAnalytics } from "../905/449184";
 import { N0 } from "../figma_app/416935";
 import { H as _$$H } from "../905/620380";
 import { useLatestRef } from "../figma_app/922077";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { S as _$$S } from "../figma_app/552746";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -129,7 +129,7 @@ export function $$E0({
   let {
     properties,
     name
-  } = j6();
+  } = useTracking();
   let ec = useCallback(e => {
     R({
       ...t,
@@ -312,7 +312,7 @@ export function $$E0({
           children: jsx(S, {
             token: e
           })
-        }, `token-${t}`)), jsx(_$$L, {
+        }, `token-${t}`)), jsx(LazyInputForwardRef, {
           ref: ea,
           "aria-activedescendant": ex && null !== Q ? x(eR, Q) : void 0,
           "aria-autocomplete": t.tokens.length ? "list" : void 0,

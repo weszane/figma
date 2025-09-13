@@ -11,7 +11,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
 import { RC } from "../3276/926297";
 import { nk } from "../figma_app/2023";
@@ -79,7 +79,7 @@ function E({
   windowPadding: i
 }) {
   let s = ic(e);
-  return s ? jsx(fu, {
+  return s ? jsx(TrackingProvider, {
     name: "Edit Request Tooltip",
     children: jsx(Cf, {
       className: "edit_request_tooltip--tooltipContainer--rhLGf",

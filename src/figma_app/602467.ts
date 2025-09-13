@@ -13,7 +13,7 @@ import h from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -528,7 +528,7 @@ function eo({
 function el() {
   return jsxs("div", {
     className: _$$s.textBodySmall.colorTextSecondary.fontNormal.overflowBreakWord.$,
-    children: [renderI18nText("whiteboard.ai_modal.disclaimer"), jsx(Us, {
+    children: [renderI18nText("whiteboard.ai_modal.disclaimer"), jsx(linkWithTracking, {
       trusted: !0,
       href: nG,
       className: m()(_$$s.inlineBlock.cursorDefault.$, "slides_rewrite_modal--disclaimerLink--a2jK5"),

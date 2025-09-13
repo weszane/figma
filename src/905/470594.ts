@@ -10,7 +10,7 @@ import { Button } from "../905/521428";
 import { K } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
 import { ET, qW } from "../905/623179";
-import { Ex, zE, vj } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -83,10 +83,10 @@ let N = registerModal(function (e) {
             case S.FontList:
               return renderI18nText("check_network_compatibility.feature.font_list");
           }
-        })(), jsx(Ex, {
+        })(), jsx(Badge, {
           text: a,
-          color: zE.DEFAULT,
-          size: vj.SMALL,
+          color: BadgeColor.DEFAULT,
+          size: BadgeSize.SMALL,
           subtle: !0
         })]
       }), jsx("div", {

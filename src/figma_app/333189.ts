@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { GZ } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { vd } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { u as _$$u } from "../905/684425";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -27,7 +27,7 @@ let $$y0 = registerModal(function () {
     imageClassName: g,
     headerText: getI18nString("link_expired.header"),
     secondaryText: getI18nString("link_expired.description"),
-    children: !t && jsx(vd, {
+    children: !t && jsx(ButtonBasePrimaryTracked, {
       className: f,
       type: "submit",
       onClick: () => {

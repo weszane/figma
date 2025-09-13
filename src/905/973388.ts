@@ -9,7 +9,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { c as _$$c } from "../905/32166";
 export let $$g0 = registerModal(function (e) {
   let t = useDispatch();
@@ -17,7 +17,7 @@ export let $$g0 = registerModal(function (e) {
   let g = () => {
     t(hideModal());
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Project Connection Revoke Modal",
     properties: {
       inviteId: e.resourceConnectionInvite.id

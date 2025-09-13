@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { O as _$$O } from "../905/501876";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import l from "classnames";
-import { lt } from "../905/511649";
-import { Ex, vj, zE } from "../figma_app/919079";
+import { RecordableAnchor } from "../905/511649";
+import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile } from "../figma_app/473493";
@@ -79,11 +79,11 @@ export function $$D0({
   isInTab: t,
   isActive: i
 }) {
-  return jsx(Ex, {
+  return jsx(Badge, {
     className: d()("overview_entry--countBadge---5UQw", t && "overview_entry--isInTab--J7wAV", i && _$$s.colorText.$),
     text: `${e}`,
-    size: vj.SMALL,
-    color: zE.DEFAULT,
+    size: BadgeSize.SMALL,
+    color: BadgeColor.DEFAULT,
     subtle: !0
   });
 }
@@ -121,7 +121,7 @@ export function $$M1({
   return !t || M ? null : 0 === x ? null : (g || y || b || T || v(!0), jsxs(_$$y, {
     autoHeight: !0,
     withBorder: !0,
-    children: [jsx(lt, {
+    children: [jsx(RecordableAnchor, {
       className: d()("overview_entry--entryRow--l-Ofr", g && R, i && "overview_entry--isDisabled--OAHeM"),
       onClick: function (e) {
         e.preventDefault();

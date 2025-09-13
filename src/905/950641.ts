@@ -5,7 +5,7 @@ import { isNullish } from "../figma_app/95419";
 import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";
 import { cn } from "../figma_app/141320";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { e6, Ih } from "../figma_app/617427";
@@ -16,7 +16,7 @@ import { B } from "../905/380801";
 import { D as _$$D } from "../905/251759";
 import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { _Z, B9 } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
@@ -36,7 +36,7 @@ function R() {
         children: renderI18nText("universal_upgrade.enterpise_plan_banner.banner_header")
       }), jsx("span", {
         children: renderI18nText("universal_upgrade.enterpise_plan_banner_v2.banner_body_text", {
-          and_more: jsx(Us, {
+          and_more: jsx(linkWithTracking, {
             href: qC,
             target: "_blank",
             trusted: !0,
@@ -263,7 +263,7 @@ function O({
             })
           }) : planTier === FPlanNameType.PRO && d ? jsx("div", {
             className: _$$s.font11.lh16.alignCenter.mt4.$,
-            children: jsx(Us, {
+            children: jsx(linkWithTracking, {
               onClick: () => d(t),
               "data-testid": "plan-information-upgrade-existing",
               trackingProperties: {
@@ -344,7 +344,7 @@ function M({
   var a;
   return jsx("div", {
     className: _$$s.mt16.$,
-    children: e ? jsx(fu, {
+    children: e ? jsx(TrackingProvider, {
       name: "Pricing Component",
       properties: {
         prices: (a = i === SubscriptionType.MONTHLY && r ? r : e, JSON.stringify(t.reduce((e, t) => ({

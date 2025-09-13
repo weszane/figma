@@ -5,7 +5,7 @@ import { CV, KJ } from "../figma_app/916560";
 import { Cg } from "../905/195479";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
-import { CY, ks, nR } from "../figma_app/637027";
+import { SecureLink, BigTextInputForwardRef, ButtonSecondary } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { PluginModalTypeEnum } from "../figma_app/671547";
 import { Kx } from "../figma_app/546509";
@@ -84,7 +84,7 @@ export function $$g0(e) {
     }), jsx("div", {
       className: yV,
       children: renderI18nText("whiteboard.embeds.insert_embed_modal.add_media_from_across_the_web", {
-        learnMoreLink: jsx(CY, {
+        learnMoreLink: jsx(SecureLink, {
           className: se,
           href: "https://help.figma.com/hc/articles/4414079911575",
           target: "_blank",
@@ -99,7 +99,7 @@ export function $$g0(e) {
         className: Ms,
         children: [jsxs("div", {
           className: iO,
-          children: [jsx(ks, {
+          children: [jsx(BigTextInputForwardRef, {
             value: n,
             ref: y,
             onChange: C,
@@ -128,7 +128,7 @@ export function $$g0(e) {
               })
             })
           })]
-        }), jsx(nR, {
+        }), jsx(ButtonSecondary, {
           type: "submit",
           disabled: w,
           className: Rq,

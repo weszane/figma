@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
-import { $z } from "../figma_app/831799";
+import { TrackedButton } from "../figma_app/831799";
 import { A } from "../c5e2cae0/809027";
 import { A as _$$A } from "../c5e2cae0/97605";
 let c = e => e.maxSeatsCount ? Math.min(e.maxSeatsCount, 99) : 99;
@@ -12,7 +12,7 @@ export function $$m0(e) {
       className: _$$s.flex.itemsCenter.$,
       children: [jsxs("div", {
         className: "seat_counter--seatCounter--DiuEb",
-        children: [jsx($z, {
+        children: [jsx(TrackedButton, {
           disabled: e.numSeats <= e.minSeatsCount,
           innerText: `remove additional ${e.billableProductKey} seat`,
           className: "seat_counter--minusButton--e0dEs",
@@ -27,7 +27,7 @@ export function $$m0(e) {
           onChange: e.updateAdditionalSeatsText,
           className: "seat_counter--additionalSeatsInput--pOPr1",
           onFocus: e => e.target.select()
-        }), jsx($z, {
+        }), jsx(TrackedButton, {
           disabled: e.numSeats >= c(e),
           innerText: `add additional ${e.billableProductKey} seat`,
           className: "seat_counter--plusButton--ZEWEz",

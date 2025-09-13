@@ -14,11 +14,11 @@ import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { TeamFileLimitsInfo } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT, ZERO_VALUE, DEFAULT_ZERO } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { $Y } from "../905/918620";
 import { K } from "../905/376298";
 function x(e) {
@@ -145,7 +145,7 @@ function x(e) {
   });
 }
 export function $$N0(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Locked State Team Overview Card",
     properties: {
       teamId: e.teamId
@@ -159,9 +159,9 @@ export function $$N0(e) {
 }
 export let $$C1 = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(d_, {
+  return jsx(ModalContainer, {
     size: 500,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Locked State Team Overview Modal",
       properties: {
         teamId: e.teamId

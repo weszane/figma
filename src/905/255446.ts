@@ -10,7 +10,7 @@ import { Ok, ux, NY, uW, xj } from "../figma_app/851625";
 import { getThemeBackgroundColor } from "../figma_app/191804";
 import { f as _$$f } from "../905/931050";
 import { selectWithShallowEqual } from "../905/103090";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { r as _$$r } from "../905/520829";
 import { uP, nh } from "../figma_app/933328";
 import { compareWithGeneratedKey } from "../905/709171";
@@ -351,16 +351,16 @@ function G(e, t, i, n, r, a) {
 export function $$z3(e, t) {
   return useHandleInputEvent("reviewUpdatesModal", "keydown", i => {
     switch (i?.event?.keyCode) {
-      case Uz.LEFT_ARROW:
+      case KeyCodes.LEFT_ARROW:
         i.accept();
         e?.();
         break;
-      case Uz.RIGHT_ARROW:
+      case KeyCodes.RIGHT_ARROW:
         i.accept();
         t?.();
         break;
-      case Uz.DOWN_ARROW:
-      case Uz.UP_ARROW:
+      case KeyCodes.DOWN_ARROW:
+      case KeyCodes.UP_ARROW:
         i.accept();
     }
   });

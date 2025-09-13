@@ -20,7 +20,7 @@ import { XE } from "../figma_app/976749";
 import { isBranch } from "../905/760074";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { P as _$$P } from "../905/200237";
 import { f as _$$f } from "../figma_app/252485";
 import { getFullscreenFile } from "../905/766303";
@@ -160,7 +160,7 @@ export function $$U4(e, t, i, n) {
     fileKey: t.key
   }));
   let r = i || n;
-  let a = i ? _$$O.ORG : _$$O.TEAM;
+  let a = i ? OrganizationType.ORG : OrganizationType.TEAM;
   e(r ? c5({
     planId: r,
     planType: a

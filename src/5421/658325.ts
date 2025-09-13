@@ -20,7 +20,7 @@ import { _j } from "../figma_app/843119";
 import { normalizeValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { R1, u3 } from "../figma_app/152690";
 import { RK } from "../figma_app/815170";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { fullscreenValue } from "../figma_app/455680";
 import { kl, lJ } from "../905/275640";
 import { KH, eY } from "../figma_app/722362";
@@ -537,7 +537,7 @@ function G({
       setPropertiesForAnchorLink: m
     })]
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Link panel",
     children: jsx(Zk, {
       children: v ? jsx("div", {

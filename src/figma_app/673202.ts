@@ -6,11 +6,11 @@ import { GZ } from "../905/508367";
 import { wY, cU } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
-import { Yo } from "../figma_app/637027";
+import { interactiveAnchorTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText, getLocalizedPath } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
 import { P4, L3, Dr, S6 } from "../905/18800";
 import { V } from "../905/182752";
@@ -21,7 +21,7 @@ function I(e) {
   let [t, r] = useState(e.showBanner);
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let l = useRef(null);
   let c = Xr(P4);
   let u = wY(l) ?? cU;
@@ -67,7 +67,7 @@ function I(e) {
     "data-testid": "cookie-banner",
     children: [jsxs("div", {
       className: rf,
-      children: [renderI18nText("cookies.explicit_consent_body"), " ", jsx(Yo, {
+      children: [renderI18nText("cookies.explicit_consent_body"), " ", jsx(interactiveAnchorTracked, {
         href: $$A0(),
         target: "_blank",
         rel: "noreferrer",
@@ -96,7 +96,7 @@ function I(e) {
         })
       })
     })]
-  }) : e.persistentMessage && jsx(fu, {
+  }) : e.persistentMessage && jsx(TrackingProvider, {
     name: "Cookie Banner Persistent Message",
     children: e.persistentMessage
   }) || null;
@@ -109,7 +109,7 @@ export function $$S1(e) {
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
-  }, [r]), r || BrowserInfo.isIpadNative) ? null : jsx(fu, {
+  }, [r]), r || BrowserInfo.isIpadNative) ? null : jsx(TrackingProvider, {
     name: "Cookie Banner",
     properties: {
       consentRegion: "explicit"

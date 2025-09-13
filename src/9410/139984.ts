@@ -35,13 +35,13 @@ import { e as _$$e } from "../figma_app/278289";
 import { cy } from "../figma_app/387100";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { c as _$$c } from "../905/370443";
-import { $z } from "../figma_app/831799";
+import { TrackedButton } from "../figma_app/831799";
 import { b as _$$b3 } from "../figma_app/5657";
 import { p as _$$p } from "../9410/889115";
 import { Z as _$$Z } from "../9410/452531";
 import X from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { getBasicViewportRect, getViewportInfo, scaleRect } from "../figma_app/62612";
 import { KindEnum } from "../905/129884";
 import { e as _$$e2 } from "../905/107855";
@@ -168,7 +168,7 @@ function z(e) {
   return jsx(_$$b3, {
     disableHighlight: !0,
     dismissModal: e.onClose,
-    lowerLeftText: jsx($z, {
+    lowerLeftText: jsx(TrackedButton, {
       onClick: e.onBackCtaClick,
       className: _$$s2.textInherit.bgTransparent.$,
       trackingProperties: {
@@ -407,15 +407,15 @@ let en = memo(({
       children: jsxs("div", {
         className: KB,
         style: i,
-        children: [jsx(Kz, {
+        children: [jsx(Spacing, {
           multiple: 1,
           direction: "x"
         }), jsx("div", {
           children: e.name
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1,
           direction: "x"
-        }), jsx($z, {
+        }), jsx(TrackedButton, {
           className: gd,
           onClick: () => {
             t.stopCurrentTutorial({

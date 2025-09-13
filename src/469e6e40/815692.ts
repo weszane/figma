@@ -142,7 +142,7 @@ import { handleErrorWithToast } from '../figma_app/345997';
 import { getParentOrgIdIfOrgLevel, useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { Jt } from '../figma_app/481749';
-import { $q, Sm, w_ } from '../figma_app/482728';
+import { TeamCreationControls, UpgradeRequestSetting, PublicLinkControlsSetting } from '../figma_app/482728';
 import { _ as _$$_2, S as _$$S5 } from '../figma_app/490799';
 import { range } from '../figma_app/492908';
 import { $w, hi, Hq, KA, Kc, NL, OT, q4, Sl, Tf, vs, xP, Xw, Y4, ye, yo } from '../figma_app/494261';
@@ -156,9 +156,9 @@ import { I7 } from '../figma_app/594947';
 import { ol } from '../figma_app/598018';
 import { $z } from '../figma_app/617427';
 import { Eh } from '../figma_app/617654';
-import { $$, N_ as _$$N_, nR as _$$nR, cw, CY, ks, qZ, vd } from '../figma_app/637027';
+import { ButtonBasePrimary, BaseLinkComponent, ButtonSecondary, ButtonWhite, SecureLink, BigTextInputForwardRef, ButtonNegative, ButtonBasePrimaryTracked } from '../figma_app/637027';
 import { pL, v0 } from '../figma_app/639088';
-import { J7 } from '../figma_app/650409';
+import { DashboardSection } from '../figma_app/650409';
 import { QN, v4 } from '../figma_app/655139';
 import { sortByPropertyWithOptions } from '../figma_app/656233';
 import { Ct, CT, Gv, OE } from '../figma_app/736948';
@@ -171,14 +171,14 @@ import { O as _$$O } from '../figma_app/809387';
 // var r = require('../figma_app/822011');
 import { r as _$$r, hM, N_, qr, Rc, vS } from '../figma_app/827447';
 import { createEmptyAddress } from '../figma_app/831101';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { mf } from '../figma_app/844435';
 import { LoadingSpinner, LoadingOverlay } from '../figma_app/858013';
 import { Nz, Yp } from '../figma_app/870683';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { trackOrgEventWithStore } from '../figma_app/901889';
-import { ey as _$$ey, yX } from '../figma_app/918700';
-import { Ex, zE } from '../figma_app/919079';
+import { ModalView, ConfirmationModal2 } from '../figma_app/918700';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { V3 as _$$V4 } from '../figma_app/926061';
 import { s as _$$s5 } from '../figma_app/961559';
 import { V3 } from '../figma_app/976345';
@@ -567,7 +567,7 @@ let eC = registerModal(e => {
         })]
       }), jsx('div', {
         className: 'billing_emails_modal--buttons--ibKgB',
-        children: jsx(vd, {
+        children: jsx(ButtonBasePrimaryTracked, {
           onClick: s,
           children: renderI18nText('billing_emails_modal.billing_emails_info.close')
         })
@@ -1407,7 +1407,7 @@ let tF = registerModal(() => {
           value: e,
           children: du(e)
         }, e))
-      }), jsx(cw, {
+      }), jsx(ButtonWhite, {
         onClick: a,
         className: Yy,
         children: renderI18nText('settings_tab.scim_metadata_modal.done')
@@ -1723,11 +1723,11 @@ let tQ = registerModal(e => {
         })
       }), jsxs('div', {
         className: tW,
-        children: [jsx(_$$nR, {
+        children: [jsx(ButtonSecondary, {
           className: tH,
           onClick: a,
           children: renderI18nText('general.back')
-        }), jsx(qZ, {
+        }), jsx(ButtonNegative, {
           className: tH,
           onClick: () => {
             t(popModalStack());
@@ -1846,13 +1846,13 @@ let t0 = registerModal(e => {
         })]
       }), jsxs('div', {
         className: tW,
-        children: [jsx(_$$nR, {
+        children: [jsx(ButtonSecondary, {
           className: tH,
           onClick: () => {
             t(popModalStack());
           },
           children: renderI18nText('general.back')
-        }), jsx(qZ, {
+        }), jsx(ButtonNegative, {
           className: tH,
           onClick: () => {
             t(showModalHandler({
@@ -1882,7 +1882,7 @@ function aj({
   let o = getParentOrgIdIfOrgLevel(l);
   let d = l?.name;
   let c = useDispatch();
-  let _ = jsx(CY, {
+  let _ = jsx(SecureLink, {
     onClick: () => {
       if (desktopAPIInstance) {
         c(sf({
@@ -1901,7 +1901,7 @@ function aj({
     trusted: !0,
     children: d
   });
-  let u = jsx(CY, {
+  let u = jsx(SecureLink, {
     onClick: () => {
       c(V3({
         url: '/community/plugins/devmode'
@@ -1920,7 +1920,7 @@ function aj({
         })
       }), jsxs('div', {
         className: _$$s.flex.$,
-        children: [jsx(ks, {
+        children: [jsx(BigTextInputForwardRef, {
           className: _$$s.flexGrow1.mr8.$,
           onChange: t,
           value: a,
@@ -2162,7 +2162,7 @@ function aU({
     }) : jsxs(Fragment, {
       children: [g && jsxs('div', {
         className: _$$s.flex.py12.$,
-        children: [jsx(ks, {
+        children: [jsx(BigTextInputForwardRef, {
           className: _$$s.flexGrow1.mr8.$,
           onChange: x,
           value: _,
@@ -2454,7 +2454,7 @@ function aW() {
             plugin: c
           }), jsx('div', {
             className: _$$s.py8.$,
-            children: jsx(CY, {
+            children: jsx(SecureLink, {
               trusted: !0,
               onClick: () => u(null),
               children: renderI18nText('settings_tab.auto_run_remove_plugin')
@@ -2588,7 +2588,7 @@ let aH = registerModal(() => {
           children: renderI18nText('settings_tab.customize_dev_mode')
         }), jsx(TextWithTruncation, {
           children: renderI18nText('settings_tab.upgrade_to_enterprise_plan_text')
-        }), jsx(CY, {
+        }), jsx(SecureLink, {
           onClick: () => {
             t(showModalHandler({
               type: DV,
@@ -2623,12 +2623,12 @@ let aH = registerModal(() => {
 }, 'DevModeModal');
 let aK = registerModal(e => {
   let [t, a, s] = e.platform === 'win' ? [getI18nString('org_admin_settings.enterprise_installer_label'), 'https://help.figma.com/hc/articles/14172933259287', `https://desktop.figma.com/win/Figma-${e.version}.msi`] : [getI18nString('org_admin_settings.enterprise_installer_label_mac'), 'https://help.figma.com/hc/articles/17686512113175', `https://desktop.figma.com/mac-universal/Figma-${e.version}.pkg`];
-  return jsxs(yX, {
+  return jsxs(ConfirmationModal2, {
     confirmationTitle: t,
     confirmText: getI18nString('org_admin_settings.enterprise_installer_confirmation'),
     onConfirm: () => window.location.href = s,
     tintedModalBackground: !0,
-    children: [renderI18nText(e.platform === 'win' ? 'org_admin_settings.enterprise_installer_modal_copy' : 'org_admin_settings.enterprise_installer_modal_copy_mac'), jsx(_$$N_, {
+    children: [renderI18nText(e.platform === 'win' ? 'org_admin_settings.enterprise_installer_modal_copy' : 'org_admin_settings.enterprise_installer_modal_copy_mac'), jsx(BaseLinkComponent, {
       href: a,
       target: '_blank',
       trusted: !0,
@@ -2752,7 +2752,7 @@ let a3 = registerModal(e => {
           }
         }), jsx(TextWithTruncation, {
           children: renderI18nText('org_settings.export_controls.org_description', {
-            learnMoreLink: jsx(CY, {
+            learnMoreLink: jsx(SecureLink, {
               'href': 'https://help.figma.com/hc/articles/31825370509591#restrict-file-exports',
               'target': '_blank',
               'trusted': !0,
@@ -2961,7 +2961,7 @@ let nr = registerModal(() => {
   let a = () => e(popModalStack());
   let [r, l] = useState(t.shared_container_setting?.external_collaboration_controls);
   let o = !!t.shared_container_setting?.external_collaboration_controls;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'External Content Controls Setting Modal',
     properties: {
       orgId: t.id
@@ -2981,7 +2981,7 @@ let nr = registerModal(() => {
             svg: _$$A8
           }), jsx('p', {
             children: renderI18nText('org_settings.external_collaboration_controls.banner', {
-              let_org_know: jsx(CY, {
+              let_org_know: jsx(SecureLink, {
                 href: 'https://help.figma.com/hc/articles/12080587805719',
                 className: _$$s.font11.$,
                 trusted: !0,
@@ -3038,11 +3038,11 @@ let nr = registerModal(() => {
           })]
         }), jsxs('div', {
           className: v0,
-          children: [jsx(_$$nR, {
+          children: [jsx(ButtonSecondary, {
             onClick: a,
             className: `${pL} ${nn}`,
             children: renderI18nText('org_settings.external_collaboration_controls.cancel')
-          }), jsx(qZ, {
+          }), jsx(ButtonNegative, {
             onClick: () => {
               if (r === o || void 0 === r) {
                 a();
@@ -3137,7 +3137,7 @@ function n_(e) {
 }
 let nu = registerModal(e => {
   let t = useDispatch();
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString('org_settings.guest_control.confirm_title'),
     confirmText: getI18nString('org_settings.guest_control.confirm_button'),
     onConfirm: () => {
@@ -3244,10 +3244,10 @@ let nm = registerModal(() => {
       })]
     }), jsxs('div', {
       className: 'guest_invite_settings_modal--footer--44yVi',
-      children: [jsx(_$$nR, {
+      children: [jsx(ButtonSecondary, {
         onClick: p,
         children: renderI18nText('general.cancel')
-      }), jsx($$, {
+      }), jsx(ButtonBasePrimary, {
         onClick: () => {
           let a = g !== t.invite_whitelist_guest_invite_setting;
           let n = o !== t.mfa_required;
@@ -3502,7 +3502,7 @@ let nC = registerModal(e => {
           children: jsxs(Fragment, {
             children: [renderI18nText('settings_tab.idle_session_timeout_settings_modal.default_choice_timeframe'), jsx('div', {
               className: _$$s.inline.$,
-              children: jsx(_$$N_, {
+              children: jsx(BaseLinkComponent, {
                 trusted: !0,
                 target: '_blank',
                 href: 'https://help.figma.com/hc/articles/14376092335127',
@@ -3570,10 +3570,10 @@ let nC = registerModal(e => {
         direction: 'horizontal',
         horizontalAlignItems: 'end',
         spacing: 8,
-        children: [jsx(cw, {
+        children: [jsx(ButtonWhite, {
           onClick: f,
           children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.cancel')
-        }), jsx($$, {
+        }), jsx(ButtonBasePrimary, {
           disabled: u || !x,
           onClick: y,
           children: renderI18nText('settings_tab.idle_session_timeout_settings_modal.save')
@@ -3968,7 +3968,7 @@ let nU = registerModal(() => {
                   successMessage: s
                 }));
               };
-              t === w_.BANNED ? e(showModalHandler({
+              t === PublicLinkControlsSetting.BANNED ? e(showModalHandler({
                 type: nF,
                 data: {
                   onConfirm: i,
@@ -4103,9 +4103,9 @@ function n3(e) {
       g(!1);
     });
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'ChangePaymentModal',
-    children: jsxs(_$$ey, {
+    children: jsxs(ModalView, {
       hide: f,
       size: 464,
       className: ut,
@@ -4185,7 +4185,7 @@ function n3(e) {
           className: _$$v3,
           children: [jsx('div', {
             className: _f
-          }), jsx(vd, {
+          }), jsx(ButtonBasePrimaryTracked, {
             tabIndex: 0,
             type: 'submit',
             disabled: p,
@@ -4271,7 +4271,7 @@ let n9 = registerModal(e => {
     _(d);
   }, [d]);
   let u = useModalManager(e);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Sites Publishing Toggle Modal',
     properties: {
       orgId: a.id,
@@ -4355,7 +4355,7 @@ let se = registerModal(e => {
     _(d);
   }, [d]);
   let u = useModalManager(e);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Supabase Toggle Modal',
     properties: {
       orgId: a.id,
@@ -4375,7 +4375,7 @@ let se = registerModal(e => {
             variant: 'danger',
             children: jsx(_$$Q, {
               children: renderI18nText('org_settings.supabase_toggle.banner_link', {
-                learnMoreLink: jsx(CY, {
+                learnMoreLink: jsx(SecureLink, {
                   target: '_blank',
                   href: 'https://help.figma.com/hc/articles/32640822050199',
                   trusted: !0,
@@ -4441,7 +4441,7 @@ let ss = registerModal(() => {
   let a = c4(t.id).data;
   let r = () => e(hideModal());
   let [l, o] = useState(t.shared_container_setting?.team_creation_controls ? t.shared_container_setting.team_creation_controls : null);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Team Creation Control Setting Modal',
     properties: {
       orgId: t.id
@@ -4469,14 +4469,14 @@ let ss = registerModal(() => {
       confirmText: getI18nString('org_settings.team_creation.save_button'),
       children: jsx('div', {
         children: jsxs(_$$z, {
-          value: l ?? $q.TEAM_CREATION_CONTROLS_ANYONE,
+          value: l ?? TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE,
           onChange: e => {
             let t = null;
             e !== 'none' && (t = e);
             o(t);
           },
           children: [jsx(_$$Z, {
-            value: $q.TEAM_CREATION_CONTROLS_ANYONE,
+            value: TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE,
             labelClassName: sn,
             className: 'team_creation_controls_modal--option--gaACu',
             children: jsxs('div', {
@@ -4488,8 +4488,8 @@ let ss = registerModal(() => {
                 children: getI18nString('org_settings.team_creation.any.description')
               })]
             })
-          }, $q.TEAM_CREATION_CONTROLS_ANYONE), jsx(_$$Z, {
-            value: $q.TEAM_CREATION_CONTROLS_ADMIN_ONLY,
+          }, TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE), jsx(_$$Z, {
+            value: TeamCreationControls.TEAM_CREATION_CONTROLS_ADMIN_ONLY,
             labelClassName: sn,
             children: jsxs('div', {
               className: st,
@@ -4500,7 +4500,7 @@ let ss = registerModal(() => {
                 children: a ? getI18nString('org_settings.team_creation.admin_only.description.workspaces') : getI18nString('org_settings.team_creation.admin_only.description.no_workspaces')
               })]
             })
-          }, $q.TEAM_CREATION_CONTROLS_ADMIN_ONLY)]
+          }, TeamCreationControls.TEAM_CREATION_CONTROLS_ADMIN_ONLY)]
         })
       })
     })
@@ -5057,7 +5057,7 @@ export function $$sr0(e) {
   let td = null;
   if (Q) {
     let e = org.shared_container_setting?.configured_upgrade_request_setting;
-    if (e === Sm.ALL_USERS) {
+    if (e === UpgradeRequestSetting.ALL_USERS) {
       td = jsx(x8, {
         label: getI18nString('plan_settings.auto_approval_settings'),
         description: getI18nString('plan_settings.auto_approval_settings_curf_all_users_description'),
@@ -5066,7 +5066,7 @@ export function $$sr0(e) {
         })
       }, 'auto-approval-settings');
     } else {
-      let t = e === Sm.MEMBERS;
+      let t = e === UpgradeRequestSetting.MEMBERS;
       td = jsx(x8, {
         label: getI18nString('plan_settings.auto_approval_settings'),
         description: getI18nString('plan_settings.auto_approval_settings_description'),
@@ -5099,7 +5099,7 @@ export function $$sr0(e) {
   org.shared_container_setting?.configured_upgrade_request_setting && ts.settings.push(jsx(Ke, {
     user: B,
     label: getI18nString('settings_tab.configured_upgrade_request_flow.label'),
-    description: org.shared_container_setting?.configured_upgrade_request_setting === Sm.MEMBERS ? getI18nString('settings_tab.configured_upgrade_request_flow.description_members') : getI18nString('settings_tab.configured_upgrade_request_flow.description_all_users')
+    description: org.shared_container_setting?.configured_upgrade_request_setting === UpgradeRequestSetting.MEMBERS ? getI18nString('settings_tab.configured_upgrade_request_flow.description_members') : getI18nString('settings_tab.configured_upgrade_request_flow.description_all_users')
   }));
   ts.settings.push(jsx(x8, {
     label: getI18nString('plan_settings.seat_upgrade_digests'),
@@ -5232,8 +5232,8 @@ export function $$sr0(e) {
   let t_ = {
     title: getI18nString('admin_settings.ai.section_title'),
     badge: ev ? void 0 : jsxs(Fragment, {
-      children: [jsx(Ex, {
-        color: zE.BRAND,
+      children: [jsx(Badge, {
+        color: BadgeColor.BRAND,
         text: getI18nString('general.beta')
       }), jsx(_$$B, {
         'data-tooltip-type': KindEnum.TEXT,
@@ -5280,7 +5280,7 @@ export function $$sr0(e) {
     label: getI18nString('admin_settings.ai.features_toggle.label'),
     description: jsx('p', {
       children: renderI18nText('admin_settings.ai.features_toggle.description.org', {
-        learnMoreLink: jsx(CY, {
+        learnMoreLink: jsx(SecureLink, {
           'aria-label': getI18nString('settings_tab.learn_more_about_ai_features'),
           'href': _$$d2.aiFeatures,
           'target': '_blank',
@@ -5319,7 +5319,7 @@ export function $$sr0(e) {
     label: getI18nString('admin_settings.ai.data_sharing.label'),
     description: jsx('p', {
       children: renderI18nText('admin_settings.ai.data_sharing.description.org', {
-        learnMoreLink: jsx(CY, {
+        learnMoreLink: jsx(SecureLink, {
           'aria-label': getI18nString('settings_tab.learn_more_about_content_training'),
           'href': _$$d2.aiDataSharing,
           'target': '_blank',
@@ -5336,8 +5336,8 @@ export function $$sr0(e) {
   }, getI18nString('admin_settings.ai.data_sharing.label'))));
   let tm = {
     title: getI18nString('settings_tab.section_header.slides'),
-    badge: jsx(Ex, {
-      color: zE.BRAND,
+    badge: jsx(Badge, {
+      color: BadgeColor.BRAND,
       text: getI18nString('general.beta')
     }),
     settings: []
@@ -5501,7 +5501,7 @@ export function $$sr0(e) {
   } : ts, tc, t_, isGovCluster() || Q ? null : tm, eE.settings.length ? eE : null, tp);
   return jsxs('div', {
     children: [jsx(_$$K, {
-      title: _$$O(J7.SETTINGS)
+      title: _$$O(DashboardSection.SETTINGS)
     }), jsxs('div', {
       className: xd,
       children: [th.filter(e => !!e).filter(e => !!e?.settings.length).map(e => jsx(Kz, {

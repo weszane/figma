@@ -6,7 +6,7 @@ import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { vj } from "../figma_app/919079";
+import { BadgeSize } from "../figma_app/919079";
 import { gS, c$ } from "../figma_app/236327";
 import { h1 } from "../905/986103";
 import { p as _$$p } from "../905/991924";
@@ -22,7 +22,7 @@ import { oB, j7, sf } from "../905/929976";
 import { S as _$$S } from "../figma_app/78808";
 import { kj } from "../905/191601";
 import { showModalHandler, hideModal } from "../905/156213";
-import { d as _$$d2 } from "../905/91820";
+import { ShareContext } from "../905/91820";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
@@ -188,7 +188,7 @@ export function $$V0(e) {
       t(_$$S({
         fileKey: e.branch.key,
         url: generateUrlAlt(e.branch, e.repo, "file").href,
-        source: _$$d2.FULLSCREEN_BRANCH
+        source: ShareContext.FULLSCREEN_BRANCH
       }));
     },
     children: renderI18nText("collaboration.branching.copy_link")
@@ -261,7 +261,7 @@ export function $$V0(e) {
           className: "branch_row--branchStatus--FFzmU",
           children: jsx(a$, {
             branchFileKey: e.branch.key,
-            size: vj.SMALL
+            size: BadgeSize.SMALL
           })
         })]
       }), e.isLoadingActivity ? jsx("div", {

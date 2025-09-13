@@ -11,9 +11,9 @@ import { ResourceStatus } from "../905/957591";
 import { R as _$$R } from "../905/165069";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
-import { zE } from "../figma_app/919079";
+import { BadgeColor } from "../figma_app/919079";
 import { gw, MM, wv } from "../figma_app/236327";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { h1 } from "../905/986103";
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
@@ -46,7 +46,7 @@ import { $z, Me } from "../figma_app/617427";
 import { getRumLoggingConfig } from "../905/16237";
 import { hideModal, showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { e0 } from "../905/696396";
 import { m as _$$m } from "../4452/114445";
@@ -65,7 +65,7 @@ import { getUserId } from "../905/372672";
 import { MX, EQ } from "../figma_app/684446";
 import { FUserRoleType } from "../figma_app/191312";
 import { AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
-import { Sm } from "../figma_app/482728";
+import { UpgradeRequestSetting } from "../figma_app/482728";
 import { KindEnum } from "../905/129884";
 import { w as _$$w } from "../905/281010";
 import { az } from "../figma_app/805373";
@@ -99,7 +99,7 @@ let ee = registerModal(function (e) {
     numRequests: e.requestsToApprove.length
   }) : renderI18nText("admin_dashboard.seat_requests.bulk_approve_modal.body");
   let c = getRumLoggingConfig();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.BULK_APPROVE_CONFIRMATION_MODAL,
     properties: {
       planType: e.plan.key.type,
@@ -742,7 +742,7 @@ export function $$e$0({
         imgUrl: e.imgUrl
       },
       badge: e.orgPermission === FUserRoleType.GUEST ? {
-        color: zE.DEFAULT,
+        color: BadgeColor.DEFAULT,
         text: getI18nString("admin_dashboard.requests.badge.guest")
       } : void 0,
       size: 24,
@@ -991,7 +991,7 @@ export function $$e$0({
       })]
     })]
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e0.UPGRADE_REQUESTS_TABLE,
     properties: {
       adminRequestsDashboard: !0,
@@ -1076,7 +1076,7 @@ export function $$e$0({
             style: sx.add({
               maxWidth: "500px"
             }).lh16.cursorDefault.alignCenter.colorTextSecondary.$,
-            children: tC ? tC === Sm.MEMBERS ? renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.members") : renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.all_users") : renderI18nText("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
+            children: tC ? tC === UpgradeRequestSetting.MEMBERS ? renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.members") : renderI18nText("admin_dashboard.configured_upgrade_request_empty_state.all_users") : renderI18nText("admin_dashboard.requests.when_a_seat_request_needs_to_be_reviewed")
           })]
         }) : eC.length > 0 && null === eq && to === ti && null === tc ? jsx("div", {
           className: _$$s2.lh16.cursorDefault.colorText.$,
@@ -1084,7 +1084,7 @@ export function $$e$0({
         }) : jsx("div", {
           className: _$$s2.lh16.cursorDefault.colorText.$,
           children: renderI18nText("admin_dashboard.requests.empty.no_filter_results", {
-            resetFiltersLink: jsx(CY, {
+            resetFiltersLink: jsx(SecureLink, {
               trusted: !0,
               onClick: () => {
                 eO(null);

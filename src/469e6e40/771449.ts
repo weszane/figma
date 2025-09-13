@@ -18,7 +18,7 @@ import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
 import { GroupType } from "../905/441038";
-import { J0, oU } from "../figma_app/967319";
+import { DefaultFilters, DefaultSortConfig } from "../figma_app/967319";
 import { o0 } from "../905/844131";
 import { nF, lF } from "../469e6e40/68843";
 if (443 == require.j) {}
@@ -76,11 +76,11 @@ export function $$C0(e) {
   let W = null;
   if (selectedTab === GroupType.MEMBERS) {
     let e = {
-      ...J0,
+      ...DefaultFilters,
       ...I.orgAdminMembersTabFilters,
       licenseGroupFilter: licenseGroupId
     };
-    let t = I.orgAdminMembersTabSort || oU;
+    let t = I.orgAdminMembersTabSort || DefaultSortConfig;
     W = jsx(KX, {
       currency: R?.data?.currency || void 0,
       customEmptyState: jsxs(AutoLayout, {

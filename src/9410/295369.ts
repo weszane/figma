@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { lQ } from "../905/934246";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { isViewportPanning } from "../figma_app/62612";
 import { N } from "../figma_app/268271";
@@ -76,7 +76,7 @@ export function $$v0() {
   return jsx(M, {
     isShowing,
     testId: "FigJamAISummarizationEntrpointPointerOverlay",
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: e0.AI_INLINE_MENU_ORGANIZE_SUMMARY_TOOLTIP,
       children: jsx(C, {
         onClose: () => {

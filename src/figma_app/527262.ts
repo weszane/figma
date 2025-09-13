@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { selectWithShallowEqual } from "../905/103090";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -17,7 +17,7 @@ import { q } from "../figma_app/712384";
 import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX, Bq, Vm } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { vp } from "../905/967587";
 import { FPlanNameType } from "../figma_app/191312";
 import { LN } from "../figma_app/514043";
@@ -74,7 +74,7 @@ export function $$D0({
   let Y = _$$U(M ?? V);
   let $ = getRumLoggingConfig();
   let X = K === FPlanNameType.PRO ? "807px" : "945px";
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: QO,
     properties: {
       upsellSource: e,
@@ -161,7 +161,7 @@ function k() {
           className: _$$s.textHeadingMedium.fontMedium.$,
           children: renderI18nText("plan_comparison.campfire.description.seat")
         }),
-        learnMoreLink: jsx(Us, {
+        learnMoreLink: jsx(linkWithTracking, {
           className: _$$s.textHeadingMedium.fontNormal.$,
           href: PRICING_URL,
           target: "_blank",

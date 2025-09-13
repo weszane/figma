@@ -5,7 +5,7 @@ import { bL, l9, mc, c$, wv, YJ, WL } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { _C } from "../figma_app/709893";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { FX } from "../figma_app/12491";
@@ -65,7 +65,7 @@ export function $$x0({
   });
   let U = {
     shortcuts: [{
-      key: Uz.ENTER
+      key: KeyCodes.ENTER
     }]
   };
   _$$k({

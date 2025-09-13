@@ -10,13 +10,13 @@ import { uM } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
 import { ZG } from "../figma_app/840917";
 import { FFileType } from "../figma_app/191312";
-import { ge } from "../figma_app/349248";
+import { mapFileSummary } from "../figma_app/349248";
 import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
 import { xS } from "../figma_app/193867";
 import { w2 } from "../905/187165";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
-import { uH, Rx } from "../figma_app/162807";
+import { PublicModelType, SpaceAccessType } from "../figma_app/162807";
 import { vj } from "../905/574958";
 import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { createOptimistThunk } from "../905/350402";
@@ -42,7 +42,7 @@ let $$N6 = createOptimistThunk(e => {
   e.dispatch(Rz({
     query: t.desktopNewTab.searchQuery,
     searchScope: r,
-    searchModelType: uH.FILES
+    searchModelType: PublicModelType.FILES
   }));
   e.dispatch(r0({
     entryPoint: "desktop_new_tab"
@@ -92,7 +92,7 @@ let $$L2 = createOptimistThunk(async (e, t, {
   });
   e.dispatch(sf({
     view: "prototype",
-    file: ge(n),
+    file: mapFileSummary(n),
     nodeId: t.pageId,
     pageId: t.pageId
   }));
@@ -132,7 +132,7 @@ let $$D10 = createOptimistThunk((e, t) => {
 });
 export function $$k5(e) {
   let t = getPermissionsStateMemoized(e);
-  return t.currentUserOrgId ? canMemberOrg(t.currentUserOrgId, t) ? Rx.ORG : Rx.ORG_GUEST : Rx.PERSONAL;
+  return t.currentUserOrgId ? canMemberOrg(t.currentUserOrgId, t) ? SpaceAccessType.ORG : SpaceAccessType.ORG_GUEST : SpaceAccessType.PERSONAL;
 }
 export function $$M9(e, t) {
   return null == t ? "#00000000" : "whiteboard" === t ? "#ffffff" : `#${w2(e)}`;

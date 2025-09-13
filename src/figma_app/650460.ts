@@ -4,7 +4,7 @@ import { c$ } from "../905/575478";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { colorToRgbaString } from "../figma_app/191804";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
@@ -73,7 +73,7 @@ export let $$L0 = forwardRef(({
     } : {}),
     children: jsxs("div", {
       className: b,
-      children: [jsx(D8, {
+      children: [jsx(RecordableDiv, {
         className: l()(S, {
           [v]: "light" === r,
           [A]: "dark" === r
@@ -146,7 +146,7 @@ export function $$D2({
   size: o = "medium",
   shouldRenderCirclesWithContentBoxSizing: d = !1
 }) {
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     ...(i ? {} : {
       "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("whiteboard.colors.custom"),
@@ -164,7 +164,7 @@ export function $$D2({
     recordingKey: generateRecordingKey(r, "colorSelectorCustomOption"),
     children: jsx("div", {
       className: b,
-      children: jsx(D8, {
+      children: jsx(RecordableDiv, {
         className: l()("swatch--customSwatch---Nq7y swatch--swatch--qSnpF", A),
         style: t,
         "data-clickable": !0
@@ -226,7 +226,7 @@ let $$M4 = forwardRef(({
   }),
   children: jsx("div", {
     className: b,
-    children: jsx(D8, {
+    children: jsx(RecordableDiv, {
       className: l()(S, A),
       style: {
         backgroundImage: `url(${e})`,

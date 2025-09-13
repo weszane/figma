@@ -40,7 +40,7 @@ import { sD } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { DI } from "../figma_app/557318";
 import { pt } from "../figma_app/198840";
-import { to as _$$to } from "../905/612685";
+import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { aB } from "../905/576221";
@@ -117,7 +117,7 @@ let $$eb16 = createOptimistThunk((e, t, {
       id: t.hubFileId,
       type: vt.CommunityResource
     }));
-    let a = _$$to(i);
+    let a = getDesignFileUrlWithOptions(i);
     a = dR(a, {
       [pt.KEY]: pt.VALUE,
       fuid: t.workspace.userId
@@ -194,7 +194,7 @@ let $$eT18 = createOptimistThunk((e, t) => {
       isDrawMode: !0,
       allowDefaulting: !1
     });
-    let s = _$$to(i, a);
+    let s = getDesignFileUrlWithOptions(i, a);
     customHistory.redirect(s, t.openInNewTab && !isMobileUA ? "_blank" : void 0);
   }).catch(n => {
     let i = {
@@ -606,7 +606,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
   }) => {
     e.dispatch(createOptimistCommitAction(n));
     let a = i.meta;
-    let s = _$$to(a);
+    let s = getDesignFileUrlWithOptions(a);
     s = dR(s, {
       [pt.KEY]: pt.VALUE
     });

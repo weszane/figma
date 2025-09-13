@@ -33,7 +33,7 @@ import { an as _$$an2, PW as _$$PW, y$ as _$$y$, TK } from '../905/81009';
 import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as _$$rj, Fd, Fj, GR, JK, JR, Ud } from '../905/81459';
 import { ck as _$$ck4 } from '../905/87821';
 import { vx } from '../905/91038';
-import { b as _$$b2, d as _$$d4 } from '../905/91820';
+import { combineWithHyphen, ShareContext } from '../905/91820';
 import { k as _$$k5 } from '../905/93362';
 import { c5 as _$$c4, uo as _$$uo8 } from '../905/93909';
 import { i as _$$i5 } from '../905/97346';
@@ -164,7 +164,7 @@ import { au as _$$au2, hK as _$$hK, Y9 as _$$Y2, yu } from '../905/504768';
 import { $R, dR as _$$dR, mc as _$$mc, Lb, NQ, wy } from '../905/508367';
 import { TranslationErrors } from '../905/508408';
 import { vv } from '../905/508457';
-import { T9 } from '../905/511649';
+import { RecordingProvider } from '../905/511649';
 import { resolveTeamId } from '../905/515860';
 import { OJ } from '../905/519092';
 import { r as _$$r9 } from '../905/520829';
@@ -221,7 +221,7 @@ import { oW as _$$oW } from '../905/675859';
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
 import { tD as _$$tD, FO, Hj } from '../905/682977';
 import { cZ as _$$cZ, oM as _$$oM, pF as _$$pF, tU as _$$tU } from '../905/683495';
-import { EO } from '../905/691205';
+import { replaceColonWithDash } from '../905/691205';
 import { Hc } from '../905/694658';
 import { e0 as _$$e3 } from '../905/696396';
 import { N as _$$N } from '../905/696711';
@@ -278,7 +278,7 @@ import { F0 } from '../905/820492';
 import { F2 } from '../905/826900';
 import { F as _$$F3 } from '../905/827944';
 import { u as _$$u3 } from '../905/831362';
-import { O as _$$O } from '../905/833838';
+import { OrganizationType } from '../905/833838';
 import { $ as _$$$ } from '../905/834575';
 import { oO as _$$oO, EE, Pq, Rg, XV, Yw } from '../905/837497';
 import { generateOptimistId } from '../905/842794';
@@ -372,7 +372,7 @@ import { dK as _$$dK2, xt } from '../figma_app/149304';
 import { iO as _$$iO } from '../figma_app/149367';
 import { hV as _$$hV2, Dc } from '../figma_app/151766';
 import { p as _$$p5 } from '../figma_app/160942';
-import { Rx as _$$Rx, uH as _$$uH, fS, Rr } from '../figma_app/162807';
+import { SpaceAccessType, PublicModelType, ModelTypeConfigs, SearchTypeMode } from '../figma_app/162807';
 import { v2 } from '../figma_app/164260';
 import { xZ } from '../figma_app/165422';
 import { qV } from '../figma_app/165623';
@@ -410,7 +410,7 @@ import { E as _$$E6, hZ as _$$hZ4, Lx, MT } from '../figma_app/330108';
 import { M2 as _$$M3, Sp as _$$Sp, k3 } from '../figma_app/332085';
 import { E as _$$E7, hZ as _$$hZ5 } from '../figma_app/342125';
 import { ce as _$$ce, cm as _$$cm, GH } from '../figma_app/347146';
-import { Ns } from '../figma_app/349248';
+import { mapFileProperties } from '../figma_app/349248';
 import { fj } from '../figma_app/357047';
 import { getI18nState, reportTranslationIssue } from '../figma_app/363242';
 import { bE as _$$bE3, hV as _$$hV3, z9 } from '../figma_app/375098';
@@ -420,7 +420,7 @@ import { _6, z3 } from '../figma_app/386952';
 import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
-import { Au as _$$Au, mX as _$$mX, oF as _$$oF, rx as _$$rx, sZ as _$$sZ2, _L, BG, Bt, fL, GD, hQ, LF, N$, w_, wS } from '../figma_app/415217';
+import { relatedLinkRemoved, selectedLayerGuid, sendText, pageLoaded, selectedPageGuid, relatedLinkCreated, sendLayers, sendCssProperties, sendHtmlSkeleton, sendFileName, configureAutocomplete, sendThumbnail, sendMappingSuggestion, messageWithCallbackManager, messageWithResponseManager } from '../figma_app/415217';
 import { iE as _$$iE, Ng, xf } from '../figma_app/416935';
 import { b4 as _$$b5, _V } from '../figma_app/421886';
 import { g5 } from '../figma_app/422062';
@@ -463,7 +463,7 @@ import { Fy } from '../figma_app/623300';
 import { getDraftsSidebarString, initialLibraryStats, LIBRARY_PREFERENCES_MODAL, LibraryAgeEnum, LibraryPublishStatusEnum, NO_TEAM, PrimaryWorkflowEnum, PublishStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
-import { _d, J7 } from '../figma_app/650409';
+import { FigResourceType, DashboardSection } from '../figma_app/650409';
 import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
 import { fl, ye, zw } from '../figma_app/682945';
@@ -492,14 +492,14 @@ import { A as _$$A1 } from '../figma_app/776368';
 import { BrowserInfo, isFigmaMobileApp } from '../figma_app/778880';
 import { dO as _$$dO, ZN as _$$ZN } from '../figma_app/781852';
 import { parsePxInt } from '../figma_app/783094';
-import { S as _$$S2 } from '../figma_app/787550';
+import { fileApiHandler } from '../figma_app/787550';
 import { EM, J1 } from '../figma_app/804490';
 import { eu as _$$eu } from '../figma_app/807786';
 import { L4 as _$$L3 } from '../figma_app/819288';
 import { pz as _$$pz, jz } from '../figma_app/825489';
 import { wH } from '../figma_app/828908';
 import { SubscriptionType } from '../figma_app/831101';
-import { tf as _$$tf, fu } from '../figma_app/831799';
+import { withTrackedClick, TrackingProvider } from '../figma_app/831799';
 import { V_ } from '../figma_app/841351';
 import { Ay as _$$Ay5 } from '../figma_app/846003';
 import { hV as _$$hV, id as _$$id, lW as _$$lW, pn as _$$pn, rH as _$$rH2, u2 as _$$u, _p, Dz, gN, k$, M3, MH, TV } from '../figma_app/847915';
@@ -1662,7 +1662,7 @@ let t8 = {
       fileKey: t
     });
   },
-  getFileFromAPI: (e, t) => _$$S2.getFiles({
+  getFileFromAPI: (e, t) => fileApiHandler.getFiles({
     fileKey: t
   }).then(t => {
     let i = t.data.meta;
@@ -1980,7 +1980,7 @@ let iz = e => t => function (i) {
   } else if (yJ.matches(i)) {
     if (i.payload.userInitiated) {
       i.payload.file.created_at && console.error('It looks like you are PUT-ting to the API with the entire file object; please only pass the key and changed attributes');
-      let n = _$$S2.putFile({
+      let n = fileApiHandler.putFile({
         file: i.payload.file
       });
       let r = i.payload.onError;
@@ -1996,7 +1996,7 @@ let iz = e => t => function (i) {
         action: i
       });
       let s = i.payload.file;
-      let o = Ns(s, s.key);
+      let o = mapFileProperties(s, s.key);
       o && WB().optimisticallyUpdate(o, n);
       let l = e.getState();
       l.selectedView.view === 'fullscreen' && l.openFile && o && subscribeAndGetStatus(OpenEditorFileData, {
@@ -2107,13 +2107,13 @@ let i2 = e => t => function (i) {
     let l = n.teams[o];
     let d = Object.keys(n.folders).filter(e => n.folders[e]?.team_id === o);
     if (!l && d.length === 0) return t(i);
-    let c = a?.filter(e => e.plan_type === _$$O.ORG || e.plan_id !== o) || [];
+    let c = a?.filter(e => e.plan_type === OrganizationType.ORG || e.plan_id !== o) || [];
     let u = () => {
       let t;
       let i;
       if (!r || !s || o !== s) return;
       let n = c[0];
-      n && n.plan_type === _$$O.ORG ? (t = n.plan_id, i = null) : n && n.plan_type === _$$O.TEAM ? (i = n.plan_id, t = null) : (t = null, i = null);
+      n && n.plan_type === OrganizationType.ORG ? (t = n.plan_id, i = null) : n && n.plan_type === OrganizationType.TEAM ? (i = n.plan_id, t = null) : (t = null, i = null);
       e.dispatch(_l({
         workspace: {
           userId: r.id,
@@ -2651,7 +2651,7 @@ let nQ = e => t => function (i) {
           });
           r.view === 'desktopNewTab' ? U_(e, a.editorType, !0).then(async () => {
             if (!n.fileByKey[t]) {
-              let i = await _$$S2.getFiles({
+              let i = await fileApiHandler.getFiles({
                 fileKey: t
               });
               e.dispatch(yJ({
@@ -3422,8 +3422,8 @@ let as = registerModal(e => {
   if (useEffect(() => {
     c && e.tab === _$$X2.FONTS && (t(hideModal()), t(_$$sf({
       view: 'orgAdminSettings',
-      orgAdminSettingsViewTab: J7.RESOURCES,
-      orgAdminSettingsViewSecondaryTab: _d.SHARED_FONTS
+      orgAdminSettingsViewTab: DashboardSection.RESOURCES,
+      orgAdminSettingsViewSecondaryTab: FigResourceType.SHARED_FONTS
     })));
   }, [c, e.tab, t]), useEffect(() => {
     u.status !== 'loaded' || u.data || t(hideModal());
@@ -3439,7 +3439,7 @@ let as = registerModal(e => {
       orgViewTab: e
     }));
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.ORG_SETTINGS,
     properties: {
       section: e.tab,
@@ -5834,7 +5834,7 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
   } else if (_$$sf.matches(i)) {
     if (i.payload.view === 'fullscreen' || i.payload.view === 'prototype') {
       let t = _$$U2(i.payload);
-      t && !e.getState().realtime.subscriptions[`/file-${t}`] && _$$S2.getRealtimeToken({
+      t && !e.getState().realtime.subscriptions[`/file-${t}`] && fileApiHandler.getRealtimeToken({
         fileKey: t
       }).then(n => {
         let r = n?.data?.meta;
@@ -5960,80 +5960,80 @@ let sq = e => t => function (i) {
 let s6 = {
   parameters: {
     query: '',
-    searchModelType: _$$uH.HUB_FILES,
-    searchScope: _$$Rx.COMMUNITY,
+    searchModelType: PublicModelType.HUB_FILES,
+    searchScope: SpaceAccessType.COMMUNITY,
     workspaceFilter: null,
     idpGroupFilter: null,
     planFilter: null,
     fileTypeFilter: FileType.ANY,
     facetFilters: null,
     sortState: {
-      [_$$uH.PUBLIC_PROFILES]: {},
-      [_$$uH.PUBLIC_PLUGINS]: {
+      [PublicModelType.PUBLIC_PROFILES]: {},
+      [PublicModelType.PUBLIC_PLUGINS]: {
         ..._$$xH2.defaultOptions.sortMode
       },
-      [_$$uH.PRIVATE_PLUGINS]: {
+      [PublicModelType.PRIVATE_PLUGINS]: {
         ..._$$xH.defaultOptions.sortMode
       },
-      [_$$uH.HUB_FILES]: {
+      [PublicModelType.HUB_FILES]: {
         ...xH.defaultOptions.sortMode
       },
-      [_$$uH.FILES]: {
+      [PublicModelType.FILES]: {
         ..._$$KJ.defaultOptions.sortMode
       },
-      [_$$uH.PROJECTS]: {
+      [PublicModelType.PROJECTS]: {
         ...$T.defaultOptions.sortMode
       },
-      [_$$uH.TEAMS]: {
+      [PublicModelType.TEAMS]: {
         ..._$$Vx.defaultOptions.sortMode
       },
-      [_$$uH.USERS]: {
+      [PublicModelType.USERS]: {
         ...V0.defaultOptions.sortMode
       },
-      [_$$uH.PUBLIC_WIDGETS]: {
+      [PublicModelType.PUBLIC_WIDGETS]: {
         ..._$$nD.viewBarConfig.defaultOptions.sortMode
       },
-      [_$$uH.PRIVATE_WIDGETS]: {
+      [PublicModelType.PRIVATE_WIDGETS]: {
         ..._$$uB.viewBarConfig.defaultOptions.sortMode
       }
     }
   },
   responseSortState: null,
   responses: {
-    [_$$uH.PUBLIC_PLUGINS]: null,
-    [_$$uH.PRIVATE_PLUGINS]: null,
-    [_$$uH.FILES]: null,
-    [_$$uH.PROJECTS]: null,
-    [_$$uH.TEAMS]: null,
-    [_$$uH.USERS]: null,
-    [_$$uH.HUB_FILES]: null,
-    [_$$uH.PUBLIC_PROFILES]: null,
-    [_$$uH.PUBLIC_WIDGETS]: null,
-    [_$$uH.PRIVATE_WIDGETS]: null
+    [PublicModelType.PUBLIC_PLUGINS]: null,
+    [PublicModelType.PRIVATE_PLUGINS]: null,
+    [PublicModelType.FILES]: null,
+    [PublicModelType.PROJECTS]: null,
+    [PublicModelType.TEAMS]: null,
+    [PublicModelType.USERS]: null,
+    [PublicModelType.HUB_FILES]: null,
+    [PublicModelType.PUBLIC_PROFILES]: null,
+    [PublicModelType.PUBLIC_WIDGETS]: null,
+    [PublicModelType.PRIVATE_WIDGETS]: null
   },
   responseCounts: {
-    [_$$uH.PUBLIC_PLUGINS]: null,
-    [_$$uH.PRIVATE_PLUGINS]: null,
-    [_$$uH.FILES]: null,
-    [_$$uH.PROJECTS]: null,
-    [_$$uH.TEAMS]: null,
-    [_$$uH.USERS]: null,
-    [_$$uH.HUB_FILES]: null,
-    [_$$uH.PUBLIC_PROFILES]: null,
-    [_$$uH.PUBLIC_WIDGETS]: null,
-    [_$$uH.PRIVATE_WIDGETS]: null
+    [PublicModelType.PUBLIC_PLUGINS]: null,
+    [PublicModelType.PRIVATE_PLUGINS]: null,
+    [PublicModelType.FILES]: null,
+    [PublicModelType.PROJECTS]: null,
+    [PublicModelType.TEAMS]: null,
+    [PublicModelType.USERS]: null,
+    [PublicModelType.HUB_FILES]: null,
+    [PublicModelType.PUBLIC_PROFILES]: null,
+    [PublicModelType.PUBLIC_WIDGETS]: null,
+    [PublicModelType.PRIVATE_WIDGETS]: null
   },
   completedQueries: {
-    [_$$uH.PUBLIC_PLUGINS]: '',
-    [_$$uH.PRIVATE_PLUGINS]: '',
-    [_$$uH.FILES]: '',
-    [_$$uH.PROJECTS]: '',
-    [_$$uH.TEAMS]: '',
-    [_$$uH.USERS]: '',
-    [_$$uH.PUBLIC_PROFILES]: '',
-    [_$$uH.HUB_FILES]: '',
-    [_$$uH.PUBLIC_WIDGETS]: '',
-    [_$$uH.PRIVATE_WIDGETS]: ''
+    [PublicModelType.PUBLIC_PLUGINS]: '',
+    [PublicModelType.PRIVATE_PLUGINS]: '',
+    [PublicModelType.FILES]: '',
+    [PublicModelType.PROJECTS]: '',
+    [PublicModelType.TEAMS]: '',
+    [PublicModelType.USERS]: '',
+    [PublicModelType.PUBLIC_PROFILES]: '',
+    [PublicModelType.HUB_FILES]: '',
+    [PublicModelType.PUBLIC_WIDGETS]: '',
+    [PublicModelType.PRIVATE_WIDGETS]: ''
   },
   lastLoadedQuery: {
     sessionId: null,
@@ -6045,7 +6045,7 @@ let s6 = {
   queryId: null,
   isFocused: !1,
   searchScrollTop: 0,
-  searchTypeBehavior: Rr.ALL_TYPES_BLOCKING,
+  searchTypeBehavior: SearchTypeMode.ALL_TYPES_BLOCKING,
   lastAckedQueryId: null,
   searchPreviewOrder: []
 };
@@ -6356,9 +6356,9 @@ let oo = e => t => function (i) {
       fileFilter && e.dispatch(Rz({
         fileTypeFilter: fileFilter
       }));
-      t.search.parameters.facetFilters || (searchModelType === _$$uH.HUB_FILES || searchModelType === _$$uH.PUBLIC_PLUGINS || searchModelType === _$$uH.PUBLIC_PROFILES || searchModelType === _$$uH.PUBLIC_WIDGETS ? (atomStoreManager.set(R9, _$$uH.FILES), e.dispatch(Rz({
+      t.search.parameters.facetFilters || (searchModelType === PublicModelType.HUB_FILES || searchModelType === PublicModelType.PUBLIC_PLUGINS || searchModelType === PublicModelType.PUBLIC_PROFILES || searchModelType === PublicModelType.PUBLIC_WIDGETS ? (atomStoreManager.set(R9, PublicModelType.FILES), e.dispatch(Rz({
         facetFilters: {
-          searchModelType: _$$uH.FILES
+          searchModelType: PublicModelType.FILES
         }
       }))) : (atomStoreManager.set(R9, searchModelType), e.dispatch(Rz({
         facetFilters: {
@@ -12617,7 +12617,7 @@ let pg = {
         ...e.parameters,
         ...t.payload
       };
-      let n = fS[i.searchScope];
+      let n = ModelTypeConfigs[i.searchScope];
       !n.modelTypes.includes(i.searchModelType) && (i.searchModelType = n.correspondingModelTypes[i.searchModelType] || n.defaultModelType);
       return {
         ...e,
@@ -12819,7 +12819,7 @@ let pg = {
       };
     }
     if (gG.matches(t) || qP.matches(t)) {
-      let i = e.responses[_$$uH.FILES];
+      let i = e.responses[PublicModelType.FILES];
       if (i != null) {
         let n = i.results;
         let r = n.findIndex(e => e.model.key === t.payload.file.key);
@@ -12836,7 +12836,7 @@ let pg = {
             ...e,
             responses: {
               ...e.responses,
-              [_$$uH.FILES]: {
+              [PublicModelType.FILES]: {
                 ...i,
                 results: a
               }
@@ -12851,7 +12851,7 @@ let pg = {
   lastVisitedPlan(e = null, t) {
     let i = e?.planId || null;
     let n = e?.planType || null;
-    _$$c4.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : _P.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = _$$O.ORG);
+    _$$c4.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : _P.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = OrganizationType.ORG);
     return i && n ? {
       planId: i,
       planType: n
@@ -13005,7 +13005,7 @@ class pS extends PureComponent {
   render() {
     let e = this.state.opened;
     let t = this.props.file;
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: 'DesktopInterstitialView',
       children: jsxs('div', {
         className: 'desktop_app_interstitial--container--evmaU',
@@ -14045,7 +14045,7 @@ let hL = {
   [languageCodes.PT_BR]: renderI18nText('desktop_version_support.using_figma_in_portuguese'),
   [languageCodes.ES_LA]: renderI18nText('desktop_version_support.using_figma_in_latin_american_spanish')
 };
-let hF = _$$tf(_$$N2.Button);
+let hF = withTrackedClick(_$$N2.Button);
 function hM(e) {
   let {
     i18n_desktop_version_support
@@ -14065,7 +14065,7 @@ let hj = registerModal(e => {
       [a]: !0
     }));
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Desktop Language Support Modal',
     properties: {
       minVersion: hM(i)
@@ -14536,7 +14536,7 @@ export async function $$hz0(e, t, d = {
                 let e = b.getState().openFile?.key;
                 if (e == null || b.getState().selectedView.view !== 'fullscreen') return;
                 trackFileEvent('File Share Link Copied', e, b.getState(), {
-                  copyLinkSource: _$$d4[_$$d4.DESKTOP_FILE_TAB_CONTEXT_MENU]
+                  copyLinkSource: ShareContext[ShareContext.DESKTOP_FILE_TAB_CONTEXT_MENU]
                 });
               }
             } else {
@@ -14588,7 +14588,7 @@ export async function $$hz0(e, t, d = {
                 let t = parseQuery(customHistory.location.search);
                 delete t.t;
                 delete t.viewport;
-                let n = _$$b2(i.sharingAttributionContextKey, _$$d4.DESKTOP_KEYBOARD_SHORTCUT);
+                let n = combineWithHyphen(i.sharingAttributionContextKey, ShareContext.DESKTOP_KEYBOARD_SHORTCUT);
                 n && (t.t = n);
                 let r = tT()(t) ? '' : `?${serializeQuery(t)}`;
                 e = `${window.location.origin}${customHistory.location.pathname}${r}`;
@@ -14608,7 +14608,7 @@ export async function $$hz0(e, t, d = {
                 if (o) {
                   let t = parseQuery(customHistory.location.search);
                   delete t.viewport;
-                  t['node-id'] = EO(o.guid);
+                  t['node-id'] = replaceColonWithDash(o.guid);
                   let i = tT()(t) ? '' : `?${serializeQuery(t)}`;
                   e = `${window.location.origin}${customHistory.location.pathname}${i}`;
                 }
@@ -14621,7 +14621,7 @@ export async function $$hz0(e, t, d = {
               b.dispatch(_$$S({
                 fileKey: n.key,
                 url: e,
-                source: _$$d4.DESKTOP_KEYBOARD_SHORTCUT,
+                source: ShareContext.DESKTOP_KEYBOARD_SHORTCUT,
                 visualBellMessageOverride: t
               }));
               b.dispatch(_$$b({
@@ -14771,7 +14771,7 @@ export async function $$hz0(e, t, d = {
               case 'REGISTER_UI_CHANGE_OBSERVER':
               case 'REGISTER_CODE_CHANGE_OBSERVER':
               case 'REGISTER_MANIFEST_CHANGE_OBSERVER':
-                w_.resolveMessage(t);
+                messageWithCallbackManager.resolveMessage(t);
                 break;
               case 'WRITE_NEW_EXTENSION_DIRECTORY_TO_DISK':
               case 'GET_ALL_LOCAL_FILE_EXTENSION_IDS':
@@ -14783,7 +14783,7 @@ export async function $$hz0(e, t, d = {
               case 'CREATE_MULTIPLE_NEW_LOCAL_FILE_EXTENSIONS':
               case 'GET_LOCAL_FILE_EXTENSION_SOURCE':
               case 'GENERATE_FIGMADOC':
-                wS.resolveMessage(t);
+                messageWithResponseManager.resolveMessage(t);
                 break;
               case 'TRACK_EVENT':
                 trackEventAnalytics(t.data.eventName, t.data.eventProperties);
@@ -14903,7 +14903,7 @@ export async function $$hz0(e, t, d = {
                     console.error(`Error getting thumbnail for node ${e}`);
                     return;
                   }
-                  LF(e, Pv(n.pixels, n.pixelSize), {
+                  sendThumbnail(e, Pv(n.pixels, n.pixelSize), {
                     width: t.x,
                     height: t.y
                   });
@@ -14999,15 +14999,15 @@ export async function $$hz0(e, t, d = {
                   d && n.push(...l.map(e => [e, r + 1]));
                 }
               }
-              BG(e, i);
+              sendLayers(e, i);
             }(g, c)), a = g);
             let v = p.appModel.currentPage;
-            b ? (await f(y, s), i = y) : o?.id !== m.id ? (hQ(), o = m) : h && (h.unit !== l?.unit || h.scaleFactor !== l?.scaleFactor || h.customSettings && Object.keys(h.customSettings ?? {}).some(e => h.customSettings?.[e] !== l?.customSettings?.[e])) && (l = h, await A(i, h));
-            r && r === v || (_$$sZ2(v), r = v, d = !1);
+            b ? (await f(y, s), i = y) : o?.id !== m.id ? (configureAutocomplete(), o = m) : h && (h.unit !== l?.unit || h.scaleFactor !== l?.scaleFactor || h.customSettings && Object.keys(h.customSettings ?? {}).some(e => h.customSettings?.[e] !== l?.customSettings?.[e])) && (l = h, await A(i, h));
+            r && r === v || (selectedPageGuid(v), r = v, d = !1);
             let I = u.openFile;
-            if (I && !rv()(I.name, n) && (GD(I.name), n = I.name, t = I.key), !d) {
+            if (I && !rv()(I.name, n) && (sendFileName(I.name), n = I.name, t = I.key), !d) {
               let e = p.appModel.pagesList;
-              Fy(e, v) === DataLoadStatus.LOADED && (_$$rx(), d = !0);
+              Fy(e, v) === DataLoadStatus.LOADED && (pageLoaded(), d = !0);
             }
           };
           e.subscribe(c);
@@ -15030,7 +15030,7 @@ export async function $$hz0(e, t, d = {
         }
         async function h(e) {
           if (!getFeatureFlags().dt_code_connect_vscode_assistant) {
-            N$({
+            sendMappingSuggestion({
               requestId: e.requestId,
               error: 'Not available'
             });
@@ -15043,7 +15043,7 @@ export async function $$hz0(e, t, d = {
             vscode_document_session_id: e.trackingContent.documentSessionId,
             vscode_document_uri: e.trackingContent.documentUri
           }), !o || !s) {
-            N$({
+            sendMappingSuggestion({
               requestId: e.requestId,
               error: 'No selected node'
             });
@@ -15065,12 +15065,12 @@ export async function $$hz0(e, t, d = {
               vscode_document_session_id: e.trackingContent.documentSessionId,
               vscode_document_uri: e.trackingContent.documentUri
             });
-            N$({
+            sendMappingSuggestion({
               requestId: e.requestId,
               mappings: i
             });
           }).catch(t => {
-            N$({
+            sendMappingSuggestion({
               requestId: e.requestId,
               error: t.message
             });
@@ -15078,8 +15078,8 @@ export async function $$hz0(e, t, d = {
         }
         async function f(t, i) {
           if (!t || t === defaultSessionLocalIDString) {
-            _$$oF(void 0);
-            _$$mX(void 0);
+            sendText(void 0);
+            selectedLayerGuid(void 0);
             l = null;
             d = null;
             c = null;
@@ -15087,13 +15087,13 @@ export async function $$hz0(e, t, d = {
             return;
           }
           r = i.developerFriendlyIdFromGuid(t);
-          _$$mX(r);
+          selectedLayerGuid(r);
           o = m(t);
           c = (l = o?.parentNode || null) ? l.childrenGuids.indexOf(t) : null;
           u = (d = l?.parentGuid ? m(l.parentGuid) : null) ? d.childrenGuids.indexOf(l.guid) : null;
           p = l?.childrenDisplayOrder === _$$k6.DESIGN;
           await A(t, _$$lX());
-          _$$oF(e.getState().mirror.selectionProperties.nodeText);
+          sendText(e.getState().mirror.selectionProperties.nodeText);
         }
         function _() {
           return AppStateTsApi.devHandoffState().currentNodeId.getCopy();
@@ -15115,7 +15115,7 @@ export async function $$hz0(e, t, d = {
             console.error(error);
             return;
           }
-          Bt(Object.keys(propertiesByLayer).reduce((e, t) => ({
+          sendCssProperties(Object.keys(propertiesByLayer).reduce((e, t) => ({
             ...e,
             [t]: {
               ...propertiesByLayer[t],
@@ -15139,7 +15139,7 @@ export async function $$hz0(e, t, d = {
             console.error(error);
             return;
           }
-          fL(code);
+          sendHtmlSkeleton(code);
         }
         function v(e, t) {
           return p ? e > 0 : e < t.childCount - 1;
@@ -15166,7 +15166,7 @@ export async function $$hz0(e, t, d = {
               }
             }
           }, o);
-          _L({
+          relatedLinkCreated({
             ...s,
             file_key: t,
             file_name: n || ''
@@ -15182,7 +15182,7 @@ export async function $$hz0(e, t, d = {
             link_url: e
           };
           await XHR.del(`/api/files/${t}/related_links`, s);
-          _$$Au({
+          relatedLinkRemoved({
             ...s,
             file_key: t,
             file_name: n || ''
@@ -15267,7 +15267,7 @@ export async function $$hz0(e, t, d = {
                   initialVersion: uiVariantName,
                   children: jsx(_$$r, {
                     debug: !1,
-                    children: jsxs(T9, {
+                    children: jsxs(RecordingProvider, {
                       children: [jsx(hV, {}), jsxs(e5, {
                         children: [jsx(mF, {
                           children: jsx(mR, {

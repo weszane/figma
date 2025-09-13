@@ -9,7 +9,7 @@ import { Ay } from "../figma_app/272902";
 import u from "classnames";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { tH } from "../905/751457";
 import { Nt, c2, yn, lv, dP } from "../figma_app/119475";
@@ -705,7 +705,7 @@ export function $$el3({
     z(e.currentTarget.value);
   }, [z]);
   let eq = useCallback(t => {
-    if (t.keyCode === Uz.ENTER) {
+    if (t.keyCode === KeyCodes.ENTER) {
       let t = function ({
         highlightedItemID: e,
         variables: t,
@@ -723,7 +723,7 @@ export function $$el3({
       });
       t ? e$(t) : l && b();
       N();
-    } else t.keyCode === Uz.ESCAPE ? N() : (Nt(t, !1) || c2(t, !1) || yn(t.code, !1) || lv(t.code, !1)) && (ec ? (eF.current?.getVirtualItems() ?? []).some(e => {
+    } else t.keyCode === KeyCodes.ESCAPE ? N() : (Nt(t, !1) || c2(t, !1) || yn(t.code, !1) || lv(t.code, !1)) && (ec ? (eF.current?.getVirtualItems() ?? []).some(e => {
       let t = eM.current[e.index];
       return "items" in t && t.items.some(e => tx(e) === ec);
     }) || eU(ec, {

@@ -12,7 +12,7 @@ import { getFeatureFlags } from "../905/601108";
 import m from "classnames";
 import { $isNodeSelection, $getSelection, KEY_ARROW_UP_COMMAND, COMMAND_PRIORITY_LOW, KEY_ARROW_DOWN_COMMAND, $setSelection, $createRangeSelection, DecoratorNode, TextNode, $getNodeByKey, KEY_BACKSPACE_COMMAND, KEY_DELETE_COMMAND, $$if, COMMAND_PRIORITY_NORMAL, KEY_ESCAPE_COMMAND, INSERT_PARAGRAPH_COMMAND, $isRangeSelection, $isDecoratorNode, $getRoot, $isElementNode, $isParagraphNode, $isTextNode, BLUR_COMMAND, SELECTION_CHANGE_COMMAND, $createTextNode, $createParagraphNode } from "lexical";
 import { useSetupPlayback, generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { M3 } from "../figma_app/119475";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -1159,7 +1159,7 @@ export function $$ev0({
           children: [jsx(SvgComponent, {
             className: zc,
             svg: A
-          }), jsx(D8, {
+          }), jsx(RecordableDiv, {
             onMouseDown: e => e.stopPropagation(),
             className: KF,
             recordingKey: U,

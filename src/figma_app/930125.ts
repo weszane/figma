@@ -4,8 +4,8 @@ import { R as _$$R } from "../905/57445";
 import { permissionScopeHandler } from "../905/189185";
 import o from "classnames";
 import { X } from "../905/606795";
-import { Uz } from "../905/63728";
-import { L } from "../905/408237";
+import { KeyCodes } from "../905/63728";
+import { LazyInputForwardRef } from "../905/408237";
 import { fullscreenValue } from "../figma_app/455680";
 import { hF, $k, gw, EH, kL } from "../figma_app/956479";
 var l = o;
@@ -44,7 +44,7 @@ export function $$h0({
     isTruncated: w,
     value: e,
     children: [t && jsxs(Fragment, {
-      children: [!o && r, jsx(L, {
+      children: [!o && r, jsx(LazyInputForwardRef, {
         ref: inputRef,
         className: l()(hF, g),
         dir: "auto",
@@ -57,12 +57,12 @@ export function $$h0({
         onFocus,
         onKeyDown: function (t) {
           switch (t.keyCode) {
-            case Uz.ESCAPE:
+            case KeyCodes.ESCAPE:
               b(e);
               N.current = !0;
               inputRef.current?.blur();
               break;
-            case Uz.ENTER:
+            case KeyCodes.ENTER:
               inputRef.current?.blur();
               t.preventDefault();
           }

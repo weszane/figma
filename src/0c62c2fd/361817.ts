@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { N_ } from "../figma_app/637027";
+import { BaseLinkComponent } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FPlanRestrictionType } from "../figma_app/191312";
 import { TeamType } from "../905/814802";
 import { Dd } from "../905/519092";
@@ -22,7 +22,7 @@ export function $$c0(e) {
   let g = f ? members.every(e => !e.whiteboard_editor_upgrade) : members.every(e => !e.design_editor_upgrade);
   let h = paidStatus === FPlanRestrictionType.RESTRICTED && g;
   let x = members[0].name || members[0].email;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team Admin Restrict TeamUser Modal",
     properties: {
       memberCount: m,
@@ -56,7 +56,7 @@ export function $$c0(e) {
           });
         })(), jsx("p", {
           className: "confirm_team_user_paid_status_update_modal--spacing--D5LgW",
-          children: jsx(N_, {
+          children: jsx(BaseLinkComponent, {
             target: "_blank",
             className: "confirm_team_user_paid_status_update_modal--link--cb35L",
             href: "https://help.figma.com/hc/articles/360039960434#Account_Types",

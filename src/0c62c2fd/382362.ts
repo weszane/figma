@@ -7,13 +7,13 @@ import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { LoadingOverlay } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { u as _$$u } from "../1e926454/858319";
 import { dr, eb as _$$eb, oU } from "../4452/405965";
 import { selectUser } from "../905/372672";
@@ -247,7 +247,7 @@ export function $$ee0(e) {
   t = K && et ? 0 === eh ? et ? jsx(Fragment, {
     children: jsxs("div", {
       onKeyDown: e => {
-        e.keyCode !== Uz.ESCAPE && e.stopPropagation();
+        e.keyCode !== KeyCodes.ESCAPE && e.stopPropagation();
       },
       children: [ev && jsxs(Fragment, {
         children: [jsx(_$$i, {
@@ -372,7 +372,7 @@ export function $$ee0(e) {
     className: Lq,
     children: jsx(LoadingOverlay, {})
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Share Modal",
     properties: {
       resourceType: FResourceCategoryType.TEAM,

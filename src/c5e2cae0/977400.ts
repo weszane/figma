@@ -4,25 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { h as _$$h } from "../905/207101";
 import { Jn } from "../905/17223";
-import { Kz, vd } from "../figma_app/637027";
+import { Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { kR } from "../c5e2cae0/894125";
 import { Dw } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
 import { LN } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { UpgradeSteps } from "../figma_app/831101";
 import { UpgradeAction, TeamType } from "../figma_app/707808";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { debounce } from "../905/915765";
 import { XHR } from "../905/910117";
 import { I as _$$I } from "../c5e2cae0/393403";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { LoadingSpinner } from "../figma_app/858013";
 import { createOptimistThunk } from "../905/350402";
 import { bE } from "../905/98702";
@@ -111,16 +111,16 @@ function V(e) {
       children: [jsx(_$$I, {
         message: getI18nString("universal_upgrade_sequence.error"),
         marginTop: 16
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 1
       })]
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 2
     }), jsxs("div", {
       className: $g,
       children: [jsx("div", {
         className: Eh,
-        children: jsx(_$$L, {
+        children: jsx(LazyInputForwardRef, {
           dataTestId: "createTeamInput",
           placeholder: getI18nString("universal_upgrade_sequence.team_name.placeholder"),
           value: h || "",
@@ -130,7 +130,7 @@ function V(e) {
           required: !0,
           maxLength: 255
         })
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         dataTestId: "nextButton",
         className: DI,
         disabled: !h || d,
@@ -185,9 +185,9 @@ export function $$z0(e) {
     e.plan === _$$I2.PRO && P();
   }), "selectTeam" === t) ? (() => {
     let t = getEditableTeamsWithoutPaidAccess(C);
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: "Upgrade Select Team Modal",
-      children: jsxs(ey, {
+      children: jsxs(ModalView, {
         hide: A,
         size: 436,
         children: [jsx("h1", {
@@ -199,12 +199,12 @@ export function $$z0(e) {
           className: _$$b,
           onClick: A,
           innerText: getI18nString("universal_upgrade_sequence.close_modal")
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 2
         }), jsx(_$$I3, {
           eligibleTeams: t,
           selectTeam: k
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 2
         }), jsx(V, {
           selectedView: b,

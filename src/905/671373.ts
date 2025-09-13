@@ -3,7 +3,7 @@ import { Component } from "react";
 import { Kh } from "../905/989765";
 import { MK } from "../figma_app/120529";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 class d extends Component {
   render() {
     let e = "Error downloading captions";
@@ -17,7 +17,7 @@ class d extends Component {
         e = "Error downloading speech files";
         t = "Network error encountered while setting up captions. Please check your connection and try again.";
     }
-    return jsx(yX, {
+    return jsx(ConfirmationModal2, {
       confirmationTitle: e,
       content: t,
       onConfirm: () => {

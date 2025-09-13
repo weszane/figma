@@ -11,7 +11,7 @@ import { o as _$$o4 } from '../905/40561';
 import { C as _$$C } from '../905/47358';
 import { A as _$$A10 } from '../905/51743';
 import { E as _$$E3 } from '../905/53857';
-import { Uz, xH } from '../905/63728';
+import { KeyCodes, ModifierKeyCodes } from '../905/63728';
 import { Ef } from '../905/81982';
 import { t_ as _$$t_, vx } from '../905/91038';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
@@ -89,7 +89,7 @@ import { J as _$$J2 } from '../905/494216';
 import { C as _$$C5 } from '../905/504203';
 import { r6 as _$$r3 } from '../905/507950';
 import { $7 } from '../905/509613';
-import { D8 } from '../905/511649';
+import { RecordableDiv } from '../905/511649';
 import { q as _$$q } from '../905/516087';
 import { C as _$$C3 } from '../905/520159';
 import { Button } from '../905/521428';
@@ -1173,7 +1173,7 @@ function t5() {
         onSearchChange: t,
         endEnhancer: jsx(_$$r, {
           shortcuts: [{
-            key: Uz.ENTER
+            key: KeyCodes.ENTER
           }],
           onAction: u,
           disabled: e.length === 0 || i.status === tn.Loading,
@@ -1900,7 +1900,7 @@ function nU({
   }, [isFocused, t]);
   let h = useMemo(() => ({
     shortcuts: [{
-      key: Uz.ENTER
+      key: KeyCodes.ENTER
     }],
     onAction: p,
     allowDefault: !0
@@ -1911,7 +1911,7 @@ function nU({
     actionLabel: !1,
     target
   });
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     forwardedRef: o,
     className: rB()(i, {
       'keyboard_navigation_on_focus--active--vGhwX': active
@@ -2075,8 +2075,8 @@ function n7({
   let o = useDispatch();
   let l = Um();
   let c = useRef(document.getElementById(t || 'fullscreen-root'));
-  kz(Uz.ESCAPE, r);
-  kz(Uz.BACKSPACE, r, document.activeElement?.tagName.toLowerCase() !== 'input');
+  kz(KeyCodes.ESCAPE, r);
+  kz(KeyCodes.BACKSPACE, r, document.activeElement?.tagName.toLowerCase() !== 'input');
   let [u, p] = useState(ColorFormatEnum.HEX);
   let [h, m] = useState(n6(e, u));
   let [f, g] = useState({
@@ -2528,8 +2528,8 @@ function as({
   let {
     pop
   } = cq();
-  kz(Uz.ESCAPE, pop);
-  kz(Uz.BACKSPACE, pop);
+  kz(KeyCodes.ESCAPE, pop);
+  kz(KeyCodes.BACKSPACE, pop);
   return jsx('div', {
     className: _$$s3.h24.$,
     children: jsx(_$$K3, {
@@ -3397,8 +3397,8 @@ function ag({
   let [eu, ep] = useState(nq.COLOR);
   let eh = jsx(_$$r, {
     shortcuts: [{
-      key: Uz.ENTER,
-      modifier: [xH.META]
+      key: KeyCodes.ENTER,
+      modifier: [ModifierKeyCodes.META]
     }],
     onAction: ec,
     disabled: !y || e.length === 0,
@@ -3407,8 +3407,8 @@ function ag({
   });
   let em = jsx(_$$r, {
     shortcuts: [{
-      key: Uz.ENTER,
-      modifier: [xH.META]
+      key: KeyCodes.ENTER,
+      modifier: [ModifierKeyCodes.META]
     }],
     onAction: close,
     recordingKey: generateRecordingKey(d, 'doneTheming'),
@@ -4761,7 +4761,7 @@ function su({
         primaryAction: {
           text: 'Perform',
           shortcuts: [{
-            key: Uz.ENTER
+            key: KeyCodes.ENTER
           }],
           onAction: () => i(e)
         },
@@ -5241,8 +5241,8 @@ function sg({
           textAreaRef: C
         }), jsx(_$$r, {
           shortcuts: [{
-            key: Uz.ENTER,
-            modifier: [xH.META]
+            key: KeyCodes.ENTER,
+            modifier: [ModifierKeyCodes.META]
           }],
           onAction: g,
           recordingKey: generateRecordingKey(c, 'generate'),
@@ -7565,9 +7565,9 @@ function od(e) {
         submenuItem.callback && (submenuItem.callback(), e && close());
       },
       shortcuts: [{
-        key: Uz.ENTER
+        key: KeyCodes.ENTER
       }, {
-        key: Uz.TAB
+        key: KeyCodes.TAB
       }]
     },
     actionLabel: !1,
@@ -7901,7 +7901,7 @@ function oF({
   let T = useCallback((e, i) => {
     if (b.current) return;
     b.current = !0;
-    let a = i?.key === Uz.TAB ? 'tab' : 'enter';
+    let a = i?.key === KeyCodes.TAB ? 'tab' : 'enter';
     if (x.isPending() && x.cancel(), e.disabled) return;
     if (e.name === 'plugins-menu-item' && !m) {
       _();
@@ -8056,9 +8056,9 @@ function oF({
     primaryAction: {
       text: 'Perform',
       shortcuts: [{
-        key: Uz.ENTER
+        key: KeyCodes.ENTER
       }, {
-        key: Uz.TAB
+        key: KeyCodes.TAB
       }],
       onAction: ({
         shortcut: t
@@ -9018,10 +9018,10 @@ function lb(e) {
   useEffect(() => {
     i(!1);
   }, [e]);
-  kz(Uz.LEFT_ARROW, e => {
+  kz(KeyCodes.LEFT_ARROW, e => {
     Jj() && t && (e.preventDefault(), i(!1));
   });
-  kz(Uz.RIGHT_ARROW, () => {
+  kz(KeyCodes.RIGHT_ARROW, () => {
     Jj() && !t && i(!0);
   });
   return t;
@@ -9546,7 +9546,7 @@ function l0({
   });
   let d = useMemo(() => ({
     shortcuts: [{
-      key: Uz.ENTER
+      key: KeyCodes.ENTER
     }],
     onAction: e
   }), [e]);
@@ -10478,24 +10478,24 @@ function dI() {
       tabId: Jc.ALL,
       onAction: () => el(Jc.ALL),
       navigatingShortcut: {
-        key: Uz.KEY_1,
-        modifier: [xH.ALT]
+        key: KeyCodes.KEY_1,
+        modifier: [ModifierKeyCodes.ALT]
       },
       children: renderI18nText('qa.all')
     }), defaultViewAssetsTabVisible && jsx(_$$oz, {
       tabId: Jc.ASSETS,
       onAction: ed,
       navigatingShortcut: {
-        key: Uz.KEY_2,
-        modifier: [xH.ALT]
+        key: KeyCodes.KEY_2,
+        modifier: [ModifierKeyCodes.ALT]
       },
       children: renderI18nText('qa.assets')
     }), ep && jsx(_$$oz, {
       tabId: Jc.EXTENSIONS,
       onAction: () => el(Jc.EXTENSIONS),
       navigatingShortcut: {
-        key: Uz.KEY_3,
-        modifier: [xH.ALT]
+        key: KeyCodes.KEY_3,
+        modifier: [ModifierKeyCodes.ALT]
       },
       children: eh ? renderI18nText('qa.plugins_widgets') : renderI18nText('qa.plugins')
     })]
@@ -10809,8 +10809,8 @@ function dP() {
               }), jsx(_$$r, {
                 variant: 'secondary',
                 shortcuts: [{
-                  key: Uz.ENTER,
-                  modifier: [xH.META]
+                  key: KeyCodes.ENTER,
+                  modifier: [ModifierKeyCodes.META]
                 }],
                 onAction: () => {
                   b();
@@ -10862,8 +10862,8 @@ function dB() {
                     })]
                   }), jsx(_$$r, {
                     shortcuts: [{
-                      key: Uz.ENTER,
-                      modifier: [xH.META]
+                      key: KeyCodes.ENTER,
+                      modifier: [ModifierKeyCodes.META]
                     }],
                     onAction: i,
                     recordingKey: 'VideoToast',

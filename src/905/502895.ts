@@ -10,7 +10,7 @@ import { aB, uz } from "../905/284552";
 import { LargeLoadingSpinner } from "../figma_app/858013";
 import { jS, Pv } from "../905/619652";
 import { _P } from "../figma_app/2590";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 let f = window.performance.now();
 let _ = (e, t, i) => {
   let n = jS(e, new Point(t, i), {
@@ -85,7 +85,7 @@ export function $$$$A0(e) {
   let j = useCallback(async e => {
     if (!openFileKey || !e) throw new aB("Missing fallback meta hash");
     try {
-      let t = await S.getVideosDownload({
+      let t = await fileApiHandler.getVideosDownload({
         fileKey: openFileKey,
         hexHash: e
       });

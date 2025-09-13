@@ -4,14 +4,14 @@ import { R } from "../905/621802";
 import { J } from "../905/125993";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { $z } from "../figma_app/831799";
+import { TrackedButton } from "../figma_app/831799";
 import { P } from "../905/842406";
 import { ShareAction } from "../figma_app/707808";
 import { o as _$$o } from "../905/382697";
 import { E4, hP } from "../905/144598";
 import { G2, QJ, aL, IG, u4, Lo, bv, LN, cp, Xr, Em } from "../905/959395";
 export function $$g2(e) {
-  return jsxs($z, {
+  return jsxs(TrackedButton, {
     className: G2,
     onClick: e.onClick,
     dataTestId: e.testId,

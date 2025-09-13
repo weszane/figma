@@ -3,13 +3,13 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
 import { c as _$$c } from "../905/370443";
-import { fu, j6 } from "../figma_app/831799";
+import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { registerModal } from "../905/102752";
 import { F as _$$F } from "../905/759613";
@@ -67,7 +67,7 @@ function N(e) {
     trackingEnabled,
     ...a
   } = e;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: trackingContextName,
     properties: trackingProperties,
     enabled: trackingEnabled,
@@ -77,7 +77,7 @@ function N(e) {
   });
 }
 function C(e) {
-  let t = j6();
+  let t = useTracking();
   let r = useModalManager({
     open: !0,
     onClose: r => {
@@ -136,7 +136,7 @@ function O(e) {
           letterSpacing: "-0.456px"
         }).$,
         children: e.title
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         direction: "y",
         multiple: 1
       }), jsx("div", {
@@ -146,7 +146,7 @@ function O(e) {
         }).$,
         children: e.description
       }), (e.primaryCta || e.secondaryCta) && jsxs(Fragment, {
-        children: [jsx(Kz, {
+        children: [jsx(Spacing, {
           direction: "y",
           multiple: 3
         }), jsxs("div", {
@@ -200,7 +200,7 @@ function R(e) {
     }), e.disclaimerFooter && jsx("div", {
       className: _$$s.textBodySmall.colorTextSecondary.$,
       children: e.disclaimerFooter
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       direction: "y",
       multiple: 4
     })]

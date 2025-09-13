@@ -13,7 +13,7 @@ import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_a
 import m from "classnames";
 import { wY, cU } from "../figma_app/708845";
 import { h as _$$h } from "../905/207101";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -613,10 +613,10 @@ export function $$B4(e) {
       if (!e.metaKey && !e.ctrlKey) return;
       let t = !0;
       switch (e.keyCode) {
-        case Uz.DASH:
+        case KeyCodes.DASH:
           E();
           break;
-        case Uz.EQUALS:
+        case KeyCodes.EQUALS:
           f();
           break;
         default:

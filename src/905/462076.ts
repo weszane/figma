@@ -11,7 +11,7 @@ import { y as _$$y } from "../figma_app/705249";
 import { o8, CR } from "../figma_app/12220";
 import { N } from "../figma_app/261650";
 import { eY } from "../figma_app/722362";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { useCurrentPlanUser } from "../figma_app/465071";
@@ -66,7 +66,7 @@ export function $$R6(e, t, i) {
         postUuid: e
       }), s) {
         if (s.type === cM.NODE) {
-          let t = jN({
+          let t = buildFileUrl({
             file: {
               key: s.fileKey
             },
@@ -80,7 +80,7 @@ export function $$R6(e, t, i) {
         }));
       }
       if (l) {
-        let e = jN({
+        let e = buildFileUrl({
           file: {
             key: l
           }

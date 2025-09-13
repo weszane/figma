@@ -16,7 +16,7 @@ import { I7 } from "../figma_app/594947";
 import { bv } from "../figma_app/421401";
 import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { Wi, JR } from "../figma_app/162641";
 import { y2 } from "../figma_app/563413";
@@ -46,7 +46,7 @@ import { rq } from "../905/425180";
 import { WZ } from "../905/893645";
 import { ONe } from "../figma_app/6204";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { isCoreProductAccessType, ProductAccessMap } from "../figma_app/765689";
 import { q as _$$q } from "../4452/876838";
 import { QL, EM } from "../905/609392";
@@ -55,7 +55,7 @@ import { getUserId } from "../905/372672";
 import { MX, EQ } from "../figma_app/684446";
 import { OrgUsersByIdView, AdminRequestDashboardView, AdminRequestDashOrgInfo } from "../figma_app/43951";
 import { $ as _$$$2 } from "../figma_app/126651";
-import { Sm } from "../figma_app/482728";
+import { UpgradeRequestSetting } from "../figma_app/482728";
 import { e0 as _$$e2 } from "../905/696396";
 import { w as _$$w } from "../905/281010";
 import { az } from "../figma_app/805373";
@@ -63,7 +63,7 @@ import { p as _$$p } from "../figma_app/353099";
 import { Cj } from "../905/270084";
 import { Jn } from "../905/17223";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { lb } from "../3973/538504";
 import { getResourceDataOrFallback } from "../905/723791";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -153,7 +153,7 @@ let ev = registerModal(function ({
   let c = l ? renderI18nText("admin_dashboard.requests.approve_all_modal.confirm_filtered", {
     numRequests: t
   }) : renderI18nText("admin_dashboard.requests.approve_all_modal.confirm");
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     className: _$$s2.cursorDefault.selectNone.$,
     title: "",
     size: 360,
@@ -226,7 +226,7 @@ function ef({
       }).$,
       ref: d,
       children: e
-    }), l && jsx(CY, {
+    }), l && jsx(SecureLink, {
       trusted: !0,
       onClick: e => {
         e.stopPropagation();
@@ -312,7 +312,7 @@ let eI = registerModal(function ({
   let y = () => {
     _(hideModal());
   };
-  return r && (p || !(b || v)) ? jsx(d_, {
+  return r && (p || !(b || v)) ? jsx(ModalContainer, {
     className: _$$s2.cursorDefault.selectNone.$,
     title: "",
     size: 400,
@@ -321,7 +321,7 @@ let eI = registerModal(function ({
     children: jsx(LoadingOverlay, {
       size: "medium"
     })
-  }) : jsx(fu, {
+  }) : jsx(TrackingProvider, {
     name: _$$e2.UPGRADE_REQUESTS_DETAIL_MODAL,
     properties: {
       adminRequestsDashboard: !0,
@@ -330,7 +330,7 @@ let eI = registerModal(function ({
       teamId: a === ps.TEAM ? t : void 0,
       entryPoint: c || void 0
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       className: _$$s2.cursorDefault.selectNone.$,
       title: "",
       size: 400,
@@ -1091,9 +1091,9 @@ export function $$eD0({
   }];
   let tz = e => {
     switch (d) {
-      case Sm.MEMBERS:
+      case UpgradeRequestSetting.MEMBERS:
         return renderI18nText(e ? "admin_dashboard.configured_upgrade_request_banner.members" : "admin_dashboard.configured_upgrade_request_empty_state.members");
-      case Sm.ALL_USERS:
+      case UpgradeRequestSetting.ALL_USERS:
         return renderI18nText(e ? "admin_dashboard.configured_upgrade_request_banner.all_users" : "admin_dashboard.configured_upgrade_request_empty_state.all_users");
       default:
         return null;
@@ -1170,7 +1170,7 @@ export function $$eD0({
         showAllOrgRequests: t_ ?? !1,
         showBillingGroupAdminRequests: tu,
         viewableBillingGroupIds: $ ? [null, ...e8] : e8
-      }), jsx(Spacer, {}), q && jsx(CY, {
+      }), jsx(Spacer, {}), q && jsx(SecureLink, {
         trusted: !0,
         onClick: q,
         className: _$$s2.fontMedium.$,
@@ -1225,7 +1225,7 @@ export function $$eD0({
       })
     })]
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e2.UPGRADE_REQUESTS_TABLE,
     properties: {
       adminRequestsDashboard: !0,
@@ -1300,7 +1300,7 @@ export function $$eD0({
           }) : jsx("div", {
             className: _$$s2.lh16.cursorDefault.colorText.$,
             children: renderI18nText("admin_dashboard.requests.empty.no_filter_results", {
-              resetFiltersLink: jsx(CY, {
+              resetFiltersLink: jsx(SecureLink, {
                 trusted: !0,
                 onClick: () => {
                   X(null);

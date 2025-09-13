@@ -9,7 +9,7 @@ import { cr, CO } from "../905/703676";
 import { n as _$$n } from "../905/624711";
 import { k } from "../905/252342";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
-import { jD, uR, $L } from "../figma_app/162807";
+import { PillType, InputType, $L } from "../figma_app/162807";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { isSitesFeatureEnabled } from "../905/561485";
 import { zH, Kk } from "../905/954985";
@@ -33,7 +33,7 @@ export function $$y0({
     y(null);
     t ? x({
       resourceType: t
-    }) : S({}, jD.ALL_TYPES, uR.DROPDOWN);
+    }) : S({}, PillType.ALL_TYPES, InputType.DROPDOWN);
   }, [I, E, y, i, x, S]);
   return jsxs("div", {
     className: zH,

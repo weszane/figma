@@ -5,7 +5,7 @@ import { N as _$$N } from "../905/438674";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { h as _$$h } from "../905/207101";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { ph } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
@@ -54,7 +54,7 @@ function c({
 }
 function p(e) {
   return useCallback(t => {
-    t.keyCode === Uz.ENTER && e();
+    t.keyCode === KeyCodes.ENTER && e();
   }, [e]);
 }
 export function $$O1({

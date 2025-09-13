@@ -14,12 +14,12 @@ import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { FRequestsStr } from "../905/384551";
-import { UserRole } from "../905/441038";
+import { UserGroupRole } from "../905/441038";
 import { O as _$$O } from "../figma_app/809387";
-import { J7, SN } from "../figma_app/650409";
-import { O as _$$O2 } from "../905/833838";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
+import { OrganizationType } from "../905/833838";
 import { DashboardSections } from "../905/548208";
-import { V0 } from "../figma_app/858344";
+import { DUserRole } from "../figma_app/858344";
 var d = l;
 export function $$x1() {
   let e = _6();
@@ -29,27 +29,27 @@ export function $$x1() {
   return t || N(e, n);
 }
 function N(e, t) {
-  return "teamAdminConsole" !== e.view && "orgAdminSettings" !== e.view && ("licenseGroup" === e.view && e.subView === UserRole.ADMIN && !!t || "billingGroupDashboard" === e.view && e.selectedTab === FRequestsStr.ALL_REQUESTS || "workspace" === e.view && e.subView === V0.ADMIN && !!t || "orgDomainManagement" === e.view || "orgIdpManagement" === e.view || "abandonedDraftFiles" === e.view || "seatRequests" === e.view);
+  return "teamAdminConsole" !== e.view && "orgAdminSettings" !== e.view && ("licenseGroup" === e.view && e.subView === UserGroupRole.ADMIN && !!t || "billingGroupDashboard" === e.view && e.selectedTab === FRequestsStr.ALL_REQUESTS || "workspace" === e.view && e.subView === DUserRole.ADMIN && !!t || "orgDomainManagement" === e.view || "orgIdpManagement" === e.view || "abandonedDraftFiles" === e.view || "seatRequests" === e.view);
 }
 function C(e) {
   let t = useTeamPlanUser();
   return useIsOrgAdminUser(t).unwrapOr(!1) ? jsxs(A5, {
     children: [jsx(J5, {
-      text: _$$O(J7.CONTENT),
+      text: _$$O(DashboardSection.CONTENT),
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.CONTENT
+          orgAdminSettingsViewTab: DashboardSection.CONTENT
         }));
       },
       hasTrailingDivider: !0
     }), jsx(J5, {
-      text: _$$O(J7.CONTENT, SN.WORKSPACES),
+      text: _$$O(DashboardSection.CONTENT, WorkspaceTab.WORKSPACES),
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.CONTENT,
-          orgAdminSettingsViewSecondaryTab: SN.WORKSPACES
+          orgAdminSettingsViewTab: DashboardSection.CONTENT,
+          orgAdminSettingsViewSecondaryTab: WorkspaceTab.WORKSPACES
         }));
       },
       hasTrailingDivider: !1
@@ -60,11 +60,11 @@ function w(e) {
   let t = useTeamPlanUser();
   return useIsOrgAdminUser(t).unwrapOr(!1) ? jsx(A5, {
     children: jsx(J5, {
-      text: _$$O(J7.BILLING),
+      text: _$$O(DashboardSection.BILLING),
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.BILLING
+          orgAdminSettingsViewTab: DashboardSection.BILLING
         }));
       },
       hasTrailingDivider: !1
@@ -74,11 +74,11 @@ function w(e) {
 function O(e) {
   return jsx(A5, {
     children: jsx(J5, {
-      text: _$$O(J7.SETTINGS),
+      text: _$$O(DashboardSection.SETTINGS),
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.SETTINGS
+          orgAdminSettingsViewTab: DashboardSection.SETTINGS
         }));
       },
       hasTrailingDivider: !1
@@ -88,11 +88,11 @@ function O(e) {
 function R(e) {
   return jsx(A5, {
     children: jsx(J5, {
-      text: _$$O(J7.SETTINGS),
+      text: _$$O(DashboardSection.SETTINGS),
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.SETTINGS
+          orgAdminSettingsViewTab: DashboardSection.SETTINGS
         }));
       },
       hasTrailingDivider: !1
@@ -100,13 +100,13 @@ function R(e) {
   });
 }
 function L(e) {
-  return e.selectedView.adminPlanType === _$$O2.ORG ? jsxs(A5, {
+  return e.selectedView.adminPlanType === OrganizationType.ORG ? jsxs(A5, {
     children: [jsx(J5, {
-      text: _$$O(J7.CONTENT),
+      text: _$$O(DashboardSection.CONTENT),
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.CONTENT
+          orgAdminSettingsViewTab: DashboardSection.CONTENT
         }));
       },
       hasTrailingDivider: !0
@@ -115,8 +115,8 @@ function L(e) {
       onClick: () => {
         e.dispatch(sf({
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.CONTENT,
-          orgAdminSettingsViewSecondaryTab: SN.ABANDONED_DRAFTS
+          orgAdminSettingsViewTab: DashboardSection.CONTENT,
+          orgAdminSettingsViewSecondaryTab: WorkspaceTab.ABANDONED_DRAFTS
         }));
       },
       hasTrailingDivider: !1
@@ -154,9 +154,9 @@ function D(e) {
     children: jsx(J5, {
       text: getI18nString("team_view.toolbar.dashboard"),
       onClick: () => {
-        e.dispatch(sf(e.selectedView.adminPlanType === _$$O2.ORG ? {
+        e.dispatch(sf(e.selectedView.adminPlanType === OrganizationType.ORG ? {
           view: "orgAdminSettings",
-          orgAdminSettingsViewTab: J7.DASHBOARD
+          orgAdminSettingsViewTab: DashboardSection.DASHBOARD
         } : {
           view: "teamAdminConsole",
           teamId: e.selectedView.planId,
@@ -169,11 +169,11 @@ function D(e) {
 }
 function k(e) {
   var t = null;
-  "workspace" === e.selectedView.view && e.selectedView.subView === V0.ADMIN && (t = jsx(C, {
+  "workspace" === e.selectedView.view && e.selectedView.subView === DUserRole.ADMIN && (t = jsx(C, {
     dispatch: e.dispatch,
     selectedView: e.selectedView
   }));
-  "licenseGroup" === e.selectedView.view && e.selectedView.subView === UserRole.ADMIN && (t = jsx(w, {
+  "licenseGroup" === e.selectedView.view && e.selectedView.subView === UserGroupRole.ADMIN && (t = jsx(w, {
     dispatch: e.dispatch,
     selectedView: e.selectedView
   }));

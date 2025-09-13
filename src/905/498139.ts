@@ -24,7 +24,7 @@ import { WB } from "../figma_app/394327";
 import { K } from "../905/443068";
 import { U as _$$U } from "../905/708285";
 import { h as _$$h } from "../905/207101";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { $ } from "../905/483620";
 import { Cr } from "../figma_app/260445";
 import { I3, gJ } from "../905/923433";
@@ -53,7 +53,7 @@ function D({
     children: [jsx(VariableFormRow, {
       label: renderI18nText("variables.create_modal.name_label"),
       labelFor: "create-component-prop-name-input",
-      input: jsx(_$$L, {
+      input: jsx(LazyInputForwardRef, {
         ref: s,
         autoFocus: !0,
         className: _Z,

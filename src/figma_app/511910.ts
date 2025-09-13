@@ -5,10 +5,10 @@ import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import l from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { DP } from "../905/640017";
 import { UK } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
@@ -69,14 +69,14 @@ function P() {
   let e = getViewportWidth({
     subscribeToUpdates_expensive: !0
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Panning and Zooming Glow Overlay",
     children: jsxs("div", {
       className: "no_figma_basics_panning_and_zooming_step--readyToDesignMoreContainer--nu9cG",
       children: [jsx("div", {
         className: "no_figma_basics_panning_and_zooming_step--readyToDesignMoreBoldText--H6Q1p",
         children: renderI18nText("tooltips_plus_onboarding.ready_to_design_more")
-      }), renderI18nText("tooltips_plus_onboarding.go_to_a_blank_spot_in_your_canvas"), jsx(Kz, {
+      }), renderI18nText("tooltips_plus_onboarding.go_to_a_blank_spot_in_your_canvas"), jsx(Spacing, {
         multiple: 3
       }), jsx("div", {
         style: {
@@ -92,7 +92,7 @@ var D = (e => (e.MOUSE = "mouse", e.TRACKPAD = "trackpad", e))(D || {});
 function k() {
   let e = useDispatch();
   let [t, r] = useState("mouse");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Panning and Zooming Instructions Modal",
     children: jsx(wz, {
       children: jsxs("div", {
@@ -134,11 +134,11 @@ function k() {
           })]
         }), jsxs("div", {
           className: "no_figma_basics_panning_and_zooming_step--body--QKpb-",
-          children: [jsx(Kz, {
+          children: [jsx(Spacing, {
             multiple: 1.5
           }), jsx(G, {
             peripheral: t
-          }), jsx(Kz, {
+          }), jsx(Spacing, {
             multiple: 2
           }), jsx(V, {
             peripheral: t

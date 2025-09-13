@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 export function $$l0({
   buttons: e,
@@ -11,7 +11,7 @@ export function $$l0({
   let n = 2 === e.length ? c.twoColumnGrid : c.threeColumnGrid;
   return jsx("div", {
     ...xk(c.startFromRowWrapper, n, i),
-    children: e.map(e => jsx(fu, {
+    children: e.map(e => jsx(TrackingProvider, {
       name: `${t}_template_start_from_button.${e.id}`,
       children: jsx(d, {
         onClick: e.onClick,

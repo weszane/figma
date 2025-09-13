@@ -18,7 +18,7 @@ import { LibraryPresetSubscriptionsV2, SubscribedLibrariesForFile, SubscribedLib
 import { Nn } from "../figma_app/177636";
 import { f as _$$f } from "../figma_app/252485";
 import { getProviderConfigType } from "../figma_app/155411";
-import { T9 } from "../figma_app/528509";
+import { hasRootPath } from "../figma_app/528509";
 import { useCurrentPublicPlan, useIsProOrStudentPlan } from "../figma_app/465071";
 var p = u;
 var $$x1 = (e => (e.COMMUNITY = "community", e.ORGANIZATION = "organization", e.WORKSPACE = "workspace", e.TEAM = "team", e.FILE = "file", e.USER = "user", e))($$x1 || {});
@@ -97,7 +97,7 @@ export function $$D0({
 }) {
   let t = selectCurrentFile();
   let r = !!t?.teamId;
-  let a = T9(t?.project);
+  let a = hasRootPath(t?.project);
   useAtomWithSubscription(LibraryPresetSubscriptionsV2.Query({
     group: getProviderConfigType()
   }));

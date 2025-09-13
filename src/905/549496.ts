@@ -6,7 +6,7 @@ import { ModalRootComponent } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
 import { A as _$$A } from "../905/920165";
 import { trackEventAnalytics } from "../905/449184";
-import { vd } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -252,7 +252,7 @@ class w extends Component {
                   className: _$$s.selectNone.$,
                   children: "+"
                 })]
-              }), jsx(vd, {
+              }), jsx(ButtonBasePrimaryTracked, {
                 onClick: this.startUpload,
                 className: pL,
                 ref: this.buttonRef,

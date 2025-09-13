@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import a from "classnames";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { Kg, u9, rH } from "../figma_app/811257";
 import { $f, Vp, ON, qv, q1, wH, jz, eK, H_, cN, xx } from "../905/235035";
 var s = a;
@@ -14,7 +14,7 @@ let $$c0 = forwardRef(function ({
   icon: c,
   ...u
 }, p) {
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: s()($f, a),
     forwardedRef: p,
     ...u,
@@ -45,7 +45,7 @@ let $$u2 = forwardRef(function ({
   dataOnboardingKey: l
 }, c) {
   let u = s()(qv, r);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     onClick: a,
     dataOnboardingKey: l,
     className: u,
@@ -74,7 +74,7 @@ forwardRef(function ({
   recordingKey: p
 }, _) {
   let h = s()(jz, i);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: h,
     forwardedRef: _,
     onFocus: a,
@@ -107,7 +107,7 @@ let $$p1 = forwardRef(function ({
   onBlur: c,
   dataTestId: u
 }, p) {
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: s()(cN, r),
     forwardedRef: p,
     onFocus: a,
@@ -136,7 +136,7 @@ let $$_3 = forwardRef(function ({
   appendedClassName: _
 }, h) {
   let m = s()(xx, _);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: m,
     forwardedRef: h,
     onContextMenu: c,

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { Kz, vd, Us } from "../figma_app/637027";
-import { L } from "../905/408237";
+import { Spacing, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
+import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
@@ -43,7 +43,7 @@ export function $$_1({
     children: [jsx("div", {
       className: Fb,
       children: p.title
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: .5
     }), jsx("div", {
       className: b0,
@@ -53,13 +53,13 @@ export function $$_1({
       children: [jsx(SvgComponent, {
         svg: A,
         className: Pr
-      }), jsx(L, {
+      }), jsx(LazyInputForwardRef, {
         className: Zy,
         onChange: e => a(e.target.value),
         value: t,
         placeholder: p.placeholder
       })]
-    }), jsx(vd, {
+    }), jsx(ButtonBasePrimaryTracked, {
       className: eA,
       onClick: m,
       trackingProperties: {
@@ -67,7 +67,7 @@ export function $$_1({
       },
       disabled: !t.trim(),
       children: p.next
-    }), !!_ && jsx(Us, {
+    }), !!_ && jsx(linkWithTracking, {
       className: x,
       onClick: _,
       trusted: !0,

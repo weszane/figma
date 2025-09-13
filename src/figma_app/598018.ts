@@ -17,7 +17,7 @@ import { FFileType, FPaymentHealthStatusType, FPlanLimitationType } from '../fig
 import { hasTeamStatePaidAccess, STANDARD_LIMIT } from '../figma_app/345997';
 import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338';
 import { throwTypeError } from '../figma_app/465776';
-import { ye } from '../figma_app/528509';
+import { isTeamFolder } from '../figma_app/528509';
 import { canAdminTeam } from '../figma_app/642025';
 import { filterNotNullish } from '../figma_app/656233';
 import { memoizeByArgs } from '../figma_app/815945';
@@ -76,7 +76,7 @@ let w = async (e, t) => {
       draft: 0,
       nonDraft: 0
     };
-    ye(s) ? r[team_id][editor_type].draft += 1 : r[team_id][editor_type].nonDraft += 1;
+    isTeamFolder(s) ? r[team_id][editor_type].draft += 1 : r[team_id][editor_type].nonDraft += 1;
   }
   let i = Object.entries(r).find(([e, r]) => {
     let n = t[e];

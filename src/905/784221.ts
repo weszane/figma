@@ -8,14 +8,14 @@ import { X } from "../905/859195";
 import { yJ } from "../figma_app/78808";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileTemplateView } from "../figma_app/43951";
 import { cD } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { r as _$$r } from "../905/149895";
 export function $$I1(e, t) {
   return () => {
@@ -36,7 +36,7 @@ function E({
   destructive: a,
   onConfirm: l
 }) {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     size: 360,
     confirmationTitle: jsx("p", {
       className: _$$s.fontSemiBold.font11.$,
@@ -101,7 +101,7 @@ let x = registerModal(function ({
       }
     }));
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team Template Unpublish Confirmation Modal",
     properties: {
       orgId: s,

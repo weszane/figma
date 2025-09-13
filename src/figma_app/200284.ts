@@ -21,7 +21,7 @@ import { Fe } from "../905/284552";
 import { Y as _$$Y } from "../905/506207";
 import { handleAtomEvent } from "../905/502364";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { LN } from "../figma_app/975811";
 import { D as _$$D } from "../figma_app/451499";
 import { dG } from "../figma_app/753501";
@@ -85,7 +85,7 @@ export function $$eT3(e) {
   let o = X7();
   let l = selectCurrentFile();
   let d = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Image Settings Modal",
     children: jsx(eI, {
       ...e,
@@ -375,7 +375,7 @@ class eI extends Component {
     });else return jsxs(Fragment, {
       children: [this.props.isAiEnabled && jsx(eC, {
         onClose: this.props.onClose
-      }), jsx(fu, {
+      }), jsx(TrackingProvider, {
         name: "Color Adjust Sliders",
         children: jsx("div", {
           className: y()(Vq, {

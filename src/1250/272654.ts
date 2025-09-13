@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import i from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { x$, cn } from "../figma_app/141320";
-import { Us, vd } from "../figma_app/637027";
+import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Dw } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { WX } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { f as _$$f } from "../905/940356";
@@ -70,7 +70,7 @@ export let $$k0 = registerModal(function (e) {
     S();
     n(Dw({}));
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Edu Offboarding Modal",
     children: jsxs(OJ, {
       title: getI18nString("edu.offboarding_modal.your_education_status"),
@@ -100,7 +100,7 @@ export let $$k0 = registerModal(function (e) {
             children: [jsx("strong", {
               children: renderI18nText("edu.offboarding_modal.if_you_graduated")
             }), I ? renderI18nText("edu.offboarding_modal.continue_below_to_upgrade_your_team_s_to_the_professional_plan_or", {
-              createProTeamLink: jsx(Us, {
+              createProTeamLink: jsx(linkWithTracking, {
                 onClick: N,
                 trusted: !0,
                 children: renderI18nText("edu.offboarding_modal.create_a_new_professional_team")
@@ -115,7 +115,7 @@ export let $$k0 = registerModal(function (e) {
             children: [jsx("strong", {
               children: renderI18nText("edu.offboarding_modal.if_you_re_still_in_education")
             }), renderI18nText("edu.offboarding_modal.verify_your_status_to_keep_collaborating_with_your_teams", {
-              verifyStatusLink: jsx(Us, {
+              verifyStatusLink: jsx(linkWithTracking, {
                 href: "/education/apply",
                 target: "_blank",
                 trusted: !0,
@@ -131,7 +131,7 @@ export let $$k0 = registerModal(function (e) {
             children: [jsx("strong", {
               children: renderI18nText("edu.offboarding_modal.to_save_your_work")
             }), I ? renderI18nText("edu.offboarding_modal.duplicate_or_move_files_to_your_drafts_to_save_them_for_later_and_consider_transferring_ownership_of_your_team_s", {
-              transferringOwnershipLink: jsx(Us, {
+              transferringOwnershipLink: jsx(linkWithTracking, {
                 href: "https://help.figma.com/hc/articles/360038512093",
                 target: "_blank",
                 trusted: !0,
@@ -141,7 +141,7 @@ export let $$k0 = registerModal(function (e) {
           })]
         }), jsx("div", {
           className: _$$s.flex.flexColumn.itemsEnd.pt32.$,
-          children: I ? jsx(vd, {
+          children: I ? jsx(ButtonBasePrimaryTracked, {
             onClick: () => {
               S();
               n(WX({
@@ -150,7 +150,7 @@ export let $$k0 = registerModal(function (e) {
               }));
             },
             children: renderI18nText("edu.offboarding_modal.upgrade_to_professional")
-          }) : jsx(vd, {
+          }) : jsx(ButtonBasePrimaryTracked, {
             onClick: N,
             children: renderI18nText("edu.offboarding_modal.create_a_new_professional_team_cta")
           })

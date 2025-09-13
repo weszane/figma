@@ -46,7 +46,7 @@ import { P as _$$P } from '../905/842406';
 import { Um } from '../905/848862';
 import { h as _$$h2 } from '../905/857431';
 import { h as _$$h } from '../905/864281';
-import { o as _$$o } from '../905/895626';
+import { InterProfileType } from '../905/895626';
 import { j7, oB, sf } from '../905/929976';
 import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
@@ -83,16 +83,16 @@ import { kb } from '../figma_app/502247';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { cD, pG } from '../figma_app/598018';
 import { X8 } from '../figma_app/634656';
-import { CY } from '../figma_app/637027';
+import { SecureLink } from '../figma_app/637027';
 import { canAdminTeam, getPermissionsState } from '../figma_app/642025';
 import { filterNotNullish } from '../figma_app/656233';
 import { isMobileUA } from '../figma_app/778880';
 import { az, z6 } from '../figma_app/805373';
-import { $z, fu } from '../figma_app/831799';
+import { TrackedButton, TrackingProvider } from '../figma_app/831799';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { wO } from '../figma_app/907616';
 import { utilityNoop } from '../figma_app/918700';
-import { Ex, zE } from '../figma_app/919079';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { A as _$$A4 } from '../svg/443105';
 import { A as _$$A8 } from '../svg/783902';
 import { A as _$$A2 } from '../svg/977613';
@@ -191,7 +191,7 @@ function ea(e) {
     t(sf({
       view: 'user',
       userId: s.id,
-      userViewTab: _$$o.INTERNAL_PROFILE
+      userViewTab: InterProfileType.INTERNAL_PROFILE
     }));
   };
   let x = (t, n) => {
@@ -372,7 +372,7 @@ function el(e) {
     t(sf({
       view: 'user',
       userId: a.id,
-      userViewTab: _$$o.INTERNAL_PROFILE
+      userViewTab: InterProfileType.INTERNAL_PROFILE
     }));
   };
   let v = (e, t) => jsx(az, {
@@ -717,7 +717,7 @@ let tr = registerModal(() => {
       }), jsx(TextWithTruncation, {
         color: 'secondary',
         children: renderI18nText('admin_settings.ai.features_toggle.description.team', {
-          learnMoreLink: jsx(CY, {
+          learnMoreLink: jsx(SecureLink, {
             href: _$$d3.aiFeatures,
             target: '_blank',
             trusted: !0,
@@ -745,8 +745,8 @@ let tr = registerModal(() => {
       children: [jsx(TextWithTruncation, {
         fontWeight: 'medium',
         children: renderI18nText('admin_settings.ai.section_title')
-      }), !u && jsx(Ex, {
-        color: zE.BRAND,
+      }), !u && jsx(Badge, {
+        color: BadgeColor.BRAND,
         text: getI18nString('general.beta')
       })]
     }),
@@ -780,7 +780,7 @@ let tr = registerModal(() => {
           }), jsx(TextWithTruncation, {
             color: 'secondary',
             children: renderI18nText('admin_settings.ai.data_sharing.description.team', {
-              learnMoreLink: jsx(CY, {
+              learnMoreLink: jsx(SecureLink, {
                 href: _$$d3.aiDataSharing,
                 target: '_blank',
                 trusted: !0,
@@ -1135,8 +1135,8 @@ function tf(e) {
         children: [renderI18nText('admin_settings.ai.section_title'), !D && jsxs(Fragment, {
           children: [jsx('span', {
             className: _$$s.inlineFlex.ml8.$,
-            children: jsx(Ex, {
-              color: zE.BRAND,
+            children: jsx(Badge, {
+              color: BadgeColor.BRAND,
               text: getI18nString('general.beta')
             })
           }), jsx(_$$B2, {
@@ -1268,7 +1268,7 @@ function tf(e) {
           children: [jsx('strong', {
             children: renderI18nText('upgrade.ready_to_go_beyond_free_plan')
           }), jsxs('div', {
-            children: [renderI18nText('upgrade.more_features'), jsx($z, {
+            children: [renderI18nText('upgrade.more_features'), jsx(TrackedButton, {
               className: t_,
               onClick: U,
               trackingProperties: {
@@ -1288,7 +1288,7 @@ function tf(e) {
       }), jsx('div', {
         className: tm,
         children: jsxs('div', {
-          children: [renderI18nText('file_browser.team_settings_modal.upgrade_to_organization'), jsx($z, {
+          children: [renderI18nText('file_browser.team_settings_modal.upgrade_to_organization'), jsx(TrackedButton, {
             className: t_,
             onClick: U,
             trackingProperties: {
@@ -1408,7 +1408,7 @@ let $$tT0 = registerModal(e => {
     avatarSvg: _$$A8,
     svgSizeRatio: 0.6
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Team Settings Modal',
     properties: {
       teamId: x.id,
@@ -1456,7 +1456,7 @@ let $$tT0 = registerModal(e => {
         children: [jsx('div', {
           className: 'team_settings_modal--avatarContainer--xDqae',
           children: j
-        }), e.tab === 'SETTINGS' && jsx(fu, {
+        }), e.tab === 'SETTINGS' && jsx(TrackingProvider, {
           name: 'Team Settings',
           children: jsx(Suspense, {
             fallback: jsx('div', {

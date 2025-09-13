@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { useSubscription } from "../figma_app/288654";
 import { logError } from "../905/714362";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { EK } from "../figma_app/396432";
 import { dR, lk } from "../figma_app/109538";
@@ -441,7 +441,7 @@ var $$n0;
   }, {
     text: getI18nString("consumption_paywalls.variables.rest_api"),
     hoverText: renderI18nText("consumption_paywalls.variables.rest_api_hover_text", {
-      learnMore: jsx(Us, {
+      learnMore: jsx(linkWithTracking, {
         trusted: !0,
         href: "https://www.figma.com/developers/api#variables",
         target: "_blank",
@@ -684,7 +684,7 @@ var $$n0;
   e.getModalLearnMoreLink = function (e) {
     switch (e) {
       case Bi.FIGMAKE:
-        return jsx(Us, {
+        return jsx(linkWithTracking, {
           trusted: !0,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/31722591905559-Figma-Make-FAQs",
@@ -692,7 +692,7 @@ var $$n0;
         });
       case vL.FILE:
       case vL.PAGE:
-        if (getFeatureFlags().sts_starter_enabled) return jsx(Us, {
+        if (getFeatureFlags().sts_starter_enabled) return jsx(linkWithTracking, {
           trusted: !0,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/33543548184215",

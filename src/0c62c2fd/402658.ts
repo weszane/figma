@@ -17,7 +17,7 @@ import { cm } from "../figma_app/544879";
 import { t as _$$t2 } from "../905/53773";
 import { hideModal } from "../905/156213";
 import { Ct } from "../figma_app/199513";
-import { CI } from "../figma_app/528509";
+import { getSidebarPath } from "../figma_app/528509";
 import { N } from "../905/98916";
 export function $$T0(e) {
   let {
@@ -79,7 +79,7 @@ function E(e) {
   })(numFiles);
   let E = jsx("span", {
     className: _$$s.fontBold.$,
-    children: CI(folder)
+    children: getSidebarPath(folder)
   });
   let I = (e => {
     switch (e) {

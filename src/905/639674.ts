@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
-import { e2 } from "../figma_app/637027";
+import { ButtonBaseReversedContainer } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../905/105972";
@@ -18,7 +18,7 @@ export function $$p0(e) {
     m(!1);
   };
   return jsxs(Fragment, {
-    children: [jsxs(e2, {
+    children: [jsxs(ButtonBaseReversedContainer, {
       className: _l,
       children: [jsx(Button, {
         variant: "primary",

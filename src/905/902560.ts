@@ -1,28 +1,59 @@
-import { parseQuery } from "../905/634134";
-import { oU, Od, dy, LU } from "../figma_app/967319";
-export function $$a0(e) {
-  if (!e) return oU;
-  let t = parseQuery(e);
-  let i = t.sort_by;
-  let a = Od.NAME;
-  i && Object.values(Od).includes(i) && i !== Od.SEARCH_SCORE && (a = i);
-  let s = t.order_by?.toLowerCase() === dy.DESC;
-  let o = LU.includes(a);
+import { parseQuery } from '../905/634134'
+import { ColumnName, DateColumns, DefaultSortConfig, SortDirection } from '../figma_app/967319'
+
+/**
+ * Parses the sort configuration from a query string.
+ * Original function name: $$a0
+ * @param query - The query string to parse.
+ * @returns The sort configuration object.
+ */
+export function parseSortConfig(query?: string) {
+  if (!query)
+    return DefaultSortConfig
+
+  const parsed = parseQuery(query)
+  const sortBy = parsed.sort_by
+  let columnName: string = ColumnName.NAME
+
+  if (
+    sortBy
+    && Object.values(ColumnName).includes(sortBy)
+    && sortBy !== ColumnName.SEARCH_SCORE
+  ) {
+    columnName = sortBy
+  }
+
+  const isDesc = parsed.order_by?.toLowerCase() === SortDirection.DESC
+  const isDateColumn = DateColumns.includes(columnName)
+
   return {
-    columnName: a,
-    isReversed: o ? !s : s
-  };
+    columnName,
+    isReversed: isDateColumn ? !isDesc : isDesc,
+  }
 }
-export function $$s1(e) {
-  let t = "score" === e.columnName || LU.includes(e.columnName) ? !e.isReversed : e.isReversed;
+
+/**
+ * Converts a sort configuration object to a query object.
+ * Original function name: $$s1
+ * @param config - The sort configuration object.
+ * @returns The query object for sorting.
+ */
+export function sortConfigToQuery(config: { columnName: string, isReversed: boolean }) {
+  const isDesc
+    = config.columnName === 'score' || DateColumns.includes(config.columnName)
+      ? !config.isReversed
+      : config.isReversed
+
   return {
-    ...(e.columnName !== Od.NAME && {
-      sort_by: e.columnName
+    ...(config.columnName !== ColumnName.NAME && {
+      sort_by: config.columnName,
     }),
-    ...(t && {
-      order_by: dy.DESC
-    })
-  };
+    ...(isDesc && {
+      order_by: SortDirection.DESC,
+    }),
+  }
 }
-export const E = $$a0;
-export const n = $$s1;
+
+// Refactored exports for clarity and consistency
+export const E = parseSortConfig
+export const n = sortConfigToQuery

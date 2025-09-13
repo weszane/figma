@@ -9,13 +9,13 @@ import { logError } from '../905/714362'
 import { API } from '../905/910117'
 
 // Types
-interface ValidationContext {
+export interface ValidationContext {
   xr: typeof API
 }
-interface ValidationError {
+export interface ValidationError {
   [key: string]: string[]
 }
-interface ValidatorResponse<T = any> {
+export interface ValidatorResponse<T = any> {
   status: number
   data: T
   [key: string]: any
@@ -26,11 +26,11 @@ type LogLevel = 'error' | 'warn'
  * Base validator class for API response validation
  */
 class BaseValidator<T> {
-  public debugKey: string
-  private readonly schema: z.ZodSchema<T>
-  private readonly logLevel: LogLevel
-  protected _input: any = null
-  protected _output: any = null
+  debugKey: string
+  schema: z.ZodSchema<T>
+  logLevel: LogLevel
+  _input: any = null
+  _output: any = null
   constructor(debugKey: string, schema: z.ZodSchema<T>, logLevel: LogLevel) {
     this.debugKey = debugKey
     this.schema = schema
@@ -68,7 +68,7 @@ class BaseValidator<T> {
   /**
    * Logs validation failures for monitoring
    */
-  private logValidationFailure(error: z.ZodError): void {
+  logValidationFailure(error: z.ZodError): void {
     trackEventAnalytics('Validator Failure', {
       name: this.debugKey,
       level: this.logLevel,
@@ -87,7 +87,7 @@ class BaseValidator<T> {
   /**
    * Formats validation errors for better readability
    */
-  protected formatValidationErrors(error: z.ZodError): ValidationError {
+  formatValidationErrors(error: z.ZodError): ValidationError {
     const formattedErrors: ValidationError = {}
     error.issues.forEach((issue) => {
       const path = issue.path.map(segment => typeof segment === 'number' ? '[#]' : segment).join('.')
@@ -104,9 +104,9 @@ class BaseValidator<T> {
  * Enhanced validator with feature flag support and enforcement options
  */
 class EnhancedValidator<T> extends BaseValidator<T> {
-  private readonly featureFlagKey?: string
-  private readonly enforce: boolean
-  private readonly reportAsSentryError: boolean
+  featureFlagKey?: string
+  enforce: boolean
+  reportAsSentryError: boolean
   constructor(public debugKey: string, schema: z.ZodSchema<T>, featureFlagKey?: string, enforce: boolean = false, reportAsSentryError: boolean = false) {
     super(debugKey, schema, enforce ? 'error' : 'warn')
     this.featureFlagKey = featureFlagKey

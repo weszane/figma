@@ -14,7 +14,7 @@ import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanFeatures, useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { vS } from "../figma_app/846003";
-import { J7 } from "../figma_app/650409";
+import { DashboardSection } from "../figma_app/650409";
 import { DashboardSections } from "../905/548208";
 import { o0 } from "../905/844131";
 import { l as _$$l } from "../4452/447644";
@@ -50,7 +50,7 @@ export function $$T0() {
     })
   }) : (T || (t.data.key.type === FOrganizationLevelType.ORG ? e(sf({
     view: "orgAdminSettings",
-    orgAdminSettingsViewTab: J7.DASHBOARD
+    orgAdminSettingsViewTab: DashboardSection.DASHBOARD
   })) : e(sf({
     view: "teamAdminConsole",
     teamId: t.data.key.parentId ?? "",

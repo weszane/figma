@@ -6,10 +6,10 @@ import { GZ } from "../905/508367";
 import { wY, cU } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
-import { Yo } from "../figma_app/637027";
+import { interactiveAnchorTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { c as _$$c } from "../905/370443";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
 import { P4, L3, Dr, S6 } from "../905/18800";
 import { V } from "../905/182752";
@@ -29,7 +29,7 @@ function T(e) {
   }, [I, E]);
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let v = useRef(trackEvent);
   v.current = trackEvent;
   useEffect(() => () => {
@@ -97,29 +97,29 @@ function T(e) {
     "data-testid": "cookie-banner",
     children: [jsxs("div", {
       className: rf,
-      children: ["This website uses cookies, pixel tags, and local storage for performance, personalization, and marketing purposes. Our use of some cookies may be considered a sale, sharing for behavioral advertising, or targeted advertising. For more, see our", " ", jsx(Yo, {
+      children: ["This website uses cookies, pixel tags, and local storage for performance, personalization, and marketing purposes. Our use of some cookies may be considered a sale, sharing for behavioral advertising, or targeted advertising. For more, see our", " ", jsx(interactiveAnchorTracked, {
         rel: "noopener",
         target: "_blank",
         href: "/privacy/",
         children: "privacy policy"
       }), ". ", jsx("b", {
         children: "California Residents"
-      }), " can learn how personal information is", " ", jsx(Yo, {
+      }), " can learn how personal information is", " ", jsx(interactiveAnchorTracked, {
         href: "/privacy/#ca-notice",
         rel: "noopener",
         target: "_blank",
         children: "collected"
-      }), ", including how it is", " ", jsx(Yo, {
+      }), ", including how it is", " ", jsx(interactiveAnchorTracked, {
         href: "/privacy/#purpose",
         rel: "noopener",
         target: "_blank",
         children: "used"
-      }), ", whether it is", " ", jsx(Yo, {
+      }), ", whether it is", " ", jsx(interactiveAnchorTracked, {
         href: "/privacy/#ca-notice",
         rel: "noopener",
         target: "_blank",
         children: "\u201Csold\u201D or \u201Cshared\u201D"
-      }), ", and how long it is", " ", jsx(Yo, {
+      }), ", and how long it is", " ", jsx(interactiveAnchorTracked, {
         href: "/privacy/#retention",
         rel: "noopener",
         target: "_blank",
@@ -144,7 +144,7 @@ function T(e) {
         })
       })
     })]
-  }) : e.persistentMessage && jsx(fu, {
+  }) : e.persistentMessage && jsx(TrackingProvider, {
     name: "Cookie Banner Persistent Message",
     children: e.persistentMessage
   }) || null;
@@ -157,7 +157,7 @@ export function $$I0(e) {
       consentRegion: "explicit",
       cookiesEnabled: !1
     });
-  }, [r]), r || BrowserInfo.isIpadNative) ? null : jsx(fu, {
+  }, [r]), r || BrowserInfo.isIpadNative) ? null : jsx(TrackingProvider, {
     name: "Cookie Banner",
     properties: {
       consentRegion: "implicit"

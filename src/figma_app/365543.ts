@@ -5,7 +5,7 @@ import { N } from "../905/438674";
 import { A } from "../905/251970";
 import l from "classnames";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { t as _$$t } from "../905/331623";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
@@ -102,7 +102,7 @@ class T extends RecordingPureComponent {
       className: z_,
       children: jsxs("div", {
         className: eO,
-        children: [jsx(Kz, {
+        children: [jsx(Spacing, {
           multiple: 1
         }), this.renderContent()]
       })

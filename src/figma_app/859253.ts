@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { mc, YJ } from "../figma_app/860955";
 import { a as _$$a } from "../figma_app/215667";
 import { UI3ConditionalWrapper } from "../905/341359";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { e as _$$e } from "../figma_app/919092";
 export let $$c1 = "FILE_CREATION_OMNICREATE_DROPDOWN";
@@ -27,7 +27,7 @@ export function $$u0({
         htmlAttributes: {
           "data-onboarding-key": t
         },
-        children: jsxs(fu, {
+        children: jsxs(TrackingProvider, {
           name: e0.RESOURCE_CREATION_DROPDOWN,
           properties: {
             ...r,

@@ -11,7 +11,7 @@ import { createOptimistThunk } from "../905/350402";
 import { trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
 import { zU } from "../figma_app/740025";
 import { N } from "../905/696711";
-import { Or, Lk, Lr, uH, j9, Rr, Rx } from "../figma_app/162807";
+import { DEFAULT_PAGE_SIZE, Lk, Lr, PublicModelType, SortingCriteria, SearchTypeMode, SpaceAccessType } from "../figma_app/162807";
 import { vj as _$$vj, Ei } from "../905/574958";
 import { $W } from "../905/144933";
 let $$y28 = createOptimistThunk(async (e, t) => {
@@ -48,7 +48,7 @@ let $$b22 = createOptimistThunk(async (e, t) => {
   d.sort((e, t) => parseInt(t.timestamp) - parseInt(e.timestamp));
   let u = {
     org_id: s,
-    searches: d = d.slice(0, Or)
+    searches: d = d.slice(0, DEFAULT_PAGE_SIZE)
   };
   await XHR.put("/api/recent_search", u).catch(e => {
     console.error("Failed to add search history with error: " + e.message);
@@ -189,7 +189,7 @@ let P = (e, t, i, n, r, s) => {
       searchModelType: t
     }, $W.getFullResults(m)).then(e => {
       e.data || p(getI18nString("search.invalid_search_endpoint_result"));
-      let n = r.getState().search.parameters.facetFilters?.searchModelType ?? uH.FILES;
+      let n = r.getState().search.parameters.facetFilters?.searchModelType ?? PublicModelType.FILES;
       if (n === t && (r.dispatch($$X12({
         parameters: {
           ...i
@@ -202,7 +202,7 @@ let P = (e, t, i, n, r, s) => {
           }
         },
         queryId: s
-      })), _$$vj.Session.trackTimeToLoad(r.getState().search), o(), getFeatureFlags().scrub_file_browser_search_results && n === uH.FILES)) {
+      })), _$$vj.Session.trackTimeToLoad(r.getState().search), o(), getFeatureFlags().scrub_file_browser_search_results && n === PublicModelType.FILES)) {
         let t = {};
         e.data.meta.results.forEach(e => {
           let i = e.model;
@@ -227,7 +227,7 @@ let O = (e, t, i, n, r, a) => {
     let p = Lr(t.facetFilters);
     (u = {
       query: t.query,
-      sort: j9.RELEVANCY,
+      sort: SortingCriteria.RELEVANCY,
       desc: !0,
       ...er(n, !0),
       queryId: a,
@@ -260,7 +260,7 @@ let $$L0 = createOptimistThunk((e, t) => {
     ...t.parameters
   }));
   e.dispatch($$H20({
-    searchTypeBehavior: t.searchTypeBehavior ?? Rr.ONE_TYPE
+    searchTypeBehavior: t.searchTypeBehavior ?? SearchTypeMode.ONE_TYPE
   }));
   let i = e.getState();
   let n = i.search.parameters;
@@ -292,7 +292,7 @@ let $$L0 = createOptimistThunk((e, t) => {
     if (e.data && e.data.i18n) return resolveMessage(e);
   };
   if (u) {
-    let t = P(sessionId, n.facetFilters && n.facetFilters.searchModelType ? n.facetFilters.searchModelType : uH.FILES, n, p, e, m);
+    let t = P(sessionId, n.facetFilters && n.facetFilters.searchModelType ? n.facetFilters.searchModelType : PublicModelType.FILES, n, p, e, m);
     let i = $$L0.loadingKeyForPayload({
       parameters: n
     });
@@ -339,12 +339,12 @@ let $$ee16 = createActionCreator("SEARCH_CLEAR_QUERY");
 let $$et24 = createActionCreator("SEARCH_CLEAR_RESPONSES");
 let $$ei2 = createActionCreator("SEARCH_SET_RESPONSE_SORT_STATE");
 let $$en13 = createActionCreator("SEARCH_SET_PARAMETERS");
-let er = (e, t, i) => e.searchScope !== Rx.ORG && e.searchScope !== Rx.ORG_GUEST ? {
+let er = (e, t, i) => e.searchScope !== SpaceAccessType.ORG && e.searchScope !== SpaceAccessType.ORG_GUEST ? {
   currentOrgId: e.currentOrgId,
   isGlobal: t,
   planId: "NON_ORG_TEAMS" === e.planId ? null : e.planId,
   planType: "NON_ORG_TEAMS" === e.planId ? "team" : "org"
-} : i && i === uH.PRIVATE_WIDGETS ? {
+} : i && i === PublicModelType.PRIVATE_WIDGETS ? {
   orgSearch: !0,
   currentOrgId: e.currentOrgId,
   isGlobal: t

@@ -1,12 +1,12 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { N_, u4 } from "../figma_app/637027";
+import { BaseLinkComponent, ButtonBase } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
-import { y } from "../905/850671";
+import { getVsCodeLinkProps } from "../905/850671";
 import { Um } from "../905/848862";
 import { kt } from "../3591/828414";
 import { A } from "../6828/154709";
@@ -81,11 +81,11 @@ export function $$v0({
   let {
     href,
     onClick
-  } = y("https://www.figma.com/widget-docs/intro/");
+  } = getVsCodeLinkProps("https://www.figma.com/widget-docs/intro/");
   let {
     href: _href,
     onClick: _onClick
-  } = y("https://www.figma.com/plugin-docs");
+  } = getVsCodeLinkProps("https://www.figma.com/plugin-docs");
   return jsxs("div", {
     className: "empty_development_view--developmentPluginEmptyStateContainer--cTeAp",
     children: [jsx("span", {
@@ -94,19 +94,19 @@ export function $$v0({
     }), jsx("span", {
       className: _$$s.font11.fontNormal.colorTextSecondary.mb4.$,
       children: e ? renderI18nText("community.plugins.no_widgets_created_yet") : renderI18nText("community.plugins.no_plugins_created_yet")
-    }), e ? jsx(N_, {
+    }), e ? jsx(BaseLinkComponent, {
       href,
       onClick,
       className: _$$s.font11.fontNormal.noUnderline.inline.$,
       trusted: !0,
       children: renderI18nText("community.plugins.learn_more_about_widget_development")
-    }) : jsx(N_, {
+    }) : jsx(BaseLinkComponent, {
       href: _href,
       onClick: _onClick,
       className: _$$s.font11.fontNormal.noUnderline.inline.$,
       trusted: !0,
       children: renderI18nText("community.plugins.learn_more_about_plugin_development")
-    }), jsx(u4, {
+    }), jsx(ButtonBase, {
       defaultClass: "empty_development_view--buttonWithBorder--zk4QX text--fontPos11--2LvXf text--_fontBase--QdLsd",
       onClick: C,
       children: jsxs("div", {

@@ -45,7 +45,7 @@ import { HiddenLabel } from "../905/270045";
 import { w as _$$w } from "../figma_app/984514";
 import { T as _$$T } from "../figma_app/737897";
 import { Vb } from "../905/151685";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { Ay } from "@stylexjs/stylex";
 import { Ij } from "../figma_app/359943";
 import { b as _$$b, bL as _$$bL2, mc as _$$mc, wv, r1 as _$$r2, YJ } from "../figma_app/860955";
@@ -640,7 +640,7 @@ function e_(e) {
     let s = [a, "STRETCH"].includes(i);
     let o = "HORIZONTAL" === r ? e.isCompact ? "constraint_selector--compactOuterHorizontalTarget--5-m-j constraint_selector--outerHorizontalTarget--2Tsd3" : "constraint_selector--outerHorizontalTarget--2Tsd3" : e.isCompact ? "constraint_selector--compactOuterVerticalTarget--0Lb9I constraint_selector--outerVerticalTarget--m0eT7" : "constraint_selector--outerVerticalTarget--m0eT7";
     let l = S(t, s);
-    return jsx(D8, {
+    return jsx(RecordableDiv, {
       className: o,
       recordingKey: generateRecordingKey(e, "constraint", t),
       onMouseDown: _(r, a),
@@ -655,7 +655,7 @@ function e_(e) {
     let r = "centerX" === t ? "HORIZONTAL" : "VERTICAL";
     let i = u(r);
     let a = "HORIZONTAL" === r ? "constraint_selector--innerUI3V2HorizontalTarget--kJ2Ck constraint_selector--_innerUI3V2Target--PtYtd" : "constraint_selector--innerUI3V2VerticalTarget--rNFiS constraint_selector--_innerUI3V2Target--PtYtd";
-    return jsx(D8, {
+    return jsx(RecordableDiv, {
       className: a,
       recordingKey: generateRecordingKey(e, "constraint", t),
       onMouseDown: E,
@@ -776,7 +776,7 @@ function eg(e) {
     let s = ["top", "left"].includes(t) ? "MIN" : "MAX";
     let o = [s, "STRETCH"].includes(i);
     let c = "SCALE" === i;
-    return jsx(D8, {
+    return jsx(RecordableDiv, {
       ...Ay.props(eE.baseConstraintButton, eE[t]),
       recordingKey: generateRecordingKey(e, "constraint", t),
       onMouseDown: u(r, s),
@@ -791,7 +791,7 @@ function eg(e) {
   let f = r => {
     let i = "centerX" === r ? "HORIZONTAL" : "VERTICAL";
     let a = "CENTER" === d(i);
-    return jsx(D8, {
+    return jsx(RecordableDiv, {
       ...Ay.props(ey.baseInnerTarget, "HORIZONTAL" === i ? ey.horizontalInnerTarget : ey.verticalInnerTarget, !a && t === i && ey.innerTargetHover),
       recordingKey: generateRecordingKey(e, "constraint", r),
       onMouseDown: _,

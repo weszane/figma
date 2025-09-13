@@ -6,7 +6,7 @@ import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { getAtomMutate } from "../figma_app/566371";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { p as _$$p } from "../905/991924";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -83,8 +83,8 @@ export function $$S0(e) {
         })
       }), jsx(w, {
         tile: e.tile
-      }), a && "loaded" === C.status && !C.data.file?.hasPermission && jsx(Ex, {
-        color: zE.WARNING_TERTIARY,
+      }), a && "loaded" === C.status && !C.data.file?.hasPermission && jsx(Badge, {
+        color: BadgeColor.WARNING_TERTIARY,
         text: getI18nString("locked_team.label.view_only"),
         dataTooltip: getI18nString("locked_team.label.tooltip"),
         dataTooltipType: KindEnum.TEXT,

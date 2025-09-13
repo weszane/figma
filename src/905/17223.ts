@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import { A } from "../905/251970";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Uz } from "../905/63728";
-import { GG } from "../905/511649";
+import { KeyCodes } from "../905/63728";
+import { RecordableButton } from "../905/511649";
 import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { $ } from "../905/355607";
 import { Nk, J_ } from "../905/871493";
-export let $$m0 = tf(({
+export let $$m0 = withTrackedClick(({
   onMouseDown: e,
   onClick: t,
   className: i,
@@ -19,7 +19,7 @@ export let $$m0 = tf(({
   ...g
 }) => {
   let f = $();
-  return jsx(GG, {
+  return jsx(RecordableButton, {
     "aria-label": h,
     className: `${Nk} ${i || ""}`,
     "data-fullscreen-intercept": g["data-fullscreen-intercept"],
@@ -29,7 +29,7 @@ export let $$m0 = tf(({
     disabled: d,
     onClick: f ? void 0 : t,
     onKeyDown: e => {
-      e.keyCode === Uz.ESCAPE && e.currentTarget.blur();
+      e.keyCode === KeyCodes.ESCAPE && e.currentTarget.blur();
     },
     onMouseDown: e,
     onPointerDown: f ? t : void 0,

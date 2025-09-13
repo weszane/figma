@@ -3,13 +3,13 @@ import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { ResourceType } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 export let $$d0 = registerModal(function ({
   error: e,
   dispatch: t,
   resourceType: i
 }) {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmText: getI18nString("general.done"),
     confirmationTitle: i === ResourceType.PLUGIN ? getI18nString("community.plugin_development.plugin_issue") : getI18nString("community.plugin_development.widget_issue"),
     content: e.text,

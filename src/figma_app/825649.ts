@@ -24,7 +24,7 @@ import { vg } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { VK } from "../905/880488";
 import { n6 } from "../905/234821";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { h as _$$h } from "../905/864281";
 import { kD, J3, JU, kN } from "../figma_app/622574";
@@ -35,7 +35,7 @@ import { t as _$$t2, m as _$$m } from "../905/364535";
 import { $n } from "../905/930279";
 import { F as _$$F } from "../905/300562";
 import { T0, gV, t$ as _$$t$ } from "../figma_app/863319";
-import { cU } from "../figma_app/528509";
+import { getProjectUrl } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { R6 } from "../figma_app/504823";
 import { jK, hP } from "../figma_app/829197";
@@ -502,7 +502,7 @@ export function $$eO1({
     displayText: getI18nString("fullscreen.filename_view.go_to_project"),
     callback: () => {
       if (tq) {
-        let e = cU(tq.id, tq.orgId ?? null, tq.teamId, eD, !!tq?.team?.canView, "FilenameViewDropdown._goToProject", eF);
+        let e = getProjectUrl(tq.id, tq.orgId ?? null, tq.teamId, eD, !!tq?.team?.canView, "FilenameViewDropdown._goToProject", eF);
         z(V3({
           url: e
         }));
@@ -579,7 +579,7 @@ export function $$eO1({
       }));
     }
   }])];
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e.EDITOR_FILENAME_DROPDOWN,
     properties: {
       ...tg,

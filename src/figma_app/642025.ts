@@ -7,7 +7,7 @@ import { mapUserRoleToOrgUserRoleAlias, isExternalRestricted } from '../figma_ap
 import { OrgUserRoleEnum } from '../figma_app/35887';
 import { cn, GU } from '../figma_app/141320';
 import { FAccessLevelType, FBasicPermissionType, FOrganizationRoleType, FPermissionLevelType, FResourceCategoryType } from '../figma_app/191312';
-import { oq } from '../figma_app/528509';
+import { getOrgIdFromFolderOrTeam } from '../figma_app/528509';
 import { memoizeByArgs } from '../figma_app/815945';
 function h(e, t, r, n, i, a, s, o, l, d, c, u, p, _, h) {
   return {
@@ -138,7 +138,7 @@ export function $$C7(e, t) {
     let a = r.user && r.user.id;
     let s = r.folders[e];
     if (!a || !s) return !1;
-    let o = oq(s.id, r);
+    let o = getOrgIdFromFolderOrTeam(s.id, r);
     if (o && !$$j3(o, r)) return !1;
     let c = s.team_id && r.teams[s.team_id];
     let u = getFeatureFlags().sc_open_team_deprecation;

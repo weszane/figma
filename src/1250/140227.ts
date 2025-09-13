@@ -2,19 +2,19 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { Us, M7 } from "../figma_app/637027";
+import { linkWithTracking, ButtonWhiteTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { E9 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { _6 } from "../figma_app/386952";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { v0 } from "../figma_app/639088";
 import { A as _$$A } from "../svg/821527";
 export let $$w0 = registerModal(function (e) {
@@ -41,12 +41,12 @@ export let $$w0 = registerModal(function (e) {
   let O = k > STANDARD_LIMIT && j;
   let R = Object.keys(w).filter(e => w[e]?.is_view_only).map(e => w[e]);
   let M = Object.keys(w).filter(e => w[e]?.is_invite_only).map(e => w[e]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "LockedTeamUsageModal",
     properties: {
       teamId
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       className: "locked_team_usage_modal--modal--hgYFc",
       size: "medium",
       children: [jsx("div", {
@@ -85,7 +85,7 @@ export let $$w0 = registerModal(function (e) {
         })]
       }), jsx("p", {
         children: renderI18nText("payments_modal.if_you_would_rather_keep_the_current_limits", {
-          upgradeToProfessional: jsx(Us, {
+          upgradeToProfessional: jsx(linkWithTracking, {
             onClick: e => {
               e.preventDefault();
               n(popModalStack());
@@ -103,7 +103,7 @@ export let $$w0 = registerModal(function (e) {
         })
       }), jsx("div", {
         className: `${v0} locked_team_usage_modal--buttonRow--y7F3c`,
-        children: jsx(M7, {
+        children: jsx(ButtonWhiteTracked, {
           onClick: A,
           trackingProperties: {
             teamId

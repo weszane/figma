@@ -19,12 +19,12 @@ import { customHistory } from "../905/612521";
 import { generateUUIDv4 } from "../905/871474";
 import { sendUrlToParent } from "../figma_app/564528";
 import { a as _$$a } from "../905/29104";
-import { Ex, zE, vj } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { wv } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { b as _$$b2 } from "../905/985254";
-import { fu, tf } from "../figma_app/831799";
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { r1 } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
 import { c$ } from "../905/794875";
@@ -136,7 +136,7 @@ export function $$ea0() {
     getTriggerProps,
     manager
   } = _$$b();
-  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(fu, {
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(TrackingProvider, {
     name: "ai_quick_actions_dropdown",
     children: [jsx(_$$V, {
       variant: "menu",
@@ -155,7 +155,7 @@ export function $$ea0() {
       },
       children: jsxs("div", {
         className: "x78zum5 x6s0dn4 x1nfngrj",
-        children: [jsx(_$$C, {}), shouldShowBadge && jsx(fu, {
+        children: [jsx(_$$C, {}), shouldShowBadge && jsx(TrackingProvider, {
           name: "ai_quick_actions_onboarding_badge",
           children: jsx(_$$E, {
             variant: "brandFilled",
@@ -299,7 +299,7 @@ function es(e) {
     }, [n, r])
   };
 }
-let eo = tf(function ({
+let eo = withTrackedClick(function ({
   onClick: e,
   onKeyDown: t,
   buttonRef: r,
@@ -347,16 +347,16 @@ let eo = tf(function ({
             "ai_quick_actions_control--svgIconDisabled--u4WwB": o
           })
         })
-      }), shouldShowBadge && jsx(fu, {
+      }), shouldShowBadge && jsx(TrackingProvider, {
         name: "ai_quick_actions_onboarding_badge",
         children: jsx("div", {
           ref: e => {
             c(e?.offsetWidth || d);
           },
-          children: jsx(Ex, {
+          children: jsx(Badge, {
             text: getI18nString("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
-            color: zE.FIGJAM,
-            size: vj.SMALL,
+            color: BadgeColor.FIGJAM,
+            size: BadgeSize.SMALL,
             className: "ai_quick_actions_control--onboardingBadge---sKJz"
           })
         })
@@ -418,7 +418,7 @@ let ed = e => {
     type
   }, `${type}-menu-option`);
 };
-let ec = tf(function ({
+let ec = withTrackedClick(function ({
   id: e,
   type: t,
   displayText: r,

@@ -10,7 +10,7 @@ import { qD, _t } from "../figma_app/471982";
 import { y } from "../905/978641";
 import { mk } from "../figma_app/777551";
 import { Vm } from "../figma_app/427318";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { Ui, Nr, Sl, t3, pq, DD, h_, qr, ME, vR, uK } from "../af221b13/148820";
 export function $$y0({
@@ -53,7 +53,7 @@ function f({
   return jsxs("div", {
     className: Ui,
     "data-testid": "collection-resource-card",
-    children: [jsxs(o3, {
+    children: [jsxs(TrackedLink, {
       className: Nr,
       to: r,
       trackingEventName: "community_collections",
@@ -90,7 +90,7 @@ function b({
   return jsxs("div", {
     className: Ui,
     "data-testid": "collection-resource-card",
-    children: [jsxs(o3, {
+    children: [jsxs(TrackedLink, {
       className: Nr,
       to: r,
       trackingEventName: "community_collections",
@@ -129,7 +129,7 @@ function v({
   return jsxs("div", {
     className: Ui,
     "data-testid": "collection-resource-card",
-    children: [jsxs(o3, {
+    children: [jsxs(TrackedLink, {
       className: Nr,
       to: r,
       trackingEventName: "community_collections",

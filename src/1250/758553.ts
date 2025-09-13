@@ -10,7 +10,7 @@ import { Y9 } from "../905/504768";
 import { selectCurrentUser } from "../905/372672";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { V } from "../7037/903447";
 let h = registerModal(function (e) {
   let t = renderI18nText("fig_feed.delete_confirmation");
@@ -21,7 +21,7 @@ let h = registerModal(function (e) {
   }) : e.numReactions && (t = renderI18nText("fig_feed.delete_confirmation_with_reactions", {
     numReactions: e.numReactions
   }));
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     destructive: !0,
     confirmationTitle: renderI18nText("fig_feed.delete_post"),
     confirmText: renderI18nText("fig_feed.delete"),

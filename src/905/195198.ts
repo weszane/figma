@@ -5,19 +5,19 @@ import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
 import { s_ } from "../905/17223";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { P as _$$P } from "../905/192768";
 import { showModalHandler, popModalStack, hideSpecificModal } from "../905/156213";
 import { yH } from "../figma_app/240735";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FAccessLevelType, FPaymentHealthStatusType } from "../figma_app/191312";
 import { TeamById } from "../figma_app/43951";
 import { getPermissionsState } from "../figma_app/642025";
 import { registerModal } from "../905/102752";
 import { hK } from "../figma_app/211706";
 import { Dd } from "../905/519092";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { Do, v0 } from "../figma_app/639088";
 let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? renderI18nText("file_browser.team.you_will_lose_access_to_open_team_warning", {
   teamName: i
@@ -39,7 +39,7 @@ let $$S0 = registerModal(function (e) {
   let S = useMemo(() => b.transform(({
     team: e
   }) => e), [b]);
-  if ("loaded" !== S.status) return jsx(d_, {
+  if ("loaded" !== S.status) return jsx(ModalContainer, {
     size: "small",
     popStack: !0,
     children: jsx("div", {
@@ -69,13 +69,13 @@ let $$S0 = registerModal(function (e) {
   let R = t.roles.byTeamId[e.teamId];
   let N = Object.keys(R).map(e => R[e]).filter(e => !e.pending);
   let P = N.length > 1;
-  if (w?.isOwner && P) return jsx(fu, {
+  if (w?.isOwner && P) return jsx(TrackingProvider, {
     name: "Team Block Owner Leave Modal",
     properties: {
       userId: y,
       teamId: e.teamId
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       size: "small",
       title: getI18nString("file_browser.team.team_leave_warning_title_hold_up"),
       popStack: !0,
@@ -85,7 +85,7 @@ let $$S0 = registerModal(function (e) {
         teamName: w?.name
       }), jsx("div", {
         className: v0,
-        children: jsx($$, {
+        children: jsx(ButtonBasePrimary, {
           onClick: k,
           children: renderI18nText("general.ok")
         })
@@ -98,20 +98,20 @@ let $$S0 = registerModal(function (e) {
       if (n?.team_id === e.teamId && n.path) return !1;
     }
     return !0;
-  })() && !P) return jsx(fu, {
+  })() && !P) return jsx(TrackingProvider, {
     name: "Team Block Last Member Leave",
     properties: {
       userId: y,
       teamId: e.teamId
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       size: "small",
       popStack: !0,
       children: [jsx(s_, {
         dispatch: i
       }), renderI18nText("file_browser.team.cannot_leave_secret_team_as_last_team_member"), jsx("br", {}), jsx("br", {}), renderI18nText("file_browser.team.change_access_level_or_move_or_delete_resources_to_leave_team"), jsx("div", {
         className: v0,
-        children: jsx($$, {
+        children: jsx(ButtonBasePrimary, {
           onClick: k,
           children: renderI18nText("general.ok")
         })
@@ -120,7 +120,7 @@ let $$S0 = registerModal(function (e) {
   });
   {
     let t = w?.orgId == null && 1 === N.length && (w?.subscription != null && w?.subscription !== FPaymentHealthStatusType.INCOMPLETE || w?.studentTeamAt != null);
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: "Team Confirm Leave Modal",
       properties: {
         userId: y,

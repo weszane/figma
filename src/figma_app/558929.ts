@@ -24,12 +24,12 @@ import { hasOrgRole, getCurrentPluginVersion, getPluginVersion } from "../figma_
 import { Y9 } from "../figma_app/502247";
 import { isWidget, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
-import { O as _$$O2 } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { ManifestEditorType } from "../figma_app/155287";
 import { G as _$$G } from "../figma_app/124713";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../905/690005";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { j as _$$j } from "../905/689815";
 import { A as _$$A } from "../6828/903761";
 import { A as _$$A2 } from "../6828/529628";
@@ -59,7 +59,7 @@ let j = () => async e => {
     return Promise.reject();
   }
 };
-let U = registerModal(yX);
+let U = registerModal(ConfirmationModal2);
 let B = (e, t, r) => n => {
   n(showModalHandler({
     type: U,
@@ -200,7 +200,7 @@ let $$H0 = createOptimistThunk((e, t) => {
     fuid: n.id,
     tryPluginParams: void 0
   };
-  let p = r.plans.filter(e => e.plan_type === _$$O2.TEAM).map(e => {
+  let p = r.plans.filter(e => e.plan_type === OrganizationType.TEAM).map(e => {
     let t = _$$O(e, n.id);
     return {
       ...t,
@@ -250,7 +250,7 @@ let $$z3 = createOptimistThunk((e, t) => {
     fuid: n.id,
     tryPluginParams: void 0
   };
-  let c = r.plans.find(e => e.plan_type === _$$O2.ORG && e.plan_id === r.currentUserOrgId);
+  let c = r.plans.find(e => e.plan_type === OrganizationType.ORG && e.plan_id === r.currentUserOrgId);
   Y9(n.id, !1, c.plan_id, void 0, null);
   _$$j(d, c.plan_id, null, n.id);
   (() => {

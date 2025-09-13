@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { JU } from "../figma_app/637027";
+import { createLabel } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
 import { fI } from "../figma_app/626177";
@@ -27,7 +27,7 @@ export function $$c0({
       }).$,
       children: [jsxs("div", {
         className: _$$s.flex.flexColumn.$,
-        children: [jsxs(JU, {
+        children: [jsxs(createLabel, {
           className: a()(_$$s.flex.flexRow.$, {
             [_$$s.colorTextDisabled.$]: f
           }),

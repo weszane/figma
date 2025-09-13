@@ -1,113 +1,237 @@
-import { canViewTeam } from "../figma_app/642025";
-import { getDraftsSidebarString } from "../figma_app/633080";
-import { AccessLevelEnum } from "../905/557142";
-import { SortField } from "../figma_app/756995";
-import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
-import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
-let $$d = "temp-";
-export function $$c1(e, t) {
-  return $$p2(e[t]);
+import { AccessLevelEnum } from '../905/557142'
+import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751'
+import { adminPermissionConfig, setupShadowRead } from '../figma_app/391338'
+import { getDraftsSidebarString } from '../figma_app/633080'
+import { canViewTeam } from '../figma_app/642025'
+import { SortField } from '../figma_app/756995'
+
+/**
+ * Prefix for temporary IDs
+ * @original $$d
+ */
+const TEMP_PREFIX = 'temp-'
+
+/**
+ * Returns the value at key `t` in object `e` after processing.
+ * @original $$c1
+ */
+export function getProcessedValueByKey(obj: any, key: string): any {
+  return isRootPath(obj[key])
 }
-export function $$u6(e) {
-  return !!e && "" === e.path;
+
+/**
+ * Checks if the object has a root path.
+ * @original $$u6
+ */
+export function hasRootPath(obj: any): boolean {
+  return !!obj && obj.path === ''
 }
-export function $$p2(e) {
-  return !!e && "" === e.path;
+
+/**
+ * Checks if the object has a root path.
+ * @original $$p2
+ */
+export function isRootPath(obj: any): boolean {
+  return !!obj && obj.path === ''
 }
-export function $$_15(e) {
-  return e.startsWith($$d);
+
+/**
+ * Checks if the string starts with TEMP_PREFIX.
+ * @original $$_15
+ */
+export function isTempId(str: string): boolean {
+  return str.startsWith(TEMP_PREFIX)
 }
-export function $$h10() {
-  return `${$$d}${+new Date()}`;
+
+/**
+ * Generates a new temporary ID.
+ * @original $$h10
+ */
+export function generateTempId(): string {
+  return `${TEMP_PREFIX}${+new Date()}`
 }
-export function $$m7(e) {
-  return e?.path === "";
+
+/**
+ * Checks if the object has a root path.
+ * @original $$m7
+ */
+export function hasRootPathOptional(obj: any): boolean {
+  return obj?.path === ''
 }
-export function $$g11(e, t, r, n) {
-  if (!e) return null;
-  if (n) return t[n.drafts_folder_id] || null;
-  for (let n in t) {
-    let i = t[n];
-    let s = r[n] ? r[n][e] : null;
-    if (!i.teamId && "" === i.path && null == i.orgId && s && s.level === AccessLevelEnum.OWNER) return i;
+
+/**
+ * Finds a folder with OWNER access level.
+ * @original $$g11
+ */
+export function findOwnerFolder(userId: string, folders: Record<string, any>, permissions: Record<string, any>, options?: { drafts_folder_id?: string }): any | null {
+  if (!userId)
+    return null
+  if (options)
+    return folders[options.drafts_folder_id!] || null
+  for (const folderId in folders) {
+    const folder = folders[folderId]
+    const perm = permissions[folderId] ? permissions[folderId][userId] : null
+    if (
+      !folder.teamId
+      && folder.path === ''
+      && folder.orgId == null
+      && perm
+      && perm.level === AccessLevelEnum.OWNER
+    ) {
+      return folder
+    }
   }
-  return null;
+  return null
 }
-export function $$f16(e) {
-  return e && !e.team_id && "" !== e.path && !!e.org_id;
+
+/**
+ * Checks if the folder is an org folder (not a team folder, has org_id, and path is not root).
+ * @original $$f16
+ */
+export function isOrgFolder(folder: any): boolean {
+  return folder && !folder.team_id && folder.path !== '' && !!folder.org_id
 }
-export function $$E13(e) {
-  return e && !e.teamId && "" !== e.path && !!e.orgId;
+
+/**
+ * Checks if the folder is an org folder (not a team folder, has orgId, and path is not root).
+ * @original $$E13
+ */
+export function isOrgFolderV2(folder: any): boolean {
+  return folder && !folder.teamId && folder.path !== '' && !!folder.orgId
 }
-export function $$y0(e) {
-  return e?.path === "" ? getDraftsSidebarString() : e?.path;
+
+/**
+ * Returns the drafts sidebar string if path is root, else returns path.
+ * @original $$y0
+ */
+export function getSidebarPath(folder: any): string {
+  return folder?.path === '' ? getDraftsSidebarString() : folder?.path
 }
-export function $$b4(e) {
-  return void 0 === e ? null : "" === e ? getDraftsSidebarString() : e;
+
+/**
+ * Returns the drafts sidebar string if input is undefined or empty, else returns input.
+ * @original $$b4
+ */
+export function getSidebarStringOrValue(value?: string): string | null {
+  return value === undefined
+    ? null
+    : value === ''
+      ? getDraftsSidebarString()
+      : value
 }
-export function $$T3(e, t) {
-  return null != t && t in e;
+
+/**
+ * Checks if key exists in object.
+ * @original $$T3
+ */
+export function hasKey(obj: any, key: string): boolean {
+  return key != null && key in obj
 }
-export function $$I14(e, t) {
-  let r = t.folders[e];
-  if (r && r.org_id) return r.org_id;
-  if (r && r.team_id) {
-    let e = t.teams[r.team_id];
-    if (e && e.org_id) return e.org_id;
+
+/**
+ * Gets org_id from folder or team.
+ * @original $$I14
+ */
+export function getOrgIdFromFolderOrTeam(folderId: string, data: { folders: Record<string, any>, teams: Record<string, any> }): string | undefined {
+  const folder = data.folders[folderId]
+  if (folder && folder.org_id)
+    return folder.org_id
+  if (folder && folder.team_id) {
+    const team = data.teams[folder.team_id]
+    if (team && team.org_id)
+      return team.org_id
   }
 }
-export function $$$$S5(e) {
-  return e.length <= 0 ? "Please provide a name" : e.length > 255 ? "Sorry, name must be at max 255 characters." : e.match(/[\/\\:?*"|]/) ? 'The following characters are not allowed:  / : ? * " |' : void 0;
+
+/**
+ * Validates folder name.
+ * @original $$$$S5
+ */
+export function validateFolderName(name: string): string | undefined {
+  if (name.length <= 0)
+    return 'Please provide a name'
+  if (name.length > 255)
+    return 'Sorry, name must be at max 255 characters.'
+  if (name.match(/[/\\:?*"|]/))
+    return 'The following characters are not allowed:  / : ? * " |'
 }
-export function $$v8(e, t) {
+
+/**
+ * Returns sort filter config and sort keys for a folder.
+ * @original $$v8
+ */
+export function getSortFilterConfig(folderId: string, data: { folders: { byId: Record<string, any>, $$default: any } }): { tileSortFilterConfig: any, sortKeys: SortField[] } {
   return {
-    tileSortFilterConfig: t.folders.byId[e] || t.folders.$$default,
-    sortKeys: [SortField.NAME, SortField.CREATED_AT, SortField.TOUCHED_AT]
-  };
+    tileSortFilterConfig: data.folders.byId[folderId] || data.folders.$$default,
+    sortKeys: [SortField.NAME, SortField.CREATED_AT, SortField.TOUCHED_AT],
+  }
 }
-export function $$A9(e, t, r, i, a, s, d) {
-  let c = r && canViewTeam(r, i);
-  let u = setupShadowRead({
+
+/**
+ * Generates a project URL based on access and context.
+ * @original $$A9
+ */
+export function getProjectUrl(folderId: string, projectId: string | null, teamId: string | null, context: any, hasAccess: boolean, callsite: string, enableShadowRead: boolean): string {
+  const canView = teamId && canViewTeam(teamId, context)
+  const shadowReadUrl = setupShadowRead({
     label: adminPermissionConfig.planBasedFolderUrl.hasTeamAccess,
-    oldValue: c,
-    newValue: a,
-    enableShadowRead: d,
+    oldValue: canView,
+    newValue: hasAccess,
+    enableShadowRead,
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7),
     maxReports: 5,
     contextArgs: {
-      currentTeamId: i.currentTeamId,
-      currentOrgId: i.currentUserOrgId,
-      currentUserId: i.user?.id ?? null,
-      openFileKey: i.openFile?.key ?? null,
-      teamIdArg: r,
-      folderId: e,
-      openFileLoadedFromLiveGraph: d,
-      callsite: s
-    }
-  });
-  return t ? `${location.origin}/files/${t}/project/${e}` : u ? `${location.origin}/files/team/${r}/project/${e}` : i.user?.personal_drafts_folder_id === e ? `${location.origin}/files/drafts-to-move` : `${location.origin}/files/project/${e}`;
+      currentTeamId: context.currentTeamId,
+      currentOrgId: context.currentUserOrgId,
+      currentUserId: context.user?.id ?? null,
+      openFileKey: context.openFile?.key ?? null,
+      teamIdArg: teamId,
+      folderId,
+      openFileLoadedFromLiveGraph: enableShadowRead,
+      callsite,
+    },
+  })
+  if (projectId)
+    return `${location.origin}/files/${projectId}/project/${folderId}`
+  if (shadowReadUrl)
+    return `${location.origin}/files/team/${teamId}/project/${folderId}`
+  if (context.user?.personal_drafts_folder_id === folderId)
+    return `${location.origin}/files/drafts-to-move`
+  return `${location.origin}/files/project/${folderId}`
 }
-export function $$x17(e) {
-  return !!e && !!e.team_id && !e.path;
+
+/**
+ * Checks if folder is a team folder (has team_id, no path).
+ * @original $$x17
+ */
+export function isTeamFolder(folder: any): boolean {
+  return !!folder && !!folder.team_id && !folder.path
 }
-export function $$N12(e) {
-  return !!e && !!e.teamId && !e.path;
+
+/**
+ * Checks if folder is a team folder (has teamId, no path).
+ * @original $$N12
+ */
+export function isTeamFolderV2(folder: any): boolean {
+  return !!folder && !!folder.teamId && !folder.path
 }
-export const CI = $$y0;
-export const D = $$c1;
-export const Gi = $$p2;
-export const N5 = $$T3;
-export const S = $$b4;
-export const SS = $$$$S5;
-export const T9 = $$u6;
-export const VA = $$m7;
-export const ZN = $$v8;
-export const cU = $$A9;
-export const d = $$h10;
-export const gj = $$g11;
-export const jd = $$N12;
-export const n3 = $$E13;
-export const oq = $$I14;
-export const qF = $$_15;
-export const sp = $$f16;
-export const ye = $$x17;
+
+// Exported aliases for backward compatibility
+export const CI = getSidebarPath
+export const D = getProcessedValueByKey
+export const Gi = isRootPath
+export const N5 = hasKey
+export const S = getSidebarStringOrValue
+export const SS = validateFolderName
+export const T9 = hasRootPath
+export const VA = hasRootPathOptional
+export const ZN = getSortFilterConfig
+export const cU = getProjectUrl
+export const d = generateTempId
+export const gj = findOwnerFolder
+export const jd = isTeamFolderV2
+export const n3 = isOrgFolderV2
+export const oq = getOrgIdFromFolderOrTeam
+export const qF = isTempId
+export const sp = isOrgFolder
+export const ye = isTeamFolder

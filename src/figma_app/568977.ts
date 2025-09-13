@@ -6,7 +6,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL as _$$bL, D0 } from "../905/4410";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { S as _$$S } from "../905/177206";
@@ -49,7 +49,7 @@ export function $$x1(e) {
     t(XE());
   };
   let w = e => {
-    e.keyCode === Uz.ENTER && C();
+    e.keyCode === KeyCodes.ENTER && C();
   };
   let O = e => {
     UK().smallNudgeAmount.set(e);

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, PureComponent, Fragment as _$$Fragment, useCallback, useMemo, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { K as _$$K } from "../905/807535";
+import { findMatchingValue } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
@@ -44,9 +44,9 @@ import { k as _$$k3 } from "../905/443820";
 import { AutoLayout } from "../905/470281";
 import { b as _$$b } from "../905/168239";
 import { K as _$$K2 } from "../905/628118";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { O as _$$O } from "../figma_app/809387";
-import { J7, SN, G_, M7, _d } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab, BillingSectionEnum, MemberView, FigResourceType } from "../figma_app/650409";
 import { e0 as _$$e3 } from "../905/696396";
 import { g as _$$g2 } from "../figma_app/638694";
 import { k as _$$k4 } from "../469e6e40/115523";
@@ -70,17 +70,17 @@ import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { NJ } from "../figma_app/518077";
-import { g as _$$g3 } from "../905/817247";
+import { getGroupOrDefault } from "../905/817247";
 import { MX, NV, EQ, cZ, EO } from "../figma_app/684446";
 import { D2, VP } from "../905/18797";
 import { hX, de } from "../figma_app/614170";
 import { _W } from "../figma_app/329496";
 import { FRequestsStr } from "../905/384551";
-import { UserRole, GroupType } from "../905/441038";
-import { J0, oU } from "../figma_app/967319";
+import { UserGroupRole, GroupType } from "../905/441038";
+import { DefaultFilters, DefaultSortConfig } from "../figma_app/967319";
 import { createEmptyAddress } from "../figma_app/831101";
-import { O as _$$O2 } from "../905/833838";
-import { V0, m2, _C } from "../figma_app/858344";
+import { OrganizationType } from "../905/833838";
+import { DUserRole, SectionType, defaultSectionKey } from "../figma_app/858344";
 import { o0 } from "../905/844131";
 import { buildUploadUrl } from "../figma_app/169182";
 import { y as _$$y } from "../905/129046";
@@ -98,7 +98,7 @@ import { truncate, formatList } from "../figma_app/930338";
 import { XHR } from "../905/910117";
 import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
-import { $$, ks, nR as _$$nR, CY, TA, vd, Ph, tM as _$$tM, qM } from "../figma_app/637027";
+import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink, BUTTON_INTERNAL_CONST_Z12, ButtonBasePrimaryTracked, clickableBaseLinkTracked, ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { resolveMessage } from "../905/231762";
@@ -174,7 +174,7 @@ import { vr } from "../figma_app/514043";
 import { Jv, YO, qH } from "../figma_app/934005";
 import { G as _$$G } from "../469e6e40/623116";
 import { Y as _$$Y3 } from "../7021/427161";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A3 } from "../svg/57540";
 import { Wi, JR } from "../figma_app/162641";
 import { In } from "../905/672640";
@@ -202,7 +202,7 @@ import { ResourceStatus } from "../905/663269";
 import { stripHtmlTags } from "../905/491152";
 import { h1 } from "../905/986103";
 import { W as _$$W } from "../5430/573261";
-import { N as _$$N3 } from "../905/551536";
+import { BaseLinkComponent } from "../905/551536";
 import { A as _$$A7 } from "../5724/933949";
 import { getResourceDataOrFallback } from "../905/723791";
 import { H8, Pf } from "../905/590952";
@@ -388,7 +388,7 @@ function eo(e) {
       console.warn("Error:", e);
     });
   }, [t, n, e.org.id]);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: _$$e3.FILE_LIST_BETA,
     properties: {
       orgId: e.org.id,
@@ -396,10 +396,10 @@ function eo(e) {
     },
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K2, {
-        title: _$$O(J7.CONTENT)
+        title: _$$O(DashboardSection.CONTENT)
       }), jsx(_$$b, {
-        tab: J7.CONTENT,
-        selectedSecondaryTab: SN.FILE_LIST_BETA
+        tab: DashboardSection.CONTENT,
+        selectedSecondaryTab: WorkspaceTab.FILE_LIST_BETA
       })]
     }), t ? jsx("div", {
       children: jsx(AutoLayout, {
@@ -454,7 +454,7 @@ function ed(e) {
       console.warn("Error:", e);
     });
   }, [t, n, e.org.id]);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: _$$e3.ACCESS_INSIGHT,
     properties: {
       orgId: e.org.id,
@@ -462,10 +462,10 @@ function ed(e) {
     },
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K2, {
-        title: _$$O(J7.CONTENT)
+        title: _$$O(DashboardSection.CONTENT)
       }), jsx(_$$b, {
-        tab: J7.CONTENT,
-        selectedSecondaryTab: SN.ACCESS_INSIGHT
+        tab: DashboardSection.CONTENT,
+        selectedSecondaryTab: WorkspaceTab.ACCESS_INSIGHT
       })]
     }), t ? jsx("div", {
       children: jsx(AutoLayout, {
@@ -1425,7 +1425,7 @@ class tZ extends PureComponent {
       hideIpColumn: this.props.hideIpColumn
     }), jsx("div", {
       className: "activity_logs_section--tableNavigation--44R60",
-      children: this.props.activityLogs.isLoading && !this.props.activityLogs.isNewQuery ? jsx(LoadingOverlay, {}) : this.canLoadMore() && jsx($$, {
+      children: this.props.activityLogs.isLoading && !this.props.activityLogs.isNewQuery ? jsx(LoadingOverlay, {}) : this.canLoadMore() && jsx(ButtonBasePrimary, {
         onClick: this.loadMore,
         children: renderI18nText("activity_log.table.load_more")
       })
@@ -1520,7 +1520,7 @@ class tZ extends PureComponent {
   render() {
     return jsxs(Fragment, {
       children: [this.state.emails.tokens.length > 0 && jsx(t1, {}), !this.props.hideHeader && jsx(_$$K2, {
-        title: _$$O(J7.ACTIVITY),
+        title: _$$O(DashboardSection.ACTIVITY),
         rightActions: jsx(_$$K3, {
           "aria-label": getI18nString("activity_log.table.get_csv"),
           variant: "secondary",
@@ -1599,7 +1599,7 @@ function t0(e) {
       today,
       minDate
     } = Bd(e.org.activity_logs_max_query_duration_in_days);
-    return jsx(ks, {
+    return jsx(BigTextInputForwardRef, {
       type: "date",
       className: a ? "activity_logs_section--dateErrorInput--5ngnu activity_logs_section--dateInput--6OLqr activity_logs_section--errorBorder--eU74Y" : "activity_logs_section--dateInput--6OLqr",
       onChange: n,
@@ -1726,7 +1726,7 @@ function t0(e) {
             }, t.id))]
           })
         })]
-      }), e.showClearButton && jsx(_$$nR, {
+      }), e.showClearButton && jsx(ButtonSecondary, {
         className: "activity_logs_section--clearButton--3duaF",
         onClick: () => e.clearFilter(),
         children: renderI18nText("activity_log.table.clear")
@@ -1813,7 +1813,7 @@ let aw = registerModal(function (e) {
   let d = e.licenseGroups.map(e => e.id);
   let c = e.licenseGroups.map(e => e.name);
   let [_, u] = useState(!1);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Delete license group modal",
     properties: {
       numLicenseGroups: e.licenseGroups.length
@@ -1927,7 +1927,7 @@ function aC({
         spacing: 0,
         children: [jsx(TextWithTruncation, {
           children: renderI18nText("billing_groups_table.edit_billing_group_modal.add_people_to_a_billing_group.seat_rename")
-        }), jsx(CY, {
+        }), jsx(SecureLink, {
           trusted: !0,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/19100885191191",
@@ -1944,7 +1944,7 @@ function aC({
           children: [jsx(TextWithTruncation, {
             fontWeight: "medium",
             children: renderI18nText("billing_groups_table.name_input")
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             autoFocus: !0,
             className: e4()("license_group_edit_modal--inputFieldFullWidth--5e5TD license_group_edit_modal--inputField--G3ewv", {
               "license_group_edit_modal--inputFieldWithError--d-g82": r
@@ -1955,7 +1955,7 @@ function aC({
               i(e.currentTarget.value);
             },
             value: a,
-            maxLength: TA
+            maxLength: BUTTON_INTERNAL_CONST_Z12
           }), "unassigned" === r && jsx(TextWithTruncation, {
             color: "danger",
             children: renderI18nText("billing_groups_table.billing_group_name_unassigned_error")
@@ -1984,15 +1984,15 @@ function aC({
         })]
       }), jsxs("div", {
         className: _$$s.flex.justifyEnd.wFull.$,
-        children: [jsx(_$$nR, {
+        children: [jsx(ButtonSecondary, {
           onClick: l,
           children: renderI18nText("general.cancel")
-        }), jsx(fu, {
+        }), jsx(TrackingProvider, {
           name: "License Group Modal Submit",
           properties: {
             licenseGroupId: e?.id
           },
-          children: jsx(vd, {
+          children: jsx(ButtonBasePrimaryTracked, {
             className: "license_group_edit_modal--submitButton--mwVBh",
             onClick: d,
             disabled: !!r || !a.length || 0 === t.tokens.length,
@@ -2119,10 +2119,10 @@ function aN({
         onClick: () => {
           t(_$$sf({
             view: "licenseGroup",
-            subView: UserRole.ADMIN,
+            subView: UserGroupRole.ADMIN,
             licenseGroupId: e[0].id,
             selectedTab: GroupType.MEMBERS,
-            orgAdminOriginTab: J7.BILLING
+            orgAdminOriginTab: DashboardSection.BILLING
           }));
         },
         label: getI18nString("billing_groups_table.manage")
@@ -2159,10 +2159,10 @@ function aR({
       onClick: () => {
         t(_$$sf({
           view: "licenseGroup",
-          subView: UserRole.ADMIN,
+          subView: UserGroupRole.ADMIN,
           licenseGroupId: e.id,
           selectedTab: GroupType.MEMBERS,
-          orgAdminOriginTab: J7.BILLING
+          orgAdminOriginTab: DashboardSection.BILLING
         }));
       },
       children: getI18nString("billing_groups_table.manage")
@@ -2341,9 +2341,9 @@ function aU(e) {
         e.id && t(_$$sf({
           licenseGroupId: e.id,
           view: "licenseGroup",
-          subView: UserRole.ADMIN,
+          subView: UserGroupRole.ADMIN,
           selectedTab: GroupType.MEMBERS,
-          orgAdminOriginTab: J7.BILLING
+          orgAdminOriginTab: DashboardSection.BILLING
         }));
       },
       onSetSortState: x,
@@ -2402,7 +2402,7 @@ function a$(e) {
     "data-onboarding-key": t
   } = e;
   let a = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "New billing group",
     children: jsx(_$$V2, {
       variant: "primary",
@@ -2445,7 +2445,7 @@ function aB({
       children: jsx(TextWithTruncation, {
         color: "secondary",
         children: renderI18nText("org_admin_settings.billing.billing_groups_empty_text.seat_rename", {
-          learnMoreLink: jsx(CY, {
+          learnMoreLink: jsx(SecureLink, {
             trusted: !0,
             target: "_blank",
             href: "https://help.figma.com/hc/articles/19100885191191",
@@ -2471,7 +2471,7 @@ function aG(e) {
       org: e.org,
       orgAdmins: e.orgAdmins,
       invoices: n,
-      currentFilters: J0,
+      currentFilters: DefaultFilters,
       licenseGroupMemberCounts: e.licenseGroupMemberCounts
     }) : jsx(_$$Q3, {
       minContentWidth: aD,
@@ -2480,7 +2480,7 @@ function aG(e) {
   });
 }
 function az(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.BILLING_GROUPS_TAB,
     properties: {
       orgId: e.org.id
@@ -2513,7 +2513,7 @@ function aH(e) {
   });
 }
 function aY(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.BILLING_INVOICES_TAB,
     properties: {
       orgId: e.org.id
@@ -2577,22 +2577,22 @@ function a3(e) {
   let u = useCallback(() => {
     t(_$$sf({
       view: "orgAdminSettings",
-      orgAdminSettingsViewTab: J7.BILLING,
-      orgAdminSettingsViewSecondaryTab: G_.INVOICES
+      orgAdminSettingsViewTab: DashboardSection.BILLING,
+      orgAdminSettingsViewSecondaryTab: BillingSectionEnum.INVOICES
     }));
   }, [t]);
   let m = useCallback(e => {
     t(_$$sf({
       view: "orgAdminSettings",
-      orgAdminSettingsViewTab: J7.BILLING,
-      orgAdminSettingsViewSecondaryTab: G_.INVOICES,
+      orgAdminSettingsViewTab: DashboardSection.BILLING,
+      orgAdminSettingsViewSecondaryTab: BillingSectionEnum.INVOICES,
       initialHighlightedInvoiceId: e
     }));
   }, [t]);
   let p = useCallback(() => {
     t(_$$sf({
       view: "orgAdminSettings",
-      orgAdminSettingsViewTab: J7.MEMBERS
+      orgAdminSettingsViewTab: DashboardSection.MEMBERS
     }));
   }, [t]);
   let g = n?.data?.scheduled_cancellation;
@@ -2663,7 +2663,7 @@ function a3(e) {
   });
 }
 function a8(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.BILLING_OVERVIEW_TAB,
     properties: {
       orgId: e.org.id
@@ -2797,12 +2797,12 @@ function n_(e) {
         orgId: e.org.id
       })
     }), jsx(_$$K2, {
-      title: _$$O(J7.BILLING),
+      title: _$$O(DashboardSection.BILLING),
       rightActions: jsx(_$$p4, {})
     }), jsx(_$$b, {
-      tab: J7.BILLING,
+      tab: DashboardSection.BILLING,
       selectedSecondaryTab: e.secondaryTab,
-      rightActions: e.secondaryTab === G_.BILLING_GROUPS ? jsx(a$, {
+      rightActions: e.secondaryTab === BillingSectionEnum.BILLING_GROUPS ? jsx(a$, {
         "data-onboarding-key": Iq
       }) : void 0
     })]
@@ -2816,7 +2816,7 @@ function nu(e) {
   }, {
     revalidateOnMount: !0
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: _$$e3.BILLING_VIEW,
     properties: {
       orgId: e.org.id
@@ -2825,14 +2825,14 @@ function nu(e) {
       currency: t.data?.currency,
       org: e.org,
       secondaryTab: e.activeTab
-    }), e.activeTab === G_.OVERVIEW && jsx(a8, {
+    }), e.activeTab === BillingSectionEnum.OVERVIEW && jsx(a8, {
       org: e.org
-    }), e.activeTab === G_.BILLING_GROUPS && jsx(az, {
+    }), e.activeTab === BillingSectionEnum.BILLING_GROUPS && jsx(az, {
       org: e.org,
       orgAdmins: e.orgAdmins,
       licenseGroupMemberCounts: e.licenseGroupMemberCounts,
       isLoading: e.isLoadingLicenseGroups || e.isLoadingOrgAdmins
-    }), e.activeTab === G_.INVOICES && jsx(aY, {
+    }), e.activeTab === BillingSectionEnum.INVOICES && jsx(aY, {
       org: e.org
     })]
   });
@@ -2854,9 +2854,9 @@ let nb = registerModal(function ({
   onConfirm: e
 }) {
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Create License Group Confirmation modal",
-    children: jsxs(yX, {
+    children: jsxs(ConfirmationModal2, {
       cancelText: getI18nString("general.back"),
       confirmText: renderI18nText("workspace.create_confirmation_modal.confirm"),
       disableClickOutsideToHide: !0,
@@ -2875,7 +2875,7 @@ let nb = registerModal(function ({
           children: nx(e)
         }, e))
       }), renderI18nText("workspace.create_confirmation_modal.description.outro", {
-        learnMore: jsx(Ph, {
+        learnMore: jsx(clickableBaseLinkTracked, {
           className: _$$s.inline.$,
           target: "_blank",
           href: "https://help.figma.com/hc/articles/4409676189207-Guide-to-workspaces",
@@ -2997,7 +2997,7 @@ let nk = registerModal(function (e) {
             className: nf,
             children: renderI18nText("workspace_table.name_input")
           }), jsx("div", {
-            children: jsx(ks, {
+            children: jsx(BigTextInputForwardRef, {
               className: "workspace_edit_modal--inputField--zgJyx",
               autoFocus: !0,
               placeholder: getI18nString("workspace_table.name_input_placeholder"),
@@ -3007,7 +3007,7 @@ let nk = registerModal(function (e) {
               },
               value: v,
               dataTestId: "workspace-name-input",
-              maxLength: TA
+              maxLength: BUTTON_INTERNAL_CONST_Z12
             })
           }), jsx(_$$Y3, {
             className: "workspace_edit_modal--yellowIcon--uYKLJ admin_notifications_count_badge--yellowIcon--7SC5D",
@@ -3055,15 +3055,15 @@ let nk = registerModal(function (e) {
           })]
         }), jsxs("div", {
           className: "workspace_edit_modal--buttonContainer--XU4e8",
-          children: [jsx(_$$nR, {
+          children: [jsx(ButtonSecondary, {
             onClick: E,
             children: renderI18nText("workspace_table.cancel_create_or_edit")
-          }), jsx(fu, {
+          }), jsx(TrackingProvider, {
             name: "Workspace Modal Submit",
             properties: {
               workspaceId: e.workspaceId
             },
-            children: jsx(vd, {
+            children: jsx(ButtonBasePrimaryTracked, {
               className: "workspace_edit_modal--submitButton--Dov4c",
               onClick: () => {
                 u && 0 !== u.length || p ? C() : t(showModal({
@@ -3132,7 +3132,7 @@ let nL = registerModal(function (e) {
     t(hideModal());
   };
   let [c, _] = useState(!1);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Delete workspace modal",
     properties: {
       numWorkspaces: e.workspaces.length
@@ -3193,10 +3193,10 @@ let nL = registerModal(function (e) {
             })
           }), jsxs("div", {
             className: v0,
-            children: [jsx(_$$tM, {
+            children: [jsx(ButtonSecondaryTracked, {
               onClick: d,
               children: renderI18nText("general.cancel")
-            }), jsx(qM, {
+            }), jsx(ButtonNegativeTracked, {
               type: "submit",
               className: pL,
               disabled: !c,
@@ -3234,10 +3234,10 @@ function nD({
         onClick: () => {
           a(_$$sf({
             view: "workspace",
-            subView: V0.ADMIN,
+            subView: DUserRole.ADMIN,
             workspaceId: n.id,
-            selectedTab: m2.MEMBERS,
-            orgAdminOriginTab: J7.CONTENT
+            selectedTab: SectionType.MEMBERS,
+            orgAdminOriginTab: DashboardSection.CONTENT
           }));
         },
         label: getI18nString("workspace_table.manage")
@@ -3271,10 +3271,10 @@ function nM({
   let o = useCallback(() => {
     a(_$$sf({
       view: "workspace",
-      subView: V0.ADMIN,
+      subView: DUserRole.ADMIN,
       workspaceId: n.id,
-      selectedTab: m2.MEMBERS,
-      orgAdminOriginTab: J7.CONTENT
+      selectedTab: SectionType.MEMBERS,
+      orgAdminOriginTab: DashboardSection.CONTENT
     }));
   }, [a, n]);
   let d = useCallback(() => {
@@ -3402,10 +3402,10 @@ function n$() {
   return jsxs("div", {
     className: "x17tqzrc x5yr21d",
     children: [jsx(_$$K2, {
-      title: _$$O(J7.CONTENT)
+      title: _$$O(DashboardSection.CONTENT)
     }), jsx(_$$b, {
-      tab: J7.CONTENT,
-      selectedSecondaryTab: SN.WORKSPACES
+      tab: DashboardSection.CONTENT,
+      selectedSecondaryTab: WorkspaceTab.WORKSPACES
     }), jsxs(AutoLayout, {
       width: "fill-parent",
       height: "fill-parent",
@@ -3495,7 +3495,7 @@ function nz(e) {
   let o = "loaded" !== l.status;
   let {
     filterCountsViewResult
-  } = vu(e.org.id, "", J0);
+  } = vu(e.org.id, "", DefaultFilters);
   let _ = useMemo(() => l.data?.org?.workspaces ?? [], [l.data]);
   let m = o ? [] : [{
     id: null
@@ -3504,10 +3504,10 @@ function nz(e) {
   let p = useCallback(e => {
     t(_$$sf({
       view: "workspace",
-      subView: V0.ADMIN,
+      subView: DUserRole.ADMIN,
       workspaceId: e,
-      selectedTab: m2.MEMBERS,
-      orgAdminOriginTab: J7.CONTENT
+      selectedTab: SectionType.MEMBERS,
+      orgAdminOriginTab: DashboardSection.CONTENT
     }));
   }, [t]);
   let g = useCallback(e => e.id ? jsxs(AutoLayout, {
@@ -3649,10 +3649,10 @@ function nz(e) {
   }), o || 0 !== _.length) ? jsxs(Fragment, {
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K2, {
-        title: _$$O(J7.CONTENT)
+        title: _$$O(DashboardSection.CONTENT)
       }), jsx(_$$b, {
-        tab: J7.CONTENT,
-        selectedSecondaryTab: SN.WORKSPACES,
+        tab: DashboardSection.CONTENT,
+        selectedSecondaryTab: WorkspaceTab.WORKSPACES,
         rightActions: E
       })]
     }), jsx(Cj, {
@@ -3721,7 +3721,7 @@ function nV(e) {
     }), !t && jsx(nS, {})]
   });
 }
-let nW = new Set([SN.TEAMS, SN.WORKSPACES]);
+let nW = new Set([WorkspaceTab.TEAMS, WorkspaceTab.WORKSPACES]);
 function nH(e) {
   let t = Um();
   let [a, n] = useState(void 0);
@@ -3731,7 +3731,7 @@ function nH(e) {
   let l = nW.has(e.activeTab) ? a : jsx(Fragment, {});
   let o = null;
   switch (e.activeTab) {
-    case SN.TEAMS:
+    case WorkspaceTab.TEAMS:
       o = jsx(_$$G, {
         org: e.org,
         dropdownShown: t,
@@ -3741,29 +3741,29 @@ function nH(e) {
         onRightActionsChange: r
       });
       break;
-    case SN.ABANDONED_DRAFTS:
+    case WorkspaceTab.ABANDONED_DRAFTS:
       o = jsx(_$$M, {
         org: e.org,
-        planType: _$$O2.ORG
+        planType: OrganizationType.ORG
       });
       break;
-    case SN.FILE_LIST_BETA:
+    case WorkspaceTab.FILE_LIST_BETA:
       o = jsx(eo, {
         org: e.org
       });
       break;
-    case SN.ACCESS_INSIGHT:
+    case WorkspaceTab.ACCESS_INSIGHT:
       o = jsx(ed, {
         org: e.org
       });
       break;
-    case SN.CONNECTED_PROJECTS:
+    case WorkspaceTab.CONNECTED_PROJECTS:
       o = jsx(_$$k4, {
         showResourceConnectionInviteModal: e.showResourceConnectionInviteModal,
         showResourceConnectionFlyout: e.showResourceConnectionFlyout
       });
       break;
-    case SN.WORKSPACES:
+    case WorkspaceTab.WORKSPACES:
     default:
       o = jsx(nV, {
         org: e.org,
@@ -3774,9 +3774,9 @@ function nH(e) {
   }
   return jsxs(Fragment, {
     children: [jsx(_$$K2, {
-      title: _$$O(J7.CONTENT)
+      title: _$$O(DashboardSection.CONTENT)
     }), jsx(_$$b, {
-      tab: J7.CONTENT,
+      tab: DashboardSection.CONTENT,
       selectedSecondaryTab: e.activeTab,
       rightActions: l
     }), e.isLoading ? jsx("div", {
@@ -3826,7 +3826,7 @@ function nX() {
 function n4(e) {
   let t = useDispatch();
   let a = Z5();
-  let n = e.activeTab === M7.ALL_MEMBERS ? jsx(Button, {
+  let n = e.activeTab === MemberView.ALL_MEMBERS ? jsx(Button, {
     variant: "primary",
     onClick: () => {
       let n = e.filters.workspaceFilter ?? void 0;
@@ -3860,7 +3860,7 @@ function n4(e) {
     iconPrefix: jsx(_$$x, {}),
     children: renderI18nText("members_table.create_user_group_button")
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: _$$e3.ORG_ADMIN_PEOPLE_VIEW,
     properties: {
       orgId: e.org.id
@@ -3868,7 +3868,7 @@ function n4(e) {
     children: [jsx(_$$K2, {
       title: getI18nString("members_table.header")
     }), jsx(_$$b, {
-      tab: J7.MEMBERS,
+      tab: DashboardSection.MEMBERS,
       selectedSecondaryTab: e.activeTab,
       rightActions: jsxs("div", {
         className: "x78zum5 x6s0dn4 x1nfngrj",
@@ -3877,7 +3877,7 @@ function n4(e) {
           planType: FOrganizationLevelType.ORG
         }), n]
       })
-    }), e.activeTab === M7.ALL_MEMBERS && e.allMembersSection]
+    }), e.activeTab === MemberView.ALL_MEMBERS && e.allMembersSection]
   });
 }
 let n8 = new class {
@@ -4000,7 +4000,7 @@ function so(e) {
   return jsxs(AutoLayout, {
     spacing: 4,
     dataTestId: "allowlist-no-extensions-banner",
-    children: [n, jsx(_$$N3, {
+    children: [n, jsx(BaseLinkComponent, {
       onClick: onAddExtension,
       trusted: !0,
       children: i
@@ -4642,7 +4642,7 @@ function sI() {
     style: _$$sx2.add({
       width: "10%"
     }).$,
-    children: jsx($$, {
+    children: jsx(ButtonBasePrimary, {
       children: jsx(TextWithTruncation, {
         children: renderI18nText("resources_tab.approved_plugins.table.review_button")
       })
@@ -4848,9 +4848,9 @@ function sR({
   }, [v, n]);
   let f = !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
     children: [jsx(_$$K2, {
-      title: _$$O(J7.RESOURCES)
+      title: _$$O(DashboardSection.RESOURCES)
     }), jsx(_$$b, {
-      tab: J7.RESOURCES,
+      tab: DashboardSection.RESOURCES,
       selectedSecondaryTab: sO[t],
       rightActions: v
     })]
@@ -4884,8 +4884,8 @@ function sR({
   }) : f || null;
 }
 let sO = {
-  plugin: _d.APPROVED_PLUGINS,
-  widget: _d.APPROVED_WIDGETS
+  plugin: FigResourceType.APPROVED_PLUGINS,
+  widget: FigResourceType.APPROVED_WIDGETS
 };
 let sL = (e, t) => "plugin" === e ? !!(t.publicPluginsAllowed && t.pluginsWhitelistEnforced) : !!(t.publicPluginsAllowed && t.widgetsWhitelistEnforced);
 let sD = M4.Query({
@@ -4913,7 +4913,7 @@ function sP(e) {
   let p = m.data || null;
   let g = null;
   switch (e.activeTab) {
-    case _d.APPROVED_PLUGINS:
+    case FigResourceType.APPROVED_PLUGINS:
       g = jsx(sR, {
         orgId: e.org.id,
         extensionType: "plugin",
@@ -4921,7 +4921,7 @@ function sP(e) {
         onRightActionsChange: u
       });
       break;
-    case _d.APPROVED_WIDGETS:
+    case FigResourceType.APPROVED_WIDGETS:
       g = jsx(sR, {
         orgId: e.org.id,
         extensionType: "widget",
@@ -4929,7 +4929,7 @@ function sP(e) {
         onRightActionsChange: u
       });
       break;
-    case _d.SHARED_FONTS:
+    case FigResourceType.SHARED_FONTS:
       g = jsx(_$$y2, {
         dispatch: t,
         dropdownShown: a,
@@ -4941,7 +4941,7 @@ function sP(e) {
         onRightActionsChange: u
       });
       break;
-    case _d.LIBRARIES:
+    case FigResourceType.LIBRARIES:
     default:
       g = jsx(re, {
         org: e.org,
@@ -4953,9 +4953,9 @@ function sP(e) {
   }
   return jsxs("div", {
     children: [jsx(_$$K2, {
-      title: _$$O(J7.RESOURCES)
+      title: _$$O(DashboardSection.RESOURCES)
     }), jsx(_$$b, {
-      tab: J7.RESOURCES,
+      tab: DashboardSection.RESOURCES,
       selectedSecondaryTab: e.activeTab,
       rightActions: c
     }), g]
@@ -5048,24 +5048,24 @@ function sB(e) {
     let i = s && I.membersTabOrgJoinRequest;
     !O || L || i ? s && !L ? a(_$$sf({
       view: "workspace",
-      subView: V0.ADMIN,
+      subView: DUserRole.ADMIN,
       workspaceId: t.id,
-      selectedTab: _$$K(m2, e.selectedTab) || _C,
+      selectedTab: findMatchingValue(SectionType, e.selectedTab) || defaultSectionKey,
       membersTabOrgJoinRequest: I.membersTabOrgJoinRequest
     })) : L || a(_$$sf(o0)) : groupsUserIsAdminOf.length > 0 ? V ? a(_$$sf({
       view: "billingGroupDashboard",
       selectedTab: FRequestsStr.REQUESTS
     })) : a(_$$sf({
       view: "licenseGroup",
-      subView: UserRole.ADMIN,
+      subView: UserGroupRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
-      selectedTab: _$$g3(e.selectedTab)
+      selectedTab: getGroupOrDefault(e.selectedTab)
     })) : D2(y, EO(n.id)) && a(_$$sf(o0));
   }, [a, groupsUserIsAdminOf, O, e.workspacesCanAdminViewResult, L, n.id, y, e.selectedTab, I.membersTabOrgJoinRequest, I.view, V]);
   let [H, Y] = useState(0);
   let [J, Q] = useState("");
   useEffect(() => {
-    e.selectedTab === J7.MEMBERS && (Y(Date.now()), trackEventAnalytics("Org Admin Members Table V2 Load Initiated", {
+    e.selectedTab === DashboardSection.MEMBERS && (Y(Date.now()), trackEventAnalytics("Org Admin Members Table V2 Load Initiated", {
       orgId: n.id
     }, {
       forwardToDatadog: !0
@@ -5118,7 +5118,7 @@ function sB(e) {
   let eW = el.data?.has_billing_address || !1;
   let eH = null;
   let eY = null;
-  eY = e.selectedTab === J7.DASHBOARD || e.selectedTab === J7.CONTENT ? jsx(LoadingOverlay, {}) : e.selectedTab === J7.RESOURCES ? jsx(_$$p2, {
+  eY = e.selectedTab === DashboardSection.DASHBOARD || e.selectedTab === DashboardSection.CONTENT ? jsx(LoadingOverlay, {}) : e.selectedTab === DashboardSection.RESOURCES ? jsx(_$$p2, {
     children: jsx(LoadingOverlay, {})
   }) : jsxs("div", {
     className: kL,
@@ -5129,11 +5129,11 @@ function sB(e) {
   let eJ = useSubscription(OrgTeamsIdAndName({
     orgId: n.id
   }), {
-    enabled: e.selectedTab === J7.ACTIVITY
+    enabled: e.selectedTab === DashboardSection.ACTIVITY
   });
   let eQ = !1;
   switch (e.selectedTab) {
-    case J7.ACTIVITY:
+    case DashboardSection.ACTIVITY:
       let eZ = "loaded" === eJ.status && "loaded" === eJ.data.org.status && eJ.data.org.data ? eJ.data.org.data.activeTeams : null;
       eH = jsx(tZ, {
         activityLogs: C,
@@ -5150,7 +5150,7 @@ function sB(e) {
         orgTeams: eZ || []
       });
       break;
-    case J7.BILLING:
+    case DashboardSection.BILLING:
       let e0 = !!R && (VP(y, EO(n.id)) || !_isFetched);
       eH = jsx(nu, {
         activeTab: Gv(e.selectedSecondaryTab),
@@ -5161,13 +5161,13 @@ function sB(e) {
         isLoadingLicenseGroups: e0
       });
       break;
-    case J7.DASHBOARD:
+    case DashboardSection.DASHBOARD:
       eQ = !1;
       eH = jsx(_$$i, {
         isOrgAdmin: L
       });
       break;
-    case J7.WORKSPACES:
+    case DashboardSection.WORKSPACES:
       eQ = !isFetched;
       eH = jsx(nV, {
         org: n,
@@ -5175,10 +5175,10 @@ function sB(e) {
         workspaceTeamCounts: z
       });
       break;
-    case J7.CONTENT:
-      let e1 = e.selectedSecondaryTab || (n.tier === FPlanNameType.ENTERPRISE ? SN.WORKSPACES : SN.TEAMS);
+    case DashboardSection.CONTENT:
+      let e1 = e.selectedSecondaryTab || (n.tier === FPlanNameType.ENTERPRISE ? WorkspaceTab.WORKSPACES : WorkspaceTab.TEAMS);
       if (getFeatureFlags().ff_a11y_page_tab_fix) {
-        let t = Object.values(SN).includes(e1) ? e1 : SN.TEAMS;
+        let t = Object.values(WorkspaceTab).includes(e1) ? e1 : WorkspaceTab.TEAMS;
         eH = jsx(nH, {
           activeTab: t,
           isLoading: !isFetched,
@@ -5194,7 +5194,7 @@ function sB(e) {
         break;
       }
       switch (e1) {
-        case SN.TEAMS:
+        case WorkspaceTab.TEAMS:
           eH = jsx(_$$G, {
             org: n,
             dropdownShown: w,
@@ -5203,29 +5203,29 @@ function sB(e) {
             selectedWorkspaceId: e.selectedWorkspaceId
           });
           break;
-        case SN.ABANDONED_DRAFTS:
+        case WorkspaceTab.ABANDONED_DRAFTS:
           eH = jsx(_$$M, {
             org: n,
-            planType: _$$O2.ORG
+            planType: OrganizationType.ORG
           });
           break;
-        case SN.FILE_LIST_BETA:
+        case WorkspaceTab.FILE_LIST_BETA:
           eH = jsx(eo, {
             org: n
           });
           break;
-        case SN.ACCESS_INSIGHT:
+        case WorkspaceTab.ACCESS_INSIGHT:
           eH = jsx(ed, {
             org: n
           });
           break;
-        case SN.CONNECTED_PROJECTS:
+        case WorkspaceTab.CONNECTED_PROJECTS:
           eH = jsx(_$$k4, {
             showResourceConnectionInviteModal: e.showResourceConnectionInviteModal,
             showResourceConnectionFlyout: e.showResourceConnectionFlyout
           });
           break;
-        case SN.WORKSPACES:
+        case WorkspaceTab.WORKSPACES:
         default:
           eQ = !isFetched;
           eH = jsx(nV, {
@@ -5235,15 +5235,15 @@ function sB(e) {
           });
       }
       break;
-    case J7.MEMBERS:
+    case DashboardSection.MEMBERS:
       let e2 = VP(y, EO(n.id)) || !!L && ("loading" === el.status || f.isFetching);
-      let e4 = I.orgAdminMembersTabSort || oU;
+      let e4 = I.orgAdminMembersTabSort || DefaultSortConfig;
       eH = null;
       let e5 = null;
       e5 = L ? jsx(KX, {
         currency: el.data?.currency || void 0,
         dropdownShown: w,
-        filters: I.orgAdminMembersTabFilters || J0,
+        filters: I.orgAdminMembersTabFilters || DefaultFilters,
         invoices: eA,
         isLoading: e2,
         org: n,
@@ -5256,11 +5256,11 @@ function sB(e) {
         activeTab: _$$i3(e.selectedSecondaryTab),
         org: n,
         allMembersSection: e5,
-        filters: I.orgAdminMembersTabFilters || J0
+        filters: I.orgAdminMembersTabFilters || DefaultFilters
       }) : e5;
       break;
-    case J7.RESOURCES:
-      let e3 = (t = e.selectedSecondaryTab, Object.values(_d).includes(t)) ? e.selectedSecondaryTab : _d.LIBRARIES;
+    case DashboardSection.RESOURCES:
+      let e3 = (t = e.selectedSecondaryTab, Object.values(FigResourceType).includes(t)) ? e.selectedSecondaryTab : FigResourceType.LIBRARIES;
       if (getFeatureFlags().ff_a11y_page_tab_fix) {
         eH = jsx(sP, {
           isOrgAdmin: L,
@@ -5271,21 +5271,21 @@ function sB(e) {
         break;
       }
       switch (e3) {
-        case _d.APPROVED_PLUGINS:
+        case FigResourceType.APPROVED_PLUGINS:
           eH = jsx(sR, {
             orgId: n.id,
             extensionType: "plugin",
             selectedExtensionId: e.selectedExtensionId
           });
           break;
-        case _d.APPROVED_WIDGETS:
+        case FigResourceType.APPROVED_WIDGETS:
           eH = jsx(sR, {
             orgId: n.id,
             extensionType: "widget",
             selectedExtensionId: e.selectedExtensionId
           });
           break;
-        case _d.SHARED_FONTS:
+        case FigResourceType.SHARED_FONTS:
           eQ = !1;
           eH = jsx(_$$y2, {
             dispatch: a,
@@ -5297,7 +5297,7 @@ function sB(e) {
             isLoading: !!_$$y2.fontLoadPromise || !_$$y2.loadedFonts
           });
           break;
-        case _d.LIBRARIES:
+        case FigResourceType.LIBRARIES:
         default:
           eQ = !1;
           eH = jsx(re, {
@@ -5308,7 +5308,7 @@ function sB(e) {
           });
       }
       break;
-    case J7.SETTINGS:
+    case DashboardSection.SETTINGS:
       eQ = f.isFetching || v.isFetching || eu;
       eH = jsx(_$$Q4, {
         adminEmail: el.data?.admin_email || "",
@@ -5323,7 +5323,7 @@ function sB(e) {
         user: S
       });
       break;
-    case J7.TEAMS:
+    case DashboardSection.TEAMS:
       eH = jsx(_$$G, {
         org: n,
         dropdownShown: w,
@@ -5349,7 +5349,7 @@ function sB(e) {
       org: n
     }), y3(n.created_at) && jsx(_$$d, {
       org: n
-    }), (e.selectedTab === J7.TEAMS || e.selectedTab === J7.ACTIVITY) && jsx(eK, {}), e.selectedTab === J7.CONTENT && jsx(nX, {}), jsx(K, {})]
+    }), (e.selectedTab === DashboardSection.TEAMS || e.selectedTab === DashboardSection.ACTIVITY) && jsx(eK, {}), e.selectedTab === DashboardSection.CONTENT && jsx(nX, {}), jsx(K, {})]
   });
 }
 export const OrgAdminSettingsPageView = $$s$0;

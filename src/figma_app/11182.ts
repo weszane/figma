@@ -3,7 +3,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
 import { Np } from "../figma_app/193867";
-import { o as _$$o } from "../905/721794";
+import { tileCopyLinkModalId } from "../905/721794";
 import { createOptimistThunk } from "../905/350402";
 let $$c3 = createOptimistThunk((e, t) => {
   let r = t.stringToCopy;
@@ -81,7 +81,7 @@ let $$h1 = createOptimistThunk(async (e, t) => {
     }));
   } catch {
     e.dispatch(showModalHandler({
-      type: _$$o,
+      type: tileCopyLinkModalId,
       data: {
         link: o
       }

@@ -10,9 +10,9 @@ import { getI18nString } from "../905/303541";
 import { c5 } from "../905/93909";
 import { getRepoById, buildUrlPath, getDisplayName } from "../905/760074";
 import { Zt } from "../figma_app/617727";
-import { ge } from "../figma_app/349248";
+import { mapFileSummary } from "../figma_app/349248";
 import { LT, ZK } from "../figma_app/831696";
-import { O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 function A(e) {
   return "proto" === e || "deck" === e || "presenter" === e;
 }
@@ -35,7 +35,7 @@ export class $$y0 {
       if (!f) throw Error(`Missing file object, path=${t.join("/")}, editingFile=${JSON.stringify(getInitialOptions().editing_file)}`);
       let A = {
         view: "prototype",
-        file: ge(f)
+        file: mapFileSummary(f)
       };
       "presenter" === u && (A.isPresenterView = !0);
       s = s ? s.slice(1) : "";
@@ -65,7 +65,7 @@ export class $$y0 {
       }
       if ("1" === c["show-proto-sidebar"] && (A.showProtoSidebar = !0), "1" === c["disable-default-keyboard-nav"] && (A.disableDefaultKeyboardNav = !0), ("1" === c["comments-enabled"] || "1" === c["allow-comments"]) && (A.commentsEnabled = !0), c["prev-plan-id"] && c["prev-plan-type"] && debugState.dispatch(c5({
         planId: c["prev-plan-id"],
-        planType: "org" === c["prev-plan-type"] ? O.ORG : O.TEAM
+        planType: "org" === c["prev-plan-type"] ? OrganizationType.ORG : OrganizationType.TEAM
       })), c["prev-selected-view"]) {
         if ("recentsAndSharing" === c["prev-selected-view"]) {
           let e = c["prev-tab"];
@@ -96,7 +96,7 @@ export class $$y0 {
       let r = e.file;
       let a = n ? encodeUri(n) : "";
       let o = "proto";
-      if (e.isPresenterView) o = "presenter"; else switch (e.file.editor_type) {
+      if (e.isPresenterView) o = "presenter";else switch (e.file.editor_type) {
         case "design":
         default:
           o = "proto";

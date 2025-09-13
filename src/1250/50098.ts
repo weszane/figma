@@ -9,12 +9,12 @@ import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { Kz, ks } from "../figma_app/637027";
+import { Spacing, BigTextInputForwardRef } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { yJ } from "../figma_app/24841";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectUser } from "../905/372672";
@@ -110,7 +110,7 @@ function B({
     }
   });
   let G = j.has("something_else") && !C;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: L,
     properties: {
       jobTitleList: B,
@@ -131,16 +131,16 @@ function B({
               autosize: !0,
               height: "32px",
               width: "24px"
-            }), jsx(Kz, {
+            }), jsx(Spacing, {
               multiple: 3
             }), jsx("h1", {
               children: questionTitle
-            }), jsx(Kz, {
+            }), jsx(Spacing, {
               multiple: .5
             }), jsx("p", {
               className: "job_title_prompt_overlay--jobTitleSubheading--1t5Ue",
               children: questionSubtitle
-            }), jsx(Kz, {
+            }), jsx(Spacing, {
               multiple: 3
             }), jsx(_$$L, {
               isSingleSelect: !0,
@@ -151,7 +151,7 @@ function B({
               answerButtonClassName: "job_title_prompt_overlay--jobTitleAnswerButton--p1bfZ",
               containerClassName: "job_title_prompt_overlay--jobTitleOptions--k9zbw",
               getOptionDisplay,
-              endingOption: j.has("something_else") ? jsx(ks, {
+              endingOption: j.has("something_else") ? jsx(BigTextInputForwardRef, {
                 autoFocus: !0,
                 dataTestId: "custom_job_title_input",
                 className: "job_title_prompt_overlay--otherInput--aNBXq",
@@ -159,7 +159,7 @@ function B({
                 value: C,
                 onChange: e => N(e.currentTarget.value)
               }) : void 0
-            }), jsx(Kz, {
+            }), jsx(Spacing, {
               multiple: 3
             }), jsx("span", {
               className: "job_title_prompt_overlay--submitButton--uVeNa",

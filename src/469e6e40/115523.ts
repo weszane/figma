@@ -8,14 +8,14 @@ import { AutoLayout } from "../905/470281";
 import { wR } from "../905/346715";
 import { b as _$$b } from "../905/168239";
 import { K as _$$K } from "../905/628118";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { t as _$$t } from "../figma_app/55043";
 import { Z as _$$Z } from "../4452/80578";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { ResourceConnectionByPlan } from "../figma_app/43951";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { O as _$$O } from "../figma_app/809387";
-import { J7, SN } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { e0 } from "../905/696396";
 import { K as _$$K2 } from "../4452/401058";
 import { A as _$$A } from "../4452/239888";
@@ -35,7 +35,7 @@ import { Ro } from "../figma_app/805373";
 import { Cj } from "../905/270084";
 import { jT } from "../4452/650793";
 import { e as _$$e } from "../905/295932";
-import { zE, Ex, vj } from "../figma_app/919079";
+import { BadgeColor, Badge, BadgeSize } from "../figma_app/919079";
 import { t as _$$t3 } from "../905/150656";
 import { ButtonPrimitive } from "../905/632989";
 import { Bs, Hg } from "../905/672745";
@@ -61,7 +61,7 @@ import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { Ax } from "../figma_app/616261";
 import { truncate } from "../figma_app/930338";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { In } from "../905/672640";
 import { selectUser } from "../905/372672";
 import { getPermissionLevelName } from "../figma_app/12796";
@@ -80,9 +80,9 @@ let Q = e => {
   switch (e) {
     case eP.PENDING:
     case eP.DISCONNECTED:
-      return zE.DEFAULT;
+      return BadgeColor.DEFAULT;
     case eP.ACTIVE:
-      return zE.SUCCESS;
+      return BadgeColor.SUCCESS;
   }
 };
 let Z = e => {
@@ -96,11 +96,11 @@ let Z = e => {
   }
 };
 function ee(e) {
-  return jsx(Ex, {
+  return jsx(Badge, {
     color: Q(e.resourceConnection.status),
     text: Z(e.resourceConnection.status),
     subtle: !0,
-    size: vj.LARGE
+    size: BadgeSize.LARGE
   });
 }
 function et(e) {
@@ -512,7 +512,7 @@ function eO(e) {
         children: [jsx(In, {
           icon: "search-32",
           fill: "secondary"
-        }), jsx(_$$L, {
+        }), jsx(LazyInputForwardRef, {
           className: "connected_projects_flyout--searchInput--68Ct-",
           autoFocus: !1,
           onChange: e => {
@@ -899,7 +899,7 @@ function eU(e) {
       className: _$$s.colorBorder.bSolid.bt1.wFull.$
     })
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e0.CONNECTED_PROJECTS_TABLE,
     properties: {
       planId,
@@ -1047,7 +1047,7 @@ export function $$eq0(e) {
     let s = getResourceDataOrFallback(e?.connectingPlanPendingResourceConnectionInvites) ?? [];
     return t.length + a.length + n.length + s.length;
   }, [E]);
-  return t ? jsxs(fu, {
+  return t ? jsxs(TrackingProvider, {
     name: e0.CONNECTED_PROJECTS_TAB,
     properties: {
       planId: a,
@@ -1055,10 +1055,10 @@ export function $$eq0(e) {
     },
     children: [k === FOrganizationLevelType.ORG && !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K, {
-        title: _$$O(J7.CONTENT)
+        title: _$$O(DashboardSection.CONTENT)
       }), jsx(_$$b, {
-        tab: J7.CONTENT,
-        selectedSecondaryTab: SN.CONNECTED_PROJECTS
+        tab: DashboardSection.CONTENT,
+        selectedSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS
       })]
     }), I && jsx(AutoLayout, {
       width: "fill-parent",

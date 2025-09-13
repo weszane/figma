@@ -1,374 +1,467 @@
-import { n as _$$n } from "../905/347702";
-import { logError } from "../905/714362";
-import { generateUUIDv4 } from "../905/871474";
-var n;
-var $$i10;
-function o(e) {
-  window.parent.postMessage(e, "*");
+// import { Fn } from '../../types/global'
+import { logError } from '../905/714362'
+import { generateUUIDv4 } from '../905/871474'
+
+/**
+ * Utility to post messages to the parent window.
+ * @param message - The message object to send.
+ * (original: o)
+ */
+function postToParent(message: any): void {
+  window.parent.postMessage(message, '*')
 }
-export function $$l22() {
-  o({
-    type: "FIGMA_READY"
-  });
+
+/**
+ * Notifies that Figma is ready.
+ * (original: $$l22)
+ */
+export function figmaReady(): void {
+  postToParent({ type: 'FIGMA_READY' })
 }
-export function $$d3(e) {
-  o({
-    type: "CSS_PROPERTIES",
+
+/**
+ * Sends CSS properties.
+ * @param cssProperties - The CSS properties to send.
+ * (original: $$d3)
+ */
+export function sendCssProperties(cssProperties: any): void {
+  postToParent({
+    type: 'CSS_PROPERTIES',
+    data: { cssProperties },
+  })
+}
+
+/**
+ * Sends HTML skeleton.
+ * @param htmlSkeleton - The HTML skeleton to send.
+ * (original: $$c11)
+ */
+export function sendHtmlSkeleton(htmlSkeleton: any): void {
+  postToParent({
+    type: 'HTML_SKELETON',
+    data: { htmlSkeleton },
+  })
+}
+
+/**
+ * Sends text data.
+ * @param text - The text to send.
+ * (original: $$u17)
+ */
+export function sendText(text: string): void {
+  postToParent({
+    type: 'TEXT',
+    data: { text },
+  })
+}
+
+/**
+ * Sends layers data.
+ * @param rootNodeId - The root node ID.
+ * @param layers - The layers data.
+ * (original: $$p2)
+ */
+export function sendLayers(rootNodeId: string, layers: any): void {
+  postToParent({
+    type: 'LAYERS',
+    data: { rootNodeId, layers },
+  })
+}
+
+/**
+ * Sends asset data.
+ * @param asset - The asset to send.
+ * (original: $$_18)
+ */
+export function sendAsset(asset: any): void {
+  postToParent({
+    type: 'ASSET',
+    data: { asset },
+  })
+}
+
+/**
+ * Notifies that a related link was created.
+ * @param link - The link data.
+ * (original: $$h9)
+ */
+export function relatedLinkCreated(link: any): void {
+  postToParent({
+    type: 'RELATED_LINK_CREATED',
+    data: { link },
+  })
+}
+
+/**
+ * Notifies that a related link was removed.
+ * @param link - The link data.
+ * (original: $$m1)
+ */
+export function relatedLinkRemoved(link: any): void {
+  postToParent({
+    type: 'RELATED_LINK_REMOVED',
+    data: { link },
+  })
+}
+
+/**
+ * Sends selected layer GUID.
+ * @param guid - The GUID of the selected layer.
+ * (original: $$g15)
+ */
+export function selectedLayerGuid(guid: string): void {
+  postToParent({
+    type: 'SELECTED_LAYER_GUID',
+    data: { guid },
+  })
+}
+
+/**
+ * Sends selected page GUID.
+ * @param guid - The GUID of the selected page.
+ * (original: $$f21)
+ */
+export function selectedPageGuid(guid: string): void {
+  postToParent({
+    type: 'SELECTED_PAGE_GUID',
+    data: { guid },
+  })
+}
+
+/**
+ * Configures autocomplete providers.
+ * @param providers - The autocomplete providers.
+ * (original: $$E12)
+ */
+export function configureAutocomplete(providers: any): void {
+  postToParent({
+    type: 'CONFIGURE_AUTOCOMPLETE',
+    data: { providers },
+  })
+}
+
+/**
+ * Sends generated code sections.
+ * @param sections - The code sections.
+ * (original: $$y13)
+ */
+export function sendGeneratedCode(sections: any): void {
+  postToParent({
+    type: 'GENERATED_CODE',
+    data: { sections },
+  })
+}
+
+/**
+ * Opens a related link.
+ * @param href - The link URL.
+ * (original: $$b16)
+ */
+export function openRelatedLink(href: string): void {
+  postToParent({
+    type: 'OPEN_RELATED_LINK',
+    data: { href },
+  })
+}
+
+/**
+ * Requests to create a file link.
+ * (original: $$T19)
+ */
+export function createFileLink(): void {
+  postToParent({ type: 'CREATE_FILE_LINK' })
+}
+
+/**
+ * Opens a URL in the browser.
+ * @param href - The URL to open.
+ * (original: $$I8)
+ */
+export function openInBrowser(href: string): void {
+  postToParent({
+    type: 'OPEN_IN_BROWSER',
+    data: { href },
+  })
+}
+
+/**
+ * Sends file name.
+ * @param name - The file name.
+ * (original: $$S4)
+ */
+export function sendFileName(name: string): void {
+  postToParent({
+    type: 'FILE_NAME',
+    data: { name },
+  })
+}
+
+/**
+ * Opens autocomplete line settings.
+ * (original: $$v5)
+ */
+export function openAutocompleteLineSettings(): void {
+  postToParent({ type: 'OPEN_AUTOCOMPLETE_LINE_SETTINGS' })
+}
+
+/**
+ * Opens autocomplete block settings.
+ * (original: $$A14)
+ */
+export function openAutocompleteBlockSettings(): void {
+  postToParent({ type: 'OPEN_AUTOCOMPLETE_BLOCK_SETTINGS' })
+}
+
+/**
+ * Sends thumbnail data.
+ * @param nodeId - The node ID.
+ * @param thumbnailDataUri - The thumbnail data URI.
+ * @param thumbnailSize - The size of the thumbnail.
+ * (original: $$x6)
+ */
+export function sendThumbnail(nodeId: string, thumbnailDataUri: string, thumbnailSize: number): void {
+  postToParent({
+    type: 'THUMBNAIL',
+    data: { nodeId, thumbnailDataUri, thumbnailSize },
+  })
+}
+
+/**
+ * Notifies that the page is loaded.
+ * (original: $$N20)
+ */
+export function pageLoaded(): void {
+  postToParent({ type: 'PAGE_LOADED' })
+}
+
+/**
+ * Notifies idle logout.
+ * (original: $$C0)
+ */
+export function idleLogout(): void {
+  postToParent({ type: 'IDLE_LOGOUT' })
+}
+
+/**
+ * Sends mapping suggestion.
+ * @param suggestion - The mapping suggestion object.
+ * (original: $$w7)
+ */
+export function sendMappingSuggestion(suggestion: { requestId: string, mappings?: any, error?: any }): void {
+  postToParent({
+    type: 'MAPPING_SUGGESTION',
     data: {
-      cssProperties: e
-    }
-  });
+      requestId: suggestion.requestId,
+      mappings: suggestion.mappings || null,
+      error: suggestion.error || null,
+    },
+  })
 }
-export function $$c11(e) {
-  o({
-    type: "HTML_SKELETON",
-    data: {
-      htmlSkeleton: e
-    }
-  });
-}
-export function $$u17(e) {
-  o({
-    type: "TEXT",
-    data: {
-      text: e
-    }
-  });
-}
-export function $$p2(e, t) {
-  o({
-    type: "LAYERS",
-    data: {
-      rootNodeId: e,
-      layers: t
-    }
-  });
-}
-export function $$_18(e) {
-  o({
-    type: "ASSET",
-    data: {
-      asset: e
-    }
-  });
-}
-export function $$h9(e) {
-  o({
-    type: "RELATED_LINK_CREATED",
-    data: {
-      link: e
-    }
-  });
-}
-export function $$m1(e) {
-  o({
-    type: "RELATED_LINK_REMOVED",
-    data: {
-      link: e
-    }
-  });
-}
-export function $$g15(e) {
-  o({
-    type: "SELECTED_LAYER_GUID",
-    data: {
-      guid: e
-    }
-  });
-}
-export function $$f21(e) {
-  o({
-    type: "SELECTED_PAGE_GUID",
-    data: {
-      guid: e
-    }
-  });
-}
-export function $$E12(e) {
-  o({
-    type: "CONFIGURE_AUTOCOMPLETE",
-    data: {
-      providers: e
-    }
-  });
-}
-export function $$y13(e) {
-  o({
-    type: "GENERATED_CODE",
-    data: {
-      sections: e
-    }
-  });
-}
-export function $$b16(e) {
-  o({
-    type: "OPEN_RELATED_LINK",
-    data: {
-      href: e
-    }
-  });
-}
-export function $$T19() {
-  o({
-    type: "CREATE_FILE_LINK"
-  });
-}
-export let $$I8 = _$$n(e => {
-  o({
-    type: "OPEN_IN_BROWSER",
-    data: {
-      href: e
-    }
-  });
-});
-export function $$S4(e) {
-  o({
-    type: "FILE_NAME",
-    data: {
-      name: e
-    }
-  });
-}
-export function $$v5() {
-  o({
-    type: "OPEN_AUTOCOMPLETE_LINE_SETTINGS"
-  });
-}
-export function $$A14() {
-  o({
-    type: "OPEN_AUTOCOMPLETE_BLOCK_SETTINGS"
-  });
-}
-export function $$x6(e, t, r) {
-  o({
-    type: "THUMBNAIL",
-    data: {
-      nodeId: e,
-      thumbnailDataUri: t,
-      thumbnailSize: r
-    }
-  });
-}
-export function $$N20() {
-  o({
-    type: "PAGE_LOADED"
-  });
-}
-export function $$C0() {
-  o({
-    type: "IDLE_LOGOUT"
-  });
-}
-export function $$w7(e) {
-  o({
-    type: "MAPPING_SUGGESTION",
-    data: {
-      requestId: e.requestId,
-      mappings: e.mappings || null,
-      error: e.error || null
-    }
-  });
-}
-(n || (n = {})).sendGenerateFigmadocMessage = function (e) {
-  return $$O23.sendMessage({
-    type: "GENERATE_FIGMADOC",
-    request: {
-      userCode: e
-    }
-  });
-};
-(e => {
-  e.sendGetLocalFileExtensionManifest = function (e) {
-    return $$O23.sendMessage({
-      type: "GET_LOCAL_FILE_EXTENSION_MANIFEST",
-      request: {
-        id: e
-      }
-    });
-  };
-  e.sendCreateMultipleNewLocalFileExtensions = function (e, t) {
-    return $$O23.sendMessage({
-      type: "CREATE_MULTIPLE_NEW_LOCAL_FILE_EXTENSIONS",
-      request: {
-        options: e,
-        depth: t
-      }
-    });
-  };
-  e.sendGetLocalFileExtensionSourceMessage = function (e) {
-    return $$O23.sendMessage({
-      type: "GET_LOCAL_FILE_EXTENSION_SOURCE",
-      request: {
-        id: e
-      }
-    });
-  };
-  e.sendUpdateCachedContainsWidget = function (e) {
-    return $$O23.sendMessage({
-      type: "UPDATE_CACHED_CONTAINS_WIDGET",
-      request: e
-    });
-  };
-  e.sendGetLocalManifestFileExtensionIdsToCachedMetadataMap = function () {
-    return $$O23.sendMessage({
-      type: "GET_LOCAL_MANIFEST_FILE_EXTENSION_IDS_TO_CACHED_METADATA_MAP",
-      request: void 0
-    });
-  };
-  e.sendRegisterManifestChangeObserverMessage = function (e) {
-    return $$R24.registerCallback({
-      type: "REGISTER_MANIFEST_CHANGE_OBSERVER"
-    }, e);
-  };
-  e.sendRegisterCodeChangeObserverMessage = function (e) {
-    return $$R24.registerCallback({
-      type: "REGISTER_CODE_CHANGE_OBSERVER"
-    }, e);
-  };
-  e.sendRegisterUIChangeObserverMessage = function (e) {
-    return $$R24.registerCallback({
-      type: "REGISTER_UI_CHANGE_OBSERVER"
-    }, e);
-  };
-  e.sendOpenExtensionDirectoryMessage = function (e) {
-    return o({
-      type: "OPEN_EXTENSION_DIRECTORY",
-      data: {
-        id: e
-      }
-    });
-  };
-  e.sendOpenExtensionManifestMessage = function (e) {
-    return o({
-      type: "OPEN_EXTENSION_MANIFEST",
-      data: {
-        id: e
-      }
-    });
-  };
-  e.sendRemoveFileExtensionMessage = function (e) {
-    return $$O23.sendMessage({
-      type: "REMOVE_LOCAL_FILE_EXTENSION",
-      request: {
-        id: e
-      }
-    });
-  };
-  e.sendGetLocalManifestFileExtensionIdsToCachedContainsWidgetMapMessage = function () {
-    return $$O23.sendMessage({
-      type: "GET_LOCAL_MANIFEST_FILE_EXTENSION_IDS_TO_CACHED_CONTAINS_WIDGET_MAP",
-      request: void 0
-    });
-  };
-  e.sendToggleDevToolsMessage = function () {
-    return o({
-      type: "TOGGLE_DEV_TOOLS"
-    });
-  };
-  e.sendGetAllLocalFileExtensionIdsMessage = function () {
-    return $$O23.sendMessage({
-      type: "GET_ALL_LOCAL_FILE_EXTENSION_IDS",
-      request: void 0
-    });
-  };
-  e.sendWriteNewExtensionDirectoryToDiskMessage = function (e) {
-    return $$O23.sendMessage({
-      type: "WRITE_NEW_EXTENSION_DIRECTORY_TO_DISK",
-      request: e
-    });
-  };
-})($$i10 || ($$i10 = {}));
-let $$O23 = new class {
-  constructor() {
-    this.pendingMessagesById = {};
+
+// Message manager for requests with responses (original: $$O23)
+class MessageWithResponseManager {
+  private pendingMessagesById: Record<string, any> = {}
+
+  /**
+   * Sends a message and returns a promise for the response.
+   * @param message - The message object.
+   */
+  sendMessage(message: any): Promise<any> {
+    const requestId = generateUUIDv4()
+    const msgWithId = { ...message, requestId }
+    return new Promise((resolve, reject) => {
+      this.pendingMessagesById[requestId] = { ...msgWithId, resolve, reject }
+      postToParent(msgWithId)
+    })
   }
-  sendMessage(e) {
-    let t = generateUUIDv4();
-    let r = {
-      ...e,
-      requestId: t
-    };
-    return new Promise((e, n) => {
-      this.pendingMessagesById[t] = {
-        ...r,
-        resolve: e,
-        reject: n
-      };
-      o(r);
-    });
-  }
-  resolveMessage(e) {
-    let t = this.pendingMessagesById[e.requestId];
-    if (!t) {
-      logError("MessageWithResponseManager.resolveMessage", "No pending message found", {
-        response: e,
-        pendingMessagesById: this.pendingMessagesById
-      }, {
-        reportAsSentryError: !0
-      });
-      return;
+
+  /**
+   * Resolves a message response.
+   * @param response - The response object.
+   */
+  resolveMessage(response: any): void {
+    const pending = this.pendingMessagesById[response.requestId]
+    if (!pending) {
+      logError('MessageWithResponseManager.resolveMessage', 'No pending message found', {
+        response,
+        pendingMessagesById: this.pendingMessagesById,
+      }, { reportAsSentryError: true })
+      return
     }
-    e.response && (t.resolve(e.response), delete this.pendingMessagesById[e.requestId]);
-  }
-}();
-let $$R24 = new class {
-  constructor() {
-    this.callbacksById = {};
-  }
-  registerCallback(e, t) {
-    let r = generateUUIDv4();
-    this.callbacksById[r] = t;
-    o({
-      ...e,
-      callbackId: r
-    });
-    return () => this.cancelCallback(r);
-  }
-  resolveMessage(e) {
-    let t = this.callbacksById[e.callbackId];
-    if (!t) {
-      logError("MessageWithCallbackManager.resolveMessage", "No callback found", {
-        response: e,
-        callbacksById: this.callbacksById
-      }, {
-        reportAsSentryError: !0
-      });
-      return;
+    if (response.response) {
+      pending.resolve(response.response)
+      delete this.pendingMessagesById[response.requestId]
     }
-    t(e.callbackData);
   }
-  async cancelCallback(e) {
-    await $$O23.sendMessage({
-      type: "CANCEL_CALLBACK",
-      request: {
-        callbackId: e
-      }
-    });
-    delete this.callbacksById[e];
+}
+const messageWithResponseManager = new MessageWithResponseManager()
+
+// Message manager for callbacks (original: $$R24)
+class MessageWithCallbackManager {
+  private callbacksById: Record<string, Fn> = {}
+
+  /**
+   * Registers a callback and returns a function to cancel it.
+   * @param message - The message object.
+   * @param callback - The callback function.
+   */
+  registerCallback(message: any, callback: Fn): () => Promise<void> {
+    const callbackId = generateUUIDv4()
+    this.callbacksById[callbackId] = callback
+    postToParent({ ...message, callbackId })
+    return () => this.cancelCallback(callbackId)
   }
-}();
-export const $g = $$C0;
-export const Au = $$m1;
-export const BG = $$p2;
-export const Bt = $$d3;
-export const GD = $$S4;
-export const KQ = $$v5;
-export const LF = $$x6;
-export const N$ = $$w7;
-export const Qn = $$I8;
-export const _L = $$h9;
-export const bf = $$i10;
-export const fL = $$c11;
-export const hQ = $$E12;
-export const le = $$y13;
-export const lk = $$A14;
-export const mX = $$g15;
-export const mz = $$b16;
-export const oF = $$u17;
-export const pY = $$_18;
-export const qE = $$T19;
-export const rx = $$N20;
-export const sZ = $$f21;
-export const u_ = $$l22;
-export const wS = $$O23;
-export const w_ = $$R24;
+
+  /**
+   * Resolves a callback message.
+   * @param response - The response object.
+   */
+  resolveMessage(response: any): void {
+    const cb = this.callbacksById[response.callbackId]
+    if (!cb) {
+      logError('MessageWithCallbackManager.resolveMessage', 'No callback found', {
+        response,
+        callbacksById: this.callbacksById,
+      }, { reportAsSentryError: true })
+      return
+    }
+    cb(response.callbackData)
+  }
+
+  /**
+   * Cancels a registered callback.
+   * @param callbackId - The callback ID.
+   */
+  async cancelCallback(callbackId: string): Promise<void> {
+    await messageWithResponseManager.sendMessage({
+      type: 'CANCEL_CALLBACK',
+      request: { callbackId },
+    })
+    delete this.callbacksById[callbackId]
+  }
+}
+const messageWithCallbackManager = new MessageWithCallbackManager()
+
+/**
+ * Extension-related message utilities.
+ * (original: $$i10)
+ */
+export const extensionMessages = {
+  sendGenerateFigmadocMessage(userCode: string) {
+    return messageWithResponseManager.sendMessage({
+      type: 'GENERATE_FIGMADOC',
+      request: { userCode },
+    })
+  },
+  sendGetLocalFileExtensionManifest(id: string) {
+    return messageWithResponseManager.sendMessage({
+      type: 'GET_LOCAL_FILE_EXTENSION_MANIFEST',
+      request: { id },
+    })
+  },
+  sendCreateMultipleNewLocalFileExtensions(options: any, depth: number) {
+    return messageWithResponseManager.sendMessage({
+      type: 'CREATE_MULTIPLE_NEW_LOCAL_FILE_EXTENSIONS',
+      request: { options, depth },
+    })
+  },
+  sendGetLocalFileExtensionSourceMessage(id: string) {
+    return messageWithResponseManager.sendMessage({
+      type: 'GET_LOCAL_FILE_EXTENSION_SOURCE',
+      request: { id },
+    })
+  },
+  sendUpdateCachedContainsWidget(request: any) {
+    return messageWithResponseManager.sendMessage({
+      type: 'UPDATE_CACHED_CONTAINS_WIDGET',
+      request,
+    })
+  },
+  sendGetLocalManifestFileExtensionIdsToCachedMetadataMap() {
+    return messageWithResponseManager.sendMessage({
+      type: 'GET_LOCAL_MANIFEST_FILE_EXTENSION_IDS_TO_CACHED_METADATA_MAP',
+      request: undefined,
+    })
+  },
+  sendRegisterManifestChangeObserverMessage(callback: Fn) {
+    return messageWithCallbackManager.registerCallback({
+      type: 'REGISTER_MANIFEST_CHANGE_OBSERVER',
+    }, callback)
+  },
+  sendRegisterCodeChangeObserverMessage(callback: Fn) {
+    return messageWithCallbackManager.registerCallback({
+      type: 'REGISTER_CODE_CHANGE_OBSERVER',
+    }, callback)
+  },
+  sendRegisterUIChangeObserverMessage(callback: Fn) {
+    return messageWithCallbackManager.registerCallback({
+      type: 'REGISTER_UI_CHANGE_OBSERVER',
+    }, callback)
+  },
+  sendOpenExtensionDirectoryMessage(id: string) {
+    return postToParent({
+      type: 'OPEN_EXTENSION_DIRECTORY',
+      data: { id },
+    })
+  },
+  sendOpenExtensionManifestMessage(id: string) {
+    return postToParent({
+      type: 'OPEN_EXTENSION_MANIFEST',
+      data: { id },
+    })
+  },
+  sendRemoveFileExtensionMessage(id: string) {
+    return messageWithResponseManager.sendMessage({
+      type: 'REMOVE_LOCAL_FILE_EXTENSION',
+      request: { id },
+    })
+  },
+  sendGetLocalManifestFileExtensionIdsToCachedContainsWidgetMapMessage() {
+    return messageWithResponseManager.sendMessage({
+      type: 'GET_LOCAL_MANIFEST_FILE_EXTENSION_IDS_TO_CACHED_CONTAINS_WIDGET_MAP',
+      request: undefined,
+    })
+  },
+  sendToggleDevToolsMessage() {
+    return postToParent({ type: 'TOGGLE_DEV_TOOLS' })
+  },
+  sendGetAllLocalFileExtensionIdsMessage() {
+    return messageWithResponseManager.sendMessage({
+      type: 'GET_ALL_LOCAL_FILE_EXTENSION_IDS',
+      request: undefined,
+    })
+  },
+  sendWriteNewExtensionDirectoryToDiskMessage(request: any) {
+    return messageWithResponseManager.sendMessage({
+      type: 'WRITE_NEW_EXTENSION_DIRECTORY_TO_DISK',
+      request,
+    })
+  },
+}
+
+// Exported names mapped to refactored implementations
+export const $g = idleLogout
+export const Au = relatedLinkRemoved
+export const BG = sendLayers
+export const Bt = sendCssProperties
+export const GD = sendFileName
+export const KQ = openAutocompleteLineSettings
+export const LF = sendThumbnail
+export const N$ = sendMappingSuggestion
+export const Qn = openInBrowser
+export const _L = relatedLinkCreated
+export const bf = extensionMessages
+export const fL = sendHtmlSkeleton
+export const hQ = configureAutocomplete
+export const le = sendGeneratedCode
+export const lk = openAutocompleteBlockSettings
+export const mX = selectedLayerGuid
+export const mz = openRelatedLink
+export const oF = sendText
+export const pY = sendAsset
+export const qE = createFileLink
+export const rx = pageLoaded
+export const sZ = selectedPageGuid
+export const u_ = figmaReady
+export const wS = messageWithResponseManager
+export const w_ = messageWithCallbackManager

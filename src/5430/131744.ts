@@ -8,7 +8,7 @@ import { N, S } from "../905/872825";
 import { a4 } from "../figma_app/321395";
 import { LJ } from "../figma_app/930386";
 import { $E } from "../figma_app/805898";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 var a = o;
 export function $$h1(e, t, r, s) {
   return r ? e.tags.map(e => ({
@@ -60,7 +60,7 @@ export function $$x0({
         title: r,
         translatedTitle: i,
         urlSlug: n
-      }) => jsx(o3, {
+      }) => jsx(TrackedLink, {
         trackingEventName: "cmty_category",
         trackingProperties: {
           name: t ? "tag_link_clicked" : "subcategory_link_clicked",

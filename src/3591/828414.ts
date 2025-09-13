@@ -8,7 +8,7 @@ import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
 import { s_ } from "../905/17223";
 import { c$, wv, ms } from "../figma_app/236327";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { R as _$$R } from "../3591/975641";
 import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
@@ -21,7 +21,7 @@ import { j7, oB, sf } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { KE } from "../905/116101";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { V2, WK } from "../figma_app/844435";
 import { Um } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
@@ -35,7 +35,7 @@ import { YW } from "../figma_app/626177";
 import { A as _$$A } from "../3591/199070";
 import { PE } from "../3591/130069";
 import { lD, T9 } from "../figma_app/38430";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { h as _$$h } from "../figma_app/752483";
 import { ho } from "../figma_app/870683";
 import { li, dn } from "../figma_app/994403";
@@ -264,7 +264,7 @@ let eu = class e extends PureComponent {
         targetRect: this.dotsIconRef.current.getBoundingClientRect(),
         propagateCloseClick: !0,
         children: e
-      }), this.state.shouldShowErrorModal && jsxs(d_, {
+      }), this.state.shouldShowErrorModal && jsxs(ModalContainer, {
         size: "small",
         title: getI18nString("community.plugins.plugin_or_widget_issue", {
           resourceType: n
@@ -276,7 +276,7 @@ let eu = class e extends PureComponent {
           children: this.props.plugin.error ? this.props.plugin.error.text : error?.text
         }), jsx("div", {
           className: H1,
-          children: jsx($$, {
+          children: jsx(ButtonBasePrimary, {
             onClick: this.hideError,
             children: renderI18nText("general.done")
           })
@@ -484,7 +484,7 @@ function eg(e) {
     })]
   });
 };
-tf(function ({
+withTrackedClick(function ({
   plugin: e,
   className: i,
   onClick: t

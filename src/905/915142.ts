@@ -7,7 +7,7 @@ import { FMemberRoleType } from "../figma_app/191312";
 import { checkOrgUserPermission } from "../figma_app/465071";
 import { d as _$$d } from "../905/44199";
 import { AccessLevelEnum } from "../905/557142";
-import { vy, Um, aU } from "../figma_app/349248";
+import { mapOrgDomainProperties, mapUserProperties, mapResourceAccess } from "../figma_app/349248";
 import { eE } from "../figma_app/336853";
 export function $$h5(e, t, i) {
   return {
@@ -37,7 +37,7 @@ export function $$A1(e) {
     name: t.org.name,
     domain_capture: t.org.domainCapture,
     invite_whitelist_guest_invite_setting: t.org.inviteWhitelist?.guestInviteSetting,
-    org_domains: vy(t.org.orgDomains),
+    org_domains: mapOrgDomainProperties(t.org.orgDomains),
     figjam_disabled_at: t.org.figjamDisabledAt,
     img_url: t.org.imgUrl
   };
@@ -66,7 +66,7 @@ export function $$A1(e) {
 export function $$y0(e) {
   let t = e.team;
   return t ? t.roles?.map(e => {
-    let t = e.user ? Um(e.user) : null;
+    let t = e.user ? mapUserProperties(e.user) : null;
     e.pending || t || (reportError(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
       extra: {
         role: e
@@ -76,7 +76,7 @@ export function $$y0(e) {
       handle: "",
       img_url: ""
     });
-    return aU(e, t, null, null);
+    return mapResourceAccess(e, t, null, null);
   }) : null;
 }
 export function $$b3(e) {
@@ -91,11 +91,11 @@ export function $$b3(e) {
     domain_capture: !!a.domainCapture,
     invite_whitelist_guest_invite_setting: a.inviteWhitelist?.guestInviteSetting,
     figjam_disabled_at: a.figjamDisabledAt,
-    org_domains: vy(a.orgDomains),
+    org_domains: mapOrgDomainProperties(a.orgDomains),
     img_url: a.imgUrl
   };
   let o = t.roles.map(e => {
-    let t = e.user ? Um(e.user) : null;
+    let t = e.user ? mapUserProperties(e.user) : null;
     e.pending || t || (reportError(_$$e.FRONTEND_PLATFORM, Error("Non-pending role has no user"), {
       extra: {
         role: e
@@ -105,7 +105,7 @@ export function $$b3(e) {
       handle: "",
       img_url: ""
     });
-    return aU(e, t, null, null);
+    return mapResourceAccess(e, t, null, null);
   });
   return {
     org: i,

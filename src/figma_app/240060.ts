@@ -5,7 +5,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { Sr, B3 } from "../905/535224";
 import { hW, vn, _p } from "../figma_app/814196";
 import { Point } from "../905/736624";
-import { tB, JU } from "../figma_app/637027";
+import { FocusCheckbox, createLabel } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Z1 } from "../figma_app/91703";
 import { Yk } from "../figma_app/644079";
@@ -73,11 +73,11 @@ export class $$b0 extends PureComponent {
         className: k,
         children: [jsxs("div", {
           className: K,
-          children: [jsx(tB, {
+          children: [jsx(FocusCheckbox, {
             id: "always-open-desktop-app",
             checked: this.state.alwaysChecked,
             onClick: this.onClickAlwaysOpenDesktopApp
-          }), jsx(JU, {
+          }), jsx(createLabel, {
             htmlFor: "always-open-desktop-app",
             children: renderI18nText("desktop_open_views.open_in_desktop_modal.always_open_in_app_checkbox")
           })]

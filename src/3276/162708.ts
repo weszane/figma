@@ -6,12 +6,12 @@ import { dR } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
-import { ks, vd, Us } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { showModalHandler, hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { M4 } from "../905/713695";
 import { registerModal } from "../905/102752";
 import { x as _$$x } from "../905/749159";
@@ -45,14 +45,14 @@ function I({
       return () => clearTimeout(e);
     }
   }, [I]);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "Share Link Modal",
     children: [jsx("div", {
       className: j,
       children: renderI18nText("figjam_try.share_link_modal.title")
     }), jsx("div", {
       className: j,
-      children: jsx(ks, {
+      children: jsx(BigTextInputForwardRef, {
         readOnly: !0,
         value: y,
         onClick: M,
@@ -60,7 +60,7 @@ function I({
       })
     }), jsx("div", {
       className: r()(C && j),
-      children: jsx(vd, {
+      children: jsx(ButtonBasePrimaryTracked, {
         fullWidth: !0,
         onClick: M,
         trackingProperties: {
@@ -80,7 +80,7 @@ function I({
         svg: _$$A,
         className: "share_link_modal--teamIcon--1LdNm"
       }), jsxs("span", {
-        children: [renderI18nText("figjam_try.share_link_modal.cta_description"), " ", jsx(Us, {
+        children: [renderI18nText("figjam_try.share_link_modal.cta_description"), " ", jsx(linkWithTracking, {
           role: "button",
           onClick: () => {
             t();

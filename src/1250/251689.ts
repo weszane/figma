@@ -6,7 +6,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
 import { getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { Tr } from "../1250/158057";
@@ -461,7 +461,7 @@ React.render(<App>,..)` : "";
         throwTypeError(e);
     }
   })();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: `Codebase Suggestions Onboarding Steps - ${e}`,
     children: jsx("div", {
       className: "codebase_suggestions_onboarding_steps--steps--EiS3Z",

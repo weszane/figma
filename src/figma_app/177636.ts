@@ -15,7 +15,7 @@ import { U } from "../905/506188";
 import { getBasename } from "../905/309735";
 import { FComponentType } from "../figma_app/191312";
 import { LibraryAssetDataOfType, LibraryComponentDataByLibraryKey } from "../figma_app/43951";
-import { Qp } from "../figma_app/349248";
+import { mapComponentProperties } from "../figma_app/349248";
 import { cleanAssetName } from "../905/722604";
 import { FEditorType } from "../figma_app/53721";
 import { G } from "../figma_app/923271";
@@ -150,7 +150,7 @@ export function $$F6() {
       let n = getResourceDataOrFallback(r.data?.libraryKeyToFile?.file);
       let a = r.data?.libraryKeyToFile?.file?.libraryKey;
       if (!n || !a) continue;
-      let s = n.libraryHierarchyPaths.flatMap(e => e.components).map(e => Qp(e, {
+      let s = n.libraryHierarchyPaths.flatMap(e => e.components).map(e => mapComponentProperties(e, {
         type: "team",
         file: {
           key: "",

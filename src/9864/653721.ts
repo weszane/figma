@@ -5,7 +5,7 @@ import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { FFileType } from "../figma_app/191312";
 import { pA } from "../7021/724859";
@@ -150,7 +150,7 @@ export function $$$$E1() {
     children: [jsx("h1", {
       className: HN,
       children: renderI18nText("new_user_experience.choose_product.title")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 4
     }), jsx("div", {
       className: "x78zum5 x1q0g3np x8gbvx8 x1v2ro7d x1a02dak x1qjc9v5",
@@ -163,7 +163,7 @@ export function $$$$E1() {
       }, t.selectedProduct))
     }), jsxs("div", {
       className: "x1s85apg xdk42cd",
-      children: [jsx(Kz, {
+      children: [jsx(Spacing, {
         multiple: 6
       }), jsx("div", {
         ...Ay.props(g.selectedProductDescriptionText),

@@ -39,7 +39,7 @@ import { oB, j7 } from "../905/929976";
 import { n1 } from "../figma_app/657017";
 import { t as _$$t2 } from "../905/511388";
 import { fd } from "../figma_app/255679";
-import { T9 } from "../figma_app/528509";
+import { hasRootPath } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { B as _$$B2 } from "../905/506188";
 import { LibraryFileSelect } from "../figma_app/43951";
@@ -142,7 +142,7 @@ function ec({
         };
         let i = e.folder_id;
         let n = r[e.folder_id];
-        if (T9(n)) continue;
+        if (hasRootPath(n)) continue;
         if (null !== a && i === a) {
           d.push(t);
           continue;

@@ -3,10 +3,10 @@ import { throwTypeError } from "../figma_app/465776";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { PureComponent, createContext } from "react";
 import { useDispatch, useStore, useSelector } from "react-redux";
-import { sN } from "../905/63728";
+import { getModifierBitmask } from "../905/63728";
 import { j7, sf, oB } from "../905/929976";
 import { fileEntityDataMapper } from "../905/943101";
-import { uH } from "../figma_app/162807";
+import { PublicModelType } from "../figma_app/162807";
 import { G as _$$G } from "../905/186289";
 import { ms, wv, c$ } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
@@ -32,7 +32,7 @@ import { selectCurrentUser } from "../905/372672";
 import { useSubscription } from "../figma_app/288654";
 import { TeamById } from "../figma_app/43951";
 import { p as _$$p } from "../905/195198";
-import { o as _$$o } from "../905/895626";
+import { InterProfileType } from "../905/895626";
 var n;
 var r;
 var a;
@@ -63,7 +63,7 @@ let y = (e, t) => class extends PureComponent {
         data: {
           selected: t,
           targetRect: a,
-          modifiers: sN(i)
+          modifiers: getModifierBitmask(i)
         }
       }));
     };
@@ -430,7 +430,7 @@ let ei = e => function (t) {
     view: "user",
     userId: t.id,
     orgId: t.org_id,
-    userViewTab: _$$o.INTERNAL_PROFILE
+    userViewTab: InterProfileType.INTERNAL_PROFILE
   };
 };
 (e => {
@@ -469,7 +469,7 @@ function em(e) {
     data: fileEntityDataMapper.toLiveGraph(data)
   });
   switch (data.search_model_type) {
-    case uH.HUB_FILES:
+    case PublicModelType.HUB_FILES:
       if (desktopAPIInstance) return jsx(el, {
         targetRect: e.targetRect,
         data: data.model
@@ -478,44 +478,44 @@ function em(e) {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.PUBLIC_PLUGINS:
+    case PublicModelType.PUBLIC_PLUGINS:
       return jsx(er, {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.PUBLIC_PROFILES:
+    case PublicModelType.PUBLIC_PROFILES:
       return jsx(ec, {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.USERS:
+    case PublicModelType.USERS:
       return jsx(ed, {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.FILES:
+    case PublicModelType.FILES:
       return jsx(i, {
         targetRect: e.targetRect,
         data: fileEntityDataMapper.toLiveGraph(data.model)
       });
-    case uH.TEAMS:
+    case PublicModelType.TEAMS:
       return jsx(eu, {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.PROJECTS:
+    case PublicModelType.PROJECTS:
       let n = es(e.isDropdown);
       return jsx(n, {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.PRIVATE_PLUGINS:
+    case PublicModelType.PRIVATE_PLUGINS:
       return jsx(er, {
         targetRect: e.targetRect,
         data: data.model
       });
-    case uH.PUBLIC_WIDGETS:
-    case uH.PRIVATE_WIDGETS:
+    case PublicModelType.PUBLIC_WIDGETS:
+    case PublicModelType.PRIVATE_WIDGETS:
       return jsx(ep, {
         targetRect: e.targetRect,
         data: data.model

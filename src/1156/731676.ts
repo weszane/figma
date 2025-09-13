@@ -9,7 +9,7 @@ import { W1 } from "../figma_app/439493";
 import { AppStateTsApi, SpacingConstants, StackBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import m from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { gk } from "../figma_app/540726";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { fI } from "../figma_app/626177";
@@ -39,7 +39,7 @@ function N() {
   });
 }
 let w = e => {
-  if (e.keyCode === Uz.TAB) {
+  if (e.keyCode === KeyCodes.TAB) {
     e.preventDefault();
     e.currentTarget.blur();
     let t = e.shiftKey;

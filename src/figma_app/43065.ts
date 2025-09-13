@@ -12,7 +12,7 @@ import { Ph, o as _$$o } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { B } from "../905/261906";
 import { WX } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { UpsellSourceType } from "../figma_app/831101";
 import { registerModal } from "../905/102752";
@@ -44,7 +44,7 @@ export function $$A0(e) {
     width: 408,
     children: jsx(Wk, {
       className: "x15fnm84 xwxc41k x78zum5 xdt5ytf x1665zp3 x87ps6o",
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: "figmake_paywall_modal",
         properties: {
           teamId: team.id

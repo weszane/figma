@@ -7,7 +7,7 @@ import { xj, Cz } from "../figma_app/851625";
 import { J } from "../905/931050";
 import { n as _$$n } from "../figma_app/741211";
 import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
-import { Od, J0 } from "../figma_app/967319";
+import { ColumnName, DefaultFilters } from "../figma_app/967319";
 import { P } from "../905/392438";
 import { Ro } from "../figma_app/805373";
 var o = l;
@@ -38,11 +38,11 @@ function b(e) {
   });
 }
 let v = {
-  columnName: Od.SEARCH_SCORE,
+  columnName: ColumnName.SEARCH_SCORE,
   isReversed: !1
 };
 let f = {
-  ...J0,
+  ...DefaultFilters,
   permissionFilter: "true_member"
 };
 export function $$j0(e) {

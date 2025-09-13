@@ -6,7 +6,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { Xr, atomStoreManager } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cP, Xi, mj } from "../figma_app/451499";
@@ -56,8 +56,8 @@ export function $$k0({
         });
       },
       shortcuts: [{
-        key: Uz.SPACE,
-        modifier: [xH.SHIFT]
+        key: KeyCodes.SPACE,
+        modifier: [ModifierKeyCodes.SHIFT]
       }]
     }, {
       type: is.KEEP_IT,
@@ -118,7 +118,7 @@ export function $$k0({
                 SceneGraphHelpers.clearSelection();
               },
               shortcuts: [{
-                key: Uz.BACKSPACE
+                key: KeyCodes.BACKSPACE
               }],
               variant: "secondary",
               children: jsx("span", {

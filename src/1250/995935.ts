@@ -27,7 +27,7 @@ import { customHistory } from "../905/612521";
 import { R as _$$R } from "../7021/67076";
 import { BrowserInfo } from "../figma_app/778880";
 import { GU, cn, zR } from "../figma_app/141320";
-import { N_, CY, tM as _$$tM } from "../figma_app/637027";
+import { BaseLinkComponent, SecureLink, ButtonSecondaryTracked } from "../figma_app/637027";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { $z, e6 as _$$e, c as _$$c } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -41,7 +41,7 @@ import { T as _$$T, b as _$$b2 } from "../1577/951568";
 import { w as _$$w } from "../1250/922745";
 import { l as _$$l } from "../7021/223482";
 import { showModalHandler } from "../905/156213";
-import { fu, $z as _$$$z } from "../figma_app/831799";
+import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { vK, jv } from "../905/84777";
 import { N_ as _$$N_ } from "../905/332483";
 import { selectCurrentUser, getUserId } from "../905/372672";
@@ -85,7 +85,7 @@ import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { V6 } from "../1250/12342";
 import { a9 } from "../figma_app/741211";
 import { y as _$$y } from "../1250/295724";
-import { n3 } from "../figma_app/528509";
+import { isOrgFolderV2 } from "../figma_app/528509";
 import { T as _$$T2 } from "../905/378189";
 import { p8, aV } from "../figma_app/722362";
 import { FC } from "../figma_app/212807";
@@ -103,9 +103,9 @@ import { Ay as _$$Ay2 } from "@stylexjs/stylex";
 import { FlashActions } from "../905/573154";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { QF } from "../figma_app/502247";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { f as _$$f2 } from "../figma_app/24747";
 import { throwError } from "../1250/559338";
 import { k as _$$k2 } from "../905/443820";
@@ -185,7 +185,7 @@ function eE(e) {
   let a = t ? renderI18nText("team_view.locked_proteam_admin_invoice_reminder_banner.title") : renderI18nText("team_view.pastdue_proteam_admin_invoice_reminder_banner.title");
   let r = t ? renderI18nText("team_view.locked_proteam_admin_invoice_reminder_banner.subtitle") : renderI18nText("team_view.pastdue_proteam_admin_invoice_reminder_banner.subtitle");
   let i = filterNotNullish(n.data?.map(e => e.hosted_invoice_url) ?? []);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "team_admin_open_invoice_reminder_banner",
     children: jsx(_$$C, {
       content: {
@@ -711,7 +711,7 @@ let tH = {
           },
           children: renderI18nText("banner.pro_trial_expiry.lower_usage")
         }),
-        upgradeLink: jsx(_$$$z, {
+        upgradeLink: jsx(TrackedButton, {
           onClick: e => {
             e.preventDefault();
             let n = d.getState();
@@ -908,7 +908,7 @@ let tY = {
     let i = null;
     let o = null;
     if (i = n && getResourceDataOrFallback(t?.isAbandonedDraftFile), o = getResourceDataOrFallback(t?.canMove) ? jsxs(Fragment, {
-      children: [renderI18nText("banner.orphaned_projects.move_to_project"), " ", jsx(N_, {
+      children: [renderI18nText("banner.orphaned_projects.move_to_project"), " ", jsx(BaseLinkComponent, {
         trusted: !0,
         target: "_blank",
         className: _$$s2.inline.ml4.$,
@@ -942,7 +942,7 @@ let tQ = {
     let r = ol();
     if (r && !n && a) {
       let n = getResourceDataOrFallback(t?.canMove) ? jsxs(Fragment, {
-        children: [renderI18nText("banner.orphaned_projects.move_to_project.team"), " ", jsx(N_, {
+        children: [renderI18nText("banner.orphaned_projects.move_to_project.team"), " ", jsx(BaseLinkComponent, {
           trusted: !0,
           target: "_blank",
           className: _$$s2.inline.ml4.$,
@@ -978,7 +978,7 @@ let tZ = {
     let i = useCurrentUserOrgId();
     let o = useDispatch();
     let d = FC();
-    if (!(i && t?.project && n3(t.project)) && !r && t && hasFolderOrTeamRestrictions(t.folderId, t.teamId, d)) {
+    if (!(i && t?.project && isOrgFolderV2(t.project)) && !r && t && hasFolderOrTeamRestrictions(t.folderId, t.teamId, d)) {
       let t = {
         bannerType: x1.WARN,
         icon: _$$A6,
@@ -1318,7 +1318,7 @@ let t3 = {
       minLengthMinutes: payload.minLengthMinutes,
       maxLengthMinutes: payload.maxLengthMinutes,
       startTime: payload.downtimeStartDate,
-      helpcenterLink: jsx(CY, {
+      helpcenterLink: jsx(SecureLink, {
         target: "_blank",
         href: payload.helpcenterUrl,
         trusted: !0,
@@ -1329,7 +1329,7 @@ let t3 = {
       children: renderI18nText("downtime_banner.ongoing.description", {
         minLengthMinutes: payload.minLengthMinutes,
         maxLengthMinutes: payload.maxLengthMinutes,
-        helpcenterLink: jsx(CY, {
+        helpcenterLink: jsx(SecureLink, {
           target: "_blank",
           href: payload.helpcenterUrl,
           trusted: !0,
@@ -1389,7 +1389,7 @@ function t9({
   let n = t ? "" : `?${Tb}`;
   return jsx(A6, {
     to: `/community/file/${e.id}${n}`,
-    children: jsx(_$$tM, {
+    children: jsx(ButtonSecondaryTracked, {
       trackingProperties: {
         trackingDescriptor: t ? _$$c2.OPEN_IN_COMMUNITY : _$$c2.BUY_THE_RESOURCE
       },
@@ -1693,7 +1693,7 @@ let nr = {
         renewalDate: g.toDate()
       }), !s && (b ? renderI18nText("seat_billing_terms.banner.urgent.description") : renderI18nText("seat_billing_terms.banner.info.description"))]
     });
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: "Seat Billing Terms Reminder Banner",
       properties: {
         userId: t?.id,
@@ -1771,7 +1771,7 @@ let no = {
       let n = selectCurrentUser();
       let r = selectCurrentFile();
       return e && r && n ? async () => {
-        let e = await _$$S.copyFile(r.key);
+        let e = await fileApiHandler.copyFile(r.key);
         if (e.data.meta) {
           let t = e.data.meta;
           if (desktopAPIInstance) {
@@ -1787,7 +1787,7 @@ let no = {
             });
             return;
           }
-          customHistory.redirect(jN({
+          customHistory.redirect(buildFileUrl({
             file: t,
             isDevHandoff: !0
           }), "_blank");
@@ -1864,7 +1864,7 @@ let ns = {
         onDismiss: void 0
       }
     }[warningType];
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: "Order Form Renewal Banner",
       properties: {
         userId: t?.id,
@@ -1977,7 +1977,7 @@ let nl = {
       userName: e?.name,
       adminSettingsLink: admin_settings_url
     }), [admin_emails, w, e, admin_settings_url]);
-    return w.isValid() && t?.id && i && p && !a.data && g && is_eligible && j && o ? jsx(fu, {
+    return w.isValid() && t?.id && i && p && !a.data && g && is_eligible && j && o ? jsx(TrackingProvider, {
       name: "Non Admin Billing Terms Reminder Banner",
       properties: {
         userId: e?.id,
@@ -2065,7 +2065,7 @@ let nc = {
         bannerType: x1.INFO,
         icon: _$$A6,
         mainText: jsxs("span", {
-          children: ["This file contains slots, but you are not in all the necessary feature flags. Please refresh the page to enable them. See", " ", jsx(CY, {
+          children: ["This file contains slots, but you are not in all the necessary feature flags. Please refresh the page to enable them. See", " ", jsx(SecureLink, {
             href: "https://go/slots-staging",
             target: "_blank",
             trusted: !0,

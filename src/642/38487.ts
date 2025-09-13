@@ -5,7 +5,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { N as _$$N } from '../642/994749';
 import { reportError } from '../905/11';
 import { k as _$$k2 } from '../905/44647';
-import { Uz } from '../905/63728';
+import { KeyCodes } from '../905/63728';
 import { l as _$$l } from '../905/103989';
 import { Z as _$$Z } from '../905/104740';
 import { KindEnum } from '../905/129884';
@@ -387,12 +387,12 @@ function eM(e) {
   });
   let x = useHandleKeyboardEvent(e.recordingKey, 'keydown', t => {
     if (!i) {
-      if (t.keyCode === Uz.ESCAPE) {
+      if (t.keyCode === KeyCodes.ESCAPE) {
         e.stopRenaming(!1);
-      } else if (t.keyCode === Uz.ENTER) {
+      } else if (t.keyCode === KeyCodes.ENTER) {
         e.stopRenaming(!0, h.current?.value, c);
       } else {
-        if (t.keyCode !== Uz.TAB) {
+        if (t.keyCode !== KeyCodes.TAB) {
           jr(t, W0.NO);
           return SKIP_RECORDING;
         }

@@ -1,9 +1,9 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useContext } from "react";
 import a from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { SKIP_RECORDING } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { formatI18nMessage } from "../905/482208";
 import { nS } from "../figma_app/274383";
 import { hv } from "../figma_app/544744";
@@ -55,7 +55,7 @@ let $$f1 = forwardRef(({
     e.stopPropagation();
     state.shouldFinishClick && !S && r(e);
   };
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: s()(Zh, $y, {
       [ll]: U
     }),
@@ -93,7 +93,7 @@ let $$f1 = forwardRef(({
       isDragging: B,
       "aria-hidden": !0,
       children: a
-    }), jsx(D8, {
+    }), jsx(RecordableDiv, {
       "aria-disabled": U,
       "aria-hidden": !v,
       "aria-label": G && v ? function (e) {
@@ -113,7 +113,7 @@ let $$f1 = forwardRef(({
       forwardedRef: M,
       onClick: U ? void 0 : V,
       onKeyDown: U ? void 0 : e => {
-        e.keyCode === Uz.ENTER && state.shouldFinishClick && !S && r(e);
+        e.keyCode === KeyCodes.ENTER && state.shouldFinishClick && !S && r(e);
       },
       role: v ? "button" : void 0,
       tabIndex: v && !U ? 0 : -1

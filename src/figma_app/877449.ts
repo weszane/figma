@@ -9,7 +9,7 @@ import { b as _$$b, c as _$$c } from '../905/308099';
 import { o as _$$o } from '../905/382697';
 import { FJ } from '../905/508367';
 import { Button } from '../905/521428';
-import { jN } from '../905/612685';
+import { buildFileUrl } from '../905/612685';
 import { s as _$$s } from '../905/932270';
 import { sR } from '../905/932881';
 import { sx } from '../905/941192';
@@ -19,7 +19,7 @@ import { s as _$$s2 } from '../cssbuilder/589278';
 import { buildUploadUrl } from '../figma_app/169182';
 import { selectCurrentFile } from '../figma_app/516028';
 import { ShareAction } from '../figma_app/707808';
-import { $z, fu, tf } from '../figma_app/831799';
+import { TrackedButton, TrackingProvider, withTrackedClick } from '../figma_app/831799';
 import { fb, J4 } from '../figma_app/907616';
 export function $$x3(e) {
   return HB(e) === 'education';
@@ -28,7 +28,7 @@ var N = (e => (e.EDIT = 'edit', e.DUPLICATE = 'duplicate', e))(N || {});
 let C = buildUploadUrl('cee072aec57608cbb49c64eb6cb3765896cea921');
 let $$w4 = 'share-to-google-classroom-row';
 let $$O0 = atom(null);
-let R = tf(sR);
+let R = withTrackedClick(sR);
 function L(e) {
   let t = useDispatch();
   let r = useSetAtom($$O0);
@@ -45,7 +45,7 @@ function L(e) {
       className: _$$S
     })
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'share_to_google_classroom_row',
     children: jsx(R, {
       icon: o,
@@ -76,7 +76,7 @@ export function $$P1({
     onClick: () => r(ShareAction.SHARE_TO_GOOGLE_CLASSROOM)
   }) : null;
 }
-let D = tf(Button);
+let D = withTrackedClick(Button);
 let k = sx.add({
   color: 'var(--color-text-figjam)',
   cursor: 'pointer',
@@ -90,7 +90,7 @@ export function $$F2(e) {
   let r = selectCurrentFile();
   let [a, s] = useState('edit');
   let c = _$$o();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'google_classroom_share_modal',
     children: jsxs('div', {
       className: _$$s2.flex.flexColumn.p16.$,
@@ -101,7 +101,7 @@ export function $$F2(e) {
               'className': _$$s2.textBodyMedium.pb8.$,
               'data-testid': 'share-to-google-classroom-disclaimer',
               'children': renderI18nText('file_permissions_modal.google_classroom_modal.disclaimer', {
-                link: jsx($z, {
+                link: jsx(TrackedButton, {
                   onClick: () => c(ShareAction.SHARE_SETTINGS),
                   type: 'button',
                   style: k,
@@ -146,7 +146,7 @@ export function $$F2(e) {
         children: jsx(D, {
           variant: 'primary',
           onClick: () => {
-            let t = r ? jN({
+            let t = r ? buildFileUrl({
               file: r
             }) : '';
             let n = a === 'duplicate' ? '/duplicate' : '';

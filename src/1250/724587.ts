@@ -1,13 +1,13 @@
 import { ex } from "../905/524523";
 import { jsx, Fragment } from "react/jsx-runtime";
-import { Ex, zE, _Y } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeLabels } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useSelector, useDispatch } from "react-redux";
 import { isReduxDeprecationCutover, ConfigGroups, isReduxDeprecationShadowreadOrCutover } from "../figma_app/121751";
 import { useShadowRead, adminPermissionConfig, useShadowReadLoaded } from "../figma_app/391338";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
-import { H } from "../figma_app/951233";
+import { getUserOrgUserByOrgId } from "../figma_app/951233";
 import { kA } from "../figma_app/336853";
 import { getPermissionsStateMemoized, hasEditorRoleAccessOnTeam } from "../figma_app/642025";
 import { useState, useRef } from "react";
@@ -18,7 +18,7 @@ import { useSubscription } from "../figma_app/288654";
 import { V } from "../905/223767";
 import { dm } from "../figma_app/976345";
 import { showModalHandler } from "../905/156213";
-import { fu, $z } from "../figma_app/831799";
+import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { TN } from "../figma_app/211146";
 import { TeamById } from "../figma_app/43951";
@@ -30,7 +30,7 @@ import { KindEnum } from "../905/129884";
 function p(e) {
   let t = useSelector(e => getPermissionsStateMemoized(e));
   let n = useShadowRead({
-    oldValue: H(t, e.orgId)?.permission === FUserRoleType.GUEST,
+    oldValue: getUserOrgUserByOrgId(t, e.orgId)?.permission === FUserRoleType.GUEST,
     newValue: e.isGuest,
     label: adminPermissionConfig.PlanSwitcherOrgBadges.isOrgGuest,
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7)
@@ -42,9 +42,9 @@ function p(e) {
     enableFullRead: isReduxDeprecationCutover(ConfigGroups.GROUP_7)
   });
   let g = n ? getI18nString("navbar.navbar.guest") : p ? getI18nString("navbar.navbar.enterprise") : getI18nString("navbar.navbar.org");
-  return jsx(Ex, {
+  return jsx(Badge, {
     className: _$$s.ml4.mr0.$,
-    color: zE.TOOLBAR,
+    color: BadgeColor.TOOLBAR,
     text: g
   });
 }
@@ -117,47 +117,47 @@ function R(e) {
   };
   if (L && F && e.isInDropdown) return jsx(Fragment, {});
   if (_.student_team) {
-    if (e.isInDropdown) return jsx(Ex, {
-      color: zE.TOOLBAR,
+    if (e.isInDropdown) return jsx(Badge, {
+      color: BadgeColor.TOOLBAR,
       text: getI18nString("navbar.navbar.edu"),
       className: _$$s.ml4.mr0.noWrap.flex.$
     });
   } else if (isTeamLocked(_.id, u)) {
     if (_.student_team_at) return null;
     let t = ng.canSeeProTrialExpiryUx(P);
-    let s = (e, t = !1) => jsx(Ex, {
+    let s = (e, t = !1) => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.trial_expired"),
       className: `${_$$s.ml4.mr0.noWrap.$} ${!t && "plan_switcher_team_badges--warningBadgeHover--v60SF"}`
     });
-    let l = e => jsx(Ex, {
+    let l = e => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.locked"),
       className: _$$s.ml4.mr0.noWrap.$
     });
-    return e.isInDropdown ? t ? s(zE.WARNING, !0) : l(zE.WARNING) : t ? jsx(fu, {
-      name: _Y.PRO_TRIAL_EXPIRED,
+    return e.isInDropdown ? t ? s(BadgeColor.WARNING, !0) : l(BadgeColor.WARNING) : t ? jsx(TrackingProvider, {
+      name: BadgeLabels.PRO_TRIAL_EXPIRED,
       properties: {
         userId: n.id,
         teamId: _.id,
         ...ng.getTrackingProperties()
       },
-      children: s(zE.WARNING)
-    }) : l(zE.WARNING);
+      children: s(BadgeColor.WARNING)
+    }) : l(BadgeColor.WARNING);
   } else if (P && ng.canSeeProTrialUx(P)) {
-    let t = (e, t, n = !1) => jsx(Ex, {
+    let t = (e, t, n = !1) => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.pro_trial"),
       className: `${t} ${!n && "plan_switcher_team_badges--proTrialBadgeHover--tuLFJ"}`
     });
-    return e.isInDropdown ? t(zE.TOOLBAR, _$$s.ml4.mr0.noWrap.$, !0) : jsx(fu, {
-      name: _Y.PRO_TRIAL,
+    return e.isInDropdown ? t(BadgeColor.TOOLBAR, _$$s.ml4.mr0.noWrap.$, !0) : jsx(TrackingProvider, {
+      name: BadgeLabels.PRO_TRIAL,
       properties: {
         userId: n.id,
         teamId: _.id,
         ...ng.getTrackingProperties()
       },
-      children: jsx($z, {
+      children: jsx(TrackedButton, {
         type: "button",
         onClick: () => W(UpsellModalType.PRO_TRIAL_UPSELL_MODAL),
         className: _$$s.ml8.noWrap.$,
@@ -169,21 +169,21 @@ function R(e) {
           "data-tooltip-show-right": !0,
           "data-tooltip-max-width": 195,
           "data-tooltip-timeout-delay": 50,
-          children: t(zE.DEFAULT, _$$s.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
+          children: t(BadgeColor.DEFAULT, _$$s.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
         })
       })
     });
-  } else if (p && e.isInDropdown) return jsx(Ex, {
-    color: zE.TOOLBAR,
+  } else if (p && e.isInDropdown) return jsx(Badge, {
+    color: BadgeColor.TOOLBAR,
     text: getI18nString("navbar.navbar.pro"),
     className: _$$s.ml4.mr0.noWrap.flex.$
   });else if (!p) {
-    let s = (e, t, n = !1) => jsx(Ex, {
+    let s = (e, t, n = !1) => jsx(Badge, {
       color: e,
       text: getI18nString("navbar.navbar.free"),
       className: `${t} ${!n && "plan_switcher_team_badges--freeBadgeHover--BSSXU"}`
     });
-    if (e.isInDropdown) return s(zE.TOOLBAR, _$$s.ml4.mr0.noWrap.flex.$, !0);
+    if (e.isInDropdown) return s(BadgeColor.TOOLBAR, _$$s.ml4.mr0.noWrap.flex.$, !0);
     if (M) {
       let e = {
         monetization_surface: _$$h.MonetizationSurface.FILE_BROWSER,
@@ -214,7 +214,7 @@ function R(e) {
           clearTimeout(G.current);
         },
         className: _$$s.bgTransparent.$,
-        children: s(zE.DEFAULT, _$$s.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
+        children: s(BadgeColor.DEFAULT, _$$s.ml4.mr0.noWrap.colorText.colorBgSelectedSecondary.flex.$)
       });
     }
   }
@@ -227,8 +227,8 @@ export function $$M0({
   isGuest: s,
   shouldShowDtmPostMigrationBadge: l
 }) {
-  if (l) return jsx(Ex, {
-    color: zE.BRAND,
+  if (l) return jsx(Badge, {
+    color: BadgeColor.BRAND,
     text: getI18nString("file_browser.drafts_to_move.new"),
     className: _$$s.ml4.mr0.noWrap.flex.$
   });

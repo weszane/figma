@@ -20,7 +20,7 @@ import { wH } from "../figma_app/680166";
 import { Gv } from "../figma_app/736948";
 import { J as _$$J, q as _$$q } from "../905/202542";
 import { getRumLoggingConfig } from "../905/16237";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 import { A as _$$A } from "../3850/566892";
 import { E as _$$E } from "../905/370356";
@@ -85,7 +85,7 @@ function R({
     (await _$$E(l, e)) && p(!0);
   };
   let E = renderI18nText("fullscreen.toolbar.request.ask_to_edit");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Edit Request Button Shown",
     trackingOptions: m,
     properties: {
@@ -163,7 +163,7 @@ function V(e) {
     trackingDescriptor: a ? "ask_to_edit" : "start_editing"
   });
   let h = getRumLoggingConfig();
-  return t ? jsx(fu, {
+  return t ? jsx(TrackingProvider, {
     name: e0.FILE_REQUEST_UPGRADE_BUTTON,
     trackingOptions: h,
     properties: {
@@ -190,7 +190,7 @@ function V(e) {
   }) : null;
 }
 function z(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.FILE_PENDING_EDIT_ROLE_REQUEST_LABEL,
     children: jsx(C, {
       variant: e.variant,
@@ -257,7 +257,7 @@ function Z(e) {
   }, [m, requestCanBeNudged, a]);
   let f = "account-request-type-nudge-key";
   let E = renderI18nText("fullscreen.toolbar.request.request_sent");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.REQUEST_SENT_NUDGE_STATUS,
     children: jsxs("div", {
       className: _$$s.relative.$,

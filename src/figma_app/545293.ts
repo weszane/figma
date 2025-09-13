@@ -9,7 +9,7 @@ import { D as _$$D } from "../905/417423";
 import { L as _$$L } from "../905/480623";
 import { _G, Pv } from "../905/619652";
 import { A } from "../905/202425";
-import { uH } from "../figma_app/162807";
+import { PublicModelType } from "../figma_app/162807";
 import { r6 } from "../figma_app/517115";
 import { t as _$$t } from "../905/658240";
 import { v } from "../905/350380";
@@ -87,7 +87,7 @@ export function $$y10(e) {
   }
 }
 function b(e) {
-  return e && e.searchModelType === uH.FILES ? {
+  return e && e.searchModelType === PublicModelType.FILES ? {
     filterFolderIds: e.folderIds,
     filterTeamIds: e.teamIds,
     filterCreatorIds: e.creatorIds

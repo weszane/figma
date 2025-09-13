@@ -199,7 +199,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { isZoomIntegration, IntegrationUtils } from '../figma_app/469876';
 import { xt } from '../figma_app/475303';
 import { useCurrentFileKey } from '../figma_app/516028';
-import { N5 } from '../figma_app/528509';
+import { hasKey } from '../figma_app/528509';
 import { sendBackToFilesAction } from '../figma_app/564528';
 import { zM } from '../figma_app/580736';
 import { L as _$$L3 } from '../figma_app/582681';
@@ -3867,7 +3867,7 @@ export function $$nN0(e) {
         if (n.metaKey || n.button === 1) {
           let e = debugState.getState().openFile;
           let t = e?.project?.id || null;
-          N5(debugState.getState().folders, t) ? Wq(EE(t, e?.parentOrgId ?? null), i) : Wq('/', i);
+          hasKey(debugState.getState().folders, t) ? Wq(EE(t, e?.parentOrgId ?? null), i) : Wq('/', i);
         } else {
           i(_$$eH());
           i(oB());

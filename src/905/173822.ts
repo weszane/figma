@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { jE, Vq } from "../figma_app/639088";
 class u extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class u extends Component {
     };
   }
   render() {
-    return jsx(yX, {
+    return jsx(ConfirmationModal2, {
       destructive: !0,
       confirmationTitle: getI18nString("file_browser.modal.transfer_ownership_title"),
       size: "small",

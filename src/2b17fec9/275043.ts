@@ -13,7 +13,7 @@ import { sg, kF } from "../figma_app/48566";
 import { f as _$$f } from "../figma_app/109947";
 import { P4 } from "../905/18800";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
 import { XM } from "../905/486443";
 import { aV } from "../figma_app/722362";
@@ -43,8 +43,8 @@ import { Yt, Uo } from "../figma_app/955650";
 import { zG, C2, P as _$$P } from "../figma_app/47958";
 import { EJ, Mm, vO } from "../figma_app/827329";
 import { lx, Jc, Qd, Lz } from "../figma_app/27927";
-import { Uz } from "../905/63728";
-import { D8 } from "../905/511649";
+import { KeyCodes } from "../905/63728";
+import { RecordableDiv } from "../905/511649";
 import { formatI18nMessage } from "../905/482208";
 import { J as _$$J } from "../figma_app/900567";
 import { Zh, $y, yG, dR, vu, ll, bz, ke, zO, bj, Bx, z6, ac, cq, UJ } from "../figma_app/731560";
@@ -254,7 +254,7 @@ let en = forwardRef((e, t) => {
     e.stopPropagation();
     C.shouldFinishClick && onClick(e);
   };
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: H()(Zh, $y),
     "data-fullscreen-intercept": !0,
     "data-onboarding-key": onboardingKey,
@@ -286,7 +286,7 @@ let en = forwardRef((e, t) => {
       isDragging: S,
       "aria-hidden": !0,
       children
-    }), jsx(D8, {
+    }), jsx(RecordableDiv, {
       "aria-disabled": disabled,
       "aria-hidden": !inTabOrder,
       "aria-label": w && inTabOrder ? function (e) {
@@ -304,7 +304,7 @@ let en = forwardRef((e, t) => {
       forwardedRef: t,
       onClick: disabled ? void 0 : I,
       onKeyDown: e => {
-        !disabled && e.keyCode === Uz.ENTER && C.shouldFinishClick && onClick(e);
+        !disabled && e.keyCode === KeyCodes.ENTER && C.shouldFinishClick && onClick(e);
       },
       role: inTabOrder ? "button" : void 0,
       tabIndex: !disabled && inTabOrder ? 0 : void 0
@@ -424,7 +424,7 @@ let ef = memo(function ({
       a: e.a
     }));
   }
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     recordingKey: generateRecordingKey(SH, `${e}.animatedIcon`),
     className: H()(ke, {
       [zO]: i,
@@ -4293,7 +4293,7 @@ function iF({
 function iH({
   children: e
 }) {
-  return aV() ? null : jsx(fu, {
+  return aV() ? null : jsx(TrackingProvider, {
     name: RZ,
     children: jsx(_$$x, {
       children: jsx(_$$m, {

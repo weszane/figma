@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
-import { U } from "../905/807535";
+import { filterNumberValues } from "../905/807535";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -20,7 +20,7 @@ export function $$x0({
 }) {
   let [x, b] = useState(void 0);
   let v = useMemo(() => {
-    let e = U(WhiteboardIntegrationType).map(e => ({
+    let e = filterNumberValues(WhiteboardIntegrationType).map(e => ({
       key: e,
       value: WhiteboardIntegrationType[e],
       label: function (e) {

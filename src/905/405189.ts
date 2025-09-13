@@ -4,7 +4,7 @@ import { k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/241899";
 import { P } from "../905/347284";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { G$ } from "../figma_app/646357";
 import { U } from "../905/506188";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -54,7 +54,7 @@ export function $$x0(e) {
   return jsx(W.PageWithTracking, {
     name: "missing_libraries",
     metadata: S,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "MissingLibrariesView",
       properties: {
         selectedLibraryKey: t

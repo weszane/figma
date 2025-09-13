@@ -29,7 +29,7 @@ import { jT } from "../figma_app/354658";
 import { Om, tv as _$$tv } from "../figma_app/979714";
 import { showModalHandler, hideModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
@@ -217,7 +217,7 @@ let Z = registerModal(function (e) {
   return jsx(UI3ConditionalWrapper, {
     children: jsx(Rj.Provider, {
       value: mk.RESOURCE_HUB,
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: e0.RESOURCE_HUB_LIGHTBOX_RDP,
         properties: en,
         children: jsx(ModalRootComponent, {

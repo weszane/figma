@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { truncate } from "../figma_app/930338";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Dd } from "../905/519092";
 export function $$l0(e) {
   let {
@@ -19,7 +19,7 @@ export function $$l0(e) {
   let m = getI18nString("team_view.downgrade_editor_modal.downgrade_multiple_users_team_permissions", {
     numSelectedUsers: d
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team Admin Downgrade Editors Modal",
     properties: {
       editorCount: d,

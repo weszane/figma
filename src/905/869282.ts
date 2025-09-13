@@ -1,41 +1,41 @@
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { XW } from "../figma_app/162807";
+import { PluginSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
 import { y2 } from "../905/776312";
 import { p_ } from "../905/573610";
 let $$d1 = {
   viewId: "search-public_plugins",
-  sortKeys: [XW.NAME, XW.AUTHOR_NAME, XW.UPDATED_AT, XW.RUN_COUNT, XW.RELEVANCY],
-  listSortKeys: [XW.NAME, XW.AUTHOR_NAME, XW.UPDATED_AT, XW.RUN_COUNT],
-  tabletListSortKeys: [XW.NAME, XW.RUN_COUNT],
-  mobileListSortKeys: [XW.NAME, XW.RUN_COUNT],
+  sortKeys: [PluginSortField.NAME, PluginSortField.AUTHOR_NAME, PluginSortField.UPDATED_AT, PluginSortField.RUN_COUNT, PluginSortField.RELEVANCY],
+  listSortKeys: [PluginSortField.NAME, PluginSortField.AUTHOR_NAME, PluginSortField.UPDATED_AT, PluginSortField.RUN_COUNT],
+  tabletListSortKeys: [PluginSortField.NAME, PluginSortField.RUN_COUNT],
+  mobileListSortKeys: [PluginSortField.NAME, PluginSortField.RUN_COUNT],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [XW.NAME]: renderI18nText("search.sort_option.name"),
-      [XW.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
-      [XW.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
-      [XW.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
-      [XW.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [XW.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
+      [PluginSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [PluginSortField.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [PluginSortField.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [PluginSortField.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [PluginSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [PluginSortField.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
     },
     [ViewMode.LIST]: {
-      [XW.NAME]: renderI18nText("search.sort_option.name"),
-      [XW.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
-      [XW.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
-      [XW.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
-      [XW.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [XW.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
+      [PluginSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [PluginSortField.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [PluginSortField.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [PluginSortField.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [PluginSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [PluginSortField.RUN_COUNT]: renderI18nText("search.sort_option.used_by")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.LIST,
     sortMode: {
-      sortKey: XW.RELEVANCY,
+      sortKey: PluginSortField.RELEVANCY,
       sortDesc: !1
     }
   },
-  includeSortDirection: e => -1 === [XW.INSTALL_COUNT, XW.RUN_COUNT, XW.RELEVANCY].indexOf(e),
+  includeSortDirection: e => -1 === [PluginSortField.INSTALL_COUNT, PluginSortField.RUN_COUNT, PluginSortField.RELEVANCY].indexOf(e),
   settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$c0 = p_;

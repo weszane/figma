@@ -26,11 +26,11 @@ import { AG, Zx } from '../figma_app/217457';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { G } from '../figma_app/361869';
 import { vr } from '../figma_app/514043';
-import { $$, tB } from '../figma_app/637027';
+import { ButtonBasePrimary, FocusCheckbox } from '../figma_app/637027';
 import { mx } from '../figma_app/681712';
 import { az } from '../figma_app/805373';
-import { fu } from '../figma_app/831799';
-import { ey } from '../figma_app/918700';
+import { TrackingProvider } from '../figma_app/831799';
+import { ModalView } from '../figma_app/918700';
 import { A as _$$A } from '../svg/433566';
 import { A as _$$A2 } from '../svg/927263';
 let O = ex('org_upgrade_user_info_extended', ({
@@ -356,7 +356,7 @@ function W({
               newVal: e.currentTarget.checked
             });
           }
-        }), jsx(tB, {
+        }), jsx(FocusCheckbox, {
           checked: a.devMode,
           className: 'org_self_serve_modals--devModeCheckbox--M-CsB',
           onChange: e => {
@@ -368,7 +368,7 @@ function W({
               rect: e.currentTarget.getBoundingClientRect()
             });
           }
-        }), jsx(tB, {
+        }), jsx(FocusCheckbox, {
           checked: a.figjamEditor,
           className: 'org_self_serve_modals--figjamCheckbox---FJmg',
           onChange: e => {
@@ -506,9 +506,9 @@ registerModal(({
   let P = () => {
     n(hideModal());
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Select Editors Modal',
-    children: jsxs(ey, {
+    children: jsxs(ModalView, {
       size: 864,
       maxHeight: 672,
       hide: () => n(hideModal()),
@@ -682,7 +682,7 @@ registerModal(({
           children: [jsx(nR, {
             onClick: P,
             children: getI18nString('general.cancel')
-          }), jsx($$, {
+          }), jsx(ButtonBasePrimary, {
             onClick: () => {
               C === 0 && (a(y), t(g), n(hideModal()));
             },

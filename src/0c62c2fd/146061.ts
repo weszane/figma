@@ -5,19 +5,19 @@ import n from "classnames";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { nR, vd } from "../figma_app/637027";
+import { ButtonSecondary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { f as _$$f } from "../0c62c2fd/277163";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { Nr } from "../figma_app/199513";
 import { FC } from "../figma_app/212807";
 import { FolderMoveModalView } from "../figma_app/43951";
-import { Bp } from "../figma_app/349248";
+import { mapProjectProperties } from "../figma_app/349248";
 import { UpsellModalType } from "../905/165519";
 import { getTeamUrl } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
@@ -114,7 +114,7 @@ export function $$M0(e) {
   if (!D) return null;
   let et = Object.keys(H).length > 0;
   let er = M && r && r.team.id === M.id;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.FILE_MOVE_MODAL,
     properties: z,
     children: jsx(OJ, {
@@ -208,13 +208,13 @@ export function $$M0(e) {
             })
           }), jsxs("div", {
             className: "folder_move--footer--jcEsZ file_move--footer--pBClJ",
-            children: [jsx(nR, {
+            children: [jsx(ButtonSecondary, {
               onClick: J,
               children: renderI18nText("modal.cancel")
-            }), jsx(vd, {
+            }), jsx(ButtonBasePrimaryTracked, {
               onClick: () => {
                 null != M && D ? n(Nr({
-                  folder: Bp(D),
+                  folder: mapProjectProperties(D),
                   team: M,
                   onSuccess: J
                 })) : J();

@@ -18,11 +18,11 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import I from "classnames";
 import { $ as _$$$ } from "../905/455748";
-import { Fo, Uz, vN, xH, Te } from "../905/63728";
+import { isCommandEvent, KeyCodes, isExactModifier, ModifierKeyCodes, isCommandModifier } from "../905/63728";
 import { yZ } from "../905/407352";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
-import { D8, GG } from "../905/511649";
+import { RecordableDiv, RecordableButton } from "../905/511649";
 import { w as _$$w } from "../905/835474";
 import { isWhitespace } from "../figma_app/930338";
 import { Wy, ml, Fk, Ch, hw } from "../905/125333";
@@ -42,7 +42,7 @@ import { Z as _$$Z } from "../905/104740";
 import { updateHoveredNode } from "../figma_app/741237";
 import { p8, eY } from "../figma_app/722362";
 import { lH, Fy } from "../figma_app/623300";
-import { _Y } from "../figma_app/162807";
+import { FileKindEnum } from "../figma_app/162807";
 import { KindEnum } from "../905/129884";
 import { b as _$$b2, bL, mc } from "../figma_app/860955";
 import { EventShield } from "../905/821217";
@@ -294,17 +294,17 @@ function eR(e, t, n, a) {
   }();
   let c = useContext(EA);
   return useCallback(l => {
-    switch (c ? Fo(l) && !l.shiftKey ? a(en.SINGLE) : l.shiftKey ? a(en.MULTI) : a(en.NONE) : a(en.NONE), l.keyCode) {
-      case Uz.P:
-      case Uz.UP_ARROW:
-        (l.keyCode !== Uz.P || BrowserInfo.mac && vN(l, xH.CONTROL)) && (e(OP.PREV, "keyboard"), l.stopPropagation(), l.preventDefault());
+    switch (c ? isCommandEvent(l) && !l.shiftKey ? a(en.SINGLE) : l.shiftKey ? a(en.MULTI) : a(en.NONE) : a(en.NONE), l.keyCode) {
+      case KeyCodes.P:
+      case KeyCodes.UP_ARROW:
+        (l.keyCode !== KeyCodes.P || BrowserInfo.mac && isExactModifier(l, ModifierKeyCodes.CONTROL)) && (e(OP.PREV, "keyboard"), l.stopPropagation(), l.preventDefault());
         break;
-      case Uz.N:
-      case Uz.DOWN_ARROW:
-        (l.keyCode !== Uz.N || BrowserInfo.mac && vN(l, xH.CONTROL)) && (e(OP.NEXT, "keyboard"), l.stopPropagation(), l.preventDefault());
+      case KeyCodes.N:
+      case KeyCodes.DOWN_ARROW:
+        (l.keyCode !== KeyCodes.N || BrowserInfo.mac && isExactModifier(l, ModifierKeyCodes.CONTROL)) && (e(OP.NEXT, "keyboard"), l.stopPropagation(), l.preventDefault());
         break;
-      case Uz.ENTER:
-        if (CanvasSearchHelpers && Fo(l)) {
+      case KeyCodes.ENTER:
+        if (CanvasSearchHelpers && isCommandEvent(l)) {
           CanvasSearchHelpers.exitSearchMode(SelectionState.SELECT_ACTIVE);
           break;
         }
@@ -313,7 +313,7 @@ function eR(e, t, n, a) {
         l.stopPropagation();
         l.preventDefault();
         break;
-      case Uz.ESCAPE:
+      case KeyCodes.ESCAPE:
         CanvasSearchHelpers && CanvasSearchHelpers.exitSearchMode(SelectionState.NONE);
         l.preventDefault();
         l.stopPropagation();
@@ -325,27 +325,27 @@ function eR(e, t, n, a) {
 }
 function eD(e) {
   return useCallback(t => {
-    if (t.keyCode === Uz.SHIFT) {
+    if (t.keyCode === KeyCodes.SHIFT) {
       (!BrowserInfo.mac || t.metaKey) && (BrowserInfo.mac || t.ctrlKey) || e(en.NONE);
       return;
     }
     let n = BrowserInfo.mac && "Meta" === t.key;
-    let a = !BrowserInfo.mac && t.keyCode === Uz.CTRL;
+    let a = !BrowserInfo.mac && t.keyCode === KeyCodes.CTRL;
     (n || a) && !t.shiftKey && e(en.NONE);
   }, [e]);
 }
 function eO(e) {
   switch (e.keyCode) {
-    case Uz.DELETE:
-    case Uz.BACKSPACE:
+    case KeyCodes.DELETE:
+    case KeyCodes.BACKSPACE:
       if (CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
       break;
-    case Uz.X:
-      if (Te(e) && CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
+    case KeyCodes.X:
+      if (isCommandModifier(e) && CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
       break;
-    case Uz.H:
-    case Uz.R:
-      if (Fo(e) && e.shiftKey && CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
+    case KeyCodes.H:
+    case KeyCodes.R:
+      if (isCommandEvent(e) && e.shiftKey && CanvasSearchHelpers) return CanvasSearchHelpers.getNextResultForActiveResultRemoval();
   }
   return defaultSessionLocalIDString;
 }
@@ -401,22 +401,22 @@ export let $$eF0 = memo(function ({
   }(w, P, M);
   let ee = function (e, t, n, a, r) {
     let i = eR(e, n, e => {
-      let n = (e.keyCode === Uz.D || e.keyCode === Uz.F) && Fo(e) && e.shiftKey;
+      let n = (e.keyCode === KeyCodes.D || e.keyCode === KeyCodes.F) && isCommandEvent(e) && e.shiftKey;
       eL(e) && !n && t.current?.focus();
     }, r);
     return useCallback(e => {
       let l = eO(e);
       switch (e.keyCode) {
-        case Uz.RIGHT_ARROW:
-        case Uz.LEFT_ARROW:
-          Te(e) || i(e);
+        case KeyCodes.RIGHT_ARROW:
+        case KeyCodes.LEFT_ARROW:
+          isCommandModifier(e) || i(e);
           break;
-        case Uz.C:
-        case Uz.X:
-          Te(e) && window.getSelection && !window.getSelection().toString() && (fullscreenValue.triggerAction(e.keyCode === Uz.C ? "copy" : "cut"), e.preventDefault(), e.stopPropagation(), e.keyCode === Uz.X && t.current?.focus());
+        case KeyCodes.C:
+        case KeyCodes.X:
+          isCommandModifier(e) && window.getSelection && !window.getSelection().toString() && (fullscreenValue.triggerAction(e.keyCode === KeyCodes.C ? "copy" : "cut"), e.preventDefault(), e.stopPropagation(), e.keyCode === KeyCodes.X && t.current?.focus());
           break;
-        case Uz.V:
-        case Uz.Z:
+        case KeyCodes.V:
+        case KeyCodes.Z:
           break;
         default:
           i(e);
@@ -450,7 +450,7 @@ export let $$eF0 = memo(function ({
       onPasteCapture: e => {
         gk(e) && (fullscreenValue.triggerActionInUserEditScope("paste"), e.preventDefault(), L.current?.focus());
       },
-      editorType: _Y.DESIGN
+      editorType: FileKindEnum.DESIGN
     })]
   });
   return jsx(_$$i, {
@@ -768,7 +768,7 @@ function eM({
         });
       });
       el(t);
-    })(), C(!0)) : Fo(e) && t.textMatch.matchType !== MatchCriteria.PAGE_MATCH ? (l(), C(!0)) : (ee(t.resultGuid, t.matchIndex), C(!1)) : (ee(t.resultGuid, t.matchIndex), C(!1));
+    })(), C(!0)) : isCommandEvent(e) && t.textMatch.matchType !== MatchCriteria.PAGE_MATCH ? (l(), C(!0)) : (ee(t.resultGuid, t.matchIndex), C(!1)) : (ee(t.resultGuid, t.matchIndex), C(!1));
   };
   let eC = function (e, t, n, a, i, o, d) {
     let c = function (e, t) {
@@ -802,10 +802,10 @@ function eM({
     return useCallback(e => {
       let n = eO(e);
       switch (e.keyCode) {
-        case Uz.UP_ARROW:
-        case Uz.DOWN_ARROW:
-        case Uz.RIGHT_ARROW:
-        case Uz.LEFT_ARROW:
+        case KeyCodes.UP_ARROW:
+        case KeyCodes.DOWN_ARROW:
+        case KeyCodes.RIGHT_ARROW:
+        case KeyCodes.LEFT_ARROW:
           i ? (!function () {
             let e = document.getElementById("fullscreen-root")?.getElementsByClassName("focus-target");
             if (null != e && 0 !== e.length) {
@@ -816,8 +816,8 @@ function eM({
             }
           }(), eL(e, !0)) : p(e);
           break;
-        case Uz.A:
-          if (u && Te(e)) {
+        case KeyCodes.A:
+          if (u && isCommandModifier(e)) {
             c();
             d(!0);
             e.stopPropagation();
@@ -826,17 +826,17 @@ function eM({
           }
           eL(e);
           break;
-        case Uz.C:
-          Te(e) ? (fullscreenValue.triggerActionInUserEditScope("copy"), e.stopPropagation()) : eL(e);
+        case KeyCodes.C:
+          isCommandModifier(e) ? (fullscreenValue.triggerActionInUserEditScope("copy"), e.stopPropagation()) : eL(e);
           break;
-        case Uz.V:
-          Te(e) ? (fullscreenValue.triggerActionInUserEditScope("paste"), e.stopPropagation()) : eL(e);
+        case KeyCodes.V:
+          isCommandModifier(e) ? (fullscreenValue.triggerActionInUserEditScope("paste"), e.stopPropagation()) : eL(e);
           break;
-        case Uz.X:
-          Te(e) ? (fullscreenValue.triggerActionInUserEditScope("cut"), e.stopPropagation()) : eL(e);
+        case KeyCodes.X:
+          isCommandModifier(e) ? (fullscreenValue.triggerActionInUserEditScope("cut"), e.stopPropagation()) : eL(e);
           break;
-        case Uz.DELETE:
-        case Uz.BACKSPACE:
+        case KeyCodes.DELETE:
+        case KeyCodes.BACKSPACE:
           eL(e, !0);
           break;
         default:
@@ -889,7 +889,7 @@ function eM({
     }), jsxs(_$$P, {
       className: bB,
       scrollContainerRef: M,
-      children: [jsx(D8, {
+      children: [jsx(RecordableDiv, {
         style: {
           height: ec.totalSize,
           position: "relative"
@@ -1001,7 +1001,7 @@ function ez({
 }) {
   let r = eY().get(e);
   let i = e === zeroSessionLocalIDString ? getI18nString("fullscreen.canvas_search.pages") : r.name;
-  return jsxs(GG, {
+  return jsxs(RecordableButton, {
     className: kQ,
     onClick: () => n(!t),
     children: [jsx(SvgComponent, {
@@ -1059,7 +1059,7 @@ function eG({
       svg: _$$A4
     })
   }));
-  return jsxs(GG, {
+  return jsxs(RecordableButton, {
     className: N()({
       [AX]: !0,
       [wH]: i,

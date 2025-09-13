@@ -5,7 +5,7 @@ import { useSubscription } from "../figma_app/288654";
 import { gB } from "../905/723791";
 import { FUserRoleType } from "../figma_app/191312";
 import { WorkspacesCanAdminView, CurrentUserAssignedWorkspaceView, WorkspacePageView, OrgHasWorkspacesView, CanCreateTeamView } from "../figma_app/43951";
-import { $q } from "../figma_app/482728";
+import { TeamCreationControls } from "../figma_app/482728";
 import { UNASSIGNED } from "../905/247093";
 export function $$p2(e) {
   let t = useSubscription(WorkspacesCanAdminView, {
@@ -81,7 +81,7 @@ export function $$y1(e, t) {
     canCreateTeam: !1,
     cannotCreateTeamReason: 4
   };
-  let _ = teamCreationControls === $q.TEAM_CREATION_CONTROLS_ADMIN_ONLY;
+  let _ = teamCreationControls === TeamCreationControls.TEAM_CREATION_CONTROLS_ADMIN_ONLY;
   return permission === FUserRoleType.GUEST ? {
     canCreateTeam: !1,
     cannotCreateTeamReason: 1

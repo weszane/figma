@@ -15,7 +15,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { C as _$$C } from "../905/108595";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { fullscreenValue } from "../figma_app/455680";
@@ -313,7 +313,7 @@ function ee({
     children: [jsx("span", {
       className: _$$s.colorTextSecondary.textBodyMedium.w64.$,
       children: renderI18nText("slides.properties_panel.color_picker.rename_color_label")
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: o,
       className: Kv,
       "data-1p-ignore": !0,

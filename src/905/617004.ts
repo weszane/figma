@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { zE } from "../figma_app/919079";
+import { BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { l as _$$l } from "../905/152724";
 import { sf } from "../905/929976";
@@ -50,7 +50,7 @@ export function $$h0(e) {
             className: "profile_tile--profileRowTileProfileHandle--gpLvX ellipsis--ellipsis--Tjyfa text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: ["@", profile.profile_handle]
           }), profile.current_user_is_followed && !e.hideFollowsYouBadge && jsx(v_, {
-            color: zE.INVERT
+            color: BadgeColor.INVERT
           })]
         })]
       })]

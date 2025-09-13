@@ -9,7 +9,7 @@ import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/421473";
 import { e0 } from "../905/696396";
 export let $$h0 = registerModal(function (e) {
@@ -44,7 +44,7 @@ export let $$h0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: a,
     width: "lg",
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: e0.APPROVE_ALL_CONFIRMATION_MODAL,
       properties: {
         planType: e.plan.key.type,

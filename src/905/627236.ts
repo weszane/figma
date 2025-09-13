@@ -29,7 +29,7 @@ import { TextWithTruncation } from "../905/984674";
 import { g as _$$g } from "../905/119656";
 import { T as _$$T } from "../905/292816";
 import { wn } from "../figma_app/920435";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
 import { xQ, $$in } from "../figma_app/84966";
 import { N_ } from "../905/332483";
@@ -79,7 +79,7 @@ export function $$Z0(e) {
     fallback: H4.DEFAULT_FULL_PAGE,
     hasCustomWASMBuild: !1,
     team: _$$e.BILLING_EXPERIENCE,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Team Add Seats Modal",
       properties: {
         teamId: t

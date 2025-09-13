@@ -11,7 +11,7 @@ import { reportError } from "../905/11";
 import { pW } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../figma_app/618031";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { G6, Yh, wd, j2, hs } from "../figma_app/84966";
 import { FOrganizationLevelType } from "../figma_app/191312";
 if (443 == require.j) {}
@@ -46,7 +46,7 @@ function v({
     planName: t,
     nextContractStartDate: b.toDate()
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "contract_start_banner",
     children: jsxs(Yy, {
       "data-testid": "contract-start-banner",

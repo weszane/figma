@@ -4,7 +4,7 @@ import { k } from "../905/44647";
 import { O } from "../905/969533";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import l from "classnames";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { Kk, Sq, jA, MJ, RO } from "../905/127603";
 var d = l;
 export function $$p3(e) {
@@ -45,7 +45,7 @@ function m({
   recordingKey: r
 }) {
   let [i, a] = useAtomValueAndSetter(e);
-  return jsx(GG, {
+  return jsx(RecordableButton, {
     className: d()(jA, {
       [MJ]: i
     }),

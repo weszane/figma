@@ -3,7 +3,7 @@ import { useContext, useCallback, useEffect, cloneElement } from "react";
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { M3 } from "../figma_app/119475";
 import { V } from "../figma_app/473391";
@@ -182,7 +182,7 @@ export function $$P0({
   });
   let S = ZV(T);
   return useCallback(i => {
-    if ((i.keyCode === Uz.ENTER || i.keyCode === Uz.SPACE) && dx(n)) {
+    if ((i.keyCode === KeyCodes.ENTER || i.keyCode === KeyCodes.SPACE) && dx(n)) {
       if (i.metaKey) {
         t();
         return;

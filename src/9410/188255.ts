@@ -9,7 +9,7 @@ import { QI } from "../9410/60600";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useSelector, useDispatch, useStore } from "react-redux";
 import { b as _$$b } from "../905/985254";
-import { tf as _$$tf, fu, j6 } from "../figma_app/831799";
+import { withTrackedClick, TrackingProvider, useTracking } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N, D as _$$D } from "../figma_app/268271";
 import { e0 as _$$e2 } from "../905/696396";
@@ -216,13 +216,13 @@ import { s2 as _$$s5, E$, WB as _$$WB, BC, Nr, yl } from "../figma_app/300024";
 import { L as _$$L } from "../905/453756";
 import { KX } from "../figma_app/89917";
 import { HS } from "../figma_app/416935";
-import { nN as _$$nN, wj } from "../figma_app/323326";
+import { isOssSalesExperimentValueMatch, markOssSalesExperimentChecked } from "../figma_app/323326";
 import { AutoLayout } from "../905/470281";
 import { lk } from "../figma_app/109538";
 import { B as _$$B3 } from "../905/380801";
 import { Bq } from "../figma_app/482142";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { Wk } from "../figma_app/397269";
 import { A as _$$A11 } from "../1250/318790";
 import { logError } from "../905/714362";
@@ -244,7 +244,7 @@ import { Bd } from "../figma_app/846841";
 import { jH } from "../figma_app/926950";
 import { zl as _$$zl, ST } from "../figma_app/641749";
 import { zb } from "../figma_app/612001";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { x as _$$x2 } from "../figma_app/849451";
 import { Hj } from "../figma_app/336229";
 import { Op, nr as _$$nr } from "../905/337355";
@@ -510,13 +510,13 @@ function q({
     })]
   });
 }
-let X = _$$tf(function ({
+let X = withTrackedClick(function ({
   onClick: e,
   disabled: t,
   disabledTooltip: i
 }) {
   let n = _$$a() ? getI18nString("whiteboard.inline_menu.ai_quick_actions_beta_badge_text") : "";
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "AI Summary Nudge CTA",
     properties: {
       disabled: t
@@ -623,7 +623,7 @@ function et() {
   }();
   return jsx(_$$M, {
     isShowing,
-    children: isShowing && jsx(fu, {
+    children: isShowing && jsx(TrackingProvider, {
       name: _$$e2.AI_SUMMARY_TOPBAR_NUDGE,
       children: jsx(q, {
         onClose: () => {
@@ -1281,7 +1281,7 @@ function t$(e) {
     ...e,
     preventUserClose: !0
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "figjam_try_device_already_claimed_overlay",
     children: jsx(ModalRootComponent, {
       manager: t,
@@ -1958,7 +1958,7 @@ function ro({
 }) {
   return jsx(_$$M, {
     isShowing: e,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Share to Google Classroom New User Onboarding",
       children: jsx(Dv, {
         targetType: "dom",
@@ -4141,7 +4141,7 @@ let ni = e => {
   let t = Xr(_$$w5);
   let {
     name
-  } = j6();
+  } = useTracking();
   let a = useDispatch();
   let [o, l] = useState(fD.NONE);
   let d = useCallback(e => {
@@ -4270,7 +4270,7 @@ let ni = e => {
         }) => e === o) && y(o);
         return;
       }
-      if ("Home" === e.key) t = 0;else if ("End" === e.key) t = C.length - 1;else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1);else {
+      if ("Home" === e.key) t = 0; else if ("End" === e.key) t = C.length - 1; else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1); else {
         if (!["ArrowDown", "ArrowRight"].includes(e.key)) return;
         t = v(o, 1);
       }
@@ -4939,7 +4939,7 @@ async function nD(e) {
     let e = getStorage();
     try {
       return !!e.get(Xk);
-    } catch (e) {}
+    } catch (e) { }
     return !1;
   })();
 }
@@ -5071,7 +5071,7 @@ let nK = _$$D3(() => {
   let e = getStorage();
   try {
     return !!e.get(Xk);
-  } catch (e) {}
+  } catch (e) { }
   return !1;
 });
 function nH({
@@ -7039,7 +7039,7 @@ let sr = registerModal(function ({
 }) {
   let t = useAtomWithSubscription(openFileAtom);
   let i = useDispatch();
-  return jsxs(yX, {
+  return jsxs(ConfirmationModal2, {
     autoFocusCta: !1,
     cancelText: renderI18nText("oss_sales_upsell_overlay.secondary_cta"),
     className: "oss_sales_upsell_modal--modal--fdI6U",
@@ -7134,11 +7134,11 @@ function sa({
   let u = HS(c);
   _$$h2(() => {
     l.show({
-      canShow: (e, i) => !!(u && _$$nN(t) && !e && i.team?.hasPermission)
+      canShow: (e, i) => !!(u && isOssSalesExperimentValueMatch(t) && !e && i.team?.hasPermission)
     });
   });
   useEffect(() => {
-    l.isShowing && wj();
+    l.isShowing && markOssSalesExperimentChecked();
   }, [u, l.isShowing]);
   return jsx(_$$h, {
     isShowing: l.isShowing,
@@ -7669,7 +7669,7 @@ function sq(e) {
     }));
     e.dismissModal();
   };
-  return t ? null : jsxs(fu, {
+  return t ? null : jsxs(TrackingProvider, {
     name: "library upsell create component pointer",
     properties: {
       fileKey: o?.key,
@@ -7685,7 +7685,7 @@ function sq(e) {
       shouldCenterArrow: _$$EL.FALLBACK,
       children: [jsx("p", {
         children: renderI18nText("rcs.upsell_libraries.click_here_to_turn_into_component")
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2
       }), jsx("div", {
         className: kP,

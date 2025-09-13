@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, forwardRef } from "react";
 import { d as _$$d } from "../905/976845";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { KindEnum } from "../905/129884";
 let l = memo(forwardRef(function ({
   tooltip: e,
@@ -32,5 +32,5 @@ let l = memo(forwardRef(function ({
     children: u
   });
 }));
-let $$d0 = tf(l);
+let $$d0 = withTrackedClick(l);
 export const Z = $$d0;

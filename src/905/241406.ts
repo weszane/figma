@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Component } from "react";
 import { useSelector, connect } from "react-redux";
 import { s_ } from "../905/17223";
-import { nR, $$, CY } from "../figma_app/637027";
+import { ButtonSecondary, ButtonBasePrimary, SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { Uu } from "../figma_app/471982";
@@ -12,7 +12,7 @@ import { kc, sD } from "../figma_app/740025";
 import { registerModal } from "../905/102752";
 import { Ro } from "../figma_app/805373";
 import { EL } from "../905/748636";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { NJ } from "../figma_app/419216";
 import { pL } from "../figma_app/639088";
 import { A as _$$A } from "../6828/188155";
@@ -150,10 +150,10 @@ export function $$O1(e) {
     }), jsx(N, {
       footerLeft: e.footerLeft,
       footerRight: jsxs(Fragment, {
-        children: [e.onCancel && jsx(nR, {
+        children: [e.onCancel && jsx(ButtonSecondary, {
           onClick: e.onCancel,
           children: renderI18nText("general.cancel")
-        }), jsx($$, {
+        }), jsx(ButtonBasePrimary, {
           disabled: !c,
           onClick: () => {
             c && e.onSubmit(c);
@@ -242,10 +242,10 @@ class L extends Component {
           children: renderI18nText("community.merge_profile_modal.confirm_your_new_profile_details_next")
         }),
         footerRight: jsxs(Fragment, {
-          children: [jsx(nR, {
+          children: [jsx(ButtonSecondary, {
             onClick: () => this.props.dispatch(popModalStack()),
             children: renderI18nText("general.cancel")
-          }), jsx($$, {
+          }), jsx(ButtonBasePrimary, {
             onClick: () => this.setState({
               step: 2
             }),
@@ -315,7 +315,7 @@ class L extends Component {
         })]
       }), jsx(N, {
         footerLeft: jsxs("div", {
-          children: [renderI18nText("community.merge_profile_modal.merging_profiles_cant_be_undone"), " ", jsx(CY, {
+          children: [renderI18nText("community.merge_profile_modal.merging_profiles_cant_be_undone"), " ", jsx(SecureLink, {
             href: "https://help.figma.com/hc/articles/1500005162381-Manage-Community-profiles-and-settings#add-profile",
             target: "_blank",
             trusted: !0,
@@ -323,10 +323,10 @@ class L extends Component {
           })]
         }),
         footerRight: jsxs(Fragment, {
-          children: [jsx(nR, {
+          children: [jsx(ButtonSecondary, {
             onClick: () => this.props.dispatch(popModalStack()),
             children: renderI18nText("general.cancel")
-          }), jsx($$, {
+          }), jsx(ButtonBasePrimary, {
             onClick: () => {
               this.props.dispatch(n7({
                 primaryUserId: this.state.primaryUser.id,
@@ -343,7 +343,7 @@ class L extends Component {
   }
   render() {
     let e = this.state.selectedUser && sD(this.state.selectedUser, this.props.authedProfilesById);
-    return jsxs(d_, {
+    return jsxs(ModalContainer, {
       size: 560,
       className: "merge_profiles--modal--1x-5z modal--modal--fXC8G modal--modalShadow--d-rJf modal--modalBare--AlP7E",
       popStack: !0,

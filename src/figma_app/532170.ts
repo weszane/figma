@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createContext } from "react";
 import { N } from "../905/438674";
 import o from "classnames";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { Qs, Dg, qr, GQ, I5, Qn, xC } from "../figma_app/169752";
 var n;
 var l = o;
@@ -91,7 +91,7 @@ export function $$f5({
     children: e.children
   });
 };
-tf(e => jsx(N, {
+withTrackedClick(e => jsx(N, {
   newTab: !0,
   trusted: !0,
   href: e.href,

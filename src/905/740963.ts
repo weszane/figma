@@ -4,7 +4,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app
 import { zD, L8, jM, J, P_, l4, a3, wf } from "../905/124270";
 import { Hz, RF, p2, H9, aI } from "../905/714062";
 import { gl, jN, yA, FR, C8, M2, q1, gh, oM, nX } from "../905/171315";
-import { WY, uH, uR } from "../figma_app/162807";
+import { CreatorResourceType, PublicModelType, InputType } from "../figma_app/162807";
 import { P } from "../905/16832";
 import { useSelector } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
@@ -23,11 +23,11 @@ import { f as _$$f2 } from "../905/287602";
 var I = v;
 let w = e => {
   switch (e) {
-    case WY.RESOURCE:
+    case CreatorResourceType.RESOURCE:
       return getI18nString("search.facets.filter_by_resource");
-    case WY.CREATOR:
+    case CreatorResourceType.CREATOR:
       return getI18nString("search.facets.filter_by_creator");
-    case WY.SPACE:
+    case CreatorResourceType.SPACE:
       return getI18nString("search.facets.filter_by_space");
     default:
       return "";
@@ -75,11 +75,11 @@ function C({
   });
 }
 let T = (e, t, i) => {
-  if (t === WY.RESOURCE) {
+  if (t === CreatorResourceType.RESOURCE) {
     let t = jN(e);
     return t ? yA(t) : "";
   }
-  return t === WY.CREATOR || t === WY.SPACE ? FR(e, i) : "";
+  return t === CreatorResourceType.CREATOR || t === CreatorResourceType.SPACE ? FR(e, i) : "";
 };
 export function $$k0({
   id: e,
@@ -110,26 +110,26 @@ export function $$k0({
         if ("TYPE_AND_VALUES" === e.suggestionType) {
           let r = e.facetType;
           let a = null == t ? e.facetValues[0] : e.facetValues[t];
-          let s = r === WY.RESOURCE ? {
-            type: WY.RESOURCE,
+          let s = r === CreatorResourceType.RESOURCE ? {
+            type: CreatorResourceType.RESOURCE,
             value: a
           } : a;
           let o = null;
-          r === WY.RESOURCE ? o = jN(a) : r === WY.CREATOR ? o = C8(a, M2.ADD_TO_GROUP, c) : r === WY.SPACE && (o = q1(a, M2.ADD_TO_GROUP, u));
+          r === CreatorResourceType.RESOURCE ? o = jN(a) : r === CreatorResourceType.CREATOR ? o = C8(a, M2.ADD_TO_GROUP, c) : r === CreatorResourceType.SPACE && (o = q1(a, M2.ADD_TO_GROUP, u));
           E(o);
           let p = y.slice(0, e.facetTypeIndex);
           if (b(p), !o) return;
           let h = gh(o, n, c, u);
           m(h?.searchModelType ?? null);
-          x || S(p, uH.FILES, h, i, !1, !1);
+          x || S(p, PublicModelType.FILES, h, i, !1, !1);
           I(oM(s), y);
         } else {
           let t = y.split(" ").slice(0, -1).join(" ");
           let r = t + (t ? " " : "") + gl(e.facetType);
           b(r);
           let a = nX(n, c, u, p ?? void 0);
-          x || S(r, uH.FILES, a, i, !1, !1);
-          v(uR.AUTOCOMPLETE, e.facetType);
+          x || S(r, PublicModelType.FILES, a, i, !1, !1);
+          v(InputType.AUTOCOMPLETE, e.facetType);
         }
       }
     }, [e, E, y, b, n, c, u, p, m, S, i, I, v, x]);
@@ -160,7 +160,7 @@ export function $$k0({
           sessionId: e,
           queryId: t,
           query: i,
-          facet_entrypoint: uR.AUTOCOMPLETE,
+          facet_entrypoint: InputType.AUTOCOMPLETE,
           facet_type: n
         };
         trackEventAnalytics("facet_type_shown", r);
@@ -169,8 +169,8 @@ export function $$k0({
     let A = P();
     let y = _$$A();
     useEffect(() => {
-      e && (e.suggestionType === aI.TYPE ? _(e.facetType) : f.length > 0 && t !== h && (i(h), A(f, e.facetType, uR.AUTOCOMPLETE)));
-      !e && n && y(uR.AUTOCOMPLETE, n.facetType);
+      e && (e.suggestionType === aI.TYPE ? _(e.facetType) : f.length > 0 && t !== h && (i(h), A(f, e.facetType, InputType.AUTOCOMPLETE)));
+      !e && n && y(InputType.AUTOCOMPLETE, n.facetType);
       l(e);
     }, [e]);
   }(), v) ? v.suggestionType === aI.TYPE ? jsx(C, {

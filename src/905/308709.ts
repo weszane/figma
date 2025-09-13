@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { N_ } from "../figma_app/637027";
+import { BaseLinkComponent } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { e1, $F, et } from "../905/305240";
@@ -10,7 +10,7 @@ export function $$c0({
 }) {
   let t;
   let i = "support+restricted@figma.com";
-  let d = jsx(N_, {
+  let d = jsx(BaseLinkComponent, {
     target: "_blank",
     href: `mailto:${i}`,
     className: e1,

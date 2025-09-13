@@ -1,11 +1,11 @@
 import { getResourceDataOrFallback } from "../905/723791";
-import { GA, cE } from "../figma_app/349248";
+import { mapVariableProperties, mapVariableSetProperties } from "../figma_app/349248";
 export function $$a2(e, t) {
   let i = (e, i) => {
     let n = [];
     i?.forEach(i => {
       i.variables?.forEach(i => {
-        n.push(GA(i, e, t));
+        n.push(mapVariableProperties(i, e, t));
       });
     });
     return n;
@@ -45,14 +45,14 @@ export function $$o1(e) {
 export function $$l4(e, t) {
   if ("team" === e.type && e.value?.status === "loaded") {
     let i = e.value.data.file;
-    if (i && i.variableCollections) return $$s3(i.variableCollections.map(e => cE(e, {
+    if (i && i.variableCollections) return $$s3(i.variableCollections.map(e => mapVariableSetProperties(e, {
       type: "team",
       file: i
     }, t)));
   }
   if ("community" === e.type && e.value?.status === "loaded") {
     let i = getResourceDataOrFallback(e.value.data.communityLibraryByHubFileId);
-    if (i && i.variableCollections) return $$s3(i.variableCollections.map(e => cE(e, {
+    if (i && i.variableCollections) return $$s3(i.variableCollections.map(e => mapVariableSetProperties(e, {
       type: "hubFile",
       file: {
         id: i.hubFileId,
@@ -67,7 +67,7 @@ export function $$d0(e, t) {
   let i = e.data.libraryKeyToFile;
   if (i.file) {
     let e = i.file;
-    return (e.variableCollections ?? []).map(i => cE(i, {
+    return (e.variableCollections ?? []).map(i => mapVariableSetProperties(i, {
       type: "team",
       file: e
     }, t));
@@ -75,7 +75,7 @@ export function $$d0(e, t) {
   if (!i.hubFile) return [];
   {
     let e = i.hubFile;
-    return (getResourceDataOrFallback(e.variableCollections) ?? []).map(i => cE(i, {
+    return (getResourceDataOrFallback(e.variableCollections) ?? []).map(i => mapVariableSetProperties(i, {
       type: "hubFile",
       file: e
     }, t));
@@ -102,7 +102,7 @@ export function $$c5(e, t) {
   }
 }
 function u(e, t, i) {
-  return (t ?? []).flatMap(e => e?.variables ?? []).map(t => GA(t, e, i));
+  return (t ?? []).flatMap(e => e?.variables ?? []).map(t => mapVariableProperties(t, e, i));
 }
 export const C$ = $$d0;
 export const UO = $$o1;

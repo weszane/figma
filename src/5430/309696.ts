@@ -2,13 +2,13 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { useDispatch, connect } from "react-redux";
 import { parsePxInt } from "../figma_app/783094";
-import { nR, $$, N_, Ph } from "../figma_app/637027";
+import { ButtonSecondary, ButtonBasePrimary, BaseLinkComponent, clickableBaseLinkTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { jt } from "../figma_app/395505";
 import { showModalHandler } from "../905/156213";
 import { R$ } from "../figma_app/86989";
 import { selectCurrentUser } from "../905/372672";
-import { Yj } from "../figma_app/951233";
+import { hasOrgUsersForUser } from "../figma_app/951233";
 import { hasClientMeta, isWidget } from "../figma_app/45218";
 import { isSubscription } from "../905/54385";
 import { bX } from "../figma_app/792917";
@@ -20,11 +20,11 @@ export function $$v4(e) {
     className: Xk,
     children: [jsx("p", {
       children: e.label
-    }), jsx(nR, {
+    }), jsx(ButtonSecondary, {
       onClick: e.onClickDecline,
       className: LL,
       children: renderI18nText("community.detail_view.decline")
-    }), jsx($$, {
+    }), jsx(ButtonBasePrimary, {
       onClick: e.onClickAccept,
       className: LL,
       children: renderI18nText("community.detail_view.accept")
@@ -63,7 +63,7 @@ ${getI18nString("community.reporting.my_figma_user_id_is_user_id", {
       userId: this.props.user.id
     })}` : ""}
 ${getI18nString("community.reporting.add_your_description_here")}`;
-    return jsx(N_, {
+    return jsx(BaseLinkComponent, {
       href: `mailto:content-reviews@figma.com?subject=${encodeURIComponent(resourceSubject)}&body=${encodeURIComponent(r)}`,
       className: _$$iZ,
       trusted: !0,
@@ -73,7 +73,7 @@ ${getI18nString("community.reporting.add_your_description_here")}`;
 }
 export function $$j3() {
   let e = selectCurrentUser();
-  return e ? jsx(Ph, {
+  return e ? jsx(clickableBaseLinkTracked, {
     className: _1,
     trackingEventName: "Detail View - Report Resource",
     onClick: () => {
@@ -90,7 +90,7 @@ export function $$w0(e) {
     monetizedResource
   } = e;
   let o = useDispatch();
-  return jsx(Ph, {
+  return jsx(clickableBaseLinkTracked, {
     className: _1,
     trackingEventName: "Detail View - Request Refund",
     onClick: () => {
@@ -112,7 +112,7 @@ export function $$C1(e) {
   let r = "Detail View - View Order Details";
   let i = getI18nString("community.buyer.view_order_details");
   isSubscription(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = getI18nString("community.buyer.manage_subscription"));
-  return jsx(Ph, {
+  return jsx(clickableBaseLinkTracked, {
     className: _1,
     onClick: () => t(),
     trackingEventName: r,
@@ -121,13 +121,13 @@ export function $$C1(e) {
   });
 }
 connect(e => ({
-  hasOrgs: Yj(e),
+  hasOrgs: hasOrgUsersForUser(e),
   teams: Object.keys(e.teams).map(t => e.teams[t]),
   user: e.user
 }))(b);
 var L = (e => (e[e.PROMO = 0] = "PROMO", e[e.PAID = 1] = "PAID", e))(L || {});
 export function $$T2(e) {
-  return jsx(N_, {
+  return jsx(BaseLinkComponent, {
     className: e.className,
     onClick: e.onClick,
     trusted: !0,

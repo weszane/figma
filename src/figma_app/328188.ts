@@ -10,7 +10,7 @@ import { useCurrentUserOrgId } from "../905/845253";
 import { FStudentTeamStatusType } from "../figma_app/191312";
 import { OrgTeamsInAdminView, OrgTeamView } from "../figma_app/43951";
 import { Ef } from "../905/81982";
-import { dy } from "../figma_app/967319";
+import { SortDirection } from "../figma_app/967319";
 import { ig } from "../figma_app/713624";
 import { teamVisibilityEnum } from "../figma_app/630077";
 import { UNASSIGNED } from "../905/247093";
@@ -251,7 +251,7 @@ export function $$C2(e, t, r, n) {
       sort_by: r.columnName
     }),
     ...(r && {
-      order_by: r.isReversed ? dy.DESC : dy.ASC
+      order_by: r.isReversed ? SortDirection.DESC : SortDirection.ASC
     }),
     ...(e && {
       search_query: e

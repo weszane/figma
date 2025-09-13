@@ -17,11 +17,11 @@ import A, { maybeCreateSavepoint } from "../905/294113";
 import { FEditorType } from "../figma_app/53721";
 import { BranchType, SourceDirection } from "../905/535806";
 import { e0 } from "../905/696396";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { K as _$$K } from "../905/807535";
+import { findMatchingValue } from "../905/807535";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
@@ -38,7 +38,7 @@ import { selectUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { ue, tF } from "../905/61300";
 import { G as _$$G } from "../905/702115";
-import { d_, yX } from "../figma_app/918700";
+import { ModalContainer, ConfirmationModal2 } from "../figma_app/918700";
 import { ss } from "../905/746499";
 import { $l } from "../905/721248";
 import { jS } from "../figma_app/557024";
@@ -150,7 +150,7 @@ let $ = registerModal(function (e) {
     error: G.message
   })));
   let J = u === SourceDirection.TO_SOURCE ? _displayGroups : displayGroups;
-  if (null === J || null === N) return jsx(d_, {
+  if (null === J || null === N) return jsx(ModalContainer, {
     onHide: Q,
     children: jsx("div", {
       className: "branch_force_merge_modal--loadingContainer--vo03-",
@@ -162,7 +162,7 @@ let $ = registerModal(function (e) {
   });
   if (u === SourceDirection.TO_SOURCE) {
     let e = N.isMergeRequired ?? !1;
-    return jsxs(yX, {
+    return jsxs(ConfirmationModal2, {
       confirmationTitle: renderI18nText("collaboration.branching_force.merge_to_source_title"),
       destructive: !0,
       confirmText: renderI18nText("collaboration.branching_force.merge_to_source_confirm"),
@@ -189,7 +189,7 @@ let $ = registerModal(function (e) {
       })]
     });
   }
-  return u === SourceDirection.FROM_SOURCE ? jsxs(yX, {
+  return u === SourceDirection.FROM_SOURCE ? jsxs(ConfirmationModal2, {
     confirmationTitle: renderI18nText("collaboration.branching_force.merge_from_source_title"),
     destructive: !0,
     confirmText: renderI18nText("collaboration.branching_force.merge_from_source_confirm"),
@@ -230,7 +230,7 @@ let $ = registerModal(function (e) {
       children: renderI18nText("collaboration.branching_force.merge_from_source_description")
     }), jsxs(_$$b, {
       value: a,
-      onChange: e => l(_$$K(BranchType, e) ?? BranchType.MAIN),
+      onChange: e => l(findMatchingValue(BranchType, e) ?? BranchType.MAIN),
       legend: jsx(_$$s, {
         children: jsx("span", {
           className: "branch_force_merge_modal--conflictChoiceRadioLegend--onrEN",
@@ -267,7 +267,7 @@ let el = registerModal(function ({
   });
   let [a, o] = useState(void 0);
   useEffect(() => {
-    _$$S.getSourceCheckpointCreatedAt({
+    fileApiHandler.getSourceCheckpointCreatedAt({
       currentFileKey: t
     }).then(({
       data: e
@@ -363,7 +363,7 @@ let el = registerModal(function ({
 }, "IncrementalUpdateModal", ModalSupportsBackground.YES);
 let $$ed0 = createOptimistThunk(async (e, t) => {
   try {
-    let i = await _$$S.getSourceFileUpdatedInfo({
+    let i = await fileApiHandler.getSourceFileUpdatedInfo({
       branchFileKey: t.branchFileKey
     });
     e.dispatch(yJ({

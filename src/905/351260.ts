@@ -9,7 +9,7 @@ import { cL } from "../905/748726";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { bE, yH } from "../905/98702";
 import { trackFileEvent, trackRoleEvent } from "../figma_app/314264";
-import { ZW, U5 } from "../figma_app/349248";
+import { mapResourceCategoryToRole, arrayToIdMap } from "../figma_app/349248";
 import { H_ } from "../figma_app/336853";
 import { getRolesForResource, getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
@@ -18,24 +18,24 @@ import { oE } from "../905/249410";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { T as _$$T } from "../figma_app/257703";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { v as _$$v } from "../905/124421";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { jE } from "../figma_app/639088";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { setupShadowRead, adminPermissionConfig } from "../figma_app/391338";
 import { UpsellModalType } from "../905/165519";
 let T = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Sharing with external users is disabled modal",
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
       resourceType: e.resourceType
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("permissions.guests_banned.sharing_with_external_users_is_disabled"),
       confirmText: getI18nString("permissions.guests_banned.got_it"),
       onConfirm: () => t(popModalStack()),
@@ -68,14 +68,14 @@ function k(e) {
 }
 let R = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Admin approval needed modal",
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
       resourceType: e.resourceType
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("permissions.invites_require_access.almost_there"),
       confirmText: getI18nString("permissions.invites_require_access.got_it"),
       onConfirm: () => t(popModalStack()),
@@ -104,14 +104,14 @@ let R = registerModal(function (e) {
 }, "REQUEST_ACCESS_WARNING_MODAL");
 let N = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Invite whitelist error modal",
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
       resourceType: e.resourceType
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
       confirmText: getI18nString("permissions.invites_whitelist.got_it"),
       onConfirm: () => t(popModalStack()),
@@ -137,14 +137,14 @@ let N = registerModal(function (e) {
 }, "INVITE_WHITELIST_ERROR_MODAL");
 let P = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Deprovisioned user invite error modal",
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
       resourceType: e.resourceType
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
       confirmText: getI18nString("permissions.deprovisioned_users.got_it"),
       onConfirm: () => t(popModalStack()),
@@ -170,14 +170,14 @@ let P = registerModal(function (e) {
 }, "DEPROVISIONED_USER_MODAL");
 let O = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Deprovisioned user invite error modal",
     properties: {
       emails: e.emails.toString(),
       resourceIdOrKey: e.resourceIdOrKey,
       resourceType: e.resourceType
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("permissions.invite_error_modal.couldn_t_send_invite"),
       confirmText: getI18nString("permissions.org_restricted_invite.got_it"),
       onConfirm: () => t(popModalStack()),
@@ -325,7 +325,7 @@ let $$M3 = createOptimistThunk((e, {
           teamId: s,
           canEditTeam: void 0
         }
-      }));else {
+      })); else {
         let t = s && {
           ...n.teams[s],
           canEdit: hasEditorRoleAccessOnTeam(s, n),
@@ -346,9 +346,9 @@ let $$M3 = createOptimistThunk((e, {
     }));
     v?.();
   });
-  let M = ZW(i);
+  let M = mapResourceCategoryToRole(i);
   M && WB().optimisticallyCreate({
-    [M]: U5(N.map(e => ({
+    [M]: arrayToIdMap(N.map(e => ({
       id: `temp-role-${e}`,
       createdAt: new Date(),
       updatedAt: new Date(),

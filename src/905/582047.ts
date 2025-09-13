@@ -2,22 +2,22 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { s_ } from "../905/17223";
-import { Us, M7, vd } from "../figma_app/637027";
+import { linkWithTracking, ButtonWhiteTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { mapFileToProductType } from "../figma_app/314264";
 import { STANDARD_LIMIT } from "../figma_app/345997";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 let _ = "file_limit_paywall_modal--textSection--eQg2n";
 let $$A0 = registerModal(function (e) {
   let t = () => {
     e.dispatch(popModalStack());
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "FileLimitPaywallModal",
     properties: {
       teamId: e.teamId,
@@ -26,7 +26,7 @@ let $$A0 = registerModal(function (e) {
       }),
       action: e.action
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       size: 360,
       className: "file_limit_paywall_modal--paywallModal--tFr8-",
       children: [jsx(s_, {
@@ -57,7 +57,7 @@ let $$A0 = registerModal(function (e) {
           className: _,
           children: jsx("span", {
             children: renderI18nText("payments.file_limit_paywall_cta", {
-              createThisFile: jsx(Us, {
+              createThisFile: jsx(linkWithTracking, {
                 target: "_blank",
                 onClick: () => {
                   e.createInDrafts();
@@ -66,7 +66,7 @@ let $$A0 = registerModal(function (e) {
                 trusted: !0,
                 children: renderI18nText("payments.file_limit_paywall_cta_create_this_file")
               }),
-              checkOutPaidPlans: jsx(Us, {
+              checkOutPaidPlans: jsx(linkWithTracking, {
                 target: "_blank",
                 onClick: () => {
                   t();
@@ -80,13 +80,13 @@ let $$A0 = registerModal(function (e) {
           })
         }), jsxs("div", {
           className: "file_limit_paywall_modal--buttonRow--Y8n-M",
-          children: [jsx(M7, {
+          children: [jsx(ButtonWhiteTracked, {
             onClick: t,
             trackingProperties: {
               trackingDescriptor: _$$c.CANCEL
             },
             children: renderI18nText("payments.file_limit_cancel")
-          }), jsx(vd, {
+          }), jsx(ButtonBasePrimaryTracked, {
             className: "file_limit_paywall_modal--upgradeButton--GJckO",
             onClick: () => {
               t();

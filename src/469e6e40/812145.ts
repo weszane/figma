@@ -20,9 +20,9 @@ import { Z5 } from "../figma_app/297957";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { Ye } from "../905/332483";
 import { KS } from "../figma_app/217457";
-import { bC } from "../figma_app/951233";
+import { hasScimSeatType } from "../figma_app/951233";
 import { FOrganizationLevelType } from "../figma_app/421473";
-import { Od } from "../figma_app/967319";
+import { ColumnName } from "../figma_app/967319";
 import { A as _$$A2 } from "../3850/566892";
 var r = i;
 if (443 == require.j) {}
@@ -147,7 +147,7 @@ export function $$L1(e) {
         userId: "orgUser" in e ? e.orgUser.user_id : void 0,
         planUserId: "orgUser" in e ? e.orgUser.id : void 0,
         planId: e.org.id,
-        isScimSeat: bC("orgUser" in e ? e.orgUser : e.idpUser),
+        isScimSeat: hasScimSeatType("orgUser" in e ? e.orgUser : e.idpUser),
         handle: s,
         name: n,
         imgUrl: i,
@@ -156,7 +156,7 @@ export function $$L1(e) {
         lastActiveAt: "orgUser" in e && e.orgUser.last_seen ? e.orgUser.last_seen : void 0
       }, a);
     },
-    sorting_key: Od.BILLABLE_PRODUCT_SEAT
+    sorting_key: ColumnName.BILLABLE_PRODUCT_SEAT
   }];
 }
 export function $$D2({

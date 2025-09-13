@@ -20,7 +20,7 @@ import { C as _$$C } from "../905/226458";
 import { sf } from "../905/929976";
 import { fA } from "../figma_app/543100";
 import { _6 } from "../figma_app/386952";
-import { V0, dN } from "../figma_app/858344";
+import { DUserRole, TGroupType } from "../figma_app/858344";
 import { lQ } from "../905/934246";
 import { atomStoreManager } from "../figma_app/27355";
 import C from "classnames";
@@ -250,14 +250,14 @@ export function $$W1(e, t) {
   let a = _6();
   return useCallback(s => {
     let i;
-    ("workspace" !== a.view || a.subView !== V0.DIRECTORY) && (i = {
+    ("workspace" !== a.view || a.subView !== DUserRole.DIRECTORY) && (i = {
       text: getI18nString("file_browser.pinning.pin_modal.confirmation_bell.view_workspace"),
       action: () => {
         r(sf({
           view: "workspace",
-          subView: V0.DIRECTORY,
+          subView: DUserRole.DIRECTORY,
           workspaceId: s,
-          selectedTab: dN.TEAMS
+          selectedTab: TGroupType.TEAMS
         }));
       }
     });

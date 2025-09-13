@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import r from "classnames";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { Tm } from "../905/772769";
 import { A as _$$A } from "../905/794518";
@@ -16,7 +16,7 @@ export function $$u0({
     label: getI18nString("community.publishing.support_contact"),
     error: i,
     required: r,
-    children: jsx(ks, {
+    children: jsx(BigTextInputForwardRef, {
       maxLength: Tm,
       className: a()(xe, {
         [e0]: !!i

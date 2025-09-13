@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { k } from "../905/443820";
 import a from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { useIsCanvasEditDisabled } from "../905/595131";
 var s = a;
@@ -14,7 +14,7 @@ export function $$u0({
 }) {
   let u = useIsCanvasEditDisabled();
   let p = u ? getI18nString("browse_templates_modal.add_template.disabled") : "";
-  return jsxs($$, {
+  return jsxs(ButtonBasePrimary, {
     className: s()("insert_template_cta--button--InTLP", r && "insert_template_cta--buttonOpaque--oEwuq"),
     onClick: BrowserInfo.isIpad ? void 0 : a,
     onPointerDown: BrowserInfo.isIpad ? a : void 0,

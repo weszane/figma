@@ -17,7 +17,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { selectTeams } from "../905/338617";
 import { gN } from "../figma_app/273118";
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
 import { s as _$$s, c as _$$c } from "../905/744710";
 import { A as _$$A } from "../6828/364616";
@@ -79,7 +79,7 @@ export function $$R1(e) {
   let V = S.reduce((e, t) => {
     if (F && "plan_type" in t) {
       let i = "";
-      if (t.plan_type === _$$O.ORG) {
+      if (t.plan_type === OrganizationType.ORG) {
         let e = q[t.plan_id];
         i = e?.name ?? i;
       } else {

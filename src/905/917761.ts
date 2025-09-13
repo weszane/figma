@@ -9,7 +9,7 @@ import { selectCurrentUser } from "../905/372672";
 import { FPlanNameType } from "../figma_app/191312";
 import { OrgSharedSettingView } from "../figma_app/43951";
 import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
-import { Sm } from "../figma_app/482728";
+import { UpgradeRequestSetting } from "../figma_app/482728";
 import { c as _$$c } from "../905/606579";
 let f = e => {
   let t = useSubscription(OrgSharedSettingView({
@@ -19,7 +19,7 @@ let f = e => {
   }).unwrapOr(null);
   if (!t) return !1;
   let i = t?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.status === ResourceStatus.Loaded ? t?.org?.orgSharedSetting?.configuredUpgradeRequestSetting?.data : null;
-  return i === Sm.ALL_USERS || i === Sm.MEMBERS;
+  return i === UpgradeRequestSetting.ALL_USERS || i === UpgradeRequestSetting.MEMBERS;
 };
 export function $$_0(e, t) {
   let i = [FPlanNameType.STARTER, FPlanNameType.STUDENT];

@@ -12,7 +12,7 @@ import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { pW } from "../905/160095";
-import { T8, j6 } from "../figma_app/831799";
+import { wrapWithTracking, useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { uF, F_, Ao } from "../905/748636";
 import { CR, NJ, OA } from "../figma_app/419216";
@@ -229,7 +229,7 @@ export class $$R0 extends Component {
         ...i
       })
     });
-    return T8((() => {
+    return wrapWithTracking((() => {
       switch (e.modalType) {
         case q3.DRAGGABLE:
           let {
@@ -377,7 +377,7 @@ function N({
   onAdditionalExplicitDismiss: i,
   onDismissModal: a
 }) {
-  let s = j6();
+  let s = useTracking();
   let c = useCallback(({
     source: e
   }) => {

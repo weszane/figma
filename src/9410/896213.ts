@@ -16,13 +16,13 @@ import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { Gc } from "../905/63728";
+import { ignoreCommandOrShift } from "../905/63728";
 import { Vi, B4, tu, oJ } from "../figma_app/385215";
 import { ah, Dv } from "../905/763714";
 import { Av } from "../905/149328";
 import { WN } from "../figma_app/638601";
 import { pz } from "../figma_app/60079";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -292,7 +292,7 @@ function eI({
     onClick: ee,
     className: BK,
     children: renderI18nText("collaboration.spotlight.button.stop")
-  }) : jsx($$, {
+  }) : jsx(ButtonBasePrimary, {
     onClick: q,
     className: BK,
     onMouseOver: () => {
@@ -466,7 +466,7 @@ function ek({
     onClick: ea,
     className: BK,
     children: renderI18nText("collaboration.spotlight.button.stop")
-  }) : jsx($$, {
+  }) : jsx(ButtonBasePrimary, {
     onClick: er,
     className: BK,
     onMouseOver: () => {
@@ -506,7 +506,7 @@ function ek({
     z((el ? 1 : 0) + ("" !== ed && ef ? 1 : 0) + (em ? 1 : 0));
   }, [el, ed, ef, em]);
   let ey = (e, t) => {
-    let i = Gc(() => {
+    let i = ignoreCommandOrShift(() => {
       let t = `/files${g}/user/${e.userID}`;
       customHistory.redirect(t, desktopAPIInstance ? void 0 : "_blank");
     });
@@ -699,7 +699,7 @@ let $$eO0 = memo(function (e) {
     renderDisplay(e, {
       hasCursor: t
     }) {
-      let n = Gc(() => {
+      let n = ignoreCommandOrShift(() => {
         let t = `/files${ef}/user/${e.userID}`;
         customHistory.redirect(t, desktopAPIInstance ? void 0 : "_blank");
       });
@@ -859,7 +859,7 @@ let $$eO0 = memo(function (e) {
         renderDisplay(e, {
           hasCursor: t
         }) {
-          let i = Gc(() => {
+          let i = ignoreCommandOrShift(() => {
             let t = `/files${ef}/user/${e.userID}`;
             customHistory.redirect(t, desktopAPIInstance ? void 0 : "_blank");
           });

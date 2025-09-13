@@ -3,11 +3,11 @@ import { isIpadDevice, isMobileUA } from "../figma_app/778880";
 import { useAtomWithSubscription, createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
-import { vd, nD as _$$nD, $9, eM as _$$eM, Kz } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked, BigButtonPrimaryTracked, BigButtonSecondaryTracked, trackedButtonClickHandler, Spacing } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { F_ } from "../905/748636";
 import { CR, NJ } from "../figma_app/419216";
-import { fu, jm } from "../figma_app/831799";
+import { TrackingProvider, TrackedDiv } from "../figma_app/831799";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { r1, GW, qG, Fu } from "../figma_app/545877";
@@ -75,14 +75,14 @@ import { Jn } from "../905/17223";
 import { P as _$$P } from "../905/347284";
 import { x as _$$x } from "../7021/270993";
 import { z6 } from "../figma_app/805373";
-import { ey as _$$ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { P as _$$P2 } from "../1250/527167";
 import { j0 } from "../1250/524544";
 import { U as _$$U3 } from "../1250/641541";
 import { FY } from "../figma_app/24841";
 import { DP } from "../905/640017";
 import { d as _$$d } from "../905/647058";
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { WZ } from "../905/893645";
 import { EL, F_ as _$$F_ } from "../905/858282";
 import { customHistory } from "../905/612521";
@@ -175,7 +175,7 @@ function m(e) {
         })
       }), jsx("div", {
         className: "custom_sections_onboarding_modal--footerContainerButtonRight--EToy- custom_sections_onboarding_modal--footerContainer---KhkM",
-        children: jsx(vd, {
+        children: jsx(ButtonBasePrimaryTracked, {
           onClick: e.onClickPrimaryCta,
           children: renderI18nText("rcs.file_browser.got_it")
         })
@@ -200,7 +200,7 @@ function j() {
   return jsx(_$$M, {
     isShowing: t.isShowing,
     userFlagOnShow: v,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Custom Sections Nudge",
       children: jsx(m, {
         onClickPrimaryCta: t.complete
@@ -809,9 +809,9 @@ function ti({
       })]
     })
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: tr,
-    children: jsxs(_$$ey, {
+    children: jsxs(ModalView, {
       className: _$$s.relative.$,
       size: 680,
       height: 576,
@@ -994,10 +994,10 @@ let tC = memo(({
         children: r
       }), jsxs("div", {
         className: "plan_spaces_launch_modal_components--ctaRow--3DVA8",
-        children: [jsx(_$$nD, {
+        children: [jsx(BigButtonPrimaryTracked, {
           onClick: n,
           children: i
-        }), jsx($9, {
+        }), jsx(BigButtonSecondaryTracked, {
           onClick: l,
           children: jsx(TextWithTruncation, {
             fontSize: 13,
@@ -1023,11 +1023,11 @@ function tS() {
   let e = useSelector(e => e.plans);
   let t = useSelector(e => e.teams);
   let n = useSelector(e => e.userFlags.personal_draft_migration_scheduled);
-  let r = e.filter(e => e.plan_type === _$$O.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
+  let r = e.filter(e => e.plan_type === OrganizationType.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
   let s = useDispatch();
   let l = DP();
   let d = useAtomWithSubscription(mp);
-  let _ = e.some(e => e.plan_type === _$$O.ORG);
+  let _ = e.some(e => e.plan_type === OrganizationType.ORG);
   let u = 1 === r.length && r[0].starter_team && !_;
   let m = function (e, t, n) {
     let a = {
@@ -1209,13 +1209,13 @@ function t$({
   trackingProperties: n,
   children: r
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: t,
     properties: {
       ...n,
       ..._$$ng.getTrackingProperties()
     },
-    children: jsx(_$$ey, {
+    children: jsx(ModalView, {
       hide: e,
       size: "any",
       className: "pro_trial_form_modal--modalContainer--mKui2",
@@ -1262,13 +1262,13 @@ function tV(e) {
         }), titleText, descriptionText]
       }), middleContent, jsxs("div", {
         className: "pro_trial_form_modal--footer--xDAGh",
-        children: [jsx(_$$nD, {
+        children: [jsx(BigButtonPrimaryTracked, {
           onClick: ctaOnClick,
           className: "pro_trial_form_modal--footerCTA--bb-GE",
           disabled: ctaDisabled,
           trackingProperties: _$$ng.getTrackingProperties("continue"),
           children: ctaText
-        }), jsx(_$$eM, {
+        }), jsx(trackedButtonClickHandler, {
           trackingProperties: _$$ng.getTrackingProperties("go back"),
           onClick: textCtaOnClick,
           children: textCtaText
@@ -1427,7 +1427,7 @@ function t3(e) {
     onClickCTA,
     onBack
   } = e;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: iX[iX.SELECT_FEATURES],
     children: jsx(tV, {
       ctaDisabled: 0 === selectedFeatures.size,
@@ -1480,7 +1480,7 @@ function t6(e) {
     onClick,
     isSelected
   } = e;
-  return jsx(jm, {
+  return jsx(TrackedDiv, {
     role: "button",
     className: isSelected ? "pro_trial_form_modal--proTrialFeatureContainerSelected--t69-D pro_trial_form_modal--proTrialFeatureContainer--RI3Vx" : "pro_trial_form_modal--proTrialFeatureContainer--RI3Vx",
     onClick,
@@ -1510,7 +1510,7 @@ function t8(e) {
     onClickCTA,
     onBack
   } = e;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: iX[iX.SELECT_TEAM_TYPE],
     children: jsx(tV, {
       ctaDisabled: void 0 === selectedTeamType,
@@ -1571,7 +1571,7 @@ function t9(e) {
     onClick,
     isSelected
   } = e;
-  return jsx(jm, {
+  return jsx(TrackedDiv, {
     role: "button",
     className: isSelected ? "pro_trial_form_modal--teamTypeCardContainerSelected--kq22n pro_trial_form_modal--teamTypeCardContainer--HEdI4" : "pro_trial_form_modal--teamTypeCardContainer--HEdI4",
     onClick,
@@ -1597,7 +1597,7 @@ function nt(e) {
     onClickCTA,
     onBack
   } = e;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: iX[iX.SELECT_TEAM],
     children: jsx(tV, {
       ctaDisabled: void 0 === selectedTeamID,
@@ -1643,7 +1643,7 @@ function nn(e) {
     onClick,
     isSelected
   } = e;
-  return jsxs(jm, {
+  return jsxs(TrackedDiv, {
     role: "button",
     className: isSelected ? "pro_trial_form_modal--teamContainerSelected--Meavl pro_trial_form_modal--teamContainer--tLBf7" : "pro_trial_form_modal--teamContainer--tLBf7",
     onClick,
@@ -1752,7 +1752,7 @@ function no(e) {
       children: renderI18nText("pro_trials_v3.entry_modal_explanation")
     }), jsx(nc, {})]
   });
-  let i = jsx(_$$nD, {
+  let i = jsx(BigButtonPrimaryTracked, {
     onClick: () => {
       hideModal();
       n(showModalHandler({
@@ -1788,7 +1788,7 @@ function ns(e) {
       children: renderI18nText("pro_trials_v3.team_welcome_modal_explanation")
     }), jsx(nc, {})]
   });
-  let o = jsx(_$$nD, {
+  let o = jsx(BigButtonPrimaryTracked, {
     onClick: () => {
       hideModal();
       r(sf({
@@ -1823,7 +1823,7 @@ function nl(e) {
     view: "team",
     teamId
   };
-  let o = jsx(_$$nD, {
+  let o = jsx(BigButtonPrimaryTracked, {
     onClick: () => {
       hideModal();
       r(WX({
@@ -1837,7 +1837,7 @@ function nl(e) {
       children: renderI18nText("pro_trials_v3.expiry_modal_cta_text")
     })
   });
-  let s = jsx($9, {
+  let s = jsx(BigButtonSecondaryTracked, {
     onClick: () => {
       r(showModalHandler({
         type: t1,
@@ -2133,7 +2133,7 @@ function nI(e) {
   }) : getI18nString("promo.select_team.single_redeem_without_deadline_promo_str.seat_rename", {
     days: i
   });
-  return jsxs(_$$ey, {
+  return jsxs(ModalView, {
     hide: e.dismissModal,
     size: 437,
     className: "promo_code_select_team_content--modal--20aUA",
@@ -2147,7 +2147,7 @@ function nI(e) {
       className: "promo_code_select_team_content--closeButton--iQ6-4",
       onClick: e.dismissModal,
       innerText: "close"
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 2
     }), jsx(_$$I, {
       eligibleTeams: e.starterTeams,
@@ -2437,7 +2437,7 @@ function ao() {
   let t = useAtomWithSubscription(mp);
   let n = useAtomWithSubscription(aa);
   let r = useAtomWithSubscription(ar);
-  let s = e.some(e => e.plan_type === _$$O.TEAM && e.is_guest);
+  let s = e.some(e => e.plan_type === OrganizationType.TEAM && e.is_guest);
   let l = !!getFeatureFlags().limited_plan_spaces && s;
   let {
     show,

@@ -17,7 +17,7 @@ import { V } from "../figma_app/385855";
 import { getI18nString } from "../905/303541";
 import { selectCurrentFile } from "../figma_app/516028";
 import { PageThumbnailsByFileKeyView } from "../figma_app/43951";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { qp } from "../figma_app/932601";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -74,7 +74,7 @@ export function $$E0({
           onClick: () => {
             c && !d && (_("figjam_pages_summary.preview_refreshed", {
               previewPageId: r
-            }), p(_$$r.LOADING), S.updatePageCheckpointThumbnails({
+            }), p(_$$r.LOADING), fileApiHandler.updatePageCheckpointThumbnails({
               fileKey: c.key
             }).catch(() => {
               _("figjam_summary_preview.page_thumbnails_request_failed_increment_metric", {});

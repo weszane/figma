@@ -1,4 +1,4 @@
-import { VariableIdHandler } from "../figma_app/243058";
+import { VariableIdHandler } from '../figma_app/243058'
 
 /**
  * Converts a variable ID string to its Kiwi representation.
@@ -7,8 +7,8 @@ import { VariableIdHandler } from "../figma_app/243058";
  * @returns The Kiwi representation or null if invalid.
  */
 export function convertVariableIdToKiwi(variableIdString: string) {
-  const variableId = VariableIdHandler.fromString(variableIdString);
-  return variableId ? VariableIdHandler.toKiwi(variableId) : null;
+  const variableId = VariableIdHandler.fromString(variableIdString)
+  return variableId ? VariableIdHandler.toKiwi(variableId) : null
 }
 
 /**
@@ -18,8 +18,8 @@ export function convertVariableIdToKiwi(variableIdString: string) {
  * @returns True if valid, false otherwise.
  */
 export function isValidVariableId(variableIdString: string) {
-  const variableId = VariableIdHandler.fromString(variableIdString);
-  return !!variableId && VariableIdHandler.isValid(variableId);
+  const variableId = VariableIdHandler.fromString(variableIdString)
+  return !!variableId && VariableIdHandler.isValid(variableId)
 }
 
 /**
@@ -28,10 +28,10 @@ export function isValidVariableId(variableIdString: string) {
  * @param guid - The GUID string.
  * @returns An object with the GUID.
  */
-export function createVariableReference(guid: string) {
+export function createVariableReference(guid: any) {
   return {
-    guid: guid
-  };
+    guid,
+  }
 }
 
 /**
@@ -41,8 +41,8 @@ export function createVariableReference(guid: string) {
  * @returns The variable ID string or "(invalid variable id)" if invalid.
  */
 export function convertKiwiToVariableIdString(kiwi: any) {
-  const variableId = VariableIdHandler.fromKiwi(kiwi);
-  return variableId ? VariableIdHandler.toString(variableId) : "(invalid variable id)";
+  const variableId = VariableIdHandler.fromKiwi(kiwi)
+  return variableId ? VariableIdHandler.toString(variableId) : '(invalid variable id)'
 }
 
 /**
@@ -51,8 +51,8 @@ export function convertKiwiToVariableIdString(kiwi: any) {
  * @param guid - The GUID string.
  * @returns The variable ID string.
  */
-export function getVariableIdStringFromGuid(guid: string) {
-  return convertKiwiToVariableIdString(createVariableReference(guid));
+export function getVariableIdStringFromGuid(guid: any) {
+  return convertKiwiToVariableIdString(createVariableReference(guid))
 }
 
 /**
@@ -64,15 +64,15 @@ export function getVariableIdStringFromGuid(guid: string) {
  */
 export function createVariableIdStringFromRef(key: string, version: number) {
   return VariableIdHandler.toString(VariableIdHandler.fromRef({
-    key: key,
-    version: version
-  }));
+    key,
+    version,
+  }))
 }
 
 // Exported aliases with updated function names
-export const Hc = createVariableIdStringFromRef;
-export const dI = convertKiwiToVariableIdString;
-export const fn = isValidVariableId;
-export const sH = convertVariableIdToKiwi;
-export const w1 = createVariableReference;
-export const wL = getVariableIdStringFromGuid;
+export const Hc = createVariableIdStringFromRef
+export const dI = convertKiwiToVariableIdString
+export const fn = isValidVariableId
+export const sH = convertVariableIdToKiwi
+export const w1 = createVariableReference
+export const wL = getVariableIdStringFromGuid

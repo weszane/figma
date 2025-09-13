@@ -3,7 +3,7 @@ import { PureComponent } from "react";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
-import { cw, vd } from "../figma_app/637027";
+import { ButtonWhite, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { hZ } from "../905/748726";
 import { c as _$$c } from "../905/370443";
@@ -108,11 +108,11 @@ export class $$A0 extends PureComponent {
             validateToken: this.props.validateToken,
             validateTokensAsEmail: this.props.validateTokensAsEmail
           }, this.props.dropdownShown ? "dropdown" : "")
-        }), this.props.onSubmit && (this.props.isSubmitting ? jsx(cw, {
+        }), this.props.onSubmit && (this.props.isSubmitting ? jsx(ButtonWhite, {
           className: r,
           disabled: !0,
           children: this.props.buttonText
-        }) : jsx(vd, {
+        }) : jsx(ButtonBasePrimaryTracked, {
           className: this.props.joinLinkShown ? "token_form--buttonFtrV2--UWPO3" : r,
           trackingProperties: {
             numInvites: this.props.autocomplete.tokens.length,

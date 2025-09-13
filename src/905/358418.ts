@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId } from "react";
 import { v } from "../905/442517";
-import { JU } from "../figma_app/637027";
+import { createLabel } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { KindEnum } from "../905/129884";
 import { zm, ad } from "../905/443375";
@@ -21,7 +21,7 @@ export function $$u1({
   let m = useId();
   return jsx("div", {
     className: zm,
-    children: jsxs(JU, {
+    children: jsxs(createLabel, {
       className: ad,
       htmlFor: m,
       children: [renderI18nText("community.seller.sell_on_community"), jsx(v, {

@@ -40,7 +40,7 @@ import { Q as _$$Q2 } from "../905/363675";
 import { Button } from "../905/521428";
 import { camelToSnake } from "../figma_app/930338";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { Em } from "../figma_app/976749";
 import { useIsCurrentUserCreator } from "../figma_app/516028";
@@ -67,7 +67,7 @@ function $(e) {
     presetType
   } = c;
   let _ = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: `${productName} ${presetType} presets entrypoint`,
     children: jsx("div", {
       className: "frame_presets_entrypoint--bannerContainer--HnBeT",

@@ -129,7 +129,7 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b2 } from "../905/985254";
 import { kJ } from "../905/723870";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { wg as _$$wg } from "../figma_app/101956";
 import { p9 } from "../figma_app/864723";
 import { A as _$$A4 } from "../svg/796914";
@@ -147,9 +147,9 @@ import { C as _$$C2, e as _$$e3 } from "../905/937623";
 import { Z as _$$Z3, _ as _$$_ } from "../3276/890696";
 import { i as _$$i3, Dp } from "../905/50151";
 import { wV } from "../figma_app/585209";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { _B, WM, hC, nq as _$$nq, uB, zf, H6 } from "../905/852370";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { W as _$$W2 } from "../figma_app/642364";
 import { vL } from "../905/826900";
 var W = K;
@@ -1430,7 +1430,7 @@ function t6(e) {
       }));
     }
   }
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Pin comment icon",
     properties: {
       isPinned: s
@@ -2681,7 +2681,7 @@ function nS(e) {
         width: M,
         height: E
       }
-    }), e.canUpdateSelectionBoxAnchor && jsx(D8, {
+    }), e.canUpdateSelectionBoxAnchor && jsx(RecordableDiv, {
       role: "button",
       tabIndex: -1,
       className: "comment_selection_box--selectionBoxAnchor--6twQJ",
@@ -3203,7 +3203,7 @@ function nG(e) {
   }, e.gestureCanvasRef);
   let b = createRef();
   let y = useCallback(t => {
-    if (t.keyCode === Uz.ESCAPE && (x.cancel(), !m && e.activeId)) {
+    if (t.keyCode === KeyCodes.ESCAPE && (x.cancel(), !m && e.activeId)) {
       u && u.visible && p(RI({
         visible: !1
       }));

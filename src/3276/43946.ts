@@ -35,7 +35,7 @@ import { NE } from "../3276/373312";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { useFullscreenViewFile, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
 import { useTeamPlanFeatures } from "../figma_app/465071";
@@ -49,7 +49,7 @@ import { k as _$$k3 } from "../905/582200";
 import { oW as _$$oW } from "../905/675859";
 import { x as _$$x } from "../905/211326";
 import { Ph } from "../905/160095";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Q as _$$Q } from "../905/346809";
 import { Zk } from "../figma_app/626177";
 let P = "interacted_with_slack_and_teams_announcement";
@@ -106,7 +106,7 @@ function ed(e) {
     });
   };
   let l = resourceUtils.useTransform(n, e => t?.id === e?.creatorId ? "owner" : e?.canEdit ? "editor" : "viewer");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e.trackingContextName,
     properties: {
       userId: t?.id,
@@ -450,7 +450,7 @@ let eg = [{
         children: jsx(lR, {
           variant: "primary",
           onClick: () => {
-            t && customHistory.redirect(jN({
+            t && customHistory.redirect(buildFileUrl({
               file: {
                 key: t
               },

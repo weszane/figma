@@ -1,9 +1,9 @@
 import { VV } from "../905/623179";
 import { XHR } from "../905/910117";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 export async function $$s0(e, t, i) {
   for (let r of e) try {
-    let e = await S.getVideosUpload({
+    let e = await fileApiHandler.getVideosUpload({
       fileKey: t,
       sha1: r.sha1
     });

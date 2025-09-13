@@ -4,7 +4,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent, createElement } from "react";
 import { connect } from "react-redux";
 import { LinkPrimitive } from "../figma_app/496441";
-import { Gc } from "../905/63728";
+import { ignoreCommandOrShift } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
 import { h1 } from "../905/986103";
@@ -17,7 +17,7 @@ import { FFileType } from "../figma_app/191312";
 import { XG } from "../figma_app/350203";
 import { getPluginVersion } from "../figma_app/300692";
 import { ShelfViewType } from "../figma_app/45218";
-import { dt } from "../figma_app/162807";
+import { WidgetSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
 import { V } from "../905/480825";
 import { y2 } from "../905/776312";
@@ -44,34 +44,34 @@ function _(e) {
 }
 let $$D3 = {
   viewId: "search-private_plugins",
-  sortKeys: [dt.NAME, dt.AUTHOR_NAME, dt.UPDATED_AT, dt.INSTALL_COUNT, dt.RELEVANCY],
-  listSortKeys: [dt.NAME, dt.AUTHOR_NAME, dt.UPDATED_AT, dt.INSTALL_COUNT],
-  tabletListSortKeys: [dt.NAME, dt.INSTALL_COUNT],
-  mobileListSortKeys: [dt.NAME, dt.INSTALL_COUNT],
+  sortKeys: [WidgetSortField.NAME, WidgetSortField.AUTHOR_NAME, WidgetSortField.UPDATED_AT, WidgetSortField.INSTALL_COUNT, WidgetSortField.RELEVANCY],
+  listSortKeys: [WidgetSortField.NAME, WidgetSortField.AUTHOR_NAME, WidgetSortField.UPDATED_AT, WidgetSortField.INSTALL_COUNT],
+  tabletListSortKeys: [WidgetSortField.NAME, WidgetSortField.INSTALL_COUNT],
+  mobileListSortKeys: [WidgetSortField.NAME, WidgetSortField.INSTALL_COUNT],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [dt.NAME]: renderI18nText("search.sort_option.name"),
-      [dt.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
-      [dt.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
-      [dt.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
-      [dt.RELEVANCY]: renderI18nText("search.sort_option.relevance")
+      [WidgetSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [WidgetSortField.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [WidgetSortField.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [WidgetSortField.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [WidgetSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance")
     },
     [ViewMode.LIST]: {
-      [dt.NAME]: renderI18nText("search.sort_option.name"),
-      [dt.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
-      [dt.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
-      [dt.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
-      [dt.RELEVANCY]: renderI18nText("search.sort_option.relevance")
+      [WidgetSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [WidgetSortField.AUTHOR_NAME]: renderI18nText("search.sort_option.creator"),
+      [WidgetSortField.UPDATED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [WidgetSortField.INSTALL_COUNT]: renderI18nText("search.sort_option.saves"),
+      [WidgetSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
-      sortKey: dt.RELEVANCY,
+      sortKey: WidgetSortField.RELEVANCY,
       sortDesc: !1
     }
   },
-  includeSortDirection: e => -1 === [dt.RELEVANCY].indexOf(e),
+  includeSortDirection: e => -1 === [WidgetSortField.RELEVANCY].indexOf(e),
   settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$L2 = p_;
@@ -85,7 +85,7 @@ export function $$F1(e, t) {
   class t extends Component {
     constructor() {
       super(...arguments);
-      this.onPluginListRowClick = Gc(e => {
+      this.onPluginListRowClick = ignoreCommandOrShift(e => {
         e.preventDefault();
         this.props.onPluginListRowClick();
       });

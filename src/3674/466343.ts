@@ -16,7 +16,7 @@ import { J } from "../905/273120";
 import { UD, Jm, zr } from "../3674/371829";
 import { W as _$$W } from "../905/200727";
 import { renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { AutoLayout } from "../905/470281";
 import { Pf, H8 } from "../905/590952";
 import { Wi, JR } from "../figma_app/162641";
@@ -490,7 +490,7 @@ function W({
   if (isError) return null;
   let s = users.map(e => e.id).join(",");
   let d = users[0]?.name ?? "";
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Dev Mode Social Proof",
     properties: {
       devModeSocialProofAvatarUserIds: s,
@@ -577,7 +577,7 @@ export function $$X0({
     };
   }();
   let _ = "blocking modal" === p;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: capitalize(p),
     properties: {
       ...g,

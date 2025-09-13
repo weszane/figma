@@ -16,7 +16,7 @@ import { q3 } from "../figma_app/450829";
 import { aI5, ar0 } from "../figma_app/6204";
 import { trackEventAnalytics } from "../905/449184";
 import { FJ } from "../905/508367";
-import { vd, tM } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 let $$w = {
   SPOTLIGHT_GUIDE: "https://help.figma.com/hc/articles/5025214483351-Facilitate-meetings-with-spotlight",
@@ -32,11 +32,11 @@ function j(e) {
       children: e.content
     }), jsxs("div", {
       className: "multiplayer_nux_modals--footerContainer--I-MS-",
-      children: [jsx(vd, {
+      children: [jsx(ButtonBasePrimaryTracked, {
         className: "multiplayer_nux_modals--footerButton--TJL3G",
         onClick: e.primaryCTAOnClick,
         children: e.primaryCTA
-      }), jsx(tM, {
+      }), jsx(ButtonSecondaryTracked, {
         onClick: e.secondaryCTAOnClick,
         children: e.secondaryCTA
       })]

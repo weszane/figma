@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
 import { useSubscription } from "../figma_app/288654";
-import { vj } from "../figma_app/919079";
+import { BadgeSize } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
 import { BranchOpenMergeRequest } from "../figma_app/43951";
 let d = "branching_status_helpers--badgeIndicatorBase--MfU-L";
@@ -90,9 +90,9 @@ export function $$R3(e) {
   return jsx("div", {
     className: v,
     children: jsxs("div", {
-      className: `${l} ${size === vj.LARGE ? b : y}`,
+      className: `${l} ${size === BadgeSize.LARGE ? b : y}`,
       children: [jsx("span", {
-        className: `${a} ${size === vj.LARGE ? h : m}`
+        className: `${a} ${size === BadgeSize.LARGE ? h : m}`
       }), I]
     })
   });
@@ -156,9 +156,9 @@ export function $$P1({
   let I = jsx("div", {
     className: `${v} ${o ? "branching_status_helpers--branchStatusBadge--mmj-O" : void 0}`,
     children: jsxs("div", {
-      className: `${f} ${t === vj.LARGE ? b : y}`,
+      className: `${f} ${t === BadgeSize.LARGE ? b : y}`,
       children: [jsx("span", {
-        className: `${g} ${t === vj.LARGE ? h : m}`
+        className: `${g} ${t === BadgeSize.LARGE ? h : m}`
       }), A]
     })
   });

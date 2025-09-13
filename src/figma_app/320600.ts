@@ -13,7 +13,7 @@ import { Dm } from "../figma_app/8833";
 import { k$, gN, id, Dz } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
 import { n as _$$n2 } from "../figma_app/307143";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { d$ } from "../figma_app/291792";
 import { VU } from "../905/625959";
 import { jr, W0 } from "../figma_app/896988";
@@ -484,7 +484,7 @@ export class $$em1 extends Component {
   }
   render() {
     let e = this.transformMenuItems(this.props.menuItems);
-    return this.hasMenuValidItems() ? jsx(fu, {
+    return this.hasMenuValidItems() ? jsx(TrackingProvider, {
       name: e0.EDITOR_MENU,
       children: jsx(_$$j, {
         ref: this.multilevelDropdownRef,

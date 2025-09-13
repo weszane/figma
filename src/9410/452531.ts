@@ -6,7 +6,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { $z } from "../figma_app/831799";
+import { TrackedButton } from "../figma_app/831799";
 import { Lh, D8 } from "../figma_app/242339";
 import { wn, HQ, Le, zu, GF, NI, JJ } from "../figma_app/61403";
 import { Of } from "../figma_app/631279";
@@ -185,7 +185,7 @@ export function $$y0(e, t) {
         fromCursorBot: !0,
         getNodeToSelect: t ? () => WY(e => "TEXT" === e.type && (e.name === $j || "Grown in Tracy, CA" === e.name), getSingletonSceneGraph()) : () => n?.type === "TEXT" ? n : WY(e => "TEXT" === e.type, getSingletonSceneGraph()),
         isFollowUp: i.isFollowUp,
-        lowerLeftText: i.onClickBack ? jsx($z, {
+        lowerLeftText: i.onClickBack ? jsx(TrackedButton, {
           onClick: i.onClickBack,
           className: _$$s.textInherit.bgTransparent.$,
           trackingProperties: {

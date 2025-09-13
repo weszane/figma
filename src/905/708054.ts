@@ -2,18 +2,18 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { XHR } from "../905/910117";
-import { nR, $$, vd } from "../figma_app/637027";
+import { ButtonSecondary, ButtonBasePrimary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { v as _$$v } from "../905/755077";
 import { renderI18nText } from "../905/303541";
 import { aP, vQ } from "../figma_app/530167";
 import { sf } from "../905/929976";
 import { popModalStack, hideModal } from "../905/156213";
 import { s0, ZO } from "../figma_app/350203";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { GH, aF } from "../905/18797";
 import { e0 } from "../905/696396";
 import { registerLegacyModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 function y() {
   return jsxs("svg", {
     width: "1024",
@@ -1564,20 +1564,20 @@ let w = class e extends Component {
   }
   renderFooterCTAs() {
     return 0 !== this.state.step ? jsxs(Fragment, {
-      children: [jsx(nR, {
+      children: [jsx(ButtonSecondary, {
         onClick: this.navigateToProfileWithHandle,
         children: renderI18nText("community.change_profile_handle_modal.view_profile")
-      }), jsx($$, {
+      }), jsx(ButtonBasePrimary, {
         type: "submit",
         onClick: () => this.props.dispatch(popModalStack()),
         className: x,
         children: renderI18nText("general.done")
       })]
     }) : this.props.profileId ? jsxs(Fragment, {
-      children: [jsx(nR, {
+      children: [jsx(ButtonSecondary, {
         onClick: () => this.props.dispatch(popModalStack()),
         children: renderI18nText("general.cancel")
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         type: "submit",
         onClick: this.onChangeSubmit,
         className: x,
@@ -1590,10 +1590,10 @@ let w = class e extends Component {
         children: renderI18nText("community.change_profile_handle_modal.change_handle")
       })]
     }) : jsxs(Fragment, {
-      children: [jsx(nR, {
+      children: [jsx(ButtonSecondary, {
         onClick: () => this.props.dispatch(popModalStack()),
         children: renderI18nText("general.cancel")
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         type: "submit",
         onClick: this.onSubmit,
         className: x,
@@ -1614,11 +1614,11 @@ let w = class e extends Component {
     let t = this.props.emailValidatedAt ? jsxs(Fragment, {
       children: [this.renderTitle(), this.renderContent()]
     }) : this.renderUnvalidatedAccount(this.state.validateEmailSent, this.props.userEmail);
-    return jsx(d_, {
+    return jsx(ModalContainer, {
       size: "medium",
       className: "change_profile_handle--handleModal--VvHfq modal--modalShadow--d-rJf",
       popStack: !0,
-      children: jsxs(fu, {
+      children: jsxs(TrackingProvider, {
         name: e0.PROFILE_CREATE_MODAL,
         properties: e,
         children: [jsx("div", {

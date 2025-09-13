@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
-import { ks, N_ } from "../figma_app/637027";
+import { BigTextInputForwardRef, BaseLinkComponent } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { vr } from "../figma_app/740025";
 import { s as _$$s2 } from "../905/608932";
@@ -49,7 +49,7 @@ export function $$c0(e) {
     className: "profile_handle--handleWrapper--AbnOd text--fontPos11--2LvXf text--_fontBase--QdLsd",
     children: [jsxs("div", {
       className: "profile_handle--handleContainer--hihCL",
-      children: [jsx(ks, {
+      children: [jsx(BigTextInputForwardRef, {
         autoComplete: "off",
         autoFocus: !0,
         className: "profile_handle--regularTextInputUI3--3Zxz5",
@@ -82,7 +82,7 @@ export function $$c0(e) {
       }), jsx("div", {
         className: "profile_handle--handleText--es9hl",
         children: renderI18nText("community.change_profile_handle_modal.profile_handle_requirements")
-      }), jsx(N_, {
+      }), jsx(BaseLinkComponent, {
         className: "profile_handle--communityGuidelinesLink--lqfL1",
         href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
         target: "_blank",

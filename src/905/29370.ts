@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { registerLegacyModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { Vq } from "../figma_app/639088";
 export let $$d0 = "team-folder-move-confirm-modal";
 registerLegacyModal($$d0, e => jsx(c, {
@@ -14,7 +14,7 @@ class c extends Component {
     let t = e.data.folder;
     let i = this.props.teams[t.teamId];
     let r = e.data.destinationTeam;
-    return jsx(yX, {
+    return jsx(ConfirmationModal2, {
       content: renderI18nText("file_browser.team_folder_move.content", {
         folderName: jsx("span", {
           className: Vq,

@@ -3,12 +3,12 @@ import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { tM, $$, vd, Us } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonBasePrimary, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { D as _$$D } from "../905/251759";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { vr, _Z, B9, LN } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
@@ -153,7 +153,7 @@ function G() {
         className: "enterprise_plan_banner--bannerTextBody--MlQOd",
         children: renderI18nText("universal_upgrade.enterpise_plan_banner.banner_body_text")
       })]
-    }), jsx(tM, {
+    }), jsx(ButtonSecondaryTracked, {
       className: "enterprise_plan_banner--contactSalesCTA--WGqtx",
       onClick: () => e(showModalHandler({
         type: lk,
@@ -366,7 +366,7 @@ function eo({
   let c = useSelector(e => e.teamCreation.loading);
   if (s && !t) {
     let t = o === UpsellModalType.CREATE_NEW_PAID_TEAM;
-    return jsx($$, {
+    return jsx(ButtonBasePrimary, {
       className: ei,
       "data-testid": `plan-information-${e}-button`,
       "data-tooltip": t ? getI18nString("plan_comparison.plans.starter.you_already_have_a_starter_team") : void 0,
@@ -399,7 +399,7 @@ function eo({
       }
     }))
   };
-  let A = h ? tM : vd;
+  let A = h ? ButtonSecondaryTracked : ButtonBasePrimaryTracked;
   return jsx(A, {
     style: _$$sx.wFull.h32.$,
     className: ei,
@@ -430,7 +430,7 @@ function el({
     className: _$$s.alignCenter.$,
     children: [canContactSales && jsx("p", {
       children: renderI18nText("plan_comparison.plans.or_contact_sales", {
-        contactSalesLink: jsx(Us, {
+        contactSalesLink: jsx(linkWithTracking, {
           className: _$$s.noWrap.cursorDefault.$,
           onClick: () => i(showModalHandler({
             type: lk,
@@ -444,7 +444,7 @@ function el({
         })
       })
     }), !!t && jsx("p", {
-      children: jsx(Us, {
+      children: jsx(linkWithTracking, {
         onClick: t,
         "data-testid": "plan-information-upgrade-existing",
         trackingProperties: {
@@ -540,7 +540,7 @@ export function $$em0({
       }
     }) : null;
   }(E);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: T,
     properties: {
       highlightedPlan,
@@ -712,7 +712,7 @@ function eg({
   });
 }
 function ef(e) {
-  return jsx(Us, {
+  return jsx(linkWithTracking, {
     className: "comparison_chart--allFeaturesLink--XNOLR",
     href: PRICING_URL,
     target: "_blank",

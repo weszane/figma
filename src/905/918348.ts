@@ -12,7 +12,7 @@ import { zL } from "../905/294543";
 import { S as _$$S } from "../905/491708";
 import { px } from "../905/201014";
 import { JG } from "../figma_app/852050";
-import { le } from "../figma_app/415217";
+import { sendGeneratedCode } from "../figma_app/415217";
 import { useCounter } from "../905/949750";
 import { d as _$$d } from "../905/485888";
 import { Z0 } from "../905/195478";
@@ -99,7 +99,7 @@ export function $$E0({
         T(d);
         i(d.code);
         I(r.stop(), o);
-        le(s.map(e => ({
+        sendGeneratedCode(s.map(e => ({
           code: e.code,
           language: e.language
         })));

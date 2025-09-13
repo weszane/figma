@@ -49,7 +49,7 @@ class EventEmitter {
    * Original: handleEvent
    * @param event - The event object with an id property.
    */
-  handleEvent(event: { id: string }): void {
+  handleEvent(event: ObjectOf): void {
     const listeners = this.listenerMap.get(event.id)
     if (listeners) {
       listeners.forEach((listener) => {
@@ -72,7 +72,7 @@ export const eventEmitterAtom = atom(() => new EventEmitter())
  * Original: $$s0
  * @param event - The event to handle.
  */
-export function handleAtomEvent(event: { id: string }): void {
+export function handleAtomEvent(event: ObjectOf): void {
   atomStoreManager.get(eventEmitterAtom).handleEvent(event)
 }
 

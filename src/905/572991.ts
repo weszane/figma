@@ -3,7 +3,7 @@ import { Component, createElement } from "react";
 import { connect } from "react-redux";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { _M, W_ } from "../figma_app/162807";
+import { RelevancySortField, WidgetRelevancySortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
 import { F9 } from "../905/636775";
 import { h as _$$h } from "../905/971482";
@@ -14,22 +14,22 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
 (e => {
   e.viewBarConfig = {
     viewId: "search-public_widgets",
-    sortKeys: [_M.RELEVANCY],
-    listSortKeys: [_M.RELEVANCY],
-    mobileListSortKeys: [_M.RELEVANCY],
-    tabletListSortKeys: [_M.RELEVANCY],
+    sortKeys: [RelevancySortField.RELEVANCY],
+    listSortKeys: [RelevancySortField.RELEVANCY],
+    mobileListSortKeys: [RelevancySortField.RELEVANCY],
+    tabletListSortKeys: [RelevancySortField.RELEVANCY],
     sortKeyDescriptions: {
       [ViewMode.GRID]: {
-        [_M.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
+        [RelevancySortField.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       },
       [ViewMode.LIST]: {
-        [_M.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
+        [RelevancySortField.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       }
     },
     defaultOptions: {
       viewMode: ViewMode.GRID,
       sortMode: {
-        sortKey: _M.RELEVANCY,
+        sortKey: RelevancySortField.RELEVANCY,
         sortDesc: !0
       },
       shouldShowPlanFilter: !1
@@ -45,22 +45,22 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
 (e => {
   e.viewBarConfig = {
     viewId: "search-private_widgets",
-    sortKeys: [W_.RELEVANCY],
-    listSortKeys: [W_.RELEVANCY],
-    mobileListSortKeys: [W_.RELEVANCY],
-    tabletListSortKeys: [W_.RELEVANCY],
+    sortKeys: [WidgetRelevancySortField.RELEVANCY],
+    listSortKeys: [WidgetRelevancySortField.RELEVANCY],
+    mobileListSortKeys: [WidgetRelevancySortField.RELEVANCY],
+    tabletListSortKeys: [WidgetRelevancySortField.RELEVANCY],
     sortKeyDescriptions: {
       [ViewMode.GRID]: {
-        [W_.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
+        [WidgetRelevancySortField.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       },
       [ViewMode.LIST]: {
-        [W_.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
+        [WidgetRelevancySortField.RELEVANCY]: renderI18nText("search.sort_option.relevancy")
       }
     },
     defaultOptions: {
       viewMode: ViewMode.GRID,
       sortMode: {
-        sortKey: W_.RELEVANCY,
+        sortKey: WidgetRelevancySortField.RELEVANCY,
         sortDesc: !0
       }
     },

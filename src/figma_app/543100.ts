@@ -6,13 +6,13 @@ import { resourceUtils } from "../905/989992";
 import { getResourceDataOrFallback } from "../905/723791";
 import { findBestBranch, getDisplayNameAlt, findBranchById, generateUrl, hasPassword } from "../905/760074";
 import { fileEntityDataMapper } from "../905/943101";
-import { Z } from "../905/190310";
+import { TrackTagsMapper } from "../905/190310";
 import { FEntityType, FFileType } from "../figma_app/191312";
 import { FileCanView, RepoCanView, PrototypeCanView } from "../figma_app/43951";
 import { F as _$$F } from "../905/915030";
 import { I4 } from "../figma_app/840917";
 import { Ph, Uj, i4 } from "../905/862913";
-import { to, jN, rl } from "../905/612685";
+import { getDesignFileUrlWithOptions, buildFileUrl, getDesignFileUrl } from "../905/612685";
 var $$E8 = (e => (e.FILE = "FILE", e.PROTOTYPE = "PROTOTYPE", e.REPO = "REPO", e.PINNED_FILE = "PINNED_FILE", e.OFFLINE_FILE = "OFFLINE_FILE", e))($$E8 || {});
 export function $$y5(e, t) {
   return {
@@ -20,7 +20,7 @@ export function $$y5(e, t) {
     file: {
       ...fileEntityDataMapper.toLiveGraph(e),
       owner: e.owner,
-      trackTags: e.track_tags ? Z.toLiveGraph(e.track_tags) : null,
+      trackTags: e.track_tags ? TrackTagsMapper.toLiveGraph(e.track_tags) : null,
       UserFileRecentAny: e.accessed_at ? {
         actionAt: new Date(e.accessed_at)
       } : void 0
@@ -271,9 +271,9 @@ export class $$x1 {
   static getUrl(e, t) {
     switch (e.type) {
       case "FILE":
-        return to(e.file);
+        return getDesignFileUrlWithOptions(e.file);
       case "PINNED_FILE":
-        return jN(e);
+        return buildFileUrl(e);
       case "PROTOTYPE":
         return e.prototype.url;
       case "REPO":
@@ -288,9 +288,9 @@ export class $$x1 {
   static getEditUrl(e, t) {
     switch (e.type) {
       case "FILE":
-        return rl(e.file);
+        return getDesignFileUrl(e.file);
       case "PINNED_FILE":
-        return jN({
+        return buildFileUrl({
           ...e,
           allowDefaulting: !0
         });
@@ -298,7 +298,7 @@ export class $$x1 {
         return e.prototype.url;
       case "REPO":
         let r = findBranchById(e.repo, e.branches, t);
-        return r ? rl(r) : "";
+        return r ? getDesignFileUrl(r) : "";
       case "OFFLINE_FILE":
         return "";
       default:

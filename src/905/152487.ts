@@ -6,8 +6,8 @@ import { J } from "../905/614223";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { s as _$$s } from "../cssbuilder/589278";
 import { b } from "../905/985254";
-import { fu } from "../figma_app/831799";
-import { K } from "../905/135526";
+import { TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
 import { Q } from "../905/717951";
 export function $$g0(e) {
@@ -30,10 +30,10 @@ export function $$g0(e) {
   }, [g, e.userFlagOnShow, isShowing]);
   return isShowing ? jsx(Q, {
     dataFullscreenIntercept: e.dataFullscreenIntercept,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Onboarding Sequence",
       properties: y,
-      trackingTargets: K.NONE,
+      trackingTargets: RCSMessageType.NONE,
       ignoreParent: !0,
       children: jsx(EventShield, {
         eventListeners: ["onClick"],

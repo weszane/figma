@@ -8,7 +8,7 @@ import { x as _$$x } from "../905/764527";
 import { permissionScopeHandler } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { getI18nString } from "../905/303541";
 import { formatI18nMessage } from "../905/482208";
@@ -280,30 +280,30 @@ export function $$V14() {
       return;
     }
     if (e) switch (a.keyCode) {
-      case Uz.ESCAPE:
+      case KeyCodes.ESCAPE:
         t(!1);
         r(null);
         break;
-      case Uz.DOWN_ARROW:
+      case KeyCodes.DOWN_ARROW:
         null === i ? r(0) : i + 1 < s.length && r(i + 1);
         break;
-      case Uz.UP_ARROW:
+      case KeyCodes.UP_ARROW:
         null === i ? r(s.length - 1) : i - 1 >= 0 && r(i - 1);
         break;
-      case Uz.RIGHT_ARROW:
+      case KeyCodes.RIGHT_ARROW:
         null === i && r(0);
         break;
-      case Uz.LEFT_ARROW:
+      case KeyCodes.LEFT_ARROW:
         r(null);
         t(!1);
         break;
-      case Uz.ENTER:
+      case KeyCodes.ENTER:
         null !== i && i < s.length && (a.preventDefault(), a.stopPropagation(), o(s[i]));
     } else if (n) switch (a.keyCode) {
-      case Uz.RIGHT_ARROW:
+      case KeyCodes.RIGHT_ARROW:
         t(!0);
         break;
-      case Uz.LEFT_ARROW:
+      case KeyCodes.LEFT_ARROW:
         t(!1);
         break;
       default:

@@ -21,7 +21,7 @@ import { nX } from "../figma_app/336853";
 import { Np, xS, Tk } from "../figma_app/193867";
 import { Eq } from "../figma_app/598018";
 import { M8 } from "../figma_app/915202";
-import { O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { v as _$$v } from "../905/906499";
 import { createOptimistThunk } from "../905/350402";
 let $$w18 = createActionCreator("CLEAR_SELECTED_VIEW_COMMENT_ID");
@@ -190,12 +190,12 @@ let $$eA35 = createOptimistThunk((e, t) => {
     view: "recentsAndSharing"
   };
   if (openFile && selectedView) {
-    if ("fullscreen" === selectedView.view && r.lastVisitedPlan && r.lastVisitedPlan.planId !== (r.lastVisitedPlan.planType === O.ORG ? openFile?.parentOrgId : openFile?.teamId)) {
+    if ("fullscreen" === selectedView.view && r.lastVisitedPlan && r.lastVisitedPlan.planId !== (r.lastVisitedPlan.planType === OrganizationType.ORG ? openFile?.parentOrgId : openFile?.teamId)) {
       let e = xS(r, p);
       selectedView.prevSelectedView && (e = xS(r, selectedView.prevSelectedView));
       let t = nX(e);
       let n = Eq(e);
-      (t || n) && (e = Tk(e, t ? O.ORG : O.TEAM, t || n, r.lastVisitedPlan.planType, r.lastVisitedPlan.planId));
+      (t || n) && (e = Tk(e, t ? OrganizationType.ORG : OrganizationType.TEAM, t || n, r.lastVisitedPlan.planType, r.lastVisitedPlan.planId));
       customHistory.redirect(e);
       return;
     }

@@ -4,7 +4,7 @@ import i, { i as _$$i } from "../905/97346";
 import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { l as _$$l } from "../905/745972";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { r as _$$r } from "../905/520829";
 import { sx } from "../905/941192";
 import { Oz, Lp, sg, wc, tH } from "../905/251509";
@@ -45,7 +45,7 @@ import { A as _$$A2 } from "../f2246930/129503";
 import { A as _$$A3 } from "../6828/718668";
 import { o as _$$o } from "../905/153787";
 import { P as _$$P } from "../905/625912";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { e as _$$e } from "../9831/266717";
 import { A as _$$A4 } from "../1617/380980";
 import { A as _$$A5 } from "../f2246930/458609";
@@ -965,20 +965,20 @@ function e1({
         height: "hug-contents",
         verticalAlignItems: "start",
         children: [jsxs("span", {
-          children: ["Snapshot of", " ", jsx(CY, {
+          children: ["Snapshot of", " ", jsx(SecureLink, {
             onClick: () => i(r.object.id),
             className: _$$s.colorTextFigjam.fontSemiBold.$,
             trusted: !0,
             children: r.object.displayProperties.name
           }), r.type === Lp.Tree && " and full subtree", " was taken at", " ", r.time.toLocaleTimeString("en-US")]
-        }), jsx(CY, {
+        }), jsx(SecureLink, {
           onClick: () => s({
             type: "refresh"
           }),
           className: _$$s.colorTextDesign.$,
           trusted: !0,
           children: "Refresh"
-        }), jsx(CY, {
+        }), jsx(SecureLink, {
           onClick: () => s({
             type: "clear"
           }),
@@ -1107,10 +1107,10 @@ function e9({
   let E = Xr(JN);
   let D = useCallback(e => {
     let t = f.current;
-    document.activeElement !== t && (e.keyCode === Uz.FORWARD_SLASH && t ? (t.focus(), e.preventDefault()) : e.keyCode === Uz.BRACKET_LEFT ? (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
+    document.activeElement !== t && (e.keyCode === KeyCodes.FORWARD_SLASH && t ? (t.focus(), e.preventDefault()) : e.keyCode === KeyCodes.BRACKET_LEFT ? (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
       direction: "prev",
       source: "keyboard"
-    }), k()) : e.keyCode === Uz.BRACKET_RIGHT && (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
+    }), k()) : e.keyCode === KeyCodes.BRACKET_RIGHT && (analyticsEventManager.trackDefinedEvent("figmascope.select_prev_next", {
       direction: "next",
       source: "keyboard"
     }), E()));

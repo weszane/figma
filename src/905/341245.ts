@@ -1,6 +1,6 @@
 import { useId, useCallback, useRef, useEffect } from "react";
 import { Xr } from "../figma_app/27355";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { TT, Bw } from "../figma_app/604494";
 import { TH } from "../figma_app/171177";
 export function $$l1({
@@ -75,7 +75,7 @@ export function $$d0({
   active: i
 }) {
   TH(e?.shortcuts ?? [{
-    key: Uz.ENTER
+    key: KeyCodes.ENTER
   }], (i, n) => {
     e && e.onAction && (e.allowDefault || i.preventDefault(), e.onAction({
       shortcut: n,

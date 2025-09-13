@@ -1,14 +1,14 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Ph } from "../figma_app/637027";
+import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { I } from "../c5e2cae0/718426";
 import { sx } from "../figma_app/307841";
 import { Dw } from "../figma_app/976345";
 import { hideModal } from "../905/156213";
 import { Vm } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
 import { getEditableUnpaidTeams } from "../figma_app/345997";
 import { OJ } from "../905/519092";
@@ -22,7 +22,7 @@ function h({
       isEduTeam: !0
     }));
   }, [t, e]);
-  return jsx(Ph, {
+  return jsx(clickableBaseLinkTracked, {
     className: "edu_upgrade_modal--createTeamLink--CbJUX edu_upgrade_modal--link--Toy9f",
     onClick: r,
     trusted: !0,
@@ -48,7 +48,7 @@ export function $$x0() {
       isEduTeam: !0
     })));
   }, [t, v.length, x, r]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Edu Team Upgrade Modal",
     children: jsx(OJ, {
       title: getI18nString("edu.upgrade_teams.headline"),
@@ -58,7 +58,7 @@ export function $$x0() {
         children: [jsxs("p", {
           className: "edu_upgrade_modal--bodyText--BXu7I",
           children: [renderI18nText("edu.upgrade_teams.body", {
-            link: jsx(Ph, {
+            link: jsx(clickableBaseLinkTracked, {
               className: "edu_upgrade_modal--link--Toy9f",
               href: "/pricing",
               target: "_blank",

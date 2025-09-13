@@ -7,7 +7,7 @@ import l from "classnames";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { sz } from "../figma_app/216696";
 import { Qx, Dm } from "../figma_app/8833";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { u2 } from "../figma_app/223206";
 import { D as _$$D } from "../905/12032";
 import { r1 } from "../figma_app/545877";
@@ -32,7 +32,7 @@ import { l as _$$l } from "../9410/430547";
 import { Y } from "../905/1768";
 import { q } from "../9410/847736";
 import { s as _$$s } from "../cssbuilder/589278";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { vN, Jn, S7 } from "../7222/396421";
 import { uRR, M$q } from "../figma_app/27776";
 import { Ei, q7, VZ } from "../figma_app/60023";
@@ -46,7 +46,7 @@ function G({
     canDismiss,
     maybeUseLightTemplateOnDismiss
   } = vN();
-  return jsx(d_, {
+  return jsx(ModalContainer, {
     className: d()("slides_template_modal--templateModal--GmDGm", Qx),
     size: parsePxInt(uRR),
     onHide: maybeUseLightTemplateOnDismiss,
@@ -84,7 +84,7 @@ export function $$V1() {
     }));
   }, [f?.id, m]), !e) return null;
   let b = l ? 70 + s : parsePxNumber(M$q) + s;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Slides Template Picker",
     children: jsx("div", {
       className: d()(ij, Dm),
@@ -119,7 +119,7 @@ export function $$W0() {
   } = wj(JT.BOARD_TO_DECK);
   let x = useCurrentFileKey();
   let y = wd();
-  return a || p && p.fileKey && !a || e || !c || y || !l || t || i || n || d && !u || state === qy.RUNNING ? null : jsx(fu, {
+  return a || p && p.fileKey && !a || e || !c || y || !l || t || i || n || d && !u || state === qy.RUNNING ? null : jsx(TrackingProvider, {
     name: "Slides Template Overlay Modal",
     properties: {
       productType: "slides",

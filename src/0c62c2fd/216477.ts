@@ -6,7 +6,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { useSubscription } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { BlockConnectedFileMove } from "../figma_app/43951";
 import { Yw } from "../905/615608";
 export function $$p0(e) {
@@ -16,7 +16,7 @@ export function $$p0(e) {
   });
   let p = r?.data?.file?.project?.name;
   let f = r?.data?.file?.plan?.name;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Block Connected File Move Modal",
     children: jsx(ModalRootComponent, {
       manager: t,

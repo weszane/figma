@@ -6,15 +6,15 @@ import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback, Xm, gB } from "../905/723791";
 import { getAtomMutate } from "../figma_app/566371";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { ms, c$, wv } from "../figma_app/236327";
-import { ks, $$, nR, vd } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonBasePrimary, ButtonSecondary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { p as _$$p } from "../905/991924";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
@@ -29,20 +29,20 @@ import { sf, j7 } from "../905/929976";
 import { iK, HK, CU, xH, OT, t3, Pb, Mi, w3, EN, Dp, hq, Ww, zv, TL, qb, YG, qM, Mn, JG } from "../905/586954";
 import { z as _$$z } from "../905/404751";
 import { hideModal, popModalStack, showModalHandler, hideSpecificModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
 import { FFileType, FAccessLevelType, FPlanFeatureType, FPaymentHealthStatusType, FPlanRestrictionType } from "../figma_app/191312";
-import { Um, aU } from "../figma_app/349248";
+import { mapUserProperties, mapResourceAccess } from "../figma_app/349248";
 import { AccountTypeEnum } from "../figma_app/35887";
 import { AccessLevelEnum } from "../905/557142";
-import { VA, gj, CI, jd } from "../figma_app/528509";
+import { hasRootPathOptional, findOwnerFolder, getSidebarPath, isTeamFolderV2 } from "../figma_app/528509";
 import { z as _$$z2 } from "../905/875422";
 import { MoveFileCurrentProject, AccessibleFoldersV2, TeamFileCountsByTeamId } from "../figma_app/43951";
 import { K as _$$K } from "../figma_app/193867";
 import { n$, Cz, aW, sK } from "../figma_app/598018";
 import { b as _$$b, A as _$$A } from "../figma_app/965813";
 import { X as _$$X } from "../905/698965";
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
 import { e0 as _$$e2 } from "../905/696396";
 import { createNoOpValidator } from "../figma_app/181241";
@@ -115,7 +115,7 @@ function ei(e) {
     children: [jsx("div", {
       className: "page_move--fileCreateNameSvgContainer--nm5eH",
       children: jsx(_$$v, {})
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       value: e.newFileName,
       onChange: e.onChange,
       maxLength: 255,
@@ -133,13 +133,13 @@ function el({
   fileKey: s,
   upgradeReason: i
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Viewer Upgrade Awareness Banner",
     properties: {
       entryPoint: i,
       fileKey: s,
-      orgId: t === _$$O.ORG ? r : void 0,
-      teamId: t === _$$O.ORG ? void 0 : r
+      orgId: t === OrganizationType.ORG ? r : void 0,
+      teamId: t === OrganizationType.ORG ? void 0 : r
     },
     children: jsx("div", {
       className: i === eo.MOVE_DRAFT ? _$$s.pt8.pb4.px8.$ : void 0,
@@ -154,7 +154,7 @@ function el({
             children: function (e, t, r) {
               switch (r) {
                 case eo.SHARE_DRAFT:
-                  if (t === _$$O.ORG) {
+                  if (t === OrganizationType.ORG) {
                     if (e) return renderI18nText("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_org", {
                       planName: e
                     });
@@ -165,7 +165,7 @@ function el({
                   });
                   return renderI18nText("viewer_upgrade_awareness.sharing_a_draft_will_move_you_to_a_paid_seat_in_your_team");
                 case eo.MOVE_DRAFT:
-                  if (t === _$$O.ORG) {
+                  if (t === OrganizationType.ORG) {
                     if (e) return renderI18nText("viewer_upgrade_awareness.moving_a_draft_will_change_you_to_a_paid_seat_org", {
                       planName: e
                     });
@@ -191,14 +191,14 @@ let ev = new KH({
   threshold: .3,
   tokenize: !0
 });
-let ey = (e, t, r, a, s) => !(e.orgId !== s && t?.orgId !== s || !e.canEdit || t && hasProjectRestrictions(e, t, r) && !VA(e)) && (!a || !!hasTeamStatePaidAccess(t));
+let ey = (e, t, r, a, s) => !(e.orgId !== s && t?.orgId !== s || !e.canEdit || t && hasProjectRestrictions(e, t, r) && !hasRootPathOptional(e)) && (!a || !!hasTeamStatePaidAccess(t));
 let ew = (e, t, r) => !r || !!hasTeamStatePaidAccess(e);
 let ej = (e, t = !1) => {
   let r = [];
   Object.keys(e.folders).forEach(a => {
     let s = e.folders[a];
     let i = s.teamId ? e.teams[s.teamId] : null;
-    ey(s, i, e.user, t, e.orgId) && (VA(s) && (s = {
+    ey(s, i, e.user, t, e.orgId) && (hasRootPathOptional(s) && (s = {
       ...s,
       path: getDraftsSidebarString()
     }), r.push(s));
@@ -234,7 +234,7 @@ let eT = ({
   let u = Object.create(null);
   let m = 0;
   let _ = 0;
-  let p = gj(r && r.id, e, t.byFolderId, r && i ? a[i][r.id] : null);
+  let p = findOwnerFolder(r && r.id, e, t.byFolderId, r && i ? a[i][r.id] : null);
   for (let e in u[HK] = [], u[iK] = [], t.byTeamId) ew(s[e], r, l) && (_++, u[e] = []);
   n && n.forEach(e => {
     ew(s[e], r, l) && (_++, u[e] = []);
@@ -245,12 +245,12 @@ let eT = ({
     };
     let n = ey(a, a.teamId ? s[a.teamId] : null, r, l, i);
     if (getFeatureFlags().file_move_show_all_resources) {
-      if (n && (!d || a.subscription || VA(a))) {
+      if (n && (!d || a.subscription || hasRootPathOptional(a))) {
         let e = a.teamId ? s[a.teamId] : null;
         u[p && a.id === p.id ? HK : eb(e)].push(a);
         m++;
       }
-    } else if (n && (a.subscription || VA(a))) {
+    } else if (n && (a.subscription || hasRootPathOptional(a))) {
       let e = a.teamId ? s[a.teamId] : null;
       u[p && a.id === p.id ? HK : eb(e)].push(a);
       m++;
@@ -311,7 +311,7 @@ let eI = (e, t, r) => {
   let i = 0;
   let n = 0;
   let o = t.orgId && t.user ? t.orgUsers[t.orgId][t.user.id] : null;
-  let l = gj(t.user ? t.user.id : null, t.folders, t.roles.byFolderId, o);
+  let l = findOwnerFolder(t.user ? t.user.id : null, t.folders, t.roles.byFolderId, o);
   for (let r of e) {
     let e = r.item.folder;
     let o = l && e.id === l.id ? 0 : r.score;
@@ -468,7 +468,7 @@ function eH(e) {
           })
         }), jsx("div", {
           className: "file_move--newTeamTitleText--cax1f file_move--teamTitleText--4XOM- ellipsis--ellipsis--Tjyfa",
-          children: jsx(ks, {
+          children: jsx(BigTextInputForwardRef, {
             value: r || "",
             onChange: e => {
               n(e.target.value);
@@ -492,7 +492,7 @@ export function $$e48(e) {
   return "folder" === e.view || _$$K(e) ? "_self" : "_blank";
 }
 export function $$e29(e) {
-  return !!e.subscription || VA(e);
+  return !!e.subscription || hasRootPathOptional(e);
 }
 export function $$e57(e) {
   switch (e.type) {
@@ -542,7 +542,7 @@ export function $$e83(e) {
         byFolderId: {},
         byTeamId: {}
       };
-      let d = Um(e.currentUser);
+      let d = mapUserProperties(e.currentUser);
       let c = [];
       let u = e => {
         n[e.id] = {
@@ -585,7 +585,7 @@ export function $$e83(e) {
           }
         };
         e.draftsProject && (u(e.draftsProject), e.draftsProject.ownerRole && (l.byFolderId[e.draftsProject.id] = {
-          [s.id]: aU(e.draftsProject.ownerRole, d, null, null)
+          [s.id]: mapResourceAccess(e.draftsProject.ownerRole, d, null, null)
         }));
       });
       e.currentUser.teamEditRoles && e.currentUser.teamEditRoles.forEach(e => {
@@ -603,7 +603,7 @@ export function $$e83(e) {
           licenseGroup: null
         };
         l.byTeamId[id] = {
-          [s.id]: aU(e, d, null, null)
+          [s.id]: mapResourceAccess(e, d, null, null)
         };
         projects && projects.forEach(e => u(e));
       });
@@ -650,16 +650,16 @@ export function $$e83(e) {
           currentTeamUser: e.team.currentTeamUser,
           licenseGroup: null
         }, l.byTeamId[id] = {
-          [s.id]: aU(e, d, null, null)
+          [s.id]: mapResourceAccess(e, d, null, null)
         });
       });
       e.currentUser.projectEditRoles && e.currentUser.projectEditRoles.forEach(e => {
         e.project && (u(e.project), l.byFolderId[e.project.id] = {
-          [s.id]: aU(e, d, null, null)
+          [s.id]: mapResourceAccess(e, d, null, null)
         });
       });
       e.currentUser.draftsProject && (u(e.currentUser.draftsProject), e.currentUser.draftsProject.ownerRole && (l.byFolderId[e.currentUser.draftsProject.id] = {
-        [s.id]: aU(e.currentUser.draftsProject.ownerRole, d, null, null)
+        [s.id]: mapResourceAccess(e.currentUser.draftsProject.ownerRole, d, null, null)
       }));
       return {
         org: m,
@@ -786,18 +786,18 @@ export class $$e32 extends PureComponent {
         userResources
       } = this.props.userResources;
       switch (e.keyCode) {
-        case Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           this.onClose();
           break;
-        case Uz.UP_ARROW:
+        case KeyCodes.UP_ARROW:
           this.props.dispatch(zv());
           break;
-        case Uz.DOWN_ARROW:
+        case KeyCodes.DOWN_ARROW:
           this.props.fileMove.indexCount && this.props.dispatch(TL({
             upperBound: this.props.fileMove.indexCount
           }));
           break;
-        case Uz.ENTER:
+        case KeyCodes.ENTER:
           {
             if (-1 === this.props.fileMove.focusedIndex) return;
             let e = this.props.fileMove.folderRows[this.props.fileMove.focusedIndex];
@@ -863,7 +863,7 @@ export class $$e32 extends PureComponent {
         return;
       }
       let i = this.props.fileMoveData;
-      if (i.type === _$$A.FILE && i.file.is_team_template && VA(e)) {
+      if (i.type === _$$A.FILE && i.file.is_team_template && hasRootPathOptional(e)) {
         this.props.dispatch(showModalHandler({
           type: X0,
           data: {
@@ -983,7 +983,7 @@ export class $$e32 extends PureComponent {
       let {
         userResources
       } = this.props.userResources;
-      if (!VA(t) || VA(r)) return null;
+      if (!hasRootPathOptional(t) || hasRootPathOptional(r)) return null;
       let i = this.props.fileMoveData.type === _$$A.FILE ? this.props.fileMoveData.fileKey : "";
       if (userResources.orgId) {
         if (userResources.org?.k12GoogleOrg) return null;
@@ -992,7 +992,7 @@ export class $$e32 extends PureComponent {
         let n = !1;
         if (e === FFileType.DESIGN ? n = r?.design_paid_status === FPlanFeatureType.STARTER : e === FFileType.WHITEBOARD && (n = r?.whiteboard_paid_status === FPlanFeatureType.STARTER), n) return jsx(el, {
           planName: this.props.currentOrg?.name,
-          planType: _$$O.ORG,
+          planType: OrganizationType.ORG,
           planId: userResources.orgId,
           fileKey: i,
           upgradeReason: eo.MOVE_DRAFT
@@ -1004,7 +1004,7 @@ export class $$e32 extends PureComponent {
           let t = !1;
           if (e === FFileType.DESIGN ? t = n.currentTeamUser?.designPaidStatus === FPlanRestrictionType.STARTER : e === FFileType.WHITEBOARD && (t = n.currentTeamUser?.whiteboardPaidStatus === FPlanRestrictionType.STARTER), t) return jsx(el, {
             planName: n.name,
-            planType: _$$O.TEAM,
+            planType: OrganizationType.TEAM,
             planId: n.id,
             fileKey: i,
             upgradeReason: eo.MOVE_DRAFT
@@ -1107,7 +1107,7 @@ export class $$e32 extends PureComponent {
       default:
         throwTypeError(_);
     }
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: _$$e2.FILE_MOVE_MODAL,
       properties: t,
       children: jsxs(OJ, {
@@ -1129,7 +1129,7 @@ export class $$e32 extends PureComponent {
               children: renderI18nText("file_browser.file_move.zero_state")
             }), this.props.currentOrg && jsx("div", {
               className: _$$s.pt20.$,
-              children: jsx($$, {
+              children: jsx(ButtonBasePrimary, {
                 onClick: this.onOrgViewLinkClick,
                 children: this.props.currentOrg.bigma_enabled ? getI18nString("file_browser.file_move.view_workspaces") : getI18nString("file_browser.file_move.view_teams")
               })
@@ -1191,10 +1191,10 @@ export class $$e32 extends PureComponent {
             })
           }), jsxs("div", {
             className: "file_move--footer--pBClJ",
-            children: [jsx(nR, {
+            children: [jsx(ButtonSecondary, {
               onClick: this.onClose,
               children: renderI18nText("modal.cancel")
-            }), jsx(vd, {
+            }), jsx(ButtonBasePrimaryTracked, {
               disabled: !e,
               onClick: this.moveToSelectedFolder,
               children: this.props.fileMoveData.moveText || getI18nString("file_browser.file_move.move")
@@ -1235,17 +1235,17 @@ export class $$e74 extends PureComponent {
       e.stopPropagation();
       let t = this.searchInputRef.current;
       switch (e.keyCode) {
-        case Uz.DOWN_ARROW:
+        case KeyCodes.DOWN_ARROW:
           t && t.blur();
           null != this.props.folderCount && this.props.dispatch(TL({
             upperBound: this.props.folderCount
           }));
           break;
-        case Uz.UP_ARROW:
+        case KeyCodes.UP_ARROW:
           t && t.blur();
           this.props.dispatch(zv());
           break;
-        case Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           if (!t) break;
           t.value ? (t.value = "", this.props.dispatch(eO({
             modalData: this.props.fileMoveData,
@@ -1254,11 +1254,11 @@ export class $$e74 extends PureComponent {
           }))) : this.props.dispatch(hideModal());
           this.props.dispatch(xH());
           break;
-        case Uz.TAB:
+        case KeyCodes.TAB:
           t && t.blur();
           this.props.dispatch(xH());
           break;
-        case Uz.ENTER:
+        case KeyCodes.ENTER:
           {
             t && t.blur();
             let e = this.props.getFocusedFolder();
@@ -1280,7 +1280,7 @@ export class $$e74 extends PureComponent {
         children: jsx(SvgComponent, {
           svg: _$$A6
         })
-      }), jsx(_$$L, {
+      }), jsx(LazyInputForwardRef, {
         ref: this.searchInputRef,
         placeholder: getI18nString("file_browser.file_move.search_placeholder"),
         onFocus: this.onFocus,
@@ -1474,7 +1474,7 @@ function tr(e) {
       className: eG,
       children: jsx(_$$p, {
         className: "file_move--renameInput--WL-5T",
-        placeholderValue: CI(folder),
+        placeholderValue: getSidebarPath(folder),
         submit: e => s(folder, e),
         cancel: () => {
           t(Mn());
@@ -1483,7 +1483,7 @@ function tr(e) {
     }) : ((t, r) => {
       let s = $$e29(t) && e.isSearchingFolders;
       let i = e.focusedFolderIndex && e.focusedFolderIndex > -1 ? r : e.currentFolderId === t.id;
-      let n = jd(t) ? _$$A9 : _$$A5;
+      let n = isTeamFolderV2(t) ? _$$A9 : _$$A5;
       return jsxs("div", {
         className: eG,
         children: [jsx("div", {
@@ -1493,7 +1493,7 @@ function tr(e) {
           })
         }), jsx("span", {
           className: "file_move--folderName--YbDNz ellipsis--ellipsis--Tjyfa",
-          children: CI(t)
+          children: getSidebarPath(t)
         }), jsx("div", {
           className: eW,
           children: s && jsx(SvgComponent, {

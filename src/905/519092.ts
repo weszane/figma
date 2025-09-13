@@ -3,9 +3,9 @@ import { Component } from "react";
 import { useDispatch } from "react-redux";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { Jn } from "../905/17223";
-import { qM, vd, tM } from "../figma_app/637027";
+import { ButtonNegativeTracked, ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -27,8 +27,8 @@ export class $$b1 extends Component {
     };
     this.onKeyDown = e => {
       e.stopPropagation();
-      e.keyCode === Uz.ESCAPE && (!this.props.disableClickOutsideToHide || this.props.closeOnEsc) && this.props.onClose && this.props.onClose(e);
-      e.keyCode === Uz.ENTER && this.props.closeOnEnter && this.props.onClose && this.props.onClose(e);
+      e.keyCode === KeyCodes.ESCAPE && (!this.props.disableClickOutsideToHide || this.props.closeOnEsc) && this.props.onClose && this.props.onClose(e);
+      e.keyCode === KeyCodes.ENTER && this.props.closeOnEnter && this.props.onClose && this.props.onClose(e);
     };
     this.bgRef = e => {
       e && !e.contains(document.activeElement) && (this.props.closeOnEsc || this.props.focus) && e.focus();
@@ -108,7 +108,7 @@ export class $$b1 extends Component {
 }
 export function $$v0(e) {
   let t = useDispatch();
-  let i = e.destructive ? qM : vd;
+  let i = e.destructive ? ButtonNegativeTracked : ButtonBasePrimaryTracked;
   let r = () => {
     if (e.onCancel) {
       e.onCancel();
@@ -117,7 +117,7 @@ export function $$v0(e) {
     t(popModalStack());
   };
   let s = jsxs(Fragment, {
-    children: [e.hideCancel || jsx(tM, {
+    children: [e.hideCancel || jsx(ButtonSecondaryTracked, {
       innerText: getI18nString("general.cancel"),
       onClick: r,
       className: x7,

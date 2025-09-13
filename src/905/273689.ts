@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { clamp } from "../figma_app/492908";
 import { colorToRgb, desaturateColor } from "../figma_app/273493";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { F } from "../905/989956";
@@ -147,12 +147,12 @@ let g = class e extends RecordingPureComponent {
         ...this.props.color
       };
       switch (e.keyCode) {
-        case Uz.LEFT_ARROW:
-        case Uz.RIGHT_ARROW:
+        case KeyCodes.LEFT_ARROW:
+        case KeyCodes.RIGHT_ARROW:
           i.s = clamp(i.s + t / 100, 0, 1);
           break;
-        case Uz.UP_ARROW:
-        case Uz.DOWN_ARROW:
+        case KeyCodes.UP_ARROW:
+        case KeyCodes.DOWN_ARROW:
           "l" in i ? i.l = clamp(i.l + t / 100, 0, 1) : i.v = clamp(i.v + t / 100, 0, 1);
       }
       this.props.changeCallback(i, !0);

@@ -3,8 +3,8 @@ import { Component } from "react";
 import { clampOptional } from "../figma_app/492908";
 import { cZ } from "../figma_app/272902";
 import { parsePxNumber } from "../figma_app/783094";
-import { Uz } from "../905/63728";
-import { L } from "../905/408237";
+import { KeyCodes } from "../905/63728";
+import { LazyInputForwardRef } from "../905/408237";
 import { dG } from "../figma_app/753501";
 import { p as _$$p } from "../905/427409";
 import { P } from "../figma_app/120873";
@@ -32,9 +32,9 @@ export class $$h0 extends Component {
       t !== this.currentHeight && (this.currentHeight = t, this.textarea.style.height = `${t}px`);
     };
     this.onKeyDown = e => {
-      this.props.submit && e.keyCode === Uz.ENTER && (this.props.bypassModifiers && !e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) && (e.stopPropagation(), e.preventDefault(), this.props.preventSubmitOnBlur && this.props.submit(this.textarea.value), this.textarea.blur());
+      this.props.submit && e.keyCode === KeyCodes.ENTER && (this.props.bypassModifiers && !e.shiftKey || e.ctrlKey || e.metaKey || e.altKey) && (e.stopPropagation(), e.preventDefault(), this.props.preventSubmitOnBlur && this.props.submit(this.textarea.value), this.textarea.blur());
       this.props.onKeyDown?.(e);
-      e.keyCode === Uz.ESCAPE && (this.props.onEscape ? this.props.onEscape() : this.textarea.blur());
+      e.keyCode === KeyCodes.ESCAPE && (this.props.onEscape ? this.props.onEscape() : this.textarea.blur());
       this.context && "=" === e.key && (e.preventDefault(), this.context?.showBindingUI(this.textarea));
     };
     this.onFocus = e => {
@@ -103,7 +103,7 @@ export class $$h0 extends Component {
   render() {
     let e = `expanding_textarea--expandingTextarea--sWlgy ${pc} ${this.props.disableBorderStyles ? "" : PQ} ${this.props.className || ""}`;
     return jsxs(Fragment, {
-      children: [this.renderVariablePill(), jsx(L, {
+      children: [this.renderVariablePill(), jsx(LazyInputForwardRef, {
         ref: this.ref,
         "aria-description": this.props.ariaDescription,
         className: e,

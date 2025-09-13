@@ -6,7 +6,7 @@ import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Ai } from "../figma_app/242339";
 import { CR, NJ } from "../figma_app/419216";
 import { x } from "../figma_app/849451";
@@ -75,7 +75,7 @@ function y(e) {
 export function $$b2(e) {
   let t = Ai(["exp_cursor_bot_onboarding"]);
   let r = !e.hideCloseButton;
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e.trackingContextName,
     properties: {
       isInCursorBotBasicsFile: t
@@ -122,7 +122,7 @@ export function $$b2(e) {
   });
 }
 export function $$T5(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e.trackingContextName,
     children: jsxs("div", {
       style: {
@@ -152,7 +152,7 @@ export function $$T5(e) {
   });
 }
 export function $$I1(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e.trackingContextName,
     children: jsxs(NJ, {
       arrowPosition: e.arrowPosition,

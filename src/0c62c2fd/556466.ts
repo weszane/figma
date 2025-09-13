@@ -20,10 +20,10 @@ import { VisualBellActions } from "../905/302958";
 import { tc } from "../905/15667";
 import { E as _$$E } from "../figma_app/61705";
 import { c as _$$c } from "../905/370443";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { F2 } from "../905/389382";
-import { T9 } from "../figma_app/528509";
+import { hasRootPath } from "../figma_app/528509";
 import { i as _$$i } from "../905/46262";
 var m = (e => (e.CAN_CREATE = "CAN_CREATE", e.CANNOT_CREATE = "CANNOT_CREATE", e.CAN_AUTO_UPGRADE = "CAN_AUTO_UPGRADE", e.CAN_REQUEST_UPGRADE = "CAN_REQUEST_UPGRADE", e.UPGRADE_PENDING = "UPGRADE_PENDING", e))(m || {});
 export function $$R0({
@@ -119,13 +119,13 @@ export function $$R0({
     }) {
       let r = useDispatch();
       let a = _$$E({
-        isDraftsFolder: T9(e),
+        isDraftsFolder: hasRootPath(e),
         newFileFrom: t,
         folderId: e.id
       });
       let {
         properties
-      } = j6();
+      } = useTracking();
       let {
         handleUpgrade
       } = wH({

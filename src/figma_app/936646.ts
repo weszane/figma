@@ -17,7 +17,7 @@ import { n1 } from "../figma_app/657017";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { eM } from "../figma_app/646357";
 import { CommunityLibraryStyleData, LibraryStyleData, LibraryData } from "../figma_app/43951";
-import { KC, Qp, SS as _$$SS } from "../figma_app/349248";
+import { mapStyleProperties, mapComponentProperties, mapStateGroupProperties } from "../figma_app/349248";
 import { jz } from "../figma_app/825489";
 import { Ns } from "../figma_app/409131";
 import { wJ } from "../figma_app/630951";
@@ -255,7 +255,7 @@ let U = memoizeWeak(function (e) {
     let e = t.communityLibraryByHubFileId;
     if (!e) return e1([]);
     let r = e.libraryHierarchyPaths.map(t => {
-      let r = t.styles.map(t => KC(t, {
+      let r = t.styles.map(t => mapStyleProperties(t, {
         type: "hubFile",
         file: {
           id: e.hubFileId,
@@ -284,15 +284,15 @@ let U = memoizeWeak(function (e) {
   let r = "libraryKeyToFile" in t ? t.libraryKeyToFile?.file : t.file;
   if (!r) return e1([]);
   let n = r.libraryHierarchyPaths.map(e => ({
-    components: "components" in e ? e.components.map(e => Qp(e, {
+    components: "components" in e ? e.components.map(e => mapComponentProperties(e, {
       type: "team",
       file: r
     })) : [],
-    stateGroups: "stateGroups" in e ? e.stateGroups.map(e => _$$SS(e, {
+    stateGroups: "stateGroups" in e ? e.stateGroups.map(e => mapStateGroupProperties(e, {
       type: "team",
       file: r
     })) : [],
-    styles: e.styles.map(e => KC(e, {
+    styles: e.styles.map(e => mapStyleProperties(e, {
       type: "team",
       file: r
     }))

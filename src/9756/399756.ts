@@ -7,7 +7,7 @@ import { zk, permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { j as _$$j } from "../figma_app/602140";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { logWarning } from "../905/714362";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -164,8 +164,8 @@ export function $$y0() {
           horizontalAlignItems: "end",
           children: jsx(r, {
             shortcuts: [{
-              key: Uz.ENTER,
-              modifier: [xH.META]
+              key: KeyCodes.ENTER,
+              modifier: [ModifierKeyCodes.META]
             }],
             onAction: D,
             disabled: 0 === w.length,

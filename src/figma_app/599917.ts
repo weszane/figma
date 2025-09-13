@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { customHistory } from "../905/612521";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { xn } from "../905/934145";
 import { sf } from "../905/929976";
 import { Np } from "../figma_app/193867";
@@ -16,7 +16,7 @@ class h extends PureComponent {
   constructor() {
     super(...arguments);
     this.onClick = e => {
-      if (e.preventDefault(), e.stopPropagation(), oJ(e) || this.props.openInNewTab) {
+      if (e.preventDefault(), e.stopPropagation(), isCommandOrShift(e) || this.props.openInNewTab) {
         customHistory.redirect(this.props.hrefPath || "", "_blank");
         return;
       }
@@ -83,7 +83,7 @@ export function $$f1(e) {
     }).href,
     className: M2,
     onClick: e => {
-      if (e.preventDefault(), e.stopPropagation(), oJ(e)) {
+      if (e.preventDefault(), e.stopPropagation(), isCommandOrShift(e)) {
         customHistory.redirect(i || "", "_blank");
         return;
       }

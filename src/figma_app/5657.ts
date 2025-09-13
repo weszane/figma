@@ -3,13 +3,13 @@ import { useRef, useState } from "react";
 import { J } from "../905/614223";
 import { Xr } from "../figma_app/27355";
 import o from "classnames";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { f as _$$f } from "../905/940356";
 import { Ai } from "../figma_app/242339";
 import { jK } from "../figma_app/989514";
@@ -29,7 +29,7 @@ function A(e) {
         [v]: t
       }),
       children: e.title
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 1
     }), jsx("div", {
       className: l()(h_, {
@@ -160,7 +160,7 @@ export function $$x0(e) {
   };
   let N = Ai(["exp_cursor_bot_onboarding"]);
   let C = _$$f("cursor_bot_v2_make_show_me_primary_cta");
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e.trackingContextName,
     properties: {
       isInCursorBotBasicsFile: N

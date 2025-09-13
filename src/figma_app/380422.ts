@@ -7,7 +7,7 @@ import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import c from "../vendor/524488";
 import { wY } from "../figma_app/708845";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { z3 } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -213,7 +213,7 @@ export function $$W0({
     primaryAction: {
       text: "Search designs",
       shortcuts: [{
-        key: Uz.ENTER
+        key: KeyCodes.ENTER
       }],
       onAction: f
     },

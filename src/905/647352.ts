@@ -28,7 +28,7 @@ import { pz } from "../figma_app/825489";
 import { U as _$$U } from "../905/29665";
 import { T as _$$T } from "../905/485734";
 import { t as _$$t2 } from "../905/340158";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { x as _$$x } from "../905/209285";
 import { I as _$$I } from "../905/266213";
 import { er, sz } from "../905/753512";
@@ -60,7 +60,7 @@ let M = registerModal(function ({
     });
   });
   let l = "loading" === s.status;
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     disableConfirm: l,
     onConfirm: () => t(sb({
       localAssetsWithDenormalizedPublishInfo: s.data ?? {},
@@ -124,7 +124,7 @@ export function $$W0(e) {
     let r = getI18nString("design_systems.libraries_modal.plural.num_style", {
       numStyles: t
     });
-    if (e > 0 && t > 0) i = formatList([n, r], "unit");else if (e > 0) i = n;else {
+    if (e > 0 && t > 0) i = formatList([n, r], "unit"); else if (e > 0) i = n; else {
       if (!(t > 0)) return "";
       i = r;
     }

@@ -8,8 +8,8 @@ import { H } from "../figma_app/147959";
 import { BrowserInfo } from "../figma_app/778880";
 import { H as _$$H } from "react-dom";
 import { R7 } from "../905/508367";
-import { B } from "../905/877503";
-import { Uz } from "../905/63728";
+import { isElementFocusable } from "../905/877503";
+import { KeyCodes } from "../905/63728";
 import { VisualBellActions } from "../905/302958";
 import { ql } from "../905/668764";
 import { fullscreenValue } from "../figma_app/455680";
@@ -264,12 +264,12 @@ let O = new class {
     this.onKeyDown = e => {
       this.isAltKeyPressed !== e.altKey && (this.isAltKeyPressed = e.altKey, this.onAltKeyChange(e));
       this.isShiftKeyPressed !== e.shiftKey && (this.isShiftKeyPressed = e.shiftKey, this.onShiftKeyChange(e));
-      e.keyCode === Uz.ESCAPE && this.activeContext && (e.preventDefault(), e.stopPropagation());
+      e.keyCode === KeyCodes.ESCAPE && this.activeContext && (e.preventDefault(), e.stopPropagation());
     };
     this.onKeyUp = e => {
       this.isAltKeyPressed !== e.altKey && (this.isAltKeyPressed = e.altKey, this.onAltKeyChange(e));
       this.isShiftKeyPressed !== e.shiftKey && (this.isShiftKeyPressed = e.shiftKey, this.onShiftKeyChange(e));
-      e.keyCode === Uz.ESCAPE && this.activeContext && (this.stopTracking(e, !0), e.preventDefault(), e.stopPropagation());
+      e.keyCode === KeyCodes.ESCAPE && this.activeContext && (this.stopTracking(e, !0), e.preventDefault(), e.stopPropagation());
     };
     this.onPointerMove = e => {
       let t;
@@ -340,7 +340,7 @@ let O = new class {
   cancelTouchIfNonInteractive(e) {
     let t = e.target;
     for (; t !== e.currentTarget;) {
-      if (B(t)) return;
+      if (isElementFocusable(t)) return;
       t = t.parentElement;
     }
     e.preventDefault();

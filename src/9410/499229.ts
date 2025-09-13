@@ -9,7 +9,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { globalPerfTimer } from "../905/542194";
 import { useEventSubscription } from "../figma_app/516794";
 import { trackFileEventWithUser } from "../figma_app/901889";
-import { Uz, Te } from "../905/63728";
+import { KeyCodes, isCommandModifier } from "../905/63728";
 import { yZ } from "../905/407352";
 import { isWhitespace } from "../figma_app/930338";
 import { Fk } from "../905/125333";
@@ -56,7 +56,7 @@ export function $$F12({
         i.current = !1;
       },
       onKeyDown: e => {
-        e.keyCode === Uz.F ? Te(e) ? (e.currentTarget.select(), e.preventDefault()) : jr(e, W0.NO, VA.NO) && e.stopPropagation() : a(e);
+        e.keyCode === KeyCodes.F ? isCommandModifier(e) ? (e.currentTarget.select(), e.preventDefault()) : jr(e, W0.NO, VA.NO) && e.stopPropagation() : a(e);
       },
       onKeyUp: s,
       onPasteCapture: o,

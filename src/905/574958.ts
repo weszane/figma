@@ -5,8 +5,8 @@ import { reportError } from "../905/11";
 import { MZ } from "../figma_app/925970";
 import { qB } from "../905/124270";
 import { trackFileBrowserFileClicked } from "../figma_app/314264";
-import { O } from "../905/833838";
-import { L0, uH, f9, Rr } from "../figma_app/162807";
+import { OrganizationType } from "../905/833838";
+import { L0, PublicModelType, SearchFieldType, SearchTypeMode } from "../figma_app/162807";
 var $$n1;
 let $$m0 = "!capture";
 let $$h4 = MZ;
@@ -90,7 +90,7 @@ function I(e, t) {
       this.context = i;
     }
     categorySpecificTrackClick(e, t) {
-      if (e === uH.FILES) {
+      if (e === PublicModelType.FILES) {
         let e = this.info.result.model;
         trackEventAnalytics("Open File Click", {
           fileKey: e.key,
@@ -124,14 +124,14 @@ function I(e, t) {
         result
       } = this.info;
       let A = qB();
-      if (e === uH.FILES && this.context?.plan) {
+      if (e === PublicModelType.FILES && this.context?.plan) {
         let {
           plan
         } = this.context;
         let t = result.model;
-        a = plan.plan_type === O.ORG ? t.parent_org_id === plan.plan_id : t.team_id === plan.plan_id;
+        a = plan.plan_type === OrganizationType.ORG ? t.parent_org_id === plan.plan_id : t.team_id === plan.plan_id;
       }
-      let y = e === uH.FILES && "preview_thumbnail_urls" in result.model ? result.model.preview_thumbnail_urls ?? [] : [];
+      let y = e === PublicModelType.FILES && "preview_thumbnail_urls" in result.model ? result.model.preview_thumbnail_urls ?? [] : [];
       trackEventAnalytics("search_result_clicked", {
         session_id: this.state.lastLoadedQuery.sessionId,
         query_id: this.state.lastLoadedQuery.queryId,
@@ -171,7 +171,7 @@ function I(e, t) {
     let i = null;
     for (let t = 0; t < e.results.length; t++) {
       let n = e.results[t];
-      if (n.matched_queries?.includes(f9.DEEP_SEARCH_TEXT)) {
+      if (n.matched_queries?.includes(SearchFieldType.DEEP_SEARCH_TEXT)) {
         i = t;
         break;
       }
@@ -196,14 +196,14 @@ function I(e, t) {
       let i = e.parameters.searchModelType;
       let n = e.responses;
       switch (e.searchTypeBehavior) {
-        case Rr.ALL_TYPES_BLOCKING:
+        case SearchTypeMode.ALL_TYPES_BLOCKING:
           for (let e in t = 0, n) {
             let r = n[e]?.metrics.roundTripTime;
             r && r > t && (t = r, i = e);
           }
           break;
-        case Rr.ONE_TYPE:
-        case Rr.ALL_TYPES_STREAMING:
+        case SearchTypeMode.ONE_TYPE:
+        case SearchTypeMode.ALL_TYPES_STREAMING:
           t = n[e.parameters.searchModelType]?.metrics.roundTripTime;
       }
       void 0 !== t && trackEventAnalytics("search_time_to_load", {

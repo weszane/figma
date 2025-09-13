@@ -12,7 +12,7 @@ import { trackFileEvent } from "../figma_app/314264";
 import { Cs } from "../905/420347";
 import { M4 } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { linkMetadataHandlerInstance } from "../905/695476";
 import { k4, Yi } from "../figma_app/164212";
 let b = z.object({
@@ -32,7 +32,7 @@ export async function $$I7({
   nodeId: t,
   includeInheritedLinks: r
 }) {
-  let n = (await _$$S.getRelatedLinks({
+  let n = (await fileApiHandler.getRelatedLinks({
     nodeId: t,
     fileKey: e
   })).data;

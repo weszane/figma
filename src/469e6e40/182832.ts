@@ -2,9 +2,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, useState, Fragment as _$$Fragment } from "react";
 import { $y } from "../figma_app/59509";
 import { Q } from "../905/363675";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { XHR } from "../905/910117";
-import { ks, nR, $$ } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { z, Z } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -122,7 +122,7 @@ class S extends PureComponent {
       }));
     };
     this.onKeyDown = e => {
-      e.keyCode === Uz.ENTER && (e.preventDefault(), this.onConfirm());
+      e.keyCode === KeyCodes.ENTER && (e.preventDefault(), this.onConfirm());
     };
     this.state = {
       certificate: null,
@@ -174,7 +174,7 @@ class S extends PureComponent {
             children: [jsx("div", {
               className: y,
               children: renderI18nText("org_settings.sso.idp_entity_id")
-            }), jsx(ks, {
+            }), jsx(BigTextInputForwardRef, {
               type: "url",
               className: w,
               placeholder: `${a}`,
@@ -184,7 +184,7 @@ class S extends PureComponent {
             }), jsx("div", {
               className: y,
               children: renderI18nText("org_settings.sso.idp_sso_target_url")
-            }), jsx(ks, {
+            }), jsx(BigTextInputForwardRef, {
               type: "url",
               className: w,
               placeholder: `${s}`,
@@ -202,7 +202,7 @@ class S extends PureComponent {
             children: [jsx("div", {
               className: y,
               children: renderI18nText("org_settings.sso.id_p_metadata_url")
-            }), jsx(ks, {
+            }), jsx(BigTextInputForwardRef, {
               type: "url",
               className: w,
               placeholder: `Eg: ${t}`,
@@ -219,10 +219,10 @@ class S extends PureComponent {
           })
         }), jsxs("div", {
           className: "configure_saml--buttonBox--c1x8J",
-          children: [jsx(nR, {
+          children: [jsx(ButtonSecondary, {
             onClick: () => this.props.dispatch(popModalStack()),
             children: renderI18nText("modal.cancel")
-          }), jsx($$, {
+          }), jsx(ButtonBasePrimary, {
             disabled: e,
             onClick: this.onConfirm,
             children: this.props.org?.can_use_multi_idp ? renderI18nText("general.continue") : renderI18nText("org_settings.sso.review")

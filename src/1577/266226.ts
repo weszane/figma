@@ -13,7 +13,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { showModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { z5 } from "../905/713722";
 import { getUserId } from "../905/372672";
 import { ColorPalettesForTeam } from "../figma_app/43951";
@@ -22,7 +22,7 @@ import { fJ } from "../figma_app/616107";
 import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { RN, In, dq } from "../figma_app/967873";
 import { jE } from "../figma_app/639088";
 import { TS } from "../figma_app/153399";
@@ -33,7 +33,7 @@ let I = registerModal(function ({
   paletteUuid: e
 }) {
   let t = useDispatch();
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     size: 300,
     confirmText: getI18nString("whiteboard.color_palettes.modal.delete_color_palette_button"),
     confirmationTitle: getI18nString("whiteboard.color_palettes.modal.delete_color_palette_confirmation_modal_title"),
@@ -56,7 +56,7 @@ let M = registerModal(function ({
   let o = cD();
   let r = useSelector(e => e.teams[o]?.name);
   r || console.error("No team name found for team id", o);
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     size: 360,
     confirmationTitle: getI18nString("whiteboard.color_palettes.make_default_confirmation_modal.title"),
     confirmText: getI18nString("whiteboard.color_palettes.make_default_confirmation_modal.confirm_button"),
@@ -196,7 +196,7 @@ export let $$B0 = registerModal(function ({
   }), {
     enabled: !!u
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.FIGJAM_MANAGE_PALETTES_MODAL,
     properties: {
       entryPoint: t,

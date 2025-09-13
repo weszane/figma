@@ -11,7 +11,7 @@ import { h as _$$h } from "../905/207101";
 import { useSubscription } from "../figma_app/288654";
 import { reportError, SeverityLevel } from "../905/11";
 import { tH } from "../905/751457";
-import { ks, nR, vd } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -22,7 +22,7 @@ import { $V } from "../figma_app/990058";
 import { tc, PE, Q7, i$ } from "../905/15667";
 import { Nu } from "../905/584989";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { VG, A7, F2, E2, ju } from "../905/389382";
@@ -35,7 +35,7 @@ import { wH } from "../figma_app/680166";
 import { UQ } from "../figma_app/864723";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
-import { Sm } from "../figma_app/482728";
+import { UpgradeRequestSetting } from "../figma_app/482728";
 import { e0 } from "../905/696396";
 import { w as _$$w } from "../905/281010";
 import { registerModal } from "../905/102752";
@@ -292,7 +292,7 @@ function ey({
           children: renderI18nText("request_upgrade.instructions")
         })
       })
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       placeholder: r === tc.USER_SETTINGS ? getI18nString("request_upgrade.placeholder.seat") : Jo(i, r),
       type: "textarea",
       value: e,
@@ -473,7 +473,7 @@ export function $$eb0(e) {
   let eP = eN.data?.currentUser?.baseOrgUser?.org;
   let eO = eP?.orgSharedSetting?.configuredUpgradeRequestSetting;
   let eD = planUserPermission === FMemberRoleType.GUEST;
-  let eL = P && eP && (eO === Sm.ALL_USERS || eO === Sm.MEMBERS && !eD);
+  let eL = P && eP && (eO === UpgradeRequestSetting.ALL_USERS || eO === UpgradeRequestSetting.MEMBERS && !eD);
   if ("loading" === eN.status && !eP) return jsx(OJ, {
     title: jsx(Wi, {}),
     maxWidth: 360,
@@ -515,7 +515,7 @@ export function $$eb0(e) {
         error: !0
       }));
     },
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: eF,
       properties: eM,
       trackingOptions: eR,
@@ -561,10 +561,10 @@ export function $$eb0(e) {
               entryPoint: e.entryPoint
             }), jsxs("div", {
               className: `${v0} request_upgrade_modal--lgModalButtonRow--TwgPl`,
-              children: [!er && jsx(nR, {
+              children: [!er && jsx(ButtonSecondary, {
                 onClick: ek,
                 children: renderI18nText("request_upgrade.cancel_button")
-              }), jsx(vd, {
+              }), jsx(ButtonBasePrimaryTracked, {
                 autoFocus: !0,
                 className: "request_upgrade_modal--confirmButton--IP-Y6",
                 onClick: e => {

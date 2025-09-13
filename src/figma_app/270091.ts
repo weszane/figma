@@ -19,7 +19,7 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/455748";
 import { selectWithShallowEqual } from "../905/103090";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { j as _$$j } from "../905/918929";
 import { generateRecordingKey } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
@@ -622,7 +622,7 @@ function eW(e) {
       inputRef: tq,
       onChange: tF,
       onDropdownHidden: tJ,
-      openOnKeyPressed: [Uz.SPACE, Uz.ENTER],
+      openOnKeyPressed: [KeyCodes.SPACE, KeyCodes.ENTER],
       property: validDropdownSelection,
       rightIcon: jsx(_$$P, {
         libraryKey: tB

@@ -57,7 +57,7 @@ import { P as _$$P } from '../905/347284';
 import { createOptimistThunk } from '../905/350402';
 import { c as _$$c2 } from '../905/370443';
 import { getUserId, hasPasswordOrSSO, selectCurrentUser } from '../905/372672';
-import { L as _$$L2 } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { iX as _$$iX, Ke } from '../905/415545';
 import { p as _$$p } from '../905/428660';
 import { useModalManager } from '../905/437088';
@@ -164,7 +164,7 @@ import { selectCurrentFile } from '../figma_app/516028';
 import { Au } from '../figma_app/518077';
 import { getAtomMutate, handleSuspenseRetainRelease } from '../figma_app/566371';
 import { $z } from '../figma_app/617427';
-import { $$, nR as _$$nR, ks, qZ } from '../figma_app/637027';
+import { ButtonBasePrimary, ButtonSecondary, BigTextInputForwardRef, ButtonNegative } from '../figma_app/637027';
 import { AM } from '../figma_app/637336';
 import { _Z, jE, pL, v0, Vq, yl } from '../figma_app/639088';
 import { wH } from '../figma_app/680166';
@@ -175,12 +175,12 @@ import { bX } from '../figma_app/792917';
 import { Ro } from '../figma_app/805373';
 import { bV, UO } from '../figma_app/808294';
 import { createEmptyAddress } from '../figma_app/831101';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { LoadingSpinner } from '../figma_app/858013';
 import { $I } from '../figma_app/865646';
 import { desktopAPIInstance } from '../figma_app/876459';
-import { d_, yX } from '../figma_app/918700';
-import { Ex, zE } from '../figma_app/919079';
+import { ModalContainer, ConfirmationModal2 } from '../figma_app/918700';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { b8 } from '../figma_app/926061';
 import { Ef, Fs } from '../figma_app/976345';
 import { AW } from '../figma_app/990058';
@@ -232,7 +232,7 @@ let z = registerModal(e => {
   let [s, o] = useState(e.shippingAddress);
   let [l, d] = useState(!1);
   let c = s.country;
-  return jsx(yX, {
+  return jsx(ConfirmationModal, {
     size: 'fitContent',
     title: getI18nString('community.community_account_settings.change_address'),
     onConfirm: () => {
@@ -1699,7 +1699,7 @@ function tD() {
     s && e.push('WorkspaceActivity');
     return e.join(',');
   }, [i, s]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e.NOTIFICATION_SETTINGS_MODAL,
     properties: {
       user_id: e?.id,
@@ -1956,7 +1956,7 @@ let iv = registerModal(e => {
           padding: 16,
           children: [jsx(TextWithTruncation, {
             children: renderI18nText('tokens.settings.dev_token_modal.description')
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             className: _$$s.wFull.$,
             placeholder: getI18nString('tokens.settings.dev_token_modal.name_placeholder'),
             value: t,
@@ -2816,7 +2816,7 @@ function nr({
       children: renderI18nText('settings.account_setting.change_email_context')
     }), jsx(nn, {
       userEmailFeatures: c
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       name: 'email',
       type: 'text',
       className: _Z,
@@ -2824,7 +2824,7 @@ function nr({
       placeholder: getI18nString('settings.account_setting.change_email_input_placeholder'),
       value: s,
       onChange: e => o(e.target.value)
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       name: 'password',
       type: 'password',
       className: _Z,
@@ -3451,7 +3451,7 @@ let n1 = registerModal(e => {
           children: renderI18nText('settings.account_settings.change_name_modal_title')
         })
       }), jsx(_$$nB, {
-        children: jsx(ks, {
+        children: jsx(BigTextInputForwardRef, {
           ref: f,
           name: 'name',
           type: 'text',
@@ -3468,7 +3468,7 @@ let n1 = registerModal(e => {
         })
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx($$, {
+          children: jsx(ButtonBasePrimary, {
             type: 'submit',
             className: pL,
             disabled: m,
@@ -3511,7 +3511,7 @@ class n8 extends PureComponent {
     };
   }
   render() {
-    return this.props.user ? this.props.user.google_sso_only || !this.props.user.email || this.props.user.email_validated_at ? this.props.user.delete_user_loading ? jsx(d_, {
+    return this.props.user ? this.props.user.google_sso_only || !this.props.user.email || this.props.user.email_validated_at ? this.props.user.delete_user_loading ? jsx(ModalContainer, {
       size: 'small',
       title: getI18nString('settings.delete_user_account.delete_account'),
       className: yl,
@@ -3520,7 +3520,7 @@ class n8 extends PureComponent {
       children: jsx('p', {
         children: renderI18nText('settings.delete_user_account.account_deletion_is_in_progress')
       })
-    }) : jsxs(d_, {
+    }) : jsxs(ModalContainer, {
       size: 'small',
       title: getI18nString('settings.delete_user_account.delete_account'),
       className: yl,
@@ -3555,7 +3555,7 @@ class n8 extends PureComponent {
         }), jsxs('form', {
           onSubmit: this.deleteAccount,
           children: [jsx('div', {
-            children: jsx(_$$L2, {
+            children: jsx(LazyInputForwardRef, {
               className: _Z,
               type: 'text',
               value: this.state.confirmUserDeleteInput,
@@ -3567,11 +3567,11 @@ class n8 extends PureComponent {
             })
           }), jsxs('div', {
             className: v0,
-            children: [jsx(_$$nR, {
+            children: [jsx(ButtonSecondary, {
               className: pL,
               onClick: this.cancel,
               children: renderI18nText('modal.cancel')
-            }), jsx(qZ, {
+            }), jsx(ButtonNegative, {
               type: 'submit',
               className: pL,
               disabled: n6() !== this.state.confirmUserDeleteInput,
@@ -3582,7 +3582,7 @@ class n8 extends PureComponent {
       }) : jsx(_$$_, {
         ...this.props
       })]
-    }) : jsx(yX, {
+    }) : jsx(ConfirmationModal, {
       confirmationTitle: getI18nString('settings.delete_user_account.a_verified_email_is_required'),
       content: getI18nString('settings.delete_user_account.you_must_verify_your_email_address_before_you_can_attempt_this_operation'),
       onConfirm: this.resendVerification,
@@ -3599,7 +3599,7 @@ let rt = registerModal(e => {
   let i = getUserId();
   let [n, o] = useState(e.fileViewHistoryDisabled.toString());
   let d = useMemo(() => n !== e.fileViewHistoryDisabled.toString(), [n, e.fileViewHistoryDisabled]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'File View History Preference Modal',
     children: jsx(ModalRootComponent, {
       manager: t,
@@ -3812,10 +3812,10 @@ function rm() {
   return jsxs(Fragment, {
     children: [jsxs('div', {
       className: 'account_settings_modal--sectionSubheader--L0LKE text--fontPos13--xW8hS text--_fontBase--QdLsd',
-      children: [renderI18nText('settings.account_settings.closed_captions'), jsx(Ex, {
+      children: [renderI18nText('settings.account_settings.closed_captions'), jsx(Badge, {
         text: getI18nString('general.beta'),
         className: 'account_settings_modal--betaTag--rm8Tl',
-        color: zE.DESIGN
+        color: BadgeColor.DESIGN
       })]
     }), jsx(rh, {})]
   });
@@ -3896,7 +3896,7 @@ let rR = 'leave_org_confirm--important--F-mUY modal--important--qfd6R';
 let rN = 'LEAVE_ORG_CONFIRMATION_MODAL';
 function rP(e) {
   let t = useDispatch();
-  return jsx(yX, {
+  return jsx(ConfirmationModal, {
     confirmationTitle: getI18nString('org_settings.leave_org.confirm_modal_title', {
       orgName: e.orgName
     }),
@@ -4408,7 +4408,7 @@ function rF({
           if (!e) return null;
           let i = Object.keys(a.orgById).length === 0;
           let n = !Object.keys(a.teams).some(e => a.teams[e].subscription !== null);
-          return i && n && g && f.data?.team?.hasPermission && jsxs(fu, {
+          return i && n && g && f.data?.team?.hasPermission && jsxs(TrackingProvider, {
             name: 'Upgrade Section',
             properties: {
               buttonColor: 'blue'

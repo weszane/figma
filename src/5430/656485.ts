@@ -18,7 +18,7 @@ import { G8, mk, cB } from "../figma_app/777551";
 import { rZ } from "../figma_app/427318";
 import { Ay } from "../905/506641";
 import { Om, tv } from "../figma_app/979714";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { ShelfViewType, hasMonetizedResourceMetadata, hasFreemiumCode, ResourceTypeNoComment } from "../figma_app/45218";
 import { V as _$$V } from "../905/480825";
 import { FM } from "../5430/773914";
@@ -364,7 +364,7 @@ export function $$ea0({
       allowHoverOnDropdownContents: !1,
       verticalPosition: "above",
       dropdownClassName: es,
-      children: jsx(o3, {
+      children: jsx(TrackedLink, {
         to: ep.to,
         trackingEventName: "community_hub_profile_preview__profile_visit",
         trackingProperties: {

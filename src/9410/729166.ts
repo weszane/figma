@@ -32,7 +32,7 @@ import { O as _$$O4 } from '../905/365108';
 import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
 import { e as _$$e3 } from '../905/383776';
-import { L as _$$L2 } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A4 } from '../905/408320';
 import { i as _$$i2 } from '../905/415810';
 import { D as _$$D, d as _$$d } from '../905/433403';
@@ -43,7 +43,7 @@ import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
 import { bL as _$$bL, mc as _$$mc, c$, l9, WL } from '../905/493196';
 import { O as _$$O } from '../905/501876';
-import { lt } from '../905/511649';
+import { RecordableAnchor } from '../905/511649';
 import { C as _$$C } from '../905/520159';
 import { Button } from '../905/521428';
 import { $ as _$$$ } from '../905/532878';
@@ -183,7 +183,7 @@ import { WC } from '../figma_app/792783';
 import { as, OP, uF } from '../figma_app/792958';
 import { rh as _$$rh, np } from '../figma_app/803932';
 import { nd, sD } from '../figma_app/826998';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { dX } from '../figma_app/837840';
 import { u as _$$u, BQ, Kd, yp } from '../figma_app/852050';
 import { b as _$$b, bL, mc, q7 } from '../figma_app/860955';
@@ -400,7 +400,7 @@ let $ = function ({
     setInstallMethod,
     availableInstallMethods
   } = gK();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Codebase Suggestions Onboarding',
     children: installMethod == null ? jsx(Z, {
       onBack: t,
@@ -443,7 +443,7 @@ let en = function ({
     onClose: i,
     onBack: () => g('connection-options'),
     libraryKey: s
-  }) : jsx(fu, {
+  }) : jsx(TrackingProvider, {
     name: 'Component Browser Onboarding',
     children: jsxs('div', {
       className: 'component_browser_onboarding--background---pN6U',
@@ -554,7 +554,7 @@ function ea() {
   let [n, a] = Vc('componentBrowserOnboardingSelection', null);
   let s = useOpenFileLibraryKey();
   let o = _6();
-  return i && s ? n ? jsx(fu, {
+  return i && s ? n ? jsx(TrackingProvider, {
     name: 'Component Browser',
     children: jsx('div', {
       className: 'component_browser_container--background--soWIQ',
@@ -1335,7 +1335,7 @@ function tm(e) {
 }
 function t9() {
   let e = useDispatch();
-  return _$$f4('dismissed_dev_mode_overview_banner') || isVsCodeEnvironment() ? null : jsx(fu, {
+  return _$$f4('dismissed_dev_mode_overview_banner') || isVsCodeEnvironment() ? null : jsx(TrackingProvider, {
     name: 'Dev Mode Overview Banner',
     properties: {
       severity: _$$c.EVENT
@@ -1692,7 +1692,7 @@ function iZ() {
     pagesList: u,
     isComparingChanges: !1
   });
-  return s ? jsx(lt, {
+  return s ? jsx(RecordableAnchor, {
     'className': 'overview--backLink--vAo8c',
     'onClick': function (e) {
       e.preventDefault();
@@ -2110,7 +2110,7 @@ function i0({
     brand: 'dev-handoff',
     children: jsxs('div', {
       className: 'overview--searchBar--NX8cb',
-      children: [jsx(_$$h2, {}), jsx(_$$L2, {
+      children: [jsx(_$$h2, {}), jsx(LazyInputForwardRef, {
         placeholder: getI18nString('dev_handoff.workflows.overview.search_placeholder'),
         value: e,
         onChange: e => {

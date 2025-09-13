@@ -1,7 +1,7 @@
 import { createRemovableAtomFamily, atom, useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { getInitialOptions } from "../figma_app/169182";
-import { zE } from "../figma_app/919079";
+import { BadgeColor } from "../figma_app/919079";
 import { getI18nString } from "../905/303541";
 import { TA, Zx } from "../figma_app/217457";
 import { Pe, Bk } from "../4452/207203";
@@ -35,16 +35,16 @@ export function $$b0(e, i, t) {
 }
 export function $$E1(e) {
   return e.team_role?.level === AccessLevelEnum.ADMIN ? e.team_role.pending ? {
-    color: zE.DEFAULT,
+    color: BadgeColor.DEFAULT,
     text: getI18nString("team_view.settings.pending_admin")
   } : {
-    color: zE.DEFAULT,
+    color: BadgeColor.DEFAULT,
     text: getI18nString("permissions.level_name_capitalized.admin")
   } : e.team_role?.level === AccessLevelEnum.OWNER ? {
-    color: zE.DEFAULT,
+    color: BadgeColor.DEFAULT,
     text: getI18nString("permissions.level_name_capitalized.owner")
   } : e.team_role?.pending ? {
-    color: zE.DEFAULT,
+    color: BadgeColor.DEFAULT,
     subtle: !1,
     text: getI18nString("team_view.settings.pending")
   } : void 0;

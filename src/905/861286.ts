@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import a from "classnames";
 import { h as _$$h } from "../905/207101";
-import { Lf } from "../figma_app/637027";
+import { EnhancedInput } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S } from "../905/339549";
 import { yM, DP } from "../905/640017";
@@ -60,7 +60,7 @@ function A(e) {
             box-shadow: 0 0 0 1px #0D99FF;
             border: 1px solid #0D99FF;
           }`
-    }), e.canSeeBillingAddressExp && t && jsx(Lf, {
+    }), e.canSeeBillingAddressExp && t && jsx(EnhancedInput, {
       value: e.nameOnPaymentMethod || "",
       htmlName: "name_on_card",
       label: getI18nString("org_self_serve.payment_step.name_on_payment_method_label"),

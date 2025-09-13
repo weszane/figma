@@ -5,7 +5,7 @@ import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { registerModal } from "../905/102752";
 import { Of } from "../905/31837";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { W } from "../figma_app/54182";
 import { iZ, Rt, N4, Be, jE } from "../figma_app/639088";
 import { v_ } from "../figma_app/538002";
@@ -52,7 +52,7 @@ export let $$_0 = registerModal(function (e) {
       numUsers: t.length,
       userHandle: t[0].handle
     });
-    return jsxs(yX, {
+    return jsxs(ConfirmationModal2, {
       confirmationTitle: i,
       confirmText: 0 === l.length ? getI18nString("comments.post_share") : getI18nString("comments.post_anyway"),
       cancelText: getI18nString("comments.cancel_post_and_share"),
@@ -88,7 +88,7 @@ export let $$_0 = registerModal(function (e) {
     numUsers: s.length,
     learnMore: _
   });
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("comments.post_comment_and_share_file"),
     confirmText: getI18nString("comments.post_share"),
     cancelText: getI18nString("comments.discard"),

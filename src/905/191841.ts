@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { dr } from "../figma_app/643789";
 import { customHistory } from "../905/612521";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { kg } from "../figma_app/976345";
@@ -96,7 +96,7 @@ export function $$P0(e) {
     }, {
       selectedView: "recentsAndSharing" === P.view ? P.tab || ViewTypeEnum.RECENTLY_VIEWED : P.view,
       viewMode: "grid"
-    }), oJ(r)) {
+    }), isCommandOrShift(r)) {
       let e = getTeamUrl(n.id, t);
       customHistory.redirect(e, "_blank");
       r.stopPropagation();

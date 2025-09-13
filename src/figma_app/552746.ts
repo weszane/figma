@@ -1,4 +1,4 @@
-import { D8, GG, oj } from "../905/511649";
+import { RecordableDiv, RecordableButton, RecordableSpan } from "../905/511649";
 import { G } from "../905/268314";
 export let $$a0 = {
   div: G("Inaccessible", "div", {
@@ -11,14 +11,14 @@ export let $$a0 = {
   span: G("Inaccessible", "span", {
     "data-fpl-audit": !0
   }),
-  recordableDiv: G("Inaccessible", D8, {
+  recordableDiv: G("Inaccessible", RecordableDiv, {
     "data-fpl-audit": !0
   }),
-  recordableButton: G("Inaccessible", GG, {
+  recordableButton: G("Inaccessible", RecordableButton, {
     "data-fpl-audit": !0,
     type: "button"
   }),
-  recordableSpan: G("Inaccessible", oj, {
+  recordableSpan: G("Inaccessible", RecordableSpan, {
     "data-fpl-audit": !0
   })
 };

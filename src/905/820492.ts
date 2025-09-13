@@ -18,7 +18,7 @@ import { isStrippedHtmlEmpty } from "../905/491152";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { useSprigWithSampling } from "../905/99656";
-import { CY, N_ } from "../figma_app/637027";
+import { SecureLink, BaseLinkComponent } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -40,7 +40,7 @@ import { oB, sf } from "../905/929976";
 import { M3 } from "../figma_app/91703";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/350203";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Wi, sD, IZ, oH, EL, qA, UP } from "../figma_app/740025";
 import { Ii, vC, $x, nK, $W, j4, xw } from "../figma_app/599979";
 import { D as _$$D } from "../905/274925";
@@ -253,7 +253,7 @@ function e2({
   fileKey: e
 }) {
   let t = renderI18nText("community.publishing.this_editor_is_being_published_as_a_file", {
-    fileEditorLink: jsx(CY, {
+    fileEditorLink: jsx(SecureLink, {
       href: `/file/${e}`,
       target: "_blank",
       trusted: !0,
@@ -310,7 +310,7 @@ function e6({
             s(e ? y4I.PROTOTYPE : y4I.CANVAS);
           }
         }), jsxs(_$$A16, {
-          children: [renderI18nText("community.publishing.instead_of_images_your_resource_will_display_as_a_prototype"), jsx(CY, {
+          children: [renderI18nText("community.publishing.instead_of_images_your_resource_will_display_as_a_prototype"), jsx(SecureLink, {
             href: "https://help.figma.com/hc/articles/360040035974-Publish-files-to-the-Community",
             target: "_blank",
             trusted: !0,
@@ -1143,7 +1143,7 @@ class ts extends Component {
   }
   getPricingDisabledMessage(e, t) {
     if (t && t.current_hub_file_version_id && !t.monetized_resource_metadata) return renderI18nText("community.seller.only_new_resources_can_be_sold_on_community");
-    let i = jsx(CY, {
+    let i = jsx(SecureLink, {
       href: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources",
       target: "_blank",
       trusted: !0,
@@ -1249,7 +1249,7 @@ class ts extends Component {
       });
       t = !0;
     } else e = this.renderForm();
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: _$$e3.COMMUNITY_HUB_FILE_PUBLISH_MODAL,
       properties: {
         entryPoint: this.props.entryPoint,
@@ -1509,7 +1509,7 @@ let $$tl0 = registerModal(function (e) {
         }) : null]
       }),
       footerLeftSide: renderI18nText("community.publishing.review_our_community_guidelines", {
-        communityGuidelinesLink: jsx(N_, {
+        communityGuidelinesLink: jsx(BaseLinkComponent, {
           href: e.isPaid ? "https://www.figma.com/aup" : "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
           target: "_blank",
           trusted: !0,

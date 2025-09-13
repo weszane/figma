@@ -21,7 +21,7 @@ import { Jr } from "../figma_app/624361";
 import { xK } from "../905/125218";
 import { VI } from "../figma_app/623300";
 import { h as _$$h } from "../905/44234";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { fullscreenValue } from "../figma_app/455680";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
 var l = o;
@@ -61,7 +61,7 @@ export let $$O1 = {
       };
     });
     r.size > 0 && (await d(async () => {
-      let e = (await _$$S.getVideos({
+      let e = (await fileApiHandler.getVideos({
         fileKey: n
       })).data.meta.videos;
       for (let t in e) r.has(t) && (l[t] = e[t]);
@@ -315,7 +315,7 @@ export async function $$k0(e, t, r, n, o, l, u) {
     let t = await XHR.post(`/api/file_download_log/${e}`, {
       is_desktop: !!desktopAPIInstance
     });
-    t.data?.meta?.download_err && (await _$$S.getWAFValidator());
+    t.data?.meta?.download_err && (await fileApiHandler.getWAFValidator());
   } catch (e) {
     if (429 === e.status) throw e;
     trackEventAnalytics("File Download Log Error", {

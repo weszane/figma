@@ -19,12 +19,12 @@ import { A as _$$A2 } from "../905/658244";
 import { createModalConfig, registerLegacyModal, registerModal } from "../905/102752";
 import { hideModal, showModalHandler } from "../905/156213";
 import { E9 } from "../figma_app/297957";
-import { L0, fu } from "../figma_app/831799";
+import { TrackedAnchor, TrackingProvider } from "../figma_app/831799";
 import { ChurnFrictionPersonalizedModalView } from "../figma_app/43951";
 import { STANDARD_LIMIT, PRIMARY_LIMIT } from "../figma_app/345997";
 import { e0 } from "../905/696396";
 import { W as _$$W } from "../905/244810";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { isSitesFeatureEnabled } from "../905/561485";
 import { I as _$$I2 } from "../905/597430";
@@ -319,7 +319,7 @@ function G({
       children: [jsx("p", {
         className: _$$s.font13.colorText.fontMedium.lh24.$,
         children: e
-      }), jsx(L0, {
+      }), jsx(TrackedAnchor, {
         className: _$$s.font13.colorText.lh24.colorTextBrand.cursorPointer.$,
         onClick: i,
         children: t
@@ -442,12 +442,12 @@ export let $$z0 = registerModal(function ({
       })]
     })]
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.CHURN_FRICTION_PERSONALIZED_VALUE_MODAL,
     properties: {
       team_id: e
     },
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       size: 520,
       className: _$$s.px32.pt32.pb24.cursorDefault.$,
       "data-testid": "downgrade-churn-friction-modal",

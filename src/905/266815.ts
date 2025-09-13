@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { selectCurrentFile } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { sn } from "../905/301347";
 export function $$p1() {
@@ -15,7 +15,7 @@ export function $$p1() {
   let p = selectCurrentFile();
   let m = a ? i.file.editor_type : p?.editorType;
   return useCallback(i => {
-    let n = jN({
+    let n = buildFileUrl({
       file: {
         key: i.key,
         editorType: m || FFileType.DESIGN

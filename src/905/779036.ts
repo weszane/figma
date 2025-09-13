@@ -6,7 +6,7 @@ import { Checkbox } from "../905/274480";
 import { HiddenLabel } from "../905/270045";
 import { f as _$$f } from "../905/54715";
 import { M3 } from "../figma_app/119475";
-import { L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { I } from "../905/343721";
@@ -45,7 +45,7 @@ export function $$y0({
       children: [jsx(I, {
         icon: "search-32",
         fill: "secondary"
-      }), jsx(L, {
+      }), jsx(LazyInputForwardRef, {
         autoFocus: !0,
         className: hF,
         onChange: y,

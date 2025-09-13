@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { WW, yT, TP } from "../figma_app/349248";
+import { mapFileAndRepoProperties, mapFileLinkExpirationConfig, mapFileLinkExpirationConfigOptimistic } from "../figma_app/349248";
 let $$m6 = createActionCreator("REPO_SET_SELECTED_BRANCH");
 let $$h2 = createOptimistThunk((e, {
   repo: t,
@@ -37,10 +37,10 @@ let $$g10 = createOptimistThunk((e, {
     })), isDevEnvironment()) throw t;
   });
   let m = {
-    ...WW(t),
-    ...yT(t, r, d)
+    ...mapFileAndRepoProperties(t),
+    ...mapFileLinkExpirationConfig(t, r, d)
   };
-  let h = TP(t, r, d);
+  let h = mapFileLinkExpirationConfigOptimistic(t, r, d);
   Object.keys(m).length > 0 && WB().optimisticallyUpdate(m, u);
   h && WB().optimisticallyCreate(h, u);
 });

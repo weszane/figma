@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -10,7 +10,7 @@ import { _8, dL } from "../figma_app/530167";
 import { s as _$$s } from "../905/608932";
 import { registerModal } from "../905/102752";
 import { y as _$$y } from "../905/617004";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { tB, bV, Iy } from "../905/318500";
 export function $$f1(e) {
   let {
@@ -74,7 +74,7 @@ export function $$f1(e) {
     }) : getI18nString("community.comments.these_people_can_t_comment_on_any_of_your_community_files_and_plugins")
   }) : jsxs(Fragment, {
     children: [emptyStateText, " ", renderI18nText("community.comments.learn_more_about_managing_comments_on_your_files_and_plugins_in_community", {
-      learnMoreLink: jsx(Us, {
+      learnMoreLink: jsx(linkWithTracking, {
         href: "https://help.figma.com/hc/articles/1500002628062",
         target: "_blank",
         trusted: !0,
@@ -108,7 +108,7 @@ export function $$f1(e) {
   });
 }
 export let $$E0 = registerModal(function (e) {
-  return jsx(d_, {
+  return jsx(ModalContainer, {
     className: Iy,
     popStack: !0,
     children: jsx($$f1, {

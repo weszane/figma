@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
@@ -142,8 +142,8 @@ function z({
       });
     });
   }, [t, r]);
-  kz(Uz.LEFT_ARROW, m);
-  kz(Uz.RIGHT_ARROW, h);
+  kz(KeyCodes.LEFT_ARROW, m);
+  kz(KeyCodes.RIGHT_ARROW, h);
   return jsx(H, {
     entryPoint: e,
     activeFragment: i
@@ -336,7 +336,7 @@ export function $$$0(e, t, i, y, b) {
     let f = {
       text: i === G4.FIGMAKE ? getI18nString("sites.panel.make.attach_design") : getI18nString("assets_in_actions.fragment_search.insert"),
       shortcuts: y ? [] : [{
-        key: Uz.ENTER
+        key: KeyCodes.ENTER
       }],
       onAction: async () => {
         let e = fullscreenValue.getViewportInfo();
@@ -389,8 +389,8 @@ export function $$$0(e, t, i, y, b) {
     let N = {
       text: getI18nString("assets_in_actions.fragment_search.preview"),
       shortcuts: y ? [] : [{
-        key: Uz.ENTER,
-        modifier: [xH.SHIFT]
+        key: KeyCodes.ENTER,
+        modifier: [ModifierKeyCodes.SHIFT]
       }],
       onAction: ({
         target: e
@@ -427,7 +427,7 @@ export function $$$0(e, t, i, y, b) {
     let P = {
       text: getI18nString("assets_in_actions.fragment_search.close"),
       shortcuts: y ? [] : [{
-        key: Uz.ESCAPE
+        key: KeyCodes.ESCAPE
       }],
       onAction: () => {
         k(n, r);
@@ -436,8 +436,8 @@ export function $$$0(e, t, i, y, b) {
     let O = {
       text: A ? getI18nString("assets_in_actions.community_section.go_to_file_text") : getI18nString("assets_in_actions.fragments_section.go_to_file_text"),
       shortcuts: y ? [] : [{
-        key: Uz.ENTER,
-        modifier: [xH.META]
+        key: KeyCodes.ENTER,
+        modifier: [ModifierKeyCodes.META]
       }],
       onAction: () => {
         I(n, r);

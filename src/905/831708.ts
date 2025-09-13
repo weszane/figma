@@ -19,7 +19,7 @@ import { R9 } from "../905/61477";
 import { nv } from "../905/182534";
 import { HI } from "../905/977218";
 import { getUserId } from "../905/372672";
-import { WY, qy, dC, uR, jD } from "../figma_app/162807";
+import { CreatorResourceType, FolderType, TeamSpaceType, InputType, PillType } from "../figma_app/162807";
 import { HY, kI, b3 } from "../905/779036";
 import { Ze, p$, Kk, R_ } from "../905/954985";
 import { A as _$$A2 } from "../1617/229828";
@@ -31,7 +31,7 @@ export function $$R0({
   setFacetValue: i
 }) {
   let [s, l] = useState("");
-  let d = _$$F(s, WY.SPACE);
+  let d = _$$F(s, CreatorResourceType.SPACE);
   let u = useDispatch();
   let g = useAtomWithSubscription(q$);
   let E = useMemo(() => {
@@ -57,11 +57,11 @@ export function $$R0({
         cappedTeams: r,
         cappedOrgs: a
       };
-    }(-1 === g.indexOf(qy.FOLDER) ? [] : nv(d.data, dC.PROJECTS), -1 === g.indexOf(qy.TEAM) ? [] : nv(d.data, dC.TEAMS), -1 === g.indexOf(qy.ORG) ? [] : nv(d.data, dC.ORGS));
+    }(-1 === g.indexOf(FolderType.FOLDER) ? [] : nv(d.data, TeamSpaceType.PROJECTS), -1 === g.indexOf(FolderType.TEAM) ? [] : nv(d.data, TeamSpaceType.TEAMS), -1 === g.indexOf(FolderType.ORG) ? [] : nv(d.data, TeamSpaceType.ORGS));
     return {
-      [qy.FOLDER]: cappedFolders,
-      [qy.TEAM]: cappedTeams,
-      [qy.ORG]: cappedOrgs
+      [FolderType.FOLDER]: cappedFolders,
+      [FolderType.TEAM]: cappedTeams,
+      [FolderType.ORG]: cappedOrgs
     };
   }, [g, d.data]);
   let C = useAtomWithSubscription(P_);
@@ -72,7 +72,7 @@ export function $$R0({
   let [O, D] = useAtomValueAndSetter(a3);
   let L = _$$P();
   useEffect(() => {
-    "loaded" === d.status && s.length > 0 && O !== P && (D(P), L(s, WY.SPACE, uR.DROPDOWN));
+    "loaded" === d.status && s.length > 0 && O !== P && (D(P), L(s, CreatorResourceType.SPACE, InputType.DROPDOWN));
   }, [d]);
   let F = _$$k();
   let M = useCallback((e, t, n) => {
@@ -89,10 +89,10 @@ export function $$R0({
     let t = nX(k, T, null, R ?? void 0);
     u(HI({}));
     i(e, null, t);
-    F({}, jD.CLEAR_ALL, uR.DROPDOWN);
+    F({}, PillType.CLEAR_ALL, InputType.DROPDOWN);
   }, [u, T, k, R, i, F]);
   let U = C?.value ?? og;
-  let B = Object.values(qy).reduce(function (e, t) {
+  let B = Object.values(FolderType).reduce(function (e, t) {
     return e + (U[t]?.length || 0);
   }, 0) >= hp;
   let {
@@ -153,7 +153,7 @@ function N({
     }) : renderI18nText("search.empty_state.no_results_no_query")
   }) : jsxs(Fragment, {
     children: [jsx(P, {
-      appliedSpaces: e[qy.FOLDER],
+      appliedSpaces: e[FolderType.FOLDER],
       baseId: `${t}-project`,
       basePath: [...i, 0],
       defaultIcon: jsx(SvgComponent, {
@@ -165,9 +165,9 @@ function N({
       onClickCallback: r,
       query: s,
       results: o.folders,
-      spaceFacetType: qy.FOLDER
+      spaceFacetType: FolderType.FOLDER
     }), jsx(P, {
-      appliedSpaces: e[qy.TEAM],
+      appliedSpaces: e[FolderType.TEAM],
       baseId: `${t}-team`,
       basePath: [...i, 1],
       computeOverrideIcon: e => jsx(nl, {
@@ -183,9 +183,9 @@ function N({
       onClickCallback: r,
       query: s,
       results: o.teams,
-      spaceFacetType: qy.TEAM
+      spaceFacetType: FolderType.TEAM
     }), jsx(P, {
-      appliedSpaces: e[qy.ORG],
+      appliedSpaces: e[FolderType.ORG],
       baseId: `${t}-org`,
       basePath: [...i, 2],
       computeOverrideIcon: e => jsx(_$$n, {
@@ -201,7 +201,7 @@ function N({
       onClickCallback: r,
       query: s,
       results: o.orgs,
-      spaceFacetType: qy.ORG
+      spaceFacetType: FolderType.ORG
     }), !!e && !wG(e) && jsx(kI, {
       baseId: t,
       basePath: [...i, 3],
@@ -227,7 +227,7 @@ function P({
   let y = _$$k();
   let b = useCallback((t, i, n, r) => {
     l(t, i, n ? r ? e.filter(e => !deepEqual(e, n)) : e.concat(n) : []);
-    !r && n ? A(dd(i, n), c) : y(n ? dd(i, n) : {}, jD.SELECTION, uR.DROPDOWN);
+    !r && n ? A(dd(i, n), c) : y(n ? dd(i, n) : {}, PillType.SELECTION, InputType.DROPDOWN);
   }, [e, l, A, c, y]);
   let v = useMemo(() => {
     if (h) return e;

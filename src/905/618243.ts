@@ -14,7 +14,7 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { p as _$$p } from "../905/185998";
 import { k as _$$k } from "../905/443820";
 import { Button } from "../905/521428";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
 import { XHR } from "../905/910117";
@@ -27,7 +27,7 @@ import { FileCanEdit } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
 import { registerModal } from "../905/102752";
 import { customHistory } from "../905/612521";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
@@ -37,8 +37,8 @@ import { hasTeamPaidAccess } from "../figma_app/345997";
 import { UpsellModalType } from "../905/165519";
 import { RO, Q1, zS, xp, Xj } from "../905/472146";
 import { lQ } from "../905/934246";
-import { fu } from "../figma_app/831799";
-import { yX } from "../figma_app/918700";
+import { TrackingProvider } from "../figma_app/831799";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A } from "../5724/768410";
 function N(e) {
   let t = useDispatch();
@@ -111,7 +111,7 @@ function N(e) {
           value: i,
           onChange: r,
           onKeyDown: e => {
-            e.keyCode === Uz.ENTER && N(e);
+            e.keyCode === KeyCodes.ENTER && N(e);
           },
           "aria-label": getI18nString("collaboration.branching_create.input_label"),
           "data-testid": "branch-create-modal-input"
@@ -368,12 +368,12 @@ function Y({
   buttonsHelperComponent: c,
   hideSecondaryCta: u = !1
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e,
     properties: {
       upsellSource: t
     },
-    children: jsxs(yX, {
+    children: jsxs(ConfirmationModal2, {
       autoFocusCta: !1,
       cancelText: a,
       className: "upsell_modal_template--modal--soxP1",
@@ -427,7 +427,7 @@ let X = registerModal(function ({
   let n = useDispatch();
   let r = UpsellModalType.OSS_EXPOSURE_BRANCHING_UPSELL_MODAL;
   let s = t ? renderI18nText("oss_exposure_branching_upsell_modal.body1") : renderI18nText("oss_exposure_branching_upsell_modal.nonadmin.body1", {
-    learnMoreLink: jsx(Us, {
+    learnMoreLink: jsx(linkWithTracking, {
       href: $,
       target: "_blank",
       trusted: !0,

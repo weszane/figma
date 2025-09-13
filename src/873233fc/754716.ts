@@ -32,7 +32,7 @@ import { W as _$$W } from "../441/503702";
 import { Lk } from "../figma_app/122682";
 import { FEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../9410/188255";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/621515";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { QF } from "../figma_app/502247";
@@ -768,7 +768,7 @@ function eI() {
     !isShowing && n && show();
   }, [isShowing, show]), isShowing) ? jsx("div", {
     "data-testid": "dev-mode-demo-file-tooltips-overlay",
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "DevModeDemoFileTour",
       properties: {
         planType: r,

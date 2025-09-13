@@ -8,7 +8,7 @@ import { gl, FR, oM } from "../905/171315";
 import { k } from "../905/252342";
 import { v as _$$v } from "../905/281500";
 import { r as _$$r } from "../905/264954";
-import { jD, uR } from "../figma_app/162807";
+import { PillType, InputType } from "../figma_app/162807";
 export function $$h0() {
   let e = useAtomWithSubscription(L8);
   let t = useAtomWithSubscription(rG);
@@ -37,7 +37,7 @@ function g({
     i ? (f(null), s.current?.blur()) : (t.stopPropagation(), f(e), s.current?.focus());
   }, [e, i, f]);
   let I = useCallback(n => {
-    i && (("Backspace" === n.key || "Delete" === n.key) && (_(), b(oM(e), jD.PILL, uR.AUTOCOMPLETE)), "ArrowLeft" === n.key && t > 0 && f(g[t - 1]), "ArrowRight" === n.key && (t < g.length - 1 ? f(g[t + 1]) : f(null)));
+    i && (("Backspace" === n.key || "Delete" === n.key) && (_(), b(oM(e), PillType.PILL, InputType.AUTOCOMPLETE)), "ArrowLeft" === n.key && t > 0 && f(g[t - 1]), "ArrowRight" === n.key && (t < g.length - 1 ? f(g[t + 1]) : f(null)));
   }, [g, t, i, _, f, b, e]);
   let E = useCallback(e => {
     h && v(e);

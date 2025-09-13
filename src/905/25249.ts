@@ -25,7 +25,7 @@ import { cL } from "../905/748726";
 import { um } from "../905/14223";
 import { le } from "../figma_app/11182";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { xT, Q3 } from "../figma_app/199513";
 import { useCurrentUserOrg } from "../905/845253";
 import { FC } from "../figma_app/212807";
@@ -654,7 +654,7 @@ export let $$eK0 = registerModal(function (e) {
       }), t?.rightSideActions]
     });
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Share Modal",
     properties: {
       resourceType: FResourceCategoryType.FOLDER,

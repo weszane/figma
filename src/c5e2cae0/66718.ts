@@ -6,14 +6,14 @@ import { xf } from "../figma_app/416935";
 import { XHR } from "../905/910117";
 import { Jn } from "../905/17223";
 import { I as _$$I } from "../c5e2cae0/393403";
-import { Lf, VE, Kz, tM, vd } from "../figma_app/637027";
+import { EnhancedInput, BigSelect, Spacing, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { popModalStack, showModalHandler, hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { Os, nO } from "../905/734904";
 import { A as _$$A } from "../6828/364616";
 import { A as _$$A2 } from "../5724/933949";
@@ -75,9 +75,9 @@ let C = () => jsxs(Fragment, {
 let w = registerModal(function ({
   hideModal: e
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Upgrade Contact Sales Success Modal",
-    children: jsxs(ey, {
+    children: jsxs(ModalView, {
       hide: e,
       size: 480,
       children: [jsxs("div", {
@@ -171,7 +171,7 @@ export function $$E0(e) {
     }) : null;
   };
   let P = (e, t, a = !1) => jsxs(Fragment, {
-    children: [jsx(Lf, {
+    children: [jsx(EnhancedInput, {
       htmlName: t,
       label: e,
       value: g[t] || "",
@@ -195,7 +195,7 @@ export function $$E0(e) {
         className: r,
         children: jsxs("div", {
           className: "upgrade_contact_sales_modal--select--sFfZ- address_form--selectRowFull--8DtEB",
-          children: [jsx(VE, {
+          children: [jsx(BigSelect, {
             name: t,
             placeholder: e,
             defaultValue: "",
@@ -219,9 +219,9 @@ export function $$E0(e) {
       }), k(t)]
     });
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Upgrade Contact Sales Modal",
-    children: jsxs(ey, {
+    children: jsxs(ModalView, {
       className: "upgrade_contact_sales_modal--contactSalesModal--ExFaV",
       hide: T,
       size: 480,
@@ -240,16 +240,16 @@ export function $$E0(e) {
         children: ["error" === g.result && jsxs(Fragment, {
           children: [jsx(_$$I, {
             message: getI18nString("universal_upgrade.there_was_an_error_processing_your_information_please_try_again")
-          }), jsx(Kz, {
+          }), jsx(Spacing, {
             multiple: .5
           })]
         }), jsxs("fieldset", {
           children: [P(getI18nString("universal_upgrade.email_address"), "email"), P(getI18nString("universal_upgrade.full_name"), "name"), P(getI18nString("universal_upgrade.company_name"), "companyName"), M(getI18nString("contact_sales.which_topic_best_fits_your_needs"), "topic", N()), M(getI18nString("contact_sales.what_figma_plan_are_you_inquiring_about"), "plan", C()), P(getI18nString("contact_sales.phone_number_optional"), "phone")]
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1
         }), jsx("p", {
           children: renderI18nText("universal_upgrade.how_can_we_help_optional")
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1
         }), jsx(_$$v, {
           className: "upgrade_contact_sales_modal--freeTextInput--fE033 text--fontPos13--xW8hS text--_fontBase--QdLsd",
@@ -263,10 +263,10 @@ export function $$E0(e) {
         })]
       }), jsxs("div", {
         className: "upgrade_contact_sales_modal--modalFooter--WNk7P",
-        children: [jsx(tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: T,
           children: renderI18nText("general.cancel")
-        }), jsx(vd, {
+        }), jsx(ButtonBasePrimaryTracked, {
           onClick: A,
           children: renderI18nText("universal_upgrade.submit")
         })]

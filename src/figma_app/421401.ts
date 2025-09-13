@@ -7,8 +7,8 @@ import { V } from "../figma_app/312987";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
-import { jm, fu } from "../figma_app/831799";
-import { K } from "../905/135526";
+import { TrackedDiv, TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { Um } from "../905/848862";
 import { RG } from "../figma_app/684446";
 import { FAccessLevelType } from "../figma_app/191312";
@@ -23,7 +23,7 @@ let v = parsePxInt(hX);
 let A = "BATCH_CHANGE_LICENSE_GROUP_DROPDOWN";
 let x = "BATCH_CHANGE_WORKSPACE_DROPDOWN";
 export function $$N3(e) {
-  return jsx(jm, {
+  return jsx(TrackedDiv, {
     className: e.disabled ? "shared_table--optionDisabled--OhX66 shared_table--_optionBase--z8wdT shared_table--_disabled--EkV7j" : "shared_table--option--hw4Sr shared_table--_optionBase--z8wdT",
     onClick: e.onClick,
     trackingProperties: e.trackingProperties,
@@ -133,9 +133,9 @@ export function $$R0(e) {
   let r = Um();
   if (!RG() || 0 === e.licenseGroups.length) return null;
   let i = r?.type === A;
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "Change billing group",
-    trackingTargets: K.NONE,
+    trackingTargets: RCSMessageType.NONE,
     children: [i && jsx(O, {
       workspaces: e.licenseGroups,
       selectedWorkspace: e.selectedLicenseGroup,
@@ -155,9 +155,9 @@ export function $$L1(e) {
   let r = Um();
   if (0 === e.workspaces.length) return null;
   let i = r?.type === x;
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "Change Workspace",
-    trackingTargets: K.NONE,
+    trackingTargets: RCSMessageType.NONE,
     children: [i && jsx(O, {
       workspaces: e.workspaces,
       selectedWorkspace: e.selectedWorkspace,

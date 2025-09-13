@@ -11,7 +11,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { d6 } from "../figma_app/246699";
-import { w_ } from "../figma_app/482728";
+import { PublicLinkControlsSetting } from "../figma_app/482728";
 if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -36,13 +36,13 @@ export function $$x2(e) {
 }
 export function $$b0(e, t, a) {
   let n = d6(t);
-  let i = n === w_.PASSWORD_REQUIRED || n === w_.EXP_AND_PWD_REQUIRED;
-  let r = n === w_.EXPIRATION_REQUIRED || n === w_.EXP_AND_PWD_REQUIRED;
+  let i = n === PublicLinkControlsSetting.PASSWORD_REQUIRED || n === PublicLinkControlsSetting.EXP_AND_PWD_REQUIRED;
+  let r = n === PublicLinkControlsSetting.EXPIRATION_REQUIRED || n === PublicLinkControlsSetting.EXP_AND_PWD_REQUIRED;
   let {
     initialMaxDuration,
     initialIsTimeMeasuredInDays
   } = $$h7(a);
-  let [d, c] = useState(n === w_.BANNED);
+  let [d, c] = useState(n === PublicLinkControlsSetting.BANNED);
   let [_, u] = useState(i);
   let [x, b] = useState(r);
   let [f, j] = useState(initialIsTimeMeasuredInDays);
@@ -97,7 +97,7 @@ export function $$v5(e, t) {
   return !0;
 }
 export function $$f4(e) {
-  return e.isPublicLinksBanned ? w_.BANNED : e.doPublicLinksRequireExpiration && e.doPublicLinksRequirePassword ? w_.EXP_AND_PWD_REQUIRED : e.doPublicLinksRequireExpiration ? w_.EXPIRATION_REQUIRED : e.doPublicLinksRequirePassword ? w_.PASSWORD_REQUIRED : w_.ALLOWED;
+  return e.isPublicLinksBanned ? PublicLinkControlsSetting.BANNED : e.doPublicLinksRequireExpiration && e.doPublicLinksRequirePassword ? PublicLinkControlsSetting.EXP_AND_PWD_REQUIRED : e.doPublicLinksRequireExpiration ? PublicLinkControlsSetting.EXPIRATION_REQUIRED : e.doPublicLinksRequirePassword ? PublicLinkControlsSetting.PASSWORD_REQUIRED : PublicLinkControlsSetting.ALLOWED;
 }
 export function $$j9(e, t) {
   return e.doPublicLinksRequireExpiration ? $$v5(e.maxDuration, e.isTimeMeasuredInDays) ? e.isTimeMeasuredInDays ? 24 * parseInt(e.maxDuration) : parseInt(e.maxDuration) : (t(FlashActions.error(getI18nString("org_actions.an_error_occurred"))), null) : null;

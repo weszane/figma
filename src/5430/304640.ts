@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { _q } from "../5430/39369";
 export let $$c0 = registerModal(function (e) {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: e.confirmationTitle,
     confirmText: e.confirmButtonText,
     onConfirm: e.onBlock,
@@ -17,7 +17,7 @@ export let $$c0 = registerModal(function (e) {
       }), jsx("p", {
         className: _q,
         children: renderI18nText("community.comments.link_about_managing_restricted_commenters", {
-          link: jsx(CY, {
+          link: jsx(SecureLink, {
             href: "https://help.figma.com/hc/articles/1500002628062",
             target: "_blank",
             trusted: !0,

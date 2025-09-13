@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { zB } from "../figma_app/482728";
+import { FileExportSetting } from "../figma_app/482728";
 export function $$l0({
   exportControlsSetting: e
 }) {
@@ -11,9 +11,9 @@ export function $$l0({
       className: _$$s.colorTextSecondary.$,
       children: function (e) {
         switch (e) {
-          case zB.BANNED:
+          case FileExportSetting.BANNED:
             return getI18nString("org_settings.workspace_controls.banned");
-          case zB.MEMBERS_ONLY:
+          case FileExportSetting.MEMBERS_ONLY:
             return getI18nString("org_settings.workspace_controls.members_only");
           default:
             return getI18nString("org_settings.workspace_controls.allowed");

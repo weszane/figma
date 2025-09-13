@@ -14,17 +14,17 @@ import { G } from "../figma_app/119843";
 import { oB, j7 } from "../905/929976";
 import { an } from "../905/81009";
 import { Um } from "../905/848862";
-import { WY, uR } from "../figma_app/162807";
+import { CreatorResourceType, InputType } from "../figma_app/162807";
 import { A as _$$A2 } from "../6828/154709";
 let T = e => {
   switch (e) {
-    case WY.RESOURCE:
+    case CreatorResourceType.RESOURCE:
       return renderI18nText("search.preview_section.all_files");
-    case WY.CREATOR:
+    case CreatorResourceType.CREATOR:
       return renderI18nText("search.facets.created_by", {
         creator: getI18nString("search.facets.anyone")
       });
-    case WY.SPACE:
+    case CreatorResourceType.SPACE:
       return renderI18nText("search.facets.space", {
         space: getI18nString("search.facets.all_spaces")
       });
@@ -47,14 +47,14 @@ export function $$I0({
   let w = useAtomWithSubscription(l4(t ?? null));
   let O = _$$f();
   let R = _$$A();
-  let L = uR.DROPDOWN;
+  let L = InputType.DROPDOWN;
   let P = useMemo(() => {
     switch (t) {
-      case WY.RESOURCE:
+      case CreatorResourceType.RESOURCE:
         return getI18nString("search.facets.filter_by_resource");
-      case WY.CREATOR:
+      case CreatorResourceType.CREATOR:
         return getI18nString("search.facets.filter_by_creator");
-      case WY.SPACE:
+      case CreatorResourceType.SPACE:
         return getI18nString("search.facets.filter_by_space");
       default:
         return "Filter";

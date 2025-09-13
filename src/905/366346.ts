@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { serializeQuery } from "../905/634134";
 import { buildUrlPath } from "../905/760074";
-import { EO } from "../905/691205";
+import { replaceColonWithDash } from "../905/691205";
 export function $$p4(e, t) {
   (e = e ? e.slice(1) : "") && ("commentPreferences" === e ? t.showCommentPreferencesPicker = !0 : t.commentThreadId = e);
 }
@@ -28,7 +28,7 @@ export function $$g3(e, t, i, n, r, a = !1) {
   return s;
 }
 export function $$f6(e, t) {
-  t && isValidSessionLocalID(parseSessionLocalID(t)) && (e["node-id"] = EO(t));
+  t && isValidSessionLocalID(parseSessionLocalID(t)) && (e["node-id"] = replaceColonWithDash(t));
 }
 export function $$_2(e, t) {
   t && (e["version-id"] = t);

@@ -5,7 +5,7 @@ import s from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { M } from "../905/152487";
 import { b as _$$b } from "../figma_app/199304";
 import { j } from "../figma_app/928756";
@@ -57,7 +57,7 @@ function v(e) {
     boxShadow: "var(--elevation-400-menu-panel)",
     ...a
   }).$;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e.trackingContextName,
     properties: e.trackingProperties,
     children: jsx(_$$M, {

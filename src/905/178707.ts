@@ -10,10 +10,10 @@ import { d as _$$d } from "../905/884707";
 import { E as _$$E2, BZ, OZ } from "../905/194276";
 import { qB, RE } from "../905/862321";
 import { sT } from "../905/694658";
-import { L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { CTA_CLICKED } from "../figma_app/314264";
 import { createNoOpValidator } from "../figma_app/181241";
 var d = l;
@@ -27,7 +27,7 @@ let _ = forwardRef(function ({
       className: "x10l6tqk x1lliihq xuzi1b7 xtvhhri x1j6dyjg xo1l8bm xjbqb8w x14qv3re xgwajed x11vz743 x563n8i",
       htmlFor: t.id,
       children: t.placeholder
-    }), jsx(L, {
+    }), jsx(LazyInputForwardRef, {
       className: d()(e),
       ..._$$d(t),
       className: "xjyslct x14qv3re x1lliihq xh8yej3 x9dczf4 x9f619 x1kxipp6 xosj86m xc8nv1x x1kogg8i x101yacv x1pga9m1 xqhu3d4 xbwv0bw x1gs6z28 xm3xvbb x1gnnqk1 xugdvvj xpdc0an xcwqlvo xxqzaim x1robv96 x1cluluk xnv9m77 x17410jd",
@@ -57,7 +57,7 @@ let $$x1 = forwardRef(function ({
     delay: 50,
     ..._$$d(i),
     ref: r
-  }) : jsx(L, {
+  }) : jsx(LazyInputForwardRef, {
     className: d()("form_inputs--input--wfn0T", e),
     ..._$$d(i),
     ref: r
@@ -83,7 +83,7 @@ export function $$w0(e) {
   let _ = useSelector(e => e.auth.invalidInput);
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   _$$h(() => {
     f && xf(f) && sT({
       email: f

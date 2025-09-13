@@ -1,7 +1,7 @@
 /**
  * UserRole enum (original: $$n0)
  */
-export enum UserRole {
+export enum UserGroupRole {
   ADMIN = "admin"
 }
 
@@ -18,6 +18,6 @@ export enum GroupType {
 export const DefaultGroups: GroupType[] = [GroupType.MEMBERS];
 
 // Refactored exports to match new names
-export const GN = UserRole;
+export const GN = UserGroupRole;
 export const RM = GroupType;
 export const Uu = DefaultGroups;

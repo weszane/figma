@@ -7,7 +7,7 @@ import { Y9, hE, nB, wi, jk, r1, vo } from "../figma_app/272243";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { N as _$$N } from "../905/809096";
@@ -100,7 +100,7 @@ function H(e) {
   let {
     onChange
   } = e;
-  let t = j6();
+  let t = useTracking();
   let r = useCallback(e => {
     onChange(e);
     logAndTrackCTA({
@@ -239,7 +239,7 @@ function ee({
       value: e,
       onChange: n,
       plan: t
-    }), r && jsx(fu, {
+    }), r && jsx(TrackingProvider, {
       name: "plan_invite_modal.seat_type_help_text",
       properties: {
         seatType: e,
@@ -304,7 +304,7 @@ function et({
   children: e,
   trackingProperties: n
 }) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Cost messaging banner",
     properties: n,
     children: jsx("div", {
@@ -656,7 +656,7 @@ function eT(e) {
       }
     });
   }, [e.planType, p?.key?.parentId, p?.type, t.status]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "PlanInviteModal",
     properties: {
       planType: p?.type,

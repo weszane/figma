@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/757007";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { x as _$$x } from "../905/312412";
@@ -129,8 +129,8 @@ let E = (e, t, i) => jsx(B, {
     },
     variant: e.isPrimary ? "primary" : "secondary",
     shortcuts: e.isPrimary ? [{
-      key: Uz.ENTER,
-      modifier: [xH.META]
+      key: KeyCodes.ENTER,
+      modifier: [ModifierKeyCodes.META]
     }] : e.shortcuts,
     recordingKey: generateRecordingKey(i, e.type),
     children: function (e) {
@@ -196,14 +196,14 @@ function x({
     onClose: f,
     disabled: !i
   });
-  kz(Uz.ESCAPE, () => {
+  kz(KeyCodes.ESCAPE, () => {
     t && hm({
       ...t,
       status: o2.COMPLETED,
       interaction: sd.DISMISS,
       interaction_type: Cq.KEYBOARD_SHORTCUT,
       keyboard_shortcut: F1({
-        key: Uz.ESCAPE
+        key: KeyCodes.ESCAPE
       })
     });
     close();

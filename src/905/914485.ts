@@ -7,8 +7,8 @@ import { renderI18nText } from "../905/303541";
 import { S as _$$S } from "../905/417453";
 import { Q0, kq } from "../905/994947";
 import { FacetedSearchPreviewRecentFilesView } from "../figma_app/43951";
-import { YN } from "../figma_app/349248";
-import { uH, Or, MU } from "../figma_app/162807";
+import { mapRecentFilesAndRepos } from "../figma_app/349248";
+import { PublicModelType, DEFAULT_PAGE_SIZE, MU } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
@@ -39,14 +39,14 @@ function T({
   let T = _$$S(h)?.searches;
   let k = useCallback(e => {
     if (e.preventDefault(), e.metaKey) {
-      let e = XW(s.query, h, p ?? uH.FILES);
+      let e = XW(s.query, h, p ?? PublicModelType.FILES);
       customHistory.redirect(e, "_blank");
     } else {
       o(Dy({
         entryPoint: "file_browser"
       }));
       c(s.query);
-      Yb(o, l, s.query, u, p ?? uH.FILES, !0);
+      Yb(o, l, s.query, u, p ?? PublicModelType.FILES, !0);
       o(hideModalHandler());
     }
   }, [o, l, s.query, h, p, u, c]);
@@ -90,11 +90,11 @@ export function $$k0({
 }) {
   let i = useSelector(e => e.currentUserOrgId);
   let f = _$$S(i);
-  let _ = f.searches.slice(0, Or);
+  let _ = f.searches.slice(0, DEFAULT_PAGE_SIZE);
   let A = MU - _.length;
   let y = function () {
     let [e] = setupResourceAtomHandler(FacetedSearchPreviewRecentFilesView({}));
-    let t = useMemo(() => e.transform(e => YN(e.currentUser.recentFiles)), [e]);
+    let t = useMemo(() => e.transform(e => mapRecentFilesAndRepos(e.currentUser.recentFiles)), [e]);
     useEffect(() => {
       "loaded" === t.status && Wn(t.data);
     }, [t]);

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useId } from "react";
 import { Label } from "../905/270045";
 import { v } from "../905/442517";
-import { Ph } from "../figma_app/637027";
+import { clickableBaseLinkTracked } from "../figma_app/637027";
 import { ny } from "../figma_app/819458";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -111,7 +111,7 @@ export function $$w0(e) {
       "data-tooltip": e.contactSupportTooltipCopy ?? "admin-support@figma.com",
       "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip-show-above": !0,
-      children: jsx(Ph, {
+      children: jsx(clickableBaseLinkTracked, {
         trackingEventName: e.label,
         onClick: () => {
           let t = getI18nState()?.getPrimaryLocale(!1);

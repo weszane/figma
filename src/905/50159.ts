@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { mc, vk, N7, QV } from "../905/508367";
 import { customHistory } from "../905/612521";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { h1, Ak } from "../905/986103";
 import { $E, w4 } from "../905/445814";
 import { NU } from "../figma_app/204891";
@@ -20,7 +20,7 @@ import { c5 } from "../905/93909";
 import { I4 } from "../figma_app/840917";
 import { i4 } from "../905/862913";
 import { fA } from "../figma_app/543100";
-import { O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { KindEnum } from "../905/129884";
 import { W } from "../905/244810";
 import { gO, m2, ag, Vj, vS, q6, SC, Dv, VA, WM, CK, m4, Tr, FR, yl, XK } from "../figma_app/603826";
@@ -136,8 +136,8 @@ export function $$P0(e) {
         }
         if (p(c5({
           planId: i || r,
-          planType: i ? O.ORG : O.TEAM
-        })), oJ(t)) {
+          planType: i ? OrganizationType.ORG : OrganizationType.TEAM
+        })), isCommandOrShift(t)) {
           p(UN({
             fileKey: e.file.key,
             entrypoint: "standalone file tile",

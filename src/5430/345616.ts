@@ -3,7 +3,7 @@ import { J } from "../905/614223";
 import n from "classnames";
 import { LoadingSpinner } from "../figma_app/858013";
 import { n as _$$n } from "../5430/496973";
-import { $z } from "../figma_app/831799";
+import { TrackedButton } from "../figma_app/831799";
 import { tt, Vi, uw, uD } from "../5430/774694";
 if (443 == require.j) {}
 var o = n;
@@ -19,7 +19,7 @@ export function $$u0({
   let p = _$$n(n);
   return jsx(J, {
     brand: p,
-    children: jsx($z, {
+    children: jsx(TrackedButton, {
       className: o()({
         [tt]: r,
         [Vi]: !r,

@@ -7,7 +7,7 @@ import { B } from "../905/759157";
 import { A as _$$A } from "../905/351112";
 import { Xt } from "../figma_app/399472";
 import { showModalHandler } from "../905/156213";
-import { QE } from "../figma_app/831799";
+import { TrackingContext } from "../figma_app/831799";
 import { Yo } from "../figma_app/543529";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { getPluginVersion } from "../figma_app/300692";
@@ -38,7 +38,7 @@ export function $$A1({
   plugins: e,
   renderPluginDropdownButton: t
 }) {
-  return jsx(QE.Consumer, {
+  return jsx(TrackingContext.Consumer, {
     children: r => jsx(x, {
       plugins: e,
       trackingContext: r.name,

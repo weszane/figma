@@ -12,7 +12,7 @@ import { $P, ej, w2 } from "../905/977218";
 import { vj } from "../905/574958";
 import { Q8, Q, ih, Yj, ic, sC } from "../905/61477";
 import { Q0, kq } from "../905/994947";
-import { Xr, uH, hf, q6 } from "../figma_app/162807";
+import { convertSearchModelTypeToModelType, PublicModelType, getModelTypeEmptyStateI18n, getModelTypeHeaderI18n } from "../figma_app/162807";
 import { e as _$$e } from "../905/404280";
 import { H } from "../905/315077";
 import { customHistory } from "../905/612521";
@@ -227,29 +227,29 @@ function V({
 }) {
   let o = useAtomWithSubscription(Q8);
   let c = useAtomWithSubscription(jM);
-  let u = a && c ? Xr(c) : null;
+  let u = a && c ? convertSearchModelTypeToModelType(c) : null;
   let p = useCallback(t => {
     t.preventDefault();
     t.metaKey || e(o, !1, !0, !0);
   }, [o, e]);
   let m = useMemo(() => {
     switch (u) {
-      case uH.FILES:
+      case PublicModelType.FILES:
         return jsx(In, {
           icon: "page-16",
           fill: "brand"
         });
-      case uH.PROJECTS:
+      case PublicModelType.PROJECTS:
         return jsx(In, {
           icon: "folder-16",
           fill: "brand"
         });
-      case uH.TEAMS:
+      case PublicModelType.TEAMS:
         return jsx(In, {
           icon: "team-16",
           fill: "brand"
         });
-      case uH.USERS:
+      case PublicModelType.USERS:
         return jsx(SvgComponent, {
           svg: _$$A2,
           className: "faceted_search_see_all_results--icon--XAyF3"
@@ -263,13 +263,13 @@ function V({
   }, [u]);
   let h = useMemo(() => {
     switch (u) {
-      case uH.FILES:
+      case PublicModelType.FILES:
         return getI18nString("search.facet_preview_section.see_more_files");
-      case uH.PROJECTS:
+      case PublicModelType.PROJECTS:
         return getI18nString("search.facet_preview_section.see_more_projects");
-      case uH.TEAMS:
+      case PublicModelType.TEAMS:
         return getI18nString("search.facet_preview_section.see_more_teams");
-      case uH.USERS:
+      case PublicModelType.USERS:
         return getI18nString("search.facet_preview_section.see_more_users");
       default:
         return getI18nString("search.preview_section.see_all_results");
@@ -301,7 +301,7 @@ export function $$z0({
   let I = useAtomWithSubscription(Yj);
   let E = useAtomWithSubscription(ic);
   let x = useAtomWithSubscription(Q);
-  let S = Xr(i);
+  let S = convertSearchModelTypeToModelType(i);
   let w = function () {
     let e = useDispatch();
     let t = useSelector(e => e.search);
@@ -342,7 +342,7 @@ export function $$z0({
       className: G,
       "data-testid": "facetedSearchNoResults",
       children: x ? S ? jsxs(Fragment, {
-        children: [hf(S), "\xa0", jsx("span", {
+        children: [getModelTypeEmptyStateI18n(S), "\xa0", jsx("span", {
           children: x
         })]
       }) : renderI18nText("search.empty_state.no_file_project_team_or_people_results", {
@@ -362,9 +362,9 @@ export function $$z0({
           return o && 0 !== o.length ? jsxs(_$$Fragment, {
             children: [I.length > 1 && jsx("div", {
               className: "faceted_search_preview_results--header--0RvlC faceted_search_preview_recents--header--JjcIl",
-              children: q6(a)
+              children: getModelTypeHeaderI18n(a)
             }), o.map((r, a) => {
-              if (r.search_model_type === uH.FILES) {
+              if (r.search_model_type === PublicModelType.FILES) {
                 let o = `${e}-file-${a}`;
                 return jsx(H, {
                   fileResult: r,
@@ -374,7 +374,7 @@ export function $$z0({
                   onContextMenuCallback: i.onContextMenuClick
                 }, o);
               }
-              if (r.search_model_type === uH.PROJECTS) {
+              if (r.search_model_type === PublicModelType.PROJECTS) {
                 let o = `${e}-folder-${a}`;
                 return jsx(N, {
                   folderResult: r,
@@ -384,7 +384,7 @@ export function $$z0({
                   onContextMenuCallback: i.onContextMenuClick
                 }, o);
               }
-              if (r.search_model_type === uH.TEAMS) {
+              if (r.search_model_type === PublicModelType.TEAMS) {
                 let o = `${e}-team-${a}`;
                 return jsx(D, {
                   teamResult: r,
@@ -394,7 +394,7 @@ export function $$z0({
                   onContextMenuCallback: i.onContextMenuClick
                 }, o);
               }
-              if (r.search_model_type === uH.USERS) {
+              if (r.search_model_type === PublicModelType.USERS) {
                 let o = `${e}-user-${a}`;
                 return jsx($$j, {
                   userResult: r,

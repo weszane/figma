@@ -1,15 +1,15 @@
 import { throwTypeError } from "../figma_app/465776";
-import { xH, Uz } from "../905/63728";
+import { ModifierKeyCodes, KeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 function s(e) {
   switch (e) {
-    case xH.CONTROL:
+    case ModifierKeyCodes.CONTROL:
       return BrowserInfo.mac ? "\u2303" : "Ctrl";
-    case xH.ALT:
+    case ModifierKeyCodes.ALT:
       return BrowserInfo.mac ? "\u2325" : "Alt";
-    case xH.SHIFT:
+    case ModifierKeyCodes.SHIFT:
       return "\u21E7";
-    case xH.META:
+    case ModifierKeyCodes.META:
       return BrowserInfo.mac ? "\u2318" : "Ctrl";
     default:
       throwTypeError(e);
@@ -23,119 +23,119 @@ export function $$o0(e) {
   let a = modifier?.map(s).join() ?? "";
   let o = function (e) {
     switch (e) {
-      case Uz.BACKSPACE:
+      case KeyCodes.BACKSPACE:
         return "\u232B";
-      case Uz.TAB:
+      case KeyCodes.TAB:
         return "Tab";
-      case Uz.ENTER:
+      case KeyCodes.ENTER:
         return "\u23CE";
-      case Uz.ESCAPE:
+      case KeyCodes.ESCAPE:
         return "Esc";
-      case Uz.SPACE:
+      case KeyCodes.SPACE:
         return "Space";
-      case Uz.LEFT_ARROW:
+      case KeyCodes.LEFT_ARROW:
         return "\u2190";
-      case Uz.UP_ARROW:
+      case KeyCodes.UP_ARROW:
         return "\u2191";
-      case Uz.RIGHT_ARROW:
+      case KeyCodes.RIGHT_ARROW:
         return "\u2192";
-      case Uz.DOWN_ARROW:
+      case KeyCodes.DOWN_ARROW:
         return "\u2193";
-      case Uz.DELETE:
+      case KeyCodes.DELETE:
         return "Delete";
-      case Uz.PERIOD:
+      case KeyCodes.PERIOD:
         return ".";
-      case Uz.KEY_0:
+      case KeyCodes.KEY_0:
         return "0";
-      case Uz.KEY_1:
+      case KeyCodes.KEY_1:
         return "1";
-      case Uz.KEY_2:
+      case KeyCodes.KEY_2:
         return "2";
-      case Uz.KEY_3:
+      case KeyCodes.KEY_3:
         return "3";
-      case Uz.KEY_4:
+      case KeyCodes.KEY_4:
         return "4";
-      case Uz.KEY_5:
+      case KeyCodes.KEY_5:
         return "5";
-      case Uz.KEY_6:
+      case KeyCodes.KEY_6:
         return "6";
-      case Uz.KEY_7:
+      case KeyCodes.KEY_7:
         return "7";
-      case Uz.KEY_8:
+      case KeyCodes.KEY_8:
         return "8";
-      case Uz.KEY_9:
+      case KeyCodes.KEY_9:
         return "9";
-      case Uz.A:
+      case KeyCodes.A:
         return "A";
-      case Uz.B:
+      case KeyCodes.B:
         return "B";
-      case Uz.C:
+      case KeyCodes.C:
         return "C";
-      case Uz.D:
+      case KeyCodes.D:
         return "D";
-      case Uz.E:
+      case KeyCodes.E:
         return "E";
-      case Uz.F:
+      case KeyCodes.F:
         return "F";
-      case Uz.G:
+      case KeyCodes.G:
         return "G";
-      case Uz.H:
+      case KeyCodes.H:
         return "H";
-      case Uz.I:
+      case KeyCodes.I:
         return "I";
-      case Uz.J:
+      case KeyCodes.J:
         return "J";
-      case Uz.K:
+      case KeyCodes.K:
         return "K";
-      case Uz.L:
+      case KeyCodes.L:
         return "L";
-      case Uz.M:
+      case KeyCodes.M:
         return "M";
-      case Uz.N:
+      case KeyCodes.N:
         return "N";
-      case Uz.O:
+      case KeyCodes.O:
         return "O";
-      case Uz.P:
+      case KeyCodes.P:
         return "P";
-      case Uz.Q:
+      case KeyCodes.Q:
         return "Q";
-      case Uz.R:
+      case KeyCodes.R:
         return "R";
-      case Uz.S:
+      case KeyCodes.S:
         return "S";
-      case Uz.T:
+      case KeyCodes.T:
         return "T";
-      case Uz.U:
+      case KeyCodes.U:
         return "U";
-      case Uz.V:
+      case KeyCodes.V:
         return "V";
-      case Uz.W:
+      case KeyCodes.W:
         return "W";
-      case Uz.X:
+      case KeyCodes.X:
         return "X";
-      case Uz.Y:
+      case KeyCodes.Y:
         return "Y";
-      case Uz.Z:
+      case KeyCodes.Z:
         return "Z";
-      case Uz.NUMPAD_0:
+      case KeyCodes.NUMPAD_0:
         return "0";
-      case Uz.NUMPAD_1:
+      case KeyCodes.NUMPAD_1:
         return "1";
-      case Uz.NUMPAD_2:
+      case KeyCodes.NUMPAD_2:
         return "2";
-      case Uz.NUMPAD_3:
+      case KeyCodes.NUMPAD_3:
         return "3";
-      case Uz.NUMPAD_4:
+      case KeyCodes.NUMPAD_4:
         return "4";
-      case Uz.NUMPAD_5:
+      case KeyCodes.NUMPAD_5:
         return "5";
-      case Uz.NUMPAD_6:
+      case KeyCodes.NUMPAD_6:
         return "6";
-      case Uz.NUMPAD_7:
+      case KeyCodes.NUMPAD_7:
         return "7";
-      case Uz.NUMPAD_8:
+      case KeyCodes.NUMPAD_8:
         return "8";
-      case Uz.NUMPAD_9:
+      case KeyCodes.NUMPAD_9:
         return "9";
       default:
         throwTypeError(e);

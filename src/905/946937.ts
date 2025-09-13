@@ -15,12 +15,12 @@ import { R as _$$R } from "../905/304671";
 import { h as _$$h } from "../905/142086";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { getRepoByIdAlt } from "../905/760074";
 import { F as _$$F } from "../905/224";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
@@ -124,7 +124,7 @@ function G(e) {
     return i && [FPlanNameType.PRO, FPlanNameType.STUDENT].includes(i.plan.tier) && !i.deletedAt && r;
   })).unwrapOr(!1), [h, t]);
   let y = !!c;
-  let b = g && jd(g.project);
+  let b = g && isTeamFolderV2(g.project);
   let v = _6();
   if (!g) return jsx(Fragment, {});
   if ("loaded" !== h.status) return jsx(ModalRootComponent, {
@@ -179,7 +179,7 @@ function z(e) {
   let x = p;
   e.isFileInOrg ? x = u : e.isFileInTeamWithProFeatures && (x = f);
   let S = e.isFileInTeamWithProFeatures ? renderI18nText("upsell.move_file_publish.move_to_project") : renderI18nText("upsell.move_file_publish.move_to_team");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "MoveFilePublishUpsell",
     children: jsx(ModalRootComponent, {
       manager: r,

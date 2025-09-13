@@ -22,7 +22,7 @@ import { HH } from "../figma_app/841415";
 import { Kb, ny } from "../905/552753";
 import { K } from "../905/663612";
 import { V } from "../905/890500";
-import { Gc } from "../905/63728";
+import { ignoreCommandOrShift } from "../905/63728";
 import { sf } from "../905/929976";
 import { Np } from "../figma_app/193867";
 import { SD, Du, In, Lo, xH, k8, zl, WO, YD, g2, lo, GI, Qq, ex, WJ, $S } from "../905/649567";
@@ -211,7 +211,7 @@ export function $$L0(e) {
       handle: e
     } : void 0, [e]);
     let n = useSelector(e => i ? Np(e, i) : void 0);
-    let s = useMemo(() => i ? Gc(e => {
+    let s = useMemo(() => i ? ignoreCommandOrShift(e => {
       e.preventDefault();
       t(sf(i));
     }) : void 0, [i, t]);

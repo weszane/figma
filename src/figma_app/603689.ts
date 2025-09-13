@@ -72,7 +72,7 @@ import { Label } from '../905/270045';
 import { Zm } from '../905/270781';
 import { b as _$$b } from '../905/275748';
 import { E as _$$E8 } from '../905/277716';
-import { e as _$$e3 } from '../905/280005';
+import { handleUrlAction } from '../905/280005';
 import { h as _$$h5 } from '../905/284399';
 import { V as _$$V2 } from '../905/292707';
 import { e as _$$e1 } from '../905/295932';
@@ -97,7 +97,7 @@ import { Z1 } from '../905/401885';
 import { U as _$$U2 } from '../905/405962';
 import { x as _$$x4 } from '../905/407439';
 import { debugState } from '../905/407919';
-import { L as _$$L } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A8 } from '../905/408320';
 import { browserCapabilities } from '../905/409121';
 import { rq as _$$rq } from '../905/425180';
@@ -154,7 +154,7 @@ import { K as _$$K3 } from '../905/604638';
 import { QL } from '../905/609392';
 import { i as _$$i3 } from '../905/610691';
 import { customHistory } from '../905/612521';
-import { rl as _$$rl } from '../905/612685';
+import { getDesignFileUrl } from '../905/612685';
 import { J as _$$J5 } from '../905/614223';
 import { b as _$$b4, c as _$$c4 } from '../905/618904';
 import { e as _$$e8 } from '../905/621515';
@@ -385,7 +385,7 @@ import { h as _$$h7 } from '../figma_app/334471';
 import { V as _$$V } from '../figma_app/339971';
 import { ds as _$$ds } from '../figma_app/343967';
 import { DQ } from '../figma_app/345195';
-import { YN as _$$YN2 } from '../figma_app/349248';
+import { mapRecentFilesAndRepos } from '../figma_app/349248';
 import { p as _$$p2 } from '../figma_app/353099';
 import { u as _$$u2 } from '../figma_app/353758';
 import { c1 as _$$c9, Yh } from '../figma_app/357047';
@@ -431,7 +431,7 @@ import { IF, Lo } from '../figma_app/518364';
 import { dh as _$$dh, TS } from '../figma_app/519839';
 import { jn } from '../figma_app/522082';
 import { Qw } from '../figma_app/527668';
-import { VA } from '../figma_app/528509';
+import { hasRootPathOptional } from '../figma_app/528509';
 import { sb as _$$sb, wz } from '../figma_app/532170';
 import { yu } from '../figma_app/533986';
 import { q4 } from '../figma_app/536669';
@@ -466,7 +466,7 @@ import { normalizeTeamData, fileActionEnum } from '../figma_app/630077';
 import { pp as _$$pp } from '../figma_app/632319';
 import { PublishStatusEnum, LibraryPublishStatusEnum } from '../figma_app/633080';
 import { X_ } from '../figma_app/634146';
-import { nD as _$$nD, u4 as _$$u3, CY, Kz, Lf, Yo } from '../figma_app/637027';
+import { BigButtonPrimaryTracked, ButtonBase, SecureLink, Spacing, EnhancedInput, interactiveAnchorTracked } from '../figma_app/637027';
 import { UK, WN } from '../figma_app/638601';
 import { x as _$$x3, Lk } from '../figma_app/639711';
 import { jW } from '../figma_app/640683';
@@ -507,7 +507,7 @@ import { l as _$$l2 } from '../figma_app/773170';
 import { BrowserInfo } from '../figma_app/778880';
 import { jw, Yd } from '../figma_app/781981';
 import { parsePxNumber } from '../figma_app/783094';
-import { S as _$$S } from '../figma_app/787550';
+import { fileApiHandler } from '../figma_app/787550';
 import { Z as _$$Z } from '../figma_app/788481';
 import { em as _$$em, eN as _$$eN, lq as _$$lq, G5, I_ } from '../figma_app/792958';
 import { M0 as _$$M5 } from '../figma_app/803054';
@@ -516,7 +516,7 @@ import { handleMouseEvent, RecordingPureComponent, useHandleMouseEvent, generate
 import { O as _$$O3 } from '../figma_app/806649';
 import { fD } from '../figma_app/816671';
 import { I as _$$I3 } from '../figma_app/827540';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { V1, XU } from '../figma_app/834392';
 import { OL as _$$OL } from '../figma_app/840917';
 import { M0, VG } from '../figma_app/841197';
@@ -543,7 +543,7 @@ import { f as _$$f } from '../figma_app/913332';
 import { QE, z0 } from '../figma_app/914216';
 import { ai as _$$ai, f6 } from '../figma_app/915202';
 import { utilityNoop } from '../figma_app/918700';
-import { Ex as _$$Ex, zE } from '../figma_app/919079';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { w as _$$w } from '../figma_app/922802';
 import { E as _$$E } from '../figma_app/924252';
 import { w4 as _$$w3, Fj, go } from '../figma_app/927140';
@@ -1863,7 +1863,7 @@ let nG = memo(e => {
     },
     'className': j()(o && jM, RO, p ? _$$ub : wI),
     'ref': m,
-    'children': jsx(Yo, {
+    'children': jsx(interactiveAnchorTracked, {
       rel: 'noopener',
       target: '_blank',
       href: r,
@@ -2197,7 +2197,7 @@ function iW() {
       imageClassName: n,
       headerText: e,
       secondaryText: t,
-      children: jsx(_$$nD, {
+      children: jsx(BigButtonPrimaryTracked, {
         onClick: () => {
           Sr(redirectUrl, B3.COMMUNITY_INTERSTITIAL);
         },
@@ -4084,7 +4084,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       children: [jsx('h1', {
         className: _$$s3.textHeadingSmall.$,
         children: e.header
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 1
       }), e.subHeader && jsx('p', {
         children: e.subHeader
@@ -4098,7 +4098,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           currentChoice: a[r],
           onClickChoice: e => c(r, e)
         }, r))]
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2
       }), jsxs('div', {
         className: _$$s3.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
@@ -4141,10 +4141,10 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
     } : o;
     return jsxs(Fragment, {
       children: [e.badge_text && jsxs(Fragment, {
-        children: [jsx(_$$Ex, {
-          color: zE.DEFAULT,
+        children: [jsx(Badge, {
+          color: BadgeColor.DEFAULT,
           text: e.badge_text
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1.5
         })]
       }), jsxs('div', {
@@ -4152,15 +4152,15 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         children: [jsx('p', {
           className: _$$s3.fontBold.textBodyLarge.pr36.$,
           children: e.question
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 2
         }), e.subtext && jsxs(Fragment, {
           children: [jsx('p', {
             children: e.subtext
-          }), jsx(Kz, {
+          }), jsx(Spacing, {
             multiple: 1.5
           })]
-        }), e.label ? jsx(Lf, {
+        }), e.label ? jsx(EnhancedInput, {
           type: 'textarea',
           htmlName: 'enter-free-form',
           placeholder: e.placeholder_text || getI18nString('rcs.surveys.would_love_to_know'),
@@ -4169,7 +4169,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
           value: t,
           onChange: s,
           maxLength: 1e3
-        }) : jsx(_$$L, {
+        }) : jsx(LazyInputForwardRef, {
           type: 'textarea',
           placeholder: e.placeholder_text || getI18nString('rcs.surveys.would_love_to_know'),
           ref: a,
@@ -4181,7 +4181,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         }), n ? jsx('p', {
           className: _$$s3.textBodyMedium.colorTextDanger.$,
           children: n
-        }) : jsx(Kz, {
+        }) : jsx(Spacing, {
           multiple: 2
         }), jsxs('div', {
           className: _$$s3.wFull.flex.justifyBetween.itemsCenter.selectNone.$,
@@ -4221,7 +4221,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
         children: [jsx(SvgComponent, {
           className: 'survey_view--successIcon---l6LH',
           svg: _$$A5
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           direction: 'x',
           multiple: 1.5
         }), jsx('p', {
@@ -4421,7 +4421,7 @@ function od() {
   return jsx(_$$M2, {
     isShowing: i.isShowing,
     userFlagOnShow: oa,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: 'Org Admin Survey Modal',
       properties: {
         surveyVersion: 2
@@ -4656,7 +4656,7 @@ function oj(e) {
   });
   let p = _$$A6(orgTrial.trialPeriodEnd).utc().format('ll');
   let _ = _$$A7.getEstimatedEditorCount(orgTrial);
-  let h = jsx(CY, {
+  let h = jsx(SecureLink, {
     'href': '/ssa/',
     'target': '_blank',
     'trusted': !0,
@@ -4847,7 +4847,7 @@ function oZ({
   }, [t, r, e, i, n]);
   if (e.status !== _$$Q4.PENDING) return null;
   let o = _$$A6(e.trialPeriodEnd).local().format('ll');
-  let d = jsx(CY, {
+  let d = jsx(SecureLink, {
     'href': '/ssa/',
     'target': '_blank',
     'trusted': !0,
@@ -4981,7 +4981,7 @@ function o1({
   }, [show, complete, isShowing, t]), getFeatureFlags().product_trials_lg) ? jsx(_$$M2, {
     isShowing,
     testId: 'product_trial_pending_overlay',
-    children: t.data ? jsx(fu, {
+    children: t.data ? jsx(TrackingProvider, {
       name: _$$e9.PENDING_PRODUCT_TRIAL_OVERLAY,
       properties: {
         trialId: t.data.id,
@@ -5245,10 +5245,10 @@ function lF({
         }), jsx('div', {
           className: 'new_file_card--title---ZPHj',
           children: a
-        }), f && jsx(_$$Ex, {
+        }), f && jsx(Badge, {
           className: 'new_file_card--betaTag--2H7Va',
           text: getI18nString('file_browser.creation_buttons.beta'),
-          color: zE.DEFAULT_TRANSLUCENT
+          color: BadgeColor.DEFAULT_TRANSLUCENT
         })]
       })
     })
@@ -5276,7 +5276,7 @@ function lj({
 }
 function lJ() {
   let [e] = setupResourceAtomHandler(DesktopNewTabRecentFilesView({}));
-  let t = useMemo(() => e.transform(e => _$$YN2(e.currentUser.recentFiles)), [e]);
+  let t = useMemo(() => e.transform(e => mapRecentFilesAndRepos(e.currentUser.recentFiles)), [e]);
   useEffect(() => {
     t.status === 'loaded' && Wn(t.data);
   }, [t]);
@@ -5411,7 +5411,7 @@ function l3({
     case _$$nb.REPO:
       {
         let t = l1(e);
-        i = _$$rl(t);
+        i = getDesignFileUrl(t);
         _ = gH(r, n.id, t.key);
         break;
       }
@@ -7396,7 +7396,7 @@ function uY() {
     }, 400);
     return () => clearTimeout(e);
   }, []);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Logged Out File Toolbelt Banner',
     children: jsxs('div', {
       className: j()({
@@ -8064,7 +8064,7 @@ function pz() {
   let [m, g] = useState(!1);
   let f = useIsCanvasEditDisabled();
   let E = selectCurrentFile();
-  let y = VA(E?.project);
+  let y = hasRootPathOptional(E?.project);
   let b = _$$I4();
   let T = h?.showBanner && !m && (!f || o) && (!y || o) && !(o && b);
   let {
@@ -8080,7 +8080,7 @@ function pz() {
       activeToolId === DesignGraphElements.COMMENTS || activeToolId === DesignGraphElements.SELECT || (activeToolId === DesignGraphElements.MEASURE || activeToolId === DesignGraphElements.ANNOTATE ? n === FEditorType.DevHandoff || n === FEditorType.Design : activeToolId === DesignGraphElements.BRUSH ? n === FEditorType.Illustration : n === FEditorType.Design || n === FEditorType.Illustration) || activateTool(DesignGraphElements.SELECT);
       h?.showBanner && (g(!0), setTimeout(() => g(!1), 1e3));
     }
-  }, [s, n, activateTool, activeToolId, close, g, h?.showBanner]), i || a || getFilteredFeatureFlags().ce_il_root && c === _$$n5.LOADING) ? jsx(Fragment, {}) : jsx(fu, {
+  }, [s, n, activateTool, activeToolId, close, g, h?.showBanner]), i || a || getFilteredFeatureFlags().ce_il_root && c === _$$n5.LOADING) ? jsx(Fragment, {}) : jsx(TrackingProvider, {
     name: _$$e9.EDITOR_TOOLBELT,
     children: jsxs(XS, {
       'data-testid': 'design-toolbelt-wrapper',
@@ -8573,7 +8573,7 @@ function _I() {
           },
           onChangeAccount: d,
           footer: renderI18nText('locked_org.footer', {
-            addAnotherLink: jsx(_$$u3, {
+            addAnotherLink: jsx(ButtonBase, {
               'defaultClass': _b,
               'onClick': d,
               'data-testid': 'add-account-button',
@@ -8587,7 +8587,7 @@ function _I() {
           }) : renderI18nText('locked_org.description_no_org')), jsx('div', {
             className: 'locked_account_view--addAccountText--zFHaY',
             children: renderI18nText('locked_org.footer_no_other_accounts', {
-              addAnotherLink: jsx(_$$u3, {
+              addAnotherLink: jsx(ButtonBase, {
                 'defaultClass': _b,
                 'onClick': d,
                 'data-testid': 'add-account-button',
@@ -8891,7 +8891,7 @@ let _C = memo(() => {
             children: jsx(LinkPrimitiveProvider, {
               value: e => {
                 let t = e.currentTarget.href;
-                t && _$$e3(t, e) && e.preventDefault();
+                t && handleUrlAction(t, e) && e.preventDefault();
               },
               children: jsx(_$$ds, {
                 children: jsxs(FplStringsProvider, {
@@ -9111,7 +9111,7 @@ t(async () => {
         }
         let t = !1;
         e.params && (e.path += e.params, t = parseQuery(e.params).$$new === '1');
-        _$$S.getIncludeFolderTeamCanEdit({
+        fileApiHandler.getIncludeFolderTeamCanEdit({
           includeFolderTeamCanEdit: !0,
           fileKey: e.fileKey
         }).then(({

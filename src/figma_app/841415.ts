@@ -5,7 +5,7 @@ import s from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { x6 } from "../905/403166";
 import { F } from "../905/241044";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { M } from "../905/649795";
 import { renderI18nText } from "../905/303541";
 import { RK } from "../figma_app/815170";
@@ -30,7 +30,7 @@ let $$S2 = memo(e => {
   let s = useMemo(() => x6(text), [text]);
   let o = z3();
   let l = useDispatch();
-  return jsx(CY, {
+  return jsx(SecureLink, {
     "data-tooltip": PositionEnum.HYPERLINK_POPUP,
     "data-tooltip-editor-type": o,
     "data-tooltip-interactive": !0,
@@ -55,7 +55,7 @@ let $$v0 = memo(e => {
     handle,
     href
   } = e;
-  return jsx(CY, {
+  return jsx(SecureLink, {
     "data-mention-user-id": userId,
     "data-tooltip": _$$N,
     "data-tooltip-show-above": !0,
@@ -80,7 +80,7 @@ let A = memo(function (e) {
   } = e;
   let d = F(handle);
   let p = F(profileName);
-  return jsx(CY, {
+  return jsx(SecureLink, {
     "data-tooltip": _$$N,
     "data-tooltip-show-above": !0,
     "data-tooltip-type": KindEnum.SPECIAL,

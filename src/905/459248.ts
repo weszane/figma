@@ -36,7 +36,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { oB, j7 } from "../905/929976";
 import { sx as _$$sx, XE } from "../figma_app/91703";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { XE as _$$XE } from "../figma_app/976749";
 import { J as _$$J2 } from "../905/445197";
 import { fullscreenValue } from "../figma_app/455680";
@@ -62,7 +62,7 @@ import { D as _$$D } from "../905/347702";
 import { L as _$$L } from "../905/704296";
 import { A as _$$A2 } from "../svg/619883";
 import { useSubscription } from "../figma_app/288654";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { Bq } from "../figma_app/482142";
 import { b as _$$b } from "../905/985254";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -140,7 +140,7 @@ function eS(e) {
 function ej(e) {
   let t = useDispatch();
   let i = e.canAdminCurrentTeam ? renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.text", {
-    upgradeLink: jsx(Us, {
+    upgradeLink: jsx(linkWithTracking, {
       onClick: () => {
         t(Bq({
           openInNewTab: !0,
@@ -152,7 +152,7 @@ function ej(e) {
       children: renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.link")
     })
   }) : renderI18nText("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.nonadmin.text", {
-    learnMoreLink: jsx(Us, {
+    learnMoreLink: jsx(linkWithTracking, {
       href: gg,
       target: "_blank",
       trusted: !0,
@@ -504,7 +504,7 @@ export let $$eZ0 = registerModal(function (e) {
   let e0 = !T && eU.length > 1;
   if (!S) return null;
   let e1 = Object.keys(replacements).filter(e => eK(replacements[e].newName)).length > 0;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e2.MISSING_FONTS_MODAL,
     children: jsxs(Ao, {
       initialPosition: S,

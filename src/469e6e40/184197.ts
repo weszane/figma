@@ -2,7 +2,7 @@ import { QD } from "../figma_app/153916";
 import { FlashActions } from "../905/573154";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
-import { J7 } from "../figma_app/650409";
+import { DashboardSection } from "../figma_app/650409";
 export let $$o0 = createOptimistThunk((e, t, {
   liveStore: a
 }) => {
@@ -18,7 +18,7 @@ export let $$o0 = createOptimistThunk((e, t, {
   }).then(() => {
     e.dispatch(sf({
       view: "orgAdminSettings",
-      orgAdminSettingsViewTab: J7.BILLING,
+      orgAdminSettingsViewTab: DashboardSection.BILLING,
       shouldShowLockedBanner: !0
     }));
   }).catch(e => {

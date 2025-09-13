@@ -10,7 +10,7 @@ import { L } from "../905/178090";
 import { to } from "../figma_app/701107";
 import { isVsCodeEnvironment } from "../905/858738";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { j9 } from "../figma_app/162807";
+import { SortingCriteria } from "../figma_app/162807";
 export let $$f1 = {
   504: XHR.RetryStrategy.NO_RETRY
 };
@@ -137,7 +137,7 @@ export let $$v0 = new class {
       }) => await e.get("/api/search/facet_search", APIParameterUtils.toAPIParameters({
         query,
         facet_type: facetType,
-        sort: j9.RELEVANCY,
+        sort: SortingCriteria.RELEVANCY,
         desc: !0,
         is_global: !restrictOrgId && !restrictTeamId,
         org_id: restrictOrgId,
@@ -157,7 +157,7 @@ export let $$v0 = new class {
         xr: e
       }) => await e.get("/api/file_move/search", APIParameterUtils.toAPIParameters({
         query,
-        sort: j9.RELEVANCY,
+        sort: SortingCriteria.RELEVANCY,
         desc: !0,
         org_id: orgId,
         max_num_results: maxNumResults

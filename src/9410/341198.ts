@@ -4,8 +4,8 @@ import { ButtonPrimitive } from "../905/632989";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { jN } from "../905/612685";
-import { Qn } from "../figma_app/415217";
+import { buildFileUrl } from "../905/612685";
+import { openInBrowser } from "../figma_app/415217";
 import { useSelector } from "react-redux";
 import { O } from "../905/501876";
 import { L } from "../1250/681431";
@@ -75,13 +75,13 @@ export function $$E0({
 }) {
   let i = useCurrentFileKey();
   let u = useCallback(() => {
-    let e = jN({
+    let e = buildFileUrl({
       file: {
         key: i
       },
       isDevHandoff: !0
     });
-    Qn(e);
+    openInBrowser(e);
   }, [i]);
   return jsxs("div", {
     className: "vscode_extension_header--vscodeExtensionHeader--1-R98",

@@ -28,7 +28,7 @@ import { B as _$$B2 } from "../905/380801";
 import { wW, VE } from "../c5e2cae0/793139";
 import { _ as _$$_2 } from "../c5e2cae0/173602";
 import { On } from "../9420/975542";
-import { tf, fu } from "../figma_app/831799";
+import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { Ju, IX } from "../905/712921";
 import { X1 } from "../figma_app/736948";
 import { UpgradeSteps, BillingCycle, createEmptyAddress, isAddressEmpty, SubscriptionType } from "../figma_app/831101";
@@ -57,7 +57,7 @@ import { Al } from "../9420/394825";
 import { y4 } from "../figma_app/298277";
 import { FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
 import { aE, LN } from "../figma_app/514043";
-import { x9 } from "../figma_app/951233";
+import { extractOrgUsersByUserId } from "../figma_app/951233";
 import { rq } from "../905/351260";
 import { lB, Ey, To } from "../905/148137";
 import { AccessLevelEnum } from "../905/557142";
@@ -67,7 +67,7 @@ import { V as _$$V } from "../905/57562";
 import { n as _$$n } from "../905/861286";
 import { CheckboxPrimitive } from "../905/549791";
 import { g as _$$g } from "../905/125190";
-import { Lf } from "../figma_app/637027";
+import { EnhancedInput } from "../figma_app/637027";
 import { nl } from "../905/590952";
 import { Q as _$$Q } from "../905/249555";
 import { G as _$$G } from "../905/142901";
@@ -98,7 +98,7 @@ function C({
     ...Object.keys(i).reduce((e, t) => (e[t] = Up(i[t]), e), {})
   };
 }
-let $ = tf(function (e) {
+let $ = withTrackedClick(function (e) {
   return jsx("div", {
     className: Nd,
     onClick: e.onClick,
@@ -276,12 +276,12 @@ function eC({
     title: getI18nString("checkout.organization_details"),
     children: jsxs("div", {
       className: _$$s.font13.$,
-      children: [jsx(Lf, {
+      children: [jsx(EnhancedInput, {
         htmlName: "legal_org_name",
         label: getI18nString("org_self_serve.details_step.legal_company_name"),
         value: e.legalOrgName,
         onChange: t
-      }), jsx(Lf, {
+      }), jsx(EnhancedInput, {
         htmlName: "org_name",
         label: getI18nString("org_self_serve.details_step.company_display_name"),
         placeholder: getI18nString("org_self_serve.details_step.company_display_name__different_from_company_name_sub_text"),
@@ -1054,7 +1054,7 @@ export class $$eM2 extends Component {
         }), t !== X1.CreateTeam && this.renderPurchaseSummary()]
       })]
     });
-    return jsxs(fu, {
+    return jsxs(TrackingProvider, {
       name: e0.ORG_CHECKOUT_FLOW,
       properties: {
         step: t,
@@ -1101,7 +1101,7 @@ export class $$eM2 extends Component {
 export function $$eR1(e) {
   let t = useDispatch();
   let a = useSelector(e => e.user);
-  let r = useSelector(e => x9(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
+  let r = useSelector(e => extractOrgUsersByUserId(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
   let l = Mh();
   let d = useSelector(e => e.payment).currency || LN();
   _$$h(() => {

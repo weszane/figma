@@ -40,7 +40,7 @@ let b = v((e, r) => {
   m !== v ? g.ref = r || n : g.ref = n
   return createElement('a', g)
 })
-let $$O0 = v((e, r) => {
+let Link = v((e, r) => {
   let n = e.component
   let y = void 0 === n ? b : n
   let O = e.replace
@@ -121,7 +121,7 @@ w((e, r) => {
       'to': h,
     }, R)
     x !== w ? j.ref = r || P : j.innerRef = P
-    return createElement($$O0, j)
+    return createElement(Link, j)
   })
 })
-export const N_ = $$O0
+export const N_ = Link

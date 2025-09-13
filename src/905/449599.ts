@@ -5,8 +5,8 @@ import { VisualBellActions } from "../905/302958";
 import { S as _$$S } from "../figma_app/78808";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Bb, ju, E_, Re, Ub, JT, co, _t, ZG, Yc, IM, QU, xe, H0, Fx, bH, kO, iL, Ax, Ay, NY, pA } from "../figma_app/274571";
-import { jN } from "../905/612685";
-import { d as _$$d } from "../905/91820";
+import { buildFileUrl } from "../905/612685";
+import { ShareContext } from "../905/91820";
 import { Vn, mr } from "../figma_app/864246";
 import { Xv } from "../905/225144";
 import { generateUUIDv4 } from "../905/871474";
@@ -646,14 +646,14 @@ export function $$w0({
             p.length > 0 && Ay(y, p, m);
             let e = debugState.getState().openFile;
             if (!e) return;
-            let t = jN({
+            let t = buildFileUrl({
               file: e,
               nodeId: y
             });
             debugState.dispatch(_$$S({
               fileKey: e.key,
               url: t,
-              source: _$$d.AI_SUMMARY_COPY_LINK_BUTTON,
+              source: ShareContext.AI_SUMMARY_COPY_LINK_BUTTON,
               visualBellMessageOverride: getI18nString("whiteboard.ai_summary.copied_link_to_clipboard")
             }));
           }, c));

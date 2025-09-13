@@ -19,7 +19,7 @@ import { N as _$$N2 } from "../905/438674";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ex } from "../905/524523";
 import { J } from "../905/614223";
-import { N_ } from "../figma_app/637027";
+import { BaseLinkComponent } from "../figma_app/637027";
 import { b as _$$b } from "../905/217163";
 import { getProviderConfigType } from "../figma_app/155411";
 import { Ag, HA } from "../figma_app/255679";
@@ -124,7 +124,7 @@ let k = ex("google_ui_kit", function () {
   });
 });
 let N = ex("visual_assets_tooltip", function (e) {
-  let t = jsx(N_, {
+  let t = jsx(BaseLinkComponent, {
     className: _$$s.colorTextBrand.justifyCenter.hAuto.$,
     trusted: !1,
     target: "_blank",

@@ -4,7 +4,7 @@ import { N as _$$N } from '../905/7587';
 import { v as _$$v } from '../905/213481';
 import { getI18nString } from '../905/303541';
 import { _Z, LI, ox, wr, Yt } from '../905/319777';
-import { L as _$$L2 } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { A9 } from '../905/414242';
 import { K as _$$K } from '../905/443068';
 import { Button } from '../905/521428';
@@ -201,7 +201,7 @@ function R({
     className: 'x78zum5 x1q0g3np x1yjdb4r x1jnr06f',
     children: [jsxs('div', {
       className: 'x1v8gsql xxk0z11 x1n3k48f x78zum5 x6s0dn4 xilkfi8 x1cmmqis x19y5rnk x3hja5i x5xtlel x1iyjqo2 xg2d0mh',
-      children: [jsx(_$$h, {}), jsx(_$$L2, {
+      children: [jsx(_$$h, {}), jsx(LazyInputForwardRef, {
         'className': 'x12m7bs9 x1v8gsql x1iyjqo2 xeuugli',
         'ref': i,
         'data-testid': 'code-search-input',
@@ -237,7 +237,7 @@ function R({
   });
   let Q = jsx('div', {
     className: 'x1q0g3np x1v8gsql xxk0z11 x1n3k48f x78zum5 x6s0dn4 xilkfi8 x1cmmqis x19y5rnk x3hja5i x5xtlel x1iyjqo2 xg2d0mh',
-    children: jsx(_$$L2, {
+    children: jsx(LazyInputForwardRef, {
       className: 'x12m7bs9 x1v8gsql x1iyjqo2 xeuugli',
       placeholder: getI18nString('sites.code_component.search.replace_placeholder'),
       value: l,

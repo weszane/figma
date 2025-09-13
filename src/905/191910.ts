@@ -3,7 +3,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
-import { nR } from "../figma_app/637027";
+import { ButtonSecondary } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 export function $$c0() {
   let e = useModalManager({
@@ -36,7 +36,7 @@ export function $$c0() {
         })]
       }), jsx(wi, {
         children: jsx(jk, {
-          children: jsx(nR, {
+          children: jsx(ButtonSecondary, {
             className: "memory_warning--reloadButton---KrxB",
             onClick: () => customHistory.reload("BranchMemoryWarning"),
             children: renderI18nText("collaboration.branching.reload_page")

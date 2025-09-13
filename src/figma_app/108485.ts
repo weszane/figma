@@ -10,7 +10,7 @@ import { zo, pQ } from "../figma_app/101956";
 import { d2, t as _$$t } from "../figma_app/579169";
 import { r1, qG } from "../figma_app/545877";
 import { jj } from "../figma_app/797994";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { jO } from "../figma_app/242339";
@@ -52,7 +52,7 @@ export function $$O1() {
   _$$h(() => {
     null != e && e.canEdit && e.createdAt > N() && j.show({
       canShow: (t, r, n, i, a, s, l) => {
-        let d = !!e && jd(e.project);
+        let d = !!e && isTeamFolderV2(e.project);
         let c = O === FFileType.WHITEBOARD && s || O === FFileType.DESIGN && L;
         return r === qo.PERSONAL && c && (i || d) && !jj(n, "ran_move_drafts_nudge_machine") && (G(_$$b({
           ran_move_drafts_nudge_machine: !0

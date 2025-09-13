@@ -2,13 +2,13 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { dm } from "../905/535224";
-import { nR, $$ } from "../figma_app/637027";
+import { ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { b } from "../905/985254";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { sx } from "../figma_app/957070";
 import { yl, DD, jE, v0, Lu, pL } from "../figma_app/639088";
 import { A } from "../4711/667326";
@@ -19,7 +19,7 @@ export let $$_0 = registerModal(function () {
       completed_font_installer_modal: !0
     }));
   }, [e]);
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     className: yl,
     tintedModalBackground: !0,
     children: [jsxs("div", {
@@ -38,13 +38,13 @@ export let $$_0 = registerModal(function () {
       })]
     }), jsxs("div", {
       className: v0,
-      children: [jsx(nR, {
+      children: [jsx(ButtonSecondary, {
         className: Lu,
         onClick: () => {
           e(hideModal());
         },
         children: renderI18nText("fullscreen.font_settings.do_this_later_in_account_settings")
-      }), jsx($$, {
+      }), jsx(ButtonBasePrimary, {
         onClick: dm,
         className: pL,
         children: renderI18nText("fullscreen.font_settings.enable_local_fonts")

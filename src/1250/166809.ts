@@ -21,7 +21,7 @@ import { DtmMigrationInfo, UserFlagByName } from "../figma_app/43951";
 import { hasExternalRestrictedOrgId } from "../figma_app/12796";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { X } from "../905/698965";
-import { O as _$$O2 } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 var c = d;
 if (443 == require.j) {}
 export let $$I0 = "PLAN_SPACES_ONBOARDING_KEY";
@@ -47,7 +47,7 @@ export function $$A1({
   let M = !O && !isGovCluster();
   return {
     menuGroups: useMemo(() => {
-      let t = !!getFeatureFlags().limited_plan_spaces && n.some(e => e.plan_type === _$$O2.TEAM && e.is_guest);
+      let t = !!getFeatureFlags().limited_plan_spaces && n.some(e => e.plan_type === OrganizationType.TEAM && e.is_guest);
       let {
         full,
         limited
@@ -59,7 +59,7 @@ export function $$A1({
         let a = [];
         let r = [];
         e.forEach(e => {
-          n ? e.plan_type === _$$O2.ORG && e.plan_id === t.external_restricted_org_id ? a.push(e) : r.push(e) : e.is_guest ? r.push(e) : a.push(e);
+          n ? e.plan_type === OrganizationType.ORG && e.plan_id === t.external_restricted_org_id ? a.push(e) : r.push(e) : e.is_guest ? r.push(e) : a.push(e);
         });
         n && 0 === a.length && reportError(_$$e.WORKFLOW, Error(`Enterprise plan not found in Plan Switcher for user ${t.id}`), {
           extra: {

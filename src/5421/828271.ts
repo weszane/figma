@@ -21,7 +21,7 @@ import { trackFileEventWithStore } from "../figma_app/901889";
 import { useLatestRef } from "../figma_app/922077";
 import { d as _$$d2, s as _$$s } from "../figma_app/429226";
 import { generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { Point } from "../905/736624";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -613,7 +613,7 @@ function eA({
         "aria-label": e1 ? e2 : eM(t.event, ei, !!U),
         children: e1 ? e0 : e7(t.event.interactionType)
       }),
-      input: jsxs(D8, {
+      input: jsxs(RecordableDiv, {
         onMouseDown: e$,
         recordingKey: generateRecordingKey(B, "interactionText"),
         className: "prototype_interaction_list--ellipsis--ro1zN ellipsis--ellipsis--Tjyfa",

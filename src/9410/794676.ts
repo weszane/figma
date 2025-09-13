@@ -8,7 +8,7 @@ import { getStorage, localStorageRef } from "../905/657224";
 import { fp } from "../figma_app/347146";
 import { Tf } from "../905/280919";
 import { ji } from "../figma_app/814196";
-import { xH, vN } from "../905/63728";
+import { ModifierKeyCodes, isExactModifier } from "../905/63728";
 import { BrowserInfo, isIpadDevice } from "../figma_app/778880";
 import { selectWithShallowEqual } from "../905/103090";
 import { I7 } from "../figma_app/594947";
@@ -19,7 +19,7 @@ import { oQ } from "../figma_app/332085";
 import { PQ, sx } from "../figma_app/91703";
 import { HQ, gr, vZ, aF } from "../figma_app/147952";
 import { NX } from "../figma_app/568591";
-import { fu, T8 } from "../figma_app/831799";
+import { TrackingProvider, wrapWithTracking } from "../figma_app/831799";
 import { o as _$$o } from "../905/808775";
 import { useDebouncedCallback } from "use-debounce";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
@@ -155,8 +155,8 @@ let f = new Set(["-", "="]);
 let g = new Set(["-", "=", "f", "o", "p", "r", "s"]);
 function _(e) {
   if (!g.has(e.key)) return;
-  let t = BrowserInfo.mac ? xH.META : xH.CONTROL;
-  vN(e, t) ? e.target instanceof Element && e.target.matches(".cm-content") || e.preventDefault() : f.has(e.key) && (t |= xH.SHIFT, vN(e, t) && e.preventDefault());
+  let t = BrowserInfo.mac ? ModifierKeyCodes.META : ModifierKeyCodes.CONTROL;
+  isExactModifier(e, t) ? e.target instanceof Element && e.target.matches(".cm-content") || e.preventDefault() : f.has(e.key) && (t |= ModifierKeyCodes.SHIFT, isExactModifier(e, t) && e.preventDefault());
 }
 let W = debounce((e, t) => {
   desktopAPIInstance.updateFullscreenMenuState({
@@ -368,7 +368,7 @@ function tu(e) {
   let {
     onDismiss
   } = e;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Workshop Expired File Banner",
     children: jsxs("div", {
       className: `workshop_expiry_footer--banner--ELf7G ${yl}`,
@@ -1299,7 +1299,7 @@ function t9({
       })
     })
   });
-  return T8(i ? jsx(NX, {
+  return wrapWithTracking(i ? jsx(NX, {
     userId: m,
     file: t,
     orgId: t?.parentOrgId ?? null,

@@ -6,7 +6,7 @@ import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { Kr } from "../vendor/111975";
 import { useLatestRef } from "../figma_app/922077";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
 import { oB } from "../905/929976";
 import { jy } from "../905/116101";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { VU } from "../905/625959";
 import { LR, zo, J$, gR } from "../figma_app/120210";
 import { Um } from "../905/848862";
@@ -175,7 +175,7 @@ function O({
         onLeaveBound: () => {
           o(!1);
         },
-        children: jsx(fu, {
+        children: jsx(TrackingProvider, {
           name: "universal-insert",
           children: jsx("div", {
             className: "browse_all_resources_modal_container--slidingPaneContainer--0TVUA sliding_pane--slidingPaneContainer--RQkXf",
@@ -231,7 +231,7 @@ function H({
           hasTransparentBackground: !0,
           hideXIcon: !0,
           iconClassName: _$$s.colorIconSecondary.$,
-          isKeyDownHandled: s => s.keyCode === Uz.ESCAPE && (e ? t("") : onClose(), !0),
+          isKeyDownHandled: s => s.keyCode === KeyCodes.ESCAPE && (e ? t("") : onClose(), !0),
           onChange: t,
           onFocus: h,
           placeholder: s || N.current,

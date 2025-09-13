@@ -8,7 +8,7 @@ import { Hv } from "../905/61477";
 import { oB, sf } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
 import { nG, qr, Je, PP, PI } from "../905/977218";
-import { WY, $L, uH, Rr } from "../figma_app/162807";
+import { CreatorResourceType, $L, PublicModelType, SearchTypeMode } from "../figma_app/162807";
 import { vj } from "../905/574958";
 import { isIncludedView, isOrgView } from "../figma_app/707808";
 import { S } from "../905/417453";
@@ -24,7 +24,7 @@ export function $$A0(e, t, i) {
   let d = useDispatch();
   let _ = useSelector(e => e.currentUserOrgId);
   let A = S(_)?.searches;
-  let y = Xr(l4(WY.RESOURCE));
+  let y = Xr(l4(CreatorResourceType.RESOURCE));
   let b = useSelector(e => e.search.sessionId);
   let v = useSelector(e => e.selectedView);
   let I = useAtomWithSubscription(hO.currentSearchAtom);
@@ -41,7 +41,7 @@ export function $$A0(e, t, i) {
     })), i && !x) {
       f && (o || (a && a.searchModelType || (y(jN($L.ALL_FILES)), a = {
         ...a,
-        searchModelType: uH.FILES
+        searchModelType: PublicModelType.FILES
       }), d(qr({})), d(Je({
         entryPoint: e
       }))), d(PP({
@@ -51,7 +51,7 @@ export function $$A0(e, t, i) {
         entryPoint: e,
         previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0
       })), d(hideModalHandler()));
-      let i = o ? Rr.ALL_TYPES_STREAMING : Rr.ALL_TYPES_BLOCKING;
+      let i = o ? SearchTypeMode.ALL_TYPES_STREAMING : SearchTypeMode.ALL_TYPES_BLOCKING;
       d(PI({
         query: n,
         searchModelType: r,

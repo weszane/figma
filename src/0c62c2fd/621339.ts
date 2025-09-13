@@ -5,7 +5,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { yH } from "../figma_app/240735";
 import { useState } from "react";
 import { trackEventAnalytics } from "../905/449184";
-import { tB, ks, vd } from "../figma_app/637027";
+import { FocusCheckbox, BigTextInputForwardRef, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { hideModal } from "../905/156213";
 import { _6 } from "../figma_app/386952";
 import { OJ } from "../905/519092";
@@ -27,7 +27,7 @@ function p({
     name: e,
     children: [jsxs("div", {
       className: "survey_option--inputContainer---R-Fh",
-      children: [jsx(tB, {
+      children: [jsx(FocusCheckbox, {
         id: e,
         checked: i,
         onChange: e => {
@@ -55,7 +55,7 @@ function y(e) {
     value: t,
     onChange: s,
     ...e
-  }) : jsx(ks, {
+  }) : jsx(BigTextInputForwardRef, {
     id: e.id,
     className: "survey_text_input--input--Q1W-9",
     placeholder: e.placeholder,
@@ -320,7 +320,7 @@ function O({
         })]
       }), jsx("div", {
         className: "downgrade_survey_modal_component_v2--buttonRow--Y15LH",
-        children: jsx(vd, {
+        children: jsx(ButtonBasePrimaryTracked, {
           type: "submit",
           disabled: !t.length,
           className: pL,

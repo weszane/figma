@@ -18,7 +18,7 @@ import { q as _$$q } from "../905/749058";
 import { Wq } from "../figma_app/481749";
 import { hideModal, popModalStack } from "../905/156213";
 import { IJ, uo } from "../figma_app/990058";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { jL } from "../figma_app/658324";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
@@ -31,7 +31,7 @@ import { createNoOpValidator } from "../figma_app/181241";
 import { h as _$$h } from "../figma_app/124713";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A } from "../1617/755299";
 import { A as _$$A2 } from "../1617/342635";
 import { A as _$$A3 } from "../svg/57540";
@@ -70,7 +70,7 @@ export let $$z2 = registerModal(function (e) {
       children: renderI18nText("org_settings.remove_user_modal.unassigned_drafts")
     })
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Confirm Remove Modal",
     properties: {
       orgId: e.org.id,
@@ -404,7 +404,7 @@ function V(e) {
         throwTypeError(t);
     }
   }(c, e.licenseType, d);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Confirm Account Change Modal",
     properties: {
       targetRole: e.accountType,
@@ -412,7 +412,7 @@ function V(e) {
       licenseType: e.licenseType,
       numUsers: d
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmText: c ? getI18nString("confirm_account_change.grant_edit_access_confirm_text") : getI18nString("confirm_account_change.remove_edit_access_confirm_text"),
       confirmationTitle: function (e, t, a) {
         if (e) switch (t) {
@@ -516,7 +516,7 @@ let $$W1 = registerModal(function (e) {
 }, "OrgConfirmAccountChangeModal");
 let $$H3 = registerModal(function (e) {
   let t = useDispatch();
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("confirm_billing_group_change.title"),
     confirmText: getI18nString("confirm_billing_group_change.confirm_button"),
     onConfirm: () => {
@@ -642,12 +642,12 @@ let $$Y0 = registerModal(function (e) {
       console.error("Unhandled orgJoinRequest.resource_type");
   }
   return jsx("div", {
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Handle Org Join Request Modal",
       properties: {
         deprovisionedUser: y
       },
-      children: jsxs(yX, {
+      children: jsxs(ConfirmationModal2, {
         confirmationTitle: getI18nString("org_join_request.modal_title", {
           requesterName: v ?? ""
         }),

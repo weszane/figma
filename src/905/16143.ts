@@ -1,14 +1,14 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
 import a from "classnames";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { NU } from "../figma_app/204891";
 import { y } from "../905/171275";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { R } from "../905/731725";
-import { CI } from "../figma_app/528509";
+import { getSidebarPath } from "../figma_app/528509";
 import { _6 } from "../figma_app/386952";
 import { KindEnum } from "../905/129884";
 var s = a;
@@ -35,9 +35,9 @@ export function $$_0(e) {
         fontSize: e.fontSize ?? 13,
         fontWeight: "medium",
         truncate: !0,
-        children: CI(e.folder)
-      }), e.showViewOnlyLabel && jsx(Ex, {
-        color: zE.WARNING_TERTIARY,
+        children: getSidebarPath(e.folder)
+      }), e.showViewOnlyLabel && jsx(Badge, {
+        color: BadgeColor.WARNING_TERTIARY,
         text: getI18nString("locked_team.label.view_only"),
         dataTooltip: getI18nString("locked_team.label.tooltip"),
         dataTooltipType: KindEnum.TEXT,

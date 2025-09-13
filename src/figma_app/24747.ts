@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { E3 } from "../figma_app/976749";
 import { p8 } from "../figma_app/722362";
 import { C } from "../figma_app/198698";
@@ -30,7 +30,7 @@ export function $$c0({
     bannerLocation: _,
     ...u
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "TopBanner",
     properties: y,
     children: jsx(C, {

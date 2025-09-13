@@ -14,7 +14,7 @@ import { aW, sK, cD, FQ } from "../figma_app/598018";
 import { i as _$$i } from "../905/718764";
 import { useLatestRef } from "../figma_app/922077";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { M as _$$M } from "../905/152487";
 import { h as _$$h } from "../905/207101";
 import { YX, S0, bk, PG, ZE, xO, VQ, qV, r3 as _$$r, X9, bT, Nz, nt, $l, aV, uN, Q7, BG, eL as _$$eL, kd, SL, ni, fj, VN, _D, pr, JA, Xw, xo, JC } from "../905/98947";
@@ -31,7 +31,7 @@ import { $B } from "../figma_app/545877";
 import { _6 } from "../figma_app/386952";
 import { Aj } from "../figma_app/336853";
 import { U2 } from "../figma_app/193867";
-import { h as _$$h2 } from "../905/772711";
+import { usePreventScrollOnIOS } from "../905/772711";
 import { getUserId, selectCurrentUser } from "../905/372672";
 import { k as _$$k } from "../905/93362";
 import { shuffle } from "../figma_app/656233";
@@ -40,7 +40,7 @@ import { CR } from "../7021/854265";
 import { g as _$$g } from "../7037/183814";
 import { oC, F$, OO, zy, Io, u_ } from "../7021/95197";
 import { R6, pV } from "../7021/970540";
-import { Kz, ks } from "../figma_app/637027";
+import { Spacing, BigTextInputForwardRef } from "../figma_app/637027";
 import { VD } from "../905/550523";
 import { languageCodes, defaultLanguage } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
@@ -48,7 +48,7 @@ import { desktopAPIInstance, hasDesktopAPI } from "../figma_app/876459";
 import { xf } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { isGovCluster, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { Wz } from "../figma_app/211694";
 import { e6 as _$$e2, c as _$$c } from "../figma_app/617427";
 import { getI18nState } from "../figma_app/363242";
@@ -186,7 +186,7 @@ function v({
     isShowing: r,
     testId: i,
     children: jsx(_$$i, {
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: t,
         children: jsx("div", {
           className: n,
@@ -212,7 +212,7 @@ function S({
     isShowing: e,
     testId: t,
     children: jsx(_$$i, {
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: r,
         children: jsx("div", {
           className: o,
@@ -769,7 +769,7 @@ function eJ(e) {
             ...s,
             selectedView: n
           },
-          openNewFileIn: oJ(o) ? ai.NEW_TAB : ai.SAME_TAB,
+          openNewFileIn: isCommandOrShift(o) ? ai.NEW_TAB : ai.SAME_TAB,
           folderOverride: e ? {
             folderId: e
           } : null,
@@ -801,7 +801,7 @@ function eJ(e) {
           source: e
         });
       }
-      l ? oJ(o) ? r.dispatch(V3({
+      l ? isCommandOrShift(o) ? r.dispatch(V3({
         url: l.url
       })) : r.dispatch(sf({
         view: "fullscreen",
@@ -985,10 +985,10 @@ function eJ(e) {
         isOrgUpgrade: r,
         team: e.team
       });
-    } else e.currentQuestion === pu.CHOOSE_PRODUCT ? x === FFileType.DESIGN ? q() || !U() ? await A(x, oJ(r)) : await z(r) : x && (await A(x, oJ(r))) : e.currentQuestion === pu.WHICH_SEAT_WOULD_YOU_LIKE && V(t = Z());
+    } else e.currentQuestion === pu.CHOOSE_PRODUCT ? x === FFileType.DESIGN ? q() || !U() ? await A(x, isCommandOrShift(r)) : await z(r) : x && (await A(x, isCommandOrShift(r))) : e.currentQuestion === pu.WHICH_SEAT_WOULD_YOU_LIKE && V(t = Z());
     if (Y()) {
       t || e.dismissModal();
-      let i = oJ(r);
+      let i = isCommandOrShift(r);
       R && (hasDesktopAPI() || i || e.currentQuestion !== pu.CHOOSE_PRODUCT) && customHistory.reload("NUX completion refresh");
     } else e.onNextQuestion();
   };
@@ -1318,7 +1318,7 @@ function rL({
     children: [jsx("div", {
       className: r.everythingInTeamsPlus,
       children: renderI18nText("new_user_experience.choose_plan_card.org.everything_in_teams_plus")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 2
     }), jsxs("div", {
       children: [" ", renderI18nText("new_user_experience.choose_plan_card.org.unlimited_teams"), " "]
@@ -1394,14 +1394,14 @@ function ry({
         className: dv,
         children: e
       })
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 1
-    }), jsx(o, {}), jsx(Kz, {
+    }), jsx(o, {}), jsx(Spacing, {
       multiple: 2
     }), jsx(rv, {
       plan: r,
       type: "mobile"
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 3
     }), jsx(eX, {
       variant: "primary",
@@ -1441,7 +1441,7 @@ function rS({
           [X3]: i
         })
       })]
-    }), l && jsx(l, {}), jsx(Kz, {
+    }), l && jsx(l, {}), jsx(Spacing, {
       multiple: 3
     }), jsx(n, {}), jsx("hr", {
       className: TB
@@ -1524,17 +1524,17 @@ function rO({
       children: [jsx("h2", {
         className: "x1pvqxga x6xwguf xcgk4ki",
         children: e
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         value: 4
       }), jsx("p", {
         className: "x4z9k3i x19v9tvf x1n0bwc9",
         children: r
       })]
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 2
-    }), jsx(l, {}), jsx(Kz, {
+    }), jsx(l, {}), jsx(Spacing, {
       multiple: 2
-    }), jsx(n, {}), jsx(Kz, {
+    }), jsx(n, {}), jsx(Spacing, {
       multiple: 3
     }), jsx(eX, {
       variant: "primary",
@@ -1645,7 +1645,7 @@ function rI({
   function b() {
     return jsx(Fragment, {
       children: !u && x && jsxs(Fragment, {
-        children: [jsx(Kz, {
+        children: [jsx(Spacing, {
           multiple: 5
         }), jsx("div", {
           className: m$,
@@ -1678,7 +1678,7 @@ function rI({
     children: [jsx("h1", {
       className: yo,
       children: renderI18nText("new_user_experience.choose_plan.title")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 4
     }), jsxs("div", {
       className: _$$f2,
@@ -1703,7 +1703,7 @@ function rI({
               className: w9,
               children: renderI18nText("new_user_experience.choose_plan_card.starter.title.completion")
             })]
-          }), jsx(Kz, {
+          }), jsx(Spacing, {
             multiple: 3
           })]
         })
@@ -1772,7 +1772,7 @@ function rP({
     children: [jsx("h1", {
       className: yo,
       children: renderI18nText("new_user_experience.choose_plan.title")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 5
     }), jsxs("div", {
       className: "x78zum5",
@@ -1836,7 +1836,7 @@ function rP({
 }
 function rA() {
   return jsxs(Fragment, {
-    children: [jsx(Kz, {
+    children: [jsx(Spacing, {
       multiple: 2
     }), jsx("p", {
       ...xk(rR.textBodySmall),
@@ -1905,7 +1905,7 @@ function rB({
 }
 function rH() {
   return useAtomWithSubscription(nt) ? jsxs(Fragment, {
-    children: [jsx(Kz, {
+    children: [jsx(Spacing, {
       multiple: 2
     }), jsxs("div", {
       className: XI,
@@ -1953,7 +1953,7 @@ function rV(e) {
     children: [jsx("h1", {
       className: xx,
       children: getI18nString("new_user_experience.choose_plan.title")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 4
     }), jsxs("div", {
       className: y8,
@@ -2036,7 +2036,7 @@ function rG(e) {
     children: [jsx("h1", {
       className: "x1akne3o xkh2ocl x1pvqxga x6xwguf x1cpheol x14fbwjk x1w2vvpw x2b8uid",
       children: getI18nString("new_user_experience.choose_plan.title")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 4
     }), jsxs("div", {
       className: "x78zum5 xdt5ytf xkfg2k x1qjc9v5 x8gbvx8 x1a02dak",
@@ -2390,7 +2390,7 @@ function te() {
     children: [jsx("h1", {
       className: yo,
       children: renderI18nText("seat_selection_in_nux.which_seat_would_you_like")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: L ? 6 : 3
     }), jsx("div", {
       className: "x78zum5 xl56j7k",
@@ -2525,11 +2525,11 @@ function ts({
     }), t && jsx("div", {
       className: "x1n0bwc9 xclx6tv x17akokd x1j61x8r x1qxcl5b xno9bf3 xyh1zc2",
       children: t
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 3
     }), jsx("form", {
       children: i.children
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 3
     })]
   });
@@ -2556,14 +2556,14 @@ function ts({
     }), t && jsx("div", {
       className: c.questionSubtitle,
       children: t
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: a ? 4 : 6
     }), jsx("form", {
       className: d()({
         [HS]: a
       }),
       children: i.children
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: a ? 4 : 6
     })]
   });
@@ -2814,7 +2814,7 @@ function tE(e) {
     }), jsx("div", {
       className: p.questionSubtitle,
       children: getI18nString("new_user_experience.invite_your_collaborators.v2.description")
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: a ? 4 : 6
     }), jsxs("div", {
       className: p.scrollContainer,
@@ -2842,7 +2842,7 @@ function tE(e) {
         team: e.team,
         joinLink: x,
         adtlClassName: p.teamInviteLink
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: a ? 4 : 6
       })]
     })]
@@ -2870,7 +2870,7 @@ function tC() {
     questionKey,
     questionTitle,
     questionSubtitle,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Job Title Options",
       properties: {
         jobTitleList: p.toString()
@@ -2885,7 +2885,7 @@ function tC() {
           h("");
         },
         getOptionDisplay,
-        endingOption: a.has("something_else") ? jsx(ks, {
+        endingOption: a.has("something_else") ? jsx(BigTextInputForwardRef, {
           autoFocus: !0,
           className: d()(tb, {
             [tj]: f
@@ -2924,7 +2924,7 @@ function tL() {
     questionKey,
     questionTitle,
     questionSubtitle,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Job Title Options",
       properties: {
         jobTitleList: E.toString()
@@ -2942,7 +2942,7 @@ function tL() {
             });
           }
         },
-        endingOption: C ? jsx(ks, {
+        endingOption: C ? jsx(BigTextInputForwardRef, {
           autoFocus: !0,
           className: g ? "what_do_you_do--modalOtherInput--OWc3s" : d()(tb, {
             [tj]: b
@@ -3032,7 +3032,7 @@ function tR(e) {
     indicator: ""
   });
   if (e.isModalNux) return jsxs(Fragment, {
-    children: [jsx(Kz, {
+    children: [jsx(Spacing, {
       multiple: 3
     }), jsx("div", {
       children: t ? jsx("div", {
@@ -3065,12 +3065,12 @@ function tR(e) {
     })
   });
   return jsxs(Fragment, {
-    children: [jsx(Kz, {
+    children: [jsx(Spacing, {
       multiple: e.isModalNux ? 3 : e.isMobileViewport ? t ? 2 : 3 : 6
     }), jsx("div", {
       children: t ? jsxs("div", {
         ..._$$Ay2.props(tT.standardDisclaimer, e.isMobileViewport && tT.textCenter),
-        children: [c && _, jsx(Kz, {
+        children: [c && _, jsx(Spacing, {
           multiple: 1
         }), u]
       }) : jsxs(Fragment, {
@@ -3082,7 +3082,7 @@ function tR(e) {
             ..._$$Ay2.props(tT.checkboxText),
             children: x
           })
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1
         }), jsx("div", {
           ..._$$Ay2.props(tT.standardDisclaimer, tT.maxWidth400),
@@ -3132,7 +3132,7 @@ function tI() {
     }), jsx("div", {
       className: h.questionSubtitle,
       children: p
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: x ? 4 : 6
     }), jsx(F0, {
       ref: e,
@@ -3148,7 +3148,7 @@ function tI() {
       value: r
     }), !isGovCluster() && jsx(tR, {
       isMobileViewport: x
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: x ? 4 : 6
     })]
   });
@@ -3166,10 +3166,10 @@ function tM({
     children: [jsx("h1", {
       className: "x1akne3o xkh2ocl xclx6tv x1vzchgk x1j61x8r x123g5w4 xt5tia6 x19pvhnb",
       children: e
-    }), jsx(Kz, {}), jsx("div", {
+    }), jsx(Spacing, {}), jsx("div", {
       className: "x1n0bwc9 xclx6tv x17akokd x1j61x8r x1qxcl5b xno9bf3 xyh1zc2",
       children: r
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 3
     }), jsx(F0, {
       ref: t,
@@ -3186,7 +3186,7 @@ function tM({
     }), !isGovCluster() && jsx(tR, {
       isModalNux: !0,
       isMobileViewport: !1
-    }), jsx(Kz, {
+    }), jsx(Spacing, {
       multiple: 3
     })]
   });
@@ -3389,7 +3389,7 @@ function tH(e) {
 }
 let tV = forwardRef(function (e, r) {
   es();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e.currentQuestion,
     properties: {
       ...VD(),
@@ -3401,7 +3401,7 @@ let tV = forwardRef(function (e, r) {
       children: [jsx(e3, {
         hasFigJamIntent: e.hasFigJamIntent,
         ref: r
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 3
       }), jsx(tH, {
         currentQuestion: e.currentQuestion,
@@ -3417,7 +3417,7 @@ let tV = forwardRef(function (e, r) {
         currentQuestion: e.currentQuestion,
         team: e.team,
         formatAndSubmitSignalCollectionResponses: e.formatAndSubmitSignalCollectionResponses
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2
       })]
     })
@@ -3553,7 +3553,7 @@ function tY(e) {
       behavior: "smooth"
     });
   }, [e.question.index]);
-  _$$h2();
+  usePreventScrollOnIOS();
   let a = pV("", e.hasFigJamIntent);
   return e.question.value ? jsx("div", {
     className: "nux_dynamic_preview_view--parentContainerMobile--7S1gd",
@@ -4224,7 +4224,7 @@ function ic(e) {
   let o = useAtomWithSubscription(YX);
   let l = getRumLoggingConfig();
   es();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: currentQuestion,
     properties: {
       ...VD(),
@@ -4401,7 +4401,7 @@ function im(e) {
     },
     preventUserClose: !0
   });
-  return e.question.value ? jsx(fu, {
+  return e.question.value ? jsx(TrackingProvider, {
     name: e.trackingContextName,
     properties: {
       entryPoint: e.entryPoint
@@ -4538,7 +4538,7 @@ function iE({
     _(e[C]);
     x(r);
   };
-  return e ? jsx(fu, {
+  return e ? jsx(TrackingProvider, {
     name: b,
     properties: {
       entryPoint: d,
@@ -4571,7 +4571,7 @@ function iE({
     },
     moveToNextQuestion: S,
     moveToPreviousQuestion: w
-  }) : jsx(fu, {
+  }) : jsx(TrackingProvider, {
     name: b,
     properties: {
       entryPoint: d,

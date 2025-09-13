@@ -14,7 +14,7 @@ import { s$ } from "../figma_app/361035";
 import { gS } from "../figma_app/441925";
 import { tI } from "../figma_app/847597";
 import { UR } from "../figma_app/307841";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { jv } from "../905/84777";
 import { ProductAccessTypeEnum, isValidAccessType } from "../905/513035";
 import { N_ } from "../905/332483";
@@ -74,7 +74,7 @@ export function $$E0({
     children: renderI18nText("checkout.review_in_tax_disclaimer")
   });
   let F = t === BillingCycle.YEAR;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.CART_REVIEW_PURCHASE_SUMMARY,
     properties: {
       tier: l,

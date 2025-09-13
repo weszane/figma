@@ -18,7 +18,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { X } from "../905/853613";
 import { selectCurrentUser } from "../905/372672";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { sw, tW } from "../905/427932";
 import { A as _$$A2 } from "../6828/718668";
 import { A as _$$A3 } from "../svg/310324";
@@ -29,7 +29,7 @@ import { X_, mA, lT } from "../figma_app/777551";
 import { kz } from "../figma_app/427318";
 import { YW } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { cs } from "../figma_app/740025";
 import { IE } from "../5430/231178";
 import { TX } from "../figma_app/255679";
@@ -97,7 +97,7 @@ let E = registerModal(function ({
       option: "make_a_copy"
     });
   }, [E, e, o, j]);
-  return jsxs(ey, {
+  return jsxs(ModalView, {
     hide: lQ,
     disableClickOutsideToHide: !0,
     className: "use_preset_options_modal--presetOptionsModal--MPCAv",
@@ -229,7 +229,7 @@ export function $$Q0({
   }) : (({
     buttonText: e,
     onClick: i
-  }) => jsx(fu, {
+  }) => jsx(TrackingProvider, {
     name: "Duplicate button",
     properties: {
       trackingDescriptor: _$$c.HUB_FILE_DUPLICATE_BUTTON,

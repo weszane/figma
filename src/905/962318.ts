@@ -21,7 +21,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { getI18nState } from "../figma_app/363242";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { aq } from "../figma_app/412189";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { T as _$$T, e as _$$e } from "../905/949616";
@@ -139,7 +139,7 @@ export let $$P0 = registerModal(function ({
       customHistory.reload("User changed locale preference");
     }
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Language Selector",
     children: jsx(ModalRootComponent, {
       manager: P,

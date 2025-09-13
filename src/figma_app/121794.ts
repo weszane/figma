@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { JU, tB, tM, qM, vd } from "../figma_app/637027";
+import { createLabel, FocusCheckbox, ButtonSecondaryTracked, ButtonNegativeTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
 import { OJ } from "../905/519092";
@@ -51,23 +51,23 @@ export class $$p0 extends PureComponent {
   render() {
     return jsxs("div", {
       className: this.props.className,
-      children: [jsxs(JU, {
+      children: [jsxs(createLabel, {
         className: Pf,
-        children: [jsx(tB, {
+        children: [jsx(FocusCheckbox, {
           checked: this.state.checked,
           onChange: this.onCheck,
           className: kv
         }), this.props.children]
       }), jsxs("div", {
         className: aV,
-        children: [!this.props.hideCancelButton && jsx(tM, {
+        children: [!this.props.hideCancelButton && jsx(ButtonSecondaryTracked, {
           onClick: this.props.onCancel,
           children: this.props.cancelButtonText || getI18nString("modal.cancel")
-        }), this.props.makeButtonAppearNegative ? jsx(qM, {
+        }), this.props.makeButtonAppearNegative ? jsx(ButtonNegativeTracked, {
           disabled: !this.state.checked,
           onClick: this.props.onConfirm,
           children: this.props.confirmButtonText || getI18nString("modal.confirm")
-        }) : jsx(vd, {
+        }) : jsx(ButtonBasePrimaryTracked, {
           disabled: !this.state.checked,
           onClick: this.props.onConfirm,
           children: this.props.confirmButtonText || getI18nString("modal.confirm")

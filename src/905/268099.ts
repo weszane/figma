@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { e as _$$e } from "../905/295932";
 import a from "classnames";
 import { AT } from "../905/672745";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { W } from "../905/95038";
@@ -40,8 +40,8 @@ export function $$g0(e) {
         children: [jsx("div", {
           className: _$$s.ellipsis.noWrap.overflowHidden.$,
           children: e.folderName
-        }), e.isCurrentFolder ? jsx(Ex, {
-          color: zE.INFORMATIONAL,
+        }), e.isCurrentFolder ? jsx(Badge, {
+          color: BadgeColor.INFORMATIONAL,
           text: getI18nString("file_browser.file_move.current_location"),
           className: _$$s.eventsNone.flexShrink0.$
         }) : e.isConnectedProject && g ? jsx("div", {

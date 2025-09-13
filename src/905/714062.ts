@@ -3,7 +3,7 @@ import { atom } from "../figma_app/27355";
 import { qM, S2, sd, hp } from "../905/171315";
 import { Q8, BA } from "../905/61477";
 import { nv } from "../905/182534";
-import { WY, dC, qy } from "../figma_app/162807";
+import { CreatorResourceType, TeamSpaceType, FolderType } from "../figma_app/162807";
 import { L8, zD, _4, J, P_, q$ } from "../905/124270";
 var $$c4 = (e => (e.TYPE = "TYPE", e.TYPE_AND_VALUES = "TYPE_AND_VALUES", e))($$c4 || {});
 let u = atom([]);
@@ -40,7 +40,7 @@ let h = atom(e => {
   let t = e($$m0);
   if (!t || null == t.valueToQuery) return null;
   let i = t.valueToQuery;
-  if (t.facetType === WY.RESOURCE) {
+  if (t.facetType === CreatorResourceType.RESOURCE) {
     let n = e(_4);
     let r = n.map(S2);
     let s = [];
@@ -48,65 +48,65 @@ let h = atom(e => {
       A(i, r[t]) && s.push(e);
     }), 0 === s.length) ? null : {
       suggestionType: "TYPE_AND_VALUES",
-      facetType: WY.RESOURCE,
+      facetType: CreatorResourceType.RESOURCE,
       facetTypeIndex: t.facetTypeIndex,
       facetValues: s.slice(0, 5)
     };
   }
   let r = e($$p3);
   if (0 === r.length) return null;
-  if (t.facetType === WY.CREATOR) {
-    let i = nv(r, dC.USERS);
+  if (t.facetType === CreatorResourceType.CREATOR) {
+    let i = nv(r, TeamSpaceType.USERS);
     if (0 === i.length) return null;
     let a = e(J);
     let s = a?.value || [];
     let c = i.filter(e => !includesEqual(s, e)).slice(0, 5);
     if (0 === c.length) return null;
     let u = c.map(e => ({
-      type: WY.CREATOR,
+      type: CreatorResourceType.CREATOR,
       value: e
     }));
     return {
       suggestionType: "TYPE_AND_VALUES",
-      facetType: WY.CREATOR,
+      facetType: CreatorResourceType.CREATOR,
       facetTypeIndex: t.facetTypeIndex,
       facetValues: u
     };
   }
-  if (t.facetType === WY.SPACE) {
+  if (t.facetType === CreatorResourceType.SPACE) {
     let i = e(P_);
     let a = e(q$);
     let s = [];
-    if (a.includes(qy.FOLDER)) {
+    if (a.includes(FolderType.FOLDER)) {
       let e = i?.value?.folders || [];
-      let t = nv(r, dC.PROJECTS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
-        type: WY.SPACE,
-        spaceType: qy.FOLDER,
+      let t = nv(r, TeamSpaceType.PROJECTS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
+        type: CreatorResourceType.SPACE,
+        spaceType: FolderType.FOLDER,
         value: e
       }));
       s.push(...t);
     }
-    if (a.includes(qy.TEAM)) {
+    if (a.includes(FolderType.TEAM)) {
       let e = i?.value?.teams || [];
-      let t = nv(r, dC.TEAMS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
-        type: WY.SPACE,
-        spaceType: qy.TEAM,
+      let t = nv(r, TeamSpaceType.TEAMS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
+        type: CreatorResourceType.SPACE,
+        spaceType: FolderType.TEAM,
         value: e
       }));
       s.push(...t);
     }
-    if (a.includes(qy.ORG)) {
+    if (a.includes(FolderType.ORG)) {
       let e = i?.value?.orgs || [];
-      let t = nv(r, dC.ORGS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
-        type: WY.SPACE,
-        spaceType: qy.ORG,
+      let t = nv(r, TeamSpaceType.ORGS).slice(0, 5).filter(t => !includesEqual(e, t)).map(e => ({
+        type: CreatorResourceType.SPACE,
+        spaceType: FolderType.ORG,
         value: e
       }));
       s.push(...t);
     }
     return 0 === s.length ? null : {
       suggestionType: "TYPE_AND_VALUES",
-      facetType: WY.SPACE,
+      facetType: CreatorResourceType.SPACE,
       facetTypeIndex: t.facetTypeIndex,
       facetValues: s.slice(0, 5)
     };
@@ -120,15 +120,15 @@ let $$g1 = atom(e => {
 let $$f5 = atom(null);
 export function $$_2(e, t) {
   let i = new Set(t);
-  sd(WY.RESOURCE, e) && i.$$delete(WY.RESOURCE);
+  sd(CreatorResourceType.RESOURCE, e) && i.$$delete(CreatorResourceType.RESOURCE);
   let n = 0;
   let r = 0;
   for (let t of e) {
-    t.type === WY.CREATOR && n++;
-    t.type === WY.SPACE && r++;
+    t.type === CreatorResourceType.CREATOR && n++;
+    t.type === CreatorResourceType.SPACE && r++;
   }
-  n >= hp && i.$$delete(WY.CREATOR);
-  r >= hp && i.$$delete(WY.SPACE);
+  n >= hp && i.$$delete(CreatorResourceType.CREATOR);
+  r >= hp && i.$$delete(CreatorResourceType.SPACE);
   return Array.from(i);
 }
 let A = (e, t) => y(t).startsWith(y(e));

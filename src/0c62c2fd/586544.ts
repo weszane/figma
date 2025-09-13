@@ -8,7 +8,7 @@ import { useSubscription } from "../figma_app/288654";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { TA } from "../figma_app/217457";
 import { Pe } from "../4452/207203";
 import { W } from "../4452/143028";
@@ -120,7 +120,7 @@ export function $$N0(e) {
   let R = !!N.team_role && N.team_role?.level >= AccessLevelEnum.EDITOR;
   let A = C.editableResources.length + C.privateResourceCount;
   let O = k.editableResources.length + k.privateResourceCount;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Member Edit Access Modal",
     properties: {
       teamId: j.id,

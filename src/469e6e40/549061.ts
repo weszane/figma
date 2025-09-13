@@ -39,7 +39,7 @@ import { $ as _$$$ } from '../905/692618';
 import { e0 as _$$e2 } from '../905/696396';
 import { G as _$$G } from '../905/750789';
 import { AutoLayout } from '../905/470281';
-import { O as _$$O } from '../905/833838';
+import { OrganizationType } from '../905/833838';
 import { useCurrentUserOrg } from '../905/845253';
 import { sf } from '../905/929976';
 import { lQ } from '../905/934246';
@@ -81,7 +81,7 @@ import { useSubscription } from '../figma_app/288654';
 import { ce } from '../figma_app/347146';
 import { fq, uE, ur } from '../figma_app/451028';
 import { useIsAdminUser, useTeamPlanFeatures, useTeamPlanUser } from '../figma_app/465071';
-import { Sm } from '../figma_app/482728';
+import { UpgradeRequestSetting } from '../figma_app/482728';
 import { _ as _$$_2, S as _$$S } from '../figma_app/490799';
 import { Y as _$$Y2 } from '../figma_app/515088';
 import { r1 } from '../figma_app/545877';
@@ -89,15 +89,15 @@ import { tI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
 import { $z, Me } from '../figma_app/617427';
 import { k as _$$k4 } from '../figma_app/618031';
-import { CY } from '../figma_app/637027';
-import { G_, J7, SN } from '../figma_app/650409';
+import { SecureLink } from '../figma_app/637027';
+import { BillingSectionEnum, DashboardSection, WorkspaceTab } from '../figma_app/650409';
 import { EQ, MX } from '../figma_app/684446';
 import { wY } from '../figma_app/708845';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { ps, V7, Xv, z7, ZY } from '../figma_app/845611';
 import { LoadingSpinner } from '../figma_app/858013';
 import { desktopAPIInstance } from '../figma_app/876459';
-import { Ex, vj, zE } from '../figma_app/919079';
+import { Badge, BadgeSize, BadgeColor } from '../figma_app/919079';
 import es from '../vendor/923386';
 let c = d;
 function R({
@@ -152,8 +152,8 @@ function J(e) {
     onClick: () => {
       t(sf({
         view: 'orgAdminSettings',
-        orgAdminSettingsViewTab: J7.BILLING,
-        orgAdminSettingsViewSecondaryTab: G_.INVOICES,
+        orgAdminSettingsViewTab: DashboardSection.BILLING,
+        orgAdminSettingsViewSecondaryTab: BillingSectionEnum.INVOICES,
         initialHighlightedInvoiceId: e.planInvoiceId
       }));
     },
@@ -166,8 +166,8 @@ function K() {
     onClick: () => {
       e(sf({
         view: 'orgAdminSettings',
-        orgAdminSettingsViewTab: J7.BILLING,
-        orgAdminSettingsViewSecondaryTab: G_.OVERVIEW
+        orgAdminSettingsViewTab: DashboardSection.BILLING,
+        orgAdminSettingsViewSecondaryTab: BillingSectionEnum.OVERVIEW
       }));
     },
     children: getI18nString('admin_dashboard.billing_notice.view_billing_label')
@@ -388,7 +388,7 @@ function eu({
     dataTestId: 'view-seats-count'
   }];
   let g = getRumLoggingConfig();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e2.SEAT_COUNTS_OVERVIEW_CARD,
     properties: {
       planType: t,
@@ -404,12 +404,12 @@ function eu({
             label: jsx('div', {
               children: getI18nString('admin_dashboard.seat_counts_overview_card.total_seats')
             }),
-            count: !u && jsx(Ex, {
+            count: !u && jsx(Badge, {
               dataTestId: 'total-seats-count-badge-value',
               text: m,
-              color: zE.INVERT,
+              color: BadgeColor.INVERT,
               subtle: !0,
-              size: vj.LARGE,
+              size: BadgeSize.LARGE,
               className: _$$s.colorBorder.px4.py0.$
             })
           })
@@ -701,7 +701,7 @@ function t_({
     children: [jsx($z, {
       variant: 'secondary',
       onClick: () => {
-        e.key.type === 'team' || s ? td(r, e.key.type === 'team' ? _$$O.TEAM : _$$O.ORG, e.key.parentId ?? '') : tc(r);
+        e.key.type === 'team' || s ? td(r, e.key.type === 'team' ? OrganizationType.TEAM : OrganizationType.ORG, e.key.parentId ?? '') : tc(r);
       },
       htmlAttributes: {
         'data-testid': 'seat-requests-mini-view-all-requests',
@@ -1199,13 +1199,13 @@ function tu({
     setHighlightedItemId(t);
   };
   let tv = () => {
-    X === ps.TEAM || t ? td(p, X === ps.TEAM ? _$$O.TEAM : _$$O.ORG, e.key.parentId ?? '') : tc(p);
+    X === ps.TEAM || t ? td(p, X === ps.TEAM ? OrganizationType.TEAM : OrganizationType.ORG, e.key.parentId ?? '') : tc(p);
   };
   let tf = eC ? eC?.length > 0 : e9.length > 0;
-  let tj = !!eR && eR !== Sm.DISABLED;
+  let tj = !!eR && eR !== UpgradeRequestSetting.DISABLED;
   let ty = et && !t;
   let tw = getRumLoggingConfig();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e2.SEAT_REQUESTS_MINI_VIEW,
     children: jsxs(_$$B2, {
       onShouldFetchNextPage: () => {
@@ -1329,17 +1329,17 @@ function tu({
                 style: sx.add({
                   maxWidth: '64%'
                 }).$,
-                children: tj ? eR === Sm.ALL_USERS ? getI18nString('admin_dashboard.requests.empty_state.curf_all_users') : eR === Sm.MEMBERS ? ty ? getI18nString('admin_dashboard.requests.empty_state.curf_members.billing_group_admin') : getI18nString('admin_dashboard.requests.empty_state.curf_members.admin') : void 0 : eA && Z.length > 0 && eC && eC?.length > 0 ? eS.data.org && eS.data.org.name ? renderI18nText('admin_dashboard.requests.your_org_name_has_seat_request_that_need_review', {
+                children: tj ? eR === UpgradeRequestSetting.ALL_USERS ? getI18nString('admin_dashboard.requests.empty_state.curf_all_users') : eR === UpgradeRequestSetting.MEMBERS ? ty ? getI18nString('admin_dashboard.requests.empty_state.curf_members.billing_group_admin') : getI18nString('admin_dashboard.requests.empty_state.curf_members.admin') : void 0 : eA && Z.length > 0 && eC && eC?.length > 0 ? eS.data.org && eS.data.org.name ? renderI18nText('admin_dashboard.requests.your_org_name_has_seat_request_that_need_review', {
                   orgName: eS.data.org.name,
                   numOrgRequests: eC?.length,
-                  reviewRequestLink: jsx(CY, {
+                  reviewRequestLink: jsx(SecureLink, {
                     trusted: !0,
                     onClick: tv,
                     children: renderI18nText('admin_dashboard.requests.review_requests')
                   })
                 }) : renderI18nText('admin_dashboard.requests.your_organization_has_seat_request_that_need_review', {
                   numOrgRequests: eC?.length,
-                  reviewRequestLink: jsx(CY, {
+                  reviewRequestLink: jsx(SecureLink, {
                     trusted: !0,
                     onClick: tv,
                     children: renderI18nText('admin_dashboard.requests.review_requests')
@@ -1367,8 +1367,8 @@ function tm({
   isOnlyBillingGroupAdmin: t
 }) {
   let a;
-  a = t ? e === Sm.ALL_USERS ? getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.all_users') : getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.members') : e === Sm.ALL_USERS ? getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.admin.all_users_setting') : getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.admin.members_only_setting');
-  return jsx(fu, {
+  a = t ? e === UpgradeRequestSetting.ALL_USERS ? getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.all_users') : getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.billing_group_admin.members') : e === UpgradeRequestSetting.ALL_USERS ? getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.admin.all_users_setting') : getI18nString('admin_dashboard.mini_view.configured_upgrade_request_banner.admin.members_only_setting');
+  return jsx(TrackingProvider, {
     name: _$$e2.CURF_PENDING_REQUESTS_BANNER,
     children: jsx('div', {
       children: jsx(_$$_2, {
@@ -1427,7 +1427,7 @@ export function $$tg0({
   let V = !B && getFeatureFlags().fc_initial_onboarding_enabled;
   return jsx(Suspense, {
     fallback: jsx(tp, {}),
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: _$$e2.BILLING_REMODEL_ADMIN_DASHBOARD,
       trackingOptions: l,
       children: jsx('div', {
@@ -1451,8 +1451,8 @@ export function $$tg0({
                   teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
                 })) : a(sf({
                   view: 'orgAdminSettings',
-                  orgAdminSettingsViewTab: J7.CONTENT,
-                  orgAdminSettingsViewSecondaryTab: SN.CONNECTED_PROJECTS
+                  orgAdminSettingsViewTab: DashboardSection.CONTENT,
+                  orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS
                 }));
               }
             })]
@@ -1493,7 +1493,7 @@ export function $$tg0({
                     teamAdminConsoleViewTab: DashboardSections.MEMBERS
                   }))) : a(sf({
                     view: 'orgAdminSettings',
-                    orgAdminSettingsViewTab: J7.MEMBERS
+                    orgAdminSettingsViewTab: DashboardSection.MEMBERS
                   }));
                 }
               })

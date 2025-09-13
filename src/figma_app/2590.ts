@@ -2,7 +2,7 @@ import { throwTypeError, assertNotNullish, assert } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { PresetType } from "../figma_app/763686";
 import { Ay } from "../vendor/159563";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
@@ -32,13 +32,13 @@ export function $$E5(e) {
   return "fixed";
 }
 export function $$y4(e, t) {
-  return !t?.disableDefaultKeyboardNav && ([Uz.LEFT_ARROW, Uz.PAGE_UP].includes(e.keyCode) || e.shiftKey && e.keyCode === Uz.N);
+  return !t?.disableDefaultKeyboardNav && ([KeyCodes.LEFT_ARROW, KeyCodes.PAGE_UP].includes(e.keyCode) || e.shiftKey && e.keyCode === KeyCodes.N);
 }
 export function $$b1(e, t) {
-  return !(t?.disableDefaultKeyboardNav || t?.inlinePreview && e.keyCode === Uz.SPACE && e.shiftKey) && [Uz.RIGHT_ARROW, Uz.SPACE, Uz.ENTER, Uz.N, Uz.PAGE_DOWN].includes(e.keyCode);
+  return !(t?.disableDefaultKeyboardNav || t?.inlinePreview && e.keyCode === KeyCodes.SPACE && e.shiftKey) && [KeyCodes.RIGHT_ARROW, KeyCodes.SPACE, KeyCodes.ENTER, KeyCodes.N, KeyCodes.PAGE_DOWN].includes(e.keyCode);
 }
 export function $$T10(e, t) {
-  return !t?.disableDefaultKeyboardNav && e.keyCode === Uz.R && !e.metaKey && !e.shiftKey && !e.ctrlKey;
+  return !t?.disableDefaultKeyboardNav && e.keyCode === KeyCodes.R && !e.metaKey && !e.shiftKey && !e.ctrlKey;
 }
 export function $$I3(e) {
   var t;

@@ -30,7 +30,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { tb } from "../905/848667";
 import { U2 } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ViewAccessTypeEnum, ProductAccessTypeEnum } from "../905/513035";
 import { Ye, N_ } from "../905/332483";
 import { I as _$$I } from "../905/343211";
@@ -109,7 +109,7 @@ function $$Z(e) {
     failedToLoadPrices: K
   });
   let q = f.key.type === FOrganizationLevelType.TEAM && !y && w === FBillingPeriodType.YEAR && e.planUser.currentSeatType === ProductAccessTypeEnum.EXPERT && a === ProductAccessTypeEnum.DEVELOPER && D[ProductAccessTypeEnum.DEVELOPER] < 1;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Modify Plan User Seat Modal",
     children: jsx(ModalRootComponent, {
       height: "dynamic",

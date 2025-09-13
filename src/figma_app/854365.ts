@@ -10,7 +10,7 @@ import { e6 } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { WX } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { UpsellSourceType } from "../figma_app/831101";
 import { registerModal } from "../905/102752";
 import { J as _$$J } from "../905/273120";
@@ -32,7 +32,7 @@ export function $$T1(e) {
     width: 408,
     children: jsx(Wk, {
       className: "x15fnm84 xwxc41k x78zum5 xdt5ytf x1665zp3 x87ps6o",
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: "sites_paywall_modal",
         children: jsxs(J, {
           brand: "seascape",

@@ -54,12 +54,12 @@ import { m as _$$m3 } from '../905/52659';
 import { E as _$$E0 } from '../905/53857';
 import { f as _$$f7 } from '../905/54715';
 import { B as _$$B4 } from '../905/55104';
-import { oJ as _$$oJ, Uz } from '../905/63728';
+import { isCommandOrShift, KeyCodes } from '../905/63728';
 import { y as _$$y4 } from '../905/76789';
 import { n as _$$n5 } from '../905/79930';
 import { an as _$$an, y$ as _$$y$, PW } from '../905/81009';
 import { jv as _$$jv, vu } from '../905/84777';
-import { b as _$$b2, d as _$$d4 } from '../905/91820';
+import { combineWithHyphen, ShareContext } from '../905/91820';
 import { k as _$$k6 } from '../905/93362';
 import { c5 as _$$c6 } from '../905/93909';
 import { W as _$$W } from '../905/95038';
@@ -152,14 +152,14 @@ import { x6 as _$$x5 } from '../905/403166';
 import { s as _$$s5 } from '../905/403855';
 import { z as _$$z3 } from '../905/404751';
 import { yZ } from '../905/407352';
-import { L as _$$L5 } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { s as _$$s8 } from '../905/411990';
 import { rq as _$$rq } from '../905/425180';
 import { t as _$$t8 } from '../905/433510';
 import { colorToHex } from '../905/436288';
 import { useModalManager } from '../905/437088';
 import { N as _$$N3 } from '../905/438674';
-import { DefaultGroups, GroupType, UserRole } from '../905/441038';
+import { DefaultGroups, GroupType, UserGroupRole } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
 import { W as _$$W6 } from '../905/442612';
 import { K as _$$K } from '../905/443068';
@@ -212,7 +212,7 @@ import { EM, QL } from '../905/609392';
 import { Timer } from '../905/609396';
 import { i as _$$i4 } from '../905/610691';
 import { customHistory, getPreviousSelectedView } from '../905/612521';
-import { r1 as _$$r3, jN } from '../905/612685';
+import { getDesignFileUrlConditional, buildFileUrl } from '../905/612685';
 import { J as _$$J2 } from '../905/614223';
 import { e as _$$e3 } from '../905/621515';
 import { Z as _$$Z2 } from '../905/622097';
@@ -258,9 +258,9 @@ import { _ as _$$_8 } from '../905/793009';
 import { N as _$$N2 } from '../905/794224';
 import { x as _$$x3 } from '../905/796251';
 import { H as _$$H4 } from '../905/799228';
-import { g as _$$g } from '../905/817247';
+import { getGroupOrDefault } from '../905/817247';
 import { z as _$$z4 } from '../905/821223';
-import { O as _$$O2 } from '../905/833838';
+import { OrganizationType } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
 import { $ as _$$$3 } from '../905/834575';
 import { Cy } from '../905/844322';
@@ -277,7 +277,7 @@ import { S as _$$S5 } from '../905/872825';
 import { VK, YK } from '../905/880488';
 import { E as _$$E1 } from '../905/881732';
 import { k as _$$k2 } from '../905/888808';
-import { o as _$$o9 } from '../905/895626';
+import { InterProfileType } from '../905/895626';
 import { K as _$$K6 } from '../905/899124';
 import { le as _$$le } from '../905/904854';
 import { Z as _$$Z } from '../905/909123';
@@ -458,7 +458,7 @@ import { uk as _$$uk } from '../figma_app/152745';
 import { BV, TS } from '../figma_app/153399';
 import { Xf } from '../figma_app/153916';
 import { JR, Qp, Wi } from '../figma_app/162641';
-import { Rx } from '../figma_app/162807';
+import { SpaceAccessType } from '../figma_app/162807';
 import { buildUploadUrl, getInitialOptions, getSupportEmail, isGovCluster } from '../figma_app/169182';
 import { XZ } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
@@ -504,7 +504,7 @@ import { getEditableUnpaidTeams, hasFolderRestrictions, hasTeamPaidAccess, hasVa
 import { ce as _$$ce, lH as _$$lH, Bb } from '../figma_app/347146';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { aO as _$$aO } from '../figma_app/348887';
-import { _3 as _$$_2, V1 as _$$V2, W2 } from '../figma_app/349248';
+import { generateProtoLinkUrl, convertCamelToSnakeWithLeading, mapProjectSummary } from '../figma_app/349248';
 import { l_ as _$$l_, u8 as _$$u2, Fx, N$, Yn, Z_ } from '../figma_app/350203';
 import { jT as _$$jT } from '../figma_app/354658';
 import { s$ as _$$s$ } from '../figma_app/361035';
@@ -543,7 +543,7 @@ import { $E, $o, kF, WX } from '../figma_app/515363';
 import { c4 as _$$c, eO as _$$eO, P as _$$P, Au, LM, NJ, z4, Zr } from '../figma_app/518077';
 import { R as _$$R3, jn } from '../figma_app/522082';
 import { P as _$$P7 } from '../figma_app/527262';
-import { oq as _$$oq, S as _$$S3, sp as _$$sp, ZN as _$$ZN, Gi, qF, T9 } from '../figma_app/528509';
+import { getOrgIdFromFolderOrTeam, getSidebarStringOrValue, isOrgFolder, getSortFilterConfig, isRootPath, isTempId, hasRootPath } from '../figma_app/528509';
 import { Gv as _$$Gv } from '../figma_app/532170';
 import { fA as _$$fA, gB as _$$gB, nb as _$$nb, nw as _$$nw, Tf as _$$Tf, uy as _$$uy, Nu, Y6, yF } from '../figma_app/543100';
 import { uZ as _$$uZ, Jo, jU } from '../figma_app/544879';
@@ -571,12 +571,12 @@ import { $z, c as _$$c2, e6 as _$$e2, Ih, Me } from '../figma_app/617427';
 import { e2 as _$$e13, li as _$$li } from '../figma_app/622574';
 import { A5 as _$$A11, J5, jT } from '../figma_app/623414';
 import { fileActionEnum, getTeamUrl, paymentActionRequirementEnum } from '../figma_app/630077';
-import { e2 as _$$e8, eM as _$$eM, il as _$$il, nD as _$$nD, nR as _$$nR2, rb as _$$rb, tM as _$$tM, vd as _$$vd, N_, NY, Ph, qM, Us } from '../figma_app/637027';
+import { ButtonBaseReversedContainer, trackedButtonClickHandler, BigTextInput, BigButtonPrimaryTracked, ButtonSecondary, ButtonLinkTracked, ButtonSecondaryTracked, ButtonBasePrimaryTracked, BaseLinkComponent, ButtonSecondaryLinkTracked, clickableBaseLinkTracked, ButtonNegativeTracked, linkWithTracking } from '../figma_app/637027';
 import { Sh, yJ } from '../figma_app/637328';
 import { Gu } from '../figma_app/640564';
 import { canAdminOrg, canAdminTeam, canEditTeam, canMemberOrg, canOwnTeam, getPermissionsState, getPermissionsStateMemoized, getRolesForUserAndTeam, hasMinRole, hasViewerRoleAccessOnTeam, isOrgUserExternallyRestrictedFromState } from '../figma_app/642025';
 import { GG } from '../figma_app/643789';
-import { J7, SN } from '../figma_app/650409';
+import { DashboardSection, WorkspaceTab } from '../figma_app/650409';
 import { COLLATOR, MAX_LENGTH, moveElement, sortByCreatedAt, sortByPropertyWithOptions } from '../figma_app/656233';
 import { usePaginatedApi } from '../figma_app/661371';
 import { C as _$$C7 } from '../figma_app/667500';
@@ -615,7 +615,7 @@ import { memoizeByArgs } from '../figma_app/815945';
 import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
 import { BillingCycle, UpgradeSteps, UpsellSourceType } from '../figma_app/831101';
-import { $z as _$$$z, fu as _$$fu, o3 as _$$o3, tf as _$$tf, j6, L0, T8 } from '../figma_app/831799';
+import { TrackedButton, TrackingProvider, TrackedLink, withTrackedClick, useTracking, TrackedAnchor, wrapWithTracking } from '../figma_app/831799';
 import { e as _$$e5 } from '../figma_app/831857';
 import { y$ as _$$y$2, Lj } from '../figma_app/835219';
 import { p as _$$p9, u as _$$u7 } from '../figma_app/837956';
@@ -624,7 +624,7 @@ import { xT as _$$xT, E4, Rk } from '../figma_app/841415';
 import { ps as _$$ps, ZY } from '../figma_app/845611';
 import { SW } from '../figma_app/846003';
 import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
-import { _C as _$$_C, dN as _$$dN, V0 } from '../figma_app/858344';
+import { defaultSectionKey, TGroupType, DUserRole } from '../figma_app/858344';
 import { b as _$$b5, bL as _$$bL, mc as _$$mc2, q7, YJ } from '../figma_app/860955';
 import { ds as _$$ds, gV as _$$gV, sb as _$$sb, t$ as _$$t$, D6, kK, R3, T0, TF } from '../figma_app/863319';
 import { VE } from '../figma_app/869776';
@@ -635,16 +635,16 @@ import { v as _$$v3 } from '../figma_app/899624';
 import { debouncedTrackOrgEvent } from '../figma_app/901889';
 import { $$if, de as _$$de, lF as _$$lF, ox as _$$ox, pS as _$$pS, to as _$$to, DN, Ic, jv, Mv, N9, qP, U6, V1, vg, vr, X7, yH, YI, ZW } from '../figma_app/909778';
 import { ai as _$$ai, f6 as _$$f3 } from '../figma_app/915202';
-import { X$ } from '../figma_app/915977';
-import { yX } from '../figma_app/918700';
-import { _Y as _$$_Y2, Ex, vj, zE } from '../figma_app/919079';
+import { resolveDashboardSection } from '../figma_app/915977';
+import { ConfirmationModal2 } from '../figma_app/918700';
+import { BadgeLabels, Badge, BadgeSize, BadgeColor } from '../figma_app/919079';
 import { C8 as _$$C, Be } from '../figma_app/920435';
 import { useLatestRef } from '../figma_app/922077';
 import { Dy as _$$Dy, ky as _$$ky } from '../figma_app/925970';
 import { encodeUri } from '../figma_app/930338';
 import { LJ } from '../figma_app/930386';
 import { qW } from '../figma_app/932285';
-import { xw as _$$xw, Xy, zR } from '../figma_app/951233';
+import { getCurrentUserOrgUser, getAdminUsers, getTopAdminUsers } from '../figma_app/951233';
 import { E as _$$E7, J as _$$J4 } from '../figma_app/953812';
 import { Wf as _$$Wf, zq as _$$zq, FK, zx } from '../figma_app/961422';
 import { _l as _$$_l, dm as _$$dm, eP as _$$eP, gN as _$$gN, h3 as _$$h2, p5 as _$$p2, Dj, Dw, RH, T5, UN, V3 } from '../figma_app/976345';
@@ -686,7 +686,7 @@ function ej() {
     overlay: _$$rv,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
-  let n = useSelector(e => _$$xw(e));
+  let n = useSelector(e => getCurrentUserOrgUser(e));
   let o = n?.created_at;
   let l = !!o && _$$A3(o).isSameOrAfter(ey);
   _$$h(() => {
@@ -842,8 +842,8 @@ function e4(e) {
           teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
         })) : t(_$$sf({
           view: 'orgAdminSettings',
-          orgAdminSettingsViewTab: J7.CONTENT,
-          orgAdminSettingsViewSecondaryTab: SN.CONNECTED_PROJECTS
+          orgAdminSettingsViewTab: DashboardSection.CONTENT,
+          orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS
         }));
       }
     })]
@@ -892,9 +892,9 @@ function tt(e) {
       case 'billingGroupDashboard':
         return !0;
       case 'licenseGroup':
-        return e.subView === UserRole.ADMIN;
+        return e.subView === UserGroupRole.ADMIN;
       case 'workspace':
-        return e.subView === V0.ADMIN;
+        return e.subView === DUserRole.ADMIN;
       default:
         return !1;
     }
@@ -910,7 +910,7 @@ function tt(e) {
     onClick: () => {
       let e = c && _$$hX(c);
       if (r) {
-        let e = J7.DASHBOARD;
+        let e = DashboardSection.DASHBOARD;
         t(_$$sf({
           view: 'orgAdminSettings',
           orgAdminSettingsViewTab: e
@@ -924,16 +924,16 @@ function tt(e) {
           selectedTab: FRequestsStr.REQUESTS
         })) : (t(_$$sf({
           view: 'licenseGroup',
-          subView: UserRole.ADMIN,
+          subView: UserGroupRole.ADMIN,
           licenseGroupId: e && groupsToReview.length > 0 ? groupsToReview[0].id : m,
-          selectedTab: _$$g(e && groupsToReview.length > 0 ? GroupType.MEMBERS : DefaultGroups[0])
+          selectedTab: getGroupOrDefault(e && groupsToReview.length > 0 ? GroupType.MEMBERS : DefaultGroups[0])
         })), t(_$$Oe({
           clickedResourceType: 'licenseGroupAdminSettings'
         }))) : f && (t(_$$sf({
           view: 'workspace',
-          subView: V0.ADMIN,
+          subView: DUserRole.ADMIN,
           workspaceId: p[0].id,
-          selectedTab: _$$_C
+          selectedTab: defaultSectionKey
         })), t(_$$Oe({
           clickedResourceType: 'workspaceAdminSettings'
         })));
@@ -1129,7 +1129,7 @@ let tN = registerModal(e => {
     className: _$$s.fontBold.$,
     children: e.sectionName
   });
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     onConfirm: () => {
       t(_$$de({
         sidebarSectionId: e.sectionId
@@ -1300,7 +1300,7 @@ function rh(e) {
     LP(n.key, FEntityType.FILE, e.favoritedFile?.sidebarSectionId ?? void 0, r_, n.editorType ?? void 0);
     Tq(t, n);
   }), ...rf(!desktopAPIInstance && !_$$ce(), () => getI18nString('tile.dropdown.open_new_tab'), () => {
-    _$$nz(jN({
+    _$$nz(buildFileUrl({
       file: n,
       allowDefaulting: !0
     }), n.key, r, t);
@@ -1309,12 +1309,12 @@ function rh(e) {
   }), ...rg, ...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
     t(_$$S2({
       fileKey: n.key,
-      url: jN({
+      url: buildFileUrl({
         file: n,
-        attributionContext: _$$b2(s, _$$d4.FAVORITED_FILE_CONTEXT_MENU),
+        attributionContext: combineWithHyphen(s, ShareContext.FAVORITED_FILE_CONTEXT_MENU),
         allowDefaulting: !0
       }),
-      source: _$$d4.FAVORITED_FILE_CONTEXT_MENU
+      source: ShareContext.FAVORITED_FILE_CONTEXT_MENU
     }));
     t(_$$oB());
   }), ...rf(!_, () => getI18nString('sidebar.share'), () => {
@@ -1439,7 +1439,7 @@ function ry(e) {
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link'), () => {
-    let r = _$$_2(e.prototype.fileKey, e.prototype.file?.name, e.prototype.pageId);
+    let r = generateProtoLinkUrl(e.prototype.fileKey, e.prototype.file?.name, e.prototype.pageId);
     t(_$$S({
       url: r
     }));
@@ -1467,7 +1467,7 @@ function rj(e) {
   let c = useCallback((e, r) => {
     LP(r.team?.id, FEntityType.TEAM, r.sidebarSectionId ?? void 0, _$$vg);
     let a = getTeamUrl(r.resourceId, r.orgId);
-    _$$oJ(e) ? (customHistory.redirect(a, '_blank'), e.stopPropagation()) : (t(_$$dm(r.resourceId)), e.preventDefault());
+    isCommandOrShift(e) ? (customHistory.redirect(a, '_blank'), e.stopPropagation()) : (t(_$$dm(r.resourceId)), e.preventDefault());
   }, [t]);
   let m = useCallback(e => {
     e.stopPropagation();
@@ -1596,13 +1596,13 @@ function rR(e) {
       }
     }));
   }, [t, d, c]);
-  let x = jN({
+  let x = buildFileUrl({
     file: d,
     allowDefaulting: !0
   });
   let b = (e, r) => {
     LP(r.file?.key, FEntityType.FILE, r.sidebarSectionId ?? void 0, _$$vg, r.file?.editorType ?? void 0);
-    _$$oJ(e) ? (t(UN({
+    isCommandOrShift(e) ? (t(UN({
       fileKey: r.file?.key ?? '',
       entrypoint: _$$vg
     })), e.stopPropagation()) : e.preventDefault();
@@ -1654,7 +1654,7 @@ function rR(e) {
   });
   let S = j ? Nn(w, j) : w;
   let k = e.favorite.file?.project?.path;
-  let R = _$$S3(k);
+  let R = getSidebarStringOrValue(k);
   let A = R ? tG : 'favorited_section--titleWithoutSubtitle--BXdOW ellipsis--ellipsis--Tjyfa text--fontPos13--xW8hS text--_fontBase--QdLsd';
   return jsxs('div', {
     className: tB,
@@ -1835,9 +1835,9 @@ function r$(e) {
   let l = useSelector(e => e.dropdownShown);
   let d = useMemo(() => l && l.type === rm.FAVORITED_PROTOTYPE_CONTEXT_MENU && l.data.resource.prototype.id === e.favorite.prototype.id, [l, e.favorite.prototype.id]);
   let c = useMemo(() => l && l.type === tk, [l]);
-  let m = _$$_2(e.favorite.prototype.fileKey, e.favorite.prototype.file?.name, e.favorite.prototype.pageId);
+  let m = generateProtoLinkUrl(e.favorite.prototype.fileKey, e.favorite.prototype.file?.name, e.favorite.prototype.pageId);
   let _ = (e, t) => {
-    if (LP(t.prototype?.fileKey, FEntityType.PROTOTYPE, t.sidebarSectionId ?? void 0, _$$vg), _$$oJ(e)) {
+    if (LP(t.prototype?.fileKey, FEntityType.PROTOTYPE, t.sidebarSectionId ?? void 0, _$$vg), isCommandOrShift(e)) {
       e.stopPropagation();
       return;
     }
@@ -1947,9 +1947,9 @@ function rV(e) {
     LP(a?.id, FEntityType.WORKSPACE, r.sidebarSectionId ?? void 0, _$$vg);
     a && t(_$$sf({
       view: 'workspace',
-      subView: V0.DIRECTORY,
+      subView: DUserRole.DIRECTORY,
       workspaceId: a.id,
-      selectedTab: _$$dN.TEAMS
+      selectedTab: TGroupType.TEAMS
     }));
   }, [t]);
   let u = useCallback(e => {
@@ -2080,7 +2080,7 @@ function rH(e) {
       case FEntityType.TEAM:
         return v.view === 'team' && v.teamId === e.favorite.resource.resourceId;
       case FEntityType.WORKSPACE:
-        return v.view === 'workspace' && v.subView === V0.DIRECTORY && v.workspaceId === e.favorite.resource.resourceId;
+        return v.view === 'workspace' && v.subView === DUserRole.DIRECTORY && v.workspaceId === e.favorite.resource.resourceId;
       default:
         return !1;
     }
@@ -2768,10 +2768,10 @@ let at = registerModal(e => {
         })
       }), jsxs('div', {
         className: 'move_favorites_modal--footer--ERUeX',
-        children: [jsx(_$$nR2, {
+        children: [jsx(ButtonSecondary, {
           onClick: m,
           children: renderI18nText('modal.cancel')
-        }), jsx(_$$vd, {
+        }), jsx(ButtonBasePrimaryTracked, {
           disabled: !t,
           onClick: () => {
             let r = t?.is_org ? null : t?.plan_id;
@@ -2870,7 +2870,7 @@ function ai(e) {
     showPreviewDelay: r,
     updateRearrangeDragState: _$$lQ
   }, t.resource.resourceId));
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.FAVORITES_TO_MOVE_SECTION,
     properties: {
       userId: l,
@@ -2896,9 +2896,9 @@ function ai(e) {
             'data-tooltip-timeout-delay': 50,
             'data-tooltip-max-width': 200
           })]
-        }), p ? null : jsx(Ex, {
+        }), p ? null : jsx(Badge, {
           text: _.length > 99 ? '99+' : `${_.length}`,
-          color: zE.DEFAULT,
+          color: BadgeColor.DEFAULT,
           className: _$$s.mr8.colorText.colorBgSelectedSecondary.$
         })]
       }), p ? jsxs('div', {
@@ -3120,8 +3120,8 @@ function aC() {
     onClickCta: e
   });
 }
-let aB = _$$tf(_$$l);
-let aU = _$$tf(_$$k2);
+let aB = withTrackedClick(_$$l);
+let aU = withTrackedClick(_$$k2);
 function aW() {
   return jsx('div', {
     className: 'base_upgrade_section--divider--k-uOp sidebar--divider--sHsz4'
@@ -3129,7 +3129,7 @@ function aW() {
 }
 function a$(e) {
   let [t, r] = useState(!1);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: e.trackingContext,
     properties: e.trackingProperties,
     children: jsxs('div', {
@@ -3235,7 +3235,7 @@ function aH({
       }
     }));
   };
-  let n = jsx(_$$eM, {
+  let n = jsx(trackedButtonClickHandler, {
     onClick: () => customHistory.redirect('/education/apply', BrowserInfo.isIpadNative ? void 0 : '_blank'),
     children: renderI18nText('edu.sidebar_section.verify_your_education_status')
   });
@@ -3362,7 +3362,7 @@ function a8(e) {
   let {
     open
   } = OC();
-  let n = jsx(_$$eM, {
+  let n = jsx(trackedButtonClickHandler, {
     onClick: () => {
       open();
     },
@@ -3828,7 +3828,7 @@ function sL() {
   let t = useSelector(e => e.userFlags);
   let r = Om();
   let s = _$$tv();
-  return t[w3] ? null : jsx(_$$fu, {
+  return t[w3] ? null : jsx(TrackingProvider, {
     name: _$$e7.COMMUNITY_MOVED_TO_RESOURCE_HUB_BANNER,
     children: jsx('div', {
       className: 'x15dj09p',
@@ -3881,7 +3881,7 @@ function sU() {
       data: Gu()
     }));
   };
-  return jsxs(L0, {
+  return jsxs(TrackedAnchor, {
     'trackingEventName': 'community_browser_sidebar_action_clicked',
     'className': U()(_$$s.flex.flexRow.itemsCenter.gap12.h48.pl12.pr12.colorText.cursorDefault.$, 'explore_community_button--hoverColor--mDUIs'),
     'data-onboarding-key': vM,
@@ -4493,7 +4493,7 @@ function iN(e) {
   let p = !e.showingFileBrowserLoader && !_ && (!!desktopAPIInstance || _$$ce() || e.pageHeaderContent);
   useEffect(() => {
     let e = e => {
-      e.keyCode === Uz.PERIOD && document.activeElement?.tagName === 'BODY' && getFeatureFlags().internal_only_debug_tools && getFeatureFlags().figment_debugger && toggleFigmentDebugger();
+      e.keyCode === KeyCodes.PERIOD && document.activeElement?.tagName === 'BODY' && getFeatureFlags().internal_only_debug_tools && getFeatureFlags().figment_debugger && toggleFigmentDebugger();
     };
     document.addEventListener('keydown', e);
     return () => {
@@ -4894,7 +4894,7 @@ function ni({
   } = _$$b5({
     initialPosition: 'bottom'
   });
-  let n = j6();
+  let n = useTracking();
   return jsxs(_$$bL, {
     manager,
     children: [jsx(_$$d3, {
@@ -4924,7 +4924,7 @@ function nn(e) {
   }) => e);
   let o = _$$o7(e.menuGroups);
   let l = !!(n && n.type === e.dropdownKey && n.data && n.data.targetRect);
-  let d = j6();
+  let d = useTracking();
   return jsxs(Fragment, {
     children: [jsx(_$$d3, {
       'ref': r,
@@ -4946,7 +4946,7 @@ function nn(e) {
       },
       'data-onboarding-key': e.dataOnboardingKey,
       'children': jsx(_$$k2, {})
-    }), l && T8(jsx(noop, {
+    }), l && wrapWithTracking(jsx(noop, {
       parentRect: n?.data?.targetRect,
       minWidth: 224,
       rootAndSubmenuMaxWidth: 224,
@@ -5014,9 +5014,9 @@ function nf() {
         onClick: () => {
           e(_$$sf({
             view: 'workspace',
-            subView: V0.ADMIN,
+            subView: DUserRole.ADMIN,
             workspaceId: r.workspace.id,
-            selectedTab: _$$_C
+            selectedTab: defaultSectionKey
           }));
         }
       }]
@@ -5231,7 +5231,7 @@ let nR = connect(e => ({
         showIsMe: s,
         onClick: e.onMemberClick,
         badge: i ? {
-          color: zE.DEFAULT,
+          color: BadgeColor.DEFAULT,
           text: getI18nString('file_browser.badge_label.admin')
         } : void 0,
         includeUserEmailAddress: e.shouldIncludeUserEmailAddress,
@@ -5370,7 +5370,7 @@ function nM({
     n(_$$sf({
       view: 'user',
       userId: t.id,
-      userViewTab: _$$o9.INTERNAL_PROFILE
+      userViewTab: InterProfileType.INTERNAL_PROFILE
     }));
     n(hideModal());
   }, [n]);
@@ -5613,7 +5613,7 @@ function nU(e) {
         t(_$$sf({
           view: 'user',
           userId: r.id,
-          userViewTab: _$$o9.INTERNAL_PROFILE
+          userViewTab: InterProfileType.INTERNAL_PROFILE
         }));
       },
       canLeave: !1,
@@ -5985,7 +5985,7 @@ function os({
     data
   } = _$$L2();
   let c = useCallback((e, t) => {
-    customHistory.redirect(_$$r3(e));
+    customHistory.redirect(getDesignFileUrlConditional(e));
     trackFileBrowserFileClicked(e.key, {
       selectedViewName: r.view,
       entrypoint: 'suggested_files_empty_state'
@@ -8323,7 +8323,7 @@ function lZ({
 function l1({
   currentOrgId: e
 }) {
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_COMMUNITY_TAB_DISABLED_PAGE,
     properties: {
       orgId: e
@@ -8383,7 +8383,7 @@ function l5({
   let r = _$$X4();
   return t ? jsx(l1, {
     currentOrgId: e
-  }) : jsx(_$$fu, {
+  }) : jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_COMMUNITY_RESOURCES_HOME_PAGE,
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf xh8yej3 x5yr21d x1665zp3',
@@ -8500,7 +8500,7 @@ function dd({
     contextClicked: _$$e7.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
     forceOpenNewTab: !0
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
     children: jsxs('div', {
       className: 'x78zum5 x1q0g3np xh8yej3 xeq9io7 xgqmno8 x3s0vfn',
@@ -8565,7 +8565,7 @@ function du({
     tab: N$.COMMUNITY
   }, i);
   let d = t ? getI18nString('community.resource_hub.template_publishing_has_been_disabled') : getI18nString('community.resource_hub.streamline_your_work_with_custom');
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_NO_RESOURCES_UPSELL,
     children: jsxs('div', {
       className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
@@ -8592,7 +8592,7 @@ function du({
           className: 'x78zum5 xdt5ytf x6s0dn4 xou54vl xkh2ocl xh8yej3 x2lah0s',
           children: [!t && jsx(_$$a1, {
             menuItems: o
-          }), jsx(_$$o3, {
+          }), jsx(TrackedLink, {
             ..._$$xk(dm.browseResourcesFromCommunity),
             to: l.to,
             trackingEventName: HH.RESOURCE_HUB_BROWSE_COMMUNITY_CLICKED,
@@ -8640,7 +8640,7 @@ function dp({
     ...r,
     tab: N$.COMMUNITY
   }, s);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_UPGRADE_UPSELL,
     properties: {
       planTier: FPlanNameType.STARTER,
@@ -8678,7 +8678,7 @@ function dp({
               }));
             },
             children: getI18nString('community.resource_hub.upgrade_to_professional')
-          }), jsx(_$$o3, {
+          }), jsx(TrackedLink, {
             ..._$$xk(df.browseResourcesFromCommunity),
             to: o.to,
             trackingEventName: HH.RESOURCE_HUB_BROWSE_COMMUNITY_CLICKED,
@@ -8940,7 +8940,7 @@ function dv({
   return jsx('div', {
     className: 'x78zum5 xdt5ytf x1665zp3',
     ref: n.sizeRef,
-    children: jsxs(_$$fu, {
+    children: jsxs(TrackingProvider, {
       name: _$$e7.RESOURCE_HUB_INTERNAL_RESOURCES_HOME_PAGE,
       children: [jsx(oq, {
         tab: N$.INTERNAL
@@ -9278,7 +9278,7 @@ function dD({
     orgId: t ?? '',
     internalResourcesRoute: d,
     resourceImpressionTracking: onIntersectionChange
-  })), jsx(_$$fu, {
+  })), jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_INTERNAL_RESOURCES_PAGE,
     children: jsx('div', {
       className: dS,
@@ -9564,7 +9564,7 @@ function dZ() {
   }, [u, _]);
   let p = _$$V5(r, d, _$$u2);
   let g = p.filterState;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_CATEGORY,
     properties: {
       category: categorySlug,
@@ -9942,7 +9942,7 @@ function ch() {
   let _ = _$$W2(r, n, u, m);
   if (!l || !d) return jsx(Fragment, {});
   let p = zL(l);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_COMMUNITY_RESOURCE_DETAIL_PAGE,
     properties: _,
     children: jsxs('div', {
@@ -10023,7 +10023,7 @@ function cw() {
   return jsx('div', {
     className: dS,
     ref: r.sizeRef,
-    children: jsx(_$$fu, {
+    children: jsx(TrackingProvider, {
       name: _$$e7.RESOURCE_HUB_SAVES_PAGE,
       children: i
     })
@@ -10361,7 +10361,7 @@ function cL({
   let y = r && !g && loadedStatusByType[o] && b <= 10;
   let w = y && b > 0;
   let j = y && !w;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_SEARCH,
     children: jsxs('div', {
       className: dS,
@@ -10413,7 +10413,7 @@ function cD() {
   }, [t, r, n]);
   return n.status !== 'loading' && t ? (m || e(_$$sf({
     view: 'recentsAndSharing'
-  })), jsx(_$$fu, {
+  })), jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB,
     children: jsx(Rj.Provider, {
       value: _$$mk.RESOURCE_HUB,
@@ -11487,7 +11487,7 @@ let uk = {
     $$css: !0
   }
 };
-let uR = _$$tf(Button);
+let uR = withTrackedClick(Button);
 function uA({
   canEditTeam: e,
   isDraftsFolder: t
@@ -11529,7 +11529,7 @@ function uO({
   let u = c ? parseInt(c, 10) : 0;
   let m = getResourceDataOrFallback(i.data.project?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let _ = s ? m >= STANDARD_LIMIT : l >= STANDARD_LIMIT || d >= STANDARD_LIMIT;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Starter Limit Overview',
     properties: n,
     children: jsx('div', {
@@ -11679,7 +11679,7 @@ function uJ(e) {
   });
 }
 function uq(e) {
-  return e.team.restrictions_list?.includes(FPlanLimitationType.LOCKED) || e.canAdminTeam ? jsx(_$$fu, {
+  return e.team.restrictions_list?.includes(FPlanLimitationType.LOCKED) || e.canAdminTeam ? jsx(TrackingProvider, {
     name: 'Open Invoice Reminder Card',
     properties: {
       teamId: e.team.id
@@ -12022,7 +12022,7 @@ function me({
       let p = a.view === 'recentsAndSharing' || a.view === 'folder' ? a : void 0;
       r(_$$c6({
         planId: m || _,
-        planType: m ? _$$O2.ORG : _$$O2.TEAM
+        planType: m ? OrganizationType.ORG : OrganizationType.TEAM
       }));
       let f = {
         user: d,
@@ -12344,7 +12344,7 @@ function me({
     }), (() => {
       let e = data?.tile ?? null;
       let t = data?.index;
-      return jsx(_$$fu, {
+      return jsx(TrackingProvider, {
         name: d ? _$$e7.PROJECT_TILES_VIEW_DROPDOWN : _$$e7.TILES_VIEW_DROP_DOWN,
         enabled: showing,
         properties: {
@@ -12569,7 +12569,7 @@ function mc({
     trigger: UpsellModalType.FOLDER_UPSELL_CARD
   });
   if (!(t = useCurrentPublicPlan('FolderUpsellCard').unwrapOr(null)) || !e || t.tier !== FPlanNameType.STARTER || n === 'recentsAndSharing' || n === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
-  let d = jsx(Us, {
+  let d = jsx(linkWithTracking, {
     className: _$$s.noWrap.cursorDefault.$,
     onClick: e => {
       e.stopPropagation();
@@ -12588,10 +12588,10 @@ function mc({
     trusted: !0,
     children: renderI18nText('team_view.folder_upsell.professional_plan')
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Folder Upsell Card',
     properties: l,
-    children: jsxs(_$$$z, {
+    children: jsxs(TrackedButton, {
       className: U()(_$$s.flex.flexColumn.alignLeft.p24.$, 'folder_upsell--card--m7-Lh'),
       onClick: () => {
         r(showModalHandler({
@@ -12668,7 +12668,7 @@ function mm({
   });
   let o = I7('exp_fbg_project_limit_upsell');
   if (!r || !e || hasTeamPaidAccess(r) || s === 'recentsAndSharing' || s === 'trashedFolders' || !o.getConfig().getValue('show_upsell', !1)) return null;
-  let l = jsx(Us, {
+  let l = jsx(linkWithTracking, {
     className: _$$s.noWrap.cursorDefault.$,
     onClick: e => {
       e.stopPropagation();
@@ -12687,7 +12687,7 @@ function mm({
     trusted: !0,
     children: renderI18nText('team_view.folder_upsell.professional_plan')
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Folder Upsell List',
     properties: n,
     children: jsx('div', {
@@ -12695,7 +12695,7 @@ function mm({
       style: _$$sx2.add({
         borderStyle: 'dashed'
       }).$,
-      children: jsxs(_$$$z, {
+      children: jsxs(TrackedButton, {
         className: U()(_$$s.flex.alignLeft.gap12.py24.px16.bRadius8.wFull.pl36.$, 'folder_upsell--list--2Higk'),
         onClick: () => {
           t(showModalHandler({
@@ -13197,7 +13197,7 @@ function m3(e, t, r) {
     let o = n.past_due_at && _$$A3(n.past_due_at).add(2, 'weeks') > _$$A3(new Date());
     if (!r && o) return null;
     let l = e.orgUsersByOrgId[e.currentUserOrgId] ?? {};
-    let d = zR(l).map(e => jsxs('span', {
+    let d = getTopAdminUsers(l).map(e => jsxs('span', {
       className: mK,
       children: [e.user.handle, ' (', e.user.email, ')']
     }, e.id));
@@ -13206,7 +13206,7 @@ function m3(e, t, r) {
         onClick: () => {
           t?.(_$$sf({
             view: 'orgAdminSettings',
-            orgAdminSettingsViewTab: J7.BILLING
+            orgAdminSettingsViewTab: DashboardSection.BILLING
           }));
         },
         children: renderI18nText('payments.outstanding_invoice')
@@ -13308,10 +13308,10 @@ function m9(e, t, r, i, n, l) {
       let o = s.userEduGracePeriods;
       C ? d && _$$hP(s.user.id, s.roles.byTeamId, s.teams[d]) && (I = _$$df(o, i), E = _$$Me(o)) : r && a && (I = GU(o, i, r, !!s.teams[r].student_team), E = qS(o, r));
     }
-    let k = l && !hasValidSubscription(l) && !l.student_team && T && !Gi(T);
+    let k = l && !hasValidSubscription(l) && !l.student_team && T && !isRootPath(T);
     let R = k && T.is_invite_only;
     let A = k && T.is_view_only;
-    let O = T && _$$sp(T);
+    let O = T && isOrgFolder(T);
     let F = !O && !l && T && hasFolderRestrictions(T, s);
     let P = () => i?.(_$$WX({
       teamId: l.id,
@@ -13382,7 +13382,7 @@ function m9(e, t, r, i, n, l) {
       let n;
       j ? (e = w ? renderI18nText('payments.pro_trial_expiry.locked_description_on_team', {
         teamName: l.name,
-        lowerUsageLink: jsx(_$$$z, {
+        lowerUsageLink: jsx(TrackedButton, {
           onClick: e => {
             e.preventDefault();
             i?.(showModalHandler({
@@ -13444,7 +13444,7 @@ function m9(e, t, r, i, n, l) {
           title: renderI18nText('edu.banner.your_education_status_is_expiring_soon'),
           message: renderI18nText('edu.banner.to_keep_collaborating_upgrade_team', {
             teamName: l.name,
-            verify: jsx(Us, {
+            verify: jsx(linkWithTracking, {
               href: '/education/apply',
               target: '_blank',
               trusted: !0,
@@ -13765,7 +13765,7 @@ function _s(e) {
     dismissible,
     onClose
   } = e;
-  return severity === _$$c7.ANNOUNCEMENT ? jsx(_$$fu, {
+  return severity === _$$c7.ANNOUNCEMENT ? jsx(TrackingProvider, {
     name: trackingContextName,
     properties: {
       severity,
@@ -13785,15 +13785,15 @@ function _s(e) {
           className: mJ,
           children: message
         })]
-      }), jsxs(_$$e8, {
+      }), jsxs(ButtonBaseReversedContainer, {
         reversed: reverseCtas,
         className: mX,
-        children: [onClickCta && jsx(_$$vd, {
+        children: [onClickCta && jsx(ButtonBasePrimaryTracked, {
           className: mV,
           onClick: onClickCta,
           trackingProperties: ctaTrackingProperties,
           children: cta
-        }), secondaryOnClickCta && jsx(_$$tM, {
+        }), secondaryOnClickCta && jsx(ButtonSecondaryTracked, {
           className: mq,
           onClick: secondaryOnClickCta,
           children: secondaryCTA
@@ -13803,7 +13803,7 @@ function _s(e) {
         })]
       })]
     })
-  }) : severity === _$$c7.EVENT ? jsx(_$$fu, {
+  }) : severity === _$$c7.EVENT ? jsx(TrackingProvider, {
     name: trackingContextName,
     properties: {
       severity,
@@ -13823,14 +13823,14 @@ function _s(e) {
           className: mJ,
           children: message
         })]
-      }), jsxs(_$$e8, {
+      }), jsxs(ButtonBaseReversedContainer, {
         className: mX,
-        children: [onClickCta && jsx(_$$vd, {
+        children: [onClickCta && jsx(ButtonBasePrimaryTracked, {
           className: mV,
           onClick: onClickCta,
           trackingProperties: ctaTrackingProperties,
           children: cta
-        }), secondaryOnClickCta && jsx(_$$tM, {
+        }), secondaryOnClickCta && jsx(ButtonSecondaryTracked, {
           className: mq,
           onClick: secondaryOnClickCta,
           children: secondaryCTA
@@ -13840,7 +13840,7 @@ function _s(e) {
         })]
       })]
     })
-  }) : jsx(_$$fu, {
+  }) : jsx(TrackingProvider, {
     name: trackingContextName,
     properties: {
       severity,
@@ -13865,10 +13865,10 @@ function _s(e) {
             children: renderI18nText('payments.learn_more')
           })]
         })]
-      }), jsxs(_$$e8, {
+      }), jsxs(ButtonBaseReversedContainer, {
         reversed: reverseCtas,
         className: mX,
-        children: [onClickCta && jsx(_$$vd, {
+        children: [onClickCta && jsx(ButtonBasePrimaryTracked, {
           className: mV,
           onClick: onClickCta,
           trackingProperties: ctaTrackingProperties,
@@ -13963,7 +13963,7 @@ function _o() {
       viewbarActions: []
     });
   }
-  let d = l.view === 'deletedFiles' ? memoizeByArgs(uh)(o) : memoizeByArgs(_$$ZN)(e.id, o);
+  let d = l.view === 'deletedFiles' ? memoizeByArgs(uh)(o) : memoizeByArgs(getSortFilterConfig)(e.id, o);
   let c = [jsx(ye, {
     config: d.tileSortFilterConfig
   }, 0), jsx(_$$mc, {
@@ -14001,7 +14001,7 @@ let _l = {
   createBranch: !0,
   moveFile: !0
 };
-let _d = memoizeByArgs(_$$ZN);
+let _d = memoizeByArgs(getSortFilterConfig);
 function _c(e) {
   let {
     sortFilterOptions,
@@ -14070,7 +14070,7 @@ function _c(e) {
       numFiles: c.transform(e => e.files.length).unwrapOr(null)
     }
   });
-  return T8(jsx(_$$r4, {
+  return wrapWithTracking(jsx(_$$r4, {
     viewBarSticky: !0,
     banner: p ? jsx(_i, {
       folderId: e.folderId
@@ -14170,7 +14170,7 @@ let _b = registerModal(e => {
   }) : getI18nString('file_browser.draft_delete_modal.you_are_about_to_delete_single_draft', {
     fileName: h[0]
   });
-  let T = isPermanentDeletion ? jsx(qM, {
+  let T = isPermanentDeletion ? jsx(ButtonNegativeTracked, {
     onClick: w,
     disabled: j,
     trackingProperties: {
@@ -14200,7 +14200,7 @@ let _b = registerModal(e => {
       numFiles: h.length
     })
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'draftDeleteModal',
     properties: {
       itemCount: h.length,
@@ -14230,7 +14230,7 @@ let _b = registerModal(e => {
         }), jsxs('form', {
           onSubmit: w,
           children: [isPermanentDeletion && jsx('div', {
-            children: jsx(_$$L5, {
+            children: jsx(LazyInputForwardRef, {
               autoCapitalize: 'off',
               autoComplete: 'off',
               autoCorrect: 'off',
@@ -14248,7 +14248,7 @@ let _b = registerModal(e => {
             })
           }), jsxs('div', {
             className: 'draft_delete_modal--footer--SRSo6',
-            children: [jsx(_$$nR2, {
+            children: [jsx(ButtonSecondary, {
               onClick: e.onClose,
               children: renderI18nText('modal.cancel')
             }), T]
@@ -14641,11 +14641,11 @@ function _M() {
       name: '',
       className: 'drafts_to_move_page_view--moveButtonColumn--Mvc2P drafts_to_move_page_view--column--jpRzM table--column--974RA',
       cellComponent: s => r === 0 ? jsxs(Fragment, {
-        children: [jsx(_$$tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           className: U()('drafts_to_move_page_view--openDraftButton--zXZGf', _$$s.$$if(!!_$$Tf.getTrashedAt(s), _$$s.invisible).$),
           onClick: e => t(e, s),
           children: renderI18nText('file_browser.drafts_to_move.open_draft_button')
-        }), jsx(_$$tM, {
+        }), jsx(ButtonSecondaryTracked, {
           className: 'drafts_to_move_page_view--moveDraftButton--GmBWa',
           onClick: t => e(t, s),
           children: renderI18nText('file_browser.drafts_to_move.move_draft_button')
@@ -14715,11 +14715,11 @@ function _M() {
         children: jsx(Cj, {
           actionBar: e => jsxs('div', {
             className: 'drafts_to_move_page_view--actionBarButtons--RUREB',
-            children: [!eE && jsx(_$$rb, {
+            children: [!eE && jsx(ButtonLinkTracked, {
               className: 'drafts_to_move_page_view--deleteDraftsButton--Aesaa',
               onClick: () => ex(eI),
               children: eI ? renderI18nText('file_browser.drafts_to_move.bulk_delete_drafts_button') : renderI18nText('file_browser.drafts_to_move.bulk_trash_drafts_button')
-            }), jsx(_$$vd, {
+            }), jsx(ButtonBasePrimaryTracked, {
               className: 'drafts_to_move_page_view--moveDraftsButton--fZf6H',
               disabled: eE,
               onClick: eb,
@@ -14762,7 +14762,7 @@ function _M() {
       currentFileTransferState: 'TRANSFER_COMPLETED'
     })
   });
-  return T8(jsx(_$$r4, {
+  return wrapWithTracking(jsx(_$$r4, {
     content: eN,
     viewbar: ec && jsxs(Fragment, {
       children: [jsxs('div', {
@@ -14789,7 +14789,7 @@ function _M() {
               })]
             }), jsxs('div', {
               className: 'drafts_to_move_page_view--viewbarActions--v-cwt',
-              children: [jsx(_$$vd, {
+              children: [jsx(ButtonBasePrimaryTracked, {
                 className: 'drafts_to_move_page_view--moveAllDraftsButton--9-TlX',
                 onClick: () => {
                   O(!0);
@@ -14807,7 +14807,7 @@ function _M() {
                   }));
                 },
                 children: renderI18nText('file_browser.drafts_to_move.move_all_drafts_button')
-              }), jsx(NY, {
+              }), jsx(ButtonSecondaryLinkTracked, {
                 className: 'drafts_to_move_page_view--learnMoreButton--lUnQ9 drafts_to_move_page_view--moveAllDraftsButton--9-TlX',
                 href: 'https://www.figma.com/blog/updates-to-how-drafts-work/',
                 target: '_blank',
@@ -15308,7 +15308,7 @@ function pc(e) {
     });
     return e;
   }, [u, _]);
-  return p.length === 0 ? null : jsx(_$$fu, {
+  return p.length === 0 ? null : jsx(TrackingProvider, {
     name: 'topbar_templates_shown',
     children: jsx('div', {
       className: 'templates_bar--container--0nCIh',
@@ -15541,7 +15541,7 @@ function pI(e) {
   let o = useDispatch();
   let {
     properties
-  } = j6();
+  } = useTracking();
   let {
     handleUpgrade,
     getUpgradeEligibility,
@@ -15569,7 +15569,7 @@ function pI(e) {
       error: !0
     })) : e;
   })(_$$$2({
-    isDraftsFolder: T9(lgFolder),
+    isDraftsFolder: hasRootPath(lgFolder),
     editorType: FFileType.DESIGN,
     newFileFrom: _$$f3.FILE_BROWSER_CONNECT_FOLDER_EMPTY_PAGE,
     contextClicked: 'empty_connected_project_page',
@@ -15652,14 +15652,14 @@ function pN(e) {
         className: pT,
         children: e.subtitle
       })]
-    }), e.showRequestTag && jsx(Ex, {
+    }), e.showRequestTag && jsx(Badge, {
       className: pE,
       text: getI18nString('upgrades.request'),
-      color: zE.DEFAULT_TRANSLUCENT
-    }), e.showRequestSentTag && jsx(Ex, {
+      color: BadgeColor.DEFAULT_TRANSLUCENT
+    }), e.showRequestSentTag && jsx(Badge, {
       className: pE,
       text: getI18nString('upgrades.request_sent'),
-      color: zE.DEFAULT_TRANSLUCENT
+      color: BadgeColor.DEFAULT_TRANSLUCENT
     })]
   });
 }
@@ -15807,7 +15807,7 @@ function pk({
     })
   });
 }
-let pR = memoizeByArgs(_$$ZN);
+let pR = memoizeByArgs(getSortFilterConfig);
 let pP = 'CONNECTED_PROJECTS_PROJECT_PAGE_ONBOARDING_KEY';
 function pL({
   resourceConnection: e
@@ -15836,7 +15836,7 @@ function p$(e) {
   let n = useSelector(({
     dropdownShown: e
   }) => e);
-  let o = useSelector(t => _$$oq(e.folder.id, t)) ?? null;
+  let o = useSelector(t => getOrgIdFromFolderOrTeam(e.folder.id, t)) ?? null;
   let l = _$$Q({
     currentOrgId: o,
     currentTeamId: null
@@ -15939,7 +15939,7 @@ function p5({
         e.dispatch(qp({
           folderId: t
         }));
-        qF(t) || e.dispatch(jl({
+        isTempId(t) || e.dispatch(jl({
           folderId: t,
           loadedFolders: {}
         }));
@@ -16239,12 +16239,12 @@ function p8({
       view: 'abandonedDraftFiles',
       abandonedDraftFolderId: c.id,
       planId: c.plan.key.parentId,
-      adminPlanType: _$$O2.TEAM
+      adminPlanType: OrganizationType.TEAM
     })) : c.plan.key.type === FOrganizationLevelType.ORG && u(_$$sf({
       view: 'abandonedDraftFiles',
       abandonedDraftFolderId: c.id,
       planId: c.plan.key.parentId,
-      adminPlanType: _$$O2.ORG
+      adminPlanType: OrganizationType.ORG
     })));
   }, [u, m, c, h, x, b]);
   let v = r.teams[c?.teamId || ''] || null;
@@ -16262,7 +16262,7 @@ function p8({
     shadowReadLabel: adminPermissionConfig.FolderPageView.hasBanner
   }).unwrapOr(!1) && w;
   let T = useCurrentUserOrgId();
-  let E = memoizeByArgs(_$$ZN);
+  let E = memoizeByArgs(getSortFilterConfig);
   let N = useSelector(t => E(e, t.tileSortFilterStateByView));
   let C = !d || !c || n.status !== 'loaded' || t.status !== 'loaded';
   if (kF('Folder'), WX({
@@ -16308,7 +16308,7 @@ function p8({
       }
     })]
   });
-  return T8(jsx(_$$r4, {
+  return wrapWithTracking(jsx(_$$r4, {
     content: jsxs('div', {
       className: _$$s.flex.flexColumn.$,
       children: [jsx(pk, {
@@ -16394,7 +16394,7 @@ function p6() {
       })
     });
   }
-  return T8(jsx(_$$r4, {
+  return wrapWithTracking(jsx(_$$r4, {
     content: jsx(Fragment, {
       children: e
     }),
@@ -16510,7 +16510,7 @@ function fn() {
   });
   let o = useMemo(() => i.status !== 'loaded' ? [] : (getResourceDataOrFallback(i.data?.planConnectedProjectsForUser) || []).map(e => {
     let t = getResourceDataOrFallback(e.project);
-    return t != null ? W2(t) : null;
+    return t != null ? mapProjectSummary(t) : null;
   }).filter(e => e !== null), [i]);
   return e.status !== 'loaded' || i.status !== 'loaded' ? jsx('div', {
     className: _$$s.flex.wFull.hFull.alignCenter.justifyCenter.$,
@@ -16581,7 +16581,7 @@ function fu({
 function fm({
   orgId: e
 }) {
-  let t = useSelector(t => Xy(t.orgUsersByOrgId[e]).map(e => e.user));
+  let t = useSelector(t => getAdminUsers(t.orgUsersByOrgId[e]).map(e => e.user));
   let r = useDispatch();
   return jsx(nR, {
     label: getI18nString('org_home_view_meta.admins'),
@@ -16590,7 +16590,7 @@ function fm({
       r(_$$sf({
         view: 'user',
         userId: t.id,
-        userViewTab: _$$o9.INTERNAL_PROFILE
+        userViewTab: InterProfileType.INTERNAL_PROFILE
       }));
     },
     canLeave: !1
@@ -17911,7 +17911,7 @@ function gy() {
     } = GS();
     let {
       properties
-    } = j6();
+    } = useTracking();
     useEffect(() => {
       e.forEach(e => {
         trackResourceImpression(e);
@@ -18064,7 +18064,7 @@ function gT() {
       }));
     },
     hasCustomWASMBuild: y4,
-    children: jsx(_$$fu, {
+    children: jsx(TrackingProvider, {
       name: _$$e7.COMMUNITY_HOME_SHELF,
       children: jsx(gy, {})
     })
@@ -18275,7 +18275,7 @@ let gR = {
         [e]: !0
       }));
     };
-    return jsx(_$$fu, {
+    return jsx(TrackingProvider, {
       name: e.trackingContextName,
       properties: {
         severity: _$$c7.EVENT
@@ -18587,16 +18587,16 @@ function gz(e) {
               branches,
               ...s
             } = repo;
-            let i = branches?.filter(e => e != null)?.map(e => _$$V2({
+            let i = branches?.filter(e => e != null)?.map(e => convertCamelToSnakeWithLeading({
               ...e,
               edit_url: e ? `${window.location.origin}/file/${e.key}/${encodeUri(e.name || '')}` : '',
               client_meta: e.checkpointClientMeta
             })) ?? [];
-            let n = _$$V2({
+            let n = convertCamelToSnakeWithLeading({
               ...s,
               ...r
             });
-            return _$$V2({
+            return convertCamelToSnakeWithLeading({
               type: _$$nb.REPO,
               repo: n,
               branches: i,
@@ -18613,11 +18613,11 @@ function gz(e) {
               ...r
             } = e;
             if (prototype == null) return null;
-            let a = _$$V2({
+            let a = convertCamelToSnakeWithLeading({
               ...prototype,
               ...r
             });
-            return _$$V2({
+            return convertCamelToSnakeWithLeading({
               type: _$$nb.PROTOTYPE,
               prototype: a
             }, {
@@ -18757,7 +18757,7 @@ function gH(e) {
           if (folder == null) return e;
           let s = folder.updatedAt.toString();
           let i = folder.activeProjectResourceConnections?.[0] ?? null;
-          let n = _$$V2({
+          let n = convertCamelToSnakeWithLeading({
             ...folder,
             ...a
           }, {
@@ -18871,7 +18871,7 @@ let g0 = registerModal(e => {
         })()),
         emailAddress: gZ(r.email)
       })
-    }), jsx(_$$nD, {
+    }), jsx(BigButtonPrimaryTracked, {
       onClick: () => {
         t(popModalStack());
       },
@@ -19112,7 +19112,7 @@ function ha(e) {
     let l = e ? t.byId[e] : null;
     return (n ? r.map(e => {
       let t = '';
-      if (e.plan_type === _$$O2.ORG) {
+      if (e.plan_type === OrganizationType.ORG) {
         let r = a[e.plan_id];
         t = r?.name ?? t;
       } else {
@@ -19122,7 +19122,7 @@ function ha(e) {
       return {
         label: t,
         plan_id: e.plan_id,
-        plan_type: e.plan_type === _$$O2.ORG ? _$$O2.ORG : _$$O2.TEAM
+        plan_type: e.plan_type === OrganizationType.ORG ? OrganizationType.ORG : OrganizationType.TEAM
       };
     }) : (l?.plans ?? []).map(e => ({
       label: e.name,
@@ -19371,7 +19371,7 @@ function h_() {
         svg: _$$A28
       })
     }), jsxs('div', {
-      children: [renderI18nText('sidebar.meta.this_team_is_for_education_users_only'), ' ', jsx(Us, {
+      children: [renderI18nText('sidebar.meta.this_team_is_for_education_users_only'), ' ', jsx(linkWithTracking, {
         target: '_blank',
         trusted: !0,
         href: '/education/',
@@ -19396,7 +19396,7 @@ function hp({
   let o = (n || []).filter(e => e.name !== '').length;
   let l = I7('exp_fbg_project_limit_upsell');
   if (!(!e.subscription && !e.org_id && s && o >= PRIMARY_LIMIT) || l.getConfig().getValue('show_upsell', !1)) return null;
-  let d = jsx(Us, {
+  let d = jsx(linkWithTracking, {
     'onClick': () => {
       t(showModalHandler({
         type: _$$V4,
@@ -19413,7 +19413,7 @@ function hp({
     'data-testid': 'starterTeamUpsellFooterUpgradeLink',
     'children': renderI18nText('file_browser.starter_team.upgrade_link')
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Starter Team Upsell Footer',
     children: jsx('div', {
       'className': U()(_$$s.flex.p32.mt16.bRadius6.justifyCenter.colorBorder.$, 'starter_team_upsell_footer--borderStyle--pM4nA'),
@@ -19535,7 +19535,7 @@ let hk = registerModal(({
     },
     children: getI18nString('pro_onboarding.pro_feature_modal.compare_plans')
   }) : null;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Pro Features Modal',
     properties: t ?? _$$S10.getTrackingProperties(e),
     children: jsx(_$$n7, {
@@ -20161,10 +20161,10 @@ function hM({
           'data-tooltip-subtext': F,
           'children': jsx(_$$$4, {})
         }) : void 0, q ? jsx(Fragment, {
-          children: jsx(_$$fu, {
-            name: _$$_Y2.PROFESSIONAL,
+          children: jsx(TrackingProvider, {
+            name: BadgeLabels.PROFESSIONAL,
             properties: _$$S10.getTrackingProperties(y),
-            children: jsx(_$$$z, {
+            children: jsx(TrackedButton, {
               type: 'button',
               onClick: () => {
                 C(showModalHandler({
@@ -20175,10 +20175,10 @@ function hM({
                 }));
               },
               className: 'team_page_view--pointerOnHover--at7fp',
-              children: jsx(Ex, {
-                color: zE.INFORMATIONAL,
+              children: jsx(Badge, {
+                color: BadgeColor.INFORMATIONAL,
                 text: getI18nString('pro_onboarding.professional'),
-                size: vj.EXTRA_LARGE
+                size: BadgeSize.EXTRA_LARGE
               })
             })
           })
@@ -20242,8 +20242,8 @@ function h1(e) {
             children: e.title
           }), e.user.profile?.job_title && jsxs('div', {
             className: 'org_user_meta_content--jobTitle--bWmsS text--fontPos11--2LvXf text--_fontBase--QdLsd',
-            children: [jsx(Ex, {
-              color: zE.INVERT,
+            children: [jsx(Badge, {
+              color: BadgeColor.INVERT,
               text: _$$lb(e.user.profile?.job_title)
             }), e.userId === r?.id && jsx('span', {
               className: 'org_user_meta_content--blueLink--u44PB blue_link--blueLink--9rlnd',
@@ -20411,7 +20411,7 @@ function h6(e) {
     children: profile?.images ? null : jsx(h8, {
       title: getI18nString('internal_profile.profile_image_nudge.title'),
       text: getI18nString('internal_profile.profile_image_nudge.text'),
-      action: jsx(N_, {
+      action: jsx(BaseLinkComponent, {
         trusted: !0,
         className: 'org_user_meta_content--userProfileNotificationActionLink--sVVav',
         onClick: () => {
@@ -20707,16 +20707,16 @@ let xr = e => {
   let G = _$$J8(() => m && m.community_profile_id ? r(_$$pZ({
     profileId: m.community_profile_id
   })) : Promise.resolve([]), [r, m]);
-  let V = l.view === 'user' && l.userViewTab === _$$o9.INTERNAL_PROFILE_POSTS ? _$$o9.INTERNAL_PROFILE_POSTS : _$$o9.INTERNAL_PROFILE;
-  let z = f === _$$o9.INTERNAL_PROFILE ? [jsx('div', {
+  let V = l.view === 'user' && l.userViewTab === InterProfileType.INTERNAL_PROFILE_POSTS ? InterProfileType.INTERNAL_PROFILE_POSTS : InterProfileType.INTERNAL_PROFILE;
+  let z = f === InterProfileType.INTERNAL_PROFILE ? [jsx('div', {
     className: 'internal_user_profile_page_view--hideFilterRightPadding--fd-Z-',
     children: jsx(ye, {
       config: x.tileSortFilterConfig
     })
   }, 'sort-filter')] : [];
   let [H, K, Y] = _$$t5.useManagedTabs({
-    [_$$o9.INTERNAL_PROFILE]: !0,
-    [_$$o9.INTERNAL_PROFILE_POSTS]: !0
+    [InterProfileType.INTERNAL_PROFILE]: !0,
+    [InterProfileType.INTERNAL_PROFILE_POSTS]: !0
   }, V, e => {
     r(_$$sf({
       view: 'user',
@@ -20729,12 +20729,12 @@ let xr = e => {
       children: jsxs(_$$t5.TabStrip, {
         manager: Y,
         children: [jsx(_$$t5.Tab, {
-          ...H[_$$o9.INTERNAL_PROFILE],
+          ...H[InterProfileType.INTERNAL_PROFILE],
           children: getI18nString('internal_profile.file_contributions')
-        }, _$$o9.INTERNAL_PROFILE), jsx(_$$t5.Tab, {
-          ...H[_$$o9.INTERNAL_PROFILE_POSTS],
+        }, InterProfileType.INTERNAL_PROFILE), jsx(_$$t5.Tab, {
+          ...H[InterProfileType.INTERNAL_PROFILE_POSTS],
           children: getI18nString('internal_profile.posts')
-        }, _$$o9.INTERNAL_PROFILE_POSTS)]
+        }, InterProfileType.INTERNAL_PROFILE_POSTS)]
       })
     }) : jsx('div', {
       className: 'internal_user_profile_page_view--sectionHeader--3NNNT text--fontPos13--xW8hS text--_fontBase--QdLsd',
@@ -20795,7 +20795,7 @@ let xr = e => {
     };
     return _$$fA(t);
   }(e)) : [], [$]);
-  return T8(jsx(_$$r4, {
+  return wrapWithTracking(jsx(_$$r4, {
     scrollableContainerClass: 'internal_user_profile_page_view--pageContainer--FQu11',
     containerClass: 'internal_user_profile_page_view--pageContainerInner--2Ep2e',
     content: !e.userNotInPlan && jsxs('div', {
@@ -20803,7 +20803,7 @@ let xr = e => {
       children: [jsx('div', {
         className: 'internal_user_profile_page_view--viewbar--eprew',
         children: J
-      }), f === _$$o9.INTERNAL_PROFILE && (G.status === _$$r1.SUCCESS && $.status === _$$r1.SUCCESS ? jsxs(Fragment, {
+      }), f === InterProfileType.INTERNAL_PROFILE && (G.status === _$$r1.SUCCESS && $.status === _$$r1.SUCCESS ? jsxs(Fragment, {
         children: [m && jsx(h9, {
           userId: t,
           org: m,
@@ -20819,7 +20819,7 @@ let xr = e => {
             sortBy: _$$lQ
           }), (() => {
             let e = _data?.tile ?? null;
-            return jsx(_$$fu, {
+            return jsx(TrackingProvider, {
               name: _$$e7.TILES_VIEW_DROP_DOWN,
               enabled: showing,
               properties: {
@@ -20838,7 +20838,7 @@ let xr = e => {
             });
           })()]
         })]
-      }) : jsx(LoadingOverlay, {})), f === _$$o9.INTERNAL_PROFILE_POSTS && m && jsx(un, {
+      }) : jsx(LoadingOverlay, {})), f === InterProfileType.INTERNAL_PROFILE_POSTS && m && jsx(un, {
         currentOrgId: m.id,
         selectedUser: e.user
       })]
@@ -20884,13 +20884,13 @@ let xn = (e, t, r) => r ? e(I1({
   allowNoOrgUser: !0
 })) : Promise.resolve(null);
 let xo = {
-  [_$$o9.INTERNAL_PROFILE]: {
+  [InterProfileType.INTERNAL_PROFILE]: {
     Component: xa
   },
-  [_$$o9.INTERNAL_PROFILE_POSTS]: {
+  [InterProfileType.INTERNAL_PROFILE_POSTS]: {
     Component: xa
   },
-  [_$$o9.PLUGINS]: {
+  [InterProfileType.PLUGINS]: {
     Component: _$$Fragment
   }
 };
@@ -20927,7 +20927,7 @@ function xd(e) {
         view: 'user',
         userId: e.userId,
         orgId: l,
-        userViewTab: _$$o9.INTERNAL_PROFILE
+        userViewTab: InterProfileType.INTERNAL_PROFILE
       }));
     } : () => {
       customHistory.redirect('/404');
@@ -21041,7 +21041,7 @@ function x_({
       case 'deletedFiles':
         return {
           pageHeaderContent: getI18nString('file_browser.tool_bar.trash'),
-          pageContent: T8(jsx(mj, {
+          pageContent: wrapWithTracking(jsx(mj, {
             selectedTab: mw.FILES
           }, 'trashed'), _$$e7.FILE_BROWSER, {
             view: 'trashed'
@@ -21064,7 +21064,7 @@ function x_({
       case 'trashedFolders':
         return {
           pageHeaderContent: getI18nString('file_browser.tool_bar.trash'),
-          pageContent: T8(jsx(mj, {
+          pageContent: wrapWithTracking(jsx(mj, {
             selectedTab: mw.FOLDERS
           }, 'trashed'), _$$e7.FILE_BROWSER, {
             view: 'trashed'
@@ -21082,7 +21082,7 @@ function x_({
             pageHeaderActions: c({
               from: _$$f3.FILE_BROWSER_TOPBAR_DRAFTS
             }),
-            pageContent: T8(jsx(_c, {
+            pageContent: wrapWithTracking(jsx(_c, {
               folderId: n.folderId,
               userId: t.id
             }, 'drafts'), _$$e7.FILE_BROWSER_DRAFTS, {
@@ -21092,7 +21092,7 @@ function x_({
           };
         }
         return {
-          pageContent: T8(jsx(p8, {
+          pageContent: wrapWithTracking(jsx(p8, {
             folderId: n.folderId
           }, `folder-${n.folderId}`), _$$e7.FOLDER_PAGE, {
             orgId: r,
@@ -21106,13 +21106,13 @@ function x_({
         };
       case 'workspace':
         switch (n.subView) {
-          case V0.ADMIN:
+          case DUserRole.ADMIN:
             return {
               pageHeaderContent: jsx(xc, {
                 workspaceId: n.workspaceId
               }),
               pageHeaderDividerHidden: !0,
-              pageContent: T8(jsx(y$, {
+              pageContent: wrapWithTracking(jsx(y$, {
                 workspaceId: n.workspaceId,
                 selectedTab: n.selectedTab
               }), _$$e7.WORKSPACE_ADMIN_SETTINGS_PAGE, {
@@ -21120,13 +21120,13 @@ function x_({
                 workspaceViewTab: n.selectedTab
               })
             };
-          case V0.DIRECTORY:
+          case DUserRole.DIRECTORY:
             return {
               pageHeaderContent: jsx(xc, {
                 workspaceId: n.workspaceId ?? null
               }),
               pageHeaderDividerHidden: !0,
-              pageContent: T8(n.workspaceId ? jsx(oR, {
+              pageContent: wrapWithTracking(n.workspaceId ? jsx(oR, {
                 workspaceId: n.workspaceId
               }, n.workspaceId) : jsx(iZ, {}), _$$e7.WORKSPACE_DIRECTORY_PAGE, {
                 workspaceId: n.workspaceId,
@@ -21137,9 +21137,9 @@ function x_({
             throwTypeError(n);
         }
       case 'licenseGroup':
-        if (n.subView === UserRole.ADMIN) {
+        if (n.subView === UserGroupRole.ADMIN) {
           return {
-            pageContent: T8(jsx(VY, {
+            pageContent: wrapWithTracking(jsx(VY, {
               licenseGroupId: n.licenseGroupId,
               selectedTab: n.selectedTab
             }), _$$e7.LICENSE_GROUP_ADMIN_SETTINGS_PAGE, {
@@ -21155,7 +21155,7 @@ function x_({
           pageHeaderActions: [jsx(p9, {
             orgId: n.orgId
           }, 'org-page-header-actions')],
-          pageContent: T8(jsx(fF, {
+          pageContent: wrapWithTracking(jsx(fF, {
             orgId: n.orgId,
             selectedTab: n.orgViewTab
           }), _$$e7.ORG_PAGE, {
@@ -21169,7 +21169,7 @@ function x_({
           showResourceConnectionFlyout: !!n.showResourceConnectionFlyout
         });
         return {
-          pageContent: T8(jsx(vW, {
+          pageContent: wrapWithTracking(jsx(vW, {
             selectedTab: n.orgAdminSettingsViewTab,
             selectedSecondaryTab: u,
             selectedExtensionId: n.selectedExtensionId,
@@ -21185,11 +21185,11 @@ function x_({
         };
       case 'abandonedDraftFiles':
         return {
-          pageContent: T8(jsx(_$$dZ, {
+          pageContent: wrapWithTracking(jsx(_$$dZ, {
             abandonedDraftFolderId: n.abandonedDraftFolderId,
             planType: n.adminPlanType,
             planId: n.planId
-          }), _$$e7.ABANDONED_DRAFTS_PAGE, n.adminPlanType === _$$O2.ORG ? {
+          }), _$$e7.ABANDONED_DRAFTS_PAGE, n.adminPlanType === OrganizationType.ORG ? {
             orgId: n.planId
           } : {
             teamId: n.planId
@@ -21202,7 +21202,7 @@ function x_({
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
-                orgAdminSettingsViewTab: J7.DASHBOARD
+                orgAdminSettingsViewTab: DashboardSection.DASHBOARD
               }));
             },
             hasTrailingDivider: !0
@@ -21211,21 +21211,21 @@ function x_({
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
-                orgAdminSettingsViewTab: J7.SETTINGS
+                orgAdminSettingsViewTab: DashboardSection.SETTINGS
               }));
             },
             hasTrailingDivider: !1
           })]
         });
         return {
-          pageContent: T8(jsx(Oe, {}), _$$e7.ORG_DOMAIN_MANAGEMENT_PAGE, {
+          pageContent: wrapWithTracking(jsx(Oe, {}), _$$e7.ORG_DOMAIN_MANAGEMENT_PAGE, {
             orgId: r
           }),
           pageHeaderContent: m
         };
       case 'billingGroupDashboard':
         return {
-          pageContent: T8(jsx(wu, {
+          pageContent: wrapWithTracking(jsx(wu, {
             selectedTab: n.selectedTab
           }), _$$e7.BILLING_GROUP_DASHBOARD_SETTINGS_PAGE, {
             orgId: r,
@@ -21240,7 +21240,7 @@ function x_({
         return {
           pageHeaderContent: getI18nString('file_browser.tool_bar.recents'),
           pageHeaderActions: p,
-          pageContent: T8(jsx(hi, {
+          pageContent: wrapWithTracking(jsx(hi, {
             selectedTab: _,
             userId: t.id,
             accountModalTab: n.accountModalTab,
@@ -21267,15 +21267,15 @@ function x_({
             pageHeaderContent: jsx(xp, {
               query
             }),
-            pageContent: T8(jsx(bS, {}), _$$e7.UNIFIED_SEARCH, {
-              showInternalModal: r && searchScope !== Rx.COMMUNITY,
-              showCommunityModal: r && searchScope === Rx.COMMUNITY
+            pageContent: wrapWithTracking(jsx(bS, {}), _$$e7.UNIFIED_SEARCH, {
+              showInternalModal: r && searchScope !== SpaceAccessType.COMMUNITY,
+              showCommunityModal: r && searchScope === SpaceAccessType.COMMUNITY
             })
           };
         }
       case 'seatRequests':
         return {
-          pageContent: T8(jsx(_$$m, {}), _$$e7.SEAT_REQUESTS_PAGE, {
+          pageContent: wrapWithTracking(jsx(_$$m, {}), _$$e7.SEAT_REQUESTS_PAGE, {
             orgId: r,
             teamId: o,
             planType: n.adminPlanType
@@ -21289,7 +21289,7 @@ function x_({
         {
           let e = n.teamViewTab ?? NavigationRoutes.HOME;
           return {
-            pageContent: T8(jsx(hD, {
+            pageContent: wrapWithTracking(jsx(hD, {
               teamId: n.teamId,
               selectedTab: e,
               upgradeModalType: n.upgradeModalType,
@@ -21309,12 +21309,12 @@ function x_({
       case 'teamAdminConsole':
         {
           let e = n.teamAdminConsoleViewTab ?? (n.isProTeam ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS);
-          let t = X$(e, n.teamAdminConsoleViewSecondaryTab, {
+          let t = resolveDashboardSection(e, n.teamAdminConsoleViewSecondaryTab, {
             showResourceConnectionInviteModal: !!n.showResourceConnectionInviteModal,
             showResourceConnectionFlyout: !!n.showResourceConnectionFlyout
           });
           return {
-            pageContent: T8(jsx(JC, {
+            pageContent: wrapWithTracking(jsx(JC, {
               teamId: n.teamId,
               selectedTab: e,
               selectedSecondaryTab: t,
@@ -21362,7 +21362,7 @@ function x_({
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
-                orgAdminSettingsViewTab: J7.DASHBOARD
+                orgAdminSettingsViewTab: DashboardSection.DASHBOARD
               }));
             },
             hasTrailingDivider: !0
@@ -21371,14 +21371,14 @@ function x_({
             onClick: () => {
               e(_$$sf({
                 view: 'orgAdminSettings',
-                orgAdminSettingsViewTab: J7.SETTINGS
+                orgAdminSettingsViewTab: DashboardSection.SETTINGS
               }));
             },
             hasTrailingDivider: !1
           })]
         });
         return {
-          pageContent: T8(jsx(T3, {}), _$$e7.ORG_IDP_MANAGEMENT_PAGE, {
+          pageContent: wrapWithTracking(jsx(T3, {}), _$$e7.ORG_IDP_MANAGEMENT_PAGE, {
             orgId: r
           }),
           pageHeaderContent: f
@@ -21503,7 +21503,7 @@ function xT({
       }
     }));
   }, [p, n, _, d]);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Add Collaborators',
     properties: {
       teamId: n?.id
@@ -21527,14 +21527,14 @@ function xT({
           className: 'add_collaborators--formContainer--zTKXv',
           children: [jsx('div', {
             className: 'add_collaborators--emailInputsContainer--19ZBc',
-            children: t.map((e, t) => jsx(_$$il, {
+            children: t.map((e, t) => jsx(BigTextInput, {
               className: xj,
               value: e,
               onChange: e => u(e.target.value, t),
               maxLength: 255,
               placeholder: getI18nString('team_creation.email')
             }, `collaborator-email-input-${t}`))
-          }), jsx(_$$nR2, {
+          }), jsx(ButtonSecondary, {
             className: xj,
             onClick: m,
             children: renderI18nText('team_creation.add_another')
@@ -21542,14 +21542,14 @@ function xT({
             className: 'add_collaborators--spacing--2VA7s'
           }), jsxs('div', {
             className: 'add_collaborators--ctaContainer--VGMvb',
-            children: [jsx(_$$nD, {
+            children: [jsx(BigButtonPrimaryTracked, {
               disabled: p().length === 0,
               onClick: f,
               trackingProperties: {
                 numCollaborators: p().length
               },
               children: renderI18nText('team_creation.continue')
-            }), jsx(Ph, {
+            }), jsx(clickableBaseLinkTracked, {
               onClick: _,
               trusted: !0,
               children: renderI18nText('team_creation.skip_for_now')
@@ -21631,7 +21631,7 @@ function xP(e) {
         onClick: () => {
           c ? t(showModalHandler({
             type: EO
-          })) : y8(m) ? customHistory.redirect(_$$r3(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(NA({
+          })) : y8(m) ? customHistory.redirect(getDesignFileUrlConditional(fileEntityDataMapper.toLiveGraph(m.file), !0), '_blank') : t(NA({
             file: m,
             openNewFileIn: _$$ai.NEW_TAB,
             source: _$$U6.AUTOSAVE_NOTIFICATION
@@ -21755,7 +21755,7 @@ function xU({
       className: 'team_creation--modalCloseX--TTg32'
     })
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Team Creation',
     children: jsx('div', {
       children: jsxs(_$$O6, {
@@ -21774,7 +21774,7 @@ function xU({
               children: [jsx('div', {
                 className: 'team_creation--teamNameLabel--ohZWy',
                 children: renderI18nText('team_creation.team_name_label')
-              }), jsx(_$$il, {
+              }), jsx(BigTextInput, {
                 value: _ || '',
                 onChange: e => {
                   p(e.target.value);
@@ -21818,7 +21818,7 @@ function xU({
             }) : jsx('div', {
               className: xB,
               children: renderI18nText('team_creation.after_creating_a_team_you_can_invite_others_to_join')
-            }), jsx(_$$nD, {
+            }), jsx(BigButtonPrimaryTracked, {
               className: t ? 'team_creation--createTeamButtonOrg--2rnOw' : 'team_creation--createTeamButton--C8IV7',
               type: 'submit',
               disabled: l.loading,
@@ -21886,7 +21886,7 @@ function xz({
       view: 'recentsAndSharing'
     }));
   };
-  let m = jsx(_$$vd, {
+  let m = jsx(ButtonBasePrimaryTracked, {
     className: xV,
     onClick: u,
     children: renderI18nText('team_restore.back')
@@ -21902,7 +21902,7 @@ function xz({
           deleteDeadline: e
         })]
       });
-      m = jsx(_$$vd, {
+      m = jsx(ButtonBasePrimaryTracked, {
         className: xV,
         onClick: () => {
           n(I9({
@@ -21934,7 +21934,7 @@ function xz({
       })]
     });
   }
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Team Restore',
     properties: {
       teamId: d
@@ -22010,7 +22010,7 @@ function xq(e) {
   };
   let p = e.selectedView.teamId;
   let f = useRef(null);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Upgrade Team',
     properties: {
       teamId: p,
@@ -22043,7 +22043,7 @@ function xq(e) {
         pageRef: f,
         children: [jsx(_$$J9, {
           index: 3
-        }), jsx(_$$fu, {
+        }), jsx(TrackingProvider, {
           name: 'Upgrade New Team',
           properties: {
             teamId: p,

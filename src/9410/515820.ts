@@ -23,11 +23,11 @@ import { o3, nt } from "../905/226610";
 import { wV } from "../figma_app/779965";
 import { useDispatch, useSelector } from "react-redux";
 import { F as _$$F } from "../905/680873";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { V as _$$V2 } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 import { Fr } from "../figma_app/297957";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
@@ -157,13 +157,13 @@ function W({
       }
     }));
   };
-  let E = jsx(Us, {
+  let E = jsx(linkWithTracking, {
     onClick: v,
     trusted: !0,
     "data-testid": "page_tracker_upsell_link",
     children: renderI18nText("fullscreen.pages_panel.see_plans_that_offer_more")
   });
-  let T = jsx(Us, {
+  let T = jsx(linkWithTracking, {
     onClick: v,
     trusted: !0,
     "data-testid": "page_tracker_upsell_link",
@@ -181,7 +181,7 @@ function W({
     numPages: s,
     ...u
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Page Tracker Upsell",
     properties: W,
     children: jsx("div", {

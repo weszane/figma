@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { useLatestRef } from "../figma_app/922077";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { NONE_SYMBOL } from "../905/992467";
 import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
@@ -41,8 +41,8 @@ import { f as _$$f } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { h as _$$h } from "../905/284399";
 import { Jn } from "../905/17223";
-import { vd } from "../figma_app/637027";
-import { $z } from "../figma_app/831799";
+import { ButtonBasePrimaryTracked } from "../figma_app/637027";
+import { TrackedButton } from "../figma_app/831799";
 import { LN, q3 } from "../figma_app/450829";
 import { xT } from "../figma_app/195407";
 import { ZA, OQ, jS, dC, TI, ZO, IL, wV, _S } from "../figma_app/809086";
@@ -100,12 +100,12 @@ function ee(e) {
         children: e.bottomLeftText
       }), jsxs("div", {
         className: OQ,
-        children: [e.secondaryCtaText && e.onClickSecondaryCta && jsx($z, {
+        children: [e.secondaryCtaText && e.onClickSecondaryCta && jsx(TrackedButton, {
           className: r ? jS : dC,
           onClick: e.onClickSecondaryCta,
           "aria-hidden": !0,
           children: e.secondaryCtaText
-        }), e.ctaText && e.onClickPrimaryCta && jsx(vd, {
+        }), e.ctaText && e.onClickPrimaryCta && jsx(ButtonBasePrimaryTracked, {
           className: r ? TI : ZO,
           onClick: e.onClickPrimaryCta,
           trackingProperties: e.buttonContext ? {
@@ -275,7 +275,7 @@ export let $$eb0 = registerModal(function (e) {
     requestToOpenPostByFeedIdx
   } = e;
   let M = useCallback(t => {
-    t.keyCode === Uz.LEFT_ARROW ? 0 === w ? requestToOpenPostByFeedIdx && void 0 !== e.feedIdx && requestToOpenPostByFeedIdx(e.feedIdx - 1) : P(w - 1) : t.keyCode === Uz.RIGHT_ARROW && (w === U - 1 ? requestToOpenPostByFeedIdx && void 0 !== e.feedIdx && requestToOpenPostByFeedIdx(e.feedIdx + 1) : P(w + 1));
+    t.keyCode === KeyCodes.LEFT_ARROW ? 0 === w ? requestToOpenPostByFeedIdx && void 0 !== e.feedIdx && requestToOpenPostByFeedIdx(e.feedIdx - 1) : P(w - 1) : t.keyCode === KeyCodes.RIGHT_ARROW && (w === U - 1 ? requestToOpenPostByFeedIdx && void 0 !== e.feedIdx && requestToOpenPostByFeedIdx(e.feedIdx + 1) : P(w + 1));
   }, [w, U, requestToOpenPostByFeedIdx, e.feedIdx]);
   let [L, A] = useState(!0);
   let R = useCallback(() => A(e => !e), []);

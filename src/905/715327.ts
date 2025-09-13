@@ -10,7 +10,7 @@ import { useSubscription } from "../figma_app/288654";
 import { PerfTimer } from "../905/609396";
 import { handleAtomEvent } from "../905/502364";
 import { nz, Yx, Tn } from "../figma_app/933328";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { useShadowReadLoaded, adminPermissionConfig } from "../figma_app/391338";
 import { FC } from "../figma_app/212807";
 import { LH } from "../905/872904";
@@ -77,7 +77,7 @@ import { y as _$$y, C as _$$C2 } from "../905/109977";
 import { A as _$$A } from "../905/47292";
 import { aU } from "../figma_app/757606";
 import { ButtonWide } from "../905/521428";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { l as _$$l2 } from "../905/997221";
 import { Pg, y6 } from "../figma_app/803787";
 import { b as _$$b2 } from "../905/937225";
@@ -124,7 +124,7 @@ function O({
   let [p] = setupResourceAtomHandler(Yt(i));
   let m = ZO(l, d);
   let h = useMemo(() => m(i), [i, m]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "SubscriptionFileView",
     properties: {
       libraryKey: i
@@ -322,11 +322,11 @@ function e4({
               })
             })
           })
-        }), w > 0 && jsx(Ex, {
+        }), w > 0 && jsx(Badge, {
           text: 0 === D ? getI18nString("design_systems.libraries_modal.no_changes") : getI18nString("design_systems.libraries_modal.x_changes", {
             numChanges: D
           }),
-          color: D > 0 ? zE.BRAND : zE.TERTIARY,
+          color: D > 0 ? BadgeColor.BRAND : BadgeColor.TERTIARY,
           className: D > 0 ? "file_row--badgeWithChanges--SXpio file_row--badge--DB32q" : "file_row--badge--DB32q"
         })]
       }), jsx("div", {
@@ -1068,7 +1068,7 @@ function tT({
   })?.thumbnail_url || "";
   SR();
   let s = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e.LIBRARY_MODAL_UPSELL,
     children: jsx("div", {
       className: _$$s.pt16.mx16.$,
@@ -1431,7 +1431,7 @@ export function $$tM0({
       width: l
     })
   }) : null;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e.LIBRARY_SUBSCRIPTIONS,
     children: jsx(_$$r.Provider, {
       value: z,

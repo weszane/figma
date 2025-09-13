@@ -7,7 +7,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { sessionLocalIDToString } from "../905/871411";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey, useHandleFocusEvent, useHandleKeyboardEvent, SKIP_RECORDING } from "../figma_app/878298";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -93,11 +93,11 @@ function w({
     }));
   };
   let j = useHandleKeyboardEvent(h, "keydown", e => {
-    if (e.keyCode === Uz.TAB) M();else if (e.keyCode === Uz.ENTER) {
+    if (e.keyCode === KeyCodes.TAB) M();else if (e.keyCode === KeyCodes.ENTER) {
       M();
       k === zM.EDIT_STYLE && "" === C || N?.();
     } else {
-      if (e.keyCode !== Uz.ESCAPE) return SKIP_RECORDING;
+      if (e.keyCode !== KeyCodes.ESCAPE) return SKIP_RECORDING;
       flushSync(() => {
         w(t ? getBasename(t) : "");
       });

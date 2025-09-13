@@ -33,7 +33,7 @@ import { cD } from '../figma_app/598018';
 import { fJ } from '../figma_app/616107';
 import { $v, Bw, US, VR, WR, X8, Z9 } from '../figma_app/634656';
 import { cd } from '../figma_app/650460';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { generateRecordingKey } from '../figma_app/878298';
 import { Ze } from '../figma_app/967873';
 let l = o;
@@ -63,7 +63,7 @@ function H({
     defaultColorPaletteLength: m.baseColors.length,
     closeColorPalettePicker: t
   }, e.uuid));
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.COLOR_PALETTE_PICKER,
     children: jsx('div', {
       className: l()({

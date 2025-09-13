@@ -4,43 +4,43 @@ import { r3 } from "../figma_app/599327";
 import { FUserRoleType } from "../figma_app/191312";
 import { du } from "../figma_app/336853";
 import { s as _$$s } from "../905/82276";
-import { Od, WH } from "../figma_app/967319";
+import { ColumnName, SpecialUserTypes } from "../figma_app/967319";
 export function $$c5(e, t) {
   switch (e) {
-    case Od.NAME:
+    case ColumnName.NAME:
       return getI18nString("members_table.column_header.name");
-    case Od.LAST_EDIT:
-    case Od.LAST_DESIGN_EDIT:
-    case Od.LAST_WHITEBOARD_EDIT:
+    case ColumnName.LAST_EDIT:
+    case ColumnName.LAST_DESIGN_EDIT:
+    case ColumnName.LAST_WHITEBOARD_EDIT:
       return getI18nString("members_table.column_header.edit_at");
-    case Od.LAST_ACTIVE:
-    case Od.LAST_DESIGN_ACTIVE:
-    case Od.LAST_WHITEBOARD_ACTIVE:
+    case ColumnName.LAST_ACTIVE:
+    case ColumnName.LAST_DESIGN_ACTIVE:
+    case ColumnName.LAST_WHITEBOARD_ACTIVE:
       return getI18nString("members_table.column_header.active_at");
-    case Od.DESIGN_ROLE:
+    case ColumnName.DESIGN_ROLE:
       return getI18nString("members_table.column_header.design_role.seat_rename");
-    case Od.WHITEBOARD_ROLE:
+    case ColumnName.WHITEBOARD_ROLE:
       return getI18nString("members_table.column_header.whiteboard_role.seat_rename");
-    case Od.DEV_MODE_ROLE:
+    case ColumnName.DEV_MODE_ROLE:
       return getI18nString("members_table.column_header.dev_mode_role.seat_rename");
-    case Od.DESIGN_UPGRADE_DATE:
-    case Od.WHITEBOARD_UPGRADE_DATE:
-    case Od.DEV_MODE_UPGRADE_DATE:
+    case ColumnName.DESIGN_UPGRADE_DATE:
+    case ColumnName.WHITEBOARD_UPGRADE_DATE:
+    case ColumnName.DEV_MODE_UPGRADE_DATE:
       return getI18nString("members_table.column_header.upgrade_date");
-    case Od.WORKSPACE:
+    case ColumnName.WORKSPACE:
       return getI18nString("members_table.column_header.workspace");
-    case Od.LICENSE_GROUP:
+    case ColumnName.LICENSE_GROUP:
       return getI18nString("members_table.column_header.billing_group");
-    case Od.SCIM_DATA:
+    case ColumnName.SCIM_DATA:
       return t ? du(t) : getI18nString("members_table.column_header.scim");
-    case Od.DESIGN_UPGRADE_REASON:
-    case Od.WHITEBOARD_UPGRADE_REASON:
+    case ColumnName.DESIGN_UPGRADE_REASON:
+    case ColumnName.WHITEBOARD_UPGRADE_REASON:
       return getI18nString("members_table.column_header.upgrade_reason");
-    case Od.BILLABLE_PRODUCT_SEAT:
+    case ColumnName.BILLABLE_PRODUCT_SEAT:
       return r3;
-    case Od.UPGRADE_REASON:
+    case ColumnName.UPGRADE_REASON:
       return getI18nString("members_table.column_header.upgrade_reason");
-    case Od.UPGRADE_DATE:
+    case ColumnName.UPGRADE_DATE:
       return getI18nString("members_table.column_header.upgrade_date");
     default:
       throwTypeError(e);
@@ -51,9 +51,9 @@ export function $$u0(e, t) {
 }
 export function $$p11(e) {
   switch (e) {
-    case WH.IDP:
+    case SpecialUserTypes.IDP:
       return getI18nString("members_table.org_permission_filter.pending");
-    case WH.UNVERIFIED:
+    case SpecialUserTypes.UNVERIFIED:
       return getI18nString("members_table.org_permission_filter.unverified");
     case FUserRoleType.GUEST:
       return getI18nString("members_table.org_permission_filter.guest");

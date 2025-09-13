@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { s_ } from "../905/17223";
-import { ks, nR, $$ } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -11,7 +11,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { xF, yo } from "../figma_app/494261";
 import { extractPluginIdFromUrl, extractWidgetIdFromUrl } from "../figma_app/300692";
 import { registerModal } from "../905/102752";
-import { yX, d_ } from "../figma_app/918700";
+import { ConfirmationModal2, ModalContainer } from "../figma_app/918700";
 let x = "allowlist_plugins_modals--allowListInputDescription--0Tdk6";
 let b = "allowlist_plugins_modals--allowListInput--ISr-U";
 let v = "allowlist_plugins_modals--allowListInputButtonContainer--O-n-P";
@@ -147,7 +147,7 @@ let $$y0 = registerModal(function ({
   extensionType: t
 }) {
   let a = useDispatch();
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("allowlist_plugins_modals.msa_amendment_modal.title"),
     confirmText: getI18nString("allowlist_plugins_modals.msa_amendment_modal.accept_button"),
     onConfirm: () => {
@@ -187,7 +187,7 @@ let $$w1 = registerModal(function (e) {
     t(hideModal());
     o("");
   };
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     title: getI18nString("allowlist_plugins_modals.add_plugin.title"),
     onHide: m,
@@ -219,19 +219,19 @@ let $$w1 = registerModal(function (e) {
           message: getI18nString("allowlist_plugins_modals.add_plugin.invalid_url_notification")
         }));
       },
-      children: [jsx(ks, {
+      children: [jsx(BigTextInputForwardRef, {
         onChange: e => o(e.currentTarget.value),
         value: a,
         className: b,
         autoFocus: !0
       }), jsxs("div", {
         className: v,
-        children: [jsx(nR, {
+        children: [jsx(ButtonSecondary, {
           onClick: m,
           className: f,
           type: "button",
           children: renderI18nText("general.cancel")
-        }), jsx($$, {
+        }), jsx(ButtonBasePrimary, {
           disabled: !extractPluginIdFromUrl(a),
           className: f,
           type: "submit",
@@ -248,7 +248,7 @@ let $$k2 = registerModal(function (e) {
     t(hideModal());
     o("");
   };
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     size: "small",
     title: getI18nString("allowlist_widgets_modals.add_widget.title"),
     onHide: m,
@@ -280,19 +280,19 @@ let $$k2 = registerModal(function (e) {
           message: getI18nString("allowlist_widgets_modals.add_widget.invalid_url_notification")
         }));
       },
-      children: [jsx(ks, {
+      children: [jsx(BigTextInputForwardRef, {
         onChange: e => o(e.currentTarget.value),
         value: a,
         className: b,
         autoFocus: !0
       }), jsxs("div", {
         className: v,
-        children: [jsx(nR, {
+        children: [jsx(ButtonSecondary, {
           onClick: m,
           className: f,
           type: "button",
           children: renderI18nText("general.cancel")
-        }), jsx($$, {
+        }), jsx(ButtonBasePrimary, {
           disabled: !extractWidgetIdFromUrl(a),
           className: f,
           type: "submit",

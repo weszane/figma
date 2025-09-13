@@ -9,15 +9,15 @@ import { memoizeByArgs } from "../figma_app/815945";
 import u from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { Og } from "../figma_app/243213";
-import { RW } from "../figma_app/637027";
+import { trackedSvgComponent } from "../figma_app/637027";
 import { Wi, JR } from "../figma_app/162641";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import v, { AutoLayout } from "../905/470281";
-import { fu } from "../figma_app/831799";
-import { K } from "../905/135526";
+import { TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { iA, Hj } from "../905/682977";
 import { LI } from "../905/832675";
 import { UE, sM, nM, uH, BA, D as _$$D, I6, E0, eO as _$$eO, U1, wY, TH, jG, NM, ln, T3, p$, _Z, KY, SB, cr, SM, Ym, ry, jm, hw } from "../figma_app/527041";
@@ -366,9 +366,9 @@ function P(e) {
           }), jsxs("div", {
             className: void 0 !== stickyBanner ? T3 : ln,
             style: eW,
-            children: [jsx(fu, {
+            children: [jsx(TrackingProvider, {
               name: "MultiSelectList Header",
-              trackingTargets: K.NONE,
+              trackingTargets: RCSMessageType.NONE,
               properties: {
                 tableType: itemTypeContext.itemType
               },
@@ -377,9 +377,9 @@ function P(e) {
           }), 0 === items.length && !isLoading && jsx("div", {
             className: p$,
             children: emptyContent
-          }), jsx(fu, {
+          }), jsx(TrackingProvider, {
             name: "MultiSelectList - Row",
-            trackingTargets: K.RCS,
+            trackingTargets: RCSMessageType.RCS,
             properties: {
               tableType: itemTypeContext.itemType
             },
@@ -396,9 +396,9 @@ function P(e) {
             })
           })]
         })
-      }), actionBar && jsx(fu, {
+      }), actionBar && jsx(TrackingProvider, {
         name: "MultiSelectList BatchAction",
-        trackingTargets: K.RCS,
+        trackingTargets: RCSMessageType.RCS,
         properties: {
           selectedAll: ef,
           selectedCount: eH.length,
@@ -412,7 +412,7 @@ function P(e) {
             children: [jsx("div", {
               className: SM,
               children: itemTypeContext.getSelectedCountString(getTotalSelected ? getTotalSelected(eH, eI()) : eH.length)
-            }), actionBar(eH), jsx(RW, {
+            }), actionBar(eH), jsx(trackedSvgComponent, {
               className: p()(Ym, styleOverrideClassNames?.batchActionClearButton),
               svg: _$$A,
               onClick: () => {
@@ -836,9 +836,9 @@ class j extends Component {
             }), jsxs("div", {
               className: void 0 !== this.props.stickyBanner ? T3 : ln,
               style: t,
-              children: [jsx(fu, {
+              children: [jsx(TrackingProvider, {
                 name: "MultiSelectList Header",
-                trackingTargets: K.NONE,
+                trackingTargets: RCSMessageType.NONE,
                 properties: {
                   tableType: this.props.itemTypeContext.itemType
                 },
@@ -847,9 +847,9 @@ class j extends Component {
             }), 0 === this.props.items.length && !this.props.isLoading && jsx("div", {
               className: p$,
               children: this.props.emptyContent
-            }), jsx(fu, {
+            }), jsx(TrackingProvider, {
               name: "MultiSelectList - Row",
-              trackingTargets: K.RCS,
+              trackingTargets: RCSMessageType.RCS,
               properties: {
                 tableType: this.props.itemTypeContext.itemType
               },
@@ -866,9 +866,9 @@ class j extends Component {
               })
             })]
           })
-        }), this.props.actionBar && jsx(fu, {
+        }), this.props.actionBar && jsx(TrackingProvider, {
           name: "MultiSelectList BatchAction",
-          trackingTargets: K.RCS,
+          trackingTargets: RCSMessageType.RCS,
           properties: {
             selectedAll: this.state.selectedAll,
             selectedCount: e.length,
@@ -882,7 +882,7 @@ class j extends Component {
               children: [jsx("div", {
                 className: SM,
                 children: this.props.itemTypeContext.getSelectedCountString(this.props.getTotalSelected ? this.props.getTotalSelected(e, this.selectableItemKeys()) : e.length)
-              }), this.props.actionBar(e), jsx(RW, {
+              }), this.props.actionBar(e), jsx(trackedSvgComponent, {
                 className: p()(Ym, this.props.styleOverrideClassNames?.batchActionClearButton),
                 svg: _$$A,
                 onClick: () => {

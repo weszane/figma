@@ -2,12 +2,12 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useCallback } from "react";
 import { lQ } from "../905/934246";
 import s from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { j } from "../905/91142";
 import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 var o = s;
 export let $$h0 = forwardRef(function ({
   variant: e = "secondary",
@@ -34,7 +34,7 @@ export let $$h0 = forwardRef(function ({
   let R = useHandleMouseEvent(g, "mousedown", s || lQ);
   let N = g ? R : s;
   let P = useCallback(e => {
-    j?.(e) || (m?.(e), e.keyCode === Uz.ESCAPE && e.currentTarget.blur());
+    j?.(e) || (m?.(e), e.keyCode === KeyCodes.ESCAPE && e.currentTarget.blur());
   }, [m]);
   return jsxs("button", {
     ref: C,
@@ -130,7 +130,7 @@ export let $$h0 = forwardRef(function ({
   });
 });
 $$h0.displayName = "Button";
-export let $$g1 = tf(e => jsx($$h0, {
+export let $$g1 = withTrackedClick(e => jsx($$h0, {
   ...e
 }));
 export const $n = $$h0;

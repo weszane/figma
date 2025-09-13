@@ -8,13 +8,13 @@ import { ComponentPropType, Fullscreen, VariableResolvedDataType } from "../figm
 import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { X as _$$X } from "../905/606795";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { u2 } from "../905/511649";
+import { RecordableInput } from "../905/511649";
 import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
 import { TQ, Zl } from "../905/211621";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { XE } from "../figma_app/91703";
@@ -229,7 +229,7 @@ let $$X0 = registerModal(function (e) {
     varValue: void 0
   });
   let ec = e => {
-    e.keyCode !== Uz.ENTER || e.shiftKey || ed || ep({
+    e.keyCode !== KeyCodes.ENTER || e.shiftKey || ed || ep({
       propName: K,
       defaultValue: er
     });
@@ -319,7 +319,7 @@ let $$X0 = registerModal(function (e) {
         children: [jsx("p", {
           className: q,
           children: renderI18nText("design_systems.component_properties.name")
-        }), jsx(_$$L, {
+        }), jsx(LazyInputForwardRef, {
           ref: inputRef,
           autoCorrect: "off",
           autoFocus: !0,
@@ -360,7 +360,7 @@ let $$X0 = registerModal(function (e) {
             },
             entrypointForLogging: _$$S.InstancePickerEntrypoint.CREATE_COMPONENT_PROP_PICKER
           })
-        }), propType === ComponentPropType.VARIANT && jsx(u2, {
+        }), propType === ComponentPropType.VARIANT && jsx(RecordableInput, {
           className: Z,
           id: "create-component-prop-variant-input",
           onChange: e => ea(e.currentTarget.value),

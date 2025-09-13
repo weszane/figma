@@ -6,7 +6,7 @@ import { iA, PC, OV } from "../905/403166";
 import { RecordingPureComponent, generateRecordingKey } from "../figma_app/878298";
 import { Hn, f6, xD, ri } from "../905/337179";
 import { useState, useCallback, useEffect } from "react";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { O1, KD } from "../figma_app/317394";
 import { fullscreenValue } from "../figma_app/455680";
 var a = r;
@@ -27,7 +27,7 @@ let g = function (e) {
   O1(l, KD.EDITING_TEXT_FIELD);
   let d = t => {
     let n = e.allSkinTones.length;
-    t.keyCode === Uz.UP_ARROW || t.keyCode === Uz.LEFT_ARROW ? (t.stopPropagation(), t.preventDefault(), r((i - 1 + n) % n)) : t.keyCode === Uz.DOWN_ARROW || t.keyCode === Uz.RIGHT_ARROW ? (t.stopPropagation(), t.preventDefault(), r((i + 1) % n)) : (t.keyCode === Uz.ENTER || t.keyCode === Uz.TAB) && (t.stopPropagation(), t.preventDefault(), o(e.allSkinTones[i].skin));
+    t.keyCode === KeyCodes.UP_ARROW || t.keyCode === KeyCodes.LEFT_ARROW ? (t.stopPropagation(), t.preventDefault(), r((i - 1 + n) % n)) : t.keyCode === KeyCodes.DOWN_ARROW || t.keyCode === KeyCodes.RIGHT_ARROW ? (t.stopPropagation(), t.preventDefault(), r((i + 1) % n)) : (t.keyCode === KeyCodes.ENTER || t.keyCode === KeyCodes.TAB) && (t.stopPropagation(), t.preventDefault(), o(e.allSkinTones[i].skin));
   };
   let c = e => r(e);
   let g = e => i === e;

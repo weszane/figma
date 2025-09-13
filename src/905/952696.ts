@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -100,7 +100,7 @@ export function $$g0({
           fontSize: 11,
           children: reasoning
         })]
-      }), i && jsx(CY, {
+      }), i && jsx(SecureLink, {
         href: t ? "https://help.figma.com/hc/articles/4410047809431-Use-widgets-in-files#Network_access" : "https://help.figma.com/hc/articles/360042532714-Use-plugins-in-files#Network_access",
         trusted: !0,
         target: "_blank",

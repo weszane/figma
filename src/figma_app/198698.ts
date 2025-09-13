@@ -11,7 +11,7 @@ import { wY, cU } from "../figma_app/708845";
 import { F as _$$F } from "../905/680873";
 import { BrowserInfo } from "../figma_app/778880";
 import { Jn } from "../905/17223";
-import { tM } from "../figma_app/637027";
+import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { FEditorType } from "../figma_app/53721";
@@ -155,7 +155,7 @@ export function $$w0(e) {
         break;
       case MA.STRUCTURED:
       case void 0:
-        k = jsx(tM, {
+        k = jsx(ButtonSecondaryTracked, {
           className: content.button.className || lI,
           onClick: content.button.onClick,
           recordingKey: content.button.recordingKey,

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import a from "classnames";
 import { useSubscription } from "../figma_app/288654";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FileEditRequestExistence } from "../figma_app/43951";
 var i = a;
 export function $$d0({
@@ -16,7 +16,7 @@ export function $$d0({
   let d = i()("badge--shareButtonBadge--zXKJj", {
     "badge--legacyPosition--58g-I": t
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Share Button Badge",
     properties: {
       numRequests: n

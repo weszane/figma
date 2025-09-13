@@ -5,14 +5,14 @@ import { GP } from "../figma_app/15927";
 import { trackEventAnalytics } from "../905/449184";
 import { RecordingComponent, setupPlayback, generateRecordingKey } from "../figma_app/878298";
 import { s_ } from "../905/17223";
-import { ks, nR, $$ } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { generateSerializableStyleThumbnail, generateThumbnailFromStyleConsumer } from "../figma_app/80990";
 import { registerLegacyModal } from "../905/102752";
 import { zi } from "../905/824449";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { yl, v0, Lu, pL } from "../figma_app/639088";
 import { A as _$$A } from "../2854/751030";
 export let $$b0 = "PAINT_DATA_STYLES";
@@ -107,7 +107,7 @@ class v extends RecordingComponent {
     let e = "create" === this.props.type.kind ? this.multiplePaintDatas ? getI18nString("design_systems.create_style.create_new_color_styles") : getI18nString("design_systems.create_style.create_new_color_style") : this.multiplePaintDatas ? getI18nString("design_systems.create_style.color_conflict") : "";
     let t = "create" === this.props.type.kind ? this.multiplePaintDatas ? getI18nString("design_systems.create_style.create_styles") : getI18nString("design_systems.create_style.create_style") : getI18nString("design_systems.create_style.use_style");
     let i = "create" === this.props.type.kind ? getI18nString("design_systems.create_style.error_creating_style") : getI18nString("design_systems.create_style.error_applying_style");
-    return jsxs(d_, {
+    return jsxs(ModalContainer, {
       title: e,
       size: "small",
       className: yl,
@@ -129,7 +129,7 @@ class v extends RecordingComponent {
                 }
               }
             })
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             className: "style_modal--textInput--35ro2",
             name: "styleName",
             ref: 0 === t ? this.inputRef : null,
@@ -147,7 +147,7 @@ class v extends RecordingComponent {
           })
         }), jsxs("div", {
           className: v0,
-          children: [this.multiplePaintDatas && "apply" === this.props.type.kind && jsxs(nR, {
+          children: [this.multiplePaintDatas && "apply" === this.props.type.kind && jsxs(ButtonSecondary, {
             type: "button",
             className: `${Lu} style_modal--selectButton--t8zHP`,
             onClick: this.onSelectSamePaintClick,
@@ -156,12 +156,12 @@ class v extends RecordingComponent {
               className: "style_modal--targetIcon--x4NAU",
               svg: _$$A
             }), renderI18nText("design_systems.create_style.show_me")]
-          }), jsx(nR, {
+          }), jsx(ButtonSecondary, {
             type: "button",
             className: Lu,
             onClick: this.onCancel,
             children: renderI18nText("design_systems.create_style.cancel")
-          }), jsx($$, {
+          }), jsx(ButtonBasePrimary, {
             type: "submit",
             className: pL,
             children: t

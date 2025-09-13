@@ -142,7 +142,7 @@ import { n as _$$n3 } from "../573/512493";
 import { l as _$$l3 } from "../9410/331071";
 import { _ as _$$_2 } from "../905/410717";
 import { Me, $z } from "../figma_app/617427";
-import { fu as _$$fu, $z as _$$$z } from "../figma_app/831799";
+import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { M as _$$M } from "../figma_app/904127";
 import { RJ } from "../figma_app/869006";
 import { h as _$$h5 } from "../905/537858";
@@ -230,7 +230,7 @@ import { A as _$$A5 } from "../3591/199070";
 import { Vv, xY as _$$xY, cu as _$$cu } from "../figma_app/439332";
 import { WZ, e2 as _$$e6, PE } from "../3591/130069";
 import { _W as _$$_W, nN as _$$nN2 } from "../7492/254275";
-import { $$, nR as _$$nR } from "../figma_app/637027";
+import { ButtonBasePrimary, ButtonSecondary } from "../figma_app/637027";
 import { t as _$$t4 } from "../469e6e40/489933";
 import { lg as _$$lg } from "../figma_app/976749";
 import { Gt, dR as _$$dR, RK, cK as _$$cK, hN as _$$hN } from "../figma_app/248118";
@@ -315,7 +315,7 @@ import { f as _$$f4 } from "../figma_app/58113";
 import { tJ as _$$tJ2, VM, Mp, oQ as _$$oQ, h_ as _$$h_, P0, JX } from "../figma_app/269100";
 import { A as _$$A1 } from "../svg/55550";
 import { S as _$$S2 } from "../1291/885929";
-import { N as _$$N2 } from "../905/551536";
+import { BaseLinkComponent } from "../905/551536";
 import { UI } from "../figma_app/471982";
 import { Uo } from "../figma_app/354658";
 import { PreviewMode } from "../figma_app/707808";
@@ -377,11 +377,11 @@ import { $ as _$$$2 } from "../vendor/909072";
 import { m as _$$m5 } from "../2b17fec9/628878";
 import { wY } from "../figma_app/708845";
 import { yZ as _$$yZ } from "../figma_app/476572";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { Br, tV as _$$tV, lt as _$$lt2, Fg } from "../figma_app/862108";
 import { A as _$$A15 } from "../2b17fec9/467175";
 import { $isAtNodeEnd } from "@lexical/selection";
-import { Fo, vN as _$$vN, xH as _$$xH, Uz, sC as _$$sC, Te as _$$Te } from "../905/63728";
+import { isCommandEvent, isExactModifier, ModifierKeyCodes, KeyCodes, isModifierMatch, isCommandModifier } from "../905/63728";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo as _$$vo2, Y9, nB as _$$nB, wi } from "../figma_app/272243";
@@ -504,7 +504,7 @@ import { n as _$$n9 } from "../9410/774045";
 import { H as _$$H5 } from "../905/762413";
 import { N as _$$N5 } from "../905/720559";
 import { a as _$$a9 } from "../905/996627";
-import { D8 as _$$D4, oj as _$$oj } from "../905/511649";
+import { RecordableDiv, RecordableSpan } from "../905/511649";
 import { b as _$$b9, c as _$$c8 } from "../figma_app/166989";
 import { wv as _$$wv5, uM as _$$uM } from "../905/888175";
 import { Cs as _$$Cs, M8 as _$$M4 } from "../figma_app/368611";
@@ -618,7 +618,7 @@ import { M as _$$M6 } from "../figma_app/750676";
 import { isGoogleMeetIntegration, IntegrationUtils } from "../figma_app/469876";
 import { Lk } from "../figma_app/122682";
 import { S as _$$S4 } from "../3682/343085";
-import { _Y as _$$_Y2 } from "../figma_app/162807";
+import { FileKindEnum } from "../figma_app/162807";
 import { SQ, CT, A5 as _$$A74, ih as _$$ih, SK } from "../9410/499229";
 import { a as _$$a1 } from "../9410/20763";
 import { Od, I_ } from "../9410/542126";
@@ -657,10 +657,10 @@ import { A as _$$A77 } from "../svg/391784";
 import { l as _$$l1 } from "../905/745972";
 import { zi, DG as _$$DG, Pd, Ld as _$$Ld, oC as _$$oC, yn as _$$yn, YR as _$$YR, FJ, Av } from "../9410/960980";
 import { f as _$$f8 } from "../905/335032";
-import { L as _$$L6 } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { Qs, iN as _$$iN, sx as _$$sx3 } from "../905/992395";
 import { qU, OO, MR, II, qM } from "../figma_app/913518";
-import { yX as _$$yX2 } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { h1 as _$$h0 } from "../905/986103";
 import { F as _$$F9 } from "../905/989956";
 import { ai as _$$ai3 } from "../9410/974031";
@@ -3130,7 +3130,7 @@ function nj() {
   let h = {
     transform: `translate3D(${p.x}px, ${p.y}px, 0) translate(0, -50%)`
   };
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: "Reactive Guidance Tooltip",
     children: jsx("div", {
       className: "reactive_guidance_tooltip--overflowContainer--RQWcR",
@@ -3598,7 +3598,7 @@ function n4(e) {
   };
   let f = getLocaleFallbacks()[0];
   let _ = "ja" === f ? 323 - 2 * _$$uv : 303 - 2 * _$$uv;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: "FigJamUpsellModal",
     properties: {},
     children: jsxs(CR, {
@@ -3788,7 +3788,7 @@ function ad(e) {
   useEffect(() => {
     S(T);
   }, [T]);
-  let w = isNotInHeader ? $$ : _$$nR;
+  let w = isNotInHeader ? ButtonBasePrimary : ButtonSecondary;
   let I = T ? void 0 : y;
   return jsx("div", {
     ref: i,
@@ -4366,7 +4366,7 @@ function aY(e) {
     cta: jsx(_$$_3, {
       url: "/community/figjam"
     })
-  }) : jsxs(_$$fu, {
+  }) : jsxs(TrackingProvider, {
     name: "all",
     properties: {
       resourceType: "all",
@@ -4656,7 +4656,7 @@ function sf(e) {
   let n = t.resources.filter(e => "is_widget" in e && !!e.is_widget);
   let r = t.resources.filter(e => "type" in e && e.type === PrimaryWorkflowEnum.COMPONENT);
   let a = t.resources.filter(e => "is_widget" in e && !e.is_widget);
-  return jsxs(_$$fu, {
+  return jsxs(TrackingProvider, {
     name: "use_case",
     properties: {
       useCase: t.name
@@ -5099,7 +5099,7 @@ function sW() {
   }));
   let s = useSelector(e => e.figjamDefaultInserts.useCases);
   let l = !!e && 0 === s.length;
-  return i || e && l || !e && (n || r || a) ? jsx(Wd, {}) : jsx(_$$fu, {
+  return i || e && l || !e && (n || r || a) ? jsx(Wd, {}) : jsx(TrackingProvider, {
     name: "all",
     children: jsxs("div", {
       children: [jsx(O9, {
@@ -5304,7 +5304,7 @@ function s6(e) {
     className: s5,
     children: e.renderResource(t)
   }, t.id);
-  return r ? jsxs(_$$fu, {
+  return r ? jsxs(TrackingProvider, {
     name: "explore",
     properties: {
       resourceType: e.resourceType,
@@ -5321,7 +5321,7 @@ function s6(e) {
 function s4(e) {
   let t = U5(e.debouncedSearchQuery);
   let i = _$$d4();
-  return 0 === e.results.length && 0 === t.length ? jsx(_$$fu, {
+  return 0 === e.results.length && 0 === t.length ? jsx(TrackingProvider, {
     name: "more",
     properties: {
       query: e.debouncedSearchQuery
@@ -5331,7 +5331,7 @@ function s4(e) {
       defaultDisplayStringResourceType: "items",
       query: e.query
     })
-  }) : jsx(_$$fu, {
+  }) : jsx(TrackingProvider, {
     name: "more",
     properties: {
       query: e.debouncedSearchQuery
@@ -5362,7 +5362,7 @@ function s8(e) {
   let h = communitySearchResultIds && communitySearchResultIds.length > 0;
   let m = developmentSearchResultIds && developmentSearchResultIds.length > 0;
   let f = u && orgSearchResultIds && orgSearchResultIds.length > 0;
-  return lastPluginSearchQuery !== debouncedSearchQuery ? jsx(VR, {}) : !hasResolved || p || h || f || m ? jsxs(_$$fu, {
+  return lastPluginSearchQuery !== debouncedSearchQuery ? jsx(VR, {}) : !hasResolved || p || h || f || m ? jsxs(TrackingProvider, {
     name: "plugins",
     properties: {
       resourceType: "plugin",
@@ -5403,7 +5403,7 @@ function s8(e) {
         view: _$$p2.EXPLORE
       }, `community_plugin_${e}`))]
     })]
-  }) : jsx(_$$fu, {
+  }) : jsx(TrackingProvider, {
     name: "plugins",
     properties: {
       resourceType: "plugin",
@@ -5551,7 +5551,7 @@ function oj() {
 }
 function ob() {
   let e = _$$f3();
-  return 0 === e.length ? null : jsxs(_$$fu, {
+  return 0 === e.length ? null : jsxs(TrackingProvider, {
     name: "invited",
     children: [e.map(e => jsx(aC, {
       pluginId: e.id,
@@ -5635,7 +5635,7 @@ function oI({
   let j = useDispatch();
   return (useEffect(() => {
     e && !t && j(Xt());
-  }, [j, e, t]), (!i || u) && h) ? x && g ? jsx(oE, {}) : jsxs(_$$fu, {
+  }, [j, e, t]), (!i || u) && h) ? x && g ? jsx(oE, {}) : jsxs(TrackingProvider, {
     name: "explore",
     children: [a.length > 0 && jsx(Fragment, {
       children: a.map(e => jsx(aC, {
@@ -5778,7 +5778,7 @@ function oF() {
   let n = useCurrentFileKey();
   let r = _$$oh(getPluginAllowListKey(t, n));
   let a = _$$oh(LP.loadingKeyForPayload(t));
-  return i || r || a ? jsx(VR, {}) : jsx(_$$fu, {
+  return i || r || a ? jsx(VR, {}) : jsx(TrackingProvider, {
     name: "plugins",
     children: jsx(oU, {})
   });
@@ -5887,7 +5887,7 @@ function oQ(e) {
   };
   if (!p) return jsx(_$$L3, {});
   let z = v?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os;
-  return jsxs(_$$fu, {
+  return jsxs(TrackingProvider, {
     name: "detail",
     properties: {
       resourceId: r.id,
@@ -6020,7 +6020,7 @@ function o1(e) {
     tabIndex: 0,
     children: e.renderResource(t)
   }, t.id);
-  return r ? jsx(_$$fu, {
+  return r ? jsx(TrackingProvider, {
     name: "explore",
     properties: {
       selectedCategory: t
@@ -6038,7 +6038,7 @@ function o8(e) {
   let r = _$$a4(n);
   let a = Kx();
   let s = a?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os;
-  return jsxs(_$$fu, {
+  return jsxs(TrackingProvider, {
     name: "detail",
     properties: {
       resourceId: n.id,
@@ -6070,7 +6070,7 @@ function o8(e) {
           })
         })
       })]
-    }), !s && jsxs(_$$N2, {
+    }), !s && jsxs(BaseLinkComponent, {
       className: "browse_templates_preview--communityLinkBase--1NI6W",
       href: UI({
         path: Uo.FILE,
@@ -6196,7 +6196,7 @@ function la(e) {
     type: _$$n4.HubFile,
     template: e
   })) : [])];
-  return 0 !== i.length || 0 !== e.totalNumTeamTemplatesFromSearch || e.teamTemplatesFromSearchIsLoading ? jsx(_$$fu, {
+  return 0 !== i.length || 0 !== e.totalNumTeamTemplatesFromSearch || e.teamTemplatesFromSearchIsLoading ? jsx(TrackingProvider, {
     name: "templates",
     properties: {
       query: e.debouncedSearchQuery
@@ -6222,7 +6222,7 @@ function la(e) {
         })
       })]
     })
-  }) : jsx(_$$fu, {
+  }) : jsx(TrackingProvider, {
     name: "templates",
     properties: {
       query: e.debouncedSearchQuery
@@ -6257,7 +6257,7 @@ function lc(e) {
   let m = communitySearchResultIds && communitySearchResultIds.length > 0;
   let f = u && orgSearchResultIds && orgSearchResultIds.length > 0;
   let _ = developmentSearchResultIds && developmentSearchResultIds.length > 0;
-  return lastWidgetSearchQuery !== debouncedSearchQuery ? jsx(_$$i2, {}) : !hasResolved || h || m || f || _ ? jsxs(_$$fu, {
+  return lastWidgetSearchQuery !== debouncedSearchQuery ? jsx(_$$i2, {}) : !hasResolved || h || m || f || _ ? jsxs(TrackingProvider, {
     name: "widgets",
     properties: {
       resourceType: "widget",
@@ -6308,7 +6308,7 @@ function lc(e) {
         }, e))
       })]
     })]
-  }) : jsx(_$$fu, {
+  }) : jsx(TrackingProvider, {
     name: "widgets",
     properties: {
       resourceType: "widget",
@@ -6386,7 +6386,7 @@ function lp() {
 }
 function lh() {
   let e = _$$wW();
-  return 0 === e.length ? null : jsx(_$$fu, {
+  return 0 === e.length ? null : jsx(TrackingProvider, {
     name: "invited",
     children: jsx("div", {
       className: _$$s.mt16.$,
@@ -6491,7 +6491,7 @@ function lb({
     return t.sort(YW);
   }, [r, n, e.id, f]);
   let x = Ol(_);
-  return c && p ? h && m ? jsx(lg, {}) : jsxs(_$$fu, {
+  return c && p ? h && m ? jsx(lg, {}) : jsxs(TrackingProvider, {
     name: "explore",
     children: [a.length > 0 && jsx(Fragment, {
       children: jsx("div", {
@@ -6587,7 +6587,7 @@ function lT() {
   let s = _$$mC(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
     key: $A.FigJam
   }));
-  return i || r || a || !s ? jsx(_$$i2, {}) : jsx(_$$fu, {
+  return i || r || a || !s ? jsx(_$$i2, {}) : jsx(TrackingProvider, {
     name: "widgets",
     children: jsx(lC, {})
   });
@@ -6602,7 +6602,7 @@ function lN({
     teamId: e,
     editorType: _$$_Y.WHITEBOARD
   });
-  return templatesByTeam ? jsx(_$$fu, {
+  return templatesByTeam ? jsx(TrackingProvider, {
     name: "custom_templates_by_team",
     children: jsxs("div", {
       className: _$$s.pt20.$,
@@ -7144,7 +7144,7 @@ function lF({
       useCaseName: e.id
     }) : e.resourceType === Rt.TEAM_TEMPLATES ? ef && e.id || eu?.type === "team" ? jsx(lN, {
       teamId: e.id
-    }) : eB.length || eH ? jsxs(_$$fu, {
+    }) : eB.length || eH ? jsxs(TrackingProvider, {
       name: "custom_org_templates",
       children: [eB.map(({
         teamId: e,
@@ -7424,7 +7424,7 @@ function lH({
         query: t,
         debouncedSearchQuery: b,
         faceStampSearchIsLoading: g
-      }) : jsx(_$$fu, {
+      }) : jsx(TrackingProvider, {
         name: "more2",
         children: jsx(sL, {
           hasTopPadding: !0
@@ -7624,10 +7624,10 @@ function dP({
   useEffect(() => {
     a.status === _$$c6.LOADING ? r.setEditable(!1) : r.setEditable(!0);
   }, [r, a]);
-  let c = useCallback(t => (Fo(t) && "Enter" === t.key || "Tab" === t.key || e.current || (Br(), e.current = !0), !1), [e]);
+  let c = useCallback(t => (isCommandEvent(t) && "Enter" === t.key || "Tab" === t.key || e.current || (Br(), e.current = !0), !1), [e]);
   useEffect(() => r.registerCommand(KEY_DOWN_COMMAND, c, COMMAND_PRIORITY_NORMAL), [r, c]);
   let u = useCallback(e => {
-    if (Fo(e) || _$$vN(e, _$$xH.SHIFT) || _$$vN(e, _$$xH.ALT)) return !1;
+    if (isCommandEvent(e) || isExactModifier(e, ModifierKeyCodes.SHIFT) || isExactModifier(e, ModifierKeyCodes.ALT)) return !1;
     let n = $convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST]);
     r.update(() => {
       if (0 === n.length) {
@@ -7670,7 +7670,7 @@ function dP({
 function dZ() {
   return jsx("div", {
     className: "ai_announcement_modal--browseInCommunityContainer--03F-u",
-    children: jsxs(_$$N2, {
+    children: jsxs(BaseLinkComponent, {
       href: "/community/collections/best-figjam-ai-prompts",
       target: "_blank",
       className: "ai_announcement_modal--communityLink--CA-Qf",
@@ -7888,7 +7888,7 @@ function d2({
 }) {
   let [t] = useLexicalComposerContext();
   let i = dx();
-  let n = useCallback(t => 0 === i.length || !!Fo(t) && (t.preventDefault(), e($convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST])), !0), [e, i.length]);
+  let n = useCallback(t => 0 === i.length || !!isCommandEvent(t) && (t.preventDefault(), e($convertToMarkdownString([UNORDERED_LIST, ORDERED_LIST])), !0), [e, i.length]);
   useEffect(() => t.registerCommand($$if, n, COMMAND_PRIORITY_NORMAL), [t, n]);
   return null;
 }
@@ -8047,10 +8047,10 @@ function d6({
   });
 }
 function d4() {
-  return jsx(Ex, {
+  return jsx(Badge, {
     className: ex()(_$$s.font11.fontMedium.h16.px4.bRadius5.ml4.hFitContent.colorTextSecondary.$, "prompt_editor_v2--tabBadge--bntTA"),
     text: getI18nString("whiteboard.ai_modal.hint_tab"),
-    color: zE.TERTIARY
+    color: BadgeColor.TERTIARY
   });
 }
 function d9({
@@ -8140,7 +8140,7 @@ function d8({
     });
   };
   let h = _$$a6() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e8.AI_PROMPT_BUILDER_ENTRY_VIEW,
     properties: {
       fileKey: n
@@ -8264,7 +8264,7 @@ function ci({
     e !== r && s && WhiteboardAiVisualCppBindings && (a(e), WhiteboardAiVisualCppBindings.updateFigjamAiGanttChartType(e, s));
   }
   let _ = _$$a6() ? getI18nString("whiteboard.ai_modal.beta_badge") : getI18nString("qa.ai");
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e8.AI_PROMPT_BUILDER_GENERATE_STAGE,
     properties: {
       fileKey: l?.key
@@ -8390,7 +8390,7 @@ function cl({
   let t = useCurrentFileKey();
   let i = ca();
   U1(i);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e8.AI_PROMPT_BUILDER_MODAL,
     properties: {
       fileKey: t,
@@ -8427,7 +8427,7 @@ function cc({
   let n = isHandbrakeDisabledForCurrentUser();
   let r = ca();
   return jsxs(Fragment, {
-    children: [jsx(_$$fu, {
+    children: [jsx(TrackingProvider, {
       name: _$$e8.AI_PROMPT_BUILDER_MODAL,
       properties: {
         fileKey: i,
@@ -8464,7 +8464,7 @@ function cu() {
       y: [0, -9, 3]
     }
   };
-  return jsxs(_$$fu, {
+  return jsxs(TrackingProvider, {
     name: _$$e8.AI_PROMPT_BUILDER_TEMPLATES_CALLOUT,
     properties: {
       fileKey: e
@@ -8489,7 +8489,7 @@ function cu() {
       },
       initial: "rest",
       whileHover: "hover",
-      children: jsxs(_$$$z, {
+      children: jsxs(TrackedButton, {
         onClick: () => {
           t(showModal({
             type: PH.type,
@@ -8654,14 +8654,14 @@ function cW({
       onClose: c,
       disabled: !i
     });
-    kz(Uz.ESCAPE, () => {
+    kz(KeyCodes.ESCAPE, () => {
       t && _$$hm({
         ...t,
         status: _$$o4.COMPLETED,
         interaction: _$$sd.DISMISS,
         interaction_type: Cq.KEYBOARD_SHORTCUT,
         keyboard_shortcut: F1({
-          key: Uz.ESCAPE
+          key: KeyCodes.ESCAPE
         })
       });
       close();
@@ -8700,8 +8700,8 @@ function cW({
           }, "feedbackButtons")
         }), jsx(_$$r2, {
           shortcuts: j ? [{
-            key: Uz.ENTER,
-            modifier: [_$$xH.META]
+            key: KeyCodes.ENTER,
+            modifier: [ModifierKeyCodes.META]
           }] : [],
           onAction: e => {
             r && SX({
@@ -9285,7 +9285,7 @@ function uD({
   let y = useStore().getState();
   let v = qI();
   let C = document.activeElement?.tagName === "TEXTAREA";
-  kz(Uz.TAB, e => {
+  kz(KeyCodes.TAB, e => {
     _ && (!v || C) && (e.preventDefault(), i(n), trackFileEvent("actions_prompt_tab_completed", y.openFile?.key, y, {
       feature: c,
       suggestion: n
@@ -9371,8 +9371,8 @@ function uD({
             }, t))]
           }), jsx(uP, {
             shortcuts: [{
-              key: Uz.ENTER,
-              modifier: [_$$xH.META]
+              key: KeyCodes.ENTER,
+              modifier: [ModifierKeyCodes.META]
             }],
             onAction: e => {
               h && SX({
@@ -9490,7 +9490,7 @@ function uB() {
     useEffect(() => {
       s && c && d();
     }, [s, c, d]);
-    kz(Uz.ESCAPE, () => {
+    kz(KeyCodes.ESCAPE, () => {
       n !== qy.RUNNING && d();
     });
   }();
@@ -10852,7 +10852,7 @@ function hZ({
     hB(hW(e), d, i, a, l);
   };
   return 1 === d ? jsxs(Fragment, {
-    children: [jsxs(_$$D4, {
+    children: [jsxs(RecordableDiv, {
       className: "whiteboard_transparency--connectorFillContainer--yUHqE",
       onPointerUp: e ? () => {
         a(p !== VisibilityState.HIDDEN);
@@ -14164,38 +14164,38 @@ function xn({
       ref: y ?? I,
       onKeyDown: e => {
         switch (e.keyCode) {
-          case Uz.ESCAPE:
+          case KeyCodes.ESCAPE:
             O ? k(!1) : e.currentTarget?.blur();
             break;
-          case Uz.ENTER:
+          case KeyCodes.ENTER:
             if (O && U >= 0 && U < V) {
               let i = Z(U);
               i && (t(i, e), k(!1));
             }
             break;
-          case Uz.RIGHT_ARROW:
-          case Uz.LEFT_ARROW:
-          case Uz.UP_ARROW:
-          case Uz.DOWN_ARROW:
-            if (!_$$sC(e, 0)) {
+          case KeyCodes.RIGHT_ARROW:
+          case KeyCodes.LEFT_ARROW:
+          case KeyCodes.UP_ARROW:
+          case KeyCodes.DOWN_ARROW:
+            if (!isModifierMatch(e, 0)) {
               _$$f6(e);
               break;
             }
             if (B(!0), O && V) {
               let t = U;
-              (t += e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.LEFT_ARROW ? -1 : 1) >= V ? t = 0 : t < 0 && (t = V - 1);
+              (t += e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.LEFT_ARROW ? -1 : 1) >= V ? t = 0 : t < 0 && (t = V - 1);
               F(t);
             } else O || k(!0);
             e.preventDefault();
             e.stopPropagation();
             break;
-          case Uz.TAB:
+          case KeyCodes.TAB:
             B(!1);
             break;
-          case Uz.C:
-          case Uz.V:
-          case Uz.X:
-            _$$Te(e) && (fullscreenValue.triggerAction(e.keyCode === Uz.C ? "copy" : e.keyCode === Uz.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
+          case KeyCodes.C:
+          case KeyCodes.V:
+          case KeyCodes.X:
+            isCommandModifier(e) && (fullscreenValue.triggerAction(e.keyCode === KeyCodes.C ? "copy" : e.keyCode === KeyCodes.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
             break;
           default:
             _$$f6(e);
@@ -14893,7 +14893,7 @@ function xT({
       focusOnMount: !1,
       hideXIcon: !0,
       iconClassName: "whiteboard_shape_selector--searchIcon--wXneH",
-      isKeyDownHandled: e => (e.keyCode === Uz.ESCAPE || "Escape" === e.code || "Escape" === e.key ? "" !== p ? v() : u(!1) : e.keyCode === Uz.ENTER ? "" !== p && m.length > 0 && (i(m[0], e), u(!1)) : ("ArrowUp" === e.code || "ArrowDown" === e.code) && (d.current?.focus(), m.length > 0 && (j(!0), x("ArrowDown" === e.code ? m.length > 1 && "" !== p ? 1 : 0 : m.length - 1)), e.preventDefault()), !0),
+      isKeyDownHandled: e => (e.keyCode === KeyCodes.ESCAPE || "Escape" === e.code || "Escape" === e.key ? "" !== p ? v() : u(!1) : e.keyCode === KeyCodes.ENTER ? "" !== p && m.length > 0 && (i(m[0], e), u(!1)) : ("ArrowUp" === e.code || "ArrowDown" === e.code) && (d.current?.focus(), m.length > 0 && (j(!0), x("ArrowDown" === e.code ? m.length > 1 && "" !== p ? 1 : 0 : m.length - 1)), e.preventDefault()), !0),
       onChange: C,
       placeholder: getI18nString("whiteboard.inline_menu.change_shape_search"),
       query: p
@@ -16292,7 +16292,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     };
   }, []), a && e) ? jsxs("div", {
     ref: s,
-    children: [jsxs(_$$oj, {
+    children: [jsxs(RecordableSpan, {
       className: ex()(Wh, "face_stamp_control--userLabel--S-WLt", {
         [_H]: isIpadDevice
       }),
@@ -16933,7 +16933,7 @@ let gm = memo(function ({
     children: [...G]
   });
   let W = getFeatureFlags().figjam_a11y_inline_toolbar ? _$$bo : _$$Fragment;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: "inline_toolbar",
     properties: {
       figjam_ai_control_shown: V,
@@ -17047,7 +17047,7 @@ let g_ = memo(function ({
     figjamAiQuickActionShown: R,
     onMenuMarginBottomChange: w
   }));
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: "inline_toolbar",
     properties: n,
     children: jsx("div", {
@@ -17328,20 +17328,20 @@ function gP() {
   _$$A74(inputRef, next, focusedByButtons);
   let [g, j] = useState("");
   let y = useCallback(e => {
-    e.keyCode === Uz.ESCAPE ? (e.target?.blur?.(), setHidden(!0)) : "INPUT" !== e.target.tagName && "TEXTAREA" !== e.target.tagName && _$$jr(e, W0.YES, _$$VA.NO) && e.stopPropagation();
+    e.keyCode === KeyCodes.ESCAPE ? (e.target?.blur?.(), setHidden(!0)) : "INPUT" !== e.target.tagName && "TEXTAREA" !== e.target.tagName && _$$jr(e, W0.YES, _$$VA.NO) && e.stopPropagation();
   }, [setHidden]);
   let v = useCallback(e => {
     switch (e.keyCode) {
-      case Uz.P:
-      case Uz.UP_ARROW:
-        (e.keyCode !== Uz.P || BrowserInfo.mac && _$$vN(e, _$$xH.CONTROL)) && (next(_$$OP.PREV, "keyboard"), e.stopPropagation(), e.preventDefault());
+      case KeyCodes.P:
+      case KeyCodes.UP_ARROW:
+        (e.keyCode !== KeyCodes.P || BrowserInfo.mac && isExactModifier(e, ModifierKeyCodes.CONTROL)) && (next(_$$OP.PREV, "keyboard"), e.stopPropagation(), e.preventDefault());
         break;
-      case Uz.N:
-      case Uz.DOWN_ARROW:
-        (e.keyCode !== Uz.N || BrowserInfo.mac && _$$vN(e, _$$xH.CONTROL)) && (next(_$$OP.NEXT, "keyboard"), e.stopPropagation(), e.preventDefault());
+      case KeyCodes.N:
+      case KeyCodes.DOWN_ARROW:
+        (e.keyCode !== KeyCodes.N || BrowserInfo.mac && isExactModifier(e, ModifierKeyCodes.CONTROL)) && (next(_$$OP.NEXT, "keyboard"), e.stopPropagation(), e.preventDefault());
         break;
-      case Uz.ENTER:
-        if (Fo(e)) {
+      case KeyCodes.ENTER:
+        if (isCommandEvent(e)) {
           CanvasSearchHelpers?.exitSearchMode(SelectionState.SELECT_ACTIVE);
           break;
         }
@@ -17373,7 +17373,7 @@ function gP() {
           focusedByButtons,
           innerRef: inputRef,
           onKeyDown: v,
-          editorType: _$$_Y2.FIGJAM
+          editorType: FileKindEnum.FIGJAM
         }), isLoading ? jsx("div", {
           className: _$$dz,
           children: jsx(_$$k4, {
@@ -21521,7 +21521,7 @@ function bH(e) {
   }, [i, title, userVoteLimit, s, c, u]));
   return jsxs("div", {
     className: "create_new_vote_view--container--mzVZ7",
-    children: [jsx(_$$L6, {
+    children: [jsx(LazyInputForwardRef, {
       "aria-label": getI18nString("voting.modal.voting_setup_prompt_input_field_aria_label"),
       autoComplete: "off",
       autoCorrect: "off",
@@ -21683,7 +21683,7 @@ let b$ = registerModal(function ({
       fileKey: i
     });
   };
-  return jsx(_$$yX2, {
+  return jsx(ConfirmationModal2, {
     cancelText: getI18nString("voting.modal.delete_voting_session_modal_cancel_button"),
     confirmText: getI18nString("voting.modal.delete_voting_session_modal_confirm_button"),
     confirmationTitle: getI18nString("voting.modal.delete_voting_session_modal_header"),
@@ -24194,7 +24194,7 @@ function vB({
   return jsx(vU, {
     show: _,
     hasPreview: x,
-    children: jsx(_$$fu, {
+    children: jsx(TrackingProvider, {
       name: "starter_kit_shown",
       properties: {
         fileKey: n,

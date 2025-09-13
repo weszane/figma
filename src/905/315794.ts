@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
-import { s6, nR } from "../figma_app/637027";
+import { ButtonSecondaryNegative, ButtonSecondary } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { oB } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -67,13 +67,13 @@ export function $$v0(e) {
     onMouseLeave: C,
     children: T
   };
-  return x === gO.CLICK_LEAVE ? jsx(s6, {
+  return x === gO.CLICK_LEAVE ? jsx(ButtonSecondaryNegative, {
     className: k.className,
     onClick: S,
     onMouseOver: w,
     onMouseLeave: C,
     children: T
-  }) : jsx(nR, {
+  }) : jsx(ButtonSecondary, {
     ...k
   });
 }

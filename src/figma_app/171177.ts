@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useContext, useRef, useCallback, useMemo, useId } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { useHandleKeyboardEvent, useHandleInputEvent, generateRecordingKey } from "../figma_app/878298";
-import { xH } from "../905/63728";
+import { ModifierKeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { jr } from "../figma_app/896988";
 import { vL } from "../905/826900";
@@ -102,7 +102,7 @@ export function $$f5({
     "Tab" !== e.key || g(f, _) || e.preventDefault();
     let t = v({
       key: e.keyCode,
-      modifier: [e.metaKey ? xH.META : void 0, e.ctrlKey ? xH.CONTROL : void 0, e.altKey ? xH.ALT : void 0, e.shiftKey ? xH.SHIFT : void 0].filter(e => !!e)
+      modifier: [e.metaKey ? ModifierKeyCodes.META : void 0, e.ctrlKey ? ModifierKeyCodes.CONTROL : void 0, e.altKey ? ModifierKeyCodes.ALT : void 0, e.shiftKey ? ModifierKeyCodes.SHIFT : void 0].filter(e => !!e)
     });
     let r = !1;
     for (let [n, i] of l.current) n.endsWith(t) && (i(e), r = !0);
@@ -156,7 +156,7 @@ export function $$f5({
   });
 }
 function E(e) {
-  return e !== xH.META || BrowserInfo.mac ? e : xH.CONTROL;
+  return e !== ModifierKeyCodes.META || BrowserInfo.mac ? e : ModifierKeyCodes.CONTROL;
 }
 function y({
   key: e,
@@ -182,13 +182,13 @@ function b(e, t, r, n) {
       modifier
     } of s) if (e.keyCode === key && (!modifier || modifier.every(t => function (e, t) {
       switch (e) {
-        case xH.META:
+        case ModifierKeyCodes.META:
           return t.metaKey;
-        case xH.CONTROL:
+        case ModifierKeyCodes.CONTROL:
           return t.ctrlKey;
-        case xH.ALT:
+        case ModifierKeyCodes.ALT:
           return t.altKey;
-        case xH.SHIFT:
+        case ModifierKeyCodes.SHIFT:
           return t.shiftKey;
         default:
           throwTypeError(e);

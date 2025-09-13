@@ -5,7 +5,7 @@ import { ButtonWide } from "../905/521428";
 import { UserActionState } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { f4 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -28,7 +28,7 @@ export function $$y0() {
   let v = useSelector(e => e.mirror.appModel.activeUserAction);
   return (useEffect(() => {
     v === UserActionState.RESIZING && t(!0);
-  }, [v]), !T || !S.length || I || e) ? null : jsx(fu, {
+  }, [v]), !T || !S.length || I || e) ? null : jsx(TrackingProvider, {
     name: "Slides conversion properties panel entrypoint",
     children: jsx(Ad, {
       appendedClassName: _$$s.pt4.$,

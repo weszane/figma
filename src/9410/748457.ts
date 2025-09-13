@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { lQ } from "../905/934246";
 import s from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { v } from "../905/318279";
 import { Rt, tI } from "../9410/733790";
@@ -39,7 +39,7 @@ export function $$p0({
     onFocus: h,
     onKeyDown: e => {
       switch (e.keyCode) {
-        case Uz.ENTER:
+        case KeyCodes.ENTER:
           if (e.preventDefault(), g && (e.shiftKey || BrowserInfo.mac && e.ctrlKey)) {
             let {
               selectionStart,
@@ -52,8 +52,8 @@ export function $$p0({
             return;
           }
           break;
-        case Uz.UP_ARROW:
-        case Uz.DOWN_ARROW:
+        case KeyCodes.UP_ARROW:
+        case KeyCodes.DOWN_ARROW:
           if (C) return;
       }
       m(e);

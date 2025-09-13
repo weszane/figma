@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Xr } from "../figma_app/27355";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { B } from "../905/524020";
 import { getUserId } from "../905/372672";
@@ -37,7 +37,7 @@ export function $$h1({
       triggerElement: a,
       team: b || T,
       from: e,
-      openNewFileIn: h || oJ(l) ? ai.NEW_TAB : ai.SAME_TAB,
+      openNewFileIn: h || isCommandOrShift(l) ? ai.NEW_TAB : ai.SAME_TAB,
       folderId: r,
       isDraftsFolder: t,
       callback: e => {

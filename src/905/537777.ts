@@ -43,7 +43,7 @@ export function convertKiwiToString(kiwiObj: KiwiObject): string {
  * @param guid - The GUID to convert.
  * @returns The string representation.
  */
-export function convertGuidToString(guid: string): string {
+export function convertGuidToString(guid: any) {
   return convertKiwiToString({ guid });
 }
 

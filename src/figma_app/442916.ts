@@ -15,14 +15,14 @@ import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { F0 } from "../905/178707";
 import { k as _$$k } from "../905/585996";
-import { il } from "../figma_app/637027";
+import { BigTextInput } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { lR, $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { S as _$$S } from "../5132/668270";
 import { showModalHandler, hideModal } from "../905/156213";
 import { cq } from "../figma_app/107215";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { BI } from "../figma_app/546509";
@@ -145,7 +145,7 @@ function H({
       children: renderI18nText("figjam_try.onboarding_submit")
     }) : jsxs("form", {
       onSubmit,
-      children: [jsx(il, {
+      children: [jsx(BigTextInput, {
         autoFocus: !0,
         className: p()("workshop_modals--figjamTryInput--vCslR", isNameError && "workshop_modals--figjamTryInputError--wUBqP"),
         placeholder: getI18nString("figjam_try.name_input_placeholder"),
@@ -289,7 +289,7 @@ export function $$W0(e) {
     ...e,
     preventUserClose: !0
   });
-  return c ? null : jsx(fu, {
+  return c ? null : jsx(TrackingProvider, {
     name: "Jam Session Onboarding Modal",
     properties: {
       isAnonymous: !t,

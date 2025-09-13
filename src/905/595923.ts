@@ -17,7 +17,7 @@ import { N as _$$N } from "../figma_app/28806";
 import { un, kI } from "../figma_app/457899";
 import { hY } from "../figma_app/80683";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
@@ -233,7 +233,7 @@ function $(e) {
     seat_type: JT(neededSeatType),
     product: _$$E(licenseType)
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e0.SHARE_MODAL_UPDATE_SEAT_TAB,
     children: [jsxs("div", {
       className: "x78zum5 xk0qfmw xdt5ytf x1pulhmw xclx6tv x17akokd x1qxcl5b xno9bf3 x1betce5",

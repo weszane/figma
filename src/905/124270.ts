@@ -5,7 +5,7 @@ import o from "../vendor/128080";
 import { hO } from "../figma_app/545293";
 import { nX, ES, wG, II, Nz, KI } from "../905/171315";
 import { R9, BA } from "../905/61477";
-import { WY, qy, $L } from "../figma_app/162807";
+import { CreatorResourceType, FolderType, $L } from "../figma_app/162807";
 var s = a;
 var l = o;
 let $$m3 = atom(null);
@@ -30,16 +30,16 @@ let $$I8 = atom(e => e(M));
 let $$E1 = atom(e => e(j));
 let $$x4 = atom(e => e(U));
 let $$S17 = atom(e => {
-  if (e(hO.isFragmentSearchAtom)) return [WY.CREATOR, WY.SPACE];
+  if (e(hO.isFragmentSearchAtom)) return [CreatorResourceType.CREATOR, CreatorResourceType.SPACE];
   let t = e(M);
-  return t && -1 === ES().indexOf(t.value) ? Object.values(WY).filter(e => e !== WY.CREATOR) : Object.values(WY);
+  return t && -1 === ES().indexOf(t.value) ? Object.values(CreatorResourceType).filter(e => e !== CreatorResourceType.CREATOR) : Object.values(CreatorResourceType);
 });
 let $$w11 = atom(e => {
-  if (e(hO.isFragmentSearchAtom)) return [qy.FOLDER, qy.TEAM];
+  if (e(hO.isFragmentSearchAtom)) return [FolderType.FOLDER, FolderType.TEAM];
   let t = e(M);
   return C(t?.value || null);
 });
-let C = e => e === $L.USERS || e === $L.TEAMS ? [qy.ORG] : e === $L.PROJECTS ? [qy.TEAM, qy.ORG] : e === $L.PLUGINS || e === $L.WIDGETS ? [] : [qy.FOLDER, qy.TEAM, qy.ORG];
+let C = e => e === $L.USERS || e === $L.TEAMS ? [FolderType.ORG] : e === $L.PROJECTS ? [FolderType.TEAM, FolderType.ORG] : e === $L.PLUGINS || e === $L.WIDGETS ? [] : [FolderType.FOLDER, FolderType.TEAM, FolderType.ORG];
 let $$T7 = atom(e => {
   let t = e(j);
   let i = e(U);
@@ -52,34 +52,34 @@ let R = (e, t, i) => {
   let r = n.concat([$L.USERS, $L.PROJECTS, $L.TEAMS]);
   if (e && e.value.length > 0) return n;
   if (t && !wG(t.value)) {
-    let e = t.value[qy.FOLDER].length > 0;
-    let i = t.value[qy.TEAM].length > 0;
-    if (t.value[qy.ORG].length > 0) return r;
+    let e = t.value[FolderType.FOLDER].length > 0;
+    let i = t.value[FolderType.TEAM].length > 0;
+    if (t.value[FolderType.ORG].length > 0) return r;
     if (i) return n.concat([$L.PROJECTS]);
     if (e) return n;
   }
   return r;
 };
-let $$N9 = createRemovableAtomFamily(e => atom(t => e === WY.RESOURCE ? t(M) : e === WY.CREATOR ? t(j) : e === WY.SPACE ? t(U) : null, (t, i, r) => {
+let $$N9 = createRemovableAtomFamily(e => atom(t => e === CreatorResourceType.RESOURCE ? t(M) : e === CreatorResourceType.CREATOR ? t(j) : e === CreatorResourceType.SPACE ? t(U) : null, (t, i, r) => {
   if (!e) return null;
   let a = !r || II(r);
-  if (e === WY.RESOURCE ? i(M, a ? null : r) : e === WY.CREATOR ? i(j, a ? null : r) : e === WY.SPACE && i(U, a ? null : r), t($$v14) && i($$v14, null), a) {
+  if (e === CreatorResourceType.RESOURCE ? i(M, a ? null : r) : e === CreatorResourceType.CREATOR ? i(j, a ? null : r) : e === CreatorResourceType.SPACE && i(U, a ? null : r), t($$v14) && i($$v14, null), a) {
     let n = t(y);
     i(y, n.filter(t => t.type !== e));
   } else {
     let a = t(y);
     let s = [];
     let o = [];
-    if (e === WY.RESOURCE) {
-      let e = Nz(WY.RESOURCE, a);
+    if (e === CreatorResourceType.RESOURCE) {
+      let e = Nz(CreatorResourceType.RESOURCE, a);
       let t = {
-        type: WY.RESOURCE,
+        type: CreatorResourceType.RESOURCE,
         value: r.value
       };
       o = [...a];
       -1 === e ? o.push(t) : o[e] = t;
       s = O(t, o);
-    } else if (e === WY.CREATOR) s = D(o = P(t(M), r, t(U), a));else if (e === WY.SPACE) {
+    } else if (e === CreatorResourceType.CREATOR) s = D(o = P(t(M), r, t(U), a));else if (e === CreatorResourceType.SPACE) {
       let e = t(M);
       let i = t(j);
       let n = t(BA);
@@ -88,7 +88,7 @@ let $$N9 = createRemovableAtomFamily(e => atom(t => e === WY.RESOURCE ? t(M) : e
     }
     i(y, o.filter(e => !includesEqual(s, e)));
     s.forEach(e => {
-      if (e.type === WY.RESOURCE) i(M, null);else if (e.type === WY.CREATOR) i(j, null);else if (e.type === WY.SPACE) {
+      if (e.type === CreatorResourceType.RESOURCE) i(M, null);else if (e.type === CreatorResourceType.CREATOR) i(j, null);else if (e.type === CreatorResourceType.SPACE) {
         let n = {
           ...t(U)
         };
@@ -101,14 +101,14 @@ let $$N9 = createRemovableAtomFamily(e => atom(t => e === WY.RESOURCE ? t(M) : e
 let P = (e, t, i, r) => {
   let a = [];
   if (e && a.push({
-    type: WY.RESOURCE,
+    type: CreatorResourceType.RESOURCE,
     value: e.value
   }), t && !II(t) && t.value.forEach(e => a.push({
-    type: WY.CREATOR,
+    type: CreatorResourceType.CREATOR,
     value: e
   })), i && !II(i)) {
     let e = i.value;
-    for (let t of Object.values(qy)) for (let i of e[t]) {
+    for (let t of Object.values(FolderType)) for (let i of e[t]) {
       let e = KI(t, i);
       e && a.push(e);
     }
@@ -125,15 +125,15 @@ let O = (e, t) => {
   let i = [];
   let n = C(e.value);
   t.filter(t => {
-    t.type === WY.SPACE && -1 === n.indexOf(t.spaceType) && i.push(t);
-    t.type === WY.CREATOR && e.value !== $L.ALL_FILES && e.value !== $L.DESIGN_FILES && e.value !== $L.FIGJAM_FILES && e.value !== $L.SLIDES && e.value !== $L.SITES && e.value !== $L.BUZZ && e.value !== $L.MAKE && i.push(t);
+    t.type === CreatorResourceType.SPACE && -1 === n.indexOf(t.spaceType) && i.push(t);
+    t.type === CreatorResourceType.CREATOR && e.value !== $L.ALL_FILES && e.value !== $L.DESIGN_FILES && e.value !== $L.FIGJAM_FILES && e.value !== $L.SLIDES && e.value !== $L.SITES && e.value !== $L.BUZZ && e.value !== $L.MAKE && i.push(t);
   });
   return i;
 };
 let D = e => {
   let t = [];
   e.forEach(e => {
-    e.type === WY.RESOURCE && e.value !== $L.DESIGN_FILES && e.value !== $L.FIGJAM_FILES && e.value !== $L.SLIDES && e.value !== $L.SITES && e.value !== $L.BUZZ && e.value !== $L.MAKE && e.value !== $L.ALL_FILES && t.push(e);
+    e.type === CreatorResourceType.RESOURCE && e.value !== $L.DESIGN_FILES && e.value !== $L.FIGJAM_FILES && e.value !== $L.SLIDES && e.value !== $L.SITES && e.value !== $L.BUZZ && e.value !== $L.MAKE && e.value !== $L.ALL_FILES && t.push(e);
   });
   return t;
 };
@@ -141,7 +141,7 @@ let L = (e, t, i, n) => {
   let r = [];
   let a = R(t, e, i);
   n.forEach(e => {
-    e.type === WY.RESOURCE && -1 === a.indexOf(e.value) && r.push(e);
+    e.type === CreatorResourceType.RESOURCE && -1 === a.indexOf(e.value) && r.push(e);
   });
   return r;
 };
@@ -163,22 +163,22 @@ export function $$B13() {
   let s = [];
   e.forEach(e => {
     switch (e.type) {
-      case WY.CREATOR:
+      case CreatorResourceType.CREATOR:
         t.push(e.value.id);
         break;
-      case WY.SPACE:
+      case CreatorResourceType.SPACE:
         switch (e.spaceType) {
-          case qy.FOLDER:
+          case FolderType.FOLDER:
             i.push(e.value.id);
             break;
-          case qy.TEAM:
+          case FolderType.TEAM:
             n.push(e.value.id);
             break;
-          case qy.ORG:
+          case FolderType.ORG:
             a.push(e.value.id);
         }
         break;
-      case WY.RESOURCE:
+      case CreatorResourceType.RESOURCE:
         s.push(e.value);
     }
   });

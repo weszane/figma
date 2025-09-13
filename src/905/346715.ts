@@ -11,7 +11,7 @@ import { C as _$$C } from "../905/520159";
 import { xf } from "../figma_app/416935";
 import { isGovCluster, includesGovDomain, buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -19,7 +19,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { mg, nX } from "../figma_app/336853";
 import { Cl, Eq } from "../figma_app/598018";
@@ -145,7 +145,7 @@ let $$F0 = registerModal(function (e) {
   useEffect(() => {
     el();
   }, [G, el]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Project Connection Request Modal",
     properties: {
       folderId: e.folder.id,
@@ -180,7 +180,7 @@ let $$F0 = registerModal(function (e) {
                       children: t || renderI18nText("resource_connection.request_modal.learn_more")
                     }))
                   })
-                }), jsx(ks, {
+                }), jsx(BigTextInputForwardRef, {
                   autoFocus: !0,
                   onChange: e => eo(e.currentTarget.value),
                   className: Z ? Xu : QL,
@@ -231,7 +231,7 @@ let $$F0 = registerModal(function (e) {
                     children: N.name
                   })
                 })
-              }), jsx(ks, {
+              }), jsx(BigTextInputForwardRef, {
                 autoFocus: !0,
                 onChange: e => es(e.currentTarget.value),
                 className: Q ? Xu : QL,
@@ -240,7 +240,7 @@ let $$F0 = registerModal(function (e) {
               }), Q && jsxs("span", {
                 className: _$$s2.colorTextDanger.$,
                 children: [" ", er(Q), " "]
-              }), jsx(ks, {
+              }), jsx(BigTextInputForwardRef, {
                 onChange: e => V(e.currentTarget.value),
                 className: iU,
                 value: B,
@@ -376,7 +376,7 @@ let M = registerModal(function (e) {
           children: renderI18nText("resource_connection.create_new_team_modal.we_will_email_them_with_a_link_to_set_up_a_figma_team")
         }), jsxs("div", {
           className: _$$s2.pb12.$,
-          children: [jsx(ks, {
+          children: [jsx(BigTextInputForwardRef, {
             value: g,
             onChange: e => w(e.target.value),
             className: A ? Xu : QL,

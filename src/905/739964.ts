@@ -10,11 +10,11 @@ import { $ as _$$$ } from "../905/379902";
 import p from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { Ex, zE, vj } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { G as _$$G } from "../figma_app/361869";
 import { Jn } from "../905/17223";
 import { tH, H4 } from "../905/751457";
-import { Us, Kz } from "../figma_app/637027";
+import { linkWithTracking, Spacing } from "../figma_app/637027";
 import { y1, w4 } from "../905/445814";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
@@ -26,7 +26,7 @@ import { Jh } from "../figma_app/441925";
 import { sx as _$$sx } from "../figma_app/307841";
 import { BC } from "../figma_app/149367";
 import { getRumLoggingConfig } from "../905/16237";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { cw, Fq, I8, yF, vu, jv, vK } from "../905/84777";
 import { h as _$$h } from "../905/864281";
 import { ProductAccessTypeEnum } from "../905/513035";
@@ -105,7 +105,7 @@ function J(e) {
 function ee({
   editorType: e
 }) {
-  let t = jsx(Us, {
+  let t = jsx(linkWithTracking, {
     href: "whiteboard" === e ? "https://www.figma.com/pricing/#figjam" : "https://www.figma.com/pricing/#cid-57mfNh6t0Xo7z8Q95Ww9ZV",
     target: "_blank",
     className: m()("whiteboard" === e && "consumption_paywall_modals--figjamLink---aC7d"),
@@ -281,7 +281,7 @@ function ea({
   let [l] = handleSuspenseRetainRelease(a);
   let d = vu(l).data;
   let c = new vr(e);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Pricing Component",
     properties: {
       planType: t,
@@ -424,7 +424,7 @@ function eo({
     })]
   });
   let S = c ? jsxs(Fragment, {
-    children: [jsx(Kz, {
+    children: [jsx(Spacing, {
       multiple: 3
     }), jsx(es, {
       "data-testid": "consumption-paywall-modal-plans-pricing-inner-plan-box-cta",
@@ -459,10 +459,10 @@ function eo({
               left: 8
             },
             width: "hug-contents",
-            children: jsx(Ex, {
+            children: jsx(Badge, {
               text: getI18nString("consumption_paywalls.badge_text"),
-              color: g ? zE.DEFAULT : zE.DISABLED,
-              size: vj.SMALL,
+              color: g ? BadgeColor.DEFAULT : BadgeColor.DISABLED,
+              size: BadgeSize.SMALL,
               subtle: g,
               className: g ? "consumption_paywall_modals--currentPlanBadge--ojZ7t" : void 0
             })
@@ -602,7 +602,7 @@ function ec(e) {
     return e === _$$F2.Plan.STARTER ? LN() : r.data || LN();
   }(currentPlan, Y);
   let Z = getRumLoggingConfig();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: j,
     properties: {
       teamId: team?.id,

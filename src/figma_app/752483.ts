@@ -4,9 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { l as _$$l } from "../905/296640";
 import { debugState } from "../905/407919";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { s_ } from "../905/17223";
-import { $$, ks, nR, CY } from "../figma_app/637027";
+import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -27,7 +27,7 @@ import { registerModal } from "../905/102752";
 import { $A } from "../905/782918";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
-import { d_ as _$$d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { $v } from "../figma_app/613182";
 import { A as _$$A } from "../905/438475";
 import { n0, we, pv, YJ, Ow, lg, lJ, Lk, x6, aP, $O, Qp, IO, re, gn, Bb, fY, GT, pn, Fn, Tp, WG, GK, Cb, dH, hG, x9 } from "../905/424197";
@@ -297,10 +297,10 @@ export let $$W0 = registerModal(function ({
   let eu = !ea || el;
   let ep = !ea || ed;
   let e_ = e => {
-    "Enter" === e.key || e.keyCode === Uz.ENTER ? "choose_editor_type_step" === z ? W("choose_template_step") : "choose_template_step" === z ? er() : "success_screen_step" === z && en() : ("Escape" === e.key || e.keyCode === Uz.ESCAPE) && en();
+    "Enter" === e.key || e.keyCode === KeyCodes.ENTER ? "choose_editor_type_step" === z ? W("choose_template_step") : "choose_template_step" === z ? er() : "success_screen_step" === z && en() : ("Escape" === e.key || e.keyCode === KeyCodes.ESCAPE) && en();
   };
   let eh = jsx(Fragment, {
-    children: jsx($$, {
+    children: jsx(ButtonBasePrimary, {
       className: x6,
       onClick: er,
       disabled: "" === b,
@@ -315,7 +315,7 @@ export let $$W0 = registerModal(function ({
     children: [jsx("div", {
       className: aP,
       children: renderI18nText("community.general.name")
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       autoFocus: !0,
       className: $O,
       "data-tooltip": e === ResourceType.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
@@ -338,7 +338,7 @@ export let $$W0 = registerModal(function ({
     let r = ea ? Qp : IO;
     return jsx(B, {
       onClick: () => Q(!1),
-      children: jsxs(_$$d_, {
+      children: jsxs(ModalContainer, {
         className: re,
         onKeyDown: e_,
         disableClickOutsideToHide: !0,
@@ -367,7 +367,7 @@ export let $$W0 = registerModal(function ({
           className: fY,
           children: jsx("div", {
             className: GT,
-            children: jsx($$, {
+            children: jsx(ButtonBasePrimary, {
               className: x6,
               onClick: () => W("choose_template_step"),
               children: renderI18nText("general.next")
@@ -380,7 +380,7 @@ export let $$W0 = registerModal(function ({
     let i = r ? Qp : IO;
     return jsx(B, {
       onClick: () => Q(!1),
-      children: jsxs(_$$d_, {
+      children: jsxs(ModalContainer, {
         className: re,
         onKeyDown: e_,
         disableClickOutsideToHide: !0,
@@ -407,7 +407,7 @@ export let $$W0 = registerModal(function ({
           className: fY,
           children: jsxs("div", {
             className: pn,
-            children: [!$A(debugState.getState().selectedView) && jsxs(nR, {
+            children: [!$A(debugState.getState().selectedView) && jsxs(ButtonSecondary, {
               className: x6,
               onClick: () => W("choose_editor_type_step"),
               children: [jsx(SvgComponent, {
@@ -420,17 +420,17 @@ export let $$W0 = registerModal(function ({
       })
     });
   })() : "success_screen_step" === z ? (() => {
-    let r = jsx(CY, {
+    let r = jsx(SecureLink, {
       href: `https://www.figma.com/${e}-docs/`,
       trusted: !0,
       children: renderI18nText("community.plugin_development.setup_guide")
     });
-    let i = jsx(CY, {
+    let i = jsx(SecureLink, {
       href: "https://discord.gg/xzQhe2Vcvx",
       trusted: !0,
       children: renderI18nText("community.plugin_development.join_our_discord")
     });
-    return jsxs(_$$d_, {
+    return jsxs(ModalContainer, {
       className: Tp,
       onKeyDown: e_,
       disableClickOutsideToHide: !0,
@@ -462,10 +462,10 @@ export let $$W0 = registerModal(function ({
           className: fY,
           children: jsxs("div", {
             className: hG,
-            children: [jsx(nR, {
+            children: [jsx(ButtonSecondary, {
               onClick: ei,
               children: renderI18nText("community.plugin_development.open_folder")
-            }), jsx($$, {
+            }), jsx(ButtonBasePrimary, {
               className: x6,
               onClick: en,
               children: renderI18nText("general.done")

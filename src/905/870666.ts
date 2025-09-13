@@ -19,13 +19,13 @@ import { c5 } from "../905/93909";
 import { h as _$$h } from "../905/662353";
 import { getRepoById, buildUrlPath, getDisplayName } from "../905/760074";
 import { cF } from "../figma_app/527873";
-import { EO } from "../905/691205";
+import { replaceColonWithDash } from "../905/691205";
 import { Zt } from "../figma_app/617727";
-import { b as _$$b, d as _$$d } from "../905/91820";
+import { combineWithHyphen, ShareContext } from "../905/91820";
 import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/327571";
 import { Vv } from "../905/32091";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { AppView } from "../figma_app/707808";
 import { eE, Hz } from "../905/366346";
 export function $$O0(e) {
@@ -38,7 +38,7 @@ export class $$D1 {
     let o = t[1];
     if ("file" === o || "design" === o || "board" === o || "slides" === o || "site" === o || "buzz" === o || "rev" === o || "make" === o) {
       let i = "design";
-      if ("file" === o && s.type) i = s.type; else if ("file" !== o) switch (o) {
+      if ("file" === o && s.type) i = s.type;else if ("file" !== o) switch (o) {
         case "design":
           i = "design";
           break;
@@ -77,7 +77,7 @@ export class $$D1 {
       if (("duplicate" === t[4] || s.duplicate) && (d.landingState = "DUPLICATE"), s["try-plugin-id"] && (d.tryPluginId = s["try-plugin-id"]), s["try-plugin-version-id"] && (d.tryPluginVersionId = s["try-plugin-version-id"]), s["try-plugin-name"] && (d.tryPluginName = s["try-plugin-name"]), s["try-plugin-editor-type"] && (d.tryPluginEditorType = mapViewTypeToMainfestEditorType(s["try-plugin-editor-type"])), s["try-plugin-params"] && (d.tryPluginParams = parsePluginParams(s)), "1" === s["is-widget"] && (d.isWidget = !0), "1" === s["is-playground-file"] && (d.isPlaygroundFile = !0), s["try-plugin-file-key"] && (d.tryPluginFileKey = s["try-plugin-file-key"]), s["library-hub-file-id"] && (d.libraryHubFileId = s["library-hub-file-id"]), "1" === s["comments-enabled"] && (d.commentsEnabled = !0), s.source && (d.trackingInfo = {
         source: s.source
       }), "1" === s["main-component"] && (d.mainComponentLink = !0), s.teamToMoveFileToOnNavigate && (d.teamToMoveFileToOnNavigate = s.teamToMoveFileToOnNavigate), "1" === s["is-freemium-preview"] && (d.isFreemiumPreview = !0), s["google-classroom-open-share-settings"] && (d.showPermissionsModalFromGoogleClassroomIntegration = !0), ("design" === o || "design" === s.mode || "view" === s.mode) && (d.mode = "design"), "auto" === s.m && (d.mode = void 0), s.recovery && "design" === i && BrowserInfo.isWasm4gbSupported && e.mirror.appModel.topLevelMode === ViewType.LAYOUT && ((CorePerfInfo?.getTotalUsedHeapMemory() ?? 0) > 2 * cF || "true" === s.recovery ? (d.isRecoveryMode = !0, console.log("Entering Recovery Mode")) : d.isRecoveryMode = !1), s["prev-plan-id"] && s["prev-plan-type"]) {
-        let e = "org" === s["prev-plan-type"] ? _$$O.ORG : _$$O.TEAM;
+        let e = "org" === s["prev-plan-type"] ? OrganizationType.ORG : OrganizationType.TEAM;
         debugState.dispatch(c5({
           planId: s["prev-plan-id"],
           planType: e
@@ -181,7 +181,7 @@ export class $$D1 {
         file,
         repo
       } = t.resources || this.DEPRECATED_getDefaultResources(e);
-      if (file ? i = buildUrlPath(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && isValidSessionLocalID(parseSessionLocalID(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId))) try {
+      if (file ? i = buildUrlPath(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (p["node-id"] = replaceColonWithDash(e.nodeId)), e.codeNodeId && isValidSessionLocalID(parseSessionLocalID(e.codeNodeId)) && (p["code-node-id"] = replaceColonWithDash(e.codeNodeId)), e.editorType === FEditorType.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId))) try {
         let t = getSingletonSceneGraph().get(e.nodeId)?.type;
         t && ["CANVAS", "DOCUMENT"].includes(t || "") && (p.p = "f");
       } catch (e) {
@@ -194,7 +194,7 @@ export class $$D1 {
       e.mergeParams && (p["merge-branch-key"] = e.mergeParams.branchKey, p["merge-source-key"] = e.mergeParams.sourceKey, p["merge-direction"] = e.mergeParams.direction, e.mergeParams.toCheckpointKey && (p["merge-to-checkpoint-key"] = e.mergeParams.toCheckpointKey), e.mergeParams.fromCheckpointKey && (p["merge-from-checkpoint-key"] = e.mergeParams.fromCheckpointKey), e.mergeParams.backFileKey && (p["merge-back-key"] = e.mergeParams.backFileKey), e.mergeParams.mergeOnFileOpen && (p["merge-on-file-open"] = e.mergeParams.mergeOnFileOpen), e.mergeParams.checkpointDiffURL && (p["checkpoint-diff-url"] = e.mergeParams.checkpointDiffURL));
       e.teamToMoveFileToOnNavigate && (p.teamToMoveFileToOnNavigate = e.teamToMoveFileToOnNavigate);
       getFeatureFlags().dakota && e.cmsItemId && (p["cms-item-id"] = e.cmsItemId);
-      let E = _$$b(t.sharingAttributionContextKey, _$$d.BROWSER_ADDRESS_BAR);
+      let E = combineWithHyphen(t.sharingAttributionContextKey, ShareContext.BROWSER_ADDRESS_BAR);
       if (E && (p.t = E), e.figmakeView === AppView.FULLSCREEN_PREVIEW && (p.fullscreen = "1"), desktopAPIInstance) {
         let e = atomStoreManager.get(_$$h);
         null != e && (p.localFileKey = e);

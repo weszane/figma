@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Gt } from "../905/275640";
 import { KH } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -31,7 +31,7 @@ export function $$g0({
       scrollContainer: e
     }, "code-local-styles")
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e0.CODE_PANEL,
     children: [jsx(Mw, {
       panelName: ON.INSPECT

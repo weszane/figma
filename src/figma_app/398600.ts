@@ -6,9 +6,9 @@ import { K } from "../905/851274";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 export function $$p1(e) {
-  return useCallback(() => e ? jN({
+  return useCallback(() => e ? buildFileUrl({
     file: e,
     isFigmakeFullscreenPreview: !0
   }) : null, [e]);

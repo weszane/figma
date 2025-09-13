@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { N_ } from "../vendor/956898";
+import { Link } from "react-router-dom";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
@@ -86,7 +86,7 @@ function Z({
 }) {
   return jsx("div", {
     className: "search_dropdown--profile--HRd2s",
-    children: jsxs(N_, {
+    children: jsxs(Link, {
       to: new xn({
         profileHandle: e.profile_handle
       }).to,

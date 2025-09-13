@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect, useLayoutEffect } from "react";
 import { Kr } from "../vendor/111975";
 import { f as _$$f, h } from "../905/693155";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { e as _$$e } from "../905/810168";
 import { F2 } from "../905/826900";
 import { useFullscreenReady } from "../905/924253";
@@ -119,8 +119,8 @@ export function $$v6(e) {
     onClickHandler,
     onEscapeHandler
   } = e;
-  onClickHandler && _e.keyCode === Uz.ENTER && onClickHandler(_e);
-  onEscapeHandler && _e.keyCode === Uz.ESCAPE && onEscapeHandler(_e);
+  onClickHandler && _e.keyCode === KeyCodes.ENTER && onClickHandler(_e);
+  onEscapeHandler && _e.keyCode === KeyCodes.ESCAPE && onEscapeHandler(_e);
 }
 export const C_ = $$h0;
 export const Jt = $$u1;

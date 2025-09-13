@@ -4,7 +4,7 @@ import { d as _$$d } from "../905/976845";
 import { r as _$$r } from "../905/571562";
 import o from "../vendor/128080";
 import { useLatestRef } from "../figma_app/922077";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { c$, wv, MM } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -126,7 +126,7 @@ function v(e) {
   useEffect(() => {
     onFocus && active && onFocus();
   }, [active, onFocus]);
-  kz(Uz.ENTER, t => {
+  kz(KeyCodes.ENTER, t => {
     if (!t.target || !active) return;
     let r = e.items.filter(e => "checkableOption" === e.type).find(e => e.text === t.target.text);
     r && x(r);

@@ -16,9 +16,9 @@ import { uZ, i9 } from "../905/487011";
 import { EM, s7, Cb } from "../905/278499";
 import { B as _$$B } from "../905/222272";
 import { Label } from "../905/270045";
-import { Fo } from "../905/63728";
+import { isCommandEvent } from "../905/63728";
 import { Point } from "../905/736624";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { registerModal } from "../905/102752";
 import { Ao } from "../905/748636";
 let d = memo(function (e) {
@@ -56,7 +56,7 @@ let T = registerModal(function (e) {
     u();
   });
   let h = useCallback(e => {
-    "Enter" === e.key && Fo(e) && !e.altKey && !e.shiftKey && (e.preventDefault(), e.stopPropagation(), u());
+    "Enter" === e.key && isCommandEvent(e) && !e.altKey && !e.shiftKey && (e.preventDefault(), e.stopPropagation(), u());
   }, [u]);
   return jsx(Ao, {
     title: getI18nString("qa.additional_feedback"),
@@ -73,7 +73,7 @@ let T = registerModal(function (e) {
       children: [jsx(Label, {
         className: C,
         children: renderI18nText("qa.how_was_your_experience")
-      }), jsx(ks, {
+      }), jsx(BigTextInputForwardRef, {
         className: "feedback_modal--textInput---aNOT feedback_modal--textArea--8FsjK",
         placeholder: getI18nString("qa.submit_feedback_placeholder"),
         type: "textarea",

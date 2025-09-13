@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { B2, al, b6 } from "../figma_app/681697";
 import { u as _$$u } from "../905/997541";
 import { useSubscription } from "../figma_app/288654";
@@ -108,7 +108,7 @@ export let $$x0 = registerModal(function ({
       multiple: !0
     }));
   }, [t, s]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "import_source_selection_modal",
     children: jsx(Y, {
       isDragTarget: al,

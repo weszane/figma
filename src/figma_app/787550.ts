@@ -1,130 +1,260 @@
-import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
-import { fileEntityModel } from "../905/806985";
-export let $$s0 = new class {
-  constructor() {
-    this.RelatedLinksSchemaValidator = createNoOpValidator();
-    this.FilesSchemaValidator = createNoOpValidator();
-    this.FilesSchemaValidatorWithPerms = createNoOpValidator();
-    this.VideosSchemaValidator = createNoOpValidator();
-    this.RealtimeTokenSchemaValidator = createNoOpValidator();
-    this.SourceCheckpointCreatedAtSchemaValidator = createNoOpValidator();
-    this.SourceFileUpdatedInfoSchemaValidator = createNoOpValidator();
-    this.MetaSchemaValidator = createNoOpValidator();
-    this.LastInteractionSchemaValidator = createNoOpValidator();
-    this.VideosUploadSchemaValidator = createNoOpValidator();
-    this.VideoDownloadSchemaValidator = createNoOpValidator();
-    this.IncludeFolderTeamCanEditSchemaValidator = createNoOpValidator();
-    this.PageCheckpointThumbnailsSchemaValidator = createNoOpValidator();
-    this.GetHubFileDuplicatesSchemaValidator = createNoOpValidator();
-    this.GetTaggedUserFileSchemaValidator = createNoOpValidator();
-    this.PageWAFValidatorSchemaValidator = createNoOpValidator();
-    this.CopyFileSchemaValidator = createMetaValidator("CopyFileSchemaValidator", fileEntityModel, null);
+import { fileEntityModel } from '../905/806985'
+import { XHR } from '../905/910117'
+import { APIParameterUtils, createMetaValidator, createNoOpValidator } from '../figma_app/181241'
+
+/**
+ * Validators and API handlers for file-related operations.
+ * Original class: $$s0
+ */
+export interface FileApiParams {
+  fileKey?: string
+  args?: any
+  includePerms?: boolean
+  currentFileKey?: string
+  branchFileKey?: string
+  openFileKey?: string
+  sha1?: string
+  hexHash?: string
+  includeFolderTeamCanEdit?: boolean
+  file?: { key: string }
+  fileKeys?: string[]
+  fileTags?: string[]
+  currentOrgId?: string
+  currentTeamId?: string
+  shouldRecreate?: boolean
+}
+
+
+
+export class FileApiHandler {
+  /** Validator for related links schema (RelatedLinksSchemaValidator) */
+  RelatedLinksSchemaValidator = createNoOpValidator()
+  /** Validator for files schema (FilesSchemaValidator) */
+  FilesSchemaValidator = createNoOpValidator()
+  /** Validator for files schema with permissions (FilesSchemaValidatorWithPerms) */
+  FilesSchemaValidatorWithPerms = createNoOpValidator()
+  /** Validator for videos schema (VideosSchemaValidator) */
+  VideosSchemaValidator = createNoOpValidator()
+  /** Validator for realtime token schema (RealtimeTokenSchemaValidator) */
+  RealtimeTokenSchemaValidator = createNoOpValidator()
+  /** Validator for source checkpoint created at schema (SourceCheckpointCreatedAtSchemaValidator) */
+  SourceCheckpointCreatedAtSchemaValidator = createNoOpValidator()
+  /** Validator for source file updated info schema (SourceFileUpdatedInfoSchemaValidator) */
+  SourceFileUpdatedInfoSchemaValidator = createNoOpValidator()
+  /** Validator for meta schema (MetaSchemaValidator) */
+  MetaSchemaValidator = createNoOpValidator()
+  /** Validator for last interaction schema (LastInteractionSchemaValidator) */
+  LastInteractionSchemaValidator = createNoOpValidator()
+  /** Validator for videos upload schema (VideosUploadSchemaValidator) */
+  VideosUploadSchemaValidator = createNoOpValidator()
+  /** Validator for video download schema (VideoDownloadSchemaValidator) */
+  VideoDownloadSchemaValidator = createNoOpValidator()
+  /** Validator for include folder team can edit schema (IncludeFolderTeamCanEditSchemaValidator) */
+  IncludeFolderTeamCanEditSchemaValidator = createNoOpValidator()
+  /** Validator for page checkpoint thumbnails schema (PageCheckpointThumbnailsSchemaValidator) */
+  PageCheckpointThumbnailsSchemaValidator = createNoOpValidator()
+  /** Validator for hub file duplicates schema (GetHubFileDuplicatesSchemaValidator) */
+  GetHubFileDuplicatesSchemaValidator = createNoOpValidator()
+  /** Validator for tagged user file schema (GetTaggedUserFileSchemaValidator) */
+  GetTaggedUserFileSchemaValidator = createNoOpValidator()
+  /** Validator for page WAF validator schema (PageWAFValidatorSchemaValidator) */
+  PageWAFValidatorSchemaValidator = createNoOpValidator()
+  /** Validator for copy file schema (CopyFileSchemaValidator) */
+  CopyFileSchemaValidator = createMetaValidator('CopyFileSchemaValidator', fileEntityModel, null)
+
+  /**
+   * Get related links for a file.
+   * Original: getRelatedLinks
+   */
+  getRelatedLinks(params: FileApiParams): Promise<any> {
+    const { fileKey, ...rest } = params
+    return this.RelatedLinksSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${fileKey}/related_links`, APIParameterUtils.toAPIParameters(rest)),
+    )
   }
-  getRelatedLinks(e) {
-    let {
-      fileKey,
-      ...r
-    } = e;
-    return this.RelatedLinksSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}/related_links`, APIParameterUtils.toAPIParameters(r)));
+
+  /**
+   * Get files, optionally with permissions.
+   * Original: getFiles
+   */
+  getFiles(params: FileApiParams): Promise<any> {
+    const { fileKey, args, ...rest } = params
+    return params.includePerms
+      ? this.FilesSchemaValidatorWithPerms.validate(async ({ xr }) =>
+          await xr.get(`/api/files/${fileKey}`, APIParameterUtils.toAPIParameters(rest), args),
+        )
+      : this.FilesSchemaValidator.validate(async ({ xr }) =>
+          await xr.get(`/api/files/${fileKey}`, APIParameterUtils.toAPIParameters(rest), args),
+        )
   }
-  getFiles(e) {
-    let {
-      fileKey,
-      args,
-      ...i
-    } = e;
-    return e.includePerms ? this.FilesSchemaValidatorWithPerms.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}`, APIParameterUtils.toAPIParameters(i), args)) : this.FilesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}`, APIParameterUtils.toAPIParameters(i), args));
+
+  /**
+   * Get videos for a file.
+   * Original: getVideos
+   */
+  getVideos(params: FileApiParams): Promise<any> {
+    return this.VideosSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.fileKey}/videos`),
+    )
   }
-  getVideos(e) {
-    return this.VideosSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}/videos`));
+
+  /**
+   * Get realtime token for a file.
+   * Original: getRealtimeToken
+   */
+  getRealtimeToken(params: FileApiParams): Promise<any> {
+    return this.RealtimeTokenSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.fileKey}/realtime_token`),
+    )
   }
-  getRealtimeToken(e) {
-    return this.RealtimeTokenSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}/realtime_token`));
+
+  /**
+   * Get source checkpoint created at for a file.
+   * Original: getSourceCheckpointCreatedAt
+   */
+  getSourceCheckpointCreatedAt(params: FileApiParams): Promise<any> {
+    return this.SourceCheckpointCreatedAtSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.currentFileKey}/source_checkpoint_created_at`),
+    )
   }
-  getSourceCheckpointCreatedAt(e) {
-    return this.SourceCheckpointCreatedAtSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.currentFileKey}/source_checkpoint_created_at`));
+
+  /**
+   * Get source file updated info for a branch file.
+   * Original: getSourceFileUpdatedInfo
+   */
+  getSourceFileUpdatedInfo(params: FileApiParams): Promise<any> {
+    return this.SourceFileUpdatedInfoSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.branchFileKey}/source_file_updated_info`),
+    )
   }
-  getSourceFileUpdatedInfo(e) {
-    return this.SourceFileUpdatedInfoSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.branchFileKey}/source_file_updated_info`));
+
+  /**
+   * Get meta information for a file.
+   * Original: getMeta
+   */
+  getMeta(params: FileApiParams): Promise<any> {
+    return this.MetaSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.fileKey}/meta`),
+    )
   }
-  getMeta(e) {
-    return this.MetaSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}/meta`));
+
+  /**
+   * Get last interaction for a file.
+   * Original: getLastInteraction
+   */
+  getLastInteraction(params: FileApiParams): Promise<any> {
+    return this.LastInteractionSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.openFileKey}/last_interaction`),
+    )
   }
-  getLastInteraction(e) {
-    return this.LastInteractionSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.openFileKey}/last_interaction`));
+
+  /**
+   * Get videos upload endpoint for a file.
+   * Original: getVideosUpload
+   */
+  getVideosUpload(params: FileApiParams): Promise<any> {
+    return this.VideosUploadSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/files/${params.fileKey}/videos/${params.sha1}/upload`),
+    )
   }
-  getVideosUpload(e) {
-    return this.VideosUploadSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}/videos/${e.sha1}/upload`));
+
+  /**
+   * Get videos download endpoint for a file.
+   * Original: getVideosDownload
+   */
+  getVideosDownload(params: FileApiParams): Promise<any> {
+    return this.VideoDownloadSchemaValidator.validate(({ xr }) =>
+      xr.get(`/api/files/${params.fileKey}/videos/${params.hexHash}`),
+    )
   }
-  getVideosDownload(e) {
-    return this.VideoDownloadSchemaValidator.validate(({
-      xr: t
-    }) => t.get(`/api/files/${e.fileKey}/videos/${e.hexHash}`));
+
+  /**
+   * Get include folder team can edit for a file.
+   * Original: getIncludeFolderTeamCanEdit
+   */
+  getIncludeFolderTeamCanEdit(params: FileApiParams): Promise<any> {
+    return this.IncludeFolderTeamCanEditSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(
+        `/api/files/${params.fileKey}`,
+        APIParameterUtils.toAPIParameters({
+          includeFolderTeamCanEdit: params.includeFolderTeamCanEdit ? 1 : 0,
+        }),
+      ),
+    )
   }
-  getIncludeFolderTeamCanEdit(e) {
-    return this.IncludeFolderTeamCanEditSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/files/${e.fileKey}`, APIParameterUtils.toAPIParameters({
-      includeFolderTeamCanEdit: e.includeFolderTeamCanEdit ? 1 : 0
-    })));
+
+  /**
+   * Put file data.
+   * Original: putFile
+   */
+  putFile(params: FileApiParams): Promise<any> {
+    return XHR.put(`/api/files/${params.file?.key}`, params.file)
   }
-  putFile(e) {
-    return XHR.put(`/api/files/${e.file.key}`, e.file);
+
+  /**
+   * Update page checkpoint thumbnails for a file.
+   * Original: updatePageCheckpointThumbnails
+   */
+  updatePageCheckpointThumbnails(params: FileApiParams): Promise<any> {
+    return this.PageCheckpointThumbnailsSchemaValidator.validate(async ({ xr }) =>
+      await xr.post(`/api/files/${params.fileKey}/page_thumbnails`),
+    )
   }
-  updatePageCheckpointThumbnails(e) {
-    return this.PageCheckpointThumbnailsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post(`/api/files/${e.fileKey}/page_thumbnails`));
+
+  /**
+   * Get hub file duplicates.
+   * Original: getHubFileDuplicates
+   */
+  getHubFileDuplicates(params: FileApiParams): Promise<any> {
+    return this.GetHubFileDuplicatesSchemaValidator.validate(async ({ xr }) =>
+      await xr.post(
+        '/api/files/hub_file_duplicates',
+        APIParameterUtils.toAPIParameters({ fileKeys: params.fileKeys }),
+      ),
+    )
   }
-  getHubFileDuplicates(e) {
-    return this.GetHubFileDuplicatesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/files/hub_file_duplicates", APIParameterUtils.toAPIParameters({
-      fileKeys: e.fileKeys
-    })));
+
+  /**
+   * Get tagged user files.
+   * Original: getTaggedUserFiles
+   */
+  getTaggedUserFiles(params: FileApiParams): Promise<any> {
+    return this.GetTaggedUserFileSchemaValidator.validate(async ({ xr }) =>
+      await xr.post(
+        '/api/tagged_file',
+        APIParameterUtils.toAPIParameters({
+          fileTags: params.fileTags,
+          currentOrgId: params.currentOrgId,
+          currentTeamId: params.currentTeamId,
+          shouldRecreate: params.shouldRecreate,
+        }),
+      ),
+    )
   }
-  getTaggedUserFiles(e) {
-    return this.GetTaggedUserFileSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/tagged_file", APIParameterUtils.toAPIParameters({
-      fileTags: e.fileTags,
-      currentOrgId: e.currentOrgId,
-      currentTeamId: e.currentTeamId,
-      shouldRecreate: e.shouldRecreate
-    })));
+
+  /**
+   * Get WAF validator.
+   * Original: getWAFValidator
+   */
+  getWAFValidator(): Promise<any> {
+    return this.PageWAFValidatorSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/waf-validation-captcha'),
+    )
   }
-  getWAFValidator() {
-    return this.PageWAFValidatorSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get("/waf-validation-captcha"));
+
+  /**
+   * Copy a file.
+   * Original: copyFile
+   */
+  copyFile(fileKey: string, options?: Record<string, any>): Promise<any> {
+    return this.CopyFileSchemaValidator.validate(async ({ xr }) =>
+      await xr.post(
+        `/api/multiplayer/${fileKey}/copy`,
+        APIParameterUtils.toAPIParameters({ ...(options || {}) }),
+      ),
+    )
   }
-  copyFile(e, t) {
-    return this.CopyFileSchemaValidator.validate(async ({
-      xr: r
-    }) => await r.post(`/api/multiplayer/${e}/copy`, APIParameterUtils.toAPIParameters({
-      ...(t || {})
-    })));
-  }
-}();
-export const S = $$s0;
+}
+
+export const fileApiHandler = new FileApiHandler()
+export const S = fileApiHandler

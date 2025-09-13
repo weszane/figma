@@ -32,7 +32,7 @@ import { l as _$$l, O as _$$O } from "../figma_app/471586";
 import { V1 } from "../figma_app/834392";
 import { A as _$$A } from "../905/79603";
 import { DF } from "../figma_app/146384";
-import { cU } from "../figma_app/528509";
+import { getProjectUrl } from "../figma_app/528509";
 import { FC } from "../figma_app/212807";
 export let $$n6;
 var _ = p;
@@ -202,7 +202,7 @@ export function $$q4({
     let r = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
     return useMemo(() => {
       let n = !!e?.project;
-      if (e && e.folderId && n) return cU(e.folderId, e.parentOrgId, e.teamId, t, !!e.project?.team?.canView, "toolbar_workspace_button.useProjectUrl", r);
+      if (e && e.folderId && n) return getProjectUrl(e.folderId, e.parentOrgId, e.teamId, t, !!e.project?.team?.canView, "toolbar_workspace_button.useProjectUrl", r);
     }, [e, t, r]);
   }();
   let l = _$$o(nt.interopFiles);

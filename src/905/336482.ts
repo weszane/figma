@@ -71,11 +71,11 @@ import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
 import { $$in, WX } from "../figma_app/350203";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
-import { xw } from "../figma_app/951233";
+import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { ResourceTypeNoComment, hasClientMeta } from "../figma_app/45218";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { e0 as _$$e3 } from "../905/696396";
@@ -486,7 +486,7 @@ function eM({
   let l = useDispatch();
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let c = _$$H(trackEvent);
   let u = useCallback(() => {
     l(hideModal());
@@ -788,7 +788,7 @@ function ej(e) {
     existingHubFile
   } = e;
   let s = selectUser();
-  let o = useSelector(e => xw(e) ?? void 0, deepEqual);
+  let o = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let l = useCurrentUserOrg();
   let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
@@ -831,7 +831,7 @@ function ej(e) {
       };
     }
   }, [A]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: s.id,
@@ -1352,7 +1352,7 @@ function td({
   let c = useDispatch();
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let p = _$$H(trackEvent);
   let m = useCallback(() => {
     c(hideModal());
@@ -1772,7 +1772,7 @@ function tc(e) {
   } = e;
   let s = selectUser();
   let o = _$$h4(figFile);
-  let l = useSelector(e => xw(e) ?? void 0, deepEqual);
+  let l = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let d = useCurrentUserOrg();
   let c = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let u = useSelector(e => e.authedProfilesById);
@@ -1791,7 +1791,7 @@ function tc(e) {
     authedProfilesById: u,
     authedActiveCommunityProfile: p
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: s.id,

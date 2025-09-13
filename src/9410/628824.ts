@@ -18,7 +18,7 @@ import { RJ } from "../figma_app/869006";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { h8 } from "../figma_app/478006";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { useState } from "react";
 import { y as _$$y } from "../905/175043";
 import { O } from "../905/936515";
@@ -31,7 +31,7 @@ function T({
   h8({
     isFigjamDLTBanner: !1
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: i,
     children: jsx("div", {
       className: "whiteboard_banner--root--fw3hW banner--root--0lk16 banner--banner--fgRdl",

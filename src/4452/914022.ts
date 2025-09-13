@@ -9,7 +9,7 @@ import { _ as _$$_, S } from "../figma_app/490799";
 import { P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { Eh } from "../figma_app/617654";
 import { V } from "../905/223084";
@@ -51,7 +51,7 @@ function I(e) {
     });
   }, [e.planType, e.planId, e.resourceType, e.resourceIdOrKey, t]);
   let E = e.planName ?? getI18nString("general.fallback_team_name");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Asset Transfer Admin List Modal",
     children: jsx(ModalRootComponent, {
       manager: a,

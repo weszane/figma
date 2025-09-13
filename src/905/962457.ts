@@ -1,4 +1,4 @@
-import { U } from "../905/807535";
+import { filterNumberValues } from "../905/807535";
 import { packRgb } from "../figma_app/273493";
 import { Axis, InteractionCpp, LayoutDirection, HideMode } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
@@ -378,7 +378,7 @@ let p = class e {
     this.renderExpandedAddButton(e, s, n);
   }
   renderHoveredInactiveElements(e, t) {
-    for (let i of U(LayoutDirection)) {
+    for (let i of filterNumberValues(LayoutDirection)) {
       let n = t.component(i ? Axis.X : Axis.Y);
       this.renderInactiveReorderHandle(e, i, n);
       this.renderInactiveAddButton(e, i, n);
@@ -386,7 +386,7 @@ let p = class e {
     }
   }
   renderAllInactiveElements(e) {
-    for (let t of U(LayoutDirection)) {
+    for (let t of filterNumberValues(LayoutDirection)) {
       let i = t === LayoutDirection.COLUMN ? this.numColumns : this.numRows;
       for (let n = 0; n < i; n++) this.renderInactiveReorderHandle(e, t, n);
       for (let n = 1; n < i; n++) this.renderInactiveAddButton(e, t, n);
@@ -397,7 +397,7 @@ let p = class e {
     t.y === this.numRows - 1 && this.renderAppendButton(e, LayoutDirection.ROW, 0);
   }
   renderAllInactiveElementsUnderEditModeUI(e) {
-    for (let t of U(LayoutDirection)) this.renderAppendButton(e, t, 0);
+    for (let t of filterNumberValues(LayoutDirection)) this.renderAppendButton(e, t, 0);
   }
   shouldRender() {
     return !this._bounds.isInvalid() && this._shouldRender !== HideMode.HIDE;

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { r as _$$r } from "../905/520829";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { X } from "../9420/381913";
 import { O } from "../9420/998877";
 import { o as _$$o } from "../c5e2cae0/371580";
@@ -16,7 +16,7 @@ import { J } from "../9420/278106";
 import { sf } from "../905/929976";
 import { Az, js, Nj } from "../figma_app/482142";
 import { Xw } from "../905/584989";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { LN } from "../figma_app/514043";
 import { A } from "../svg/821527";
 let N = e => {
@@ -61,7 +61,7 @@ export function $$b0({
       onCloseOrComplete: e.onCloseOrComplete
     }));
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Edu Review",
     properties: {
       teamId
@@ -91,7 +91,7 @@ export function $$b0({
           className: _$$s.flex.flexColumn.itemsCenter.alignCenter.$,
           children: [jsx(JR, {
             children: renderI18nText("edu.almost_done_everything_look_good")
-          }), jsx(Kz, {
+          }), jsx(Spacing, {
             multiple: 4
           }), jsx(_$$x, {
             isLoading: a,

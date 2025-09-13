@@ -16,7 +16,7 @@ import { VisualBellActions } from "../905/302958";
 import { tI } from "../figma_app/599327";
 import { hideSpecificModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
@@ -152,7 +152,7 @@ let $$L0 = registerModal(function (e) {
   };
   return jsx(J, {
     brand: P[e.seatType],
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Post NUX Seat Request Confirmation Modal Outer",
       children: jsx(xx, {
         title: renderI18nText("seat_selection_in_nux.welcome_to_figma"),

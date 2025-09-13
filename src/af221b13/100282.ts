@@ -5,11 +5,11 @@ import { getIsMobile } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { s_ } from "../905/17223";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { hideModal, showModalHandler } from "../905/156213";
 import { registerModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { s as _$$s } from "../5430/913603";
 import { zE } from "../905/738636";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -24,7 +24,7 @@ import { y as _$$y } from "../905/978641";
 import { Ui, Nr, Sl } from "../af221b13/148820";
 import { jx, tt, hh } from "../5430/774694";
 let h = registerModal(function (e) {
-  return jsxs(d_, {
+  return jsxs(ModalContainer, {
     title: jsx("div", {
       className: "feature_not_available_modal--title--kPAVe text--fontPos14--OL9Hp text--_fontBase--QdLsd",
       children: renderI18nText("community.collections.this_feature_isnt_available")
@@ -42,7 +42,7 @@ let h = registerModal(function (e) {
       })]
     }), jsx("div", {
       className: "feature_not_available_modal--buttonContainer--9-Zwv",
-      children: jsx($$, {
+      children: jsx(ButtonBasePrimary, {
         onClick: () => {
           e.dispatch(hideModal());
         },

@@ -1,9 +1,9 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createRef, Children, cloneElement, PureComponent } from "react";
 import a from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleGenericEvent, handleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { t as _$$t } from "../905/331623";
 import { normalizeValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
@@ -38,21 +38,21 @@ class g extends RecordingPureComponent {
     });
     this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.props.disabled) switch (e.keyCode) {
-        case Uz.ENTER:
-        case Uz.RIGHT_ARROW:
-        case Uz.DOWN_ARROW:
-        case Uz.SPACE:
+        case KeyCodes.ENTER:
+        case KeyCodes.RIGHT_ARROW:
+        case KeyCodes.DOWN_ARROW:
+        case KeyCodes.SPACE:
           this.selectValueWithOffset(1);
           e.stopPropagation();
           e.preventDefault();
           break;
-        case Uz.UP_ARROW:
-        case Uz.LEFT_ARROW:
+        case KeyCodes.UP_ARROW:
+        case KeyCodes.LEFT_ARROW:
           this.selectValueWithOffset(-1);
           e.stopPropagation();
           e.preventDefault();
           break;
-        case Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           this.hiddenInputRef.current && this.hiddenInputRef.current.blur();
       }
     });
@@ -123,7 +123,7 @@ class f extends PureComponent {
     let t = KindEnum.TEXT;
     let i = "";
     this.props.tooltip ? i = this.props.tooltip : this.props.tooltipAction && (t = KindEnum.LOOKUP, i = this.props.tooltipAction);
-    return jsxs(D8, {
+    return jsxs(RecordableDiv, {
       className: e,
       onMouseDown: this.props.inactive ? void 0 : this.props.onMouseDown,
       onMouseEnter: this.props.inactive || !this.props.mouseHoverHandler ? void 0 : this.onMouseEnter,

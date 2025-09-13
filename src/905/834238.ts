@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { analyticsEventManager } from "../905/449184";
 import { HB, VA, ZS } from "../3973/538504";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { ConfirmationModal } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -86,7 +86,7 @@ function I(e) {
         value: e,
         children: ZS(e)
       }, e))
-    }), v(x) && jsx(ks, {
+    }), v(x) && jsx(BigTextInputForwardRef, {
       id: "other-job-title-input",
       className: _$$s.wFull.mt10.$,
       value: C,

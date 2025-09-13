@@ -22,7 +22,7 @@ import { M4 } from "../905/713695";
 import { N as _$$N } from "../905/696711";
 import { Np, xS } from "../figma_app/193867";
 import { Y9 } from "../figma_app/502247";
-import { Qn } from "../figma_app/415217";
+import { openInBrowser } from "../figma_app/415217";
 import { lH } from "../905/316062";
 import { UpgradeSteps } from "../figma_app/831101";
 import { UpgradeAction, allViews } from "../figma_app/707808";
@@ -150,7 +150,7 @@ let $$H16 = createOptimistThunk((e, t) => {
   r?.type === t.type ? e.dispatch(oB()) : e.dispatch(j7(t));
 });
 let $$z9 = createOptimistThunk((e, t) => {
-  isVsCodeEnvironment() ? Qn(t.url) : customHistory.redirect(t.url, "_blank");
+  isVsCodeEnvironment() ? openInBrowser(t.url) : customHistory.redirect(t.url, "_blank");
 });
 export function $$W15(e, t = {}) {
   return sf({

@@ -3,7 +3,7 @@ import { b } from "../905/985254";
 import { w } from "../905/863010";
 import { hasValidSubscription, isTeamInGracePeriod } from "../figma_app/345997";
 import { canAdminTeam } from "../figma_app/642025";
-import { Yj } from "../figma_app/951233";
+import { hasOrgUsersForUser } from "../figma_app/951233";
 let d = {
   FIRST_TIME: "dismissed_org_upsell_first_time",
   SECOND_TIME: "dismissed_org_upsell_second_time",
@@ -49,7 +49,7 @@ export function $$m0(e) {
   }
 }
 export function $$g3(e, t, r) {
-  if (Yj(e) || e.userFlags.completed_org_cart_flow) return 0;
+  if (hasOrgUsersForUser(e) || e.userFlags.completed_org_cart_flow) return 0;
   let i = e.user?.email;
   let d = !!e.user?.email_validated_at;
   if (!i || qe(i) || !d || function (e, t = 2592e6) {

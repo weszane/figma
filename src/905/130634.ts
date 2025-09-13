@@ -4,7 +4,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { oB } from "../figma_app/530167";
 import { StatusType } from "../figma_app/175992";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { Hl, hM } from "../905/840929";
 class u extends Component {
   constructor() {
@@ -32,7 +32,7 @@ class u extends Component {
         })
       })]
     });
-    return jsx(yX, {
+    return jsx(ConfirmationModal2, {
       destructive: !0,
       confirmationTitle: getI18nString("community.delete_profile_modal.delete_profile_title"),
       content: e,

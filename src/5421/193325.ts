@@ -64,7 +64,7 @@ import { useIsFullscreenSitesView } from "../905/561485";
 import { c as _$$c, P as _$$P2 } from "../905/200950";
 import { getFeatureFlags } from "../905/601108";
 import { h as _$$h2 } from "../905/207101";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { C as _$$C, B as _$$B2 } from "../905/330741";
 import { tZ, u as _$$u, BQ } from "../figma_app/852050";
 import { ZM } from "../figma_app/505098";
@@ -85,7 +85,7 @@ import { In } from "../905/672640";
 import { KindEnum } from "../905/129884";
 import { zZ } from "../figma_app/299859";
 import { N as _$$N } from "../905/438674";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { sT, RU } from "../figma_app/740163";
 import { oM, QK, Ti, PB, x as _$$x, iR } from "../897/934363";
 import { Y as _$$Y2 } from "../5421/483739";
@@ -934,7 +934,7 @@ function eX({
     [eq]: !(y || O)
   });
   let B = useSelector(ZM) ? getI18nString("proto.select_variable_unified") : getI18nString("proto.select_variable.short");
-  let H = jsx(D8, {
+  let H = jsx(RecordableDiv, {
     recordingKey: generateRecordingKey(c.recordingKey, "selectTargetVariable"),
     onClick: E,
     children: jsx("div", {
@@ -1309,7 +1309,7 @@ function tl({
   onURLChange: n,
   onOpenInNewTabChange: i
 }) {
-  let r = jsx(ks, {
+  let r = jsx(BigTextInputForwardRef, {
     className: "prototype_open_url_action_options--urlInputUI3--H-JfT",
     dataTestId: "url-input",
     placeholder: getI18nString("proto.interaction.example_com"),

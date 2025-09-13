@@ -22,7 +22,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { ms, c$ } from "../figma_app/236327";
@@ -509,7 +509,7 @@ export function $$ej4({
   children: t
 }) {
   let r = useCallback(e => {
-    [Uz.ENTER, Uz.UP_ARROW, Uz.DOWN_ARROW, Uz.LEFT_ARROW, Uz.RIGHT_ARROW].includes(e.event.keyCode) && e.accept();
+    [KeyCodes.ENTER, KeyCodes.UP_ARROW, KeyCodes.DOWN_ARROW, KeyCodes.LEFT_ARROW, KeyCodes.RIGHT_ARROW].includes(e.event.keyCode) && e.accept();
   }, []);
   return jsx(vL, {
     name: e || "",
@@ -829,7 +829,7 @@ export function $$eV2({
     className: "style_picker--search--2I-82",
     clearSearch: () => r(""),
     focusOnMount: !0,
-    isKeyDownHandled: e => (e.keyCode === Uz.ESCAPE && l(), !0),
+    isKeyDownHandled: e => (e.keyCode === KeyCodes.ESCAPE && l(), !0),
     onChange: r,
     query: e,
     recordingKey: o

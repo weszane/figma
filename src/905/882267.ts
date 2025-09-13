@@ -18,7 +18,7 @@ import { useSubscription } from "../figma_app/288654";
 import { generateRecordingKey } from "../figma_app/878298";
 import { k as _$$k2 } from "../905/582200";
 import { Point } from "../905/736624";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { P as _$$P } from "../905/347284";
 import { ne } from "../figma_app/563413";
 import { SvgComponent, V as _$$V } from "../905/714743";
@@ -30,7 +30,7 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { XE, u1 } from "../figma_app/91703";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { B as _$$B2 } from "../905/330741";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { F as _$$F } from "../905/224";
 import { convertTeamToRaw } from "../905/628874";
 import { Cj } from "../905/291654";
@@ -586,7 +586,7 @@ function eF({
     showFontsUpsell: d,
     recordingKey: r
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.FONT_PICK_FONT_SET_DROPDOWN,
     enabled: c,
     children: jsx("div", {
@@ -770,7 +770,7 @@ let eU = forwardRef(({
   } = ne(i, r);
   return jsx("div", {
     className: "font_picker--fontPickerSearchBar--xubKc",
-    children: jsx(_$$L, {
+    children: jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       "aria-activedescendant": e,
       "aria-controls": t,

@@ -4,7 +4,7 @@ import { Z } from "../5430/993414";
 import { OQ } from "../5430/903660";
 import { y } from "../5430/173892";
 import { MF } from "../figma_app/773663";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
 export function $$u0({
@@ -22,7 +22,7 @@ export function $$u0({
     editorType = MF(resourceType),
     price
   } = t;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.RESOURCE_HUB_FEED_FILTERS,
     children: jsx(_$$a, {
       mode: "match",

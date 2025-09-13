@@ -9,7 +9,7 @@ import { isIOSUA } from "../figma_app/778880";
 import { pW } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 var o = n;
 let g = "mobile_download_prompt--mobilePromptTitle--7Tgsn text--fontPos13--xW8hS text--_fontBase--QdLsd";
 let h = "mobile_download_prompt--mobilePromptOptionTitle--mMUYW text--fontPos13--xW8hS text--_fontBase--QdLsd";
@@ -34,7 +34,7 @@ export function $$v0(e) {
       E(!0);
     }, 300), n.set(b, !0));
   };
-  return null !== n.get(b) ? null : jsx(fu, {
+  return null !== n.get(b) ? null : jsx(TrackingProvider, {
     name: "Mobile Download Prompt",
     children: jsx("div", {
       className: o()({

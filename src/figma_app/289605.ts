@@ -14,7 +14,7 @@ import { f as _$$f } from "../905/257420";
 import { VariableDataType, PropertyScope } from "../figma_app/763686";
 import f from "classnames";
 import { useLatestRef } from "../figma_app/922077";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { tH, H4 } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { c as _$$c } from "../905/241436";
@@ -137,7 +137,7 @@ function ei({
     })), t());
   }, [E, d, t]);
   let T = useCallback(e => {
-    e.event.keyCode === Uz.ESCAPE && (u("escape_pressed"), e.event.preventDefault(), e.accept(), t());
+    e.event.keyCode === KeyCodes.ESCAPE && (u("escape_pressed"), e.event.preventDefault(), e.accept(), t());
   }, [u, t]);
   let I = useCallback(() => {
     u("description_expanded");

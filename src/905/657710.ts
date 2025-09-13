@@ -1,6 +1,6 @@
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { Lk, mp, qm, a7 } from "../figma_app/162807";
+import { Lk, ProjectSortField, OrgSortField, UserSortField } from "../figma_app/162807";
 import { ViewMode } from "../figma_app/756995";
 import { s as _$$s } from "../905/77553";
 let $$l0 = {
@@ -38,89 +38,89 @@ let $$l0 = {
 };
 let $$d1 = {
   viewId: "search-projects",
-  sortKeys: [mp.RELEVANCY, mp.NAME, mp.CREATED_AT],
-  listSortKeys: [mp.NAME, mp.CREATED_AT],
-  tabletListSortKeys: [mp.NAME],
-  mobileListSortKeys: [mp.NAME],
+  sortKeys: [ProjectSortField.RELEVANCY, ProjectSortField.NAME, ProjectSortField.CREATED_AT],
+  listSortKeys: [ProjectSortField.NAME, ProjectSortField.CREATED_AT],
+  tabletListSortKeys: [ProjectSortField.NAME],
+  mobileListSortKeys: [ProjectSortField.NAME],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [mp.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [mp.NAME]: renderI18nText("search.sort_option.name"),
-      [mp.CREATED_AT]: renderI18nText("search.sort_option.created_at")
+      [ProjectSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [ProjectSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [ProjectSortField.CREATED_AT]: renderI18nText("search.sort_option.created_at")
     },
     [ViewMode.LIST]: {
-      [mp.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [mp.NAME]: renderI18nText("search.sort_option.name"),
-      [mp.CREATED_AT]: renderI18nText("search.sort_option.created_at")
+      [ProjectSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [ProjectSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [ProjectSortField.CREATED_AT]: renderI18nText("search.sort_option.created_at")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
-      sortKey: mp.RELEVANCY,
+      sortKey: ProjectSortField.RELEVANCY,
       sortDesc: !1
     }
   },
-  includeSortDirection: e => -1 === [mp.RELEVANCY].indexOf(e)
+  includeSortDirection: e => -1 === [ProjectSortField.RELEVANCY].indexOf(e)
 };
 let $$c2 = {
   viewId: "search-teams",
-  sortKeys: [qm.RELEVANCY, qm.NAME, qm.FILES_LAST_TOUCHED_AT, qm.CREATED_AT, qm.MEMBER_COUNT],
-  listSortKeys: [qm.NAME, qm.FILES_LAST_TOUCHED_AT, qm.CREATED_AT, qm.MEMBER_COUNT, _$$s.SPACER],
-  tabletListSortKeys: [qm.NAME, qm.FILES_LAST_TOUCHED_AT, qm.MEMBER_COUNT, _$$s.SPACER],
-  mobileListSortKeys: [qm.NAME],
+  sortKeys: [OrgSortField.RELEVANCY, OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.CREATED_AT, OrgSortField.MEMBER_COUNT],
+  listSortKeys: [OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.CREATED_AT, OrgSortField.MEMBER_COUNT, _$$s.SPACER],
+  tabletListSortKeys: [OrgSortField.NAME, OrgSortField.FILES_LAST_TOUCHED_AT, OrgSortField.MEMBER_COUNT, _$$s.SPACER],
+  mobileListSortKeys: [OrgSortField.NAME],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [qm.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [qm.NAME]: renderI18nText("search.sort_option.name"),
-      [qm.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
-      [qm.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
-      [qm.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
+      [OrgSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [OrgSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [OrgSortField.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [OrgSortField.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [OrgSortField.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
     },
     [ViewMode.LIST]: {
-      [qm.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [qm.NAME]: renderI18nText("search.sort_option.name"),
-      [qm.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
-      [qm.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
-      [qm.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
+      [OrgSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [OrgSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [OrgSortField.FILES_LAST_TOUCHED_AT]: renderI18nText("search.sort_option.last_updated"),
+      [OrgSortField.CREATED_AT]: renderI18nText("search.sort_option.created_at"),
+      [OrgSortField.MEMBER_COUNT]: renderI18nText("search.sort_option.members")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
-      sortKey: qm.RELEVANCY,
+      sortKey: OrgSortField.RELEVANCY,
       sortDesc: !1
     }
   },
-  includeSortDirection: e => -1 === [qm.RELEVANCY].indexOf(e),
+  includeSortDirection: e => -1 === [OrgSortField.RELEVANCY].indexOf(e),
   settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 let $$u3 = {
   viewId: "search-users",
-  sortKeys: [a7.RELEVANCY, a7.NAME, a7.EMAIL],
-  listSortKeys: [a7.NAME, a7.EMAIL],
-  tabletListSortKeys: [a7.NAME, a7.EMAIL],
-  mobileListSortKeys: [a7.NAME],
+  sortKeys: [UserSortField.RELEVANCY, UserSortField.NAME, UserSortField.EMAIL],
+  listSortKeys: [UserSortField.NAME, UserSortField.EMAIL],
+  tabletListSortKeys: [UserSortField.NAME, UserSortField.EMAIL],
+  mobileListSortKeys: [UserSortField.NAME],
   sortKeyDescriptions: {
     [ViewMode.GRID]: {
-      [a7.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [a7.NAME]: renderI18nText("search.sort_option.name"),
-      [a7.EMAIL]: renderI18nText("search.sort_option.email")
+      [UserSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [UserSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [UserSortField.EMAIL]: renderI18nText("search.sort_option.email")
     },
     [ViewMode.LIST]: {
-      [a7.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
-      [a7.NAME]: renderI18nText("search.sort_option.name"),
-      [a7.EMAIL]: renderI18nText("search.sort_option.email")
+      [UserSortField.RELEVANCY]: renderI18nText("search.sort_option.relevance"),
+      [UserSortField.NAME]: renderI18nText("search.sort_option.name"),
+      [UserSortField.EMAIL]: renderI18nText("search.sort_option.email")
     }
   },
   defaultOptions: {
     viewMode: ViewMode.GRID,
     sortMode: {
-      sortKey: a7.RELEVANCY,
+      sortKey: UserSortField.RELEVANCY,
       sortDesc: !1
     }
   },
-  includeSortDirection: e => -1 === [a7.RELEVANCY].indexOf(e),
+  includeSortDirection: e => -1 === [UserSortField.RELEVANCY].indexOf(e),
   settingsSpacer: BrowserInfo.tablet || BrowserInfo.mobile
 };
 export const KJ = $$l0;

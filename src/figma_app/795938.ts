@@ -15,7 +15,7 @@ import { Jm } from "../figma_app/387599";
 import { qD, _t, JJ, Dm } from "../figma_app/471982";
 import { cB, G8, rZ } from "../figma_app/777551";
 import { xn } from "../905/934145";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { ResourceTypeNoComment, isWidget, isPlugin } from "../figma_app/45218";
 import { V } from "../905/480825";
@@ -230,7 +230,7 @@ export function $$D2({
   let _ = d && !model.current_user_is_following ? 1 : 0;
   let m = Dm(model.id, r);
   let g = model.img_urls?.["500_500"] || model.img_urls?.["120_120"];
-  return jsxs(o3, {
+  return jsxs(TrackedLink, {
     to: new xn({
       profileHandle: model.profile_handle
     }).to,

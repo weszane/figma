@@ -22,7 +22,7 @@ import { F9 } from "../figma_app/803787";
 import { UpsellModalType } from "../905/165519";
 import { vL, Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
-import { O as _$$O } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { fileActionEnum } from "../figma_app/630077";
 import { h as _$$h } from "../figma_app/270558";
 import { DV } from "../905/739964";
@@ -36,8 +36,8 @@ export function $$D0() {
   return e.filter(e => e.has_drafts).map(e => ({
     workspaceName: e.plan_name,
     userId: t?.id ?? "",
-    orgId: e.plan_type === _$$O.ORG ? e.plan_id : null,
-    teamId: e.plan_type === _$$O.TEAM ? e.plan_id : null,
+    orgId: e.plan_type === OrganizationType.ORG ? e.plan_id : null,
+    teamId: e.plan_type === OrganizationType.TEAM ? e.plan_id : null,
     draftFolderId: e.draft_folder_id,
     isDisabledDueToECC: null !== r && e.plan_id !== r,
     isFigJamDisabled: e.is_figjam_disabled,

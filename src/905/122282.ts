@@ -10,7 +10,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { N as _$$N } from "../905/551536";
+import { BaseLinkComponent } from "../905/551536";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { ol, cD } from "../figma_app/598018";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -29,7 +29,7 @@ import { $z } from "../figma_app/617427";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/859195";
 import { c as _$$c } from "../905/370443";
-import { fu, j6 } from "../figma_app/831799";
+import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { T6 } from "../905/201596";
 import { Et as _$$Et, mZ, b2 } from "../figma_app/622574";
 import { $x, $W } from "../figma_app/599979";
@@ -141,7 +141,7 @@ let y = registerModal(function ({
         })
       }), jsx(wi, {
         children: jsxs(jk, {
-          children: [jsx(_$$N, {
+          children: [jsx(BaseLinkComponent, {
             href: "https://www.figma.com/pricing#figjam",
             target: "_blank",
             trusted: !0,
@@ -568,7 +568,7 @@ function tr({
     publishableComponentNodeIds,
     localComponents
   } = useSelector(Pn, deepEqual);
-  return "loading" !== status && data && s ? jsx(fu, {
+  return "loading" !== status && data && s ? jsx(TrackingProvider, {
     name: _$$e.TEAM_TEMPLATE_PUBLISH_MODAL_V2,
     properties: {
       source: e,
@@ -600,7 +600,7 @@ function ta({
   let u = lg();
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let g = _$$H(trackEvent);
   let _ = e7({
     figFile: e,
@@ -1294,7 +1294,7 @@ function tO({
       type: "template-publish-error",
       error: !0
     }));
-  }, [l, y]), l) ? jsx(fu, {
+  }, [l, y]), l) ? jsx(TrackingProvider, {
     name: _$$e.TEAM_TEMPLATE_PUBLISH_MODAL,
     properties: {
       source: i,

@@ -6,7 +6,7 @@ import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
@@ -15,7 +15,7 @@ import { l1 } from "../figma_app/502363";
 import { j7 } from "../905/929976";
 import { Um } from "../905/848862";
 import { QB } from "../905/143890";
-import { WY } from "../figma_app/162807";
+import { CreatorResourceType } from "../figma_app/162807";
 import { H } from "../905/286442";
 import { dd } from "../figma_app/604494";
 import { c as _$$c } from "../905/566438";
@@ -31,11 +31,11 @@ export function $$w0({
     "data-testid": "fragment-search-filters",
     children: [jsx(C, {
       dropdownId: "same-energy-modal-creator-facet-dropdown",
-      facetType: WY.CREATOR,
+      facetType: CreatorResourceType.CREATOR,
       containerRef: t
     }), !i && jsx(C, {
       dropdownId: "same-energy-modal-space-facet-dropdown",
-      facetType: WY.SPACE,
+      facetType: CreatorResourceType.SPACE,
       containerRef: t
     }), jsx(T, {
       entryPoint: e
@@ -63,7 +63,7 @@ function C({
   let m = useMemo(() => ({
     allowDefault: !0,
     shortcuts: [{
-      key: Uz.ENTER
+      key: KeyCodes.ENTER
     }],
     onAction: () => {
       !d && s.current && o(j7({
@@ -123,7 +123,7 @@ function T({
   let T = {
     allowDefault: !0,
     shortcuts: [{
-      key: Uz.ENTER
+      key: KeyCodes.ENTER
     }]
   };
   _$$k({

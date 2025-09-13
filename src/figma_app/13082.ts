@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { a as _$$a } from "../905/29104";
-import { N_ } from "../figma_app/637027";
+import { BaseLinkComponent } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
@@ -13,7 +13,7 @@ export function $$p1({
 }) {
   let [r, p] = useState(!1);
   let _ = _$$a() ? renderI18nText("qa.ai_beta") : getI18nString("qa.ai");
-  return jsx(N_, {
+  return jsx(BaseLinkComponent, {
     className: _$$s.hAuto.flexShrink0.$,
     "data-tooltip": getI18nString("qa.learn_more"),
     "data-tooltip-show-above": !0,

@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
 import { useAtomValueAndSetter } from "../figma_app/27355";
-import { Fo, Uz as _$$Uz } from "../905/63728";
+import { isCommandEvent, KeyCodes } from "../905/63728";
 import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
 import { dh } from "../figma_app/186343";
@@ -8,7 +8,7 @@ import { Pe } from "../figma_app/32128";
 import { cE } from "../figma_app/932601";
 var u = (e => (e.RANGE = "range", e.INDIVIDUAL = "individual", e))(u || {});
 function p(e) {
-  return Fo(e) ? "individual" : e.shiftKey ? "range" : null;
+  return isCommandEvent(e) ? "individual" : e.shiftKey ? "range" : null;
 }
 export function $$h2(e) {
   return !!p(e);
@@ -30,12 +30,12 @@ export function $$m0({
         return void 0 !== i && !e[i].isDivider;
       }).sort((e, t) => r[e] - r[t]);
       if (0 !== c.length) switch (t.keyCode) {
-        case _$$Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           o();
           l();
           break;
-        case _$$Uz.R:
-          Fo(t) && (1 === c.length ? n(c[0]) : fullscreenValue.triggerActionInUserEditScope("batch-page-rename", {
+        case KeyCodes.R:
+          isCommandEvent(t) && (1 === c.length ? n(c[0]) : fullscreenValue.triggerActionInUserEditScope("batch-page-rename", {
             args: {
               nodeIds: c
             }

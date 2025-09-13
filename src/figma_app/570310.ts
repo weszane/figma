@@ -25,7 +25,7 @@ import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { A as _$$A2 } from "../905/920142";
 import { isDevEnvironment } from "../figma_app/169182";
 import { reportError } from "../905/11";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { z as _$$z } from "../905/284530";
 import { f as _$$f, v as _$$v } from "../figma_app/258006";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -41,7 +41,7 @@ import { X as _$$X } from "../905/853613";
 import { findComponentGuidOrPublishId } from "../figma_app/854115";
 import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { replaceSelection } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
 import { Um } from "../905/848862";
@@ -862,8 +862,8 @@ function eB({
   updatedAt: e
 }) {
   let t = ez(e);
-  return t ? jsx(Ex, {
-    color: zE.DISABLED,
+  return t ? jsx(Badge, {
+    color: BadgeColor.DISABLED,
     text: t,
     className: "figmadocs--editedText--Tz4Au ellipsis--ellipsis--Tjyfa"
   }) : null;
@@ -1187,7 +1187,7 @@ function eJ({
     title: getI18nString("dev_handoff.code_connect.entrypoint_title"),
     hintLinkText: getI18nString("dev_handoff.code_connect.entrypoint_text")
   };
-  return t || o ? null : jsx(fu, {
+  return t || o ? null : jsx(TrackingProvider, {
     name: "code_connect_get_started",
     children: jsx("div", {
       className: "figmadocs--hintContainer--NQVSC",

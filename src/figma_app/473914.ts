@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import a from "classnames";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { Kg, u9, my } from "../figma_app/811257";
 import { ZD, Vp, ON, dk, pK, Xv, H$, Os, KP, uf, kW, qv, eK, q1, wH } from "../905/235035";
 var s = a;
@@ -16,7 +16,7 @@ let $$c2 = forwardRef(function ({
   ...p
 }, _) {
   let h = s()(ZD, u);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: h,
     forwardedRef: _,
     ...p,
@@ -90,7 +90,7 @@ let $$u1 = forwardRef(function ({
     })]
   });
   let v = !E && f ? KP : uf;
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: s()(v, a),
     forwardedRef: b,
     ...y,
@@ -123,7 +123,7 @@ let $$p3 = forwardRef(function ({
   ...g
 }, f) {
   let E = s()(KP, a);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: E,
     forwardedRef: f,
     ...g,

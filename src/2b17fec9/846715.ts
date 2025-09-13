@@ -14,7 +14,7 @@ import { X as _$$X } from "../figma_app/776368";
 import { tH, H4 } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Dm } from "../figma_app/8833";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { xn } from "../figma_app/644079";
 import { C_ } from "../figma_app/290668";
 import { LR, gR } from "../figma_app/120210";
@@ -1151,7 +1151,7 @@ let tw = memo(function () {
     }), jsx(eX, {})]
   });
   let eg = useSelector(e => e.showingFileFooter);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: RZ,
     children: jsxs(nS.Provider, {
       value: q,

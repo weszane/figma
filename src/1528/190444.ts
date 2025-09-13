@@ -7,15 +7,15 @@ import o from "classnames";
 import { A as _$$A } from "../905/920142";
 import { generateRecordingKey, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { k as _$$k } from "../905/582200";
-import { Yo } from "../figma_app/637027";
+import { interactiveAnchorTracked } from "../figma_app/637027";
 import { t } from "../905/331623";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Me } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { af } from "../figma_app/559491";
 import { Q7 } from "../905/15667";
-import { fu } from "../figma_app/831799";
-import { K } from "../905/135526";
+import { TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { canRunPlugin, getRelaunchablePlugins } from "../figma_app/300692";
 import { O as _$$O2 } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
@@ -149,17 +149,17 @@ function B(e) {
       plugin
     })
   });
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "PluginRelaunchRow",
     properties: {
       pluginId: plugin.plugin_id
     },
-    trackingTargets: K.RCS,
+    trackingTargets: RCSMessageType.RCS,
     children: [jsx(fI, {
       className: e.collapsibleStyling ? "plugin_panel--rowButtonCollapsible--Vfrhx button_row--rowButton--s-r8y raw_components--singleRow--W5dYN raw_components--_singleRow--yTGIY raw_components--singleRowHeight--dKM4t raw_components--_row--rHucX raw_components--row--NThzm button_row--_rowButton--EdZXq" : "plugin_panel--rowButton--PxW5t button_row--rowButton--s-r8y raw_components--singleRow--W5dYN raw_components--_singleRow--yTGIY raw_components--singleRowHeight--dKM4t raw_components--_row--rHucX raw_components--row--NThzm button_row--_rowButton--EdZXq",
       children: jsxs("div", {
         className: "plugin_panel--relaunchContainer--leq1l",
-        children: [jsx(Yo, {
+        children: [jsx(interactiveAnchorTracked, {
           className: "plugin_panel--relaunchButton--sEH4s",
           onClick: () => e.onRelaunch(e.relaunchData),
           "data-tooltip-type": KindEnum.TEXT,

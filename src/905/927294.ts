@@ -6,11 +6,11 @@ import o from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { F } from "../905/759613";
 import { Q6, nK, QC, aj, AH, Vs, b, Rf, uI, J, Lb } from "../905/856036";
 var l = o;
-export let $$g2 = tf(({
+export let $$g2 = withTrackedClick(({
   onClick: e,
   disabled: t,
   dataOnboardingKey: i,

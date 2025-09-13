@@ -17,7 +17,7 @@ import { h as _$$h } from "../905/207101";
 import { selectWithShallowEqual } from "../905/103090";
 import { buildStaticUrl } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { E as _$$E2 } from "../905/277716";
 import { XHR } from "../905/910117";
@@ -303,7 +303,7 @@ export function $$em2({
         ref: ej,
         label: null,
         input: u
-      });else if ("button" === em) return jsx(D8, {
+      });else if ("button" === em) return jsx(RecordableDiv, {
         forwardedRef: ej,
         "data-non-interactive": !0,
         children: u

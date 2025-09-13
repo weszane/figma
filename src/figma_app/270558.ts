@@ -8,7 +8,7 @@ import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
 import { M } from "../905/456042";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { b } from "../905/791493";
 import { planPickerModalBody, workspaceSelectorModalInner } from "../figma_app/727769";
@@ -31,7 +31,7 @@ export let $$f0 = registerModal(function (e) {
     workspace_option_length: workspaces.length,
     workspaces: JSON.stringify(workspaces)
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Plan Picker",
     properties: y,
     children: jsx(ModalRootComponent, {

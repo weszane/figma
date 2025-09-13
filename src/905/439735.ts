@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import a from "classnames";
 import { camelToKebab } from "../figma_app/930338";
-import { Kz } from "../figma_app/637027";
+import { Spacing } from "../figma_app/637027";
 import { S } from "../figma_app/420927";
 import { s as _$$s } from "../cssbuilder/589278";
 import { formatI18nMessage } from "../905/482208";
@@ -70,7 +70,7 @@ export function $$g0({
           shortcut: g,
           className: s()(_$$s.flex.columnGap4.fontSemiBold.colorTextSecondary.$, "animated_tooltip--shortcut--kyqA8")
         })]
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: .5
       }), jsx("div", {
         className: _$$s.colorText.$,

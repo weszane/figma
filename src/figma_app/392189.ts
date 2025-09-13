@@ -21,7 +21,7 @@ import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
 import { g7 } from "../905/939482";
 import { selectCurrentFile } from "../figma_app/516028";
-import { X$ } from "../905/612685";
+import { getCommunityFileUrl } from "../905/612685";
 import { _9 } from "../figma_app/76115";
 import { ON, zr } from "../figma_app/644808";
 import { dH } from "../figma_app/647246";
@@ -72,7 +72,7 @@ function L({
       entryPoint: "ui_kit_empty_state"
     });
   }, [library_key, c?.key, c?.parentOrgId, c?.teamId]);
-  let h = useMemo(() => X$(library_file_key), [library_file_key]);
+  let h = useMemo(() => getCommunityFileUrl(library_file_key), [library_file_key]);
   return jsxs("div", {
     className: "ui_kit_select--uiKitCard--qVuvk",
     "data-testid": "ui-kit-card",

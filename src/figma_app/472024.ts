@@ -9,7 +9,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal, popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { R as _$$R } from "../905/782411";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
@@ -59,7 +59,7 @@ let P = memo(function ({
       updateSource: "library_modal_open"
     });
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Library Preference Modal",
     properties: {
       fileKey: p?.key,

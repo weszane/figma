@@ -5,7 +5,7 @@ import s from "classnames";
 import { h8 } from "../figma_app/478006";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 var o = s;
 let $$$$p0 = memo(function (e) {
   let {
@@ -21,7 +21,7 @@ let $$$$p0 = memo(function (e) {
     isFigjamDLTBanner: !0,
     bannerType: e.bannerType
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: trackingContext,
     children: jsxs("div", {
       className: o()(isFloatingBanner ? "dlt_banner--floatingBanner--Gv-Xd" : "dlt_banner--banner--nGI-J", {

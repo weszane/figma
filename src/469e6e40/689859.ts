@@ -1,14 +1,14 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Ex, zE, vj } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { V } from "../figma_app/312987";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { M4, IT, gY } from "../905/713695";
 import { JO, Cn, fm } from "../c5e2cae0/453906";
 import { registerModal } from "../905/102752";
@@ -110,11 +110,11 @@ let $$C0 = registerModal(function (e) {
       isChecked: e === JO.FULL,
       optionHeight: 40,
       callback: () => a(JO.FULL),
-      displayTextBadge: jsx(Ex, {
+      displayTextBadge: jsx(Badge, {
         className: "default_paid_status--badge--r6VCf",
         text: getI18nString("default_paid_status_modal_v2.paid"),
-        color: zE.BRAND,
-        size: vj.LARGE
+        color: BadgeColor.BRAND,
+        size: BadgeSize.LARGE
       })
     }];
     let i = D.data.targetRect;
@@ -153,7 +153,7 @@ let $$C0 = registerModal(function (e) {
   let U = D?.type === P;
   let F = "WHITEBOARD_DEFAULT_PAID_STATUS_DROPDOWN";
   let q = D?.type === F;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Default License Type Setting Modal",
     children: jsx(OJ, {
       title: getI18nString("default_paid_status_modal_v2.manage_default_roles.seat_rename"),
@@ -197,7 +197,7 @@ let $$C0 = registerModal(function (e) {
           })]
         }), jsx("div", {
           className: v0,
-          children: jsx($$, {
+          children: jsx(ButtonBasePrimary, {
             onClick: async () => {
               O(!0);
               try {

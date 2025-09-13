@@ -6,7 +6,7 @@ import { renderI18nText } from "../905/303541";
 import { r as _$$r } from "../905/534055";
 import { s as _$$s } from "../905/328136";
 import { Mr } from "../figma_app/795938";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { getPluginVersion } from "../figma_app/300692";
 import { WM, Wh, dY, sU } from "../905/838765";
 import { YW } from "../figma_app/870683";
@@ -164,7 +164,7 @@ export function $$L1({
     })]
   });
 }
-export let $$F0 = tf(function (e) {
+export let $$F0 = withTrackedClick(function (e) {
   let {
     onTileClicked,
     version
@@ -183,7 +183,7 @@ export let $$F0 = tf(function (e) {
     })
   });
 });
-tf(function (e) {
+withTrackedClick(function (e) {
   let {
     onTileClicked,
     version

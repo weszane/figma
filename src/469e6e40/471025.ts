@@ -12,7 +12,7 @@ import { _ as _$$_ } from "../469e6e40/422718";
 import { A as _$$A } from "../vendor/850789";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
-import { Ex, vj, zE } from "../figma_app/919079";
+import { Badge, BadgeSize, BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
@@ -60,10 +60,10 @@ function C(e) {
       className: "x9f619 xfj9a5l x17fksa9 x186i4p8",
       children: jsxs("div", {
         className: _$$s.flex.itemsCenter.gap4.$,
-        children: [jsx(Ex, {
+        children: [jsx(Badge, {
           text: g.toLocaleString(),
-          size: vj.LARGE,
-          color: zE.DEFAULT
+          size: BadgeSize.LARGE,
+          color: BadgeColor.DEFAULT
         }), jsx(B, {
           removeBackgroundColor: !0,
           type: e.seatType,

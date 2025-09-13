@@ -7,7 +7,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { Multiplayer } from "../figma_app/763686";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { Gc } from "../905/63728";
+import { ignoreCommandOrShift } from "../905/63728";
 import { tu, oJ } from "../figma_app/385215";
 import { hk } from "../figma_app/632319";
 import { renderI18nText } from "../905/303541";
@@ -151,7 +151,7 @@ let L = {
     });
   },
   "view-profile": function (e) {
-    let t = Gc(t => {
+    let t = ignoreCommandOrShift(t => {
       t.stopPropagation();
       customHistory.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
     });
@@ -213,7 +213,7 @@ let L = {
     let h = useCallback(() => {
       null != e.userSessionID && d(e.userSessionID, t);
     }, [e.userSessionID, d, t]);
-    let f = Gc(t => {
+    let f = ignoreCommandOrShift(t => {
       t.stopPropagation();
       customHistory.redirect(e.profileUrl, desktopAPIInstance ? void 0 : "_blank");
     });

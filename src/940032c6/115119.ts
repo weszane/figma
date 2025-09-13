@@ -66,7 +66,7 @@ import { d as _$$d5 } from '../905/49800';
 import { E as _$$E6 } from '../905/53857';
 import { f as _$$f1 } from '../905/54715';
 import { R as _$$R } from '../905/57445';
-import { Fo, Uz } from '../905/63728';
+import { isCommandEvent, KeyCodes } from '../905/63728';
 import { M as _$$M2 } from '../905/69907';
 import { hE as _$$hE3, Ej } from '../905/71683';
 import { n as _$$n10 } from '../905/79930';
@@ -167,7 +167,7 @@ import { Z as _$$Z } from '../905/404142';
 import { H as _$$H9 } from '../905/404982';
 import { debugState } from '../905/407919';
 import { SelectPrimitiveTrigger, useSelectPrimitiveState } from '../905/408073';
-import { L as _$$L4 } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A0 } from '../905/408320';
 import { _ as _$$_0 } from '../905/410717';
 import { h4 as _$$h1, Nz as _$$Nz } from '../905/417232';
@@ -203,7 +203,7 @@ import { Cf as _$$Cf, it as _$$it, Jz } from '../905/504727';
 import { Y as _$$Y4 } from '../905/506207';
 import { FJ } from '../905/508367';
 import { l as _$$l9 } from '../905/509505';
-import { D8 } from '../905/511649';
+import { RecordableDiv } from '../905/511649';
 import { h as _$$h9 } from '../905/513745';
 import { C as _$$C6 } from '../905/520159';
 import { Z as _$$Z3 } from '../905/521211';
@@ -230,7 +230,7 @@ import { H8, Pf } from '../905/590952';
 import { G as _$$G8 } from '../905/594445';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
-import { jN as _$$jN } from '../905/612685';
+import { buildFileUrl } from '../905/612685';
 import { J as _$$J } from '../905/614223';
 import { compareVersions } from '../905/616700';
 import { e as _$$e5 } from '../905/621515';
@@ -661,7 +661,7 @@ import { y as _$$y5 } from '../figma_app/504415';
 import { selectCurrentFile, useCurrentFileKey, useIsCurrentUserCreator, useOpenFileLibraryKey } from '../figma_app/516028';
 import { z as _$$z2 } from '../figma_app/516075';
 import { h0 as _$$h10, o3 as _$$o7, Yu as _$$Yu, Zr as _$$Zr, B_ } from '../figma_app/525810';
-import { VA } from '../figma_app/528509';
+import { hasRootPathOptional } from '../figma_app/528509';
 import { c as _$$c1 } from '../figma_app/528598';
 import { tz as _$$tz } from '../figma_app/531331';
 import { t as _$$t3 } from '../figma_app/532797';
@@ -709,7 +709,7 @@ import { ay as _$$ay } from '../figma_app/628987';
 import { n as _$$n2 } from '../figma_app/630671';
 import { JT } from '../figma_app/632248';
 import { LibraryTabEnum } from '../figma_app/633080';
-import { CY as _$$CY, ks as _$$ks, Us } from '../figma_app/637027';
+import { SecureLink, BigTextInputForwardRef, linkWithTracking } from '../figma_app/637027';
 import { g as _$$g8 } from '../figma_app/638268';
 import { UK } from '../figma_app/638601';
 import { xn as _$$xn } from '../figma_app/644079';
@@ -757,7 +757,7 @@ import { O as _$$O2 } from '../figma_app/806649';
 import { fn as _$$fn2, s2 as _$$s8, Y9 as _$$Y5, Ad, DE } from '../figma_app/811257';
 import { C5 as _$$C4, c$ as _$$c$3, h5 as _$$h4, mg as _$$mg2, oA as _$$oA2, Gu, Ve } from '../figma_app/812915';
 import { Agb, G_h } from '../figma_app/822011';
-import { fu as _$$fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { e as _$$e8 } from '../figma_app/831857';
 import { F as _$$F3 } from '../figma_app/832508';
 import { Q as _$$Q12 } from '../figma_app/834744';
@@ -785,7 +785,7 @@ import { z0 } from '../figma_app/914216';
 import { zy } from '../figma_app/915202';
 import { KJ } from '../figma_app/916560';
 import { utilityNoop } from '../figma_app/918700';
-import { vj as _$$vj, Ex, zE } from '../figma_app/919079';
+import { BadgeSize, Badge, BadgeColor } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
 import { f as _$$f7 } from '../figma_app/924252';
 import { capitalize, formatList, slugify } from '../figma_app/930338';
@@ -1617,7 +1617,7 @@ function tz() {
     activeToolId,
     onActivateTool: activateTool
   });
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: _$$e4.EDITOR_TOOLBELT,
     children: jsx('div', {
       ref: b,
@@ -1721,7 +1721,7 @@ function tB(e) {
   let n = getProvisionalAccessBanner(G_.SITES);
   let s = _$$aV();
   let r = selectCurrentFile();
-  let d = VA(r?.project);
+  let d = hasRootPathOptional(r?.project);
   let c = useAtomWithSubscription(_$$wg);
   let u = useMemo(() => n?.showBanner && !s && !d && c, [n?.showBanner, s, d, c]);
   return jsxs(Fragment, {
@@ -2742,7 +2742,7 @@ function nD() {
   }, [e, t, show]), isShowing) ? jsx(nz, {}) : null;
 }
 function nz() {
-  return getFeatureFlags().make_mobile_blocking_banner ? jsx(_$$fu, {
+  return getFeatureFlags().make_mobile_blocking_banner ? jsx(TrackingProvider, {
     name: 'Figmake Mobile Blocking Popup',
     children: jsx(_$$J, {
       mode: 'light',
@@ -3584,40 +3584,40 @@ function aR() {
   let n = useTeamPlanPublicInfo();
   let a = useIsStarterOrProPlan(n).unwrapOr(!0);
   return i && t && getFeatureFlags().cmty_make_publishing ? a ? renderI18nText('sites.toolbar.publish_modal.community_publish_disclaimer', {
-    creator_agreement: jsx(_$$CY, {
+    creator_agreement: jsx(SecureLink, {
       href: aT,
       target: '_blank',
       trusted: !0,
       children: renderI18nText('sites.toolbar.publish_modal.creator_agreement')
     })
   }) : renderI18nText('sites.toolbar.publish_modal.community_publish_disclaimer_with_web', {
-    creator_agreement: jsx(_$$CY, {
+    creator_agreement: jsx(SecureLink, {
       href: aT,
       target: '_blank',
       trusted: !0,
       children: renderI18nText('sites.toolbar.publish_modal.creator_agreement')
     }),
-    beta_terms: jsx(_$$CY, {
+    beta_terms: jsx(SecureLink, {
       href: aI,
       target: '_blank',
       trusted: !0,
       children: renderI18nText('sites.toolbar.publish_modal.beta_terms')
     })
   }) : e ? renderI18nText('sites.toolbar.publish_modal.acceptable_publication_policy_agreement', {
-    acceptable_publication_policy: jsx(_$$CY, {
+    acceptable_publication_policy: jsx(SecureLink, {
       href: aC,
       target: '_blank',
       trusted: !0,
       children: renderI18nText('sites.toolbar.publish_modal.acceptable_publication_policy')
     })
   }) : renderI18nText('sites.toolbar.publish_modal.terms_agreement', {
-    figmas_beta_terms: jsx(_$$CY, {
+    figmas_beta_terms: jsx(SecureLink, {
       href: aI,
       target: '_blank',
       trusted: !0,
       children: renderI18nText('sites.toolbar.publish_modal.beta_terms')
     }),
-    acceptable_publication_policy: jsx(_$$CY, {
+    acceptable_publication_policy: jsx(SecureLink, {
       href: aC,
       target: '_blank',
       trusted: !0,
@@ -3753,7 +3753,7 @@ function aX({
         })]
       }), jsx('div', {
         className: 'show_love_modal--rightColumn--VCAkU',
-        children: jsx(_$$fu, {
+        children: jsx(TrackingProvider, {
           name: _$$e4.FIGMA_MAKE_COMMUNITY_ATTRIBUTION,
           children: jsx(_$$Q3, {
             resource: t.data,
@@ -4034,7 +4034,7 @@ function st() {
   let s = _$$y6(t?.id || '', UpsellModalType.FIGMAKE_PUBLISH_SITE);
   return e || !a.data ? null : jsx('div', {
     children: renderI18nText('sites.toolbar.publish_modal.allow_others_to_remix_on_community.description', {
-      upgradePlanLink: jsx(Us, {
+      upgradePlanLink: jsx(linkWithTracking, {
         className: _$$s4.noWrap.cursorDefault.$,
         onClick: s,
         trackingProperties: {
@@ -4078,7 +4078,7 @@ let sr = registerModal(({
     let i = t.figFilePublishedAsHubFile[e];
     return i ? t.hubFiles[i] : void 0;
   });
-  return status === 'loading' || d.status === 'loading' ? null : c ? jsx(_$$fu, {
+  return status === 'loading' || d.status === 'loading' ? null : c ? jsx(TrackingProvider, {
     name: _$$e4.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: i?.id,
@@ -4733,7 +4733,7 @@ function sj({
     onClick: o.handlePublish,
     variant: 'secondary'
   });
-  return 'trackingContextKey' in o && o.trackingContextKey ? jsx(_$$fu, {
+  return 'trackingContextKey' in o && o.trackingContextKey ? jsx(TrackingProvider, {
     name: o.trackingContextKey,
     children: d
   }) : d;
@@ -8583,7 +8583,7 @@ function dI({
   let i = useCurrentFileKey();
   let n = e && e.hasCustomDomain;
   let [a] = setupResourceAtomHandler(_$$q7(i ?? ''));
-  return i ? jsxs(_$$fu, {
+  return i ? jsxs(TrackingProvider, {
     name: 'Sites Domain Settings',
     children: [jsx('h2', {
       ..._$$xk(dT.header),
@@ -8995,7 +8995,7 @@ function dz({
         }), g ? jsxs(Fragment, {
           children: [jsxs('div', {
             className: 'x1n2onr6 x78zum5 x6s0dn4',
-            children: [jsx(_$$ks, {
+            children: [jsx(BigTextInputForwardRef, {
               'id': 'password-input',
               'ref': w,
               'type': 'text',
@@ -9028,7 +9028,7 @@ function dz({
             'children': dD(j)
           })]
         }) : jsxs(Fragment, {
-          children: [jsx(_$$ks, {
+          children: [jsx(BigTextInputForwardRef, {
             type: 'password',
             placeholder: getI18nString('sites.settings.password_protection.set_password_placeholder'),
             disabled: !0,
@@ -9571,7 +9571,7 @@ function ci({
   });
 }
 let cn = e => {
-  e.keyCode !== Uz.ESCAPE && (e.keyCode !== Uz.ENTER || e.shiftKey) || (e.stopPropagation(), e.currentTarget.blur());
+  e.keyCode !== KeyCodes.ESCAPE && (e.keyCode !== KeyCodes.ENTER || e.shiftKey) || (e.stopPropagation(), e.currentTarget.blur());
 };
 function cl({
   recordingKey: e,
@@ -9640,7 +9640,7 @@ function cr({
   let c = !!(n.lang && !cs.test(n.lang));
   return jsx(dK, {
     label: getI18nString('sites.metadata.controls.language.label'),
-    control: jsx(_$$ks, {
+    control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
       'className': _$$s4.wFull.$,
       'style': _$$sx2.py8.px12.hAuto.$$if(c, _$$sx2.colorBorderWarningStrong).$,
@@ -9761,7 +9761,7 @@ function cc({
   let c = !!(n.googleAnalyticsID && !cd.test(n.googleAnalyticsID));
   return jsx(dK, {
     label: getI18nString('sites.metadata.controls.google_analytics_id.label'),
-    control: jsx(_$$ks, {
+    control: jsx(BigTextInputForwardRef, {
       'aria-invalid': c,
       'className': _$$s4.wFull.$,
       'style': _$$sx2.py8.px12.hAuto.$$if(c, _$$sx2.colorBorderWarningStrong).$,
@@ -11077,7 +11077,7 @@ function us({
     boundaryKey: 'figmake.full_width_empty_state',
     fallback: jsx(Fragment, {}),
     team: _$$e2.ACTIVATION,
-    children: jsx(_$$fu, {
+    children: jsx(TrackingProvider, {
       name: 'Make Full Width Empty State',
       children: jsx(ur, {
         requestClose: e,
@@ -11386,7 +11386,7 @@ function uy() {
   }({
     showMakeACopyStep: d
   }), [d]);
-  return isShowing ? jsx(_$$fu, {
+  return isShowing ? jsx(TrackingProvider, {
     name: ub,
     children: jsx(u_, {
       steps: m,
@@ -11511,7 +11511,7 @@ function uN({
     isViewOnly: n,
     showMakeACopyStep: m
   }), [n, m]);
-  return isShowing ? jsx(_$$fu, {
+  return isShowing ? jsx(TrackingProvider, {
     name: uE,
     children: jsx(u_, {
       steps: _,
@@ -11579,7 +11579,7 @@ function uO() {
     complete();
   }), useEffect(() => {
     s || show();
-  }, [show, s]), isShowing) ? jsx(_$$fu, {
+  }, [show, s]), isShowing) ? jsx(TrackingProvider, {
     name: uA,
     children: jsx(u_, {
       steps: uL,
@@ -11613,7 +11613,7 @@ function uF({
     });
   }, [d, t]), useEffect(() => {
     i && !s && componentPreviewState === _$$d3.LOADED && show();
-  }, [i, s, componentPreviewState, show]), isShowing) ? jsx(_$$fu, {
+  }, [i, s, componentPreviewState, show]), isShowing) ? jsx(TrackingProvider, {
     name: uA,
     children: jsx(u_, {
       steps: uP,
@@ -11656,7 +11656,7 @@ function uM() {
       window.removeEventListener('keydown', e);
       e();
     };
-  }, []), isShowing) ? jsx(_$$fu, {
+  }, []), isShowing) ? jsx(TrackingProvider, {
     name: uA,
     children: jsx(_$$rq, {
       description: renderI18nText('figmake.onboarding_v2.give_it_a_try.description'),
@@ -11734,7 +11734,7 @@ function uU() {
   let {
     trackingContextName
   } = u$;
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: uB,
     children: jsx(_$$J, {
       mode: 'light',
@@ -12112,7 +12112,7 @@ function uJ({
     let n = {};
     try {
       if (getFeatureFlags().make_download && t) {
-        let l = i?.key ? _$$jN({
+        let l = i?.key ? buildFileUrl({
           file: {
             key: i.key,
             name: i.name
@@ -14870,7 +14870,7 @@ function mj({
 }) {
   let n;
   n = useAtomWithSubscription(_$$s3) === PanelType.DAKOTA ? 'connect_mode' : 'properties_panel';
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'CMS View',
     properties: {
       source: n
@@ -15058,12 +15058,12 @@ function mz(e) {
   });
   let p = useHandleKeyboardEvent(e.recordingKey, 'keydown', t => {
     if (!e.readOnly && !n) {
-      if (t.keyCode === Uz.ESCAPE) {
+      if (t.keyCode === KeyCodes.ESCAPE) {
         e.stopRenaming?.(!1);
-      } else if (t.keyCode === Uz.ENTER) {
+      } else if (t.keyCode === KeyCodes.ENTER) {
         e.stopRenaming?.(!0, t.currentTarget.value, e.value);
       } else {
-        if (t.keyCode !== Uz.TAB) return SKIP_RECORDING;
+        if (t.keyCode !== KeyCodes.TAB) return SKIP_RECORDING;
         t.preventDefault();
         e.stopRenaming?.(!0, t.currentTarget.value, e.value);
       }
@@ -15118,7 +15118,7 @@ function mz(e) {
       tag: 'div',
       ref: r,
       children: e.isRenaming ? jsxs(Fragment, {
-        children: [!e.indented && f, jsx(_$$ks, {
+        children: [!e.indented && f, jsx(BigTextInputForwardRef, {
           className: 'x1x55y9o xl9wa41 x1iyjqo2 xh8yej3 xeuugli x4zv5z4 xvra0b2 xdpxx8g',
           ref: c,
           autoCapitalize: 'off',
@@ -15509,7 +15509,7 @@ let mW = registerModal(({
     b(hideModal());
   }, [collectionFields, i, _, b, n, p, y, submitFieldChanges]);
   let B = collectionFields.find(e => e.id === O);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Dakota Collection Field Editor',
     children: jsx(ModalRootComponent, {
       manager: d,
@@ -15595,7 +15595,7 @@ let mY = registerModal(e => {
   });
   let n = setupAutofocusHandler();
   let [r, o] = useState(e.placeholder);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'CMS New Collection Modal',
     children: jsx(ModalRootComponent, {
       manager: i,
@@ -16137,7 +16137,7 @@ let hd = registerModal(e => {
   let [n, r] = useState(null);
   let [o, d] = useState('');
   let [c, p] = useState({});
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'Dakota CSV Import',
     children: jsx(ModalRootComponent, {
       manager: i,
@@ -16950,11 +16950,11 @@ function hR() {
   let [t, i] = useState(!1);
   return jsxs('div', {
     ref: e,
-    children: [jsx(Ex, {
+    children: [jsx(Badge, {
       className: 'x1yf7rl7 x1htgra6',
       text: getI18nString('dakota.alpha_cta.alpha'),
-      color: zE.DEFAULT,
-      size: _$$vj.SMALL,
+      color: BadgeColor.DEFAULT,
+      size: BadgeSize.SMALL,
       onClick: () => i(e => !e)
     }), e.current && t && jsx(hN, {
       targetRect: e.current.getBoundingClientRect(),
@@ -17086,7 +17086,7 @@ function hF() {
       e = null;
       noop(t);
   }
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: 'CMS View',
     properties: {
       source: 'cms_tab'
@@ -18075,12 +18075,12 @@ let gN = ({
   };
   let f = useHandleKeyboardEvent(l, 'keydown', e => {
     if (!c) {
-      if (e.keyCode === Uz.ESCAPE) {
+      if (e.keyCode === KeyCodes.ESCAPE) {
         g(!1);
-      } else if (e.keyCode === Uz.ENTER) {
+      } else if (e.keyCode === KeyCodes.ENTER) {
         g(!0, p.current?.value, n);
       } else {
-        if (e.keyCode !== Uz.TAB) {
+        if (e.keyCode !== KeyCodes.TAB) {
           _$$jr2(e, _$$W7.NO);
           return SKIP_RECORDING;
         }
@@ -18163,7 +18163,7 @@ function gR({
     regenerateAfterImagesLoaded: !0
   });
   let L = useHandleMouseEvent(x, 'click', useCallback(e => {
-    e.shiftKey ? u(t) : Fo(e) ? d(t) : y(t);
+    e.shiftKey ? u(t) : isCommandEvent(e) ? d(t) : y(t);
   }, [y, u, d, t]));
   let P = useHandleMouseEvent(x, 'contextmenu', useCallback(e => {
     o?.(t, e);
@@ -19476,9 +19476,9 @@ function fy() {
       ctaTrackingDescriptor: _$$c8.DECLINE
     },
     title: jsxs('div', {
-      children: [renderI18nText('sites.onboarding.welcome.title'), _$$z0() === 'BETA' ? jsx(Ex, {
+      children: [renderI18nText('sites.onboarding.welcome.title'), _$$z0() === 'BETA' ? jsx(Badge, {
         className: 'xxymvpz xet2fuk',
-        color: zE.BRAND,
+        color: BadgeColor.BRAND,
         subtle: !0,
         text: renderI18nText('file_browser.creation_buttons.beta')
       }) : null]
@@ -22252,7 +22252,7 @@ function bL() {
   let [x, m] = useAtomValueAndSetter(P4);
   if (!t || !x || i || !s || r || p) return null;
   let h = PR(u);
-  return e || h ? (m(!1), null) : jsx(_$$fu, {
+  return e || h ? (m(!1), null) : jsx(TrackingProvider, {
     name: 'Sites Template Overlay Modal',
     properties: {
       productType: 'sites',
@@ -24022,7 +24022,7 @@ function jr(e) {
           }), jsx(DE, {
             appendedClassName: 'styles-module--inputRowWithIcon--8XfSh',
             label: null,
-            input: jsx(_$$L4, {
+            input: jsx(LazyInputForwardRef, {
               className: `${v4} styles-module--cmsText--5DDN2`,
               name: 'sites_accessible_label',
               value: p,
@@ -24056,7 +24056,7 @@ function jr(e) {
             dataTestId: 'accessibility-label-row'
           }), jsx('div', {
             className: 'styles-module--labelInputRow--kcjQR',
-            children: jsx(_$$L4, {
+            children: jsx(LazyInputForwardRef, {
               className: v4,
               name: 'sites_accessible_label',
               placeholder: isInvalidValue(i) ? getI18nString('common.mixed') : void 0,
@@ -24537,7 +24537,7 @@ function jT(e) {
       o === 'Mixed' && e.currentTarget.select();
     },
     onKeyDown: e => {
-      e.keyCode !== Uz.ESCAPE && (e.keyCode !== Uz.ENTER || e.shiftKey) || (e.stopPropagation(), e.currentTarget.blur());
+      e.keyCode !== KeyCodes.ESCAPE && (e.keyCode !== KeyCodes.ENTER || e.shiftKey) || (e.stopPropagation(), e.currentTarget.blur());
     },
     value: o,
     placeholder,
@@ -29289,7 +29289,7 @@ function Tx({
             codeBehaviorIcon: x
           })
         }),
-        input: jsx(D8, {
+        input: jsx(RecordableDiv, {
           recordingKey: generateRecordingKey(g, 'behaviorName'),
           className: kZ,
           children: function ({

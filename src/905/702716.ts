@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -306,7 +306,7 @@ function U({
         children: renderI18nText(e === ResourceType.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
           filename: "manifest.json"
         })
-      }), jsx(CY, {
+      }), jsx(SecureLink, {
         href: "/plugin-docs/manifest/",
         trusted: !0,
         children: renderI18nText("general.learn_more")
@@ -324,7 +324,7 @@ export function $$B2() {
         children: renderI18nText("community.publishing.please_add_this_to_your_manifest_period", {
           filename: "manifest.json"
         })
-      }), jsx(CY, {
+      }), jsx(SecureLink, {
         href: "/plugin-docs/migrating-to-dynamic-loading/",
         trusted: !0,
         children: renderI18nText("general.learn_more")

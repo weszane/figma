@@ -8,7 +8,7 @@ import { bx } from "../905/34809";
 import { sf } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { trackFolderEvent } from "../figma_app/314264";
-import { SS, d as _$$d } from "../figma_app/528509";
+import { validateFolderName, generateTempId } from "../figma_app/528509";
 import { FResourceCategoryType } from "../figma_app/191312";
 import { rq } from "../905/351260";
 import { AccessLevelEnum } from "../905/557142";
@@ -59,7 +59,7 @@ let $$x2 = createActionCreator("FOLDER_DELETE_LG_SHIM");
 let $$N13 = createActionCreator("FOLDER_DELETE");
 let $$C3 = createActionCreator("FOLDER_CLEAR");
 let $$w11 = createOptimistThunk((e, t) => {
-  let r = SS(t.name);
+  let r = validateFolderName(t.name);
   if (r) {
     e.dispatch(FlashActions.error(r));
     return null;
@@ -69,7 +69,7 @@ let $$w11 = createOptimistThunk((e, t) => {
     return null;
   }
   let n = {
-    id: _$$d(),
+    id: generateTempId(),
     name: t.name,
     description: null,
     path: t.name,

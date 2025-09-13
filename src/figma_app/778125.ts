@@ -2,11 +2,11 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useContext } from "react";
 import a from "classnames";
 import { M } from "../figma_app/648761";
-import { Uz } from "../905/63728";
-import { lt, GG } from "../905/511649";
+import { KeyCodes } from "../905/63728";
+import { RecordableAnchor, RecordableButton } from "../905/511649";
 import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { dD } from "../figma_app/941824";
 import { En } from "../figma_app/613182";
 import { U, Ah, pq, vR, No, ai } from "../figma_app/973219";
@@ -53,7 +53,7 @@ let $$f0 = forwardRef(function (e, t) {
     [No]: e.isBackgroundTransparent
   });
   let g = e.tooltipForScreenReadersOnly || !e.showTooltipWhenSelectedIsTrue && e.selected;
-  let f = e.href ? lt : GG;
+  let f = e.href ? RecordableAnchor : RecordableButton;
   return jsx(f, {
     "aria-disabled": e.disabled,
     "aria-expanded": e["aria-expanded"],
@@ -81,13 +81,13 @@ let $$f0 = forwardRef(function (e, t) {
     onDoubleClick: e.disabled ? void 0 : e.onDoubleClick,
     onKeyDown: e.disabled ? void 0 : t => {
       if (!useGrid || " " !== t.key || !t.shiftKey) switch (t.keyCode) {
-        case Uz.ENTER:
-        case Uz.SPACE:
+        case KeyCodes.ENTER:
+        case KeyCodes.SPACE:
           (e.onMouseDown || e.onClick || e.onKeyDown) && t.preventDefault();
           e.onMouseDown?.(t);
           e.onKeyDown ? e.onKeyDown(t) : e.onClick?.(t);
           break;
-        case Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           c();
       }
     },
@@ -112,9 +112,9 @@ let $$f0 = forwardRef(function (e, t) {
     })
   });
 });
-let $$E1 = tf($$f0);
+let $$E1 = withTrackedClick($$f0);
 let $$y2 = $$f0;
-let $$b3 = tf($$y2);
+let $$b3 = withTrackedClick($$y2);
 export const K0 = $$f0;
 export const Me = $$E1;
 export const YW = $$y2;

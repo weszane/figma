@@ -7,7 +7,7 @@ import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G } from "../figma_app/361869";
 import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
-import { Us, vd } from "../figma_app/637027";
+import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -15,7 +15,7 @@ import { sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { kp } from "../figma_app/831799";
+import { withTracking } from "../figma_app/831799";
 import { vK, vu, ic, Fq, jv } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
@@ -28,7 +28,7 @@ import { ol } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
 import { Bi } from "../905/652992";
 import { N as _$$N } from "../905/809096";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { bP } from "../905/739964";
 import { oE, Vf, _R, $P, W2, E8, Ms, QB, VA, y3, Q$, gt, G8, yl, jG, o as _$$o, Dz, hx, b as _$$b, yH, Mm, Jh } from "../c5e2cae0/859355";
 import { A as _$$A } from "../6828/871993";
@@ -56,13 +56,13 @@ function V(e) {
         })
       }, t)), e.plan === FPlanNameType.ORG && jsx("div", {
         className: W2,
-        children: jsx(Us, {
+        children: jsx(linkWithTracking, {
           href: "https://www.figma.com/pricing/#cid-57mfNh6t0Xo7z8Q95Ww9ZV",
           target: "_blank",
           trusted: !0,
           children: renderI18nText("org_upgrade.single_team.see_all_features")
         })
-      }), e.plan === FPlanNameType.ORG && jsx(vd, {
+      }), e.plan === FPlanNameType.ORG && jsx(ButtonBasePrimaryTracked, {
         onClick: e.onUpgrade,
         className: E8,
         trackingProperties: {
@@ -168,7 +168,7 @@ function U(e) {
     O(hideModal());
   };
   let L = new vr(_);
-  return jsx(ey, {
+  return jsx(ModalView, {
     className: yl,
     hide: B,
     size: 586,
@@ -247,7 +247,7 @@ function U(e) {
     })
   });
 }
-export let $$z0 = kp(function (e) {
+export let $$z0 = withTracking(function (e) {
   let t = sx();
   let a = ol();
   return jsx(tH, {

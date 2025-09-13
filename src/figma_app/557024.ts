@@ -16,7 +16,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { l as _$$l } from "../905/618243";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { isDefaultFileAlt, isTrashed } from "../905/760074";
 import { $n } from "../905/930279";
 import { selectOpenFileKey, selectOpenFile } from "../figma_app/516028";
@@ -177,7 +177,7 @@ function F() {
   });
   let $ = _$$s.p8.$;
   let X = _$$s.pr4.$;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.BRANCHES_MODAL,
     properties: {
       fileRepoId: k.fileRepoId,

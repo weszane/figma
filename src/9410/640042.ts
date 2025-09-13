@@ -7,7 +7,7 @@ import { Fe, uz } from "../905/284552";
 import { fullscreenValue } from "../figma_app/455680";
 import { getVisibleArea, getViewportInfo } from "../figma_app/62612";
 import { wA } from "../figma_app/167249";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 var r;
 let m = _$$m(g, (r = _$$y(6e4), (e, t) => !t.deferred.result && r(e, t)));
 export function $$f1(e) {
@@ -25,7 +25,7 @@ async function x(e) {
   let t = await fullscreenValue.openFilePromise();
   if ("figFile" !== t.type) throw Error("Unsupported file");
   try {
-    let i = await S.getVideosDownload({
+    let i = await fileApiHandler.getVideosDownload({
       fileKey: t.fileKey,
       hexHash: e
     });

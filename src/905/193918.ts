@@ -45,15 +45,15 @@ import { Tb } from '../figma_app/350203';
 import { U3 } from '../figma_app/412189';
 import { Vm } from '../figma_app/427318';
 import { Cg, qD } from '../figma_app/471982';
-import { CY, Lf, vv } from '../figma_app/637027';
+import { SecureLink, EnhancedInput, BigButtonPrimary } from '../figma_app/637027';
 import { VH } from '../figma_app/690075';
 import { AC, Ul } from '../figma_app/777551';
 import { parsePxNumber } from '../figma_app/783094';
 import { bV, up } from '../figma_app/808294';
 import { createEmptyAddress, DEFAULT_COUNTRY, JAPAN_COUNTRY } from '../figma_app/831101';
 import { LoadingSpinner, LargeLoadingSpinner, LoadingOverlay } from '../figma_app/858013';
-import { ey as _$$ey } from '../figma_app/918700';
-import { Ex, zE } from '../figma_app/919079';
+import { ModalView } from '../figma_app/918700';
+import { Badge, BadgeColor } from '../figma_app/919079';
 import { A as _$$A4 } from '../svg/228383';
 import { A as _$$A8 } from '../svg/675271';
 import { useDebouncedCallback } from 'use-debounce';
@@ -199,7 +199,7 @@ function Z({
         'checkout_promo_code_input--promoCodeInputWrapper__invalid--GFMsR': s === 'invalid',
         'checkout_promo_code_input--promoCodeInputWrapper__too_short--CDECY': s === 'too_short' || s === 'possibly_valid' || s === 'loading'
       }),
-      children: [jsx(Lf, {
+      children: [jsx(EnhancedInput, {
         className: 'checkout_promo_code_input--promoCodeInput--aypdF basic_form--labeledInputGroup--aeD6L',
         disabled: t,
         htmlName: 'promo_code',
@@ -237,7 +237,7 @@ function Z({
 function X(e) {
   return jsxs('div', {
     className: _$$s.flex.flexColumn.alignCenter.gap12.$,
-    children: [jsx(vv, {
+    children: [jsx(BigButtonPrimary, {
       onClick: e.submit,
       disabled: e.disabled || e.isLoading,
       fullWidth: !0,
@@ -246,7 +246,7 @@ function X(e) {
       }) : renderI18nText('community.buyer.complete_purchase')
     }), jsx('span', {
       children: renderI18nText('community.buyer.by_purchasing_you_agree_to_the_terms_of_service', {
-        termsOfServiceLink: jsx(CY, {
+        termsOfServiceLink: jsx(SecureLink, {
           href: 'https://www.figma.com/tos/',
           target: '_blank',
           trusted: !0,
@@ -430,7 +430,7 @@ function eh(e) {
       className: SU
     }), jsxs('div', {
       className: _$$s.flex.itemsCenter.gap8.$,
-      children: [jsx(CY, {
+      children: [jsx(SecureLink, {
         onClick: o,
         trusted: !0,
         className: classNames(TF, {
@@ -1047,9 +1047,9 @@ export let $$eN0 = registerModal(e => {
             }) : renderI18nText('community.buyer.purchase_resource_name', {
               resourceName: i
             });
-          }(e.resource, e.localResource), (e.localResource || D) && jsx(Ex, {
+          }(e.resource, e.localResource), (e.localResource || D) && jsx(Badge, {
             text: e.localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
-            color: zE.WARNING,
+            color: BadgeColor.WARNING,
             className: Ph
           })]
         }),
@@ -1094,7 +1094,7 @@ export let $$eN0 = registerModal(e => {
       })
     }), jsx(_$$z, {
       query: `(max-width: ${parsePxNumber(tgj) - 1}px)`,
-      children: jsxs(_$$ey, {
+      children: jsxs(ModalView, {
         hide: ez,
         className: Yf,
         useModalViewScroll: !1,

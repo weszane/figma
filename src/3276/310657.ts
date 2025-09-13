@@ -11,7 +11,7 @@ import { Hd } from "../figma_app/583114";
 import { wY } from "../figma_app/708845";
 import { isAnyMobile } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { m as _$$m } from "../905/99004";
@@ -311,7 +311,7 @@ export function $$O0(e) {
                       })
                     }), showCloseButton && jsx("div", {
                       className: L,
-                      children: jsx(GG, {
+                      children: jsx(RecordableButton, {
                         className: l()(U),
                         recordingKey: generateRecordingKey(e, "closeButton"),
                         onClick: () => {

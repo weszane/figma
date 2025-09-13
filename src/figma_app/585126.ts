@@ -1,120 +1,163 @@
-import { throwTypeError } from "../figma_app/465776";
-import { A } from "../905/920142";
-import { parseQuery } from "../905/634134";
-import { CC } from "../figma_app/609194";
-import { s as _$$s } from "../905/82276";
-import { U9, rk, Oo, GX, J0, cC, e5 } from "../figma_app/967319";
-let d = (e, t, r) => {
-  switch (e) {
-    case "seatType":
-    case "seatChanges":
-      return t;
-    case "accountType":
-      return U9[t];
-    case "lastEdit":
-      return rk[t];
-    case "billingGroup":
-      let n = decodeURIComponent(t);
-      let i = Object.keys(r).find(e => r[e]?.name === n);
-      if ("unassigned" === t || "Unassigned" === t) return _$$s;
-      if (i) return i;
-      return null;
-    case "newEditor":
-      return "true" === t;
-    default:
-      return null;
-  }
-};
-let c = (e, t, r) => {
-  switch (e) {
-    case "permissionFilter":
-    case "lastEditFilter":
-    case "newEditorFilter":
-    case "workspaceFilter":
-    case "idpGroupFilter":
-    case "seatTypeFilter":
-    case "seatChangesFilter":
-      return t;
-    case "licenseGroupFilter":
-      return encodeURIComponent(CC(t, r));
-    default:
-      return null;
-  }
-};
-export function $$u2(e, t) {
-  if (!e) return null;
-  let r = parseQuery(e);
-  return Object.keys(r).reduce((e, n) => {
-    if (!(n in Oo)) return e;
-    {
-      let i = GX[n];
-      let a = r[n];
-      let s = d(n, a, t);
-      return {
-        ...e,
-        ...(s && {
-          [i]: s
-        })
-      };
+import { parseQuery } from '../905/634134'
+import { A as dayjs } from '../905/920142'
+import { throwTypeError } from '../figma_app/465776'
+import { CC } from '../figma_app/609194'
+import { DefaultFilters, FilterKeys, FilterToGroupMap, GroupKeys, GroupToFilterMap, LastEditPeriod, UserRoleMap } from '../figma_app/967319'
+/**
+ * Maps group keys to their corresponding filter values.
+ * Original function: d
+ */
+function mapGroupKeyToFilterValue(groupKey: string, value: string, groupMap: Record<string, any>): any {
+  switch (groupKey) {
+    case 'seatType':
+    case 'seatChanges':
+      return value
+    case 'accountType':
+      return UserRoleMap[value]
+    case 'lastEdit':
+      return LastEditPeriod[value]
+    case 'billingGroup': {
+      const decodedValue = decodeURIComponent(value)
+      const matchedKey = Object.keys(groupMap).find(
+        key => groupMap[key]?.name === decodedValue,
+      )
+      if (value === 'unassigned' || value === 'Unassigned')
+        return 'Unassigned'
+      if (matchedKey)
+        return matchedKey
+      return null
     }
-  }, J0);
+    case 'newEditor':
+      return value === 'true'
+    default:
+      return null
+  }
 }
-export function $$p0(e, t) {
-  return Object.keys(e).reduce((r, n) => {
-    let i = cC[n];
-    let a = e[n];
+
+/**
+ * Maps filter keys to their corresponding group values.
+ * Original function: c
+ */
+function mapFilterKeyToGroupValue(filterKey: string, value: string, groupMap: Record<string, any>): any {
+  switch (filterKey) {
+    case 'permissionFilter':
+    case 'lastEditFilter':
+    case 'newEditorFilter':
+    case 'workspaceFilter':
+    case 'idpGroupFilter':
+    case 'seatTypeFilter':
+    case 'seatChangesFilter':
+      return value
+    case 'licenseGroupFilter':
+      return encodeURIComponent(CC(value, groupMap))
+    default:
+      return null
+  }
+}
+
+/**
+ * Converts a query string to filter object.
+ * Original function: $$u2
+ * @param queryString
+ * @param groupMap
+ */
+export function setupFiltersFromQuery(
+  queryString: string,
+  groupMap: Record<string, any>,
+): typeof DefaultFilters | null {
+  if (!queryString)
+    return null
+  const query = parseQuery(queryString)
+  return Object.keys(query).reduce((filters, groupKey) => {
+    if (!(groupKey in GroupKeys))
+      return filters
+    const filterKey = GroupToFilterMap[groupKey]
+    const value = query[groupKey]
+    const mappedValue = mapGroupKeyToFilterValue(groupKey, value, groupMap)
     return {
-      ...r,
-      ...(a && {
-        [i]: c(n, a, t)
-      })
-    };
-  }, {});
-}
-export function $$_1(e) {
-  let t = {
-    filters: {}
-  };
-  e[e5.newEditorFilter] && (t.filters.new_editor = !0);
-  Object.entries(e).forEach(([e, r]) => {
-    if (null !== r && e !== e5.newEditorFilter) switch (e) {
-      case e5.licenseGroupFilter:
-        t.filters.license_group = r;
-        break;
-      case e5.workspaceFilter:
-        t.filters.workspace = r;
-        break;
-      case e5.idpGroupFilter:
-        t.filters.idp_group = r;
-        break;
-      case e5.permissionFilter:
-        t.filters.permission = r;
-        break;
-      case e5.seatTypeFilter:
-        t.filters.seat_type = r;
-        break;
-      case e5.seatChangesFilter:
-        t.filters.upgrade_reason = r;
-        break;
-      case e5.lastEditFilter:
-        t.filters.last_edit = function (e) {
-          switch (e) {
-            case rk["3mo"]:
-              return A().subtract(3, "month");
-            case rk["6mo"]:
-              return A().subtract(6, "month");
-            case rk["1yr"]:
-              return A().subtract(1, "year");
-            default:
-              throwTypeError(e);
-          }
-        }(r).utc().format();
+      ...filters,
+      ...(mappedValue && { [filterKey]: mappedValue }),
     }
-  });
-  return {
-    filters: JSON.stringify(t.filters)
-  };
+  }, DefaultFilters)
 }
-export const OA = $$p0;
-export const nG = $$_1;
-export const rT = $$u2;
+
+/**
+ * Converts filter object to group object.
+ * Original function: $$p0
+ * @param filters
+ * @param groupMap
+ */
+export function setupGroupsFromFilters(
+  filters: Record<string, any>,
+  groupMap: Record<string, any>,
+): Record<string, any> {
+  return Object.keys(filters).reduce((groups, filterKey) => {
+    const groupKey = FilterToGroupMap[filterKey]
+    const value = filters[filterKey]
+    return {
+      ...groups,
+      ...(value && { [groupKey]: mapFilterKeyToGroupValue(filterKey, value, groupMap) }),
+    }
+  }, {})
+}
+
+/**
+ * Serializes filters for API usage.
+ * Original function: $$_1
+ * @param filters
+ */
+export function serializeFiltersForApi(
+  filters: Record<string, any>,
+): { filters: string } {
+  const result: { filters: Record<string, any> } = { filters: {} }
+  // Handle newEditorFilter
+  if (filters[FilterKeys.newEditorFilter]) {
+    result.filters.new_editor = true
+  }
+  Object.entries(filters).forEach(([filterKey, value]) => {
+    if (value !== null && filterKey !== FilterKeys.newEditorFilter) {
+      switch (filterKey) {
+        case FilterKeys.licenseGroupFilter:
+          result.filters.license_group = value
+          break
+        case FilterKeys.workspaceFilter:
+          result.filters.workspace = value
+          break
+        case FilterKeys.idpGroupFilter:
+          result.filters.idp_group = value
+          break
+        case FilterKeys.permissionFilter:
+          result.filters.permission = value
+          break
+        case FilterKeys.seatTypeFilter:
+          result.filters.seat_type = value
+          break
+        case FilterKeys.seatChangesFilter:
+          result.filters.upgrade_reason = value
+          break
+        case FilterKeys.lastEditFilter:
+          result.filters.last_edit = (() => {
+            switch (value) {
+              case LastEditPeriod['3mo']:
+                return dayjs.subtract(3, 'month')
+              case LastEditPeriod['6mo']:
+                return dayjs.subtract(6, 'month')
+              case LastEditPeriod['1yr']:
+                return dayjs.subtract(1, 'year')
+              default:
+                throwTypeError(value)
+            }
+          })().utc().format()
+          break
+      }
+    }
+  })
+  return {
+    filters: JSON.stringify(result.filters),
+  }
+}
+
+// Exported names refactored for clarity and traceability
+export const OA = setupGroupsFromFilters // $$p0
+export const nG = serializeFiltersForApi // $$_1
+export const rT = setupFiltersFromQuery // $$u2

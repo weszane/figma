@@ -14,7 +14,7 @@ import { gN } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { hideModal } from "../905/156213";
 import { fileImporter } from "../905/642505";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { W } from "../905/39853";
 import { cu, zX, pl, MS } from "../905/615657";
 import { Ij } from "../905/902099";
@@ -65,7 +65,7 @@ let $$C6 = createOptimistThunk(async e => {
   if (N && !aW(N, {
     type: sK.ADD_FILE,
     editorType: R,
-    isDestinationTeamDrafts: jd(k)
+    isDestinationTeamDrafts: isTeamFolderV2(k)
   })) {
     let t = (() => {
       let e = N.name;

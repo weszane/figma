@@ -10,7 +10,7 @@ import { M as _$$M } from "../905/269719";
 import { useDispatch } from "react-redux";
 import { sf } from "../905/929976";
 import { Tf } from "../figma_app/543100";
-import { o as _$$o } from "../905/895626";
+import { InterProfileType } from "../905/895626";
 import { az } from "../figma_app/805373";
 import { E as _$$E2 } from "../905/391888";
 import { p as _$$p } from "../905/767868";
@@ -42,7 +42,7 @@ function _(e) {
         t(sf({
           view: "user",
           userId: i.id,
-          userViewTab: _$$o.INTERNAL_PROFILE,
+          userViewTab: InterProfileType.INTERNAL_PROFILE,
           orgId: r
         }));
       }

@@ -6,7 +6,7 @@ import { U as _$$U } from '../905/18613';
 import { HZ } from '../905/34809';
 import { tl as _$$tl } from '../905/70982';
 import { an, y$ } from '../905/81009';
-import { b as _$$b, d as _$$d } from '../905/91820';
+import { combineWithHyphen, ShareContext } from '../905/91820';
 import { selectWithShallowEqual } from '../905/103090';
 import { h as _$$h, O as _$$O } from '../905/142086';
 import { showModalHandler } from '../905/156213';
@@ -23,7 +23,7 @@ import { I as _$$I } from '../905/531560';
 import { l as _$$l3 } from '../905/572910';
 import { FlashActions } from '../905/573154';
 import { customHistory } from '../905/612521';
-import { jN, Kw, rl } from '../905/612685';
+import { buildFileUrl, buildFileUrlInternal, getDesignFileUrl } from '../905/612685';
 import { j as _$$j, l as _$$l2 } from '../905/618243';
 import { g_ } from '../905/646788';
 import { e0 as _$$e2 } from '../905/696396';
@@ -54,7 +54,7 @@ import { _H, ae, CS, gX, nL, zj } from '../figma_app/448654';
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from '../figma_app/465071';
 import { throwError, throwTypeError } from '../figma_app/465776';
 import { jn } from '../figma_app/522082';
-import { Gi } from '../figma_app/528509';
+import { isRootPath } from '../figma_app/528509';
 import { nb, Tf, Y6 } from '../figma_app/543100';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Fj } from '../figma_app/594947';
@@ -145,7 +145,7 @@ export function $$ek0(e) {
     selectedView: e.selectedView,
     tileSelect: e.tileSelect,
     pinnedFileKeys: e.pinnedFileKeys,
-    isDrafts: e.selectedView.view === 'folder' && Gi(e.folders[e.selectedView.folderId]),
+    isDrafts: e.selectedView.view === 'folder' && isRootPath(e.folders[e.selectedView.folderId]),
     folders: e.folders,
     selectedBranchKeyByRepoId: e.selectedBranchKeyByRepoId,
     fileKeysByRepoId: e.fileKeysByRepoId,
@@ -204,11 +204,11 @@ export function $$ek0(e) {
       index: e.searchIndexToLog
     })), t.type) {
       case nb.FILE:
-        let n = rl(t.file);
+        let n = getDesignFileUrl(t.file);
         nz(n, t.file.key, selectedView, i);
         break;
       case nb.PINNED_FILE:
-        nz(jN(t), t.file.key, selectedView, i);
+        nz(buildFileUrl(t), t.file.key, selectedView, i);
         break;
       case nb.PROTOTYPE:
         D4(t.prototype.url, t.prototype.file_key, t.prototype.page_id, selectedView);
@@ -288,34 +288,34 @@ export function $$ek0(e) {
         let t = e.file;
         i(_$$S2({
           fileKey: t.key,
-          url: jN({
+          url: buildFileUrl({
             file: t,
-            attributionContext: _$$b(attributionContextKey, _$$d.FILE_TILE_CONTEXT_MENU),
+            attributionContext: combineWithHyphen(attributionContextKey, ShareContext.FILE_TILE_CONTEXT_MENU),
             allowDefaulting: !0
           }),
-          source: _$$d.FILE_TILE_CONTEXT_MENU
+          source: ShareContext.FILE_TILE_CONTEXT_MENU
         }));
         break;
       case nb.PINNED_FILE:
         i(_$$S2({
           fileKey: e.file.key,
-          url: jN({
+          url: buildFileUrl({
             file: e.file,
-            attributionContext: _$$b(attributionContextKey, _$$d.FILE_TILE_CONTEXT_MENU),
+            attributionContext: combineWithHyphen(attributionContextKey, ShareContext.FILE_TILE_CONTEXT_MENU),
             allowDefaulting: !0
           }),
-          source: _$$d.FILE_TILE_CONTEXT_MENU
+          source: ShareContext.FILE_TILE_CONTEXT_MENU
         }));
         break;
       case nb.PROTOTYPE:
         i(_$$S({
-          url: Kw({
+          url: buildFileUrlInternal({
             base: 'proto',
             file: {
               key: e.prototype.file_key
             },
             nodeId: e.prototype.page_id,
-            attributionContext: _$$b(attributionContextKey, _$$d.FILE_TILE_CONTEXT_MENU)
+            attributionContext: combineWithHyphen(attributionContextKey, ShareContext.FILE_TILE_CONTEXT_MENU)
           })
         }));
         break;
@@ -324,7 +324,7 @@ export function $$ek0(e) {
         i(_$$S2({
           fileKey: n.key,
           url: generateUrl(n, e.repo, 'file'),
-          source: _$$d.FILE_TILE_CONTEXT_MENU
+          source: ShareContext.FILE_TILE_CONTEXT_MENU
         }));
     }
   };
@@ -958,7 +958,7 @@ export function $$ek0(e) {
         let s = Tf.getTeamId(e);
         let o = Tf.getEditorType(e);
         let l = Tf.getOrgId(e);
-        let d = isDrafts || a !== null && Gi(folders[a]);
+        let d = isDrafts || a !== null && isRootPath(folders[a]);
         return we({
           dispatch: i,
           file: {

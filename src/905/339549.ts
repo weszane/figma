@@ -3,7 +3,7 @@ import { forwardRef, useRef, useImperativeHandle, useEffect, useId } from "react
 import { w } from "../905/442596";
 import { l as _$$l } from "../905/479687";
 import o from "classnames";
-import { u2 } from "../905/511649";
+import { RecordableInput } from "../905/511649";
 import { TextWithTruncation } from "../905/838445";
 import { A } from "../6828/954206";
 import { A as _$$A } from "../6828/482039";
@@ -34,7 +34,7 @@ export let $$m0 = forwardRef((e, t) => {
       className: "checkbox--checkAndLabelContainer--v09nP",
       children: [jsxs("div", {
         className: "checkbox--checkWrapper--nHmJ0",
-        children: [jsx(u2, {
+        children: [jsx(RecordableInput, {
           "aria-describedby": description ? I : void 0,
           checked,
           className: l()("checkbox--input--dQMU-", {

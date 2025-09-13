@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { mc, YJ, q7 } from "../figma_app/860955";
 import { Ay } from "@stylexjs/stylex";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { w } from "../figma_app/883622";
 export function $$l0(e) {
   return e.flatMap(e => [...e.items.map(e => ({
@@ -19,7 +19,7 @@ export function $$d1({
   onTrackedItemClick: o
 }) {
   return jsx(mc, {
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: r,
       children: e.map(e => jsx(YJ, {
         children: e.items.map(e => jsx(q7, {

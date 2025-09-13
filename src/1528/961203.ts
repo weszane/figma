@@ -16,7 +16,7 @@ import g from "classnames";
 import { _ as _$$_2 } from "../vendor/853977";
 import { selectWithShallowEqual } from "../905/103090";
 import { useHandleChangeEvent, useHandleKeyboardEvent, generateRecordingKey } from "../figma_app/878298";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -39,7 +39,7 @@ import { go } from "../figma_app/524655";
 import { J as _$$J } from "../905/614223";
 import { g as _$$g } from "../905/687265";
 import { permissionScopeHandler } from "../905/189185";
-import { Fo } from "../905/63728";
+import { isCommandEvent } from "../905/63728";
 import { b as _$$b } from "../1528/127188";
 import { f7 } from "../figma_app/896988";
 import { renameNode, replaceSelection } from "../figma_app/741237";
@@ -221,7 +221,7 @@ function et({
         break;
       case "=":
       case "-":
-        Fo(e) && f7(e);
+        isCommandEvent(e) && f7(e);
     }
   });
   let R = useSelector(e => e.mirror.selectionProperties.name);
@@ -464,7 +464,7 @@ let $$el0 = forwardRef(function ({
       value: guid,
       children: [J && isCollapsed && children.length > 0 && jsx("div", {
         className: "x1n11dy9 xaatb59 x1qgsegg x1sxf85j x100vrsf xdk7pt x10l6tqk xqzfmfr x1iog12x x1ja2u2z x5jz2lk xbogpc4"
-      }), jsx(GG, {
+      }), jsx(RecordableButton, {
         "aria-label": eV,
         "aria-pressed": u,
         "aria-selected": u,
@@ -567,7 +567,7 @@ let $$el0 = forwardRef(function ({
             carouselSlide: t
           })]
         })
-      }), !eK || Y || Q ? null : jsx(GG, {
+      }), !eK || Y || Q ? null : jsx(RecordableButton, {
         onClick: e => {
           e.preventDefault();
           e.stopPropagation();

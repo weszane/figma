@@ -4,7 +4,7 @@ import { z as _$$z } from "../905/4823";
 import { S as _$$S } from "../905/962956";
 import { ExperimentAssignmentsSchema } from "../905/13165";
 import { N4 } from "../905/158283";
-import { C$ } from "../figma_app/482728";
+import { TeamSettingsSchema } from "../figma_app/482728";
 let c = fc(FCostCenterType);
 let u = fc(FPlanFeatureType);
 let p = fc(FDomainVerificationStatusType);
@@ -77,7 +77,7 @@ ExperimentAssignmentsSchema.extend({
   design_default_paid_status: u.optional(),
   whiteboard_default_paid_status: u.optional(),
   k12_google_org: z.boolean(),
-  shared_container_setting: C$.nullable(),
+  shared_container_setting: TeamSettingsSchema.nullable(),
   vat_gst_id: z.string().optional().nullable(),
   tax_id_verification_status: p.optional(),
   are_custom_templates_allowed: z.boolean(),

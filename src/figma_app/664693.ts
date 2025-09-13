@@ -13,7 +13,7 @@ import { SceneGraphHelpers, Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { Y1 } from "../905/143116";
 import { h as _$$h } from "../905/207101";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { tH, H4 } from "../905/751457";
 import { x as _$$x } from "../905/868466";
@@ -221,8 +221,8 @@ function G(e) {
           justify: "end",
           children: jsx(_$$r, {
             shortcuts: [{
-              key: Uz.ENTER,
-              modifier: [xH.META]
+              key: KeyCodes.ENTER,
+              modifier: [ModifierKeyCodes.META]
             }],
             onAction: e.onBack,
             recordingKey: generateRecordingKey(e.recordingKey, "generate"),

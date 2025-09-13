@@ -11,7 +11,7 @@ import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { G as _$$G } from "../figma_app/318030";
 import m from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { k as _$$k2 } from "../905/582200";
 import { V as _$$V } from "../905/506207";
 import { getI18nState } from "../figma_app/363242";
@@ -54,7 +54,7 @@ import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getSingletonSceneGraph } from "../905/700578";
 import { AutoLayout } from "../figma_app/947482";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { XE, Uv } from "../figma_app/91703";
 import { u as _$$u } from "../9410/354452";
 import { O8 } from "../figma_app/393980";
@@ -194,7 +194,7 @@ function ef({
         onClick: w,
         disabled: !T || !styleRef,
         children: renderI18nText("design_systems.create_style.create_style")
-      }) : jsx($$, {
+      }) : jsx(ButtonBasePrimary, {
         style: {
           justifySelf: "right"
         },
@@ -713,7 +713,7 @@ export function $$e20({
   let f = _$$b("guid");
   let _ = isValidSessionLocalID(normalizeValue(f));
   let b = useCallback(e => {
-    _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID)) : e.event.keyCode === Uz.F && Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID));
+    _ && (e.event.keyCode === KeyCodes.ESCAPE ? (e.accept(), Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID)) : e.event.keyCode === KeyCodes.F && Fullscreen?.selectStyle(n3.INVALID, VariableStyleId.INVALID));
   }, [_]);
   let C = useSelector(e => e.loadingState);
   let j = VP(C, "edit_button_upgrading_to_edit");

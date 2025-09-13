@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { M7 } from "../figma_app/637027";
+import { ButtonWhiteTracked } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 export let $$s1 = "seen_synchronous_collaboration_onboarding";
 function o(e) {
@@ -15,7 +15,7 @@ function o(e) {
       children: t
     }), jsx("div", {
       className: "multiplayer_onboarding--footerContainerNudge--nBkOA",
-      children: jsx(M7, {
+      children: jsx(ButtonWhiteTracked, {
         className: "multiplayer_onboarding--footerButtonNudge--4CJm-",
         onClick: e.dismissModal,
         children: renderI18nText("collaboration.spotlight.nudge_spotlight.got_it")

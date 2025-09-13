@@ -16,7 +16,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { createLocalStorageAtom, useAtomValueAndSetter, atomStoreManager } from "../figma_app/27355";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { uint8ArrayToBase64, base64ToUint8Array } from "../figma_app/930338";
 import { oW } from "../905/675859";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -247,7 +247,7 @@ function eh(e, t, {
     ...(r ? {
       interaction_type: Cq.KEYBOARD_SHORTCUT,
       keyboard_shortcut: F1({
-        key: Uz.ENTER
+        key: KeyCodes.ENTER
       })
     } : {
       interaction_type: Cq.BUTTON_CLICK

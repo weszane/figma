@@ -1,9 +1,9 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { customHistory } from "../905/612521";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
-import { jN } from "../905/612685";
-import { O } from "../905/833838";
+import { buildFileUrl } from "../905/612685";
+import { OrganizationType } from "../905/833838";
 import { trackEventAnalytics } from "../905/449184";
 import { fakePath, getInitialOptions } from "../figma_app/169182";
 export function $$u10(e, t) {
@@ -63,7 +63,7 @@ export function $$f7(e, {
   user: a
 }) {
   let s = e.base ?? "file";
-  let c = $$A13(jN({
+  let c = $$A13(buildFileUrl({
     ...e,
     base: s
   }), a);
@@ -72,7 +72,7 @@ export function $$f7(e, {
     trackEventAnalytics("file_browser_fresh_external_file_load", {
       fileKey: e,
       entryPlanId: t || i,
-      planType: t ? O.ORG : O.TEAM,
+      planType: t ? OrganizationType.ORG : OrganizationType.TEAM,
       urlType: n
     });
   })(e.file.key, t, i, s);
@@ -91,7 +91,7 @@ export function $$A13(e, t) {
 export function $$y15(e, t, i, n) {
   let r = "";
   let a = t || i;
-  a && (r = $$p6(e, "prev-plan-id", a), r = $$p6(r, "prev-plan-type", t ? O.ORG : O.TEAM));
+  a && (r = $$p6(e, "prev-plan-id", a), r = $$p6(r, "prev-plan-type", t ? OrganizationType.ORG : OrganizationType.TEAM));
   n && (r = $$p6(r, "prev-selected-view", n.view), r = "folder" === n.view ? $$p6(r, "prev-folder-id", n.folderId) : r, r = "recentsAndSharing" === n.view && n.tab ? $$p6(r, "prev-tab", n.tab) : r);
   return r;
 }
@@ -148,7 +148,7 @@ export function $$k16(e) {
   let t = getInitialOptions().user_data;
   let i = t && t.id;
   let n = function (e) {
-    if (!i || e instanceof KeyboardEvent && e.keyCode !== Uz.ENTER) return;
+    if (!i || e instanceof KeyboardEvent && e.keyCode !== KeyCodes.ENTER) return;
     let t = e.target;
     if (!(t instanceof Element)) return;
     let n = t.closest("a");

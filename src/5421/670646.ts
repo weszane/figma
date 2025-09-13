@@ -8,7 +8,7 @@ import { generateRecordingKey, RecordingPureComponent } from "../figma_app/87829
 import { k as _$$k } from "../905/582200";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { fu, kp } from "../figma_app/831799";
+import { TrackingProvider, withTracking } from "../figma_app/831799";
 import { xv } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
@@ -1022,7 +1022,7 @@ function e9({
   let l = 0 !== r && !t;
   let s = !n;
   let d = useMemo(() => a ? _$$c.CREATING_A_CONNECTION : l ? _$$c.REMOVING_A_CONNECTION : s ? _$$c.RUNNING_YOUR_PROTOTYPE : null, [a, l, s]);
-  return d ? jsx(fu, {
+  return d ? jsx(TrackingProvider, {
     name: "Prototype Onboarding Hint Panel V1",
     properties: {
       trackingDescriptor: d
@@ -1034,7 +1034,7 @@ function e9({
     })
   }) : null;
 }
-export let $$e70 = kp(function (e) {
+export let $$e70 = withTracking(function (e) {
   let {
     dropdownShown,
     pickerShown,

@@ -2,9 +2,9 @@ import { jsx } from "react/jsx-runtime";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 export let $$l0 = registerModal(function () {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("community.publishing.verifying_seller_status"),
     confirmText: getI18nString("community.publishing.got_it"),
     hideOnConfirm: !0,

@@ -22,7 +22,7 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { c as _$$c2 } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { Eh } from "../figma_app/617654";
 import { registerModal } from "../905/102752";
@@ -636,7 +636,7 @@ function V(e) {
       display: "contents"
     },
     "data-testid": `org-schedule-cancellation-modal-${t}`,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: e0.ORG_SCHEDULE_CANCELLATION_MODAL,
       properties: {
         orgId: e.orgId,
@@ -698,7 +698,7 @@ function W(e) {
       s(!1);
     });
   }, [a, e.orgId, onClose]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.ORG_UNSCHEDULE_CANCELLATION_MODAL,
     properties: {
       orgId: e.orgId

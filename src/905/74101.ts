@@ -4,7 +4,7 @@ import { a as _$$a } from "../905/339331";
 import { r as _$$r } from "../905/571562";
 import o from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { isInvalidValue, normalizeValue } from "../905/216495";
 import { Uq } from "../905/633462";
 import { yesNoTrackingEnum } from "../figma_app/198712";
@@ -183,7 +183,7 @@ function v(e) {
       children: icon
     }), !disabled && jsxs("div", {
       className: "stepper_input--endNodeOverlay---iG4y",
-      children: [jsx(GG, {
+      children: [jsx(RecordableButton, {
         className: l()(y, {
           [b]: N >= O
         }),
@@ -197,7 +197,7 @@ function v(e) {
             flexShrink: 0
           }
         })
-      }), jsx(GG, {
+      }), jsx(RecordableButton, {
         className: l()(y, {
           [b]: N <= P
         }),

@@ -13,7 +13,7 @@ import { y as _$$y } from "../905/444931";
 import { M5 } from "../figma_app/350203";
 import { nm } from "../905/352022";
 import { F as _$$F } from "../905/504462";
-import { to } from "../905/612685";
+import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { Y9 } from "../figma_app/502247";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
@@ -86,7 +86,7 @@ let $$T1 = (e, l = {
         id: i.id,
         type: vt.CommunityResource
       }));
-      let g = to(d);
+      let g = getDesignFileUrlWithOptions(d);
       g = dR(g, {
         "is-community-duplicate": "1",
         fuid: e?.userId || l.userId || ""

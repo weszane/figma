@@ -14,7 +14,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Av } from "../figma_app/622881";
 import { jK, it } from "../figma_app/829197";
 import { M } from "../905/366117";
@@ -98,7 +98,7 @@ let R = registerModal(function (e) {
     }), R(!1));
   }), [R, N]);
   let L = useModalManager(e);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "color_management_user_color_profile_modal",
     children: jsx(ModalRootComponent, {
       manager: L,

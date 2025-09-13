@@ -5,7 +5,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { r5 } from "../figma_app/947784";
 import { So } from "../figma_app/209680";
 import { y } from "../905/158417";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { sA, cy, Zz, tF } from "../905/105487";
 import { u1 } from "../905/847552";
 var a = i;
@@ -15,7 +15,7 @@ function m({
   openInNewTab: t
 }) {
   let r = y(e.profile_handle);
-  return jsx(o3, {
+  return jsx(TrackedLink, {
     className: "resource_header_creators--authorNameOverflow--b2EnA",
     to: r.to,
     target: t ? "_blank" : "_self",

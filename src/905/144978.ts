@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ScreenReaderOnly } from "../905/172252";
 import { EventShield } from "../905/821217";
 import l from "classnames";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
@@ -75,7 +75,7 @@ let $$b0 = forwardRef(function ({
     children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
-      children: jsx(ks, {
+      children: jsx(BigTextInputForwardRef, {
         ref: l,
         "aria-describedby": S,
         "aria-errormessage": v ? w : void 0,

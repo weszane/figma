@@ -5,13 +5,13 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { xf } from "../figma_app/416935";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { d as _$$d } from "../905/44199";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
@@ -39,7 +39,7 @@ let $$w0 = registerModal(function (e) {
   let k = useDispatch();
   let E = () => v.tokens.filter(e => e.state === _$$d.OK).map(e => e.content).join(",");
   let C = () => v.tokens.filter(e => e.state === _$$d.ERROR).length > 0;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.CHANGE_BILLING_CONTACT_MODAL,
     children: jsx(ModalRootComponent, {
       manager: t,
@@ -60,7 +60,7 @@ let $$w0 = registerModal(function (e) {
             TokenComponent: j,
             autoFocus: !1,
             placeholder: getI18nString("payments.change_billing_contact_placeholder")
-          }) : jsx(ks, {
+          }) : jsx(BigTextInputForwardRef, {
             value: a,
             onChange: e => d(e.target.value)
           })]

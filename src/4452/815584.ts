@@ -5,8 +5,8 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { Uz } from "../905/63728";
-import { ks } from "../figma_app/637027";
+import { KeyCodes } from "../905/63728";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { popModalStack } from "../905/156213";
@@ -52,7 +52,7 @@ function h(e) {
         })
       }), jsxs(nB, {
         scrolling: "none",
-        children: [subtitle, jsx(ks, {
+        children: [subtitle, jsx(BigTextInputForwardRef, {
           autoFocus: !0,
           className: "resource_rename_modal--input--lUTNz",
           maxLength,
@@ -60,7 +60,7 @@ function h(e) {
           onChange: e => I(e.currentTarget.value),
           value: j,
           onKeyDown: e => {
-            e.keyCode === Uz.ENTER && (e.preventDefault(), w());
+            e.keyCode === KeyCodes.ENTER && (e.preventDefault(), w());
           }
         }), maxLength && jsx("div", {
           className: "resource_rename_modal--lengthCount--n2dbN",

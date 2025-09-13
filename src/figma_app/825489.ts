@@ -7,7 +7,7 @@ import { yZ } from "../figma_app/476572";
 import { DU } from "../figma_app/275462";
 import { JB } from "../figma_app/657017";
 import { getProviderConfigType } from "../figma_app/155411";
-import { T9 } from "../figma_app/528509";
+import { hasRootPath } from "../figma_app/528509";
 import { J } from "../905/9585";
 import { i as _$$i } from "../905/667910";
 import { o as _$$o } from "../905/738144";
@@ -26,7 +26,7 @@ let $$x0 = atom(e => {
   if (!t) return Xm();
   let r = t.parentOrgId;
   let n = !!t.teamId;
-  let i = T9(t?.project);
+  let i = hasRootPath(t?.project);
   let a = e(SubscribedLibrariesForFile.Query({
     fileKey: t.key ?? "",
     teamId: t.teamId ?? "-1",

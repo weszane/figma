@@ -7,7 +7,7 @@ import { l as _$$l } from "../905/716947";
 import { useLatestRef } from "../figma_app/922077";
 import { uo, yH } from "../905/879323";
 import { n1 } from "../figma_app/657017";
-import { SS, Qp } from "../figma_app/349248";
+import { mapStateGroupProperties, mapComponentProperties } from "../figma_app/349248";
 import { NO_TEAM, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { qq } from "../905/72677";
 let g = atom(e => {
@@ -37,14 +37,14 @@ export function $$f0() {
         let s = _$$l(r.libraryKey);
         let o = components?.[NO_TEAM]?.[s];
         let d = stateGroups?.[NO_TEAM]?.[s];
-        let u = r.stateGroups.map(e => SS(e, {
+        let u = r.stateGroups.map(e => mapStateGroupProperties(e, {
           type: "hubFile",
           file: {
             id: r.hubFileId,
             libraryKey: r.libraryKey
           }
         }));
-        let h = r.components.map(e => Qp(e, {
+        let h = r.components.map(e => mapComponentProperties(e, {
           type: "hubFile",
           file: {
             id: r.hubFileId,

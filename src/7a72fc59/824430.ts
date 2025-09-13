@@ -25,7 +25,7 @@ import { ModalRootComponent } from '../905/38914';
 import { k as _$$k3 } from '../905/44647';
 import { lJ as _$$lJ, GQ } from '../905/50159';
 import { W as _$$W4 } from '../905/63398';
-import { Uz } from '../905/63728';
+import { KeyCodes } from '../905/63728';
 import { s as _$$s9 } from '../905/66404';
 import { d as _$$d6 } from '../905/68441';
 import { q as _$$q6 } from '../905/74101';
@@ -90,7 +90,7 @@ import { deepEqual } from '../905/382883';
 import { Q as _$$Q2 } from '../905/384324';
 import { u as _$$u7 } from '../905/389684';
 import { X as _$$X4 } from '../905/399133';
-import { L as _$$L2 } from '../905/408237';
+import { LazyInputForwardRef } from '../905/408237';
 import { O as _$$O2 } from '../905/410575';
 import { $ as _$$$3 } from '../905/411599';
 import { bj } from '../905/420347';
@@ -122,7 +122,7 @@ import { Y as _$$Y3 } from '../905/506207';
 import { r6 as _$$r2 } from '../905/507950';
 import { mc as _$$mc2, vk } from '../905/508367';
 import { l as _$$l3 } from '../905/509505';
-import { GG } from '../905/511649';
+import { RecordableButton } from '../905/511649';
 import { h as _$$h3 } from '../905/513745';
 import { C as _$$C2 } from '../905/520159';
 import { j as _$$j2 } from '../905/521149';
@@ -457,7 +457,7 @@ import { wV } from '../figma_app/779965';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { Ad } from '../figma_app/811257';
 import { _YF } from '../figma_app/822011';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { F as _$$F2 } from '../figma_app/832508';
 import { WH } from '../figma_app/836943';
 import { dM as _$$dM, Eh } from '../figma_app/837840';
@@ -4357,7 +4357,7 @@ function lQ() {
         status
       });
   }
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e4,
     properties: {
       productType: 'buzz',
@@ -4426,7 +4426,7 @@ function l2() {
 }
 function l4() {
   let e = useCurrentFileKey();
-  return l2() ? jsx(fu, {
+  return l2() ? jsx(TrackingProvider, {
     name: 'Buzz Template Overlay Modal',
     properties: {
       productType: 'buzz',
@@ -5710,7 +5710,7 @@ function oB({
     onChange: n,
     clearSearch: () => n(''),
     isKeyDownHandled: t => {
-      if (t.keyCode === Uz.ESCAPE || t.code === 'Escape' || t.key === 'Escape') {
+      if (t.keyCode === KeyCodes.ESCAPE || t.code === 'Escape' || t.key === 'Escape') {
         if (e !== '') {
           n('');
           return !0;
@@ -5735,7 +5735,7 @@ let oD = forwardRef((e, t) => {
   } = _$$ne(e, t);
   return jsx('div', {
     className: 'font_picker--fontPickerSearchBar--NuQ0L',
-    children: jsx(_$$L2, {
+    children: jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: 'font_picker--fontPickerSearchBarInput--bXbGN',
       dataTestId: 'font-picker-search-input',
@@ -10857,7 +10857,7 @@ function uu({
         children: jsxs('div', {
           'className': _$$s.wFull.h24.flex.justifyCenter.$,
           'data-element-target': 'left-panel-add-template-button',
-          'children': [jsxs(GG, {
+          'children': [jsxs(RecordableButton, {
             'className': 'x78zum5 x6s0dn4 xxk0z11 x16v0e3u x1bamp8i xl56j7k xq5q4zq x1iyjqo2 xy5cce4 xgfja2r xda6en0',
             'onClick': T,
             'recordingKey': 'addTemplateButton',
@@ -10867,7 +10867,7 @@ function uu({
             'children': [jsx(_$$n6, {}), jsx('p', {
               children: getI18nString('cooper.templates.new_asset_alt')
             })]
-          }), jsx(GG, {
+          }), jsx(RecordableButton, {
             'className': 'x78zum5 x6s0dn4 xxk0z11 x16v0e3u x1bamp8i xl56j7k xq5q4zq xww3pen xvy4d1p x1717udv',
             'onClick': e,
             'recordingKey': 'addTemplateButtonPlus',
@@ -10954,7 +10954,7 @@ function ux({
 }
 function up() {
   let e = jL();
-  return jsx(GG, {
+  return jsx(RecordableButton, {
     'className': 'x16v0e3u x1sxf85j x1useyqa xsdox4t x78zum5 xl56j7k x6s0dn4 xehbxol x1hlb6i2 xq5q4zq',
     'onClick': e,
     'aria-label': getI18nString('cooper.templates.new_blank_asset'),
@@ -13071,7 +13071,7 @@ function x2() {
         k = jsx(lI, {});
     }
   }
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e4,
     properties: {
       productType: 'buzz',

@@ -26,7 +26,7 @@ import { getFeatureFlags } from "../905/601108";
 import C from "classnames";
 import { useLatestRef } from "../figma_app/922077";
 import { X as _$$X } from "../905/606795";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { reportError } from "../905/11";
 import { Y as _$$Y } from "../905/506207";
@@ -646,7 +646,7 @@ function ez({
         onChange,
         onFocus,
         onKeyDown: e => {
-          e.keyCode !== Uz.ENTER || e.shiftKey || (e.preventDefault(), A());
+          e.keyCode !== KeyCodes.ENTER || e.shiftKey || (e.preventDefault(), A());
         },
         onKeyUp,
         onMouseLeave,
@@ -766,7 +766,7 @@ function eK({
         onChange,
         onFocus,
         onKeyDown: e => {
-          e.keyCode === Uz.ENTER && !e.shiftKey && (e.preventDefault(), inputRef.current && (inputRef.current.scrollTop = 0, inputRef.current.blur()));
+          e.keyCode === KeyCodes.ENTER && !e.shiftKey && (e.preventDefault(), inputRef.current && (inputRef.current.scrollTop = 0, inputRef.current.blur()));
         },
         onKeyUp,
         onMouseLeave,

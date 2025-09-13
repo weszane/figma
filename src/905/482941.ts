@@ -3,7 +3,7 @@ import { forwardRef, useRef, useImperativeHandle } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { EventShield } from "../905/821217";
 import o from "classnames";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { w } from "../905/113805";
@@ -50,7 +50,7 @@ let $$A0 = forwardRef(function ({
     children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
-      children: jsx(ks, {
+      children: jsx(BigTextInputForwardRef, {
         ref: b,
         className: l()(_Z, {
           [z3]: !!y

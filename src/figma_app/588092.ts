@@ -1,18 +1,18 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useSelector, useDispatch } from "react-redux";
-import { tM } from "../figma_app/637027";
+import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { Q9 } from "../905/773401";
 import { renderI18nText } from "../905/303541";
 import { h1 } from "../figma_app/530167";
 import { hideModal } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { s0, ZO } from "../figma_app/350203";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { Ro } from "../figma_app/805373";
 import { Pn } from "../figma_app/692865";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { eR, iF, B1, $E } from "../905/586932";
 import { S0, xl, qE, Ts, fr } from "../905/52565";
 import { my, wx, m_, N4, Il, Qk, aq, Qc, FT, C5, IK } from "../905/884682";
@@ -142,9 +142,9 @@ registerModal(function ({
   };
   let T = S(r, 0) && 1 === r.length;
   let I = S(r, 0) ? 1 === r.length ? aq : Qc : FT;
-  return jsx(d_, {
+  return jsx(ModalContainer, {
     className: I,
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: e0.PROFILE_CREATE_MODAL,
       properties: {
         action: s0.COMMUNITY_OPT_IN,
@@ -166,7 +166,7 @@ registerModal(function ({
           S(r, 0) && e && (y(), n || t?.());
         },
         children: S(r, 0) ? renderI18nText("community.onboarding.got_it") : renderI18nText("community.onboarding.looks_good")
-      }), !T && jsx(tM, {
+      }), !T && jsx(ButtonSecondaryTracked, {
         className: IK,
         onClick: E,
         children: renderI18nText("general.cancel")

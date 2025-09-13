@@ -8,7 +8,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { selectWithShallowEqual } from "../905/103090";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { ye, Gi as _$$Gi } from "../figma_app/528509";
+import { isTeamFolder, isRootPath } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { FOrganizationLevelType, FPlanNameType, FFileType } from "../figma_app/191312";
@@ -62,7 +62,7 @@ export function $$M3() {
   let t = function () {
     let e = $$P2();
     let t = selectCurrentFile();
-    return useSelector(r => !!t && !!t.folderId && (e?.type === "team" ? ye(r.folders[t.folderId]) : e?.type === "org" && _$$Gi(r.folders[t.folderId])));
+    return useSelector(r => !!t && !!t.folderId && (e?.type === "team" ? isTeamFolder(r.folders[t.folderId]) : e?.type === "org" && isRootPath(r.folders[t.folderId])));
   }();
   let r = useCurrentPublicPlan("usePublishTemplateStatus").unwrapOr(null);
   let n = r?.key.type;

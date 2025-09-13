@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { n3, ey, yG } from "../905/859698";
 import a from "../vendor/923386";
 import { A as _$$A } from "../905/920142";
-import { aX } from "../figma_app/349248";
+import { mapVariableResolvedDataType } from "../figma_app/349248";
 import { LibraryAgeEnum } from "../figma_app/633080";
 var s = a;
 export function $$c0(e, t) {
@@ -62,7 +62,7 @@ export function $$h4(e, t, i) {
     num_existing_instances: e.usages,
     num_insertions: e[n],
     num_detachments: e[a],
-    resolvedType: aX(e.type)
+    resolvedType: mapVariableResolvedDataType(e.type)
   }));
 }
 export function $$g5(e) {

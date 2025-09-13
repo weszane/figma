@@ -3,7 +3,7 @@ import { Label } from "../905/270045";
 import { Ay } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { UZ, JU } from "../figma_app/626177";
 import { wh, fR } from "../figma_app/973219";
 var l = o;
@@ -36,13 +36,13 @@ export function $$m0({
       className: s,
       children: e
     }));
-    return jsxs(D8, {
+    return jsxs(RecordableDiv, {
       className: p,
       ...g,
       children: [c, i]
     });
   }
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: p,
     ...g,
     children: [m ? jsx(UZ, {

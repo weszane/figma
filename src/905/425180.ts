@@ -4,7 +4,7 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { M } from "../905/152487";
 import { F_ } from "../905/748636";
 import { Ay, gm } from "../figma_app/419216";
@@ -118,7 +118,7 @@ function w(e) {
   let h = e.clickOutsideToHide ?? (void 0 === e.primaryCta && void 0 === e.secondaryCta);
   let _ = useCallback(() => onClose("clicked_outside"), [onClose]);
   _$$l(h, e.innerRef, _);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e.trackingContextName,
     properties: e.trackingProperties,
     children: [!e.disableHighlight && e.targetKey && jsx(x, {

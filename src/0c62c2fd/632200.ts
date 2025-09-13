@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo } from "react";
 import { useDispatch } from "react-redux";
 import n from "classnames";
-import { tM, qM } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonNegativeTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { l as _$$l } from "../905/192768";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -42,10 +42,10 @@ let f = memo(function (e) {
         children: g
       }), jsxs("div", {
         className: o()(v0, hF),
-        children: [jsx(tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: f,
           children: renderI18nText("confirm_downgrade.go_back")
-        }), jsx(qM, {
+        }), jsx(ButtonNegativeTracked, {
           className: pL,
           onClick: () => {
             t(Wc({

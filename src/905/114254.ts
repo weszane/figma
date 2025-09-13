@@ -4,7 +4,7 @@ import { _YF } from "../figma_app/822011";
 import { AppStateTsApi, ThemeMode } from "../figma_app/763686";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { useCurrentUserOrgId } from "../905/845253";
 import { cD } from "../figma_app/598018";
 import { registerModal } from "../905/102752";
@@ -48,7 +48,7 @@ let A = registerModal(function ({
     let e = AppStateTsApi?.slideThemeLibBindings().insertDefaultLocalTheme(ThemeMode.LIGHT, "Template style");
     e && _(e);
   }, []);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Slides Template Theme Picker Modal",
     properties: {
       source: e,

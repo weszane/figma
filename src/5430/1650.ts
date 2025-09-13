@@ -8,7 +8,7 @@ import { AutoLayout } from "../905/470281";
 import { k } from "../905/22009";
 import { LJ } from "../figma_app/930386";
 import { $E } from "../figma_app/805898";
-import { L0, o3 } from "../figma_app/831799";
+import { TrackedAnchor, TrackedLink } from "../figma_app/831799";
 import { A as _$$A } from "../svg/179418";
 let p = "footer--divider--srDs2";
 let x = z.object({
@@ -191,11 +191,11 @@ export function $$f0() {
         link: e
       }
     };
-    return vh(e) ? jsx(L0, {
+    return vh(e) ? jsx(TrackedAnchor, {
       href: e,
       ...r,
       children: t
-    }) : jsx(o3, {
+    }) : jsx(TrackedLink, {
       to: e,
       ...r,
       children: t

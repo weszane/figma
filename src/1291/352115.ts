@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef } from "react";
 import { sz } from "../figma_app/216696";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { eE, Fz } from "../figma_app/106207";
 import { RD } from "../figma_app/198840";
 import { mC, oh } from "../905/18797";
@@ -114,7 +114,7 @@ export function $$I0(e) {
   }));
   return f || b ? jsx(i8, {}) : jsx("div", {
     ref: s,
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: "templates",
       children: [jsx($, {}), jsx(C, {}), jsx(K, {
         resourceType: ResourceType.HUB_FILE,

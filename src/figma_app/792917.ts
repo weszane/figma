@@ -20,7 +20,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { CancellationReason, DEFAULT_PRICE } from "../905/54385";
 import { registerModal } from "../905/102752";
 import { v as _$$v } from "../905/318279";
-import { yX, ey } from "../figma_app/918700";
+import { ConfirmationModal2, ModalView } from "../figma_app/918700";
 import { v0 } from "../figma_app/639088";
 let $$N0 = registerModal(function (e) {
   let {
@@ -48,7 +48,7 @@ let $$N0 = registerModal(function (e) {
       }
     }));
   };
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     autoFocusCta: !1,
     cancelText: renderI18nText("general.close"),
     confirmText: renderI18nText("general.confirm"),
@@ -140,7 +140,7 @@ let C = registerModal(function (e) {
     user
   } = e;
   let r = useDispatch();
-  return jsxs(ey, {
+  return jsxs(ModalView, {
     size: "small",
     hide: lQ,
     title: getI18nString("community.buyer.refund_requested"),
@@ -168,7 +168,7 @@ let w = registerModal(function (e) {
   let {
     user
   } = e;
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     size: "small",
     confirmationTitle: renderI18nText("community.buyer.unable_to_process_refund"),
     content: jsx("span", {

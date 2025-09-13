@@ -11,13 +11,13 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { C as _$$C, wR } from "../905/346715";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../vendor/850789";
 import { r as _$$r } from "../905/520829";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { LoadingOverlay } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { In } from "../905/672640";
@@ -247,7 +247,7 @@ let z = registerModal(function (e) {
       children: [jsx(In, {
         icon: "search-32",
         fill: "secondary"
-      }), jsx(_$$L, {
+      }), jsx(LazyInputForwardRef, {
         className: Rt,
         autoFocus: !0,
         onChange: $,
@@ -308,7 +308,7 @@ let z = registerModal(function (e) {
     })
   });
   let er = W && status === _$$r.LOADING || j || !H;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Connected Project Select Project Modal",
     children: jsx(ModalRootComponent, {
       manager: d,
@@ -356,7 +356,7 @@ export let $$W0 = registerModal(function (e) {
   let i = useModalManager(e);
   let _ = useDispatch();
   let A = e.entryPoint === wR.PROJECT_SETTINGS && e.assetTransferRequestWarning;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Connected Project Intro Modal",
     children: jsx(ModalRootComponent, {
       manager: i,

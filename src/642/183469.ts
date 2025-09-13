@@ -19,7 +19,7 @@ import { globalPerfTimer } from "../905/542194";
 import { parsePxNumber } from "../figma_app/783094";
 import { H as _$$H } from "../figma_app/147959";
 import { getFilteredFeatureFlags } from "../905/717445";
-import { Fo } from "../905/63728";
+import { isCommandEvent } from "../905/63728";
 import { V as _$$V } from "../905/418494";
 import { BrowserInfo } from "../figma_app/778880";
 import { useHandleMouseEvent, RecordingPureComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
@@ -615,7 +615,7 @@ class ez extends RecordingPureComponent {
     this.rowContainerMouseDown = handleMouseEvent(this, "mousedown", e => {
       let t = this.guidAtMousePosition(e.clientY);
       if (!t || (e.stopPropagation(), document.activeElement && "blur" in document.activeElement && !this.props.renamingGuid && document.activeElement.blur(), this.props.ignoreRightClickForSelection && 2 === e.button)) return;
-      if (this.props.onSelectNodesFromLayersPanel?.(), (this.props.allowToggleSelection ?? !0) && Fo(e)) {
+      if (this.props.onSelectNodesFromLayersPanel?.(), (this.props.allowToggleSelection ?? !0) && isCommandEvent(e)) {
         this.toggleSelected(t);
         return;
       }
@@ -770,7 +770,7 @@ class ez extends RecordingPureComponent {
         nonInteraction: 0
       });
       let r = !s.isExpanded;
-      t.altKey ? setNodeExpandedRecursive(s.guid, r) : Fo(t) && !isEmptyObject(this.props.sceneGraphSelection) ? setSelectionExpanded(s.guid, r) : setNodeExpanded(s.guid, r);
+      t.altKey ? setNodeExpandedRecursive(s.guid, r) : isCommandEvent(t) && !isEmptyObject(this.props.sceneGraphSelection) ? setSelectionExpanded(s.guid, r) : setNodeExpanded(s.guid, r);
       this.justToggledExpandedGuid = s.guid;
     };
     this.isDraggingToToggle = null;

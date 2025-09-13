@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { PrototypingTsApi, PresentationValidationStatus } from "../figma_app/763686";
 import { xf } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
-import { Gc } from "../905/63728";
+import { ignoreCommandOrShift } from "../905/63728";
 import { isValidUrl } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { N6 } from "../figma_app/471982";
@@ -14,7 +14,7 @@ import { o1 } from "../figma_app/10554";
 import { PreviewMode } from "../figma_app/707808";
 import { Rs } from "../figma_app/761870";
 import { Hc, b as _$$b, Yp as _$$Yp, IZ } from "../figma_app/740025";
-import { X$ } from "../905/612685";
+import { getCommunityFileUrl } from "../905/612685";
 let b = {
   id: "",
   hub_file_id: "",
@@ -198,8 +198,8 @@ export function $$j17(e) {
   return !!e && e.publishing_status === FPublicationStatusType.APPROVED_PUBLIC;
 }
 export function $$U5(e) {
-  let t = X$(e);
-  return Gc(e => {
+  let t = getCommunityFileUrl(e);
+  return ignoreCommandOrShift(e => {
     e?.preventDefault();
     customHistory.redirect(t, "_blank");
   });

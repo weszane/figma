@@ -8,7 +8,7 @@ import { W } from "../figma_app/4979";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useSprigWithSampling } from "../905/99656";
 import { xD, Qv, Cp, IW, o_ } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -76,7 +76,7 @@ let E = connect((e, t) => ({
   }, [i, onQueryChanged, x]);
   useEffect(() => {
     let e = e => {
-      e.keyCode === Uz.FORWARD_SLASH && document.activeElement?.tagName === "BODY" && S();
+      e.keyCode === KeyCodes.FORWARD_SLASH && document.activeElement?.tagName === "BODY" && S();
     };
     document.addEventListener("keydown", e);
     return () => {

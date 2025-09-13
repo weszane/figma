@@ -1,6 +1,15 @@
-import { K } from "../905/807535";
-import { GroupType, DefaultGroups } from "../905/441038";
-export function $$a0(e) {
-  return K(GroupType, e || DefaultGroups[0]) || DefaultGroups[0];
+import { GroupType } from '../905/441038'
+import { findMatchingValue } from '../905/807535'
+
+/**
+ * Returns a matching group value from GroupType, or the default group if not found.
+ * @param groupName - The name of the group to find.
+ * @returns The matching group value or the default group.
+ * (Original function: $$a0)
+ */
+export function getGroupOrDefault(groupName?: string): string {
+  return findMatchingValue(GroupType, groupName || GroupType.MEMBERS) || GroupType.MEMBERS
 }
-export const g = $$a0;
+
+// Export with original alias for backward compatibility (Original export: g)
+export const g = getGroupOrDefault

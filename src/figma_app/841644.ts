@@ -7,7 +7,7 @@ import { o as _$$o } from "../905/949628";
 import { Ay } from "../figma_app/272902";
 import c from "classnames";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { i as _$$i } from "../figma_app/85949";
@@ -38,7 +38,7 @@ let x = forwardRef(function ({
   onKeyDown: f,
   recordingKey: E
 }, y) {
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     forwardedRef: y,
     recordingKey: generateRecordingKey(E, "comboInputControl", "container"),
     className: u()(a, {

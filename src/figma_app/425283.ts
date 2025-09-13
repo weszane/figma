@@ -1,4 +1,4 @@
-import { J7, SN, _d, G_, M7 } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab, FigResourceType, BillingSectionEnum, MemberView } from "../figma_app/650409";
 let i = "Org admin settings onboarding -";
 let $$a26 = `${i} Enterprise admin -`;
 let $$s30 = `${i} teams tab -`;
@@ -15,35 +15,35 @@ let $$g35 = "org_admin_settings_billing_tab_onboarding_key";
 let $$f16 = "org_admin_settings_settings_tab_onboarding_key";
 let $$E33 = "org_admin_settings_content_tab_onboarding_key";
 let $$y5 = {
-  [J7.DASHBOARD]: "org_admin_settings_dashboard_tab_onboarding_key",
-  [J7.WORKSPACES]: "org_admin_settings_workspaces_tab_onboarding_key",
-  [J7.TEAMS]: $$m22,
-  [J7.MEMBERS]: "org_admin_settings_members_tab_onboarding_key",
-  [J7.ACTIVITY]: "org_admin_settings_activity_tab_onboarding_key",
-  [J7.BILLING]: $$g35,
-  [J7.RESOURCES]: "org_admin_settings_resources_tab_onboarding_key",
-  [J7.SETTINGS]: $$f16,
-  [J7.CONTENT]: $$E33
+  [DashboardSection.DASHBOARD]: "org_admin_settings_dashboard_tab_onboarding_key",
+  [DashboardSection.WORKSPACES]: "org_admin_settings_workspaces_tab_onboarding_key",
+  [DashboardSection.TEAMS]: $$m22,
+  [DashboardSection.MEMBERS]: "org_admin_settings_members_tab_onboarding_key",
+  [DashboardSection.ACTIVITY]: "org_admin_settings_activity_tab_onboarding_key",
+  [DashboardSection.BILLING]: $$g35,
+  [DashboardSection.RESOURCES]: "org_admin_settings_resources_tab_onboarding_key",
+  [DashboardSection.SETTINGS]: $$f16,
+  [DashboardSection.CONTENT]: $$E33
 };
 let $$b20 = "org_admin_unassigned_drafts_onboarding_key";
 let $$T21 = "org_admin_settings_billing_groups_secondary_tab_onboarding_key";
 let $$I0 = "org_admin_settings_billing_overview_secondary_tab_onboarding_key";
 let $$S2 = {
-  [SN.ABANDONED_DRAFTS]: $$b20,
-  [SN.TEAMS]: $$m22,
-  [SN.FILE_LIST_BETA]: "",
-  [SN.ACCESS_INSIGHT]: "",
-  [SN.WORKSPACES]: "",
-  [_d.APPROVED_PLUGINS]: "",
-  [_d.APPROVED_WIDGETS]: "",
-  [_d.LIBRARIES]: "",
-  [_d.SHARED_FONTS]: "",
-  [G_.BILLING_GROUPS]: $$T21,
-  [G_.INVOICES]: "",
-  [G_.OVERVIEW]: $$I0,
-  [SN.CONNECTED_PROJECTS]: "org_admin_connected_projects_tab_onboarding_key",
-  [M7.ALL_MEMBERS]: "",
-  [M7.USER_GROUPS]: ""
+  [WorkspaceTab.ABANDONED_DRAFTS]: $$b20,
+  [WorkspaceTab.TEAMS]: $$m22,
+  [WorkspaceTab.FILE_LIST_BETA]: "",
+  [WorkspaceTab.ACCESS_INSIGHT]: "",
+  [WorkspaceTab.WORKSPACES]: "",
+  [FigResourceType.APPROVED_PLUGINS]: "",
+  [FigResourceType.APPROVED_WIDGETS]: "",
+  [FigResourceType.LIBRARIES]: "",
+  [FigResourceType.SHARED_FONTS]: "",
+  [BillingSectionEnum.BILLING_GROUPS]: $$T21,
+  [BillingSectionEnum.INVOICES]: "",
+  [BillingSectionEnum.OVERVIEW]: $$I0,
+  [WorkspaceTab.CONNECTED_PROJECTS]: "org_admin_connected_projects_tab_onboarding_key",
+  [MemberView.ALL_MEMBERS]: "",
+  [MemberView.USER_GROUPS]: ""
 };
 let $$v9 = "activity_table_email_input_onboarding_key";
 let $$A24 = "activity_table_export_csv_onboarding_key";

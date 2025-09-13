@@ -15,9 +15,9 @@ import { resolveVariableValue } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import { C as _$$C } from "../figma_app/974443";
 import { X as _$$X } from "../905/606795";
-import { Uz, Fo } from "../905/63728";
+import { KeyCodes, isCommandEvent } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
-import { u2 } from "../905/511649";
+import { RecordableInput } from "../905/511649";
 import { Point } from "../905/736624";
 import { TQ, Zl } from "../905/211621";
 import { P as _$$P } from "../905/347284";
@@ -146,7 +146,7 @@ export function $$eE1({
       children: [jsx("p", {
         className: ec,
         children: renderI18nText("design_systems.component_properties.name")
-      }), jsx(u2, {
+      }), jsx(RecordableInput, {
         className: e_,
         forwardedRef: inputRef,
         onBlur: P,
@@ -155,9 +155,9 @@ export function $$eE1({
         onFocus,
         onKeyDown: e => {
           e.stopPropagation();
-          e.keyCode !== Uz.ENTER || e.shiftKey || (e.currentTarget.blur(), L());
-          e.keyCode === Uz.ESCAPE && (e.currentTarget.blur(), U());
-          e.keyCode === Uz.TAB && L();
+          e.keyCode !== KeyCodes.ENTER || e.shiftKey || (e.currentTarget.blur(), L());
+          e.keyCode === KeyCodes.ESCAPE && (e.currentTarget.blur(), U());
+          e.keyCode === KeyCodes.TAB && L();
         },
         onKeyUp,
         onMouseLeave,
@@ -260,7 +260,7 @@ function ey({
     setSelectedIndices: c
   });
   let w = useCallback(t => {
-    if (Fo(t) && ["ArrowUp", "ArrowDown"].includes(t.key)) {
+    if (isCommandEvent(t) && ["ArrowUp", "ArrowDown"].includes(t.key)) {
       let r = "ArrowUp" === t.key ? -1 : 1;
       if (null === _) return;
       let n = [...e.values];
@@ -279,7 +279,7 @@ function ey({
     }
   }, [e.values, _, I, C]);
   let O = useCallback((e, t) => {
-    e.keyCode === Uz.ENTER && x(t, e.currentTarget.value);
+    e.keyCode === KeyCodes.ENTER && x(t, e.currentTarget.value);
     w(e);
   }, [w, x]);
   let P = useRef(null);
@@ -396,7 +396,7 @@ function eb({
   let c = Qu();
   return jsx("div", {
     className: "edit_component_prop_picker--variantValueInputWrapper---9s9m",
-    children: r ? jsx(u2, {
+    children: r ? jsx(RecordableInput, {
       className: em,
       onKeyDown: t => {
         c(t);
@@ -511,7 +511,7 @@ function eS({
         onBlur: s,
         onKeyDown: e => {
           e.stopPropagation();
-          e.keyCode !== Uz.ENTER || e.shiftKey || e.currentTarget.blur();
+          e.keyCode !== KeyCodes.ENTER || e.shiftKey || e.currentTarget.blur();
         },
         value: r,
         onFocus: e => e.currentTarget?.select(),
@@ -546,7 +546,7 @@ function ev({
         onBlur: o,
         onKeyDown: e => {
           e.stopPropagation();
-          e.keyCode !== Uz.ENTER || e.shiftKey || e.currentTarget.blur();
+          e.keyCode !== KeyCodes.ENTER || e.shiftKey || e.currentTarget.blur();
         },
         value: lg(r),
         onFocus: e => e.currentTarget?.select(),

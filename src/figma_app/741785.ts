@@ -9,7 +9,7 @@ import d from "classnames";
 import u from "../vendor/737647";
 import { setupLazyComponentFactory } from "../905/992467";
 import { generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { Point } from "../905/736624";
 import { dP } from "../figma_app/119475";
 import { getI18nString } from "../905/303541";
@@ -207,7 +207,7 @@ function H({
           })
         })
       })
-    }), jsx(D8, {
+    }), jsx(RecordableDiv, {
       className: ZA,
       onMouseDown: e => {
         !N && w() || (T >= 1 ? O("click_out_cancel") : 0 === T && A(1, "click_out_error"));
@@ -252,7 +252,7 @@ export function $$z2({
     [_i]: !0
   });
   let P = A ? getI18nString("proto.expression_builder_entry.placeholder_ui3_lhs") : x ? getI18nString("proto.expression_builder_entry.placeholder_ui3_rhs") : getI18nString("proto.expression_builder_entry.placeholder");
-  return jsx(D8, {
+  return jsx(RecordableDiv, {
     onClick: r,
     recordingKey: generateRecordingKey(a, "openExpressionBuilder"),
     className: tY,

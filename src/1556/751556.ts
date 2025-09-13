@@ -11,7 +11,7 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import x from "classnames";
 import { N as _$$N } from "../figma_app/469468";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { g as _$$g } from "../1556/359896";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
@@ -48,10 +48,10 @@ import { popModalStack, showModalHandler } from "../905/156213";
 import { ql, S5 } from "../figma_app/24841";
 import { T$, w3 } from "../figma_app/865646";
 import { tO, QF, I2 } from "../figma_app/502247";
-import { O as _$$O2 } from "../905/833838";
+import { OrganizationType } from "../905/833838";
 import { s as _$$s2, c as _$$c } from "../905/744710";
 import { G$, FF } from "../figma_app/588092";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { kL, v0 } from "../figma_app/639088";
@@ -65,7 +65,7 @@ import { K as _$$K } from "../1556/124168";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { X as _$$X } from "../figma_app/91315";
 import { ck } from "../905/952832";
-import { o as _$$o } from "../905/895626";
+import { InterProfileType } from "../905/895626";
 import { e0 as _$$e3 } from "../905/696396";
 import { S as _$$S } from "../1556/805548";
 import { s as _$$s3 } from "../905/539471";
@@ -122,7 +122,7 @@ let ed = registerModal(function () {
       className: kL,
       children: [renderI18nText("multi-account.max_accounts_body"), jsx("div", {
         className: v0,
-        children: jsx($$, {
+        children: jsx(ButtonBasePrimary, {
           onClick: t,
           children: renderI18nText("multi-account.max_accounts_submit")
         })
@@ -233,7 +233,7 @@ function eT({
     })) : (o && tO(t.id), e(sf({
       view: "user",
       userId: t.id,
-      userViewTab: _$$o.INTERNAL_PROFILE
+      userViewTab: InterProfileType.INTERNAL_PROFILE
     })));
     x && logAndTrackCTA({
       trackingContext: _$$e3.FILE_BROWSER,
@@ -730,7 +730,7 @@ function eX() {
           let o = null;
           let s = n[0];
           let a = n[1];
-          s === _$$O2.ORG && a ? i = a : s === _$$O2.TEAM && a && (o = a);
+          s === OrganizationType.ORG && a ? i = a : s === OrganizationType.TEAM && a && (o = a);
           l(_l({
             workspace: {
               userId: t,
@@ -889,9 +889,9 @@ function eX() {
       color: "default",
       truncate: !0,
       children: d && cs(a) ? a.name : n.name
-    }), d && cs(a) && jsx(Ex, {
+    }), d && cs(a) && jsx(Badge, {
       className: p()("account_switcher--adminBadge--ys5HM", _$$s.mr0.$),
-      color: zE.TERTIARY,
+      color: BadgeColor.TERTIARY,
       text: getI18nString("navbar.community.admin_label")
     })]
   });

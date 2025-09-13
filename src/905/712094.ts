@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { Lf } from "../figma_app/637027";
+import { EnhancedInput } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { createEmptyAddress } from "../figma_app/831101";
 import { X } from "../905/33014";
@@ -11,7 +11,7 @@ export function $$l0({
   updateLegalCompanyName: d
 }) {
   return jsxs(Fragment, {
-    children: [!!d && jsx(Lf, {
+    children: [!!d && jsx(EnhancedInput, {
       value: l || "",
       htmlName: "legal_company_name",
       label: getI18nString("pro_cart.payment.legal_company_name_label"),

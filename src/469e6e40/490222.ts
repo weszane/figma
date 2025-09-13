@@ -15,11 +15,11 @@ import { b as _$$b } from "../905/168239";
 import { K } from "../905/628118";
 import { L as _$$L } from "../905/16143";
 import { sf } from "../905/929976";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { PaginatedAbandonedDraftsView } from "../figma_app/43951";
 import { O as _$$O } from "../figma_app/809387";
-import { J7, SN } from "../figma_app/650409";
-import { O as _$$O2 } from "../905/833838";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
+import { OrganizationType } from "../905/833838";
 import { e0 } from "../905/696396";
 import { Cj } from "../905/270084";
 import { zx, VU } from "../4452/650793";
@@ -61,7 +61,7 @@ function R(e) {
     children: [jsx(_$$p2, {
       onClick: r,
       children: getI18nString("abandoned_drafts_table.open")
-    }), e.planType === _$$O2.ORG && jsx(_$$p2, {
+    }), e.planType === OrganizationType.ORG && jsx(_$$p2, {
       onClick: o,
       children: getI18nString("abandoned_drafts_table.move")
     }), jsx(_$$p2, {
@@ -88,7 +88,7 @@ function L({
       },
       disabled: 1 !== e.length,
       label: getI18nString("abandoned_drafts_table.open")
-    }), t === _$$O2.ORG && jsx(IU, {
+    }), t === OrganizationType.ORG && jsx(IU, {
       onClick: () => {
         s(showModalHandler({
           type: J,
@@ -119,7 +119,7 @@ export function $$U0(e) {
     columnName: P,
     isReversed: !0
   });
-  let I = e.planType === _$$O2.TEAM ? e.team.id : e.org.id;
+  let I = e.planType === OrganizationType.TEAM ? e.team.id : e.org.id;
   let [T, A] = useState("");
   let O = (e, t) => e.columnName === t ? !e.isReversed : t === P;
   let U = useCallback(e => {
@@ -132,8 +132,8 @@ export function $$U0(e) {
     firstPageSize: 30,
     sortOrder: a.isReversed ? "desc" : "asc",
     cursorColumn: a.columnName,
-    planId: e.planType === _$$O2.TEAM ? e.team.id : e.org.id,
-    planType: e.planType === _$$O2.TEAM ? "team" : "org",
+    planId: e.planType === OrganizationType.TEAM ? e.team.id : e.org.id,
+    planType: e.planType === OrganizationType.TEAM ? "team" : "org",
     queryString: T
   });
   let q = useMemo(() => new Map(F.data?.abandonedDraftFolders.map(e => [e.projectId, e.fileCount])), [F]);
@@ -153,18 +153,18 @@ export function $$U0(e) {
       adminPlanType: e.planType
     }));
   }, [t, I, e.planType]);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: e0.ABANDONED_DRAFTS_TABLE,
     properties: {
-      orgId: e.planType === _$$O2.ORG ? e.org.id : null,
-      teamId: e.planType === _$$O2.TEAM ? e.team.id : null
+      orgId: e.planType === OrganizationType.ORG ? e.org.id : null,
+      teamId: e.planType === OrganizationType.TEAM ? e.team.id : null
     },
-    children: [e.planType === _$$O2.ORG && !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
+    children: [e.planType === OrganizationType.ORG && !getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(K, {
-        title: _$$O(J7.CONTENT)
+        title: _$$O(DashboardSection.CONTENT)
       }), jsx(_$$b, {
-        tab: J7.CONTENT,
-        selectedSecondaryTab: SN.ABANDONED_DRAFTS
+        tab: DashboardSection.CONTENT,
+        selectedSecondaryTab: WorkspaceTab.ABANDONED_DRAFTS
       })]
     }), jsx(Cj, {
       actionBar: t => jsx(L, {
@@ -179,7 +179,7 @@ export function $$U0(e) {
           folder: e,
           fontSize: 11
         }),
-        sorting_key: e.planType === _$$O2.ORG ? "path" : "abandoned_draft_user_email",
+        sorting_key: e.planType === OrganizationType.ORG ? "path" : "abandoned_draft_user_email",
         getSortValue: e => e.path
       }, {
         name: getI18nString("abandoned_drafts_table.files"),
@@ -252,12 +252,12 @@ export function $$U0(e) {
             placeholder: getI18nString("abandoned_drafts_table.search.placeholder")
           })
         }), (() => {
-          let t = e.planType === _$$O2.ORG ? renderI18nText("abandoned_drafts_table.banner_header", {
+          let t = e.planType === OrganizationType.ORG ? renderI18nText("abandoned_drafts_table.banner_header", {
             orgName: e.org.name
           }) : renderI18nText("abandoned_drafts_table.banner_header_teams", {
             teamName: e.team.name
           });
-          let a = e.planType === _$$O2.ORG ? renderI18nText("abandoned_drafts_table.banner_message") : renderI18nText("abandoned_drafts_table.banner_message_teams");
+          let a = e.planType === OrganizationType.ORG ? renderI18nText("abandoned_drafts_table.banner_message") : renderI18nText("abandoned_drafts_table.banner_message_teams");
           let s = getFeatureFlags().delete_empty_abandoned_draft_folders ? renderI18nText("abandoned_drafts_table.banner_message_on_cleanup") : null;
           return jsx(AutoLayout, {
             padding: {

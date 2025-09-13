@@ -2,7 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { getInitialOptions } from "../figma_app/169182";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { sz } from "../figma_app/216696";
 import { rL } from "../figma_app/49598";
@@ -186,7 +186,7 @@ export function $$C1(e) {
     u(rL({
       hubFileId: templateId,
       hubFileName: m?.name || "this file",
-      openInNewTab: !!forceOpenNewTab || oJ(e),
+      openInNewTab: !!forceOpenNewTab || isCommandOrShift(e),
       folderId: void 0,
       source,
       isDrawMode,

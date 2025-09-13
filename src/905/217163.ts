@@ -1,6 +1,6 @@
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
-import { jN, X$ } from "../905/612685";
+import { buildFileUrl, getCommunityFileUrl } from "../905/612685";
 import { LibraryKeyToFileLink } from "../figma_app/43951";
 export function $$o0({
   libraryKey: e,
@@ -51,7 +51,7 @@ export function $$l1({
   let p = e.libraryKeyToFile;
   return p ? p.fileCanAccess ? {
     type: "team",
-    link: jN({
+    link: buildFileUrl({
       file: {
         key: p.fileCanAccess.key
       },
@@ -68,7 +68,7 @@ export function $$l1({
     })
   } : p.hubFile ? {
     type: "community",
-    link: X$(p.hubFile.id)
+    link: getCommunityFileUrl(p.hubFile.id)
   } : void 0 : void 0;
 }
 export const b = $$o0;

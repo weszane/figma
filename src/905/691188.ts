@@ -13,8 +13,8 @@ import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/376628";
 import { FP } from "../figma_app/91703";
 import { nE, fR, am } from "../figma_app/430563";
-import { fu } from "../figma_app/831799";
-import { K as _$$K } from "../905/135526";
+import { TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { Ho, Ck } from "../figma_app/236178";
 import { zK, Lr, XM, pD, GO, Nn } from "../905/561897";
 import { o3 } from "../figma_app/255679";
@@ -265,9 +265,9 @@ export function $$U2({
         return O;
     }
   }(l, B, b);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Library Subscription Toggle",
-    trackingTargets: _$$K.RCS,
+    trackingTargets: RCSMessageType.RCS,
     children: jsxs("button", {
       disabled: e,
       className: z,
@@ -408,9 +408,9 @@ export function $$V1({
     }, e))
   });
   return jsxs(Fragment, {
-    children: [jsx(fu, {
+    children: [jsx(TrackingProvider, {
       name: "Library Subscription Toggle",
-      trackingTargets: _$$K.RCS,
+      trackingTargets: RCSMessageType.RCS,
       children: jsxs("div", {
         className: "subscription_toggle--subscriptionToggleContainer--70894",
         children: [e && jsx("span", {

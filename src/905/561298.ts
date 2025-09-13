@@ -3,7 +3,7 @@ import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { buildUploadUrl } from "../figma_app/169182";
 import { d as _$$d } from "../905/884707";
-import { $$, nR, tB, CY, N_ } from "../figma_app/637027";
+import { ButtonBasePrimary, ButtonSecondary, FocusCheckbox, SecureLink, BaseLinkComponent } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { v } from "../905/755077";
 import { P } from "../905/347284";
@@ -14,24 +14,24 @@ import { Bj } from "../905/708054";
 import { qw, Py, H5, BU, Ng as _$$Ng, rh, qr, PJ, GC, u1 } from "../905/599844";
 var n;
 export function $$A2(e) {
-  return jsx($$, {
+  return jsx(ButtonBasePrimary, {
     className: qw,
     ..._$$d(e)
   });
 }
 export function $$y1(e) {
-  return jsx(nR, {
+  return jsx(ButtonSecondary, {
     className: qw,
     ..._$$d(e)
   });
 }
 export function $$b5(e) {
   return jsxs(Fragment, {
-    children: [jsx(tB, {
+    children: [jsx(FocusCheckbox, {
       onChange: e.onChange,
       checked: e.isChecked
     }), renderI18nText("community.publishing.i_agree_to_the_terms_of_service", {
-      termsOfService: jsx(CY, {
+      termsOfService: jsx(SecureLink, {
         href: "https://www.figma.com/tos/",
         target: "_blank",
         trusted: !0,
@@ -141,7 +141,7 @@ export function $$v3(e) {
     getFooterText() {
       return jsx(Fragment, {
         children: renderI18nText("community.publishing.review_our_community_guidelines", {
-          communityGuidelinesLink: jsx(N_, {
+          communityGuidelinesLink: jsx(BaseLinkComponent, {
             href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
             target: "_blank",
             trusted: !0,
@@ -182,7 +182,7 @@ export let $$I0 = n.ConnectedPublishSuccessHandleContent;
 export function $$E4(e) {
   let t = jsxs(Fragment, {
     children: [jsxs("div", {
-      children: [renderI18nText("community.publishing.if_you_have_a_personal_community_profile_associated_with_a_different_figma_account_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(CY, {
+      children: [renderI18nText("community.publishing.if_you_have_a_personal_community_profile_associated_with_a_different_figma_account_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(SecureLink, {
         href: "https://help.figma.com/hc/articles/1500005162381-Manage-Community-profiles-and-settings#add-profile",
         target: "_blank",
         trusted: !0,
@@ -194,7 +194,7 @@ export function $$E4(e) {
   });
   e.withConnectedAccounts && (t = jsxs(Fragment, {
     children: [jsxs("div", {
-      children: [renderI18nText("community.publishing.currently_you_don_t_have_a_personal_community_profile_associated_with_a_different_figma_account_if_you_do_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(CY, {
+      children: [renderI18nText("community.publishing.currently_you_don_t_have_a_personal_community_profile_associated_with_a_different_figma_account_if_you_do_connect_it_now_and_publish_to_your_existing_profile_without_having_to_switch_accounts"), " ", jsx(SecureLink, {
         href: "https://help.figma.com/hc/articles/1500005162381-Manage-Community-profiles-and-settings#add-profile",
         target: "_blank",
         trusted: !0,

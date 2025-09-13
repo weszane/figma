@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { N_ } from "../figma_app/637027";
+import { BaseLinkComponent } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { PF } from "../figma_app/78808";
@@ -55,7 +55,7 @@ function f(e) {
         className: "file_restore_from_version_modal--fileRestoreUser--Bv60C",
         children: r?.name ?? ""
       })]
-    }), jsx(N_, {
+    }), jsx(BaseLinkComponent, {
       onClick: e.callback,
       className: "file_restore_from_version_modal--fileRestoreAction--414BR",
       trusted: !0,

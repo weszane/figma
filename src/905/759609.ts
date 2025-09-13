@@ -13,7 +13,7 @@ import { A as _$$A } from "../905/24328";
 import { Multiplayer } from "../figma_app/763686";
 import { xj, Mx, yx } from "../figma_app/851625";
 import { h as _$$h } from "../905/207101";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
 import { J9 } from "../905/149328";
 import { Point } from "../905/736624";
@@ -45,7 +45,7 @@ function H({
 }) {
   let i = useDispatch();
   let s = useCallback(t => {
-    t.event.keyCode === Uz.TAB && null != e.current && (e.current.focus(), t.accept());
+    t.event.keyCode === KeyCodes.TAB && null != e.current && (e.current.focus(), t.accept());
   }, [e]);
   let o = new Point((window.innerWidth - tA) / 2, J9 + 12);
   return jsx(Ao, {

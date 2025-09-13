@@ -14,7 +14,7 @@ import { tI } from "../figma_app/599327";
 import { BC } from "../figma_app/149367";
 import { hideModalHandler } from "../905/156213";
 import { Z } from "../469e6e40/184197";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Oq } from "../905/332483";
 import { AG, Gj } from "../figma_app/217457";
 import { _k } from "../figma_app/934005";
@@ -29,7 +29,7 @@ function N(e) {
   let l = () => {
     t(hideModalHandler());
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Finalize Invoice Modal",
     properties: {
       orgId: e.orgId

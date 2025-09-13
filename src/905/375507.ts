@@ -19,11 +19,11 @@ import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { memoizeByArgs } from "../figma_app/815945";
 import { IU } from "../figma_app/421401";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { R as _$$R } from "../905/307199";
 import { gw, c$ } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
-import T, { N as _$$N } from "../905/551536";
+import T, { BaseLinkComponent } from "../905/551536";
 import { y2, Lp } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -35,7 +35,7 @@ import { K as _$$K } from "../905/628118";
 import { X as _$$X, i } from "../905/784599";
 import { z as _$$z } from "../figma_app/369596";
 import { O as _$$O } from "../figma_app/809387";
-import { J7, _d } from "../figma_app/650409";
+import { DashboardSection, FigResourceType } from "../figma_app/650409";
 import { Cj } from "../905/270084";
 import { hP } from "../figma_app/527041";
 import { A as _$$A } from "../6828/493300";
@@ -118,9 +118,9 @@ function H(e) {
                 children: e.displayName
               }), jsx("span", {
                 className: "shared_fonts_table--variableFontBadge--rKy2g",
-                children: jsx(Ex, {
+                children: jsx(Badge, {
                   text: getI18nString("resources_tab.shared_fonts_table.variable_font_badge"),
-                  color: zE.INVERT
+                  color: BadgeColor.INVERT
                 })
               })]
             }), jsx("div", {
@@ -209,10 +209,10 @@ function H(e) {
   return jsxs(Fragment, {
     children: [!getFeatureFlags().ff_a11y_page_tab_fix && jsxs(Fragment, {
       children: [jsx(_$$K, {
-        title: _$$O(J7.RESOURCES)
+        title: _$$O(DashboardSection.RESOURCES)
       }), jsx(_$$b, {
-        tab: J7.RESOURCES,
-        selectedSecondaryTab: _d.SHARED_FONTS,
+        tab: DashboardSection.RESOURCES,
+        selectedSecondaryTab: FigResourceType.SHARED_FONTS,
         rightActions: W
       })]
     }), e.isLoading ? jsx("div", {
@@ -232,7 +232,7 @@ function H(e) {
       columns: f,
       emptyContent: jsx(_$$p, {
         children: query ? renderI18nText("resources_tab.shared_fonts_table.no_fonts_match_your_search_query", {
-          uploadFontsLink: jsx(_$$N, {
+          uploadFontsLink: jsx(BaseLinkComponent, {
             onClick: onUploadClick,
             trusted: !0,
             className: _$$s.ml4.$,
@@ -242,7 +242,7 @@ function H(e) {
           spacing: 4,
           children: [jsx("span", {
             children: renderI18nText("resources_tab.shared_fonts_table.no_shared_fonts_yet")
-          }), jsx(_$$N, {
+          }), jsx(BaseLinkComponent, {
             onClick: onUploadClick,
             trusted: !0,
             children: renderI18nText("resources_tab.shared_fonts_table.upload_fonts_link")
@@ -803,9 +803,9 @@ class eN extends PureComponent {
           fontStyle: e.style
         }), jsx("span", {
           className: "shared_fonts_modal_content--variableFontBadge---whIx",
-          children: jsx(Ex, {
+          children: jsx(Badge, {
             text: getI18nString("design_systems.shared_fonts.variable"),
-            color: zE.INVERT
+            color: BadgeColor.INVERT
           })
         })]
       }), jsx("div", {
@@ -1006,8 +1006,8 @@ let eM = class e extends RecordingComponent {
       let e = this.getOrgForTeam();
       e && ("team" === this.props.resourceType && this.props.canAdminOrg ? this.props.dispatch(sf({
         view: "orgAdminSettings",
-        orgAdminSettingsViewTab: J7.RESOURCES,
-        orgAdminSettingsViewSecondaryTab: _d.SHARED_FONTS
+        orgAdminSettingsViewTab: DashboardSection.RESOURCES,
+        orgAdminSettingsViewSecondaryTab: FigResourceType.SHARED_FONTS
       })) : this.props.dispatch(sf({
         view: "org",
         orgId: e.id,

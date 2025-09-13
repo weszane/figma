@@ -3,7 +3,7 @@ import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'r
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { k as _$$k2 } from '../905/44647';
-import { Fo, Uz } from '../905/63728';
+import { isCommandEvent, KeyCodes } from '../905/63728';
 import { G as _$$G } from '../905/117393';
 import { KindEnum } from '../905/129884';
 import { e as _$$e2 } from '../905/149844';
@@ -121,7 +121,7 @@ function el({
     F(e.currentTarget.value);
   }, [F]));
   let q = useHandleKeyboardEvent(generateRecordingKey(R, 'text-input'), 'keydown', e => {
-    e.keyCode === Uz.ESCAPE ? (B(a, h), F(h)) : e.keyCode === Uz.ENTER && Y(e.currentTarget.value);
+    e.keyCode === KeyCodes.ESCAPE ? (B(a, h), F(h)) : e.keyCode === KeyCodes.ENTER && Y(e.currentTarget.value);
   }, {
     recordMetadata: e => ({
       inputValue: e.currentTarget.value
@@ -133,7 +133,7 @@ function el({
     })
   });
   let G = useHandleKeyboardEvent(R, 'keydown', e => {
-    c && !u && (e.keyCode === Uz.BACKSPACE || e.keyCode === Uz.DELETE) ? l() : c && !u && e.keyCode === Uz.G && Fo(e) ? (C(), e.preventDefault()) : !u && e.key !== 'Tab' && e.nativeEvent && fullscreenValue.forwardKeyboardEvent(e.nativeEvent);
+    c && !u && (e.keyCode === KeyCodes.BACKSPACE || e.keyCode === KeyCodes.DELETE) ? l() : c && !u && e.keyCode === KeyCodes.G && isCommandEvent(e) ? (C(), e.preventDefault()) : !u && e.key !== 'Tab' && e.nativeEvent && fullscreenValue.forwardKeyboardEvent(e.nativeEvent);
   });
   let Z = useCallback(() => {
     Y(K);

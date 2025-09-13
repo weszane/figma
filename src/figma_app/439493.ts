@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, Children, memo } from "react";
 import { J } from "../905/614223";
 import s from "classnames";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { SvgComponent } from "../905/714743";
 import { KindEnum } from "../905/129884";
 import { En } from "../figma_app/613182";
@@ -191,7 +191,7 @@ let $$E0 = forwardRef((e, t) => {
     tooltipType
   });
   let X = "combobox" === role && "NONE" !== active;
-  return jsxs(GG, {
+  return jsxs(RecordableButton, {
     "aria-activedescendant": X ? ariaActiveDescendant : void 0,
     "aria-checked": "switch" === role ? "NONE" !== active : void 0,
     "aria-controls": ariaControls,

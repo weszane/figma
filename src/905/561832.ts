@@ -18,7 +18,7 @@ import { sf } from "../905/929976";
 import { Cp } from "../905/292918";
 import { Nu, ie, ov, E as _$$E } from "../905/300250";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { handleError } from "../905/760074";
 import { waitForJoinStatus } from "../905/346794";
 import { FEditorType } from "../figma_app/53721";
@@ -178,7 +178,7 @@ function M(e) {
       forwardToDatadog: !0
     });
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.BRANCHING_MERGE_ERROR_MODAL,
     children: jsx(Ao, {
       isCloseHidden: !0,

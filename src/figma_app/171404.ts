@@ -7,7 +7,7 @@ import { analyticsEventManager } from "../905/449184";
 import { useWebLoggerTimer } from "../905/485103";
 import { EH } from "../905/985374";
 import { wu } from "../figma_app/297957";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { iq } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { ProductAccessTypeMap } from "../905/513035";
@@ -218,7 +218,7 @@ function A(e) {
     socialProofTotalActiveUsers: e.totalActiveUsers,
     socialProofActiveUserAvatars: v.map(e => e.id).join(",")
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Social Proof",
     properties: A,
     children: jsxs("div", {

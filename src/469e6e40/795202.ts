@@ -15,16 +15,16 @@ import { Tn } from "../figma_app/933328";
 import { NJ } from "../figma_app/518077";
 import { WorkspaceAdminSettingsView, WorkspaceInfoView } from "../figma_app/43951";
 import { U5 } from "../figma_app/336853";
-import { J0, oU } from "../figma_app/967319";
+import { DefaultFilters, DefaultSortConfig } from "../figma_app/967319";
 import { EntityType } from "../figma_app/707808";
-import { m2 } from "../figma_app/858344";
+import { SectionType } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
 import { z6 } from "../figma_app/805373";
 import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { m as _$$m } from "../469e6e40/248185";
 import { FAccessType } from "../figma_app/191312";
-import { w_ } from "../figma_app/482728";
+import { PublicLinkControlsSetting } from "../figma_app/482728";
 import { getFeatureFlags } from "../905/601108";
 import A from "classnames";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -104,14 +104,14 @@ function $({
   let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   return jsxs(Fragment, {
     children: [jsx(_$$m, {
-      selectedSecondaryTab: m2.SETTINGS
+      selectedSecondaryTab: SectionType.SETTINGS
     }), jsx("div", {
       className: "settings_section--container--QpIP- admin_settings_page--container--LZSr8",
       children: jsx("div", {
         className: _$$s.bt1.bSolid.colorBorder.$,
         children: jsx(F, {
           finishedLoading: "loaded" === t.status,
-          publicLinkControlsSetting: t.data?.workspace?.publicLinkControlsSetting ?? w_.ALLOWED,
+          publicLinkControlsSetting: t.data?.workspace?.publicLinkControlsSetting ?? PublicLinkControlsSetting.ALLOWED,
           publicLinkControlsMaxExp: t.data?.workspace?.publicLinkControlsMaxExpiration,
           exportControlsSetting: getResourceDataOrFallback(t.data?.workspace?.fileExportSetting) ?? a?.shared_container_setting?.file_export_setting ?? FAccessType.ALLOWED
         })
@@ -154,13 +154,13 @@ function G({
   let L = jsx(LoadingOverlay, {});
   let D = null;
   switch (t) {
-    case m2.MEMBERS:
+    case SectionType.MEMBERS:
       let M = {
-        ...J0,
+        ...DefaultFilters,
         ...E.orgAdminMembersTabFilters,
         workspaceFilter: e
       };
-      let P = E.orgAdminMembersTabSort || oU;
+      let P = E.orgAdminMembersTabSort || DefaultSortConfig;
       D = jsx(KX, {
         currency: void 0,
         dropdownShown: g,
@@ -174,7 +174,7 @@ function G({
         startTime: A
       });
       break;
-    case m2.TEAMS:
+    case SectionType.TEAMS:
       let U = E.teamsTabViewingUnassigned ? UNASSIGNED : e;
       D = jsx(_$$G, {
         org: a,
@@ -184,7 +184,7 @@ function G({
         selectedWorkspaceId: U
       });
       break;
-    case m2.LIBRARIES:
+    case SectionType.LIBRARIES:
       D = jsx(re, {
         org: a,
         workspaceId: e,
@@ -192,7 +192,7 @@ function G({
         isLoading: null === T
       });
       break;
-    case m2.SETTINGS:
+    case SectionType.SETTINGS:
       if (!U5(a)) break;
       D = jsx($, {
         workspaceId: e

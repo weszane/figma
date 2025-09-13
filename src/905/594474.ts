@@ -64,7 +64,7 @@ import { LG, WN, wC, bx } from "../905/448440";
 import { A as _$$A9 } from "../905/562488";
 import { EventShield } from "../905/821217";
 import { b as _$$b2, c as _$$c2 } from "../905/308099";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { TextWithTruncation } from "../905/984674";
 import { FRequestStatusType } from "../figma_app/191312";
 import { G6, ir as _$$ir } from "../905/671449";
@@ -141,7 +141,7 @@ import { w as _$$w3 } from "../905/893785";
 import { deepClone } from "../905/284190";
 import { J as _$$J6 } from "../905/931050";
 import { r as _$$r4 } from "../905/520829";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { i as _$$i2 } from "../905/810360";
 import { VisualBellActions } from "../905/302958";
 import { $$in, WX } from "../figma_app/350203";
@@ -151,7 +151,7 @@ import { _e, gI } from "../905/277373";
 import { Fk } from "../figma_app/167249";
 import { A as _$$A11 } from "../905/72153";
 import { useCurrentUserOrg } from "../905/845253";
-import { xw } from "../figma_app/951233";
+import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { k2 } from "../figma_app/10554";
 import { e0 as _$$e3 } from "../905/696396";
@@ -734,7 +734,7 @@ function eV({
     className: "x78zum5 xdt5ytf x167g77z",
     children: [prompt && jsx("div", {
       children: _$$g(prompt)
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       className: F()(_Z, {
         [z3]: d
       }),
@@ -1456,7 +1456,7 @@ let tB = forwardRef(function ({
     children: jsx(EventShield, {
       display: "contents",
       eventListeners: ["onKeyDown"],
-      children: jsx(ks, {
+      children: jsx(BigTextInputForwardRef, {
         ref: o,
         "aria-describedby": m,
         "aria-errormessage": d ? h : void 0,
@@ -2563,7 +2563,7 @@ function iM({
   let l = useDispatch();
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let A = _$$H(trackEvent);
   let y = _$$t4(e.fieldStates.category);
   let R = _$$J7({
@@ -2573,7 +2573,7 @@ function iM({
   let N = function (e) {
     let {
       trackEvent: _trackEvent
-    } = j6();
+    } = useTracking();
     let i = _$$H(_trackEvent);
     let n = useRef(void 0);
     useEffect(() => {
@@ -2701,7 +2701,7 @@ function iM({
     let n = useDispatch();
     let {
       trackEvent: _trackEvent2
-    } = j6();
+    } = useTracking();
     let o = _$$H(_trackEvent2);
     let l = _$$J6(async () => await e.deps.dataSecurityPromise, [e.deps.dataSecurityPromise]);
     let d = l.status === _$$r4.SUCCESS ? l.value.existingStatus : null;
@@ -3391,7 +3391,7 @@ function ij(e) {
     securityForm: await _$$is.getBlankSecurityForm()
   }, [existingSecurityFormResponse]);
   let m = selectUser();
-  let h = useSelector(e => xw(e) ?? void 0, deepEqual);
+  let h = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let g = useCurrentUserOrg();
   let f = useCurrentPlanUser("ExtensionPublishingModal");
   let A = useIsOrgMemberOrAdminUser(f).unwrapOr(!1);
@@ -3423,7 +3423,7 @@ function ij(e) {
   useEffect(() => {
     (localExtension?.error || S) && __(_$$tZ.MANIFEST_INFO);
   }, [localExtension?.error, S]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e3.COMMUNITY_HUB_PLUGIN_PUBLISH_MODAL_V2,
     properties: {
       entryPoint,

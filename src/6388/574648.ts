@@ -60,7 +60,7 @@ import { Dm } from "../figma_app/8833";
 import { d as _$$d } from "../9410/847929";
 import { xn } from "../figma_app/644079";
 import { k as _$$k4 } from "../figma_app/564183";
-import { VA } from "../figma_app/528509";
+import { hasRootPathOptional } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { aV } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -125,7 +125,7 @@ function e0({
 }) {
   let a = aV();
   let d = selectCurrentFile();
-  let c = VA(d?.project);
+  let c = hasRootPathOptional(d?.project);
   let u = s === ViewType.HISTORY;
   let h = atomStoreManager.get(_$$o2);
   let {

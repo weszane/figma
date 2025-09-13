@@ -1,5 +1,5 @@
 import { W } from "../905/187396";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { isMobileUA } from "../figma_app/778880";
 import { bG } from "../905/149328";
 import { e } from "../905/361125";
@@ -54,7 +54,7 @@ let l = class e {
       this._setUIShown(!0);
     };
     this.handleKeyDown = (e, t) => {
-      (t && this._isUIShown() || e.keyCode === Uz.ESCAPE) && this.showUiAndScheduleFade();
+      (t && this._isUIShown() || e.keyCode === KeyCodes.ESCAPE) && this.showUiAndScheduleFade();
     };
     this.teardown = () => {
       this._hideUITask.reset();

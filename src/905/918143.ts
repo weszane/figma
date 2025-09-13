@@ -6,7 +6,7 @@ import { k as _$$k2 } from "../905/22009";
 import { iB } from "../figma_app/188671";
 import { IT } from "../905/713695";
 import { h as _$$h } from "../905/207101";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { tZ, xe, DK, I$, w, gP, Kz, K_, UW } from "../905/599844";
 import { useDispatch } from "react-redux";
 import g from "classnames";
@@ -26,7 +26,7 @@ function m({
   _$$h(() => () => t(""));
   return jsx("div", {
     className: tZ,
-    children: jsx(ks, {
+    children: jsx(BigTextInputForwardRef, {
       maxLength: 70,
       className: xe,
       onChange: i,

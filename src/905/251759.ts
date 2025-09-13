@@ -6,7 +6,7 @@ import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { Cf } from "../905/504727";
 import { A } from "../svg/763165";
 var o = s;
@@ -102,7 +102,7 @@ export function $$A0(e) {
   });
 }
 _.sort((e, t) => "usd" === e ? 1 : "usd" === t ? -1 : e.localeCompare(t));
-let y = tf(function (e) {
+let y = withTrackedClick(function (e) {
   let t = f[e.currency];
   return jsx(c$, {
     onClick: e.onClick,

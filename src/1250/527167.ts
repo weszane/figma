@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { g as _$$g } from "../1250/701065";
 import { customHistory } from "../905/612521";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -73,9 +73,9 @@ export function $$w1(e) {
       }, y - e);
     }, [personal_draft_migration_completed, l, d, long_running_draft_migration_toast_shown, draft_migration_completed_toast_shown, personal_draft_migration_scheduled]);
   }(t);
-  let j = n.seen_drafts_to_move_notice_icon ? w > 0 ? jsx(Ex, {
+  let j = n.seen_drafts_to_move_notice_icon ? w > 0 ? jsx(Badge, {
     text: w > 99 ? "99+" : `${w}`,
-    color: T ? zE.TOOLBAR_SELECTED : zE.DEFAULT,
+    color: T ? BadgeColor.TOOLBAR_SELECTED : BadgeColor.DEFAULT,
     className: _$$s.mr8.$$if(!T, _$$s.colorBgBrandTertiary.colorText).$
   }) : void 0 : jsx(_$$E, {
     className: _$$s.mr8.$

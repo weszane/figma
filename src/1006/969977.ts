@@ -11,7 +11,7 @@ import { colorToHex } from "../905/436288";
 import { useDebouncedCallback } from "use-debounce";
 import { logger } from "../905/651849";
 import { selectWithShallowEqual } from "../905/103090";
-import { N as _$$N } from "../905/551536";
+import { BaseLinkComponent } from "../905/551536";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Dm } from "../figma_app/8833";
 import { z5 } from "../905/713722";
@@ -52,7 +52,7 @@ function M(e) {
   });
 }
 function P(e) {
-  let t = e.href ? jsx(_$$N, {
+  let t = e.href ? jsx(BaseLinkComponent, {
     href: e.href,
     className: _$$s.cursorDefault.wFull.hFull.$,
     target: "_blank",
@@ -81,7 +81,7 @@ function P(e) {
   });
 }
 function O(e) {
-  let t = e.href ? jsx(_$$N, {
+  let t = e.href ? jsx(BaseLinkComponent, {
     href: e.href,
     className: d()(B, _$$s.cursorDefault.wFull.hFull.$),
     target: "_blank",

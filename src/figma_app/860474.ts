@@ -1,4 +1,4 @@
-import { U } from "../905/807535";
+import { filterNumberValues } from "../905/807535";
 import { CanvasSearchHelpers, GraphicElement, EditAction, Fullscreen, TextCase } from "../figma_app/763686";
 import { A } from "../vendor/292399";
 import { debugState } from "../905/407919";
@@ -90,13 +90,13 @@ export function $$E0(e) {
     },
     setCategoryCounts(e) {
       let t = {};
-      for (let r of U(GraphicElement)) t[r] = e[r];
+      for (let r of filterNumberValues(GraphicElement)) t[r] = e[r];
       yo.syncFromFullscreen(t);
     },
     updateCategoryCounts(e) {
       yo.syncFromFullscreen(t => {
         let r = {};
-        for (let n of U(GraphicElement)) r[n] = t[n] + e[n];
+        for (let n of filterNumberValues(GraphicElement)) r[n] = t[n] + e[n];
         return r;
       });
     },

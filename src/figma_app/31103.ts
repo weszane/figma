@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useMemo, useEffect } from "reac
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { v4 } from "../figma_app/655139";
 import { $h } from "../905/191741";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 let d = createContext({});
 let c = "dev_mode.variables.";
 let u = {};
@@ -75,7 +75,7 @@ export function $$m2({
         });
       };
     }
-  }, []), p) ? jsx(fu, {
+  }, []), p) ? jsx(TrackingProvider, {
     name: p,
     enabled: t,
     properties: f,

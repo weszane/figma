@@ -4,9 +4,9 @@ import { clamp } from "../figma_app/492908";
 import { ColorSpaceEnum, NoneColor, AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { j7 } from "../905/929976";
 import { Vl } from "../figma_app/8833";
 import { F } from "../905/989956";
@@ -187,14 +187,14 @@ class k extends RecordingPureComponent {
       let t = 0;
       let i = !1;
       switch (e.keyCode) {
-        case Uz.LEFT_ARROW:
+        case KeyCodes.LEFT_ARROW:
           t = e.shiftKey ? -.05 : -.01;
           break;
-        case Uz.RIGHT_ARROW:
+        case KeyCodes.RIGHT_ARROW:
           t = e.shiftKey ? .05 : .01;
           break;
-        case Uz.BACKSPACE:
-        case Uz.DELETE:
+        case KeyCodes.BACKSPACE:
+        case KeyCodes.DELETE:
           i = this.props.paint.stops.length > 1;
           break;
         default:
@@ -437,7 +437,7 @@ function R({
       tabIndex: -1
     })
   });
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: d()(c, {
       "gradient_control--stopNewUI--b8M72": m
     }),

@@ -5,7 +5,7 @@ import { oB, j7 } from "../905/929976";
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { n as _$$n } from "../figma_app/3731";
@@ -45,10 +45,10 @@ function P(e, t, i, r, a, s, o) {
         forceAvatar: !0
       })]
     }),
-    itemBadge: cs(e) ? jsx(Ex, {
+    itemBadge: cs(e) ? jsx(Badge, {
       className: w,
       text: getI18nString("navbar.community.admin_label"),
-      color: zE.INVERT,
+      color: BadgeColor.INVERT,
       subtle: !0
     }) : void 0,
     isActive: r,
@@ -122,10 +122,10 @@ function z() {
           return {
             displayText: e.name,
             optionHeight: G,
-            itemBadge: o ? jsx(Ex, {
+            itemBadge: o ? jsx(Badge, {
               className: "workspace_switcher--badge--lsDwX",
               text: getI18nString("navbar.navbar.guest"),
-              color: zE.INVERT,
+              color: BadgeColor.INVERT,
               subtle: !0
             }) : void 0,
             icon: jsx(_$$n, {
@@ -223,10 +223,10 @@ function z() {
                 })
               }),
               isActive: A,
-              itemBadge: jsx(Ex, {
+              itemBadge: jsx(Badge, {
                 className: w,
                 text: getI18nString("navbar.community.admin_label"),
-                color: zE.INVERT,
+                color: BadgeColor.INVERT,
                 subtle: !0
               }),
               isChecked: A,

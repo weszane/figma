@@ -21,7 +21,7 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { showModal, popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { O1, KD } from "../figma_app/317394";
 import { dH } from "../figma_app/722362";
 import { getUserId } from "../905/372672";
@@ -309,7 +309,7 @@ export let $$$0 = registerModal(function ({
     className: k()("edit_color_palette_modal--headerModalTransitionContainer--C-CFV", {
       "edit_color_palette_modal--hidden--EDk-H": f
     }),
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: e0.FIGJAM_EDIT_PALETTE_MODAL,
       properties: {
         userId: s,

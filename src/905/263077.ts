@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { kz } from "../figma_app/171177";
 import { cq } from "../905/794154";
 export function $$o0(e, t) {
@@ -32,6 +32,6 @@ export function $$o0(e, t) {
   let d = useCallback(e => {
     e.repeat || (e.preventDefault(), pop());
   }, [pop]);
-  kz(Uz.BACKSPACE, d, l && !e && !isRoot);
+  kz(KeyCodes.BACKSPACE, d, l && !e && !isRoot);
 }
 export const y = $$o0;

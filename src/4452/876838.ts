@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { K } from "../905/807535";
+import { findMatchingValue } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { getResourceDataOrFallback } from "../905/663269";
 import { subscribeAndAwaitData } from "../905/553831";
@@ -54,8 +54,8 @@ export function $$f1() {
   useEffect(() => {
     async function s(t) {
       let s = QL(h.entryPoint);
-      let n = K(m, s || "") ?? m.UnknownDeeplink;
-      let i = K(ps, t.planType) || ps.TEAM;
+      let n = findMatchingValue(m, s || "") ?? m.UnknownDeeplink;
+      let i = findMatchingValue(ps, t.planType) || ps.TEAM;
       try {
         let a = await w.approveRequests({
           plan_id: t.planId,

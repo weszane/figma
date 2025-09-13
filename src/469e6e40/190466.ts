@@ -20,7 +20,7 @@ import { lb } from "../3973/538504";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { P as _$$P } from "../905/347284";
 import { a as _$$a } from "../905/925868";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -53,19 +53,19 @@ import { II } from "../figma_app/11182";
 import { sf } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { C3, UV } from "../figma_app/297957";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { x as _$$x } from "../469e6e40/446220";
 import { mm, a3 } from "../figma_app/684446";
 import { MemberFlyoutInfoView } from "../figma_app/43951";
 import { k_, XO, PR, w6 } from "../figma_app/609194";
-import { QS, bC, Ad } from "../figma_app/951233";
+import { hasScimMetadata, hasScimSeatType, findMainWorkspaceUser } from "../figma_app/951233";
 import { hasValidSubscription } from "../figma_app/345997";
 import { getOrgLevelData } from "../figma_app/428858";
 import { k_ as _$$k_ } from "../1881/866163";
 import { L7 } from "../figma_app/329496";
-import { J7 } from "../figma_app/650409";
+import { DashboardSection } from "../figma_app/650409";
 import { BillingCycle } from "../figma_app/831101";
 import { J as _$$J2 } from "../905/298764";
 import { H as _$$H, az } from "../figma_app/805373";
@@ -235,7 +235,7 @@ function eO(e) {
       entity: e.avatarEntity,
       labelSize: _$$H.HEADING_MEDIUM,
       showIsMe: e.isMe,
-      isScimUser: e.planType === FOrganizationLevelType.ORG && QS(e.orgUser),
+      isScimUser: e.planType === FOrganizationLevelType.ORG && hasScimMetadata(e.orgUser),
       badge: e.badge,
       size: 48
     }) : jsx(az, {
@@ -263,7 +263,7 @@ function eL(e) {
   let d = useId();
   let c = useId();
   let _ = useRef(null);
-  let u = j6();
+  let u = useTracking();
   let g = {};
   e.options.forEach(e => {
     "option" === e.type && (g[e.key] = e.text);
@@ -384,7 +384,7 @@ function eU(e) {
     userId: e.orgUser.user_id,
     eccUpgradingLocked: !!e.orgUser.ecc_upgrading_locked,
     eccDomain: W4(e.orgUser),
-    scimLocked: bC(e.orgUser),
+    scimLocked: hasScimSeatType(e.orgUser),
     lastActiveAt: e.orgUser.last_seen ? e.orgUser.last_seen : void 0,
     upgradeReason: e.orgUser.active_seat_upgrade_method?.reason,
     upgradeMethod: e.orgUser.active_seat_upgrade_method?.upgrade_method ?? void 0,
@@ -556,8 +556,8 @@ function e$(e) {
     default:
       e.billingInterval;
   }
-  return t ? jsx(Ex, {
-    color: zE.DEFAULT,
+  return t ? jsx(Badge, {
+    color: BadgeColor.DEFAULT,
     text: t,
     dataTestId: "billing-interval-badge"
   }) : null;
@@ -847,7 +847,7 @@ function eY(e) {
 function eJ(e) {
   let t = useDispatch();
   let a = _$$o(e.orgUser, e.workspacesCanMoveTo);
-  let s = Ad(e.orgUser);
+  let s = findMainWorkspaceUser(e.orgUser);
   let {
     updateReason,
     updateTimestamp
@@ -1126,7 +1126,7 @@ function e0(e) {
           t(hideModal());
           t(sf({
             view: "orgAdminSettings",
-            orgAdminSettingsViewTab: J7.ACTIVITY,
+            orgAdminSettingsViewTab: DashboardSection.ACTIVITY,
             activityTabInitialEmail: e.orgUser.user.email
           }));
         },

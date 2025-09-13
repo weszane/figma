@@ -3,9 +3,9 @@ import { useEffect, useMemo, useCallback, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { Wn } from "../figma_app/88484";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useSubscription, useMultiSubscription } from "../figma_app/288654";
-import { L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { LoadingSpinner } from "../figma_app/858013";
 import { ne } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
@@ -17,8 +17,8 @@ import { nb } from "../figma_app/543100";
 import { FC } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { CommunityPlaygroundFileSelectorRecentFilesView, FileCanEdit } from "../figma_app/43951";
-import { YN, iP } from "../figma_app/349248";
-import { Lk, uH } from "../figma_app/162807";
+import { mapRecentFilesAndRepos, filterValidRecentFiles } from "../figma_app/349248";
+import { Lk, PublicModelType } from "../figma_app/162807";
 import { $W } from "../905/144933";
 import { GQ, lJ } from "../905/50159";
 import { bx, Uz as _$$Uz, SL, Vg, g4, ZF, Tm, qc, Rt, i3 } from "../figma_app/312949";
@@ -41,11 +41,11 @@ export function $$R5() {
   let e = useSubscription(CommunityPlaygroundFileSelectorRecentFilesView({}));
   useEffect(() => {
     if ("loaded" === e.status) {
-      let t = YN(e.data.currentUser.recentFiles2);
+      let t = mapRecentFilesAndRepos(e.data.currentUser.recentFiles2);
       Wn(t);
     }
   }, [e]);
-  return useMemo(() => e.transform(e => iP(e.currentUser.recentFiles2)), [e]);
+  return useMemo(() => e.transform(e => filterValidRecentFiles(e.currentUser.recentFiles2)), [e]);
 }
 export function $$L1(e) {
   var t;
@@ -169,7 +169,7 @@ export function $$D0(e) {
       sort: Lk.RELEVANCY,
       orgId: void 0,
       isGlobal: !0,
-      searchModelType: uH.FILES
+      searchModelType: PublicModelType.FILES
     }).then(({
       data: {
         meta: e
@@ -189,7 +189,7 @@ export function $$D0(e) {
   let m = useCallback(() => {
     setQuery("");
   }, [setQuery]);
-  let f = useCallback(e => (e.keyCode === Uz.ENTER && u(), !0), [u]);
+  let f = useCallback(e => (e.keyCode === KeyCodes.ENTER && u(), !0), [u]);
   let E = useCallback(e => {
     setQuery(e);
   }, [setQuery]);
@@ -219,7 +219,7 @@ export function $$D0(e) {
     children: [jsx(SvgComponent, {
       className: qc,
       svg: _$$A
-    }), jsx(L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: Rt,
       onBlur,

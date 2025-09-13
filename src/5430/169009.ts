@@ -30,13 +30,13 @@ import { Um } from "../905/848862";
 import { p as _$$p } from "../905/927118";
 import { j as _$$j } from "../905/834956";
 import { T as _$$T } from "../5132/203178";
-import { N_ } from "../vendor/956898";
+import { Link } from "react-router-dom";
 import { K as _$$K } from "../905/443068";
 import { J as _$$J } from "../905/125993";
 import H from "classnames";
 import { h1 } from "../905/986103";
 import { SvgComponent } from "../905/714743";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { AG } from "../figma_app/999312";
 import { y as _$$y } from "../905/158417";
 import { CS } from "../figma_app/275462";
@@ -50,10 +50,10 @@ import { lW } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { E as _$$E2 } from "../905/565019";
 import { H as _$$H } from "../5430/304640";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { H8, Pf } from "../905/590952";
 import { registerModal } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { zC, RZ } from "../5430/39369";
 import { setupLazyComponentFactory } from "../905/992467";
 import { A as _$$A } from "../svg/724030";
@@ -175,9 +175,9 @@ let M = function ({
 };
 var U = H;
 function $() {
-  return jsx(Ex, {
+  return jsx(Badge, {
     text: getI18nString("community.comments.creator"),
-    color: zE.TOOLBAR,
+    color: BadgeColor.TOOLBAR,
     className: "creator_badge--creatorBadge--P5vsL"
   });
 }
@@ -226,7 +226,7 @@ let ep = registerModal(function (e) {
     children: [t ? getI18nString("community.comments.this_will_flag_the_comment_for_review_and_hide_it_for_everyone") : getI18nString("community.comments.this_will_flag_the_comment_for_review"), " ", getI18nString("community.comments.comment_author_will_not_be_notified", {
       authorName: e.comment.author.name
     }), " ", renderI18nText("community.comments.please_read_our_link_before_reporting", {
-      link: jsx(CY, {
+      link: jsx(SecureLink, {
         href: "https://help.figma.com/hc/articles/360038510573-Figma-Community-Guidelines",
         target: "_blank",
         trusted: !0,
@@ -234,7 +234,7 @@ let ep = registerModal(function (e) {
       })
     })]
   });
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: r,
     confirmText: getI18nString("community.comments.report"),
     onConfirm: () => e.onReport(e.comment.id),
@@ -593,7 +593,7 @@ function eI(e) {
     "data-comment-id": comment.id,
     role: "button",
     tabIndex: 0,
-    children: [jsx(N_, {
+    children: [jsx(Link, {
       className: "comment_tile--commentAvatarContainer--e8z35",
       to: L,
       target: E,
@@ -609,7 +609,7 @@ function eI(e) {
         children: [jsxs("div", {
           className: "comment_tile--commentMetaAndOptions--Avk6k",
           children: [jsxs("div", {
-            children: [jsxs(N_, {
+            children: [jsxs(Link, {
               className: "comment_tile--commentAuthorLink--3Q-Ty ellipsis--ellipsis--Tjyfa",
               to: L,
               target: E,

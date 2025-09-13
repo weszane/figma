@@ -1,9 +1,9 @@
-import { KC } from "../figma_app/349248";
+import { mapStyleProperties } from "../figma_app/349248";
 export function $$r0(e) {
   let t = [];
   if (e?.status === "loaded") {
     let i = e.data.communityLibraryByHubFileId;
-    if (i?.libraryHierarchyPaths) for (let e of i.libraryHierarchyPaths) for (let r of e.styles) t.push(KC(r, {
+    if (i?.libraryHierarchyPaths) for (let e of i.libraryHierarchyPaths) for (let r of e.styles) t.push(mapStyleProperties(r, {
       type: "hubFile",
       file: {
         id: i.hubFileId,

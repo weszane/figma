@@ -12,9 +12,9 @@ import { h as _$$h2 } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { M } from "../figma_app/648761";
 import { getInitialOptions } from "../figma_app/169182";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -75,7 +75,7 @@ export function $$P7(e, t) {
   });
   let A = useHandleKeyboardEvent(e.recordingKey, "keydown", t => {
     if (!(e.isKeyDownHandled && e.isKeyDownHandled(t))) {
-      if (" " === t.key && t.stopPropagation(), t.keyCode === Uz.ESCAPE) {
+      if (" " === t.key && t.stopPropagation(), t.keyCode === KeyCodes.ESCAPE) {
         b.current?.blur();
         return;
       }
@@ -147,7 +147,7 @@ let $$D1 = forwardRef((e, t) => {
     }) : jsx(SvgComponent, {
       className: e.iconClassName ?? qc,
       svg: _$$A2
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: mn,
       dataTestId: "search-bar-input",
@@ -199,7 +199,7 @@ let $$k4 = forwardRef((e, t) => {
       children: jsx(In, {
         icon: "chevron-left-32"
       })
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: mn,
       dataTestId: "search-bar-input",
@@ -268,7 +268,7 @@ let $$F0 = forwardRef((e, t) => {
     children: [jsx(SvgComponent, {
       className: mh,
       svg: _$$A2
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: g,
       onBlur,
@@ -324,7 +324,7 @@ let $$j3 = forwardRef((e, t) => {
     onMouseUp,
     children: [jsx(In, {
       icon: "search-32"
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: T,
       onBlur,
@@ -364,7 +364,7 @@ let $$U9 = forwardRef((e, t) => {
   return jsxs("div", {
     "data-onboarding-key": e["data-onboarding-key"],
     className: sb,
-    children: [jsx(_$$L, {
+    children: [jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: vs,
       onBlur,
@@ -406,7 +406,7 @@ let $$B2 = forwardRef((e, t) => {
     children: [!e.hideSearchIcon && jsx(SvgComponent, {
       svg: _$$A4,
       className: nk
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: e.query ? CC : Vl,
       dataTestId: e.dataTestId,
@@ -446,7 +446,7 @@ let $$G5 = forwardRef((e, t) => {
     children: [jsx(SvgComponent, {
       svg: _$$A4,
       className: MU
-    }), jsx(_$$L, {
+    }), jsx(LazyInputForwardRef, {
       ref: searchInputRef,
       className: uD,
       onBlur,
@@ -502,7 +502,7 @@ let $$V8 = forwardRef((e, t) => {
       })
     }), (loggedOutSearchBarActivated || !!e.query) && jsxs("div", {
       className: S_,
-      children: [jsx(_$$L, {
+      children: [jsx(LazyInputForwardRef, {
         ref: searchInputRef,
         autoFocus: !0,
         className: nA,

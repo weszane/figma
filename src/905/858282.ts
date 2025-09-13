@@ -4,9 +4,9 @@ import { throwTypeError } from "../figma_app/465776";
 import { Ay } from "../figma_app/272902";
 import o from "classnames";
 import { A as _$$A } from "../vendor/518290";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingComponent, handleMouseEvent, SKIP_RECORDING, generateRecordingKey } from "../figma_app/878298";
-import { i as _$$i, C as _$$C } from "../905/64217";
+import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Uu, Dm } from "../figma_app/8833";
 import { ft } from "../figma_app/753501";
@@ -132,7 +132,7 @@ export class $$w2 extends RecordingComponent {
     };
     this.onKeyDown = e => {
       this.props.onKeyDown?.(e);
-      e.event.keyCode === Uz.ESCAPE && !this.props.ignoreCloseShortcut && this.props.onClose && (0 === this.props.onClose() ? e.shouldPropagate = !0 : e.accept());
+      e.event.keyCode === KeyCodes.ESCAPE && !this.props.ignoreCloseShortcut && this.props.onClose && (0 === this.props.onClose() ? e.shouldPropagate = !0 : e.accept());
     };
     this.getAllowedResizeDirections = () => {
       let e = [];
@@ -261,8 +261,8 @@ export class $$w2 extends RecordingComponent {
                 left: this.props.arrowRelativeX,
                 top: this.props.arrowRelativeY
               }
-            }), jsx(_$$i, {
-              displayAs: _$$C.DeprecatedFullHeightBlock,
+            }), jsx(TabLoop, {
+              displayAs: TabLoopDisplayAs.DeprecatedFullHeightBlock,
               children: null != this.props.title ? jsx(ZD, {
                 className: hv,
                 closeButtonClassName: this.props.closeButtonClassName,

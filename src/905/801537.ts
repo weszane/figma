@@ -4,7 +4,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { MZ } from "../figma_app/925970";
 import { wf } from "../905/124270";
 import { IT, M4 } from "../905/713695";
-import { WY } from "../figma_app/162807";
+import { CreatorResourceType } from "../figma_app/162807";
 import { $W } from "../905/144933";
 import { A as _$$A } from "../905/421315";
 export function $$p0(e, t) {
@@ -39,6 +39,6 @@ let m = M4.Query({
     restrictOrgId: e.restrictOrgId,
     restrictTeamId: e.restrictTeamId
   })).data.meta,
-  enabled: e => !!e.facetType && e.facetType !== WY.RESOURCE && null != e.query
+  enabled: e => !!e.facetType && e.facetType !== CreatorResourceType.RESOURCE && null != e.query
 });
 export const F = $$p0;

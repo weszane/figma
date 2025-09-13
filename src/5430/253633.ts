@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { h as _$$h } from "../905/994594";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Dy, ky, Je } from "../figma_app/925970";
@@ -116,17 +116,17 @@ export function $$b0({
               entryPoint: "community"
             }));
           }
-        } else if ("Escape" === s.key) A.current?.blur();else if (s.keyCode === Uz.DOWN_ARROW || s.keyCode === Uz.UP_ARROW) {
+        } else if ("Escape" === s.key) A.current?.blur();else if (s.keyCode === KeyCodes.DOWN_ARROW || s.keyCode === KeyCodes.UP_ARROW) {
           s.preventDefault();
           let e = renderedSelectedIdx === renderedOrder.length - 1 ? renderedSelectedIdx : renderedSelectedIdx + 1;
           let t = renderedSelectedIdx <= 0 ? renderedSelectedIdx : renderedSelectedIdx - 1;
           switch (s.keyCode) {
-            case Uz.DOWN_ARROW:
+            case KeyCodes.DOWN_ARROW:
               setSelectedIdx(renderedOrder[e] || {
                 idx: -1
               });
               break;
-            case Uz.UP_ARROW:
+            case KeyCodes.UP_ARROW:
               setSelectedIdx(renderedOrder[t] || {
                 idx: -1
               });

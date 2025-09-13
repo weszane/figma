@@ -9,7 +9,7 @@ import { Button } from "../905/521428";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { ks } from "../905/773401";
-import { i, C as _$$C } from "../905/64217";
+import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
 import { popModalStack } from "../905/156213";
@@ -79,8 +79,8 @@ export let $$b0 = registerModal(function (e) {
           accessLevel: E,
           onChangeAccessLevel: x,
           requesterCurrentLevel
-        }), jsx(i, {
-          displayAs: _$$C.Block,
+        }), jsx(TabLoop, {
+          displayAs: TabLoopDisplayAs.Block,
           children: jsx("form", {
             onSubmit: e => {
               e.preventDefault();

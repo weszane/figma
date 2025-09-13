@@ -4,7 +4,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { parseQuery, serializeQuery } from "../905/634134";
-import { EO } from "../905/691205";
+import { replaceColonWithDash } from "../905/691205";
 import { FFileType } from "../figma_app/191312";
 export function $$u3(e, t, r, n, s) {
   let c = {};
@@ -13,7 +13,7 @@ export function $$u3(e, t, r, n, s) {
   e.scalingInfo?.viewportScalingMode && (c.scaling = e.scalingInfo.viewportScalingMode);
   e.scalingInfo?.contentScalingMode && (c["content-scaling"] = e.scalingInfo?.contentScalingMode);
   e.pageId && isValidSessionLocalID(parseSessionLocalID(e.pageId)) && (c["page-id"] = e.pageId);
-  e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (c["node-id"] = EO(e.nodeId));
+  e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (c["node-id"] = replaceColonWithDash(e.nodeId));
   e.startingPointNodeId && isValidSessionLocalID(parseSessionLocalID(e.startingPointNodeId)) && (c["starting-point-node-id"] = e.startingPointNodeId);
   t && r && (c["prev-plan-id"] = t, c["prev-plan-type"] = r);
   e.prevSelectedView && (c["prev-selected-view"] = e.prevSelectedView.view, "recentsAndSharing" === e.prevSelectedView.view ? c["prev-tab"] = e.prevSelectedView.tab : "folder" === e.prevSelectedView.view && (c["folder-id"] = e.prevSelectedView.folderId));

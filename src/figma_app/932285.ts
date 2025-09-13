@@ -4,7 +4,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import s from "classnames";
 import { whiteColor, areColorsEqual } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
-import { GG } from "../905/511649";
+import { RecordableButton } from "../905/511649";
 import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { F as _$$F } from "../905/989956";
@@ -251,7 +251,7 @@ export function $$L1({
   recordingKey: d,
   shouldRenderCirclesWithContentBoxSizing: u
 }) {
-  return a ? createElement(GG, {
+  return a ? createElement(RecordableButton, {
     id: e,
     ...(t ? {} : {
       "data-tooltip-type": KindEnum.TEXT,
@@ -279,7 +279,7 @@ export function $$L1({
     background: "dark",
     size: "medium",
     shouldRenderCirclesWithContentBoxSizing: u
-  })) : jsx(GG, {
+  })) : jsx(RecordableButton, {
     id: e,
     recordingKey: d,
     onPointerUp: s,
@@ -448,7 +448,7 @@ function P({
       id: r,
       isSelected: l,
       isFocused: d
-    }) => createElement(GG, {
+    }) => createElement(RecordableButton, {
       id: r,
       ...(H ? {} : {
         "data-tooltip-type": KindEnum.TEXT,

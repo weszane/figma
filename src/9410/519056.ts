@@ -17,7 +17,7 @@ import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { l7 } from "../figma_app/88239";
 import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
-import { $z } from "../figma_app/831799";
+import { TrackedButton } from "../figma_app/831799";
 import { xf } from "../3276/13008";
 import { my } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
@@ -199,7 +199,7 @@ function ei({
     [z_]: "personalDraftDisabled" === e,
     [MI]: "secondary" === e
   }, uX, n);
-  return jsxs($z, {
+  return jsxs(TrackedButton, {
     type: "button",
     className: o,
     onClick: t,

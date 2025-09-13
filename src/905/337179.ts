@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { Children, isValidElement, createRef } from "react";
 import { PluginHelpers } from "../figma_app/763686";
 import s from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleKeyboardEvent, handlePointerEvent, RecordingComponent } from "../figma_app/878298";
 var o = s;
 var $$c0 = (e => (e.UPWARDS = "upwards", e.DOWNWARDS = "downwards", e))($$c0 || {});
@@ -54,26 +54,26 @@ export class $$u2 extends RecordingPureComponent {
       let i = this.props.typeahead;
       let n = Children.count(this.props.children?.filter(e => isValidElement(e) && e.type === $$p1));
       let a = null;
-      if (e.keyCode !== Uz.DOWN_ARROW || e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
-        if (e.keyCode !== Uz.UP_ARROW || e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
-          if ((e.keyCode === Uz.DOWN_ARROW || e.keyCode === Uz.UP_ARROW) && (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey)) {
+      if (e.keyCode !== KeyCodes.DOWN_ARROW || e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
+        if (e.keyCode !== KeyCodes.UP_ARROW || e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
+          if ((e.keyCode === KeyCodes.DOWN_ARROW || e.keyCode === KeyCodes.UP_ARROW) && (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey)) {
             this.props.onClear();
             return;
           }
         } else a = "suggestions" === this.props.typeahead.type && -1 === i.index ? n - 1 : (n + i.index - 1) % n;
       } else a = (i.index + 1) % n;
-      (e.keyCode === Uz.ENTER || e.keyCode === Uz.TAB) && (e.stopPropagation(), e.preventDefault(), a = i.index, "suggestions" === i.type && this.props.trackEvent && this.props.trackEvent("comments_suggestions_picker_selected_item", {
+      (e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.TAB) && (e.stopPropagation(), e.preventDefault(), a = i.index, "suggestions" === i.type && this.props.trackEvent && this.props.trackEvent("comments_suggestions_picker_selected_item", {
         commentSuggestion: i.suggestedComments[i.index].suggestionsKey,
         commentSuggestionIndex: i.index + 1
       }), this.props.onInsert(), this.props.shouldNotClearOnEnter && (t = !1));
-      "suggestions" === this.props.typeahead.type && this.props.isOneLineOfSuggestions && !(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) && (e.keyCode === Uz.RIGHT_ARROW ? a = (i.index + 1) % n : e.keyCode === Uz.LEFT_ARROW && (a = (n + i.index - 1) % n));
+      "suggestions" === this.props.typeahead.type && this.props.isOneLineOfSuggestions && !(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) && (e.keyCode === KeyCodes.RIGHT_ARROW ? a = (i.index + 1) % n : e.keyCode === KeyCodes.LEFT_ARROW && (a = (n + i.index - 1) % n));
       null !== a && this.props.dispatchTypeahead({
         ...this.props.typeahead,
         index: a
       });
-      e.keyCode === Uz.ESCAPE || "suggestions" !== this.props.typeahead.type && (e.keyCode === Uz.TAB || e.keyCode === Uz.ENTER || e.keyCode === Uz.LEFT_ARROW || e.keyCode === Uz.RIGHT_ARROW) ? setTimeout(() => {
+      e.keyCode === KeyCodes.ESCAPE || "suggestions" !== this.props.typeahead.type && (e.keyCode === KeyCodes.TAB || e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.LEFT_ARROW || e.keyCode === KeyCodes.RIGHT_ARROW) ? setTimeout(() => {
         t && this.props.onClear();
-      }, 50) : "suggestions" === this.props.typeahead.type && (e.keyCode === Uz.ENTER || e.keyCode === Uz.TAB) && this.props.dispatchTypeahead(null);
+      }, 50) : "suggestions" === this.props.typeahead.type && (e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.TAB) && this.props.dispatchTypeahead(null);
     });
     this.handlePointerUp = handlePointerEvent(this, "pointerup", () => {
       this.holdTimeout && (clearTimeout(this.holdTimeout), this.props.setIsPointerDownInTypeahead?.(!1), this.isPointerInTypeaheadView || this.props.setWasPointerDownInTypeahead?.(!1));

@@ -3,7 +3,7 @@ import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
-import { Lf } from "../figma_app/637027";
+import { EnhancedInput } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { conditionalFeatureFlag } from "../figma_app/169182";
 import { V } from "../905/57562";
@@ -194,7 +194,7 @@ export function $$y0(e) {
     children: (t = e.country, i = e.region, !(e.isCommunityCheckout && (getFeatureFlags().cmty_disable_vat_for_india && t === p.INDIA || function (e) {
       if (f.has(e)) return h[e];
     }(t)?.communityDisabled)) && (void 0 === i ? f.has(t) : !!f.has(t) && !!h[t]?.regions?.includes(i)) && jsxs(Fragment, {
-      children: [jsx(Lf, {
+      children: [jsx(EnhancedInput, {
         className: l()("vat_input--inputBox--o9iEf basic_form--labeledInputGroup--aeD6L", {
           "vat_input--error--PX8cc": e.hasTaxIdVerificationError
         }),

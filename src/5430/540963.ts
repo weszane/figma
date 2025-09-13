@@ -13,7 +13,7 @@ import { S as _$$S } from "../905/872825";
 import { RA, ed as _$$ed } from "../figma_app/321395";
 import { xn, bL, qL } from "../905/934145";
 import { showModalHandler, hideModal } from "../905/156213";
-import { o3, fu } from "../figma_app/831799";
+import { TrackedLink, TrackingProvider } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
 import { UserProfileTab } from "../figma_app/707808";
 import { e0 as _$$e } from "../905/696396";
@@ -65,7 +65,7 @@ import { getFeatureFlags } from "../905/601108";
 import eO from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { nR, N_, CY } from "../figma_app/637027";
+import { ButtonSecondary, BaseLinkComponent, SecureLink } from "../figma_app/637027";
 import { G as _$$G } from "../905/750789";
 import { handleAtomEvent } from "../905/502364";
 import { l as _$$l } from "../905/152724";
@@ -107,7 +107,7 @@ import { s as _$$s3 } from "../5430/114211";
 import { P as _$$P } from "../905/347284";
 import { C as _$$C2 } from "../905/180";
 import { registerModal } from "../905/102752";
-import { yX as _$$yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A4 } from "../svg/815368";
 import { Hl } from "../905/840929";
 import { dxy, ZI8, g8m, d8i, wOr } from "../figma_app/27776";
@@ -494,7 +494,7 @@ function eI({
           newTab: !0,
           children: getI18nString("community.profiles.learn_how_to_publish_link")
         })
-      }) : jsx(o3, {
+      }) : jsx(TrackedLink, {
         className: "x1ypdohk",
         to: r.to,
         children: getI18nString("community.profiles.see_whats_being_created_in_figma")
@@ -607,7 +607,7 @@ function eA({
   return jsx("div", {
     className: "x78zum5 xdt5ytf x1fwvi78 xzc32ve xrsdzbr",
     ref: s.sizeRef,
-    children: e ? jsxs(fu, {
+    children: e ? jsxs(TrackingProvider, {
       name: _$$e.RESOURCE_HUB_PROFILE,
       properties: {
         handle: e.profile_handle,
@@ -712,7 +712,7 @@ function to({
   return jsx(_$$M, {
     isShowing: r.isShowing,
     userFlagOnShow: _$$e3,
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "Community monetization creator dashboard onboarding",
       children: jsx(NJ, {
         targetKey: e,
@@ -778,7 +778,7 @@ let tE = registerModal(function () {
   });
   let y = "creator_payout_statements_modal--scrollContainer--8j6P4";
   p && (c || (y += " creator_payout_statements_modal--topBorder--OHBCp"), u || (y += " creator_payout_statements_modal--bottomBorder--tNtIc"));
-  return jsx(_$$yX, {
+  return jsx(ConfirmationModal2, {
     title: getI18nString("community.seller.community_payout_statements"),
     titleClassName: "creator_payout_statements_modal--title--t9wed",
     confirmText: getI18nString(0 === r.length ? "general.got_it" : "general.done"),
@@ -1720,7 +1720,7 @@ function rq() {
         className: _$$s4.font11.$,
         children: renderI18nText("community.saves.no_saves_subtitle")
       })]
-    }), jsx(nR, {
+    }), jsx(ButtonSecondary, {
       target: "_blank",
       onClick: () => {
         customHistory.push("/community");
@@ -1739,7 +1739,7 @@ class r0 extends Component {
     };
     this.getProfileLinkText = () => {
       let e = this.getProfileLink();
-      let t = jsx(N_, {
+      let t = jsx(BaseLinkComponent, {
         href: `https://${e}`,
         className: nf,
         trusted: !0,
@@ -1793,7 +1793,7 @@ function r8(e) {
       children: renderI18nText("community.profiles.contact_creator_support")
     }) : jsx("div", {
       className: "profile_resources_grid--sellOnCommunity--7r6cV",
-      children: jsx(CY, {
+      children: jsx(SecureLink, {
         href: "https://www.figma.com/community-creators",
         className: tJ,
         target: "_blank",
@@ -2015,7 +2015,7 @@ function se({
   return jsx(_$$x, {
     className: "community_hub_public_profile--loadingContainer--GUi6s",
     isLoading: !s,
-    children: () => jsx(fu, {
+    children: () => jsx(TrackingProvider, {
       name: _$$e.COMMUNITY_HUB_PROFILE,
       properties: {
         handle: s.profile_handle,
@@ -2136,7 +2136,7 @@ function se({
             role: "button",
             tabIndex: 0,
             children: renderI18nText("community.profiles.resources")
-          }), t, s && jsx(fu, {
+          }), t, s && jsx(TrackingProvider, {
             name: _$$e.COMMUNITY_PROFILE_METRICS_TAB,
             children: jsx("div", {
               className: tP,
@@ -2168,7 +2168,7 @@ function se({
           role: "button",
           tabIndex: 0,
           children: renderI18nText("community.profiles.resources")
-        }), t, s && jsxs(fu, {
+        }), t, s && jsxs(TrackingProvider, {
           name: _$$e.COMMUNITY_PROFILE_METRICS_TAB,
           children: [jsx(_$$p, {
             children: jsx(to, {

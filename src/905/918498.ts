@@ -12,10 +12,10 @@ import { B } from "../905/380801";
 import { b as _$$b, A as _$$A } from "../905/723768";
 import { sf } from "../905/929976";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
 import { UpsellModalType } from "../905/165519";
-import { J7, SN } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
 export let $$v0 = registerModal(function (e) {
   let {
@@ -40,8 +40,8 @@ export let $$v0 = registerModal(function (e) {
         teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
       })) : i(sf({
         view: "orgAdminSettings",
-        orgAdminSettingsViewTab: J7.CONTENT,
-        orgAdminSettingsViewSecondaryTab: SN.CONNECTED_PROJECTS
+        orgAdminSettingsViewTab: DashboardSection.CONTENT,
+        orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS
       }));
     },
     children: getI18nString("resource_connection.maximum_connections_modal.disconnect_link_text")
@@ -70,7 +70,7 @@ export let $$v0 = registerModal(function (e) {
     href: "#",
     children: getI18nString("resource_connection.maximum_connections_modal.upgrade_link_text_org_upgrade")
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Maximum Connections Reached Paywall Modal",
     properties: {
       planId: plan.key.parentId,

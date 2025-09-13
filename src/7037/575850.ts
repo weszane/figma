@@ -2,12 +2,12 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import a from "classnames";
-import { N } from "../905/551536";
+import { BaseLinkComponent } from "../905/551536";
 import { h1 } from "../905/986103";
 import { H8, Pf } from "../905/590952";
 import { sf } from "../905/929976";
 import { dG } from "../figma_app/753501";
-import { o as _$$o } from "../905/895626";
+import { InterProfileType } from "../905/895626";
 var d = a;
 let f = "feed_profile_header--profile--BBFn9";
 export function $$_1(e) {
@@ -41,13 +41,13 @@ export function $$h0(e) {
     e.user.id && t(sf({
       view: "user",
       userId: e.user.id,
-      userViewTab: _$$o.INTERNAL_PROFILE_POSTS
+      userViewTab: InterProfileType.INTERNAL_PROFILE_POSTS
     }));
   }, [t, e.user.id]);
   let a = e.appendToHandle || !1 === e.noHandle;
   return jsxs("div", {
     className: f,
-    children: [!e.noAvatar && jsx(N, {
+    children: [!e.noAvatar && jsx(BaseLinkComponent, {
       onClick: n,
       trusted: !0,
       onMouseDown: dG,
@@ -57,7 +57,7 @@ export function $$h0(e) {
       })
     }), a && jsxs("div", {
       className: "feed_profile_header--content--bTCE2",
-      children: [!e.noHandle && jsx(N, {
+      children: [!e.noHandle && jsx(BaseLinkComponent, {
         className: "feed_profile_header--handleLink--GjGl1",
         onClick: n,
         trusted: !0,

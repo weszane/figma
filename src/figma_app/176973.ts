@@ -5,7 +5,7 @@ import { Sb } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
 import { M4 } from "../905/713695";
 import { fileEntityModel } from "../905/806985";
-import { S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { H } from "../905/473998";
 export let $$p2 = createActionCreator("ONBOARDING_TEMPLATES_PUT_ALL");
 createOptimistThunk(e => {
@@ -29,7 +29,7 @@ createOptimistThunk((e, t) => XHR.post("/api/files/first_template_type", {
 }));
 export let $$_1 = M4.Query({
   fetch: async e => {
-    let t = await S.getTaggedUserFiles({
+    let t = await fileApiHandler.getTaggedUserFiles({
       ...e
     });
     return 200 !== t.status || t.data.meta.files.length < 1 ? [] : t.data.meta.files;

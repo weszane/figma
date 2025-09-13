@@ -1,6 +1,6 @@
 import { truncate } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { Ad } from "../figma_app/951233";
+import { findMainWorkspaceUser } from "../figma_app/951233";
 export let $$r0 = 75;
 export function $$l1(e, t) {
   return [...t.map(e => ({
@@ -13,7 +13,7 @@ export function $$l1(e, t) {
   }, {
     type: "option",
     key: "",
-    text: Ad(e) ? getI18nString("members_table.workspace_cell.unassign") : getI18nString("workspace.unassigned")
+    text: findMainWorkspaceUser(e) ? getI18nString("members_table.workspace_cell.unassign") : getI18nString("workspace.unassigned")
   }];
 }
 export const A = $$r0;

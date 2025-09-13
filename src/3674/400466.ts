@@ -38,8 +38,8 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/78808";
 import { VU } from "../905/625959";
 import { selectCurrentFile } from "../figma_app/516028";
-import { jN } from "../905/612685";
-import { d as _$$d } from "../905/91820";
+import { buildFileUrl } from "../905/612685";
+import { ShareContext } from "../905/91820";
 import { w as _$$w } from "../figma_app/883622";
 import { c1 } from "../figma_app/357047";
 import { j as _$$j } from "../905/834956";
@@ -95,7 +95,7 @@ import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext
 import { mergeRegister } from "../vendor/425002";
 import { $$if, INSERT_PARAGRAPH_COMMAND, $getSelection, $isRangeSelection, COMMAND_PRIORITY_NORMAL } from "lexical";
 import { useHandleMouseEvent, useHandleGenericEvent, generateRecordingKey, useSetupPlayback, useHandleKeyboardEvent } from "../figma_app/878298";
-import { D8, GG } from "../905/511649";
+import { RecordableDiv, RecordableButton } from "../905/511649";
 import { useSprigWithSampling } from "../905/99656";
 import { n } from "../905/734251";
 import { showModalHandler } from "../905/156213";
@@ -1921,7 +1921,7 @@ function tB(e) {
     displayText: getI18nString("dev_handoff.annotations.copy_link"),
     callback: () => {
       if (null === s) return;
-      let e = jN({
+      let e = buildFileUrl({
         file: s,
         nodeId,
         isDevHandoff: !0
@@ -1929,7 +1929,7 @@ function tB(e) {
       r(_$$S({
         fileKey: s.key,
         url: e,
-        source: _$$d.ANNOTATION_CONTEXT_MENU,
+        source: ShareContext.ANNOTATION_CONTEXT_MENU,
         visualBellMessageOverride: getI18nString("dev_handoff.annotations.copied_link_to_clipboard")
       }));
     },
@@ -2495,7 +2495,7 @@ function nB({
     e && (clearSelection(), _$$S3("annotations"), addToSelection([e]));
   };
   let s = i.slice(0, 3).map(e => e.name).join(", ");
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: A()(er, eh, {
       [ek]: o,
       [eg]: n
@@ -3182,7 +3182,7 @@ function n5({
   let e_ = selectCurrentFile();
   let ev = useCallback(() => {
     if (null === e_) return;
-    let t = jN({
+    let t = buildFileUrl({
       file: e_,
       nodeId: e,
       isDevHandoff: w
@@ -3190,7 +3190,7 @@ function n5({
     m(_$$S({
       fileKey: e_.key,
       url: t,
-      source: _$$d.ANNOTATION_CONTEXT_MENU,
+      source: ShareContext.ANNOTATION_CONTEXT_MENU,
       visualBellMessageOverride: getI18nString("dev_handoff.annotations.copied_link_to_clipboard")
     }));
   }, [m, e_, e, w]);
@@ -3336,7 +3336,7 @@ function n5({
           ref: dropdownTargetRef,
           children: [jsx("div", {
             className: "annotation--headerRowLeft--iIqjN",
-            children: jsxs(GG, {
+            children: jsxs(RecordableButton, {
               className: A()("annotation--categorySelectorButton--q2A6p", {
                 [ex]: er && cD(er),
                 [ep]: !!er
@@ -3696,7 +3696,7 @@ let aa = memo(function ({
     "--annotation-category-color": Y ? FQ(Y) ?? "var(--color-bg)" : "var(--color-bg)"
   };
   let $ = detectEditorStateFormat(J.label);
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     className: A()(er, {
       [ep]: !!Y,
       "annotation--viewAnnotationNodeSelected--DfJ3t": v && null === N && null === b,

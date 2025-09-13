@@ -9,20 +9,20 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { qe, zN } from "../figma_app/416935";
 import { Jn } from "../905/17223";
-import { tM, vd } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n } from "../figma_app/537817";
 import { S as _$$S } from "../905/339549";
 import { b as _$$b } from "../905/985254";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { F } from "../905/224";
 import { UpsellModalType } from "../905/165519";
 import { Pj } from "../905/652992";
 import { registerModal } from "../905/102752";
 import w from "classnames";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { DV } from "../905/739964";
 import { A as _$$A } from "../4711/867985";
 var C = w;
@@ -154,10 +154,10 @@ let D = registerModal(function (e) {
     let e = i?.current?.offsetWidth;
     e && e > 167 && s(550 + (e - 167));
   }, []);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team creation speed bump",
     properties: o,
-    children: jsxs(d_, {
+    children: jsxs(ModalContainer, {
       title: getI18nString("team_creation_speed_bump.title"),
       titleClassName: "team_creation_speed_bump--modalTitle--ji1ue",
       className: "team_creation_speed_bump--modal--Q02I8",
@@ -202,7 +202,7 @@ let D = registerModal(function (e) {
           className: "team_creation_speed_bump--footerButtons--zvChs",
           children: [jsx("div", {
             ref: i,
-            children: jsxs(tM, {
+            children: jsxs(ButtonSecondaryTracked, {
               className: "team_creation_speed_bump--upgradeButton--Z3aHm",
               onClick: () => {
                 S();
@@ -215,7 +215,7 @@ let D = registerModal(function (e) {
                 children: getI18nString("team_creation_speed_bump.footer.upgrade_button.label")
               })]
             })
-          }), jsx(vd, {
+          }), jsx(ButtonBasePrimaryTracked, {
             className: "team_creation_speed_bump--createTeamButton--C0SJY",
             onClick: () => {
               S();

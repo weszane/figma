@@ -18,7 +18,7 @@ import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/273
 import { analyticsEventManager } from "../905/449184";
 import { useLatestRef } from "../figma_app/922077";
 import { buildUploadUrl } from "../figma_app/169182";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { r as _$$r } from "../905/520829";
 import { BrowserInfo } from "../figma_app/778880";
@@ -31,7 +31,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { TS, ZS, iA } from "../figma_app/519839";
 import { hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
 import { getSelectedFile } from "../905/766303";
 import { processLocalComponents } from "../figma_app/80990";
@@ -1267,7 +1267,7 @@ function tX({
   });
 }
 export let $$tQ0 = registerModal(function (e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Publishing Modal",
     properties: {
       entryPoint: e.entrypoint,
@@ -1572,7 +1572,7 @@ function tJ(e) {
   let tk = useCallback(e => {
     if (!em) return;
     let t = BrowserInfo.mac ? e.metaKey : e.ctrlKey;
-    e.keyCode === Uz.ENTER && t && !tT && (tv(), e.preventDefault(), e.stopPropagation());
+    e.keyCode === KeyCodes.ENTER && t && !tT && (tv(), e.preventDefault(), e.stopPropagation());
   }, [em, tv, tT]);
   let tR = _$$z();
   if (!em) return null;

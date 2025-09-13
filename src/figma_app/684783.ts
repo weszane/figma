@@ -4,7 +4,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { BrowserInfo } from "../figma_app/778880";
 import { QQ } from "../figma_app/808294";
 import { sW } from "../figma_app/49598";
-import { fu, $z } from "../figma_app/831799";
+import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { Cn } from "../905/862913";
 import { t0 } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
@@ -169,9 +169,9 @@ let ef = "hub_file_viewer--caret--LG-MD";
   };
   e.GetFreePreviewButton = function (e) {
     let t = _$$A(e.hubFile, !0);
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: e0.COMMUNITY_HUB_FILE_GET_FREE_PREVIEW_BUTTON,
-      children: jsx($z, {
+      children: jsx(TrackedButton, {
         onClick: t,
         dataTestId: "community-get-free-preview-button",
         className: "hub_file_viewer--embedGetFreePreviewButton--sLwDl hub_file_viewer--_embedControl--g0n7j hub_file_viewer--_embedControlNoHover--npgKi text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -1384,7 +1384,7 @@ export class $$eJ0 extends Component {
         style: a,
         children: jsxs("div", {
           className: this.props.containerClassName || s,
-          children: [jsx(fu, {
+          children: [jsx(TrackingProvider, {
             name: "Canvas Embed",
             children: jsx("div", {
               id: "HubFileViewerContainer",

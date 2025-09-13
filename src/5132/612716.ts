@@ -13,7 +13,7 @@ import { AutoLayout, Spacer } from "../905/470281";
 import { V } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
-import { L0, jm, fu } from "../figma_app/831799";
+import { TrackedAnchor, TrackedDiv, TrackingProvider } from "../figma_app/831799";
 import { SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
@@ -21,7 +21,7 @@ import { K } from "../905/3140";
 import { LN, vr } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../905/809096";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 var $$n = c;
 var $$$$I1 = (e => (e[e.SMALL = 0] = "SMALL", e[e.LARGE = 1] = "LARGE", e))($$$$I1 || {});
 function z({
@@ -75,7 +75,7 @@ function C({
   url: l,
   ...i
 }) {
-  return e && void 0 !== l ? jsx(L0, {
+  return e && void 0 !== l ? jsx(TrackedAnchor, {
     href: l,
     target: "_blank",
     className: "fullscreen_help_upsells_modal_base--clickableCard--056mH",
@@ -181,7 +181,7 @@ export function $$N0({
       children: l
     })
   });
-  let F = e.map(e => jsx(jm, {
+  let F = e.map(e => jsx(TrackedDiv, {
     role: "button",
     tabIndex: 0,
     className: $$n()("fullscreen_help_upsells_modal_base--panelTabs--WjAUp", z === e.id && "fullscreen_help_upsells_modal_base--panelTabsActive--cM4NL"),
@@ -211,9 +211,9 @@ export function $$N0({
         estimatedWidth: 900,
         estimatedHeight: 600
       }),
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: "FullscreenHelpUpsellsModalBase",
-        children: jsx(ey, {
+        children: jsx(ModalView, {
           size: 900,
           className: "fullscreen_help_upsells_modal_base--largeModal--8j2D0",
           ...i,

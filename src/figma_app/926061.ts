@@ -13,7 +13,7 @@ import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { oB, j7 } from "../905/929976";
-import { jm, j6 } from "../figma_app/831799";
+import { TrackedDiv, useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { g1 } from "../905/504727";
 import { km, LF, hX } from "../905/701417";
@@ -160,7 +160,7 @@ export function $$R0({
   _ = _ ?? t?.type === l;
   return jsxs("div", {
     ref: b,
-    children: [jsxs(jm, {
+    children: [jsxs(TrackedDiv, {
       trackingProperties: m,
       className: u()({
         [Lt]: !c,
@@ -227,7 +227,7 @@ export function $$L2({
       children: l(e)
     })]
   }) : o(e), [o, l]);
-  let _ = j6();
+  let _ = useTracking();
   let h = e => e.toString();
   let g = useCallback(e => {
     let t = parseInt(e);

@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { JZ } from "../figma_app/696043";
 import { af } from "../figma_app/559491";
 import { showModalHandler, popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { yQ, bh } from "../figma_app/844435";
 import { gn } from "../figma_app/86989";
 import { j as _$$j } from "../905/813868";
@@ -32,7 +32,7 @@ import { mS, zD } from "../figma_app/293326";
 import { L as _$$L } from "../figma_app/520315";
 import { cX, s3 } from "../figma_app/920333";
 import { b as _$$b } from "../905/635568";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { tJ, VM, Mp, oQ, h_, P0, JX } from "../figma_app/269100";
 import { A as _$$A } from "../svg/55550";
 var d = l;
@@ -64,7 +64,7 @@ export function $$G2(e) {
   })) && !l) return jsx(_$$L, {});
   if (!l) return null;
   let Z = getPluginVersion(l);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "detail",
     properties: {
       resourceId: e.id,
@@ -160,7 +160,7 @@ export function $$G2(e) {
 let $$V0 = registerModal(function ({
   dispatch: e
 }) {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     cancelText: getI18nString("whiteboard.inserts.widget_development_error_modal_close"),
     confirmText: getI18nString("whiteboard.inserts.widget_development_import_manifest"),
     confirmationTitle: getI18nString("whiteboard.inserts.widget_development_error_modal_title"),

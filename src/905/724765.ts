@@ -15,7 +15,7 @@ import { FProductAccessType } from '../figma_app/191312';
 import { MQ } from '../figma_app/197432';
 import { jk, nB, r1, vo, wi } from '../figma_app/272243';
 import { $z } from '../figma_app/617427';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 let v = {
   title: {
     ..._$$g.textBodyMediumStrong,
@@ -69,7 +69,7 @@ function I(e) {
   });
 }
 export let $$E0 = registerModal(e => {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Ask To Edit One Click Auto Confirmation Modal',
     children: jsxs(I, {
       ...e,

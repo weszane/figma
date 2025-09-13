@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import o from "classnames";
 import { m as _$$m } from "../5430/656485";
 import { qD } from "../figma_app/471982";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { a as _$$a } from "../905/329735";
 import { bN, cS, Yw, Cv } from "../figma_app/795938";
@@ -35,7 +35,7 @@ export function $$f0({
 }) {
   let v = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
   let b = useMemo(() => x(e), [e]);
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: y,
     children: [jsx("div", {
       className: a()(t || z3, wS),

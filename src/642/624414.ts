@@ -5,13 +5,13 @@ import { l as _$$l } from "../905/509505";
 import { trackEventAnalytics } from "../905/449184";
 import { Jn } from "../905/17223";
 import { tH, H4 } from "../905/751457";
-import { Us } from "../figma_app/637027";
+import { linkWithTracking } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
 import { b as _$$b } from "../905/985254";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
 import { UpsellModalType } from "../905/165519";
 export function $$_0() {
@@ -20,7 +20,7 @@ export function $$_0() {
   let s = useSelector(e => e.user?.id);
   if (!t) return null;
   let _ = t.teamId;
-  let b = jsx(Us, {
+  let b = jsx(linkWithTracking, {
     className: "library_upsell_banner--blueLink--bt6GX blue_link--blueLink--9rlnd",
     onClick: function () {
       trackEventAnalytics("library_upsell_badge_clicked", {
@@ -50,7 +50,7 @@ export function $$_0() {
     sentryTags: {
       area: _$$e.MONETIZATION_UPGRADES
     },
-    children: jsx(fu, {
+    children: jsx(TrackingProvider, {
       name: "library upsell badge",
       properties: {
         fileKey: t?.key,

@@ -8,7 +8,7 @@ import { sf } from "../905/929976";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { SharingGroupsByLibraryKey } from "../figma_app/43951";
 import { useTeamPlanFeatures, useTeamPlanUser, useIsAdminUser } from "../figma_app/465071";
-import { J7, SN } from "../figma_app/650409";
+import { DashboardSection, WorkspaceTab } from "../figma_app/650409";
 import { DashboardSections, MemberSections } from "../905/548208";
 export function $$g1(e, t) {
   let i = useTeamPlanFeatures().unwrapOr(null);
@@ -42,8 +42,8 @@ export function $$f0({
   let g = e => {
     u && (u.key.type === FOrganizationLevelType.ORG ? s(sf({
       view: "orgAdminSettings",
-      orgAdminSettingsViewTab: J7.CONTENT,
-      orgAdminSettingsViewSecondaryTab: SN.CONNECTED_PROJECTS,
+      orgAdminSettingsViewTab: DashboardSection.CONTENT,
+      orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS,
       showResourceConnectionFlyout: e
     })) : u.key.type === FOrganizationLevelType.TEAM && s(sf({
       view: "teamAdminConsole",

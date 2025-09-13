@@ -1,4 +1,4 @@
-import { U } from "../905/807535";
+import { filterNumberValues } from "../905/807535";
 import { HideMode, InteractionCpp, LayoutDirection, UserActionState } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
@@ -512,7 +512,7 @@ let m = class e extends j {
     }
   }
   renderSelection(e) {
-    if (InteractionCpp) for (let t of U(LayoutDirection)) for (let i of InteractionCpp.tableCellSelectionSelectedSpanIndexes(t)) this.ui.renderExpandedReorderHandle(e, t, i, Dv.SELECTED);
+    if (InteractionCpp) for (let t of filterNumberValues(LayoutDirection)) for (let i of InteractionCpp.tableCellSelectionSelectedSpanIndexes(t)) this.ui.renderExpandedReorderHandle(e, t, i, Dv.SELECTED);
   }
   renderHoveredElements(e, t) {
     let i = this._getOrUpdateTableUI(e);

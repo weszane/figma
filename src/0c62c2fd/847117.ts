@@ -14,7 +14,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { selectWithShallowEqual } from "../905/103090";
 import { useMultiSubscription } from "../figma_app/288654";
-import { Us, Ph } from "../figma_app/637027";
+import { linkWithTracking, clickableBaseLinkTracked } from "../figma_app/637027";
 import { w4, Y8 } from "../905/445814";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
@@ -25,12 +25,12 @@ import { sx as _$$sx } from "../905/941192";
 import { h as _$$h, O as _$$O } from "../905/142086";
 import { hideModal, showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { F as _$$F } from "../905/224";
-import { Gi } from "../figma_app/528509";
+import { isRootPath } from "../figma_app/528509";
 import { cY, yD, _9, AU } from "../905/81459";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { FileByKey } from "../figma_app/43951";
 import { useCurrentPublicPlan } from "../figma_app/465071";
@@ -91,7 +91,7 @@ function q(e) {
         o = jsx("span", {
           className: _$$s.textBodyMedium.$,
           children: renderI18nText("file_browser.file_import_view.to_continue_working", {
-            openANewTabLink: jsx(Us, {
+            openANewTabLink: jsx(linkWithTracking, {
               href: window.location.href,
               target: "_blank",
               trusted: !0,
@@ -244,7 +244,7 @@ export function $$Z0() {
         throwTypeError(fileImport.step);
     }
   })();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: Q,
     children: l
   });
@@ -263,7 +263,7 @@ export function $$ee2({
   let f = p?.tier !== FPlanNameType.STARTER;
   let g = 0 === m.remainingFiles;
   let h = useSelector(e => "folder" === e.selectedView.view ? e.folders[e.selectedView.folderId] : null);
-  let b = Gi(h);
+  let b = isRootPath(h);
   let v = _$$K(_);
   $$el6(!g);
   let y = h?.name || getI18nString("file_browser.tool_bar.drafts");
@@ -470,7 +470,7 @@ export function $$er5(e, t, r) {
   }), n = jsx("span", {
     className: _$$s.textBodyMedium.$,
     children: renderI18nText("file_browser.file_import_view.to_continue_working", {
-      openANewTabLink: jsx(Us, {
+      openANewTabLink: jsx(linkWithTracking, {
         href: window.location.href,
         target: "_blank",
         trusted: !0,
@@ -573,7 +573,7 @@ export function $$ei1(e) {
             children: file.name
           }), r && jsxs("div", {
             className: _$$s.flex.flexColumn.mt4.colorTextSecondary.$,
-            children: [r, file.cta && jsx(Us, {
+            children: [r, file.cta && jsx(linkWithTracking, {
               className: _$$s.colorTextSecondary.underline.ml8.$,
               role: "button",
               onClick: file.cta.action,
@@ -621,12 +621,12 @@ function eo(e) {
     children
   } = e;
   if (status !== mO.SUCCESS && status !== mO.WARNING) return children;
-  let i = fileKey ? jN({
+  let i = fileKey ? buildFileUrl({
     file: {
       key: fileKey
     }
   }) : void 0;
-  return i ? jsxs(Ph, {
+  return i ? jsxs(clickableBaseLinkTracked, {
     href: i,
     target: "_blank",
     trusted: !0,

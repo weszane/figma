@@ -27,7 +27,7 @@ import { n6 } from "../figma_app/600006";
 import { zs, _4 } from "../figma_app/773663";
 import { z } from "../5430/143080";
 import { Z_ } from "../figma_app/350203";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { T as _$$T2 } from "../5430/126619";
 import { ial, cVr, N6X } from "../figma_app/27776";
@@ -161,7 +161,7 @@ export function $$U1({
   });
 }
 export function $$V0() {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.COMMUNITY_HUB_SEARCH,
     children: jsx(W, {})
   });

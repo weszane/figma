@@ -3,7 +3,7 @@ import { forwardRef, useRef, useImperativeHandle } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { N } from "../905/438674";
 import { x } from "../905/811596";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
 import { U } from "../905/331038";
 import { Lz, Zc } from "../905/497882";
@@ -73,7 +73,7 @@ export let $$f0 = forwardRef(function ({
     }),
     children: jsxs("div", {
       className: "profile_handle_input--handleContainer--yNTkr",
-      children: [jsx(ks, {
+      children: [jsx(BigTextInputForwardRef, {
         ref: o,
         className: "profile_handle_input--regularTextInputUI3--NDhZA",
         value: Lz(e, ""),

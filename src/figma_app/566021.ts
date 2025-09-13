@@ -18,9 +18,9 @@ import { Lg, od } from "../figma_app/505098";
 import { isInvalidValue } from "../905/216495";
 import { fI } from "../figma_app/626177";
 import { u as _$$u } from "../905/419626";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { X as _$$X } from "../905/606795";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { fullscreenValue } from "../figma_app/455680";
 import { N as _$$N } from "../905/438674";
 import { v as _$$v } from "../figma_app/258006";
@@ -115,7 +115,7 @@ function R(e) {
     onSubmitLinks
   } = e;
   let [i, a] = useState(null);
-  let l = useCallback(e => e.keyCode === Uz.ENTER && !e.shiftKey && (e.currentTarget.blur(), !0), []);
+  let l = useCallback(e => e.keyCode === KeyCodes.ENTER && !e.shiftKey && (e.currentTarget.blur(), !0), []);
   let d = useCallback(e => {
     a(e.target.value);
   }, [a]);
@@ -156,7 +156,7 @@ function R(e) {
       children: renderI18nText("design_systems.component_panel.link")
     }), jsx(fI, {
       className: "documentation_link_input--row--Ph7Ip component_controls_picker--inputRow--piRyG sf_pro--uiFontWithSFProFallback--m-p9V",
-      children: jsx(_$$L, {
+      children: jsx(LazyInputForwardRef, {
         ref: inputRef,
         "aria-labelledby": b,
         className: "documentation_link_input--documentationLink--3NlJC raw_components--textAreaInput--mi1Ag raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u ellipsis--ellipsis--Tjyfa",

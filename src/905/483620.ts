@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback } from "react";
 import { lQ } from "../905/934246";
 import { useHandleChangeEvent, useHandleKeyboardEvent, useHandleGenericEvent } from "../figma_app/878298";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { useSyncedRef } from "../905/633914";
 import { v as _$$v } from "../905/318279";
 import { ks } from "../figma_app/626177";
@@ -127,7 +127,7 @@ export function $$p0({
       onKeyDown: L,
       placeholder: t,
       value: v ?? k
-    }) : jsx(_$$L, {
+    }) : jsx(LazyInputForwardRef, {
       ref: w,
       autoFocus: u,
       className: "rename_input--textInput--x3ypL raw_components--textInput--t9D8g raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u ellipsis--ellipsis--Tjyfa",

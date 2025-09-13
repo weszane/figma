@@ -1,14 +1,14 @@
 import { jsx } from "react/jsx-runtime";
 import s from "classnames";
-import { Uz, sC, xH } from "../905/63728";
-import { GG } from "../905/511649";
+import { KeyCodes, isModifierMatch, ModifierKeyCodes } from "../905/63728";
+import { RecordableButton } from "../905/511649";
 import { dG } from "../figma_app/753501";
 import { f7 } from "../figma_app/896988";
 import { isInvalidValue } from "../905/216495";
 import { KindEnum } from "../905/129884";
 var i = s;
 function u(e) {
-  e.keyCode === Uz.TAB && sC(e, xH.SHIFT) || e.keyCode === Uz.ENTER || e.keyCode === Uz.SPACE || f7(e);
+  e.keyCode === KeyCodes.TAB && isModifierMatch(e, ModifierKeyCodes.SHIFT) || e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.SPACE || f7(e);
 }
 export function $$m0(e) {
   return jsx(p, {
@@ -38,7 +38,7 @@ function p({
 }) {
   let E = () => !!isInvalidValue(e) || !e;
   let C = isInvalidValue(e) ? "mixed" : e;
-  return jsx(GG, {
+  return jsx(RecordableButton, {
     "aria-checked": "switch" === w ? C : void 0,
     "aria-describedby": v,
     "aria-labelledby": b,

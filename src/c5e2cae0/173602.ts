@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import r from "classnames";
-import { CY, $$ } from "../figma_app/637027";
+import { SecureLink, ButtonBasePrimary } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getLocalizedPath } from "../905/303541";
@@ -19,13 +19,13 @@ function u(e) {
 export function $$p0() {
   return jsx("span", {
     children: renderI18nText("org_self_serve.review_step.i_agree_to_msa_and_renewal_links", {
-      msaLink: jsx(CY, {
+      msaLink: jsx(SecureLink, {
         href: "/ssa",
         target: "_blank",
         trusted: !0,
         children: renderI18nText("org_self_serve.review_step.software_services_agreement")
       }),
-      renewalLink: jsx(CY, {
+      renewalLink: jsx(SecureLink, {
         href: getLocalizedPath("/renewal-and-cancellation"),
         target: "_blank",
         trusted: !0,
@@ -89,7 +89,7 @@ export function $$h1(e) {
                 className: nm,
                 children: renderI18nText("org_self_serve.confirmation_step.we_re_setting_up_your_organization")
               })]
-            }), jsx($$, {
+            }), jsx(ButtonBasePrimary, {
               disabled: !e.orgMigrated,
               className: Xq,
               onClick: e.onFileBrowserClick,

@@ -43,11 +43,11 @@ import { R as _$$R } from '../figma_app/522082';
 import { tI } from '../figma_app/599327';
 import { e6, lR } from '../figma_app/617427';
 import { k as _$$k2 } from '../figma_app/618031';
-import { J7 } from '../figma_app/650409';
+import { DashboardSection } from '../figma_app/650409';
 import { RG } from '../figma_app/684446';
 import { BillingCycle } from '../figma_app/831101';
 import { _8, $b, _k, fA, fx, gL, gl, Jv, ly, nm, qH, TQ, Z4, z7, zz } from '../figma_app/934005';
-import { J0 } from '../figma_app/967319';
+import { DefaultFilters } from '../figma_app/967319';
 import * as N from '../vendor/116389';
 import { useStore, useDispatch } from 'react-redux';
 import * as T from '../vendor/923386';
@@ -487,9 +487,9 @@ function el(e) {
       onClick: () => {
         t(sf({
           view: 'orgAdminSettings',
-          orgAdminSettingsViewTab: J7.MEMBERS,
+          orgAdminSettingsViewTab: DashboardSection.MEMBERS,
           orgAdminMembersTabFilters: {
-            ...J0,
+            ...DefaultFilters,
             newEditorFilter: !0
           }
         }));

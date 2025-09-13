@@ -15,7 +15,7 @@ import { w as _$$w } from "../905/113805";
 import { Lz } from "../905/497882";
 import { en } from "../905/759470";
 import { $$in, WX, xP } from "../figma_app/350203";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
 import { VY } from "../905/966582";
 import { L as _$$L } from "../905/597048";
@@ -60,7 +60,7 @@ export let $$C0 = forwardRef(function ({
 }, c) {
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let {
     deps,
     addMediaFromFiles,

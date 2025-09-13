@@ -15,7 +15,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { oB } from "../905/929976";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { Bq, WX } from "../figma_app/482142";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { K } from "../905/3140";
 import { vp } from "../905/967587";
@@ -25,7 +25,7 @@ import { LN } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { N as _$$N } from "../905/809096";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { O as _$$O } from "../905/6519";
 import { I as _$$I } from "../905/641938";
 function O(e) {
@@ -56,7 +56,7 @@ function O(e) {
         estimatedWidth: 1049,
         estimatedHeight: 700
       }),
-      children: jsx(fu, {
+      children: jsx(TrackingProvider, {
         name: "Upgrade Choose Plan With Figjam Modal",
         properties: {
           upsellSource: e.upsellSource,
@@ -64,7 +64,7 @@ function O(e) {
           ...L
         },
         trackingOptions: F,
-        children: jsxs(ey, {
+        children: jsxs(ModalView, {
           className: "upgrade_choose_plan_modal--modal--2cgyx",
           hide: M,
           size: 1049,

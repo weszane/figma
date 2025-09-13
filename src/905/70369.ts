@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getI18nStringAlias } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
 import { _ as _$$_ } from "../905/919117";
 import { JT } from "../figma_app/632248";
@@ -154,7 +154,7 @@ export function $$I2(e, t) {
 }
 function E(e) {
   let t = selectCurrentFile();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "library upsell bell",
     properties: {
       fileKey: t?.key,

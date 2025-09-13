@@ -12,13 +12,13 @@ import m from "classnames";
 import { customHistory } from "../905/612521";
 import { generateUUIDv4 } from "../905/871474";
 import { sendUrlToParent } from "../figma_app/564528";
-import { Ex, zE, vj } from "../figma_app/919079";
+import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { b as _$$b2 } from "../905/985254";
-import { fu, tf } from "../figma_app/831799";
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { r1 } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
 import { c$ } from "../905/794875";
@@ -118,7 +118,7 @@ export function $$Y1() {
   let A = useDispatch();
   let L = CI();
   let M = useAtomWithSubscription(V).data;
-  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(fu, {
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(TrackingProvider, {
     name: "organize_menu_dropdown",
     children: jsxs(bL, {
       manager,
@@ -140,7 +140,7 @@ export function $$Y1() {
         },
         children: jsxs("div", {
           className: "x78zum5 x6s0dn4 x1jnr06f",
-          children: [jsx(_$$t, {}), renderI18nText("whiteboard.inline_menu.organize_button_text"), !M && L && jsx(fu, {
+          children: [jsx(_$$t, {}), renderI18nText("whiteboard.inline_menu.organize_button_text"), !M && L && jsx(TrackingProvider, {
             name: "organize_actions_onboarding_badge",
             children: jsx(_$$E, {
               variant: "brandFilled",
@@ -199,7 +199,7 @@ export function $$Y1() {
         })]
       })]
     })
-  }) : jsx(fu, {
+  }) : jsx(TrackingProvider, {
     name: "organize_menu_dropdown",
     children: jsx(Fn, {
       OptionWrapper: function ({
@@ -253,7 +253,7 @@ export function $$Y1() {
     })
   });
 }
-let J = tf(function ({
+let J = withTrackedClick(function ({
   onClick: e,
   onKeyDown: t,
   buttonRef: i,
@@ -303,7 +303,7 @@ let J = tf(function ({
             "organize_actions_control--svgIconDisabled--siNy6": l
           })
         })
-      }), renderI18nText("whiteboard.inline_menu.organize_button_text"), !u && p && jsx(fu, {
+      }), renderI18nText("whiteboard.inline_menu.organize_button_text"), !u && p && jsx(TrackingProvider, {
         name: "organize_actions_onboarding_badge",
         children: jsx("div", {
           style: {
@@ -312,10 +312,10 @@ let J = tf(function ({
           ref: e => {
             g(e?.offsetWidth || m);
           },
-          children: jsx(Ex, {
+          children: jsx(Badge, {
             text: getI18nString("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
-            color: zE.FIGJAM,
-            size: vj.SMALL,
+            color: BadgeColor.FIGJAM,
+            size: BadgeSize.SMALL,
             className: "organize_actions_control--onboardingBadge--NG7o-",
             dataTestId: "figjam_ai_quick_actions_onboarding_badge"
           })
@@ -370,7 +370,7 @@ function q({
         text: W(Uj.OPEN_CLUSTER_BY_MORE_MENU)
       },
       type: Uj.OPEN_CLUSTER_BY_MORE_MENU
-    }, `${Uj.OPEN_CLUSTER_BY_MORE_MENU}-menu-option`), l && jsx(fu, {
+    }, `${Uj.OPEN_CLUSTER_BY_MORE_MENU}-menu-option`), l && jsx(TrackingProvider, {
       name: K,
       children: jsx("div", {
         className: "organize_actions_control--submenuPopover--3lKOZ",
@@ -438,7 +438,7 @@ let X = e => {
 function Z(e) {
   return `inline_menu_organize_option-${e}`;
 }
-let Q = tf(function ({
+let Q = withTrackedClick(function ({
   id: e,
   type: t,
   displayText: i,
@@ -523,7 +523,7 @@ function $({
   let t = v1();
   let i = QL();
   let n = PX();
-  return t ? jsx(fu, {
+  return t ? jsx(TrackingProvider, {
     name: K,
     children: jsxs(g8, {
       children: [jsxs(ZP, {

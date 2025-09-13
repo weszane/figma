@@ -8,7 +8,7 @@ import { k } from "../905/585996";
 import { lR } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { Dg, Sl, FS, DX, Kc } from "../905/989426";
 export let $$f0 = registerModal(function (e) {
@@ -17,7 +17,7 @@ export let $$f0 = registerModal(function (e) {
     ...e,
     preventUserClose: !0
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "google_device_try_file_claim_success_modal",
     children: jsx(ModalRootComponent, {
       width: 420,

@@ -97,7 +97,7 @@ import { LJ } from "../figma_app/930386";
 import { Zp } from "../figma_app/188671";
 import { $E } from "../figma_app/805898";
 import { n6 } from "../figma_app/600006";
-import { o3 } from "../figma_app/831799";
+import { TrackedLink } from "../figma_app/831799";
 import { Pr, Pc, Tc, Cy, AT } from "../figma_app/950781";
 import { u as _$$u2 } from "../5430/533104";
 import { MW, Vj, k9, p9, sB as _$$sB, oj, iS, X$, BE, zu, ok, zt, lt } from "../5430/658869";
@@ -1236,7 +1236,7 @@ function tR({
       className: Pc,
       children: _ && Object.entries(u).map(([e, t]) => {
         let r = l.find(t => t.text === e);
-        return jsx(o3, {
+        return jsx(TrackedLink, {
           className: Tc,
           to: new $E({
             categorySlug: n,
@@ -1253,7 +1253,7 @@ function tR({
       })
     }), m && jsx("div", {
       className: Cy,
-      children: c.map(e => jsx(o3, {
+      children: c.map(e => jsx(TrackedLink, {
         className: AT,
         to: new n6({}, {
           query: CW(e)

@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { oU, Sr, B3 } from "../905/535224";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { s_ } from "../905/17223";
-import { N_, CY } from "../figma_app/637027";
+import { BaseLinkComponent, SecureLink } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { getI18nString } from "../905/303541";
@@ -26,12 +26,12 @@ import { selectUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
 import { CommunityUniversalPostingModalRecentFileKeysView } from "../figma_app/43951";
 import { IT } from "../905/713695";
-import { Yj } from "../figma_app/951233";
+import { hasOrgUsersForUser } from "../figma_app/951233";
 import { ResourceType } from "../figma_app/45218";
 import { k2 } from "../figma_app/10554";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { registerModal } from "../905/102752";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { rw } from "../905/54367";
 import { gr, fV, n6, IW, fp } from "../figma_app/257005";
 import { sp, ke, tY } from "../3591/828414";
@@ -48,7 +48,7 @@ function H(e) {
     children: [jsx("div", {
       className: Uz,
       children: e.tab === gr.PLUGINS ? getI18nString("community.universal_posting_modal.desktop_callout.plugins") : getI18nString("community.universal_posting_modal.desktop_callout.widgets")
-    }), jsx(N_, {
+    }), jsx(BaseLinkComponent, {
       onClick: () => {
         trackEventAnalytics(t ? "community_publish_open_desktop_clicked" : "community_publish_get_desktop_clicked", {
           resourceType: e.tab === gr.PLUGINS ? ResourceType.PLUGIN : ResourceType.WIDGET
@@ -177,7 +177,7 @@ function X(e) {
   let t;
   let r = useSelector(e => e.user.email);
   let i = useSelector(e => e.orgById);
-  if (useSelector(e => Yj(e))) {
+  if (useSelector(e => hasOrgUsersForUser(e))) {
     let a = e.currentOrgId && i[e.currentOrgId] ? i[e.currentOrgId].name : null;
     t = jsxs("div", {
       className: Js,
@@ -287,7 +287,7 @@ let $$Q0 = registerModal(function (e) {
   useEffect(() => {
     if ("loaded" !== d.status || 2 !== C) return;
     let e = d.data;
-    0 !== e.length && (R(1), _$$S.getHubFileDuplicates({
+    0 !== e.length && (R(1), fileApiHandler.getHubFileDuplicates({
       fileKeys: e
     }).then(e => {
       F(e.data.meta);
@@ -328,7 +328,7 @@ let $$Q0 = registerModal(function (e) {
   }, [Y]);
   if (!o) return jsx(Fragment, {});
   let ep = "loaded" === d.status && 0 === C;
-  return jsxs(ey, {
+  return jsxs(ModalView, {
     size: "any",
     className: _$$aq,
     hide: $,
@@ -373,7 +373,7 @@ let $$Q0 = registerModal(function (e) {
       className: qr,
       children: [jsxs("div", {
         className: PJ,
-        children: [getI18nString("community.universal_posting_modal.footer.choose_resource"), jsx(CY, {
+        children: [getI18nString("community.universal_posting_modal.footer.choose_resource"), jsx(SecureLink, {
           href: "https://help.figma.com/hc/articles/360040035974-Publish-Community-files",
           target: "_blank",
           trusted: !0,

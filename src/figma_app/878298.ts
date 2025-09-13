@@ -117,7 +117,7 @@ export function generateRecordingKey(key: any, ...args: any[]): string | typeof 
  * PureComponent that handles recording lifecycle.
  * Original: $$f23
  */
-export class RecordingPureComponent extends PureComponent<{ recordingKey: any }> {
+export class RecordingPureComponent<P = any, TState = any> extends PureComponent<P & { recordingKey?: any }, TState> {
   /**
    * Returns the recording key.
    */
@@ -142,7 +142,7 @@ export class RecordingPureComponent extends PureComponent<{ recordingKey: any }>
  * Component that handles recording lifecycle.
  * Original: $$E27
  */
-export class RecordingComponent extends Component<{ recordingKey: any }> {
+export class RecordingComponent<P = any, S = any> extends Component<P & { recordingKey?: any }, S> {
   /**
    * Returns the recording key.
    */
@@ -419,7 +419,7 @@ export function handleMouseEvent(recorder: any, eventType: string, handler: Fn, 
  * @param options - Additional options.
  * @returns The memoized handler.
  */
-export function useHandleMouseEvent(key: any, eventType: string, handler: Fn, options: any) {
+export function useHandleMouseEvent(key: any, eventType: string, handler: Fn, options: ObjectOf = {}) {
   const recorder = useRecordingKey(key)
   return useMemo(() => handleMouseEvent(recorder, eventType, handler, options), [recorder, eventType, handler, options])
 }
@@ -537,7 +537,7 @@ export function handleWheelEvent(recorder: any, eventType: string, handler: Fn, 
  * @param options - Additional options.
  * @returns The wrapped handler.
  */
-export function handleKeyboardEvent(recorder: any, eventType: string, handler: Fn, options: any) {
+export function handleKeyboardEvent(recorder: any, eventType: string, handler: Fn, options: ObjectOf = {}) {
   return setupPlayback(recorder, eventType, handler, {
     record(event: any) {
       return {

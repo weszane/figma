@@ -13,7 +13,7 @@ import { popModalStack, showModalHandler, hideModal } from "../905/156213";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/224";
 import { mE } from "../905/561087";
-import { ye, jd, VA } from "../figma_app/528509";
+import { isTeamFolder, isTeamFolderV2, hasRootPathOptional } from "../figma_app/528509";
 import { FPermissionDenialReason, FFileType } from "../figma_app/191312";
 import { RepoCanMove, RepoCanMoveWithReasons, FileCanMoveWithReasons } from "../figma_app/43951";
 import { Y9, fm } from "../figma_app/680166";
@@ -281,8 +281,8 @@ let $$K0 = createOptimistThunk(async (e, t) => {
       if (o && r && W(o, r.key, e)) return;
     }
   }
-  let k = ye(T);
-  let R = jd(_);
+  let k = isTeamFolder(T);
+  let R = isTeamFolderV2(_);
   let P = T?.team_id !== _.teamId;
   if (_.teamId && (!T || P || k !== R)) {
     if (team && _.isEditingLockedForUser && !R) {
@@ -360,7 +360,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
   } = function (e, t) {
     let i = !1;
     let n = null;
-    let r = VA(t);
+    let r = hasRootPathOptional(t);
     e.some(e => e.is_team_template) && r && (n = {
       type: N.TEMPLATE_TO_DRAFTS
     }, i = !0);

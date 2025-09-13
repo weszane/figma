@@ -6,7 +6,7 @@ import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
-import { V0, rj, m2 } from "../figma_app/858344";
+import { DUserRole, sectionKeys, SectionType } from "../figma_app/858344";
 import { f, r as _$$r } from "../905/136283";
 export function $$$$m0({
   selectedSecondaryTab: e,
@@ -14,19 +14,19 @@ export function $$$$m0({
 }) {
   let a = useDispatch();
   let m = _6();
-  let p = "workspace" === m.view && m.subView === V0.ADMIN ? m.workspaceId : null;
-  let g = "workspace" === m.view && m.subView === V0.ADMIN ? m.orgAdminOriginTab : void 0;
+  let p = "workspace" === m.view && m.subView === DUserRole.ADMIN ? m.workspaceId : null;
+  let g = "workspace" === m.view && m.subView === DUserRole.ADMIN ? m.orgAdminOriginTab : void 0;
   let h = useCallback(e => {
     p && a(sf({
       view: "workspace",
-      subView: V0.ADMIN,
+      subView: DUserRole.ADMIN,
       selectedTab: e,
       workspaceId: p,
       orgAdminOriginTab: g
     }));
   }, [a, p, g]);
   if (null === p) return jsx(Fragment, {});
-  let x = rj;
+  let x = sectionKeys;
   let b = e || x[0];
   return jsxs(AutoLayout, {
     padding: {
@@ -42,13 +42,13 @@ export function $$$$m0({
         onClick: h,
         tabName: function (e) {
           switch (e) {
-            case m2.TEAMS:
+            case SectionType.TEAMS:
               return getI18nString("workspace_admin_tab.teams");
-            case m2.MEMBERS:
+            case SectionType.MEMBERS:
               return getI18nString("workspace_admin_tab.members");
-            case m2.LIBRARIES:
+            case SectionType.LIBRARIES:
               return getI18nString("workspace_admin_tab.libraries");
-            case m2.SETTINGS:
+            case SectionType.SETTINGS:
               return getI18nString("workspace_admin_tab.settings");
             default:
               throwTypeError(e);

@@ -42,7 +42,7 @@ import { g as _$$g } from "../905/248178";
 import { lR, $z } from "../figma_app/617427";
 import { f as _$$f } from "../figma_app/908415";
 import { hideModalHandler, hideModal, showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { E3 } from "../figma_app/976749";
 import { H as _$$H } from "../figma_app/423008";
 import { _6 } from "../figma_app/386952";
@@ -56,7 +56,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { r as _$$r } from "../905/520829";
 import { k as _$$k2 } from "../905/585996";
-import { il } from "../figma_app/637027";
+import { BigTextInput } from "../figma_app/637027";
 import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -176,7 +176,7 @@ let eE = registerModal(function (e) {
       t(hideModalHandler());
     }
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "google_device_try_file_claim_modal",
     children: jsx(ModalRootComponent, {
       manager: p,
@@ -200,7 +200,7 @@ let eE = registerModal(function (e) {
             })
           }), jsx(_$$k2, {
             multiple: 3
-          }), jsx(il, {
+          }), jsx(BigTextInput, {
             autoFocus: !0,
             type: "email",
             className: ea()(_2, o && cC),
@@ -268,7 +268,7 @@ let eb = registerModal(function (e) {
     ...e,
     preventUserClose: !0
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "google_device_try_file_received_email_modal",
     children: jsx(ModalRootComponent, {
       manager: o,
@@ -382,7 +382,7 @@ function ex({
     }),
     iconSize: "medium"
   } : {};
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Google Logged-out File Banner",
     properties: {
       isFigJamTry: e
@@ -571,7 +571,7 @@ function eD({
     className: Yg,
     children: E
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Google Logged-out File Banner",
     properties: {
       isFigJamTry: e

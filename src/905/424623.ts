@@ -9,7 +9,7 @@ import { Kk, n8, EY, x as _$$x } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { LibraryDataByLibraryKey } from "../figma_app/43951";
-import { Qp as _$$Qp, SS, KC } from "../figma_app/349248";
+import { mapComponentProperties, mapStateGroupProperties, mapStyleProperties } from "../figma_app/349248";
 import { C9, jf } from "../figma_app/141508";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { r as _$$r } from "../905/336143";
@@ -75,9 +75,9 @@ function x(e) {
     } : void 0 : void 0;
   }(e);
   return useMemo(() => null == t ? px() : {
-    components: VV(t.libraryHierarchyPaths.map(e => e.components.map(e => _$$Qp(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
-    stateGroups: VV(t.libraryHierarchyPaths.map(e => e.stateGroups.map(e => SS(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
-    styles: VV(t.libraryHierarchyPaths.map(e => e.styles.map(e => KC(e, t.assetFile))).reduce((e, t) => [...e, ...t], []))
+    components: VV(t.libraryHierarchyPaths.map(e => e.components.map(e => mapComponentProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
+    stateGroups: VV(t.libraryHierarchyPaths.map(e => e.stateGroups.map(e => mapStateGroupProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], [])),
+    styles: VV(t.libraryHierarchyPaths.map(e => e.styles.map(e => mapStyleProperties(e, t.assetFile))).reduce((e, t) => [...e, ...t], []))
   }, [t]);
 }
 export function $$S0(e) {

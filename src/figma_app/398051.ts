@@ -7,7 +7,7 @@ import { _ as _$$_ } from "../905/862468";
 import { PrototypingTsApi, DesignWorkspace, ActionType } from "../figma_app/763686";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tv } from "../figma_app/311375";
 import { fullscreenValue } from "../figma_app/455680";
@@ -198,8 +198,8 @@ function U() {
       variant: "secondary",
       iconPrefix: jsx(_$$_, {}),
       shortcuts: [{
-        key: Uz.ENTER,
-        modifier: [xH.META]
+        key: KeyCodes.ENTER,
+        modifier: [ModifierKeyCodes.META]
       }]
     }],
     children: renderI18nText(1 === e.length ? "magic_link.rename_layer_suggestion" : "magic_link.rename_layers_suggestion")

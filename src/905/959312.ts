@@ -11,7 +11,7 @@ const SKIP_RECORDING = 'SKIP_RECORDING'
  * Context for managing recording state
  * Original name: $$s3
  */
-const RecordingContext = createContext<null | ReturnType<typeof D>>(null)
+export const RecordingContext = createContext<null | ReturnType<typeof D>>(null)
 
 /**
  * Hook to check if recording is enabled

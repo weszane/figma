@@ -184,7 +184,7 @@ export const MAX_LENGTH = 200;
  * @param t - The property key.
  * @param r - Options.
  */
-export function sortByPropertyWithOptions<T>(e: T[], t: keyof T, r: {
+export function sortByPropertyWithOptions<T = any>(e: T[], t: keyof T, r: {
   isDescending?: boolean;
   useExpensiveNaturalComparison?: boolean;
 } = {}): void {

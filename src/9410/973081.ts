@@ -16,11 +16,11 @@ import { A as _$$A3 } from '../905/51490';
 import { A as _$$A9 } from '../905/51743';
 import { u as _$$u2 } from '../905/56919';
 import { R as _$$R3 } from '../905/57445';
-import { Uz, vN, xH } from '../905/63728';
+import { KeyCodes, isExactModifier, ModifierKeyCodes } from '../905/63728';
 import { s as _$$s7 } from '../905/73603';
 import { n as _$$n3 } from '../905/79930';
 import { W as _$$W } from '../905/80656';
-import { b as _$$b2, d as _$$d } from '../905/91820';
+import { combineWithHyphen, ShareContext } from '../905/91820';
 import { useSprigWithSampling } from '../905/99656';
 import { registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
@@ -94,7 +94,7 @@ import { isFullscreenSitesView } from '../905/561485';
 import { VisualBellIcon, VisualBellType } from '../905/576487';
 import { x as _$$x4 } from '../905/587214';
 import { getFeatureFlags } from '../905/601108';
-import { jN } from '../905/612685';
+import { buildFileUrl } from '../905/612685';
 import { J as _$$J4 } from '../905/614223';
 import { _G, Pv } from '../905/619652';
 import { VU } from '../905/625959';
@@ -305,7 +305,7 @@ import { xY } from '../figma_app/624361';
 import { XC } from '../figma_app/631279';
 import { JT } from '../figma_app/632248';
 import { getSubscribedVariableInfo, PrimaryWorkflowEnum } from '../figma_app/633080';
-import { ks } from '../figma_app/637027';
+import { BigTextInputForwardRef } from '../figma_app/637027';
 import { td as _$$td, yh } from '../figma_app/646357';
 import { v4, xv } from '../figma_app/655139';
 import { filterNotNullish } from '../figma_app/656233';
@@ -329,7 +329,7 @@ import { xm } from '../figma_app/826288';
 import { xp } from '../figma_app/827216';
 import { I as _$$I } from '../figma_app/827540';
 import { useIsSelectedViewFullscreenCooper } from '../figma_app/828186';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { dX } from '../figma_app/837840';
 import { xT } from '../figma_app/841415';
 import { $1, op as _$$op, x as _$$x, Be, BE, cW, NU, qr, QZ, Tg, V2, ZT } from '../figma_app/844435';
@@ -349,8 +349,8 @@ import { jr, W0 } from '../figma_app/896988';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 import { trackFileEventWithStore, trackFileEventWithUser } from '../figma_app/901889';
 import { ai as _$$ai, f6 } from '../figma_app/915202';
-import { yX } from '../figma_app/918700';
-import { zE as _$$zE, Ex } from '../figma_app/919079';
+import { ConfirmationModal2 } from '../figma_app/918700';
+import { BadgeColor, Badge } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
 import { FW as _$$FW } from '../figma_app/952764';
 import { mD, Ne, Tm } from '../figma_app/955528';
@@ -2549,7 +2549,7 @@ function iG({
     });
     d('handoff');
   }, [t, d, l]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Dev Mode Upsell In Design Mode',
     properties: {
       currentPlan: o,
@@ -3264,7 +3264,7 @@ let ns = class e extends PureComponent {
         let a = debugState?.getState()?.openFile?.canEdit;
         let s = qZ() && getFeatureFlags().aip_flower_garden_on_copy && a;
         let c = this.getSelectionGuid();
-        let u = jN({
+        let u = buildFileUrl({
           file: this.props.openFile,
           nodeId: this.getSelectionGuid(),
           isDevHandoff: $A(this.props.selectedView),
@@ -3272,7 +3272,7 @@ let ns = class e extends PureComponent {
           isFigJam: this.isFigjam(),
           isDevModeOverview: i,
           devModeFocusId: r,
-          attributionContext: t ? _$$b2(this.props.attributionContextKey, _$$d.FULLSCREEN_CONTEXT_MENU) : null
+          attributionContext: t ? combineWithHyphen(this.props.attributionContextKey, ShareContext.FULLSCREEN_CONTEXT_MENU) : null
         });
         if (getFeatureFlags().ce_copy_labelled_links) {
           let t = getSingletonSceneGraph().get(this.getSelectionGuid());
@@ -3343,7 +3343,7 @@ let ns = class e extends PureComponent {
           fileKey: this.props.openFile.key,
           url: u,
           label: e,
-          source: _$$d.FULLSCREEN_CONTEXT_MENU,
+          source: ShareContext.FULLSCREEN_CONTEXT_MENU,
           visualBellTypeOverride: p.visualBellTypeOverride,
           visualBellButton: p.visualBellButton,
           visualBellExtras: p.visualBellExtras,
@@ -4467,7 +4467,7 @@ function nu({
     },
     callback: () => {
       if (!d) return;
-      let e = jN({
+      let e = buildFileUrl({
         file: d,
         nodeId: t,
         isDevHandoff: !0,
@@ -4479,7 +4479,7 @@ function nu({
       h(_$$S3({
         fileKey: d.key,
         url: e,
-        source: _$$d.FULLSCREEN_CONTEXT_MENU,
+        source: ShareContext.FULLSCREEN_CONTEXT_MENU,
         visualBellMessageOverride: void 0
       }));
     }
@@ -4683,7 +4683,7 @@ function ny({
   let l = selectCurrentFile();
   let d = useCallback(() => {
     s(lW({
-      stringToCopy: jN({
+      stringToCopy: buildFileUrl({
         file: l,
         isDevHandoff: !0,
         isDevModeOverview: !0,
@@ -4939,8 +4939,8 @@ function nV({
   }, [t, e, i]);
   let h = useCallback(e => {
     switch (e.keyCode) {
-      case Uz.SPACE:
-      case Uz.ENTER:
+      case KeyCodes.SPACE:
+      case KeyCodes.ENTER:
         p();
         e.stopPropagation();
     }
@@ -4959,7 +4959,7 @@ function nV({
     mode: 'dark',
     children: jsxs('div', {
       className: 'ready_status_menu_item--menuItemContainer--Uy01z',
-      children: [jsx(ks, {
+      children: [jsx(BigTextInputForwardRef, {
         autoFocus: !0,
         className: 'ready_status_menu_item--textInput--iqTJf',
         maxLength: 1e3,
@@ -5063,7 +5063,7 @@ function nY({
     let u = {
       name: 'ready-status-copy-dev-link',
       callback: () => {
-        let e = jN({
+        let e = buildFileUrl({
           file: b,
           nodeId: t,
           isDevHandoff: !0
@@ -5071,7 +5071,7 @@ function nY({
         s(_$$S3({
           fileKey: b.key,
           url: e,
-          source: _$$d.STATUS_DROPDOWN_MENU
+          source: ShareContext.STATUS_DROPDOWN_MENU
         }));
       },
       flags: ['dev_handoff', 'design']
@@ -5095,7 +5095,7 @@ function nY({
     let E = {
       name: 'status-copy-focus-link',
       callback: () => {
-        let e = jN({
+        let e = buildFileUrl({
           file: b,
           nodeId: R,
           isDevHandoff: !0,
@@ -5104,7 +5104,7 @@ function nY({
         s(_$$S3({
           fileKey: b.key,
           url: e,
-          source: _$$d.STATUS_DROPDOWN_MENU
+          source: ShareContext.STATUS_DROPDOWN_MENU
         }));
       },
       flags: ['dev_handoff', 'design'],
@@ -5417,7 +5417,7 @@ let aa = registerModal(({
   onCancel: a
 }) => {
   let s = useCurrentFileKey();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'section_preset_picker_confirmation_modal_shown',
     properties: {
       fileKey: s,
@@ -5426,7 +5426,7 @@ let aa = registerModal(({
       initialTemplateId: t,
       templateType: _$$n3.HubFile
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: jsxs('div', {
         children: [jsx('p', {
           className: el()(_$$s3.fontSemiBold.font15.$, 'section_preset_picker--alertHeader--oa08R'),
@@ -5796,7 +5796,7 @@ function ab({
       disabled: !0
     });
   }
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'section_preset_picker_shown',
     enabled: g,
     properties: {
@@ -6713,10 +6713,10 @@ function sn() {
           children: jsx(TextWithTruncation, {
             children: renderI18nText('keyboard_settings.custom_keyboard_shortcuts.add')
           })
-        }), jsx(Spacer, {}), jsx(Ex, {
+        }), jsx(Spacer, {}), jsx(Badge, {
           className: _$$s3.mt4.$,
           text: 'Internal only - #feat-custom-keyboard-shortcuts',
-          color: _$$zE.WARNING,
+          color: BadgeColor.WARNING,
           onClick: () => FJ('https://figma.slack.com/archives/C055MQJ2E5P', '_blank')
         })]
       })
@@ -8458,11 +8458,11 @@ class ow extends RecordingPureComponent {
           this.scrollContainerRef.current.scrollElementAtIndexIntoView(i);
         }
       };
-      let i = vN(e, xH.CONTROL);
-      let r = BrowserInfo.mac ? vN(e, xH.META) : i;
+      let i = isExactModifier(e, ModifierKeyCodes.CONTROL);
+      let r = BrowserInfo.mac ? isExactModifier(e, ModifierKeyCodes.META) : i;
       let n = BrowserInfo.mac && i;
       switch (e.keyCode) {
-        case Uz.ENTER:
+        case KeyCodes.ENTER:
           {
             e.preventDefault();
             let t = this.state.searchResults[this.state.activeItemIndex];
@@ -8471,14 +8471,14 @@ class ow extends RecordingPureComponent {
             });
             break;
           }
-        case Uz.ESCAPE:
+        case KeyCodes.ESCAPE:
           e.preventDefault();
           this.cancelDelayedClose();
           this.props.dispatch(_$$oB());
           break;
-        case Uz.N:
-        case Uz.DOWN_ARROW:
-          if (e.keyCode === Uz.N && !n) {
+        case KeyCodes.N:
+        case KeyCodes.DOWN_ARROW:
+          if (e.keyCode === KeyCodes.N && !n) {
             jr(e, W0.NO);
             break;
           }
@@ -8486,9 +8486,9 @@ class ow extends RecordingPureComponent {
           this.cancelDelayedClose();
           t(1);
           break;
-        case Uz.P:
-        case Uz.UP_ARROW:
-          if (e.keyCode === Uz.P && !n) {
+        case KeyCodes.P:
+        case KeyCodes.UP_ARROW:
+          if (e.keyCode === KeyCodes.P && !n) {
             jr(e, W0.NO);
             break;
           }
@@ -8496,19 +8496,19 @@ class ow extends RecordingPureComponent {
           this.cancelDelayedClose();
           t(-1);
           break;
-        case Uz.TAB:
+        case KeyCodes.TAB:
           {
             e.preventDefault();
             let t = this.state.searchResults[this.state.activeItemIndex];
             t && t.itemParameterArgs && (this.onStartParameterMode(t.itemParameterArgs, t, 'tab'), this.logActionSelectedEvent(t));
             break;
           }
-        case Uz.R:
-        case Uz.S:
-        case Uz.D:
-        case Uz.E:
-        case Uz.F:
-        case Uz.O:
+        case KeyCodes.R:
+        case KeyCodes.S:
+        case KeyCodes.D:
+        case KeyCodes.E:
+        case KeyCodes.F:
+        case KeyCodes.O:
           if (r) {
             e.preventDefault();
             let t = this.state.searchQuery + e.key;

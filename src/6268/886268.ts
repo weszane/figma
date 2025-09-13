@@ -12,7 +12,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { Vc } from "../figma_app/211694";
-import { L as _$$L2 } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { a as _$$a } from "../6658/303587";
 import { z as _$$z } from "../6268/891724";
@@ -68,7 +68,7 @@ import { q as _$$q } from "../905/932270";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { n as _$$n } from "../1250/647011";
 import { gK } from "../1250/158057";
@@ -1129,7 +1129,7 @@ let nn = registerModal(function (e) {
     availableInstallMethods
   } = gK(!0);
   let r = _$$G();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Codebase Suggestions Onboarding Modal",
     children: jsx(ModalRootComponent, {
       manager: n,
@@ -1902,7 +1902,7 @@ function nM({
     className: u()("component_browser_library_view--searchBar--bauvr", {
       [nI]: o
     }),
-    children: [jsx(_$$h, {}), jsx(_$$L2, {
+    children: [jsx(_$$h, {}), jsx(LazyInputForwardRef, {
       placeholder: getI18nString("dev_handoff.component_browser.search_placeholder"),
       value: e,
       onChange: e => {

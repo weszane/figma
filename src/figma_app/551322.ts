@@ -11,7 +11,7 @@ import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { Ve, c$ } from "../figma_app/236327";
-import { tM, vd } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -30,7 +30,7 @@ import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FFileType, FPlanLimitationType } from "../figma_app/191312";
 import { MoveDraftsTeamData, MoveDraftsNudgeV2OverlayRecentFilesView, MoveDraftsNudgeV2OverlayRecentFilesLegacyView } from "../figma_app/43951";
-import { YN } from "../figma_app/349248";
+import { mapRecentFilesAndRepos } from "../figma_app/349248";
 import { vL, Bi } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
 import { KindEnum } from "../905/129884";
@@ -344,11 +344,11 @@ export function $$ee2({
       })
     }), jsxs("div", {
       className: "move_drafts_nudge_rcs_steps--ctaContainer--VD-a6",
-      children: [jsx(tM, {
+      children: [jsx(ButtonSecondaryTracked, {
         className: "move_drafts_nudge_rcs_steps--secondaryCtaButton--yOPJx",
         onClick: t,
         children: getI18nString("rcs.move_drafts_nudge.cancel")
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         onClick: () => {
           d(_$$z2({
             files: [z],
@@ -374,7 +374,7 @@ let et = getFeatureFlags().move_drafts_nudge_v2_recent_files_slim ? function () 
   }), [e]);
 } : function () {
   let [e] = setupResourceAtomHandler(MoveDraftsNudgeV2OverlayRecentFilesLegacyView({}));
-  let t = useMemo(() => e.transform(e => YN(e.currentUser.recentFiles2)), [e]);
+  let t = useMemo(() => e.transform(e => mapRecentFilesAndRepos(e.currentUser.recentFiles2)), [e]);
   useEffect(() => {
     "loaded" === t.status && Wn(t.data);
   }, [t]);

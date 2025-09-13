@@ -1,5 +1,5 @@
 import { jsx, Fragment } from "react/jsx-runtime";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Cc, vb } from "../5430/664984";
 import { ws, bc } from "../figma_app/427318";
@@ -16,13 +16,13 @@ export function $$l0({
     switch (e) {
       case vb.SITES_DISABLED_FOR_STARTER:
         return renderI18nText("community.detail_view.duplicate_cta_disable.starter_plan", {
-          upgradeLink: jsx(CY, {
+          upgradeLink: jsx(SecureLink, {
             href: "/upgrade-team?entryPoint=4",
             target: "_blank",
             trusted: !0,
             children: getI18nString("community.detail_view.duplicate_cta_disable.starter_plan.upgrade")
           }),
-          learnMoreLink: jsx(CY, {
+          learnMoreLink: jsx(SecureLink, {
             href: "https://help.figma.com/hc/articles/31230436657815",
             target: "_blank",
             trusted: !0,

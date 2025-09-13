@@ -11,7 +11,7 @@ import { analyticsEventManager } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { NX } from "../figma_app/243213";
 import { h as _$$h } from "../905/207101";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { Point } from "../905/736624";
 import { c2, Nt, yn, lv } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -74,7 +74,7 @@ import { ButtonWide } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { N as _$$N } from "../905/120979";
 import { NG } from "../figma_app/709893";
-import { $$ } from "../figma_app/637027";
+import { ButtonBasePrimary } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { SvgComponent } from "../905/714743";
 import { b as _$$b2 } from "../1528/176770";
@@ -443,7 +443,7 @@ function e4({
         onClick: i,
         recordingKey: "component_flyout_insert",
         children: C
-      }) : jsx($$, {
+      }) : jsx(ButtonBasePrimary, {
         onClick: i,
         fullWidth: !0,
         recordingKey: "component_flyout_insert",
@@ -817,7 +817,7 @@ export function $$tu1({
     let n = _$$V(e);
     let i = L?.(n);
     if (!i) return;
-    let l = t.keyCode === Uz.TAB;
+    let l = t.keyCode === KeyCodes.TAB;
     let a = t.shiftKey;
     if (c2(t, !1)) {
       i.getItemAbove()?.focus();

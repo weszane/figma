@@ -20,7 +20,7 @@ import { uQ as _$$uQ, NM, Zl, Tv } from "../figma_app/311375";
 import { OM, uL as _$$uL } from "../figma_app/422471";
 import { useCanAccessDevModeEntryPoint, useCanUseDevModeDemoFile, useCanAccessFullDevMode } from "../figma_app/473493";
 import { W as _$$W } from "../905/200727";
-import { fu as _$$fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { UK, UX, Ku } from "../figma_app/740163";
 import { z4 } from "../905/37051";
 import { useCurrentFileKey, selectCurrentFile, useOpenFileLibraryKey, useSourceFileKey, selectOpenFileKey } from "../figma_app/516028";
@@ -100,9 +100,9 @@ import { Io, yQ } from "../figma_app/875495";
 import { devHandoffComponentPreviewMaxHeight, devHandoffAssetPreviewMaxWidth, devHandoffAssetPreviewMaxHeight } from "../figma_app/786175";
 import { A as _$$A2 } from "../3850/839808";
 import { Button, ButtonWide } from "../905/521428";
-import { Kz } from "../figma_app/637027";
-import { jN } from "../905/612685";
-import { Qn, mz, KQ, lk as _$$lk, qE } from "../figma_app/415217";
+import { Spacing } from "../figma_app/637027";
+import { buildFileUrl } from "../905/612685";
+import { openInBrowser, openRelatedLink, openAutocompleteLineSettings, openAutocompleteBlockSettings, createFileLink } from "../figma_app/415217";
 import { A as _$$A3 } from "../svg/756305";
 import { e as _$$e2 } from "../905/383776";
 import { setupToggleButton } from "../905/167712";
@@ -118,7 +118,7 @@ import { O as _$$O2 } from "../905/969533";
 import { k as _$$k3 } from "../905/44647";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { useSessionStorageSync, useLocalStorageSync } from "../905/657224";
-import { D8, lt as _$$lt } from "../905/511649";
+import { RecordableDiv, RecordableAnchor } from "../905/511649";
 import { P as _$$P2 } from "../905/347284";
 import { R6, zL, bE, i_ as _$$i_, eb as _$$eb, vo } from "../figma_app/617506";
 import { $ as _$$$3 } from "../905/532878";
@@ -239,7 +239,7 @@ import { C as _$$C } from "../figma_app/686450";
 import { d as _$$d4 } from "../905/86829";
 import { D6, kF } from "../1528/377549";
 import { K as _$$K3 } from "../905/799615";
-import { e as _$$e4 } from "../905/280005";
+import { handleUrlAction } from "../905/280005";
 import { v as _$$v } from "../figma_app/258006";
 import { dI as _$$dI } from "../figma_app/204145";
 import { lW as _$$lW } from "../figma_app/11182";
@@ -293,15 +293,15 @@ import { LS, $A } from "../905/782918";
 import { $ as _$$$4 } from "../905/330495";
 import { fI, nV as _$$nV } from "../figma_app/626177";
 import { X as _$$X3 } from "../905/606795";
-import { L as _$$L2 } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { A as _$$A14 } from "../svg/86097";
 import { useMemoStable } from "../905/19536";
 import { z as _$$z4 } from "../905/239603";
 import { reportError } from "../905/11";
 import { isDefaultFileAlt } from "../905/760074";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 import { setupAutofocusHandler } from "../905/128376";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { dh as _$$dh } from "../figma_app/186343";
 import { kl, Gt } from "../905/275640";
 import { go } from "../figma_app/57551";
@@ -1788,7 +1788,7 @@ function nl({
     }, {
       forwardToDatadog: !0
     });
-    Qn(jN({
+    openInBrowser(buildFileUrl({
       file: {
         key: e
       },
@@ -1806,7 +1806,7 @@ function nl({
     }, {
       forwardToDatadog: !0
     });
-    Qn("https://help.figma.com/hc/articles/15023121296151-Figma-for-VS-Code");
+    openInBrowser("https://help.figma.com/hc/articles/15023121296151-Figma-for-VS-Code");
   }, [e, n, o, t]);
   let p = useCallback(() => {
     trackEventAnalytics("Dev Mode Paywall clicked", {
@@ -1850,13 +1850,13 @@ function nl({
         children: [jsx("div", {
           className: "vscode_paywall--vscodePaywallTitle---OrBg text--fontPos24--YppUD text--_fontBase--QdLsd",
           children: renderI18nText("dev_handoff.paywall.vscode.title")
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           direction: "y",
           multiple: 1
         }), jsx("div", {
           className: na,
           children: renderI18nText("dev_handoff.paywall.vscode.description")
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           direction: "y",
           multiple: 3
         }), jsx("ul", {
@@ -1865,7 +1865,7 @@ function nl({
             className: "vscode_paywall--vscodePaywallListItem--Es3mO text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: e
           }, t))
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           direction: "y",
           multiple: 3
         }), jsx("div", {
@@ -1875,7 +1875,7 @@ function nl({
               children: renderI18nText("dev_handoff.paywall.vscode.need_access_dev_mode")
             })
           }) : renderI18nText("dev_handoff.paywall.vscode.no_access")
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           direction: "y",
           multiple: 3
         }), jsxs("div", {
@@ -1895,13 +1895,13 @@ function nl({
             children: renderI18nText("dev_handoff.paywall.vscode.view_button")
           })]
         }), !getFeatureFlags().dt_vscode_ready_for_dev && jsxs(Fragment, {
-          children: [jsx(Kz, {
+          children: [jsx(Spacing, {
             direction: "y",
             multiple: 5
           }), jsx("div", {
             className: "vscode_paywall--vscodeVideoDescription--b-s1K text--fontPos11--2LvXf text--_fontBase--QdLsd",
             children: renderI18nText("dev_handoff.paywall.vscode.video")
-          }), jsx(Kz, {
+          }), jsx(Spacing, {
             direction: "y",
             multiple: 1
           }), jsx("div", {
@@ -1950,7 +1950,7 @@ function nr() {
     sentryTags: {
       area: _$$e.MONETIZATION_EXPANSION
     },
-    children: jsxs(_$$fu, {
+    children: jsxs(TrackingProvider, {
       name: "Dev Mode Paywall",
       properties: t,
       enabled: t?.gracePeriod !== void 0,
@@ -2750,7 +2750,7 @@ function nZ({
     className: ek()("variables_side_panel--groupRow--bvXHW", l),
     onMouseEnter: () => p(!0),
     onMouseLeave: () => p(!1),
-    children: jsxs(D8, {
+    children: jsxs(RecordableDiv, {
       className: ek()("variables_side_panel--groupButton--M6HtP", {
         [nH]: f,
         [nV]: u
@@ -3404,7 +3404,7 @@ function iO() {
     })]
   });
 }
-function iM({}) {
+function iM({ }) {
   let e = useDispatch();
   let t = "install-messaging-dropdown";
   let n = Um();
@@ -4510,7 +4510,7 @@ function iq() {
     isShowing,
     testId: "dev_handoff_config_wizard",
     dataFullscreenIntercept: !1,
-    children: jsx(_$$fu, {
+    children: jsx(TrackingProvider, {
       name: "Dev Mode Configuration Wizard",
       children: jsx(ModalRootComponent, {
         manager: d,
@@ -4815,7 +4815,7 @@ let oZ = class {
       if (n?.type === "PLAIN_TEXT") _$$n6({
         link: t,
         linkPreviewJson: n
-      });else if (n?.type === "AUTH_REQUIRED") {
+      }); else if (n?.type === "AUTH_REQUIRED") {
         let n = atomStoreManager.get(ok);
         let a = n[e.plugin_id]?.links ?? [];
         atomStoreManager.set(ok, n => ({
@@ -5110,10 +5110,10 @@ function o8({
       }));
       return;
     }
-    z4.getIsExtension() && mz(t.linkUrl);
+    z4.getIsExtension() && openRelatedLink(t.linkUrl);
   }, [h, f?.type, x, t, F, k, c]);
   let G = () => {
-    _$$e4(t.linkUrl) || c(RK({
+    handleUrlAction(t.linkUrl) || c(RK({
       rawInput: t.linkUrl
     }));
     x("Dev Handoff Related Links Open Hyperlink", {
@@ -5393,7 +5393,7 @@ let lD = memo(({
     },
     children: jsx(_$$E5, {})
   }));
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: "Dev Mode Component Playground",
     children: jsx(ModalRootComponent, {
       manager: m,
@@ -5511,7 +5511,7 @@ function lO({
   manager: e,
   theme: t
 }) {
-  return useDelayedTrue(200) ? jsx(_$$fu, {
+  return useDelayedTrue(200) ? jsx(TrackingProvider, {
     name: "Dev Mode Component Playground",
     children: jsx(ModalRootComponent, {
       manager: e,
@@ -5928,7 +5928,7 @@ function l8({
     children: [jsx(SvgComponent, {
       svg: _$$A14,
       className: _$$s.colorIconSecondary.$
-    }), jsx(_$$L2, {
+    }), jsx(LazyInputForwardRef, {
       ref: inputRef,
       autoCorrect: "off",
       autoFocus: !0,
@@ -6014,7 +6014,7 @@ let sd = registerModal(function (e) {
       }));
     }
   };
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     destructive: !0,
     confirmationTitle: renderI18nText("dev_handoff.developer_related_links.delete_link"),
     confirmText: renderI18nText("dev_handoff.developer_related_links.delete_link"),
@@ -6121,7 +6121,7 @@ let sf = registerModal(function ({
   };
   let M = f || !d || linkName === p && linkUrl === d;
   let B = e => {
-    e.keyCode === Uz.ENTER && !e.shiftKey && p && d ? O() : e.keyCode === Uz.ESCAPE && v(hideModal());
+    e.keyCode === KeyCodes.ENTER && !e.shiftKey && p && d ? O() : e.keyCode === KeyCodes.ESCAPE && v(hideModal());
   };
   let F = setupAutofocusHandler();
   return jsx(ModalRootComponent, {
@@ -6138,7 +6138,7 @@ let sf = registerModal(function ({
           children: [jsx("p", {
             className: sh,
             children: renderI18nText("dev_handoff.developer_related_links.link")
-          }), jsx(_$$L2, {
+          }), jsx(LazyInputForwardRef, {
             ref: _inputRef,
             autoCorrect: "off",
             className: "developer_related_links_edit_modal--input--mw5Qe",
@@ -6164,7 +6164,7 @@ let sf = registerModal(function ({
               children: jsx(_$$v, {
                 url: linkUrl
               })
-            }), jsx(_$$L2, {
+            }), jsx(LazyInputForwardRef, {
               ref: e => {
                 F(e);
                 inputRef.current = e;
@@ -6620,7 +6620,7 @@ function sH(e, t) {
 }
 let sW = ["color", "border", "text", "effect", "layout", "shape", "style"];
 let sU = registerModal(function () {
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     destructive: !0,
     confirmationTitle: renderI18nText("inspect_panel.detached_component.remove_attachment"),
     confirmText: renderI18nText("dev_handoff.detached_component.remove_attachment_confirm"),
@@ -6720,7 +6720,7 @@ function s1({
       children: R
     })
   }) : u ? jsxs(Fragment, {
-    children: [jsxs(D8, {
+    children: [jsxs(RecordableDiv, {
       className: tY,
       forwardedRef: dropdownTargetRef,
       onClick: S ? P : L,
@@ -8088,8 +8088,8 @@ function rX() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => {},
-    pinModal: () => {}
+    closeModal: () => { },
+    pinModal: () => { }
   }), [n, setCurrentView, currentPluginView]);
   return jsx(AutoLayout, {
     direction: "vertical",
@@ -11360,7 +11360,7 @@ function pj(e) {
           scrollingDisabled: !!p,
           enableOverscroll: !0,
           containerId: _$$Y,
-          children: jsx(_$$fu, {
+          children: jsx(TrackingProvider, {
             name: _$$e5.CODE_PANEL,
             children: jsx(_$$i3, {
               children: jsx("div", {
@@ -11933,7 +11933,7 @@ function p4({
       className: "frame_picker--trigger--ZPMqZ",
       ref: o,
       onClick: function () {
-        if (t) n(!1);else {
+        if (t) n(!1); else {
           let e = o.current?.getBoundingClientRect();
           e && (c(e), n(!0));
         }
@@ -11999,7 +11999,7 @@ function hc({
   useEffect(() => {
     styleNodeId || d();
   }, [styleNodeId, d]);
-  return jsx(_$$fu, {
+  return jsx(TrackingProvider, {
     name: "Selection styles details modal",
     properties: {
       resourceType: styleType
@@ -12170,7 +12170,7 @@ function hf({
   let o = AC(codeLanguageApi?.codeLanguage);
   let l = Pt(o);
   let s = !!hg(e)?.length;
-  return codeLanguageApi && i ? jsx(_$$fu, {
+  return codeLanguageApi && i ? jsx(TrackingProvider, {
     name: "Style code",
     properties: {
       type: codeLanguageApi.codeLanguage.type,
@@ -12207,7 +12207,7 @@ function hx({
   let o = Ig();
   let l = useCallback(e => _$$dc(e, o), [o]);
   let s = useMemo(() => t?.map(l), [t, l]);
-  return s && 0 !== s.length ? jsx(_$$fu, {
+  return s && 0 !== s.length ? jsx(TrackingProvider, {
     name: "Style properties",
     properties: {
       resourceType: "COLOR",
@@ -12232,7 +12232,7 @@ function hm({
     if (n && n.isAlive) return n.effects.reverse();
   }, e);
   let n = _$$d1(t ?? []);
-  return n && 0 !== n.length ? jsx(_$$fu, {
+  return n && 0 !== n.length ? jsx(TrackingProvider, {
     name: "Style properties",
     properties: {
       resourceType: "EFFECT",
@@ -12262,7 +12262,7 @@ function h_({
       isNodeInvalid: !0
     };
   }, e);
-  return isNodeInvalid ? null : jsx(_$$fu, {
+  return isNodeInvalid ? null : jsx(TrackingProvider, {
     name: "Style properties",
     properties: {
       resourceType: "TEXT"
@@ -12455,7 +12455,7 @@ function hM() {
       }), jsx(hT, {
         label: getI18nString("dev_handoff.inspect_panel.property_suggestions.title"),
         description: getI18nString("dev_handoff.inspect_panel.property_suggestions.body"),
-        onClick: KQ
+        onClick: openAutocompleteLineSettings
       })]
     }), jsxs("div", {
       className: hj,
@@ -12467,7 +12467,7 @@ function hM() {
       }), jsx(hT, {
         label: getI18nString("dev_handoff.inspect_panel.block_suggestions.title"),
         description: getI18nString("dev_handoff.inspect_panel.block_suggestions.body"),
-        onClick: _$$lk
+        onClick: openAutocompleteBlockSettings
       })]
     })]
   });
@@ -12557,7 +12557,7 @@ function hV({
               nodeType: h?.type,
               source: "web"
             });
-            qE();
+            createFileLink();
             break;
           case "add_link":
             e(IAssertResource.DEV_RESOURCES);
@@ -13024,7 +13024,7 @@ function fh() {
     recordingKey: "dev_handoff.focus.copy_link",
     callback: () => {
       e(_$$lW({
-        stringToCopy: jN({
+        stringToCopy: buildFileUrl({
           file: r,
           nodeId: d,
           isDevHandoff: !0,
@@ -13120,7 +13120,7 @@ function ff() {
       } : void 0,
       children: [jsxs("div", {
         className: fu,
-        children: [jsx(_$$lt, {
+        children: [jsx(RecordableAnchor, {
           className: "focus_canvas_ui--backLink--oBW-6",
           "data-onboarding-key": dV,
           onClick: function (t) {

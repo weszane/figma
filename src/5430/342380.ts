@@ -2,7 +2,7 @@ import { useRef, useCallback, useMemo, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { trackEventAnalytics } from "../905/449184";
 import { o_, Qd, Vm } from "../figma_app/427318";
-import { j6 } from "../figma_app/831799";
+import { useTracking } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
 let c = e => {
@@ -56,7 +56,7 @@ function h({
   let {
     name = e0.COMMUNITY_HUB,
     properties
-  } = j6();
+  } = useTracking();
   let m = useRef([]);
   let _ = useRef(new Set());
   let p = useCallback(e => {

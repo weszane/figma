@@ -26,7 +26,7 @@ import { FUpgradeReasonType } from "../figma_app/565016";
 import { CT } from "../figma_app/736948";
 import { E as _$$E } from "../figma_app/126651";
 import { AccessLevelEnum } from "../905/557142";
-import { $q } from "../figma_app/482728";
+import { TeamCreationControls } from "../figma_app/482728";
 import { r as _$$r } from "../469e6e40/505264";
 import { Hj } from "../905/682977";
 import { p3 } from "../figma_app/588582";
@@ -3553,7 +3553,7 @@ export function $$ep2(e, t, a, s) {
         });
       }
     case "org_team_creation_controls":
-      return e.metadata.new_team_creation_controls_setting === $q.TEAM_CREATION_CONTROLS_ANYONE ? jsx("span", {
+      return e.metadata.new_team_creation_controls_setting === TeamCreationControls.TEAM_CREATION_CONTROLS_ANYONE ? jsx("span", {
         children: renderI18nText("activity_log.teams.changed_team_creation_controls_to_anyone")
       }) : jsx("span", {
         children: renderI18nText("activity_log.teams.changed_team_creation_controls_to_admins_only")

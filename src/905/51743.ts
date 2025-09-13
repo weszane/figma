@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { _ as _$$_ } from "../905/862468";
 import { k as _$$k } from "../905/727631";
 import { ActionType, Fullscreen } from "../figma_app/763686";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { B as _$$B } from "../905/969273";
@@ -83,8 +83,8 @@ function P({
             variant: "secondary",
             recordingKey: "instructionView",
             shortcuts: [{
-              key: Uz.ENTER,
-              modifier: [xH.META]
+              key: KeyCodes.ENTER,
+              modifier: [ModifierKeyCodes.META]
             }],
             children: o
           })
@@ -178,7 +178,7 @@ export function $$D0(e) {
               onAction: G,
               variant: "secondary",
               shortcuts: [{
-                key: Uz.ESCAPE
+                key: KeyCodes.ESCAPE
               }],
               recordingKey: "cancel-instruction",
               children: renderI18nText("ai.cancel")
@@ -206,7 +206,7 @@ export function $$D0(e) {
               onAction: G,
               variant: "secondary",
               shortcuts: [{
-                key: Uz.ESCAPE
+                key: KeyCodes.ESCAPE
               }],
               recordingKey: "cancel-instruction",
               children: renderI18nText("ai.cancel")
@@ -257,8 +257,8 @@ export function $$D0(e) {
             },
             variant: "secondary",
             shortcuts: [{
-              key: Uz.ENTER,
-              modifier: [xH.META]
+              key: KeyCodes.ENTER,
+              modifier: [ModifierKeyCodes.META]
             }]
           }],
           children: renderI18nText("auto_rename_layers.error.no_nameable_items")

@@ -1,6 +1,6 @@
 import { PureComponent, useMemo, useRef } from 'react';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { Uz } from '../905/63728';
+import { KeyCodes } from '../905/63728';
 import { h as _$$h } from '../905/65944';
 import { KindEnum } from '../905/129884';
 import { getThemeContextOrDefault } from '../905/158740';
@@ -38,7 +38,7 @@ class I extends PureComponent {
   constructor(e) {
     super(e);
     this.documentKeyDown = e => {
-      e.keyCode === Uz.TAB && this.setState({
+      e.keyCode === KeyCodes.TAB && this.setState({
         showFocus: !0
       });
     };

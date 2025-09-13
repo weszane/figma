@@ -10,8 +10,8 @@ import { AccessLevelEnum } from "../905/557142";
 import { aD, zg } from "../905/452667";
 import { ButtonPrimitive } from "../905/632989";
 import h from "classnames";
-import { vd } from "../figma_app/637027";
-import { fu } from "../figma_app/831799";
+import { ButtonBasePrimaryTracked } from "../figma_app/637027";
+import { TrackingProvider } from "../figma_app/831799";
 import { xf, my, Zk, $S } from "../905/372455";
 import { A as _$$A2 } from "../2854/769773";
 var g = h;
@@ -21,7 +21,7 @@ let b = "role_requests--container--77Hxz";
 let v = "role_requests--imgContainer--vpNHd";
 let I = "role_requests--boldText--1ynVk";
 function x(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Request Permission > Share Modal Notification",
     properties: {
       request_type: aD(e.requestType)
@@ -96,7 +96,7 @@ function w(e) {
       onClick: handleDeny,
       className: "role_request_row--roleRequestButton--lj7fY",
       children: renderI18nText("request_row.deny")
-    }), jsx(vd, {
+    }), jsx(ButtonBasePrimaryTracked, {
       trackingProperties: {
         resourceIdOrKey: e.resourceIdOrKey,
         userId: e.requesterId,

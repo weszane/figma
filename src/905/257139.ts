@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, createRef } from "react";
 import { analyticsEventManager } from "../905/449184";
 import { RecordingComponent } from "../figma_app/878298";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { N0, We, GY, zq, oz, wI } from "../figma_app/782261";
 import { P } from "../905/347284";
 import { DG } from "../figma_app/585235";
@@ -349,7 +349,7 @@ export class $$b0 extends RecordingComponent {
         ...this.props,
         ref: this.scrollContainerRef,
         onScroll: this.onScroll,
-        children: [this.props.renderEmptyState && this.props.renderEmptyState(), jsx(D8, {
+        children: [this.props.renderEmptyState && this.props.renderEmptyState(), jsx(RecordableDiv, {
           onMouseUp: this.props.onMouseUp,
           recordingKey: this.props.recordingKey,
           style: {

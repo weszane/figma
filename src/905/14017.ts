@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { N_ } from "../vendor/956898";
+import { Link } from "react-router-dom";
 import a from "classnames";
 import { formatNumber } from "../figma_app/930338";
 import { SvgComponent } from "../905/714743";
@@ -128,7 +128,7 @@ export function $$L0(e) {
     className: UN,
     children: [jsxs("div", {
       className: rn,
-      children: [jsx(N_, {
+      children: [jsx(Link, {
         to: a,
         onClick: e => {
           cB(i, resource.id, void 0, c);
@@ -137,7 +137,7 @@ export function $$L0(e) {
         children: t
       }), jsxs("div", {
         className: Tl,
-        children: [jsx(N_, {
+        children: [jsx(Link, {
           className: m ? pV : cy,
           to: new xn({
             profileHandle: p.profile_handle

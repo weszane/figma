@@ -3,7 +3,7 @@ import { memo, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import n from "classnames";
 import { useSubscription } from "../figma_app/288654";
-import { vd } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -117,7 +117,7 @@ export let $$b0 = memo(function (e) {
           variant: "regional"
         }), jsx("div", {
           className: o()(v0, hF),
-          children: jsx(vd, {
+          children: jsx(ButtonBasePrimaryTracked, {
             className: pL,
             type: "submit",
             disabled: !F,

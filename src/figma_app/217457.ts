@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { filterNotNullish } from "../figma_app/656233";
-import { K } from "../905/807535";
+import { findMatchingValue } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { x } from "../905/23221";
@@ -91,7 +91,7 @@ export function $$O3(e) {
   let t = function (e) {
     let t = e.visibility ?? "seat_description";
     let r = useCurrentPublicPlan("useSeatTypeLicenseTypesMap").unwrapOr(null);
-    let s = (e.overridePlanTier ? K(FPlanNameType, e.overridePlanTier) : void 0) || r?.tier;
+    let s = (e.overridePlanTier ? findMatchingValue(FPlanNameType, e.overridePlanTier) : void 0) || r?.tier;
     let o = useMemo(() => ({
       [ProductAccessTypeEnum.EXPERT]: filterNotNullish([FProductAccessType.DESIGN, FProductAccessType.DEV_MODE, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.SITES, FProductAccessType.COOPER, isFigmakeSitesEnabled() ? FProductAccessType.FIGMAKE : void 0]),
       [ProductAccessTypeEnum.DEVELOPER]: filterNotNullish([FProductAccessType.DEV_MODE, FProductAccessType.WHITEBOARD, FProductAccessType.SLIDES, FProductAccessType.COOPER]),

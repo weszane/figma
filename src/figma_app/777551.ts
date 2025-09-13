@@ -7,7 +7,7 @@ import { L } from "../905/178090";
 import { vt, U$, Dm, GT } from "../figma_app/306946";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
 import { hasClientMeta, isPlugin, isWidget } from "../figma_app/45218";
-import { Rx } from "../figma_app/162807";
+import { SpaceAccessType } from "../figma_app/162807";
 import { qD } from "../figma_app/471982";
 import { l$ } from "../figma_app/275462";
 import { XW, Gl } from "../figma_app/427318";
@@ -136,7 +136,7 @@ export function $$L13(e, t, r, n, i, a = "feed") {
       resource_type: e,
       community_resource_id: t,
       subView: a,
-      scope: Rx.COMMUNITY,
+      scope: SpaceAccessType.COMMUNITY,
       index: r,
       searchSessionId: n,
       search_query_id: i

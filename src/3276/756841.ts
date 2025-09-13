@@ -9,7 +9,7 @@ import { x as _$$x } from "../905/211326";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088";
-import { T8 } from "../figma_app/831799";
+import { wrapWithTracking } from "../figma_app/831799";
 import { y as _$$y } from "../figma_app/705249";
 import { k as _$$k2 } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
@@ -75,7 +75,7 @@ import { oB } from "../905/929976";
 import { Z as _$$Z } from "../905/104740";
 import { dh } from "../figma_app/186343";
 import { Fy } from "../figma_app/623300";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { ez as _$$ez } from "../3276/297268";
@@ -89,7 +89,7 @@ import { Jn } from "../905/17223";
 import { D as _$$D } from "../905/555681";
 import { h as _$$h } from "../905/994594";
 import { L as _$$L } from "../905/704296";
-import { L as _$$L2 } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { lQ } from "../905/934246";
 import { H_, z6, CU, $Q, a2 } from "../905/963340";
@@ -655,7 +655,7 @@ let e0 = memo(function (e) {
     let S = useCallback(() => {
       let t = T.getState().openFile;
       if (t) {
-        let n = jN({
+        let n = buildFileUrl({
           file: t,
           nodeId: e.nodeId,
           isFigJam: t.editorType === FFileType.WHITEBOARD
@@ -1030,7 +1030,7 @@ let tt = forwardRef((e, t) => {
       spellCheck: !1,
       value: e.query
     }) : jsxs(Fragment, {
-      children: [jsx(_$$h, {}), jsx(_$$L2, {
+      children: [jsx(_$$h, {}), jsx(LazyInputForwardRef, {
         ref: searchInputRef,
         className: "sidebar_search--searchInput--ySEJ2 text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa",
         onBlur,
@@ -1393,7 +1393,7 @@ function tk({
   let l = e.length;
   let d = useFullscreenReady();
   let c = _$$k2();
-  return T8(jsxs(Fragment, {
+  return wrapWithTracking(jsxs(Fragment, {
     children: [d && jsx(Mw, {
       panelName: ON.COMMENTS
     }), r && !l && !c && jsx(tj, {

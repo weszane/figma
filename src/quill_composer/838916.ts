@@ -16,7 +16,7 @@ import { A as _$$A7 } from "../vendor/572313";
 import { A as _$$A8 } from "../vendor/787998";
 import { A as _$$A9 } from "../vendor/706709";
 import { c2 } from "../figma_app/243213";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { sanitizeHtml } from "../905/69245";
 import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
@@ -390,7 +390,7 @@ function H(t) {
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": `${t.tooltip}${formatShortcutKey(t)}`,
     onKeyDown: t => {
-      t.keyCode === Uz.ESCAPE && t.currentTarget.blur();
+      t.keyCode === KeyCodes.ESCAPE && t.currentTarget.blur();
     }
   });
 }
@@ -574,7 +574,7 @@ export function $$j0({
       },
       onFocus: i.onFocus,
       onKeyDown: t => {
-        i.onKeyDown?.(t) || t.keyCode !== Uz.ESCAPE || t.target.blur();
+        i.onKeyDown?.(t) || t.keyCode !== KeyCodes.ESCAPE || t.target.blur();
       },
       placeholder: i.placeholder,
       value: v

@@ -48,7 +48,7 @@ import { $z } from '../figma_app/617427';
 import { k as _$$k } from '../figma_app/618031';
 import { Ro } from '../figma_app/805373';
 import { zRx } from '../figma_app/822011';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { useDispatch } from 'react-redux';
 FPlanNameType.STUDENT;
 FPlanNameType.STARTER;
@@ -293,7 +293,7 @@ function er(e) {
     }));
   }, []);
   let Z = g || !currency || status === 'errors' || !x;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.AUTO_APPROVAL_SETTINGS_MODAL,
     properties: {
       planType: z.key.type,
@@ -394,7 +394,7 @@ function ei({
   }) : null;
 }
 function el() {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.SCIM_INFO_BADGE,
     children: jsx(_$$_, {
       dataTestId: 'scim-info-badge',
@@ -414,7 +414,7 @@ function el() {
   });
 }
 function eo() {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.CURF_MEMBER_INFO_BADGE,
     children: jsx(_$$_, {
       dataTestId: 'curf-member-only-info-badge',
@@ -453,7 +453,7 @@ let ed = registerModal(e => {
 let eu = registerModal(e => {
   let t = useTeamPlanFeatures().unwrapOr(null);
   let a = useModalManager(e);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'Auto Approval Settings Modal (CURF All Users)',
     children: jsx(ModalRootComponent, {
       manager: a,

@@ -12,7 +12,7 @@ import { sx } from "../905/941192";
 import { A as _$$A } from "../5885/54359";
 import { D as _$$D } from "../905/251759";
 import { c as _$$c2 } from "../905/370443";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { Um } from "../905/848862";
 import { _Z, B9 } from "../figma_app/514043";
 import { BillingCycle } from "../figma_app/831101";
@@ -23,7 +23,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
-let N = tf(ButtonLargeWide);
+let N = withTrackedClick(ButtonLargeWide);
 export function $$b0({
   title: e,
   countByBillableProductKey: t,

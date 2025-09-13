@@ -64,14 +64,14 @@ import { isDevEnvironment } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
 import { tc as _$$tc } from "../905/15667";
-import { fu, tf as _$$tf } from "../figma_app/831799";
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { yy } from "../figma_app/543529";
 import { y as _$$y } from "../1250/295724";
 import { k as _$$k2 } from "../figma_app/564183";
 import { B as _$$B } from "../905/969273";
 import { A0, sZ, Ay as _$$Ay } from "../figma_app/948389";
 import { selectCurrentFile, openFileTeamAtom, useCurrentFileKey } from "../figma_app/516028";
-import { X$ } from "../905/612685";
+import { getCommunityFileUrl } from "../905/612685";
 import { FPlanNameType, FProductAccessType, FFileType } from "../figma_app/191312";
 import { useTeamPlanPublicInfo, useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { wH, mT } from "../figma_app/680166";
@@ -130,7 +130,7 @@ import { Y9 } from "../figma_app/42724";
 import { P as _$$P3 } from "../figma_app/650304";
 import { V as _$$V, s as _$$s2 } from "../1156/291626";
 import { W as _$$W3 } from "../1156/852405";
-import { F4 } from "../905/691205";
+import { isFigmaDomain } from "../905/691205";
 import { Wv } from "../figma_app/711157";
 import { y as _$$y4 } from "../figma_app/13082";
 import { z as _$$z } from "../vendor/999105";
@@ -631,7 +631,7 @@ let th = "dismissed_chat_soft_limit_banner";
 function tN() {
   let e = Y9(getI18nString("auth.welcome-to-figma"));
   let t = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Logged Out File Chatbox Banner",
     children: jsxs("div", {
       className: "x9f619 x78zum5 x1ov5egs x9a3u73 x1cy8zhl x1mxnbhz x131gfan x1mgsydn x167g77z",
@@ -927,7 +927,7 @@ function tF({
   if (e.length <= 0 || e.length > 3) return null;
   let n = e.map(e => jsx(Ph, {
     newTab: !0,
-    href: X$(e.hubFileId),
+    href: getCommunityFileUrl(e.hubFileId),
     trusted: !0,
     children: truncate(e.hubFileName, 30)
   }, e.hubFileId));
@@ -958,7 +958,7 @@ function tF({
     })
   });
 }
-let tO = _$$tf(_$$$);
+let tO = withTrackedClick(_$$$);
 function tD({
   licenseType: e,
   onClose: t
@@ -979,7 +979,7 @@ function tD({
   } = mT(e);
   let u = l;
   shouldShowCurf || getPendingRequest(e)?.entryPoint !== _$$tc.CODE_CHAT_LIMIT || (u = getI18nString("fullscreen.toolbar_banner.provisional_access.code_chat"));
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "ChatBoxProvisionalAccessBanner",
     properties: {
       tier: i
@@ -1015,7 +1015,7 @@ function tB({
       children: renderI18nText("general.learn_more")
     })
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "ChatBoxSoftLimitBanner",
     properties: {
       tier: n
@@ -1218,7 +1218,7 @@ function tW() {
         throwTypeError(e);
     }
   }(i, s?.name || a?.name || "");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "ChatBoxToast",
     properties: {
       codeChatRestriction: i,
@@ -1735,7 +1735,7 @@ function t0({
               return !!(t && [...t].findIndex(e => function (e) {
                 if (isValidUrl(e)) {
                   let t = new URL(e);
-                  if (F4(t.hostname)) return !0;
+                  if (isFigmaDomain(t.hostname)) return !0;
                 }
                 return !1;
               }(e)) > -1);

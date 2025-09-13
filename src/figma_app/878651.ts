@@ -4,11 +4,11 @@ import { useSelector, useDispatch, connect } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import p from "classnames";
 import { customHistory } from "../905/612521";
-import { oJ, Gc } from "../905/63728";
+import { isCommandOrShift, ignoreCommandOrShift } from "../905/63728";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
 import { Ts } from "../905/194276";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
 import { SvgComponent } from "../905/714743";
@@ -25,7 +25,7 @@ import { C as _$$C2 } from "../figma_app/382445";
 import { s1, uR, oj } from "../figma_app/304207";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { tf } from "../figma_app/831799";
+import { withTrackedClick } from "../figma_app/831799";
 import { cs, zp } from "../figma_app/740025";
 import { Cn } from "../905/862913";
 import { Ni } from "../figma_app/188152";
@@ -232,9 +232,9 @@ function em() {
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.profiles.boosted_by_the_figma_team"),
     "data-tooltip-show-immediately": !0,
-    children: jsx(Ex, {
+    children: jsx(Badge, {
       text: getI18nString("community.profiles.fig_pick"),
-      color: zE.BRAND,
+      color: BadgeColor.BRAND,
       className: q2
     })
   });
@@ -242,9 +242,9 @@ function em() {
 export function $$eg3() {
   return jsx("div", {
     className: jq,
-    children: jsx(Ex, {
+    children: jsx(Badge, {
       text: getI18nString("community.profiles.new"),
-      color: zE.SUCCESS,
+      color: BadgeColor.SUCCESS,
       className: q2
     })
   });
@@ -644,7 +644,7 @@ function eT(e, t) {
     constructor() {
       super(...arguments);
       this.onClick = e => {
-        if (oJ(e)) {
+        if (isCommandOrShift(e)) {
           customHistory.redirect(ho(this.props.plugin?.id), "_blank");
           return;
         }
@@ -696,7 +696,7 @@ function eT(e, t) {
   };
 })(i || (i = {}));
 let $$eI6 = i.PluginTile;
-let $$eS0 = tf($$eI6);
+let $$eS0 = withTrackedClick($$eI6);
 export class $$ev7 extends Component {
   render() {
     let {
@@ -718,7 +718,7 @@ $$ev7.defaultProps = {
   class t extends Component {
     constructor() {
       super(...arguments);
-      this.onHubFileClick = Gc(e => {
+      this.onHubFileClick = ignoreCommandOrShift(e => {
         e.preventDefault();
         e.stopPropagation();
         this.props.onHubFileClick();
@@ -765,7 +765,7 @@ $$ev7.defaultProps = {
   class t extends Component {
     constructor() {
       super(...arguments);
-      this.onPluginClick = Gc(e => {
+      this.onPluginClick = ignoreCommandOrShift(e => {
         e.preventDefault();
         e.stopPropagation();
         this.props.onResourceClick();
@@ -816,7 +816,7 @@ $$ev7.defaultProps = {
     constructor(e) {
       super(e);
       this.onPublicProfileClick = e => {
-        if (oJ(e)) {
+        if (isCommandOrShift(e)) {
           let e = this.props.publicProfile;
           if (!e) return;
           customHistory.redirect(bL(e.profile_handle) || "", "_blank");
@@ -935,13 +935,13 @@ $$ev7.defaultProps = {
     }
   });
   e.ConnectedPublicProfileTile = connect(r, n)(t);
-  e.ConnectedPublicProfileTileTracked = connect(r, n)(tf(t));
+  e.ConnectedPublicProfileTileTracked = connect(r, n)(withTrackedClick(t));
 })(o || (o = {}));
 export let $$eA4 = o.ConnectedPublicProfileTile;
 export function $$ex8({
-  color: e = zE.DEFAULT
+  color: e = BadgeColor.DEFAULT
 }) {
-  return jsx(Ex, {
+  return jsx(Badge, {
     text: getI18nString("community.profiles.follows_you"),
     color: e,
     className: x7

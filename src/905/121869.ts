@@ -5,13 +5,13 @@ import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
 import { useAtomValue } from "../vendor/525001";
 import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
-import { NY, rb } from "../figma_app/637027";
+import { ButtonSecondaryLinkTracked, ButtonLinkTracked } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { U } from "../905/405962";
 import { useCurrentUserOrg } from "../905/845253";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
@@ -47,21 +47,21 @@ export function $$x0(e) {
   });
   h?.standing === ZG.DEACTIVATED && (x = void 0);
   let R = [];
-  i && (R = x ? [jsx(NY, {
+  i && (R = x ? [jsx(ButtonSecondaryLinkTracked, {
     href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
     target: "_blank",
     trackingProperties: {
       trackingDescriptor: _$$c.CONTACT_SUPPORT
     },
     children: renderI18nText("payments_modal.contact_support")
-  }, "contact_support"), jsx(rb, {
+  }, "contact_support"), jsx(ButtonLinkTracked, {
     href: x.invoice_url,
     target: "_blank",
     trackingProperties: {
       trackingDescriptor: _$$c.PAY_INVOICE
     },
     children: renderI18nText("payments_modal.pay_invoice")
-  }, "pay_invoice")] : [jsx(rb, {
+  }, "pay_invoice")] : [jsx(ButtonLinkTracked, {
     href: "https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215",
     target: "_blank",
     trackingProperties: {
@@ -69,7 +69,7 @@ export function $$x0(e) {
     },
     children: renderI18nText("payments_modal.contact_support")
   }, "contact_support")]);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.ORG_SUSPENSION_MODAL,
     properties: {
       orgId: h?.id,

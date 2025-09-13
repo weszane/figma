@@ -75,7 +75,7 @@ import { dL } from "../figma_app/825489";
 import { Wq, od } from "../figma_app/392189";
 import { r6 as _$$r } from "../905/542608";
 import ew from "classnames";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { BrowserInfo } from "../figma_app/778880";
 import { eu as _$$eu, q5 as _$$q } from "../figma_app/807786";
 import { vb, E1, aU } from "../figma_app/757606";
@@ -127,8 +127,8 @@ import { rp, PI, A5, rj } from "../figma_app/703988";
 import { AD, iE, QX, Gr, HR, Bm, UU, OW, Md, Rm, Ki } from "../figma_app/645801";
 import { A as _$$A3 } from "../1617/775065";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { fu } from "../figma_app/831799";
-import { K as _$$K2 } from "../905/135526";
+import { TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { BS, T as _$$T3, FX as _$$FX, Nz, cP, uY } from "../figma_app/475869";
 import { A as _$$A4 } from "../6828/523860";
 import { A as _$$A5 } from "../6828/85206";
@@ -242,7 +242,7 @@ function eL({
   });
   useEffect(() => {
     let e = e => {
-      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && u !== LayoutTabType.TEXT && (h(), e.preventDefault());
+      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === KeyCodes.KEY_2 : e.altKey && e.keyCode === KeyCodes.KEY_2) && u !== LayoutTabType.TEXT && (h(), e.preventDefault());
     };
     document.addEventListener("keydown", e);
     return () => {
@@ -362,7 +362,7 @@ function eW(e) {
     onHideDropdownOverride: e.useLocalState ? e.onHideDropdownOverride : void 0,
     onShowDropdown: y,
     onShowDropdownOverride: e.useLocalState ? e.onShowDropdownOverride : void 0,
-    openOnKeyPressed: [Uz.SPACE, Uz.ENTER],
+    openOnKeyPressed: [KeyCodes.SPACE, KeyCodes.ENTER],
     property: assetType,
     rightIcon: jsx(_$$P2, {
       libraryKey: assetType.type === _$$I2.FILE ? assetType.libraryKey : void 0
@@ -655,13 +655,13 @@ class tK extends Component {
     let t = tO(this.props) ? "library_section_header--sectionHeaderExpandable--hHEFq" : "";
     let s = tF(e, this.props.shouldShowDividerLine);
     let r = tO(this.props) && this.props.isFixed ? "library_section_header--isFixed--eVHns" : "";
-    return jsx(fu, {
+    return jsx(TrackingProvider, {
       name: "Section Header",
       properties: {
         title: this.props.title,
         isExpanded: !!tO(this.props) && this.props.isExpanded
       },
-      trackingTargets: _$$K2.RCS,
+      trackingTargets: RCSMessageType.RCS,
       children: jsxs("div", {
         className: eN()(s, e, t, r),
         children: [tO(this.props) && jsx(SvgComponent, {

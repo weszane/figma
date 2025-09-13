@@ -12,7 +12,7 @@ import { h1 } from "../905/986103";
 import { o as _$$o } from "../905/605383";
 import { Ph } from "../905/160095";
 import { getI18nString } from "../905/303541";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { LT } from "../figma_app/646357";
 import { FFileType } from "../figma_app/191312";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -588,7 +588,7 @@ export function $$H1({
       stat: e
     }) => jsx(Ph, {
       newTab: !0,
-      href: jN({
+      href: buildFileUrl({
         file: {
           key: e.fileKey,
           name: e.fileName,

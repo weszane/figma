@@ -9,7 +9,7 @@ import { logWarning } from "../905/714362";
 import { PN } from "../figma_app/897289";
 import { zn, Ns } from "../figma_app/768070";
 import { fullscreenValue } from "../figma_app/455680";
-import { Kw } from "../905/612685";
+import { buildFileUrlInternal } from "../905/612685";
 import { yw, Bm } from "../figma_app/617727";
 import { FFileType } from "../figma_app/191312";
 import { $z } from "../figma_app/297733";
@@ -64,7 +64,7 @@ let v = forwardRef(function ({
     }
   }, [I, N, M, i]);
   let P = t ? function (e, t, i, r, n) {
-    let a = encodeURIComponent(Kw({
+    let a = encodeURIComponent(buildFileUrlInternal({
       base: "proto",
       file: {
         key: e

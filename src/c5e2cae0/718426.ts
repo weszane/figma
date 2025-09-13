@@ -1,10 +1,10 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { nR } from "../figma_app/637027";
+import { ButtonSecondary } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
-import { jm } from "../figma_app/831799";
+import { TrackedDiv } from "../figma_app/831799";
 import { STANDARD_LIMIT } from "../figma_app/345997";
 import { Ro } from "../figma_app/805373";
 import { jG, o8, kz, nW, wv, cr, J1 } from "../c5e2cae0/62130";
@@ -37,7 +37,7 @@ export function $$u0({
     scrollingDisabled: !1,
     children: jsx("div", {
       className: nW,
-      children: t.map((t, r) => jsxs(jm, {
+      children: t.map((t, r) => jsxs(TrackedDiv, {
         className: t === y ? wv : cr,
         onClick: () => a(t),
         trackingProperties: {
@@ -67,7 +67,7 @@ export function $$u0({
               })]
             })]
           })]
-        }), jsx(nR, {
+        }), jsx(ButtonSecondary, {
           className: J1,
           dataTestId: "select_team.upgrade",
           children: e ?? renderI18nText("universal_upgrade.select_team.upgrade")

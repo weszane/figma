@@ -9,7 +9,7 @@ import { renderI18nText } from "../905/303541";
 import { nl, Pf } from "../905/590952";
 import { tc } from "../905/15667";
 import { Xt } from "../figma_app/297957";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { m0 } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { yF } from "../figma_app/386952";
@@ -121,7 +121,7 @@ function S({
   let b = t ? renderI18nText("viewer_restricted_tooltip.to_collaborate_in_this_draft", {
     fileOpenerName: t
   }) : renderI18nText("viewer_restricted_tooltip.to_collaborate_in_this_draft_no_name");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "VR Draft Share Notification Tooltip",
     children: jsx(Cf, {
       targetRect: m,

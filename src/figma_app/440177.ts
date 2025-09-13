@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Fo, Uz } from "../905/63728";
+import { isCommandEvent, KeyCodes } from "../905/63728";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { k as _$$k } from "../figma_app/564183";
 import { f4 } from "../figma_app/722362";
@@ -573,7 +573,7 @@ export function $$eD0(e) {
   return r ? null : jsxs("div", {
     ref: t,
     onKeyDown: e => {
-      if (Fo(e) && e.keyCode === Uz.A) {
+      if (isCommandEvent(e) && e.keyCode === KeyCodes.A) {
         let t = window.getSelection();
         if (t) {
           let r = document.createRange();

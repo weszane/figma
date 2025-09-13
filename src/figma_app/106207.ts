@@ -23,7 +23,7 @@ import { loadCanvasData } from "../905/815475";
 import { sf } from "../figma_app/12535";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
-import { to } from "../905/612685";
+import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
 import { useCurrentPublicPlan } from "../figma_app/465071";
@@ -274,7 +274,7 @@ async function W({
       storeInRecentsKey: $A.FigJam,
       ...t
     }));
-    customHistory.redirect(to(fig_file), a ? "_blank" : void 0);
+    customHistory.redirect(getDesignFileUrlWithOptions(fig_file), a ? "_blank" : void 0);
   }).catch(() => {
     let t = {
       error: !0,

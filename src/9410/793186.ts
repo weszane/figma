@@ -39,7 +39,7 @@ import { normalizeValue, isInvalidValue } from "../905/216495";
 import { lJ, kl } from "../905/275640";
 import { lg } from "../figma_app/164212";
 import { lerp, clamp } from "../figma_app/492908";
-import { Fo } from "../905/63728";
+import { isCommandEvent } from "../905/63728";
 import { useHandleChangeEvent, useHandleKeyboardEvent } from "../figma_app/878298";
 import { Dm } from "../figma_app/8833";
 import { f7 } from "../figma_app/896988";
@@ -57,9 +57,9 @@ import { g as _$$g } from "../figma_app/240060";
 import { Ay } from "../figma_app/838407";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { L as _$$L } from "../905/657783";
-import { yX, ey as _$$ey } from "../figma_app/918700";
+import { ConfirmationModal2, ModalView } from "../figma_app/918700";
 import { jE, yl, DD } from "../figma_app/639088";
 import { lQ } from "../905/934246";
 var P = M;
@@ -156,7 +156,7 @@ function X(e, t, i) {
           break;
         case "=":
         case "-":
-          Fo(e) && f7(e);
+          isCommandEvent(e) && f7(e);
       }
     }
   });
@@ -322,7 +322,7 @@ function et() {
   let f = e => {
     var t;
     let r = (t = (t = e).trim().toLowerCase(), "auto".startsWith(t) || "fill".startsWith(t)) ? LayoutSizingType.FLEX : "hug".startsWith(t) && getFeatureFlags().ce_tv_grid_hug ? LayoutSizingType.HUG : "fixed".startsWith(t) ? LayoutSizingType.FIXED : null;
-    if (null != r) a(r);else {
+    if (null != r) a(r); else {
       let t = parseFloat(e);
       if (isNaN(t)) return;
       i(t);
@@ -744,13 +744,13 @@ function ey(e) {
 }
 function ek(e) {
   let t = selectCurrentUser();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Starter team edit confirmation modal",
     properties: {
       userId: t?.id,
       userEmail: t?.email
     },
-    children: jsx(yX, {
+    children: jsx(ConfirmationModal2, {
       confirmationTitle: getI18nString("fullscreen.starter_team_edit_modal.open_this_link"),
       confirmText: "Continue",
       onConfirm: () => {
@@ -782,7 +782,7 @@ function ek(e) {
   });
 }
 let eA = registerModal(function (e) {
-  return jsxs(_$$ey, {
+  return jsxs(ModalView, {
     size: "small",
     className: yl,
     disableClickOutsideToHide: !0,

@@ -58,13 +58,13 @@ import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
 import { $$in, WX } from "../figma_app/350203";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Yw, Of } from "../905/201596";
 import { Rv, mN } from "../figma_app/599979";
 import { eY } from "../figma_app/722362";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectUser } from "../905/372672";
-import { xw } from "../figma_app/951233";
+import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { e0 } from "../905/696396";
 import { t as _$$t3 } from "../figma_app/305141";
@@ -154,7 +154,7 @@ function eO({
   let Y = useDispatch();
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let X = _$$H(trackEvent);
   let q = useCallback(() => {
     Y(hideModal());
@@ -538,7 +538,7 @@ function eR(e) {
     existingHubFile
   } = e;
   let n = selectUser();
-  let o = useSelector(e => xw(e) ?? void 0, deepEqual);
+  let o = useSelector(e => getCurrentUserOrgUser(e) ?? void 0, deepEqual);
   let l = useCurrentUserOrg();
   let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), deepEqual);
   let c = useSelector(e => e.authedProfilesById);
@@ -565,7 +565,7 @@ export function $$eL0(e) {
     ...t
   });
   let i = _t(e.figFile?.key ?? "");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.COMMUNITY_HUB_FILE_PUBLISH_MODAL_V2,
     properties: {
       userId: t.user.id,
@@ -593,7 +593,7 @@ function eP({
   let d = _$$H(o);
   let {
     trackEvent
-  } = j6();
+  } = useTracking();
   let _ = _$$H(trackEvent);
   let [h, m] = useState();
   useEffect(() => {

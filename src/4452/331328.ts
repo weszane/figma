@@ -5,12 +5,12 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { getFeatureFlags } from "../905/601108";
-import { tM, vd } from "../figma_app/637027";
+import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { cL } from "../905/748726";
 import { hideModal } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { zK } from "../figma_app/475472";
 import { dr } from "../4452/405965";
 import { FResourceCategoryType, FPermissionLevelType } from "../figma_app/191312";
@@ -36,7 +36,7 @@ export let $$S0 = registerModal(function (e) {
     ...e,
     onClose: d
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Team Access Modal",
     properties: {
       resourceType: FResourceCategoryType.TEAM,
@@ -124,10 +124,10 @@ export function $$T1(e) {
       children: u === _9.INVITE_ONLY ? getI18nString("team_creation.visibility") : getI18nString("team_creation.what_they_can_do")
     }), I, jsxs("div", {
       className: E_,
-      children: [jsx(tM, {
+      children: [jsx(ButtonSecondaryTracked, {
         onClick: e.goBack || e.hideModal,
         children: renderI18nText("project_creation.cancel")
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         onClick: () => {
           let t = u === _9.INVITE_ONLY && p === teamVisibilityEnum.ORG_BROWSABLE;
           let s = u === _9.INVITE_ONLY && p === teamVisibilityEnum.HIDDEN;

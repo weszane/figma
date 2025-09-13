@@ -7,7 +7,7 @@ import { resourceUtils } from "../905/989992";
 import { ResourceStatus } from "../905/957591";
 import { logInfo } from "../905/714362";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { J4 } from "../figma_app/349248";
+import { mapTemplateProperties } from "../figma_app/349248";
 import { arraysEqual } from "../figma_app/656233";
 import { libraryModuleDataAtomFamily } from "../905/888985";
 import { _f } from "../905/760682";
@@ -55,14 +55,14 @@ export function $$b1(e, t) {
       }
       let a = [];
       if (file?.modules?.length) {
-        let e = file.modules.map(e => J4(e, {
+        let e = file.modules.map(e => mapTemplateProperties(e, {
           type: "teamTemplate",
           file
         })).filter($$I0).filter(e => t === y || e.moduleSource === t);
         a = a.concat(e);
       }
       if (hubFile?.modules_v2?.length) {
-        let e = hubFile.modules_v2.map(e => J4(e, {
+        let e = hubFile.modules_v2.map(e => mapTemplateProperties(e, {
           type: "hubFile",
           file: hubFile
         }));
@@ -79,7 +79,7 @@ export function $$T2() {
   return useMemo(() => function (e, t = y) {
     if (e?.status !== "loaded") return [];
     let r = e.data.file;
-    return r ? S(r.modules.map(e => J4(e, {
+    return r ? S(r.modules.map(e => mapTemplateProperties(e, {
       type: "team",
       file: r
     })), t) : [];

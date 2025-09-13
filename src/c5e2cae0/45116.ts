@@ -12,7 +12,7 @@ import { UL, iB, O$ } from "../figma_app/361035";
 import { Tj, gS, gu } from "../figma_app/441925";
 import { getRumLoggingConfig } from "../905/16237";
 import { Dj } from "../figma_app/297957";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Ju } from "../905/712921";
 import { e0 } from "../905/696396";
 import { useDispatch } from "react-redux";
@@ -173,7 +173,7 @@ let H = registerModal(function (e) {
     open,
     onClose
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Select User Seat Type Modal",
     properties: {
       teamId
@@ -352,7 +352,7 @@ export function $$q0({
   let P = UL(a.additionalSeatCounts);
   let M = Dj();
   let R = S === Ju.PRO && M();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: e0.SELECT_SEATS_TABLE,
     properties: {
       selectedUserSeatTypes: Tj(C.selectedUserSeatTypes),

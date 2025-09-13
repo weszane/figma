@@ -6,7 +6,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import l from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { y as _$$y } from "../905/52479";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleKeyboardEvent, handleGenericEvent, handleMouseEvent } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Pg } from "../905/149328";
@@ -24,7 +24,7 @@ import { l as _$$l } from "../905/479687";
 import { s as _$$s } from "../905/403855";
 import { J as _$$J2 } from "../905/125993";
 import { k as _$$k } from "../905/44647";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { S as _$$S } from "../figma_app/420927";
 import { getI18nString } from "../905/303541";
 import { KD } from "../figma_app/975811";
@@ -215,7 +215,7 @@ class H extends z {
           className: c ? $$j : M,
           children: t.rightIcon
         })]
-      }), !!t.children && !("render" in t) && (a ? jsx(D8, {
+      }), !!t.children && !("render" in t) && (a ? jsx(RecordableDiv, {
         className: d()("multilevel_dropdown--hasDotDotDotButton--ifOsI", {
           "multilevel_dropdown--hasDotDotDotButtonActive--XRU9C": this.props.isActive
         }),
@@ -389,33 +389,33 @@ let er = class e extends RecordingPureComponent {
         let i = this.props.depth > 0;
         let n = null;
         switch (e.keyCode) {
-          case Uz.ENTER:
-          case Uz.SPACE:
+          case KeyCodes.ENTER:
+          case KeyCodes.SPACE:
             e.preventDefault();
             (n = null != this.state.activeItem ? t[this.state.activeItem.index] : null) && (n.children ? this.setState({
               activeItemSubmenuShown: !0,
               activeItemSubmenuShouldAutofocus: !0
             }) : (this.props.dispatch(oB()), this.props.onSelectItem(n, e)));
             break;
-          case Uz.TAB:
-          case Uz.ESCAPE:
+          case KeyCodes.TAB:
+          case KeyCodes.ESCAPE:
             e.preventDefault();
             this.props.onDismissMenu && this.props.onDismissMenu();
             i || this.props.dispatch(oB());
             break;
-          case Uz.LEFT_ARROW:
+          case KeyCodes.LEFT_ARROW:
             1 === this.state.submenuPosition ? this.showSubmenu(!0) : i && this.props.onDismissMenu && this.props.onDismissMenu();
             break;
-          case Uz.RIGHT_ARROW:
+          case KeyCodes.RIGHT_ARROW:
             1 === this.state.submenuPosition ? i && this.props.onDismissMenu && this.props.onDismissMenu() : this.showSubmenu(!0);
             break;
-          case Uz.DOWN_ARROW:
+          case KeyCodes.DOWN_ARROW:
             if (e.preventDefault(), null === this.state.activeItem) {
               let e = t[0];
               this.isItemSelectable(e) ? this.setActiveOption(e, 0) : this.selectNextActiveItem(t, 0, !0);
             } else this.state.activeItem.index < t.length - 1 && this.selectNextActiveItem(t, this.state.activeItem.index, !0);
             break;
-          case Uz.UP_ARROW:
+          case KeyCodes.UP_ARROW:
             if (e.preventDefault(), null === this.state.activeItem) {
               let e = t.length - 1;
               let i = t[e];

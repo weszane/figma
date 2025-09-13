@@ -1,8 +1,8 @@
 import { createContext, forwardRef, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { jsx } from 'react/jsx-runtime';
 import { useStableMemo } from '../905/19536';
-import { vN, xH } from '../905/63728';
-import { D8 } from '../905/511649';
+import { isExactModifier, ModifierKeyCodes } from '../905/63728';
+import { RecordableDiv } from '../905/511649';
 import { logger } from '../905/651849';
 import { lQ } from '../905/934246';
 import { assertNotNullish, isNullish } from '../figma_app/95419';
@@ -252,7 +252,7 @@ let $$E4 = forwardRef(({
   }), [N, I, L, R, u]);
   return jsx(f.Provider, {
     value: F,
-    children: jsx(D8, {
+    children: jsx(RecordableDiv, {
       style: h ? {
         display: 'contents'
       } : void 0,
@@ -425,13 +425,13 @@ export function $$I2({
 }
 export function $$S3(e, t) {
   let r = k(e);
-  let n = vN(e, xH.CONTROL);
+  let n = isExactModifier(e, ModifierKeyCodes.CONTROL);
   let i = BrowserInfo.mac && n;
   return r === 'ArrowUp' || r === 'KeyK' && t && N() || i && r === 'KeyP';
 }
 export function $$v1(e, t) {
   let r = k(e);
-  let n = vN(e, xH.CONTROL);
+  let n = isExactModifier(e, ModifierKeyCodes.CONTROL);
   let i = BrowserInfo.mac && n;
   return r === 'ArrowDown' || r === 'KeyJ' && t && N() || i && r === 'KeyN';
 }

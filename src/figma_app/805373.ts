@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A } from "../905/410311";
 import o from "classnames";
 import { oW } from "../905/675859";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
@@ -450,10 +450,10 @@ class eb extends Component {
         children: [this.props.text.length > 0 && r, this.props.showIsMe && jsx("span", {
           className: l()("avatar--isMe--LeNkH", t),
           children: renderI18nText("avatar.tooltip.you")
-        }), this.props.badge && jsx(Ex, {
+        }), this.props.badge && jsx(Badge, {
           ...this.props.badge
-        }), this.props.isScimUser && jsx(Ex, {
-          color: zE.DEFAULT,
+        }), this.props.isScimUser && jsx(Badge, {
+          color: BadgeColor.DEFAULT,
           text: getI18nString("members_table.org_user_name_cell.scim_badge")
         })]
       }), this.props.email && jsx("div", {

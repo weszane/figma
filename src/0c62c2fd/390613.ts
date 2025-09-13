@@ -5,7 +5,7 @@ import { getAtomMutate } from "../figma_app/566371";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { U } from "../figma_app/199513";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 export function $$u0({
   folders: e
 }) {
@@ -25,7 +25,7 @@ export function $$u0({
       t(FlashActions.error(getI18nString("file_browser.api_folder.error_when_deleting")));
     });
   };
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: getI18nString("file_browser.delete_project.title"),
     destructive: !0,
     confirmText: getI18nString("file_browser.batch_delete_project.generic_confirm_label"),

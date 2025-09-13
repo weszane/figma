@@ -6,7 +6,7 @@ import { ResourceStatus } from "../905/663269";
 import { Xf } from "../figma_app/153916";
 import { useSubscription } from "../figma_app/288654";
 import { I7 } from "../figma_app/594947";
-import { zE, Ex } from "../figma_app/919079";
+import { BadgeColor, Badge } from "../figma_app/919079";
 import { tH } from "../905/751457";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -17,7 +17,7 @@ import { Y } from "../figma_app/515088";
 import { ur, uE } from "../figma_app/451028";
 import { Y as _$$Y } from "../7021/427161";
 import { Jt } from "../figma_app/28323";
-import { T8 } from "../figma_app/831799";
+import { wrapWithTracking } from "../figma_app/831799";
 import { Pn, Yo, oU } from "../figma_app/84966";
 import { NJ } from "../figma_app/518077";
 import { MX, EQ, Cz, RG } from "../figma_app/684446";
@@ -74,12 +74,12 @@ export function $$k0(e) {
   }, [e.isDataLoaded, g, y]);
   let j = (v[y] ?? 0) + (e.billingStatusCount || 0) + (e.taxStatusCount || 0);
   if (j < 1) return null;
-  let I = zE.DEFAULT;
-  e.billingStatusCount || e.taxStatusCount ? I = zE.WARNING : e.isSelected && (I = zE.LIGHT);
-  return void 0 !== g && j > 0 && e.isDataLoaded ? jsx(Ex, {
+  let I = BadgeColor.DEFAULT;
+  e.billingStatusCount || e.taxStatusCount ? I = BadgeColor.WARNING : e.isSelected && (I = BadgeColor.LIGHT);
+  return void 0 !== g && j > 0 && e.isDataLoaded ? jsx(Badge, {
     text: j.toString(),
     color: I,
-    className: I === zE.DEFAULT ? _$$s.mr0.colorText.colorBgSelectedSecondary.$ : _$$s.mr0.$,
+    className: I === BadgeColor.DEFAULT ? _$$s.mr0.colorText.colorBgSelectedSecondary.$ : _$$s.mr0.$,
     dataTestId: "admin-notifications-badge"
   }) : null;
 }
@@ -234,7 +234,7 @@ function F(e) {
     className: m
   });
   let x = "warning" === u.iconType ? g : h;
-  return T8(x, "Org Admin Billing Status Badge", {
+  return wrapWithTracking(x, "Org Admin Billing Status Badge", {
     orgId: e.org.id,
     isCurrentUserLicenseAndNotOrgAdmin: l
   });

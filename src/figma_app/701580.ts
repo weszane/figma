@@ -9,7 +9,7 @@ import { ModalRootComponent } from "../905/38914";
 import { J as _$$J } from "../905/614223";
 import _ from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { j6, fu } from "../figma_app/831799";
+import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { _ as _$$_ } from "../905/793009";
 import { Gi, tS, wv } from "../figma_app/622574";
 import { Ou, Fz, b4, WS } from "../figma_app/106207";
@@ -665,7 +665,7 @@ function eg(e) {
   let {
     properties,
     name
-  } = j6();
+  } = useTracking();
   let {
     onClose
   } = e;
@@ -694,7 +694,7 @@ function eg(e) {
 }
 export let $$ef0 = registerModal(function (e) {
   let t = useCurrentFileKey();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "template_modal_shown",
     properties: {
       fileKey: t,

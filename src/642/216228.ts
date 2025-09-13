@@ -12,7 +12,7 @@ import { T as _$$T } from '../642/794951';
 import { D2, oh } from '../905/18797';
 import { k as _$$k3 } from '../905/44647';
 import { f as _$$f2 } from '../905/54715';
-import { Uz } from '../905/63728';
+import { KeyCodes } from '../905/63728';
 import { oA } from '../905/71785';
 import { TG } from '../905/72677';
 import { KH } from '../905/81982';
@@ -62,7 +62,7 @@ import { x as _$$x } from '../905/505155';
 import { g as _$$g3 } from '../905/505662';
 import { U as _$$U2 } from '../905/506188';
 import { E as _$$E3 } from '../905/511388';
-import { GG } from '../905/511649';
+import { RecordableButton } from '../905/511649';
 import { RR as _$$RR } from '../905/514666';
 import { dD } from '../905/519113';
 import { C as _$$C } from '../905/520159';
@@ -232,7 +232,7 @@ import { e_ as _$$e_, dM, F9, fA, MH } from '../figma_app/803787';
 import { $E } from '../figma_app/805898';
 import { _2, hw, u2 } from '../figma_app/807786';
 import { dL } from '../figma_app/825489';
-import { o3 } from '../figma_app/831799';
+import { TrackedLink } from '../figma_app/831799';
 import { z6 } from '../figma_app/846841';
 import { u as _$$u2, V as _$$V4 } from '../figma_app/862515';
 import { generateRecordingKey, useHandleInputEvent, useHandleMouseEvent } from '../figma_app/878298';
@@ -377,7 +377,7 @@ let el = forwardRef(({
         onContextMenu: n
       },
       'children': f
-    }) : jsx(GG, {
+    }) : jsx(RecordableButton, {
       'aria-label': t,
       'className': l()(ee, {
         [et]: d
@@ -4450,7 +4450,7 @@ function nV({
       }
     }, [t, e, s]);
   }(e.name, D || e.libraryKey === Yl);
-  return jsx(GG, {
+  return jsx(RecordableButton, {
     'aria-label': e.name,
     'className': u ? '' : 'asset_panel_library--library--5bw5-',
     'forwardedRef': setKeyboardNavigationElement,
@@ -5820,7 +5820,7 @@ function it() {
   });
 }
 function is() {
-  return jsx(o3, {
+  return jsx(TrackedLink, {
     trackingEventName: 'cmty_category',
     trackingProperties: {
       name: 'visual_assets_browse_more_assets_clicked',
@@ -7085,7 +7085,7 @@ function i9({
     let t = e.libraryKey === i?.libraryKey ? 'localLibrary' : e.libraryKey;
     return generateRecordingKey('assetsLibrary', t);
   }, [e.libraryKey, i?.libraryKey]);
-  return jsx(GG, {
+  return jsx(RecordableButton, {
     'className': l()('asset_panel_visual_asset_library--library--ta4FR', {
       'asset_panel_visual_asset_library--hovered--r37Mn': a
     }),
@@ -7362,7 +7362,7 @@ function lb({
   let A = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
     let e = e => {
-      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && A !== LayoutTabType.TEXT && (focusSearchBar(), e.preventDefault());
+      (BrowserInfo.chromeos ? e.altKey && e.shiftKey && e.keyCode === KeyCodes.KEY_2 : e.altKey && e.keyCode === KeyCodes.KEY_2) && A !== LayoutTabType.TEXT && (focusSearchBar(), e.preventDefault());
     };
     document.addEventListener('keydown', e);
     return () => {

@@ -7,7 +7,7 @@ import { M } from "../469e6e40/302359";
 import { V } from "../469e6e40/782251";
 import { SelectionStylesHelpers } from "../figma_app/763686";
 import { q6 } from "../figma_app/793429";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Fk } from "../figma_app/167249";
 import { VZ } from "../figma_app/727192";
 import { _p } from "../figma_app/826998";
@@ -30,7 +30,7 @@ function x({
     let a = e?.get(t);
     return !!a && ("SECTION" === a.type || "FRAME" === a.type);
   }, s) ? jsxs(Fragment, {
-    children: [t.visibleItems.length > 0 && jsx(fu, {
+    children: [t.visibleItems.length > 0 && jsx(TrackingProvider, {
       name: "Selection styles panel",
       properties: {
         resourceType: "Effect",
@@ -46,7 +46,7 @@ function x({
           styleData: e
         }, e?.key)), t.showMoreButton]
       })
-    }), a.visibleItems.length > 0 && jsx(fu, {
+    }), a.visibleItems.length > 0 && jsx(TrackingProvider, {
       name: "Selection styles panel",
       properties: {
         resourceType: "Text",

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Children, cloneElement } from "react";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { RecordingComponent, RecordingPureComponent, handleMouseEvent } from "../figma_app/878298";
 import { KindEnum } from "../905/129884";
 export class $$l0 extends RecordingComponent {
@@ -21,7 +21,7 @@ export class $$d1 extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.documentKeyDown = e => {
-      this.props._onChange && (e.keyCode === Uz.SPACE || e.keyCode === Uz.ENTER) && this.props._onChange(this.props.value);
+      this.props._onChange && (e.keyCode === KeyCodes.SPACE || e.keyCode === KeyCodes.ENTER) && this.props._onChange(this.props.value);
     };
     this.onClick = handleMouseEvent(this, "click", () => {
       this.props._onChange && !this.props.disabled && this.props._onChange(this.props.value);

@@ -5,7 +5,7 @@ import { AC } from "../figma_app/777551";
 import { et, zn } from "../figma_app/559491";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 export let $$u0 = registerModal(function ({
   plugin: e
 }) {
@@ -37,7 +37,7 @@ export let $$u0 = registerModal(function ({
   }), t = getI18nString("community.plugins.this_action_will_cause_your_resource_type_to_disappear_current_users_will_lose_access_to_your_resource_type_immediately_you_cannot_undo_this_action_however_if_you_publish_your_resource_type_again_later_it_will_keep_its_url", {
     resourceType: _
   }), d = getI18nString("community.resource.unpublish")), u = h);
-  return jsx(yX, {
+  return jsx(ConfirmationModal2, {
     confirmationTitle: r,
     content: t,
     onConfirm: u,

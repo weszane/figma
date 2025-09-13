@@ -3,7 +3,7 @@ import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import r from "classnames";
 import { WB } from "../905/761735";
-import { ks, tM, vd } from "../figma_app/637027";
+import { BigTextInputForwardRef, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
 import { R } from "../c5e2cae0/276031";
@@ -84,7 +84,7 @@ let j = memo(function (e) {
             className: _$$s.block.colorText.$,
             children: renderI18nText("pro_cart.review.edit_details.team_name_label")
           }), renderI18nText("pro_cart.review.edit_details.team_name_description")]
-        }), jsx(ks, {
+        }), jsx(BigTextInputForwardRef, {
           value: b,
           id: "teamName",
           onChange: e => {
@@ -102,7 +102,7 @@ let j = memo(function (e) {
             className: _$$s.block.colorText.$,
             children: renderI18nText("pro_cart.review.edit_details.company_name_label")
           }), renderI18nText("pro_cart.review.edit_details.company_name_description")]
-        }), jsx(ks, {
+        }), jsx(BigTextInputForwardRef, {
           value: y,
           id: "legalName",
           onChange: e => {
@@ -113,11 +113,11 @@ let j = memo(function (e) {
         })]
       }), jsxs("div", {
         className: l()(v0, hF),
-        children: [jsx(tM, {
+        children: [jsx(ButtonSecondaryTracked, {
           onClick: C,
           disabled: isLoading,
           children: renderI18nText("pro_cart.review.edit_details.cancel")
-        }), jsx(vd, {
+        }), jsx(ButtonBasePrimaryTracked, {
           className: pL,
           disabled: isLoading,
           type: "submit",

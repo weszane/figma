@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { getFeatureFlags } from "../905/601108";
 import s from "classnames";
-import { D8 } from "../905/511649";
+import { RecordableDiv } from "../905/511649";
 import { SvgComponent } from "../905/714743";
 import { e as _$$e } from "../905/579635";
 import { V } from "../905/460261";
@@ -285,7 +285,7 @@ export let $$x5 = forwardRef(function ({
   let E = !r && (!a || s);
   let y = e && s ? Aw : gB;
   let b = u ? kR : e ? CZ : "";
-  return jsxs(D8, {
+  return jsxs(RecordableDiv, {
     ...g,
     forwardedRef: f,
     className: o()(i ? s ? r_ : kc : P6, b, m),

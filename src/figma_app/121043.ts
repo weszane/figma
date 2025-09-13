@@ -49,7 +49,7 @@ import { z4 } from "../905/37051";
 import { LW, bs, GG } from "../figma_app/553940";
 import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
-import { EO } from "../905/691205";
+import { replaceColonWithDash } from "../905/691205";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
@@ -531,7 +531,7 @@ let $$eB8 = memo(function (e) {
         s(Ts({
           origin: "logged_out_footer",
           formState: qB.SIGN_IN,
-          redirectUrl: n ? `${customHistory.location.pathname}?node-id=${encodeURIComponent(EO(n))}` : customHistory.location.pathname
+          redirectUrl: n ? `${customHistory.location.pathname}?node-id=${encodeURIComponent(replaceColonWithDash(n))}` : customHistory.location.pathname
         }));
         s(showModalHandler({
           type: _$$x,

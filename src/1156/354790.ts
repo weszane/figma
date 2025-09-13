@@ -5,7 +5,7 @@ import { O as _$$O } from '../905/273186';
 import { getI18nString } from '../905/303541';
 import { noop, throwIf } from '../905/419236';
 import { getFeatureFlags } from '../905/601108';
-import { X$ } from '../905/612685';
+import { getCommunityFileUrl } from '../905/612685';
 import { getSingletonSceneGraph } from '../905/700578';
 import { M4 } from '../905/713695';
 import { generateUUIDv4 } from '../905/871474';
@@ -545,7 +545,7 @@ export function $$er2(e) {
     let r = [getI18nString('figmake.chat.shadcn_attribution.attribution_comment'), e, ...n.map(e => e ? getI18nString('figmake.chat.community_attribution.attribution_comment', {
       creatorName: e.creatorName,
       hubFileName: e.hubFileName,
-      hubFileLink: `${getInitialOptions().figma_url}${X$(e.hubFileId)}`,
+      hubFileLink: `${getInitialOptions().figma_url}${getCommunityFileUrl(e.hubFileId)}`,
       licenseName: 'CC BY 4.0',
       licenseLink: 'https://creativecommons.org/licenses/by/4.0/'
     }) : null).filter(e => !!e)].join('\n\n');

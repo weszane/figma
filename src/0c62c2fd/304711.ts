@@ -11,7 +11,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { t as _$$t2 } from "../905/53773";
 import { Q4 } from "../figma_app/199513";
-import { CI } from "../figma_app/528509";
+import { getSidebarPath } from "../figma_app/528509";
 import { x as _$$x } from "../905/98916";
 export function $$x0(e) {
   var t;
@@ -21,7 +21,7 @@ export function $$x0(e) {
   let v = _$$x(e.folder.id, !0);
   let y = jsx("span", {
     className: _$$s.fontBold.$,
-    children: CI(e.folder)
+    children: getSidebarPath(e.folder)
   });
   let w = getI18nString("file_browser.delete_project.delete_project");
   let j = "loaded" !== v.status ? renderI18nText("file_browser.delete_project.generic_confirm_text_permanently_delete_folder", {

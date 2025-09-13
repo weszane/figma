@@ -8,7 +8,7 @@ import { cn } from "../figma_app/141320";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { fu, tf } from "../figma_app/831799";
+import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { M4, IT } from "../905/713695";
 import { Cn } from "../c5e2cae0/453906";
 import { selectCurrentUser } from "../905/372672";
@@ -60,7 +60,7 @@ function y({
   let b = getI18nString("checkout.banner.price_change", {
     date: j(e)
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Campfire Cart Banner",
     children: jsxs("div", {
       className: _$$s.flex.justifyBetween.itemsCenter.minH40.px8.flexGrow1.colorBgWarningTertiary.$,
@@ -91,7 +91,7 @@ function j(e) {
   a.getDate() >= 11 ? a.setMonth(2) : a.setMonth(3);
   return A(e === SubscriptionType.ANNUAL ? t : a).format("MMMM D, YYYY");
 }
-let S = tf(function ({
+let S = withTrackedClick(function ({
   onClick: e,
   children: t
 }) {

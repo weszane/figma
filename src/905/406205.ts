@@ -11,10 +11,10 @@ import { N7, QV } from "../905/508367";
 import { IT } from "../905/864644";
 import { YO } from "../figma_app/672951";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { oJ } from "../905/63728";
+import { isCommandOrShift } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { BrowserInfo } from "../figma_app/778880";
-import { Ex, zE } from "../figma_app/919079";
+import { Badge, BadgeColor } from "../figma_app/919079";
 import { tH, H4 } from "../905/751457";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { x as _$$x } from "../figma_app/475340";
@@ -49,7 +49,7 @@ import { B as _$$B3 } from "../905/524020";
 import { getUserId } from "../905/372672";
 import { FEntityType, FFileType } from "../figma_app/191312";
 import { FavoritesByResourceId } from "../figma_app/43951";
-import { Bp } from "../figma_app/349248";
+import { mapProjectProperties } from "../figma_app/349248";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { f6, ai } from "../figma_app/915202";
 import { ViewTypeEnum } from "../figma_app/471068";
@@ -188,7 +188,7 @@ function em(e) {
         type: _$$B2,
         data: {
           folder: {
-            ...Bp(e.folder),
+            ...mapProjectProperties(e.folder),
             folderPerms: e.folder.folderPerms,
             description: e.folder.description,
             isSubscribed: E
@@ -287,8 +287,8 @@ function e_(e) {
           truncate: !0,
           showTooltipWhenTruncated: !1,
           children: e.folderName
-        }), r && jsx(Ex, {
-          color: zE.WARNING_TERTIARY,
+        }), r && jsx(Badge, {
+          color: BadgeColor.WARNING_TERTIARY,
           text: getI18nString("locked_team.label.view_only"),
           dataTooltip: getI18nString("locked_team.label.tooltip"),
           dataTooltipType: KindEnum.TEXT,
@@ -448,7 +448,7 @@ function eb(e) {
         folderId: e.folder.id,
         team: r,
         from: f6.FILE_BROWSER_FOLDER_EMPTY_TILE,
-        openNewFileIn: oJ(n) ? ai.NEW_TAB : ai.SAME_TAB
+        openNewFileIn: isCommandOrShift(n) ? ai.NEW_TAB : ai.SAME_TAB
       }));
     },
     trusted: !0,

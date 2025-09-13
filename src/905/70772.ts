@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { parseColor } from "../figma_app/191804";
 import { Point } from "../905/736624";
 import { Jn } from "../905/17223";
-import { i as _$$i, C as _$$C } from "../905/64217";
+import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { $ } from "../905/355181";
@@ -18,7 +18,7 @@ import { KindEnum } from "../905/129884";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { UR } from "../905/301347";
 import { b as _$$b } from "../905/168657";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { DH } from "../905/508893";
 import { M as _$$M } from "../905/981847";
 function v(e) {
@@ -161,9 +161,9 @@ export let $$k0 = registerModal(function (e) {
     R(null);
   }, [t, onUpdateAltText, i]);
   return jsx(Fragment, {
-    children: jsxs(_$$i, {
-      displayAs: _$$C.Block,
-      children: [jsx(d_, {
+    children: jsxs(TabLoop, {
+      displayAs: TabLoopDisplayAs.Block,
+      children: [jsx(ModalContainer, {
         className: "attachment_detail_modal--attachmentDetailsModal--wUYTe",
         size: "any",
         onKeyDown: e => {

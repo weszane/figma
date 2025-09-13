@@ -6,7 +6,7 @@ import { h8 } from "../figma_app/478006";
 import { S } from "../figma_app/109947";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { Um } from "../905/848862";
 import { I } from "../figma_app/827540";
 import { b, zr, w, LQ, jD, kL, hu, rb, MP } from "../figma_app/60171";
@@ -39,7 +39,7 @@ export function $$g0({
       className: b
     })
   });
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: trackingContext,
     children: jsx("div", {
       className: o()(zr, {

@@ -7,7 +7,7 @@ import { B7, My } from '../figma_app/143628';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { selectCurrentFile } from '../figma_app/516028';
 import { fx, PF } from '../figma_app/657972';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { useSelector, useDispatch } from 'react-redux';
 export function $$h1() {
   return renderI18nText('slides.properties_panel.visual_bell.remove_stack', {
@@ -21,7 +21,7 @@ export function $$g0() {
   let e = useDispatch();
   let t = selectCurrentFile();
   let i = useSelector(e => e.fileVersion);
-  return t?.key ? jsx(fu, {
+  return t?.key ? jsx(TrackingProvider, {
     name: 'Slides conversion visual bell entrypoint',
     children: jsxs('div', {
       className: My,

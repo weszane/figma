@@ -9,20 +9,20 @@ import { sx } from "../905/941192";
 import { tI } from "../figma_app/599327";
 import { hideModal } from "../905/156213";
 import { Z } from "../469e6e40/184197";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { AG } from "../figma_app/217457";
 import { _k, tB } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { MX, cI } from "../figma_app/684446";
 import { vr } from "../figma_app/514043";
 import { xS } from "../figma_app/193867";
-import { UserRole, GroupType } from "../905/441038";
+import { UserGroupRole, GroupType } from "../905/441038";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 function k(e) {
   let t = useDispatch();
   let a = e.licenseGroupsEnabled && e.groupsToReview.length > 0;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Freeze Invoice Modal",
     properties: {
       numReviewsIncomplete: e.groupsToReview.length,
@@ -97,7 +97,7 @@ export let $$E0 = registerModal(function (e) {
     }) => {
       t[a] = xS(e, {
         view: "licenseGroup",
-        subView: UserRole.ADMIN,
+        subView: UserGroupRole.ADMIN,
         selectedTab: GroupType.MEMBERS,
         licenseGroupId: a
       });

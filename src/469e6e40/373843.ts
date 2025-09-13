@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { CY } from "../figma_app/637027";
+import { SecureLink } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { jQ } from "../5430/920085";
 var l = (e => (e.FREE_HUB_FILE_LICENSE = "https://creativecommons.org/licenses/by/4.0/", e.FREE_RESOURCE_LICENSE = "https://www.figma.com/community-free-resource-license/", e.PAID_RESOURCE_LICENSE = "https://www.figma.com/community-paid-resource-license/", e.APPLE_RESOURCE_LICENSE = "https://developer.apple.com/apple-design-resources-license/", e))(l || {});
@@ -33,7 +33,7 @@ export function $$d1({
     "https://developer.apple.com/apple-design-resources-license/": getI18nString("community.detail_view.apple_resource_license")
   };
   r = a ? "https://developer.apple.com/apple-design-resources-license/" : e ? "https://www.figma.com/community-paid-resource-license/" : t ? "https://creativecommons.org/licenses/by/4.0/" : "https://www.figma.com/community-free-resource-license/";
-  return jsx(CY, {
+  return jsx(SecureLink, {
     href: r,
     trusted: !0,
     children: l[r]

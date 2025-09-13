@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
 import { W as _$$W } from "../905/187396";
-import { Uz, sC, Te } from "../905/63728";
+import { KeyCodes, isModifierMatch, isCommandModifier } from "../905/63728";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { generateUUIDv4 } from "../905/871474";
 import { fullscreenValue } from "../figma_app/455680";
@@ -98,35 +98,35 @@ export function $$E1({
       ref: D ?? M,
       onKeyDown: e => {
         switch (e.keyCode) {
-          case Uz.ESCAPE:
+          case KeyCodes.ESCAPE:
             U ? B(!1) : e.currentTarget?.blur();
             break;
-          case Uz.ENTER:
+          case KeyCodes.ENTER:
             U && (W >= 0 && W < r.length ? t(r[W], e) : W === r.length && E && b?.(e));
             break;
-          case Uz.RIGHT_ARROW:
-          case Uz.LEFT_ARROW:
-          case Uz.UP_ARROW:
-          case Uz.DOWN_ARROW:
-            if (!sC(e, 0)) {
+          case KeyCodes.RIGHT_ARROW:
+          case KeyCodes.LEFT_ARROW:
+          case KeyCodes.UP_ARROW:
+          case KeyCodes.DOWN_ARROW:
+            if (!isModifierMatch(e, 0)) {
               f7(e);
               break;
             }
             if ($(!0), U && X) {
               let t = W;
-              (t += e.keyCode === Uz.UP_ARROW || e.keyCode === Uz.LEFT_ARROW ? -1 : 1) >= X ? t = 0 : t < 0 && (t = X - 1);
+              (t += e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.LEFT_ARROW ? -1 : 1) >= X ? t = 0 : t < 0 && (t = X - 1);
               K(t);
             } else U || B(!0);
             e.preventDefault();
             e.stopPropagation();
             break;
-          case Uz.TAB:
+          case KeyCodes.TAB:
             $(!1);
             break;
-          case Uz.C:
-          case Uz.V:
-          case Uz.X:
-            Te(e) && (fullscreenValue.triggerAction(e.keyCode === Uz.C ? "copy" : e.keyCode === Uz.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
+          case KeyCodes.C:
+          case KeyCodes.V:
+          case KeyCodes.X:
+            isCommandModifier(e) && (fullscreenValue.triggerAction(e.keyCode === KeyCodes.C ? "copy" : e.keyCode === KeyCodes.X ? "cut" : "paste"), e.stopPropagation(), e.preventDefault());
             break;
           default:
             f7(e);

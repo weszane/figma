@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { generateRecordingKey } from "../figma_app/878298";
-import { Uz, xH } from "../905/63728";
+import { KeyCodes, ModifierKeyCodes } from "../905/63728";
 import { SX, Q0 } from "../905/487011";
 import { NI } from "../905/278499";
 import { r as _$$r } from "../905/189361";
@@ -37,8 +37,8 @@ export function $$u0({
         children: m
       }), jsx(_$$r, {
         shortcuts: [{
-          key: Uz.ENTER,
-          modifier: [xH.META]
+          key: KeyCodes.ENTER,
+          modifier: [ModifierKeyCodes.META]
         }],
         onAction: e => {
           g && SX({

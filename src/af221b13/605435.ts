@@ -30,7 +30,7 @@ import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
 import { j7 } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { x2, OX } from "../figma_app/33586";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { Sz } from "../figma_app/12535";
@@ -39,7 +39,7 @@ import { k2 } from "../figma_app/10554";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
-import { yX } from "../figma_app/918700";
+import { ConfirmationModal2 } from "../figma_app/918700";
 function h(e) {
   let {
     hasPublisherAdminAccess,
@@ -127,7 +127,7 @@ function E(e) {
   });
 }
 let Y = "MANAGE_RESOURCE_DROPDOWN_TYPE";
-let X = registerModal(yX);
+let X = registerModal(ConfirmationModal2);
 function V(e) {
   let {
     resource,
@@ -274,7 +274,7 @@ function V(e) {
       element: ee
     }
   };
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "RDP Creator Banner",
     properties: {
       name: "rdp_creator_banner",

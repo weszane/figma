@@ -8,7 +8,7 @@ import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
 import { Jn } from "../905/17223";
 import { tH } from "../905/751457";
-import { Us, vd } from "../figma_app/637027";
+import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -18,7 +18,7 @@ import { sx as _$$sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { kp } from "../figma_app/831799";
+import { withTracking } from "../figma_app/831799";
 import { jv, SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { N_, Oq } from "../905/332483";
@@ -28,7 +28,7 @@ import { _L } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N } from "../905/809096";
-import { ey } from "../figma_app/918700";
+import { ModalView } from "../figma_app/918700";
 import { throwTypeError } from "../figma_app/465776";
 import { isNullish } from "../figma_app/95419";
 import { A as _$$A } from "../905/251970";
@@ -323,7 +323,7 @@ function ea(e) {
       })]
     })
   });
-  return jsx(ey, {
+  return jsx(ModalView, {
     className: "org_upgrade_multi_team_modal--modal--fVO2l",
     hide: a,
     size: "fitContent",
@@ -408,7 +408,7 @@ function ea(e) {
                 })
               }, t)), jsx("div", {
                 className: "org_upgrade_multi_team_modal--seeAll--8WNIM",
-                children: jsx(Us, {
+                children: jsx(linkWithTracking, {
                   href: "https://www.figma.com/pricing/#cid-57mfNh6t0Xo7z8Q95Ww9ZV",
                   target: "_blank",
                   trusted: !0,
@@ -426,7 +426,7 @@ function ea(e) {
         })]
       }), jsx("div", {
         className: Y
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         onClick: _,
         className: "org_upgrade_multi_team_modal--continueButton--Zo9V7",
         trackingProperties: {
@@ -486,7 +486,7 @@ export let $$er0 = connect(e => {
     teams,
     unsortedTeamIds: _L(e.user, e.roles, e.teams)
   };
-})(kp(function (e) {
+})(withTracking(function (e) {
   return jsx(tH, {
     boundaryKey: "OrgUpgradeMultiTeamModal",
     team: _$$e.BILLING_EXPERIENCE,

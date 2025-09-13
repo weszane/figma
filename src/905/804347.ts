@@ -16,12 +16,12 @@ import { ViewMode, SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../905/971482";
 import { GR, hZ } from "../figma_app/330108";
 import { cD } from "../figma_app/598018";
-import { Lk, uH, mp } from "../figma_app/162807";
+import { Lk, PublicModelType, ProjectSortField } from "../figma_app/162807";
 import { jn } from "../figma_app/522082";
 import { vt } from "../figma_app/231614";
 import { kq, ro } from "../905/994947";
 import { N as _$$N } from "../905/438674";
-import { Gc, oJ } from "../905/63728";
+import { ignoreCommandOrShift, isCommandOrShift } from "../905/63728";
 import { h1 } from "../905/986103";
 import { C as _$$C } from "../905/196436";
 import { NU } from "../figma_app/204891";
@@ -30,9 +30,9 @@ import { UN, dm } from "../figma_app/976345";
 import { sf } from "../905/929976";
 import { yJ } from "../figma_app/78808";
 import { useCurrentUserOrgId } from "../905/845253";
-import { to } from "../905/612685";
+import { getDesignFileUrlWithOptions } from "../905/612685";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
-import { o as _$$o } from "../905/895626";
+import { InterProfileType } from "../905/895626";
 import { az as _$$az, rE } from "../figma_app/805373";
 import { H as _$$H } from "../905/209153";
 import { lJ, GQ } from "../905/50159";
@@ -65,7 +65,7 @@ import { i as _$$i } from "../905/610691";
 import { d as _$$d2 } from "../905/958822";
 import { b0 } from "../905/763690";
 import { qv } from "../905/977218";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { nb, fA } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { vj } from "../905/574958";
@@ -150,7 +150,7 @@ function z(e, t) {
       i(sf({
         view: "user",
         userId: e.creator_id,
-        userViewTab: _$$o.INTERNAL_PROFILE
+        userViewTab: InterProfileType.INTERNAL_PROFILE
       }));
     }
   }), [i, e, t]);
@@ -158,7 +158,7 @@ function z(e, t) {
 let H = _$$h({
   [ViewMode.GRID]: function (e) {
     let [t, i] = useState(!1);
-    let a = to(e.searchResult.model);
+    let a = getDesignFileUrlWithOptions(e.searchResult.model);
     let {
       onClick
     } = z(e.searchResult.model, e.viewMode);
@@ -175,7 +175,7 @@ let H = _$$h({
     });
   },
   [ViewMode.LIST]: function (e) {
-    let t = to(e.searchResult.model);
+    let t = getDesignFileUrlWithOptions(e.searchResult.model);
     let {
       onClick,
       onClickOwner
@@ -196,11 +196,11 @@ let H = _$$h({
 class W extends Component {
   constructor() {
     super(...arguments);
-    this.onClick = Gc(e => {
+    this.onClick = ignoreCommandOrShift(e => {
       e.preventDefault();
       this.props.onClick();
     });
-    this.onClickOwner = Gc(e => {
+    this.onClickOwner = ignoreCommandOrShift(e => {
       e.preventDefault();
       e.stopPropagation();
       this.props.onClickOwner();
@@ -315,7 +315,7 @@ let ep = memo(function (e) {
   } = em(r.id, e.canUserViewTeam);
   let d = FC();
   let c = _6();
-  let u = Gc(t => {
+  let u = ignoreCommandOrShift(t => {
     t.preventDefault();
     trackTeamEvent("file_browser_team_click", e.searchResult.model.id, d, {
       selectedView: "recentsAndSharing" === c.view ? c.tab || ViewTypeEnum.RECENTLY_VIEWED : c.view,
@@ -450,13 +450,13 @@ function eg(e) {
   let t = e.searchResult.model;
   let i = function (e, t) {
     let i = useDispatch();
-    return Gc(n => {
+    return ignoreCommandOrShift(n => {
       n.preventDefault();
       i(sf({
         view: "user",
         userId: e,
         orgId: t || null,
-        userViewTab: _$$o.INTERNAL_PROFILE
+        userViewTab: InterProfileType.INTERNAL_PROFILE
       }));
     });
   }(e.searchResult.model.id, e.searchResult.model.org_id);
@@ -549,7 +549,7 @@ function eM(e) {
     if (!n) return;
     let r = {
       ...i,
-      [uH.FILES]: {
+      [PublicModelType.FILES]: {
         sortKey: n,
         sortDesc: i.files.sortKey !== n || !i.files.sortDesc
       }
@@ -599,7 +599,7 @@ function eM(e) {
     }), (() => {
       let e = data?.tile ?? null;
       let t = e ? [e] : [];
-      return jsx(fu, {
+      return jsx(TrackingProvider, {
         name: _$$e.TILES_VIEW_DROP_DOWN,
         enabled: showing,
         properties: {
@@ -629,19 +629,19 @@ function eU(e) {
 let eG = e => {
   switch (e) {
     case Dq.NAME:
-      return mp.NAME;
+      return ProjectSortField.NAME;
     case Dq.CREATED_AT:
-      return mp.CREATED_AT;
+      return ProjectSortField.CREATED_AT;
     default:
       debug(!0, "Should not try to sort by any other key in search list view");
-      return mp.NAME;
+      return ProjectSortField.NAME;
   }
 };
 let ez = e => {
   switch (e) {
-    case mp.NAME:
+    case ProjectSortField.NAME:
       return Dq.NAME;
-    case mp.CREATED_AT:
+    case ProjectSortField.CREATED_AT:
       return Dq.CREATED_AT;
     default:
       debug(!0, "Should not try to sort by any other key in search project list view");
@@ -656,7 +656,7 @@ function eH(e) {
     if (!n) return;
     let r = {
       ...i,
-      [uH.PROJECTS]: {
+      [PublicModelType.PROJECTS]: {
         sortKey: n,
         sortDesc: i.projects.sortKey !== n || !i.projects.sortDesc
       }
@@ -705,7 +705,7 @@ function e0() {
   let t = getUserId();
   let i = getUserId();
   return useCallback((n, r) => {
-    if (oJ(r)) {
+    if (isCommandOrShift(r)) {
       r?.stopPropagation();
       let e = n.id;
       if (e === t) {
@@ -722,7 +722,7 @@ function e0() {
       view: "user",
       userId: n.id,
       orgId: n.org_id || null,
-      userViewTab: _$$o.INTERNAL_PROFILE
+      userViewTab: InterProfileType.INTERNAL_PROFILE
     }));
   }, [t, i, e]);
 }
@@ -877,21 +877,21 @@ function te(e) {
     showSettingsIcon: !0,
     onFileSettingsClick: _$$j
   }), e.searchResult.search_model_type) {
-    case uH.FILES:
+    case PublicModelType.FILES:
       return jsx(H, {
         searchResult: e.searchResult,
         viewMode: e.viewMode,
         isFavorited: !!e.searchResult.model.is_favorited,
         ...t
       });
-    case uH.PROJECTS:
+    case PublicModelType.PROJECTS:
       return jsx(b, {
         searchResult: e.searchResult,
         viewMode: e.viewMode,
         checksForViewOnlyLabels: e.checksForViewOnlyLabels,
         ...t
       });
-    case uH.TEAMS:
+    case PublicModelType.TEAMS:
       return jsx(eh, {
         searchResult: e.searchResult,
         viewMode: e.viewMode,
@@ -899,29 +899,29 @@ function te(e) {
         selectedSearchResultId: e.selectedSearchResultId,
         ...t
       });
-    case uH.USERS:
+    case PublicModelType.USERS:
       return jsx(eg, {
         searchResult: e.searchResult,
         viewMode: e.viewMode,
         ...t
       });
-    case uH.HUB_FILES:
+    case PublicModelType.HUB_FILES:
       return jsx(q0, {
         searchResult: e.searchResult
       });
-    case uH.PUBLIC_PLUGINS:
-    case uH.PRIVATE_PLUGINS:
+    case PublicModelType.PUBLIC_PLUGINS:
+    case PublicModelType.PRIVATE_PLUGINS:
       return jsx(g8.SearchResult, {
         searchResult: e.searchResult,
         viewMode: e.viewMode
       });
-    case uH.PUBLIC_PROFILES:
+    case PublicModelType.PUBLIC_PROFILES:
       return jsx(_$$g.SearchResult, {
         searchResult: e.searchResult,
         viewMode: e.viewMode
       });
-    case uH.PUBLIC_WIDGETS:
-    case uH.PRIVATE_WIDGETS:
+    case PublicModelType.PUBLIC_WIDGETS:
+    case PublicModelType.PRIVATE_WIDGETS:
       return jsx(Ru.SearchResult, {
         searchResult: e.searchResult,
         viewMode: e.viewMode
@@ -934,15 +934,15 @@ export function $$tt0(e) {
   let o = cD();
   let d = vt(o);
   let c = jn();
-  let p = useMemo(() => e.searchModelType === uH.TEAMS ? t.map(e => ({
+  let p = useMemo(() => e.searchModelType === PublicModelType.TEAMS ? t.map(e => ({
     teamId: e.model.id
   })) : [], [e.searchModelType, t]);
   let m = useMultiSubscription(TeamOrphanedStatus, p, {
-    enabled: e.searchModelType === uH.TEAMS
+    enabled: e.searchModelType === PublicModelType.TEAMS
   });
   let h = useDispatch();
   useEffect(() => {
-    if (e.searchModelType === uH.TEAMS) {
+    if (e.searchModelType === PublicModelType.TEAMS) {
       let e = {};
       m.forEach(t => {
         e[t.args.teamId] = t.result.data?.team.status === "loaded" && !!t.result.data.team.data?.isOrphaned;
@@ -960,21 +960,21 @@ export function $$tt0(e) {
     teamId: o,
     isLockedTeam: d || c
   } : void 0;
-  return e.searchModelType === uH.FILES ? jsx(eM, {
+  return e.searchModelType === PublicModelType.FILES ? jsx(eM, {
     results: t,
     viewMode: e.viewMode,
     checksForViewOnlyLabels: f
-  }) : e.searchModelType === uH.PROJECTS ? jsx(eH, {
+  }) : e.searchModelType === PublicModelType.PROJECTS ? jsx(eH, {
     results: t,
     checksForViewOnlyLabels: f,
     viewMode: e.viewMode
-  }) : e.viewMode === ViewMode.GRID && e.searchModelType === uH.TEAMS ? jsx(eK, {
+  }) : e.viewMode === ViewMode.GRID && e.searchModelType === PublicModelType.TEAMS ? jsx(eK, {
     results: t
-  }) : e.viewMode === ViewMode.GRID && e.searchModelType === uH.USERS ? jsx(e7, {
+  }) : e.viewMode === ViewMode.GRID && e.searchModelType === PublicModelType.USERS ? jsx(e7, {
     results: t
-  }) : e.searchModelType === uH.PUBLIC_PLUGINS || e.searchModelType === uH.PRIVATE_PLUGINS ? jsx(eU, {
+  }) : e.searchModelType === PublicModelType.PUBLIC_PLUGINS || e.searchModelType === PublicModelType.PRIVATE_PLUGINS ? jsx(eU, {
     results: t
-  }) : e.searchModelType === uH.PUBLIC_WIDGETS || e.searchModelType === uH.PRIVATE_WIDGETS ? jsx(e9, {
+  }) : e.searchModelType === PublicModelType.PUBLIC_WIDGETS || e.searchModelType === PublicModelType.PRIVATE_WIDGETS ? jsx(e9, {
     results: t
   }) : jsx(Fragment, {
     children: t.map((t, r) => {

@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import l from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { ks } from "../figma_app/637027";
+import { BigTextInputForwardRef } from "../figma_app/637027";
 import { z as _$$z } from "../905/284530";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -216,7 +216,7 @@ function M(e) {
     className: _$$s.flex.flexColumn.gap8.$,
     children: [prompt && jsx("div", {
       children: $$F1(prompt)
-    }), jsx(ks, {
+    }), jsx(BigTextInputForwardRef, {
       className: _$$s.wFull.$,
       value: value ?? "",
       onChange,

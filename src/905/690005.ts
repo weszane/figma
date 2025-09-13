@@ -3,12 +3,12 @@ import { Component } from "react";
 import { Ts } from "../905/194276";
 import { qB } from "../905/862321";
 import { s_ } from "../905/17223";
-import { tM } from "../figma_app/637027";
+import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { SvgComponent } from "../905/714743";
 import { showModalHandler } from "../905/156213";
 import { x as _$$x } from "../905/749159";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { registerModal } from "../905/102752";
 import { A as _$$A } from "../figma_app/722506";
 var n = {};
@@ -60,7 +60,7 @@ class S extends Component {
     };
   }
   render() {
-    return jsx(d_, {
+    return jsx(ModalContainer, {
       className: _,
       children: jsx(_$$A, {
         styles: n,
@@ -76,7 +76,7 @@ class S extends Component {
         Component: {
           ModalCloseButton: s_,
           BrandButton: Ak,
-          ButtonSecondaryTracked: tM,
+          ButtonSecondaryTracked: ButtonSecondaryTracked,
           Svg: SvgComponent
         }
       })

@@ -7,7 +7,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { UserProfileTab } from "../figma_app/707808";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
@@ -199,7 +199,7 @@ class S extends Component {
       let e = this.props.currentSelectedView.profileTab;
       let t = e === UserProfileTab.FOLLOWERS ? this.state.followerState : this.state.followingState;
       let i = e === UserProfileTab.FOLLOWERS ? this.state.followerState.followers : this.state.followingState.following;
-      return 0 !== i.length || t.loading ? jsx(fu, {
+      return 0 !== i.length || t.loading ? jsx(TrackingProvider, {
         name: "Follows List Modal",
         properties: {
           tab: e,

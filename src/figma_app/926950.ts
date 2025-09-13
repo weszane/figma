@@ -41,7 +41,7 @@ import { atom, useAtomValueAndSetter, Xr } from '../figma_app/27355';
 import { mapEditorTypeToStringWithObfuscated } from '../figma_app/53721';
 import { getInitialOptions } from '../figma_app/169182';
 import { _6 } from '../figma_app/386952';
-import { e2, ks } from '../figma_app/637027';
+import { ButtonBaseReversedContainer, BigTextInputForwardRef } from '../figma_app/637027';
 import { generateRecordingKey, useHandleChangeEvent, useHandleFocusEvent, useHandleKeyboardEvent, useHandleMouseEvent, useSetupPlayback } from '../figma_app/878298';
 import { A as _$$A6 } from '../svg/237029';
 import { useDispatch, useSelector } from 'react-redux';
@@ -563,7 +563,7 @@ function ep(e) {
           children: [jsx(Label, {
             className: y8,
             children: renderI18nText('bug_reporter.asana_hint')
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             className: _Z,
             placeholder: getI18nString('bug_reporter.modal.asana_link_placeholder'),
             value: E,
@@ -582,7 +582,7 @@ function ep(e) {
           children: [jsx(Label, {
             className: Pf,
             children: renderI18nText('bug_reporter.modal.title')
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             className: _Z,
             placeholder: getI18nString('bug_reporter.modal.title_placeholder'),
             autoFocus: !0,
@@ -624,7 +624,7 @@ function ep(e) {
             },
             className: Pf,
             children: renderI18nText('bug_reporter.modal.product_area')
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             className: _Z,
             placeholder: getI18nString('bug_reporter.modal.search_filter_placeholder'),
             autoFocus: !0,
@@ -682,7 +682,7 @@ function ep(e) {
           children: [jsx(Label, {
             className: Pf,
             children: e.descriptionLabel
-          }), jsx(ks, {
+          }), jsx(BigTextInputForwardRef, {
             className: [_Z, Tg].join(' '),
             placeholder: e.descriptionPlaceholder,
             type: 'textarea',
@@ -730,7 +730,7 @@ function ep(e) {
               })]
             })
           })
-        }), jsxs(e2, {
+        }), jsxs(ButtonBaseReversedContainer, {
           className: GC,
           children: [jsx(Button, {
             variant: 'secondary',

@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
-import { _Y } from "../figma_app/919079";
+import { BadgeLabels } from "../figma_app/919079";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { popModalStack, showModalHandler } from "../905/156213";
@@ -15,14 +15,14 @@ import { useCurrentFileKey, selectCurrentFile, useFullscreenViewFile } from "../
 import { UpsellModalType } from "../905/165519";
 import { QY, xw, Zk } from "../9410/351585";
 import y from "classnames";
-import { fu, $z } from "../figma_app/831799";
+import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { l as _$$l, I as _$$I } from "../9410/990893";
 import { useDebouncedCallback } from "use-debounce";
 import { y as _$$y } from "../1250/295724";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
 import { adminPermissionConfig } from "../905/654645";
 import { useShadowRead } from "../figma_app/391338";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { FC } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
 import { FPlanLimitationType, FPlanNameType, FFileType } from "../figma_app/191312";
@@ -32,7 +32,7 @@ import { ng } from "../figma_app/205827";
 import { jn } from "../figma_app/522082";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { vd } from "../figma_app/637027";
+import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { AutoLayout } from "../905/470281";
 import { E9 } from "../figma_app/297957";
@@ -53,8 +53,8 @@ function E({
   isLocked: a,
   children: s
 }) {
-  let o = a ? "paid_status_badge_base--locked--z8YBo" : e === _Y.DEV_MODE_TRIAL ? "paid_status_badge_base--devmode--u3XTd" : "paid_status_badge_base--brand--7khqG";
-  return jsx(fu, {
+  let o = a ? "paid_status_badge_base--locked--z8YBo" : e === BadgeLabels.DEV_MODE_TRIAL ? "paid_status_badge_base--devmode--u3XTd" : "paid_status_badge_base--brand--7khqG";
+  return jsx(TrackingProvider, {
     name: e,
     properties: {
       ...n,
@@ -62,7 +62,7 @@ function E({
     },
     children: jsxs("div", {
       className: "paid_status_badge_base--container--e3rGO",
-      children: [jsx($z, {
+      children: [jsx(TrackedButton, {
         type: "button",
         className: "paid_status_badge_base--button--KgNx9",
         "data-onboarding-key": _$$l,
@@ -107,7 +107,7 @@ function w({
   let h = useSelector(e => e.multiplayer.sessionID);
   let m = useCurrentFileKey();
   return jsx(E, {
-    name: _Y.FREE,
+    name: BadgeLabels.FREE,
     onBadgeClick: () => {
       i.showing && i.userFlag && (n({
         showing: !1
@@ -134,7 +134,7 @@ function S({
 }) {
   let t = useDispatch();
   return jsx(E, {
-    name: _Y.FREE,
+    name: BadgeLabels.FREE,
     onBadgeClick: () => {
       t(showModalHandler({
         type: _$$V,
@@ -196,7 +196,7 @@ function ee(e) {
     productType: mapFileToProductType(l),
     ...p
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "File Tracker Modal",
     properties: y,
     children: jsx(CR, {
@@ -251,7 +251,7 @@ function ee(e) {
               })]
             }, t))
           })
-        }), jsx(vd, {
+        }), jsx(ButtonBasePrimaryTracked, {
           className: "file_tracker_upsell_modal--comparePlansButton--2oBV9",
           onClick: () => {
             dismissModal();
@@ -273,7 +273,7 @@ function ei({
 }) {
   let i = useDispatch();
   let n = TN(t);
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Pro trial upsell modal",
     properties: ng.getTrackingProperties(),
     children: jsx(CR, {
@@ -300,7 +300,7 @@ function ei({
           })
         }), jsx("div", {
           className: "pro_trial_upsell_modal--btnContainer--wZVCK",
-          children: jsx(vd, {
+          children: jsx(ButtonBasePrimaryTracked, {
             trackingProperties: {
               trackingDescriptor: _$$c.UPGRADE_FROM_FILENAME_PRO_BADGE,
               ...ng.getTrackingProperties("Upgrade now")
@@ -384,7 +384,7 @@ function eo({
 }) {
   let [i, n] = es();
   return jsx(E, {
-    name: _Y.PRO_TRIAL,
+    name: BadgeLabels.PRO_TRIAL,
     onBadgeClick: () => n(!0),
     text: getI18nString("fullscreen.filename_view.pro_trial"),
     trackingProperties: {
@@ -407,7 +407,7 @@ function el({
   let o = useDispatch();
   let p = jn();
   let h = ng.canSeeProTrialExpiryUx(t);
-  let m = h ? _Y.PRO_TRIAL_EXPIRED : _Y.LOCKED;
+  let m = h ? BadgeLabels.PRO_TRIAL_EXPIRED : BadgeLabels.LOCKED;
   let f = h ? UpsellModalType.PRO_TRIAL_UPSELL_MODAL : UpsellModalType.LOCKED_TEAM_FILE_BADGE;
   return jsx(E, {
     name: m,
@@ -442,7 +442,7 @@ function ed({
   teamId: n
 }) {
   let a = _$$I(e.editorType);
-  let s = jd(t.openFile?.project);
+  let s = isTeamFolderV2(t.openFile?.project);
   return a ? jsx(eh, {
     trackingProperties: i,
     teamId: n
@@ -461,7 +461,7 @@ function ec({
 }) {
   let i = _$$y(t, UpsellModalType.STARTER_TEAM_FILE_BADGE);
   return jsx(E, {
-    name: _Y.FREE,
+    name: BadgeLabels.FREE,
     onBadgeClick: () => i(),
     text: getI18nString("fullscreen.filename_view.free"),
     trackingProperties: e
@@ -477,7 +477,7 @@ function ep({
   let s = _$$y(i, UpsellModalType.STARTER_TEAM_FILE_BADGE);
   return jsxs(Fragment, {
     children: [jsx(E, {
-      name: _Y.FREE,
+      name: BadgeLabels.FREE,
       onBadgeClick: () => {
         e.editorType && eu.includes(e.editorType) ? a(!0) : s();
       },
@@ -500,7 +500,7 @@ function eh({
   let o = useAtomWithSubscription(QY);
   let c = Xr(xw);
   return jsx(E, {
-    name: _Y.FREE,
+    name: BadgeLabels.FREE,
     onBadgeClick: () => {
       o.showing && o.userFlag && (c({
         showing: !1

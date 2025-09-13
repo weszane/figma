@@ -17,7 +17,7 @@ import { f as _$$f, E as _$$E } from "../905/690713";
 import { A } from "../905/721854";
 import { Oq, is } from "../905/904596";
 import { F as _$$F } from "../905/382217";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { If } from "../figma_app/171177";
 import { B as _$$B2 } from "../905/388732";
@@ -43,7 +43,7 @@ function I({
       primaryAction: {
         onAction: () => t(e),
         shortcuts: [{
-          key: Uz.ENTER
+          key: KeyCodes.ENTER
         }]
       },
       actionLabel: !1,

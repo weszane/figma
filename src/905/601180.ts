@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { s as _$$s } from "../cssbuilder/589278";
 import { K } from "../figma_app/694593";
-import { fu } from "../figma_app/831799";
-import { K as _$$K } from "../905/135526";
+import { TrackingProvider } from "../figma_app/831799";
+import { RCSMessageType } from "../905/135526";
 import { vL, h3, Lm, i1, um, li } from "../905/118234";
 export function $$d0(e) {
   let t;
@@ -29,9 +29,9 @@ export function $$d0(e) {
         children: e.center
       }), d && jsx("div", {
         className: li,
-        children: jsx(fu, {
+        children: jsx(TrackingProvider, {
           name: "Toolbar",
-          trackingTargets: _$$K.RCS,
+          trackingTargets: RCSMessageType.RCS,
           children: e.rightSideActions && jsx("div", {
             className: _$$s.flex.flexRow.gap8.$,
             children: e.rightSideActions.map(e => jsx(K, {

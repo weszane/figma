@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { XHR } from "../905/910117";
 import { registerModal } from "../905/102752";
 import { Lg, Lq } from "../figma_app/392626";
@@ -28,7 +28,7 @@ let b = registerModal(function (e) {
     onClose: t
   });
   let r = useDispatch();
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Project Disconnect Modal",
     properties: {
       resourceConnectionId: e.resourceConnectionId
@@ -81,7 +81,7 @@ let $$v0 = registerModal(function (e) {
   let y = () => {
     t(hideModal());
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Project Disconnect Modal",
     properties: {
       resourceConnectionId: e.resourceConnectionId

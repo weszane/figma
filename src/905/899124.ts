@@ -5,8 +5,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
-import { Ex, zE } from "../figma_app/919079";
-import { ks, nR, vd, Us } from "../figma_app/637027";
+import { Badge, BadgeColor } from "../figma_app/919079";
+import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { BlueLoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -16,7 +16,7 @@ import { Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
 import { Cy } from "../905/844322";
 import { showModalHandler } from "../905/156213";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { z as _$$z } from "../905/373223";
 import { mE } from "../905/561087";
 import { fileEntityDataMapper } from "../905/943101";
@@ -50,7 +50,7 @@ let M = registerModal(function (e) {
   let l = draftsToMove.length;
   let d = () => "figjam" === imminentDraftMoveUpgradeReason ? renderI18nText("file_browser.draft_move_confirmation_modal.seat_type_figjam") : renderI18nText("file_browser.draft_move_confirmation_modal.seat_type_design");
   let c = () => userHasAdminLevelPermissions ? renderI18nText("file_browser.draft_move_confirmation_modal.move_drafts_team_owner_substring") : renderI18nText("file_browser.draft_move_confirmation_modal.move_drafts_team_member_substring");
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
     children: jsx(Dd, {
       title: getI18nString("file_browser.draft_move_modal.confirmation_modal_header", {
@@ -115,7 +115,7 @@ let Q = registerModal(function (e) {
   let [o, l] = useState("");
   let d = useDispatch();
   let c = !o.trim().length;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
     children: jsx(Dd, {
       cancelText: getI18nString("file_browser.draft_move_modal.back"),
@@ -153,7 +153,7 @@ let Q = registerModal(function (e) {
           children: renderI18nText("file_browser.draft_move_modal.team_name")
         }), jsx(hK, {
           height: 8
-        }), jsx(ks, {
+        }), jsx(BigTextInputForwardRef, {
           value: o,
           onChange: e => {
             l(e.target.value);
@@ -340,7 +340,7 @@ export let $$en0 = registerModal(function (e) {
         className: "draft_move_modal--spinner--G4CKo"
       })
     })
-  }) : jsx(fu, {
+  }) : jsx(TrackingProvider, {
     name: "draftMoveModal",
     properties: {
       itemCount: e_.length,
@@ -421,10 +421,10 @@ export let $$en0 = registerModal(function (e) {
             onCreateNewTeamClick: eg
           }), jsxs("div", {
             className: "draft_move_modal--footerCTA--A8uBM",
-            children: [jsx(nR, {
+            children: [jsx(ButtonSecondary, {
               onClick: onClose,
               children: renderI18nText("modal.cancel")
-            }), V ? jsx(vd, {
+            }), V ? jsx(ButtonBasePrimaryTracked, {
               disabled: !V,
               onClick: () => {
                 G(!1);
@@ -437,7 +437,7 @@ export let $$en0 = registerModal(function (e) {
                 }));
               },
               children: getI18nString("file_browser.draft_move_modal.continue")
-            }) : jsx(vd, {
+            }) : jsx(ButtonBasePrimaryTracked, {
               disabled: !U,
               onClick: () => {
                 let e = ef.find(e => e.folderId === U);
@@ -502,7 +502,7 @@ function er(e) {
             });
         }
       }(e.userOrgDestinations),
-      learnMoreLink: jsx(Us, {
+      learnMoreLink: jsx(linkWithTracking, {
         className: X,
         trusted: !0,
         target: "_blank",
@@ -515,7 +515,7 @@ function er(e) {
 function ea(e) {
   let t;
   let i;
-  let r = jsx(Us, {
+  let r = jsx(linkWithTracking, {
     className: X,
     trusted: !0,
     target: "_blank",
@@ -582,10 +582,10 @@ function ea(e) {
         className: s ? "draft_move_modal--destinationDescriptionOrg--wEClH draft_move_modal--destinationDescription--fMcX-" : $$K,
         children: t
       })]
-    }), jsx(Ex, {
+    }), jsx(Badge, {
       text: i,
       dataTestId: `${e.name}-badge`,
-      color: e.checked ? zE.TOOLBAR_SELECTED : zE.DEFAULT,
+      color: e.checked ? BadgeColor.TOOLBAR_SELECTED : BadgeColor.DEFAULT,
       className: l()("draft_move_modal--teamBadge--ODLch", _$$s.mr8.$$if(!e.checked, _$$s.colorBgBrandTertiary.colorText).$)
     })]
   });

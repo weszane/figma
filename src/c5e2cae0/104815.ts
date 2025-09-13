@@ -8,7 +8,7 @@ import { d as _$$d } from "../c5e2cae0/841217";
 import { sf } from "../905/929976";
 import { Ay } from "../figma_app/482142";
 import { S_ } from "../5885/925885";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { LN } from "../figma_app/514043";
 import { Ud } from "../c5e2cae0/2942";
 export function $$g0(e) {
@@ -39,7 +39,7 @@ export function $$g0(e) {
       onError: f
     }));
   };
-  return promo ? jsx(fu, {
+  return promo ? jsx(TrackingProvider, {
     name: "Redeem Promo Code > Confirm",
     properties: {
       teamId: selectedView.teamId

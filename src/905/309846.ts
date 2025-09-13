@@ -45,7 +45,7 @@ import { nk } from "../figma_app/2023";
 import { fullscreenValue } from "../figma_app/455680";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { xK } from "../905/125218";
-import { jN } from "../905/612685";
+import { buildFileUrl } from "../905/612685";
 import { hZ } from "../figma_app/841351";
 import { mapEditorTypeToWorkspaceType, FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../figma_app/849666";
@@ -62,7 +62,7 @@ import { xN } from "../905/672897";
 import { w2, i_ } from "../905/187165";
 import { Ob } from "../figma_app/111825";
 import { m as _$$m } from "../905/84999";
-import { S as _$$S } from "../figma_app/787550";
+import { fileApiHandler } from "../figma_app/787550";
 import { $ as _$$$ } from "../905/834575";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
@@ -70,11 +70,11 @@ import { R as _$$R2 } from "../905/300969";
 import { c as _$$c2 } from "../905/580030";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { tB, JU, nR, $$ } from "../figma_app/637027";
+import { FocusCheckbox, createLabel, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
 import { Dm } from "../figma_app/8833";
 import { registerLegacyModal } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { ModalContainer } from "../figma_app/918700";
 import { isEditorTypeEnabled, getLastUsedEditorType, setLastUsedEditorType } from "../905/298923";
 import { canAccessFullDevMode } from "../figma_app/473493";
 import { sf } from "../905/929976";
@@ -87,7 +87,7 @@ async function ea(e, t, i) {
   let n = t.getState();
   let s = e.data.meta;
   if (s || reportError(_$$e.FRONTEND_PLATFORM, Error("We are expecting FileMetadata but got undefined"), t => (t.setExtra("response", e), t)), s.redirect_to_password_auth) {
-    await customHistory.redirectAndWaitForever(jN({
+    await customHistory.redirectAndWaitForever(buildFileUrl({
       file: {
         key: s.file_key,
         name: s.name
@@ -228,7 +228,7 @@ class ek extends PureComponent {
   }
   render() {
     let e = getSelectedFile(this.props);
-    return e?.license?.toLowerCase() === "apple" ? jsxs(d_, {
+    return e?.license?.toLowerCase() === "apple" ? jsxs(ModalContainer, {
       size: 560,
       className: `${Dm} license_agreement--modal--EN2ao`,
       disableClickOutsideToHide: !0,
@@ -242,17 +242,17 @@ class ek extends PureComponent {
         })
       }), jsxs("div", {
         className: "license_agreement--footer--dZJPI",
-        children: [jsx(tB, {
+        children: [jsx(FocusCheckbox, {
           id: "check-license-agreement",
           checked: this.state.checked,
           onChange: this.onChange
-        }), jsx(JU, {
+        }), jsx(createLabel, {
           htmlFor: "check-license-agreement",
           children: "I have read, understood, and agree to the License Agreement."
-        }), jsx(nR, {
+        }), jsx(ButtonSecondary, {
           onClick: this.decline,
           children: "Disagree and Cancel"
-        }), jsx($$, {
+        }), jsx(ButtonBasePrimary, {
           disabled: !this.state.checked,
           onClick: this.accept,
           children: "Agree and Open"
@@ -392,7 +392,7 @@ let $$ej0 = createOptimistThunk(async (e, {
   let s = a.editorType !== t.editorType;
   let l = e.getState();
   if (!l.fileByKey[n]) {
-    let t = await _$$S.getFiles({
+    let t = await fileApiHandler.getFiles({
       fileKey: n
     });
     e.dispatch(yJ({
@@ -492,7 +492,7 @@ let eU = createOptimistThunk((e, t) => {
   } = t;
   if (!Bz()) {
     if (!file) return;
-    customHistory.redirect(jN({
+    customHistory.redirect(buildFileUrl({
       file: t.file
     }));
   }

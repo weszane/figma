@@ -13,7 +13,7 @@ import { trackFileCopyEvent, trackMultipleFileEvent } from "../figma_app/314264"
 import { isBranch } from "../905/760074";
 import { f as _$$f } from "../905/509236";
 import { sR } from "../905/862913";
-import { Ns } from "../figma_app/349248";
+import { mapFileProperties } from "../figma_app/349248";
 import { M4 } from "../905/713695";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { xY } from "../905/70982";
@@ -146,7 +146,7 @@ let S = M4.Mutation((e, {
     }))
   });
   let c = files.reduce((e, t) => {
-    let i = Ns({
+    let i = mapFileProperties({
       ...t,
       folder_id: folderId
     }, t.key);

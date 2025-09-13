@@ -7,7 +7,7 @@ import { U as _$$U } from "../905/708285";
 import { RR } from "../figma_app/338442";
 import { VariableDataType, Command, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
 import { X } from "../905/606795";
-import { Uz } from "../905/63728";
+import { KeyCodes } from "../905/63728";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { X as _$$X } from "../905/190511";
@@ -323,7 +323,7 @@ function Z({
     onChange,
     onFocus,
     onKeyDown: function (e) {
-      e.keyCode !== Uz.ESCAPE && (e.keyCode !== Uz.ENTER || e.shiftKey) || (e.stopPropagation(), e.currentTarget.blur());
+      e.keyCode !== KeyCodes.ESCAPE && (e.keyCode !== KeyCodes.ENTER || e.shiftKey) || (e.stopPropagation(), e.currentTarget.blur());
     },
     onKeyUp,
     onMouseLeave,

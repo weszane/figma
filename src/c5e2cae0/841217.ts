@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { customHistory } from "../905/612521";
-import { Ph, Kz, vd } from "../figma_app/637027";
+import { clickableBaseLinkTracked, Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../905/339549";
@@ -45,7 +45,7 @@ function y(e) {
     }), e.canSeeBillingAddressExp && jsx(T, {
       header: renderI18nText("org_self_serve.review_step.billing_email"),
       value: e.userEmail
-    }), e.canSeeBillingAddressExp && jsx(Ph, {
+    }), e.canSeeBillingAddressExp && jsx(clickableBaseLinkTracked, {
       onClick: e.navigateToEditOrganizationDetails,
       trackingEventName: "Edit organization details - checkout flow",
       trusted: !0,
@@ -56,7 +56,7 @@ function y(e) {
     }), a && jsx(T, {
       header: renderI18nText("org_self_serve.review_step.shipping_address"),
       value: N(e.shippingAddress)
-    }), e.canSeeBillingAddressExp && jsx(Ph, {
+    }), e.canSeeBillingAddressExp && jsx(clickableBaseLinkTracked, {
       onClick: e.navigateToEditPaymentDetails,
       trackingEventName: "Edit payment details - checkout flow",
       trusted: !0,
@@ -84,7 +84,7 @@ function j(e) {
     }), l && jsx(T, {
       header: renderI18nText("pro_cart.review.shipping_address"),
       value: N(e.shippingAddress)
-    }), jsx(Ph, {
+    }), jsx(clickableBaseLinkTracked, {
       onClick: e.canSeeBillingAddressExp ? () => {
         t(sf({
           ...a,
@@ -206,7 +206,7 @@ export function $$E0(e) {
         hasCartStickerShock: S
       }), jsx("div", {
         className: pV
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2
       }), y.taxes && !!e.billingAddress && jsxs(Fragment, {
         children: [jsx(Wy, {
@@ -215,7 +215,7 @@ export function $$E0(e) {
             showCents: !0
           }),
           "data-testid": "subtotal-summary"
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1.5
         }), jsx(Wy, {
           mainText: renderI18nText("pro_cart.review.tax"),
@@ -226,7 +226,7 @@ export function $$E0(e) {
             taxPercent: y.taxes.lines[0]?.tax_percent || 0
           }),
           "data-testid": "tax-summary"
-        }), jsx(Kz, {
+        }), jsx(Spacing, {
           multiple: 1.5
         })]
       }), jsx(Wy, {
@@ -239,7 +239,7 @@ export function $$E0(e) {
         subText: A ? renderI18nText("pro_cart.review.you_will_not_be_charged_during_the_free_period", {
           days: y.promo.promo_value
         }) : void 0
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2
       }), jsxs("div", {
         children: [finePrint, !A && jsxs("div", {
@@ -253,11 +253,11 @@ export function $$E0(e) {
             children: [" ", jsx(Um, {})]
           })]
         })]
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2.5
-      }), jsx(Kz, {
+      }), jsx(Spacing, {
         multiple: 2.5
-      }), jsx(vd, {
+      }), jsx(ButtonBasePrimaryTracked, {
         className: fK,
         onClick: H,
         trackingProperties: {

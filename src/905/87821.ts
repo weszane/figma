@@ -3,7 +3,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { canCreateFileType } from "../figma_app/687776";
 import { FlashActions } from "../905/573154";
 import { sf } from "../905/929976";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { rR, sK } from "../figma_app/598018";
 export function $$p0(e, t) {
@@ -27,7 +27,7 @@ export function $$g3(e, t, i) {
   if (s && p && !rR(s, {
     type: sK.ADD_FILE,
     editorType: u,
-    isDestinationTeamDrafts: jd(i.openFile?.project)
+    isDestinationTeamDrafts: isTeamFolderV2(i.openFile?.project)
   }) || u === FFileType.FIGMAKE && s && o === FPlanNameType.STARTER && !getFeatureFlags().bake_starter_limit) return s;
 }
 export { ck } from "../figma_app/469876";

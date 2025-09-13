@@ -16,7 +16,7 @@ import { Fk } from "../figma_app/167249";
 import { vD } from "../figma_app/889655";
 import { JR } from "../figma_app/217457";
 import { h as _$$h } from "../figma_app/496854";
-import { jd } from "../figma_app/528509";
+import { isTeamFolderV2 } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
@@ -107,7 +107,7 @@ export function $$W14() {
   let {
     getConfig
   } = I7("exp_drafts_page_limit_v1");
-  return useCallback(t => !!(getFeatureFlags().exp_drafts_page_limit_v1_new_user && !t.parentOrgId && t.editorType === FFileType.DESIGN && jd(t.project)) && !!t.team && !hasTeamStatePaidAccess(t.team) && !!t.canEdit && getConfig().get("apply_drafts_page_limit", !1), [getConfig]);
+  return useCallback(t => !!(getFeatureFlags().exp_drafts_page_limit_v1_new_user && !t.parentOrgId && t.editorType === FFileType.DESIGN && isTeamFolderV2(t.project)) && !!t.team && !hasTeamStatePaidAccess(t.team) && !!t.canEdit && getConfig().get("apply_drafts_page_limit", !1), [getConfig]);
 }
 export function $$K27() {
   let e = I7("starter_global_file_limits");

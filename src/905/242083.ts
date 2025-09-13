@@ -16,7 +16,7 @@ import { p as _$$p } from '../905/42189';
 import { e as _$$e3, N as _$$N } from '../905/55273';
 import { e as _$$e2 } from '../905/58247';
 import { K as _$$K2 } from '../905/63322';
-import { Uz } from '../905/63728';
+import { KeyCodes } from '../905/63728';
 import { l as _$$l5 } from '../905/65216';
 import { m as _$$m2 } from '../905/70820';
 import { z as _$$z2 } from '../905/95280';
@@ -141,7 +141,7 @@ import { observabilityClient } from '../905/602906';
 import { a as _$$a3 } from '../905/608122';
 import { Timer } from '../905/609396';
 import { customHistory, isMainAppRoute } from '../905/612521';
-import { jN } from '../905/612685';
+import { buildFileUrl } from '../905/612685';
 import { isActiveAtom } from '../905/617744';
 import { getSelectedView, checkCanRunExtensions } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
@@ -155,7 +155,7 @@ import { getResourceDataOrFallback } from '../905/663269';
 import { gG } from '../905/684180';
 import { IM } from '../905/687477';
 import { EventEmitter } from '../905/690073';
-import { EO, F4 } from '../905/691205';
+import { replaceColonWithDash, isFigmaDomain } from '../905/691205';
 import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { createPluginContext as _$$e8 } from '../905/700654';
 import { X as _$$X } from '../905/701807';
@@ -333,7 +333,7 @@ import { lu as _$$lu, lV as _$$lV, k1, mI, OJ } from '../figma_app/389091';
 import { initializeShadowReadReporter } from '../figma_app/391338';
 import { g as _$$g6 } from '../figma_app/398051';
 import { sn as _$$sn, hf } from '../figma_app/407856';
-import { u_ } from '../figma_app/415217';
+import { figmaReady } from '../figma_app/415217';
 import { bi as _$$bi, hg } from '../figma_app/425489';
 import { Ay as _$$Ay5 } from '../figma_app/432652';
 import { eY as _$$eY2 } from '../figma_app/442259';
@@ -354,7 +354,7 @@ import { ZS } from '../figma_app/519839';
 import { oY as _$$oY } from '../figma_app/524655';
 import { mQ } from '../figma_app/527668';
 import { F4 as _$$F4, le as _$$le, dn } from '../figma_app/527873';
-import { D as _$$D2 } from '../figma_app/528509';
+import { getProcessedValueByKey } from '../figma_app/528509';
 import { A9 as _$$A7 } from '../figma_app/533986';
 import { Zb } from '../figma_app/539925';
 import { eY as _$$eY, cB, cu, D2, Er, fb, FJ, FM, gU, H3, wh, xY } from '../figma_app/540726';
@@ -383,7 +383,7 @@ import { Id, JU } from '../figma_app/626177';
 import { JT, zw } from '../figma_app/632248';
 import { SubscriptionStatusEnum, LIBRARY_PREFERENCES_MODAL, PrimaryWorkflowEnum } from '../figma_app/633080';
 import { BG as _$$BG } from '../figma_app/634288';
-import { e2 as _$$e6, ks } from '../figma_app/637027';
+import { ButtonBaseReversedContainer, BigTextInputForwardRef } from '../figma_app/637027';
 import { canMemberOrg } from '../figma_app/642025';
 import { Ju } from '../figma_app/644255';
 import { m3 } from '../figma_app/645694';
@@ -409,7 +409,7 @@ import { cortexAnalyticsPluginIds } from '../figma_app/757723';
 import { PrototypingFacetTsApiGenerated, documentStateTsApi, ImageFormat, ComponentPropsAiCPPBindings, ImageCppBindings, VectorFacetTsApiGenerated, FullscreenWebSocketTsApi, SceneNodeCpp, AutosaveEventType, SaveConnectionIssues, TextEditAction, AppStateTsApi, DesignWorkspace, NodeTsApiGenerated, LayerFacetTsApiGenerated, Fullscreen, Multiplayer, TextFacetTsApiGenerated, CorePerfInfo, ComponentishFacetTsApiGenerated, DocumentColorProfileEnum, AutosaveHelpers, FigmaSite, ConstraintsFacetTsApiGenerated, FrameFacetTsApiGenerated, TabMode, FontSourceType, EmbedPanelType, WidgetFacetTsApiGenerated, StackFacetTsApiGenerated, ViewType, SettingsAction, ImageExportType, SceneGraphTsApi, interactionTestHelpers, PanelType, DesignGraphElements, CanvasFacetTsApiGenerated, FullscreenPerfInfo, EmailAction, DesignSystemsInternalHelpers, RenderableBaseFacetTsApiGenerated, PolygonFacetTsApiGenerated, UserActionState, Command, DocumentMode, NodePropertyCategory, StyleFacetTsApiGenerated, ImageToolsBindings, BaseNodeTsApiGenerated, StateSourceType, FontHelpers, RenderableRectangleFacetTsApiGenerated, DebuggingHelpers, NodeTsApi, ConnectionState, PageSelectionType, Fonts, Thumbnail, EditChangeMode, VisibilityCondition, PrototypingTsApi, ConnectorFacetTsApiGenerated, UserInterfaceElements, BindingsPerfBench, SymbolOverrideType, ColorProfileEnum, CanvasComponentType, WhiteboardAgendaCppBindings, SourceType, TextModificationAction } from '../figma_app/763686';
 import { isNotMobile, BrowserInfo } from '../figma_app/778880';
 import { parsePxInt, parsePxNumber } from '../figma_app/783094';
-import { S as _$$S } from '../figma_app/787550';
+import { fileApiHandler } from '../figma_app/787550';
 import { T as _$$T } from '../figma_app/792332';
 import { Ts as _$$Ts3 } from '../figma_app/793953';
 import { Ym } from '../figma_app/806075';
@@ -417,7 +417,7 @@ import { isRecordingEnabled } from '../figma_app/878298';
 import { RK } from '../figma_app/815170';
 import { G_h } from '../figma_app/822011';
 import { Ik } from '../figma_app/831696';
-import { fu } from '../figma_app/831799';
+import { TrackingProvider } from '../figma_app/831799';
 import { bi } from '../figma_app/836943';
 import { mu, Ww, ZG } from '../figma_app/840917';
 import { _b, Eg, HF } from '../figma_app/841351';
@@ -1811,7 +1811,7 @@ function nW() {
             children: `${getI18nString('fake_mp.modal.center_y')}:`
           })
         })]
-      }), jsxs(_$$e6, {
+      }), jsxs(ButtonBaseReversedContainer, {
         className: nD,
         children: [jsx(Button, {
           variant: 'secondary',
@@ -1933,7 +1933,7 @@ function nJ() {
         })]
       }), jsx(_$$wi, {
         children: jsx(jk, {
-          children: jsx(_$$e6, {
+          children: jsx(ButtonBaseReversedContainer, {
             className: nD,
             children: jsx(Button, {
               variant: 'secondary',
@@ -2208,7 +2208,7 @@ let r7 = registerModal(({
   let d = Av();
   let c = e === ColorProfileEnum.DISPLAY_P3 ? r4(o, d) : null;
   let u = e === ColorProfileEnum.SRGB ? ColorProfileEnum.DISPLAY_P3 : ColorProfileEnum.SRGB;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: 'color_management_document_color_profile_modal',
     children: jsxs(ConfirmationModal, {
       open: t,
@@ -2710,7 +2710,7 @@ async function aE(e, t, i) {
     fileKey: t.key
   }) : Promise.resolve({
     s3_urls: {}
-  }), _$$S.getVideos({
+  }), fileApiHandler.getVideos({
     fileKey: t.key
   })]);
   let u = d.s3_urls;
@@ -3045,7 +3045,7 @@ class aZ extends PureComponent {
     };
     this.onKeyDown = e => {
       e.stopPropagation();
-      e.keyCode === Uz.ESCAPE && this.props.onClose();
+      e.keyCode === KeyCodes.ESCAPE && this.props.onClose();
     };
     this.onSubmit = e => {
       e && e.preventDefault();
@@ -3081,7 +3081,7 @@ class aZ extends PureComponent {
       className: 'rename_modal--formInputs--uxH5m',
       children: [jsx('div', {
         className: aG,
-        children: jsx(ks, {
+        children: jsx(BigTextInputForwardRef, {
           className: az,
           value: this.state.matchPattern,
           onFocus: this.onMatchPatternFocus,
@@ -3090,7 +3090,7 @@ class aZ extends PureComponent {
         })
       }), jsx('div', {
         className: aG,
-        children: jsx(ks, {
+        children: jsx(BigTextInputForwardRef, {
           className: az,
           value: this.state.replacePattern,
           onChange: this.onReplacePatternChange,
@@ -5736,7 +5736,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   isInDrafts() {
     let e = getSelectedFile(this._state);
-    return !!(e?.folder_id && _$$D2(this._state.folders, e.folder_id));
+    return !!(e?.folder_id && getProcessedValueByKey(this._state.folders, e.folder_id));
   }
   showUI() {
     return this._state.mirror.appModel.showUi;
@@ -6745,7 +6745,7 @@ let lX = class e extends sP(sN(sR)) {
           let p = _$$$A(this._state.selectedView);
           let m = Wl(this._state.selectedView);
           let h = _$$s2(this._state.selectedView);
-          l = jN({
+          l = buildFileUrl({
             file: n,
             nodeId: e,
             isDevHandoff: p,
@@ -6759,7 +6759,7 @@ let lX = class e extends sP(sN(sR)) {
       }
     } else {
       console.error(`file key is empty in copying link, pathname is ${customHistory.location.pathname}`);
-      l = `${location.protocol}//${location.host}${customHistory.location.pathname}?node-id=${encodeURIComponent(EO(e))}`;
+      l = `${location.protocol}//${location.host}${customHistory.location.pathname}?node-id=${encodeURIComponent(replaceColonWithDash(e))}`;
     }
     let g = r.selectionProperties.responsiveSetTitle || a?.name || n?.name;
     if (getFeatureFlags().ce_copy_labelled_links && g) {
@@ -6783,15 +6783,15 @@ let lX = class e extends sP(sN(sR)) {
   _generateLinkToNode(e, t = null) {
     let i = this._state.openFile;
     let n = null;
-    i ? n = jN({
+    i ? n = buildFileUrl({
       file: i,
       nodeId: e,
       cmsItemId: t
-    }) : (console.error(`file key is empty in generating link to node, pathname is ${customHistory.location.pathname}`), n = `${location.protocol}//${location.host}${customHistory.location.pathname}?node-id=${encodeURIComponent(EO(e))}`);
+    }) : (console.error(`file key is empty in generating link to node, pathname is ${customHistory.location.pathname}`), n = `${location.protocol}//${location.host}${customHistory.location.pathname}?node-id=${encodeURIComponent(replaceColonWithDash(e))}`);
     return n;
   }
   generateLinkToRemoteNode(e, t) {
-    return jN({
+    return buildFileUrl({
       file: {
         key: e
       },
@@ -6856,7 +6856,7 @@ let lX = class e extends sP(sN(sR)) {
       });
     }
     this.dispatch(_$$X());
-    _$$z.getIsExtension() && u_();
+    _$$z.getIsExtension() && figmaReady();
     e.maybeEnterRecoveryMode(this._store);
     this._figFileLoadPromise.then(e => {
       let t = this._store.getState().user;
@@ -7573,7 +7573,7 @@ let lX = class e extends sP(sN(sR)) {
       let n = lK.exec(i.pathname);
       if (n && this._store.getState().fileByKey && !this._store.getState().fileByKey[n[1]]) {
         try {
-          await _$$S.getFiles({
+          await fileApiHandler.getFiles({
             fileKey: n[1]
           });
         } catch (e) {
@@ -7634,7 +7634,7 @@ let lX = class e extends sP(sN(sR)) {
           } : e.protocol === 'tel:' ? {
             type: _$$F3.TEL,
             url: e
-          } : F4(e.hostname) || F4(e.host) ? Sh(e.pathname) ? {
+          } : isFigmaDomain(e.hostname) || isFigmaDomain(e.host) ? Sh(e.pathname) ? {
             type: _$$F3.FIGMA_PROTOTYPE,
             url: e
           } : e.searchParams.has('version-id') ? {

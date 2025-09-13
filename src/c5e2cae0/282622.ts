@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { sx } from "../905/941192";
-import { Ph, Us } from "../figma_app/637027";
+import { clickableBaseLinkTracked, linkWithTracking } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
@@ -46,7 +46,7 @@ function _(e) {
       header: getI18nString("checkout.cart_plan_details.shipping_address"),
       value: p(e.shippingAddress),
       dataTestId: "cart-plan-details-shipping-address"
-    }), jsx(Ph, {
+    }), jsx(clickableBaseLinkTracked, {
       onClick: e.navigateToEditDetails,
       className: _$$s.font13.py12.$,
       trackingProperties: {
@@ -80,7 +80,7 @@ function p(e) {
     return e;
   }).join(", ");
 }
-let E = jsx(Us, {
+let E = jsx(linkWithTracking, {
   target: "_blank",
   trusted: !0,
   href: "/pricing",
@@ -186,7 +186,7 @@ function k({
               throwError(e);
           }
         }(e, t)
-      }), jsx(Ph, {
+      }), jsx(clickableBaseLinkTracked, {
         className: _$$s.textBodyMediumStrong.$,
         style: sx.add({
           height: "16px"
@@ -233,7 +233,7 @@ function P() {
           }), jsx("li", {
             children: renderI18nText("checkout.org_self_serve.true_up_description4_seat_rename")
           })]
-        }), jsx(Ph, {
+        }), jsx(clickableBaseLinkTracked, {
           className: _$$s.pt8.fontMedium.inline.$,
           onClick: () => t(!0),
           trusted: !0,

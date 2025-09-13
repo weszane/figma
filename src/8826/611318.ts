@@ -52,7 +52,7 @@ import { W7, iZ } from "../figma_app/473914";
 import { W as _$$W2 } from "../figma_app/605682";
 import { N as _$$N } from "../905/438674";
 import { customHistory } from "../905/612521";
-import { Gc, Uz, Fo } from "../905/63728";
+import { ignoreCommandOrShift, KeyCodes, isCommandEvent } from "../905/63728";
 import { ex as _$$ex } from "../905/524523";
 import { clamp } from "../figma_app/492908";
 import { jr, W0, VA } from "../figma_app/896988";
@@ -611,7 +611,7 @@ let ev = _$$ex("autolayout_v3_migration_info", function (e) {
   let {
     tooltipText
   } = e;
-  let n = Gc(e => {
+  let n = ignoreCommandOrShift(e => {
     e.stopPropagation();
     customHistory.unsafeRedirect("https://help.figma.com/hc/articles/360040451373#Updates_to_Auto_Layout", "_blank");
   });
@@ -990,56 +990,56 @@ function ez({
     let r = c4(normalizeValue(n)) ? s : u;
     let a = "VERTICAL" === n ? s : u;
     switch (e.keyCode) {
-      case Uz.ESCAPE:
-      case Uz.ENTER:
+      case KeyCodes.ESCAPE:
+      case KeyCodes.ENTER:
         e.currentTarget.blur();
         break;
-      case Uz.UP_ARROW:
+      case KeyCodes.UP_ARROW:
         {
           let e = i(a, -1);
           e && l(e);
           break;
         }
-      case Uz.DOWN_ARROW:
+      case KeyCodes.DOWN_ARROW:
         {
           let e = i(a, 1);
           e && l(e);
           break;
         }
-      case Uz.LEFT_ARROW:
+      case KeyCodes.LEFT_ARROW:
         {
           let e = i(r, -1);
           e && t(e);
           break;
         }
-      case Uz.RIGHT_ARROW:
+      case KeyCodes.RIGHT_ARROW:
         {
           let e = i(r, 1);
           e && t(e);
           break;
         }
-      case Uz.B:
+      case KeyCodes.B:
         "HORIZONTAL" === n && f("BASELINE" !== u, "alignment keyboard");
         break;
-      case Uz.X:
+      case KeyCodes.X:
         L("alignment keyboard", !rO(s));
         break;
-      case Uz.W:
+      case KeyCodes.W:
         l("MIN");
         break;
-      case Uz.A:
+      case KeyCodes.A:
         t("MIN");
         break;
-      case Uz.S:
+      case KeyCodes.S:
         l("MAX");
         break;
-      case Uz.D:
+      case KeyCodes.D:
         t("MAX");
         break;
-      case Uz.V:
+      case KeyCodes.V:
         l("CENTER");
         break;
-      case Uz.H:
+      case KeyCodes.H:
         t("CENTER");
         break;
       default:
@@ -1367,7 +1367,7 @@ function t_({
       setShowSinglePaddingControl: s,
       recordingKey: e,
       handleClick: function (e) {
-        Fo(e) && s(!0);
+        isCommandEvent(e) && s(!0);
       },
       showAllPaddingControlsToggle: m
     })

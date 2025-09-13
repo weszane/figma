@@ -9,7 +9,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useHandleMouseEvent } from "../figma_app/878298";
 import { P as _$$P } from "../905/347284";
 import { renderI18nText } from "../905/303541";
-import { fu } from "../figma_app/831799";
+import { TrackingProvider } from "../figma_app/831799";
 import { n1 } from "../figma_app/657017";
 import { getSelectedFile } from "../905/766303";
 import { Fl } from "../figma_app/236178";
@@ -174,7 +174,7 @@ export function $$F0({
       numUsedStyles: ei
     })]
   });
-  return U ? ec : jsx(fu, {
+  return U ? ec : jsx(TrackingProvider, {
     name: "CommunityLibraryFileView",
     properties: {
       libraryKey: e

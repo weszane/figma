@@ -8,14 +8,14 @@ import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app
 import c from "../vendor/197638";
 import { h as _$$h2 } from "../905/207101";
 import { M3 } from "../figma_app/119475";
-import { L as _$$L } from "../905/408237";
+import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString } from "../905/303541";
 import { hO } from "../figma_app/545293";
 import { sf } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { _z, W0 } from "../905/977218";
 import { _6 } from "../figma_app/386952";
-import { uR } from "../figma_app/162807";
+import { InputType } from "../figma_app/162807";
 import { isSearchView } from "../figma_app/707808";
 import { KindEnum } from "../905/129884";
 import { oT, L8, rG, z5, q4 } from "../905/124270";
@@ -122,7 +122,7 @@ export function $$P0({
     })));
   }, [t, isFocused, keyboardNavigationItem, ee, K]);
   useEffect(() => {
-    isFocused && z && (H(null), $(uR.DROPDOWN, z));
+    isFocused && z && (H(null), $(InputType.DROPDOWN, z));
   }, [L, z]);
   useEffect(() => {
     V || M || (keyboardNavigationItem?.focus(), keyboardNavigationItem?.fauxFocus());
@@ -158,7 +158,7 @@ export function $$P0({
     }), jsxs("div", {
       className: "faceted_search_bar--clipContainer--RB40P",
       ref: D,
-      children: [!M && jsx(_$$K2, {}), jsx(_$$L, {
+      children: [!M && jsx(_$$K2, {}), jsx(LazyInputForwardRef, {
         ref: O,
         autoFocus: !0,
         className: "faceted_search_bar--input--V5ksZ",

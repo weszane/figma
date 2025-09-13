@@ -14,7 +14,7 @@ import { reportError } from "../905/11";
 import { hideModal, showModalHandler, hideModalHandler } from "../905/156213";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { N as _$$N } from "../figma_app/469468";
-import { LA, Yo } from "../figma_app/637027";
+import { BigButtonInverseTracked, interactiveAnchorTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getTranslatedDynamicContent } from "../905/303541";
 import { qB } from "../905/862321";
@@ -27,7 +27,7 @@ import { sf } from "../905/929976";
 import { b as _$$b2 } from "../905/985254";
 import { YW, _O, s0, EX } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
-import { fu, o3, jm, $z } from "../figma_app/831799";
+import { TrackingProvider, TrackedLink, TrackedDiv, TrackedButton } from "../figma_app/831799";
 import { QL } from "../905/609392";
 import { _6 } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
@@ -51,7 +51,7 @@ import { A as _$$A2 } from "../5724/172808";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { S as _$$S } from "../5430/465757";
-import { N_ } from "../vendor/956898";
+import { Link } from "react-router-dom";
 import { J as _$$J } from "../5430/284487";
 import { z as _$$z } from "../905/239603";
 import { Vm, HX, XW, zL, qY, ws } from "../figma_app/427318";
@@ -421,7 +421,7 @@ function F() {
   });
 }
 function M(e) {
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: "Continue Duplication after Verification Modal",
     children: jsxs(OJ, {
       headerSize: "hidden",
@@ -444,7 +444,7 @@ function M(e) {
             children: e.userEmail
           })
         })
-      }), jsx(LA, {
+      }), jsx(BigButtonInverseTracked, {
         fullWidth: !0,
         onClick: e.onOpenFileClick,
         type: "button",
@@ -533,7 +533,7 @@ let V = memo(function (e) {
     role: "region",
     "aria-label": t,
     className: MZ,
-    children: [jsx(Yo, {
+    children: [jsx(interactiveAnchorTracked, {
       className: o2,
       rel: "noopener",
       target: "_blank",
@@ -749,7 +749,7 @@ function eS({
           className: "community_collections--communityShelfAllPageTitle--r8QHx ellipsis--ellipsis--Tjyfa text--fontPos24--YppUD text--_fontBase--QdLsd",
           children: e.title
         })]
-      }), jsx(N_, {
+      }), jsx(Link, {
         to: e.is_template_url ? `/community/templates/${e.url_slug}` : `/community/collections/${e.url_slug}`,
         className: "community_collections--communityShelfAllPageHeaderRightSide--UQUv8 community_collections--communityShelfAllPageHeaderLeftSide--6UBkD text--fontPos13--xW8hS text--_fontBase--QdLsd",
         children: renderI18nText("community.shelves.show_more")
@@ -1386,7 +1386,7 @@ function tx({
   let c = _t({
     resource: t
   });
-  let d = jsx(o3, {
+  let d = jsx(TrackedLink, {
     className: "hero_section--learnMore--a7m3e text--fontPos13--xW8hS text--_fontBase--QdLsd",
     to: c,
     trackingEventName: "community_collections",
@@ -1540,7 +1540,7 @@ function tS({
   collection: e,
   preview: t = !1
 }) {
-  return jsxs(fu, {
+  return jsxs(TrackingProvider, {
     name: "community_collections",
     properties: {
       urlSlug: e.url_slug,
@@ -1639,7 +1639,7 @@ function t2({
   };
   return jsx("div", {
     className: t5,
-    children: jsx(o3, {
+    children: jsx(TrackedLink, {
       to: e.path,
       onClick: () => {
         t();
@@ -1722,7 +1722,7 @@ function t7({
           "mobile_flyout--mobileFlyoutMounted--RUFmS": n
         }),
         onClick: e => e.stopPropagation(),
-        children: jsxs(fu, {
+        children: jsxs(TrackingProvider, {
           ...d,
           children: [jsxs("div", {
             className: _$$s.flex.justifyBetween.itemsCenter.$,
@@ -2046,7 +2046,7 @@ function ih(e) {
     backgroundColor,
     newProductBadgeTheme
   } = e;
-  return jsxs(jm, {
+  return jsxs(TrackedDiv, {
     className: "nav_dropdown_card--navDropdownCard--MAs6u",
     "data-card-size": cardSize,
     trackingEventName: "community_global_nav_category_clicked",
@@ -2117,7 +2117,7 @@ function i_({
     }) => {
       let n = t;
       e instanceof IE && (n ||= xF(e.params.categorySlug));
-      return jsx(o3, {
+      return jsx(TrackedLink, {
         trackingEventName: "community_global_nav_category_clicked",
         to: e.href,
         trackingProperties: e instanceof IE ? {
@@ -2965,7 +2965,7 @@ function iB({
     role: "button",
     tabIndex: 0,
     className: _$$s.flex.itemsCenter.$,
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: "Global Nav Category",
       properties: {
         slug: t
@@ -3078,7 +3078,7 @@ function iq() {
   let e = zq();
   return jsxs("div", {
     className: _$$s.flex.flexShrink0.alignCenter.alignCenter.gap16.$,
-    children: [jsx($z, {
+    children: [jsx(TrackedButton, {
       className: "auth_buttons--logInButton--ln482 shared--_button--qcVz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
       trackingProperties: {
         trackingDescriptor: _$$c.LOGGED_OUT_NAV_LOGIN
@@ -3091,7 +3091,7 @@ function iq() {
       }),
       type: "button",
       children: getI18nString("community.signed_out_modal.log_in")
-    }), jsx($z, {
+    }), jsx(TrackedButton, {
       className: "auth_buttons--signUpButton--lM9GB shared--_button--qcVz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
       onClick: () => FL(qB.SIGN_UP, {
         preventDefaultRedirect: !0,
@@ -3153,7 +3153,7 @@ function iX({
     className: e9()("homepage_link--homepageLinkContainer---EZRJ", {
       "homepage_link--rightBorder--hQMW-": !e
     }),
-    children: jsxs(o3, {
+    children: jsxs(TrackedLink, {
       trackingEventName: "community_nav_click_communitiy_heading",
       to: _$$iY(),
       className: _$$s.font14.fontSemiBold.lh24.flex.flexNowrap.$,
@@ -3263,7 +3263,7 @@ function i7({
   }, {
     editor_type: e === LE.COOPER ? _$$k2.Editors.COOPER : _$$k2.Editors.SITES
   });
-  return jsxs(jm, {
+  return jsxs(TrackedDiv, {
     className: "buzz_sites_promo_banner--card--fBm7j",
     ref: r,
     onClick: () => customHistory.push(m.href),
@@ -4266,7 +4266,7 @@ function nU({
       let t = new $E({
         categorySlug: e.category
       });
-      return jsx(o3, {
+      return jsx(TrackedLink, {
         to: t.href,
         trackingEventName: "community_homepage_category_highlight_clicked",
         trackingProperties: {
@@ -4284,7 +4284,7 @@ function nH({
   buttonLabel: e,
   route: t
 }) {
-  return jsxs(o3, {
+  return jsxs(TrackedLink, {
     className: "homepage_section--viewAllLinks--ZxJcd text--fontPos13--xW8hS text--_fontBase--QdLsd",
     to: t.to,
     trackingEventName: "community_homepage_section_link_clicked",
@@ -4334,7 +4334,7 @@ function nX() {
     className: "x1n2onr6 x78zum5 xl56j7k xh8yej3 xpxwu9m",
     children: jsx("div", {
       ...xk(nV.bannerWrapper, i && nV.bannerWrapperFullWidth),
-      children: jsx(N_, {
+      children: jsx(Link, {
         to: new tQ({
           landingPageType: tH.MAKE
         }).href,
@@ -4962,7 +4962,7 @@ function as() {
     categorySlug,
     tagSlug
   } = e.params;
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e4.COMMUNITY_HUB_CATEGORY,
     properties: {
       category: categorySlug,
@@ -5471,7 +5471,7 @@ function aE({
 }) {
   let [o, l] = useState(!1);
   let c = "dark" === DP();
-  return e ? jsx(N_, {
+  return e ? jsx(Link, {
     to: r,
     className: "x1hl2dhg x1heor9g",
     children: jsxs("div", {
@@ -5749,7 +5749,7 @@ function aP() {
   let n = t.HeaderComponent;
   return i && !getFeatureFlags()[i] ? jsx(rd, {
     to: new _$$_2().to
-  }) : jsxs(fu, {
+  }) : jsxs(TrackingProvider, {
     name: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
     children: [jsx(n, {}), jsx("div", {
       ..._$$Ay5.props(aR.feedContainer),
@@ -5821,7 +5821,7 @@ function a5({
     r(t);
     t > m[1] ? (g(e => [e[0] + 1, e[1] + 1]), h(p - 10)) : t < m[0] && (g(e => [e[0] - 1, e[1] - 1]), h(p + 10));
   };
-  return jsx(fu, {
+  return jsx(TrackingProvider, {
     name: _$$e4.COMMUNITY_MOBILE_RDP_CAROUSEL,
     properties: {
       resource_type: Vm(t),
@@ -6161,7 +6161,7 @@ function so() {
   let b = generateUUIDv4();
   return jsx("div", {
     className: "resource_page--resourcePage--n6Aio text--fontPos14--OL9Hp text--_fontBase--QdLsd",
-    children: jsxs(fu, {
+    children: jsxs(TrackingProvider, {
       name: f.name,
       properties: f.properties,
       children: [jsxs(_$$H.Provider, {

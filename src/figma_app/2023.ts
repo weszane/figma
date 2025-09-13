@@ -7,11 +7,11 @@ import { getI18nString } from "../905/303541";
 import { Zx } from "../figma_app/217457";
 import { fileEntityDataMapper } from "../905/943101";
 import { FTeamAccessPermissionType, FPlanFeatureType, FPermissionLevelType } from "../figma_app/191312";
-import { Um, Nl, aU, WP, Xs, vy, uk } from "../figma_app/349248";
+import { mapUserProperties, mapFileLinkExpirationConfigWithPrevious, mapResourceAccess, mapFileView, mapRepoSummary, mapOrgDomainProperties, mapFileExportAndLinkControls } from "../figma_app/349248";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { v } from "../figma_app/995722";
 import { zb } from "../905/862913";
-import { VA } from "../figma_app/528509";
+import { hasRootPathOptional } from "../figma_app/528509";
 var s = a;
 var $$E6 = (e => (e.fileBrowserContextMenu = "file_browser_context_menu", e.fileBrowserFavoritedContextMenu = "file_browser_favorited_context_menu", e.fileBrowserTileActionMenu = "file_browser_tile_action_menu", e.prototypeHeader = "prototype_header", e.fullscreenToolbar = "fullscreen_toolbar", e.expFigJamOnboardingShareVariant = "exp_figjam_onboarding_share_variant", e.fullscreenCopyLinkButtonVisualBell = "fullscreen_copy_link_button_visual_bell", e.prototypeCopyLinkButtonVisualBell = "prototype_copy_link_button_visual_bell", e.customTemplatePublishNudge = "custom_template_publish_nudge", e.editRequestTooltip = "edit_request_tooltip", e.editRequestExternal = "edit_request_external", e.shareToGoogleClassroomOnboarding = "share_to_google_classroom_onboarding", e.googleClassroomIntegration = "google_classroom_integration", e))($$E6 || {});
 export function $$y4(e) {
@@ -72,7 +72,7 @@ export function $$S3(e) {
   let t = T(e);
   let r = I(e);
   let n = e.pwdConfig?.updatedAt || null;
-  let a = e.pwdConfig?.setByUser ? Um(e.pwdConfig.setByUser) : null;
+  let a = e.pwdConfig?.setByUser ? mapUserProperties(e.pwdConfig.setByUser) : null;
   let s = {
     ...fileEntityDataMapper.toSinatra(e),
     client_meta: e.clientMeta || "",
@@ -107,7 +107,7 @@ export function $$S3(e) {
     passwordSetByUser: a,
     isOwner: r ? !!e.repo?.roleOnObjectForUser?.isOwnerOfResource : !!e.roleOnObjectForUser?.isOwnerOfResource,
     isPublishedHubFile: !!e.publishedHubFile && !e.publishedHubFile.unpublishedAt,
-    mainFileLinkExpirationConfig: Nl(t),
+    mainFileLinkExpirationConfig: mapFileLinkExpirationConfigWithPrevious(t),
     folderAccessEnabled: e.folderAccessEnabled && getResourceDataOrFallback(e.folderAccessEnabled) || !1,
     isDraftFileLG: e.isDraftFile && getResourceDataOrFallback(e.isDraftFile) || !1,
     isAbandonedDraftFile: e.isAbandonedDraftFile || !1,
@@ -140,7 +140,7 @@ export function $$v5(e, t) {
   });
   let E = {};
   (a ? r.repo.roles : r.roles).forEach(e => {
-    let t = e.user ? Um(e.user) : null;
+    let t = e.user ? mapUserProperties(e.user) : null;
     if (t) {
       let r = e.user?.orgUser || e.user?.guestOrgUser;
       let n = o[t.id];
@@ -151,7 +151,7 @@ export function $$v5(e, t) {
         designPaidStatus: e.user.teamUser.designPaidStatus,
         whiteboardPaidStatus: e.user.teamUser.whiteboardPaidStatus
       } : null;
-      let l = aU(e, t, r || null, s || null);
+      let l = mapResourceAccess(e, t, r || null, s || null);
       E[t.id] = l.pending ? {
         ...l,
         invite: w(e.invite)
@@ -162,7 +162,7 @@ export function $$v5(e, t) {
         repoLevel: n?.level || null
       };
     } else if (e.pending) {
-      let t = aU(e, null, null, null);
+      let t = mapResourceAccess(e, null, null, null);
       E[`pending-${e.id}`] = {
         ...t,
         invite: w(e.invite)
@@ -171,12 +171,12 @@ export function $$v5(e, t) {
   });
   let v = {};
   zb(t) && r.fileSeenStates.forEach(e => {
-    let t = e.user ? Um(e.user) : null;
+    let t = e.user ? mapUserProperties(e.user) : null;
     if (t) {
       let r = o[t.id];
       let n = m[t.id];
       let i = u[t.id];
-      let a = WP(e, t);
+      let a = mapFileView(e, t);
       v[a.user_id] = {
         ...a,
         folderLevel: i?.level || null,
@@ -190,9 +190,9 @@ export function $$v5(e, t) {
     e.org && (A[e.org.id] = {});
   });
   let N = r.repo ? {
-    ...Xs(r.repo),
+    ...mapRepoSummary(r.repo),
     canEdit: r.repo.canEdit,
-    mainFileLinkExpirationConfig: Nl(n)
+    mainFileLinkExpirationConfig: mapFileLinkExpirationConfigWithPrevious(n)
   } : null;
   if (x(n)) {
     let e = {
@@ -214,7 +214,7 @@ export function $$v5(e, t) {
     design_paid_status: r.project.orgDraftsFolderOwnerBaseOrgUser.accountType,
     whiteboard_paid_status: r.project.orgDraftsFolderOwnerBaseOrgUser.whiteboardPaidStatus || FPlanFeatureType.STARTER,
     user_id: r.project.orgDraftsFolderOwnerBaseOrgUser.userId,
-    user: Um(r.project.orgDraftsFolderOwnerBaseOrgUser.user)
+    user: mapUserProperties(r.project.orgDraftsFolderOwnerBaseOrgUser.user)
   } : null;
   var O = void 0;
   r.org && null !== r.org.imgUrl && (O = r.org.imgUrl);
@@ -234,7 +234,7 @@ export function $$v5(e, t) {
       canRead: l.canRead && getResourceDataOrFallback(l.canRead) || !1
     },
     folderRoles: l && l.roles || [],
-    isInDraftsFolder: VA(l),
+    isInDraftsFolder: hasRootPathOptional(l),
     orgDraftsOwner: C,
     org: r.org ? {
       id: r.org.id,
@@ -244,7 +244,7 @@ export function $$v5(e, t) {
       workshop_enabled: !r.org.workshopDisabledAt,
       invite_whitelist_guest_invite_setting: r.org.inviteWhitelist?.guestInviteSetting,
       figjam_disabled_at: r.org.figjamDisabledAt,
-      org_domains: vy(r.org.orgDomains),
+      org_domains: mapOrgDomainProperties(r.org.orgDomains),
       bigma_enabled: !!r.org.bigmaEnabledAt,
       k12_google_org: !!R
     } : null,
@@ -279,7 +279,7 @@ export function $$v5(e, t) {
     orgs: A,
     dataLoaded: !0,
     currentUser: e.data.currentUser,
-    sharedContainerSetting: uk(r.org ? {
+    sharedContainerSetting: mapFileExportAndLinkControls(r.org ? {
       id: r.org.id,
       bigma_enabled: !!r.org?.bigmaEnabledAt
     } : null, r.org?.orgSharedSetting ?? e.data.org?.orgSharedSetting, r.team?.workspaceSharedSetting),
