@@ -7,6 +7,7 @@ declare global {
   let scheduler: any
   let createFileImporter: any
   let Fig: FigType
+
   interface Window {
     INITIAL_OPTIONS: InitialOptions
     EARLY_ARGS: EarlyArgs

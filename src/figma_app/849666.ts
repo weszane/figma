@@ -36,9 +36,9 @@ import { c as _$$c } from "../figma_app/769913";
 import { getFeatureFlags } from "../905/601108";
 import { dR, jM } from "../905/508367";
 import { customHistory } from "../905/612521";
-import { My } from "../905/194276";
-import { qB } from "../905/862321";
-import { g as _$$g } from "../905/248178";
+import { AUTH_COMPLETE } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
+import { trackAuthEvent } from "../905/248178";
 import { lR, $z } from "../figma_app/617427";
 import { f as _$$f } from "../figma_app/908415";
 import { hideModalHandler, hideModal, showModalHandler } from "../905/156213";
@@ -501,7 +501,7 @@ function eC({
       onClick: () => {
         s({
           origin: t(!1),
-          formState: qB.SIGN_UP
+          formState: AuthFlowStep.SIGN_UP
         });
       },
       children: renderI18nText("footer_banner.sign_up_with_email")
@@ -513,11 +513,11 @@ function eC({
           origin: e,
           redirectUrl: p
         }).then(e => {
-          "login" === e.type && l(My({
+          "login" === e.type && l(AUTH_COMPLETE({
             userId: e.user.id
           }));
         }, t => {
-          _$$g("google_signup_error", e, {
+          trackAuthEvent("google_signup_error", e, {
             error: t.message
           });
           getFeatureFlags().ff_show_auth_modal_on_google_sso_error && Y2({
@@ -604,10 +604,10 @@ function eD({
               dispatch: l,
               origin: t(!0),
               redirectUrl: _
-            }).then(e => "login" === e.type && l(My({
+            }).then(e => "login" === e.type && l(AUTH_COMPLETE({
               userId: e.user.id
             })), e => {
-              _$$g("google_signup_error", t(!0), {
+              trackAuthEvent("google_signup_error", t(!0), {
                 error: e.message
               });
             });
@@ -640,7 +640,7 @@ function eD({
             onClick: () => {
               s({
                 origin: t(!1),
-                formState: qB.SIGN_UP
+                formState: AuthFlowStep.SIGN_UP
               });
             },
             htmlAttributes: {

@@ -4,7 +4,7 @@ import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { StatusType } from "../figma_app/175992";
 export let $$u0 = createOptimistThunk(async (e, t, {
   loadingKey: r
@@ -23,7 +23,7 @@ export let $$u0 = createOptimistThunk(async (e, t, {
       address: t.address,
       vat_id: t.vatId
     });
-    N(s, e, r);
+    setupLoadingStateHandler(s, e, r);
     let a = await s;
     if (!a?.data?.meta) {
       t.callback(!1);

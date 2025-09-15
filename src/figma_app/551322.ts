@@ -23,7 +23,7 @@ import { U as _$$U } from "../905/566881";
 import { j7, oB } from "../905/929976";
 import { z as _$$z2 } from "../905/404751";
 import { showModalHandler, hideModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { lg } from "../figma_app/976749";
 import { F as _$$F2 } from "../905/224";
 import { Um } from "../905/848862";
@@ -60,11 +60,11 @@ export function $$Z1(e) {
   setTimeout(() => {
     c(!0);
   }, 3e3);
-  let p = () => t(_$$b({
+  let p = () => t(postUserFlag({
     dismissed_move_drafts_nudge: !0
   }));
   useEffect(() => () => {
-    l || t(_$$b({
+    l || t(postUserFlag({
       seen_move_drafts_nudge: !0
     }));
   }, [t, l]);

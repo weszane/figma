@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { mG } from "../figma_app/15924";
-import { XR } from "../figma_app/808294";
+import { getBuyOrSubscribeLabel } from "../figma_app/808294";
 import { v as _$$v } from "../905/581647";
 import { showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
@@ -104,10 +104,10 @@ export function $$O0({
     let e = publishedExtension?.monetized_resource_metadata;
     return M && !F && e ? Y ? {
       onAction: B,
-      actionText: XR(e)
+      actionText: getBuyOrSubscribeLabel(e)
     } : {
       onAction: $,
-      actionText: XR(e)
+      actionText: getBuyOrSubscribeLabel(e)
     } : M && j ? {
       onAction: G,
       actionText: getI18nString("qa.extensions.update_payment")

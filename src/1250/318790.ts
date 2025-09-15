@@ -5,22 +5,22 @@ import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { oW } from "../905/675859";
 import { B1, Vb, EK, Kz } from "../9864/183809";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
 import { gik } from "../figma_app/6204";
-if (443 == require.j) { }
+if (443 == require.j) {}
 var k = (e => (e.BRAZILIAN = "brazilian", e.NON_BRAZILIAN = "non_brazilian", e))(k || {});
 let E = 443 == require.j ? 864e5 : null;
 let C = () => Date.now() - E;
@@ -64,7 +64,7 @@ function $$A(e) {
     })
   });
 }
-let S = r1("has_tried_pt_br");
+let S = userFlagExistsAtomFamily("has_tried_pt_br");
 export function $$N0() {
   let e = useDispatch();
   let t = useAtomWithSubscription(S);
@@ -72,10 +72,10 @@ export function $$N0() {
   let _ = "loaded" === t.status && "loaded" === n.status;
   let {
     getConfig
-  } = I7("exp_i18n_pt_br_new_users");
+  } = selectExperimentConfigHook("exp_i18n_pt_br_new_users");
   let {
     getConfig: _getConfig
-  } = I7("exp_i18n_pt_br_existing_users");
+  } = selectExperimentConfigHook("exp_i18n_pt_br_existing_users");
   let {
     show,
     isShowing,
@@ -95,7 +95,7 @@ export function $$N0() {
     }
   }, [n, t]);
   if (useEffect(() => {
-    getInitialOptions().user_data?.locale === languageCodes.PT_BR && "loaded" === t.status && !1 === t.data && e(_$$b({
+    getInitialOptions().user_data?.locale === languageCodes.PT_BR && "loaded" === t.status && !1 === t.data && e(postUserFlag({
       has_tried_pt_br: !0
     }));
   }, [e, t]), useEffect(() => {

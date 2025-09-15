@@ -21,7 +21,7 @@ import { wV } from "../figma_app/585209";
 import { _B } from "../905/852370";
 import { iX } from "../6443/426443";
 import { trackEventAnalytics } from "../905/449184";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { showModalHandler } from "../905/156213";
 import { LU } from "../figma_app/692865";
 import { l as _$$l } from "../905/690005";
@@ -34,7 +34,7 @@ let F = ({
   dispatch: n
 }) => {
   if (e === NoUserProfileStatus.NO_USER) {
-    n(Ts({
+    n(AUTH_INIT({
       origin: "comments_signed_out"
     }));
     n(showModalHandler({

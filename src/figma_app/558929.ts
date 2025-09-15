@@ -3,7 +3,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { O as _$$O } from "../905/539306";
 import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -129,7 +129,7 @@ let $$V2 = createOptimistThunk((e, t) => {
     return;
   }
   let r = t.isWidget ? getI18nString("community.logged_out.sign_up_modal_widget_header") : getI18nString("community.logged_out.sign_up_modal_plugin_header");
-  e.dispatch(Ts({
+  e.dispatch(AUTH_INIT({
     origin: "plugin_try_signed_out"
   }));
   e.dispatch(showModalHandler({

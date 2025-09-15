@@ -6,7 +6,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { hE } from "../figma_app/272243";
 import { N } from "../905/438674";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { $z } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -41,7 +41,7 @@ export let $$b0 = registerModal(function ({
     manager: b,
     children: [jsx(hE, {
       children: e
-    }), jsx(s_, {
+    }), jsx(ModalCloseButton, {
       dispatch: v
     }), t, jsx("div", {
       className: "upsell_modals--footerRow--barMd modal--buttonRow--o2A0S",

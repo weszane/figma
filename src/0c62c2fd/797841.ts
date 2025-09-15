@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { BaseLinkComponent } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { PF } from "../figma_app/78808";
+import { fileRestoreAction } from "../figma_app/78808";
 import { hideModal, popModalStack } from "../905/156213";
 import { Ro } from "../figma_app/805373";
 import { Cr } from "../figma_app/221114";
@@ -71,7 +71,7 @@ export function $$g0(e) {
       versionId: r
     });
     t(hideModal());
-    t(PF({
+    t(fileRestoreAction({
       fileKey: e.fig.key,
       versionId: r
     }));

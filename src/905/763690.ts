@@ -7,14 +7,14 @@ import { i as _$$i } from "../905/264868";
 import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { w } from "../905/129046";
 import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
 import { b0J } from "../figma_app/6204";
 let A = "seen_file_preview_overlay";
-let y = r1(A);
+let y = userFlagExistsAtomFamily(A);
 export function $$b0() {
   let e = useAtomWithSubscription(_$$i);
   let t = useAtomWithSubscription(Fy);

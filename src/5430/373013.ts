@@ -9,7 +9,7 @@ import { gM } from "../5430/823351";
 import { Ay } from "../905/506641";
 import { e as _$$e } from "../figma_app/324237";
 import { Z } from "../905/942203";
-import { L as _$$L } from "../905/178090";
+import { ResourceTypes } from "../905/178090";
 import { MF, OU } from "../figma_app/773663";
 import { A5 } from "../figma_app/209680";
 import { Yf, AV } from "../5430/297093";
@@ -79,7 +79,7 @@ export function $$I0({
         children: renderI18nText("categories.filter_by")
       }), jsx(Ay, {
         mediaQuery: `(min-width: ${glm})`,
-        children: resourceType !== _$$L.SearchResourceTypes.PROFILES && jsx(F, {
+        children: resourceType !== ResourceTypes.SearchResourceTypes.PROFILES && jsx(F, {
           onUpdate: e => {
             let r = [{
               key: "editorType",

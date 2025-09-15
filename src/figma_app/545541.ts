@@ -11,7 +11,7 @@ import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { xb } from "../figma_app/910914";
 import { getCodegenLanguagePreference } from "../905/515076";
 import { Bs } from "../figma_app/120227";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { m0 } from "../figma_app/976749";
 import { YN, mf, uf, _P } from "../figma_app/844435";
 import { qZ } from "../905/201014";
@@ -393,7 +393,7 @@ export function $$F0() {
       });
     },
     pinPlugin(e) {
-      u(_$$b({
+      u(postUserFlag({
         [xb]: !0
       }));
       F(T.pinPlugin(e));

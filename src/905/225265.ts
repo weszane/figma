@@ -11,7 +11,7 @@ import { $ as _$$$ } from "../905/455748";
 import { asyncExecutorSubscription } from "../905/888985";
 import { WebLoggerTimer } from "../905/485103";
 import { yZ } from "../figma_app/476572";
-import { hW } from "../figma_app/594947";
+import { getExperimentConfigAsync } from "../figma_app/594947";
 import { XE } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { compareLibraryKeyWithString } from "../905/709171";
@@ -255,7 +255,7 @@ let ey = createRemovableAtomFamily(e => atom(async t => {
         S.siteKitSearchResultsCount = e;
         S.totalShownResults = S.totalShownResults + e;
       }
-      hW("exp_asset_search_refactor");
+      getExperimentConfigAsync("exp_asset_search_refactor");
       analyticsEventManager.trackDefinedEvent("assets_panel.search_time", S);
       analyticsEventManager.trackDefinedEvent("asset_search.query_result", {
         ...S,

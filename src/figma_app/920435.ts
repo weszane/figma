@@ -10,8 +10,8 @@ import { showModalHandler } from "../905/156213";
 import { Be as _$$Be } from "../figma_app/920435";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { ub } from "../figma_app/514043";
-import { N } from "../905/696711";
+import { getUserIsoCodeIfNonUsd } from "../figma_app/514043";
+import { setupLoadingStateHandler } from "../905/696711";
 import { T } from "../905/696189";
 export function $$E0(e) {
   let {
@@ -44,7 +44,7 @@ let $$y1 = createOptimistThunk((e, {
   let n = T.getTeamSummary({
     teamId: t
   });
-  N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   n.then(({
     data: t
   }) => {
@@ -71,7 +71,7 @@ export function $$I2(e) {
     type: _$$s2(),
     data: {
       currency,
-      defaultCountry: ub(),
+      defaultCountry: getUserIsoCodeIfNonUsd(),
       monthlySub,
       annualSub,
       customerInfo: {

@@ -30,7 +30,7 @@ import { Label } from "../905/270045";
 import { __, tZ as _$$tZ, Mm } from "../905/271611";
 import { A as _$$A3 } from "../905/567946";
 import L from "classnames";
-import { zt } from "../figma_app/808294";
+import { getAnnualPriceString } from "../figma_app/808294";
 import { U as _$$U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { l4 } from "../figma_app/975811";
@@ -239,7 +239,7 @@ let H = forwardRef(function ({
         }
       }), _$$i_(e) && jsx("div", {
         className: PW,
-        children: zt(l, currentValue.discountPercentage)
+        children: getAnnualPriceString(l, currentValue.discountPercentage)
       })]
     })
   }) : null;

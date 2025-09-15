@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ButtonLargeWide } from "../905/521428";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { EnhancedInput } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
@@ -72,7 +72,7 @@ export let $$w0 = registerModal(function (e) {
   }, [N, w, r, t, C, P, k, T, e, g, S]);
   return jsxs(ModalContainer, {
     className: "collect_tax_info_modal--container--F6VXQ",
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: t
     }), jsx("div", {
       className: "collect_tax_info_modal--title--wFmJh text--fontPos20--Bcz97 text--_fontBase--QdLsd",

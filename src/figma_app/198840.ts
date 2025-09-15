@@ -6,7 +6,7 @@ import { ignoreCommandOrShift } from "../905/63728";
 import { isValidUrl } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { N6 } from "../figma_app/471982";
-import { vf, Yp, mZ, F8 } from "../figma_app/808294";
+import { centsToDollars, isPriceOutOfRange, MIN_PRICE, isNotInteger } from "../figma_app/808294";
 import { Tn, gO, Ii, xw, vC } from "../figma_app/599979";
 import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "../figma_app/191312";
 import { d as _$$d } from "../905/44199";
@@ -147,7 +147,7 @@ export function $$C11(e, t, r, n) {
     publishers: T,
     commentsSetting: o.comments_setting || m.commentsSetting,
     blockPublishingOnToS: xw(e),
-    price: vf(o.monetized_resource_metadata),
+    price: centsToDollars(o.monetized_resource_metadata),
     isPaid: !!o.monetized_resource_metadata,
     supportContact: o.support_contact || e.user?.email,
     carouselMedia: N6(o),
@@ -155,7 +155,7 @@ export function $$C11(e, t, r, n) {
   };
 }
 export function $$w10(e, t) {
-  return e ? t ? Yp(t) ? t < mZ ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err") : F8(t) ? getI18nString("community.seller.prices_must_follow_format") : void 0 : getI18nString("community.publishing.price_is_required_for_paid_resources") : void 0;
+  return e ? t ? isPriceOutOfRange(t) ? t < MIN_PRICE ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err") : isNotInteger(t) ? getI18nString("community.seller.prices_must_follow_format") : void 0 : getI18nString("community.publishing.price_is_required_for_paid_resources") : void 0;
 }
 export function $$O16(e) {
   let t = _$$Yp(e || null).length;

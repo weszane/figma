@@ -10,7 +10,7 @@ import u from "classnames";
 import { wY, cU } from "../figma_app/708845";
 import { F as _$$F } from "../905/680873";
 import { BrowserInfo } from "../figma_app/778880";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -227,7 +227,7 @@ export function $$w0(e) {
         children: content.description
       }), jsxs("div", {
         className: iZ,
-        children: [k, e.content.dismissible && jsx(Jn, {
+        children: [k, e.content.dismissible && jsx(CloseButton, {
           onClick: () => j(!0),
           className: _$$r,
           "aria-label": getI18nString("banner.shared.close_banner"),

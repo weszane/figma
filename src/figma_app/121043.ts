@@ -22,8 +22,8 @@ import { parseQuery } from "../905/634134";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { generateUUIDv4 } from "../905/871474";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { WN } from "../figma_app/638601";
 import { b as _$$b } from "../figma_app/556971";
 import { SvgComponent } from "../905/714743";
@@ -450,7 +450,7 @@ let $$eU7 = memo(function (e) {
       if (!user || user.appData && user.appData.loggedOut) {
         if (e) {
           if ("fullscreen" === selectedView.view && selectedView.editorType === FEditorType.Whiteboard) {
-            r(Ts({
+            r(AUTH_INIT({
               origin: "logged_out_main_menu_toolbar",
               redirectUrl: customHistory.location.pathname,
               signedUpFromOpenSession: u
@@ -528,9 +528,9 @@ let $$eB8 = memo(function (e) {
           file: t.name
         }) : getI18nString("fullscreen.toolbar.log_in_or_create_an_account") : i && (e = getI18nString("fullscreen.toolbar.log_in_to_do_more_with_figjam"));
         let n = parseQuery(customHistory.location.search)["node-id"];
-        s(Ts({
+        s(AUTH_INIT({
           origin: "logged_out_footer",
-          formState: qB.SIGN_IN,
+          formState: AuthFlowStep.SIGN_IN,
           redirectUrl: n ? `${customHistory.location.pathname}?node-id=${encodeURIComponent(replaceColonWithDash(n))}` : customHistory.location.pathname
         }));
         s(showModalHandler({

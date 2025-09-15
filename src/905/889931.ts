@@ -7,7 +7,7 @@ import { analyticsEventManager } from "../905/449184";
 import { getIsWindows } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logWarning, logError } from "../905/714362";
-import { gP } from "../figma_app/594947";
+import { getInitialDynamicConfig } from "../figma_app/594947";
 import { wO, ap, Zj, Vu } from "../figma_app/149304";
 import { l as _$$l } from "../figma_app/773170";
 export let $$n5;
@@ -240,7 +240,7 @@ class f {
     return !0;
   }
   _useContext2D(e) {
-    return !!(getFeatureFlags().webgpu_canvas_2d_readpixels_windows && getIsWindows()) || !!getFeatureFlags().webgpu_canvas_2d_readpixels && gP("webgpu_sync_readback_config").get("vendor_architecture_context2d", []).some(t => t.vendor === e.webgpuVendor && t.architecture === e.webgpuArchitecture);
+    return !!(getFeatureFlags().webgpu_canvas_2d_readpixels_windows && getIsWindows()) || !!getFeatureFlags().webgpu_canvas_2d_readpixels && getInitialDynamicConfig("webgpu_sync_readback_config").get("vendor_architecture_context2d", []).some(t => t.vendor === e.webgpuVendor && t.architecture === e.webgpuArchitecture);
   }
 }
 class _ {
@@ -338,7 +338,7 @@ class _ {
       let e = n.getExtension("WEBGL_debug_renderer_info");
       e ? (this._gpuDeviceInfo.graphicsCardName = n.getParameter(e.UNMASKED_RENDERER_WEBGL) ?? "", this._gpuDeviceInfo.vendor = n.getParameter(e.UNMASKED_VENDOR_WEBGL) ?? "") : (this._gpuDeviceInfo.graphicsCardName = n.getParameter(n.RENDERER) ?? "", this._gpuDeviceInfo.vendor = n.getParameter(n.VENDOR) ?? "");
     } else i ? (logWarning("GPU", "No WebGL context found... using WebGPUAdapterInfo to fill in GPU hardware info"), this._gpuDeviceInfo.graphicsCardName = i.device, this._gpuDeviceInfo.vendor = i.vendor) : logWarning("GPU", "No WebGL context found and no WebGPUAdapterInfo found. Using empty GPU hardware info");
-    if (i && (this._gpuDeviceInfo.webgpuArchitecture = i.architecture, this._gpuDeviceInfo.webgpuDescription = i.description, this._gpuDeviceInfo.webgpuDevice = i.device, this._gpuDeviceInfo.webgpuVendor = i.vendor), this._webglFallbackTriggers = gP("webgl_fallback_triggers").get("webgl_fallback_triggers", {
+    if (i && (this._gpuDeviceInfo.webgpuArchitecture = i.architecture, this._gpuDeviceInfo.webgpuDescription = i.description, this._gpuDeviceInfo.webgpuDevice = i.device, this._gpuDeviceInfo.webgpuVendor = i.vendor), this._webglFallbackTriggers = getInitialDynamicConfig("webgl_fallback_triggers").get("webgl_fallback_triggers", {
       request_device_failure: !1,
       webgpu_error: !1,
       webgpu_oom: !1,
@@ -348,9 +348,9 @@ class _ {
       if (Zj()) return !1;
       if (getIsWindows() && "intel" === e.webgpuVendor.toLowerCase() && ("gen-7" === e.webgpuArchitecture.toLowerCase() || "gen-8" === e.webgpuArchitecture.toLowerCase())) return !0;
       if ("apple" === e.webgpuVendor.toLowerCase() && "metal-3" === e.webgpuArchitecture.toLowerCase()) return !getFeatureFlags().webgpu_canvas_2d_readpixels;
-      if (gP("webgpu_platform_device_config").get("block_missing_graphics_card_name", !1) && 0 === e.graphicsCardName.length) return !0;
-      let t = gP("webgpu_platform_device_config").get("graphics_card_blocklist", []);
-      let i = gP("webgpu_platform_device_config").get("vendor_architecture_blocklist", []);
+      if (getInitialDynamicConfig("webgpu_platform_device_config").get("block_missing_graphics_card_name", !1) && 0 === e.graphicsCardName.length) return !0;
+      let t = getInitialDynamicConfig("webgpu_platform_device_config").get("graphics_card_blocklist", []);
+      let i = getInitialDynamicConfig("webgpu_platform_device_config").get("vendor_architecture_blocklist", []);
       return t.some(t => e.graphicsCardName.toLowerCase().includes(t.toLowerCase())) || i.some(t => t.vendor === e.webgpuVendor && t.architecture === e.webgpuArchitecture);
     }(this._gpuDeviceInfo)) {
       this._initializationStatus = "webgpu_disallow_list";

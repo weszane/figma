@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { ResourceStatus } from "../905/663269";
 import { analyticsEventManager } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { g as _$$g } from "../figma_app/618031";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { Em } from "../figma_app/976749";
@@ -31,7 +31,7 @@ let L = () => !!useCurrentUserOrgId();
 export function $$P11() {
   let {
     getConfig
-  } = I7("exp_at_mention_invited_users");
+  } = selectExperimentConfigHook("exp_at_mention_invited_users");
   return useCallback(t => !!function ({
     showExpAtMentionInvite: e,
     isDraftFile: t,
@@ -45,13 +45,13 @@ export function $$P11() {
 export function $$D21() {
   let {
     getConfig
-  } = I7("exp_plan_user_creation_context_org_member_flyout");
+  } = selectExperimentConfigHook("exp_plan_user_creation_context_org_member_flyout");
   return useCallback(t => t === FOrganizationLevelType.ORG && getConfig().get("enabled", !1), [getConfig]);
 }
 export function $$k10() {
   let {
     getConfig
-  } = I7("exp_cart_optimizations_sticker_shock");
+  } = selectExperimentConfigHook("exp_cart_optimizations_sticker_shock");
   return !!getConfig().getValue("enabled", !1);
 }
 export function $$M2({
@@ -78,14 +78,14 @@ export function $$U1(e, t) {
   return !!e && !t;
 }
 export function $$B15() {
-  let e = I7("exp_adv_prototyping_upsell");
+  let e = selectExperimentConfigHook("exp_adv_prototyping_upsell");
   return useCallback(() => !!e.getConfig().getValue("showUpsell", !1), [e]);
 }
 export var $$G0 = (e => (e.CONTROL = "control", e.VARIANT_A = "variantA", e.VARIANT_B = "variantB", e))($$G0 || {});
 export function $$V8() {
   let {
     getConfig
-  } = I7("exp_fbg_navigation_updates");
+  } = selectExperimentConfigHook("exp_fbg_navigation_updates");
   let t = useCurrentPrivilegedPlan("useFBGNavigationUpdatesTreatment").unwrapOr(null);
   let r = t?.key.type === FOrganizationLevelType.TEAM;
   let n = t?.tier === FPlanNameType.STARTER;
@@ -94,42 +94,42 @@ export function $$V8() {
 export function $$H6() {
   let {
     getConfig
-  } = I7("exp_separate_billing_and_shipping_addresses");
+  } = selectExperimentConfigHook("exp_separate_billing_and_shipping_addresses");
   return !!getConfig().getValue("is_enabled", !1);
 }
 export function $$z32() {
   let {
     getConfig
-  } = I7("seat_billing_terms");
+  } = selectExperimentConfigHook("seat_billing_terms");
   return !!getConfig().getValue("enabled", !1);
 }
 export function $$W14() {
   let {
     getConfig
-  } = I7("exp_drafts_page_limit_v1");
+  } = selectExperimentConfigHook("exp_drafts_page_limit_v1");
   return useCallback(t => !!(getFeatureFlags().exp_drafts_page_limit_v1_new_user && !t.parentOrgId && t.editorType === FFileType.DESIGN && isTeamFolderV2(t.project)) && !!t.team && !hasTeamStatePaidAccess(t.team) && !!t.canEdit && getConfig().get("apply_drafts_page_limit", !1), [getConfig]);
 }
 export function $$K27() {
-  let e = I7("starter_global_file_limits");
+  let e = selectExperimentConfigHook("starter_global_file_limits");
   return !!e?.getConfig().getValue("enabled", !1);
 }
 export function $$Y22() {
   let {
     getConfig
-  } = I7("exp_scim_group");
+  } = selectExperimentConfigHook("exp_scim_group");
   return useCallback(() => !!getConfig().getValue("enabled", !1), [getConfig]);
 }
 export function $$$18(e) {
   let {
     getConfig
-  } = I7(e ? "exp_drafts_copy_link_v2_org" : "exp_drafts_copy_link_v2_team");
+  } = selectExperimentConfigHook(e ? "exp_drafts_copy_link_v2_org" : "exp_drafts_copy_link_v2_team");
   getFeatureFlags().statsig_aa_flag_plan_key_web;
   return !!getConfig().getValue("has_drafts_copy_link_experience", !1);
 }
 export function $$X17() {
   let {
     getConfig
-  } = I7("exp_dismissible_uub");
+  } = selectExperimentConfigHook("exp_dismissible_uub");
   return useCallback(() => getConfig().get("enabled", !1), [getConfig]);
 }
 export function $$q36() {
@@ -150,10 +150,10 @@ export function $$q36() {
   let h = _ === FVisibilityType.ALL_USERS || _ === FVisibilityType.MEMBERS;
   let {
     getConfig
-  } = I7("exp_seat_choice_in_nux_team_id");
+  } = selectExperimentConfigHook("exp_seat_choice_in_nux_team_id");
   let {
     getConfig: _getConfig
-  } = I7("exp_seat_choice_in_nux_org_id");
+  } = selectExperimentConfigHook("exp_seat_choice_in_nux_org_id");
   let y = u ? getConfig : _getConfig;
   return useCallback(() => {
     let t = !!i?.licenseTypes?.length;
@@ -167,10 +167,10 @@ export function $$J35() {
   let a = !!_$$f("has_marked_ready_for_dev");
   let {
     getConfig
-  } = I7("exp_rfd_signals_upsell_team_id");
+  } = selectExperimentConfigHook("exp_rfd_signals_upsell_team_id");
   let {
     getConfig: _getConfig2
-  } = I7("exp_rfd_signals_upsell_org_id");
+  } = selectExperimentConfigHook("exp_rfd_signals_upsell_org_id");
   let l = r ? getConfig : _getConfig2;
   return useCallback(() => !a && (!r || !!t) && l().get("enabled", !1), [l, r, t, a]);
 }
@@ -182,7 +182,7 @@ export function $$Z4() {
   } = t?.key ?? {};
   let {
     getConfig
-  } = I7(type === FOrganizationLevelType.TEAM ? "exp_approve_in_file_pro_team" : "exp_approve_in_file_org");
+  } = selectExperimentConfigHook(type === FOrganizationLevelType.TEAM ? "exp_approve_in_file_pro_team" : "exp_approve_in_file_org");
   return void 0 !== type && !!getConfig().getValue("show_request_in_file", !1);
 }
 export function $$Q7() {
@@ -208,7 +208,7 @@ export function $$et29() {
     let t = _$$g(e);
     let {
       getConfig
-    } = I7("exp_pro_annual_improvements_may_2025");
+    } = selectExperimentConfigHook("exp_pro_annual_improvements_may_2025");
     return useCallback(() => e?.tier === FPlanNameType.PRO && !!t && !!getConfig().getValue("enabled", !1), [e, t, getConfig]);
   }();
   return useCallback(() => e() || !!getFeatureFlags().new_annual_seats_ctas, [e]);
@@ -216,7 +216,7 @@ export function $$et29() {
 export function $$er16() {
   let {
     getConfig
-  } = I7("exp_cart_seat_selection_clarity");
+  } = selectExperimentConfigHook("exp_cart_seat_selection_clarity");
   return useCallback(() => !!getConfig().getValue("enabled", !1), [getConfig]);
 }
 export function $$en26({
@@ -226,10 +226,10 @@ export function $$en26({
   let r = useIsStarterOrStudentPlan(t);
   let {
     getConfig
-  } = I7("exp_pro_admin_plan_invite_with_seat", void 0, e);
+  } = selectExperimentConfigHook("exp_pro_admin_plan_invite_with_seat", void 0, e);
   let {
     getConfig: _getConfig3
-  } = I7("exp_org_admin_plan_invite_with_seat", void 0, e);
+  } = selectExperimentConfigHook("exp_org_admin_plan_invite_with_seat", void 0, e);
   return useCallback(({
     isPlanAdmin: e
   }) => {
@@ -249,10 +249,10 @@ export function $$en26({
 export function $$ei25() {
   let {
     getConfig
-  } = I7("exp_pro_admin_file_invite_with_seat");
+  } = selectExperimentConfigHook("exp_pro_admin_file_invite_with_seat");
   let {
     getConfig: _getConfig4
-  } = I7("exp_org_admin_file_invite_with_seat");
+  } = selectExperimentConfigHook("exp_org_admin_file_invite_with_seat");
   let r = useCurrentPublicPlan("useIsInviteToFileWithSeatExpEnabled").unwrapOr(null);
   return useCallback(({
     rolePending: n,
@@ -362,7 +362,7 @@ export function $$el33() {
   let e = useCanAccessFullDevMode();
   let {
     getConfig
-  } = I7("exp_dt_mcp_callout");
+  } = selectExperimentConfigHook("exp_dt_mcp_callout");
   let r = !!_$$f("dev_mode_has_enabled_mcp_server");
   return useCallback(() => !!e && !r && getConfig().getValue("enabled", !1), [getConfig, e, r]);
 }
@@ -377,16 +377,16 @@ export function $$ed20() {
   }();
   let {
     getConfig
-  } = I7("seat_management_widget_pro");
+  } = selectExperimentConfigHook("seat_management_widget_pro");
   return useCallback(r => e(r) && !!getFeatureFlags().seat_billing_interval_people_tab && getConfig().get("enabled", !1), [e, getConfig]);
 }
 export function $$ec5() {
   let {
     getConfig
-  } = I7("seat_management_widget_pro");
+  } = selectExperimentConfigHook("seat_management_widget_pro");
   let {
     getConfig: _getConfig5
-  } = I7("seat_management_widget_org");
+  } = selectExperimentConfigHook("seat_management_widget_org");
   let r = useTeamPlanFeatures().unwrapOr(null)?.type;
   return useCallback(() => {
     if (!getFeatureFlags().billing_page_updates_jul_2025) return !1;
@@ -403,7 +403,7 @@ export function $$ec5() {
 export function $$eu34() {
   let {
     getConfig
-  } = I7("exp_send_to_make");
+  } = selectExperimentConfigHook("exp_send_to_make");
   let t = function () {
     let e = Em();
     let t = _$$y().transform(e => e?.canCreateFigmakeFileWithReasons.result ?? !1).unwrapOr(!1);
@@ -419,37 +419,37 @@ export function $$ep9({
 }) {
   let {
     getConfig
-  } = I7("exp_make_empty_state_refresh", void 0, e);
+  } = selectExperimentConfigHook("exp_make_empty_state_refresh", void 0, e);
   return useCallback(() => getConfig().get("enabled", !1) ?? !1, [getConfig]);
 }
 export function $$e_12() {
   let {
     getConfig
-  } = I7("exp_figma_make_prototype_tab_upsell");
+  } = selectExperimentConfigHook("exp_figma_make_prototype_tab_upsell");
   return useCallback(() => getConfig().get("enabled", !1), [getConfig]);
 }
 export function $$eh28() {
   let {
     getConfig
-  } = I7("exp_make_file_creation_tooltip");
+  } = selectExperimentConfigHook("exp_make_file_creation_tooltip");
   return useCallback(() => getConfig().get("enabled", !1), [getConfig]);
 }
 export function $$$$em13() {
   let {
     getConfig
-  } = I7("exp_figma_make_design_editor_popout_upsell");
+  } = selectExperimentConfigHook("exp_figma_make_design_editor_popout_upsell");
   return useCallback(() => getConfig().get("enabled", !1), [getConfig]);
 }
 export function $$eg30(e) {
   let {
     getConfig
-  } = I7("exp_high_pri_notifs_v2");
+  } = selectExperimentConfigHook("exp_high_pri_notifs_v2");
   return !!_$$h() && !!e && getConfig().getValue("has_high_priority_filter", !1);
 }
 export function $$ef31() {
   let {
     getConfig
-  } = I7("exp_one_click_resubscribe", !1, !0);
+  } = selectExperimentConfigHook("exp_one_click_resubscribe", !1, !0);
   let {
     can_one_click_resubscribe
   } = getFeatureFlags();

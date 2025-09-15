@@ -32,7 +32,7 @@ import { permissionScopeHandler as _$$l, scopeAwareFunction as _$$nc, zk } from 
 import { trackFileEventWithStore, trackFileEventWithUser } from "../figma_app/901889";
 import { reportError } from "../905/11";
 import { MZ, Dy } from "../figma_app/925970";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { fG as _$$fG } from "../905/772425";
 import { zW } from "../905/162414";
@@ -159,7 +159,7 @@ import { V as _$$V2 } from "../905/223767";
 import { popModalStack, showModalHandler, showModal } from "../905/156213";
 import { zN } from "../figma_app/579169";
 import { mW as _$$mW } from "../figma_app/797994";
-import { UQ } from "../figma_app/864723";
+import { isStarterUserAtom } from "../figma_app/864723";
 import { TeamFileCountsByTeamId } from "../figma_app/43951";
 import { UpsellModalType } from "../905/165519";
 import { EL } from "../905/858282";
@@ -217,7 +217,7 @@ import { n as _$$n5 } from "../905/734251";
 import { sx as _$$sx2 } from "../905/941192";
 import { QP, op as _$$op, $3 } from "../figma_app/487970";
 import { w5 } from "../figma_app/15924";
-import { bV as _$$bV, Lt } from "../figma_app/808294";
+import { getProductPriceString, hasTrialAvailable } from "../figma_app/808294";
 import { G8 } from "../figma_app/777551";
 import { xp as _$$xp, EO, gn as _$$gn, lt as _$$lt, aQ as _$$aQ } from "../figma_app/86989";
 import { z as _$$z } from "../3276/638169";
@@ -320,7 +320,7 @@ import { UI } from "../figma_app/471982";
 import { Uo } from "../figma_app/354658";
 import { PreviewMode } from "../figma_app/707808";
 import { Z as _$$Z2 } from "../figma_app/684783";
-import { eg as _$$eg2 } from "../figma_app/690075";
+import { formatPublisherNames } from "../figma_app/690075";
 import { O as _$$O } from "../figma_app/71774";
 import { F as _$$F3 } from "../figma_app/603239";
 import { A as _$$A10 } from "../6828/564422";
@@ -347,7 +347,7 @@ import { wg, sM as _$$sM, FN as _$$FN, hZ as _$$hZ, Zj as _$$Zj, fV as _$$fV, LY
 import { k as _$$k5 } from "../905/44647";
 import { P as _$$P3 } from "../vendor/348225";
 import { isInteractionPathCheck } from "../figma_app/897289";
-import { Fu as _$$Fu } from "../figma_app/545877";
+import { userFlagAtomFamily } from "../figma_app/545877";
 import { O1, KD } from "../figma_app/317394";
 import { useFullscreenReady } from "../905/924253";
 import { t as _$$t6 } from "../905/181774";
@@ -358,7 +358,7 @@ import { PH } from "../figma_app/701580";
 import { E as _$$E5 } from "../905/53857";
 import { n as _$$n8 } from "../vendor/110313";
 import { a as _$$a6 } from "../905/29104";
-import { $ as _$$$ } from "../905/355607";
+import { shouldOptimizeForIpad } from "../905/355607";
 import { A as _$$A13 } from "../svg/972494";
 import { c1 as _$$c5, Yh as _$$Yh } from "../figma_app/357047";
 import { c as _$$c6 } from "../905/850166";
@@ -774,7 +774,7 @@ async function Y(e, t, i, n, r, a) {
       fileKey: e,
       mentionedUserId: n.id
     })).data.meta.needs_invite;
-    r(_$$b({
+    r(postUserFlag({
       has_used_canvas_mentions: !0
     }));
     let p = _$$x(nodeId, store);
@@ -3501,7 +3501,7 @@ let nV = memo(function () {
   return isNotMobile() ? jsx(nB, {}) : jsx(nH, {});
 });
 function n3() {
-  let e = useAtomWithSubscription(UQ);
+  let e = useAtomWithSubscription(isStarterUserAtom);
   let t = useAtomWithSubscription(zN);
   let i = 1e3 * parseFloat(_$$H2) + 300;
   let [n, r] = useState(!1);
@@ -3585,7 +3585,7 @@ function n4(e) {
   }, [c, userFlag]);
   let m = () => {
     u(popModalStack());
-    u(_$$b({
+    u(postUserFlag({
       [userFlag]: !0
     }));
     h[userFlag] = {
@@ -4083,8 +4083,8 @@ function aE(e) {
     },
     children: [jsx("div", {
       className: "browse_plugins_universal_modal_tiles--priceBadge--L2Q5M ellipsis--ellipsis--Tjyfa",
-      children: _$$bV(e.plugin.monetized_resource_metadata)
-    }), Lt({
+      children: getProductPriceString(e.plugin.monetized_resource_metadata)
+    }), hasTrialAvailable({
       resource: e.plugin,
       payment: i
     }) && jsx(w5, {
@@ -6138,7 +6138,7 @@ function ln(e) {
             firstPublisherName: v[0]?.name,
             multiplePublisherSuffix: jsx("span", {
               "data-tooltip-type": KindEnum.TEXT,
-              "data-tooltip": _$$eg2(v.slice(1), v.length, e => e.name),
+              "data-tooltip": formatPublisherNames(v.slice(1), v.length, e => e.name),
               children: renderI18nText("whiteboard.inserts.and_others")
             })
           })
@@ -6692,7 +6692,7 @@ function lk(e) {
             firstPublisherName: p[0]?.name,
             multiplePublisherSuffix: jsx("span", {
               "data-tooltip-type": KindEnum.TEXT,
-              "data-tooltip": _$$eg2(p.slice(1), p.length, e => e.name),
+              "data-tooltip": formatPublisherNames(p.slice(1), p.length, e => e.name),
               children: renderI18nText("whiteboard.inserts.and_others")
             })
           })
@@ -6847,7 +6847,7 @@ function lD(e) {
             firstPublisherName: r[0]?.name,
             multiplePublisherSuffix: jsx("span", {
               "data-tooltip-type": KindEnum.TEXT,
-              "data-tooltip": _$$eg2(r.slice(1), r.length, e => e.name),
+              "data-tooltip": formatPublisherNames(r.slice(1), r.length, e => e.name),
               children: renderI18nText("whiteboard.inserts.and_others")
             })
           })
@@ -7455,7 +7455,7 @@ function de({
   closeButtonInnerText: n,
   testIdPrefix: r
 }) {
-  let a = _$$$();
+  let a = shouldOptimizeForIpad();
   return jsxs("div", {
     className: "figjam_panel_header--headerContainer--fVdY4",
     children: [jsx("h2", {
@@ -8553,7 +8553,7 @@ function cp({
   onGenerate: e
 }) {
   let t = useAtomWithSubscription(_$$zS) === Wl.TOP_BAR;
-  let i = useAtomWithSubscription(_$$Fu(Pg));
+  let i = useAtomWithSubscription(userFlagAtomFamily(Pg));
   return jsxs("div", {
     "data-fullscreen-prevent-event-capture": !0,
     className: ex()(_$$s.colorBg.flex.flexColumn.$, "ai_modal--generateContainerV2--vAeZh", {
@@ -10237,7 +10237,7 @@ function u6(e) {
   let c = useDispatch();
   let p = useSelector(e => e.userFlags.seen_alt_text_explanation);
   let h = useCallback(() => {
-    !p && n && c(_$$b({
+    !p && n && c(postUserFlag({
       seen_alt_text_explanation: !0
     }));
   }, [p, n, c]);
@@ -17721,7 +17721,7 @@ function g9({
   let p = useDispatch();
   let h = useSelector(e => e.music.playerInstance);
   let m = e || g4;
-  let f = _$$$();
+  let f = shouldOptimizeForIpad();
   let x = [jsx(_$$c$3, {
     fullWidth: !0,
     ignoreCheck: !0,
@@ -19668,7 +19668,7 @@ function ju() {
       })
     }), jsx(_$$K, {
       onClick: () => {
-        a(_$$b({
+        a(postUserFlag({
           dismissed_figjam_music_volume_hint: !0
         }));
       },
@@ -19752,7 +19752,7 @@ let jj = "playback_control_button--mediaControlButton--Wp3H1";
 let jb = "playback_control_button--withHover--9DG-T";
 var jy = (e => (e.PLAY = "play", e.PAUSE = "pause", e.STOP = "stop", e))(jy || {});
 function jv(e) {
-  let t = _$$$();
+  let t = shouldOptimizeForIpad();
   let {
     buttonState,
     onClick,
@@ -22446,7 +22446,7 @@ function yy({
   });
 }
 function yv() {
-  let e = _$$$();
+  let e = shouldOptimizeForIpad();
   return jsx("div", {
     className: "volume_view--volumeView--XbP1r",
     children: jsx(yy, {
@@ -22557,7 +22557,7 @@ function yT() {
 }
 function yE() {
   let e = useAtomWithSubscription(Qs);
-  let t = _$$$();
+  let t = shouldOptimizeForIpad();
   let i = qU();
   let n = Av();
   let r = U1();
@@ -22820,7 +22820,7 @@ function y0() {
       if (!s) return;
       let t = window.setTimeout(() => {
         i(!0);
-        a(_$$b({
+        a(postUserFlag({
           [y$]: !0
         }));
       }, e?.delay_ms || 1e4);
@@ -22933,7 +22933,7 @@ function y0() {
     let i = II();
     return !e && !t.isOpen && 0 === i.length;
   }(renderGleam);
-  let C = _$$$();
+  let C = shouldOptimizeForIpad();
   let T = Av();
   let E = e.isOpen || n.length > 0;
   return jsxs("div", {

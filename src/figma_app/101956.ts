@@ -6,11 +6,11 @@ import { hasTeamPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { M_ } from "../905/32091";
 import { a as _$$a } from "../905/692930";
-import { Z1, J9 } from "../905/401885";
+import { transformAtom, mapAndAggregateResources } from "../905/401885";
 import { _s, KI } from "../figma_app/33126";
 import { Z_, Hh, Vm } from "../figma_app/579169";
-import { r1 } from "../figma_app/545877";
-let $$m3 = Z1(Z_, (e, t) => {
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
+let $$m3 = transformAtom(Z_, (e, t) => {
   let r = t(openFileAtom);
   if (null == r || null == e) return !1;
   let n = e.map(e => e.team).find(e => null != e && e.id === r.teamId);
@@ -19,7 +19,7 @@ let $$m3 = Z1(Z_, (e, t) => {
     grace_period_type: n.gracePeriodType
   }) === _$$a.IN_TRIAL;
 });
-let $$g5 = J9([Hh], ([e], t) => {
+let $$g5 = mapAndAggregateResources([Hh], ([e], t) => {
   let r = t(openFileAtom);
   let n = t(_s) ? null : e;
   return !!r && !!n && !r.teamId && !r.parentOrgId && r.folderId === n;
@@ -30,12 +30,12 @@ let f = createReduxSubscriptionAtomWithState(({
 let $$E4 = atom(e => new Promise(t => {
   e(f) || t(!1);
 }));
-let $$y7 = r1("figjam_editor_onboarded");
-let b = Z1(Vm, (e, t) => {
+let $$y7 = userFlagExistsAtomFamily("figjam_editor_onboarded");
+let b = transformAtom(Vm, (e, t) => {
   let r = t(openFileAtom);
   return r?.teamId ? e?.find(e => e.id === r?.teamId) : null;
 });
-let $$T0 = J9([KI, b], ([e, t], r) => {
+let $$T0 = mapAndAggregateResources([KI, b], ([e, t], r) => {
   let n = r(openFileAtom);
   let i = n?.parentOrgId ? e[n.parentOrgId] : null;
   let s = t ? {

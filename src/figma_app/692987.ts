@@ -1,6 +1,6 @@
 import { isNotNullish } from "../figma_app/95419";
 import { N_ } from "../905/332483";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 export function $$s1(e, t) {
   let r = 0;
   N_.forEach(i => {
@@ -19,7 +19,7 @@ export function $$l0(e, t, r) {
   return $$s1(e, t) + $$o2(e, t, r);
 }
 export function $$d3(e, t, r) {
-  return new vr(t).formatMoney(e, r);
+  return new CurrencyFormatter(t).formatMoney(e, r);
 }
 export const N9 = $$l0;
 export const Vh = $$s1;

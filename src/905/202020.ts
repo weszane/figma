@@ -19,7 +19,7 @@ import { trackFileBrowserFileClick, trackFileArrayEvent } from "../figma_app/314
 import { restoreFiles, generateUrlAlt } from "../905/760074";
 import { createOptimistThunk } from "../905/350402";
 import { oB, j7, sf } from "../905/929976";
-import { S as _$$S } from "../figma_app/78808";
+import { copyShareLinkOptimistic } from "../figma_app/78808";
 import { kj } from "../905/191601";
 import { showModalHandler, hideModal } from "../905/156213";
 import { ShareContext } from "../905/91820";
@@ -185,7 +185,7 @@ export function $$V0(e) {
     children: renderI18nText("collaboration.branching.restore")
   }, "restore")), jsx(c$, {
     onClick: () => {
-      t(_$$S({
+      t(copyShareLinkOptimistic({
         fileKey: e.branch.key,
         url: generateUrlAlt(e.branch, e.repo, "file").href,
         source: ShareContext.FULLSCREEN_BRANCH

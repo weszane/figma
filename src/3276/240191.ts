@@ -1,12 +1,12 @@
 import { atom } from "../figma_app/27355";
-import { p9 } from "../figma_app/864723";
+import { userAtom } from "../figma_app/864723";
 import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { Z1 } from "../905/401885";
-import { r1 } from "../figma_app/545877";
+import { transformAtom } from "../905/401885";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 let d = createReduxSubscriptionAtomWithState(e => e.multiplayer.allUsers);
 atom(e => {
-  let t = e(p9);
+  let t = e(userAtom);
   let n = e(d);
   if (t && 0 !== n.length) return n.filter(e => e.userID !== t.id);
 });
@@ -16,8 +16,8 @@ let $$m2 = atom(e => {
   let n = e(c);
   return null != e(openFileAtom) && null != n && new Set(t.filter(e => e.deviceName === n).map(e => e.userID)).size > 1;
 });
-let u = r1("seen_spotlight_hint");
-let $$p1 = Z1(u, (e, t) => {
+let u = userFlagExistsAtomFamily("seen_spotlight_hint");
+let $$p1 = transformAtom(u, (e, t) => {
   let n = t(d);
   let o = t(c);
   if (t(h)) return !1;

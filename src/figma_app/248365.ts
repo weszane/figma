@@ -5,7 +5,7 @@ import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription 
 import { trackEventAnalytics } from "../905/449184";
 import { DT } from "../figma_app/320164";
 import { customHistory } from "../905/612521";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { tl } from "../figma_app/781453";
 import { zq } from "../figma_app/598412";
 import { A } from "../figma_app/122760";
@@ -18,7 +18,7 @@ let f = atom({
   mounted: !1
 });
 let E = atom(!1);
-export function $$y1(e = qB.SIGN_IN, t = {}) {
+export function $$y1(e = AuthFlowStep.SIGN_IN, t = {}) {
   if (t.preventDefaultRedirect && (t.authOptions ??= {}, t.authOptions.redirect_url = customHistory.location.pathname + customHistory.location.search), atomStoreManager.get(E)) !function (e) {
     let t = document.querySelector("iframe#figma-auth-iframe");
     t?.contentWindow?.postMessage(e, location.origin);
@@ -31,7 +31,7 @@ export function $$y1(e = qB.SIGN_IN, t = {}) {
   });else {
     let r = new URLSearchParams(t.authOptions);
     let n = "/login_iframe";
-    e === qB.SIGN_UP && r.append("form_state", "sign_up");
+    e === AuthFlowStep.SIGN_UP && r.append("form_state", "sign_up");
     r.append("one_tap_origin", DT.COMMUNITY);
     r.append("type", "fixedmodal");
     r.append("with_community_header", "true");

@@ -1,12 +1,12 @@
 import { getFeatureFlags } from "../905/601108";
-import { Fj } from "../figma_app/594947";
+import { setupDynamicConfigHandler } from "../figma_app/594947";
 import { useCurrentPublicPlan, useCurrentPrivilegedPlan } from "../figma_app/465071";
 export function $$o0() {
   let e = useCurrentPublicPlan("useCanUseCodebaseSuggestions").unwrapOr(null);
   let t = e?.key;
   let {
     getDynamicConfig
-  } = Fj("codebase_components_v2_plan_config");
+  } = setupDynamicConfigHandler("codebase_components_v2_plan_config");
   let o = getDynamicConfig().get("org_ids", []);
   return !!(t?.parentId && o && o.includes(t?.parentId)) || !!getFeatureFlags().dt_ccv2_component_browser;
 }

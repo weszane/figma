@@ -45,7 +45,7 @@ import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN, Lo, Je, I2, Vm, Bq, Nj, Ay as _$$Ay, qU } from "../figma_app/482142";
 import { S_, gk } from "../5885/925885";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { e5, Mh, Dj } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { withTrackedInput, TrackingProvider } from "../figma_app/831799";
@@ -60,7 +60,7 @@ import { FC } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { LM, z4 } from "../figma_app/518077";
 import { M4 } from "../905/713695";
-import { LN, ub } from "../figma_app/514043";
+import { getUserCurrency, getUserIsoCodeIfNonUsd } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess, getBillingCycleFromSubscriptionType, getSubscriptionTypeFromBillingCycle } from "../figma_app/345997";
 import { Ud, OI } from "../c5e2cae0/2942";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
@@ -486,7 +486,7 @@ function eY(e) {
     rolesByTeamId: O
   });
   let [e_, eN] = useState(!1);
-  let [eC, ew] = useState(n?.currency || x.currency || LN());
+  let [eC, ew] = useState(n?.currency || x.currency || getUserCurrency());
   let eE = e => {
     ew(e);
     to(MN({
@@ -565,7 +565,7 @@ function eY(e) {
     paymentFlowSource: wn.PRO_UPGRADE,
     currency: eC,
     billingPeriod: eA,
-    defaultCountry: ub(),
+    defaultCountry: getUserIsoCodeIfNonUsd(),
     initialBillingAddress: n?.billing_address,
     initialNameOnPaymentMethod: n?.name_on_payment_method,
     initialShippingAddress: n?.shipping_address,
@@ -645,7 +645,7 @@ function eY(e) {
   } = LM(ty, tT ?? null);
   let tb = useSelector(e => isOrgUserExternallyRestrictedFromState(e));
   _$$h(() => {
-    to(_$$b({
+    to(postUserFlag({
       entered_pro_cart_flow: !0
     }));
   });
@@ -953,7 +953,7 @@ function eY(e) {
                   }
                 }));
               } else {
-                to(_$$b({
+                to(postUserFlag({
                   completed_pro_cart_flow: !0
                 }));
                 let {

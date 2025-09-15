@@ -6,13 +6,13 @@ import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { getTrackingSessionId } from "../905/471229";
 import { isEditDisabled } from "../figma_app/459490";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { B as _$$B } from "../figma_app/750676";
 import { T as _$$T } from "../905/793009";
 import { _s } from "../figma_app/33126";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { J } from "../905/915227";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
@@ -106,11 +106,11 @@ let ea = atom(null, async (e, t, {
     status: _$$c.NONE
   };
   t(Mg, e => e + 1);
-  e(r1($$P11)).data || debugState.dispatch(_$$b({
+  e(userFlagExistsAtomFamily($$P11)).data || debugState.dispatch(postUserFlag({
     [$$P11]: !0
   }));
-  let L = e(r1($$D7)).data;
-  I && !L && debugState.dispatch(_$$b({
+  let L = e(userFlagExistsAtomFamily($$D7)).data;
+  I && !L && debugState.dispatch(postUserFlag({
     [$$D7]: !0
   }));
   t($$z9);
@@ -119,7 +119,7 @@ let ea = atom(null, async (e, t, {
     orgId: e(_s),
     teamId: e(openFileTeamIdAtom) || null,
     fileKey: r,
-    userId: e(kS) || null,
+    userId: e(userIdAtom) || null,
     trackingSessionId: getTrackingSessionId(),
     fileSeq: e(J)?.toString() || null
   };

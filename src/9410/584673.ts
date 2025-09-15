@@ -17,9 +17,9 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
 import { c$ } from "../905/794875";
 import { w as _$$w } from "../figma_app/654279";
@@ -60,7 +60,7 @@ function N() {
 let K = "figjam_organize_sort_stickies_sub_menu";
 let $$H0 = "https://help.figma.com/hc/articles/16822138920343-Use-AI-tools-in-Figma";
 let z = "used_figjam_ai_quick_actions";
-let V = r1(z);
+let V = userFlagExistsAtomFamily(z);
 function W(e) {
   switch (e) {
     case Uj.SUMMARIZE:
@@ -126,7 +126,7 @@ export function $$Y1() {
         variant: "menu",
         getTriggerProps: () => getTriggerProps({
           onClick: () => {
-            b && A(_$$b2({
+            b && A(postUserFlag({
               [z]: !0
             }));
           }
@@ -282,7 +282,7 @@ let J = withTrackedClick(function ({
     disabled: l,
     onClick: l ? lQ : () => {
       e();
-      d && c(_$$b2({
+      d && c(postUserFlag({
         [z]: !0
       }));
     },

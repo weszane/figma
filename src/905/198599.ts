@@ -8,7 +8,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { hW } from "../figma_app/594947";
+import { getExperimentConfigAsync } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { yt, m1, SW, T1 } from "../figma_app/545293";
@@ -183,7 +183,7 @@ export async function $$H1(e, t) {
         totalShownResults: a.length,
         tier: atomStoreManager.get(getPlanPublicInfoAtomFamily(!0)).data?.tier
       };
-      await hW("exp_asset_search_refactor");
+      await getExperimentConfigAsync("exp_asset_search_refactor");
       analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
         ...e,
         searchSessionId: G ?? ""

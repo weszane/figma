@@ -2,7 +2,7 @@ import { atom, atomStoreManager } from "../figma_app/27355";
 import i from "../vendor/946678";
 import { analyticsEventManager } from "../905/449184";
 import { WebLoggerTimer } from "../905/485103";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { PrimaryWorkflowEnum, hasAssetId } from "../figma_app/633080";
 import { I } from "../figma_app/130633";
 import { Ci } from "../figma_app/318590";
@@ -118,7 +118,7 @@ export async function $$I7(e) {
     query,
     searchType
   } = e;
-  let m = (await w0("max_asset_search_results_to_log")).get("count", 20);
+  let m = (await fetchDynamicConfig("max_asset_search_results_to_log")).get("count", 20);
   results.slice(0, m).forEach((e, t) => {
     let l = e.library_key;
     let m = $$b10(l, libraryKey, subscribedLibraryKeys);

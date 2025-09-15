@@ -43,7 +43,7 @@ import { OrgIdpManagementPageView } from '../figma_app/43951';
 import { Yy } from '../figma_app/59509';
 import { JR, Wi } from '../figma_app/162641';
 import { useSubscription } from '../figma_app/288654';
-import { Fj } from '../figma_app/594947';
+import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { TrackingProvider } from '../figma_app/831799';
 import { useLatestRef } from '../figma_app/922077';
 import i from '../vendor/128080';
@@ -618,7 +618,7 @@ let e_ = {
 function eu() {
   let {
     getDynamicConfig
-  } = Fj('multi_idp_nickname');
+  } = setupDynamicConfigHandler('multi_idp_nickname');
   return getDynamicConfig().get('enabled', !1);
 }
 let em = {
@@ -1045,7 +1045,7 @@ function eb(e) {
 function ev() {
   let {
     getDynamicConfig
-  } = Fj('multi_idp_nickname');
+  } = setupDynamicConfigHandler('multi_idp_nickname');
   return getDynamicConfig().get('enabled', !1);
 }
 let ef = {
@@ -1209,7 +1209,7 @@ let eC = {
 export function $$eS1() {
   let {
     getDynamicConfig
-  } = Fj('multi_idp_scim');
+  } = setupDynamicConfigHandler('multi_idp_scim');
   return getDynamicConfig().get('enabled', !1);
 }
 export const a = $$eE0;

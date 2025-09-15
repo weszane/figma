@@ -36,7 +36,7 @@ import { getBasename } from "../905/309735";
 import { Oe } from "../figma_app/336853";
 import { e as _$$e2 } from "../figma_app/882253";
 import { KindEnum } from "../905/129884";
-import { V9 } from "../905/72677";
+import { resourceDataToSubscriptionMapAtom } from "../905/72677";
 import { J as _$$J } from "../905/225412";
 import { Cq } from "../figma_app/632975";
 import { zi, iL } from "../905/824449";
@@ -358,7 +358,7 @@ function ec({
   let d = useCurrentUserOrg();
   let p = Oe(d);
   let _ = fV(libraryKey);
-  let h = useAtomWithSubscription(V9);
+  let h = useAtomWithSubscription(resourceDataToSubscriptionMapAtom);
   let f = libraryKey ? h[libraryKey]?.hubFileId ?? null : null;
   let E = useCallback(() => {
     r(e);

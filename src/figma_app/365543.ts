@@ -9,7 +9,7 @@ import { Spacing } from "../figma_app/637027";
 import { t as _$$t } from "../905/331623";
 import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { $A } from "../905/782918";
 import { Q } from "../905/346809";
@@ -20,7 +20,7 @@ class T extends RecordingPureComponent {
   constructor() {
     super(...arguments);
     this.onDismiss = () => {
-      this.props.dispatch(_$$b({
+      this.props.dispatch(postUserFlag({
         [this.props.userFlag]: !0
       }));
     };

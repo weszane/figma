@@ -5,7 +5,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { X } from "../905/859195";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -94,7 +94,7 @@ let x = registerModal(function ({
       message: getI18nString("templates.unpublishing.bell.success"),
       type: "template-unpublish-success"
     }));
-    e(yJ({
+    e(filePutAction({
       file: {
         key: C.fileKey,
         is_team_template: !1

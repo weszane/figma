@@ -5,7 +5,7 @@ import o from "../vendor/241899";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { WebLoggerTimer } from "../905/485103";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { JB } from "../figma_app/657017";
 import { compareWithGeneratedKey } from "../905/709171";
 import { isBranchAlt } from "../905/760074";
@@ -155,8 +155,8 @@ export async function $$L7(e, t, r) {
     itemsOnPageFromSubscribedLib: _itemsOnPageFromSubscribedLib,
     itemsNotOnPageFromUnsubscribedLib: _itemsNotOnPageFromUnsubscribedLib
   } = R(stateGroups, _stateGroups);
-  let h = (await w0("max_product_components_to_log")).get("count", 1e3);
-  let m = (await w0("percent_used_product_components_on_page")).get("percent", .5);
+  let h = (await fetchDynamicConfig("max_product_components_to_log")).get("count", 1e3);
+  let m = (await fetchDynamicConfig("percent_used_product_components_on_page")).get("percent", .5);
   let f = w(h, itemsOverlapping, _itemsOverlapping);
   let E = h - f.length;
   let y = w(Math.max(Math.floor(m * E), E - itemsNotOnPageFromUnsubscribedLib.length - _itemsNotOnPageFromUnsubscribedLib.length), itemsOnPageFromSubscribedLib, _itemsOnPageFromSubscribedLib);
@@ -276,7 +276,7 @@ export async function $$B4(e, t, r, n, i, a, s, o) {
       components,
       stateGroups
     } = O(debugState.getState());
-    let u = (await w0("max_product_components_to_log")).get("count", 1e3);
+    let u = (await fetchDynamicConfig("max_product_components_to_log")).get("count", 1e3);
     let _ = {
       query: e,
       libraryKey: t,

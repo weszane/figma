@@ -15,7 +15,7 @@ const errorPatterns = [
   /a\[b\]\.target\.className\.indexOf is not a function/,
   /\(event\.target\.className \|\| ""\)\.indexOf is not a function/,
   /XHR for ".*" failed with status/,
-  /Endpoint requires authenticated user/
+  /Endpoint requires authenticated user/,
 ]
 
 /**
@@ -26,7 +26,7 @@ const externalUrlPatterns = [
   /\bkaspersky-labs\.com\b/,
   /\bchrome-extension:\/\//,
   /\bmoz-extension:\/\//,
-  /\bsafari-extension:\/\//
+  /\bsafari-extension:\/\//,
 ]
 
 /**
@@ -51,11 +51,14 @@ export function normalizeSentryEvent(event: any) {
   // $$y19
   for (const exception of event.exception?.values || []) {
     for (const frame of exception.stacktrace?.frames || []) {
-      if (frame.filename) frame.filename = normalizeUrl(frame.filename)
+      if (frame.filename)
+        frame.filename = normalizeUrl(frame.filename)
     }
   }
-  if (event.request?.url) event.request.url = normalizeUrl(event.request.url)
-  if (typeof event.tags?.url === 'string') event.tags.url = normalizeUrl(event.tags.url)
+  if (event.request?.url)
+    event.request.url = normalizeUrl(event.request.url)
+  if (typeof event.tags?.url === 'string')
+    event.tags.url = normalizeUrl(event.tags.url)
 }
 
 /**
@@ -69,10 +72,10 @@ export function processBreadcrumb(breadcrumb: any) {
   if (category === 'xhr' || category === 'fetch') {
     const url = data?.url
     if (
-      url &&
-      (url.match(/segment.io/) ||
-        url.startsWith('/api/figment-proxy') ||
-        url.startsWith(`${location.origin}/api/figment-proxy`))
+      url
+      && (url.match(/segment.io/)
+        || url.startsWith('/api/figment-proxy')
+        || url.startsWith(`${location.origin}/api/figment-proxy`))
     ) {
       return null
     }
@@ -81,8 +84,10 @@ export function processBreadcrumb(breadcrumb: any) {
     }
   }
   if (breadcrumb.category === 'navigation') {
-    if (data?.from) data.from = normalizeUrl(data.from)
-    if (data?.to) data.to = normalizeUrl(data.to)
+    if (data?.from)
+      data.from = normalizeUrl(data.from)
+    if (data?.to)
+      data.to = normalizeUrl(data.to)
   }
   sentryEventEmitter.trigger('breadcrumb', breadcrumb)
   return breadcrumb
@@ -95,7 +100,7 @@ export enum SeverityLevel {
   Critical = 'critical',
   Major = 'major',
   Minor = 'minor',
-  Trivial = 'trivial'
+  Trivial = 'trivial',
 }
 
 const sentryConfig = getSentryConfig()
@@ -121,11 +126,11 @@ export function setTagsGlobal(tags: Record<string, any>) {
   // $$x1
   if (sentryConfig.enabled) {
     setTags(tags)
-    datadogRum &&
-      datadogRum.setGlobalContext({
-        ...tags,
-        ...datadogRum.getGlobalContext(),
-      })
+    datadogRum
+    && datadogRum.setGlobalContext({
+      ...tags,
+      ...datadogRum.getGlobalContext(),
+    })
   }
 }
 
@@ -136,19 +141,21 @@ export function setTagsGlobal(tags: Record<string, any>) {
  */
 export function setContextGlobal(key: string, value: any) {
   // $$S7
-  if (sentryConfig.enabled) setContext(key, value)
+  if (sentryConfig.enabled)
+    setContext(key, value)
 }
 
 /**
  * Set branching tags for file (xZ)
  * @param file - File object
  */
-export function setBranchingTags(file: { key: string; fileRepoId: string | null; sourceFileKey: string | null }) {
+export function setBranchingTags(file: { key: string, fileRepoId: string | null, sourceFileKey: string | null }) {
   // $$w17
   setTagGlobal('file.key', file.key)
   if (file.fileRepoId === null) {
     setTagGlobal('branching', 'not enabled')
-  } else {
+  }
+  else {
     setTagGlobal('branching_repo', file.fileRepoId)
     setTagGlobal('branching', file.sourceFileKey === null ? 'main branch' : 'user branch')
   }
@@ -160,7 +167,8 @@ export function setBranchingTags(file: { key: string; fileRepoId: string | null;
  */
 export function setSentryUser(userId: string) {
   // $$C5
-  if (userId) setUser({ id: userId })
+  if (userId)
+    setUser({ id: userId })
 }
 
 /**
@@ -169,7 +177,8 @@ export function setSentryUser(userId: string) {
  */
 export function setOrgIdTag(orgId: string) {
   // $$T12
-  if (orgId) setTag('org.id', orgId)
+  if (orgId)
+    setTag('org.id', orgId)
 }
 
 /**
@@ -178,7 +187,8 @@ export function setOrgIdTag(orgId: string) {
  */
 export function setServerReleaseTag(release: string) {
   // $$k14
-  if (release) setTag('server_release', release)
+  if (release)
+    setTag('server_release', release)
 }
 
 /**
@@ -193,7 +203,7 @@ export function normalizeErrorObject(
     depth = 3,
     maxProperties = Infinity,
     exclude = [],
-  }: { depth?: number; maxProperties?: number; exclude?: string[] } = {}
+  }: { depth?: number, maxProperties?: number, exclude?: string[] } = {},
 ) {
   // $$R6
   const excludeProps = [
@@ -238,7 +248,7 @@ export function reportError(
   area: string,
   error: any,
   context?: any,
-  dedupe?: boolean
+  dedupe?: boolean,
 ) {
   // $$O0
   let eventId
@@ -248,25 +258,28 @@ export function reportError(
         const stack = error.stack?.split('\n').slice(1, 3).join('|') || ''
         return `${error.name}:${error.message}:${stack}`
       })()
-      if (reportedSet.has(dedupeKey)) return
+      if (reportedSet.has(dedupeKey))
+        return
       reportedSet.add(dedupeKey)
     }
     error.reportedToSentry = true
-    if (sentryConfig.slogToConsole) console.error(error, context)
+    if (sentryConfig.slogToConsole)
+      console.error(error, context)
     if (sentryConfig.enabled) {
-      withScope(scope => {
-        if (area !== _$$e.UNOWNED) scope.setTag('area', area)
+      withScope((scope) => {
+        if (area !== _$$e.UNOWNED)
+          scope.setTag('area', area)
         if (error.sentryTags) {
           for (const tag in error.sentryTags) scope.setTag(tag, error.sentryTags[tag])
         }
         eventId = captureException(error, context)
       })
-      datadogRum &&
-        datadogRum.addError(error, {
-          captureContext: context,
-          ...(area !== _$$e.UNOWNED && { area }),
-          ...error.sentryTags,
-        })
+      datadogRum
+      && datadogRum.addError(error, {
+        captureContext: context,
+        ...(area !== _$$e.UNOWNED && { area }),
+        ...error.sentryTags,
+      })
     }
     return eventId
   }
@@ -278,8 +291,10 @@ export function reportError(
  */
 export function captureSentryMessage(message: string) {
   // $$D13
-  if (sentryConfig.slogToConsole) console.error(message)
-  if (sentryConfig.enabled) captureMessage(message)
+  if (sentryConfig.slogToConsole)
+    console.error(message)
+  if (sentryConfig.enabled)
+    captureMessage(message)
 }
 
 /**
@@ -289,7 +304,8 @@ export function captureSentryMessage(message: string) {
  */
 export function reportValueError(area: string, value: any) {
   // $$L16
-  if (value == null) reportError(area, new Error(`value is ${void 0 === value ? 'undefined' : 'null'}`))
+  if (value == null)
+    reportError(area, new Error(`value is ${void 0 === value ? 'undefined' : 'null'}`))
 }
 
 /**
@@ -327,6 +343,5 @@ export const xZ = setBranchingTags
 export const xg = externalUrlPatterns
 export const xn = normalizeSentryEvent
 export const yO = errorPatterns
-export const setSentryTag = setTagGlobal
-export const setDatadogTags = setTagsGlobal
-
+// export const setSentryTag = setTagGlobal
+// export const setDatadogTags = setTagsGlobal

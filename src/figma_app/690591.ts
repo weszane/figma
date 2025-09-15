@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
 import { oU, Sr, B3 } from "../905/535224";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { BaseLinkComponent, SecureLink } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P as _$$P } from "../905/347284";
@@ -15,7 +15,7 @@ import { se, fd } from "../figma_app/559491";
 import { aq } from "../figma_app/399472";
 import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { hideModal } from "../905/156213";
 import { _z, ky } from "../905/977218";
 import { WX } from "../figma_app/350203";
@@ -240,7 +240,7 @@ function q(e) {
     children: [jsx("div", {
       className: KE,
       children: i
-    }), jsx(s_, {
+    }), jsx(ModalCloseButton, {
       className: g8,
       dispatch: () => {
         trackEventAnalytics("community_publish_modal", {
@@ -313,7 +313,7 @@ let $$Q0 = registerModal(function (e) {
     }));
   };
   let Q = async e => {
-    e && (et(e), V[e.key] || r(yJ({
+    e && (et(e), V[e.key] || r(filePutAction({
       file: e
     })), await J(e.key));
   };

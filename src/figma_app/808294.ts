@@ -1,180 +1,303 @@
-import { j } from "../905/918929";
-import { getI18nString } from "../905/303541";
-import { D } from "../figma_app/690075";
-import { vr } from "../figma_app/514043";
-import { isPlugin, isWidget, hasMonetizedResourceMetadata, isThirdPartyMonetized, hasClientMeta, hasFreemiumCode } from "../figma_app/45218";
-import { G3, QK } from "../905/272080";
-import { isSubscription, CancellationReason } from "../905/54385";
-let $$c15 = 2;
-let $$u19 = 1e3;
-export function $$p17(e) {
-  if (e?.price) {
-    let {
-      price
-    } = e;
-    return .01 * price;
+import { CancellationReason, isSubscription } from '../905/54385'
+import { SubscriptionStatus, SubscriptionStatusList } from '../905/272080'
+import { getI18nString } from '../905/303541'
+import { partitionByPredicate } from '../905/918929'
+import { hasClientMeta, hasFreemiumCode, hasMonetizedResourceMetadata, isPlugin, isThirdPartyMonetized, isWidget } from '../figma_app/45218'
+import { CurrencyFormatter } from '../figma_app/514043'
+import { collectPublisherUserIds } from '../figma_app/690075'
+
+/**
+ * Minimum price constant (original: $$c15)
+ */
+export const MIN_PRICE = 2
+
+/**
+ * Maximum price constant (original: $$u19)
+ */
+export const MAX_PRICE = 1000
+
+/**
+ * Converts cents to dollars (original: $$p17)
+ * @param item - Object with price in cents
+ * @returns Price in dollars
+ */
+export function centsToDollars(item: { price?: number }) {
+  if (item?.price) {
+    return 0.01 * item.price
   }
 }
-export function $$_13(e) {
-  return e ? 100 * e : 0;
+
+/**
+ * Converts a decimal to percentage (original: $$_13)
+ * @param value - Decimal value
+ * @returns Percentage value
+ */
+export const decimalToPercent = (value?: number) => (value ? 100 * value : 0)
+
+/**
+ * Checks if a number is not an integer (original: $$h1)
+ * @param value - Number to check
+ * @returns True if not integer
+ */
+export const isNotInteger = (value: number) => value % 1 !== 0
+
+/**
+ * Checks if t is greater than e (original: $$m7)
+ * @param e - First number
+ * @param t - Second number
+ * @returns True if t > e
+ */
+export const isGreater = (e: number, t: number) => t > e
+
+/**
+ * Checks if t/e ratio is greater than 1.5 (original: $$g3)
+ * @param e - Denominator
+ * @param t - Numerator
+ * @returns True if ratio > 1.5
+ */
+export const isRatioHigh = (e: number, t: number) => t / e > 1.5
+
+/**
+ * Checks if value is out of allowed price range (original: $$f11)
+ * @param value - Price value
+ * @returns True if out of range
+ */
+export const isPriceOutOfRange = (value: number) => value < MIN_PRICE || value >= MAX_PRICE
+
+/**
+ * Returns formatted annual price string (original: $$E21)
+ * @param price - Price value
+ * @param discount - Discount percentage
+ * @returns Localized price string
+ */
+export function getAnnualPriceString(price: number, discount: number) {
+  if (!price || !discount)
+    return ''
+  const discounted = 1200 * price * (1 - discount / 100)
+  return getI18nString('community.buyer.price_per_year', {
+    priceString: formatCurrency(discounted, discounted % 100 !== 0),
+  })
 }
-export function $$h1(e) {
-  return e % 1 != 0;
-}
-export function $$m7(e, t) {
-  return t > e;
-}
-export function $$g3(e, t) {
-  return t / e > 1.5;
-}
-export function $$f11(e) {
-  return e < $$c15 || e >= $$u19;
-}
-export function $$E21(e, t) {
-  if (!e || !t) return "";
-  let r = 1200 * e * (1 - t / 100);
-  return getI18nString("community.buyer.price_per_year", {
-    priceString: $$I16(r, r % 100 != 0)
-  });
-}
-export function $$y14(e, t = !1) {
-  let {
-    price,
-    is_subscription
-  } = e;
-  if (!is_subscription) return $$I16(price, !1);
-  if (t) {
-    let t = e.annual_price || 0;
-    return getI18nString("community.buyer.price_per_year", {
-      priceString: $$I16(t, t % 100 != 0)
-    });
+
+/**
+ * Returns formatted price string for a product (original: $$y14)
+ * @param item - Product object
+ * @param showAnnual - Show annual price if subscription
+ * @returns Localized price string
+ */
+export function getProductPriceString(item: { price: number, is_subscription?: boolean, annual_price?: number }, showAnnual = false) {
+  const { price, is_subscription } = item
+  if (!is_subscription)
+    return formatCurrency(price, false)
+  if (showAnnual) {
+    const annualPrice = item.annual_price || 0
+    return getI18nString('community.buyer.price_per_year', {
+      priceString: formatCurrency(annualPrice, annualPrice % 100 !== 0),
+    })
   }
-  return getI18nString("community.buyer.price_per_month", {
-    priceString: $$I16(price, price % 100 != 0)
-  });
+  return getI18nString('community.buyer.price_per_month', {
+    priceString: formatCurrency(price, price % 100 !== 0),
+  })
 }
-export function $$b10(e) {
-  let t = $$y14(e);
-  let r = isSubscription(e) ? getI18nString("community.buyer.subscribe") : getI18nString("community.buyer.buy");
-  return `${r} ${t}`;
+
+/**
+ * Returns buy/subscribe label with price (original: $$b10)
+ * @param item - Product object
+ * @returns Localized label string
+ */
+export function getBuyOrSubscribeLabel(item: any) {
+  const priceStr = getProductPriceString(item)
+  const label = isSubscription(item)
+    ? getI18nString('community.buyer.subscribe')
+    : getI18nString('community.buyer.buy')
+  return `${label} ${priceStr}`
 }
-export function $$T9(e) {
-  let {
-    price,
-    is_subscription
-  } = e;
-  let n = $$I16(price, price % 100 != 0);
-  return is_subscription ? getI18nString("community.buyer.price_per_month_subscription", {
-    priceString: n
-  }) : getI18nString("community.buyer.price_one_time_payment", {
-    priceString: n
-  });
+
+/**
+ * Returns formatted subscription price string (original: $$T9)
+ * @param item - Product object
+ * @returns Localized price string
+ */
+export function getSubscriptionPriceString(item: { price: number, is_subscription?: boolean }) {
+  const { price, is_subscription } = item
+  const formatted = formatCurrency(price, price % 100 !== 0)
+  return is_subscription
+    ? getI18nString('community.buyer.price_per_month_subscription', { priceString: formatted })
+    : getI18nString('community.buyer.price_one_time_payment', { priceString: formatted })
 }
-export function $$I16(e, t = !1) {
-  return new vr("usd").formatMoney(e, {
-    showCents: t
-  });
+
+/**
+ * Formats currency (original: $$I16)
+ * @param value - Amount in cents
+ * @param showCents - Whether to show cents
+ * @returns Formatted string
+ */
+export function formatCurrency(value: number, showCents = false) {
+  return new CurrencyFormatter('usd').formatMoney(value, { showCents })
 }
-export function $$S18(e) {
-  switch (e) {
+
+/**
+ * Returns localized refund reason string (original: $$S18)
+ * @param reason - Cancellation reason
+ * @returns Localized string
+ */
+export function getRefundReasonString(reason: CancellationReason) {
+  switch (reason) {
     case CancellationReason.DOESNT_MEET_NEEDS:
-      return getI18nString("community.buyer.refund_reason.doesnt_meet_needs");
+      return getI18nString('community.buyer.refund_reason.doesnt_meet_needs')
     case CancellationReason.TECHNICAL_ISSUES:
-      return getI18nString("community.buyer.refund_reason.technical_issues");
+      return getI18nString('community.buyer.refund_reason.technical_issues')
     case CancellationReason.TOO_EXPENSIVE:
-      return getI18nString("community.buyer.refund_reason.too_expensive");
+      return getI18nString('community.buyer.refund_reason.too_expensive')
     case CancellationReason.FOUND_ALTERNATIVE:
-      return getI18nString("community.buyer.refund_reason.found_alternative");
+      return getI18nString('community.buyer.refund_reason.found_alternative')
     case CancellationReason.OTHER:
-      return getI18nString("community.buyer.refund_reason.other");
+      return getI18nString('community.buyer.refund_reason.other')
+    default:
+      return ''
   }
 }
-function v(e) {
-  return !!(e.subscription_expires_at && !isNaN(Date.parse(e.subscription_expires_at)));
+
+/**
+ * Checks if subscription expiration date is valid (original: v)
+ * @param payment - Payment object
+ * @returns True if valid date
+ */
+function hasValidSubscriptionExpiry(payment: any) {
+  return !!(payment.subscription_expires_at && !isNaN(Date.parse(payment.subscription_expires_at)))
 }
-export function $$A4(e) {
-  return !!e && (v(e) ? new Date(e.subscription_expires_at).getTime() + 864e5 > new Date().getTime() && !$$x8(e, G3.DISPUTED) : $$x8(e, G3.SUCCEEDED));
+
+/**
+ * Checks if subscription is active (original: $$A4)
+ * @param payment - Payment object
+ * @returns True if active
+ */
+export function isSubscriptionActive(payment: any) {
+  return !!payment
+    && (hasValidSubscriptionExpiry(payment)
+      ? new Date(payment.subscription_expires_at).getTime() + 864e5 > Date.now()
+      && !isStatus(payment, SubscriptionStatus.DISPUTED)
+      : isStatus(payment, SubscriptionStatus.SUCCEEDED))
 }
-export function $$x8(e, t) {
-  return !!e.status && e.status === t;
+
+/**
+ * Checks if payment status matches (original: $$x8)
+ * @param payment - Payment object
+ * @param status - Status to check
+ * @returns True if matches
+ */
+export function isStatus(payment: any, status: any) {
+  return !!payment.status && payment.status === status
 }
-export function $$N5(e) {
-  return e.status === G3.SUBSCRIPTION_PAYMENT_FAILED || e.status === G3.INVOICE_FINALIZATION_FAILED;
+
+/**
+ * Checks if payment failed (original: $$N5)
+ * @param payment - Payment object
+ * @returns True if failed
+ */
+export function isPaymentFailed(payment: any) {
+  return payment.status === SubscriptionStatus.SUBSCRIPTION_PAYMENT_FAILED
+    || payment.status === SubscriptionStatus.INVOICE_FINALIZATION_FAILED
 }
-export function $$$$C0(e) {
-  let t = Date.now() - 864e5;
-  return $$A4(e) && !v(e) && new Date(e.purchased_at).getTime() >= t;
+
+/**
+ * Checks if purchase is recent and active (original: $$$$C0)
+ * @param payment - Payment object
+ * @returns True if recent and active
+ */
+export function isRecentActivePurchase(payment: any) {
+  const oneDayAgo = Date.now() - 864e5
+  return isSubscriptionActive(payment) && !hasValidSubscriptionExpiry(payment) && new Date(payment.purchased_at).getTime() >= oneDayAgo
 }
-export function $$w6(e, t) {
-  if (isPlugin(t) || isWidget(t)) {
-    let r = (t.plugin_publishers?.accepted || []).map(e => e.id);
-    let i = (t.plugin_publishers?.pending || []).map(e => e.id);
-    let a = new Set(r.concat(i));
-    let {
-      pass,
-      fail
-    } = j(e, e => a.has(e.id) || e.id === t.creator.id);
-    return {
-      usersCanPurchase: fail,
-      publishers: pass
-    };
+
+/**
+ * Partitions users by purchase eligibility (original: $$w6)
+ * @param users - Array of user objects
+ * @param resource - Resource object
+ * @returns Partitioned users
+ */
+export function partitionUsersByPurchaseEligibility(users: any[], resource: any) {
+  if (isPlugin(resource) || isWidget(resource)) {
+    const accepted = (resource.plugin_publishers?.accepted || []).map((u: any) => u.id)
+    const pending = (resource.plugin_publishers?.pending || []).map((u: any) => u.id)
+    const publisherIds = new Set([...accepted, ...pending])
+    const { pass, fail } = partitionByPredicate(users, u => publisherIds.has(u.id) || u.id === resource.creator.id)
+    return { usersCanPurchase: fail, publishers: pass }
   }
-  {
-    let r = new Set(D(t));
-    let {
-      pass,
-      fail
-    } = j(e, e => r.has(e.id));
-    return {
-      usersCanPurchase: fail,
-      publishers: pass
-    };
+  else {
+    const publisherIds = new Set(collectPublisherUserIds(resource))
+    const { pass, fail } = partitionByPredicate(users, u => publisherIds.has(u.id))
+    return { usersCanPurchase: fail, publishers: pass }
   }
 }
-export function $$O2({
-  resource: e,
-  payment: t
+
+/**
+ * Checks if resource has trial available (original: $$O2)
+ * @param params - Object with resource and payment
+ * @returns True if trial available
+ */
+export function hasTrialAvailable({
+  resource,
+  payment,
+}: {
+  resource: any
+  payment: any
 }) {
-  let r = e.monetized_resource_metadata;
-  return !!(r && isSubscription(r)) && !!r.trial_length_in_days && (!t || !t.subscription_expires_at);
+  const meta = resource.monetized_resource_metadata
+  return !!(meta && isSubscription(meta)) && !!meta.trial_length_in_days && (!payment || !payment.subscription_expires_at)
 }
-export function $$R12(e, t) {
-  let r = hasMonetizedResourceMetadata(e);
-  let n = isThirdPartyMonetized(e) && hasClientMeta(e);
-  let i = r && hasFreemiumCode(e);
-  let a = $$A4(t);
-  return r && !i && !a || n;
+
+/**
+ * Checks if resource is eligible for purchase (original: $$R12)
+ * @param resource - Resource object
+ * @param payment - Payment object
+ * @returns True if eligible
+ */
+export function isResourceEligibleForPurchase(resource: any, payment: any) {
+  const hasMeta = hasMonetizedResourceMetadata(resource)
+  const isThirdParty = isThirdPartyMonetized(resource) && hasClientMeta(resource)
+  const hasFreemium = hasMeta && hasFreemiumCode(resource)
+  const isActive = isSubscriptionActive(payment)
+  return (hasMeta && !hasFreemium && !isActive) || isThirdParty
 }
-export function $$L20(e) {
+
+/**
+ * Maps payment object to API format (original: $$L20)
+ * @param payment - Payment object
+ * @returns API payment object
+ */
+export function mapPaymentToApiFormat(payment: any) {
   return {
-    status: QK[e.status],
-    purchased_at: e.purchasedAt ? new Date(e.purchasedAt).toISOString() : null,
-    subscription_expires_at: e.subscriptionExpiresAt ? new Date(e.subscriptionExpiresAt).toISOString() : null,
-    subscription_canceled_at: e.subscriptionCanceledAt ? new Date(e.subscriptionCanceledAt).toISOString() : null,
-    refund_reason: e.refundReason,
-    monetized_resource_metadata_id: e.monetizedResourceMetadataId,
-    subscription_interval: e.subscriptionInterval
-  };
+    status: SubscriptionStatusList[payment.status],
+    purchased_at: payment.purchasedAt ? new Date(payment.purchasedAt).toISOString() : null,
+    subscription_expires_at: payment.subscriptionExpiresAt ? new Date(payment.subscriptionExpiresAt).toISOString() : null,
+    subscription_canceled_at: payment.subscriptionCanceledAt ? new Date(payment.subscriptionCanceledAt).toISOString() : null,
+    refund_reason: payment.refundReason,
+    monetized_resource_metadata_id: payment.monetizedResourceMetadataId,
+    subscription_interval: payment.subscriptionInterval,
+  }
 }
-export const C = $$$$C0;
-export const F8 = $$h1;
-export const Lt = $$O2;
-export const Mj = $$g3;
-export const QQ = $$A4;
-export const UO = $$N5;
-export const V4 = $$w6;
-export const WD = $$m7;
-export const WJ = $$x8;
-export const X2 = $$T9;
-export const XR = $$b10;
-export const Yp = $$f11;
-export const _K = $$R12;
-export const ae = $$_13;
-export const bV = $$y14;
-export const mZ = $$c15;
-export const up = $$I16;
-export const vf = $$p17;
-export const vi = $$S18;
-export const wF = $$u19;
-export const xs = $$L20;
-export const zt = $$E21;
+
+// Export aliases for backward compatibility
+export const C = isRecentActivePurchase
+export const F8 = isNotInteger
+export const Lt = hasTrialAvailable
+export const Mj = isRatioHigh
+export const QQ = isSubscriptionActive
+export const UO = isPaymentFailed
+export const V4 = partitionUsersByPurchaseEligibility
+export const WD = isGreater
+export const WJ = isStatus
+export const X2 = getSubscriptionPriceString
+export const XR = getBuyOrSubscribeLabel
+export const Yp = isPriceOutOfRange
+export const _K = isResourceEligibleForPurchase
+export const ae = decimalToPercent
+export const bV = getProductPriceString
+export const mZ = MIN_PRICE
+export const up = formatCurrency
+export const vf = centsToDollars
+export const vi = getRefundReasonString
+export const wF = MAX_PRICE
+export const xs = mapPaymentToApiFormat
+export const zt = getAnnualPriceString

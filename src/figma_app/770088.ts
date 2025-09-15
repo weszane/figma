@@ -33,7 +33,7 @@ import { VB } from "../905/431747";
 import { showModalHandler } from "../905/156213";
 import { zq } from "../905/193529";
 import { jD } from "../905/765855";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 export async function $$U4(e, t, r, n, i) {
   await G(i.messageMeta, e, t, r, n).then(t => {
     e($$q27({
@@ -599,7 +599,7 @@ let $$er40 = createOptimistThunk((e, t) => {
       commentId: o.id,
       commentUuid: o.uuid
     }));
-    e.getState().userFlags.has_created_comment || e.dispatch(_$$b({
+    e.getState().userFlags.has_created_comment || e.dispatch(postUserFlag({
       has_created_comment: !0
     }));
   }).catch(r => {
@@ -778,7 +778,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
       stablePath,
       isDevModeFocusView: !!e.getState().selectedView?.devModeFocusId
     });
-    e.getState().userFlags.has_created_comment || e.dispatch(_$$b({
+    e.getState().userFlags.has_created_comment || e.dispatch(postUserFlag({
       has_created_comment: !0
     }));
     e.dispatch(zq({
@@ -867,7 +867,7 @@ let $$eo5 = createOptimistThunk((e, t) => {
 });
 let $$el7 = createActionCreator("COMMENTS_SET_NEW_SELECTION_BOX_ANCHOR_POSITION");
 let $$ed28 = createOptimistThunk((e, t) => {
-  e.getState().userFlags.has_created_selection_comment || e.dispatch(_$$b({
+  e.getState().userFlags.has_created_selection_comment || e.dispatch(postUserFlag({
     has_created_selection_comment: !0
   }));
   e.dispatch($$el7(t));

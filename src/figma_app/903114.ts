@@ -37,7 +37,7 @@ import { I as _$$I } from "../905/343211";
 import { d as _$$d } from "../figma_app/603561";
 import { selectCurrentUser } from "../905/372672";
 import { FOrganizationLevelType, FBillingPeriodType, FSeatAssignmentReasonType, FUpgradeReasonType, FApprovalMethodType } from "../figma_app/191312";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { getPlanData } from "../figma_app/428858";
 import { h as _$$h } from "../figma_app/124713";
@@ -88,7 +88,7 @@ function $$Z(e) {
   let [L] = handleSuspenseRetainRelease(R);
   let P = Qf(f.key.parentId, f.key.type);
   let D = "loaded" === P.status ? Ye.dict(e => P.data[e]?.available ?? 0) : J;
-  let B = new vr(e.currency);
+  let B = new CurrencyFormatter(e.currency);
   let z = N_.dict(e => {
     let t = L.data?.[e]?.amount ?? 0;
     return {

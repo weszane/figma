@@ -78,7 +78,7 @@ import { atomStoreManager } from '../figma_app/27355';
 import { hasMonetizedResourceMetadata } from '../figma_app/45218';
 import { DEV_MODE_STRING, FEditorType, SLACK_STRING } from '../figma_app/53721';
 import { applyOffsetToViewport } from '../figma_app/62612';
-import { FE, PB } from '../figma_app/78808';
+import { updateFileThumbnail, batchSubscribeToRealtimeAction } from '../figma_app/78808';
 import { getObservableOrFallback } from '../figma_app/84367';
 // Import Data Structures and Collections Management - Phase 16
 import { kA, Qj, vl, vT, y1, zH } from '../figma_app/86989';
@@ -9477,7 +9477,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
             resolve,
             reject
           } = e.newPromise();
-          e.registerPromise(FE(r, i)).then(() => {
+          e.registerPromise(updateFileThumbnail(r, i)).then(() => {
             resolve(e.undefined);
           }).catch(t => {
             reject(e.newString(`Failed to set thumbnail guid. Error: ${t.message}`));
@@ -10326,7 +10326,7 @@ async function a_(_componentKey, styleKey, permissions) {
   }
 
   // Update library state
-  debugStateInstance.dispatch(PB({
+  debugStateInstance.dispatch(batchSubscribeToRealtimeAction({
     libraryKeys: [publishedStyle.library_key]
   }));
   return {
@@ -10435,7 +10435,7 @@ export async function $$ab4(componentKey, sceneGraphInstance = getSceneGraphInst
 
   // Handle direct component import (no state group)
   if (!isComponentInStateGroup(finalComponent, parentStateGroup)) {
-    debugStateInstance.dispatch(PB({
+    debugStateInstance.dispatch(batchSubscribeToRealtimeAction({
       libraryKeys: [finalComponent?.library_key || 'unknown'] // Safe property access
     }));
     return await aA(finalComponent, currentFile.key);
@@ -10550,7 +10550,7 @@ export async function $$av5(componentSetKey) {
   }
 
   // Dispatch library loading action
-  debugState.dispatch(PB({
+  debugState.dispatch(batchSubscribeToRealtimeAction({
     libraryKeys: [foundStateGroup.library_key]
   }));
 

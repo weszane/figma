@@ -6,8 +6,8 @@ import { oW } from "../905/675859";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { C as _$$C } from "../905/237873";
-import { CS } from "../figma_app/275462";
-import { L } from "../905/178090";
+import { isResourceHubProfilesEnabled } from "../figma_app/275462";
+import { ResourceTypes } from "../905/178090";
 import { Z } from "../5430/338876";
 import { A } from "../6828/505145";
 import { A as _$$A } from "../6828/44395";
@@ -35,7 +35,7 @@ function b(e) {
     children: e.query
   });
   switch (e.resourceType) {
-    case L.SearchResourceTypes.FILES:
+    case ResourceTypes.SearchResourceTypes.FILES:
       if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_hub_files_free", {
         query: t
       });
@@ -45,7 +45,7 @@ function b(e) {
       return renderI18nText("community.search.empty_state_hub_files", {
         query: t
       });
-    case L.SearchResourceTypes.PLUGINS:
+    case ResourceTypes.SearchResourceTypes.PLUGINS:
       if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_public_plugins_free", {
         query: t
       });
@@ -55,7 +55,7 @@ function b(e) {
       return renderI18nText("community.search.empty_state_public_plugins", {
         query: t
       });
-    case L.SearchResourceTypes.WIDGETS:
+    case ResourceTypes.SearchResourceTypes.WIDGETS:
       if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_public_widgets_free", {
         query: t
       });
@@ -65,11 +65,11 @@ function b(e) {
       return renderI18nText("community.search.empty_state_public_widgets", {
         query: t
       });
-    case L.SearchResourceTypes.PROFILES:
+    case ResourceTypes.SearchResourceTypes.PROFILES:
       return renderI18nText("community.search.empty_state_creators", {
         query: t
       });
-    case L.SearchResourceTypes.MIXED:
+    case ResourceTypes.SearchResourceTypes.MIXED:
     default:
       if (e.view.price === _$$C.FREE) return renderI18nText("community.search.no_resources_matching_free", {
         query: t
@@ -83,7 +83,7 @@ function b(e) {
   }
 }
 export function $$j0(e) {
-  return CS() ? jsx(C, {
+  return isResourceHubProfilesEnabled() ? jsx(C, {
     ...e
   }) : jsx(w, {
     ...e

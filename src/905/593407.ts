@@ -6,7 +6,7 @@ import { analyticsEventManager } from "../905/449184";
 import { H } from "../905/620380";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions } from "../figma_app/169182";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
 import { y as _$$y } from "../905/958284";
 import { a as _$$a } from "../905/12032";
@@ -147,7 +147,7 @@ export function $$F0({
     testId: "tos_agreement_overlay",
     children: jsx(L, {
       onAccept: function () {
-        w(_$$b({
+        w(postUserFlag({
           tos_accepted: !0
         }));
         complete();

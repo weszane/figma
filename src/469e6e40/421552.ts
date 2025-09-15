@@ -37,7 +37,7 @@ import { isTeamLibrary, isCommunityLibrary } from "../figma_app/633080";
 import { O as _$$O } from "../figma_app/809387";
 import { DashboardSection, FigResourceType } from "../figma_app/650409";
 import { SectionType } from "../figma_app/858344";
-import { qq, TG } from "../905/72677";
+import { hubFileAndPresetKeysSetAtom, resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { Hj, A3, tD, FO } from "../905/682977";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { K as _$$K2 } from "../905/443068";
@@ -289,7 +289,7 @@ let ey = function ({
   let f = p && !!u && _.some(e => e.resourceType === EntityType.Workspace && e.resourceId === u);
   let y = p && v && _.some(e => e.resourceType === EntityType.Org && e.resourceId === v);
   let k = t.workspaces?.find(e => e.id === u)?.name;
-  let E = useAtomWithSubscription(qq);
+  let E = useAtomWithSubscription(hubFileAndPresetKeysSetAtom);
   let C = useMemo(() => "community" === e.type && E.has(_$$l2(e.hubFileId)), [e, E]);
   return jsxs(AutoLayout, {
     direction: "vertical",
@@ -1355,7 +1355,7 @@ export function $$tx1(e) {
   let H = useDispatch();
   let [Y, J] = useState(new Set(workspaceId ? [workspaceId] : []));
   let [K, Q] = useState("");
-  let Z = useAtomWithSubscription(TG);
+  let Z = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let ee = NJ(org.id);
   let et = useSubscription(LibrarySubscriptionView, {
     orgId: org.id

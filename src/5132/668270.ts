@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { DeviceTryFileView } from "../figma_app/43951";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { Uy } from "../figma_app/685921";
 import { L } from "../905/92291";
 import { createOptimistThunk } from "../905/350402";
@@ -32,7 +32,7 @@ let $$f0 = createOptimistThunk(async (e, l, {
       fileKey: l.file_key,
       folderId: l.folder_id
     });
-    N(t, e, i);
+    setupLoadingStateHandler(t, e, i);
     let {
       data
     } = await t;

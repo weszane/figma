@@ -4,13 +4,13 @@ import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { R } from "../905/11928";
 import { F_ } from "../905/858282";
 import { QzE } from "../figma_app/6204";
-let m = r1("seen_connected_projects_admin_settings_content_tab_overlay");
+let m = userFlagExistsAtomFamily("seen_connected_projects_admin_settings_content_tab_overlay");
 let $$g1 = "org_admin_connected_projects_tab_onboarding_key";
 export function $$f0() {
   let e = useAtomWithSubscription(m);

@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getIsMobile } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { hideModal, showModalHandler } from "../905/156213";
@@ -30,7 +30,7 @@ let h = registerModal(function (e) {
       children: renderI18nText("community.collections.this_feature_isnt_available")
     }),
     className: "feature_not_available_modal--modalContainer--Etu7A",
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: e.dispatch
     }), jsxs("div", {
       className: "feature_not_available_modal--modalBody--Dhwo0 text--fontPos14--OL9Hp text--_fontBase--QdLsd",

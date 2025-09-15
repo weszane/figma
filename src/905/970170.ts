@@ -1,7 +1,7 @@
 import { randomBetween } from "../figma_app/492908";
 import { getFeatureFlags } from "../905/601108";
 import { isIOSUA, isFigmaMobileWithoutTripleTaps } from "../figma_app/778880";
-import { yJ, c3, Yp, bE } from "../figma_app/78808";
+import { filePutAction, clearActiveFileUsersAction, removeFileFromProjectAction, postFileAction } from "../figma_app/78808";
 import { ru } from "../905/879323";
 import { ER } from "../905/466026";
 import { VK, YK } from "../905/880488";
@@ -26,16 +26,16 @@ export function $$h0(e, t) {
         }));
         break;
       }
-      e.dispatch(yJ({
+      e.dispatch(filePutAction({
         file: i
       }));
       n && (n.team_id !== i.team_id ? (e.dispatch(ru({
         fileKey: i.key
-      })), e.dispatch(c3({
+      })), e.dispatch(clearActiveFileUsersAction({
         fileKey: i.key
-      }))) : n.folder_id !== i.folder_id && (e.dispatch(c3({
+      }))) : n.folder_id !== i.folder_id && (e.dispatch(clearActiveFileUsersAction({
         fileKey: i.key
-      })), n.folder_id && e.dispatch(Yp({
+      })), n.folder_id && e.dispatch(removeFileFromProjectAction({
         file: i,
         folderId: n.folder_id
       }))));
@@ -44,7 +44,7 @@ export function $$h0(e, t) {
       i.file_repo_id && e.dispatch(ER({
         file: t.file
       }));
-      e.dispatch(bE({
+      e.dispatch(postFileAction({
         file: t.file
       }));
       break;

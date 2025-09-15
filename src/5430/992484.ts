@@ -2,17 +2,17 @@ import { useState } from "react";
 import { C } from "../905/237873";
 import { gM, c5 } from "../5430/823351";
 import { H, e } from "../figma_app/324237";
-import { k } from "../905/22009";
-import { L } from "../905/178090";
+import { editorUtilities } from "../905/22009";
+import { ResourceTypes } from "../905/178090";
 let c = {
-  resourceType: L.BrowseResourceTypes.MIXED,
-  editorType: k.Editors.ALL,
+  resourceType: ResourceTypes.BrowseResourceTypes.MIXED,
+  editorType: editorUtilities.Editors.ALL,
   price: C.ALL,
   sortBy: H()
 };
 let d = {
   ...c,
-  resourceType: L.SearchResourceTypes.MIXED
+  resourceType: ResourceTypes.SearchResourceTypes.MIXED
 };
 let u = {
   [gM.PROFILE]: c,
@@ -21,7 +21,7 @@ let u = {
   [gM.HOMEPAGE]: c5(),
   [gM.PLUGINS]: {
     ...c,
-    resourceType: L.BrowseResourceTypes.PLUGINS
+    resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS
   },
   [gM.RESOURCE_LANDING_PAGE]: c
 };

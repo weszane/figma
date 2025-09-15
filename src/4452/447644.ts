@@ -75,7 +75,7 @@ import { h as _$$h } from "../905/207101";
 import { qf } from "../4452/780544";
 import { g as _$$g } from "../4452/983384";
 import { e as _$$e2 } from "../905/621515";
-import { r1 as _$$r } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rq } from "../905/425180";
 import { Clh } from "../figma_app/6204";
 import { k as _$$k3 } from "../905/443820";
@@ -146,7 +146,7 @@ let ee = registerModal(function (e) {
   });
 }, "BulkApproveConfirmationModal");
 function eR(e) {
-  let t = _$$r("seen_admin_seat_approval_settings_onboarding");
+  let t = userFlagExistsAtomFamily("seen_admin_seat_approval_settings_onboarding");
   let a = useAtomWithSubscription(t);
   let {
     show,

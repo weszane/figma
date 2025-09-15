@@ -17,7 +17,7 @@ import { sf } from "../905/929976";
 import { Az, js, Nj } from "../figma_app/482142";
 import { Xw } from "../905/584989";
 import { TrackingProvider } from "../figma_app/831799";
-import { LN } from "../figma_app/514043";
+import { getUserCurrency } from "../figma_app/514043";
 import { A } from "../svg/821527";
 let N = e => {
   let t = useSelector(t => {
@@ -99,7 +99,7 @@ export function $$b0({
               children: jsx(_$$d, {
                 selectedView: e,
                 onClickConfirm: l,
-                currency: LN(),
+                currency: getUserCurrency(),
                 canSeeBillingAddressExp: !1
               })
             })

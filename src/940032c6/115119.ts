@@ -108,7 +108,7 @@ import { p as _$$p5 } from '../905/185998';
 import { a3 as _$$a15, ow as _$$ow } from '../905/188421';
 import { d as _$$d10 } from '../905/189168';
 import { permissionScopeHandler as _$$l, zk } from '../905/189185';
-import { My } from '../905/194276';
+import { AUTH_COMPLETE } from '../905/194276';
 import { m as _$$m8 } from '../905/194327';
 import { h as _$$h2 } from '../905/200386';
 import { Hz, Of, Yw } from '../905/201596';
@@ -126,7 +126,7 @@ import { E as _$$E10 } from '../905/235326';
 import { o as _$$o0 } from '../905/237202';
 import { z as _$$z11 } from '../905/239603';
 import { Y as _$$Y3 } from '../905/246212';
-import { g as _$$g4 } from '../905/248178';
+import { trackAuthEvent } from '../905/248178';
 import { A as _$$A7 } from '../905/251970';
 import { z as _$$z6 } from '../905/252950';
 import { R as _$$R4 } from '../905/256203';
@@ -291,7 +291,7 @@ import { BK, Um } from '../905/848862';
 import { K as _$$K3 } from '../905/851274';
 import { EL, F_ } from '../905/858282';
 import { isVsCodeEnvironment } from '../905/858738';
-import { qB } from '../905/862321';
+import { AuthFlowStep } from '../905/862321';
 import { h as _$$h7 } from '../905/864281';
 import { Ay as _$$Ay7 } from '../905/865071';
 import { bL as _$$bL, c$ as _$$c$2, RT } from '../905/867927';
@@ -335,7 +335,7 @@ import { O as _$$O4 } from '../905/969533';
 import { d as _$$d2 } from '../905/976845';
 import { J as _$$J12 } from '../905/980942';
 import { TextWithTruncation } from '../905/984674';
-import { b as _$$b10 } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { h1 as _$$h5 } from '../905/986103';
 import { resourceUtils } from '../905/989992';
 import { NONE_SYMBOL as _$$H5 } from '../905/992467';
@@ -511,7 +511,7 @@ import { cF as _$$cF2, Az } from '../figma_app/61758';
 import { addViewportOffset, getViewportInfo, computeFullscreenViewportForNode } from '../figma_app/62612';
 import { Q as _$$Q13 } from '../figma_app/67145';
 import { p7 as _$$p8, Ut as _$$Ut } from '../figma_app/72338';
-import { Nw } from '../figma_app/78808';
+import { renameFileOptimistic } from '../figma_app/78808';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { $5 } from '../figma_app/84580';
 import { o0 as _$$o6, u3 as _$$u6, Kd } from '../figma_app/85384';
@@ -667,7 +667,7 @@ import { tz as _$$tz } from '../figma_app/531331';
 import { t as _$$t3 } from '../figma_app/532797';
 import { B as _$$B6 } from '../figma_app/539422';
 import { C4 as _$$C1, fG as _$$fG } from '../figma_app/540726';
-import { r1 as _$$r7 } from '../figma_app/545877';
+import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { N0 } from '../figma_app/547638';
 import { x as _$$x4 } from '../figma_app/550678';
 import { S as _$$S2 } from '../figma_app/552746';
@@ -686,7 +686,7 @@ import { gJ as _$$gJ, p3 as _$$p4, Xu } from '../figma_app/588582';
 import { q as _$$q8 } from '../figma_app/590592';
 import { S as _$$S5 } from '../figma_app/590972';
 import { W as _$$W2 } from '../figma_app/592474';
-import { Fj } from '../figma_app/594947';
+import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { ol as _$$ol } from '../figma_app/598018';
 import { v4 as _$$v9, Qr } from '../figma_app/598952';
 import { f7 as _$$f8, j4 as _$$j3, jr as _$$jr, Tn as _$$Tn, MO, Rv, Z7 } from '../figma_app/599979';
@@ -4828,7 +4828,7 @@ function sA({
     })]
   });
 }
-function sq(e, t, i = qB.SIGN_IN) {
+function sq(e, t, i = AuthFlowStep.SIGN_IN) {
   let n = _$$Y();
   return useCallback(() => {
     UK(e);
@@ -4839,7 +4839,7 @@ function sq(e, t, i = qB.SIGN_IN) {
   }, [n, e, t, i]);
 }
 function sX() {
-  let e = sq('SIGN_UP_BUTTON_BANNER', _$$ty.FIGMA_REV_LOGGED_OUT_HEADER, qB.SIGN_UP);
+  let e = sq('SIGN_UP_BUTTON_BANNER', _$$ty.FIGMA_REV_LOGGED_OUT_HEADER, AuthFlowStep.SIGN_UP);
   return jsx(ButtonLarge, {
     htmlAttributes: {
       'data-test-id': 'email-btn'
@@ -4861,11 +4861,11 @@ function sV() {
           origin: _$$ty.FIGMA_REV_LOGGED_OUT_HEADER_WITH_GOOGLE,
           redirectUrl: customHistory.location.pathname
         }).then(t => {
-          t.type === 'login' && e(My({
+          t.type === 'login' && e(AUTH_COMPLETE({
             userId: t.user.id
           }));
         }, t => {
-          _$$g4('google_signup_error', _$$ty.FIGMA_REV_LOGGED_OUT_HEADER_WITH_GOOGLE, {
+          trackAuthEvent('google_signup_error', _$$ty.FIGMA_REV_LOGGED_OUT_HEADER_WITH_GOOGLE, {
             error: t.message
           });
           getFeatureFlags().ff_show_auth_modal_on_google_sso_error && Y2({
@@ -11106,7 +11106,7 @@ function ur({
       try {
         await UP(buildUploadUrl(`${ue[n]}.zip`), un[n], i.key, t);
         p(!0);
-        i.name === getI18nString('fullscreen.fullscreen_view_selector.untitled') && c(Nw({
+        i.name === getI18nString('fullscreen.fullscreen_view_selector.untitled') && c(renameFileOptimistic({
           file: {
             key: i.key
           },
@@ -12103,7 +12103,7 @@ function uJ({
     UK('DOWNLOAD_CODE_BUTTON');
     d({
       origin: 'figma_make_download_code_button',
-      formState: qB.SIGN_IN
+      formState: AuthFlowStep.SIGN_IN
     });
   }, [d]);
   let p = useCallback(async () => {
@@ -12239,7 +12239,7 @@ function pr({
     let c = d && d.length === 0;
     useEffect(() => {
       let e = getI18nString('fullscreen.fullscreen_view_selector.untitled');
-      i && n && l && i.name === e && c && t(Nw({
+      i && n && l && i.name === e && c && t(renameFileOptimistic({
         file: {
           key: n
         },
@@ -19384,7 +19384,7 @@ function fb() {
   return e.status === 'errors' || e.status === 'disabled' ? null : jsx(fy, {});
 }
 function fy() {
-  let e = _$$r7(Vc);
+  let e = userFlagExistsAtomFamily(Vc);
   let t = useAtomWithSubscription(e);
   let i = useCurrentPublicPlan('OnboardSitesTOSInner');
   let n = useDispatch();
@@ -19410,7 +19410,7 @@ function fy() {
     });
   });
   let g = e => {
-    e === 'close_button_clicked' && (n(_$$b10({
+    e === 'close_button_clicked' && (n(postUserFlag({
       [Vc]: !1
     })), n(_$$sf({
       view: 'recentsAndSharing'
@@ -19454,7 +19454,7 @@ function fy() {
         children: renderI18nText('sites.onboarding.welcome.accept')
       }),
       onClick: () => {
-        n(_$$b10({
+        n(postUserFlag({
           [Vc]: !0,
           [_$$at]: !0,
           [R0]: c
@@ -19488,9 +19488,9 @@ function fy() {
 }
 function fv() {
   let e = useDispatch();
-  let t = _$$r7(_$$at);
+  let t = userFlagExistsAtomFamily(_$$at);
   let i = useAtomWithSubscription(t);
-  let n = _$$r7(_$$uy);
+  let n = userFlagExistsAtomFamily(_$$uy);
   let r = useAtomWithSubscription(n);
   let d = fR();
   let {
@@ -19522,7 +19522,7 @@ function fv() {
   } = _$$A11({
     numSteps: g.length,
     onComplete: () => {
-      e(_$$b10({
+      e(postUserFlag({
         [R0]: d
       }));
       complete();
@@ -19546,11 +19546,11 @@ function fv() {
 }
 function fj() {
   let e = useDispatch();
-  let t = _$$r7(_$$at);
+  let t = userFlagExistsAtomFamily(_$$at);
   let i = useAtomWithSubscription(t);
-  let n = _$$r7(_$$uy);
+  let n = userFlagExistsAtomFamily(_$$uy);
   let d = useAtomWithSubscription(n);
-  let c = _$$r7(R0);
+  let c = userFlagExistsAtomFamily(R0);
   let u = useAtomWithSubscription(c);
   let p = useAtomWithSubscription(P4);
   let x = fR();
@@ -19568,7 +19568,7 @@ function fj() {
     });
   }, [p, show, x]);
   let f = useCallback(() => {
-    e(_$$b10({
+    e(postUserFlag({
       [R0]: !0
     }));
     complete();
@@ -19743,7 +19743,7 @@ function fI({
 }) {
   let o = useDispatch();
   _$$h3(() => {
-    o(_$$b10({
+    o(postUserFlag({
       [R0]: !0
     }));
   });
@@ -21607,7 +21607,7 @@ let _9 = _$$z11.object({
 let be = () => {
   let {
     getDynamicConfig
-  } = Fj('sites_template_picker_categories_prod');
+  } = setupDynamicConfigHandler('sites_template_picker_categories_prod');
   let {
     categories
   } = _9.parse(getDynamicConfig().value);
@@ -22241,7 +22241,7 @@ function bL() {
   let e = _$$p2('isReadOnly');
   let t = EI();
   let i = useAtomWithSubscription(_$$D6);
-  let n = _$$r7(_$$at);
+  let n = userFlagExistsAtomFamily(_$$at);
   let a = useAtomWithSubscription(n);
   let s = a.status === 'loaded' && !0 === a.data;
   let r = useAtomWithSubscription(_$$me);

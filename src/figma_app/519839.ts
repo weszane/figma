@@ -22,7 +22,7 @@ import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { I0 } from "../905/879323";
 import { hideModal } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { getSelectedFile } from "../905/766303";
 import { z as _$$z } from "../905/853613";
 import { Hj } from "../figma_app/412398";
@@ -397,7 +397,7 @@ let $$eo4 = createOptimistThunk(async (e, t = {}) => {
   e.dispatch($$K1({
     unpublishAll: !!ei
   }));
-  e.dispatch(_$$b({
+  e.dispatch(postUserFlag({
     has_published_library_items: !0
   }));
   let ea = (r, n, i, a) => {

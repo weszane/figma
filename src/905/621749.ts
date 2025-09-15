@@ -9,7 +9,7 @@ import { A as _$$A } from "../905/920142";
 import { customHistory } from "../905/612521";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { i0 } from "../905/17223";
+import { ModalUpperRightCorner } from "../905/17223";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout, Spacer } from "../905/470281";
@@ -451,7 +451,7 @@ export let $$z0 = registerModal(function ({
       size: 520,
       className: _$$s.px32.pt32.pb24.cursorDefault.$,
       "data-testid": "downgrade-churn-friction-modal",
-      children: [jsx(i0, {
+      children: [jsx(ModalUpperRightCorner, {
         onClick: P
       }), jsx("p", {
         className: _$$s.font20.colorText.fontSemiBold.lh32.$,

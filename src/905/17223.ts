@@ -1,65 +1,95 @@
-import { jsx } from "react/jsx-runtime";
-import { A } from "../905/251970";
-import { generateRecordingKey } from "../figma_app/878298";
-import { KeyCodes } from "../905/63728";
-import { RecordableButton } from "../905/511649";
-import { getI18nString } from "../905/303541";
-import { popModalStack } from "../905/156213";
-import { withTrackedClick } from "../figma_app/831799";
-import { $ } from "../905/355607";
-import { Nk, J_ } from "../905/871493";
-export let $$m0 = withTrackedClick(({
-  onMouseDown: e,
-  onClick: t,
-  className: i,
-  disabled: d,
-  dataOnboardingKey: c,
-  dataTestId: m = "close-button",
-  "aria-label": h = getI18nString("general.close"),
-  ...g
+import { jsx } from 'react/jsx-runtime'
+import { KeyCodes } from '../905/63728'
+import { popModalStack } from '../905/156213'
+import { A as Icon1 } from '../905/251970'
+import { getI18nString } from '../905/303541'
+import { shouldOptimizeForIpad } from '../905/355607'
+import { RecordableButton } from '../905/511649'
+import { J_, Nk } from '../905/871493'
+import { withTrackedClick } from '../figma_app/831799'
+import { generateRecordingKey } from '../figma_app/878298'
+/**
+ * CloseButton - Refactored from $$m0
+ * Renders a recordable close button with tracked click and accessibility features.
+ * @param props - Button props including event handlers and accessibility attributes.
+ */
+export const CloseButton = withTrackedClick(({
+  onMouseDown,
+  onClick,
+  className,
+  disabled,
+  dataOnboardingKey,
+  dataTestId = 'close-button',
+  'aria-label': ariaLabel = getI18nString('general.close'),
+  ...restProps
 }) => {
-  let f = $();
+  const isIpad = shouldOptimizeForIpad()
   return jsx(RecordableButton, {
-    "aria-label": h,
-    className: `${Nk} ${i || ""}`,
-    "data-fullscreen-intercept": g["data-fullscreen-intercept"],
-    "data-not-draggable": !0,
-    "data-onboarding-key": c,
-    dataTestId: m,
-    disabled: d,
-    onClick: f ? void 0 : t,
-    onKeyDown: e => {
-      e.keyCode === KeyCodes.ESCAPE && e.currentTarget.blur();
+    'aria-label': ariaLabel,
+    'className': `${Nk} ${className || ''}`,
+    'data-fullscreen-intercept': restProps['data-fullscreen-intercept'],
+    'data-not-draggable': true,
+    'data-onboarding-key': dataOnboardingKey,
+    'dataTestId': dataTestId,
+    'disabled': disabled,
+    'onClick': isIpad ? undefined : onClick,
+    'onKeyDown': (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (e.keyCode === KeyCodes.ESCAPE)
+        e.currentTarget.blur()
     },
-    onMouseDown: e,
-    onPointerDown: f ? t : void 0,
-    recordingKey: generateRecordingKey(g, "closeButton"),
-    type: "button",
-    children: jsx(A, {})
-  });
-});
-$$m0.displayName = "CloseButton";
-let $$h1 = function (e) {
-  return jsx("div", {
-    className: J_,
-    style: {
-      ...e.customStyle
-    },
-    "data-testid": "modal-upper-right-corner",
-    children: jsx($$m0, {
-      ...e
-    })
-  });
-};
-let $$g2 = function (e) {
-  return jsx($$h1, {
-    ...e,
+    'onMouseDown': onMouseDown,
+    'onPointerDown': isIpad ? onClick : undefined,
+    'recordingKey': generateRecordingKey(restProps, 'closeButton'),
+    'type': 'button',
+    'children': jsx(Icon1, {}),
+  })
+})
+CloseButton.displayName = 'CloseButton'
+
+/**
+ * ModalUpperRightCorner - Refactored from $$h1
+ * Renders the modal's upper right corner with a close button.
+ * @param props - Props including custom styles and button props.
+ */
+export function ModalUpperRightCorner({
+  customStyle,
+  ...buttonProps
+}: {
+  customStyle?: React.CSSProperties
+  [key: string]: any
+}) {
+  return jsx('div', {
+    'className': J_,
+    'style': { ...customStyle },
+    'data-testid': 'modal-upper-right-corner',
+    'children': jsx(CloseButton, { ...buttonProps }),
+  })
+}
+
+/**
+ * ModalCloseButton - Refactored from $$g2
+ * Handles modal close logic and dispatches popModalStack.
+ * @param props - Props including dispatch and onClose handlers.
+ */
+export function ModalCloseButton({
+  dispatch,
+  onClose,
+  ...rest
+}: {
+  dispatch: Fn
+  onClose?: () => void
+  [key: string]: any
+}) {
+  return jsx(ModalUpperRightCorner, {
+    ...rest,
     onClick: () => {
-      e.dispatch(popModalStack());
-      e.onClose?.();
-    }
-  });
-};
-export const Jn = $$m0;
-export const i0 = $$h1;
-export const s_ = $$g2;
+      dispatch(popModalStack())
+      onClose?.()
+    },
+  })
+}
+
+// Refactored exports
+export const Jn = CloseButton
+export const i0 = ModalUpperRightCorner
+export const s_ = ModalCloseButton

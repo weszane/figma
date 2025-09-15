@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -191,7 +191,7 @@ let $$w1 = registerModal(function (e) {
     size: "small",
     title: getI18nString("allowlist_plugins_modals.add_plugin.title"),
     onHide: m,
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: t
     }), jsx("div", {
       className: x,
@@ -252,7 +252,7 @@ let $$k2 = registerModal(function (e) {
     size: "small",
     title: getI18nString("allowlist_widgets_modals.add_widget.title"),
     onHide: m,
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: t
     }), jsx("div", {
       className: x,

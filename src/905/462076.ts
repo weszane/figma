@@ -6,7 +6,7 @@ import { gB } from "../905/723791";
 import { $E, y1 } from "../905/445814";
 import { V3 } from "../figma_app/976345";
 import { le } from "../figma_app/11182";
-import { ZN } from "../figma_app/78808";
+import { fetchFileByKeyOptimistic } from "../figma_app/78808";
 import { y as _$$y } from "../figma_app/705249";
 import { o8, CR } from "../figma_app/12220";
 import { N } from "../figma_app/261650";
@@ -49,7 +49,7 @@ export function $$R6(e, t, i) {
   let s = t.find(e => e.type === cM.NODE || e.type === cM.PROTOTYPE);
   let l = (s ? s.fileKey : void 0) || i;
   useEffect(() => {
-    a(ZN({
+    a(fetchFileByKeyOptimistic({
       file_key: l ?? void 0
     }));
   }, [a, l]);

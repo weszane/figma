@@ -23,8 +23,8 @@ import { xk } from "@stylexjs/stylex";
 import { m as _$$m } from "../5430/992484";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { vb, _W, gM } from "../5430/823351";
-import { k as _$$k } from "../905/22009";
-import { L as _$$L } from "../905/178090";
+import { editorUtilities as _$$k } from "../905/22009";
+import { ResourceTypes } from "../905/178090";
 import { a as _$$a, z as _$$z } from "../figma_app/601188";
 import { N$, u8 } from "../figma_app/350203";
 import { X as _$$X } from "../5430/966412";
@@ -33,7 +33,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { generateUUIDv4 } from "../905/871474";
 import { LoadingOverlay, LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
-import { CS } from "../figma_app/275462";
+import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { Ai, _8, dL, aP } from "../figma_app/530167";
 import { YU, M0, Zs, gZ, xj, si, E1 } from "../figma_app/740025";
 import { l8, kJ, Cw } from "../figma_app/599979";
@@ -81,7 +81,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
-import { r1 as _$$r } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N2 } from "../figma_app/268271";
 import { e9 as _$$e3 } from "../figma_app/692865";
 import { M as _$$M } from "../905/152487";
@@ -93,19 +93,19 @@ import { useSubscription } from "../figma_app/288654";
 import { VisualBellActions } from "../905/302958";
 import { S as _$$S2 } from "../5430/465757";
 import { C as _$$C } from "../905/237873";
-import { bV, up } from "../figma_app/808294";
+import { getProductPriceString, formatCurrency } from "../figma_app/808294";
 import { Vm, yX, qY } from "../figma_app/427318";
 import { e as _$$e4 } from "../figma_app/324237";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
-import { N as _$$N3 } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { CommunityResourceStat, UserMonetizationMetadata } from "../figma_app/43951";
 import { StatusType, SourceType, PayoutMetric } from "../figma_app/175992";
 import { s as _$$s3 } from "../5430/114211";
 import { P as _$$P } from "../905/347284";
-import { C as _$$C2 } from "../905/180";
+import { BuyerAPIHandler } from "../905/180";
 import { registerModal } from "../905/102752";
 import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A4 } from "../svg/815368";
@@ -115,7 +115,7 @@ import { A as _$$A5 } from "../1617/230645";
 import { getResourceWithMeta } from "../figma_app/45218";
 import { Cv, cS, bN } from "../figma_app/795938";
 import { A6 } from "../905/350234";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { K as _$$K } from "../905/443068";
 import { J as _$$J2 } from "../905/125993";
 import { N9 } from "../figma_app/188152";
@@ -148,7 +148,7 @@ function A({
 }) {
   let s = setupResourceAtomHandler(_$$a.ResourcesPaginatedQuery({
     ...vb({
-      resourceType: t.resourceType || _$$L.BrowseResourceTypes.MIXED,
+      resourceType: t.resourceType || ResourceTypes.BrowseResourceTypes.MIXED,
       editorType: t.editorType || _$$k.Editors.ALL,
       price: t.price,
       sortBy: t.sortBy
@@ -266,7 +266,7 @@ function J({
   avatarSize: t = 96
 }) {
   let r = AG();
-  let s = CS();
+  let s = isResourceHubProfilesEnabled();
   let o = si(e) && !r;
   let [a, l] = useState(generateUUIDv4());
   let c = useCallback(() => {
@@ -533,7 +533,7 @@ function eE({
     }
   });
   let _ = "loading" === l;
-  return _ || a?.length !== 0 || e.editorType !== _$$k.Editors.ALL || e.resourceType !== _$$L.BrowseResourceTypes.MIXED ? jsxs("div", {
+  return _ || a?.length !== 0 || e.editorType !== _$$k.Editors.ALL || e.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED ? jsxs("div", {
     children: [jsx(_$$O, {
       resourcesLoading: _,
       totalResources: a || [],
@@ -692,7 +692,7 @@ class e4 extends PureComponent {
     });
   }
 }
-let tn = _$$r(_$$e3);
+let tn = userFlagExistsAtomFamily(_$$e3);
 function to({
   onboardingKey: e
 }) {
@@ -730,7 +730,7 @@ let tg = createOptimistThunk(async (e, t, {
 }) => {
   try {
     let s = XHR.post("/api/community/seller/stripe_dashboard");
-    _$$N3(s, e, r);
+    setupLoadingStateHandler(s, e, r);
     let i = await s;
     if (!i?.data?.meta) {
       t?.callback(!1);
@@ -757,7 +757,7 @@ let tE = registerModal(function () {
   let [p, h] = useState(!1);
   let x = useRef(null);
   _$$h(() => {
-    _$$C2.getCmtyCreatorPayoutStatements({
+    BuyerAPIHandler.getCmtyCreatorPayoutStatements({
       userId: t?.id
     }).then(({
       data: e
@@ -975,7 +975,7 @@ function r_({
     month: "long",
     day: "numeric"
   });
-  let n = e.monetized_resource_metadata ? bV(e.monetized_resource_metadata) : "";
+  let n = e.monetized_resource_metadata ? getProductPriceString(e.monetized_resource_metadata) : "";
   let o = `/community/${_$$ss(e)}/${e.id}`;
   return jsxs("div", {
     className: ri,
@@ -1089,7 +1089,7 @@ function ry({
   let n = useSubscription(CommunityResourceStat, {
     monetizedResourceMetadataId: id
   });
-  let a = new vr("usd");
+  let a = new CurrencyFormatter("usd");
   if ("loading" === n.status) return jsx(rf, {
     resource: e
   });
@@ -1345,7 +1345,7 @@ function rj({
           metricValueStyle: L,
           metricLabelStyle: T,
           totalPurchases: t[PayoutMetric.NUM_PURCHASES],
-          totalEarned: up(t[PayoutMetric.ALL_TIME_TOTAL_EARNED]),
+          totalEarned: formatCurrency(t[PayoutMetric.ALL_TIME_TOTAL_EARNED]),
           children: jsx(j, {})
         });
       }
@@ -1529,7 +1529,7 @@ rP.displayName = "ProfileMoreActionsButton";
 function rO({
   profile: e
 }) {
-  let t = CS();
+  let t = isResourceHubProfilesEnabled();
   let r = useRef(null);
   let {
     filterState,

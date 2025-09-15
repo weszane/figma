@@ -2,7 +2,7 @@ import { useEffect, useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { GM } from "../figma_app/275462";
+import { setupStarterUserCallback } from "../figma_app/275462";
 import { fI, In } from "../figma_app/229259";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
@@ -29,7 +29,7 @@ export function $$f1(e) {
   return i?.data ?? h;
 }
 export function $$_2() {
-  let e = !!GM()();
+  let e = !!setupStarterUserCallback()();
   let [t] = setupResourceAtomHandler(In(void 0), {
     enabled: e
   });

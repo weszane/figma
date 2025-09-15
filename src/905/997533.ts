@@ -10,10 +10,10 @@ import { P as _$$P } from "../905/724705";
 import { parseQuery } from "../905/634134";
 import { stringToUint8Array } from "../figma_app/930338";
 import { XHR } from "../905/910117";
-import { IY, kQ, LP, E as _$$E, Qg, Em, WY, My } from "../905/194276";
+import { AUTH_TOGGLE_SMS, AUTH_SET_HINT, AUTH_REQUIRE_TWO_FACTOR, changeAuthFormState, AUTH_SHOW_ERROR, startSamlEmailVerification, AUTH_SET_REDIRECT_URL, AUTH_COMPLETE } from "../905/194276";
 import { _G } from "../905/164233";
-import { qB, By, RE } from "../905/862321";
-import { g as _$$g } from "../905/248178";
+import { AuthFlowStep, AuthErrorCode, AuthField } from "../905/862321";
+import { trackAuthEvent } from "../905/248178";
 import { p as _$$p } from "../905/300815";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -53,14 +53,14 @@ let $$k5 = createOptimistThunk((e, {
     }
     if ("two_factor" === a.reason.missing) {
       let t;
-      e.dispatch(IY(a.reason.sms));
+      e.dispatch(AUTH_TOGGLE_SMS(a.reason.sms));
       a.reason.phone_number && (t = getI18nString("auth.two-factor.sms-hint", {
         phoneNumber: a.reason.phone_number
-      }), e.dispatch(kQ({
+      }), e.dispatch(AUTH_SET_HINT({
         hint: t
       })));
-      let i = r.auth.formState === qB.SIGN_IN || r.auth.formState === qB.RESET_PASSWORD ? r.auth.formState : qB.SIGN_IN;
-      e.dispatch(LP({
+      let i = r.auth.formState === AuthFlowStep.SIGN_IN || r.auth.formState === AuthFlowStep.RESET_PASSWORD ? r.auth.formState : AuthFlowStep.SIGN_IN;
+      e.dispatch(AUTH_REQUIRE_TWO_FACTOR({
         kind: i
       }));
       return;
@@ -68,8 +68,8 @@ let $$k5 = createOptimistThunk((e, {
   }
   let s = resolveMessage(t, a?.message || getI18nString("auth.default-error"));
   if (a?.reason === "account_unverified") {
-    e.dispatch(_$$E({
-      formState: qB.VALIDATE_EMAIL
+    e.dispatch(changeAuthFormState({
+      formState: AuthFlowStep.VALIDATE_EMAIL
     }));
     return;
   }
@@ -77,12 +77,12 @@ let $$k5 = createOptimistThunk((e, {
     window.location.href = "/blocked.html";
     return;
   }
-  t && 401 === t.status ? i = By.UNAUTHORIZED : t && 400 === t.status ? i = By.BAD_REQUEST : t && 404 === t.status && "no_saml" === a.reason ? i = By.NO_SAML : t && 404 === t.status && "magic_link_login_no_account" === a.reason ? i = By.MAGIC_LINK_LOGIN_NO_ACCOUNT : t && 403 === t.status && "saml_required" === a.reason && (i = By.SAML_REQUIRED);
-  r.auth.formState === qB.TWO_FACTOR && r.auth.twoFactorPromptedBy === qB.SIGN_IN ? n = RE.TOTP_KEY : r.auth.formState === qB.RESET_PASSWORD ? n = RE.PASSWORD : a && a.reason && "object" == typeof a.reason && ("password" === a.reason.missing || "password" === a.reason.invalid) ? n = RE.PASSWORD : r.auth.formState === qB.SAML_START && (n = RE.EMAIL);
-  r.auth.formState === qB.VERIFY_HUMAN && r.auth.prevForm !== qB.VERIFY_HUMAN && e.dispatch(_$$E({
+  t && 401 === t.status ? i = AuthErrorCode.UNAUTHORIZED : t && 400 === t.status ? i = AuthErrorCode.BAD_REQUEST : t && 404 === t.status && "no_saml" === a.reason ? i = AuthErrorCode.NO_SAML : t && 404 === t.status && "magic_link_login_no_account" === a.reason ? i = AuthErrorCode.MAGIC_LINK_LOGIN_NO_ACCOUNT : t && 403 === t.status && "saml_required" === a.reason && (i = AuthErrorCode.SAML_REQUIRED);
+  r.auth.formState === AuthFlowStep.TWO_FACTOR && r.auth.twoFactorPromptedBy === AuthFlowStep.SIGN_IN ? n = AuthField.TOTP_KEY : r.auth.formState === AuthFlowStep.RESET_PASSWORD ? n = AuthField.PASSWORD : a && a.reason && "object" == typeof a.reason && ("password" === a.reason.missing || "password" === a.reason.invalid) ? n = AuthField.PASSWORD : r.auth.formState === AuthFlowStep.SAML_START && (n = AuthField.EMAIL);
+  r.auth.formState === AuthFlowStep.VERIFY_HUMAN && r.auth.prevForm !== AuthFlowStep.VERIFY_HUMAN && e.dispatch(changeAuthFormState({
     formState: r.auth.prevForm
   }));
-  e.dispatch(Qg({
+  e.dispatch(AUTH_SHOW_ERROR({
     message: s,
     errorType: i,
     invalidInput: n
@@ -92,7 +92,7 @@ let $$R1 = createOptimistThunk((e, {
   data: t
 }) => {
   let i = e.getState();
-  if (_$$p("sign_in_user_pass"), _$$g("sign_in_success", i.auth.origin, {
+  if (_$$p("sign_in_user_pass"), trackAuthEvent("sign_in_success", i.auth.origin, {
     user_id: t?.meta?.id
   }), getInitialOptions().integration_host && trackEventAnalytics("Integration Login Success", {
     user_id: t?.meta?.id,
@@ -100,14 +100,14 @@ let $$R1 = createOptimistThunk((e, {
     trackedContext: e0.MS_TEAMS_TAB
   }), $$N7(t, i.auth.redirectUrl)) {
     let i = t.meta.id;
-    e.dispatch(Em({
+    e.dispatch(startSamlEmailVerification({
       userId: i
     }));
   } else {
-    "design_pricing" === i.auth.signupSource && e.dispatch(WY({
+    "design_pricing" === i.auth.signupSource && e.dispatch(AUTH_SET_REDIRECT_URL({
       redirectUrl: "/upgrade-team"
     }));
-    e.dispatch(My({
+    e.dispatch(AUTH_COMPLETE({
       userId: t.meta.id
     }));
     e.dispatch(FlashActions.flash(getI18nString("auth.sign-in-success", {
@@ -142,10 +142,10 @@ let F = e => e ? xf(e) ? {
   invalidInput: null
 } : {
   message: getI18nString("auth.input-validation.invalid-email"),
-  invalidInput: RE.EMAIL
+  invalidInput: AuthField.EMAIL
 } : {
   message: getI18nString("auth.input-validation.no-email"),
-  invalidInput: RE.EMAIL
+  invalidInput: AuthField.EMAIL
 };
 let M = (e, t) => {
   let i = F(t);
@@ -154,7 +154,7 @@ let M = (e, t) => {
     invalidInput: null
   } : {
     message: getI18nString("auth.input-validation.no-password"),
-    invalidInput: RE.PASSWORD
+    invalidInput: AuthField.PASSWORD
   };
 };
 let $$j4 = (e = "") => !!parseQuery(customHistory.location.search).is_not_gen_0 || e && P.includes(e);
@@ -166,7 +166,7 @@ let U = (e, t, i) => {
   i && e === i && (n = getI18nString("auth.input-validation.name-is-password"));
   return n ? {
     message: n,
-    invalidInput: RE.PASSWORD
+    invalidInput: AuthField.PASSWORD
   } : {
     message: "",
     invalidInput: null
@@ -183,7 +183,7 @@ export function $$B0({
 export let $$V6 = createOptimistThunk((e, {
   formId: t
 }) => {
-  _$$g("sms_recover_attempt", e.getState().auth.origin);
+  trackAuthEvent("sms_recover_attempt", e.getState().auth.origin);
   let i = document.getElementById(t);
   let a = _$$t(i);
   let s = null;
@@ -197,8 +197,8 @@ export let $$V6 = createOptimistThunk((e, {
   XHR.post("/api/session/sms_recover", s).then(({
     data: t
   }) => {
-    _$$g("sms_recover_success", e.getState().auth.origin);
-    t && t.meta && e.dispatch(kQ({
+    trackAuthEvent("sms_recover_success", e.getState().auth.origin);
+    t && t.meta && e.dispatch(AUTH_SET_HINT({
       hint: getI18nString("auth.two-factor.code-hint-confirmation", {
         phoneNumber: t.meta.phone_number
       })

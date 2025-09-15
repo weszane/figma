@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { A } from "../905/17894";
-import { k } from "../905/22009";
+import { editorUtilities } from "../905/22009";
 import { nT } from "../905/448740";
 import { iB } from "../figma_app/188671";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
@@ -10,48 +10,48 @@ import { ManifestEditorType } from "../figma_app/155287";
 export function $$p3(e, t) {
   if (t) switch (t) {
     case FTemplateCategoryType.CANVAS:
-      return k.Editors.FIGMA;
+      return editorUtilities.Editors.FIGMA;
     case FTemplateCategoryType.PROTOTYPE:
-      return k.Editors.PROTOTYPE;
+      return editorUtilities.Editors.PROTOTYPE;
     case FTemplateCategoryType.WHITEBOARD:
-      return k.Editors.FIGJAM;
+      return editorUtilities.Editors.FIGJAM;
     case FTemplateCategoryType.SLIDE_TEMPLATE:
-      return k.Editors.SLIDES;
+      return editorUtilities.Editors.SLIDES;
     case FTemplateCategoryType.SITE_TEMPLATE:
-      return k.Editors.SITES;
+      return editorUtilities.Editors.SITES;
     case FTemplateCategoryType.COOPER_TEMPLATE_FILE:
-      return k.Editors.COOPER;
+      return editorUtilities.Editors.COOPER;
     case FTemplateCategoryType.FIGMAKE_TEMPLATE:
-      return k.Editors.FIGMAKE;
+      return editorUtilities.Editors.FIGMAKE;
     case FTemplateCategoryType.LIBRARY:
       return;
     case FTemplateCategoryType.FIGMAKE_TEMPLATE:
-      return k.Editors.FIGMAKE;
+      return editorUtilities.Editors.FIGMAKE;
     default:
       throwTypeError(t);
   }
   if (e) switch (e) {
     case FFileType.DESIGN:
     case ManifestEditorType.FIGMA:
-      return k.Editors.FIGMA;
+      return editorUtilities.Editors.FIGMA;
     case FFileType.WHITEBOARD:
     case ManifestEditorType.FIGJAM:
-      return k.Editors.FIGJAM;
+      return editorUtilities.Editors.FIGJAM;
     case FFileType.SLIDES:
     case ManifestEditorType.SLIDES:
-      return k.Editors.SLIDES;
+      return editorUtilities.Editors.SLIDES;
     case FFileType.SITES:
     case ManifestEditorType.SITES:
-      return k.Editors.SITES;
+      return editorUtilities.Editors.SITES;
     case ManifestEditorType.INSPECT:
     case ManifestEditorType.DEV:
-      return k.Editors.DEV_MODE;
+      return editorUtilities.Editors.DEV_MODE;
     case FFileType.COOPER:
-      return k.Editors.COOPER;
+      return editorUtilities.Editors.COOPER;
     case FFileType.FIGMAKE:
-      return k.Editors.FIGMAKE;
+      return editorUtilities.Editors.FIGMAKE;
     case ManifestEditorType.BUZZ:
-      return k.Editors.COOPER;
+      return editorUtilities.Editors.COOPER;
     default:
       throwTypeError(e);
   }

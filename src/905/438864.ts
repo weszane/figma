@@ -1,6 +1,6 @@
 import { randomBetween } from "../figma_app/492908";
 import { getFalseValue } from "../figma_app/897289";
-import { c3 } from "../figma_app/78808";
+import { clearActiveFileUsersAction } from "../figma_app/78808";
 import { yJ, bE, HA, yH } from "../figma_app/598926";
 import { ru } from "../905/879323";
 import { ProjectsForTeam, ProjectByIdForRealtimeShim } from "../figma_app/43951";
@@ -18,7 +18,7 @@ export function $$u2(e, t, i = !1) {
         e.dispatch(ru({
           fileKey: t
         }));
-        e.dispatch(c3({
+        e.dispatch(clearActiveFileUsersAction({
           fileKey: t
         }));
       }

@@ -1,7 +1,7 @@
 import { z as zod } from 'zod';
 import { ProductStatus, ProductSource } from '../905/54385';
 import { Ip } from '../905/239603';
-import { fe } from '../905/272080';
+import { SubscriptionMetadataSchema } from '../905/272080';
 import { Y } from '../905/344937';
 import { getFeatureFlags } from '../905/601108';
 import { CommunityRatingStatsContainerSchema } from '../905/796201';
@@ -311,7 +311,7 @@ export const PluginDetailsSchema = PluginVersionsRecordSchema.merge(zod.object({
   profile_install_status: zod.nativeEnum(PluginInstallStatus).optional(),
   commenting_is_restricted: zod.boolean(),
   monetization_status: zod.nativeEnum(ProductSource).nullish(),
-  community_resource_payment: fe.optional(),
+  community_resource_payment: SubscriptionMetadataSchema.optional(),
   third_party_m10n_status: zod.nativeEnum(ProductStatus).nullish(),
   creator_policy: zod.string().optional(),
   plugin_publishers: I7.optional(),

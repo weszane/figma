@@ -121,17 +121,17 @@ import { A as _$$A2 } from "../svg/452";
 import { A as _$$A3 } from "../1617/505000";
 import { g as _$$g3 } from "../905/757007";
 import { W as _$$W } from "../905/569454";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { yo, k3, U6 } from "../figma_app/591738";
 import { Z as _$$Z2 } from "../905/104740";
 import { K as _$$K3 } from "../905/443068";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { kJ } from "../905/723870";
 import { TrackingProvider } from "../figma_app/831799";
 import { wg as _$$wg } from "../figma_app/101956";
-import { p9 } from "../figma_app/864723";
+import { userAtom } from "../figma_app/864723";
 import { A as _$$A4 } from "../svg/796914";
 import { A as _$$A5 } from "../svg/404778";
 import { V as _$$V } from "../905/890500";
@@ -1383,7 +1383,7 @@ function tV(e) {
   }) : null;
 }
 function t3(e) {
-  let t = useAtomWithSubscription(p9);
+  let t = useAtomWithSubscription(userAtom);
   let n = useAtomWithSubscription(openFileAtom);
   let a = kJ();
   return yo({
@@ -1415,7 +1415,7 @@ function t6(e) {
   let r = e.numPinnedCommentThreads >= 10;
   async function d() {
     try {
-      a(_$$b2({
+      a(postUserFlag({
         has_toggled_comment_pin: !0
       }));
       s ? await pinApi?.removePin(e.id, e.commentPin.id) : await pinApi?.setPin(e.id);
@@ -1513,7 +1513,7 @@ function t8(e) {
         onMouseDown: e => e.stopPropagation(),
         className: W()(e.resolved && aW, r && VM),
         children: e.resolved ? jsx(_$$g3, {}) : jsx(_$$W, {})
-      }), e.customIcon, jsx(Jn, {
+      }), e.customIcon, jsx(CloseButton, {
         className: _$$UR,
         recordingKey: "threadHeader",
         onClick: e.onClose,

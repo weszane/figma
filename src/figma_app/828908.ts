@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { f } from "../905/940356";
 function l(e) {
   switch (e) {
@@ -32,7 +32,7 @@ function c(e, t, r) {
   isSrgb && "srgb" !== r && (d.color_management_desktop_app_setting_srgb = !1);
   let c = isDefault && "default" === r || isUnmanaged && "unmanaged" === r || isManaged && "managed" === r || isSrgb && "srgb" === r;
   void 0 === r || c || (d[l(r)] = !0);
-  Object.keys(d).length > 0 && e(b(d));
+  Object.keys(d).length > 0 && e(postUserFlag(d));
 }
 export function $$u1(e) {
   if (!desktopAPIInstance) return;

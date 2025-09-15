@@ -28,7 +28,7 @@ import { N as _$$N } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/103637";
 import { s as _$$s } from "../cssbuilder/589278";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { f as _$$f } from "../905/940356";
 import { pz, vC, D5, wP, X6, Mo, rb, xQ, w0, $I, ON, hW, jE } from "../figma_app/589564";
 import { tJ, G3, iq, AF, Pr, Cm } from "../figma_app/80782";
@@ -70,7 +70,7 @@ function B({
   let h = _$$f(U);
   let g = n.filter(e => d.every(t => !t.categoryIds.includes(e)));
   useEffect(() => {
-    "makeSomething" !== o && _ && !h && (t(l), c(_$$b({
+    "makeSomething" !== o && _ && !h && (t(l), c(postUserFlag({
       [U]: !0
     })));
   }, [c, _, h, l, t, o]);

@@ -7,7 +7,7 @@ import { Ag } from "../figma_app/471982";
 import { Af } from "../figma_app/49598";
 import { l5 } from "../figma_app/559491";
 import { Qv, sf } from "../905/929976";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { yJ as _$$yJ, bE } from "../figma_app/598926";
 import { OB } from "../figma_app/91703";
 import { yJ as _$$yJ2 } from "../905/466026";
@@ -151,7 +151,7 @@ let $$P0 = e => t => function (r) {
         }
       }
     }
-  } else if (yJ.matches(r)) {
+  } else if (filePutAction.matches(r)) {
     let t = e.getState().selectedView;
     if ("fullscreen" === t.view && r.payload.file.key === t.fileKey || "prototype" === t.view && r.payload.file.key === t.file.key) {
       OR(P, t);

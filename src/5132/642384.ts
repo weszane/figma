@@ -8,7 +8,7 @@ import { Hx } from "../905/321397";
 import { VisualBellActions } from "../905/302958";
 import { wr } from "../figma_app/387599";
 import { JJ } from "../figma_app/471982";
-import { YN } from "../figma_app/275462";
+import { shouldSkipWorkspaceSelection } from "../figma_app/275462";
 import { y as _$$y } from "../905/444931";
 import { M5 } from "../figma_app/350203";
 import { nm } from "../905/352022";
@@ -97,7 +97,7 @@ let $$T1 = (e, l = {
       customHistory.redirect(g, isMobileUA ? void 0 : "_blank");
     });
   }
-  YN() && l.skipWorkspaceSelection ? h() : await j(e, i, n, u, h);
+  shouldSkipWorkspaceSelection() && l.skipWorkspaceSelection ? h() : await j(e, i, n, u, h);
 };
 let $$A2 = (e, l = {
   skipWorkspaceSelection: !1,
@@ -113,7 +113,7 @@ let $$A2 = (e, l = {
     }));
     customHistory.redirect(t, isMobileUA ? void 0 : "_blank");
   }
-  YN() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o);
+  shouldSkipWorkspaceSelection() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o);
 };
 let $$S0 = (e, l = {
   skipWorkspaceSelection: !1,
@@ -129,7 +129,7 @@ let $$S0 = (e, l = {
     }));
     customHistory.redirect(t, isMobileUA ? void 0 : "_blank");
   }
-  YN() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o, !0);
+  shouldSkipWorkspaceSelection() && l.skipWorkspaceSelection ? o() : await j(e, i, t, n, o, !0);
 };
 export const Q4 = $$S0;
 export const gE = $$T1;

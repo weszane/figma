@@ -54,13 +54,13 @@ import { z6 } from "../figma_app/805373";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e3 } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N2 } from "../figma_app/268271";
 import { rq as _$$rq } from "../905/425180";
 import { R as _$$R } from "../905/11928";
 import { F_ } from "../905/858282";
 import { SqV, BWk } from "../figma_app/6204";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { zl } from "../figma_app/641749";
@@ -83,7 +83,7 @@ import { i as _$$i } from "../905/385727";
 import { st, d3, bV, hO, tb, w3, dF, zY, DA, Sc, KN, Zk, KZ, l2, VA, Lq } from "../figma_app/538002";
 import { $ as _$$$, t as _$$t2 } from "../905/628632";
 let eu = "seen_sharing_clarity_project_modal_overlay";
-let ep = r1(eu);
+let ep = userFlagExistsAtomFamily(eu);
 let em = "sc_project_creation_team_access_onboarding_key";
 function eh() {
   let e = useAtomWithSubscription(ep);
@@ -119,7 +119,7 @@ function eh() {
 let eI = "seen_sharing_clarity_project_modal_overlay";
 let eE = "sc_project_modal_onboarding_key";
 let ex = "sc_project_modal_team_access_onboarding_key";
-let eS = r1(eI);
+let eS = userFlagExistsAtomFamily(eI);
 let ew = rn("sc_project_modal_onboarding", _$$R2(BWk));
 function eC() {
   let e = useAtomWithSubscription(eS);
@@ -169,7 +169,7 @@ function eC() {
     isShowing,
     steps: c,
     onComplete: () => {
-      o(_$$b2({
+      o(postUserFlag({
         [eI]: !0
       }));
       complete();

@@ -1,42 +1,42 @@
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
-import { l$ } from "../figma_app/275462";
+import { isMakeDiscoveryEnabled } from "../figma_app/275462";
 import { M } from "../905/722875";
 import { Z } from "../905/942203";
-import { k } from "../905/22009";
-import { L, t as _$$t2 } from "../905/178090";
+import { editorUtilities } from "../905/22009";
+import { ResourceTypes, ResourceTypeSubset } from "../905/178090";
 import { zs } from "../figma_app/773663";
 import { C } from "../905/237873";
 import { e as _$$e } from "../figma_app/324237";
 if (443 == require.j) {}
 export function $$_4(e) {
   switch (e) {
-    case k.Editors.ALL:
+    case editorUtilities.Editors.ALL:
       return getI18nString("community.landing_page.sort.all_products");
-    case k.Editors.FIGMA:
+    case editorUtilities.Editors.FIGMA:
       return getI18nString("general.figma_design");
-    case k.Editors.DEV_MODE:
+    case editorUtilities.Editors.DEV_MODE:
       return getI18nString("community.view_bar.dev_mode");
-    case k.Editors.PROTOTYPE:
+    case editorUtilities.Editors.PROTOTYPE:
       return getI18nString("community.view_bar.figma_prototype");
-    case k.Editors.FIGJAM:
+    case editorUtilities.Editors.FIGJAM:
       return getI18nString("community.view_bar.fig_jam");
-    case k.Editors.SLIDES:
+    case editorUtilities.Editors.SLIDES:
       return getI18nString("community.view_bar.slides");
-    case k.Editors.SITES:
+    case editorUtilities.Editors.SITES:
       return getI18nString("community.view_bar.sites");
-    case k.Editors.COOPER:
+    case editorUtilities.Editors.COOPER:
       return getI18nString("community.view_bar.buzz");
-    case k.Editors.FIGMAKE:
+    case editorUtilities.Editors.FIGMAKE:
       return getI18nString("community.view_bar.figmake");
     default:
       throwTypeError(e);
   }
 }
 export function $$p2(e, t, r) {
-  return e === L.SearchResourceTypes.PROFILES ? [] : function () {
-    let e = [k.Editors.ALL, k.Editors.FIGMA, k.Editors.DEV_MODE, k.Editors.PROTOTYPE, k.Editors.FIGJAM, k.Editors.SLIDES, k.Editors.SITES, k.Editors.COOPER];
-    l$() && e.push(k.Editors.FIGMAKE);
+  return e === ResourceTypes.SearchResourceTypes.PROFILES ? [] : function () {
+    let e = [editorUtilities.Editors.ALL, editorUtilities.Editors.FIGMA, editorUtilities.Editors.DEV_MODE, editorUtilities.Editors.PROTOTYPE, editorUtilities.Editors.FIGJAM, editorUtilities.Editors.SLIDES, editorUtilities.Editors.SITES, editorUtilities.Editors.COOPER];
+    isMakeDiscoveryEnabled() && e.push(editorUtilities.Editors.FIGMAKE);
     return e;
   }().filter(s => (!t || !(t.length > 0) || !!t.includes(s)) && s === zs(s, e, r).editorType).map(e => ({
     key: e,
@@ -79,8 +79,8 @@ export function $$x0(e, t) {
   }));
   return r;
 }
-let f = [L.BrowseResourceTypes.MIXED, L.BrowseResourceTypes.FILES, L.BrowseResourceTypes.PLUGINS, L.BrowseResourceTypes.WIDGETS];
-let y = Object.values(_$$t2);
+let f = [ResourceTypes.BrowseResourceTypes.MIXED, ResourceTypes.BrowseResourceTypes.FILES, ResourceTypes.BrowseResourceTypes.PLUGINS, ResourceTypes.BrowseResourceTypes.WIDGETS];
+let y = Object.values(ResourceTypeSubset);
 export function $$g1(e, t = !0) {
   return (t ? f : y).filter(t => {
     let {
@@ -105,11 +105,11 @@ export function $$g1(e, t = !0) {
       }
     }(e) : function (e) {
       switch (e) {
-        case _$$t2.FILES:
+        case ResourceTypeSubset.FILES:
           return getI18nString("community.view_bar.files");
-        case _$$t2.PLUGINS:
+        case ResourceTypeSubset.PLUGINS:
           return getI18nString("community.view_bar.plugins");
-        case _$$t2.WIDGETS:
+        case ResourceTypeSubset.WIDGETS:
           return getI18nString("community.view_bar.widgets");
         default:
           throwTypeError(e);

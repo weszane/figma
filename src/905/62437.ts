@@ -7,7 +7,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { getResourceDataOrFallback } from "../905/723791";
 import { FlashActions } from "../905/573154";
 import { fk } from "../figma_app/618433";
-import { SQ, PF, YW } from "../figma_app/78808";
+import { restoreFileVersionOptimistic, fileRestoreAction, duplicateFileOptimistic } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/852057";
 import { formatI18nMessage } from "../905/482208";
@@ -61,7 +61,7 @@ function $$D(e) {
       d(!1);
       return;
     }
-    t(SQ({
+    t(restoreFileVersionOptimistic({
       fileKey: e,
       version
     }));
@@ -173,7 +173,7 @@ export function $$B0(e) {
     let y = r("savepoint-restore", () => {
       if (!i) return;
       let e = () => {
-        k(PF({
+        k(fileRestoreAction({
           fileKey: t.key,
           versionId: C.id
         }));
@@ -202,7 +202,7 @@ export function $$B0(e) {
           upsellPlan: _$$F.Plan.PRO,
           upsellSource: UpsellModalType.CREATE_NEW_FILE
         }
-      })) : (k(YW({
+      })) : (k(duplicateFileOptimistic({
         file: t,
         versionId: C.id
       })), trackEventAnalytics("History Version Checkpoint Duplicated", {

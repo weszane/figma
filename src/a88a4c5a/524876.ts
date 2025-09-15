@@ -33,7 +33,7 @@ import { f as _$$f } from '../905/940356';
 import { kG } from '../905/958668';
 import { Wn, xp } from '../905/966582';
 import { v as _$$v } from '../905/981847';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { iX } from '../6443/426443';
 import { n as _$$n } from '../draftjs_composer/589474';
 import { eR as _$$eR } from '../figma_app/12220';
@@ -197,7 +197,7 @@ export function $$ed1(e) {
     trackUserEvent('Comment composer opened', eA.getState(), {
       isThread: t
     });
-    Z || eA.dispatch(_$$b({
+    Z || eA.dispatch(postUserFlag({
       has_opened_comments_modal: !0
     }));
   }, [eA, e.threadId, Z]);

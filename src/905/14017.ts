@@ -5,7 +5,7 @@ import { formatNumber } from "../figma_app/930338";
 import { SvgComponent } from "../905/714743";
 import { useSelector } from "react-redux";
 import { renderI18nText } from "../905/303541";
-import { bV, QQ } from "../figma_app/808294";
+import { getProductPriceString, isSubscriptionActive } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
 import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from "../figma_app/45218";
 import { t as _$$t } from "../905/344937";
@@ -37,7 +37,7 @@ let f = "monetization_labels--monetizationLabel--IHaDi text--fontPos11--2LvXf te
 function _({
   resource: e
 }) {
-  let t = bV(e.monetized_resource_metadata);
+  let t = getProductPriceString(e.monetized_resource_metadata);
   return jsx("span", {
     className: f,
     children: t
@@ -65,7 +65,7 @@ function v({
   resource: e
 }) {
   let t = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  return e ? !(t && cs(t)) && _$$t(e) && e.community_resource_payment && QQ(e.community_resource_payment) ? jsx(A, {}) : hasFreemiumCode(e) ? jsx(y, {}) : hasMonetizedResourceMetadata(e) ? jsx(_, {
+  return e ? !(t && cs(t)) && _$$t(e) && e.community_resource_payment && isSubscriptionActive(e.community_resource_payment) ? jsx(A, {}) : hasFreemiumCode(e) ? jsx(y, {}) : hasMonetizedResourceMetadata(e) ? jsx(_, {
     resource: e
   }) : isThirdPartyMonetized(e) ? jsx(y, {}) : jsx(b, {}) : null;
 }

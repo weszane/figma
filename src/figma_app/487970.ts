@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 import { E } from "../905/53857";
 import { renderI18nText } from "../905/303541";
 import { I } from "../figma_app/4253";
-import { bV, QQ } from "../figma_app/808294";
+import { getProductPriceString, isSubscriptionActive } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
 import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from "../figma_app/45218";
 import { t as _$$t } from "../905/344937";
 function p(e) {
-  let t = bV(e.resource.monetized_resource_metadata);
+  let t = getProductPriceString(e.resource.monetized_resource_metadata);
   return jsx(E, {
     size: e.size,
     children: t
@@ -19,7 +19,7 @@ export function $$_3({
 }) {
   let t = useSelector(e => e.authedActiveCommunityProfile);
   let r = I(e);
-  let c = QQ(r);
+  let c = isSubscriptionActive(r);
   return !cs(t) && c ? jsx(E, {
     variant: "defaultOutline",
     children: renderI18nText("community.buyer.purchased")
@@ -74,7 +74,7 @@ export function $$b0({
   validBadges: r = Object.values($$E4),
   authedActiveCommunityProfile: i
 }) {
-  return e ? !(i && cs(i)) && _$$t(e) && e.community_resource_payment && QQ(e.community_resource_payment) ? r.includes("purchased") ? jsx($$h2, {
+  return e ? !(i && cs(i)) && _$$t(e) && e.community_resource_payment && isSubscriptionActive(e.community_resource_payment) ? r.includes("purchased") ? jsx($$h2, {
     size: t
   }) : null : hasFreemiumCode(e) ? r.includes("freemium") ? jsx(g, {
     size: t

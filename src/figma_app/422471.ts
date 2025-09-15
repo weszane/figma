@@ -1,13 +1,13 @@
 import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { b } from "../905/985254";
-import { Fu } from "../figma_app/545877";
+import { postUserFlag } from "../905/985254";
+import { userFlagAtomFamily } from "../figma_app/545877";
 import { selectCurrentFile } from "../figma_app/516028";
-let $$d1 = Fu("dev_handoff_has_seen_dev_mode");
-let $$c3 = Fu("dev_handoff_has_seen_dev_mode_ga");
+let $$d1 = userFlagAtomFamily("dev_handoff_has_seen_dev_mode");
+let $$c3 = userFlagAtomFamily("dev_handoff_has_seen_dev_mode_ga");
 let $$u2 = atom(!1);
-let $$p5 = Fu("dev_handoff_has_seen_dev_mode_paywall");
+let $$p5 = userFlagAtomFamily("dev_handoff_has_seen_dev_mode_paywall");
 export function $$_4() {
   (function () {
     let e = useSelector(e => e.currentUserOrgId);
@@ -17,7 +17,7 @@ export function $$_4() {
     let c = useAtomWithSubscription($$d1);
     let u = useRef(!1);
     useEffect(() => {
-      u.current || "loaded" !== c.status || (u.current = !0, o(b({
+      u.current || "loaded" !== c.status || (u.current = !0, o(postUserFlag({
         dev_handoff_has_seen_dev_mode: !0,
         dev_handoff_has_seen_dev_mode_ga: !0
       })));
@@ -33,7 +33,7 @@ export function $$h0() {
     let o = useRef(!1);
     useEffect(() => {
       r(!0);
-      o.current || "loaded" !== t.status || (o.current = !0, e(b({
+      o.current || "loaded" !== t.status || (o.current = !0, e(postUserFlag({
         dev_handoff_has_seen_dev_mode_paywall: !0
       })));
     }, [t, e, r]);

@@ -24,7 +24,7 @@ import { jL } from "../figma_app/658324";
 import { FPlanFeatureType, FOrganizationLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
 import { cg } from "../figma_app/336853";
-import { N as _$$N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { e as _$$e } from "../figma_app/119601";
 import { AccessLevelEnum } from "../905/557142";
 import { createNoOpValidator } from "../figma_app/181241";
@@ -656,7 +656,7 @@ let $$Y0 = registerModal(function (e) {
           let e = XHR.put(`/api/org_join_request/${t}/approve`, {
             source: "email"
           });
-          _$$N(e, {
+          setupLoadingStateHandler(e, {
             dispatch: l
           }, b);
           e.then(() => {

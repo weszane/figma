@@ -2,7 +2,7 @@ import { D } from "../905/347702";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { g as _$$g } from "../figma_app/115586";
 import { f } from "../905/940356";
@@ -22,7 +22,7 @@ export function $$u0(e, t) {
       };
     }
     function n() {
-      r(b({
+      r(postUserFlag({
         [e]: !0
       }));
     }

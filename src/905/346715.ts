@@ -18,7 +18,7 @@ import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { hideModal, showModalHandler, popModalStack } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType, FResourceCategoryType } from "../figma_app/191312";
 import { mg, nX } from "../figma_app/336853";
@@ -293,7 +293,7 @@ let $$F0 = registerModal(function (e) {
                         connectedPlanName: K || ""
                       })
                     }));
-                    i(_$$b({
+                    i(postUserFlag({
                       initiated_first_resource_connection: !0
                     }));
                   }).catch(e => {

@@ -24,9 +24,9 @@ import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { NotificationType } from "../905/170564";
 import { notificationActions } from "../905/463586";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { trackFileEvent } from "../figma_app/314264";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { isIncrementalSessionOrValidating, autosaveSubscribeWithRetry } from "../figma_app/582924";
 import { awaitSync } from "../905/412815";
 import { xK } from "../905/125218";
@@ -1191,7 +1191,7 @@ let $$eC12 = _$$M.Mutation(({
   let o = eb?.fileCreationManager;
   o && (o.fileKey === e ? (o.updateNewFileInfo({
     fileName: t
-  }), o.pendingRealFileKey && debugState.dispatch(yJ({
+  }), o.pendingRealFileKey && debugState.dispatch(filePutAction({
     file: {
       key: o.pendingRealFileKey,
       name: t
@@ -1208,7 +1208,7 @@ let $$eC12 = _$$M.Mutation(({
   return ef(s, e, t);
 });
 let ew = atom(e => {
-  let t = e(kS);
+  let t = e(userIdAtom);
   let r = {};
   if (t) {
     let n = e($$ex6({
@@ -1220,7 +1220,7 @@ let ew = atom(e => {
 });
 let $$eO17 = atom(e => {
   let t = e(_$$h);
-  let r = e(kS);
+  let r = e(userIdAtom);
   if (t && r) {
     let n = e($$ex6({
       userId: r

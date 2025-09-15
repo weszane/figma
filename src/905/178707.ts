@@ -7,8 +7,8 @@ import l from "classnames";
 import { xf, bs } from "../figma_app/416935";
 import { h as _$$h } from "../905/207101";
 import { d as _$$d } from "../905/884707";
-import { E as _$$E2, BZ, OZ } from "../905/194276";
-import { qB, RE } from "../905/862321";
+import { changeAuthFormState, AUTH_CHANGE_EMAIL, AUTH_SET_GOOGLE_ID_TOKEN } from "../905/194276";
+import { AuthFlowStep, AuthField } from "../905/862321";
 import { sT } from "../905/694658";
 import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -90,12 +90,12 @@ export function $$w0(e) {
     });
   });
   let x = e => {
-    e && d === qB.SIGN_IN && l(_$$E2({
-      formState: qB.SAML_START
+    e && d === AuthFlowStep.SIGN_IN && l(changeAuthFormState({
+      formState: AuthFlowStep.SAML_START
     }));
   };
   let w = async e => {
-    if (l(BZ({
+    if (l(AUTH_CHANGE_EMAIL({
       value: e.trim()
     })), !p && xf(e)) {
       await sT({
@@ -115,8 +115,8 @@ export function $$w0(e) {
         getSessionStorage()?.setItem(`SIGN-IN ${e}`, data.meta.saml_sso_only);
         x(!!data.meta.saml_sso_only);
       } catch (e) {
-        d === qB.SAML_START && l(_$$E2({
-          formState: qB.SIGN_IN
+        d === AuthFlowStep.SAML_START && l(changeAuthFormState({
+          formState: AuthFlowStep.SIGN_IN
         }));
       }
     }
@@ -135,13 +135,13 @@ export function $$w0(e) {
   return jsxs(Fragment, {
     children: [jsx($$S2, {
       "aria-describedby": e.ariaDescribedBy,
-      "aria-invalid": RE.EMAIL === _,
+      "aria-invalid": AuthField.EMAIL === _,
       autoCapitalize: "off",
       autoComplete: "username",
       autoCorrect: "off",
       id: "email",
-      isInvalid: RE.EMAIL === _,
-      name: RE.EMAIL,
+      isInvalid: AuthField.EMAIL === _,
+      name: AuthField.EMAIL,
       onBlur: t => {
         if (e.onBlur?.(t, !0), e.showDomainSuggestions) {
           let e = f.split("@")[1];
@@ -174,17 +174,17 @@ export function $$C3(e) {
   let d = e.isSignUp ? "new-password" : "current-password";
   return jsx($$S2, {
     "aria-describedby": e.ariaDescribedBy,
-    "aria-invalid": o === RE.PASSWORD,
+    "aria-invalid": o === AuthField.PASSWORD,
     autoCapitalize: "off",
     autoComplete: d,
     autoCorrect: "off",
     id: "current-password",
-    isInvalid: o === RE.PASSWORD,
-    name: RE.PASSWORD,
+    isInvalid: o === AuthField.PASSWORD,
+    name: AuthField.PASSWORD,
     onBlur: e.onBlur,
     onChange: function (e) {
       i(e.currentTarget.value);
-      s(OZ({
+      s(AUTH_SET_GOOGLE_ID_TOKEN({
         googleIdToken: null
       }));
     },

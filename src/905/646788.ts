@@ -35,7 +35,7 @@ import { ResourceStatus } from "../905/663269";
 import { conditionalFeatureFlag, getInitialOptions, isStagingCluster, buildUploadUrl, isDevEnvironment, getSupportEmail } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { Su, aP as _$$aP, QU, DU, bF } from "../figma_app/275462";
+import { isFullFilePublishingEnabled, isMakePublishingEnabled, isMakePublishingUpdatesEnabled, canAdminPublish, isTemplatePublishingEnabled } from "../figma_app/275462";
 import { W as _$$W } from "../905/336482";
 import { JT } from "../figma_app/173838";
 import { HW, iq as _$$iq, lg, m0 } from "../figma_app/976749";
@@ -53,7 +53,7 @@ import { dR } from "../905/508367";
 import { selectWithShallowEqual } from "../905/103090";
 import { e as _$$e } from "../905/383776";
 import { A8 } from "../figma_app/617506";
-import { S as _$$S, Yn, Rh, rA as _$$rA, og } from "../figma_app/78808";
+import { copyShareLinkOptimistic, copyEmbedCodeOptimistic, startWorkshopSessionOptimistic, deleteWorkshopOptimistic, updateFilePermissionsOptimistic } from "../figma_app/78808";
 import { generateUrl, isBranch, isDefaultFile } from "../905/760074";
 import { buildFileUrl } from "../905/612685";
 import { replaceColonWithDash, normalizeVariableId } from "../905/691205";
@@ -100,13 +100,13 @@ import { cD } from "../figma_app/598018";
 import { K as _$$K } from "../905/851274";
 import { I as _$$I } from "../905/932503";
 import { K as _$$K2 } from "../905/987240";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { f as _$$f } from "../905/940356";
 import { h as _$$h2 } from "../905/207101";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
-import { r1 as _$$r2 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl as _$$zl } from "../figma_app/641749";
 import { rn as _$$rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
@@ -182,7 +182,7 @@ import { useMemoShallow } from "../905/19536";
 import nA from "../vendor/241899";
 import { t as _$$t5 } from "../905/331623";
 import { W as _$$W2 } from "../905/841666";
-import { ae as _$$ae } from "../figma_app/808294";
+import { decimalToPercent } from "../figma_app/808294";
 import { AC, Pg } from "../figma_app/777551";
 import { M as _$$M2 } from "../905/759470";
 import { Pn, PP } from "../905/230175";
@@ -192,7 +192,7 @@ import { Ro } from "../figma_app/805373";
 import { ax as _$$ax, ts as _$$ts2 } from "../figma_app/49598";
 import { sf } from "../905/929976";
 import { oH, b as _$$b4 } from "../figma_app/740025";
-import { VH } from "../figma_app/690075";
+import { getPublisherDisplayName } from "../figma_app/690075";
 import { $T } from "../figma_app/12535";
 import { HF, a6 as _$$a2, ow, M3 as _$$M3 } from "../figma_app/198840";
 import { getPermissionsState } from "../figma_app/642025";
@@ -421,7 +421,7 @@ function ey({
       shouldLinkToPrototype: s,
       shouldLinkToEditor: o
     });
-    return i(_$$S({
+    return i(copyShareLinkOptimistic({
       fileKey: e.key,
       url: l,
       label: conditionalFeatureFlag("ce_copy_labelled_links", e.name, void 0),
@@ -512,7 +512,7 @@ function eM({
     e.target.select();
   }, []);
   let u = useCallback(() => {
-    i(Yn({
+    i(copyEmbedCodeOptimistic({
       fileKey: e.key,
       embedCode: eF(s)
     }));
@@ -628,7 +628,7 @@ let eX = registerModal(function (e) {
       fileKey,
       userId: c
     });
-    s(Rh({
+    s(startWorkshopSessionOptimistic({
       fileKey
     }));
   }, [s, fileKey, c]);
@@ -683,7 +683,7 @@ let eQ = registerModal(function (e) {
       fileKey,
       userId: d
     });
-    i(_$$rA({
+    i(deleteWorkshopOptimistic({
       file_key: fileKey
     }));
   }, [i, fileKey, d]);
@@ -926,7 +926,7 @@ let to = registerModal(function (e) {
                 end_now: jsx($z, {
                   variant: "destructiveLink",
                   onClick: () => {
-                    s(_$$rA({
+                    s(deleteWorkshopOptimistic({
                       file_key: e.fileKey
                     }));
                     s(hideModalHandler());
@@ -1099,7 +1099,7 @@ function tf(e) {
 function tv(e) {
   let {
     getConfig
-  } = I7("exp_prototype_sharing_clarity");
+  } = selectExperimentConfigHook("exp_prototype_sharing_clarity");
   return useCallback(() => {
     if (!e) return !1;
     let i = getConfig().get("enabled", !1);
@@ -1110,7 +1110,7 @@ let tL = "seen_sharing_clarity_file_modal_overlay";
 let tF = "sc_file_modal_step_1_onboarding_key";
 let tM = "sc_file_modal_step_2_onboarding_key";
 let tj = "sc_file_modal_step_3_onboarding_key";
-let tU = _$$r2(tL);
+let tU = userFlagExistsAtomFamily(tL);
 let tB = _$$rn("sc_file_modal_onboarding", _$$R2(GCV));
 function tV(e) {
   let t = useAtomWithSubscription(tU);
@@ -1161,7 +1161,7 @@ function tV(e) {
     isShowing,
     steps: u,
     onComplete: () => {
-      l(_$$b2({
+      l(postUserFlag({
         [tL]: !0
       }));
       complete();
@@ -1216,7 +1216,7 @@ let tW = registerModal(function (e) {
           children: jsx(Button, {
             variant: "primary",
             onClick: () => {
-              l && i(_$$b2({
+              l && i(postUserFlag({
                 prototype_share_warning_dismissed: !0
               }));
               e.onConfirm();
@@ -1442,9 +1442,9 @@ function is({
     let r = _$$iq();
     let a = X();
     let s = _$$o();
-    let o = Su();
-    let l = _$$aP();
-    let d = QU();
+    let o = isFullFilePublishingEnabled();
+    let l = isMakePublishingEnabled();
+    let d = isMakePublishingUpdatesEnabled();
     let c = _$$W(e.editor_type);
     let u = function (e, t) {
       let i = useSubscription(FilePublishSitePermissions, {
@@ -1462,7 +1462,7 @@ function is({
     let g = Hz({
       figFileKey: e.key
     });
-    let _ = !i && hasTeamPaidAccess(t) && DU(e.editor_type ?? void 0);
+    let _ = !i && hasTeamPaidAccess(t) && canAdminPublish(e.editor_type ?? void 0);
     let A = (() => {
       switch (e.editor_type) {
         case FFileType.SLIDES:
@@ -1522,7 +1522,7 @@ function is({
   let C = function ({
     file: e
   }) {
-    let t = bF();
+    let t = isTemplatePublishingEnabled();
     return t9({
       file: e
     }) && t ? jsx(ir, {}) : null;
@@ -2571,7 +2571,7 @@ function na({
         onSuccess: a,
         linkExpirationConfigId: o,
         currentUser: n
-      })) : s(og({
+      })) : s(updateFilePermissionsOptimistic({
         file: {
           ...i,
           key: e.key
@@ -3840,7 +3840,7 @@ class rt extends Component {
         className: hC,
         children: [" ", renderI18nText("community.hub_files.by_author", {
           author: jsx("strong", {
-            children: VH(e)
+            children: getPublisherDisplayName(e)
           })
         })]
       })]
@@ -3880,7 +3880,7 @@ class rt extends Component {
         badges: [],
         monetized_resource_metadata: {
           id: "0",
-          price: _$$ae(metadata.price),
+          price: decimalToPercent(metadata.price),
           is_subscription: !1
         }
       } : null;
@@ -4792,7 +4792,7 @@ function r5(e) {
   });
 }
 let r7 = "seen_sharing_clarity_branch_modal_overlay";
-let r8 = _$$r2(r7);
+let r8 = userFlagExistsAtomFamily(r7);
 let r9 = "sc_branch_modal_onboarding_key";
 function ae() {
   let e = useAtomWithSubscription(r8);
@@ -4824,7 +4824,7 @@ function ae() {
   });
 }
 let at = "seen_sharing_clarity_file_audience_overlay";
-let ai = _$$r2(at);
+let ai = userFlagExistsAtomFamily(at);
 let an = "sc_file_audience_onboarding_key";
 function ar() {
   let e = useAtomWithSubscription(ai);
@@ -4856,7 +4856,7 @@ function ar() {
   });
 }
 let aa = "seen_sharing_clarity_prototype_modal_overlay";
-let as = _$$r2(aa);
+let as = userFlagExistsAtomFamily(aa);
 let ao = "sc_prototype_modal_onboarding_key";
 function al() {
   let e = useAtomWithSubscription(as);
@@ -5533,7 +5533,7 @@ function a$({
             invites: e
           }) => {
             u([...(c || []), ...e]);
-            d(_$$b2({
+            d(postUserFlag({
               sent_file_invite: !0
             }));
           },

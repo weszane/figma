@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
 import { sf, Qv } from "../905/929976";
-import { x2, of } from "../figma_app/714946";
+import { loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { bE } from "../905/98702";
 import { r1, bE as _$$bE, $w, aB, mw, ii } from "../figma_app/240735";
 import { b as _$$b } from "../905/493664";
@@ -240,11 +240,11 @@ let $$R5 = createOptimistThunk((e, t) => {
           teamName: a
         })));
     }
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: r
     }));
   }).catch(() => {
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: r
     }));
   });
@@ -274,11 +274,11 @@ let $$L4 = createOptimistThunk((e, t) => {
           teamCount: i
         })));
     }
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: r
     }));
   }).catch(() => {
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: r
     }));
   });

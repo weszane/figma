@@ -5,7 +5,7 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { n as _$$n, sD } from "../figma_app/740025";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 let $$p1 = createOptimistThunk((e, {
   id: t,
@@ -16,7 +16,7 @@ let $$p1 = createOptimistThunk((e, {
   let p = XHR.post(`/api/${_$$n(r)}/${t}/like`, {
     orgId: e.getState().currentUserOrgId
   });
-  N(p, e, l);
+  setupLoadingStateHandler(p, e, l);
   p.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: r === ResourceTypeNoComment.PLUGIN ? getI18nString("community.actions.unable_to_like_this_plugin_error", {
@@ -57,7 +57,7 @@ let $$_0 = createOptimistThunk((e, {
   let p = XHR.del(`/api/${_$$n(r)}/${t}/like`, {
     orgId: e.getState().currentUserOrgId
   });
-  N(p, e, l);
+  setupLoadingStateHandler(p, e, l);
   p.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: r === ResourceTypeNoComment.PLUGIN ? getI18nString("community.actions.unable_to_unlike_this_plugin_error", {

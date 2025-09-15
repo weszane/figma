@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { Sc } from "../905/18797";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { $ } from "../905/834575";
 import { tc } from "../905/15667";
 let $$m0 = createOptimistThunk((e, {
@@ -68,7 +68,7 @@ let $$h1 = createOptimistThunk((e, {
   let o = $.getTeamUsers({
     teamId: t
   });
-  N(o, e, i);
+  setupLoadingStateHandler(o, e, i);
   o.then(i => {
     e.dispatch($$f2({
       teamUsers: i.data.meta,

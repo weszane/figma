@@ -3,7 +3,7 @@ import { VariableResolvedDataType, LinterCppBindings } from "../figma_app/763686
 import { convertStringToKiwi } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { calculateColorDifference } from "../figma_app/191804";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { RI } from "../905/711212";
 import { n as _$$n } from "../905/347702";
 import { y as _$$y } from "../905/456837";
@@ -113,7 +113,7 @@ let $$x1 = _$$n(async (e, t, r, n, a, c, u, g, f) => {
   });
   let A = new Map();
   for (let [e, t] of f) A.set(e, new Set(t));
-  let x = await w0(Cg);
+  let x = await fetchDynamicConfig(Cg);
   let N = x.get(wp, dg);
   let C = x.get(qg, A7);
   let w = [];

@@ -8,7 +8,7 @@ import { IAssertResource } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
 import { f as _$$f } from "../figma_app/258006";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { LS } from "../905/782918";
 let g = "hint_panels--icon--EMIdH";
@@ -19,7 +19,7 @@ export function $$b1() {
   let e = LS();
   let t = useDispatch();
   let r = useCallback(() => {
-    t(b({
+    t(postUserFlag({
       [$$y0]: !0
     }));
   }, [t]);

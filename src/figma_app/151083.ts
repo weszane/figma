@@ -13,7 +13,7 @@ import { c$, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
 import { oB, j7 } from "../905/929976";
 import { showModalHandler } from "../905/156213";
-import { p9 } from "../figma_app/864723";
+import { userAtom } from "../figma_app/864723";
 import { fullscreenValue } from "../figma_app/455680";
 import { c as _$$c } from "../905/210851";
 import { openFileAtom } from "../figma_app/516028";
@@ -229,7 +229,7 @@ function W() {
     file_team_id
   } = useSelector(_$$c);
   let r = useAtomWithSubscription(openFileAtom);
-  let n = useAtomWithSubscription(p9);
+  let n = useAtomWithSubscription(userAtom);
   return useMemo(() => ({
     fileKey: file_key,
     fileParentOrgId: r?.parentOrgId?.toString(),

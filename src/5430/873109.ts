@@ -10,7 +10,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../5430/129716";
 import { Cc } from "../5430/664984";
 import { Qo, qD, _m } from "../figma_app/471982";
-import { oi } from "../figma_app/275462";
+import { isTntSavingEnabled } from "../figma_app/275462";
 import { K2 } from "../figma_app/777551";
 import { $9, Vm, rZ, XW, g0, YI, $3, qY, ws, bc, zL } from "../figma_app/427318";
 import { $O, bK } from "../figma_app/701107";
@@ -32,7 +32,7 @@ import { getResourceDataOrFallback, tT } from "../905/723791";
 import { reportError } from "../905/11";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { handleAtomEvent } from "../905/502364";
 import { VisualBellActions } from "../905/302958";
 import { AG } from "../figma_app/999312";
@@ -233,7 +233,7 @@ function es({
   orgId: i,
   orgName: n
 }) {
-  let o = oi();
+  let o = isTntSavingEnabled();
   if (!e.authedActiveCommunityProfile) {
     reportError(_$$e.COMMUNITY, Error("Attempted to save resource without an active community profile"));
     return;
@@ -312,7 +312,7 @@ function ei(e, t, r, s) {
 function en(e, t, r, s) {
   return function (i, n) {
     let o = n();
-    let a = oi();
+    let a = isTntSavingEnabled();
     if (!o.user || !o.authedActiveCommunityProfile) {
       reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted to remove save without currentUser"));
       return;
@@ -426,7 +426,7 @@ function ea(e, t) {
     u ? r(XW(e) ? en(e, t) : ei(e, t)) : r(XW(e) ? er(e, t, d?.href) : et(e, t));
   }, [u, r, e, t, d]);
   useCallback(e => {
-    FL(qB.SIGN_UP, {
+    FL(AuthFlowStep.SIGN_UP, {
       preventDefaultRedirect: !0
     });
   }, []);
@@ -911,7 +911,7 @@ export function $$eF0({
     let e = _$$T();
     return {
       showLikeButton: !0,
-      showSaveButton: (!e || oi()) && !0,
+      showSaveButton: (!e || isTntSavingEnabled()) && !0,
       showAuthorsHeader: !e
     };
   }();

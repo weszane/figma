@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useMemo, useState, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
-import { k as _$$k2 } from "../905/22009";
+import { editorUtilities as _$$k2 } from "../905/22009";
 import { iB } from "../figma_app/188671";
 import { IT } from "../905/713695";
 import { h as _$$h } from "../905/207101";

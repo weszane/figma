@@ -39,7 +39,7 @@ import { SvgComponent } from "../905/714743";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { AG } from "../figma_app/999312";
 import { y as _$$y } from "../905/158417";
-import { CS } from "../figma_app/275462";
+import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { HH } from "../figma_app/841415";
@@ -525,7 +525,7 @@ setupLazyComponentFactory("lazy_comment_editable_typeahead", {
 });
 function eI(e) {
   let t = AG();
-  let r = CS();
+  let r = isResourceHubProfilesEnabled();
   let {
     comment,
     author,

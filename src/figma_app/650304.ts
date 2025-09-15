@@ -10,8 +10,8 @@ import { J } from "../905/931050";
 import { getInitialOptions, isGovCluster } from "../figma_app/169182";
 import { r as _$$r } from "../905/520829";
 import { getIsMobile } from "../figma_app/778880";
-import { WY, My, Qg } from "../905/194276";
-import { g as _$$g } from "../905/248178";
+import { AUTH_SET_REDIRECT_URL, AUTH_COMPLETE, AUTH_SHOW_ERROR } from "../905/194276";
+import { trackAuthEvent } from "../905/248178";
 import { S$ } from "../figma_app/591738";
 import { o as _$$o } from "../905/621736";
 import { d as _$$d } from "../905/241150";
@@ -24,7 +24,7 @@ function T({
   let n = window;
   try {
     window.origin === window.parent.origin && (n = window.parent || window);
-  } catch { }
+  } catch {}
   let o = J(() => _$$o(n), [n]);
   let h = useDispatch();
   let y = !!S$();
@@ -33,7 +33,7 @@ function T({
   let S = useCallback(async ({
     credential: r
   }) => {
-    _$$g("google_one_tap_login_start", e, {}, {
+    trackAuthEvent("google_one_tap_login_start", e, {}, {
       forwardToDatadog: !0
     });
     let i = z(r);
@@ -48,12 +48,12 @@ function T({
       return;
     }
     try {
-      h(WY({
+      h(AUTH_SET_REDIRECT_URL({
         redirectUrl: function () {
           let e = jM();
           try {
             window.origin === window.parent.origin && (e = window.parent.location.pathname + window.parent.location.search);
-          } catch { }
+          } catch {}
           return e;
         }()
       }));
@@ -65,16 +65,16 @@ function T({
       "mfa" === t.type && n !== window && n.postMessage({
         type: "auth_iframe_show"
       }, "*");
-      "login" === t.type && (_$$g("google_one_tap_login_complete", e, {}, {
+      "login" === t.type && (trackAuthEvent("google_one_tap_login_complete", e, {}, {
         forwardToDatadog: !0
-      }), h(My({
+      }), h(AUTH_COMPLETE({
         userId: t.user.id
       })));
     } catch (e) {
       n !== window && n.postMessage({
         type: "auth_iframe_show"
       }, "*");
-      h(Qg({
+      h(AUTH_SHOW_ERROR({
         message: e.message
       }));
     }
@@ -97,7 +97,7 @@ function T({
       t.accounts.id.prompt(t => {
         if (T) {
           let r = t.getMomentType();
-          _$$g("google_one_tap_prompt_moment", e, {
+          trackAuthEvent("google_one_tap_prompt_moment", e, {
             momentType: r,
             reason: "dismissed" === r ? t.getDismissedReason() : void 0
           }, {
@@ -105,17 +105,17 @@ function T({
           });
           return;
         }
-        "display" === t.getMomentType() ? t.isDisplayed() ? _$$g("google_one_tap_prompt_displayed", e, {}, {
+        "display" === t.getMomentType() ? t.isDisplayed() ? trackAuthEvent("google_one_tap_prompt_displayed", e, {}, {
           forwardToDatadog: !0
-        }) : _$$g("google_one_tap_prompt_display_failed", e, {
+        }) : trackAuthEvent("google_one_tap_prompt_display_failed", e, {
           reason: t.getNotDisplayedReason()
         }, {
           forwardToDatadog: !0
-        }) : "skipped" === t.getMomentType() ? _$$g("google_one_tap_prompt_skipped", e, {
+        }) : "skipped" === t.getMomentType() ? trackAuthEvent("google_one_tap_prompt_skipped", e, {
           reason: t.getSkippedReason()
         }, {
           forwardToDatadog: !0
-        }) : "dismissed" === t.getMomentType() && _$$g("google_one_tap_prompt_dismissed", e, {
+        }) : "dismissed" === t.getMomentType() && trackAuthEvent("google_one_tap_prompt_dismissed", e, {
           reason: t.getDismissedReason()
         }, {
           forwardToDatadog: !0

@@ -42,7 +42,7 @@ import { NotificationType } from '../905/170564';
 import { d as _$$d3 } from '../905/189168';
 import { scopeAwareFunction as _$$nc, permissionScopeHandler } from '../905/189185';
 import { t as _$$t3 } from '../905/192333';
-import { Ts } from '../905/194276';
+import { AUTH_INIT } from '../905/194276';
 import { isStackOverflowError } from '../905/194389';
 import { Cg } from '../905/195479';
 import { g as _$$g3 } from '../905/211118';
@@ -231,7 +231,7 @@ import { qo as _$$qo } from '../905/959568';
 import { L as _$$L } from '../905/970585';
 import { n as _$$n5 } from '../905/971006';
 import { pO } from '../905/977824';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { K as _$$K } from '../905/987240';
 import { Rz } from '../905/990497';
 import { Ts as _$$Ts, qV } from '../905/994545';
@@ -427,7 +427,7 @@ import { LoadingSpinner } from '../figma_app/858013';
 import { n as _$$n6 } from '../figma_app/860474';
 import { ZW } from '../figma_app/861982';
 import { B3 as _$$B3, Ag } from '../figma_app/862289';
-import { kS } from '../figma_app/864723';
+import { userIdAtom } from '../figma_app/864723';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { bJ } from '../figma_app/881578';
 import { rT as _$$rT, dK, vD } from '../figma_app/889655';
@@ -812,7 +812,7 @@ async function ts(e, t) {
     e = t;
   }
   if (!t) {
-    let e = atomStoreManager.get(kS);
+    let e = atomStoreManager.get(userIdAtom);
     if (!e) throw new Error('Must provide a user ID');
     t = e;
   }
@@ -6147,7 +6147,7 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   saveUseNumbersForOpacityPreference(e) {
-    this._store.dispatch(_$$b({
+    this._store.dispatch(postUserFlag({
       use_numbers_for_opacity: e
     }));
   }
@@ -7064,7 +7064,7 @@ let lX = class e extends sP(sN(sR)) {
     let i = this._store.getState().selectedView;
     if (i.view !== 'fullscreen' || i.editorType === FEditorType.Design && !this.session.user) return;
     let n = parseQuery(customHistory.location.search);
-    this.dispatch(Ts({
+    this.dispatch(AUTH_INIT({
       origin: 'signed_out_edit',
       redirectUrl: this.generateRedirectLinkForSignedOutEdit(n['node-id'], customHistory.location.hash),
       signedUpFromOpenSession: this.isInWorkshopMode()
@@ -7132,7 +7132,7 @@ let lX = class e extends sP(sN(sR)) {
     desktopAPIInstance && this._writeFilesQueue.length !== 0 && (desktopAPIInstance.writeFiles(this._writeFilesQueue), this._writeFilesQueue = []);
   }
   enableCodegenMcpServer(e) {
-    getFeatureFlags().dt_my_cool_plugin && (atomStoreManager.get(Kx) !== 'xml' || getFeatureFlags().dt_my_cool_plugin_xml || atomStoreManager.set(Kx, 'design_to_react'), atomStoreManager.get(Kx) !== 'jsx' || getFeatureFlags().dt_my_cool_plugin_internal || atomStoreManager.set(Kx, 'design_to_react'), desktopAPIInstance?.setEnableMCP(e, pM, () => this.dispatch(_$$b({
+    getFeatureFlags().dt_my_cool_plugin && (atomStoreManager.get(Kx) !== 'xml' || getFeatureFlags().dt_my_cool_plugin_xml || atomStoreManager.set(Kx, 'design_to_react'), atomStoreManager.get(Kx) !== 'jsx' || getFeatureFlags().dt_my_cool_plugin_internal || atomStoreManager.set(Kx, 'design_to_react'), desktopAPIInstance?.setEnableMCP(e, pM, () => this.dispatch(postUserFlag({
       dev_mode_has_enabled_mcp_server: !0
     }))).then(t => {
       if (!t) return;
@@ -8101,7 +8101,7 @@ let lX = class e extends sP(sN(sR)) {
     _$$KE(e, t, user?.id);
   }
   setUserFlag(e, t) {
-    t !== e in this._state.userFlags && this.dispatch(_$$b({
+    t !== e in this._state.userFlags && this.dispatch(postUserFlag({
       [e]: t
     }));
   }

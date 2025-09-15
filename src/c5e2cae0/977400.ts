@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { h as _$$h } from "../905/207101";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { kR } from "../c5e2cae0/894125";
@@ -14,7 +14,7 @@ import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { FC } from "../figma_app/212807";
 import { _6 } from "../figma_app/386952";
-import { LN } from "../figma_app/514043";
+import { getUserCurrency } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { UpgradeSteps } from "../figma_app/831101";
 import { UpgradeAction, TeamType } from "../figma_app/707808";
@@ -80,7 +80,7 @@ function V(e) {
   let [d, m] = useState(!1);
   let [_, u] = useState(!1);
   let [h, g] = useState("");
-  let x = LN();
+  let x = getUserCurrency();
   let f = () => {
     t(hideModal());
   };
@@ -168,7 +168,7 @@ export function $$z0(e) {
       teamId: t.id,
       selectedView: b,
       newTeam: !1,
-      currency: LN(),
+      currency: getUserCurrency(),
       billingPeriod: e.billingPeriod,
       onBillingCompleteRedirectInfo: e.onBillingCompleteRedirectInfo,
       entryPoint: e.entryPoint,
@@ -194,7 +194,7 @@ export function $$z0(e) {
           "data-testid": "modalTitle",
           className: GK,
           children: renderI18nText("universal_upgrade_sequence.title")
-        }), jsx(Jn, {
+        }), jsx(CloseButton, {
           dataTestId: "closeButton",
           className: _$$b,
           onClick: A,

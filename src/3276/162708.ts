@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { dR } from "../905/508367";
 import { customHistory } from "../905/612521";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { BigTextInputForwardRef, ButtonBasePrimaryTracked, linkWithTracking } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -84,9 +84,9 @@ function I({
           role: "button",
           onClick: () => {
             t();
-            s(Ts({
+            s(AUTH_INIT({
               origin: "figjam_try_share_modal",
-              formState: qB.SIGN_UP,
+              formState: AuthFlowStep.SIGN_UP,
               redirectUrl: dR(customHistory.location.pathname, {
                 [ao.key]: ao.value
               }),

@@ -12,7 +12,7 @@ import { h as _$$h } from "../905/207101";
 import { R as _$$R } from "../905/165069";
 import { useSubscription } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { bv } from "../figma_app/421401";
 import { gw, MM, wv } from "../figma_app/236327";
 import { V as _$$V } from "../figma_app/312987";
@@ -38,7 +38,7 @@ import { isMobileUA } from "../figma_app/778880";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E3 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
-import { r1 as _$$r } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rn, zl } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
 import { R as _$$R2 } from "../905/298004";
@@ -61,7 +61,7 @@ import { w as _$$w } from "../905/281010";
 import { az } from "../figma_app/805373";
 import { p as _$$p } from "../figma_app/353099";
 import { Cj } from "../905/270084";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 import { lb } from "../3973/538504";
@@ -76,7 +76,7 @@ var c = d;
 let X = "seen_org_admin_request_dashboard_onboarding";
 let Q = rn("org_admin_request_dashboard_onboarding", _$$R2(ONe));
 function Z(e) {
-  let t = _$$r(X);
+  let t = userFlagExistsAtomFamily(X);
   let a = useAtomWithSubscription(t);
   let {
     isShowing,
@@ -169,7 +169,7 @@ let ev = registerModal(function ({
       children: [jsx("div", {
         className: _$$s2.fontSemiBold.lh16.colorText.$,
         children: d
-      }), jsx(Spacer, {}), jsx(Jn, {
+      }), jsx(Spacer, {}), jsx(CloseButton, {
         onClick: r
       })]
     }), jsx("div", {
@@ -345,7 +345,7 @@ let eI = registerModal(function ({
         children: [jsx("div", {
           className: _$$s2.fontSemiBold.lh16.colorText.$,
           children: renderI18nText("admin_dashboard.requests.details.title")
-        }), jsx(Spacer, {}), jsx(Jn, {
+        }), jsx(Spacer, {}), jsx(CloseButton, {
           onClick: y,
           innerText: "X"
         })]
@@ -537,7 +537,7 @@ export function $$eD0({
     requestId: void 0,
     request: void 0
   });
-  let tc = I7("exp_all_admin_request_dash");
+  let tc = selectExperimentConfigHook("exp_all_admin_request_dash");
   let t_ = e5 && "loaded" === ts.status && ts.data?.org?.bigmaEnabledAt && tc.getConfig().get("enabled", !1) && $;
   let tu = ZY({
     isIntendedAudience: e5 && "loaded" === ts.status && ts.data?.org?.bigmaEnabledAt !== null && !1 === $

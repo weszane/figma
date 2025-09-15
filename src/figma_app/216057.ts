@@ -23,7 +23,7 @@ import { SG } from "../905/508457";
 import { createAtomWithReduxWithState, attachReducerWrapper, setupReduxAtomWithState } from "../905/270322";
 import { LibraryVariableCollectionData, LibraryVariableCollectionDataByLibraryKey, CommunityLibraryVariableCollectionDataWithVariables, VariablesByVariableCollectionKey, LibraryVariableCollectionDataByLibraryKeyWithVariables, LibraryVariableCollectionDataWithVariables } from "../figma_app/43951";
 import { getSubscribedVariableSetInfo, getLocalVariableSetInfo, getLocalVariableInfo, getSubscribedVariableInfo, isExtension, getLocalVariableOverride, getSubscribedVariableOverride } from "../figma_app/633080";
-import { TG } from "../905/72677";
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 var p = u;
 var h = _;
 var g = m;
@@ -219,7 +219,7 @@ export function $$ee10(e) {
 }
 let et = atom(e => {
   let t = e($$ef21);
-  let r = e(TG);
+  let r = e(resourceDataAndPresetKeysV2SetAtom);
   let n = Object.values(t).filter(e => !lR(e, r)).map(e => e.key).sort();
   return e(variableByKeyResourceAtomFamily(n.map(e => ({
     key: e
@@ -227,7 +227,7 @@ let et = atom(e => {
 });
 let er = atom(e => {
   let t = e($$ef21);
-  let r = e(TG);
+  let r = e(resourceDataAndPresetKeysV2SetAtom);
   let n = (e(_$$JB) ? Object.values(t).filter(e => lR(e, r)) : []).map(e => e.key).sort().map(e => ({
     key: e
   }));

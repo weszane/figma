@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
-import { k } from "../905/22009";
-import { L } from "../905/178090";
+import { editorUtilities } from "../905/22009";
+import { ResourceTypes } from "../905/178090";
 let s = z.object({
   id: z.string(),
   text: z.string(),
@@ -29,8 +29,8 @@ let o = z.object({
   description: z.string(),
   extended_description: z.string(),
   is_enabled: z.boolean(),
-  editor_types: z.array(z.nativeEnum(k.Editors)),
-  resource_types: z.array(z.nativeEnum(L.BrowseResourceTypes)),
+  editor_types: z.array(z.nativeEnum(editorUtilities.Editors)),
+  resource_types: z.array(z.nativeEnum(ResourceTypes.BrowseResourceTypes)),
   h1_title: z.string().nullable(),
   localized_url_slug: z.string().nullable().optional()
 });
@@ -140,4 +140,4 @@ let $$_2 = $$f1.extend({
 });
 export const Hg = $$h0;
 export const cK = $$f1;
-export const oF = $$_2; 
+export const oF = $$_2;

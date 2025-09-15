@@ -9,7 +9,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../figma_app/307841";
 import { sf } from "../905/929976";
-import { yH } from "../figma_app/714946";
+import { loadingStateDelete } from "../figma_app/714946";
 import { eK, i as _$$i, M2, Lo, $h, yy, Ef, qU, Je, js, Az } from "../figma_app/482142";
 import { Xw } from "../905/584989";
 import { N_ } from "../905/332483";
@@ -149,7 +149,7 @@ let C = D((e, t) => {
   let a = Xw.loadingKeyForPayload({
     teamId: t
   });
-  e(yH({
+  e(loadingStateDelete({
     key: a
   }));
 });

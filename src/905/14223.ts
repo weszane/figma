@@ -1,6 +1,6 @@
 import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { U } from "../figma_app/477548";
 let $$o2 = createOptimistThunk((e, t, {
   loadingKey: i
@@ -20,7 +20,7 @@ let $$o2 = createOptimistThunk((e, t, {
       fileKey: r
     }));
   }).catch(e => {});
-  N(o, e, i);
+  setupLoadingStateHandler(o, e, i);
 });
 let $$l1 = createActionCreator("CONTACTS_SET");
 let $$d0 = createActionCreator("CONTACTS_RESET");

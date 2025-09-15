@@ -76,7 +76,7 @@ import { k9 as _$$k4 } from "../905/182598";
 import { Q as _$$Q } from "../figma_app/550678";
 import { Point } from "../905/736624";
 import { k8 } from "../figma_app/49598";
-import { Nw } from "../figma_app/78808";
+import { renameFileOptimistic } from "../figma_app/78808";
 import { fullscreenValue } from "../figma_app/455680";
 import { F as _$$F2 } from "../905/877554";
 import { Q as _$$Q2, ic as _$$ic } from "../figma_app/688398";
@@ -175,14 +175,14 @@ import { Z as _$$Z4 } from "../6401/653234";
 import { H as _$$H3 } from "../905/821118";
 import { _ as _$$_4 } from "../9410/16707";
 import { j7 } from "../905/929976";
-import { b as _$$b3 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c2 } from "../905/370443";
 import { hX, xn } from "../figma_app/644079";
 import { J3, JU as _$$JU } from "../figma_app/622574";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A4 } from "../905/956262";
-import { r1 as _$$r3 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N3 } from "../figma_app/268271";
 import { U as _$$U } from "../905/455766";
 import { rq as _$$rq } from "../905/425180";
@@ -1069,7 +1069,7 @@ let tt = async ({
   try {
     var _;
     var g;
-    dispatch(Nw({
+    dispatch(renameFileOptimistic({
       file: {
         key: openFileKey
       },
@@ -4074,7 +4074,7 @@ function rR() {
   let e = useDispatch();
   let t = J3();
   let i = _$$JU(t);
-  let n = _$$r3(uM);
+  let n = userFlagExistsAtomFamily(uM);
   let a = useAtomWithSubscription(n);
   let o = jY();
   let {
@@ -4099,7 +4099,7 @@ function rR() {
     complete,
     onClose: () => {
       complete();
-      e(_$$b3({
+      e(postUserFlag({
         [uM]: !0
       }));
     },
@@ -9236,7 +9236,7 @@ function cz() {
           fileKey: n.current.fileKey,
           source: _$$oE.EDITOR,
           name: e
-        }) : i.current && r(Nw({
+        }) : i.current && r(renameFileOptimistic({
           file: i.current,
           name: e
         })));

@@ -9,7 +9,7 @@ import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Sb } from "../figma_app/101956";
 import { mp } from "../figma_app/579169";
-import { Fu } from "../figma_app/545877";
+import { userFlagAtomFamily } from "../figma_app/545877";
 import { useFullscreenReady } from "../905/924253";
 import { zC, re } from "../figma_app/186343";
 import { Fk } from "../figma_app/167249";
@@ -28,7 +28,7 @@ import { iH } from "../figma_app/449975";
 import { H as _$$H } from "../9410/25542";
 let $$A1 = "section_presets_announcement_key";
 let O = "seen_figjam_section_presets_announcement";
-let $$L0 = Fu(O);
+let $$L0 = userFlagAtomFamily(O);
 export function $$R2() {
   let e = useAtomWithSubscription(_$$P) === iH.TRUE;
   let t = useSelector(e => e.mirror.appModel.currentPage);

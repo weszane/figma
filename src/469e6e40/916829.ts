@@ -14,7 +14,7 @@ import { AG } from "../figma_app/217457";
 import { _k, tB } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { MX, cI } from "../figma_app/684446";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { xS } from "../figma_app/193867";
 import { UserGroupRole, GroupType } from "../905/441038";
 import { registerModal } from "../905/102752";
@@ -87,7 +87,7 @@ export let $$E0 = registerModal(function (e) {
   let t = MX();
   let a = o0(e.invoice);
   let r = _k(e.invoice);
-  let l = new vr(e.invoice.currency);
+  let l = new CurrencyFormatter(e.invoice.currency);
   let u = tB(e.invoice);
   let m = t.filter(e => !cI(e, u));
   let p = useSelector(e => {

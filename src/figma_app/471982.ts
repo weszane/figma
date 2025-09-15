@@ -1,52 +1,53 @@
-import { B6 } from "../vendor/130505";
-import { throwTypeError } from "../figma_app/465776";
-import { sha1Hex } from "../905/125019";
-import { getFeatureFlags } from "../905/601108";
-import o from "../vendor/128080";
-import { customHistory } from "../905/612521";
-import { N as _$$N } from "../figma_app/469468";
-import { processSlug } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { k as _$$k } from "../905/22009";
-import { L as _$$L } from "../905/178090";
-import { co, $2 } from "../figma_app/701107";
-import { vt } from "../figma_app/306946";
-import { qL, xn } from "../905/934145";
-import { Xu, Uo, UF } from "../figma_app/354658";
-import { YW } from "../figma_app/350203";
-import { Dm as _$$Dm } from "../figma_app/8833";
-import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { ResourceTypeNoComment, isMonetizedOrThirdParty, hasClientMeta, isPlugin, isWidget, ResourceType } from "../figma_app/45218";
-import { LE } from "../905/71785";
-import { o1 } from "../figma_app/10554";
-import { createEmptyAddress } from "../figma_app/831101";
-import { ManifestEditorType } from "../figma_app/155287";
-import { Z4 } from "../figma_app/809727";
-import { statusTypeToNumber, StatusType } from "../figma_app/175992";
-import { C as _$$C } from "../905/237873";
-import { CS } from "../figma_app/275462";
-import { S as _$$S } from "../905/872825";
-import { po, iY } from "../figma_app/598412";
-import { Vm, Lz, eO, XW } from "../figma_app/427318";
-import { communityViewerMaxWidth } from "../figma_app/786175";
-var l = o;
+import { isEqual } from 'lodash-es';
+import { editorUtilities as _$$k } from '../905/22009';
+import { LE } from '../905/71785';
+import { sha1Hex } from '../905/125019';
+import { ResourceTypes } from '../905/178090';
+import { C as _$$C } from '../905/237873';
+import { getI18nString } from '../905/303541';
+import { getFeatureFlags } from '../905/601108';
+import { customHistory } from '../905/612521';
+import { S as _$$S } from '../905/872825';
+import { qL, xn } from '../905/934145';
+import { Dm as _$$Dm } from '../figma_app/8833';
+import { o1 } from '../figma_app/10554';
+import { hasClientMeta, isMonetizedOrThirdParty, isPlugin, isWidget, ResourceType, ResourceTypeNoComment } from '../figma_app/45218';
+import { ManifestEditorType } from '../figma_app/155287';
+import { StatusType, statusTypeToNumber } from '../figma_app/175992';
+import { FFileType, FTemplateCategoryType } from '../figma_app/191312';
+import { isResourceHubProfilesEnabled } from '../figma_app/275462';
+import { vt } from '../figma_app/306946';
+import { YW } from '../figma_app/350203';
+import { UF, Uo, Xu } from '../figma_app/354658';
+import { eO, Lz, Vm, XW } from '../figma_app/427318';
+import { throwTypeError } from '../figma_app/465776';
+import { N as _$$N } from '../figma_app/469468';
+import { iY, po } from '../figma_app/598412';
+import { $2, co } from '../figma_app/701107';
+import { communityViewerMaxWidth } from '../figma_app/786175';
+import { Z4 } from '../figma_app/809727';
+import { createEmptyAddress } from '../figma_app/831101';
+import { processSlug } from '../figma_app/930338';
+import { B6 } from '../vendor/130505';
 let $$k4 = new RegExp(/^[\w.]{0,30}$/);
 let $$M8 = new RegExp(/^\w{0,15}$/);
 export function $$F0(e) {
-  return "current_hub_file_version_id" in e ? e.versions[e.current_hub_file_version_id] : "current_plugin_version_id" in e && e.current_plugin_version_id ? e.versions[e.current_plugin_version_id] : void 0;
+  return 'current_hub_file_version_id' in e ? e.versions[e.current_hub_file_version_id] : 'current_plugin_version_id' in e && e.current_plugin_version_id ? e.versions[e.current_plugin_version_id] : void 0;
 }
 export function $$j32(e) {
   return $$F0(e);
 }
-export let $$U25 = () => po(customHistory.location.pathname).remainingPath.split("/").slice(1);
+export let $$U25 = () => po(customHistory.location.pathname).remainingPath.split('/').slice(1);
 export function $$B36(e) {
   let t = B6(new URL(e).pathname, {
     path: Xu.path
   });
-  if (t) return {
-    resourceId: t.params.resourceId,
-    apiResourceType: t.params.apiResourceType
-  };
+  if (t) {
+    return {
+      resourceId: t.params.resourceId,
+      apiResourceType: t.params.apiResourceType
+    };
+  }
 }
 export function $$G9(e) {
   switch (e) {
@@ -85,7 +86,7 @@ export function $$V34(e) {
   }
 }
 export function $$H31(e, t) {
-  t.resourceType !== _$$L.BrowseResourceTypes.MIXED && (e = e.filter(e => t.resourceType === _$$L.BrowseResourceTypes.FILES ? Vm(e) === ResourceTypeNoComment.HUB_FILE : t.resourceType === _$$L.BrowseResourceTypes.PLUGINS ? Vm(e) === ResourceTypeNoComment.PLUGIN : t.resourceType === _$$L.BrowseResourceTypes.WIDGETS ? Vm(e) === ResourceTypeNoComment.WIDGET : void 0));
+  t.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED && (e = e.filter(e => t.resourceType === ResourceTypes.BrowseResourceTypes.FILES ? Vm(e) === ResourceTypeNoComment.HUB_FILE : t.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS ? Vm(e) === ResourceTypeNoComment.PLUGIN : t.resourceType === ResourceTypes.BrowseResourceTypes.WIDGETS ? Vm(e) === ResourceTypeNoComment.WIDGET : void 0));
   t.price === _$$C.PAID ? e = e.filter(e => isMonetizedOrThirdParty(e)) : t.price === _$$C.FREE && (e = e.filter(e => !isMonetizedOrThirdParty(e)));
   t.editor_type && t.editor_type !== _$$k.Editors.ALL && (e = e.filter(e => function (e, t) {
     if ($$W13(e)) return !!(t === _$$k.Editors.FIGMA && $$z26.includes(e.viewer_mode)) || t === _$$k.Editors.FIGJAM && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || t === _$$k.Editors.PROTOTYPE && e.viewer_mode === FTemplateCategoryType.PROTOTYPE || t === _$$k.Editors.SLIDES && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE || t === _$$k.Editors.SITES && e.viewer_mode === FTemplateCategoryType.SITE_TEMPLATE || t === _$$k.Editors.COOPER && e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE || t === _$$k.Editors.FIGMAKE && e.viewer_mode === FTemplateCategoryType.FIGMAKE_TEMPLATE;
@@ -103,13 +104,13 @@ export function $$H31(e, t) {
 }
 export let $$z26 = [FTemplateCategoryType.CANVAS, FTemplateCategoryType.PROTOTYPE, FTemplateCategoryType.LIBRARY];
 export function $$W13(e) {
-  return "viewer_mode" in e;
+  return 'viewer_mode' in e;
 }
 export function $$K33(e) {
   return $$W13(e) && e.viewer_mode === FTemplateCategoryType.LIBRARY;
 }
 export function $$Y24(e) {
-  return null !== e && "viewer_mode" in e && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
+  return e !== null && 'viewer_mode' in e && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
 }
 export function $$$6(e) {
   return function (e) {
@@ -158,7 +159,7 @@ export function $$q35(e, {
       throwTypeError(r);
   }
 }
-var J = (e => (e.HUB_FILES = "hub_files", e.PLUGINS = "plugins", e.WIDGETS = "widgets", e))(J || {});
+var J = (e => (e.HUB_FILES = 'hub_files', e.PLUGINS = 'plugins', e.WIDGETS = 'widgets', e))(J || {});
 export function $$Z19({
   resource: e
 }) {
@@ -169,8 +170,8 @@ export function $$Z19({
     id: t,
     name: r
   }) {
-    let n = processSlug(r) ?? "";
-    return t ? `${iY()}/${e}/${t}${"" === n ? "" : "/"}${n}` : void 0;
+    let n = processSlug(r) ?? '';
+    return t ? `${iY()}/${e}/${t}${n === '' ? '' : '/'}${n}` : void 0;
   }({
     path: t,
     id: $$B36(e.rdp_url)?.resourceId,
@@ -183,7 +184,7 @@ export function $$Q22({
   return $$ee17({
     path: $$$6(e),
     id: e.id,
-    name: $$F0(e)?.name ?? ""
+    name: $$F0(e)?.name ?? ''
   });
 }
 export function $$ee17({
@@ -191,8 +192,8 @@ export function $$ee17({
   id: t,
   name: r
 }) {
-  let n = processSlug(r) ?? "";
-  return `${iY()}/${e}/${t}${"" === n ? "" : "/"}${n}`;
+  let n = processSlug(r) ?? '';
+  return `${iY()}/${e}/${t}${n === '' ? '' : '/'}${n}`;
 }
 export function $$et5(e) {
   return `${location.origin}${$$Q22({
@@ -200,25 +201,25 @@ export function $$et5(e) {
   })}`;
 }
 export function $$er29(e) {
-  var t = document.createElement("input");
-  t.style.position = "fixed";
-  t.style.top = "-1000px";
+  let t = document.createElement('input');
+  t.style.position = 'fixed';
+  t.style.top = '-1000px';
   t.value = e;
   t.classList.add(_$$Dm);
   document.body.appendChild(t);
   t.select();
   t.focus();
-  document.execCommand("copy");
+  document.execCommand('copy');
   t.parentNode.removeChild(t);
 }
-export let $$en20 = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+export let $$en20 = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
 export function $$ei7(e, t) {
   return t?.entity_type !== o1.USER || t?.id === e;
 }
 export function $$ea2(e) {
-  return e.query ? getI18nString("community.search_results_tab_title", {
+  return e.query ? getI18nString('community.search_results_tab_title', {
     searchQuery: e.query
-  }) : getI18nString("community.browser_home_tab_title");
+  }) : getI18nString('community.browser_home_tab_title');
 }
 export function $$es23(e) {
   return !!e && e?.stripe_account_status && statusTypeToNumber(e.stripe_account_status) >= statusTypeToNumber(StatusType.ACCEPTED);
@@ -230,7 +231,7 @@ export function $$el18(e) {
   return e?.stripe_account_status && e.stripe_account_status !== StatusType.NONE && e.stripe_account_status !== StatusType.ACCEPTED;
 }
 export function $$ed38(e) {
-  return e ? "100%" : Math.min(window.innerWidth, parseInt(communityViewerMaxWidth));
+  return e ? '100%' : Math.min(window.innerWidth, parseInt(communityViewerMaxWidth));
 }
 export function $$ec37(e) {
   if (Lz(e)) return Z4.EMBED;
@@ -241,11 +242,11 @@ export function $$eu21(e, t, r) {
   return e + co <= t && r > $2;
 }
 export function $$ep3(e) {
-  return l()(e, createEmptyAddress());
+  return isEqual(e, createEmptyAddress());
 }
 export function $$e_27() {
   let e = _$$N(`(max-width: ${YW - 1}px)`);
-  let t = customHistory.location.pathname.startsWith("/community");
+  let t = customHistory.location.pathname.startsWith('/community');
   return e && t;
 }
 export async function $$eh10(e) {
@@ -253,7 +254,7 @@ export async function $$eh10(e) {
     let t = await fetch(e);
     let r = new Uint8Array(await t.arrayBuffer());
     return {
-      type: "image",
+      type: 'image',
       url: e,
       sha1: sha1Hex(r),
       buffer: r
@@ -265,23 +266,23 @@ export async function $$eh10(e) {
 export function $$em12(e) {
   let t = {};
   let r = XW(e) ? e.carousel_media.images : e.carousel_media_urls;
-  let n = XW(e) ? e.carousel_media.videos : "carousel_videos" in e && e?.carousel_videos;
+  let n = XW(e) ? e.carousel_media.videos : 'carousel_videos' in e && e?.carousel_videos;
   r && Object.entries(r).forEach(([e, r]) => {
     t[e] = {
       ...r,
-      type: "image"
+      type: 'image'
     };
   });
   n && Object.entries(n).forEach(([e, r]) => {
     t[e] = {
       ...r,
-      type: "video"
+      type: 'video'
     };
   });
   return Object.entries(t).sort(([e], [t]) => parseInt(e) - parseInt(t)).map(([e, t]) => t);
 }
 export function $$eg16(e) {
-  return !!getFeatureFlags().cmty_rdp_creator_nudges && (hasClientMeta(e) && e.viewer_mode !== FTemplateCategoryType.PROTOTYPE ? 1 === Object.keys(e.carousel_media_urls ?? {}).length : !!(isPlugin(e) || isWidget(e)) && 0 === Object.keys(e.carousel_videos ?? {}).length);
+  return !!getFeatureFlags().cmty_rdp_creator_nudges && (hasClientMeta(e) && e.viewer_mode !== FTemplateCategoryType.PROTOTYPE ? Object.keys(e.carousel_media_urls ?? {}).length === 1 : !!(isPlugin(e) || isWidget(e)) && Object.keys(e.carousel_videos ?? {}).length === 0);
 }
 export function $$ef11(e, {
   pluralized: t,
@@ -294,15 +295,15 @@ export function $$ef11(e, {
     return ey((() => {
       switch (e) {
         case ResourceTypeNoComment.PLUGIN:
-          return "plugin";
+          return 'plugin';
         case ResourceTypeNoComment.WIDGET:
-          return "widget";
-        case "comment":
-          return "comment";
+          return 'widget';
+        case 'comment':
+          return 'comment';
         case ResourceTypeNoComment.HUB_FILE:
-          return "hub file";
+          return 'hub file';
         default:
-          throw Error("Unsupported Type");
+          throw new Error('Unsupported Type');
       }
     })(), {
       pluralized: t,
@@ -329,16 +330,16 @@ function ey(e, {
   pluralized: t,
   capitalized: r
 } = {}) {
-  e += t ? "s" : "";
+  e += t ? 's' : '';
   r && void 0 !== e[0] && (e = e[0].toUpperCase() + e.substr(1));
   return e;
 }
 export function $$eb14(e) {
-  let t = e.current_hub_file_version_id ? e.current_hub_file_version_id : e.current_plugin_version_id || "";
-  return e.versions[t]?.created_at || "";
+  let t = e.current_hub_file_version_id ? e.current_hub_file_version_id : e.current_plugin_version_id || '';
+  return e.versions[t]?.created_at || '';
 }
 export function $$eT15(e, t, r, n) {
-  let i = CS();
+  let i = isResourceHubProfilesEnabled();
   let a = {
     profileHandle: e
   };

@@ -5,7 +5,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { jm } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
 import { isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { useCurrentUserOrgId } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 let _ = () => !!useCurrentUserOrgId();
@@ -28,13 +28,13 @@ export function $$f10({
 export function $$E7() {
   let {
     getConfig
-  } = I7("rollout_pinned_comments_ff");
+  } = selectExperimentConfigHook("rollout_pinned_comments_ff");
   return getConfig().getValue("can_pin_comments", !1);
 }
 export function $$y8() {
   let {
     getConfig
-  } = I7("exp_in_file_notif_bell");
+  } = selectExperimentConfigHook("exp_in_file_notif_bell");
   return () => !desktopAPIInstance && !isAndroidOrIphoneNotFigmaMobile && getConfig().get("has_editor_bell", !1);
 }
 export function $$b2() {
@@ -50,10 +50,10 @@ export function $$v5() {
   let e = _();
   let {
     getConfig
-  } = I7("cmty_home_shelf_exp_v2__non_org");
+  } = selectExperimentConfigHook("cmty_home_shelf_exp_v2__non_org");
   let {
     getConfig: _getConfig
-  } = I7("cmty_home_shelf_exp_v2__org");
+  } = selectExperimentConfigHook("cmty_home_shelf_exp_v2__org");
   let i = e ? _getConfig : getConfig;
   return useCallback(() => i().get("enabled", !1), [i]);
 }

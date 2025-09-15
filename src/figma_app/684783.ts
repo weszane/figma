@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useCallback, useEffect, useState, useRef, useMemo, PureComponent, createRef, Component } from "react";
 import { parsePxInt } from "../figma_app/783094";
 import { BrowserInfo } from "../figma_app/778880";
-import { QQ } from "../figma_app/808294";
+import { isSubscriptionActive } from "../figma_app/808294";
 import { sW } from "../figma_app/49598";
 import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { Cn } from "../905/862913";
@@ -814,7 +814,7 @@ function ex(e) {
   let X = $ ? `/community/file/${hubFile.id}/embed` : `/embed?embed_host=hub_file_detail_view&community_viewer=true&hub_file_id=${hubFile.id}&hide_ui=true`;
   let q = hasMonetizedResourceMetadata(hubFile);
   let J = _$$I(hubFile);
-  let Z = QQ(J);
+  let Z = isSubscriptionActive(J);
   return jsxs("div", {
     className: "hub_file_viewer--iframeViewerAndSidebarContainer--8cmiH",
     children: [jsxs("div", {
@@ -1322,7 +1322,7 @@ export class $$eJ0 extends Component {
   isPaidFigjamWithoutPurchase() {
     let e = hasMonetizedResourceMetadata(this.props.hubFile);
     let t = this.props.hubFile.community_resource_payment;
-    let r = QQ(t);
+    let r = isSubscriptionActive(t);
     return this.props.hubFile.viewer_mode === FTemplateCategoryType.WHITEBOARD && e && !r;
   }
   getViewer() {

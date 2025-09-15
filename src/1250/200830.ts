@@ -10,7 +10,7 @@ import { CR, NJ } from "../figma_app/419216";
 import { TrackingProvider, TrackedDiv } from "../figma_app/831799";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
-import { r1, GW, qG, Fu } from "../figma_app/545877";
+import { userFlagExistsAtomFamily, fileBrowserOnboardedAtom, userFlagsAtom, userFlagAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { M as _$$M } from "../905/152487";
 import { LB2, I3H, Ob5, X5_, USq, sqw, yjU, MwQ, NdL, bGx, Qlc, I$z, Kgs, BTz, dYj, Ult, kmq, Sgd, Wb3 } from "../figma_app/6204";
@@ -24,9 +24,9 @@ import { lQ } from "../905/934246";
 import { getStorage } from "../905/657224";
 import { useLatestRef } from "../figma_app/922077";
 import { buildStaticUrl, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
-import { zl } from "../905/862321";
-import { yl } from "../figma_app/275462";
-import { b as _$$b } from "../905/985254";
+import { SIGNED_UP_FROM_OPEN_SESSIONS } from "../905/862321";
+import { isResourceHubEnabled } from "../figma_app/275462";
+import { postUserFlag } from "../905/985254";
 import { A as _$$A } from "../905/956262";
 import { UC, uA } from "../figma_app/33126";
 import { of, mW } from "../figma_app/797994";
@@ -63,7 +63,7 @@ import { RG } from "../figma_app/684446";
 import { sortByPropertyWithOptions, shuffle } from "../figma_app/656233";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { reportError } from "../905/11";
-import { Z1 } from "../905/401885";
+import { transformAtom } from "../905/401885";
 import { g as _$$g } from "../1250/695038";
 import { useCurrentUserOrg, useCurrentUserOrgId } from "../905/845253";
 import { WorkspaceSelectorView, TeamFileCountsByTeamId } from "../figma_app/43951";
@@ -71,7 +71,7 @@ import { useCurrentPlanUser, useTeamPlanFeatures } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
 import { trackEventAnalytics } from "../905/449184";
 import { tM as _$$tM, vd as _$$vd } from "../figma_app/60079";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { P as _$$P } from "../905/347284";
 import { x as _$$x } from "../7021/270993";
 import { z6 } from "../figma_app/805373";
@@ -133,7 +133,7 @@ import { C as _$$C } from "../1250/50098";
 import { NuxOnboardingOverlay } from "../4452/529989";
 import { A as _$$A7 } from "../1250/318790";
 import { getResourceDataOrFallback } from "../905/723791";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { FPlanNameType } from "../figma_app/191312";
 import { _l, B$ } from "../figma_app/995208";
 import { C5 } from "../7021/95197";
@@ -185,7 +185,7 @@ function m(e) {
 }
 let v = "seen_custom_sections_nudge";
 let $$w0 = "favorites-count-crossed-threshold";
-let T = r1(v);
+let T = userFlagExistsAtomFamily(v);
 function j() {
   let e = useAtomWithSubscription(T);
   let t = _$$e({
@@ -209,10 +209,10 @@ function j() {
   });
 }
 let $$A1 = "seen_whats_new_v2_modal";
-let S = r1($$A1);
+let S = userFlagExistsAtomFamily($$A1);
 let N = _$$tH("last_figjam_at");
 function O() {
-  let e = useAtomWithSubscription(GW);
+  let e = useAtomWithSubscription(fileBrowserOnboardedAtom);
   let t = useAtomWithSubscription(mp);
   let n = useAtomWithSubscription(N);
   let r = useAtomWithSubscription(S);
@@ -589,19 +589,19 @@ function eD(e) {
     userFlagOnShow: "welcome_onboarded"
   });
 }
-let eL = r1("file_browser_onboarded");
+let eL = userFlagExistsAtomFamily("file_browser_onboarded");
 let eF = ["seen_sidebar_workspace_onboarding", "seen_search_workspace_onboarding", "seen_libraries_workspace_onboarding"];
 let eB = e => ["file_browser_onboarded", "community_hub_onboarded", "variants_onboarded", "account_switcher_onboarded", ...(e ? eF : [])];
 let eU = () => {
   let e = getStorage();
   try {
-    return !!e.get(zl);
+    return !!e.get(SIGNED_UP_FROM_OPEN_SESSIONS);
   } catch (e) {}
   return !1;
 };
 function eG() {
   let e = useDispatch();
-  let t = useAtomWithSubscription(qG);
+  let t = useAtomWithSubscription(userFlagsAtom);
   let n = useAtomWithSubscription(eL);
   let r = useLatestRef(n);
   let s = useAtomWithSubscription(d2);
@@ -631,7 +631,7 @@ function eG() {
           let d = mW(e, "welcome_onboarded");
           let c = mW(e, "file_browser_onboarded");
           let _ = [eA, ey, _q(e) || a ? null : eE];
-          let u = [...(a ? [] : [el, e_]), eR, yl() ? eh : ep, ea, ev];
+          let u = [...(a ? [] : [el, e_]), eR, isResourceHubEnabled() ? eh : ep, ea, ev];
           let m = [en, ...u];
           return s ? [] : n || l || r ? !n && (r || l) && c ? [] : r ? _ : i ? m : l ? eU() || d ? [en, ...u] : [eD, ...u] : m : c ? [] : m;
         }({
@@ -654,7 +654,7 @@ function eG() {
   let T = useCallback(() => {
     let t = {};
     for (let e of x) t[e] = !0;
-    e(_$$b(t));
+    e(postUserFlag(t));
     u.complete();
   }, [e, u, x]);
   return u.isShowing && 0 !== m.length ? jsx(eW, {
@@ -703,7 +703,7 @@ function eK() {
   });
 }
 let eY = "orgs_onboarded";
-let eQ = r1(eY);
+let eQ = userFlagExistsAtomFamily(eY);
 function eZ() {
   let e = useAtomWithSubscription(d2);
   let t = useAtomWithSubscription(eQ);
@@ -832,7 +832,7 @@ function ti({
           innerClassName: _$$s.borderBox.hFull.flex.flexColumn.itemsCenter.alignCenter.px32.pt32.$,
           children: [l, d]
         }), _]
-      }), jsx(Jn, {
+      }), jsx(CloseButton, {
         className: _$$s.absolute.top0.right0.mt8.mr8.$,
         onClick: t,
         trackingProperties: {
@@ -868,7 +868,7 @@ function to({
 }
 let ts = "workspace_selector_seen";
 let tl = _$$g(ts);
-let td = createRemovableAtomFamily(e => Z1(WorkspaceSelectorView.Query({
+let td = createRemovableAtomFamily(e => transformAtom(WorkspaceSelectorView.Query({
   orgId: e
 }), e => {
   if (!e.org?.workspaces) return null;
@@ -1127,8 +1127,8 @@ function tS() {
   }) : null;
 }
 let tO = "saw_recreated_starter_team_onboarding";
-let tR = r1(tO);
-let tM = r1("had_recreated_starter_team");
+let tR = userFlagExistsAtomFamily(tO);
+let tM = userFlagExistsAtomFamily("had_recreated_starter_team");
 function tP() {
   let e = useAtomWithSubscription(tR);
   let t = _$$d();
@@ -1244,7 +1244,7 @@ function tV(e) {
         svg: _$$A2,
         className: "pro_trial_form_modal--icon--CKqnw",
         useOriginalSrcFills_DEPRECATED: !0
-      }), jsx(Jn, {
+      }), jsx(CloseButton, {
         innerText: "Close",
         onClick: hideModal
       })]
@@ -1925,7 +1925,7 @@ function n_() {
     modalType: q3.FEATURE_UPDATE,
     onClickPrimaryCta: e.complete,
     onClose: () => {
-      t(_$$b({
+      t(postUserFlag({
         [Jy]: !0
       }));
       e.complete();
@@ -2060,7 +2060,7 @@ let nb = atom(() => {
   return !1;
 });
 let nx = createReduxSubscriptionAtomWithState(e => null != e.payment.promo);
-let ny = Z1(Vm, e => (e ?? []).some(e => null != e && !hasTeamPaidAccess({
+let ny = transformAtom(Vm, e => (e ?? []).some(e => null != e && !hasTeamPaidAccess({
   subscription: e.subscription,
   student_team: !!e.studentTeamAt,
   grace_period_end: e.gracePeriodEnd ? e.gracePeriodEnd.toISOString() : null
@@ -2143,7 +2143,7 @@ function nI(e) {
     }), jsx("div", {
       className: "promo_code_select_team_content--promoSelectTeamDescription--pHb18 text--fontPos11--2LvXf text--_fontBase--QdLsd",
       children: r
-    }), jsx(Jn, {
+    }), jsx(CloseButton, {
       className: "promo_code_select_team_content--closeButton--iQ6-4",
       onClick: e.dismissModal,
       innerText: "close"
@@ -2218,7 +2218,7 @@ function nS() {
     trackingContextName: "Redeem Promo Code > Select Team"
   });
 }
-let nD = r1(J5);
+let nD = userFlagExistsAtomFamily(J5);
 function nL() {
   let e = useAtomWithSubscription(nD);
   let t = useAtomWithSubscription(Fy);
@@ -2271,7 +2271,7 @@ function nL() {
   });
 }
 let nW = "seen_team_project_link_overlay";
-let nz = r1(nW);
+let nz = userFlagExistsAtomFamily(nW);
 function n$() {
   let e = useAtomWithSubscription(nz);
   let t = fn();
@@ -2309,7 +2309,7 @@ function n$() {
 function n0() {
   let {
     getConfig
-  } = I7("starter_global_file_limits");
+  } = selectExperimentConfigHook("starter_global_file_limits");
   let t = useTeamPlanFeatures();
   let n = getResourceDataOrFallback(t?.data?.tier);
   let {
@@ -2366,7 +2366,7 @@ function n0() {
   });
 }
 function n6() {
-  let e = useAtomWithSubscription(qG);
+  let e = useAtomWithSubscription(userFlagsAtom);
   let t = useAtomWithSubscription(Qm);
   let n = useAtomWithSubscription(zN);
   let a = ol();
@@ -2385,7 +2385,7 @@ function n6() {
             teamId: a?.id
           }
         }));
-        r(_$$b({
+        r(postUserFlag({
           seen_edu_offboarding_modal: !0
         }));
         o.complete();
@@ -2429,8 +2429,8 @@ function an() {
   });
   return null;
 }
-let aa = Fu("seen_plan_spaces_launch_modal");
-let ar = Fu("seen_limited_spaces_onboarding");
+let aa = userFlagAtomFamily("seen_plan_spaces_launch_modal");
+let ar = userFlagAtomFamily("seen_limited_spaces_onboarding");
 let ai = new Date("2024-10-30T20:00:00.000Z").getTime();
 function ao() {
   let e = useSelector(e => e.plans);

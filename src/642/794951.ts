@@ -2,8 +2,8 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { renderI18nText } from "../905/303541";
-import { te } from "../figma_app/275462";
-import { b as _$$b } from "../905/985254";
+import { alwaysFalseCallback2 } from "../figma_app/275462";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
@@ -35,7 +35,7 @@ export function $$j0() {
     overlay: TrJ,
     priority: _$$N.SECONDARY_MODAL
   }, [e]);
-  let T = te();
+  let T = alwaysFalseCallback2();
   let N = !!_$$f(fc);
   let I = t?.canEdit;
   let {
@@ -43,7 +43,7 @@ export function $$j0() {
     visualAssetsType
   } = wV();
   E(uniqueId, ["Reset Visual Assets Tooltips", io], () => {
-    j && t && s(_$$b($$C1));
+    j && t && s(postUserFlag($$C1));
   });
   useEffect(() => {
     I && T() && !N && visualAssetsType && currentView === S5.VisualAssets && show();

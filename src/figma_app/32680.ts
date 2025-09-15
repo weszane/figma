@@ -4,7 +4,7 @@ import { s as _$$s } from "../905/403855";
 import { U } from "../905/275247";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { Ih } from "../figma_app/617427";
 import { renderI18nText } from "../905/303541";
@@ -103,7 +103,7 @@ function x(e) {
         children: jsx(_$$s, {
           className: K
         })
-      }), !!e.onClose && jsx(Jn, {
+      }), !!e.onClose && jsx(CloseButton, {
         onClick: e.onClose
       })]
     }), jsx("div", {

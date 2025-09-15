@@ -3,7 +3,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { X2, Lt } from "../figma_app/808294";
+import { getSubscriptionPriceString, hasTrialAvailable } from "../figma_app/808294";
 import { hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { A } from "../6828/154709";
@@ -12,7 +12,7 @@ function p({
   showTooltip: t
 }) {
   if (!e.monetized_resource_metadata) return null;
-  let r = X2(e.monetized_resource_metadata);
+  let r = getSubscriptionPriceString(e.monetized_resource_metadata);
   return t ? jsxs("div", {
     "data-testid": "freemium-text",
     className: _$$s.flex.itemsCenter.gap4.$,
@@ -74,7 +74,7 @@ function h({
   });
 }
 export function $$m0(e) {
-  return !!e && (hasFreemiumCode(e) || Lt({
+  return !!e && (hasFreemiumCode(e) || hasTrialAvailable({
     resource: e,
     payment: e.community_resource_payment
   }) || isThirdPartyMonetized(e));
@@ -86,7 +86,7 @@ export function $$$$g1({
   return hasFreemiumCode(e) ? jsx(p, {
     publishedExtension: e,
     showTooltip: t
-  }) : Lt({
+  }) : hasTrialAvailable({
     resource: e,
     payment: e.community_resource_payment
   }) ? jsx(_, {

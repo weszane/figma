@@ -25,7 +25,7 @@ import { b as _$$b } from "../905/620668";
 import { Lm, mF } from "../figma_app/755939";
 import { Ym } from "../figma_app/806075";
 import { sf } from "../905/929976";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { kP, OB, Y6, FP, JM } from "../figma_app/91703";
 import { am } from "../figma_app/430563";
 import { showModalHandler } from "../905/156213";
@@ -137,7 +137,7 @@ function ex(e, t, i, n) {
   let r = t.meta.fig_file;
   let a = t.meta.team_user;
   let s = t.meta.org_user;
-  e(yJ({
+  e(filePutAction({
     file: r
   }));
   s && e(hZ({
@@ -449,7 +449,7 @@ async function ek(e, t, i, r, p) {
   let I = p?.fileCreationManager;
   I && I.assignPendingRealFileKey(v.key);
   f();
-  g.fileName && g.fileName !== v.name && (e.dispatch(yJ({
+  g.fileName && g.fileName !== v.name && (e.dispatch(filePutAction({
     file: {
       key: v.key,
       name: g.fileName

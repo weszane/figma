@@ -1,5 +1,5 @@
 import { getInitialOptions } from "../figma_app/169182";
-import { n4 } from "../905/194276";
+import { SET_MINIMAL_MFA_USER } from "../905/194276";
 import { Qv, Ts } from "../905/929976";
 import { yJ, WJ, C$, hz } from "../figma_app/24841";
 import { eu } from "../figma_app/829197";
@@ -14,7 +14,7 @@ export function $$c3(e = !0, t) {
 }
 export function $$u2(e = null, t) {
   if (Ts.matches(t)) return getInitialOptions().user_data || null;
-  if (n4.matches(t)) return {
+  if (SET_MINIMAL_MFA_USER.matches(t)) return {
     ...e,
     ...t.payload.user
   };

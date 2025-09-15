@@ -38,7 +38,7 @@ import { AG } from '../figma_app/217457';
 import { P8, vt } from '../figma_app/297957';
 import { Tj } from '../figma_app/342207';
 import { useTeamPlanFeatures } from '../figma_app/465071';
-import { vr } from '../figma_app/514043';
+import { CurrencyFormatter } from '../figma_app/514043';
 import { R as _$$R } from '../figma_app/522082';
 import { tI } from '../figma_app/599327';
 import { e6, lR } from '../figma_app/617427';
@@ -103,7 +103,7 @@ function B(e) {
     children: e
   });
   if (e.lines.length === 0) return i(a);
-  let r = new vr(e.currency);
+  let r = new CurrencyFormatter(e.currency);
   return i(jsxs(Fragment, {
     children: [jsxs('div', {
       className: 'x78zum5 xdt5ytf xg2d0mh',
@@ -136,7 +136,7 @@ function B(e) {
 }
 var G = (e => (e.SEATS = 'seats', e.SEAT_ADJUSTMENTS = 'seat-adjustments', e.SEAT_CHARGES = 'seat-charges', e.SEAT_CREDITS = 'seat-credits', e))(G || {});
 function z(e) {
-  let t = new vr(e.invoice.currency);
+  let t = new CurrencyFormatter(e.invoice.currency);
   let a = _k(e.invoice);
   let i = useMemo(() => ({
     startDate: _$$A(a ? e.invoice.issued_at : e.invoice.period_starts_at).toDate(),
@@ -909,7 +909,7 @@ function eS(e) {
   }) : jsx('div', {
     role: 'rowgroup',
     children: e.invoices.map(t => {
-      let a = new vr(t.currency);
+      let a = new CurrencyFormatter(t.currency);
       let s = nm(t);
       let i = zz(t);
       let r = getI18nString('plan_invoices.row_aria_label', {

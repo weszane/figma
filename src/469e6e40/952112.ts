@@ -6,13 +6,13 @@ import { $ } from "../905/692618";
 import { I } from "../469e6e40/329965";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 export function $$u0({
   openConnectedProjects: e
 }) {
   let t = useDispatch();
   let a = () => {
-    t(b({
+    t(postUserFlag({
       seen_connected_project_in_admin_dashboard_banner: !0
     }));
   };

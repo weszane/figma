@@ -114,16 +114,16 @@ import { u1 } from "../figma_app/337924";
 import { _9, hH, yM, qQ, NC } from "../figma_app/119420";
 import { T_, tk as _$$tk } from "../figma_app/883638";
 import { Tf } from "../figma_app/396432";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { f as _$$f3 } from "../905/940356";
 import { Pe } from "../1156/713925";
 import { Ng, YT, vG } from "../figma_app/176302";
 import { S as _$$S } from "../1156/521776";
 import { ty as _$$ty, Rm, Y2, DT } from "../figma_app/320164";
 import { customHistory } from "../905/612521";
-import { My } from "../905/194276";
-import { qB } from "../905/862321";
-import { g as _$$g2 } from "../905/248178";
+import { AUTH_COMPLETE } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
+import { trackAuthEvent } from "../905/248178";
 import { UK } from "../figma_app/638601";
 import { M as _$$M2 } from "../figma_app/423008";
 import { Y9 } from "../figma_app/42724";
@@ -195,7 +195,7 @@ import { Fullscreen } from "../figma_app/13528";
 import { Point } from "../905/736624";
 import { e as _$$e5 } from "../905/621515";
 import { F as _$$F4 } from "../905/224";
-import { r1 as _$$r4 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { Bi } from "../905/652992";
 import { N as _$$N5 } from "../figma_app/268271";
 import { DV } from "../905/739964";
@@ -648,7 +648,7 @@ function tN() {
             UK("SIGN_UP_BUTTON_BANNER");
             e({
               origin: _$$ty.FIGMA_REV_LOGGED_OUT_FOOTER,
-              formState: qB.SIGN_UP
+              formState: AuthFlowStep.SIGN_UP
             });
           },
           className: "xxk0z11 x16v0e3u xf67zum x19y5rnk x1akne3o x2b8uid xeq5yr9 xclx6tv xiqqdae x1j61x8r xkezfkh x14kxzw3 xqp8s7e x2lah0s",
@@ -661,11 +661,11 @@ function tN() {
               origin: _$$ty.FIGMA_REV_LOGGED_OUT_FOOTER_WITH_GOOGLE,
               redirectUrl: customHistory.location.pathname
             }).then(e => {
-              "login" === e.type && t(My({
+              "login" === e.type && t(AUTH_COMPLETE({
                 userId: e.user.id
               }));
             }, e => {
-              _$$g2("google_signup_error", _$$ty.FIGMA_REV_LOGGED_OUT_FOOTER_WITH_GOOGLE, {
+              trackAuthEvent("google_signup_error", _$$ty.FIGMA_REV_LOGGED_OUT_FOOTER_WITH_GOOGLE, {
                 error: e.message
               });
               getFeatureFlags().ff_show_auth_modal_on_google_sso_error && Y2({
@@ -1564,7 +1564,7 @@ let tQ = forwardRef((e, t) => {
     if (n && function (e) {
       let t = _$$A3(new Date()).tz("America/Los_Angeles");
       return _$$A3(e).tz("America/Los_Angeles").isBefore(t, "month");
-    }(n.updatedAt)) t(_$$b2({
+    }(n.updatedAt)) t(postUserFlag({
       [th]: !1
     }));else if (n) return {
       showChatSoftLimitBanner: !1
@@ -1572,7 +1572,7 @@ let tQ = forwardRef((e, t) => {
     return i && i !== FPlanNameType.STARTER && i !== FPlanNameType.STUDENT ? {
       showChatSoftLimitBanner: meterUsed > l[i],
       onCloseChatSoftLimitBanner: () => {
-        t(_$$b2({
+        t(postUserFlag({
           [th]: !0
         }));
       }
@@ -4408,7 +4408,7 @@ let ih = {
     $$css: !0
   }
 };
-let ig = _$$r4("seen_figmake_selected_design_system_onboarding");
+let ig = userFlagExistsAtomFamily("seen_figmake_selected_design_system_onboarding");
 let ip = atomStoreManager.get(_$$nM);
 function iy({
   isViewOnly: e,

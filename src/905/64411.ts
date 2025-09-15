@@ -3,9 +3,9 @@ import { Sc } from '../905/18797';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { createOptimistThunk } from '../905/350402';
 import { D3 } from '../905/359847';
-import { N } from '../905/696711';
+import { setupLoadingStateHandler } from '../905/696711';
 import { Z } from '../905/939602';
-import { uo } from '../figma_app/78808';
+import { batchPutFileAction } from '../figma_app/78808';
 import { Mb, Ve, Ys } from '../figma_app/646357';
 import { aW } from '../figma_app/864378';
 export let $$m0 = createOptimistThunk(async (e, t) => {
@@ -22,7 +22,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
     includeThumbnail,
     includeRealtime
   });
-  N(f, {
+  setupLoadingStateHandler(f, {
     dispatch: e.dispatch
   }, g);
   Ys.add(g);
@@ -56,7 +56,7 @@ export let $$m0 = createOptimistThunk(async (e, t) => {
     });
     let c = t?.data?.meta?.file;
     let u = t?.data?.meta?.hub_file;
-    c ? e.dispatch(uo({
+    c ? e.dispatch(batchPutFileAction({
       files: [c],
       subscribeToRealtime: includeRealtime
     })) : u && e.dispatch(D3([u]));

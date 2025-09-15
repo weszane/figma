@@ -21,7 +21,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { b as _$$b } from "../905/620668";
 import { createOptimistThunk } from "../905/350402";
-import { yJ, GZ } from "../figma_app/78808";
+import { filePutAction, markFileViewedOptimistic } from "../figma_app/78808";
 import { z as _$$z } from "../905/404751";
 import { kP, Y6, XQ, ho } from "../figma_app/91703";
 import { showModalHandler, hideModal, hideModalHandler } from "../905/156213";
@@ -395,7 +395,7 @@ let $$ej0 = createOptimistThunk(async (e, {
     let t = await fileApiHandler.getFiles({
       fileKey: n
     });
-    e.dispatch(yJ({
+    e.dispatch(filePutAction({
       file: t.data.meta
     }));
   }
@@ -580,7 +580,7 @@ let eH = createOptimistThunk(async (e, {
     setLastUsedEditorType(c);
     t && i && void 0 === parseQuery(customHistory.location.search).embed_host && Lb().then(() => {
       setTimeout(() => {
-        t.key === e.getState().openFile?.key && e.dispatch(GZ({
+        t.key === e.getState().openFile?.key && e.dispatch(markFileViewedOptimistic({
           fileKey: t.key
         }));
       }, 4e3);

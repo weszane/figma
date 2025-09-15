@@ -9,7 +9,7 @@ import { getPlanUserAtomFamily } from "../905/276025";
 import { checkOrgUserPermission } from "../figma_app/465071";
 import { Eh } from "../figma_app/617654";
 import { createOptimistThunk } from "../905/350402";
-import { Cx, x2, of } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 let $$m2 = createActionCreator("LICENSE_GROUP_DELETE");
 let $$g3 = createActionCreator("LICENSE_GROUP_UPDATE");
 let $$f1 = createActionCreator("LICENSE_GROUP_SET");
@@ -34,7 +34,7 @@ let y = async (e, t, r) => {
   let E = orgById[r];
   let y = EO(E.id);
   if (E && E.bigma_enabled && g && (t.forceRefetch || Sc(loadingState, y)) && !VP(loadingState, y)) {
-    e.dispatch(Cx({
+    e.dispatch(loadingStatePutLoading({
       key: EO(r)
     }));
     try {
@@ -42,7 +42,7 @@ let y = async (e, t, r) => {
         currentOrgId: r
       })).data.meta;
       e.dispatch($$f1(t));
-      e.dispatch(x2({
+      e.dispatch(loadingStatePutSuccess({
         key: EO(r)
       }));
     } catch (t) {
@@ -51,7 +51,7 @@ let y = async (e, t, r) => {
         message: t.data?.message || getI18nString("license_group.an_error_occurred_while_fetching_workspaces"),
         error: !0
       }));
-      e.dispatch(of({
+      e.dispatch(loadingStatePutFailure({
         key: EO(r)
       }));
     }

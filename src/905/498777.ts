@@ -1,7 +1,7 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { isValidWorkshopModeExpiration } from "../figma_app/789";
@@ -25,7 +25,7 @@ export function $$y1(e) {
   let x = e.getState().openFile?.editorType === FFileType.WHITEBOARD;
   let S = !e.getState().user;
   let w = isValidWorkshopModeExpiration(e.getState().openFile);
-  x && S && w ? (e.dispatch(Ts({
+  x && S && w ? (e.dispatch(AUTH_INIT({
     origin: "open_session_video_upload",
     redirectUrl: customHistory.location.pathname,
     signedUpFromOpenSession: !0

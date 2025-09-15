@@ -1,9 +1,9 @@
 import { createLocalStorageAtom } from "../figma_app/27355";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 let $$a5 = "user_has_generated_ai_summary";
 let $$s3 = "has_dismissed_summarization_nudge";
-let $$o4 = r1($$a5);
-let $$l1 = r1($$s3);
+let $$o4 = userFlagExistsAtomFamily($$a5);
+let $$l1 = userFlagExistsAtomFamily($$s3);
 let $$d2 = createLocalStorageAtom("last_saw_summarization_nudge", "0");
 let $$c0 = createLocalStorageAtom("seen_summarization_nudge_count", 0);
 export const EH = $$c0;

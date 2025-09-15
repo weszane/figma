@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { buildUploadUrl } from "../figma_app/169182";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
 import { LE } from "../905/71785";
@@ -13,7 +13,7 @@ export let $$u0 = registerModal(function (e) {
   e.editorType === LE.SLIDES && (t = getI18nString("rcs.redirect_from_mobile_to_desktop.head_to_slides_on_desktop"), r = getI18nString("community.collections.head_to_desktop_slides"), c = buildUploadUrl("d5fbdadc97f3d94063357e9819c314ade9055df3"));
   return jsxs(ModalContainer, {
     className: "head_to_desktop_modal--modalContainer--BRiSA",
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: e.dispatch
     }), jsx("img", {
       width: "100%",

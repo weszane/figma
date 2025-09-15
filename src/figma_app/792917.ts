@@ -9,12 +9,12 @@ import { Button } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { XHR } from "../905/910117";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { z, Z } from "../905/306088";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { vi } from "../figma_app/808294";
+import { getRefundReasonString } from "../figma_app/808294";
 import { c9, oW } from "../figma_app/395505";
 import { showModalHandler, hideModal } from "../905/156213";
 import { CancellationReason, DEFAULT_PRICE } from "../905/54385";
@@ -73,7 +73,7 @@ let $$N0 = registerModal(function (e) {
           children: Object.values(CancellationReason).map(e => jsx(_$$c, {
             value: e,
             label: jsx(Label, {
-              children: vi(e)
+              children: getRefundReasonString(e)
             })
           }, e))
         }), f === CancellationReason.OTHER ? jsx("div", {
@@ -95,7 +95,7 @@ let $$N0 = registerModal(function (e) {
           children: Object.values(CancellationReason).map(e => jsx(Z, {
             className: _$$s.font11.selectNone.$,
             value: e,
-            children: vi(e)
+            children: getRefundReasonString(e)
           }, e))
         }), f === CancellationReason.OTHER ? jsx("div", {
           className: _$$s.mt8.$,
@@ -144,7 +144,7 @@ let C = registerModal(function (e) {
     size: "small",
     hide: lQ,
     title: getI18nString("community.buyer.refund_requested"),
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: r
     }), renderI18nText("community.buyer.keep_an_eye_out", {
       here: jsx(Button.Link, {

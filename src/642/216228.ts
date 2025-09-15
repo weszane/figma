@@ -14,7 +14,7 @@ import { k as _$$k3 } from '../905/44647';
 import { f as _$$f2 } from '../905/54715';
 import { KeyCodes } from '../905/63728';
 import { oA } from '../905/71785';
-import { TG } from '../905/72677';
+import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { KH } from '../905/81982';
 import { F as _$$F } from '../905/84606';
 import { yD } from '../905/92359';
@@ -169,7 +169,7 @@ import { GG as _$$GG, lS as _$$lS, qd as _$$qd, b4, Ou, PV, YQ } from '../figma_
 import { o as _$$o } from '../figma_app/267183';
 import { N as _$$N } from '../figma_app/268271';
 import { Ay as _$$Ay4 } from '../figma_app/272902';
-import { te as _$$te, GM } from '../figma_app/275462';
+import { alwaysFalseCallback2, setupStarterUserCallback } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
 import { $z } from '../figma_app/297733';
 import { KD, O1 } from '../figma_app/317394';
@@ -199,7 +199,7 @@ import { setupResourceAtomHandler } from '../figma_app/566371';
 import { J as _$$J, P as _$$P } from '../figma_app/582341';
 import { $A, lX as _$$lX, MT } from '../figma_app/588397';
 import { Hz } from '../figma_app/591738';
-import { I7 } from '../figma_app/594947';
+import { selectExperimentConfigHook } from '../figma_app/594947';
 import { y as _$$y } from '../figma_app/598297';
 import { Ev, JA } from '../figma_app/608944';
 import { createTrackedAtom } from '../figma_app/615482';
@@ -268,7 +268,7 @@ function M() {
     overlay: QI3,
     priority: _$$N.SECONDARY_MODAL
   }, [s]);
-  let o = _$$te();
+  let o = alwaysFalseCallback2();
   let {
     currentView
   } = wV();
@@ -484,7 +484,7 @@ function e3({
     isFlyoutOpen
   } = JA();
   let N = useCurrentFileKey();
-  let I = useAtomWithSubscription(TG);
+  let I = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let {
     currentView
   } = wV();
@@ -3195,7 +3195,7 @@ function r4() {
   }, [C]);
   let v = fi();
   let S = Bv();
-  let k = useAtomWithSubscription(TG);
+  let k = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   return useMemo(() => function ({
     localComponentsInfo: e,
     localTemplatesInfo: t,
@@ -4318,7 +4318,7 @@ function nV({
   let b = useAtomWithSubscription(nD);
   let C = _$$H(e.libraryKey);
   let [j] = MA();
-  let v = (GM()() ? $H.LIST : j) === $H.LIST;
+  let v = (setupStarterUserCallback()() ? $H.LIST : j) === $H.LIST;
   let S = _$$sN();
   let k = useCallback(() => {
     S('libraryCard', navigateToLibrary(e.libraryKey));
@@ -5640,7 +5640,7 @@ function ie({
     librariesScrollTop,
     handleScrollLibraries
   } = tM();
-  let c = !!GM()();
+  let c = !!setupStarterUserCallback()();
   let {
     currentView
   } = wV();
@@ -6611,7 +6611,7 @@ let iZ = ({
   query: t,
   showMoreDefault: s
 }) => {
-  let i = !!GM()();
+  let i = !!setupStarterUserCallback()();
   let [l, a] = useState(!1);
   let o = s || l || i;
   let d = useCallback(() => a(!0), []);
@@ -6955,7 +6955,7 @@ function i5(e) {
   let {
     visualAssetsType
   } = wV();
-  let s = !!GM()();
+  let s = !!setupStarterUserCallback()();
   let r = useAtomWithSubscription(QN);
   let i = useAtomWithSubscription(_$$r2);
   let l = s && !!visualAssetsType;
@@ -7207,7 +7207,7 @@ function li({
     previousLibraryKey
   } = RR();
   let c = ll();
-  let u = !!GM()();
+  let u = !!setupStarterUserCallback()();
   let {
     getPage,
     getLibrary
@@ -7536,7 +7536,7 @@ function lR({
   let b = useCurrentFileKey();
   let C = useOpenFileLibraryKey();
   let [j] = MA();
-  let v = !!GM()() && currentView === S5.Libraries;
+  let v = !!setupStarterUserCallback()() && currentView === S5.Libraries;
   let S = v ? $H.LIST : j;
   let k = cJ() || v;
   let w = useMemo(() => currentView !== S5.Search && (productComponents.length > 0 || u.length > 0), [currentView, productComponents.length, u.length]);
@@ -7754,7 +7754,7 @@ function lQ({
   }, a);
   let {
     getConfig
-  } = I7('assets_panel_visual_search');
+  } = selectExperimentConfigHook('assets_panel_visual_search');
   let c = getConfig().get('variant', 'control') === 'component_filter';
   let u = useCallback(() => {
     a && ($I({
@@ -8029,7 +8029,7 @@ function l4({
   let n = Ko();
   let {
     getConfig
-  } = I7('assets_panel_visual_search');
+  } = selectExperimentConfigHook('assets_panel_visual_search');
   let l = _$$b();
   let {
     closeOverlay

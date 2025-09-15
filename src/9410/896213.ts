@@ -31,7 +31,7 @@ import { gR } from "../figma_app/976345";
 import { ZO } from "../figma_app/88239";
 import { oB } from "../905/929976";
 import { J4 } from "../figma_app/91703";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
 import { k as _$$k2 } from "../figma_app/564183";
 import { hx } from "../figma_app/290668";
@@ -177,7 +177,7 @@ export function $$ew1(e, t, i, r, n, a, s) {
         multiplayerObservingSessionID: o,
         multiplayerSessionID: n.sessionID
       }
-    })), i(_$$b({
+    })), i(postUserFlag({
       aware_of_observation_mode: !0
     })));
     i(J4({
@@ -186,7 +186,7 @@ export function $$ew1(e, t, i, r, n, a, s) {
     }));
   } else {
     Multiplayer.observeUser(o);
-    n.observingSessionID !== o && n.sessionID !== o && i(_$$b({
+    n.observingSessionID !== o && n.sessionID !== o && i(postUserFlag({
       aware_of_observation_mode: !0
     }));
   }

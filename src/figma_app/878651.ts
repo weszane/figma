@@ -7,7 +7,7 @@ import { customHistory } from "../905/612521";
 import { isCommandOrShift, ignoreCommandOrShift } from "../905/63728";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
@@ -17,7 +17,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Xy } from "../figma_app/578832";
 import { Mr } from "../figma_app/795938";
-import { ae } from "../figma_app/808294";
+import { decimalToPercent } from "../figma_app/808294";
 import { G8 } from "../figma_app/777551";
 import { Vm } from "../figma_app/427318";
 import { bL } from "../905/934145";
@@ -274,7 +274,7 @@ function eE(e) {
     badges: [],
     monetized_resource_metadata: {
       id: "0",
-      price: ae(e.price),
+      price: decimalToPercent(e.price),
       is_subscription: !1
     }
   } : null;
@@ -384,7 +384,7 @@ export function $$eb5({
           window.location.href = "/login";
           return;
         }
-        f(Ts({
+        f(AUTH_INIT({
           origin: "plugin_install_signed_out"
         }));
         f(showModalHandler({

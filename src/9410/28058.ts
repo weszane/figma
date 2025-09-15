@@ -10,7 +10,7 @@ import { Qx, Dm } from "../figma_app/8833";
 import { TrackingProvider } from "../figma_app/831799";
 import { u2 } from "../figma_app/223206";
 import { D as _$$D } from "../905/12032";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { Tc } from "../905/797478";
 import { dP } from "../figma_app/740163";
 import { _o } from "../figma_app/701001";
@@ -111,7 +111,7 @@ export function $$W0() {
   let a = useAtomWithSubscription(q7);
   let l = EI();
   let d = useAtomWithSubscription(_$$D);
-  let c = useAtomWithSubscription(r1(Kt)).data;
+  let c = useAtomWithSubscription(userFlagExistsAtomFamily(Kt)).data;
   let u = useAtomWithSubscription(VZ);
   let p = useAtomWithSubscription(u2);
   let {

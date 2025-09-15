@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { nA, lp, eH, J4 } from "../figma_app/91703";
-import { x2 } from "../figma_app/714946";
+import { loadingStatePutSuccess } from "../figma_app/714946";
 import { hideModal, showModalHandler } from "../905/156213";
 import { E as _$$E } from "../905/344656";
 import { VERSION_HISTORY_SET_DOC_HAS_CHANGED } from "../905/784363";
@@ -35,7 +35,7 @@ import { z as _$$z } from "../905/239603";
 import { registerLegacyModal, registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 import { yl, DD, jE, v0 } from "../figma_app/639088";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { ButtonSecondary } from "../figma_app/637027";
 import { Be } from "../905/172516";
 import { incrementReconnectCounter } from "../figma_app/314264";
@@ -180,7 +180,7 @@ let Z = registerModal(function () {
   return jsxs(ModalContainer, {
     size: "small",
     title: getI18nString("multiplayer_limit.editor_limit_modal_title.seat_rename"),
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: e
     }), jsxs("div", {
       className: jE,
@@ -213,7 +213,7 @@ let X = registerModal(function () {
   return jsxs(ModalContainer, {
     size: "small",
     title: getI18nString("multiplayer_limit.cursor_limit_modal_title"),
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: e
     }), jsxs("div", {
       className: jE,
@@ -256,7 +256,7 @@ export class $$eu0 {
   reconnectingSucceeded() {
     getFeatureFlags()?.fullscreen_send_client_rendered_message ? Multiplayer.sendClientRendered(xK.getClientRenderedMetadata()) : Multiplayer.sendSignal("client-rendered", "");
     this.dispatch(lp());
-    VP(this.store.getState().loadingState, $5) && this.dispatch(x2({
+    VP(this.store.getState().loadingState, $5) && this.dispatch(loadingStatePutSuccess({
       key: $5
     }));
   }

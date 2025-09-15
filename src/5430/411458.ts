@@ -1,6 +1,6 @@
 import { S } from "../905/872825";
 import { nS, Ac, aV } from "../figma_app/321395";
-import { t } from "../905/178090";
+import { ResourceTypeSubset } from "../905/178090";
 import { VR, FZ, CS, p7 } from "../figma_app/979714";
 let a = class extends nS {};
 Ac(a);
@@ -15,7 +15,7 @@ a.serializeParams = e => ({
 a.deserializeParams = e => ({
   ...CS(e),
   ...(e.resourceType && {
-    resourceType: S(e.resourceType, t)
+    resourceType: S(e.resourceType, ResourceTypeSubset)
   })
 });
 a.parseQueryString = e => ({

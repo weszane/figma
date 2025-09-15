@@ -4,7 +4,7 @@ import { useState, useRef, Suspense } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { selectWithShallowEqual } from "../905/103090";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -21,7 +21,7 @@ import { K } from "../905/3140";
 import { vp } from "../905/967587";
 import { FC } from "../figma_app/212807";
 import { TN } from "../figma_app/211146";
-import { LN } from "../figma_app/514043";
+import { getUserCurrency } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess } from "../figma_app/345997";
 import { ng } from "../figma_app/205827";
 import { N as _$$N } from "../905/809096";
@@ -31,7 +31,7 @@ import { I as _$$I } from "../905/641938";
 function O(e) {
   let t = useDispatch();
   let i = TN(e.teamId ?? "");
-  let [n, h] = useState(LN());
+  let [n, h] = useState(getUserCurrency());
   let g = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let O = useRef(null);
   let D = getEditableTeamsWithoutPaidAccess(FC());
@@ -78,7 +78,7 @@ function O(e) {
               className: "upgrade_choose_plan_modal--planModalTitle--IYaCP text--fontPos24--YppUD text--_fontBase--QdLsd",
               children: U
             })
-          }), jsx(Jn, {
+          }), jsx(CloseButton, {
             className: "upgrade_choose_plan_modal--closeButton--OMLmq",
             onClick: M,
             innerText: "close"

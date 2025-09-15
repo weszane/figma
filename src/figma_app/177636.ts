@@ -6,7 +6,7 @@ import { unwrap } from "../vendor/812047";
 import { getResourceDataOrFallback } from "../905/663269";
 import { Xm, gB } from "../905/723791";
 import { setupMemoizedAtomSubscription } from "../figma_app/566371";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { processSelector } from "../3973/697935";
 import { OperationStatus } from "../3973/473379";
 import { Lg, isInteractionPathCheck } from "../figma_app/897289";
@@ -22,7 +22,7 @@ import { G } from "../figma_app/923271";
 import { n as _$$n } from "../905/347702";
 import { Pv, GZ, Yl } from "../figma_app/10098";
 import { V } from "../figma_app/862515";
-let N = _$$n(async () => await w0("ds_sts_lib_key"));
+let N = _$$n(async () => await fetchDynamicConfig("ds_sts_lib_key"));
 let C = z.object({
   libraryKey: z.string(),
   primaryTextFieldId: z.string(),

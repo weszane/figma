@@ -9,7 +9,7 @@ import { sf } from "../905/929976";
 import { Ay } from "../figma_app/482142";
 import { S_ } from "../5885/925885";
 import { TrackingProvider } from "../figma_app/831799";
-import { LN } from "../figma_app/514043";
+import { getUserCurrency } from "../figma_app/514043";
 import { Ud } from "../c5e2cae0/2942";
 export function $$g0(e) {
   let {
@@ -72,7 +72,7 @@ export function $$g0(e) {
             children: jsx(_$$d, {
               selectedView,
               onClickConfirm: v,
-              currency: LN(),
+              currency: getUserCurrency(),
               canSeeBillingAddressExp: !1
             })
           })

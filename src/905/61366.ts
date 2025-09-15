@@ -2,7 +2,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { BrowserInfo } from "../figma_app/778880";
 import { createOptimistThunk } from "../905/350402";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 let l = BrowserInfo.isIpad || BrowserInfo.isIpadNative;
 function d() {
   return l ? "hide_figjam_templates_picker" : "hide_figjam_starter_kit";
@@ -22,7 +22,7 @@ export let $$u1 = createOptimistThunk((e, t) => {
     dispatch
   } = e;
   let c = e.getState().openFile?.key || null;
-  dispatch(b({
+  dispatch(postUserFlag({
     [userFlag]: hide
   }));
   i = {

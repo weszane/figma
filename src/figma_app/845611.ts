@@ -5,7 +5,7 @@ import { j } from "../905/206476";
 import { P } from "../905/697522";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { LoadingSpinner } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -93,7 +93,7 @@ export function $$M19({
 export function $$F8({
   isIntendedAudience: e
 }) {
-  let t = I7("exp_billing_group_admin_request_dash");
+  let t = selectExperimentConfigHook("exp_billing_group_admin_request_dash");
   return void 0 !== e && e && t.getConfig().get("enabled", !1);
 }
 export const Bk = $$D0;

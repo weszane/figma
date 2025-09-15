@@ -9,9 +9,9 @@ import { LQ8 } from '../figma_app/6204';
 import { useAtomWithSubscription } from '../figma_app/27355';
 import { buildUploadUrl } from '../figma_app/169182';
 import { N } from '../figma_app/268271';
-import { r1 } from '../figma_app/545877';
+import { userFlagExistsAtomFamily } from '../figma_app/545877';
 let m = 'connected_projects_usage_onboarded';
-let g = r1(m);
+let g = userFlagExistsAtomFamily(m);
 export function $$f0({
   projectUrl: e,
   onboardingKey: t,

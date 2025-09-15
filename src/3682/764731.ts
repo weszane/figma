@@ -63,7 +63,7 @@ import { L as _$$L2 } from "../905/473569";
 import { useMemoShallow } from "../905/19536";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { LoadingSpinner } from "../figma_app/858013";
 import { VisualBellActions } from "../905/302958";
 import { TrackedAnchor } from "../figma_app/831799";
@@ -940,7 +940,7 @@ function e6(e) {
       onClick: e => e.stopPropagation(),
       children: [jsxs("div", {
         className: "device_controls--header---h3P-",
-        children: [getI18nString("collaboration.voice.audio_settings"), jsx(Jn, {
+        children: [getI18nString("collaboration.voice.audio_settings"), jsx(CloseButton, {
           onClick: () => _(oB())
         })]
       }), jsxs("div", {

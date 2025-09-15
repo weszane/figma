@@ -7,7 +7,7 @@ import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { d9, $5 } from "../3276/240191";
 import { PD } from "../figma_app/101956";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { getUserCreatedAt } from "../905/372672";
 import { M8 } from "../figma_app/915202";
 import { N } from "../figma_app/268271";
@@ -80,7 +80,7 @@ function P({
   });
 }
 let I = "seen_synchronous_collaboration_onboarding";
-let T = r1(I);
+let T = userFlagExistsAtomFamily(I);
 export function $$M0() {
   let e = useAtomWithSubscription(d9);
   let t = useAtomWithSubscription(PD);

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { linkWithTracking, ButtonWhiteTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { popModalStack } from "../905/156213";
@@ -29,7 +29,7 @@ let $$A0 = registerModal(function (e) {
     children: jsxs(ModalContainer, {
       size: 360,
       className: "file_limit_paywall_modal--paywallModal--tFr8-",
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         className: "file_limit_paywall_modal--closeButton--IyrJA",
         ...e
       }), jsxs("div", {

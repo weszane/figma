@@ -4,7 +4,7 @@ import { isAnyMobile } from "../figma_app/778880";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { X2 } from "../figma_app/808294";
+import { getSubscriptionPriceString } from "../figma_app/808294";
 import { KindEnum } from "../905/129884";
 import { m_ } from "../figma_app/209680";
 import { A } from "../6828/154709";
@@ -17,7 +17,7 @@ export function $$f1({
   showCaret: t = !0,
   textSize: r = "medium"
 }) {
-  let i = X2(e.monetized_resource_metadata);
+  let i = getSubscriptionPriceString(e.monetized_resource_metadata);
   let a = renderI18nText("community.buyer.in_app_purchase");
   return jsx("div", {
     className: _,

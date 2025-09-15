@@ -10,7 +10,7 @@ import { isAIFeaturesDisabled } from "../figma_app/459490";
 import { SecureLink } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
@@ -150,13 +150,13 @@ export function $$H1({
     })
   });
   useEffect(() => {
-    s && !A && v?.(_$$b({
+    s && !A && v?.(postUserFlag({
       seen_slides_onboarding: !1
     }));
   });
   let G = () => {
     e();
-    v?.(_$$b({
+    v?.(postUserFlag({
       seen_slides_onboarding: !0,
       ...(!A && {
         agreed_to_slides_ai_terms: !0

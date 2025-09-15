@@ -24,7 +24,7 @@ import { A as _$$A2 } from "../svg/910223";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { xb, FO } from "../figma_app/910914";
 import { $ as _$$$ } from "../figma_app/61705";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { oW } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
@@ -135,7 +135,7 @@ function ed(e) {
               children: jsx(Me, {
                 "aria-label": getI18nString("general.close"),
                 onClick: e.onDismiss ? e.onDismiss : () => {
-                  a(_$$b({
+                  a(postUserFlag({
                     [e.userFlagName]: !0
                   }));
                 },
@@ -232,7 +232,7 @@ let eg = [{
         })
       }),
       onDismiss: () => {
-        t(_$$b({
+        t(postUserFlag({
           [e]: !0
         }));
       },
@@ -267,7 +267,7 @@ let eg = [{
         e(VisualBellActions.enqueue({
           message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
         }));
-        e(_$$b({
+        e(postUserFlag({
           seen_mobile_proto_announcement: !0
         }));
       },
@@ -304,7 +304,7 @@ let eg = [{
         e(VisualBellActions.enqueue({
           message: getI18nString("rcs.mobile_comment_reply_upsell.email_sent")
         }));
-        e(_$$b({
+        e(postUserFlag({
           seen_mobile_comment_announcement: !0
         }));
       },
@@ -330,7 +330,7 @@ let eg = [{
     let a = _$$U("announcement");
     let s = "dark" === DP();
     let r = () => {
-      t ? _Z(t) : n(_$$b({
+      t ? _Z(t) : n(postUserFlag({
         [e]: !0
       }));
     };
@@ -456,7 +456,7 @@ let eg = [{
               },
               isDevHandoff: !0
             }), "_blank");
-            e(_$$b({
+            e(postUserFlag({
               dev_mode_demo_file_props_panel_upsell_dismissed: !0
             }));
           },

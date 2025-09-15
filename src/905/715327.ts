@@ -62,7 +62,7 @@ import { p as _$$p } from "../figma_app/353099";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e3 } from "../905/621515";
 import { UC } from "../figma_app/33126";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KI } from "../figma_app/797994";
 import { Um } from "../905/848862";
 import { N as _$$N2 } from "../figma_app/268271";
@@ -101,7 +101,7 @@ import { p as _$$p2 } from "../905/895920";
 import { fd } from "../figma_app/255679";
 import { B as _$$B2 } from "../905/146468";
 import { h as _$$h2 } from "../905/594794";
-import { qq } from "../905/72677";
+import { hubFileAndPresetKeysSetAtom } from "../905/72677";
 import { FO } from "../905/682977";
 import { sO } from "../figma_app/21029";
 import { A as _$$A2 } from "../6828/117346";
@@ -203,8 +203,8 @@ function ew({
   });
 }
 let eT = "seen_libraries_workspace_onboarding";
-let ek = r1("file_browser_onboarded");
-let eR = r1(eT);
+let ek = userFlagExistsAtomFamily("file_browser_onboarded");
+let eR = userFlagExistsAtomFamily(eT);
 function eN() {
   let e = useAtomWithSubscription(ek);
   let t = useSelector(e => e.currentUserOrgId);
@@ -1156,7 +1156,7 @@ function tk({
   let m = useSelector(getSelectedFile);
   let [h, g] = useState(new Set());
   let f = Fl();
-  let _ = useAtomWithSubscription(qq);
+  let _ = useAtomWithSubscription(hubFileAndPresetKeysSetAtom);
   let A = useMemo(() => d()(l, e => e.library_key), [l]);
   let [y, b] = useMemo(() => V()(p?.allUsedLibraryKeys ? Array.from(p.allUsedLibraryKeys) : [], e => !!A[e]), [A, p?.allUsedLibraryKeys]);
   let v = mo({

@@ -11,7 +11,7 @@ import { getI18nString } from "../905/303541";
 import { Ay } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { Z } from "../905/104740";
 import { renameNode } from "../figma_app/741237";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
@@ -37,7 +37,7 @@ export function $$x1() {
   let R = um();
   let L = useAtomWithSubscription(_s);
   let P = useAtomWithSubscription(openFileTeamIdAtom);
-  let D = useAtomWithSubscription(kS);
+  let D = useAtomWithSubscription(userIdAtom);
   let k = useAtomWithSubscription(openFileKeyAtom);
   let M = useAtomWithSubscription(_$$J);
   let F = {

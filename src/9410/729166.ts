@@ -79,7 +79,7 @@ import { e as _$$e6 } from '../905/916195';
 import { sf } from '../905/929976';
 import { lQ } from '../905/934246';
 import { f as _$$f4 } from '../905/940356';
-import { b as _$$b2 } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { Ak } from '../905/986103';
 import { h as _$$h2 } from '../905/994594';
 import { H as _$$H2 } from '../905/999677';
@@ -1343,7 +1343,7 @@ function t9() {
     children: jsxs(Yy, {
       variant: 'success',
       onDismiss: () => {
-        e(_$$b2({
+        e(postUserFlag({
           dismissed_dev_mode_overview_banner: !0
         }));
       },

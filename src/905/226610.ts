@@ -11,7 +11,7 @@ import { NU } from "../905/11";
 import { logDebug, logWarning } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { logger } from "../905/651849";
 import { trackUserEvent } from "../figma_app/314264";
 function y() {
@@ -95,7 +95,7 @@ class b {
       [this.falseOverrideUserFlag]: !1
     };
     a[r ? this.trueOverrideUserFlag : this.falseOverrideUserFlag] = !0;
-    t(_$$b(a));
+    t(postUserFlag(a));
     t(VisualBellActions.enqueue({
       message: this.getVisualBellMessage(r)
     }));
@@ -115,7 +115,7 @@ class b {
   }
   resetToDefault(e, t) {
     let i = this.getValue();
-    t(_$$b({
+    t(postUserFlag({
       [this.trueOverrideUserFlag]: !1,
       [this.falseOverrideUserFlag]: !1
     }));

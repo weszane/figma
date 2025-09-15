@@ -12,7 +12,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../5430/816957";
 import { Lj } from "../figma_app/835219";
 import { JJ, qD, $l, _t, eD as _$$eD, ss, _m, z$, DV } from "../figma_app/471982";
-import { CS, qw, Qd } from "../figma_app/275462";
+import { isResourceHubProfilesEnabled, isComponentViewerEnabled, isRelatedContentExperimentEnabled } from "../figma_app/275462";
 import { M as _$$M } from "../905/722875";
 import { mA, sB, K2, zY } from "../figma_app/777551";
 import { XW, qY, BQ, YI, g0, ZA, Qc, Vm, $9, eO as _$$eO, zL, PI, cX, $3, ws, tv as _$$tv } from "../figma_app/427318";
@@ -27,7 +27,7 @@ import { Q as _$$Q } from "../5430/662041";
 import { T as _$$T } from "../5132/203178";
 import { R as _$$R } from "../5430/129716";
 import { A as _$$A } from "../5430/202447";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { FL } from "../figma_app/248365";
 import { b as _$$b } from "../5430/872214";
 import { A as _$$A2 } from "../vendor/850789";
@@ -50,7 +50,7 @@ import { Ay as _$$Ay, xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { xf } from "../figma_app/416935";
 import { h1 } from "../905/986103";
-import { X2 } from "../figma_app/808294";
+import { getSubscriptionPriceString } from "../figma_app/808294";
 import { hasClientMeta, hasMonetizedResourceMetadata, hasFreemiumCode, isThirdPartyMonetized, isPlugin } from "../figma_app/45218";
 import { dx } from "../5430/309696";
 import { OJ } from "../905/519092";
@@ -105,7 +105,7 @@ var a = o;
 let u = _$$X;
 function A() {
   return jsx(_$$b, {
-    onClick: () => FL(qB.SIGN_UP, {
+    onClick: () => FL(AuthFlowStep.SIGN_UP, {
       preventDefaultRedirect: !0
     }),
     isResourceLiked: !1
@@ -716,7 +716,7 @@ function eZ({
   isOffPlatform: r
 }) {
   if (t && e) {
-    let t = X2(e);
+    let t = getSubscriptionPriceString(e);
     return renderI18nText("community.detail_view.in_app_purchases", {
       priceString: t
     });
@@ -1071,7 +1071,7 @@ function tu({
   resource: e
 }) {
   let t = AG();
-  let r = CS();
+  let r = isResourceHubProfilesEnabled();
   let i = e.community_publishers.accepted;
   let n = [...i.filter(e => J3(e.badges)), ...i.filter(e => !J3(e.badges))];
   let o = jsx(eF, {
@@ -1392,7 +1392,7 @@ function tD({
 export function $$tF0({
   resource: e
 }) {
-  let t = qw();
+  let t = isComponentViewerEnabled();
   let r = XW(e) ? qY(e) : e;
   if (!r) return null;
   let i = _$$eO(r);
@@ -1547,7 +1547,7 @@ function t$({
   relatedContent: i,
   openLightboxRDP: n
 }) {
-  return Qd()() && ws(e) ? jsx(tl, {
+  return isRelatedContentExperimentEnabled()() && ws(e) ? jsx(tl, {
     resourceType: Vm(e),
     resourceId: e.id,
     rdpImpressionId: r,

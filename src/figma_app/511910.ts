@@ -7,7 +7,7 @@ import l from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Spacing } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { DP } from "../905/640017";
 import { UK } from "../figma_app/740163";
@@ -121,7 +121,7 @@ function k() {
             className: "no_figma_basics_panning_and_zooming_step--closeButton--UAV5m",
             children: jsx(K, {
               onClick: () => {
-                e(_$$b({
+                e(postUserFlag({
                   dismissed_no_figma_basics_panning_and_zooming_tooltip: !0
                 }));
               },

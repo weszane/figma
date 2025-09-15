@@ -4,7 +4,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { I } from "../figma_app/4253";
 import { Qo, cX } from "../figma_app/471982";
-import { _K } from "../figma_app/808294";
+import { isResourceEligibleForPurchase } from "../figma_app/808294";
 import { XW, eO, $9, jB } from "../figma_app/427318";
 import { vt } from "../figma_app/306946";
 import { ShelfViewType, hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
@@ -33,7 +33,7 @@ export function $$y0({
   enableCondensedWideButtonForStickyFooter: x
 }) {
   let y = I(t);
-  return _K(t, y) ? jsx(_$$I, {
+  return isResourceEligibleForPurchase(t, y) ? jsx(_$$I, {
     resource: t,
     context: ShelfViewType.DETAIL,
     enableWideButtonForStickyFooter: r,

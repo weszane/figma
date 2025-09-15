@@ -8,13 +8,13 @@ import { Ct } from "../figma_app/598018";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { qe, zN } from "../figma_app/416935";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { n as _$$n } from "../figma_app/537817";
 import { S as _$$S } from "../905/339549";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { F } from "../905/224";
@@ -146,7 +146,7 @@ let D = registerModal(function (e) {
   };
   let [g, _] = useState(!1);
   let S = () => {
-    g && t(_$$b({
+    g && t(postUserFlag({
       team_creation_speed_bump_dismissed: !0
     }));
   };
@@ -162,7 +162,7 @@ let D = registerModal(function (e) {
       titleClassName: "team_creation_speed_bump--modalTitle--ji1ue",
       className: "team_creation_speed_bump--modal--Q02I8",
       size: r,
-      children: [jsx(Jn, {
+      children: [jsx(CloseButton, {
         className: "team_creation_speed_bump--closeButton--JcGlN close_button--modalUpperRightCorner--eKAQg",
         onClick: () => {
           S();

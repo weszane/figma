@@ -6,7 +6,7 @@ import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../
 import { XHR } from "../905/910117";
 import { e as _$$e } from "../figma_app/324237";
 import { h as _$$h } from "../905/632544";
-import { L } from "../905/178090";
+import { ResourceTypes } from "../905/178090";
 import { to } from "../figma_app/701107";
 import { isVsCodeEnvironment } from "../905/858738";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
@@ -263,7 +263,7 @@ export let $$v0 = new class {
     }) => await n.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || void 0,
-      resource_type: L.BrowseResourceTypes.PLUGINS,
+      resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
       sort_by: _$$e.Search.RELEVANCY,
       price: i,
       ...s
@@ -275,7 +275,7 @@ export let $$v0 = new class {
     }) => await n.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || void 0,
-      resource_type: L.BrowseResourceTypes.PLUGINS,
+      resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
       sort_by: _$$e.Search.RELEVANCY,
       price: i,
       ...s,
@@ -292,7 +292,7 @@ export let $$v0 = new class {
     }) => await r.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || "",
-      resource_type: L.BrowseResourceTypes.WIDGETS,
+      resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
       editor_type: n,
       sort_by: _$$e.Search.RELEVANCY,
       price: i
@@ -304,7 +304,7 @@ export let $$v0 = new class {
     }) => await r.get("/api/search/community_resources", APIParameterUtils.toAPIParameters({
       query: _(e),
       current_org_id: t || "",
-      resource_type: L.BrowseResourceTypes.WIDGETS,
+      resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
       editor_type: n,
       sort_by: _$$e.Search.RELEVANCY,
       price: i,

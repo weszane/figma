@@ -89,7 +89,7 @@ import { o as _$$o3 } from "../905/17894";
 import { v as _$$v } from "../905/513628";
 import { z as _$$z2 } from "../905/348343";
 import { om } from "../905/175462";
-import { Nw, yJ } from "../figma_app/78808";
+import { renameFileOptimistic, filePutAction } from "../figma_app/78808";
 import { q as _$$q } from "../figma_app/446378";
 import { n as _$$n2 } from "../905/341791";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
@@ -521,13 +521,13 @@ let e6 = _$$T({
       });
     }
     try {
-      figFile.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && debugState.dispatch(Nw({
+      figFile.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && debugState.dispatch(renameFileOptimistic({
         file: {
           key: figFile.key
         },
         name: c_(name).currentValue
       }));
-      debugState.dispatch(yJ({
+      debugState.dispatch(filePutAction({
         file: {
           key: figFile.key,
           is_team_template: !0

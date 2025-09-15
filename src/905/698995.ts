@@ -200,7 +200,7 @@ export class DesktopAPI {
     fileKey: string
     title: string
     fileEditorType: string
-    target: string
+    target: any
     isBranch: boolean
     isLibrary: boolean
     isTeamTemplate: boolean

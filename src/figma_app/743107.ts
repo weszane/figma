@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { useMemoStable } from "../905/19536";
 import { analyticsEventManager } from "../905/449184";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { qd } from "../figma_app/852050";
 import { isLocalOrSubscribed } from "../figma_app/633080";
@@ -107,7 +107,7 @@ export function $$A1({
     let l = useMemo(() => _$$UN(e), [e]);
     useEffect(() => (r ? (a({
       status: "loading"
-    }), getFeatureFlags().aip_flower_garden_shadow_reranker && getFeatureFlags().aip_flower_garden_shadow_reranker_top_k && l) ? w0(Cg).then(e => {
+    }), getFeatureFlags().aip_flower_garden_shadow_reranker && getFeatureFlags().aip_flower_garden_shadow_reranker_top_k && l) ? fetchDynamicConfig(Cg).then(e => {
       let r = e.get(wj, hs);
       return kA({
         library_keys: t,

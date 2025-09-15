@@ -1,12 +1,12 @@
 import { createRemovableAtomFamily, atom } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { OrgUserFlag } from "../figma_app/43951";
-import { Z1 } from "../905/401885";
+import { transformAtom } from "../905/401885";
 import { _s } from "../figma_app/33126";
 let l = createRemovableAtomFamily(({
   orgId: e,
   eventType: t
-}) => Z1(OrgUserFlag.Query({
+}) => transformAtom(OrgUserFlag.Query({
   orgId: e,
   eventType: t
 }), e => !!e.currentUser.baseOrgUser?.orgUserFlag?.id));

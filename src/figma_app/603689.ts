@@ -20,7 +20,7 @@ import { z4 } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { yx } from '../905/41973';
 import { d as _$$d7 } from '../905/68441';
-import { TG } from '../905/72677';
+import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { t } from '../905/78171';
 import { an as _$$an, y$ } from '../905/81009';
 import { x as _$$x } from '../905/89282';
@@ -49,7 +49,7 @@ import { g as _$$g2 } from '../905/181093';
 import { Y as _$$Y3 } from '../905/185567';
 import { uW as _$$uW } from '../905/187165';
 import { LO } from '../905/189279';
-import { My } from '../905/194276';
+import { AUTH_COMPLETE } from '../905/194276';
 import { W as _$$W4 } from '../905/200727';
 import { h as _$$h9 } from '../905/207101';
 import { Z as _$$Z2 } from '../905/224161';
@@ -61,7 +61,7 @@ import { x as _$$x2 } from '../905/239551';
 import { d as _$$d6 } from '../905/241150';
 import { l as _$$l4 } from '../905/241412';
 import { W as _$$W3 } from '../905/244810';
-import { g as _$$g3 } from '../905/248178';
+import { trackAuthEvent } from '../905/248178';
 import { H as _$$H2 } from '../905/250770';
 import { A as _$$A9 } from '../905/251970';
 import { $7, o8 as _$$o4, B_, QB } from '../905/258397';
@@ -93,7 +93,7 @@ import { deepEqual } from '../905/382883';
 import { e as _$$e10 } from '../905/383776';
 import { h as _$$h6 } from '../905/388624';
 import { A as _$$A0 } from '../905/389851';
-import { Z1 } from '../905/401885';
+import { transformAtom } from '../905/401885';
 import { U as _$$U2 } from '../905/405962';
 import { x as _$$x4 } from '../905/407439';
 import { debugState } from '../905/407919';
@@ -218,7 +218,7 @@ import { notificationActions } from '../905/851662';
 import { V as _$$V3 } from '../905/856857';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n3, sg as _$$sg } from '../905/859698';
-import { qB } from '../905/862321';
+import { AuthFlowStep } from '../905/862321';
 import { ud as _$$ud } from '../905/862913';
 import { q9 } from '../905/865071';
 import { bL as _$$bL2, c$ as _$$c$ } from '../905/867927';
@@ -251,7 +251,7 @@ import { PluginIframeMode } from '../905/968269';
 import { O as _$$O2 } from '../905/969533';
 import { R9 } from '../905/977824';
 import { TextWithTruncation } from '../905/984674';
-import { b as _$$b7 } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { h1 } from '../905/986103';
 import { Q as _$$Q } from '../905/986450';
 import { rn as _$$rn2 } from '../905/988099';
@@ -307,7 +307,7 @@ import { h as _$$h } from '../figma_app/61485';
 import { useFullscreenViewportUpdates, scaleRect } from '../figma_app/62612';
 import { jm } from '../figma_app/67099';
 import { mX } from '../figma_app/76123';
-import { Lk as _$$Lk } from '../figma_app/78808';
+import { setActiveFileUsersAction } from '../figma_app/78808';
 import { o as _$$o2, v as _$$v3 } from '../figma_app/79979';
 import { getObservableValue } from '../figma_app/84367';
 import { l7 as _$$l6, ZO as _$$ZO2, hA } from '../figma_app/88239';
@@ -438,7 +438,7 @@ import { q4 } from '../figma_app/536669';
 import { Lj, xM } from '../figma_app/539925';
 import { yH } from '../figma_app/540726';
 import { nb as _$$nb, fA, Tf } from '../figma_app/543100';
-import { r1 as _$$r4, Fu, Hy } from '../figma_app/545877';
+import { userFlagExistsAtomFamily, userFlagAtomFamily, latestSurveyResponseDateAtom } from '../figma_app/545877';
 import { N as _$$N, Gm } from '../figma_app/548577';
 import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { ZO as _$$ZO } from '../figma_app/557318';
@@ -451,7 +451,7 @@ import { d2 as _$$d9, nZ as _$$nZ, t as _$$t4, zN as _$$zN } from '../figma_app/
 import { FP } from '../figma_app/580736';
 import { xE } from '../figma_app/581520';
 import { iw as _$$iw } from '../figma_app/582563';
-import { Bf } from '../figma_app/594947';
+import { ConfigManagerProxy } from '../figma_app/594947';
 import { ol as _$$ol, rR as _$$rR, sK as _$$sK } from '../figma_app/598018';
 import { MR } from '../figma_app/598926';
 import { oR as _$$oR, wA as _$$wA } from '../figma_app/598952';
@@ -4394,7 +4394,7 @@ let on = Op({
 });
 let oi = _$$rn('left_admin_settings', on);
 let oa = 'seen_org_admin_survey';
-let os = Fu(oa);
+let os = userFlagAtomFamily(oa);
 function oo(e) {
   return (Date.now() - e.getTime()) / 864e5;
 }
@@ -4407,7 +4407,7 @@ function ol(e, t, r) {
 function od() {
   let e = _$$zl(oi);
   let t = useAtomWithSubscription(os);
-  let r = useAtomWithSubscription(Hy);
+  let r = useAtomWithSubscription(latestSurveyResponseDateAtom);
   let n = useAtomWithSubscription(ZS);
   let i = _$$e8({
     overlay: GFz,
@@ -4523,14 +4523,14 @@ let om = Op({
 });
 let og = _$$rn2('org_cart_abandon_survey', om);
 let of = 'seen_org_cart_abandon_survey';
-let oE = _$$r4('completed_org_cart_flow');
-let oy = _$$r4(of);
+let oE = userFlagExistsAtomFamily('completed_org_cart_flow');
+let oy = userFlagExistsAtomFamily(of);
 let ob = {
   surveyVersion: 1
 };
 function oT() {
   let e = useAtomWithSubscription(oE);
-  let t = useAtomWithSubscription(Hy);
+  let t = useAtomWithSubscription(latestSurveyResponseDateAtom);
   let r = useAtomWithSubscription(_$$zN);
   let n = useAtomWithSubscription(_$$nZ);
   let i = useAtomWithSubscription(oy);
@@ -4811,7 +4811,7 @@ function oG({
 let oz = M4.Mutation(async e => {
   await Eh.validateTrial(e);
 });
-let oK = createRemovableAtomFamily(e => Z1(ProductTrialsView.Query({
+let oK = createRemovableAtomFamily(e => transformAtom(ProductTrialsView.Query({
   orgId: e
 }), e => e?.org?.canAdmin && e.org.billingTrials?.length ? function (e) {
   let t = e.filter(e => e.status === _$$Q4.PENDING && e.trialType === FBillingEntityType.PRODUCT);
@@ -5325,7 +5325,7 @@ function l5({
       if (e.result.status === 'loaded' && e.result.data) {
         let r = e.args.fileKey;
         let n = ZF(e.result.data);
-        t(_$$Lk({
+        t(setActiveFileUsersAction({
           fileKey: r,
           users: n
         }));
@@ -5828,7 +5828,7 @@ function dR() {
     let t = function () {
       let e = useCurrentFileKey();
       let t = _$$n4();
-      let r = useAtomWithSubscription(TG);
+      let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
       let [n, i] = useAtomValueAndSetter(dP);
       let a = useAtomWithSubscription(dD);
       let s = useSelector(qC);
@@ -7118,7 +7118,7 @@ function uy(e) {
     userFlagOnShow: 'seen_draw_first_time_onboarding'
   });
 }
-let ub = _$$r4('seen_draw_first_time_onboarding');
+let ub = userFlagExistsAtomFamily('seen_draw_first_time_onboarding');
 function uT(e) {
   let {
     activeMode
@@ -7196,7 +7196,7 @@ function uv(e) {
     c(!1);
   }, [activeMode]);
   useEffect(() => {
-    prevActiveMode === 'illustration' && activeMode !== 'illustration' && (c(!1), n(_$$b7({
+    prevActiveMode === 'illustration' && activeMode !== 'illustration' && (c(!1), n(postUserFlag({
       has_toggled_from_draw: !0
     })));
   }, [activeMode, prevActiveMode, n]);
@@ -7312,7 +7312,7 @@ function uO() {
     trackingContextName: 'Dev Mode Nudge'
   });
 }
-let uM = Fu('dev_mode_notified_of_approved_org_request');
+let uM = userFlagAtomFamily('dev_mode_notified_of_approved_org_request');
 function uF() {
   let e = useAtomWithSubscription(uM);
   let t = useDispatch();
@@ -7326,7 +7326,7 @@ function uF() {
   }, [e]);
   let a = _$$W4();
   let s = useCallback(() => {
-    t(_$$b7({
+    t(postUserFlag({
       dev_mode_notified_of_approved_org_request: !0,
       dev_mode_seen_paywall_reminder: !0
     }));
@@ -7414,7 +7414,7 @@ function uY() {
             UK('SIGN_UP_BUTTON_BANNER');
             e({
               origin: _$$ty.LOGGED_OUT_FOOTER,
-              formState: qB.SIGN_UP
+              formState: AuthFlowStep.SIGN_UP
             });
           },
           children: getI18nString('auth.sign_up')
@@ -7426,11 +7426,11 @@ function uY() {
               origin: _$$ty.LOGGED_OUT_FOOTER_CONTINUE_WITH_GOOGLE,
               redirectUrl: _$$jM()
             }).then(e => {
-              e.type === 'login' && n(My({
+              e.type === 'login' && n(AUTH_COMPLETE({
                 userId: e.user.id
               }));
             }, e => {
-              _$$g3('google_signup_error', _$$ty.LOGGED_OUT_FOOTER_CONTINUE_WITH_GOOGLE, {
+              trackAuthEvent('google_signup_error', _$$ty.LOGGED_OUT_FOOTER_CONTINUE_WITH_GOOGLE, {
                 error: e.message
               });
               getFeatureFlags().ff_show_auth_modal_on_google_sso_error && Y2({
@@ -8567,7 +8567,7 @@ function _I() {
           }) : renderI18nText('locked_org.description_no_other_accounts_no_org')),
           users: s,
           onUserSelect: t => {
-            e(My({
+            e(AUTH_COMPLETE({
               userId: t
             }));
           },
@@ -8929,7 +8929,7 @@ let _C = memo(() => {
   });
 });
 let _O = createDeferredPromise();
-_$$v.setDelegate(new Bf());
+_$$v.setDelegate(new ConfigManagerProxy());
 (function (e) {
   if (!getFeatureFlags().web_vitals_report) return;
   let t = customHistory.location.pathname + customHistory.location.search;

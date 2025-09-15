@@ -17,7 +17,7 @@ import { isMobileUA } from "../figma_app/778880";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { XHR } from "../905/910117";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -28,7 +28,7 @@ import { m as _$$m } from "../905/909123";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { d6 } from "../figma_app/530167";
 import { oB, sf } from "../905/929976";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { u as _$$u } from "../905/747030";
 import { showModalHandler } from "../905/156213";
 import { Hx } from "../figma_app/147952";
@@ -44,7 +44,7 @@ import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { M4 } from "../905/713695";
 import { aB } from "../905/576221";
-import { N as _$$N2 } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { maybeCreateSavepoint } from "../905/294113";
 import { AC, x6, jO } from "../figma_app/803787";
 import { rR, sK } from "../figma_app/598018";
@@ -53,7 +53,7 @@ import { LibrarySourceEnum } from "../figma_app/633080";
 import { $A, vt } from "../905/862883";
 import { PreviewMode } from "../figma_app/707808";
 import { fileActionEnum } from "../figma_app/630077";
-import { C as _$$C } from "../905/180";
+import { BuyerAPIHandler } from "../905/180";
 import { D as _$$D } from "../905/17527";
 import { H as _$$H } from "../905/473998";
 import { z as _$$z } from "../905/931953";
@@ -75,7 +75,7 @@ let ey = e => {
     window.location.href = "/login";
     return;
   }
-  e.dispatch(Ts({
+  e.dispatch(AUTH_INIT({
     origin
   }));
   e.dispatch(showModalHandler({
@@ -102,7 +102,7 @@ let $$eb16 = createOptimistThunk((e, t, {
   let a = XHR.post(`/api/hub_files/v2/${t.hubFileId}/copy`, {
     org_id: t.workspace.orgId
   }, i);
-  _$$N2(a, e, r);
+  setupLoadingStateHandler(a, e, r);
   a.then(({
     data: r
   }) => {
@@ -230,7 +230,7 @@ let $$eI20 = createOptimistThunk(async (e, {
   } catch (e) {
     return;
   }
-  _$$N2(a, e, n);
+  setupLoadingStateHandler(a, e, n);
   let {
     fig_file_metadata,
     remixed_from_metadata,
@@ -247,7 +247,7 @@ let $$eI20 = createOptimistThunk(async (e, {
   fig_file_metadata && (e.dispatch($$e_7({
     hubFileId: d.id,
     fileKey: fig_file_metadata.key
-  })), fig_file_metadata.file && e.dispatch(yJ({
+  })), fig_file_metadata.file && e.dispatch(filePutAction({
     file: fig_file_metadata.file
   })), fig_file_metadata.roles && e.dispatch(uo({
     roles: fig_file_metadata.roles
@@ -648,7 +648,7 @@ let $$eM24 = createOptimistThunk((e, {
   let n = createAtomSetter(ek)({
     id: t
   });
-  _$$N2(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   n.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_like_this_file_error", {
@@ -696,7 +696,7 @@ let $$ej6 = createOptimistThunk((e, {
   let i = createAtomSetter(eF)({
     id: t
   });
-  _$$N2(i, e, n);
+  setupLoadingStateHandler(i, e, n);
   i.catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       message: getI18nString("community.actions.unable_to_unlike_this_file_error", {
@@ -725,7 +725,7 @@ let $$eG14 = createOptimistThunk(async (e, {
   let n = r.user?.id;
   n && (trackEventAnalytics(M5.SLIDE_TEMPLATE_USED, {
     hubFileId: t
-  }), eB[n]?.includes(t) || (await _$$C.updateSlideTemplateCommunityUsageCount({
+  }), eB[n]?.includes(t) || (await BuyerAPIHandler.updateSlideTemplateCommunityUsageCount({
     hubFileId: t
   }).then(() => {
     eB[n] || (eB[n] = []);

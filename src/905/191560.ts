@@ -6,9 +6,9 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { isFigmaMirrorAndroid, isInFigmaMobile, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { E as _$$E, Qg, WY, My, Jv, xw, hE, GG, qw, Hh, Re, OZ, kL, I$, KS, AP, ET, $j } from "../905/194276";
+import { changeAuthFormState, AUTH_SHOW_ERROR, AUTH_SET_REDIRECT_URL, AUTH_COMPLETE, AUTH_SIGN_IN, AUTH_RESET_PASSWORD, AUTH_SEND_PASSWORD_RESET, AUTH_REDEEM_RESET, redeemTeamJoinLink, AUTH_SIGN_UP, AUTH_CLICKED_SAML_SIGN_IN, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_AUTH_LOADING, AUTH_CLEAR_AUTH_LOADING, AUTH_SEND_EMAIL_SAML_START, AUTH_SAML_START_FROM_SESSION, AUTH_CLEAR_ERROR, AUTH_EMAIL_ONLY } from "../905/194276";
 import { nb, _G, Kf } from "../905/164233";
-import { cc, RE, qB, vR, DP, By } from "../905/862321";
+import { AuthAction, AuthField, AuthFlowStep, AuthProvider, ClientPlatform, AuthErrorCode } from "../905/862321";
 import { DT, W8, _B, Bs, Rm, xI } from "../figma_app/320164";
 import { I8, TA } from "../905/667970";
 import { Hc, p8, sT } from "../905/694658";
@@ -49,8 +49,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { LinkPrimitive } from "../figma_app/496441";
 import { t as _$$t2 } from "../905/897919";
-import { g as _$$g } from "../905/248178";
-import { I7 } from "../figma_app/594947";
+import { trackAuthEvent } from "../905/248178";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { _ as _$$_2, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
 import { A as _$$A4 } from "../5724/600086";
@@ -228,7 +228,7 @@ function j(e) {
   let x = async () => {
     let e = "";
     try {
-      e = await Hc(cc.SIGN_UP);
+      e = await Hc(AuthAction.SIGN_UP);
     } finally {
       window.self.origin === window.parent.origin && window.parent.postMessage({
         type: "arkose_completed",
@@ -317,10 +317,10 @@ function j(e) {
       onFailed: (i, n) => {
         o(!1);
         w();
-        t(_$$E({
+        t(changeAuthFormState({
           formState: e.auth.prevForm
         }));
-        t(Qg({
+        t(AUTH_SHOW_ERROR({
           message: resolveMessage(i, n)
         }));
       }
@@ -347,13 +347,13 @@ function H(e) {
         origin: e.auth.origin,
         formId: i
       }).then(i => {
-        "login" === i.type && (t(WY({
+        "login" === i.type && (t(AUTH_SET_REDIRECT_URL({
           redirectUrl: e.auth.redirectUrl
-        })), t(My({
+        })), t(AUTH_COMPLETE({
           userId: i.user.id
         })));
       }).catch(e => {
-        t(Qg({
+        t(AUTH_SHOW_ERROR({
           message: e.message
         }));
       });else if (TA()) _$$k2.twoFactor(d || "").then(e => {
@@ -361,18 +361,18 @@ function H(e) {
       }).catch(e => {
         let i = e.data;
         let n = resolveMessage(e, i?.message || getI18nString("auth.default-error"));
-        "invalid_session" === i.reason ? customHistory.redirect("/") : t(Qg({
+        "invalid_session" === i.reason ? customHistory.redirect("/") : t(AUTH_SHOW_ERROR({
           message: n,
-          invalidInput: RE.TOTP_KEY
+          invalidInput: AuthField.TOTP_KEY
         }));
       });else switch (_) {
-        case qB.SIGN_IN:
-          t(Jv({
+        case AuthFlowStep.SIGN_IN:
+          t(AUTH_SIGN_IN({
             formId: i
           }));
           break;
-        case qB.RESET_PASSWORD:
-          t(xw({
+        case AuthFlowStep.RESET_PASSWORD:
+          t(AUTH_RESET_PASSWORD({
             formId: i
           }));
       }
@@ -382,11 +382,11 @@ function H(e) {
         c(e.currentTarget.value);
       },
       value: d || "",
-      name: RE.TOTP_KEY,
+      name: AuthField.TOTP_KEY,
       inputMode: "numeric",
       autoComplete: "one-time-code",
       placeholder: getI18nString("auth.two-factor.authentication-code"),
-      isInvalid: e.auth.invalidInput === RE.TOTP_KEY,
+      isInvalid: e.auth.invalidInput === AuthField.TOTP_KEY,
       showUpdatedInputDesign: !0
     }), jsx("input", {
       type: "hidden",
@@ -436,9 +436,9 @@ function H(e) {
         href: "#",
         onClick: () => {
           atomStoreManager.set(_G, null);
-          e.auth.ssoMethod === vR.SAML ? t(_$$E({
-            formState: qB.SAML_START
-          })) : t(_$$E({
+          e.auth.ssoMethod === AuthProvider.SAML ? t(changeAuthFormState({
+            formState: AuthFlowStep.SAML_START
+          })) : t(changeAuthFormState({
             formState: e.auth.twoFactorPromptedBy
           }));
         },
@@ -555,11 +555,11 @@ function et(e) {
     ...e,
     header: getI18nString("auth.password-reset.enter-email-header"),
     onSubmit: () => {
-      t(_$$E({
-        formState: qB.VERIFY_HUMAN,
-        prevState: qB.FORGOT_PASSWORD,
-        arkoseAction: cc.FORGOT_PASSWORD,
-        postVerificationAction: hE({
+      t(changeAuthFormState({
+        formState: AuthFlowStep.VERIFY_HUMAN,
+        prevState: AuthFlowStep.FORGOT_PASSWORD,
+        arkoseAction: AuthAction.FORGOT_PASSWORD,
+        postVerificationAction: AUTH_SEND_PASSWORD_RESET({
           formId: e.id
         })
       }));
@@ -578,8 +578,8 @@ function et(e) {
     }), jsx("div", {
       className: ee,
       children: jsx(_$$N, {
-        onClick: () => t(_$$E({
-          formState: qB.SIGN_IN
+        onClick: () => t(changeAuthFormState({
+          formState: AuthFlowStep.SIGN_IN
         })),
         trusted: !0,
         href: "#",
@@ -607,8 +607,8 @@ function ei(e) {
     }), jsx("div", {
       className: ee,
       children: jsx(_$$N, {
-        onClick: () => t(_$$E({
-          formState: qB.SIGN_IN
+        onClick: () => t(changeAuthFormState({
+          formState: AuthFlowStep.SIGN_IN
         })),
         trusted: !0,
         href: "#",
@@ -633,12 +633,12 @@ function en(e) {
       name: "email_token",
       value: i
     }), jsx(gK, {
-      name: RE.PASSWORD,
+      name: AuthField.PASSWORD,
       type: "password",
       placeholder: getI18nString("auth.password-reset.placeholder.password"),
       autoCapitalize: "off",
       autoCorrect: "off",
-      isInvalid: RE.PASSWORD === e.auth.invalidInput,
+      isInvalid: AuthField.PASSWORD === e.auth.invalidInput,
       showUpdatedInputDesign: !0
     }), jsx(_$$k, {
       multiple: 3
@@ -648,7 +648,7 @@ function en(e) {
       placeholder: getI18nString("auth.password-reset.placeholder.confirm-password"),
       autoCapitalize: "off",
       autoCorrect: "off",
-      isInvalid: RE.PASSWORD === e.auth.invalidInput,
+      isInvalid: AuthField.PASSWORD === e.auth.invalidInput,
       showUpdatedInputDesign: !0
     }), jsx(_$$k, {
       multiple: 4
@@ -660,8 +660,8 @@ function en(e) {
     }), jsx("div", {
       className: "password_reset--center--Z4tPu",
       children: jsx(_$$N, {
-        onClick: () => t(_$$E({
-          formState: qB.SIGN_IN
+        onClick: () => t(changeAuthFormState({
+          formState: AuthFlowStep.SIGN_IN
         })),
         trusted: !0,
         href: "#",
@@ -716,7 +716,7 @@ function ey(e) {
     clearTimeout(t.current);
   }, []);
   let l = useCallback(() => {
-    o(Qg({
+    o(AUTH_SHOW_ERROR({
       message: getI18nString("auth.generic-app-auth-error")
     }));
     s(!1);
@@ -805,7 +805,7 @@ function eb(e) {
   let o;
   let d = useDispatch();
   let [c, p] = useState(!1);
-  let h = e.auth.appAuthAppType === DP.MSFT_TEAMS;
+  let h = e.auth.appAuthAppType === ClientPlatform.MSFT_TEAMS;
   let g = t => {
     let i;
     let {
@@ -874,13 +874,13 @@ function eb(e) {
     appAuthAppType
   } = e.auth;
   let S = e.modal ? ed : eu;
-  t = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.mobile-app") : appAuthAppType === DP.MIRROR ? getI18nString("auth.mirror-app") : appAuthAppType === DP.MSFT_TEAMS ? getI18nString("auth.microsoft-teams") : getI18nString("auth.desktop-app");
-  i = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.continue-with-the-specific-app", {
+  t = appAuthAppType === ClientPlatform.MOBILE || appAuthAppType === ClientPlatform.FIGJAM_MOBILE ? getI18nString("auth.mobile-app") : appAuthAppType === ClientPlatform.MIRROR ? getI18nString("auth.mirror-app") : appAuthAppType === ClientPlatform.MSFT_TEAMS ? getI18nString("auth.microsoft-teams") : getI18nString("auth.desktop-app");
+  i = appAuthAppType === ClientPlatform.MOBILE || appAuthAppType === ClientPlatform.FIGJAM_MOBILE ? getI18nString("auth.continue-with-the-specific-app", {
     appDescriptor: t
-  }) : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
+  }) : appAuthAppType === ClientPlatform.VSCODE || appAuthAppType === ClientPlatform.VSCODE_INSIDERS || appAuthAppType === ClientPlatform.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
     appDescriptor: t
   });
-  s = appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.choose-account-to-add-to-figma-for-vs-code") : getI18nString("auth.choose-account-to-add-to-specific-app", {
+  s = appAuthAppType === ClientPlatform.VSCODE || appAuthAppType === ClientPlatform.VSCODE_INSIDERS || appAuthAppType === ClientPlatform.VSCODE_CURSOR ? getI18nString("auth.choose-account-to-add-to-figma-for-vs-code") : getI18nString("auth.choose-account-to-add-to-specific-app", {
     appDescriptor: t
   });
   let w = e.auth.appAuthUsers?.length === 1 ? e.auth.appAuthUsers[0] : null;
@@ -911,8 +911,8 @@ function eb(e) {
           children: jsx(Button.Link, {
             onClick: () => {
               I();
-              d(_$$E({
-                formState: qB.SIGN_IN
+              d(changeAuthFormState({
+                formState: AuthFlowStep.SIGN_IN
               }));
             },
             children: getI18nString("auth.log-in-with-other-account-link")
@@ -929,10 +929,10 @@ function eb(e) {
   });else {
     let e;
     let i;
-    e = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? getI18nString("auth.generic-go-back-and-try-again") : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
+    e = appAuthAppType === ClientPlatform.MOBILE || appAuthAppType === ClientPlatform.FIGJAM_MOBILE ? getI18nString("auth.generic-go-back-and-try-again") : appAuthAppType === ClientPlatform.VSCODE || appAuthAppType === ClientPlatform.VSCODE_INSIDERS || appAuthAppType === ClientPlatform.VSCODE_CURSOR ? getI18nString("auth.open-figma-for-vs-code") : getI18nString("auth.open-specific-app", {
       appDescriptor: t
     });
-    i = appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? getI18nString("auth.try-again-in-figma-for-vs-code") : getI18nString("auth.try-again-on-specific-app", {
+    i = appAuthAppType === ClientPlatform.VSCODE || appAuthAppType === ClientPlatform.VSCODE_INSIDERS || appAuthAppType === ClientPlatform.VSCODE_CURSOR ? getI18nString("auth.try-again-in-figma-for-vs-code") : getI18nString("auth.try-again-on-specific-app", {
       appDescriptor: t
     });
     o = jsxs(Fragment, {
@@ -976,10 +976,10 @@ function ev(e) {
       t.append("error", e);
       customHistory.redirect("/mobile-app?" + t.toString());
     } else {
-      t(Qg({
+      t(AUTH_SHOW_ERROR({
         message: e
       }));
-      t(GG());
+      t(AUTH_REDEEM_RESET());
     }
   };
   let r = () => {
@@ -1022,11 +1022,11 @@ function ex({
   let o = getInitialOptions().team_join_link?.token;
   let l = useRef(!1);
   let d = (e, n) => {
-    let r = qw.loadingKeyForPayload({
+    let r = redeemTeamJoinLink.loadingKeyForPayload({
       token: e,
       userId: n
     });
-    VP(i, r) || GH(i, r) || t(qw({
+    VP(i, r) || GH(i, r) || t(redeemTeamJoinLink({
       token: e,
       userId: n
     }));
@@ -1046,7 +1046,7 @@ function ex({
     users: s.authed_users,
     hints: s.authed_user_access_reason,
     onUserSelect: e => {
-      l.current || (l.current = !0, o ? d(o, e) : t(My({
+      l.current || (l.current = !0, o ? d(o, e) : t(AUTH_COMPLETE({
         userId: e
       })));
     },
@@ -1113,11 +1113,11 @@ function eM({
         tokenType: s
       }
     }).then(() => {
-      t(_$$E({
-        formState: qB.VERIFY_HUMAN,
-        prevState: qB.SIGN_UP,
-        arkoseAction: cc.SIGN_UP,
-        postVerificationAction: Hh({
+      t(changeAuthFormState({
+        formState: AuthFlowStep.VERIFY_HUMAN,
+        prevState: AuthFlowStep.SIGN_UP,
+        arkoseAction: AuthAction.SIGN_UP,
+        postVerificationAction: AUTH_SIGN_UP({
           formId: e
         })
       }));
@@ -1158,10 +1158,10 @@ function ej(e) {
         className: y()(ek, "sign_in_and_up--signInWithPassword--WpKvE"),
         children: !i && jsx(_$$N, {
           onClick: () => {
-            t(_$$E({
-              formState: qB.SIGN_IN
+            t(changeAuthFormState({
+              formState: AuthFlowStep.SIGN_IN
             }));
-            t(Re({
+            t(AUTH_CLICKED_SAML_SIGN_IN({
               value: !1
             }));
           },
@@ -1217,7 +1217,7 @@ function eB(e) {
   }) : null;
 }
 function eV(e) {
-  return !!(e && [DP.MOBILE, DP.MIRROR, DP.FIGJAM_MOBILE].includes(e));
+  return !!(e && [ClientPlatform.MOBILE, ClientPlatform.MIRROR, ClientPlatform.FIGJAM_MOBILE].includes(e));
 }
 function eG({
   ctaText: e,
@@ -1250,24 +1250,24 @@ function ez(e) {
     auth
   } = e;
   useEffect(() => {
-    auth.loading || auth.errorType !== By.UNAUTHORIZED || null == auth.googleIdToken || t(OZ({
+    auth.loading || auth.errorType !== AuthErrorCode.UNAUTHORIZED || null == auth.googleIdToken || t(AUTH_SET_GOOGLE_ID_TOKEN({
       googleIdToken: null
     }));
   }, [auth.loading, auth.errorType, auth.googleIdToken, t]);
   let o = () => {
-    t(_$$E({
-      formState: qB.FORGOT_PASSWORD
+    t(changeAuthFormState({
+      formState: AuthFlowStep.FORGOT_PASSWORD
     }));
   };
   let l = () => {
-    t(Re({
+    t(AUTH_CLICKED_SAML_SIGN_IN({
       value: !0
     }));
-    t(_$$E({
-      formState: qB.SAML_START
+    t(changeAuthFormState({
+      formState: AuthFlowStep.SAML_START
     }));
   };
-  let d = auth.invalidInput === RE.EMAIL || auth.invalidInput === RE.PASSWORD;
+  let d = auth.invalidInput === AuthField.EMAIL || auth.invalidInput === AuthField.PASSWORD;
   let c = useAtomWithSubscription(Kf);
   let h = I8();
   let f = y()(eR, eT);
@@ -1292,7 +1292,7 @@ function ez(e) {
       showDomainSuggestions: !0,
       showUpdatedInputDesign: !0,
       ariaDescribedBy: "email-error-text"
-    }), auth.invalidInput === RE.EMAIL && auth.error && jsx("p", {
+    }), auth.invalidInput === AuthField.EMAIL && auth.error && jsx("p", {
       className: f,
       id: "email-error-text",
       children: auth.error
@@ -1302,7 +1302,7 @@ function ez(e) {
       showUpdatedInputDesign: !0,
       ariaDescribedBy: "password-error-text",
       isSignUp: e.isSignUp
-    }), auth.invalidInput === RE.PASSWORD && auth.error && jsx("p", {
+    }), auth.invalidInput === AuthField.PASSWORD && auth.error && jsx("p", {
       className: f,
       id: "password-error-text",
       children: auth.error
@@ -1332,8 +1332,8 @@ function ez(e) {
           }), " ", jsx(LinkPrimitive, {
             href: "#",
             onClick: () => {
-              t(_$$E({
-                formState: qB.SIGN_IN
+              t(changeAuthFormState({
+                formState: AuthFlowStep.SIGN_IN
               }));
             },
             className: "x1bvjpef x8p8a2l x1ypdohk",
@@ -1351,8 +1351,8 @@ function ez(e) {
     }) : jsx(eB, {
       isSignUp: e.isSignUp,
       onChangeFormClick: e.isSignUp ? void 0 : () => {
-        t(_$$E({
-          formState: qB.SIGN_UP
+        t(changeAuthFormState({
+          formState: AuthFlowStep.SIGN_UP
         }));
       },
       onForgotPassword: o,
@@ -1369,7 +1369,7 @@ function eH(e) {
   });
   let l = eV(e.auth.appAuthAppType);
   let c = (e, i) => {
-    t(Qg({
+    t(AUTH_SHOW_ERROR({
       message: e,
       errorType: i
     }));
@@ -1385,7 +1385,7 @@ function eH(e) {
         origin: e.auth.origin,
         tosAccepted: l
       }).then(e => {
-        "login" === e.type && t(My({
+        "login" === e.type && t(AUTH_COMPLETE({
           userId: e.user.id
         }));
       }, e => {
@@ -1402,7 +1402,7 @@ function eX(e) {
   let {
     auth
   } = e;
-  let i = auth.invalidInput === RE.EMAIL;
+  let i = auth.invalidInput === AuthField.EMAIL;
   let r = y()(eR, eT);
   return jsxs(v, {
     className: eC,
@@ -1425,7 +1425,7 @@ function eX(e) {
       showDomainSuggestions: !0,
       showUpdatedInputDesign: !0,
       ariaDescribedBy: "email-error-text"
-    }), auth.invalidInput === RE.EMAIL && auth.error && jsx("p", {
+    }), auth.invalidInput === AuthField.EMAIL && auth.error && jsx("p", {
       className: r,
       id: "email-error-text",
       children: auth.error
@@ -1461,14 +1461,14 @@ function eQ(e) {
   let c = function () {
     let {
       getConfig
-    } = I7("exp_signup_optimization_deferred_password");
+    } = selectExperimentConfigHook("exp_signup_optimization_deferred_password");
     return useCallback(() => !!getConfig().getValue("enabled", !1), [getConfig]);
   }();
   let g = useState(() => c())[0];
   let [f, _] = useState(g && !o);
   let A = e.auth.email;
   let [y, b] = useState(!1);
-  let v = e.auth.appAuthAppType === DP.FIGJAM_MOBILE;
+  let v = e.auth.appAuthAppType === ClientPlatform.FIGJAM_MOBILE;
   let I = !f || !v && eV(e.auth.appAuthAppType);
   useEffect(() => {
     b(!1);
@@ -1483,7 +1483,7 @@ function eQ(e) {
       origin: e.auth.origin,
       tosAccepted: I
     }).then(e => {
-      "login" === e.type && t(My({
+      "login" === e.type && t(AUTH_COMPLETE({
         userId: e.user.id
       }));
     }, e => {
@@ -1491,7 +1491,7 @@ function eQ(e) {
     });
   };
   let x = e => {
-    t(Qg({
+    t(AUTH_SHOW_ERROR({
       message: e
     }));
   };
@@ -1500,11 +1500,11 @@ function eQ(e) {
     let n = document.getElementById(i);
     let r = _$$t2(n);
     let a = f ? f1(r) : Ng(r);
-    return !a.message || (_$$g("signup_attempt_form_error", e.auth.origin, {
+    return !a.message || (trackAuthEvent("signup_attempt_form_error", e.auth.origin, {
       error: a.message,
       googleIdToken: r.googleIdToken,
       invalidInput: a.invalidInput
-    }), t(Qg({
+    }), t(AUTH_SHOW_ERROR({
       message: a.message,
       invalidInput: a.invalidInput
     })), !1);
@@ -1513,18 +1513,18 @@ function eQ(e) {
     let n = i.currentTarget;
     let r = _$$t2(n);
     if (S()) {
-      _$$g("email_start_submit", e.auth.origin);
-      t(kL());
+      trackAuthEvent("email_start_submit", e.auth.origin);
+      t(AUTH_SET_AUTH_LOADING());
       try {
-        let i = await Iu(r.email, qB.SIGN_UP);
-        t(I$());
-        "google" === i ? (b(!0), E()) : "saml" === i ? t(KS({
+        let i = await Iu(r.email, AuthFlowStep.SIGN_UP);
+        t(AUTH_CLEAR_AUTH_LOADING());
+        "google" === i ? (b(!0), E()) : "saml" === i ? t(AUTH_SEND_EMAIL_SAML_START({
           formId: e.id
-        })) : "sign_in" === i ? (l(!0), t(_$$E({
-          formState: qB.SIGN_IN
+        })) : "sign_in" === i ? (l(!0), t(changeAuthFormState({
+          formState: AuthFlowStep.SIGN_IN
         }))) : (l(!0), _(!1));
       } catch (e) {
-        t(Qg({
+        t(AUTH_SHOW_ERROR({
           message: e.message
         }));
       }
@@ -1559,14 +1559,14 @@ function eQ(e) {
 function eJ(e) {
   let t = useDispatch();
   let i = () => {
-    t(My());
+    t(AUTH_COMPLETE());
   };
   let r = e => {
-    t(Qg({
+    t(AUTH_SHOW_ERROR({
       message: e
     }));
   };
-  let s = e.auth.ssoMethod === vR.GOOGLE ? getI18nString("auth.sso-gate.google") : getI18nString("auth.sso-gate.saml-sso");
+  let s = e.auth.ssoMethod === AuthProvider.GOOGLE ? getI18nString("auth.sso-gate.google") : getI18nString("auth.sso-gate.saml-sso");
   let o = getI18nString("auth.sso-gate.header", {
     orgName: e.auth.orgName,
     ssoName: s
@@ -1579,17 +1579,17 @@ function eJ(e) {
     className: eC,
     header: o,
     onSubmit: null,
-    children: [e.auth.ssoMethod === vR.GOOGLE && jsx(P, {
+    children: [e.auth.ssoMethod === AuthProvider.GOOGLE && jsx(P, {
       text: getI18nString("auth.sso-gate.log-in-google"),
       onClick: () => {
         xI(t, e.auth.origin).then(e => "login" === e.type && i(), e => {
           r(e.message);
         });
       }
-    }), e.auth.ssoMethod === vR.SAML && jsx(k, {
+    }), e.auth.ssoMethod === AuthProvider.SAML && jsx(k, {
       type: "submit",
       onClick: () => {
-        t(AP());
+        t(AUTH_SAML_START_FROM_SESSION());
       },
       loading: e.auth.loading,
       children: getI18nString("auth.sso-gate.log-in-saml")
@@ -1601,8 +1601,8 @@ function eJ(e) {
         className: ek,
         children: jsx(_$$N, {
           onClick: () => {
-            e.auth.existingSession ? customHistory.redirect("/") : t(_$$E({
-              formState: qB.EMAIL_ONLY
+            e.auth.existingSession ? customHistory.redirect("/") : t(changeAuthFormState({
+              formState: AuthFlowStep.EMAIL_ONLY
             }));
           },
           trusted: !0,
@@ -1619,23 +1619,23 @@ function e2(e) {
   let [i, s] = useState("");
   return jsxs(v, {
     onSubmit: () => {
-      _$$g("validate_code_attempt", e.auth.origin);
-      t(kL());
+      trackAuthEvent("validate_code_attempt", e.auth.origin);
+      t(AUTH_SET_AUTH_LOADING());
       i ? _$$k2.validateCode(i).then(e => {
         customHistory.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
         let n = resolveMessage(e, i?.message || getI18nString("auth.default-error"));
-        "invalid_session" === i.reason ? customHistory.redirect("/") : t(Qg({
+        "invalid_session" === i.reason ? customHistory.redirect("/") : t(AUTH_SHOW_ERROR({
           message: n,
-          invalidInput: RE.VERIFICATION_CODE
+          invalidInput: AuthField.VERIFICATION_CODE
         }));
-      }) : t(Qg({
+      }) : t(AUTH_SHOW_ERROR({
         message: getI18nString("auth.validate-code.enter-code-message"),
-        invalidInput: RE.VERIFICATION_CODE
+        invalidInput: AuthField.VERIFICATION_CODE
       }));
     },
-    hideError: e.auth.invalidInput === RE.VERIFICATION_CODE,
+    hideError: e.auth.invalidInput === AuthField.VERIFICATION_CODE,
     ...e,
     children: [jsx("div", {
       className: y()("validate_code--header--6nZt- auth_form--header--5WRrG auth_form--headerBase--jhLAT auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw", "validate_code--figmaSansHeader--e8MKV auth_brand--figmaSans--aXdNw"),
@@ -1654,16 +1654,16 @@ function e2(e) {
       autoComplete: "off",
       autoCorrect: "off",
       "data-1p-ignore": !0,
-      isInvalid: e.auth.invalidInput === RE.VERIFICATION_CODE,
+      isInvalid: e.auth.invalidInput === AuthField.VERIFICATION_CODE,
       maxLength: 6,
-      name: RE.VERIFICATION_CODE,
+      name: AuthField.VERIFICATION_CODE,
       onChange: e => {
         s(e.target.value);
       },
       placeholder: getI18nString("auth.two-factor.authentication-code"),
       showUpdatedInputDesign: !0,
       value: i
-    }), e.auth.invalidInput === RE.VERIFICATION_CODE && e.auth.error && jsx("div", {
+    }), e.auth.invalidInput === AuthField.VERIFICATION_CODE && e.auth.error && jsx("div", {
       className: "validate_code--error--gBEWv auth_form--error--EtrjX auth_form--figmaSans--XXAeN auth_brand--figmaSans--aXdNw",
       children: e.auth.error
     }), jsx(_$$k, {
@@ -1681,7 +1681,7 @@ function e2(e) {
           href: "#",
           className: "validate_code--link--aOlPI modal--blueLink--9GcJu blue_link--blueLink--9rlnd",
           onClick: () => {
-            _$$g("resend_code", e.auth.origin);
+            trackAuthEvent("resend_code", e.auth.origin);
             _$$k2.resendCode().then(() => {
               t(FlashActions.flash(getI18nString("auth.validate-code.code-resent-check-email")));
             }).catch(e => {
@@ -1829,7 +1829,7 @@ function te() {
   let i = useSelector(e => e.auth.formState);
   let s = useSelector(e => e.auth.redirectUrl || "/");
   let o = useSelector(e => e.user?.email === t);
-  let d = i === qB.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD;
+  let d = i === AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD;
   let c = _$$s.alignCenter.font16.lh24.$;
   let [p, h] = useState("");
   let [g, f] = useState(!1);
@@ -1837,8 +1837,8 @@ function te() {
     className: "validate_email--link--w8oJH modal--blueLink--9GcJu blue_link--blueLink--9rlnd",
     href: "#",
     onClick: () => {
-      e(_$$E({
-        formState: qB.SIGN_IN
+      e(changeAuthFormState({
+        formState: AuthFlowStep.SIGN_IN
       }));
     },
     children: renderI18nText("auth.magic_link_check_email.go_back")
@@ -1905,7 +1905,7 @@ function te() {
           h(e.target.value);
         },
         value: p,
-        name: RE.TOTP_KEY,
+        name: AuthField.TOTP_KEY,
         inputMode: "numeric",
         autoComplete: "one-time-code",
         placeholder: getI18nString("auth.two-factor.authentication-code"),
@@ -2033,16 +2033,16 @@ function ts() {
     children: t
   });
   let p = useCallback(() => {
-    _$$g("send_validation_email_attempt", s);
+    trackAuthEvent("send_validation_email_attempt", s);
     _$$H.sendValidationEmail().then(t => {
-      _$$g("send_validation_email_success", s);
+      trackAuthEvent("send_validation_email_success", s);
       let i = resolveMessage(t);
       if (i) return e(FlashActions.flash(i));
     }).catch(t => {
       let i = resolveMessage(t, getI18nString("auth.sign-up.confirmation-email-error"));
       return e(FlashActions.error(i));
     });
-    e(kL());
+    e(AUTH_SET_AUTH_LOADING());
   }, [e, s]);
   useEffect(() => {
     let e = null;
@@ -2145,9 +2145,9 @@ function ts() {
 export function $$to0(e) {
   let t = useDispatch();
   useEffect(() => () => {
-    t(ET());
-    t(_$$E({
-      formState: qB.SIGN_UP
+    t(AUTH_CLEAR_ERROR());
+    t(changeAuthFormState({
+      formState: AuthFlowStep.SIGN_UP
     }));
   }, [t]);
   return jsx("div", {
@@ -2163,43 +2163,43 @@ export function $$to0(e) {
       children: (() => {
         if (!navigator.cookieEnabled) return jsx(eD, {});
         switch (e.auth.formState) {
-          case qB.SIGN_IN:
-          case qB.SIGN_UP:
-          case qB.RESET_PASSWORD:
-          case qB.VALIDATE_CODE:
-          case qB.SAML_START:
-          case qB.EMAIL_ONLY:
-          case qB.JOIN_ORG:
-          case qB.ACCOUNT_PICKER:
-          case qB.VERIFY_HUMAN:
-          case qB.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT:
-          case qB.TWO_FACTOR:
+          case AuthFlowStep.SIGN_IN:
+          case AuthFlowStep.SIGN_UP:
+          case AuthFlowStep.RESET_PASSWORD:
+          case AuthFlowStep.VALIDATE_CODE:
+          case AuthFlowStep.SAML_START:
+          case AuthFlowStep.EMAIL_ONLY:
+          case AuthFlowStep.JOIN_ORG:
+          case AuthFlowStep.ACCOUNT_PICKER:
+          case AuthFlowStep.VERIFY_HUMAN:
+          case AuthFlowStep.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT:
+          case AuthFlowStep.TWO_FACTOR:
             return jsx(tl, {
               ...e
             });
-          case qB.FORGOT_PASSWORD:
+          case AuthFlowStep.FORGOT_PASSWORD:
             return jsx(et, {
               ...e
             });
-          case qB.SENT_PASSWORD_RESET:
+          case AuthFlowStep.SENT_PASSWORD_RESET:
             return jsx(ei, {
               ...e
             });
-          case qB.VALIDATE_EMAIL:
+          case AuthFlowStep.VALIDATE_EMAIL:
             return jsx(ts, {});
-          case qB.APP_AUTH_GRANT:
+          case AuthFlowStep.APP_AUTH_GRANT:
             return jsx(eb, {
               ...e
             });
-          case qB.APP_AUTH_REDEEM:
+          case AuthFlowStep.APP_AUTH_REDEEM:
             return jsx(ev, {
               ...e
             });
-          case qB.SSO_GATE:
+          case AuthFlowStep.SSO_GATE:
             return jsx(eJ, {
               ...e
             });
-          case qB.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD:
+          case AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD:
             return jsx(te, {});
         }
         return null;
@@ -2211,7 +2211,7 @@ function tl(e) {
   let t = useDispatch();
   let i = Xr(nb);
   _$$h(() => {
-    e.auth.formState !== qB.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT && e.auth.formState !== qB.VERIFY_HUMAN && (t(OZ({
+    e.auth.formState !== AuthFlowStep.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT && e.auth.formState !== AuthFlowStep.VERIFY_HUMAN && (t(AUTH_SET_GOOGLE_ID_TOKEN({
       googleIdToken: null
     })), i(null));
   });
@@ -2219,61 +2219,61 @@ function tl(e) {
     let n = e.auth.origin?.startsWith("google_one_tap");
     let r = e.id;
     let a = document.getElementById(r).elements;
-    a.password && !n && (i(a.password.value), t(OZ({
+    a.password && !n && (i(a.password.value), t(AUTH_SET_GOOGLE_ID_TOKEN({
       googleIdToken: null
     })));
     let s = e.auth.formState;
-    switch ("gov" !== window.INITIAL_OPTIONS.cluster_name || s === qB.VALIDATE_CODE || window.origin.startsWith("https://admin.") || (s = qB.SAML_START), s) {
-      case qB.SIGN_IN:
-        t(Jv({
+    switch ("gov" !== window.INITIAL_OPTIONS.cluster_name || s === AuthFlowStep.VALIDATE_CODE || window.origin.startsWith("https://admin.") || (s = AuthFlowStep.SAML_START), s) {
+      case AuthFlowStep.SIGN_IN:
+        t(AUTH_SIGN_IN({
           formId: r
         }));
         break;
-      case qB.RESET_PASSWORD:
-        t(xw({
+      case AuthFlowStep.RESET_PASSWORD:
+        t(AUTH_RESET_PASSWORD({
           formId: r
         }));
         break;
-      case qB.SAML_START:
-        t(KS({
+      case AuthFlowStep.SAML_START:
+        t(AUTH_SEND_EMAIL_SAML_START({
           formId: r
         }));
         break;
-      case qB.SIGN_UP:
-        t(_$$E({
-          formState: qB.VERIFY_HUMAN,
-          prevState: qB.SIGN_UP,
-          arkoseAction: cc.SIGN_UP,
-          postVerificationAction: Hh({
+      case AuthFlowStep.SIGN_UP:
+        t(changeAuthFormState({
+          formState: AuthFlowStep.VERIFY_HUMAN,
+          prevState: AuthFlowStep.SIGN_UP,
+          arkoseAction: AuthAction.SIGN_UP,
+          postVerificationAction: AUTH_SIGN_UP({
             formId: r
           })
         }));
         break;
-      case qB.EMAIL_ONLY:
-        t($j({
+      case AuthFlowStep.EMAIL_ONLY:
+        t(AUTH_EMAIL_ONLY({
           formId: r
         }));
     }
   };
-  if (e.auth.formState === qB.ACCOUNT_PICKER && e.auth.accountPicker) return jsx(ex, {
+  if (e.auth.formState === AuthFlowStep.ACCOUNT_PICKER && e.auth.accountPicker) return jsx(ex, {
     authOrigin: e.auth.origin
   });
   if (desktopAPIInstance) return jsx(ey, {
-    appType: DP.DESKTOP,
+    appType: ClientPlatform.DESKTOP,
     ...e
   });
-  if ("gov" === window.INITIAL_OPTIONS.cluster_name && e.auth.formState !== qB.VALIDATE_CODE && !window.origin.startsWith("https://admin.")) return jsx(ej, {
+  if ("gov" === window.INITIAL_OPTIONS.cluster_name && e.auth.formState !== AuthFlowStep.VALIDATE_CODE && !window.origin.startsWith("https://admin.")) return jsx(ej, {
     onFormSubmit: r,
     ...e
   });
-  if (e.auth.formState === qB.SIGN_IN) return jsx(TrackingProvider, {
+  if (e.auth.formState === AuthFlowStep.SIGN_IN) return jsx(TrackingProvider, {
     name: "Sign In",
     children: jsx(eH, {
       onFormSubmit: r,
       ...e
     })
   });
-  if (e.auth.formState === qB.SIGN_UP) {
+  if (e.auth.formState === AuthFlowStep.SIGN_UP) {
     let t = "true" === new URLSearchParams(customHistory.location.search).get("with_community_header");
     return jsx(TrackingProvider, {
       name: "Sign Up",
@@ -2284,30 +2284,30 @@ function tl(e) {
       })
     });
   }
-  if (e.auth.formState === qB.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT) return jsx(TrackingProvider, {
+  if (e.auth.formState === AuthFlowStep.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT) return jsx(TrackingProvider, {
     name: "Google SSO Redirect",
     children: jsx(eM, {
       formId: e.id
     })
   });
-  if (e.auth.formState === qB.RESET_PASSWORD) return jsx(en, {
+  if (e.auth.formState === AuthFlowStep.RESET_PASSWORD) return jsx(en, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
+  });else if (e.auth.formState === AuthFlowStep.VALIDATE_CODE) return jsx(e2, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
+  });else if (e.auth.formState === AuthFlowStep.SAML_START) return jsx(ej, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
+  });else if (e.auth.formState === AuthFlowStep.EMAIL_ONLY) return jsx(eP, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
+  });else if (e.auth.formState === AuthFlowStep.JOIN_ORG) return jsx(Q, {
     onFormSubmit: r,
     ...e
-  });else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
+  });else if (e.auth.formState === AuthFlowStep.VERIFY_HUMAN) return jsx(j, {
     ...e
-  });else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
+  });else if (e.auth.formState === AuthFlowStep.TWO_FACTOR) return jsx(H, {
     onFormSubmit: r,
     ...e
   });

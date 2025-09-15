@@ -1,4 +1,4 @@
-import { G } from '../905/11536';
+import { getAssociatedUserProfiles } from '../905/11536';
 import { getI18nString, getTranslatedDynamicContent } from '../905/303541';
 import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
@@ -274,7 +274,7 @@ export function $$ey2(e) {
   return e.view === 'communityHub' && e.subView === 'handle';
 }
 export function $$eb6(e) {
-  return G(e);
+  return getAssociatedUserProfiles(e);
 }
 export function $$eT32(e) {
   return e.community_publishers?.accepted.find(e => $$es33(e)) || null;

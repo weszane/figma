@@ -84,7 +84,7 @@ import { useIsAdminUser, useTeamPlanFeatures, useTeamPlanUser } from '../figma_a
 import { UpgradeRequestSetting } from '../figma_app/482728';
 import { _ as _$$_2, S as _$$S } from '../figma_app/490799';
 import { Y as _$$Y2 } from '../figma_app/515088';
-import { r1 } from '../figma_app/545877';
+import { userFlagExistsAtomFamily } from '../figma_app/545877';
 import { tI } from '../figma_app/599327';
 import { d as _$$d } from '../figma_app/603561';
 import { $z, Me } from '../figma_app/617427';
@@ -456,7 +456,7 @@ function eO({
   let t = useTeamPlanFeatures();
   let a = useTeamPlanUser();
   let s = useIsAdminUser(a).unwrapOr(!1);
-  let i = r1('seen_admin_dashboard_onboarding');
+  let i = userFlagExistsAtomFamily('seen_admin_dashboard_onboarding');
   let r = useAtomWithSubscription(i);
   let {
     show,

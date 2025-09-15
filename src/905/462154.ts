@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logDebug } from "../905/714362";
-import { hW } from "../figma_app/594947";
+import { getExperimentConfigAsync } from "../figma_app/594947";
 import { fullscreenValue } from "../figma_app/455680";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { Zh } from "../figma_app/2590";
@@ -56,7 +56,7 @@ export let $$C1 = async ({
   if (!f) throw Error("No page found");
   let C = debugState.getState().mirror.sceneGraphSelection;
   let T = debugState.dispatch;
-  let k = (await hW("magic_link_ai_models_v2")).get("variant", "gpt-fine-tuned");
+  let k = (await getExperimentConfigAsync("magic_link_ai_models_v2")).get("variant", "gpt-fine-tuned");
   let R = Ac(k);
   _$$c(async e => {
     let t = e.map(e => i.get(e.id)).map(async e => {

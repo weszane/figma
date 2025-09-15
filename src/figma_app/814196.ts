@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription, atom } from "../figma_app/27355";
 import { sessionStorageRef, localStorageRef } from "../905/657224";
 import { customHistory } from "../905/612521";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { FFileType } from "../figma_app/191312";
 import { UserPreferences } from "../figma_app/43951";
 import { YP } from "../figma_app/193867";
@@ -49,7 +49,7 @@ export function $$v3(e) {
   getFeatureFlags().desktop_write_auto_open_pref && (_$$e.setPreferenceValue({
     key: "auto_open_in_desktop",
     value: e
-  }), debugState.dispatch(_$$b({
+  }), debugState.dispatch(postUserFlag({
     user_changed_auto_open_pref: !0
   })));
 }

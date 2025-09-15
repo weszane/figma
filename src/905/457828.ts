@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { useState, useRef, useCallback } from "react";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { V } from "../figma_app/385855";
 import { F } from "../905/171275";
 import { FFileType } from "../figma_app/191312";
@@ -80,7 +80,7 @@ function f({
 }) {
   let {
     getConfig
-  } = I7("exp_search_fb_thumbnail_previews");
+  } = selectExperimentConfigHook("exp_search_fb_thumbnail_previews");
   let _ = getConfig();
   let A = _.get("shouldAutoplay", !0);
   let y = useRef(null);

@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { s_ } from '../905/17223';
+import { ModalCloseButton } from '../905/17223';
 import { registerModal } from '../905/102752';
 import { Alignment, KindEnum, PositionEnum } from '../905/129884';
 import { hideModal } from '../905/156213';
@@ -25,7 +25,7 @@ import { $L, us } from '../figma_app/136698';
 import { AG, Zx } from '../figma_app/217457';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { G } from '../figma_app/361869';
-import { vr } from '../figma_app/514043';
+import { CurrencyFormatter } from '../figma_app/514043';
 import { ButtonBasePrimary, FocusCheckbox } from '../figma_app/637027';
 import { mx } from '../figma_app/681712';
 import { az } from '../figma_app/805373';
@@ -198,7 +198,7 @@ registerModal(e => {
     let a = parseInt(e.target.value);
     isNaN(a) || t(a);
   };
-  let g = new vr(e.currency);
+  let g = new CurrencyFormatter(e.currency);
   let x = a[ProductAccessTypeEnum.FIGJAM];
   let f = {
     [ProductAccessTypeEnum.DESIGN]: {
@@ -502,7 +502,7 @@ registerModal(({
       [t]: a
     }));
   };
-  let k = new vr(i);
+  let k = new CurrencyFormatter(i);
   let P = () => {
     n(hideModal());
   };
@@ -515,7 +515,7 @@ registerModal(({
       className: 'org_self_serve_modals--selectEditorsModal--D0yWS',
       children: [jsxs('div', {
         className: 'org_self_serve_modals--selectEditorModalHeader--wPo15 org_self_serve_modals--headerModalText--h0Go9',
-        children: [renderI18nText('checkout.add_or_remove_editors'), jsx(s_, {
+        children: [renderI18nText('checkout.add_or_remove_editors'), jsx(ModalCloseButton, {
           customStyle: {
             position: 'initial'
           },

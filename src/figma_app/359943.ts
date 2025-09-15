@@ -39,7 +39,7 @@ import { cV } from "../figma_app/59509";
 import { Q as _$$Q2 } from "../905/363675";
 import { Button } from "../905/521428";
 import { camelToSnake } from "../figma_app/930338";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { Em } from "../figma_app/976749";
@@ -79,7 +79,7 @@ function $(e) {
             trackingContext: `${productName} conversion ${presetType} presets entrypoint`,
             name: `${camelToSnake(productName)}_conversion_${camelToSnake(presetType)}_presets_entrypoint_dismissed`
           });
-          _(_$$b({
+          _(postUserFlag({
             [userFlag]: !0
           }));
           onDismiss && onDismiss();

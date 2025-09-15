@@ -1,4 +1,4 @@
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 let $$i4 = "AI_CALLOUT";
 let $$a3 = "toolbelt-actions";
 let $$s8 = "toolbelt_ask_to_edit_onboarding_key";
@@ -10,7 +10,7 @@ let $$u5 = "toolbar-enabled-tools-key";
 let $$p9 = "seen_ai_actions_callout";
 let $$_2 = "seen_ready_for_dev_callout";
 export function $$h10(e) {
-  e(b({
+  e(postUserFlag({
     [$$_2]: !0
   }));
 }

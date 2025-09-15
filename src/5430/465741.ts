@@ -10,7 +10,7 @@ import { T as _$$T } from "../5430/373013";
 import m from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { L as _$$L } from "../905/178090";
+import { ResourceTypes } from "../905/178090";
 import { Yw } from "../figma_app/795938";
 import { A as _$$A } from "../5430/1650";
 import { M as _$$M } from "../5430/704379";
@@ -34,23 +34,23 @@ import { ial, cVr, N6X } from "../figma_app/27776";
 var _ = m;
 let f = (e, t) => {
   switch (e) {
-    case _$$L.SearchResourceTypes.MIXED:
+    case ResourceTypes.SearchResourceTypes.MIXED:
       return renderI18nText("community.landing_page.query_header__mixed", {
         query: t
       });
-    case _$$L.SearchResourceTypes.PLUGINS:
+    case ResourceTypes.SearchResourceTypes.PLUGINS:
       return renderI18nText("community.landing_page.query_header__plugins", {
         query: t
       });
-    case _$$L.SearchResourceTypes.FILES:
+    case ResourceTypes.SearchResourceTypes.FILES:
       return renderI18nText("community.landing_page.query_header__files", {
         query: t
       });
-    case _$$L.SearchResourceTypes.WIDGETS:
+    case ResourceTypes.SearchResourceTypes.WIDGETS:
       return renderI18nText("community.landing_page.query_header__widgets", {
         query: t
       });
-    case _$$L.SearchResourceTypes.PROFILES:
+    case ResourceTypes.SearchResourceTypes.PROFILES:
       return renderI18nText("community.landing_page.query_header__profiles", {
         query: t
       });
@@ -126,14 +126,14 @@ export function $$U1({
   p && (h = 2);
   let f = r[e.resource_type] ?? E4();
   let y = "resources" in f ? f.resources : f;
-  return i || 0 !== y.length ? e.resource_type === _$$L.SearchResourceTypes.PLUGINS ? jsx(_$$M, {
+  return i || 0 !== y.length ? e.resource_type === ResourceTypes.SearchResourceTypes.PLUGINS ? jsx(_$$M, {
     plugins: y,
     onIntersectionChange: (e, r) => {
       r && t(e);
     },
     isLoading: i,
     isOrgTeamBrowsing: m
-  }) : e.resource_type === _$$L.SearchResourceTypes.PROFILES ? jsx(v, {
+  }) : e.resource_type === ResourceTypes.SearchResourceTypes.PROFILES ? jsx(v, {
     profiles: y
   }) : u ? jsx(_$$T2, {
     resources: y,
@@ -217,7 +217,7 @@ function W() {
     });
   };
   let j = f;
-  (r.resource_type === _$$L.SearchResourceTypes.FILES || r.resource_type === _$$L.SearchResourceTypes.WIDGETS || r.resource_type === _$$L.SearchResourceTypes.PLUGINS) && (j = isLoadingAdditionalResources);
+  (r.resource_type === ResourceTypes.SearchResourceTypes.FILES || r.resource_type === ResourceTypes.SearchResourceTypes.WIDGETS || r.resource_type === ResourceTypes.SearchResourceTypes.PLUGINS) && (j = isLoadingAdditionalResources);
   let w = jsx($$U1, {
     searchParams: r,
     trackResourceImpression,

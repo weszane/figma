@@ -42,7 +42,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { uint8ArrayToBase64 } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
 import { J as _$$J2 } from "../905/915227";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { openFileKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { p4 } from "../figma_app/412398";
 import { B as _$$B2 } from "../905/521763";
@@ -227,7 +227,7 @@ async function el(e, t) {
           orgId: null,
           teamId: null,
           fileKey: atomStoreManager.get(openFileKeyAtom) || null,
-          userId: atomStoreManager.get(kS) || null,
+          userId: atomStoreManager.get(userIdAtom) || null,
           fileSeq: atomStoreManager.get(_$$J2)?.toString() || null,
           trackingSessionId: null,
           clientLifecycleId: ""

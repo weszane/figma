@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { useCallback } from "react";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { SvgComponent } from "../905/714743";
 import { TrackingProvider, TrackedButton } from "../figma_app/831799";
 import { A } from "../figma_app/722506";
@@ -32,12 +32,12 @@ function _({
         styles: p,
         Event: {
           onLogInClick: () => {
-            FL(qB.SIGN_IN, {
+            FL(AuthFlowStep.SIGN_IN, {
               preventDefaultRedirect: !0
             });
           },
           onSignUpClick: () => {
-            FL(qB.SIGN_UP, {
+            FL(AuthFlowStep.SIGN_UP, {
               preventDefaultRedirect: !0
             });
           }

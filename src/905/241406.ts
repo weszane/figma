@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Component } from "react";
 import { useSelector, connect } from "react-redux";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { ButtonSecondary, ButtonBasePrimary, SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
@@ -347,7 +347,7 @@ class L extends Component {
       size: 560,
       className: "merge_profiles--modal--1x-5z modal--modal--fXC8G modal--modalShadow--d-rJf modal--modalBare--AlP7E",
       popStack: !0,
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         ...this.props
       }), jsx("div", {
         children: 0 === this.state.step ? jsx($$O1, {

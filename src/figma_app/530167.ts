@@ -21,7 +21,7 @@ import { yJ } from "../figma_app/240735";
 import { c as _$$c } from "../905/289751";
 import { n as _$$n, HR, Cj } from "../figma_app/740025";
 import { mapUserRoleToOrgUserRoleAlias } from "../figma_app/12796";
-import { N as _$$N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { Il } from "../figma_app/502247";
 import { NEW_COMMENT_ID } from "../905/380385";
 import { CommentTabType } from "../figma_app/45218";
@@ -200,7 +200,7 @@ createOptimistThunk((e, {
   let i = _$$s2.getProfile({
     profileId: t
   });
-  _$$N(i, e, n);
+  setupLoadingStateHandler(i, e, n);
   i.then(({
     data: t
   }) => {
@@ -219,7 +219,7 @@ createOptimistThunk((e, {
     currentOrgId: i || void 0,
     handle: t
   });
-  _$$N(a, e, n);
+  setupLoadingStateHandler(a, e, n);
   a.then(({
     data: t
   }) => {
@@ -255,7 +255,7 @@ let $$ee28 = createOptimistThunk((e, t, {
     team_id: teamId,
     org_id: orgId
   });
-  _$$N(m, e, r);
+  setupLoadingStateHandler(m, e, r);
   m.then(({
     data: t
   }) => {
@@ -347,7 +347,7 @@ let $$er12 = createOptimistThunk((e, t, {
     location,
     profile_handle: profileHandle
   });
-  _$$N(S, e, r);
+  setupLoadingStateHandler(S, e, r);
   let A = e.getState().user?.community_profile_handle;
   S.then(({
     data: r
@@ -443,7 +443,7 @@ let $$ei1 = createOptimistThunk(async (e, {
   loadingKey: i
 }) => {
   let a = _$$c(t).then(e => ea(`/api/profile/${r}/upload`, e, t));
-  _$$N(a, e, i);
+  setupLoadingStateHandler(a, e, i);
   await a.then(({
     signature: e
   }) => XHR.put(`/api/profile/${r}`, {
@@ -488,7 +488,7 @@ let $$eo18 = createOptimistThunk(async (e, t, {
   let n = XHR.put("/api/follows", {
     followed_profile_id: t
   });
-  _$$N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   await n.then(({
     data: r
   }) => {
@@ -520,7 +520,7 @@ let $$ed8 = createOptimistThunk((e, t, {
   let n = XHR.del("/api/follows", {
     followed_profile_id: t
   });
-  _$$N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   n.then(() => {
     e.getState().user?.community_profile_id && (e.dispatch($$j7({
       followedProfileId: t,

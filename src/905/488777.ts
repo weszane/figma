@@ -9,7 +9,7 @@ import { w as _$$w } from "../905/113805";
 import { Lz } from "../905/497882";
 import { HE, eL } from "../figma_app/740025";
 import { d as _$$d } from "../905/44199";
-import { C as _$$C } from "../905/180";
+import { BuyerAPIHandler } from "../905/180";
 import { P } from "../905/392438";
 import { A } from "../905/567946";
 var o = s;
@@ -110,7 +110,7 @@ let $$y0 = forwardRef(function ({
         autocomplete: R,
         autocompleteResultsClassName: "tags_v1_input--searchResultsContainer--LSBf-",
         focusInputRef: N,
-        getSearchResults: useCallback(async e => e.inputValue ? (await _$$C.getTagsAutocomplete({
+        getSearchResults: useCallback(async e => e.inputValue ? (await BuyerAPIHandler.getTagsAutocomplete({
           existingTags: E.join(","),
           tagPrefix: e.inputValue
         })).data.meta.map(({

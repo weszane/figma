@@ -2,7 +2,7 @@ import { PluginHelpers } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { I as _$$I } from "../905/117966";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { fullscreenValue } from "../figma_app/455680";
 import { z as _$$z } from "../905/223332";
@@ -1185,7 +1185,7 @@ export async function $$el0(e) {
 async function ed(e) {
   return (await $$el0(e), "cppvm" === e) ? new U() : new en();
 }
-let ec = _$$n(async () => await w0("ext_plugindata_limit_exempt_plugins"));
+let ec = _$$n(async () => await fetchDynamicConfig("ext_plugindata_limit_exempt_plugins"));
 let $$eu1 = _$$n(async e => {
   let t;
   let {

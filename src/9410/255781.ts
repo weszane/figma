@@ -15,7 +15,7 @@ import { FFileType } from "../figma_app/191312";
 import { ai, f6 } from "../figma_app/915202";
 import { i0 } from "../figma_app/632248";
 import { Fullscreen } from "../figma_app/763686";
-import { gP } from "../figma_app/594947";
+import { getInitialDynamicConfig } from "../figma_app/594947";
 let C = {
   FULLSCREEN_UNAVAILABLE: "fullscreen-unavailable",
   SINGLE_FRAME_REQUIRED: "single-frame-required",
@@ -138,7 +138,7 @@ let S = (e, t) => ({
       }) {
         if (!e || !t || !i || !r) throw Error(C.SOMETHING_WENT_WRONG);
         let n = function () {
-          let e = gP("make_large_paste_threshold").get("sizeBytes", 25e4);
+          let e = getInitialDynamicConfig("make_large_paste_threshold").get("sizeBytes", 25e4);
           return Fullscreen?.isActiveCanvasSelectionWithinThreshold(e) ?? null;
         }();
         if (null === n) throw Error(C.FULLSCREEN_UNAVAILABLE);

@@ -4,9 +4,9 @@ import { Fragment as _$$Fragment, createContext, createElement, forwardRef, memo
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
-import { C as _$$C } from '../905/180';
+import { BuyerAPIHandler } from '../905/180';
 import { tc as _$$tc } from '../905/15667';
-import { s_ } from '../905/17223';
+import { ModalCloseButton } from '../905/17223';
 import { lW as _$$lW } from '../905/31837';
 import { X as _$$X } from '../905/33014';
 import { eK as _$$eK, av, E0, IJ, qq, sy, Wc } from '../905/37362';
@@ -40,7 +40,7 @@ import { g as _$$g } from '../905/241406';
 import { R as _$$R3 } from '../905/256203';
 import { ec as _$$ec, eu as _$$eu, BD, Ci, qC } from '../905/264101';
 import { HiddenLabel, Label } from '../905/270045';
-import { G3 } from '../905/272080';
+import { SubscriptionStatus } from '../905/272080';
 import { Checkbox } from '../905/274480';
 import { C as _$$C2 } from '../905/283236';
 import { A as _$$A } from '../905/289352';
@@ -124,7 +124,7 @@ import { ck } from '../905/952832';
 import { useRecording } from '../905/959312';
 import { kA as _$$kA, rP as _$$rP, IO } from '../905/962318';
 import { TextWithTruncation } from '../905/984674';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { h1 } from '../905/986103';
 import { PG } from '../905/997533';
 import { lb } from '../3973/538504';
@@ -173,7 +173,7 @@ import { sD } from '../figma_app/740025';
 import { BrowserInfo } from '../figma_app/778880';
 import { bX } from '../figma_app/792917';
 import { Ro } from '../figma_app/805373';
-import { bV, UO } from '../figma_app/808294';
+import { getProductPriceString, isPaymentFailed } from '../figma_app/808294';
 import { createEmptyAddress } from '../figma_app/831101';
 import { TrackingProvider } from '../figma_app/831799';
 import { LoadingSpinner } from '../figma_app/858013';
@@ -243,7 +243,7 @@ let z = registerModal(e => {
       };
       d(!0);
       t(VisualBellActions.clearAll());
-      _$$C.updateBillingDetails(n).then(({
+      BuyerAPIHandler.updateBillingDetails(n).then(({
         data: i
       }) => {
         let n = i.meta.vat_gst_id;
@@ -658,7 +658,7 @@ let ek = e => {
   }(subscription_data, purchase_date);
   return {
     ...e,
-    price: bV({
+    price: getProductPriceString({
       id: monetized_resource_id,
       price,
       annual_price,
@@ -670,14 +670,14 @@ let ek = e => {
   };
 };
 let eR = (e, t, i, n) => {
-  switch (t.subscription_canceled_at ? G3.CANCELED : e) {
-    case G3.SUCCEEDED:
+  switch (t.subscription_canceled_at ? SubscriptionStatus.CANCELED : e) {
+    case SubscriptionStatus.SUCCEEDED:
       return t.subscription_expires_at ? getI18nString('community.purchase_home.renews', {
         date: t.subscription_expires_at
       }) : getI18nString('community.purchase_home.purchased', {
         date: i
       });
-    case G3.CANCELED:
+    case SubscriptionStatus.CANCELED:
       if (t.subscription_canceled_at) {
         return t.has_subscription_ended ? getI18nString('community.purchase_home.cancelled_and_inactive', {
           date: t.subscription_canceled_at
@@ -693,12 +693,12 @@ let eR = (e, t, i, n) => {
         });
       }
       return '';
-    case G3.REFUNDED:
-    case G3.DISPUTED:
+    case SubscriptionStatus.REFUNDED:
+    case SubscriptionStatus.DISPUTED:
       return getI18nString('community.purchase_home.refunded', {
         date: n
       });
-    case G3.TRIALING:
+    case SubscriptionStatus.TRIALING:
       if (t.trial_expires_at) {
         return t.has_trial_expired ? getI18nString('community.purchase_home.free_trial_ended', {
           date: t.trial_expires_at
@@ -707,8 +707,8 @@ let eR = (e, t, i, n) => {
         });
       }
       return '';
-    case G3.SUBSCRIPTION_PAYMENT_FAILED:
-    case G3.INVOICE_FINALIZATION_FAILED:
+    case SubscriptionStatus.SUBSCRIPTION_PAYMENT_FAILED:
+    case SubscriptionStatus.INVOICE_FINALIZATION_FAILED:
       return getI18nString('community.purchase_home.update_payment_details');
     default:
       return '';
@@ -770,7 +770,7 @@ let eN = function (e) {
     resourceType: purchase.community_resource_type,
     description: eR(status, subscription_data, purchase_date, last_modified_date),
     thumbnailUrl: thumbnail_url,
-    isError: UO({
+    isError: isPaymentFailed({
       status
     }),
     isBlocked: is_blocked,
@@ -893,7 +893,7 @@ function eG(e) {
             href: `mailto:${support_contact}`,
             target: '_blank',
             children: renderI18nText('community.purchase_home.contact_creator')
-          }), c === 'otp_refundable' && purchase.status === G3.SUCCEEDED ? jsx(c$, {
+          }), c === 'otp_refundable' && purchase.status === SubscriptionStatus.SUCCEEDED ? jsx(c$, {
             onClick: m,
             children: renderI18nText('community.purchase_home.request_refund')
           }) : jsx(c$, {
@@ -1098,7 +1098,7 @@ function eJ(e) {
   let [m, g] = useState('');
   let [_, A] = useState(createEmptyAddress());
   let [I, E] = useState('');
-  let w = useCallback(() => _$$C.getBuyerPurchases({
+  let w = useCallback(() => BuyerAPIHandler.getBuyerPurchases({
     purchaseType: 'active',
     pageSize: '15',
     cursor: o || void 0
@@ -1110,7 +1110,7 @@ function eJ(e) {
   }).catch(() => {
     p(!0);
   }), [o]);
-  let k = useCallback(() => _$$C.getBuyerPurchases({
+  let k = useCallback(() => BuyerAPIHandler.getBuyerPurchases({
     purchaseType: 'inactive',
     pageSize: '15',
     cursor: d || void 0
@@ -1125,7 +1125,7 @@ function eJ(e) {
   _$$h(() => {
     w();
     k();
-    _$$C.getCommunityUserTaxInfo({
+    BuyerAPIHandler.getCommunityUserTaxInfo({
       userId: e.user.id
     }).then(({
       data: e
@@ -1630,7 +1630,7 @@ function tN() {
   let e = useDispatch();
   let t = !!_$$f('opted_in_email');
   let i = useCallback(t => {
-    e(_$$b({
+    e(postUserFlag({
       opted_in_email: t
     }));
   }, [e]);
@@ -3526,7 +3526,7 @@ class n8 extends PureComponent {
       className: yl,
       popStack: !0,
       ...this.props,
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         ...this.props
       }), this.props.user.google_sso_only || this.props.user.saml_sso_only || this.props.user.password_token ? jsxs('div', {
         children: [jsxs('p', {

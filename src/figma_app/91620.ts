@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { ow } from "../figma_app/976749";
-import { VF } from "../figma_app/864723";
+import { userStateLoadedAtom } from "../figma_app/864723";
 import { useFullscreenReady } from "../905/924253";
 import { aV } from "../figma_app/722362";
 import { selectCurrentUser } from "../905/372672";
@@ -14,7 +14,7 @@ export function $$$$_0() {
   let r = L();
   let _ = aV();
   let h = selectCurrentUser();
-  let m = useAtomWithSubscription(VF);
+  let m = useAtomWithSubscription(userStateLoadedAtom);
   let g = useFullscreenReady();
   let f = useSelector(e => e.mirror?.appModel.isReadOnly);
   let E = z();

@@ -13,7 +13,7 @@ import { TeamFileLimitsInfo, FileCanEditIgnorePaidStatus, TeamById } from "../fi
 import { aW, sK, cD, FQ } from "../figma_app/598018";
 import { i as _$$i } from "../905/718764";
 import { useLatestRef } from "../figma_app/922077";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { M as _$$M } from "../905/152487";
 import { h as _$$h } from "../905/207101";
@@ -103,7 +103,7 @@ import { B as _$$B3 } from "../905/261906";
 import { jv } from "../905/84777";
 import { Oq, N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
-import { LN, vr } from "../figma_app/514043";
+import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
 import { rI as _$$rI, Jg, OA, QM, Gz, wd, sV, Sd, On, ik, qD, Mg, B_, MY as _$$MY, dv, yG, Oj, PB, O0, X3, TB, m$, Vz, yo, f6 as _$$f2, kr, _7, w9, XI, Q2, PG as _$$PG, PJ, xx, y8, ih as _$$ih, rv as _$$rv, dD, XK, HN, $r, HS, h0, DM, jG, Bi, nc, ZA, Bu, Pm, _t, pR, Gr, mx } from "../7021/762792";
 import { N as _$$N } from "../905/438674";
@@ -154,7 +154,7 @@ function L(e) {
   let r = useDispatch();
   return useCallback(() => {
     e && e();
-    r(_$$b({
+    r(postUserFlag({
       welcome_onboarded: !0
     }));
   }, [e, r]);
@@ -175,7 +175,7 @@ function v({
   }, [u, r, d]);
   useEffect(() => {
     let e = () => {
-      c(_$$b({
+      c(postUserFlag({
         welcome_onboarded: !0
       }));
     };
@@ -842,12 +842,12 @@ function eJ(e) {
     }
   };
   let X = () => {
-    isGovCluster() || r(_$$b({
+    isGovCluster() || r(postUserFlag({
       opted_in_email: S
     }));
   };
   let J = () => {
-    N && r(_$$b({
+    N && r(postUserFlag({
       tos_accepted: N
     }));
   };
@@ -1040,7 +1040,7 @@ let rh = {
 };
 function r_() {
   let e = useDispatch();
-  let r = LN();
+  let r = getUserCurrency();
   let t = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]);
   let i = {
     currency: r,
@@ -1080,7 +1080,7 @@ function r_() {
 }
 function rp() {
   let e = useDispatch();
-  let r = LN();
+  let r = getUserCurrency();
   let t = {
     currency: r,
     tier: Ju.PRO,
@@ -1130,8 +1130,8 @@ function rg({
   price: t,
   title: i
 }) {
-  let o = LN();
-  let l = new vr(o);
+  let o = getUserCurrency();
+  let l = new CurrencyFormatter(o);
   let n = {
     choosePlanCardPricing: r ? _$$rI : Jg,
     choosePlanCardProductTitle: r ? OA : QM,
@@ -1173,8 +1173,8 @@ function rm({
   price: e,
   isUserEduVerified: r
 }) {
-  let t = LN();
-  let i = new vr(t);
+  let t = getUserCurrency();
+  let i = new CurrencyFormatter(t);
   return jsx("div", {
     children: N_.sort(AG).map(t => {
       let o = e[t];

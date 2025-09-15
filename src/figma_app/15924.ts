@@ -12,7 +12,7 @@ import { EditorType } from '../figma_app/155287';
 import { FTemplateCategoryType } from '../figma_app/191312';
 import { Dl } from '../figma_app/471982';
 import { e6 } from '../figma_app/617427';
-import { bV, Lt } from '../figma_app/808294';
+import { getProductPriceString, hasTrialAvailable } from '../figma_app/808294';
 import { DefaultLoadingSpinner } from '../figma_app/858013';
 let s = a;
 let b = 'purchase_button_view--primaryText--TzFkq';
@@ -107,10 +107,10 @@ export function $$S1({
             [b]: r === ShelfViewType.PLUGIN_ROW,
             [_$$s.colorText.$]: r === ShelfViewType.REDESIGNED_PLUGIN_ROW
           }),
-          children: x && bV(e.monetized_resource_metadata)
+          children: x && getProductPriceString(e.monetized_resource_metadata)
         })]
       }), C && O]
-    }), r === ShelfViewType.DETAIL && x && Lt({
+    }), r === ShelfViewType.DETAIL && x && hasTrialAvailable({
       resource: e,
       payment: t
     }) && jsx($$v0, {

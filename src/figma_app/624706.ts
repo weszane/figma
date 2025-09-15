@@ -18,7 +18,7 @@ import { getInitialOptions, buildUploadUrl, isDevEnvironment, isGovCluster, isLo
 import { isExactModifier, ModifierKeyCodes } from "../905/63728";
 import { useSubscription } from "../figma_app/288654";
 import { RecordingPureComponent, setupPlayback, generateRecordingKey, handleMouseEvent } from "../figma_app/878298";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
@@ -42,7 +42,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nState } from "../figma_app/363242";
 import { FU } from "../905/26824";
 import { yJ } from "../figma_app/24841";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Fn } from "../figma_app/976749";
 import { hx } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
@@ -63,7 +63,7 @@ import { kA, IO } from "../905/962318";
 import { H as _$$H2 } from "../figma_app/731109";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
-import { r1, Fu, qG } from "../figma_app/545877";
+import { userFlagExistsAtomFamily, userFlagAtomFamily, userFlagsAtom } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { J_ } from "../figma_app/598952";
@@ -74,7 +74,7 @@ import { g as _$$g2 } from "../905/687265";
 import { Button } from "../905/521428";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { P as _$$P } from "../vendor/348225";
-import { Z1 } from "../905/401885";
+import { transformAtom } from "../905/401885";
 import { h4, WB } from "../figma_app/625596";
 import { P as _$$P2 } from "../905/184837";
 import { iH } from "../figma_app/449975";
@@ -85,11 +85,11 @@ import { dR } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
 import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
-import { LN } from "../figma_app/514043";
+import { getUserCurrency } from "../figma_app/514043";
 import { UpsellModalType } from "../905/165519";
 import { SubscriptionType } from "../figma_app/831101";
 import { hK } from "../5132/334833";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { sx as _$$sx } from "../905/941192";
 import { AutoLayout, Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
@@ -251,7 +251,7 @@ function q({
   });
 }
 let eO = "seen_bug_reporter_modal";
-let eR = r1(eO);
+let eR = userFlagExistsAtomFamily(eO);
 function eL() {
   let e = useDispatch();
   let t = useAtomWithSubscription(eR);
@@ -267,7 +267,7 @@ function eL() {
   return (_$$E2(r.uniqueId, "Fullscreen Loaded", () => {
     l && d && r.show({
       canShow: e => !e,
-      onShow: () => e(_$$b2({
+      onShow: () => e(postUserFlag({
         [eO]: !0
       }))
     });
@@ -519,7 +519,7 @@ function eH(...e) {
         [t]: r
       };
     }, {});
-    t(_$$b2(i));
+    t(postUserFlag(i));
   };
   return {
     flagNumberVal: n,
@@ -574,7 +574,7 @@ let e4 = registerModal(function ({
         e ? o(WX({
           teamId: e,
           openInNewTab: !0,
-          currency: LN(),
+          currency: getUserCurrency(),
           billingPeriod: SubscriptionType.ANNUAL
         })) : o(showModalHandler({
           type: dR,
@@ -621,7 +621,7 @@ function te({
           fontWeight: "medium",
           fontSize: 13,
           children: r
-        }), jsx(Spacer, {}), jsx(Jn, {
+        }), jsx(Spacer, {}), jsx(CloseButton, {
           onClick: e
         })]
       }), jsx(Suspense, {
@@ -732,8 +732,8 @@ function ti({
 let ta = "collective_upsell_widget_dismissed";
 let ts = "collective_upsell_first_file_created";
 let to = [ta, ts, ...WB, ...h4];
-let tl = Fu(ts);
-let td = Z1(qG, e => Math.max(...[...WB, ...h4].map(t => e[t]?.updatedAt).filter(e => null != e).map(Number)));
+let tl = userFlagAtomFamily(ts);
+let td = transformAtom(userFlagsAtom, e => Math.max(...[...WB, ...h4].map(t => e[t]?.updatedAt).filter(e => null != e).map(Number)));
 function tc({
   dropdownOpen: e
 }) {
@@ -763,13 +763,13 @@ function tc({
       ...e,
       [t]: !1
     }), {});
-    l(_$$b2({
+    l(postUserFlag({
       ...e
     }));
   });
   let h = useCallback((e = !0) => {
     flagNumberVal <= 1 && r(e);
-    _.isShowing && l(_$$b2({
+    _.isShowing && l(postUserFlag({
       [ta]: !0
     }));
     _.complete();
@@ -2701,7 +2701,7 @@ export function $$t60(e) {
   } = A5();
   let {
     getConfig
-  } = I7("exp_in_product_help");
+  } = selectExperimentConfigHook("exp_in_product_help");
   let u = function () {
     let e = useSelector(e => getPermissionsStateMemoized(e));
     let t = selectCurrentFile();
@@ -2719,7 +2719,7 @@ export function $$t60(e) {
       let r = useRef(_$$f(t));
       let n = useDispatch();
       _$$h(() => {
-        !r.current && e && n(_$$b2({
+        !r.current && e && n(postUserFlag({
           [t]: !0
         }));
       });
@@ -2727,7 +2727,7 @@ export function $$t60(e) {
     }(t?.creatorId === n);
     let {
       getConfig: _getConfig
-    } = I7("exp_collective_upsells_v2");
+    } = selectExperimentConfigHook("exp_collective_upsells_v2");
     let u = !!useMemo(() => o.transform(e => !!r && (e.currentUser.teamRoles ?? []).some(e => e.team && e.team.id === r && e.team.canEdit)), [r, o]).data;
     if ("loaded" !== o.status) return !1;
     let p = o.data.currentUser.teamRoles;

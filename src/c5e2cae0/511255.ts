@@ -6,7 +6,7 @@ import { s as _$$s } from "../905/403855";
 import { buildUploadUrl } from "../figma_app/169182";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G as _$$G } from "../figma_app/361869";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { tH } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
@@ -23,7 +23,7 @@ import { jv, SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { N_, Oq } from "../905/332483";
 import { K as _$$K } from "../905/3140";
-import { vr, wU } from "../figma_app/514043";
+import { CurrencyFormatter, createUserCurrencyFormatter } from "../figma_app/514043";
 import { _L } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
 import { Ro } from "../figma_app/805373";
@@ -122,7 +122,7 @@ function W({
   });
   let [r] = handleSuspenseRetainRelease(a);
   if (null === r.data) throw Error("Price data is null");
-  let i = new vr(e);
+  let i = new CurrencyFormatter(e);
   return jsx("div", {
     className: _$$s2.flex.flexColumn.$,
     children: N_.sort(AG).map(e => isNullish(r.data[e]) ? null : jsxs("div", {
@@ -242,7 +242,7 @@ function ea(e) {
     }
   }, [e.teams]);
   let A = G8;
-  let P = wU();
+  let P = createUserCurrencyFormatter();
   let R = Oq.dict(e => ({
     currency: P.currency,
     billableProductKey: e,
@@ -348,7 +348,7 @@ function ea(e) {
             fontWeight: 600
           },
           children: renderI18nText("org_upgrade.multi_team.bring_your_teams_together_with_the_figma_organization_plan")
-        }), jsx(Jn, {
+        }), jsx(CloseButton, {
           className: "org_upgrade_multi_team_modal--closeButton--x3l-2",
           onClick: a,
           innerText: "close"

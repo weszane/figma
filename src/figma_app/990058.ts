@@ -2,8 +2,8 @@ import { createOptimistCommitAction, createOptimistRevertAction } from "../905/6
 import { createActionCreator } from "../905/73481";
 import { customHistory } from "../905/612521";
 import { XHR } from "../905/910117";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { hG } from "../905/890368";
@@ -12,7 +12,7 @@ import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
 import { tc, PE } from "../905/15667";
 import { Sc } from "../905/18797";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { G } from "../figma_app/124713";
 import { Eh } from "../figma_app/617654";
 import { x } from "../905/749159";
@@ -97,9 +97,9 @@ let $$S0 = createOptimistThunk(async (e, t) => {
     }));
   } catch (r) {
     console.error(r);
-    r.message.includes("Org access needed") ? (e.dispatch(Ts({
+    r.message.includes("Org access needed") ? (e.dispatch(AUTH_INIT({
       origin: "edit_button_click",
-      formState: qB.JOIN_ORG,
+      formState: AuthFlowStep.JOIN_ORG,
       redirectUrl: customHistory.location.pathname
     })), e.dispatch(showModalHandler({
       type: x,
@@ -194,7 +194,7 @@ let $$C4 = createOptimistThunk(async (e, {
     includeLicenseAdmins: !0,
     orgId: t
   });
-  N(i, e, r);
+  setupLoadingStateHandler(i, e, r);
   try {
     let r = await i;
     e.dispatch($$T6({
@@ -214,7 +214,7 @@ let $$w2 = createOptimistThunk(async (e, t, {
     orgId: t.orgId,
     userId: t.userId
   });
-  N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   try {
     let r = [(await n).data.meta];
     e.dispatch($$T6({

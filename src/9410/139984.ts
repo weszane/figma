@@ -4,7 +4,7 @@ import { useSelector, useDispatch, useStore } from "react-redux";
 import { DesignGraphElements, Fullscreen, SchemaJoinStatus } from "../figma_app/763686";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { uM } from "../905/738636";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { e } from "../905/621515";
 import { getNewFileConfig } from "../905/766303";
 import { useOpenFileObjectWithSinatraType, selectCurrentFile } from "../figma_app/516028";
@@ -552,7 +552,7 @@ export function $$eo1() {
         cursor_bot_v2_has_greeted_with_wave: !1
       };
       e && (r.has_cursor_bot_onboarding_v2 = !0);
-      n(_$$b(r));
+      n(postUserFlag(r));
       t || i();
     };
     _$$E(e, _$$W, () => {
@@ -601,14 +601,14 @@ export function $$eo1() {
   }, [isShowing, complete, X, K]);
   let $ = _$$f("cursor_bot_v2__basics_file__started_flow");
   if (useEffect(() => {
-    isShowing && H && !$ && O(_$$b({
+    isShowing && H && !$ && O(postUserFlag({
       cursor_bot_v2__basics_file__started_flow: !0
     }));
   }, [O, H, isShowing, $]), !isShowing || !K) return null;
   let ee = () => {
-    H ? O(_$$b({
+    H ? O(postUserFlag({
       cursor_bot_v2__basics_onboarded: !0
-    })) : O(_$$b({
+    })) : O(postUserFlag({
       cursor_bot_v2__no_basics_onboarded: !0
     }));
     complete();
@@ -639,13 +639,13 @@ export function $$eo1() {
     currentTutorial: K
   });
   let et = () => {
-    K.previousTutorialCompleteUserFlag && (G(_$$en.BACKWARD), O(_$$b({
+    K.previousTutorialCompleteUserFlag && (G(_$$en.BACKWARD), O(postUserFlag({
       [K.previousTutorialCompleteUserFlag]: !1
     })));
   };
   let ei = () => {
     G(_$$en.FORWARD);
-    O(_$$b({
+    O(postUserFlag({
       [K.stepCompletedUserFlag]: !0
     }));
   };

@@ -4,8 +4,8 @@ import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/273
 import { customHistory } from "../905/612521";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { V as _$$V } from "../905/223767";
@@ -71,9 +71,9 @@ export function $$z0({
           })({});
         } else if (t.parentOrgId) {
           B();
-          C(Ts({
+          C(AUTH_INIT({
             origin: "dev_mode",
-            formState: qB.JOIN_ORG,
+            formState: AuthFlowStep.JOIN_ORG,
             redirectUrl: customHistory.location.pathname
           }));
           C(showModalHandler({

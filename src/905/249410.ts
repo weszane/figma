@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { useDispatch } from "react-redux";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { ButtonSecondaryTracked, ButtonLinkTracked, linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sf } from "../905/929976";
@@ -219,7 +219,7 @@ registerModal(function (e) {
       popStack: !0,
       disableClickOutsideToHide: !0,
       className: "upsell_modals--modalSmall--V-tca",
-      children: [jsx(Jn, {
+      children: [jsx(CloseButton, {
         className: "upsell_modals--closeButton--tyiun close_button--modalUpperRightCorner--eKAQg",
         onClick: c
       }), jsxs("span", {

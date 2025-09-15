@@ -21,7 +21,7 @@ import { XHR } from "../905/910117";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/929976";
-import { yJ, bE } from "../figma_app/78808";
+import { filePutAction, postFileAction } from "../figma_app/78808";
 import { bE as _$$bE } from "../905/466026";
 import { FileCanEdit } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
@@ -62,10 +62,10 @@ function N(e) {
       t(_$$bE({
         repo
       }));
-      t(yJ({
+      t(filePutAction({
         file: source_file
       }));
-      t(bE({
+      t(postFileAction({
         file
       }));
       t(hideModal());

@@ -2,7 +2,7 @@ import { i as _$$i } from "../905/970229";
 import { yr } from "../905/827765";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
-import { Nw, yJ } from "../figma_app/78808";
+import { renameFileOptimistic, filePutAction } from "../figma_app/78808";
 import { q } from "../figma_app/446378";
 import { Yp } from "../figma_app/740025";
 export function $$c1(e) {
@@ -35,7 +35,7 @@ export async function $$u0({
   };
   let A = $$c1(_);
   if (m(A), !(Object.keys(A).length > 0)) {
-    p && f(Nw({
+    p && f(renameFileOptimistic({
       file: {
         key: e
       },
@@ -84,7 +84,7 @@ export async function $$u0({
       g(e.message);
       return;
     }
-    f(yJ({
+    f(filePutAction({
       file: {
         key: e,
         is_team_template: !0

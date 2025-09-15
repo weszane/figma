@@ -24,7 +24,7 @@ import { F as _$$F2 } from "../905/827944";
 import { showVisualBell, joinStringSegments, PluginPermissions, getFullscreenViewEditorType, isValidForCooper, isDevModeWithInspectPanel, isValidForCooperSelectedView, isBuzzPlugin, loadLocalPluginSource, loadPluginManifest, isValidForFullscreenView, clearVisualBell, hasSpecialCapability } from "../figma_app/300692";
 import { C3, SH } from "../figma_app/790714";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
-import { G3 } from "../905/272080";
+import { SubscriptionStatus } from "../905/272080";
 import { mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { hasLocalFileId } from "../figma_app/155287";
 import { d4 } from "../figma_app/474636";
@@ -585,7 +585,7 @@ export let $$eo4 = _$$n(async e => {
             paidStatus: function (e) {
               let t = hasMonetizedResourceMetadata(e);
               let i = e?.community_resource_payment;
-              return t && i ? i.status === G3.TRIALING ? "trial" : "paid" : "none";
+              return t && i ? i.status === SubscriptionStatus.TRIALING ? "trial" : "paid" : "none";
             }(b),
             widgetAction: widgetAction ?? null,
             isReadOnly: debugState.getState().mirror.appModel.isReadOnly,

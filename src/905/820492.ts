@@ -30,7 +30,7 @@ import { Lj } from "../figma_app/835219";
 import { DV, qD } from "../figma_app/471982";
 import { BT } from "../905/618447";
 import { rY } from "../figma_app/524655";
-import { ae } from "../figma_app/808294";
+import { decimalToPercent } from "../figma_app/808294";
 import { gH } from "../905/104173";
 import { W as _$$W2, T as _$$T } from "../905/336482";
 import { iB } from "../figma_app/188671";
@@ -912,7 +912,7 @@ class ts extends Component {
       badges: [],
       monetized_resource_metadata: {
         id: "0",
-        price: ae(metadata.price),
+        price: decimalToPercent(metadata.price),
         is_subscription: !1
       }
     } : null;

@@ -2,7 +2,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { L } from "../905/92291";
 import { $ } from "../905/20253";
 import { createOptimistThunk } from "../905/350402";
@@ -18,7 +18,7 @@ let $$u1 = createOptimistThunk((e, {
     fileKey: t,
     emailAddress: r
   });
-  N(u, e, c);
+  setupLoadingStateHandler(u, e, c);
   u.then(() => {
     if (s) {
       e.dispatch(VisualBellActions.enqueue({
@@ -45,7 +45,7 @@ let $$p0 = createOptimistThunk((e, {
   let a = L.claimDeviceFile({
     fileKey: t
   });
-  N(a, e, r);
+  setupLoadingStateHandler(a, e, r);
   a.then(() => {
     e.dispatch(showModalHandler({
       type: $,

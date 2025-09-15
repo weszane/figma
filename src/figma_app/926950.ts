@@ -30,7 +30,7 @@ import { c$, l6, sK } from '../905/794875';
 import { Um } from '../905/848862';
 import { XHR, XHRError } from '../905/910117';
 import { f as _$$f } from '../905/940356';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { A as _$$A4 } from '../1617/230645';
 import { A as _$$A5 } from '../1617/794786';
 import { A as _$$A3 } from '../1617/805095';
@@ -181,7 +181,7 @@ function eu({
   };
   let eN = _$$f('seen_bug_reporter_modal');
   _$$h(() => {
-    eN || D(_$$b({
+    eN || D(postUserFlag({
       seen_bug_reporter_modal: !0
     }));
     eA(!0);

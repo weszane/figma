@@ -6,8 +6,8 @@ import { isNullish } from '../figma_app/95419';
 import { Xf } from '../figma_app/153916';
 import { FOrganizationLevelType } from '../figma_app/421473';
 import { un } from '../figma_app/457899';
-import { vr } from '../figma_app/514043';
-import { Fj } from '../figma_app/594947';
+import { CurrencyFormatter } from '../figma_app/514043';
+import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { k } from '../figma_app/618031';
 import { I1 } from '../figma_app/990058';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,7 +15,7 @@ export function $$h0(e, t) {
   let a = useDispatch();
   let {
     getDynamicConfig
-  } = Fj('disable_cost_messaging_config');
+  } = setupDynamicConfigHandler('disable_cost_messaging_config');
   let {
     seatAvailability
   } = _$$k(e);
@@ -76,7 +76,7 @@ export function $$h0(e, t) {
         price: null,
         reason: D3.MISSING_PRICE
       } : {
-        price: new vr(E).formatMoney(s, {
+        price: new CurrencyFormatter(E).formatMoney(s, {
           showCents: !1
         })
       };

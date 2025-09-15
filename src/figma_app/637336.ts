@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { h } from "../figma_app/275739";
 export let $$l0 = {
   MAIN_GUIDE: "https://help.figma.com/hc/articles/1500004414622",
@@ -20,7 +20,7 @@ export function $$d1() {
       } catch {
         return;
       }
-      t !== n.sessionID && r !== n.sessionID && e(b({
+      t !== n.sessionID && r !== n.sessionID && e(postUserFlag({
         aware_of_observation_mode: !0
       }));
     }

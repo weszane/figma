@@ -1,10 +1,10 @@
 import { getLocalStorage } from "../905/657224";
 import { createActionCreator } from "../905/73481";
 import { logError } from "../905/714362";
-import { QQ } from "../figma_app/808294";
+import { isSubscriptionActive } from "../figma_app/808294";
 import { createOptimistThunk } from "../905/350402";
-import { N } from "../905/696711";
-import { C } from "../905/180";
+import { setupLoadingStateHandler } from "../905/696711";
+import { BuyerAPIHandler } from "../905/180";
 createOptimistThunk((e, t) => {
   let {
     payments,
@@ -12,7 +12,7 @@ createOptimistThunk((e, t) => {
   } = t;
   let o = e.getState().user?.id;
   if (!o || !payments) return;
-  let l = payments.filter(QQ);
+  let l = payments.filter(isSubscriptionActive);
   let d = `${c}_${o}`;
   let u = getLocalStorage()?.getItem(d);
   if (u) {
@@ -38,8 +38,8 @@ let c = "debug_succeeded_payments";
 let $$u3 = createOptimistThunk((e, t, {
   loadingKey: r
 }) => {
-  let n = C.getBuyerActivePayments();
-  N(n, e, r);
+  let n = BuyerAPIHandler.getBuyerActivePayments();
+  setupLoadingStateHandler(n, e, r);
   n.then(({
     data: t
   }) => {

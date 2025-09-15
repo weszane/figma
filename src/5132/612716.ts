@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import c from "classnames";
 import { P as _$$P } from "../vendor/348225";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -18,7 +18,7 @@ import { SK, Fq } from "../905/84777";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Oq } from "../905/332483";
 import { K } from "../905/3140";
-import { LN, vr } from "../figma_app/514043";
+import { getUserCurrency, CurrencyFormatter } from "../figma_app/514043";
 import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../905/809096";
 import { ModalView } from "../figma_app/918700";
@@ -90,7 +90,7 @@ function C({
   });
 }
 function E() {
-  let e = LN();
+  let e = getUserCurrency();
   let l = Oq.exclude([ProductAccessTypeEnum.DEV_MODE]).dict(l => ({
     currency: e,
     billableProductKey: l,
@@ -102,7 +102,7 @@ function E() {
   let i = SK(l, Fq.UPSELL_MODALS);
   let [a] = handleSuspenseRetainRelease(i);
   if (null === a.data) throw Error("Price data is null");
-  let r = new vr(e);
+  let r = new CurrencyFormatter(e);
   let s = a.data[ProductAccessTypeEnum.DESIGN].amount;
   let c = a.data[ProductAccessTypeEnum.FIGJAM].amount;
   return jsxs(AutoLayout, {
@@ -261,7 +261,7 @@ export function $$N0({
                     fontSize: 20,
                     fontWeight: "semi-bold",
                     children: c
-                  }), jsx(s_, {
+                  }), jsx(ModalCloseButton, {
                     customStyle: {
                       right: "8px",
                       top: "8px"

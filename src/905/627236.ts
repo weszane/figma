@@ -34,7 +34,7 @@ import { Y$ } from "../905/84777";
 import { xQ, $$in } from "../figma_app/84966";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { T as _$$T2 } from "../905/696189";
 import { Ro } from "../figma_app/805373";
@@ -104,7 +104,7 @@ function X(e) {
   let f = useSelector(e => e.teamBilling);
   let b = g.key.parentId;
   let S = f.summary.currency;
-  let w = new vr(S);
+  let w = new CurrencyFormatter(S);
   let L = _$$g(f.summary.total_upgraded_user_counts, {
     throwOnError: !0
   });

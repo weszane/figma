@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { f as _$$f } from "../905/940356";
 import { e0 as _$$e } from "../905/696396";
 import { n as _$$n, l as _$$l } from "../905/402643";
@@ -32,7 +32,7 @@ import { resourceUtils } from "../905/989992";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { fX, Im } from "../905/627262";
 import { bu, k9, DQ, y$ } from "../905/712714";
-import { JK } from "../figma_app/514043";
+import { getUserLocale } from "../figma_app/514043";
 import { A as _$$A3 } from "../905/27250";
 import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t2 } from "../905/150656";
@@ -665,7 +665,7 @@ let eS = _$$ex("dsa_graph", function ({
   numInsertions: e,
   dateString: t
 }) {
-  let i = useMemo(() => new Intl.NumberFormat(JK(), {
+  let i = useMemo(() => new Intl.NumberFormat(getUserLocale(), {
     useGrouping: !0
   }).format(e), [e]);
   return jsxs("div", {
@@ -1375,7 +1375,7 @@ function e1() {
   let e = _$$f(e0);
   let t = useDispatch();
   let i = useCallback(() => {
-    t(_$$b({
+    t(postUserFlag({
       [e0]: !0
     }));
   }, [t]);

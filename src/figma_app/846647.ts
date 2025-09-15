@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Z } from "../905/104740";
 import { VF } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
@@ -22,7 +22,7 @@ export function $$m1(e) {
         navigate: m,
         guidToFocus: t?.guid,
         guidToSelect: n.guid
-      }), r(!0), g(_$$b({
+      }), r(!0), g(postUserFlag({
         format_text_step_shown: !0
       }))) : e.skip();
     });

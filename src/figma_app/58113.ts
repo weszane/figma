@@ -3,7 +3,7 @@ import { formatNumber } from "../figma_app/930338";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { Cg, Gb, sw } from "../figma_app/534676";
-import { Lt } from "../figma_app/808294";
+import { hasTrialAvailable } from "../figma_app/808294";
 import { hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { A } from "../6828/6507";
@@ -36,7 +36,7 @@ export function $$m0({
     if (m) return jsx(Gb, {
       textSize: "small"
     });
-    let t = Lt({
+    let t = hasTrialAvailable({
       resource: e,
       payment: e.community_resource_payment
     });

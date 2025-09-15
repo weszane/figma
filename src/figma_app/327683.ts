@@ -9,7 +9,7 @@ import { l as _$$l, i as _$$i } from "../905/283360";
 import { C } from "../905/887158";
 import { TW, sB, d$ } from "../905/958097";
 import { debugState } from "../905/407919";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { Oe } from "../figma_app/933328";
 import { Vg, gU, Hf } from "../figma_app/407414";
@@ -128,7 +128,7 @@ async function w({
   allowedScopes: a,
   contrastData: s
 }) {
-  let o = await w0($$T8);
+  let o = await fetchDynamicConfig($$T8);
   let l = o.get("llmMaxCandidates", 20);
   let d = o.get("llmMaxColorDistance", 40);
   let u = {
@@ -179,7 +179,7 @@ async function O({
   allowedScopes: s,
   contrastData: l
 }) {
-  let u = await w0($$T8);
+  let u = await fetchDynamicConfig($$T8);
   let _ = u.get("rerankerMaxSimilarCandidates", 50);
   let g = u.get("rerankerMaxColorDistance", 40);
   let b = u.get($$I6, $$S2);

@@ -6,7 +6,7 @@ import { canCreateFileType } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { c$ } from "../figma_app/618433";
 import { oB } from "../905/929976";
-import { YW } from "../figma_app/78808";
+import { duplicateFileOptimistic } from "../figma_app/78808";
 import { showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
 import { F as _$$F } from "../905/224";
@@ -145,7 +145,7 @@ export function $$k1() {
         return;
       }
       let i = (t, r) => {
-        fullscreenValue.dispatchIfSaved(YW({
+        fullscreenValue.dispatchIfSaved(duplicateFileOptimistic({
           file: e,
           folderId: t,
           checkOssSalesExperiment: y,

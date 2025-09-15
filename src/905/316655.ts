@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { k as _$$k } from "../905/443820";
 import { isMobileUA } from "../figma_app/778880";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { X2, e6 } from "../figma_app/530167";
@@ -40,7 +40,7 @@ export function $$v0({
       window.location.href = "/login";
       return;
     }
-    I(Ts({
+    I(AUTH_INIT({
       origin: i
     }));
     I(showModalHandler({

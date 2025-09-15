@@ -15,7 +15,7 @@ import { showModalHandler } from "../905/156213";
 import { L } from "../c5e2cae0/262856";
 import { isAddressEmpty, UpgradeSteps, SubscriptionType } from "../figma_app/831101";
 import { p as _$$p, m as _$$m } from "../figma_app/160942";
-import { vr, _Z } from "../figma_app/514043";
+import { CurrencyFormatter, isNonUsdUserCurrency } from "../figma_app/514043";
 import { HX, PT, Bo, TV, pV, Gn, fK, S as _$$S2 } from "../figma_app/81441";
 function v(e) {
   return "org" === e.variant ? jsx(y, {
@@ -138,7 +138,7 @@ function N(e) {
 }
 export function $$E0(e) {
   let [t, a] = useState(!1);
-  let p = new vr(e.currency);
+  let p = new CurrencyFormatter(e.currency);
   let [h, g] = useState(!1);
   let x = useSelector(e => e.payment);
   let y = useSelector(e => e.payment, (e, t) => h || e === t);
@@ -234,7 +234,7 @@ export function $$E0(e) {
         mainText: E ? renderI18nText("pro_cart.review.total") : renderI18nText("pro_cart.review.total_due_today"),
         priceText: p.formatMoney(L, {
           showCents: !0,
-          showFullFormat: _Z()
+          showFullFormat: isNonUsdUserCurrency()
         }),
         subText: A ? renderI18nText("pro_cart.review.you_will_not_be_charged_during_the_free_period", {
           days: y.promo.promo_value

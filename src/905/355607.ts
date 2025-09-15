@@ -1,7 +1,15 @@
-import { BrowserInfo } from "../figma_app/778880";
-import { F4 } from "../figma_app/546509";
-export function $$a0() {
-  let e = F4();
-  return e?.shouldOptimizeForIpadApp || BrowserInfo.isIpad;
+import { F4 as getFigmaMobile } from '../figma_app/546509'
+import { BrowserInfo } from '../figma_app/778880'
+
+/**
+ * Determines if the app should optimize for iPad.
+ * Combines figma mobile optimization flag and browser info.
+ * (Original: $$a0)
+ */
+export function shouldOptimizeForIpad(): boolean {
+  const figmaMobile = getFigmaMobile()
+  return figmaMobile?.shouldOptimizeForIpadApp || BrowserInfo.isIpad
 }
-export const $ = $$a0;
+
+/** Alias for shouldOptimizeForIpad (Original: $) */
+export const $ = shouldOptimizeForIpad

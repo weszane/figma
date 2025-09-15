@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
-import { yJ, U2 } from "../figma_app/78808";
+import { filePutAction, moveFileAction } from "../figma_app/78808";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { trackFileCopyEvent, trackMultipleFileEvent } from "../figma_app/314264";
 import { isBranch } from "../905/760074";
@@ -183,7 +183,7 @@ let $$w0 = createOptimistThunk(async (e, t) => {
     data: i
   }) => {
     let n = i && i.meta && i.meta.success || {};
-    for (let t in n) e.dispatch(yJ({
+    for (let t in n) e.dispatch(filePutAction({
       file: n[t]
     }));
     let r = i?.meta?.team;
@@ -199,7 +199,7 @@ let $$w0 = createOptimistThunk(async (e, t) => {
       onFinishCallback: t.onFinishCallback
     }));
   });
-  let d = U2(t);
+  let d = moveFileAction(t);
   return await Q({
     requestPromise: o,
     fallbackError: getI18nString("file_browser.file_browser_actions.file_processing_error"),

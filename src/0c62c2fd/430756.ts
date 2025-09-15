@@ -18,7 +18,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { bx } from "../905/34809";
 import { vt } from "../figma_app/598926";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { h as _$$h } from "../905/864281";
 import { b as _$$b2 } from "../905/388233";
@@ -38,7 +38,7 @@ import { e as _$$e } from "../905/393279";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h2 } from "../905/207101";
 import { e as _$$e2 } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N2 } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { R as _$$R } from "../905/11928";
@@ -47,7 +47,7 @@ import { QpH } from "../figma_app/6204";
 import { _9, J4, YU, Iz } from "../figma_app/907616";
 import { o6, gy } from "../905/986349";
 import { F as _$$F } from "../905/154112";
-let J = r1("seen_sharing_clarity_project_modal_overlay");
+let J = userFlagExistsAtomFamily("seen_sharing_clarity_project_modal_overlay");
 let q = "sc_project_creation_permission_onboarding_key";
 function X() {
   let e = useAtomWithSubscription(J);
@@ -334,7 +334,7 @@ export function $$er0(e) {
             color: _$$S.INFORMATION,
             icon: jsx(_$$U, {}),
             onDismiss: () => {
-              t(_$$b({
+              t(postUserFlag({
                 seen_connected_project_in_project_creation_onboarding: !0
               }));
             },

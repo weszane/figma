@@ -2,11 +2,11 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { h as _$$h } from "../905/207101";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { LoadingSpinner } from "../figma_app/858013";
 import { P } from "../905/347284";
 import { getI18nString } from "../905/303541";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { popModalStack } from "../905/156213";
 import { _z, ky } from "../905/977218";
 import { ud } from "../905/862913";
@@ -28,7 +28,7 @@ function I(e) {
       hasCloseButton: !1
     }), jsx("div", {
       className: vu,
-      children: jsx(s_, {
+      children: jsx(ModalCloseButton, {
         className: g8,
         dispatch: () => {
           t(popModalStack());
@@ -54,7 +54,7 @@ export let $$E0 = registerModal(function (e) {
     t(popModalStack());
   };
   let E = e => {
-    e && (S(e), o[e.key] || t(yJ({
+    e && (S(e), o[e.key] || t(filePutAction({
       file: e
     })));
   };

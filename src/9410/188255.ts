@@ -8,7 +8,7 @@ import { isAIFeaturesEnabledForCurrentUser } from "../figma_app/459490";
 import { QI } from "../9410/60600";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { useSelector, useDispatch, useStore } from "react-redux";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { withTrackedClick, TrackingProvider, useTracking } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { N as _$$N, D as _$$D } from "../figma_app/268271";
@@ -48,7 +48,7 @@ import { yF } from "../figma_app/386952";
 import { I as _$$I } from "../figma_app/51637";
 import { FEditorType } from "../figma_app/53721";
 import { A as _$$A3 } from "../905/920142";
-import { mp } from "../figma_app/864723";
+import { userCreatedAtAtom } from "../figma_app/864723";
 import { f as _$$f } from "../905/940356";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellType, VisualBellIcon } from "../905/576487";
@@ -63,7 +63,7 @@ import { hn } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { mp as _$$mp, t as _$$t2, tH as _$$tH, Ot, M$, Fy } from "../figma_app/579169";
-import { r1 as _$$r2, Fu } from "../figma_app/545877";
+import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
 import { UpsellModalType } from "../905/165519";
 import { xp, Q1, Xj } from "../905/472146";
 import { IR } from "../figma_app/625596";
@@ -125,20 +125,20 @@ import { jO, Ai } from "../figma_app/242339";
 import { xZ } from "../1250/927871";
 import { f as _$$f2 } from "../1250/46310";
 import { A as _$$A6 } from "../figma_app/882803";
-import { Nw, tX as _$$tX } from "../figma_app/78808";
+import { renameFileOptimistic, fileOnboardingFlag } from "../figma_app/78808";
 import { f6, ai as _$$ai } from "../figma_app/915202";
 import { _l, Jm } from "../figma_app/995208";
 import { S as _$$S, bg } from "../figma_app/446435";
 import { P as _$$P } from "../1250/232298";
 import { A as _$$A7 } from "../1250/545022";
-import { I7, XV } from "../figma_app/594947";
+import { selectExperimentConfigHook, useUserFlagExperimentConfig } from "../figma_app/594947";
 import { FP } from "../figma_app/91703";
 import { F_, EL } from "../905/858282";
 import { S as _$$S2 } from "../figma_app/420927";
 import { sx as _$$sx2 } from "../905/941192";
 import { browserCapabilities } from "../905/409121";
 import ix from "classnames";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { Hz, Un, jg, Am } from "../figma_app/591738";
 import { Rf } from "../905/856036";
 import { XHR } from "../905/910117";
@@ -627,16 +627,16 @@ function et() {
       name: _$$e2.AI_SUMMARY_TOPBAR_NUDGE,
       children: jsx(q, {
         onClose: () => {
-          e(_$$b({
+          e(postUserFlag({
             [l0]: !0
           }));
           complete();
         },
         onSummarize: () => {
-          e(_$$b({
+          e(postUserFlag({
             [zp]: !0
           }));
-          e(_$$b({
+          e(postUserFlag({
             [l0]: !0
           }));
           complete();
@@ -666,7 +666,7 @@ function ex() {
         timeoutOverride: 1e4,
         onDismiss: () => {
           o(!0);
-          e(_$$b({
+          e(postUserFlag({
             [e_]: !0
           }));
           logAndTrackCTA({
@@ -690,7 +690,7 @@ function ex() {
   }();
   return null;
 }
-let eR = _$$r2(IR);
+let eR = userFlagExistsAtomFamily(IR);
 function eD() {
   let e = useAtomValue(_$$mp);
   let t = useAtomValue(_$$t2);
@@ -753,7 +753,7 @@ function eD() {
   });
 }
 let eF = "seen_audio_nux";
-let eB = _$$r2(eF);
+let eB = userFlagExistsAtomFamily(eF);
 function eU() {
   let e = useAtomWithSubscription(eB);
   let t = _$$e({
@@ -1009,7 +1009,7 @@ function th() {
   return (useEffect(() => {
     m && setTimeout(() => {
       e.show();
-      t(_$$b({
+      t(postUserFlag({
         seen_custom_template_publish_nudge: !0
       }));
     }, 1e3);
@@ -1034,8 +1034,8 @@ function th() {
     dispatch: t
   }) : null;
 }
-let tx = _$$r2("seen_desktop_download_modal_prompt");
-let ty = _$$r2("seen_desktop_download_modal_prompt_v2");
+let tx = userFlagExistsAtomFamily("seen_desktop_download_modal_prompt");
+let ty = userFlagExistsAtomFamily("seen_desktop_download_modal_prompt_v2");
 let tb = _$$tH("used_desktop_app");
 function tC() {
   let e = useAtomWithSubscription(tx);
@@ -1120,7 +1120,7 @@ function tD() {
   let a = Fk((e, t) => zC(e, t), i);
   let o = useSelector(e => !zP(e.mirror.appModel.currentTool));
   let l = Uj(t, e || "");
-  let d = Fu("interacted_figjam_whats_new_v2_cta");
+  let d = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let c = useAtomWithSubscription(d);
   let u = useAtomWithSubscription(wg);
   let [h, m] = useState(!1);
@@ -1320,9 +1320,9 @@ function t$(e) {
     })
   });
 }
-let t5 = _$$r2(USER_FLAG_V2);
+let t5 = userFlagExistsAtomFamily(USER_FLAG_V2);
 let t4 = _$$tH("last_figjam_at");
-let t6 = _$$r2("dont_show_figjam_updates_in_figma_design");
+let t6 = userFlagExistsAtomFamily("dont_show_figjam_updates_in_figma_design");
 function t7() {
   let e = useAtomWithSubscription(t6);
   let t = useAtomWithSubscription(wg);
@@ -1414,7 +1414,7 @@ function ir() {
       ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
       onClick: () => {
         a(void 0, t => {
-          null != t && (e(Nw({
+          null != t && (e(renameFileOptimistic({
             file: {
               key: t
             },
@@ -1446,7 +1446,7 @@ function ic() {
   let d = useAtomWithSubscription(wg);
   let {
     getConfig
-  } = I7("exp_library_upsells_v2");
+  } = selectExperimentConfigHook("exp_library_upsells_v2");
   let {
     isShowing,
     show,
@@ -1517,7 +1517,7 @@ function ic() {
   });
 }
 let im = "seen_link_shortcut_overlay";
-let ig = _$$r2(im);
+let ig = userFlagExistsAtomFamily(im);
 function i_() {
   let e = useDispatch();
   let t = useAtomValue(ig);
@@ -1539,7 +1539,7 @@ function i_() {
   }), [l]);
   _$$E2(uniqueId, ["show_link_shortcuts_overlay"], () => {
     show({
-      canShow: t => (e(_$$b({
+      canShow: t => (e(postUserFlag({
         seen_link_shortcut_overlay: !0
       })), !t)
     });
@@ -1585,7 +1585,7 @@ function i_() {
 }
 var iy = ix;
 let iE = "dismissed_local_component_asset_panel_pointer";
-let iT = _$$r2(iE);
+let iT = userFlagExistsAtomFamily(iE);
 function iw() {
   let e = useDispatch();
   let t = getUserId();
@@ -1616,7 +1616,7 @@ function iw() {
     });
   }, [c, i, o, show]);
   let v = useCallback(() => {
-    isShowing && (complete(), e(_$$b({
+    isShowing && (complete(), e(postUserFlag({
       [iE]: !0
     })));
   }, [e, complete, isShowing]);
@@ -1629,7 +1629,7 @@ function iw() {
       children: [jsx("div", {
         className: _$$s.pt6.mr36.$,
         children: u ? renderI18nText("design_systems.assets_panel.drag_drop_component_draft") : renderI18nText("design_systems.assets_panel.drag_drop_component")
-      }), jsx(Jn, {
+      }), jsx(CloseButton, {
         onClick: v,
         innerText: getI18nString("general.close"),
         "aria-label": getI18nString("general.close"),
@@ -1649,7 +1649,7 @@ function iw() {
     hideCloseButton: !0
   });
 }
-let iI = _$$r2("seen_mobile_comment_download_modal_prompt");
+let iI = userFlagExistsAtomFamily("seen_mobile_comment_download_modal_prompt");
 function ik() {
   let e = useDispatch();
   let t = useAtomWithSubscription(iI);
@@ -2001,11 +2001,11 @@ function rl({
   });
 }
 let rd = "seen_figjam_share_to_google_classroom_existing_user_onboarding";
-let rc = _$$r2(rd);
+let rc = userFlagExistsAtomFamily(rd);
 let ru = "seen_figjam_share_to_google_classroom_new_user_onboarding";
-let rp = _$$r2(ru);
-let rh = _$$r2("has_shared_to_google_classroom");
-let rm = _$$r2("figjam_editor_onboarded");
+let rp = userFlagExistsAtomFamily(ru);
+let rh = userFlagExistsAtomFamily("has_shared_to_google_classroom");
+let rm = userFlagExistsAtomFamily("figjam_editor_onboarded");
 let rf = "start_share_to_classroom_new_user_onboarding";
 function rg() {
   let e = useDispatch();
@@ -2028,7 +2028,7 @@ function rg() {
   _$$E2(uniqueId, rf, () => {
     show({
       onShow: () => {
-        e(_$$b({
+        e(postUserFlag({
           [ru]: !0
         }));
       },
@@ -2090,7 +2090,7 @@ function rg() {
 function r_(e) {
   let t = useDispatch();
   return () => {
-    t(_$$b({
+    t(postUserFlag({
       figjam_editor_onboarded: !0
     }));
     e();
@@ -2102,7 +2102,7 @@ function rx({
 }) {
   let i = useDispatch();
   _$$E2(e, "Reset Onboarding", () => {
-    i(_$$b({
+    i(postUserFlag({
       figjam_editor_onboarded: !1,
       figjam_browse_templates_modal_onboarded: !1,
       figjam_browse_templates_modal_onboarding_item_selected: !1
@@ -4170,7 +4170,7 @@ let ni = e => {
     handleAtomEvent({
       id: Lz
     });
-    a(_$$b({
+    a(postUserFlag({
       figjam_browse_templates_modal_onboarding_item_selected: !0
     }));
     a(hideModal());
@@ -4270,7 +4270,7 @@ let ni = e => {
         }) => e === o) && y(o);
         return;
       }
-      if ("Home" === e.key) t = 0; else if ("End" === e.key) t = C.length - 1; else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1); else {
+      if ("Home" === e.key) t = 0;else if ("End" === e.key) t = C.length - 1;else if (["ArrowUp", "ArrowLeft"].includes(e.key)) t = v(o, -1);else {
         if (!["ArrowDown", "ArrowRight"].includes(e.key)) return;
         t = v(o, 1);
       }
@@ -4337,7 +4337,7 @@ let nn = _$$n2(({
           handleAtomEvent({
             id: a
           });
-          i(_$$b({
+          i(postUserFlag({
             figjam_browse_templates_modal_onboarding_item_selected: !0
           }));
           t(_$$tX2.USE_CASE_STEPS);
@@ -4939,7 +4939,7 @@ async function nD(e) {
     let e = getStorage();
     try {
       return !!e.get(Xk);
-    } catch (e) { }
+    } catch (e) {}
     return !1;
   })();
 }
@@ -5039,7 +5039,7 @@ function nB() {
     onComplete: complete
   });
   _$$E2(uniqueId, "Reset Onboarding", () => {
-    e(_$$b({
+    e(postUserFlag({
       figjam_editor_onboarded: !1
     }));
     u && (reset(), show());
@@ -5071,7 +5071,7 @@ let nK = _$$D3(() => {
   let e = getStorage();
   try {
     return !!e.get(Xk);
-  } catch (e) { }
+  } catch (e) {}
   return !1;
 });
 function nH({
@@ -5124,12 +5124,12 @@ function nW({
   let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((e, t) => zC(e, t), t);
   let a = useAtomWithSubscription(zo);
-  let o = Fu("interacted_figjam_whats_new_v2_cta");
+  let o = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let l = useAtomWithSubscription(o);
   let d = Xr(Am);
   let {
     getConfig
-  } = XV("exposed_exp_figjam_unified_onboarding", "figjam_unified_onboarding");
+  } = useUserFlagExperimentConfig("exposed_exp_figjam_unified_onboarding", "figjam_unified_onboarding");
   let u = useCallback(() => {
     let e = getConfig().get("sequence", jg.DEFAULT);
     d(e);
@@ -5209,7 +5209,7 @@ function nY({
   let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((e, t) => zC(e, t), t);
   let a = useAtomWithSubscription(zo);
-  let o = Fu("interacted_figjam_whats_new_v2_cta");
+  let o = userFlagAtomFamily("interacted_figjam_whats_new_v2_cta");
   let l = useAtomWithSubscription(o);
   let {
     show,
@@ -5289,7 +5289,7 @@ function nQ(e) {
   });
 }
 function n$() {
-  let e = _$$r2("figjam_browse_templates_modal_onboarded");
+  let e = userFlagExistsAtomFamily("figjam_browse_templates_modal_onboarded");
   let t = useAtomWithSubscription(e);
   let i = useAtomWithSubscription(nX);
   let [a, o] = useState(!1);
@@ -7162,7 +7162,7 @@ function sa({
   });
 }
 let sm = "seen_figjam_section_preset_picker_callout";
-let sf = Fu(sm);
+let sf = userFlagAtomFamily(sm);
 let sg = e => useSelector(t => {
   if (!e) return !1;
   let i = Object.keys(t.mirror.sceneGraphSelection);
@@ -7291,7 +7291,7 @@ function sC() {
   useEffect(() => {
     show({
       onShow: () => {
-        e(_$$b({
+        e(postUserFlag({
           [rd]: !0
         }));
       },
@@ -7355,7 +7355,7 @@ let sA = atom(!1);
 let sL = _$$N.HIGH_PRIORITY_MODAL + 3;
 function sR(e, t) {
   _$$h2(() => {
-    e(_$$b({
+    e(postUserFlag({
       [t]: !0
     }));
   });
@@ -7453,13 +7453,13 @@ function sB() {
     0 === c.length && !s && o && d && !a && c.push(sF);
     return c;
   }();
-  let t = _$$r2(sN);
+  let t = userFlagExistsAtomFamily(sN);
   let i = useAtomWithSubscription(t);
-  let o = _$$r2("did_sign_up_as_ui3_user");
+  let o = userFlagExistsAtomFamily("did_sign_up_as_ui3_user");
   let l = useAtomWithSubscription(o);
-  let d = _$$r2($9);
+  let d = userFlagExistsAtomFamily($9);
   let c = useAtomWithSubscription(d);
-  let u = _$$r2(_$$af);
+  let u = userFlagExistsAtomFamily(_$$af);
   let p = useAtomWithSubscription(u);
   let h = Em();
   let m = l7();
@@ -7664,7 +7664,7 @@ function sq(e) {
     setTimeout(() => i(!1), 1e3);
   });
   let l = () => {
-    a(_$$b({
+    a(postUserFlag({
       explicitly_dismissed_create_component_pointer: !0
     }));
     e.dismissModal();
@@ -7748,7 +7748,7 @@ let s1 = Op({
   }]
 });
 let s2 = _$$rn("paste_deselected_machine", s1);
-let s3 = _$$r2("explicitly_dismissed_create_component_pointer");
+let s3 = userFlagExistsAtomFamily("explicitly_dismissed_create_component_pointer");
 let s5 = _$$tH("first_component_created_date");
 function s4() {
   let e = useDispatch();
@@ -7774,7 +7774,7 @@ function s4() {
     });
   });
   _$$E2(c.uniqueId, "action_create_symbol", () => {
-    c.isShowing && (e(_$$b({
+    c.isShowing && (e(postUserFlag({
       explicitly_dismissed_create_component_pointer: !0
     })), c.complete());
   });
@@ -7811,7 +7811,7 @@ function s6(e) {
   return t ? e.children : null;
 }
 let oe = "seen_workflow_interop_diagram_onboarding";
-let ot = _$$r2(oe);
+let ot = userFlagExistsAtomFamily(oe);
 let oi = "FigJam Diagram Onboarding (Workflow Interop Experiment)";
 let or = {
   connectors: `${oi} - Connectors`,
@@ -7922,7 +7922,7 @@ function oo() {
     }], [t, e]);
   }(t);
   _$$h2(() => {
-    QL(_$$tX.key) === _$$tX.value && t.show({
+    QL(fileOnboardingFlag.key) === fileOnboardingFlag.value && t.show({
       canShow: e => !e
     });
   });
@@ -7935,7 +7935,7 @@ function oo() {
   });
 }
 let od = "seen_figjam_workshop_onboarding";
-let oc = _$$r2(od);
+let oc = userFlagExistsAtomFamily(od);
 function ou(e) {
   let t = useAtomWithSubscription(J1);
   let i = useAtomWithSubscription(oc);
@@ -7982,7 +7982,7 @@ function o_(e, t, i, r) {
   let s = _$$f(i);
   let o = useRef(!!s);
   _$$E2(e, t, useCallback(() => {
-    !(r?.current || o?.current) && (s || (o.current = !0, a(_$$b({
+    !(r?.current || o?.current) && (s || (o.current = !0, a(postUserFlag({
       [i]: !0
     }))));
   }, [r, a, s, i]));
@@ -8015,7 +8015,7 @@ function ow() {
     currentTutorial: b
   });
   let C = () => {
-    o(_$$b({
+    o(postUserFlag({
       design_panel_step_shown: !0
     }));
     complete();
@@ -8064,7 +8064,7 @@ function oS() {
     currentTutorial: E
   });
   let S = () => {
-    o(_$$b({
+    o(postUserFlag({
       format_text_step_shown: !0
     }));
     complete();
@@ -8094,7 +8094,7 @@ function ok() {
   }, [e, o])), !e.isShowing) return null;
   let l = () => {
     e.complete();
-    s(_$$b({
+    s(postUserFlag({
       design_panel_step_shown: !0
     }));
   };
@@ -8126,7 +8126,7 @@ function oN() {
   }, [e, o])), !e.isShowing) return null;
   let l = () => {
     e.complete();
-    s(_$$b({
+    s(postUserFlag({
       format_text_step_shown: !0
     }));
   };
@@ -8209,9 +8209,9 @@ function oH(e) {
 function oX() {
   let e = useDispatch();
   let t = PE();
-  let i = _$$r2(Kt);
+  let i = userFlagExistsAtomFamily(Kt);
   let r = useAtomWithSubscription(i);
-  let a = _$$r2(wl);
+  let a = userFlagExistsAtomFamily(wl);
   let o = useAtomWithSubscription(a);
   let l = _$$sO();
   let d = _$$aV();
@@ -8232,7 +8232,7 @@ function oX() {
   return _$$i3({
     onClickPrimaryCta: complete,
     onClickSecondaryCta: () => {
-      e(_$$b({
+      e(postUserFlag({
         agreed_to_slides_ai_terms: !1
       }));
     },
@@ -8255,9 +8255,9 @@ function o2({
   teamId: e
 }) {
   let t = useDispatch();
-  let i = _$$r2(Kt);
+  let i = userFlagExistsAtomFamily(Kt);
   let a = useAtomWithSubscription(i);
-  let o = _$$r2(uM);
+  let o = userFlagExistsAtomFamily(uM);
   let l = useAtomWithSubscription(o);
   let d = hX(`[data-onboarding-key="${O0}"]`);
   let c = selectCurrentFile();
@@ -8425,12 +8425,12 @@ export let $$le0 = memo(function ({
   })(l);
   (function (e) {
     let t = useDispatch();
-    let i = useAtomWithSubscription(mp);
+    let i = useAtomWithSubscription(userCreatedAtAtom);
     let r = null != i && _$$A3("2023-10-31").isBefore(i);
     let a = !!_$$f("has_opened_design_editor");
     let [o, l] = useAtomValueAndSetter(eu);
     useEffect(() => {
-      r && !a && e && (l(!0), t(_$$b({
+      r && !a && e && (l(!0), t(postUserFlag({
         has_opened_design_editor: !0
       })));
     }, [t, a, e, l, r]);

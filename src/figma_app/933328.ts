@@ -6,7 +6,7 @@ import { createActionCreator } from '../905/73481';
 import { Sc, VP } from '../905/18797';
 import { cI, Dl } from '../905/49792';
 import { qB } from '../905/63598';
-import { TG } from '../905/72677';
+import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { Ml, yD } from '../905/92359';
 import { E as _$$E2 } from '../905/128063';
 import { f as _$$f2 } from '../905/135117';
@@ -41,7 +41,7 @@ import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { PluginAction, setupPlaybackHandler } from '../905/656545';
 import { PT } from '../905/669853';
-import { N as _$$N } from '../905/696711';
+import { setupLoadingStateHandler } from '../905/696711';
 import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
 import { compareLibraryItems } from '../905/709171';
 import { IT, M4 } from '../905/713695';
@@ -60,10 +60,10 @@ import { Z as _$$Z } from '../905/939602';
 import { c6 } from '../905/950959';
 import { r as _$$r } from '../905/955316';
 import { qp } from '../905/977779';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { useLatestRef } from '../figma_app/922077';
 import { LibraryOrgSubscriptions, LibraryTeamSubscriptions, LibraryUserSubscriptions, LibraryFileSubscriptions } from '../figma_app/43951';
-import { uo, yJ } from '../figma_app/78808';
+import { batchPutFileAction, filePutAction } from '../figma_app/78808';
 import { teamLibraryCache } from '../figma_app/80990';
 import { Ob } from '../figma_app/111825';
 import { LL, OQ } from '../figma_app/141508';
@@ -83,7 +83,7 @@ import { qr } from '../figma_app/608944';
 import { PrimaryWorkflowEnum, initialLibraryStats } from '../figma_app/633080';
 import { $j, td as _$$td, _B, GA, iw, kw, lG, Mb, Ve, vu, Ys } from '../figma_app/646357';
 import { n1 } from '../figma_app/657017';
-import { Cx, of, x2, yH } from '../figma_app/714946';
+import { loadingStatePutLoading, loadingStatePutFailure, loadingStatePutSuccess, loadingStateDelete } from '../figma_app/714946';
 import { AppStateTsApi, Confirmation, CopyPasteType, FileSourceType, Fullscreen, LibraryPubSub, SceneIdentifier, StyleVariableOperation, TemplateType, VariablesBindings } from '../figma_app/763686';
 import { vP } from '../figma_app/864378';
 import { fu, xB } from '../figma_app/990334';
@@ -165,7 +165,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
     queryId
   } = t;
   let l = Ml(item, instanceGUIDs);
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: l
   }));
   let c = e.getState();
@@ -177,7 +177,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
   }));
   let _ = getSelectedFile(c);
   if (!_) {
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: l
     }));
     return;
@@ -192,13 +192,13 @@ let $$eW48 = createOptimistThunk((e, t) => {
         permissionScopeHandler.user('replace-symbol-backing-instances', () => {
           Fullscreen.replaceSymbolBackingInstances(a, usedSwapInstanceKeyboardShortcut);
         });
-        e.dispatch(x2({
+        e.dispatch(loadingStatePutSuccess({
           key: l
         }));
         _$$V(_.key, item, !0, !!e.getState().userFlags.apple_eula_accepted);
       }
     } catch (t) {
-      e.dispatch(of({
+      e.dispatch(loadingStatePutFailure({
         key: l
       }));
       e.dispatch(FlashActions.error('An error occurred while adding an instance of this component.'));
@@ -253,7 +253,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
   } = t;
   let T = t.insertAsChildOfCanvas ? getSingletonSceneGraph().getCurrentPage()?.guid : t.insertAsChildOfGuid;
   let I = e.getState();
-  let S = atomStoreManager.get(TG).has(item.library_key);
+  let S = atomStoreManager.get(resourceDataAndPresetKeysV2SetAtom).has(item.library_key);
   let v = async () => {
     let t = _$$s2(I);
     e.dispatch($$tG17({
@@ -416,7 +416,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
   } = t;
   let T = t.insertAsChildOfCanvas ? getSingletonSceneGraph().getCurrentPage()?.guid : t.insertAsChildOfGuid;
   let I = e.getState();
-  let S = atomStoreManager.get(TG).has(item.library_key);
+  let S = atomStoreManager.get(resourceDataAndPresetKeysV2SetAtom).has(item.library_key);
   let v = async () => {
     let t = _$$s2(I);
     e.dispatch($$tG17({
@@ -1141,10 +1141,10 @@ let $$to21 = createOptimistThunk((e, t) => {
   }
 });
 let $$tl11 = createOptimistThunk((e, t) => {
-  e.dispatch(yH({
+  e.dispatch(loadingStateDelete({
     key: yD(t.openFileKey)
   }));
-  e.dispatch(yH({
+  e.dispatch(loadingStateDelete({
     key: iw(t.openFileKey)
   }));
 });
@@ -1171,7 +1171,7 @@ let $$t_45 = async (e, t, r, n) => {
   atomStoreManager.set($$tg22, 'loading');
   let a = (n = n ?? lG(r)).loadingKey;
   VP(r.getState().loadingState, a) && (await n.promise);
-  r.dispatch(Cx({
+  r.dispatch(loadingStatePutLoading({
     key: a
   }));
   i.editorType === 'whiteboard' && (await kw);
@@ -1202,7 +1202,7 @@ let $$t_45 = async (e, t, r, n) => {
       let t = e.data.meta.components;
       let n = e.data.meta.state_groups;
       let a = e.data.meta.files;
-      r.dispatch(uo({
+      r.dispatch(batchPutFileAction({
         files: a,
         subscribeToRealtime: !0
       }));
@@ -1219,7 +1219,7 @@ let $$t_45 = async (e, t, r, n) => {
     n.callbackForComponent?.(!1);
   }
   n.resetPromise();
-  r.dispatch(yH({
+  r.dispatch(loadingStateDelete({
     key: a
   }));
   n.callback();
@@ -1236,7 +1236,7 @@ export async function $$tE47(e, t, r) {
       source: r
     });
     let i = n.data.meta.file;
-    i && e.dispatch(yJ({
+    i && e.dispatch(filePutAction({
       file: i
     }));
     let a = n.data.meta.component || null;
@@ -1325,7 +1325,7 @@ export async function $$tS13(e, t) {
     } = (await _$$Z.getLibraryStyleByKey({
       styleKey: t
     })).data.meta;
-    file && e.dispatch(yJ({
+    file && e.dispatch(filePutAction({
       file
     }));
     teamLibraryCache.getCanvas(style);
@@ -1361,13 +1361,13 @@ export async function $$tA52(e) {
   let i = _$$Z.getLibraryPublishedAndMovedComponents({
     openFileKey: r.key
   });
-  _$$N(i, {
+  setupLoadingStateHandler(i, {
     dispatch: e.dispatch
   }, n);
   Ys.add(n);
   try {
     let t = await i;
-    e.dispatch(uo({
+    e.dispatch(batchPutFileAction({
       files: t.data.meta.files,
       subscribeToRealtime: !0
     }));
@@ -1404,7 +1404,7 @@ let tC = async (e, t) => {
   let n = function (e) {
     return `LIBRARY${e ? `_${e}` : ''}'_STATS'`;
   }(t);
-  _$$N(r, {
+  setupLoadingStateHandler(r, {
     dispatch: e
   }, n);
   try {
@@ -1423,7 +1423,7 @@ let tC = async (e, t) => {
     let h = new Set();
     let m = {};
     for (let e of n) (e.num_components !== 0 || e.num_styles !== 0 || e.num_variable_collections !== 0 || e.num_variables !== 0 || e.num_module_assets !== 0) && (e.team_id && !h.has(e.team_id) && (h.add(e.team_id), c++), p.push(e), _.push(e.file), e.thumbnail_url && (m[e.library_key] = e.thumbnail_url), i += e.num_components, s += e.num_styles, o += e.num_variable_collections, l += e.num_variables, e.num_state_groups = 0, a += e.num_state_groups, d += e.num_module_assets, u++);
-    _.length > 0 && e(uo({
+    _.length > 0 && e(batchPutFileAction({
       files: _,
       subscribeToRealtime: !1
     }));
@@ -1458,7 +1458,7 @@ export function $$tR19(e, t = {}) {
   let s = useSetAtom(qU);
   handleStatusChangeEffect(a, e => {
     let t = e.files.map(e => e.file);
-    t.length > 0 && n(uo({
+    t.length > 0 && n(batchPutFileAction({
       files: t,
       subscribeToRealtime: !1
     }));
@@ -1696,12 +1696,12 @@ let $$t$51 = createOptimistThunk(e => {
   }));
 });
 let tX = createOptimistThunk(e => {
-  e.getState().userFlags.has_inserted_component || e.dispatch(_$$b({
+  e.getState().userFlags.has_inserted_component || e.dispatch(postUserFlag({
     has_inserted_component: !0
   }));
 });
 let $$tq29 = createOptimistThunk(e => {
-  e.getState().userFlags.has_opened_libraries_modal || e.dispatch(_$$b({
+  e.getState().userFlags.has_opened_libraries_modal || e.dispatch(postUserFlag({
     has_opened_libraries_modal: !0
   }));
 });

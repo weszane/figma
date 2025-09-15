@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectWithShallowEqual } from "../905/103090";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { cW, Be, $1 } from "../figma_app/844435";
 import { getPluginVersion, isDevWithOnlyCodegen, getFullscreenViewEditorType } from "../figma_app/300692";
 import { ResourceType } from "../figma_app/45218";
@@ -55,9 +55,9 @@ export function $$m1(e, t, i) {
       children: w
     } : {
       callback: () => {
-        "figma" === getFullscreenViewEditorType() && (g(_$$b({
+        "figma" === getFullscreenViewEditorType() && (g(postUserFlag({
           seen_published_plugin_onboarding_modal: !0
-        })), g(_$$b({
+        })), g(postUserFlag({
           seen_development_plugin_onboarding_modal: !0
         })));
         i();
@@ -70,9 +70,9 @@ export function $$m1(e, t, i) {
       children: T
     } : {
       callback: () => {
-        "figma" === getFullscreenViewEditorType() && (g(_$$b({
+        "figma" === getFullscreenViewEditorType() && (g(postUserFlag({
           seen_published_plugin_onboarding_modal: !0
-        })), g(_$$b({
+        })), g(postUserFlag({
           seen_development_plugin_onboarding_modal: !0
         })));
         t();

@@ -9,7 +9,7 @@ import { YW } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { trackContextViewed } from "../figma_app/314264";
 import { Cn } from "../905/862913";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { Ho } from "../figma_app/878651";
 import { O7 } from "../figma_app/578832";
@@ -40,7 +40,7 @@ function j({
   let [o, a] = useState(void 0);
   let [d, u] = useState(!1);
   let [m, p] = useState(!1);
-  let x = useAtomWithSubscription(kS);
+  let x = useAtomWithSubscription(userIdAtom);
   useEffect(() => {
     if (!e) return;
     let t = t => {

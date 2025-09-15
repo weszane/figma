@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
 import { sf } from "../905/929976";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
 import { getSelectedFile } from "../905/766303";
 import { fullscreenValue } from "../figma_app/455680";
@@ -366,7 +366,7 @@ let $$ed0 = createOptimistThunk(async (e, t) => {
     let i = await fileApiHandler.getSourceFileUpdatedInfo({
       branchFileKey: t.branchFileKey
     });
-    e.dispatch(yJ({
+    e.dispatch(filePutAction({
       file: i.data.meta.source
     }));
   } catch (e) {

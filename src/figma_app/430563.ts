@@ -6,7 +6,7 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { yH } from "../figma_app/714946";
+import { loadingStateDelete } from "../figma_app/714946";
 import { getSelectedFile } from "../905/766303";
 import { td } from "../figma_app/646357";
 import { J } from "../905/252202";
@@ -27,7 +27,7 @@ let $$I0 = createOptimistThunk((e, {
     let a = n.editor_type ?? "design";
     (!0 === r || "design" === a && r.design || "whiteboard" === a && r.figjam) && (e.getState().leftPanel.activeTab === UserInterfaceElements.ASSETS || e.getState().universalInsertModal.showing ? e.dispatch(_$$n({
       libraryKey: t
-    })) : e.dispatch(yH({
+    })) : e.dispatch(loadingStateDelete({
       key: yD(n.key)
     })));
   }

@@ -2,8 +2,8 @@ import { useLayoutEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
-import { k as _$$k } from "../905/22009";
-import { L } from "../905/178090";
+import { editorUtilities as _$$k } from "../905/22009";
+import { ResourceTypes } from "../905/178090";
 export function $$d4(e = _$$k.Editors.ALL, t, r) {
   switch (e) {
     case _$$k.Editors.ALL:
@@ -12,9 +12,9 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.MIXED
+            resourceType: ResourceTypes.BrowseResourceTypes.MIXED
           };
-        case L.SearchResourceTypes.PROFILES:
+        case ResourceTypes.SearchResourceTypes.PROFILES:
           return {
             editorType: _$$k.Editors.ALL,
             resourceType: t
@@ -27,7 +27,7 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
       }
     case _$$k.Editors.FIGMA:
       switch (t) {
-        case L.BrowseResourceTypes.FILES:
+        case ResourceTypes.BrowseResourceTypes.FILES:
           if (r) return {
             editorType: _$$k.Editors.ALL,
             resourceType: t
@@ -39,9 +39,9 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.MIXED
+            resourceType: ResourceTypes.BrowseResourceTypes.MIXED
           };
-        case L.SearchResourceTypes.PROFILES:
+        case ResourceTypes.SearchResourceTypes.PROFILES:
           return {
             editorType: _$$k.Editors.ALL,
             resourceType: t
@@ -54,16 +54,16 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
       }
     case _$$k.Editors.SITES:
       switch (t) {
-        case L.BrowseResourceTypes.FILES:
+        case ResourceTypes.BrowseResourceTypes.FILES:
           return {
             editorType: e,
             resourceType: t
           };
-        case L.BrowseResourceTypes.MIXED:
+        case ResourceTypes.BrowseResourceTypes.MIXED:
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.FILES
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES
           };
         default:
           return {
@@ -74,16 +74,16 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
     case _$$k.Editors.FIGMAKE:
       return {
         editorType: e,
-        resourceType: t ?? L.BrowseResourceTypes.MIXED
+        resourceType: t ?? ResourceTypes.BrowseResourceTypes.MIXED
       };
     case _$$k.Editors.COOPER:
       switch (t) {
-        case L.BrowseResourceTypes.FILES:
+        case ResourceTypes.BrowseResourceTypes.FILES:
           return {
             editorType: e,
             resourceType: t
           };
-        case L.BrowseResourceTypes.PLUGINS:
+        case ResourceTypes.BrowseResourceTypes.PLUGINS:
           if (getFeatureFlags().buzz_plugins) return {
             editorType: e,
             resourceType: t
@@ -92,11 +92,11 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
             editorType: _$$k.Editors.ALL,
             resourceType: t
           };
-        case L.BrowseResourceTypes.MIXED:
+        case ResourceTypes.BrowseResourceTypes.MIXED:
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.FILES
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES
           };
         default:
           return {
@@ -107,19 +107,19 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
     case _$$k.Editors.PROTOTYPE:
       if (r) return {
         editorType: _$$k.Editors.ALL,
-        resourceType: t ?? L.BrowseResourceTypes.MIXED
+        resourceType: t ?? ResourceTypes.BrowseResourceTypes.MIXED
       };
       switch (t) {
-        case L.BrowseResourceTypes.FILES:
+        case ResourceTypes.BrowseResourceTypes.FILES:
           return {
             editorType: e,
             resourceType: t
           };
-        case L.BrowseResourceTypes.MIXED:
+        case ResourceTypes.BrowseResourceTypes.MIXED:
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.FILES
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES
           };
         default:
           return {
@@ -129,16 +129,16 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
       }
     case _$$k.Editors.DEV_MODE:
       switch (t) {
-        case L.BrowseResourceTypes.PLUGINS:
+        case ResourceTypes.BrowseResourceTypes.PLUGINS:
           return {
             editorType: e,
             resourceType: t
           };
-        case L.BrowseResourceTypes.MIXED:
+        case ResourceTypes.BrowseResourceTypes.MIXED:
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.PLUGINS
+            resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS
           };
         default:
           return {
@@ -148,17 +148,17 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
       }
     case _$$k.Editors.SLIDES:
       switch (t) {
-        case L.BrowseResourceTypes.FILES:
-        case L.BrowseResourceTypes.PLUGINS:
+        case ResourceTypes.BrowseResourceTypes.FILES:
+        case ResourceTypes.BrowseResourceTypes.PLUGINS:
           return {
             editorType: e,
             resourceType: t
           };
-        case L.BrowseResourceTypes.MIXED:
+        case ResourceTypes.BrowseResourceTypes.MIXED:
         case void 0:
           return {
             editorType: e,
-            resourceType: L.BrowseResourceTypes.FILES
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES
           };
         default:
           return {

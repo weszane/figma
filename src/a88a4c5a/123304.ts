@@ -31,7 +31,7 @@ import { z4 } from '../905/37051';
 import { ModalRootComponent } from '../905/38914';
 import { $ as _$$$2 } from '../905/43354';
 import { k as _$$k3 } from '../905/44647';
-import { V9 } from '../905/72677';
+import { resourceDataToSubscriptionMapAtom } from '../905/72677';
 import { n as _$$n } from '../905/79930';
 import { o as _$$o4 } from '../905/89370';
 import { m as _$$m } from '../905/99004';
@@ -72,7 +72,7 @@ import { _ as _$$_ } from '../905/381235';
 import { deepEqual } from '../905/382883';
 import { e as _$$e3 } from '../905/383776';
 import { u as _$$u } from '../905/389684';
-import { J9 } from '../905/401885';
+import { mapAndAggregateResources } from '../905/401885';
 import { _ as _$$_3 } from '../905/410717';
 import { F as _$$F2 } from '../905/422355';
 import { rq as _$$rq } from '../905/425180';
@@ -152,7 +152,7 @@ import { w as _$$w3 } from '../905/955293';
 import { d$ } from '../905/958097';
 import { O as _$$O4 } from '../905/969533';
 import { TextWithTruncation } from '../905/984674';
-import { b as _$$b2 } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { X as _$$X5 } from '../905/999307';
 import { d as _$$d2 } from '../1156/154963';
 import { E as _$$E9 } from '../1156/200958';
@@ -265,7 +265,7 @@ import { J as _$$J3 } from '../figma_app/261874';
 import { N as _$$N } from '../figma_app/268271';
 import { nB as _$$nB, hE, jk, vo, wi, Wk, Y9 } from '../figma_app/272243';
 import { A5 } from '../figma_app/274104';
-import { te as _$$te } from '../figma_app/275462';
+import { alwaysFalseCallback2 } from '../figma_app/275462';
 import { s4 as _$$s2 } from '../figma_app/276332';
 import { useSubscription } from '../figma_app/288654';
 import { lS as _$$lS, cR, RI } from '../figma_app/297957';
@@ -299,7 +299,7 @@ import { useCurrentFileKey, selectCurrentFile, openFileAtom, openFileKeyAtom } f
 import { GV } from '../figma_app/532170';
 import { r8 as _$$r2, W3 } from '../figma_app/537824';
 import { eF as _$$eF, iS as _$$iS, Op as _$$Op, rT as _$$rT, KV, ky, L2, yd, zZ } from '../figma_app/542202';
-import { r1 as _$$r, Fu } from '../figma_app/545877';
+import { userFlagExistsAtomFamily, userFlagAtomFamily } from '../figma_app/545877';
 import { BI } from '../figma_app/546509';
 import { _9, Dm as _$$Dm, fR, gx, p6 } from '../figma_app/548615';
 import { k as _$$k4 } from '../figma_app/564183';
@@ -345,7 +345,7 @@ import { dL as _$$dL } from '../figma_app/825489';
 import { oV as _$$oV, FR, xp } from '../figma_app/827216';
 import { TrackedButton, TrackingProvider } from '../figma_app/831799';
 import { bL as _$$bL2, wi as _$$wi, gR } from '../figma_app/861123';
-import { UQ } from '../figma_app/864723';
+import { isStarterUserAtom } from '../figma_app/864723';
 import { C as _$$C } from '../figma_app/872960';
 import { s as _$$s4 } from '../figma_app/874592';
 import { bj, Re, Yq } from '../figma_app/880974';
@@ -1632,8 +1632,8 @@ function t2(e, t) {
   let l = Date.now();
   return e.getTime() <= l - 864e5 * t;
 }
-let t5 = J9([Fu('seen_figmake_promo_overlay'), Fu('seen_figmake_file_creation_tooltip')], ([e, t]) => !!(e && t2(new Date(e.updatedAt), 14)) && (!t || t2(new Date(t.updatedAt), 3)));
-let t3 = _$$r('has_created_figma_make_file');
+let t5 = mapAndAggregateResources([userFlagAtomFamily('seen_figmake_promo_overlay'), userFlagAtomFamily('seen_figmake_file_creation_tooltip')], ([e, t]) => !!(e && t2(new Date(e.updatedAt), 14)) && (!t || t2(new Date(t.updatedAt), 3)));
+let t3 = userFlagExistsAtomFamily('has_created_figma_make_file');
 function t4() {
   let e = useAtomWithSubscription(t5);
   let t = useAtomWithSubscription(t3);
@@ -2029,7 +2029,7 @@ function lw({
     })
   });
 }
-let lR = _$$r('dismissed_starting_points_templates_modal');
+let lR = userFlagExistsAtomFamily('dismissed_starting_points_templates_modal');
 function lL() {
   let e = wA();
   let t = !!getFeatureFlags().starting_points_modal;
@@ -2042,7 +2042,7 @@ function lL() {
   let x = getUserId();
   let p = c?.creatorId === x;
   let h = useAtomWithSubscription(Fy);
-  let m = useAtomWithSubscription(UQ);
+  let m = useAtomWithSubscription(isStarterUserAtom);
   let f = !_$$f('not_gen_0');
   let y = useAtomWithSubscription(lR);
   let _ = getInitialOptions().starting_points;
@@ -2060,7 +2060,7 @@ function lL() {
     }));
   }, [t, p, s, d, isShowing, l, f, m, u, _, y, show]), isShowing) ? jsx(lw, {
     onClose: () => {
-      y.data || e(_$$b2({
+      y.data || e(postUserFlag({
         dismissed_starting_points_templates_modal: !0
       }));
       complete();
@@ -2096,7 +2096,7 @@ function lV() {
   let d = _$$aV();
   let u = selectCurrentFile();
   let c = selectCurrentUser();
-  let p = _$$te();
+  let p = alwaysFalseCallback2();
   let h = !!_$$f(bo);
   let m = _$$zl(l$).currentState === 'ui3_onboarding_was_shown_in_current_session';
   let f = _$$zl(_$$j3).currentState === 'no_figma_basics_onboarding_was_shown_in_current_session';
@@ -2105,7 +2105,7 @@ function lV() {
   let b = u?.canEdit;
   let j = d4(e => e.leftPanel.activeTab === UserInterfaceElements.LAYERS);
   if (_$$E(uniqueId, ['Reset Visual Assets Tooltips', _$$io], () => {
-    c && u && a(_$$b2(_$$g3));
+    c && u && a(postUserFlag(_$$g3));
   }), useEffect(() => {
     !p() || !b || y || h || m || f || !_ || d || !j || isShowing || show();
   }, [show, p, b, h, _, d, m, f, isShowing, y, j]), useEffect(() => {
@@ -7821,7 +7821,7 @@ function s0({
   let l = useCurrentUserOrg();
   let i = Oe(l);
   let r = fV(t);
-  let s = useAtomWithSubscription(V9);
+  let s = useAtomWithSubscription(resourceDataToSubscriptionMapAtom);
   let o = t ? s[t]?.hubFileId ?? null : null;
   return jsxs(Fragment, {
     children: [jsx('span', {
@@ -9735,7 +9735,7 @@ let oM = memo(() => {
     let t = wA();
     let l = _$$f('seen_linter_home_view');
     useEffect(() => {
-      l || e || t(_$$b2({
+      l || e || t(postUserFlag({
         seen_linter_home_view: !0
       }));
     }, [l, t, e]);
@@ -9913,7 +9913,7 @@ function oP() {
     useEffect(() => {
       if (!e) return;
       let l = () => {
-        t(_$$b2({
+        t(postUserFlag({
           seen_linter_libraries_callout: !0
         }));
       };

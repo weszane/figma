@@ -42,7 +42,7 @@ import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
 import { XW } from "../905/182534";
 import { gt, Ri, j3, Gb, ht } from "../figma_app/327577";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { r as _$$r } from "../905/520829";
 import { getDesignFileUrl } from "../905/612685";
 import { uQ, eM as _$$eM, J1 } from "../figma_app/20203";
@@ -610,7 +610,7 @@ function eg(e) {
   let l = result.model;
   let d = useCallback(e => {
     e.preventDefault();
-    t(yJ({
+    t(filePutAction({
       file: result.model
     }));
     t(Gb({

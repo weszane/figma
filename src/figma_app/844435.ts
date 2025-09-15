@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { P as _$$P, o as _$$o } from "../905/717906";
 import { VisualBellActions } from "../905/302958";
 import { AC } from "../figma_app/777551";
-import { L as _$$L } from "../905/178090";
+import { ResourceTypes } from "../905/178090";
 import { Vl, mV } from "../905/837497";
 import { f1, O8, Qi } from "../figma_app/559491";
 import { my, E3, m0, pQ } from "../figma_app/976749";
@@ -868,7 +868,7 @@ export function $$eG9(e) {
         let n = {
           query: t,
           current_org_id: u || "",
-          resource_type: _$$L.BrowseResourceTypes.PLUGINS,
+          resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
           editor_type: e,
           did_org_search: p,
           error: r?.message,
@@ -937,7 +937,7 @@ export function $$eV17(e) {
         let n = {
           query: t,
           current_org_id: u || "",
-          resource_type: _$$L.BrowseResourceTypes.WIDGETS,
+          resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
           editor_type: e,
           did_org_search: p,
           error: r?.message,

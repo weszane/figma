@@ -64,7 +64,7 @@ export interface CustomHistory {
   reload: (reason: string, metadata?: Record<string, unknown>) => void
   reloadAndWaitForever: (reason: string, metadata?: Record<string, unknown>) => Promise<void>
   reloadEmbed: (reason: string) => Promise<void>
-  redirect: (url: string, inTopFrame?: boolean) => void
+  redirect: (url: string, inTopFrame?: any) => void
   redirectAndWaitForever: (url: string, inTopFrame?: boolean) => Promise<void>
   postRedirect: (url: string, target?: string) => void
   unsafeRedirect: (url: string, target?: string, container?: HTMLElement) => void

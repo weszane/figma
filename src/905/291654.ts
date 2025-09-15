@@ -14,7 +14,7 @@ import { analyticsEventManager } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
 import { If } from '../905/714538';
 import { D7, rj, T_, V1 } from '../905/946258';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { FEditorType } from '../figma_app/53721';
 import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
 import { mapFileToProductType } from '../figma_app/314264';
@@ -240,7 +240,7 @@ let k = registerModal(e => {
         }), jsxs(jk, {
           children: [jsx($z, {
             onClick: () => {
-              t(_$$b({
+              t(postUserFlag({
                 [eulaConfig.declinedUserFlag]: !0
               }));
               k('decline');
@@ -251,7 +251,7 @@ let k = registerModal(e => {
             children: renderI18nText('community.eula.disagree')
           }), jsx($z, {
             onClick: () => {
-              t(_$$b({
+              t(postUserFlag({
                 [eulaConfig.acceptedUserFlag]: !0
               }));
               k('accept');

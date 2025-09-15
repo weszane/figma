@@ -13,7 +13,7 @@ import { PE } from '../figma_app/251115';
 import { f as _$$f } from '../figma_app/443973';
 import { Vg } from '../figma_app/460003';
 import { p3, V2 } from '../figma_app/578955';
-import { w0 } from '../figma_app/594947';
+import { fetchDynamicConfig } from '../figma_app/594947';
 import { RB } from '../figma_app/626952';
 import { isInteractionOrEvalMode } from '../figma_app/897289';
 let $$T2 = atom(null);
@@ -28,7 +28,7 @@ export function $$S1() {
   let x = useRef(0);
   !async function () {
     if (!isInteractionOrEvalMode() && !getInitialOptions().e2e_traffic) {
-      let e = await w0('autosuggest_prop_shadow_reads');
+      let e = await fetchDynamicConfig('autosuggest_prop_shadow_reads');
       A.current = e.get('delayForComparisonMs', 3e5);
       x.current = e.get('proportionLogged', 0);
     }

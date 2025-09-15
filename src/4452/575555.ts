@@ -3,7 +3,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { um } from '../905/14223';
-import { s_ } from '../905/17223';
+import { ModalCloseButton } from '../905/17223';
 import { d as _$$d2 } from '../905/49800';
 import { rw } from '../905/54367';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
@@ -626,7 +626,7 @@ function eI(e) {
     children: [jsx('div', {
       className: 'mobile_settings_tool_bar--tabContainer--yD8Zf',
       children: e.tabs
-    }), jsx(s_, {
+    }), jsx(ModalCloseButton, {
       dispatch: e.dispatch,
       customStyle: {
         position: 'static',
@@ -1354,7 +1354,7 @@ function tI(e) {
     children: [jsx(_$$i, {
       containerClassName: `${l ? 'team_settings_modal--toolBarSettingsOnly--281il team_settings_modal--toolBarContainer--O-2hM' : 'team_settings_modal--toolBarContainerFullWidth--XliLu team_settings_modal--toolBarContainer--O-2hM'} team_settings_modal--borderRadius--NeGkl`,
       tabs: d
-    }), jsx(s_, {
+    }), jsx(ModalCloseButton, {
       dispatch: e.dispatch,
       className: l ? 'team_settings_modal--settingsOnlyCloseButton--r1V-e' : 'team_settings_modal--settingsCloseButton--nkdXd',
       onClose: () => tS(e.dispatch, e.team, e.viewOnClose)

@@ -5,7 +5,7 @@ import { L_, Nr, HZ as _$$HZ } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { hm } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 let $$u3 = L_;
 let $$p4 = Nr;
 let $$m2 = _$$HZ;
@@ -19,7 +19,7 @@ let $$h1 = createOptimistThunk((e, {
   let d = XHR.post(`/api/profile/${i}/primary_user`, {
     new_primary_user_id: s
   });
-  N(d, e, l);
+  setupLoadingStateHandler(d, e, l);
   d.then(({
     data: i
   }) => {
@@ -52,7 +52,7 @@ let $$g0 = createOptimistThunk((e, {
   let p = XHR.del(`/api/profile/${i}/user`, {
     secondary_user_id: s
   });
-  N(p, e, d);
+  setupLoadingStateHandler(p, e, d);
   p.then(({
     data: i
   }) => {
@@ -86,7 +86,7 @@ let $$f5 = createOptimistThunk((e, {
     primary_user_id: t,
     secondary_user_id: i
   });
-  N(d, e, s);
+  setupLoadingStateHandler(d, e, s);
   d.then(({
     data: t
   }) => {

@@ -12,7 +12,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { clearSelection } from "../figma_app/741237";
 import { Qs, iN, sx as _$$sx } from "../905/992395";
-import { of, Cx, x2 } from "../figma_app/714946";
+import { loadingStatePutFailure, loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
 let $$E11 = createActionCreator("UNSET_HOVERED_IN_MODAL_VOTE_PIN");
 let $$y8 = createActionCreator("SET_HOVERED_IN_MODAL_VOTE_PIN");
 let $$b13 = createActionCreator("DESELECT_VOTE_PIN");
@@ -30,7 +30,7 @@ let $$S6 = createOptimistThunk(async (e, {
   let s = $$v16(fileKey);
   let o = "end-voting-session-failed";
   let l = () => {
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: s
     }));
     e.dispatch(VisualBellActions.enqueue({
@@ -38,7 +38,7 @@ let $$S6 = createOptimistThunk(async (e, {
       message: getI18nString("voting.visual_bell.end_voting_session_failed")
     }));
   };
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: s
   }));
   e.dispatch(VisualBellActions.dequeue({
@@ -49,7 +49,7 @@ let $$S6 = createOptimistThunk(async (e, {
   }).then(({
     status: r
   }) => {
-    200 === r ? (e.dispatch(x2({
+    200 === r ? (e.dispatch(loadingStatePutSuccess({
       key: s
     })), "MeetingsPanel" === t && atomStoreManager.set(Qs, {
       type: "SET_VIEW",
@@ -73,7 +73,7 @@ let $$A14 = createOptimistThunk((e, {
   if (!fileKey) return;
   let o = $$x0(fileKey);
   let d = () => {
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: o
     }));
     e.dispatch(VisualBellActions.enqueue({
@@ -81,7 +81,7 @@ let $$A14 = createOptimistThunk((e, {
       message: getI18nString("voting.visual_bell.start_voting_session_failed")
     }));
   };
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: o
   }));
   e.dispatch(VisualBellActions.dequeue({
@@ -93,7 +93,7 @@ let $$A14 = createOptimistThunk((e, {
     })), "MeetingsPanel" === a && atomStoreManager.get(Qs).activeToolModal === _$$sx.VOTING && atomStoreManager.set(Qs, {
       type: "SET_TOOL",
       payload: null
-    }), e.dispatch(x2({
+    }), e.dispatch(loadingStatePutSuccess({
       key: o
     })), trackEventAnalytics("start_voting_session", {
       source: t,

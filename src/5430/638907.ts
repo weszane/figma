@@ -4,7 +4,7 @@ import { AG } from "../figma_app/999312";
 import { M } from "../5430/704379";
 import { A } from "../5430/728674";
 import { ws } from "../figma_app/427318";
-import { L } from "../905/178090";
+import { ResourceTypes } from "../905/178090";
 import { vt } from "../figma_app/306946";
 import { Z_ } from "../figma_app/350203";
 import { isPlugin } from "../figma_app/45218";
@@ -33,7 +33,7 @@ export function $$f0(e) {
   if (resourcesLoading && customLoadingView) return jsx(Fragment, {
     children: customLoadingView
   });
-  let E = filterState.resourceType === L.BrowseResourceTypes.PLUGINS && (resourcesLoading || (totalResources ?? []).every(e => ws(e) ? e.resource_type === vt.PLUGIN : isPlugin(e)));
+  let E = filterState.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS && (resourcesLoading || (totalResources ?? []).every(e => ws(e) ? e.resource_type === vt.PLUGIN : isPlugin(e)));
   let S = [];
   if (E && (S = (totalResources ?? []).map(e => ws(e) ? e.content?.plugin : e).filter(e => void 0 !== e)), N) return jsx(fk, {
     resourceType: filterState.resourceType,

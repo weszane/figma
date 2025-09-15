@@ -14,7 +14,7 @@ import { sf } from "../905/34809";
 import { p as _$$p } from "../905/282607";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { sf as _$$sf } from "../905/929976";
-import { uo } from "../figma_app/78808";
+import { batchPutFileAction } from "../figma_app/78808";
 import { yJ, bE, Kc } from "../figma_app/598926";
 import { showModalHandler } from "../905/156213";
 import { nX } from "../905/466026";
@@ -50,7 +50,7 @@ let Y = createOptimistThunk((e, {
     e.getState().folders[t] ? e.dispatch(yJ({
       folder: r.folder
     })) : e.dispatch(bE(r.folder));
-    e.dispatch(uo({
+    e.dispatch(batchPutFileAction({
       files: r.files,
       subscribeToRealtime: !1
     }));
@@ -74,7 +74,7 @@ let $ = M4.Query({
       folderId: e.folderId,
       shouldShowOnlyTrashedFiles: !!e.shouldShowOnlyTrashedFiles
     });
-    t.dispatch(uo({
+    t.dispatch(batchPutFileAction({
       files: r.data.meta.files
     }));
     t.dispatch(nX({
@@ -176,7 +176,7 @@ let $$J0 = M4.PaginatedQuery({
     }
     let i = await getRequest(n);
     let a = i.data.meta;
-    r.dispatch(uo({
+    r.dispatch(batchPutFileAction({
       files: a.files
     }));
     r.dispatch(nX({

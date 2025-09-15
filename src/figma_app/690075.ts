@@ -1,34 +1,80 @@
-import { formatList } from "../figma_app/930338";
-import { getI18nString } from "../905/303541";
-import { cV } from "../figma_app/740025";
-export function $$s2(e, t, r) {
-  if (0 === e.length) return "";
-  if (1 === e.length) return r(e[0]);
-  let a = e.slice(0, t - 1);
-  let s = e.slice(t - 1);
-  0 === s.length && (s = [a[a.length - 1]], a = a.slice(0, a.length - 1));
-  let o = 1 === s.length ? r(s[0]) : getI18nString("community.resource.by_x_others", {
-    numPublishers: s.length
-  });
-  let l = a.map(r);
-  o && l.push(o);
-  return formatList(l);
+import { getI18nString } from '../905/303541'
+import { cV as getPublisherDetails } from '../figma_app/740025'
+import { formatList } from '../figma_app/930338'
+
+/**
+ * Formats a list of publisher names with internationalization support.
+ * Original function name: $$s2
+ * @param publishers - Array of publisher objects
+ * @param maxDisplay - Maximum number of publishers to display before grouping as "others"
+ * @param nameMapper - Function to map publisher object to display name
+ * @returns Formatted string of publisher names
+ */
+export function formatPublisherNames(publishers: any[], maxDisplay: number, nameMapper: (publisher: any) => string): string {
+  if (publishers.length === 0)
+    return ''
+
+  if (publishers.length === 1)
+    return nameMapper(publishers[0])
+
+  let displayed = publishers.slice(0, maxDisplay - 1)
+  let remaining = publishers.slice(maxDisplay - 1)
+
+  if (remaining.length === 0) {
+    remaining = [displayed[displayed.length - 1]]
+    displayed = displayed.slice(0, displayed.length - 1)
+  }
+
+  const othersLabel
+    = remaining.length === 1
+      ? nameMapper(remaining[0])
+      : getI18nString('community.resource.by_x_others', {
+          numPublishers: remaining.length,
+        })
+
+  const names = displayed.map(nameMapper)
+  if (othersLabel)
+    names.push(othersLabel)
+
+  return formatList(names)
 }
-export function $$o1(e) {
-  let t = cV(e);
-  if (t) return t.name;
-  let r = e.community_publishers.accepted;
-  return $$s2(r, r.length, e => e.name);
+
+/**
+ * Gets the display name for a publisher or formats multiple publisher names.
+ * Original function name: $$o1
+ * @param resource - Resource object containing publisher info
+ * @returns Publisher name or formatted publisher names
+ */
+export function getPublisherDisplayName(resource: any): string {
+  const publisherDetails = getPublisherDetails(resource)
+  if (publisherDetails)
+    return publisherDetails.name
+
+  const acceptedPublishers = resource.community_publishers.accepted
+  return formatPublisherNames(acceptedPublishers, acceptedPublishers.length, p => p.name)
 }
-export function $$l0(e) {
-  let t = e.community_publishers.accepted;
-  e.community_publishers.pending && (t = t.concat(e.community_publishers.pending));
-  return t.reduce((e, t) => {
-    let r = t.associated_users?.map(e => e.user_id) || [];
-    t.primary_user_id && e.push(t.primary_user_id);
-    return e.concat(r);
-  }, []);
+
+/**
+ * Collects all user IDs associated with accepted and pending publishers.
+ * Original function name: $$l0
+ * @param resource - Resource object containing publisher info
+ * @returns Array of user IDs
+ */
+export function collectPublisherUserIds(resource: any): string[] {
+  let publishers = resource.community_publishers.accepted as any[] || []
+  if (resource.community_publishers.pending) {
+    publishers = publishers.concat(resource.community_publishers.pending)
+  }
+
+  return publishers.reduce<string[]>((userIds, publisher) => {
+    const associatedUserIds = publisher.associated_users?.map((u: any) => u.user_id) || []
+    if (publisher.primary_user_id)
+      userIds.push(publisher.primary_user_id)
+    return userIds.concat(associatedUserIds)
+  }, [])
 }
-export const D = $$l0;
-export const VH = $$o1;
-export const eg = $$s2;
+
+// Export refactored names for consistency
+export const D = collectPublisherUserIds
+export const VH = getPublisherDisplayName
+export const eg = formatPublisherNames

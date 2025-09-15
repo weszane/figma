@@ -11,7 +11,7 @@ import { VisualBellActions } from "../905/302958";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { A } from "../905/956262";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { U } from "../905/455766";
 import { h as _$$h } from "../905/284399";
@@ -49,7 +49,7 @@ function I() {
   });
 }
 let $$T = "dismissed_mobile_replies_upsell";
-let M = r1($$T);
+let M = userFlagExistsAtomFamily($$T);
 let $$E1 = "commentSubmitted";
 export function $$N0() {
   let e = useAtomWithSubscription(M);

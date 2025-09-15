@@ -2,13 +2,13 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { atom, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { N as _$$N } from "../905/482239";
 import { zo, pQ } from "../figma_app/101956";
 import { d2, t as _$$t } from "../figma_app/579169";
-import { r1, qG } from "../figma_app/545877";
+import { userFlagExistsAtomFamily, userFlagsAtom } from "../figma_app/545877";
 import { jj } from "../figma_app/797994";
 import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
@@ -24,11 +24,11 @@ import { nWd } from "../figma_app/6204";
 let $$x0 = atom(!1);
 let N = () => new Date(Date.now() - 1e4);
 let C = "Move Drafts Nudge -";
-let w = r1("dismissed_move_drafts_nudge");
+let w = userFlagExistsAtomFamily("dismissed_move_drafts_nudge");
 export function $$O1() {
   let e = useAtomWithSubscription(openFileAtom);
   let t = useAtomWithSubscription(d2);
-  let r = useAtomWithSubscription(qG);
+  let r = useAtomWithSubscription(userFlagsAtom);
   let O = useEditorType();
   let R = useAtomWithSubscription(zo);
   let L = jO();
@@ -54,7 +54,7 @@ export function $$O1() {
       canShow: (t, r, n, i, a, s, l) => {
         let d = !!e && isTeamFolderV2(e.project);
         let c = O === FFileType.WHITEBOARD && s || O === FFileType.DESIGN && L;
-        return r === qo.PERSONAL && c && (i || d) && !jj(n, "ran_move_drafts_nudge_machine") && (G(_$$b({
+        return r === qo.PERSONAL && c && (i || d) && !jj(n, "ran_move_drafts_nudge_machine") && (G(postUserFlag({
           ran_move_drafts_nudge_machine: !0
         })), !0) && !l && !!a && !!t;
       },

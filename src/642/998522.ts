@@ -7,7 +7,7 @@ import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zC } from "../figma_app/186343";
 import { aV } from "../figma_app/722362";
 import { Fk } from "../figma_app/167249";
@@ -18,7 +18,7 @@ import { F_ } from "../905/858282";
 import { vlG } from "../figma_app/6204";
 let $$C1 = "ui3-layers-horizontal-scroll-onboarding-key";
 let $$j2 = "ui2-layers-horizontal-scroll-onboarding-key";
-let v = r1("seen_ui3_layers_horizontal_scroll_overlay");
+let v = userFlagExistsAtomFamily("seen_ui3_layers_horizontal_scroll_overlay");
 export function $$S0() {
   let e = aV();
   let t = useAtomWithSubscription(Fy);

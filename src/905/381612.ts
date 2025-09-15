@@ -7,7 +7,7 @@ import { createOptimistThunk } from "../905/350402";
 import { ts } from "../figma_app/49598";
 import { W9, b6 } from "../figma_app/559491";
 import { PI } from "../figma_app/933328";
-import { Cx, x2 } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStatePutSuccess } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
 import { nM, QN, Vu, Kq, jS, f0, jX, Ks, lD, WR, cu, pj, F9, v8, ay, KA } from "../figma_app/147952";
 import { MF } from "../figma_app/646357";
@@ -38,7 +38,7 @@ let T = createOptimistThunk(async (e, t, {
   let d = new Set();
   for (let e of o) n.hubFiles[e.id] || d.add(e.id);
   if (0 === d.size && 0 === l.length) return;
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: i
   }));
   let c = [];
@@ -83,7 +83,7 @@ let T = createOptimistThunk(async (e, t, {
       recentTemplates: n
     }));
   }
-  e.dispatch(x2({
+  e.dispatch(loadingStatePutSuccess({
     key: i
   }));
 });
@@ -96,17 +96,17 @@ let k = createOptimistThunk(async (e, t, {
     let t = getCurrentPluginVersionId(n.publishedCanvasWidgetVersions, e.id);
     !(t && n.publishedCanvasWidgetVersions[e.id]?.[t]) && e.version && (r[e.id] || (r[e.id] = []), e.version && r[e.id].push(e.version));
   }
-  if (e.dispatch(Cx({
+  if (e.dispatch(loadingStatePutLoading({
     key: i
   })), 0 === Object.keys(r).length) {
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: i
     }));
     return;
   }
   Object.keys(r).length > 0 && (await W9(r, n.currentUserOrgId), e.dispatch(b6({
     widgetIDToVersions: r
-  })), e.dispatch(x2({
+  })), e.dispatch(loadingStatePutSuccess({
     key: i
   })));
 });

@@ -7,7 +7,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { j as _$$j } from "../5430/272190";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
@@ -180,7 +180,7 @@ export function $$E0(e) {
     bannerContent
   } = D;
   let U = () => {
-    E(_$$b({
+    E(postUserFlag({
       [userFlag]: !0
     }));
   };

@@ -4,7 +4,7 @@ import { SecureLink, ButtonBasePrimary } from "../figma_app/637027";
 import { LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getLocalizedPath } from "../905/303541";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { jg, M7, Et, cc, O2, W as _$$W, Jo, Qv, aK, N5, I1, iv, Ed, nm, Xq } from "../c5e2cae0/763339";
 import { A } from "../5724/933949";
 var i = r;
@@ -35,7 +35,7 @@ export function $$p0() {
   });
 }
 export function $$h1(e) {
-  let t = new vr(e.currency);
+  let t = new CurrencyFormatter(e.currency);
   return jsx("div", {
     className: jg,
     children: jsxs("div", {

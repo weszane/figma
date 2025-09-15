@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { Tw } from "../figma_app/755939";
 import { yB } from "../figma_app/334505";
 import { sf } from "../905/929976";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
 import { E as _$$E2 } from "../905/453826";
@@ -84,7 +84,7 @@ export function $$N2() {
       type: "button",
       label: renderI18nText("cooper.onboarding.welcome.primary_cta"),
       onClick: () => {
-        y?.(_$$b({
+        y?.(postUserFlag({
           [WW]: !0
         }));
         complete();

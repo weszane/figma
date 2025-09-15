@@ -14,7 +14,7 @@ import { D as _$$D } from "../905/251759";
 import { c as _$$c2 } from "../905/370443";
 import { withTrackedClick } from "../figma_app/831799";
 import { Um } from "../905/848862";
-import { _Z, B9 } from "../figma_app/514043";
+import { isNonUsdUserCurrency, getAllowedCartCurrencies } from "../figma_app/514043";
 import { BillingCycle } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { _ as _$$_2 } from "../c5e2cae0/57596";
@@ -41,7 +41,7 @@ export function $$b0({
   trackingProperties: M
 }) {
   let R = !!t;
-  let O = _Z();
+  let O = isNonUsdUserCurrency();
   let D = Um();
   let [B, L] = function (e, t, a, s) {
     let [i, l] = useState(!1);
@@ -79,7 +79,7 @@ export function $$b0({
           }), jsx(_$$D, {
             currency: c,
             dropdownShown: D,
-            supportedCurrencies: B9(),
+            supportedCurrencies: getAllowedCartCurrencies(),
             changeCurrency: e => {
               A(e);
             },

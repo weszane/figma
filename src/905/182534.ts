@@ -2,7 +2,7 @@ import { vk, mc, N7, QV } from "../905/508367";
 import { debugState } from "../905/407919";
 import { gN, dm } from "../figma_app/976345";
 import { sf } from "../905/929976";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { Pj, Ns, PI } from "../905/977218";
 import { Tq } from "../905/697795";
 import { buildFileUrl } from "../905/612685";
@@ -70,7 +70,7 @@ export function $$x8(e, t, i, n, r, a) {
   }));
 }
 export function $$S2(e, t, i, r, a) {
-  e(yJ({
+  e(filePutAction({
     file: t
   }));
   N7(i, t.parent_org_id, r, t.team_id) ? QV({

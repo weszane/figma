@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import n from "classnames";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { G } from "../figma_app/361869";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { tH } from "../905/751457";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { P as _$$P } from "../905/347284";
@@ -22,7 +22,7 @@ import { Oq } from "../905/332483";
 import { K } from "../905/3140";
 import { F } from "../905/224";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { useSuspendCurrentPrivilegedPlan } from "../figma_app/465071";
 import { ol } from "../figma_app/598018";
 import { Ju, IX } from "../905/712921";
@@ -167,7 +167,7 @@ function U(e) {
   let B = () => {
     O(hideModal());
   };
-  let L = new vr(_);
+  let L = new CurrencyFormatter(_);
   return jsx(ModalView, {
     className: yl,
     hide: B,
@@ -183,7 +183,7 @@ function U(e) {
             className: hx,
             children: renderI18nText("org_upgrade.single_team.get_more_out_of_figma_as_you_grow")
           })
-        }), jsx(Jn, {
+        }), jsx(CloseButton, {
           className: _$$b,
           onClick: B,
           innerText: "close"

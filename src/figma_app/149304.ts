@@ -6,7 +6,7 @@ import { customHistory } from "../905/612521";
 import { sendMetric } from "../905/485103";
 import { BrowserInfo, isMobilePlatform, getIsLinux, getIsMac, getIsWindows, getIsChromeOS } from "../figma_app/778880";
 import { logError } from "../905/714362";
-import { gP } from "../figma_app/594947";
+import { getInitialDynamicConfig } from "../figma_app/594947";
 import { PN } from "../figma_app/897289";
 import { X } from "../905/683920";
 import { D } from "../905/347702";
@@ -16,7 +16,7 @@ export let $$f2 = D(() => {
   if ($$A0() !== GLContextType.WebGPU) {
     if (BrowserInfo.safari || BrowserInfo.firefox || isMobilePlatform || getIsLinux() && !PN()) return !1;
     if (BrowserInfo.chrome) {
-      let e = gP("webgpu_platform_device_config").get("minimum_chromium_version", 0);
+      let e = getInitialDynamicConfig("webgpu_platform_device_config").get("minimum_chromium_version", 0);
       if (0 > BrowserInfo.compareVersions([BrowserInfo.version.toString(), e.toString()]) && !PN()) return !1;
     }
   }
@@ -42,7 +42,7 @@ export function $$T6() {
         let e = document.createElement("canvas");
         try {
           return e.getContext("webgl");
-        } catch (e) { }
+        } catch (e) {}
         return null;
       }();
       t || (e = 1);
@@ -55,7 +55,7 @@ export function $$T6() {
         };
         sendMetric("page_load", n).catch(e => console.error("Error trying to send tags", n, e));
       }(t);
-    } catch (e) { }
+    } catch (e) {}
     return e;
   }());
   return window.webGLTestResult;
@@ -63,7 +63,7 @@ export function $$T6() {
 class I {
   constructor() {
     this._graphicsBackendOverride = GLContextType.None;
-    if (getFeatureFlags().webgl2_override) this._graphicsBackendOverride = GLContextType.WebGL2; else if (getFeatureFlags().webgl1_override) this._graphicsBackendOverride = GLContextType.WebGL1; else if (getFeatureFlags().webgpu_override) this._graphicsBackendOverride = GLContextType.WebGPU; else if (getFeatureFlags().webgpu_webgl_url_param && customHistory.location) {
+    if (getFeatureFlags().webgl2_override) this._graphicsBackendOverride = GLContextType.WebGL2;else if (getFeatureFlags().webgl1_override) this._graphicsBackendOverride = GLContextType.WebGL1;else if (getFeatureFlags().webgpu_override) this._graphicsBackendOverride = GLContextType.WebGPU;else if (getFeatureFlags().webgpu_webgl_url_param && customHistory.location) {
       let e = new URLSearchParams(customHistory.location.search);
       "1" === e.get("force-webgpu") ? this._graphicsBackendOverride = GLContextType.WebGPU : "1" === e.get("force-webgl2") ? this._graphicsBackendOverride = GLContextType.WebGL2 : "1" === e.get("force-webgl1") && (this._graphicsBackendOverride = GLContextType.WebGL1);
     }

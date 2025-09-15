@@ -199,7 +199,7 @@ import { $ as _$$$, J as _$$J5 } from '../figma_app/61771';
 import { applyOffsetToViewport, getBasicViewportRect, getViewportInfo, centeredValue, viewportToScreen } from '../figma_app/62612';
 import { U as _$$U3 } from '../figma_app/65327';
 import { iT as _$$iT } from '../figma_app/74165';
-import { $m, S as _$$S3 } from '../figma_app/78808';
+import { $m, copyShareLinkOptimistic } from '../figma_app/78808';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
 import { s4 as _$$s, hA, l7, Wl, ZO } from '../figma_app/88239';
 import { PQ as _$$PQ, kU, Ty, XE } from '../figma_app/91703';
@@ -3356,7 +3356,7 @@ let ns = class e extends PureComponent {
           ...h,
           visualBellMessageOverride: p.visualBellMessageOverride
         };
-        this.props.dispatch(_$$S3(m));
+        this.props.dispatch(copyShareLinkOptimistic(m));
       }
     };
   }
@@ -4476,7 +4476,7 @@ function nu({
         isFigJam: !1,
         attributionContext: null
       });
-      h(_$$S3({
+      h(copyShareLinkOptimistic({
         fileKey: d.key,
         url: e,
         source: ShareContext.FULLSCREEN_CONTEXT_MENU,
@@ -5068,7 +5068,7 @@ function nY({
           nodeId: t,
           isDevHandoff: !0
         });
-        s(_$$S3({
+        s(copyShareLinkOptimistic({
           fileKey: b.key,
           url: e,
           source: ShareContext.STATUS_DROPDOWN_MENU
@@ -5101,7 +5101,7 @@ function nY({
           isDevHandoff: !0,
           devModeFocusId: i?.devModeFocusId ?? t
         });
-        s(_$$S3({
+        s(copyShareLinkOptimistic({
           fileKey: b.key,
           url: e,
           source: ShareContext.STATUS_DROPDOWN_MENU

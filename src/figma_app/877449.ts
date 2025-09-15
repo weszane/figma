@@ -13,7 +13,7 @@ import { buildFileUrl } from '../905/612685';
 import { s as _$$s } from '../905/932270';
 import { sR } from '../905/932881';
 import { sx } from '../905/941192';
-import { b as _$$b2 } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { HB } from '../3973/538504';
 import { s as _$$s2 } from '../cssbuilder/589278';
 import { buildUploadUrl } from '../figma_app/169182';
@@ -51,7 +51,7 @@ function L(e) {
       icon: o,
       text: getI18nString('file_permissions_modal.share_as.google_classroom'),
       onClick: () => {
-        t(_$$b2({
+        t(postUserFlag({
           has_shared_to_google_classroom: !0
         }));
         e.onClick();

@@ -12,7 +12,7 @@ import { Oe } from "../905/34809";
 import { E as _$$E } from "../7021/427161";
 import { SidebarRow } from "../451de8f0/94979";
 import { sf } from "../905/929976";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { j0 } from "../1250/524544";
 if (443 == require.j) {}
 if (443 == require.j) {}
@@ -44,7 +44,7 @@ export function $$w1(e) {
         timeoutOverride: 1 / 0,
         onDismiss: () => {}
       }));
-      e(_$$b({
+      e(postUserFlag({
         long_running_draft_migration_toast_shown: !0
       }));
     }, [e]);
@@ -55,7 +55,7 @@ export function $$w1(e) {
       e(VisualBellActions.enqueue({
         message: getI18nString("file_browser.drafts_to_move.long_running_draft_migration_completed")
       }));
-      e(_$$b({
+      e(postUserFlag({
         draft_migration_completed_toast_shown: !0
       }));
     }, [e]);
@@ -87,7 +87,7 @@ export function $$w1(e) {
         view: "draftsToMove"
       })), t(Oe({
         clickedResourceType: "draftsToMove"
-      })), t(_$$b({
+      })), t(postUserFlag({
         seen_drafts_to_move_notice_icon: !0
       })));
     },

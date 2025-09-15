@@ -2,7 +2,7 @@ import n, { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import a, { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { S as _$$S } from "../figma_app/78808";
+import { copyShareLinkOptimistic } from "../figma_app/78808";
 import { buildUploadUrl } from "../figma_app/169182";
 import { Bb, ju, E_, Re, Ub, JT, co, _t, ZG, Yc, IM, QU, xe, H0, Fx, bH, kO, iL, Ax, Ay, NY, pA } from "../figma_app/274571";
 import { buildFileUrl } from "../905/612685";
@@ -650,7 +650,7 @@ export function $$w0({
               file: e,
               nodeId: y
             });
-            debugState.dispatch(_$$S({
+            debugState.dispatch(copyShareLinkOptimistic({
               fileKey: e.key,
               url: t,
               source: ShareContext.AI_SUMMARY_COPY_LINK_BUTTON,

@@ -6,7 +6,7 @@ import { S as _$$S } from "../5430/465757";
 import { lQ } from "../905/934246";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { FPublicationStatusType } from "../figma_app/191312";
-import { G3 } from "../905/272080";
+import { SubscriptionStatus } from "../905/272080";
 import { FEditorType } from "../figma_app/53721";
 import { C as _$$C } from "../figma_app/198698";
 import { om, x1, MA } from "../figma_app/465413";
@@ -57,7 +57,7 @@ function h(e) {
         dateString: e
       });
     }
-    return resource?.community_resource_payment?.status === G3.SUCCEEDED ? renderI18nText("community.resource.delisted_you_ll_continue_to_have_access_to_it") : renderI18nText("community.resource.if_you_have_questions_reach_out_to_creator");
+    return resource?.community_resource_payment?.status === SubscriptionStatus.SUCCEEDED ? renderI18nText("community.resource.delisted_you_ll_continue_to_have_access_to_it") : renderI18nText("community.resource.if_you_have_questions_reach_out_to_creator");
   })();
   let s = {
     id: om.communityResourceInReviewBanner,

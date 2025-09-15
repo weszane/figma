@@ -126,7 +126,7 @@ import { gs, ON } from "../figma_app/31103";
 import { yp, u as _$$u4, Rb } from "../figma_app/852050";
 import { wV } from "../figma_app/779965";
 import { GC } from "../905/782020";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { jK } from "../figma_app/934707";
 import { D as _$$D2 } from "../905/12032";
 import { qZ, px as _$$px } from "../905/201014";
@@ -167,7 +167,7 @@ import { bL as _$$bL, c$ as _$$c$ } from "../905/575478";
 import { q as _$$q2 } from "../905/932270";
 import { A as _$$A5 } from "../905/251970";
 import { trackFileEventWithUser, trackFileEventWithStore, trackDefinedFileEventWithStore } from "../figma_app/901889";
-import { Fu, r1 as _$$r2 } from "../figma_app/545877";
+import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
 import { xb } from "../figma_app/910914";
 import { VR } from "../figma_app/545541";
 import { b as _$$b3 } from "../905/22449";
@@ -431,8 +431,8 @@ import { f as _$$f5, pe as _$$pe, Pq, Kx, tz as _$$tz, SV, lk as _$$lk2 } from "
 import { Fc } from "../figma_app/484865";
 import { $k, As } from "../figma_app/802241";
 import { hasDesktopAPI, desktopAPIInstance } from "../figma_app/876459";
-import { gP as _$$gP } from "../figma_app/594947";
-import { mp as _$$mp } from "../figma_app/864723";
+import { getInitialDynamicConfig } from "../figma_app/594947";
+import { userCreatedAtAtom } from "../figma_app/864723";
 import { pT as _$$pT } from "../figma_app/297957";
 import { V as _$$V2 } from "../469e6e40/782251";
 import { VERSION_HISTORY_SET_ACTIVE } from "../905/784363";
@@ -2847,7 +2847,7 @@ function a_() {
   });
 }
 let aL = "dev_handoff_seen_config_wizard";
-let aR = Fu(aL);
+let aR = userFlagAtomFamily(aL);
 let a$ = "configuration_wizard--step--9zx-B";
 let a0 = "configuration_wizard--buttonRow--2GlLI";
 let a1 = "configuration_wizard--spacer--LCRlq";
@@ -3404,7 +3404,7 @@ function iO() {
     })]
   });
 }
-function iM({ }) {
+function iM({}) {
   let e = useDispatch();
   let t = "install-messaging-dropdown";
   let n = Um();
@@ -4501,7 +4501,7 @@ function iq() {
     });
   });
   _$$E3(uniqueId, "Reset Onboarding", () => {
-    t(_$$b({
+    t(postUserFlag({
       [aL]: !1
     }));
     show();
@@ -4540,10 +4540,10 @@ function iZ({
   let d = useRef(null);
   let c = useCallback(() => {
     e();
-    s(_$$b({
+    s(postUserFlag({
       [aL]: !0
     }));
-    r && s(_$$b({
+    r && s(postUserFlag({
       [xb]: !0
     }));
   }, [s, r, e]);
@@ -4815,7 +4815,7 @@ let oZ = class {
       if (n?.type === "PLAIN_TEXT") _$$n6({
         link: t,
         linkPreviewJson: n
-      }); else if (n?.type === "AUTH_REQUIRED") {
+      });else if (n?.type === "AUTH_REQUIRED") {
         let n = atomStoreManager.get(ok);
         let a = n[e.plugin_id]?.links ?? [];
         atomStoreManager.set(ok, n => ({
@@ -5105,7 +5105,7 @@ function o8({
         source: "web",
         pluginId: k.plugin.plugin_id
       });
-      c(_$$b({
+      c(postUserFlag({
         [xb]: !0
       }));
       return;
@@ -5343,7 +5343,7 @@ let lD = memo(({
   }(e ?? y);
   let A = useSelector(e => e.userFlags.dismissed_playground_banner);
   let I = useCallback(() => {
-    s(_$$b({
+    s(postUserFlag({
       dismissed_playground_banner: !0
     }));
   }, [s]);
@@ -8088,8 +8088,8 @@ function rX() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => { },
-    pinModal: () => { }
+    closeModal: () => {},
+    pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
   return jsx(AutoLayout, {
     direction: "vertical",
@@ -8698,8 +8698,8 @@ function dN({
   }) : null;
 }
 let dC = "interactive-inspection-onboarding-key";
-let dT = Fu("dev_mode_has_seen_interactive_inspection_onboarding");
-let dS = Fu("dev_mode_has_seen_focus_view_onboarding");
+let dT = userFlagAtomFamily("dev_mode_has_seen_interactive_inspection_onboarding");
+let dS = userFlagAtomFamily("dev_mode_has_seen_focus_view_onboarding");
 let dP = {
   title: renderI18nText("dev_handoff.focus_view.interactive_onboarding_title"),
   description: renderI18nText("dev_handoff.focus_view.interactive_onboarding_description"),
@@ -8710,7 +8710,7 @@ let dP = {
 function dL(e) {
   let t = useDispatch();
   return useCallback(() => {
-    t(_$$b({
+    t(postUserFlag({
       dev_mode_has_seen_interactive_inspection_onboarding: !0
     }));
     e();
@@ -10887,7 +10887,7 @@ function uQ({
     fillContainer: e
   });
 }
-let u8 = _$$r2("dev_mode_mcp_has_seen_mcp_enable_button_callout");
+let u8 = userFlagExistsAtomFamily("dev_mode_mcp_has_seen_mcp_enable_button_callout");
 function u6() {
   let e = _$$pT();
   let t = useAtomWithSubscription(u8);
@@ -10975,8 +10975,8 @@ let pi = "https://help.figma.com/hc/articles/32132100833559-Guide-to-the-Dev-Mod
 function po() {
   let e = $k();
   let t = getObservableOrFallback(UK().enableCodegenMcpServer);
-  let n = _$$gP("dt_mcp_eligible_for_new_ui_date").get("date", null);
-  let i = useAtomWithSubscription(_$$mp);
+  let n = getInitialDynamicConfig("dt_mcp_eligible_for_new_ui_date").get("date", null);
+  let i = useAtomWithSubscription(userCreatedAtAtom);
   let o = !!n && !!i && new Date(n) <= new Date(i);
   return !getFeatureFlags().dt_my_cool_plugin || e ? null : hasDesktopAPI() ? desktopAPIInstance?.hasFeature("addCodegenMCPStartupBinding") ? t ? jsx(VZ, {
     title: getI18nString("dev_handoff.mcp.panel_title"),
@@ -11121,7 +11121,7 @@ function pu() {
     className: pt,
     children: jsx(_$$cV, {
       variant: "default",
-      onDismiss: () => n(_$$b({
+      onDismiss: () => n(postUserFlag({
         dev_mode_mcp_has_dismissed_client_setup_banner: !0
       })),
       children: jsx(_$$Q2, {
@@ -11556,7 +11556,7 @@ let pL = memo(function () {
       return;
     }
     setSelectedDevModePropertiesPanelTab(t);
-    e === r5[IAssertResource.PLUGIN] && d(_$$b({
+    e === r5[IAssertResource.PLUGIN] && d(postUserFlag({
       [xb]: !0
     }));
   }, {
@@ -11933,7 +11933,7 @@ function p4({
       className: "frame_picker--trigger--ZPMqZ",
       ref: o,
       onClick: function () {
-        if (t) n(!1); else {
+        if (t) n(!1);else {
           let e = o.current?.getBoundingClientRect();
           e && (c(e), n(!0));
         }
@@ -13266,7 +13266,7 @@ let f_ = memo(function () {
     let t = _$$f2("dev_mode_notified_of_approved_org_request");
     let n = useDispatch();
     useEffect(() => {
-      e && !t && n(_$$b({
+      e && !t && n(postUserFlag({
         dev_mode_notified_of_approved_org_request: !0
       }));
     }, [n, e, t]);

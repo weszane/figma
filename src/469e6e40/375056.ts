@@ -33,7 +33,7 @@ import { _ as _$$_, Y as _$$Y } from "../469e6e40/781142";
 import { showModalHandler } from "../905/156213";
 import { Z4, tB, qH, W8, fA, _k, zz, fx, gl, iv, RK } from "../figma_app/934005";
 import { Xf } from "../figma_app/153916";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { filterNotNullish } from "../figma_app/656233";
 import { pW } from "../905/160095";
 import { V as _$$V } from "../905/223767";
@@ -289,7 +289,7 @@ function X() {
     } : null;
   }();
   if (!e || e.amount <= 0) return null;
-  let t = new vr(e.currency);
+  let t = new CurrencyFormatter(e.currency);
   return jsx(Yy, {
     variant: "brand",
     "data-testid": "account-credit-banner",
@@ -596,7 +596,7 @@ function ek(e) {
   let l = useMemo(() => e.upcomingAnnualInvoice?.org_invoice_details?.billing_period_is_stub || e.upcomingAnnualInvoice?.org_invoice_details?.multiyear_contract_id || e.latestAnnualInvoice?.org_invoice_details?.billing_period_is_stub || e.latestAnnualInvoice?.org_invoice_details?.multiyear_contract_id ? getI18nString("admin_settings.plan_subscription_card.plan_subscription") : getI18nString("admin_settings.plan_subscription_card.annual_subscription"), [e.latestAnnualInvoice?.org_invoice_details?.billing_period_is_stub, e.latestAnnualInvoice?.org_invoice_details?.multiyear_contract_id, e.upcomingAnnualInvoice?.org_invoice_details?.billing_period_is_stub, e.upcomingAnnualInvoice?.org_invoice_details?.multiyear_contract_id]);
   let o = useMemo(() => {
     if (!e.latestAnnualInvoice || e.planStarting) return null;
-    let t = new vr(e.latestAnnualInvoice.currency).formatMoney(e.latestAnnualInvoice.total, {
+    let t = new CurrencyFormatter(e.latestAnnualInvoice.currency).formatMoney(e.latestAnnualInvoice.total, {
       showCents: !0,
       currencySign: "accounting"
     });
@@ -617,7 +617,7 @@ function ek(e) {
   let d = useMemo(() => {
     if (e.upcomingAnnualInvoice) {
       let t = tB(e.upcomingAnnualInvoice);
-      let a = new vr(e.upcomingAnnualInvoice.currency).formatMoney(e.upcomingAnnualInvoice.subtotal, {
+      let a = new CurrencyFormatter(e.upcomingAnnualInvoice.currency).formatMoney(e.upcomingAnnualInvoice.subtotal, {
         showCents: !0,
         currencySign: "accounting"
       });
@@ -751,7 +751,7 @@ function ek(e) {
 function eI(e) {
   let t = _$$k2();
   let a = useMemo(() => e.planType === FOrganizationLevelType.TEAM ? getI18nString("admin_settings.upcoming_invoice_card.heading.next_monthly_invoice") : getI18nString("admin_settings.upcoming_invoice_card.heading.next_quarterly_invoice"), [e.planType]);
-  let i = useMemo(() => new vr(e.upcomingInvoice?.currency || e.planCurrency || _$$S2.USD), [e.upcomingInvoice, e.planCurrency]);
+  let i = useMemo(() => new CurrencyFormatter(e.upcomingInvoice?.currency || e.planCurrency || _$$S2.USD), [e.upcomingInvoice, e.planCurrency]);
   let r = i.formatMoney(e.upcomingInvoice?.total || 0, {
     showCents: !0,
     currencySign: "accounting"
@@ -946,7 +946,7 @@ function eq(e) {
 function e$(e) {
   let t = _$$R();
   let a = useMemo(() => e.invoice.is_empty ? [eM(e.invoice), eD()] : _k(e.invoice) ? v()([eM(e.invoice), function (e) {
-    let t = new vr(e.currency);
+    let t = new CurrencyFormatter(e.currency);
     return {
       key: "charges",
       icon: jsx(_$$S, {}),
@@ -958,7 +958,7 @@ function e$(e) {
       })
     };
   }(e.invoice), function (e) {
-    let t = new vr(e.currency);
+    let t = new CurrencyFormatter(e.currency);
     let a = Bf(e);
     return 0 !== a && {
       key: "credits",
@@ -971,7 +971,7 @@ function e$(e) {
       })
     };
   }(e.invoice)]) : v()([eM(e.invoice), function (e) {
-    let t = new vr(e.currency);
+    let t = new CurrencyFormatter(e.currency);
     let a = Hx(e);
     let s = GK(e);
     return (0 !== a || 0 !== s) && {
@@ -985,7 +985,7 @@ function e$(e) {
       })
     };
   }(e.invoice), function (e) {
-    let t = new vr(e.currency);
+    let t = new CurrencyFormatter(e.currency);
     let a = e.plan_parent_type === FOrganizationLevelType.TEAM && e.billing_interval === FBillingPeriodType.MONTH;
     let s = t.formatMoney(x$(e), {
       showCents: !0,

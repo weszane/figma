@@ -12,10 +12,10 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { Cx, yH } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStateDelete } from "../figma_app/714946";
 import { D as _$$D } from "../905/775228";
 import { Hx } from "../figma_app/147952";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { B } from "../figma_app/750676";
 import { T as _$$T, _ as _$$_ } from "../905/793009";
 import { gY } from "../figma_app/973927";
@@ -124,7 +124,7 @@ export async function $$U2({
         triggeredFrom: d,
         templateType: n.type,
         templateCategory: n.type === _$$n2.HubFile ? n.category : void 0
-      }), s) && (t(_$$b({
+      }), s) && (t(postUserFlag({
         inserted_figjam_template: !0
       })), n.type === _$$n2.TeamTemplate && t(_$$D([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(Hx({
         storeInRecentsKey: $A.FigJam,
@@ -197,7 +197,7 @@ export function $$H4() {
       ...s
     }) => {
       let o = V(t, F(s.template));
-      VP(n, o) || (e(Cx({
+      VP(n, o) || (e(loadingStatePutLoading({
         key: o
       })), await G({
         dispatch: e,
@@ -205,13 +205,13 @@ export function $$H4() {
         fileVersion: r,
         ...s,
         onSuccess: () => {
-          e(yH({
+          e(loadingStateDelete({
             key: o
           }));
           i && i();
         },
         onFailure: () => {
-          e(yH({
+          e(loadingStateDelete({
             key: o
           }));
           a && a();
@@ -297,19 +297,19 @@ export let $$Y0 = createOptimistThunk((e, t) => {
   let {
     loadingState
   } = e.getState();
-  VP(loadingState, r) || (dispatch(Cx({
+  VP(loadingState, r) || (dispatch(loadingStatePutLoading({
     key: r
   })), W({
     ...t,
     dispatch,
     onSuccess: () => {
-      dispatch(yH({
+      dispatch(loadingStateDelete({
         key: r
       }));
       t.onSuccess && t.onSuccess();
     },
     onFailure: () => {
-      dispatch(yH({
+      dispatch(loadingStateDelete({
         key: r
       }));
       t.onFailure && t.onFailure();

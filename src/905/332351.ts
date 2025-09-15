@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { GP } from "../figma_app/15927";
 import { trackEventAnalytics } from "../905/449184";
 import { RecordingComponent, setupPlayback, generateRecordingKey } from "../figma_app/878298";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -112,7 +112,7 @@ class v extends RecordingComponent {
       size: "small",
       className: yl,
       ...this.props,
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         dispatch: this.props.dispatch
       }), jsxs("form", {
         onSubmit: this.onSubmit,

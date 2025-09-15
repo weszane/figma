@@ -17,14 +17,14 @@ import { N as _$$N } from "../figma_app/469468";
 import { BigButtonInverseTracked, interactiveAnchorTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getTranslatedDynamicContent } from "../905/303541";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { FL, Ay as _$$Ay } from "../figma_app/248365";
 import { u5, gE } from "../5132/642384";
 import { s as _$$s2 } from "../5430/913603";
 import { _ as _$$_ } from "../905/456042";
 import { ts as _$$ts, Sb } from "../figma_app/49598";
 import { sf } from "../905/929976";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { YW, _O, s0, EX } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider, TrackedLink, TrackedDiv, TrackedButton } from "../figma_app/831799";
@@ -89,7 +89,7 @@ import { C as _$$C2 } from "../figma_app/198698";
 import { om, x1 } from "../figma_app/465413";
 import { A as _$$A8 } from "../5724/965092";
 import { communityPagePaths } from "../905/528121";
-import { Fj } from "../figma_app/594947";
+import { setupDynamicConfigHandler } from "../figma_app/594947";
 import { zq, iY as _$$iY, po, p_ } from "../figma_app/598412";
 import { Jm } from "../figma_app/387599";
 import { nS as _$$nS, Ac, Wk, ed as _$$ed, RA, NY, a4 as _$$a2 } from "../figma_app/321395";
@@ -102,8 +102,8 @@ import { getFeatureFlags } from "../905/601108";
 import { ce } from "../figma_app/347146";
 import { parsePxNumber } from "../figma_app/783094";
 import { Z as _$$Z } from "../905/498136";
-import { l$, gs, Qd } from "../figma_app/275462";
-import { k as _$$k2 } from "../905/22009";
+import { isMakeDiscoveryEnabled, isPluginsPageEnabled, isRelatedContentExperimentEnabled } from "../figma_app/275462";
+import { editorUtilities as _$$k2 } from "../905/22009";
 import { getIconColor } from "../905/499018";
 import { A as _$$A9 } from "../6828/523860";
 import { A as _$$A0 } from "../svg/951803";
@@ -111,7 +111,7 @@ import { A as _$$A1 } from "../svg/228383";
 import { J as _$$J2 } from "../905/614223";
 import { useAtomWithSubscription, Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
-import { Fu, r1 } from "../figma_app/545877";
+import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
 import { w4, QK, Xt } from "../figma_app/692865";
 import { E as _$$E2 } from "../905/53857";
 import { xF, Jm as _$$Jm, uD, J7, If } from "../figma_app/405906";
@@ -136,7 +136,7 @@ import { M as _$$M2 } from "../5430/704379";
 import { A as _$$A13 } from "../5430/728674";
 import { v as _$$v } from "../5430/992484";
 import { gM, vb } from "../5430/823351";
-import { L as _$$L2 } from "../905/178090";
+import { ResourceTypes } from "../905/178090";
 import { a as _$$a3, z as _$$z2 } from "../figma_app/601188";
 import { P as _$$P } from "../vendor/348225";
 import { a as _$$a4 } from "../905/329735";
@@ -484,7 +484,7 @@ let $ = registerModal(function (e) {
       }
     }));
   } : () => {
-    i(_$$b2({
+    i(postUserFlag({
       signed_up_from_community: !0
     }));
     let e = u5(e => {
@@ -499,7 +499,7 @@ let $ = registerModal(function (e) {
     i(e(n));
   };
   let h = e.editorType === FFileType.SLIDES ? p : () => {
-    i(_$$b2({
+    i(postUserFlag({
       signed_up_from_community: !0
     }));
     let t = gE(e => {
@@ -1767,7 +1767,7 @@ function t6({
 }) {
   let [t, i] = useState(!1);
   let n = function () {
-    let e = l$();
+    let e = isMakeDiscoveryEnabled();
     return [{
       text: getI18nString("community.view_bar.home"),
       path: "/community"
@@ -2325,7 +2325,7 @@ iw.path = "/community/plugins";
 let iE = Wk(iw);
 function iN() {
   let e = DP();
-  let t = gs();
+  let t = isPluginsPageEnabled();
   let {
     editingEffectsRoute,
     fileOrganizationRoute,
@@ -2868,7 +2868,7 @@ function ik() {
 var iI = (e => (e.DesignTemplate = "design_template", e.Websites = "websites", e.Plugins = "plugins", e.Whiteboarding = "whiteboarding", e.Presentation = "presentations", e.Make = "make", e))(iI || {});
 function iA() {
   let [e, t] = useState();
-  let i = l$();
+  let i = isMakeDiscoveryEnabled();
   let n = useDebouncedCallback(e => t(e), 50);
   return jsxs("div", {
     "data-testid": "nav-category-selector",
@@ -2916,8 +2916,8 @@ function iA() {
     })]
   });
 }
-let iR = Fu(w4);
-let iP = Fu(QK);
+let iR = userFlagAtomFamily(w4);
+let iP = userFlagAtomFamily(QK);
 function iB({
   text: e,
   slug: t,
@@ -2935,10 +2935,10 @@ function iB({
   let y = !(("design_template" !== t || p?.status !== "loaded" || p?.data) && ("websites" !== t || _?.status !== "loaded" || _?.data));
   let f = useCallback(() => {
     c(t);
-    "design_template" === t && g(_$$b2({
+    "design_template" === t && g(postUserFlag({
       [w4]: !0
     }));
-    "websites" === t && g(_$$b2({
+    "websites" === t && g(postUserFlag({
       [QK]: !0
     }));
   }, [g, c, t]);
@@ -3083,7 +3083,7 @@ function iq() {
       trackingProperties: {
         trackingDescriptor: _$$c.LOGGED_OUT_NAV_LOGIN
       },
-      onClick: () => FL(qB.SIGN_IN, {
+      onClick: () => FL(AuthFlowStep.SIGN_IN, {
         preventDefaultRedirect: !0,
         authOptions: {
           locale: e
@@ -3093,7 +3093,7 @@ function iq() {
       children: getI18nString("community.signed_out_modal.log_in")
     }), jsx(TrackedButton, {
       className: "auth_buttons--signUpButton--lM9GB shared--_button--qcVz- text--fontPos11--2LvXf text--_fontBase--QdLsd",
-      onClick: () => FL(qB.SIGN_UP, {
+      onClick: () => FL(AuthFlowStep.SIGN_UP, {
         preventDefaultRedirect: !0,
         authOptions: {
           locale: e
@@ -3355,7 +3355,7 @@ function no({
   let h = "loading" === d;
   let x = useRef(null);
   let _ = useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
-  let y = filterState.resourceType === _$$L2.BrowseResourceTypes.PLUGINS && (c ?? []).every(e => e.resource_type === _$$vt.PLUGIN);
+  let y = filterState.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS && (c ?? []).every(e => e.resource_type === _$$vt.PLUGIN);
   let f = [];
   y && (f = (c ?? []).map(e => e.content?.plugin).filter(e => void 0 !== e));
   return jsxs("div", {
@@ -4585,7 +4585,7 @@ function n0() {
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }), {
-    enabled: l$()
+    enabled: isMakeDiscoveryEnabled()
   });
   return jsx(n1, {
     popularSlideTemplates: {
@@ -4653,8 +4653,8 @@ function n1({
   let {
     trackResourceImpression
   } = GS();
-  let _ = gs();
-  let y = l$();
+  let _ = isPluginsPageEnabled();
+  let y = isMakeDiscoveryEnabled();
   let {
     sitesTemplatesRoute,
     cooperTemplatesRoute,
@@ -4694,7 +4694,7 @@ function n1({
     widgetsRoute: new $E({
       categorySlug: LJ.whiteboarding
     }, {
-      resource_type: _$$L2.BrowseResourceTypes.WIDGETS
+      resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS
     }),
     makeRoute: new tQ({
       landingPageType: tH.MAKE
@@ -5968,7 +5968,7 @@ function a2({
     })
   });
 }
-let se = r1(Xt);
+let se = userFlagExistsAtomFamily(Xt);
 function st() {
   let e = useAtomWithSubscription(se);
   let t = selectCurrentUser();
@@ -6119,7 +6119,7 @@ function so() {
       document.body.removeAttribute("data-hide");
     };
   }, []);
-  let c = Qd();
+  let c = isRelatedContentExperimentEnabled();
   let [d] = setupResourceAtomHandler(_$$Z2({
     apiResourceType: e,
     id: t,
@@ -6215,7 +6215,7 @@ function sl() {
     let e = null === getUserId();
     let {
       getDynamicConfig
-    } = Fj("community_localization");
+    } = setupDynamicConfigHandler("community_localization");
     let i = getDynamicConfig().getValue("localizedRoutes", {});
     if (!e) return;
     let n = document.documentElement.getAttribute("data-product-locale");

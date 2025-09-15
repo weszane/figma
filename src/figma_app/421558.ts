@@ -56,7 +56,7 @@ import { kF } from "../figma_app/48566";
 import { AE, $v } from "../figma_app/370763";
 import { XZ, rM } from "../figma_app/241541";
 import { getI18nString } from "../905/303541";
-import { _Y } from "../figma_app/275462";
+import { alwaysFalseCallback } from "../figma_app/275462";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
@@ -543,7 +543,7 @@ export function $$e00(e) {
   let m = topLevelMode === ViewType.HISTORY || editModeType === LayoutTabType.DEV_HANDOFF_HISTORY;
   let g = "illustration" === toolbeltMode;
   let f = _$$z(editModeType);
-  let E = _Y();
+  let E = alwaysFalseCallback();
   let y = L4();
   let b = useAtomWithSubscription(wg);
   let T = useAtomWithSubscription(Bu);

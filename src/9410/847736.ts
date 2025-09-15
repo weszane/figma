@@ -55,7 +55,7 @@ import { Point } from "../905/736624";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { k8 } from "../figma_app/49598";
-import { Nw } from "../figma_app/78808";
+import { renameFileOptimistic } from "../figma_app/78808";
 import { yy } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { D as _$$D } from "../7222/938408";
@@ -74,7 +74,7 @@ import { getTrackingSessionId } from "../905/471229";
 import { Ay, c6 } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J as _$$J } from "../905/915227";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { _E } from "../905/788069";
 import { R as _$$R } from "../figma_app/53049";
 import { n as _$$n2 } from "../905/347702";
@@ -712,7 +712,7 @@ async function eZ({
       teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
       fileKey: atomStoreManager.get(openFileKeyAtom) || null,
       fileSeq: atomStoreManager.get(_$$J)?.toString() || null,
-      userId: atomStoreManager.get(kS) || null,
+      userId: atomStoreManager.get(userIdAtom) || null,
       trackingSessionId: getTrackingSessionId()
     });
     if (r.signal.aborted || !atomStoreManager.get(openFileKeyAtom)) {
@@ -877,7 +877,7 @@ let e3 = async ({
     await eZ({
       canvasData: r.value,
       processTitle: e => {
-        e && dispatch(Nw({
+        e && dispatch(renameFileOptimistic({
           file: {
             key: openFileKey
           },
@@ -1215,7 +1215,7 @@ function tl({
     permissionScopeHandler.user("add-all-slides", () => {
       AppStateTsApi?.slideThemeLibBindings().setDocumentTemplateLibraryKey(t[0].library_key);
     });
-    !getFeatureFlags().piper_auto_rename && i?.key && S.file_name && !e && i.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && h(Nw({
+    !getFeatureFlags().piper_auto_rename && i?.key && S.file_name && !e && i.name === getI18nString("fullscreen.fullscreen_view_selector.untitled") && h(renameFileOptimistic({
       file: {
         key: i.key
       },

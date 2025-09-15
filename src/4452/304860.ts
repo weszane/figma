@@ -39,7 +39,7 @@ import { jk, nB, vo, wi } from '../figma_app/272243';
 import { useTeamPlanFeatures } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { _ as _$$_, S as _$$S } from '../figma_app/490799';
-import { vr } from '../figma_app/514043';
+import { CurrencyFormatter } from '../figma_app/514043';
 import { i6 } from '../figma_app/543529';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { CM, kj, NU, SI } from '../figma_app/599327';
@@ -247,7 +247,7 @@ function er(e) {
         status: n.status
       };
     }
-    let c = new vr(t);
+    let c = new CurrencyFormatter(t);
     return {
       billableProductKeyContractPrices: N_.dict(e => {
         if (!isNullish(data[e])) {

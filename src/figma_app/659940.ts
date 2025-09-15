@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { dR } from "../905/508367";
 import { customHistory } from "../905/612521";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { x } from "../905/749159";
@@ -12,7 +12,7 @@ export function $$u0() {
     origin: t,
     formState: r
   }) => {
-    e(Ts({
+    e(AUTH_INIT({
       origin: t,
       formState: r,
       redirectUrl: dR(customHistory.location.pathname, {

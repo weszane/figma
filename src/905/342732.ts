@@ -2,7 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { ku, gP } from "../905/879323";
 import { qp } from "../905/977779";
 import { openFileAtom } from "../figma_app/516028";
@@ -30,7 +30,7 @@ export function $$_0(e) {
   let u = qi(e);
   let {
     getConfig
-  } = I7("exp_asset_search_refactor", void 0, !0);
+  } = selectExperimentConfigHook("exp_asset_search_refactor", void 0, !0);
   return useMemo(() => {
     if (!getFeatureFlags().dse_refactor_asset_search_debug_only && !getConfig().getValue("use_refactor", !1)) {
       let {

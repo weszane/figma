@@ -28,7 +28,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { useIsProOrStudentPlan, useCurrentPublicPlan } from '../figma_app/465071';
 import { useCurrentFileKey } from '../figma_app/516028';
 import { setupResourceAtomHandler } from '../figma_app/566371';
-import { Fj } from '../figma_app/594947';
+import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { Gi, qY } from '../figma_app/622574';
 import { eY } from '../figma_app/722362';
 import { setNodeExpanded } from '../figma_app/741237';
@@ -418,7 +418,7 @@ export function $$el16(e) {
 function ed() {
   let {
     getDynamicConfig
-  } = Fj('cooper_asset_type_to_category_and_tag_map');
+  } = setupDynamicConfigHandler('cooper_asset_type_to_category_and_tag_map');
   return getDynamicConfig().get('asset_type_map', {});
 }
 function ec(e, t) {

@@ -5,7 +5,7 @@ import { vh } from "../figma_app/99826";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
-import { k } from "../905/22009";
+import { editorUtilities } from "../905/22009";
 import { LJ } from "../figma_app/930386";
 import { $E } from "../figma_app/805898";
 import { TrackedAnchor, TrackedLink } from "../figma_app/831799";
@@ -23,49 +23,49 @@ export function $$f0() {
       url: new $E({
         categorySlug: LJ.socialMediaTemplates
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.web_ad_templates"),
       url: new $E({
         categorySlug: LJ.webAds
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.instagram_templates"),
       url: new $E({
         categorySlug: LJ.instagramTemplates
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.linkedin_templates"),
       url: new $E({
         categorySlug: LJ.linkedinTemplates
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.facebook_templates"),
       url: new $E({
         categorySlug: LJ.facebookTemplates
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.youtube_templates"),
       url: new $E({
         categorySlug: LJ.youtubeTemplates
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.card_templates"),
       url: new $E({
         categorySlug: LJ.cardTemplates
       }, {
-        editor_type: k.Editors.COOPER
+        editor_type: editorUtilities.Editors.COOPER
       }).href
     }]
   }, {
@@ -85,7 +85,7 @@ export function $$f0() {
       url: new $E({
         categorySlug: LJ.websiteTemplates
       }, {
-        editor_type: k.Editors.SITES
+        editor_type: editorUtilities.Editors.SITES
       }).href
     }, {
       label: getI18nString("categories.mobile_app_templates"),

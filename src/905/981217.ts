@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { qe } from "../figma_app/416935";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 export let $$s2 = "https://help.figma.com/hc/articles/360039956774-Upload-custom-fonts-to-an-organization";
 export function $$o1({
   currentTeamId: e,
@@ -22,7 +22,7 @@ export function $$d0({
 }) {
   let {
     getConfig
-  } = I7("exp_oss_exposure_fonts_v1");
+  } = selectExperimentConfigHook("exp_oss_exposure_fonts_v1");
   return useMemo(() => !!e && !!t && l({
     user: t,
     hasCurrentOrg: r,

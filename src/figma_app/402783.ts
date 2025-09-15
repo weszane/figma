@@ -9,11 +9,11 @@ import { PerfTimer } from "../905/609396";
 import { useSprigWithSampling } from "../905/99656";
 import { getTrackingSessionId } from "../905/471229";
 import { generateUUIDv4 } from "../905/871474";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Ay, nU, c6 } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { zp } from "../figma_app/847014";
 import { Gw, WN } from "../figma_app/274571";
 import { Z } from "../905/104740";
@@ -55,7 +55,7 @@ async function R({
     orgId: atomStoreManager.get(_s),
     teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
     fileKey: atomStoreManager.get(openFileKeyAtom) || null,
-    userId: atomStoreManager.get(kS) || null,
+    userId: atomStoreManager.get(userIdAtom) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     trackingSessionId: getTrackingSessionId()
   };
@@ -124,7 +124,7 @@ async function R({
     }, {
       forwardToDatadog: !0
     });
-    P && (_$$b({
+    P && (postUserFlag({
       [zp]: !0
     }), c(P.guid, v, L));
   }

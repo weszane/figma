@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
-import { aH, sq } from "../figma_app/594947";
+import { DynamicConfigSchema, TeamBootstrapSchema } from "../figma_app/594947";
 import { createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 let o = z.record(z.string(), z.boolean());
 let l = z.record(z.string(), z.string());
@@ -10,8 +10,8 @@ let d = z.object({
 });
 let $$c0 = new class {
   constructor() {
-    this.StatsigInitializeResponseValidator = createMetaValidator("StatsigInitializeResponseValidator", aH, null);
-    this.StatsigInitializeResponseBatchedValidator = createMetaValidator("StatsigInitializeResponseBatchedValidator", sq, null);
+    this.StatsigInitializeResponseValidator = createMetaValidator("StatsigInitializeResponseValidator", DynamicConfigSchema, null);
+    this.StatsigInitializeResponseBatchedValidator = createMetaValidator("StatsigInitializeResponseBatchedValidator", TeamBootstrapSchema, null);
     this.StatsigFlagStatusForUserValidator = createMetaValidator("StatsigFlagStatusForUserValidator", o, null);
     this.StatsigFlagDescriptionsValidator = createMetaValidator("StatsigFlagDescriptionsValidator", l, null);
     this.StatsigUpdateOverridesValidator = createMetaValidator("StatsigUpdateOverridesValidator", d, null);

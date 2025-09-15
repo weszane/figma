@@ -5,7 +5,7 @@ import { EventShield } from "../905/821217";
 import { J } from "../905/614223";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { s as _$$s } from "../cssbuilder/589278";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { openFileKeyAtom, openFileTeamIdAtom } from "../figma_app/516028";
@@ -24,7 +24,7 @@ export function $$g0(e) {
     fileKey: _
   } : void 0, [_, A]);
   useEffect(() => {
-    isShowing && e.userFlagOnShow && g(b({
+    isShowing && e.userFlagOnShow && g(postUserFlag({
       [e.userFlagOnShow]: !0
     }));
   }, [g, e.userFlagOnShow, isShowing]);

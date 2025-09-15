@@ -12,7 +12,7 @@ import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { Nw } from "../figma_app/78808";
+import { renameFileOptimistic } from "../figma_app/78808";
 import { NN } from "../905/466026";
 import { b_, oE } from "../figma_app/840917";
 import { Y6, nb, Tf } from "../figma_app/543100";
@@ -41,7 +41,7 @@ export function $$S0(e) {
     placeholderValue: Tf.getName(e.tile),
     submit: t => {
       S(null);
-      e.tile.type === nb.FILE ? m(Nw({
+      e.tile.type === nb.FILE ? m(renameFileOptimistic({
         file: e.tile.file,
         name: t
       })) : e.tile.type === nb.REPO ? m(NN({

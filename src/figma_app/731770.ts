@@ -5,7 +5,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h as _$$h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Z as _$$Z } from "../905/104740";
 import { VF, uY } from "../figma_app/989514";
 import { b as _$$b2 } from "../figma_app/5657";
@@ -45,7 +45,7 @@ export function $$E0({
         guidToSelect: R.guid
       }));
       D(!0);
-      w(_$$b({
+      w(postUserFlag({
         design_panel_step_shown: !0
       }));
       Fullscreen.triggerAction("set-tool-default", null);

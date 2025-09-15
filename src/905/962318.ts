@@ -16,7 +16,7 @@ import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { isDevEnvironment } from "../figma_app/169182";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
@@ -41,46 +41,46 @@ export let $$P0 = registerModal(function ({
   let O = function () {
     let {
       getConfig
-    } = I7("exp_i18n_es_es_existing_users");
+    } = selectExperimentConfigHook("exp_i18n_es_es_existing_users");
     let {
       getConfig: _getConfig
-    } = I7("exp_i18n_es_es_new_users");
+    } = selectExperimentConfigHook("exp_i18n_es_es_new_users");
     let {
       getConfig: _getConfig2
-    } = I7("exp_i18n_es_es_existing_users_comms_holdout");
+    } = selectExperimentConfigHook("exp_i18n_es_es_existing_users_comms_holdout");
     let {
       getConfig: _getConfig3
-    } = I7("exp_i18n_es_es_new_users_comms_holdout");
+    } = selectExperimentConfigHook("exp_i18n_es_es_new_users_comms_holdout");
     return !!getConfig().getValue("toggle_language_enabled", !1) || !!_getConfig().getValue("toggle_language_enabled", !1) || !!_getConfig2().getValue("toggle_language_enabled", !1) || !!_getConfig3().getValue("toggle_language_enabled", !1);
   }();
   let D = function () {
     let {
       getConfig
-    } = I7("exp_i18n_ko_kr_existing_users");
+    } = selectExperimentConfigHook("exp_i18n_ko_kr_existing_users");
     let {
       getConfig: _getConfig4
-    } = I7("exp_i18n_ko_kr_new_users");
+    } = selectExperimentConfigHook("exp_i18n_ko_kr_new_users");
     let {
       getConfig: _getConfig5
-    } = I7("exp_i18n_ko_kr_existing_users_comms_holdout");
+    } = selectExperimentConfigHook("exp_i18n_ko_kr_existing_users_comms_holdout");
     let {
       getConfig: _getConfig6
-    } = I7("exp_i18n_ko_kr_new_users_comms_holdout");
+    } = selectExperimentConfigHook("exp_i18n_ko_kr_new_users_comms_holdout");
     return !!getConfig().getValue("toggle_language_enabled", !1) || !!_getConfig4().getValue("toggle_language_enabled", !1) || !!_getConfig5().getValue("toggle_language_enabled", !1) || !!_getConfig6().getValue("toggle_language_enabled", !1);
   }();
   let F = function () {
     let {
       getConfig
-    } = I7("exp_i18n_pt_br_existing_users");
+    } = selectExperimentConfigHook("exp_i18n_pt_br_existing_users");
     let {
       getConfig: _getConfig7
-    } = I7("exp_i18n_pt_br_new_users");
+    } = selectExperimentConfigHook("exp_i18n_pt_br_new_users");
     let {
       getConfig: _getConfig8
-    } = I7("exp_i18n_pt_br_existing_users_comms_holdout");
+    } = selectExperimentConfigHook("exp_i18n_pt_br_existing_users_comms_holdout");
     let {
       getConfig: _getConfig9
-    } = I7("exp_i18n_pt_br_new_users_comms_holdout");
+    } = selectExperimentConfigHook("exp_i18n_pt_br_new_users_comms_holdout");
     return !!getConfig().getValue("toggle_language_enabled", !1) || !!_getConfig7().getValue("toggle_language_enabled", !1) || !!_getConfig8().getValue("toggle_language_enabled", !1) || !!_getConfig9().getValue("toggle_language_enabled", !1);
   }();
   let M = useCallback(e => {

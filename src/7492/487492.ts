@@ -22,10 +22,10 @@ import { Ex } from "../905/69098";
 import { QP, op, $3 } from "../figma_app/487970";
 import { L as _$$L } from "../3591/956338";
 import { w5 } from "../figma_app/15924";
-import { bV, Lt } from "../figma_app/808294";
+import { getProductPriceString, hasTrialAvailable } from "../figma_app/808294";
 import { G8, AC } from "../figma_app/777551";
 import { oB, j7 } from "../905/929976";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { useTracking } from "../figma_app/831799";
 import { t as _$$t3 } from "../469e6e40/489933";
 import { m0 } from "../figma_app/976749";
@@ -398,10 +398,10 @@ let eF = memo(function (e) {
         return;
       }
       x ? u() : o();
-      r(_$$b({
+      r(postUserFlag({
         seen_published_plugin_onboarding_modal: !0
       }));
-      r(_$$b({
+      r(postUserFlag({
         seen_development_plugin_onboarding_modal: !0
       }));
     }
@@ -1162,10 +1162,10 @@ export function $$ez5(e) {
         return;
       }
       h ? u() : o();
-      i(_$$b({
+      i(postUserFlag({
         seen_published_plugin_onboarding_modal: !0
       }));
-      i(_$$b({
+      i(postUserFlag({
         seen_development_plugin_onboarding_modal: !0
       }));
     }
@@ -1282,8 +1282,8 @@ function e$(e) {
     className: y2,
     children: [jsx("div", {
       className: lO,
-      children: bV(e.plugin.monetized_resource_metadata)
-    }), !e.hideFreeTrialBadge && Lt({
+      children: getProductPriceString(e.plugin.monetized_resource_metadata)
+    }), !e.hideFreeTrialBadge && hasTrialAvailable({
       resource: e.plugin,
       payment: i
     }) && jsx(w5, {

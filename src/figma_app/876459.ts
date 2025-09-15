@@ -21,7 +21,7 @@ export const desktopAPIInstance = (() => {
  * Initializes the PopoutAPIWrapper from the global window object.
  * @returns {PopoutAPIWrapper | null}
  */
-const popoutAPIInstance = (() => {
+export const popoutAPIInstance = (() => {
   // $$u7
   const popoutAPIData = window.__figmaDesktopGetPopoutAPI?.()
   popoutAPIData?.lockAPI()
@@ -112,7 +112,6 @@ export function isUnsupportedMacVersion() { // $$y6
   }
   return false
 }
-
 
 export function hasDesktopAPI() { // $$b9
   return !!desktopAPIInstance

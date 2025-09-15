@@ -20,7 +20,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { Hl, YT } from "../figma_app/217457";
 import { a as _$$a2 } from "../905/584964";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { e0 } from "../905/696396";
 import { linkWithTracking } from "../figma_app/637027";
 var b = x;
@@ -212,7 +212,7 @@ function M({
   let _ = useMemo(() => _$$a2(l), [l]);
   let p = a[r];
   if (isNullish(p)) return jsx(Fragment, {});
-  let h = new vr(p.currency).formatMoney(p.amount);
+  let h = new CurrencyFormatter(p.currency).formatMoney(p.amount);
   let g = r === ProductAccessTypeEnum.EXPERT ? getI18nString("seat_billing_terms.modal.seat_features.list.full", {
     productList: _
   }) : getI18nString("seat_billing_terms.modal.seat_features.list", {

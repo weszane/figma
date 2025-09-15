@@ -9,7 +9,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
 import { lX, dT } from "../9420/394825";
-import { LN, bu, ub, B9 } from "../figma_app/514043";
+import { getUserCurrency, isCurrencyAllowedForCountry, getUserIsoCodeIfNonUsd, getAllowedCartCurrencies } from "../figma_app/514043";
 import { eV, pV, lB } from "../905/148137";
 import { V as _$$V } from "../905/57562";
 import { $ as _$$$ } from "../905/834575";
@@ -383,21 +383,21 @@ let $$P3 = _$$D(e => {
       } else if (e.shouldCheckIpCurrency) try {
         await _$$$.validateCurrency({
           teamId: e.customerInfo.teamId,
-          currency: LN(),
+          currency: getUserCurrency(),
           billingAddress: address,
           shippingAddress: _address,
           isCheckout: e.isCheckout
         });
       } catch (t) {
         W({
-          error: `Currency & IP address mismatch error: ${JSON.stringify(e.customerInfo)}, country: ${address.country}, currency: ${LN()}`,
+          error: `Currency & IP address mismatch error: ${JSON.stringify(e.customerInfo)}, country: ${address.country}, currency: ${getUserCurrency()}`,
           code: "currency-validation-error",
           message: getI18nString("payments.errors.currency_ip_mismatch_error")
         });
         return !0;
       }
     } else {
-      if (e.currency && !bu(e.currency, address.country)) {
+      if (e.currency && !isCurrencyAllowedForCountry(e.currency, address.country)) {
         W({
           error: "Currency/Address Mismatch",
           code: "currency-validation-error",
@@ -411,9 +411,9 @@ let $$P3 = _$$D(e => {
         });
         return !0;
       }
-      if (e.shouldCheckIpCurrency && ub() !== address.country) {
+      if (e.shouldCheckIpCurrency && getUserIsoCodeIfNonUsd() !== address.country) {
         W({
-          error: `Currency & IP address mismatch error: ${JSON.stringify(e.customerInfo)}, country: ${address.country}, currency: ${LN()}`,
+          error: `Currency & IP address mismatch error: ${JSON.stringify(e.customerInfo)}, country: ${address.country}, currency: ${getUserCurrency()}`,
           code: "currency-validation-error",
           message: getI18nString("payments.errors.currency_ip_mismatch_error")
         });
@@ -444,7 +444,7 @@ let $$P3 = _$$D(e => {
         trackEventAnalytics("Payment Form Loaded", {
           ...Z(),
           paymentMethod: Q ?? lB.CARD,
-          availableCurrencies: B9()
+          availableCurrencies: getAllowedCartCurrencies()
         });
         Q || q(lB.CARD);
         e.ready?.(r);

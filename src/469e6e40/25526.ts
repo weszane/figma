@@ -26,7 +26,7 @@ import { Ytf, URh, YEj } from "../figma_app/27776";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e2 } from "../905/621515";
 import { A as _$$A } from "../905/956262";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { FPlanNameType, FUserRoleType, FOrganizationLevelType, FAccessLevelType, FPublicationStatusType } from "../figma_app/191312";
 import { EnterpriseOrgAdminOnboardingSequenceView, WorkspacesTableView, ExtensionRequestTableView, AllowlistPluginsSectionView, OrgTeamsIdAndName } from "../figma_app/43951";
 import { useTeamPlanPublicInfo, getParentOrgIdIfOrgLevel, useCurrentPublicPlan, useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
@@ -105,7 +105,7 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { q as _$$q } from "../905/749058";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { E as _$$E2 } from "../905/453826";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
@@ -170,7 +170,7 @@ import { Z as _$$Z } from "../905/279476";
 import { FJ } from "../905/508367";
 import { reportError } from "../905/11";
 import { aD as _$$aD, Sn } from "../469e6e40/875985";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { Jv, YO, qH } from "../figma_app/934005";
 import { G as _$$G } from "../469e6e40/623116";
 import { Y as _$$Y3 } from "../7021/427161";
@@ -218,7 +218,7 @@ function T() {
 }
 var B = (e => (e.CreateFirstWorkspace = "CreateFirstWorkspace", e.CreateFirstBillingGroup = "CreateFirstBillingGroup", e))(B || {});
 let G = "seen_enterprise_org_admin_onboarding";
-let z = r1(G);
+let z = userFlagExistsAtomFamily(G);
 function V(e) {
   let {
     step,
@@ -506,7 +506,7 @@ function ed(e) {
 let eW = "admin_onboarding_overlay--bold--FFVeT";
 let eH = "admin_onboarding_overlay--listItem--qXeo9";
 let eY = "seen_sharing_clarity_admin_onboarding_overlay";
-let eJ = r1(eY);
+let eJ = userFlagExistsAtomFamily(eY);
 function eK() {
   let e = useAtomWithSubscription(eJ);
   let {
@@ -590,7 +590,7 @@ var e4 = e2;
 var e3 = e5;
 let th = "seen_org_admin_activity_onboarding";
 let tx = rn("org_admin_activity_onboarding", _$$R(Ql8));
-let tb = r1(th);
+let tb = userFlagExistsAtomFamily(th);
 function tv() {
   let e = useAtomWithSubscription(tb);
   let t = _$$e2({
@@ -620,7 +620,7 @@ function tv() {
     isShowing: t.isShowing,
     steps: i,
     onComplete: () => {
-      a(_$$b2({
+      a(postUserFlag({
         [th]: !0
       }));
       t.complete();
@@ -1752,7 +1752,7 @@ tZ.displayName = "ActivityLogsPage";
 let t7 = atom(!1);
 let t9 = "seen_org_admin_billing_groups_onboarding";
 let ae = rn("org_admin_license_groups_onboarding", _$$R(O5v));
-let at = r1(t9);
+let at = userFlagExistsAtomFamily(t9);
 function aa() {
   let e = useAtomWithSubscription(at);
   let t = useAtomWithSubscription(t7);
@@ -2712,7 +2712,7 @@ function ni(e) {
   });
 }
 function nr(e) {
-  let t = new vr(e.currency);
+  let t = new CurrencyFormatter(e.currency);
   return jsx("div", {
     "data-testid": "past-due-banner",
     children: jsxs(_$$aD, {
@@ -3083,7 +3083,7 @@ let nk = registerModal(function (e) {
   });
 }, "WorkspaceEditModal");
 let nE = "seen_org_admin_workspaces_onboarding";
-let nC = r1(nE);
+let nC = userFlagExistsAtomFamily(nE);
 function nS() {
   let e = useAtomWithSubscription(nC);
   let {
@@ -3789,7 +3789,7 @@ function nH(e) {
   });
 }
 let nJ = "seen_org_admin_unassigned_drafts_tab_onboarding";
-let nK = r1(nJ);
+let nK = userFlagExistsAtomFamily(nJ);
 function nX() {
   let e = useAtomWithSubscription(nK);
   let {

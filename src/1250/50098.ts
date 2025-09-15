@@ -13,7 +13,7 @@ import { Spacing, BigTextInputForwardRef } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { yJ } from "../figma_app/24841";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -191,7 +191,7 @@ function B({
                     prevJobTitle: T,
                     jobTitleList: B
                   });
-                  u(_$$b({
+                  u(postUserFlag({
                     submitted_job_title_prompt_overlay: !0
                   }));
                   U.props.close({

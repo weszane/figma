@@ -2,15 +2,15 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAtomWithSubscription, Xr } from "../figma_app/27355";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { BadgeLabels } from "../figma_app/919079";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { mapFileToProductType } from "../figma_app/314264";
 import { zN } from "../figma_app/579169";
-import { UQ } from "../figma_app/864723";
+import { isStarterUserAtom } from "../figma_app/864723";
 import { useCurrentFileKey, selectCurrentFile, useFullscreenViewFile } from "../figma_app/516028";
 import { UpsellModalType } from "../905/165519";
 import { QY, xw, Zk } from "../9410/351585";
@@ -80,11 +80,11 @@ function T({
 }) {
   let t = _$$I(e.editorType);
   let i = function (e) {
-    let t = useAtomWithSubscription(UQ);
+    let t = useAtomWithSubscription(isStarterUserAtom);
     let i = useAtomWithSubscription(zN);
     let {
       getConfig
-    } = I7("exp_free_badge_in_drafts_plan_comparison");
+    } = selectExperimentConfigHook("exp_free_badge_in_drafts_plan_comparison");
     return useMemo(() => "design" === e && t && "loaded" === i.status && !1 === i.data && !!getConfig().getValue("free_badge_visible", !1), [e, t, i.status, i.data, getConfig]);
   }(e.editorType);
   let a = {
@@ -111,7 +111,7 @@ function w({
     onBadgeClick: () => {
       i.showing && i.userFlag && (n({
         showing: !1
-      }), t(popModalStack()), t(_$$b({
+      }), t(popModalStack()), t(postUserFlag({
         [i.userFlag]: !0
       })), o[i.userFlag] = {
         fileKey: m || void 0,
@@ -504,7 +504,7 @@ function eh({
     onBadgeClick: () => {
       o.showing && o.userFlag && (c({
         showing: !1
-      }), n(popModalStack()), n(_$$b({
+      }), n(popModalStack()), n(postUserFlag({
         [o.userFlag]: !0
       })));
       i();

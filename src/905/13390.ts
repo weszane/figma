@@ -42,7 +42,7 @@ import { nk } from '../figma_app/2023';
 import { S as _$$S } from '../figma_app/11182';
 import { isExternalRestricted } from '../figma_app/12796';
 import { useAtomWithSubscription, Xr } from '../figma_app/27355';
-import { S as _$$S2 } from '../figma_app/78808';
+import { copyShareLinkOptimistic } from '../figma_app/78808';
 import { yN } from '../figma_app/88484';
 import { GI } from '../figma_app/147337';
 import { FFileType } from '../figma_app/191312';
@@ -57,7 +57,7 @@ import { jn } from '../figma_app/522082';
 import { isRootPath } from '../figma_app/528509';
 import { nb, Tf, Y6 } from '../figma_app/543100';
 import { setupResourceAtomHandler } from '../figma_app/566371';
-import { Fj } from '../figma_app/594947';
+import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { gO, z6 } from '../figma_app/598926';
 import { UF } from '../figma_app/622574';
 import { Z as _$$Z } from '../figma_app/640519';
@@ -170,7 +170,7 @@ export function $$ek0(e) {
     fileInBrowser: eU.type === nb.FILE ? eU.file : void 0
   });
   let e$ = GI('tile_action_dropdown');
-  let eZ = Fj('file_multi_move_limit').getDynamicConfig().get('fileLimit', 100);
+  let eZ = setupDynamicConfigHandler('file_multi_move_limit').getDynamicConfig().get('fileLimit', 100);
   let eX = e => {
     if (e.file.folderId != null) {
       if (currentUserOrgId === e.file.parentOrgId) {
@@ -286,7 +286,7 @@ export function $$ek0(e) {
     switch (e.type) {
       case nb.FILE:
         let t = e.file;
-        i(_$$S2({
+        i(copyShareLinkOptimistic({
           fileKey: t.key,
           url: buildFileUrl({
             file: t,
@@ -297,7 +297,7 @@ export function $$ek0(e) {
         }));
         break;
       case nb.PINNED_FILE:
-        i(_$$S2({
+        i(copyShareLinkOptimistic({
           fileKey: e.file.key,
           url: buildFileUrl({
             file: e.file,
@@ -321,7 +321,7 @@ export function $$ek0(e) {
         break;
       case nb.REPO:
         let n = findBranchById(e.repo, e.branches, selectedBranchKeyByRepoId);
-        i(_$$S2({
+        i(copyShareLinkOptimistic({
           fileKey: n.key,
           url: generateUrl(n, e.repo, 'file'),
           source: ShareContext.FILE_TILE_CONTEXT_MENU

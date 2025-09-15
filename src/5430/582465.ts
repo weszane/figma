@@ -9,7 +9,7 @@ import { ms } from "../figma_app/209680";
 import { E } from "../5430/741319";
 import { D } from "../5430/253633";
 import { v$ } from "../figma_app/455722";
-import { Fm } from "../figma_app/275462";
+import { isResourceHubInternalSearchEnabled } from "../figma_app/275462";
 import { PF } from "../figma_app/930386";
 import { G } from "../5430/654859";
 import { useDispatch } from "react-redux";
@@ -86,7 +86,7 @@ export function $$w0({
   let [w, C] = useState("");
   let L = useAtomWithSubscription(E);
   let T = getI18nString("community.search.placeholder");
-  f && (T = Fm() ? getI18nString("community.search.search_templates_and_tools") : getI18nString("community.search.search_community_placeholder"));
+  f && (T = isResourceHubInternalSearchEnabled() ? getI18nString("community.search.search_templates_and_tools") : getI18nString("community.search.search_community_placeholder"));
   let I = useDebouncedCallback(e, t ? 600 : 400);
   let N = useCallback(() => {
     C("");

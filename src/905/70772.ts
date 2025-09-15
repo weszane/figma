@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { parseColor } from "../figma_app/191804";
 import { Point } from "../905/736624";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -178,7 +178,7 @@ export let $$k0 = registerModal(function (e) {
               children: O[i].metadata.file_name ?? getI18nString("comments.attachment_default_name", {
                 fileExtension: O[i].mediaType.split("/")[1]
               })
-            }), jsx(Jn, {
+            }), jsx(CloseButton, {
               className: "attachment_detail_modal--headerCloseButton--Ueo20",
               recordingKey: "commentMediaDetailModal",
               onClick: G,

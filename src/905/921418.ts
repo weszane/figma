@@ -4,7 +4,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import s from "../vendor/946678";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
-import { hW } from "../figma_app/594947";
+import { getExperimentConfigAsync } from "../figma_app/594947";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { Dy, pY } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
@@ -284,7 +284,7 @@ let $$G0 = new class extends M {
           localSearchResultCount: E.normalizedSearchResults.length,
           searchType: _?.type
         };
-        await hW("exp_asset_search_refactor");
+        await getExperimentConfigAsync("exp_asset_search_refactor");
         analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
           ...x,
           ...o,
@@ -334,7 +334,7 @@ let $$G0 = new class extends M {
           totalShownResults: x.totalShownResults + e
         };
       }
-      await hW("exp_asset_search_refactor");
+      await getExperimentConfigAsync("exp_asset_search_refactor");
       analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
         ...x,
         ...D,

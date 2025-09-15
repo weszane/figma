@@ -2,8 +2,8 @@ import { logger } from "../905/651849";
 import { C } from "../905/237873";
 import { H, e as _$$e } from "../figma_app/324237";
 import { Z } from "../905/942203";
-import { k as _$$k } from "../905/22009";
-import { L } from "../905/178090";
+import { editorUtilities as _$$k } from "../905/22009";
+import { ResourceTypes } from "../905/178090";
 import { J5, iB } from "../figma_app/805898";
 import { zs, pJ } from "../figma_app/773663";
 export function $$u6(e, t) {
@@ -53,7 +53,7 @@ export function $$p1(e) {
       resourceType
     } = zs(e.editor_type, e.resourceType);
     e.editor_type !== editorType ? e.resourceType = zs(e.editor_type).resourceType : e.resourceType !== resourceType && (e.resourceType = resourceType);
-    e.resourceType !== L.BrowseResourceTypes.MIXED && (t += `/${e.resourceType}`);
+    e.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED && (t += `/${e.resourceType}`);
     zs(e.editor_type, e.resourceType).editorType !== _$$k.Editors.ALL && (t += `/${e.editor_type}`);
     e.price && C.FOR_URL_SLUG.indexOf(e.price) > -1 && (t += `/${e.price}`);
     e.creators === Z.FIGMA_PARTNER && (t += `/${e.creators}`);
@@ -111,7 +111,7 @@ let b = [function (e) {
   }, e.slice(2)];
 }, function (e) {
   let t = e[0];
-  return Object.values(L.BrowseResourceTypes).indexOf(t) > -1 && [{
+  return Object.values(ResourceTypes.BrowseResourceTypes).indexOf(t) > -1 && [{
     resourceType: t
   }, e.slice(1)];
 }, function (e, t) {

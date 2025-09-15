@@ -17,7 +17,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { A as _$$A } from "../1250/724587";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { hr } from "../905/352022";
 import { vp, HE } from "../905/967587";
 import { V as _$$V } from "../1250/329133";
@@ -269,7 +269,7 @@ function $({
 }
 let q = (e, t, n) => {
   e && n(e, !0);
-  t(_$$b2({
+  t(postUserFlag({
     switched_to_new_plan_from_dtm_deprecation_onboarding: !0
   }));
 };

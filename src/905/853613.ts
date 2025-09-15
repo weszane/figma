@@ -1,9 +1,9 @@
 import { atomStoreManager } from "../figma_app/27355";
 import { LibrarySourceEnum } from "../figma_app/633080";
-import { V9 } from "../905/72677";
+import { resourceDataToSubscriptionMapAtom } from "../905/72677";
 export function $$s0(e) {
   if (null == e) return;
-  let t = atomStoreManager.get(V9);
+  let t = atomStoreManager.get(resourceDataToSubscriptionMapAtom);
   return t[e]?.partner_type ?? void 0;
 }
 export function $$o1(e) {

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { selectCurrentFile } from "../figma_app/516028";
 import { wA } from "../figma_app/336853";
 function l() {
@@ -18,7 +18,7 @@ export function $$$$d1() {
     currentTeam,
     currentFile
   } = l();
-  let i = I7("exp_aa_test_teamid_fullscreen_menu");
+  let i = selectExperimentConfigHook("exp_aa_test_teamid_fullscreen_menu");
   useEffect(() => {
     !currentOrg && currentTeam && currentFile && "design" === currentFile.editorType && i.getConfig();
   }, [currentOrg, currentTeam, currentFile, i]);

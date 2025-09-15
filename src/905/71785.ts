@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { ProductSource, ProductStatus } from '../905/54385';
-import { fe } from '../905/272080';
+import { SubscriptionMetadataSchema } from '../905/272080';
 import { Y } from '../905/344937';
 import { CommunityRatingStatsContainerSchema } from '../905/796201';
 import { n as _$$n, s as _$$s } from '../905/875063';
@@ -57,7 +57,7 @@ let $$f3 = z.object({
   verification_status: z.nativeEnum(FUserVerificationStatusType).optional(),
   commenting_is_restricted: z.boolean().optional(),
   monetization_status: z.nativeEnum(ProductSource).nullish(),
-  community_resource_payment: fe.optional(),
+  community_resource_payment: SubscriptionMetadataSchema.optional(),
   support_contact: z.string().nullish(),
   published_site_url: z.string().nullish(),
   library_key: z.custom().optional(),

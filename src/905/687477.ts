@@ -17,7 +17,7 @@ import { fullscreenValue } from '../figma_app/455680';
 import { v7 } from '../figma_app/475303';
 import { gk, tj } from '../figma_app/540726';
 import { isDebugSelectedFigmakeFullscreen } from '../figma_app/552876';
-import { gP } from '../figma_app/594947';
+import { getInitialDynamicConfig } from '../figma_app/594947';
 import { I2 } from '../figma_app/603466';
 import { wo } from '../figma_app/753501';
 import { KeyboardLayout, EventTypeEnum, InsertErrorType, Fullscreen, PointerType, PanelType, DesignGraphElements, HTMLWindow, PageNavigation, ClipboardAction } from '../figma_app/763686';
@@ -1253,7 +1253,7 @@ class W {
           {
             atomStoreManager.set(Q_);
             let e = gk(i) && i.clipboardData?.getData('text/html');
-            getFeatureFlags().bake_large_paste_warning && e && e.length > gP('make_large_paste_threshold').get('sizeBytes', 25e4) && hH(InsertErrorType.INSERTED_NODES_TOO_LARGE);
+            getFeatureFlags().bake_large_paste_warning && e && e.length > getInitialDynamicConfig('make_large_paste_threshold').get('sizeBytes', 25e4) && hH(InsertErrorType.INSERTED_NODES_TOO_LARGE);
           }
         }
         e(i, ClipboardAction.PASTE);

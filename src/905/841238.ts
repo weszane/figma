@@ -12,7 +12,7 @@ import { KeyCodes } from "../905/63728";
 import { generateRecordingKey } from "../figma_app/878298";
 import { RecordableInput } from "../905/511649";
 import { Point } from "../905/736624";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { TQ, Zl } from "../905/211621";
 import { LazyInputForwardRef } from "../905/408237";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -310,7 +310,7 @@ let $$X0 = registerModal(function (e) {
       children: [jsx("p", {
         className: "create_component_prop_modal--heading--qr9K5",
         children: renderI18nText("design_systems.component_properties.create_property")
-      }), jsx(Jn, {
+      }), jsx(CloseButton, {
         onClick: eu
       })]
     }), jsxs(i, {

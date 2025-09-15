@@ -29,7 +29,7 @@ import { O as _$$O } from "../figma_app/710329";
 import { P as _$$P } from "../905/842406";
 import { FProductAccessType, FOrganizationLevelType } from "../figma_app/191312";
 import { ModifyPlanUserSeatModalView } from "../figma_app/43951";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { getPlanData } from "../figma_app/428858";
 import { E as _$$E } from "../figma_app/126651";
 import { e0 } from "../905/696396";
@@ -61,7 +61,7 @@ export function $$K1(e) {
   let p = Xf(d.parentId, s);
   let m = useSelector(e => e.teamBilling);
   let h = s ? p?.data?.currency : m.summary.currency;
-  let g = h ? new vr(h) : void 0;
+  let g = h ? new CurrencyFormatter(h) : void 0;
   return e.editorType && a && d.parentId && t ? t.pending ? jsx(Y, {
     pendingRole: t,
     planKey: d,

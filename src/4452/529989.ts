@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Q } from "../9864/768691";
 import { e as _$$e } from "../905/621515";
 import { eS } from "../figma_app/33126";
@@ -60,9 +60,9 @@ export function $$v0(e) {
     trackingContextName: "Gen1 Welcome Modal",
     testId: "NuxOnboardingOverlay-Gen1"
   } : {
-      trackingContextName: "Gen 0 NUX",
-      testId: "NuxOnboardingOverlay-Gen0"
-    };
+    trackingContextName: "Gen 0 NUX",
+    testId: "NuxOnboardingOverlay-Gen0"
+  };
   return jsx(_$$b2, {
     isGen1: v,
     trackingContextName,
@@ -70,7 +70,7 @@ export function $$v0(e) {
     isShowing,
     dataTestId: testId,
     onOverlayClose: () => {
-      a(_$$b({
+      a(postUserFlag({
         welcome_onboarded: !0
       }));
       complete();

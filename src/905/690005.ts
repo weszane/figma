@@ -1,8 +1,8 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
-import { s_ } from "../905/17223";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
+import { ModalCloseButton } from "../905/17223";
 import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { SvgComponent } from "../905/714743";
@@ -34,9 +34,9 @@ class S extends Component {
   constructor() {
     super(...arguments);
     this.onLogInClick = () => {
-      this.props.dispatch(Ts({
+      this.props.dispatch(AUTH_INIT({
         origin: "community_hub_signed_out_top_bar",
-        formState: qB.SIGN_IN,
+        formState: AuthFlowStep.SIGN_IN,
         redirectUrl: this.props.redirectPath
       }));
       this.props.dispatch(showModalHandler({
@@ -47,9 +47,9 @@ class S extends Component {
       }));
     };
     this.onSignUpClick = () => {
-      this.props.dispatch(Ts({
+      this.props.dispatch(AUTH_INIT({
         origin: "community_hub_signed_out_top_bar",
-        formState: qB.SIGN_UP
+        formState: AuthFlowStep.SIGN_UP
       }));
       this.props.dispatch(showModalHandler({
         type: _$$x,
@@ -74,7 +74,7 @@ class S extends Component {
           onSignUpClick: this.onSignUpClick
         },
         Component: {
-          ModalCloseButton: s_,
+          ModalCloseButton: ModalCloseButton,
           BrandButton: Ak,
           ButtonSecondaryTracked: ButtonSecondaryTracked,
           Svg: SvgComponent

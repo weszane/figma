@@ -4,7 +4,7 @@ import { Rx } from "../905/686312";
 import { loadScript } from "../figma_app/623293";
 import { logDebug, logInfo, logWarning, logError } from "../905/714362";
 import { analyticsEventManager } from "../905/449184";
-import { w$ } from "../figma_app/594947";
+import { FrozenConfigManager } from "../figma_app/594947";
 import { Su } from "../figma_app/781115";
 import { L } from "../905/550169";
 import { ld } from "../figma_app/582563";
@@ -73,40 +73,40 @@ class E {
 }
 let y = class e {
   getDynamicConfigBoolean(t, r, n) {
-    return w$.getDynamicConfigBoolean(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getDynamicConfigBoolean(t, r, n, e.SourceLoggingString);
   }
   getDynamicConfigNumber(t, r, n) {
-    return w$.getDynamicConfigNumber(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getDynamicConfigNumber(t, r, n, e.SourceLoggingString);
   }
   getDynamicConfigString(t, r, n) {
-    return w$.getDynamicConfigString(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getDynamicConfigString(t, r, n, e.SourceLoggingString);
   }
   getExperimentBoolean(t, r, n) {
-    return w$.getExperimentBoolean(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getExperimentBoolean(t, r, n, e.SourceLoggingString);
   }
   getExperimentNumber(t, r, n) {
-    return w$.getExperimentNumber(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getExperimentNumber(t, r, n, e.SourceLoggingString);
   }
   getExperimentString(t, r, n) {
-    return w$.getExperimentString(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getExperimentString(t, r, n, e.SourceLoggingString);
   }
   clearFeatureGatesForTesting() {
-    w$.clear();
+    FrozenConfigManager.clear();
   }
   updateFeatureGateForTesting(e, t) {
-    w$.updateFeatureGateForTesting(e, t);
+    FrozenConfigManager.updateFeatureGateForTesting(e, t);
   }
   getFeatureGate(e) {
-    return w$.getFeatureGateFromInitialOptions(e);
+    return FrozenConfigManager.getFeatureGateFromInitialOptions(e);
   }
   setInRenderServerForViewerTests() {
-    w$.setInRenderServerForViewerTests();
+    FrozenConfigManager.setInRenderServerForViewerTests();
   }
   updateExperimentForTesting(e, t, r) {
-    w$.updateExperimentForTesting(e, t, r);
+    FrozenConfigManager.updateExperimentForTesting(e, t, r);
   }
   clearExperimentsForTesting() {
-    w$.clear();
+    FrozenConfigManager.clear();
   }
 };
 async function b() {

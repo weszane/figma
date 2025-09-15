@@ -18,7 +18,7 @@ import { showModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
-import { _Z, B9 } from "../figma_app/514043";
+import { isNonUsdUserCurrency, getAllowedCartCurrencies } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
 import { SubscriptionType } from "../figma_app/831101";
 import { KindEnum } from "../905/129884";
@@ -144,12 +144,12 @@ export function $$P0({
   let M = Qu().filter(e => L.includes(e.planTier));
   let j = !u && Hw(w);
   return jsxs("div", {
-    children: [_Z() && jsx("div", {
+    children: [isNonUsdUserCurrency() && jsx("div", {
       className: _$$s.flex.justifyEnd.$,
       children: jsx(_$$D, {
         currency: e,
         dropdownShown: v,
-        supportedCurrencies: B9(),
+        supportedCurrencies: getAllowedCartCurrencies(),
         changeCurrency: t,
         shortFormDisplay: !0
       })

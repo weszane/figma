@@ -8,10 +8,10 @@ import { XHR } from "../905/910117";
 import { getFileKey } from "../905/412913";
 import { D3 } from "../905/359847";
 import { createOptimistThunk } from "../905/350402";
-import { uo, yJ } from "../figma_app/78808";
+import { batchPutFileAction, filePutAction } from "../figma_app/78808";
 import { uo as _$$uo, lx, Ho, dC } from "../905/879323";
 import { tg, xZ, VF } from "../figma_app/933328";
-import { Cx, x2, of } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { qp } from "../905/977779";
 import { LC, Ve, iw, kG } from "../figma_app/646357";
 import { l as _$$l } from "../905/997221";
@@ -39,7 +39,7 @@ async function R(e, t) {
     LC();
     return;
   }
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: d
   }));
   let c = e.getState();
@@ -63,7 +63,7 @@ async function R(e, t) {
     });
     let [m] = await Promise.all([p]);
     n || (await kb.promise);
-    e.dispatch(uo({
+    e.dispatch(batchPutFileAction({
       files: m.data.meta.files,
       subscribeToRealtime: !0
     }));
@@ -100,14 +100,14 @@ async function R(e, t) {
       });
     }
     LC();
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: d
     }));
     YG.queryDidChange(e);
   } catch (r) {
     LC();
     O.set(t, (O.get(t) || 0) + 1);
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: d
     }));
   }
@@ -118,7 +118,7 @@ async function L(e) {
   let r = iw(t.key);
   let i = e.getState().loadingState;
   if (!(D2(i, r) || VP(i, r))) {
-    e.dispatch(Cx({
+    e.dispatch(loadingStatePutLoading({
       key: r
     }));
     try {
@@ -131,7 +131,7 @@ async function L(e) {
       D(e, i.data.meta.state_groups, PrimaryWorkflowEnum.STATE_GROUP);
       i.data.meta.files.forEach(t => {
         t.team_id = NO_TEAM;
-        e.dispatch(yJ({
+        e.dispatch(filePutAction({
           file: t
         }));
       });
@@ -140,12 +140,12 @@ async function L(e) {
         libraryKeys: a
       }));
       kG();
-      e.dispatch(x2({
+      e.dispatch(loadingStatePutSuccess({
         key: r
       }));
     } catch (t) {
       kG();
-      e.dispatch(of({
+      e.dispatch(loadingStatePutFailure({
         key: r
       }));
       YG.queryDidChange(e);
@@ -184,12 +184,12 @@ async function j(e, t) {
   let r;
   if (VP(e.getState().loadingState, $$F1)) return;
   atomStoreManager.set($$k2, "loading");
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: $$F1
   }));
   let n = e.getState();
   if ("fullscreen" !== n.selectedView.view) {
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: $$F1
     }));
     atomStoreManager.set($$k2, "loaded");
@@ -202,7 +202,7 @@ async function j(e, t) {
     e.type === PrimaryWorkflowEnum.COMPONENT && e.key && !n.library.publishedByLibraryKey.components[e.team_id]?.[t]?.[e.node_id] ? i.add(e.key) : e.type === PrimaryWorkflowEnum.STATE_GROUP && e.key && !n.library.publishedByLibraryKey.stateGroups[e.team_id]?.[t]?.[e.node_id] && a.add(e.key);
   }
   if (0 === i.size && 0 === a.size) {
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: $$F1
     }));
     atomStoreManager.set($$k2, "loaded");
@@ -215,17 +215,17 @@ async function j(e, t) {
       org_id: n.openFile?.parentOrgId
     });
   } catch (t) {
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: $$F1
     }));
     atomStoreManager.set($$k2, "loaded");
     return;
   }
-  e.dispatch(x2({
+  e.dispatch(loadingStatePutSuccess({
     key: $$F1
   }));
   atomStoreManager.set($$k2, "loaded");
-  e.dispatch(uo({
+  e.dispatch(batchPutFileAction({
     files: r.data.meta.files,
     subscribeToRealtime: !1
   }));

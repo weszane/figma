@@ -8,7 +8,7 @@ import { t as _$$t } from "../905/947268";
 import { Z as _$$Z } from "../905/498136";
 import { VariableResolvedDataType } from "../figma_app/763686";
 import { trackFileEventWithStore } from "../figma_app/901889";
-import { j } from "../905/918929";
+import { partitionByPredicate } from "../905/918929";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { wJ } from "../figma_app/630951";
@@ -38,7 +38,7 @@ function T({
   let {
     pass,
     fail
-  } = useMemo(() => j(i, e => wJ(e.fileKey)), [i]);
+  } = useMemo(() => partitionByPredicate(i, e => wJ(e.fileKey)), [i]);
   let h = useMemo(() => C(i), [i]);
   let b = "SUBSCRIBED_VARIABLES" === t.type ? t.libraryKey : void 0;
   let E = useCallback(e => {

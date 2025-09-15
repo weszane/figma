@@ -9,7 +9,7 @@ import { reportError } from "../905/11";
 import { XP } from "../figma_app/655139";
 import { canAccessFullDevMode } from "../figma_app/473493";
 import { mapPlatformToFramework } from "../905/359509";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { UK } from "../figma_app/740163";
 import { Jr } from "../figma_app/624361";
@@ -22,7 +22,7 @@ import { pe, Kx, tz, SV, rx, DR, lk, f as _$$f, Nt, iy } from "../figma_app/3423
 import { $w, Z, E4 } from "../figma_app/935144";
 import { nP, Kk } from "../figma_app/484865";
 import { t2 } from "../figma_app/911720";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { CX, Kl } from "../905/372596";
 import { jb, Lv, oG } from "../figma_app/681951";
 import { uT } from "../figma_app/802241";
@@ -100,7 +100,7 @@ async function N(e) {
       type: "CONTENT_HEIGHT",
       value: t
     }) : null;
-  }(e, (await w0("dt_mcp_image_dimension_resizing_value")).get("constraint", null));
+  }(e, (await fetchDynamicConfig("dt_mcp_image_dimension_resizing_value")).get("constraint", null));
   let i = await e.loadImagesAndExport([{
     imageType: "PNG",
     suffix: "png",
@@ -214,7 +214,7 @@ export async function $$z1(e, t, i, d) {
   if (function (e) {
     if ("fullscreen" !== e.getState().selectedView.view) throw Error("The MCP server is only available if your active tab is a Figma design file");
     if (!getFeatureFlags().dt_my_cool_plugin || !UK().enableCodegenMcpServer) throw Error("The MCP server is not enabled for this user");
-  }(i), i.dispatch(_$$b({
+  }(i), i.dispatch(postUserFlag({
     dev_mode_mcp_has_used_a_tool: !0
   })), e === MCP_INTERNAL_GET_TOOLS) {
     let e = {

@@ -2,7 +2,7 @@ import { createActionCreator } from "../905/73481";
 import { logWarning } from "../905/714362";
 import { P, o as _$$o } from "../905/717906";
 import { createOptimistThunk } from "../905/350402";
-import { Cx, x2, of } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { getPluginAllowListKey, getWidgetAllowListKey } from "../figma_app/155287";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
@@ -15,7 +15,7 @@ let $$h3 = createOptimistThunk((e, t) => {
   let n = e.getState();
   let a = n.openFile?.key ?? null;
   let s = getPluginAllowListKey(i, a);
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: s
   }));
   pluginAPIService.getOrgWhitelist({
@@ -32,14 +32,14 @@ let $$h3 = createOptimistThunk((e, t) => {
     }));
     let n = i.reduce((e, t) => (e[t.id] = !0, e), {});
     e.dispatch($$p1(n));
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: s
     }));
   }).catch(t => {
     logWarning("plugin allowlist", "Unable to fetch the plugin allowlist", {
       message: t.message
     });
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: s
     }));
   });
@@ -50,7 +50,7 @@ let $$g6 = createOptimistThunk(async (e, t) => {
   let n = e.getState();
   let a = n.openFile?.key ?? null;
   let s = getWidgetAllowListKey(i, a);
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: s
   }));
   try {
@@ -66,14 +66,14 @@ let $$g6 = createOptimistThunk(async (e, t) => {
     }));
     let l = r.reduce((e, t) => (e[t.id] = !0, e), {});
     e.dispatch($$m7(l));
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: s
     }));
   } catch (t) {
     logWarning("widget allowlist", "Unable to fetch the widget allowlist", {
       message: t.message
     });
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: s
     }));
   }

@@ -7,7 +7,7 @@ import { getLaunchDarklyFlagsExport, getInitialOptions, isDevEnvironment } from 
 import { y as _$$y, t as _$$t } from "../905/958284";
 import { OC, yF, AN } from "../figma_app/386952";
 import { NT } from "../figma_app/579169";
-import { Fu } from "../figma_app/545877";
+import { userFlagAtomFamily } from "../figma_app/545877";
 import { trackEventAnalytics } from "../905/449184";
 import { NotificationType } from "../905/170564";
 import { m as _$$m } from "../905/92222";
@@ -87,7 +87,7 @@ let O = atom(e => {
   let r = e(NT);
   let a = e(_$$a);
   let o = "string" == typeof r || void 0 === r ? r : "loaded" === r.status ? r.data : void 0;
-  let l = e(Fu("last_seen_dev_mode_upsell"));
+  let l = e(userFlagAtomFamily("last_seen_dev_mode_upsell"));
   return {
     uiState: {
       selectedView: t,

@@ -1,7 +1,7 @@
 import { createValidatedLocalStorageAtom, atom } from "../figma_app/27355";
 import { z } from "../905/239603";
 import a from "../vendor/240820";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 var s = a;
 export function $$l0(e, t, i, a = {
   maxNumRecentlyUsed: 20,
@@ -13,11 +13,11 @@ export function $$l0(e, t, i, a = {
     subscribeToChanges: !0
   });
   return atom(e => {
-    let t = e(kS);
+    let t = e(userIdAtom);
     return t ? e(d).filter(e => !!e.lastAddedAtUserId[t]) : [];
   }, (e, i, n) => {
     let r = [...e(d)];
-    let s = e(kS);
+    let s = e(userIdAtom);
     if (!s) return;
     let l = a.transform(n, e);
     let c = r.findIndex(e => e[t] === l[t]);

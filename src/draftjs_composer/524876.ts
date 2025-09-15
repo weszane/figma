@@ -24,7 +24,7 @@ import { n as _$$n } from "../draftjs_composer/589474";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { RI, We, uz, i4 } from "../figma_app/770088";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { y as _$$y } from "../figma_app/297957";
 import { lg, HW } from "../figma_app/976749";
 import { k as _$$k2 } from "../figma_app/564183";
@@ -195,7 +195,7 @@ export function $$em1(e) {
     trackUserEvent("Comment composer opened", eF.getState(), {
       isThread: t
     });
-    $ || eF.dispatch(_$$b({
+    $ || eF.dispatch(postUserFlag({
       has_opened_comments_modal: !0
     }));
   }, [eF, e.threadId, $]);

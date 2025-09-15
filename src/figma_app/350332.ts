@@ -5,7 +5,7 @@ import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
-import { Fj } from "../figma_app/594947";
+import { setupDynamicConfigHandler } from "../figma_app/594947";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { AiMeterUsageView } from "../figma_app/43951";
 import { n as _$$n } from "../905/347702";
@@ -28,7 +28,7 @@ function f() {
 _$$n((e, t) => {
   let {
     getDynamicConfig
-  } = Fj("ai_metering_credits_per_feature");
+  } = setupDynamicConfigHandler("ai_metering_credits_per_feature");
   if (!e) return 0;
   if (!getFeatureFlags().ai_credits_metering) return 1;
   let i = new Map(Object.entries(getDynamicConfig().get(e.toString(), {})));

@@ -11,10 +11,10 @@ import { createOptimistThunk } from "../905/350402";
 import { yJ } from "../figma_app/240735";
 import { UM, vr } from "../figma_app/475472";
 import { n1, p9 } from "../figma_app/88768";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { Eh } from "../figma_app/617654";
 import { u as _$$u } from "../905/774364";
-import { Cx, of } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStatePutFailure } from "../figma_app/714946";
 var s = a;
 createOptimistThunk(async (e, t) => {
   let r = t.team.id;
@@ -96,7 +96,7 @@ let $$S6 = createOptimistThunk((e, t) => {
   };
   t.level && (i.level = t.level);
   let a = n1(n);
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: a
   }));
   XHR.post(`/api/orgs/${r}/teams/join`, i).then(() => {
@@ -106,7 +106,7 @@ let $$S6 = createOptimistThunk((e, t) => {
     }));
   }).catch(t => {
     e.dispatch(FlashActions.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_joining_teams"))));
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: a
     }));
   });
@@ -119,7 +119,7 @@ let v = createOptimistThunk((e, t) => {
   };
   t.level && (i.level = t.level);
   let a = p9(n);
-  e.dispatch(Cx({
+  e.dispatch(loadingStatePutLoading({
     key: a
   }));
   XHR.post(`/api/orgs/${r}/teams/join`, i).then(() => {
@@ -129,7 +129,7 @@ let v = createOptimistThunk((e, t) => {
     }));
   }).catch(t => {
     e.dispatch(FlashActions.error(resolveMessage(t, getI18nString("org_team_actions.an_error_occurred_while_joining"))));
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: a
     }));
   });
@@ -146,7 +146,7 @@ let $$A2 = createOptimistThunk((e, t, {
     orgId: n,
     teamId
   });
-  N(s, e, r);
+  setupLoadingStateHandler(s, e, r);
   s.then(t => {
     let r = t.data.meta;
     e.dispatch(yJ({

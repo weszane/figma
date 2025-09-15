@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { A } from "../905/920142";
 import { customHistory } from "../905/612521";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -19,7 +19,7 @@ export function $$_1(e) {
     let c = e || ("DUPLICATE" === r.landingState && t ? getI18nString("footer_banner.log_in_or_create_an_account_to_get_a_copy_of_file_name", {
       fileName: t
     }) : "");
-    n(Ts({
+    n(AUTH_INIT({
       origin: i,
       formState: a,
       redirectUrl: customHistory.location.pathname

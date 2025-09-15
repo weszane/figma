@@ -40,7 +40,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { X as _$$X } from "../905/853613";
 import { findComponentGuidOrPublishId } from "../figma_app/854115";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { replaceSelection } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
@@ -1174,7 +1174,7 @@ function eJ({
   let s = useDispatch();
   let o = _$$f2(eq);
   let l = useCallback(() => {
-    s(_$$b({
+    s(postUserFlag({
       [eq]: !0
     }));
   }, [s]);

@@ -1,12 +1,39 @@
-import { atom } from "../figma_app/27355";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-let $$a4 = createReduxSubscriptionAtomWithState(e => e.user);
-let $$s2 = atom(e => e($$a4)?.id);
-let $$o3 = atom(e => e($$a4)?.created_at);
-let $$l1 = createReduxSubscriptionAtomWithState(e => e.userStateLoaded);
-let $$d0 = createReduxSubscriptionAtomWithState(e => e.isStarterUser);
-export const UQ = $$d0;
-export const VF = $$l1;
-export const kS = $$s2;
-export const mp = $$o3;
-export const p9 = $$a4;
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { atom } from '../figma_app/27355'
+
+/**
+ * Atom for user state from Redux subscription.
+ * (original: $$a4)
+ */
+export const userAtom = createReduxSubscriptionAtomWithState(e => e.user)
+
+/**
+ * Atom for user id.
+ * (original: $$s2)
+ */
+export const userIdAtom = atom(e => e(userAtom)?.id)
+
+/**
+ * Atom for user creation date.
+ * (original: $$o3)
+ */
+export const userCreatedAtAtom = atom(e => e(userAtom)?.created_at)
+
+/**
+ * Atom for user state loaded flag.
+ * (original: $$l1)
+ */
+export const userStateLoadedAtom = createReduxSubscriptionAtomWithState(e => e.userStateLoaded)
+
+/**
+ * Atom for starter user flag.
+ * (original: $$d0)
+ */
+export const isStarterUserAtom = createReduxSubscriptionAtomWithState(e => e.isStarterUser)
+
+// Export refactored atoms with new names
+export const UQ = isStarterUserAtom
+export const VF = userStateLoadedAtom
+export const kS = userIdAtom
+export const mp = userCreatedAtAtom
+export const p9 = userAtom

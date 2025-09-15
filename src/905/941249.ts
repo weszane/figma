@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { trackTeamEvent } from "../figma_app/314264";
 import { FResourceCategoryType } from "../figma_app/191312";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { _M, jx, wZ, OL } from "../figma_app/869776";
 import { S } from "../figma_app/11182";
 var $$h1 = (e => (e.TEAM_PERMISSIONS_MODAL = "team permissions modal", e.NUX_INVITE_COLLABORATOR = "nux invite collaborator", e))($$h1 || {});
@@ -17,7 +17,7 @@ let $$f5 = createOptimistThunk(async (e, t, {
   let n = XHR.put("/api/team_join_link/disable", {
     team_id: t.teamId
   });
-  N(n, e, i);
+  setupLoadingStateHandler(n, e, i);
   await n.then(() => {
     e.dispatch($$g0({
       disabled: !0,
@@ -32,7 +32,7 @@ let $$_3 = createOptimistThunk(async (e, t) => {
     team_id: t.teamId,
     level: t.level
   });
-  N(i, e, _M(t.teamId));
+  setupLoadingStateHandler(i, e, _M(t.teamId));
   await i.then(({
     data: i
   }) => {
@@ -51,7 +51,7 @@ let $$_3 = createOptimistThunk(async (e, t) => {
 });
 let $$A4 = createOptimistThunk((e, t) => {
   let i = wZ(t.teamId, t.level);
-  N(i, e, OL(t.teamId));
+  setupLoadingStateHandler(i, e, OL(t.teamId));
   i.then(t => {
     if (t.disabled) e.dispatch($$g0({
       disabled: !0,

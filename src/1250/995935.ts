@@ -76,7 +76,7 @@ import { _ as _$$_ } from "../figma_app/4253";
 import { useIsSelectedViewFullscreenCooper, isCooperFeatureEnabled } from "../figma_app/828186";
 import { u1 } from "../figma_app/91703";
 import { WX } from "../figma_app/482142";
-import { b as _$$b3 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { bE } from "../figma_app/375098";
 import { Tb } from "../figma_app/350203";
 import { C9 } from "../figma_app/8833";
@@ -1205,7 +1205,7 @@ let t4 = {
           num_hours: i
         }) : getI18nString("figjam_try.drafts_banner_title_1_hour_or_less"),
         description: getI18nString("figjam_try.drafts_banner_description"),
-        onDismiss: () => t?.(_$$b3({
+        onDismiss: () => t?.(postUserFlag({
           dismissed_figjam_try_drafts_banner: !0
         })),
         dismissible: !0,
@@ -1289,7 +1289,7 @@ let t2 = {
         hoursLeft: g
       }) : getI18nString("figjam_try.claim_banner_title_1_hour_or_less"),
       description: getI18nString("figjam_try_v2.logged_in.after_that_this_board_will_be_deleted"),
-      onDismiss: () => t?.(_$$b3({
+      onDismiss: () => t?.(postUserFlag({
         dismissed_figjam_try_claim_banner: !0
       })),
       dismissible: !0,

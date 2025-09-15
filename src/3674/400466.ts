@@ -35,7 +35,7 @@ import { XR, uA, FQ, yu, mi, AP, h9, Lw, cD } from "../figma_app/781512";
 import { y as _$$y } from "../905/661502";
 import { selectWithShallowEqual } from "../905/103090";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { S as _$$S } from "../figma_app/78808";
+import { copyShareLinkOptimistic } from "../figma_app/78808";
 import { VU } from "../905/625959";
 import { selectCurrentFile } from "../figma_app/516028";
 import { buildFileUrl } from "../905/612685";
@@ -99,9 +99,9 @@ import { RecordableDiv, RecordableButton } from "../905/511649";
 import { useSprigWithSampling } from "../905/99656";
 import { n } from "../905/734251";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { m0, Em } from "../figma_app/976749";
-import { Fu } from "../figma_app/545877";
+import { userFlagAtomFamily } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
 import { B as _$$B2 } from "../figma_app/539422";
@@ -1926,7 +1926,7 @@ function tB(e) {
         nodeId,
         isDevHandoff: !0
       });
-      r(_$$S({
+      r(copyShareLinkOptimistic({
         fileKey: s.key,
         url: e,
         source: ShareContext.ANNOTATION_CONTEXT_MENU,
@@ -2888,7 +2888,7 @@ function n$({
     })
   });
 }
-let n1 = Fu("has_opened_annotation_visibility_learn_more_link");
+let n1 = userFlagAtomFamily("has_opened_annotation_visibility_learn_more_link");
 function n2({
   nodeId: e,
   annotationId: t,
@@ -3187,7 +3187,7 @@ function n5({
       nodeId: e,
       isDevHandoff: w
     });
-    m(_$$S({
+    m(copyShareLinkOptimistic({
       fileKey: e_.key,
       url: t,
       source: ShareContext.ANNOTATION_CONTEXT_MENU,
@@ -3277,7 +3277,7 @@ function n5({
     "loaded" === eT.status && eP(void 0 !== eT.data);
   }, [eT]);
   let eR = useCallback(() => {
-    m(_$$b2({
+    m(postUserFlag({
       has_opened_annotation_visibility_learn_more_link: !0
     }));
   }, [m]);

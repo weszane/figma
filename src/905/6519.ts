@@ -10,7 +10,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { D as _$$D } from "../905/251759";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
-import { vr, _Z, B9, LN } from "../figma_app/514043";
+import { CurrencyFormatter, isNonUsdUserCurrency, getAllowedCartCurrencies, getUserCurrency } from "../figma_app/514043";
 import { Hw } from "../figma_app/698052";
 import { PRICING_URL } from "../figma_app/345997";
 import { PlanType, SubscriptionType } from "../figma_app/831101";
@@ -283,7 +283,7 @@ function es({
   let h = SK(m, Fq.UPSELL_MODALS);
   let [_] = handleSuspenseRetainRelease(h);
   let A = vu(_);
-  let b = new vr(t);
+  let b = new CurrencyFormatter(t);
   let v = K()(A.data, e => b.formatMoney(e.amount, {
     showFullFormat: r
   }));
@@ -557,12 +557,12 @@ export function $$em0({
             L(e);
           }
         })
-      }), _Z() && jsx("div", {
+      }), isNonUsdUserCurrency() && jsx("div", {
         className: "comparison_chart--currencySwitcherContainer--wyBip",
         children: jsx(_$$D, {
           currency: e,
           dropdownShown: N,
-          supportedCurrencies: B9(),
+          supportedCurrencies: getAllowedCartCurrencies(),
           changeCurrency: l,
           shortFormDisplay: !1
         })
@@ -608,7 +608,7 @@ export function $$em0({
                   currentSubscriptionPlan: D,
                   setCurrentSubscriptionPlan: L,
                   isCurrentPlan: t === currentPlan,
-                  showFullCurrencyFormat: "usd" === e && "cad" === LN()
+                  showFullCurrencyFormat: "usd" === e && "cad" === getUserCurrency()
                 })
               }, t))]
             }), jsxs("tr", {

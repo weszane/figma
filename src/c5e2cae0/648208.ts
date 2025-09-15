@@ -19,7 +19,7 @@ import { jv } from "../905/84777";
 import { ProductAccessTypeEnum, isValidAccessType } from "../905/513035";
 import { N_ } from "../905/332483";
 import { AG } from "../figma_app/217457";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { Ju } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
 import { e0 } from "../905/696396";
@@ -200,7 +200,7 @@ function A({
     reportError(_$$e.BILLING_EXPERIENCE, Error(`Received null line item price on purchase summary for ${e}`));
     return null;
   }
-  let g = new vr(a);
+  let g = new CurrencyFormatter(a);
   let f = g.formatMoney(p * t, {
     showCents: n
   });

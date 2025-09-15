@@ -4,7 +4,7 @@ import { A as _$$A } from "../vendor/850789";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { getInitialOptions } from "../figma_app/169182";
-import { k as _$$k } from "../905/22009";
+import { editorUtilities as _$$k } from "../905/22009";
 import { yQ, nl, I5, SG } from "../figma_app/844435";
 import { tS } from "../figma_app/622574";
 import { Ou } from "../figma_app/106207";

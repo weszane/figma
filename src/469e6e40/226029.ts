@@ -52,7 +52,7 @@ import { o as _$$o } from "../469e6e40/744116";
 import { Ii } from "../figma_app/425283";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { c as _$$c } from "../905/370443";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rq } from "../905/425180";
 import { Rb, qW, ZW, eC as _$$eC } from "../figma_app/982327";
 import { ps } from "../figma_app/845611";
@@ -107,7 +107,7 @@ function g(e) {
   });
 }
 let el = "seen_team_admin_manage_unassigned_drafts_onboarding";
-let eo = r1(el);
+let eo = userFlagExistsAtomFamily(el);
 function ex(e) {
   return jsx("div", {
     className: _$$s.h24.w24.$,

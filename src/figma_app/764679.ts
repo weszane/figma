@@ -23,7 +23,7 @@ import { hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { isThirdPartyMonetized } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
-import { C as _$$C } from "../905/180";
+import { BuyerAPIHandler } from "../905/180";
 import { noop } from "../905/834956";
 import { it } from "../905/504727";
 import { S as _$$S } from "../905/404161";
@@ -254,7 +254,7 @@ export function $$H1(e, t, r) {
     let [R, L] = useState();
     _$$h(() => {
       !async function () {
-        let t = await _$$C.getRecentFiles({
+        let t = await BuyerAPIHandler.getRecentFiles({
           extensionId: e.id,
           isWidget: !!e.is_widget
         });

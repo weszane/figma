@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resourceUtils } from "../905/989992";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
-import { uo } from "../figma_app/78808";
+import { batchPutFileAction } from "../figma_app/78808";
 import { q0, Am } from "../905/70982";
 import { uo as _$$uo, nF } from "../905/466026";
 import { trackMultipleFileEvent } from "../figma_app/314264";
@@ -101,7 +101,7 @@ export function $$v2({
 }
 export function $$A0(e) {
   let t = e.recent_repos.map(e => e.files).reduce((e, t) => e.concat(t), []);
-  debugState.dispatch(uo({
+  debugState.dispatch(batchPutFileAction({
     files: e.recent_files.concat(t),
     subscribeToRealtime: !1
   }));

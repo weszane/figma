@@ -16,7 +16,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { wR } from "../905/346715";
 import { B } from "../905/900597";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { N as _$$N2 } from "../figma_app/55043";
 import { UserFlagByName } from "../figma_app/43951";
 import { useTeamPlanUser, useTeamPlanFeatures, useIsAdminUser } from "../figma_app/465071";
@@ -56,7 +56,7 @@ export function $$w0() {
         }
       }),
       onDismiss: () => {
-        e(_$$b({
+        e(postUserFlag({
           seen_connected_projects_org_member_banner: !0
         }));
       },

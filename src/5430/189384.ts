@@ -24,7 +24,7 @@ import { A as _$$A2 } from "../6828/718668";
 import { A as _$$A3 } from "../svg/310324";
 import { Rr, Cc } from "../5430/664984";
 import { I as _$$I } from "../figma_app/4253";
-import { QQ } from "../figma_app/808294";
+import { isSubscriptionActive } from "../figma_app/808294";
 import { X_, mA, lT } from "../figma_app/777551";
 import { kz } from "../figma_app/427318";
 import { YW } from "../figma_app/350203";
@@ -246,7 +246,7 @@ export function $$Q0({
         isLoading: d
       })
     })
-  }))(QQ(h) ? {
+  }))(isSubscriptionActive(h) ? {
     buttonText: renderI18nText("community.duplicate.open"),
     onClick: L
   } : {

@@ -5,7 +5,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { Q7 } from "../905/15667";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { applyOffsetToViewport } from "../figma_app/62612";
 import { checkZoomWidgetAccess } from "../figma_app/12796";
@@ -53,7 +53,7 @@ export function $$I0({
       widgetRunPromise: void 0
     };
   }
-  "universal-insert" === C && "figma" === getFullscreenViewEditorType() && fullscreenValue.dispatch(_$$b({
+  "universal-insert" === C && "figma" === getFullscreenViewEditorType() && fullscreenValue.dispatch(postUserFlag({
     seen_widget_insert_onboarding_modal: !0
   }));
   "undo_widget_update" !== S && notifyPluginStatus({

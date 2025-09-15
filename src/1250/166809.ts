@@ -13,7 +13,7 @@ import { n as _$$n } from "../figma_app/3731";
 import { getI18nString } from "../905/303541";
 import { _l } from "../figma_app/976345";
 import { A } from "../1250/724587";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { z } from "../905/373223";
 import { trackUserEvent } from "../figma_app/314264";
 import { HE, O_ } from "../905/967587";
@@ -122,7 +122,7 @@ export function $$A1({
         orgId: d.orgId,
         orgViewTab: X.HOME
       };
-      I && w && b?.planParentId === l.plan_id && t(_$$b({
+      I && w && b?.planParentId === l.plan_id && t(postUserFlag({
         seen_dtm_post_migration_badge: !0
       }));
       trackUserEvent("Plan Switcher Plan Clicked", {

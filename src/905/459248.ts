@@ -64,7 +64,7 @@ import { A as _$$A2 } from "../svg/619883";
 import { useSubscription } from "../figma_app/288654";
 import { linkWithTracking } from "../figma_app/637027";
 import { Bq } from "../figma_app/482142";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { selectCurrentUser } from "../905/372672";
@@ -168,7 +168,7 @@ function ej(e) {
       children: i
     }),
     onClose: () => {
-      t(_$$b({
+      t(postUserFlag({
         seen_missing_fonts_org_upsell_banner: !0
       }));
     }

@@ -36,7 +36,7 @@ import { CurrentUserInStudentPlanView, LibraryFileContext } from "../figma_app/4
 import { getPermissionsState, canGuestOrg, hasActiveEduTeam } from "../figma_app/642025";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { x as _$$x } from "../figma_app/584132";
-import { TG } from "../905/72677";
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { o as _$$o } from "../figma_app/915774";
 import { X as _$$X } from "../905/853613";
 import { tM, Hu } from "../figma_app/361662";
@@ -144,7 +144,7 @@ function H(e) {
     if (t) {
       if (s.seatTypeLicenseTypes?.includes(FProductAccessType.DESIGN)) return !0;
     } else if (s.designPaidStatus === FPlanAccessType.FULL) return !0;
-    return !!r || atomStoreManager.get(TG).has(e);
+    return !!r || atomStoreManager.get(resourceDataAndPresetKeysV2SetAtom).has(e);
   }), [s, l, a, d, t, h, e]);
 }
 let ex = "asset_file_path--path---PrgD text--fontPos11--2LvXf text--_fontBase--QdLsd";
@@ -667,7 +667,7 @@ export function $$tu1({
   let F = useRef(null);
   let B = Xr(_$$T);
   let K = H(e.library_key);
-  let Q = useAtomWithSubscription(TG);
+  let Q = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let ea = _$$H2(e.library_key);
   let eo = _9(e.library_key, "asset_panel_visual_assets_flyout_insert");
   let {

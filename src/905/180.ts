@@ -1,75 +1,179 @@
-import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { XHR } from "../905/910117";
-export let $$a0 = new class {
+import { XHR } from '../905/910117'
+import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241'
+
+/**
+ * Types for API parameter objects
+ */
+interface RecentFilesParams {
+  isWidget: boolean
+  extensionId: string
+}
+
+interface CommunityUserTaxInfoParams {
+  userId: string
+}
+
+interface CmtyCreatorPayoutStatementsParams {
+  userId: string
+}
+
+interface SlideTemplateCommunityUsageParams {
+  hubFileId: string
+}
+
+interface BuyerPortalParams {
+  // Add relevant fields as needed
+  [key: string]: any
+}
+
+interface BuyerPaymentMethodsParams {
+  userId: string
+}
+
+interface BuyerTaxParams {
+  resourceId: string
+  // Add relevant fields as needed
+  [key: string]: any
+}
+
+interface TagsAutocompleteParams {
+  tagPrefix: string
+  existingTags: string[]
+}
+
+interface BuyerPurchasesParams {
+  purchaseType: string
+  pageSize: number
+  cursor?: string
+}
+
+interface BuyerAssociatedPurchasesParams {
+  id: string
+}
+
+/**
+ * Buyer API Handler (original: $$a0)
+ */
+export const BuyerAPIHandler = new class {
+  BuyerPortalSchemaValidator = createNoOpValidator()
+  BuyerActivePaymentsSchemaValidator = createNoOpValidator()
+  BuyerPaymentMethodsSchemaValidator = createNoOpValidator()
+  BuyerTaxSchemaValidator = createNoOpValidator()
+  TagsAutocompleteSchemaValidator = createNoOpValidator()
+  BuyerPurchasesSchemaValidator = createNoOpValidator()
+  BuyerAssociatedPurchasesSchemaValidator = createNoOpValidator()
+  RecentFilesSchemaValidator = createNoOpValidator()
+  CommunityUserTaxInfoValidator = createNoOpValidator()
+  CmtyCreatorPayoutStatementsSchemaValidator = createNoOpValidator()
+
   constructor() {
-    this.BuyerPortalSchemaValidator = createNoOpValidator();
-    this.BuyerActivePaymentsSchemaValidator = createNoOpValidator();
-    this.BuyerPaymentMethodsSchemaValidator = createNoOpValidator();
-    this.BuyerTaxSchemaValidator = createNoOpValidator();
-    this.TagsAutocompleteSchemaValidator = createNoOpValidator();
-    this.BuyerPurchasesSchemaValidator = createNoOpValidator();
-    this.BuyerAssociatedPurchasesSchemaValidator = createNoOpValidator();
-    this.RecentFilesSchemaValidator = createNoOpValidator();
-    this.getRecentFiles = e => this.RecentFilesSchemaValidator.validate(async ({
-      xr: t
-    }) => e.isWidget ? await t.get(`/api/widgets/${e.extensionId}/recent_files`) : await t.get(`/api/plugins/${e.extensionId}/recent_files`));
-    this.CommunityUserTaxInfoValidator = createNoOpValidator();
-    this.getCommunityUserTaxInfo = e => this.CommunityUserTaxInfoValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/community/monetization/tax_info", {
-      user_id: e.userId
-    }));
-    this.updateBillingDetails = e => XHR.post("/api/community/monetization/update_user_tax_info", e);
-    this.CmtyCreatorPayoutStatementsSchemaValidator = createNoOpValidator();
-    this.getCmtyCreatorPayoutStatements = e => this.CmtyCreatorPayoutStatementsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/community/seller/payout_statements", {
-      user_id: e.userId
-    }));
-    this.updateSlideTemplateCommunityUsageCount = e => XHR.post(`/api/hub_files/${e.hubFileId}/use_hub_file`);
+
   }
-  getBuyerPortal(e) {
-    return this.BuyerPortalSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/community/buyer/portal", APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Get Buyer Portal (original: getBuyerPortal)
+   */
+  getBuyerPortal(params: BuyerPortalParams): Promise<any> {
+    return this.BuyerPortalSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/community/buyer/portal', APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getBuyerActivePayments() {
-    return this.BuyerActivePaymentsSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get("/api/community/buyer/active_payments"));
+
+  /**
+   * Get Buyer Active Payments (original: getBuyerActivePayments)
+   */
+  getBuyerActivePayments(): Promise<any> {
+    return this.BuyerActivePaymentsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/community/buyer/active_payments'),
+    )
   }
-  getBuyerPaymentMethods(e) {
-    return this.BuyerPaymentMethodsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/community/buyer/payment_methods", {
-      user_id: e.userId
-    }));
+
+  /**
+   * Get Buyer Payment Methods (original: getBuyerPaymentMethods)
+   */
+  getBuyerPaymentMethods(params: BuyerPaymentMethodsParams): Promise<any> {
+    return this.BuyerPaymentMethodsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/community/buyer/payment_methods', { user_id: params.userId }),
+    )
   }
-  getBuyerTax(e) {
-    return this.BuyerTaxSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/community/buyer/${e.resourceId}/tax`, APIParameterUtils.toAPIParameters(e)));
+
+  /**
+   * Get Buyer Tax (original: getBuyerTax)
+   */
+  getBuyerTax(params: BuyerTaxParams): Promise<any> {
+    return this.BuyerTaxSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/community/buyer/${params.resourceId}/tax`, APIParameterUtils.toAPIParameters(params)),
+    )
   }
-  getTagsAutocomplete(e) {
-    return this.TagsAutocompleteSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/community/tags/${e.tagPrefix}/autocomplete`, {
-      existing_tags: e.existingTags
-    }));
+
+  /**
+   * Get Tags Autocomplete (original: getTagsAutocomplete)
+   */
+  getTagsAutocomplete(params: TagsAutocompleteParams): Promise<any> {
+    return this.TagsAutocompleteSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/community/tags/${params.tagPrefix}/autocomplete`, { existing_tags: params.existingTags }),
+    )
   }
-  getBuyerPurchases(e) {
-    return this.BuyerPurchasesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.getPaginated("/api/community/buyer/purchases", {
-      purchase_type: e.purchaseType,
-      page_size: e.pageSize,
-      cursor: e.cursor
-    }));
+
+  /**
+   * Get Buyer Purchases (original: getBuyerPurchases)
+   */
+  getBuyerPurchases(params: BuyerPurchasesParams): Promise<any> {
+    return this.BuyerPurchasesSchemaValidator.validate(async ({ xr }) =>
+      await xr.getPaginated('/api/community/buyer/purchases', {
+        purchase_type: params.purchaseType,
+        page_size: params.pageSize,
+        cursor: params.cursor,
+      }),
+    )
   }
-  getBuyerAssociatedPurchases(e) {
-    return this.BuyerAssociatedPurchasesSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/community/buyer/associated_purchases/${e.id}`));
+
+  /**
+   * Get Buyer Associated Purchases (original: getBuyerAssociatedPurchases)
+   */
+  getBuyerAssociatedPurchases(params: BuyerAssociatedPurchasesParams): Promise<any> {
+    return this.BuyerAssociatedPurchasesSchemaValidator.validate(async ({ xr }) =>
+      await xr.get(`/api/community/buyer/associated_purchases/${params.id}`),
+    )
   }
-}();
-export const C = $$a0;
+
+  /**
+   * Get Recent Files (original: getRecentFiles)
+   */
+  getRecentFiles = (params: RecentFilesParams): Promise<any> =>
+    this.RecentFilesSchemaValidator.validate(async ({ xr }) =>
+      params.isWidget
+        ? await xr.get(`/api/widgets/${params.extensionId}/recent_files`)
+        : await xr.get(`/api/plugins/${params.extensionId}/recent_files`),
+    )
+
+  /**
+   * Get Community User Tax Info (original: getCommunityUserTaxInfo)
+   */
+  getCommunityUserTaxInfo = (params: CommunityUserTaxInfoParams): Promise<any> =>
+    this.CommunityUserTaxInfoValidator.validate(async ({ xr }) =>
+      await xr.get('/api/community/monetization/tax_info', { user_id: params.userId }),
+    )
+
+  /**
+   * Update Billing Details (original: updateBillingDetails)
+   */
+  updateBillingDetails = (params: any): Promise<any> =>
+    XHR.post('/api/community/monetization/update_user_tax_info', params)
+
+  /**
+   * Get Community Creator Payout Statements (original: getCmtyCreatorPayoutStatements)
+   */
+  getCmtyCreatorPayoutStatements = (params: CmtyCreatorPayoutStatementsParams): Promise<any> =>
+    this.CmtyCreatorPayoutStatementsSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/community/seller/payout_statements', { user_id: params.userId }),
+    )
+
+  /**
+   * Update Slide Template Community Usage Count (original: updateSlideTemplateCommunityUsageCount)
+   */
+  updateSlideTemplateCommunityUsageCount = (params: SlideTemplateCommunityUsageParams): Promise<any> =>
+    XHR.post(`/api/hub_files/${params.hubFileId}/use_hub_file`)
+}()
+
+export const C = BuyerAPIHandler

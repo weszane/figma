@@ -30,7 +30,7 @@ import { k as _$$k } from "../figma_app/618031";
 import { JT, tI } from "../figma_app/599327";
 import { I as _$$I } from "../905/343211";
 import { h as _$$h2, d as _$$d } from "../figma_app/603561";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { resourceUtils } from "../905/989992";
 import { un } from "../figma_app/457899";
 import { IX } from "../905/712921";
@@ -171,7 +171,7 @@ function U({
   price: t,
   availableCount: r
 }) {
-  let s = useMemo(() => t ? new vr(t.currency).formatMoney(t.amount, {
+  let s = useMemo(() => t ? new CurrencyFormatter(t.currency).formatMoney(t.amount, {
     showCents: !1
   }) : null, [t]);
   let l = _w({
@@ -270,7 +270,7 @@ function en({
   });
   let c = W(e);
   let p = n !== ViewAccessTypeEnum.VIEW ? c?.[n] : null;
-  let u = useMemo(() => p?.currency ? new vr(p?.currency) : null, [p?.currency]);
+  let u = useMemo(() => p?.currency ? new CurrencyFormatter(p?.currency) : null, [p?.currency]);
   let m = useMemo(() => ({
     seatType: n,
     prorationEnabled: s,

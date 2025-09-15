@@ -7,11 +7,11 @@ import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { logWarning } from "../905/714362";
 import { XHR } from "../905/910117";
-import { WY, Ts, OZ, fX, m9, dl, E as _$$E, Sr, Qg } from "../905/194276";
+import { AUTH_SET_REDIRECT_URL, AUTH_INIT, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_GOOGLE_TOKEN_TYPE, AUTH_CHANGE_NAME, AUTH_SET_ORIGIN, changeAuthFormState, AUTH_GOOGLE_SIGNUP, AUTH_SHOW_ERROR } from "../905/194276";
 import { _G } from "../905/164233";
 import { MZ, P8 } from "../905/997533";
-import { qB, cc, By } from "../905/862321";
-import { g as _$$g } from "../905/248178";
+import { AuthFlowStep, AuthAction, AuthErrorCode } from "../905/862321";
+import { trackAuthEvent } from "../905/248178";
 import { sT } from "../905/694658";
 import { a as _$$a } from "../905/105502";
 import { p as _$$p } from "../905/300815";
@@ -66,7 +66,7 @@ export async function $$D2({
   redirectUrl: n
 }) {
   let i = await L();
-  n && e(WY({
+  n && e(AUTH_SET_REDIRECT_URL({
     redirectUrl: n
   }));
   return await $$F3(i, {
@@ -77,7 +77,7 @@ export async function $$D2({
   });
 }
 export function $$k0(e, t, r) {
-  _$$g("google_sso_login_redirect_attempt", r, {
+  trackAuthEvent("google_sso_login_redirect_attempt", r, {
     fromMsTeams: t
   });
   document.cookie = C + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -145,9 +145,9 @@ export async function $$F3(e, {
     }, data?.message);
     let s = getI18nString("auth.google-sso.unable-to-auth");
     if (data && data.reason && "object" == typeof data.reason && "two_factor" === data.reason.missing) {
-      MZ() && null != a && (t(Ts({
+      MZ() && null != a && (t(AUTH_INIT({
         origin: a,
-        formState: qB.SIGN_IN,
+        formState: AuthFlowStep.SIGN_IN,
         redirectUrl: debugState?.getState().auth.redirectUrl
       })), t(showModalHandler({
         type: _$$a,
@@ -162,7 +162,7 @@ export async function $$F3(e, {
       };
     }
     let o = debugState?.getState().auth.redirectUrl || "";
-    if (v && _$$g("google_one_tap_login_error", a, {
+    if (v && trackAuthEvent("google_one_tap_login_error", a, {
       error: n
     }), n === getI18nString("auth.error.account-not-found") || n === getI18nString("auth.error.api.cannot_verify_captcha_token")) {
       (function ({
@@ -173,9 +173,9 @@ export async function $$F3(e, {
         tosAccepted: i
       }) {
         var a;
-        null != t && MZ() ? (r(Ts({
+        null != t && MZ() ? (r(AUTH_INIT({
           origin: t,
-          formState: qB.SIGN_UP,
+          formState: AuthFlowStep.SIGN_UP,
           redirectUrl: n
         })), r(showModalHandler({
           type: _$$a,
@@ -190,23 +190,23 @@ export async function $$F3(e, {
           ...e,
           origin: t
         };
-        r(OZ({
+        r(AUTH_SET_GOOGLE_ID_TOKEN({
           googleIdToken: a.token
         }));
-        r(fX({
+        r(AUTH_SET_GOOGLE_TOKEN_TYPE({
           googleTokenType: a.tokenType
         }));
-        r(m9({
+        r(AUTH_CHANGE_NAME({
           value: a.name
         }));
-        a.origin && r(dl({
+        a.origin && r(AUTH_SET_ORIGIN({
           authOrigin: a.origin
         }));
-        r(_$$E({
-          formState: qB.VERIFY_HUMAN,
-          prevState: qB.SIGN_UP,
-          arkoseAction: cc.SIGN_UP,
-          postVerificationAction: Sr({
+        r(changeAuthFormState({
+          formState: AuthFlowStep.VERIFY_HUMAN,
+          prevState: AuthFlowStep.SIGN_UP,
+          arkoseAction: AuthAction.SIGN_UP,
+          postVerificationAction: AUTH_GOOGLE_SIGNUP({
             tosAccepted: i
           })
         }));
@@ -223,7 +223,7 @@ export async function $$F3(e, {
     }
     if (data?.reason === "saml_required") {
       let e = new M(n);
-      e.errorType = By.SAML_REQUIRED;
+      e.errorType = AuthErrorCode.SAML_REQUIRED;
       return e;
     }
     t(FlashActions.error(n || s, 15e3));
@@ -236,12 +236,12 @@ export function $$j4({
   redirectUrl: r,
   message: n
 }) {
-  e(Ts({
+  e(AUTH_INIT({
     origin: t,
     redirectUrl: r,
-    formState: qB.SIGN_UP
+    formState: AuthFlowStep.SIGN_UP
   }));
-  e(Qg({
+  e(AUTH_SHOW_ERROR({
     message: n
   }));
   e(showModalHandler({

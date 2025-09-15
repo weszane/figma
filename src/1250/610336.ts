@@ -2,8 +2,8 @@ import { returnSecond, throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { N } from "../figma_app/469468";
 import { getI18nString } from "../905/303541";
-import { yl } from "../figma_app/275462";
-import { t as _$$t } from "../905/178090";
+import { isResourceHubEnabled } from "../figma_app/275462";
+import { ResourceTypeSubset } from "../905/178090";
 import { vt } from "../figma_app/306946";
 import { M } from "../1250/758461";
 import { YW } from "../figma_app/350203";
@@ -20,7 +20,7 @@ export function $$f0() {
   let r = N(`(max-width: ${YW}px)`);
   if ("loading" === n.status) return !1;
   let o = n.data?.type === FOrganizationLevelType.ORG ? n.data?.key.parentId : void 0;
-  return !(!yl() || r || a || hasExternalRestrictedOrgId(e) && o !== e?.external_restricted_org_id);
+  return !(!isResourceHubEnabled() || r || a || hasExternalRestrictedOrgId(e) && o !== e?.external_restricted_org_id);
 }
 export function $$h1(e) {
   return (e.data?.type === FOrganizationLevelType.ORG && !!e.data.isResourceHubCmtyTabDisabled) ?? !1;
@@ -51,11 +51,11 @@ export function $$b3(e, t, n) {
 }
 export function $$x2(e) {
   switch (e) {
-    case _$$t.PLUGINS:
+    case ResourceTypeSubset.PLUGINS:
       return getI18nString("community.view_bar.plugins");
-    case _$$t.WIDGETS:
+    case ResourceTypeSubset.WIDGETS:
       return getI18nString("community.view_bar.widgets");
-    case _$$t.FILES:
+    case ResourceTypeSubset.FILES:
       return getI18nString("community.saves.all_files");
     default:
       return;

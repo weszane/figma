@@ -39,7 +39,7 @@ import { kd, Pc, Jb, E7 } from "../figma_app/425283";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { zl } from "../figma_app/641749";
 import { rn } from "../figma_app/903573";
 import { N as _$$N } from "../figma_app/268271";
@@ -124,7 +124,7 @@ import { YEj } from "../figma_app/27776";
 import { A as _$$A4 } from "../svg/619883";
 import { R as _$$R2 } from "../905/192963";
 let X = "seen_org_admin_teams_onboarding";
-let Q = r1(X);
+let Q = userFlagExistsAtomFamily(X);
 let Z = rn("org_admin_teams_onboarding", _$$R(Ql8));
 function ee(e) {
   let t = useAtomWithSubscription(Q);
@@ -160,7 +160,7 @@ function ee(e) {
   });
 }
 let eo = "seen_workspace_admin_onboarding";
-let ed = r1(eo);
+let ed = userFlagExistsAtomFamily(eo);
 var ec = (e => (e.AddTeamsToWorkspace = "AddTeamsToWorkspace", e.CheckUnassignedTeams = "CheckUnassignedTeams", e))(ec || {});
 function e_() {
   let e = useCurrentUserOrgId();

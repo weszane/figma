@@ -9,11 +9,11 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { V6 } from "../figma_app/487970";
 import { Dl } from "../figma_app/471982";
-import { V4, QQ } from "../figma_app/808294";
+import { partitionUsersByPurchaseEligibility, isSubscriptionActive } from "../figma_app/808294";
 import { c as _$$c } from "../figma_app/11961";
-import { G } from "../905/11536";
+import { getAssociatedUserProfiles } from "../905/11536";
 import { KindEnum } from "../905/129884";
-import { C as _$$C } from "../905/180";
+import { BuyerAPIHandler } from "../905/180";
 import A from "classnames";
 import { SvgComponent } from "../905/714743";
 import { YE, Aq, sw, tW, pV, a_, Bi, iG, z_, lf, dS } from "../905/427932";
@@ -75,22 +75,22 @@ function w(e) {
   let i = useSelector(e => e.authedUsers);
   let [o, p] = useState({});
   _$$h(() => {
-    _$$C.getBuyerAssociatedPurchases({
+    BuyerAPIHandler.getBuyerAssociatedPurchases({
       id: e.resource.monetized_resource_metadata.id
     }).then(e => {
       p(e.data.meta);
     }).catch(() => {});
   });
-  let A = useMemo(() => G({
+  let A = useMemo(() => getAssociatedUserProfiles({
     authedActiveCommunityProfile: t,
     authedUsers: i
   }), [t, i]);
   let {
     usersCanPurchase,
     publishers
-  } = useMemo(() => V4(A, e.resource), [A, e.resource]);
+  } = useMemo(() => partitionUsersByPurchaseEligibility(A, e.resource), [A, e.resource]);
   let v = usersCanPurchase.map(i => {
-    let r = o[i.id] && QQ(o[i.id]);
+    let r = o[i.id] && isSubscriptionActive(o[i.id]);
     return {
       id: i.id,
       title: jsxs("div", {

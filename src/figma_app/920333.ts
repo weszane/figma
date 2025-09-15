@@ -7,7 +7,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
 import { selectWithShallowEqual } from "../905/103090";
 import { Point } from "../905/736624";
-import { WJ } from "../figma_app/808294";
+import { isStatus } from "../figma_app/808294";
 import { zK } from "../figma_app/913823";
 import { cr } from "../905/879323";
 import { _ as _$$_ } from "../905/793009";
@@ -20,7 +20,7 @@ import { a6 } from "../figma_app/198840";
 import { Sc } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt, Vq as _$$Vq } from "../figma_app/979658";
-import { G3 } from "../905/272080";
+import { SubscriptionStatus } from "../905/272080";
 import { EditorType } from "../figma_app/155287";
 import { $1, yz } from "../figma_app/76115";
 import { yD } from "../905/92359";
@@ -180,7 +180,7 @@ function H(e, t) {
     let n = e[r.plugin_id];
     if (!n || !n.monetized_resource_metadata) return !0;
     let i = t[n.monetized_resource_metadata.id] || n.community_resource_payment;
-    return !i || !WJ(i, G3.PENDING);
+    return !i || !isStatus(i, SubscriptionStatus.PENDING);
   };
 }
 export const H6 = $$B0;

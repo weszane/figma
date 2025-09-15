@@ -13,7 +13,7 @@ import { VisualBellActions } from "../905/302958";
 import { We, UU, Qe } from "../figma_app/770088";
 import { Hx } from "../figma_app/530167";
 import { pP, jD } from "../905/765855";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Ty, pP as _$$pP, yO, I2 } from "../905/331019";
 import { FFileType } from "../figma_app/191312";
 import { fG, oQ } from "../905/772425";
@@ -1510,9 +1510,9 @@ export class $$tA0 extends Component {
   componentWillUnmount() {
     this.props.setIsEditorFocused(!1);
     let t = this.props.pendingUserInvites && this.props.pendingUserInvites.length > 0;
-    t && !this.props.hasMentionedPendingUserInvite ? (this.props.dispatch(_$$b({
+    t && !this.props.hasMentionedPendingUserInvite ? (this.props.dispatch(postUserFlag({
       has_mentioned_pending_user_invite: !0
-    })), this.props.setPendingUserInvitesAtom?.([])) : t && this.props.hasMentionedPendingUserInvite && !this.props.hasMentionedPendingUserInviteTwice && this.props.dispatch(_$$b({
+    })), this.props.setPendingUserInvitesAtom?.([])) : t && this.props.hasMentionedPendingUserInvite && !this.props.hasMentionedPendingUserInviteTwice && this.props.dispatch(postUserFlag({
       has_mentioned_pending_user_invite_twice: !0
     }));
   }

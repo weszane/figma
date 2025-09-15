@@ -2,7 +2,7 @@ import { useRef, useCallback } from "react";
 import { ResourceStatus } from "../905/663269";
 import { analyticsEventManager } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { kh } from "../905/86266";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -28,10 +28,10 @@ export function $$_0(e, t) {
   let p = f(s);
   let {
     getConfig
-  } = I7(e.teamXP);
+  } = selectExperimentConfigHook(e.teamXP);
   let {
     getConfig: _getConfig
-  } = I7(e.orgXP);
+  } = selectExperimentConfigHook(e.orgXP);
   let A = _$$c();
   let y = kh();
   let b = selectCurrentFile();

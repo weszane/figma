@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { bV } from "../figma_app/808294";
+import { getProductPriceString } from "../figma_app/808294";
 import { hN } from "../figma_app/248118";
 import { Rm } from "../figma_app/86989";
 import { M } from "../figma_app/170366";
@@ -55,7 +55,7 @@ function C(e, t, i) {
         menuAction: {
           type: "unpurchased-plugin"
         },
-        rightText: bV(e.monetized_resource_metadata),
+        rightText: getProductPriceString(e.monetized_resource_metadata),
         requiresPurchase: !0,
         isWidget: e.is_widget,
         pluginId: e.id,

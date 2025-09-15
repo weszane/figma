@@ -28,7 +28,7 @@ import { $A } from "../905/862883";
 import { r as _$$r } from "../905/632622";
 import { r6 } from "../figma_app/517115";
 import { tM, k1 } from "../figma_app/984498";
-import { TG } from "../905/72677";
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { Nv } from "../figma_app/318590";
 import { p as _$$p } from "../905/42189";
 import { Kl } from "../figma_app/275938";
@@ -40,7 +40,7 @@ export function $$$$j0(e) {
   let i = useDispatch();
   let j = useSelector(e => e.library);
   let U = Nv(!0);
-  let B = useAtomWithSubscription(TG);
+  let B = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let V = e.resource;
   let G = hasAssetId(V);
   let z = G ? "LIBRARY" !== V.subscriptionStatus : V.isLocal;

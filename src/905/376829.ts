@@ -35,7 +35,7 @@ import { p as _$$p } from "../figma_app/353099";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e } from "../905/621515";
 import { UC } from "../figma_app/33126";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { tBR } from "../figma_app/6204";
@@ -140,8 +140,8 @@ function M({
 var B = U;
 let X = "seen_search_workspace_onboarding";
 let Q = "SEARCH_WORKSPACE_ONBOARDING_KEY";
-let J = r1("file_browser_onboarded");
-let ee = r1(X);
+let J = userFlagExistsAtomFamily("file_browser_onboarded");
+let ee = userFlagExistsAtomFamily(X);
 function et() {
   let e = useSelector(e => e.currentUserOrgId);
   let t = UC(e);

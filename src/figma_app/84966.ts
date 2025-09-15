@@ -17,7 +17,7 @@ import { hY } from "../figma_app/80683";
 import { Y$, Ln, SG, Tc } from "../905/84777";
 import { FOrganizationLevelType, FOrganizationEntityType } from "../figma_app/191312";
 import { PendingConfirmedRenewalSeatCountsView } from "../figma_app/43951";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { getFutureDateOrNull } from "../figma_app/345997";
 import { IX } from "../905/712921";
 import { BillingCycle } from "../figma_app/831101";
@@ -46,7 +46,7 @@ function w(e, t, r, n) {
   let l = Tc(o);
   return {
     prices: o,
-    localizeCurrency: new vr(l)
+    localizeCurrency: new CurrencyFormatter(l)
   };
 }
 export let $$O11 = 500;

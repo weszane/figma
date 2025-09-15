@@ -1,7 +1,7 @@
 import { getStorage } from "../905/657224";
 import { globalPerfTimer } from "../905/542194";
 import { sf } from "../905/929976";
-import { yJ, bE, sF } from "../figma_app/78808";
+import { filePutAction, postFileAction, filePermissionsPutAction } from "../figma_app/78808";
 import { OB, M3, ST } from "../figma_app/91703";
 import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
 import { mapFileSummary } from "../figma_app/349248";
@@ -38,7 +38,7 @@ export function $$m0(e = $$p1, t) {
     ...e,
     filePermissionsModalTab: t.payload.view
   };
-  if ((yJ.matches(t) || bE.matches(t) || sF.matches(t)) && "prototype" === e.view) {
+  if ((filePutAction.matches(t) || postFileAction.matches(t) || filePermissionsPutAction.matches(t)) && "prototype" === e.view) {
     if (t.payload.file.key === e.file.key) return {
       ...e,
       file: mapFileSummary({

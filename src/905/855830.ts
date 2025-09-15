@@ -32,7 +32,7 @@ import { FProductAccessType, FOrganizationLevelType, FPlanNameType, FMemberRoleT
 import { _6 } from "../figma_app/386952";
 import { ConfiguredUpgradeRequestModalView } from "../figma_app/43951";
 import { wH } from "../figma_app/680166";
-import { UQ } from "../figma_app/864723";
+import { isStarterUserAtom } from "../figma_app/864723";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { UpgradeRequestSetting } from "../figma_app/482728";
@@ -319,7 +319,7 @@ export function $$eb0(e) {
   let [ee, et] = useAtomValueAndSetter(eA);
   let ei = !!e.getIsEligibleForProvisionalAccess && e.getIsEligibleForProvisionalAccess(Z);
   let en = function (e) {
-    let t = useAtomWithSubscription(UQ);
+    let t = useAtomWithSubscription(isStarterUserAtom);
     let i = selectCurrentFile();
     return !t && !!i && i.editorType === FFileType.DESIGN && (e === i$.BlockingModal || e === i$.Upsell);
   }(e.entryPoint);

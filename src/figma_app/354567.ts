@@ -2,7 +2,7 @@ import { useAtomWithSubscription, atom, useAtomValueAndSetter } from "../figma_a
 import { debugState } from "../905/407919";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { DeviceTryFileView } from "../figma_app/43951";
@@ -30,14 +30,14 @@ export function $$m1() {
       u(!0);
       r({
         origin: "google_hardware_claim_file",
-        formState: qB.SIGN_UP
+        formState: AuthFlowStep.SIGN_UP
       });
     };
     if ("login" === t) return () => {
       u(!0);
       r({
         origin: "google_hardware_claim_file",
-        formState: qB.SIGN_IN
+        formState: AuthFlowStep.SIGN_IN
       });
     };
   }

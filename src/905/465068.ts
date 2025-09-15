@@ -1,5 +1,5 @@
 import { oB } from "../905/115338";
-import { yJ, bE, sF } from "../figma_app/78808";
+import { filePutAction, postFileAction, filePermissionsPutAction } from "../figma_app/78808";
 import { yH } from "../figma_app/598926";
 import { FPermissionLevelType } from "../figma_app/191312";
 export function $$s1(e) {
@@ -11,13 +11,13 @@ export let $$o0 = oB(function (e, t) {
       ...e,
       folder_id: null
     };
-  } else if (yJ.matches(t) || bE.matches(t) || sF.matches(t)) return t.payload && t.payload.file && e && t.payload.file.key === e.key ? {
+  } else if (filePutAction.matches(t) || postFileAction.matches(t) || filePermissionsPutAction.matches(t)) return t.payload && t.payload.file && e && t.payload.file.key === e.key ? {
     ...e,
     ...t.payload.file
   } : e;
   return e;
 }, {
-  shouldIgnoreAction: e => !(yH.matches(e) || yJ.matches(e) || sF.matches(e) || bE.matches(e))
+  shouldIgnoreAction: e => !(yH.matches(e) || filePutAction.matches(e) || filePermissionsPutAction.matches(e) || postFileAction.matches(e))
 });
 export const N = $$o0;
 export const Y = $$s1;

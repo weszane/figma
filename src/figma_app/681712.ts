@@ -8,7 +8,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { m as _$$m } from "../figma_app/160942";
 import { FFileType } from "../figma_app/191312";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { SubscriptionType, DesignProductIds, FigJamProductIds } from "../figma_app/831101";
 import { of, vg, hy, sH, q9, qS } from "../figma_app/81441";
 var s = a;
@@ -45,7 +45,7 @@ export function $$f3({
   };
 }
 export function $$E5(e, t, r, n, i) {
-  let a = new vr(i).formatMoney(n, {
+  let a = new CurrencyFormatter(i).formatMoney(n, {
     showCents: !r
   });
   let s = getI18nString("all_carts.num_editors.seat_rename", {
@@ -89,7 +89,7 @@ function b({
   monthlyUnitCostForStrikethrough: a,
   currency: s
 }) {
-  let o = new vr(s);
+  let o = new CurrencyFormatter(s);
   let l = o.formatMoney(i, {
     showCents: !r
   });
@@ -168,7 +168,7 @@ function v({
     currency: r
   });
   n = "design" === e ? estimatedDesignCost(t, SubscriptionType.MONTHLY) : estimatedWhiteboardCost(t, SubscriptionType.MONTHLY);
-  let s = new vr(r);
+  let s = new CurrencyFormatter(r);
   return renderI18nText("edu.cost_per_month", {
     cost: s.formatMoney(n)
   });
@@ -251,7 +251,7 @@ function x({
   } = _$$m({
     currency: t
   });
-  let f = new vr(t);
+  let f = new CurrencyFormatter(t);
   let {
     editorType
   } = a;

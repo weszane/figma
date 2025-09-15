@@ -11,8 +11,8 @@ import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { F0 } from "../905/178707";
 import { k as _$$k } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
@@ -51,9 +51,9 @@ function V({
   let _ = !!t?.isTryFile;
   return {
     openLoginModal: () => {
-      r(Ts({
+      r(AUTH_INIT({
         origin: "logged_out_footer",
-        formState: qB.SIGN_IN,
+        formState: AuthFlowStep.SIGN_IN,
         redirectUrl: customHistory.location.pathname
       }));
       r(showModalHandler({

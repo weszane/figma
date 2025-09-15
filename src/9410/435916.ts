@@ -9,11 +9,11 @@ import c from "classnames";
 import { h as _$$h } from "../905/207101";
 import { isAnyMobile, isIOSUA } from "../figma_app/778880";
 import { renderI18nText } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { e as _$$e } from "../905/621515";
 import { A as _$$A } from "../905/956262";
 import { Fy, g5, NT } from "../figma_app/579169";
-import { r1, Fu } from "../figma_app/545877";
+import { userFlagExistsAtomFamily, userFlagAtomFamily } from "../figma_app/545877";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { aV } from "../figma_app/722362";
@@ -476,7 +476,7 @@ function Y(e) {
   } = e;
   let s = useDispatch();
   let l = useCallback(() => {
-    s(_$$b({
+    s(postUserFlag({
       [V.NEW_USER_ZOOM]: !0
     }));
   }, [s]);
@@ -532,7 +532,7 @@ function J(e) {
     }, 1e3);
   });
   let d = useCallback(() => {
-    l(_$$b({
+    l(postUserFlag({
       [V.NEW_USER_PAN]: !0
     }));
   }, [l]);
@@ -592,9 +592,9 @@ export function $$$$X0() {
   let i = useSelector(e => e.isMakeSomethingV2Active);
   return t || e || i ? null : jsx(et, {});
 }
-let Z = r1(V.NEW_USER_PAN);
-let Q = r1(V.NEW_USER_ZOOM);
-let $ = Fu("figjam_editor_onboarded");
+let Z = userFlagExistsAtomFamily(V.NEW_USER_PAN);
+let Q = userFlagExistsAtomFamily(V.NEW_USER_ZOOM);
+let $ = userFlagAtomFamily("figjam_editor_onboarded");
 let ee = [function (e) {
   let {
     isOverlayShowing,

@@ -8,8 +8,8 @@ import { zq } from "../figma_app/598412";
 import { pO, nS, Ac, Wk, aV } from "../figma_app/321395";
 import { H, e as _$$e } from "../figma_app/324237";
 import { Z } from "../905/942203";
-import { k } from "../905/22009";
-import { L as _$$L } from "../905/178090";
+import { editorUtilities } from "../905/22009";
+import { ResourceTypes } from "../905/178090";
 import { LJ, gT, Tr, zU } from "../figma_app/930386";
 import { Zp } from "../figma_app/188671";
 import { VR, FZ, CS, p7 } from "../figma_app/979714";
@@ -67,7 +67,7 @@ export function $$S4(e) {
     creators: e.creators
   }).href;
 }
-class v extends nS { }
+class v extends nS {}
 v.deserializeParams = e => {
   let t = zq();
   let r = L(e.categorySlug, t);
@@ -81,14 +81,14 @@ v.serializeParams = e => e;
 v.parseQueryString = e => {
   let t = parseQuerySimple(e);
   return {
-    resource_type: S(t.resource_type, _$$L.BrowseResourceTypes),
-    editor_type: S(t.editor_type, k.Editors),
+    resource_type: S(t.resource_type, ResourceTypes.BrowseResourceTypes),
+    editor_type: S(t.editor_type, editorUtilities.Editors),
     price: S(t.price, _$$C.Price),
     sort_by: S(t.sort_by, _$$e.Browse),
     creators: S(t.creators, Z.Browse)
   };
 };
-let A = class extends v { };
+let A = class extends v {};
 Ac(A);
 A.displayName = "CategoryRoute";
 A.path = "/community/:categorySlug/:tagSlug?";
@@ -106,7 +106,7 @@ export class $$N0 extends Wk($$x2) {
     super(i, t, r);
   }
 }
-let C = class extends v { };
+let C = class extends v {};
 Ac(C);
 C.displayName = "ResourceHubCategoryRoute";
 C.path = aV(VR, $$x2.path);

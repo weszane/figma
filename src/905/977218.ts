@@ -10,7 +10,7 @@ import { W0 as _$$W, Dy as _$$Dy, ky as _$$ky, NR as _$$NR, Pj as _$$Pj, r0 as _
 import { createOptimistThunk } from "../905/350402";
 import { trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
 import { zU } from "../figma_app/740025";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { DEFAULT_PAGE_SIZE, Lk, Lr, PublicModelType, SortingCriteria, SearchTypeMode, SpaceAccessType } from "../figma_app/162807";
 import { vj as _$$vj, Ei } from "../905/574958";
 import { $W } from "../905/144933";
@@ -296,13 +296,13 @@ let $$L0 = createOptimistThunk((e, t) => {
     let i = $$L0.loadingKeyForPayload({
       parameters: n
     });
-    N(t, e, i, h);
+    setupLoadingStateHandler(t, e, i, h);
   } else {
     let t = O(sessionId, n, !1, p, e, m);
     let i = $$L0.loadingKeyForPayload({
       parameters: n
     });
-    N(t, e, i, h);
+    setupLoadingStateHandler(t, e, i, h);
   }
 }, ({
   parameters: e

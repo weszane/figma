@@ -3,12 +3,12 @@ import { useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { getSingletonSceneGraph } from "../905/700578";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { wg, zo, pQ } from "../figma_app/101956";
 import { t as _$$t, d2 } from "../figma_app/579169";
-import { qG } from "../figma_app/545877";
+import { userFlagsAtom } from "../figma_app/545877";
 import { mW, jj } from "../figma_app/797994";
 import { isTeamFolderV2 } from "../figma_app/528509";
 import { openFileAtom, useEditorType } from "../figma_app/516028";
@@ -33,7 +33,7 @@ export function $$C0() {
   let R = useAtomWithSubscription(pQ);
   let L = useAtomWithSubscription(_$$t);
   let P = useAtomWithSubscription(d2);
-  let D = useAtomWithSubscription(qG);
+  let D = useAtomWithSubscription(userFlagsAtom);
   let k = useAtomWithSubscription($);
   let M = useAtomWithSubscription(MoveDraftsTeamData.Query({
     orgId: null
@@ -54,11 +54,11 @@ export function $$C0() {
         let o = 0 === (s?.currentUser?.teamEditRoles?.map(e => e.team) ?? []).filter(e => e && e.projects && !e.deletedAt && e.projects.length > 0).length;
         let d = !!t && isTeamFolderV2(t.project);
         let c = C === FFileType.WHITEBOARD && n || C === FFileType.DESIGN && O;
-        return e && (r || d) && c && i === qo.PERSONAL && !o && !mW(a, "ran_move_drafts_nudge_v2_num_3") && (mW(a, "ran_move_drafts_nudge_v2_num_2") ? !jj(a, "ran_move_drafts_nudge_v2_num_2") && (F(_$$b({
+        return e && (r || d) && c && i === qo.PERSONAL && !o && !mW(a, "ran_move_drafts_nudge_v2_num_3") && (mW(a, "ran_move_drafts_nudge_v2_num_2") ? !jj(a, "ran_move_drafts_nudge_v2_num_2") && (F(postUserFlag({
           ran_move_drafts_nudge_v2_num_3: !0
-        })), !0) : mW(a, "ran_move_drafts_nudge_v2_num_1") ? !jj(a, "ran_move_drafts_nudge_v2_num_1") && (F(_$$b({
+        })), !0) : mW(a, "ran_move_drafts_nudge_v2_num_1") ? !jj(a, "ran_move_drafts_nudge_v2_num_1") && (F(postUserFlag({
           ran_move_drafts_nudge_v2_num_2: !0
-        })), !0) : (F(_$$b({
+        })), !0) : (F(postUserFlag({
           ran_move_drafts_nudge_v2_num_1: !0
         })), !0));
       },
@@ -81,7 +81,7 @@ export function $$C0() {
     trackingContextName: "Move Drafts Nudge - Team nudge",
     element: B,
     onClickPrimaryCta: () => {
-      F(_$$b({
+      F(postUserFlag({
         ran_move_drafts_nudge_v2_num_3: !0
       }));
       j.complete();

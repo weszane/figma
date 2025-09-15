@@ -21,7 +21,7 @@ import { J } from "../figma_app/636279";
 import { mZ } from "../figma_app/76115";
 import { n as _$$n } from "../905/186638";
 import { ZV } from "../figma_app/188908";
-import { TG } from "../905/72677";
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { QT } from "../figma_app/645801";
 import { fJ, ND, r6, HR } from "../905/545010";
 var l = o;
@@ -166,7 +166,7 @@ export function $$P0({
   let {
     closeFlyout
   } = JA();
-  let b = useAtomWithSubscription(TG);
+  let b = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let T = Ew({
     assetKey: u2(n),
     assetLibraryKey: n.library_key,

@@ -4,7 +4,7 @@ import { D, n as _$$n } from "../905/347702";
 import { useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { setupResourceAtomHandler } from "../figma_app/566371";
-import { j } from "../905/918929";
+import { partitionByPredicate } from "../905/918929";
 import { isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { bj } from "../905/420347";
 import { e6, _x, qE } from "../905/404538";
@@ -53,7 +53,7 @@ let $$x0 = _$$n(() => {
       let {
         pass,
         fail
-      } = j(o, isPublishedLibraryWithAssets);
+      } = partitionByPredicate(o, isPublishedLibraryWithAssets);
       return [pass, fail];
     }, [o]);
     let _ = useMemo(() => {
@@ -121,7 +121,7 @@ let $$x0 = _$$n(() => {
       let {
         pass,
         fail
-      } = j(C.data, isPublishedLibraryWithAssets);
+      } = partitionByPredicate(C.data, isPublishedLibraryWithAssets);
       return [pass, fail];
     }, [C]);
     let P = useMemo(() => gB({

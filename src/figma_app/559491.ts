@@ -16,14 +16,14 @@ import { AC } from "../figma_app/777551";
 import { createOptimistThunk } from "../905/350402";
 import { d6 } from "../figma_app/530167";
 import { HZ, Oo } from "../905/926523";
-import { Cx, x2, of } from "../figma_app/714946";
+import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { c as _$$c } from "../905/289751";
 import { Kg, Ac, Rd, Gf } from "../figma_app/599979";
 import { M4 } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
 import { F as _$$F } from "../905/827944";
 import { validateExtensionIconImage, validateArtworkImage, loadPluginManifest, loadLocalPluginSource, validatePluginCodeSize, getResourceRoleInfo, getPublishingData } from "../figma_app/300692";
-import { N as _$$N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { ResourceType, isWidget } from "../figma_app/45218";
 import { aP, kM } from "../figma_app/10554";
 import { w as _$$w } from "../905/771986";
@@ -56,7 +56,7 @@ let $$F29 = createOptimistThunk((e, t, {
       src: "initializeUserPublishedWidgets"
     }));
   });
-  _$$N(i, e, r);
+  setupLoadingStateHandler(i, e, r);
 });
 let $$j28 = M4.Query({
   fetch: async e => (await pluginAPIService.getUnpublishedPlugins()).data.meta,
@@ -205,7 +205,7 @@ let $$X26 = createOptimistThunk((e, t, {
     currentOrgId: e.getState().currentUserOrgId || void 0
   });
   let i = UM(t.profileId);
-  _$$N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   return n.then(async ({
     data: t
   }) => {
@@ -227,7 +227,7 @@ createOptimistThunk((e, t, {
     currentOrgId: e.getState().currentUserOrgId || void 0
   });
   let i = Jr(t.profileId);
-  _$$N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   return n.then(async ({
     data: t
   }) => {
@@ -247,7 +247,7 @@ let $$q7 = createOptimistThunk((e, t, {
   let n = pluginAPIService.getOrg({
     orgId: t
   });
-  _$$N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   return n.then(({
     data: t
   }) => {
@@ -263,7 +263,7 @@ let $$J14 = createOptimistThunk(async (e, t, {
   loadingKey: r
 }) => {
   try {
-    e.dispatch(Cx({
+    e.dispatch(loadingStatePutLoading({
       key: r
     }));
     let n = await U.getOrg({
@@ -274,13 +274,13 @@ let $$J14 = createOptimistThunk(async (e, t, {
       publishedPlugins: i,
       src: "getOrgPublishedWidgets"
     }));
-    e.dispatch(x2({
+    e.dispatch(loadingStatePutSuccess({
       key: r
     }));
     return i;
   } catch (t) {
     FlashActions.flash(t.message || getI18nString("community.actions.an_error_occurred_while_trying_to_fetch_the_org_widgets_list"));
-    e.dispatch(of({
+    e.dispatch(loadingStatePutFailure({
       key: r
     }));
     return [];
@@ -794,7 +794,7 @@ let $$ec15 = createOptimistThunk((e, {
   }) : pluginAPIService.getVersions({
     pluginId: t
   });
-  _$$N(a, e, n);
+  setupLoadingStateHandler(a, e, n);
   a.then(({
     data: e
   }) => {

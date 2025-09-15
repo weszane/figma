@@ -20,7 +20,7 @@ import { AG, Gj } from "../figma_app/217457";
 import { _k } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { FProductAccessType } from "../figma_app/191312";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 function N(e) {
@@ -101,7 +101,7 @@ function T({
 export let $$A0 = registerModal(function (e) {
   let t = useDispatch();
   let a = o0(e.invoice);
-  let s = new vr(e.invoice.currency);
+  let s = new CurrencyFormatter(e.invoice.currency);
   let _ = _k(e.invoice);
   let u = a.dict(t => e.invoice.seats_breakdown[t]?.net_quantity ?? 0);
   return jsx(N, {

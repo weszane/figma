@@ -9,7 +9,7 @@ import { f as _$$f } from '../905/436809';
 import { handleAtomEvent } from '../905/502364';
 import { subscribeMultipleAndAwaitAll } from '../905/553831';
 import { n as _$$n } from '../905/917104';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { atomStoreManager } from '../figma_app/27355';
 import { DevModeActivity } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
@@ -143,7 +143,7 @@ export async function $$P0({
   let A = R(t);
   let x = debugState.dispatch;
   if (t === BuildStatus.BUILD) {
-    x(_$$b({
+    x(postUserFlag({
       has_marked_ready_for_dev: !0
     }));
     handleAtomEvent({

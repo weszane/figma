@@ -1,10 +1,12 @@
-import U from 'classnames';
+import classNames from 'classnames';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
-import { C as _$$C } from '../905/180';
-import { s_ } from '../905/17223';
+import { useDebouncedCallback } from 'use-debounce';
+import { BuyerAPIHandler } from '../905/180';
+import { ModalCloseButton } from '../905/17223';
 import { X as _$$X } from '../905/33014';
-import { SubscriptionInterval, ProductStatus, isSubscription } from '../905/54385';
+import { isSubscription, ProductStatus, SubscriptionInterval } from '../905/54385';
 import { registerModal } from '../905/102752';
 import { Ey, To } from '../905/148137';
 import { hideModal } from '../905/156213';
@@ -45,20 +47,17 @@ import { Tb } from '../figma_app/350203';
 import { U3 } from '../figma_app/412189';
 import { Vm } from '../figma_app/427318';
 import { Cg, qD } from '../figma_app/471982';
-import { SecureLink, EnhancedInput, BigButtonPrimary } from '../figma_app/637027';
-import { VH } from '../figma_app/690075';
+import { BigButtonPrimary, EnhancedInput, SecureLink } from '../figma_app/637027';
+import { getPublisherDisplayName } from '../figma_app/690075';
 import { AC, Ul } from '../figma_app/777551';
 import { parsePxNumber } from '../figma_app/783094';
-import { bV, up } from '../figma_app/808294';
+import { getProductPriceString, formatCurrency } from '../figma_app/808294';
 import { createEmptyAddress, DEFAULT_COUNTRY, JAPAN_COUNTRY } from '../figma_app/831101';
-import { LoadingSpinner, LargeLoadingSpinner, LoadingOverlay } from '../figma_app/858013';
+import { LargeLoadingSpinner, LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { ModalView } from '../figma_app/918700';
 import { Badge, BadgeColor } from '../figma_app/919079';
-import { A as _$$A4 } from '../svg/228383';
-import { A as _$$A8 } from '../svg/675271';
-import { useDebouncedCallback } from 'use-debounce';
-import { useDispatch, useSelector } from 'react-redux';
-import classNames from 'classnames';
+import { A as SVG1 } from '../svg/228383';
+import { A as SVG2 } from '../svg/675271';
 function j({
   shippingAddress: e,
   setShippingAddress: t,
@@ -103,7 +102,6 @@ function j({
     })]
   });
 }
-let B = U;
 let H = 'checkout_promo_code_input--promoCodeApplyButton--x6XvK';
 let W = 'checkout_promo_code_input--promoCodeCancelButton--atXkP';
 function q({
@@ -119,7 +117,6 @@ function q({
     percent_off: t.percent_off
   }) : null;
 }
-var $ = (e => (e.POSSIBLY_VALID = 'possibly_valid', e.VALID = 'valid', e.INVALID = 'invalid', e.TOO_SHORT = 'too_short', e.LOADING = 'loading', e))($ || {});
 function Z({
   resource: e,
   disabled: t,
@@ -174,7 +171,7 @@ function Z({
       }), jsx('div', {
         className: W,
         children: jsx(SvgComponent, {
-          svg: _$$A4
+          svg: SVG1
         })
       })]
     }) : s === 'invalid' ? jsx('button', {
@@ -183,7 +180,7 @@ function Z({
       children: jsx('div', {
         className: W,
         children: jsx(SvgComponent, {
-          svg: _$$A4
+          svg: SVG1
         })
       })
     }) : s === 'loading' ? jsx('button', {
@@ -292,18 +289,18 @@ function J(e) {
     newTotalAmount: i,
     promoCodeAmountString: r
   };
-  let I = void 0 !== priceInCents ? up(priceInCents, !0) : jsx('div', {
+  let I = void 0 !== priceInCents ? formatCurrency(priceInCents, !0) : jsx('div', {
     className: nv,
     children: getI18nString('community.buyer.tbd')
   });
-  let E = void 0 !== newTotalAmount ? up(newTotalAmount, !0) : jsx('div', {
+  let E = void 0 !== newTotalAmount ? formatCurrency(newTotalAmount, !0) : jsx('div', {
     className: nv,
     children: getI18nString('community.buyer.tbd')
   });
   isSubscription && priceInCents && (t = subscriptionInterval === SubscriptionInterval.MONTHLY ? renderI18nText('community.buyer.price_x_month', {
-    priceString: up(priceInCents)
+    priceString: formatCurrency(priceInCents)
   }) : renderI18nText('community.buyer.price_x_year', {
-    priceString: up(priceInCents, !0)
+    priceString: formatCurrency(priceInCents, !0)
   }));
   return jsxs('div', {
     className: _$$s.flex.flexColumn.itemsStart.gap12.$,
@@ -325,26 +322,26 @@ function J(e) {
       price: taxCalculationError ? jsx('span', {
         className: u7,
         children: taxCalculationError
-      }) : hasCalculatedTax ? up(taxAmountInCents, !0) : jsx('span', {
+      }) : hasCalculatedTax ? formatCurrency(taxAmountInCents, !0) : jsx('span', {
         className: nv,
         children: renderI18nText('community.buyer.to_be_calculated')
       })
     }), promoCodeAmountString && jsx(ee, {
       adtlClassName: us,
       header: renderI18nText('community.buyer.promo_code'),
-      price: up(promoCodeAmountString, !0)
+      price: formatCurrency(promoCodeAmountString, !0)
     }), _ && jsx(ee, {
       header: renderI18nText('community.buyer.to_be_charged_on_date', {
         date: A
       }),
-      price: promoCode ? E : up(y, !0)
+      price: promoCode ? E : formatCurrency(y, !0)
     }), jsx('div', {
       className: Wz
     }), jsx(ee, {
       header: jsx('strong', {
         children: _ ? renderI18nText('community.buyer.total_due_today') : renderI18nText('community.buyer.total')
       }),
-      price: _ ? up(0) : E,
+      price: _ ? formatCurrency(0) : E,
       showUSDLabel: !0
     })]
   });
@@ -371,7 +368,6 @@ function ee(e) {
     })]
   });
 }
-var ep = (e => (e.AMEX = 'amex', e.MASTERCARD = 'mastercard', e.VISA = 'visa', e))(ep || {});
 function em(e) {
   switch (e.brand) {
     case 'amex':
@@ -388,7 +384,7 @@ function em(e) {
       });
     case 'visa':
       return jsx(SvgComponent, {
-        svg: _$$A8,
+        svg: SVG2,
         className: Ie,
         useOriginalSrcFills_DEPRECATED: !0
       });
@@ -639,7 +635,7 @@ function eS({
   subscriptionInterval: t
 }) {
   let i = hasClientMeta(e) ? a6(e) : getPluginVersion(e);
-  let r = VH(e);
+  let r = getPublisherDisplayName(e);
   let a = i.name;
   let s = hasClientMeta(e) ? e.thumbnail_url : i.redirect_icon_url;
   let o = jsx('img', {
@@ -651,7 +647,7 @@ function eS({
     if (e.monetized_resource_metadata.is_subscription) {
       let i = e.monetized_resource_metadata.trial_length_in_days || 0;
       let n = t === SubscriptionInterval.MONTHLY;
-      let r = n ? up(e.monetized_resource_metadata.price) : up(e.monetized_resource_metadata.annual_price || 0, !0);
+      let r = n ? formatCurrency(e.monetized_resource_metadata.price) : formatCurrency(e.monetized_resource_metadata.annual_price || 0, !0);
       let a = e?.community_resource_payment && e.community_resource_payment.subscription_expires_at;
       l = i > 0 && !a ? renderI18nText(n ? 'community.buyer.free_trial_then_price_month' : 'community.buyer.free_trial_then_price_year', {
         freeTrialDays: i,
@@ -661,7 +657,7 @@ function eS({
       });
     } else {
       l = renderI18nText('community.buyer.price_one_time_payment', {
-        priceString: bV(e.monetized_resource_metadata)
+        priceString: getProductPriceString(e.monetized_resource_metadata)
       });
     }
   } else {
@@ -714,405 +710,504 @@ function eR(e) {
     children: [jsx(eE, {
       resource,
       localResource: e.localResource
-    }), jsx(s_, {
+    }), jsx(ModalCloseButton, {
       dispatch: s
     })]
   });
 }
-export let $$eN0 = registerModal(e => {
-  let t;
-  let {
+/**
+ * CommunityCheckoutModal - Refactored main modal component for community checkout.
+ * Original export: $$eN0
+ */
+export const CommunityCheckoutModal = registerModal(props => {
+  // Destructure props for clarity
+  const {
     userId,
     resource,
     onSuccess,
-    onCancel
-  } = e;
-  let D = e.resource && getFeatureFlags().community_hub_admin && AC(e.resource);
-  let L = e.noInteractionMode && !!(e.localResource || D);
-  let F = resource?.monetized_resource_metadata;
-  let U = F?.id;
-  let B = useDispatch();
+    onCancel,
+    noInteractionMode,
+    localResource
+  } = props;
+
+  // Feature flags and admin mode
+  const isAdminReview = resource && getFeatureFlags().community_hub_admin && AC(resource);
+  const isNoInteraction = noInteractionMode && !!(localResource || isAdminReview);
+
+  // Resource metadata
+  const monetizedMeta = resource?.monetized_resource_metadata;
+  const monetizedMetaId = monetizedMeta?.id;
+
+  // Redux dispatch
+  const dispatch = useDispatch();
+
+  // Initialize buyer payment methods and tax info
   _$$G();
-  let [V, G] = useState();
-  let [z, H] = useState(!1);
-  let [W, K] = useState(createEmptyAddress());
-  let [Y, q] = useState('');
-  let [$, Q] = useState(!0);
-  let [ee, et] = useState('');
-  let [ei, en] = useState(0);
-  let [er, ea] = useState(null);
-  let [es, el] = useState(!1);
-  let [ed, ec] = useState(void 0);
-  let [eu, ep] = useState(!0);
-  let [em, eh] = useState([]);
-  let [e_, eA] = useState('');
-  let [ey, eb] = useState(!1);
-  let [ev, eI] = useState(!L);
-  let [ex, eS] = useState(!L);
-  let [ew, eC] = useState(null);
-  let [eT, ek] = useState(!1);
-  let [eN, eP] = useState(SubscriptionInterval.MONTHLY);
-  t = F?.is_subscription && F?.annual_discount_active_at && eN === SubscriptionInterval.ANNUALLY ? F?.annual_price || 0 : F?.price || 0;
-  let eO = useRef(null);
-  let eD = useCallback((e, t = {}) => ({
-    message: e.message,
-    statusCode: e.statusCode,
-    monetized_resource_metadata_id: U,
+
+  // State hooks
+  const [cardReady, setCardReady] = useState();
+  const [isCardComplete, setIsCardComplete] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState(createEmptyAddress());
+  const [vatGstId, setVatGstId] = useState('');
+  const [isVatIdValid, setIsVatIdValid] = useState(true);
+  const [taxIdVerificationStatus, setTaxIdVerificationStatus] = useState('');
+  const [taxPercent, setTaxPercent] = useState(0);
+  const [taxPercentWithPromo, setTaxPercentWithPromo] = useState(null);
+  const [hasCalculatedTax, setHasCalculatedTax] = useState(false);
+  const [taxCalculationError, setTaxCalculationError] = useState(undefined);
+  const [savePaymentInfo, setSavePaymentInfo] = useState(true);
+  const [paymentMethods, setPaymentMethods] = useState([]);
+  const [selectedPaymentMethodId, setSelectedPaymentMethodId] = useState('');
+  const [isRemovingCard, setIsRemovingCard] = useState(false);
+  const [promoCode, setPromoCode] = useState(null);
+  const [isLoadingPaymentMethods, setIsLoadingPaymentMethods] = useState(!isNoInteraction);
+  const [isLoadingTaxInfo, setIsLoadingTaxInfo] = useState(!isNoInteraction);
+  const [isLoadingPurchase, setIsLoadingPurchase] = useState(false);
+  const [subscriptionInterval, setSubscriptionInterval] = useState(SubscriptionInterval.MONTHLY);
+
+  // Price calculation
+  const priceInCents = monetizedMeta?.is_subscription && monetizedMeta?.annual_discount_active_at && subscriptionInterval === SubscriptionInterval.ANNUALLY ? monetizedMeta?.annual_price || 0 : monetizedMeta?.price || 0;
+
+  // Ref for mobile scroll container
+  const mobileScrollContainerRef = useRef(null);
+
+  /**
+   * Helper to format error log payloads.
+   * Original: eD
+   */
+  const formatErrorPayload = useCallback((err, extra = {}) => ({
+    message: err.message,
+    statusCode: err.statusCode,
+    monetized_resource_metadata_id: monetizedMetaId,
     userId,
-    ...t
-  }), [U, userId]);
-  let eL = useCallback((e, t) => {
-    B(VisualBellActions.clearAll());
-    B(VisualBellActions.enqueue({
-      type: e,
-      message: t || getI18nString('community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again'),
-      error: !0
+    ...extra
+  }), [monetizedMetaId, userId]);
+
+  /**
+   * Helper to show error messages in visual bell.
+   * Original: eL
+   */
+  const showVisualBellError = useCallback((type, message) => {
+    dispatch(VisualBellActions.clearAll());
+    dispatch(VisualBellActions.enqueue({
+      type,
+      message: message || getI18nString('community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again'),
+      error: true
     }));
-  }, [B]);
+  }, [dispatch]);
+
+  /**
+   * Fetch payment methods and tax info on mount.
+   * Original: useEffect
+   */
   useEffect(() => {
-    L || (_$$C.getBuyerPaymentMethods({
+    if (isNoInteraction) return;
+
+    // Fetch payment methods
+    BuyerAPIHandler.getBuyerPaymentMethods({
       userId
     }).then(({
-      data: e
+      data
     }) => {
-      let t = e.meta.payment_methods;
-      eh(t);
-      t.length && eA(t[0].payment_method_id);
-      B(VisualBellActions.dequeue({
+      const methods = data.meta.payment_methods;
+      setPaymentMethods(methods);
+      if (methods.length) setSelectedPaymentMethodId(methods[0].payment_method_id);
+      dispatch(VisualBellActions.dequeue({
         matchType: 'fetch-payment-methods-error'
       }));
-    }).catch(e => {
-      logError('checkout', 'error fetching payment methods', eD(e), {
-        reportAsSentryError: !0
+    }).catch(err => {
+      logError('checkout', 'error fetching payment methods', formatErrorPayload(err), {
+        reportAsSentryError: true
       });
-      eL('fetch-payment-methods-error', getI18nString('community.buyer.couldnt_fetch_existing_payment_method'));
-    }).$$finally(() => {
-      eI(!1);
-    }), _$$C.getCommunityUserTaxInfo({
+      showVisualBellError('fetch-payment-methods-error', getI18nString('community.buyer.couldnt_fetch_existing_payment_method'));
+    }).finally(() => setIsLoadingPaymentMethods(false));
+
+    // Fetch tax info
+    BuyerAPIHandler.getCommunityUserTaxInfo({
       userId
     }).then(({
-      data: e
+      data
     }) => {
-      e.meta.vat_gst_id && q(e.meta.vat_gst_id);
-      e.meta.shipping_address && K(e.meta.shipping_address);
-      e.meta.tax_id_verification_status && et(e.meta.tax_id_verification_status);
-    }).catch(e => {
-      logError('checkout', 'error fetching user tax info', eD(e), {
-        reportAsSentryError: !0
+      if (data.meta.vat_gst_id) setVatGstId(data.meta.vat_gst_id);
+      if (data.meta.shipping_address) setShippingAddress(data.meta.shipping_address);
+      if (data.meta.tax_id_verification_status) setTaxIdVerificationStatus(data.meta.tax_id_verification_status);
+    }).catch(err => {
+      logError('checkout', 'error fetching user tax info', formatErrorPayload(err), {
+        reportAsSentryError: true
       });
-    }).$$finally(() => {
-      eS(!1);
-    }));
-  }, [L, B, eL, eD, userId]);
-  let eF = useSelector(e => e.selectedView);
-  let eM = ei / 100 * t;
-  let ej = resource?.community_resource_payment && resource.community_resource_payment.subscription_expires_at ? void 0 : F?.trial_length_in_days;
-  let eU = er === null || ew === null ? null : er / 100 * (t * (1 - ew.percent_off / 100));
-  let eB = useDebouncedCallback(useCallback(e => {
-    el(!1);
-    _$$C.getBuyerTax({
+    }).finally(() => setIsLoadingTaxInfo(false));
+  }, [isNoInteraction, dispatch, showVisualBellError, formatErrorPayload, userId]);
+
+  // Redux selector for current view
+  const selectedView = useSelector(state => state.selectedView);
+
+  // Tax calculations
+  const taxAmountInCents = taxPercent / 100 * priceInCents;
+  const trialDays = resource?.community_resource_payment && resource.community_resource_payment.subscription_expires_at ? undefined : monetizedMeta?.trial_length_in_days;
+  const taxAmountWithPromoCodeInCents = taxPercentWithPromo === null || promoCode === null ? null : taxPercentWithPromo / 100 * (priceInCents * (1 - promoCode.percent_off / 100));
+
+  /**
+   * Debounced tax calculation.
+   * Original: eB
+   */
+  const debouncedCalculateTax = useDebouncedCallback(useCallback(address => {
+    setHasCalculatedTax(false);
+    BuyerAPIHandler.getBuyerTax({
       userId,
-      address: JSON.stringify(e),
-      promoCode: ew?.promo_code,
-      resourceId: U,
-      userInputtedVatId: Y
+      address: JSON.stringify(address),
+      promoCode: promoCode?.promo_code,
+      resourceId: monetizedMetaId,
+      userInputtedVatId: vatGstId
     }).then(({
-      data: e
+      data
     }) => {
-      en(e.meta.tax_percent);
-      void 0 !== e.meta.tax_percent_with_promo_code && ea(e.meta.tax_percent_with_promo_code);
-      ec(void 0);
-      B(VisualBellActions.dequeue({
+      setTaxPercent(data.meta.tax_percent);
+      if (data.meta.tax_percent_with_promo_code !== undefined) setTaxPercentWithPromo(data.meta.tax_percent_with_promo_code);
+      setTaxCalculationError(undefined);
+      dispatch(VisualBellActions.dequeue({
         matchType: 'tax-calcuation-error'
       }));
-    }).catch(e => {
-      logWarning('checkout', 'error calculating taxes', eD({
-        message: e.data.message,
-        statusCode: e.data.status
+    }).catch(err => {
+      logWarning('checkout', 'error calculating taxes', formatErrorPayload({
+        message: err.data.message,
+        statusCode: err.data.status
       }, {
-        promo_code: ew?.promo_code,
-        vatId: Y
+        promo_code: promoCode?.promo_code,
+        vatId: vatGstId
       }), {
-        reportAsSentryError: !(e.data.status === 400 && e.data.reason === 'ADDRESS')
+        reportAsSentryError: !(err.data.status === 400 && err.data.reason === 'ADDRESS')
       });
-      ec(resolveMessage(e));
-    }).$$finally(() => {
-      el(!0);
-    });
-  }, [B, U, userId, ew, eD, Y]), 500);
+      setTaxCalculationError(resolveMessage(err));
+    }).finally(() => setHasCalculatedTax(true));
+  }, [dispatch, monetizedMetaId, userId, promoCode, formatErrorPayload, vatGstId]), 500);
+
+  /**
+   * Trigger tax calculation when address or VAT ID changes.
+   * Original: useEffect
+   */
   useEffect(() => {
-    if (L) return;
-    let {
+    if (isNoInteraction) return;
+    const {
       line1,
       city,
       country,
       region,
       postal_code
-    } = W;
+    } = shippingAddress;
     if (line1 && city && country && postal_code) {
       if (country === 'US' && !region) return;
-      eB(W);
+      debouncedCalculateTax(shippingAddress);
     } else {
-      el(!1);
+      setHasCalculatedTax(false);
     }
-  }, [W, Y, eB, L]);
-  let eV = useCallback(async (e, t, n) => {
+  }, [shippingAddress, vatGstId, debouncedCalculateTax, isNoInteraction]);
+
+  /**
+   * Complete purchase handler.
+   * Original: eV
+   */
+  const completePurchase = useCallback(async (paymentMethod, done, userInputtedVatId) => {
     try {
-      let t = {
-        payment_method: e,
-        address: W,
+      const payload: any = {
+        payment_method: paymentMethod,
+        address: shippingAddress,
         user_id: userId,
-        save_payment_info: eu,
-        promo_code: ew?.promo_code,
-        subscription_interval: F?.is_subscription ? eN : null
+        save_payment_info: savePaymentInfo,
+        promo_code: promoCode?.promo_code,
+        subscription_interval: monetizedMeta?.is_subscription ? subscriptionInterval : null
       };
-      void 0 !== n && (t.user_inputted_vat_id = n);
-      await XHR.post(`/api/community/buyer/${U}/buy`, t);
-      B(VisualBellActions.clearAll());
-      B(hideModal());
-      B(VisualBellActions.enqueue({
+      if (userInputtedVatId !== undefined) payload.user_inputted_vat_id = userInputtedVatId;
+      await XHR.post(`/api/community/buyer/${monetizedMetaId}/buy`, payload);
+      dispatch(VisualBellActions.clearAll());
+      dispatch(hideModal());
+      dispatch(VisualBellActions.enqueue({
         message: getI18nString('community.buyer.purchase_complete'),
-        error: !1
+        error: false
       }));
       onSuccess?.();
-    } catch (e) {
+    } catch (err) {
       onCancel?.();
-      logError('checkout', 'error completing purchase', eD(e, {
-        promo_code: ew?.promo_code
+      logError('checkout', 'error completing purchase', formatErrorPayload(err, {
+        promo_code: promoCode?.promo_code
       }), {
-        reportAsSentryError: !0
+        reportAsSentryError: true
       });
-      e.message ? eL('purchasing-error', e.message) : eL('purchasing-error', getI18nString('community.buyer.couldnt_complete_purchase'));
+      err.message ? showVisualBellError('purchasing-error', err.message) : showVisualBellError('purchasing-error', getI18nString('community.buyer.couldnt_complete_purchase'));
     } finally {
-      t?.();
+      done?.();
     }
-  }, [B, U, W, userId, eu, onSuccess, onCancel, eL, ew, eD, eN, F?.is_subscription]);
-  let eG = useCallback(async () => {
-    let e;
-    let i;
-    if (L) {
-      B(hideModal());
+  }, [dispatch, monetizedMetaId, shippingAddress, userId, savePaymentInfo, onSuccess, onCancel, showVisualBellError, promoCode, formatErrorPayload, subscriptionInterval, monetizedMeta?.is_subscription]);
+
+  /**
+   * Main purchase flow handler.
+   * Original: eG
+   */
+  const handlePurchase = useCallback(async () => {
+    let stripeToken, paymentConfirmation;
+    if (isNoInteraction) {
+      dispatch(hideModal());
       onSuccess?.();
       return;
     }
-    if (B(VisualBellActions.clearAll()), B(VisualBellActions.enqueue({
+    dispatch(VisualBellActions.clearAll());
+    dispatch(VisualBellActions.enqueue({
       type: 'loading-purchase',
       message: getI18nString('community.buyer.hold_tight_while_we_process_your_payment')
-    })), ek(!0), e_) {
-      eV(e_, () => ek(!1), Y);
+    }));
+    setIsLoadingPurchase(true);
+    if (selectedPaymentMethodId) {
+      completePurchase(selectedPaymentMethodId, () => setIsLoadingPurchase(false), vatGstId);
       return;
     }
-    if (!V) {
-      ek(!1);
+    if (!cardReady) {
+      setIsLoadingPurchase(false);
       return;
     }
     try {
-      e = await Ey(V);
-    } catch (e) {
-      logError('checkout', 'stripe token fetch error', eD(e), {
-        reportAsSentryError: !0
+      stripeToken = await Ey(cardReady);
+    } catch (err) {
+      logError('checkout', 'stripe token fetch error', formatErrorPayload(err), {
+        reportAsSentryError: true
       });
-      eL('stripe-token-error', getI18nString('community.buyer.couldnt_process_payment_through_stripe'));
-      ek(!1);
+      showVisualBellError('stripe-token-error', getI18nString('community.buyer.couldnt_process_payment_through_stripe'));
+      setIsLoadingPurchase(false);
       return;
     }
-    let n = e?.token?.id;
-    if (void 0 === n) {
-      logError('checkout', 'stripe token error', eD({
-        message: e?.error?.message || 'stripe token error'
+    const tokenId = stripeToken?.token?.id;
+    if (tokenId === undefined) {
+      logError('checkout', 'stripe token error', formatErrorPayload({
+        message: stripeToken?.error?.message || 'stripe token error'
       }), {
-        reportAsSentryError: !0
+        reportAsSentryError: true
       });
-      eL('stripe-token-error', getI18nString('community.buyer.error_stripe', {
-        message: e?.error?.message || getI18nString('community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again')
+      showVisualBellError('stripe-token-error', getI18nString('community.buyer.error_stripe', {
+        message: stripeToken?.error?.message || getI18nString('community.buyer.sorry_there_was_an_error_processing_your_request_refresh_and_try_again')
       }));
-      ek(!1);
+      setIsLoadingPurchase(false);
       return;
     }
     try {
-      i = await To(n, t + eM);
-    } catch (e) {
+      paymentConfirmation = await To(tokenId, priceInCents + taxAmountInCents);
+    } catch (err) {
       onCancel?.();
-      logError('checkout', 'error confirming payment', eD(e), {
-        reportAsSentryError: !0
+      logError('checkout', 'error confirming payment', formatErrorPayload(err), {
+        reportAsSentryError: true
       });
-      eL('payment-processing-error', e?.message);
-      ek(!1);
+      showVisualBellError('payment-processing-error', err?.message);
+      setIsLoadingPurchase(false);
       return;
     }
-    let r = i?.payment_method;
-    if (void 0 === r) {
-      logError('checkout', 'error processing payment', eD({
+    const paymentMethod = paymentConfirmation?.payment_method;
+    if (paymentMethod === undefined) {
+      logError('checkout', 'error processing payment', formatErrorPayload({
         message: 'payment method is undefined'
       }), {
-        reportAsSentryError: !0
+        reportAsSentryError: true
       });
-      eL('payment-processing');
-      ek(!1);
+      showVisualBellError('payment-processing');
+      setIsLoadingPurchase(false);
       return;
     }
-    eV(r, () => ek(!1), Y);
-  }, [B, V, t, eM, eV, onCancel, onSuccess, L, e_, eL, eD, Y]);
-  let ez = useCallback(() => {
-    eT ? B(VisualBellActions.enqueue({
-      type: 'close-during-purchase',
-      message: getI18nString('community.buyer.please_remain_on_the_page'),
-      error: !0,
-      timeoutOverride: 2e3
-    })) : (B(VisualBellActions.clearAll()), B(hideModal()), onCancel?.(), new URLSearchParams(customHistory.location.search).has(Tb) && B(sf({
-      ...eF,
-      triggerCheckout: void 0
-    })));
-  }, [B, onCancel, eF, eT]);
-  let eH = !!em.length;
-  let eW = L || es && (z || e_) && $;
-  let eK = !!(L || eT);
-  let eY = ev ? jsx(LargeLoadingSpinner, {}) : jsx(eg, {
-    address: W,
-    disabled: eK,
-    hideReusePaymentUi: L || !eH,
-    isRemovingCard: ey,
-    onAddressChange: K,
-    onCardChange: e => H(e.complete),
-    onCardReady: G,
-    onRemoveCard(e) {
-      eb(!0);
-      XHR.del(`/api/community/buyer/payment_method/${e}`).then(() => {
-        let t = em.filter(t => t.payment_method_id !== e);
-        eh(t);
-        eA(t[0]?.payment_method_id || '');
-        B(VisualBellActions.dequeue({
+    completePurchase(paymentMethod, () => setIsLoadingPurchase(false), vatGstId);
+  }, [dispatch, cardReady, priceInCents, taxAmountInCents, completePurchase, onCancel, onSuccess, isNoInteraction, selectedPaymentMethodId, showVisualBellError, formatErrorPayload, vatGstId]);
+
+  /**
+   * Modal close handler.
+   * Original: ez
+   */
+  const handleClose = useCallback(() => {
+    if (isLoadingPurchase) {
+      dispatch(VisualBellActions.enqueue({
+        type: 'close-during-purchase',
+        message: getI18nString('community.buyer.please_remain_on_the_page'),
+        error: true,
+        timeoutOverride: 2000
+      }));
+    } else {
+      dispatch(VisualBellActions.clearAll());
+      dispatch(hideModal());
+      onCancel?.();
+      if (new URLSearchParams(customHistory.location.search).has(Tb)) {
+        dispatch(sf({
+          ...selectedView,
+          triggerCheckout: undefined
+        }));
+      }
+    }
+  }, [dispatch, onCancel, selectedView, isLoadingPurchase]);
+
+  // UI state
+  const hasPaymentMethods = !!paymentMethods.length;
+  const canSubmit = isNoInteraction || hasCalculatedTax && (isCardComplete || selectedPaymentMethodId) && isVatIdValid;
+  const isDisabled = isNoInteraction || isLoadingPurchase;
+
+  // Payment UI
+  const paymentUi = isLoadingPaymentMethods ? jsx(LargeLoadingSpinner, {}) : jsx(eg, {
+    address: shippingAddress,
+    disabled: isDisabled,
+    hideReusePaymentUi: isNoInteraction || !hasPaymentMethods,
+    isRemovingCard,
+    onAddressChange: setShippingAddress,
+    onCardChange: e => setIsCardComplete(e.complete),
+    onCardReady: setCardReady,
+    onRemoveCard: id => {
+      setIsRemovingCard(true);
+      XHR.del(`/api/community/buyer/payment_method/${id}`).then(() => {
+        const updatedMethods = paymentMethods.filter(pm => pm.payment_method_id !== id);
+        setPaymentMethods(updatedMethods);
+        setSelectedPaymentMethodId(updatedMethods[0]?.payment_method_id || '');
+        dispatch(VisualBellActions.dequeue({
           matchType: 'remove-card-error'
         }));
-      }).catch(e => {
-        logError('checkout', 'error removing card', eD(e), {
-          reportAsSentryError: !0
+      }).catch(err => {
+        logError('checkout', 'error removing card', formatErrorPayload(err), {
+          reportAsSentryError: true
         });
-        eL('remove-card-error', getI18nString('community.buyer.couldnt_remove_existing_payment_method'));
-      }).$$finally(() => {
-        eb(!1);
-      });
+        showVisualBellError('remove-card-error', getI18nString('community.buyer.couldnt_remove_existing_payment_method'));
+      }).finally(() => setIsRemovingCard(false));
     },
-    onSelectPaymentMethod: eA,
-    onSetSavePaymentInfo: ep,
-    paymentMethods: em,
-    savePaymentInfo: eu,
-    selectedPaymentMethodId: e_
+    onSelectPaymentMethod: setSelectedPaymentMethodId,
+    onSetSavePaymentInfo: setSavePaymentInfo,
+    paymentMethods,
+    savePaymentInfo,
+    selectedPaymentMethodId
   });
-  let eq = F?.annual_discount_active_at && F?.annual_discount_percentage ? jsx(ef, {
-    annualDiscountPercentage: F.annual_discount_percentage,
-    subscriptionInterval: eN,
-    setSubscriptionInterval: eP
+
+  // Annual discount UI
+  const annualDiscountUi = monetizedMeta?.annual_discount_active_at && monetizedMeta?.annual_discount_percentage ? jsx(ef, {
+    annualDiscountPercentage: monetizedMeta.annual_discount_percentage,
+    subscriptionInterval,
+    setSubscriptionInterval
   }) : null;
-  let e$ = jsx(J, {
-    countryCode: W.country,
-    hasCalculatedTax: es,
-    isSubscription: !!F?.is_subscription,
-    priceInCents: t,
-    promoCode: ew,
-    subscriptionInterval: eN,
-    taxAmountInCents: eM,
-    taxAmountWithPromoCodeInCents: eU,
-    taxCalculationError: ed,
-    trialDays: ej
+
+  // Price summary UI
+  const priceSummaryUi = jsx(J, {
+    countryCode: shippingAddress.country,
+    hasCalculatedTax,
+    isSubscription: !!monetizedMeta?.is_subscription,
+    priceInCents,
+    promoCode,
+    subscriptionInterval,
+    taxAmountInCents,
+    taxAmountWithPromoCodeInCents,
+    taxCalculationError,
+    trialDays
   });
-  let eZ = jsx(Z, {
+
+  // Promo code UI
+  const promoCodeUi = jsx(Z, {
     initialValue: new URLSearchParams(customHistory.location.search).get(Tb),
     resource,
-    disabled: eK || !!e.localResource,
-    onValidate: eC
+    disabled: isDisabled || !!localResource,
+    onValidate: setPromoCode
   });
-  let eX = jsx(j, {
-    vatGstId: Y,
-    setVatGstId: q,
-    setIsVatIdValid: Q,
-    shippingAddress: W,
-    setShippingAddress: K,
-    taxIdVerificationStatus: ee
+
+  // Shipping address and VAT UI
+  const shippingVatUi = jsx(j, {
+    vatGstId,
+    setVatGstId,
+    setIsVatIdValid,
+    shippingAddress,
+    setShippingAddress,
+    taxIdVerificationStatus
   });
-  let eQ = jsx(X, {
-    submit: eG,
-    isLoading: eT,
-    disabled: !eW
+
+  // Submit button UI
+  const submitButtonUi = jsx(X, {
+    submit: handlePurchase,
+    isLoading: isLoadingPurchase,
+    disabled: !canSubmit
   });
-  return jsxs(Fragment, {
-    children: [jsx(_$$z, {
-      query: `(min-width: ${parsePxNumber(tgj)}px)`,
-      children: jsx(OJ, {
-        title: jsxs('div', {
-          children: [function (e, t) {
-            let i = e ? qD(e)?.name : t ? t.manifest.name : void 0;
-            return i !== 'undefined' && e && F && F.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
-              resourceName: i
-            }) : renderI18nText('community.buyer.purchase_resource_name', {
-              resourceName: i
-            });
-          }(e.resource, e.localResource), (e.localResource || D) && jsx(Badge, {
-            text: e.localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
-            color: BadgeColor.WARNING,
-            className: Ph
-          })]
-        }),
-        headerClassName: _$$s.font13.mx8.$,
-        headerSize: 'large',
-        onClose: ez,
-        maxWidth: 864,
-        disableClickOutsideToHide: eT,
-        children: jsxs('div', {
-          className: rb,
-          children: [jsxs('div', {
-            className: Cd,
-            children: [!!F?.annual_discount_active_at && jsx('div', {
-              className: ck,
-              children: eq
-            }), jsx('div', {
-              className: fI,
-              children: eY
-            }), !ex && jsx('div', {
-              className: yV,
-              children: eX
-            })]
+
+  // Desktop modal view
+  const desktopModal = jsx(_$$z, {
+    query: `(min-width: ${parsePxNumber(tgj)}px)`,
+    children: jsx(OJ, {
+      title: jsxs('div', {
+        children: [
+        // Title logic
+        (() => {
+          const resourceName = resource ? qD(resource)?.name : localResource ? localResource.manifest.name : undefined;
+          return resourceName !== 'undefined' && resource && monetizedMeta && monetizedMeta.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
+            resourceName
+          }) : renderI18nText('community.buyer.purchase_resource_name', {
+            resourceName
+          });
+        })(), (localResource || isAdminReview) && jsx(Badge, {
+          text: localResource ? renderI18nText('community.buyer.development') : renderI18nText('community.plugins.in_review'),
+          color: BadgeColor.WARNING,
+          className: Ph
+        })]
+      }),
+      headerClassName: _$$s.font13.mx8.$,
+      headerSize: 'large',
+      onClose: handleClose,
+      maxWidth: 864,
+      disableClickOutsideToHide: isLoadingPurchase,
+      children: jsxs('div', {
+        className: rb,
+        children: [jsxs('div', {
+          className: Cd,
+          children: [!!monetizedMeta?.annual_discount_active_at && jsx('div', {
+            className: ck,
+            children: annualDiscountUi
           }), jsx('div', {
-            className: SU
-          }), jsxs('div', {
-            className: yu,
-            children: [jsx(eE, {
-              resource: e.resource,
-              localResource: e.localResource,
-              subscriptionInterval: eN
-            }), jsx('div', {
-              className: _$$s.my24.$,
-              children: eZ
-            }), jsx('div', {
-              className: jH
-            }), jsxs('div', {
-              className: _$$s.flex.flexColumn.gap32.$,
-              children: [e$, eQ]
-            })]
+            className: fI,
+            children: paymentUi
+          }), !isLoadingTaxInfo && jsx('div', {
+            className: yV,
+            children: shippingVatUi
           })]
-        })
-      })
-    }), jsx(_$$z, {
-      query: `(max-width: ${parsePxNumber(tgj) - 1}px)`,
-      children: jsxs(ModalView, {
-        hide: ez,
-        className: Yf,
-        useModalViewScroll: !1,
-        disableClickOutsideToHide: eT,
-        children: [jsx(eR, {
-          resource,
-          localResource: e.localResource,
-          mobileScrollContainerRef: eO
+        }), jsx('div', {
+          className: SU
         }), jsxs('div', {
-          ref: eO,
-          className: AA,
-          children: [eq, eY, eZ, !ex && eX, jsxs('div', {
+          className: yu,
+          children: [jsx(eE, {
+            resource,
+            localResource,
+            subscriptionInterval
+          }), jsx('div', {
+            className: _$$s.my24.$,
+            children: promoCodeUi
+          }), jsx('div', {
+            className: jH
+          }), jsxs('div', {
             className: _$$s.flex.flexColumn.gap32.$,
-            children: [e$, eQ]
+            children: [priceSummaryUi, submitButtonUi]
           })]
         })]
       })
-    })]
+    })
+  });
+
+  // Mobile modal view
+  const mobileModal = jsx(_$$z, {
+    query: `(max-width: ${parsePxNumber(tgj) - 1}px)`,
+    children: jsxs(ModalView, {
+      hide: handleClose,
+      className: Yf,
+      useModalViewScroll: false,
+      disableClickOutsideToHide: isLoadingPurchase,
+      children: [jsx(eR, {
+        resource,
+        localResource,
+        mobileScrollContainerRef
+      }), jsxs('div', {
+        ref: mobileScrollContainerRef,
+        className: AA,
+        children: [annualDiscountUi, paymentUi, promoCodeUi, !isLoadingTaxInfo && shippingVatUi, jsxs('div', {
+          className: _$$s.flex.flexColumn.gap32.$,
+          children: [priceSummaryUi, submitButtonUi]
+        })]
+      })]
+    })
+  });
+
+  // Render modal
+  return jsxs(Fragment, {
+    children: [desktopModal, mobileModal]
   });
 }, 'CommunityCheckoutModal');
-export const h = $$eN0;
+
+/** Original export: h */
+export const h = CommunityCheckoutModal;

@@ -5,7 +5,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
 import { XHR } from "../905/910117";
-import { uo } from "../figma_app/78808";
+import { batchPutFileAction } from "../figma_app/78808";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { dU, GS } from "../figma_app/803787";
 let $$m3 = createContext({
@@ -53,7 +53,7 @@ export function $$g2({
         valid_move_id_to_file_key
       } = e.data.meta;
       for (let e of never_movable_node_ids) Fullscreen.clearLibraryMoveInfo(e);
-      p(uo({
+      p(batchPutFileAction({
         files,
         subscribeToRealtime: !0
       }));

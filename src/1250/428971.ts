@@ -7,13 +7,13 @@ import { renderI18nText } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
 import { A } from "../905/956262";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { U } from "../905/455766";
 import { rq } from "../905/425180";
 import { Hx5 } from "../figma_app/6204";
 if (443 == require.j) {}
-let h = r1("dev_mode_has_seen_component_browser_onboarding");
+let h = userFlagExistsAtomFamily("dev_mode_has_seen_component_browser_onboarding");
 let $$b1 = {
   Step1: "dev_mode_component_browser_manual_mapping_step_1",
   Step2: "dev_mode_component_browser_manual_mapping_step_2",

@@ -20,7 +20,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h } from "../905/455748";
 import { selectWithShallowEqual } from "../905/103090";
 import { KeyCodes } from "../905/63728";
-import { j as _$$j } from "../905/918929";
+import { partitionByPredicate } from "../905/918929";
 import { generateRecordingKey } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
@@ -32,10 +32,10 @@ import { j7, oB } from "../905/929976";
 import { U8, fG } from "../figma_app/91703";
 import { vq, qX } from "../905/8732";
 import { fi } from "../figma_app/913823";
-import { yH } from "../figma_app/714946";
+import { loadingStateDelete } from "../figma_app/714946";
 import { showModalHandler } from "../905/156213";
 import { jD } from "../905/765855";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
 import { n1 } from "../figma_app/657017";
 import { mapFileToProductType } from "../figma_app/314264";
@@ -420,7 +420,7 @@ function eW(e) {
   });
   let tD = n1();
   let tk = useCallback(() => {
-    pickerType !== Zl.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(jD()), e8(vq())) : pickerType === Zl.RESOURCE_INSERT_MODAL && e5 && (e8(_$$b({
+    pickerType !== Zl.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(jD()), e8(vq())) : pickerType === Zl.RESOURCE_INSERT_MODAL && e5 && (e8(postUserFlag({
       seen_component_onboarding_modal: !0
     })), tP()));
   }, [instanceSwapPickerShown, pickerToggleRef, e8, pickerType, tP, e5]);
@@ -522,7 +522,7 @@ function eW(e) {
       });
     }
     let s = e.altKey;
-    tp && e8(yH({
+    tp && e8(loadingStateDelete({
       key: Ml(tp, Object.keys(sceneGraphSelection))
     }));
     t_(r.item);
@@ -662,7 +662,7 @@ function eW(e) {
         let {
           pass,
           fail
-        } = _$$j(Object.keys(rootDrilldownItemsByLibraryKey), e => {
+        } = partitionByPredicate(Object.keys(rootDrilldownItemsByLibraryKey), e => {
           let t = libraryMetadataMap[e];
           return !!t?.isHubFile;
         });

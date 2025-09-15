@@ -12,8 +12,8 @@ import { W as _$$W } from "../905/841666";
 import { I as _$$I } from "../figma_app/4253";
 import { Jm, BY } from "../figma_app/387599";
 import { UI, N6, qD, _t, ZD, RE } from "../figma_app/471982";
-import { CS } from "../figma_app/275462";
-import { QQ } from "../figma_app/808294";
+import { isResourceHubProfilesEnabled } from "../figma_app/275462";
+import { isSubscriptionActive } from "../figma_app/808294";
 import { G8, mk, cB } from "../figma_app/777551";
 import { rZ } from "../figma_app/427318";
 import { Ay } from "../905/506641";
@@ -296,7 +296,7 @@ export function $$ea0({
   let k = !!getFeatureFlags().cmty_release_plugin_row_v2;
   let A = !k && "twoColumn" === T;
   let P = AG();
-  let O = CS();
+  let O = isResourceHubProfilesEnabled();
   let B = useDispatch();
   let D = Jm();
   let F = Om();
@@ -306,7 +306,7 @@ export function $$ea0({
   let G = hasMonetizedResourceMetadata(e);
   let $ = hasFreemiumCode(e);
   let z = _$$I(e);
-  let Q = QQ(z);
+  let Q = isSubscriptionActive(z);
   let ea = rZ(e);
   let el = useRef(null);
   let ec = useMemo(() => r ? jsx("div", {

@@ -9,7 +9,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { adminPermissionConfig } from "../905/654645";
 import { createLatencyTimer } from "../figma_app/391338";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { $ } from "../905/834575";
 let $$g7 = createOptimistAction("BATCH_DEL_TEAM_MEMBERS", (e, {
   teamId: t,
@@ -84,7 +84,7 @@ createOptimistThunk((e, {
   let n = $.getTeam({
     teamId: t
   });
-  N(n, e, r);
+  setupLoadingStateHandler(n, e, r);
   n.then(({
     data: t
   }) => {
@@ -105,7 +105,7 @@ let $$b12 = createOptimistThunk((e, {
   let i = $.getMembers({
     teamId: t
   });
-  r && N(i, e, n);
+  r && setupLoadingStateHandler(i, e, n);
   let a = createLatencyTimer({
     label: adminPermissionConfig.TeamMembersTable.teamMembersByTeamId,
     variant: "old",

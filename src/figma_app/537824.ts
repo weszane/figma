@@ -6,7 +6,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { fY, Og, jq, v4, VG, qL, m7, qZ } from "../figma_app/761118";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { w0 } from "../figma_app/594947";
+import { fetchDynamicConfig } from "../figma_app/594947";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -37,7 +37,7 @@ class L {
     this.linterResponsivenessDebouncer = i;
   }
   initialize() {
-    this.designLinterStateManager.getStatus() === td.UNINITIALIZED && (atomStoreManager.set(Av, performance.now()), this.designLinterStateManager.setStatus(td.INITIALIZED), w0("aip_flower_garden_node_limit").then(e => this._layerLimit = e.get("nodeLimit", $$O0)), this.linterResponsivenessDebouncer.initialize((e, t) => {
+    this.designLinterStateManager.getStatus() === td.UNINITIALIZED && (atomStoreManager.set(Av, performance.now()), this.designLinterStateManager.setStatus(td.INITIALIZED), fetchDynamicConfig("aip_flower_garden_node_limit").then(e => this._layerLimit = e.get("nodeLimit", $$O0)), this.linterResponsivenessDebouncer.initialize((e, t) => {
       this.triggerResponsivenessUpdate(e, t);
     }));
   }
@@ -210,7 +210,7 @@ class L {
     this.updateViolationsForNodes(e, t);
   }
   async areLinterDependenciesReady(e) {
-    let t = (await w0("aip_flower_garden_modal_data_loading")).get("libraryContextTimeoutMs", 5e3);
+    let t = (await fetchDynamicConfig("aip_flower_garden_modal_data_loading")).get("libraryContextTimeoutMs", 5e3);
     if (!(await this.waitForDataToLoad({
       isDataLoaded: _$$c,
       retryDelayMs: 100,

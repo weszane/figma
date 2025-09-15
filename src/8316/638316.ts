@@ -15,11 +15,11 @@ import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
 import { A as _$$A } from "../5132/237216";
-import { V4 } from "../figma_app/808294";
+import { partitionUsersByPurchaseEligibility } from "../figma_app/808294";
 import { Pg, lT } from "../figma_app/777551";
 import { cs } from "../figma_app/740025";
 import { ej } from "../figma_app/86989";
-import { G } from "../905/11536";
+import { getAssociatedUserProfiles } from "../905/11536";
 import { getUserId } from "../905/372672";
 import { hasMonetizedResourceMetadata, isThirdPartyMonetized, hasClientMeta } from "../figma_app/45218";
 var j = (e => (e.PATREON = "Patreon", e.GUMROAD = "Gumroad", e.UI8 = "UI8", e.LEMONSQUEEZY = "Lemon Squeezy", e))(j || {});
@@ -105,7 +105,7 @@ export function $$P0({
     f = !0;
     u = getI18nString("community.buyer.cannot_make_purchase_on_behalf_of_team_or_org");
   } else {
-    let t = G({
+    let t = getAssociatedUserProfiles({
       authedActiveCommunityProfile: _,
       authedUsers: m
     });
@@ -113,7 +113,7 @@ export function $$P0({
       let {
         usersCanPurchase,
         publishers
-      } = V4(t, e);
+      } = partitionUsersByPurchaseEligibility(t, e);
       0 === usersCanPurchase.length && 0 !== publishers.length && (f = !0, u = getI18nString("community.buyer.no_you_cannot_buy_your_own_resource"));
     }
     Pg(e) && (f = !0, u = getI18nString("community.resource.delisted_title"));

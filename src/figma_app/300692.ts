@@ -41,7 +41,7 @@ import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from '../figma_app/740025
 import { Rs } from '../figma_app/761870';
 import { AC } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
-import { F8, Mj, mZ, vf, WD, Yp } from '../figma_app/808294';
+import { isNotInteger, isRatioHigh, MIN_PRICE, centsToDollars, isGreater, isPriceOutOfRange } from '../figma_app/808294';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
 import { gU, YH } from '../figma_app/930338';
 import { XE } from '../figma_app/976749';
@@ -1432,7 +1432,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
     playgroundFigFile: pluginVersion.playground_fig_file,
     playgroundFilePublishType: _$$J.Actions.NOOP,
     isPaid: !!publishedResource.monetized_resource_metadata || hasPaymentsApi,
-    price: vf(publishedResource.monetized_resource_metadata),
+    price: centsToDollars(publishedResource.monetized_resource_metadata),
     isSubscription: publishedResource.monetized_resource_metadata?.is_subscription,
     hasPaymentsApi,
     annualDiscount: publishedResource.monetized_resource_metadata?.annual_discount_percentage,
@@ -1542,16 +1542,16 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
   const priceError = (() => {
     if (!data.isPaid || data.hasPaymentsApi) return null;
     if (!data.price) return getI18nString('community.publishing.price_is_required_for_paid_resources');
-    if (Yp(data.price)) {
-      return data.price < mZ ? getI18nString('community.seller.paid_resource_minimum_err') : getI18nString('community.seller.paid_resource_maximum_err');
+    if (isPriceOutOfRange(data.price)) {
+      return data.price < MIN_PRICE ? getI18nString('community.seller.paid_resource_minimum_err') : getI18nString('community.seller.paid_resource_maximum_err');
     }
-    if (F8(data.price)) return getI18nString('community.seller.prices_must_follow_format');
+    if (isNotInteger(data.price)) return getI18nString('community.seller.prices_must_follow_format');
     if (!publishedResource || AC(publishedResource)) return null;
     const prevPrice = publishedResource?.monetized_resource_metadata?.price;
-    if (data.isSubscription && prevPrice && Mj(prevPrice / 100, data.price)) {
+    if (data.isSubscription && prevPrice && isRatioHigh(prevPrice / 100, data.price)) {
       return getI18nString('community.seller.price_increase_limit');
     }
-    if (!publishedResource?.monetized_resource_metadata?.can_increase_price && prevPrice && WD(prevPrice / 100, data.price)) {
+    if (!publishedResource?.monetized_resource_metadata?.can_increase_price && prevPrice && isGreater(prevPrice / 100, data.price)) {
       return getI18nString('community.seller.price_can_only_be_increased_once_every_thirty_days');
     }
     return null;

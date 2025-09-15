@@ -6,7 +6,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { V } from "../905/965990";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { A } from "../905/563377";
 import { tS } from "../figma_app/622574";
 import { f as _$$f } from "../905/940356";
@@ -51,7 +51,7 @@ export function $$y1({
   let o = useDispatch();
   let l = tS();
   let d = useCallback(() => {
-    o(_$$b({
+    o(postUserFlag({
       dismissed_team_template_announcement_card: !0
     }));
     localStorage.removeItem(g);

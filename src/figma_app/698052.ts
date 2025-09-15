@@ -1,5 +1,5 @@
 import { qe } from "../figma_app/416935";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { w } from "../905/863010";
 import { hasValidSubscription, isTeamInGracePeriod } from "../figma_app/345997";
 import { canAdminTeam } from "../figma_app/642025";
@@ -35,15 +35,15 @@ export function $$h4(e) {
 export function $$m0(e) {
   switch (p(e)) {
     case 0:
-      return b({
+      return postUserFlag({
         dismissed_org_upsell_first_time: !0
       });
     case 1:
-      return b({
+      return postUserFlag({
         dismissed_org_upsell_second_time: !0
       });
     default:
-      return b({
+      return postUserFlag({
         dismissed_org_upsell_permanently: !0
       });
   }

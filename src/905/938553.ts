@@ -26,7 +26,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { rk, nF } from "../figma_app/471982";
-import { zt, Yp, mZ, F8 } from "../figma_app/808294";
+import { getAnnualPriceString, isPriceOutOfRange, MIN_PRICE, isNotInteger } from "../figma_app/808294";
 import { Ul, AC } from "../figma_app/777551";
 import { J as _$$J2 } from "../905/896954";
 import { gH } from "../905/104173";
@@ -967,7 +967,7 @@ function tO({
                 resource: l
               }));
             },
-            onCancel: () => { }
+            onCancel: () => {}
           },
           showModalsBeneath: !0
         })) : (c(wx({
@@ -1359,7 +1359,7 @@ function tY({
     children: renderI18nText(a ? "community.publishing.figma_reviews_all_resources_published_to_community_org_private.widget" : "community.publishing.figma_reviews_all_resources_published_to_community_org_private.plugin", {
       orgName: n.org.name
     })
-  }); else {
+  });else {
     let e = jsx(SecureLink, {
       href: "https://help.figma.com/hc/articles/360039958914",
       target: "_blank",
@@ -1684,7 +1684,7 @@ function ih({
           disabled: o
         }), jsx("div", {
           className: Oh,
-          children: !s && zt(e, n)
+          children: !s && getAnnualPriceString(e, n)
         })]
       })]
     }), l && !!s && jsx("div", {
@@ -1710,7 +1710,7 @@ function iE({
         })
       })
     })
-  }); else if (t) {
+  });else if (t) {
     let o = UR(t, e);
     s = a && e ? e.status === FRequestStatusType.APPROVED ? jsx(ix, {
       children: jsx(TextWithTruncation, {
@@ -2175,7 +2175,7 @@ class iW extends Component {
       }
       let t = "";
       let i = this.props.publishingState.metadata.author;
-      if ("org_id" in i) t = i.org_id; else if ("team_id" in i) {
+      if ("org_id" in i) t = i.org_id;else if ("team_id" in i) {
         let e = this.props.teams[i.team_id];
         t = e?.org_id ?? "";
       }
@@ -2243,7 +2243,7 @@ class iW extends Component {
           onConfirm: () => {
             this.createOrUpdatePluginVersion(i);
           },
-          onCancel: () => { }
+          onCancel: () => {}
         },
         showModalsBeneath: !0
       })) : this.createOrUpdatePluginVersion(i);
@@ -2608,8 +2608,8 @@ class iW extends Component {
     };
     this.onPriceChange = e => {
       let t;
-      Yp(e) && (t = e < mZ ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err"));
-      F8(e) && (t = getI18nString("community.seller.prices_must_follow_format"));
+      isPriceOutOfRange(e) && (t = e < MIN_PRICE ? getI18nString("community.seller.paid_resource_minimum_err") : getI18nString("community.seller.paid_resource_maximum_err"));
+      isNotInteger(e) && (t = getI18nString("community.seller.prices_must_follow_format"));
       this.setState({
         errors: {
           ...this.getFormErrors(!0),
@@ -2695,7 +2695,7 @@ class iW extends Component {
       try {
         let e = await ec.getPermissions(i);
         if (200 === e.status) return e.data.meta;
-      } catch (e) { }
+      } catch (e) {}
     };
     this.getPublishFormPrimaryButtonText = () => {
       let e = this.getReviewStatus();
@@ -3346,7 +3346,7 @@ class iW extends Component {
         role: publishedPlugin.roles,
         initialStep: l
       })) : e = this.renderErrorScreen();
-    } else if (this.state.activeTab === KM.PUBLISH) e = this.renderForm(); else if (this.state.activeTab === KM.PERMISSIONS) e = jsx(tU, {
+    } else if (this.state.activeTab === KM.PUBLISH) e = this.renderForm();else if (this.state.activeTab === KM.PERMISSIONS) e = jsx(tU, {
       allowedTabs: this.state.allowedTabs,
       closePluginPublishModal: this.close,
       contacts: this.props.contacts,
@@ -3358,7 +3358,7 @@ class iW extends Component {
       pluginName: this.props.publishingState.metadata.name,
       publishedPlugin: this.props.publishedPlugin,
       userIsAdmin: this.props.isAdminOfPrivateOrgPlugin
-    }); else if (this.state.activeTab === KM.DATA_SECURITY) {
+    });else if (this.state.activeTab === KM.DATA_SECURITY) {
       let t = getPublishedResourceOrNull(this.props.unpublishedPlugins, this.props.unpublishedWidgets, this.props.localPlugin);
       e = jsx(_$$A4, {
         localSecurityFormResponse: this.state.localSecurityFormResponse,

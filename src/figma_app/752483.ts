@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { l as _$$l } from "../905/296640";
 import { debugState } from "../905/407919";
 import { KeyCodes } from "../905/63728";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { ButtonBasePrimary, BigTextInputForwardRef, ButtonSecondary, SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -343,7 +343,7 @@ export let $$W0 = registerModal(function ({
         onKeyDown: e_,
         disableClickOutsideToHide: !0,
         onModalClick: e => e.stopPropagation(),
-        children: [jsx(s_, {
+        children: [jsx(ModalCloseButton, {
           dispatch: t
         }), jsx("div", {
           className: gn,
@@ -384,7 +384,7 @@ export let $$W0 = registerModal(function ({
         className: re,
         onKeyDown: e_,
         disableClickOutsideToHide: !0,
-        children: [jsx(s_, {
+        children: [jsx(ModalCloseButton, {
           dispatch: t
         }), jsx("div", {
           className: gn,
@@ -434,7 +434,7 @@ export let $$W0 = registerModal(function ({
       className: Tp,
       onKeyDown: e_,
       disableClickOutsideToHide: !0,
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         dispatch: t
       }), jsxs("div", {
         className: WG,

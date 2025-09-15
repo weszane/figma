@@ -11,7 +11,7 @@ import { ji } from "../figma_app/814196";
 import { ModifierKeyCodes, isExactModifier } from "../905/63728";
 import { BrowserInfo, isIpadDevice } from "../figma_app/778880";
 import { selectWithShallowEqual } from "../905/103090";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { k as _$$k2 } from "../905/582200";
 import { Hb, tH as _$$tH, H4 } from "../905/751457";
 import { subscribeDevModePermissions, useCanUseDevModeDemoFile } from "../figma_app/473493";
@@ -49,7 +49,7 @@ import { As, CZ, rd, v7 } from "../figma_app/475303";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { FU } from "../905/26824";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { $$, ZN } from "../figma_app/781852";
 import { pB } from "../905/395919";
@@ -84,8 +84,8 @@ import { w as _$$w } from "../figma_app/922802";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { H as _$$H } from "../905/444904";
 import { customHistory } from "../905/612521";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { Ob } from "../905/191560";
 import { u as _$$u } from "../905/684425";
 import { Ji } from "../905/739314";
@@ -172,7 +172,7 @@ let ed = (e, t, i) => {
   i || fullscreenValue.triggerAction("toggle-keyboard-shortcuts");
 };
 let ec = (e, t, i, r) => {
-  e(_$$b({
+  e(postUserFlag({
     keyboard_manual_supported_bell: !0
   }));
   e(VisualBellActions.enqueue({
@@ -185,7 +185,7 @@ let ec = (e, t, i, r) => {
     },
     type: el,
     onDismiss: () => {
-      e(_$$b({
+      e(postUserFlag({
         keyboard_manual_supported_bell: !0
       }));
     },
@@ -198,7 +198,7 @@ let ec = (e, t, i, r) => {
   });
 };
 let eu = (e, t, i) => {
-  e(_$$b({
+  e(postUserFlag({
     keyboard_generic_supported_first_bell: !0
   }));
   e(VisualBellActions.enqueue({
@@ -299,20 +299,20 @@ function e4(e) {
   let t = useDispatch();
   let i = useSelector(e => e.auth);
   useEffect(() => {
-    t(Ts({
+    t(AUTH_INIT({
       origin: "request_permissions_entry",
       redirectUrl: customHistory.location.pathname,
-      formState: qB.ACCOUNT_PICKER,
+      formState: AuthFlowStep.ACCOUNT_PICKER,
       accountPickerData: e.accountPickerData
     }));
   }, [t, e.accountPickerData]);
   return jsxs(_$$u, {
     useOriginalSrcFills: !0,
     onBackClick: () => {
-      i.formState === qB.ACCOUNT_PICKER ? e.closeAuth() : t(Ts({
+      i.formState === AuthFlowStep.ACCOUNT_PICKER ? e.closeAuth() : t(AUTH_INIT({
         origin: "request_permissions_entry",
         redirectUrl: customHistory.location.pathname,
-        formState: qB.ACCOUNT_PICKER,
+        formState: AuthFlowStep.ACCOUNT_PICKER,
         accountPickerData: e.accountPickerData
       }));
     },
@@ -482,9 +482,9 @@ function tm(e) {
         userCanEditFile || i(!0);
         return;
       }
-      r(Ts({
+      r(AUTH_INIT({
         origin: "logged_out_footer",
-        formState: qB.SIGN_UP,
+        formState: AuthFlowStep.SIGN_UP,
         redirectUrl: customHistory.location.pathname
       }));
       r(showModalHandler({
@@ -723,7 +723,7 @@ export function $$t80({
         }) : CZ({
           layout: r,
           eventName: "ignore_us_qwerty"
-        }) : (e(_$$b({
+        }) : (e(postUserFlag({
           keyboard_user_first_detection: !0
         })), r && (rd({
           layout: r
@@ -868,7 +868,7 @@ export function $$t80({
       getFeatureFlags().properties_panel_resize_lag_fix && (r.setProperty("--properties-panel-width", `${t}px`), r.setProperty("--dev-handoff-panel-width", `${i}px`));
     }, [e, t, i, r]);
   })();
-  I7("exp_aa_test_fullscreen_view").getConfig();
+  selectExperimentConfigHook("exp_aa_test_fullscreen_view").getConfig();
   (function () {
     let e = useDispatch();
     let t = _$$_();
@@ -922,7 +922,7 @@ export function $$t80({
     }();
     let d = useCallback(t => {
       Multiplayer?.observeUser(t);
-      o && o.observingSessionID !== t && o.sessionID !== t && e(_$$b({
+      o && o.observingSessionID !== t && o.sessionID !== t && e(postUserFlag({
         aware_of_observation_mode: !0
       }));
     }, [o, e]);

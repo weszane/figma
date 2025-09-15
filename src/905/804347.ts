@@ -28,7 +28,7 @@ import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
 import { UN, dm } from "../figma_app/976345";
 import { sf } from "../905/929976";
-import { yJ } from "../figma_app/78808";
+import { filePutAction } from "../figma_app/78808";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getDesignFileUrlWithOptions } from "../905/612685";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -137,7 +137,7 @@ function z(e, t) {
         entrypoint: "search",
         viewMode: 0 === t ? "list" : "grid"
       }));
-      i(yJ({
+      i(filePutAction({
         file: e
       }));
       i(sf({
@@ -540,7 +540,7 @@ function eM(e) {
     data
   } = _$$L2();
   let p = useCallback((i, n, r) => {
-    i.type === nb.FILE && (t(yJ({
+    i.type === nb.FILE && (t(filePutAction({
       file: fileEntityDataMapper.toSinatra(i.file)
     })), s(r, "key" in n && "Enter" === n.key ? vj.Query.ClickAction.ENTER : vj.Query.ClickAction.CLICK, e.results.find(e => e.model.key === i.file.key)));
   }, [t, e.results, s]);

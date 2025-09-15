@@ -17,7 +17,7 @@ import { parsePxInt } from "../figma_app/783094";
 import { h as _$$h2, $ as _$$$ } from "../905/455748";
 import { h as _$$h3 } from "../905/207101";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
-import { I7, hW } from "../figma_app/594947";
+import { selectExperimentConfigHook, getExperimentConfigAsync } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { P as _$$P } from "../905/347284";
 import { IW } from "../figma_app/563413";
@@ -684,7 +684,7 @@ function eI(e) {
   let ez = je().data?.length ?? 0;
   let {
     getConfig
-  } = I7("exp_asset_search_refactor", void 0, !0);
+  } = selectExperimentConfigHook("exp_asset_search_refactor", void 0, !0);
   let eW = useDebouncedCallback(async e => {
     if (!onSearch) return;
     queryId.current = generateUUIDv4();
@@ -713,7 +713,7 @@ function eI(e) {
         totalShownResults: t.length,
         tier: eB
       };
-      await hW("exp_asset_search_refactor");
+      await getExperimentConfigAsync("exp_asset_search_refactor");
       analyticsEventManager.trackDefinedEvent("assets_panel.search_time", {
         ...n,
         searchSessionId: sessionId

@@ -4,7 +4,7 @@ import { atom, createRemovableAtomFamily, mg, createAtomWithEquality, setupCusto
 import s from "../vendor/239910";
 import { Xm } from "../905/723791";
 import { yZ } from "../figma_app/476572";
-import { DU } from "../figma_app/275462";
+import { canAdminPublish } from "../figma_app/275462";
 import { JB } from "../figma_app/657017";
 import { getProviderConfigType } from "../figma_app/155411";
 import { hasRootPath } from "../figma_app/528509";
@@ -61,7 +61,7 @@ let $$k4 = (() => {
       stateGroups: {},
       modules: {}
     };
-    if (!t || !DU(r ?? void 0)) return n;
+    if (!t || !canAdminPublish(r ?? void 0)) return n;
     let i = e(CommunityLibraryComponentsAndStateGroups.Query({
       hubFileId: t
     }));

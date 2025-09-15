@@ -19,10 +19,10 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { A as _$$A } from "../905/920142";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { eC } from "../905/539601";
 import { E as _$$E } from "../0c62c2fd/358013";
-let N = r1("has_created_figma_make_file");
+let N = userFlagExistsAtomFamily("has_created_figma_make_file");
 export function $$C0({
   newFileFrom: e
 }) {

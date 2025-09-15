@@ -7,7 +7,7 @@ import { renderI18nText } from "../905/303541";
 import { y3 } from "../figma_app/307841";
 import { eC } from "../figma_app/982327";
 import { Ut } from "../figma_app/425283";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e2 } from "../905/621515";
@@ -17,8 +17,8 @@ import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
 import { d8X } from "../figma_app/6204";
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 let y = "seen_seat_approval_overlay";
 let $$w1 = "settings_tab_click";
 function k({
@@ -38,7 +38,7 @@ function k({
     overlay: d8X,
     priority: _$$N.DEFAULT_MODAL
   });
-  let S = e => s(_$$b({
+  let S = e => s(postUserFlag({
     [y]: e
   }));
   let N = () => {

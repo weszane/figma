@@ -14,7 +14,7 @@ import { r as _$$r } from "../905/12476";
 import { sf } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
 import { IN, pM, KE } from "../905/116101";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { E3 } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab, getSelectedDevModePropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
@@ -122,7 +122,7 @@ export function $$k0(e, t) {
         showDevModeVariablesTable: void 0
       }));
       r(KE());
-      G || (H || r(_$$b({
+      G || (H || r(postUserFlag({
         dev_mode_should_see_paywall_reminder: !0
       })), B || setPropertiesPanelTab(DesignWorkspace.INSPECT), W(_$$c.DEFAULT));
       Ym(Q.getState(), FEditorType.Design, e, t, ee);

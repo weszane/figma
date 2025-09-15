@@ -2,8 +2,8 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { ButtonPrimitive } from "../905/632989";
 import { N } from "../905/438674";
 import { xk } from "@stylexjs/stylex";
-import { dl, E as _$$E } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_SET_ORIGIN, changeAuthFormState } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
@@ -98,11 +98,11 @@ export function $$g0(e) {
                 e.onChangeAccount();
                 return;
               }
-              e.authOrigin && e.dispatch(dl({
+              e.authOrigin && e.dispatch(AUTH_SET_ORIGIN({
                 authOrigin: e.authOrigin
               }));
-              e.dispatch(_$$E({
-                formState: qB.SIGN_IN
+              e.dispatch(changeAuthFormState({
+                formState: AuthFlowStep.SIGN_IN
               }));
             },
             htmlAttributes: {

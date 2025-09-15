@@ -12,7 +12,7 @@ import { c as _$$c } from "../905/370443";
 import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { lo, wn, Ix } from "../9420/795870";
 import { _6 } from "../figma_app/386952";
-import { ub } from "../figma_app/514043";
+import { getUserIsoCodeIfNonUsd } from "../figma_app/514043";
 import { Np } from "../figma_app/193867";
 let v = withTrackedClick(Button);
 let y = withTrackedClick(Button);
@@ -48,7 +48,7 @@ export function $$j0(e) {
       teamId: team.id,
       orgId: void 0
     },
-    defaultCountry: ub(),
+    defaultCountry: getUserIsoCodeIfNonUsd(),
     currency,
     canSeeBillingAddressExp,
     isCheckout: !1

@@ -1,32 +1,32 @@
-import { w$ } from "../figma_app/594947";
+import { FrozenConfigManager } from "../figma_app/594947";
 export let $$n1;
 let a = class e {
   logFeatureGateExposure(e, t) {
-    w$.logExposureForFeatureGate(e, t);
+    FrozenConfigManager.logExposureForFeatureGate(e, t);
   }
   getDynamicConfigNumberAsRoundedInt(t, r, n) {
-    return Math.round(w$.getDynamicConfigNumber(t, r, n, e.SourceLoggingString));
+    return Math.round(FrozenConfigManager.getDynamicConfigNumber(t, r, n, e.SourceLoggingString));
   }
   getExperimentNumberAsRoundedInt(t, r, n) {
-    return Math.round(w$.getExperimentNumber(t, r, n, e.SourceLoggingString));
+    return Math.round(FrozenConfigManager.getExperimentNumber(t, r, n, e.SourceLoggingString));
   }
   getDynamicConfigNumberAsFloat(t, r, n) {
-    return w$.getDynamicConfigNumber(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getDynamicConfigNumber(t, r, n, e.SourceLoggingString);
   }
   getExperimentNumberAsFloat(t, r, n) {
-    return w$.getExperimentNumber(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getExperimentNumber(t, r, n, e.SourceLoggingString);
   }
   getDynamicConfigString(t, r, n) {
-    return w$.getDynamicConfigString(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getDynamicConfigString(t, r, n, e.SourceLoggingString);
   }
   getExperimentString(t, r, n) {
-    return w$.getExperimentString(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getExperimentString(t, r, n, e.SourceLoggingString);
   }
   getDynamicConfigBoolean(t, r, n) {
-    return w$.getDynamicConfigBoolean(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getDynamicConfigBoolean(t, r, n, e.SourceLoggingString);
   }
   getExperimentBoolean(t, r, n) {
-    return w$.getExperimentBoolean(t, r, n, e.SourceLoggingString);
+    return FrozenConfigManager.getExperimentBoolean(t, r, n, e.SourceLoggingString);
   }
 };
 a.SourceLoggingString = "fullscreen";

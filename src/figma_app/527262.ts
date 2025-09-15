@@ -20,7 +20,7 @@ import { WX, Bq, Vm } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
 import { vp } from "../905/967587";
 import { FPlanNameType } from "../figma_app/191312";
-import { LN } from "../figma_app/514043";
+import { getUserCurrency } from "../figma_app/514043";
 import { PRICING_URL } from "../figma_app/345997";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UpsellSourceType } from "../figma_app/831101";
@@ -67,7 +67,7 @@ export function $$D0({
   seatComparisonChartOverride: B
 }) {
   let G = useDispatch();
-  let [V, H] = useState(LN());
+  let [V, H] = useState(getUserCurrency());
   let z = selectWithShallowEqual(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let W = useCurrentPublicPlan("PlanComparisonModalContent");
   let K = W.unwrapOr(null)?.tier || null;

@@ -5,7 +5,7 @@ import { Q9 } from "../905/773401";
 import { renderI18nText } from "../905/303541";
 import { h1 } from "../figma_app/530167";
 import { hideModal } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { s0, ZO } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
@@ -136,7 +136,7 @@ registerModal(function ({
     m(hideModal());
   };
   let y = () => {
-    m(_$$b({
+    m(postUserFlag({
       [Pn]: !0
     }));
   };

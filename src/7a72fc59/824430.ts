@@ -224,7 +224,7 @@ import { O as _$$O } from '../905/969533';
 import { d as _$$d3 } from '../905/976845';
 import { gg, Rk } from '../905/981217';
 import { TextWithTruncation } from '../905/984674';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { F as _$$F7 } from '../905/989956';
 import { X as _$$X2 } from '../1250/115566';
 import { nR as _$$nR, RG, XF } from '../1250/182479';
@@ -362,7 +362,7 @@ import { S7 } from '../figma_app/259578';
 import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
 import { cZ as _$$cZ } from '../figma_app/272902';
 import { rgbToNormalized, packNormalizedRgb, colorsEqual } from '../figma_app/273493';
-import { D7, fi } from '../figma_app/275462';
+import { isBuzzTemplatePickerCmtyShelvesEnabled, isBuzzImportFromDesignEnabled } from '../figma_app/275462';
 import { s4 as _$$s3 } from '../figma_app/276332';
 import { q as _$$q2 } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
@@ -410,7 +410,7 @@ import { u as _$$u4 } from '../figma_app/514229';
 import { useCurrentFileKey, selectCurrentFile, openFileKeyAtom } from '../figma_app/516028';
 import { ie as _$$ie, Z as _$$Z3 } from '../figma_app/524655';
 import { t as _$$t2 } from '../figma_app/532797';
-import { Fu } from '../figma_app/545877';
+import { userFlagAtomFamily } from '../figma_app/545877';
 import { S as _$$S2 } from '../figma_app/552746';
 import { u4 as _$$u2, _o, DN, I$, kB } from '../figma_app/552821';
 import { A as _$$A } from '../figma_app/556971';
@@ -419,7 +419,7 @@ import { jL as _$$jL } from '../figma_app/576669';
 import { FP, hO, zM } from '../figma_app/580736';
 import { lX as _$$lX } from '../figma_app/588397';
 import { w as _$$w } from '../figma_app/588564';
-import { Fj } from '../figma_app/594947';
+import { setupDynamicConfigHandler } from '../figma_app/594947';
 import { a as _$$a6, z as _$$z3 } from '../figma_app/601188';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { $z, e6 as _$$e3, Me } from '../figma_app/617427';
@@ -1375,11 +1375,11 @@ function tx({
 }
 let tE = _$$z.array(_$$z.string());
 function tv() {
-  let e = Fj(isProdCluster() ? 'cooper_use_case_to_categories_and_resource_ids_map' : 'cooper_use_case_to_categories_and_resource_ids_map_staging');
-  let t = Fj(isProdCluster() ? 'buzz_use_case_to_categories_and_shelf_ids_map' : 'buzz_use_case_to_categories_and_shelf_ids_map_staging');
-  let n = Fj(isProdCluster() ? 'cooper_explore_resource_ids' : 'cooper_explore_resource_ids_staging');
+  let e = setupDynamicConfigHandler(isProdCluster() ? 'cooper_use_case_to_categories_and_resource_ids_map' : 'cooper_use_case_to_categories_and_resource_ids_map_staging');
+  let t = setupDynamicConfigHandler(isProdCluster() ? 'buzz_use_case_to_categories_and_shelf_ids_map' : 'buzz_use_case_to_categories_and_shelf_ids_map_staging');
+  let n = setupDynamicConfigHandler(isProdCluster() ? 'cooper_explore_resource_ids' : 'cooper_explore_resource_ids_staging');
   return useMemo(() => function (e, t, n) {
-    let l = D7();
+    let l = isBuzzTemplatePickerCmtyShelvesEnabled();
     if (isLocalCluster()) {
       return {
         exploreResourceIds: [],
@@ -1443,7 +1443,7 @@ function tz({
   selectedView: e,
   onViewSelected: t
 }) {
-  let n = D7();
+  let n = isBuzzTemplatePickerCmtyShelvesEnabled();
   let l = tk();
   let r = tC();
   let i = n ? r : l;
@@ -2463,7 +2463,7 @@ let nS = {
     $$css: !0
   }
 };
-let nF = Fu(RG);
+let nF = userFlagAtomFamily(RG);
 function nB() {
   let e = useDispatch();
   let t = VU();
@@ -2485,7 +2485,7 @@ function nB() {
         }), jsx(_$$K, {
           'aria-label': getI18nString('banner.shared.close_banner'),
           'onClick': () => {
-            e(_$$b({
+            e(postUserFlag({
               [RG]: !0
             }));
           },
@@ -3026,7 +3026,7 @@ function n4({
     'children': renderI18nText('cooper.templates.new_template')
   });
 }
-let n6 = Fu(_$$nR);
+let n6 = userFlagAtomFamily(_$$nR);
 let n7 = buildUploadUrl('aaa012bc9019933eac51395f8d09842efe26d15d');
 function n8({
   planName: e,
@@ -3074,7 +3074,7 @@ function n8({
         children: jsx(_$$K, {
           'aria-label': getI18nString('banner.shared.close_banner'),
           'onClick': () => {
-            l(_$$b({
+            l(postUserFlag({
               [_$$nR]: !0
             }));
           },
@@ -3358,7 +3358,7 @@ function lv() {
     return exploreResourceIds;
   }();
   let t = _$$j2();
-  let n = fi();
+  let n = isBuzzImportFromDesignEnabled();
   let l = _$$aZ();
   let r = useAtomWithSubscription(Lm);
   let {
@@ -4238,7 +4238,7 @@ function lq({
   useCase: e
 }) {
   let t = function (e) {
-    let t = D7();
+    let t = isBuzzTemplatePickerCmtyShelvesEnabled();
     let {
       useCaseMap,
       useCaseMapV2

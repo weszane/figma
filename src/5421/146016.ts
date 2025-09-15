@@ -16,7 +16,7 @@ import { HiddenLabel } from "../905/270045";
 import { J as _$$J } from "../905/614223";
 import { Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { normalizeValue, isInvalidValue, isValidValue } from "../905/216495";
 import { av } from "../figma_app/316316";
 import { ZM } from "../figma_app/505098";
@@ -185,7 +185,7 @@ function w(e) {
           let _ = jsx(wv, {}, "third-divider");
           let {
             getConfig
-          } = I7("exp_prototyping_reorder_actions");
+          } = selectExperimentConfigHook("exp_prototyping_reorder_actions");
           let j = !!getConfig().getValue("new_ordering", !1);
           let N = n ? [a, l, s, g, h, x] : j ? [i, g, r, a, l, s, d, y, h, m, x, _, c, p, u] : [i, g, r, a, l, s, d, y, c, p, u, _, h, m, x];
           if (e.showVideoActions && !n) {

@@ -3,7 +3,7 @@ import { useStore } from "react-redux";
 import { debounce } from "../905/915765";
 import { isNullish } from "../figma_app/95419";
 import { atom, atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 let d = {
   x: atom(void 0),
   y: atom(void 0),
@@ -27,7 +27,7 @@ export function $$u1(e, t) {
   let a = d[e];
   let c = useAtomWithSubscription(a);
   useEffect(() => {
-    !(t && t.current || isNullish(c)) && (r.getState().userFlags.figma_basics_has_modified_properties || r.getState().userFlags.has_modified_properties || r.dispatch(b({
+    !(t && t.current || isNullish(c)) && (r.getState().userFlags.figma_basics_has_modified_properties || r.getState().userFlags.has_modified_properties || r.dispatch(postUserFlag({
       has_modified_properties: !0
     })));
   }, [t, c, r]);

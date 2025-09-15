@@ -6,7 +6,7 @@ import { J as _$$J } from "../905/125993";
 import u from "classnames";
 import { BrowserInfo, isMobileUA } from "../figma_app/778880";
 import { stripHtmlTags } from "../905/491152";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { c$, wv, ms } from "../figma_app/236327";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { R as _$$R } from "../3591/975641";
@@ -269,7 +269,7 @@ let eu = class e extends PureComponent {
         title: getI18nString("community.plugins.plugin_or_widget_issue", {
           resourceType: n
         }),
-        children: [jsx(s_, {
+        children: [jsx(ModalCloseButton, {
           ...this.props
         }), jsx("div", {
           className: hM,

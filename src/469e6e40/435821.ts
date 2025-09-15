@@ -7,7 +7,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { D, _ as _$$_ } from "../figma_app/169991";
 import { Fragment as _$$Fragment } from "react";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { linkWithTracking } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { sx as _$$sx } from "../905/941192";
@@ -73,7 +73,7 @@ let w = registerModal(function ({
   return jsxs(utilityNoop, {
     size: 600,
     title: getI18nString("community.detail_view.data_security"),
-    children: [jsx(s_, {
+    children: [jsx(ModalCloseButton, {
       dispatch: a
     }), jsx("div", {
       "data-testid": "program-explanation",

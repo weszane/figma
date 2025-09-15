@@ -1,4 +1,4 @@
-import { vf, mZ, wF, Mj, WD } from "../figma_app/808294";
+import { centsToDollars, MIN_PRICE, MAX_PRICE, isRatioHigh, isGreater } from "../figma_app/808294";
 import { A } from "../905/17894";
 import { Lz } from "../905/497882";
 import { AC } from "../figma_app/777551";
@@ -12,7 +12,7 @@ export let $$u1 = {
     existingResourceContent: e,
     localExtension: t
   }) => {
-    let i = e ? vf(e.monetized_resource_metadata) ?? 0 : 0;
+    let i = e ? centsToDollars(e.monetized_resource_metadata) ?? 0 : 0;
     if (!((!e || isWidgetOrPlugin(e)) && Kc(t, e)) || i) return i;
   },
   validate: ({
@@ -39,18 +39,18 @@ export let $$u1 = {
       key: "PRICE_EMPTY",
       data: {}
     }];
-    c < mZ && u.push({
+    c < MIN_PRICE && u.push({
       key: "PRICE_TOO_LOW",
       data: {
         currentValue: c,
-        minValue: mZ
+        minValue: MIN_PRICE
       }
     });
-    c > wF && u.push({
+    c > MAX_PRICE && u.push({
       key: "PRICE_TOO_HIGH",
       data: {
         currentValue: c,
-        maxValue: wF
+        maxValue: MAX_PRICE
       }
     });
     Number.isInteger(c) || u.push({
@@ -76,11 +76,11 @@ export let $$u1 = {
       let c = [];
       if (!AC(e) && !Kc(t, e)) {
         let t = e.monetized_resource_metadata?.price;
-        i && Lz(i, void 0) && t && Mj(t / 100, r) && c.push({
+        i && Lz(i, void 0) && t && isRatioHigh(t / 100, r) && c.push({
           key: "PRICE_INCREASE_OUT_OF_RANGE",
           data: {}
         });
-        !e.monetized_resource_metadata?.can_increase_price && t && WD(t / 100, r) && c.push({
+        !e.monetized_resource_metadata?.can_increase_price && t && isGreater(t / 100, r) && c.push({
           key: "PRICE_CANNOT_BE_INCREASED",
           data: {}
         });

@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { localStorageRef } from "../905/657224";
 import { FP } from "../figma_app/91703";
 import { Em } from "../figma_app/976749";
-import { UQ } from "../figma_app/864723";
+import { isStarterUserAtom } from "../figma_app/864723";
 import { d4 } from "../figma_app/202626";
 import { D } from "../905/347702";
 import { I7 } from "../figma_app/630951";
@@ -41,7 +41,7 @@ export function $$T2() {
   let {
     hasAnyUiKit
   } = I7();
-  let p = useAtomWithSubscription(UQ);
+  let p = useAtomWithSubscription(isStarterUserAtom);
   let g = Em();
   let f = selectCurrentFile()?.canEdit;
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
-import { s_ } from "../905/17223";
+import { ModalCloseButton } from "../905/17223";
 import { ButtonBasePrimary } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { P as _$$P } from "../905/192768";
@@ -79,7 +79,7 @@ let $$S0 = registerModal(function (e) {
       size: "small",
       title: getI18nString("file_browser.team.team_leave_warning_title_hold_up"),
       popStack: !0,
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         dispatch: i
       }), renderI18nText("file_browser.team.you_are_current_team_owner_assign_new_owner_before_leaving", {
         teamName: w?.name
@@ -107,7 +107,7 @@ let $$S0 = registerModal(function (e) {
     children: jsxs(ModalContainer, {
       size: "small",
       popStack: !0,
-      children: [jsx(s_, {
+      children: [jsx(ModalCloseButton, {
         dispatch: i
       }), renderI18nText("file_browser.team.cannot_leave_secret_team_as_last_team_member"), jsx("br", {}), jsx("br", {}), renderI18nText("file_browser.team.change_access_level_or_move_or_delete_resources_to_leave_team"), jsx("div", {
         className: v0,

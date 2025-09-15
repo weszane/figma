@@ -5,7 +5,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { n1 } from "../figma_app/657017";
 import { oA } from "../905/71785";
 import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
-import { TG } from "../905/72677";
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { D } from "../905/347702";
 import { je, Qh } from "../figma_app/155728";
 let $$_4 = "ui_kits_tooltip_onboarding_key";
@@ -88,7 +88,7 @@ export function $$E5(e) {
 export function $$y2() {
   let e = n1();
   let t = je();
-  let r = useAtomWithSubscription(TG);
+  let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   return e ? "loading" === t.status ? {
     hasAnyUiKit: !1,
     status: "loading"
@@ -106,7 +106,7 @@ export function $$y2() {
 export function $$b6() {
   let e = je();
   let t = useSelector(e => Object.keys(e.library.local.components).length);
-  let r = useAtomWithSubscription(TG);
+  let r = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   if (e.data && "loaded" === e.status) {
     var n;
     n = e.data;

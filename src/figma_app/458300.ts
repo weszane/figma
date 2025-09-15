@@ -2,7 +2,7 @@ import { ColorSpaceEnum } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { B3 } from "../905/709095";
 import { logError } from "../905/714362";
-import { L, K } from "../905/958077";
+import { runProfileSession, PerfProfileLevel } from "../905/958077";
 import { l as _$$l } from "../figma_app/773170";
 export let $$d0 = new class {
   constructor() {
@@ -28,7 +28,7 @@ export let $$d0 = new class {
     };
   }
   onFrame() {
-    L(B3, K.DEFAULT, () => {
+    runProfileSession(B3, PerfProfileLevel.DEFAULT, () => {
       this.onFrameCb && this.onFrameCb();
     });
   }

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { KeyCodes } from "../905/63728";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { ButtonNegativeTracked, ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -184,7 +184,7 @@ export class $$I2 extends Component {
       [_$$s.sticky.top0.left0.zIndex1.colorBg.$]: this.props.stickyHeader,
       [Jg]: !this.props.disableHeaderBottomBorder
     });
-    let i = jsx(Jn, {
+    let i = jsx(CloseButton, {
       onClick: this.props.onClose,
       onMouseDown: this.props.onMouseDown,
       innerText: this.props.closeTrackingText || "Close",

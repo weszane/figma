@@ -8,7 +8,7 @@ import { useSubscription } from "../figma_app/288654";
 import { gB, Xm, e1 } from "../905/723791";
 import { setupResourceAtomHandler, handleStatusChangeEffect } from "../figma_app/566371";
 import { fI } from "../figma_app/229259";
-import { uo } from "../figma_app/78808";
+import { batchPutFileAction } from "../figma_app/78808";
 import { Yb, wV } from "../figma_app/933328";
 import { yy } from "../figma_app/543529";
 import { n1 } from "../figma_app/657017";
@@ -64,7 +64,7 @@ let $$N5 = _$$n(({
   let g = Xr(qU);
   handleStatusChangeEffect(d, e => {
     let t = e.libraryStats.files.map(e => e.file);
-    t.length > 0 && s(uo({
+    t.length > 0 && s(batchPutFileAction({
       files: t,
       subscribeToRealtime: !1
     }));

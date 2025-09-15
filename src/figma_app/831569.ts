@@ -3,14 +3,14 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { h } from "../905/207101";
 import { renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KI } from "../figma_app/797994";
 import { N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { V86 } from "../figma_app/6204";
 export let $$_0 = "new_text_row_location_callout";
 export function $$h1() {
-  let e = r1("seen_text_row_location_callout");
+  let e = userFlagExistsAtomFamily("seen_text_row_location_callout");
   let t = useAtomWithSubscription(e);
   let {
     show,

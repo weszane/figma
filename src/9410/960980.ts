@@ -13,7 +13,7 @@ import { FFileType } from "../figma_app/191312";
 import { PS } from "../figma_app/598018";
 import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
-import { $ } from "../905/355607";
+import { shouldOptimizeForIpad } from "../905/355607";
 import { Qs, iN } from "../905/992395";
 import { qU } from "../figma_app/913518";
 import { D } from "../905/80656";
@@ -96,7 +96,7 @@ export function $$L3() {
 export function $$R6() {
   let e = useSelector(e => e.mirror.appModel.votingSessionInfo.votingStage);
   let t = Xr(Qs);
-  let i = $();
+  let i = shouldOptimizeForIpad();
   let o = qU();
   useEffect(() => {
     e !== SessionStatus.ENDED || i || (t({

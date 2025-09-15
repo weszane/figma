@@ -1,40 +1,122 @@
-import { w } from "../905/669698";
-export class $$s0 {
-  getDynamicConfigBoolean(e, t, r) {
-    return w.getDynamicConfigBoolean(e, t, r);
+import {
+  FrozenConfigManager,
+} from '../905/669698'
+
+/**
+ * ConfigManagerProxy provides a proxy interface to FrozenConfigManager for
+ * accessing dynamic configs, experiments, and feature gates.
+ *
+ * Original class name: $$s0
+ */
+export class ConfigManagerProxy {
+  /**
+   * Retrieves a boolean value from dynamic config.
+   * @param key - Config key
+   * @param defaultValue - Default value if not found
+   * @param options - Additional options
+   */
+  getDynamicConfigBoolean(key: string, defaultValue: boolean, options?: any): boolean {
+    return FrozenConfigManager.getDynamicConfigBoolean(key, defaultValue, options)
   }
-  getDynamicConfigNumber(e, t, r) {
-    return w.getDynamicConfigNumber(e, t, r);
+
+  /**
+   * Retrieves a number value from dynamic config.
+   * @param key - Config key
+   * @param defaultValue - Default value if not found
+   * @param options - Additional options
+   */
+  getDynamicConfigNumber(key: string, defaultValue: number, options?: any): number {
+    return FrozenConfigManager.getDynamicConfigNumber(key, defaultValue, options)
   }
-  getDynamicConfigString(e, t, r) {
-    return w.getDynamicConfigString(e, t, r);
+
+  /**
+   * Retrieves a string value from dynamic config.
+   * @param key - Config key
+   * @param defaultValue - Default value if not found
+   * @param options - Additional options
+   */
+  getDynamicConfigString(key: string, defaultValue: string, options?: any): string {
+    return FrozenConfigManager.getDynamicConfigString(key, defaultValue, options)
   }
-  getExperimentBoolean(e, t, r) {
-    return w.getExperimentBoolean(e, t, r);
+
+  /**
+   * Retrieves a boolean value from experiments.
+   * @param key - Experiment key
+   * @param defaultValue - Default value if not found
+   * @param options - Additional options
+   */
+  getExperimentBoolean(key: string, defaultValue: boolean, options?: any): boolean {
+    return FrozenConfigManager.getExperimentBoolean(key, defaultValue, options)
   }
-  getExperimentNumber(e, t, r) {
-    return w.getExperimentNumber(e, t, r);
+
+  /**
+   * Retrieves a number value from experiments.
+   * @param key - Experiment key
+   * @param defaultValue - Default value if not found
+   * @param options - Additional options
+   */
+  getExperimentNumber(key: string, defaultValue: number, options?: any): number {
+    return FrozenConfigManager.getExperimentNumber(key, defaultValue, options)
   }
-  getExperimentString(e, t, r) {
-    return w.getExperimentString(e, t, r);
+
+  /**
+   * Retrieves a string value from experiments.
+   * @param key - Experiment key
+   * @param defaultValue - Default value if not found
+   * @param options - Additional options
+   */
+  getExperimentString(key: string, defaultValue: string, options?: any): string {
+    return FrozenConfigManager.getExperimentString(key, defaultValue, options)
   }
-  getFeatureGate(e) {
-    return w.getFeatureGateFromInitialOptions(e);
+
+  /**
+   * Gets the value of a feature gate.
+   * @param gateName - Name of the feature gate
+   */
+  getFeatureGate(gateName: string): boolean {
+    return FrozenConfigManager.getFeatureGateFromInitialOptions(gateName)
   }
-  updateFeatureGateForTesting(e, t) {
-    return w.updateFeatureGateForTesting(e, t);
+
+  /**
+   * Updates a feature gate for testing purposes.
+   * @param gateName - Name of the feature gate
+   * @param value - Value to set
+   */
+  updateFeatureGateForTesting(gateName: string, value: boolean): void {
+    FrozenConfigManager.updateFeatureGateForTesting(gateName, value)
   }
-  clearFeatureGatesForTesting() {
-    return w.clear();
+
+  /**
+   * Clears all feature gates for testing.
+   */
+  clearFeatureGatesForTesting(): void {
+    FrozenConfigManager.clear()
   }
-  setInRenderServerForViewerTests() {
-    return w.setInRenderServerForViewerTests();
+
+  /**
+   * Sets the render server for viewer tests.
+   */
+  setInRenderServerForViewerTests(): void {
+    FrozenConfigManager.setInRenderServerForViewerTests()
   }
-  updateExperimentForTesting(e, t, r) {
-    return w.updateExperimentForTesting(e, t, r);
+
+  /**
+   * Updates an experiment for testing purposes.
+   * @param experimentName - Name of the experiment
+   * @param value - Value to set
+   * @param options - Additional options
+   */
+  updateExperimentForTesting(experimentName: string, value: any, options?: any): void {
+    FrozenConfigManager.updateExperimentForTesting(experimentName, value, options)
   }
-  clearExperimentsForTesting() {
-    return w.clear();
+
+  /**
+   * Clears all experiments for testing.
+   */
+  clearExperimentsForTesting(): void {
+    FrozenConfigManager.clear()
   }
 }
-export const B = $$s0;
+
+// Refactored export name: B -> ConfigManagerProxy
+export const B = ConfigManagerProxy

@@ -73,7 +73,7 @@ import { x as _$$x } from "../573/916234";
 import { B as _$$B2 } from "../7a72fc59/288229";
 import { c as _$$c2 } from "../905/370443";
 import { e as _$$e2 } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
@@ -372,7 +372,7 @@ let eI = memo(function ({
     })]
   }) : null;
 });
-let eO = r1("seen_draw_properties_panel_onboarding");
+let eO = userFlagExistsAtomFamily("seen_draw_properties_panel_onboarding");
 function eD(e) {
   let {
     panelsShown

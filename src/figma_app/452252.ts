@@ -16,7 +16,7 @@ import { N as _$$N } from "../905/438674";
 import { F_ } from "../905/748636";
 import { b as _$$b } from "../figma_app/47801";
 import { W as _$$W } from "../905/95038";
-import { Nw } from "../figma_app/78808";
+import { renameFileOptimistic } from "../figma_app/78808";
 import { vg, Wk } from "../figma_app/91703";
 import { NN } from "../905/466026";
 import { lu, b_, oE } from "../figma_app/840917";
@@ -175,7 +175,7 @@ function $(e) {
         fileKey: renamableFile.newAutosaveFile.fileKey,
         name: t,
         source: oE.EDITOR
-      }) : renamableFile.openFile ? e.dispatch(Nw({
+      }) : renamableFile.openFile ? e.dispatch(renameFileOptimistic({
         file: renamableFile.openFile,
         name: t
       })) : reportError(_$$e.UNOWNED, Error("Tried renaming but file does not exist"));

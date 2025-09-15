@@ -10,7 +10,7 @@ import { useModalManager } from '../905/437088';
 import { analyticsEventManager } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
 import { useSingleEffect } from '../905/791079';
-import { b as setAppleEulaAccepted } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
 import { selectCurrentFile } from '../figma_app/516028';
 import { $z } from '../figma_app/617427';
@@ -127,7 +127,7 @@ export function AppleEulaModal({
           }), jsx($z, {
             onClick: () => {
               trackEulaClick('accept');
-              dispatch(setAppleEulaAccepted({
+              dispatch(postUserFlag({
                 apple_eula_accepted: true
               }));
               onAgree();

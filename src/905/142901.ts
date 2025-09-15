@@ -6,7 +6,7 @@ import { jv } from "../905/84777";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { N_, Ye } from "../905/332483";
 import { _w } from "../figma_app/217457";
-import { vr } from "../figma_app/514043";
+import { CurrencyFormatter } from "../figma_app/514043";
 import { IX } from "../905/712921";
 export function $$m0({
   currency: e,
@@ -32,7 +32,7 @@ export function $$m0({
     let o = N_.dict(t => {
       var n;
       n = i[t] || 0;
-      return new vr(e).formatMoney(n, {
+      return new CurrencyFormatter(e).formatMoney(n, {
         showCents: m
       });
     });

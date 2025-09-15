@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/509505";
 import { trackEventAnalytics } from "../905/449184";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { tH, H4 } from "../905/751457";
 import { linkWithTracking } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 import { V as _$$V } from "../905/223767";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -60,7 +60,7 @@ export function $$_0() {
         className: "library_upsell_banner--bannerBackground--WlTVY",
         children: jsxs("div", {
           className: "library_upsell_banner--bannerContainer--SqSHa",
-          children: [jsx(Jn, {
+          children: [jsx(CloseButton, {
             className: "library_upsell_banner--closeButton--U1sPN",
             onClick: function () {
               trackEventAnalytics("library_upsell_badge_dismissed", {
@@ -68,7 +68,7 @@ export function $$_0() {
                 teamId: _,
                 userId: s
               });
-              e(_$$b({
+              e(postUserFlag({
                 has_dismissed_component_sidebar_library_upsell_banner: !0
               }));
             }

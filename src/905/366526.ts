@@ -71,7 +71,7 @@ import { permissionScopeHandler as _$$l3 } from '../905/189185';
 import { l as _$$l10 } from '../905/190247';
 import { t as _$$t9 } from '../905/192333';
 import { mC as _$$mC, X7 as _$$X5, zq } from '../905/193529';
-import { $j, dB as _$$dB, E as _$$E, hE as _$$hE, Sr as _$$Sr, AP, Em, Hh, Jv, kL, KS, My, Qg, Ts, WY, xw } from '../905/194276';
+import { AUTH_EMAIL_ONLY, redirectAfterRedeem, changeAuthFormState, AUTH_SEND_PASSWORD_RESET, AUTH_GOOGLE_SIGNUP, AUTH_SAML_START_FROM_SESSION, startSamlEmailVerification, AUTH_SIGN_UP, AUTH_SIGN_IN, AUTH_SET_AUTH_LOADING, AUTH_SEND_EMAIL_SAML_START, AUTH_COMPLETE, AUTH_SHOW_ERROR, AUTH_INIT, AUTH_SET_REDIRECT_URL, AUTH_RESET_PASSWORD } from '../905/194276';
 import { j as _$$j4 } from '../905/200237';
 import { px as _$$px2 } from '../905/201014';
 import { H as _$$H4 } from '../905/202181';
@@ -86,7 +86,7 @@ import { N as _$$N5 } from '../905/239398';
 import { z as _$$z3 } from '../905/239603';
 import { $ as _$$$4 } from '../905/240853';
 import { a as _$$a5 } from '../905/242083';
-import { g as _$$g2 } from '../905/248178';
+import { trackAuthEvent } from '../905/248178';
 import { nE as _$$nE, EU } from '../905/255097';
 import { dK as _$$dK, TE, v9 } from '../905/266289';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
@@ -224,7 +224,7 @@ import { cZ as _$$cZ, oM as _$$oM, pF as _$$pF, tU as _$$tU } from '../905/68349
 import { replaceColonWithDash } from '../905/691205';
 import { Hc } from '../905/694658';
 import { e0 as _$$e3 } from '../905/696396';
-import { N as _$$N } from '../905/696711';
+import { setupLoadingStateHandler } from '../905/696711';
 import { R as _$$R3, V as _$$V3 } from '../905/697254';
 import { De as _$$De } from '../905/697795';
 import { X as _$$X2 } from '../905/698965';
@@ -253,7 +253,7 @@ import { l as _$$l1 } from '../905/745972';
 import { x as _$$x4 } from '../905/749159';
 import { k as _$$k6 } from '../905/749197';
 import { f as _$$f3 } from '../905/749689';
-import { B as _$$B } from '../905/749933';
+import { StatsigContext } from '../905/749933';
 import { tH as _$$tH, As, H4, S1 } from '../905/751457';
 import { handlePluginError } from '../905/753206';
 import { getRepoById, getRepoByIdAlt, isBranch, isBranchAlt } from '../905/760074';
@@ -292,7 +292,7 @@ import { D as _$$D2 } from '../905/852057';
 import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
-import { cc as _$$cc, zl as _$$zl, By, qB, RE, vR } from '../905/862321';
+import { AuthAction, SIGNED_UP_FROM_OPEN_SESSIONS, AuthErrorCode, AuthFlowStep, AuthField, AuthProvider } from '../905/862321';
 import { RD } from '../905/862913';
 import { w as _$$w2 } from '../905/863010';
 import { xH as _$$xH2 } from '../905/869282';
@@ -328,7 +328,7 @@ import { Dk as _$$Dk, O9, qG, qS, W$, XG } from '../905/970170';
 import { S as _$$S6 } from '../905/970585';
 import { ej as _$$ej, eK as _$$eK2, hS as _$$hS3, Je as _$$Je, KQ as _$$KQ, Ns as _$$Ns, pY as _$$pY, qv as _$$qv, r0 as _$$r8, _z, Dy, H7, HI, ky, NR, PI, Pj, PP, qr, R7, Rz, vK, W0, w2, Z6, zy } from '../905/977218';
 import { qp } from '../905/977779';
-import { A as _$$A6, b as _$$b } from '../905/985254';
+import { setAllUserFlags, postUserFlag } from '../905/985254';
 import { Y as _$$Y4 } from '../905/986107';
 import { Q as _$$Q2 } from '../905/986450';
 import { a6 as _$$a3, cb as _$$cb, oI as _$$oI, rO as _$$rO, t7 as _$$t3, yF as _$$yF, jT, Kh, LV, Pp, Zq } from '../905/989765';
@@ -357,7 +357,7 @@ import { CommentTabType, ResourceTypeNoComment } from '../figma_app/45218';
 import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '../figma_app/49598';
 import { FEditorType, mapEditorTypeToString, mapEditorTypeToStringWithObfuscated, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
-import { c3 as _$$c, S as _$$S, sF as _$$sF, uo as _$$uo, bE, jO, Lk, Nw, PB, PF, U2, yJ, Yp } from '../figma_app/78808';
+import { clearActiveFileUsersAction, copyShareLinkOptimistic, filePermissionsPutAction, batchPutFileAction, postFileAction, hasFileRepo, setActiveFileUsersAction, renameFileOptimistic, batchSubscribeToRealtimeAction, fileRestoreAction, moveFileAction, filePutAction, removeFileFromProjectAction } from '../figma_app/78808';
 import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
@@ -442,7 +442,7 @@ import { isEmptyObject } from '../figma_app/493477';
 import { I2 as _$$I, pk as _$$pk, tb as _$$tb, tp as _$$tp, _X, Il, kb, Um, yk } from '../figma_app/502247';
 import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640';
 import { up as _$$up2 } from '../figma_app/506364';
-import { LN } from '../figma_app/514043';
+import { getUserCurrency } from '../figma_app/514043';
 import { Fi, YD } from '../figma_app/515363';
 import { openFileKeyAtom, selectCurrentFile } from '../figma_app/516028';
 import { df as _$$df, Sb as _$$Sb, De, WM } from '../figma_app/519839';
@@ -472,7 +472,7 @@ import { kE as _$$kE, mH as _$$mH, QA as _$$QA, tG as _$$tG2, TW as _$$TW, HF, z
 import { y as _$$y5 } from '../figma_app/705249';
 import { AppView, isIncludedView } from '../figma_app/707808';
 import { cL as _$$cL5, DI as _$$DI, dY as _$$dY, sV as _$$sV, NY, V2, zx } from '../figma_app/712525';
-import { of as _$$of, SI as _$$SI, yH as _$$yH6, Cx, x2 } from '../figma_app/714946';
+import { loadingStatePutFailure, loadingStatePutFailureReason, loadingStateDelete, loadingStatePutLoading, loadingStatePutSuccess } from '../figma_app/714946';
 import { aV as _$$aV2 } from '../figma_app/722362';
 import { tG as _$$tG } from '../figma_app/723183';
 import { LP } from '../figma_app/728005';
@@ -1159,13 +1159,13 @@ function e0(e) {
     teamId,
     orgId,
     planKey
-  }), getFeatureFlags().statsig_suspend) ? jsx(_$$B.Provider, {
+  }), getFeatureFlags().statsig_suspend) ? jsx(StatsigContext.Provider, {
     value: l,
     children: jsx(Suspense, {
       fallback,
       children
     })
-  }) : jsx(_$$B.Provider, {
+  }) : jsx(StatsigContext.Provider, {
     value: l,
     children: jsx(eJ, {
       contextValue: l,
@@ -1292,31 +1292,31 @@ async function e7(e) {
 }
 let t_ = e => t => async function (i) {
   let n = e.getState();
-  if (Ts.matches(i)) {
-    i.payload.formState = i.payload.formState || getInitialOptions().form_state || qB.SIGN_UP;
-    _$$g2('show_auth_page', i.payload.origin, {
+  if (AUTH_INIT.matches(i)) {
+    i.payload.formState = i.payload.formState || getInitialOptions().form_state || AuthFlowStep.SIGN_UP;
+    trackAuthEvent('show_auth_page', i.payload.origin, {
       formState: i.payload.formState
     }, {
       forwardToDatadog: !0
     });
     let n = new _$$P2();
     getInitialOptions().user_data || n.register(_$$y, () => {
-      e.dispatch(My());
+      e.dispatch(AUTH_COMPLETE());
     });
     return t(i);
   }
-  if (Hh.matches(i)) {
+  if (AUTH_SIGN_UP.matches(i)) {
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
     let s = a.googleIdToken || n.auth.googleIdToken;
     let o = e.getState().auth.signedUpFromOpenSession;
     if (s) {
-      _$$g2('google_sso_attempt', n.auth.origin);
+      trackAuthEvent('google_sso_attempt', n.auth.origin);
       let t = null;
       try {
-        t = await Hc(_$$cc.SIGN_UP, n.auth.prevForm);
+        t = await Hc(AuthAction.SIGN_UP, n.auth.prevForm);
       } catch (e) {
-        _$$g2('arkose_token_error_signup', n.auth.origin);
+        trackAuthEvent('arkose_token_error_signup', n.auth.origin);
       }
       XHR.post('/api/session/google_auth/signin_or_signup', {
         name: a.name || n.auth.name,
@@ -1335,28 +1335,28 @@ let t_ = e => t => async function (i) {
         data: t
       }) => {
         _$$p2('sign_up_google_sso');
-        _$$g2('google_sso_success', n.auth.origin, {
+        trackAuthEvent('google_sso_success', n.auth.origin, {
           user_id: t?.meta?.id
         }, {
           forwardToDatadog: !0
         });
-        e.dispatch(My());
+        e.dispatch(AUTH_COMPLETE());
         trackEventAnalytics('Sign Up (GTM)', {
           isWorkEmail: _$$iE(t),
           sha256_email: await qV(t.meta?.email)
         });
-        o && getStorage().set(_$$zl, !0);
-      }, t => (e.dispatch(_$$E({
-        formState: qB.SIGN_UP
-      })), e.dispatch(Qg({
+        o && getStorage().set(SIGNED_UP_FROM_OPEN_SESSIONS, !0);
+      }, t => (e.dispatch(changeAuthFormState({
+        formState: AuthFlowStep.SIGN_UP
+      })), e.dispatch(AUTH_SHOW_ERROR({
         message: resolveMessage(t, t?.data?.message)
       }))));
     } else {
-      _$$g2('sign_up_attempt', n.auth.origin);
+      trackAuthEvent('sign_up_attempt', n.auth.origin);
       try {
-        a.arkose_token = await Hc(_$$cc.SIGN_UP, n.auth.prevForm);
+        a.arkose_token = await Hc(AuthAction.SIGN_UP, n.auth.prevForm);
       } catch (e) {
-        _$$g2('arkose_token_error_signup', n.auth.origin);
+        trackAuthEvent('arkose_token_error_signup', n.auth.origin);
       }
       let t = {
         ...a,
@@ -1375,7 +1375,7 @@ let t_ = e => t => async function (i) {
         if (e.getState().communityHub?.pageState?.view === 'communityHub' && getCookieOrStorage().set('community_signup_redirect', {
           location: customHistory.location.pathname,
           action: null
-        }), _$$p2('sign_up_user_pass'), _$$g2('sign_up_success', n.auth.origin, {
+        }), _$$p2('sign_up_user_pass'), trackAuthEvent('sign_up_success', n.auth.origin, {
           mailingListOptIn: e.getState().auth.optInEmail,
           user_id: t?.meta?.id
         }), getInitialOptions().integration_host || e.getState().auth.fromMsTeams) {
@@ -1392,31 +1392,31 @@ let t_ = e => t => async function (i) {
           sha256_email: await qV(n.auth.email)
         }), qF(t, n.auth.redirectUrl)) {
           let i = t.meta.id;
-          e.dispatch(Em({
+          e.dispatch(startSamlEmailVerification({
             userId: i
           }));
         } else {
-          e.dispatch(My({
+          e.dispatch(AUTH_COMPLETE({
             userId: t.meta.id
           }));
         }
-        o && getStorage().set(_$$zl, !0);
+        o && getStorage().set(SIGNED_UP_FROM_OPEN_SESSIONS, !0);
       }).catch(t => e.dispatch(P8({
         resp: t
       })));
     }
-    e.dispatch(kL());
+    e.dispatch(AUTH_SET_AUTH_LOADING());
     return t(i);
   }
-  if (_$$Sr.matches(i)) {
-    _$$g2('google_sso_attempt', n.auth.origin);
-    _$$g2('google_sso_attempt_skip_extra_info', n.auth.origin);
+  if (AUTH_GOOGLE_SIGNUP.matches(i)) {
+    trackAuthEvent('google_sso_attempt', n.auth.origin);
+    trackAuthEvent('google_sso_attempt_skip_extra_info', n.auth.origin);
     let r = e.getState().auth.signedUpFromOpenSession;
     let a = null;
     try {
-      a = await Hc(_$$cc.SIGN_UP, n.auth.prevForm);
+      a = await Hc(AuthAction.SIGN_UP, n.auth.prevForm);
     } catch (e) {
-      _$$g2('arkose_token_error_signup', n.auth.origin);
+      trackAuthEvent('arkose_token_error_signup', n.auth.origin);
     }
     XHR.post('/api/session/google_auth/signin_or_signup', {
       name: n.auth.name || null,
@@ -1435,32 +1435,32 @@ let t_ = e => t => async function (i) {
       data: t
     }) => {
       _$$p2('sign_up_google_sso');
-      _$$g2('google_sso_success', n.auth.origin, {
+      trackAuthEvent('google_sso_success', n.auth.origin, {
         user_id: t?.meta?.id
       }, {
         forwardToDatadog: !0
       });
-      e.dispatch(My());
+      e.dispatch(AUTH_COMPLETE());
       trackEventAnalytics('Sign Up (GTM)', {
         isWorkEmail: _$$iE(t),
         sha256_email: await qV(t.meta?.email)
       });
-      r && getStorage().set(_$$zl, !0);
-    }, t => (e.dispatch(_$$E({
-      formState: qB.SIGN_UP
-    })), e.dispatch(Qg({
+      r && getStorage().set(SIGNED_UP_FROM_OPEN_SESSIONS, !0);
+    }, t => (e.dispatch(changeAuthFormState({
+      formState: AuthFlowStep.SIGN_UP
+    })), e.dispatch(AUTH_SHOW_ERROR({
       message: resolveMessage(t, t?.data?.message)
     }))));
     return t(i);
   }
-  if (Jv.matches(i)) {
-    _$$g2('sign_in_attempt', n.auth.origin);
+  if (AUTH_SIGN_IN.matches(i)) {
+    trackAuthEvent('sign_in_attempt', n.auth.origin);
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
     let s = PG(a);
-    s.message ? (n.auth.formState === qB.VERIFY_HUMAN && n.auth.prevForm !== qB.VERIFY_HUMAN && e.dispatch(_$$E({
+    s.message ? (n.auth.formState === AuthFlowStep.VERIFY_HUMAN && n.auth.prevForm !== AuthFlowStep.VERIFY_HUMAN && e.dispatch(changeAuthFormState({
       formState: n.auth.prevForm
-    })), e.dispatch(Qg({
+    })), e.dispatch(AUTH_SHOW_ERROR({
       message: s.message,
       invalidInput: s.invalidInput
     }))) : (a.username = a.email.trim(), XHR.post('/api/session/login', a).then(({
@@ -1473,12 +1473,12 @@ let t_ = e => t => async function (i) {
       resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'login', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
-        _$$g2('magic_link_request_success', n.auth.origin, {
+        trackAuthEvent('magic_link_request_success', n.auth.origin, {
           modality: 'login',
           user_id: t?.meta?.id
         });
-        e.dispatch(_$$E({
-          formState: qB.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
+        e.dispatch(changeAuthFormState({
+          formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
           userId: t.meta.id
         }));
       }).catch(t => e.dispatch(P8({
@@ -1486,32 +1486,32 @@ let t_ = e => t => async function (i) {
       })))) : e.dispatch(P8({
         resp: t
       }));
-    }), e.dispatch(kL()));
+    }), e.dispatch(AUTH_SET_AUTH_LOADING()));
     return t(i);
   }
-  if (_$$hE.matches(i)) {
-    _$$g2('send_reset_password_email_attempt', n.auth.origin);
+  if (AUTH_SEND_PASSWORD_RESET.matches(i)) {
+    trackAuthEvent('send_reset_password_email_attempt', n.auth.origin);
     let r = {
       username: n.auth.email
     };
     try {
-      r.arkose_token = await Hc(_$$cc.FORGOT_PASSWORD, n.auth.prevForm);
+      r.arkose_token = await Hc(AuthAction.FORGOT_PASSWORD, n.auth.prevForm);
     } catch (e) {
-      _$$g2('arkose_token_error_forgot', n.auth.origin);
+      trackAuthEvent('arkose_token_error_forgot', n.auth.origin);
     }
     XHR.post('/api/password/forgot', r).then(() => {
-      _$$g2('send_reset_password_email_success', n.auth.origin);
-      e.dispatch(_$$E({
-        formState: qB.SENT_PASSWORD_RESET
+      trackAuthEvent('send_reset_password_email_success', n.auth.origin);
+      e.dispatch(changeAuthFormState({
+        formState: AuthFlowStep.SENT_PASSWORD_RESET
       }));
     }).catch(t => e.dispatch(P8({
       resp: t
     })));
-    e.dispatch(kL());
+    e.dispatch(AUTH_SET_AUTH_LOADING());
     return t(i);
   }
-  if (KS.matches(i)) {
-    _$$g2('saml_redirect_to_provider_attempt', n.auth.origin);
+  if (AUTH_SEND_EMAIL_SAML_START.matches(i)) {
+    trackAuthEvent('saml_redirect_to_provider_attempt', n.auth.origin);
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
     a.email = a.email.trim();
@@ -1520,21 +1520,21 @@ let t_ = e => t => async function (i) {
     }).then(({
       data: e
     }) => {
-      _$$g2('saml_redirect_to_provider_success', n.auth.origin);
+      trackAuthEvent('saml_redirect_to_provider_success', n.auth.origin);
       vr({
         url: e.meta.sp_sso_target_url,
         cont: n.auth.redirectUrl
       });
     }).catch(t => {
-      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (_$$g2('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
+      resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (trackAuthEvent('saml_redirect_to_magic_link', n.auth.origin), a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
-        _$$g2('magic_link_request_success', n.auth.origin, {
+        trackAuthEvent('magic_link_request_success', n.auth.origin, {
           modality: 'either',
           user_id: t?.meta?.id
         });
-        e.dispatch(_$$E({
-          formState: qB.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
+        e.dispatch(changeAuthFormState({
+          formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
           userId: t.meta.id
         }));
       }).catch(t => e.dispatch(P8({
@@ -1543,50 +1543,50 @@ let t_ = e => t => async function (i) {
         resp: t
       }));
     });
-    e.dispatch(kL());
+    e.dispatch(AUTH_SET_AUTH_LOADING());
     return t(i);
   }
-  if (AP.matches(i)) {
-    _$$g2('saml_gate_redirect_attempt', n.auth.origin);
+  if (AUTH_SAML_START_FROM_SESSION.matches(i)) {
+    trackAuthEvent('saml_gate_redirect_attempt', n.auth.origin);
     _$$H4.getSsoConfig().then(({
       data: t
     }) => {
-      t.meta.org_saml_config ? (_$$g2('saml_gate_redirect_success', n.auth.origin), vr({
+      t.meta.org_saml_config ? (trackAuthEvent('saml_gate_redirect_success', n.auth.origin), vr({
         url: t.meta.org_saml_config.sp_sso_target_url,
         cont: n.auth.redirectUrl
-      })) : e.dispatch(Qg({
+      })) : e.dispatch(AUTH_SHOW_ERROR({
         message: getI18nString('auth.sso-gate.invalid-session')
       }));
     }).catch(t => e.dispatch(P8({
       resp: t
     })));
     return t(i);
-  } else if ($j.matches(i)) {
-    _$$g2('email_only_attempt', n.auth.origin);
+  } else if (AUTH_EMAIL_ONLY.matches(i)) {
+    trackAuthEvent('email_only_attempt', n.auth.origin);
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
     _$$H4.getSsoConfig(a).then(({
       data: t
     }) => {
-      _$$g2('email_only_success', n.auth.origin);
-      t.meta.account_type === 'guest' ? e.dispatch(_$$E({
-        formState: t.meta.existing_user ? qB.SIGN_IN : qB.SIGN_UP
-      })) : n.auth.ssoMethod === vR.SAML ? vr({
+      trackAuthEvent('email_only_success', n.auth.origin);
+      t.meta.account_type === 'guest' ? e.dispatch(changeAuthFormState({
+        formState: t.meta.existing_user ? AuthFlowStep.SIGN_IN : AuthFlowStep.SIGN_UP
+      })) : n.auth.ssoMethod === AuthProvider.SAML ? vr({
         url: t.meta.org_saml_config.sp_sso_target_url,
         cont: n.auth.redirectUrl
-      }) : e.dispatch(_$$E({
-        formState: qB.SSO_GATE
+      }) : e.dispatch(changeAuthFormState({
+        formState: AuthFlowStep.SSO_GATE
       }));
     }).catch(t => {
       resolveMessage(t, t?.data?.message) === getI18nString('auth.error.magic-link-server-validation-error') && t?.status === 401 ? (a.modality = 'either', a.cont = n.auth.redirectUrl, XHR.post('/api/session/request_magic_link', a).then(({
         data: t
       }) => {
-        _$$g2('magic_link_request_success', n.auth.origin, {
+        trackAuthEvent('magic_link_request_success', n.auth.origin, {
           modality: 'either',
           user_id: t?.meta?.id
         });
-        e.dispatch(_$$E({
-          formState: qB.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
+        e.dispatch(changeAuthFormState({
+          formState: AuthFlowStep.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD,
           userId: t.meta.id
         }));
       }).catch(t => e.dispatch(P8({
@@ -1596,45 +1596,45 @@ let t_ = e => t => async function (i) {
       }));
     });
     return t(i);
-  } else if (xw.matches(i)) {
-    _$$g2('reset_password_attempt', n.auth.origin);
-    e.dispatch(kL());
+  } else if (AUTH_RESET_PASSWORD.matches(i)) {
+    trackAuthEvent('reset_password_attempt', n.auth.origin);
+    e.dispatch(AUTH_SET_AUTH_LOADING());
     t(i);
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
-    a.password !== a.password_retype ? e.dispatch(Qg({
+    a.password !== a.password_retype ? e.dispatch(AUTH_SHOW_ERROR({
       message: getI18nString('auth.reset-password.password-retype-error'),
-      invalidInput: RE.PASSWORD
+      invalidInput: AuthField.PASSWORD
     })) : XHR.post('/api/password/recover', a).then(({}) => {
-      _$$g2('reset_password_success', n.auth.origin);
-      e.dispatch(My());
+      trackAuthEvent('reset_password_success', n.auth.origin);
+      e.dispatch(AUTH_COMPLETE());
     }).catch(t => e.dispatch(P8({
       resp: t
     })));
-  } else if (Qg.matches(i)) {
-    _$$g2('error', n.auth.origin, {
+  } else if (AUTH_SHOW_ERROR.matches(i)) {
+    trackAuthEvent('error', n.auth.origin, {
       formState: n.auth.formState,
       ...i.payload
     });
     t(i);
     let r = i.payload.message;
-    i.payload.errorType === By.UNAUTHORIZED || (i.payload.errorType == By.SAML_REQUIRED ? e.dispatch(_$$E({
-      formState: qB.SAML_START,
+    i.payload.errorType === AuthErrorCode.UNAUTHORIZED || (i.payload.errorType == AuthErrorCode.SAML_REQUIRED ? e.dispatch(changeAuthFormState({
+      formState: AuthFlowStep.SAML_START,
       errorMessage: r
-    })) : i.payload.errorType === By.MAGIC_LINK_LOGIN_NO_ACCOUNT && e.dispatch(_$$E({
-      formState: qB.SIGN_UP,
+    })) : i.payload.errorType === AuthErrorCode.MAGIC_LINK_LOGIN_NO_ACCOUNT && e.dispatch(changeAuthFormState({
+      formState: AuthFlowStep.SIGN_UP,
       errorMessage: r
     })));
   } else {
-    if (!My.matches(i)) return t(i);
+    if (!AUTH_COMPLETE.matches(i)) return t(i);
     let r = e.getState().auth.fromMsTeams;
     if (i.payload && 'userId' in i.payload && i.payload.userId) {
       let e = _$$dR(n.auth.redirectUrl, {
         fuid: i.payload.userId
       });
-      _$$dB(e, r);
+      redirectAfterRedeem(e, r);
     } else {
-      _$$dB(n.auth.redirectUrl, r);
+      redirectAfterRedeem(n.auth.redirectUrl, r);
     }
     return t(i);
   }
@@ -1666,7 +1666,7 @@ let t8 = {
     fileKey: t
   }).then(t => {
     let i = t.data.meta;
-    e.dispatch(yJ({
+    e.dispatch(filePutAction({
       file: i
     }));
     return i;
@@ -1977,7 +1977,7 @@ let iz = e => t => function (i) {
       next: t,
       action: i
     });
-  } else if (yJ.matches(i)) {
+  } else if (filePutAction.matches(i)) {
     if (i.payload.userInitiated) {
       i.payload.file.created_at && console.error('It looks like you are PUT-ting to the API with the entire file object; please only pass the key and changed attributes');
       let n = fileApiHandler.putFile({
@@ -2017,7 +2017,7 @@ let iz = e => t => function (i) {
       });
       return a;
     }
-  } else if (PF.matches(i)) {
+  } else if (fileRestoreAction.matches(i)) {
     let {
       fileKey,
       versionId
@@ -2189,7 +2189,7 @@ let i2 = e => t => function (i) {
       }));
       xN(t, e);
     });
-    _$$N(n, e, `TEAM_GET_ACTION_${t}`);
+    setupLoadingStateHandler(n, e, `TEAM_GET_ACTION_${t}`);
   } else {
     _$$sf.matches(i) && i.payload.view === 'team' && e.getState().teams[i.payload.teamId] == null && e.dispatch(_$$Jt({
       teamId: i.payload.teamId,
@@ -2211,7 +2211,7 @@ let i6 = e => t => function (i) {
         action: i
       });
     }
-  } else if (_$$b.matches(i)) {
+  } else if (postUserFlag.matches(i)) {
     if (!e.getState().user) return;
     let t = e.getState().userFlags;
     let n = XHR.post('/api/user/flags', {
@@ -2307,7 +2307,7 @@ let ns = e => t => function (i) {
     let s = !!i.payload.profileTab;
     let o = modalShown?.type && nr.includes(modalShown.type);
     if (selectedView.view === 'communityHub' && o && !s && e.dispatch(hideModal()), i.payload.view === 'communityHub') {
-      if (e.dispatch(Ad(i.payload)), e.dispatch(WY({
+      if (e.dispatch(Ad(i.payload)), e.dispatch(AUTH_SET_REDIRECT_URL({
         redirectUrl: Np(t, i.payload)
       })), i.payload.subView === 'hubFile' || i.payload.subView === 'plugin' || i.payload.subView === 'widget') {
         let t = !1;
@@ -2316,7 +2316,7 @@ let ns = e => t => function (i) {
       }
       user && _$$I(user.id);
     } else {
-      selectedView.view === 'communityHub' && e.dispatch(WY({
+      selectedView.view === 'communityHub' && e.dispatch(AUTH_SET_REDIRECT_URL({
         redirectUrl: getInitialOptions().redirect_url || null
       }));
     }
@@ -2475,7 +2475,7 @@ let nS = e => t => function (i) {
     }
     return;
   }
-  if (yJ.matches(i) || bE.matches(i)) {
+  if (filePutAction.matches(i) || postFileAction.matches(i)) {
     let t = e.getState();
     let n = i.payload.file;
     let r = n.key ? t.fileByKey[n.key] : void 0;
@@ -2654,7 +2654,7 @@ let nQ = e => t => function (i) {
               let i = await fileApiHandler.getFiles({
                 fileKey: t
               });
-              e.dispatch(yJ({
+              e.dispatch(filePutAction({
                 file: i.data.meta
               }));
             }
@@ -4941,7 +4941,7 @@ function sA(e, t) {
             let n = t.role_data.folder;
             !n || n.deleted_at || i.folders[n.id] || e.dispatch(_$$bE(n));
             let r = t.role_data.file;
-            !r || r.deleted_at || i.fileByKey[r.key] || getFeatureFlags().dse_lk_realtime_role_filter && !r.library_key || e.dispatch(bE({
+            !r || r.deleted_at || i.fileByKey[r.key] || getFeatureFlags().dse_lk_realtime_role_filter && !r.library_key || e.dispatch(postFileAction({
               file: r
             }));
           }
@@ -4963,7 +4963,7 @@ function sA(e, t) {
             let r = t.role_data.folder;
             !r || r.deleted_at || i.folders[r.id] || r.org_id && !r.team_id && r.path !== '' || e.dispatch(_$$bE(r));
             let a = t.role_data.file;
-            a && !a.deleted_at && (!getFeatureFlags().dse_lk_realtime_role_filter || a.library_key) && e.dispatch(bE({
+            a && !a.deleted_at && (!getFeatureFlags().dse_lk_realtime_role_filter || a.library_key) && e.dispatch(postFileAction({
               file: a
             }));
           }
@@ -5846,11 +5846,11 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
       });
     }
     return;
-  } else if (_$$uo.matches(i)) {
+  } else if (batchPutFileAction.matches(i)) {
     if (i.payload.subscribeToRealtime) {
       for (let t of i.payload.files) sz(e, t);
     }
-  } else if (PB.matches(i)) {
+  } else if (batchSubscribeToRealtimeAction.matches(i)) {
     let t = e.getState();
     let n = af()(t.fileByKey, e => _$$l6(e.library_key));
     for (let t of i.payload.libraryKeys) {
@@ -7644,7 +7644,7 @@ let lg = Oi((e = {}, t) => {
     n && !t[n.key] && (t[n.key] = n);
     return t;
   }
-  if (yJ.matches(t) || _$$sF.matches(t) || bE.matches(t)) {
+  if (filePutAction.matches(t) || filePermissionsPutAction.matches(t) || postFileAction.matches(t)) {
     let i = t.payload.file;
     if (!(i.key in e)) {
       return {
@@ -7686,13 +7686,13 @@ let lg = Oi((e = {}, t) => {
       });
       return i;
     }
-  } else if (_$$uo.matches(t)) {
+  } else if (batchPutFileAction.matches(t)) {
     let i = t.payload.files;
     let n = {
       ...e
     };
     for (let t of i) {
-      t.key in e ? n[t.key] = _$$N4(e[t.key], yJ({
+      t.key in e ? n[t.key] = _$$N4(e[t.key], filePutAction({
         file: t
       })) : n[t.key] = t;
     }
@@ -7703,7 +7703,7 @@ let lg = Oi((e = {}, t) => {
       ...e
     };
     for (let t of i) {
-      t.key in e ? n[t.key] = _$$N4(e[t.key], yJ({
+      t.key in e ? n[t.key] = _$$N4(e[t.key], filePutAction({
         file: t
       })) : n[t.key] = t;
     }
@@ -7771,7 +7771,7 @@ function lf(e, t) {
 }
 function l_(e, t) {
   if (!e) return {};
-  if (U2.matches(t)) {
+  if (moveFileAction.matches(t)) {
     let i = {
       ...e
     };
@@ -7781,7 +7781,7 @@ function l_(e, t) {
     for (let e in n) i[t.payload.folderId]?.push(e);
     return i;
   }
-  if (Yp.matches(t)) {
+  if (removeFileFromProjectAction.matches(t)) {
     let i = t.payload.folderId;
     if (!e[i]) return e;
     let n = {
@@ -7790,14 +7790,14 @@ function l_(e, t) {
     n[i] = n[i].filter(e => t.payload.file.key !== e);
     return n;
   }
-  if (yJ.matches(t)) {
+  if (filePutAction.matches(t)) {
     let i = {
       ...e
     };
     lf(t.payload.file, i);
     return i;
   }
-  if (_$$uo.matches(t)) {
+  if (batchPutFileAction.matches(t)) {
     let i = t.payload.files;
     let n = {
       ...e
@@ -7805,7 +7805,7 @@ function l_(e, t) {
     for (let e of i) lf(e, n);
     return n;
   }
-  if (bE.matches(t)) {
+  if (postFileAction.matches(t)) {
     let i = {
       ...e
     };
@@ -8398,13 +8398,13 @@ function lH(e = lz, t) {
     return {
       ...e,
       upgradingNewTeam: t.payload.newTeam,
-      currency: t.payload.currency || LN()
+      currency: t.payload.currency || getUserCurrency()
     };
   }
   if (Mv.matches(t)) {
     return {
       ...e,
-      currency: t.payload.currency || LN()
+      currency: t.payload.currency || getUserCurrency()
     };
   }
   if (Qe.matches(t)) {
@@ -8570,14 +8570,14 @@ let lq = Oi((e = {}, t) => {
     for (let e of t.payload.repos) i[e.id] = e;
     return i;
   }
-  if (yJ.matches(t) || _$$sF.matches(t)) {
+  if (filePutAction.matches(t) || filePermissionsPutAction.matches(t)) {
     let i = {
       ...e
     };
     let {
       file
     } = t.payload;
-    jO(file) && file.file_repo && (i[file.file_repo.id] = file.file_repo);
+    hasFileRepo(file) && file.file_repo && (i[file.file_repo.id] = file.file_repo);
     return i;
   }
   if (gG.matches(t) || qP.matches(t)) {
@@ -9101,12 +9101,12 @@ function dp(e = null, t) {
   return _$$sf2.matches(t) ? t.payload : bx.matches(t) ? null : e;
 }
 function dm(e = {}, t) {
-  if (_$$c.matches(t)) {
+  if (clearActiveFileUsersAction.matches(t)) {
     let i = Object.assign(Object.create(null), e);
     delete i[t.payload.fileKey];
     return i;
   }
-  if (Lk.matches(t)) {
+  if (setActiveFileUsersAction.matches(t)) {
     let i = t.payload.fileKey;
     let n = t.payload.users;
     let r = Object.create(null);
@@ -11375,7 +11375,7 @@ let pg = {
   },
   user: kQ,
   userFlags(e = {}, t) {
-    if (_$$b.matches(t)) {
+    if (postUserFlag.matches(t)) {
       let i = {
         ...e
       };
@@ -11394,7 +11394,7 @@ let pg = {
       });
       return i;
     }
-    return _$$A6.matches(t) ? t.payload : e;
+    return setAllUserFlags.matches(t) ? t.payload : e;
   },
   userAnalyticsData(e = window.INITIAL_OPTIONS.user_analytics_data || null, t) {
     return e;
@@ -11500,7 +11500,7 @@ let pg = {
       for (let e in t.payload.fileKeys) t.payload.fileKeys[e].file_repo_id || (i[e] = t.payload.fileKeys[e]);
       return i;
     }
-    if (yJ.matches(t)) {
+    if (filePutAction.matches(t)) {
       let i = t.payload.file;
       if (!i.trashed_at && e[i.key]) {
         let t = {
@@ -11516,7 +11516,7 @@ let pg = {
         t[i.key] = i;
         return t;
       }
-    } else if (bE.matches(t)) {
+    } else if (postFileAction.matches(t)) {
       let i = t.payload.file;
       if (i.trashed_at) {
         let t = {
@@ -11974,26 +11974,26 @@ let pg = {
     } : e;
   },
   loadingState(e = {}, t) {
-    if (Cx.matches(t)) {
+    if (loadingStatePutLoading.matches(t)) {
       return {
         ...e,
         [t.payload.key]: _$$r9.LOADING
       };
     }
-    if (x2.matches(t)) {
+    if (loadingStatePutSuccess.matches(t)) {
       return {
         ...e,
         [t.payload.key]: _$$r9.SUCCESS
       };
     }
-    if (_$$of.matches(t)) {
+    if (loadingStatePutFailure.matches(t)) {
       return {
         ...e,
         [t.payload.key]: _$$r9.FAILURE
       };
     }
     {
-      if (!_$$yH6.matches(t)) return e;
+      if (!loadingStateDelete.matches(t)) return e;
       let i = {
         ...e
       };
@@ -12002,13 +12002,13 @@ let pg = {
     }
   },
   loadingStateFailureReasons(e = {}, t) {
-    if (_$$SI.matches(t)) {
+    if (loadingStatePutFailureReason.matches(t)) {
       return {
         ...e,
         [t.payload.key]: t.payload.reason
       };
     }
-    if (!(_$$yH6.matches(t) || x2.matches(t))) return e;
+    if (!(loadingStateDelete.matches(t) || loadingStatePutSuccess.matches(t))) return e;
     {
       let i = {
         ...e
@@ -12355,7 +12355,7 @@ let pg = {
   },
   repos: lq,
   fileKeysByRepoId(e = {}, t) {
-    if (_$$uo.matches(t)) {
+    if (batchPutFileAction.matches(t)) {
       let i = {
         ...e
       };
@@ -12365,7 +12365,7 @@ let pg = {
       });
       return i;
     }
-    if (bE.matches(t) || yJ.matches(t)) {
+    if (postFileAction.matches(t) || filePutAction.matches(t)) {
       let i = t.payload.file.key;
       let n = t.payload.file.file_repo_id;
       if (!n || e[n] && e[n].includes(i)) return e;
@@ -14061,7 +14061,7 @@ let hj = registerModal(e => {
   let l = useSelector(e => a && !!e.userFlags[a]);
   if (a == null || o == null || l || !desktopAPIInstance) return null;
   let d = () => {
-    r(_$$b({
+    r(postUserFlag({
       [a]: !0
     }));
   };
@@ -14307,7 +14307,7 @@ export async function $$hz0(e, t, d = {
             updatedAt: new Date(e.updated_at)
           };
         }
-        e(_$$A6(r));
+        e(setAllUserFlags(r));
       }
       WB().subscribe(BlockingUserState, {}, i => {
         if (i.status === 'loaded') {
@@ -14320,7 +14320,7 @@ export async function $$hz0(e, t, d = {
             };
           }
           _$$f3(t(), n);
-          e(_$$A6(n));
+          e(setAllUserFlags(n));
         }
       });
     }(b.dispatch, () => b.getState().userFlags);
@@ -14340,7 +14340,7 @@ export async function $$hz0(e, t, d = {
       T = {
         ...defaultUserConfig
       };
-      editing_file && b.dispatch(yJ({
+      editing_file && b.dispatch(filePutAction({
         file: editing_file
       }));
     }
@@ -14618,13 +14618,13 @@ export async function $$hz0(e, t, d = {
               } else {
                 t = getI18nString('desktop_bindings.visual_bell.file_link_copied');
               }
-              b.dispatch(_$$S({
+              b.dispatch(copyShareLinkOptimistic({
                 fileKey: n.key,
                 url: e,
                 source: ShareContext.DESKTOP_KEYBOARD_SHORTCUT,
                 visualBellMessageOverride: t
               }));
-              b.dispatch(_$$b({
+              b.dispatch(postUserFlag({
                 used_copy_link_shortcut: !0
               }));
             }
@@ -14662,7 +14662,7 @@ export async function $$hz0(e, t, d = {
           } else if (e === 'handleTabTitleRename') {
             let e = b.getState();
             let i = e.openFile?.key;
-            i && (b.dispatch(Nw({
+            i && (b.dispatch(renameFileOptimistic({
               file: {
                 key: i
               },

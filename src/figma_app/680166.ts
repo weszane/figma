@@ -11,8 +11,8 @@ import p from "../vendor/626715";
 import { customHistory } from "../905/612521";
 import { useSubscription, useMultiSubscription } from "../figma_app/288654";
 import { reportError } from "../905/11";
-import { Ts } from "../905/194276";
-import { qB } from "../905/862321";
+import { AUTH_INIT } from "../905/194276";
+import { AuthFlowStep } from "../905/862321";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
@@ -628,9 +628,9 @@ export function $$z2({
     isOrgGuest: a?.permission === FMemberRoleType.GUEST && i.key.type === FOrganizationLevelType.ORG
   };
   let A = e => {
-    e.message.includes("Org access needed") ? (t(Ts({
+    e.message.includes("Org access needed") ? (t(AUTH_INIT({
       origin: "edit_button_click",
-      formState: qB.JOIN_ORG,
+      formState: AuthFlowStep.JOIN_ORG,
       redirectUrl: customHistory.location.pathname
     })), t(showModalHandler({
       type: _$$x,

@@ -8,7 +8,7 @@ import { ez, SK, U9, wp } from "../905/125333";
 import { F as _$$F } from "../905/989956";
 import { e as _$$e } from "../905/621515";
 import { Fy } from "../figma_app/579169";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { LR } from "../figma_app/120210";
 import { aV } from "../figma_app/722362";
 import { N as _$$N } from "../figma_app/268271";
@@ -467,7 +467,7 @@ function ep({
 let ex = "dlt_shape_collage--ignorePointerEvents--dih4g";
 let eg = ["ELLIPSE", "SQUARE", "TRIANGLE_UP"];
 let $$ej0 = "seen_figjam_advanced_diagraming_v1_onboarding";
-let eb = r1($$ej0);
+let eb = userFlagExistsAtomFamily($$ej0);
 let ey = YCy;
 let ev = zuZ;
 let eC = [{

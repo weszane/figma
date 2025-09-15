@@ -13,7 +13,7 @@ import { hk } from "../figma_app/632319";
 import { renderI18nText } from "../905/303541";
 import { j7 } from "../905/929976";
 import { jD } from "../905/765855";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { HG } from "../figma_app/440875";
 import { T as _$$T, N as _$$N } from "../905/847283";
 import { z3 } from "../figma_app/386952";
@@ -120,7 +120,7 @@ let L = {
     });
     let r = i => {
       i.stopPropagation();
-      Multiplayer && null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(_$$b({
+      Multiplayer && null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(postUserFlag({
         aware_of_observation_mode: !0
       })));
     };
@@ -192,7 +192,7 @@ let L = {
       actionText: renderI18nText("collaboration.spotlight.tooltip.click_to_follow"),
       actionCallback: i => {
         i.stopPropagation();
-        null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(_$$b({
+        null != e.userSessionID && (Multiplayer.observeUser(e.userSessionID), t(postUserFlag({
           aware_of_observation_mode: !0
         })));
       },

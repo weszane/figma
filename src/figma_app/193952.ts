@@ -6,7 +6,7 @@ import { logWarning } from "../905/714362";
 import { getTrackingSessionId } from "../905/471229";
 import { _s } from "../figma_app/33126";
 import { J } from "../905/915227";
-import { kS } from "../figma_app/864723";
+import { userIdAtom } from "../figma_app/864723";
 import { openFileTeamIdAtom, openFileKeyAtom } from "../figma_app/516028";
 export function $$_0(e, t, r, n) {
   if (!e) return [];
@@ -61,7 +61,7 @@ export function $$S12({
     orgId: atomStoreManager.get(_s) || null,
     teamId: atomStoreManager.get(openFileTeamIdAtom) || null,
     fileKey: atomStoreManager.get(openFileKeyAtom) || null,
-    userId: atomStoreManager.get(kS) || null,
+    userId: atomStoreManager.get(userIdAtom) || null,
     fileSeq: atomStoreManager.get(J)?.toString() || null,
     clientLifecycleId: e,
     trackingSessionId: getTrackingSessionId()

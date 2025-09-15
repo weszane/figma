@@ -2,10 +2,10 @@ import { Actions } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { LRUCache } from "../905/196201";
 import { handleAtomEvent } from "../905/502364";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 export function $$d1() {
-  fullscreenValue.dispatch(b({
+  fullscreenValue.dispatch(postUserFlag({
     seen_widget_insert_onboarding_modal: !0,
     seen_component_onboarding_modal: !0,
     seen_published_plugin_onboarding_modal: !0,

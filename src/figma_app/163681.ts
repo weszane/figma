@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useDispatch, useStore, useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { E as _$$E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { NT, g5 } from "../figma_app/579169";
@@ -34,7 +34,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { Vr } from "../figma_app/151869";
 import { Z as _$$Z } from "../figma_app/731770";
 import { iF } from "../figma_app/511910";
-import { te } from "../figma_app/275462";
+import { alwaysFalseCallback2 } from "../figma_app/275462";
 import { h as _$$h } from "../905/207101";
 import { Z as _$$Z2 } from "../905/104740";
 import { F_ as _$$F_ } from "../905/748636";
@@ -146,24 +146,24 @@ function j({
   let j = [D].reduce((e, t) => t ? e + 1 : e, 4);
   let U = (e, r = _$$en.FORWARD) => {
     O(r);
-    t(_$$b({
+    t(postUserFlag({
       [e]: !0
     }));
   };
   let B = (e, r = _$$en.BACKWARD) => {
     O(r);
-    t(_$$b({
+    t(postUserFlag({
       [e]: !1
     }));
   };
   let G = () => {
     e();
-    t(_$$b({
+    t(postUserFlag({
       figma_basics_tooltips_onboarding: !0
     }));
   };
   return (useEffect(() => {
-    s || m || h || t(_$$b({
+    s || m || h || t(postUserFlag({
       started_figma_basics_onboarding: !0
     }));
   }, [m, s, t, h]), s || m) ? null : l ? d ? c ? u ? D ? jsx(k, {
@@ -229,7 +229,7 @@ function j({
 }
 function z(e) {
   let t = useDispatch();
-  let r = te()() ? renderI18nText("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : renderI18nText("tooltips_plus_onboarding.ui_kits_step.title");
+  let r = alwaysFalseCallback2()() ? renderI18nText("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : renderI18nText("tooltips_plus_onboarding.ui_kits_step.title");
   let s = renderI18nText("tooltips_plus_onboarding.ui_kits_step.description");
   let o = "UI Kits";
   oe() && (r = renderI18nText("tooltips_plus_onboarding.assets_step.title"), s = renderI18nText("tooltips_plus_onboarding.assets_step.description"), o = "Assets");
@@ -296,13 +296,13 @@ function K({
   let O = () => eN(getSingletonSceneGraph(), "TEXT", N);
   let L = (e, r = _$$en.FORWARD) => {
     d(r);
-    t(_$$b({
+    t(postUserFlag({
       [e]: !0
     }));
   };
   let P = (e, r = _$$en.BACKWARD) => {
     d(r);
-    t(_$$b({
+    t(postUserFlag({
       [e]: !1
     }));
   };
@@ -311,7 +311,7 @@ function K({
   };
   let F = useCallback(() => {
     e();
-    t(_$$b({
+    t(postUserFlag({
       no_figma_basics_tooltips_onboarding: !0
     }));
   }, [e, t]);
@@ -520,24 +520,24 @@ function en({
   let E = useSelector(e => e.mirror.sceneGraph);
   let b = (e, r = _$$en.FORWARD) => {
     g(r);
-    t(_$$b({
+    t(postUserFlag({
       [e]: !0
     }));
   };
   let T = (e, r = _$$en.BACKWARD) => {
     g(r);
-    t(_$$b({
+    t(postUserFlag({
       [e]: !1
     }));
   };
   let S = () => {
     e();
-    t(_$$b({
+    t(postUserFlag({
       seen_starting_points_tooltips_onboarding: !0
     }));
   };
   return (useEffect(() => {
-    r || h || p || t(_$$b({
+    r || h || p || t(postUserFlag({
       started_figma_basics_onboarding: !0
     }));
   }, [h, r, t, p]), r || h) ? null : jsx("div", {
@@ -636,7 +636,7 @@ export function $$ea1() {
       format_text_step_shown: !1,
       started_figma_basics_onboarding: !1
     };
-    e(_$$b(r));
+    e(postUserFlag(r));
   });
   _$$E(uniqueId, "starting_points_template_inserted", () => {
     R(!0);

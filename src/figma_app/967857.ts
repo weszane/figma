@@ -23,9 +23,9 @@ import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { wv } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { b as _$$b2 } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
 import { c$ } from "../905/794875";
 import { w as _$$w } from "../figma_app/654279";
@@ -77,10 +77,10 @@ function Q(e) {
       };
   }
 }
-let $$ee3 = r1("used_figjam_ai_quick_actions");
+let $$ee3 = userFlagExistsAtomFamily("used_figjam_ai_quick_actions");
 let et = "used_figjam_ai_mindmaps_inline_menu";
 let er = "figjam ai";
-let en = r1(et);
+let en = userFlagExistsAtomFamily(et);
 export function $$ei4() {
   let e = useAtomWithSubscription(_$$f2).positionRelativeToSelection;
   let {
@@ -293,7 +293,7 @@ function es(e) {
       return !!(t && !r && e);
     }(n),
     setUserFlagsCallback: useCallback(() => {
-      n && r(_$$b2({
+      n && r(postUserFlag({
         [et]: !0
       }));
     }, [n, r])

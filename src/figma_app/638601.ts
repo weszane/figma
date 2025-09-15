@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Command, DesignGraphElements } from "../figma_app/763686";
 import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
-import { Ts } from "../905/194276";
+import { AUTH_INIT } from "../905/194276";
 import { showModalHandler } from "../905/156213";
 import { x } from "../905/749159";
 export function $$u0(e) {
@@ -64,7 +64,7 @@ export function $$p1() {
   let e = useDispatch();
   return useCallback(t => {
     $$u0(t);
-    e(Ts({
+    e(AUTH_INIT({
       origin: "signed_out_edit",
       redirectUrl: customHistory.location.pathname
     }));

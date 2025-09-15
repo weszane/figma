@@ -12,7 +12,7 @@ import { useSubscription } from "../figma_app/288654";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { Badge, BadgeColor, BadgeSize } from "../figma_app/919079";
 import { G as _$$G } from "../figma_app/361869";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { tH, H4 } from "../905/751457";
 import { linkWithTracking, Spacing } from "../figma_app/637027";
 import { y1, w4 } from "../905/445814";
@@ -36,7 +36,7 @@ import { getProductAccessTypeFromFileType } from "../figma_app/765689";
 import { F as _$$F2 } from "../905/224";
 import { FOrganizationLevelType, FFileType } from "../figma_app/191312";
 import { TeamCanEdit } from "../figma_app/43951";
-import { vr, LN } from "../figma_app/514043";
+import { CurrencyFormatter, getUserCurrency } from "../figma_app/514043";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { UpsellModalType } from "../905/165519";
 import { Ju, IX } from "../905/712921";
@@ -205,7 +205,7 @@ function er({
   let [m] = handleSuspenseRetainRelease(p);
   let h = vu(m);
   let f = a ? [a] : [FFileType.DESIGN, FFileType.WHITEBOARD];
-  let A = new vr(e);
+  let A = new CurrencyFormatter(e);
   let y = h.data;
   let b = {
     [FFileType.DESIGN]: y[ProductAccessTypeEnum.DESIGN].amount,
@@ -280,7 +280,7 @@ function ea({
   let a = jv(r);
   let [l] = handleSuspenseRetainRelease(a);
   let d = vu(l).data;
-  let c = new vr(e);
+  let c = new CurrencyFormatter(e);
   return jsx(TrackingProvider, {
     name: "Pricing Component",
     properties: {
@@ -599,7 +599,7 @@ function ec(e) {
       enabled: t && !!i
     });
     let [r] = handleSuspenseRetainRelease(n);
-    return e === _$$F2.Plan.STARTER ? LN() : r.data || LN();
+    return e === _$$F2.Plan.STARTER ? getUserCurrency() : r.data || getUserCurrency();
   }(currentPlan, Y);
   let Z = getRumLoggingConfig();
   return jsx(TrackingProvider, {
@@ -621,7 +621,7 @@ function ec(e) {
       size: 600,
       popStack: !0,
       className: "consumption_paywall_modals--largeModal--gQbzP",
-      children: [jsx(Jn, {
+      children: [jsx(CloseButton, {
         className: "consumption_paywall_modals--closeButton--cGAYf close_button--modalUpperRightCorner--eKAQg",
         onClick: cancel,
         innerText: "Close",

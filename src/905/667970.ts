@@ -2,10 +2,10 @@ import { V } from "../905/749397";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { parseQuery } from "../905/634134";
-import { qB } from "../905/862321";
+import { AuthFlowStep } from "../905/862321";
 import { getI18nString } from "../905/303541";
 import { generateAnnomousPrefill } from "../905/301652";
-import { Ts, v$, GG, WY, OZ, fX, BZ, m9, bA, IY, LP, kQ, Re, i_, EM, ND, Qg, ET, kL, I$, QS, dl, NX } from "../905/194276";
+import { AUTH_INIT, AUTH_REDEEM, AUTH_REDEEM_RESET, AUTH_SET_REDIRECT_URL, AUTH_SET_GOOGLE_ID_TOKEN, AUTH_SET_GOOGLE_TOKEN_TYPE, AUTH_CHANGE_EMAIL, AUTH_CHANGE_NAME, AUTH_CHANGE_OPT_IN_EMAIL, AUTH_TOGGLE_SMS, AUTH_REQUIRE_TWO_FACTOR, AUTH_SET_HINT, AUTH_CLICKED_SAML_SIGN_IN, AUTH_CHANGE_JOB, AUTH_CHANGE_USAGE_PURPOSE, AUTH_UPDATE_FORM, AUTH_SHOW_ERROR, AUTH_CLEAR_ERROR, AUTH_SET_AUTH_LOADING, AUTH_CLEAR_AUTH_LOADING, AUTH_SET_SIGNUP_SOURCE, AUTH_SET_ORIGIN, AUTH_SET_SSO_METHOD } from "../905/194276";
 let u = "/files";
 let p = {
   formState: void 0,
@@ -42,7 +42,7 @@ export function $$h1() {
   return getInitialOptions().saml_session_id || null;
 }
 export function $$g2(e = p, t) {
-  if (Ts.matches(t)) {
+  if (AUTH_INIT.matches(t)) {
     let e;
     let i = getInitialOptions();
     let o = parseQuery(customHistory.location.search).signup_source;
@@ -88,96 +88,96 @@ export function $$g2(e = p, t) {
       smsOkay: i.sms_okay || !1
     };
   }
-  if (v$.matches(t)) return {
+  if (AUTH_REDEEM.matches(t)) return {
     ...e,
     appAuthGSecret: t.payload.gSecret,
-    formState: qB.APP_AUTH_REDEEM
+    formState: AuthFlowStep.APP_AUTH_REDEEM
   };
-  if (GG.matches(t)) return {
+  if (AUTH_REDEEM_RESET.matches(t)) return {
     ...e,
     loading: !1,
     appAuthId: null,
     appAuthGSecret: null,
     redirectUrl: u,
-    formState: qB.SIGN_IN
+    formState: AuthFlowStep.SIGN_IN
   };
-  if (WY.matches(t)) return {
+  if (AUTH_SET_REDIRECT_URL.matches(t)) return {
     ...e,
     redirectUrl: t.payload.redirectUrl || u
   };
-  if (OZ.matches(t)) return {
+  if (AUTH_SET_GOOGLE_ID_TOKEN.matches(t)) return {
     ...e,
     googleIdToken: t.payload.googleIdToken
   };
-  if (fX.matches(t)) return {
+  if (AUTH_SET_GOOGLE_TOKEN_TYPE.matches(t)) return {
     ...e,
     googleTokenType: t.payload.googleTokenType
   };
-  if (BZ.matches(t)) return {
+  if (AUTH_CHANGE_EMAIL.matches(t)) return {
     ...e,
     email: t.payload.value
-  };else if (m9.matches(t)) return {
+  };else if (AUTH_CHANGE_NAME.matches(t)) return {
     ...e,
     name: t.payload.value
-  };else if (bA.matches(t)) return {
+  };else if (AUTH_CHANGE_OPT_IN_EMAIL.matches(t)) return {
     ...e,
     optInEmail: t.payload.value
-  };else if (IY.matches(t)) return {
+  };else if (AUTH_TOGGLE_SMS.matches(t)) return {
     ...e,
     smsOkay: t.payload
-  };else if (LP.matches(t)) return {
+  };else if (AUTH_REQUIRE_TWO_FACTOR.matches(t)) return {
     ...e,
     loading: !1,
-    formState: qB.TWO_FACTOR,
+    formState: AuthFlowStep.TWO_FACTOR,
     twoFactorPromptedBy: t.payload.kind,
     error: null
-  };else if (kQ.matches(t)) return {
+  };else if (AUTH_SET_HINT.matches(t)) return {
     ...e,
     hint: t.payload.hint
-  };else if (Re.matches(t)) return {
+  };else if (AUTH_CLICKED_SAML_SIGN_IN.matches(t)) return {
     ...e,
     clickedSAMLSignIn: t.payload.value
-  };else if (i_.matches(t)) return {
+  };else if (AUTH_CHANGE_JOB.matches(t)) return {
     ...e,
     jobTitle: t.payload.value
-  };else if (EM.matches(t)) return {
+  };else if (AUTH_CHANGE_USAGE_PURPOSE.matches(t)) return {
     ...e,
     usagePurpose: t.payload.value
-  };else if (ND.matches(t)) return t.payload.formState !== e.formState ? {
+  };else if (AUTH_UPDATE_FORM.matches(t)) return t.payload.formState !== e.formState ? {
     ...e,
     formState: t.payload.formState,
     loading: !1,
     error: t.payload.errorMessage || null,
     invalidInput: null,
-    twoFactorPromptedBy: t.payload.formState === qB.TWO_FACTOR ? e.twoFactorPromptedBy : void 0,
-    prevForm: t.payload.formState === qB.VERIFY_HUMAN ? t.payload.prevState : null,
-    postVerificationAction: t.payload.formState === qB.VERIFY_HUMAN ? t.payload.postVerificationAction : null,
-    arkoseAction: t.payload.formState === qB.VERIFY_HUMAN ? t.payload.arkoseAction : null
-  } : e;else if (Qg.matches(t)) return {
+    twoFactorPromptedBy: t.payload.formState === AuthFlowStep.TWO_FACTOR ? e.twoFactorPromptedBy : void 0,
+    prevForm: t.payload.formState === AuthFlowStep.VERIFY_HUMAN ? t.payload.prevState : null,
+    postVerificationAction: t.payload.formState === AuthFlowStep.VERIFY_HUMAN ? t.payload.postVerificationAction : null,
+    arkoseAction: t.payload.formState === AuthFlowStep.VERIFY_HUMAN ? t.payload.arkoseAction : null
+  } : e;else if (AUTH_SHOW_ERROR.matches(t)) return {
     ...e,
     loading: !1,
     error: t.payload.message,
     errorType: t.payload.errorType,
     invalidInput: t.payload.invalidInput
-  };else if (ET.matches(t)) return {
+  };else if (AUTH_CLEAR_ERROR.matches(t)) return {
     ...e,
     error: null,
     errorType: null,
     invalidInput: null
-  };else if (kL.matches(t)) return {
+  };else if (AUTH_SET_AUTH_LOADING.matches(t)) return {
     ...e,
     loading: !0,
     error: null
-  };else if (I$.matches(t)) return {
+  };else if (AUTH_CLEAR_AUTH_LOADING.matches(t)) return {
     ...e,
     loading: !1
-  };else if (QS.matches(t)) return {
+  };else if (AUTH_SET_SIGNUP_SOURCE.matches(t)) return {
     ...e,
     signupSource: t.payload.signupSource
-  };else if (dl.matches(t)) return {
+  };else if (AUTH_SET_ORIGIN.matches(t)) return {
     ...e,
     origin: t.payload.authOrigin
-  };else if (NX.matches(t)) return {
+  };else if (AUTH_SET_SSO_METHOD.matches(t)) return {
     ...e,
     ssoMethod: t.payload.ssoMethod
   };else return e;

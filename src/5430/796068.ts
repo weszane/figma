@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { I } from "../figma_app/4253";
-import { QQ, C } from "../figma_app/808294";
+import { isSubscriptionActive, isRecentActivePurchase } from "../figma_app/808294";
 import { K2 } from "../figma_app/777551";
 import { XW, qY } from "../figma_app/427318";
 import { bb } from "../figma_app/399472";
@@ -34,10 +34,10 @@ export function $$h0({
     children: [f && jsx(_$$d, {
       onClick: y,
       className: "metadata_additional_actions_logged_in--link--Hgvm- text--fontPos13--xW8hS text--_fontBase--QdLsd"
-    }), g && QQ(v) && jsx(NY, {
+    }), g && isSubscriptionActive(v) && jsx(NY, {
       resource: x,
       payment: v
-    }), g && b && QQ(v) && C(v) && jsx(EV, {
+    }), g && b && isSubscriptionActive(v) && isRecentActivePurchase(v) && jsx(EV, {
       user: b,
       name: K2(e) || "",
       monetizedResource: x.monetized_resource_metadata

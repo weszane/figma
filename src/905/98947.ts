@@ -1,7 +1,7 @@
 import { atom, t_ } from "../figma_app/27355";
 import { ProductAccessTypeEnum } from "../905/513035";
 import { N_ } from "../905/332483";
-import { qG } from "../figma_app/545877";
+import { userFlagsAtom } from "../figma_app/545877";
 let $$o8 = atom([]);
 let $$l21 = atom(void 0);
 let $$d27 = atom(e => {
@@ -45,7 +45,7 @@ let $$M4 = atom(e => {
 });
 let $$j23 = atom(null);
 let $$U2 = atom(e => e($$j23) === ProductAccessTypeEnum.DEVELOPER);
-let $$B1 = t_(e => !!e(qG).data?.opted_in_email);
+let $$B1 = t_(e => !!e(userFlagsAtom).data?.opted_in_email);
 export const $l = $$h0;
 export const BG = $$B1;
 export const FP = $$U2;

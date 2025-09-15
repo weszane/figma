@@ -6,7 +6,7 @@ import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
-import { N } from "../905/696711";
+import { setupLoadingStateHandler } from "../905/696711";
 import { getAttachmentChanges } from "../905/380385";
 import { createNoOpValidator } from "../figma_app/181241";
 let h = new class {
@@ -25,7 +25,7 @@ let $$f5 = createOptimistThunk((e, t, {
 }) => {
   if (!getFeatureFlags().xr_debounce_threshold) return;
   let r = h.getFeedBellStates();
-  N(r, e, i);
+  setupLoadingStateHandler(r, e, i);
   r.then(t => {
     e.dispatch($$A10({
       bellStates: t.data.meta

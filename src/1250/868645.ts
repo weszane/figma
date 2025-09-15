@@ -9,10 +9,10 @@ import { Ph } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { sf } from "../905/929976";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { qmK } from "../figma_app/6204";
@@ -20,14 +20,14 @@ import { _H } from "../figma_app/408883";
 import { Ve } from "../figma_app/812915";
 import { M } from "../1250/475573";
 let j = "acknowledged_figmake_ai_tos_onboarding";
-let k = r1(j);
+let k = userFlagExistsAtomFamily(j);
 export function $$E2() {
   return useAtomWithSubscription(k);
 }
 export function $$C3(e) {
   let t = useDispatch();
   let n = useCallback(e => {
-    t(_$$b({
+    t(postUserFlag({
       [j]: e
     }));
   }, [t]);

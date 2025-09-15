@@ -1,5 +1,5 @@
 import { getInitialOptions } from "../figma_app/169182";
-import { Fj } from "../figma_app/594947";
+import { setupDynamicConfigHandler } from "../figma_app/594947";
 export function $$$$a0({
   isSitesTemplate: e,
   resourceContentId: t,
@@ -7,7 +7,7 @@ export function $$$$a0({
 }) {
   let {
     getDynamicConfig
-  } = Fj("sites_template_hubfile_id_to_url_map");
+  } = setupDynamicConfigHandler("sites_template_hubfile_id_to_url_map");
   if (null != i) return i;
   let s = getInitialOptions().cluster_name;
   if (!e || !t || !s) return;

@@ -45,7 +45,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { sf } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN } from "../figma_app/482142";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { Mh } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { jv } from "../905/84777";
@@ -56,7 +56,7 @@ import { K as _$$K } from "../905/3140";
 import { Al } from "../9420/394825";
 import { y4 } from "../figma_app/298277";
 import { FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
-import { aE, LN } from "../figma_app/514043";
+import { getUserIsoCode, getUserCurrency } from "../figma_app/514043";
 import { extractOrgUsersByUserId } from "../figma_app/951233";
 import { rq } from "../905/351260";
 import { lB, Ey, To } from "../905/148137";
@@ -650,7 +650,7 @@ export class $$eM2 extends Component {
       payment: {
         card: null,
         last4: null,
-        address: createEmptyAddress(aE())
+        address: createEmptyAddress(getUserIsoCode())
       },
       apiPending: !1,
       stripeCustomerId: null,
@@ -663,7 +663,7 @@ export class $$eM2 extends Component {
       },
       paymentError: null,
       currency: this.props.currency,
-      shippingAddress: createEmptyAddress(aE()),
+      shippingAddress: createEmptyAddress(getUserIsoCode()),
       nameOnPaymentMethod: "",
       vatId: null,
       regionalVatId: null,
@@ -849,7 +849,7 @@ export class $$eM2 extends Component {
     });
   }
   onSubmitPurchaseOrder() {
-    this.props.dispatch(_$$b({
+    this.props.dispatch(postUserFlag({
       completed_org_cart_flow: !0
     }));
     let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts);
@@ -1103,7 +1103,7 @@ export function $$eR1(e) {
   let a = useSelector(e => e.user);
   let r = useSelector(e => extractOrgUsersByUserId(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
   let l = Mh();
-  let d = useSelector(e => e.payment).currency || LN();
+  let d = useSelector(e => e.payment).currency || getUserCurrency();
   _$$h(() => {
     let e = document.createElement("div");
     e.style.position = "fixed";

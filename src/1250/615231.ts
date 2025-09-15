@@ -9,17 +9,17 @@ import { oW } from "../905/675859";
 import { sJ, Q5, rX } from "../9864/183809";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
 import { e as _$$e } from "../905/621515";
 import { mp } from "../figma_app/579169";
-import { r1 } from "../figma_app/545877";
+import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { N as _$$N } from "../figma_app/268271";
 import { _l } from "../figma_app/995208";
 import { kA, IO } from "../905/962318";
 import { FJT } from "../figma_app/6204";
-if (443 == require.j) { }
+if (443 == require.j) {}
 let j = 443 == require.j ? 864e5 : null;
 let k = () => Date.now() - j;
 export function $$E1() {
@@ -72,8 +72,8 @@ function A(e) {
     })
   });
 }
-let S = r1("has_tried_es_la");
-let N = r1("seen_es_es_launch_announcement");
+let S = userFlagExistsAtomFamily("has_tried_es_la");
+let N = userFlagExistsAtomFamily("seen_es_es_launch_announcement");
 export function $$O0() {
   let e = useDispatch();
   let t = useAtomWithSubscription(S);
@@ -89,7 +89,7 @@ export function $$O0() {
     priority: _$$N.SECONDARY_MODAL
   }, [c, t, n]);
   if (useEffect(() => {
-    getInitialOptions().user_data?.locale === languageCodes.ES_LA && "loaded" === t.status && !1 === t.data && e(_$$b({
+    getInitialOptions().user_data?.locale === languageCodes.ES_LA && "loaded" === t.status && !1 === t.data && e(postUserFlag({
       has_tried_es_la: !0
     }));
   }, [e, t]), useEffect(() => {

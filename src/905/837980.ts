@@ -12,7 +12,7 @@ import { Point } from '../905/736624';
 import { Xj } from '../905/748636';
 import { A as _$$A } from '../1617/568132';
 import { v as _$$v } from '../figma_app/79979';
-import { bV } from '../figma_app/808294';
+import { getProductPriceString } from '../figma_app/808294';
 import { generateRecordingKey } from '../figma_app/878298';
 
 /**
@@ -482,7 +482,7 @@ function getButtonText(monetizedResourceMetadata?: MonetizedResourceMetadata) {
     return jsxs('div', {
       children: [isSubscription(monetizedResourceMetadata) ? renderI18nText('community.buyer.subscribe') : renderI18nText('community.buyer.buy'), jsx('span', {
         className: 'freemium_api_pre_checkout_modal--buttonPriceString--UHoHb',
-        children: bV(monetizedResourceMetadata)
+        children: getProductPriceString(monetizedResourceMetadata)
       })]
     });
   }

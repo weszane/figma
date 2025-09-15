@@ -5,7 +5,7 @@ import { useAtomValueAndSetter } from "../figma_app/27355";
 import { ResourceStatus } from "../905/663269";
 import { Xf } from "../figma_app/153916";
 import { useSubscription } from "../figma_app/288654";
-import { I7 } from "../figma_app/594947";
+import { selectExperimentConfigHook } from "../figma_app/594947";
 import { BadgeColor, Badge } from "../figma_app/919079";
 import { tH } from "../905/751457";
 import { SvgComponent } from "../905/714743";
@@ -30,7 +30,7 @@ let R = "admin_notifications_count_badge--yellowIcon--7SC5D";
 export function $$k0(e) {
   let {
     getConfig
-  } = I7("exp_all_admin_request_dash");
+  } = selectExperimentConfigHook("exp_all_admin_request_dash");
   let a = useSubscription(AdminRequestDashOrgInfo, {
     orgId: e.planId
   }, {

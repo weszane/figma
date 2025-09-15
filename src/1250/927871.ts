@@ -8,7 +8,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { zE } from "../905/738636";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { w as _$$w } from "../0c62c2fd/912149";
 import { B } from "../905/524020";
 import { FFileType } from "../figma_app/191312";
@@ -112,7 +112,7 @@ export function $$j0(e) {
     body
   } = y(o);
   let I = useCallback(() => {
-    t(_$$b({
+    t(postUserFlag({
       dont_show_figjam_updates_in_figma_design: !s
     }));
     e.onClose();
@@ -141,7 +141,7 @@ export function $$j0(e) {
         children: jsx($z, {
           onClick: () => {
             I();
-            t(_$$b({
+            t(postUserFlag({
               interacted_figjam_whats_new_v2_cta: !0
             }));
             t(zE({

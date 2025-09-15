@@ -40,7 +40,7 @@ import { zl } from "../figma_app/641749";
 import { f as _$$f } from "../905/940356";
 import { N as _$$N } from "../figma_app/268271";
 import { h as _$$h } from "../905/284399";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { TrackedButton } from "../figma_app/831799";
 import { LN, q3 } from "../figma_app/450829";
@@ -157,7 +157,7 @@ function ee(e) {
     children: [jsxs("div", {
       children: [jsx("h1", {
         children: e.title
-      }), e.children, jsx(Jn, {
+      }), e.children, jsx(CloseButton, {
         className: _S,
         onClick: e.dismissModal,
         innerText: "close"

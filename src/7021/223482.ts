@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { T as _$$T } from "../1577/951568";
 import { SeatBillingTermsModal } from "../7021/149615";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { vK, jv } from "../905/84777";
 import { e as _$$e } from "../905/621515";
 import { N_ } from "../905/332483";
@@ -58,7 +58,7 @@ export function $$$$k0({
     }
   });
   let O = _$$f(S);
-  let E = e => t(_$$b({
+  let E = e => t(postUserFlag({
     [S]: e
   }));
   let {

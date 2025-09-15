@@ -6,7 +6,7 @@ import { ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
-import { b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 import { sx } from "../figma_app/957070";
@@ -15,7 +15,7 @@ import { A } from "../4711/667326";
 export let $$_0 = registerModal(function () {
   let e = useDispatch();
   useEffect(() => {
-    e(b({
+    e(postUserFlag({
       completed_font_installer_modal: !0
     }));
   }, [e]);

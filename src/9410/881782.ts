@@ -8,7 +8,7 @@ import { FlashActions } from '../905/573154';
 import { endPerformanceSpan, startPerformanceSpan } from '../905/670985';
 import { logError, logInfo } from '../905/714362';
 import { f as _$$f } from '../905/940356';
-import { b as _$$b } from '../905/985254';
+import { postUserFlag } from '../905/985254';
 import { useAtomValueAndSetter, Xr } from '../figma_app/27355';
 import { ts } from '../figma_app/49598';
 import { $2, bn, GF, h0, HQ, JJ, mf, NI, zu } from '../figma_app/61403';
@@ -275,7 +275,7 @@ class L {
     if (this.blockUserEvents(), this.shouldStop = !1, this.timeoutIds = [], this.computeAndSetTutorialDuration(e), e.startingViewportFrameType && this.setCursorBotOverlayType(e.startingViewportFrameType), this.setCursorBotTutorialPhase(h0.PLAYING), this.hasWaved || (this.setTimeoutWrapper({
       callback: () => {
         this.hasWaved = !0;
-        this.dispatch(_$$b({
+        this.dispatch(postUserFlag({
           cursor_bot_v2_has_greeted_with_wave: !0
         }));
       },
@@ -332,7 +332,7 @@ class L {
   }
   resetStateAndMarkTutorialComplete(e, t) {
     setTimeout(() => {
-      this.dispatch(_$$b({
+      this.dispatch(postUserFlag({
         [e]: !0
       }));
       t?.();

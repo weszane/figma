@@ -11,7 +11,7 @@ import { u2 } from "../figma_app/807786";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $z } from "../figma_app/297733";
 import { CK } from "../figma_app/517115";
-import { TG } from "../905/72677";
+import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { XG } from "../figma_app/98578";
 import { Nv } from "../figma_app/318590";
 import { WP } from "../905/198599";
@@ -32,7 +32,7 @@ export function $$C1({
   let {
     currentSearch
   } = useAtomWithSubscription(WP);
-  let R = useAtomWithSubscription(TG);
+  let R = useAtomWithSubscription(resourceDataAndPresetKeysV2SetAtom);
   let N = "visual-search";
   currentSearch?.input.type === "input-text" && (N = currentSearch.input.query);
   let P = Hu(e.library_key);

@@ -13,7 +13,7 @@ import { getI18nState } from "../figma_app/363242";
 import { KindEnum } from "../905/129884";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Df, uy, pD, z$, RI } from "../figma_app/770088";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { AK, I_, Tv } from "../905/234821";
 import { ComposerType } from "../905/380385";
 import { Ro } from "../figma_app/805373";
@@ -173,7 +173,7 @@ export function $$L0(e) {
     }, [i, n, t.id, e]);
   }(o, comment);
   useEffect(() => () => {
-    getFeatureFlags().show_at_mention_invited_users && dispatch(_$$b({
+    getFeatureFlags().show_at_mention_invited_users && dispatch(postUserFlag({
       has_closed_comment: !0
     }));
   }, [dispatch]);

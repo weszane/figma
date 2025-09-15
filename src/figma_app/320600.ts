@@ -34,7 +34,7 @@ import { hideModalHandler, showModalConditional, showModalHandler } from "../905
 import { registerModal } from "../905/102752";
 import { Ao } from "../905/748636";
 import { kL, zN, Pf } from "../905/326616";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { fullscreenValue } from "../figma_app/455680";
 import { useCurrentFileKey, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
@@ -313,7 +313,7 @@ let ec = () => {
     }, {
       name: "toggle-cursor-bot-primary-cta",
       callback: () => {
-        e(_$$b({
+        e(postUserFlag({
           cursor_bot_v2_make_show_me_primary_cta: !r
         }));
       }

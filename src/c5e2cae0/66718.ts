@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
 import { xf } from "../figma_app/416935";
 import { XHR } from "../905/910117";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { I as _$$I } from "../c5e2cae0/393403";
 import { EnhancedInput, BigSelect, Spacing, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
@@ -88,7 +88,7 @@ let w = registerModal(function ({
             className: "upgrade_contact_sales_modal--successIcon---zT4I",
             svg: _$$A2
           }), renderI18nText("universal_upgrade.contact_sales.thank_you")]
-        }), jsx(Jn, {
+        }), jsx(CloseButton, {
           className: y,
           onClick: e,
           innerText: "close"
@@ -230,7 +230,7 @@ export function $$E0(e) {
         children: [jsx("h1", {
           className: "upgrade_contact_sales_modal--modalTitle--7k87R text--fontPos13--xW8hS text--_fontBase--QdLsd",
           children: renderI18nText("universal_upgrade.contact_sales_title")
-        }), jsx(Jn, {
+        }), jsx(CloseButton, {
           className: y,
           onClick: T,
           innerText: "close"

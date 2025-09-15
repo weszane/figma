@@ -12,7 +12,7 @@ import _ from "classnames";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { Ph } from "../905/160095";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { b as _$$b } from "../905/985254";
+import { postUserFlag } from "../905/985254";
 import { f as _$$f } from "../905/940356";
 import { ZQ } from "../figma_app/727192";
 import { Cm } from "../figma_app/826998";
@@ -119,7 +119,7 @@ export function $$w0(e) {
       })]
     }),
     dismissible: !0,
-    onDismiss: () => r(_$$b({
+    onDismiss: () => r(postUserFlag({
       dev_mode_mcp_sse_deprecation_banner_dismissed: !0
     })),
     button: {

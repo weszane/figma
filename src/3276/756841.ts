@@ -85,7 +85,7 @@ import { VS } from "../1250/506456";
 import { K as _$$K } from "../7037/201222";
 import { e as _$$e2 } from "../3276/460810";
 import { mW, hJ } from "../905/123443";
-import { Jn } from "../905/17223";
+import { CloseButton } from "../905/17223";
 import { D as _$$D } from "../905/555681";
 import { h as _$$h } from "../905/994594";
 import { L as _$$L } from "../905/704296";
@@ -1340,7 +1340,7 @@ function ty(e) {
           threadManager: e.threadManager
         }), jsx(tg, {
           hideSettingsDropdown: e.hideSettingsDropdown
-        }), e.onCloseButton && jsx(Jn, {
+        }), e.onCloseButton && jsx(CloseButton, {
           className: tf,
           recordingKey: "threadHeader",
           onClick: e.onCloseButton,
