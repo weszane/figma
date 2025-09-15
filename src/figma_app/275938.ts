@@ -2,9 +2,9 @@ import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { Z } from "../905/939602";
-let $$d4 = M4.Query({
+let $$d4 = liveStoreInstance.Query({
   fetch: async () => (await Z.getDefaultLibraries({
     editorType: "whiteboard_shapes"
   })).data.meta

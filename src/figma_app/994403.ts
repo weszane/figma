@@ -16,8 +16,8 @@ import { B } from "../905/548640";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { q } from "../figma_app/277543";
-import { LE } from "../905/71785";
+import { DesignToolType } from "../figma_app/277543";
+import { FileTypeEnum } from "../905/71785";
 import { ManifestEditorType, isDevOrInspect } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
 import { $E, cL, is, G, Wv, p2, QF } from "../905/452765";
@@ -76,8 +76,8 @@ export function $$k1({
 function M(e, t, r) {
   switch (e) {
     case ManifestEditorType.FIGJAM:
-    case LE.FIGJAM:
-    case q.WHITEBOARD:
+    case FileTypeEnum.FIGJAM:
+    case DesignToolType.WHITEBOARD:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-figjam",
@@ -86,8 +86,8 @@ function M(e, t, r) {
         children: r ? jsx(j, {}) : jsx(_$$C, {})
       });
     case ManifestEditorType.FIGMA:
-    case LE.FIGMA:
-    case q.DESIGN:
+    case FileTypeEnum.FIGMA:
+    case DesignToolType.DESIGN:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-figma",
@@ -97,7 +97,7 @@ function M(e, t, r) {
       });
     case ManifestEditorType.INSPECT:
     case ManifestEditorType.DEV:
-    case q.DEV_HANDOFF:
+    case DesignToolType.DEV_HANDOFF:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-devmode",
@@ -105,8 +105,8 @@ function M(e, t, r) {
         "data-tooltip": getI18nString("community.detail_view.dev_mode_only"),
         children: r ? jsx(_$$P, {}) : jsx(_$$o, {})
       });
-    case LE.SLIDES:
-    case q.SLIDES:
+    case FileTypeEnum.SLIDES:
+    case DesignToolType.SLIDES:
     case ManifestEditorType.SLIDES:
       return jsx("div", {
         className: t,
@@ -115,7 +115,7 @@ function M(e, t, r) {
         "data-tooltip": getI18nString("community.detail_view.made_for_slides"),
         children: r ? jsx(_$$p, {}) : jsx(K, {})
       });
-    case q.SITES:
+    case DesignToolType.SITES:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-sites",
@@ -123,7 +123,7 @@ function M(e, t, r) {
         "data-tooltip": getI18nString("community.detail_view.made_for_sites"),
         children: r ? jsx(_$$v, {}) : jsx(k, {})
       });
-    case q.FIGMAKE:
+    case DesignToolType.FIGMAKE:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-figmake",
@@ -132,7 +132,7 @@ function M(e, t, r) {
         children: r ? jsx(_$$N, {}) : jsx(_$$o2, {})
       });
     case ManifestEditorType.BUZZ:
-    case q.COOPER:
+    case DesignToolType.COOPER:
       return jsx("div", {
         className: t,
         "data-testid": "editor-type-badge-cooper",

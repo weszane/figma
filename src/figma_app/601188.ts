@@ -3,21 +3,21 @@ import { z as _$$z, Ip } from "../905/239603";
 import { reportError } from "../905/11";
 import { createMetaValidator, createPaginatedValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { H } from "../figma_app/324237";
+import { getAllTimeSortOption } from "../figma_app/324237";
 import { S } from "../figma_app/701107";
-import { Q3, Y9, _s, Bn } from "../figma_app/306946";
-import { M4 } from "../905/713695";
+import { ResourceWithContentSchema, ResourceWithOptionalContentListSchema, RecommendationDimensionsSchema, RecommendedResourcesSchema } from "../figma_app/306946";
+import { liveStoreInstance } from "../905/713695";
 import { PluginDetailsSchema } from "../figma_app/155287";
 var $$_1 = (e => (e.HOMEPAGE = "homepage", e.CATEGORY = "category", e.PROFILE = "profile", e.PLUGINS = "plugins", e.RESOURCE_LANDING_PAGE = "resource_landing_page", e.SUGGESTED_EXTENSIONS = "suggested_extensions", e.RESOURCE_HUB = "resource_hub", e.COOPER_TEMPLATE_PICKER = "cooper_template_picker", e.SITES_TEMPLATE_PICKER = "sites_template_picker", e.EDITOR_COMMUNITY_VIEW = "editor_community_view", e))($$_1 || {});
 let h = _$$z.object({
-  resource: Q3.optional(),
+  resource: ResourceWithContentSchema.optional(),
   private_plugin: Ip.ignore(PluginDetailsSchema).optional()
 });
 let $$m0 = new class {
   constructor() {
     this.ResourceWithContentIDSchemaValidator = createMetaValidator("ResourceWithContentIDSchemaValidator", h, null, !0);
-    this.CommunityResourcesSchemaValidator = createPaginatedValidator("CommunityResourcesSchemaValidator", Y9, null, !0);
-    this.ResourcesPaginatedQuery = M4.PaginatedQuery({
+    this.CommunityResourcesSchemaValidator = createPaginatedValidator("CommunityResourcesSchemaValidator", ResourceWithOptionalContentListSchema, null, !0);
+    this.ResourcesPaginatedQuery = liveStoreInstance.PaginatedQuery({
       fetch: async (e, {
         pageParam: t
       }) => {
@@ -26,7 +26,7 @@ let $$m0 = new class {
             xr: r
           }) => {
             let n = APIParameterUtils.toAPIParameters({
-              sort_by: H(),
+              sort_by: getAllTimeSortOption(),
               ...e,
               resourceType: e.resourceType && e.resourceType.join(","),
               tags: e.tags && e.tags.join(","),
@@ -47,9 +47,9 @@ let $$m0 = new class {
         }
       }
     });
-    this.AdminResourceRecommendationsSchemaValidator = createMetaValidator("CommunityAdminResourceRecommendationsSchema", _s, null);
-    this.CommunityHomeShelfContentSchemaValidator = createMetaValidator("CommunityHomeShelfContentSchema", Bn, null);
-    this.getHomeShelfContent = M4.Query({
+    this.AdminResourceRecommendationsSchemaValidator = createMetaValidator("CommunityAdminResourceRecommendationsSchema", RecommendationDimensionsSchema, null);
+    this.CommunityHomeShelfContentSchemaValidator = createMetaValidator("CommunityHomeShelfContentSchema", RecommendedResourcesSchema, null);
+    this.getHomeShelfContent = liveStoreInstance.Query({
       fetch: ({
         seenResourceIds: e
       }) => this.CommunityHomeShelfContentSchemaValidator.validate(async ({

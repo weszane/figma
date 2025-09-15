@@ -10,7 +10,7 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { ShelfViewType, isMonetizedWithClientMeta, isPlugin, hasMonetizedResourceMetadata, hasClientMeta, isWidget, isThirdPartyMonetized } from '../figma_app/45218';
 import { EditorType } from '../figma_app/155287';
 import { FTemplateCategoryType } from '../figma_app/191312';
-import { Dl } from '../figma_app/471982';
+import { mapResourceType } from '../figma_app/471982';
 import { e6 } from '../figma_app/617427';
 import { getProductPriceString, hasTrialAvailable } from '../figma_app/808294';
 import { DefaultLoadingSpinner } from '../figma_app/858013';
@@ -19,7 +19,7 @@ let b = 'purchase_button_view--primaryText--TzFkq';
 export function $$T3(e, t, r, n) {
   trackEventAnalytics('cmty_redirect_purchase_button_click', {
     context: t,
-    resource_type: Dl(e),
+    resource_type: mapResourceType(e),
     resource_id: e.id,
     user_id: r,
     profile_id: n
@@ -28,7 +28,7 @@ export function $$T3(e, t, r, n) {
 export function $$I2(e, t, r, n) {
   trackEventAnalytics('cmty_purchase_button_click', {
     context: t,
-    resource_type: Dl(e),
+    resource_type: mapResourceType(e),
     resource_id: e.id,
     user_id: r,
     profile_id: n

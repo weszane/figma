@@ -452,7 +452,7 @@ import { KD, Lk } from '../figma_app/975811';
 import { XE as _$$XE } from '../figma_app/976749';
 import { gH } from '../figma_app/985200';
 import _require from '../vendor/89702';
-import { Ay as _$$Ay } from '../vendor/159563';
+import { produce } from 'immer';
 import { hp } from '../vendor/162266';
 import ah from '../vendor/223926';
 import { deflateRaw } from '../vendor/323834';
@@ -7091,7 +7091,7 @@ let lX = class e extends sP(sN(sR)) {
   requestEditorType(e) {
     let t = this._store.getState().selectedView;
     if (t.view !== 'fullscreen') return;
-    let i = _$$Ay(t, t => {
+    let i = produce(t, t => {
       t.editorType === FEditorType.DevHandoff && delete t.devModeFocusId;
       t.editorType = this._jsEditorType(e);
     });

@@ -19,7 +19,7 @@ import { RCSMessageType } from "../905/135526";
 import { canRunPlugin, getRelaunchablePlugins } from "../figma_app/300692";
 import { O as _$$O2 } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType, hasLocalFileId, relaunchMixedDescription } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
@@ -67,7 +67,7 @@ let P = class e extends PureComponent {
     this.fetchPlugin = e => {
       this.props.dispatch(af({
         id: e,
-        resourceType: ResourceType.PLUGIN
+        resourceType: HubTypeEnum.PLUGIN
       }));
     };
     this.renderRelaunchRows = e => {

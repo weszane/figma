@@ -7,7 +7,7 @@
  */
 export function createDeferredPromise(): {
   promise: Promise<any>
-  resolve: (value: any) => void
+  resolve: (value?: any) => void
   reject: (reason: any) => void
   status: 'pending' | 'resolved' | 'rejected'
   result?: any

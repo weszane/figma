@@ -18,10 +18,10 @@ import { FPermissionDenialReason, FFileType } from "../figma_app/191312";
 import { RepoCanMove, RepoCanMoveWithReasons, FileCanMoveWithReasons } from "../figma_app/43951";
 import { Y9, fm } from "../figma_app/680166";
 import { Bi, vL } from "../905/652992";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { fileActionEnum } from "../figma_app/630077";
 import { J } from "../905/202542";
-import { W as _$$W } from "../905/522628";
+import { folderAPIInstance } from "../905/522628";
 import { jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { ConfirmationModal } from "../905/441305";
@@ -235,7 +235,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
     let t = i.folder_id ? g.folders[i.folder_id] ?? null : null;
     let n = g.figFilePublishedAsHubFile[i.key] || null;
     let r = n && g.hubFiles[n] || null;
-    if (r?.publisher.entity_type === o1.TEAM) {
+    if (r?.publisher.entity_type === TeamOrgType.TEAM) {
       e.dispatch(FlashActions.error(getI18nString("file_browser.file_browser_actions.cant_move_published_file", {
         fileName: i.name,
         teamName: r.publisher.name
@@ -308,7 +308,7 @@ let $$K0 = createOptimistThunk(async (e, t) => {
       let c = files.filter(e => "sites" === e.editor_type).length;
       let u = files.filter(e => "figmake" === e.editor_type).length;
       try {
-        await _$$W.getCanMoveFiles({
+        await folderAPIInstance.getCanMoveFiles({
           numDesignFiles: t,
           numWhiteboardFiles: a,
           numSlidesFiles: s,

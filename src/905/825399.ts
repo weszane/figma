@@ -17,7 +17,7 @@ import { E as _$$E } from "../905/128063";
 import { qU, bj } from "../905/420347";
 import { LH } from "../905/872904";
 import { SharingGroupsByResourceConnection } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { je } from "../figma_app/155728";
 import { ol } from "../figma_app/598018";
@@ -33,8 +33,8 @@ export function $$k10() {
     hasEntAccess: !!t && !!t.bigma_enabled
   };
 }
-let R = M4.Query({
-  fetch: e => M4.fetch(Yb(e)),
+let R = liveStoreInstance.Query({
+  fetch: e => liveStoreInstance.fetch(Yb(e)),
   output: e => ({
     libraryStats: e.data,
     publishedLibraries: e.data.files.map(e => _$$E(e)) ?? []

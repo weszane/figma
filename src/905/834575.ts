@@ -1,159 +1,241 @@
-import { createNoOpValidator } from "../figma_app/181241";
-import { XHR } from "../905/910117";
-import { isAddressEmpty } from "../figma_app/831101";
-import { AccessLevelEnum } from "../905/557142";
-export let $$o0 = new class {
+import { AccessLevelEnum } from '../905/557142'
+import { XHR } from '../905/910117'
+import { createNoOpValidator } from '../figma_app/181241'
+import { isAddressEmpty } from '../figma_app/831101'
+
+type Validates = ReturnType<typeof createNoOpValidator>
+/**
+ * TeamAPIClient - Refactored from original $$o0 class.
+ * Handles team-related API operations with schema validation.
+ */
+export class TeamAPIClient {
+  private MembersSchemaValidator: Validates
+  private TeamUsersSchemaValidator: Validates
+  private TeamSchemaValidator: Validates
+  private DeletedSchemaValidator: Validates
+  private TeamNameSchemaValidator: Validates
+  private SubscriptionStatusSchemaValidator: Validates
+  private UsersLastActiveSchemaValidator: Validates
+  private FoldersSchemaValidator: Validates
+  private TeamAdminsSchemaValidator: Validates
+  private TeamDeletionFileCountSchemaValidator: Validates
+  private HasPublishedSiteSchemaValidator: Validates
+  private TeamUserInvariantBackfillStatsSchemaValidator: Validates
+  private TeamRoleRequestSchemaValidator: Validates
+  private showDanglingTeamUserBackfillBannerSchemaValidator: Validates
+
   constructor() {
-    this.MembersSchemaValidator = createNoOpValidator();
-    this.TeamUsersSchemaValidator = createNoOpValidator();
-    this.TeamSchemaValidator = createNoOpValidator();
-    this.DeletedSchemaValidator = createNoOpValidator();
-    this.TeamNameSchemaValidator = createNoOpValidator();
-    this.SubscriptionStatusSchemaValidator = createNoOpValidator();
-    this.UsersLastActiveSchemaValidator = createNoOpValidator();
-    this.FoldersSchemaValidator = createNoOpValidator();
-    this.TeamAdminsSchemaValidator = createNoOpValidator();
-    this.TeamDeletionFileCountSchemaValidator = createNoOpValidator();
-    this.HasPublishedSiteSchemaValidator = createNoOpValidator();
-    this.TeamUserInvariantBackfillStatsSchemaValidator = createNoOpValidator();
-    this.TeamRoleRequestSchemaValidator = createNoOpValidator();
-    this.showDanglingTeamUserBackfillBannerSchemaValidator = createNoOpValidator();
+    this.MembersSchemaValidator = createNoOpValidator()
+    this.TeamUsersSchemaValidator = createNoOpValidator()
+    this.TeamSchemaValidator = createNoOpValidator()
+    this.DeletedSchemaValidator = createNoOpValidator()
+    this.TeamNameSchemaValidator = createNoOpValidator()
+    this.SubscriptionStatusSchemaValidator = createNoOpValidator()
+    this.UsersLastActiveSchemaValidator = createNoOpValidator()
+    this.FoldersSchemaValidator = createNoOpValidator()
+    this.TeamAdminsSchemaValidator = createNoOpValidator()
+    this.TeamDeletionFileCountSchemaValidator = createNoOpValidator()
+    this.HasPublishedSiteSchemaValidator = createNoOpValidator()
+    this.TeamUserInvariantBackfillStatsSchemaValidator = createNoOpValidator()
+    this.TeamRoleRequestSchemaValidator = createNoOpValidator()
+    this.showDanglingTeamUserBackfillBannerSchemaValidator = createNoOpValidator()
   }
-  getMembers(e) {
-    return this.MembersSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/members`));
+
+  // Getter methods for team data
+  /**
+   * getMembers - Original: getMembers
+   * Fetches team members.
+   */
+  getMembers = (e: any) => {
+    return this.MembersSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/members`))
   }
-  getTeamUsers(e) {
-    return this.TeamUsersSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/team_users`));
+
+  /**
+   * getTeamUsers - Original: getTeamUsers
+   * Fetches team users.
+   */
+  getTeamUsers = (e: any) => {
+    return this.TeamUsersSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/team_users`))
   }
-  getTeam(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}`));
+
+  /**
+   * getTeam - Original: getTeam
+   * Fetches team details.
+   */
+  getTeam = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}`))
   }
-  getDeleted(e) {
-    return this.DeletedSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/deleted/${e.teamId}`));
+
+  /**
+   * getDeleted - Original: getDeleted
+   * Fetches deleted team data.
+   */
+  getDeleted = (e: any) => {
+    return this.DeletedSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/deleted/${e.teamId}`))
   }
-  getTeamName(e) {
-    return this.TeamNameSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/team_name`));
+
+  /**
+   * getTeamName - Original: getTeamName
+   * Fetches team name.
+   */
+  getTeamName = (e: any) => {
+    return this.TeamNameSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/team_name`))
   }
-  getSubscriptionStatus(e) {
-    return this.SubscriptionStatusSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/subscription_status`));
+
+  /**
+   * getSubscriptionStatus - Original: getSubscriptionStatus
+   * Fetches subscription status.
+   */
+  getSubscriptionStatus = (e: any) => {
+    return this.SubscriptionStatusSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/subscription_status`))
   }
-  getUsersLastActive(e) {
-    return this.UsersLastActiveSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/users/${e.teamMemberId}/last_active`));
+
+  /**
+   * getUsersLastActive - Original: getUsersLastActive
+   * Fetches user's last active time.
+   */
+  getUsersLastActive = (e: any) => {
+    return this.UsersLastActiveSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/users/${e.teamMemberId}/last_active`))
   }
-  getFolders(e) {
-    return this.FoldersSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/folders`));
+
+  /**
+   * getFolders - Original: getFolders
+   * Fetches team folders.
+   */
+  getFolders = (e: any) => {
+    return this.FoldersSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/folders`))
   }
-  getTeamAdmins(e) {
-    return this.TeamAdminsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/team_admins`));
+
+  /**
+   * getTeamAdmins - Original: getTeamAdmins
+   * Fetches team admins.
+   */
+  getTeamAdmins = (e: any) => {
+    return this.TeamAdminsSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/team_admins`))
   }
-  getDeletionFileCount(e) {
-    return this.TeamDeletionFileCountSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/deletion_file_count`));
+
+  /**
+   * getDeletionFileCount - Original: getDeletionFileCount
+   * Fetches deletion file count.
+   */
+  getDeletionFileCount = (e: any) => {
+    return this.TeamDeletionFileCountSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/deletion_file_count`))
   }
-  getHasPublishedSite(e) {
-    return this.HasPublishedSiteSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/has_published_site`));
+
+  /**
+   * getHasPublishedSite - Original: getHasPublishedSite
+   * Checks if team has published site.
+   */
+  getHasPublishedSite = (e: any) => {
+    return this.HasPublishedSiteSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/has_published_site`))
   }
-  fetchTeamUserInvariantBackfillStats(e) {
-    return this.TeamUserInvariantBackfillStatsSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/num_backfilled_team_user`));
+
+  /**
+   * fetchTeamUserInvariantBackfillStats - Original: fetchTeamUserInvariantBackfillStats
+   * Fetches backfill stats.
+   */
+  fetchTeamUserInvariantBackfillStats = (e: any) => {
+    return this.TeamUserInvariantBackfillStatsSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/num_backfilled_team_user`))
   }
-  requestTeamRole(e) {
-    return this.TeamRoleRequestSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/team_role_requests", {
-      team_id: e.teamId,
-      level: AccessLevelEnum.VIEWER
-    }));
+
+  /**
+   * showDanglingTeamUserBackfillBanner - Original: showDanglingTeamUserBackfillBanner
+   * Checks if to show backfill banner.
+   */
+  showDanglingTeamUserBackfillBanner = (e: any) => {
+    return this.showDanglingTeamUserBackfillBannerSchemaValidator.validate(async ({ xr: t }: any) => await t.get(`/api/teams/${e.teamId}/show_dangling_team_user_backfill_banner`))
   }
-  showDanglingTeamUserBackfillBanner(e) {
-    return this.showDanglingTeamUserBackfillBannerSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get(`/api/teams/${e.teamId}/show_dangling_team_user_backfill_banner`));
+
+  // Update methods for team data
+  /**
+   * updateAiFeaturesDisabled - Original: updateAiFeaturesDisabled
+   * Updates AI features disabled status.
+   */
+  updateAiFeaturesDisabled = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.put(`/api/teams/${e.teamId}`, { ai_features_disabled: e.aiFeaturesDisabled }))
   }
-  updateAiFeaturesDisabled(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/teams/${e.teamId}`, {
-      ai_features_disabled: e.aiFeaturesDisabled
-    }));
+
+  /**
+   * updateTeamName - Original: updateTeamName
+   * Updates team name and legal name.
+   */
+  updateTeamName = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.put(`/api/teams/${e.teamId}`, { name: e.updatedDisplayName, legal_name: e.updatedLegalName }))
   }
-  updateTeamName(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/teams/${e.teamId}`, {
-      name: e.updatedDisplayName,
-      legal_name: e.updatedLegalName
-    }));
+
+  /**
+   * updateDisplayName - Original: updateDisplayName
+   * Updates display name.
+   */
+  updateDisplayName = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.put(`/api/teams/${e.teamId}`, { name: e.updatedDisplayName }))
   }
-  updateDisplayName(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/teams/${e.teamId}`, {
-      name: e.updatedDisplayName
-    }));
+
+  /**
+   * updateShippingAddress - Original: updateShippingAddress
+   * Updates shipping address and legal name.
+   */
+  updateShippingAddress = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.put(`/api/teams/${e.teamId}`, { shipping_address: e.shippingAddress, legal_name: e.updatedLegalName }))
   }
-  updateShippingAddress(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/teams/${e.teamId}`, {
-      shipping_address: e.shippingAddress,
-      legal_name: e.updatedLegalName
-    }));
+
+  /**
+   * updatePresetsDisabled - Original: updatePresetsDisabled
+   * Updates presets disabled status.
+   */
+  updatePresetsDisabled = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.put(`/api/teams/${e.teamId}`, { figma_provided_libraries_disabled: e.presetsDisabled }))
   }
-  updatePresetsDisabled(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.put(`/api/teams/${e.teamId}`, {
-      figma_provided_libraries_disabled: e.presetsDisabled
-    }));
+
+  /**
+   * updateAiDataSharing - Original: updateAiDataSharing
+   * Updates AI data sharing.
+   */
+  updateAiDataSharing = (e: any) => {
+    return XHR.put(`/api/teams/${e.teamId}/ai_data_sharing`, { enabled: e.enabled })
   }
-  updateAiDataSharing(e) {
-    return XHR.put(`/api/teams/${e.teamId}/ai_data_sharing`, {
-      enabled: e.enabled
-    });
-  }
-  validateAddresses(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/validate_address", {
+
+  // Validation methods
+  /**
+   * validateAddresses - Original: validateAddresses
+   * Validates addresses.
+   */
+  validateAddresses = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.post('/api/validate_address', {
       billing_address: isAddressEmpty(e.billingAddress) ? null : e.billingAddress,
       shipping_address: isAddressEmpty(e.shippingAddress) ? null : e.shippingAddress,
       team_id: e.teamId,
-      is_checkout: e.isCheckout
-    }));
+      is_checkout: e.isCheckout,
+    }))
   }
-  validateCurrency(e) {
-    return this.TeamSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.post("/api/validate_currency", {
+
+  /**
+   * validateCurrency - Original: validateCurrency
+   * Validates currency.
+   */
+  validateCurrency = (e: any) => {
+    return this.TeamSchemaValidator.validate(async ({ xr: t }: any) => await t.post('/api/validate_currency', {
       team_id: e.teamId,
       currency: e.currency,
       is_checkout: e.isCheckout,
       billing_address: isAddressEmpty(e.billingAddress) ? null : e.billingAddress,
-      shipping_address: isAddressEmpty(e.shippingAddress) ? null : e.shippingAddress
-    }));
+      shipping_address: isAddressEmpty(e.shippingAddress) ? null : e.shippingAddress,
+    }))
   }
-}();
-export const $ = $$o0;
+
+  // Request method
+  /**
+   * requestTeamRole - Original: requestTeamRole
+   * Requests team role.
+   */
+  requestTeamRole = (e: any) => {
+    return this.TeamRoleRequestSchemaValidator.validate(async ({ xr: t }: any) => await t.post('/api/team_role_requests', {
+      team_id: e.teamId,
+      level: AccessLevelEnum.VIEWER,
+    }))
+  }
+}
+
+// Export instance as $ for backward compatibility, refactored from $$o0
+export const teamAPIClient = new TeamAPIClient()
+export const $ = teamAPIClient

@@ -10,7 +10,7 @@ import { O as _$$O } from "../905/969533";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
 import x from "classnames";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { Badge, BadgeColor } from "../figma_app/919079";
 import { g as _$$g } from "../1556/359896";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -871,8 +871,8 @@ function eX() {
   let a = kc();
   let d = t && !!a;
   let u = s_();
-  let h = _$$N(`(max-width: ${YW}px)`);
-  let m = _$$N(`(max-width: ${d8i})`);
+  let h = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let m = usePrefersMediaQuery(`(max-width: ${d8i})`);
   let x = getI18nString("navbar.settings_dropdown.button_label");
   let _ = jsxs("div", {
     className: "account_switcher--dropdownButtonContent--GPGDx",

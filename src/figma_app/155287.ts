@@ -2,12 +2,12 @@ import { z as zod } from 'zod';
 import { ProductStatus, ProductSource } from '../905/54385';
 import { Ip } from '../905/239603';
 import { SubscriptionMetadataSchema } from '../905/272080';
-import { Y } from '../905/344937';
+import { monetizedResourceMetadataSchema } from '../905/344937';
 import { getFeatureFlags } from '../905/601108';
 import { CommunityRatingStatsContainerSchema } from '../905/796201';
-import { n as _$$n } from '../905/875063';
-import { I7, xK } from '../figma_app/10554';
-import { M } from '../figma_app/70618';
+import { BadgeSchema } from '../905/875063';
+import { AcceptedPendingUsersSchema, PublisherInfoSchema } from '../figma_app/10554';
+import { createContentFilterSchema } from '../figma_app/70618';
 import { Ni } from '../figma_app/188152';
 import { FPinStatusType, FPublicationStatusType, FPublisherType } from '../figma_app/191312';
 import { fE, Fy } from '../figma_app/809727';
@@ -303,7 +303,7 @@ export const PluginDetailsSchema = PluginVersionsRecordSchema.merge(zod.object({
   unpublished_at: zod.string().nullable(),
   support_contact: zod.string().nullable(),
   comments_setting: zod.nativeEnum(Ni).nullable(),
-  related_content: M(zod.lazy(() => PluginDetailsSchema)),
+  related_content: createContentFilterSchema(zod.lazy(() => PluginDetailsSchema)),
   hide_related_content_by_others: zod.coerce.boolean().optional(),
   publishing_status: zod.nativeEnum(FPublicationStatusType).nullable(),
   score: zod.number().optional(),
@@ -314,10 +314,10 @@ export const PluginDetailsSchema = PluginVersionsRecordSchema.merge(zod.object({
   community_resource_payment: SubscriptionMetadataSchema.optional(),
   third_party_m10n_status: zod.nativeEnum(ProductStatus).nullish(),
   creator_policy: zod.string().optional(),
-  plugin_publishers: I7.optional(),
+  plugin_publishers: AcceptedPendingUsersSchema.optional(),
   carousel_media_urls: zod.optional(fE),
   carousel_videos: zod.optional(Fy)
-})).and(xK).and(_$$n).and(Y).and(CommunityRatingStatsContainerSchema);
+})).and(PublisherInfoSchema).and(BadgeSchema).and(monetizedResourceMetadataSchema).and(CommunityRatingStatsContainerSchema);
 export const WidgetDetailsSchema = PluginDetailsSchema.and(zod.object({
   is_widget: zod.literal(true)
 }));

@@ -18,7 +18,7 @@ import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { Fl } from "../figma_app/236178";
 import { NX, k9 } from "../figma_app/777207";
-import { B8 } from "../figma_app/255679";
+import { useHasResourcePresetKey } from "../figma_app/255679";
 import { kf, u5, Rb, yp, pN } from "../figma_app/852050";
 import { Um } from "../905/848862";
 import { dH } from "../figma_app/722362";
@@ -553,7 +553,7 @@ export function $$el3({
     requestedTypes: k,
     onStyleSelected: A
   });
-  let eS = B8();
+  let eS = useHasResourcePresetKey();
   let [ev, eA] = useState(() => getFeatureFlags().dse_collapse_variable_and_style_libraries ? new Set(eI.filter(({
     libraryKey: e
   }) => eS(e)).map(({

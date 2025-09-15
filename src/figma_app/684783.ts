@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Point } from "../905/736624";
 import { I as _$$I } from "../figma_app/4253";
-import { zS } from "../figma_app/471982";
+import { getViewerWidth } from "../figma_app/471982";
 import { wB } from "../figma_app/12220";
 import { lS } from "../figma_app/242565";
 import { U3 } from "../figma_app/412189";
@@ -840,7 +840,7 @@ function ex(e) {
       }), jsx("iframe", {
         title: "Hub file iframe viewer",
         height: "100%",
-        width: fixedSize ? "100%" : zS(u),
+        width: fixedSize ? "100%" : getViewerWidth(u),
         src: X,
         allowFullScreen: !0,
         ref: x

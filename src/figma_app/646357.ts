@@ -16,7 +16,7 @@ import { handleAtomEvent } from '../905/502364';
 import { pD as _$$pD, GO, Lr, Nn, zK } from '../905/561897';
 import { getFeatureFlags } from '../905/601108';
 import { rb, xp } from '../905/711212';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { l as _$$l } from '../905/716947';
 import { gB, Xm } from '../905/723791';
@@ -798,14 +798,14 @@ export async function $$tn62(e, t = [], r, n, i, a, s) {
     t && t.styleKeyForPublish && Fullscreen.getNumUsagesOfStyle(t.styleKeyForPublish, !0) !== 0 && (o[t.styleKeyForPublish] = r);
   }
   let l = Object.keys(o).map(n3);
-  let p = await M4.fetch(_x.UnpublishedStylesQuery({
+  let p = await liveStoreInstance.fetch(_x.UnpublishedStylesQuery({
     styleKeys: l,
     orgId: i
   }));
   let _ = g()([...p, ...Object.values(r).filter(e => e.key in o)], e => e.key);
   let h = new Set(_.map(e => e.key));
   let m = l.filter(e => e && !h.has(n3(e)));
-  let f = await M4.fetch(qE.MissingStyleKeyToLibraryKeyQuery({
+  let f = await liveStoreInstance.fetch(qE.MissingStyleKeyToLibraryKeyQuery({
     styleKeys: m
   }));
   a && delete f[a.libraryKey];

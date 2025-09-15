@@ -12,9 +12,9 @@ import { l as _$$l } from "../905/152724";
 import { Xy } from "../figma_app/578832";
 import { A6 } from "../905/350234";
 import { Jm } from "../figma_app/387599";
-import { qD, _t, JJ, Dm } from "../figma_app/471982";
-import { cB, G8, rZ } from "../figma_app/777551";
-import { xn } from "../905/934145";
+import { getCurrentVersion, buildCommunityPathById, mapTemplateCategoryToFileType, isUserOrIdMatch } from "../figma_app/471982";
+import { trackResourceClickEvent, getResourceTaglineOrDescription, buildResourceClickTrackingEvent } from "../figma_app/777551";
+import { ProfileRouteState } from "../905/934145";
 import { TrackedLink } from "../figma_app/831799";
 import { FTemplateCategoryType } from "../figma_app/191312";
 import { ResourceTypeNoComment, isWidget, isPlugin } from "../figma_app/45218";
@@ -56,7 +56,7 @@ export function $$R0({
   subView: o
 }) {
   let c = Jm();
-  let u = qD(e);
+  let u = getCurrentVersion(e);
   let p = e.client_meta && JSON.parse(e.client_meta)?.background_color;
   let _ = e.thumbnail_is_set;
   e.viewer_mode === FTemplateCategoryType.WHITEBOARD && (p = {
@@ -78,11 +78,11 @@ export function $$R0({
     children: [jsx(_$$a, {
       onIntersectionChange: e => r?.(e)
     }), jsx(A6, {
-      to: _t({
+      to: buildCommunityPathById({
         resource: e
       }),
       onClick: t => {
-        cB("hub_file", e.id, a, c, o);
+        trackResourceClickEvent("hub_file", e.id, a, c, o);
       },
       onClickOverride: i,
       className: nJ,
@@ -99,7 +99,7 @@ export function $$R0({
         }), jsx("div", {
           className: JM,
           children: jsx(dn, {
-            editorType: JJ(e.viewer_mode)
+            editorType: mapTemplateCategoryToFileType(e.viewer_mode)
           })
         }), !t && jsx($$O1, {
           resource: e,
@@ -121,18 +121,18 @@ export function $$L4({
   subView: o
 }) {
   let d = Jm();
-  let c = qD(e);
+  let c = getCurrentVersion(e);
   return jsxs("div", {
     className: IQ,
     "data-testid": "plugin-tile",
     children: [jsx(_$$a, {
       onIntersectionChange: e => r?.(e)
     }), jsx(A6, {
-      to: _t({
+      to: buildCommunityPathById({
         resource: e
       }),
       onClick: t => {
-        cB("plugin", e.id, a, d, o);
+        trackResourceClickEvent("plugin", e.id, a, d, o);
       },
       onClickOverride: i,
       className: nJ,
@@ -149,7 +149,7 @@ export function $$L4({
         }), !t && jsxs(Fragment, {
           children: [jsx("div", {
             className: A$,
-            children: G8(c)
+            children: getResourceTaglineOrDescription(c)
           }), c.manifest?.editorType && jsx("div", {
             className: JM,
             children: jsx(dn, {
@@ -176,18 +176,18 @@ export function $$P3({
   subView: o
 }) {
   let d = Jm();
-  let c = qD(e);
+  let c = getCurrentVersion(e);
   return jsxs("div", {
     className: HL,
     "data-testid": "widget-tile",
     children: [jsx(_$$a, {
       onIntersectionChange: e => r?.(e)
     }), jsx(A6, {
-      to: _t({
+      to: buildCommunityPathById({
         resource: e
       }),
       onClick: t => {
-        cB("widget", e.id, a, d, o);
+        trackResourceClickEvent("widget", e.id, a, d, o);
       },
       onClickOverride: i,
       className: nJ,
@@ -228,13 +228,13 @@ export function $$D2({
   let l = Jm();
   let [d, p] = useState(model.current_user_is_following);
   let _ = d && !model.current_user_is_following ? 1 : 0;
-  let m = Dm(model.id, r);
+  let m = isUserOrIdMatch(model.id, r);
   let g = model.img_urls?.["500_500"] || model.img_urls?.["120_120"];
   return jsxs(TrackedLink, {
-    to: new xn({
+    to: new ProfileRouteState({
       profileHandle: model.profile_handle
     }).to,
-    ...rZ("profile", model.id, e, l),
+    ...buildResourceClickTrackingEvent("profile", model.id, e, l),
     className: gO,
     children: [jsx("div", {
       className: zG,
@@ -277,14 +277,14 @@ export function $$D2({
       children: resources.length > 0 ? resources.slice(0, 3).map(e => isWidget(e) ? jsx("div", {
         className: vR,
         children: jsx("img", {
-          alt: qD(e).name,
-          src: qD(e).redirect_snapshot_url ?? void 0,
+          alt: getCurrentVersion(e).name,
+          src: getCurrentVersion(e).redirect_snapshot_url ?? void 0,
           loading: "lazy"
         })
       }, e.id) : (isPlugin(e), jsx("div", {
         className: vR,
         children: jsx("img", {
-          alt: qD(e).name,
+          alt: getCurrentVersion(e).name,
           src: e.thumbnail_url || void 0,
           loading: "lazy"
         })

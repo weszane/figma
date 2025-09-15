@@ -14,15 +14,15 @@ import { A6 } from "../905/350234";
 import { W as _$$W } from "../5430/53744";
 import { Jm } from "../figma_app/387599";
 import { Lj } from "../figma_app/835219";
-import { qD, _t, ZD } from "../figma_app/471982";
-import { Mc, qd } from "../figma_app/640564";
+import { getCurrentVersion, buildCommunityPathById, TransparentGifDataUri } from "../figma_app/471982";
+import { buildSearchUrl, defaultSearchOptions } from "../figma_app/640564";
 import { PerfTimer } from "../905/609396";
 import { VisualBellActions } from "../905/302958";
 import { $W } from "../905/144933";
-import { e as _$$e2 } from "../figma_app/324237";
+import { SortOptions } from "../figma_app/324237";
 import { PF } from "../figma_app/930386";
 import { zj, bT, AS } from "../5430/438185";
-import { xn } from "../905/934145";
+import { ProfileRouteState } from "../905/934145";
 import { eK, w2 } from "../905/977218";
 import { M5 } from "../figma_app/350203";
 import { Ei } from "../905/574958";
@@ -87,7 +87,7 @@ function Z({
   return jsx("div", {
     className: "search_dropdown--profile--HRd2s",
     children: jsxs(Link, {
-      to: new xn({
+      to: new ProfileRouteState({
         profileHandle: e.profile_handle
       }).to,
       className: "search_dropdown--resourceRowProfile--HScpw",
@@ -122,14 +122,14 @@ function q({
       className: D,
       children: renderI18nText("community.view_bar.widgets")
     }), e.slice(0, 4).map((e, n) => {
-      let a = qD(e);
+      let a = getCurrentVersion(e);
       return jsx("div", {
         onMouseEnter: () => r(n),
         className: c()({
           [$]: i === n
         }),
         children: jsxs(A6, {
-          to: _t({
+          to: buildCommunityPathById({
             resource: e
           }),
           className: $$G,
@@ -141,7 +141,7 @@ function q({
             plugin: a,
             className: O,
             alt: a.name,
-            onError: e => e.target.src = ZD
+            onError: e => e.target.src = TransparentGifDataUri
           }), jsxs("div", {
             className: M,
             children: [jsx("div", {
@@ -183,14 +183,14 @@ function Y({
       className: D,
       children: renderI18nText("community.view_bar.plugins")
     }), e.slice(0, 4).map((e, n) => {
-      let a = qD(e);
+      let a = getCurrentVersion(e);
       return jsx("div", {
         onMouseEnter: () => r(n),
         className: c()({
           [$]: i === n
         }),
         children: jsxs(A6, {
-          to: _t({
+          to: buildCommunityPathById({
             resource: e
           }),
           className: $$G,
@@ -202,7 +202,7 @@ function Y({
             src: a.redirect_icon_url,
             className: O,
             alt: a.name,
-            onError: e => e.target.src = ZD
+            onError: e => e.target.src = TransparentGifDataUri
           }), jsxs("div", {
             className: M,
             children: [jsx("div", {
@@ -246,14 +246,14 @@ function X({
       className: D,
       children: renderI18nText("community.view_bar.files")
     }), e.slice(0, 4).map((e, n) => {
-      let a = qD(e);
+      let a = getCurrentVersion(e);
       return jsx("div", {
         onMouseEnter: () => r(n),
         className: c()({
           [$]: i === n
         }),
         children: jsxs(A6, {
-          to: _t({
+          to: buildCommunityPathById({
             resource: e
           }),
           className: "search_dropdown--resourceRow--P-Lig",
@@ -265,7 +265,7 @@ function X({
             src: e.thumbnail_url,
             className: l ? "search_dropdown--fileTilePreview16x9---1A4y" : "search_dropdown--fileTilePreview--uCbva",
             alt: a.name,
-            onError: e => e.target.src = ZD
+            onError: e => e.target.src = TransparentGifDataUri
           }), jsxs("div", {
             className: M,
             children: [jsx("div", {
@@ -356,7 +356,7 @@ let J = function (e, t) {
   };
 }({
   query: e,
-  sort_by: _$$e2.Search.RELEVANCY,
+  sort_by: SortOptions.Search.RELEVANCY,
   resourceType: "mixed",
   limit: 12,
   isPreview: !0,
@@ -428,7 +428,7 @@ export function $$K0(e) {
         widgets: l.length,
         profiles: i.data.meta.results.length
       });
-    }).catch(() => { });
+    }).catch(() => {});
   }, [query, v, j, context, setResources, setSelectedIdx, w]);
   let L = useCallback(e => {
     trackEventAnalytics("search_result_clicked", {
@@ -451,8 +451,8 @@ export function $$K0(e) {
   }, [resources, setSelectedIdx]);
   if (!query) return null;
   let E = resources.files?.length || resources.widgets?.length || resources.plugins?.length || resources.creators?.length;
-  let A = Mc({
-    ...qd,
+  let A = buildSearchUrl({
+    ...defaultSearchOptions,
     query
   });
   return jsxs("div", {

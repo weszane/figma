@@ -26,7 +26,7 @@ import { TeamHasPublishedSite } from "../figma_app/43951";
 import { mg, nX } from "../figma_app/336853";
 import { HE, Cl, Eq } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
-import { $ as _$$$ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { isFigmakeSitesEnabled } from "../figma_app/552876";
 import { isSitesFeatureEnabled } from "../905/561485";
@@ -311,7 +311,7 @@ function B(e) {
                       e === P || ep || (Z(t.meta), el(!0));
                     }), ep) {
                       let e = Eq(Y);
-                      _$$$.getTeamName({
+                      teamAPIClient.getTeamName({
                         teamId: e
                       }).then(({
                         data: t

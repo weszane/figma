@@ -174,7 +174,7 @@ import { $ as _$$$3 } from '../905/692618';
 import { E as _$$E3 } from '../905/694285';
 import { e0 as _$$e9, qo } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
-import { IT as _$$IT, M4 } from '../905/713695';
+import { IT as _$$IT, liveStoreInstance } from '../905/713695';
 import { z5 as _$$z, Nv } from '../905/713722';
 import { XA } from '../905/714160';
 import { SvgComponent } from '../905/714743';
@@ -354,7 +354,7 @@ import { vt } from '../figma_app/231614';
 import { a as _$$a9 } from '../figma_app/234156';
 import { rM as _$$rM } from '../figma_app/241541';
 import { lS as _$$lS } from '../figma_app/242565';
-import { lR as _$$lR, ue as _$$ue, ku } from '../figma_app/255679';
+import { hasLibraryKeyInSet, styleByKeyQuery, handleResourceQuery } from '../figma_app/255679';
 import { isInteractionPathCheck, isInteractionOrEvalMode } from '../figma_app/897289';
 import { gH, ZF } from '../figma_app/258114';
 import { rG as _$$rG } from '../figma_app/260703';
@@ -4808,7 +4808,7 @@ function oG({
     testId: 'org_trial_pending_overlay'
   });
 }
-let oz = M4.Mutation(async e => {
+let oz = liveStoreInstance.Mutation(async e => {
   await Eh.validateTrial(e);
 });
 let oK = createRemovableAtomFamily(e => transformAtom(ProductTrialsView.Query({
@@ -5849,12 +5849,12 @@ function dR() {
           Object.entries(c).forEach(([t, {
             result: n
           }]) => {
-            n.status === 'loaded' && _$$lR(n.data, r) && e.add(_$$sg(t));
+            n.status === 'loaded' && hasLibraryKeyInSet(n.data, r) && e.add(_$$sg(t));
           });
           Object.entries(a).forEach(([t, {
             result: n
           }]) => {
-            n.status !== 'loaded' || _$$lR(n.data, r) || e.$$delete(_$$sg(t));
+            n.status !== 'loaded' || hasLibraryKeyInSet(n.data, r) || e.$$delete(_$$sg(t));
           });
           dT()(n, e) || i(e);
         }
@@ -5973,7 +5973,7 @@ let dD = atom(e => {
     key: e,
     openFileKey: t
   }));
-  let n = ku(_$$ue, r, e);
+  let n = handleResourceQuery(styleByKeyQuery, r, e);
   return n.data ? dO(n.data) : {};
 });
 let dj = atom(e => {

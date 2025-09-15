@@ -4,7 +4,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { SX } from "../figma_app/199513";
-import { Ah } from "../905/316062";
+import { FolderViewType } from "../905/316062";
 import { KindEnum } from "../905/129884";
 import { rm } from "../905/989969";
 export function $$p0(e) {
@@ -22,7 +22,7 @@ export function $$p0(e) {
     "data-tooltip-timeout-delay": 100,
     "data-tooltip-max-width": 250,
     onClick: () => e.team && t(SX({
-      where: Ah.FileMoveModalV2,
+      where: FolderViewType.FileMoveModalV2,
       team: {
         id: e.team.id,
         name: e.team.name,

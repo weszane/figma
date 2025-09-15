@@ -17,7 +17,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { RCSMessageType } from "../905/135526";
 import { Ho, Ck } from "../figma_app/236178";
 import { zK, Lr, XM, pD, GO, Nn } from "../905/561897";
-import { o3 } from "../figma_app/255679";
+import { hasResourcePresetKeyStatic } from "../figma_app/255679";
 import { $N, fc, Mj, w3, wn, T4, Bt } from "../figma_app/646357";
 import { B as _$$B } from "../905/506188";
 import { QB } from "../905/921418";
@@ -381,7 +381,7 @@ export function $$V1({
     D(t) ? (_(t), u(!0)) : O(t);
   }, [D, C, u, O]);
   let U = `subscription-dropdown-container-${e ? "subflow" : "mainflow"}-${i}`;
-  let V = o3(i);
+  let V = hasResourcePresetKeyStatic(i);
   let Y = getFeatureFlags().buzz_library_subscriptions;
   m = V ? ["Design", "Off"] : ["Off", "AllFiles", "Divider", "Design", "FigJam", "Slides", ...(Y ? ["Buzz"] : [])];
   let q = G(V, !!Y);

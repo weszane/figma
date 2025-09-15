@@ -51,7 +51,7 @@ import { p9, fA, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
 import { e0 as _$$e } from "../905/696396";
 import { AM, pT } from "../905/467351";
@@ -476,7 +476,7 @@ let ti = memo(function ({
       let t = e?.canDelete;
       let i = useSelector(selectOpenFileObject);
       let r = JT();
-      let n = r && r.profile.entityType === o1.TEAM;
+      let n = r && r.profile.entityType === TeamOrgType.TEAM;
       let s = useDispatch();
       let o = useSelector(e => e.repos);
       return () => {
@@ -626,7 +626,7 @@ let ti = memo(function ({
     userCanMove
   } = e3();
   let e8 = JT();
-  let e9 = e8 && e8.profile.entityType === o1.TEAM;
+  let e9 = e8 && e8.profile.entityType === TeamOrgType.TEAM;
   let te = !!eK && userCanTrashFile && !e9;
   let ti = jB({
     files: [{

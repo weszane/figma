@@ -9,7 +9,7 @@ import { ov, Av } from "../figma_app/646357";
 import { k1, vx } from "../905/91038";
 import { O } from "../905/221694";
 import { m0, No } from "../figma_app/141508";
-import { oA } from "../905/71785";
+import { getCurrentHubFileVersionName } from "../905/71785";
 var o = s;
 let f = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.components);
 let _ = createReduxSubscriptionAtomWithState(e => e.library.publishedByLibraryKey.stateGroups);
@@ -43,7 +43,7 @@ let $$I1 = atom(e => {
   for (let e of Object.keys(r)) {
     let i = _$$l(e);
     let a = r[i];
-    a && (t[i] = oA(a));
+    a && (t[i] = getCurrentHubFileVersionName(a));
   }
   return t;
 });

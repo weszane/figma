@@ -4,10 +4,10 @@ import { Button } from "../905/521428";
 import o from "classnames";
 import { l as _$$l } from "../905/745972";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
-import { N, S } from "../905/872825";
-import { a4 } from "../figma_app/321395";
+import { isValueInObject, getValueOrFallback } from "../905/872825";
+import { useSafeRouteStateInstance } from "../figma_app/321395";
 import { LJ } from "../figma_app/930386";
-import { $E } from "../figma_app/805898";
+import { BrowseCategoryRoute } from "../figma_app/805898";
 import { TrackedLink } from "../figma_app/831799";
 var a = o;
 export function $$h1(e, t, r, s) {
@@ -21,7 +21,7 @@ export function $$h1(e, t, r, s) {
     urlSlug: e.text,
     categorySlug: t,
     tagSlug: e.localized_url_slug ?? e.url_slug ?? void 0
-  })) : e.child_categories ? e.child_categories.filter(e => N(e.url_slug, LJ) && "other" !== e.title.toLowerCase()).map(e => ({
+  })) : e.child_categories ? e.child_categories.filter(e => isValueInObject(e.url_slug, LJ) && "other" !== e.title.toLowerCase()).map(e => ({
     to: s.copyWith({
       categorySlug: e.url_slug
     }).href,
@@ -36,9 +36,9 @@ export function $$x0({
   category: e,
   showTags: t = !1
 }) {
-  let r = S(e.url_slug, LJ);
+  let r = getValueOrFallback(e.url_slug, LJ);
   if (!r || e.selected_tag) return null;
-  let o = $$h1(e, r, t, a4($E));
+  let o = $$h1(e, r, t, useSafeRouteStateInstance(BrowseCategoryRoute));
   let x = useRef(null);
   let [f, y] = useState(!1);
   let [g, v] = useState(!1);

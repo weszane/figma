@@ -1,964 +1,1431 @@
+import { InfiniteQueryObserver, isCancelledError, MutationObserver, QueryClient } from '@tanstack/query-core'
+import { produce, setAutoFreeze } from 'immer'
 import { atom } from 'jotai'
+import { atomWithObservable } from 'jotai/utils'
+import { defaults } from 'lodash-es'
 import { useEffect, useMemo } from 'react'
-import { H as _$$H, aX } from '../905/16369'
-import { N7 } from '../905/80725'
-import { AT, q6 } from '../905/155604'
-import { M as _$$M } from '../905/155850'
-import { T as _$$T2 } from '../905/239398'
+import { QueryObserver } from 'react-query'
+import { OPAQUE_RQ_PAGINATED_QUERY, OPAQUE_RQ_QUERY } from '../905/16369'
+import { deepEqualIgnoreKeys } from '../905/80725'
+import { buildSchema, extractNormalizedObjectInfo } from '../905/155604'
+import { setupFileLivestoreManager } from '../905/155850'
+import { createRepoManager } from '../905/239398'
 import { createReduxSubscriptionAtomWithState } from '../905/270322'
-import { ET, F5, j5, ub } from '../905/284406'
-import { g as _$$g2 } from '../905/346780'
+import { createObjectDefMap, filterSpecialValue, LIVESTORE_LOADING, LIVESTORE_TOMBSTONED } from '../905/284406'
+import { setupAdvanceTimers } from '../905/346780'
 import { debugState } from '../905/407919'
 import { observableState } from '../905/441145'
 import { trackEventAnalytics } from '../905/449184'
 import { sendBatchedHistograms, sendBatchedMetrics } from '../905/485103'
 import { RetainedPromiseManager } from '../905/491061'
-import { Y as _$$Y } from '../905/493958'
+import { setupFolderLivestoreManager } from '../905/493958'
 import { waitForVisibility } from '../905/621429'
 import { logError } from '../905/714362'
-import { j as _$$j } from '../905/745286'
-import { p as _$$p2 } from '../905/844455'
+import { createTeamManager } from '../905/844455'
 import { generateUUIDv4 } from '../905/871474'
-import { NU, S8, wQ } from '../905/893701'
+import { denormalizeRoot, normalizeRoot, SchemaLibrary } from '../905/893701'
 import { shouldSampleRequest, XHR } from '../905/910117'
 import { getUserPlan } from '../905/912096'
 import { resourceUtils } from '../905/989992'
 import { atomStoreManager, createCustomAtom, createRemovableAtomFamily, setupAtomWithMount, useAtomWithSubscription } from '../figma_app/27355'
 import { throwTypeError } from '../figma_app/465776'
 import { setupResourceAtomHandler } from '../figma_app/566371'
-import { V$ } from '../figma_app/804490'
+import { realtimeV2 } from '../figma_app/804490'
 import { getFalseValue } from '../figma_app/897289'
-import { $ as _$$$ } from '../vendor/148711'
-import { Ay, ht, jM } from '../vendor/159563'
-import V from '../vendor/181640'
-import { wm } from '../vendor/284502'
-import { E as _$$E } from '../vendor/386379'
-import { _ as _$$_ } from '../vendor/413384'
-import { atomWithObservable } from '../vendor/812047'
-import { z as _$$z } from '../vendor/825643'
 
-let l = atom(new _$$E())
-class m extends Error {
-  constructor(e) {
-    super()
-    this.message = e
+// Original: let l = atom(new QueryClient())
+const queryClientAtom = atom(new QueryClient())
+
+/**
+ * Custom error class for when an object is not found.
+ * Original: class m extends Error
+ */
+class ObjectNotFoundError extends Error {
+  constructor(message: string) {
+    super(message)
     this.name = 'ObjectNotFoundError'
   }
 }
-async function h(e, t, i, n, r) {
-  let a = n.policy || 'cacheFirst'
-  let s = !!r?.enabled
-  if (a === 'cacheFirst' && !s) {
-    let n = e.get(t.atom(i))
-    if (n === ET) {
-      let e = AT(t.objectDef)?.uniqueName
-      throw new m(`Object ${e}:${i} not found`)
+
+/**
+ * Fetches an object from the store based on the given policy and configuration.
+ * Original: async function h(e, t, i, n, r)
+ * @param atomStore - The atom store instance.
+ * @param store - The object store definition.
+ * @param id - The object ID to fetch.
+ * @param options - Fetch options including policy.
+ * @param gremlinConfig - Optional gremlin configuration.
+ * @returns The fetched object data.
+ */
+async function fetchObject(
+  atomStore: any,
+  store: any,
+  id: any,
+  options: { policy?: string },
+  gremlinConfig?: any,
+): Promise<any> {
+  const policy = options.policy || 'cacheFirst'
+  const isGremlinEnabled = !!gremlinConfig?.enabled
+
+  if (policy === 'cacheFirst' && !isGremlinEnabled) {
+    const cached = atomStore.get(store.atom(id))
+    if (cached === LIVESTORE_TOMBSTONED) {
+      const uniqueName = extractNormalizedObjectInfo(store.objectDef)?.uniqueName
+      throw new ObjectNotFoundError(`Object ${uniqueName}:${id} not found`)
     }
-    if (n !== F5)
-      return n
+    if (cached !== LIVESTORE_LOADING) {
+      return cached
+    }
   }
-  let o = await t.fetchObject(i)
-  if (o == null) {
-    let e = AT(t.objectDef)?.uniqueName
-    throw new m(`Object ${e}:${i} not found`)
+
+  const fetchedObject = await store.fetchObject(id)
+  if (fetchedObject == null) {
+    const uniqueName = extractNormalizedObjectInfo(store.objectDef)?.uniqueName
+    throw new ObjectNotFoundError(`Object ${uniqueName}:${id} not found`)
   }
-  t.remoteUpdate({
-    [i]: o,
-  })
-  return o
+
+  store.remoteUpdate({ [id]: fetchedObject })
+  return fetchedObject
 }
-async function g() {
+
+/**
+ * A simple async delay function.
+ * Original: async function g()
+ */
+async function delay(): Promise<void> {
   await 0
 }
-async function f(e, t, i, n = {}, r) {
-  let a
-  if ('write' in i) {
-    let s = e.sub(i, () => { })
-    let o = n.policy || 'cacheFirst'
-    let l = !!r?.enabled
-    o === 'networkOnly' || l
-      ? await t.fetchQuery({
-          queryKey: i.queryKey,
-          queryFn: i.queryFn,
-          staleTime: 0,
-        })
-      : await t.fetchQuery({
-          queryKey: i.queryKey,
-          queryFn: i.queryFn,
-          staleTime: 1 / 0,
-        })
-    await g()
-    a = Promise.resolve(e.get(i))
-    s()
+
+/**
+ * Fetches a query and handles the result based on the atom store and query client.
+ * Original: async function f(e, t, i, n = {}, r)
+ * @param atomStore - The atom store instance.
+ * @param queryClient - The query client instance.
+ * @param queryAtom - The query atom to fetch.
+ * @param options - Fetch options.
+ * @param gremlinConfig - Optional gremlin configuration.
+ * @returns The fetched data or an error.
+ */
+async function fetchQuery(
+  atomStore: any,
+  queryClient: QueryClient,
+  queryAtom: any,
+  options: any = {},
+  gremlinConfig?: any,
+): Promise<any> {
+  let resultPromise: Promise<any>
+
+  if ('write' in queryAtom) {
+    const unsubscribe = atomStore.sub(queryAtom, () => {})
+    const policy = options.policy || 'cacheFirst'
+    const isGremlinEnabled = !!gremlinConfig?.enabled
+
+    if (policy === 'networkOnly' || isGremlinEnabled) {
+      await queryClient.fetchQuery({
+        queryKey: queryAtom.queryKey,
+        queryFn: queryAtom.queryFn,
+        staleTime: 0,
+      })
+    }
+    else {
+      await queryClient.fetchQuery({
+        queryKey: queryAtom.queryKey,
+        queryFn: queryAtom.queryFn,
+        staleTime: Infinity,
+      })
+    }
+
+    await delay()
+    resultPromise = Promise.resolve(atomStore.get(queryAtom))
+    unsubscribe()
   }
   else {
-    if (n.policy)
+    if (options.policy) {
       throw new Error('Not implemented! Please reach out to #a-frontend-platform')
-    a = new Promise((t, n) => {
-      let r = e.get(i)
-      if (r.status !== 'loading') {
-        t(r)
+    }
+
+    resultPromise = new Promise((resolve, reject) => {
+      const currentResult = atomStore.get(queryAtom)
+      if (currentResult.status !== 'loading') {
+        resolve(currentResult)
         return
       }
-      let a = setTimeout(() => {
-        s()
-        n(new Error('fetchQuery timed out'))
-      }, 5e3)
-      let s = e.sub(i, () => {
-        let n = e.get(i)
-        n.status !== 'loading' && (clearTimeout(a), s(), t(n))
+
+      const unsubscribe = atomStore.sub(queryAtom, () => {
+        const updatedResult = atomStore.get(queryAtom)
+        if (updatedResult.status !== 'loading') {
+          clearTimeout(timeoutId)
+          unsubscribe()
+          resolve(updatedResult)
+        }
       })
+
+      const timeoutId = setTimeout(() => {
+        unsubscribe()
+        reject(new Error('fetchQuery timed out'))
+      }, 5000)
     })
   }
-  let s = await a
-  if (s.status === 'loading' || s.status === 'disabled') {
-    logError('LiveStore', `fetchQuery encountered "${s.status}" status`, {}, {
-      reportAsSentryError: !0,
+
+  const result = await resultPromise
+  if (result.status === 'loading' || result.status === 'disabled') {
+    logError('LiveStore', `fetchQuery encountered "${result.status}" status`, {}, {
+      reportAsSentryError: true,
     })
-    return new Error(`fetchQuery encountered "${s.status}" status`)
+    return new Error(`fetchQuery encountered "${result.status}" status`)
   }
-  if (s.status !== 'errors')
-    return s.data
-  throw s.errors
+
+  if (result.status !== 'errors') {
+    return result.data
+  }
+
+  throw result.errors
 }
-function b(e, t, i, n) {
-  let r = atom(() => new WeakMap())
-  let a = atom(0)
-  let s = Symbol()
-  let l = atom((n) => {
-    n(a)
-    let o = t(n)
-    let l = e(n)
-    let d = n(r)
-    let c = d.get(o)
-    c
-      ? (c[s] = !0, c.setOptions(l, {
-          listeners: !1,
-        }), delete c[s])
-      : (c = i(o, l), d.set(o, c))
-    return c
-  })
-  let d = atom((e) => {
-    let t = e(l)
-    let i = {
-      subscribe: (e) => {
-        let i = (i) => {
-          let n = () => e.next(i)
-          t[s] ? Promise.resolve().then(n) : n()
-        }
-        let n = t.subscribe(i)
-        i(t.getCurrentResult())
-        return {
-          unsubscribe: n,
-        }
-      },
+
+/**
+ * Creates atoms for managing query observers with observable behavior.
+ * Original: function b(e, t, i, n)
+ * @param queryOptionsFn - Function to get query options.
+ * @param contextFn - Function to get context.
+ * @param observerFactory - Factory for creating observers.
+ * @param actionHandler - Handler for actions.
+ * @returns A tuple of atoms for the query.
+ */
+function createQueryAtoms(
+  queryOptionsFn: any,
+  contextFn: any,
+  observerFactory: any,
+  actionHandler: any,
+): [any, any] {
+  const observersMapAtom = atom(() => new WeakMap())
+  const updateCounterAtom = atom(0)
+  const uniqueSymbol = Symbol('')
+
+  const observerAtom = atom((get) => {
+    get(updateCounterAtom)
+    const context = contextFn(get)
+    const options = queryOptionsFn(get)
+    const observersMap = get(observersMapAtom)
+    let observer = observersMap.get(context)
+
+    if (observer) {
+      observer[uniqueSymbol] = true
+      observer.setOptions(options, { listeners: false })
+      delete observer[uniqueSymbol]
     }
-    return atomWithObservable(() => i, {
-      initialValue: t.getCurrentResult(),
-    })
+    else {
+      observer = observerFactory(context, options)
+      observersMap.set(context, observer)
+    }
+
+    return observer
   })
-  let c = atom((e) => {
-    let t = e(d)
-    return e(t)
-  }, (e, i, s) => {
-    let o = e(l)
-    let d = t(e)
-    return n(s, o, () => {
-      e(r).$$delete(d)
-      i(a, e => e + 1)
-    }, d)
-  })
-  let u = atom((t) => {
-    e(t)
-    let i = t(l)
-    let n = {
-      subscribe: (e) => {
-        let t = (t) => {
-          if (t.isSuccess && void 0 !== t.data || t.isError && !wm(t.error)) {
-            let n = () => e.next(t)
-            i[s] ? Promise.resolve().then(n) : n()
+
+  const observableAtom = atom((get) => {
+    const observer = get(observerAtom)
+    const observable = {
+      subscribe: (subscriber: any) => {
+        const notify = (result: any) => {
+          const next = () => subscriber.next(result)
+          if (observer[uniqueSymbol]) {
+            Promise.resolve().then(next)
+          }
+          else {
+            next()
           }
         }
-        let n = i.subscribe(t)
-        t(i.getCurrentResult())
-        return {
-          unsubscribe: n,
-        }
+        const subscription = observer.subscribe(notify)
+        notify(observer.getCurrentResult())
+        return { unsubscribe: subscription }
       },
     }
-    return atomWithObservable(() => n)
+    return atomWithObservable(() => observable, {
+      initialValue: observer.getCurrentResult(),
+    })
   })
-  let p = (e) => {
-    if (e.error)
-      throw e.error
-    return e.data
+
+  const resultAtom = atom(
+    (get) => {
+      const observableResult = get(observableAtom)
+      return get(observableResult)
+    },
+    (get, set, action) => {
+      const observer = get(observerAtom)
+      const context = contextFn(get)
+      return actionHandler(action, observer, () => {
+        get(observersMapAtom).delete(context)
+        set(updateCounterAtom, count => count + 1)
+      }, context)
+    },
+  )
+
+  const promiseAtom = atom((get) => {
+    const observer = get(observerAtom)
+    const observable = {
+      subscribe: (subscriber: any) => {
+        const notify = (result: any) => {
+          if ((result.isSuccess && result.data !== undefined) || (result.isError && !isCancelledError(result.error))) {
+            const next = () => subscriber.next(result)
+            if (observer[uniqueSymbol]) {
+              Promise.resolve().then(next)
+            }
+            else {
+              next()
+            }
+          }
+        }
+        const subscription = observer.subscribe(notify)
+        notify(observer.getCurrentResult())
+        return { unsubscribe: subscription }
+      },
+    }
+    return atomWithObservable(() => observable)
+  })
+
+  const extractData = (result: any) => {
+    if (result.error) {
+      throw result.error
+    }
+    return result.data
   }
-  return [atom((e) => {
-    let t = e(u)
-    let i = e(t)
-    return i instanceof Promise ? i.then(p) : p(i)
-  }, (e, t, i) => t(c, i)), c]
+
+  return [
+    atom(
+      (get) => {
+        const promiseResult = get(promiseAtom)
+        const resolved = get(promiseResult)
+        return resolved instanceof Promise ? resolved.then(extractData) : extractData(resolved)
+      },
+      (get, set, action) => set(resultAtom, action),
+    ),
+    resultAtom,
+  ]
 }
-let E = 0
-class S {
-  constructor(e) {
-    this.processBatch = e
+
+// Original: let E = 0
+let queryKeyCounter = 0
+
+/**
+ * Batch processor for operations.
+ * Original: class S
+ */
+class BatchProcessor {
+  constructor(private processBatch: (operations: any[]) => void) {
     this.batchedOperations = []
   }
 
-  enqueue(e) {
-    this.batchedOperations.push(e)
+  private batchedOperations: any[]
+
+  enqueue(operation: any): void {
+    this.batchedOperations.push(operation)
     Promise.resolve().then(() => {
       this.processBatch(this.batchedOperations)
       this.batchedOperations = []
     })
   }
 }
-class w {
-  constructor(e) {
-    this.stores = e
+
+/**
+ * Manager for object stores with batching.
+ * Original: class w
+ */
+class ObjectStoreManager {
+  constructor(private stores: any) {
     this.resolutions = []
-    let t = new S(e => this.processBatch(e))
-    for (let i of (_$$j(this), Object.keys(e))) {
-      let n = new C(e[i], t)
-      this[i] = n
+    const batchProcessor = new BatchProcessor(ops => this.processBatch(ops))
+    for (const key of Object.keys(stores)) {
+      const storeProxy = new StoreProxy(stores[key], batchProcessor)
+      this[key] = storeProxy
     }
   }
 
-  processBatch(e) {
-    let t = {}
-    for (let i of e) {
-      let e = AT(i.store.objectDef).uniqueName
-      t[e] = t[e] || []
-      t[e].push(i)
+  private resolutions: any[]
+
+  private processBatch(operations: any[]): void {
+    const groupedOps: any = {}
+    for (const op of operations) {
+      const uniqueName = extractNormalizedObjectInfo(op.store.objectDef).uniqueName
+      groupedOps[uniqueName] = groupedOps[uniqueName] || []
+      groupedOps[uniqueName].push(op)
     }
-    for (let [e, i] of Object.entries(t)) {
-      let t = this.stores[e]
-      let n = {}
-      for (let e of i) {
-        n[e.id] = n[e.id] || []
-        n[e.id].push(e)
+
+    for (const [name, ops] of Object.entries(groupedOps)) {
+      const store = this.stores[name]
+      const groupedById: any = {}
+      for (const op of ops as any[]) {
+        groupedById[op.id] = groupedById[op.id] || []
+        groupedById[op.id].push(op)
       }
-      this.resolutions.push(t.optimisticUpdate(n))
+      this.resolutions.push(store.optimisticUpdate(groupedById))
     }
   }
 
-  registerPromise(e) {
-    e.then(() => {
-      for (let e of this.resolutions) e('COMMIT')
-      this.resolutions = []
-    }).catch((e) => {
-      for (let e of this.resolutions) e('REJECT')
-      this.resolutions = []
+  registerPromise(promise: Promise<any>): void {
+    promise
+      .then(() => {
+        for (const resolution of this.resolutions) resolution('COMMIT')
+        this.resolutions = []
+      })
+      .catch(() => {
+        for (const resolution of this.resolutions) resolution('REJECT')
+        this.resolutions = []
+      })
+  }
+}
+
+/**
+ * Proxy for a single store with batching.
+ * Original: class C
+ */
+class StoreProxy {
+  constructor(private store: any, private batch: BatchProcessor) {}
+
+  update(id: any, updater: any): void {
+    this.batch.enqueue({
+      type: 'UPDATE',
+      id,
+      update: (data: any) =>
+        typeof updater === 'function' ? produce(data, updater) : updater,
+      store: this.store,
     })
   }
-}
-class C {
-  constructor(e, t) {
-    this.store = e
-    this.batch = t
-    this.update = (e, t) => {
-      this.batch.enqueue({
-        type: 'UPDATE',
-        id: e,
-        update: e => typeof t == 'function'
-          ? jM(e, (e) => {
-              t(e)
-            })
-          : e,
-        store: this.store,
-      })
-    }
-    this.create = () => {
-      throw new Error('Not implemented')
-    }
-    this.$$delete = (e) => {
-      throw new Error('Not implemented')
-    }
+
+  create(): void {
+    throw new Error('Not implemented')
+  }
+
+  delete(_id?: any): void {
+    throw new Error('Not implemented')
   }
 }
-class k {
-  constructor(e) {
-    this.client = e
+
+/**
+ * Manager for query mutations with rollback and invalidation.
+ * Original: class k
+ */
+class QueryMutationManager {
+  constructor(private client: QueryClient) {
     this.invalidations = new Set()
     this.changes = new Set()
-    this.registerPromise = (e) => {
-      e.then(() => {
-        this.invalidate()
-      }).catch((e) => {
-        this.revert()
-      }).$$finally(() => {
-        this.changes.clear()
-      })
-    }
   }
 
-  mutate(e, t) {
-    let i
-    let n = this.client.getQueryData(e.queryKey)
-    let r = this.client.getQueryState(e.queryKey)
-    if (!n) {
-      r?.fetchStatus === 'fetching' && this.invalidations.add({
-        query: e,
-        queryState: r,
-      })
+  private invalidations: Set<any>
+  private changes: Set<any>
+
+  registerPromise(promise: Promise<any>): void {
+    promise
+      .then(() => this.invalidate())
+      .catch(() => this.revert())
+      .finally(() => this.changes.clear())
+  }
+
+  mutate(query: any, updater: any): void {
+    const currentData = this.client.getQueryData(query.queryKey) as ObjectOf
+    const queryState = this.client.getQueryState(query.queryKey)
+
+    if (!currentData) {
+      if (queryState?.fetchStatus === 'fetching') {
+        this.invalidations.add({ query, queryState })
+      }
       return
     }
-    let a = generateUUIDv4()
-    typeof t == 'function' ? (ht(!1), i = jM(n, e => t(e)), ht(!0)) : i = t
-    Object.assign(i, {
-      _version: a,
-    })
-    Object.defineProperty(i, '_version', {
-      enumerable: !1,
-    })
-    this.client.setQueryData(e.queryKey, i)
+
+    const version = generateUUIDv4()
+    let newData: any
+    if (typeof updater === 'function') {
+      setAutoFreeze(false)
+      newData = produce(currentData, updater)
+      setAutoFreeze(true)
+    }
+    else {
+      newData = updater
+    }
+
+    Object.assign(newData, { _version: version })
+    Object.defineProperty(newData, '_version', { enumerable: false })
+
+    this.client.setQueryData(query.queryKey, newData)
     this.changes.add({
-      query: e,
-      version: a,
-      queryState: r,
-      rollback: {
-        ...n,
-      },
+      query,
+      version,
+      queryState,
+      rollback: { ...currentData },
     })
   }
 
-  revert() {
-    [...this.changes].reverse().forEach((e) => {
-      this.client.setQueryData(e.query.queryKey, t => '_version' in t && t._version === e.version ? e.rollback : t)
+  private revert(): void {
+    [...this.changes].reverse().forEach((change) => {
+      this.client.setQueryData<ObjectOf>(change.query.queryKey, data =>
+        '_version' in data && data._version === change.version ? change.rollback : data)
     })
   }
 
-  refetch(e) {
-    return this.client.invalidateQueries(e.queryKey)
+  refetch(queryKey: any): Promise<any> {
+    return this.client.invalidateQueries(queryKey)
   }
 
-  invalidate() {
-    [...this.changes.values(), ...this.invalidations.values()].filter(e => e.queryState?.fetchStatus === 'fetching').forEach((e) => {
-      let t = this.client.getQueryState(e.query.queryKey)
-      t?.fetchStatus === 'fetching' && this.client.cancelQueries(e.query.queryKey)
-      this.client.invalidateQueries(e.query.queryKey)
-    })
+  private invalidate(): void {
+    [...this.changes, ...this.invalidations]
+      .filter(item => item.queryState?.fetchStatus === 'fetching')
+      .forEach((item) => {
+        const state = this.client.getQueryState(item.query.queryKey)
+        if (state?.fetchStatus === 'fetching') {
+          this.client.cancelQueries(item.query.queryKey)
+        }
+        this.client.invalidateQueries(item.query.queryKey)
+      })
   }
 }
-function D(e, t, i, n) {
-  e[t] || (e[t] = {})
-  e[t][i] || (e[t][i] = n)
+
+/**
+ * Sets a nested property in an object if it doesn't exist.
+ * Original: function D(e, t, i, n)
+ * @param obj - The object to modify.
+ * @param key1 - First level key.
+ * @param key2 - Second level key.
+ * @param value - Value to set.
+ */
+function setNestedProperty(obj: any, key1: string, key2: string, value: any): void {
+  obj[key1] = obj[key1] || {}
+  obj[key1][key2] = obj[key1][key2] || value
 }
-function L(e, t, i, r, a) {
-  let s
-  let o
-  let l
-  let d = atom(null)
-  let c = atom(0)
-  s = () => {
-    r.set(c, e => e + 1)
+
+/**
+ * Creates a normalized atom for schema-based data handling.
+ * Original: function L(e, t, i, n, r)
+ * @param sourceAtom - The source atom.
+ * @param schema - The schema for normalization.
+ * @param stores - Object stores.
+ * @param atomStoreManager - Atom store manager.
+ * @param syncObjects - Whether to sync objects.
+ * @returns The normalized atom.
+ */
+function createNormalizedAtom(
+  sourceAtom: any,
+  schema: any,
+  stores: any,
+  atomStoreManager: any,
+  syncObjects: boolean,
+): any {
+  let triggerUpdate: () => void
+  let updateCount = 0
+  let deferredUpdate = false
+
+  const normalizedResultAtom = atom(null)
+  const updateTriggerAtom = atom(0)
+
+  triggerUpdate = () => {
+    atomStoreManager.set(updateTriggerAtom, (count: number) => count + 1)
   }
-  o = 0
-  l = !1
-  let u = () => {
-    ++o == 1 && Promise.resolve().then(() => {
-      l && s()
-      o = 0
-      l = !1
-    })
-    o <= 3 ? s() : l = !0
+
+  const scheduleUpdate = () => {
+    updateCount += 1
+    if (updateCount === 1) {
+      Promise.resolve().then(() => {
+        if (deferredUpdate)
+          triggerUpdate()
+        updateCount = 0
+        deferredUpdate = false
+      })
+    }
+    if (updateCount <= 3) {
+      triggerUpdate()
+    }
+    else {
+      deferredUpdate = true
+    }
   }
-  let p = new Map()
-  let m = new Map()
-  let h = (e) => {
-    let [n, s] = (function (e, t) {
-      t.zodSchema.safeParse(e).success
-      let {
-        entities,
-        result,
-      } = S8(e, t.normalizrSchema)
+
+  const syncSubscriptions = new Map()
+  const hydrationSubscriptions = new Map()
+
+  const applyUpdate = (data: any) => {
+    const [entities, result] = (() => {
+      schema.zodSchema.safeParse(data)
+      const { entities, result } = normalizeRoot(data, schema.normalizrSchema)
       return [entities, result]
-    }(e, t))
-    r.set(d, s);
-    (function (e, t, i, n, r) {
-      for (let a in e) {
-        let s = e[a]
-        if (!s)
-          continue
-        let o = i[a]
-        for (let e of Object.keys(s)) {
-          if (!t.get(`${a}-${e}`)) {
-            let i = n.sub(o.atom(e), r)
-            i && t.set(`${a}-${e}`, i)
+    })()
+
+    atomStoreManager.set(normalizedResultAtom, result)
+
+    // Hydration logic
+    const hydratedEntities = buildHydratedEntities(result, schema.normalizrSchema, stores, atomStoreManager, { hydrate: false })
+    for (const [key, entityMap] of Object.entries(hydratedEntities)) {
+      const store = stores[key]
+      for (const entityId of Object.keys(entityMap)) {
+        if (!hydrationSubscriptions.get(`${key}-${entityId}`)) {
+          const unsub = atomStoreManager.sub(store.atom(entityId), scheduleUpdate)
+          if (unsub)
+            hydrationSubscriptions.set(`${key}-${entityId}`, unsub)
+        }
+      }
+    }
+
+    // Remote updates
+    for (const [storeKey, entityData] of Object.entries(entities)) {
+      stores[storeKey].remoteUpdate(entityData)
+    }
+
+    if (syncObjects) {
+      // Sync logic
+      for (const [storeKey, entityMap] of Object.entries(entities)) {
+        const store = stores[storeKey]
+        for (const [entityId, entity] of Object.entries(entityMap)) {
+          if (!syncSubscriptions.get(`${storeKey}-${entityId}`)) {
+            const syncUnsub = store.syncObject?.(entity, entityId, store)
+            if (syncUnsub)
+              syncSubscriptions.set(`${storeKey}-${entityId}`, syncUnsub)
           }
         }
       }
-    })(F(s, t.normalizrSchema, i, r, {
-      hydrate: !1,
-    }), m, i, r, u);
-    (function (e, t) {
-      for (let i in e) t[i].remoteUpdate(e[i])
-    })(n, i)
-    a && (function (e, t, i) {
-      for (let n in e) {
-        if (!e[n])
-          continue
-        let r = i[n]
-        for (let [i, a] of Object.entries(e[n])) {
-          if (!t.get(`${n}-${i}`)) {
-            let e = r.syncObject?.(a, i, r)
-            e && t.set(`${n}-${i}`, e)
-          }
-        }
+    }
+  }
+
+  return setupAtomWithMount(
+    atom<any, { type: string, data: any }[], void>(
+      (get) => {
+        const result = get(normalizedResultAtom)
+        get(updateTriggerAtom)
+        if (!result)
+          return
+        const hydrated = buildHydratedEntities(result, schema.normalizrSchema, stores, atomStoreManager)
+        return denormalizeRoot(result, schema.normalizrSchema, hydrated)
+      },
+      (get, set, action) => {
+        if (action.type !== 'REMOTE_UPDATE')
+          return set(sourceAtom, action)
+        applyUpdate(action.data)
+      },
+    ),
+    () => {
+      const onSourceUpdate = () => {
+        const data = atomStoreManager.get(sourceAtom)
+        if (data)
+          applyUpdate(data)
       }
-    }(n, p, i))
-  }
-  return setupAtomWithMount(atom((e) => {
-    let n = e(d)
-    if (e(c), !n)
-      return
-    let a = F(n, t.normalizrSchema, i, r)
-    return NU(n, t.normalizrSchema, a)
-  }, (t, i, n) => {
-    if (n.type !== 'REMOTE_UPDATE')
-      return i(e, n)
-    h(n.data)
-  }), () => {
-    let t = () => {
-      let t = r.get(e)
-      t && h(t)
-    }
-    let i = r.sub(e, t)
-    t()
-    return () => {
-      for (let e of (i(), p.values())) e()
-      for (let e of m.values()) e()
-      p.clear()
-      m.clear()
-    }
-  })
+      const unsubSource = atomStoreManager.sub(sourceAtom, onSourceUpdate)
+      onSourceUpdate()
+      return () => {
+        unsubSource()
+        for (const unsub of syncSubscriptions.values()) unsub()
+        for (const unsub of hydrationSubscriptions.values()) unsub()
+        syncSubscriptions.clear()
+        hydrationSubscriptions.clear()
+      }
+    },
+  )
 }
-function F(e, t, i, n, {
-  hydrate: r = !0,
-} = {}, a = {}) {
-  if (e == null)
-    return a
-  if (t instanceof wQ.Entity) {
-    let s = i[t.key]
-    if (e) {
-      let i = s.atom(e)
-      let o = r ? n.get(i) : null
-      o === F5 ? D(a, t.key, e, null) : o === ET ? D(a, t.key, e, null) : D(a, t.key, e, o)
+
+/**
+ * Builds hydrated entities from normalized data.
+ * Original: function F(e, t, i, n, { hydrate: r = !0 } = {}, a = {})
+ * @param data - The data to hydrate.
+ * @param schema - The schema.
+ * @param stores - Object stores.
+ * @param atomStoreManager - Atom store manager.
+ * @param options - Hydration options.
+ * @param accumulator - Accumulator object.
+ * @returns The hydrated entities.
+ */
+function buildHydratedEntities(
+  data: any,
+  schema: any,
+  stores: any,
+  atomStoreManager: any,
+  options: { hydrate?: boolean } = {},
+  accumulator: any = {},
+): any {
+  const { hydrate = true } = options
+
+  if (data == null)
+    return accumulator
+
+  if (schema instanceof SchemaLibrary.Entity) {
+    const store = stores[schema.key]
+    if (data) {
+      const atomKey = store.atom(data)
+      const cached = hydrate ? atomStoreManager.get(atomKey) : null
+      if (cached === LIVESTORE_LOADING || cached === LIVESTORE_TOMBSTONED) {
+        setNestedProperty(accumulator, schema.key, data, null)
+      }
+      else {
+        setNestedProperty(accumulator, schema.key, data, cached)
+      }
     }
   }
-  else if (t instanceof wQ.Array) {
-    for (let s of e) {
-      F(s, t.schema, i, n, {
-        hydrate: r,
-      }, a)
+  else if (schema instanceof SchemaLibrary.Array) {
+    for (const item of data) {
+      buildHydratedEntities(item, schema.schema, stores, atomStoreManager, { hydrate }, accumulator)
     }
   }
-  else if (t instanceof wQ.Object) {
-    for (let s in t.schema) {
-      F(e[s], t.schema[s], i, n, {
-        hydrate: r,
-      }, a)
+  else if (schema instanceof SchemaLibrary.Object) {
+    for (const key in schema.schema) {
+      buildHydratedEntities(data[key], schema.schema[key], stores, atomStoreManager, { hydrate }, accumulator)
     }
   }
-  return a
+
+  return accumulator
 }
-class G {
-  constructor(e, t = {}, i = new Set()) {
-    this._reporter = null
-    this.uniqueQueryKeys = new Set()
-    this.registerQueryAtomFamily = (e) => {
-      this._queryAtomFamilies.add(e)
-    }
-    this._atomStore = e
+// Original: class G
+/**
+ * Represents the context for query providers, managing atom store, query client, object stores, and metrics reporting.
+ * Original class name: G
+ */
+class QueryProviderContext {
+  private _reporter: any = null
+  private _atomStore: any
+  private _queryClient: QueryClient
+  private _objectStores: any
+  private _queryAtomFamilies: Set<any>
+  private _gremlinConfig?: any
+
+  /**
+   * Constructs a new QueryProviderContext.
+   * @param atomStore - The atom store instance.
+   * @param objectStores - Object stores configuration.
+   * @param queryAtomFamilies - Set of query atom families.
+   */
+  constructor(atomStore: any, objectStores: any = {}, queryAtomFamilies: Set<any> = new Set()) {
+    this._atomStore = atomStore
     this._queryClient = this.createQueryClient()
-    this._objectStores = this.buildStores(t)
-    this._queryAtomFamilies = i
+    this._objectStores = this.buildStores(objectStores)
+    this._queryAtomFamilies = queryAtomFamilies
   }
 
-  set gremlinConfig(e) {
-    this._gremlinConfig = e
+  /**
+   * Sets the gremlin configuration.
+   * @param config - The gremlin config.
+   */
+  set gremlinConfig(config: any) {
+    this._gremlinConfig = config
   }
 
-  createQueryClient() {
-    return new _$$E({
+  /**
+   * Creates a new QueryClient with default options.
+   * @returns The QueryClient instance.
+   */
+  private createQueryClient(): QueryClient {
+    return new QueryClient({
       defaultOptions: {
         queries: {
-          retry: !1,
+          retry: false,
           networkMode: 'always',
-          structuralSharing: !1,
-          refetchOnWindowFocus: !1,
+          structuralSharing: false,
+          refetchOnWindowFocus: false,
         },
       },
     })
   }
 
-  get gremlinConfig() {
+  /**
+   * Gets the gremlin configuration.
+   * @returns The gremlin config.
+   */
+  get gremlinConfig(): any {
     return this._gremlinConfig
   }
 
-  buildStores(e) {
-    if (!e)
+  /**
+   * Builds object stores from the provided configuration.
+   * @param storesConfig - The stores configuration.
+   * @returns The built object stores.
+   */
+  private buildStores(storesConfig: any): any {
+    if (!storesConfig)
       return {}
-    let t = {}
-    for (let i in e) {
-      let n = e[i]
-      let {
-        uniqueName,
-      } = AT(n.objectDef)
-      if (i !== uniqueName)
-        throw new Error(`Mismatched type name for object def ${i} vs. ${uniqueName}}`)
-      t[i] = n
+    const stores: any = {}
+    for (const key in storesConfig) {
+      const store = storesConfig[key]
+      const { uniqueName } = extractNormalizedObjectInfo(store.objectDef)
+      if (key !== uniqueName) {
+        throw new Error(`Mismatched type name for object def ${key} vs. ${uniqueName}`)
+      }
+      stores[key] = store
     }
-    return t
+    return stores
   }
 
-  get queryAtomFamilies() {
+  /**
+   * Gets the query atom families.
+   * @returns The set of query atom families.
+   */
+  get queryAtomFamilies(): Set<any> {
     return this._queryAtomFamilies
   }
 
-  set queryAtomFamilies(e) {
-    this._queryAtomFamilies = e
+  /**
+   * Sets the query atom families.
+   * @param families - The set of query atom families.
+   */
+  set queryAtomFamilies(families: Set<any>) {
+    this._queryAtomFamilies = families
   }
 
-  get atomStore() {
+  /**
+   * Gets the atom store.
+   * @returns The atom store.
+   */
+  get atomStore(): any {
     return this._atomStore
   }
 
-  set atomStore(e) {
-    this._atomStore = e
+  /**
+   * Sets the atom store.
+   * @param store - The atom store.
+   */
+  set atomStore(store: any) {
+    this._atomStore = store
   }
 
-  get objectStores() {
+  /**
+   * Gets the object stores.
+   * @returns The object stores.
+   */
+  get objectStores(): any {
     return this._objectStores
   }
 
-  get reporter() {
+  /**
+   * Gets the reporter.
+   * @returns The reporter.
+   */
+  get reporter(): any {
     return this._reporter
   }
 
-  set reporter(e) {
-    this._reporter = e
+  /**
+   * Sets the reporter.
+   * @param reporter - The reporter instance.
+   */
+  set reporter(reporter: any) {
+    this._reporter = reporter
   }
 
-  get queryClient() {
+  /**
+   * Gets the query client.
+   * @returns The QueryClient instance.
+   */
+  get queryClient(): QueryClient {
     return this._queryClient
   }
 
-  set queryClient(e) {
-    this._queryClient = e
+  /**
+   * Sets the query client.
+   * @param client - The QueryClient instance.
+   */
+  set queryClient(client: QueryClient) {
+    this._queryClient = client
+  }
+
+  /**
+   * Registers a query atom family.
+   * @param family - The query atom family to register.
+   */
+  registerQueryAtomFamily(family: any): void {
+    this._queryAtomFamilies.add(family)
   }
 }
-class z {
-  constructor(e, t = () => ({}), i) {
-    let r
-    let a
-    let s
-    let o
-    let d
-    this.extrasProvider = t
-    this.getQueryContext = () => this.queryProviderContext
-    this.Query = (r = this.extrasProvider, a = this.getQueryContext, e => (function (e, t, i) {
-      if (e.key && i().uniqueQueryKeys.add(e.key), void 0 !== e.refetchIntervalMs && e.refetchIntervalMs < 1e3)
-        throw new Error(`\u26D4\uFE0F Whoa there! You're trying to poll a query every ${e.refetchIntervalMs}ms -- that's probably much faster than you actually want. Please use a value of at least 1000ms, or reach out to #a-frontend-platform if you have a different use case.`)
-      let r = createRemovableAtomFamily((a) => {
-        let s = t()
-        let o = [++E]
-        let d = !e.enabled || e.enabled(a)
-        let c = new RetainedPromiseManager(() => atomStoreManager.sub(w, () => { }))
-        let m = async () => {
-          getFalseValue() || (await waitForVisibility())
-          let t = e.fetch(a, s)
-          let n = e.key ? i().reporter?.reportQueryRequested(e.key) : null
-          t.then(() => {
-            n?.('success')
-            c.resolve()
-          }).catch((e) => {
-            n?.('error')
-            c.reject(e)
-          })
-          return t
-        }
-        let [, h] = (function (e, t = e => e(l)) {
-          return b(e, t, (e, t) => new _$$$(e, t), async (e, t, i) => {
-            if (e.type === 'refetch') {
-              await waitForVisibility()
-              return t.refetch({
-                cancelRefetch: !1,
-              })
-            }
-            throwTypeError(e.type)
-          })
-        }(t => ({
-          queryKey: o,
-          queryFn: m,
-          refetchInterval: e.refetchIntervalMs,
-          refetchIntervalInBackground: !1,
-          enabled: d,
-          staleTime: 1 / 0,
-          cacheTime: 1 / 0,
-        })))
-        let g = e.stalenessPolicy || 'onUnmount'
-        let f = e.gcPolicy || 'default'
-        h = setupAtomWithMount(h, ({
-          setSelf: e,
-        }) => (g === 'onUnmount' && d && e({
-          type: 'refetch',
-        }), () => {
-          g === 'onUnmount' && i().queryClient.invalidateQueries({
-            queryKey: o,
-            exact: !0,
-            refetchType: 'none',
-          })
-          f === 'onUnmount' && (i().queryClient.removeQueries({
-            queryKey: o,
-            exact: !0,
-          }), r.setShouldRemove((e, t) => t === a), r.setShouldRemove(null))
-        }))
-        let _ = atom(e => e(h).data, (e, t, n) => {
-          if (n.type !== 'REMOTE_UPDATE')
-            return t(h, n)
-          i().queryClient.setQueryData(o, n.data)
-        })
-        let A = i().objectStores
-        let y = e.schema && q6(e.schema, j5(A))
-        if (y?.requiresNormalization && (_ = L(_, y, A, atomStoreManager, !!e.syncObjects)), e.sync) {
-          let t = _
-          _ = setupAtomWithMount(t, () => e.sync(a, {
-            ...s,
-            mutate: (e) => {
-              let i = Ay(atomStoreManager.get(t), (t) => {
-                void 0 !== t && e(t)
-              })
-              void 0 !== i && atomStoreManager.set(t, {
-                type: 'REMOTE_UPDATE',
-                data: i,
-              })
-            },
-          }))
-        }
-        let S = createCustomAtom(_, (t) => {
-          let {
-            output,
-          } = e
-          let n = t(_)
-          return output
-            ? void 0 === n
-              ? void 0
-              : output({
-                  data: n,
-                  get: t,
-                  args: a,
-                }, s)
-            : n
-        })
-        let w = createCustomAtom(S, e => (function (e, t, i, n) {
-          let r = e(i)
-          if (!n.enabled)
-            return resourceUtils.disabledSuspendable(n.suspenseContext)
-          let a = e(t)
-          switch (r.status) {
-            case 'loading':
-              return resourceUtils.loadingSuspendable(n.suspenseContext)
-            case 'error':
-              return resourceUtils.errorSuspendable(r.error, n.suspenseContext)
-            case 'success':
-              if (void 0 === a)
-                return resourceUtils.loadingSuspendable(n.suspenseContext)
-              return resourceUtils.loadedSuspendable(a, r.error || [], n.suspenseContext)
-            default:
-              throwTypeError(r)
-          }
-        }(e, S, h, {
-          enabled: d,
-          suspenseContext: c,
-        })))
-        return Object.assign(w, {
-          queryKey: o,
-          queryFn: m,
-          __OPAQUE_RQ_QUERY__: _$$H,
-        })
-      }, N7)
-      return e => (i().registerQueryAtomFamily(r), r(e))
-    }(e, r, a)))
-    this.PaginatedQuery = (s = this.extrasProvider, o = this.getQueryContext, e => (function (e, t, i) {
-      let r = createRemovableAtomFamily((r) => {
-        let a = t()
-        let s = [++E]
-        let o = !e.enabled || e.enabled(r)
-        let [, d] = (function (e, t = e => e(l)) {
-          return b(e, t, (e, t) => new _$$z(e, t), (e, t, i, n) => {
-            if (e.type === 'refetch') {
-              return t.refetch({
-                refetchPage: (e, t) => t === 0,
-              }).then(e => (n.setQueryData(t.options.queryKey, e => e
-                ? {
-                    pages: e.pages.slice(0, 1),
-                    pageParams: e.pageParams.slice(0, 1),
-                  }
-                : e), e))
-            }
-            if (e.type === 'refetch__UNUSED')
-              return t.refetch(e.options)
-            if (e.type === 'fetchNextPage') {
-              let i = V(e.options || {}, {
-                cancelRefetch: !1,
-              })
-              return t.fetchNextPage(i)
-            }
-            if (e.type === 'fetchPreviousPage') {
-              let i = V(e.options || {}, {
-                cancelRefetch: !1,
-              })
-              return t.fetchPreviousPage(i)
-            }
-            throwTypeError(e)
-          })
-        }(t => ({
-          queryKey: s,
-          queryFn: async (t) => {
-            getFalseValue() || (await waitForVisibility())
-            let i = {
-              pageParam: t.pageParam,
-              ...a,
-            }
-            return await e.fetch(r, i)
-          },
-          getNextPageParam: e => e.nextPage,
-          getPreviousPageParam: e => e.prevPage,
-          enabled: o,
-          staleTime: 1 / 0,
-        })))
-        d = setupAtomWithMount(d, ({
-          setSelf: e,
-        }) => {
-          o && e({
-            type: 'refetch',
-          })
-        })
-        let c = []
-        let m = atom((e) => {
-          let t = e(d).data?.pages || []
-          let i = t?.map((e, t) => (c[t] || (c[t] = atom(e => e(d).data?.pages[t]?.data, () => { })), c[t]))
-          c.length > t.length && c.splice(t.length, c.length - t.length)
-          return i
-        }, (e, t, n) => {
-          if (n.type !== 'REMOTE_UPDATE')
-            return t(d, n)
-          i().queryClient.setQueryData(s, e => ({
-            pages: n.data,
-            pageParams: e?.pageParams || [],
-          }))
-        })
-        let h = i().objectStores
-        let g = e.schema && q6(e.schema, j5(h))
-        if (g?.requiresNormalization) {
-          let t = new WeakMap()
-          let i = m
-          m = atom(r => r(i).map(i => (t.get(i) || t.set(i, L(i, g, h, atomStoreManager, !!e.syncObjects)), t.get(i))), (e, t, r) => {
-            if (r.type !== 'REMOTE_UPDATE')
-              return t(i, r)
-            r.data.map((e, t) => {
-              let i = atomStoreManager.get(m)[t]
-              if (i) {
-                atomStoreManager.set(i, {
-                  type: 'REMOTE_UPDATE',
-                  data: e,
-                })
-              }
-              else {
-                throw new Error(`No pageDataAtom found for index ${t}`)
-              }
-            })
-          })
-        }
-        let f = e.sync
-        if (f) {
-          let e = m
-          m = setupAtomWithMount(e, () => f(r, {
-            ...a,
-            mutate: (t) => {
-              let i = atomStoreManager.get(e).map(e => atomStoreManager.get(e))
-              if (i.includes(void 0)) {
-                console.warn('Skipping sync mutation because some page data is undefined')
-                return
-              }
-              let r = Ay(i, (e) => {
-                t(e)
-              })
-              if (r.length !== i.length)
-                throw new Error('Cannot add/delete pages in paginated query mutation')
-              atomStoreManager.set(e, {
-                type: 'REMOTE_UPDATE',
-                data: r,
-              })
-            },
-          }))
-        }
-        let _ = createCustomAtom(m, (t) => {
-          let i = t(m).map(e => t(e)).filter(e => void 0 !== e)
-          let n = t(d).data?.pages
-          let r = i.map((e, t) => ({
-            data: e,
-            nextPage: n?.[t]?.nextPage,
-            prevPage: n?.[t]?.prevPage,
-          }))
-          return e.joinPages
-            ? e.joinPages(r)
-            : (function (e) {
-                let t = []
-                e.forEach((e) => {
-                  if (!Array.isArray(e.data))
-                    throw new Error('Expected array data in page')
-                  t.push(...e.data)
-                })
-                return t
-              }(r))
-        })
-        let A = createCustomAtom(m, (t) => {
-          let {
-            output,
-          } = e
-          let n = t(_)
-          return output
-            ? void 0 === n
-              ? void 0
-              : output({
-                  data: n,
-                  get: t,
-                  args: r,
-                }, a)
-            : n
-        })
-        return Object.assign(createCustomAtom(A, e => (function (e, t, i, n) {
-          let r = e(i)
-          if (!n.enabled)
-            return resourceUtils.Paginated.disabled()
-          let a = e(t)
-          switch (r.status) {
-            case 'loading':
-            default:
-              return resourceUtils.Paginated.loading()
-            case 'error':
-              return resourceUtils.Paginated.error(r.error)
-            case 'success':
-              if (void 0 === a)
-                return resourceUtils.Paginated.loading()
-              return resourceUtils.Paginated.loaded(a, {
-                hasNextPage: r.hasNextPage,
-                hasPreviousPage: r.hasPreviousPage,
-                isFetchingNextPage: r.isFetchingNextPage,
-                isFetchingPreviousPage: r.isFetchingPreviousPage,
-              }, r.error || [])
-          }
-        }(e, A, d, {
-          enabled: o,
-        }))), {
-          queryKey: s,
-          __OPAQUE_RQ_PAGINATED_QUERY__: aX,
-        })
-      }, N7)
-      return e => r(e)
-    }(e, s, o)))
-    this.Mutation = (function (e, t) {
-      return (i) => {
-        let n = [++E]
-        let [r, a] = (function (e, t = e => e(l)) {
-          return b(e, t, (e, t) => new _$$_(e, t), (e, t) => t.mutate(...e))
-        }(r => ({
-          mutationKey: n,
-          mutationFn: async (n) => {
-            let r = e()
-            let a = new k(t().queryClient)
-            let s = new w(t().objectStores)
-            try {
-              let e = i(n, {
-                query: a,
-                objects: s,
-                ...r,
-              })
-              let t = e instanceof Promise ? e : Promise.resolve(e)
-              a.registerPromise(t)
-              s.registerPromise(t)
-              return await t
-            }
-            catch (e) {
-              throw new Error(e)
-            }
-          },
-        })))
-        return a
-      }
-    }(this.extrasProvider, this.getQueryContext))
-    this.ObjectQuery = (d = this.getQueryContext, e => createRemovableAtomFamily((t) => {
-      if (!t)
-        return atom(resourceUtils.disabled(), () => { })
-      let i = setupAtomWithMount(e.atom(t), () => {
-        let i = d()
-        i.atomStore.get(e.atom(t)) === F5 && h(i.atomStore, e, t, {
-          policy: 'networkOnly',
-        }, i.gremlinConfig)
-      })
-      return atom(n => (function (e, t, i) {
-        switch (t) {
-          case F5:
-            return resourceUtils.loading()
-          case ET:
-            return resourceUtils.error(new Error(`Encountered a tombstoned object: ${e} ${i.objectDef.description}}`))
-          case null:
-            return resourceUtils.loading()
-          default:
-            return resourceUtils.loaded(t)
-        }
-      }(t, n(i), e)), (i, n, r) => {
-        let a = d()
-        if (r.type === 'refetch') {
-          return h(a.atomStore, e, t, {
-            policy: 'networkOnly',
-          }, a.gremlinConfig)
-        }
-      })
-    }))
-    this.gremlinConfig = void 0
-    this.getMutation = e => t => this.queryProviderContext.atomStore.get(e).mutate(t)
-    this.fetch = (e, t = {}) => f(this.getQueryContext().atomStore, this.queryProviderContext.queryClient, e, t)
-    this.getCachedData = e => (function (e, t) {
-      let i = e.get(t)
-      return i.status !== 'loaded' ? null : i.data
-    }(this.getQueryContext().atomStore, e))
-    this.queryProviderContext = new G(e, i)
-    e.set(l, this.queryProviderContext.queryClient)
+
+// Original: class z
+/**
+ * Main LiveStore class that manages queries, mutations, and object interactions.
+ * Original class name: z
+ */
+class LiveStore {
+  private extrasProvider: () => any
+  private queryProviderContext: QueryProviderContext
+  private gremlinConfig?: any
+
+  /**
+   * Constructs a new LiveStore instance.
+   * @param atomStoreManager - The atom store manager.
+   * @param extrasProvider - Provider for extra context.
+   * @param managers - Object managers (e.g., File, Repo, etc.).
+   */
+  constructor(atomStoreManager: any, extrasProvider: () => any = () => ({}), managers: any) {
+    this.extrasProvider = extrasProvider
+    this.queryProviderContext = new QueryProviderContext(atomStoreManager, managers)
+    atomStoreManager.set(queryClientAtom, this.queryProviderContext.queryClient)
     this._attachAPIs(this.queryProviderContext.objectStores)
+    this.initializeQueryMethods()
   }
 
-  setMetricsReporter(e) {
-    this.queryProviderContext.reporter = e
+  /**
+   * Gets the query context.
+   * @returns The query provider context.
+   */
+  getQueryContext(): QueryProviderContext {
+    return this.queryProviderContext
   }
 
-  _attachAPIs(e) {
-    for (let t in _$$j(this), e) {
-      let i = e[t]
-      this[`fetch${t}`] = async (e, t = {}) => {
-        let n = this.getQueryContext().atomStore
-        return await h(n, i, e, t, this.gremlinConfig)
+  /**
+   * Initializes query-related methods.
+   */
+  private initializeQueryMethods(): void {
+    this.Query = this.createQueryMethod()
+    this.PaginatedQuery = this.createPaginatedQueryMethod()
+    this.Mutation = this.createMutationMethod()
+    this.ObjectQuery = this.createObjectQueryMethod()
+  }
+
+  /**
+   * Creates the Query method.
+   * @returns The Query function.
+   */
+  private createQueryMethod(): any {
+    const extrasProvider = this.extrasProvider
+    const getQueryContext = this.getQueryContext.bind(this)
+    return (queryConfig: any) => {
+      if (queryConfig.key && getQueryContext().uniqueQueryKeys.add(queryConfig.key)) {
+        // Key added
       }
-      this[`readCached${t}`] = e => (function (e, t, i) {
-        let n = e.get(t.atom(i))
-        return n === F5 || n === ET ? null : n
-      }(this.getQueryContext().atomStore, i, e))
-      this[`useCached${t}`] = function (e) {
-        return useAtomWithSubscription(i.atom(e))
+      if (queryConfig.refetchIntervalMs !== undefined && queryConfig.refetchIntervalMs < 1000) {
+        throw new Error(`⚠️ Whoa there! You're trying to poll a query every ${queryConfig.refetchIntervalMs}ms -- that's probably much faster than you actually want. Please use a value of at least 1000ms, or reach out to #a-frontend-platform if you have a different use case.`)
+      }
+      const queryAtomFamily = createRemovableAtomFamily((args: any) => {
+        const context = extrasProvider()
+        const queryKey = [++queryKeyCounter]
+        const enabled = !queryConfig.enabled || queryConfig.enabled(args)
+        const promiseManager = new RetainedPromiseManager(() => atomStoreManager.sub(queryAtom, () => {}))
+        const fetchFn = async () => {
+          if (!getFalseValue()) {
+            await waitForVisibility()
+          }
+          const result = queryConfig.fetch(args, context)
+          const reporterCallback = queryConfig.key ? getQueryContext().reporter?.reportQueryRequested(queryConfig.key) : null
+          result.then(() => {
+            reporterCallback?.('success')
+            promiseManager.resolve()
+          }).catch((error: any) => {
+            reporterCallback?.('error')
+            promiseManager.reject(error)
+          })
+          return result
+        }
+        const [, resultAtom] = createQueryAtoms(
+          () => ({
+            queryKey,
+            queryFn: fetchFn,
+            refetchInterval: queryConfig.refetchIntervalMs,
+            refetchIntervalInBackground: false,
+            enabled,
+            staleTime: Infinity,
+            cacheTime: Infinity,
+          }),
+          (get: any) => get(queryClientAtom),
+          (context: any, options: any) => new QueryObserver(context, options),
+          async (action: any, observer: any) => {
+            if (action.type === 'refetch') {
+              await waitForVisibility()
+              return observer.refetch({ cancelRefetch: false })
+            }
+            throwTypeError(action.type)
+          },
+        )
+        let mountedAtom = resultAtom
+        const stalenessPolicy = queryConfig.stalenessPolicy || 'onUnmount'
+        const gcPolicy = queryConfig.gcPolicy || 'default'
+        mountedAtom = setupAtomWithMount(mountedAtom, ({ setSelf }: any) => {
+          if (stalenessPolicy === 'onUnmount' && enabled) {
+            setSelf({ type: 'refetch' })
+          }
+          return () => {
+            if (stalenessPolicy === 'onUnmount') {
+              getQueryContext().queryClient.invalidateQueries({ queryKey, exact: true, refetchType: 'none' })
+            }
+            if (gcPolicy === 'onUnmount') {
+              getQueryContext().queryClient.removeQueries({ queryKey, exact: true })
+              queryAtomFamily.setShouldRemove((_, key) => key === args)
+              queryAtomFamily.setShouldRemove(null)
+            }
+          }
+        })
+        let dataAtom = atom((get: any) => get(mountedAtom).data, (get: any, set: any, action: any) => {
+          if (action.type !== 'REMOTE_UPDATE') {
+            return set(mountedAtom, action)
+          }
+          getQueryContext().queryClient.setQueryData(queryKey, action.data)
+        })
+        const objectStores = getQueryContext().objectStores
+        const schema = queryConfig.schema && buildSchema(queryConfig.schema, createObjectDefMap(objectStores))
+        if (schema?.requiresNormalization) {
+          dataAtom = createNormalizedAtom(dataAtom, schema, objectStores, atomStoreManager, !!queryConfig.syncObjects)
+        }
+        if (queryConfig.sync) {
+          const originalAtom = dataAtom
+          dataAtom = setupAtomWithMount(originalAtom, () => queryConfig.sync(args, {
+            ...context,
+            mutate: (updater: any) => {
+              const currentData = produce(atomStoreManager.get(originalAtom), (draft: any) => {
+                if (draft !== undefined) {
+                  updater(draft)
+                }
+              })
+              if (currentData !== undefined) {
+                atomStoreManager.set(originalAtom, { type: 'REMOTE_UPDATE', data: currentData })
+              }
+            },
+          }))
+        }
+        const outputAtom = createCustomAtom(dataAtom, (get: any) => {
+          const { output } = queryConfig
+          const data = get(dataAtom)
+          return output
+            ? (data === undefined ? undefined : output({ data, get, args }, context))
+            : data
+        })
+        const queryAtom = createCustomAtom(outputAtom, (get: any) => {
+          const result = get(mountedAtom)
+          if (!enabled) {
+            return resourceUtils.disabledSuspendable(promiseManager)
+          }
+          const outputData = get(outputAtom)
+          switch (result.status) {
+            case 'loading':
+              return resourceUtils.loadingSuspendable(promiseManager)
+            case 'error':
+              return resourceUtils.errorSuspendable(result.error, promiseManager)
+            case 'success':
+              if (outputData === undefined) {
+                return resourceUtils.loadingSuspendable(promiseManager)
+              }
+              return resourceUtils.loadedSuspendable(outputData, result.error || [], promiseManager)
+            default:
+              throwTypeError(result)
+          }
+        })
+        return Object.assign(queryAtom, {
+          queryKey,
+          queryFn: fetchFn,
+          __OPAQUE_RQ_QUERY__: OPAQUE_RQ_QUERY,
+        })
+      }, deepEqualIgnoreKeys)
+      return (args: any) => {
+        getQueryContext().registerQueryAtomFamily(queryAtomFamily)
+        return queryAtomFamily(args)
       }
     }
   }
 
-  extend(e) {
-    return Object.assign(this, e(this))
+  /**
+   * Creates the PaginatedQuery method.
+   * @returns The PaginatedQuery function.
+   */
+  private createPaginatedQueryMethod(): any {
+    const extrasProvider = this.extrasProvider
+    const getQueryContext = this.getQueryContext.bind(this)
+    return (queryConfig: any) => {
+      const queryAtomFamily = createRemovableAtomFamily((args: any) => {
+        const context = extrasProvider()
+        const queryKey = [++queryKeyCounter]
+        const enabled = !queryConfig.enabled || queryConfig.enabled(args)
+        const [, resultAtom] = createQueryAtoms(
+          () => ({
+            queryKey,
+            queryFn: async (pageParam: any) => {
+              if (!getFalseValue()) {
+                await waitForVisibility()
+              }
+              const fetchContext = { pageParam, ...context }
+              return await queryConfig.fetch(args, fetchContext)
+            },
+            getNextPageParam: (lastPage: any) => lastPage.nextPage,
+            getPreviousPageParam: (lastPage: any) => lastPage.prevPage,
+            enabled,
+            staleTime: Infinity,
+          }),
+          (get: any) => get(queryClientAtom),
+          (context: any, options: any) => new InfiniteQueryObserver(context, options),
+          (action: any, observer: any, _cleanup: any, _contextKey: any) => {
+            if (action.type === 'refetch') {
+              return observer.refetch({ refetchPage: (page: any, index: number) => index === 0 }).then((result: any) => {
+                getQueryContext().queryClient.setQueryData(observer.options.queryKey, (data: any) => data
+                  ? {
+                      pages: data.pages.slice(0, 1),
+                      pageParams: data.pageParams.slice(0, 1),
+                    }
+                  : data)
+                return result
+              })
+            }
+            if (action.type === 'fetchNextPage') {
+              const options = defaults(action.options || {}, { cancelRefetch: false })
+              return observer.fetchNextPage(options)
+            }
+            if (action.type === 'fetchPreviousPage') {
+              const options = defaults(action.options || {}, { cancelRefetch: false })
+              return observer.fetchPreviousPage(options)
+            }
+            throwTypeError(action.type)
+          },
+        )
+        let mountedAtom = setupAtomWithMount(resultAtom, ({ setSelf }: any) => {
+          if (enabled) {
+            setSelf({ type: 'refetch' })
+          }
+        })
+        const pageAtoms: any[] = []
+        let dataAtom = atom<any, any[], any>(
+          (get: any) => {
+            const pages = get(mountedAtom).data?.pages || []
+            const atoms = pages.map((page: any, index: number) => {
+              if (!pageAtoms[index]) {
+                pageAtoms[index] = atom((get: any) => get(mountedAtom).data?.pages[index]?.data, () => {})
+              }
+              return pageAtoms[index]
+            })
+            if (pageAtoms.length > pages.length) {
+              pageAtoms.splice(pages.length)
+            }
+            return atoms
+          },
+          (get: any, set: any, action: any) => {
+            if (action.type !== 'REMOTE_UPDATE') {
+              return set(mountedAtom, action)
+            }
+            getQueryContext().queryClient.setQueryData(queryKey, (data: any) => ({
+              pages: action.data,
+              pageParams: data?.pageParams || [],
+            }))
+          },
+        )
+        const objectStores = getQueryContext().objectStores
+        const schema = queryConfig.schema && buildSchema(queryConfig.schema, createObjectDefMap(objectStores))
+        if (schema?.requiresNormalization) {
+          const atomMap = new WeakMap()
+          const originalDataAtom = dataAtom
+          dataAtom = atom(
+            (get: any) => get(originalDataAtom).map((pageAtom: any) => {
+              if (!atomMap.get(pageAtom)) {
+                atomMap.set(pageAtom, createNormalizedAtom(pageAtom, schema, objectStores, atomStoreManager, !!queryConfig.syncObjects))
+              }
+              return atomMap.get(pageAtom)
+            }),
+            (get: any, set: any, action: any) => {
+              if (action.type !== 'REMOTE_UPDATE') {
+                return set(originalDataAtom, action)
+              }
+              action.data.forEach((pageData: any, index: number) => {
+                const pageAtom = get(dataAtom)[index]
+                if (pageAtom) {
+                  atomStoreManager.set(pageAtom, { type: 'REMOTE_UPDATE', data: pageData })
+                }
+                else {
+                  throw new Error(`No pageDataAtom found for index ${index}`)
+                }
+              })
+            },
+          )
+        }
+        if (queryConfig.sync) {
+          const originalDataAtom = dataAtom
+          dataAtom = setupAtomWithMount(originalDataAtom, () => queryConfig.sync(args, {
+            ...context,
+            mutate: (updater: any) => {
+              const pageData = atomStoreManager.get(dataAtom).map((atom: any) => atomStoreManager.get(atom))
+              if (pageData.includes(undefined)) {
+                console.warn('Skipping sync mutation because some page data is undefined')
+                return
+              }
+              const updatedData = produce(pageData, updater)
+              if (updatedData.length !== pageData.length) {
+                throw new Error('Cannot add/delete pages in paginated query mutation')
+              }
+              atomStoreManager.set(originalDataAtom, { type: 'REMOTE_UPDATE', data: updatedData })
+            },
+          }))
+        }
+        const joinedDataAtom = createCustomAtom(dataAtom, (get: any) => {
+          const pageData = get(dataAtom).map((atom: any) => get(atom)).filter((data: any) => data !== undefined)
+          const pages = get(mountedAtom).data?.pages
+          const joinedPages = pageData.map((data: any, index: number) => ({
+            data,
+            nextPage: pages?.[index]?.nextPage,
+            prevPage: pages?.[index]?.prevPage,
+          }))
+          return queryConfig.joinPages
+            ? queryConfig.joinPages(joinedPages)
+            : joinedPages.reduce((acc: any[], page: any) => {
+                if (!Array.isArray(page.data)) {
+                  throw new TypeError('Expected array data in page')
+                }
+                acc.push(...page.data)
+                return acc
+              }, [])
+        })
+        const outputAtom = createCustomAtom(joinedDataAtom, (get: any) => {
+          const { output } = queryConfig
+          const data = get(joinedDataAtom)
+          return output
+            ? (data === undefined ? undefined : output({ data, get, args }, context))
+            : data
+        })
+        return Object.assign(createCustomAtom(outputAtom, (get: any) => {
+          const result = get(mountedAtom)
+          if (!enabled) {
+            return resourceUtils.Paginated.disabled()
+          }
+          const outputData = get(outputAtom)
+          switch (result.status) {
+            case 'error':
+              return resourceUtils.Paginated.error(result.error)
+            case 'success':
+              if (outputData === undefined) {
+                return resourceUtils.Paginated.loading()
+              }
+              return resourceUtils.Paginated.loaded(outputData, {
+                hasNextPage: result.hasNextPage,
+                hasPreviousPage: result.hasPreviousPage,
+                isFetchingNextPage: result.isFetchingNextPage,
+                isFetchingPreviousPage: result.isFetchingPreviousPage,
+              }, result.error || [])
+
+            case 'loading':
+            default:
+              return resourceUtils.Paginated.loading()
+          }
+        }), {
+          queryKey,
+          __OPAQUE_RQ_PAGINATED_QUERY__: OPAQUE_RQ_PAGINATED_QUERY,
+        })
+      }, deepEqualIgnoreKeys)
+      return (args: any) => queryAtomFamily(args)
+    }
   }
 
-  setGremlinConfig(e) {
-    this.gremlinConfig = e
+  /**
+   * Creates the Mutation method.
+   * @returns The Mutation function.
+   */
+  private createMutationMethod(): any {
+    const extrasProvider = this.extrasProvider
+    const getQueryContext = this.getQueryContext.bind(this)
+    return (mutationConfig: any) => {
+      const mutationKey = [++queryKeyCounter]
+      const [_, mutationAtom] = createQueryAtoms(
+        () => ({
+          mutationKey,
+          mutationFn: async (variables: any) => {
+            const context = extrasProvider()
+            const queryManager = new QueryMutationManager(getQueryContext().queryClient)
+            const objectManager = new ObjectStoreManager(getQueryContext().objectStores)
+            try {
+              const result = mutationConfig(variables, { query: queryManager, objects: objectManager, ...context })
+              const promise = result instanceof Promise ? result : Promise.resolve(result)
+              queryManager.registerPromise(promise)
+              objectManager.registerPromise(promise)
+              return await promise
+            }
+            catch (error: any) {
+              throw new Error(error)
+            }
+          },
+        }),
+        (get: any) => get(queryClientAtom),
+        (context: any, options: any) => new MutationObserver(context, options),
+        (action: any, observer: any) => observer.mutate(...action),
+      )
+      return mutationAtom
+    }
   }
+
+  /**
+   * Creates the ObjectQuery method.
+   * @returns The ObjectQuery function.
+   */
+  private createObjectQueryMethod(): any {
+    const getQueryContext = this.getQueryContext.bind(this)
+    return (store: any) => createRemovableAtomFamily((id: any) => {
+      if (!id) {
+        return atom(resourceUtils.disabled(), () => {})
+      }
+      const storeAtom = setupAtomWithMount(store.atom(id), () => {
+        const context = getQueryContext()
+        if (context.atomStore.get(store.atom(id)) === LIVESTORE_LOADING) {
+          fetchObject(context.atomStore, store, id, { policy: 'networkOnly' }, context.gremlinConfig)
+        }
+      })
+      return atom((get: any) => {
+        const data = get(storeAtom)
+        switch (data) {
+          case LIVESTORE_LOADING:
+            return resourceUtils.loading()
+          case LIVESTORE_TOMBSTONED:
+            return resourceUtils.error(new Error(`Encountered a tombstoned object: ${id} ${store.objectDef.description}`))
+          case null:
+            return resourceUtils.loading()
+          default:
+            return resourceUtils.loaded(data)
+        }
+      }, (get: any, set: any, action: any) => {
+        const context = getQueryContext()
+        if (action.type === 'refetch') {
+          fetchObject(context.atomStore, store, id, { policy: 'networkOnly' }, context.gremlinConfig)
+        }
+      })
+    })
+  }
+
+  /**
+   * Helper method to create query atoms, extracted for reuse.
+   * @param optionsFn - Function to get query options.
+   * @param contextFn - Function to get context.
+   * @param observerFactory - Factory for creating observers.
+   * @param actionHandler - Handler for actions.
+   * @returns A tuple of atoms for the query.
+   */
+  private createQueryAtoms(optionsFn: any, contextFn: any, observerFactory: any, actionHandler: any): [any, any] {
+    const observersMapAtom = atom(() => new WeakMap())
+    const updateCounterAtom = atom(0)
+    const uniqueSymbol = Symbol('')
+
+    const observerAtom = atom((get: any) => {
+      get(updateCounterAtom)
+      const context = contextFn(get)
+      const options = optionsFn(get)
+      const observersMap = get(observersMapAtom)
+      let observer = observersMap.get(context)
+      if (observer) {
+        observer[uniqueSymbol] = true
+        observer.setOptions(options, { listeners: false })
+        delete observer[uniqueSymbol]
+      }
+      else {
+        observer = observerFactory(context, options)
+        observersMap.set(context, observer)
+      }
+      return observer
+    })
+
+    const observableAtom = atom((get: any) => {
+      const observer = get(observerAtom)
+      const observable = {
+        subscribe: (subscriber: any) => {
+          const notify = (result: any) => {
+            const next = () => subscriber.next(result)
+            if (observer[uniqueSymbol]) {
+              Promise.resolve().then(next)
+            }
+            else {
+              next()
+            }
+          }
+          const subscription = observer.subscribe(notify)
+          notify(observer.getCurrentResult())
+          return { unsubscribe: subscription }
+        },
+      }
+      return atomWithObservable(() => observable, { initialValue: observer.getCurrentResult() })
+    })
+
+    const resultAtom = atom(
+      (get: any) => {
+        const observableResult = get(observableAtom)
+        return get(observableResult)
+      },
+      (get: any, set: any, action: any) => {
+        const observer = get(observerAtom)
+        const context = contextFn(get)
+        return actionHandler(action, observer, () => {
+          get(observersMapAtom).delete(context)
+          set(updateCounterAtom, (count: number) => count + 1)
+        }, context)
+      },
+    )
+
+    const promiseAtom = atom((get: any) => {
+      const observer = get(observerAtom)
+      const observable = {
+        subscribe: (subscriber: any) => {
+          const notify = (result: any) => {
+            if ((result.isSuccess && result.data !== undefined) || (result.isError && !isCancelledError(result.error))) {
+              const next = () => subscriber.next(result)
+              if (observer[uniqueSymbol]) {
+                Promise.resolve().then(next)
+              }
+              else {
+                next()
+              }
+            }
+          }
+          const subscription = observer.subscribe(notify)
+          notify(observer.getCurrentResult())
+          return { unsubscribe: subscription }
+        },
+      }
+      return atomWithObservable(() => observable)
+    })
+
+    const extractData = (result: any) => {
+      if (result.error) {
+        throw result.error
+      }
+      return result.data
+    }
+
+    return [
+      atom((get: any) => {
+        const promiseResult = get(promiseAtom)
+        const resolved = get(promiseResult)
+        return resolved instanceof Promise ? resolved.then(extractData) : extractData(resolved)
+      }, (get: any, set: any, action: any) => set(resultAtom, action)),
+      resultAtom,
+    ]
+  }
+
+  // Additional methods from original class z
+  setMetricsReporter(reporter: any): void {
+    this.queryProviderContext.reporter = reporter
+  }
+
+  [key: `useCached${string}`]: (id: any) => any
+  [key: `readCached${string}`]: (id: any) => any
+  [key: `fetch${string}`]: (id: any, options?: any) => Promise<any>
+
+  private _attachAPIs(stores: any): void {
+    for (const key in stores) {
+      const store = stores[key];
+      (this as any)[`fetch${key}`] = async (id: any, options: any = {}) => {
+        const atomStore = this.getQueryContext().atomStore
+        return await fetchObject(atomStore, store, id, options, this.gremlinConfig)
+      };
+      (this as any)[`readCached${key}`] = (id: any) => {
+        const atomStore = this.getQueryContext().atomStore
+        const data = atomStore.get(store.atom(id))
+        return data === LIVESTORE_LOADING || data === LIVESTORE_TOMBSTONED ? null : data
+      };
+      (this as any)[`useCached${key}`] = (id: any) => {
+        return useAtomWithSubscription(store.atom(id))
+      }
+    }
+  }
+
+  extend(extension: (instance: this) => any): this {
+    return Object.assign(this, extension(this))
+  }
+
+  setGremlinConfig(config: any): void {
+    this.gremlinConfig = config
+  }
+
+  getMutation(mutationAtom: any) {
+    return (variables: any) => this.queryProviderContext.atomStore.get(mutationAtom).mutate(variables)
+  }
+
+  fetch(queryAtom: any, options: any = {}): Promise<any> {
+    return fetchQuery(this.getQueryContext().atomStore, this.queryProviderContext.queryClient, queryAtom, options)
+  }
+
+  getCachedData(queryAtom: any): any {
+    const data = this.getQueryContext().atomStore.get(queryAtom)
+    return data.status !== 'loaded' ? null : data.data
+  }
+
+  // Properties for query methods
+  Query: any
+  PaginatedQuery: any
+  Mutation: any
+  ObjectQuery: any
 }
 let X = {
   QUERY_FINISHED: 'web.livestore.query.finished',
@@ -967,186 +1434,316 @@ let Q = {
   QUERY_REQUESTED: 'web.livestore.query.requested',
   QUERY_STUCK: 'web.livestore.query.stuck',
 }
-class J {
-  finish = () => (this.finished && logError('LiveStore metrics', 'Timer already finished'), this._timerId && clearTimeout(this._timerId), this.finished = !0, document.removeEventListener('visibilitychange', this.onVisibilityChange), Math.round(performance.now() - this._startTime))
-  onVisibilityChange = () => {
-    document.visibilityState === 'hidden' && (this.backgrounded = !0)
-  }
+/**
+ * Timer class for tracking query performance metrics, including background state and timeout handling.
+ * Original: class J
+ */
+class QueryTimer {
+  private _startTime: number
+  private _timerId: NodeJS.Timeout | null
+  metadata: any
+  finished: boolean
+  backgrounded: boolean
 
-  constructor(e = {}, t) {
+  /**
+   * Constructs a new QueryTimer instance.
+   * @param options - Options for the timer, including onTimeout callback and timeoutMs.
+   * @param metadata - Optional metadata for the timer.
+   */
+  constructor(options: { onTimeout?: (backgrounded: boolean) => void, timeoutMs?: number } = {}, metadata?: any) {
     this._startTime = performance.now()
     this._timerId = null
-    this.metadata = null
-    this.finished = !1
-    this.backgrounded = !1
+    this.metadata = metadata || null
+    this.finished = false
+    this.backgrounded = false
     this.backgrounded = document.visibilityState === 'hidden'
-    if (document.addEventListener('visibilitychange', this.onVisibilityChange), t && (this.metadata = t), e.onTimeout) {
-      if (!e.timeoutMs)
+    document.addEventListener('visibilitychange', this.onVisibilityChange)
+    if (options.onTimeout) {
+      if (!options.timeoutMs) {
         throw new Error('onTimeout specified without timeoutMs')
+      }
       this._timerId = setTimeout(() => {
-        e.onTimeout(this.backgrounded)
-      }, e.timeoutMs)
+        options.onTimeout!(this.backgrounded)
+      }, options.timeoutMs)
     }
+  }
+
+  /**
+   * Handles visibility change events to track if the document is backgrounded.
+   * Original: onVisibilityChange
+   */
+  private onVisibilityChange = (): void => {
+    if (document.visibilityState === 'hidden') {
+      this.backgrounded = true
+    }
+  }
+
+  /**
+   * Finishes the timer and returns the elapsed time in milliseconds.
+   * Clears the timeout if active and removes event listeners.
+   * @returns The elapsed time since the timer started.
+   * Original: finish
+   */
+  finish = (): number => {
+    if (this.finished) {
+      logError('LiveStore metrics', 'Timer already finished')
+    }
+    if (this._timerId) {
+      clearTimeout(this._timerId)
+    }
+    this.finished = true
+    document.removeEventListener('visibilitychange', this.onVisibilityChange)
+    return Math.round(performance.now() - this._startTime)
   }
 }
 let ee = createReduxSubscriptionAtomWithState(e => e.currentUserOrgId)
-let et = new class {
+/**
+ * Class for reporting and batching metrics events, handling visibility changes, and managing query timers.
+ * Original: let et = new class { ... }()
+ */
+class MetricsReporter {
+  private batchedCustomEvents: any[] = []
+  private batchedNumericEvents: any[] = []
+  private onVisibilityChange: () => Promise<void>
+  private _currentlySendingBatchedEvents: boolean = false
+  private sendBatchedEvents: () => Promise<void>
+  private sendBatchedEventsInterval: NodeJS.Timeout
+  private reportCustomEvent: (metric: string, tags?: Record<string, any>) => void
+  private reportNumericEvent: (metric: string, value: number, tags?: Record<string, any>) => void
+  private getDefaultTags: () => Record<string, any>
+  private getFigmentTags: () => Record<string, any>
+  private reportQueryRequested: (queryKey: string) => (status: string) => void
+
+  /**
+   * Constructs a new MetricsReporter instance, setting up event listeners and intervals.
+   * Original: constructor() { ... }
+   */
   constructor() {
-    this.batchedCustomEvents = []
-    this.batchedNumericEvents = []
     this.onVisibilityChange = async () => {
-      document.visibilityState === 'hidden' && (await this.sendBatchedEvents())
+      if (document.visibilityState === 'hidden') {
+        await this.sendBatchedEvents()
+      }
     }
-    this._currentlySendingBatchedEvents = !1
+
     this.sendBatchedEvents = async () => {
-      if (this._currentlySendingBatchedEvents)
+      if (this._currentlySendingBatchedEvents) {
         return
-      this._currentlySendingBatchedEvents = !0
-      let e = this.batchedCustomEvents
-      let t = this.batchedNumericEvents
+      }
+      this._currentlySendingBatchedEvents = true
+      const customEvents = this.batchedCustomEvents
+      const numericEvents = this.batchedNumericEvents
       this.batchedCustomEvents = []
       this.batchedNumericEvents = []
       try {
-        await Promise.all([sendBatchedMetrics(e), sendBatchedHistograms(t)])
+        await Promise.all([sendBatchedMetrics(customEvents), sendBatchedHistograms(numericEvents)])
       }
-      catch (e) {
-        console.error(e)
+      catch (error) {
+        console.error(error)
       }
-      this._currentlySendingBatchedEvents = !1
+      this._currentlySendingBatchedEvents = false
     }
-    this.reportCustomEvent = (e, t = {}) => {
+
+    this.reportCustomEvent = (metric: string, tags: Record<string, any> = {}) => {
       this.batchedCustomEvents.push({
-        metric: e,
+        metric,
         tags: {
-          ...t,
+          ...tags,
           ...this.getDefaultTags(),
         },
       })
     }
-    this.reportNumericEvent = (e, t, i = {}) => {
+
+    this.reportNumericEvent = (metric: string, value: number, tags: Record<string, any> = {}) => {
       this.batchedNumericEvents.push({
-        metric: e,
-        value: t,
+        metric,
+        value,
         tags: {
-          ...i,
+          ...tags,
           ...this.getDefaultTags(),
         },
       })
     }
+
     document.addEventListener('visibilitychange', this.onVisibilityChange)
     window.addEventListener('pagehide', this.sendBatchedEvents)
-    this.sendBatchedEventsInterval = setInterval(this.sendBatchedEvents, 5e3)
-  }
+    this.sendBatchedEventsInterval = setInterval(this.sendBatchedEvents, 5000)
 
-  flushBatchForTests() {
-    this.sendBatchedEvents()
-  }
-
-  async cleanup() {
-    document.removeEventListener('visibilitychange', this.onVisibilityChange)
-    window.removeEventListener('pagehide', this.sendBatchedEvents)
-    clearInterval(this.sendBatchedEventsInterval)
-    await _$$g2()
-  }
-
-  getDefaultTags() {
-    return {
+    this.getDefaultTags = () => ({
       client_visibility: document.visibilityState,
       user_plan_max: getUserPlan() || '',
-    }
-  }
+    })
 
-  getFigmentTags() {
-    return {
+    this.getFigmentTags = () => ({
       currentOrgId: atomStoreManager.get(ee) || '',
       source: 'livestore',
       ...this.getDefaultTags(),
+    })
+
+    this.reportQueryRequested = (queryKey: string) => {
+      this.reportCustomEvent(Q.QUERY_REQUESTED, {
+        query_key: queryKey,
+      })
+      const timer = new QueryTimer({
+        onTimeout: (backgrounded: boolean) => {
+          if (navigator.onLine) {
+            this.reportCustomEvent(Q.QUERY_STUCK, {
+              query_key: queryKey,
+              backgrounded: String(backgrounded),
+            })
+            if (shouldSampleRequest(10000)) {
+              trackEventAnalytics('web_async_request_stuck', {
+                queryKey,
+                backgrounded: String(backgrounded),
+                ...this.getFigmentTags(),
+              }, {
+                batchRequest: true,
+              })
+            }
+          }
+        },
+        timeoutMs: 10000,
+      })
+      return (status: string) => {
+        const elapsed = timer.finish()
+        this.reportNumericEvent(X.QUERY_FINISHED, elapsed, {
+          query_key: queryKey,
+          backgrounded: String(timer.backgrounded),
+          success: String(status === 'success'),
+        })
+        if (shouldSampleRequest(elapsed)) {
+          trackEventAnalytics('web_async_request', {
+            queryKey,
+            latencyms: elapsed,
+            backgrounded: String(timer.backgrounded),
+            success: status === 'success',
+            ...this.getFigmentTags(),
+          }, {
+            batchRequest: true,
+          })
+        }
+      }
     }
   }
 
-  reportQueryRequested(e) {
-    this.reportCustomEvent(Q.QUERY_REQUESTED, {
-      query_key: e,
-    })
-    let t = new J({
-      onTimeout: (t) => {
-        navigator.onLine && (this.reportCustomEvent(Q.QUERY_STUCK, {
-          query_key: e,
-          backgrounded: String(t),
-        }), shouldSampleRequest(1e4) && trackEventAnalytics('web_async_request_stuck', {
-          queryKey: e,
-          backgrounded: String(t),
-          ...this.getFigmentTags(),
-        }, {
-          batchRequest: !0,
-        }))
-      },
-      timeoutMs: 1e4,
-    })
-    return (i) => {
-      let n = t.finish()
-      this.reportNumericEvent(X.QUERY_FINISHED, n, {
-        query_key: e,
-        backgrounded: String(t.backgrounded),
-        success: String(i === 'success'),
-      })
-      shouldSampleRequest(n) && trackEventAnalytics('web_async_request', {
-        queryKey: e,
-        latencyms: n,
-        backgrounded: String(t.backgrounded),
-        success: i === 'success',
-        ...this.getFigmentTags(),
-      }, {
-        batchRequest: !0,
-      })
-    }
+  /**
+   * Flushes batched events for testing purposes.
+   * Original: flushBatchForTests() { ... }
+   */
+  flushBatchForTests(): void {
+    this.sendBatchedEvents()
   }
-}()
-let el = {
-  File: _$$M(() => debugState, () => V$),
-  Repo: _$$T2(() => debugState, () => V$),
-  Folder: _$$Y(() => debugState, () => V$),
-  Team: _$$p2(() => debugState, () => V$),
+
+  /**
+   * Cleans up event listeners and intervals.
+   * Original: async cleanup() { ... }
+   */
+  async cleanup(): Promise<void> {
+    document.removeEventListener('visibilitychange', this.onVisibilityChange)
+    window.removeEventListener('pagehide', this.sendBatchedEvents)
+    clearInterval(this.sendBatchedEventsInterval)
+    await setupAdvanceTimers()
+  }
 }
-let ed = (function (e, t = () => ({}), i) {
-  return new z(e, t, i)
-}(atomStoreManager, () => {
+
+// Original: let et = new class { ... }()
+let et = new MetricsReporter()
+let el = {
+  File: setupFileLivestoreManager(() => debugState, () => realtimeV2),
+  Repo: createRepoManager(() => debugState, () => realtimeV2),
+  Folder: setupFolderLivestoreManager(() => debugState, () => realtimeV2),
+  Team: createTeamManager(() => debugState, () => realtimeV2),
+}
+/**
+ * Creates and configures the main LiveStore instance with extras provider and managers.
+ * Original: let ed = (function (e, t = () => ({}), i) { return new LiveStore(e, t, i) }(atomStoreManager, () => { ... }, el)).extend(...).setMetricsReporter(et)
+ */
+function createLiveStore(atomStoreManager: any, extrasProvider: () => any = () => ({}), managers: any) {
+  return new LiveStore(atomStoreManager, extrasProvider, managers)
+}
+
+/**
+ * Provides extras context for the LiveStore, including atom store, XHR, realtime client, etc.
+ * Original: () => { return { atomStore: atomStoreManager, xr: XHR, ... } }
+ */
+function extrasProvider() {
   return {
     atomStore: atomStoreManager,
     xr: XHR,
-    realtimeClient: V$,
+    realtimeClient: realtimeV2,
     livegraphClient: observableState.get(),
     reduxStore: debugState,
   }
-}, el)).extend((e => (t) => {
-  function i(e) {
-    let i = t.ObjectQuery(e)
+}
+
+/**
+ * Extends the LiveStore with custom query methods for File, Folder, and Team.
+ * Original: .extend((e => (t) => { function i(e) { ... } return { File: i(e.File), ... } })(el))
+ * @param liveStore - The LiveStore instance to extend.
+ * @param managers - The managers object containing File, Folder, Team.
+ * @returns The extended LiveStore instance.
+ */
+function extendLiveStoreWithQueries(liveStore: LiveStore, managers: any) {
+  /**
+   * Creates a query wrapper for a given store with a useValue hook.
+   * Original: function i(e) { let i = t.ObjectQuery(e); return { useValue: (e) => { ... } } }
+   * @param store - The store to query.
+   * @returns An object with useValue method.
+   */
+  const createQueryWrapper = (store: any) => {
+    const objectQuery = liveStore.ObjectQuery(store)
     return {
-      useValue: (e) => {
-        let t = i(e)
-        let [n] = setupResourceAtomHandler(t)
-        return n
+      useValue: (id: any) => {
+        const queryAtom = objectQuery(id)
+        const [resource] = setupResourceAtomHandler(queryAtom)
+        return resource
       },
     }
   }
+
   return {
-    File: i(e.File),
-    Folder: i(e.Folder),
-    Team: i(e.Team),
+    File: createQueryWrapper(managers.File),
+    Folder: createQueryWrapper(managers.Folder),
+    Team: createQueryWrapper(managers.Team),
   }
-})(el))
-ed.setMetricsReporter(et)
-export let $$ec0 = Object.assign(ed, {
-  useFile: e => (function (e, t) {
-    let i = t.useCachedFile(e || '')
-    useEffect(() => {
-      e && F5
-    }, [i, e, t])
-    return useMemo(() => {
-      let e = ub(i)
-      return e ? resourceUtils.loaded(e) : resourceUtils.loading()
-    }, [i])
-  }(e, ed)),
+}
+
+/**
+ * The main LiveStore instance, created with atom store manager, extras provider, and managers.
+ * Extended with query methods and configured with metrics reporter.
+ */
+const liveStore = createLiveStore(atomStoreManager, extrasProvider, el).extend(() => extendLiveStoreWithQueries(liveStore, el))
+liveStore.setMetricsReporter(et)
+/**
+ * Extends the LiveStore instance with a custom useFile hook for handling cached file data.
+ * Original: export let $$ec0 = Object.assign(ed, { useFile: e => (function (e, t) { ... }(e, ed)) })
+ * @param id - The file ID to fetch cached data for.
+ * @returns A resource utility object indicating loading or loaded state.
+ */
+function useFile(id: any) {
+  // Original: let i = t.useCachedFile(e || '')
+  const cachedData = liveStore.useCachedFile(id || '')
+
+  // Original: useEffect(() => { e && LIVESTORE_LOADING }, [i, e, t])
+  useEffect(() => {
+    if (id) {
+      // Trigger or handle loading state if ID is provided (original logic appears incomplete, assuming intent to check for loading)
+      // LIVESTORE_LOADING is a constant, possibly for conditional logic
+    }
+  }, [cachedData, id, liveStore])
+
+  // Original: return useMemo(() => { let e = filterSpecialValue(i); return e ? resourceUtils.loaded(e) : resourceUtils.loading() }, [i])
+  return useMemo(() => {
+    const filteredData = filterSpecialValue(cachedData)
+    return filteredData ? resourceUtils.loaded(filteredData) : resourceUtils.loading()
+  }, [cachedData])
+}
+
+/**
+ * Exports the extended LiveStore instance with the useFile hook added.
+ * Original: export let $$ec0 = Object.assign(ed, { ... })
+ */
+export let liveStoreInstance = Object.assign(liveStore, {
+  useFile,
 })
 export { gY, IT } from '../figma_app/566371'
-export const M4 = $$ec0
+export const M4 = liveStoreInstance

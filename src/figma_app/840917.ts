@@ -31,7 +31,7 @@ import { isIncrementalSessionOrValidating, autosaveSubscribeWithRetry } from "..
 import { awaitSync } from "../905/412815";
 import { xK } from "../905/125218";
 import { FileCanEdit } from "../figma_app/43951";
-import { M4 as _$$M } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { maybeCreateSavepoint } from "../905/294113";
 import { B as _$$B } from "../905/18613";
 import { L_, hS } from "../905/200074";
@@ -1159,7 +1159,7 @@ export function $$eA15(e, {
   }
   return r;
 }
-export let $$ex6 = _$$M.Query({
+export let $$ex6 = liveStoreInstance.Query({
   async fetch({
     userId: e
   }) {
@@ -1171,7 +1171,7 @@ export let $$ex6 = _$$M.Query({
   }
 });
 export var $$eN19 = (e => (e.OFFLINE_FILE_TILE = "OFFLINE_FILE_TILE", e.EDITOR = "EDITOR", e))($$eN19 || {});
-let $$eC12 = _$$M.Mutation(({
+let $$eC12 = liveStoreInstance.Mutation(({
   fileKey: e,
   name: t,
   source: r

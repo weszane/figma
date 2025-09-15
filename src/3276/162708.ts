@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { showModalHandler, hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { registerModal } from "../905/102752";
 import { x as _$$x } from "../905/749159";
 import { EL } from "../905/748636";
@@ -28,7 +28,7 @@ function I({
   alreadyCopied: n
 }) {
   let s = useDispatch();
-  let x = M4.File.useValue(e).data;
+  let x = liveStoreInstance.File.useValue(e).data;
   let y = x?.url || "";
   let C = useSelector(e => !e.user);
   let [I, T] = useState(!!n);

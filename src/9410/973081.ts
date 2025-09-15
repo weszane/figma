@@ -193,7 +193,7 @@ import { IuL, k22, LdP, PXB, rY4, tui, tXK, ZAq, ZB$, zK5 } from '../figma_app/2
 import { Ye } from '../figma_app/32128';
 import { s9 as _$$s4 } from '../figma_app/34798';
 import { StarterFileEditConfirmation } from '../figma_app/43951';
-import { ResourceType } from '../figma_app/45218';
+import { HubTypeEnum } from '../figma_app/45218';
 import { FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { $ as _$$$, J as _$$J5 } from '../figma_app/61771';
 import { applyOffsetToViewport, getBasicViewportRect, getViewportInfo, centeredValue, viewportToScreen } from '../figma_app/62612';
@@ -3505,7 +3505,7 @@ let ns = class e extends PureComponent {
     if (this.props.selectedView.editorType === FEditorType.Design) return null;
     let t = e => this.props.dispatch(_$$af({
       id: e,
-      resourceType: ResourceType.PLUGIN
+      resourceType: HubTypeEnum.PLUGIN
     }));
     let i = getRelaunchablePlugins(this.props.pluginRelaunchData, this.props.publishedPlugins, this.props.localExtensions, this.props.orgEntity, this.props.numSelected || 0, (i, r) => e.refreshCache.debounceRefresh(i, () => t(i), r), ManifestEditorType.FIGJAM);
     let r = [];

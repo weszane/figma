@@ -1,7 +1,7 @@
 import { throwTypeError, assertNotNullish, assert } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { PresetType } from "../figma_app/763686";
-import { Ay } from "../vendor/159563";
+import { produce } from "immer";
 import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
 import { createOptimistThunk } from "../905/350402";
@@ -124,7 +124,7 @@ let $$x2 = createOptimistThunk((e, t) => {
   }
   let r = e.getState().selectedView;
   if ("prototype" === r.view) {
-    let n = Ay(r, e => {
+    let n = produce(r, e => {
       void 0 === e.scalingInfo && (e.scalingInfo = {});
       t.hasOwnProperty("viewportScalingMode") && (e.scalingInfo.viewportScalingMode = t.viewportScalingMode);
       t.hasOwnProperty("contentScalingMode") && (e.scalingInfo.contentScalingMode = t.contentScalingMode);

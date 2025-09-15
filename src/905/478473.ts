@@ -6,7 +6,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { $ } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
-import { qD } from "../figma_app/471982";
+import { getCurrentVersion } from "../figma_app/471982";
 import { showModalHandler } from "../905/156213";
 import { a as _$$a } from "../figma_app/453187";
 import { XL } from "../figma_app/684168";
@@ -187,7 +187,7 @@ export function $$S1(e) {
   let d = _$$a(workspace.orgId, extension?.id);
   let c = e => {
     if (!extension) return;
-    let t = qD(extension);
+    let t = getCurrentVersion(extension);
     let i = {
       extension: {
         pluginId: t.plugin_id,

@@ -3,7 +3,7 @@ import { Xr } from "../figma_app/27355";
 import { useDebouncedCallback } from "use-debounce";
 import { MZ } from "../figma_app/925970";
 import { wf } from "../905/124270";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 import { CreatorResourceType } from "../figma_app/162807";
 import { $W } from "../905/144933";
 import { A as _$$A } from "../905/421315";
@@ -32,7 +32,7 @@ export function $$p0(e, t) {
   }, [_, e, c]);
   return f;
 }
-let m = M4.Query({
+let m = liveStoreInstance.Query({
   fetch: async e => (await $W.getFacetSearchResults({
     query: e.query,
     facetType: e.facetType,

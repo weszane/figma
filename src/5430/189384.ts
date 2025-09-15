@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, createRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { lQ } from "../905/934246";
 import { e as _$$e } from "../905/435763";
@@ -25,14 +25,14 @@ import { A as _$$A3 } from "../svg/310324";
 import { Rr, Cc } from "../5430/664984";
 import { I as _$$I } from "../figma_app/4253";
 import { isSubscriptionActive } from "../figma_app/808294";
-import { X_, mA, lT } from "../figma_app/777551";
-import { kz } from "../figma_app/427318";
+import { getResourceActionText, isApplePublisherAccepted, isResourceBlocked } from "../figma_app/777551";
+import { mapVtToFileTypeEnum } from "../figma_app/427318";
 import { YW } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { cs } from "../figma_app/740025";
 import { IE } from "../5430/231178";
-import { TX } from "../figma_app/255679";
+import { hasHubFileOrPresetKey } from "../figma_app/255679";
 import { KindEnum } from "../905/129884";
 import { F as _$$F } from "../5430/926195";
 import { T as _$$T } from "../5132/203178";
@@ -187,15 +187,15 @@ export function $$Q0({
   let f = Rr(c);
   let v = _$$A(e);
   let b = _$$T();
-  let j = _$$N(`(max-width: ${YW}px)`);
-  let w = X_(t);
+  let j = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let w = getResourceActionText(t);
   let {
     isDisabled
   } = Cc(t);
   let L = useCallback(() => {
     u(!0);
     let t = () => {
-      TX(e.id) && f && !j ? c(showModalHandler({
+      hasHubFileOrPresetKey(e.id) && f && !j ? c(showModalHandler({
         type: E,
         data: {
           hubFile: e,
@@ -203,7 +203,7 @@ export function $$Q0({
         }
       })) : v();
     };
-    mA(e) && !_ ? c(showModalHandler({
+    isApplePublisherAccepted(e) && !_ ? c(showModalHandler({
       type: _$$F,
       data: {
         hubFileId: e.id,
@@ -212,9 +212,9 @@ export function $$Q0({
       }
     })) : t();
   }, [c, e, _, f, j, v, b]);
-  if (m || lT(e)) {
+  if (m || isResourceBlocked(e)) {
     let t;
-    lT(e) ? t = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked") : m && (t = getI18nString("community.duplicate.to_duplicate_switch_to_your_personal_profile"));
+    isResourceBlocked(e) ? t = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked") : m && (t = getI18nString("community.duplicate.to_duplicate_switch_to_your_personal_profile"));
     return jsx("div", {
       "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": t,
@@ -241,7 +241,7 @@ export function $$Q0({
         buttonText: e,
         onClick: i,
         useNoIconStyle: !0,
-        editorType: kz(t),
+        editorType: mapVtToFileTypeEnum(t),
         enableWideButtonForStickyFooter: r,
         isLoading: d
       })

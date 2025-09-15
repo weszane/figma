@@ -25,12 +25,12 @@ import { handleAtomEvent } from "../905/502364";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { rk, nF } from "../figma_app/471982";
+import { mapFileTypeToEnum, getPluginWidgetLabel } from "../figma_app/471982";
 import { getAnnualPriceString, isPriceOutOfRange, MIN_PRICE, isNotInteger } from "../figma_app/808294";
-import { Ul, AC } from "../figma_app/777551";
+import { isResourceApprovedPublic, isResourcePendingPublishing } from "../figma_app/777551";
 import { J as _$$J2 } from "../905/896954";
 import { gH } from "../905/104173";
-import { iB as _$$iB } from "../figma_app/188671";
+import { allCategoriesQuery } from "../figma_app/188671";
 import { fy, wx, uX, Qi, Ij, gD, Dl, Vp, zn, R8, se, fd, pm } from "../figma_app/559491";
 import { oB, j7, sf } from "../905/929976";
 import { s as _$$s2 } from "../905/58247";
@@ -45,14 +45,14 @@ import { j4, UU, of, f7, kN, Dd, $W, oB as _$$oB, xw } from "../figma_app/599979
 import { D as _$$D2 } from "../905/274925";
 import { Ni } from "../figma_app/188152";
 import { getUserId, selectUser } from "../905/372672";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { eE as _$$eE, Ts, wA as _$$wA } from "../figma_app/336853";
 import { getPermissionsState, canMemberOrg, canAdminOrg } from "../figma_app/642025";
 import { getPluginVersion, pluginMetadata, validateAndResizeIconImage, getFirstFileOrThrow, getFullscreenViewEditorType, getPublishingRole, hasRoleOrOrgChanged, getLocalFileId, getOrgRole, isDevModePlugin, getPublishingErrors, validatePublishingData, validatePublishingDataLengths, getPublishedResourceOrNull, getPublishedResource, getPublishingData } from "../figma_app/300692";
 import { qu, UR } from "../905/671449";
 import { w3 } from "../905/481915";
-import { FileInputType, ResourceType, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
-import { kM, k2, aP } from "../figma_app/10554";
+import { FileInputType, HubTypeEnum, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
+import { PublisherRole, PageTypeEnum, UploadStatusEnum } from "../figma_app/10554";
 import { ProductStatus } from "../905/54385";
 import { PublisherType, ManifestEditorType } from "../figma_app/155287";
 import { SourceType } from "../figma_app/175992";
@@ -372,7 +372,7 @@ function eZ(e) {
 }
 let eJ = "plugin_publish_modal--semiBoldText--jpwzU";
 let e0 = "plugin_publish_modal--successContentParagraph---3X81 publish_modal--successContentParagraph---jcpl";
-let e1 = M4.Query({
+let e1 = liveStoreInstance.Query({
   fetch: async (e, {
     xr: t
   }) => (await _$$W.getVersions({
@@ -395,7 +395,7 @@ function e2({
   let u = getUserId() ?? void 0;
   let [p] = IT(e1(s?.key || ""));
   let m = p.data;
-  let g = s?.editor_type ? rk(s.editor_type) : null;
+  let g = s?.editor_type ? mapFileTypeToEnum(s.editor_type) : null;
   let f = getFeatureFlags().ext_plugin_publish_rearch ? _$$A5 : _$$A6;
   return jsx(f, {
     label: jsx("div", {
@@ -882,9 +882,9 @@ function tR(e) {
     key: e,
     text: function (e) {
       switch (e) {
-        case kM.OWNER:
+        case PublisherRole.OWNER:
           return getI18nString("community.publishing.publisher_role_owner");
-        case kM.PUBLISHER:
+        case PublisherRole.PUBLISHER:
           return getI18nString("community.publishing.publisher_role_can_update");
         default:
           return "";
@@ -928,12 +928,12 @@ function tO({
 }) {
   let c = useDispatch();
   let u = Um();
-  let p = t === kM.OWNER ? [tR(kM.OWNER)] : [tR(kM.PUBLISHER)];
-  t !== kM.OWNER && (!i && a && p.unshift(tR(kM.OWNER)), p.push({
+  let p = t === PublisherRole.OWNER ? [tR(PublisherRole.OWNER)] : [tR(PublisherRole.PUBLISHER)];
+  t !== PublisherRole.OWNER && (!i && a && p.unshift(tR(PublisherRole.OWNER)), p.push({
     type: "separator"
   }), p.push({
     type: "option",
-    key: kM.NONE,
+    key: PublisherRole.NONE,
     text: getI18nString("confirm_remove_role.remove")
   }));
   return jsxs(AutoLayout, {
@@ -951,7 +951,7 @@ function tO({
     }), jsx(HU, {
       dispatch: c,
       onChange: t => {
-        t === kM.OWNER ? l?.monetized_resource_metadata ? c(showModalHandler({
+        t === PublisherRole.OWNER ? l?.monetized_resource_metadata ? c(showModalHandler({
           type: _$$K2,
           data: {}
         })) : c(showModalHandler({
@@ -974,7 +974,7 @@ function tO({
           role: t,
           userId: e.id,
           resource: l
-        })), t === kM.NONE && n && d());
+        })), t === PublisherRole.NONE && n && d());
       },
       options: p,
       id: `publish-invite-selector-${e.id}`,
@@ -983,7 +983,7 @@ function tO({
       dropdownData: {
         dropdownId: e.id
       },
-      disabled: t === kM.OWNER
+      disabled: t === PublisherRole.OWNER
     })]
   });
 }
@@ -1073,9 +1073,9 @@ function tM({
     A(um());
   }, [A]);
   useEffect(() => {
-    m !== k2.RESOURCE_PAGE && A(uX({
+    m !== PageTypeEnum.RESOURCE_PAGE && A(uX({
       resourceId: d.id,
-      resourceType: d.is_widget ? ResourceType.WIDGET : ResourceType.PLUGIN
+      resourceType: d.is_widget ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
     }));
   }, [A, d.id, d.is_widget, m]);
   let b = !!d.roles.org && !d.roles.is_public && d.publishing_status === FPublicationStatusType.ORG_PRIVATE;
@@ -1126,7 +1126,7 @@ function tM({
           email: e
         }) => !s.has(e)).slice(0, 10);
       },
-      inviteLevel: kM.PUBLISHER,
+      inviteLevel: PublisherRole.PUBLISHER,
       isSubmitting: f,
       onAutocompleteChange: function (e) {
         g(e);
@@ -1187,7 +1187,7 @@ function tM({
         spacing: 8,
         children: [jsx(tO, {
           user: d.creator,
-          publisherRole: kM.OWNER,
+          publisherRole: PublisherRole.OWNER,
           isPending: !1,
           isCurrentUser: t.id === d.creator.id,
           pluginName: l,
@@ -1195,7 +1195,7 @@ function tM({
           closePluginPublishModal: p
         }, d.creator.id), d.plugin_publishers?.accepted.map(e => jsx(tO, {
           user: e,
-          publisherRole: kM.PUBLISHER,
+          publisherRole: PublisherRole.PUBLISHER,
           isPending: !1,
           isCurrentUser: t.id === e.id,
           canSetToOwner: v,
@@ -1205,7 +1205,7 @@ function tM({
         }, e.id)), d.plugin_publishers?.pending?.map(e => jsx(tO, {
           user: e,
           isCurrentUser: t.id === e.id,
-          publisherRole: kM.PUBLISHER,
+          publisherRole: PublisherRole.PUBLISHER,
           isPending: !0,
           pluginName: l,
           publishedPlugin: d,
@@ -1354,7 +1354,7 @@ function tY({
   let i;
   let n = e.roles;
   let a = e.is_widget;
-  if (Ul(e) || t === PublisherType.ORG) return null;
+  if (isResourceApprovedPublic(e) || t === PublisherType.ORG) return null;
   if (null != n.org && t === PublisherType.PUBLIC) i = jsx(TextWithTruncation, {
     children: renderI18nText(a ? "community.publishing.figma_reviews_all_resources_published_to_community_org_private.widget" : "community.publishing.figma_reviews_all_resources_published_to_community_org_private.plugin", {
       orgName: n.org.name
@@ -1865,7 +1865,7 @@ function iO({
       value: e,
       onChange: t,
       spellCheck: !1,
-      placeholder: i === ResourceType.WIDGET ? getI18nString("community.publishing.widget_tagline_input_placeholder") : getI18nString("community.publishing.plugin_tagline_input_placeholder")
+      placeholder: i === HubTypeEnum.WIDGET ? getI18nString("community.publishing.widget_tagline_input_placeholder") : getI18nString("community.publishing.plugin_tagline_input_placeholder")
     })
   });
 }
@@ -1963,7 +1963,7 @@ class iW extends Component {
     } = {}) => {
       let i = () => {
         let e = this.props.publishingState.status;
-        (e.code === aP.SUCCESS || e.code === aP.FAILURE) && this.props.dispatch(Ij({
+        (e.code === UploadStatusEnum.SUCCESS || e.code === UploadStatusEnum.FAILURE) && this.props.dispatch(Ij({
           id: this.getLocalFileIdOrPluginId()
         }));
         trackEventAnalytics("plugin_publish_modal_close", {
@@ -1976,7 +1976,7 @@ class iW extends Component {
         });
         this.props.Sprig("track", "plugin_publish_modal_close", {
           hasAttemptedToPublish: this.hasAttemptedToPublish,
-          hasSucceededToPublish: e.code === aP.SUCCESS,
+          hasSucceededToPublish: e.code === UploadStatusEnum.SUCCESS,
           timeSpentInModal: this.getTimeSinceComponentDidMount()
         });
         this.props.dispatch(popModalStack());
@@ -2075,7 +2075,7 @@ class iW extends Component {
       this.props.dispatch(gD({
         id: this.getLocalFileIdOrPluginId(),
         status: {
-          code: aP.EDIT
+          code: UploadStatusEnum.EDIT
         }
       }));
       let {
@@ -2090,7 +2090,7 @@ class iW extends Component {
       let {
         status
       } = this.props.publishingState;
-      return status.code === aP.FAILURE && status.error.includes("invalid word");
+      return status.code === UploadStatusEnum.FAILURE && status.error.includes("invalid word");
     };
     this.isPrivateResource = () => this.state.roleToPublishAs === PublisherType.ORG && !!this.getOrgToPublishTo();
     this.onTagsChanged = e => {
@@ -2165,7 +2165,7 @@ class iW extends Component {
       }));
     };
     this.isInEditPageMode = () => !this.props.localPlugin;
-    this.isUniversalPosting = () => this.props.entryPoint === k2.UNIVERSAL_POSTING;
+    this.isUniversalPosting = () => this.props.entryPoint === PageTypeEnum.UNIVERSAL_POSTING;
     this.onPublishClick = async () => {
       this.hasAttemptedToPublish = !0;
       let e = await this.existingPluginPublishersPermissions();
@@ -2347,9 +2347,9 @@ class iW extends Component {
           },
           callback: () => {
             this.updatePublishedPlugin(metadata, e);
-            this.props.entryPoint !== k2.EDITOR && this.close({
+            this.props.entryPoint !== PageTypeEnum.EDITOR && this.close({
               ignoreUnsavedChanges: !0,
-              reloadResourceDetailPage: this.props.entryPoint === k2.RESOURCE_PAGE
+              reloadResourceDetailPage: this.props.entryPoint === PageTypeEnum.RESOURCE_PAGE
             });
           },
           playgroundFilePublishType: metadata.playgroundFilePublishType,
@@ -2400,7 +2400,7 @@ class iW extends Component {
         isPublic: r.is_public,
         onSuccess: () => {
           this.props.dispatch(VisualBellActions.enqueue({
-            message: this.hasChangedSubscriptionPrice() && !AC(this.props.publishedPlugin) ? getI18nString("community.publishing.new_price_will_appear_within_an_hour_on_Community") : getI18nString("community.publishing.changes_saved"),
+            message: this.hasChangedSubscriptionPrice() && !isResourcePendingPublishing(this.props.publishedPlugin) ? getI18nString("community.publishing.new_price_will_appear_within_an_hour_on_Community") : getI18nString("community.publishing.changes_saved"),
             icon: VisualBellIcon.CHECK
           }));
         },
@@ -2527,7 +2527,7 @@ class iW extends Component {
     this.isWidget = () => function (e, t) {
       return !!e.is_widget || !!t && !!t.manifest.containsWidget;
     }(this.props.publishedPlugin, this.props.localPlugin);
-    this.resourceType = () => nF(this.isWidget());
+    this.resourceType = () => getPluginWidgetLabel(this.isWidget());
     this.hasChangedSubscriptionPrice = () => !!this.props.publishingState.metadata.isSubscription && !this.isFirstTimePublish() && this.state.originalPrice !== this.props.publishingState.metadata.price && null !== this.state.originalPrice;
     this.hideDropdownIfOpen = () => {
       (this.props.dropdownShown?.type === _$$iu || this.props.dropdownShown?.type === Ql) && this.props.dispatch(oB());
@@ -2715,7 +2715,7 @@ class iW extends Component {
       let t = this.props.publishedPlugin;
       let i = getPluginVersion(t);
       let n = t.roles;
-      let a = AC(this.props.publishedPlugin);
+      let a = isResourcePendingPublishing(this.props.publishedPlugin);
       let s = this.resourceType();
       if (2 === e && this.isFirstTimePublish()) return {
         title: this.isWidget() ? getI18nString("community.publishing.is_under_review.widget") : getI18nString("community.publishing.is_under_review.plugin"),
@@ -2774,7 +2774,7 @@ class iW extends Component {
           children: renderI18nText("community.publishing.see_our_guidelines_here")
         });
         return {
-          title: s === ResourceType.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.plugin") : getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.widget"),
+          title: s === HubTypeEnum.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.plugin") : getI18nString("community.publishing.success_your_resource_has_been_submitted_for_review.widget"),
           description: jsxs(Fragment, {
             children: [jsx("p", {
               className: e0,
@@ -2787,13 +2787,13 @@ class iW extends Component {
               })
             }), jsxs("p", {
               className: e0,
-              children: [s === ResourceType.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.once_approved"), s === ResourceType.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.once_approved")]
+              children: [s === HubTypeEnum.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.once_approved"), s === HubTypeEnum.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.once_approved")]
             }), o, l]
           })
         };
       }
       return n.org ? {
-        title: s === ResourceType.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin.to_organization") : getI18nString("community.publishing.success_your_resource_has_been_published.widget.to_organization"),
+        title: s === HubTypeEnum.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin.to_organization") : getI18nString("community.publishing.success_your_resource_has_been_published.widget.to_organization"),
         description: jsxs(Fragment, {
           children: [jsx("p", {
             className: e0,
@@ -2806,11 +2806,11 @@ class iW extends Component {
             })
           }), jsxs("p", {
             className: e0,
-            children: [s === ResourceType.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.with_your_teammates"), s === ResourceType.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.with_your_teammates")]
+            children: [s === HubTypeEnum.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin.with_your_teammates"), s === HubTypeEnum.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget.with_your_teammates")]
           }), o, l]
         })
       } : {
-        title: s === ResourceType.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin") : getI18nString("community.publishing.success_your_resource_has_been_published.widget"),
+        title: s === HubTypeEnum.PLUGIN ? getI18nString("community.publishing.success_your_resource_has_been_published.plugin") : getI18nString("community.publishing.success_your_resource_has_been_published.widget"),
         description: jsxs(Fragment, {
           children: [jsx("p", {
             className: e0,
@@ -2822,7 +2822,7 @@ class iW extends Component {
             })
           }), jsxs("p", {
             className: e0,
-            children: [s === ResourceType.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin"), s === ResourceType.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget")]
+            children: [s === HubTypeEnum.PLUGIN && renderI18nText("community.publishing.below_is_your_resources_url.plugin"), s === HubTypeEnum.WIDGET && renderI18nText("community.publishing.below_is_your_resources_url.widget")]
           }), o, l]
         })
       };
@@ -2834,9 +2834,9 @@ class iW extends Component {
         children: [jsx("div", {
           className: "plugin_publish_modal--publishHeader--xNFHi publish_modal--publishHeader--SA7W2 text--fontPos14--OL9Hp text--_fontBase--QdLsd",
           children: renderI18nText("general.error")
-        }), this.resourceType() === ResourceType.PLUGIN && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.plugin", {
+        }), this.resourceType() === HubTypeEnum.PLUGIN && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.plugin", {
           filename: "manifest.json"
-        }), this.resourceType() === ResourceType.WIDGET && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.widget", {
+        }), this.resourceType() === HubTypeEnum.WIDGET && renderI18nText("community.publishing.error_we_could_not_load_your_development_resource.widget", {
           filename: "manifest.json"
         }), jsx(_$$M, {
           onClick: () => this.close(),
@@ -2922,7 +2922,7 @@ class iW extends Component {
     await this.setAllCategories();
   }
   async setAllCategories() {
-    let e = await M4.fetch(_$$iB(void 0));
+    let e = await liveStoreInstance.fetch(allCategoriesQuery(void 0));
     this.setState({
       allCategories: e
     });
@@ -2960,7 +2960,7 @@ class iW extends Component {
       ...validatePublishingData(metadata, this.getPluginManifest(), this.isWidget(), this.props.publishedPlugin)
     });
     let a = this.props.localPlugin?.manifest;
-    a?.enableProposedApi && (i.usesProposedApi = this.resourceType() === ResourceType.PLUGIN ? getI18nString("community.publishing.cannot_publish_using_enableProposedApi.plugin") : getI18nString("community.publishing.cannot_publish_using_enableProposedApi.widget"));
+    a?.enableProposedApi && (i.usesProposedApi = this.resourceType() === HubTypeEnum.PLUGIN ? getI18nString("community.publishing.cannot_publish_using_enableProposedApi.plugin") : getI18nString("community.publishing.cannot_publish_using_enableProposedApi.widget"));
     (!this.canUserSellPluginOnCmty() || !this.props.user.stripe_account_status) && a?.permissions?.includes("payments") && (i.notApprovedSeller = getI18nString("community.publishing.cannot_use_payments_api_if_non_approved"));
     this.isPublishingLegoPlugin() && this.props.localPlugin?.manifest.editorType?.includes(ManifestEditorType.INSPECT) && (i.lego = getI18nString("community.publishing.cannot_publish_with_inspect_editor_type"));
     $i(a) && (a?.containsWidget || this.isFirstTimePublish()) && (i.incrementalMode = getI18nString("community.publishing.cannot_publish_without_document_access"));
@@ -2996,7 +2996,7 @@ class iW extends Component {
   }
   renderIsPaidPricingSection(e, t, i, n) {
     return jsxs(Fragment, {
-      children: [this.resourceType() === ResourceType.PLUGIN && jsx(_$$A6, {
+      children: [this.resourceType() === HubTypeEnum.PLUGIN && jsx(_$$A6, {
         label: getI18nString("community.seller.payment_type"),
         labelId: "plugin-publish-modal-payment-type-label",
         disabled: i || !n,
@@ -3222,7 +3222,7 @@ class iW extends Component {
       ...errors,
       ...this.getFormErrors()
     };
-    let i = this.props.publishingState.status?.code === aP.UPLOADING;
+    let i = this.props.publishingState.status?.code === UploadStatusEnum.UPLOADING;
     let n = !1;
     this.hasFormErrors(errors) || i ? n = !0 : metadata.blockPublishingOnToS && xw(this.props.permissionsState) && (n = !0);
     let a = jsx(Fragment, {
@@ -3308,8 +3308,8 @@ class iW extends Component {
       case PublisherType.ORG:
         return "none";
       case PublisherType.PUBLIC:
-        if (Ul(this.props.publishedPlugin)) return "approved";
-        if (AC(this.props.publishedPlugin)) return "pending";
+        if (isResourceApprovedPublic(this.props.publishedPlugin)) return "approved";
+        if (isResourcePendingPublishing(this.props.publishedPlugin)) return "pending";
         return "required";
     }
   }
@@ -3325,13 +3325,13 @@ class iW extends Component {
       title,
       description
     } = this.getSuccessScreenText(this.state.step);
-    if ((1 === this.state.step || 2 === this.state.step) && this.props.publishedPlugin && this.props.publishingState.status.code === aP.SUCCESS && this.props.entryPoint === k2.EDITOR) {
+    if ((1 === this.state.step || 2 === this.state.step) && this.props.publishedPlugin && this.props.publishingState.status.code === UploadStatusEnum.SUCCESS && this.props.entryPoint === PageTypeEnum.EDITOR) {
       let {
         publishedPlugin,
         profile,
         localPlugin
       } = this.props;
-      let o = AC(publishedPlugin) || Ul(publishedPlugin);
+      let o = isResourcePendingPublishing(publishedPlugin) || isResourceApprovedPublic(publishedPlugin);
       let l = _$$D2.Step.INFO;
       o && (profile?.public_at || (l = _$$D2.Step.USER_PUBLISH_FLOW), profile && ("org_id" in profile && profile.org_id || "team_id" in profile && profile.team_id) && (l = _$$D2.Step.TEAM_ORG_POST_PUBLISH_FLOW));
       let d = getLocalFileId(publishedPlugin, localPlugin);

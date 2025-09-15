@@ -17,7 +17,7 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { handleErrorWithToast } from "../figma_app/345997";
 import { Rs } from "../figma_app/761870";
 import { fm, X4, Cn, by, UI } from "../c5e2cae0/453906";
@@ -31,7 +31,7 @@ import { Xw } from "../905/584989";
 import { Ef } from "../905/81982";
 import { d as _$$d } from "../905/44199";
 import { Eh } from "../figma_app/617654";
-import { $ as _$$$ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { P as _$$P } from "../905/392438";
 function U(e) {
   let t = e.searchResult;
@@ -95,7 +95,7 @@ function $$q(e) {
   return (useEffect(() => {
     planType === fm.ORGANIZATION ? Eh.getOrgAdmins({
       orgId: planId
-    }).then(g) : _$$$.getTeamAdmins({
+    }).then(g) : teamAPIClient.getTeamAdmins({
       teamId: planId
     }).then(g);
   }, [initialEmails, initialEmailsLoaded, g, planId, planType, setAutocomplete]), initialEmailsLoaded) ? jsxs("div", {
@@ -152,7 +152,7 @@ function $(e) {
       };
   }
 }
-let B = M4.Query({
+let B = liveStoreInstance.Query({
   fetch: async e => {
     let t = await Cn.getNotificationSettings({
       planId: e.planId,
@@ -169,7 +169,7 @@ let B = M4.Query({
     recipients: []
   }
 });
-let G = M4.Mutation(async (e, {
+let G = liveStoreInstance.Mutation(async (e, {
   query: t,
   xr: a
 }) => {

@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { gB, Xm } from "../905/723791";
 import { Fl } from "../figma_app/236178";
-import { B8 } from "../figma_app/255679";
+import { useHasResourcePresetKey } from "../figma_app/255679";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
 import { je } from "../figma_app/155728";
 import { Nh, mb } from "../figma_app/188908";
@@ -15,7 +15,7 @@ export function $$$$g0({
 } = {}) {
   let t = useOpenFileLibraryKey();
   let i = je();
-  let f = B8();
+  let f = useHasResourcePresetKey();
   let _ = function () {
     let e = lY();
     let t = useMemo(() => e.map(e => _$$x(e)).filter(isNotNullish), [e]);

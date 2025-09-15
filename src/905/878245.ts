@@ -1,2 +1,15 @@
-export var $$n0 = (e => (e.ORG = "org", e.TEAM = "team", e.COMMUNITY = "community", e))($$n0 || {});
-export const i = $$n0;
+/**
+ * Enum representing organization types.
+ * Original variable: $$n0
+ */
+export enum CommunityOrgType {
+  ORG = 'org',
+  TEAM = 'team',
+  COMMUNITY = 'community',
+}
+
+/**
+ * Alias for OrganizationType enum.
+ * Original variable: i
+ */
+export const i = CommunityOrgType

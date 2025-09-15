@@ -11,24 +11,24 @@ import { atomStoreManager } from '../905/490038'
  *
  * Original function name: $$a0
  */
-export function setupAtomWithMount<T>(target: Atom<T> | WritableAtom<T, unknown[], void>, onMountHandler: (params: {
+export function setupAtomWithMount<T>(target: Atom<T> | WritableAtom<T, unknown[], void>, onMountHandler: (params?: {
   target: any
   setSelf: (value: any) => void
   onSet: (value: any) => void
-}) => (() => void) | void) {
+}) => any) {
   let onSetCallback: ((value: any) => void) | null = null
 
   // Create atom depending on whether 'write' exists in target
   const jotaiAtom = 'write' in target
     ? atom(
-      get => get(target),
-      (get, set, ...args) => set(target, ...args),
-    )
+        get => get(target),
+        (get, set, ...args) => set(target, ...args),
+      )
     : atom(get => get(target)) as WritableAtom<unknown, unknown[], void>
 
   // Attach custom onMount logic
   jotaiAtom.onMount = (setSelf: (...value: any[]) => any): () => void => {
-    let cleanup: (() => void) | void
+    let cleanup: (() => void)
     try {
       cleanup = onMountHandler({
         target,

@@ -16,7 +16,7 @@ import { registerModal } from "../905/102752";
 import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
 import { A as _$$A } from "../5132/237216";
 import { partitionUsersByPurchaseEligibility } from "../figma_app/808294";
-import { Pg, lT } from "../figma_app/777551";
+import { isResourceDelisted, isResourceBlocked } from "../figma_app/777551";
 import { cs } from "../figma_app/740025";
 import { ej } from "../figma_app/86989";
 import { getAssociatedUserProfiles } from "../905/11536";
@@ -116,8 +116,8 @@ export function $$P0({
       } = partitionUsersByPurchaseEligibility(t, e);
       0 === usersCanPurchase.length && 0 !== publishers.length && (f = !0, u = getI18nString("community.buyer.no_you_cannot_buy_your_own_resource"));
     }
-    Pg(e) && (f = !0, u = getI18nString("community.resource.delisted_title"));
-    lT(e) && (f = !0, u = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked"));
+    isResourceDelisted(e) && (f = !0, u = getI18nString("community.resource.delisted_title"));
+    isResourceBlocked(e) && (f = !0, u = getI18nString("community.resource.admin_blocked_resource_banner.this_resource_is_blocked"));
   }
   let j = () => {
     x(showModalHandler({

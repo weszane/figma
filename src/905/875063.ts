@@ -1,8 +1,31 @@
 import { z } from 'zod'
+/**
+ * Enum representing badge types.
+ * Original variable: $$r1
+ */
+export enum BadgeType {
+  FIGMA_PARTNER = 'figma_partner',
+  TRUSTED = 'trusted',
+  CREATOR_FUND = 'creator_fund',
+  AWARD_2023 = 'award_2023',
+}
 
-var $$r1 = (e => (e.FIGMA_PARTNER = 'figma_partner', e.TRUSTED = 'trusted', e.CREATOR_FUND = 'creator_fund', e.AWARD_2023 = 'award_2023', e))($$r1 || {})
-export let $$a0 = z.object({
-  badges: z.array(z.nativeEnum($$r1)),
+/**
+ * Zod schema for validating badge arrays.
+ * Original variable: $$a0
+ */
+export const BadgeSchema = z.object({
+  badges: z.array(z.nativeEnum(BadgeType)),
 })
-export const n = $$a0
-export const s = $$r1
+
+/**
+ * Exported schema for external usage.
+ * Original variable: n
+ */
+export const n = BadgeSchema
+
+/**
+ * Exported enum for external usage.
+ * Original variable: s
+ */
+export const s = BadgeType

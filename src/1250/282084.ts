@@ -1,13 +1,13 @@
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { Q } from "../905/577205";
 import { QV } from "../1250/958770";
-let $$o0 = M4.Query({
+let $$o0 = liveStoreInstance.Query({
   fetch: async e => (await Q.getRepositorySourceFiles(e)).data.meta.source_files ?? []
 });
-let $$s3 = M4.Query({
+let $$s3 = liveStoreInstance.Query({
   fetch: async e => (await Q.getRepositoryFileComponents(e)).data.meta
 });
-let $$l2 = M4.Query({
+let $$l2 = liveStoreInstance.Query({
   fetch: async ({
     planType: e,
     planParentId: t
@@ -16,7 +16,7 @@ let $$l2 = M4.Query({
     parent_plan_id: t
   })).data.meta
 });
-M4.Query({
+liveStoreInstance.Query({
   fetch: async ({
     planType: e,
     planParentId: t
@@ -25,7 +25,7 @@ M4.Query({
     plan_parent_id: t
   })).data.meta
 });
-let $$d4 = M4.Query({
+let $$d4 = liveStoreInstance.Query({
   fetch: async e => {
     let t = await Q.getConnectedRepositories({
       libraryKey: e
@@ -38,7 +38,7 @@ let $$d4 = M4.Query({
   },
   key: "connectedRepositoriesCodeConnect"
 });
-let $$c1 = M4.Mutation(async (e, {
+let $$c1 = liveStoreInstance.Mutation(async (e, {
   query: t
 }) => {
   let {

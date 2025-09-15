@@ -7,7 +7,7 @@ import { sf } from "../905/929976";
 import { h } from "../905/662353";
 import { wI, JI, kl, OL, Gc } from "../figma_app/840917";
 import { hp, c6, ec, m6 } from "../905/725909";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 let $$_4 = createOptimistThunk(async (e, t) => {
   let r = e.getState()?.user?.id;
   if (!r) return;
@@ -36,7 +36,7 @@ let $$f2 = createActionCreator("SET_UNCLAIMED_FILES");
 export function $$E3(e) {
   hp.register(ec, () => function (e) {
     let t = e.getState().user?.id ?? null;
-    M4.fetch(OL({
+    liveStoreInstance.fetch(OL({
       userId: t
     }), {
       policy: "networkOnly"

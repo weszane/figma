@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { cz, i8 } from "../905/14017";
 import { Q } from "../905/978641";
 import { Lz } from "../905/497882";
-import { mk } from "../figma_app/777551";
+import { getResourceUserCount } from "../figma_app/777551";
 import { j4 } from "../figma_app/599979";
 var o = s;
 let h = "preview_tile--nonOverflowingText---rDD1";
@@ -80,7 +80,7 @@ export function $$g0({
         children: [jsx(cz, {
           likeCount: i && "like_count" in i ? i.like_count : 0
         }), jsx(i8, {
-          usageCount: i && "like_count" in i ? mk(i) : 0
+          usageCount: i && "like_count" in i ? getResourceUserCount(i) : 0
         })]
       })]
     })]

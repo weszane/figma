@@ -3,7 +3,7 @@ import { useId } from "react";
 import a from "classnames";
 import { X } from "../figma_app/313269";
 import { getI18nString } from "../905/303541";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { A as _$$A } from "../905/794518";
 import { I5, J7 } from "../905/599844";
 var s = a;
@@ -33,11 +33,11 @@ export function $$p0({
         },
         placeholder: i || (() => {
           switch (a) {
-            case ResourceType.HUB_FILE:
+            case HubTypeEnum.HUB_FILE:
               return getI18nString("community.publishing.describe_your_file");
-            case ResourceType.PLUGIN:
+            case HubTypeEnum.PLUGIN:
               return getI18nString("community.publishing.describe_your_plugin");
-            case ResourceType.WIDGET:
+            case HubTypeEnum.WIDGET:
               return getI18nString("community.publishing.describe_your_widget");
             default:
               return;

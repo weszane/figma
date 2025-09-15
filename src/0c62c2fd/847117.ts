@@ -43,7 +43,7 @@ import { DV } from "../905/739964";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
 import { uf, yA } from "../905/769";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { PdfConfirmationModal } from "../0c62c2fd/653470";
 let J = "file_import_modal--scrollContainer--rcZDu";
 function q(e) {
@@ -58,7 +58,7 @@ function q(e) {
   let f = 0 === p.remainingFiles;
   let g = $$ea7();
   let h = useSelector(e => "folder" === e.selectedView.view ? e.selectedView.folderId : null);
-  let x = M4.Folder.useValue(h).data;
+  let x = liveStoreInstance.Folder.useValue(h).data;
   let [v, T] = useState(uf.IMPORTING_FILES);
   $$el6(v === uf.IMPORTING_FILES || v === uf.ATTACHING_BRANCH);
   let I = x?.name || getI18nString("file_browser.tool_bar.drafts");

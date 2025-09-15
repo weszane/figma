@@ -119,7 +119,7 @@ import { I as _$$I } from "../c5e2cae0/718426";
 import { FC } from "../figma_app/212807";
 import { canEditTeam } from "../figma_app/642025";
 import { b0 } from "../905/763690";
-import { Om, tv as _$$tv, au } from "../figma_app/979714";
+import { useResourceRouteParams, useResourceFuid, ResourceHubHomeRouteClass } from "../figma_app/979714";
 import { Fz } from "../1250/610336";
 import { P as _$$P4 } from "../1250/15189";
 import { HH } from "../7222/418961";
@@ -2236,8 +2236,8 @@ function nL() {
       canShow: (e, t) => !e && t && Date.now() <= new Date("2025-06-23T16:00:00Z").getTime() + 2592e6 && n
     });
   });
-  let l = Om();
-  let d = _$$tv();
+  let l = useResourceRouteParams();
+  let d = useResourceFuid();
   let _ = _$$P4();
   return jsx(rq, {
     arrowPosition: _$$F_.LEFT_TITLE,
@@ -2249,7 +2249,7 @@ function nL() {
       label: renderI18nText("community.resource_hub.promotion.show_me_more"),
       type: "button",
       onClick: () => {
-        customHistory.push(new au({
+        customHistory.push(new ResourceHubHomeRouteClass({
           ...l,
           tab: _
         }, d).href);

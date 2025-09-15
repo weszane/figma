@@ -3,7 +3,7 @@ import { lQ } from "../905/934246";
 import n from "classnames";
 import { logError, logWarning } from "../905/714362";
 import { oW } from "../905/675859";
-import { YI, $3 } from "../figma_app/427318";
+import { isPluginResource, isWidgetResource } from "../figma_app/427318";
 import { Ek } from "../905/483217";
 import { Sl } from "../figma_app/578832";
 import { mH, zn, G8 } from "../5430/770886";
@@ -73,7 +73,7 @@ export function $$h3({
   });
 }
 export function $$x1(e, t) {
-  return YI(t) ? `/api/plugins/${t.id}/videos/${e.video_file_uuid}/manifest` : $3(t) ? `/api/widgets/${t.id}/videos/${e.video_file_uuid}/manifest` : null;
+  return isPluginResource(t) ? `/api/plugins/${t.id}/videos/${e.video_file_uuid}/manifest` : isWidgetResource(t) ? `/api/widgets/${t.id}/videos/${e.video_file_uuid}/manifest` : null;
 }
 export const F5 = $$p0;
 export const Mf = $$x1;

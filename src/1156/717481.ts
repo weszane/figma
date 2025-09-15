@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { R as _$$R } from "../905/943003";
 import { registerModal } from "../905/102752";
 import { l6, c$ } from "../905/794875";
@@ -292,7 +292,7 @@ let $$O0 = registerModal(function (e) {
     let r = setInterval(async () => {
       let {
         connectedProject
-      } = await M4.fetch(TT({
+      } = await liveStoreInstance.fetch(TT({
         fileKey: d.key
       }), {
         policy: "networkOnly"

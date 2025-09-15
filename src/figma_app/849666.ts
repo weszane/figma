@@ -22,7 +22,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { sf } from "../905/929976";
 import { Rh } from "../905/844322";
 import { BranchOpenMergeRequest, FileCanView, FileCanManage } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
 import { FEditorType } from "../figma_app/53721";
 import { R as _$$R } from "../905/309400";
@@ -114,7 +114,7 @@ function D(e) {
 function k() {
   let e = useDispatch();
   let t = useSelector(selectOpenFile);
-  let r = M4.useFile(t?.key || "").data;
+  let r = liveStoreInstance.useFile(t?.key || "").data;
   let i = useSelector(e => getPermissionsState(e));
   let s = useSubscription(BranchOpenMergeRequest, {
     branchFileKey: t && t?.key || ""

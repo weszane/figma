@@ -10,7 +10,7 @@ import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { Ir, nk as _$$nk, m1 } from "../figma_app/2023";
 import { selectCurrentUser, selectUser } from "../905/372672";
 import { FPublicationStatusType, FFileType, FPlanNameType, FOrganizationLevelType, FTeamAccessPermissionType, FPermissionLevelType, FViewPermissionType, FResourceCategoryType, FContainerType, FTemplateCategoryType, FUserVerificationStatusType, FProductAccessType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { hasTeamPaidAccess, hasValidSubscription } from "../figma_app/345997";
 import { wH, fm, KI } from "../figma_app/680166";
 import { FEditorType, mapFileTypeToEditorType, isSlidesOrWhiteboardOrDesignOrIllustration, mapEditorTypeToFileType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
@@ -174,7 +174,7 @@ import { Q as _$$Q } from "../905/363675";
 import { sx as _$$sx } from "../905/941192";
 import { t as _$$t4 } from "../905/833100";
 import { A as _$$A6 } from "../905/563377";
-import { k2 } from "../figma_app/10554";
+import { PageTypeEnum } from "../figma_app/10554";
 import { e0 as _$$e5 } from "../905/696396";
 import { y4I, _YF } from "../figma_app/822011";
 import { deepEqual } from "../905/382883";
@@ -183,7 +183,7 @@ import nA from "../vendor/241899";
 import { t as _$$t5 } from "../905/331623";
 import { W as _$$W2 } from "../905/841666";
 import { decimalToPercent } from "../figma_app/808294";
-import { AC, Pg } from "../figma_app/777551";
+import { isResourcePendingPublishing, isResourceDelisted } from "../figma_app/777551";
 import { M as _$$M2 } from "../905/759470";
 import { Pn, PP } from "../905/230175";
 import { Pf } from "../905/590952";
@@ -205,7 +205,7 @@ import { n as _$$n4, a as _$$a3 } from "../905/114254";
 import { N as _$$N3 } from "../905/620375";
 import { X$ } from "../figma_app/870683";
 import { l as _$$l } from "../905/716947";
-import { cX } from "../figma_app/471982";
+import { isSlideTemplateResource } from "../figma_app/471982";
 import { sG } from "../905/686934";
 import { ZS } from "../figma_app/519839";
 import { pz } from "../figma_app/825489";
@@ -798,7 +798,7 @@ function tn(e) {
   let i = getWorkshopModeStatus(e);
   return getFeatureFlags().figjam_3p_hardware_integration && (t || i.enabled);
 }
-let tr = M4.Query({
+let tr = liveStoreInstance.Query({
   fetch: async e => (await _$$L2.shareFileToGoogleDevice(e)).data.meta,
   gcPolicy: "onUnmount"
 });
@@ -3206,7 +3206,7 @@ let n2 = registerModal(function ({
     onUnpublishHubFileRedirectLink,
     onUnpublishHubFileSuccess,
     onUnpublishHubFileError
-  } = useMemo(() => cX(e) ? {
+  } = useMemo(() => isSlideTemplateResource(e) ? {
     beforeUnpublishHubFile: async () => {
       p(LibrarySourceEnum.HUBFILE);
       atomStoreManager.set(UM, {
@@ -3571,7 +3571,7 @@ function re({
     i(_$$t4({
       fileKey: e.key,
       isFullscreenOpen: !0,
-      entryPoint: k2.EDITOR,
+      entryPoint: PageTypeEnum.EDITOR,
       canvasThumbnailPromise: n ?? Promise.resolve(null)
     }));
   };
@@ -3613,7 +3613,7 @@ class rt extends Component {
     this.showUnpublishModal = () => {
       if (!this.props.editingHubFile) return;
       let e = this.isPaid();
-      let t = this.props.editingHubFile && AC(this.props.editingHubFile);
+      let t = this.props.editingHubFile && isResourcePendingPublishing(this.props.editingHubFile);
       let i = e && !t;
       let n = i ? getI18nString("community.hub_files.delist_file_from_community_hub") : this.isSlidesFile() ? getI18nString("community.hub_files.unpublish_template") : getI18nString("community.hub_files.remove_file_from_community_hub");
       let r = i ? getI18nString("community.resource.delisting_this_resource_will_prevent_people_from_discovering_or_purchasing_this_resource") : this.isSlidesFile() ? getI18nString("community.hub_files.unpublish_template_description") : getI18nString("community.hub_files.unpublishing_this_file_will_remove_it_from_the_community_hub_and_prevent_people_from_finding_and_using_this_file");
@@ -3657,7 +3657,7 @@ class rt extends Component {
   renderPublishInfoFooter() {
     let e;
     let t;
-    let i = this.props.editingHubFile && AC(this.props.editingHubFile);
+    let i = this.props.editingHubFile && isResourcePendingPublishing(this.props.editingHubFile);
     let r = this.props.isCommunityBlocked;
     let a = this.props.editingHubFile && this.props.editingHubFile.verification_status === FUserVerificationStatusType.BLOCKED;
     let s = HF(this.props.editingHubFile) ? _$$a2(this.props.editingHubFile).created_at : null;
@@ -3772,7 +3772,7 @@ class rt extends Component {
           children: renderI18nText("community.resource.publish")
         })
       })]
-    }) : (e = this.props.editingHubFile && Pg(this.props.editingHubFile) ? getI18nString("community.resource.delisted") : i ? getI18nString("community.permissions_modal_publish_tab.footer.submitted") : getI18nString("community.permissions_modal_publish_tab.footer.last_published"), t = this.isPaid() && !i ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish"), jsx("div", {
+    }) : (e = this.props.editingHubFile && isResourceDelisted(this.props.editingHubFile) ? getI18nString("community.resource.delisted") : i ? getI18nString("community.permissions_modal_publish_tab.footer.submitted") : getI18nString("community.permissions_modal_publish_tab.footer.last_published"), t = this.isPaid() && !i ? getI18nString("community.resource.delist") : getI18nString("community.resource.unpublish"), jsx("div", {
       className: HO,
       children: HF(this.props.editingHubFile) && !this.props.canPublishError ? jsxs(Fragment, {
         children: [jsxs("div", {
@@ -3786,16 +3786,16 @@ class rt extends Component {
             })
           }), jsxs("p", {
             className: mq,
-            children: [e, " ", this.props.editingHubFile && Pg(this.props.editingHubFile) ? "" : o, jsx("br", {}), jsx(_$$N2, {
+            children: [e, " ", this.props.editingHubFile && isResourceDelisted(this.props.editingHubFile) ? "" : o, jsx("br", {}), jsx(_$$N2, {
               href: this.props.hubFileHref,
               onClick: this.onHubFileClick,
               trusted: !0,
-              children: this.props.editingHubFile && AC(this.props.editingHubFile) ? renderI18nText("community.permissions_modal_publish_tab.footer.view_private_community_page") : renderI18nText("community.permissions_modal_publish_tab.footer.view_community_page")
+              children: this.props.editingHubFile && isResourcePendingPublishing(this.props.editingHubFile) ? renderI18nText("community.permissions_modal_publish_tab.footer.view_private_community_page") : renderI18nText("community.permissions_modal_publish_tab.footer.view_community_page")
             })]
           })]
         }), jsxs("div", {
           className: Uo,
-          children: [!Pg(this.props.editingHubFile) && jsx(Button, {
+          children: [!isResourceDelisted(this.props.editingHubFile) && jsx(Button, {
             variant: "destructiveSecondary",
             onClick: this.showUnpublishModal,
             children: t
@@ -4021,7 +4021,7 @@ function rn(e) {
   let A = !!_$$W2(d, ResourceTypeNoComment.HUB_FILE).data?.[0];
   let y = o?.editorType === _YF.SLIDES;
   let b = o && _$$W(o.editorType);
-  let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!HF(h) || Pg(h)) && b;
+  let v = canPublishAsHubFile && !_ && "loading" !== p.status && (!HF(h) || isResourceDelisted(h)) && b;
   let I = useMemoShallow(() => o && ny()(o, "key", "teamId", "parentOrgId", "editorType"), [o]);
   useLayoutEffect(() => {
     s && I && v && re({
@@ -4260,7 +4260,7 @@ function rb() {
               I(_$$t4({
                 fileKey: b,
                 isFullscreenOpen: !0,
-                entryPoint: k2.EDITOR,
+                entryPoint: PageTypeEnum.EDITOR,
                 canvasThumbnailPromise: Promise.resolve(v())
               }));
               return;
@@ -6516,7 +6516,7 @@ export let $$sm0 = registerModal(function ({
 }) {
   var s;
   let l = assertNotNullish(selectCurrentUser(), "FilePermissions: user is not logged in");
-  let d = M4.File.useValue(e).data;
+  let d = liveStoreInstance.File.useValue(e).data;
   let c = $S({
     fileKey: e,
     file: d

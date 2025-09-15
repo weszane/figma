@@ -1,9 +1,9 @@
 import { createActionCreator } from "../905/73481";
 import { createOptimistThunk } from "../905/350402";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { xy } from "../905/844322";
 import { sM } from "../905/70982";
-let $$l0 = M4.Mutation((e, {
+let $$l0 = liveStoreInstance.Mutation((e, {
   objects: t,
   reduxStore: i
 }) => {

@@ -13,7 +13,7 @@ import { D2, oh } from '../905/18797';
 import { k as _$$k3 } from '../905/44647';
 import { f as _$$f2 } from '../905/54715';
 import { KeyCodes } from '../905/63728';
-import { oA } from '../905/71785';
+import { getCurrentHubFileVersionName } from '../905/71785';
 import { resourceDataAndPresetKeysV2SetAtom } from '../905/72677';
 import { KH } from '../905/81982';
 import { F as _$$F } from '../905/84606';
@@ -164,7 +164,7 @@ import { Fl, fV } from '../figma_app/236178';
 import { X3 as _$$X, c$, MM, ms, wv } from '../figma_app/236327';
 import { jO } from '../figma_app/242339';
 import { Bf } from '../figma_app/249941';
-import { lR as _$$lR, fd, Re } from '../figma_app/255679';
+import { hasLibraryKeyInSet, hasResourcePresetKey, queryUiKitsFeedbackUrls } from '../figma_app/255679';
 import { GG as _$$GG, lS as _$$lS, qd as _$$qd, b4, Ou, PV, YQ } from '../figma_app/257779';
 import { o as _$$o } from '../figma_app/267183';
 import { N as _$$N } from '../figma_app/268271';
@@ -229,7 +229,7 @@ import { BrowserInfo } from '../figma_app/778880';
 import { l$ as _$$l$ } from '../figma_app/782261';
 import { parsePxNumber } from '../figma_app/783094';
 import { e_ as _$$e_, dM, F9, fA, MH } from '../figma_app/803787';
-import { $E } from '../figma_app/805898';
+import { BrowseCategoryRoute } from '../figma_app/805898';
 import { _2, hw, u2 } from '../figma_app/807786';
 import { dL } from '../figma_app/825489';
 import { TrackedLink } from '../figma_app/831799';
@@ -489,7 +489,7 @@ function e3({
     currentView
   } = wV();
   let M = useMemo(() => _ ?? Nz(e, {
-    isPreset: _$$lR(e, I)
+    isPreset: hasLibraryKeyInSet(e, I)
   }), [e, _, I]);
   let A = _$$J2(e, p, u);
   let P = _$$n2(e);
@@ -611,7 +611,7 @@ function e2({
   let b = useAtomWithSubscription(_$$T2);
   let C = x.searchOption?.type === _$$I2.ALL;
   let j = fV(e.library_key);
-  let v = fd(e.library_key);
+  let v = hasResourcePresetKey(e.library_key);
   let S = _$$H(e.library_key);
   let k = _9(e.library_key, 'asset_panel_visual_assets');
   let w = C && (j || v || S);
@@ -2421,7 +2421,7 @@ function sO({
   let {
     folderPath
   } = wV();
-  let c = fd(t);
+  let c = hasResourcePresetKey(t);
   let u = e.id;
   let p = s.length;
   let h = folderPath?.length ?? 0;
@@ -2579,7 +2579,7 @@ let s3 = memo(({
 }) => {
   let [{
     data: s
-  }] = setupResourceAtomHandler(Re(e?.data?.partnerType));
+  }] = setupResourceAtomHandler(queryUiKitsFeedbackUrls(e?.data?.partnerType));
   if (!e || e.type !== sZ) return null;
   let {
     data
@@ -3267,7 +3267,7 @@ function r4() {
         });
         if (i.length > 0) {
           let t = {
-            name: oA(e),
+            name: getCurrentHubFileVersionName(e),
             libraryKey: _$$l(e.library_key ?? ''),
             pages: l,
             numComponents: i.length,
@@ -5826,7 +5826,7 @@ function is() {
       name: 'visual_assets_browse_more_assets_clicked',
       text: 'Browse more assets'
     },
-    to: new $E({
+    to: new BrowseCategoryRoute({
       categorySlug: LJ.icons
     }).to,
     className: n1,
@@ -6134,7 +6134,7 @@ function ii({
         fileOrgId: s?.parentOrgId ?? void 0
       });
     }, [e, s?.key, s?.parentOrgId, s?.teamId, t]);
-    let m = fd(e);
+    let m = hasResourcePresetKey(e);
     return useCallback(e => {
       l && !m && (e.preventDefault(), e.stopPropagation(), r(j7({
         type: s4,
@@ -6318,7 +6318,7 @@ function iS({
     libraryKey: e?.libraryKey
   });
   let d = useMemo(() => e ? Array.from(e.pages) : [], [e]);
-  let c = fd(e?.libraryKey);
+  let c = hasResourcePresetKey(e?.libraryKey);
   let {
     thumbWidth,
     thumbHeight,
@@ -7291,7 +7291,7 @@ let la = () => {
   } = wV();
   let t = _$$R();
   let s = _$$$(libraryKey);
-  let r = fd(libraryKey);
+  let r = hasResourcePresetKey(libraryKey);
   useEffect(() => {
     r && s && t({
       updateSource: 'ui3_library_expand'

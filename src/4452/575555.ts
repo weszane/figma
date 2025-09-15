@@ -41,7 +41,7 @@ import { SvgComponent } from '../905/714743';
 import { yN } from '../905/727738';
 import { Qq } from '../905/736956';
 import { p as _$$p } from '../905/763242';
-import { $ as _$$$ } from '../905/834575';
+import { teamAPIClient } from '../905/834575';
 import { P as _$$P } from '../905/842406';
 import { Um } from '../905/848862';
 import { h as _$$h2 } from '../905/857431';
@@ -672,7 +672,7 @@ let tr = registerModal(() => {
   let u = getFeatureFlags().ai_ga;
   let m = async a => {
     try {
-      await _$$$.updateAiFeaturesDisabled({
+      await teamAPIClient.updateAiFeaturesDisabled({
         teamId: t,
         aiFeaturesDisabled: !a
       });
@@ -684,7 +684,7 @@ let tr = registerModal(() => {
   };
   let p = async a => {
     try {
-      await _$$$.updateAiDataSharing({
+      await teamAPIClient.updateAiDataSharing({
         teamId: t,
         enabled: a
       });

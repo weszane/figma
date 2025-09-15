@@ -27,13 +27,13 @@ import { VisualBellIcon } from "../905/576487";
 import { R as _$$R } from "../905/792510";
 import { W as _$$W } from "../905/841666";
 import { Lj } from "../figma_app/835219";
-import { DV, qD } from "../figma_app/471982";
+import { buildFullCommunityUrl, getCurrentVersion } from "../figma_app/471982";
 import { BT } from "../905/618447";
 import { rY } from "../figma_app/524655";
 import { decimalToPercent } from "../figma_app/808294";
 import { gH } from "../905/104173";
 import { W as _$$W2, T as _$$T } from "../905/336482";
-import { iB } from "../figma_app/188671";
+import { allCategoriesQuery } from "../figma_app/188671";
 import { cO } from "../figma_app/530167";
 import { i9, N4, VS, oO, bk } from "../figma_app/49598";
 import { oB, sf } from "../905/929976";
@@ -48,13 +48,13 @@ import { Ni } from "../figma_app/188152";
 import { selectUser } from "../905/372672";
 import { bH, cp, HF, zv, yS, cU, vK, Rj, al, a6, ow } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getExplicitRoleForUserAndFile, getPermissionsState } from "../figma_app/642025";
 import { Ef } from "../905/81982";
 import { Np } from "../figma_app/193867";
-import { FileInputType, ResourceTypeNoComment, ResourceType } from "../figma_app/45218";
-import { mN } from "../905/71785";
-import { k2, aP } from "../figma_app/10554";
+import { FileInputType, ResourceTypeNoComment, HubTypeEnum } from "../figma_app/45218";
+import { CanvasSourceEnum } from "../905/71785";
+import { PageTypeEnum, UploadStatusEnum } from "../figma_app/10554";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { AccessLevelEnum } from "../905/557142";
 import { ShareAction } from "../figma_app/707808";
@@ -376,7 +376,7 @@ class ts extends Component {
         carouselMedia: metadata.carouselMedia,
         thumbnailBuffer: this.state.customThumbnail && "buffer" in this.state.customThumbnail ? this.state.customThumbnail.buffer : null,
         customCarouselThumbnail: this.state.customThumbnail,
-        hasCustomUploadedThumbnail: this.state.thumbnailType === mN.USER_UPLOADED
+        hasCustomUploadedThumbnail: this.state.thumbnailType === CanvasSourceEnum.USER_UPLOADED
       };
     };
     this.getCreateHubFilePayload = () => {
@@ -399,7 +399,7 @@ class ts extends Component {
         tagsV2: metadata.tagsV2 ?? [],
         thumbnailBuffer: n && "buffer" in n ? n.buffer : null,
         thumbnailIsSet: void 0 !== n,
-        hasCustomUploadedThumbnail: this.state.thumbnailType === mN.USER_UPLOADED,
+        hasCustomUploadedThumbnail: this.state.thumbnailType === CanvasSourceEnum.USER_UPLOADED,
         viewerMode: metadata.viewerMode,
         scalingMode: metadata.scalingMode,
         authorOrgId: t,
@@ -573,7 +573,7 @@ class ts extends Component {
       e === FTemplateCategoryType.PROTOTYPE && null == this.props.scalingMode && (t.scalingMode = nV);
       e !== FTemplateCategoryType.PROTOTYPE || this.state.customThumbnail || this.setState({
         customThumbnail: this.state.canvasThumbnail,
-        thumbnailType: this.hasUserSetCanvasThumbnail() ? mN.USER_CANVAS : mN.DEFAULT_CANVAS
+        thumbnailType: this.hasUserSetCanvasThumbnail() ? CanvasSourceEnum.USER_CANVAS : CanvasSourceEnum.DEFAULT_CANVAS
       });
       this.updatePublishingMetadata(t);
     };
@@ -636,7 +636,7 @@ class ts extends Component {
         };
         this.setState({
           customThumbnail: i,
-          thumbnailType: mN.USER_UPLOADED
+          thumbnailType: CanvasSourceEnum.USER_UPLOADED
         }, () => {
           this.updateCarouselMedia({
             carouselMedia: [i]
@@ -661,7 +661,7 @@ class ts extends Component {
         this.setState({
           customThumbnail: e,
           coverImageCarouselMediaId: "id" in e ? e.id : void 0,
-          thumbnailType: mN.USER_UPLOADED
+          thumbnailType: CanvasSourceEnum.USER_UPLOADED
         });
         trackEventAnalytics("community_publish_modal", {
           name: "use_custom_thumbnail",
@@ -680,7 +680,7 @@ class ts extends Component {
       let e = this.state.customThumbnail;
       this.setState({
         customThumbnail: this.state.canvasThumbnail,
-        thumbnailType: this.hasUserSetCanvasThumbnail() ? mN.USER_CANVAS : mN.DEFAULT_CANVAS
+        thumbnailType: this.hasUserSetCanvasThumbnail() ? CanvasSourceEnum.USER_CANVAS : CanvasSourceEnum.DEFAULT_CANVAS
       }, () => {
         this.state.canvasThumbnail && this.updateCarouselMedia({
           carouselMedia: [this.state.canvasThumbnail]
@@ -693,7 +693,7 @@ class ts extends Component {
       if (this.setState({
         customThumbnail: e,
         coverImageCarouselMediaId: "",
-        thumbnailType: mN.USER_CANVAS
+        thumbnailType: CanvasSourceEnum.USER_CANVAS
       }, () => {}), e) {
         let t = this.props.publishingState.metadata.carouselMedia ?? [];
         t.some(t => t.sha1 === e.sha1) || this.updateCarouselMedia({
@@ -727,7 +727,7 @@ class ts extends Component {
         })()
       });
     };
-    this.isUniversalPosting = () => this.props.entryPoint === k2.UNIVERSAL_POSTING;
+    this.isUniversalPosting = () => this.props.entryPoint === PageTypeEnum.UNIVERSAL_POSTING;
     this.hideDropdownIfOpen = () => {
       (this.props.dropdownShown?.type === iu || this.props.dropdownShown?.type === Ql) && this.props.hideDropdown();
     };
@@ -782,7 +782,7 @@ class ts extends Component {
   }
   componentWillUnmount() {
     this.state.canvasThumbnail && nK(this.state.canvasThumbnail);
-    this.props.publishingState.status.code === aP.SUCCESS && this.props.clearPublishingState();
+    this.props.publishingState.status.code === UploadStatusEnum.SUCCESS && this.props.clearPublishingState();
     this.props.Sprig("track", "hub_file_publish_modal_close", {
       hasAttemptedToPublish: this.hasAttemptedToPublish,
       hasSucceededToPublish: this.hasSucceededToPublish,
@@ -809,7 +809,7 @@ class ts extends Component {
     });
   }
   async setAllCategories() {
-    let e = await M4.fetch(iB(gH(this.props.figFile.editor_type ?? void 0, this.props.publishingState.metadata.viewerMode)));
+    let e = await liveStoreInstance.fetch(allCategoriesQuery(gH(this.props.figFile.editor_type ?? void 0, this.props.publishingState.metadata.viewerMode)));
     this.setState({
       allCategories: e
     });
@@ -836,11 +836,11 @@ class ts extends Component {
     if (HF(this.props.hubFile)) {
       let e = this.state.customThumbnail && this.state.customThumbnail.sha1 === n?.sha1;
       r.thumbnailType = (() => {
-        if (this.state.customThumbnail) return e ? this.hasUserSetCanvasThumbnail() ? mN.USER_CANVAS : mN.DEFAULT_CANVAS : mN.USER_UPLOADED;
+        if (this.state.customThumbnail) return e ? this.hasUserSetCanvasThumbnail() ? CanvasSourceEnum.USER_CANVAS : CanvasSourceEnum.DEFAULT_CANVAS : CanvasSourceEnum.USER_UPLOADED;
       })();
     } else {
       let e = [];
-      this.hasUserSetCanvasThumbnail() && n ? (r.customThumbnail = n, r.thumbnailType = mN.USER_CANVAS, e = [n]) : publishingState.metadata.viewerMode === FTemplateCategoryType.PROTOTYPE && n ? (r.customThumbnail = n, r.thumbnailType = mN.DEFAULT_CANVAS, e = [n]) : (r.customThumbnail = void 0, r.thumbnailType = void 0);
+      this.hasUserSetCanvasThumbnail() && n ? (r.customThumbnail = n, r.thumbnailType = CanvasSourceEnum.USER_CANVAS, e = [n]) : publishingState.metadata.viewerMode === FTemplateCategoryType.PROTOTYPE && n ? (r.customThumbnail = n, r.thumbnailType = CanvasSourceEnum.DEFAULT_CANVAS, e = [n]) : (r.customThumbnail = void 0, r.thumbnailType = void 0);
       this.updatePublishingMetadata({
         carouselMedia: e
       });
@@ -858,7 +858,7 @@ class ts extends Component {
     return e;
   }
   async getCategoryIdForPresentations() {
-    let e = await M4.fetch(iB(gH(this.props.figFile.editor_type ?? void 0, this.props.publishingState.metadata.viewerMode)));
+    let e = await liveStoreInstance.fetch(allCategoriesQuery(gH(this.props.figFile.editor_type ?? void 0, this.props.publishingState.metadata.viewerMode)));
     return e.find(d_)?.id;
   }
   async initPublishingMetadataForSlides() {
@@ -874,7 +874,7 @@ class ts extends Component {
     }
     e && e.length > 0 ? this.setState({
       customThumbnail: e[0],
-      thumbnailType: mN.USER_UPLOADED,
+      thumbnailType: CanvasSourceEnum.USER_UPLOADED,
       isGeneratingThumbnail: !1
     }, () => {
       this.updatePublishingMetadata({
@@ -904,7 +904,7 @@ class ts extends Component {
     let t = this.props.hubFile;
     let i = j4(metadata.author);
     let n = this.state.formErrors;
-    let a = this.props.publishingState.status.code === aP.UPLOADING || this.props.slidesPublishState === F4.PUBLISH_HUB_FILE_INITIATED;
+    let a = this.props.publishingState.status.code === UploadStatusEnum.UPLOADING || this.props.slidesPublishState === F4.PUBLISH_HUB_FILE_INITIATED;
     let s = n.thumbnailIsSet || n.thumbnailBuffer;
     let o = this.state.customThumbnail;
     let l = metadata.isPaid ? {
@@ -940,9 +940,9 @@ class ts extends Component {
           name: i?.name,
           imgUrl: i?.img_url
         },
-        enableRestore: !this.props.isEditHubFilePageMode && this.state.thumbnailType === mN.USER_UPLOADED,
-        enableUpload: !this.props.isEditHubFilePageMode && this.state.thumbnailType !== mN.USER_UPLOADED,
-        isCustomThumbnailSet: this.state.thumbnailType !== mN.DEFAULT_CANVAS,
+        enableRestore: !this.props.isEditHubFilePageMode && this.state.thumbnailType === CanvasSourceEnum.USER_UPLOADED,
+        enableUpload: !this.props.isEditHubFilePageMode && this.state.thumbnailType !== CanvasSourceEnum.USER_UPLOADED,
+        isCustomThumbnailSet: this.state.thumbnailType !== CanvasSourceEnum.DEFAULT_CANVAS,
         metricFooter: {
           viewCount: t?.view_count || 0,
           likeCount: t?.like_count || 0,
@@ -1012,7 +1012,7 @@ class ts extends Component {
                 description: vK(e)
               });
             },
-            resourceType: ResourceType.HUB_FILE,
+            resourceType: HubTypeEnum.HUB_FILE,
             error: n.description
           }), this.state.allCategories && (!this.isSlidePublish() || metadata.categoryId) && jsx(SE, {
             categoryId: metadata.categoryId,
@@ -1049,7 +1049,7 @@ class ts extends Component {
                 creatorPolicy: Rj(e)
               });
             },
-            resourceType: ResourceType.HUB_FILE,
+            resourceType: HubTypeEnum.HUB_FILE,
             error: n.creatorPolicy
           }), jsx(_$$A8, {
             showToSCheckbox: this.props.showToSCheckbox,
@@ -1096,7 +1096,7 @@ class ts extends Component {
             }
           }), jsx(_$$A17, {
             isPaid: this.props.isPaid,
-            resourceType: ResourceType.HUB_FILE
+            resourceType: HubTypeEnum.HUB_FILE
           })]
         })]
       }), jsx("div", {
@@ -1205,7 +1205,7 @@ class ts extends Component {
     let t = !1;
     let i = this.isSlidePublish();
     let n = i && this.props.slidesPublishState === F4.PUBLISH_HUB_FILE_COMPLETED;
-    if (2 === this.state.step && this.props.hubFile && this.props.publishingState.status.code === aP.SUCCESS && this.props.publisher && (!i || n)) {
+    if (2 === this.state.step && this.props.hubFile && this.props.publishingState.status.code === UploadStatusEnum.SUCCESS && this.props.publisher && (!i || n)) {
       let {
         hubFile,
         fileKey,
@@ -1280,7 +1280,7 @@ let to = connect((e, t) => {
   let s = a && a6(a);
   let o = getExplicitRoleForUserAndFile(fileKey, e);
   let l = o?.level === AccessLevelEnum.OWNER;
-  let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== k2.UNIVERSAL_POSTING && PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID;
+  let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== PageTypeEnum.UNIVERSAL_POSTING && PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID;
   let u = e.publishingHubFiles[fileKey];
   u && u.metadata || (u = {
     status: oH(u),
@@ -1359,7 +1359,7 @@ let $$tl0 = registerModal(function (e) {
   let {
     Sprig
   } = useSprigWithSampling();
-  let i = M4.useFile(e.fileKey).data;
+  let i = liveStoreInstance.useFile(e.fileKey).data;
   let n = useSelector(e => {
     if (!i) return null;
     let t = e.figFilePublishedAsHubFile[i.key];
@@ -1502,9 +1502,9 @@ let $$tl0 = registerModal(function (e) {
         }), e.hubFile && !e.isPaid ? jsx(_$$R, {
           author: Lj(e.hubFile),
           resourceType: ResourceTypeNoComment.HUB_FILE,
-          resourceURL: DV(e.hubFile),
+          resourceURL: buildFullCommunityUrl(e.hubFile),
           resourceId: e.hubFile.id,
-          resourceName: qD(e.hubFile).name,
+          resourceName: getCurrentVersion(e.hubFile).name,
           disableHeader: !0
         }) : null]
       }),

@@ -6,7 +6,7 @@ import { Bq } from "../905/760682";
 import { Z } from "../905/939602";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { LH } from "../905/872904";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 var $$n0;
 let m = createRemovableAtomFamily(() => atom(null));
 let h = createRemovableAtomFamily(e => atom(t => e.map(e => t(m(e)))), shallowEqual);
@@ -51,7 +51,7 @@ export function $$_2(e, t) {
     data: i.data[0] ?? null
   }), [i]);
 }
-($$n0 || ($$n0 = {})).LibrariesByLibraryKeysQuery = M4.Query({
+($$n0 || ($$n0 = {})).LibrariesByLibraryKeysQuery = liveStoreInstance.Query({
   fetch: async ({
     libraryKeys: e,
     subscriptionFileKey: t,

@@ -21,7 +21,7 @@ import { isSingleDevWithCodegen } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { isValidPluginId } from "../905/327571";
 import { Rt } from "../figma_app/979658";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
 import { getOpenFileKey } from "../905/622391";
@@ -75,7 +75,7 @@ export let $$j0 = createOptimistThunk(async (e, t) => {
     return;
   }
   let $ = (await TN(e, {
-    resourceType: ResourceType.PLUGIN,
+    resourceType: HubTypeEnum.PLUGIN,
     resourceIds: [tryPluginId]
   }))[tryPluginId];
   if ($ && tryPluginParams && isValidPluginId(tryPluginId) && K) {

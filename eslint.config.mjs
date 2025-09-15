@@ -16,6 +16,7 @@ export default antfu({
     'prefer-promise-reject-errors': 'off',
     'no-async-promise-executor': 'off',
     'no-console': 'off',
+    'ts/no-use-before-define': 'off',
     'unicorn/prefer-dom-node-text-content': 'off',
   },
 })

@@ -1,10 +1,33 @@
-import { deepEqual } from "../905/382883";
-import r from "../vendor/785047";
-var a = r;
-export function $$s0(e, t) {
-  if ("object" != typeof e || null == e) return t;
-  if (e === t) return e;
-  let i = a()({}, e, t);
-  return deepEqual(i, e) ? e : i;
+import { assign } from 'lodash-es'
+import { deepEqual } from '../905/382883'
+
+/**
+ * Merges two objects, returning the first if they are identical or if the merge doesn't change it.
+ * Original function name: $$s0, exported as: j
+ * @param source - The source object to merge into.
+ * @param target - The target object to merge from.
+ * @returns The merged object or the original if unchanged.
+ */
+export function mergeWithObject(
+  source: Record<string, any> | null | undefined,
+  target: Record<string, any> | null | undefined,
+): Record<string, any> | null | undefined {
+  // Early return if source is not an object or is null
+  if (typeof source !== 'object' || source == null) {
+    return target
+  }
+
+  // Early return if source and target are the same reference
+  if (source === target) {
+    return source
+  }
+
+  // Perform shallow merge using lodash assign
+  const merged = assign({}, source, target)
+
+  // Return original source if merge didn't change it (deep equality check)
+  return deepEqual(merged, source) ? source : merged
 }
-export const j = $$s0;
+
+// Export the function with a consistent name
+export const j = mergeWithObject

@@ -4,7 +4,7 @@ import { useDispatch, connect } from "react-redux";
 import { s as _$$s } from "../905/601732";
 import { j4, o1, f7, Rv, UU, mH } from "../figma_app/599979";
 import { getPermissionsState } from "../figma_app/642025";
-import { o1 as _$$o } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { A as _$$A } from "../905/61817";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
@@ -136,7 +136,7 @@ class b extends PureComponent {
   }
   renderCreatorWithIcon(e) {
     let t = j4(e);
-    let i = "org_id" in e ? _$$o.ORG : "team_id" in e ? _$$o.TEAM : _$$o.USER;
+    let i = "org_id" in e ? TeamOrgType.ORG : "team_id" in e ? TeamOrgType.TEAM : TeamOrgType.USER;
     return t ? jsx(_$$A, {
       profile: {
         ...t,

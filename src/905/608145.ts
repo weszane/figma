@@ -32,8 +32,8 @@ import { M as _$$M } from "../figma_app/170366";
 import { getFullscreenViewEditorType, getCurrentPluginVersion, canRunPlugin } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { handlePluginError } from "../905/753206";
-import { ResourceType } from "../figma_app/45218";
-import { k2 } from "../figma_app/10554";
+import { HubTypeEnum } from "../figma_app/45218";
+import { PageTypeEnum } from "../figma_app/10554";
 import { hasLocalFileId } from "../figma_app/155287";
 import { mN, Wh } from "../figma_app/985200";
 import { h as _$$h } from "../figma_app/752483";
@@ -390,7 +390,7 @@ export function $$J0(e, t, i) {
         debugState.dispatch(_$$r({
           localFileId: i.localFileId,
           publishedPluginId: i.widgetId,
-          entryPoint: k2.EDITOR,
+          entryPoint: PageTypeEnum.EDITOR,
           localSnapshotUrl: r,
           localSnapshotBlob: t,
           widgetNodeId: i.widgetId
@@ -406,7 +406,7 @@ export function $$J0(e, t, i) {
       debugState.dispatch(_$$r({
         localFileId: i.localFileId,
         publishedPluginId: i.widgetId,
-        entryPoint: k2.EDITOR
+        entryPoint: PageTypeEnum.EDITOR
       }));
       return;
     case "view-api-docs":
@@ -420,7 +420,7 @@ export function $$J0(e, t, i) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
-          resourceType: ResourceType.PLUGIN
+          resourceType: HubTypeEnum.PLUGIN
         }
       }));
       return;
@@ -429,7 +429,7 @@ export function $$J0(e, t, i) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h,
         data: {
-          resourceType: ResourceType.WIDGET
+          resourceType: HubTypeEnum.WIDGET
         }
       }));
       return;

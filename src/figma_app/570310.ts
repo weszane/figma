@@ -51,7 +51,7 @@ import { selectCurrentUser } from "../905/372672";
 import { f as _$$f2 } from "../905/940356";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { bj } from "../905/420347";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
 import { KindEnum } from "../905/129884";
 import { Vr } from "../figma_app/151869";
@@ -1263,7 +1263,7 @@ export function $$eQ0({
     isComponentBrowserMapping: o
   }) {
     let l = useCurrentFileKey();
-    let d = M4.File.useValue(l).data;
+    let d = liveStoreInstance.File.useValue(l).data;
     let c = useSelector(e => e.userFlags.dev_mode_has_dismissed_code_connect_instance_entrypoint);
     let u = {
       view: "none"

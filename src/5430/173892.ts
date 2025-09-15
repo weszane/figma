@@ -5,7 +5,7 @@ import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
 import { Jm } from "../figma_app/387599";
 import { CO } from "../5430/297093";
-import { OU } from "../figma_app/773663";
+import { anchorEditorResource } from "../figma_app/773663";
 import { n as _$$n } from "../5430/859486";
 import { km, u9 } from "../5430/184698";
 var n = i;
@@ -42,7 +42,7 @@ export function $$h1({
     options: l,
     searchParamUpdate: e => ({
       resource_type: e,
-      editor_type: OU(r, e, {
+      editor_type: anchorEditorResource(r, e, {
         anchorOn: "resourceType"
       }).editorType
     }),
@@ -58,7 +58,7 @@ export function $$h1({
         key: "resourceType",
         value: e
       }];
-      let s = OU(r, e, {
+      let s = anchorEditorResource(r, e, {
         anchorOn: "resourceType"
       }).editorType;
       s !== r && t.push({

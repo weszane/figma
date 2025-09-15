@@ -1,13 +1,13 @@
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { CommunityPageType } from "../figma_app/45218";
-import { A } from "../905/665703";
-let $$n1 = M4.Query({
-  fetch: async e => await A.getCommunityShelves({
+import { communityShelfService } from "../905/665703";
+let $$n1 = liveStoreInstance.Query({
+  fetch: async e => await communityShelfService.getCommunityShelves({
     shelfType: CommunityPageType.SLIDES_TEMPLATE_MODAL
   }).then(e => e.data.meta)
 });
-let $$c0 = M4.Query({
-  fetch: async e => await A.getCommunityShelfById({
+let $$c0 = liveStoreInstance.Query({
+  fetch: async e => await communityShelfService.getCommunityShelfById({
     categoryId: e
   }).then(e => {
     if (e.data.meta.length > 0) return e.data.meta[0];

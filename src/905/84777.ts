@@ -4,7 +4,7 @@ import { resourceUtils } from "../905/989992";
 import s from "lodash-es/mapValues";
 import { reportError } from "../905/11";
 import { y as _$$y } from "../figma_app/681090";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { createMetaValidator } from "../figma_app/181241";
 import { F6 } from "../905/712921";
 var o = s;
@@ -87,21 +87,21 @@ function f(e) {
     error: e
   }), t));
 }
-let $$_2 = M4.Query({
+let $$_2 = liveStoreInstance.Query({
   fetch: e => m.getRates(e).then(e => e.data.meta).catch(e => {
     f(e);
     return e;
   }),
   key: "billing_prices_active_rates"
 });
-let $$A3 = M4.Query({
+let $$A3 = liveStoreInstance.Query({
   fetch: e => m.getContractRates(e).then(e => e.data.meta).catch(e => {
     f(e);
     return e;
   }),
   key: "billing_prices_contract_rates"
 });
-let y = M4.Query({
+let y = liveStoreInstance.Query({
   fetch: async ({
     planKey: e
   }) => {
@@ -120,7 +120,7 @@ let y = M4.Query({
   }) => null !== e.parentId && "" !== e.parentId,
   key: "billing_prices_current_contract_rates"
 });
-let b = M4.Query({
+let b = liveStoreInstance.Query({
   fetch: async ({
     planKey: e
   }) => {
@@ -179,7 +179,7 @@ export function $$S6(e, t, i, n = {}) {
     }
   }), n);
 }
-M4.Query({
+liveStoreInstance.Query({
   fetch: async ({
     planKey: e
   }) => {
@@ -198,7 +198,7 @@ M4.Query({
   }) => null !== e.parentId,
   key: "billing_prices_admin_current_contract_rates"
 });
-M4.Query({
+liveStoreInstance.Query({
   fetch: async ({
     planKey: e
   }) => {
@@ -217,7 +217,7 @@ M4.Query({
   }) => null !== e.parentId,
   key: "billing_prices_admin_at_contract_renewal"
 });
-M4.Query({
+liveStoreInstance.Query({
   fetch: async ({
     planKey: e,
     renewalTerm: t,

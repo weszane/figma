@@ -4,7 +4,7 @@ import { r as _$$r } from "../905/857502";
 import { trackEventAnalytics } from "../905/449184";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { A as _$$A } from "../905/776343";
-import { lW } from "../figma_app/471982";
+import { copyToClipboard } from "../figma_app/471982";
 import { s0 } from "../figma_app/350203";
 function l() {
   return jsx("svg", {
@@ -66,7 +66,7 @@ export function $$h0({
         tabIndex: 0,
         onClick: () => {
           A(!0);
-          lW(h);
+          copyToClipboard(h);
           setTimeout(() => A(!1), 3e3);
           y(s0.SHARE_LINK);
         },

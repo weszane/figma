@@ -11,24 +11,24 @@ import { getFeatureFlags } from '../905/601108';
 import { s as _$$s } from '../905/608932';
 import { VV } from '../905/623179';
 import { j } from '../905/659729';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { en, GT } from '../905/759470';
 import { aB, yr } from '../905/827765';
 import { v as _$$v } from '../905/871922';
-import { S as _$$S } from '../905/872825';
+import { getValueOrFallback } from '../905/872825';
 import { XHR } from '../905/910117';
 import { VY, yj } from '../905/966582';
 import { O_ } from '../905/967587';
 import { i as _$$i } from '../905/970229';
-import { o1 as _$$o } from '../figma_app/10554';
+import { TeamOrgType } from '../figma_app/10554';
 import { isPlugin, hasMonetizedResourceMetadata, hasClientMeta, hasFigFileMetadata, isWidget } from '../figma_app/45218';
 import { PublisherType } from '../figma_app/155287';
 import { Bg } from '../figma_app/246699';
-import { g0, Qc } from '../figma_app/427318';
+import { isPluginOrWidget, hasHubFile } from '../figma_app/427318';
 import { canAdminOrg, hasAdminRoleAccessOnTeam } from '../figma_app/642025';
 import { A as _$$A, E3 } from '../figma_app/711113';
 import { cs, cV, Gg, Gq, qA, sD, Uc, Zi } from '../figma_app/740025';
-import { AC, XU } from '../figma_app/777551';
+import { isResourcePendingPublishing, isUserAcceptedPublisher } from '../figma_app/777551';
 import { getCurrentUserOrgUser } from '../figma_app/951233';
 import { shallowEqual, useSelector } from 'react-redux';
 var $$M4 = (e => (e[e.NONE = 0] = 'NONE', e[e.PENDING = 1] = 'PENDING', e[e.DISPLAY_ONLY = 2] = 'DISPLAY_ONLY', e[e.ADMIN_IN_DIFFERENT_WORKSPACE = 3] = 'ADMIN_IN_DIFFERENT_WORKSPACE', e[e.ADMIN = 4] = 'ADMIN', e[e.NONE_WITH_INHERITED_ADMIN = 5] = 'NONE_WITH_INHERITED_ADMIN', e[e.PENDING_WITH_INHERITED_ADMIN = 6] = 'PENDING_WITH_INHERITED_ADMIN', e[e.DISPLAY_ONLY_WITH_INHERITED_ADMIN = 7] = 'DISPLAY_ONLY_WITH_INHERITED_ADMIN', e[e.EXPLICIT_ADMIN = 8] = 'EXPLICIT_ADMIN', e))($$M4 || {});
@@ -51,7 +51,7 @@ export function $$G19(e) {
   let r = useSelector(r => hasClientMeta(e) ? $$U29(t) : $$B25(r, e));
   let i = useSelector(t => isPlugin(e) || isWidget(e) ? _$$A(t, e) : null);
   let a = hasFigFileMetadata(e) ? e.fig_file_metadata?.key : null;
-  let s = M4.File.useValue(a);
+  let s = liveStoreInstance.File.useValue(a);
   let o = !!a && !!s;
   return hasClientMeta(e) ? r && o : !!(isPlugin(e) || isWidget(e)) && (r || E3(i));
 }
@@ -60,7 +60,7 @@ export function $$V13(e, t) {
   let n = !!(r?.org_id || r?.team_id);
   let i = r && Zi(r, e);
   let a = i && e.user && O_(e, i);
-  return g0(t) && (!i || i.userId === e.user?.id) && t.creator.id === e.user?.id ? 8 : t.community_publishers?.accepted.some(t => t.id === e.user?.community_profile_id) ? !n && Qc(t) ? 8 : i ? a ? n ? 7 : 2 : 3 : 2 : t.community_publishers?.pending?.some(t => t.id === e.user?.community_profile_id) ? i && a ? 6 : 1 : i ? a ? 5 : 3 : 0;
+  return isPluginOrWidget(t) && (!i || i.userId === e.user?.id) && t.creator.id === e.user?.id ? 8 : t.community_publishers?.accepted.some(t => t.id === e.user?.community_profile_id) ? !n && hasHubFile(t) ? 8 : i ? a ? n ? 7 : 2 : 3 : 2 : t.community_publishers?.pending?.some(t => t.id === e.user?.community_profile_id) ? i && a ? 6 : 1 : i ? a ? 5 : 3 : 0;
 }
 export function $$H34(e, t) {
   if ('user' in e) {
@@ -76,7 +76,7 @@ export function $$H34(e, t) {
 }
 export let $$z17 = e => !0 === e.is_public || e.org != null;
 export function $$W41(e, t, r, n) {
-  return hasMonetizedResourceMetadata(e) || n ? PublisherType.PUBLIC : $$z17(e.roles) ? e.roles.is_public || AC(e) ? PublisherType.PUBLIC : PublisherType.ORG : t != null && r ? PublisherType.ORG : PublisherType.PUBLIC;
+  return hasMonetizedResourceMetadata(e) || n ? PublisherType.PUBLIC : $$z17(e.roles) ? e.roles.is_public || isResourcePendingPublishing(e) ? PublisherType.PUBLIC : PublisherType.ORG : t != null && r ? PublisherType.ORG : PublisherType.PUBLIC;
 }
 export function $$K31(e, t, r, n) {
   let i = $$en21(t.team_id, r, e, t.parent_org_id || null);
@@ -86,7 +86,7 @@ export function $$K31(e, t, r, n) {
 export function $$Y16(e, t) {
   if (!e) return !1;
   let r = e.author.id;
-  return XU(r, t);
+  return isUserAcceptedPublisher(r, t);
 }
 export function $$$5(e, t) {
   return e.creator.id === t;
@@ -204,14 +204,14 @@ export async function $$ei38(e) {
 export function $$ea42(e, t) {
   if (t.publisher.id && e.user) {
     switch (t.publisher.entity_type) {
-      case _$$o.ORG:
+      case TeamOrgType.ORG:
         {
           let r = Object.values(e.orgById).find(e => e.community_profile_id === t.publisher.id);
           return {
             org_id: r?.id ?? e.currentUserOrgId ?? ''
           };
         }
-      case _$$o.TEAM:
+      case TeamOrgType.TEAM:
         {
           let r = Object.values(e.teams).find(e => e.community_profile_id === t.publisher.id);
           return {
@@ -309,7 +309,7 @@ export function $$e_26(e, t = 'Image') {
       filename: t
     }));
   }
-  let r = _$$S(e.type, yj);
+  let r = getValueOrFallback(e.type, yj);
   if (!r || !$$ep3.includes(r)) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_wrong_format', {
       filename: t

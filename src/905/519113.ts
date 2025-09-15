@@ -80,7 +80,7 @@ import { $z } from "../figma_app/617427";
 import { AutoLayout, Spacer } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { isBranch } from "../905/760074";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { bL as _$$bL, mc, c$ } from "../905/493196";
 import { useSelectPrimitiveState, SelectPrimitiveTrigger } from "../905/408073";
 import { r as _$$r3 } from "../905/571562";
@@ -312,7 +312,7 @@ function eW(e) {
   }));
   let f = useRef(null);
   let _ = useId();
-  let y = M4.File.useValue(fileKey).data;
+  let y = liveStoreInstance.File.useValue(fileKey).data;
   let b = useMemo(() => {
     if (!y) return;
     let e = y.team_id;
@@ -450,7 +450,7 @@ function eq({
   editingFile: t,
   publishScope: i
 }) {
-  let r = M4.File.useValue(t.key).data?.team_id;
+  let r = liveStoreInstance.File.useValue(t.key).data?.team_id;
   let s = useSelector(e => {
     if (r) return e.teams[r];
   });

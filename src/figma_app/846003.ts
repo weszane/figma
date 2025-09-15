@@ -2,8 +2,8 @@ import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { Oe } from "../905/34809";
-import { $T } from "../figma_app/422062";
-import { Ag } from "../figma_app/471982";
+import { ViewPathManager } from "../figma_app/422062";
+import { getTabTitle } from "../figma_app/471982";
 import { Af } from "../figma_app/49598";
 import { l5 } from "../figma_app/559491";
 import { Qv, sf } from "../905/929976";
@@ -29,7 +29,7 @@ export function $$w1(e, t) {
 }
 let O = (e, t) => $Z.selectedViewHasMissingResources(e, t);
 export function $$R2(e) {
-  return new $T().selectedViewMissingResourceType(e);
+  return new ViewPathManager().selectedViewMissingResourceType(e);
 }
 let L = 0;
 let $$P0 = e => t => function (r) {
@@ -103,7 +103,7 @@ let $$P0 = e => t => function (r) {
     }
     if ("searchAndBrowse" === r.payload.subView) {
       let e = r.payload.data;
-      e && !e.category && hL(Ag(e));
+      e && !e.category && hL(getTabTitle(e));
     } else OR(P, r.payload);
   } else if (Af.matches(r) && "hubFile" === P.selectedView.subView) OR(P, {
     hubFileId: r.payload.hubFileId,

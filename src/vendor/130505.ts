@@ -121,9 +121,9 @@ let d = function (e) {
   t.displayName = e
   return t
 }
-let h = d('Router-History')
-let $$p3 = d('Router')
-let $$C1 = (function (e) {
+let historyContext = d('Router-History')
+let context = d('Router')
+let Router = (function (e) {
   function t(t) {
     let n;
     (n = e.call(this, t) || this).state = {
@@ -163,14 +163,14 @@ let $$C1 = (function (e) {
     this.unlisten && (this.unlisten(), this._isMounted = !1, this._pendingLocation = null)
   }
   n.render = function () {
-    return createElement($$p3.Provider, {
+    return createElement(context.Provider, {
       value: {
         history: this.props.history,
         location: this.state.location,
         match: t.computeRootMatch(this.state.location.pathname),
         staticContext: this.props.staticContext,
       },
-    }, createElement(h.Provider, {
+    }, createElement(historyContext.Provider, {
       children: this.props.children || null,
       value: this.props.history,
     }))
@@ -178,7 +178,7 @@ let $$C1 = (function (e) {
   return t
 }(Component))
 Component
-let I = (function (e) {
+let Lifecycle = (function (e) {
   function t() {
     return e.apply(this, arguments) || this
   }
@@ -200,7 +200,7 @@ let I = (function (e) {
 }(Component))
 let E = {}
 let B = 0
-export function $$m8(e, t) {
+export function generatePath(e, t) {
   void 0 === e && (e = '/')
   void 0 === t && (t = {})
   return e === '/'
@@ -215,26 +215,26 @@ export function $$m8(e, t) {
         pretty: !0,
       })
 }
-export function $$y7(e) {
+export function Redirect(e) {
   let t = e.computedMatch
   let n = e.to
   let r = e.push
   let A = void 0 !== r && r
-  return createElement($$p3.Consumer, null, (e) => {
+  return createElement(context.Consumer, null, (e) => {
     e || _$$A2(!1)
     let r = e.history
     let o = e.staticContext
     let u = A ? r.push : r.replace
     let g = yJ(t
       ? typeof n == 'string'
-        ? $$m8(n, t.params)
+        ? generatePath(n, t.params)
         : _$$A3({}, n, {
-            pathname: $$m8(n.pathname, t.params),
+            pathname: generatePath(n.pathname, t.params),
           })
       : n)
     return o
       ? (u(g), null)
-      : createElement(I, {
+      : createElement(Lifecycle, {
           onMount() {
             u(g)
           },
@@ -250,7 +250,7 @@ export function $$y7(e) {
 }
 let _ = {}
 let Q = 0
-export function $$D0(e, t) {
+export function matchPath(e, t) {
   void 0 === t && (t = {});
   (typeof t == 'string' || Array.isArray(t)) && (t = {
     path: t,
@@ -306,18 +306,18 @@ export function $$D0(e, t) {
         }
   }, null)
 }
-export var $$w6 = (function (e) {
+export var Route = (function (e) {
   function t() {
     return e.apply(this, arguments) || this
   }
   _$$A(t, e)
   t.prototype.render = function () {
     let e = this
-    return createElement($$p3.Consumer, null, (t) => {
+    return createElement(context.Consumer, null, (t) => {
       t || _$$A2(!1)
       let n
       let r = e.props.location || t.location
-      let A = e.props.computedMatch ? e.props.computedMatch : e.props.path ? $$D0(r.pathname, e.props) : t.match
+      let A = e.props.computedMatch ? e.props.computedMatch : e.props.path ? matchPath(r.pathname, e.props) : t.match
       let o = _$$A3({}, t, {
         location: r,
         match: A,
@@ -327,7 +327,7 @@ export var $$w6 = (function (e) {
       let g = s.component
       let c = s.render
       Array.isArray(u) && (n = u, Children.count(n) === 0) && (u = null)
-      return createElement($$p3.Provider, {
+      return createElement(context.Provider, {
         value: o,
       }, o.match ? u ? typeof u == 'function' ? u(o) : u : g ? createElement(g, o) : c ? c(o) : null : typeof u == 'function' ? u(o) : null)
     })
@@ -335,14 +335,14 @@ export var $$w6 = (function (e) {
   return t
 }(Component))
 Component
-let $$b4 = (function (e) {
+let Switch = (function (e) {
   function t() {
     return e.apply(this, arguments) || this
   }
   _$$A(t, e)
   t.prototype.render = function () {
     let e = this
-    return createElement($$p3.Consumer, null, (t) => {
+    return createElement(context.Consumer, null, (t) => {
       t || _$$A2(!1)
       let n
       let r
@@ -352,7 +352,7 @@ let $$b4 = (function (e) {
           n = e
           let o = e.props.path || e.props.from
           r = o
-            ? $$D0(A.pathname, _$$A3({}, e.props, {
+            ? matchPath(A.pathname, _$$A3({}, e.props, {
                 path: o,
               }))
             : t.match
@@ -369,25 +369,25 @@ let $$b4 = (function (e) {
   return t
 }(Component))
 let v = useContext
-export function $$k9() {
-  return v($$p3).location
+export function useLocation() {
+  return v(context).location
 }
-export function $$x5() {
-  let e = v($$p3).match
+export function useParams() {
+  let e = v(context).match
   return e ? e.params : {}
 }
-export function $$S2(e) {
-  let t = $$k9()
-  let n = v($$p3).match
-  return e ? $$D0(t.pathname, e) : n
+export function useRouteMatch(e) {
+  let t = useLocation()
+  let n = v(context).match
+  return e ? matchPath(t.pathname, e) : n
 }
-export const B6 = $$D0
-export const Ix = $$C1
-export const W5 = $$S2
-export const XZ = $$p3
-export const dO = $$b4
-export const g = $$x5
-export const qh = $$w6
-export const rd = $$y7
-export const tW = $$m8
-export const zy = $$k9
+export const B6 = matchPath
+export const Ix = Router
+export const W5 = useRouteMatch
+export const XZ = context
+export const dO = Switch
+export const g = useParams
+export const qh = Route
+export const rd = Redirect
+export const tW = generatePath
+export const zy = useLocation

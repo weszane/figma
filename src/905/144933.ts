@@ -4,7 +4,7 @@ import { getTrackingSessionId } from "../905/471229";
 import { generateUUIDv4 } from "../905/871474";
 import { createNoOpValidator, createMetaValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { e as _$$e } from "../figma_app/324237";
+import { SortOptions } from "../figma_app/324237";
 import { h as _$$h } from "../905/632544";
 import { ResourceTypes } from "../905/178090";
 import { to } from "../figma_app/701107";
@@ -264,7 +264,7 @@ export let $$v0 = new class {
       query: _(e),
       current_org_id: t || void 0,
       resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
-      sort_by: _$$e.Search.RELEVANCY,
+      sort_by: SortOptions.Search.RELEVANCY,
       price: i,
       ...s
     }), {
@@ -276,7 +276,7 @@ export let $$v0 = new class {
       query: _(e),
       current_org_id: t || void 0,
       resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
-      sort_by: _$$e.Search.RELEVANCY,
+      sort_by: SortOptions.Search.RELEVANCY,
       price: i,
       ...s,
       org_search: !0
@@ -294,7 +294,7 @@ export let $$v0 = new class {
       current_org_id: t || "",
       resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
       editor_type: n,
-      sort_by: _$$e.Search.RELEVANCY,
+      sort_by: SortOptions.Search.RELEVANCY,
       price: i
     }), {
       retryStrategyOverride: $$f1
@@ -306,7 +306,7 @@ export let $$v0 = new class {
       current_org_id: t || "",
       resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
       editor_type: n,
-      sort_by: _$$e.Search.RELEVANCY,
+      sort_by: SortOptions.Search.RELEVANCY,
       price: i,
       org_search: !0
     }), {

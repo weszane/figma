@@ -44,7 +44,7 @@ import { PT } from '../905/669853';
 import { setupLoadingStateHandler } from '../905/696711';
 import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578';
 import { compareLibraryItems } from '../905/709171';
-import { IT, M4 } from '../905/713695';
+import { IT, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { l as _$$l } from '../905/716947';
 import { getSelectedFile } from '../905/766303';
@@ -1386,13 +1386,13 @@ export async function $$tA52(e) {
   atomStoreManager.set($$tf14, 'loaded');
   _B();
 }
-let $$tx37 = M4.Query({
+let $$tx37 = liveStoreInstance.Query({
   fetch: async e => (await PT.getOrgMigrationStatus({
     orgId: e
   })).data.meta,
   enabled: e => !!e
 });
-let $$tN27 = M4.Query({
+let $$tN27 = liveStoreInstance.Query({
   fetch: async e => await tC(debugState.dispatch, e),
   key: 'libraryStats'
 });
@@ -1443,11 +1443,11 @@ let tC = async (e, t) => {
     return initialLibraryStats;
   }
 };
-let $$tw23 = M4.Query({
+let $$tw23 = liveStoreInstance.Query({
   fetch: e => $$tL(e),
   key: 'libraryInfo'
 });
-let $$tO50 = M4.Query({
+let $$tO50 = liveStoreInstance.Query({
   fetch: async e => (await _$$Z.getLibrariesV2(e)).data.meta ?? [],
   key: 'libraryInfoV2'
 });

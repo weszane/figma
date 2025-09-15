@@ -25,20 +25,20 @@ import { validateFolderName } from "../figma_app/528509";
 import { convertTeamToRaw } from "../905/628874";
 import { FFolderType } from "../figma_app/191312";
 import { FilesForProject, TeamFoldersQuerySyncView } from "../figma_app/43951";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { rR, sK } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { W$ } from "../905/970170";
 import { Y7 } from "../905/438864";
 import { vL } from "../905/652992";
 import { fileEntityModel } from "../905/806985";
-import { lH } from "../905/316062";
-import { z as _$$z2 } from "../905/954314";
+import { FolderSchema } from "../905/316062";
+import { repositoryDefinition } from "../905/954314";
 import { AccessSchema } from "../905/557142";
 import { EntityType } from "../figma_app/707808";
 import { fileActionEnum } from "../figma_app/630077";
-import { W as _$$W } from "../905/522628";
-import { $ as _$$$ } from "../905/834575";
+import { folderAPIInstance } from "../905/522628";
+import { teamAPIClient } from "../905/834575";
 import { z as _$$z3 } from "../905/40865";
 import { DV } from "../905/739964";
 import { o as _$$o } from "../905/29370";
@@ -66,11 +66,11 @@ let Y = createOptimistThunk((e, {
     }));
   });
 });
-let $ = M4.Query({
+let $ = liveStoreInstance.Query({
   fetch: async (e, {
     reduxStore: t
   }) => {
-    let r = await _$$W.getFiles({
+    let r = await folderAPIInstance.getFiles({
       folderId: e.folderId,
       shouldShowOnlyTrashedFiles: !!e.shouldShowOnlyTrashedFiles
     });
@@ -90,9 +90,9 @@ let $ = M4.Query({
     return r.data.meta;
   },
   schema: e => e.object({
-    folder: lH.nullable(),
+    folder: FolderSchema.nullable(),
     files: e.array(fileEntityModel),
-    repos: e.array(_$$z2)
+    repos: e.array(repositoryDefinition)
   }),
   sync: ({
     folderId: e
@@ -145,12 +145,12 @@ export function $$X2(e, t = !0, r = !1) {
   return n;
 }
 let q = _$$z.object({
-  folder: lH.nullable(),
+  folder: FolderSchema.nullable(),
   files: _$$z.array(fileEntityModel),
-  repos: _$$z.array(_$$z2),
+  repos: _$$z.array(repositoryDefinition),
   roles: _$$z.array(AccessSchema)
 });
-let $$J0 = M4.PaginatedQuery({
+let $$J0 = liveStoreInstance.PaginatedQuery({
   fetch: async (e, {
     pageParam: t,
     reduxStore: r
@@ -255,7 +255,7 @@ let $$Z10 = createOptimistThunk(async (e, {
       state: "loading"
     }));
     try {
-      let r = (await _$$W.getFiles({
+      let r = (await folderAPIInstance.getFiles({
         folderId: t
       })).data.meta;
       e.dispatch(Y({
@@ -276,11 +276,11 @@ let $$Z10 = createOptimistThunk(async (e, {
     }
   }
 });
-let $$Q8 = M4.Query({
-  fetch: async e => (await _$$$.getFolders({
+let $$Q8 = liveStoreInstance.Query({
+  fetch: async e => (await teamAPIClient.getFolders({
     teamId: e.teamId
   })).data.meta.folder_rows,
-  schema: e => e.array(lH.extend({
+  schema: e => e.array(FolderSchema.extend({
     touched_at: e.string()
   })),
   syncObjects: !0,
@@ -311,22 +311,22 @@ let $$Q8 = M4.Query({
     data: e
   }) => e.filter(e => !(e.trashed_at || e.deleted_at))
 });
-let $$ee5 = M4.Mutation((e, {
+let $$ee5 = liveStoreInstance.Mutation((e, {
   reduxStore: t
-}) => _$$W.permanentlyDelete({
+}) => folderAPIInstance.permanentlyDelete({
   folderId: e.folderId
 }).then(() => {
   t.dispatch(VisualBellActions.enqueue({
     message: getI18nString("file_browser.file_browser_actions.folder_deleted_forever")
   }));
 }));
-let $$et1 = M4.Mutation(({
+let $$et1 = liveStoreInstance.Mutation(({
   folderId: e
 }, {
   objects: t,
   reduxStore: r
 }) => {
-  let n = _$$W.trash({
+  let n = folderAPIInstance.trash({
     folderId: e
   }).then(() => {
     t.Folder.update(e, e => {
@@ -348,14 +348,14 @@ let $$et1 = M4.Mutation(({
     }
   }, n);
 });
-let $$er11 = M4.Mutation(({
+let $$er11 = liveStoreInstance.Mutation(({
   folderId: e,
   team: t
 }, {
   objects: r,
   reduxStore: n
 }) => {
-  let i = _$$W.restore({
+  let i = folderAPIInstance.restore({
     folderId: e
   }).then(() => {
     r.Folder.update(e, e => {
@@ -390,10 +390,10 @@ let $$er11 = M4.Mutation(({
     }
   }, i);
 });
-let $$en7 = M4.Mutation(e => _$$W.batchDelete({
+let $$en7 = liveStoreInstance.Mutation(e => folderAPIInstance.batchDelete({
   folderIds: e.folderIds
 }));
-let $$ei12 = M4.Mutation(({
+let $$ei12 = liveStoreInstance.Mutation(({
   folderId: e,
   folderName: t
 }, {
@@ -449,7 +449,7 @@ let $$ea9 = createOptimistAction("FOLDER_UPDATE_FOLDER_ACCESS", (e, t, {
 let $$es4 = createOptimistAction("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, t, {
   optimistId: r
 }) => {
-  let n = _$$W.updateFolderSharingAudienceControls({
+  let n = folderAPIInstance.updateFolderSharingAudienceControls({
     folderId: t.folder.id,
     sharingAudienceControl: t.sharingAudienceControl
   }).then(() => {
@@ -470,7 +470,7 @@ let $$es4 = createOptimistAction("FOLDER_UPDATE_SHARING_AUDIENCE_CONTROLS", (e, 
 let $$eo13 = createOptimistAction("FOLDER_UPDATE_TEAM_ACCESS", (e, t, {
   optimistId: r
 }) => {
-  let n = _$$W.updatedFolderTeamAccess({
+  let n = folderAPIInstance.updatedFolderTeamAccess({
     folderId: t.folder.id,
     teamAccess: t.teamAccess
   }).then(() => {
@@ -502,7 +502,7 @@ let $$el3 = createOptimistThunk(async (e, t) => {
     return;
   }
   try {
-    await _$$W.getCanMove({
+    await folderAPIInstance.getCanMove({
       teamId: n.id,
       folderId: r.id
     });
@@ -543,7 +543,7 @@ let $$el3 = createOptimistThunk(async (e, t) => {
   });
   t.onSuccess && t.onSuccess();
 });
-let ed = M4.Mutation((e, {
+let ed = liveStoreInstance.Mutation((e, {
   query: t,
   objects: r,
   reduxStore: n

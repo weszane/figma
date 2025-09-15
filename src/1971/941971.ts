@@ -31,7 +31,7 @@ import { f as _$$f } from "../9410/885134";
 import { pK } from "../9410/215872";
 import { C2 } from "../9410/671180";
 import { Ol } from "../figma_app/193952";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 import { Xh } from "../figma_app/803787";
 import { KindEnum } from "../905/129884";
 import { Gh, Xs } from "../figma_app/707567";
@@ -577,7 +577,7 @@ function ec({
     })]
   });
 }
-let ed = M4.Query({
+let ed = liveStoreInstance.Query({
   fetch: async () => (await Gh.getFirstDraftAllEvalSets()).data.meta.eval_sets
 });
 function eu({

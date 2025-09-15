@@ -10,22 +10,22 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
-import { KH, nF } from "../figma_app/471982";
+import { getResourceTypeLabel, getPluginWidgetLabel } from "../figma_app/471982";
 import { Qi } from "../905/172918";
-import { AC } from "../figma_app/777551";
+import { isResourcePendingPublishing } from "../figma_app/777551";
 import { createOptimistThunk } from "../905/350402";
 import { d6 } from "../figma_app/530167";
 import { HZ, Oo } from "../905/926523";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { c as _$$c } from "../905/289751";
 import { Kg, Ac, Rd, Gf } from "../figma_app/599979";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getPermissionsState } from "../figma_app/642025";
 import { F as _$$F } from "../905/827944";
 import { validateExtensionIconImage, validateArtworkImage, loadPluginManifest, loadLocalPluginSource, validatePluginCodeSize, getResourceRoleInfo, getPublishingData } from "../figma_app/300692";
 import { setupLoadingStateHandler } from "../905/696711";
-import { ResourceType, isWidget } from "../figma_app/45218";
-import { aP, kM } from "../figma_app/10554";
+import { HubTypeEnum, isWidget } from "../figma_app/45218";
+import { UploadStatusEnum, PublisherRole } from "../figma_app/10554";
 import { w as _$$w } from "../905/771986";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
@@ -58,7 +58,7 @@ let $$F29 = createOptimistThunk((e, t, {
   });
   setupLoadingStateHandler(i, e, r);
 });
-let $$j28 = M4.Query({
+let $$j28 = liveStoreInstance.Query({
   fetch: async e => (await pluginAPIService.getUnpublishedPlugins()).data.meta,
   output: ({
     data: e
@@ -68,7 +68,7 @@ let $$j28 = M4.Query({
     return t;
   }
 });
-let $$U19 = M4.Query({
+let $$U19 = liveStoreInstance.Query({
   fetch: async e => (await U.getUnpublishedWidgets()).data.meta,
   output: ({
     data: e
@@ -99,7 +99,7 @@ let $$G32 = createOptimistThunk(async (e, {
   resourceId: t,
   resourceType: r
 }) => {
-  let n = r === ResourceType.WIDGET ? U.getWidgets({
+  let n = r === HubTypeEnum.WIDGET ? U.getWidgets({
     id: t
   }) : pluginAPIService.getPlugins({
     id: t
@@ -335,7 +335,7 @@ async function Z(e, t, r) {
   }));
   let A = Rd(g.carouselImages, o);
   let [x, C, O] = await Promise.all([f, y, v, ...A]);
-  let L = uploadVideos.map(t => Gf(KH(e, {
+  let L = uploadVideos.map(t => Gf(getResourceTypeLabel(e, {
     pluralized: !0
   }), e.id, {
     sha1: t.sha1,
@@ -356,7 +356,7 @@ async function Z(e, t, r) {
   await Promise.all(L);
   let {
     data
-  } = await XHR.put(`/api/${KH(e, {
+  } = await XHR.put(`/api/${getResourceTypeLabel(e, {
     pluralized: !0
   })}/${e.id}/versions/${t.id}`, {
     icon_uploaded: x,
@@ -397,7 +397,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   let E;
   if (!e) throw Error(getI18nString("community.actions.plugin_id_is_invalid"));
   let [y, b] = await Promise.all([loadPluginManifest(t, {
-    resourceType: nF(g),
+    resourceType: getPluginWidgetLabel(g),
     isPublishing: !0
   }), loadLocalPluginSource(t)]);
   let T = validatePluginCodeSize(b);
@@ -506,7 +506,7 @@ async function Q(e, t, r, i, a, o, l, u, h, g, f) {
   await Promise.all(Q);
   let {
     data
-  } = await XHR.put(`/api/${nF(!!g, {
+  } = await XHR.put(`/api/${getPluginWidgetLabel(!!g, {
     pluralized: !0
   })}/${e}/versions/${versionId}`, {
     icon_uploaded: q,
@@ -573,7 +573,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
   e.dispatch(updateStatus({
     id: localFileId,
     status: {
-      code: aP.UPLOADING
+      code: UploadStatusEnum.UPLOADING
     }
   }));
   try {
@@ -589,7 +589,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
     e.dispatch(updateStatus({
       id: localFileId,
       status: {
-        code: aP.SUCCESS
+        code: UploadStatusEnum.SUCCESS
       }
     }));
     e.dispatch(clearMetadata({
@@ -600,7 +600,7 @@ let $$ea2 = createOptimistThunk(async (e, t) => {
     e.dispatch(updateStatus({
       id: localFileId,
       status: {
-        code: aP.FAILURE,
+        code: UploadStatusEnum.FAILURE,
         error: r.message
       }
     }));
@@ -627,7 +627,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
     e.dispatch(updateStatus({
       id: localFileIdOrPluginId,
       status: {
-        code: aP.UPLOADING
+        code: UploadStatusEnum.UPLOADING
       }
     }));
     let {
@@ -642,7 +642,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
     e.dispatch(updateStatus({
       id: localFileIdOrPluginId,
       status: {
-        code: aP.SUCCESS
+        code: UploadStatusEnum.SUCCESS
       }
     }));
     callback();
@@ -655,7 +655,7 @@ let $$es11 = createOptimistThunk(async (e, t) => {
     e.dispatch(updateStatus({
       id: localFileIdOrPluginId,
       status: {
-        code: aP.FAILURE,
+        code: UploadStatusEnum.FAILURE,
         error: t
       }
     }));
@@ -684,7 +684,7 @@ let $$eo35 = createOptimistThunk(async (e, {
       pluginId: t,
       toPublic: n.roles.is_public,
       toOrg: !!n.roles.org,
-      needApproval: AC(n),
+      needApproval: isResourcePendingPublishing(n),
       isWidget: a
     });
     e.dispatch(Qi({
@@ -752,7 +752,7 @@ let $$el10 = createOptimistThunk(async (e, t) => {
 let $$ed17 = createOptimistThunk((e, {
   resource: t
 }) => {
-  XHR.del(`/api/${KH(t, {
+  XHR.del(`/api/${getResourceTypeLabel(t, {
     pluralized: !0
   })}/${t.id}`).then(({
     data: r
@@ -789,7 +789,7 @@ let $$ec15 = createOptimistThunk((e, {
     src: "getResourceVersions",
     overrideInstallStatus: !0
   }));
-  let a = r === ResourceType.WIDGET ? U.getVersions({
+  let a = r === HubTypeEnum.WIDGET ? U.getVersions({
     widgetId: t
   }) : pluginAPIService.getVersions({
     pluginId: t
@@ -818,7 +818,7 @@ let $$eu34 = createOptimistThunk(async (e, t) => {
       role
     })).data.meta.plugin;
     let n = e.getState().user;
-    role === kM.NONE && userId === n?.id && (t.plugin_publishers = {
+    role === PublisherRole.NONE && userId === n?.id && (t.plugin_publishers = {
       accepted: [],
       pending: []
     });

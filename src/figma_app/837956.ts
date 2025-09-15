@@ -18,7 +18,7 @@ import { F } from "../905/224";
 import { k4, jl } from "../figma_app/199513";
 import { rR, sK } from "../figma_app/598018";
 import { vL } from "../905/652992";
-import { EE } from "../905/316062";
+import { getProjectUrl } from "../905/316062";
 import { fileActionEnum } from "../figma_app/630077";
 import { j } from "../905/834956";
 import { DV } from "../905/739964";
@@ -98,7 +98,7 @@ export function $$w1(e) {
     }]) : (k.push({
       displayText: getI18nString("file_browser.copy_link"),
       onClick: () => {
-        let r = EE(e.id, t);
+        let r = getProjectUrl(e.id, t);
         w(_$$S({
           url: r,
           linkType: "project"

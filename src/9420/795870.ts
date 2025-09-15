@@ -12,7 +12,7 @@ import { lX, dT } from "../9420/394825";
 import { getUserCurrency, isCurrencyAllowedForCountry, getUserIsoCodeIfNonUsd, getAllowedCartCurrencies } from "../figma_app/514043";
 import { eV, pV, lB } from "../905/148137";
 import { V as _$$V } from "../905/57562";
-import { $ as _$$$ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { D as _$$D } from "../905/347702";
 import { yM, DP } from "../905/640017";
 import { sq } from "../905/613896";
@@ -325,7 +325,7 @@ let $$P3 = _$$D(e => {
       return !0;
     }
     if (e.canSeeBillingAddressExp) try {
-      await _$$$.validateAddresses({
+      await teamAPIClient.validateAddresses({
         billingAddress: address,
         shippingAddress: _address,
         teamId: e.customerInfo.teamId,
@@ -360,7 +360,7 @@ let $$P3 = _$$D(e => {
     }, address.region))) return !0;
     if (e.canSeeBillingAddressExp) {
       if (e.currency) try {
-        await _$$$.validateCurrency({
+        await teamAPIClient.validateCurrency({
           teamId: e.customerInfo.teamId,
           currency: e.currency,
           billingAddress: address,
@@ -381,7 +381,7 @@ let $$P3 = _$$D(e => {
         });
         return !0;
       } else if (e.shouldCheckIpCurrency) try {
-        await _$$$.validateCurrency({
+        await teamAPIClient.validateCurrency({
           teamId: e.customerInfo.teamId,
           currency: getUserCurrency(),
           billingAddress: address,

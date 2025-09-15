@@ -4,7 +4,7 @@ import { renderI18nText } from "../905/303541";
 import { W } from "../5430/573261";
 import { _ as _$$_ } from "../905/456042";
 import { I } from "../5132/515990";
-import { Vm } from "../figma_app/427318";
+import { getResourceType } from "../figma_app/427318";
 import { showModalHandler } from "../905/156213";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { Tm } from "../figma_app/740025";
@@ -38,7 +38,7 @@ export function $$x0({
       if (logAndTrackCTA({
         viewContext: t,
         resourceId: e.id,
-        resourceType: Vm(e),
+        resourceType: getResourceType(e),
         allowlistOrgs: y.length
       }, "approve-button-clicked"), 1 === y.length) {
         g(e, y[0].id);

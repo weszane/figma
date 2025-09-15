@@ -27,8 +27,8 @@ import { FFileType } from "../figma_app/191312";
 import { CommunityUniversalPostingModalRecentFileKeysView } from "../figma_app/43951";
 import { IT } from "../905/713695";
 import { hasOrgUsersForUser } from "../figma_app/951233";
-import { ResourceType } from "../figma_app/45218";
-import { k2 } from "../figma_app/10554";
+import { HubTypeEnum } from "../figma_app/45218";
+import { PageTypeEnum } from "../figma_app/10554";
 import { fileApiHandler } from "../figma_app/787550";
 import { registerModal } from "../905/102752";
 import { ModalView } from "../figma_app/918700";
@@ -51,7 +51,7 @@ function H(e) {
     }), jsx(BaseLinkComponent, {
       onClick: () => {
         trackEventAnalytics(t ? "community_publish_open_desktop_clicked" : "community_publish_get_desktop_clicked", {
-          resourceType: e.tab === gr.PLUGINS ? ResourceType.PLUGIN : ResourceType.WIDGET
+          resourceType: e.tab === gr.PLUGINS ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET
         });
         t && Sr(location.href, B3.UNIVERSAL_POSTING_MODAL);
       },
@@ -390,13 +390,13 @@ let $$Q0 = registerModal(function (e) {
             if (ea === gr.FILES) ee && (trackEventAnalytics("community_publish_modal", {
               user: t.id,
               step: WX.DETAILS,
-              resourceType: ResourceType.HUB_FILE,
+              resourceType: HubTypeEnum.HUB_FILE,
               fileKey: ee.key,
               fileName: ee.name
             }), r(_$$t2({
               fileKey: ee.key,
               isFullscreenOpen: !1,
-              entryPoint: k2.UNIVERSAL_POSTING,
+              entryPoint: PageTypeEnum.UNIVERSAL_POSTING,
               canvasThumbnailPromise: Sz(ee.key, t),
               source: e.source
             })), et(null));else if ((ea === gr.PLUGINS || ea === gr.WIDGETS) && en) {
@@ -405,14 +405,14 @@ let $$Q0 = registerModal(function (e) {
               trackEventAnalytics("community_publish_modal", {
                 user: t.id,
                 step: WX.DETAILS,
-                resourceType: ea === gr.PLUGINS ? ResourceType.PLUGIN : ResourceType.WIDGET,
+                resourceType: ea === gr.PLUGINS ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET,
                 pluginId: e.plugin_id,
                 pluginName: e.name,
                 localFileId: n
               });
               r(_$$r({
                 localFileId: n,
-                entryPoint: k2.UNIVERSAL_POSTING
+                entryPoint: PageTypeEnum.UNIVERSAL_POSTING
               }));
               ei(null);
             }

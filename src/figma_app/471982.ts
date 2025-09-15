@@ -1,389 +1,658 @@
 import { isEqual } from 'lodash-es';
-import { editorUtilities as _$$k } from '../905/22009';
-import { LE } from '../905/71785';
+import { editorUtilities } from '../905/22009';
+import { FileTypeEnum } from '../905/71785';
 import { sha1Hex } from '../905/125019';
 import { ResourceTypes } from '../905/178090';
-import { C as _$$C } from '../905/237873';
+import { PricingOptions } from '../905/237873';
 import { getI18nString } from '../905/303541';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
-import { S as _$$S } from '../905/872825';
-import { qL, xn } from '../905/934145';
+import { getValueOrFallback } from '../905/872825';
+import { ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
 import { Dm as _$$Dm } from '../figma_app/8833';
-import { o1 } from '../figma_app/10554';
-import { hasClientMeta, isMonetizedOrThirdParty, isPlugin, isWidget, ResourceType, ResourceTypeNoComment } from '../figma_app/45218';
+import { TeamOrgType } from '../figma_app/10554';
+import { hasClientMeta, HubTypeEnum, isMonetizedOrThirdParty, isPlugin, isWidget, ResourceTypeNoComment } from '../figma_app/45218';
 import { ManifestEditorType } from '../figma_app/155287';
 import { StatusType, statusTypeToNumber } from '../figma_app/175992';
 import { FFileType, FTemplateCategoryType } from '../figma_app/191312';
 import { isResourceHubProfilesEnabled } from '../figma_app/275462';
-import { vt } from '../figma_app/306946';
-import { YW } from '../figma_app/350203';
-import { UF, Uo, Xu } from '../figma_app/354658';
-import { eO, Lz, Vm, XW } from '../figma_app/427318';
+import { ResourceTypeEnum } from '../figma_app/306946';
+import { CommunityRoute, ResourceType, ResourceTypePlural } from '../figma_app/354658';
+import { getHubFile, getResourceType, hasContent, isPrototype } from '../figma_app/427318';
 import { throwTypeError } from '../figma_app/465776';
-import { N as _$$N } from '../figma_app/469468';
-import { iY, po } from '../figma_app/598412';
-import { $2, co } from '../figma_app/701107';
+import { usePrefersMediaQuery } from '../figma_app/469468';
+import { getCurrentCommunityBasePath, parseCommunityPath } from '../figma_app/598412';
 import { communityViewerMaxWidth } from '../figma_app/786175';
 import { Z4 } from '../figma_app/809727';
 import { createEmptyAddress } from '../figma_app/831101';
 import { processSlug } from '../figma_app/930338';
-import { B6 } from '../vendor/130505';
-let $$k4 = new RegExp(/^[\w.]{0,30}$/);
-let $$M8 = new RegExp(/^\w{0,15}$/);
-export function $$F0(e) {
-  return 'current_hub_file_version_id' in e ? e.versions[e.current_hub_file_version_id] : 'current_plugin_version_id' in e && e.current_plugin_version_id ? e.versions[e.current_plugin_version_id] : void 0;
+import { matchPath } from '../vendor/130505';
+
+/**
+ * Regular expressions for validation (Co, HD)
+ */
+export const Co = /^[\w.]{0,30}$/;
+export const HD = /^\w{0,15}$/;
+
+/**
+ * Returns the current version object for a resource (setupCurrentVersion)
+ * @param resource
+ */
+export function setupCurrentVersion(resource: any) {
+  if ('current_hub_file_version_id' in resource) {
+    return resource.versions[resource.current_hub_file_version_id];
+  }
+  if ('current_plugin_version_id' in resource && resource.current_plugin_version_id) {
+    return resource.versions[resource.current_plugin_version_id];
+  }
+  return undefined;
 }
-export function $$j32(e) {
-  return $$F0(e);
+
+/**
+ * Alias for setupCurrentVersion (getCurrentVersion)
+ */
+export function getCurrentVersion(resource: any) {
+  return setupCurrentVersion(resource);
 }
-export let $$U25 = () => po(customHistory.location.pathname).remainingPath.split('/').slice(1);
-export function $$B36(e) {
-  let t = B6(new URL(e).pathname, {
-    path: Xu.path
+
+/**
+ * Returns the remaining path segments from the community path (getCommunityPathSegments)
+ */
+export function getCommunityPathSegments(): string[] {
+  return parseCommunityPath(customHistory.location.pathname).remainingPath.split('/').slice(1);
+}
+
+/**
+ * Extracts resourceId and apiResourceType from a URL (extractResourceInfoFromUrl)
+ * @param url
+ */
+export function extractResourceInfoFromUrl(url: string) {
+  const match = matchPath(new URL(url).pathname, {
+    path: CommunityRoute.path
   });
-  if (t) {
+  if (match) {
     return {
-      resourceId: t.params.resourceId,
-      apiResourceType: t.params.apiResourceType
+      resourceId: match.params.resourceId,
+      apiResourceType: match.params.apiResourceType
     };
   }
 }
-export function $$G9(e) {
-  switch (e) {
+
+/**
+ * Maps template category type to file type enum (mapTemplateCategoryToFileType)
+ * @param category
+ */
+export function mapTemplateCategoryToFileType(category: FTemplateCategoryType) {
+  switch (category) {
     case FTemplateCategoryType.SLIDE_TEMPLATE:
-      return LE.SLIDES;
+      return FileTypeEnum.SLIDES;
     case FTemplateCategoryType.WHITEBOARD:
-      return LE.FIGJAM;
+      return FileTypeEnum.FIGJAM;
     case FTemplateCategoryType.SITE_TEMPLATE:
-      return LE.SITES;
+      return FileTypeEnum.SITES;
     case FTemplateCategoryType.COOPER_TEMPLATE_FILE:
-      return LE.COOPER;
+      return FileTypeEnum.COOPER;
     case FTemplateCategoryType.FIGMAKE_TEMPLATE:
-      return LE.FIGMAKE;
+      return FileTypeEnum.FIGMAKE;
     case FTemplateCategoryType.CANVAS:
     case FTemplateCategoryType.PROTOTYPE:
     default:
-      return LE.FIGMA;
+      return FileTypeEnum.FIGMA;
   }
 }
-export function $$V34(e) {
-  switch (e) {
+
+/**
+ * Maps file type to file type enum (mapFileTypeToEnum)
+ * @param fileType
+ */
+export function mapFileTypeToEnum(fileType: FFileType) {
+  switch (fileType) {
     case FFileType.DESIGN:
-      return LE.FIGMA;
+      return FileTypeEnum.FIGMA;
     case FFileType.WHITEBOARD:
-      return LE.FIGJAM;
+      return FileTypeEnum.FIGJAM;
     case FFileType.SLIDES:
-      return LE.SLIDES;
+      return FileTypeEnum.SLIDES;
     case FFileType.SITES:
-      return LE.SITES;
+      return FileTypeEnum.SITES;
     case FFileType.COOPER:
       return null;
     case FFileType.FIGMAKE:
-      return LE.FIGMAKE;
+      return FileTypeEnum.FIGMAKE;
     default:
-      throwTypeError(e);
+      throwTypeError(fileType);
   }
 }
-export function $$H31(e, t) {
-  t.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED && (e = e.filter(e => t.resourceType === ResourceTypes.BrowseResourceTypes.FILES ? Vm(e) === ResourceTypeNoComment.HUB_FILE : t.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS ? Vm(e) === ResourceTypeNoComment.PLUGIN : t.resourceType === ResourceTypes.BrowseResourceTypes.WIDGETS ? Vm(e) === ResourceTypeNoComment.WIDGET : void 0));
-  t.price === _$$C.PAID ? e = e.filter(e => isMonetizedOrThirdParty(e)) : t.price === _$$C.FREE && (e = e.filter(e => !isMonetizedOrThirdParty(e)));
-  t.editor_type && t.editor_type !== _$$k.Editors.ALL && (e = e.filter(e => function (e, t) {
-    if ($$W13(e)) return !!(t === _$$k.Editors.FIGMA && $$z26.includes(e.viewer_mode)) || t === _$$k.Editors.FIGJAM && e.viewer_mode === FTemplateCategoryType.WHITEBOARD || t === _$$k.Editors.PROTOTYPE && e.viewer_mode === FTemplateCategoryType.PROTOTYPE || t === _$$k.Editors.SLIDES && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE || t === _$$k.Editors.SITES && e.viewer_mode === FTemplateCategoryType.SITE_TEMPLATE || t === _$$k.Editors.COOPER && e.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE || t === _$$k.Editors.FIGMAKE && e.viewer_mode === FTemplateCategoryType.FIGMAKE_TEMPLATE;
-    {
-      let r = e.current_plugin_version_id;
-      if (!e.versions || !r) return !1;
-      let n = e.versions[r];
-      if (!n) return !1;
-      if (t === _$$k.Editors.DEV_MODE && n.manifest.editorType?.includes(ManifestEditorType.DEV)) return !0;
-      let i = _$$S(t, ManifestEditorType);
-      return (i && n.manifest.editorType?.includes(i)) ?? !1;
-    }
-  }(e, t.editor_type)));
-  return e;
-}
-export let $$z26 = [FTemplateCategoryType.CANVAS, FTemplateCategoryType.PROTOTYPE, FTemplateCategoryType.LIBRARY];
-export function $$W13(e) {
-  return 'viewer_mode' in e;
-}
-export function $$K33(e) {
-  return $$W13(e) && e.viewer_mode === FTemplateCategoryType.LIBRARY;
-}
-export function $$Y24(e) {
-  return e !== null && 'viewer_mode' in e && e.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
-}
-export function $$$6(e) {
-  return function (e) {
-    switch (e) {
-      case ResourceTypeNoComment.HUB_FILE:
-        return Uo.FILE;
-      case ResourceTypeNoComment.PLUGIN:
-        return Uo.PLUGIN;
-      case ResourceTypeNoComment.WIDGET:
-        return Uo.WIDGET;
-    }
-  }(Vm(e));
-}
-export function $$X1(e) {
-  switch (e.resource_type) {
-    case vt.DESIGN_TEMPLATE:
-    case vt.UI_KIT:
-    case vt.SLIDE_TEMPLATE:
-    case vt.SITE_TEMPLATE:
-    case vt.PROTOTYPE:
-    case vt.FIGJAM_TEMPLATE:
-    case vt.COOPER_TEMPLATE_FILE:
-    case vt.COOPER_TEMPLATE_ASSET:
-    case vt.FIGMAKE_TEMPLATE:
-      return Uo.FILE;
-    case vt.PLUGIN:
-      return Uo.PLUGIN;
-    case vt.WIDGET:
-      return Uo.WIDGET;
-    default:
-      throwTypeError(e.resource_type);
+
+/**
+ * Filters resources based on type, price, and editor type (filterResources)
+ * @param resources
+ * @param options
+ */
+export function filterResources(resources: any[], options: {
+  resourceType?: string;
+  price?: string;
+  editor_type?: string;
+}) {
+  let filtered = [...resources];
+  if (options.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED) {
+    filtered = filtered.filter(item => {
+      if (options.resourceType === ResourceTypes.BrowseResourceTypes.FILES) {
+        return getResourceType(item) === ResourceTypeNoComment.HUB_FILE;
+      }
+      if (options.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS) {
+        return getResourceType(item) === ResourceTypeNoComment.PLUGIN;
+      }
+      if (options.resourceType === ResourceTypes.BrowseResourceTypes.WIDGETS) {
+        return getResourceType(item) === ResourceTypeNoComment.WIDGET;
+      }
+      return undefined;
+    });
   }
+  if (options.price === PricingOptions.PAID) {
+    filtered = filtered.filter(isMonetizedOrThirdParty);
+  } else if (options.price === PricingOptions.FREE) {
+    filtered = filtered.filter(item => !isMonetizedOrThirdParty(item));
+  }
+  if (options.editor_type && options.editor_type !== editorUtilities.Editors.ALL) {
+    filtered = filtered.filter(item => matchEditorType(item, options.editor_type));
+  }
+  return filtered;
 }
-export function $$q35(e, {
-  plural: t = !1
-} = {}) {
-  let r = Vm(e);
-  switch (r) {
+
+/**
+ * Viewer modes for Figma files (viewerModes)
+ */
+export const viewerModes = [FTemplateCategoryType.CANVAS, FTemplateCategoryType.PROTOTYPE, FTemplateCategoryType.LIBRARY];
+
+/**
+ * Helper for filterResources: matches editor type (matchEditorType)
+ * @param resource
+ * @param editorType
+ */
+function matchEditorType(resource: any, editorType: string): boolean {
+  if (isViewerModeResource(resource)) {
+    return editorType === editorUtilities.Editors.FIGMA && viewerModes.includes(resource.viewer_mode) || editorType === editorUtilities.Editors.FIGJAM && resource.viewer_mode === FTemplateCategoryType.WHITEBOARD || editorType === editorUtilities.Editors.PROTOTYPE && resource.viewer_mode === FTemplateCategoryType.PROTOTYPE || editorType === editorUtilities.Editors.SLIDES && resource.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE || editorType === editorUtilities.Editors.SITES && resource.viewer_mode === FTemplateCategoryType.SITE_TEMPLATE || editorType === editorUtilities.Editors.COOPER && resource.viewer_mode === FTemplateCategoryType.COOPER_TEMPLATE_FILE || editorType === editorUtilities.Editors.FIGMAKE && resource.viewer_mode === FTemplateCategoryType.FIGMAKE_TEMPLATE;
+  }
+  const versionId = resource.current_plugin_version_id;
+  if (!resource.versions || !versionId) return false;
+  const version = resource.versions[versionId];
+  if (!version) return false;
+  if (editorType === editorUtilities.Editors.DEV_MODE && version.manifest.editorType?.includes(ManifestEditorType.DEV)) {
+    return true;
+  }
+  const manifestEditorType = getValueOrFallback(editorType, ManifestEditorType);
+  return (manifestEditorType && version.manifest.editorType?.includes(manifestEditorType)) ?? false;
+}
+
+/**
+ * Checks if resource has viewer_mode (isViewerModeResource)
+ * @param resource
+ */
+export function isViewerModeResource(resource: any): boolean {
+  return 'viewer_mode' in resource;
+}
+
+/**
+ * Checks if resource is a library (isLibraryResource)
+ * @param resource
+ */
+export function isLibraryResource(resource: any): boolean {
+  return isViewerModeResource(resource) && resource.viewer_mode === FTemplateCategoryType.LIBRARY;
+}
+
+/**
+ * Checks if resource is a slide template (isSlideTemplateResource)
+ * @param resource
+ */
+export function isSlideTemplateResource(resource: any): boolean {
+  return resource !== null && 'viewer_mode' in resource && resource.viewer_mode === FTemplateCategoryType.SLIDE_TEMPLATE;
+}
+
+/**
+ * Maps resource type to ResourceType enum (mapResourceType)
+ * @param resource
+ */
+export function mapResourceType(resource: any) {
+  switch (getResourceType(resource)) {
     case ResourceTypeNoComment.HUB_FILE:
-      return t ? UF.FILE : Uo.FILE;
+      return ResourceType.FILE;
     case ResourceTypeNoComment.PLUGIN:
-      return t ? UF.PLUGIN : Uo.PLUGIN;
+      return ResourceType.PLUGIN;
     case ResourceTypeNoComment.WIDGET:
-      return t ? UF.WIDGET : Uo.WIDGET;
-    default:
-      throwTypeError(r);
+      return ResourceType.WIDGET;
   }
 }
-var J = (e => (e.HUB_FILES = 'hub_files', e.PLUGINS = 'plugins', e.WIDGETS = 'widgets', e))(J || {});
-export function $$Z19({
-  resource: e
+
+/**
+ * Maps vt resource_type to ResourceType enum (mapVtResourceType)
+ * @param resource
+ */
+export function mapVtResourceType(resource: any) {
+  switch (resource.resource_type) {
+    case ResourceTypeEnum.DESIGN_TEMPLATE:
+    case ResourceTypeEnum.UI_KIT:
+    case ResourceTypeEnum.SLIDE_TEMPLATE:
+    case ResourceTypeEnum.SITE_TEMPLATE:
+    case ResourceTypeEnum.PROTOTYPE:
+    case ResourceTypeEnum.FIGJAM_TEMPLATE:
+    case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
+    case ResourceTypeEnum.COOPER_TEMPLATE_ASSET:
+    case ResourceTypeEnum.FIGMAKE_TEMPLATE:
+      return ResourceType.FILE;
+    case ResourceTypeEnum.PLUGIN:
+      return ResourceType.PLUGIN;
+    case ResourceTypeEnum.WIDGET:
+      return ResourceType.WIDGET;
+    default:
+      throwTypeError(resource.resource_type);
+  }
+}
+
+/**
+ * Maps resource type to singular/plural ResourceType (mapResourceTypePlural)
+ * @param resource
+ * @param options
+ */
+export function mapResourceTypePlural(resource: any, {
+  plural = false
+}: {
+  plural?: boolean;
+} = {}) {
+  const type = getResourceType(resource);
+  switch (type) {
+    case ResourceTypeNoComment.HUB_FILE:
+      return plural ? ResourceTypePlural.FILE : ResourceType.FILE;
+    case ResourceTypeNoComment.PLUGIN:
+      return plural ? ResourceTypePlural.PLUGIN : ResourceType.PLUGIN;
+    case ResourceTypeNoComment.WIDGET:
+      return plural ? ResourceTypePlural.WIDGET : ResourceType.WIDGET;
+    default:
+      throwTypeError(type);
+  }
+}
+
+/**
+ * Resource type keys (ResourceTypeKeys)
+ */
+export const ResourceTypeKeys = {
+  HUB_FILES: 'hub_files',
+  PLUGINS: 'plugins',
+  WIDGETS: 'widgets'
+};
+
+/**
+ * Builds community URL for a resource (buildCommunityUrl)
+ * @param param0
+ */
+export function buildCommunityUrl({
+  resource
+}: {
+  resource: any;
 }) {
-  let t = $$X1(e);
-  let r = e.name;
-  return function ({
-    path: e,
-    id: t,
-    name: r
-  }) {
-    let n = processSlug(r) ?? '';
-    return t ? `${iY()}/${e}/${t}${n === '' ? '' : '/'}${n}` : void 0;
-  }({
-    path: t,
-    id: $$B36(e.rdp_url)?.resourceId,
-    name: r
+  const path = mapVtResourceType(resource);
+  const name = resource.name;
+  return buildCommunityPath({
+    path,
+    id: extractResourceInfoFromUrl(resource.rdp_url)?.resourceId,
+    name
   });
 }
-export function $$Q22({
-  resource: e
+
+/**
+ * Builds community path for a resource (buildCommunityPath)
+ * @param param0
+ */
+export function buildCommunityPath({
+  path,
+  id,
+  name
+}: {
+  path: string;
+  id: string;
+  name: string;
 }) {
-  return $$ee17({
-    path: $$$6(e),
-    id: e.id,
-    name: $$F0(e)?.name ?? ''
+  const slug = processSlug(name) ?? '';
+  return id ? `${getCurrentCommunityBasePath()}/${path}/${id}${slug === '' ? '' : '/'}${slug}` : undefined;
+}
+
+/**
+ * Builds community path for a resource by id and name (buildCommunityPathById)
+ * @param param0
+ */
+export function buildCommunityPathById({
+  resource
+}: {
+  resource: any;
+}) {
+  return buildCommunityPath({
+    path: mapResourceType(resource),
+    id: resource.id,
+    name: setupCurrentVersion(resource)?.name ?? ''
   });
 }
-export function $$ee17({
-  path: e,
-  id: t,
-  name: r
-}) {
-  let n = processSlug(r) ?? '';
-  return `${iY()}/${e}/${t}${n === '' ? '' : '/'}${n}`;
-}
-export function $$et5(e) {
-  return `${location.origin}${$$Q22({
-    resource: e
+
+/**
+ * Builds full community URL for a resource (buildFullCommunityUrl)
+ * @param resource
+ */
+export function buildFullCommunityUrl(resource: any) {
+  return `${location.origin}${buildCommunityPathById({
+    resource
   })}`;
 }
-export function $$er29(e) {
-  let t = document.createElement('input');
-  t.style.position = 'fixed';
-  t.style.top = '-1000px';
-  t.value = e;
-  t.classList.add(_$$Dm);
-  document.body.appendChild(t);
-  t.select();
-  t.focus();
+
+/**
+ * Copies text to clipboard using a hidden input (copyToClipboard)
+ * @param text
+ */
+export function copyToClipboard(text: string) {
+  const input = document.createElement('input');
+  input.style.position = 'fixed';
+  input.style.top = '-1000px';
+  input.value = text;
+  input.classList.add(_$$Dm);
+  document.body.appendChild(input);
+  input.select();
+  input.focus();
   document.execCommand('copy');
-  t.parentNode.removeChild(t);
+  input.parentNode?.removeChild(input);
 }
-export let $$en20 = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-export function $$ei7(e, t) {
-  return t?.entity_type !== o1.USER || t?.id === e;
+
+/**
+ * Transparent GIF data URI (TransparentGifDataUri)
+ */
+export const TransparentGifDataUri = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+
+/**
+ * Checks if entity is user or matches id (isUserOrIdMatch)
+ * @param id
+ * @param entity
+ */
+export function isUserOrIdMatch(id: string, entity: any) {
+  return entity?.entity_type !== TeamOrgType.USER || entity?.id === id;
 }
-export function $$ea2(e) {
-  return e.query ? getI18nString('community.search_results_tab_title', {
-    searchQuery: e.query
+
+/**
+ * Gets tab title for search or browser home (getTabTitle)
+ * @param params
+ */
+export function getTabTitle(params: {
+  query?: string;
+}) {
+  return params.query ? getI18nString('community.search_results_tab_title', {
+    searchQuery: params.query
   }) : getI18nString('community.browser_home_tab_title');
 }
-export function $$es23(e) {
-  return !!e && e?.stripe_account_status && statusTypeToNumber(e.stripe_account_status) >= statusTypeToNumber(StatusType.ACCEPTED);
+
+/**
+ * Checks if stripe account status is accepted (isStripeAccepted)
+ * @param entity
+ */
+export function isStripeAccepted(entity: any) {
+  return !!entity && entity?.stripe_account_status && statusTypeToNumber(entity.stripe_account_status) >= statusTypeToNumber(StatusType.ACCEPTED);
 }
-export function $$eo28(e) {
-  return !!e?.associated_users?.find(e => e.can_sell_on_community);
+
+/**
+ * Checks if any associated user can sell on community (canSellOnCommunity)
+ * @param entity
+ */
+export function canSellOnCommunity(entity: any) {
+  return !!entity?.associated_users?.find((u: any) => u.can_sell_on_community);
 }
-export function $$el18(e) {
-  return e?.stripe_account_status && e.stripe_account_status !== StatusType.NONE && e.stripe_account_status !== StatusType.ACCEPTED;
+
+/**
+ * Checks if stripe account status is not NONE or ACCEPTED (isStripePending)
+ * @param entity
+ */
+export function isStripePending(entity: any) {
+  return entity?.stripe_account_status && entity.stripe_account_status !== StatusType.NONE && entity.stripe_account_status !== StatusType.ACCEPTED;
 }
-export function $$ed38(e) {
-  return e ? '100%' : Math.min(window.innerWidth, parseInt(communityViewerMaxWidth));
+
+/**
+ * Gets viewer width or max width (getViewerWidth)
+ * @param isFullWidth
+ */
+export function getViewerWidth(isFullWidth: boolean) {
+  return isFullWidth ? '100%' : Math.min(window.innerWidth, parseInt(communityViewerMaxWidth));
 }
-export function $$ec37(e) {
-  if (Lz(e)) return Z4.EMBED;
-  let t = eO(e);
-  return t && !t.thumbnail_is_set ? Z4.EMBED : Z4.CURATED_IMAGE;
+
+/**
+ * Gets embed type for resource (getEmbedType)
+ * @param resource
+ */
+export function getEmbedType(resource: any) {
+  if (isPrototype(resource)) return Z4.EMBED;
+  const hubFile = getHubFile(resource);
+  return hubFile && !hubFile.thumbnail_is_set ? Z4.EMBED : Z4.CURATED_IMAGE;
 }
-export function $$eu21(e, t, r) {
-  return e + co <= t && r > $2;
+
+/**
+ * Checks if resource fits in viewer (fitsInViewer)
+ * @param width
+ * @param maxWidth
+ * @param count
+ */
+export function fitsInViewer(width: number, maxWidth: number, count: number) {
+  return width + 125 <= maxWidth && count > 10;
 }
-export function $$ep3(e) {
-  return isEqual(e, createEmptyAddress());
+
+/**
+ * Checks if address is empty (isEmptyAddress)
+ * @param address
+ */
+export function isEmptyAddress(address: any) {
+  return isEqual(address, createEmptyAddress());
 }
-export function $$e_27() {
-  let e = _$$N(`(max-width: ${YW - 1}px)`);
-  let t = customHistory.location.pathname.startsWith('/community');
-  return e && t;
+
+/**
+ * Checks if prefers mobile and is on community path (isMobileCommunity)
+ */
+export function isMobileCommunity() {
+  const prefersMobile = usePrefersMediaQuery(`(max-width: 644px)`);
+  const isCommunity = customHistory.location.pathname.startsWith('/community');
+  return prefersMobile && isCommunity;
 }
-export async function $$eh10(e) {
+
+/**
+ * Fetches image and returns sha1 and buffer (fetchImageWithSha1)
+ * @param url
+ */
+export async function fetchImageWithSha1(url: string) {
   try {
-    let t = await fetch(e);
-    let r = new Uint8Array(await t.arrayBuffer());
+    const response = await fetch(url);
+    const buffer = new Uint8Array(await response.arrayBuffer());
     return {
       type: 'image',
-      url: e,
-      sha1: sha1Hex(r),
-      buffer: r
+      url,
+      sha1: sha1Hex(buffer),
+      buffer
     };
   } catch {
     return null;
   }
 }
-export function $$em12(e) {
-  let t = {};
-  let r = XW(e) ? e.carousel_media.images : e.carousel_media_urls;
-  let n = XW(e) ? e.carousel_media.videos : 'carousel_videos' in e && e?.carousel_videos;
-  r && Object.entries(r).forEach(([e, r]) => {
-    t[e] = {
-      ...r,
-      type: 'image'
-    };
-  });
-  n && Object.entries(n).forEach(([e, r]) => {
-    t[e] = {
-      ...r,
-      type: 'video'
-    };
-  });
-  return Object.entries(t).sort(([e], [t]) => parseInt(e) - parseInt(t)).map(([e, t]) => t);
-}
-export function $$eg16(e) {
-  return !!getFeatureFlags().cmty_rdp_creator_nudges && (hasClientMeta(e) && e.viewer_mode !== FTemplateCategoryType.PROTOTYPE ? Object.keys(e.carousel_media_urls ?? {}).length === 1 : !!(isPlugin(e) || isWidget(e)) && Object.keys(e.carousel_videos ?? {}).length === 0);
-}
-export function $$ef11(e, {
-  pluralized: t,
-  capitalized: r
-} = {}) {
-  return function (e, {
-    pluralized: t,
-    capitalized: r
-  } = {}) {
-    return ey((() => {
-      switch (e) {
-        case ResourceTypeNoComment.PLUGIN:
-          return 'plugin';
-        case ResourceTypeNoComment.WIDGET:
-          return 'widget';
-        case 'comment':
-          return 'comment';
-        case ResourceTypeNoComment.HUB_FILE:
-          return 'hub file';
-        default:
-          throw new Error('Unsupported Type');
-      }
-    })(), {
-      pluralized: t,
-      capitalized: r
+
+/**
+ * Builds carousel media array (buildCarouselMedia)
+ * @param resource
+ */
+export function buildCarouselMedia(resource: any) {
+  const media: Record<string, any> = {};
+  const images: Record<string, ObjectOf<ObjectOf>> = hasContent(resource) ? resource.carousel_media.images : resource.carousel_media_urls;
+  const videos: Record<string, ObjectOf<ObjectOf>> = hasContent(resource) ? resource.carousel_media.videos : 'carousel_videos' in resource && resource?.carousel_videos;
+  if (images) {
+    Object.entries(images).forEach(([key, value]) => {
+      media[key] = {
+        ...value,
+        type: 'image'
+      };
     });
-  }(Vm(e), {
-    pluralized: t,
-    capitalized: r
+  }
+  if (videos) {
+    Object.entries(videos).forEach(([key, value]) => {
+      media[key] = {
+        ...value,
+        type: 'video'
+      };
+    });
+  }
+  return Object.entries(media).sort(([a], [b]) => parseInt(a) - parseInt(b)).map(([, value]) => value);
+}
+
+/**
+ * Checks if creator nudge should be shown (shouldShowCreatorNudge)
+ * @param resource
+ */
+export function shouldShowCreatorNudge(resource: any) {
+  const flags = getFeatureFlags();
+  if (!flags.cmty_rdp_creator_nudges) return false;
+  if (hasClientMeta(resource) && resource.viewer_mode !== FTemplateCategoryType.PROTOTYPE) {
+    return Object.keys(resource.carousel_media_urls ?? {}).length === 1;
+  }
+  return (isPlugin(resource) || isWidget(resource)) && Object.keys(resource.carousel_videos ?? {}).length === 0;
+}
+
+/**
+ * Gets resource type label (getResourceTypeLabel)
+ * @param resource
+ * @param options
+ */
+export function getResourceTypeLabel(resource: any, options: {
+  pluralized?: boolean;
+  capitalized?: boolean;
+} = {}) {
+  return formatResourceTypeLabel(getResourceType(resource), options);
+}
+
+/**
+ * Formats resource type label (formatResourceTypeLabel)
+ * @param type
+ * @param options
+ */
+function formatResourceTypeLabel(type: string, {
+  pluralized,
+  capitalized
+}: {
+  pluralized?: boolean;
+  capitalized?: boolean;
+} = {}) {
+  let label: string;
+  switch (type) {
+    case ResourceTypeNoComment.PLUGIN:
+      label = 'plugin';
+      break;
+    case ResourceTypeNoComment.WIDGET:
+      label = 'widget';
+      break;
+    case 'comment':
+      label = 'comment';
+      break;
+    case ResourceTypeNoComment.HUB_FILE:
+      label = 'hub file';
+      break;
+    default:
+      throw new Error('Unsupported Type');
+  }
+  return formatLabel(label, {
+    pluralized,
+    capitalized
   });
 }
-export function $$eE30(e, {
-  pluralized: t,
-  capitalized: r
+
+/**
+ * Gets plugin/widget label based on boolean (getPluginWidgetLabel)
+ * @param isWidget
+ * @param options
+ */
+export function getPluginWidgetLabel(isWidget: boolean, options: {
+  pluralized?: boolean;
+  capitalized?: boolean;
 } = {}) {
-  return e ? ey(ResourceType.WIDGET, {
-    pluralized: t,
-    capitalized: r
-  }) : ey(ResourceType.PLUGIN, {
-    pluralized: t,
-    capitalized: r
-  });
+  return formatLabel(isWidget ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN, options);
 }
-function ey(e, {
-  pluralized: t,
-  capitalized: r
+
+/**
+ * Formats label with pluralization and capitalization (formatLabel)
+ * @param label
+ * @param options
+ */
+function formatLabel(label: string, {
+  pluralized,
+  capitalized
+}: {
+  pluralized?: boolean;
+  capitalized?: boolean;
 } = {}) {
-  e += t ? 's' : '';
-  r && void 0 !== e[0] && (e = e[0].toUpperCase() + e.substr(1));
-  return e;
+  let result = label + (pluralized ? 's' : '');
+  if (capitalized && result[0]) {
+    result = result[0].toUpperCase() + result.substr(1);
+  }
+  return result;
 }
-export function $$eb14(e) {
-  let t = e.current_hub_file_version_id ? e.current_hub_file_version_id : e.current_plugin_version_id || '';
-  return e.versions[t]?.created_at || '';
+
+/**
+ * Gets created_at for current version (getCurrentVersionCreatedAt)
+ * @param resource
+ */
+export function getCurrentVersionCreatedAt(resource: any) {
+  const versionId = resource.current_hub_file_version_id || resource.current_plugin_version_id || '';
+  return resource.versions[versionId]?.created_at || '';
 }
-export function $$eT15(e, t, r, n) {
-  let i = isResourceHubProfilesEnabled();
-  let a = {
-    profileHandle: e
+
+/**
+ * Builds profile route state (buildProfileRouteState)
+ * @param profileHandle
+ * @param isResourceHub
+ * @param routeState
+ * @param extra
+ */
+export function buildProfileRouteState(profileHandle: string, isResourceHub: boolean, routeState: any, extra?: any) {
+  const enabled = isResourceHubProfilesEnabled();
+  const base = {
+    profileHandle
   };
-  return t && i && r ? new qL({
-    ...r,
-    ...a
-  }, n) : new xn(a);
+  return isResourceHub && enabled && routeState ? new ResourceHubProfileRouteState({
+    ...routeState,
+    ...base
+  }, extra) : new ProfileRouteState(base);
 }
-export const $l = $$F0;
-export const A7 = $$X1;
-export const Ag = $$ea2;
-export const Cg = $$ep3;
-export const Co = $$k4;
-export const DV = $$et5;
-export const Dl = $$$6;
-export const Dm = $$ei7;
-export const HD = $$M8;
-export const JJ = $$G9;
-export const KG = $$eh10;
-export const KH = $$ef11;
-export const N6 = $$em12;
-export const Qo = $$W13;
-export const Qy = $$eb14;
-export const RE = $$eT15;
-export const U0 = $$eg16;
-export const UI = $$ee17;
-export const Uu = $$el18;
-export const VJ = $$Z19;
-export const ZD = $$en20;
-export const _m = $$eu21;
-export const _t = $$Q22;
-export const af = $$es23;
-export const cX = $$Y24;
-export const eD = $$U25;
-export const iX = $$z26;
-export const jl = $$e_27;
-export const kf = $$eo28;
-export const lW = $$er29;
-export const nF = $$eE30;
-export const o7 = $$H31;
-export const qD = $$j32;
-export const r7 = $$K33;
-export const rk = $$V34;
-export const ss = $$q35;
-export const tv = $$B36;
-export const z$ = $$ec37;
-export const zS = $$ed38;
+
+// Exported aliases (same as original code)
+export const YJ = setupCurrentVersion;
+export const A7 = mapVtResourceType;
+export const Ag = getTabTitle;
+export const Cg = isEmptyAddress;
+export const DV = buildFullCommunityUrl;
+export const Dl = mapResourceType;
+export const Dm = isUserOrIdMatch;
+export const JJ = mapTemplateCategoryToFileType;
+export const KG = fetchImageWithSha1;
+export const KH = getResourceTypeLabel;
+export const N6 = buildCarouselMedia;
+export const Qo = isViewerModeResource;
+export const Qy = getCurrentVersionCreatedAt;
+export const RE = buildProfileRouteState;
+export const U0 = shouldShowCreatorNudge;
+export const UI = buildCommunityPath;
+export const Uu = isStripePending;
+export const VJ = buildCommunityUrl;
+export const ZD = TransparentGifDataUri;
+export const _m = fitsInViewer;
+export const _t = buildCommunityPathById;
+export const af = isStripeAccepted;
+export const cX = isSlideTemplateResource;
+export const eD = getCommunityPathSegments;
+export const iX = viewerModes;
+export const jl = isMobileCommunity;
+export const kf = canSellOnCommunity;
+export const lW = copyToClipboard;
+export const nF = getPluginWidgetLabel;
+export const o7 = filterResources;
+export const qD = getCurrentVersion;
+export const r7 = isLibraryResource;
+export const rk = mapFileTypeToEnum;
+export const ss = mapResourceTypePlural;
+export const tv = extractResourceInfoFromUrl;
+export const z$ = getEmbedType;
+export const zS = getViewerWidth;

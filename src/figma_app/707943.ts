@@ -12,7 +12,7 @@ import { isBranchAlt } from "../905/760074";
 import { Av, ah, uN, f0 } from "../figma_app/646357";
 import { withParsedMeta } from "../905/405710";
 import { FFileType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getPlanPublicInfoAtomFamily } from "../905/276025";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { $W, $$in } from "../905/144933";
@@ -206,7 +206,7 @@ export function $$k13(e, t, r) {
     unsubscribedCommunitySearchResults: i
   };
 }
-export let $$M14 = M4.Query({
+export let $$M14 = liveStoreInstance.Query({
   fetch: async ({
     query: e,
     libraryId: t,

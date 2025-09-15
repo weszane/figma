@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { Dq } from "../905/316062";
+import { FolderSortKey } from "../905/316062";
 import { SortingCriteria } from "../figma_app/162807";
 import { SortField, SortType } from "../figma_app/756995";
 export function $$l0(e) {
@@ -14,17 +14,17 @@ export function $$l0(e) {
     case SortingCriteria.TOUCHED_AT:
     case SortingCriteria.UPDATED_AT:
     case SortingCriteria.RECENCY:
-    case Dq.LAST_MODIFIED:
-    case Dq.SHARED_AT:
+    case FolderSortKey.LAST_MODIFIED:
+    case FolderSortKey.SHARED_AT:
       return SortType.TIME;
     case SortField.NAME:
     case SortField.PROJECT_NAME:
     case SortingCriteria.NAME:
     case SortingCriteria.AUTHOR_NAME:
     case SortingCriteria.EMAIL:
-    case Dq.NAME:
-    case Dq.OWNER:
-    case Dq.TEAM:
+    case FolderSortKey.NAME:
+    case FolderSortKey.OWNER:
+    case FolderSortKey.TEAM:
       return SortType.ALPHABETICAL;
     case SortingCriteria.INSTALL_COUNT:
     case SortingCriteria.MEMBER_COUNT:

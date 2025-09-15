@@ -27,7 +27,7 @@ import { Gt } from "../figma_app/248118";
 import { x as _$$x } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { Um } from "../905/848862";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { be } from "../figma_app/474636";
 import { VR } from "../figma_app/545541";
@@ -127,7 +127,7 @@ function z(e) {
   let j = useMemoStable(() => new Set(pinnedPlugins.map(e => e.plugin_id)), [pinnedPlugins]);
   useEffect(() => {
     u(Vg({
-      resourceType: ResourceType.PLUGIN,
+      resourceType: HubTypeEnum.PLUGIN,
       resourceIds: Array.from(j)
     }));
   }, [j, u]);

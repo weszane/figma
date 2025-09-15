@@ -7,11 +7,11 @@ import { DT } from "../figma_app/320164";
 import { customHistory } from "../905/612521";
 import { AuthFlowStep } from "../905/862321";
 import { tl } from "../figma_app/781453";
-import { zq } from "../figma_app/598412";
+import { getCurrentLocale } from "../figma_app/598412";
 import { A } from "../figma_app/122760";
 import { figmaAuthModal } from "../figma_app/727769";
 var m = (e => (e[e.CLOSED = 0] = "CLOSED", e[e.PRELOAD = 1] = "PRELOAD", e[e.OPEN = 2] = "OPEN", e))(m || {});
-let g = `/login_iframe?with_community_header=true&type=fixedmodal&one_tap_origin=${DT.COMMUNITY}&locale=${zq() ?? "en"}`;
+let g = `/login_iframe?with_community_header=true&type=fixedmodal&one_tap_origin=${DT.COMMUNITY}&locale=${getCurrentLocale() ?? "en"}`;
 let f = atom({
   state: 0,
   url: g,

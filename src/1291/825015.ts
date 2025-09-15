@@ -8,7 +8,7 @@ import d from "classnames";
 import { getTranslatedDynamicContent, renderI18nText } from "../905/303541";
 import { d as _$$d } from "../5430/535653";
 import { Rt } from "../figma_app/979658";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { cX } from "../figma_app/920333";
 import { q } from "../1291/18399";
 import { L } from "../figma_app/520315";
@@ -35,14 +35,14 @@ export function $$y0(e) {
   if (!shelves || 0 === shelves.length) return null;
   if (isLoading) return jsx(L, {});
   let S = Rt.PLUGINS;
-  e.resourceType === ResourceType.HUB_FILE ? (t = sk, S = Rt.TEMPLATES) : e.resourceType === ResourceType.WIDGET ? (t = xC, S = Rt.WIDGETS) : t = void 0;
+  e.resourceType === HubTypeEnum.HUB_FILE ? (t = sk, S = Rt.TEMPLATES) : e.resourceType === HubTypeEnum.WIDGET ? (t = xC, S = Rt.WIDGETS) : t = void 0;
   return jsxs(Fragment, {
     children: [shelves.map(s => {
       let d = j[s.id];
       return jsxs(_$$Fragment, {
         children: [jsx(F, {}), getFeatureFlags().fpl_card_primitive_migration ? jsxs(bL, {
           className: c()(H6, {
-            [xO]: e.resourceType === ResourceType.PLUGIN
+            [xO]: e.resourceType === HubTypeEnum.PLUGIN
           }),
           children: [jsx("div", {
             className: bV,
@@ -60,7 +60,7 @@ export function $$y0(e) {
           })]
         }) : jsxs(ButtonPrimitive, {
           className: c()(a0, {
-            [xO]: e.resourceType === ResourceType.PLUGIN
+            [xO]: e.resourceType === HubTypeEnum.PLUGIN
           }),
           onClick: () => y({
             id: s.id,

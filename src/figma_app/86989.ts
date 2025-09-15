@@ -23,8 +23,8 @@ import { hasClientMeta, hasFreemiumCode, hasMonetizedResourceMetadata, isPlugin,
 import { fR } from '../figma_app/147952';
 import { isMigratingPlugin, manifestContainsWidget } from '../figma_app/155287';
 import { getPluginMetadata, getPluginVersion } from '../figma_app/300692';
-import { Dl } from '../figma_app/471982';
-import { AC } from '../figma_app/777551';
+import { mapResourceType } from '../figma_app/471982';
+import { isResourcePendingPublishing } from '../figma_app/777551';
 import { isSubscriptionActive, isPaymentFailed, partitionUsersByPurchaseEligibility, isStatus } from '../figma_app/808294';
 import { cW, ZT } from '../figma_app/844435';
 function P(e, t, r, n) {
@@ -46,7 +46,7 @@ function P(e, t, r, n) {
   };
 }
 export let $$D12 = _$$n((e, t, r, n, i, s) => {
-  let o = getFeatureFlags().community_hub_admin && r && AC(r);
+  let o = getFeatureFlags().community_hub_admin && r && isResourcePendingPublishing(r);
   return new Promise(a => {
     let d = () => {
       if (t) {
@@ -111,7 +111,7 @@ export function $$k10(e) {
     let n = isSubscriptionActive(s);
     let i = hasMonetizedResourceMetadata(e);
     if (trackEventAnalytics('cmty_resource_usage_action', {
-      resourceType: Dl(e),
+      resourceType: mapResourceType(e),
       resourceId: e.id,
       profileId: r?.id,
       hasActiveCommunityResourcePayment: n,
@@ -128,7 +128,7 @@ export function $$k10(e) {
       publishers
     } = partitionUsersByPurchaseEligibility(l, e);
     if (trackEventAnalytics('Checkout Flow Entered', {
-      resourceType: Dl(e),
+      resourceType: mapResourceType(e),
       resourceId: e.id,
       numLoggedInAssociatedUsersThatCanPurchase: usersCanPurchase.length,
       numLoggedInAssociatedPublishers: publishers.length
@@ -141,7 +141,7 @@ export function $$k10(e) {
       data: {
         onUserSelect: r => {
           trackEventAnalytics('Pre Purchase User Selector Modal - User Selected', {
-            resourceType: Dl(e),
+            resourceType: mapResourceType(e),
             resourceId: e.id,
             userIdForPurchase: r.id
           });

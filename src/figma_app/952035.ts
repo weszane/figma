@@ -1,12 +1,12 @@
 import { reportError } from '../905/11';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { ResourceStatus } from '../905/663269';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { R } from '../905/943003';
 import { SupabaseAuthView } from '../figma_app/43951';
 import { useSubscription } from '../figma_app/288654';
 import { p3 } from '../figma_app/588582';
-export let $$u6 = M4.Query({
+export let $$u6 = liveStoreInstance.Query({
   fetch: async e => {
     let {
       fileKey
@@ -75,7 +75,7 @@ export function $$p4(e) {
     org: void 0
   };
 }
-let $$_0 = M4.Query({
+let $$_0 = liveStoreInstance.Query({
   fetch: async e => {
     let {
       fileKey,
@@ -95,7 +95,7 @@ let $$_0 = M4.Query({
   key: 'getSupabaseProject',
   gcPolicy: 'onUnmount'
 });
-let $$h1 = M4.Query({
+let $$h1 = liveStoreInstance.Query({
   fetch: async e => {
     let {
       fileKey
@@ -131,7 +131,7 @@ let $$h1 = M4.Query({
   key: 'getSupabaseConnectedProject',
   gcPolicy: 'onUnmount'
 });
-let $$m2 = M4.Query({
+let $$m2 = liveStoreInstance.Query({
   fetch: async e => {
     let {
       fileKey
@@ -157,7 +157,7 @@ let $$m2 = M4.Query({
   key: 'getSupabaseExistingProjects',
   gcPolicy: 'onUnmount'
 });
-let $$g3 = M4.Query({
+let $$g3 = liveStoreInstance.Query({
   fetch: async e => {
     let {
       fileKey,
@@ -179,7 +179,7 @@ let $$g3 = M4.Query({
   stalenessPolicy: 'never',
   gcPolicy: 'default'
 });
-let $$f5 = M4.Mutation(async (e, {
+let $$f5 = liveStoreInstance.Mutation(async (e, {
   query: t
 }) => {
   let {
@@ -199,7 +199,7 @@ let $$f5 = M4.Mutation(async (e, {
     });
   }
 });
-M4.Mutation((e, {
+liveStoreInstance.Mutation((e, {
   query: t
 }) => {
   let {
@@ -209,7 +209,7 @@ M4.Mutation((e, {
     fileKey
   }), e => {
     e.existingProjects = [];
-  }), M4.fetch($$m2({
+  }), liveStoreInstance.fetch($$m2({
     fileKey
   }), {
     policy: 'networkOnly'

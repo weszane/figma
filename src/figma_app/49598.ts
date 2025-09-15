@@ -42,13 +42,13 @@ import { DI } from "../figma_app/557318";
 import { pt } from "../figma_app/198840";
 import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { aB } from "../905/576221";
 import { setupLoadingStateHandler } from "../905/696711";
 import { maybeCreateSavepoint } from "../905/294113";
 import { AC, x6, jO } from "../figma_app/803787";
 import { rR, sK } from "../figma_app/598018";
-import { aP } from "../figma_app/10554";
+import { UploadStatusEnum } from "../figma_app/10554";
 import { LibrarySourceEnum } from "../figma_app/633080";
 import { $A, vt } from "../905/862883";
 import { PreviewMode } from "../figma_app/707808";
@@ -327,7 +327,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
   e.dispatch(updateStatus({
     id: t.fileKey,
     status: {
-      code: aP.UPLOADING
+      code: UploadStatusEnum.UPLOADING
     }
   }));
   eO(e, t).then(({
@@ -343,7 +343,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
   })), i && (n.profile_created = i, e.dispatch(HZ(n))), e.dispatch(Oo(n)), e.dispatch(updateStatus({
     id: t.fileKey,
     status: {
-      code: aP.SUCCESS
+      code: UploadStatusEnum.SUCCESS
     }
   })), t.suggestedCategory && trackEventAnalytics("community_category_suggestion", {
     resourceType: "hub_file",
@@ -394,7 +394,7 @@ let $$ew13 = createOptimistThunk((e, t) => {
     e.dispatch(updateStatus({
       id: t.fileKey,
       status: {
-        code: aP.FAILURE,
+        code: UploadStatusEnum.FAILURE,
         error: r.message
       }
     }));
@@ -628,7 +628,7 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
     }));
   });
 });
-let ek = M4.Mutation(({
+let ek = liveStoreInstance.Mutation(({
   id: e
 }, {
   query: t
@@ -675,7 +675,7 @@ let $$eM24 = createOptimistThunk((e, {
     }
   }, n);
 }, e => `LIKE_HUB_FILE_${e}`);
-let eF = M4.Mutation(({
+let eF = liveStoreInstance.Mutation(({
   id: e
 }, {
   query: t

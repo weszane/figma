@@ -1,6 +1,6 @@
 import { G5, S6 } from "../figma_app/795674";
 import { u } from "../figma_app/187359";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { Z } from "../905/939602";
 import { PT } from "../905/669853";
 import { o as _$$o } from "../905/918279";
@@ -8,20 +8,20 @@ let d = {
   num_insertions: 0,
   num_detachments: 0
 };
-let $$c9 = M4.Query({
+let $$c9 = liveStoreInstance.Query({
   fetch: async e => (await PT.getComponent({
     fv: e.fileVersion || "0",
     componentKey: e.componentKey
   })).data.meta
 });
-let $$u1 = M4.Query({
+let $$u1 = liveStoreInstance.Query({
   fetch: async e => (await PT.getComponentFileUsage({
     orgId: e.orgId || "",
     fv: e.fileVersion || "0",
     componentKey: e.componentKey
   })).data.meta
 });
-let $$p3 = M4.Query({
+let $$p3 = liveStoreInstance.Query({
   fetch: async e => {
     let t = PT.getLibraryPublishedComponentsUsages({
       startTs: G5(_$$o[e.duration]).toString(),
@@ -69,7 +69,7 @@ let $$p3 = M4.Query({
     };
   }
 });
-let $$m5 = M4.Query({
+let $$m5 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e,
     numDays: t
@@ -83,7 +83,7 @@ let h = e => e.map(e => ({
   date: new Date(e.date),
   value: e.num_insertions
 }));
-let $$g6 = M4.Query({
+let $$g6 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e,
     numDays: t
@@ -100,14 +100,14 @@ let f = e => {
   for (let e of t) e.percent_insertions = `${Math.round(100 * e.num_insertions / i)}%`;
   return t;
 };
-let $$_0 = M4.Query({
+let $$_0 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e
   }) => (await PT.getLibraryStyleOverview({
     libraryFileKey: e
   })).data.meta
 });
-let $$A7 = M4.Query({
+let $$A7 = liveStoreInstance.Query({
   fetch: async ({
     libraryFileKey: e,
     styleKey: t
@@ -116,14 +116,14 @@ let $$A7 = M4.Query({
     styleKey: t
   })).data.meta
 });
-let $$y8 = M4.Query({
+let $$y8 = liveStoreInstance.Query({
   fetch: async ({
     fileKey: e
   }) => (await PT.getLibraryVariableOverview({
     libraryFileKey: e
   })).data.meta
 });
-let $$b2 = M4.Query({
+let $$b2 = liveStoreInstance.Query({
   fetch: async ({
     libraryFileKey: e,
     variableKey: t
@@ -132,7 +132,7 @@ let $$b2 = M4.Query({
     variableKey: t
   })).data.meta
 });
-M4.Query({
+liveStoreInstance.Query({
   fetch: e => Z.getLibraryPublishedComponentsStats({
     libraryFileKey: e
   }),
@@ -144,8 +144,8 @@ M4.Query({
   }),
   key: "libraryStatsForLibraryView"
 });
-export let $$v4 = M4.Query({
-  fetch: e => M4.fetch(u(e)),
+export let $$v4 = liveStoreInstance.Query({
+  fetch: e => liveStoreInstance.fetch(u(e)),
   output: ({
     data: e
   }) => ({

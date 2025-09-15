@@ -2,7 +2,7 @@ import { A } from "../905/920142";
 import { h } from "../905/142086";
 import { oB } from "../905/929976";
 import { getRepoByIdAlt } from "../905/760074";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { L } from "../905/657783";
 export function $$d0(e, t) {
   return !!e && !!t && (e.creatorId === t.id && A(e.createdAt).add(30, "s").isAfter(A()) || e.canEdit);
@@ -26,7 +26,7 @@ export function $$c2(e, t, r, n) {
 export function $$u1(e) {
   return !e.parentOrgId && !e.teamId;
 }
-M4.Query({
+liveStoreInstance.Query({
   fetch: async e => {
     if (!e) return null;
     let t = await L.getFileCanRequestEdit({

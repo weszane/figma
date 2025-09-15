@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { PresentationValidationStatus } from "../figma_app/763686";
-import { iX } from "../figma_app/471982";
+import { viewerModes } from "../figma_app/471982";
 import { a6, x0 } from "../figma_app/198840";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 function l({
@@ -46,7 +46,7 @@ export let $$d0 = {
         break;
       case null:
       case FFileType.DESIGN:
-        if (!iX.includes(d)) return [{
+        if (!viewerModes.includes(d)) return [{
           key: "INVALID_VIEWER_MODE_FOR_EDITOR_TYPE",
           data: {
             viewerMode: d,

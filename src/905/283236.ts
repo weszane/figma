@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
-import { Cg } from "../figma_app/471982";
+import { isEmptyAddress } from "../figma_app/471982";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { VA } from "../905/941408";
@@ -35,7 +35,7 @@ export function $$u0({
   vatGstId: t
 }) {
   return jsxs(Fragment, {
-    children: [!Cg(e) && jsx(c, {
+    children: [!isEmptyAddress(e) && jsx(c, {
       address: e
     }), t && renderI18nText("community.community_account_settings.vat_gst_id", {
       vatGstId: t

@@ -1,9 +1,9 @@
 import { withParsedMeta } from "../905/405710";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
 import { f } from "../905/292380";
 import { Tf } from "../905/297574";
-let $$l3 = M4.Query({
+let $$l3 = liveStoreInstance.Query({
   fetch: async e => {
     try {
       let {
@@ -27,7 +27,7 @@ let $$l3 = M4.Query({
     data: e
   }) => Tf(e.components, e.state_groups)
 });
-let $$d2 = M4.Query({
+let $$d2 = liveStoreInstance.Query({
   fetch: async ({
     hubFileId: e
   }) => (await f.getLibraryStyles({
@@ -37,13 +37,13 @@ let $$d2 = M4.Query({
     data: e
   }) => e.map(withParsedMeta)
 });
-let $$c1 = M4.Query({
+let $$c1 = liveStoreInstance.Query({
   fetch: async () => (await f.getCommunityLibraries()).data.meta,
   output: ({
     data: e
   }) => e.map(p)
 });
-let $$u0 = M4.Query({
+let $$u0 = liveStoreInstance.Query({
   fetch: async () => (await f.getCommunityLibrariesVisualAssets()).data.meta,
   output: ({
     data: e

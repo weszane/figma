@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import o from "classnames";
 import { getI18nString } from "../905/303541";
-import { zS, qD } from "../figma_app/471982";
+import { getViewerWidth, getCurrentVersion } from "../figma_app/471982";
 import { Ay } from "../905/506641";
 import { YW } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
@@ -99,7 +99,7 @@ function j({
       children: [jsx("iframe", {
         title: getI18nString("community.embed.preview_title_long"),
         style: {
-          width: r ? "100%" : zS(d),
+          width: r ? "100%" : getViewerWidth(d),
           height: "100%"
         },
         src: b(t, x),
@@ -153,7 +153,7 @@ function w({
           isWhiteboard: o,
           backgroundColor: Cn(e.client_meta),
           hubFileId: e.id,
-          alt: qD(e).name + " preview",
+          alt: getCurrentVersion(e).name + " preview",
           thumbnailContext: O7.DETAIL,
           resizedThumbnailUrls: e.resized_thumbnail_urls
         })
@@ -182,7 +182,7 @@ function C({
       children: jsx("img", {
         className: "canvas_viewer--pluginLoadingCoverImage--nn23R canvas_viewer--resourceLoadingCoverImage--e9uBx",
         src: e.thumbnail_url,
-        alt: qD(e).name + " preview"
+        alt: getCurrentVersion(e).name + " preview"
       }, e.id)
     })
   });

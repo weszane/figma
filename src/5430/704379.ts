@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { range } from "../figma_app/492908";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
 import { m as _$$m } from "../5430/656485";
 import { Qp, JR, Wi } from "../figma_app/162641";
@@ -52,7 +52,7 @@ export function $$p0({
   layoutV1: h = "oneColumn"
 }) {
   let x = !!getFeatureFlags().cmty_release_plugin_row_v2;
-  let f = N(`(max-width: ${dxy})`);
+  let f = usePrefersMediaQuery(`(max-width: ${dxy})`);
   let y = x ? f ? "oneColumn" : "twoColumn" : h;
   return jsx("div", {
     className: _$$s.wFull.$,

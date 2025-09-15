@@ -2,10 +2,10 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { renderI18nText } from "../905/303541";
 import { c } from "../905/391496";
 import { m_ } from "../figma_app/209680";
-import { s as _$$s } from "../905/875063";
+import { BadgeType } from "../905/875063";
 import { RL, kz } from "../figma_app/410936";
 export function $$d2(e) {
-  return e.some(e => e === _$$s.FIGMA_PARTNER);
+  return e.some(e => e === BadgeType.FIGMA_PARTNER);
 }
 export function $$c0({
   badges: e

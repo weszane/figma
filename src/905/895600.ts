@@ -1,6 +1,6 @@
 import { Statsig } from "statsig-react";
 import { getInitialOptions } from "../figma_app/169182";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { a as _$$a } from "../905/425366";
 import { m as _$$m } from "../905/325034";
 import { StatsigTimer, trackClientValuesNetworkCall, trackContextSwitchCacheMiss, trackClientUpdateUserTime, trackPrefetchCalls, trackStatsigClientInitTime } from "../3973/890507";
@@ -50,7 +50,7 @@ async function p({
   return p;
 }
 let _ = atom(() => new Set());
-let A = M4.Query({
+let A = liveStoreInstance.Query({
   fetch: async e => {
     let t = e.__IGNORE__overrideValues;
     let {
@@ -85,7 +85,7 @@ let A = M4.Query({
   key: "statsig_user_values",
   stalenessPolicy: "never"
 });
-let y = M4.Query({
+let y = liveStoreInstance.Query({
   fetch: async e => {
     let {
       userId,
@@ -109,7 +109,7 @@ let y = M4.Query({
           __IGNORE__timeout: nK,
           ...e
         });
-        return M4.fetch(n, {
+        return liveStoreInstance.fetch(n, {
           policy: "networkOnly"
         });
       }({
@@ -192,7 +192,7 @@ let $$v0 = atom(null, async (e, t, i) => {
           planKey
         });
         let n = e(i);
-        t = (w = "loaded" === n.status) ? n.data : await M4.fetch(i, {
+        t = (w = "loaded" === n.status) ? n.data : await liveStoreInstance.fetch(i, {
           policy: "networkOnly"
         });
       }
@@ -270,7 +270,7 @@ let $$I2 = atom(null, async (e, t, i) => {
         teamIds: d.map(e => e.teamId),
         orgId: i[0].orgId ?? void 0
       });
-      await M4.fetch(e, {
+      await liveStoreInstance.fetch(e, {
         policy: "networkOnly"
       });
     }
@@ -327,7 +327,7 @@ async function E(e, t, i, o, u) {
       orgId,
       planKey
     });
-    p = await M4.fetch(t, {
+    p = await liveStoreInstance.fetch(t, {
       policy: "networkOnly"
     });
   } catch (t) {

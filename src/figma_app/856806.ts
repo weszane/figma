@@ -10,7 +10,7 @@ import { eY } from "../figma_app/722362";
 import { openFileLibraryKeyAtom, useCurrentFileKey } from "../figma_app/516028";
 import { bj } from "../905/420347";
 import { PreloadCodeConnectLk } from "../figma_app/43951";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { MH } from "../figma_app/803787";
 import { Th, WH } from "../figma_app/645694";
 import { BA } from "../figma_app/889655";
@@ -215,7 +215,7 @@ export function $$w0(e, t = !0) {
 export function $$O2() {
   return atomStoreManager.get(zV)?.nodesWithCodeConnect;
 }
-let R = M4.Query({
+let R = liveStoreInstance.Query({
   fetch: async ({
     nodes: e
   }) => 0 === e.length ? {} : (await Q.getComponentNames(e)).data.meta.componentsById,
@@ -236,7 +236,7 @@ export function $$L5() {
     componentsById: r.data
   }), () => atomStoreManager.set(Af, null)), [e, r.status]);
 }
-let P = M4.Query({
+let P = liveStoreInstance.Query({
   fetch: async ({
     assetKeys: e
   }) => 0 === e.length ? {

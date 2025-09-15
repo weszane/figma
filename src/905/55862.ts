@@ -19,7 +19,7 @@ import { eO } from "../figma_app/518077";
 import { gi, r9, fc } from "../figma_app/646357";
 import { PG, Q_ } from "../905/570707";
 import { LibrariesViewFilterStatesView } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
 import { _X, YH } from "../figma_app/502247";
 import { NO_TEAM } from "../figma_app/633080";
@@ -247,7 +247,7 @@ export function $$L3(e, t = !1) {
   let y = useSelector(({
     openFile: e
   }) => e);
-  let v = M4.Team.useValue(e).data;
+  let v = liveStoreInstance.Team.useValue(e).data;
   let I = useMemo(() => {
     let t;
     let i = _.data?.org?.workspaces ?? [];

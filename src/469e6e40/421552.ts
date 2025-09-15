@@ -83,7 +83,7 @@ import { fM } from "../figma_app/214643";
 import { l as _$$l3 } from "../469e6e40/774192";
 import { FlashActions } from "../905/573154";
 import { XF, wZ, CA } from "../figma_app/777207";
-import { M4, gY } from "../905/713695";
+import { liveStoreInstance, gY } from "../905/713695";
 import { WB } from "../905/761735";
 import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
@@ -462,10 +462,10 @@ let eV = new class {
     });
   }
 }();
-let eW = M4.Mutation(async e => {
+let eW = liveStoreInstance.Mutation(async e => {
   await eV.createOrgApprovedLibrary(e);
 });
-let eH = M4.Mutation(async e => {
+let eH = liveStoreInstance.Mutation(async e => {
   await eV.deleteOrgApprovedLibrary(e);
 });
 function eY({
@@ -550,10 +550,10 @@ function eY({
     })]
   });
 }
-let eJ = M4.Mutation(async e => {
+let eJ = liveStoreInstance.Mutation(async e => {
   await eV.createWorkspaceApprovedLibrary(e);
 });
-let eK = M4.Mutation(async e => {
+let eK = liveStoreInstance.Mutation(async e => {
   await eV.deleteWorkspaceApprovedLibrary(e);
 });
 function eX({

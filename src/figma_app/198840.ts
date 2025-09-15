@@ -5,12 +5,12 @@ import { customHistory } from "../905/612521";
 import { ignoreCommandOrShift } from "../905/63728";
 import { isValidUrl } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
-import { N6 } from "../figma_app/471982";
+import { buildCarouselMedia } from "../figma_app/471982";
 import { centsToDollars, isPriceOutOfRange, MIN_PRICE, isNotInteger } from "../figma_app/808294";
 import { Tn, gO, Ii, xw, vC } from "../figma_app/599979";
 import { FTemplateCategoryType, FPublicationStatusType, FFileType } from "../figma_app/191312";
 import { d as _$$d } from "../905/44199";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { PreviewMode } from "../figma_app/707808";
 import { Rs } from "../figma_app/761870";
 import { Hc, b as _$$b, Yp as _$$Yp, IZ } from "../figma_app/740025";
@@ -49,7 +49,7 @@ let T = {
     location: null,
     follower_count: 0,
     following_count: 0,
-    entity_type: o1.USER,
+    entity_type: TeamOrgType.USER,
     badges: [],
     description: ""
   },
@@ -150,7 +150,7 @@ export function $$C11(e, t, r, n) {
     price: centsToDollars(o.monetized_resource_metadata),
     isPaid: !!o.monetized_resource_metadata,
     supportContact: o.support_contact || e.user?.email,
-    carouselMedia: N6(o),
+    carouselMedia: buildCarouselMedia(o),
     coverImageCarouselMediaId: o.cover_image_carousel_media_id
   };
 }

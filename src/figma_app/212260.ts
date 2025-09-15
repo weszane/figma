@@ -22,7 +22,7 @@ import { Kx } from "../figma_app/546509";
 import { oh } from "../905/18797";
 import { getPluginVersion } from "../figma_app/300692";
 import { Vq } from "../figma_app/979658";
-import { ResourceType, hasMonetizedResourceMetadata } from "../figma_app/45218";
+import { HubTypeEnum, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r } from "../905/319631";
 import { Cf } from "../905/504727";
@@ -54,13 +54,13 @@ export function $$G2(e) {
   useEffect(() => {
     l || w(af({
       id: r,
-      resourceType: ResourceType.WIDGET
+      resourceType: HubTypeEnum.WIDGET
     }));
   }, [r, w, l]);
   let J = _$$b();
   if (oh(af.loadingKeyForPayload({
     id: r,
-    resourceType: ResourceType.WIDGET
+    resourceType: HubTypeEnum.WIDGET
   })) && !l) return jsx(_$$L, {});
   if (!l) return null;
   let Z = getPluginVersion(l);
@@ -69,7 +69,7 @@ export function $$G2(e) {
     properties: {
       resourceId: e.id,
       isMonetized: hasMonetizedResourceMetadata(l),
-      resourceType: ResourceType.WIDGET,
+      resourceType: HubTypeEnum.WIDGET,
       editorType: "figjam"
     },
     children: [jsx(_$$P, {
@@ -119,7 +119,7 @@ export function $$G2(e) {
             data: {
               error: j.error,
               dispatch: w,
-              resourceType: ResourceType.WIDGET
+              resourceType: HubTypeEnum.WIDGET
             },
             showModalsBeneath: !0
           })) : w(showModalHandler({

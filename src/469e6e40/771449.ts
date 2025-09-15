@@ -8,7 +8,7 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { KX } from "../469e6e40/623537";
 import { g as _$$g } from "../figma_app/638694";
-import { $N } from "../figma_app/422062";
+import { isSelectedViewMissingOrgAdminSettingsResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { Jt } from "../figma_app/28323";
@@ -48,7 +48,7 @@ export function $$C0(e) {
   let D = useTeamPlanUser();
   let M = useIsOrgAdminUser(D);
   let P = useSelector(e => getPermissionsStateMemoized(e));
-  let U = "loaded" === M.status && $N({
+  let U = "loaded" === M.status && isSelectedViewMissingOrgAdminSettingsResources({
     isAdminOrg: !!M.data,
     permissions: P,
     view: I

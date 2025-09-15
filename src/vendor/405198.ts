@@ -1,7 +1,7 @@
 import { U } from "../vendor/150351";
 import { j } from "../vendor/637177";
 import { k } from "../vendor/38262";
-import { II, v_ } from "../vendor/284502";
+import { createRetryer, canFetch } from "@tanstack/query-core";
 export class $$h1 extends k {
   constructor(e) {
     super();
@@ -69,7 +69,7 @@ export class $$h1 extends k {
     var x;
     let w = () => {
       var e;
-      this.retryer = II({
+      this.retryer = createRetryer({
         fn: () => this.options.mutationFn ? this.options.mutationFn(this.state.variables) : Promise.reject("No mutationFn found"),
         onFail: (e, r) => {
           this.dispatch({
@@ -159,7 +159,7 @@ export class $$h1 extends k {
             failureCount: 0,
             failureReason: null,
             error: null,
-            isPaused: !v_(this.options.networkMode),
+            isPaused: !canFetch(this.options.networkMode),
             status: "loading",
             variables: e.variables
           };

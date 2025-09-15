@@ -3,7 +3,7 @@ import { a as _$$a } from "../figma_app/215667";
 import { Z } from "../5430/993414";
 import { OQ } from "../5430/903660";
 import { y } from "../5430/173892";
-import { MF } from "../figma_app/773663";
+import { getEditorTypeForResource } from "../figma_app/773663";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
@@ -19,7 +19,7 @@ export function $$u0({
 }) {
   let {
     resourceType,
-    editorType = MF(resourceType),
+    editorType = getEditorTypeForResource(resourceType),
     price
   } = t;
   return jsx(TrackingProvider, {

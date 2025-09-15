@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager } from "../figma_app/27355";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { isInvalidValue } from "../905/216495";
 import { useCurrentFileKey, openFileLibraryKeyAtom } from "../figma_app/516028";
 import { FileCanAccessFullCodeConnect, CodeConnectForNodeLk } from "../figma_app/43951";
@@ -144,7 +144,7 @@ export function $$v8(e, t) {
     backingNodeId,
     backingLibraryKey
   } = $$S2(e, t, i);
-  let g = fd(_$$l(backingLibraryKey ?? ""));
+  let g = hasResourcePresetKey(_$$l(backingLibraryKey ?? ""));
   let f = atomStoreManager.get(zV);
   let E = d.data?.file?.status === "loaded" && !d.data.file?.data?.hasPermission && !g;
   let [y] = setupResourceAtomHandler(CodeConnectForNodeLk({
@@ -247,7 +247,7 @@ export function $$N5(e, t, r, i) {
     backingNodeId,
     backingLibraryKey
   } = $$S2(e, t, f);
-  let v = fd(_$$l(backingLibraryKey ?? ""));
+  let v = hasResourcePresetKey(_$$l(backingLibraryKey ?? ""));
   let x = $$L6(e, t, g, !!i, f);
   let N = !!backingLibraryKey && function (e, t, r) {
     if (!e || !t) return !1;

@@ -5,8 +5,8 @@ import { throwTypeError } from "../figma_app/465776";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Jj, bY } from "../figma_app/2023";
 import { FPublicationStatusType, FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
-import { k2 } from "../figma_app/10554";
+import { liveStoreInstance } from "../905/713695";
+import { PageTypeEnum } from "../figma_app/10554";
 import { $S } from "../905/918620";
 import { deepEqual } from "../905/382883";
 import { t as _$$t2 } from "../905/150656";
@@ -50,7 +50,7 @@ import { getFeatureFlags } from "../905/601108";
 import J from "../vendor/781591";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { S as _$$S3 } from "../905/872825";
+import { getValueOrFallback } from "../905/872825";
 import { T as _$$T, e as _$$e2 } from "../905/15569";
 import { q as _$$q } from "../905/840070";
 import { v as _$$v, V as _$$V } from "../905/513628";
@@ -444,7 +444,7 @@ let ey = {
           }
         });
       }
-      r.publishing_status = _$$S3(e, FPublicationStatusType) ?? null;
+      r.publishing_status = getValueOrFallback(e, FPublicationStatusType) ?? null;
       RN(r, "CooperForm.submit");
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
@@ -1297,7 +1297,7 @@ let tt = _$$T({
           }
         });
       }
-      r.publishing_status = _$$S3(e, FPublicationStatusType) ?? null;
+      r.publishing_status = getValueOrFallback(e, FPublicationStatusType) ?? null;
       RN(r, "HubFileForm.submit");
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);
@@ -1817,7 +1817,7 @@ export function $$th0({
   let {
     status,
     data
-  } = M4.useFile(t);
+  } = liveStoreInstance.useFile(t);
   let h = $S({
     fileKey: t,
     file: data ?? null
@@ -1840,15 +1840,15 @@ export function $$th0({
     }
   }(data?.editor_type);
   switch (e) {
-    case k2.EDITOR:
-    case k2.UNIVERSAL_POSTING:
+    case PageTypeEnum.EDITOR:
+    case PageTypeEnum.UNIVERSAL_POSTING:
       if (g) return jsx(_, {
         figFile: g,
         existingHubFile: f,
         createNewVersionOnSubmit: !0
       });
       break;
-    case k2.RESOURCE_PAGE:
+    case PageTypeEnum.RESOURCE_PAGE:
       if (f) return jsx(_, {
         figFile: g,
         existingHubFile: f,

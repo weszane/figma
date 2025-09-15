@@ -5,7 +5,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
-import { C as _$$C } from "../905/237873";
+import { PricingOptions } from "../905/237873";
 import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { ResourceTypes } from "../905/178090";
 import { Z } from "../5430/338876";
@@ -36,30 +36,30 @@ function b(e) {
   });
   switch (e.resourceType) {
     case ResourceTypes.SearchResourceTypes.FILES:
-      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_hub_files_free", {
+      if (e.view.price === PricingOptions.FREE) return renderI18nText("community.search.empty_state_hub_files_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.empty_state_hub_files_paid", {
+      if (e.view.price === PricingOptions.PAID) return renderI18nText("community.search.empty_state_hub_files_paid", {
         query: t
       });
       return renderI18nText("community.search.empty_state_hub_files", {
         query: t
       });
     case ResourceTypes.SearchResourceTypes.PLUGINS:
-      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_public_plugins_free", {
+      if (e.view.price === PricingOptions.FREE) return renderI18nText("community.search.empty_state_public_plugins_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.empty_state_public_plugins_paid", {
+      if (e.view.price === PricingOptions.PAID) return renderI18nText("community.search.empty_state_public_plugins_paid", {
         query: t
       });
       return renderI18nText("community.search.empty_state_public_plugins", {
         query: t
       });
     case ResourceTypes.SearchResourceTypes.WIDGETS:
-      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.empty_state_public_widgets_free", {
+      if (e.view.price === PricingOptions.FREE) return renderI18nText("community.search.empty_state_public_widgets_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.empty_state_public_widgets_paid", {
+      if (e.view.price === PricingOptions.PAID) return renderI18nText("community.search.empty_state_public_widgets_paid", {
         query: t
       });
       return renderI18nText("community.search.empty_state_public_widgets", {
@@ -71,10 +71,10 @@ function b(e) {
       });
     case ResourceTypes.SearchResourceTypes.MIXED:
     default:
-      if (e.view.price === _$$C.FREE) return renderI18nText("community.search.no_resources_matching_free", {
+      if (e.view.price === PricingOptions.FREE) return renderI18nText("community.search.no_resources_matching_free", {
         query: t
       });
-      if (e.view.price === _$$C.PAID) return renderI18nText("community.search.no_resources_matching_paid", {
+      if (e.view.price === PricingOptions.PAID) return renderI18nText("community.search.no_resources_matching_paid", {
         query: t
       });
       return renderI18nText("community.search.no_resources_matching", {

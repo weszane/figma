@@ -1,10 +1,31 @@
-import { cZ, OS } from "../905/113138";
-import { lH } from "../905/316062";
-import { W } from "../905/522628";
-import { E } from "../905/118283";
-let $$o0 = new cZ("FOLDER").binding;
-let $$l1 = (e, t) => new OS(e, "folders", $$o0, lH, async e => (await W.getFolder({
-  folderId: e
-})).data.meta, E(t(), "folder"));
-export const N = $$o0;
-export const Y = $$l1;
+import { LivestoreBinding, LivestoreManager } from '../905/113138'
+import { setupRealtimeSubscription } from '../905/118283'
+import { FolderSchema } from '../905/316062'
+import { folderAPIInstance } from '../905/522628'
+/**
+ * LivestoreBinding for folders.
+ * Original variable: $$o0
+ */
+export const folderLivestoreBinding = new LivestoreBinding('FOLDER').binding
+
+/**
+ * Sets up a LivestoreManager for folders.
+ * Original variable: $$l1
+ * @param id - The folder ID.
+ * @param getRealtimeSubscription - Function to get the realtime subscription.
+ * @returns LivestoreManager instance for folders.
+ */
+export function setupFolderLivestoreManager(id: any, getRealtimeSubscription: () => any) {
+  return new LivestoreManager(
+    id,
+    'folders',
+    folderLivestoreBinding,
+    FolderSchema,
+    async folderId => (await folderAPIInstance.getFolder({ folderId })).data.meta,
+    setupRealtimeSubscription(getRealtimeSubscription(), 'folder'),
+  )
+}
+
+// Refactored exports for clarity and maintainability
+export const N = folderLivestoreBinding
+export const Y = setupFolderLivestoreManager

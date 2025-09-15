@@ -13,7 +13,7 @@ import { N } from "../figma_app/261650";
 import { eY } from "../figma_app/722362";
 import { buildFileUrl } from "../905/612685";
 import { FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser } from "../figma_app/465071";
 import { lD } from "../figma_app/831696";
 import { ThreadType } from "../905/380385";
@@ -53,7 +53,7 @@ export function $$R6(e, t, i) {
       file_key: l ?? void 0
     }));
   }, [a, l]);
-  let u = M4.useFile(l).data;
+  let u = liveStoreInstance.useFile(l).data;
   let m = $E();
   let h = useMemo(() => u && s && s.type === cM.PROTOTYPE ? y1.PROTOTYPE : u ? m(u) : void 0, [u, s, m]);
   let g = u && void 0 !== h;

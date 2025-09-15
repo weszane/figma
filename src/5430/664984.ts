@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { r as _$$r } from "../905/520829";
 import { logError } from "../905/714362";
-import { vt } from "../figma_app/306946";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { ek, MJ } from "../figma_app/657017";
 import { g } from "../905/347448";
 import { nm } from "../905/352022";
@@ -85,7 +85,7 @@ export function $$g0(e) {
     isDisabled,
     disabledReason
   } = function (e, t, r) {
-    if (e !== vt.SITE_TEMPLATE) return {
+    if (e !== ResourceTypeEnum.SITE_TEMPLATE) return {
       isDisabled: !1
     };
     if (!r || 0 === r.length) return {
@@ -110,7 +110,7 @@ export function $$g0(e) {
   let {
     isDisabled: _isDisabled,
     disabledReason: _disabledReason
-  } = e !== vt.COOPER_TEMPLATE_FILE ? {
+  } = e !== ResourceTypeEnum.COOPER_TEMPLATE_FILE ? {
     isDisabled: !1
   } : r && 0 !== r.length ? r.some(e => e.plan_type === OrganizationType.TEAM || !e.is_cooper_disabled) ? {
     isDisabled: !1
@@ -123,7 +123,7 @@ export function $$g0(e) {
   let {
     isDisabled: _isDisabled2,
     disabledReason: _disabledReason2
-  } = e !== vt.FIGMAKE_TEMPLATE ? {
+  } = e !== ResourceTypeEnum.FIGMAKE_TEMPLATE ? {
     isDisabled: !1
   } : r && 0 !== r.length ? r.some(e => e.plan_type === OrganizationType.TEAM || !e.is_figmake_disabled) ? {
     isDisabled: !1
@@ -133,13 +133,13 @@ export function $$g0(e) {
   } : {
     isDisabled: !0
   };
-  return e === vt.SITE_TEMPLATE && isDisabled ? {
+  return e === ResourceTypeEnum.SITE_TEMPLATE && isDisabled ? {
     isDisabled: !0,
     disabledReason
-  } : e === vt.COOPER_TEMPLATE_FILE && _isDisabled ? {
+  } : e === ResourceTypeEnum.COOPER_TEMPLATE_FILE && _isDisabled ? {
     isDisabled: !0,
     disabledReason: _disabledReason
-  } : e === vt.FIGMAKE_TEMPLATE && _isDisabled2 ? {
+  } : e === ResourceTypeEnum.FIGMAKE_TEMPLATE && _isDisabled2 ? {
     isDisabled: !0,
     disabledReason: _disabledReason2
   } : {

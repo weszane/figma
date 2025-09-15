@@ -1,10 +1,10 @@
 import { AG } from "../figma_app/999312";
-import { RE } from "../figma_app/471982";
-import { Om, tv } from "../figma_app/979714";
+import { buildProfileRouteState } from "../figma_app/471982";
+import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 export function $$s0(e) {
   let t = AG();
-  let i = Om() ?? void 0;
-  let s = tv() ?? void 0;
-  return RE(e, t, i, s);
+  let i = useResourceRouteParams() ?? void 0;
+  let s = useResourceFuid() ?? void 0;
+  return buildProfileRouteState(e, t, i, s);
 }
 export const y = $$s0;

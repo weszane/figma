@@ -21,12 +21,12 @@ import { o as _$$o } from "../905/160095";
 import { getI18nString } from "../905/303541";
 import { Jm, BY } from "../figma_app/387599";
 import { y$ } from "../figma_app/835219";
-import { lW, tv, DV } from "../figma_app/471982";
-import { K2 } from "../figma_app/777551";
-import { XW, qY, ws, zL, Vm, $9, o_, B2 } from "../figma_app/427318";
+import { copyToClipboard, extractResourceInfoFromUrl, buildFullCommunityUrl } from "../figma_app/471982";
+import { getResourceName } from "../figma_app/777551";
+import { hasContent, getMainContent, hasResourceType, isFigmakeTemplate, getResourceType, getPluginOrWidgetContent, hasLibraryKey, getTemplateContent } from "../figma_app/427318";
 import { Z as _$$Z } from "../905/909123";
-import { jT } from "../figma_app/354658";
-import { Om, tv as _$$tv } from "../figma_app/979714";
+import { ResourceHubResourceRoute } from "../figma_app/354658";
+import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { showModalHandler, hideModalHandler } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -41,7 +41,7 @@ import { Y as _$$Y } from "../5430/601486";
 import { Q as _$$Q } from "../5430/117345";
 import { Y as _$$Y2 } from "../5430/229344";
 import { qG } from "../figma_app/701107";
-import { vt } from "../figma_app/306946";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { lx } from "../figma_app/558929";
 import { jd } from "../figma_app/106207";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
@@ -79,7 +79,7 @@ function z({
     children: [jsx(_$$K, {
       ...getTriggerProps(),
       onClick: () => {
-        lW(e);
+        copyToClipboard(e);
         r(!0);
         setTimeout(() => r(!1), 2e3);
       },
@@ -142,8 +142,8 @@ let Z = registerModal(function (e) {
   let i = hasDesktopAPI();
   let [a, u] = useAtomValueAndSetter(_$$Q);
   let m = useRef(!1);
-  let x = Om();
-  let f = _$$tv() ?? void 0;
+  let x = useResourceRouteParams();
+  let f = useResourceFuid() ?? void 0;
   let {
     resourceUrl,
     resourceId,
@@ -152,13 +152,13 @@ let Z = registerModal(function (e) {
     open
   } = e;
   if (resourceUrl) {
-    let e = tv(resourceUrl);
+    let e = extractResourceInfoFromUrl(resourceUrl);
     t = e?.resourceId;
     r = e?.apiResourceType;
   }
   let Z = resourceId || t;
   let q = r || resourceType;
-  let Y = x && q && Z ? new jT({
+  let Y = x && q && Z ? new ResourceHubResourceRoute({
     ...x,
     apiResourceType: q,
     resourceId: Z
@@ -170,9 +170,9 @@ let Z = registerModal(function (e) {
     enabled: !!q && !!Z
   });
   let J = X.data;
-  let K = J && XW(J) ? qY(J) : J;
+  let K = J && hasContent(J) ? getMainContent(J) : J;
   let ee = "";
-  J && K && (ee = ws(J) ? J.rdp_url : DV(K));
+  J && K && (ee = hasResourceType(J) ? J.rdp_url : buildFullCommunityUrl(K));
   useEffect(() => {
     if (shouldUpdateUrl && open && Y && !m.current) {
       window.history.pushState(null, "", Y);
@@ -206,7 +206,7 @@ let Z = registerModal(function (e) {
   let es = Jm();
   let ei = BY();
   let en = W6(q || "", Z || "", es, ei);
-  let eo = J && zL(J);
+  let eo = J && isFigmakeTemplate(J);
   let ea = !i && jsx(Q, {
     dispatch: s,
     route: Y,
@@ -227,7 +227,7 @@ let Z = registerModal(function (e) {
           children: jsxs(vo, {
             children: [jsxs(Y9, {
               children: [jsx(hE, {
-                children: J && K2(J)
+                children: J && getResourceName(J)
               }), jsxs("div", {
                 className: "x78zum5 x1v2ro7d x8x9d4c xnuq7ks",
                 children: [jsx(z, {
@@ -262,16 +262,16 @@ let Z = registerModal(function (e) {
 export function $$ea2(e, t) {
   let r = function (e, t) {
     if (!t) return null;
-    if (!ws(e)) return new jT({
+    if (!hasResourceType(e)) return new ResourceHubResourceRoute({
       ...t,
-      apiResourceType: qG[Vm(e)],
+      apiResourceType: qG[getResourceType(e)],
       resourceId: e.id
     });
     {
-      let r = tv(e.rdp_url);
+      let r = extractResourceInfoFromUrl(e.rdp_url);
       let s = r?.apiResourceType;
       let i = r?.resourceId;
-      return s && i ? new jT({
+      return s && i ? new ResourceHubResourceRoute({
         ...t,
         apiResourceType: s,
         resourceId: i
@@ -282,7 +282,7 @@ export function $$ea2(e, t) {
     reportError(_$$e.COMMUNITY, Error("ResourceHubResourceRoute is empty"), {
       extra: {
         resourceId: e.id,
-        resourceType: Vm(e),
+        resourceType: getResourceType(e),
         sharedRouteParams: t
       }
     });
@@ -298,7 +298,7 @@ export function $$el1(e, t, r) {
     $$ea2(t, r.sharedRouteParams);
     return;
   }
-  if (ws(t)) e(showModalHandler({
+  if (hasResourceType(t)) e(showModalHandler({
     type: Z,
     data: {
       resourceUrl: t.rdp_url,
@@ -308,7 +308,7 @@ export function $$el1(e, t, r) {
     var a;
     var l;
     a = t.id;
-    l = qG[Vm(t)];
+    l = qG[getResourceType(t)];
     e(showModalHandler({
       type: Z,
       data: {
@@ -343,10 +343,10 @@ export function $$ec3(e, t) {
 }
 export function $$ed0(e, t, r, n) {
   switch (t.resource_type) {
-    case vt.PLUGIN:
-    case vt.WIDGET:
+    case ResourceTypeEnum.PLUGIN:
+    case ResourceTypeEnum.WIDGET:
       !function (e, t, r, s) {
-        let n = $9(t);
+        let n = getPluginOrWidgetContent(t);
         if (!n) {
           reportError(_$$e.COMMUNITY, Error("Plugin resource has no plugin"), {
             extra: {
@@ -373,23 +373,23 @@ export function $$ed0(e, t, r, n) {
         }));
       }(e, t, r, n);
       break;
-    case vt.SLIDE_TEMPLATE:
+    case ResourceTypeEnum.SLIDE_TEMPLATE:
       eu(t);
       break;
-    case vt.FIGJAM_TEMPLATE:
+    case ResourceTypeEnum.FIGJAM_TEMPLATE:
       em(e, t);
       break;
-    case vt.COOPER_TEMPLATE_FILE:
+    case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
       e_(t);
       break;
-    case vt.FIGMAKE_TEMPLATE:
+    case ResourceTypeEnum.FIGMAKE_TEMPLATE:
       ep(e, t);
       break;
-    case vt.UI_KIT:
-    case vt.PROTOTYPE:
-    case vt.DESIGN_TEMPLATE:
-    case vt.SITE_TEMPLATE:
-    case vt.COOPER_TEMPLATE_ASSET:
+    case ResourceTypeEnum.UI_KIT:
+    case ResourceTypeEnum.PROTOTYPE:
+    case ResourceTypeEnum.DESIGN_TEMPLATE:
+    case ResourceTypeEnum.SITE_TEMPLATE:
+    case ResourceTypeEnum.COOPER_TEMPLATE_ASSET:
       break;
     default:
       throwTypeError(t.resource_type);
@@ -397,9 +397,9 @@ export function $$ed0(e, t, r, n) {
 }
 function eu(e) {
   let t;
-  let r = o_(e);
+  let r = hasLibraryKey(e);
   if (r) t = e.libraryKey;else {
-    let r = B2(e);
+    let r = getTemplateContent(e);
     t = r?.library_key;
   }
   if (t) {
@@ -424,12 +424,12 @@ function eu(e) {
 function em(e, t) {
   let r;
   let s;
-  let n = o_(t);
+  let n = hasLibraryKey(t);
   if (n) {
     r = t.fileKey;
     s = t.name;
   } else {
-    let e = B2(t);
+    let e = getTemplateContent(t);
     r = e?.file_key;
     s = e?.name;
   }
@@ -460,9 +460,9 @@ function em(e, t) {
 }
 function e_(e) {
   let t;
-  let r = o_(e);
+  let r = hasLibraryKey(e);
   if (r) t = e.libraryKey;else {
-    let r = B2(e);
+    let r = getTemplateContent(e);
     t = r?.library_key;
   }
   if (t) {
@@ -487,12 +487,12 @@ function e_(e) {
 function ep(e, t) {
   let r;
   let s;
-  let n = o_(t);
+  let n = hasLibraryKey(t);
   if (n) {
     r = t.fileKey;
     s = t.name;
   } else {
-    let e = B2(t);
+    let e = getTemplateContent(t);
     r = e?.file_key;
     s = e?.name;
   }

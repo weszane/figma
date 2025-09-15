@@ -28,7 +28,7 @@ function getPluginUniqueId(plugin: any): string {
  * @returns The codegen language preference object.
  * (original: $$p0)
  */
-function getCodegenLanguagePreference(plugin: any, language?: any): any {
+export function getCodegenLanguagePreference(plugin: any, language?: any): any {
   const type = hasLocalFileId(plugin) ? 'local-plugin' : 'published-plugin'
   const id = getPluginUniqueId(plugin)
   if (language) {

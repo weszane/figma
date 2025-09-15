@@ -1,6 +1,6 @@
 import { k } from '../905/93362';
 import { H } from '../905/202181';
-import { g } from '../905/346780';
+import { setupAdvanceTimers } from '../905/346780';
 import { getCookieOrStorage } from '../905/414007';
 import { sendBatchedMetrics } from '../905/485103';
 import { OrganizationType } from '../905/833838';
@@ -42,7 +42,7 @@ let b = new class {
     document.removeEventListener('visibilitychange', this.onVisibilityChange);
     window.removeEventListener('pagehide', this.sendBatchedEvents);
     clearInterval(this.sendBatchedEventsInterval);
-    await g();
+    await setupAdvanceTimers();
   }
   reportUserStateCall(e) {
     this.batchedCustomEvents.push({

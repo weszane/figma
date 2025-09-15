@@ -2,9 +2,9 @@ import { throwTypeError } from "../figma_app/465776";
 import { A } from "../905/17894";
 import { editorUtilities } from "../905/22009";
 import { nT } from "../905/448740";
-import { iB } from "../figma_app/188671";
+import { allCategoriesQuery } from "../figma_app/188671";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 import { ManifestEditorType } from "../figma_app/155287";
 export function $$p3(e, t) {
@@ -67,10 +67,10 @@ export function $$m0(e) {
   let l = existingResourceContent && isWidgetOrPlugin(existingResourceContent) ? existingResourceContent : void 0;
   (localExtension || l) && (t = nT(localExtension, l)?.[0]);
   let d = figFile?.editor_type ?? void 0;
-  return iB($$p3(d || t, currentViewerMode));
+  return allCategoriesQuery($$p3(d || t, currentViewerMode));
 }
 export async function $$h1(...e) {
-  return await M4.fetch($$m0(...e));
+  return await liveStoreInstance.fetch($$m0(...e));
 }
 let $$g2 = {
   displayName: "CategoryField",

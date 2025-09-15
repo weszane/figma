@@ -7,7 +7,7 @@ import { RD } from "../figma_app/198840";
 import { mC, oh } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt } from "../figma_app/979658";
-import { CommunityPageType, ResourceType } from "../figma_app/45218";
+import { CommunityPageType, HubTypeEnum } from "../figma_app/45218";
 import { $A } from "../905/862883";
 import { cd } from "../905/381612";
 import { K } from "../1291/825015";
@@ -117,7 +117,7 @@ export function $$I0(e) {
     children: jsxs(TrackingProvider, {
       name: "templates",
       children: [jsx($, {}), jsx(C, {}), jsx(K, {
-        resourceType: ResourceType.HUB_FILE,
+        resourceType: HubTypeEnum.HUB_FILE,
         shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER,
         renderResource: s => jsx(_$$S, {
           template: {

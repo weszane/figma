@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { S as _$$S } from "../905/872825";
+import { getValueOrFallback } from "../905/872825";
 import { L } from "../905/884941";
 import { T as _$$T, e as _$$e2 } from "../905/15569";
 import { o as _$$o } from "../905/17894";
@@ -366,7 +366,7 @@ let $$P2 = {
           }
         });
       }
-      p.publishing_status = _$$S(e, FPublicationStatusType) ?? null;
+      p.publishing_status = getValueOrFallback(e, FPublicationStatusType) ?? null;
       RN(p, "SitesForm.submit");
     } catch (e) {
       reportError(_$$e.COMMUNITY, e);

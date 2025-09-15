@@ -2,11 +2,11 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { SecureLink } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Cc, vb } from "../5430/664984";
-import { ws, bc } from "../figma_app/427318";
+import { hasResourceType, getTemplateType } from "../figma_app/427318";
 export function $$l0({
   resource: e
 }) {
-  let t = ws(e) ? e.resource_type : bc(e);
+  let t = hasResourceType(e) ? e.resource_type : getTemplateType(e);
   let {
     isDisabled,
     disabledReason

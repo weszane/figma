@@ -6,7 +6,7 @@ import { I } from "../figma_app/4253";
 import { getProductPriceString, isSubscriptionActive } from "../figma_app/808294";
 import { cs } from "../figma_app/740025";
 import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from "../figma_app/45218";
-import { t as _$$t } from "../905/344937";
+import { hasMonetizedResourceMetadata } from "../905/344937";
 function p(e) {
   let t = getProductPriceString(e.resource.monetized_resource_metadata);
   return jsx(E, {
@@ -74,7 +74,7 @@ export function $$b0({
   validBadges: r = Object.values($$E4),
   authedActiveCommunityProfile: i
 }) {
-  return e ? !(i && cs(i)) && _$$t(e) && e.community_resource_payment && isSubscriptionActive(e.community_resource_payment) ? r.includes("purchased") ? jsx($$h2, {
+  return e ? !(i && cs(i)) && hasMonetizedResourceMetadata(e) && e.community_resource_payment && isSubscriptionActive(e.community_resource_payment) ? r.includes("purchased") ? jsx($$h2, {
     size: t
   }) : null : hasFreemiumCode(e) ? r.includes("freemium") ? jsx(g, {
     size: t

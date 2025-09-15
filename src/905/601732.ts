@@ -10,7 +10,7 @@ import { Lz, Zc } from "../905/497882";
 import { LG } from "../905/448440";
 import { jr, j4, Z7, MO } from "../figma_app/599979";
 import { isWidgetOrPlugin } from "../figma_app/45218";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { A as _$$A } from "../905/567946";
 import { iy, uK, O0, Ee, I1 } from "../905/916525";
 export function $$$$A0({
@@ -105,7 +105,7 @@ function S({
   } = e;
   return jsxs("label", {
     className: uK,
-    children: [e.entity_type === o1.USER ? jsx(H8, {
+    children: [e.entity_type === TeamOrgType.USER ? jsx(H8, {
       user: {
         imageUrl: img_url,
         name
@@ -128,6 +128,6 @@ function S({
     })]
   });
 }
-let w = e => e.entity_type === o1.USER ? getI18nString("community.publishing.individual_creator") : e.entity_type === o1.TEAM ? getI18nString("community.publishing.team_author") : e.entity_type === o1.ORG ? getI18nString("community.publishing.organization_author") : void 0;
+let w = e => e.entity_type === TeamOrgType.USER ? getI18nString("community.publishing.individual_creator") : e.entity_type === TeamOrgType.TEAM ? getI18nString("community.publishing.team_author") : e.entity_type === TeamOrgType.ORG ? getI18nString("community.publishing.organization_author") : void 0;
 export const A = $$$$A0;
 export const s = $$b1;

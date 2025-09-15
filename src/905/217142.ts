@@ -15,7 +15,7 @@ import { getUserId } from "../905/372672";
 import { FMemberRoleType } from "../figma_app/191312";
 import { useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071";
 import { w as _$$w } from "../figma_app/883622";
-import { k2 } from "../figma_app/10554";
+import { PageTypeEnum } from "../figma_app/10554";
 import { KM } from "../figma_app/224019";
 import { YW, ho } from "../figma_app/870683";
 import { H } from "../figma_app/441663";
@@ -95,7 +95,7 @@ export function $$C1(e) {
     r(_$$r({
       publishedPluginId: publishedResource?.id,
       initialTab: e,
-      entryPoint: k2.ADMIN,
+      entryPoint: PageTypeEnum.ADMIN,
       initialAllowedTabs: C
     }));
   };

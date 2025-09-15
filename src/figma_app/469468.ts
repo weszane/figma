@@ -1,20 +1,39 @@
-import { useState, useEffect } from "react";
-export function $$i0(e) {
-  let [t, r] = useState(() => matchMedia(e).matches);
+import { useEffect, useState } from 'react'
+
+/**
+ * usePrefersMediaQuery - Tracks a media query and returns its match status.
+ * Original: $$i0
+ * @param query - The media query string to match.
+ * @returns boolean - Whether the media query matches.
+ */
+export function usePrefersMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(() => matchMedia(query).matches)
+
   useEffect(() => {
-    let t = matchMedia(e);
-    let n = e => {
-      r(e.matches);
-    };
-    t.addEventListener("change", n);
+    const mediaQueryList = matchMedia(query)
+    const handleChange = (event: MediaQueryListEvent) => {
+      setMatches(event.matches)
+    }
+    mediaQueryList.addEventListener('change', handleChange)
     return () => {
-      t.removeEventListener("change", n);
-    };
-  }, [e]);
-  return t;
+      mediaQueryList.removeEventListener('change', handleChange)
+    }
+  }, [query])
+
+  return matches
 }
-export function $$a1() {
-  return $$i0("(prefers-reduced-motion: reduce)");
+
+/**
+ * usePrefersReducedMotion - Returns true if user prefers reduced motion.
+ * Original: $$a1
+ */
+export function usePrefersReducedMotion(): boolean {
+  return usePrefersMediaQuery('(prefers-reduced-motion: reduce)')
 }
-export const N = $$i0;
-export const j = $$a1;
+
+/**
+ * Alias for usePrefersMediaQuery.
+ * Original: N
+ */
+export const N = usePrefersMediaQuery
+export const j = usePrefersReducedMotion

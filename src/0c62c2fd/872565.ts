@@ -23,7 +23,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { R as _$$R } from "../905/304671";
 import { SX, mq } from "../figma_app/199513";
 import { convertTeamToRaw } from "../905/628874";
-import { Ah, EE } from "../905/316062";
+import { FolderViewType, getProjectUrl } from "../905/316062";
 import { f as _$$f } from "../0c62c2fd/277163";
 import { sf, j7 } from "../905/929976";
 import { iK, HK, CU, xH, OT, t3, Pb, Mi, w3, EN, Dp, hq, Ww, zv, TL, qb, YG, qM, Mn, JG } from "../905/586954";
@@ -82,7 +82,7 @@ function R(e) {
     e.team.canEdit && (trackEventAnalytics("New Folder", {
       trackingContext: e.trackingContextName
     }), t(SX({
-      where: Ah.FolderListView,
+      where: FolderViewType.FolderListView,
       team: {
         ...convertTeamToRaw(e.team),
         canEdit: e.team.canEdit
@@ -1526,7 +1526,7 @@ export class $$ta0 extends PureComponent {
         onClick: this.renameFolder,
         children: renderI18nText("file_browser.file_move.context_menu_rename")
       }), jsx(wv, {}), jsx(c$, {
-        href: EE(e.id, e.orgId),
+        href: getProjectUrl(e.id, e.orgId),
         target: r,
         children: renderI18nText("file_browser.file_move.context_menu_show_in_files")
       })]

@@ -1,89 +1,182 @@
-import { parseQuerySimple } from "../905/634134";
-import { processSlug } from "../figma_app/930338";
-import { nS, Ac, Wk, aV } from "../figma_app/321395";
-import { PreviewMode } from "../figma_app/707808";
-import { VR, FZ, CS, p7 } from "../figma_app/979714";
-var l = Object.getPrototypeOf;
-var d = Reflect.get;
-var c = (e, t, r) => d(l(e), r, t);
-var $$u2 = (e => (e.FILE = "file", e.WIDGET = "widget", e.PLUGIN = "plugin", e))($$u2 || {});
-var $$p1 = (e => (e.FILE = "files", e.WIDGET = "widgets", e.PLUGIN = "plugins", e))($$p1 || {});
-class _ extends nS {
-  constructor(e, t) {
-    super({
-      ...e,
-      urlSlug: processSlug(e.urlSlug)
-    }, t);
+import { parseQuerySimple } from '../905/634134'
+import { captureRouteEvent, concatStrings, RouteState, withCommunityRoute } from '../figma_app/321395'
+import { PreviewMode } from '../figma_app/707808'
+import { processSlug } from '../figma_app/930338'
+import { parseFuidQuery, RESOURCE_ROUTE, toResourceParams, toRouteParams } from '../figma_app/979714'
+
+/**
+ * ResourceType enum (original: $$u2)
+ */
+export enum ResourceType {
+  FILE = 'file',
+  WIDGET = 'widget',
+  PLUGIN = 'plugin',
+}
+
+/**
+ * ResourceTypePlural enum (original: $$p1)
+ */
+export enum ResourceTypePlural {
+  FILE = 'files',
+  WIDGET = 'widgets',
+  PLUGIN = 'plugins',
+}
+
+/**
+ * Helper to get prototype property (original: c)
+ * @param obj - The object to get prototype from
+ * @param target - The target object
+ * @param prop - The property name
+ */
+function getPrototypeProperty<T, K extends keyof T>(obj: T, target: any, prop: K) {
+  return Reflect.get(Object.getPrototypeOf(obj), prop, target)
+}
+
+/**
+ * ResourceRouteState class (original: _)
+ * Extends RouteState and processes urlSlug
+ */
+export class ResourceRouteState extends RouteState {
+  constructor(params: any, context?: any) {
+    super(
+      {
+        ...params,
+        urlSlug: processSlug(params.urlSlug),
+      },
+      context,
+    )
+  }
+
+  /** Deserialize params (original: _.deserializeParams) */
+  static deserializeParams(params: any) {
+    return {
+      ...params,
+      apiResourceType: params.apiResourceType,
+    }
+  }
+
+  /** Serialize params (original: _.serializeParams) */
+  static serializeParams(params: any) {
+    return params
+  }
+
+  /** Parse query string (original: _.parseQueryString) */
+  static parseQueryString(query: string) {
+    const parsed = parseQuerySimple(query)
+    return {
+      comment: parsed.comment,
+      checkout: parsed.checkout,
+      rating: parsed.rating,
+    }
   }
 }
-_.deserializeParams = e => ({
-  ...e,
-  apiResourceType: e.apiResourceType
-});
-_.serializeParams = e => e;
-_.parseQueryString = e => {
-  let t = parseQuerySimple(e);
-  return {
-    comment: t.comment,
-    checkout: t.checkout,
-    rating: t.rating
-  };
-};
-let h = class extends _ { };
-Ac(h);
-h.displayName = "ResourceRoute";
-h.path = "/community/:apiResourceType(file|plugin|widget)/:resourceId/:urlSlug?";
-let $$m3 = Wk(h);
-let g = class extends _ { };
-Ac(g);
-g.displayName = "ResourceHubResourceRoute";
-g.path = aV(VR, h.path);
-g.serializeParams = e => ({
-  ...FZ(e),
-  ...c(g, g, "serializeParams").call(void 0, e)
-});
-g.deserializeParams = e => ({
-  ...CS(e),
-  ...c(g, g, "deserializeParams").call(void 0, e)
-});
-g.parseQueryString = e => ({
-  ...p7(e),
-  ...c(g, g, "parseQueryString").call(void 0, e)
-});
-let $$f4 = g;
-let E = class extends _ {
-  constructor(e, t) {
-    super({
-      ...e,
-      apiResourceType: "file"
-    }, t);
+
+/**
+ * CommunityResourceRoute class (original: h)
+ * Extends ResourceRouteState
+ */
+export class CommunityResourceRoute extends ResourceRouteState {
+  static path: string
+  static displayName: string
+}
+captureRouteEvent(CommunityResourceRoute)
+CommunityResourceRoute.displayName = 'ResourceRoute'
+CommunityResourceRoute.path = '/community/:apiResourceType(file|plugin|widget)/:resourceId/:urlSlug?'
+
+/**
+ * CommunityRoute (original: $$m3)
+ */
+export const CommunityRoute = withCommunityRoute(CommunityResourceRoute)
+
+/**
+ * ResourceHubResourceRoute class (original: g)
+ * Extends ResourceRouteState
+ */
+export class ResourceHubResourceRoute extends ResourceRouteState {
+  static path: string
+  static displayName: string
+  static serializeParams: (params: any) => any
+  static deserializeParams: (params: any) => any
+  static parseQueryString: (query: string) => any
+}
+captureRouteEvent(ResourceHubResourceRoute)
+ResourceHubResourceRoute.displayName = 'ResourceHubResourceRoute'
+ResourceHubResourceRoute.path = concatStrings(RESOURCE_ROUTE, CommunityResourceRoute.path)
+
+/** Serialize params (original: g.serializeParams) */
+ResourceHubResourceRoute.serializeParams = (params: any) => ({
+  ...toResourceParams(params),
+  ...getPrototypeProperty(ResourceHubResourceRoute, ResourceHubResourceRoute, 'serializeParams')(params),
+})
+
+/** Deserialize params (original: g.deserializeParams) */
+ResourceHubResourceRoute.deserializeParams = (params: any) => ({
+  ...toRouteParams(params),
+  ...getPrototypeProperty(ResourceHubResourceRoute, ResourceHubResourceRoute, 'deserializeParams')(params),
+})
+
+/** Parse query string (original: g.parseQueryString) */
+ResourceHubResourceRoute.parseQueryString = (query: string) => ({
+  ...parseFuidQuery(query),
+  ...getPrototypeProperty(ResourceHubResourceRoute, ResourceHubResourceRoute, 'parseQueryString')(query),
+})
+
+/**
+ * HubFileRoute class (original: E)
+ * Extends ResourceRouteState
+ */
+export class HubFileRoute extends ResourceRouteState {
+  static path: string
+  static displayName: string
+  static serializeParams: (params: any) => any
+  static deserializeParams: (params: any) => any
+  static parseQueryString: (query: string) => any
+  constructor(params: any, context?: any) {
+    super(
+      {
+        ...params,
+        apiResourceType: 'file',
+      },
+      context,
+    )
   }
-};
-Ac(E);
-E.displayName = "HubFileRoute";
-E.path = "/community/:apiResourceType(file)/:resourceId/:urlSlug?";
-E.serializeParams = e => c(E, E, "serializeParams").call(void 0, {
-  ...e,
-  apiResourceType: "file"
-});
-E.deserializeParams = e => ({
-  ...c(E, E, "deserializeParams").call(void 0, e),
-  apiResourceType: "file"
-});
-E.parseQueryString = e => {
-  let t = parseQuerySimple(e);
+}
+captureRouteEvent(HubFileRoute)
+HubFileRoute.displayName = 'HubFileRoute'
+HubFileRoute.path = '/community/:apiResourceType(file)/:resourceId/:urlSlug?'
+
+/** Serialize params (original: E.serializeParams) */
+HubFileRoute.serializeParams = (params: any) =>
+  getPrototypeProperty(HubFileRoute, HubFileRoute, 'serializeParams')({
+    ...params,
+    apiResourceType: 'file',
+  })
+
+/** Deserialize params (original: E.deserializeParams) */
+HubFileRoute.deserializeParams = (params: any) => ({
+  ...getPrototypeProperty(HubFileRoute, HubFileRoute, 'deserializeParams')(params),
+  apiResourceType: 'file',
+})
+
+/** Parse query string (original: E.parseQueryString) */
+HubFileRoute.parseQueryString = (query: string) => {
+  const parsed = parseQuerySimple(query)
   return {
-    ...c(E, E, "parseQueryString").call(void 0, e),
+    ...getPrototypeProperty(HubFileRoute, HubFileRoute, 'parseQueryString')(query),
     preview: (() => {
-      let e = t.preview;
-      if (void 0 !== e) return parseInt(e) === PreviewMode.DEFAULT ? PreviewMode.DEFAULT : e;
+      const previewVal = parsed.preview
+      if (previewVal !== undefined)
+        return parseInt(previewVal) === PreviewMode.DEFAULT ? PreviewMode.DEFAULT : previewVal
     })(),
-    freemium_preview: t.freemium_preview
-  };
-};
-export let $$y0 = E;
-export const Tg = $$y0;
-export const UF = $$p1;
-export const Uo = $$u2;
-export const Xu = $$m3;
-export const jT = $$f4;
+    freemium_preview: parsed.freemium_preview,
+  }
+}
+
+/**
+ * Exported variables (original: $$y0, $$p1, $$u2, $$m3, $$f4)
+ */
+export const $$y0 = HubFileRoute
+export const UF = ResourceTypePlural
+export const Uo = ResourceType
+export const Xu = CommunityRoute
+export const jT = ResourceHubResourceRoute

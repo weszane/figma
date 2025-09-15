@@ -5,7 +5,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrgId } from "../905/845253";
 import { UserAvatarView } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { ol } from "../figma_app/598018";
 import { rK } from "../figma_app/72338";
 import { Yr } from "../figma_app/325912";
@@ -74,10 +74,10 @@ export async function $$E0(e) {
   let t = TT({
     fileKey: e
   });
-  let r = M4.getCachedData(t);
+  let r = liveStoreInstance.getCachedData(t);
   if (null !== r) return !!r.connectedProject;
   try {
-    return !!(await M4.fetch(t)).connectedProject;
+    return !!(await liveStoreInstance.fetch(t)).connectedProject;
   } catch (e) {
     console.error("Failed to check Supabase connection:", e);
     return !1;

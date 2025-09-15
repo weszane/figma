@@ -3,7 +3,7 @@ import { useCallback, useState, useMemo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
-import { pO } from "../figma_app/422062";
+import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
@@ -386,7 +386,7 @@ export function $$et0(e) {
   let h = useSelector(e => e.teams);
   let x = useTeamPlanUser();
   let b = useIsOrgAdminUser(x);
-  let v = "loaded" === b.status && pO({
+  let v = "loaded" === b.status && isSelectedViewMissingOrgAdminResources({
     isAdminOrg: b.data,
     permissions: g,
     teams: h,

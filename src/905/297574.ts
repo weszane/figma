@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { atomStoreManager } from "../figma_app/27355";
 import { qp } from "../905/977779";
 import { withParsedMeta } from "../905/405710";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { vx } from "../905/91038";
 import { e_ } from "../figma_app/803787";
 import { dK } from "../figma_app/889655";
@@ -64,12 +64,12 @@ export function $$b3(e) {
   let t = useContext(_$$r);
   return t?.allUsedStylesByLibraryKey[e]?.length ?? 0;
 }
-let $$v4 = M4.Query({
+let $$v4 = liveStoreInstance.Query({
   fetch: async e => null == e ? [] : ((await Z.getLibraryStyles({
     libraryFileKey: e
   })).data.meta.styles ?? []).map(withParsedMeta)
 });
-let $$I5 = M4.Query({
+let $$I5 = liveStoreInstance.Query({
   fetch: async e => null == e ? [] : ((await Z.getLibraryStylesByLibraryKey({
     libraryKey: e
   })).data.meta.styles ?? []).map(withParsedMeta)

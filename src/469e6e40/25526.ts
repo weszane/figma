@@ -21,7 +21,7 @@ import { TextWithTruncation } from "../905/984674";
 import { qB, eh as _$$eh, u0, Lh, Ks, eI as _$$eI, gx, Iq, Bq, Pz, d1, WF, _R, eN as _$$eN } from "../figma_app/425283";
 import { g as _$$g } from "../4452/983384";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { Ytf, URh, YEj } from "../figma_app/27776";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e2 } from "../905/621515";
@@ -50,7 +50,7 @@ import { DashboardSection, WorkspaceTab, BillingSectionEnum, MemberView, FigReso
 import { e0 as _$$e3 } from "../905/696396";
 import { g as _$$g2 } from "../figma_app/638694";
 import { k as _$$k4 } from "../469e6e40/115523";
-import { nb as _$$nb } from "../figma_app/422062";
+import { isSelectedOrgAdminSettingsMissingResources } from "../figma_app/422062";
 import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
 import { r as _$$r } from "../905/398386";
 import { Jt } from "../figma_app/401069";
@@ -191,7 +191,7 @@ import { x as _$$x } from "../905/587214";
 import { yE } from "../469e6e40/471025";
 import { e as _$$e6 } from "../905/86132";
 import { F4 } from "../1881/125927";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 import { createNoOpValidator } from "../figma_app/181241";
 import { z as _$$z2 } from "../905/284530";
 import { A as _$$A6 } from "../5724/663128";
@@ -214,7 +214,7 @@ import { kL, nF as _$$nF, lF } from "../469e6e40/68843";
 var n;
 let I = parsePxNumber(Ytf);
 function T() {
-  return _$$N(`(max-width: ${I}px)`);
+  return usePrefersMediaQuery(`(max-width: ${I}px)`);
 }
 var B = (e => (e.CreateFirstWorkspace = "CreateFirstWorkspace", e.CreateFirstBillingGroup = "CreateFirstBillingGroup", e))(B || {});
 let G = "seen_enterprise_org_admin_onboarding";
@@ -4888,7 +4888,7 @@ let sO = {
   widget: FigResourceType.APPROVED_WIDGETS
 };
 let sL = (e, t) => "plugin" === e ? !!(t.publicPluginsAllowed && t.pluginsWhitelistEnforced) : !!(t.publicPluginsAllowed && t.widgetsWhitelistEnforced);
-let sD = M4.Query({
+let sD = liveStoreInstance.Query({
   fetch: async e => await n8.getExtensionAnalyticsForOrg(e)
 });
 function sP(e) {
@@ -4968,7 +4968,7 @@ export function $$s$0(e) {
   let l = useIsOrgAdminUser(n);
   let o = useCurrentUserOrg();
   let d = NJ(o.id);
-  let c = "loaded" === l.status && _$$nb({
+  let c = "loaded" === l.status && isSelectedOrgAdminSettingsMissingResources({
     isAdminOrg: l.data,
     orgAdminSettingsViewTab: e.selectedTab,
     orgAdminSettingsViewSecondaryTab: e.selectedSecondaryTab,

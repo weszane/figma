@@ -3,14 +3,14 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { OC } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { FFileType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { Q7 } from "../905/98947";
 var $$c3 = (e => (e.FILE = "file", e.TEAM = "team", e.PROJECT = "project", e.NONE = "none", e))($$c3 || {});
 export function $$u1() {
   let e = useAtomWithSubscription(OC);
-  let t = M4.File.useValue(e.fileKey);
-  let a = M4.Team.useValue(e.teamId);
-  let o = M4.Folder.useValue(e.folderId);
+  let t = liveStoreInstance.File.useValue(e.fileKey);
+  let a = liveStoreInstance.Team.useValue(e.teamId);
+  let o = liveStoreInstance.Folder.useValue(e.folderId);
   let r = useSelector(e => e.roles);
   switch (e.view) {
     case "fullscreen":

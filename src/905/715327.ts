@@ -98,7 +98,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { w as _$$w } from "../905/768636";
 import { n1 } from "../figma_app/657017";
 import { p as _$$p2 } from "../905/895920";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { B as _$$B2 } from "../905/146468";
 import { h as _$$h2 } from "../905/594794";
 import { hubFileAndPresetKeysSetAtom } from "../905/72677";
@@ -515,7 +515,7 @@ function tl({
     viewFile: u
   });
   let y = fV(e.library_key, a);
-  let b = fd(e.library_key);
+  let b = hasResourcePresetKey(e.library_key);
   return jsxs(_$$m, {
     libraryKey: m,
     disabled: h,

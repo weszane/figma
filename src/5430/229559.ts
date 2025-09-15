@@ -3,10 +3,10 @@ import { U } from "../5430/189384";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
 import { I } from "../figma_app/4253";
-import { Qo, cX } from "../figma_app/471982";
+import { isViewerModeResource, isSlideTemplateResource } from "../figma_app/471982";
 import { isResourceEligibleForPurchase } from "../figma_app/808294";
-import { XW, eO, $9, jB } from "../figma_app/427318";
-import { vt } from "../figma_app/306946";
+import { hasContent, getHubFile, getPluginOrWidgetContent, getViewerModeType } from "../figma_app/427318";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { ShelfViewType, hasFreemiumCode, isThirdPartyMonetized } from "../figma_app/45218";
 import { d as _$$d } from "../5430/772148";
 import { I as _$$I } from "../5430/292815";
@@ -38,30 +38,30 @@ export function $$y0({
     context: ShelfViewType.DETAIL,
     enableWideButtonForStickyFooter: r,
     enableCondensedWideButtonForStickyFooter: x,
-    thirdPartyM10nUrl: XW(e) && e.third_party_m10n_url ? e.third_party_m10n_url : void 0
-  }) : XW(e) ? function (e, t) {
+    thirdPartyM10nUrl: hasContent(e) && e.third_party_m10n_url ? e.third_party_m10n_url : void 0
+  }) : hasContent(e) ? function (e, t) {
     let r;
     switch (e.resource_type) {
-      case vt.DESIGN_TEMPLATE:
-      case vt.UI_KIT:
-      case vt.PROTOTYPE:
-      case vt.FIGJAM_TEMPLATE:
-      case vt.SITE_TEMPLATE:
-      case vt.COOPER_TEMPLATE_FILE:
-      case vt.FIGMAKE_TEMPLATE:
-        return (r = eO(e)) ? jsx(n, {
+      case ResourceTypeEnum.DESIGN_TEMPLATE:
+      case ResourceTypeEnum.UI_KIT:
+      case ResourceTypeEnum.PROTOTYPE:
+      case ResourceTypeEnum.FIGJAM_TEMPLATE:
+      case ResourceTypeEnum.SITE_TEMPLATE:
+      case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
+      case ResourceTypeEnum.FIGMAKE_TEMPLATE:
+        return (r = getHubFile(e)) ? jsx(n, {
           hubFile: r,
           resourceType: e.resource_type,
           enableWideButtonForStickyFooter: t
         }) : null;
-      case vt.SLIDE_TEMPLATE:
-        return (r = eO(e)) ? jsx(h, {
+      case ResourceTypeEnum.SLIDE_TEMPLATE:
+        return (r = getHubFile(e)) ? jsx(h, {
           resource: r,
           enableWideButtonForStickyFooter: t
         }) : null;
-      case vt.PLUGIN:
-      case vt.WIDGET:
-        if (!(r = $9(e))) return null;
+      case ResourceTypeEnum.PLUGIN:
+      case ResourceTypeEnum.WIDGET:
+        if (!(r = getPluginOrWidgetContent(e))) return null;
         let o = hasFreemiumCode(r) ? jsx(Cg, {
           resource: r,
           showCaret: !1
@@ -73,19 +73,19 @@ export function $$y0({
           }),
           subtext: o
         });
-      case vt.COOPER_TEMPLATE_FILE:
-      case vt.COOPER_TEMPLATE_ASSET:
+      case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
+      case ResourceTypeEnum.COOPER_TEMPLATE_ASSET:
         return null;
       default:
         throwTypeError(e.resource_type);
     }
   }(e, r) : function (e, t) {
-    if (Qo(e)) return cX(e) ? jsx(h, {
+    if (isViewerModeResource(e)) return isSlideTemplateResource(e) ? jsx(h, {
       resource: e,
       enableWideButtonForStickyFooter: t
     }) : jsx(n, {
       hubFile: e,
-      resourceType: jB(e.viewer_mode),
+      resourceType: getViewerModeType(e.viewer_mode),
       enableWideButtonForStickyFooter: t
     });
     {

@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { Hx } from "../905/321397";
 import { VisualBellActions } from "../905/302958";
 import { wr } from "../figma_app/387599";
-import { JJ } from "../figma_app/471982";
+import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { shouldSkipWorkspaceSelection } from "../figma_app/275462";
 import { y as _$$y } from "../905/444931";
 import { M5 } from "../figma_app/350203";
@@ -34,7 +34,7 @@ async function j(e, l, i, t, a, r) {
   }
   let o = (t.authedActiveCommunityProfile?.associated_users ?? []).filter(e => e.user_id in t.authedUsers.byId).length > 1;
   if (s.length > 1 || o) {
-    let i = JJ(l.viewer_mode);
+    let i = mapTemplateCategoryToFileType(l.viewer_mode);
     "sites" === i && (s = s.filter(e => {
       if (e?.teamId) {
         let l = t.teams[e.teamId];

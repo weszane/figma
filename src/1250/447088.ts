@@ -1,6 +1,6 @@
 import { permissionScopeHandler } from '../905/189185';
 import { isNotNullish } from '../figma_app/95419';
-import { XW } from '../figma_app/427318';
+import { hasContent } from '../figma_app/427318';
 import { x } from '../figma_app/639711';
 import { SceneGraphHelpers, AppStateTsApi, CooperTemplateTypesTsBindings, Fullscreen, CooperHelpers, SocialMediaFormats } from '../figma_app/763686';
 import { Ez } from '../figma_app/766708';
@@ -49,20 +49,20 @@ export function $$_0({
     if (o && width === o[0] && height === o[1]) {
       let r = i[e];
       return t.filter(e => {
-        if (!XW(e)) return !1;
+        if (!hasContent(e)) return !1;
         let t = $$u1(e);
         return !!t && (t.width === width && t.height === height || t.width === r?.w && t.height === r?.h);
       });
     }
   }
   return t.filter(e => {
-    if (!XW(e)) return !1;
+    if (!hasContent(e)) return !1;
     let t = $$u1(e);
     return !!t && t.width === width && t.height === height;
   });
 }
 export function $$u1(e) {
-  if (!XW(e)) return;
+  if (!hasContent(e)) return;
   let t = e.content.component_v2?.min_node_width;
   let n = e.content.component_v2?.min_node_height;
   return t && n ? {

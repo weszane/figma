@@ -2,7 +2,7 @@ import { Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
-import { Ul } from "../figma_app/777551";
+import { isResourceApprovedPublic } from "../figma_app/777551";
 import { p4 } from "../905/448740";
 import { T as _$$T } from "../905/594474";
 import { createOptimistThunk } from "../905/350402";
@@ -15,7 +15,7 @@ import { getPermissionsState } from "../figma_app/642025";
 import { getPublishingData } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
-import { k2 } from "../figma_app/10554";
+import { PageTypeEnum } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
 import { U as _$$U } from "../905/424668";
 import { o as _$$o } from "../905/938553";
@@ -31,7 +31,7 @@ export let $$x0 = createOptimistThunk(async (e, {
   localSnapshotBlob: w,
   widgetNodeId: O
 }) => {
-  if (c === k2.EDITOR && !canRunExtensions(e.getState())) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
+  if (c === PageTypeEnum.EDITOR && !canRunExtensions(e.getState())) return _$$R.instance.handleUpgrade(Q7.MANAGE_EXTENSIONS);
   if (null != r) {
     let [t, n] = await Promise.all([pluginAPIService.getPlugins({
       id: r
@@ -58,7 +58,7 @@ export let $$x0 = createOptimistThunk(async (e, {
   } = R;
   let U = (r ? publishedPlugins[r] : void 0) || (r ? publishedWidgets[r] : void 0);
   let B = null != t ? localPlugins[t] : void 0;
-  if (U && !hasMonetizedResourceMetadata(U) && Ul(U) && B && B.manifest.permissions?.includes("payments") && user && !user.has_passed_visual_compliance) {
+  if (U && !hasMonetizedResourceMetadata(U) && isResourceApprovedPublic(U) && B && B.manifest.permissions?.includes("payments") && user && !user.has_passed_visual_compliance) {
     e.dispatch(showModal({
       type: _$$O.type
     }));

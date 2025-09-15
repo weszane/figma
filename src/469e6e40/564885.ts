@@ -20,7 +20,7 @@ import { OrganizationType } from "../905/833838";
 import { E as _$$E } from "../figma_app/126651";
 import { KindEnum } from "../905/129884";
 import { J as _$$J } from "../905/298764";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 export let $$E0 = registerModal(function (e) {
   let t = useModalManager(e);
   let a = useDispatch();
@@ -43,7 +43,7 @@ export let $$E0 = registerModal(function (e) {
   useEffect(() => {
     (e.planType === OrganizationType.ORG ? _$$J.getLastEdit({
       orgUserId: e.planUserId
-    }) : $.getUsersLastActive({
+    }) : teamAPIClient.getUsersLastActive({
       teamId: e.planId,
       teamMemberId: e.planUserId
     })).then(e => {

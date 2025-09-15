@@ -11,7 +11,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { Jm } from "../figma_app/387599";
-import { qD } from "../figma_app/471982";
+import { getCurrentVersion } from "../figma_app/471982";
 import { lx, aI, s0 } from "../figma_app/558929";
 import { oB, j7 } from "../905/929976";
 import { showModalHandler } from "../905/156213";
@@ -136,7 +136,7 @@ function G(e) {
   let d = Jm();
   let c = e => {
     if (!e.org_id) return;
-    let r = qD(resource);
+    let r = getCurrentVersion(resource);
     let n = {
       extension: {
         pluginId: r.plugin_id,

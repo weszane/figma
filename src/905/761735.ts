@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { z as _$$z } from '../905/239603';
 import { datadogRum } from '@datadog/browser-rum';
 import { oJ as _$$oJ } from '../905/312028';
-import { g as _$$g2 } from '../905/346780';
+import { setupAdvanceTimers } from '../905/346780';
 import { D as _$$D } from '../905/412108';
 import { observableState } from '../905/441145';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -92841,7 +92841,7 @@ class Nm {
     window.removeEventListener('pagehide', this.sendBatchedEvents);
     clearInterval(this.sendBatchedEventsInterval);
     this.sessionSuccessTimer && (clearTimeout(this.sessionSuccessTimer), this.sessionSuccessTimer = void 0);
-    await _$$g2();
+    await setupAdvanceTimers();
   }
   clearTimers(e) {
     let t = this.clientE2ESubscriptionTimers.get(e);

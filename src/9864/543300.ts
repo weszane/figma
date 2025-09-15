@@ -77,7 +77,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { getNewFileConfig } from "../905/766303";
 import { useCurrentUserOrgId } from "../905/845253";
 import { FC } from "../figma_app/212807";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
 import { B as _$$B } from "../905/524020";
@@ -143,8 +143,8 @@ import { b as _$$b3, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
 import { r as _$$r3 } from "../905/571562";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { Tq, B1, Vb, Q5, sJ, QS, vz, rX as _$$rX, EK, Kz as _$$Kz } from "../9864/183809";
-import { W as _$$W } from "../905/522628";
-import { $ as _$$$ } from "../905/834575";
+import { folderAPIInstance } from "../905/522628";
+import { teamAPIClient } from "../905/834575";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { m as _$$m } from "../9864/958952";
 import { A as _$$A5 } from "../6828/250823";
@@ -788,7 +788,7 @@ function eJ(e) {
         r.dispatch(uM(t));
       };
       try {
-        let e = await M4.fetch(XZ({
+        let e = await liveStoreInstance.fetch(XZ({
           currentOrgId: t,
           currentTeamId: i,
           fileTags: ["figma_basics"],
@@ -3780,19 +3780,19 @@ function t7({
       }));
       try {
         if (u && r && x) {
-          await _$$$.updateDisplayName({
+          await teamAPIClient.updateDisplayName({
             teamId: r.id,
             updatedDisplayName: getI18nString("default_team.web.team_name", {
               userHandle: u.handle
             })
           });
-          let e = (await _$$$.getFolders({
+          let e = (await teamAPIClient.getFolders({
             teamId: r.id
           })).data.meta.folder_rows.map(e => e.id);
           if (e.length > 1) throw Error("Locale NUX: Multiple folders found for team");
           if (0 === e.length) throw Error("Locale NUX: No folders found for team");
           let t = e[0];
-          await _$$W.updateFolderName({
+          await folderAPIInstance.updateFolderName({
             folderId: t,
             name: getI18nString("default_team_folder.web.folder_name")
           });

@@ -5,7 +5,7 @@ import { J } from "../905/614223";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { wY } from "../figma_app/708845";
-import { j } from "../figma_app/469468";
+import { usePrefersReducedMotion } from "../figma_app/469468";
 import { Vn } from "../figma_app/795674";
 import { jD } from "../905/765855";
 import { L } from "../figma_app/717083";
@@ -67,7 +67,7 @@ export function $$T1(e) {
       v(!1);
     }, b);
   }, [e.activeRowIndex]);
-  let A = j();
+  let A = usePrefersReducedMotion();
   return (useEffect(() => {
     t(jD());
   }, [t, e.activeRowIndex]), o) ? jsx("div", {

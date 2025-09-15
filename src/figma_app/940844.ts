@@ -1,7 +1,7 @@
 import { getInitialOptions } from "../figma_app/169182";
-import { qY } from "../figma_app/427318";
-import { s as _$$s } from "../905/875063";
-import { o1 } from "../figma_app/10554";
+import { getMainContent } from "../figma_app/427318";
+import { BadgeType } from "../905/875063";
+import { TeamOrgType } from "../figma_app/10554";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 let d = {
@@ -23,7 +23,7 @@ let d = {
   current_user_is_following: !1,
   current_user_is_followed: !1,
   is_restricted_by_current_user: !1,
-  entity_type: o1.ORG,
+  entity_type: TeamOrgType.ORG,
   website: "asana.design",
   twitter: "twitter.com/asanadesignteam",
   instagram: "instagram.com/asanadesignteam",
@@ -33,7 +33,7 @@ let d = {
   has_shared_orgs: null,
   redirect_cover_image_url: "/profile/4317920/cover_image",
   is_community_beta: !0,
-  badges: [_$$s.FIGMA_PARTNER]
+  badges: [BadgeType.FIGMA_PARTNER]
 };
 let c = {
   id: "1521",
@@ -54,7 +54,7 @@ let c = {
   current_user_is_following: !1,
   current_user_is_followed: !1,
   is_restricted_by_current_user: !1,
-  entity_type: o1.ORG,
+  entity_type: TeamOrgType.ORG,
   website: "https://atlassian.com",
   twitter: null,
   instagram: null,
@@ -64,7 +64,7 @@ let c = {
   has_shared_orgs: null,
   redirect_cover_image_url: "/profile/1521/cover_image",
   is_community_beta: !0,
-  badges: [_$$s.FIGMA_PARTNER]
+  badges: [BadgeType.FIGMA_PARTNER]
 };
 let u = {
   id: "1608",
@@ -85,7 +85,7 @@ let u = {
   current_user_is_following: !1,
   current_user_is_followed: !1,
   is_restricted_by_current_user: !1,
-  entity_type: o1.ORG,
+  entity_type: TeamOrgType.ORG,
   website: "https://www.github.com",
   twitter: null,
   instagram: null,
@@ -95,7 +95,7 @@ let u = {
   has_shared_orgs: null,
   redirect_cover_image_url: "",
   is_community_beta: !1,
-  badges: [_$$s.FIGMA_PARTNER]
+  badges: [BadgeType.FIGMA_PARTNER]
 };
 let p = {
   id: "1731",
@@ -116,7 +116,7 @@ let p = {
   current_user_is_following: !1,
   current_user_is_followed: !1,
   is_restricted_by_current_user: !1,
-  entity_type: o1.ORG,
+  entity_type: TeamOrgType.ORG,
   website: "https://www.snapchat.com/l/en-gb/",
   twitter: null,
   instagram: null,
@@ -147,7 +147,7 @@ let _ = {
   current_user_is_following: !1,
   current_user_is_followed: !1,
   is_restricted_by_current_user: !1,
-  entity_type: o1.USER,
+  entity_type: TeamOrgType.USER,
   website: "www.figma.com",
   twitter: "twitter.com/figma",
   instagram: "instagram.com/figma",
@@ -211,7 +211,7 @@ export function $$v1(e) {
 }
 export function $$A0(e) {
   if (!I()) return e;
-  let t = qY(e)?.id;
+  let t = getMainContent(e)?.id;
   if (!t) return e;
   let r = S(t);
   if (0 === r.length) return e;

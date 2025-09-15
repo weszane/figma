@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
 import { atom, useAtomValueAndSetter, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { increment } from "../905/972754";
-import { ku, Os, qA, fn } from "../figma_app/255679";
+import { handleResourceQuery, communityLibraryComponentsQuery, pageLoadAtom, nonceAtom } from "../figma_app/255679";
 import { useDispatch, useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { useLatestRef } from "../figma_app/922077";
@@ -12,13 +12,13 @@ import { NO_TEAM, PrimaryWorkflowEnum } from "../figma_app/633080";
 import { hubFileAndPresetKeysSetAtom } from "../905/72677";
 let g = atom(e => {
   let t = e(hubFileAndPresetKeysSetAtom);
-  return ku(Os, [...t].sort().map(e => ({
+  return handleResourceQuery(communityLibraryComponentsQuery, [...t].sort().map(e => ({
     hubFileId: e
   })), e);
 });
 export function $$f0() {
-  let [e, t] = useAtomValueAndSetter(qA);
-  let i = Xr(fn);
+  let [e, t] = useAtomValueAndSetter(pageLoadAtom);
+  let i = Xr(nonceAtom);
   !function () {
     let e = useDispatch();
     let {

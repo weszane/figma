@@ -6,7 +6,7 @@ import o from "classnames";
 import { getI18nString } from "../905/303541";
 import { cz, i8 } from "../905/14017";
 import { Lz } from "../905/497882";
-import { mk } from "../figma_app/777551";
+import { getResourceUserCount } from "../figma_app/777551";
 import { j4 } from "../figma_app/599979";
 import { FPublicationStatusType } from "../figma_app/191312";
 var l = o;
@@ -63,7 +63,7 @@ export function $$g0({
             likeCount: t && "like_count" in t ? t.like_count : 0
           }), jsx(i8, {
             inPluginRow: !0,
-            usageCount: t && "like_count" in t ? mk(t) : 0
+            usageCount: t && "like_count" in t ? getResourceUserCount(t) : 0
           })]
         }), jsx("div", {
           className: "preview_row--authorNameContainer--rD8Y7 preview_row--baseNameContainer--8zjr8",

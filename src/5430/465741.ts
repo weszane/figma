@@ -3,7 +3,7 @@ import { useEffect, useRef, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { AG } from "../figma_app/999312";
 import { fk } from "../5430/480225";
 import { T as _$$T } from "../5430/373013";
@@ -18,13 +18,13 @@ import { A as _$$A2 } from "../5430/728674";
 import { v as _$$v } from "../5430/992484";
 import { GS } from "../5430/342380";
 import { E4, Dz } from "../5430/62487";
-import { C as _$$C } from "../905/237873";
+import { PricingOptions } from "../905/237873";
 import { gM } from "../5430/823351";
-import { a4 } from "../figma_app/321395";
-import { H as _$$H } from "../figma_app/324237";
-import { Z } from "../905/942203";
+import { useSafeRouteStateInstance } from "../figma_app/321395";
+import { getAllTimeSortOption } from "../figma_app/324237";
+import { BrowseUtils } from "../905/942203";
 import { n6 } from "../figma_app/600006";
-import { zs, _4 } from "../figma_app/773663";
+import { selectEditorResource, syncEditorResourceWithHistory } from "../figma_app/773663";
 import { z } from "../5430/143080";
 import { Z_ } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
@@ -99,13 +99,13 @@ let H = e => {
   let {
     editorType,
     resourceType
-  } = zs(e.search.editor_type, e.search.resource_type);
+  } = selectEditorResource(e.search.editor_type, e.search.resource_type);
   return {
     query: e.search.query ?? "",
     editor_type: editorType,
-    price: e.search.price ?? _$$C.Price.ALL,
-    sort_by: e.search.sort_by ?? _$$H(),
-    creators: e.search.creators ?? Z.Browse.ALL,
+    price: e.search.price ?? PricingOptions.Price.ALL,
+    sort_by: e.search.sort_by ?? getAllTimeSortOption(),
+    creators: e.search.creators ?? BrowseUtils.Browse.ALL,
     resource_type: resourceType
   };
 };
@@ -119,8 +119,8 @@ export function $$U1({
 }) {
   let u = AG();
   let m = !u && useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
-  let _ = _$$N(`(max-width: ${ial})`);
-  let p = _$$N(`(max-width: ${cVr})`);
+  let _ = usePrefersMediaQuery(`(max-width: ${ial})`);
+  let p = usePrefersMediaQuery(`(max-width: ${cVr})`);
   let h = 4;
   _ && (h = 3);
   p && (h = 2);
@@ -167,9 +167,9 @@ export function $$V0() {
   });
 }
 function W() {
-  let e = _$$N(`(max-width: ${N6X})`);
-  let t = a4(n6);
-  _4(t);
+  let e = usePrefersMediaQuery(`(max-width: ${N6X})`);
+  let t = useSafeRouteStateInstance(n6);
+  syncEditorResourceWithHistory(t);
   let r = H(t);
   useEffect(() => {
     0 === r.query.trim().length && customHistory.replace("/community");
@@ -244,7 +244,7 @@ function W() {
               resource_type: r.resourceType,
               editor_type: r.editorType,
               price: r.price,
-              creators: r.creators && Z.isSearchType(r.creators) ? r.creators : Z.ALL,
+              creators: r.creators && BrowseUtils.isSearchType(r.creators) ? r.creators : BrowseUtils.ALL,
               sort_by: r.sortBy
             });
             customHistory.replace(s.href);

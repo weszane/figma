@@ -1,7 +1,7 @@
 import { centsToDollars, MIN_PRICE, MAX_PRICE, isRatioHigh, isGreater } from "../figma_app/808294";
 import { A } from "../905/17894";
 import { Lz } from "../905/497882";
-import { AC } from "../figma_app/777551";
+import { isResourcePendingPublishing } from "../figma_app/777551";
 import { Kc, Fh } from "../905/448740";
 import { isWidgetOrPlugin } from "../figma_app/45218";
 import { ProductStatus } from "../905/54385";
@@ -74,7 +74,7 @@ export let $$u1 = {
     }) {
       if (!e || !isWidgetOrPlugin(e)) return [];
       let c = [];
-      if (!AC(e) && !Kc(t, e)) {
+      if (!isResourcePendingPublishing(e) && !Kc(t, e)) {
         let t = e.monetized_resource_metadata?.price;
         i && Lz(i, void 0) && t && isRatioHigh(t / 100, r) && c.push({
           key: "PRICE_INCREASE_OUT_OF_RANGE",

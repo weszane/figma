@@ -3,7 +3,7 @@ import { createMetaValidator, createNoOpValidator, APIParameterUtils } from "../
 import { XHR } from "../905/910117";
 import { FileKeySourceEnum } from "../905/412913";
 import { fileEntityModel } from "../905/806985";
-import { NS } from "../905/71785";
+import { HubFileSchema } from "../905/71785";
 import { ComponentSchema, StateGroupDetailSchema, createFileKeySchema, StyleSchema, cI } from "../figma_app/633080";
 import { stringSchema } from "../figma_app/198712";
 let u = XHR.requiredHeaders;
@@ -21,7 +21,7 @@ let $$p0 = new class {
       components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
       state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
       file: fileEntityModel.nullable(),
-      hub_file: Ip.coerce.$$null(NS.nullable())
+      hub_file: Ip.coerce.$$null(HubFileSchema.nullable())
     }), "ds_zod_components", !1, !0);
     this.LibraryStylesSchemaValidator = createMetaValidator("LibraryStylesSchemaValidator", z.object({
       styles: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StyleSchema.shape))
@@ -35,7 +35,7 @@ let $$p0 = new class {
       components: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(ComponentSchema.shape)),
       state_groups: z.array(createFileKeySchema(FileKeySourceEnum.REST_API).extend(StateGroupDetailSchema.shape)),
       files: fileEntityModel.array(),
-      hub_files: NS.array().optional()
+      hub_files: HubFileSchema.array().optional()
     }), "ds_zod_components", !1, !0);
     this.DefaultLibrariesSchemaValidator = createNoOpValidator();
     this.DefaultLibraryAttributionSchemaValidator = createNoOpValidator();

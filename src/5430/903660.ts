@@ -4,19 +4,19 @@ import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
 import { A5 } from "../figma_app/209680";
 import { Jm } from "../figma_app/387599";
-import { C } from "../905/237873";
+import { PricingOptions } from "../905/237873";
 import { n as _$$n } from "../5430/859486";
 import { km, u9 } from "../5430/184698";
 var n = i;
 function _() {
   return [{
-    key: C.ALL,
+    key: PricingOptions.ALL,
     label: getI18nString("community.landing_page.sort.paid_and_free")
   }, {
-    key: C.PAID,
+    key: PricingOptions.PAID,
     label: getI18nString("community.landing_page.sort.paid")
   }, {
-    key: C.FREE,
+    key: PricingOptions.FREE,
     label: getI18nString("community.landing_page.sort.free")
   }];
 }

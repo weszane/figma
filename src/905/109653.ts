@@ -9,14 +9,14 @@ import { N as _$$N } from "../vendor/930821";
 import { H } from "../905/620380";
 import { getI18nString } from "../905/303541";
 import { Lz } from "../905/497882";
-import { AC, Y5 } from "../figma_app/777551";
+import { isResourcePendingPublishing, isResourcePendingPublicOrCompliance } from "../figma_app/777551";
 import { uX, Rk, Un, MY, I_ } from "../905/759470";
 import { useCurrentUserOrg } from "../905/845253";
 import { FTemplateCategoryType, FPublicationStatusType } from "../figma_app/191312";
 import { getCurrentPluginVersion } from "../figma_app/300692";
 import { ol } from "../figma_app/598018";
 import { isWidgetOrPlugin } from "../figma_app/45218";
-import { i as _$$i } from "../905/186961";
+import { ContainerTypeMap } from "../905/186961";
 import { T as _$$T } from "../905/943304";
 import { x as _$$x } from "../905/956141";
 import { jT } from "../905/870778";
@@ -245,7 +245,7 @@ function P({
       children: jsx(O, {
         header: (() => {
           let i = T(e, t);
-          return t[i] ? t[i]() : s === FPublicationStatusType.APPROVED_PUBLIC ? MY.$$public() : s === FPublicationStatusType.ORG_PRIVATE ? MY.$$private() : s && AC({
+          return t[i] ? t[i]() : s === FPublicationStatusType.APPROVED_PUBLIC ? MY.$$public() : s === FPublicationStatusType.ORG_PRIVATE ? MY.$$private() : s && isResourcePendingPublishing({
             publishing_status: s
           }) ? MY.inReview() : MY.error();
         })(),
@@ -253,7 +253,7 @@ function P({
           if (p) {
             if (s === FPublicationStatusType.APPROVED_PUBLIC) return I_.$$public();
             if (s === FPublicationStatusType.ORG_PRIVATE && r) {
-              let e = Lz(r, void 0) === _$$i.ORG ? l : d;
+              let e = Lz(r, void 0) === ContainerTypeMap.ORG ? l : d;
               return I_.$$private(e?.name);
             }
             if (s === FPublicationStatusType.ORG_PRIVATE && a) {
@@ -265,10 +265,10 @@ function P({
                 orgName: e
               });
             }
-            if (s && AC({
+            if (s && isResourcePendingPublishing({
               publishing_status: s
             })) {
-              let e = getFeatureFlags().cmty_m10n_poll_hub_file_statuses_on_publish && Y5({
+              let e = getFeatureFlags().cmty_m10n_poll_hub_file_statuses_on_publish && isResourcePendingPublicOrCompliance({
                 publishing_status: s
               });
               return jsxs(Fragment, {

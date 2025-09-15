@@ -1,92 +1,102 @@
-import { $ } from "../vendor/405198";
-import { j } from "../vendor/637177";
-import { Q } from "../vendor/166452";
-import { f8 } from "../vendor/348210";
-export class $$h0 extends Q {
+import { Q } from '../vendor/166452'
+import { f8 } from '../vendor/348210'
+import { $ } from '../vendor/405198'
+import { j } from '../vendor/637177'
+
+export class MutationObserver extends Q {
   constructor(e, r) {
-    super();
-    this.client = e;
-    this.setOptions(r);
-    this.bindMethods();
-    this.updateResult();
+    super()
+    this.client = e
+    this.setOptions(r)
+    this.bindMethods()
+    this.updateResult()
   }
+
   bindMethods() {
-    this.mutate = this.mutate.bind(this);
-    this.reset = this.reset.bind(this);
+    this.mutate = this.mutate.bind(this)
+    this.reset = this.reset.bind(this)
   }
+
   setOptions(e) {
-    let r = this.options;
-    this.options = this.client.defaultMutationOptions(e);
+    let r = this.options
+    this.options = this.client.defaultMutationOptions(e)
     f8(r, this.options) || this.client.getMutationCache().notify({
-      type: "observerOptionsUpdated",
+      type: 'observerOptionsUpdated',
       mutation: this.currentMutation,
-      observer: this
-    });
+      observer: this,
+    })
   }
+
   onUnsubscribe() {
     if (!this.listeners.length) {
-      var e;
-      null == (e = this.currentMutation) || e.removeObserver(this);
+      let e
+      (e = this.currentMutation) == null || e.removeObserver(this)
     }
   }
+
   onMutationUpdate(e) {
-    this.updateResult();
+    this.updateResult()
     let r = {
-      listeners: !0
-    };
-    "success" === e.type ? r.onSuccess = !0 : "error" === e.type && (r.onError = !0);
-    this.notify(r);
+      listeners: !0,
+    }
+    e.type === 'success' ? r.onSuccess = !0 : e.type === 'error' && (r.onError = !0)
+    this.notify(r)
   }
+
   getCurrentResult() {
-    return this.currentResult;
+    return this.currentResult
   }
+
   reset() {
-    this.currentMutation = void 0;
-    this.updateResult();
+    this.currentMutation = void 0
+    this.updateResult()
     this.notify({
-      listeners: !0
-    });
+      listeners: !0,
+    })
   }
+
   mutate(e, r) {
-    this.mutateOptions = r;
-    this.currentMutation && this.currentMutation.removeObserver(this);
+    this.mutateOptions = r
+    this.currentMutation && this.currentMutation.removeObserver(this)
     this.currentMutation = this.client.getMutationCache().build(this.client, {
       ...this.options,
-      variables: void 0 !== e ? e : this.options.variables
-    });
-    this.currentMutation.addObserver(this);
-    return this.currentMutation.execute();
+      variables: void 0 !== e ? e : this.options.variables,
+    })
+    this.currentMutation.addObserver(this)
+    return this.currentMutation.execute()
   }
+
   updateResult() {
-    let e = this.currentMutation ? this.currentMutation.state : $();
+    let e = this.currentMutation ? this.currentMutation.state : $()
     let r = {
       ...e,
-      isLoading: "loading" === e.status,
-      isSuccess: "success" === e.status,
-      isError: "error" === e.status,
-      isIdle: "idle" === e.status,
+      isLoading: e.status === 'loading',
+      isSuccess: e.status === 'success',
+      isError: e.status === 'error',
+      isIdle: e.status === 'idle',
       mutate: this.mutate,
-      reset: this.reset
-    };
-    this.currentResult = r;
+      reset: this.reset,
+    }
+    this.currentResult = r
   }
+
   notify(e) {
     j.batch(() => {
       if (this.mutateOptions && this.hasListeners()) {
-        var r;
-        var n;
-        var i;
-        var s;
-        var o;
-        var a;
-        var h;
-        var d;
-        e.onSuccess ? (null == (r = (n = this.mutateOptions).onSuccess) || r.call(n, this.currentResult.data, this.currentResult.variables, this.currentResult.context), null == (i = (s = this.mutateOptions).onSettled) || i.call(s, this.currentResult.data, null, this.currentResult.variables, this.currentResult.context)) : e.onError && (null == (o = (a = this.mutateOptions).onError) || o.call(a, this.currentResult.error, this.currentResult.variables, this.currentResult.context), null == (h = (d = this.mutateOptions).onSettled) || h.call(d, void 0, this.currentResult.error, this.currentResult.variables, this.currentResult.context));
+        let r
+        let n
+        let i
+        let s
+        let o
+        let a
+        let h
+        let d
+        e.onSuccess ? ((r = (n = this.mutateOptions).onSuccess) == null || r.call(n, this.currentResult.data, this.currentResult.variables, this.currentResult.context), (i = (s = this.mutateOptions).onSettled) == null || i.call(s, this.currentResult.data, null, this.currentResult.variables, this.currentResult.context)) : e.onError && ((o = (a = this.mutateOptions).onError) == null || o.call(a, this.currentResult.error, this.currentResult.variables, this.currentResult.context), (h = (d = this.mutateOptions).onSettled) == null || h.call(d, void 0, this.currentResult.error, this.currentResult.variables, this.currentResult.context))
       }
-      e.listeners && this.listeners.forEach(e => {
-        e(this.currentResult);
-      });
-    });
+      e.listeners && this.listeners.forEach((e) => {
+        e(this.currentResult)
+      })
+    })
   }
 }
-export const _ = $$h0;
+export const _ = MutationObserver

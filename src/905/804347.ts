@@ -73,7 +73,7 @@ import { e0 as _$$e } from "../905/696396";
 import { p as _$$p3 } from "../figma_app/353099";
 import { y as _$$y2 } from "../figma_app/887997";
 import { m as _$$m } from "../905/52659";
-import { Dq } from "../905/316062";
+import { FolderSortKey } from "../905/316062";
 import { w as _$$w } from "../905/191841";
 import { lQ } from "../905/934246";
 import eq from "classnames";
@@ -628,9 +628,9 @@ function eU(e) {
 }
 let eG = e => {
   switch (e) {
-    case Dq.NAME:
+    case FolderSortKey.NAME:
       return ProjectSortField.NAME;
-    case Dq.CREATED_AT:
+    case FolderSortKey.CREATED_AT:
       return ProjectSortField.CREATED_AT;
     default:
       debug(!0, "Should not try to sort by any other key in search list view");
@@ -640,12 +640,12 @@ let eG = e => {
 let ez = e => {
   switch (e) {
     case ProjectSortField.NAME:
-      return Dq.NAME;
+      return FolderSortKey.NAME;
     case ProjectSortField.CREATED_AT:
-      return Dq.CREATED_AT;
+      return FolderSortKey.CREATED_AT;
     default:
       debug(!0, "Should not try to sort by any other key in search project list view");
-      return Dq.NAME;
+      return FolderSortKey.NAME;
   }
 };
 function eH(e) {

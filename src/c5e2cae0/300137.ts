@@ -9,11 +9,11 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { Cn } from "../c5e2cae0/453906";
 import { selectCurrentUser } from "../905/372672";
 import { SubscriptionType } from "../figma_app/831101";
-let g = M4.Query({
+let g = liveStoreInstance.Query({
   fetch: async () => (await Cn.maintenancePoc1()).data.meta
 });
 export function $$v0(e) {

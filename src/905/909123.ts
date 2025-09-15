@@ -1,14 +1,14 @@
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { XW } from "../figma_app/427318";
-import { M4 } from "../905/713695";
+import { hasContent } from "../figma_app/427318";
+import { liveStoreInstance } from "../905/713695";
 import { H } from "../905/473998";
 import { pluginAPIService } from "../905/3209";
 import { a as _$$a } from "../figma_app/601188";
 import { U } from "../905/424668";
 import { I$, $f } from "../figma_app/940844";
-let $$$$m1 = M4.Query({
+let $$$$m1 = liveStoreInstance.Query({
   fetch: async ({
     apiResourceType: e,
     id: t
@@ -37,7 +37,7 @@ let $$$$m1 = M4.Query({
     }
   }) => "plugin" === t || "widget" === t ? I$(e) : e
 });
-let $$h0 = M4.Query({
+let $$h0 = liveStoreInstance.Query({
   fetch: async ({
     apiResourceType: e,
     id: t,
@@ -67,7 +67,7 @@ let $$h0 = M4.Query({
     args: {
       apiResourceType: t
     }
-  }) => e && XW(e) && ("plugin" === t || "widget" === t) ? $f(e) : e
+  }) => e && hasContent(e) && ("plugin" === t || "widget" === t) ? $f(e) : e
 });
 export const Z = $$h0;
 export const m = $$$$m1;

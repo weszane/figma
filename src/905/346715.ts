@@ -25,7 +25,7 @@ import { mg, nX } from "../figma_app/336853";
 import { Cl, Eq } from "../figma_app/598018";
 import { Eh } from "../figma_app/617654";
 import { c as _$$c } from "../905/32166";
-import { $ as _$$$ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { CE, XK, C2, Xu, QL, T as _$$T, Pv, Gu, Kk, Qu, Cr, iU, g2 } from "../figma_app/397283";
 import { A as _$$A } from "../6828/7452";
@@ -120,7 +120,7 @@ let $$F0 = registerModal(function (e) {
         X("url_same_plan");
         return;
       }
-      _$$$.getTeamName({
+      teamAPIClient.getTeamName({
         teamId: n
       }).then(({
         data: e

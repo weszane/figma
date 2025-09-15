@@ -14,7 +14,7 @@ import { Tf, nb } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { cD } from "../figma_app/598018";
 import { U } from "../905/18613";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
@@ -178,7 +178,7 @@ let T = async ({
       }));
       break;
     case nb.PINNED_FILE:
-      let _ = await M4.fetchFile(e.file.key);
+      let _ = await liveStoreInstance.fetchFile(e.file.key);
       N7(n, _.parent_org_id, o, _.team_id) ? QV({
         file: {
           key: e.file.key,

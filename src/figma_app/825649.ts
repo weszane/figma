@@ -53,7 +53,7 @@ import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { UpsellModalType } from "../905/165519";
 import { Eg, _b } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
 import { e0 as _$$e } from "../905/696396";
 import { Q as _$$Q } from "../figma_app/113686";
@@ -184,7 +184,7 @@ export function $$eO1({
   let tw = tv || tC || tN;
   let tO = eD.user;
   let tR = DF(eM, tO);
-  let tL = e7 && e7.profile.entityType === o1.TEAM;
+  let tL = e7 && e7.profile.entityType === TeamOrgType.TEAM;
   let tP = !!tO && tE && !tL;
   let tD = useCallback(() => ({
     canMove: !!tA,

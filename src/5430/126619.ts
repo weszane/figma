@@ -5,9 +5,9 @@ import { lQ } from "../905/934246";
 import { bL, mc, q7, YJ, b as _$$b } from "../figma_app/860955";
 import { A as _$$A } from "../905/351112";
 import { Jm, BY } from "../figma_app/387599";
-import { mk, K2 } from "../figma_app/777551";
-import { o_, Qd, ws, bc, $3, tv, Tv, B2, Gk } from "../figma_app/427318";
-import { Om } from "../figma_app/979714";
+import { getResourceUserCount, getResourceName } from "../figma_app/777551";
+import { hasLibraryKey, mapEditorTypeToVt, hasResourceType, getTemplateType, isWidgetResource, isCooperTemplateFile, hasOrgPrivateContent, getTemplateContent, hasOrgPrivateResourceType } from "../figma_app/427318";
+import { useResourceRouteParams } from "../figma_app/979714";
 import { useCurrentPrivilegedPlan, useCurrentPlanUser } from "../figma_app/465071";
 import { ViewMode } from "../figma_app/756995";
 import { w4, y1 } from "../905/445814";
@@ -19,7 +19,7 @@ import { a as _$$a } from "../905/329735";
 import { cz, i8 } from "../905/14017";
 import { EU } from "../figma_app/835219";
 import { Q } from "../905/978641";
-import { vt } from "../figma_app/306946";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { l as _$$l } from "../905/716947";
 import { on } from "../905/420347";
 import { throwTypeError } from "../figma_app/465776";
@@ -27,7 +27,7 @@ import { F } from "../905/171275";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { hasDesktopAPI } from "../figma_app/876459";
 import { VisualBellActions } from "../905/302958";
-import { DV, lW } from "../figma_app/471982";
+import { buildFullCommunityUrl, copyToClipboard } from "../figma_app/471982";
 import { FM, RL, Gq, xb as _$$xb } from "../5430/773914";
 import { LP, L_ } from "../7222/418961";
 import { Qp, JR, Wi } from "../figma_app/162641";
@@ -42,8 +42,8 @@ function E({
   let a;
   let l;
   let c;
-  let m = o_(e);
-  m ? (c = Qd(e), o = e.signedThumbnailUrl, a = e.libraryKey, l = e.publishedByUserNullable?.handle) : (c = ws(e) ? e.resource_type : bc(e), o = $3(e) && "icon_url" in e ? e.icon_url : e.thumbnail_url, a = tv(e) && Tv(e) ? B2(e)?.library_key : void 0, l = e.publisher.name);
+  let m = hasLibraryKey(e);
+  m ? (c = mapEditorTypeToVt(e), o = e.signedThumbnailUrl, a = e.libraryKey, l = e.publishedByUserNullable?.handle) : (c = hasResourceType(e) ? e.resource_type : getTemplateType(e), o = isWidgetResource(e) && "icon_url" in e ? e.icon_url : e.thumbnail_url, a = isCooperTemplateFile(e) && hasOrgPrivateContent(e) ? getTemplateContent(e)?.library_key : void 0, l = e.publisher.name);
   let {
     numComponents,
     librariesIsLoading
@@ -59,7 +59,7 @@ function E({
     author: l
   });
   let S = E;
-  m || Gk(e) ? c === vt.COOPER_TEMPLATE_FILE && !librariesIsLoading && numComponents > 0 && (S = jsxs("div", {
+  m || hasOrgPrivateResourceType(e) ? c === ResourceTypeEnum.COOPER_TEMPLATE_FILE && !librariesIsLoading && numComponents > 0 && (S = jsxs("div", {
     className: "x78zum5 x1q0g3np x6s0dn4",
     children: [jsx("span", {
       className: "xb3r6kr xlyipyv",
@@ -79,12 +79,12 @@ function E({
         likeCount: e.like_count,
         disableFontStyling: !0
       }), jsx(i8, {
-        usageCount: mk(e),
+        usageCount: getResourceUserCount(e),
         disableFontStyling: !0
       })]
     })]
   });
-  let R = c === vt.COOPER_TEMPLATE_FILE ? jsx(q, {
+  let R = c === ResourceTypeEnum.COOPER_TEMPLATE_FILE ? jsx(q, {
     noBorder: !0,
     children: jsx(Q, {
       src: o ?? void 0,
@@ -96,21 +96,21 @@ function E({
     thumbnailUrl: o,
     thumbnailType: function (e) {
       switch (e) {
-        case vt.FIGJAM_TEMPLATE:
+        case ResourceTypeEnum.FIGJAM_TEMPLATE:
           return F.WHITEBOARD;
-        case vt.SLIDE_TEMPLATE:
+        case ResourceTypeEnum.SLIDE_TEMPLATE:
           return F.SLIDES;
-        case vt.SITE_TEMPLATE:
+        case ResourceTypeEnum.SITE_TEMPLATE:
           return F.SITES;
-        case vt.PROTOTYPE:
-        case vt.DESIGN_TEMPLATE:
-        case vt.UI_KIT:
-        case vt.PLUGIN:
-        case vt.WIDGET:
-        case vt.FIGMAKE_TEMPLATE:
+        case ResourceTypeEnum.PROTOTYPE:
+        case ResourceTypeEnum.DESIGN_TEMPLATE:
+        case ResourceTypeEnum.UI_KIT:
+        case ResourceTypeEnum.PLUGIN:
+        case ResourceTypeEnum.WIDGET:
+        case ResourceTypeEnum.FIGMAKE_TEMPLATE:
           return F.DESIGN;
-        case vt.COOPER_TEMPLATE_FILE:
-        case vt.COOPER_TEMPLATE_ASSET:
+        case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
+        case ResourceTypeEnum.COOPER_TEMPLATE_ASSET:
           return F.COOPER;
         default:
           throwTypeError(e);
@@ -118,8 +118,8 @@ function E({
     }(c),
     noBorder: !0,
     addtlStyles: {
-      objectFit: c === vt.WIDGET ? "contain" : "cover",
-      padding: c === vt.WIDGET ? "16px" : void 0
+      objectFit: c === ResourceTypeEnum.WIDGET ? "contain" : "cover",
+      padding: c === ResourceTypeEnum.WIDGET ? "16px" : void 0
     },
     disableSmartBackground: !0
   });
@@ -135,24 +135,24 @@ function E({
         size: 16,
         type: function (e) {
           switch (e) {
-            case vt.PLUGIN:
+            case ResourceTypeEnum.PLUGIN:
               return y1.PLUGIN;
-            case vt.WIDGET:
+            case ResourceTypeEnum.WIDGET:
               return y1.WIDGET;
-            case vt.FIGJAM_TEMPLATE:
+            case ResourceTypeEnum.FIGJAM_TEMPLATE:
               return y1.WHITEBOARD;
-            case vt.SLIDE_TEMPLATE:
+            case ResourceTypeEnum.SLIDE_TEMPLATE:
               return y1.SLIDES;
-            case vt.SITE_TEMPLATE:
+            case ResourceTypeEnum.SITE_TEMPLATE:
               return y1.SITES;
-            case vt.PROTOTYPE:
-            case vt.DESIGN_TEMPLATE:
-            case vt.UI_KIT:
+            case ResourceTypeEnum.PROTOTYPE:
+            case ResourceTypeEnum.DESIGN_TEMPLATE:
+            case ResourceTypeEnum.UI_KIT:
               return y1.DESIGN;
-            case vt.COOPER_TEMPLATE_FILE:
-            case vt.COOPER_TEMPLATE_ASSET:
+            case ResourceTypeEnum.COOPER_TEMPLATE_FILE:
+            case ResourceTypeEnum.COOPER_TEMPLATE_ASSET:
               return y1.COOPER;
-            case vt.FIGMAKE_TEMPLATE:
+            case ResourceTypeEnum.FIGMAKE_TEMPLATE:
               return y1.FIGMAKE;
             default:
               throwTypeError(e);
@@ -160,9 +160,9 @@ function E({
         }(c)
       }),
       title: function (e) {
-        let t = o_(e);
-        let r = t ? e.name : K2(e);
-        return t || Gk(e) ? r : jsx("div", {
+        let t = hasLibraryKey(e);
+        let r = t ? e.name : getResourceName(e);
+        return t || hasOrgPrivateResourceType(e) ? r : jsx("div", {
           className: "x78zum5 x1q0g3np x6s0dn4 x1jnr06f",
           children: r
         });
@@ -187,7 +187,7 @@ function M({
     resource,
     sharedRouteParams
   } = t;
-  let c = ws(resource) ? resource.rdp_url : DV(resource);
+  let c = hasResourceType(resource) ? resource.rdp_url : buildFullCommunityUrl(resource);
   let d = useCallback(() => {
     FM(r, resource, {
       openInNewTab: !1,
@@ -198,7 +198,7 @@ function M({
     RL(resource, sharedRouteParams);
   }, [resource, sharedRouteParams]);
   let _ = useCallback(() => {
-    lW(c);
+    copyToClipboard(c);
     r(VisualBellActions.enqueue({
       message: getI18nString("copy_to_clipboard.link_copied_to_clipboard"),
       type: "success"
@@ -271,7 +271,7 @@ export function $$F0({
   resourceImpressionTracking: h = lQ
 }) {
   let x = useDispatch();
-  let f = Om();
+  let f = useResourceRouteParams();
   let y = useCurrentPrivilegedPlan("ResourceHubItemsView").unwrapOr(null);
   let g = useCurrentPlanUser("ResourceHubItemsView").unwrapOr(null);
   let v = Jm();
@@ -303,7 +303,7 @@ export function $$F0({
     L_(e.id, e.editorType);
   };
   let S = (e, t) => {
-    o_(e) ? N(e) : Gk(e) ? Tv(e) && I(e) : T(e, t);
+    hasLibraryKey(e) ? N(e) : hasOrgPrivateResourceType(e) ? hasOrgPrivateContent(e) && I(e) : T(e, t);
   };
   let R = e => {
     w({
@@ -311,7 +311,7 @@ export function $$F0({
       sharedRouteParams: f ?? void 0
     });
   };
-  let k = e => o_(e) ? e.name : K2(e);
+  let k = e => hasLibraryKey(e) ? e.name : getResourceName(e);
   let A = Array(r).fill(1);
   return jsxs(Fragment, {
     children: [jsx(_$$A, {
@@ -334,7 +334,7 @@ export function $$F0({
           isHovered: i,
           onIntersectionChange: h,
           onContextMenu: t => {
-            o_(e) || Gk(e) || Tv(e) || (getContextMenuTriggerProps().onContextMenu(t), R(e));
+            hasLibraryKey(e) || hasOrgPrivateResourceType(e) || hasOrgPrivateContent(e) || (getContextMenuTriggerProps().onContextMenu(t), R(e));
           }
         })
       }

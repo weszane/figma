@@ -6,7 +6,7 @@ import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { RR } from "../figma_app/307841";
 import { g as _$$g } from "../figma_app/638694";
-import { pO } from "../figma_app/422062";
+import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
@@ -29,7 +29,7 @@ export function $$T0() {
   let I = useSelector(e => getPermissionsStateMemoized(e));
   let N = useSelector(e => e.teams);
   let C = useIsOrgAdminUser(r);
-  let S = "loaded" === C.status && pO({
+  let S = "loaded" === C.status && isSelectedViewMissingOrgAdminResources({
     isAdminOrg: C.data,
     permissions: I,
     teams: N,

@@ -18,7 +18,7 @@ import { u as _$$u } from "../1e926454/858319";
 import { dr, eb as _$$eb, oU } from "../4452/405965";
 import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FResourceCategoryType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { H_ } from "../figma_app/336853";
 import { canPerformActionBasedOnLevel, getPermissionLevelName } from "../figma_app/12796";
 import { rq } from "../905/351260";
@@ -144,7 +144,7 @@ export function $$ee0(e) {
   let V = useSelector(e => e.autocomplete);
   let z = useSelector(e => e.contacts);
   let H = useSelector(e => e.dropdownShown);
-  let K = M4.Team.useValue(teamId).data;
+  let K = liveStoreInstance.Team.useValue(teamId).data;
   let q = dr(teamId);
   let ee = _$$eb(teamId);
   useWebLoggerTimerEffect("loaded" === q.status && "loaded" === ee.status, e => {

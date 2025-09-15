@@ -11,9 +11,9 @@ import { mapFileTypeToEditorType, FEditorType } from "../figma_app/53721";
 import { gz, GJ, X7, dC, l0, vf, Wc, d6 } from "../5430/455879";
 import { I as _$$I } from "../5132/515990";
 import { Jm } from "../figma_app/387599";
-import { X_ } from "../figma_app/777551";
+import { getResourceActionText } from "../figma_app/777551";
 import { hJ, XY } from "../905/506641";
-import { vt } from "../figma_app/306946";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
 import { Yo } from "../figma_app/543529";
@@ -120,7 +120,7 @@ export function $$S0({
           ref: ee,
           children: jsxs(Fragment, {
             children: [jsx(hJ, {
-              children: X_(J ? vt.WIDGET : vt.PLUGIN, isThirdPartyMonetized(e) || hasFreemiumCode(e))
+              children: getResourceActionText(J ? ResourceTypeEnum.WIDGET : ResourceTypeEnum.PLUGIN, isThirdPartyMonetized(e) || hasFreemiumCode(e))
             }), jsx(XY, {
               children: renderI18nText("community.using.open_in_no_ellipses")
             })]

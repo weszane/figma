@@ -1,7 +1,7 @@
 import { buildUploadUrl } from "../figma_app/169182";
 import { getI18nString, getTranslatedDynamicContent } from "../905/303541";
-import { N, S } from "../905/872825";
-import { zq } from "../figma_app/598412";
+import { isValueInObject, getValueOrFallback } from "../905/872825";
+import { getCurrentLocale } from "../figma_app/598412";
 import { LJ, zU } from "../figma_app/930386";
 let l = {
   [LJ.visualAssets]: () => getI18nString("categories.visual_assets"),
@@ -61,11 +61,11 @@ let l = {
   [LJ.zoomBackgroundTemplates]: () => getI18nString("categories.zoom_background_templates")
 };
 export function $$d3(e) {
-  if (N(e, LJ)) return e;
-  let t = zq();
+  if (isValueInObject(e, LJ)) return e;
+  let t = getCurrentLocale();
   if (t) {
     let r = zU(e, t);
-    if (r && N(r, LJ)) return r;
+    if (r && isValueInObject(r, LJ)) return r;
   }
   console.error(`Invalid category slug: ${e}. Cannot convert to Categories enum. This should not happen with ValidCategorySlug type.`);
   return Error(`Invalid category slug: ${e}. Cannot convert to Categories enum.`);
@@ -126,7 +126,7 @@ export function $$h0(e) {
 }
 export function $$m4(e) {
   if (e.i18n_meta?.title) return getTranslatedDynamicContent(e.i18n_meta.title, e.title);
-  let t = S(e.url_slug, LJ);
+  let t = getValueOrFallback(e.url_slug, LJ);
   return t ? $$c6(t) ?? e.title : e.title;
 }
 export const If = $$h0;

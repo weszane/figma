@@ -6,10 +6,10 @@ import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { getI18nString } from "../905/303541";
 import { Jm } from "../figma_app/387599";
-import { a4 } from "../figma_app/321395";
+import { useSafeRouteStateInstance } from "../figma_app/321395";
 import { ResourceTypes } from "../905/178090";
 import { n6 } from "../figma_app/600006";
-import { OU } from "../figma_app/773663";
+import { anchorEditorResource } from "../figma_app/773663";
 var o = n;
 var l = a;
 let m = {
@@ -95,7 +95,7 @@ export function $$g0({
   resultsByType: t
 }) {
   getFeatureFlags().statsig_aa_flag_web_cmtysidebar;
-  let r = a4(n6);
+  let r = useSafeRouteStateInstance(n6);
   let n = $$y1(t);
   let a = Jm();
   let l = [[ResourceTypes.SearchResourceTypes.MIXED, getI18nString("community.view_bar.all"), m.All], [ResourceTypes.SearchResourceTypes.FILES, getI18nString("community.view_bar.files_and_templates"), m.Files], [ResourceTypes.SearchResourceTypes.PLUGINS, getI18nString("community.view_bar.plugins"), m.Plugins], [ResourceTypes.SearchResourceTypes.WIDGETS, getI18nString("community.view_bar.widgets"), m.Widgets], [ResourceTypes.SearchResourceTypes.PROFILES, getI18nString("community.view_bar.creators"), m.Union]];
@@ -105,7 +105,7 @@ export function $$g0({
       className: "search_sidebar--sidebarList--abBb8",
       children: l.map(([t, i, l]) => {
         let u = e === t;
-        let m = r.search?.editor_type ? OU(r.search.editor_type, t, {
+        let m = r.search?.editor_type ? anchorEditorResource(r.search.editor_type, t, {
           anchorOn: "resourceType"
         }).editorType : void 0;
         let _ = r.copyWith({}, {

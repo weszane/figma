@@ -1,188 +1,327 @@
-import { logger } from "../905/651849";
-import { C } from "../905/237873";
-import { H, e as _$$e } from "../figma_app/324237";
-import { Z } from "../905/942203";
-import { editorUtilities as _$$k } from "../905/22009";
-import { ResourceTypes } from "../905/178090";
-import { J5, iB } from "../figma_app/805898";
-import { zs, pJ } from "../figma_app/773663";
-export function $$u6(e, t) {
-  return $$h5(e, t) || J5(e, t) || function (e, t) {
-    let r = decodeURIComponent(e || location.pathname);
-    if (!g.test(r) || f.test(r) || E.test(r)) return;
-    let n = ("/" === r[0] ? r.slice(1) : r).split("/");
-    let o = {
-      resourceType: void 0,
-      tags: [],
-      editor_type: void 0,
-      sort_by: H(),
-      price: C.ALL,
-      category: null,
-      creators: Z.ALL
-    };
-    for (let e = 0; e < b.length && 0 !== n.length; e++) {
-      let t = b[e](n, o);
-      t && t[0] && (n = t[1], o = {
-        ...o,
-        ...t[0]
-      });
+import { editorUtilities as _$$k } from '../905/22009'
+import { ResourceTypes } from '../905/178090'
+import { PricingOptions } from '../905/237873'
+import { logger } from '../905/651849'
+import { BrowseUtils } from '../905/942203'
+import { getAllTimeSortOption, SortOptions } from '../figma_app/324237'
+import { getDefaultEditorResource, selectEditorResource } from '../figma_app/773663'
+import { buildBrowseUrl, parseBrowseRoute } from '../figma_app/805898'
+
+/**
+ * Parses a community browse/search route and returns the corresponding resource options.
+ * @param pathname - The URL pathname to parse.
+ * @param search - The URL search string.
+ * @returns The parsed resource options object or null.
+ * (Original: $$u6)
+ */
+export function setupBrowseRoute(pathname: string, search?: string) {
+  return parseSearchRoute(pathname, search) || parseBrowseRoute(pathname, search) || parseCommunityRoute(pathname)
+}
+
+/**
+ * Parses a community route and returns the corresponding resource options.
+ * @param pathname - The URL pathname to parse.
+ * @returns The parsed resource options object or undefined.
+ * (Original: inline function in $$u6)
+ */
+function parseCommunityRoute(pathname?: string) {
+  let route = decodeURIComponent(pathname || location.pathname)
+  if (!communityRegex.test(route) || collectionsRegex.test(route) || resourceRegex.test(route))
+    return
+  let segments = (route[0] === '/' ? route.slice(1) : route).split('/')
+  let options: BrowseOptions = {
+    resourceType: undefined,
+    tags: [],
+    editor_type: undefined,
+    sort_by: getAllTimeSortOption(),
+    price: PricingOptions.ALL,
+    category: null,
+    creators: BrowseUtils.ALL,
+  }
+  for (let i = 0; i < routeParsers.length && segments.length !== 0; i++) {
+    let result = routeParsers[i](segments, options)
+    if (result && result[0]) {
+      segments = result[1]
+      options = { ...options, ...result[0] }
     }
-    let {
-      editorType,
-      resourceType
-    } = zs(o.editor_type, o.resourceType);
-    o.editor_type = editorType;
-    o.resourceType = resourceType;
-    let u = new URLSearchParams(location.search);
-    let p = (() => {
-      let e = u.get("creators");
-      return e && e === Z.FOLLOWING ? e : o.creators;
-    })();
-    return {
-      ...o,
-      creators: p
-    };
-  }(e);
+  }
+  const { editorType, resourceType } = selectEditorResource(options.editor_type, options.resourceType)
+  options.editor_type = editorType
+  options.resourceType = resourceType
+  const params = new URLSearchParams(location.search)
+  const creators = (() => {
+    const c = params.get('creators')
+    return c && c === BrowseUtils.FOLLOWING ? c : options.creators
+  })()
+  return { ...options, creators }
 }
-export function $$p1(e) {
-  return "query" in e ? $$m2(e) : "category" in e && null !== e.category ? iB(e) : function (e) {
-    let t = "/community";
-    e.tags?.length && (t += `/tag/${e.tags.join(",")}`);
-    let {
-      editorType,
-      resourceType
-    } = zs(e.editor_type, e.resourceType);
-    e.editor_type !== editorType ? e.resourceType = zs(e.editor_type).resourceType : e.resourceType !== resourceType && (e.resourceType = resourceType);
-    e.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED && (t += `/${e.resourceType}`);
-    zs(e.editor_type, e.resourceType).editorType !== _$$k.Editors.ALL && (t += `/${e.editor_type}`);
-    e.price && C.FOR_URL_SLUG.indexOf(e.price) > -1 && (t += `/${e.price}`);
-    e.creators === Z.FIGMA_PARTNER && (t += `/${e.creators}`);
-    e.sort_by && e.sort_by !== H() && (e.sort_by === _$$e.Browse.PUBLISHED_AT ? t += "/new" : e.sort_by === _$$e.Browse.POPULAR && (t += "/trending"));
-    T[t] && (t = T[t]);
-    let d = {};
-    e.creators === Z.FOLLOWING && (d.creators = e.creators);
-    let u = Object.keys(d).length > 0 ? new URLSearchParams(d).toString() : void 0;
-    u && (t += `?${u}`);
-    return t;
-  }(e);
+
+/**
+ * Converts browse/search options to a URL.
+ * @param options - The browse/search options.
+ * @returns The corresponding URL string.
+ * (Original: $$p1)
+ */
+export function buildBrowseOrSearchUrl(options: BrowseOptions | SearchOptions) {
+  if ('query' in options) {
+    return buildSearchUrl(options as SearchOptions)
+  }
+  if ('category' in options && options.category !== null) {
+    return buildBrowseUrl(options as any)
+  }
+  return buildCommunityUrl(options as any)
 }
-let _ = /^\/community\/search$/;
-export function $$h5(e, t) {
-  if (!(e ||= location.pathname).match(_)) return null;
-  let r = new URLSearchParams(t ||= location.search);
-  let n = r.get("query");
-  if (!n) return null;
-  let o = r.get("resource_type");
-  if (!o) return null;
-  let l = r.get("sort_by") || _$$e.Search.RELEVANCY;
-  let d = zs(r.get("editor_type") ?? void 0, o).editorType;
+
+/**
+ * Builds a community browse URL from options.
+ * @param options - The browse options.
+ * @returns The corresponding URL string.
+ * (Original: inline function in $$p1)
+ */
+function buildCommunityUrl(options: BrowseOptions) {
+  let url = '/community'
+  if (options.tags?.length)
+    url += `/tag/${options.tags.join(',')}`
+  const { editorType, resourceType } = selectEditorResource(options.editor_type, options.resourceType)
+  if (options.editor_type !== editorType) {
+    options.resourceType = selectEditorResource(options.editor_type).resourceType
+  }
+  else if (options.resourceType !== resourceType) {
+    options.resourceType = resourceType
+  }
+  if (options.resourceType !== ResourceTypes.BrowseResourceTypes.MIXED) {
+    url += `/${options.resourceType}`
+  }
+  if (selectEditorResource(options.editor_type, options.resourceType).editorType !== _$$k.Editors.ALL) {
+    url += `/${options.editor_type}`
+  }
+  if (options.price && PricingOptions.FOR_URL_SLUG.includes(options.price)) {
+    url += `/${options.price}`
+  }
+  if (options.creators === BrowseUtils.FIGMA_PARTNER) {
+    url += `/${options.creators}`
+  }
+  if (options.sort_by && options.sort_by !== getAllTimeSortOption()) {
+    if (options.sort_by === SortOptions.Browse.PUBLISHED_AT)
+      url += '/new'
+    else if (options.sort_by === SortOptions.Browse.POPULAR)
+      url += '/trending'
+  }
+  if (communityUrlMap[url])
+    url = communityUrlMap[url]
+  const params: Record<string, string> = {}
+  if (options.creators === BrowseUtils.FOLLOWING)
+    params.creators = options.creators
+  const query = Object.keys(params).length > 0 ? new URLSearchParams(params).toString() : undefined
+  if (query)
+    url += `?${query}`
+  return url
+}
+
+/**
+ * Parses a community search route and returns the corresponding search options.
+ * @param pathname - The URL pathname to parse.
+ * @param search - The URL search string.
+ * @returns The parsed search options object or null.
+ * (Original: $$h5)
+ */
+export function parseSearchRoute(pathname?: string, search?: string) {
+  pathname ||= location.pathname
+  if (!pathname.match(searchRegex))
+    return null
+  const params = new URLSearchParams(search ||= location.search)
+  const query = params.get('query')
+  if (!query)
+    return null
+  const resourceType = params.get('resource_type')
+  if (!resourceType)
+    return null
+  const sortBy = params.get('sort_by') || SortOptions.Search.RELEVANCY
+  const editorType = selectEditorResource(params.get('editor_type') as any, resourceType).editorType
   return {
-    resourceType: o,
-    sort_by: l,
-    editor_type: d,
-    query: n,
-    price: r.get("price") || C.ALL,
+    resourceType,
+    sort_by: sortBy,
+    editor_type: editorType,
+    query,
+    price: params.get('price') || PricingOptions.ALL,
     creators: (() => {
-      let e = r.get("creators");
-      return Z.isSearchType(e) ? e : Z.ALL;
-    })()
-  };
+      const c = params.get('creators')
+      return BrowseUtils.isSearchType(c) ? c : BrowseUtils.ALL
+    })(),
+  }
 }
-export function $$m2(e) {
-  let t = new URLSearchParams({
-    resource_type: e.resourceType,
-    sort_by: e.sort_by,
-    query: e.query,
-    editor_type: zs(e.editor_type, e.resourceType).editorType,
-    price: e.price,
-    creators: e.creators && Z.isSearchType(e.creators) ? e.creators : Z.ALL
-  }).toString();
-  return `/community/search?${t}`;
+
+/**
+ * Builds a community search URL from search options.
+ * @param options - The search options.
+ * @returns The corresponding URL string.
+ * (Original: $$m2)
+ */
+export function buildSearchUrl(options: SearchOptions) {
+  const params = new URLSearchParams({
+    resource_type: options.resourceType,
+    sort_by: options.sort_by,
+    query: options.query,
+    editor_type: selectEditorResource(options.editor_type, options.resourceType).editorType,
+    price: options.price,
+    creators: options.creators && BrowseUtils.isSearchType(options.creators) ? options.creators : BrowseUtils.ALL,
+  }).toString()
+  return `/community/search?${params}`
 }
-let g = /^\/community/;
-let f = /^\/community\/collections?\/?/;
-let E = /^\/community\/(file|plugin|widget)\//;
-var y = (e => (e.NEW = "new", e.POPULAR = "popular", e.TRENDING = "trending", e.TAG = "tag", e.COMMUNITY = "community", e))(y || {});
-let b = [function (e) {
-  return "community" === e[0] && [{}, e.slice(1)];
-}, function (e) {
-  return "tag" === e[0] && !!e[1] && [{
-    tags: e[1].split(",")
-  }, e.slice(2)];
-}, function (e) {
-  let t = e[0];
-  return Object.values(ResourceTypes.BrowseResourceTypes).indexOf(t) > -1 && [{
-    resourceType: t
-  }, e.slice(1)];
-}, function (e, t) {
-  let r = e[0];
-  return Object.values(_$$k.Editors).indexOf(r) > -1 && [{
-    editor_type: zs(r, t.resourceType).editorType
-  }, e.slice(1)];
-}, function (e) {
-  let t = e[0];
-  return C.FOR_URL_SLUG.indexOf(t) > -1 && [{
-    price: t
-  }, e.slice(1)];
-}, function (e) {
-  let t = e[0];
-  return t === Z.FIGMA_PARTNER && [{
-    creators: t
-  }, e.slice(1)];
-}, function (e) {
-  let t = null;
-  "new" === e[0] && (t = _$$e.Browse.PUBLISHED_AT);
-  "popular" === e[0] && (t = _$$e.Browse.ALL_TIME);
-  "trending" === e[0] && (t = _$$e.Browse.POPULAR);
-  return !!t && [{
-    sort_by: t
-  }, e.slice(1)];
-}];
-let T = {
-  "/community/mixed": "/community"
-};
-export function $$I0() {
-  let e = pJ();
+
+// Regex patterns for route matching (Original: g, f, E, _)
+const communityRegex = /^\/community/
+const collectionsRegex = /^\/community\/collections?\/?/
+// eslint-disable-next-line regexp/no-unused-capturing-group
+const resourceRegex = /^\/community\/(file|plugin|widget)\//
+const searchRegex = /^\/community\/search$/
+
+// Route parser functions (Original: b)
+interface BrowseOptions {
+  resourceType?: string
+  tags?: string[]
+  editor_type?: any
+  sort_by?: string
+  price?: string
+  category?: string | null
+  creators?: string
+}
+interface SearchOptions {
+  resourceType: string
+  sort_by: string
+  editor_type: any
+  query: string
+  price: string
+  creators: string
+}
+
+const routeParsers: Array<
+  (segments: string[], options: BrowseOptions) => [Partial<BrowseOptions>, string[]] | undefined
+> = [
+  // community
+  segments => segments[0] === 'community' && [{}, segments.slice(1)],
+  // tag
+  segments => segments[0] === 'tag' && !!segments[1] && [{
+    tags: segments[1].split(','),
+  }, segments.slice(2)],
+  // resourceType
+  (segments) => {
+    const t = segments[0]
+    return Object.values(ResourceTypes.BrowseResourceTypes).includes(t) && [{
+      resourceType: t,
+    }, segments.slice(1)]
+  },
+  // editor_type
+  (segments, options) => {
+    const r = segments[0] as any
+    return Object.values(_$$k.Editors).includes(r) && [{
+      editor_type: selectEditorResource(r, options.resourceType).editorType,
+    }, segments.slice(1)]
+  },
+  // price
+  (segments) => {
+    const t = segments[0]
+    return PricingOptions.FOR_URL_SLUG.includes(t) && [{
+      price: t,
+    }, segments.slice(1)]
+  },
+  // creators
+  (segments) => {
+    const t = segments[0]
+    return t === BrowseUtils.FIGMA_PARTNER && [{
+      creators: t,
+    }, segments.slice(1)]
+  },
+  // sort_by
+  (segments) => {
+    let sortBy: string | undefined
+    if (segments[0] === 'new')
+      sortBy = SortOptions.Browse.PUBLISHED_AT
+    if (segments[0] === 'popular')
+      sortBy = SortOptions.Browse.ALL_TIME
+    if (segments[0] === 'trending')
+      sortBy = SortOptions.Browse.POPULAR
+    return !!sortBy && [{
+      sort_by: sortBy,
+    }, segments.slice(1)]
+  },
+]
+
+// Community URL map (Original: T)
+const communityUrlMap: Record<string, string> = {
+  '/community/mixed': '/community',
+}
+
+/**
+ * Returns the default browse options.
+ * (Original: $$I0)
+ */
+export function getDefaultBrowseOptions(): BrowseOptions {
+  const e = getDefaultEditorResource()
   return {
     resourceType: e.resourceType,
-    sort_by: H(),
+    sort_by: getAllTimeSortOption(),
     editor_type: e.editorType,
-    price: C.ALL,
+    price: PricingOptions.ALL,
     tags: [],
     category: null,
-    creators: Z.ALL
-  };
+    creators: BrowseUtils.ALL,
+  }
 }
-export let $$S4 = (() => {
-  let e = pJ();
+
+/**
+ * Default search options object.
+ * (Original: $$S4)
+ */
+export const defaultSearchOptions = (() => {
+  const e = getDefaultEditorResource()
   return {
     resourceType: e.resourceType,
-    sort_by: _$$e.Search.RELEVANCY,
+    sort_by: SortOptions.Search.RELEVANCY,
     editor_type: e.editorType,
-    price: C.ALL,
-    creators: Z.ALL
-  };
-})();
-export function $$v3(e) {
-  return /\/community\/(file|plugin|widget)\/\d+/.test(e) ? {
-    reactRouterHandled: !0,
-    subView: "resourcePage"
-  } : /^\/@/.test(e) ? {
-    reactRouterHandled: !0,
-    subView: "handle"
-  } : /\/community*/.test(e) ? {
-    reactRouterHandled: !0,
-    subView: "searchAndBrowse"
-  } : (logger.warn(`If this is firing, it means you're trying to use logged-out Community routing on a non-Community URL.
-url: ${e}`), {
-    reactRouterHandled: !1,
-    subView: !1
-  });
+    price: PricingOptions.ALL,
+    creators: BrowseUtils.ALL,
+  }
+})()
+
+/**
+ * Determines the subview for a given community route.
+ * @param pathname - The route pathname.
+ * @returns An object indicating the subview and router handling.
+ * (Original: $$v3)
+ */
+export function getCommunitySubview(pathname: string) {
+  // eslint-disable-next-line regexp/no-unused-capturing-group
+  if (/\/community\/(file|plugin|widget)\/\d+/.test(pathname)) {
+    return { reactRouterHandled: true, subView: 'resourcePage' }
+  }
+  if (/^\/@/.test(pathname)) {
+    return { reactRouterHandled: true, subView: 'handle' }
+  }
+  if (/\/community*/.test(pathname)) {
+    return { reactRouterHandled: true, subView: 'searchAndBrowse' }
+  }
+  logger.warn(`If this is firing, it means you're trying to use logged-out Community routing on a non-Community URL.
+url: ${pathname}`)
+  return { reactRouterHandled: false, subView: false }
 }
-export const Gu = $$I0;
-export const MU = $$p1;
-export const Mc = $$m2;
-export const gV = $$v3;
-export const qd = $$S4;
-export const sT = $$h5;
-export const wl = $$u6;
+
+// Exported aliases (refactored to match new names)
+export const YJ = setupBrowseRoute
+export const MU = buildBrowseOrSearchUrl
+export const Mc = buildSearchUrl
+export const gV = getCommunitySubview
+export const qd = defaultSearchOptions
+export const sT = parseSearchRoute
+export const wl = setupBrowseRoute
+export const Gu = getDefaultBrowseOptions
+
+// Types for documentation
+/**
+ * BrowseOptions type for browse routes.
+ * (Original: inline type)
+ */
+/**
+ * SearchOptions type for search routes.
+ * (Original: inline type)
+ */

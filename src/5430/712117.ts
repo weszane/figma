@@ -10,9 +10,9 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { In } from "../905/672640";
 import { Jm } from "../figma_app/387599";
 import { a as _$$a } from "../5430/14230";
-import { qD, N6, z$ } from "../figma_app/471982";
+import { getCurrentVersion, buildCarouselMedia, getEmbedType } from "../figma_app/471982";
 import { Q as _$$Q } from "../905/978641";
-import { XW, cX, eO, tv, ZA, Vm, qY } from "../figma_app/427318";
+import { hasContent, isSlideTemplate, getHubFile, isCooperTemplateFile, isSiteTemplate, getResourceType, getMainContent } from "../figma_app/427318";
 import { hasClientMeta } from "../figma_app/45218";
 import { Z4 } from "../figma_app/809727";
 import { A as _$$A } from "../5430/202447";
@@ -319,7 +319,7 @@ function F({
   });
 }
 function H(e) {
-  let t = XW(e) ? e.name : qD(e).name;
+  let t = hasContent(e) ? e.name : getCurrentVersion(e).name;
   return `${t} preview`;
 }
 export function $$U0({
@@ -333,9 +333,9 @@ export function $$U0({
   let [L, E] = useState(0);
   let [S, R] = useState(!1);
   let [k, U] = useState(!0);
-  let W = useMemo(() => N6(e), [e]);
+  let W = useMemo(() => buildCarouselMedia(e), [e]);
   let G = function (e, t, r = !1) {
-    let s = fq(cX(e) ? eO(e)?.library_key : void 0);
+    let s = fq(isSlideTemplate(e) ? getHubFile(e)?.library_key : void 0);
     return useMemo(() => {
       let e = void 0 === s;
       let i = e ? t : s.length;
@@ -432,14 +432,14 @@ export function $$U0({
     }
   }, [Y, q, L, K, J]);
   let ee = Jm();
-  let et = z$(e);
-  let er = cX(e);
-  let es = tv(e);
-  let ei = ZA(e);
+  let et = getEmbedType(e);
+  let er = isSlideTemplate(e);
+  let es = isCooperTemplateFile(e);
+  let ei = isSiteTemplate(e);
   let en = _$$a({
     isSitesTemplate: ei,
     resourceContentId: t.id,
-    publishedSiteUrl: eO(t)?.published_site_url
+    publishedSiteUrl: getHubFile(t)?.published_site_url
   });
   if (et === Z4.EMBED || 0 === $.length) return jsx(V, {
     resource: e,
@@ -511,7 +511,7 @@ export function $$U0({
               onEnded: () => {
                 trackEventAnalytics("rdp_video_ended", {
                   community_resource_id: e.id,
-                  resouce_type: Vm(t),
+                  resouce_type: getResourceType(t),
                   searchSessionId: ee
                 });
               }
@@ -588,7 +588,7 @@ export function $$U0({
                 community_resource_id: e.id,
                 index: i,
                 media_type: r.type,
-                resouce_type: Vm(t),
+                resouce_type: getResourceType(t),
                 searchSessionId: ee
               });
             },
@@ -632,17 +632,17 @@ function V({
   heroType: t,
   is16to9AspectRatio: r
 }) {
-  let i = XW(e) ? qY(e) : e;
-  let n = ZA(e);
+  let i = hasContent(e) ? getMainContent(e) : e;
+  let n = isSiteTemplate(e);
   let o = _$$a({
     isSitesTemplate: n,
     resourceContentId: i?.id,
-    publishedSiteUrl: eO(i)?.published_site_url
+    publishedSiteUrl: getHubFile(i)?.published_site_url
   });
   if (t !== Z4.EMBED) {
     let t = e.thumbnail_url ?? void 0;
-    let i = XW(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
-    let a = cX(e);
+    let i = hasContent(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
+    let a = isSlideTemplate(e);
     return jsxs(Fragment, {
       children: [jsx(A, {
         showPreviewButton: a || n || !!o,

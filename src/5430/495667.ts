@@ -5,8 +5,8 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { Jm } from "../figma_app/387599";
-import { KH, A7 } from "../figma_app/471982";
-import { XW, Qc, $3, qY, Vm } from "../figma_app/427318";
+import { getResourceTypeLabel, mapVtResourceType } from "../figma_app/471982";
+import { hasContent, hasHubFile, isWidgetResource, getMainContent, getResourceType } from "../figma_app/427318";
 import { Z } from "../905/909123";
 import { zm, Qi } from "../figma_app/49598";
 import { C as _$$C, $ } from "../figma_app/382445";
@@ -14,7 +14,7 @@ import { showModalHandler } from "../905/156213";
 import { s0, M5 } from "../figma_app/350203";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentUser } from "../905/372672";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { hasClientMeta, isWidget, ResourceTypeNoComment } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
@@ -24,7 +24,7 @@ export function $$$$w0(e, t, r, m) {
     let o = selectCurrentUser();
     let a = Jm();
     let l = () => {
-      XW(e) || (logAndTrackCTA(b()), hasClientMeta(e) ? n(zm({
+      hasContent(e) || (logAndTrackCTA(b()), hasClientMeta(e) ? n(zm({
         hubFileId: e.id
       })) : isWidget(e) ? n(_$$C({
         id: e.id,
@@ -51,8 +51,8 @@ export function $$$$w0(e, t, r, m) {
       }
     };
     let g = t => {
-      if (!XW(e)) {
-        if (t.stopPropagation(), !o) throw Error(`Tried to unlike a ${KH(e)} as a signed out user`);
+      if (!hasContent(e)) {
+        if (t.stopPropagation(), !o) throw Error(`Tried to unlike a ${getResourceTypeLabel(e)} as a signed out user`);
         logAndTrackCTA(b());
         hasClientMeta(e) ? n(Qi({
           hubFileId: e.id,
@@ -69,7 +69,7 @@ export function $$$$w0(e, t, r, m) {
       }
     };
     let b = () => ({
-      action: Qc(e) ? t ? s0.HUB_FILE_UNLIKE : s0.HUB_FILE_LIKE : $3(e) ? t ? s0.WIDGET_UNLIKE : s0.WIDGET_LIKE : t ? s0.PLUGIN_UNLIKE : s0.PLUGIN_LIKE,
+      action: hasHubFile(e) ? t ? s0.HUB_FILE_UNLIKE : s0.HUB_FILE_LIKE : isWidgetResource(e) ? t ? s0.WIDGET_UNLIKE : s0.WIDGET_LIKE : t ? s0.PLUGIN_UNLIKE : s0.PLUGIN_LIKE,
       pluginId: e.id,
       profileId: e.publisher.id,
       viewContext: i,
@@ -86,14 +86,14 @@ export function $$$$w0(e, t, r, m) {
     let v = getAtomMutate(C);
     let b = getAtomMutate(L);
     let w = () => {
-      if (!XW(e)) return;
-      let t = qY(e);
+      if (!hasContent(e)) return;
+      let t = getMainContent(e);
       if (!t) throw Error("Missing resource content");
       logAndTrackCTA(N());
       let r = v({
         resourceId: e.id,
         contentId: t.id,
-        apiResourceType: A7(e)
+        apiResourceType: mapVtResourceType(e)
       });
       p && p.community_profile_id && WB().optimisticallyCreate({
         CommunityHubLike: {
@@ -136,15 +136,15 @@ export function $$$$w0(e, t, r, m) {
       }
     };
     let I = t => {
-      if (!XW(e)) return;
-      let s = qY(e);
+      if (!hasContent(e)) return;
+      let s = getMainContent(e);
       if (!s) throw Error("Missing resource content");
       if (t.stopPropagation(), !p) throw Error("Tried to unlike a resource as a signed out user");
       logAndTrackCTA(N());
       let n = b({
         resourceId: e.id,
         contentId: s.id,
-        apiResourceType: A7(e)
+        apiResourceType: mapVtResourceType(e)
       });
       r && WB().optimisticallyDelete({
         CommunityHubLike: {
@@ -164,7 +164,7 @@ export function $$$$w0(e, t, r, m) {
     let N = () => ({
       action: t ? M5.RESOURCE_UNLIKE : M5.RESOURCE_LIKE,
       resourceId: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       profileId: e.publisher.id,
       viewContext: m,
       searchSessionId: g
@@ -173,9 +173,9 @@ export function $$$$w0(e, t, r, m) {
       return t ? e => I(e) : e => T(e);
     };
   }(e, t, r, m);
-  return XW(e) ? b : g;
+  return hasContent(e) ? b : g;
 }
-let C = M4.Mutation(({
+let C = liveStoreInstance.Mutation(({
   resourceId: e,
   contentId: t,
   apiResourceType: r
@@ -189,7 +189,7 @@ let C = M4.Mutation(({
 }), _$$a.likeResource({
   resourceId: e
 })));
-let L = M4.Mutation(({
+let L = liveStoreInstance.Mutation(({
   resourceId: e,
   contentId: t,
   apiResourceType: r

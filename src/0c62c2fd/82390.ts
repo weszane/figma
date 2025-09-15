@@ -99,7 +99,7 @@ import { AE, Nn } from '../905/225144';
 import { C as _$$C2 } from '../905/226458';
 import { Z as _$$Z3 } from '../905/236383';
 import { delay } from '../905/236856';
-import { C as _$$C3 } from '../905/237873';
+import { PricingOptions } from '../905/237873';
 import { z as _$$z7 } from '../905/239603';
 import { F as _$$F6, p as _$$p6 } from '../905/241044';
 import { l as _$$l3 } from '../905/241412';
@@ -121,7 +121,7 @@ import { R as _$$R0 } from '../905/304671';
 import { T as _$$T2, v as _$$v2 } from '../905/309844';
 import { C as _$$C5 } from '../905/314082';
 import { m3 as _$$m4 } from '../905/315794';
-import { Ah, Dq, EE } from '../905/316062';
+import { FolderViewType, FolderSortKey, getProjectUrl } from '../905/316062';
 import { y8 } from '../905/327522';
 import { N_ as _$$N_ } from '../905/332483';
 import { a as _$$a12 } from '../905/332662';
@@ -238,7 +238,7 @@ import { L as _$$L4 } from '../905/704296';
 import { H as _$$H3 } from '../905/706055';
 import { D as _$$D5 } from '../905/711533';
 import { Ju as _$$Ju } from '../905/712921';
-import { gY as _$$gY, IT as _$$IT, M4 } from '../905/713695';
+import { gY as _$$gY, IT as _$$IT, liveStoreInstance } from '../905/713695';
 import { SvgComponent } from '../905/714743';
 import { X as _$$X6 } from '../905/718513';
 import { tT as _$$tT } from '../905/723791';
@@ -262,7 +262,7 @@ import { getGroupOrDefault } from '../905/817247';
 import { z as _$$z4 } from '../905/821223';
 import { OrganizationType } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
-import { $ as _$$$3 } from '../905/834575';
+import { teamAPIClient } from '../905/834575';
 import { Cy } from '../905/844322';
 import { useCurrentUserOrg, useCurrentUserOrgId } from '../905/845253';
 import { BK, Um } from '../905/848862';
@@ -273,7 +273,7 @@ import { w as _$$w4 } from '../905/863010';
 import { h as _$$h3 } from '../905/864281';
 import { u as _$$u5 } from '../905/866761';
 import { generateUUIDv4 } from '../905/871474';
-import { S as _$$S5 } from '../905/872825';
+import { getValueOrFallback } from '../905/872825';
 import { VK, YK } from '../905/880488';
 import { E as _$$E1 } from '../905/881732';
 import { k as _$$k2 } from '../905/888808';
@@ -288,7 +288,7 @@ import { a as _$$a } from '../905/925868';
 import { oB as _$$oB, sf as _$$sf, j7 } from '../905/929976';
 import { J as _$$J8 } from '../905/931050';
 import { I as _$$I2 } from '../905/932503';
-import { xn as _$$xn, qL } from '../905/934145';
+import { ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
 import { lQ as _$$lQ } from '../905/934246';
 import { v as _$$v4 } from '../905/939922';
 import { f as _$$f } from '../905/940356';
@@ -462,7 +462,7 @@ import { SpaceAccessType } from '../figma_app/162807';
 import { buildUploadUrl, getInitialOptions, getSupportEmail, isGovCluster } from '../figma_app/169182';
 import { XZ } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
-import { Zp } from '../figma_app/188671';
+import { categoryBySlugQuery } from '../figma_app/188671';
 import { FAccessLevelType, FEntityType, FFileType, FMemberRoleType, FOrganizationLevelType, FOrganizationRoleType, FPaymentHealthStatusType, FPlanLimitationType, FPlanNameType, FProductAccessType, FResourceCategoryType, FStudentTeamStatusType, FTemplateCategoryType, FUserRoleType } from '../figma_app/191312';
 import { areColorsEqual, isColorDarkByLuminance, parseColor, whiteColor } from '../figma_app/191804';
 import { K as _$$K5, xS as _$$xS } from '../figma_app/193867';
@@ -484,17 +484,17 @@ import { ZF } from '../figma_app/258114';
 import { N as _$$N } from '../figma_app/268271';
 import { nB as _$$nB, r1 as _$$r5, Y9 as _$$Y3, vo } from '../figma_app/272243';
 import { isMakeDiscoveryEnabled, isResourceHubEnabled, isResourceHubInternalSearchEnabled, isResourceHubProfilesEnabled, isTntSavingEnabled } from '../figma_app/275462';
-import { q as _$$q3 } from '../figma_app/277543';
+import { DesignToolType } from '../figma_app/277543';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { fn as _$$fn, ih as _$$ih, E9, Lm, Mh, Mi } from '../figma_app/297957';
 import { y4 } from '../figma_app/298277';
 import { filterPublishedResources, filterResourcesByMatch, filterResourcesByOrgOrPublisher } from '../figma_app/300692';
-import { vt as _$$vt2 } from '../figma_app/306946';
+import { ResourceTypeEnum } from '../figma_app/306946';
 import { sx as _$$sx3 } from '../figma_app/307841';
 import { hp as _$$hp, vg as _$$vg, xs as _$$xs, DF, LP } from '../figma_app/310688';
 import { DISABLED_TEAM_CREATION_BUTTON_HOVERED, FILE_BROWSER_FILE_CLICKED, logAndTrackCTA, TEAM_CREATION_BUTTON_HOVERED_TIMEOUT, trackFileBrowserFileClick, trackFileBrowserFileClicked, trackFileBrowserLoaded, trackFileBrowserPageVisit, trackUserEvent } from '../figma_app/314264';
-import { a4 as _$$a8, ed as _$$ed, vA as _$$vA, ye as _$$ye, RA, Rd } from '../figma_app/321395';
-import { e as _$$e12, H as _$$H2 } from '../figma_app/324237';
+import { useSafeRouteStateInstance, useRouteStateInstance, useRouteQuery, useRouteMatchExists, useSafeRouteParams, useRouteParams } from '../figma_app/321395';
+import { SortOptions, getAllTimeSortOption } from '../figma_app/324237';
 import { fO as _$$fO, ZM } from '../figma_app/329496';
 import { Jt as _$$Jt2, GR, HD } from '../figma_app/330108';
 import { h as _$$h7 } from '../figma_app/334471';
@@ -506,7 +506,7 @@ import { toggleFigmentDebugger } from '../figma_app/347406';
 import { aO as _$$aO } from '../figma_app/348887';
 import { convertCamelToSnakeWithLeading, generateProtoLinkUrl, mapProjectSummary } from '../figma_app/349248';
 import { l_ as _$$l_, u8 as _$$u2, Fx, N$, Yn, Z_ } from '../figma_app/350203';
-import { jT as _$$jT } from '../figma_app/354658';
+import { ResourceHubResourceRoute } from '../figma_app/354658';
 import { s$ as _$$s$ } from '../figma_app/361035';
 import { z as _$$z1 } from '../figma_app/369596';
 import { bE as _$$bE } from '../figma_app/375098';
@@ -518,7 +518,7 @@ import { xF as _$$xF, WG } from '../figma_app/405906';
 import { QJ } from '../figma_app/411744';
 import { aq as _$$aq } from '../figma_app/412189';
 import { o8 as _$$o2, sm as _$$sm } from '../figma_app/425283';
-import { o_ as _$$o_, J2, qY, ws, XW, zL } from '../figma_app/427318';
+import { hasLibraryKey, mapVtToFileType, getMainContent, hasResourceType, hasContent, isFigmakeTemplate } from '../figma_app/427318';
 import { zE as _$$zE, Jw } from '../figma_app/435872';
 import { f as _$$f5 } from '../figma_app/436731';
 import { $n as _$$$n, wv } from '../figma_app/439493';
@@ -559,7 +559,7 @@ import { oN as _$$oN } from '../figma_app/583114';
 import { aH as _$$aH } from '../figma_app/591738';
 import { getExperimentConfigAsync, selectExperimentConfigHook } from '../figma_app/594947';
 import { cD as _$$cD, cU as _$$cU, ol as _$$ol, zs } from '../figma_app/598018';
-import { zq } from '../figma_app/598412';
+import { getCurrentLocale } from '../figma_app/598412';
 import { z6 as _$$z10, MR, qp } from '../figma_app/598926';
 import { bP, IQ } from '../figma_app/600006';
 import { a as _$$a0, z as _$$z8 } from '../figma_app/601188';
@@ -573,7 +573,7 @@ import { A5 as _$$A11, J5, jT } from '../figma_app/623414';
 import { fileActionEnum, getTeamUrl, paymentActionRequirementEnum } from '../figma_app/630077';
 import { BaseLinkComponent, BigButtonPrimaryTracked, BigTextInput, ButtonBasePrimaryTracked, ButtonBaseReversedContainer, ButtonLinkTracked, ButtonNegativeTracked, ButtonSecondary, ButtonSecondaryLinkTracked, ButtonSecondaryTracked, clickableBaseLinkTracked, linkWithTracking, trackedButtonClickHandler } from '../figma_app/637027';
 import { Sh, yJ } from '../figma_app/637328';
-import { Gu } from '../figma_app/640564';
+import { getDefaultBrowseOptions } from '../figma_app/640564';
 import { canAdminOrg, canAdminTeam, canEditTeam, canMemberOrg, canOwnTeam, getPermissionsState, getPermissionsStateMemoized, getRolesForUserAndTeam, hasMinRole, hasViewerRoleAccessOnTeam, isOrgUserExternallyRestrictedFromState } from '../figma_app/642025';
 import { GG } from '../figma_app/643789';
 import { DashboardSection, WorkspaceTab } from '../figma_app/650409';
@@ -602,15 +602,15 @@ import { a9 as _$$a3, LQ } from '../figma_app/741211';
 import { M as _$$M, s as _$$s4 } from '../figma_app/749682';
 import { FileType, FilterType, getFileTypeIndex, getResourceSortField, getSortFieldKey, getSortFieldProperty, getSortOrderKey, getViewModeKey, PermissionAction, PermissionType, SortField, SortOrder, ViewMode } from '../figma_app/756995';
 import { ColorOptions } from '../figma_app/763686';
-import { _4 as _$$_6 } from '../figma_app/773663';
-import { mk as _$$mk2, yl as _$$yl, K2 } from '../figma_app/777551';
+import { syncEditorResourceWithHistory } from '../figma_app/773663';
+import { getResourceUserCount, getResourceTypesForBrowse, getResourceName } from '../figma_app/777551';
 import { K0 } from '../figma_app/778125';
 import { BrowserInfo, getIsAndroidOrIphoneNotFigmaMobile, isAndroidOrIphoneNotFigmaMobile, isMobilePlatformNotFigmaMobile } from '../figma_app/778880';
 import { parseMsNumber, parsePxInt, parsePxNumber } from '../figma_app/783094';
 import { R as _$$R10 } from '../figma_app/787018';
 import { gY as _$$gY2 } from '../figma_app/797994';
 import { az as _$$az, md as _$$md2, rE as _$$rE, Ro, z6 } from '../figma_app/805373';
-import { pj as _$$pj, Dv } from '../figma_app/805898';
+import { useCategoryResourceHandler, ResourceHubCategoryRoute } from '../figma_app/805898';
 import { memoizeByArgs } from '../figma_app/815945';
 import { _Z as _$$_Z, sP as _$$sP } from '../figma_app/819288';
 import { Agb } from '../figma_app/822011';
@@ -648,7 +648,7 @@ import { getAdminUsers, getCurrentUserOrgUser, getTopAdminUsers } from '../figma
 import { E as _$$E7, J as _$$J4 } from '../figma_app/953812';
 import { Wf as _$$Wf, zq as _$$zq, FK, zx } from '../figma_app/961422';
 import { _l as _$$_l, dm as _$$dm, eP as _$$eP, gN as _$$gN, h3 as _$$h2, p5 as _$$p2, Dj, Dw, RH, T5, UN, V3 } from '../figma_app/976345';
-import { au as _$$au, tv as _$$tv, Om, VR } from '../figma_app/979714';
+import { ResourceHubHomeRouteClass, useResourceFuid, useResourceRouteParams, RESOURCE_ROUTE } from '../figma_app/979714';
 import { o8 as _$$o4 } from '../figma_app/982327';
 import { yJ as _$$yJ2, I1, Pg } from '../figma_app/990058';
 import { L as _$$L7 } from '../figma_app/990299';
@@ -666,7 +666,7 @@ import { A as _$$A8 } from '../svg/507015';
 import { A as _$$A18 } from '../svg/616591';
 import { A as _$$A26 } from '../svg/792557';
 import { A as _$$A16 } from '../svg/821527';
-import { dO as _$$dO, rd as _$$rd, qh } from '../vendor/130505';
+import { Switch, Redirect, Route } from '../vendor/130505';
 import gr from '../vendor/223926';
 import { eJ as _$$eJ } from '../vendor/352483';
 import { A as _$$A1 } from '../vendor/850789';
@@ -1288,7 +1288,7 @@ function rh(e) {
   let r = useSelector(e => e.selectedView);
   let s = _$$p4();
   let n = e.favoritedFile.file;
-  let o = M4.useFile(n?.key).data;
+  let o = liveStoreInstance.useFile(n?.key).data;
   let d = n?.project?.canView;
   let u = useSelector(e => e.dropdownShown);
   let m = _$$e5();
@@ -1416,7 +1416,7 @@ function rv(e) {
   let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => getI18nString('file_browser.copy_link_to_project'), () => {
-    let r = EE(e.projectId, e.orgId);
+    let r = getProjectUrl(e.projectId, e.orgId);
     t(_$$S({
       url: r
     }));
@@ -1562,7 +1562,7 @@ function rR(e) {
   let n = useSelector(e => e.currentTeamId);
   let l = useSelector(e => e.dropdownShown);
   let d = e.favorite.file;
-  let c = M4.useFile(d.key).data;
+  let c = liveStoreInstance.useFile(d.key).data;
   let m = NN();
   let _ = r !== null;
   let p = !!n;
@@ -3280,7 +3280,7 @@ function aX(e) {
   }
   let _ = async () => {
     try {
-      await _$$$3.requestTeamRole({
+      await teamAPIClient.requestTeamRole({
         teamId: e.team.id
       });
       t(VisualBellActions.enqueue({
@@ -3826,8 +3826,8 @@ let sC = {
 function sL() {
   let e = useDispatch();
   let t = useSelector(e => e.userFlags);
-  let r = Om();
-  let s = _$$tv();
+  let r = useResourceRouteParams();
+  let s = useResourceFuid();
   return t[w3] ? null : jsx(TrackingProvider, {
     name: _$$e7.COMMUNITY_MOVED_TO_RESOURCE_HUB_BANNER,
     children: jsx('div', {
@@ -3850,7 +3850,7 @@ function sL() {
           'aria-label': getI18nString('community.resource_hub.take_me_there'),
           ..._$$xk(sD.button),
           'onClick': () => {
-            customHistory.push(new _$$au({
+            customHistory.push(new ResourceHubHomeRouteClass({
               ...r,
               tab: N$.COMMUNITY
             }, s).href);
@@ -3878,7 +3878,7 @@ function sU() {
     e(_$$sf({
       view: 'communityHub',
       subView: 'searchAndBrowse',
-      data: Gu()
+      data: getDefaultBrowseOptions()
     }));
   };
   return jsxs(TrackedAnchor, {
@@ -4964,7 +4964,7 @@ function nn(e) {
     }), _$$e7.PAGE_HEADER_DROPDOWN)]
   });
 }
-let n_ = M4.Mutation(async e => {
+let n_ = liveStoreInstance.Mutation(async e => {
   await _$$u4.updateDescription(e);
 });
 let np = registerModal(({
@@ -5086,7 +5086,7 @@ function nw({
     noBorder: !0
   });
 }
-let nj = M4.Mutation(async e => {
+let nj = liveStoreInstance.Mutation(async e => {
   await _$$u4.updateColor(e);
 });
 function nT({
@@ -6729,15 +6729,15 @@ let o9 = {
   WEBSITES: 'websites'
 };
 function le(e) {
-  let t = Om();
-  let r = _$$tv();
+  let t = useResourceRouteParams();
+  let r = useResourceFuid();
   return useMemo(() => Object.fromEntries(e.map(({
     key: e,
     category: a,
     resource_type: s,
     editor_type: i,
     tag: n
-  }) => [e, new Dv({
+  }) => [e, new ResourceHubCategoryRoute({
     ...t,
     categorySlug: a,
     tagSlug: n
@@ -6814,10 +6814,10 @@ function lo({
     getTriggerProps,
     manager
   } = _$$b5();
-  let o = Rd(Dv);
+  let o = useRouteParams(ResourceHubCategoryRoute);
   let l = o?.categorySlug;
   let d = o?.tagSlug;
-  let c = _$$vA(Dv);
+  let c = useRouteQuery(ResourceHubCategoryRoute);
   let m = c?.resource_type;
   let _ = l && function (e, t) {
     if (!e) return null;
@@ -7185,8 +7185,8 @@ function lg() {
 }
 function lx() {
   let e = getI18nString('community.profiles.saved');
-  let t = Om();
-  let r = _$$tv() ?? void 0;
+  let t = useResourceRouteParams();
+  let r = useResourceFuid() ?? void 0;
   return jsx(ButtonPrimitive, {
     'aria-label': e,
     'className': U()(_$$x4, Mg, _$$pU),
@@ -7230,7 +7230,7 @@ function lT({
   useEffect(() => {
     e > 0 && d.current === null && (d.current = lj(e));
   }, [e]);
-  let c = zq();
+  let c = getCurrentLocale();
   let [{
     data: u,
     status: m,
@@ -8066,15 +8066,15 @@ function lX({
         header: getI18nString('categories.brainstorming'),
         categoryForQuery: LJ.brainstorming,
         categorySlug: LJ.brainstorming,
-        resourceType: _$$vt2.FIGJAM_TEMPLATE
+        resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       cooperTemplate: {
         key: 'cooperTemplate',
         header: getI18nString('categories.social_media_templates'),
         categoryForQuery: LJ.socialMediaTemplates,
         categorySlug: LJ.socialMediaTemplates,
-        resourceType: _$$vt2.COOPER_TEMPLATE_FILE,
-        resourceEditorType: _$$q3.COOPER,
+        resourceType: ResourceTypeEnum.COOPER_TEMPLATE_FILE,
+        resourceEditorType: DesignToolType.COOPER,
         apiEditorType: _$$k4.Editors.COOPER
       },
       dataTemplate: {
@@ -8082,19 +8082,19 @@ function lX({
         header: getI18nString('community.footer.data_templates'),
         categoryForQuery: LJ.dataTemplates,
         categorySlug: LJ.dataTemplates,
-        resourceType: _$$vt2.DESIGN_TEMPLATE
+        resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       designTemplate: {
         key: 'designTemplate',
         header: getI18nString('categories.design_templates'),
         categorySlug: LJ.designTemplates,
-        resourceType: _$$vt2.DESIGN_TEMPLATE
+        resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       designTools: {
         key: 'designTools',
         header: getI18nString('community.view_bar.plugins'),
         categorySlug: LJ.designTools,
-        resourceType: _$$vt2.PLUGIN,
+        resourceType: ResourceTypeEnum.PLUGIN,
         isPlugin: !0
       },
       diagramming: {
@@ -8102,21 +8102,21 @@ function lX({
         header: getI18nString('categories.diagramming'),
         categoryForQuery: LJ.diagramming,
         categorySlug: LJ.diagramming,
-        resourceType: _$$vt2.FIGJAM_TEMPLATE
+        resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       education: {
         key: 'education',
         header: getI18nString('categories.education'),
         categoryForQuery: LJ.education,
         categorySlug: LJ.education,
-        resourceType: _$$vt2.DESIGN_TEMPLATE
+        resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       figJamTemplate: {
         key: 'figJamTemplate',
         header: getI18nString('community.resource_hub.figjam_templates'),
         categorySlug: LJ.whiteboarding,
-        resourceType: _$$vt2.FIGJAM_TEMPLATE,
-        resourceEditorType: _$$q3.WHITEBOARD,
+        resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE,
+        resourceEditorType: DesignToolType.WHITEBOARD,
         apiEditorType: _$$k4.Editors.FIGJAM
       },
       funAndGames: {
@@ -8124,7 +8124,7 @@ function lX({
         header: getI18nString('categories.fun_games'),
         categoryForQuery: LJ.funGames,
         categorySlug: LJ.funGames,
-        resourceType: _$$vt2.WIDGET,
+        resourceType: ResourceTypeEnum.WIDGET,
         apiResourceType: ResourceTypes.BrowseResourceTypes.WIDGETS
       },
       makeTemplate: {
@@ -8132,15 +8132,15 @@ function lX({
         header: getI18nString('community.resource_hub.make_shelf_header'),
         categoryForQuery: LJ.make,
         categorySlug: LJ.make,
-        resourceType: _$$vt2.FIGMAKE_TEMPLATE
+        resourceType: ResourceTypeEnum.FIGMAKE_TEMPLATE
       },
       presentationTemplate: {
         key: 'presentationTemplate',
         header: getI18nString('community.footer.presentations'),
         categoryForQuery: LJ.presentations,
         categorySlug: LJ.presentations,
-        resourceType: _$$vt2.SLIDE_TEMPLATE,
-        resourceEditorType: _$$q3.SLIDES,
+        resourceType: ResourceTypeEnum.SLIDE_TEMPLATE,
+        resourceEditorType: DesignToolType.SLIDES,
         apiEditorType: _$$k4.Editors.SLIDES
       },
       siteTemplate: {
@@ -8148,8 +8148,8 @@ function lX({
         header: getI18nString('categories.website_templates'),
         categoryForQuery: LJ.websiteTemplates,
         categorySlug: LJ.websiteTemplates,
-        resourceType: _$$vt2.SITE_TEMPLATE,
-        resourceEditorType: _$$q3.SITES,
+        resourceType: ResourceTypeEnum.SITE_TEMPLATE,
+        resourceEditorType: DesignToolType.SITES,
         apiEditorType: _$$k4.Editors.SITES
       },
       strategicPlanning: {
@@ -8157,36 +8157,36 @@ function lX({
         header: getI18nString('categories.strategic_planning'),
         categoryForQuery: LJ.strategicPlanning,
         categorySlug: LJ.strategicPlanning,
-        resourceType: _$$vt2.FIGJAM_TEMPLATE
+        resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       uiKits: {
         key: 'uiKits',
         header: getI18nString('categories.ui_kits'),
         categoryForQuery: LJ.uiKits,
         categorySlug: LJ.uiKits,
-        resourceType: _$$vt2.DESIGN_TEMPLATE
+        resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       },
       websiteTemplate: {
         key: 'websiteTemplate',
         header: getI18nString('categories.website_templates'),
         categoryForQuery: LJ.websiteTemplates,
         categorySlug: LJ.websiteTemplates,
-        resourceType: _$$vt2.DESIGN_TEMPLATE,
-        resourceEditorType: _$$q3.DESIGN
+        resourceType: ResourceTypeEnum.DESIGN_TEMPLATE,
+        resourceEditorType: DesignToolType.DESIGN
       },
       whiteboarding: {
         key: 'whiteboarding',
         header: getI18nString('categories.whiteboarding'),
         categoryForQuery: LJ.whiteboarding,
         categorySlug: LJ.whiteboarding,
-        resourceType: _$$vt2.FIGJAM_TEMPLATE
+        resourceType: ResourceTypeEnum.FIGJAM_TEMPLATE
       },
       wireframes: {
         key: 'wireframes',
         header: getI18nString('categories.wireframes'),
         categoryForQuery: LJ.wireframes,
         categorySlug: LJ.wireframes,
-        resourceType: _$$vt2.DESIGN_TEMPLATE
+        resourceType: ResourceTypeEnum.DESIGN_TEMPLATE
       }
     };
     let r = {
@@ -8291,7 +8291,7 @@ function lZ({
     loading
   } = lT({
     resourceCount: _$$l_,
-    resourceType: [_$$vt2.PLUGIN],
+    resourceType: [ResourceTypeEnum.PLUGIN],
     category: t,
     caller: _$$z8.RESOURCE_HUB,
     includeContent: !0
@@ -8422,7 +8422,7 @@ function l3(e, t) {
   });
   return {
     onIntersectionChange: useCallback((e, t) => {
-      t && (_$$o_(e) ? _trackResourceImpression(e) : ws(e) ? trackResourceImpression(e) : isPlugin(e) && _trackResourceImpression2(e));
+      t && (hasLibraryKey(e) ? _trackResourceImpression(e) : hasResourceType(e) ? trackResourceImpression(e) : isPlugin(e) && _trackResourceImpression2(e));
     }, [trackResourceImpression, _trackResourceImpression, _trackResourceImpression2]),
     flushAndResetImpressions: useCallback(() => {
       flushAndResetResourceImpressions();
@@ -8549,8 +8549,8 @@ function du({
   isTemplatesPublishingDisabledForOrg: t
 }) {
   let r;
-  let s = Om();
-  let i = _$$tv();
+  let s = useResourceRouteParams();
+  let i = useResourceFuid();
   let {
     color
   } = _$$G3();
@@ -8560,7 +8560,7 @@ function du({
     contextClicked: _$$e7.RESOURCE_HUB_NO_RESOURCES_UPSELL,
     forceOpenNewTab: !0
   });
-  let l = new _$$au({
+  let l = new ResourceHubHomeRouteClass({
     ...s,
     tab: N$.COMMUNITY
   }, i);
@@ -8631,12 +8631,12 @@ function dp({
   teamId: e
 }) {
   let t = useDispatch();
-  let r = Om();
-  let s = _$$tv();
+  let r = useResourceRouteParams();
+  let s = useResourceFuid();
   let {
     color
   } = _$$G3();
-  let o = new _$$au({
+  let o = new ResourceHubHomeRouteClass({
     ...r,
     tab: N$.COMMUNITY
   }, s);
@@ -8726,8 +8726,8 @@ function dx({
 function db({
   resourceTypeSlug: e
 }) {
-  let t = Om();
-  let r = _$$tv();
+  let t = useResourceRouteParams();
+  let r = useResourceFuid();
   let s = _$$i_(e);
   let i = function (e) {
     switch (e) {
@@ -8822,11 +8822,11 @@ function dv({
     loading: _loading,
     hasNextPage: _hasNextPage
   } = GO({
-    resourceType: _$$vt2.WIDGET,
+    resourceType: ResourceTypeEnum.WIDGET,
     orgId: r,
     teamId: s,
     planTier: e,
-    sortBy: _$$e12.Browse.ALL_TIME,
+    sortBy: SortOptions.Browse.ALL_TIME,
     isTemplatesPublishingDisabledForOrg: !!t
   });
   if (m || f || x || y || loading || _loading) {
@@ -9036,8 +9036,8 @@ function dI({
   resources: t,
   hasNextPage: r
 }) {
-  let s = Om();
-  let i = _$$tv();
+  let s = useResourceRouteParams();
+  let i = useResourceFuid();
   return t && t.length !== 0 ? jsx(l$, {
     header: _$$i_(_$$M2.PLUGINS),
     route: new _$$U5({
@@ -9076,8 +9076,8 @@ function dC({
   resourceImpressionTracking: s,
   numberOfTiles: i
 }) {
-  let n = Om();
-  let o = _$$tv();
+  let n = useResourceRouteParams();
+  let o = useResourceFuid();
   if (t.length === 0) return null;
   let l = !!r || t.length > i;
   return jsx(l$, {
@@ -9104,7 +9104,7 @@ function dk({
   let n;
   let {
     tab
-  } = RA(_$$au);
+  } = useSafeRouteParams(ResourceHubHomeRouteClass);
   switch (tab) {
     case N$.INTERNAL:
       n = jsx(dv, {
@@ -9133,12 +9133,12 @@ function dF() {
   let {
     templatesTeamId,
     resourceTypeSlug
-  } = Rd(_$$U5) ?? {};
+  } = useRouteParams(_$$U5) ?? {};
   let a = null;
   if (resourceTypeSlug) {
     try {
       let e = W6(resourceTypeSlug);
-      e.length > 0 && e[0] && (a = J2(e[0]));
+      e.length > 0 && e[0] && (a = mapVtToFileType(e[0]));
     } catch {}
   }
   let s = e.data?.type === FOrganizationLevelType.ORG ? templatesTeamId : e.data?.key.parentId;
@@ -9181,7 +9181,7 @@ function dL({
   resourceImpressionTracking: n
 }) {
   let o;
-  let l = J2(e);
+  let l = mapVtToFileType(e);
   let d = _$$X4();
   let {
     onIntersectionChange
@@ -9246,7 +9246,7 @@ function dD({
 }) {
   let n;
   let l = getFeatureFlags().cooper;
-  let d = _$$a8(_$$U5);
+  let d = useSafeRouteStateInstance(_$$U5);
   let {
     resourceTypeSlug,
     templatesTeamId
@@ -9261,12 +9261,12 @@ function dD({
     customHistory.redirect(i.href);
     return null;
   }
-  let f = W6(resourceTypeSlug).filter(e => l || e !== _$$vt2.COOPER_TEMPLATE_FILE);
-  return f.length === 0 ? null : (f[0] && Pe(e, f[0]) && (n = f[0] === _$$vt2.PLUGIN ? jsx(dB, {
+  let f = W6(resourceTypeSlug).filter(e => l || e !== ResourceTypeEnum.COOPER_TEMPLATE_FILE);
+  return f.length === 0 ? null : (f[0] && Pe(e, f[0]) && (n = f[0] === ResourceTypeEnum.PLUGIN ? jsx(dB, {
     orgId: t ?? void 0,
     resourceImpressionTracking: onIntersectionChange,
     planTier: e
-  }) : f[0] === _$$vt2.WIDGET || resourceTypeSlug === _$$M2.RECENTLY_ADDED_TEMPLATES ? jsx(dM, {
+  }) : f[0] === ResourceTypeEnum.WIDGET || resourceTypeSlug === _$$M2.RECENTLY_ADDED_TEMPLATES ? jsx(dM, {
     resourceTypes: f,
     orgId: t ?? void 0,
     teamId: r ?? void 0,
@@ -9307,7 +9307,7 @@ function dM({
     orgId: t,
     teamId: r,
     includeContent: !0,
-    sortBy: e.some(e => [_$$vt2.SLIDE_TEMPLATE, _$$vt2.COOPER_TEMPLATE_FILE, _$$vt2.FIGJAM_TEMPLATE].includes(e)) ? _$$e12.Browse.PUBLISHED_AT : _$$e12.Browse.ALL_TIME
+    sortBy: e.some(e => [ResourceTypeEnum.SLIDE_TEMPLATE, ResourceTypeEnum.COOPER_TEMPLATE_FILE, ResourceTypeEnum.FIGJAM_TEMPLATE].includes(e)) ? SortOptions.Browse.PUBLISHED_AT : SortOptions.Browse.ALL_TIME
   });
   if (!loading && (!resources || resources.length === 0)) {
     return jsx(du, {
@@ -9386,10 +9386,10 @@ function dY({
 function dJ({
   links: e
 }) {
-  let t = _$$a8(Dv);
+  let t = useSafeRouteStateInstance(ResourceHubCategoryRoute);
   let {
     tagSlug
-  } = RA(Dv);
+  } = useSafeRouteParams(ResourceHubCategoryRoute);
   let i = useRef(null);
   let [n, o] = useState(!1);
   let [l, d] = useState(!1);
@@ -9527,8 +9527,8 @@ function dX({
   category: e,
   showTags: t = !1
 }) {
-  let r = _$$a8(Dv);
-  let s = _$$S5(e.url_slug, LJ);
+  let r = useSafeRouteStateInstance(ResourceHubCategoryRoute);
+  let s = getValueOrFallback(e.url_slug, LJ);
   if (!s) return null;
   let i = _$$m2(e, s, t, r);
   return jsx('div', {
@@ -9540,8 +9540,8 @@ function dX({
 }
 function dZ() {
   let e = _$$X4();
-  let t = _$$a8(Dv);
-  _$$pj(t);
+  let t = useSafeRouteStateInstance(ResourceHubCategoryRoute);
+  useCategoryResourceHandler(t);
   let r = t.params;
   let {
     categorySlug,
@@ -9549,11 +9549,11 @@ function dZ() {
   } = r;
   let [o, l] = useState(null);
   let d = t.search;
-  let c = zq();
+  let c = getCurrentLocale();
   let [{
     data: u,
     status: m
-  }] = setupResourceAtomHandler(Zp({
+  }] = setupResourceAtomHandler(categoryBySlugQuery({
     categorySlug,
     tagSlug,
     locale: c
@@ -9655,7 +9655,7 @@ function d8({
   isCommunityTabDisabledForOrg: r
 }) {
   let s = useDispatch();
-  let n = _$$a8(_$$au);
+  let n = useSafeRouteStateInstance(ResourceHubHomeRouteClass);
   let o = useSelector(e => e.userFlags);
   let l = e => {
     e !== N$.COMMUNITY || o[w3] || s(postUserFlag({
@@ -9710,9 +9710,9 @@ function cs({
   orgOrTeamName: t
 }) {
   let r = UX();
-  let i = Om();
-  let n = _$$tv();
-  let o = RA(_$$au).tab;
+  let i = useResourceRouteParams();
+  let n = useResourceFuid();
+  let o = useSafeRouteParams(ResourceHubHomeRouteClass).tab;
   let [l, d] = useState(o);
   useEffect(() => {
     d(o);
@@ -9759,13 +9759,13 @@ function ci() {
     setSelectedDropdownTab
   } = function () {
     let e = _$$P4();
-    let t = Rd(_$$au)?.tab || e;
+    let t = useRouteParams(ResourceHubHomeRouteClass)?.tab || e;
     let [r, a] = useState(t);
     let i = r === N$.INTERNAL ? IQ : bP;
     let n = UX();
     let o = !!n;
-    let l = Om();
-    let d = _$$tv();
+    let l = useResourceRouteParams();
+    let d = useResourceFuid();
     return {
       onSubmit: e => {
         let t;
@@ -9777,7 +9777,7 @@ function ci() {
         }).href, e.length) {
           customHistory.push(t);
         } else if (o) {
-          let e = new _$$au({
+          let e = new ResourceHubHomeRouteClass({
             ...l,
             tab: r
           }, d).href;
@@ -9870,8 +9870,8 @@ function co({
 }) {
   let {
     tab
-  } = RA(_$$au);
-  let s = !!_$$ed(_$$jT);
+  } = useSafeRouteParams(ResourceHubHomeRouteClass);
+  let s = !!useRouteStateInstance(ResourceHubResourceRoute);
   let i = tab === N$.COMMUNITY && !t && !s && !isResourceHubInternalSearchEnabled();
   let n = jsx('div', {
     className: 'xqyf9gi',
@@ -9892,10 +9892,10 @@ function cl({
   isCommunityTabDisabledForOrg: r
 }) {
   let s = !!v$();
-  let i = _$$ye(_$$au, !0);
-  let n = _$$ed(Dv);
-  let o = _$$ed(_$$U5);
-  let l = _$$ed(_$$e11);
+  let i = useRouteMatchExists(ResourceHubHomeRouteClass, !0);
+  let n = useRouteStateInstance(ResourceHubCategoryRoute);
+  let o = useRouteStateInstance(_$$U5);
+  let l = useRouteStateInstance(_$$e11);
   let {
     templatesByTeam
   } = dF();
@@ -9924,7 +9924,7 @@ let cd = {
 };
 function ch() {
   let e = useDispatch();
-  let t = RA(_$$jT);
+  let t = useSafeRouteParams(ResourceHubResourceRoute);
   let r = t.apiResourceType;
   let n = t.resourceId;
   let [o] = setupResourceAtomHandler(_$$Z({
@@ -9932,7 +9932,7 @@ function ch() {
     id: n
   }));
   let l = o.data;
-  let d = l && XW(l) ? qY(l) : l;
+  let d = l && hasContent(l) ? getMainContent(l) : l;
   useEffect(() => {
     d && _$$S7(e, d);
   }, [e, d]);
@@ -9941,7 +9941,7 @@ function ch() {
   let m = BY();
   let _ = _$$W2(r, n, u, m);
   if (!l || !d) return jsx(Fragment, {});
-  let p = zL(l);
+  let p = isFigmakeTemplate(l);
   return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_COMMUNITY_RESOURCE_DETAIL_PAGE,
     properties: _,
@@ -10007,7 +10007,7 @@ let cy = {
 };
 function cw() {
   let e = getUserId() ?? void 0;
-  let t = _$$a8(_$$e11);
+  let t = useSafeRouteStateInstance(_$$e11);
   let r = _$$X4();
   let {
     resourceType
@@ -10051,7 +10051,7 @@ function cj({
     loading,
     hasNextPage
   } = lT({
-    resourceType: _$$yl(ResourceTypeSubset.FILES),
+    resourceType: getResourceTypesForBrowse(ResourceTypeSubset.FILES),
     resourceCount: 2 * t.numberOfTiles,
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: e,
@@ -10063,7 +10063,7 @@ function cj({
     loading: _loading2,
     hasNextPage: _hasNextPage2
   } = lT({
-    resourceType: _$$yl(ResourceTypeSubset.PLUGINS),
+    resourceType: getResourceTypesForBrowse(ResourceTypeSubset.PLUGINS),
     resourceCount: Fx,
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: e,
@@ -10075,7 +10075,7 @@ function cj({
     loading: _loading3,
     hasNextPage: _hasNextPage3
   } = lT({
-    resourceType: _$$yl(ResourceTypeSubset.WIDGETS),
+    resourceType: getResourceTypesForBrowse(ResourceTypeSubset.WIDGETS),
     resourceCount: 2 * t.numberOfTiles,
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: e,
@@ -10133,7 +10133,7 @@ function cT({
   }, {
     fetchNextPage: u
   }] = setupResourceAtomHandler(_$$a0.ResourcesPaginatedQuery({
-    resourceType: _$$yl(e),
+    resourceType: getResourceTypesForBrowse(e),
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: t,
     pageSize: _$$u2,
@@ -10175,8 +10175,8 @@ function cE({
   hasNextPage: i,
   resourceImpressionTracking: n
 }) {
-  let o = Om();
-  let l = _$$tv();
+  let o = useResourceRouteParams();
+  let l = useResourceFuid();
   if (e.length === 0) return null;
   let d = !!i || e.length > 2 * s;
   return jsx(l$, {
@@ -10197,8 +10197,8 @@ function cI({
   hasNextPage: t,
   resourceImpressionTracking: r
 }) {
-  let s = Om();
-  let i = _$$tv();
+  let s = useResourceRouteParams();
+  let i = useResourceFuid();
   return e.length === 0 ? null : jsx(l$, {
     header: getI18nString('community.view_bar.plugins'),
     content: jsx(_$$M3, {
@@ -10223,7 +10223,7 @@ function cO({
 }) {
   let s = _$$e15();
   let i = s instanceof bP ? N$.COMMUNITY : N$.INTERNAL;
-  let n = _$$tv();
+  let n = useResourceFuid();
   let o = _$$v6(t);
   let l = (e, t) => {
     let r = s.copyWith({}, {
@@ -10307,7 +10307,7 @@ function cF({
 let cP = e => ({
   query: e.search.query ?? '',
   editor_type: e.search.editor_type ?? _$$k4.Editors.ALL,
-  price: e.search.price ?? _$$C3.Price.ALL,
+  price: e.search.price ?? PricingOptions.Price.ALL,
   resource_type: e.search.resource_type ?? ResourceTypeSubset.FILES
 });
 function cL({
@@ -10316,7 +10316,7 @@ function cL({
 }) {
   let r = !!(e || t);
   let i = _$$e15();
-  _$$_6(i, r);
+  syncEditorResourceWithHistory(i, r);
   let n = cP(i);
   let o = n.resource_type;
   let {
@@ -10331,7 +10331,7 @@ function cL({
     resourceType: n.resource_type,
     editorType: n.editor_type ?? _$$k4.Editors.ALL,
     price: n.price,
-    sortBy: _$$H2()
+    sortBy: getAllTimeSortOption()
   }), [n]);
   useEffect(() => {
     flushAndResetResourceImpressions();
@@ -10343,7 +10343,7 @@ function cL({
     query: n.query,
     editor_type: n.editor_type,
     price: n.price,
-    sort_by: _$$e12.Search.RELEVANCY,
+    sort_by: SortOptions.Search.RELEVANCY,
     org_id: e,
     team_id: t
   }), [n.query, n.editor_type, n.price, e, t]), o);
@@ -10392,8 +10392,8 @@ function cL({
 }
 function cD() {
   let e = useDispatch();
-  let t = Om();
-  let r = _$$tv();
+  let t = useResourceRouteParams();
+  let r = useResourceFuid();
   let n = useCurrentPrivilegedPlan('ResourceHubApp');
   let o = _$$LQ(n);
   let l = isResourceHubInternalSearchEnabled();
@@ -10406,7 +10406,7 @@ function cD() {
   let f = useMemo(() => {
     let e = N$.INTERNAL;
     n.status === 'loaded' && n.data?.tier === FPlanNameType.STARTER && (e = N$.COMMUNITY);
-    return new _$$au({
+    return new ResourceHubHomeRouteClass({
       ...t,
       tab: e
     }, r);
@@ -10418,40 +10418,40 @@ function cD() {
     children: jsx(Rj.Provider, {
       value: _$$mk.RESOURCE_HUB,
       children: jsx(UI3ConditionalWrapper, {
-        children: jsx(qh, {
-          path: VR,
+        children: jsx(Route, {
+          path: RESOURCE_ROUTE,
           children: jsxs('div', {
             className: 'xv90nub x78see',
             children: [jsx(co, {
               orgOrTeamName: n.data?.name,
               isCommunityTabDisabledForOrg: o
-            }), jsxs(_$$dO, {
-              children: [jsx(qh, {
-                path: qL.path,
+            }), jsxs(Switch, {
+              children: [jsx(Route, {
+                path: ResourceHubProfileRouteState.path,
                 children: !o && d ? jsx(_$$P3, {
                   fallbackRedirectRoute: f
-                }) : jsx(_$$rd, {
+                }) : jsx(Redirect, {
                   to: f.to
                 })
-              }), jsx(qh, {
-                path: _$$jT.path,
-                children: o ? jsx(_$$rd, {
+              }), jsx(Route, {
+                path: ResourceHubResourceRoute.path,
+                children: o ? jsx(Redirect, {
                   to: f.to
                 }) : jsx(ch, {})
-              }), jsx(qh, {
+              }), jsx(Route, {
                 path: bP.path,
-                children: o ? jsx(_$$rd, {
+                children: o ? jsx(Redirect, {
                   to: f.to
                 }) : jsx(cL, {})
-              }), jsx(qh, {
+              }), jsx(Route, {
                 path: IQ.path,
                 children: l && (c || u) ? jsx(cL, {
                   currentOrgId: c,
                   currentTeamId: u
-                }) : jsx(_$$rd, {
+                }) : jsx(Redirect, {
                   to: f.to
                 })
-              }), jsx(qh, {
+              }), jsx(Route, {
                 path: _$$U5.path,
                 children: jsx(dD, {
                   planTier: n.data?.tier ?? null,
@@ -10459,18 +10459,18 @@ function cD() {
                   currentTeamId: u,
                   fallbackRedirectRoute: f
                 })
-              }), jsx(qh, {
+              }), jsx(Route, {
                 path: _$$e11.path,
-                children: !o && p ? jsx(cw, {}) : jsx(_$$rd, {
+                children: !o && p ? jsx(cw, {}) : jsx(Redirect, {
                   to: f.to
                 })
-              }), jsx(qh, {
-                path: Dv.path,
-                children: o ? jsx(_$$rd, {
+              }), jsx(Route, {
+                path: ResourceHubCategoryRoute.path,
+                children: o ? jsx(Redirect, {
                   to: f.to
                 }) : jsx(dZ, {})
-              }), jsx(qh, {
-                path: _$$au.path,
+              }), jsx(Route, {
+                path: ResourceHubHomeRouteClass.path,
                 children: jsx(dk, {
                   planTier: n.data?.tier ?? null,
                   currentOrgId: c,
@@ -10478,7 +10478,7 @@ function cD() {
                   isCommunityTabDisabledForOrg: o,
                   isTemplatesPublishingDisabledForOrg: !_
                 })
-              }), jsx(_$$rd, {
+              }), jsx(Redirect, {
                 to: f.to
               })]
             })]
@@ -10489,8 +10489,8 @@ function cD() {
   })) : null;
 }
 function cM() {
-  let e = Om();
-  let t = _$$tv();
+  let e = useResourceRouteParams();
+  let t = useResourceFuid();
   return e ? jsx(cB, {
     sharedRouteParams: e,
     sharedSearchParams: t
@@ -10507,11 +10507,11 @@ function cB({
     templatesByTeam
   } = dF();
   let m = [];
-  let _ = Rd(_$$au)?.tab || N$.INTERNAL;
+  let _ = useRouteParams(ResourceHubHomeRouteClass)?.tab || N$.INTERNAL;
   let p = _ === N$.COMMUNITY ? getI18nString('community.resource_hub.templates_and_tools_from_community') : getI18nString('sidebar.templates_and_tools');
   m = [{
     text: p,
-    to: new _$$au({
+    to: new ResourceHubHomeRouteClass({
       ...e,
       tab: _
     }, t).href,
@@ -10520,9 +10520,9 @@ function cB({
       text: p
     }
   }];
-  let g = _$$ed(Dv);
+  let g = useRouteStateInstance(ResourceHubCategoryRoute);
   let h = !!g;
-  let x = _$$ed(_$$jT);
+  let x = useRouteStateInstance(ResourceHubResourceRoute);
   let b = !!x;
   let v = h || b;
   useEffect(() => {
@@ -10538,11 +10538,11 @@ function cB({
   });
   let T = g?.params.categorySlug || j.data?.category_slug || '';
   let E = g?.params.tagSlug || '';
-  let I = zq();
+  let I = getCurrentLocale();
   let [{
     data: C,
     status: S
-  }] = setupResourceAtomHandler(Zp({
+  }] = setupResourceAtomHandler(categoryBySlugQuery({
     categorySlug: T,
     tagSlug: E,
     locale: I
@@ -10570,14 +10570,14 @@ function cB({
     categoryRoute: i
   }) {
     if (!e) return [];
-    let n = _$$S5(t?.url_slug, LJ);
-    let o = _$$S5(e.url_slug, LJ);
+    let n = getValueOrFallback(t?.url_slug, LJ);
+    let o = getValueOrFallback(e.url_slug, LJ);
     return [t && n && {
       text: lr(n, void 0, i?.search.resource_type) || getTranslatedDynamicContent(t.i18n_meta?.title, t.title),
       to: i ? i.copyWith({
         categorySlug: n,
         tagSlug: void 0
-      }).href : new Dv({
+      }).href : new ResourceHubCategoryRoute({
         ...a,
         categorySlug: n
       }, {
@@ -10593,7 +10593,7 @@ function cB({
       to: i ? i.copyWith({
         categorySlug: o,
         tagSlug: void 0
-      }).href : new Dv({
+      }).href : new ResourceHubCategoryRoute({
         ...a,
         categorySlug: o
       }, {
@@ -10618,11 +10618,11 @@ function cB({
   let k = j.data;
   if (b && k && (r || !k.category_slug)) {
     let e = {
-      text: K2(k) || ''
+      text: getResourceName(k) || ''
     };
     m = [...m, e];
   }
-  let R = _$$ed(_$$e11);
+  let R = useRouteStateInstance(_$$e11);
   if (R) {
     let t = {
       text: getI18nString('community.profiles.saved'),
@@ -10644,7 +10644,7 @@ function cB({
     };
     m = [...m, e];
   }
-  let A = _$$ed(_$$U5);
+  let A = useRouteStateInstance(_$$U5);
   if (A) {
     let e = A.params.resourceTypeSlug;
     let t = {
@@ -10664,7 +10664,7 @@ function cB({
       }]);
     }
   }
-  if (_$$ye(qL)) {
+  if (useRouteMatchExists(ResourceHubProfileRouteState)) {
     let e = {
       text: getI18nString('community.profiles.community_profile')
     };
@@ -11761,7 +11761,7 @@ function me({
   let y = selectCurrentUser();
   let w = _$$_();
   let j = w.view === 'folder' ? w.folderId : null;
-  let T = M4.Folder.useValue(j).data;
+  let T = liveStoreInstance.Folder.useValue(j).data;
   let C = [y?.drafts_folder_id, y?.personal_drafts_folder_id].includes(T?.id);
   let {
     showing,
@@ -12969,7 +12969,7 @@ function mv(e) {
       viewMode: _.viewMode,
       onChangeSortOptions: t => {
         if (l) {
-          let r = t.sortKey === Dq.NAME ? SortField.NAME : SortField.TOUCHED_AT;
+          let r = t.sortKey === FolderSortKey.NAME ? SortField.NAME : SortField.TOUCHED_AT;
           let a = t.sortDesc ? SortOrder.DESC : SortOrder.ASC;
           n(JF({
             selectedView: e.selectedView,
@@ -16561,7 +16561,7 @@ function fu({
 }) {
   let t = useDispatch();
   return jsx('a', {
-    href: new _$$xn({
+    href: new ProfileRouteState({
       profileHandle: e
     }).href,
     className: _$$Be,
@@ -17667,14 +17667,14 @@ let f9 = {
 };
 let gt = atom(!1);
 let ga = gr;
-let gs = [_$$vt2.FIGMAKE_TEMPLATE, _$$vt2.SITE_TEMPLATE, _$$vt2.COOPER_TEMPLATE_FILE, _$$vt2.DESIGN_TEMPLATE, _$$vt2.SLIDE_TEMPLATE, _$$vt2.FIGJAM_TEMPLATE];
+let gs = [ResourceTypeEnum.FIGMAKE_TEMPLATE, ResourceTypeEnum.SITE_TEMPLATE, ResourceTypeEnum.COOPER_TEMPLATE_FILE, ResourceTypeEnum.DESIGN_TEMPLATE, ResourceTypeEnum.SLIDE_TEMPLATE, ResourceTypeEnum.FIGJAM_TEMPLATE];
 function gi() {
   let e = useSelector(e => e.user?.drafts_folder_id) ?? null;
   let {
     data
   } = useProjectFileCreationPermissions(e);
   return useMemo(() => gs.filter(e => {
-    let r = J2(e);
+    let r = mapVtToFileType(e);
     return r && data && canCreateFileType(data, r);
   }), [data]);
 }
@@ -17776,7 +17776,7 @@ function gf({
           likeCount: e.like_count,
           disableFontStyling: !0
         }), jsx(_$$i6, {
-          usageCount: _$$mk2(e),
+          usageCount: getResourceUserCount(e),
           disableFontStyling: !0
         })]
       })]
@@ -17785,9 +17785,9 @@ function gf({
 }
 let gg = 211 / 244;
 function gb() {
-  let e = Om();
-  let t = _$$tv();
-  let r = e && t ? new _$$au({
+  let e = useResourceRouteParams();
+  let t = useResourceFuid();
+  let r = e && t ? new ResourceHubHomeRouteClass({
     ...e,
     tab: N$.COMMUNITY
   }, t).href : '';
@@ -19007,7 +19007,7 @@ function g3() {
     }
   };
 }
-let g7 = M4.Query({
+let g7 = liveStoreInstance.Query({
   fetch: async e => {
     let t = await g6.getPlanFilterOptions({
       resource_type: e
@@ -19889,7 +19889,7 @@ function hM({
   }, [C, e]);
   let L = () => {
     C(SX({
-      where: Ah.FolderListView,
+      where: FolderViewType.FolderListView,
       team: {
         ...e,
         canEdit: !!t.canEditTeam
@@ -20084,7 +20084,7 @@ function hM({
                     ...e,
                     canEdit: i.canEditTeam
                   },
-                  where: Ah.FolderListView
+                  where: FolderViewType.FolderListView
                 }));
               },
               'children': renderI18nText('file_browser.team.add_project')
@@ -21865,7 +21865,7 @@ function xz({
   let c = useSelector(e => e.teams[d]);
   useEffect(() => {
     l(!0);
-    _$$$3.getDeleted({
+    teamAPIClient.getDeleted({
       teamId: d
     }).then(({
       data: e

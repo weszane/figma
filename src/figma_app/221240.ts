@@ -9,14 +9,14 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { teamLibraryCache } from "../figma_app/80990";
 import { eY } from "../figma_app/722362";
 import { selectOpenFileKey, useOpenFileLibraryKey } from "../figma_app/516028";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { Fk } from "../figma_app/167249";
 import { Z } from "../905/939602";
 import { Yi } from "../figma_app/164212";
 import { nM } from "../figma_app/505098";
 import { Bx } from "../figma_app/967154";
 import { uQ } from "../figma_app/311375";
-let T = M4.Query({
+let T = liveStoreInstance.Query({
   fetch: async ({
     componentKey: e
   }) => {
@@ -37,7 +37,7 @@ let T = M4.Query({
   },
   enabled: e => e.enabled
 });
-let I = M4.Query({
+let I = liveStoreInstance.Query({
   fetch: async ({
     statusResult: e
   }) => {

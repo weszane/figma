@@ -6,7 +6,7 @@ import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { Oe } from "../905/34809";
 import { SidebarRow } from "../451de8f0/94979";
-import { Om, tv, au } from "../figma_app/979714";
+import { useResourceRouteParams, useResourceFuid, ResourceHubHomeRouteClass } from "../figma_app/979714";
 import { postUserFlag } from "../905/985254";
 import { N$ } from "../figma_app/350203";
 import { z3 } from "../figma_app/386952";
@@ -19,12 +19,12 @@ export function $$b1() {
   let e = useDispatch();
   let t = z3();
   let n = useSelector(e => e.userFlags);
-  let b = Om();
-  let x = tv();
+  let b = useResourceRouteParams();
+  let x = useResourceFuid();
   let y = P();
   return jsx(SidebarRow, {
     onClick: () => {
-      customHistory.push(new au({
+      customHistory.push(new ResourceHubHomeRouteClass({
         ...b,
         tab: y
       }, x).href);

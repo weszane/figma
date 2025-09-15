@@ -7,7 +7,7 @@ import { useCurrentPublicPlan } from "../figma_app/465071";
 import { H } from "../905/991973";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { iE, oE, FT } from "../905/678287";
 var s = a;
 export let $$m0 = 16;
@@ -23,7 +23,7 @@ export function $$g1({
   let E = f?.tier === Agb.ENTERPRISE;
   let y = useOpenFileLibraryKey();
   let b = fV(e);
-  let T = fd(e);
+  let T = hasResourcePresetKey(e);
   let I = H(e);
   let S = s()(iE, {
     [oE]: m,

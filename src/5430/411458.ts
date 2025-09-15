@@ -1,25 +1,25 @@
-import { S } from "../905/872825";
-import { nS, Ac, aV } from "../figma_app/321395";
+import { getValueOrFallback } from "../905/872825";
+import { RouteState, captureRouteEvent, concatStrings } from "../figma_app/321395";
 import { ResourceTypeSubset } from "../905/178090";
-import { VR, FZ, CS, p7 } from "../figma_app/979714";
-let a = class extends nS {};
-Ac(a);
+import { RESOURCE_ROUTE, toResourceParams, toRouteParams, parseFuidQuery } from "../figma_app/979714";
+let a = class extends RouteState {};
+captureRouteEvent(a);
 a.displayName = "SavesRoute";
-a.path = aV(VR, "/community/saves/:resourceType?");
+a.path = concatStrings(RESOURCE_ROUTE, "/community/saves/:resourceType?");
 a.serializeParams = e => ({
-  ...FZ(e),
+  ...toResourceParams(e),
   ...(e.resourceType && {
     resourceType: e.resourceType
   })
 });
 a.deserializeParams = e => ({
-  ...CS(e),
+  ...toRouteParams(e),
   ...(e.resourceType && {
-    resourceType: S(e.resourceType, ResourceTypeSubset)
+    resourceType: getValueOrFallback(e.resourceType, ResourceTypeSubset)
   })
 });
 a.parseQueryString = e => ({
-  ...p7(e)
+  ...parseFuidQuery(e)
 });
 export let $$l0 = 443 == require.j ? a : null;
 export const e = $$l0;

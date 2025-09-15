@@ -53,7 +53,7 @@ import { sendMessageToParent } from '../905/298920';
 import { O as _$$O } from '../905/301080';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { EE } from '../905/316062';
+import { getProjectUrl } from '../905/316062';
 import { t as _$$t } from '../905/316903';
 import { e as _$$e3 } from '../905/318479';
 import { reattachAndSyncMultiplayer, abandonAndReattachMultiplayer, detachMultiplayer } from '../905/346794';
@@ -3867,7 +3867,7 @@ export function $$nN0(e) {
         if (n.metaKey || n.button === 1) {
           let e = debugState.getState().openFile;
           let t = e?.project?.id || null;
-          hasKey(debugState.getState().folders, t) ? Wq(EE(t, e?.parentOrgId ?? null), i) : Wq('/', i);
+          hasKey(debugState.getState().folders, t) ? Wq(getProjectUrl(t, e?.parentOrgId ?? null), i) : Wq('/', i);
         } else {
           i(_$$eH());
           i(oB());

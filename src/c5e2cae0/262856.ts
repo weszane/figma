@@ -11,7 +11,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { hideModal } from "../905/156213";
 import { yy } from "../figma_app/482142";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { OJ } from "../905/519092";
 import { v0, hF, pL } from "../905/289198";
@@ -41,7 +41,7 @@ let j = memo(function (e) {
               name: f
             }
           }
-        }, $.updateDisplayName({
+        }, teamAPIClient.updateDisplayName({
           teamId: e.team.id,
           updatedDisplayName: f
         })) : await WB().optimisticallyUpdate({
@@ -50,7 +50,7 @@ let j = memo(function (e) {
               name: f
             }
           }
-        }, $.updateTeamName({
+        }, teamAPIClient.updateTeamName({
           teamId: e.team.id,
           updatedDisplayName: f,
           updatedLegalName: S

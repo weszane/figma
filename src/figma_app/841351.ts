@@ -12,7 +12,7 @@ import { isFullscreenSitesView } from '../905/561485';
 import { FlashActions } from '../905/573154';
 import { getFeatureFlags } from '../905/601108';
 import { VersionHistoryAnalyticsInstance } from '../905/703182';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { getDiffVersion } from '../905/760074';
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPARE_CHANGES, VERSION_HISTORY_LOADING, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_LINKED_VERSION } from '../905/784363';
@@ -38,7 +38,7 @@ import { fileApiHandler } from '../figma_app/787550';
 let $$B5 = 'current_version';
 let $$G2 = new LRUCache(40);
 let $$V14 = atom('');
-let $$H12 = M4.Query({
+let $$H12 = liveStoreInstance.Query({
   fetch: async e => {
     let t = e.fileKey;
     if (!t) return null;

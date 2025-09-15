@@ -1,6 +1,6 @@
 import { hV } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { Fk } from "../figma_app/167249";
 import { Q } from "../905/577205";
 import { $W } from "../905/144933";
@@ -41,48 +41,48 @@ let _ = new class {
     }) => await t.post("/api/search/code_suggestions_bulk", APIParameterUtils.toAPIParameters(e)));
   }
 }();
-let $$u4 = M4.Query({
+let $$u4 = liveStoreInstance.Query({
   fetch: async e => (await Q.getLibraryPublishedComponentsWithCodeConnect({
     libraryKey: e
   })).data.meta,
   key: "libraryPublishedComponentsCodeConnect"
 });
-let $$m3 = M4.Query({
+let $$m3 = liveStoreInstance.Query({
   fetch: async e => (await Q.getLibraryIngestionStatus({
     libraryKey: e
   })).data.meta,
   key: "libraryIngestionStatus"
 });
-let $$p2 = M4.Query({
+let $$p2 = liveStoreInstance.Query({
   fetch: async e => (await Q.getInContextPublishedComponents(e)).data.meta,
   key: "inContextPublishedComponentsCodeConnect"
 });
-let $$g5 = M4.Query({
+let $$g5 = liveStoreInstance.Query({
   fetch: async e => (await Q.getRepositoryDirectories(e)).data.meta,
   key: "repositoryDirectories"
 });
-let $$f0 = M4.Query({
+let $$f0 = liveStoreInstance.Query({
   fetch: async e => getFeatureFlags().dt_ccv2_dd ? i(e) : (await _.searchBulkCodeSuggestions(e)).data.meta,
   key: "bulkSuggestions"
 });
-M4.Query({
+liveStoreInstance.Query({
   fetch: async e => (await $W.getCodeSuggestions(e)).data.meta.results
 });
-let $$h1 = M4.Query({
+let $$h1 = liveStoreInstance.Query({
   fetch: async e => (await Q.getGithubSourceFileContents(e)).data.meta
 });
-let $$b7 = M4.Mutation(e => Q.createCodeConnectMap(e));
-let $$x11 = M4.Mutation(async e => {
+let $$b7 = liveStoreInstance.Mutation(e => Q.createCodeConnectMap(e));
+let $$x11 = liveStoreInstance.Mutation(async e => {
   await Q.updateCodeConnectMap(e);
 });
-let $$y9 = M4.Mutation(async e => {
+let $$y9 = liveStoreInstance.Mutation(async e => {
   await Q.deleteCodeConnectMap(e);
 });
-let $$v6 = M4.Mutation(e => Q.createCodeConnectBulkMap(e));
-let $$w8 = M4.Mutation(async e => {
+let $$v6 = liveStoreInstance.Mutation(e => Q.createCodeConnectBulkMap(e));
+let $$w8 = liveStoreInstance.Mutation(async e => {
   await Q.deleteCodeConnectBulkMap(e);
 });
-let $$T10 = M4.Mutation(async ({
+let $$T10 = liveStoreInstance.Mutation(async ({
   libraryKey: e,
   repositoryId: t,
   directories: n

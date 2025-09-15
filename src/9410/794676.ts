@@ -61,7 +61,7 @@ import { l6, He } from "../figma_app/155728";
 import { M as _$$M } from "../905/540025";
 import { yD } from "../905/92359";
 import { YG, Wg } from "../905/921418";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { x as _$$x2 } from "../figma_app/612938";
 import { a4 } from "../figma_app/457074";
 import { vY, S7, a7, YN, xk, SO, JG } from "../figma_app/190980";
@@ -656,7 +656,7 @@ export function $$t80({
   let i = useDispatch();
   let d = selectCurrentFile();
   subscribeDevModePermissions(d?.key ?? "");
-  M4.Folder.useValue(d?.folderId);
+  liveStoreInstance.Folder.useValue(d?.folderId);
   let h = useSelector(e => e.selectedView.editorType);
   let [f, g] = useState(!1);
   let x = getThemeContextOrDefault();

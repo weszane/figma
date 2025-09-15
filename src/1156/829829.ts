@@ -2,7 +2,7 @@ import { Hg } from "../figma_app/304955";
 import { Xr } from "../figma_app/27355";
 import { generateUUIDv4 } from "../905/871474";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { R } from "../905/943003";
 import { p7, Xl, GV, Ut } from "../figma_app/72338";
 import { nc } from "../figma_app/570630";
@@ -49,7 +49,7 @@ export function $$f0() {
       j(s.data.meta.version);
       ZO();
       setTimeout(() => {
-        M4.fetch(gZ({
+        liveStoreInstance.fetch(gZ({
           fileKey: y,
           functionName: "make-server"
         }), {

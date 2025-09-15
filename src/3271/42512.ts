@@ -27,7 +27,7 @@ import { LR } from "../figma_app/120210";
 import { Um } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { M as _$$M } from "../figma_app/170366";
-import { ShelfViewType, ResourceType, hasMonetizedResourceMetadata, ResourceTypeNoComment } from "../figma_app/45218";
+import { ShelfViewType, HubTypeEnum, hasMonetizedResourceMetadata, ResourceTypeNoComment } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { Jz } from "../905/504727";
 import { l6, c$, sK } from "../905/794875";
@@ -61,7 +61,7 @@ import { Pk, Kj } from "../figma_app/740025";
 import { A as _$$A3 } from "../svg/833198";
 import { A as _$$A4 } from "../svg/733948";
 import { isSubscriptionActive } from "../figma_app/808294";
-import { Ul } from "../figma_app/777551";
+import { isResourceApprovedPublic } from "../figma_app/777551";
 import { af, Qi } from "../figma_app/559491";
 import { S as _$$S3 } from "../figma_app/11182";
 import { getVsCodeLinkProps } from "../905/850671";
@@ -114,12 +114,12 @@ import { trackEventAnalytics } from "../905/449184";
 import { reportError } from "../905/11";
 import { a as _$$a } from "../905/925868";
 import { Me } from "../figma_app/617427";
-import { C as _$$C } from "../905/237873";
-import { cD, rg } from "../figma_app/427318";
-import { e as _$$e3 } from "../figma_app/324237";
+import { PricingOptions } from "../905/237873";
+import { getPluginContent, getWidgetContent } from "../figma_app/427318";
+import { SortOptions } from "../figma_app/324237";
 import { h as _$$h2 } from "../905/632544";
-import { q as _$$q } from "../figma_app/277543";
-import { M4 } from "../905/713695";
+import { DesignToolType } from "../figma_app/277543";
+import { liveStoreInstance } from "../905/713695";
 import { z as _$$z, a as _$$a2 } from "../figma_app/601188";
 import { memoizeByArgs } from "../figma_app/815945";
 import { useMemoStable } from "../905/19536";
@@ -379,7 +379,7 @@ function eQ(e) {
   return (useEffect(() => {
     d && d.community_publishers || t(af({
       id: e.resourceId,
-      resourceType: r ? ResourceType.PLUGIN : ResourceType.WIDGET
+      resourceType: r ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET
     }));
   }, [t, d, e.resourceId, r]), d) ? jsx(eG, {
     resourceId: e.resourceId,
@@ -472,7 +472,7 @@ function eG(e) {
     name: "detail",
     properties: {
       resourceId: e.resourceId,
-      resourceType: r ? ResourceType.PLUGIN : ResourceType.WIDGET,
+      resourceType: r ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET,
       isMonetized: hasMonetizedResourceMetadata(resource),
       editorType: "figma"
     },
@@ -579,7 +579,7 @@ function eG(e) {
               })
             }), jsx("div", {
               className: eU,
-              children: canRate && Ul(resource) && jsx("div", {
+              children: canRate && isResourceApprovedPublic(resource) && jsx("div", {
                 className: eU,
                 children: jsx(eC, {
                   openRatingModal: e => {},
@@ -716,7 +716,7 @@ function e8() {
       })
     }), s && jsx("div", {
       children: jsx(Pq, {
-        resourceType: ResourceType.PLUGIN
+        resourceType: HubTypeEnum.PLUGIN
       })
     })]
   });
@@ -1053,40 +1053,40 @@ let tY = async (e, t) => {
   let s = {
     caller: _$$z.EDITOR_COMMUNITY_VIEW,
     resourceType: [vtl.PLUGIN],
-    editorType: e ? _$$q.DEV_HANDOFF : _$$q.DESIGN,
-    sortBy: _$$e3.Browse.POPULAR,
+    editorType: e ? DesignToolType.DEV_HANDOFF : DesignToolType.DESIGN,
+    sortBy: SortOptions.Browse.POPULAR,
     includeContent: !0
   };
   e && t && (s.capabilityType = _$$h2.CODEGEN);
-  let [r, a] = await Promise.all([M4.fetch(_$$a2.ResourcesPaginatedQuery({
+  let [r, a] = await Promise.all([liveStoreInstance.fetch(_$$a2.ResourcesPaginatedQuery({
     ...s,
-    price: _$$C.FREE,
+    price: PricingOptions.FREE,
     pageSize: 18
-  })), M4.fetch(_$$a2.ResourcesPaginatedQuery({
+  })), liveStoreInstance.fetch(_$$a2.ResourcesPaginatedQuery({
     ...s,
-    price: _$$C.PAID,
+    price: PricingOptions.PAID,
     pageSize: 12
   }))]);
-  return [...r, ...a].map(e => cD(e)).filter(e => !!e);
+  return [...r, ...a].map(e => getPluginContent(e)).filter(e => !!e);
 };
 let tK = async () => {
   let e = {
     caller: _$$z.EDITOR_COMMUNITY_VIEW,
     resourceType: [vtl.WIDGET],
-    editorType: _$$q.DESIGN,
-    sortBy: _$$e3.Browse.POPULAR,
+    editorType: DesignToolType.DESIGN,
+    sortBy: SortOptions.Browse.POPULAR,
     includeContent: !0
   };
-  let [t, s] = await Promise.all([M4.fetch(_$$a2.ResourcesPaginatedQuery({
+  let [t, s] = await Promise.all([liveStoreInstance.fetch(_$$a2.ResourcesPaginatedQuery({
     ...e,
-    price: _$$C.FREE,
+    price: PricingOptions.FREE,
     pageSize: 18
-  })), M4.fetch(_$$a2.ResourcesPaginatedQuery({
+  })), liveStoreInstance.fetch(_$$a2.ResourcesPaginatedQuery({
     ...e,
-    price: _$$C.PAID,
+    price: PricingOptions.PAID,
     pageSize: 12
   }))]);
-  return [...t, ...s].map(e => rg(e)).filter(e => !!e);
+  return [...t, ...s].map(e => getWidgetContent(e)).filter(e => !!e);
 };
 function tJ({
   viewExpandedList: e,
@@ -1829,7 +1829,7 @@ function sc(e) {
       }), "development" === e.currentView && jsx("div", {
         className: "fd_browse_resource_modal--mainViewHeaderRightSide--hxfTP text--fontPos12--YsUAh text--_fontBase--QdLsd",
         children: jsx(_$$n, {
-          resourceType: activeTab === _$$s2.WIDGET ? ResourceType.WIDGET : ResourceType.PLUGIN
+          resourceType: activeTab === _$$s2.WIDGET ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
         })
       })]
     }), jsx(_$$P, {

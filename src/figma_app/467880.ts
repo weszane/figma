@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { textOnDarkCanvas } from "../figma_app/191804";
-import { j } from "../figma_app/469468";
+import { usePrefersReducedMotion } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
 import { f as _$$f } from "../905/940356";
 import { FFileType } from "../figma_app/191312";
@@ -73,7 +73,7 @@ function y() {
   });
 }
 export function $$b1(e) {
-  let t = j();
+  let t = usePrefersReducedMotion();
   let r = XC(useAtomWithSubscription(a8));
   let i = !_$$f("cursor_bot_v2_has_greeted_with_wave") && !e.manualControl;
   let s = useAtomWithSubscription(jr);

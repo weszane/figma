@@ -15,7 +15,7 @@ import { $ } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
 import { showModalHandler } from "../905/156213";
 import { FRequestStatusType } from "../figma_app/191312";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 import { wT, UR, HX, G6, qu } from "../905/671449";
 import { is } from "../905/744076";
 import { R as _$$R } from "../905/240644";
@@ -651,7 +651,7 @@ export function $$W0(e) {
     children: jsx(_$$R, {})
   });
 }
-let K = M4.Query({
+let K = liveStoreInstance.Query({
   fetch: async e => await is.getBlankSecurityForm(e)
 });
 export const A = $$W0;

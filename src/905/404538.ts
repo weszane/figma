@@ -4,14 +4,14 @@ import { l as _$$l } from "../905/716947";
 import { createRemovableAtomFamily, atom, atomStoreManager } from "../figma_app/27355";
 import c from "../vendor/223926";
 import { Z } from "../905/939602";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 var $$n0;
 var $$r2;
 var $$a1;
 var u = c;
 (e => {
   let t = createRemovableAtomFamily(() => atom(void 0), shallowEqual);
-  e.UnpublishedStylesQuery = M4.Query({
+  e.UnpublishedStylesQuery = liveStoreInstance.Query({
     fetch: async ({
       styleKeys: e,
       orgId: i
@@ -47,7 +47,7 @@ var u = c;
 })($$n0 || ($$n0 = {}));
 (e => {
   let t = createRemovableAtomFamily(() => atom(void 0));
-  e.MissingStyleKeyToLibraryKeyQuery = M4.Query({
+  e.MissingStyleKeyToLibraryKeyQuery = liveStoreInstance.Query({
     fetch: async ({
       styleKeys: e
     }) => {
@@ -73,7 +73,7 @@ var u = c;
 })($$r2 || ($$r2 = {}));
 (e => {
   let t = createRemovableAtomFamily(() => atom(void 0));
-  e.EverPublishedLibraryQuery = M4.Query({
+  e.EverPublishedLibraryQuery = liveStoreInstance.Query({
     fetch: async ({
       libraryKeys: e
     }) => {

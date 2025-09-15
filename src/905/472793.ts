@@ -109,7 +109,7 @@ import { UK } from '../figma_app/740163';
 import { updateActiveTextReviewPlugin } from '../figma_app/741237';
 import { createTrackingContext } from '../figma_app/757723';
 import { AppStateTsApi, Confirmation, CooperHelpers, CooperTemplateTypesTsBindings, DraftState, FirstDraftHelpers, Fullscreen, LibraryPubSub, LogicalOperation, MeasurementUnit, PluginHelpers, PluginModalType, ResourceLocation, SceneChangeType, SceneGraphHelpers, SceneIdentifier, SelectionPaintHelpers, SlideViewType, SocialMediaFormats, TrackType, VariableResolvedDataType } from '../figma_app/763686';
-import { AC } from '../figma_app/777551';
+import { isResourcePendingPublishing } from '../figma_app/777551';
 import { desktopAPIInstance } from '../figma_app/876459';
 import { isInteractionPathCheck } from '../figma_app/897289';
 // Import UI Components and Controls Library - Phase 14
@@ -5078,7 +5078,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     return this.options.isLocal ? this.getLocalPlugin(this.options.pluginID) : this.getPublishedExtension(this.options.pluginID)?.versions[this.options.pluginVersionID];
   }
   inReviewByCommunityAdmin(e) {
-    return !!(getFeatureFlags().community_hub_admin && e && AC(e));
+    return !!(getFeatureFlags().community_hub_admin && e && isResourcePendingPublishing(e));
   }
   userPaymentStatusType(e) {
     if (this.options.isLocal || this.inReviewByCommunityAdmin(e)) {

@@ -7,7 +7,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { editorUtilities } from "../905/22009";
 import { LJ } from "../figma_app/930386";
-import { $E } from "../figma_app/805898";
+import { BrowseCategoryRoute } from "../figma_app/805898";
 import { TrackedAnchor, TrackedLink } from "../figma_app/831799";
 import { A as _$$A } from "../svg/179418";
 let p = "footer--divider--srDs2";
@@ -20,49 +20,49 @@ export function $$f0() {
     title: getI18nString("community.footer.explore"),
     items: [{
       label: getI18nString("categories.social_media_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.socialMediaTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.web_ad_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.webAds
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.instagram_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.instagramTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.linkedin_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.linkedinTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.facebook_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.facebookTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.youtube_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.youtubeTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
       }).href
     }, {
       label: getI18nString("categories.card_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.cardTemplates
       }, {
         editor_type: editorUtilities.Editors.COOPER
@@ -72,39 +72,39 @@ export function $$f0() {
     title: getI18nString("community.footer.popular_searches"),
     items: [{
       label: getI18nString("categories.portfolio_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.portfolios
       }).href
     }, {
       label: getI18nString("categories.resume_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.resumes
       }).href
     }, {
       label: getI18nString("categories.website_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates
       }, {
         editor_type: editorUtilities.Editors.SITES
       }).href
     }, {
       label: getI18nString("categories.mobile_app_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.mobileApps
       }).href
     }, {
       label: getI18nString("categories.presentations"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.presentations
       }).href
     }, {
       label: getI18nString("categories.device_mockups"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.deviceMockups
       }).href
     }, {
       label: getI18nString("categories.team_meetings"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.teamMeetings
       }).href
     }]
@@ -112,37 +112,37 @@ export function $$f0() {
     title: getI18nString("community.footer.recommended"),
     items: [{
       label: getI18nString("categories.calendar_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.calendarTemplates
       }).href
     }, {
       label: getI18nString("categories.data_templates"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.dataTemplates
       }).href
     }, {
       label: getI18nString("categories.accessibility_tools"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.accessibility
       }).href
     }, {
       label: getI18nString("categories.fonts_typography"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.fontsTypography
       }).href
     }, {
       label: getI18nString("categories.design_inspirations"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.designInspirations
       }).href
     }, {
       label: getI18nString("categories.development_plugins"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.development
       }).href
     }, {
       label: getI18nString("categories.strategic_planning"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.strategicPlanning
       }).href
     }]
@@ -150,32 +150,32 @@ export function $$f0() {
     title: getI18nString("community.footer.top_categories"),
     items: [{
       label: getI18nString("categories.design_tools"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.designTools
       }).href
     }, {
       label: getI18nString("categories.libraries"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.libraries
       }).href
     }, {
       label: getI18nString("categories.education"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.education
       }).href
     }, {
       label: getI18nString("categories.whiteboarding"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.whiteboarding
       }).href
     }, {
       label: getI18nString("categories.visual_assets"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.visualAssets
       }).href
     }, {
       label: getI18nString("categories.illustrations"),
-      url: new $E({
+      url: new BrowseCategoryRoute({
         categorySlug: LJ.illustrations
       }).href
     }]

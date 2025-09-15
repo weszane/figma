@@ -23,7 +23,7 @@ import { _6 } from "../figma_app/386952";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { getTeamUrl } from "../figma_app/630077";
 import { ViewMode } from "../figma_app/756995";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { $ as _$$$ } from "../905/442144";
 import { H as _$$H } from "../905/154301";
 import { p as _$$p } from "../905/195198";
@@ -128,7 +128,7 @@ export function $$P0(e) {
         }
       }));
     };
-    i ? n(!0) : $.getSubscriptionStatus({
+    i ? n(!0) : teamAPIClient.getSubscriptionStatus({
       teamId: t.id
     }).then(({
       data: e

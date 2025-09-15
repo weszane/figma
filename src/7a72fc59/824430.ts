@@ -163,7 +163,7 @@ import { X as _$$X3 } from '../905/647103';
 import { R as _$$R7 } from '../905/649743';
 import { Bi } from '../905/652992';
 import { y as _$$y2 } from '../905/661502';
-import { A as _$$A4 } from '../905/665703';
+import { communityShelfService } from '../905/665703';
 import { oW as _$$oW } from '../905/675859';
 import { e as _$$e8 } from '../905/678389';
 import { p as _$$p6 } from '../905/682418';
@@ -176,7 +176,7 @@ import { L as _$$L } from '../905/704296';
 import { oV as _$$oV2, Zb } from '../905/706046';
 import { U as _$$U2 } from '../905/708285';
 import { n8 as _$$n8, T_ } from '../905/713167';
-import { IT, M4 } from '../905/713695';
+import { IT, liveStoreInstance } from '../905/713695';
 import { pn as _$$pn, If } from '../905/714538';
 import { SvgComponent, V as _$$V2 } from '../905/714743';
 import { l as _$$l } from '../905/716947';
@@ -364,12 +364,12 @@ import { cZ as _$$cZ } from '../figma_app/272902';
 import { rgbToNormalized, packNormalizedRgb, colorsEqual } from '../figma_app/273493';
 import { isBuzzTemplatePickerCmtyShelvesEnabled, isBuzzImportFromDesignEnabled } from '../figma_app/275462';
 import { s4 as _$$s3 } from '../figma_app/276332';
-import { q as _$$q2 } from '../figma_app/277543';
+import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
 import { L as _$$L6 } from '../figma_app/297778';
-import { vt } from '../figma_app/306946';
+import { ResourceTypeEnum } from '../figma_app/306946';
 import { $I, MK } from '../figma_app/322845';
-import { e as _$$e4 } from '../figma_app/324237';
+import { SortOptions } from '../figma_app/324237';
 import { AO as _$$AO, KT } from '../figma_app/325158';
 import { Ci, jw, kG, LU, W5 } from '../figma_app/327588';
 import { nL as _$$nL, uM as _$$uM, B2, bE, Cl, DW, hn, Pn, qr, z7 } from '../figma_app/334505';
@@ -391,7 +391,7 @@ import { rg as _$$rg } from '../figma_app/401069';
 import { R as _$$R } from '../figma_app/421558';
 import { u7 as _$$u, hg } from '../figma_app/425489';
 import { A as _$$A2 } from '../figma_app/426577';
-import { XW as _$$XW, Ky, LE } from '../figma_app/427318';
+import { hasContent, getTeamTemplateLg, isCooperTemplateAsset } from '../figma_app/427318';
 import { aE as _$$aE } from '../figma_app/433401';
 import { W1 } from '../figma_app/439493';
 import { q as _$$q4 } from '../figma_app/446378';
@@ -2933,7 +2933,7 @@ function n0({
   singleColumn: r
 }) {
   let i = VU();
-  let s = useMemo(() => e.filter(_$$XW).filter(LE).map(e => ({
+  let s = useMemo(() => e.filter(hasContent).filter(isCooperTemplateAsset).map(e => ({
     component: e.content.component_v2?._component_v2_record,
     categorySlug: e.category_slug,
     tags: e.tags_v2
@@ -2945,7 +2945,7 @@ function n0({
     children: [jsx(nT, {
       items: e,
       renderItem: (e, t) => {
-        if (_$$XW(e) && LE(e)) {
+        if (hasContent(e) && isCooperTemplateAsset(e)) {
           let n = e.content.component_v2?._component_v2_record;
           if (!n) return null;
           let l = d.get(n.id);
@@ -3465,7 +3465,7 @@ function lI() {
     })]
   });
 }
-let lS = M4.Query({
+let lS = liveStoreInstance.Query({
   fetch: async e => e ? await _$$q4.getSearchPaginated({
     orgId: e,
     size: 8,
@@ -3512,11 +3512,11 @@ function lC({
     data: a,
     isFetchingNextPage: s
   }] = IT(_$$a6.ResourcesPaginatedQuery({
-    resourceType: [vt.COOPER_TEMPLATE_ASSET],
+    resourceType: [ResourceTypeEnum.COOPER_TEMPLATE_ASSET],
     caller: _$$z3.COOPER_TEMPLATE_PICKER,
     pageSize: 12,
-    editorType: _$$q2.COOPER,
-    sortBy: _$$e4.Browse.PUBLISHED_AT,
+    editorType: DesignToolType.COOPER,
+    sortBy: SortOptions.Browse.PUBLISHED_AT,
     includeContent: !0,
     category: category_slug,
     tags: tags_slug
@@ -3583,11 +3583,11 @@ function lz({
   let b = useAtomWithSubscription(Hb);
   let j = s && !!n && n.length > 0 && !l;
   let y = {
-    resourceType: [vt.COOPER_TEMPLATE_ASSET],
+    resourceType: [ResourceTypeEnum.COOPER_TEMPLATE_ASSET],
     caller: _$$z3.COOPER_TEMPLATE_PICKER,
     pageSize: 20,
-    editorType: _$$q2.COOPER,
-    sortBy: _$$e4.Browse.PUBLISHED_AT,
+    editorType: DesignToolType.COOPER,
+    sortBy: SortOptions.Browse.PUBLISHED_AT,
     includeContent: !0,
     includeCategorySlug: !0,
     includeTags: !0
@@ -3623,7 +3623,7 @@ function lz({
     isFetchingNextPage: R
   }, {
     fetchNextPage: L
-  }] = IT(_$$A4.ShelfContentPaginatedQuery({
+  }] = IT(communityShelfService.ShelfContentPaginatedQuery({
     shelfId: l,
     includeContent: !0,
     pageSize: 20
@@ -3992,18 +3992,18 @@ function lV({
       resources,
       loading
     } = yH({
-      resourceTypes: [vt.COOPER_TEMPLATE_FILE],
+      resourceTypes: [ResourceTypeEnum.COOPER_TEMPLATE_FILE],
       limit: 3,
       orgId: i,
       teamId: o,
       caller: _$$z3.COOPER_TEMPLATE_PICKER,
-      sortBy: _$$e4.Browse.PUBLISHED_AT,
+      sortBy: SortOptions.Browse.PUBLISHED_AT,
       selfPublished: !0,
       includeContent: !0,
       enableQuery: !!(i || o)
     });
     return {
-      yourTemplates: !loading && resources ? resources.map(e => Ky(e)).filter(Boolean) : [],
+      yourTemplates: !loading && resources ? resources.map(e => getTeamTemplateLg(e)).filter(Boolean) : [],
       isLoading: loading
     };
   }({
@@ -10084,7 +10084,7 @@ let cp = _$$z.object({
 let cm = new class {
   constructor() {
     this.UnsplashSearchSchemaValidator = createPaginatedValidator('UnsplashSearchResponseSchemaValidator', cu, 'buzz_unsplash', !0);
-    this.UnsplashPaginatedSearchQuery = M4.PaginatedQuery({
+    this.UnsplashPaginatedSearchQuery = liveStoreInstance.PaginatedQuery({
       fetch: async (e, {
         pageParam: t
       }) => {
@@ -10113,7 +10113,7 @@ let cm = new class {
       }
     });
     this.UnsplashEditorialSchemaValidator = createPaginatedValidator('UnsplashEditorialResponseSchemaValidator', cp, 'buzz_unsplash', !0);
-    this.UnsplashPaginatedEditorialQuery = M4.PaginatedQuery({
+    this.UnsplashPaginatedEditorialQuery = liveStoreInstance.PaginatedQuery({
       fetch: async (e, {
         pageParam: t
       }) => {

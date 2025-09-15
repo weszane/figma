@@ -53,13 +53,13 @@ import { Vq, EX, Wh, Rc, nT, J9, Fh, Kc, bo, Gl } from "../905/448740";
 import { Qi, uT, n1, se, fd } from "../figma_app/559491";
 import { showModalHandler, hideModal } from "../905/156213";
 import { generatePluginId, getCurrentPluginVersion, getLocalFileId, getOrgRole, validatePluginCodeSize, validateExtensionIconImage, hasRoleOrOrgChanged, mapToFileType, loadPluginManifest, loadLocalPluginSource, validateAndResizeIconImage, getPublishedResourceOrNull } from "../figma_app/300692";
-import { ResourceType, FileInputType, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
+import { HubTypeEnum, FileInputType, PaymentType, ResourceTypeNoComment } from "../figma_app/45218";
 import { A as _$$A8 } from "../905/552947";
 import { gG, ic as _$$ic } from "../905/702716";
 import { u as _$$u } from "../905/952696";
 import { K as _$$K } from "../figma_app/364226";
 import { s as _$$s } from "../cssbuilder/589278";
-import { nF, rk } from "../figma_app/471982";
+import { getPluginWidgetLabel, mapFileTypeToEnum } from "../figma_app/471982";
 import { LG, WN, wC, bx } from "../905/448440";
 import { A as _$$A9 } from "../905/562488";
 import { EventShield } from "../905/821217";
@@ -72,7 +72,7 @@ import { g as _$$g } from "../905/356410";
 import { ButtonPrimitive } from "../905/632989";
 import { A as _$$A0 } from "../905/251970";
 import { oW } from "../905/675859";
-import { S as _$$S2 } from "../905/872825";
+import { getValueOrFallback } from "../905/872825";
 import { CW, M0, Rd, Gf, f7, Dd, MO, Z7, Q4, Kg, jr, l8, UU, of } from "../figma_app/599979";
 import { yj } from "../905/966582";
 import { L as _$$L } from "../905/597048";
@@ -81,7 +81,7 @@ import { c as _$$c3 } from "../905/34525";
 import { iy as _$$iy, BA, lR, Ee, uK, O0, I1 } from "../905/916525";
 import { H as _$$H2 } from "../905/367945";
 import { A as _$$A1 } from "../905/144978";
-import { Ul, AC } from "../figma_app/777551";
+import { isResourceApprovedPublic, isResourcePendingPublishing } from "../figma_app/777551";
 import { r as _$$r3 } from "../905/783627";
 import { isNotNullish } from "../figma_app/95419";
 import { b as _$$b4, bL, mc, q7 } from "../figma_app/860955";
@@ -90,7 +90,7 @@ import { NU } from "../figma_app/204891";
 import { J as _$$J5 } from "../905/896954";
 import { trackGenericEvent } from "../figma_app/314264";
 import { getUserId, selectUser } from "../905/372672";
-import { IT as _$$IT, M4 } from "../905/713695";
+import { IT as _$$IT, liveStoreInstance } from "../905/713695";
 import { W as _$$W } from "../905/985740";
 import { $ as _$$$3 } from "../905/668315";
 import { dn } from "../figma_app/994403";
@@ -153,7 +153,7 @@ import { A as _$$A11 } from "../905/72153";
 import { useCurrentUserOrg } from "../905/845253";
 import { getCurrentUserOrgUser } from "../figma_app/951233";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
-import { k2 } from "../figma_app/10554";
+import { PageTypeEnum } from "../figma_app/10554";
 import { e0 as _$$e3 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { r as _$$r5 } from "../905/490676";
@@ -393,7 +393,7 @@ function ey({
   let o = useDispatch();
   let l = async () => {
     if (!s) return;
-    let e = r ? ResourceType.WIDGET : ResourceType.PLUGIN;
+    let e = r ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN;
     let i = await generatePluginId(e);
     o(Qi({
       publishedPlugins: [i],
@@ -491,7 +491,7 @@ function ew({
   return jsx("div", {
     className: _$$s.pt8.pb8.$,
     children: jsx(_$$A9, {
-      resourceType: nF(e),
+      resourceType: getPluginWidgetLabel(e),
       isSubscription: i,
       hasBeenPublishedAsPaid: r
     })
@@ -793,7 +793,7 @@ let eX = forwardRef(function ({
   let y = jsxs("div", {
     className: "icon_uploader--container---wkQt",
     onDragOver: e => {
-      let t = _$$S2(e.dataTransfer.items[0]?.type, yj);
+      let t = getValueOrFallback(e.dataTransfer.items[0]?.type, yj);
       1 === e.dataTransfer.items.length && t && CW.includes(t) ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
       e.preventDefault();
     },
@@ -939,7 +939,7 @@ function e6({
     afterLabelContent: `${getI18nString("community.publishing.version")} ${s}`,
     children: jsx(Checkbox, {
       label: jsx(Label, {
-        children: (i = Lz(t, void 0), i?.is_public ? existingExtension && Ul(existingExtension) ? getI18nString("community.publishing.publish_a_new_version") : existingExtension && AC(existingExtension) ? getI18nString("community.publishing.resubmit_a_new_version") : getI18nString("community.publishing.submit_a_new_version") : getI18nString("community.publishing.publish_a_new_version"))
+        children: (i = Lz(t, void 0), i?.is_public ? existingExtension && isResourceApprovedPublic(existingExtension) ? getI18nString("community.publishing.publish_a_new_version") : existingExtension && isResourcePendingPublishing(existingExtension) ? getI18nString("community.publishing.resubmit_a_new_version") : getI18nString("community.publishing.submit_a_new_version") : getI18nString("community.publishing.publish_a_new_version"))
       }),
       checked: a,
       onChange: () => {
@@ -962,7 +962,7 @@ let tu = forwardRef(function ({
   let o = Lz(e, void 0)?.playgroundFile;
   let [l] = _$$IT(tm(o?.key || ""));
   let d = l.data;
-  let c = o?.editor_type ? rk(o.editor_type) : null;
+  let c = o?.editor_type ? mapFileTypeToEnum(o.editor_type) : null;
   let u = useRef(null);
   let p = useRef(null);
   useImperativeHandle(i, () => ({
@@ -1118,7 +1118,7 @@ function tp({
     })]
   });
 }
-let tm = M4.Query({
+let tm = liveStoreInstance.Query({
   fetch: async e => (await _$$W.getVersions({
     fileKey: e
   })).data.meta.versions[0],
@@ -1325,7 +1325,7 @@ let tP = forwardRef(function ({
         className: "snapshot_uploader--container--lZqVB",
         onClick: m,
         onDragOver: e => {
-          let t = _$$S2(e.dataTransfer.items[0]?.type, yj);
+          let t = getValueOrFallback(e.dataTransfer.items[0]?.type, yj);
           1 === e.dataTransfer.items.length && t === yj.PNG ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
           e.preventDefault();
         },
@@ -1644,7 +1644,7 @@ async function io(e) {
     pluginId: validExtensionId,
     toPublic: m.roles.is_public,
     toOrg: !!m.roles.org,
-    needApproval: AC(m),
+    needApproval: isResourcePendingPublishing(m),
     isWidget
   });
   return {
@@ -1938,9 +1938,9 @@ let id = {
       let r = t?.manifest?.permissions?.includes("payments");
       return J9(e) || r ? {
         is_public: !0
-      } : e && Q4(e.roles) ? AC(e) ? {
+      } : e && Q4(e.roles) ? isResourcePendingPublishing(e) ? {
         is_public: !0
-      } : e.roles : e && AC(e) ? {
+      } : e.roles : e && isResourcePendingPublishing(e) ? {
         is_public: !0
       } : null != i && n ? {
         org: {
@@ -2325,7 +2325,7 @@ let ic = _$$T2({
       });
       try {
         [u, c] = await Promise.all([loadPluginManifest(e?.localFileId, {
-          resourceType: nF(n),
+          resourceType: getPluginWidgetLabel(n),
           isPublishing: !0
         }), loadLocalPluginSource(e?.localFileId)]);
       } catch (e) {
@@ -2996,7 +2996,7 @@ function iM({
     A.current($$in, {
       step: WX.CLOSED
     });
-    t === k2.RESOURCE_PAGE && draftSubmissionResult?.result === "success" && customHistory.reload("Resource updated on community hub");
+    t === PageTypeEnum.RESOURCE_PAGE && draftSubmissionResult?.result === "success" && customHistory.reload("Resource updated on community hub");
   }, [l, t, draftSubmissionResult, A]);
   let {
     isWidget,
@@ -3275,7 +3275,7 @@ function iM({
   }) : jsxs(Fragment, {
     children: [jsx(gx, {
       publishedResourceContent: draftSubmissionResult.data.publishedExtension
-    }), t === k2.RESOURCE_PAGE ? jsx(A_, {}) : jsx(Dg, {
+    }), t === PageTypeEnum.RESOURCE_PAGE ? jsx(A_, {}) : jsx(Dg, {
       publishedResourceContent: draftSubmissionResult.data.publishedExtension
     })]
   });

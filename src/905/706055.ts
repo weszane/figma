@@ -1,9 +1,9 @@
 import { fc } from "../905/239603";
 import { FFolderType } from "../figma_app/191312";
-import { z } from "../905/954314";
+import { repositoryDefinition } from "../905/954314";
 import { createDataMapper, processAdditionalConfig } from "../905/508958";
 let o = fc(FFolderType);
-let $$l0 = createDataMapper(z, e => ({
+let $$l0 = createDataMapper(repositoryDefinition, e => ({
   id: e.camel(),
   name: e.camel(),
   folder_id: e.camel(),

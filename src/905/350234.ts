@@ -1,8 +1,8 @@
 import { u as _$$u } from "../905/700827";
 import { jsx } from "react/jsx-runtime";
 import { customHistory } from "../905/612521";
-import { gV, wl } from "../figma_app/640564";
-import { p as _$$p } from "../905/428660";
+import { getCommunitySubview, setupBrowseRoute } from "../figma_app/640564";
+import { getCommunityHubNavigation } from "../905/428660";
 import { M } from "../905/722875";
 let l = e => ({
   type: "SELECT_VIEW",
@@ -35,8 +35,8 @@ export function $$p0({
         return;
       }
       if (function (e) {
-        let t = gV(window.location.pathname);
-        let i = gV(e);
+        let t = getCommunitySubview(window.location.pathname);
+        let i = getCommunitySubview(e);
         return t.reactRouterHandled && i.reactRouterHandled;
       }(e)) {
         n.preventDefault();
@@ -52,7 +52,7 @@ export function $$p0({
           if (d.test(e)) {
             i = !0;
             let [t, n, r] = e.match(d);
-            u(l(_$$p(n, r)));
+            u(l(getCommunityHubNavigation(n, r)));
           } else if (c.test(e)) {
             i = !0;
             u(l({
@@ -65,7 +65,7 @@ export function $$p0({
             let [t, n] = e.split("?");
             n = n ? `?${n}` : "";
             u(l({
-              data: wl(t, n),
+              data: setupBrowseRoute(t, n),
               subView: "searchAndBrowse",
               view: "communityHub"
             }));

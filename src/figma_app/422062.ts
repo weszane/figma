@@ -1,6 +1,6 @@
 import { isEqual } from 'lodash-es'
 import { reportError } from '../905/11'
-import { ServiceCategories as _$$e } from '../905/165054'
+import { ServiceCategories } from '../905/165054'
 import { UNASSIGNED } from '../905/247093'
 import { getI18nString } from '../905/303541'
 import { FRequestsStr } from '../905/384551'
@@ -36,703 +36,861 @@ import { encodeUri } from '../figma_app/930338'
 import { getCurrentUserOrgUser } from '../figma_app/951233'
 import { ColumnName, DefaultFilters, DefaultSortConfig } from '../figma_app/967319'
 
-export function $$G6({
-  isAdminOrg: e,
-  permissions: t,
-  teams: r,
-  view: n,
-}) {
-  if (n.adminPlanType !== OrganizationType.ORG)
-    return !(n.planId in r)
-  {
-    let r = wA(t)
-    let n = getCurrentUserOrgUser(t)
-    return !r || !n || !e
+/**
+ * Checks if the selected view is missing resources for org/team admin.
+ * Original: isSelectedViewMissingOrgAdminResources
+ * @param params - Object containing isAdminOrg, permissions, teams, and view.
+ * @returns True if missing resources, false otherwise.
+ */
+export function isSelectedViewMissingOrgAdminResources({
+  isAdminOrg,
+  permissions,
+  teams,
+  view,
+}: {
+  isAdminOrg: boolean
+  permissions: any
+  teams: Record<string, any>
+  view: any
+}): boolean {
+  if (view.adminPlanType !== OrganizationType.ORG) {
+    return !(view.planId in teams)
   }
+  const hasBigma = wA(permissions)
+  const currentUserOrgUser = getCurrentUserOrgUser(permissions)
+  return !hasBigma || !currentUserOrgUser || !isAdminOrg
 }
-export function $$V0({
-  isAdminOrg: e,
-  permissions: t,
-  view: r,
-}) {
-  let n = wA(t)
-  let i = getCurrentUserOrgUser(t)
-  return !n || !i || !n.bigma_enabled || r.subView === UserGroupRole.ADMIN && !e && !i.license_admin
+
+/**
+ * Checks if the selected view is missing resources for org admin settings.
+ * Original: isSelectedViewMissingOrgAdminSettingsResources
+ * @param params - Object containing isAdminOrg, permissions, and view.
+ * @returns True if missing resources, false otherwise.
+ */
+export function isSelectedViewMissingOrgAdminSettingsResources({
+  isAdminOrg,
+  permissions,
+  view,
+}: {
+  isAdminOrg: boolean
+  permissions: any
+  view: any
+}): boolean {
+  const hasBigma = wA(permissions)
+  const currentUserOrgUser = getCurrentUserOrgUser(permissions)
+  return (
+    !hasBigma
+    || !currentUserOrgUser
+    || !hasBigma.bigma_enabled
+    || (view.subView === UserGroupRole.ADMIN && !isAdminOrg && !currentUserOrgUser.license_admin)
+  )
 }
-export function $$H4({
-  isAdminOrg: e,
-  permissions: t,
-  orgAdminSettingsViewTab: r,
-  orgAdminSettingsViewSecondaryTab: n,
-}) {
-  let i = wA(t)
-  let a = getCurrentUserOrgUser(t)
-  let s = t.currentUserOrgId && kA(t.orgById[t.currentUserOrgId])
-  return !(i && a && (r !== DashboardSection.WORKSPACES && n !== WorkspaceTab.WORKSPACES || !t.currentUserOrgId || s) && (e || a.license_admin || a.workspace_users?.some(e => e.permission === 'admin'))) || r === DashboardSection.BILLING && n === BillingSectionEnum.BILLING_GROUPS && !s
+
+/**
+ * Checks if the selected org admin settings view is missing resources.
+ * Original: isSelectedOrgAdminSettingsMissingResources
+ * @param params - Object containing isAdminOrg, permissions, orgAdminSettingsViewTab, orgAdminSettingsViewSecondaryTab.
+ * @returns True if missing resources, false otherwise.
+ */
+export function isSelectedOrgAdminSettingsMissingResources({
+  isAdminOrg,
+  permissions,
+  orgAdminSettingsViewTab,
+  orgAdminSettingsViewSecondaryTab,
+}: {
+  isAdminOrg: boolean
+  permissions: any
+  orgAdminSettingsViewTab: DashboardSection
+  orgAdminSettingsViewSecondaryTab:  BillingSectionEnum | MemberView | WorkspaceTab | FigResourceType | undefined
+}): boolean {
+  const hasBigma = wA(permissions)
+  const currentUserOrgUser = getCurrentUserOrgUser(permissions)
+  const hasOrg = permissions.currentUserOrgId && kA(permissions.orgById[permissions.currentUserOrgId])
+  const hasAdmin
+    = isAdminOrg
+      || currentUserOrgUser?.license_admin
+      || currentUserOrgUser?.workspace_users?.some((u: any) => u.permission === 'admin')
+  const isWorkspaceTab
+    = orgAdminSettingsViewTab !== DashboardSection.WORKSPACES
+      && orgAdminSettingsViewSecondaryTab !== WorkspaceTab.WORKSPACES
+  const validWorkspace
+    = !permissions.currentUserOrgId || hasOrg
+  if (
+    !(hasBigma && currentUserOrgUser && (isWorkspaceTab || validWorkspace) && hasAdmin)
+    || (orgAdminSettingsViewTab === DashboardSection.BILLING
+      && orgAdminSettingsViewSecondaryTab === BillingSectionEnum.BILLING_GROUPS
+      && !hasOrg)
+  ) {
+    return true
+  }
+  return false
 }
-export function $$z3({
-  isAdminTeam: e,
-  teamAdminConsoleViewTab: t,
-  teamId: r,
-  teams: n,
-}) {
-  return (t === DashboardSections.BILLING || t === DashboardSections.DASHBOARD) && (!e || !n[r] || n[r].student_team || !hasTeamPaidAccess(n[r]))
+
+/**
+ * Checks if the selected team admin console view is missing resources.
+ * Original: isSelectedTeamAdminConsoleMissingResources
+ * @param params - Object containing isAdminTeam, teamAdminConsoleViewTab, teamId, teams.
+ * @returns True if missing resources, false otherwise.
+ */
+export function isSelectedTeamAdminConsoleMissingResources({
+  isAdminTeam,
+  teamAdminConsoleViewTab,
+  teamId,
+  teams,
+}: {
+  isAdminTeam: boolean
+  teamAdminConsoleViewTab: DashboardSections
+  teamId: string
+  teams: Record<string, any>
+}): boolean {
+  return (
+    (teamAdminConsoleViewTab === DashboardSections.BILLING
+      || teamAdminConsoleViewTab === DashboardSections.DASHBOARD)
+    && (!isAdminTeam || !teams[teamId] || teams[teamId].student_team || !hasTeamPaidAccess(teams[teamId]))
+  )
 }
-let W = {
+
+/**
+ * View configuration object.
+ * Original: viewConfig
+ */
+export const viewConfig = {
   feed: {
     slug: 'feed',
     i18nName: () => getI18nString('view_selectors.file_browser.feed'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   resourceUnavailable: {
     slug: 'resourceUnavailable',
     i18nName: () => getI18nString('view_selectors.file_browser.resource_unavailable'),
-    hasMissingResource: () => !1,
-    isNonUrlAddressable: !0,
+    hasMissingResource: () => false,
+    isNonUrlAddressable: true,
   },
   deletedFiles: {
     slug: 'trashed',
     i18nName: () => getI18nString('view_selectors.file_browser.trash'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   trashedFolders: {
     slug: 'trashed-projects',
     i18nName: () => getI18nString('view_selectors.file_browser.trash'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   teamCreation: {
     slug: 'create-team',
     i18nName: () => getI18nString('view_selectors.file_browser.create_new_team'),
-    hasMissingResource: () => !1,
-    skipBrowserHistory: () => !0,
+    hasMissingResource: () => false,
+    skipBrowserHistory: () => true,
   },
   folder: {
     slug: 'project',
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   team: {
     slug: 'team',
-    hasMissingResource: (e, t) => {
-      let {
-        teamId,
-      } = t
-      let n = t.teamViewTab === NavigationRoutes.BILLING && (!canAdminTeam(teamId, e) || !e.teams[teamId] || !e.teams[teamId].pro_team)
+    hasMissingResource: (state: any, view: any) => {
+      const { teamId } = view
+      const missing
+        = view.teamViewTab === NavigationRoutes.BILLING
+          && (!canAdminTeam(teamId, state) || !state.teams[teamId] || !state.teams[teamId].pro_team)
       return setupShadowRead({
         label: adminPermissionConfig.fileBrowserConfig.teamHasMissingResource,
-        oldValue: n,
-        newValue: !1,
+        oldValue: missing,
+        newValue: false,
         maxReports: 5,
       })
     },
     missingResourceType: EntityType.TEAM,
-    areDifferent: (e, t) => e.teamId !== t.teamId,
+    areDifferent: (a: any, b: any) => a.teamId !== b.teamId,
   },
   allProjects: {
     slug: 'all-projects',
-    hasMissingResource: (e, t) => !(e.currentTeamId && e.teams[e.currentTeamId]),
+    hasMissingResource: (state: any, _view: any) => !(state.currentTeamId && state.teams[state.currentTeamId]),
     missingResourceType: EntityType.TEAM,
   },
   limitedTeamSharedProjects: {
     slug: 'shared-projects',
     i18nName: () => getI18nString('sidebar.all_shared_projects'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   teamAdminConsole: {
     slug: 'team-admin-console',
-    hasMissingResource: () => !1,
-    areDifferent: (e, t) => e.teamId !== t.teamId || e.teamAdminConsoleViewTab !== t.teamAdminConsoleViewTab || e.teamAdminConsoleViewSecondaryTab !== t.teamAdminConsoleViewSecondaryTab,
+    hasMissingResource: () => false,
+    areDifferent: (a: any, b: any) =>
+      a.teamId !== b.teamId
+      || a.teamAdminConsoleViewTab !== b.teamAdminConsoleViewTab
+      || a.teamAdminConsoleViewSecondaryTab !== b.teamAdminConsoleViewSecondaryTab,
   },
   addCollaborators: {
     slug: 'add-collaborators',
     i18nName: () => getI18nString('view_selectors.file_browser.add_collaborators'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   teamUpgrade: {
     slug: 'upgrade-team',
-    hasMissingResource: (e, t) => !getFeatureFlags().redirect_starter_team_loophole && t.teamId === null && isUpgradeExistingTeam(t.teamFlowType) || !!t.teamId && !(t.teamId in e.teams),
+    hasMissingResource: (state: any, view: any) =>
+      !getFeatureFlags().redirect_starter_team_loophole
+      && view.teamId === null
+      && isUpgradeExistingTeam(view.teamFlowType)
+      || (!!view.teamId && !(view.teamId in state.teams)),
     missingResourceType: EntityType.TEAM,
-    areDifferent: (e, t) => e.teamId !== t.teamId || e.paymentStep !== t.paymentStep,
-    skipBrowserHistory: e => e.paymentStep === UpgradeSteps.CONFIRM_PAY,
+    areDifferent: (a: any, b: any) => a.teamId !== b.teamId || a.paymentStep !== b.paymentStep,
+    skipBrowserHistory: (view: any) => view.paymentStep === UpgradeSteps.CONFIRM_PAY,
   },
   promoReview: {
     slug: 'promo-review',
-    hasMissingResource: (e, t) => !(t.teamId in e.teams),
+    hasMissingResource: (state: any, view: any) => !(view.teamId in state.teams),
     missingResourceType: EntityType.TEAM,
-    areDifferent: (e, t) => e.teamId !== t.teamId,
-    skipBrowserHistory: () => !0,
+    areDifferent: (a: any, b: any) => a.teamId !== b.teamId,
+    skipBrowserHistory: () => true,
   },
   eduReview: {
     slug: 'edu-review',
-    hasMissingResource: (e, t) => !(t.teamId in e.teams),
+    hasMissingResource: (state: any, view: any) => !(view.teamId in state.teams),
     missingResourceType: EntityType.TEAM,
-    areDifferent: (e, t) => e.teamId !== t.teamId,
-    skipBrowserHistory: () => !0,
+    areDifferent: (a: any, b: any) => a.teamId !== b.teamId,
+    skipBrowserHistory: () => true,
   },
   teamFeed: {
     slug: 'feed-posts',
     i18nName: () => getI18nString('view_selectors.file_browser.feed'),
-    hasMissingResource: () => !1,
-    areDifferent: (e, t) => e.postUuid !== t.postUuid,
+    hasMissingResource: () => false,
+    areDifferent: (a: any, b: any) => a.postUuid !== b.postUuid,
   },
   litmus: {
     slug: 'litmus',
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   componentBrowserLibrary: {
     slug: 'library',
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   seatRequests: {
     slug: 'seat-requests',
     i18nName: () => getI18nString('admin_dashboard.requests.seat_title'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   workspace: {
     slug: 'workspace',
     missingResourceType: EntityType.WORKSPACE,
-    hasMissingResource: (e, t) => {
-      let r = getPermissionsStateMemoized(e)
-      let n = wA(r)
-      let i = getCurrentUserOrgUser(r)
-      if (!n || !i || !n.bigma_enabled)
-        return !0
-      switch (t.subView) {
+    hasMissingResource: (state: any, view: any) => {
+      const permissions = getPermissionsStateMemoized(state)
+      const hasBigma = wA(permissions)
+      const currentUserOrgUser = getCurrentUserOrgUser(permissions)
+      if (!hasBigma || !currentUserOrgUser || !hasBigma.bigma_enabled)
+        return true
+      switch (view.subView) {
         case DUserRole.DIRECTORY:
         case DUserRole.ADMIN:
         default:
-          return !1
+          return false
       }
     },
-    areDifferent: (e, t) => e.subView !== t.subView || e.workspaceId !== t.workspaceId || e.selectedTab !== t.selectedTab,
+    areDifferent: (a: any, b: any) =>
+      a.subView !== b.subView
+      || a.workspaceId !== b.workspaceId
+      || a.selectedTab !== b.selectedTab,
   },
   licenseGroup: {
     slug: 'billing-group',
-    hasMissingResource: () => !1,
-    areDifferent: (e, t) => e.subView !== t.subView || e.licenseGroupId !== t.licenseGroupId || e.selectedTab !== t.selectedTab,
+    hasMissingResource: () => false,
+    areDifferent: (a: any, b: any) =>
+      a.subView !== b.subView
+      || a.licenseGroupId !== b.licenseGroupId
+      || a.selectedTab !== b.selectedTab,
   },
   billingGroupDashboard: {
     slug: 'billing-group-dashboard',
-    hasMissingResource: (e, t) => {
-      let r = getPermissionsStateMemoized(e)
-      let n = wA(r)
-      let i = getCurrentUserOrgUser(r)
-      return !n || !i || !n.bigma_enabled
+    hasMissingResource: (state: any, _view: any) => {
+      const permissions = getPermissionsStateMemoized(state)
+      const hasBigma = wA(permissions)
+      const currentUserOrgUser = getCurrentUserOrgUser(permissions)
+      return !hasBigma || !currentUserOrgUser || !hasBigma.bigma_enabled
     },
-    areDifferent: (e, t) => e !== t,
+    areDifferent: (a: any, b: any) => a !== b,
   },
   orgDomainManagement: {
     slug: 'domains',
     i18nName: () => getI18nString('view_selectors.file_browser.org_domain_management'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   orgIdpManagement: {
     slug: 'idps',
     i18nName: () => getI18nString('view_selectors.file_browser.org_idp_management'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   abandonedDraftFiles: {
     slug: 'abandoned_draft_files',
     i18nName: () => getI18nString('org_admin_tab.abandoned_drafts'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   orgAdminSettings: {
     slug: 'admin',
     i18nName: () => getI18nString('view_selectors.file_browser.org_admin'),
-    hasMissingResource: () => !1,
-    areDifferent: (e, t) => e.orgAdminSettingsViewTab !== t.orgAdminSettingsViewTab || e.orgAdminSettingsViewSecondaryTab !== t.orgAdminSettingsViewSecondaryTab || !isEqual(e.orgAdminMembersTabFilters, t.orgAdminMembersTabFilters) || !isEqual(e.orgAdminMembersTabSort, t.orgAdminMembersTabSort),
+    hasMissingResource: () => false,
+    areDifferent: (a: any, b: any) =>
+      a.orgAdminSettingsViewTab !== b.orgAdminSettingsViewTab
+      || a.orgAdminSettingsViewSecondaryTab !== b.orgAdminSettingsViewSecondaryTab
+      || !isEqual(a.orgAdminMembersTabFilters, b.orgAdminMembersTabFilters)
+      || !isEqual(a.orgAdminMembersTabSort, b.orgAdminMembersTabSort),
   },
   search: {
     slug: 'search',
-    hasMissingResource: () => !1,
-    areDifferent: (e, t) => e.entryPoint !== t.entryPoint,
-    stripFuidParam: e => e.entryPoint === 'community',
+    hasMissingResource: () => false,
+    areDifferent: (a: any, b: any) => a.entryPoint !== b.entryPoint,
+    stripFuidParam: (view: any) => view.entryPoint === 'community',
   },
   user: {
     slug: 'user',
     i18nName: () => getI18nString('view_selectors.file_browser.user'),
-    hasMissingResource: () => !1,
-    areDifferent: (e, t) => e.userViewTab !== t.userViewTab || e.userId !== t.userId,
+    hasMissingResource: () => false,
+    areDifferent: (a: any, b: any) => a.userViewTab !== b.userViewTab || a.userId !== b.userId,
   },
   recentsAndSharing: {
     slug: 'recents-and-sharing',
     i18nName: () => getI18nString('view_selectors.file_browser.recents_and_sharing'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   draftsToMove: {
     slug: 'drafts-to-move',
     i18nName: () => getI18nString('view_selectors.file_browser.drafts_to_move'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
   resourceHub: {
     slug: 'resources',
     i18nName: () => getI18nString('view_selectors.file_browser.templates_and_tools'),
-    hasMissingResource: () => !1,
+    hasMissingResource: () => false,
   },
 }
-let $$K2 = Object.keys(W)
-let $$Y5 = Object.values(W).map(e => e.slug)
-let $ = e => !!e && /^\d+$/.test(e)
-function X({
-  resourceType: e,
-  matchingViewName: t,
-  extra: r,
+
+/** List of view keys. Original: viewKeys */
+export const viewKeys = Object.keys(viewConfig)
+/** List of view slugs. Original: viewSlugs */
+export const viewSlugs = Object.values(viewConfig).map(e => e.slug)
+
+/**
+ * Checks if a string is a valid numeric ID.
+ * Original: $
+ * @param id - The string to check.
+ * @returns True if valid numeric ID, false otherwise.
+ */
+export const isValidId = (id: string): boolean => !!id && /^\d+$/.test(id)
+
+/**
+ * Reports an error for invalid resource IDs.
+ * Original: reportInvalidResourceId
+ * @param params - Object containing resourceType, matchingViewName, and extra info.
+ */
+export function reportInvalidResourceId({
+  resourceType,
+  matchingViewName,
+  extra,
+}: {
+  resourceType: string
+  matchingViewName: string
+  extra?: Record<string, any>
 }) {
-  reportError(_$$e.WAYFINDING, new Error(`Invalid ${e} ID while parsing selected view ${t} from path`), {
-    extra: {
-      matchingViewName: t,
-      ...r,
+  reportError(
+    ServiceCategories.WAYFINDING,
+    new Error(`Invalid ${resourceType} ID while parsing selected view ${matchingViewName} from path`),
+    {
+      extra: {
+        matchingViewName,
+        ...extra,
+      },
     },
-  })
+  )
 }
-export class $$q1 {
-  pathToSelectedView(e, t, r, n) {
-    if (t[1] === 'my_plugins' && e.user) {
+/**
+ * Utility class for view path and resource management.
+ * Original: $$q1
+ */
+export class ViewPathManager {
+  /**
+   * Maps a path to a selected view object.
+   * Original: pathToSelectedView
+   */
+  pathToSelectedView(state: any, parts: string[], query: string, extra?: any): any {
+    // Handle user plugins view
+    if (parts[1] === 'my_plugins' && state.user) {
       return {
         view: 'user',
-        userId: e.user.id,
+        userId: state.user.id,
         userViewTab: InterProfileType.PLUGINS,
       }
     }
-    if (t[1] !== 'files')
-      return null
-    if (t[2] === 'drafts') {
+    // Only handle 'files' route
+    if (parts[1] !== 'files') return null
+
+    // Drafts folder
+    if (parts[2] === 'drafts') {
       return {
         view: 'folder',
-        folderId: e.user?.drafts_folder_id,
+        folderId: state.user?.drafts_folder_id,
       }
     }
-    if (t[2] === 'recent') {
-      return {
-        view: 'recentsAndSharing',
-      }
+    // Recent files
+    if (parts[2] === 'recent') {
+      return { view: 'recentsAndSharing' }
     }
-    let o = $$K2.find(e => W[e].slug === t[2])
-    if (!o)
-      return null
-    switch (o) {
-      case 'folder':
-      {
-        let e = t[3]
-        if (!$(e)) {
-          X({
+
+    // Find matching view key
+    const viewKey = viewKeys.find(k => viewConfig[k].slug === parts[2])
+    if (!viewKey) return null
+
+    switch (viewKey) {
+      case 'folder': {
+        const folderId = parts[3]
+        if (!isValidId(folderId)) {
+          reportInvalidResourceId({
             resourceType: 'folder',
-            matchingViewName: o,
-            extra: {
-              folderId: e,
-            },
+            matchingViewName: viewKey,
+            extra: { folderId },
           })
           return null
         }
-        if (!e) {
+        if (!folderId) {
           return {
             view: 'resourceUnavailable',
             resourceType: EntityType.PROJECT,
           }
         }
-        let n = !1
-        r && parseQuery(r).renameProject != null && (n = parseQuery(r).renameProject === 'true')
+        let shouldShowRenameModal = false
+        if (query && parseQuery(query).renameProject != null) {
+          shouldShowRenameModal = parseQuery(query).renameProject === 'true'
+        }
         return {
-          view: o,
-          folderId: e,
-          shouldShowRenameModal: n,
+          view: viewKey,
+          folderId,
+          shouldShowRenameModal,
         }
       }
       case 'allProjects':
-      case 'team':
-      {
-        let n
-        let a
-        let s
-        let l
-        let d
-        let c = NavigationRoutes.HOME
-        if (t.length === 4) {
-          let e = findMatchingValue(NavigationRoutes, t[t.length - 1])
-          e && e !== NavigationRoutes.PROFILE && (c = e)
+      case 'team': {
+        let showResourceConnectionInviteModal
+        let isProUpgrade
+        let assetTransferRequestId
+        let upgradeModalType
+        let teamViewTab = NavigationRoutes.HOME
+        let teamId: string | undefined = state.currentTeamId ? state.currentTeamId : parts[3]
+        if (parts.length === 4) {
+          const tab = findMatchingValue(NavigationRoutes, parts[parts.length - 1])
+          if (tab && tab !== NavigationRoutes.PROFILE) teamViewTab = tab
         }
-        if (t.length === 5 || t.length === 6) {
-          if (t[5] === 'restore')
-            return null
-          let e = findMatchingValue(NavigationRoutes, t[t.length - 1])
-          e && e !== NavigationRoutes.PROFILE && (c = e)
+        if (parts.length === 5 || parts.length === 6) {
+          if (parts[5] === 'restore') return null
+          const tab = findMatchingValue(NavigationRoutes, parts[parts.length - 1])
+          if (tab && tab !== NavigationRoutes.PROFILE) teamViewTab = tab
         }
-        if (!$(d = e.currentTeamId ? e.currentTeamId : t[3])) {
-          void 0 !== d && X({
-            resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              'teamId': d,
-              '!!state.currentTeamId': !!e.currentTeamId,
-              '!!state.currentUserOrgId': !!e.currentUserOrgId,
-              'parts.length': t.length,
-            },
-          })
+        if (!isValidId(teamId)) {
+          if (teamId !== undefined) {
+            reportInvalidResourceId({
+              resourceType: 'team',
+              matchingViewName: viewKey,
+              extra: {
+                teamId,
+                '!!state.currentTeamId': !!state.currentTeamId,
+                '!!state.currentUserOrgId': !!state.currentUserOrgId,
+                'parts.length': parts.length,
+              },
+            })
+          }
           return null
         }
-        let p = d && e.teams[d]
-        if (p && r) {
-          let e = new URLSearchParams(r).get('upgrade_type')
-          e && (l = findMatchingValue(FProductAccessType, e))
+        const teamObj = teamId && state.teams[teamId]
+        if (teamObj && query) {
+          const upgradeType = new URLSearchParams(query).get('upgrade_type')
+          if (upgradeType) upgradeModalType = findMatchingValue(FProductAccessType, upgradeType)
         }
-        r && parseQuerySimple(r).rciid != null && (n = parseQuerySimple(r).rciid)
-        p && r && parseQuery(r).proUpgrade != null && (a = parseQuery(r).proUpgrade === 'true')
-        r && parseQuery(r).assetTransferRequest != null && (s = parseQuery(r).assetTransferRequest)
+        if (query && parseQuerySimple(query).rciid != null) {
+          showResourceConnectionInviteModal = parseQuerySimple(query).rciid
+        }
+        if (teamObj && query && parseQuery(query).proUpgrade != null) {
+          isProUpgrade = parseQuery(query).proUpgrade === 'true'
+        }
+        if (query && parseQuery(query).assetTransferRequest != null) {
+          assetTransferRequestId = parseQuery(query).assetTransferRequest
+        }
         return {
           view: 'team',
-          teamId: d,
-          teamViewTab: c,
-          upgradeModalType: l,
-          isProUpgrade: a,
-          assetTransferRequestId: s,
-          showResourceConnectionInviteModal: n,
+          teamId,
+          teamViewTab,
+          upgradeModalType,
+          isProUpgrade,
+          assetTransferRequestId,
+          showResourceConnectionInviteModal,
         }
       }
-      case 'teamAdminConsole':
-      {
-        let n
-        let a
-        if (!e.currentTeamId)
-          return null
-        let s = null
-        let l = null
-        if (t.length >= 4) {
-          let e = findMatchingValue(DashboardSections, t[3])
-          if (e && (s = e), e && t.length >= 5) {
-            let r = t[4]
-            switch (e) {
-              case DashboardSections.CONTENT:
-                n = findMatchingValue(MemberSections, r)
-                break
-              case DashboardSections.BILLING:
-                n = findMatchingValue(BillingSections, r)
+      case 'teamAdminConsole': {
+        let showResourceConnectionInviteModal
+        if (!state.currentTeamId) return null
+        let teamAdminConsoleViewTab: DashboardSections | null = null
+        let teamAdminConsoleViewSecondaryTab: BillingSections | MemberSections | null = null
+        if (parts.length >= 4) {
+          const tab = findMatchingValue(DashboardSections, parts[3])
+          if (tab) {
+            teamAdminConsoleViewTab = tab
+            if (tab && parts.length >= 5) {
+              const secondary = parts[4]
+              switch (tab) {
+                case DashboardSections.CONTENT:
+                  teamAdminConsoleViewSecondaryTab = findMatchingValue(MemberSections, secondary)
+                  break
+                case DashboardSections.BILLING:
+                  teamAdminConsoleViewSecondaryTab = findMatchingValue(BillingSections, secondary)
+                  break
+              }
             }
           }
         }
-        if (!$(l = e.currentTeamId)) {
-          X({
+        if (!isValidId(state.currentTeamId)) {
+          reportInvalidResourceId({
             resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              currentTeamId: l,
-            },
+            matchingViewName: viewKey,
+            extra: { currentTeamId: state.currentTeamId },
           })
           return null
         }
-        let d = !!e.teams[l]?.pro_team
-        s || (s = d ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS)
-        let c = ''
-        d && r && parseQuery(r).dashEntryPoint && (s = DashboardSections.DASHBOARD, c = parseQuery(r).dashEntryPoint)
-        s === DashboardSections.CONTENT && n === MemberSections.CONNECTED_PROJECTS && r && parseQuerySimple(r).rciid != null && (a = parseQuerySimple(r).rciid)
+        const isProTeam = !!state.teams[state.currentTeamId]?.pro_team
+        if (!teamAdminConsoleViewTab) {
+          teamAdminConsoleViewTab = isProTeam ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS
+        }
+        let dashDeepLinkEntryPoint = ''
+        if (isProTeam && query && parseQuery(query).dashEntryPoint) {
+          teamAdminConsoleViewTab = DashboardSections.DASHBOARD
+          dashDeepLinkEntryPoint = parseQuery(query).dashEntryPoint
+        }
+        if (
+          teamAdminConsoleViewTab === DashboardSections.CONTENT &&
+          teamAdminConsoleViewSecondaryTab === MemberSections.CONNECTED_PROJECTS &&
+          query &&
+          parseQuerySimple(query).rciid != null
+        ) {
+          showResourceConnectionInviteModal = parseQuerySimple(query).rciid
+        }
         return {
-          view: o,
-          teamId: l,
-          teamAdminConsoleViewTab: s,
-          teamAdminConsoleViewSecondaryTab: n,
-          isProTeam: d,
-          dashDeepLinkEntryPoint: c,
-          showResourceConnectionInviteModal: a,
+          view: viewKey,
+          teamId: state.currentTeamId,
+          teamAdminConsoleViewTab,
+          teamAdminConsoleViewSecondaryTab,
+          isProTeam,
+          dashDeepLinkEntryPoint,
+          showResourceConnectionInviteModal,
         }
       }
-      case 'limitedTeamSharedProjects':
-      {
-        let t
-        if (getFeatureFlags().limited_plan_spaces && e.currentTeamId && (t = e.currentTeamId), !t)
-          return null
-        return {
-          view: 'limitedTeamSharedProjects',
+      case 'limitedTeamSharedProjects': {
+        let teamId
+        if (getFeatureFlags().limited_plan_spaces && state.currentTeamId) {
+          teamId = state.currentTeamId
         }
+        if (!teamId) return null
+        return { view: 'limitedTeamSharedProjects' }
       }
       case 'addCollaborators':
         return {
-          view: o,
-          teamId: t[3],
+          view: viewKey,
+          teamId: parts[3],
         }
-      case 'teamUpgrade':
-      {
-        let e = new URLSearchParams(r)
-        let n = !!getFeatureFlags().redirect_starter_team_loophole && !getFeatureFlags().close_starter_team_loophole_v2
-        let i = Object.values(UpgradeAction).includes(t[4]) ? t[4] : UpgradeAction.UPGRADE_EXISTING_TEAM
-        if (n && i !== UpgradeAction.UPGRADE_EXISTING_TEAM) {
-          reportError(_$$e.MONETIZATION_UPGRADES, new Error('Invalid team flow type while parsing selected view from path'), {
-            extra: {
-              matchingViewName: o,
-              parts: t,
-            },
+      case 'teamUpgrade': {
+        const params = new URLSearchParams(query)
+        const loopholeEnabled =
+          !!getFeatureFlags().redirect_starter_team_loophole &&
+          !getFeatureFlags().close_starter_team_loophole_v2
+        const teamFlowType = Object.values(UpgradeAction).includes(parts[4] as UpgradeAction)
+          ? parts[4]
+          : UpgradeAction.UPGRADE_EXISTING_TEAM
+        if (loopholeEnabled && teamFlowType !== UpgradeAction.UPGRADE_EXISTING_TEAM) {
+          reportError(ServiceCategories.MONETIZATION_UPGRADES, new Error('Invalid team flow type while parsing selected view from path'), {
+            extra: { matchingViewName: viewKey, parts },
           })
-          return {
-            view: 'teamCreation',
-            fromNewTab: !0,
-          }
+          return { view: 'teamCreation', fromNewTab: true }
         }
-        let l = Object.values(UpgradeSteps).includes(t[4]) ? t[4] : UpgradeSteps.CHOOSE_PLAN
-        let d = t[5] || l
-        let c = e.get('planType') ? parseInt(e.get('planType')) : i === UpgradeAction.UPGRADE_EXISTING_TEAM ? TeamType.TEAM : void 0
-        let u = isCreateOrPlanComparison(i, d) ? void 0 : c
-        let _ = t[3]
-        if (_ === 'n') {
-          if (_ = null, n) {
-            reportError(_$$e.MONETIZATION_UPGRADES, new Error('Null team ID while parsing selected view from path'), {
-              extra: {
-                matchingViewName: o,
-                parts: t,
-              },
+        const paymentStep = Object.values(UpgradeSteps).includes(parts[4])
+          ? parts[4]
+          : UpgradeSteps.CHOOSE_PLAN
+        const step = parts[5] || paymentStep
+        const planType =
+          params.get('planType')
+            ? parseInt(params.get('planType'))
+            : teamFlowType === UpgradeAction.UPGRADE_EXISTING_TEAM
+              ? TeamType.TEAM
+              : undefined
+        const planTypeFinal = isCreateOrPlanComparison(teamFlowType, step) ? undefined : planType
+        let teamId = parts[3]
+        if (teamId === 'n') {
+          teamId = null
+          if (loopholeEnabled) {
+            reportError(ServiceCategories.MONETIZATION_UPGRADES, new Error('Null team ID while parsing selected view from path'), {
+              extra: { matchingViewName: viewKey, parts },
             })
-            return {
-              view: 'teamCreation',
-              fromNewTab: !0,
-            }
+            return { view: 'teamCreation', fromNewTab: true }
           }
-        }
-        else if (!$(_)) {
-          X({
+        } else if (!isValidId(teamId)) {
+          reportInvalidResourceId({
             resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              teamId: _,
-            },
+            matchingViewName: viewKey,
+            extra: { teamId },
           })
           return null
         }
         return {
-          view: o,
-          teamFlowType: i,
-          teamId: _,
-          paymentStep: d,
-          ...(e.get('entryPoint')
-            ? {
-                entryPoint: parseInt(e.get('entryPoint')),
-              }
-            : {}),
-          ...(e.get('billingPeriod')
-            ? {
-                billingPeriod: parseInt(e.get('billingPeriod')),
-              }
-            : {}),
-          ...(e.get('onCompleteRedirectFileKey')
+          view: viewKey,
+          teamFlowType,
+          teamId,
+          paymentStep: step,
+          ...(params.get('entryPoint') ? { entryPoint: parseInt(params.get('entryPoint')) } : {}),
+          ...(params.get('billingPeriod') ? { billingPeriod: parseInt(params.get('billingPeriod')) } : {}),
+          ...(params.get('onCompleteRedirectFileKey')
             ? {
                 searchParams: {
-                  onCompleteRedirectFileKey: e.get('onCompleteRedirectFileKey'),
-                  onCompleteRedirectNodeId: e.get('onCompleteRedirectNodeId'),
+                  onCompleteRedirectFileKey: params.get('onCompleteRedirectFileKey'),
+                  onCompleteRedirectNodeId: params.get('onCompleteRedirectNodeId'),
                 },
               }
             : {}),
-          ...(u
-            ? {
-                planType: u,
-              }
-            : {}),
+          ...(planTypeFinal ? { planType: planTypeFinal } : {}),
         }
       }
-      case 'promoReview':
-      {
-        let e = t[3]
-        if (!$(e)) {
-          X({
+      case 'promoReview': {
+        const teamId = parts[3]
+        if (!isValidId(teamId)) {
+          reportInvalidResourceId({
             resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              teamId: e,
-            },
+            matchingViewName: viewKey,
+            extra: { teamId },
           })
           return null
         }
         return {
-          view: o,
-          teamId: t[3],
-          teamName: t[4],
+          view: viewKey,
+          teamId,
+          teamName: parts[4],
         }
       }
-      case 'eduReview':
-      {
-        let e = t[3]
-        if (!$(e)) {
-          X({
+      case 'eduReview': {
+        const teamId = parts[3]
+        if (!isValidId(teamId)) {
+          reportInvalidResourceId({
             resourceType: 'team',
-            matchingViewName: o,
-            extra: {
-              teamId: e,
-            },
+            matchingViewName: viewKey,
+            extra: { teamId },
           })
           return null
         }
         return {
-          view: o,
-          teamId: e,
+          view: viewKey,
+          teamId,
         }
       }
-      case 'licenseGroup':
-      {
-        let e
-        let n = getGroupOrDefault(t[5])
-        let i = parseSortConfig(r)
-        n === GroupType.MEMBERS && (e = i ?? DefaultSortConfig)
-        let a = new URLSearchParams(customHistory.location.search).get(originTab)
-        let s = a ? getAllowedDashboardSection(a) : void 0
-        let l = t[3]
-        if (!$(l)) {
-          X({
+      case 'licenseGroup': {
+        let orgAdminMembersTabSort
+        const selectedTab = getGroupOrDefault(parts[5])
+        const sortConfig = parseSortConfig(query)
+        if (selectedTab === GroupType.MEMBERS) {
+          orgAdminMembersTabSort = sortConfig ?? DefaultSortConfig
+        }
+        const originTabValue:any = new URLSearchParams(customHistory.location.search).get(originTab)
+        const orgAdminOriginTab = originTabValue ? getAllowedDashboardSection(originTabValue) : undefined
+        const licenseGroupId = parts[3]
+        if (!isValidId(licenseGroupId)) {
+          reportInvalidResourceId({
             resourceType: 'license group',
-            matchingViewName: o,
-            extra: {
-              licenseGroupId: l,
-            },
+            matchingViewName: viewKey,
+            extra: { licenseGroupId },
           })
           return null
         }
         return {
-          view: o,
+          view: viewKey,
           subView: UserGroupRole.ADMIN,
-          licenseGroupId: l,
-          selectedTab: n,
-          orgAdminMembersTabSort: e,
-          orgAdminOriginTab: s,
+          licenseGroupId,
+          selectedTab,
+          orgAdminMembersTabSort,
+          orgAdminOriginTab,
         }
       }
       case 'billingGroupDashboard':
         return {
-          view: o,
-          selectedTab: findMatchingValue(FRequestsStr, t[3] ?? '') ?? FRequestsStr.REQUESTS,
+          view: viewKey,
+          selectedTab: findMatchingValue(FRequestsStr, parts[3] ?? '') ?? FRequestsStr.REQUESTS,
         }
       case 'seatRequests':
-        if (e.currentUserOrgId === null) {
+        if (state.currentUserOrgId === null) {
           return {
-            view: o,
+            view: viewKey,
             adminPlanType: OrganizationType.TEAM,
-            planId: e.currentTeamId ?? '',
+            planId: state.currentTeamId ?? '',
           }
         }
         return {
-          view: o,
+          view: viewKey,
           adminPlanType: OrganizationType.ORG,
-          planId: e.currentUserOrgId,
+          planId: state.currentUserOrgId,
         }
-      case 'workspace':
-      {
-        let e = t[3]
-        if ((findMatchingValue(DUserRole, t[4]) || DUserRole.DIRECTORY) === DUserRole.ADMIN) {
-          let n
-          let a = findMatchingValue(SectionType, t[5]) || sectionKeys[0]
-          let s = parseSortConfig(r)
-          if (a === SectionType.MEMBERS && (n = s ?? DefaultSortConfig), !$(e)) {
-            X({
+      case 'workspace': {
+        const workspaceId = parts[3]
+        const subView = findMatchingValue(DUserRole, parts[4]) || DUserRole.DIRECTORY
+        if (subView === DUserRole.ADMIN) {
+          const selectedTab = findMatchingValue(SectionType, parts[5]) || sectionKeys[0]
+          const sortConfig = parseSortConfig(query)
+          let orgAdminMembersTabSort
+          if (selectedTab === SectionType.MEMBERS) {
+            orgAdminMembersTabSort = sortConfig ?? DefaultSortConfig
+          }
+          if (!isValidId(workspaceId)) {
+            reportInvalidResourceId({
               resourceType: 'workspace',
-              matchingViewName: o,
-              extra: {
-                workspaceId: e,
-              },
+              matchingViewName: viewKey,
+              extra: { workspaceId },
             })
             return null
           }
           return {
-            view: o,
+            view: viewKey,
             subView: DUserRole.ADMIN,
-            workspaceId: e,
-            selectedTab: a,
-            orgAdminMembersTabSort: n,
+            workspaceId,
+            selectedTab,
+            orgAdminMembersTabSort,
           }
-        }
-        {
-          let r = e
-          if (e === UNASSIGNED) {
-            r = null
-          }
-          else if (!$(e)) {
-            X({
+        } else {
+          let id = workspaceId
+          if (workspaceId === UNASSIGNED) {
+            id = null
+          } else if (!isValidId(workspaceId)) {
+            reportInvalidResourceId({
               resourceType: 'workspace',
-              matchingViewName: o,
-              extra: {
-                workspaceId: e,
-              },
+              matchingViewName: viewKey,
+              extra: { workspaceId },
             })
             return null
           }
           return {
-            view: o,
+            view: viewKey,
             subView: DUserRole.DIRECTORY,
-            workspaceId: r,
-            selectedTab: findMatchingValue(TGroupType, t[5]) || TeamGroupTypes[0],
+            workspaceId: id,
+            selectedTab: findMatchingValue(TGroupType, parts[5]) || TeamGroupTypes[0],
           }
         }
       }
-      case 'orgAdminSettings':
-      {
-        let n
-        let a
-        if (t.length >= 4 && (n = findMatchingValue(DashboardSection, t[3])) && t.length >= 5) {
-          let e = t[4]
-          switch (n) {
-            case DashboardSection.RESOURCES:
-              a = findMatchingValue(FigResourceType, e)
-              break
-            case DashboardSection.CONTENT:
-              a = findMatchingValue(WorkspaceTab, e)
-              break
-            case DashboardSection.BILLING:
-              a = findMatchingValue(BillingSectionEnum, e ?? '')
-              break
-            case DashboardSection.MEMBERS:
-              a = findMatchingValue(MemberView, e ?? '')
+      case 'orgAdminSettings': {
+        let orgAdminSettingsViewTab
+        let orgAdminSettingsViewSecondaryTab
+        if (parts.length >= 4) {
+          orgAdminSettingsViewTab = findMatchingValue(DashboardSection, parts[3])
+          if (orgAdminSettingsViewTab && parts.length >= 5) {
+            const secondary = parts[4]
+            switch (orgAdminSettingsViewTab) {
+              case DashboardSection.RESOURCES:
+                orgAdminSettingsViewSecondaryTab = findMatchingValue(FigResourceType, secondary)
+                break
+              case DashboardSection.CONTENT:
+                orgAdminSettingsViewSecondaryTab = findMatchingValue(WorkspaceTab, secondary)
+                break
+              case DashboardSection.BILLING:
+                orgAdminSettingsViewSecondaryTab = findMatchingValue(BillingSectionEnum, secondary ?? '')
+                break
+              case DashboardSection.MEMBERS:
+                orgAdminSettingsViewSecondaryTab = findMatchingValue(MemberView, secondary ?? '')
+            }
           }
         }
-        n === DashboardSection.WORKSPACES ? (n = DashboardSection.CONTENT, a = WorkspaceTab.WORKSPACES) : n === DashboardSection.TEAMS && (n = DashboardSection.CONTENT, a = WorkspaceTab.TEAMS)
-        let s = {
+        if (orgAdminSettingsViewTab === DashboardSection.WORKSPACES) {
+          orgAdminSettingsViewTab = DashboardSection.CONTENT
+          orgAdminSettingsViewSecondaryTab = WorkspaceTab.WORKSPACES
+        } else if (orgAdminSettingsViewTab === DashboardSection.TEAMS) {
+          orgAdminSettingsViewTab = DashboardSection.CONTENT
+          orgAdminSettingsViewSecondaryTab = WorkspaceTab.TEAMS
+        }
+        const result: any = {
           view: 'orgAdminSettings',
-          orgAdminSettingsViewTab: n = n ?? DashboardSection.DASHBOARD,
-          orgAdminSettingsViewSecondaryTab: a,
+          orgAdminSettingsViewTab: orgAdminSettingsViewTab ?? DashboardSection.DASHBOARD,
+          orgAdminSettingsViewSecondaryTab,
           orgAdminMembersTabFilters: DefaultFilters,
           orgAdminMembersTabSort: DefaultSortConfig,
         }
-        n === DashboardSection.DASHBOARD && r && parseQuery(r).dashEntryPoint != null && (s.dashDeepLinkEntryPoint = parseQuery(r).dashEntryPoint)
-        let o = setupFiltersFromQuery(r, e.licenseGroups)
-        n === DashboardSection.MEMBERS && o && (s.orgAdminMembersTabFilters = o)
-        let l = parseSortConfig(r)
-        if (n === DashboardSection.MEMBERS && r && parseQuery(r).initialSort === 'date-upgraded'
-          ? s.orgAdminMembersTabSort = {
-            columnName: ColumnName.DESIGN_ROLE,
-            isReversed: !0,
-          }
-          : n === DashboardSection.MEMBERS && l && (s.orgAdminMembersTabSort = l), n === DashboardSection.MEMBERS && r && parseQuery(r).orgJoinRequest != null && (s.membersTabOrgJoinRequest = parseQuery(r).orgJoinRequest), r && parseQuery(r).assetTransferRequest != null && (s.teamsTabAssetTransferRequest = parseQuery(r).assetTransferRequest), n === DashboardSection.RESOURCES && r && (a === FigResourceType.APPROVED_PLUGINS || a === FigResourceType.APPROVED_WIDGETS)) {
-          let e = parseQuery(r).eid
-          s.selectedExtensionId = e
+        if (
+          orgAdminSettingsViewTab === DashboardSection.DASHBOARD &&
+          query &&
+          parseQuery(query).dashEntryPoint != null
+        ) {
+          result.dashDeepLinkEntryPoint = parseQuery(query).dashEntryPoint
         }
-        n === DashboardSection.CONTENT && a === WorkspaceTab.CONNECTED_PROJECTS && r && parseQuerySimple(r).rciid != null && (s.showResourceConnectionInviteModal = parseQuerySimple(r).rciid)
-        return s
+        const filters = setupFiltersFromQuery(query, state.licenseGroups)
+        if (orgAdminSettingsViewTab === DashboardSection.MEMBERS && filters) {
+          result.orgAdminMembersTabFilters = filters
+        }
+        const sortConfig = parseSortConfig(query)
+        if (
+          orgAdminSettingsViewTab === DashboardSection.MEMBERS &&
+          query &&
+          parseQuery(query).initialSort === 'date-upgraded'
+        ) {
+          result.orgAdminMembersTabSort = {
+            columnName: ColumnName.DESIGN_ROLE,
+            isReversed: true,
+          }
+        } else if (orgAdminSettingsViewTab === DashboardSection.MEMBERS && sortConfig) {
+          result.orgAdminMembersTabSort = sortConfig
+        }
+        if (
+          orgAdminSettingsViewTab === DashboardSection.MEMBERS &&
+          query &&
+          parseQuery(query).orgJoinRequest != null
+        ) {
+          result.membersTabOrgJoinRequest = parseQuery(query).orgJoinRequest
+        }
+        if (query && parseQuery(query).assetTransferRequest != null) {
+          result.teamsTabAssetTransferRequest = parseQuery(query).assetTransferRequest
+        }
+        if (
+          orgAdminSettingsViewTab === DashboardSection.RESOURCES &&
+          query &&
+          (orgAdminSettingsViewSecondaryTab === FigResourceType.APPROVED_PLUGINS ||
+            orgAdminSettingsViewSecondaryTab === FigResourceType.APPROVED_WIDGETS)
+        ) {
+          result.selectedExtensionId = parseQuery(query).eid
+        }
+        if (
+          orgAdminSettingsViewTab === DashboardSection.CONTENT &&
+          orgAdminSettingsViewSecondaryTab === WorkspaceTab.CONNECTED_PROJECTS &&
+          query &&
+          parseQuerySimple(query).rciid != null
+        ) {
+          result.showResourceConnectionInviteModal = parseQuerySimple(query).rciid
+        }
+        return result
       }
       case 'search':
         return {
           view: 'search',
           entryPoint: 'url:internal',
-          previousView: {
-            view: 'recentsAndSharing',
-          },
+          previousView: { view: 'recentsAndSharing' },
         }
-      case 'user':
-      {
-        if (t.length < 4 || !e.user)
-          return null
-        let i = t[3]
-        let a = InterProfileType.INTERNAL_PROFILE
-        if (t[t.length - 1] === 'settings' && i === e.user.id) {
-          let e = r && parseQuery(r).tab
-          let t = n ? n.slice(1) : void 0
+      case 'user': {
+        if (parts.length < 4 || !state.user) return null
+        const userId = parts[3]
+        let userViewTab = InterProfileType.INTERNAL_PROFILE
+        if (parts[parts.length - 1] === 'settings' && userId === state.user.id) {
+          const accountModalTab = query && parseQuery(query).tab
+          const accountModalTabSection = extra ? extra.slice(1) : undefined
           return {
             view: 'recentsAndSharing',
-            accountModalTab: e || SidebarSection.ACCOUNT,
-            accountModalTabSection: t,
+            accountModalTab: accountModalTab || SidebarSection.ACCOUNT,
+            accountModalTabSection,
           }
         }
-        if (t[t.length - 1] === 'plugins') {
+        if (parts[parts.length - 1] === 'plugins') {
           return {
             view: 'recentsAndSharing',
             accountModalTab: SidebarSection.PLUGINS,
           }
         }
-        if (t[t.length - 1] === 'email_unsubscribe' && i === e.user.id) {
-          let e = r && parseQuery(r).policy
-          if (e) {
+        if (parts[parts.length - 1] === 'email_unsubscribe' && userId === state.user.id) {
+          const emailPolicy = query && parseQuery(query).policy
+          if (emailPolicy) {
             return {
               view: 'recentsAndSharing',
-              emailPolicyToUnsubscribeFrom: e,
+              emailPolicyToUnsubscribeFrom: emailPolicy,
             }
           }
           return {
@@ -740,377 +898,403 @@ export class $$q1 {
             accountModalTab: SidebarSection.NOTIFICATIONS,
           }
         }
-        getFeatureFlags().xr_debounce_threshold && t[t.length - 1] === 'posts' && (a = InterProfileType.INTERNAL_PROFILE_POSTS)
+        if (getFeatureFlags().xr_debounce_threshold && parts[parts.length - 1] === 'posts') {
+          userViewTab = InterProfileType.INTERNAL_PROFILE_POSTS
+        }
         return {
           view: 'user',
-          userId: i,
-          userViewTab: a,
+          userId,
+          userViewTab,
         }
       }
-      case 'feed':
-        if (r) {
-          let e = parseQuery(r)
-          if (e.quickReplyFileKey && e.quickReplyThreadId) {
+      case 'feed': {
+        if (query) {
+          const parsed = parseQuery(query)
+          if (parsed.quickReplyFileKey && parsed.quickReplyThreadId) {
             return {
               view: 'feed',
               quickReplyInfo: {
-                fileKey: e.quickReplyFileKey,
-                threadId: e.quickReplyThreadId,
+                fileKey: parsed.quickReplyFileKey,
+                threadId: parsed.quickReplyThreadId,
               },
             }
           }
         }
-        return {
-          view: 'feed',
-        }
-      case 'teamFeed':
-      {
-        if (e.currentUserOrgId === null || !getFeatureFlags().xr_debounce_threshold)
-          return null
-        let r = new URLSearchParams(customHistory.location.search)
+        return { view: 'feed' }
+      }
+      case 'teamFeed': {
+        if (state.currentUserOrgId === null || !getFeatureFlags().xr_debounce_threshold) return null
+        const params = new URLSearchParams(customHistory.location.search)
         return {
           view: 'teamFeed',
-          postUuid: t[3],
-          creatorId: r.get('creator_id') ?? void 0,
+          postUuid: parts[3],
+          creatorId: params.get('creator_id') ?? undefined,
         }
       }
-      case 'recentsAndSharing':
-      {
-        let e
-        if (t.length >= 4 && (e = findMatchingValue(ViewTypeEnum, t[t.length - 1])), !e) {
-          return {
-            view: 'recentsAndSharing',
-          }
+      case 'recentsAndSharing': {
+        let tab
+        if (parts.length >= 4) {
+          tab = findMatchingValue(ViewTypeEnum, parts[parts.length - 1])
+        }
+        if (!tab) {
+          return { view: 'recentsAndSharing' }
         }
         return {
           view: 'recentsAndSharing',
-          tab: e,
+          tab,
         }
       }
       case 'teamCreation':
-        return {
-          view: o,
-          fromNewTab: !0,
-        }
+        return { view: viewKey, fromNewTab: true }
       case 'abandonedDraftFiles':
-        if (e.currentUserOrgId === null) {
+        if (state.currentUserOrgId === null) {
           return {
-            view: o,
-            abandonedDraftFolderId: t[t.length - 1],
+            view: viewKey,
+            abandonedDraftFolderId: parts[parts.length - 1],
             adminPlanType: OrganizationType.TEAM,
-            planId: e.currentTeamId ?? '',
+            planId: state.currentTeamId ?? '',
           }
         }
         return {
-          view: o,
-          abandonedDraftFolderId: t[t.length - 1],
+          view: viewKey,
+          abandonedDraftFolderId: parts[parts.length - 1],
           adminPlanType: OrganizationType.ORG,
-          planId: e.currentUserOrgId,
+          planId: state.currentUserOrgId,
         }
-      case 'componentBrowserLibrary':
-      {
-        if (!getFeatureFlags().dt_component_browser_file_browser)
-          return null
-        let e = t[3]
-        if (!e)
-          return null
+      case 'componentBrowserLibrary': {
+        if (!getFeatureFlags().dt_component_browser_file_browser) return null
+        const libraryKey = parts[3]
+        if (!libraryKey) return null
         return {
           view: 'componentBrowserLibrary',
-          libraryKey: e,
-          componentKey: t[5],
+          libraryKey,
+          componentKey: parts[5],
         }
       }
       case 'litmus':
         return null
       case 'resourceHub':
-        if (!getFeatureFlags().cmty_resource_hub)
-          return null
-        return {
-          view: 'resourceHub',
-        }
+        if (!getFeatureFlags().cmty_resource_hub) return null
+        return { view: 'resourceHub' }
       default:
-        return {
-          view: o,
-        }
+        return { view: viewKey }
     }
   }
 
-  requireHistoryChange(e, t) {
-    let r = $$K2.find(t => t === e.view)
-    let i = $$K2.find(e => e === t.view)
-    if (!r && !i)
-      return !1
-    let a = r && W[r].skipBrowserHistory
-    if (a && a(e))
-      return !1
-    if (r !== i)
-      return !0
-    if (r && r === i) {
-      let n = W[r].areDifferent
-      return !!n && n(e, t)
+  /**
+   * Determines if a history change is required between two views.
+   * Original: requireHistoryChange
+   */
+  requireHistoryChange(current: any, next: any): boolean {
+    const currentKey = viewKeys.find(k => k === current.view)
+    const nextKey = viewKeys.find(k => k === next.view)
+    if (!currentKey && !nextKey) return false
+    const skipHistory = currentKey && viewConfig[currentKey].skipBrowserHistory
+    if (skipHistory && skipHistory(current)) return false
+    if (currentKey !== nextKey) return true
+    if (currentKey && currentKey === nextKey) {
+      const areDifferent = viewConfig[currentKey].areDifferent
+      return !!areDifferent && areDifferent(current, next)
     }
-    debug(!1, 'view selector code which should be unreachable was reached')
+    debug(false, 'view selector code which should be unreachable was reached')
+    return false
   }
 
-  selectedViewToPath(e, t) {
-    let r = $$K2.find(t => t === e.view)
-    if (!r)
-      return null
-    let i = W[r]
-    if (i.isNonUrlAddressable)
-      return null
-    let a = {}
-    let o = i.slug
-    e.view === 'folder' && t.user?.drafts_folder_id === e.folderId && (o = 'drafts')
-    let l = ''
-    l = getOrgOrTeamPath(t)
-    let p = `/files${l}/${o}`
-    switch (e.view) {
+  /**
+   * Converts a selected view object to a path string.
+   * Original: selectedViewToPath
+   */
+  selectedViewToPath(view: any, state: any): string | null {
+    const viewKey = viewKeys.find(k => k === view.view)
+    if (!viewKey) return null
+    const config = viewConfig[viewKey]
+    if (config.isNonUrlAddressable) return null
+    let queryParams: Record<string, any> = {}
+    let slug = config.slug
+    if (view.view === 'folder' && state.user?.drafts_folder_id === view.folderId) {
+      slug = 'drafts'
+    }
+    let orgOrTeamPath = getOrgOrTeamPath(state)
+    let path = `/files${orgOrTeamPath}/${slug}`
+    switch (view.view) {
       case 'folder':
-        if (o === 'drafts')
-          break
-        p += `/${e.folderId}`
-        let h = this.selectedViewName(e, t)
-        h && (p += `/${encodeUri(h)}`)
+        if (slug === 'drafts') break
+        path += `/${view.folderId}`
+        const folderName = this.selectedViewName(view, state)
+        if (folderName) path += `/${encodeUri(folderName)}`
         break
       case 'team':
-        let g = this.selectedViewName(e, t) || 'Team'
-        t.currentTeamId ? p = `/files${l}/all-projects` : (p += `/${e.teamId}/${encodeUri(g)}`, e.teamViewTab && (p += `/${e.teamViewTab}`))
+        const teamName = this.selectedViewName(view, state) || 'Team'
+        if (state.currentTeamId) {
+          path = `/files${orgOrTeamPath}/all-projects`
+        } else {
+          path += `/${view.teamId}/${encodeUri(teamName)}`
+          if (view.teamViewTab) path += `/${view.teamViewTab}`
+        }
         break
       case 'allProjects':
-        e.isProUpgrade && (a = {
-          ...a,
-          proUpgrade: e.isProUpgrade,
-        })
+        if (view.isProUpgrade) {
+          queryParams = { ...queryParams, proUpgrade: view.isProUpgrade }
+        }
         break
       case 'componentBrowserLibrary':
-        if (!getFeatureFlags().dt_component_browser)
-          break
-        p += `/${e.libraryKey}`
-        e.componentKey ? p += `/component/${e.componentKey}/Component` : p += '/Library'
+        if (!getFeatureFlags().dt_component_browser) break
+        path += `/${view.libraryKey}`
+        path += view.componentKey ? `/component/${view.componentKey}/Component` : '/Library'
         break
       case 'teamAdminConsole':
-        e.teamAdminConsoleViewTab && (p += `/${e.teamAdminConsoleViewTab}`)
-        e.teamAdminConsoleViewSecondaryTab && (p += `/${e.teamAdminConsoleViewSecondaryTab}`)
-        this.appendQueryParams(a, [mL, UC])
+        if (view.teamAdminConsoleViewTab) path += `/${view.teamAdminConsoleViewTab}`
+        if (view.teamAdminConsoleViewSecondaryTab) path += `/${view.teamAdminConsoleViewSecondaryTab}`
+        this.appendQueryParams(queryParams, [mL, UC])
         break
       case 'addCollaborators':
       case 'eduReview':
-        p += `/${e.teamId}`
+        path += `/${view.teamId}`
         break
       case 'teamUpgrade':
-        e.teamId === null ? p += '/n' : p += `/${e.teamId}`
-        e.teamFlowType && (p += `/${e.teamFlowType}`)
-        e.paymentStep && (p += `/${e.paymentStep}`)
-        let f = new URLSearchParams(customHistory.location.search);
-        (e.searchParams || f) && (a = {
-          ...a,
-          ...(f.get('onCompleteRedirectFileKey')
-            ? {
-                onCompleteRedirectFileKey: f.get('onCompleteRedirectFileKey'),
-              }
+        path += view.teamId === null ? '/n' : `/${view.teamId}`
+        if (view.teamFlowType) path += `/${view.teamFlowType}`
+        if (view.paymentStep) path += `/${view.paymentStep}`
+        const urlParams = new URLSearchParams(customHistory.location.search)
+        queryParams = {
+          ...queryParams,
+          ...(urlParams.get('onCompleteRedirectFileKey')
+            ? { onCompleteRedirectFileKey: urlParams.get('onCompleteRedirectFileKey') }
             : {}),
-          ...(f.get('onCompleteRedirectNodeId')
-            ? {
-                onCompleteRedirectNodeId: f.get('onCompleteRedirectNodeId'),
-              }
+          ...(urlParams.get('onCompleteRedirectNodeId')
+            ? { onCompleteRedirectNodeId: urlParams.get('onCompleteRedirectNodeId') }
             : {}),
-          ...e.searchParams,
-        })
-        e.billingPeriod && (a = {
-          ...a,
-          billingPeriod: e.billingPeriod,
-        })
-        e.entryPoint && (a = {
-          ...a,
-          entryPoint: e.entryPoint,
-        })
-        let y = e.planType || TeamType.UNDETERMINED
-        y && (a = {
-          ...a,
-          planType: y,
-        })
+          ...view.searchParams,
+        }
+        if (view.billingPeriod) queryParams.billingPeriod = view.billingPeriod
+        if (view.entryPoint) queryParams.entryPoint = view.entryPoint
+        const planType = view.planType || TeamType.UNDETERMINED
+        if (planType) queryParams.planType = planType
         break
       case 'promoReview':
-        p += `/${e.teamId}/${e.teamName}`
+        path += `/${view.teamId}/${view.teamName}`
         break
       case 'abandonedDraftFiles':
-        p += `/${e.abandonedDraftFolderId}`
+        path += `/${view.abandonedDraftFolderId}`
         break
       case 'orgAdminSettings':
-        e.orgAdminSettingsViewTab && (p += `/${e.orgAdminSettingsViewTab}`, e.orgAdminSettingsViewTab === 'members' && (e.orgAdminMembersTabFilters && (a = {
-          ...a,
-          ...setupGroupsFromFilters(e.orgAdminMembersTabFilters, t.licenseGroups),
-        }), e.orgAdminMembersTabSort && (a = {
-          ...a,
-          ...sortConfigToQuery(e.orgAdminMembersTabSort),
-        })), e.orgAdminSettingsViewSecondaryTab && (p += `/${e.orgAdminSettingsViewSecondaryTab}`), this.appendQueryParams(a, [mL, UC]))
-        break
-      case 'licenseGroup':
-        p += `/${e.licenseGroupId}/${e.subView}/${e.selectedTab}`
-        e.selectedTab === GroupType.MEMBERS && e.orgAdminMembersTabSort && (a = {
-          ...a,
-          ...sortConfigToQuery(e.orgAdminMembersTabSort),
-        })
-        e.orgAdminOriginTab && (a = {
-          ...a,
-          [originTab]: e.orgAdminOriginTab,
-        })
-        break
-      case 'billingGroupDashboard':
-        e.selectedTab === FRequestsStr.ALL_REQUESTS && (p += `/${e.selectedTab}`)
-        break
-      case 'workspace':
-        switch (e.subView) {
-          case DUserRole.ADMIN:
-            p += `/${e.workspaceId}/${e.subView}/${e.selectedTab}`
-            e.selectedTab === SectionType.MEMBERS && e.orgAdminMembersTabSort && (a = {
-              ...a,
-              ...sortConfigToQuery(e.orgAdminMembersTabSort),
-            })
-            break
-          case DUserRole.DIRECTORY:
-            p += `/${e.workspaceId ?? UNASSIGNED}/${e.subView}/${e.selectedTab}`
+        if (view.orgAdminSettingsViewTab) {
+          path += `/${view.orgAdminSettingsViewTab}`
+          if (view.orgAdminSettingsViewTab === 'members') {
+            if (view.orgAdminMembersTabFilters) {
+              queryParams = {
+                ...queryParams,
+                ...setupGroupsFromFilters(view.orgAdminMembersTabFilters, state.licenseGroups),
+              }
+            }
+            if (view.orgAdminMembersTabSort) {
+              queryParams = {
+                ...queryParams,
+                ...sortConfigToQuery(view.orgAdminMembersTabSort),
+              }
+            }
+          }
+          if (view.orgAdminSettingsViewSecondaryTab) {
+            path += `/${view.orgAdminSettingsViewSecondaryTab}`
+          }
+          this.appendQueryParams(queryParams, [mL, UC])
         }
         break
-      case 'search':
-        let b = t.search.parameters
-        switch (a = {
-          model_type: b.searchModelType,
-          ...(b.query && {
-            q: b.query,
-          }),
-          ...(b.fileTypeFilter && {
-            file_type: b.fileTypeFilter,
-          }),
-        }, b.searchScope) {
+      case 'licenseGroup':
+        path += `/${view.licenseGroupId}/${view.subView}/${view.selectedTab}`
+        if (view.selectedTab === GroupType.MEMBERS && view.orgAdminMembersTabSort) {
+          queryParams = {
+            ...queryParams,
+            ...sortConfigToQuery(view.orgAdminMembersTabSort),
+          }
+        }
+        if (view.orgAdminOriginTab) {
+          queryParams[originTab] = view.orgAdminOriginTab
+        }
+        break
+      case 'billingGroupDashboard':
+        if (view.selectedTab === FRequestsStr.ALL_REQUESTS) {
+          path += `/${view.selectedTab}`
+        }
+        break
+      case 'workspace':
+        switch (view.subView) {
+          case DUserRole.ADMIN:
+            path += `/${view.workspaceId}/${view.subView}/${view.selectedTab}`
+            if (view.selectedTab === SectionType.MEMBERS && view.orgAdminMembersTabSort) {
+              queryParams = {
+                ...queryParams,
+                ...sortConfigToQuery(view.orgAdminMembersTabSort),
+              }
+            }
+            break
+          case DUserRole.DIRECTORY:
+            path += `/${view.workspaceId ?? UNASSIGNED}/${view.subView}/${view.selectedTab}`
+            break
+        }
+        break
+      case 'search': {
+        const searchParams = state.search.parameters
+        queryParams = {
+          model_type: searchParams.searchModelType,
+          ...(searchParams.query && { q: searchParams.query }),
+          ...(searchParams.fileTypeFilter && { file_type: searchParams.fileTypeFilter }),
+        }
+        switch (searchParams.searchScope) {
           case SpaceAccessType.ORG:
           case SpaceAccessType.ORG_GUEST:
           case SpaceAccessType.PERSONAL:
             break
           case SpaceAccessType.COMMUNITY:
-            p = '/community/search'
+            path = '/community/search'
             break
           default:
-            throwTypeError(b.searchScope)
+            throwTypeError(searchParams.searchScope)
         }
         break
-      case 'user':
-        let S = this.selectedViewName(e, t)
-        let v = S ? `/${encodeUri(S)}` : ''
-        e.userViewTab === InterProfileType.INTERNAL_PROFILE ? p += `/${e.userId}${v}` : e.userViewTab === InterProfileType.INTERNAL_PROFILE_POSTS ? p += `/${e.userId}/posts` : e.userViewTab === InterProfileType.PLUGINS && (p += `/${e.userId}/plugins`)
+      }
+      case 'user': {
+        const userName = this.selectedViewName(view, state)
+        const userNamePath = userName ? `/${encodeUri(userName)}` : ''
+        if (view.userViewTab === InterProfileType.INTERNAL_PROFILE) {
+          path += `/${view.userId}${userNamePath}`
+        } else if (view.userViewTab === InterProfileType.INTERNAL_PROFILE_POSTS) {
+          path += `/${view.userId}/posts`
+        } else if (view.userViewTab === InterProfileType.PLUGINS) {
+          path += `/${view.userId}/plugins`
+        }
         break
+      }
       case 'teamFeed':
-        e.postUuid && (p += `/${e.postUuid}`)
-        e.creatorId && (a = {
-          ...a,
-          creator_id: e.creatorId,
-        })
+        if (view.postUuid) path += `/${view.postUuid}`
+        if (view.creatorId) queryParams.creator_id = view.creatorId
         break
       case 'recentsAndSharing':
-        e.tab && (p += `/${e.tab}`)
+        if (view.tab) path += `/${view.tab}`
         break
       case 'resourceHub':
-        p = customHistory.location.pathname
-        new URLSearchParams(customHistory.location.search).forEach((e, t) => {
-          t !== 'fuid' && (a[t] = e)
+        path = customHistory.location.pathname
+        new URLSearchParams(customHistory.location.search).forEach((val, key) => {
+          if (key !== 'fuid') queryParams[key] = val
         })
         break
       case 'litmus':
-        e.subView === 'feed' && (p += `/${e.projectId}`)
+        if (view.subView === 'feed') path += `/${view.projectId}`
+        break
     }
-    let A = !i.stripFuidParam || !i.stripFuidParam(e)
-    return (t.user && A && (a.fuid = t.user.id), isAppShellEnabled() && (a._app_shell = '1'), Object.keys(a).length !== 0) ? `${p}?${serializeQuery(a)}` : p
+    const shouldIncludeFuid = !config.stripFuidParam || !config.stripFuidParam(view)
+    if (state.user && shouldIncludeFuid) queryParams.fuid = state.user.id
+    if (isAppShellEnabled()) queryParams._app_shell = '1'
+    return Object.keys(queryParams).length !== 0 ? `${path}?${serializeQuery(queryParams)}` : path
   }
 
-  selectedViewName(e, t) {
-    let r = $$K2.find(t => t === e.view)
-    if (!r)
-      return null
-    switch (e.view) {
+  /**
+   * Gets the display name for a selected view.
+   * Original: selectedViewName
+   */
+  selectedViewName(view: any, state: any): string | null {
+    const viewKey = viewKeys.find(k => k === view.view)
+    if (!viewKey) return null
+    switch (view.view) {
       case 'folder':
-        if (getFeatureFlags().folder_page_fix_tab_titles && t.user?.drafts_folder_id === e.folderId)
+        if (getFeatureFlags().folder_page_fix_tab_titles && state.user?.drafts_folder_id === view.folderId) {
           return getI18nString('sidebar.drafts')
-        let n = t.folders[e.folderId]
-        if (!n)
-          return null
-        return getSidebarPath(n)
+        }
+        const folder = state.folders[view.folderId]
+        if (!folder) return null
+        return getSidebarPath(folder)
       case 'team':
-        return t.teams[e.teamId]?.name ?? getI18nString('view_selectors.file_browser.team')
+        return state.teams[view.teamId]?.name ?? getI18nString('view_selectors.file_browser.team')
       case 'teamAdminConsole':
-        let i = t.teams[e.teamId]?.name
-        return getI18nString('view_selectors.file_browser.team_admin_console_with_name', {
-          adminTeamName: i,
-        }) ?? getI18nString('view_selectors.file_browser.team_admin_console_generic')
+        const teamName = state.teams[view.teamId]?.name
+        return (
+          getI18nString('view_selectors.file_browser.team_admin_console_with_name', { adminTeamName: teamName }) ??
+          getI18nString('view_selectors.file_browser.team_admin_console_generic')
+        )
       case 'teamUpgrade':
-        if (e.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE || e.teamId === null)
+        if (view.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE || view.teamId === null) {
           return getI18nString('view_selectors.file_browser.create_new_team')
-        let a = t.teams[e.teamId]?.name
-        if (a) {
-          return getI18nString('view_selectors.file_browser.team_upgrade_with_name', {
-            teamName: a,
-          })
+        }
+        const upgradeTeamName = state.teams[view.teamId]?.name
+        if (upgradeTeamName) {
+          return getI18nString('view_selectors.file_browser.team_upgrade_with_name', { teamName: upgradeTeamName })
         }
         return getI18nString('view_selectors.file_browser.team_upgrade_generic')
       case 'search':
-        let {
-          query,
-        } = t.search.parameters
+        const { query } = state.search.parameters
         return query
-          ? getI18nString('view_selectors.file_browser.search_results_with_query', {
-              query,
-            })
+          ? getI18nString('view_selectors.file_browser.search_results_with_query', { query })
           : getI18nString('view_selectors.file_browser.search_results_generic')
       case 'user':
-        let {
-          orgUsersByOrgId,
-          currentUserOrgId,
-        } = t
-        let c = currentUserOrgId && orgUsersByOrgId[currentUserOrgId] || {}
-        if (e.userViewTab === InterProfileType.INTERNAL_PROFILE || e.userViewTab === InterProfileType.INTERNAL_PROFILE_POSTS) {
-          let t = c[e.userId]
-          return t ? t.user.handle : ''
+        const { orgUsersByOrgId, currentUserOrgId } = state
+        const orgUsers = currentUserOrgId && orgUsersByOrgId[currentUserOrgId] || {}
+        if (
+          view.userViewTab === InterProfileType.INTERNAL_PROFILE ||
+          view.userViewTab === InterProfileType.INTERNAL_PROFILE_POSTS
+        ) {
+          const user = orgUsers[view.userId]
+          return user ? user.user.handle : ''
         }
-        if (e.userViewTab === InterProfileType.PLUGINS)
+        if (view.userViewTab === InterProfileType.PLUGINS) {
           return getI18nString('view_selectors.file_browser.plugins')
+        }
         return 'User'
       case 'licenseGroup':
         return getI18nString('view_selectors.file_browser.billing_admin')
       case 'workspace':
-        if (e.subView === DUserRole.ADMIN)
+        if (view.subView === DUserRole.ADMIN) {
           return getI18nString('view_selectors.file_browser.workspace_admin')
-        if (!e.workspaceId)
+        }
+        if (!view.workspaceId) {
           return getI18nString('view_selectors.file_browser.other_teams')
+        }
         return getI18nString('view_selectors.file_browser.workspace')
       default:
-        if (W[r].i18nName)
-          return W[r].i18nName()
+        if (viewConfig[viewKey].i18nName) {
+          return viewConfig[viewKey].i18nName()
+        }
         return null
     }
   }
 
-  selectedViewHasMissingResources(e, t) {
-    let r = $$K2.find(e => e === t.view)
-    return !!r && W[r].hasMissingResource(e, t)
+  /**
+   * Checks if the selected view has missing resources.
+   * Original: selectedViewHasMissingResources
+   */
+  selectedViewHasMissingResources(state: any, view: any): boolean {
+    const viewKey = viewKeys.find(k => k === view.view)
+    return !!viewKey && viewConfig[viewKey].hasMissingResource(state, view)
   }
 
-  selectedViewMissingResourceType(e) {
-    let t = $$K2.find(t => t === e.view)
-    if (t)
-      return W[t].missingResourceType
+  /**
+   * Gets the missing resource type for a selected view.
+   * Original: selectedViewMissingResourceType
+   */
+  selectedViewMissingResourceType(view: any): EntityType | undefined {
+    const viewKey = viewKeys.find(k => k === view.view)
+    if (viewKey) return viewConfig[viewKey].missingResourceType
   }
 
-  appendQueryParams(e, t) {
-    let r = new URLSearchParams(customHistory.location.search)
-    t.forEach((t) => {
-      r.has(t) && (e[t] = r.get(t))
+  /**
+   * Appends query parameters from history to the given object.
+   * Original: appendQueryParams
+   */
+  appendQueryParams(params: Record<string, any>, keys: string[]): void {
+    const searchParams = new URLSearchParams(customHistory.location.search)
+    keys.forEach(key => {
+      if (searchParams.has(key)) {
+        params[key] = searchParams.get(key)
+      }
     })
   }
 }
-export const $N = $$V0
-export const $T = $$q1
-export const g5 = $$K2
-export const gb = $$z3
-export const nb = $$H4
-export const nw = $$Y5
-export const pO = $$G6
+
+// Export refactored class and variables with new names
+export const $$q1 = ViewPathManager
+export const $N = isSelectedViewMissingOrgAdminSettingsResources
+export const $T = ViewPathManager
+export const g5 = viewKeys
+export const gb = isSelectedTeamAdminConsoleMissingResources
+export const nb = isSelectedOrgAdminSettingsMissingResources
+export const nw = viewSlugs
+export const pO = isSelectedViewMissingOrgAdminResources

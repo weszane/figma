@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../5430/872214";
 import { W, B } from "../905/841666";
 import { w } from "../5430/495667";
-import { Vm, XW } from "../figma_app/427318";
+import { getResourceType, hasContent } from "../figma_app/427318";
 import { cs } from "../figma_app/740025";
 import { KindEnum } from "../905/129884";
 export function $$p0(e) {
@@ -15,10 +15,10 @@ export function $$p0(e) {
   } = e;
   let x = useSelector(e => e.authedActiveCommunityProfile);
   let m = cs(x);
-  let h = W(resource.id, Vm(resource), !XW(resource));
-  let g = B(resource.id, XW(resource));
-  let f = XW(resource) ? !!g.data?.[0] : !!h.data?.[0];
-  let _ = XW(resource) ? g.data?.[1] : h.data?.[1];
+  let h = W(resource.id, getResourceType(resource), !hasContent(resource));
+  let g = B(resource.id, hasContent(resource));
+  let f = hasContent(resource) ? !!g.data?.[0] : !!h.data?.[0];
+  let _ = hasContent(resource) ? g.data?.[1] : h.data?.[1];
   let b = w(resource, f, _ || null, viewContext);
   return m ? jsx("div", {
     "data-tooltip-type": KindEnum.TEXT,

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { l as _$$l } from "../905/716947";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { n1 } from "../figma_app/657017";
-import { oA } from "../905/71785";
+import { getCurrentHubFileVersionName } from "../905/71785";
 import { COMMUNITY_LIBRARY_FILE } from "../figma_app/633080";
 import { resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { D } from "../905/347702";
@@ -14,7 +14,7 @@ export function $$m0(e) {
   return useMemo(() => e && $$h7(e) ? e : null, [e]);
 }
 export function $$g3(e) {
-  let t = oA(e);
+  let t = getCurrentHubFileVersionName(e);
   let {
     id,
     thumbnail_url,

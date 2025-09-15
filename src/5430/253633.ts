@@ -11,8 +11,8 @@ import { Dy, ky, Je } from "../figma_app/925970";
 import { x0 } from "../5430/908946";
 import { W as _$$W } from "../5430/53744";
 import { Jm } from "../figma_app/387599";
-import { _t } from "../figma_app/471982";
-import { xn } from "../905/934145";
+import { buildCommunityPathById } from "../figma_app/471982";
+import { ProfileRouteState } from "../905/934145";
 import { AG } from "../figma_app/999312";
 import { A as _$$A } from "../svg/355105";
 import { A as _$$A2 } from "../svg/545021";
@@ -91,9 +91,9 @@ export function $$b0({
         if ("Enter" === s.key) {
           if (s.preventDefault(), renderedSelectedIdx >= 0 && selectedIdx.type) {
             let t = resources[selectedIdx.type]?.[selectedIdx.idx];
-            let s = x0(t) ? new xn({
+            let s = x0(t) ? new ProfileRouteState({
               profileHandle: t.model.profile_handle
-            }).href : _t({
+            }).href : buildCommunityPathById({
               resource: t
             });
             customHistory.push(s);

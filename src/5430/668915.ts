@@ -1,8 +1,8 @@
 import { useMemo, useEffect } from "react";
-import { o7 } from "../figma_app/471982";
+import { filterResources } from "../figma_app/471982";
 import { fk, vb } from "../5430/823351";
-import { zq } from "../figma_app/598412";
-import { R5 } from "../figma_app/188671";
+import { getCurrentLocale } from "../figma_app/598412";
+import { communityShelvesQuery } from "../figma_app/188671";
 import { IT } from "../905/713695";
 import { a as _$$a, z } from "../figma_app/601188";
 import { GS } from "../5430/342380";
@@ -25,7 +25,7 @@ export function $$m1(e, t, r) {
   useEffect(() => {
     flushAndResetResourceImpressions();
   }, [categorySlug, flushAndResetResourceImpressions]);
-  let x = zq();
+  let x = getCurrentLocale();
   let [{
     data: f,
     status: y,
@@ -44,14 +44,14 @@ export function $$m1(e, t, r) {
   let [{
     data: j,
     status: w
-  }] = IT(R5(categorySlug));
+  }] = IT(communityShelvesQuery(categorySlug));
   let C = tagSlug || "loaded" !== w ? null : j;
   let L = (C?.shelf_content ?? []).filter(e => "viewer_mode" in e || "is_widget" in e);
   let T = useMemo(() => {
     let e = new Set(L.map(e => e.id));
     return (f ?? []).filter(t => !e.has(t.rdp_url.split("/").pop() ?? ""));
   }, [f, L]);
-  let I = useMemo(() => o7(L, {
+  let I = useMemo(() => filterResources(L, {
     editor_type: _.editorType,
     price: _.price,
     resourceType: _.resourceType

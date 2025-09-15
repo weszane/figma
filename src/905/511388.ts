@@ -22,7 +22,7 @@ import { J } from "../905/614223";
 import { BaseLinkComponent } from "../figma_app/637027";
 import { b as _$$b } from "../905/217163";
 import { getProviderConfigType } from "../figma_app/155411";
-import { Ag, HA } from "../figma_app/255679";
+import { isKeyInQNOrR9, getPartnerTypeFromPreset } from "../figma_app/255679";
 let o = memo(function (e) {
   return _$$O() ? jsx("svg", {
     width: "16",
@@ -194,7 +194,7 @@ export function $$L0({
       ...m
     };
     if (t && null != e) {
-      if (Ag(e)) {
+      if (isKeyInQNOrR9(e)) {
         let t = o?.[e]?.author_name;
         return {
           "data-tooltip": N,
@@ -205,7 +205,7 @@ export function $$L0({
           ...m
         };
       }
-      switch (HA(p, e)) {
+      switch (getPartnerTypeFromPreset(p, e)) {
         case FAuthProviderType.APPLE:
           return {
             "data-tooltip": S,

@@ -3,8 +3,8 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { I } from "../figma_app/4253";
 import { isSubscriptionActive, isRecentActivePurchase } from "../figma_app/808294";
-import { K2 } from "../figma_app/777551";
-import { XW, qY } from "../figma_app/427318";
+import { getResourceName } from "../figma_app/777551";
+import { hasContent, getMainContent } from "../figma_app/427318";
 import { bb } from "../figma_app/399472";
 import { MK, Gl } from "../figma_app/599979";
 import { selectCurrentUser } from "../905/372672";
@@ -16,7 +16,7 @@ export function $$h0({
   let t = useDispatch();
   let r = useSelector(e => e.authedActiveCommunityProfile);
   let h = useSelector(t => MK(t, e));
-  let x = XW(e) ? qY(e) : e;
+  let x = hasContent(e) ? getMainContent(e) : e;
   let f = Gl.includes(h) && (e.community_publishers?.accepted || []).length > 1 && r?.primary_user_id;
   let y = useCallback(() => {
     hasClientMeta(x) ? t(bb({
@@ -39,7 +39,7 @@ export function $$h0({
       payment: v
     }), g && b && isSubscriptionActive(v) && isRecentActivePurchase(v) && jsx(EV, {
       user: b,
-      name: K2(e) || "",
+      name: getResourceName(e) || "",
       monetizedResource: x.monetized_resource_metadata
     })]
   });

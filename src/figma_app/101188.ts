@@ -18,7 +18,7 @@ import { YP, gO } from "../figma_app/88768";
 import { getPermissionsState, canAdminOrg } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
 import { getTeamUrl } from "../figma_app/630077";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { j } from "../905/834956";
 import { H } from "../905/154301";
 import { p as _$$p } from "../905/195198";
@@ -66,7 +66,7 @@ export function $$C0() {
           }
         }));
       };
-      e ? t(!0) : $.getSubscriptionStatus({
+      e ? t(!0) : teamAPIClient.getSubscriptionStatus({
         teamId: C.id
       }).then(({
         data: e

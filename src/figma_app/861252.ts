@@ -23,7 +23,7 @@ import { aV } from "../figma_app/722362";
 import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../figma_app/57000";
 import { P4 } from "../905/18800";
-import { jl } from "../figma_app/471982";
+import { isMobileCommunity } from "../figma_app/471982";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { U as _$$U } from "../905/492359";
 import { S as _$$S } from "../5132/724052";
@@ -211,7 +211,7 @@ let $$eh0 = memo(function () {
   let U = $$eg1();
   let H = useAtomWithSubscription(P4);
   let W = getObservableValue(AppStateTsApi?.uiState().inProductHelpSidePanelWidth, 0);
-  if (jl() || !_ && j) return null;
+  if (isMobileCommunity() || !_ && j) return null;
   let q = jsxs("div", {
     ref: u,
     className: p()("bottom_right_tools_container--container--GhraJ", {

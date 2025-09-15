@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Jm } from "../figma_app/387599";
-import { JJ } from "../figma_app/471982";
+import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { YW } from "../figma_app/350203";
 import { hasMonetizedResourceMetadata, hasClientMeta, isWidget } from "../figma_app/45218";
 import { e0 } from "../905/696396";
@@ -34,7 +34,7 @@ function u(e) {
   return {
     hubFileId: e.id,
     viewerMode: e.viewer_mode,
-    editorType: JJ(e.viewer_mode),
+    editorType: mapTemplateCategoryToFileType(e.viewer_mode),
     isMonetized: hasMonetizedResourceMetadata(e),
     isMobileView: window.innerWidth <= YW
   };

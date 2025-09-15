@@ -1,5 +1,5 @@
 import { XHR } from "../905/910117";
-import { KH } from "../figma_app/471982";
+import { getResourceTypeLabel } from "../figma_app/471982";
 export function $$a1(e, t) {
   return !!e && !!e.plugin_publishers?.pending?.some(e => e.id === t);
 }
@@ -12,7 +12,7 @@ export function $$o2(e, t) {
 export async function $$l3(e, t) {
   let {
     data
-  } = await XHR.post(`/api/${KH(e, {
+  } = await XHR.post(`/api/${getResourceTypeLabel(e, {
     pluralized: !0
   })}/${e.id}/publisher_invites`, {
     emails: t

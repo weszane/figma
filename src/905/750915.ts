@@ -8,7 +8,7 @@ import { h as _$$h } from "../905/207101";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { e as _$$e } from "../905/579755";
 import { V6 } from "../figma_app/487970";
-import { Dl } from "../figma_app/471982";
+import { mapResourceType } from "../figma_app/471982";
 import { partitionUsersByPurchaseEligibility, isSubscriptionActive } from "../figma_app/808294";
 import { c as _$$c } from "../figma_app/11961";
 import { getAssociatedUserProfiles } from "../905/11536";
@@ -142,7 +142,7 @@ export let $$T0 = registerModal(function (e) {
   let s = useMemo(() => function (e) {
     _$$h(() => {
       trackEventAnalytics("Pre Purchase User Selector Modal - Opened", {
-        resourceType: Dl(e.resource),
+        resourceType: mapResourceType(e.resource),
         resourceId: e.resource.id
       });
     });

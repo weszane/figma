@@ -7,7 +7,7 @@ import { BillingSections, DashboardSections, MemberSections } from '../905/54820
 import { subscribeAndAwaitData } from '../905/553831';
 import { AccessLevelEnum } from '../905/557142';
 import { getFeatureFlags } from '../905/601108';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { getResourceDataOrFallback } from '../905/723791';
 import { createLoadedResource } from '../905/957591';
 import { TeamFileLimitsInfo, TeamFileLimitsInfoByProject } from '../figma_app/43951';
@@ -25,7 +25,7 @@ export async function $$x10(e) {
   let t = [];
   let r = {};
   await Promise.all(e.map(async e => {
-    let n = await M4.fetchFile(e);
+    let n = await liveStoreInstance.fetchFile(e);
     if (!n?.trashed_at || !n?.team_id) return;
     t.push(n);
     let i = (await subscribeAndAwaitData(TeamFileLimitsInfo, {
@@ -47,7 +47,7 @@ export async function $$C19(e) {
   let r = {};
   await Promise.all(e.map(async e => {
     let n = {
-      ...(await M4.fetchFile(e.key)),
+      ...(await liveStoreInstance.fetchFile(e.key)),
       folder_id: e.folderId
     };
     if (n && t.push(n), !e.folderId) return;
@@ -69,7 +69,7 @@ let w = async (e, t) => {
       editor_type
     } = t;
     if (!folder_id || !team_id || !editor_type) continue;
-    let s = n[folder_id] ?? (await M4.fetchFolder(folder_id));
+    let s = n[folder_id] ?? (await liveStoreInstance.fetchFolder(folder_id));
     n[folder_id] = s;
     r[team_id] = r[team_id] ?? {};
     r[team_id][editor_type] = r[team_id][editor_type] ?? {

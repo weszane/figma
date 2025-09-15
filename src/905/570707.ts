@@ -7,7 +7,7 @@ import { handleAtomEvent } from "../905/502364";
 import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { eD } from "../figma_app/646357";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { h as _$$h } from "../figma_app/198885";
 import { k1, vx } from "../905/91038";
 import { kb } from "../figma_app/502247";
@@ -72,7 +72,7 @@ export function $$v2() {
   }), [e, i, t]);
 }
 (e => {
-  e.livestoreQuery = M4.Query({
+  e.livestoreQuery = liveStoreInstance.Query({
     fetch: async ({
       query: e,
       fileVersion: t,
@@ -110,7 +110,7 @@ export function $$v2() {
       };
     }
   });
-  e.libraryKeyLivestoreQuery = M4.Query({
+  e.libraryKeyLivestoreQuery = liveStoreInstance.Query({
     fetch: async ({
       query: e,
       fileVersion: t,

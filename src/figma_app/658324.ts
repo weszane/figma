@@ -4,7 +4,7 @@ import a from "../vendor/239910";
 import { logger } from "../905/651849";
 import { getI18nString } from "../905/303541";
 import { qH } from "../figma_app/934005";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { i as _$$i } from "../905/787489";
 import { V } from "../905/223084";
 var s = a;
@@ -16,7 +16,7 @@ function h(e) {
     ...t
   }));
 }
-let m = M4.Query({
+let m = liveStoreInstance.Query({
   fetch: async e => {
     let t = (await V.getPlanInvoices(e)).data.meta.invoices;
     h(t);
@@ -42,7 +42,7 @@ export function $$f1({
   _$$i(n, getI18nString("plan_invoices.generic_load_error"));
   return g(n);
 }
-let E = M4.Query({
+let E = liveStoreInstance.Query({
   fetch: async ({
     planType: e,
     planId: t
@@ -57,10 +57,10 @@ let E = M4.Query({
 });
 export async function $$y2(e) {
   try {
-    let t = await M4.fetch(E(e), {
+    let t = await liveStoreInstance.fetch(E(e), {
       policy: "networkOnly"
     });
-    let r = M4.getMutation(b);
+    let r = liveStoreInstance.getMutation(b);
     await r({
       queryArgs: e,
       upcomingPlanInvoices: t
@@ -69,14 +69,14 @@ export async function $$y2(e) {
     logger.error(e);
   }
 }
-let b = M4.Mutation((e, {
+let b = liveStoreInstance.Mutation((e, {
   query: t
 }) => {
   t.mutate(m(e.queryArgs), t => [...e.upcomingPlanInvoices, ...t.filter(({
     state: e
   }) => e !== qH.PENDING)]);
 });
-let T = M4.Query({
+let T = liveStoreInstance.Query({
   fetch: async ({
     planType: e,
     planId: t

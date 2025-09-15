@@ -16,7 +16,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { getRelaunchablePlugins, canRunPlugin } from "../figma_app/300692";
 import { O as _$$O } from "../figma_app/185954";
 import { R as _$$R } from "../figma_app/612938";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { hasLocalFileId, ManifestEditorType } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
@@ -207,7 +207,7 @@ export function $$F0() {
   let I = useDispatch();
   let D = e => I(af({
     id: e,
-    resourceType: n[e]?.is_widget ? ResourceType.WIDGET : ResourceType.PLUGIN
+    resourceType: n[e]?.is_widget ? HubTypeEnum.WIDGET : HubTypeEnum.PLUGIN
   }));
   let k = getRelaunchablePlugins(e, n, r, a, t || 0, (e, t) => C.current.debounceRefresh(e, () => D(e), t), ManifestEditorType.FIGJAM);
   let V = u()(k, e => e.pluginTypeAndID);

@@ -8,7 +8,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { Tn, fv } from "../figma_app/933328";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { MH, cM, tK } from "../figma_app/803787";
 import { registerModal } from "../905/102752";
 import { u as _$$u } from "../905/56919";
@@ -202,7 +202,7 @@ let $$B0 = registerModal(function (e) {
   _$$T();
   let g = useSelector(e => e.currentUserOrgId);
   let f = useSelector(e => g ? e.orgById[g] : void 0);
-  let _ = M4.useFile(fileKey).data;
+  let _ = liveStoreInstance.useFile(fileKey).data;
   let A = useSelector(e => Object.values(MH(e)).length);
   let y = useSelector(e => Object.values(cM(e)).length);
   let b = useSelector(e => Object.values(tK(e)).length);

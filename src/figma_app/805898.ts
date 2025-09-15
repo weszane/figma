@@ -1,176 +1,290 @@
-import { useMemo, useLayoutEffect } from "react";
-import { customHistory } from "../905/612521";
-import { setupResourceAtomHandler } from "../figma_app/566371";
-import { parseQuerySimple } from "../905/634134";
-import { C as _$$C } from "../905/237873";
-import { S, N } from "../905/872825";
-import { zq } from "../figma_app/598412";
-import { pO, nS, Ac, Wk, aV } from "../figma_app/321395";
-import { H, e as _$$e } from "../figma_app/324237";
-import { Z } from "../905/942203";
-import { editorUtilities } from "../905/22009";
-import { ResourceTypes } from "../905/178090";
-import { LJ, gT, Tr, zU } from "../figma_app/930386";
-import { Zp } from "../figma_app/188671";
-import { VR, FZ, CS, p7 } from "../figma_app/979714";
-import { zs, OU, _4 } from "../figma_app/773663";
-var y = Object.getPrototypeOf;
-var b = Reflect.get;
-var T = (e, t, r) => b(y(e), r, t);
-export function $$I3(e, t) {
-  let r;
-  let n = decodeURIComponent(e || customHistory.location.pathname);
+import { useLayoutEffect, useMemo } from 'react'
+import { editorUtilities } from '../905/22009'
+import { ResourceTypes } from '../905/178090'
+import { PricingOptions } from '../905/237873'
+import { customHistory } from '../905/612521'
+import { parseQuerySimple } from '../905/634134'
+import { getValueOrFallback, isValueInObject } from '../905/872825'
+import { BrowseUtils } from '../905/942203'
+import { categoryBySlugQuery } from '../figma_app/188671'
+import { captureRouteEvent, concatStrings, createRouteMatcher, RouteState, withCommunityRoute } from '../figma_app/321395'
+import { getAllTimeSortOption, SortOptions } from '../figma_app/324237'
+import { setupResourceAtomHandler } from '../figma_app/566371'
+import { getCurrentLocale } from '../figma_app/598412'
+import { anchorEditorResource, selectEditorResource, syncEditorResourceWithHistory } from '../figma_app/773663'
+import { gT, LJ, Tr, zU } from '../figma_app/930386'
+import { parseFuidQuery, RESOURCE_ROUTE, toResourceParams, toRouteParams } from '../figma_app/979714'
+
+// Utility functions for prototype access (original: y, b, T)
+const getPrototypeOf = Object.getPrototypeOf
+const reflectGet = Reflect.get
+const callSuperMethod = (instance: any, context: any, method: string) => reflectGet(getPrototypeOf(instance), method, context)
+
+/**
+ * Interface for browse route parameters (derived from original $$I3 logic)
+ */
+export interface BrowseRouteParams {
+  category: string
+  resourceType: string
+  editor_type: any
+  price: string
+  creators: string
+  sort_by: string
+  tags: string[]
+}
+
+/**
+ * Parses the browse route from pathname and search query to extract parameters.
+ * Original function: $$I3
+ * @param pathname - The pathname to parse (defaults to current location)
+ * @param search - The search query string (defaults to current location)
+ * @returns Parsed browse parameters or null if parsing fails
+ */
+export function parseBrowseRoute(pathname?: string, search?: string): BrowseRouteParams | null {
+  const decodedPath = decodeURIComponent(pathname || customHistory.location.pathname)
+  let routeParams: any
   try {
-    let e = pO($$N0)(n);
-    if (!e) return null;
-    r = e.params;
-  } catch (e) {
-    return null;
+    const matcher = createRouteMatcher(CategoryRoute)
+    const match = matcher(decodedPath)
+    if (!match)
+      return null
+    routeParams = match.params
   }
-  let a = $$x2.parseQueryString(t || customHistory.location.search);
-  let s = r.categorySlug;
-  let l = r.tagSlug;
-  let {
-    resourceType,
-    editorType
-  } = zs(a.editor_type, a.resource_type);
-  let h = {
-    category: s,
+  catch {
+    return null
+  }
+
+  const queryParams = CategoryRoute.parseQueryString(search || customHistory.location.search)
+  const categorySlug = routeParams.categorySlug
+  const tagSlug = routeParams.tagSlug
+  const { resourceType, editorType } = selectEditorResource(queryParams.editor_type, queryParams.resource_type)
+
+  const params: BrowseRouteParams = {
+    category: categorySlug,
     resourceType,
     editor_type: editorType,
-    price: a.price || _$$C.ALL,
-    creators: Z.ALL,
-    sort_by: H(),
-    tags: l ? [l] : []
-  };
-  let m = a.sort_by;
-  m && [_$$e.Browse.ALL_TIME, _$$e.Browse.PUBLISHED_AT, _$$e.Browse.POPULAR, _$$e.Browse.RANDOM].includes(m) && (h.sort_by = m);
-  let g = a.creators;
-  g && [Z.FIGMA_PARTNER, Z.FOLLOWING].includes(g) && (h.creators = g);
-  return h;
+    price: queryParams.price || PricingOptions.ALL,
+    creators: BrowseUtils.ALL,
+    sort_by: getAllTimeSortOption(),
+    tags: tagSlug ? [tagSlug] : [],
+  }
+
+  // Handle sort_by if valid
+  if (queryParams.sort_by && [SortOptions.Browse.ALL_TIME, SortOptions.Browse.PUBLISHED_AT, SortOptions.Browse.POPULAR, SortOptions.Browse.RANDOM].includes(queryParams.sort_by)) {
+    params.sort_by = queryParams.sort_by
+  }
+
+  // Handle creators if valid
+  if (queryParams.creators && [BrowseUtils.FIGMA_PARTNER, BrowseUtils.FOLLOWING].includes(queryParams.creators)) {
+    params.creators = queryParams.creators
+  }
+
+  return params
 }
-export function $$S4(e) {
-  let t = S(e.category, LJ);
-  if (void 0 === t) return "/community";
-  let {
-    resourceType,
-    editorType
-  } = zs(e.editor_type, e.resourceType);
-  return new $$N0({
-    categorySlug: t,
-    tagSlug: e.tags[0]
+
+/**
+ * Builds a browse URL from given parameters.
+ * Original function: $$S4
+ * @param params - The browse parameters
+ * @returns The constructed URL string
+ */
+export function buildBrowseUrl(params: BrowseRouteParams): string {
+  const categorySlug = getValueOrFallback(params.category, LJ)
+  if (categorySlug === undefined)
+    return '/community'
+
+  const { resourceType, editorType } = selectEditorResource(params.editor_type, params.resourceType)
+  return new BrowseCategoryRoute({
+    categorySlug,
+    tagSlug: params.tags[0],
   }, {
     resource_type: resourceType,
     editor_type: editorType,
-    price: e.price,
-    sort_by: e.sort_by,
-    creators: e.creators
-  }).href;
+    price: params.price,
+    sort_by: params.sort_by,
+    creators: params.creators,
+  }).href
 }
-class v extends nS {}
-v.deserializeParams = e => {
-  let t = zq();
-  let r = L(e.categorySlug, t);
-  if (void 0 === r) throw Error(`CategoryRoute: Invalid category slug ${e.categorySlug}`);
-  return {
-    ...e,
-    categorySlug: r
-  };
-};
-v.serializeParams = e => e;
-v.parseQueryString = e => {
-  let t = parseQuerySimple(e);
-  return {
-    resource_type: S(t.resource_type, ResourceTypes.BrowseResourceTypes),
-    editor_type: S(t.editor_type, editorUtilities.Editors),
-    price: S(t.price, _$$C.Price),
-    sort_by: S(t.sort_by, _$$e.Browse),
-    creators: S(t.creators, Z.Browse)
-  };
-};
-let A = class extends v {};
-Ac(A);
-A.displayName = "CategoryRoute";
-A.path = "/community/:categorySlug/:tagSlug?";
-export let $$x2 = A;
-export class $$N0 extends Wk($$x2) {
-  constructor(e, t = {}, r) {
-    let n = zq();
-    let i = {
-      ...e
-    };
-    if (e.categorySlug) {
-      let t = L(e.categorySlug, n);
-      t && (i.categorySlug = t);
+
+/**
+ * Base route state class for category routes.
+ * Original class: v
+ */
+class CategoryRouteState extends RouteState {
+  /**
+   * Deserializes parameters, validating category slug.
+   * Original: v.deserializeParams
+   */
+  static deserializeParams(params: any): any {
+    const locale = getCurrentLocale()
+    const resolvedSlug = resolveCategorySlug(params.categorySlug, locale)
+    if (resolvedSlug === undefined) {
+      throw new Error(`CategoryRoute: Invalid category slug ${params.categorySlug}`)
     }
-    super(i, t, r);
+    return { ...params, categorySlug: resolvedSlug }
+  }
+
+  /**
+   * Serializes parameters (pass-through).
+   * Original: v.serializeParams
+   */
+  static serializeParams(params: any): any {
+    return params
+  }
+
+  /**
+   * Parses query string into browse parameters.
+   * Original: v.parseQueryString
+   */
+  static parseQueryString(query: string): any {
+    const parsed = parseQuerySimple(query)
+    return {
+      resource_type: getValueOrFallback(parsed.resource_type, ResourceTypes.BrowseResourceTypes),
+      editor_type: getValueOrFallback(parsed.editor_type, editorUtilities.Editors),
+      price: getValueOrFallback(parsed.price, PricingOptions.Price),
+      sort_by: getValueOrFallback(parsed.sort_by, SortOptions.Browse),
+      creators: getValueOrFallback(parsed.creators, BrowseUtils.Browse),
+    }
   }
 }
-let C = class extends v {};
-Ac(C);
-C.displayName = "ResourceHubCategoryRoute";
-C.path = aV(VR, $$x2.path);
-C.serializeParams = e => ({
-  ...FZ(e),
-  ...T(C, C, "serializeParams").call(void 0, e)
-});
-C.deserializeParams = e => ({
-  ...CS(e),
-  ...T(C, C, "deserializeParams").call(void 0, e)
-});
-C.parseQueryString = e => ({
-  ...p7(e),
-  ...T(C, C, "parseQueryString").call(void 0, e)
-});
-let $$w1 = C;
-let $$O5 = Array.from(Object.values(LJ)).filter(e => e !== LJ.make).map(e => {
-  let t = L(e, zq());
-  return t ? new $$N0({
-    categorySlug: t
-  }).href : null;
-}).filter(e => null !== e);
-export function $$R6(e) {
-  let {
-    categorySlug,
-    tagSlug
-  } = e.params;
-  let {
-    editor_type,
-    resource_type
-  } = e.search;
-  let l = zq();
-  let [c] = setupResourceAtomHandler(Zp({
-    categorySlug,
-    tagSlug,
-    locale: l
-  }));
-  let u = useMemo(() => "loaded" === c.status ? c.data.editor_types : [], [c.status, c.data]);
+
+/**
+ * Route class for community category pages.
+ * Original class: A
+ */
+class CategoryRoute extends CategoryRouteState {
+  static displayName = 'CategoryRoute'
+  static path = '/community/:categorySlug/:tagSlug?'
+}
+
+captureRouteEvent(CategoryRoute)
+
+/**
+ * Route class for browse category with community route wrapper.
+ * Original class: $$N0
+ */
+export class BrowseCategoryRoute extends withCommunityRoute(CategoryRoute) {
+  constructor(params: any, query: any = {}, hash?: any) {
+    const locale = getCurrentLocale()
+    const adjustedParams = { ...params }
+    if (params.categorySlug) {
+      const resolved = resolveCategorySlug(params.categorySlug, locale)
+      if (resolved)
+        adjustedParams.categorySlug = resolved
+    }
+    super(adjustedParams, query, hash)
+  }
+}
+
+/**
+ * Route class for resource hub category pages.
+ * Original class: C
+ */
+class ResourceHubCategoryRoute extends CategoryRouteState {
+  static displayName = 'ResourceHubCategoryRoute'
+  static path = concatStrings(RESOURCE_ROUTE, CategoryRoute.path)
+
+  /**
+   * Serializes parameters with resource params.
+   * Original: C.serializeParams
+   */
+  static serializeParams(params: any): any {
+    return {
+      ...toResourceParams(params),
+      ...callSuperMethod(this, this, 'serializeParams')(params),
+    }
+  }
+
+  /**
+   * Deserializes parameters with route params.
+   * Original: C.deserializeParams
+   */
+  static deserializeParams(params: any): any {
+    return {
+      ...toRouteParams(params),
+      ...callSuperMethod(this, this, 'deserializeParams')(params),
+    }
+  }
+
+  /**
+   * Parses query string with FUID query.
+   * Original: C.parseQueryString
+   */
+  static parseQueryString(query: string): any {
+    return {
+      ...parseFuidQuery(query),
+      ...callSuperMethod(this, this, 'parseQueryString')(query),
+    }
+  }
+}
+
+captureRouteEvent(ResourceHubCategoryRoute)
+
+/**
+ * Array of category URLs for all categories except 'make'.
+ * Original: $$O5
+ */
+const categoryUrls = Array.from(Object.values(LJ))
+  .filter(category => category !== LJ.make)
+  .map((category: string) => {
+    const slug = resolveCategorySlug(category, getCurrentLocale())
+    return slug ? new BrowseCategoryRoute({ categorySlug: slug }).href : null
+  })
+  .filter(url => url !== null)
+
+/**
+ * Hook to handle resource atom setup and history synchronization for category routes.
+ * Original function: $$R6
+ * @param route - The current route object
+ */
+export function useCategoryResourceHandler(route: any): void {
+  const { categorySlug, tagSlug } = route.params
+  const { editor_type, resource_type } = route.search
+  const locale = getCurrentLocale()
+  const [resourceAtom] = setupResourceAtomHandler(categoryBySlugQuery({ categorySlug, tagSlug, locale }))
+  const availableEditorTypes = useMemo(() => resourceAtom.status === 'loaded' ? resourceAtom.data.editor_types : [], [resourceAtom.status, resourceAtom.data])
+
   useLayoutEffect(() => {
-    if (u.length > 0 && (!editor_type || !u.includes(editor_type))) {
-      let t = u[0];
-      customHistory.replace(e.copyWith({}, {
-        editor_type: t,
-        resource_type: resource_type && OU(t, resource_type, {
-          anchorOn: "editorType"
-        }).resourceType
-      }).href);
+    if (availableEditorTypes.length > 0 && (!editor_type || !availableEditorTypes.includes(editor_type))) {
+      const defaultEditorType = availableEditorTypes[0]
+      customHistory.replace(route.copyWith({}, {
+        editor_type: defaultEditorType,
+        resource_type: resource_type && anchorEditorResource(defaultEditorType, resource_type, { anchorOn: 'editorType' }).resourceType,
+      }).href)
     }
-  }, [e, u, editor_type, resource_type]);
-  _4(e);
+  }, [route, availableEditorTypes, editor_type, resource_type])
+
+  syncEditorResourceWithHistory(route)
 }
-function L(e, t) {
-  if (e) {
-    if (t && t in gT) {
-      if (N(e, LJ)) return Tr(e, t) || e;
-      let r = zU(e, t);
-      if (r && N(r, LJ)) return e;
-    } else if (N(e, LJ)) return e;
+
+/**
+ * Resolves a category slug based on locale and validation.
+ * Original function: L
+ * @param slug - The slug to resolve
+ * @param locale - The current locale
+ * @returns The resolved slug or undefined if invalid
+ */
+function resolveCategorySlug(slug: string, locale: string): string | undefined {
+  if (!slug)
+    return undefined
+  if (locale && locale in gT) {
+    if (isValueInObject(slug, LJ))
+      return Tr(slug, locale) || slug
+    const reverseSlug = zU(slug, locale)
+    if (reverseSlug && isValueInObject(reverseSlug, LJ))
+      return slug
   }
+  else if (isValueInObject(slug, LJ)) {
+    return slug
+  }
+  return undefined
 }
-export const $E = $$N0;
-export const Dv = $$w1;
-export const IE = $$x2;
-export const J5 = $$I3;
-export const iB = $$S4;
-export const m5 = $$O5;
-export const pj = $$R6;
+
+// Updated exports with meaningful names (original exports: $E, Dv, IE, J5, iB, m5, pj)
+export const $E = BrowseCategoryRoute
+export const Dv = ResourceHubCategoryRoute
+export const IE = CategoryRoute
+export const J5 = parseBrowseRoute
+export const iB = buildBrowseUrl
+export const m5 = categoryUrls
+export const pj = useCategoryResourceHandler

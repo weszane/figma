@@ -39,7 +39,7 @@ import { selectCurrentUser } from "../905/372672";
 import { OpenEditorFileData } from "../figma_app/43951";
 import { l as _$$l, s as _$$s } from "../905/618307";
 import { LibrarySourceEnum } from "../figma_app/633080";
-import { i as _$$i } from "../905/186961";
+import { ContainerTypeMap } from "../905/186961";
 import { e0 as _$$e } from "../905/696396";
 import { N as _$$N2 } from "../905/620375";
 import { A as _$$A } from "../905/81613";
@@ -95,7 +95,7 @@ import { n as _$$n2 } from "../905/341791";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { SS, WX } from "../figma_app/350203";
 import { lg } from "../figma_app/976749";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { B3, $o } from "../905/54042";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
@@ -291,12 +291,12 @@ function eU({
       value: n,
       onChange: Zc(e) ? t => e.setValue(t) : lQ,
       children: [i && jsx(eB, {
-        publishScope: _$$i.TEAM,
+        publishScope: ContainerTypeMap.TEAM,
         publishScopeEntity: i
-      }, _$$i.TEAM), t && jsx(eB, {
-        publishScope: _$$i.ORG,
+      }, ContainerTypeMap.TEAM), t && jsx(eB, {
+        publishScope: ContainerTypeMap.ORG,
         publishScopeEntity: t
-      }, _$$i.ORG)]
+      }, ContainerTypeMap.ORG)]
     })
   });
 }
@@ -321,10 +321,10 @@ function eB({
     })]
   });
 }
-let eV = e => e === _$$i.TEAM ? getI18nString("templates.publishing.scope.team") : e === _$$i.ORG ? getI18nString("templates.publishing.scope.organization") : throwTypeError(e);
+let eV = e => e === ContainerTypeMap.TEAM ? getI18nString("templates.publishing.scope.team") : e === ContainerTypeMap.ORG ? getI18nString("templates.publishing.scope.organization") : throwTypeError(e);
 let e2 = {
-  [_$$i.ORG]: FContainerType.ORG,
-  [_$$i.TEAM]: FContainerType.TEAM
+  [ContainerTypeMap.ORG]: FContainerType.ORG,
+  [ContainerTypeMap.TEAM]: FContainerType.TEAM
 };
 let e3 = {
   name: om,
@@ -335,31 +335,31 @@ let e3 = {
       existingTemplate: e
     }) => (e && function (e) {
       switch (e.publishScope) {
-        case _$$i.ORG:
-          return _$$i.ORG;
-        case _$$i.TEAM:
-          return _$$i.TEAM;
+        case ContainerTypeMap.ORG:
+          return ContainerTypeMap.ORG;
+        case ContainerTypeMap.TEAM:
+          return ContainerTypeMap.TEAM;
         default:
           return;
       }
-    }(e)) ?? _$$i.ORG,
+    }(e)) ?? ContainerTypeMap.ORG,
     validate: ({
       figFile: e
     }, t) => {
       let i = [];
-      [_$$i.ORG, _$$i.TEAM].includes(t) || i.push({
+      [ContainerTypeMap.ORG, ContainerTypeMap.TEAM].includes(t) || i.push({
         key: "INVALID_PUBLISH_SCOPE",
         data: {
           publishScope: t
         }
       });
-      e.parent_org_id || t !== _$$i.ORG || i.push({
+      e.parent_org_id || t !== ContainerTypeMap.ORG || i.push({
         key: "FILE_MISSING_ORG_ID",
         data: {
           publishScope: t
         }
       });
-      e.team_id || t !== _$$i.TEAM || i.push({
+      e.team_id || t !== ContainerTypeMap.TEAM || i.push({
         key: "FILE_MISSING_TEAM_ID",
         data: {
           publishScope: t
@@ -563,7 +563,7 @@ function tr({
   let {
     status,
     data
-  } = M4.useFile(t?.key);
+  } = liveStoreInstance.useFile(t?.key);
   let {
     publishableComponentNodeIds,
     localComponents
@@ -809,7 +809,7 @@ function ty({
   required: r,
   error: a
 }) {
-  let s = e => e === _$$i.ORG ? getI18nString("templates.publishing.scope.organization") : getI18nString("templates.publishing.scope.team");
+  let s = e => e === ContainerTypeMap.ORG ? getI18nString("templates.publishing.scope.organization") : getI18nString("templates.publishing.scope.team");
   return jsx(_$$A9, {
     label: getI18nString("templates.publishing.scope.label"),
     error: a,
@@ -820,15 +820,15 @@ function ty({
         let i = [];
         e && i.push({
           name: e.name,
-          scope: _$$i.ORG,
+          scope: ContainerTypeMap.ORG,
           imgUrl: e.img_url || "",
-          description: s(_$$i.ORG)
+          description: s(ContainerTypeMap.ORG)
         });
         t && i.push({
           name: t.name,
-          scope: _$$i.TEAM,
+          scope: ContainerTypeMap.TEAM,
           imgUrl: t.imgUrl || "",
-          description: s(_$$i.TEAM)
+          description: s(ContainerTypeMap.TEAM)
         });
         return i;
       })(),
@@ -987,7 +987,7 @@ function tx({
   inDropdown: n,
   hideArrow: r
 }) {
-  let a = t === _$$i.ORG ? getI18nString("templates.publishing.scope.organization") : getI18nString("templates.publishing.scope.team");
+  let a = t === ContainerTypeMap.ORG ? getI18nString("templates.publishing.scope.organization") : getI18nString("templates.publishing.scope.team");
   return jsxs("div", {
     className: T()(n ? "template_publish_modal--selectionItemDropdown--mT46A" : "template_publish_modal--selectionItem--sCqY-", {
       "template_publish_modal--hoverTextColorUI3--0cOZ1": n
@@ -1081,7 +1081,7 @@ function tO({
   let [z, W] = useState(o?.description || "");
   let [X, ea] = useAtomValueAndSetter(b2);
   let [es, ed] = useState({});
-  let [ec, eu] = useState(() => o ? o.publishScope : t ? _$$i.ORG : _$$i.TEAM);
+  let [ec, eu] = useState(() => o ? o.publishScope : t ? ContainerTypeMap.ORG : ContainerTypeMap.TEAM);
   let ep = selectCurrentUser();
   let em = useMemo(() => ep ? {
     name: ep.name,
@@ -1095,7 +1095,7 @@ function tO({
     name: A?.name,
     imgUrl: A?.imgUrl
   };
-  let ef = em || (ec === _$$i.ORG ? eh : eg);
+  let ef = em || (ec === ContainerTypeMap.ORG ? eh : eg);
   let e_ = e.editorType === FFileType.SLIDES;
   let eA = e.editorType === FFileType.COOPER;
   let ey = e.editorType === FFileType.FIGMAKE;
@@ -1368,7 +1368,7 @@ function tO({
               value: ec,
               onChange: eu
             })]
-          }), t && (!o || o?.publishScope === _$$i.TEAM) && ec === _$$i.ORG && e_ && jsx(eo, {})]
+          }), t && (!o || o?.publishScope === ContainerTypeMap.TEAM) && ec === ContainerTypeMap.ORG && e_ && jsx(eo, {})]
         }), jsxs(wi, {
           children: [jsx("div", {
             children: !!$W(tk, es) && jsxs("div", {

@@ -21,7 +21,7 @@ import { isVsCodeEnvironment } from '../905/858738';
 import { $A } from '../905/862883';
 import { J as _$$J } from '../905/896954';
 import { XHR } from '../905/910117';
-import { aP, o1 } from '../figma_app/10554';
+import { UploadStatusEnum, TeamOrgType } from '../figma_app/10554';
 import { Eh } from '../figma_app/12796';
 import { FEditorType } from '../figma_app/53721';
 import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from '../figma_app/155287';
@@ -33,13 +33,13 @@ import { xf } from '../figma_app/416935';
 import { isTrustedPluginId, getPluginDomain, getPluginPermissions } from '../figma_app/455620';
 import { Y5 } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
-import { N6 } from '../figma_app/471982';
+import { buildCarouselMedia } from '../figma_app/471982';
 import { jY, Ro } from '../figma_app/564095';
 import { Dd, En, Ii, l8, vC, Wl, xw } from '../figma_app/599979';
 import { sortByCreatedAt } from '../figma_app/656233';
 import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from '../figma_app/740025';
 import { Rs } from '../figma_app/761870';
-import { AC } from '../figma_app/777551';
+import { isResourcePendingPublishing } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
 import { isNotInteger, isRatioHigh, MIN_PRICE, centsToDollars, isGreater, isPriceOutOfRange } from '../figma_app/808294';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
@@ -254,7 +254,7 @@ const defaultPublishedPlugin = {
     location: null,
     follower_count: 0,
     following_count: 0,
-    entity_type: o1.USER,
+    entity_type: TeamOrgType.USER,
     badges: [],
     description: ''
   },
@@ -1170,7 +1170,7 @@ export function sortResourcesByCreatedAt(resources: Record<string, any>): any[] 
  */
 export function hasRoleOrOrgChanged(resource: any, roleObj: any): boolean {
   const roles = resource.roles;
-  const isNotPublicAndAC = !roleObj.is_public && AC(resource);
+  const isNotPublicAndAC = !roleObj.is_public && isResourcePendingPublishing(resource);
   return !!roles.is_public !== !!roleObj.is_public || roles.org?.id !== roleObj.org?.id || isNotPublicAndAC;
 }
 
@@ -1425,7 +1425,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
     })).concat((pending ?? []).map((e: any) => ({
       ...e,
       isPending: true
-    }))).filter((item: any) => !Ii(state.authedProfilesById[item.id], author) && item.entity_type === o1.USER),
+    }))).filter((item: any) => !Ii(state.authedProfilesById[item.id], author) && item.entity_type === TeamOrgType.USER),
     commentsSetting: publishedResource.comments_setting || defaultPublishingData.commentsSetting,
     categoryId: publishedResource.category_id || defaultPublishingData.categoryId,
     blockPublishingOnToS: xw(state),
@@ -1437,7 +1437,7 @@ export function getPublishingData(state: any, pluginId: string, resourceId: stri
     hasPaymentsApi,
     annualDiscount: publishedResource.monetized_resource_metadata?.annual_discount_percentage,
     isAnnualDiscountActive: !!publishedResource.monetized_resource_metadata?.annual_discount_active_at,
-    carouselMedia: N6(publishedResource)
+    carouselMedia: buildCarouselMedia(publishedResource)
   };
 }
 
@@ -1482,10 +1482,10 @@ export function getPublishingErrors(user: any, status: any, isWidget: boolean, i
   if (!user.email_validated_at) {
     errors.emailNotVerifiedError = getI18nString('community.publishing.please_verify_your_email_address_to_publish');
   }
-  if (isVerified || (user.saml_sso_only || user.google_sso_only || user.two_factor_app_enabled || user.phone_number) && (status.code !== aP.FAILURE || status.error !== getI18nString('community.publishing.you_must_enable_two_factor_authentication_to_publish'))) {
-    if (!isVerified && (user.plugin_publishing_blocked_at || user.community_blocked_at || status.code === aP.FAILURE && status.error === getI18nString('community.publishing.you_must_verify_your_account_details_to_publish'))) {
+  if (isVerified || (user.saml_sso_only || user.google_sso_only || user.two_factor_app_enabled || user.phone_number) && (status.code !== UploadStatusEnum.FAILURE || status.error !== getI18nString('community.publishing.you_must_enable_two_factor_authentication_to_publish'))) {
+    if (!isVerified && (user.plugin_publishing_blocked_at || user.community_blocked_at || status.code === UploadStatusEnum.FAILURE && status.error === getI18nString('community.publishing.you_must_verify_your_account_details_to_publish'))) {
       errors.accountDetailsChangedError = getI18nString('community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin');
-    } else if (status.code === aP.FAILURE && status.error) {
+    } else if (status.code === UploadStatusEnum.FAILURE && status.error) {
       errors.other = status.error;
     }
   } else {
@@ -1546,7 +1546,7 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
       return data.price < MIN_PRICE ? getI18nString('community.seller.paid_resource_minimum_err') : getI18nString('community.seller.paid_resource_maximum_err');
     }
     if (isNotInteger(data.price)) return getI18nString('community.seller.prices_must_follow_format');
-    if (!publishedResource || AC(publishedResource)) return null;
+    if (!publishedResource || isResourcePendingPublishing(publishedResource)) return null;
     const prevPrice = publishedResource?.monetized_resource_metadata?.price;
     if (data.isSubscription && prevPrice && isRatioHigh(prevPrice / 100, data.price)) {
       return getI18nString('community.seller.price_increase_limit');

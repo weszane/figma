@@ -14,7 +14,7 @@ import { isBranch } from "../905/760074";
 import { f as _$$f } from "../905/509236";
 import { sR } from "../905/862913";
 import { mapFileProperties } from "../figma_app/349248";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getDraftsSidebarString } from "../figma_app/633080";
 import { xY } from "../905/70982";
 import { YF, Ip } from "../905/880488";
@@ -120,7 +120,7 @@ let $$x1 = createOptimistThunk((e, t) => {
     fileKeys: Object.keys(t.fileKeys)
   }));
 });
-let S = M4.Mutation((e, {
+let S = liveStoreInstance.Mutation((e, {
   objects: t,
   livegraphClient: i
 }) => {

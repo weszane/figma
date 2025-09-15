@@ -59,7 +59,7 @@ import { y4 } from "../figma_app/298277";
 import { FC } from "../figma_app/212807";
 import { selectCurrentUser } from "../905/372672";
 import { LM, z4 } from "../figma_app/518077";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getUserCurrency, getUserIsoCodeIfNonUsd } from "../figma_app/514043";
 import { getEditableTeamsWithoutPaidAccess, getBillingCycleFromSubscriptionType, getSubscriptionTypeFromBillingCycle } from "../figma_app/345997";
 import { Ud, OI } from "../c5e2cae0/2942";
@@ -462,7 +462,7 @@ function eW({
     tier: Ju.PRO
   });
 }
-let eJ = M4.Query({
+let eJ = liveStoreInstance.Query({
   fetch: async e => (await _$$V.getEligibleUpgradeData(e)).data.meta,
   stalenessPolicy: "never"
 });

@@ -17,7 +17,7 @@ import { fV } from "../figma_app/236178";
 import { L1, KP } from "../figma_app/12491";
 import { b as _$$b } from "../905/217163";
 import { E as _$$E } from "../905/511388";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrgId } from "../905/845253";
 import { B as _$$B } from "../905/506188";
 import { KindEnum } from "../905/129884";
@@ -74,7 +74,7 @@ export function $$O1({
   let M = P?.library_key === i;
   let j = t?.library_file_name ?? N?.data ?? "";
   let U = fV(i, g);
-  let B = fd(i);
+  let B = hasResourcePresetKey(i);
   let V = _$$b({
     libraryKey: i
   });

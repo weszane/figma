@@ -15,7 +15,7 @@ import { t as _$$t } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { L as _$$L } from "../3591/956338";
-import { AC, G8 } from "../figma_app/777551";
+import { isResourcePendingPublishing, getResourceTaglineOrDescription } from "../figma_app/777551";
 import { JZ, qR } from "../figma_app/696043";
 import { j7, oB, sf } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -27,7 +27,7 @@ import { Um } from "../905/848862";
 import { M as _$$M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory, hasOrgRole, getPluginVersion } from "../figma_app/300692";
 import { R as _$$R2 } from "../figma_app/612938";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { V as _$$V } from "../905/480825";
 import { Cf } from "../905/504727";
@@ -82,7 +82,7 @@ export function $$ed0(e) {
   let i = useDispatch();
   let t = useSelector(e => e.dropdownShown);
   let n = V2();
-  let s = e.resourceType === ResourceType.WIDGET;
+  let s = e.resourceType === HubTypeEnum.WIDGET;
   return t?.data?.targetRect ? jsxs(Cf, {
     minWidth: 163,
     targetRect: t?.data.targetRect,
@@ -94,7 +94,7 @@ export function $$ed0(e) {
         i(showModalHandler({
           type: _$$h,
           data: {
-            resourceType: e.resourceType || ResourceType.PLUGIN
+            resourceType: e.resourceType || HubTypeEnum.PLUGIN
           }
         }));
       },
@@ -383,7 +383,7 @@ function eg(e) {
 };
 (e => {
   function i(e) {
-    if (AC(e)) return jsx(_$$L, {
+    if (isResourcePendingPublishing(e)) return jsx(_$$L, {
       height: "16"
     });
     if (hasOrgRole(e)) {
@@ -522,7 +522,7 @@ withTrackedClick(function ({
         children: n.name
       }), jsx("div", {
         className: ar,
-        children: G8(n, stripHtmlTags)
+        children: getResourceTaglineOrDescription(n, stripHtmlTags)
       })]
     })]
   }, e.id);

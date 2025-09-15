@@ -23,7 +23,7 @@ import { QP, op, $3 } from "../figma_app/487970";
 import { L as _$$L } from "../3591/956338";
 import { w5 } from "../figma_app/15924";
 import { getProductPriceString, hasTrialAvailable } from "../figma_app/808294";
-import { G8, AC } from "../figma_app/777551";
+import { getResourceTaglineOrDescription, isResourcePendingPublishing } from "../figma_app/777551";
 import { oB, j7 } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { useTracking } from "../figma_app/831799";
@@ -260,7 +260,7 @@ function eb(e) {
   let d = jsxs(Fragment, {
     children: [jsx("div", {
       className: y7,
-      children: G8({
+      children: getResourceTaglineOrDescription({
         tagline,
         description
       }, stripHtmlTags)
@@ -317,7 +317,7 @@ function eC(e) {
   let u = jsxs(Fragment, {
     children: [jsx("div", {
       className: Pg,
-      children: G8({
+      children: getResourceTaglineOrDescription({
         tagline,
         description
       }, stripHtmlTags)
@@ -497,7 +497,7 @@ function eN(e) {
     localResource: r,
     publishedResource: a
   });
-  let C = a && AC(a);
+  let C = a && isResourcePendingPublishing(a);
   let R = a && o?.redirect_icon_url;
   let F = a && !C ? a.roles.is_public ? _$$A3 : _$$A5 : void 0;
   let B = jsx(Ex, {
@@ -901,7 +901,7 @@ function eS(e) {
     localResource: r,
     publishedResource: u
   });
-  let j = u && AC(u);
+  let j = u && isResourcePendingPublishing(u);
   let h = u && getPluginVersion(u).redirect_snapshot_url || e.localFileId && d[e.localFileId] && d[e.localFileId].metadata.widgetSnapshotImageSrc || _$$J2;
   let w = u && !j ? u.roles.is_public ? _$$A3 : _$$A5 : void 0;
   return jsxs(Fragment, {
@@ -960,7 +960,7 @@ function eV(e) {
   let s = jsxs(Fragment, {
     children: [jsx("div", {
       className: rz,
-      children: G8(t, stripHtmlTags)
+      children: getResourceTaglineOrDescription(t, stripHtmlTags)
     }), jsx("div", {
       className: Yl,
       children: l

@@ -10,7 +10,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { ne } from "../figma_app/563413";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { r7 } from "../figma_app/471982";
+import { isLibraryResource } from "../figma_app/471982";
 import { Dy } from "../905/977218";
 import { Q1 } from "../905/201596";
 import { nb } from "../figma_app/543100";
@@ -142,7 +142,7 @@ export function $$P2({
     onClick: s,
     children: S.map(e => {
       let i = e.model;
-      let a = i.hub_file && r7(i.hub_file);
+      let a = i.hub_file && isLibraryResource(i.hub_file);
       return jsx(k, {
         file: i,
         disabled: a,

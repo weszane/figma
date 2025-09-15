@@ -193,7 +193,7 @@ import { Sc, mC as _$$mC, oh as _$$oh } from "../905/18797";
 import { G7 } from "../figma_app/336853";
 import { n as _$$n4 } from "../905/79930";
 import { Vq, Rt } from "../figma_app/979658";
-import { ResourceTypeNoComment, hasMonetizedResourceMetadata, ResourceType, CommunityPageType, ShelfViewType } from "../figma_app/45218";
+import { ResourceTypeNoComment, hasMonetizedResourceMetadata, HubTypeEnum, CommunityPageType, ShelfViewType } from "../figma_app/45218";
 import { $A } from "../905/862883";
 import { cd as _$$cd } from "../905/381612";
 import { yD as _$$yD } from "../905/92359";
@@ -218,7 +218,7 @@ import { sx as _$$sx2 } from "../905/941192";
 import { QP, op as _$$op, $3 } from "../figma_app/487970";
 import { w5 } from "../figma_app/15924";
 import { getProductPriceString, hasTrialAvailable } from "../figma_app/808294";
-import { G8 } from "../figma_app/777551";
+import { getResourceTaglineOrDescription } from "../figma_app/777551";
 import { xp as _$$xp, EO, gn as _$$gn, lt as _$$lt, aQ as _$$aQ } from "../figma_app/86989";
 import { z as _$$z } from "../3276/638169";
 import { c as _$$c3 } from "../3276/761211";
@@ -316,8 +316,8 @@ import { tJ as _$$tJ2, VM, Mp, oQ as _$$oQ, h_ as _$$h_, P0, JX } from "../figma
 import { A as _$$A1 } from "../svg/55550";
 import { S as _$$S2 } from "../1291/885929";
 import { BaseLinkComponent } from "../905/551536";
-import { UI } from "../figma_app/471982";
-import { Uo } from "../figma_app/354658";
+import { buildCommunityPath } from "../figma_app/471982";
+import { ResourceType } from "../figma_app/354658";
 import { PreviewMode } from "../figma_app/707808";
 import { Z as _$$Z2 } from "../figma_app/684783";
 import { formatPublisherNames } from "../figma_app/690075";
@@ -4020,7 +4020,7 @@ let aT = memo(function (e) {
       })
     }), jsx("div", {
       className: ex()(ag, "browse_plugins_universal_modal_tiles--pluginTileDescriptionPadding--qGAaH"),
-      children: G8(pluginVersion, stripHtmlTags)
+      children: getResourceTaglineOrDescription(pluginVersion, stripHtmlTags)
     }), v && jsx("div", {
       className: ag,
       children: v
@@ -4293,7 +4293,7 @@ let aG = memo(function (e) {
   useEffect(() => {
     a || n(_$$af({
       id: r,
-      resourceType: ResourceType.WIDGET
+      resourceType: HubTypeEnum.WIDGET
     }));
   }, [r, n, a]);
   let j = BI();
@@ -5311,7 +5311,7 @@ function s6(e) {
       selectedCategory: t
     },
     children: [jsx("div", {
-      className: e.resourceType === ResourceType.WIDGET ? "browse_explore_category_view--widgetTilesGridContainer--U4Dl6 browse_widgets_view--widgetTilesGridContainer--t5-lL" : "browse_explore_category_view--pluginCategoryViewPadding--tst89",
+      className: e.resourceType === HubTypeEnum.WIDGET ? "browse_explore_category_view--widgetTilesGridContainer--U4Dl6 browse_widgets_view--widgetTilesGridContainer--t5-lL" : "browse_explore_category_view--pluginCategoryViewPadding--tst89",
       children: r.shelf_content.map(e => a(e))
     }), jsx(_$$q, {
       resourceType: e.resourceType
@@ -5718,7 +5718,7 @@ function oM() {
 }
 function oD() {
   return jsx(_$$K2, {
-    resourceType: ResourceType.PLUGIN,
+    resourceType: HubTypeEnum.PLUGIN,
     shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL,
     renderResource: e => jsx(aC, {
       pluginId: e.id,
@@ -5743,7 +5743,7 @@ function oU() {
       children: [jsx(oP, {}), e === oh.DEVELOPMENT && jsx("div", {
         className: _$$s.flex.itemsCenter.pr16.$,
         children: jsx(_$$n7, {
-          resourceType: ResourceType.PLUGIN
+          resourceType: HubTypeEnum.PLUGIN
         })
       })]
     }), e === oh.RECENT_AND_SAVED && jsxs(Fragment, {
@@ -5828,7 +5828,7 @@ function oQ(e) {
   useEffect(() => {
     p || i(_$$af({
       id: e.pluginId,
-      resourceType: ResourceType.PLUGIN
+      resourceType: HubTypeEnum.PLUGIN
     }));
   }, [i, e.pluginId, p]);
   let R = {};
@@ -5892,7 +5892,7 @@ function oQ(e) {
     properties: {
       resourceId: r.id,
       isMonetized: hasMonetizedResourceMetadata(r),
-      resourceType: ResourceType.PLUGIN,
+      resourceType: HubTypeEnum.PLUGIN,
       editorType: "whiteboard"
     },
     children: [jsx(_$$P, {
@@ -5971,7 +5971,7 @@ function oQ(e) {
               data: {
                 dispatch: i,
                 error: s.error,
-                resourceType: ResourceType.PLUGIN
+                resourceType: HubTypeEnum.PLUGIN
               },
               showModalsBeneath: !0
             }));
@@ -6042,7 +6042,7 @@ function o8(e) {
     name: "detail",
     properties: {
       resourceId: n.id,
-      resourceType: ResourceType.HUB_FILE
+      resourceType: HubTypeEnum.HUB_FILE
     },
     children: [jsxs(_$$P, {
       height: _$$mS(i.pinned, 504, _$$s3, zD),
@@ -6072,8 +6072,8 @@ function o8(e) {
       })]
     }), !s && jsxs(BaseLinkComponent, {
       className: "browse_templates_preview--communityLinkBase--1NI6W",
-      href: UI({
-        path: Uo.FILE,
+      href: buildCommunityPath({
+        path: HubTypeEnum.FILE,
         id: n.id
       }),
       target: "_blank",
@@ -6233,7 +6233,7 @@ function la(e) {
       query: e.query,
       cta: jsx(_$$_3, {
         url: "/community/figjam",
-        resourceType: ResourceType.HUB_FILE
+        resourceType: HubTypeEnum.HUB_FILE
       })
     })
   });
@@ -6525,7 +6525,7 @@ function lb({
 }
 function ly() {
   return jsx(_$$K2, {
-    resourceType: ResourceType.WIDGET,
+    resourceType: HubTypeEnum.WIDGET,
     shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL,
     renderResource: e => jsx(aG, {
       widgetId: e.id
@@ -6549,7 +6549,7 @@ function lC() {
       children: [jsx(lv, {}), e === oh.DEVELOPMENT && jsx("div", {
         className: _$$s.flex.itemsCenter.pr16.$,
         children: jsx(_$$n7, {
-          resourceType: ResourceType.WIDGET
+          resourceType: HubTypeEnum.WIDGET
         })
       })]
     }), e === oh.RECENT_AND_SAVED && jsxs(Fragment, {
@@ -6641,7 +6641,7 @@ function lk(e) {
   useEffect(() => {
     a || m(_$$af({
       id: resourceId,
-      resourceType: ResourceType.PLUGIN
+      resourceType: HubTypeEnum.PLUGIN
     }));
   }, [m, resourceId, a]);
   let _ = EO(r);
@@ -6770,7 +6770,7 @@ function lD(e) {
   useEffect(() => {
     n || a(_$$af({
       id: resourceId,
-      resourceType: ResourceType.WIDGET
+      resourceType: HubTypeEnum.WIDGET
     }));
   }, [resourceId, a, n]);
   let L = _$$b4();
@@ -7126,7 +7126,7 @@ function lF({
     }) : e.resourceType === Rt.WIDGETS ? jsx(s6, {
       selectedCategoryId: e.id,
       goBack: () => setSelectedCategory(void 0),
-      resourceType: ResourceType.WIDGET,
+      resourceType: HubTypeEnum.WIDGET,
       shelfType: CommunityPageType.BROWSE_WIDGETS_MODAL,
       renderResource: e => jsx(aG, {
         widgetId: e.id
@@ -7134,7 +7134,7 @@ function lF({
     }) : e.resourceType === Rt.PLUGINS ? jsx(s6, {
       selectedCategoryId: e.id,
       goBack: () => setSelectedCategory(void 0),
-      resourceType: ResourceType.PLUGIN,
+      resourceType: HubTypeEnum.PLUGIN,
       shelfType: CommunityPageType.BROWSE_PLUGINS_MODAL,
       renderResource: e => jsx(aC, {
         pluginId: e.id,

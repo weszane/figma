@@ -1,8 +1,8 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { Link } from "react-router-dom";
 import { kc } from "../figma_app/835219";
-import { RE } from "../figma_app/471982";
-import { Om, tv } from "../figma_app/979714";
+import { buildProfileRouteState } from "../figma_app/471982";
+import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { e as _$$e } from "../figma_app/661119";
 import { TrackedLink } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/579755";
@@ -18,12 +18,12 @@ export function $$h0({
   openInNewTab: o = !1
 }) {
   let h = AG();
-  let b = Om() ?? void 0;
-  let x = tv() ?? void 0;
+  let b = useResourceRouteParams() ?? void 0;
+  let x = useResourceFuid() ?? void 0;
   let k = h ? 2 : 3;
   return e.length < 5 ? jsx(Fragment, {
     children: e.map((e, n) => {
-      let l = RE(e.profile_handle, h, b, x);
+      let l = buildProfileRouteState(e.profile_handle, h, b, x);
       return jsxs("div", {
         className: f,
         "data-testid": "resource-header-avatar-" + n,
@@ -54,7 +54,7 @@ export function $$h0({
     })
   }) : jsxs(Fragment, {
     children: [e.slice(0, 3).map((e, t) => {
-      let o = RE(e.profile_handle, h, b, x);
+      let o = buildProfileRouteState(e.profile_handle, h, b, x);
       return jsxs("div", {
         className: f,
         "data-testid": "resource-header-avatar-" + t,

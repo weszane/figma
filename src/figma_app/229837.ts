@@ -1,289 +1,446 @@
-import { getFeatureFlags } from "../905/601108";
-import { trackEventAnalytics } from "../905/449184";
-import { getInitialOptions } from "../figma_app/169182";
-import { C as _$$C } from "../905/797765";
-import { isInteractionPathCheck } from "../figma_app/897289";
-var n;
-let d = !1;
-let c = [];
-let u = [];
-let p = 0;
-export function $$_0(e) {
-  let t = e.split(":");
+import { trackEventAnalytics } from '../905/449184'
+import { getFeatureFlags } from '../905/601108'
+import { allowedEntityTypes } from '../905/797765'
+import { getInitialOptions } from '../figma_app/169182'
+import { isInteractionPathCheck } from '../figma_app/897289'
+
+// Original: $$_0
+/**
+ * Parses a realtime token string into its components.
+ * @param token - The token string in format "channel:timestamp:generation:signature"
+ * @returns An object with channel, timestamp, generation, and signature
+ */
+export function parseRealtimeToken(token: string) {
+  const parts = token.split(':')
   return {
-    channel: t[0],
-    timestamp: parseInt(t[1]),
-    generation: parseInt(t[2]),
-    signature: t[3]
-  };
+    channel: parts[0],
+    timestamp: parseInt(parts[1]),
+    generation: parseInt(parts[2]),
+    signature: parts[3],
+  }
 }
-let h = -1;
-export function $$m1() {
-  let e = null;
-  let t = null;
-  let r = null;
-  let n = null;
-  let c = null;
-  let p = {};
-  let m = !0;
-  let g = Date.now();
-  let f = 0;
-  let E = null;
-  let y = !0;
-  let b = null;
-  let T = null;
-  let I = null;
-  getFeatureFlags().realtime_disconnect_in_background && (T = () => {
-    "hidden" === document.visibilityState ? I || (I = setTimeout(() => {
-      S();
-      I = null;
-    }, 12e4)) : (I && (clearTimeout(I), I = null), null == n && (console.log("[Realtime] Attempting reconnect due to page visibility change."), v()));
-  }, document.addEventListener("visibilitychange", T));
-  let S = () => {
-    null != c && clearInterval(c);
-    null != n && n.close();
-    c = null;
-    n = null;
-    m = !0;
-  };
-  let v = () => {
-    E && (clearTimeout(E), E = null);
-    b && (window.removeEventListener("online", b), b = null);
-    w();
-  };
-  let A = () => {
-    if (S(), !y || null != E) return;
-    let e = 4 + (Math.min(128, 4 * Math.pow(2, f)) - 4) * Math.random();
-    console.log(`[Realtime] Disconnected. Will attempt reconnect in ${e.toFixed(0)} seconds.`);
-    E = setTimeout(() => {
-      console.log(`[Realtime] Attempting reconnect now after waiting ${e.toFixed(0)} seconds.`);
-      v();
-    }, 1e3 * e);
-    f++;
-    b = () => {
-      console.log("[Realtime] Attempting reconnect due to connectivity change.");
-      navigator.onLine && v();
-    };
-    window.addEventListener("online", b);
-  };
-  let x = e => {
-    n && n.readyState === n.OPEN && n.send(`tok:${e.channel}:${e.timestamp}:${e.generation}:${e.signature}`);
-  };
-  let N = e => {
-    let t = getInitialOptions().user_data;
-    if (!t?.id) {
-      console.warn("Can't post to me channel without user id available");
-      trackEventAnalytics("Me Channel UserId Missing");
-      return;
-    }
-    let r = `/me-${t?.id}`;
-    if (!(r in p)) {
-      if (console.warn("We're not subscribed to the me channel"), trackEventAnalytics("Me Channel Subscription Missing"), t?.realtime_token) {
-        trackEventAnalytics("Me Channel Resubscribe");
-        let e = $$_0(t.realtime_token);
-        p[r] = e;
-        x(e);
-      } else {
-        console.warn("We're unable to subscribe to the me channel; server will reject this message");
-        trackEventAnalytics("Me Channel No Token");
-        return;
-      }
-    }
-    if (!n || n.readyState !== n.OPEN) {
-      isInteractionPathCheck() || console.warn("Sending to me without open websocket");
-      trackEventAnalytics("Me Channel Websocket Missing");
-      return;
-    }
-    let i = JSON.stringify([{
-      channel: r,
-      data: e
-    }]);
-    n.send(`pme:${i}`);
-  };
-  let C = e => {
-    delete p[e];
-    n && n.readyState === n.OPEN && n.send(`uns:${e}`);
-  };
-  let w = () => {
-    if (getFeatureFlags().realtime_disable_websocket_connection || getFeatureFlags().realtime_disconnect_in_background && "hidden" === document.visibilityState && d) return;
-    S();
-    let t = "";
-    t = ("https:" === window.location.protocol ? `wss://${window.location.host}` : `ws://${window.location.host}`) + "/api/realtime_v2";
-    let r = window.INITIAL_OPTIONS && window.INITIAL_OPTIONS.release_git_tag || "";
-    t += `?release_git_tag=${r}&user_id=${window.INITIAL_OPTIONS?.user_data?.id || ""}`;
-    (n = new WebSocket(t)).onopen = e => {
-      for (let e in f = 0, console.log(`[Realtime] Connected to ${t}.`), null != c && clearInterval(c), c = setInterval(() => {
-        n?.send("ping");
-      }, 3e4 + 5e3 * Math.random() - 2500), d && Date.now() - g > 6e4 && u.forEach(e => {
-        setTimeout(e, 0);
-      }), d = !0, p) x(p[e]);
-    };
-    n.onmessage = t => {
-      if ("pong" === t.data) {
-        g = Date.now();
-        return;
-      }
-      let r = t.data.substr(0, 4);
-      if ("tok:" === r) {
-        let e = $$_0(t.data.substr(4));
-        p[e.channel] = e;
-        return;
-      }
-      let n = {};
-      if ("ouc:" === r) {
-        let e = t.data.substr(4).split(":");
-        3 !== e.length && console.warn("Got ouc: command with wrong number of params");
-        for (let t = 0; t < e.length; t++) "null" === e[t] && (e[t] = null);
-        n = {
-          type: "verify_user_state",
-          org_user_count: e[0] && parseInt(e[0]),
-          org_user_updated: e[1] && new Date(parseInt(e[1])).toISOString(),
-          target_user_id: e[2]
-        };
-      } else if ("sub:" === r || "uns:" === r) {
-        let e = t.data.split(":");
-        let r = e[e.length - 1];
-        if ("ok" === r) return;
-        if (delete p[e[1]], "expired" === r) {
-          if (!m) return;
-          m = !1;
-          n = {
-            type: "token_expired"
-          };
-        } else {
-          console.warn(t.data);
-          return;
+
+// Original: $$m1
+/**
+ * Creates a realtime manager for handling WebSocket connections and subscriptions.
+ * @returns An object with methods for managing realtime connections and v2 API
+ */
+export function createRealtimeManager() {
+  // State variables with descriptive names
+  let websocket: WebSocket | null = null
+  let isConnected = false
+  let pingInterval: NodeJS.Timeout | null = null
+  let reconnectCallbacks: (() => void)[] = []
+  let activeSubscriptions: Record<string, any> = {}
+  let subscriptionIdCounter = -1
+
+  // Additional state
+  let onMessageCallback: ((data: any) => void) | null = null
+  let onSubscribeCallback: ((channel: string) => void) | null = null
+  let onUnsubscribeCallback: ((channel: string) => void) | null = null
+  let isReconnecting = true
+  let lastPongTime = Date.now()
+  let reconnectAttempts = 0
+  let reconnectTimeout: NodeJS.Timeout | null = null
+  let isEnabled = true
+  let disconnectTimeout: NodeJS.Timeout | null = null
+  let visibilityChangeHandler: (() => void) | null = null
+  let onlineHandler: (() => void) | null = null
+
+  // Visibility change handler for background disconnect
+  if (getFeatureFlags().realtime_disconnect_in_background) {
+    visibilityChangeHandler = () => {
+      if (document.visibilityState === 'hidden') {
+        if (!disconnectTimeout) {
+          disconnectTimeout = setTimeout(() => {
+            disconnect()
+            disconnectTimeout = null
+          }, 120000) // 2 minutes
         }
-      } else {
+      }
+      else {
+        if (disconnectTimeout) {
+          clearTimeout(disconnectTimeout)
+          disconnectTimeout = null
+        }
+        if (!websocket) {
+          console.log('[Realtime] Attempting reconnect due to page visibility change.')
+          attemptReconnect()
+        }
+      }
+    }
+    document.addEventListener('visibilitychange', visibilityChangeHandler)
+  }
+
+  /**
+   * Disconnects the WebSocket and cleans up intervals.
+   */
+  function disconnect() {
+    if (pingInterval) {
+      clearInterval(pingInterval)
+      pingInterval = null
+    }
+    if (websocket) {
+      websocket.close()
+      websocket = null
+    }
+    isReconnecting = true
+  }
+
+  /**
+   * Attempts to reconnect to the WebSocket.
+   */
+  function attemptReconnect() {
+    if (reconnectTimeout) {
+      clearTimeout(reconnectTimeout)
+      reconnectTimeout = null
+    }
+    if (onlineHandler) {
+      window.removeEventListener('online', onlineHandler)
+      onlineHandler = null
+    }
+    connect()
+  }
+
+  /**
+   * Schedules a reconnect attempt with exponential backoff.
+   */
+  function scheduleReconnect() {
+    disconnect()
+    if (!isEnabled || reconnectTimeout)
+      return
+    const delay = 4 + (Math.min(128, 4 * 2 ** reconnectAttempts) - 4) * Math.random()
+    console.log(`[Realtime] Disconnected. Will attempt reconnect in ${delay.toFixed(0)} seconds.`)
+    reconnectTimeout = setTimeout(() => {
+      console.log(`[Realtime] Attempting reconnect now after waiting ${delay.toFixed(0)} seconds.`)
+      attemptReconnect()
+    }, 1000 * delay)
+    reconnectAttempts++
+    onlineHandler = () => {
+      console.log('[Realtime] Attempting reconnect due to connectivity change.')
+      if (navigator.onLine) {
+        attemptReconnect()
+      }
+    }
+    window.addEventListener('online', onlineHandler)
+  }
+
+  /**
+   * Sends a subscription token to the WebSocket.
+   * @param token - The token object
+   */
+  function sendSubscriptionToken(token: any) {
+    if (websocket && websocket.readyState === WebSocket.OPEN) {
+      websocket.send(`tok:${token.channel}:${token.timestamp}:${token.generation}:${token.signature}`)
+    }
+  }
+
+  /**
+   * Posts data to the user's personal channel.
+   * @param data - The data to post
+   */
+  function postToMeChannel(data: any) {
+    const userData = getInitialOptions().user_data
+    if (!userData?.id) {
+      console.warn('Can\'t post to me channel without user id available')
+      trackEventAnalytics('Me Channel UserId Missing')
+      return
+    }
+    const channel = `/me-${userData.id}`
+    if (!(channel in activeSubscriptions)) {
+      console.warn('We\'re not subscribed to the me channel')
+      trackEventAnalytics('Me Channel Subscription Missing')
+      if (userData?.realtime_token) {
+        trackEventAnalytics('Me Channel Resubscribe')
+        const token = parseRealtimeToken(userData.realtime_token)
+        activeSubscriptions[channel] = token
+        sendSubscriptionToken(token)
+      }
+      else {
+        console.warn('We\'re unable to subscribe to the me channel; server will reject this message')
+        trackEventAnalytics('Me Channel No Token')
+        return
+      }
+    }
+    if (!websocket || websocket.readyState !== WebSocket.OPEN) {
+      if (!isInteractionPathCheck()) {
+        console.warn('Sending to me without open websocket')
+      }
+      trackEventAnalytics('Me Channel Websocket Missing')
+      return
+    }
+    const message = JSON.stringify([{ channel, data }])
+    websocket.send(`pme:${message}`)
+  }
+
+  /**
+   * Unsubscribes from a channel.
+   * @param channel - The channel to unsubscribe from
+   */
+  function unsubscribeChannel(channel: string) {
+    delete activeSubscriptions[channel]
+    if (websocket && websocket.readyState === WebSocket.OPEN) {
+      websocket.send(`uns:${channel}`)
+    }
+  }
+
+  /**
+   * Establishes the WebSocket connection.
+   */
+  function connect() {
+    if (getFeatureFlags().realtime_disable_websocket_connection
+      || (getFeatureFlags().realtime_disconnect_in_background && document.visibilityState === 'hidden' && isConnected)) {
+      return
+    }
+    disconnect()
+    let url = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/api/realtime_v2`
+    const releaseTag = window.INITIAL_OPTIONS?.release_git_tag || ''
+    const userId = window.INITIAL_OPTIONS?.user_data?.id || ''
+    url += `?release_git_tag=${releaseTag}&user_id=${userId}`
+    websocket = new WebSocket(url)
+
+    websocket.onopen = () => {
+      reconnectAttempts = 0
+      console.log(`[Realtime] Connected to ${url}.`)
+      if (pingInterval) {
+        clearInterval(pingInterval)
+      }
+      pingInterval = setInterval(() => {
+        websocket?.send('ping')
+      }, 30000 + 5000 * Math.random() - 2500) // 30s ± 2.5s
+      if (isConnected && Date.now() - lastPongTime > 60000) {
+        reconnectCallbacks.forEach(callback => setTimeout(callback, 0))
+      }
+      isConnected = true
+      for (const channel in activeSubscriptions) {
+        sendSubscriptionToken(activeSubscriptions[channel])
+      }
+    }
+
+    websocket.onmessage = (event) => {
+      if (event.data === 'pong') {
+        lastPongTime = Date.now()
+        return
+      }
+      const prefix = event.data.substr(0, 4)
+      if (prefix === 'tok:') {
+        const token = parseRealtimeToken(event.data.substr(4))
+        activeSubscriptions[token.channel] = token
+        return
+      }
+      let message: any = {}
+      if (prefix === 'ouc:') {
+        const parts = event.data.substr(4).split(':')
+        if (parts.length !== 3) {
+          console.warn('Got ouc: command with wrong number of params')
+        }
+        for (let i = 0; i < parts.length; i++) {
+          if (parts[i] === 'null')
+            parts[i] = null
+        }
+        message = {
+          type: 'verify_user_state',
+          org_user_count: parts[0] ? parseInt(parts[0]) : null,
+          org_user_updated: parts[1] ? new Date(parseInt(parts[1])).toISOString() : null,
+          target_user_id: parts[2],
+        }
+      }
+      else if (prefix === 'sub:' || prefix === 'uns:') {
+        const parts = event.data.split(':')
+        const status = parts[parts.length - 1]
+        if (status === 'ok')
+          return
+        delete activeSubscriptions[parts[1]]
+        if (status === 'expired') {
+          if (!isReconnecting)
+            return
+          isReconnecting = false
+          message = { type: 'token_expired' }
+        }
+        else {
+          console.warn(event.data)
+          return
+        }
+      }
+      else {
         try {
-          n = JSON.parse(t.data);
-        } catch (e) {
-          console.warn(`unexpected non-JSON realtime message: ${t.data}`);
-          return;
+          message = JSON.parse(event.data)
         }
-        null != n.err && (console.warn("encountered error message from realtime", n.err), A());
+        catch {
+          console.warn(`Unexpected non-JSON realtime message: ${event.data}`)
+          return
+        }
+        if (message.err != null) {
+          console.warn('Encountered error message from realtime', message.err)
+          scheduleReconnect()
+        }
       }
-      e && e(n);
-    };
-    n.onclose = e => {
-      n = null;
-      null != c && (clearInterval(c), c = null);
-      A();
-    };
-  };
-  let O = {};
-  let R = new Set();
-  let L = new Map();
-  let P = {
-    connect: w,
+      if (onMessageCallback) {
+        onMessageCallback(message)
+      }
+    }
+
+    websocket.onclose = () => {
+      websocket = null
+      if (pingInterval) {
+        clearInterval(pingInterval)
+        pingInterval = null
+      }
+      scheduleReconnect()
+    }
+  }
+
+  // V2 API state
+  const entityCallbacks: Record<string, Record<string, any>> = {}
+  const persistentSubscriptions = new Set<string>()
+  const subscriptionRefs = new Map<string, Set<string>>()
+
+  /**
+   * Gets the user's realtime token.
+   * @returns The parsed token or null
+   */
+  function getUserToken() {
+    const userData = getInitialOptions().user_data
+    return userData?.realtime_token ? parseRealtimeToken(userData.realtime_token) : null
+  }
+
+  const defaultMethods = ['post', 'put', 'delete']
+
+  /**
+   * Normalizes subscription options.
+   * @param options - Subscription options
+   * @returns Normalized options
+   */
+  function normalizeSubscriptionOptions(options: any) {
+    return typeof options === 'string'
+      ? {
+          type: options,
+          token: getUserToken(),
+          methods: defaultMethods,
+        }
+      : options
+  }
+
+  const manager = {
+    connect,
     disconnect: () => {
-      y = !1;
-      S();
-      p = {};
-      T && document.removeEventListener("visibilitychange", T);
-    },
-    setCallback: t => {
-      e = e => {
-        let r = e.method;
-        let n = Object.keys(e).filter(e => _$$C.has(e)).map(t => ({
-          type: t,
-          value: e[t]
-        }));
-        let i = !1;
-        t(e);
-        n.forEach(t => {
-          let n = O[t.type];
-          n && Object.keys(n).map(e => n[e]).filter(e => e.methods[r]).forEach(r => {
-            r.callback(t.value, e.method);
-          });
-        });
-      };
-    },
-    setOnSubscribeCallback: e => {
-      t = e;
-    },
-    setOnUnsubscribeCallback: e => {
-      r = e;
-    },
-    subscribe: (e, r) => {
-      let n = p[e.channel];
-      p[e.channel] = e;
-      n || x(e);
-      !1 !== r && R.add(e.channel);
-      t && t(e.channel);
-    },
-    unsubscribe: (e, t) => {
-      if (!1 !== t && R.$$delete(e), !1 === t && R.has(e)) return;
-      let n = L.get(e);
-      n && n.size > 0 || (delete p[e], C(e), r && r(e));
-    },
-    postToMeChannel: e => {
-      N(e);
-    }
-  };
-  let D = () => {
-    let e = getInitialOptions().user_data;
-    return e?.realtime_token ? $$_0(e.realtime_token) : null;
-  };
-  let k = ["post", "put", "delete"];
-  let M = e => "string" == typeof e ? {
-    type: e,
-    token: D(),
-    methods: k
-  } : e;
-  let F = {
-    subscriptions: p,
-    subscribe: function (e, t) {
-      let r = M(e);
-      let n = r.token || D();
-      if (!n) return () => { };
-      h += 1;
-      let i = `${h}:${performance.now()}`;
-      let a = O[r.type] || {};
-      let s = r.methods || k;
-      let o = {};
-      s.forEach(e => {
-        o[e] = !0;
-      });
-      a[i] = {
-        methods: o,
-        callback: t
-      };
-      O[r.type] = a;
-      (L.get(n.channel) || new Set()).add(i);
-      P.subscribe(n, !1);
-      return () => {
-        let {
-          channel
-        } = n;
-        let t = L.get(channel);
-        t?.delete(i);
-        let a = O[r.type];
-        if (a && (delete a[i], 0 === Object.keys(a).length)) {
-          let e = r.type;
-          delete O[e];
-        }
-        P.unsubscribe(channel, !1);
-      };
-    }
-  };
-  return {
-    ...P,
-    v2: F
-  };
-}
-n = function () {
-  p > 0 || c.forEach(e => {
-    p += 1;
-    setTimeout(() => {
-      try {
-        e();
-      } finally {
-        p -= 1;
+      isEnabled = false
+      disconnect()
+      activeSubscriptions = {}
+      if (visibilityChangeHandler) {
+        document.removeEventListener('visibilitychange', visibilityChangeHandler)
       }
-    }, 6e4 + 24e4 * Math.random());
-  });
-};
-u.push(n);
-export const EM = $$_0;
-export const Xs = $$m1;
+    },
+    setCallback: (callback: (data: any) => void) => {
+      onMessageCallback = (data) => {
+        const method = data.method
+        const entities = Object.keys(data).filter(key => allowedEntityTypes.has(key)).map(key => ({
+          type: key,
+          value: data[key],
+        }))
+        callback(data)
+        entities.forEach((entity) => {
+          const typeCallbacks = entityCallbacks[entity.type]
+          if (typeCallbacks) {
+            Object.values(typeCallbacks).filter(cb => cb.methods[method]).forEach((cb) => {
+              cb.callback(entity.value, data.method)
+            })
+          }
+        })
+      }
+    },
+    setOnSubscribeCallback: (callback: (channel: string) => void) => {
+      onSubscribeCallback = callback
+    },
+    setOnUnsubscribeCallback: (callback: (channel: string) => void) => {
+      onUnsubscribeCallback = callback
+    },
+    subscribe: (token: any, persistent = true) => {
+      const existing = activeSubscriptions[token.channel]
+      activeSubscriptions[token.channel] = token
+      if (!existing) {
+        sendSubscriptionToken(token)
+      }
+      if (persistent) {
+        persistentSubscriptions.add(token.channel)
+      }
+      if (onSubscribeCallback) {
+        onSubscribeCallback(token.channel)
+      }
+    },
+    unsubscribe: (channel: string, force = true) => {
+      if (!force && persistentSubscriptions.has(channel))
+        return
+      if (force) {
+        persistentSubscriptions.delete(channel)
+      }
+      const refs = subscriptionRefs.get(channel)
+      if (!refs || refs.size === 0) {
+        delete activeSubscriptions[channel]
+        unsubscribeChannel(channel)
+        if (onUnsubscribeCallback) {
+          onUnsubscribeCallback(channel)
+        }
+      }
+    },
+    postToMeChannel,
+  }
+
+  const v2Api = {
+    subscriptions: activeSubscriptions,
+    subscribe(options: any, callback: (value: any, method: string) => void) {
+      const normalized = normalizeSubscriptionOptions(options)
+      const token = normalized.token || getUserToken()
+      if (!token)
+        return () => {}
+      subscriptionIdCounter++
+      const id = `${subscriptionIdCounter}:${performance.now()}`
+      const typeCallbacks = entityCallbacks[normalized.type] || {}
+      const methods = normalized.methods || defaultMethods
+      const methodMap: Record<string, boolean> = {}
+      methods.forEach(method => methodMap[method] = true)
+      typeCallbacks[id] = { methods: methodMap, callback }
+      entityCallbacks[normalized.type] = typeCallbacks
+      const refs = subscriptionRefs.get(token.channel) || new Set()
+      refs.add(id)
+      subscriptionRefs.set(token.channel, refs)
+      manager.subscribe(token, false)
+      return () => {
+        const { channel } = token
+        const refs = subscriptionRefs.get(channel)
+        if (refs) {
+          refs.delete(id)
+        }
+        const typeCallbacks = entityCallbacks[normalized.type]
+        if (typeCallbacks) {
+          delete typeCallbacks[id]
+          if (Object.keys(typeCallbacks).length === 0) {
+            delete entityCallbacks[normalized.type]
+          }
+        }
+        manager.unsubscribe(channel, false)
+      }
+    },
+  }
+
+  // Original reconnect logic
+  const originalReconnect = () => {
+    if (reconnectCallbacks.length > 0) {
+      reconnectCallbacks.forEach((callback) => {
+        setTimeout(() => {
+          try {
+            callback()
+          }
+          finally {
+            // No-op
+          }
+        }, 60000 + 240000 * Math.random()) // 1-5 minutes
+      })
+    }
+  }
+  reconnectCallbacks.push(originalReconnect)
+
+  return { ...manager, v2: v2Api }
+}
+export const EM = parseRealtimeToken
+export const Xs = createRealtimeManager

@@ -6,7 +6,7 @@ import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { H8 } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 export function $$p0({
   profile: e,
   profileHandle: t,
@@ -43,15 +43,15 @@ export function $$p0({
           color: isPending ? "tertiary" : void 0,
           children: [(e => {
             switch (entity_type) {
-              case o1.TEAM:
+              case TeamOrgType.TEAM:
                 return getI18nString("community.publishing.team_name", {
                   team: e
                 });
-              case o1.ORG:
+              case TeamOrgType.ORG:
                 return getI18nString("community.publishing.org_name", {
                   org: e
                 });
-              case o1.USER:
+              case TeamOrgType.USER:
                 return e;
             }
           })(name), " ", isPending && getI18nString("community.publish.pending")]

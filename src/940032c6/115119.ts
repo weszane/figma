@@ -252,7 +252,7 @@ import { getSingletonSceneGraph } from '../905/700578';
 import { s as _$$s6 } from '../905/702260';
 import { L as _$$L2 } from '../905/704296';
 import { G as _$$G6 } from '../905/707993';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { pn as _$$pn } from '../905/714538';
 import { SvgComponent } from '../905/714743';
@@ -484,7 +484,7 @@ import { bY as _$$bY, Jj } from '../figma_app/2023';
 import { l4 as _$$l5, __X, bbp, Bd, BZN, Htp, KYV, Nbd, p2q, sfE, TtK, zpn } from '../figma_app/6204';
 import { H as _$$H } from '../figma_app/7677';
 import { jQ as _$$jQ, s9 as _$$s, uR as _$$uR, Dm, J7, Qx, Uu, V6, Zn } from '../figma_app/8833';
-import { k2 as _$$k8 } from '../figma_app/10554';
+import { PageTypeEnum } from '../figma_app/10554';
 import { lW as _$$lW2 } from '../figma_app/11182';
 import { dC as _$$dC, iO as _$$iO, lf as _$$lf, lT as _$$lT, Mj as _$$Mj, ou as _$$ou, rx as _$$rx, UU } from '../figma_app/11329';
 import { hv as _$$hv, YZ as _$$YZ, BW, WD, z_ } from '../figma_app/11610';
@@ -580,7 +580,7 @@ import { gs as _$$gs2, lt as _$$lt, Z0 } from '../figma_app/263905';
 import { N as _$$N5 } from '../figma_app/268271';
 import { hE as _$$hE, i3 as _$$i2, jk as _$$jk, nB as _$$nB, Pt as _$$Pt, vo as _$$vo, wi as _$$wi, Wk, Y9 } from '../figma_app/272243';
 import { s4 as _$$s10, Zk as _$$Zk2 } from '../figma_app/276332';
-import { q as _$$q9 } from '../figma_app/277543';
+import { DesignToolType } from '../figma_app/277543';
 import { useSubscription } from '../figma_app/288654';
 import { C_ as _$$C_ } from '../figma_app/290668';
 import { em as _$$em } from '../figma_app/297957';
@@ -590,14 +590,14 @@ import { I as _$$I2 } from '../figma_app/304633';
 import { is as _$$is, Hg } from '../figma_app/304955';
 import { t as _$$t7, z as _$$z5 } from '../figma_app/305141';
 import { v as _$$v2 } from '../figma_app/306727';
-import { vt as _$$vt2 } from '../figma_app/306946';
+import { ResourceTypeEnum } from '../figma_app/306946';
 import { getProductType, logAndTrackCTA, mapFileToProductType } from '../figma_app/314264';
 import { N as _$$N2 } from '../figma_app/316881';
 import { KD, O1 } from '../figma_app/317394';
 import { _i as _$$_i } from '../figma_app/319440';
 import { ty as _$$ty, DT, Rm, Y2 } from '../figma_app/320164';
 import { bL as _$$bL5, Y9 as _$$Y2, JU, UC, X0 } from '../figma_app/322555';
-import { e as _$$e13 } from '../figma_app/324237';
+import { SortOptions } from '../figma_app/324237';
 import { $W, mC as _$$mC } from '../figma_app/325537';
 import { C4 as _$$C7, kR as _$$kR, kS as _$$kS, n1 as _$$n4 } from '../figma_app/325912';
 import { B as _$$B2 } from '../figma_app/327027';
@@ -633,7 +633,7 @@ import { _H as _$$_H2, ry as _$$ry } from '../figma_app/408883';
 import { G7 } from '../figma_app/409807';
 import { H as _$$H4 } from '../figma_app/423008';
 import { b as _$$b0, yF as _$$yF, IL, MS, Rp, zQ } from '../figma_app/427309';
-import { XW as _$$XW } from '../figma_app/427318';
+import { hasContent } from '../figma_app/427318';
 import { B3, LE } from '../figma_app/427737';
 import { d as _$$d11, s as _$$s12 } from '../figma_app/429226';
 import { Ay as _$$Ay2 } from '../figma_app/432652';
@@ -648,7 +648,7 @@ import { additionalValue, fullscreenValue } from '../figma_app/455680';
 import { useCurrentPublicPlan, useIsStarterOrProPlan, useIsStarterPlan, useTeamPlanFeatures, useTeamPlanPublicInfo } from '../figma_app/465071';
 import { assert, debug, throwTypeError } from '../figma_app/465776';
 import { _ as _$$_2 } from '../figma_app/467504';
-import { _t as _$$_t2, VJ } from '../figma_app/471982';
+import { buildCommunityPathById, buildCommunityUrl } from '../figma_app/471982';
 import { i as _$$i5 } from '../figma_app/472709';
 import { NP } from '../figma_app/473317';
 import { D as _$$D2, o as _$$o4 } from '../figma_app/478029';
@@ -742,7 +742,7 @@ import { c as _$$c5 } from '../figma_app/763535';
 import { AccessibilityAttributes, AppStateTsApi, ChatMessageType, CmsHelpers, CodeComponentHelper, Command, ComponentPropType, CustomPosition, DataLoadStatus, DesignGraphElements, DesignWorkspace, EqualityType, FontHelpers, FontSourceType, Fullscreen, GraphicObjectTypes, ImageExportType, InsertSourceType, ItemType, MatchType, MixedBlockType, Multiplayer, NodePropertyCategory, NodeTsApi, PanelType, PrototypingTsApi, SceneGraphHelpers, ScrollBehavior, SelectionPanelType, SideType, SitesBindingsCpp, SquareShapes, TextBlockType, TrackType, UIVisibilitySetting, UserInterfaceElements, VariableDataType, VariableResolvedDataType, ViewType } from '../figma_app/763686';
 import { C as _$$C } from '../figma_app/765025';
 import { e6 as _$$e1, hu as _$$hu, kI as _$$kI, TZ as _$$TZ, Ez } from '../figma_app/766708';
-import { K2 } from '../figma_app/777551';
+import { getResourceName } from '../figma_app/777551';
 import { YW as _$$YW } from '../figma_app/778125';
 import { getIsAndroidOrIphoneNotFigmaMobile } from '../figma_app/778880';
 import { wV as _$$wV } from '../figma_app/779965';
@@ -3723,7 +3723,7 @@ function aX({
     id: e
   }));
   let i = t.data?.creator.name || t.data?.creator.handle;
-  let n = t.data ? K2(t.data) : '';
+  let n = t.data ? getResourceName(t.data) : '';
   return t.status === 'errors' ? null : jsx('div', {
     className: 'show_love_modal--rowContainer--0t7nv',
     children: t.status === 'loaded' && t.data && jsxs(Fragment, {
@@ -3734,9 +3734,9 @@ function aX({
           entity: t.data.creator
         }), jsx('div', {
           children: jsxs('a', {
-            href: _$$XW(t.data) ? VJ({
+            href: hasContent(t.data) ? buildCommunityUrl({
               resource: t.data
-            }) : _$$_t2({
+            }) : buildCommunityPathById({
               resource: t.data
             }),
             target: '_blank',
@@ -3872,7 +3872,7 @@ function a8({
 }) {
   let {
     data
-  } = M4.useFile(e);
+  } = liveStoreInstance.useFile(e);
   let i = selectUser();
   let n = function (e) {
     let t = useSelector(t => Rv(e?.team_id ?? null, t, null, e?.parent_org_id ?? null), deepEqual);
@@ -4068,7 +4068,7 @@ let sr = registerModal(({
   let {
     status,
     data
-  } = M4.useFile(e);
+  } = liveStoreInstance.useFile(e);
   let d = $S({
     fileKey: e,
     file: data ?? null
@@ -4341,13 +4341,13 @@ function sp({
       fileKey: e,
       userId: N?.id,
       orgId: R?.id,
-      entryPoint: _$$k8.SITES_PUBLISH_MODAL,
+      entryPoint: PageTypeEnum.SITES_PUBLISH_MODAL,
       editorType: _$$_Y.FIGMAKE
     }), k(hideModalHandler()), k(showModalHandler({
       type: sr,
       data: {
         figFileKey: e,
-        entryPoint: _$$k8.SITES_PUBLISH_MODAL
+        entryPoint: PageTypeEnum.SITES_PUBLISH_MODAL
       }
     }))) : i();
   }, [U, doSetup, k, e, i, N, R]);
@@ -8103,7 +8103,7 @@ let ds = registerModal(e => {
     })
   });
 });
-let dr = M4.Mutation((e, {
+let dr = liveStoreInstance.Mutation((e, {
   query: t
 }) => {
   let {
@@ -21842,11 +21842,11 @@ function bg() {
   }, {
     fetchNextPage: p
   }] = setupResourceAtomHandler(_$$a12.ResourcesPaginatedQuery({
-    resourceType: [_$$vt2.SITE_TEMPLATE],
+    resourceType: [ResourceTypeEnum.SITE_TEMPLATE],
     caller: _$$z10.SITES_TEMPLATE_PICKER,
     pageSize: 20,
-    editorType: _$$q9.SITES,
-    sortBy: _$$e13.Browse.PUBLISHED_AT,
+    editorType: DesignToolType.SITES,
+    sortBy: SortOptions.Browse.PUBLISHED_AT,
     includeContent: !0,
     category: s.category,
     tags: s.tags
@@ -21914,7 +21914,7 @@ function bf() {
     })]
   });
 }
-let bk = M4.Query({
+let bk = liveStoreInstance.Query({
   fetch: async ({
     id: e
   }) => {

@@ -45,11 +45,11 @@ import { a6 } from '../figma_app/198840';
 import { getPluginVersion } from '../figma_app/300692';
 import { Tb } from '../figma_app/350203';
 import { U3 } from '../figma_app/412189';
-import { Vm } from '../figma_app/427318';
-import { Cg, qD } from '../figma_app/471982';
+import { getResourceType } from '../figma_app/427318';
+import { isEmptyAddress, getCurrentVersion } from '../figma_app/471982';
 import { BigButtonPrimary, EnhancedInput, SecureLink } from '../figma_app/637027';
 import { getPublisherDisplayName } from '../figma_app/690075';
-import { AC, Ul } from '../figma_app/777551';
+import { isResourcePendingPublishing, isResourceApprovedPublic } from '../figma_app/777551';
 import { parsePxNumber } from '../figma_app/783094';
 import { getProductPriceString, formatCurrency } from '../figma_app/808294';
 import { createEmptyAddress, DEFAULT_COUNTRY, JAPAN_COUNTRY } from '../figma_app/831101';
@@ -66,7 +66,7 @@ function j({
   setIsVatIdValid: s,
   taxIdVerificationStatus: o
 }) {
-  let [l, d] = useState(Cg(e));
+  let [l, d] = useState(isEmptyAddress(e));
   let c = o === FDomainVerificationStatusType.UNVERIFIED;
   return jsxs('div', {
     children: [jsx('div', {
@@ -141,7 +141,7 @@ function Z({
         onClick: () => {
           o('loading');
           XHR.post('/api/community/promo_codes/validate', {
-            resource_type: Vm(e),
+            resource_type: getResourceType(e),
             resource_id: e.id,
             promo_code: l
           }).then(e => {
@@ -612,7 +612,7 @@ function eE(e) {
     localResource,
     subscriptionInterval
   } = e;
-  return resource && Ul(resource) ? jsx(eS, {
+  return resource && isResourceApprovedPublic(resource) ? jsx(eS, {
     resource,
     subscriptionInterval
   }) : localResource ? jsx(ex, {
@@ -731,7 +731,7 @@ export const CommunityCheckoutModal = registerModal(props => {
   } = props;
 
   // Feature flags and admin mode
-  const isAdminReview = resource && getFeatureFlags().community_hub_admin && AC(resource);
+  const isAdminReview = resource && getFeatureFlags().community_hub_admin && isResourcePendingPublishing(resource);
   const isNoInteraction = noInteractionMode && !!(localResource || isAdminReview);
 
   // Resource metadata
@@ -1127,7 +1127,7 @@ export const CommunityCheckoutModal = registerModal(props => {
         children: [
         // Title logic
         (() => {
-          const resourceName = resource ? qD(resource)?.name : localResource ? localResource.manifest.name : undefined;
+          const resourceName = resource ? getCurrentVersion(resource)?.name : localResource ? localResource.manifest.name : undefined;
           return resourceName !== 'undefined' && resource && monetizedMeta && monetizedMeta.is_subscription ? renderI18nText('community.buyer.subscribe_to_resource_name', {
             resourceName
           }) : renderI18nText('community.buyer.purchase_resource_name', {

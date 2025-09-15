@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import a from "../vendor/223926";
 import o from "../vendor/149674";
-import { N6, KG } from "../figma_app/471982";
+import { buildCarouselMedia, fetchImageWithSha1 } from "../figma_app/471982";
 import { A } from "../905/17894";
 import { en, DM } from "../905/759470";
 import { FTemplateCategoryType } from "../figma_app/191312";
@@ -34,7 +34,7 @@ export let $$g1 = {
       if (e) return e;
     }
     if (e && "carousel_media_urls" in e) {
-      let t = N6(e);
+      let t = buildCarouselMedia(e);
       let i = (() => {
         if (t.length > 0) return "cover_image_carousel_media_id" in e && e.cover_image_carousel_media_id ? t.find(t => t.id === e.cover_image_carousel_media_id) : t[0];
       })();
@@ -44,7 +44,7 @@ export let $$g1 = {
       };
     }
     if (e && "thumbnailUrl" in e) {
-      let t = await KG(e.thumbnailUrl);
+      let t = await fetchImageWithSha1(e.thumbnailUrl);
       if (t) return {
         allMedia: [t],
         thumbnailMedium: t

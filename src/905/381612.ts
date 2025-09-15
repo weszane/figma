@@ -13,7 +13,7 @@ import { nM, QN, Vu, Kq, jS, f0, jX, Ks, lD, WR, cu, pj, F9, v8, ay, KA } from "
 import { MF } from "../figma_app/646357";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { gJ, Jl, SO, JG } from "../figma_app/190980";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { NO_TEAM } from "../figma_app/633080";
 import { vt, $A, dB } from "../905/862883";
 import { q } from "../figma_app/446378";
@@ -139,7 +139,7 @@ let D = {
 };
 let L = {
   [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, ResourceType.WIDGET),
+  [$A.FigJam]: gJ($A.FigJam, HubTypeEnum.WIDGET),
   [$A.Handoff]: [],
   [$A.Slides]: [],
   [$A.Cooper]: [],
@@ -147,17 +147,17 @@ let L = {
 };
 let F = {
   [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, ResourceType.PLUGIN),
-  [$A.Handoff]: gJ($A.Handoff, ResourceType.PLUGIN),
+  [$A.FigJam]: gJ($A.FigJam, HubTypeEnum.PLUGIN),
+  [$A.Handoff]: gJ($A.Handoff, HubTypeEnum.PLUGIN),
   [$A.Slides]: [],
   [$A.Cooper]: [],
   fetchedResources: {}
 };
 let M = {
   [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, ResourceType.HUB_FILE),
+  [$A.FigJam]: gJ($A.FigJam, HubTypeEnum.HUB_FILE),
   [$A.Handoff]: [],
-  [$A.Slides]: gJ($A.Slides, ResourceType.HUB_FILE),
+  [$A.Slides]: gJ($A.Slides, HubTypeEnum.HUB_FILE),
   [$A.Cooper]: []
 };
 let j = {
@@ -197,7 +197,7 @@ function V(e) {
       } : {})
     },
     type: vt.CommunityResource
-  }, ...c].slice(0, resourceKey === ResourceType.PLUGIN ? 21 : 12);
+  }, ...c].slice(0, resourceKey === HubTypeEnum.PLUGIN ? 21 : 12);
   let p = Jl(editorKey, resourceKey);
   p && localStorageRef?.setItem(p, JSON.stringify(u));
   return u;
@@ -264,7 +264,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let n = ResourceType.WIDGET;
+      let n = HubTypeEnum.WIDGET;
       if (!Jl(storeInRecentsKey, n)) return e;
       let r = V({
         currentUserId: t.payload.currentUserId,
@@ -287,7 +287,7 @@ let $$H0 = HY({
         resourceId,
         storeInRecentsKey
       } = t.payload;
-      let r = G(storeInRecentsKey, ResourceType.WIDGET, resourceId);
+      let r = G(storeInRecentsKey, HubTypeEnum.WIDGET, resourceId);
       return {
         ...e,
         [storeInRecentsKey]: r
@@ -295,7 +295,7 @@ let $$H0 = HY({
     }
     return jS.matches(t) ? {
       ...e,
-      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, ResourceType.WIDGET)
+      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, HubTypeEnum.WIDGET)
     } : f0.matches(t) ? {
       ...e,
       fetchedResources: {
@@ -312,7 +312,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let n = ResourceType.PLUGIN;
+      let n = HubTypeEnum.PLUGIN;
       if (!Jl(storeInRecentsKey, n)) return e;
       let r = V({
         currentUserId: t.payload.currentUserId,
@@ -335,7 +335,7 @@ let $$H0 = HY({
         resourceId,
         storeInRecentsKey
       } = t.payload;
-      let r = G(storeInRecentsKey, ResourceType.PLUGIN, resourceId);
+      let r = G(storeInRecentsKey, HubTypeEnum.PLUGIN, resourceId);
       return {
         ...e,
         [storeInRecentsKey]: r
@@ -343,7 +343,7 @@ let $$H0 = HY({
     }
     return WR.matches(t) ? t.payload.storeInRecentsKey === $A.Design ? e : {
       ...e,
-      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, ResourceType.PLUGIN)
+      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
     } : cu.matches(t) ? {
       ...e,
       fetchedResources: {
@@ -361,7 +361,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let o = Jl(storeInRecentsKey, ResourceType.HUB_FILE);
+      let o = Jl(storeInRecentsKey, HubTypeEnum.HUB_FILE);
       if (!o) throw Error("Recently used templates currently only implemented for FigJam and Slides");
       let {
         payload
@@ -370,7 +370,7 @@ let $$H0 = HY({
         type,
         userId
       } = l;
-      let [[u], p] = s()(gJ(storeInRecentsKey, ResourceType.HUB_FILE), e => {
+      let [[u], p] = s()(gJ(storeInRecentsKey, HubTypeEnum.HUB_FILE), e => {
         let {
           type: _type
         } = e;

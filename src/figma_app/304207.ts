@@ -12,7 +12,7 @@ import { b6, Qi } from "../figma_app/559491";
 import { M5, ZO } from "../figma_app/350203";
 import { N3 } from "../figma_app/844435";
 import { n as _$$n } from "../figma_app/740025";
-import { ResourceTypeNoComment, isWidget, ResourceType } from "../figma_app/45218";
+import { ResourceTypeNoComment, isWidget, HubTypeEnum } from "../figma_app/45218";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 import { n as _$$n2 } from "../905/347702";
@@ -200,12 +200,12 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
   });
 });
 let x = {
-  [ResourceType.PLUGIN]: function (e) {
+  [HubTypeEnum.PLUGIN]: function (e) {
     return pluginAPIService.getInstallStatus({
       orgId: e
     });
   },
-  [ResourceType.WIDGET]: function (e) {
+  [HubTypeEnum.WIDGET]: function (e) {
     return U.getInstallStatus({
       orgId: e
     });

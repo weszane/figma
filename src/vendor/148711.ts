@@ -1,9 +1,9 @@
-import { f8, lQ, S$, gn, j3, pl } from "../vendor/348210";
-import { j } from "../vendor/637177";
-import { m as _$$m } from "../vendor/338690";
-import { Q } from "../vendor/166452";
-import { v_, wm } from "../vendor/284502";
-export class $$d0 extends Q {
+import { Q } from '../vendor/166452';
+import { canFetch, isCancelledError } from '@tanstack/query-core';
+import { m as _$$m } from '../vendor/338690';
+import { f8, gn, j3, lQ, pl, S$ } from '../vendor/348210';
+import { j } from '../vendor/637177';
+export class QueryObserver extends Q {
   constructor(e, r) {
     super();
     this.client = e;
@@ -18,7 +18,7 @@ export class $$d0 extends Q {
     this.refetch = this.refetch.bind(this);
   }
   onSubscribe() {
-    1 === this.listeners.length && (this.currentQuery.addObserver(this), g(this.currentQuery, this.options) && this.executeFetch(), this.updateTimers());
+    this.listeners.length === 1 && (this.currentQuery.addObserver(this), g(this.currentQuery, this.options) && this.executeFetch(), this.updateTimers());
   }
   onUnsubscribe() {
     this.listeners.length || this.destroy();
@@ -39,10 +39,12 @@ export class $$d0 extends Q {
     let n = this.options;
     let s = this.currentQuery;
     if (this.options = this.client.defaultQueryOptions(e), f8(n, this.options) || this.client.getQueryCache().notify({
-      type: "observerOptionsUpdated",
+      type: 'observerOptionsUpdated',
       query: this.currentQuery,
       observer: this
-    }), void 0 !== this.options.enabled && "boolean" != typeof this.options.enabled) throw Error("Expected enabled to be a boolean");
+    }), void 0 !== this.options.enabled && typeof this.options.enabled != 'boolean') {
+      throw new Error('Expected enabled to be a boolean');
+    }
     this.options.queryKey || (this.options.queryKey = n.queryKey);
     this.updateQuery();
     let o = this.hasListeners();
@@ -94,7 +96,7 @@ export class $$d0 extends Q {
     return n.fetch().then(() => this.createResult(n, r));
   }
   fetch(e) {
-    var r;
+    let r;
     return this.executeFetch({
       ...e,
       cancelRefetch: e.cancelRefetch || r
@@ -103,7 +105,7 @@ export class $$d0 extends Q {
   executeFetch(e) {
     this.updateQuery();
     let r = this.currentQuery.fetch(this.options, e);
-    null != e && e.throwOnError || (r = r.catch(lQ));
+    e != null && e.throwOnError || (r = r.catch(lQ));
     return r;
   }
   updateStaleTimeout() {
@@ -114,13 +116,13 @@ export class $$d0 extends Q {
     }, e);
   }
   computeRefetchInterval() {
-    var e;
-    return "function" == typeof this.options.refetchInterval ? this.options.refetchInterval(this.currentResult.data, this.currentQuery) : null != (e = this.options.refetchInterval) && e;
+    let e;
+    return typeof this.options.refetchInterval == 'function' ? this.options.refetchInterval(this.currentResult.data, this.currentQuery) : (e = this.options.refetchInterval) != null && e;
   }
   updateRefetchInterval(e) {
     this.clearRefetchInterval();
     this.currentRefetchInterval = e;
-    !S$ && !1 !== this.options.enabled && gn(this.currentRefetchInterval) && 0 !== this.currentRefetchInterval && (this.refetchIntervalId = setInterval(() => {
+    !S$ && !1 !== this.options.enabled && gn(this.currentRefetchInterval) && this.currentRefetchInterval !== 0 && (this.refetchIntervalId = setInterval(() => {
       (this.options.refetchIntervalInBackground || _$$m.isFocused()) && this.executeFetch();
     }, this.currentRefetchInterval));
   }
@@ -160,44 +162,54 @@ export class $$d0 extends Q {
       let n = this.hasListeners();
       let i = !n && g(e, r);
       let a = n && v(e, s, r, o);
-      (i || a) && (S = v_(e.options.networkMode) ? "fetching" : "paused", dataUpdatedAt || (E = "loading"));
-      "isRestoring" === r._optimisticResults && (S = "idle");
+      (i || a) && (S = canFetch(e.options.networkMode) ? 'fetching' : 'paused', dataUpdatedAt || (E = 'loading'));
+      r._optimisticResults === 'isRestoring' && (S = 'idle');
     }
-    if (r.keepPreviousData && !state.dataUpdatedAt && null != O && O.isSuccess && "error" !== status) {
+    if (r.keepPreviousData && !state.dataUpdatedAt && O != null && O.isSuccess && status !== 'error') {
       n = O.data;
       w = O.dataUpdatedAt;
       E = O.status;
       A = !0;
     } else if (r.select && void 0 !== state.data) {
-      if (a && state.data === d?.data && r.select === this.selectFn) n = this.selectResult; else try {
-        this.selectFn = r.select;
-        n = r.select(state.data);
-        n = pl(a?.data, n, r);
-        this.selectResult = n;
-        this.selectError = null;
-      } catch (e) {
-        this.selectError = e;
+      if (a && state.data === d?.data && r.select === this.selectFn) {
+        n = this.selectResult;
+      } else {
+        try {
+          this.selectFn = r.select;
+          n = r.select(state.data);
+          n = pl(a?.data, n, r);
+          this.selectResult = n;
+          this.selectError = null;
+        } catch (e) {
+          this.selectError = e;
+        }
       }
-    } else n = state.data;
-    if (void 0 !== r.placeholderData && void 0 === n && "loading" === status) {
-      let e;
-      if (null != a && a.isPlaceholderData && r.placeholderData === p?.placeholderData) e = a.data; else if (e = "function" == typeof r.placeholderData ? r.placeholderData() : r.placeholderData, r.select && void 0 !== e) try {
-        e = r.select(e);
-        this.selectError = null;
-      } catch (e) {
-        this.selectError = e;
-      }
-      void 0 !== e && (E = "success", n = pl(a?.data, e, r), C = !0);
+    } else {
+      n = state.data;
     }
-    this.selectError && (k = this.selectError, n = this.selectResult, _ = Date.now(), E = "error");
-    let T = "fetching" === fetchStatus;
-    let I = "loading" === status;
-    let P = "error" === status;
+    if (void 0 !== r.placeholderData && void 0 === n && status === 'loading') {
+      let e;
+      if (a != null && a.isPlaceholderData && r.placeholderData === p?.placeholderData) {
+        e = a.data;
+      } else if (e = typeof r.placeholderData == 'function' ? r.placeholderData() : r.placeholderData, r.select && void 0 !== e) {
+        try {
+          e = r.select(e);
+          this.selectError = null;
+        } catch (e) {
+          this.selectError = e;
+        }
+      }
+      void 0 !== e && (E = 'success', n = pl(a?.data, e, r), C = !0);
+    }
+    this.selectError && (k = this.selectError, n = this.selectResult, _ = Date.now(), E = 'error');
+    let T = fetchStatus === 'fetching';
+    let I = status === 'loading';
+    let P = status === 'error';
     return {
       status,
       fetchStatus,
       isLoading: I,
-      isSuccess: "success" === status,
+      isSuccess: status === 'success',
       isError: P,
       isInitialLoading: I && T,
       data: n,
@@ -211,11 +223,11 @@ export class $$d0 extends Q {
       isFetchedAfterMount: state.dataUpdateCount > b.dataUpdateCount || state.errorUpdateCount > b.errorUpdateCount,
       isFetching: T,
       isRefetching: T && !I,
-      isLoadingError: P && 0 === state.dataUpdatedAt,
-      isPaused: "paused" === fetchStatus,
+      isLoadingError: P && state.dataUpdatedAt === 0,
+      isPaused: fetchStatus === 'paused',
       isPlaceholderData: C,
       isPreviousData: A,
-      isRefetchError: P && 0 !== state.dataUpdatedAt,
+      isRefetchError: P && state.dataUpdatedAt !== 0,
       isStale: y(e, r),
       refetch: this.refetch,
       remove: this.remove
@@ -234,9 +246,9 @@ export class $$d0 extends Q {
       let {
         notifyOnChangeProps
       } = this.options;
-      if ("all" === notifyOnChangeProps || !notifyOnChangeProps && !this.trackedProps.size) return !0;
-      let n = new Set(null != notifyOnChangeProps ? notifyOnChangeProps : this.trackedProps);
-      this.options.useErrorBoundary && n.add("error");
+      if (notifyOnChangeProps === 'all' || !notifyOnChangeProps && !this.trackedProps.size) return !0;
+      let n = new Set(notifyOnChangeProps != null ? notifyOnChangeProps : this.trackedProps);
+      this.options.useErrorBoundary && n.add('error');
       return Object.keys(this.currentResult).some(e => {
         let i = e;
         return this.currentResult[i] !== r[i] && n.has(i);
@@ -259,48 +271,48 @@ export class $$d0 extends Q {
   }
   onQueryUpdate(e) {
     let r = {};
-    "success" === e.type ? r.onSuccess = !e.manual : "error" !== e.type || wm(e.error) || (r.onError = !0);
+    e.type === 'success' ? r.onSuccess = !e.manual : e.type !== 'error' || isCancelledError(e.error) || (r.onError = !0);
     this.updateResult(r);
     this.hasListeners() && this.updateTimers();
   }
   notify(e) {
     j.batch(() => {
-      var r;
-      var n;
-      var i;
-      var s;
-      var o;
-      var a;
-      var h;
-      var d;
-      e.onSuccess ? (null == (r = (n = this.options).onSuccess) || r.call(n, this.currentResult.data), null == (i = (s = this.options).onSettled) || i.call(s, this.currentResult.data, null)) : e.onError && (null == (o = (a = this.options).onError) || o.call(a, this.currentResult.error), null == (h = (d = this.options).onSettled) || h.call(d, void 0, this.currentResult.error));
+      let r;
+      let n;
+      let i;
+      let s;
+      let o;
+      let a;
+      let h;
+      let d;
+      e.onSuccess ? ((r = (n = this.options).onSuccess) == null || r.call(n, this.currentResult.data), (i = (s = this.options).onSettled) == null || i.call(s, this.currentResult.data, null)) : e.onError && ((o = (a = this.options).onError) == null || o.call(a, this.currentResult.error), (h = (d = this.options).onSettled) == null || h.call(d, void 0, this.currentResult.error));
       e.listeners && this.listeners.forEach(e => {
         e(this.currentResult);
       });
       e.cache && this.client.getQueryCache().notify({
         query: this.currentQuery,
-        type: "observerResultsUpdated"
+        type: 'observerResultsUpdated'
       });
     });
   }
 }
 function p(e, r) {
-  return !1 !== r.enabled && !e.state.dataUpdatedAt && !("error" === e.state.status && !1 === r.retryOnMount);
+  return !1 !== r.enabled && !e.state.dataUpdatedAt && !(e.state.status === 'error' && !1 === r.retryOnMount);
 }
 function g(e, r) {
   return p(e, r) || e.state.dataUpdatedAt > 0 && m(e, r, r.refetchOnMount);
 }
 function m(e, r, n) {
   if (!1 !== r.enabled) {
-    let i = "function" == typeof n ? n(e) : n;
-    return "always" === i || !1 !== i && y(e, r);
+    let i = typeof n == 'function' ? n(e) : n;
+    return i === 'always' || !1 !== i && y(e, r);
   }
   return !1;
 }
 function v(e, r, n, i) {
-  return !1 !== n.enabled && (e !== r || !1 === i.enabled) && (!n.suspense || "error" !== e.state.status) && y(e, n);
+  return !1 !== n.enabled && (e !== r || !1 === i.enabled) && (!n.suspense || e.state.status !== 'error') && y(e, n);
 }
 function y(e, r) {
   return e.isStaleByTime(r.staleTime);
 }
-export const $ = $$d0; 
+export const $ = QueryObserver;

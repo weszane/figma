@@ -13,7 +13,7 @@ import { logError } from "../905/714362";
 import { getI18nString } from "../905/303541";
 import { P as _$$P, o as _$$o } from "../905/717906";
 import { VisualBellActions } from "../905/302958";
-import { AC } from "../figma_app/777551";
+import { isResourcePendingPublishing } from "../figma_app/777551";
 import { ResourceTypes } from "../905/178090";
 import { Vl, mV } from "../905/837497";
 import { f1, O8, Qi } from "../figma_app/559491";
@@ -124,7 +124,7 @@ export function $$Q11() {
         invitedPlugins: e
       };
     }
-    if (AC(r)) {
+    if (isResourcePendingPublishing(r)) {
       let e = [...t.pendingReviewPlugins, r];
       return {
         ...t,
@@ -182,7 +182,7 @@ export function $$ei7() {
         invitedWidgets: e
       };
     }
-    if (AC(r)) {
+    if (isResourcePendingPublishing(r)) {
       let e = [...t.pendingReviewWidgets, r];
       return {
         ...t,

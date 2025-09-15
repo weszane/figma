@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { A } from "../5132/237216";
-import { Vm } from "../figma_app/427318";
+import { getResourceType } from "../figma_app/427318";
 import { aI } from "../figma_app/558929";
 import { selectCurrentUser } from "../905/372672";
 import { useTeamPlanUser, useTeamPlanFeatures } from "../figma_app/465071";
@@ -26,7 +26,7 @@ export function $$f0(e) {
   let N = A(e.resource, !0);
   if (!f || !t || !getFeatureFlags().community_hub_admin_reviewer) return jsx(Fragment, {});
   function S(t) {
-    return "hub_file" === Vm(e.resource);
+    return "hub_file" === getResourceType(e.resource);
   }
   let C = S(e.resource) ? renderI18nText("community.duplicate.duplicate") : renderI18nText("community.detail_view.try_it_out");
   let k = {

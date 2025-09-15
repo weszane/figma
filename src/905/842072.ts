@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { n1 } from "../figma_app/657017";
 import { N4 } from "../figma_app/630951";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { H } from "../905/473998";
 import { $W, yX, YQ } from "../905/144933";
 let d = {
@@ -14,7 +14,7 @@ let d = {
   },
   libraries: []
 };
-let $$c1 = M4.Query({
+let $$c1 = liveStoreInstance.Query({
   fetch: async ({
     query: e
   }) => {

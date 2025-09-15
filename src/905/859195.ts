@@ -8,7 +8,7 @@ import { VisualBellIcon } from "../905/576487";
 import { ZS } from "../figma_app/519839";
 import { Ol } from "../905/576221";
 import { vQ, p6 } from "../figma_app/803787";
-import { V } from "../905/186961";
+import { getFContainerType } from "../905/186961";
 import { UV, _9, Md, VW } from "../figma_app/755939";
 import { Bj, _I, sG, Ao } from "../905/686934";
 export function $$f0() {
@@ -34,7 +34,7 @@ export function $$f0() {
         e(ZS({
           savepointDescription: "cooper template publish",
           itemsToPublish: new Set(_),
-          publishScope: V(t.publishScope),
+          publishScope: getFContainerType(t.publishScope),
           ...sG()
         }));
       });

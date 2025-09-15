@@ -1,7 +1,7 @@
 import { z, Ip } from "../905/239603";
 import { createNoOpValidator, createMetaValidator, APIParameterUtils, defaultValidator } from "../figma_app/181241";
 import { XHR } from "../905/910117";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { _ as _$$_, P } from "../905/242077";
 import { S } from "../905/697164";
 import { pd } from "../figma_app/327564";
@@ -53,7 +53,7 @@ let $$g0 = new class {
     this.OrgUsersFilterCountsSchemaValidator = createNoOpValidator();
     this.OrgTeamsFilterCountsSchemaValidator = createNoOpValidator();
     this.OrgAdminsSchemaValidator = createNoOpValidator();
-    this.OrgAdminsQuery = M4.Query({
+    this.OrgAdminsQuery = liveStoreInstance.Query({
       fetch: async ({
         orgId: e
       }) => (await this.getOrgAdmins({

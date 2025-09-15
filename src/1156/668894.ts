@@ -10,7 +10,7 @@ import { setupResourceAtomHandler } from "../figma_app/566371";
 import { h1 } from "../905/986103";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCurrentFileKey } from "../figma_app/516028";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { R as _$$R } from "../905/943003";
 import { uF } from "../1156/418246";
 import { TL, mS, YY, tE, Lz } from "../figma_app/791586";
@@ -105,7 +105,7 @@ function P({
         projectId: t
       });
       let r = setInterval(async () => {
-        let i = await M4.fetch(GO({
+        let i = await liveStoreInstance.fetch(GO({
           fileKey: n,
           projectId: t
         }), {
@@ -475,7 +475,7 @@ function Y({
     };
     let E = () => {
       let e = setInterval(async () => {
-        let t = await M4.fetch(TT({
+        let t = await liveStoreInstance.fetch(TT({
           fileKey: o
         }), {
           policy: "networkOnly"

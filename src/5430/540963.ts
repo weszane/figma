@@ -9,12 +9,12 @@ import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AG } from "../figma_app/999312";
 import { A as _$$A } from "../5430/1650";
-import { S as _$$S } from "../905/872825";
-import { RA, ed as _$$ed } from "../figma_app/321395";
-import { xn, bL, qL } from "../905/934145";
+import { getValueOrFallback } from "../905/872825";
+import { useSafeRouteParams, useRouteStateInstance } from "../figma_app/321395";
+import { ProfileRouteState, getProfileRouteHref, ResourceHubProfileRouteState } from "../905/934145";
 import { showModalHandler, hideModal } from "../905/156213";
 import { TrackedLink, TrackingProvider } from "../figma_app/831799";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { UserProfileTab } from "../figma_app/707808";
 import { e0 as _$$e } from "../905/696396";
 import { s as _$$s2 } from "../905/608932";
@@ -48,7 +48,7 @@ import { J as _$$J } from "../5132/948584";
 import { V as _$$V } from "../1577/311426";
 import { A as _$$A3 } from "../905/776343";
 import { qU, TI } from "../5430/258075";
-import { HD, Co, Qo, qD, ss as _$$ss, kf, af } from "../figma_app/471982";
+import { HD, Co, isViewerModeResource, getCurrentVersion, mapResourceTypePlural, canSellOnCommunity, isStripeAccepted } from "../figma_app/471982";
 import { W as _$$W } from "../905/316655";
 import { k as _$$k2 } from "../905/443820";
 import { O as _$$O } from "../5430/638907";
@@ -58,7 +58,7 @@ import { m1 } from "../5430/297093";
 import { oW } from "../905/675859";
 import { Z as _$$Z } from "../5430/338876";
 import { _ as _$$_ } from "../5430/511077";
-import { Om, tv as _$$tv, au } from "../figma_app/979714";
+import { useResourceRouteParams, useResourceFuid, ResourceHubHomeRouteClass } from "../figma_app/979714";
 import { W as _$$W2 } from "../5430/484293";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
@@ -92,10 +92,10 @@ import { z as _$$z2 } from "../905/353894";
 import { useSubscription } from "../figma_app/288654";
 import { VisualBellActions } from "../905/302958";
 import { S as _$$S2 } from "../5430/465757";
-import { C as _$$C } from "../905/237873";
+import { PricingOptions } from "../905/237873";
 import { getProductPriceString, formatCurrency } from "../figma_app/808294";
-import { Vm, yX, qY } from "../figma_app/427318";
-import { e as _$$e4 } from "../figma_app/324237";
+import { getResourceType, getSupportedVtTypes, getMainContent } from "../figma_app/427318";
+import { SortOptions } from "../figma_app/324237";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
 import { RK } from "../figma_app/815170";
@@ -121,18 +121,18 @@ import { J as _$$J2 } from "../905/125993";
 import { N9 } from "../figma_app/188152";
 import { Um } from "../905/848862";
 import { lW } from "../figma_app/11182";
-import { o1 } from "../figma_app/10554";
+import { TeamOrgType } from "../figma_app/10554";
 import { H as _$$H2 } from "../5430/304640";
 import { j as _$$j } from "../905/834956";
 import { T as _$$T } from "../5430/373013";
-import { N as _$$N4 } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { f as _$$f } from "../figma_app/436731";
 import { s as _$$s4 } from "../cssbuilder/589278";
 import { A as _$$A6 } from "../5430/728674";
 import { ServiceCategories as _$$e5 } from "../905/165054";
 import { reportError } from "../905/11";
 import { createMinimalValidator, APIParameterUtils, createPaginatedValidator } from "../figma_app/181241";
-import { Y9 } from "../figma_app/306946";
+import { ResourceWithOptionalContentListSchema } from "../figma_app/306946";
 import { t as _$$t3 } from "../905/331623";
 import { nf, cI, q3, _M } from "../5430/708619";
 import { A as _$$A7 } from "../svg/16929";
@@ -377,7 +377,7 @@ function e_({
 function ep({
   profile: e
 }) {
-  let t = new xn({
+  let t = new ProfileRouteState({
     profileHandle: e.profile_handle
   });
   return jsx(_$$N.Button, {
@@ -466,9 +466,9 @@ function eI({
   let t = buildUploadUrl("8b7a937ff662171bfc1bb88ac6c2803aa6434608");
   let r = function () {
     let e = AG();
-    let t = Om();
-    let r = _$$tv() ?? void 0;
-    return e && t ? new au({
+    let t = useResourceRouteParams();
+    let r = useResourceFuid() ?? void 0;
+    return e && t ? new ResourceHubHomeRouteClass({
       ...t,
       tab: N$.COMMUNITY
     }, r) : new _$$_(r);
@@ -952,10 +952,10 @@ let ru = parsePxNumber(ZI8);
 function rm({
   resource: e
 }) {
-  return Qo(e) ? jsx(Cv, {
+  return isViewerModeResource(e) ? jsx(Cv, {
     resource: e,
     isMetaHidden: !0
-  }) : "plugin" === Vm(e) ? jsx(cS, {
+  }) : "plugin" === getResourceType(e) ? jsx(cS, {
     resource: e,
     isMetaHidden: !0
   }) : jsx(bN, {
@@ -969,14 +969,14 @@ function r_({
   let {
     name,
     created_at
-  } = qD(e);
+  } = getCurrentVersion(e);
   let s = new Date(created_at).toLocaleDateString(void 0, {
     year: "numeric",
     month: "long",
     day: "numeric"
   });
   let n = e.monetized_resource_metadata ? getProductPriceString(e.monetized_resource_metadata) : "";
-  let o = `/community/${_$$ss(e)}/${e.id}`;
+  let o = `/community/${mapResourceTypePlural(e)}/${e.id}`;
   return jsxs("div", {
     className: ri,
     children: [jsx("div", {
@@ -1211,11 +1211,11 @@ function rj({
   }, {
     fetchNextPage: h
   }] = setupResourceAtomHandler(_$$a.ResourcesPaginatedQuery({
-    resourceType: yX(),
-    sortBy: _$$e4.Browse.PUBLISHED_AT,
+    resourceType: getSupportedVtTypes(),
+    sortBy: SortOptions.Browse.PUBLISHED_AT,
     caller: _$$z.PROFILE,
     profileId: t,
-    price: _$$C.PAID,
+    price: PricingOptions.PAID,
     pageSize: 30,
     includeContent: !0
   }));
@@ -1309,7 +1309,7 @@ function rj({
   let I = renderI18nText("community.seller.resource_metrics_coming_soon");
   let E = renderI18nText("community.seller.working_on_bringing_you_more_in_depth_metrics");
   s?.stripe_account_status !== StatusType.ENABLED && (L = "profile_resources_grid--metricValueDisabled--mYlXF profile_resources_grid--metricValue--w627p text--fontPos48--H177Q text--_fontBase--QdLsd", T = "profile_resources_grid--metricLabelDisabled--dTvu- profile_resources_grid--metricLabel--1bOis text--fontPos13--xW8hS text--_fontBase--QdLsd");
-  let S = "loaded" === d ? (c || []).map(e => qY(e)).filter(e => void 0 !== e).filter(rb) : [];
+  let S = "loaded" === d ? (c || []).map(e => getMainContent(e)).filter(e => void 0 !== e).filter(rb) : [];
   let R = S.length > 0;
   let A = S.reduce((e, t) => e + (t.view_count || 0), 0);
   I = renderI18nText("community.seller.youre_all_set_up_to_sell_on_community");
@@ -1390,7 +1390,7 @@ function rA() {
   let n = r.is_restricted_by_current_user;
   let a = () => {
     e(lW({
-      stringToCopy: `${window.location.origin}${bL(r.profile_handle)}`
+      stringToCopy: `${window.location.origin}${getProfileRouteHref(r.profile_handle)}`
     }));
   };
   let l = r => {
@@ -1475,7 +1475,7 @@ function rA() {
   let m = [{
     displayText: rk("Copy profile link")
   }];
-  return (t?.community_profile_id && r.entity_type === o1.USER && (n ? m.push({
+  return (t?.community_profile_id && r.entity_type === TeamOrgType.USER && (n ? m.push({
     displayText: rk("Unrestrict user")
   }) : m.push({
     displayText: rk("Restrict user")
@@ -1567,8 +1567,8 @@ let r$ = new class {
     this.getCommunityLegacyResourceSaves = e => this.CommunityResourceLegacySavesSchemaValidator.validate(({
       xr: t
     }) => t.getPaginated("/api/resource_saves", APIParameterUtils.toAPIParameters(e)));
-    this.CommunityResourceSavesSchemaValidator = createPaginatedValidator("CommunityResourceSavesSchemaValidator", Y9, null, !0);
-    this.PaginatedCommunityResourceSavesQuery = M4.PaginatedQuery({
+    this.CommunityResourceSavesSchemaValidator = createPaginatedValidator("CommunityResourceSavesSchemaValidator", ResourceWithOptionalContentListSchema, null, !0);
+    this.PaginatedCommunityResourceSavesQuery = liveStoreInstance.PaginatedQuery({
       fetch: async ({
         pageSize: e
       }, {
@@ -1596,7 +1596,7 @@ let r$ = new class {
     this.getCommunityUserResourceInstalls = e => this.CommunityUserResourceInstallsSchemaValidator.validate(({
       xr: t
     }) => t.getPaginated("/api/resources/installed/user", APIParameterUtils.toAPIParameters(e)));
-    this.PaginatedPrivateExtensionInstallsQuery = M4.PaginatedQuery({
+    this.PaginatedPrivateExtensionInstallsQuery = liveStoreInstance.PaginatedQuery({
       fetch: async ({
         pageSize: e
       }, {
@@ -1626,7 +1626,7 @@ let r$ = new class {
 _$$f.byProperty("saved_at", _$$f.BY_DATETIME);
 let rz = _$$f.byProperty("saved_at", _$$f.BY_DATETIME);
 function rQ() {
-  let e = _$$N4(`(max-width: ${g8m})`);
+  let e = usePrefersMediaQuery(`(max-width: ${g8m})`);
   let [t, r] = useState(!0);
   let [s, o] = useState([]);
   let [{
@@ -1747,9 +1747,9 @@ class r0 extends Component {
       });
       return this.props.profile.primary_user_id ? renderI18nText("community.profiles.your_profile_is_visible_to_the_public_at", {
         link: t
-      }) : this.props.profile.entity_type === o1.TEAM ? renderI18nText("community.profiles.your_teams_profile_is_visible_to_the_public_at", {
+      }) : this.props.profile.entity_type === TeamOrgType.TEAM ? renderI18nText("community.profiles.your_teams_profile_is_visible_to_the_public_at", {
         link: t
-      }) : this.props.profile.entity_type === o1.ORG ? renderI18nText("community.profiles.your_organizations_profile_is_visible_to_the_public_at", {
+      }) : this.props.profile.entity_type === TeamOrgType.ORG ? renderI18nText("community.profiles.your_organizations_profile_is_visible_to_the_public_at", {
         link: t
       }) : void 0;
     };
@@ -1926,7 +1926,7 @@ function r9(e) {
   });
   let w = jsx(r8, {
     canEdit: n,
-    canSellOnCommunity: kf(profile)
+    canSellOnCommunity: canSellOnCommunity(profile)
   });
   return jsxs("div", {
     children: [jsxs("h1", {
@@ -1951,7 +1951,7 @@ function r7({
   let a = useDispatch();
   let l = r === e.id;
   return (useEffect(() => {
-    t !== UserProfileTab.SAVES || l || customHistory.push(bL(e.profile_handle, UserProfileTab.RESOURCES));
+    t !== UserProfileTab.SAVES || l || customHistory.push(getProfileRouteHref(e.profile_handle, UserProfileTab.RESOURCES));
   }, [t, l, s, e.profile_handle, a]), t === UserProfileTab.METRICS) ? jsx("div", {
     className: tV,
     children: jsx(rj, {
@@ -1967,7 +1967,7 @@ function r6({
 }) {
   let {
     tabView
-  } = RA(xn);
+  } = useSafeRouteParams(ProfileRouteState);
   let r = selectCurrentUser();
   let n = useDispatch();
   let a = useSelector(t => E1(e, t));
@@ -1994,7 +1994,7 @@ function se({
   currentProfile: s,
   dispatch: o
 }) {
-  let a = _$$S(t?.profileTab, sr);
+  let a = getValueOrFallback(t?.profileTab, sr);
   useEffect(() => {
     if (s && a) {
       o(showModalHandler({
@@ -2053,7 +2053,7 @@ function se({
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        customHistory.push(bL(this.props.profile.profile_handle, UserProfileTab.RESOURCES));
+        customHistory.push(getProfileRouteHref(this.props.profile.profile_handle, UserProfileTab.RESOURCES));
       };
       this.onMetricsTabClick = () => {
         trackEventAnalytics("Profile Resources Tab Clicked", {
@@ -2064,7 +2064,7 @@ function se({
         handleAtomEvent({
           id: "profile-metrics-tab-clicked"
         });
-        customHistory.push(bL(this.props.profile.profile_handle, UserProfileTab.METRICS, this.props.currentUser));
+        customHistory.push(getProfileRouteHref(this.props.profile.profile_handle, UserProfileTab.METRICS, this.props.currentUser));
       };
       this.onSavesTabClick = () => {
         handleAtomEvent({
@@ -2075,7 +2075,7 @@ function se({
           profileId: this.props.profileId,
           viewingUserId: this.props.currentUser?.id
         });
-        customHistory.push(bL(this.props.profile.profile_handle, UserProfileTab.SAVES));
+        customHistory.push(getProfileRouteHref(this.props.profile.profile_handle, UserProfileTab.SAVES));
       };
       this.showFollowsModal = e => {
         this.props.dispatch(sf({
@@ -2123,7 +2123,7 @@ function se({
           className: tq
         })]
       });
-      let s = !!(this.props.isWithinProfileScope && af(this.props.currentUser)) || !!getFeatureFlags().cmty_expand_extension_m10n && !!this.props.profile.associated_users?.find(e => e.user_id === this.props.currentUser?.id && !0 === e.is_primary_user);
+      let s = !!(this.props.isWithinProfileScope && isStripeAccepted(this.props.currentUser)) || !!getFeatureFlags().cmty_expand_extension_m10n && !!this.props.profile.associated_users?.find(e => e.user_id === this.props.currentUser?.id && !0 === e.is_primary_user);
       let n = jsx(e4, {
         user: this.props.currentUser,
         children: jsxs("div", {
@@ -2221,7 +2221,7 @@ let st = connect(e => ({
   authedActiveCommunityProfileId: "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null
 }))(se);
 let sr = l()(UserProfileTab, ["FOLLOWERS", "FOLLOWING"]);
-let ss = M4.Query({
+let ss = liveStoreInstance.Query({
   fetch: async e => (await _$$s2.getHandle({
     handle: e
   })).data.meta
@@ -2229,8 +2229,8 @@ let ss = M4.Query({
 export function $$si0({
   fallbackRedirectRoute: e
 }) {
-  let t = _$$ed(xn);
-  let r = _$$ed(qL);
+  let t = useRouteStateInstance(ProfileRouteState);
+  let r = useRouteStateInstance(ResourceHubProfileRouteState);
   let s = AG();
   let a = useDispatch();
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;

@@ -32,7 +32,7 @@ import { FC } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
 import { FPermissionLevelType, FTeamAccessPermissionType, FResourceCategoryType, FPlanNameType } from "../figma_app/191312";
 import { FolderPermissions } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { H_ } from "../figma_app/336853";
 import { getPermissionLevelName } from "../figma_app/12796";
 import { ob, t9, yI } from "../905/915142";
@@ -403,7 +403,7 @@ export let $$eK0 = registerModal(function (e) {
   let ee = useSelector(e => e.dropdownShown);
   let et = useSelector(e => e.orgDomains);
   let ei = FC();
-  let en = M4.Folder.useValue(folderId).data;
+  let en = liveStoreInstance.Folder.useValue(folderId).data;
   let er = useSelector(e => en?.team_id && e.teams[en.team_id] || null);
   let ea = useCurrentUserOrg() || null;
   let [es, eo] = useState(AccessLevelEnum.VIEWER);

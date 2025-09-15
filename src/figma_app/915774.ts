@@ -1,6 +1,6 @@
 import { sortByWithOptions } from "../figma_app/656233";
 import { hasAssetId, PrimaryWorkflowEnum } from "../figma_app/633080";
-import { lR } from "../figma_app/255679";
+import { hasLibraryKeyInSet } from "../figma_app/255679";
 let s = /^Examples *\//;
 export function $$o0(e, {
   isPreset: t
@@ -9,7 +9,7 @@ export function $$o0(e, {
 }
 export function $$l3(e, t) {
   if (hasAssetId(e) || !(e.type === PrimaryWorkflowEnum.COMPONENT || e.type === PrimaryWorkflowEnum.STATE_GROUP)) return !1;
-  let r = lR(e, t);
+  let r = hasLibraryKeyInSet(e, t);
   return $$o0(e, {
     isPreset: r
   });

@@ -1,4 +1,4 @@
-import { Tg, Xu, Uo } from "../figma_app/354658";
+import { Tg, CommunityRoute, ResourceType } from "../figma_app/354658";
 export function $$i1(e, t) {
   return new Tg({
     resourceId: e,
@@ -6,15 +6,15 @@ export function $$i1(e, t) {
   }).href;
 }
 export function $$a6(e, t) {
-  return new Xu({
-    apiResourceType: Uo.PLUGIN,
+  return new CommunityRoute({
+    apiResourceType: ResourceType.PLUGIN,
     resourceId: e,
     urlSlug: t
   }).href;
 }
 export function $$s2(e, t) {
-  return new Xu({
-    apiResourceType: Uo.WIDGET,
+  return new CommunityRoute({
+    apiResourceType: ResourceType.WIDGET,
     resourceId: e,
     urlSlug: t
   }).href;

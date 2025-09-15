@@ -13,7 +13,7 @@ import { TrackingProvider } from "../figma_app/831799";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { Eh } from "../figma_app/617654";
 import { V } from "../905/223084";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 import { az } from "../figma_app/805373";
 import { lM } from "../figma_app/392626";
@@ -42,7 +42,7 @@ function I(e) {
         I(e.meta);
       });
       return;
-    } else e.planType === FOrganizationLevelType.TEAM && $.getTeamAdmins({
+    } else e.planType === FOrganizationLevelType.TEAM && teamAPIClient.getTeamAdmins({
       teamId: e.planId
     }).then(({
       data: e

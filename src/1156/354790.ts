@@ -7,7 +7,7 @@ import { noop, throwIf } from '../905/419236';
 import { getFeatureFlags } from '../905/601108';
 import { getCommunityFileUrl } from '../905/612685';
 import { getSingletonSceneGraph } from '../905/700578';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { generateUUIDv4 } from '../905/871474';
 import { ei, Ur, zK } from '../1156/71049';
 import { eM, oL, Pd, qE, rH } from '../1156/418246';
@@ -669,7 +669,7 @@ async function ea() {
   let {
     connectedProject,
     isConnectedNonOwner
-  } = await M4.fetch(TT({
+  } = await liveStoreInstance.fetch(TT({
     fileKey: e
   }));
   let r = connectedProject?.secrets?.map(e => e.name);

@@ -11,7 +11,7 @@ import { eE } from "../figma_app/106207";
 import { gp } from "../figma_app/973927";
 import { g5 } from "../figma_app/178752";
 import { s as _$$s } from "../905/506024";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { getPluginVersion } from "../figma_app/300692";
 import { Ph, T0 } from "../figma_app/455620";
 import { X2 } from "../figma_app/190980";
@@ -25,7 +25,7 @@ var r = s;
 var d = l;
 var m = c;
 var p = u;
-let E = M4.Query({
+let E = liveStoreInstance.Query({
   fetch: async e => (await _$$d.getDefaultCollageItems({
     orgId: e
   })).data.meta

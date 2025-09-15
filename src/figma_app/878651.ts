@@ -18,9 +18,9 @@ import { VisualBellActions } from "../905/302958";
 import { Xy } from "../figma_app/578832";
 import { Mr } from "../figma_app/795938";
 import { decimalToPercent } from "../figma_app/808294";
-import { G8 } from "../figma_app/777551";
-import { Vm } from "../figma_app/427318";
-import { bL } from "../905/934145";
+import { getResourceTaglineOrDescription } from "../figma_app/777551";
+import { getResourceType } from "../figma_app/427318";
+import { getProfileRouteHref } from "../905/934145";
 import { C as _$$C2 } from "../figma_app/382445";
 import { s1, uR, oj } from "../figma_app/304207";
 import { sf } from "../905/929976";
@@ -113,7 +113,7 @@ function ep(e) {
     description,
     name
   } = i;
-  let d = G8({
+  let d = getResourceTaglineOrDescription({
     description: e.isPublishing ? "" : e.descriptionOverride ?? description ?? "",
     tagline: tagline ?? ""
   }, stripHtmlTags);
@@ -819,7 +819,7 @@ $$ev7.defaultProps = {
         if (isCommandOrShift(e)) {
           let e = this.props.publicProfile;
           if (!e) return;
-          customHistory.redirect(bL(e.profile_handle) || "", "_blank");
+          customHistory.redirect(getProfileRouteHref(e.profile_handle) || "", "_blank");
           return;
         }
         this.props.onPublicProfileClick();
@@ -894,7 +894,7 @@ $$ev7.defaultProps = {
         }), this.props.resources.length > 0 && jsxs("div", {
           className: iR,
           children: [this.props.resources.map(e => {
-            let t = Vm(e);
+            let t = getResourceType(e);
             switch (t) {
               case ResourceTypeNoComment.HUB_FILE:
                 return jsx(a.PublicProfileHubFileTile, {

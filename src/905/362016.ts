@@ -21,7 +21,7 @@ import { sortWithCollator } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
 import { lX } from "../figma_app/588397";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { PT } from "../905/669853";
 import { V as _$$V } from "../905/697254";
 import { c as _$$c2 } from "../905/167005";
@@ -250,7 +250,7 @@ function j({
     stats: a
   });
 }
-let U = M4.Query({
+let U = liveStoreInstance.Query({
   fetch: async e => (await PT.getLibraryOverview({
     libraryFileKey: e
   })).data.meta

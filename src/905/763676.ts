@@ -38,7 +38,7 @@ import { SvgComponent } from "../905/714743";
 import { oB, j7 } from "../905/929976";
 import { n1 } from "../figma_app/657017";
 import { t as _$$t2 } from "../905/511388";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { hasRootPath } from "../figma_app/528509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { B as _$$B2 } from "../905/506188";
@@ -116,7 +116,7 @@ function ec({
     return e;
   }, [y]);
   let v = n1();
-  let I = fd(e);
+  let I = hasResourcePresetKey(e);
   let x = useMemo(() => L()(u.result, e => e.library_key), [u.result]);
   let S = useMemo(() => L()(h, e => e.libraryKey), [h]);
   let C = useMemo(() => {

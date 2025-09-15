@@ -11,13 +11,13 @@ import { X as _$$X } from "../figma_app/514836";
 import { W as _$$W } from "../905/841666";
 import { I as _$$I } from "../figma_app/4253";
 import { Jm, BY } from "../figma_app/387599";
-import { UI, N6, qD, _t, ZD, RE } from "../figma_app/471982";
+import { buildCommunityPath, buildCarouselMedia, getCurrentVersion, buildCommunityPathById, TransparentGifDataUri, buildProfileRouteState } from "../figma_app/471982";
 import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { isSubscriptionActive } from "../figma_app/808294";
-import { G8, mk, cB } from "../figma_app/777551";
-import { rZ } from "../figma_app/427318";
+import { getResourceTaglineOrDescription, getResourceUserCount, trackResourceClickEvent } from "../figma_app/777551";
+import { isOrgPrivatePluginOrWidget } from "../figma_app/427318";
 import { Ay } from "../905/506641";
-import { Om, tv } from "../figma_app/979714";
+import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { TrackedLink } from "../figma_app/831799";
 import { ShelfViewType, hasMonetizedResourceMetadata, hasFreemiumCode, ResourceTypeNoComment } from "../figma_app/45218";
 import { V as _$$V } from "../905/480825";
@@ -26,7 +26,7 @@ import { AG } from "../figma_app/999312";
 import { Z as _$$Z } from "../figma_app/947784";
 import { So } from "../figma_app/209680";
 import { A6 } from "../905/350234";
-import { Uo } from "../figma_app/354658";
+import { ResourceType } from "../figma_app/354658";
 import { EditorType } from "../figma_app/155287";
 import { gz, kJ, GJ } from "../5430/455879";
 import { cz, i8 } from "../905/14017";
@@ -46,8 +46,8 @@ function M({
   let r;
   r = t === ShelfViewType.REDESIGNED_PLUGIN_ROW ? gz : e.editor_type === EditorType.FIGJAM || e.editor_type === EditorType.UNIVERSAL ? kJ : GJ;
   return jsx(A6, {
-    to: UI({
-      path: Uo.PLUGIN,
+    to: buildCommunityPath({
+      path: ResourceType.PLUGIN,
       id: e.id
     }),
     className: r,
@@ -138,7 +138,7 @@ function Q({
     pluginVideo: i,
     aspectRatio: r
   });
-  let n = N6(e);
+  let n = buildCarouselMedia(e);
   return n.length > 0 ? jsx(G, {
     carouselImages: n,
     version: t,
@@ -154,8 +154,8 @@ function Z({
   aspectRatio: t,
   video: r
 }) {
-  let i = qD(e);
-  let n = G8(i, void 0, !0);
+  let i = getCurrentVersion(e);
+  let n = getResourceTaglineOrDescription(i, void 0, !0);
   let o = e.tags?.slice(0, 3) ?? [];
   return jsxs("div", {
     className: "plugin_dropdown_preview--hoverCard--zzMPg",
@@ -195,7 +195,7 @@ let et = "plugin_row--pluginRowWithHover--KJ-CP";
 let er = "plugin_row--animatedDropdown--bkyGN dropdown--dropdown--IX0tU text--fontPos14--OL9Hp text--_fontBase--QdLsd";
 let es = "plugin_row--animatedDropdownContent--p9W2i";
 function ei(e, t, r, s, i) {
-  if (e(), !rZ(r)) {
+  if (e(), !isOrgPrivatePluginOrWidget(r)) {
     let e = !!i && (s.ctrlKey || s.metaKey);
     FM(t, r, e ? {
       openInNewTab: !0,
@@ -213,8 +213,8 @@ function en({
 }) {
   let i = AG();
   let o = useDispatch();
-  let a = Om();
-  let l = _t({
+  let a = useResourceRouteParams();
+  let l = buildCommunityPathById({
     resource: e
   });
   return jsx("div", {
@@ -229,10 +229,10 @@ function en({
         alt: `Figma plugin "${r.name}"`,
         plugin: {
           ...r,
-          redirect_icon_url: r.redirect_icon_url || ZD
+          redirect_icon_url: r.redirect_icon_url || TransparentGifDataUri
         },
         onLoad: e => e.target.style.opacity = "1",
-        onError: e => e.target.src = ZD,
+        onError: e => e.target.src = TransparentGifDataUri,
         loading: "lazy"
       })
     })
@@ -267,7 +267,7 @@ function eo({
           num: n.unique_run_count
         }),
         children: jsx(i8, {
-          usageCount: mk(n),
+          usageCount: getResourceUserCount(n),
           inPluginRow: !0
         })
       })]
@@ -299,15 +299,15 @@ export function $$ea0({
   let O = isResourceHubProfilesEnabled();
   let B = useDispatch();
   let D = Jm();
-  let F = Om();
-  let U = tv() ?? void 0;
+  let F = useResourceRouteParams();
+  let U = useResourceFuid() ?? void 0;
   let V = BY();
-  let W = qD(e);
+  let W = getCurrentVersion(e);
   let G = hasMonetizedResourceMetadata(e);
   let $ = hasFreemiumCode(e);
   let z = _$$I(e);
   let Q = isSubscriptionActive(z);
-  let ea = rZ(e);
+  let ea = isOrgPrivatePluginOrWidget(e);
   let el = useRef(null);
   let ec = useMemo(() => r ? jsx("div", {
     ref: el,
@@ -335,12 +335,12 @@ export function $$ea0({
     },
     validBadges: [op.FREEMIUM, op.OFF_PLATFORM, op.PURCHASED, op.PRICE, ...(k ? [] : [op.FREE])]
   });
-  let eu = _t({
+  let eu = buildCommunityPathById({
     resource: e
   });
-  let em = () => cB("plugin", e.id, a, D, V);
+  let em = () => trackResourceClickEvent("plugin", e.id, a, D, V);
   let e_ = (e.community_publishers.accepted ?? [])[0];
-  let ep = RE(e_?.profile_handle ?? "", P, F ?? void 0, U);
+  let ep = buildProfileRouteState(e_?.profile_handle ?? "", P, F ?? void 0, U);
   let eh = !!_$$W(e.id, ResourceTypeNoComment.PLUGIN).data?.[0];
   if (e_) {
     let e = jsx(_$$e, {
@@ -387,7 +387,7 @@ export function $$ea0({
   }(e);
   let ef = "";
   if (ex) ef = ex.thumbnail_url;else {
-    let t = N6(e);
+    let t = buildCarouselMedia(e);
     ef = t?.length > 0 ? _$$P(t[0])[0] : e.thumbnail_url || "";
   }
   let ey = _$$X(ef) ? "16/9" : "2/1";
@@ -425,7 +425,7 @@ export function $$ea0({
         } : {},
         children: A ? renderI18nText("community.by_publisher", {
           publisher: e_?.name
-        }) : G8(W, void 0, !0)
+        }) : getResourceTaglineOrDescription(W, void 0, !0)
       })]
     }), e_ && jsx(Ay, {
       mediaQuery: `(min-width: ${ikM})`,
@@ -463,7 +463,7 @@ export function $$ea0({
         })]
       }), jsx("div", {
         className: "plugin_row--pluginRowDescriptionV2--Yk5bM text--fontPos11--2LvXf text--_fontBase--QdLsd",
-        children: G8(W, void 0, !0)
+        children: getResourceTaglineOrDescription(W, void 0, !0)
       })]
     }), jsx("div", {
       className: "plugin_row--pluginRowCTAV2--A4oMF",

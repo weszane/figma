@@ -2,8 +2,8 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { N } from "../7222/898730";
-import { e as _$$e2 } from "../figma_app/324237";
-import { vt } from "../figma_app/306946";
+import { SortOptions } from "../figma_app/324237";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { u8 } from "../figma_app/350203";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { Pe } from "../1250/610336";
@@ -18,7 +18,7 @@ export function $$p4({
   caller: d,
   includeContent: c = !1,
   enableQuery: _ = !0,
-  sortBy: m = _$$e2.Browse.ALL_TIME,
+  sortBy: m = SortOptions.Browse.ALL_TIME,
   selfPublished: p
 }) {
   let [{
@@ -67,13 +67,13 @@ export function $$g3({
 }) {
   return $$p4({
     limit: e,
-    resourceTypes: [vt.PLUGIN],
+    resourceTypes: [ResourceTypeEnum.PLUGIN],
     teamId: void 0,
     orgId: t,
     caller: n,
     includeContent: a,
     enableQuery: !!t,
-    sortBy: _$$e2.Browse.ALL_TIME
+    sortBy: SortOptions.Browse.ALL_TIME
   });
 }
 export function $$f0({
@@ -103,7 +103,7 @@ export function $$h2(e, t, n, a = u8) {
     teamId: t,
     editorType: FFileType.COOPER,
     pageSize: a + 1,
-    enabled: Pe(e, vt.COOPER_TEMPLATE_FILE, n)
+    enabled: Pe(e, ResourceTypeEnum.COOPER_TEMPLATE_FILE, n)
   });
   let o = templatesByTeam?.templates ?? [];
   let {
@@ -113,7 +113,7 @@ export function $$h2(e, t, n, a = u8) {
     teamId: t,
     editorType: FFileType.WHITEBOARD,
     pageSize: a + 1,
-    enabled: Pe(e, vt.FIGJAM_TEMPLATE, n)
+    enabled: Pe(e, ResourceTypeEnum.FIGJAM_TEMPLATE, n)
   });
   let p = _templatesByTeam?.templates ?? [];
   let {
@@ -123,7 +123,7 @@ export function $$h2(e, t, n, a = u8) {
     teamId: t,
     editorType: FFileType.SLIDES,
     pageSize: a + 1,
-    enabled: Pe(e, vt.SLIDE_TEMPLATE, n)
+    enabled: Pe(e, ResourceTypeEnum.SLIDE_TEMPLATE, n)
   });
   let b = _templatesByTeam2?.templates ?? [];
   let {
@@ -133,7 +133,7 @@ export function $$h2(e, t, n, a = u8) {
     teamId: t,
     editorType: FFileType.FIGMAKE,
     pageSize: a + 1,
-    enabled: Pe(e, vt.FIGMAKE_TEMPLATE, n)
+    enabled: Pe(e, ResourceTypeEnum.FIGMAKE_TEMPLATE, n)
   });
   let v = _templatesByTeam3?.templates ?? [];
   return {
@@ -170,7 +170,7 @@ export function $$b1(e, t, n, a = u8) {
     areWorkspacesEnabled: r,
     numTemplatesPerTeam: a + 1,
     filterByIds: null,
-    enabled: Pe(e, vt.COOPER_TEMPLATE_FILE, n)
+    enabled: Pe(e, ResourceTypeEnum.COOPER_TEMPLATE_FILE, n)
   });
   let s = teamTemplates.flatMap(e => e.templates.map(e => e.template));
   let {
@@ -182,7 +182,7 @@ export function $$b1(e, t, n, a = u8) {
     areWorkspacesEnabled: r,
     numTemplatesPerTeam: a + 1,
     filterByIds: null,
-    enabled: Pe(e, vt.FIGJAM_TEMPLATE, n)
+    enabled: Pe(e, ResourceTypeEnum.FIGJAM_TEMPLATE, n)
   });
   let g = _teamTemplates.flatMap(e => e.templates.map(e => e.template));
   let {
@@ -194,7 +194,7 @@ export function $$b1(e, t, n, a = u8) {
     areWorkspacesEnabled: r,
     numTemplatesPerTeam: a + 1,
     filterByIds: null,
-    enabled: Pe(e, vt.SLIDE_TEMPLATE, n)
+    enabled: Pe(e, ResourceTypeEnum.SLIDE_TEMPLATE, n)
   });
   let x = _teamTemplates2.flatMap(e => e.templates.map(e => e.template));
   let {
@@ -206,7 +206,7 @@ export function $$b1(e, t, n, a = u8) {
     areWorkspacesEnabled: r,
     numTemplatesPerTeam: a + 1,
     filterByIds: null,
-    enabled: Pe(e, vt.FIGMAKE_TEMPLATE, n)
+    enabled: Pe(e, ResourceTypeEnum.FIGMAKE_TEMPLATE, n)
   });
   let w = _teamTemplates3.flatMap(e => e.templates.map(e => e.template));
   return {

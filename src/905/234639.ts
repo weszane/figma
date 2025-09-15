@@ -10,7 +10,7 @@ import { Ri } from "../figma_app/49598";
 import { HZ, Oo } from "../905/926523";
 import { Yp } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { ProductStatus } from "../905/54385";
 import { H } from "../905/473998";
 var a = r;
@@ -197,7 +197,7 @@ export function $$C8(e) {
     apiResourceType: "file",
     id: e.id
   });
-  null !== M4.getCachedData(t) && M4.fetch(t, {
+  null !== liveStoreInstance.getCachedData(t) && liveStoreInstance.fetch(t, {
     policy: "networkOnly"
   });
 }

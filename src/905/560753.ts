@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useDebouncedCallback } from "use-debounce";
 import { X } from "../figma_app/313269";
 import { getI18nString } from "../905/303541";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { A as _$$A2 } from "../905/794518";
 import { J7 } from "../905/599844";
 var a = r;
@@ -53,9 +53,9 @@ export function $$h0({
   error: r
 }) {
   let s = {
-    [ResourceType.PLUGIN]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this.plugin"),
-    [ResourceType.WIDGET]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this.widget"),
-    [ResourceType.HUB_FILE]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this_resource")
+    [HubTypeEnum.PLUGIN]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this.plugin"),
+    [HubTypeEnum.WIDGET]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this.widget"),
+    [HubTypeEnum.HUB_FILE]: getI18nString("community.publishing.add_your_policy_for_the_usage_of_this_resource")
   };
   return jsx(_$$A2, {
     label: getI18nString("community.publishing.creator_policy"),

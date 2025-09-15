@@ -3,7 +3,7 @@ import { PureComponent } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
-import { xn } from "../905/934145";
+import { ProfileRouteState } from "../905/934145";
 import { sf } from "../905/929976";
 import { Np } from "../figma_app/193867";
 import { Ro } from "../figma_app/805373";
@@ -47,7 +47,7 @@ class h extends PureComponent {
         className: this.props.childrenClassName || oY,
         children: t
       }) : jsx("a", {
-        href: new xn({
+        href: new ProfileRouteState({
           profileHandle: this.props.publisher.profile_handle
         }).href,
         className: this.props.childrenClassName || this.props.authorLinkStyle,
@@ -78,7 +78,7 @@ export function $$f1(e) {
   };
   let i = useSelector(e => Np(e, r));
   return jsx("a", {
-    href: new xn({
+    href: new ProfileRouteState({
       profileHandle: e.profile.profile_handle
     }).href,
     className: M2,

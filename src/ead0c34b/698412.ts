@@ -10,7 +10,7 @@ import { N } from "../905/809096";
 import { getI18nString } from "../905/303541";
 import { delay } from "../905/236856";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 function f() {
   return getI18nString("billing.purchase_ai_credits.modal_hidden_title");
 }
@@ -31,7 +31,7 @@ function _(e) {
   }, [e.reason]);
   return jsx(E, {});
 }
-let I = M4.Query({
+let I = liveStoreInstance.Query({
   fetch: () => delay(1e3).then(() => ({}))
 });
 function C(e) {

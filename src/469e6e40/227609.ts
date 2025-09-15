@@ -81,12 +81,12 @@ import { adminPermissionConfig } from '../905/654645';
 import { A as _$$A3 } from '../905/658244';
 import { e0 as _$$e4 } from '../905/696396';
 import { IX } from '../905/712921';
-import { IT, M4 } from '../905/713695';
+import { IT, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { gB, getResourceDataOrFallback, Xm } from '../905/723791';
 import { yN } from '../905/727738';
 import { OrganizationType } from '../905/833838';
-import { $ as _$$$ } from '../905/834575';
+import { teamAPIClient } from '../905/834575';
 import { tb as _$$tb } from '../905/848667';
 import { EL, F_ } from '../905/858282';
 import { A as _$$A } from '../905/920142';
@@ -139,7 +139,7 @@ import { bE } from '../figma_app/375098';
 import { _6 } from '../figma_app/386952';
 import { useShadowReadLoaded } from '../figma_app/391338';
 import { bv, IU } from '../figma_app/421401';
-import { gb } from '../figma_app/422062';
+import { isSelectedTeamAdminConsoleMissingResources } from '../figma_app/422062';
 import { useIsStudentPlan, useIsTeamAdminUser, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
 import { throwTypeError } from '../figma_app/465776';
 import { Bq, WX } from '../figma_app/482142';
@@ -1184,7 +1184,7 @@ function tG(e) {
   });
   let b = async e => {
     try {
-      await _$$$.updateAiFeaturesDisabled({
+      await teamAPIClient.updateAiFeaturesDisabled({
         teamId: team.id,
         aiFeaturesDisabled: e
       });
@@ -1203,7 +1203,7 @@ function tG(e) {
   };
   let v = async e => {
     try {
-      await _$$$.updateAiDataSharing({
+      await teamAPIClient.updateAiDataSharing({
         teamId: team.id,
         enabled: e
       });
@@ -2151,10 +2151,10 @@ function aP(e) {
   });
 }
 let aq = 'dismissed_dangling_team_user_backfill_banner';
-let a$ = M4.Query({
+let a$ = liveStoreInstance.Query({
   fetch: async ({
     teamId: e
-  }) => (await _$$$.showDanglingTeamUserBackfillBanner({
+  }) => (await teamAPIClient.showDanglingTeamUserBackfillBanner({
     teamId: e
   })).data
 });
@@ -2187,7 +2187,7 @@ export function $$aG0(e) {
   let s = n[e.teamId];
   let k = useTeamPlanUser();
   let E = useIsTeamAdminUser(k);
-  let C = E.status === 'loaded' && gb({
+  let C = E.status === 'loaded' && isSelectedTeamAdminConsoleMissingResources({
     isAdminTeam: E.data,
     teamId: e.teamId,
     teamAdminConsoleViewTab: e.selectedTab,

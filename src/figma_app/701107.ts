@@ -1,6 +1,6 @@
 import { z } from "../905/239603";
 import { ExtendedCommentSchema } from "../figma_app/45218";
-import { UL } from "../figma_app/306946";
+import { ResourceWithOptionalContentSchema } from "../figma_app/306946";
 let $$s3 = -200;
 let $$o0 = 10;
 let $$l4 = 125;
@@ -12,7 +12,7 @@ let $$u6 = {
   widget: "base_plugin"
 };
 let p = z.object({
-  model: UL,
+  model: ResourceWithOptionalContentSchema,
   score: z.number()
 });
 let $$_7 = z.object({

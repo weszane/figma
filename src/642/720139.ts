@@ -59,7 +59,7 @@ import { Wi, JR } from "../figma_app/162641";
 import { q as _$$q2 } from "../figma_app/58251";
 import { b as _$$b } from "../905/217163";
 import { E as _$$E } from "../905/511388";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { useCurrentUserOrg } from "../905/845253";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { ol } from "../figma_app/598018";
@@ -166,7 +166,7 @@ function e_({
     let t = useSubscription(LibraryFileContext, {
       libraryKey: e
     });
-    let s = fd(e);
+    let s = hasResourcePresetKey(e);
     return useMemo(() => ({
       fileContext: t.data?.libraryKeyToFile?.file,
       fileName: t.data?.libraryKeyToFile?.hubFile?.currentHubFileVersion?.name ?? t.data?.libraryKeyToFile?.file?.name,

@@ -20,7 +20,7 @@ import { extractValuesByKey } from "../905/439650";
 import { _ as _$$_ } from "../905/780571";
 import { FFileType } from "../figma_app/191312";
 import { FileOperationsView } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { R5, mx } from "../figma_app/598018";
 import { UpsellModalType } from "../905/165519";
 import { Bi, vL } from "../905/652992";
@@ -39,7 +39,7 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
   } = t;
   if (fileKeys.length > 0) {
     let t = e.getState();
-    let [n, ...a] = await Promise.all([R5(fileKeys), ...fileKeys.map(e => M4.fetchFile(e))]);
+    let [n, ...a] = await Promise.all([R5(fileKeys), ...fileKeys.map(e => liveStoreInstance.fetchFile(e))]);
     if (n) {
       let s = t.teams[n];
       let o = new Set(a.map(e => e.editor_type));
@@ -73,7 +73,7 @@ export let $$F1 = createOptimistThunk(async (e, t) => {
     }));
   }
   if (repoIds && repoIds.length > 0) {
-    let t = await Promise.all(repoIds.map(e => M4.fetchRepo(e)));
+    let t = await Promise.all(repoIds.map(e => liveStoreInstance.fetchRepo(e)));
     e.dispatch(_$$i({
       reposById: s()(t, "id"),
       userInitiated: !0
@@ -137,7 +137,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
   a && (c.push(...extractValuesByKey(r.orgUsersByOrgId, a).map(e => e.drafts_folder_id)), c.push(..._$$_(r.teamUserByTeamId, a).map(e => e.drafts_folder_id || void 0)));
   let h = Object.keys(r.tileSelect && r.tileSelect[_$$F3.FILES] || {}).concat(Object.keys(r.tileSelect && r.tileSelect[_$$F3.PINNED_FILES] || {}));
   let g = Object.keys(r.tileSelect && r.tileSelect[_$$F3.REPOS] || {});
-  (await Promise.all(g.map(e => M4.fetchRepo(e)))).forEach(e => {
+  (await Promise.all(g.map(e => liveStoreInstance.fetchRepo(e)))).forEach(e => {
     let t = e.default_file_key;
     t && h.push(t);
   });

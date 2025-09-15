@@ -1,16 +1,16 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { xk } from "@stylexjs/stylex";
 import { trackEventAnalytics } from "../905/449184";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Jm } from "../figma_app/387599";
-import { C as _$$C } from "../905/237873";
+import { PricingOptions } from "../905/237873";
 import { gM } from "../5430/823351";
 import { Ay } from "../905/506641";
-import { e as _$$e } from "../figma_app/324237";
-import { Z } from "../905/942203";
+import { SortOptions } from "../figma_app/324237";
+import { BrowseUtils } from "../905/942203";
 import { ResourceTypes } from "../905/178090";
-import { MF, OU } from "../figma_app/773663";
+import { getEditorTypeForResource, anchorEditorResource } from "../figma_app/773663";
 import { A5 } from "../figma_app/209680";
 import { Yf, AV } from "../5430/297093";
 import { km, u9, hs, R6 } from "../5430/184698";
@@ -60,12 +60,12 @@ export function $$I0({
 }) {
   let {
     resourceType,
-    editorType = MF(resourceType),
+    editorType = getEditorTypeForResource(resourceType),
     price,
     sortBy,
-    creators = Z.ALL
+    creators = BrowseUtils.ALL
   } = e;
-  let k = _$$N(`(max-width: ${_C6})`);
+  let k = usePrefersMediaQuery(`(max-width: ${_C6})`);
   let A = Jm();
   return ("search" !== x && (A = void 0), x === gM.SEARCH && "profiles" === resourceType) ? null : jsxs("div", {
     className: hs,
@@ -85,7 +85,7 @@ export function $$I0({
               key: "editorType",
               value: e
             }];
-            let s = OU(e, resourceType, {
+            let s = anchorEditorResource(e, resourceType, {
               anchorOn: "editorType"
             }).resourceType;
             s !== resourceType && r.push({
@@ -110,7 +110,7 @@ export function $$I0({
             key: "resourceType",
             value: e
           }];
-          let s = OU(editorType, e, {
+          let s = anchorEditorResource(editorType, e, {
             anchorOn: "resourceType"
           }).editorType;
           s !== editorType && r.push({
@@ -133,9 +133,9 @@ export function $$I0({
             key: "price",
             value: e
           }];
-          e === _$$C.FREE && (sortBy === _$$e.Search.PRICE_ASC || sortBy === _$$e.Search.PRICE_DESC) && r.push({
+          e === PricingOptions.FREE && (sortBy === SortOptions.Search.PRICE_ASC || sortBy === SortOptions.Search.PRICE_DESC) && r.push({
             key: "sortBy",
-            value: _$$e.Shared.POPULAR
+            value: SortOptions.Shared.POPULAR
           });
           t(r);
           trackEventAnalytics("price_filter_changed", {

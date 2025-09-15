@@ -6,10 +6,10 @@ import { getI18nString } from "../905/303541";
 import { pY, MZ, Dy } from "../figma_app/925970";
 import { VisualBellActions } from "../905/302958";
 import { mk } from "../figma_app/999312";
-import { yl } from "../figma_app/777551";
+import { getResourceTypesForBrowse } from "../figma_app/777551";
 import { ResourceTypes } from "../905/178090";
-import { S as _$$S } from "../figma_app/277543";
-import { zs } from "../figma_app/773663";
+import { mapEditorToType } from "../figma_app/277543";
+import { selectEditorResource } from "../figma_app/773663";
 import { w2, eK } from "../905/977218";
 import { M5 } from "../figma_app/350203";
 import { Ei } from "../905/574958";
@@ -78,16 +78,16 @@ let E = async (e, t, r, s, i) => {
     let {
       editorType,
       resourceType
-    } = zs(editor_type, e, n);
+    } = selectEditorResource(editor_type, e, n);
     if (editorType !== editor_type || resourceType !== e) return null;
-    let m = yl(e, editor_type);
+    let m = getResourceTypesForBrowse(e, editor_type);
     let h = {
       ...a,
       resource_type: m,
       session_id: r,
       query_id: MZ(),
       include_content: i,
-      resource_editor_type: _$$S(t.editor_type)
+      resource_editor_type: mapEditorToType(t.editor_type)
     };
     let x = $W.getResources(h);
     N(s, r);

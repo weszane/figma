@@ -4,7 +4,7 @@ import { Et } from "../figma_app/397267";
 import { atomStoreManager, useAtomWithSubscription, atom } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { NX, k9 } from "../figma_app/777207";
-import { fd } from "../figma_app/255679";
+import { hasResourcePresetKey } from "../figma_app/255679";
 import { selectCurrentFile, useOpenFileLibraryKey, useCurrentFileKey } from "../figma_app/516028";
 import { r6, CK } from "../figma_app/517115";
 import { tM, k1 } from "../figma_app/984498";
@@ -67,7 +67,7 @@ export function $$I12({
   let l = useOpenFileLibraryKey();
   let u = useAtomWithSubscription(lj);
   let p = libraryKey && u.includes(libraryKey);
-  let _ = fd(libraryKey);
+  let _ = hasResourcePresetKey(libraryKey);
   return useMemo(() => {
     switch (currentView) {
       case S5.Search:

@@ -63,7 +63,7 @@ import { w2, i_ } from "../905/187165";
 import { Ob } from "../figma_app/111825";
 import { m as _$$m } from "../905/84999";
 import { fileApiHandler } from "../figma_app/787550";
-import { $ as _$$$ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { R as _$$R2 } from "../905/300969";
@@ -460,7 +460,7 @@ let $$ej0 = createOptimistThunk(async (e, {
       if (0 === Object.keys(teams).length) {
         let {
           data
-        } = await _$$$.getTeam({
+        } = await teamAPIClient.getTeam({
           teamId: teamToMoveFileToOnNavigate
         });
         C = data.meta;

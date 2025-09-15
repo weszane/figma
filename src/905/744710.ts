@@ -59,7 +59,7 @@ import { c as _$$c2 } from '../905/370443';
 import { getUserId, hasPasswordOrSSO, selectCurrentUser } from '../905/372672';
 import { LazyInputForwardRef } from '../905/408237';
 import { iX as _$$iX, Ke } from '../905/415545';
-import { p as _$$p } from '../905/428660';
+import { getCommunityHubNavigation } from '../905/428660';
 import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { ConfirmationModal } from '../905/441305';
@@ -93,7 +93,7 @@ import { f as _$$f2, h as _$$h3 } from '../905/693155';
 import { e0 as _$$e } from '../905/696396';
 import { L as _$$L } from '../905/704296';
 import { S3 } from '../905/708054';
-import { gY as _$$gY, IT, M4 } from '../905/713695';
+import { gY as _$$gY, IT, liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { G as _$$G } from '../905/750789';
@@ -156,7 +156,7 @@ import { tx as _$$tx2 } from '../figma_app/395505';
 import { useFplStrings } from '../figma_app/415899';
 import { zN } from '../figma_app/416935';
 import { useCurrentPrivilegedPlan } from '../figma_app/465071';
-import { Cg } from '../figma_app/471982';
+import { isEmptyAddress } from '../figma_app/471982';
 import { T as _$$T } from '../figma_app/472024';
 import { _ as _$$_2, S as _$$S4 } from '../figma_app/490799';
 import { j as _$$j } from '../figma_app/496854';
@@ -580,7 +580,7 @@ let eC = function (e) {
         e.preventDefault();
         return;
       }
-      let i = _$$p(resourceType, resourceId);
+      let i = getCommunityHubNavigation(resourceType, resourceId);
       c(sf(i));
       c(hideModal());
     },
@@ -1278,7 +1278,7 @@ function e0(e, t) {
   return e.length > 0 || t.length > 0;
 }
 function e1(e, t) {
-  return !!e || !Cg(t);
+  return !!e || !isEmptyAddress(t);
 }
 let tm = new class {
   constructor() {
@@ -1300,7 +1300,7 @@ let tm = new class {
 }();
 let th = 'notifications_settings_modal--sectionHeader--is4j1 text--fontPos14--OL9Hp text--_fontBase--QdLsd';
 let tg = 'notifications_settings_modal--legend--na-Xo text--fontPos13--xW8hS text--_fontBase--QdLsd';
-let tf = M4.Query({
+let tf = liveStoreInstance.Query({
   fetch: async (e, {
     reduxStore: t
   }) => {
@@ -1314,7 +1314,7 @@ let tf = M4.Query({
     }
   }
 });
-let t_ = M4.Mutation(({
+let t_ = liveStoreInstance.Mutation(({
   orgId: e,
   value: t
 }, {
@@ -1403,7 +1403,7 @@ function tx(e) {
     })
   }, e.checkboxSettings.policyType);
 }
-let tS = M4.Query({
+let tS = liveStoreInstance.Query({
   fetch: async (e, {
     reduxStore: t
   }) => {
@@ -1446,7 +1446,7 @@ let tS = M4.Query({
     }
   }
 });
-let tw = M4.Mutation(({
+let tw = liveStoreInstance.Mutation(({
   channelType: e,
   policyTypesCsv: t,
   policyType: i,
@@ -1471,7 +1471,7 @@ let tw = M4.Mutation(({
   });
   return s;
 });
-let tC = M4.Mutation(({
+let tC = liveStoreInstance.Mutation(({
   channelType: e,
   policyTypesCsv: t,
   policyType: i,
@@ -1496,7 +1496,7 @@ let tC = M4.Mutation(({
   });
   return s;
 });
-let tT = M4.Mutation(({
+let tT = liveStoreInstance.Mutation(({
   channelType: e,
   policyTypesCsv: t,
   channelSetting: i
@@ -1647,7 +1647,7 @@ function tN() {
     })]
   });
 }
-let tP = M4.Query({
+let tP = liveStoreInstance.Query({
   fetch: async () => ({
     permissionStatus: await navigator.permissions.query({
       name: 'notifications'

@@ -10,7 +10,7 @@ import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { adminPermissionConfig } from "../905/654645";
 import { createLatencyTimer } from "../figma_app/391338";
 import { setupLoadingStateHandler } from "../905/696711";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 let $$g7 = createOptimistAction("BATCH_DEL_TEAM_MEMBERS", (e, {
   teamId: t,
   userIds: r
@@ -56,7 +56,7 @@ let $$E17 = createOptimistThunk(async (e, t) => {
 });
 let $$y16 = createOptimistThunk(async (e, t) => {
   let r = t.figma_provided_libraries_disabled;
-  await $.updatePresetsDisabled({
+  await teamAPIClient.updatePresetsDisabled({
     teamId: t.teamId,
     presetsDisabled: r
   }).then(() => {
@@ -81,7 +81,7 @@ createOptimistThunk((e, {
 }, {
   loadingKey: r
 }) => {
-  let n = $.getTeam({
+  let n = teamAPIClient.getTeam({
     teamId: t
   });
   setupLoadingStateHandler(n, e, r);
@@ -102,7 +102,7 @@ let $$b12 = createOptimistThunk((e, {
 }, {
   loadingKey: n
 }) => {
-  let i = $.getMembers({
+  let i = teamAPIClient.getMembers({
     teamId: t
   });
   r && setupLoadingStateHandler(i, e, n);

@@ -13,14 +13,14 @@ import { e as _$$e } from "../905/621515";
 import { N_ } from "../905/332483";
 import { f as _$$f } from "../905/940356";
 import { FBillingModelType, FOrganizationLevelType } from "../figma_app/191312";
-import { M4, gY } from "../905/713695";
+import { liveStoreInstance, gY } from "../905/713695";
 import { kA } from "../figma_app/336853";
 import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../figma_app/268271";
 import { w as _$$w } from "../7021/108292";
 import { M } from "../905/152487";
 import { kSi } from "../figma_app/6204";
-let $$C1 = M4.Mutation(({
+let $$C1 = liveStoreInstance.Mutation(({
   planParentId: e,
   planType: t
 }) => _$$w.updateTermsAcceptance({

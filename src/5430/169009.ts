@@ -17,7 +17,7 @@ import { x as _$$x } from "../905/211326";
 import { a as _$$a } from "../905/925868";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { Jm } from "../figma_app/387599";
-import { Zl, Vm } from "../figma_app/427318";
+import { Zl, getResourceType } from "../figma_app/427318";
 import { hJ, XY } from "../905/506641";
 import { Zj, _8, dL, e6, X2, p4, vr, cO } from "../figma_app/530167";
 import { zn } from "../figma_app/350203";
@@ -45,7 +45,7 @@ import { Ro } from "../figma_app/805373";
 import { HH } from "../figma_app/841415";
 import { ky } from "../figma_app/99826";
 import { VisualBellActions } from "../905/302958";
-import { Xu } from "../figma_app/354658";
+import { CommunityRoute } from "../figma_app/354658";
 import { lW } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { E as _$$E2 } from "../905/565019";
@@ -297,7 +297,7 @@ function ef(e) {
   };
   let m = () => {
     t(lW({
-      stringToCopy: ky(new Xu({
+      stringToCopy: ky(new CommunityRoute({
         apiResourceType: n,
         resourceId: o
       }, {
@@ -806,7 +806,7 @@ function eS(e) {
     };
   }(e.comments, t);
   let m = r ? parentCommentIds : parentCommentIds.reduce((e, r) => (t[r]?.resolved_at || e.push(r), e), []);
-  let _ = Vm(e.resource);
+  let _ = getResourceType(e.resource);
   if (0 === m.length && !e.hasSelectedComment && e.resource.comments_setting !== Ni.ALL_DISABLED) return jsx(eR, {
     isTeamOrOrgProfileActive: l
   });
@@ -902,7 +902,7 @@ function eA(e) {
   let {
     resource
   } = e;
-  let z = Vm(resource);
+  let z = getResourceType(resource);
   let Q = () => {
     if (ek) return;
     ek = !0;

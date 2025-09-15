@@ -1,232 +1,292 @@
-import { useLayoutEffect } from "react";
-import { throwTypeError } from "../figma_app/465776";
-import { getFeatureFlags } from "../905/601108";
-import { customHistory } from "../905/612521";
-import { editorUtilities as _$$k } from "../905/22009";
-import { ResourceTypes } from "../905/178090";
-export function $$d4(e = _$$k.Editors.ALL, t, r) {
-  switch (e) {
-    case _$$k.Editors.ALL:
-    case _$$k.Editors.FIGJAM:
-      switch (t) {
-        case void 0:
+import { useLayoutEffect } from 'react'
+import { editorUtilities } from '../905/22009'
+import { ResourceTypes } from '../905/178090'
+import { getFeatureFlags } from '../905/601108'
+import { customHistory } from '../905/612521'
+import { throwTypeError } from '../figma_app/465776'
+
+/**
+ * Types for editor and resource selection logic (from $$d4)
+ */
+export type EditorType = typeof editorUtilities.Editors[keyof typeof editorUtilities.Editors]
+export type ResourceType
+  = | typeof ResourceTypes.BrowseResourceTypes[keyof typeof ResourceTypes.BrowseResourceTypes]
+    | typeof ResourceTypes.SearchResourceTypes[keyof typeof ResourceTypes.SearchResourceTypes]
+
+/**
+ * Result type for editor/resource selection (from $$d4)
+ */
+export interface EditorResourceSelection {
+  editorType: EditorType
+  resourceType: ResourceType
+}
+
+/**
+ * Anchor options for resource selection (from $$p1)
+ */
+export interface AnchorOptions {
+  anchorOn: 'editorType' | 'resourceType'
+}
+
+/**
+ * Selects editor/resource type based on input parameters.
+ * Original: $$d4
+ */
+export function selectEditorResource(
+  editor: EditorType = editorUtilities.Editors.ALL,
+  resource?: ResourceType,
+  prototypeFlag?: boolean,
+): EditorResourceSelection {
+  switch (editor) {
+    case editorUtilities.Editors.ALL:
+    case editorUtilities.Editors.FIGJAM:
+      switch (resource) {
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.MIXED
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.MIXED,
+          }
         case ResourceTypes.SearchResourceTypes.PROFILES:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
         default:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
       }
-    case _$$k.Editors.FIGMA:
-      switch (t) {
+    case editorUtilities.Editors.FIGMA:
+      switch (resource) {
         case ResourceTypes.BrowseResourceTypes.FILES:
-          if (r) return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+          if (prototypeFlag) {
+            return {
+              editorType: editorUtilities.Editors.ALL,
+              resourceType: resource,
+            }
+          }
           return {
-            editorType: e,
-            resourceType: t
-          };
-        case void 0:
+            editorType: editor,
+            resourceType: resource,
+          }
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.MIXED
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.MIXED,
+          }
         case ResourceTypes.SearchResourceTypes.PROFILES:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
         default:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
       }
-    case _$$k.Editors.SITES:
-      switch (t) {
+    case editorUtilities.Editors.SITES:
+      switch (resource) {
         case ResourceTypes.BrowseResourceTypes.FILES:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
         case ResourceTypes.BrowseResourceTypes.MIXED:
-        case void 0:
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.FILES
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES,
+          }
         default:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
       }
-    case _$$k.Editors.FIGMAKE:
+    case editorUtilities.Editors.FIGMAKE:
       return {
-        editorType: e,
-        resourceType: t ?? ResourceTypes.BrowseResourceTypes.MIXED
-      };
-    case _$$k.Editors.COOPER:
-      switch (t) {
+        editorType: editor,
+        resourceType: resource ?? ResourceTypes.BrowseResourceTypes.MIXED,
+      }
+    case editorUtilities.Editors.COOPER:
+      switch (resource) {
         case ResourceTypes.BrowseResourceTypes.FILES:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
         case ResourceTypes.BrowseResourceTypes.PLUGINS:
-          if (getFeatureFlags().buzz_plugins) return {
-            editorType: e,
-            resourceType: t
-          };
+          if (getFeatureFlags().buzz_plugins) {
+            return {
+              editorType: editor,
+              resourceType: resource,
+            }
+          }
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
         case ResourceTypes.BrowseResourceTypes.MIXED:
-        case void 0:
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.FILES
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES,
+          }
         default:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
       }
-    case _$$k.Editors.PROTOTYPE:
-      if (r) return {
-        editorType: _$$k.Editors.ALL,
-        resourceType: t ?? ResourceTypes.BrowseResourceTypes.MIXED
-      };
-      switch (t) {
+    case editorUtilities.Editors.PROTOTYPE:
+      if (prototypeFlag) {
+        return {
+          editorType: editorUtilities.Editors.ALL,
+          resourceType: resource ?? ResourceTypes.BrowseResourceTypes.MIXED,
+        }
+      }
+      switch (resource) {
         case ResourceTypes.BrowseResourceTypes.FILES:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
         case ResourceTypes.BrowseResourceTypes.MIXED:
-        case void 0:
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.FILES
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES,
+          }
         default:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
       }
-    case _$$k.Editors.DEV_MODE:
-      switch (t) {
+    case editorUtilities.Editors.DEV_MODE:
+      switch (resource) {
         case ResourceTypes.BrowseResourceTypes.PLUGINS:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
         case ResourceTypes.BrowseResourceTypes.MIXED:
-        case void 0:
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.PLUGINS,
+          }
         default:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
       }
-    case _$$k.Editors.SLIDES:
-      switch (t) {
+    case editorUtilities.Editors.SLIDES:
+      switch (resource) {
         case ResourceTypes.BrowseResourceTypes.FILES:
         case ResourceTypes.BrowseResourceTypes.PLUGINS:
           return {
-            editorType: e,
-            resourceType: t
-          };
+            editorType: editor,
+            resourceType: resource,
+          }
         case ResourceTypes.BrowseResourceTypes.MIXED:
-        case void 0:
+        case undefined:
           return {
-            editorType: e,
-            resourceType: ResourceTypes.BrowseResourceTypes.FILES
-          };
+            editorType: editor,
+            resourceType: ResourceTypes.BrowseResourceTypes.FILES,
+          }
         default:
           return {
-            editorType: _$$k.Editors.ALL,
-            resourceType: t
-          };
+            editorType: editorUtilities.Editors.ALL,
+            resourceType: resource,
+          }
       }
     default:
-      throwTypeError(e);
+      throwTypeError(editor)
   }
 }
-export function $$c3() {
-  return $$d4();
+
+/**
+ * Returns default editor/resource selection.
+ * Original: $$c3
+ */
+export function getDefaultEditorResource(): EditorResourceSelection {
+  return selectEditorResource()
 }
-export function $$u0(e) {
-  return $$d4(void 0, e).editorType;
+
+/**
+ * Returns editor type for a given resource type.
+ * Original: $$u0
+ */
+export function getEditorTypeForResource(resource: ResourceType): EditorType {
+  return selectEditorResource(undefined, resource).editorType
 }
-export function $$p1(e, t, r) {
-  let {
-    editorType,
-    resourceType
-  } = $$d4(e, t);
-  if (e === editorType && t === resourceType) return {
-    editorType: e,
-    resourceType: t
-  };
-  switch (r.anchorOn) {
-    case "editorType":
-      if (e !== editorType) return {
-        editorType: e,
-        resourceType: $$d4(e, void 0).resourceType
-      };
-      return {
-        editorType: e,
-        resourceType
-      };
-    case "resourceType":
-      if (t !== resourceType) return {
-        editorType: $$u0(t),
-        resourceType: t
-      };
-      return {
-        editorType,
-        resourceType: t
-      };
+
+/**
+ * Anchors editor/resource selection based on anchor options.
+ * Original: $$p1
+ */
+export function anchorEditorResource(
+  editor: EditorType,
+  resource: ResourceType,
+  anchorOptions: AnchorOptions,
+): EditorResourceSelection {
+  const { editorType, resourceType } = selectEditorResource(editor, resource)
+  if (editor === editorType && resource === resourceType) {
+    return { editorType: editor, resourceType: resource }
+  }
+  switch (anchorOptions.anchorOn) {
+    case 'editorType':
+      if (editor !== editorType) {
+        return {
+          editorType: editor,
+          resourceType: selectEditorResource(editor, undefined).resourceType,
+        }
+      }
+      return { editorType: editor, resourceType }
+    case 'resourceType':
+      if (resource !== resourceType) {
+        return {
+          editorType: getEditorTypeForResource(resource),
+          resourceType: resource,
+        }
+      }
+      return { editorType, resourceType: resource }
     default:
-      throwTypeError(r.anchorOn);
+      throwTypeError(anchorOptions.anchorOn)
   }
 }
-export function $$_2(e, t) {
-  let {
-    editor_type,
-    resource_type
-  } = e.search;
+
+/**
+ * Syncs editor/resource selection with history if changed.
+ * Original: $$_2
+ */
+export function syncEditorResourceWithHistory(
+  location: {
+    search: { editor_type?: EditorType, resource_type?: ResourceType }
+    copyWith: (params: object, search: object) => { href: string }
+  },
+  prototypeFlag?: boolean,
+): void {
+  const { editor_type, resource_type } = location.search
   useLayoutEffect(() => {
-    if (!editor_type || !resource_type) return;
-    let {
-      editorType,
-      resourceType
-    } = $$d4(editor_type, resource_type, t);
-    (editorType !== editor_type || resourceType !== resource_type) && customHistory.replace(e.copyWith({}, {
-      editor_type: editorType,
-      resource_type: resourceType
-    }).href);
-  }, [e, editor_type, resource_type, t]);
+    if (!editor_type || !resource_type)
+      return
+    const { editorType, resourceType } = selectEditorResource(editor_type, resource_type, prototypeFlag)
+    if (editorType !== editor_type || resourceType !== resource_type) {
+      customHistory.replace(
+        location.copyWith({}, { editor_type: editorType, resource_type: resourceType }).href,
+      )
+    }
+  }, [location, editor_type, resource_type, prototypeFlag])
 }
-export const MF = $$u0;
-export const OU = $$p1;
-export const _4 = $$_2;
-export const pJ = $$c3;
-export const zs = $$d4;
+
+// Exported names refactored for clarity and traceability
+export const MF = getEditorTypeForResource // Original: MF
+export const OU = anchorEditorResource // Original: OU
+export const _4 = syncEditorResourceWithHistory // Original: _4
+export const pJ = getDefaultEditorResource // Original: pJ
+export const zs = selectEditorResource // Original: zs

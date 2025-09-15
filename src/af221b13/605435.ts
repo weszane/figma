@@ -11,19 +11,19 @@ import { FEditorType } from "../figma_app/53721";
 import { C as _$$C } from "../figma_app/198698";
 import { om, x1, MA } from "../figma_app/465413";
 import { A as _$$A } from "../5724/965092";
-import { Vm } from "../figma_app/427318";
+import { getResourceType } from "../figma_app/427318";
 import { selectCurrentUser } from "../905/372672";
-import { Pg, lT, AC } from "../figma_app/777551";
+import { isResourceDelisted, isResourceBlocked, isResourcePendingPublishing } from "../figma_app/777551";
 import { MK, cN, Wd, RB } from "../figma_app/599979";
-import { hasClientMeta, isWidget, isPlugin, ResourceType, hasMonetizedResourceMetadata, isWidgetOrPlugin, hasFigFileMetadata } from "../figma_app/45218";
+import { hasClientMeta, isWidget, isPlugin, HubTypeEnum, hasMonetizedResourceMetadata, isWidgetOrPlugin, hasFigFileMetadata } from "../figma_app/45218";
 import { useRef, useEffect } from "react";
 import { U as _$$U2 } from "../905/103637";
 import { customHistory } from "../905/612521";
 import { g as _$$g } from "../1556/359896";
 import { Jm } from "../figma_app/387599";
-import { U0 } from "../figma_app/471982";
+import { shouldShowCreatorNudge } from "../figma_app/471982";
 import { gK } from "../5430/201744";
-import { bL } from "../905/934145";
+import { getProfileRouteHref } from "../905/934145";
 import { ts, ax } from "../figma_app/49598";
 import { af } from "../figma_app/559491";
 import { t as _$$t2 } from "../905/833100";
@@ -35,7 +35,7 @@ import { x2, OX } from "../figma_app/33586";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { Sz } from "../figma_app/12535";
 import { E as _$$E } from "../1556/957507";
-import { k2 } from "../figma_app/10554";
+import { PageTypeEnum } from "../figma_app/10554";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
 import { j as _$$j } from "../905/834956";
@@ -76,7 +76,7 @@ function h(e) {
 }
 function y(e) {
   if (!selectCurrentUser()) return jsx(Fragment, {});
-  let t = "hub_file" === Vm(e.resource) ? getI18nString("community.seller.only_you_can_see_your_file") : "plugin" === Vm(e.resource) ? getI18nString("community.seller.only_you_can_see_your_plugin") : "widget" === Vm(e.resource) ? getI18nString("community.seller.only_you_can_see_your_widget") : jsx(Fragment, {});
+  let t = "hub_file" === getResourceType(e.resource) ? getI18nString("community.seller.only_you_can_see_your_file") : "plugin" === getResourceType(e.resource) ? getI18nString("community.seller.only_you_can_see_your_plugin") : "widget" === getResourceType(e.resource) ? getI18nString("community.seller.only_you_can_see_your_widget") : jsx(Fragment, {});
   let i = {
     id: om.communityResourceInReviewBanner,
     bannerType: x1.WARN,
@@ -94,7 +94,7 @@ function y(e) {
 }
 function f(e) {
   if (!selectCurrentUser()) return jsx(Fragment, {});
-  let t = "hub_file" === Vm(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.hub_file") : "plugin" === Vm(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.plugin") : "widget" === Vm(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.widget") : jsx(Fragment, {});
+  let t = "hub_file" === getResourceType(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.hub_file") : "plugin" === getResourceType(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.plugin") : "widget" === getResourceType(e.resource) ? getI18nString("community.resource.unpublished_banner.only_you_can_see_this_page.widget") : jsx(Fragment, {});
   let i = {
     id: om.communityResourceInReviewBanner,
     bannerType: x1.WARN,
@@ -138,19 +138,19 @@ function V(e) {
   let d = useSelector(_$$E(Y));
   let p = useSelector(e => e.currentUserOrgId);
   let h = Jm();
-  let y = U0(resource);
+  let y = shouldShowCreatorNudge(resource);
   let f = hasClientMeta(e.resource) ? e0.COMMUNITY_HUB_FILE : isWidget(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let v = selectCurrentUser();
   let w = hasClientMeta(e.resource);
   let E = isPlugin(e.resource);
-  let G = x2(void 0, resource, void 0, k2.RESOURCE_PAGE);
+  let G = x2(void 0, resource, void 0, PageTypeEnum.RESOURCE_PAGE);
   let q = OX(resource);
   if (useEffect(() => {
     w ? r(ts({
       hubFileId: e.resource.id
     })) : r(af({
       id: e.resource.id,
-      resourceType: E ? ResourceType.PLUGIN : ResourceType.WIDGET
+      resourceType: E ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET
     }));
   }, [r, e.resource.id, p, w, E]), !v) return null;
   let V = hasMonetizedResourceMetadata(resource);
@@ -171,7 +171,7 @@ function V(e) {
         fileKey,
         isFullscreenOpen: !1,
         isEditHubFilePageMode: !0,
-        entryPoint: k2.RESOURCE_PAGE,
+        entryPoint: PageTypeEnum.RESOURCE_PAGE,
         canvasThumbnailPromise: Sz(fileKey, v)
       }))) : (logAndTrackCTA({
         pluginId: resource.id,
@@ -183,7 +183,7 @@ function V(e) {
         has_carousel_media_nudge: y
       }), r(_$$r({
         publishedPluginId: resource.id,
-        entryPoint: k2.RESOURCE_PAGE
+        entryPoint: PageTypeEnum.RESOURCE_PAGE
       })));
     }
   }), getFeatureFlags().ext_plugin_publish_rearch && isWidgetOrPlugin(resource) && (K.push(G), q && K.push(q)), hasClientMeta(resource)) {
@@ -202,7 +202,7 @@ function V(e) {
         });
         customHistory.redirect(`/file/${fileKey}`, "_blank");
       }
-    }), !Pg(resource)) {
+    }), !isResourceDelisted(resource)) {
       K.push({
         displayText: "",
         disabled: !0,
@@ -229,7 +229,7 @@ function V(e) {
               onConfirm: () => {
                 r(ax({
                   hubFileId: resource.id,
-                  redirectLink: bL(resource.publisher.profile_handle)
+                  redirectLink: getProfileRouteHref(resource.publisher.profile_handle)
                 }));
               },
               destructive: !0
@@ -279,7 +279,7 @@ function V(e) {
     properties: {
       name: "rdp_creator_banner",
       resourceId: resource.id,
-      resourceType: Vm(resource),
+      resourceType: getResourceType(resource),
       hasCarouselMediaNudge: y
     },
     children: [jsx(_$$C, {
@@ -306,13 +306,13 @@ export function $$K0(e) {
   let o = useSelector(e => hasClientMeta(resource) ? cN(i) : Wd(e, resource));
   let l = RB(resource);
   let c = hasFigFileMetadata(resource) ? resource.fig_file_metadata?.key : void 0;
-  return getFeatureFlags().community_hub_admin && lT(resource) ? jsx(E, {
+  return getFeatureFlags().community_hub_admin && isResourceBlocked(resource) ? jsx(E, {
     resource
   }) : getFeatureFlags().community_hub_admin_reviewer && hasMonetizedResourceMetadata(resource) ? jsx(w, {
     resource
-  }) : resource.publishing_status ? o && AC(resource) ? jsx(y, {
+  }) : resource.publishing_status ? o && isResourcePendingPublishing(resource) ? jsx(y, {
     resource
-  }) : Pg(resource) ? jsx(h, {
+  }) : isResourceDelisted(resource) ? jsx(h, {
     hasPublisherAdminAccess: o,
     resource
   }) : hasClientMeta(resource) && l ? jsx(V, {

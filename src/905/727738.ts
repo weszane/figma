@@ -15,7 +15,7 @@ import { ConfirmationModal } from '../905/441305';
 import { AccessLevelEnum } from '../905/557142';
 import { FlashActions, handlePromiseError } from '../905/573154';
 import { P as _$$P } from '../905/595507';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { getDisplayNameAlt } from '../905/760074';
 import { WB } from '../905/761735';
 import { handleOptimistTransaction } from '../905/842794';
@@ -109,7 +109,7 @@ function j(e) {
   let n = e.roleToRemove;
   let r = n.user;
   let a = n.resource_type === FResourceCategoryType.FILE ? n.resource_id_or_key : void 0;
-  let s = M4.File.useValue(a).data;
+  let s = liveStoreInstance.File.useValue(a).data;
   switch (n.resource_type) {
     case FResourceCategoryType.FILE:
       r.id === e.user.id ? (t = getI18nString('confirm_remove_role.are_you_sure_you_want_to_leave_file_name_you_may_not_be_able_to_access_this_file_anymore', {

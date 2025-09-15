@@ -1,13 +1,13 @@
 import { useRef, useCallback, useMemo, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { trackEventAnalytics } from "../905/449184";
-import { o_, Qd, Vm } from "../figma_app/427318";
+import { hasLibraryKey, mapEditorTypeToVt, getResourceType } from "../figma_app/427318";
 import { useTracking } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 if (443 == require.j) {}
 let c = e => {
   let t;
-  t = o_(e) ? Qd(e) : Vm(e);
+  t = hasLibraryKey(e) ? mapEditorTypeToVt(e) : getResourceType(e);
   return `${e.id}---${t}`;
 };
 let d = e => {

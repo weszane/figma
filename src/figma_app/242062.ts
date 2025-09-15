@@ -7,7 +7,7 @@ import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
 import { globalPerfTimer, distributionAnalytics } from "../905/542194";
 import { getTextColorForBackground, textOnDarkCanvas, getDarkerShade, textOnLightCanvas } from "../figma_app/191804";
-import { j as _$$j } from "../figma_app/469468";
+import { usePrefersReducedMotion } from "../figma_app/469468";
 import { selectWithShallowEqual } from "../905/103090";
 import { tH, H4 } from "../905/751457";
 import { lg } from "../figma_app/976749";
@@ -1868,7 +1868,7 @@ function tm({
     }
   }) => t.find(t => t.sessionID === e));
   let l = p8("currentPage");
-  let c = _$$j();
+  let c = usePrefersReducedMotion();
   let u = lg();
   let p = getObservableOrFallback(_$$d().showOutlines);
   let _ = _$$S();

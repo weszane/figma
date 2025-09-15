@@ -11,7 +11,7 @@ import { cR as _$$cR } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { HD, Co } from "../figma_app/471982";
-import { Gu } from "../figma_app/640564";
+import { getDefaultBrowseOptions } from "../figma_app/640564";
 import { createOptimistThunk } from "../905/350402";
 import { UU } from "../figma_app/770088";
 import { sf } from "../905/929976";
@@ -47,7 +47,7 @@ let $$M3 = createOptimistThunk((e, t) => {
   let f = t.view ? t.view : {
     view: "communityHub",
     subView: "searchAndBrowse",
-    data: Gu()
+    data: getDefaultBrowseOptions()
   };
   if (!m) {
     e.dispatch(VisualBellActions.enqueue({

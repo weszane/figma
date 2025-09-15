@@ -2,22 +2,22 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { trackEventAnalytics } from "../905/449184";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getI18nString } from "../905/303541";
 import { u5 } from "../5132/642384";
 import { s as _$$s } from "../5430/913603";
 import { Q } from "../5430/345616";
 import { _ as _$$_ } from "../905/456042";
 import { vQ } from "../5430/664984";
-import { X_ } from "../figma_app/777551";
-import { vt } from "../figma_app/306946";
+import { getResourceActionText } from "../figma_app/777551";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { showModalHandler } from "../905/156213";
 import { YW } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { IE } from "../5430/231178";
 import { selectCurrentUser } from "../905/372672";
-import { LE } from "../905/71785";
+import { FileTypeEnum } from "../905/71785";
 import { KindEnum } from "../905/129884";
 import { T as _$$T } from "../5132/203178";
 import { nu, uD } from "../5430/774694";
@@ -27,7 +27,7 @@ export function $$T0({
 }) {
   let r = IE(e);
   let T = useDispatch();
-  let I = _$$N(`(max-width: ${YW}px)`);
+  let I = usePrefersMediaQuery(`(max-width: ${YW}px)`);
   let N = _$$T();
   let E = selectCurrentUser();
   let S = useCallback(() => {
@@ -36,7 +36,7 @@ export function $$T0({
         type: _$$s,
         data: {
           dispatch: T,
-          editorType: LE.SLIDES
+          editorType: FileTypeEnum.SLIDES
         }
       }));
       return;
@@ -56,7 +56,7 @@ export function $$T0({
     T(t(e));
   }, [T, e, r, I, N, E]);
   let R = vQ(T);
-  let k = X_(vt.SLIDE_TEMPLATE);
+  let k = getResourceActionText(ResourceTypeEnum.SLIDE_TEMPLATE);
   let A = jsx("div", {
     "data-testid": "slide-template-use-button",
     className: nu,
@@ -93,7 +93,7 @@ export function $$T0({
       buttonText: k,
       onClick: S,
       useNoIconStyle: !0,
-      editorType: LE.SLIDES,
+      editorType: FileTypeEnum.SLIDES,
       enableWideButtonForStickyFooter: t,
       dataTestId: "slide-template-use-button"
     })

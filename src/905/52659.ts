@@ -20,7 +20,7 @@ import { Ct } from "../figma_app/199513";
 import { _6 } from "../figma_app/386952";
 import { mapProjectProperties } from "../figma_app/349248";
 import { Mz } from "../vendor/925040";
-import { Dq } from "../905/316062";
+import { FolderSortKey } from "../905/316062";
 import { SortField, SortOrder } from "../figma_app/756995";
 import { h as _$$h } from "../figma_app/198885";
 import { h1 } from "../905/986103";
@@ -40,7 +40,7 @@ let k = Mz(_$$h, T, e => e.viewBarSortOptionsByView, e => e.tileSortFilterStateB
   if ("team" === e.view) {
     let e = n.team;
     return {
-      sortKey: e.sort.key === SortField.NAME ? Dq.NAME : Dq.LAST_MODIFIED,
+      sortKey: e.sort.key === SortField.NAME ? FolderSortKey.NAME : FolderSortKey.LAST_MODIFIED,
       sortDesc: e.sort.dir === SortOrder.DESC
     };
   }
@@ -108,7 +108,7 @@ let K = {
 };
 let Y = (e, t, i) => ({
   headerCellClassName: _$$s2.wHalf.$,
-  field: Dq.NAME,
+  field: FolderSortKey.NAME,
   renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_name_column")
@@ -134,7 +134,7 @@ let q = {
   })
 };
 let $ = {
-  field: Dq.LAST_MODIFIED,
+  field: FolderSortKey.LAST_MODIFIED,
   renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_updated_column")
@@ -157,7 +157,7 @@ let Z = {
   })
 };
 let X = {
-  field: Dq.CREATED_AT,
+  field: FolderSortKey.CREATED_AT,
   renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_created_column")
@@ -169,7 +169,7 @@ let X = {
   })
 };
 let Q = {
-  field: Dq.SHARED_AT,
+  field: FolderSortKey.SHARED_AT,
   renderHeaderCell: () => jsx(TextWithTruncation, {
     truncate: !0,
     children: renderI18nText("file_browser.folder_list_view.header_shared_at_column")

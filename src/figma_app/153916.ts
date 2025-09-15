@@ -5,18 +5,18 @@ import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { i as _$$i } from "../905/787489";
 import { Eh } from "../figma_app/617654";
 var n;
-(n || (n = {})).orgBillingDataQuery = M4.Query({
+(n || (n = {})).orgBillingDataQuery = liveStoreInstance.Query({
   fetch: async e => (await Eh.getBillingData({
     orgId: e
   })).data.meta,
   enabled: e => !!e
 });
-let $$m0 = M4.Mutation(async (e, {
+let $$m0 = liveStoreInstance.Mutation(async (e, {
   query: t
 }) => {
   let {
@@ -34,7 +34,7 @@ let $$m0 = M4.Mutation(async (e, {
     e && (e.admin_email = s.data.meta.admin_email);
   });
 });
-let $$g1 = M4.Mutation(async (e, {
+let $$g1 = liveStoreInstance.Mutation(async (e, {
   query: t
 }) => {
   let r = await XHR.put(`/api/orgs/${e.orgId}/lock_invoice`, {
@@ -53,7 +53,7 @@ let $$g1 = M4.Mutation(async (e, {
   })) : await t.refetch(i);
   return r.data.meta;
 });
-let f = M4.Mutation((e, {
+let f = liveStoreInstance.Mutation((e, {
   query: t
 }) => {
   t.refetch(n.orgBillingDataQuery(e));
@@ -65,7 +65,7 @@ export function $$E2(e) {
   }, [t, e]);
 }
 export async function $$y3(e) {
-  await M4.fetch(n.orgBillingDataQuery(e), {
+  await liveStoreInstance.fetch(n.orgBillingDataQuery(e), {
     policy: "networkOnly"
   });
 }

@@ -13,7 +13,7 @@ import { nl, cW, ZT } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { RecentlyUsedActionsView } from "../figma_app/43951";
 import { getPluginByFileId } from "../figma_app/300692";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { CN } from "../figma_app/915202";
 import { hasLocalFileId, SV } from "../figma_app/155287";
 var l = o;
@@ -30,11 +30,11 @@ export function $$S1() {
   let x = [];
   let N = useDebouncedCallback(() => {
     A.length > 0 && v(Vg({
-      resourceType: ResourceType.PLUGIN,
+      resourceType: HubTypeEnum.PLUGIN,
       resourceIds: A
     }));
     x.length > 0 && v(Vg({
-      resourceType: ResourceType.WIDGET,
+      resourceType: HubTypeEnum.WIDGET,
       resourceIds: x
     }));
   }, 500);

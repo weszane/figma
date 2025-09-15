@@ -4,10 +4,10 @@ import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
 import { trackEventAnalytics } from '../905/449184';
 import { $A } from '../905/862883';
-import { aP } from '../figma_app/10554';
+import { UploadStatusEnum } from '../figma_app/10554';
 import { c as _$$c } from '../figma_app/11961';
 import { OrgUserRoleEnum } from '../figma_app/35887';
-import { ResourceType, ResourceTypeNoComment2, ResourceTypeNoComment } from '../figma_app/45218';
+import { HubTypeEnum, ResourceTypeNoComment2, ResourceTypeNoComment } from '../figma_app/45218';
 import { FEditorType } from '../figma_app/53721';
 import { Ni } from '../figma_app/188152';
 import { FPublicationStatusType, FTemplateCategoryType } from '../figma_app/191312';
@@ -29,7 +29,7 @@ export function $$I26(e) {
 }
 export function $$S44(e) {
   return e && e.status || {
-    code: aP.EDIT
+    code: UploadStatusEnum.EDIT
   };
 }
 export function $$v54(e, t) {
@@ -320,13 +320,13 @@ export function $$eS27(e, t) {
 }
 export function $$ev42(e) {
   switch (e) {
-    case ResourceType.PLUGIN:
+    case HubTypeEnum.PLUGIN:
       return 'plugins';
-    case ResourceType.WIDGET:
+    case HubTypeEnum.WIDGET:
       return 'widgets';
-    case ResourceType.COMMENT:
+    case HubTypeEnum.COMMENT:
       return 'comments';
-    case ResourceType.HUB_FILE:
+    case HubTypeEnum.HUB_FILE:
       return 'hub_files';
     default:
       throw new Error('Unsupported Type');

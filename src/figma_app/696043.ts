@@ -7,7 +7,7 @@ import { gU, RH } from "../figma_app/147952";
 import { isVsCodeEnvironment } from "../905/858738";
 import { M } from "../figma_app/170366";
 import { loadPluginManifest, getFullscreenViewEditorType, mapToFileType, resolveFrameworkType, loadLocalPluginManifest } from "../figma_app/300692";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { manifestErrorMessage, ManifestErrorType } from "../figma_app/155287";
 import { getSelectedView } from "../905/622391";
 import { p as _$$p } from "../905/42189";
@@ -72,13 +72,13 @@ let $$y0 = createOptimistThunk(async (e, {
     let E = s.editorType;
     E?.forEach(r => {
       let n = resolveFrameworkType(r);
-      t === ResourceType.PLUGIN ? e.dispatch(gU({
+      t === HubTypeEnum.PLUGIN ? e.dispatch(gU({
         storeInRecentsKey: n,
         id: s.id || "",
         version: "",
         isDevelopment: !0,
         currentUserId: getSelectedView()
-      })) : t === ResourceType.WIDGET && e.dispatch(RH({
+      })) : t === HubTypeEnum.WIDGET && e.dispatch(RH({
         storeInRecentsKey: n,
         id: s.id || "",
         version: "",

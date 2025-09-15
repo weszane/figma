@@ -59,7 +59,7 @@ import { Az } from "../5132/863145";
 import { pW } from "../905/160095";
 import { dl } from "../figma_app/307841";
 import { g as _$$g } from "../1250/695038";
-import { M4, IT, gY as _$$gY } from "../905/713695";
+import { liveStoreInstance, IT, gY as _$$gY } from "../905/713695";
 import { useCurrentPlanUser, isOrgGuestUser, useCurrentPublicPlan } from "../figma_app/465071";
 import { G as _$$G } from "../figma_app/124713";
 import { w as _$$w2 } from "../7021/108292";
@@ -139,10 +139,10 @@ import { A as _$$A5 } from "../svg/104766";
 import { A as _$$A6 } from "../1617/316388";
 let ep = "non_admin_billing_terms_banner_seen";
 let eg = _$$g(ep);
-let ef = M4.Query({
+let ef = liveStoreInstance.Query({
   fetch: async e => (await _$$w2.getNonAdminBillingTermsBanner(e)).data.meta
 });
-let eh = M4.Mutation(async e => {
+let eh = liveStoreInstance.Mutation(async e => {
   await _$$G.postOrgUserFlags({
     orgUserId: e.orgUserId,
     flags: {

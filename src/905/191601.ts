@@ -11,7 +11,7 @@ import { hT, YM } from "../905/561087";
 import { nb } from "../figma_app/543100";
 import { fileEntityDataMapper } from "../905/943101";
 import { SiteMount, FileLastPublishedAt } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { ConfirmationModal } from "../905/441305";
 import { renderI18nText } from "../905/303541";
@@ -401,7 +401,7 @@ let $$U3 = createOptimistThunk(async ({
   }
   let o = "";
   if (fileKeys.length > 0) {
-    let e = await M4.fetchFile(fileKeys[0]);
+    let e = await liveStoreInstance.fetchFile(fileKeys[0]);
     e && (o = e.name);
   } else if (repoIds.length > 0) {
     let t = e().repos[repoIds[0]];

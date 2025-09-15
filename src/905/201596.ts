@@ -14,10 +14,10 @@ import { fullscreenValue } from "../figma_app/455680";
 import { FC } from "../figma_app/212807";
 import { FFileType } from "../figma_app/191312";
 import { PublishedHubFileForFile } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { getObservableValue } from "../figma_app/84367";
 import { p6 } from "../figma_app/803787";
-import { Se } from "../905/71785";
+import { mapCommunityPublishers } from "../905/71785";
 import { $S } from "../905/918620";
 import { m as _$$m } from "../figma_app/913212";
 import { $6 } from "../figma_app/791586";
@@ -62,7 +62,7 @@ export function $$T1(e) {
   if (!e || "loading" === s.status) return {
     canPublishAsHubFile: void 0
   };
-  let d = Se(l);
+  let d = mapCommunityPublishers(l);
   let c = $$k3(e, e.canEdit, {
     ...t,
     authedProfilesById: i,
@@ -109,7 +109,7 @@ export function $$N0({
   let t = useDispatch();
   let {
     data
-  } = M4.useFile(e);
+  } = liveStoreInstance.useFile(e);
   let a = $S({
     fileKey: e ?? "",
     file: data ?? null

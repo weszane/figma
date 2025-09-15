@@ -9,10 +9,10 @@ import a from "classnames";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { R as _$$R } from "../5430/129716";
 import { Cc } from "../5430/664984";
-import { Qo, qD, _m } from "../figma_app/471982";
+import { isViewerModeResource, getCurrentVersion, fitsInViewer } from "../figma_app/471982";
 import { isTntSavingEnabled } from "../figma_app/275462";
-import { K2 } from "../figma_app/777551";
-import { $9, Vm, rZ, XW, g0, YI, $3, qY, ws, bc, zL } from "../figma_app/427318";
+import { getResourceName } from "../figma_app/777551";
+import { getPluginOrWidgetContent, getResourceType, isOrgPrivatePluginOrWidget, hasContent, isPluginOrWidget, isPluginResource, isWidgetResource, getMainContent, hasResourceType, getTemplateType, isFigmakeTemplate } from "../figma_app/427318";
 import { $O, bK } from "../figma_app/701107";
 import { Tm, e5 } from "../figma_app/740025";
 import { hasClientMeta, isPlugin, isWidget, isMonetizedWithClientMeta } from "../figma_app/45218";
@@ -38,8 +38,8 @@ import { VisualBellActions } from "../905/302958";
 import { AG } from "../figma_app/999312";
 import { FL } from "../figma_app/248365";
 import { wr } from "../figma_app/387599";
-import { xn } from "../905/934145";
-import { Om, tv } from "../figma_app/979714";
+import { ProfileRouteState } from "../905/934145";
+import { useResourceRouteParams, useResourceFuid } from "../figma_app/979714";
 import { e as _$$e2 } from "../5430/411458";
 import { d6, uR, s1 } from "../figma_app/304207";
 import { showModalHandler } from "../905/156213";
@@ -83,7 +83,7 @@ function N({
   let i = I ? jsx(I, {
     resource: t
   }) : void 0;
-  let n = $9(e);
+  let n = getPluginOrWidgetContent(e);
   n && (r = hasOrgRole(n) ? jsx(L, {
     orgName: n.roles?.org?.name
   }) : void 0);
@@ -103,7 +103,7 @@ function et(e, t, r, s) {
     if (logAndTrackCTA(eo({
       state: n,
       resourceId: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       viewContext: t,
       action: "save",
       loggedIn: !!n.user,
@@ -150,7 +150,7 @@ function et(e, t, r, s) {
       t();
     } else r(d6({
       id: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       communityProfile: i().authedActiveCommunityProfile || void 0,
       orgId: s,
       source: uR.COMMUNITY_HUB,
@@ -166,7 +166,7 @@ function er(e, t, r, s, i) {
     if (logAndTrackCTA(eo({
       state: a,
       resourceId: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       viewContext: t,
       action: "save",
       loggedIn: !!a.user,
@@ -175,8 +175,8 @@ function er(e, t, r, s, i) {
       reportError(_$$e.COMMUNITY, Error("[Community Saves] Attempted unsave without currentUser"));
       return;
     }
-    if (rZ(e)) {
-      let t = $9(e);
+    if (isOrgPrivatePluginOrWidget(e)) {
+      let t = getPluginOrWidgetContent(e);
       if (!t) {
         reportError(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
           extra: {
@@ -187,7 +187,7 @@ function er(e, t, r, s, i) {
       }
       n(d6({
         id: e.id,
-        resourceType: Vm(t),
+        resourceType: getResourceType(t),
         communityProfile: a.authedActiveCommunityProfile || void 0,
         orgId: s,
         source: uR.COMMUNITY_HUB,
@@ -288,7 +288,7 @@ function ei(e, t, r, s) {
     (logAndTrackCTA(eo({
       state: n,
       resourceId: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       viewContext: t,
       action: "unsave",
       loggedIn: !!n.user,
@@ -302,7 +302,7 @@ function ei(e, t, r, s) {
       reportError(_$$e.COMMUNITY, e);
     }) : r(s1({
       id: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       communityProfile: i().authedActiveCommunityProfile || void 0,
       orgId: s,
       source: uR.COMMUNITY_HUB
@@ -320,13 +320,13 @@ function en(e, t, r, s) {
     if (logAndTrackCTA(eo({
       state: o,
       resourceId: e.id,
-      resourceType: Vm(e),
+      resourceType: getResourceType(e),
       viewContext: t,
       action: "unsave",
       loggedIn: !!o.user,
       orgId: r
-    }), ee), rZ(e)) {
-      let t = $9(e);
+    }), ee), isOrgPrivatePluginOrWidget(e)) {
+      let t = getPluginOrWidgetContent(e);
       if (!t) {
         reportError(_$$e.COMMUNITY, Error("Extension type resource is missing plugin and widget content"), {
           extra: {
@@ -337,7 +337,7 @@ function en(e, t, r, s) {
       }
       i(s1({
         id: e.id,
-        resourceType: Vm(t),
+        resourceType: getResourceType(t),
         communityProfile: n().authedActiveCommunityProfile || void 0,
         orgId: r,
         source: uR.COMMUNITY_HUB
@@ -394,26 +394,26 @@ function ea(e, t) {
       resourceId: e.id,
       orgIds: []
     }, {
-      enabled: XW(e) && !rZ(e)
+      enabled: hasContent(e) && !isOrgPrivatePluginOrWidget(e)
     });
     let r = useSubscription(ResourceSave, {
       hubFileId: e.id
     }, {
-      enabled: !XW(e) && hasClientMeta(e)
+      enabled: !hasContent(e) && hasClientMeta(e)
     });
     let s = useSubscription(PluginInstall, {
       pluginId: e.id,
       orgIds: []
     }, {
-      enabled: rZ(e) || !XW(e) && (isPlugin(e) || isWidget(e))
+      enabled: isOrgPrivatePluginOrWidget(e) || !hasContent(e) && (isPlugin(e) || isWidget(e))
     });
-    return XW(e) ? getResourceDataOrFallback(t.data?.resourceSaveFromResourceId)?.createdAt || null : r.data?.resourceSave?.createdAt || s.data?.pluginInstall?.createdAt || null;
+    return hasContent(e) ? getResourceDataOrFallback(t.data?.resourceSaveFromResourceId)?.createdAt || null : r.data?.resourceSave?.createdAt || s.data?.pluginInstall?.createdAt || null;
   }(e);
   let o = AG();
-  let a = Om();
-  let l = tv() ?? void 0;
+  let a = useResourceRouteParams();
+  let l = useResourceFuid() ?? void 0;
   let c = useSelector(e => e.authedActiveCommunityProfile?.profile_handle);
-  let d = useMemo(() => o && a ? new _$$e2(a, l) : c ? new xn({
+  let d = useMemo(() => o && a ? new _$$e2(a, l) : c ? new ProfileRouteState({
     profileHandle: c,
     tabView: UserProfileTab.SAVES
   }) : void 0, [o, a, l, c]);
@@ -423,7 +423,7 @@ function ea(e, t) {
       id: "cmty-detail-view-saved-button-clicked"
     });
     s?.stopPropagation();
-    u ? r(XW(e) ? en(e, t) : ei(e, t)) : r(XW(e) ? er(e, t, d?.href) : et(e, t));
+    u ? r(hasContent(e) ? en(e, t) : ei(e, t)) : r(hasContent(e) ? er(e, t, d?.href) : et(e, t));
   }, [u, r, e, t, d]);
   useCallback(e => {
     FL(AuthFlowStep.SIGN_UP, {
@@ -442,13 +442,13 @@ function el(e, t, r) {
     pluginId: t.id,
     orgIds: Object.keys(o)
   }, {
-    enabled: !XW(e)
+    enabled: !hasContent(e)
   });
   let l = useSubscription(ResourceSaveFromResourceId, {
     resourceId: e.id,
     orgIds: Object.keys(o)
   }, {
-    enabled: XW(e)
+    enabled: hasContent(e)
   });
   let c = useSubscription(AllowlistedPlugin, {
     pluginId: t.id,
@@ -456,17 +456,17 @@ function el(e, t, r) {
   });
   let d = useMemo(() => {
     let t;
-    if (!g0(e)) return {};
-    t = XW(e) ? getResourceDataOrFallback(l.data?.orgResourceSaves) || [] : a.data?.orgPluginInstalls.status !== tT.Loaded ? [] : a.data?.orgPluginInstalls.data || [];
+    if (!isPluginOrWidget(e)) return {};
+    t = hasContent(e) ? getResourceDataOrFallback(l.data?.orgResourceSaves) || [] : a.data?.orgPluginInstalls.status !== tT.Loaded ? [] : a.data?.orgPluginInstalls.data || [];
     let r = {};
     Object.values(o).forEach(s => {
-      (!(YI(e) && s.plugins_whitelist_enforced || $3(e) && s.widgets_whitelist_enforced) || (c.data?.orgAllowlistedPlugins.status !== tT.Loaded ? [] : c.data?.orgAllowlistedPlugins.data || []).some(e => e.orgId === s.id)) && (r[s.id] = t.some(e => e.orgId === s.id));
+      (!(isPluginResource(e) && s.plugins_whitelist_enforced || isWidgetResource(e) && s.widgets_whitelist_enforced) || (c.data?.orgAllowlistedPlugins.status !== tT.Loaded ? [] : c.data?.orgAllowlistedPlugins.data || []).some(e => e.orgId === s.id)) && (r[s.id] = t.some(e => e.orgId === s.id));
     });
     return r;
   }, [o, c, e, a.data?.orgPluginInstalls, l.data]);
   let u = useCallback((t, i, n) => {
     n?.stopPropagation();
-    d[t] ? s(XW(e) ? en(e, r, t, i) : ei(e, r, !0, t)) : s(XW(e) ? er(e, r, void 0, t, i) : et(e, r, !0, t));
+    d[t] ? s(hasContent(e) ? en(e, r, t, i) : ei(e, r, !0, t)) : s(hasContent(e) ? er(e, r, void 0, t, i) : et(e, r, !0, t));
   }, [s, e, r, d]);
   return {
     savesByOrgId: d,
@@ -556,10 +556,10 @@ function ev({
     } = e;
     let s = useSelector(e => e.authedActiveCommunityProfile);
     let i = _$$c(s);
-    let o = _$$W(resource.id, Vm(resource), !XW(resource));
-    let a = _$$B(resource.id, XW(resource));
-    let l = XW(resource) ? !!a.data?.[0] : !!o.data?.[0];
-    let c = XW(resource) ? a.data?.[1] : o.data?.[1];
+    let o = _$$W(resource.id, getResourceType(resource), !hasContent(resource));
+    let a = _$$B(resource.id, hasContent(resource));
+    let l = hasContent(resource) ? !!a.data?.[0] : !!o.data?.[0];
+    let c = hasContent(resource) ? a.data?.[1] : o.data?.[1];
     let d = _$$w(resource, l, c || null, viewContext);
     return {
       isTeamOrOrgProfileActive: i,
@@ -622,7 +622,7 @@ function ev({
   });
   let b = useSelector(e => Tm(e));
   let j = [];
-  if (0 !== Object.values(b).length && g0(e)) {
+  if (0 !== Object.values(b).length && isPluginOrWidget(e)) {
     j.push({
       displayText: getI18nString("community.saves.save_for_yourself"),
       icon: jsx("div", {
@@ -801,7 +801,7 @@ function eT({
     onOrgSaveAction
   } = el(e, t, r);
   let _ = useSelector(e => Tm(e));
-  if (!g0(e)) return null;
+  if (!isPluginOrWidget(e)) return null;
   let p = [{
     displayText: getI18nString("community.saves.save_this_resource_for_yourself"),
     isChecked: isResourceSavedForUser,
@@ -855,9 +855,9 @@ function eM({
   resource: e
 }) {
   let t = _$$M2() ? "mobile_logged_in" : "mobile_logged_out";
-  let r = XW(e) ? qY(e) : e;
+  let r = hasContent(e) ? getMainContent(e) : e;
   let n = !!r && isMonetizedWithClientMeta(r);
-  let o = useMemo(() => r ? g0(e) ? jsxs(Fragment, {
+  let o = useMemo(() => r ? isPluginOrWidget(e) ? jsxs(Fragment, {
     children: [jsx(eN, {
       resource: e,
       resourceContent: r,
@@ -915,17 +915,17 @@ export function $$eF0({
       showAuthorsHeader: !e
     };
   }();
-  let c = K2(e);
+  let c = getResourceName(e);
   let d = useSelector(e => Tm(e));
-  let x = Qo(t) ? e0.COMMUNITY_HUB_FILE : isWidget(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
+  let x = isViewerModeResource(t) ? e0.COMMUNITY_HUB_FILE : isWidget(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let j = null;
   let w = jsx(_$$q, {
     resource: e,
     resourceContent: t
   });
-  let C = $9(e);
+  let C = getPluginOrWidgetContent(e);
   if (eB && C) {
-    let e = qD(C);
+    let e = getCurrentVersion(C);
     let t = Object.values(d).some(e => isPlugin(C) && e.plugins_whitelist_enforced || isWidget(C) && e.widgets_whitelist_enforced);
     !(e && "is_private" in e && e.is_private) && t && (j = jsx(eB, {
       resource: C,
@@ -954,7 +954,7 @@ export function $$eF0({
     resource: e,
     resourceContent: t
   });
-  let R = ws(e) ? e.resource_type : bc(e);
+  let R = hasResourceType(e) ? e.resource_type : getTemplateType(e);
   let {
     isDisabled,
     disabledReason
@@ -963,7 +963,7 @@ export function $$eF0({
   let M = P ? jsx(eD, {
     resource: e
   }) : null;
-  let O = zL(e);
+  let O = isFigmakeTemplate(e);
   let B = "oneColumn" === i ? jsx(_$$A, {
     resource: e,
     resourceContent: t,
@@ -1077,7 +1077,7 @@ export function $$eU2({
   resourceContent: t,
   hasScrolled: r
 }) {
-  let i = K2(e);
+  let i = getResourceName(e);
   let n = e.community_publishers.accepted;
   let o = e5(t);
   let a = t.comment_count;
@@ -1150,7 +1150,7 @@ function eV({
       let e = document.getElementById($O.CommentsView);
       if (e) {
         let t = e.getBoundingClientRect().top;
-        _m(t, window.innerHeight, window.scrollY) ? n($O.CommentsView) : n($O.DescriptionView);
+        fitsInViewer(t, window.innerHeight, window.scrollY) ? n($O.CommentsView) : n($O.DescriptionView);
       }
     };
     window.addEventListener("scroll", e);

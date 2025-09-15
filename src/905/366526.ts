@@ -41,7 +41,7 @@ import { bE as _$$bE4, uo as _$$uo5, yH as _$$yH3, yJ as _$$yJ5 } from '../905/9
 import { useSprigWithSampling } from '../905/99656';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { C as _$$C2 } from '../905/109977';
-import { cZ as _$$cZ2, Xc } from '../905/113138';
+import { LivestoreBinding, LivestoreStore } from '../905/113138';
 import { oB as _$$oB2, Oi, Ql, ZN } from '../905/115338';
 import { eo as _$$eo, En, IN, jx, KE, Kl, SI } from '../905/116101';
 import { xK } from '../905/125218';
@@ -53,7 +53,7 @@ import { Kz as _$$Kz } from '../905/145989';
 import { CL } from '../905/148074';
 import { Q as _$$Q3 } from '../905/150006';
 import { t as _$$t5 } from '../905/150656';
-import { N as _$$N3 } from '../905/155850';
+import { liveStoreFileBinding } from '../905/155850';
 import { hideModal, hideSpecificModal, popModalStack, popPrevModal, showModal, showModalHandler, updateModal } from '../905/156213';
 import { ThemeProvider, useThemeContext } from '../905/158740';
 import { mO as _$$mO, Y5 as _$$Y3, kI } from '../905/163189';
@@ -82,7 +82,7 @@ import { w as _$$w } from '../905/230422';
 import { resolveMessage } from '../905/231762';
 import { y as _$$y } from '../905/235145';
 import { delay } from '../905/236856';
-import { N as _$$N5 } from '../905/239398';
+import { liveStoreRepoBinding } from '../905/239398';
 import { z as _$$z3 } from '../905/239603';
 import { $ as _$$$4 } from '../905/240853';
 import { a as _$$a5 } from '../905/242083';
@@ -155,7 +155,7 @@ import { sendMetric } from '../905/485103';
 import { $ as _$$$2 } from '../905/489647';
 import { S as _$$S7 } from '../905/491708';
 import { b as _$$b4 } from '../905/493664';
-import { N as _$$N6 } from '../905/493958';
+import { folderLivestoreBinding } from '../905/493958';
 import { C as _$$C3 } from '../905/496700';
 import { G as _$$G2, j as _$$j2 } from '../905/496937';
 import { f as _$$f, r as _$$r2 } from '../905/501976';
@@ -188,7 +188,7 @@ import { vj, zQ } from '../905/574958';
 import { l as _$$l0, q as _$$q4 } from '../905/578831';
 import { pf as _$$pf } from '../905/579526';
 import { l as _$$l7 } from '../905/579959';
-import { H as _$$H7 } from '../905/581820';
+import { applyOptimisticUpdates } from '../905/581820';
 import { pE as _$$pE, yJ as _$$yJ8 } from '../905/584989';
 import { t3 as _$$t8, xH as _$$xH4, YG as _$$YG, CU, Dp, EN, hq, JG, Mi, Mn, OT, Pb, qM, TL, w3, Ww, zv } from '../905/586954';
 import { WZ } from '../905/587414';
@@ -237,7 +237,7 @@ import { compareLibraryItemWithKey } from '../905/709171';
 import { uiVariantName } from '../905/709735';
 import { us as _$$us2, xp } from '../905/711212';
 import { S as _$$S5 } from '../905/711770';
-import { IT, M4 } from '../905/713695';
+import { IT, liveStoreInstance } from '../905/713695';
 import { logDebug, logError, logInfo, logWarning } from '../905/714362';
 import { lG as _$$lG } from '../905/714538';
 import { SvgComponent } from '../905/714743';
@@ -279,13 +279,13 @@ import { F2 } from '../905/826900';
 import { F as _$$F3 } from '../905/827944';
 import { u as _$$u3 } from '../905/831362';
 import { OrganizationType } from '../905/833838';
-import { $ as _$$$ } from '../905/834575';
+import { teamAPIClient } from '../905/834575';
 import { oO as _$$oO, EE, Pq, Rg, XV, Yw } from '../905/837497';
 import { generateOptimistId } from '../905/842794';
 import { o0 as _$$o4, NG } from '../905/844131';
-import { N as _$$N8 } from '../905/844455';
+import { teamLivestoreBinding } from '../905/844455';
 import { useCurrentUserOrg } from '../905/845253';
-import { j as _$$j3 } from '../905/848904';
+import { mergeWithObject } from '../905/848904';
 import { c as _$$c6 } from '../905/850166';
 import { hM as _$$hM } from '../905/851937';
 import { D as _$$D2 } from '../905/852057';
@@ -423,7 +423,7 @@ import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { relatedLinkRemoved, selectedLayerGuid, sendText, pageLoaded, selectedPageGuid, relatedLinkCreated, sendLayers, sendCssProperties, sendHtmlSkeleton, sendFileName, configureAutocomplete, sendThumbnail, sendMappingSuggestion, messageWithCallbackManager, messageWithResponseManager } from '../figma_app/415217';
 import { iE as _$$iE, Ng, xf } from '../figma_app/416935';
 import { b4 as _$$b5, _V } from '../figma_app/421886';
-import { g5 } from '../figma_app/422062';
+import { viewKeys } from '../figma_app/422062';
 import { hg as _$$hg } from '../figma_app/425489';
 import { parseOrgParentId } from '../figma_app/428858';
 import { h0, TP, Y3, zE } from '../figma_app/435872';
@@ -493,7 +493,7 @@ import { BrowserInfo, isFigmaMobileApp } from '../figma_app/778880';
 import { dO as _$$dO, ZN as _$$ZN } from '../figma_app/781852';
 import { parsePxInt } from '../figma_app/783094';
 import { fileApiHandler } from '../figma_app/787550';
-import { EM, J1 } from '../figma_app/804490';
+import { parseMessage, realtimeClient } from '../figma_app/804490';
 import { eu as _$$eu } from '../figma_app/807786';
 import { L4 as _$$L3 } from '../figma_app/819288';
 import { pz as _$$pz, jz } from '../figma_app/825489';
@@ -1046,7 +1046,7 @@ function eJ({
   let c = useAtomWithSubscription(processSelector)?.initCompletedPromise;
   let u = z3();
   let p = u === 'fullscreen';
-  let m = useMemo(() => g5.includes(u), [u]);
+  let m = useMemo(() => viewKeys.includes(u), [u]);
   let [h, g] = useState(!1);
   useEffect(() => {
     o != null && h && (q_.addDependency(eQ, 'resolved'), g(!1));
@@ -2178,7 +2178,7 @@ let i2 = e => t => function (i) {
     u();
   } else if (_$$Jt.matches(i)) {
     let t = i.payload.teamId;
-    let n = _$$$.getTeam({
+    let n = teamAPIClient.getTeam({
       teamId: t
     }).then(({
       data: i
@@ -5643,7 +5643,7 @@ function sV(e) {
   let a = new Set();
   let s = new Set();
   let o = e => {
-    let t = EM(e);
+    let t = parseMessage(e);
     n.push(t);
   };
   let l = t.roles;
@@ -5730,14 +5730,14 @@ function sG(e, t) {
 let sz = (e, t) => {
   let i = e.getState();
   if (t.realtime_token == null) return;
-  let n = EM(t.realtime_token);
+  let n = parseMessage(t.realtime_token);
   t.team_id && (getFeatureFlags().realtime_cleanup_viewer_role_access ? i.realtime.subscriptions[`/team-members-${t.team_id}`] : hasViewerRoleAccessOnTeam(t.team_id, i)) || t.folder_id && i.realtime.subscriptions[`/folder-${t.folder_id}`] || i.realtime.subscriptions[n.channel] || sG(e, n);
 };
 let sH = (e, t) => {
   let i = e.getState();
   let n = t.realtime_token;
   if (n == null) return;
-  let r = EM(n);
+  let r = parseMessage(n);
   if (!i.realtime.subscriptions[r.channel]) {
     switch (t.resource_type) {
       case FResourceCategoryType.FILE:
@@ -5752,7 +5752,7 @@ let sH = (e, t) => {
           let n = i.folders[t.resource_id_or_key];
           if (n && n.team_id && !(getFeatureFlags().realtime_cleanup_viewer_role_access ? i.realtime.subscriptions[`/team-members-${n.team_id}`] : hasViewerRoleAccessOnTeam(n.team_id, i))) {
             let t = i.teams[n.team_id];
-            t && t.realtime_token && sG(e, EM(t.realtime_token));
+            t && t.realtime_token && sG(e, parseMessage(t.realtime_token));
           }
           break;
         }
@@ -5764,11 +5764,11 @@ let sH = (e, t) => {
 let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function (i) {
   let n = t(i);
   if (_$$os.matches(i)) {
-    let t = i.payload.users.filter(e => e.realtime_token_inactive).map(e => EM(e.realtime_token_inactive));
+    let t = i.payload.users.filter(e => e.realtime_token_inactive).map(e => parseMessage(e.realtime_token_inactive));
     e.dispatch(iZ(t));
   }
   if (Qv.matches(i)) {
-    J1.setCallback(t => {
+    realtimeClient.setCallback(t => {
       !function (e, t) {
         if (sj.shimLogger.logMessages([t], {
           origin: 'handleFayeMessage'
@@ -5817,20 +5817,20 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
         }
       }(e, t);
     });
-    J1.setOnSubscribeCallback(t => {
+    realtimeClient.setOnSubscribeCallback(t => {
       getFeatureFlags().livegraph_shim_enabled && sj.handleRealtimeSubscription(t, e);
     });
-    J1.setOnUnsubscribeCallback(e => {
+    realtimeClient.setOnUnsubscribeCallback(e => {
       getFeatureFlags().livegraph_shim_enabled && sj.handleRealtimeUnsubscription(e);
     });
-    i.payload.user_realtime_token && sG(e, EM(i.payload.user_realtime_token));
+    i.payload.user_realtime_token && sG(e, parseMessage(i.payload.user_realtime_token));
     sV(e);
     return;
   }
   if (_$$l8.matches(i)) {
-    for (let t of i.payload) t && t.realtime_token && e.dispatch(i$(EM(t.realtime_token).channel));
+    for (let t of i.payload) t && t.realtime_token && e.dispatch(i$(parseMessage(t.realtime_token).channel));
   } else if (L1.matches(i)) {
-    for (let t of i.payload) t && t.realtime_token && e.dispatch(i$(EM(t.realtime_token).channel));
+    for (let t of i.payload) t && t.realtime_token && e.dispatch(i$(parseMessage(t.realtime_token).channel));
   } else if (_$$sf.matches(i)) {
     if (i.payload.view === 'fullscreen' || i.payload.view === 'prototype') {
       let t = _$$U2(i.payload);
@@ -5838,11 +5838,11 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
         fileKey: t
       }).then(n => {
         let r = n?.data?.meta;
-        r && r.realtime_token && (sG(e, EM(r.realtime_token)), i.payload.view === 'fullscreen' && desktopAPIInstance?.setRealtimeToken({
+        r && r.realtime_token && (sG(e, parseMessage(r.realtime_token)), i.payload.view === 'fullscreen' && desktopAPIInstance?.setRealtimeToken({
           realtimeToken: r.realtime_token,
           fileKey: t
         }));
-        r && r.repo_realtime_token && sG(e, EM(r.repo_realtime_token));
+        r && r.repo_realtime_token && sG(e, parseMessage(r.repo_realtime_token));
       });
     }
     return;
@@ -5882,14 +5882,14 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
     if (t && r.user_id === t.id) {
       if (r.resource_type === FResourceCategoryType.FILE && e.getState().openFile?.key === r.resource_id_or_key) return n;
       let t = r.realtime_token;
-      t && e.dispatch(i$(EM(t).channel));
+      t && e.dispatch(i$(parseMessage(t).channel));
       sV(e);
     }
   } else if (iZ.matches(i)) {
-    for (let e of i.payload) J1.subscribe(e);
+    for (let e of i.payload) realtimeClient.subscribe(e);
   } else if (i$.matches(i)) {
     let e = i.payload;
-    J1.unsubscribe(e);
+    realtimeClient.unsubscribe(e);
   }
   return n;
 };
@@ -7748,7 +7748,7 @@ let lg = Oi((e = {}, t) => {
     return i || e;
   }
   return Ql(e, t, _$$N4);
-}, _$$N3.reducer);
+}, liveStoreFileBinding.reducer);
 function lf(e, t) {
   let i = e.folder_id;
   let n = e.key;
@@ -8665,7 +8665,7 @@ let lq = Oi((e = {}, t) => {
     return i;
   }
   return Ql(e, t, lY);
-}, _$$N5.reducer);
+}, liveStoreRepoBinding.reducer);
 let l$ = (e, t, i) => {
   if (t.length === 0) return e;
   let n = new Set(t);
@@ -9275,7 +9275,7 @@ let dv = Oi((e = {}, t) => {
     }, i) : e;
   }
   return Ql(e, t, dI);
-}, _$$N6.reducer);
+}, folderLivestoreBinding.reducer);
 let dI = _$$oB2((e, t) => {
   if (_$$yJ2.matches(t)) {
     return t.payload.folder.id !== e.id ? e : {
@@ -10557,7 +10557,7 @@ let uS = uI((e = {}, t) => {
   return Ql(e, t, ux);
 });
 let uw = {};
-let uP = new _$$cZ2('PUBLISHED_PLUGINS').binding;
+let uP = new LivestoreBinding('PUBLISHED_PLUGINS').binding;
 let uD = Oi((e = {}, t) => {
   if (Vx.matches(t)) {
     let i = {
@@ -10826,7 +10826,7 @@ function u$(e, t) {
     }
   }
 }
-let uZ = new Xc('TEAM_USER', {}, {
+let uZ = new LivestoreStore('TEAM_USER', {}, {
   update: (e, t) => {
     let {
       instance
@@ -10839,7 +10839,7 @@ let uZ = new Xc('TEAM_USER', {}, {
         ...e[n]
       }
     };
-    a[n][r] ? a[n][r] = _$$j3(a[n][r], instance) : a[n][r] = instance;
+    a[n][r] ? a[n][r] = mergeWithObject(a[n][r], instance) : a[n][r] = instance;
     return a;
   },
   tombstone: (e, t) => {
@@ -10880,7 +10880,7 @@ let uZ = new Xc('TEAM_USER', {}, {
         continue;
       }
       i[r] || (i[r] = {});
-      i[r][a] ? i[r][a] = _$$j3(i[r][a], n) : i[r][a] = n;
+      i[r][a] ? i[r][a] = mergeWithObject(i[r][a], n) : i[r][a] = n;
     }
     return i;
   },
@@ -10898,7 +10898,7 @@ let uZ = new Xc('TEAM_USER', {}, {
       if (!n) continue;
       let r = n.team_id;
       let a = n.user_id;
-      let s = _$$H7(n, t.updates[e]);
+      let s = applyOptimisticUpdates(n, t.updates[e]);
       i[r] || (i[r] = {});
       i[r][a] = s;
     }
@@ -11048,7 +11048,7 @@ let u0 = Oi((e = {}, t) => {
     };
   }
   return e;
-}, _$$N8.reducer);
+}, teamLivestoreBinding.reducer);
 var u2 = (e => (e.REMOTE_WORK = 'remoteWork', e.ONBOARDING = 'onboarding', e.TEMPLATES_PICKER = 'templatesPicker', e))(u2 || {});
 let u6 = {
   target: null,
@@ -14122,7 +14122,7 @@ export async function $$hz0(e, t, d = {
   loadBlank: !1
 }) {
   await e7(async () => {
-    if (isInteractionPathCheck() || J1.connect(), desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab() && !getInitialOptions().user_data) {
+    if (isInteractionPathCheck() || realtimeClient.connect(), desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab() && !getInitialOptions().user_data) {
       _$$a();
       return;
     }
@@ -14132,7 +14132,7 @@ export async function $$hz0(e, t, d = {
     xK.start('createStoreStart');
     let c = !!new URLSearchParams(customHistory.location.search).get('reduxDebug');
     let u = _$$A2.withExtraArgument({
-      liveStore: M4
+      liveStore: liveStoreInstance
     });
     setTagGlobal('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
     let p = Zz(Tw(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__({

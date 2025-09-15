@@ -1,14 +1,21 @@
-import { z } from "../905/239603";
-import { describeNormalized, createPrimaryKeySchema } from "../905/67898";
-import { FPermissionDenialReason } from "../figma_app/191312";
-var s = (e => (e.EDIT = "EDIT", e.VIEW = "VIEW", e.DISABLE = "DISABLE", e))(s || {});
-let o = z.object({
+import { z } from 'zod'
+import { createPrimaryKeySchema, describeNormalized } from '../905/67898'
+import { FPermissionDenialReason } from '../figma_app/191312'
+
+/**
+ * TeamWebhookSchema - Schema for team webhook settings
+ */
+export const TeamWebhookSchema = z.object({
   team_name: z.string(),
   incoming_webhook: z.object({
-    channel: z.string()
-  })
-});
-let l = z.object({
+    channel: z.string(),
+  }),
+})
+
+/**
+ * FolderPermissionsSchema - Schema for folder permissions
+ */
+export const FolderPermissionsSchema = z.object({
   canEdit: z.boolean(),
   canShare: z.boolean(),
   canMove: z.boolean(),
@@ -16,22 +23,22 @@ let l = z.object({
   canSkipDeletionConfirmation: z.boolean(),
   canCreateDesignFileWithReasons: z.object({
     result: z.boolean(),
-    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason))
+    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason)),
   }),
   canCreateFigjamFileWithReasons: z.object({
     result: z.boolean(),
-    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason))
+    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason)),
   }),
   canCreateSlidesFileWithReasons: z.object({
     result: z.boolean(),
-    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason))
+    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason)),
   }),
   canTransferExternally: z.boolean(),
   canTransferCopy: z.boolean(),
   canTrash: z.boolean(),
   canTrashWithReasons: z.object({
     result: z.boolean(),
-    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason))
+    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason)),
   }).optional(),
   canRestore: z.boolean(),
   canPermanentlyDelete: z.boolean(),
@@ -40,10 +47,14 @@ let l = z.object({
   isPlanMember: z.boolean(),
   planCanConnectWithReasons: z.object({
     result: z.boolean(),
-    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason))
-  }).optional()
-});
-let $$d3 = describeNormalized("Folder", z.object({
+    publicDenyReasons: z.array(z.nativeEnum(FPermissionDenialReason)),
+  }).optional(),
+})
+
+/**
+ * FolderSchema - Normalized schema for Folder
+ */
+export const FolderSchema = describeNormalized('Folder', z.object({
   id: createPrimaryKeySchema(),
   name: z.string(),
   description: z.string().nullable(),
@@ -58,8 +69,8 @@ let $$d3 = describeNormalized("Folder", z.object({
   is_invite_only: z.boolean(),
   is_view_only: z.boolean(),
   settings: z.object({
-    webhooks: z.record(o).optional(),
-    legacy_team_root_folder: z.boolean().optional()
+    webhooks: z.record(TeamWebhookSchema).optional(),
+    legacy_team_root_folder: z.boolean().optional(),
   }).nullable(),
   deleted_at: z.string().nullable(),
   trashed_at: z.string().nullable(),
@@ -71,19 +82,19 @@ let $$d3 = describeNormalized("Folder", z.object({
   parent_org_id: z.string().optional().nullable(),
   shared_by_user: z.object({
     id: z.string(),
-    name: z.string().nullable()
+    name: z.string().nullable(),
   }).optional().nullable(),
   parent_org: z.object({
     id: z.string(),
     imgUrl: z.union([z.string(), z.undefined()]),
-    name: z.string()
+    name: z.string(),
   }).optional().nullable(),
   parent_team: z.object({
     id: z.string(),
     imgUrl: z.union([z.string(), z.undefined()]),
-    name: z.string()
+    name: z.string(),
   }).optional().nullable(),
-  folderPerms: l.optional(),
+  folderPerms: FolderPermissionsSchema.optional(),
   sharing_audience_control: z.string().optional().nullable(),
   team_access: z.string().optional().nullable(),
   team_name: z.string().optional().nullable(),
@@ -91,16 +102,44 @@ let $$d3 = describeNormalized("Folder", z.object({
   is_connected_project: z.boolean().optional().nullable(),
   resource_connection: z.object({
     hostPlanName: z.string(),
-    connectedPlanName: z.string()
+    connectedPlanName: z.string(),
   }).optional().nullable(),
-  has_pending_connection_invite: z.boolean().optional().nullable()
-}));
-export function $$c2(e, t) {
-  return `${location.origin}/files/${t ? t + "/" : ""}project/${e}`;
+  has_pending_connection_invite: z.boolean().optional().nullable(),
+}))
+
+/**
+ * getProjectUrl - Generates a project URL
+ * @param e - Project ID
+ * @param t - Optional team ID
+ * @returns Project URL string
+ */
+export function getProjectUrl(e: string, t?: string): string {
+  return `${location.origin}/files/${t ? `${t}/` : ''}project/${e}`
 }
-var $$u0 = (e => (e.FolderListView = "folder-list-view", e.FileMoveModalV2 = "file-move-modal-v2", e))($$u0 || {});
-var $$p1 = (e => (e.NAME = "name", e.TEAM = "team", e.OWNER = "owner", e.LAST_MODIFIED = "lastModified", e.CREATED_AT = "createdAt", e.SHARED_AT = "sharedAt", e.TRASHED_AT = "trashedAt", e))($$p1 || {});
-export const Ah = $$u0;
-export const Dq = $$p1;
-export const EE = $$c2;
-export const lH = $$d3; 
+
+/**
+ * FolderViewType - Enum for folder view types
+ */
+export enum FolderViewType {
+  FolderListView = 'folder-list-view',
+  FileMoveModalV2 = 'file-move-modal-v2',
+}
+
+/**
+ * FolderSortKey - Enum for folder sort keys
+ */
+export enum FolderSortKey {
+  NAME = 'name',
+  TEAM = 'team',
+  OWNER = 'owner',
+  LAST_MODIFIED = 'lastModified',
+  CREATED_AT = 'createdAt',
+  SHARED_AT = 'sharedAt',
+  TRASHED_AT = 'trashedAt',
+}
+
+// Exported variables with refactored names
+export const Ah = FolderViewType
+export const Dq = FolderSortKey
+export const EE = getProjectUrl
+export const lH = FolderSchema

@@ -1,9 +1,9 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { range } from "../figma_app/492908";
 import n from "classnames";
-import { N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
-import { ws } from "../figma_app/427318";
+import { hasResourceType } from "../figma_app/427318";
 import { fz } from "../figma_app/795938";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { f as _$$f } from "../5430/372951";
@@ -58,7 +58,7 @@ function g({
       className: o()({
         [f]: t
       }, _$$s.p1.$),
-      children: ws(e) ? jsx(_$$f, {
+      children: hasResourceType(e) ? jsx(_$$f, {
         resource: e,
         index: n,
         onIntersectionChange: t => r(e, t.isIntersecting),
@@ -87,7 +87,7 @@ export function $$v0({
   skipResourceLimit: u = !1,
   onClickTracking: m
 }) {
-  let _ = N(`(max-width: ${n})`);
+  let _ = usePrefersMediaQuery(`(max-width: ${n})`);
   let {
     rows,
     cols

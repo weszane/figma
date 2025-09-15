@@ -13,7 +13,7 @@ import { h as _$$h } from "../905/207101";
 import { reportError } from "../905/11";
 import { hideModal, showModalHandler, hideModalHandler } from "../905/156213";
 import { selectCurrentUser, getUserId } from "../905/372672";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { BigButtonInverseTracked, interactiveAnchorTracked } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString, getTranslatedDynamicContent } from "../905/303541";
@@ -33,11 +33,11 @@ import { _6 } from "../figma_app/386952";
 import { FFileType } from "../figma_app/191312";
 import { mC } from "../905/18797";
 import { _q } from "../figma_app/242339";
-import { LE } from "../905/71785";
+import { FileTypeEnum } from "../905/71785";
 import { registerModal } from "../905/102752";
 import { F as _$$F } from "../5430/926195";
 import { OJ } from "../905/519092";
-import { g as _$$g, rd, dO, qh } from "../vendor/130505";
+import { useParams, Redirect, Switch, Route } from "../vendor/130505";
 import { trackEventAnalytics } from "../905/449184";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
 import { Ak } from "../905/773401";
@@ -54,15 +54,15 @@ import { S as _$$S } from "../5430/465757";
 import { Link } from "react-router-dom";
 import { J as _$$J } from "../5430/284487";
 import { z as _$$z } from "../905/239603";
-import { Vm, HX, XW, zL, qY, ws } from "../figma_app/427318";
+import { getResourceType, mapVtToBrowseResourceType, hasContent, isFigmakeTemplate, getMainContent, hasResourceType } from "../figma_app/427318";
 import { ResourceTypeNoComment, CommunityPageType, hasClientMeta } from "../figma_app/45218";
-import { bo } from "../figma_app/10554";
-import { M4, IT as _$$IT } from "../905/713695";
+import { PublisherBadgeSchema } from "../figma_app/10554";
+import { liveStoreInstance, IT as _$$IT } from "../905/713695";
 import { getRequest } from "../905/910117";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { Xy, O7 } from "../figma_app/578832";
-import { lW, qD, Qo, _t, N6, eD as _$$eD2 } from "../figma_app/471982";
-import { A as _$$A3 } from "../905/665703";
+import { copyToClipboard, getCurrentVersion, isViewerModeResource, buildCommunityPathById, buildCarouselMedia, getCommunityPathSegments } from "../figma_app/471982";
+import { communityShelfService } from "../905/665703";
 import { E as _$$E } from "../5430/204549";
 import { _C6, U1R, qvA, ngI, OX3, g8m, ikM, Ero, eZi } from "../figma_app/27776";
 import { A as _$$A4 } from "../5430/1650";
@@ -72,9 +72,9 @@ import { wR, Ks, Dm, FX, zo, A8, L2 } from "../figma_app/728075";
 import { A as _$$A6 } from "../svg/831814";
 import e8 from "classnames";
 import { L as _$$L, I as _$$I } from "../1577/16430";
-import { N as _$$N2 } from "../905/872825";
+import { isValueInObject } from "../905/872825";
 import { LJ, HP, OE, PF } from "../figma_app/930386";
-import { $E, IE, pj, m5 } from "../figma_app/805898";
+import { BrowseCategoryRoute, CategoryRoute, useCategoryResourceHandler, categoryUrls } from "../figma_app/805898";
 import { AutoLayout } from "../905/470281";
 import { In } from "../905/672640";
 import { Wt, Hb } from "../5430/873109";
@@ -90,13 +90,13 @@ import { om, x1 } from "../figma_app/465413";
 import { A as _$$A8 } from "../5724/965092";
 import { communityPagePaths } from "../905/528121";
 import { setupDynamicConfigHandler } from "../figma_app/594947";
-import { zq, iY as _$$iY, po, p_ } from "../figma_app/598412";
+import { getCurrentLocale, getCurrentCommunityBasePath, parseCommunityPath, generateCommunityPagePaths } from "../figma_app/598412";
 import { Jm } from "../figma_app/387599";
-import { nS as _$$nS, Ac, Wk, ed as _$$ed, RA, NY, a4 as _$$a2 } from "../figma_app/321395";
+import { RouteState, captureRouteEvent, withCommunityRoute, useRouteStateInstance, useSafeRouteParams, useSafeRouteQuery, useSafeRouteStateInstance } from "../figma_app/321395";
 import { _ as _$$_2 } from "../5430/511077";
-import { xn } from "../905/934145";
-import { Xu, Uo } from "../figma_app/354658";
-import { vt as _$$vt } from "../figma_app/306946";
+import { ProfileRouteState } from "../905/934145";
+import { CommunityRoute, ResourceType } from "../figma_app/354658";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { n6 as _$$n } from "../figma_app/600006";
 import { getFeatureFlags } from "../905/601108";
 import { ce } from "../figma_app/347146";
@@ -120,7 +120,7 @@ import { DP } from "../905/640017";
 import { A as _$$A11 } from "../6828/364616";
 import { BrowserInfo } from "../figma_app/778880";
 import { S as _$$S2 } from "../5430/582465";
-import { wl } from "../figma_app/640564";
+import { setupBrowseRoute } from "../figma_app/640564";
 import { M as _$$M } from "../905/722875";
 import { f as _$$f } from "../figma_app/316722";
 import { kc } from "../figma_app/740025";
@@ -165,7 +165,7 @@ import { xk, Ay as _$$Ay5 } from "@stylexjs/stylex";
 import { logAndTrackCTA, trackContextViewed } from "../figma_app/314264";
 import { e0 as _$$e4 } from "../905/696396";
 import { GS } from "../5430/342380";
-import { q as _$$q2, S as _$$S3 } from "../figma_app/277543";
+import { DesignToolType, mapEditorToType } from "../figma_app/277543";
 import { P as _$$P2 } from "../5430/540963";
 import { g as _$$g3 } from "../5430/465741";
 import { performanceMetricsTracker } from "../905/414972";
@@ -173,7 +173,7 @@ import { X as _$$X3 } from "../5430/512075";
 import { A as _$$A30 } from "../5430/131744";
 import { V as _$$V, D as _$$D2 } from "../5430/668915";
 import { y$ } from "../figma_app/835219";
-import { Zp } from "../figma_app/188671";
+import { categoryBySlugQuery } from "../figma_app/188671";
 import { e as _$$e5 } from "../5430/604204";
 import { Ay as _$$Ay6 } from "../figma_app/103728";
 import { ButtonLarge } from "../905/521428";
@@ -181,15 +181,15 @@ import { f6 } from "../figma_app/915202";
 import { AG } from "../figma_app/999312";
 import { O as _$$O } from "../5430/638907";
 import { D as _$$D3 } from "../5430/769256";
-import { e as _$$e6 } from "../figma_app/324237";
+import { SortOptions } from "../figma_app/324237";
 import { t as _$$t2 } from "../905/150656";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useLatestRef } from "../figma_app/922077";
-import { C as _$$C3 } from "../905/237873";
+import { PricingOptions } from "../905/237873";
 import { generateUUIDv4 } from "../905/871474";
 import { a as _$$a5 } from "../905/925868";
 import { Qi } from "../905/172918";
-import { K2 } from "../figma_app/777551";
+import { getResourceName } from "../figma_app/777551";
 import { S as _$$S4, $O } from "../figma_app/701107";
 import { Z as _$$Z2 } from "../905/909123";
 import { Ay as _$$Ay7 } from "../5430/231178";
@@ -473,14 +473,14 @@ let $ = registerModal(function (e) {
       hubFileId: e.hubFileId
     }));
   }, [i, n, e.hubFileId]);
-  let m = _$$N(`(max-width: ${YW}px)`);
+  let m = usePrefersMediaQuery(`(max-width: ${YW}px)`);
   if (!n) return null;
   let p = m ? () => {
     i(showModalHandler({
       type: _$$s2,
       data: {
         dispatch: i,
-        editorType: LE.SLIDES
+        editorType: FileTypeEnum.SLIDES
       }
     }));
   } : () => {
@@ -627,7 +627,7 @@ let ex = _$$z.object({
   breadcrumb_text: _$$z.string().nullish()
 }).nonstrict();
 function e_(e, t) {
-  let i = Vm(e);
+  let i = getResourceType(e);
   return t?.resources?.length ? (t?.resources).find(t => i === ResourceTypeNoComment.HUB_FILE ? t?.hub_file_id === e.id : i === ResourceTypeNoComment.PLUGIN ? t?.plugin_id === e.id : i === ResourceTypeNoComment.WIDGET ? t?.widget_id === e.id : void 0) : t?.resource ? t?.resource : void 0;
 }
 _$$z.object({
@@ -640,7 +640,7 @@ _$$z.object({
   meta: ex,
   url_slug: _$$z.string(),
   sections: _$$z.array(_$$z.union([eg, ep])),
-  profile: bo,
+  profile: PublisherBadgeSchema,
   publishing_status: _$$z.string(),
   latest_published_at: _$$z.string().nullable(),
   created_at: _$$z.string().nullable(),
@@ -809,42 +809,42 @@ let eR = new class {
     }) => await t.post("/api/admin/collection_pages", APIParameterUtils.toAPIParameters(e.collectionPage || {})));
   }
 }();
-let eP = M4.Query({
+let eP = liveStoreInstance.Query({
   fetch: async ({
     urlSlug: e,
     isTemplateUrl: t
   }) => (await eA.getCollectionPageByUrlSlug(e, t)).data.meta
 });
-M4.Query({
+liveStoreInstance.Query({
   fetch: async ({
     urlSlug: e
   }) => (await eR.getCollectionPageByUrlSlug(e)).data.meta
 });
-M4.Mutation(async ({
+liveStoreInstance.Mutation(async ({
   urlSlug: e,
   collectionPage: t
 }) => (await eR.updateCollectionPageByUrlSlug({
   urlSlug: e,
   collectionPage: t
 })).data.meta);
-M4.Mutation(async ({
+liveStoreInstance.Mutation(async ({
   urlSlug: e
 }) => (await eR.deleteCollectionPageByUrlSlug({
   urlSlug: e
 })).data.meta);
-M4.Mutation(async e => (await eR.createCollectionPage({
+liveStoreInstance.Mutation(async e => (await eR.createCollectionPage({
   collectionPage: e
 })).data.meta);
-M4.PaginatedQuery({
+liveStoreInstance.PaginatedQuery({
   fetch: eT(() => "/api/admin/collection_pages", 8)
 });
-let eB = M4.PaginatedQuery({
+let eB = liveStoreInstance.PaginatedQuery({
   fetch: eT(() => "/api/collection_pages", 8)
 });
 function eO({
   collection: e
 }) {
-  let t = _$$N(`(max-width: ${_C6})`);
+  let t = usePrefersMediaQuery(`(max-width: ${_C6})`);
   let i = [{
     text: getI18nString("community.breadcrumbs.collections"),
     linkProps: {
@@ -916,7 +916,7 @@ let eV = Object.keys(eX)[0];
 function eK() {
   let {
     urlSlug
-  } = _$$g();
+  } = useParams();
   return jsx(Fragment, {
     children: jsx(e1, {
       urlSlug
@@ -977,7 +977,7 @@ function e1(e) {
   } = e;
   let [n, r] = useState(null);
   let o = () => {
-    _$$A3.getCommunityShelves({
+    communityShelfService.getCommunityShelves({
       urlSlug
     }).then(({
       data: e
@@ -1059,7 +1059,7 @@ function e5(e) {
     className: ev,
     onClick: () => {
       n(!0);
-      lW(window.location.href);
+      copyToClipboard(window.location.href);
       setTimeout(() => n(!1), 1e3);
     },
     children: isMobileScreen ? eY : renderI18nText("community.view_bar.copy_link")
@@ -1170,8 +1170,8 @@ function e2(e) {
 function e3({
   resource: e
 }) {
-  let t = qD(e);
-  let i = Qo(e);
+  let t = getCurrentVersion(e);
+  let i = isViewerModeResource(e);
   let n = e.thumbnail_url;
   return jsx("div", {
     className: ew,
@@ -1253,7 +1253,7 @@ function te({
   collection: e,
   preview: t = !1
 }) {
-  let i = _$$N(`(max-width: ${_C6})`);
+  let i = usePrefersMediaQuery(`(max-width: ${_C6})`);
   return jsxs("div", {
     className: "collection_banner--collectionBanner--vyr9z",
     children: [jsxs("div", {
@@ -1376,14 +1376,14 @@ function tx({
   meta: i,
   showCTA: n = !0
 }) {
-  let s = _$$N(`(max-width: ${YW}px)`);
+  let s = usePrefersMediaQuery(`(max-width: ${YW}px)`);
   let r = _$$C(t);
   let o = e_(t, i);
   let l = n ? jsx(_$$q, {
     resource: t,
     resourceContent: t
   }) : null;
-  let c = _t({
+  let c = buildCommunityPathById({
     resource: t
   });
   let d = jsx(TrackedLink, {
@@ -1396,7 +1396,7 @@ function tx({
     target: "_blank",
     children: renderI18nText("community.collections.learn_more")
   });
-  let u = qD(t);
+  let u = getCurrentVersion(t);
   let m = jsx(_$$A7, {
     resource: t,
     resourceContent: t
@@ -1506,7 +1506,7 @@ function tL({
 function tN() {
   let {
     urlSlug
-  } = _$$g();
+  } = useParams();
   let [{
     data: t,
     status: i
@@ -1522,7 +1522,7 @@ function tN() {
   }));
   return (useLayoutEffect(() => {
     let t = ey[urlSlug];
-    _$$N2(t, LJ) && customHistory.replace(new $E({
+    isValueInObject(t, LJ) && customHistory.replace(new BrowseCategoryRoute({
       categorySlug: t
     }).href);
     let i = ef[urlSlug];
@@ -1596,8 +1596,8 @@ function tR() {
   return null;
 }
 var tB = (e => (e.COLLECTIONS = "collections", e.TEMPLATES = "templates", e))(tB || {});
-let tz = class extends _$$nS {};
-Ac(tz);
+let tz = class extends RouteState {};
+captureRouteEvent(tz);
 tz.displayName = "CollectionRoute";
 tz.path = "/community/:collectionType(collections|templates)/:urlSlug";
 tz.deserializeParams = e => ({
@@ -1605,19 +1605,19 @@ tz.deserializeParams = e => ({
   collectionType: e.collectionType
 });
 tz.serializeParams = e => e;
-let tF = Wk(tz);
-let tM = class extends _$$nS {};
-Ac(tM);
+let tF = withCommunityRoute(tz);
+let tM = class extends RouteState {};
+captureRouteEvent(tM);
 tM.displayName = "CollectionShelvesRoute";
 tM.path = "/community/collections";
-let t$ = Wk(tM);
+let t$ = withCommunityRoute(tM);
 var tH = (e => (e.PLUGINS = "plugins", e.MAKE = "make", e))(tH || {});
 let tJ = {
-  plugins: _$$vt.PLUGIN,
-  make: _$$vt.FIGMAKE_TEMPLATE
+  plugins: ResourceTypeEnum.PLUGIN,
+  make: ResourceTypeEnum.FIGMAKE_TEMPLATE
 };
-let tG = class extends _$$nS {};
-Ac(tG);
+let tG = class extends RouteState {};
+captureRouteEvent(tG);
 tG.displayName = "ResourceLandingPageRoute";
 tG.path = "/community/:landingPageType(plugins|make)";
 tG.deserializeParams = e => ({
@@ -1625,7 +1625,7 @@ tG.deserializeParams = e => ({
   landingPageType: e.landingPageType
 });
 tG.serializeParams = e => e;
-let tQ = Wk(tG);
+let tQ = withCommunityRoute(tG);
 let t5 = "mobile_flyout_item--mobileFlyoutItem--7KYhr text--fontPos20--Bcz97 text--_fontBase--QdLsd";
 function t2({
   navItem: e,
@@ -1780,31 +1780,31 @@ function t6({
       text: getI18nString("community.homepage.figma_section.header"),
       children: [{
         text: getI18nString("categories.ui_kits"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.uiKits
         }).href
       }, {
         text: getI18nString("categories.wireframes"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.wireframes
         }).href
       }, {
         text: getI18nString("categories.navbar.social_media.title"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.socialMediaTemplates
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
         text: getI18nString("categories.navbar.print.title"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.printableTemplates
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
         text: getI18nString("categories.all_design_libraries"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.libraries
         }).href
       }]
@@ -1812,29 +1812,29 @@ function t6({
       text: getI18nString("categories.design_templates"),
       children: [{
         text: getI18nString("categories.portfolio_templates"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.portfolios
         }).href
       }, {
         text: getI18nString("categories.mobile_apps"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.mobileApps
         }).href
       }, {
         text: getI18nString("categories.resume_templates"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.resumes
         }).href
       }, {
         text: getI18nString("categories.navbar.web_ad"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.webAds
         }, {
           editor_type: _$$k2.Editors.COOPER
         }).href
       }, {
         text: getI18nString("categories.all_design_templates"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.designTemplates
         }).href
       }]
@@ -1842,27 +1842,27 @@ function t6({
       text: getI18nString("categories.assets"),
       children: [{
         text: getI18nString("categories.icons"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.icons
         }).href
       }, {
         text: getI18nString("categories.illustrations"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.illustrations
         }).href
       }, {
         text: getI18nString("categories.shapes_colors"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.shapesColors
         }).href
       }, {
         text: getI18nString("categories.device_mockups"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.deviceMockups
         }).href
       }, {
         text: getI18nString("categories.all_assets"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.visualAssets
         }).href
       }]
@@ -1870,7 +1870,7 @@ function t6({
       text: getI18nString("categories.websites"),
       children: [{
         text: getI18nString("categories.navbar.landing_page.title"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.landingPageTemplates
         }, {
@@ -1878,7 +1878,7 @@ function t6({
         }).href
       }, {
         text: getI18nString("categories.navbar.portfolio.title"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.portfolioWebsiteTemplates
         }, {
@@ -1886,7 +1886,7 @@ function t6({
         }).href
       }, {
         text: getI18nString("categories.navbar.business.title"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.businessWebsites
         }, {
@@ -1894,13 +1894,13 @@ function t6({
         }).href
       }, {
         text: getI18nString("categories.navbar.blog"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.websiteTemplates,
           tagSlug: HP.blogWebsites
         }).href
       }, {
         text: getI18nString("categories.all_websites"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.websiteTemplates
         }, {
           editor_type: _$$k2.Editors.SITES
@@ -1910,37 +1910,37 @@ function t6({
       text: getI18nString("categories.plugins"),
       children: [{
         text: getI18nString("categories.editing_effects"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.editingEffects
         }).href
       }, {
         text: getI18nString("categories.file_organization"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.fileOrganization
         }).href
       }, {
         text: getI18nString("categories.navbar.development"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.development
         }).href
       }, {
         text: getI18nString("categories.widgets"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.whiteboarding
         }).href + "?resource_type=widgets"
       }, {
         text: getI18nString("categories.import_export"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.importExport
         }).href
       }, {
         text: getI18nString("categories.prototyping_animation"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.prototypingAnimation
         }).href
       }, {
         text: getI18nString("categories.all_plugins"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.designTools
         }).href
       }]
@@ -1948,32 +1948,32 @@ function t6({
       text: getI18nString("categories.whiteboarding"),
       children: [{
         text: getI18nString("categories.brainstorming"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.brainstorming
         }).href
       }, {
         text: getI18nString("categories.diagramming"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.diagramming
         }).href
       }, {
         text: getI18nString("categories.fun_games"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.funGames
         }).href
       }, {
         text: getI18nString("categories.team_meetings"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.teamMeetings
         }).href
       }, {
         text: getI18nString("categories.strategic_planning"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.strategicPlanning
         }).href
       }, {
         text: getI18nString("categories.all_whiteboarding"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.whiteboarding
         }).href + "?resource_type=widgets"
       }]
@@ -1981,19 +1981,19 @@ function t6({
       text: getI18nString("categories.presentations"),
       children: [{
         text: getI18nString("categories.presentations.pitch_deck"),
-        path: new Xu({
+        path: new CommunityRoute({
           resourceId: "1383475610293894214",
-          apiResourceType: Uo.FILE
+          apiResourceType: ResourceType.FILE
         }).href
       }, {
         text: getI18nString("categories.presentations.product_roadmap"),
-        path: new Xu({
+        path: new CommunityRoute({
           resourceId: "1382445842871959915",
-          apiResourceType: Uo.FILE
+          apiResourceType: ResourceType.FILE
         }).href
       }, {
         text: getI18nString("categories.all_presentations"),
-        path: new $E({
+        path: new BrowseCategoryRoute({
           categorySlug: LJ.presentations
         }).href
       }]
@@ -2116,11 +2116,11 @@ function i_({
       isBold: i
     }) => {
       let n = t;
-      e instanceof IE && (n ||= xF(e.params.categorySlug));
+      e instanceof CategoryRoute && (n ||= xF(e.params.categorySlug));
       return jsx(TrackedLink, {
         trackingEventName: "community_global_nav_category_clicked",
         to: e.href,
-        trackingProperties: e instanceof IE ? {
+        trackingProperties: e instanceof CategoryRoute ? {
           slug: e.params.categorySlug
         } : {},
         children: jsx("div", {
@@ -2154,49 +2154,49 @@ function ij() {
       editor_type: _$$k2.Editors.COOPER
     };
     return {
-      uikitRoute: new $E({
+      uikitRoute: new BrowseCategoryRoute({
         categorySlug: LJ.uiKits
       }),
-      wireframesRoute: new $E({
+      wireframesRoute: new BrowseCategoryRoute({
         categorySlug: LJ.wireframes
       }),
-      socialMediaRoute: new $E({
+      socialMediaRoute: new BrowseCategoryRoute({
         categorySlug: LJ.socialMediaTemplates
       }, e),
-      printableTemplatesRoute: new $E({
+      printableTemplatesRoute: new BrowseCategoryRoute({
         categorySlug: LJ.printableTemplates
       }, e),
-      designTemplatesRoute: new $E({
+      designTemplatesRoute: new BrowseCategoryRoute({
         categorySlug: LJ.designTemplates
       }),
-      desktopAppRoute: new $E({
+      desktopAppRoute: new BrowseCategoryRoute({
         categorySlug: LJ.desktopAppsWebsites
       }),
-      mobileAppRoute: new $E({
+      mobileAppRoute: new BrowseCategoryRoute({
         categorySlug: LJ.mobileApps
       }),
-      portfolioRoute: new $E({
+      portfolioRoute: new BrowseCategoryRoute({
         categorySlug: LJ.portfolios
       }),
-      resumeRoute: new $E({
+      resumeRoute: new BrowseCategoryRoute({
         categorySlug: LJ.resumes
       }),
-      webAdsRoute: new $E({
+      webAdsRoute: new BrowseCategoryRoute({
         categorySlug: LJ.webAds
       }),
-      visualAssetsRoute: new $E({
+      visualAssetsRoute: new BrowseCategoryRoute({
         categorySlug: LJ.visualAssets
       }),
-      illustrationsRoute: new $E({
+      illustrationsRoute: new BrowseCategoryRoute({
         categorySlug: LJ.illustrations
       }),
-      iconsRoute: new $E({
+      iconsRoute: new BrowseCategoryRoute({
         categorySlug: LJ.icons
       }),
-      shapesColorsRoute: new $E({
+      shapesColorsRoute: new BrowseCategoryRoute({
         categorySlug: LJ.shapesColors
       }),
-      deviceMockupsRoute: new $E({
+      deviceMockupsRoute: new BrowseCategoryRoute({
         categorySlug: LJ.deviceMockups
       })
     };
@@ -2318,11 +2318,11 @@ function ij() {
     })]
   });
 }
-let iw = class extends _$$nS {};
-Ac(iw);
+let iw = class extends RouteState {};
+captureRouteEvent(iw);
 iw.displayName = "PluginsRoute";
 iw.path = "/community/plugins";
-let iE = Wk(iw);
+let iE = withCommunityRoute(iw);
 function iN() {
   let e = DP();
   let t = isPluginsPageEnabled();
@@ -2337,47 +2337,47 @@ function iN() {
     prototypingAnimationRoute,
     designToolsRoute
   } = useMemo(() => ({
-    editingEffectsRoute: new $E({
+    editingEffectsRoute: new BrowseCategoryRoute({
       categorySlug: LJ.editingEffects
     }, {
       resource_type: "plugins"
     }),
-    fileOrganizationRoute: new $E({
+    fileOrganizationRoute: new BrowseCategoryRoute({
       categorySlug: LJ.fileOrganization
     }, {
       resource_type: "plugins"
     }),
-    developmentRoute: new $E({
+    developmentRoute: new BrowseCategoryRoute({
       categorySlug: LJ.development
     }, {
       resource_type: "plugins"
     }),
-    widgetsRoute: new $E({
+    widgetsRoute: new BrowseCategoryRoute({
       categorySlug: LJ.whiteboarding
     }, {
       resource_type: "widgets"
     }),
-    pluginsRoute: t ? new iE() : new $E({
+    pluginsRoute: t ? new iE() : new BrowseCategoryRoute({
       categorySlug: LJ.designTools
     }, {
       resource_type: "plugins"
     }),
-    importExportRoute: new $E({
+    importExportRoute: new BrowseCategoryRoute({
       categorySlug: LJ.importExport
     }, {
       resource_type: "plugins"
     }),
-    accessibilityRoute: new $E({
+    accessibilityRoute: new BrowseCategoryRoute({
       categorySlug: LJ.accessibility
     }, {
       resource_type: "plugins"
     }),
-    prototypingAnimationRoute: new $E({
+    prototypingAnimationRoute: new BrowseCategoryRoute({
       categorySlug: LJ.prototypingAnimation
     }, {
       resource_type: "plugins"
     }),
-    designToolsRoute: new $E({
+    designToolsRoute: new BrowseCategoryRoute({
       categorySlug: LJ.designTools
     }, {
       resource_type: "plugins"
@@ -2493,99 +2493,99 @@ function iN() {
   });
 }
 function iS() {
-  let e = new $E({
+  let e = new BrowseCategoryRoute({
     categorySlug: LJ.presentations
   }, {
     editor_type: _$$k2.Editors.SLIDES
   });
   let [t, i] = "staging" === getInitialOptions().cluster_name ? [{
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1380690018201193525",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.pitch_deck"),
     subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1380614040001429551",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.product_roadmap"),
     subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1380608789812079661",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.research_readout")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1380608691855352876",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.all_hands_meeting")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1380280625154305056",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.design_review")
   }] : "prod" === getInitialOptions().cluster_name ? [{
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1382483546106051977",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.pitch_deck"),
     subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1382445842871959915",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.product_roadmap"),
     subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1382481559228932486",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.research_readout")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1382859851486347871",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.all_hands_meeting")
   }, {
-    route: new Xu({
+    route: new CommunityRoute({
       resourceId: "1383475610293894214",
-      apiResourceType: Uo.FILE
+      apiResourceType: ResourceType.FILE
     }),
     text: getI18nString("categories.presentations.design_review")
   }] : "local" === getInitialOptions().cluster_name ? [{
-    route: new $E({
+    route: new BrowseCategoryRoute({
       categorySlug: LJ.uiKits
     }),
     text: getI18nString("categories.presentations.pitch_deck"),
     subText: getI18nString("categories.presentations.pitch_deck.description")
   }, {
-    route: new $E({
+    route: new BrowseCategoryRoute({
       categorySlug: LJ.uiKits
     }),
     text: getI18nString("categories.presentations.product_roadmap"),
     subText: getI18nString("categories.presentations.product_roadmap.description")
   }, {
-    route: new $E({
+    route: new BrowseCategoryRoute({
       categorySlug: LJ.uiKits
     }),
     text: getI18nString("categories.ui_kits")
   }, {
-    route: new $E({
+    route: new BrowseCategoryRoute({
       categorySlug: LJ.uiKits
     }),
     text: getI18nString("categories.ui_kits")
   }, {
-    route: new $E({
+    route: new BrowseCategoryRoute({
       categorySlug: LJ.uiKits
     }),
     text: getI18nString("categories.ui_kits")
@@ -2649,34 +2649,34 @@ function iC() {
       editor_type: _$$k2.Editors.SITES
     };
     return {
-      landingPageRoute: new $E({
+      landingPageRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.landingPageTemplates
       }, e),
-      portfolioRoute: new $E({
+      portfolioRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.portfolioWebsiteTemplates
       }, e),
-      businessRoute: new $E({
+      businessRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.businessWebsites
       }, e),
-      moreWebsitesRoute: new $E({
+      moreWebsitesRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates
       }, e),
-      blogRoute: new $E({
+      blogRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.blogWebsites
       }, e),
-      weddingRoute: new $E({
+      weddingRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.weddingWebsites
       }, e),
-      photographyRoute: new $E({
+      photographyRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.photographyWebsites
       }, e),
-      interiorDesignWebsiteRoute: new $E({
+      interiorDesignWebsiteRoute: new BrowseCategoryRoute({
         categorySlug: LJ.websiteTemplates,
         tagSlug: HP.interiorDesignWebsites
       }, e)
@@ -2750,22 +2750,22 @@ function ik() {
     whiteboardingRoute,
     strategicPlanningRoute
   } = useMemo(() => ({
-    brainstormingRoute: new $E({
+    brainstormingRoute: new BrowseCategoryRoute({
       categorySlug: LJ.brainstorming
     }),
-    diagrammingRoute: new $E({
+    diagrammingRoute: new BrowseCategoryRoute({
       categorySlug: LJ.diagramming
     }),
-    funGamesRoute: new $E({
+    funGamesRoute: new BrowseCategoryRoute({
       categorySlug: LJ.funGames
     }),
-    teamMeetingsRoute: new $E({
+    teamMeetingsRoute: new BrowseCategoryRoute({
       categorySlug: LJ.teamMeetings
     }),
-    whiteboardingRoute: new $E({
+    whiteboardingRoute: new BrowseCategoryRoute({
       categorySlug: LJ.whiteboarding
     }),
-    strategicPlanningRoute: new $E({
+    strategicPlanningRoute: new BrowseCategoryRoute({
       categorySlug: LJ.strategicPlanning
     })
   }), []);
@@ -3003,7 +3003,7 @@ function iB({
   });
 }
 function iM() {
-  let e = _$$ed(_$$n);
+  let e = useRouteStateInstance(_$$n);
   let t = !!e;
   return {
     onSubmit: i => {
@@ -3075,7 +3075,7 @@ function iQ() {
   });
 }
 function iq() {
-  let e = zq();
+  let e = getCurrentLocale();
   return jsxs("div", {
     className: _$$s.flex.flexShrink0.alignCenter.alignCenter.gap16.$,
     children: [jsx(TrackedButton, {
@@ -3155,7 +3155,7 @@ function iX({
     }),
     children: jsxs(TrackedLink, {
       trackingEventName: "community_nav_click_communitiy_heading",
-      to: _$$iY(),
+      to: getCurrentCommunityBasePath(),
       className: _$$s.font14.fontSemiBold.lh24.flex.flexNowrap.$,
       children: [jsx("div", {
         className: "homepage_link--logoLinkWrapper---5vec",
@@ -3169,11 +3169,11 @@ let iK = Xg;
 function iZ({}) {
   let e = _$$M();
   let t = !!desktopAPIInstance || ce();
-  let i = _$$N(`(max-width: ${_C6})`);
+  let i = usePrefersMediaQuery(`(max-width: ${_C6})`);
   let n = parsePxNumber(qvA) + (t ? parsePxNumber(ngI) : 0);
-  let s = _$$N(`(max-width: ${n}px)`);
-  let o = _$$N(`(max-width: ${OX3})`);
-  let l = OE(wl(location.pathname));
+  let s = usePrefersMediaQuery(`(max-width: ${n}px)`);
+  let o = usePrefersMediaQuery(`(max-width: ${OX3})`);
+  let l = OE(setupBrowseRoute(location.pathname));
   let c = !1;
   let d = null;
   l = useSelector(e => e?.selectedView?.view === "search");
@@ -3254,14 +3254,14 @@ function i7({
 }) {
   let n = _$$G();
   let r = useRef(null);
-  let o = e === LE.SITES;
-  let c = e === LE.COOPER;
+  let o = e === FileTypeEnum.SITES;
+  let c = e === FileTypeEnum.COOPER;
   let d = "light" === n.color;
   let u = c ? _$$u2 : _$$$2;
-  let m = new $E({
-    categorySlug: e === LE.COOPER ? LJ.socialMediaTemplates : LJ.websiteTemplates
+  let m = new BrowseCategoryRoute({
+    categorySlug: e === FileTypeEnum.COOPER ? LJ.socialMediaTemplates : LJ.websiteTemplates
   }, {
-    editor_type: e === LE.COOPER ? _$$k2.Editors.COOPER : _$$k2.Editors.SITES
+    editor_type: e === FileTypeEnum.COOPER ? _$$k2.Editors.COOPER : _$$k2.Editors.SITES
   });
   return jsxs(TrackedDiv, {
     className: "buzz_sites_promo_banner--card--fBm7j",
@@ -3308,7 +3308,7 @@ function i7({
   });
 }
 function i6() {
-  let e = _$$N(`(min-width: ${parsePxNumber(g8m) + 1}px)`);
+  let e = usePrefersMediaQuery(`(min-width: ${parsePxNumber(g8m) + 1}px)`);
   return jsxs("div", {
     className: "buzz_sites_promo_banner--bannerContainer--3Qi3B",
     children: [jsx("div", {
@@ -3320,11 +3320,11 @@ function i6() {
         "buzz_sites_promo_banner--cardColumn--MgGFh": !e
       }),
       children: [jsx(i7, {
-        product: LE.SITES,
+        product: FileTypeEnum.SITES,
         title: getI18nString("community.homepage.buzz_sites_promo_banner.sites_header"),
         subtitle: getI18nString("community.homepage.buzz_sites_promo_banner.sites_subheader")
       }), jsx(i7, {
-        product: LE.COOPER,
+        product: FileTypeEnum.COOPER,
         title: getI18nString("community.homepage.buzz_sites_promo_banner.buzz_header"),
         subtitle: getI18nString("community.homepage.buzz_sites_promo_banner.buzz_subheader")
       })]
@@ -3334,8 +3334,8 @@ function i6() {
 function no({
   onIntersectionChange: e
 }) {
-  let t = _$$N(`(max-width: ${ikM})`);
-  let i = _$$N(`(max-width: ${g8m})`);
+  let t = usePrefersMediaQuery(`(max-width: ${ikM})`);
+  let i = usePrefersMediaQuery(`(max-width: ${g8m})`);
   let {
     filterState,
     handleFilterUpdate,
@@ -3355,7 +3355,7 @@ function no({
   let h = "loading" === d;
   let x = useRef(null);
   let _ = useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
-  let y = filterState.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS && (c ?? []).every(e => e.resource_type === _$$vt.PLUGIN);
+  let y = filterState.resourceType === ResourceTypes.BrowseResourceTypes.PLUGINS && (c ?? []).every(e => e.resource_type === ResourceTypeEnum.PLUGIN);
   let f = [];
   y && (f = (c ?? []).map(e => e.content?.plugin).filter(e => void 0 !== e));
   return jsxs("div", {
@@ -3395,8 +3395,8 @@ function no({
 function ng({
   isRedesignedHomepage: e
 }) {
-  let t = _$$N(`(max-width: ${Ero})`);
-  let i = _$$N(`(max-width: ${ikM})`);
+  let t = usePrefersMediaQuery(`(max-width: ${Ero})`);
+  let i = usePrefersMediaQuery(`(max-width: ${ikM})`);
   let {
     onSubmit,
     inSearchPath
@@ -4149,7 +4149,7 @@ let nM = e => {
   }, 3e3);
 };
 function n$() {
-  let e = _$$N(`(max-width: ${parsePxNumber(ikM) - 1}px)`);
+  let e = usePrefersMediaQuery(`(max-width: ${parsePxNumber(ikM) - 1}px)`);
   let [t, i] = useState(2 * Math.floor(3 * Math.random()));
   let [r, o] = useState(null);
   useEffect(() => (nF(i), () => {
@@ -4216,7 +4216,7 @@ let nO = forwardRef(({
   onClick: n,
   categoryHighlight: s
 }, r) => {
-  let o = _$$N(`(max-width: ${ikM})`);
+  let o = usePrefersMediaQuery(`(max-width: ${ikM})`);
   return jsx("div", {
     ref: r,
     className: "homepage_categories_highlight--homepageCategoriesHighlightItemWrapper--iQwAJ",
@@ -4263,7 +4263,7 @@ function nU({
   return jsx("div", {
     className: "homepage_categories_highlight--homepageCategoriesHighlight--XCng9",
     children: e.map(e => {
-      let t = new $E({
+      let t = new BrowseCategoryRoute({
         categorySlug: e.category
       });
       return jsx(TrackedLink, {
@@ -4325,11 +4325,11 @@ function nJ({
   });
 }
 function nX() {
-  let e = _$$N("(max-width: 1140px)");
-  let t = _$$N("(min-width: 871px)");
+  let e = usePrefersMediaQuery("(max-width: 1140px)");
+  let t = usePrefersMediaQuery("(min-width: 871px)");
   let i = e && t;
-  let n = _$$N("(max-width: 610px)");
-  let s = _$$N("(max-width: 1050px)");
+  let n = usePrefersMediaQuery("(max-width: 610px)");
+  let s = usePrefersMediaQuery("(max-width: 1050px)");
   return jsx("div", {
     className: "x1n2onr6 x78zum5 xl56j7k xh8yej3 xpxwu9m",
     children: jsx("div", {
@@ -4518,7 +4518,7 @@ function n0() {
     data: e,
     status: t
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.SLIDE_TEMPLATE],
+    resourceType: [ResourceTypeEnum.SLIDE_TEMPLATE],
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }));
@@ -4526,8 +4526,8 @@ function n0() {
     data: i,
     status: n
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.DESIGN_TEMPLATE],
-    editorType: _$$q2.DESIGN,
+    resourceType: [ResourceTypeEnum.DESIGN_TEMPLATE],
+    editorType: DesignToolType.DESIGN,
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }));
@@ -4535,7 +4535,7 @@ function n0() {
     data: s,
     status: r
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.PLUGIN],
+    resourceType: [ResourceTypeEnum.PLUGIN],
     category: LJ.designTools,
     caller: _$$z2.HOMEPAGE,
     pageSize: 10,
@@ -4545,7 +4545,7 @@ function n0() {
     data: o,
     status: l
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.FIGJAM_TEMPLATE],
+    resourceType: [ResourceTypeEnum.FIGJAM_TEMPLATE],
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }));
@@ -4553,7 +4553,7 @@ function n0() {
     data: c,
     status: d
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.WIDGET],
+    resourceType: [ResourceTypeEnum.WIDGET],
     category: LJ.whiteboarding,
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
@@ -4562,8 +4562,8 @@ function n0() {
     data: u,
     status: m
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.SITE_TEMPLATE],
-    editorType: _$$q2.SITES,
+    resourceType: [ResourceTypeEnum.SITE_TEMPLATE],
+    editorType: DesignToolType.SITES,
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }));
@@ -4571,8 +4571,8 @@ function n0() {
     data: g,
     status: p
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.COOPER_TEMPLATE_FILE],
-    editorType: _$$q2.COOPER,
+    resourceType: [ResourceTypeEnum.COOPER_TEMPLATE_FILE],
+    editorType: DesignToolType.COOPER,
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }));
@@ -4580,8 +4580,8 @@ function n0() {
     data: h,
     status: x
   }] = setupResourceAtomHandler(_$$a3.ResourcesPaginatedQuery({
-    resourceType: [_$$vt.FIGMAKE_TEMPLATE],
-    editorType: _$$q2.FIGMAKE,
+    resourceType: [ResourceTypeEnum.FIGMAKE_TEMPLATE],
+    editorType: DesignToolType.FIGMAKE,
     caller: _$$z2.HOMEPAGE,
     pageSize: 6
   }), {
@@ -4641,8 +4641,8 @@ function n1({
     loading: !1
   }
 }) {
-  let d = _$$N(`(max-width: ${g8m})`);
-  let u = _$$N(`(max-width: ${ikM})`);
+  let d = usePrefersMediaQuery(`(max-width: ${g8m})`);
+  let u = usePrefersMediaQuery(`(max-width: ${ikM})`);
   let m = d ? {
     rows: 3,
     cols: 2
@@ -4665,33 +4665,33 @@ function n1({
     widgetsRoute,
     makeRoute
   } = useMemo(() => ({
-    sitesTemplatesRoute: new $E({
+    sitesTemplatesRoute: new BrowseCategoryRoute({
       categorySlug: LJ.websiteTemplates
     }, {
       editor_type: _$$k2.Editors.SITES
     }),
-    cooperTemplatesRoute: new $E({
+    cooperTemplatesRoute: new BrowseCategoryRoute({
       categorySlug: LJ.socialMediaTemplates
     }, {
       editor_type: _$$k2.Editors.COOPER
     }),
-    slideTemplatesRoute: new $E({
+    slideTemplatesRoute: new BrowseCategoryRoute({
       categorySlug: LJ.presentations
     }, {
       editor_type: _$$k2.Editors.SLIDES
     }),
-    designResourcesRoute: new $E({
+    designResourcesRoute: new BrowseCategoryRoute({
       categorySlug: LJ.designTemplates
     }),
-    pluginsRoute: _ ? new iw() : new $E({
+    pluginsRoute: _ ? new iw() : new BrowseCategoryRoute({
       categorySlug: LJ.designTools
     }, {
       resource_type: "plugins"
     }),
-    figjamAssetsRoute: new $E({
+    figjamAssetsRoute: new BrowseCategoryRoute({
       categorySlug: LJ.whiteboarding
     }),
-    widgetsRoute: new $E({
+    widgetsRoute: new BrowseCategoryRoute({
       categorySlug: LJ.whiteboarding
     }, {
       resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS
@@ -4830,7 +4830,7 @@ function n9({
   BreadcrumbComponent: i,
   LinkContainerComponent: n
 }) {
-  let s = _$$N(`(max-width: ${_C6})`);
+  let s = usePrefersMediaQuery(`(max-width: ${_C6})`);
   return jsxs("div", {
     className: "feed_banner--categoryBannerRedesign--V-cSc",
     children: [jsxs("div", {
@@ -4879,17 +4879,17 @@ function n6({
   }) : null;
 }
 function aa() {
-  let e = RA($E);
+  let e = useSafeRouteParams(BrowseCategoryRoute);
   let {
     categorySlug,
     tagSlug
   } = e;
-  let n = NY($E);
-  let r = zq();
+  let n = useSafeRouteQuery(BrowseCategoryRoute);
+  let r = getCurrentLocale();
   let [{
     data: o,
     status: c
-  }] = _$$IT(Zp({
+  }] = _$$IT(categoryBySlugQuery({
     categorySlug,
     tagSlug,
     locale: r
@@ -4906,7 +4906,7 @@ function aa() {
   let x = useRef(null);
   let _ = !d && m && "loaded" === g.status && 0 === g.totalResources.length && getFeatureFlags().cmty_redirect_empty_buzz_sites_editor_filter;
   return (useEffect(() => {
-    _ && (u(!0), customHistory.replace(new $E({
+    _ && (u(!0), customHistory.replace(new BrowseCategoryRoute({
       categorySlug,
       tagSlug
     }, {
@@ -4930,7 +4930,7 @@ function aa() {
         onUpdate: e => {
           let n = handleFilterUpdate(e);
           o.editor_types[0] && (n.editorType = o.editor_types[0]);
-          customHistory.replace(new $E({
+          customHistory.replace(new BrowseCategoryRoute({
             categorySlug,
             tagSlug
           }, {
@@ -4956,8 +4956,8 @@ function aa() {
   });
 }
 function as() {
-  let e = _$$a2($E);
-  pj(e);
+  let e = useSafeRouteStateInstance(BrowseCategoryRoute);
+  useCategoryResourceHandler(e);
   let {
     categorySlug,
     tagSlug
@@ -4989,7 +4989,7 @@ function au() {
       loggedIn: !0
     });
   };
-  let n = _$$N(`(max-width: ${ikM})`);
+  let n = usePrefersMediaQuery(`(max-width: ${ikM})`);
   return jsx("div", {
     className: "xh8yej3 x1fy0iyk x78zum5 x6s0dn4 xl56j7k x1n2onr6 x1cpjm7i x1hmns74 x1y3wzot x1wlytlt x1rmj1tg xszcg87 x1swwxko xapqrkf x1747dyw x8o0w0x x12maryy",
     children: jsxs("div", {
@@ -5041,7 +5041,7 @@ let am = {
   }
 };
 function ag() {
-  let e = _$$N(`(max-width: ${_C6})`);
+  let e = usePrefersMediaQuery(`(max-width: ${_C6})`);
   let t = [{
     text: getI18nString("community.view_bar.plugins"),
     linkProps: {
@@ -5065,7 +5065,7 @@ function ag() {
   });
 }
 let ap = () => ({
-  [_$$vt.PLUGIN]: {
+  [ResourceTypeEnum.PLUGIN]: {
     HeaderComponent: ag,
     featureFlag: "cmty_plugins_page",
     featuredResources: {
@@ -5086,7 +5086,7 @@ let ap = () => ({
       text: getI18nString("community.plugins_page.extended_description")
     }
   },
-  [_$$vt.FIGMAKE_TEMPLATE]: {
+  [ResourceTypeEnum.FIGMAKE_TEMPLATE]: {
     HeaderComponent: au,
     featureFlag: "cmty_make_discovery",
     featuredResources: {
@@ -5137,7 +5137,7 @@ function ab(e) {
     filterState,
     handleFilterUpdate
   } = _$$v(gM.RESOURCE_LANDING_PAGE, {
-    sortBy: _$$e6.Browse.ALL_TIME
+    sortBy: SortOptions.Browse.ALL_TIME
   });
   let {
     trackResourceImpression,
@@ -5164,12 +5164,12 @@ function ab(e) {
       fetchNextPage: o
     }] = _$$IT(_$$a3.ResourcesPaginatedQuery({
       resourceType: [t],
-      editorType: _$$S3(e.editorType || _$$k2.Editors.ALL),
+      editorType: mapEditorToType(e.editorType || _$$k2.Editors.ALL),
       price: e.price,
       sortBy: e.sortBy,
       pageSize: 20,
       caller: _$$z2.RESOURCE_LANDING_PAGE,
-      includeContent: t === _$$vt.PLUGIN
+      includeContent: t === ResourceTypeEnum.PLUGIN
     }));
     return {
       trackResourceImpression: _trackResourceImpression,
@@ -5198,7 +5198,7 @@ function ab(e) {
           resourcesLoading: "loading" === status,
           totalResources,
           filterState: {
-            resourceType: HX(e.resourceType),
+            resourceType: mapVtToBrowseResourceType(e.resourceType),
             sortBy: filterState.sortBy,
             editorType: filterState.editorType || _$$k2.Editors.ALL,
             price: filterState.price
@@ -5218,32 +5218,32 @@ function ab(e) {
   });
 }
 let av = {
-  accessibilityRoute: new $E({
+  accessibilityRoute: new BrowseCategoryRoute({
     categorySlug: LJ.accessibility
   }, {
     resource_type: "plugins"
   }),
-  editingEffectsRoute: new $E({
+  editingEffectsRoute: new BrowseCategoryRoute({
     categorySlug: LJ.editingEffects
   }, {
     resource_type: "plugins"
   }),
-  developmentRoute: new $E({
+  developmentRoute: new BrowseCategoryRoute({
     categorySlug: LJ.development
   }, {
     resource_type: "plugins"
   }),
-  fileOrganizationRoute: new $E({
+  fileOrganizationRoute: new BrowseCategoryRoute({
     categorySlug: LJ.fileOrganization
   }, {
     resource_type: "plugins"
   }),
-  importExportRoute: new $E({
+  importExportRoute: new BrowseCategoryRoute({
     categorySlug: LJ.importExport
   }, {
     resource_type: "plugins"
   }),
-  prototypingAnimationRoute: new $E({
+  prototypingAnimationRoute: new BrowseCategoryRoute({
     categorySlug: LJ.prototypingAnimation
   }, {
     resource_type: "plugins"
@@ -5504,7 +5504,7 @@ function aL({
   resourceType: e
 }) {
   let t = function (e) {
-    if (e === _$$vt.PLUGIN) return aj();
+    if (e === ResourceTypeEnum.PLUGIN) return aj();
   }(e);
   return t ? jsxs("div", {
     ..._$$Ay5.props(af.container),
@@ -5524,24 +5524,24 @@ let aT = () => ({
     defaultActive: !0,
     tabTitle: getI18nString("community.landing_page.sort.trending"),
     resourceQueryParamsToActivate: {
-      sortBy: _$$e6.Browse.POPULAR,
-      price: _$$C3.ALL
+      sortBy: SortOptions.Browse.POPULAR,
+      price: PricingOptions.ALL
     }
   },
   mostPopular: {
     defaultActive: !1,
     tabTitle: getI18nString("community.plugins_page.featured_plugins.most_popular"),
     resourceQueryParamsToActivate: {
-      sortBy: _$$e6.Browse.ALL_TIME,
-      price: _$$C3.ALL
+      sortBy: SortOptions.Browse.ALL_TIME,
+      price: PricingOptions.ALL
     }
   },
   free: {
     defaultActive: !1,
     tabTitle: getI18nString("community.plugins_page.featured_plugins.free_plugins"),
     resourceQueryParamsToActivate: {
-      sortBy: _$$e6.Browse.ALL_TIME,
-      price: _$$C3.FREE
+      sortBy: SortOptions.Browse.ALL_TIME,
+      price: PricingOptions.FREE
     }
   }
 });
@@ -5549,7 +5549,7 @@ var aI = (e => (e.IDLE = "idle", e.LOADING = "loading", e.SUCCESS = "success", e
 function aA(e) {
   let t = AG();
   let i = useRef(null);
-  let n = e.resourceType === _$$vt.FIGMAKE_TEMPLATE && getFeatureFlags().cmty_make_page_feed_shelf;
+  let n = e.resourceType === ResourceTypeEnum.FIGMAKE_TEMPLATE && getFeatureFlags().cmty_make_page_feed_shelf;
   let {
     tabPropsMap,
     tabManager,
@@ -5563,30 +5563,30 @@ function aA(e) {
     prevActiveTab
   } = function (e) {
     let t = useMemo(() => ({
-      [_$$vt.PLUGIN]: aT(),
-      [_$$vt.FIGMAKE_TEMPLATE]: {
+      [ResourceTypeEnum.PLUGIN]: aT(),
+      [ResourceTypeEnum.FIGMAKE_TEMPLATE]: {
         mostPopular: {
           defaultActive: !0,
           tabTitle: getI18nString("community.plugins_page.featured_plugins.most_popular"),
           resourceQueryParamsToActivate: {
-            sortBy: _$$e6.Browse.ALL_TIME,
-            price: _$$C3.ALL
+            sortBy: SortOptions.Browse.ALL_TIME,
+            price: PricingOptions.ALL
           }
         },
         trending: {
           defaultActive: !1,
           tabTitle: getI18nString("community.landing_page.sort.trending"),
           resourceQueryParamsToActivate: {
-            sortBy: _$$e6.Browse.POPULAR,
-            price: _$$C3.ALL
+            sortBy: SortOptions.Browse.POPULAR,
+            price: PricingOptions.ALL
           }
         },
         recent: {
           defaultActive: !1,
           tabTitle: getI18nString("community.landing_page.sort.recent"),
           resourceQueryParamsToActivate: {
-            sortBy: _$$e6.Browse.PUBLISHED_AT,
-            price: _$$C3.ALL
+            sortBy: SortOptions.Browse.PUBLISHED_AT,
+            price: PricingOptions.ALL
           }
         }
       }
@@ -5603,7 +5603,7 @@ function aA(e) {
       resourceType: [e],
       caller: _$$z2.RESOURCE_LANDING_PAGE,
       pageSize: n.featuredResources.paginatedFeedPageSize ?? 6,
-      includeContent: e === _$$vt.PLUGIN,
+      includeContent: e === ResourceTypeEnum.PLUGIN,
       ...i[c.activeTab]?.resourceQueryParamsToActivate
     };
     let [{
@@ -5651,7 +5651,7 @@ function aA(e) {
       if (n && "idle" === w && "mostPopular" === tabManager.activeTab) {
         E("loading");
         try {
-          let e = await _$$A3.getCommunityShelves({
+          let e = await communityShelfService.getCommunityShelves({
             shelfType: CommunityPageType.MAKE_PAGE_FEED
           });
           e.data.meta[0] && j(e.data.meta[0]);
@@ -5698,17 +5698,17 @@ function aA(e) {
         resourcesLoading: "loading" === status || "loading" === w,
         totalResources: N,
         filterState: {
-          resourceType: HX(e.resourceType),
-          sortBy: sort ?? _$$e6.Browse.ALL_TIME,
+          resourceType: mapVtToBrowseResourceType(e.resourceType),
+          sortBy: sort ?? SortOptions.Browse.ALL_TIME,
           editorType: _$$k2.Editors.ALL,
-          price: _$$C3.ALL
+          price: PricingOptions.ALL
         },
         hasNextPage: f.featuredResources.feedPaginated && !!hasNextPage,
         trackResourceImpression,
         emptyResourceStateQuery: "",
         pluginRowLoadingCount: 6
       }), f.featuredResources.feedPaginated && hasNextPage && jsx(_$$D3, {
-        useInfiniteScroll: t || e.resourceType === _$$vt.FIGMAKE_TEMPLATE,
+        useInfiniteScroll: t || e.resourceType === ResourceTypeEnum.FIGMAKE_TEMPLATE,
         fetchNextPage,
         isFetchingNextPage,
         hasNextPage,
@@ -5743,11 +5743,11 @@ let aR = {
   }
 };
 function aP() {
-  let e = tJ[RA(tQ).landingPageType];
+  let e = tJ[useSafeRouteParams(tQ).landingPageType];
   let t = ap()[e];
   let i = t.featureFlag;
   let n = t.HeaderComponent;
-  return i && !getFeatureFlags()[i] ? jsx(rd, {
+  return i && !getFeatureFlags()[i] ? jsx(Redirect, {
     to: new _$$_2().to
   }) : jsxs(TrackingProvider, {
     name: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
@@ -5805,7 +5805,7 @@ function a5({
   let i = Jm();
   let [n, r] = useState(0);
   let [o, l] = useState(0);
-  let c = N6(e);
+  let c = buildCarouselMedia(e);
   let d = c.length > 1;
   let u = c[n];
   let [m, g] = useState([0, 2]);
@@ -5824,7 +5824,7 @@ function a5({
   return jsx(TrackingProvider, {
     name: _$$e4.COMMUNITY_MOBILE_RDP_CAROUSEL,
     properties: {
-      resource_type: Vm(t),
+      resource_type: getResourceType(t),
       resource_id: e.id,
       searchSessionId: i
     },
@@ -5860,13 +5860,13 @@ function a5({
             o < -500 ? (y(1), l(1), trackEventAnalytics("community_mobile_rdp", {
               name: "mobile_rdp_carousel_swipe",
               community_resource_id: e.id,
-              resource_type: Vm(t),
+              resource_type: getResourceType(t),
               selectedIndex: n,
               searchSessionId: i
             })) : o > 500 && (y(-1), l(-1), trackEventAnalytics("community_mobile_rdp", {
               name: "mobile_rdp_carousel_swipe",
               community_resource_id: e.id,
-              resource_type: Vm(t),
+              resource_type: getResourceType(t),
               selectedIndex: n,
               searchSessionId: i
             }));
@@ -5897,14 +5897,14 @@ function a5({
                 trackEventAnalytics("community_mobile_rdp", {
                   name: "mobile_rdp_video_ended",
                   community_resource_id: e.id,
-                  resource_type: Vm(t),
+                  resource_type: getResourceType(t),
                   searchSessionId: i
                 });
               }
             }) : jsx(F5, {
               thumbnailUrl: x,
               resourceId: e.id,
-              altText: K2(e) + " preview",
+              altText: getResourceName(e) + " preview",
               thumbnailContext: O7.DETAIL,
               resizedThumbnailUrls: _,
               isMobileCarousel: !0
@@ -5949,19 +5949,19 @@ function a2({
         trackEventAnalytics("community_mobile_rdp", {
           name: "mobile_rdp_video_ended",
           community_resource_id: e.id,
-          resource_type: Vm(t),
+          resource_type: getResourceType(t),
           searchSessionId: n
         });
       }
     })
   });
-  let s = XW(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
+  let s = hasContent(e) ? e.thumbnail_src_set : hasClientMeta(e) && e.resized_thumbnail_urls;
   return jsx("div", {
     className: aK,
     children: jsx(F5, {
       thumbnailUrl: e.thumbnail_url || "",
       resourceId: e.id,
-      altText: K2(e) + " preview",
+      altText: getResourceName(e) + " preview",
       thumbnailContext: O7.DETAIL,
       resizedThumbnailUrls: s || void 0,
       isMobileCarousel: !0
@@ -5973,7 +5973,7 @@ function st() {
   let e = useAtomWithSubscription(se);
   let t = selectCurrentUser();
   let i = useSelector(e => e.authedActiveCommunityProfile);
-  let n = _$$N(`(max-width: ${YW - 1}px)`);
+  let n = usePrefersMediaQuery(`(max-width: ${YW - 1}px)`);
   let {
     show,
     isShowing,
@@ -6001,7 +6001,7 @@ function st() {
     primaryCta: {
       type: "link",
       label: renderI18nText("community.modal.creator_carousel_nux.update_my_resources"),
-      href: i?.profile_handle ? new xn({
+      href: i?.profile_handle ? new ProfileRouteState({
         profileHandle: i.profile_handle
       }).href : "",
       ctaTrackingDescriptor: _$$c.UPDATE_MY_RESOURCES,
@@ -6040,7 +6040,7 @@ function ss({
   rdpImpressionId: i,
   category: n
 }) {
-  let s = zL(e);
+  let s = isFigmakeTemplate(e);
   return jsxs(Fragment, {
     children: [jsx(si, {
       resource: t
@@ -6101,14 +6101,14 @@ function so() {
     apiResourceType: e,
     resourceId: t
   }, i] = useState({
-    apiResourceType: _$$eD2()[0],
-    resourceId: _$$eD2()[1]
+    apiResourceType: getCommunityPathSegments()[0],
+    resourceId: getCommunityPathSegments()[1]
   });
   let n = useDispatch();
-  let o = _$$N(`(max-width: ${YW - 1}px)`);
+  let o = usePrefersMediaQuery(`(max-width: ${YW - 1}px)`);
   useEffect(() => {
     let e = customHistory.listen(() => {
-      let [e, t] = _$$eD2();
+      let [e, t] = getCommunityPathSegments();
       _$$S4.hasOwnProperty(e) && (i(i => i.apiResourceType === e && i.resourceId === t ? i : {
         apiResourceType: e,
         resourceId: t
@@ -6133,8 +6133,8 @@ function so() {
     enabled: c()
   });
   let u = d.data;
-  let m = u && XW(u) ? qY(u) : u;
-  let p = u && ws(u) ? u.category : void 0;
+  let m = u && hasContent(u) ? getMainContent(u) : u;
+  let p = u && hasResourceType(u) ? u.category : void 0;
   useEffect(() => {
     e && t && u && m && (hasClientMeta(m) ? n(Sb({
       hubFiles: [m],
@@ -6142,7 +6142,7 @@ function so() {
     })) : n(Qi({
       publishedPlugins: [m],
       src: "resourcePage"
-    })), document.title = K2(u) + "\xa0| Figma", document.body.removeAttribute("data-hide"));
+    })), document.title = getResourceName(u) + "\xa0| Figma", document.body.removeAttribute("data-hide"));
   }, [e, t, n, u, m]);
   let [h, x] = useAtomValueAndSetter(_$$R);
   useEffect(() => {
@@ -6220,45 +6220,45 @@ function sl() {
     if (!e) return;
     let n = document.documentElement.getAttribute("data-product-locale");
     if (!n || !i[n]) return;
-    let a = po(customHistory.location.pathname + customHistory.location.search + customHistory.location.hash);
+    let a = parseCommunityPath(customHistory.location.pathname + customHistory.location.search + customHistory.location.hash);
     if (!a.locale || a.locale === n) return;
     let s = communityPagePaths[n];
     s && customHistory.replace(`${s}${a.remainingPath}`);
   })();
-  let e = _$$iY();
+  let e = getCurrentCommunityBasePath();
   return jsxs("div", {
     "data-testid": "community-app",
     className: "community_app--communityApp--kXC00",
-    children: [jsx(iZ, {}), jsxs(dO, {
-      children: [jsx(qh, {
+    children: [jsx(iZ, {}), jsxs(Switch, {
+      children: [jsx(Route, {
         path: tF.localizedPaths,
         children: jsx(tN, {})
-      }), jsx(qh, {
+      }), jsx(Route, {
         path: t$.localizedPaths,
         children: jsx(e0, {})
-      }), jsxs(qh, {
-        path: Xu.localizedPaths,
+      }), jsxs(Route, {
+        path: CommunityRoute.localizedPaths,
         children: [jsx(tA, {}), jsx(so, {})]
-      }), jsxs(qh, {
+      }), jsxs(Route, {
         path: _$$n.localizedPaths,
         children: [jsx(tA, {}), jsx(_$$g3, {})]
-      }), jsx(qh, {
+      }), jsx(Route, {
         path: tQ.localizedPaths,
         children: jsx(aP, {})
-      }), jsx(qh, {
-        path: m5,
+      }), jsx(Route, {
+        path: categoryUrls,
         children: jsx(as, {})
-      }), jsxs(qh, {
+      }), jsxs(Route, {
         path: _$$_2.localizedPaths,
         children: [jsx(tR, {}), jsx(n0, {})]
-      }), p_("/community*").map(t => t.startsWith(e) ? jsx(rd, {
+      }), generateCommunityPagePaths("/community*").map(t => t.startsWith(e) ? jsx(Redirect, {
         to: new _$$_2().to,
         from: t
-      }, t) : jsx(qh, {
+      }, t) : jsx(Route, {
         path: t,
         children: jsx(sc, {})
-      }, t)), jsx(qh, {
-        path: xn.path,
+      }, t)), jsx(Route, {
+        path: ProfileRouteState.path,
         children: jsx(_$$P2, {})
       })]
     }), jsx(K, {}), jsx(_$$Ay6, {}), jsx(_$$Ay, {})]

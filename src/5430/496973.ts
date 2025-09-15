@@ -1,15 +1,15 @@
-import { LE } from "../905/71785";
+import { FileTypeEnum } from "../905/71785";
 export function $$i0(e) {
   switch (e) {
-    case LE.FIGJAM:
+    case FileTypeEnum.FIGJAM:
       return "whiteboard";
-    case LE.SLIDES:
+    case FileTypeEnum.SLIDES:
       return "piper";
-    case LE.SITES:
+    case FileTypeEnum.SITES:
       return "seascape";
-    case LE.FIGMAKE:
+    case FileTypeEnum.FIGMAKE:
       return "bake-filebrowser";
-    case LE.COOPER:
+    case FileTypeEnum.COOPER:
       return "cooper";
     default:
       return "design";

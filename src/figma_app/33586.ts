@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
-import { AC, Pg } from "../figma_app/777551";
+import { isResourcePendingPublishing, isResourceDelisted } from "../figma_app/777551";
 import { JZ } from "../figma_app/696043";
 import { r as _$$r } from "../figma_app/896657";
 import { showModalHandler } from "../905/156213";
@@ -11,7 +11,7 @@ import { getUserId } from "../905/372672";
 import { M } from "../figma_app/170366";
 import { getPluginsMenuOpenDirectory } from "../figma_app/300692";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
-import { k2 } from "../figma_app/10554";
+import { PageTypeEnum } from "../figma_app/10554";
 import { ManifestErrorType, manifestContainsWidget, hasLocalFileId } from "../figma_app/155287";
 import { KM } from "../figma_app/224019";
 import { H } from "../figma_app/441663";
@@ -22,8 +22,8 @@ export function $$I1(e) {
   let r = useDispatch();
   let i = getUserId();
   if (!e || i !== e.creator.id) return null;
-  if (AC(e)) t = getI18nString("community.plugins.cancel_review");else if (hasMonetizedResourceMetadata(e)) {
-    if (Pg(e)) return null;
+  if (isResourcePendingPublishing(e)) t = getI18nString("community.plugins.cancel_review");else if (hasMonetizedResourceMetadata(e)) {
+    if (isResourceDelisted(e)) return null;
     t = getI18nString("community.resource.delist");
   } else t = getI18nString("community.resource.unpublish");
   return {
@@ -54,7 +54,7 @@ export function $$S0(e, t) {
       r(_$$r({
         localFileId: e?.localFileId,
         publishedPluginId: t?.id,
-        entryPoint: k2.EDITOR
+        entryPoint: PageTypeEnum.EDITOR
       }));
     }
   } : null;
@@ -95,7 +95,7 @@ export function $$v2(e, t) {
       throwTypeError(e);
   }
 }
-export function $$A5(e, t, r, i = k2.EDITOR) {
+export function $$A5(e, t, r, i = PageTypeEnum.EDITOR) {
   let s = useDispatch();
   let {
     close

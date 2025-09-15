@@ -2,7 +2,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { localStorageRef } from "../905/657224";
 import { my } from "../figma_app/976749";
 import { FPublisherType } from "../figma_app/191312";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType, isDesignOrIllustration } from "../figma_app/53721";
 import { $A, dB, vt } from "../905/862883";
 import { getPluginVersion } from "../figma_app/300692";
@@ -19,11 +19,11 @@ let $$f3 = "recent-face-stamps-figjam";
 let $$E0 = "recent-whiteboard-tools-figjam";
 export function $$y1(e, t) {
   if (e === $A.FigJam) switch (t) {
-    case ResourceType.PLUGIN:
+    case HubTypeEnum.PLUGIN:
       return $$_2;
-    case ResourceType.WIDGET:
+    case HubTypeEnum.WIDGET:
       return $$p12;
-    case ResourceType.HUB_FILE:
+    case HubTypeEnum.HUB_FILE:
       return "recent-templates-figjam";
     case dB.FACE_STAMP:
       return $$f3;
@@ -33,23 +33,23 @@ export function $$y1(e, t) {
       return null;
   }
   if (e === $A.Design) switch (t) {
-    case ResourceType.PLUGIN:
+    case HubTypeEnum.PLUGIN:
       return $$m11;
-    case ResourceType.WIDGET:
+    case HubTypeEnum.WIDGET:
       return $$h7;
     default:
       return null;
   }
-  if (e === $A.Handoff) return t === ResourceType.PLUGIN ? "recent-plugins-handoff" : null;
+  if (e === $A.Handoff) return t === HubTypeEnum.PLUGIN ? "recent-plugins-handoff" : null;
   if (e === $A.Slides) switch (t) {
-    case ResourceType.HUB_FILE:
+    case HubTypeEnum.HUB_FILE:
       return "recent-templates-piper";
-    case ResourceType.PLUGIN:
+    case HubTypeEnum.PLUGIN:
       return $$g8;
     default:
       return null;
   }
-  return e === $A.Cooper && t === ResourceType.PLUGIN ? "recent-plugins-cooper" : null;
+  return e === $A.Cooper && t === HubTypeEnum.PLUGIN ? "recent-plugins-cooper" : null;
 }
 export function $$b9(e, t) {
   if (!localStorageRef) return [];
@@ -94,7 +94,7 @@ export function $$I6(e) {
   }
 }
 export function $$S4(e) {
-  return $$b9(e, ResourceType.HUB_FILE).length;
+  return $$b9(e, HubTypeEnum.HUB_FILE).length;
 }
 export const JG = $$E0;
 export const Jl = $$y1;

@@ -15,7 +15,7 @@ import { LR } from "../figma_app/120210";
 import { Um } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getPluginVersion, isValidForSelectedViewAndWhitelist } from "../figma_app/300692";
-import { ResourceType, ResourceTypeNoComment } from "../figma_app/45218";
+import { HubTypeEnum, ResourceTypeNoComment } from "../figma_app/45218";
 import { ManifestErrorType } from "../figma_app/155287";
 import { bE, aY } from "../figma_app/78725";
 import { VR } from "../figma_app/545541";
@@ -45,7 +45,7 @@ export function $$w2(e) {
           data: {
             error: d.error,
             dispatch: t,
-            resourceType: ResourceType.WIDGET
+            resourceType: HubTypeEnum.WIDGET
           },
           showModalsBeneath: !0
         })) : t(showModalHandler({

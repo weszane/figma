@@ -1,10 +1,10 @@
 import { returnSecond, throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { getI18nString } from "../905/303541";
 import { isResourceHubEnabled } from "../figma_app/275462";
 import { ResourceTypeSubset } from "../905/178090";
-import { vt } from "../figma_app/306946";
+import { ResourceTypeEnum } from "../figma_app/306946";
 import { M } from "../1250/758461";
 import { YW } from "../figma_app/350203";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
@@ -17,7 +17,7 @@ export function $$f0() {
   let t = useTeamPlanUser();
   let n = useTeamPlanFeatures();
   let a = useIsOrgGuestUser(t).unwrapOr(!1);
-  let r = N(`(max-width: ${YW}px)`);
+  let r = usePrefersMediaQuery(`(max-width: ${YW}px)`);
   if ("loading" === n.status) return !1;
   let o = n.data?.type === FOrganizationLevelType.ORG ? n.data?.key.parentId : void 0;
   return !(!isResourceHubEnabled() || r || a || hasExternalRestrictedOrgId(e) && o !== e?.external_restricted_org_id);
@@ -30,16 +30,16 @@ export function $$b3(e, t, n) {
     case FPlanNameType.STUDENT:
     case FPlanNameType.PRO:
       {
-        let e = new Set([vt.SLIDE_TEMPLATE, vt.COOPER_TEMPLATE_FILE, vt.COOPER_TEMPLATE_ASSET]);
-        getFeatureFlags().make_template_discovery && e.add(vt.FIGMAKE_TEMPLATE);
+        let e = new Set([ResourceTypeEnum.SLIDE_TEMPLATE, ResourceTypeEnum.COOPER_TEMPLATE_FILE, ResourceTypeEnum.COOPER_TEMPLATE_ASSET]);
+        getFeatureFlags().make_template_discovery && e.add(ResourceTypeEnum.FIGMAKE_TEMPLATE);
         return e.has(t);
       }
     case FPlanNameType.ORG:
     case FPlanNameType.ENTERPRISE:
       {
-        if (n) return new Set([vt.PLUGIN, vt.WIDGET]).has(t);
-        let e = new Set([vt.PLUGIN, vt.WIDGET, vt.FIGJAM_TEMPLATE, vt.SLIDE_TEMPLATE, vt.COOPER_TEMPLATE_FILE, vt.COOPER_TEMPLATE_ASSET]);
-        getFeatureFlags().make_template_discovery && e.add(vt.FIGMAKE_TEMPLATE);
+        if (n) return new Set([ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET]).has(t);
+        let e = new Set([ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET, ResourceTypeEnum.FIGJAM_TEMPLATE, ResourceTypeEnum.SLIDE_TEMPLATE, ResourceTypeEnum.COOPER_TEMPLATE_FILE, ResourceTypeEnum.COOPER_TEMPLATE_ASSET]);
+        getFeatureFlags().make_template_discovery && e.add(ResourceTypeEnum.FIGMAKE_TEMPLATE);
         return e.has(t);
       }
     case FPlanNameType.STARTER:
@@ -86,19 +86,19 @@ export function $$y5(e) {
 export function $$v4(e) {
   switch (e) {
     case M.PLUGINS:
-      return [vt.PLUGIN];
+      return [ResourceTypeEnum.PLUGIN];
     case M.FIGJAM_TEMPLATES:
-      return [vt.FIGJAM_TEMPLATE];
+      return [ResourceTypeEnum.FIGJAM_TEMPLATE];
     case M.WIDGETS:
-      return [vt.WIDGET];
+      return [ResourceTypeEnum.WIDGET];
     case M.SLIDE_TEMPLATES:
-      return [vt.SLIDE_TEMPLATE];
+      return [ResourceTypeEnum.SLIDE_TEMPLATE];
     case M.COOPER_TEMPLATES:
-      return [vt.COOPER_TEMPLATE_FILE];
+      return [ResourceTypeEnum.COOPER_TEMPLATE_FILE];
     case M.FIGMAKE_TEMPLATES:
-      return [vt.FIGMAKE_TEMPLATE];
+      return [ResourceTypeEnum.FIGMAKE_TEMPLATE];
     case M.RECENTLY_ADDED_TEMPLATES:
-      return [vt.SLIDE_TEMPLATE, vt.COOPER_TEMPLATE_FILE, vt.FIGJAM_TEMPLATE, vt.FIGMAKE_TEMPLATE];
+      return [ResourceTypeEnum.SLIDE_TEMPLATE, ResourceTypeEnum.COOPER_TEMPLATE_FILE, ResourceTypeEnum.FIGJAM_TEMPLATE, ResourceTypeEnum.FIGMAKE_TEMPLATE];
     case M.LIBRARIES:
       return [];
     default:

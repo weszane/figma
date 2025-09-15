@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { tv, um, lQ } from "../905/985374";
 import { FPlanNameType } from "../figma_app/191312";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 let l = new class {
   constructor() {
@@ -27,7 +27,7 @@ let l = new class {
     })));
   }
 }();
-let $$d2 = M4.Query({
+let $$d2 = liveStoreInstance.Query({
   fetch: async e => (await l.getTotalActiveUsers({
     seatType: e.seatType,
     planType: e.planType,
@@ -38,7 +38,7 @@ let $$d2 = M4.Query({
   enabled: e => !!getFeatureFlags().is_extended_social_proof_enabled && !!e.planParentId && u(e.seatType),
   key: "social_proof_total_active_users"
 });
-let $$c1 = M4.Query({
+let $$c1 = liveStoreInstance.Query({
   fetch: async e => (await l.getActiveUserAvatars({
     seatType: e.seatType,
     planType: e.planData.planType,

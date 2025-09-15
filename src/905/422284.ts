@@ -29,7 +29,7 @@ import { QO, VO } from "../figma_app/646357";
 import { xN } from "../905/672897";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
-import { $ as _$$$3 } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { l as _$$l } from "../905/26554";
 import { on } from "../figma_app/292324";
 import { qp } from "../905/977779";
@@ -190,7 +190,7 @@ let $$H = createOptimistThunk((e, t, {
           if (0 === Object.keys(teams).length) {
             let {
               data
-            } = await _$$$3.getTeam({
+            } = await teamAPIClient.getTeam({
               teamId: a
             });
             s = data.meta;

@@ -15,7 +15,7 @@ import { Be } from "../figma_app/920435";
 import { E as _$$E } from "../905/712094";
 import { createEmptyAddress, isAddressEmpty } from "../figma_app/831101";
 import { Eh } from "../figma_app/617654";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { registerModal } from "../905/102752";
 let y = memo(function ({
   canSeeBillingAddressExp: e,
@@ -44,7 +44,7 @@ let y = memo(function ({
       try {
         if (j) {
           if (!I || isAddressEmpty(I) || !A || "" === A.trim()) throw Error(getI18nString("team_view.settings_table.update_invoice_details.error.legal_name_and_shipping_address_required"));
-          await $.updateShippingAddress({
+          await teamAPIClient.updateShippingAddress({
             teamId: j,
             shippingAddress: I,
             updatedLegalName: A

@@ -14,7 +14,7 @@ import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
 import { e as _$$e } from "../figma_app/522702";
 import { v as _$$v } from "../905/213481";
-import { Ay } from "../vendor/159563";
+import { produce } from "immer";
 import { k as _$$k, p as _$$p } from "../469e6e40/343829";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
@@ -601,7 +601,7 @@ function G({
     return {
       filterValues: n,
       handleChange: useCallback((e, t) => {
-        i(Ay(a => {
+        i(produce(a => {
           a[e].current = t === _$$p ? null : t;
         }));
       }, []),

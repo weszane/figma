@@ -9,7 +9,7 @@ import { noop } from "../905/419236";
 import { oW } from "../905/675859";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { S as _$$S } from "../905/872825";
+import { getValueOrFallback } from "../905/872825";
 import { Q as _$$Q } from "../905/978641";
 import { U as _$$U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
@@ -113,7 +113,7 @@ export let $$T0 = forwardRef(function ({
       className: "thumbnail_uploader--container--KPh0i",
       onClick: K,
       onDragOver: e => {
-        let t = _$$S(e.dataTransfer.items[0]?.type, yj) || (allowVideos ? _$$S(e.dataTransfer.items[0]?.type, Mr) : void 0);
+        let t = getValueOrFallback(e.dataTransfer.items[0]?.type, yj) || (allowVideos ? getValueOrFallback(e.dataTransfer.items[0]?.type, Mr) : void 0);
         setThumbnailMediumFromFile && 1 === e.dataTransfer.items.length && t && ee.includes(t) ? (e.dataTransfer.dropEffect = "copy", e.currentTarget.setAttribute("data-droppable", "true")) : (e.dataTransfer.dropEffect = "none", e.currentTarget.setAttribute("data-droppable", "false"));
         e.preventDefault();
       },

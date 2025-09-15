@@ -42,7 +42,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { setupFileObject } from "../905/628874";
 import { ds as _$$ds } from "../905/87821";
 import { setPropertiesPanelTab } from "../figma_app/741237";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { w2, i_ } from "../905/187165";
 import { FEditorType, mapEditorTypeToWorkspaceType, mapEditorTypeToFileType, isWhiteboardOrDesignOrIllustration, doesEditorTypeMatchFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { m as _$$m } from "../905/84999";
@@ -199,7 +199,7 @@ export async function $$ew5(e, t, i, n) {
   let o = s && "fullscreen" === s.view;
   if (!o) return;
   {
-    let e = await M4.fetchFile(t);
+    let e = await liveStoreInstance.fetchFile(t);
     setTagGlobal("file.key", e.key);
     null === e.file_repo_id ? setTagGlobal("branching", "not enabled") : (setTagGlobal("branching_repo", e.file_repo_id), null === e.source_file_key ? setTagGlobal("branching", "main branch") : setTagGlobal("branching", "user branch"));
     $$eS6({
@@ -279,7 +279,7 @@ export async function $$ew5(e, t, i, n) {
   atomStoreManager.set(p9, c.jubilee_b);
   atomStoreManager.set(Jt, c.jubilee_eligibility_s);
   atomStoreManager.set(yf, new Set());
-  let f = await M4.fetchFile(t);
+  let f = await liveStoreInstance.fetchFile(t);
   let _ = e.getState();
   let A = _.folders[f.folder_id || ""];
   let v = _.teams[f.team_id || ""];

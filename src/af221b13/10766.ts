@@ -6,10 +6,10 @@ import { Xy } from "../figma_app/578832";
 import { cz, i8 } from "../905/14017";
 import { L, I } from "../1577/16430";
 import { _ as _$$_ } from "../5430/533104";
-import { qD, _t } from "../figma_app/471982";
+import { getCurrentVersion, buildCommunityPathById } from "../figma_app/471982";
 import { y } from "../905/978641";
-import { mk } from "../figma_app/777551";
-import { Vm } from "../figma_app/427318";
+import { getResourceUserCount } from "../figma_app/777551";
+import { getResourceType } from "../figma_app/427318";
 import { TrackedLink } from "../figma_app/831799";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { Ui, Nr, Sl, t3, pq, DD, h_, qr, ME, vR, uK } from "../af221b13/148820";
@@ -18,7 +18,7 @@ export function $$y0({
   title: t,
   description: i
 }) {
-  switch (Vm(e)) {
+  switch (getResourceType(e)) {
     case ResourceTypeNoComment.HUB_FILE:
       return jsx(f, {
         hubFile: e,
@@ -46,8 +46,8 @@ function f({
   title: t,
   description: i
 }) {
-  let s = qD(e);
-  let r = _t({
+  let s = getCurrentVersion(e);
+  let r = buildCommunityPathById({
     resource: e
   });
   return jsxs("div", {
@@ -83,8 +83,8 @@ function b({
   title: t,
   description: i
 }) {
-  let a = qD(e);
-  let r = _t({
+  let a = getCurrentVersion(e);
+  let r = buildCommunityPathById({
     resource: e
   });
   return jsxs("div", {
@@ -122,8 +122,8 @@ function v({
   title: t,
   description: i
 }) {
-  let a = qD(e);
-  let r = _t({
+  let a = getCurrentVersion(e);
+  let r = buildCommunityPathById({
     resource: e
   });
   return jsxs("div", {
@@ -196,7 +196,7 @@ function w({
         likeCount: e.like_count,
         currentUserLiked: !1
       }), jsx(i8, {
-        usageCount: mk(e)
+        usageCount: getResourceUserCount(e)
       })]
     })]
   });

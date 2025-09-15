@@ -6,7 +6,7 @@ import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
 import { Sc } from "../905/18797";
 import { setupLoadingStateHandler } from "../905/696711";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { tc } from "../905/15667";
 let $$m0 = createOptimistThunk((e, {
   licenseType: t,
@@ -65,7 +65,7 @@ let $$h1 = createOptimistThunk((e, {
   let n = e.getState();
   let r = "team" === n.selectedView.view && ("members" === n.selectedView.teamViewTab || "billing" === n.selectedView.teamViewTab) || "teamUpgrade" === n.selectedView.view || "eduReview" === n.selectedView.view;
   if (!Sc(n.loadingState, i) && !r) return;
-  let o = $.getTeamUsers({
+  let o = teamAPIClient.getTeamUsers({
     teamId: t
   });
   setupLoadingStateHandler(o, e, i);

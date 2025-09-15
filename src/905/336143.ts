@@ -4,11 +4,11 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { useStableMemo } from "../905/19536";
 import { useLatestRef } from "../figma_app/922077";
 import { qp } from "../905/977779";
-import { B8 } from "../figma_app/255679";
+import { useHasResourcePresetKey } from "../figma_app/255679";
 import { selectCurrentFile, useFileLibraryKeys } from "../figma_app/516028";
 import { cU } from "../figma_app/646357";
 import { LH } from "../905/872904";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { e6 } from "../905/404538";
 import { Mz } from "../vendor/925040";
 import { dK } from "../figma_app/889655";
@@ -40,9 +40,9 @@ let $$I1 = D(() => {
   let C = useFileLibraryKeys();
   let T = useLatestRef(x);
   let k = useSelector(_);
-  let R = B8();
+  let R = useHasResourcePresetKey();
   useEffect(() => {
-    x !== T && Promise.all([cU(g, x, k, w, I, C, e), M4.fetch(e6.EverPublishedLibraryQuery({
+    x !== T && Promise.all([cU(g, x, k, w, I, C, e), liveStoreInstance.fetch(e6.EverPublishedLibraryQuery({
       libraryKeys: E
     }))]).then(([{
       usedStylesByLibraryKey: e

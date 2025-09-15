@@ -1,13 +1,13 @@
-import { z } from 'zod'
-import { ProductStatus } from '../905/54385'
-import { CommentSchema } from '../905/380385'
-import { Y9 as ShelfContentSchema } from '../figma_app/306946'
-import * as Ip from '../figma_app/709165'
+import { z } from 'zod';
+import { ProductStatus } from '../905/54385';
+import { CommentSchema } from '../905/380385';
+import { ResourceWithOptionalContentListSchema } from '../figma_app/306946';
+import * as Ip from '../figma_app/709165';
 
 /**
  * ResourceType enum (original: $$o14)
  */
-export enum ResourceType {
+export enum HubTypeEnum {
   HUB_FILE = 'hub_file',
   PLUGIN = 'plugin',
   WIDGET = 'widget',
@@ -70,8 +70,8 @@ export const ExtendedCommentSchema = CommentSchema.extend({
   last_replied_at: z.string().nullable(),
   resource_version_id: z.string(),
   message_meta: z.array(Ip.ignore()),
-  rating_value: z.number().optional(),
-})
+  rating_value: z.number().optional()
+});
 
 /**
  * ProfileRedirectStatus enum (original: h)
@@ -135,7 +135,7 @@ export enum UserRole {
  * @param resource
  */
 export function isWidget(resource: any): boolean {
-  return resource != null && 'is_widget' in resource && resource.is_widget
+  return resource != null && 'is_widget' in resource && resource.is_widget;
 }
 
 /**
@@ -143,7 +143,7 @@ export function isWidget(resource: any): boolean {
  * @param resource
  */
 export function isPlugin(resource: any): boolean {
-  return resource != null && 'current_plugin_version_id' in resource && !resource.is_widget
+  return resource != null && 'current_plugin_version_id' in resource && !resource.is_widget;
 }
 
 /**
@@ -151,7 +151,7 @@ export function isPlugin(resource: any): boolean {
  * @param resource
  */
 export function isWidgetOrPlugin(resource: any): boolean {
-  return 'is_widget' in resource || 'current_plugin_version_id' in resource
+  return 'is_widget' in resource || 'current_plugin_version_id' in resource;
 }
 
 /**
@@ -159,7 +159,7 @@ export function isWidgetOrPlugin(resource: any): boolean {
  * @param resource
  */
 export function hasClientMeta(resource: any): boolean {
-  return resource != null && 'client_meta' in resource
+  return resource != null && 'client_meta' in resource;
 }
 
 /**
@@ -167,7 +167,7 @@ export function hasClientMeta(resource: any): boolean {
  * @param resource
  */
 export function hasPublishScope(resource: any): boolean {
-  return !!resource && 'publishScope' in resource
+  return !!resource && 'publishScope' in resource;
 }
 
 /**
@@ -175,7 +175,7 @@ export function hasPublishScope(resource: any): boolean {
  * @param resource
  */
 export function hasFigFileMetadata(resource: any): boolean {
-  return 'fig_file_metadata' in resource
+  return 'fig_file_metadata' in resource;
 }
 
 /**
@@ -183,9 +183,7 @@ export function hasFigFileMetadata(resource: any): boolean {
  * @param resource
  */
 export function isMonetizedWithClientMeta(resource: any): boolean {
-  return (hasMonetizedResourceMetadata(resource) || isThirdPartyMonetized(resource))
-    && hasClientMeta(resource)
-    && resource.viewer_mode !== 'whiteboard'
+  return (hasMonetizedResourceMetadata(resource) || isThirdPartyMonetized(resource)) && hasClientMeta(resource) && resource.viewer_mode !== 'whiteboard';
 }
 
 /**
@@ -193,7 +191,7 @@ export function isMonetizedWithClientMeta(resource: any): boolean {
  * @param resource
  */
 export function hasMonetizedResourceMetadata(resource: any): boolean {
-  return !!resource?.monetized_resource_metadata
+  return !!resource?.monetized_resource_metadata;
 }
 
 /**
@@ -201,7 +199,7 @@ export function hasMonetizedResourceMetadata(resource: any): boolean {
  * @param resource
  */
 export function isMonetizedOrThirdParty(resource: any): boolean {
-  return isThirdPartyMonetized(resource) || hasMonetizedResourceMetadata(resource)
+  return isThirdPartyMonetized(resource) || hasMonetizedResourceMetadata(resource);
 }
 
 /**
@@ -209,7 +207,7 @@ export function isMonetizedOrThirdParty(resource: any): boolean {
  * @param resource
  */
 export function hasFreemiumCode(resource: any): boolean {
-  return !!resource?.monetized_resource_metadata?.has_freemium_code
+  return !!resource?.monetized_resource_metadata?.has_freemium_code;
 }
 
 /**
@@ -217,10 +215,7 @@ export function hasFreemiumCode(resource: any): boolean {
  * @param resource
  */
 export function isThirdPartyMonetized(resource: any): boolean {
-  return (
-    ('third_party_m10n_status' in resource && resource.third_party_m10n_status === ProductStatus.FLAGGED)
-    || ('is_3rd_party_monetized' in resource && !!resource.is_3rd_party_monetized)
-  )
+  return 'third_party_m10n_status' in resource && resource.third_party_m10n_status === ProductStatus.FLAGGED || 'is_3rd_party_monetized' in resource && !!resource.is_3rd_party_monetized;
 }
 
 /**
@@ -228,8 +223,8 @@ export function isThirdPartyMonetized(resource: any): boolean {
  * @param resource
  */
 export function getResourceWithMeta(resource: any): any {
-  hasClientMeta(resource) || isWidget(resource)
-  return resource
+  hasClientMeta(resource) || isWidget(resource);
+  return resource;
 }
 
 /**
@@ -283,8 +278,8 @@ export const RatingStatsSchema = z.object({
   totalRatings: z.number(),
   avgRating: z.number().nullish(),
   createdAt: z.date().nullish(),
-  updatedAt: z.date().nullish(),
-})
+  updatedAt: z.date().nullish()
+});
 
 /**
  * ShelfSchema (original: $$D21)
@@ -297,36 +292,36 @@ export const ShelfSchema = z.object({
   description: z.string(),
   order: z.number().optional(),
   shelf_meta: z.any(),
-  shelf_content: ShelfContentSchema,
+  shelf_content: ResourceWithOptionalContentListSchema,
   total_shelf_content_count: z.number().optional(),
   url_slug: z.string().nullable(),
-  i18n_meta: z.record(z.string()),
-})
+  i18n_meta: z.record(z.string())
+});
 
 // Export refactored names
-export const BS = isMonetizedWithClientMeta
-export const CM = NoUserProfileStatus
-export const Ch = getResourceWithMeta
-export const Fl = hasPublishScope
-export const H0 = isMonetizedOrThirdParty
-export const I0 = isPlugin
-export const KS = ExtendedCommentSchema
-export const PM = hasFreemiumCode
-export const Qv = CommentTabType
-export const U = hasClientMeta
-export const Ug = ResourceTypeNoComment2
-export const Uz = hasFigFileMetadata
-export const Zm = ComposerLocation
-export const aL = ShelfViewType
-export const bD = ResourceType
-export const cS = CommunityPageType
-export const dj = FileInputType
-export const hE = PaymentType
-export const iF = UserRole
-export const m3 = hasMonetizedResourceMetadata
-export const mr = isWidgetOrPlugin
-export const nn = ShelfSchema
-export const po = ResourceStatus
-export const vt = ResourceTypeNoComment
-export const xQ = isWidget
-export const zF = isThirdPartyMonetized
+export const BS = isMonetizedWithClientMeta;
+export const CM = NoUserProfileStatus;
+export const Ch = getResourceWithMeta;
+export const Fl = hasPublishScope;
+export const H0 = isMonetizedOrThirdParty;
+export const I0 = isPlugin;
+export const KS = ExtendedCommentSchema;
+export const PM = hasFreemiumCode;
+export const Qv = CommentTabType;
+export const U = hasClientMeta;
+export const Ug = ResourceTypeNoComment2;
+export const Uz = hasFigFileMetadata;
+export const Zm = ComposerLocation;
+export const aL = ShelfViewType;
+export const bD = HubTypeEnum;
+export const cS = CommunityPageType;
+export const dj = FileInputType;
+export const hE = PaymentType;
+export const iF = UserRole;
+export const m3 = hasMonetizedResourceMetadata;
+export const mr = isWidgetOrPlugin;
+export const nn = ShelfSchema;
+export const po = ResourceStatus;
+export const vt = ResourceTypeNoComment;
+export const xQ = isWidget;
+export const zF = isThirdPartyMonetized;

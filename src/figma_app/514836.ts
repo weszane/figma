@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { z$ } from "../figma_app/471982";
+import { getEmbedType } from "../figma_app/471982";
 import { Z4 } from "../figma_app/809727";
 export function $$s0(e) {
   let [t, r] = useState(!0);
   useEffect(() => {
-    let t = z$(e);
+    let t = getEmbedType(e);
     let n = e.thumbnail_url;
     if (t === Z4.EMBED) {
       r(!0);

@@ -35,7 +35,7 @@ import { Z_ } from "../figma_app/793953";
 import { selectOpenFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { BranchingSourceViewSidebarView, RepoReviewerSuggestions, FileCanEdit, BranchOpenMergeRequest } from "../figma_app/43951";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 import { FEditorType } from "../figma_app/53721";
 import { SourceDirection, BranchType, CPPEventType } from "../905/535806";
 import { AccessLevelEnum } from "../905/557142";
@@ -5864,12 +5864,12 @@ function rM(e) {
       reason: t || "unknown_reason"
     });
   }, [c]);
-  let eh = M4.useFile(e.branchKey).data;
+  let eh = liveStoreInstance.useFile(e.branchKey).data;
   let eg = useSelector(e => {
     let t = eh?.file_repo_id;
     if (t) return t in e.repos ? e.repos[t] : void 0;
   });
-  let ef = M4.useFile(eg?.default_file_key).data;
+  let ef = liveStoreInstance.useFile(eg?.default_file_key).data;
   if (!eg || !eh || !ef) {
     logError("branching", "Unable to get file data", {
       repo: !!eg,

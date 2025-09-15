@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { AC } from "../figma_app/777551";
+import { isResourcePendingPublishing } from "../figma_app/777551";
 import { et, zn } from "../figma_app/559491";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -20,7 +20,7 @@ export let $$u0 = registerModal(function ({
       resource: e
     }));
   };
-  AC(e) ? (r = getI18nString("community.plugins.withdraw_from_review"), t = e.roles.org ? getI18nString("community.plugins.this_action_will_remove_your_public_resource_type_review_submission_your_resource_type_will_still_be_available_to_members_of_org_name", {
+  isResourcePendingPublishing(e) ? (r = getI18nString("community.plugins.withdraw_from_review"), t = e.roles.org ? getI18nString("community.plugins.this_action_will_remove_your_public_resource_type_review_submission_your_resource_type_will_still_be_available_to_members_of_org_name", {
     resourceType: _,
     orgName: e.roles.org.name
   }) : getI18nString("community.plugins.this_action_will_remove_your_public_resource_type_review_submission", {

@@ -113,7 +113,7 @@ import { NG } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
 import { AutoLayout } from "../905/470281";
 import { jD } from "../905/765855";
-import { fd, o3 as _$$o, Ag } from "../figma_app/255679";
+import { hasResourcePresetKey, hasResourcePresetKeyStatic, isKeyInQNOrR9 } from "../figma_app/255679";
 import { getBasename } from "../905/309735";
 import { $z } from "../figma_app/297733";
 import { T as _$$T2 } from "../905/714785";
@@ -469,7 +469,7 @@ function tS({
   let k = useAtomWithSubscription(_$$T2);
   let S = searchOption?.type === _$$I2.ALL;
   let w = fV(e.library_key);
-  let N = fd(e.library_key);
+  let N = hasResourcePresetKey(e.library_key);
   let I = S && (w || N);
   let C = useRef(null);
   let j = getBasename(e.name);
@@ -678,7 +678,7 @@ class tK extends Component {
           children: jsx(KP, {
             libraryKey: this.props.subscribedLibraryKey
           })
-        }), (_$$o(this.props.subscribedLibraryKey) || Ag(this.props.subscribedLibraryKey)) && jsx("div", {
+        }), (hasResourcePresetKeyStatic(this.props.subscribedLibraryKey) || isKeyInQNOrR9(this.props.subscribedLibraryKey)) && jsx("div", {
           className: _$$s2.flex.alignCenter.justifyCenter.ml4.$,
           children: jsx(_$$E2, {
             libraryKey: this.props.subscribedLibraryKey,

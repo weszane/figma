@@ -7,11 +7,11 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { AC } from "../figma_app/777551";
+import { isResourcePendingPublishing } from "../figma_app/777551";
 import { Qi } from "../figma_app/559491";
 import { showModalHandler } from "../905/156213";
 import { getPluginVersion, getMissingEditorTypeError, generatePluginId } from "../figma_app/300692";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { ManifestErrorType, ManifestEditorType } from "../figma_app/155287";
 import { isNetworkAccessValidationError } from "../905/544659";
 import { A as _$$A } from "../905/552947";
@@ -38,10 +38,10 @@ export function $$N1({
   updatePluginPublishingMetadata: o
 }) {
   let c = {
-    [ResourceType.PLUGIN]: getI18nString("community.publishing.resource_id.plugin"),
-    [ResourceType.WIDGET]: getI18nString("community.publishing.resource_id.widget")
+    [HubTypeEnum.PLUGIN]: getI18nString("community.publishing.resource_id.plugin"),
+    [HubTypeEnum.WIDGET]: getI18nString("community.publishing.resource_id.widget")
   };
-  let u = AC(a) ? jsx("div", {
+  let u = isResourcePendingPublishing(a) ? jsx("div", {
     className: _$$s.mb8.$,
     children: jsx(P, {
       submittedAt: a.created_at
@@ -285,7 +285,7 @@ function U({
   return i ? jsxs(Fragment, {
     children: [jsx(_$$u, {
       networkAccess: i,
-      isWidget: e === ResourceType.WIDGET
+      isWidget: e === HubTypeEnum.WIDGET
     }), i.allowedDomains.includes("*") && null == i.reasoning && jsx("div", {
       className: _$$s.mt8.$,
       children: jsx(z, {
@@ -303,7 +303,7 @@ function U({
     instruction: jsxs("div", {
       children: [jsx(TextWithTruncation, {
         color: "danger",
-        children: renderI18nText(e === ResourceType.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
+        children: renderI18nText(e === HubTypeEnum.PLUGIN ? "community.publishing.plugin_missing_network_access" : "community.publishing.widget_missing_network_access", {
           filename: "manifest.json"
         })
       }), jsx(SecureLink, {

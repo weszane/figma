@@ -275,16 +275,16 @@ export function withTrackedInput(WrappedComponent: React.ComponentType<any>) {
 
 // Pre-built tracked components
 // Original: $$I0
-const TrackedButton = withTrackedClick(({ dataTestId, ...props }: any) => jsx('button', { ...props, 'data-testid': dataTestId }))
+export const TrackedButton = withTrackedClick(({ dataTestId, ...props }: any) => jsx('button', { ...props, 'data-testid': dataTestId }))
 
 // Original: $$S7
-const TrackedDiv = withTrackedClick((props: any) => jsx('div', { ...props }))
+export const TrackedDiv = withTrackedClick((props: any) => jsx('div', { ...props }))
 
 // Original: $$v1
-const TrackedAnchor = withTrackedClick((props: any) => jsx('a', { ...props, children: props.children }), true)
+export const TrackedAnchor = withTrackedClick((props: any) => jsx('a', { ...props, children: props.children }), true)
 
 // Original: $$A9
-const TrackedLink = withTrackedClick((props: any) => jsx(Link, { ...props }))
+export const TrackedLink = withTrackedClick((props: any) => jsx(Link, { ...props }))
 
 /**
  * Hook to access tracking context.

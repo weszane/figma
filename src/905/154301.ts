@@ -12,7 +12,7 @@ import { hideModal, showModalHandler, popModalStack } from "../905/156213";
 import { yH } from "../figma_app/240735";
 import { TrackingProvider } from "../figma_app/831799";
 import { FlashActions } from "../905/573154";
-import { $ } from "../905/834575";
+import { teamAPIClient } from "../905/834575";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
 import { Dd, OJ } from "../905/519092";
@@ -47,7 +47,7 @@ export let $$E0 = registerModal(function (e) {
         o(!0);
         return;
       }
-      n || $.getDeletionFileCount({
+      n || teamAPIClient.getDeletionFileCount({
         teamId: e
       }).then(({
         data: e
@@ -71,7 +71,7 @@ export let $$E0 = registerModal(function (e) {
         b(!1);
         return;
       }
-      g || $.getHasPublishedSite({
+      g || teamAPIClient.getHasPublishedSite({
         teamId: e
       }).then(({
         data: e

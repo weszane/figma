@@ -3,8 +3,8 @@ import { b, bL, mc, q7 } from "../figma_app/860955";
 import { customHistory } from "../905/612521";
 import { v$ } from "../figma_app/455722";
 import { gM } from "../5430/823351";
-import { ed } from "../figma_app/321395";
-import { Dv } from "../figma_app/805898";
+import { useRouteStateInstance } from "../figma_app/321395";
+import { ResourceHubCategoryRoute } from "../figma_app/805898";
 import { ButtonPrimitive } from "../905/632989";
 import { r } from "../905/571562";
 import m from "classnames";
@@ -36,7 +36,7 @@ export function $$x0({
     getTriggerProps,
     manager
   } = b();
-  let f = ed(Dv);
+  let f = useRouteStateInstance(ResourceHubCategoryRoute);
   let y = v$();
   let g = e === gM.CATEGORY ? f : e === gM.SEARCH ? y : null;
   return g || _ ? jsxs(bL, {

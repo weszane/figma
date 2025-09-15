@@ -4,7 +4,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { M4, IT } from "../905/713695";
+import { liveStoreInstance, IT } from "../905/713695";
 import { m as _$$m } from "../905/325034";
 import { registerModal } from "../905/102752";
 import { setupAutofocusHandler } from "../905/128376";
@@ -302,10 +302,10 @@ function V(e) {
   });
 }
 var G = (e => (e[e.MAKE_CHANGES = 0] = "MAKE_CHANGES", e[e.REVIEW_CHANGES = 1] = "REVIEW_CHANGES", e))(G || {});
-let z = M4.Query({
+let z = liveStoreInstance.Query({
   fetch: async () => (await _$$m.getStatsigFlagStatusForUser()).data.meta
 });
-let H = M4.Query({
+let H = liveStoreInstance.Query({
   fetch: async () => (await _$$m.getStatsigFlagDescriptions()).data.meta ?? {}
 });
 let $$W0 = registerModal(function (e) {

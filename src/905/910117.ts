@@ -206,7 +206,6 @@ class MockServer {
       }
     }
     if (!isInteractionPathCheck() && !this.areUnitTestsRunning && settings.url && !settings.url.endsWith('realtime_token') && settings.url !== 'https://api.segment.io/v1/track' && !settings.url.includes('/api/figment-proxy')) {
-      // eslint-disable-next-line no-console
       console.log(`[xr.MockServer]: Ignoring ${settings.method} request to ${settings.url}`, settings)
     }
     return new Promise(() => { })
@@ -403,7 +402,7 @@ class XHRError extends Error {
  * @param t - Response URL.
  * @returns Boolean indicating if request should be sampled.
  */
-export function shouldSampleRequest(e, t) {
+export function shouldSampleRequest(e, t?: any) {
   // $$x2
   const excludedPatterns = ['api/web_logger', 's3-alpha-sig.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts-private-production', 'data:image/png;base64']
   for (const pattern of excludedPatterns) {
@@ -727,13 +726,13 @@ async function getPaginated<T = any>(url: string, options: Record<string, any> =
       ...res.data,
       pagination: res.data!.pagination
         ? {
-          nextPage: res.data.pagination?.next_page ?? null,
-          prevPage: res.data.pagination?.prev_page ?? null,
-        }
+            nextPage: res.data.pagination?.next_page ?? null,
+            prevPage: res.data.pagination?.prev_page ?? null,
+          }
         : {
-          nextPage: null,
-          prevPage: null,
-        },
+            nextPage: null,
+            prevPage: null,
+          },
     },
   }
 }

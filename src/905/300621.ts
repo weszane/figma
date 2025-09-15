@@ -8,7 +8,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { on } from "../905/420347";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 import { H as _$$H } from "../905/216861";
 import { NO_TEAM, getDraftsSidebarString, isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -132,7 +132,7 @@ function H() {
   });
   return useMemo(() => i.data?.library_thumbnail_by_library_key ?? {}, [i]);
 }
-let W = M4.Query({
+let W = liveStoreInstance.Query({
   fetch: async e => (await _$$Z.getDefaultLibraries({
     editorType: e
   })).data.meta,
@@ -422,7 +422,7 @@ let $$eu0 = registerModal(function (e) {
     onClose: i
   });
   let [_, A] = useState(null);
-  let y = M4.useFile(_?.fileKey ?? null).data;
+  let y = liveStoreInstance.useFile(_?.fileKey ?? null).data;
   let b = on(_?.libraryKey ?? null).data;
   let v = parsePxInt(PXO);
   return jsx(ModalRootComponent, {

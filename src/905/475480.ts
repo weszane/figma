@@ -1,6 +1,6 @@
 import { FPlanTierType, FOrganizationType } from "../figma_app/191312";
 import { Eh } from "../figma_app/617654";
-import { M4 } from "../905/713695";
+import { liveStoreInstance } from "../905/713695";
 var $$n0;
 let a = [FPlanTierType.ORGANIZATION, FPlanTierType.ENTERPRISE];
 (e => {
@@ -14,7 +14,7 @@ let a = [FPlanTierType.ORGANIZATION, FPlanTierType.ENTERPRISE];
     let t = e.metadata?.editorCount;
     return t ? parseInt(t, 10) : 0;
   };
-  e.validateOrgTrialMutation = M4.Mutation(async e => {
+  e.validateOrgTrialMutation = liveStoreInstance.Mutation(async e => {
     await Eh.validateTrial(e);
   });
   e.isOrgTrial = t;

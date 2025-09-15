@@ -6,21 +6,21 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useMemo, createElement, useContext } from "react";
 import n, { useAtomValueAndSetter } from "../figma_app/27355";
 import o from "classnames";
-import { N as _$$N } from "../figma_app/469468";
+import { usePrefersMediaQuery } from "../figma_app/469468";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H as _$$H } from "../5430/816957";
 import { Lj } from "../figma_app/835219";
-import { JJ, qD, $l, _t, eD as _$$eD, ss, _m, z$, DV } from "../figma_app/471982";
+import { mapTemplateCategoryToFileType, getCurrentVersion, $l, buildCommunityPathById, getCommunityPathSegments, mapResourceTypePlural, fitsInViewer, getEmbedType, buildFullCommunityUrl } from "../figma_app/471982";
 import { isResourceHubProfilesEnabled, isComponentViewerEnabled, isRelatedContentExperimentEnabled } from "../figma_app/275462";
 import { M as _$$M } from "../905/722875";
-import { mA, sB, K2, zY } from "../figma_app/777551";
-import { XW, qY, BQ, YI, g0, ZA, Qc, Vm, $9, eO as _$$eO, zL, PI, cX, $3, ws, tv as _$$tv } from "../figma_app/427318";
+import { isApplePublisherAccepted, isFigmaPublisherAccepted, getResourceName, getResourceDescription } from "../figma_app/777551";
+import { hasContent, getMainContent, isUIKitLibrary, isPluginResource, isPluginOrWidget, isSiteTemplate, hasHubFile, getResourceType, getPluginOrWidgetContent, getHubFile, isFigmakeTemplate, isMonetizedFigJamTemplate, isSlideTemplate, isWidgetResource, hasResourceType, isCooperTemplateFile } from "../figma_app/427318";
 import { Ay } from "../905/506641";
 import { $O, bK } from "../figma_app/701107";
 import { w3, YW } from "../figma_app/350203";
 import { uS, CW, e5 as _$$e } from "../figma_app/740025";
-import { TX } from "../figma_app/255679";
+import { hasHubFileOrPresetKey } from "../figma_app/255679";
 import { Z4 } from "../figma_app/809727";
 import { e0 as _$$e2 } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
@@ -72,7 +72,7 @@ import { A as _$$A5 } from "../5724/663128";
 import { useDispatch } from "react-redux";
 import { C as _$$C } from "../905/222694";
 import { trackEventAnalytics } from "../905/449184";
-import { o as _$$o2 } from "../figma_app/70618";
+import { ContentFilterType } from "../figma_app/70618";
 import { V as _$$V } from "../905/480825";
 import { Ho } from "../figma_app/878651";
 import { A6 } from "../905/350234";
@@ -91,11 +91,11 @@ import { T as _$$T2 } from "../5430/528285";
 import { V as _$$V2 } from "../1577/311426";
 import { CW as _$$CW, P1 } from "../5430/201744";
 import { R as _$$R2 } from "../905/792510";
-import { S as _$$S } from "../905/872825";
-import { zq } from "../figma_app/598412";
+import { getValueOrFallback } from "../905/872825";
+import { getCurrentLocale } from "../figma_app/598412";
 import { LJ } from "../figma_app/930386";
-import { Zp } from "../figma_app/188671";
-import { $E } from "../figma_app/805898";
+import { categoryBySlugQuery } from "../figma_app/188671";
+import { BrowseCategoryRoute } from "../figma_app/805898";
 import { n6 } from "../figma_app/600006";
 import { TrackedLink } from "../figma_app/831799";
 import { Pr, Pc, Tc, Cy, AT } from "../figma_app/950781";
@@ -609,34 +609,34 @@ let eI = _$$G;
 function eF({
   resource: e
 }) {
-  let t = XW(e) ? qY(e) : e;
+  let t = hasContent(e) ? getMainContent(e) : e;
   if (!t) return null;
   let r = function (e) {
-    if (XW(e)) return jsx(Fragment, {
+    if (hasContent(e)) return jsx(Fragment, {
       children: e.editor_types.map(t => jsx(_$$_, {
         resourceEditorType: t,
         resourceType: e.resource_type
       }, t))
     });
     if (hasClientMeta(e)) return jsx(_$$_, {
-      hubFileEditorType: JJ(e.viewer_mode)
+      hubFileEditorType: mapTemplateCategoryToFileType(e.viewer_mode)
     });
-    let t = qD(e).manifest.editorType;
+    let t = getCurrentVersion(e).manifest.editorType;
     if (t) return jsx(Fragment, {
       children: t.map(e => jsx(_$$_, {
         pluginEditorType: e
       }, e))
     });
   }(e);
-  let i = BQ(e) && jsx(eH, {});
-  let n = YI(e) && isDevModeWithCodegen(qD(t)) && jsx(eU, {});
+  let i = isUIKitLibrary(e) && jsx(eH, {});
+  let n = isPluginResource(e) && isDevModeWithCodegen(getCurrentVersion(t)) && jsx(eU, {});
   let o = e.community_publishers.accepted.reduce((e, t) => e.concat(t.badges), []);
   let a = [...new Set(e.badges.concat(o))];
   let l = C2({
     badges: a
   }, !1, !0);
-  let c = g0(e) ? function (e) {
-    let t = qD(e).manifest;
+  let c = isPluginOrWidget(e) ? function (e) {
+    let t = getCurrentVersion(e).manifest;
     return jsxs(Fragment, {
       children: [jsx(eW, {
         plugin: e
@@ -648,7 +648,7 @@ function eF({
       })]
     });
   }(t) : null;
-  let u = ZA(e) && jsx(eV, {});
+  let u = isSiteTemplate(e) && jsx(eV, {});
   return jsxs(Fragment, {
     children: [r, i, n, l && jsxs("div", {
       className: qS,
@@ -795,7 +795,7 @@ function eY({
   resource: e,
   showBadges: t = !0
 }) {
-  let r = XW(e) ? qY(e) : e;
+  let r = hasContent(e) ? getMainContent(e) : e;
   if (!r) return null;
   let i = $l(r);
   let n = hasMonetizedResourceMetadata(r);
@@ -813,9 +813,9 @@ function eY({
       supportContact: e.support_contact,
       license: jsx(_$$F, {
         isMonetizedResource: n,
-        isHubFile: Qc(e),
-        isAppleResource: mA(e),
-        isFigmaResource: sB(e)
+        isHubFile: hasHubFile(e),
+        isAppleResource: isApplePublisherAccepted(e),
+        isFigmaResource: isFigmaPublisherAccepted(e)
       }),
       paymentInfo: jsx(eZ, {
         monetizedResourceMetadata: r.monetized_resource_metadata,
@@ -846,12 +846,12 @@ function e6({
   openLightboxRDP: r
 }) {
   let i = useDispatch();
-  let n = qD(e);
+  let n = getCurrentVersion(e);
   let o = e.thumbnail_url;
   let l = !!e.thumbnail_is_set;
   let c = e.viewer_mode === FTemplateCategoryType.WHITEBOARD;
   let d = getFeatureFlags().cmty_thumbnail_16x9_ar;
-  let u = _t({
+  let u = buildCommunityPathById({
     resource: e
   });
   return jsxs(A6, {
@@ -886,9 +886,9 @@ function te({
   openLightboxRDP: r
 }) {
   let i = useDispatch();
-  let n = qD(e);
+  let n = getCurrentVersion(e);
   let o = n.redirect_icon_url;
-  let a = _t({
+  let a = buildCommunityPathById({
     resource: e
   });
   return jsxs(A6, {
@@ -919,9 +919,9 @@ function tt({
   openLightboxRDP: r
 }) {
   let i = useDispatch();
-  let n = qD(e);
+  let n = getCurrentVersion(e);
   let o = n.redirect_snapshot_url;
-  let a = _t({
+  let a = buildCommunityPathById({
     resource: e
   });
   return jsxs(A6, {
@@ -944,7 +944,7 @@ function tt({
 }
 let tr = (e, t) => {
   trackEventAnalytics("Community Related Content Clicked", {
-    community_resource: Vm(e),
+    community_resource: getResourceType(e),
     community_resource_id: e.id,
     related_content_type: e.related_content?.types.join(","),
     rdp_impression_id: t
@@ -968,7 +968,7 @@ function ts({
       itemsImpressed: r.map(e => e.id).join(",")
     });
   }, [r.map(e => e.id).join(",")]);
-  let c = 1 === n.length && n[0] === _$$o2.by_creator ? o.accepted.length > 1 ? getI18nString("community.related_content.more_by_these_creators") : getI18nString("community.related_content.more_by_this_creator") : getI18nString("community.related_content.more_like_this");
+  let c = 1 === n.length && n[0] === ContentFilterType.by_creator ? o.accepted.length > 1 ? getI18nString("community.related_content.more_by_these_creators") : getI18nString("community.related_content.more_by_this_creator") : getI18nString("community.related_content.more_like_this");
   return jsxs("div", {
     className: e3,
     "data-testid": "related-content",
@@ -1008,7 +1008,7 @@ function tl({
   let {
     trackResourceImpression
   } = GS();
-  let [a, l] = _$$eD();
+  let [a, l] = getCommunityPathSegments();
   let [{
     data: c,
     status: u
@@ -1126,7 +1126,7 @@ function tb({
   let [c, u] = useState(!1);
   let [m, _] = useState(0);
   let p = useRef(null);
-  let h = K2(n);
+  let h = getResourceName(n);
   let x = _$$CW(P1.RELOAD);
   let g = _$$CW(P1.OPEN_NEW_TAB);
   let v = useCallback(() => {
@@ -1143,10 +1143,10 @@ function tb({
     l(!0);
     u(!1);
     _(e => e + 1);
-    n && o && x(n.id, Vm(o));
+    n && o && x(n.id, getResourceType(o));
   }, [n, o, x]);
   let w = useCallback(() => {
-    n && o && g(n.id, Vm(o));
+    n && o && g(n.id, getResourceType(o));
   }, [n, o, g]);
   useEffect(() => {
     l(!0);
@@ -1210,9 +1210,9 @@ function tR({
   disableHeader: r,
   showBottomDivider: i
 }) {
-  let n = _$$S(e.category_slug, LJ);
-  let o = zq();
-  let [a] = setupResourceAtomHandler(Zp({
+  let n = getValueOrFallback(e.category_slug, LJ);
+  let o = getCurrentLocale();
+  let [a] = setupResourceAtomHandler(categoryBySlugQuery({
     categorySlug: n,
     locale: o
   }), {
@@ -1225,7 +1225,7 @@ function tR({
   let m = c.length > 0;
   let _ = !!n && Object.keys(u).length > 0;
   if (!m && !_) return null;
-  let h = ss(e, {
+  let h = mapResourceTypePlural(e, {
     plural: !0
   });
   return jsxs(Fragment, {
@@ -1238,7 +1238,7 @@ function tR({
         let r = l.find(t => t.text === e);
         return jsx(TrackedLink, {
           className: Tc,
-          to: new $E({
+          to: new BrowseCategoryRoute({
             categorySlug: n,
             tagSlug: r?.localized_url_slug ?? t
           }).to,
@@ -1273,8 +1273,8 @@ function tA({
   resource: e
 }) {
   let [t, r] = useState(!1);
-  if (!g0(e)) return null;
-  let n = $9(e);
+  if (!isPluginOrWidget(e)) return null;
+  let n = getPluginOrWidgetContent(e);
   if (!n) return null;
   let {
     versions
@@ -1352,7 +1352,7 @@ function tD({
       let e = document.getElementById($O.CommentsView);
       if (e) {
         let t = e.getBoundingClientRect().top;
-        _m(t, window.innerHeight, window.scrollY) ? o($O.CommentsView) : o($O.DescriptionView);
+        fitsInViewer(t, window.innerHeight, window.scrollY) ? o($O.CommentsView) : o($O.DescriptionView);
       }
     };
     window.addEventListener("scroll", e);
@@ -1393,10 +1393,10 @@ export function $$tF0({
   resource: e
 }) {
   let t = isComponentViewerEnabled();
-  let r = XW(e) ? qY(e) : e;
+  let r = hasContent(e) ? getMainContent(e) : e;
   if (!r) return null;
-  let i = _$$eO(r);
-  let n = zL(e);
+  let i = getHubFile(r);
+  let n = isFigmakeTemplate(e);
   let o = i?.published_site_url;
   if (n && o) return jsx(tb, {
     src: o,
@@ -1404,12 +1404,12 @@ export function $$tF0({
     resourceContent: r
   });
   let a = function (e, t) {
-    if (g0(e)) return !1;
-    let r = PI(e, t);
-    let s = z$(e) === Z4.EMBED;
-    return !r && !s && !cX(e);
+    if (isPluginOrWidget(e)) return !1;
+    let r = isMonetizedFigJamTemplate(e, t);
+    let s = getEmbedType(e) === Z4.EMBED;
+    return !r && !s && !isSlideTemplate(e);
   }(e, r);
-  let l = TX(r.id) && t();
+  let l = hasHubFileOrPresetKey(r.id) && t();
   return a && !l ? jsxs(Fragment, {
     children: [jsx("h3", {
       className: _$$s.font14.fontSemiBold.mb16.$,
@@ -1429,7 +1429,7 @@ export function $$tH1({
 }) {
   if (!_$$M()) return jsx(A, {});
   {
-    let t = Qc(e) ? _$$e2.COMMUNITY_HUB_FILE : $3(e) ? _$$e2.COMMUNITY_HUB_WIDGET : _$$e2.COMMUNITY_HUB_PLUGIN;
+    let t = hasHubFile(e) ? _$$e2.COMMUNITY_HUB_FILE : isWidgetResource(e) ? _$$e2.COMMUNITY_HUB_WIDGET : _$$e2.COMMUNITY_HUB_PLUGIN;
     return jsx(_$$Q, {
       resource: e,
       viewContext: t
@@ -1547,15 +1547,15 @@ function t$({
   relatedContent: i,
   openLightboxRDP: n
 }) {
-  return isRelatedContentExperimentEnabled()() && ws(e) ? jsx(tl, {
-    resourceType: Vm(e),
+  return isRelatedContentExperimentEnabled()() && hasResourceType(e) ? jsx(tl, {
+    resourceType: getResourceType(e),
     resourceId: e.id,
     rdpImpressionId: r,
     creators: e.community_publishers
   }) : i && i.content.length > 0 ? jsxs(Fragment, {
     children: [jsx(ts, {
       resourceId: e.id,
-      resourceType: Vm(t),
+      resourceType: getResourceType(t),
       content: i.content,
       types: i.types,
       creators: e.community_publishers,
@@ -1584,11 +1584,11 @@ export function $$tQ2({
   isMobileSize: i,
   openLightboxRDP: n
 }) {
-  let o = K2(e);
-  let a = zY(e);
+  let o = getResourceName(e);
+  let a = getResourceDescription(e);
   let c = t.related_content;
-  let d = g0(e);
-  let m = _$$N(`(min-width: ${w3}px)`);
+  let d = isPluginOrWidget(e);
+  let m = usePrefersMediaQuery(`(min-width: ${w3}px)`);
   let {
     showTags,
     showSidebarPublisherDetailsContainer,
@@ -1597,12 +1597,12 @@ export function $$tQ2({
     showDescriptionViewHeader,
     showAnchorTabs
   } = tz();
-  let T = zL(e);
-  let I = !ZA(e) && !_$$tv(e) && !T;
+  let T = isFigmakeTemplate(e);
+  let I = !isSiteTemplate(e) && !isCooperTemplateFile(e) && !T;
   let N = {
     detailPendingCreatorInvite: jsx(tM, {
       resourceId: t.id,
-      resourceType: Vm(t),
+      resourceType: getResourceType(t),
       containerClassName: BE
     }),
     detailPendingPluginPublisherInvite: d ? jsx(tO, {
@@ -1640,8 +1640,8 @@ export function $$tQ2({
     }) : void 0,
     socialLinks: jsx(_$$R2, {
       author: Lj(t),
-      resourceType: Vm(t),
-      resourceURL: DV(t),
+      resourceType: getResourceType(t),
+      resourceURL: buildFullCommunityUrl(t),
       resourceId: e.id,
       resourceName: o ?? ""
     }),

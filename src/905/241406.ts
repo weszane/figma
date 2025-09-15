@@ -5,7 +5,7 @@ import { ModalCloseButton } from "../905/17223";
 import { ButtonSecondary, ButtonBasePrimary, SecureLink } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
-import { Uu } from "../figma_app/471982";
+import { isStripePending } from "../figma_app/471982";
 import { n7 } from "../905/926523";
 import { popModalStack } from "../905/156213";
 import { kc, sD } from "../figma_app/740025";
@@ -42,7 +42,7 @@ function P(e) {
   let t = useRef();
   let [i, a] = useState(!1);
   let s = `MergeProfileDisabledTooltipKey-${e.user.id}`;
-  let o = Uu(e.user);
+  let o = isStripePending(e.user);
   let l = "merge_profiles--connectUserRow--p7hQl";
   o ? l = "merge_profiles--disableConnectUserRow--3RsHX merge_profiles--connectUserRow--p7hQl" : e.isSelected && (l = "merge_profiles--selectedConnectUserRow--fCP2P");
   return jsxs("div", {

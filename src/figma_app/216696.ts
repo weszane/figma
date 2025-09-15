@@ -6,7 +6,7 @@ import { createOptimistThunk } from "../905/350402";
 import { x1 as _$$x } from "../figma_app/740025";
 import { setupLoadingStateHandler } from "../905/696711";
 import { ResourceTypeNoComment2 } from "../figma_app/45218";
-import { A } from "../905/665703";
+import { communityShelfService } from "../905/665703";
 let $$p2 = createActionCreator("COMMUNITY_SET_SHELVES_FOR_SHELF_TYPE");
 let $$_1 = createOptimistThunk((e, {
   shelfType: t,
@@ -18,7 +18,7 @@ let $$_1 = createOptimistThunk((e, {
     shelfType: t,
     limitShelfContent: r
   };
-  let s = A.getCommunityShelves(a);
+  let s = communityShelfService.getCommunityShelves(a);
   setupLoadingStateHandler(s, e, n);
   s.then(({
     data: r
@@ -46,7 +46,7 @@ let $$h0 = createOptimistThunk((e, {
 }, {
   loadingKey: i
 }) => {
-  let a = A.getCommunityShelves({
+  let a = communityShelfService.getCommunityShelves({
     shelfType: t,
     filterLabel: r,
     limitShelfContent: n

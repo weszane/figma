@@ -6,7 +6,7 @@ export namespace ResourceTypes {
   /**
    * Resource types available for browsing.
    */
-  export const Browse = {
+  export const BrowseResourceTypes = {
     FILES: 'files',
     PLUGINS: 'plugins',
     WIDGETS: 'widgets',
@@ -16,15 +16,15 @@ export namespace ResourceTypes {
   /**
    * Unique resource types for browsing (excluding 'MIXED').
    */
-  export const Unique = Object.keys(Browse)
+  export const Unique = Object.keys(BrowseResourceTypes)
     .filter(type => type !== 'MIXED')
-    .map(type => Browse[type])
+    .map(type => BrowseResourceTypes[type])
 
   /**
    * Resource types available for searching (includes 'PROFILES').
    */
-  export const Search = {
-    ...Browse,
+  export const SearchResourceTypes = {
+    ...BrowseResourceTypes,
     PROFILES: 'profiles',
   }
 }
@@ -34,9 +34,9 @@ export namespace ResourceTypes {
  * Original variable: $$r1
  */
 export const ResourceTypeSubset = {
-  FILES: ResourceTypes.Browse.FILES,
-  PLUGINS: ResourceTypes.Browse.PLUGINS,
-  WIDGETS: ResourceTypes.Browse.WIDGETS,
+  FILES: ResourceTypes.BrowseResourceTypes.FILES,
+  PLUGINS: ResourceTypes.BrowseResourceTypes.PLUGINS,
+  WIDGETS: ResourceTypes.BrowseResourceTypes.WIDGETS,
 }
 
 // Refactored exports for clarity and maintainability

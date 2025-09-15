@@ -19,7 +19,7 @@ import { M as _$$M } from "../figma_app/170366";
 import { pS } from "../905/588985";
 import { getFullscreenViewEditorType, generatePluginId } from "../figma_app/300692";
 import { Bs, d_, cj } from "../905/197730";
-import { ResourceType } from "../figma_app/45218";
+import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
@@ -55,7 +55,7 @@ function G({
   setSelectedEditorTypes: s
 }) {
   return jsxs(Fragment, {
-    children: [e === ResourceType.PLUGIN ? jsx(z, {
+    children: [e === HubTypeEnum.PLUGIN ? jsx(z, {
       isSelected: a.includes(ManifestEditorType.FIGMA) && a.includes(ManifestEditorType.FIGJAM) && a.includes(ManifestEditorType.SLIDES),
       image: jsx(_$$A.editorTypes.multiProduct, {}),
       titleText: getI18nString("community.plugin_development.plugin_creation_editor_option_multi_product"),
@@ -64,20 +64,20 @@ function G({
     }) : jsx(z, {
       isSelected: a.includes(ManifestEditorType.FIGMA) && a.includes(ManifestEditorType.FIGJAM),
       image: jsx(_$$A.editorTypes.multiProduct, {}),
-      titleText: getI18nString(e === ResourceType.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam"),
-      descriptionText: getI18nString(e === ResourceType.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam_description"),
+      titleText: getI18nString(e === HubTypeEnum.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam"),
+      descriptionText: getI18nString(e === HubTypeEnum.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_and_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_and_figjam_description"),
       onSelect: () => s([ManifestEditorType.FIGMA, ManifestEditorType.FIGJAM])
     }), t && jsx(z, {
       isSelected: a.includes(ManifestEditorType.FIGMA) && 1 === a.length,
       image: jsx(_$$A.editorTypes.figmaDesign, {}),
-      titleText: getI18nString(e === ResourceType.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design" : "community.plugin_development.plugin_creation_editor_option_figma_design"),
-      descriptionText: getI18nString(e === ResourceType.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_description"),
+      titleText: getI18nString(e === HubTypeEnum.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design" : "community.plugin_development.plugin_creation_editor_option_figma_design"),
+      descriptionText: getI18nString(e === HubTypeEnum.WIDGET ? "community.plugin_development.widget_creation_editor_option_figma_design_description" : "community.plugin_development.plugin_creation_editor_option_figma_design_description"),
       onSelect: () => s([ManifestEditorType.FIGMA])
     }), r && jsx(z, {
       isSelected: a.includes(ManifestEditorType.FIGJAM) && 1 === a.length,
       image: jsx(_$$A.editorTypes.figJam, {}),
-      titleText: getI18nString(e === ResourceType.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam" : "community.plugin_development.plugin_creation_editor_option_figjam"),
-      descriptionText: getI18nString(e === ResourceType.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figjam_description"),
+      titleText: getI18nString(e === HubTypeEnum.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam" : "community.plugin_development.plugin_creation_editor_option_figjam"),
+      descriptionText: getI18nString(e === HubTypeEnum.WIDGET ? "community.plugin_development.widget_creation_editor_option_figjam_description" : "community.plugin_development.plugin_creation_editor_option_figjam_description"),
       onSelect: () => s([ManifestEditorType.FIGJAM])
     }), i && jsx(z, {
       isSelected: a.includes(ManifestEditorType.SLIDES) && 1 === a.length,
@@ -227,7 +227,7 @@ export let $$W0 = registerModal(function ({
           how: "created",
           [e + "Id"]: r,
           version: pS,
-          isWidget: e === ResourceType.WIDGET,
+          isWidget: e === HubTypeEnum.WIDGET,
           productType: getFullscreenViewEditorType() === ManifestEditorType.FIGMA ? "design" : "whiteboard"
         });
         t(QF({
@@ -266,7 +266,7 @@ export let $$W0 = registerModal(function ({
       }));
       return;
     }
-    let n = e === ResourceType.PLUGIN ? d_[K] : cj[q];
+    let n = e === HubTypeEnum.PLUGIN ? d_[K] : cj[q];
     let i = await et({
       resourceId: r,
       template: n(b, r, $)
@@ -305,7 +305,7 @@ export let $$W0 = registerModal(function ({
       onClick: er,
       disabled: "" === b,
       children: jsx("span", {
-        "data-tooltip": e === ResourceType.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
+        "data-tooltip": e === HubTypeEnum.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
         "data-tooltip-type": "" === b ? KindEnum.TEXT : null,
         children: renderI18nText("community.plugin_development.save_as")
       })
@@ -318,7 +318,7 @@ export let $$W0 = registerModal(function ({
     }), jsx(BigTextInputForwardRef, {
       autoFocus: !0,
       className: $O,
-      "data-tooltip": e === ResourceType.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
+      "data-tooltip": e === HubTypeEnum.PLUGIN ? getI18nString("community.plugin_development.you_must_provide_a_name_for_your_plugin") : getI18nString("community.plugin_development.you_must_provide_a_name_for_your_widget"),
       "data-tooltip-ignore-mouse": !0,
       "data-tooltip-key": "plugin-new-development-modal",
       "data-tooltip-show-immediately": !0,
@@ -327,7 +327,7 @@ export let $$W0 = registerModal(function ({
         e.currentTarget.value && Z && Q(!1);
         C(e.currentTarget.value);
       },
-      placeholder: e === ResourceType.PLUGIN ? getI18nString("community.plugin_development.plugin_name") : getI18nString("community.plugin_development.widget_name"),
+      placeholder: e === HubTypeEnum.PLUGIN ? getI18nString("community.plugin_development.plugin_name") : getI18nString("community.plugin_development.widget_name"),
       value: b
     }), jsx($v, {
       visible: Z,
@@ -348,7 +348,7 @@ export let $$W0 = registerModal(function ({
         }), jsx("div", {
           className: gn,
           children: jsx("div", {
-            children: e === ResourceType.PLUGIN ? getI18nString("community.plugin_development.create_plugin") : getI18nString("community.plugin_development.create_widget")
+            children: e === HubTypeEnum.PLUGIN ? getI18nString("community.plugin_development.create_plugin") : getI18nString("community.plugin_development.create_widget")
           })
         }), jsxs("div", {
           className: Bb,
@@ -389,13 +389,13 @@ export let $$W0 = registerModal(function ({
         }), jsx("div", {
           className: gn,
           children: jsx("div", {
-            children: e === ResourceType.PLUGIN ? renderI18nText("community.plugin_development.create_plugin") : renderI18nText("community.plugin_development.create_widget")
+            children: e === HubTypeEnum.PLUGIN ? renderI18nText("community.plugin_development.create_plugin") : renderI18nText("community.plugin_development.create_widget")
           })
         }), jsxs("div", {
           className: Bb,
           children: [em, jsx("div", {
             className: i,
-            children: e === ResourceType.PLUGIN ? jsx(V, {
+            children: e === HubTypeEnum.PLUGIN ? jsx(V, {
               selectedTemplate: K,
               setSelectedTemplate: Y
             }) : jsx(H, {
@@ -440,19 +440,19 @@ export let $$W0 = registerModal(function ({
         className: WG,
         children: [jsx("div", {
           className: GK,
-          children: e === ResourceType.PLUGIN ? getI18nString("community.plugin_development.new_plugin_created") : getI18nString("community.plugin_development.new_widget_created")
+          children: e === HubTypeEnum.PLUGIN ? getI18nString("community.plugin_development.new_plugin_created") : getI18nString("community.plugin_development.new_widget_created")
         }), jsxs("div", {
           className: Bb,
           children: [jsx("span", {
             className: Cb,
-            children: e === ResourceType.PLUGIN ? renderI18nText("community.plugin_development.follow_our_setup_guide_plugin", {
+            children: e === HubTypeEnum.PLUGIN ? renderI18nText("community.plugin_development.follow_our_setup_guide_plugin", {
               setupGuideLink: r
             }) : renderI18nText("community.plugin_development.follow_our_setup_guide_widget", {
               setupGuideLink: r
             })
           }), jsx("div", {
             className: dH,
-            children: e === ResourceType.PLUGIN ? renderI18nText("community.plugin_development.connect_with_other_plugin_developers", {
+            children: e === HubTypeEnum.PLUGIN ? renderI18nText("community.plugin_development.connect_with_other_plugin_developers", {
               joinOurDiscordLink: i
             }) : renderI18nText("community.plugin_development.connect_with_other_widget_developers", {
               joinOurDiscordLink: i
@@ -474,7 +474,7 @@ export let $$W0 = registerModal(function ({
         })]
       }), jsx("div", {
         className: x9,
-        children: e === ResourceType.WIDGET ? jsx(_$$A.widgetSuccess, {}) : jsx(_$$A.pluginSuccess, {})
+        children: e === HubTypeEnum.WIDGET ? jsx(_$$A.widgetSuccess, {}) : jsx(_$$A.pluginSuccess, {})
       })]
     });
   })() : jsx(Fragment, {});

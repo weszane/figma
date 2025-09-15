@@ -44,7 +44,7 @@ import { nt as _$$nt, o3 as _$$o } from '../905/226610';
 import { s as _$$s4 } from '../905/234042';
 import { Ag, H5, Hz } from '../905/235578';
 import { y as _$$y4 } from '../905/236825';
-import { C as _$$C4 } from '../905/237873';
+import { PricingOptions } from '../905/237873';
 import { z as _$$z } from '../905/239603';
 import { R as _$$R6 } from '../905/240644';
 import { A as _$$A11 } from '../905/251970';
@@ -123,7 +123,7 @@ import { g as _$$g } from '../905/687265';
 import { E as _$$E4, f as _$$f5 } from '../905/690713';
 import { getSingletonSceneGraph } from '../905/700578';
 import { y as _$$y } from '../905/705736';
-import { M4 } from '../905/713695';
+import { liveStoreInstance } from '../905/713695';
 import { logInfo, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { i as _$$i } from '../905/718764';
@@ -244,7 +244,7 @@ import { atom, atomStoreManager, AY, createLocalStorageAtom, createRemovableAtom
 import { Pt as _$$Pt2, NV, OX, qu, x2, xZ } from '../figma_app/33586';
 import { ms } from '../figma_app/38430';
 import { useLatestRef } from '../figma_app/922077';
-import { ResourceType } from '../figma_app/45218';
+import { HubTypeEnum } from '../figma_app/45218';
 import { YJ } from '../figma_app/50224';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
 import { getObservableOrFallback } from '../figma_app/84367';
@@ -279,20 +279,20 @@ import { lM as _$$lM, q8 as _$$q6, S3, U4, Xq } from '../figma_app/254872';
 import { dt as _$$dt, fC, he, QS, VA } from '../figma_app/259578';
 import { nB as _$$nB, hE, vo, Y9 } from '../figma_app/272243';
 import { rgbToHsl, rgbToHsv, colorToRgb } from '../figma_app/273493';
-import { q as _$$q5, S as _$$S2 } from '../figma_app/277543';
+import { DesignToolType, mapEditorToType } from '../figma_app/277543';
 import { p as _$$p2 } from '../figma_app/284426';
 import { FX as _$$FX } from '../figma_app/291792';
 import { eg as _$$eg, i6 as _$$i2, lw as _$$lw, Ev, F$, HD, mi, Mq, NH, vI } from '../figma_app/297822';
 import { _p } from '../figma_app/297957';
 import { filterArrayByEditorType, getCurrentPluginVersion, getPluginByFileId, injectHtmlOrUiFiles, PluginPermissions } from '../figma_app/300692';
-import { vt } from '../figma_app/306946';
+import { ResourceTypeEnum } from '../figma_app/306946';
 import { Tv } from '../figma_app/311375';
 import { getProductType } from '../figma_app/314264';
 import { bJ } from '../figma_app/318123';
 import { eH as _$$eH } from '../figma_app/318590';
 import { m as _$$m2 } from '../figma_app/321561';
 import { dL as _$$dL, el as _$$el, _V, KY } from '../figma_app/322845';
-import { e as _$$e6 } from '../figma_app/324237';
+import { SortOptions } from '../figma_app/324237';
 import { CN, FL, MR, NY, Vl, w8, Y6 } from '../figma_app/347120';
 import { c1, vg, Yh } from '../figma_app/357047';
 import { nj as _$$nj, XG } from '../figma_app/360824';
@@ -301,7 +301,7 @@ import { a as _$$a } from '../figma_app/380422';
 import { p as _$$p3 } from '../figma_app/398051';
 import { aq as _$$aq } from '../figma_app/399472';
 import { S as _$$S } from '../figma_app/420927';
-import { $9, Gk } from '../figma_app/427318';
+import { getPluginOrWidgetContent, hasOrgPrivateResourceType } from '../figma_app/427318';
 import { Ay } from '../figma_app/432652';
 import { C as _$$C2 } from '../figma_app/444297';
 import { g as _$$g5, o as _$$o5 } from '../figma_app/449363';
@@ -363,7 +363,7 @@ import { dG } from '../figma_app/753501';
 import { F as _$$F2 } from '../figma_app/757236';
 import { ActionType, AppStateTsApi, AssetSource, ColorFormatEnum, ComponentPropsAiCPPBindings, ContentFillNudgesStateBindings, DesignGraphElements, DesignToBuzzHelpers, FirstDraftHelpers, Fullscreen, ImageToolsBindings, LayoutTabType, SceneGraphHelpers, UiParserHelpers } from '../figma_app/763686';
 import { w as _$$w3 } from '../figma_app/774411';
-import { AC, G8 } from '../figma_app/777551';
+import { isResourcePendingPublishing, getResourceTaglineOrDescription } from '../figma_app/777551';
 import { c4 } from '../figma_app/805925';
 import { oG as _$$oG, _g, xm } from '../figma_app/826288';
 import { I as _$$I } from '../figma_app/827540';
@@ -7801,7 +7801,7 @@ function oN(e) {
       text: a.name
     };
   }
-  if (hasLocalFileId(extension) && publishedExtension && AC(publishedExtension)) {
+  if (hasLocalFileId(extension) && publishedExtension && isResourcePendingPublishing(publishedExtension)) {
     return {
       text: getI18nString('qa.extensions.in_review'),
       variant: _$$x5.BRAND
@@ -9418,7 +9418,7 @@ function lk(e) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h5,
         data: {
-          resourceType: ResourceType.PLUGIN
+          resourceType: HubTypeEnum.PLUGIN
         }
       }));
     }
@@ -9431,7 +9431,7 @@ function lk(e) {
       fullscreenValue.dispatch(showModalHandler({
         type: _$$h5,
         data: {
-          resourceType: ResourceType.WIDGET
+          resourceType: HubTypeEnum.WIDGET
         }
       }));
     }
@@ -9719,7 +9719,7 @@ function de({
     augmentedExtension: e
   });
   if (!canRun && !canRequest) return null;
-  let u = G8(extension, stripHtmlTags);
+  let u = getResourceTaglineOrDescription(extension, stripHtmlTags);
   return jsx(_$$p4, {
     primaryAction: c,
     setActive: o,
@@ -9862,41 +9862,41 @@ function ds({
       let [n, o] = useState(!1);
       let l = useMemo(() => {
         let e = {
-          resourceType: [vt.PLUGIN, vt.WIDGET],
+          resourceType: [ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET],
           editorType: function (e) {
             switch (e) {
               case FFileType.SLIDES:
-                return _$$q5.SLIDES;
+                return DesignToolType.SLIDES;
               case FFileType.COOPER:
-                return _$$q5.COOPER;
+                return DesignToolType.COOPER;
               default:
-                return _$$q5.DESIGN;
+                return DesignToolType.DESIGN;
             }
           }(t),
           caller: _$$z4.SUGGESTED_EXTENSIONS,
-          sortBy: _$$e6.Browse.POPULAR,
+          sortBy: SortOptions.Browse.POPULAR,
           includeContent: !0
         };
         return [{
           ...e,
-          price: _$$C4.FREE
+          price: PricingOptions.FREE
         }, {
           ...e,
-          price: _$$C4.PAID
+          price: PricingOptions.PAID
         }];
       }, [t]);
       let d = useCallback(async () => {
         let e;
         let t;
         try {
-          [e, t] = await Promise.all([M4.fetch(_$$a6.ResourcesPaginatedQuery(l[0])), M4.fetch(_$$a6.ResourcesPaginatedQuery(l[1]))]);
+          [e, t] = await Promise.all([liveStoreInstance.fetch(_$$a6.ResourcesPaginatedQuery(l[0])), liveStoreInstance.fetch(_$$a6.ResourcesPaginatedQuery(l[1]))]);
         } catch (e) {
           o(!1);
           r([]);
           return;
         }
-        let i = e.map(e => $9(e)).filter(e => !!e);
-        let n = t.map(e => $9(e)).filter(e => !!e);
+        let i = e.map(e => getPluginOrWidgetContent(e)).filter(e => !!e);
+        let n = t.map(e => getPluginOrWidgetContent(e)).filter(e => !!e);
         r(shuffle([...shuffle(i).slice(0, 10), ...shuffle(n).slice(0, 5)]));
         o(!0);
       }, [l]);
@@ -10036,7 +10036,7 @@ function dd({
   }) : null;
 }
 let du = dc;
-let dy = M4.Query({
+let dy = liveStoreInstance.Query({
   fetch: async e => (await $W.getExtensions(e)).data.meta,
   enabled: () => !getFeatureFlags().ext_extended_plugin_editor_types,
   output: ({
@@ -10046,13 +10046,13 @@ let dy = M4.Query({
     private: e.results.$$private.map(e => e.model)
   })
 });
-let db = M4.Query({
+let db = liveStoreInstance.Query({
   fetch: async e => {
     let t = {
       ...e,
       limit_associations: !0,
-      sort_by: _$$e6.Search.RELEVANCY,
-      resource_type: [vt.PLUGIN, vt.WIDGET],
+      sort_by: SortOptions.Search.RELEVANCY,
+      resource_type: [ResourceTypeEnum.PLUGIN, ResourceTypeEnum.WIDGET],
       include_content: !0,
       consolidate_org_search: !0
     };
@@ -10065,7 +10065,7 @@ let db = M4.Query({
     let {
       pass,
       fail
-    } = partitionByPredicate(e.results, e => Gk(e.model));
+    } = partitionByPredicate(e.results, e => hasOrgPrivateResourceType(e.model));
     return {
       public: fail.map(({
         model: e
@@ -10136,7 +10136,7 @@ function dv({
         errors: s
       }] = setupResourceAtomHandler(getFeatureFlags().ext_extended_plugin_editor_types ? db({
         query: e.trim(),
-        resourceEditorType: _$$S2(t),
+        resourceEditorType: mapEditorToType(t),
         orgId: i ? r : void 0,
         maxNumResults: 20
       }) : dy({

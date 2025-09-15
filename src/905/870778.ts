@@ -11,7 +11,7 @@ import { g as _$$g } from "../905/125190";
 import { r as _$$r } from "../905/857502";
 import { customHistory } from "../905/612521";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { Tg, Xu, Uo } from "../figma_app/354658";
+import { Tg, CommunityRoute, ResourceType } from "../figma_app/354658";
 import { S as _$$S } from "../figma_app/11182";
 import { hasPublishScope, hasClientMeta, isWidgetOrPlugin } from "../figma_app/45218";
 import { H } from "../905/548668";
@@ -137,9 +137,9 @@ export function $$x1({
 export function $$S4(e) {
   return hasPublishScope(e) ? "" : hasClientMeta(e) ? new Tg({
     resourceId: e.id
-  }).href : isWidgetOrPlugin(e) ? new Xu({
+  }).href : isWidgetOrPlugin(e) ? new CommunityRoute({
     resourceId: e.id,
-    apiResourceType: e.is_widget ? Uo.WIDGET : Uo.PLUGIN
+    apiResourceType: e.is_widget ? ResourceType.WIDGET : ResourceType.PLUGIN
   }).href : "";
 }
 export const A_ = $$I0;

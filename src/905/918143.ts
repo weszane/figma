@@ -3,7 +3,7 @@ import { useCallback, useRef, useMemo, useState, useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { getI18nString } from "../905/303541";
 import { editorUtilities as _$$k2 } from "../905/22009";
-import { iB } from "../figma_app/188671";
+import { allCategoriesQuery } from "../figma_app/188671";
 import { IT } from "../905/713695";
 import { h as _$$h } from "../905/207101";
 import { BigTextInputForwardRef } from "../figma_app/637027";
@@ -175,7 +175,7 @@ export function $$k2({
   disabled: g,
   editorType: f
 }) {
-  let [_] = IT(iB(f));
+  let [_] = IT(allCategoriesQuery(f));
   null != _.data && f !== _$$k2.Editors.SLIDES && (_.data = _.data.filter(e => "presentations" !== e.url_slug));
   let A = useMemo(() => {
     if ("loaded" !== _.status) return [];

@@ -1,7 +1,7 @@
 import { sortByDate } from "../figma_app/656233";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
-import { Qy } from "../figma_app/471982";
-import { M4 } from "../905/713695";
+import { getCurrentVersionCreatedAt } from "../figma_app/471982";
+import { liveStoreInstance } from "../905/713695";
 import { H } from "../905/473998";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
@@ -12,7 +12,7 @@ export let $$c0 = new class {
     this.RestrictedProfilesSchemaValidator = createNoOpValidator();
     this.HandleAvailableSchemaValidator = createNoOpValidator();
     this.EditorsSchemaValidator = createNoOpValidator();
-    this.profilePublicResourceQuery = M4.Query({
+    this.profilePublicResourceQuery = liveStoreInstance.Query({
       fetch: async e => {
         let {
           profileId
@@ -31,7 +31,7 @@ export let $$c0 = new class {
           pluginsAndWidgets: [...n.data.meta, ...r.data.meta]
         };
       },
-      output: e => sortByDate([...e.data.hubFiles, ...e.data.pluginsAndWidgets], e => Qy(e))
+      output: e => sortByDate([...e.data.hubFiles, ...e.data.pluginsAndWidgets], e => getCurrentVersionCreatedAt(e))
     });
   }
   getProfile(e) {

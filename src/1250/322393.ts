@@ -19,8 +19,8 @@ import { LibraryComponentDataByLibraryKey } from '../figma_app/43951';
 import { isNotNullish } from '../figma_app/95419';
 import { u as _$$u } from '../figma_app/187359';
 import { FFileType } from '../figma_app/191312';
-import { vt } from '../figma_app/306946';
-import { e as _$$e } from '../figma_app/324237';
+import { ResourceTypeEnum } from '../figma_app/306946';
+import { SortOptions } from '../figma_app/324237';
 import { LU } from '../figma_app/327588';
 import { mapComponentProperties } from '../figma_app/349248';
 import { gI, Wn } from '../figma_app/396464';
@@ -132,8 +132,8 @@ export function $$J18() {
     status: P
   }] = setupResourceAtomHandler(_$$V({
     query: h,
-    sort_by: _$$e.Search.POPULAR,
-    resource_type: [vt.COOPER_TEMPLATE_ASSET],
+    sort_by: SortOptions.Search.POPULAR,
+    resource_type: [ResourceTypeEnum.COOPER_TEMPLATE_ASSET],
     org_id: O,
     team_id: R,
     include_content_for_cooper: !0
@@ -145,8 +145,8 @@ export function $$J18() {
     status: L
   }] = setupResourceAtomHandler(_$$V({
     query: h,
-    sort_by: _$$e.Search.POPULAR,
-    resource_type: [vt.COOPER_TEMPLATE_ASSET],
+    sort_by: SortOptions.Search.POPULAR,
+    resource_type: [ResourceTypeEnum.COOPER_TEMPLATE_ASSET],
     include_content_for_cooper: !0,
     include_category_slug: !0,
     include_tags: !0

@@ -5,7 +5,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { Kf, Jk } from "../figma_app/99826";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { IT, M4 } from "../905/713695";
+import { IT, liveStoreInstance } from "../905/713695";
 import { $ } from "../905/479092";
 import { A } from "../5724/75936";
 let p = "link_favicon--favicon--jk134";
@@ -50,7 +50,7 @@ export function $$g1({
     className: "link_favicon--faviconPlaceholder--CFVEV"
   });
 }
-let $$f = M4.Query({
+let $$f = liveStoreInstance.Query({
   fetch: async e => e ? (await $.getFaviconForUrlProxy({
     url: Jk(e)
   })).data.meta ?? null : null
