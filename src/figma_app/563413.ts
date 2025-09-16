@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useImperativeHandle, useState, useRef, useEffect, forwardRef } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { D } from "../905/555681";
 import { h as _$$h } from "../905/994594";
 import { f as _$$f } from "../905/54715";
@@ -569,7 +569,7 @@ function z({
 }) {
   return !e || t ? null : jsx("div", {
     className: p()(i3, c),
-    children: jsx(K, {
+    children: jsx(IconButton, {
       onClick: i,
       "aria-label": getI18nString("search.search_bar.clear"),
       recordingKey: s,

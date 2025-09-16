@@ -15,7 +15,7 @@ import { Sc } from "../905/18797";
 import { setupLoadingStateHandler } from "../905/696711";
 import { G } from "../figma_app/124713";
 import { Eh } from "../figma_app/617654";
-import { x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 let $$T6 = setUserInOrgs;
 let $$I8 = createOptimistAction("ORG_USER_PUT", async (e, t, {
   optimistId: r
@@ -102,7 +102,7 @@ let $$S0 = createOptimistThunk(async (e, t) => {
       formState: AuthFlowStep.JOIN_ORG,
       redirectUrl: customHistory.location.pathname
     })), e.dispatch(showModalHandler({
-      type: x,
+      type: AuthModal,
       data: {}
     }))) : e.dispatch(FlashActions.error(r.data?.message || getI18nString("org_user_actions.an_error_occurred_requesting_account_type")));
     t.onError?.();

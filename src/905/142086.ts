@@ -25,7 +25,7 @@ import { z as _$$z } from '../905/404751';
 import { LazyInputForwardRef } from '../905/408237';
 import { A as _$$A3 } from '../905/408320';
 import { S as _$$S2 } from '../905/433182';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
 import { useWebLoggerTimerEffect } from '../905/485103';
 import { x as _$$x } from '../905/505155';
@@ -40,7 +40,7 @@ import { In } from '../905/672640';
 import { P as _$$P2 } from '../905/688136';
 import { e0 as _$$e } from '../905/696396';
 import { SvgComponent } from '../905/714743';
-import { i as _$$i } from '../905/718764';
+import { TabLoop } from '../905/718764';
 import { s as _$$s2 } from '../905/761565';
 import { h as _$$h } from '../905/864281';
 import { K as _$$K2 } from '../905/899124';
@@ -775,7 +775,7 @@ let eR = registerModal(e => {
   return jsx(TrackingProvider, {
     name: _$$e.FILE_MOVE_MODAL,
     properties: eq,
-    children: jsx(_$$i, {
+    children: jsx(TabLoop, {
       children: jsxs(OJ, {
         title: jsxs('div', {
           className: _$$s.alignCenter.flex.ml8.maxW350.$,
@@ -844,7 +844,7 @@ let eR = registerModal(e => {
               'aria-label': getI18nString('file_browser.file_move.search_placeholder')
             }), !!ej && jsx('div', {
               className: mt,
-              children: jsx(_$$K, {
+              children: jsx(IconButton, {
                 'onClick': eQ,
                 'aria-label': getI18nString('search.search_bar.clear'),
                 'children': jsx(In, {

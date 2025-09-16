@@ -13,7 +13,7 @@ import { generateUUIDv4 } from '../905/871474';
 import { Xr } from '../figma_app/27355';
 import { FProductAccessType } from '../figma_app/191312';
 import { MQ } from '../figma_app/197432';
-import { jk, nB, r1, vo, wi } from '../figma_app/272243';
+import { DialogActionStrip, DialogBody, DialogHiddenTitle, DialogContents, DialogFooter } from '../figma_app/272243';
 import { $z } from '../figma_app/617427';
 import { TrackingProvider } from '../figma_app/831799';
 let v = {
@@ -37,12 +37,12 @@ function I(e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 340,
-    children: jsxs(vo, {
-      children: [jsx(r1, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHiddenTitle, {
         children: jsx('div', {
           children: renderI18nText('1_click_expansion.you_now_have_full_access')
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('div', {
           className: 'x1v4kod4 x14p8jc9 x13ktmxq x1n2onr6',
           children: jsx(T, {
@@ -52,8 +52,8 @@ function I(e) {
           className: 'x1vi7shn',
           children: e.children
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx($z, {
             autoFocus: !0,
             variant: 'primary',

@@ -3,7 +3,7 @@ import { XHR } from "../905/910117";
 import { AUTH_INIT } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
 import { showModalHandler } from "../905/156213";
-import { x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 export async function $$d0(e, t) {
   try {
     await XHR.post("/api/files/edit_request", {
@@ -16,7 +16,7 @@ export async function $$d0(e, t) {
       formState: AuthFlowStep.JOIN_ORG,
       redirectUrl: customHistory.location.pathname
     })), e(showModalHandler({
-      type: x,
+      type: AuthModal,
       data: {}
     })));
     return !1;

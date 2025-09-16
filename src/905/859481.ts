@@ -19,7 +19,7 @@ import { _2 } from "../905/185121";
 import { CL } from "../figma_app/722913";
 import { dL } from "../figma_app/473914";
 import { useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { F as _$$F } from "../905/427107";
 import { Fullscreen } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -96,7 +96,7 @@ function j(e) {
       }, t))]
     })
   });
-  let u = jsx(K, {
+  let u = jsx(IconButton, {
     recordingKey: generateRecordingKey(e, "swapCap"),
     onClick: () => {
       permissionScopeHandler.user("swap-stroke-end-caps", () => {

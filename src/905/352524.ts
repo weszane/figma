@@ -3,7 +3,7 @@ import { useId, useCallback, memo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { b as _$$b } from "../905/946806";
 import { FileFormat, FillType, StickyTableConfig, AppStateTsApi, Fullscreen } from "../figma_app/763686";
@@ -388,11 +388,11 @@ let J = memo(function (e) {
     width: 364,
     children: jsxs(ModalFormContents, {
       onSubmit: G,
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("whiteboard.figjam_export.export")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx($, {
           fileType: w,
           onChangeFileType: e => {
@@ -423,7 +423,7 @@ let J = memo(function (e) {
           onChangeAreaType: U,
           recordingKey: Q
         })]
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [function (e, t, i) {
           switch (e) {
             case FileFormat.PNG:
@@ -439,7 +439,7 @@ let J = memo(function (e) {
         }(w, M, pickerInfo) && jsxs("div", {
           className: "figjam_export_pickers--exportWarning--KzT0q",
           children: [jsx(_$$b, {}), renderI18nText("whiteboard.figjam_export.exporting_may_take_a_minute_or_two")]
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: "primary",
             type: "submit",

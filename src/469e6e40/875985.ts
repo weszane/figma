@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import r from "classnames";
 import { SvgComponent } from "../905/714743";
@@ -78,7 +78,7 @@ export function $$f3(e) {
           className: _$$s.wFull.$,
           children: e.children
         })]
-      }), jsx(K, {
+      }), jsx(IconButton, {
         onClick: e.onClose,
         "aria-label": getI18nString("admin_settings.dimiss"),
         children: jsx(A, {})

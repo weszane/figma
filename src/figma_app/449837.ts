@@ -3,7 +3,7 @@ import { useContext, createContext, useMemo, useState, useCallback, useEffect, u
 import { clamp } from "../figma_app/492908";
 import { assertNotNullish } from "../figma_app/95419";
 import { k } from "../905/443820";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
 import { H } from "../905/404982";
@@ -647,7 +647,7 @@ export function $$B4(e) {
   };
   let b = (e, t, r, i, a) => a ? jsx("div", {
     className: x,
-    children: jsx(K, {
+    children: jsx(IconButton, {
       "aria-label": "ZOOM_IN" === t ? getI18nString("collaboration.branching.zoom_in") : getI18nString("collaboration.branching.zoom_out"),
       disabled: i,
       onClick: r,
@@ -698,7 +698,7 @@ export function $$G0() {
     className: A,
     children: [jsx("div", {
       className: x,
-      children: jsx(K, {
+      children: jsx(IconButton, {
         onClick: () => {
           setPosition({
             x: 0,
@@ -715,7 +715,7 @@ export function $$G0() {
       children: `${Math.round(zoomPercentage)}%`
     }), jsx("div", {
       className: x,
-      children: jsx(K, {
+      children: jsx(IconButton, {
         onClick: () => {
           setZoomPercentage(100);
           setIsFitZoom(!1);

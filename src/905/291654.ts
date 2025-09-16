@@ -16,7 +16,7 @@ import { If } from '../905/714538';
 import { D7, rj, T_, V1 } from '../905/946258';
 import { postUserFlag } from '../905/985254';
 import { FEditorType } from '../figma_app/53721';
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { mapFileToProductType } from '../figma_app/314264';
 import { selectCurrentFile } from '../figma_app/516028';
 import { $z } from '../figma_app/617427';
@@ -212,12 +212,12 @@ let k = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: R,
     width: 600,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: C.header
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('div', {
           style: {
             color: 'var(--color-text-secondary)',
@@ -230,14 +230,14 @@ let k = registerModal(e => {
           },
           children: C.content()
         })]
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [void 0 !== eulasToShow && void 0 !== eulaShown && eulasToShow > 1 && jsx('div', {
           'data-testid': 'eula-counts',
           'children': renderI18nText('community.eula.i_of_count', {
             i: eulaShown,
             count: eulasToShow
           })
-        }), jsxs(jk, {
+        }), jsxs(DialogActionStrip, {
           children: [jsx($z, {
             onClick: () => {
               t(postUserFlag({

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { b, bL } from "../figma_app/860955";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -44,7 +44,7 @@ export function $$y0({
     ...xk(!t && v.hidden),
     children: jsxs(bL, {
       manager,
-      children: [jsx(K, {
+      children: [jsx(IconButton, {
         htmlAttributes: {
           "data-tooltip": getI18nString("sidebar.new_file"),
           "data-onboarding-key": "new-file-icon"

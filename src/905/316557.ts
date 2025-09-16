@@ -25,8 +25,8 @@ import { UG } from "../figma_app/628987";
 import { Ao } from "../905/748636";
 import { lQ } from "../905/934246";
 import { bL as _$$bL } from "../905/911410";
-import { vo, Y9, hE as _$$hE, jk, nB } from "../figma_app/272243";
-import { K as _$$K } from "../905/443068";
+import { DialogContents, DialogHeader, DialogTitle, DialogActionStrip, DialogBody } from "../figma_app/272243";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { ScreenReaderOnly } from "../905/172252";
 import { i as _$$i } from "../905/22844";
@@ -87,21 +87,21 @@ function ep({
         defaultPosition: t,
         onClose: i,
         recordingKey: eu,
-        children: jsxs(vo, {
-          children: [jsxs(Y9, {
-            children: [jsx(_$$hE, {
+        children: jsxs(DialogContents, {
+          children: [jsxs(DialogHeader, {
+            children: [jsx(DialogTitle, {
               children: jsx(eg, {
                 themeId: e,
                 recordingKey: eu
               })
-            }), jsx(jk, {
+            }), jsx(DialogActionStrip, {
               children: jsx(em, {
                 themeId: e,
                 recordingKey: eu,
                 onClose: i
               })
             })]
-          }), jsxs(nB, {
+          }), jsxs(DialogBody, {
             padding: 0,
             children: [jsx(e_, {
               themeId: e,
@@ -132,7 +132,7 @@ function em({
     });
   }, [e, o, i]);
   let m = generateRecordingKey(t, "removeTheme");
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     htmlAttributes: {
       "data-tooltip": c,
       "data-tooltip-type": KindEnum.TEXT,
@@ -620,7 +620,7 @@ function eS({
     children: [jsx("p", {
       className: _$$s.textBodyMediumStrong.alignLeft.$,
       children: e
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       onClick: i,
       "aria-label": t,
       children: jsx(_$$e, {})

@@ -20,7 +20,7 @@ import { registerModal } from "../905/102752";
 import { mK } from "../figma_app/197286";
 import { i as _$$i } from "../905/46262";
 import { MM, jS } from "../905/136701";
-import { i as _$$i2 } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { BrowserInfo } from "../figma_app/778880";
 import { OJ } from "../905/519092";
 import { getFeatureFlags } from "../905/601108";
@@ -82,7 +82,7 @@ import { Q9, M_, kA } from "../905/32091";
 import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
 import { KM, Ku } from "../figma_app/877449";
 import { trackEventAnalytics } from "../905/449184";
@@ -159,7 +159,7 @@ import { $ as _$$$ } from "../figma_app/995722";
 import { AccessLevelEnum } from "../905/557142";
 import { R9, nu as _$$nu, E4 } from "../905/144598";
 import { og as _$$og } from "../905/466026";
-import { K as _$$K3 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { a as _$$a } from "../905/5627";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { LazyInputForwardRef } from "../905/408237";
@@ -285,7 +285,7 @@ import { F as _$$F4 } from "../905/680873";
 import { useSprigWithSampling } from "../905/99656";
 function T(e) {
   let t = BrowserInfo.isIpadNative;
-  return jsx(_$$i2, {
+  return jsx(TabLoop, {
     children: jsx(OJ, {
       bottomSection: e.bottomSection,
       closeOnEsc: !0,
@@ -586,15 +586,15 @@ function eZ(e) {
     manager,
     width: 450,
     height: "dynamic",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: title
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: content
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: onClose,
@@ -858,13 +858,13 @@ let to = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: m,
       width: "fit-content",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("file_permissions_modal.google_screencast_modal.title")
           })
         }), f ? jsxs(Fragment, {
-          children: [jsxs(_$$nB, {
+          children: [jsxs(DialogBody, {
             padding: 0,
             children: [jsxs("div", {
               className: _$$s.flex.flexRow.pl12.pt12.pb16.pr16.$,
@@ -917,7 +917,7 @@ let to = registerModal(function (e) {
             }), jsx("div", {
               className: "google_device_screenshare_modal--divider--b7Acz"
             })]
-          }), jsx(wi, {
+          }), jsx(DialogFooter, {
             children: jsx("div", {
               className: _$$s.inline.$,
               children: renderI18nText("file_permissions_modal.share_as.google_device.open_session_countdown", {
@@ -940,14 +940,14 @@ let to = registerModal(function (e) {
             })
           })]
         }) : "errors" === h.status ? jsxs(Fragment, {
-          children: [jsx(_$$nB, {
+          children: [jsx(DialogBody, {
             scrolling: "none",
             children: jsx("div", {
               className: _$$s.colorTextSecondary.$,
               children: renderI18nText("file_permissions_modal.screenshare_to_google_device.error_generating_code")
             })
-          }), jsx(wi, {
-            children: jsxs(jk, {
+          }), jsx(DialogFooter, {
+            children: jsxs(DialogActionStrip, {
               children: [jsx(Button, {
                 variant: "secondary",
                 onClick: p,
@@ -959,7 +959,7 @@ let to = registerModal(function (e) {
               })]
             })
           })]
-        }) : jsx(_$$nB, {
+        }) : jsx(DialogBody, {
           scrolling: "none",
           children: jsx("div", {
             className: _$$s.flex.itemsCenter.justifyCenter.my8.minH250.minW400.$,
@@ -1177,12 +1177,12 @@ let tW = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 350,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("confirm_prototype_share_modal.your_entire_file_will_be_shared")
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           className: "confirm_prototype_share_modal--modalTopSection--glopl",
           children: getI18nString("confirm_prototype_share_modal.sharing_this_link_will_give_others_direct_access_to_your_prototype")
@@ -1205,14 +1205,14 @@ let tW = registerModal(function (e) {
             children: getI18nString("confirm_prototype_share_modal.upgrade_your_plan")
           })]
         })]
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [jsx(Checkbox, {
           checked: l,
           onChange: e => d(e),
           label: jsx(Label, {
             children: getI18nString("confirm_prototype_share_modal.dont_show_again")
           })
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: "primary",
             onClick: () => {
@@ -2078,7 +2078,7 @@ function i$(e) {
       "data-testid": "link-autogen-password-input"
     }), e.password && e.password.length > 0 && jsx("div", {
       className: N8,
-      children: jsx(_$$K3, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("permissions.link_autogen_password_copy"),
         onClick: () => {
           e.password && (copyTextToClipboard(e.password), trackEventAnalytics("file_password_copied", {
@@ -3120,20 +3120,20 @@ let nR = registerModal(function () {
   return "loaded" !== s.status ? null : jsx(ModalRootComponent, {
     manager: o,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("community.access_needed_to_publish_in_org_modal.title")
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf xou54vl",
           children: [renderI18nText("community.access_needed_to_publish_in_org_modal.body"), jsx(nk, {
             users: s.data
           })]
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(_$$N2.Button, {
             variant: "secondary",
             href: _$$M2,
@@ -3166,15 +3166,15 @@ let nN = registerModal(function () {
   return jsx(ModalRootComponent, {
     manager: o,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("community.sites_publish_required_modal.title")
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: getI18nString("community.sites_publish_required_modal.body")
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: i,

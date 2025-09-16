@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useCallback, useEffect, useLayoutEffect, forwardRef } from "react";
 import { useSelector } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { wY } from "../figma_app/708845";
 import { generateRecordingKey } from "../figma_app/878298";
 import { E as _$$E } from "../905/277716";
@@ -171,7 +171,7 @@ export function $$Y0(e) {
   return jsxs(Fragment, {
     children: [jsx(_$$E, {
       name: "toggle_align_options_button",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         ref: r,
         actionOnPointerDown: t.showing,
         "aria-label": a,
@@ -246,7 +246,7 @@ function J(e) {
     alsoTrack: () => ({
       alignButtonAction: e.action
     }),
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       disabled: !t,
       onClick: () => {
         fullscreenValue.triggerActionInUserEditScope(e.action);

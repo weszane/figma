@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { ScreenReaderOnly } from "../905/172252";
-import { G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { P } from "../vendor/348225";
 import { N as _$$N } from "../vendor/930821";
 import { getI18nString } from "../905/303541";
@@ -109,7 +109,7 @@ export function $$g0({
   let [t, n] = useState(e || "enter");
   let [r, s] = useState(0);
   let d = useRef(0);
-  let m = G();
+  let m = useTheme();
   useEffect(() => {
     let o;
     if (e) return;
@@ -546,7 +546,7 @@ function f({
 }) {
   let t = "code" === e || "fixingErrors" === e;
   let n = "codeExit" === e;
-  let i = G();
+  let i = useTheme();
   return jsxs(Fragment, {
     children: [jsx(P.div, {
       style: {
@@ -920,7 +920,7 @@ function v({
         return "initial";
     }
   };
-  let m = G();
+  let m = useTheme();
   return jsxs(Fragment, {
     children: [jsxs(P.div, {
       style: {

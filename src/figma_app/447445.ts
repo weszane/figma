@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { lQ } from "../905/934246";
-import { F } from "../905/768014";
+import { defaultInputState } from "../905/768014";
 import { isFakeTouchEvent } from "../905/955878";
 import { hg } from "../905/705398";
 import { getFeatureFlags } from "../905/601108";
@@ -28,7 +28,7 @@ function _({
         !(e.current || !(target instanceof HTMLElement) || m(r)) && (null == r.relatedTarget || r.relatedTarget.closest('dialog,[role="dialog"]')) && ("pointer" !== t.current || target instanceof HTMLInputElement || target.blur());
       },
       onBlur(e) {
-        !(!e.relatedTarget || m(e)) && (e.currentTarget.contains(e.relatedTarget) || (t.current = F.type));
+        !(!e.relatedTarget || m(e)) && (e.currentTarget.contains(e.relatedTarget) || (t.current = defaultInputState.type));
       },
       onPointerDown(r) {
         m(r) || (t.current = "pointer");
@@ -68,7 +68,7 @@ function h({
         let {
           target
         } = e;
-        if (d.current || !(target instanceof HTMLElement) || null != e.relatedTarget || "keyboard" === F.type) return;
+        if (d.current || !(target instanceof HTMLElement) || null != e.relatedTarget || "keyboard" === defaultInputState.type) return;
         let r = target.getAttribute("aria-haspopup");
         null !== r && "false" !== r && target.blur();
       });

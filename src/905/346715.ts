@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { debounce } from "../905/915765";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { xf } from "../figma_app/416935";
 import { isGovCluster, includesGovDomain, buildUploadUrl } from "../figma_app/169182";
@@ -154,12 +154,12 @@ let $$F0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: p,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: 1 === L ? renderI18nText("resource_connection.request_modal.which_team_do_you_want_to_connect_to") : renderI18nText("resource_connection.request_modal.whos_your_contact_on_that_team")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsx("div", {
             className: _$$s2.pb12.$,
@@ -249,7 +249,7 @@ let $$F0 = registerModal(function (e) {
               })]
             })
           })
-        }), jsx(wi, {
+        }), jsx(DialogFooter, {
           children: jsxs("div", {
             className: _$$s2.flex.justifyBetween.itemsCenter.wFull.pl2.$,
             children: [jsxs("span", {
@@ -356,12 +356,12 @@ let M = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: h,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsxs("div", {
             className: g2,
-            children: [jsx(K, {
+            children: [jsx(IconButton, {
               onClick: () => {
                 t(popModalStack());
               },
@@ -370,7 +370,7 @@ let M = registerModal(function (e) {
             }), renderI18nText("resource_connection.create_new_team_modal.who_would_you_like_to_collaborate_with")]
           })
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("p", {
           className: _$$s2.py8.$,
           children: renderI18nText("resource_connection.create_new_team_modal.we_will_email_them_with_a_link_to_set_up_a_figma_team")
@@ -397,8 +397,8 @@ let M = registerModal(function (e) {
             })(A), " "]
           })]
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: i,

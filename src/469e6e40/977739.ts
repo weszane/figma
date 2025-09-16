@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { getAtomMutate } from "../figma_app/566371";
 import { z as _$$z, Z } from "../905/306088";
 import { LoadingSpinner } from "../figma_app/858013";
@@ -362,11 +362,11 @@ let $$z0 = registerModal(function ({
             handleErrorWithToast("An error has occured. Please try again.", N);
           }
         },
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("new_editor_notifications_modal.header")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 16,
@@ -378,8 +378,8 @@ let $$z0 = registerModal(function ({
               children: renderI18nText("new_editor_notifications_modal.get_emailed_when_members_upgrade_from_free_to_paid")
             }), J]
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               onClick: a.onClose,

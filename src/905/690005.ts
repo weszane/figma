@@ -7,7 +7,7 @@ import { ButtonSecondaryTracked } from "../figma_app/637027";
 import { Ak } from "../905/773401";
 import { SvgComponent } from "../905/714743";
 import { showModalHandler } from "../905/156213";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { ModalContainer } from "../figma_app/918700";
 import { registerModal } from "../905/102752";
 import { A as _$$A } from "../figma_app/722506";
@@ -40,7 +40,7 @@ class S extends Component {
         redirectUrl: this.props.redirectPath
       }));
       this.props.dispatch(showModalHandler({
-        type: _$$x,
+        type: AuthModal,
         data: {
           headerText: " "
         }
@@ -52,7 +52,7 @@ class S extends Component {
         formState: AuthFlowStep.SIGN_UP
       }));
       this.props.dispatch(showModalHandler({
-        type: _$$x,
+        type: AuthModal,
         data: {
           headerText: " "
         }

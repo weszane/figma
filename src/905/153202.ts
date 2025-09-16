@@ -3,7 +3,7 @@ import { memo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { sha1HexFromBytes } from "../905/125019";
 import { A as _$$A } from "../905/920165";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { K as _$$K } from "../905/851274";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
@@ -82,7 +82,7 @@ function A({
   disabled: i,
   recordingKey: r
 }) {
-  return e ? jsx(K, {
+  return e ? jsx(IconButton, {
     disabled: i,
     onClick: () => {
       t(!1);
@@ -90,7 +90,7 @@ function A({
     "aria-label": getI18nString("fullscreen.properties_panel.stop"),
     recordingKey: generateRecordingKey(r, "stopGIF"),
     children: jsx(d, {})
-  }) : jsx(K, {
+  }) : jsx(IconButton, {
     disabled: i,
     onClick: () => {
       t(!0);

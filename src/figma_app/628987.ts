@@ -3,7 +3,7 @@ import { useRef, useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
 import { isNotNullish } from "../figma_app/95419";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
 import { AppStateTsApi, SelfDesignType } from "../figma_app/763686";
@@ -221,7 +221,7 @@ export function $$em2({
         });
         let r = _ ? jsx("span", {
           className: Ds,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             ref: eF,
             onClick: _,
             "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),

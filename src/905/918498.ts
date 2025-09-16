@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { N } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { lk, u3 } from "../figma_app/109538";
@@ -81,12 +81,12 @@ export let $$v0 = registerModal(function (e) {
       width: "lg",
       children: jsx("div", {
         className: "maximum_connections_reached_modal--modalContents--fGCvS",
-        children: jsxs(vo, {
-          children: [jsx(Y9, {
-            children: jsx(hE, {
+        children: jsxs(DialogContents, {
+          children: [jsx(DialogHeader, {
+            children: jsx(DialogTitle, {
               children: renderI18nText("resource_connection.maximum_connections_modal.no_more_connected_projects_available")
             })
-          }), jsx(nB, {
+          }), jsx(DialogBody, {
             children: jsxs("p", {
               className: _$$s.pt8.pb8.$,
               children: [renderI18nText("resource_connection.maximum_connections_modal.tier_maximum_connections_info", {

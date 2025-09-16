@@ -14,7 +14,7 @@ import { showModalHandler, hideModal } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { liveStoreInstance } from "../905/713695";
 import { registerModal } from "../905/102752";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { EL } from "../905/748636";
 import { CR, uv } from "../figma_app/419216";
 import { ao, v4 } from "../figma_app/598952";
@@ -93,7 +93,7 @@ function I({
               signedUpFromOpenSession: !0
             }));
             s(showModalHandler({
-              type: _$$x,
+              type: AuthModal,
               data: {
                 headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
               }

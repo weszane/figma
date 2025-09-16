@@ -4,7 +4,7 @@ import { r as _$$r } from "../905/216849";
 import { eg, zw, SZ, I5, gy } from "../905/183218";
 import { A } from "../vendor/723372";
 import { N } from "../905/130112";
-import { r as _$$r2 } from "../905/840133";
+import { TabsPrimitiveTabStrip } from "../905/840133";
 function o({
   children: e,
   ...t
@@ -36,7 +36,7 @@ function c(e) {
 }
 c.displayName = "Tabs.TabPanel";
 function p(e) {
-  return jsx(_$$r2, {
+  return jsx(TabsPrimitiveTabStrip, {
     ...e,
     className: gy
   });

@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { K } from "../905/443068";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { x as _$$x } from "../905/811596";
 import { a as _$$a } from "../905/462280";
@@ -35,18 +35,18 @@ let $$j0 = registerModal(function (e) {
     manager: t,
     width: 536,
     height: "dynamic",
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [e.onBack && jsx(K, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [e.onBack && jsx(IconButton, {
           onClick: e.onBack,
           "aria-label": getI18nString("general.back"),
           children: jsx(C, {})
-        }), jsx(hE, {
+        }), jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             children: renderI18nText("idp_management.domain_mapping_modal.title")
           })
         })]
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: {
           top: "1rem",
           bottom: "1rem"
@@ -157,8 +157,8 @@ let $$j0 = registerModal(function (e) {
             })
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [e.onBack && jsx(Button, {
             onClick: e.onBack,
             variant: "secondary",

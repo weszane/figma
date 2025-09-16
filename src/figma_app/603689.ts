@@ -104,7 +104,7 @@ import { rq as _$$rq } from '../905/425180';
 import { useModalManager } from '../905/437088';
 import { N as _$$N6 } from '../905/438674';
 import { W as _$$W2 } from '../905/442612';
-import { K as _$$K2 } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
 import { NN, w4, y1 } from '../905/445814';
 import { analyticsEventManager, getAnonymousId, trackEventAnalytics } from '../905/449184';
@@ -442,7 +442,7 @@ import { userFlagExistsAtomFamily, userFlagAtomFamily, latestSurveyResponseDateA
 import { N as _$$N, Gm } from '../figma_app/548577';
 import { isFigmakeSitesEnabled, useIsSelectedFigmakeFullscreen } from '../figma_app/552876';
 import { ZO as _$$ZO } from '../figma_app/557318';
-import { k as _$$k3 } from '../figma_app/564183';
+import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
 import { getAtomMutate, setupResourceAtomHandler, handleSuspenseRetainRelease, handleResourceAtomMetrics } from '../figma_app/566371';
 import { NX } from '../figma_app/568591';
 import { Pm } from '../figma_app/569743';
@@ -2136,7 +2136,7 @@ let iP = [FEditorType.Cooper];
 function iD() {
   let e = debugState.getState().selectedView;
   let t = getEditorTypeFromView(e);
-  return iP.includes(t) ? jsx(_$$K2, {
+  return iP.includes(t) ? jsx(IconButton, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
       t === FEditorType.Cooper && (e?.switchContainer(PluginIframeMode.BUZZ_LEFT_PANEL), atomStoreManager.set(FP, PluginIframeMode.BUZZ_LEFT_PANEL), atomStoreManager.set(Lk, _$$x3.PLUGINS));
@@ -6671,7 +6671,7 @@ function cE() {
         ..._$$Ay3.props(dX.container, (i || !t) && dX.containerCovered),
         'children': [jsx('div', {
           ..._$$Ay3.props(dX.closeButton),
-          children: jsx(_$$K2, {
+          children: jsx(IconButton, {
             'recordingKey': 'file-drawer-close',
             'aria-label': getI18nString('general.close'),
             'onClick': () => n(!1),
@@ -6951,7 +6951,7 @@ function ut({
   cX();
   c2();
   let c = (t ? 'handoff' : 'design') == 'handoff';
-  let u = _$$k3();
+  let u = isUserNotLoggedInAndEditorSupported();
   if (!u && (!o || d)) return null;
   let p = !u && !c && !i && !isInteractionPathCheck();
   let _ = c && s;
@@ -6976,7 +6976,7 @@ function ui({
   setDelayViewOnlyBanner: e
 }) {
   let t = WN();
-  let r = _$$k3();
+  let r = isUserNotLoggedInAndEditorSupported();
   return jsxs(Fragment, {
     children: [jsx(un, {}), jsx(ut, {
       onClick_UI3_DO_NOT_REUSE: r ? () => t(Command.SET_TOOL_DEFAULT_DEV_HANDOFF) : () => e(!0)
@@ -6990,7 +6990,7 @@ function ud(e) {
     showDisabledTools,
     textureModeAccess
   } = e;
-  let a = _$$k3();
+  let a = isUserNotLoggedInAndEditorSupported();
   let s = WN();
   let o = isDevHandoffEditorType();
   let d = getFilteredFeatureFlags().ce_il_root && textureModeAccess === _$$n5.HAS_ACCESS;
@@ -8072,7 +8072,7 @@ function pz() {
   } = _$$cq();
   let S = zm();
   let v = Uv(m);
-  let A = _$$k3();
+  let A = isUserNotLoggedInAndEditorSupported();
   let [x, N] = useState(!1);
   return (useEffect(() => {
     if (s) {

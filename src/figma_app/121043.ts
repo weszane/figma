@@ -3,7 +3,7 @@ import { memo, useState, useEffect, useRef, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { T as _$$T } from "../905/745591";
 import { V as _$$V } from "../905/291719";
@@ -38,7 +38,7 @@ import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { n6 } from "../905/234821";
 import { formatI18nMessage } from "../905/482208";
 import { isWorkshopModeEnabled } from "../figma_app/789";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { ZG } from "../figma_app/840917";
 import { hx } from "../figma_app/290668";
 import { VU } from "../905/625959";
@@ -54,7 +54,7 @@ import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
 import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { e as _$$e } from "../figma_app/320600";
 import { F2 } from "../905/826900";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -185,7 +185,7 @@ export function $$ew0(e) {
         "data-tooltip-submenu-open": !1
       }
     }, item.reactKey && `action-toggle-${item.reactKey}`);
-  } else m = jsx(_$$K, {
+  } else m = jsx(IconButton, {
     recordingKey,
     "aria-label": formatI18nMessage(item.action),
     onClick: g,
@@ -414,7 +414,7 @@ let $$eU7 = memo(function (e) {
     selectedView: e.selectedView
   }));
   let u = isWorkshopModeEnabled();
-  let p = _$$k();
+  let p = isUserNotLoggedInAndEditorSupported();
   let _ = WN();
   useEffect(() => {
     TY(dropdownShown) ? handleAtomEvent({
@@ -456,7 +456,7 @@ let $$eU7 = memo(function (e) {
               signedUpFromOpenSession: u
             }));
             r(showModalHandler({
-              type: _$$x,
+              type: AuthModal,
               data: {
                 headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
               }
@@ -534,7 +534,7 @@ let $$eB8 = memo(function (e) {
           redirectUrl: n ? `${customHistory.location.pathname}?node-id=${encodeURIComponent(replaceColonWithDash(n))}` : customHistory.location.pathname
         }));
         s(showModalHandler({
-          type: _$$x,
+          type: AuthModal,
           data: {
             headerText: e
           }

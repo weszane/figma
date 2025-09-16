@@ -6,7 +6,7 @@ import { t as _$$t } from "../5132/435788";
 import { Xr } from "../figma_app/27355";
 import { useEffect } from "react";
 import { N } from "../905/57692";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { Ay } from "@stylexjs/stylex";
 import { lQ } from "../905/934246";
@@ -55,7 +55,7 @@ function _({
 }) {
   switch (l) {
     case "icon":
-      return jsx(K, {
+      return jsx(IconButton, {
         "aria-label": r,
         "aria-expanded": e,
         disabled: t,

@@ -6,7 +6,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { Et } from "../figma_app/397267";
 import { k as _$$k } from "../905/443820";
 import { Button } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { l as _$$l } from "../905/509505";
 import { t as _$$t } from "../905/947268";
 import { Z as _$$Z } from "../905/498136";
@@ -1064,7 +1064,7 @@ export function $$e$0({
       viewMode: c ? "grid" : "list"
     });
   }, [l, p, c, r, e, d, t]);
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     "aria-label": c ? getI18nString("design_systems.instance_swap_picker.show_as_grid") : getI18nString("design_systems.instance_swap_picker.show_as_list"),
     onClick: m,
     recordingKey: generateRecordingKey("toggleGridViewButton", t ? "preferredValues" : "instanceSwapPicker"),

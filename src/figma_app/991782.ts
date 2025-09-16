@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef, useState, useEffect, useCallback, Suspense } from "react";
 import { assert } from "../figma_app/465776";
 import { Button } from "../905/521428";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL, l9, mc, c$, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { k as _$$k } from "../905/443820";
@@ -180,7 +180,7 @@ function W({
       })]
     }), i && jsx("div", {
       className: "lint_error_modal--errorTarget--kau97",
-      children: jsx(K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("sites.panel.sites_issues.select_nodes_with_issues"),
         onClick: () => V(t.nodeIds),
         htmlAttributes: {

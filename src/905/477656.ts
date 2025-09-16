@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { hideModal } from "../905/156213";
@@ -17,15 +17,15 @@ function m(e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("design_systems.instance_panel.oops")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText("design_systems.instance_panel.deleted_source_component_message")
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             onClick: () => {
               e.dispatch(hideModal());

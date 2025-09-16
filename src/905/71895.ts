@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useDialogClose } from "../905/749786";
-import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { setupAutofocusHandler } from "../905/128376";
 import { ModalFormContents, ModalRootComponent } from "../905/38914";
@@ -38,16 +38,16 @@ function R({
   let r = k();
   let s = useSubscription(CurrentUserIsMfaRequiredByMembershipOrgView, {});
   let d = getResourceDataOrFallback(s.data?.currentUser?.isMfaRequiredByMembershipOrg) && !t.two_factor_app_enabled;
-  return jsxs(vo, {
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+  return jsxs(DialogContents, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication_is_enabled")
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       children: renderI18nText("auth.two-factor-setup.phone-number-setup-enabled-info", {
         phoneNumber: t.phone_number
       })
-    }), jsx(wi, {
+    }), jsx(DialogFooter, {
       children: jsxs("div", {
         className: Hx,
         children: [jsx(Button, {
@@ -94,11 +94,11 @@ function N({
         code: t.value
       }));
     },
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication")
       })
-    }), jsxs(nB, {
+    }), jsxs(DialogBody, {
       children: [renderI18nText("auth.two-factor-setup.sms-sent-message", {
         phoneNumber: e.temp_phone
       }), jsx("input", {
@@ -111,7 +111,7 @@ function N({
         className: z3,
         children: r.currentError || ""
       })]
-    }), jsx(wi, {
+    }), jsx(DialogFooter, {
       children: jsxs("div", {
         className: Hx,
         children: [t ? getI18nString("auth.two-factor-setup.code_resent") : jsx(Button, {
@@ -143,11 +143,11 @@ function P({
   let u = k();
   return jsxs(ModalFormContents, {
     onSubmit: e,
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: renderI18nText("auth.two-factor-setup.sms_two_factor_authentication")
       })
-    }), jsxs(nB, {
+    }), jsxs(DialogBody, {
       children: [renderI18nText("auth.two-factor-setup.enter-phone-number"), jsx("input", {
         type: "text",
         name: "phone",
@@ -161,7 +161,7 @@ function P({
         className: _$$s.mt12.colorTextTertiary.$,
         children: renderI18nText("auth.two-factor-setup.phone-number-opt-in")
       })]
-    }), jsx(wi, {
+    }), jsx(DialogFooter, {
       children: jsxs("div", {
         className: t.two_factor_app_enabled ? _$$s.flex.wFull.justifyEnd.$ : Hx,
         children: [!t.two_factor_app_enabled && jsx(Button, {

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, Component, PureComponent, useId, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button, ButtonWide } from "../905/521428";
 import { c$, bL, l9, mc } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
@@ -431,7 +431,7 @@ class eI extends Component {
       className: y()({
         [Ts]: !this.props.insetImageSettings
       }),
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         onClick: this.onRotateClockwiseClick,
         "aria-label": getI18nString("fullscreen.properties_panel.rotate_90"),
         recordingKey: generateRecordingKey(this.props, "rotateClockwise"),

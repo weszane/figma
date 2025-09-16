@@ -11,7 +11,7 @@ import { openFileTeamAtom } from "../figma_app/516028";
 import { FFileType } from "../figma_app/191312";
 import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { Y } from "../905/513161";
 import { DV } from "../905/739964";
 export function $$y1(e) {
@@ -30,7 +30,7 @@ export function $$y1(e) {
     redirectUrl: customHistory.location.pathname,
     signedUpFromOpenSession: !0
   })), e.dispatch(showModalHandler({
-    type: _$$x,
+    type: AuthModal,
     data: {
       headerText: getI18nString("fullscreen.toolbar.create_an_account_to_do_more_with_fig_jam")
     }

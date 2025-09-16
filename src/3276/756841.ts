@@ -11,7 +11,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AY, QY, Fm, l5, bB, NJ, Oo, Tb, UU, hx, Mv } from "../figma_app/770088";
 import { wrapWithTracking } from "../figma_app/831799";
 import { y as _$$y } from "../figma_app/705249";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { useFullscreenReady } from "../905/924253";
 import { dH } from "../figma_app/722362";
@@ -791,7 +791,7 @@ let e0 = memo(function (e) {
   let ee = w?.id;
   let et = useMemo(() => !!isCommentStatePostable(element.sidebarItemType) && (!isCommentStateActive(element.sidebarItemType) || (j && ee ? To(element, j, ee) : null)), [j, ee, element]);
   let en = useHandleMouseEvent(`comment-sidebar-comment-${element.id}`, "click", onCommentSelect);
-  let eo = _$$k2();
+  let eo = isUserNotLoggedInAndEditorSupported();
   let ea = WN();
   eo && (en = () => ea("SELECT_COMMENT_SIDEBAR"));
   element.isCanvasMention && (en = onCanvasMentionSelect);
@@ -1213,7 +1213,7 @@ function tg(e) {
     getTriggerProps,
     manager
   } = _$$b();
-  let r = _$$k2();
+  let r = isUserNotLoggedInAndEditorSupported();
   let l = WN();
   _$$Z2(manager);
   let d = useLatestRef(manager.isOpen);
@@ -1392,7 +1392,7 @@ function tk({
   let r = !activeQuery || activeQuery && !e.length;
   let l = e.length;
   let d = useFullscreenReady();
-  let c = _$$k2();
+  let c = isUserNotLoggedInAndEditorSupported();
   return wrapWithTracking(jsxs(Fragment, {
     children: [d && jsx(Mw, {
       panelName: ON.COMMENTS

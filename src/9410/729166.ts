@@ -4,7 +4,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { E as _$$E } from '../905/53857';
 import { e as _$$e5 } from '../905/74460';
-import { i as _$$i } from '../905/97346';
+import { setupDragHandler } from '../905/97346';
 import { Z as _$$Z } from '../905/104740';
 import { t as _$$t3 } from '../905/117577';
 import { xK } from '../905/125218';
@@ -37,7 +37,7 @@ import { A as _$$A4 } from '../905/408320';
 import { i as _$$i2 } from '../905/415810';
 import { D as _$$D, d as _$$d } from '../905/433403';
 import { N as _$$N } from '../905/438674';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { l as _$$l } from '../905/479687';
@@ -252,7 +252,7 @@ function Z({
     className: z,
     children: [jsx('div', {
       className: Y,
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         'aria-label': getI18nString('dev_handoff.component_browser_onboarding.close'),
         'onClick': t,
         'children': jsx(_$$A, {})
@@ -331,7 +331,7 @@ function Q({
       })
     }), jsx('div', {
       className: Y,
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         'aria-label': getI18nString('dev_handoff.component_browser_onboarding.close'),
         'onClick': e,
         'children': jsx(_$$A, {})
@@ -449,7 +449,7 @@ let en = function ({
       className: 'component_browser_onboarding--background---pN6U',
       children: [jsx('div', {
         className: 'component_browser_onboarding--closeButton--D5H4w',
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           'aria-label': getI18nString('dev_handoff.component_browser_onboarding.close'),
           'onClick': a,
           'children': jsx(_$$A, {})
@@ -877,7 +877,7 @@ function e0({
   let [t, i] = useAtomValueAndSetter(e$);
   let a = useRef(null);
   let s = useRef(0);
-  let [o, l] = _$$i({
+  let [o, l] = setupDragHandler({
     onBeforeDrag() {
       let i = e ? t.valueColumnWidths[e] : t.nameColumnWidth;
       let r = e ? Gyo : Wsk;
@@ -1219,7 +1219,7 @@ function tu() {
                 className: 'variables_table--detailsSidePanel--U-Z97',
                 children: [jsxs('div', {
                   className: 'variables_table--detailsSidePanelHeader--pF3Tn',
-                  children: [renderI18nText('dev_handoff.variables.details_title'), jsx(_$$K, {
+                  children: [renderI18nText('dev_handoff.variables.details_title'), jsx(IconButton, {
                     'aria-label': getI18nString('general.close'),
                     'htmlAttributes': {
                       'data-tooltip-type': KindEnum.TEXT,
@@ -1298,7 +1298,7 @@ function th({
     className: 'variables_table--header--412jw',
     children: [jsxs('div', {
       className: _$$s.flex.itemsCenter.$,
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         'aria-label': getI18nString('general.close'),
         'htmlAttributes': {
           'data-tooltip-type': KindEnum.TEXT,
@@ -2118,7 +2118,7 @@ function i0({
         },
         className: 'overview--searchInput--3X9vp text--fontPos11--2LvXf text--_fontBase--QdLsd',
         spellCheck: !1
-      }), !!e && jsx(_$$K, {
+      }), !!e && jsx(IconButton, {
         'onClick': () => t(''),
         'aria-label': getI18nString('dev_handoff.workflows.overview.clear_search'),
         'htmlAttributes': {
@@ -2225,7 +2225,7 @@ function i2({
       className: 'overview--overviewNodeCardHeaderRight--wRNMN',
       children: [jsxs(bL, {
         manager,
-        children: [jsx(_$$K, {
+        children: [jsx(IconButton, {
           ...getTriggerProps(),
           'aria-label': getI18nString('dev_handoff.workflows.more_actions_tooltip'),
           'children': jsx(_$$J, {})
@@ -3181,7 +3181,7 @@ function r1({
   return jsxs(Fragment, {
     children: [u && jsx('div', {
       ref: S,
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         'aria-label': getI18nString('inline_preview.overflow_menu'),
         'htmlAttributes': {
           'data-tooltip-type': KindEnum.TEXT,
@@ -3195,7 +3195,7 @@ function r1({
         'recordingKey': generateRecordingKey(rZ, 'overflowMenuButton'),
         'children': jsx(_$$A9, {})
       })
-    }), C > kl && jsx(_$$K, {
+    }), C > kl && jsx(IconButton, {
       'htmlAttributes': {
         'data-tooltip-type': KindEnum.TEXT,
         'data-tooltip': getI18nString('inline_preview.new_tab'),
@@ -3205,7 +3205,7 @@ function r1({
       'onClick': L,
       'recordingKey': generateRecordingKey(rZ, 'openInNewTabButton'),
       'children': jsx(_$$V3, {})
-    }), p && jsx(_$$K, {
+    }), p && jsx(IconButton, {
       'onClick': P,
       'htmlAttributes': {
         'data-tooltip-type': KindEnum.TEXT,
@@ -3243,7 +3243,7 @@ function r2({
   return jsxs('div', {
     className: KW,
     children: [n <= Ah ? null : jsxs(Fragment, {
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         'htmlAttributes': {
           'data-testid': 'preview-navigate-backward'
         },
@@ -3252,7 +3252,7 @@ function r2({
         'disabled': !t,
         'recordingKey': generateRecordingKey(rZ, 'navigateBackwardButton'),
         'children': jsx(_$$C, {})
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         'aria-label': getI18nString('viewer.footer.next_frame'),
         'onClick': o,
         'disabled': !e,
@@ -3262,7 +3262,7 @@ function r2({
         },
         'children': jsx(_$$e6, {})
       })]
-    }), n <= kl ? null : jsx(_$$K, {
+    }), n <= kl ? null : jsx(IconButton, {
       'aria-label': getI18nString('inline_preview.restart'),
       'htmlAttributes': {
         'data-tooltip-type': KindEnum.TEXT,

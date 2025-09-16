@@ -3,7 +3,7 @@ import { useCallback, useRef, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { isCommandEvent, KeyCodes } from "../905/63728";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { f4 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Sh, dK, a$ } from "../figma_app/889655";
@@ -47,7 +47,7 @@ import { z4 } from "../figma_app/95266";
 import { u as _$$u2, a as _$$a } from "../figma_app/997280";
 import { X as _$$X } from "../figma_app/934313";
 import { J as _$$J } from "../figma_app/785050";
-import { K as _$$K2 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { clearSelection, addToSelection, updateHoveredNode } from "../figma_app/741237";
 import { o as _$$o } from "../figma_app/254634";
@@ -489,7 +489,7 @@ let eN = e => {
 function eC(e) {
   let t = ex(e.parentId);
   let r = eN(e.parentId);
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     onClick: t,
     ...r,
     "aria-label": getI18nString("inspect_panel.interactions.select_layer"),
@@ -567,7 +567,7 @@ export function $$eD0(e) {
       r = r.parentNode;
     }
   });
-  let r = _$$k();
+  let r = isUserNotLoggedInAndEditorSupported();
   let a = e.flowPanel ?? null;
   let o = e.localStylesPanel ?? null;
   return r ? null : jsxs("div", {

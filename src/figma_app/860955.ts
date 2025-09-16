@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { getThemeContextOrDefault } from "../905/158740";
-import { G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { J } from "../905/614223";
 import { A } from "../vendor/723372";
 import { S } from "../figma_app/215667";
@@ -63,7 +63,7 @@ export let $$T1 = forwardRef(({
   let i = S();
   let {
     color
-  } = G();
+  } = useTheme();
   return jsx(MenuSubContainer, {
     className: A(kL, "light" === ("dark" === i ? "dark" : color) ? BB : XT),
     ...t,
@@ -90,7 +90,7 @@ export let $$I11 = forwardRef(({
   let i = S();
   let {
     color
-  } = G();
+  } = useTheme();
   let {
     fpl_consistent_menu_indent_by_default
   } = loadFeatureFlags();

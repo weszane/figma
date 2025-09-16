@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
 import { ServiceCategories } from "../905/165054";
 import { t as _$$t } from "../905/150656";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
 import { o as _$$o } from "../905/530496";
@@ -86,7 +86,7 @@ export function $$U0() {
             ...u.examples,
             children: "Examples"
           })]
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           "aria-label": "Refresh",
           onClick: () => {
             if (e) {
@@ -179,7 +179,7 @@ function G(e) {
             className: _$$s.wFull.flex.gap4.$,
             children: [jsx("div", {
               className: _$$s.h24.$,
-              children: jsx(_$$K, {
+              children: jsx(IconButton, {
                 recordingKey: generateRecordingKey(e.recordingKey, "backButton"),
                 onClick: e.onBack,
                 "aria-label": getI18nString("qa.go_back"),

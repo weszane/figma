@@ -6,7 +6,7 @@ import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, jk } from "../figma_app/272243";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { A as _$$A } from "../905/920142";
 import { useSubscription } from "../figma_app/288654";
@@ -207,7 +207,7 @@ function F() {
                 ...m.archived,
                 children: renderI18nText("collaboration.branching_modal.tab_archived")
               }), W && jsx(jk, {
-                children: jsx(_$$K, {
+                children: jsx(IconButton, {
                   "aria-label": getI18nString("collaboration.branching_modal.create_branch_tooltip"),
                   onClick: () => {
                     k && e(_$$l({

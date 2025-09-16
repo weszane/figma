@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { filterNumberValues } from "../905/807535";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
 import { Label } from "../905/270045";
@@ -57,12 +57,12 @@ export function $$x0({
   return jsx(ModalRootComponent, {
     manager: j,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("file_browser.file_import_view.select_pdf_source_header")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: _$$s.flex.flexColumn.pt4.gap16.textBodyMedium.$,
           children: [jsx("div", {
@@ -86,8 +86,8 @@ export function $$x0({
             })
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "secondary",
             onClick: r,

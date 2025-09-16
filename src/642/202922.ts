@@ -34,7 +34,7 @@ import { DE, Ad } from "../figma_app/811257";
 import { pG } from "../figma_app/47085";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { y as _$$y } from "../905/582657";
 import { f as _$$f } from "../905/335032";
 import { S as _$$S2 } from "../figma_app/552746";
@@ -172,7 +172,7 @@ function es({
     }),
     icon: jsx("div", {
       className: "bubbled_instances_list--minusIcon--dY8i-",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.component_properties.unbubble_instance"),
         onClick: () => {
           t(e.connectedGUIDs[0]);

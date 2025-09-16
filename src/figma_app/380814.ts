@@ -6,7 +6,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
 import { U as _$$U } from "../905/708285";
 import { VariablesBindings, VariableCollectionContext, VariableUIContext, VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
@@ -309,7 +309,7 @@ export function $$Z1({
             contextType: $.FORM,
             onChange: e => b(e),
             recordingKey: generateRecordingKey(e, "variableValueInput")
-          }), T && jsx(_$$K, {
+          }), T && jsx(IconButton, {
             type: "button",
             "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
             onClick: () => b(T),

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C } from "../905/504203";
 import { L } from "../905/704296";
 import { xk } from "@stylexjs/stylex";
@@ -58,7 +58,7 @@ function p({
       placeholder: t,
       query: e,
       withUI3Icon: !0
-    }), null != o && jsx(K, {
+    }), null != o && jsx(IconButton, {
       "aria-label": getI18nString("common.close"),
       onClick: o,
       children: jsx(L, {})

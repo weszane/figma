@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { C } from "../905/520159";
 import { e as _$$e } from "../905/916195";
@@ -54,7 +54,7 @@ export function $$g0(e) {
     let t = e.navigateForwardEnabled || e.navigateBackwardEnabled;
     return (e.showNavigationInMobile || !isMobileUA) && t;
   }(e);
-  let d = jsx(K, {
+  let d = jsx(IconButton, {
     onClick: e.navigateBackward,
     recordingKey: generateRecordingKey(e, "backButton"),
     "aria-label": getI18nString("viewer.footer.previous_frame"),
@@ -68,7 +68,7 @@ export function $$g0(e) {
       children: jsx(C, {})
     })
   });
-  let m = jsx(K, {
+  let m = jsx(IconButton, {
     onClick: e.navigateForward,
     recordingKey: generateRecordingKey(e, "nextButton"),
     "aria-label": getI18nString("viewer.footer.next_frame"),

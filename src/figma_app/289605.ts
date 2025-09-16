@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useId } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { LinkPrimitive } from "../figma_app/496441";
 import { L as _$$L } from "../905/704296";
@@ -169,7 +169,7 @@ function ei({
             className: h6,
             children: [jsx(ea, {
               variable
-            }), jsx(_$$K, {
+            }), jsx(IconButton, {
               onClick: t,
               "aria-label": getI18nString("dev_handoff.variables.details_button_close_aria_label"),
               children: jsx(_$$L, {})
@@ -450,7 +450,7 @@ function ep({
   }, [c, m, y]);
   return a && !_ && r && (a?.subscriptionStatus !== "SUBSCRIBED" || "loaded" === g.status) ? c ? jsx("div", {
     className: Iw,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       "aria-label": getI18nString("dev_handoff.variables.details_view_in_collection"),
       htmlAttributes: {
         "data-tooltip-type": KindEnum.TEXT,

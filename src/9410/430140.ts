@@ -3,7 +3,7 @@ import n from "classnames";
 import { IW, RE } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
 import { vN } from "../7222/396421";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
 import { getI18nString } from "../905/303541";
 import { ON } from "../9410/148230";
@@ -11,7 +11,7 @@ var a = n;
 function p({
   onClick: e
 }) {
-  return jsx(K, {
+  return jsx(IconButton, {
     "aria-label": getI18nString("common.close"),
     onClick: e,
     children: jsx(L, {})

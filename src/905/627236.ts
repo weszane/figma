@@ -7,7 +7,7 @@ import { N as _$$N } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { nB, r1, wi, jk } from "../figma_app/272243";
+import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
@@ -213,7 +213,7 @@ function X(e) {
           onFailure: ep
         }));
       },
-      children: [jsxs(nB, {
+      children: [jsxs(DialogBody, {
         padding: {
           top: 40,
           left: 24,
@@ -236,7 +236,7 @@ function X(e) {
                 imgUrl: g.imgUrl
               }
             })
-          }), jsx(r1, {
+          }), jsx(DialogHiddenTitle, {
             children: ei
           }), jsx("div", {
             className: _$$s.textHeadingMedium.$,
@@ -311,8 +311,8 @@ function X(e) {
           monthlyRenewalDate: H,
           totalAdditionalAnnualSeatCount: en
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,

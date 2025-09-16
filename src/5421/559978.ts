@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { G } from "../905/289770";
+import { useTheme } from "../905/289770";
 let r = e => `var(${e})`;
 let a = {
   bg: "--animation-bg",
@@ -22,7 +22,7 @@ let l = {
   }
 };
 export function $$s0() {
-  let e = G();
+  let e = useTheme();
   let t = jsxs("svg", {
     width: "417",
     height: "321",

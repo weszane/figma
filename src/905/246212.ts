@@ -4,7 +4,7 @@ import { o as _$$o } from "../905/695226";
 import { useRecording } from "../905/959312";
 import { useExposedRef } from "../905/581092";
 import { defaultComponentAttribute } from "../905/577641";
-import { f5 } from "../905/914656";
+import { hasTextSelection } from "../905/914656";
 let c = createContext(null);
 let u = forwardRef(({
   onPointerDown: e,
@@ -42,7 +42,7 @@ export let $$p0 = Object.assign(forwardRef(({
   let f = useExposedRef(h);
   !function (e, t) {
     useLayoutEffect(() => {
-      t && !f5(e.current) && e.current.select();
+      t && !hasTextSelection(e.current) && e.current.select();
     }, []);
   }(f, m.autoFocus);
   let _ = useRecording(t, {

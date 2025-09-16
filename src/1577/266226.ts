@@ -2,10 +2,10 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { E as _$$E } from "../905/53857";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { L as _$$L } from "../1577/392861";
 import { i as _$$i } from "../905/22844";
 import { setupResourceAtomHandler } from "../figma_app/566371";
@@ -113,7 +113,7 @@ function L({
         width: "hug-contents",
         spacing: "8px",
         children: [!r && jsxs(Fragment, {
-          children: [jsx(K, {
+          children: [jsx(IconButton, {
             onClick: () => {
               o(showModal({
                 type: dV.type,
@@ -139,7 +139,7 @@ function L({
               })
             },
             children: jsx(_$$L, {})
-          }), jsx(K, {
+          }), jsx(IconButton, {
             onClick: () => {
               o(showModal({
                 type: I.type,
@@ -207,12 +207,12 @@ export let $$B0 = registerModal(function ({
       width: "fit-content",
       height: "dynamic",
       manager: _,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("whiteboard.color_palettes.manage_modal.color_palettes")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 16,
           children: [jsxs("div", {
             className: "manage_color_palettes_modal--subheader--2Aol7",

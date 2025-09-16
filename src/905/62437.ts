@@ -24,7 +24,7 @@ import { isBranchView } from "../905/218608";
 import { isFullscreenDevHandoffView } from "../905/782918";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { restoreFiles } from "../905/760074";
@@ -74,15 +74,15 @@ function $$D(e) {
   return jsx(ModalRootComponent, {
     manager: i,
     width: "sm",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("collaboration.branching.undo_merge_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText("collaboration.branching.undo_merge_description")
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: () => t(hideModal()),
@@ -109,17 +109,17 @@ let F = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("cms_file_operations.cms_data_wont_roll_back")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("p", {
           children: getI18nString("cms_file_operations.when_you_roll_back_to")
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: onClose,
             variant: "secondary",

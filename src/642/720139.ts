@@ -3,8 +3,8 @@ import { useMemo, useRef, useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Et } from "../figma_app/397267";
 import { bL } from "../905/911410";
-import { vo, Y9, nB } from "../figma_app/272243";
-import { J as _$$J } from "../905/799737";
+import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
+import { DialogLabel } from "../905/799737";
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, Xr, useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -71,7 +71,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k4 } from "../905/582200";
 import { MO } from "../1528/85853";
 import { ButtonWide } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { N as _$$N } from "../905/120979";
 import { NG } from "../figma_app/709893";
 import { ButtonBasePrimary } from "../figma_app/637027";
@@ -502,7 +502,7 @@ function e5({
       }), renderI18nText("design_systems.assets_panel.playground_label")]
     }), getFeatureFlags().dse_fpl_wave_1 ? jsx("span", {
       className: "component_flyout_body--resetButtonContainer--fCSjD",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.playground.reset_properties"),
         onClick: t,
         disabled: !e.hasChangesToReset,
@@ -884,16 +884,16 @@ export function $$tu1({
     },
     ref: F,
     maxHeight: "100vh",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$J, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogLabel, {
           style: {
             margin: 0,
             minWidth: 0
           },
           children: eN
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         style: {
           padding: 0
         },

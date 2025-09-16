@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useEffect, useMemo } from "react";
 import { sortByWithOptions } from "../figma_app/656233";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { d as _$$d } from "../c5e2cae0/368426";
 import { Q } from "../905/553231";
 import { analyticsEventManager } from "../905/449184";
@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button, ButtonWide } from "../905/521428";
 import { A as _$$A } from "../905/891805";
 import { s as _$$s2, K as _$$K2 } from "../c5e2cae0/341232";
@@ -63,12 +63,12 @@ let R = registerModal(function (e) {
     htmlAttributes: {
       "data-testid": "additional-seats--modal"
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("checkout.additional_seats.add_or_remove_unassigned_seats")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           className: _$$s.pt8.pb24.colorTextSecondary.$,
           children: jsx("p", {
@@ -98,8 +98,8 @@ let R = registerModal(function (e) {
             })
           }, e))
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: onClose,
@@ -185,8 +185,8 @@ let H = registerModal(function (e) {
       htmlAttributes: {
         "data-testid": "select-user-seat-type--modal"
       },
-      children: jsx(vo, {
-        children: jsx(nB, {
+      children: jsx(DialogContents, {
+        children: jsx(DialogBody, {
           children: jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 0,
@@ -383,7 +383,7 @@ export function $$q0({
                   children: [renderI18nText("checkout.select_seats_table.user_column"), " ", jsx("div", {
                     className: _$$s.inlineBlock.$,
                     "data-testid": "select-seats-table-sort-users-button",
-                    children: jsx(_$$K, {
+                    children: jsx(IconButton, {
                       onClick: () => A(e => !e),
                       "aria-label": getI18nString("checkout.select_seats_table.sort"),
                       children: E ? jsx(_$$d, {

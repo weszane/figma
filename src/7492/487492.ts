@@ -3,7 +3,7 @@ import { createContext, useContext, useRef, useCallback, useEffect, useMemo, mem
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { s as _$$s } from "../905/403855";
 import { J as _$$J } from "../905/125993";
 import { permissionScopeHandler } from "../905/189185";
@@ -653,7 +653,7 @@ function eP(e) {
     }), $ && jsx("div", {
       className: D1,
       children: $
-    }), e.onOptionsClick && jsx(_$$K, {
+    }), e.onOptionsClick && jsx(IconButton, {
       onClick: e.onOptionsClick,
       "aria-label": getI18nString("universal_insert.more_options"),
       htmlAttributes: {
@@ -1069,7 +1069,7 @@ let eM = memo(function (e) {
         className: ML,
         children: e.subheader
       })]
-    }), e.onOptionsClick && jsx(_$$K, {
+    }), e.onOptionsClick && jsx(IconButton, {
       "aria-label": getI18nString("universal_insert.more_options"),
       htmlAttributes: {
         "data-tooltip-type": KindEnum.TEXT,

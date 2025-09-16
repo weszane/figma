@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, memo } from "react";
 import { useDispatch } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { ButtonPrimitive } from "../905/632989";
 import { U as _$$U } from "../905/708285";
@@ -214,7 +214,7 @@ class eA extends RecordingPureComponent {
     return 0 !== e ? null : jsxs(Fragment, {
       children: [!this.props.hideTextStyleControl && jsx("span", {
         className: v9,
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           actionOnPointerDown: !0,
           recordingKey: generateRecordingKey(this.props, "detachButton"),
           "aria-label": getI18nString("design_systems.styles.detach_style"),
@@ -227,7 +227,7 @@ class eA extends RecordingPureComponent {
         })
       }), this.props.removeAllProperties && jsx("span", {
         className: N4,
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           recordingKey: generateRecordingKey(this.props, "removeAllButton"),
           onClick: this.props.removeAllProperties,
           "aria-label": getI18nString("fullscreen.properties_panel.remove"),
@@ -289,7 +289,7 @@ class eA extends RecordingPureComponent {
   renderAdvancedSettings() {
     return this.props.onToggleAdvancedSettings && this.props.advancedSettingsTooltip ? jsx(_$$E2, {
       name: "toggle_advanced_settings_button",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         onClick: this.props.onToggleAdvancedSettings,
         recordingKey: generateRecordingKey(this.props, "more"),
         "aria-label": this.props.advancedSettingsTooltip,
@@ -385,7 +385,7 @@ class eA extends RecordingPureComponent {
             name: "add_property_button",
             children: jsx("span", {
               className: N4,
-              children: jsx(_$$K, {
+              children: jsx(IconButton, {
                 recordingKey: generateRecordingKey(this.props, "addButton"),
                 onClick: i,
                 "aria-label": this.props.overrideAddPropertyTooltip ?? getI18nString("fullscreen.properties_panel.add"),

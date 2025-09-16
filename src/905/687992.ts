@@ -1,4 +1,4 @@
-import { n$, KY } from "../905/875826";
+import { roundToNearestMultiple, clampWithBounds } from "../905/875826";
 let $$r0 = 1;
 let $$a11 = 10;
 let s = {
@@ -83,7 +83,7 @@ export function $$u10(e, t, i, {
   let o = e.incrementBy(t, i, a);
   if (s) {
     let i = $$c9(e, r, t);
-    e.snap ? o = e.snap(o, i) : "number" == typeof o && (o = n$(o, i));
+    e.snap ? o = e.snap(o, i) : "number" == typeof o && (o = roundToNearestMultiple(o, i));
   }
   return {
     value: $$g3(e, o),
@@ -131,7 +131,7 @@ export function $$g3(e, t) {
     min,
     max
   } = e;
-  return e.clamp ? e.clamp(t, min, max) : "number" == typeof t ? KY(t, min, max) : t;
+  return e.clamp ? e.clamp(t, min, max) : "number" == typeof t ? clampWithBounds(t, min, max) : t;
 }
 export function $$f1(e, t, i) {
   return t === i || (e.isEqual ? e.isEqual(t, i) : e.format(t) === e.format(i));

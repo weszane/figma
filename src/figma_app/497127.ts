@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { BrowserInfo } from "../figma_app/778880";
 import { a as _$$a } from "../905/925868";
@@ -40,7 +40,7 @@ export function $$f0({
         left: 24,
         right: 24
       },
-      children: [y && jsx(K, {
+      children: [y && jsx(IconButton, {
         "aria-label": getI18nString("general.back"),
         actionOnPointerDown: BrowserInfo.isIpad,
         onClick: y,

@@ -5,7 +5,7 @@ import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { deepEqual } from "../905/382883";
 import { clamp } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { U as _$$U } from "../905/708285";
 import { uN } from "../figma_app/338442";
@@ -436,7 +436,7 @@ function eT({
   let a = getI18nString("design_systems.component_properties.select_variants_with_property_value", {
     numVariants: t
   });
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     disabled: !t,
     onClick: () => r(e),
     "aria-label": a,
@@ -614,7 +614,7 @@ function ex({
         thumbnailValue: a,
         isDeleted: eF(i)
       })
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       onClick: () => t(a),
       htmlAttributes: {
         "data-tooltip": getI18nString("design_systems.component_properties.detach_property"),

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { N } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { getFeatureFlags } from "../905/601108";
@@ -21,12 +21,12 @@ export function $$h0() {
   return e ? jsx(ModalRootComponent, {
     manager: t,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsxs(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsxs(DialogTitle, {
           children: [renderI18nText("unsupported_browser_modal.os_not_supported.title"), " "]
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: p,
           children: [renderI18nText("unsupported_browser_modal.os_not_supported.description", {
@@ -53,12 +53,12 @@ export function $$h0() {
   }) : jsx(ModalRootComponent, {
     manager: t,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("desktop_update_modal.desktop_update.title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           className: p,
           children: renderI18nText("desktop_update_modal.desktop_update.description", {

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { isValidElement } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/54715";
 import o from "classnames";
 import { SvgComponent } from "../905/714743";
@@ -48,7 +48,7 @@ export function $$m1({
       children: h
     }), f && jsx("div", {
       className: YE,
-      children: jsx(K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("common.dismiss"),
         onClick: f,
         children: jsx(_$$f, {})

@@ -47,7 +47,7 @@ import { GV, S2, P5 } from "../figma_app/159296";
 import { q as _$$q } from "../573/775640";
 import { j as _$$j } from "../642/671529";
 import { isEmptyObject } from "../figma_app/493477";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
@@ -119,7 +119,7 @@ import { Xd, W as _$$W2, zr } from "../figma_app/359164";
 import { hl, Vb, i as _$$i2, xI, CL } from "../figma_app/722913";
 import { yT } from "../figma_app/836943";
 import { dD } from "../figma_app/941824";
-import { K as _$$K4 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { setupToggleButton } from "../905/167712";
 import { f as _$$f2 } from "../905/335032";
 import { W as _$$W3 } from "../905/63398";
@@ -322,7 +322,7 @@ function tS(e) {
         className: tj,
         children: getI18nString("fullscreen.properties_panel.brush")
       }),
-      icon: jsx(_$$K4, {
+      icon: jsx(IconButton, {
         onClick: () => {
           s(defaultSessionLocalID);
         },
@@ -472,7 +472,7 @@ function tR(e) {
         className: tj,
         children: getI18nString("fullscreen.properties_panel.dynamic")
       }),
-      icon: jsx(_$$K4, {
+      icon: jsx(IconButton, {
         onClick: () => {
           t({
             dynamicStrokeSettings: lF
@@ -679,7 +679,7 @@ function tP({
   if ((isEmptyObject(p) || Object.keys(p).every(e => !p[parseInt(e)])) && !window.figmaPerfTesting && !getFalseValue() && !isInteractionPathCheck() && logError("PropertiesPanel", "Rendering illustration tab with no shownPropertiesPanels", {
     isEmpty: isEmptyObject(p),
     shouldRenderInspectTab: n
-  }), p[ItemType.FRAME_PRESETS]) return jsx(_$$i, {
+  }), p[ItemType.FRAME_PRESETS]) return jsx(TabLoop, {
     children: jsx(VF, {
       isVisible: !0,
       children: () => jsx(_$$nl, {
@@ -688,7 +688,7 @@ function tP({
     })
   });
   let K = d || D || _$$tV(p, stateGroupSelectionInfo) || p[ItemType.COMPONENT_ITEM] || M0(p);
-  return jsxs(_$$i, {
+  return jsxs(TabLoop, {
     children: [jsx(eN, {
       panelsShown: p[ItemType.EFFECTS_ITEM] ?? !1
     }), jsx(_i, {

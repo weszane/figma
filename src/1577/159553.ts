@@ -32,7 +32,7 @@ import { fD } from "../905/807385";
 import { a as _$$a, j as _$$j } from "../1577/143479";
 import { ButtonWide } from "../905/521428";
 import { HG, hE, bL, O6 } from "../905/598775";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ScreenReaderOnly } from "../905/172252";
 import { a as _$$a2 } from "../905/964520";
 import H from "../vendor/197638";
@@ -52,7 +52,7 @@ import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { logError } from "../905/714362";
 import { p as _$$p } from "../figma_app/941287";
 import { lQ } from "../905/934246";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { C as _$$C } from "../905/807275";
 import { y as _$$y } from "../905/52479";
 import { Point } from "../905/736624";
@@ -377,7 +377,7 @@ function ex(e) {
       }), shouldShowChevron && openQuickReply && jsx(HG, {
         children: jsx("div", {
           className: inDesktopTray ? "block_kit_row--quickReplyChevronContainerDesktop--Nn5jL block_kit_row--quickReplyChevronContainerBase--Z-3oi" : "block_kit_row--quickReplyChevronContainerBase--Z-3oi",
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: openQuickReply,
             htmlAttributes: {
               "data-testid": "quick-reply-chevron"
@@ -814,7 +814,7 @@ function eV(e) {
           c.current = lQ;
           s.current = lQ;
         },
-        children: jsx(_$$i, {
+        children: jsx(TabLoop, {
           children: jsx(_$$d, {
             quickReplyInfo: t,
             onClose: () => i(null),

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef } from "react";
 import { Nz, h4 } from "../905/720338";
 import { useRecording } from "../905/959312";
-import { S } from "../905/823680";
+import { setupRefUpdater } from "../905/823680";
 import { ensureContext } from "../905/61417";
 import { q7 } from "../figma_app/860955";
 import { useFplStrings } from "../figma_app/415899";
@@ -229,7 +229,7 @@ let $$E1 = forwardRef(({
       rowRef: x
     };
   }(t);
-  let g = S(rowRef, i);
+  let g = setupRefUpdater(rowRef, i);
   return jsx("div", {
     ...rowProps,
     ...defaultComponentAttribute,

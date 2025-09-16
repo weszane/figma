@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useMemo } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
@@ -36,7 +36,7 @@ function N(e) {
     }) => {
       let s = p6;
       "NORMAL" !== normalizeValue(i.property) && (s = DU);
-      return t ? jsx(K, {
+      return t ? jsx(IconButton, {
         onClick: e,
         "aria-label": getI18nString("fullscreen.properties_panel.color_picker.blend_mode_select.tooltip.blend_mode"),
         htmlAttributes: {

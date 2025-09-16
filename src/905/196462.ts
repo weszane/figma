@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useId, useCallback, useEffect } from "react";
 import { p } from "../905/185998";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { U } from "../905/708285";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -65,7 +65,7 @@ export function $$p0(e) {
           value: url
         }), "" !== url && jsx("span", {
           className: "hyperlink_editor--breakIcon--ntEK8",
-          children: jsx(K, {
+          children: jsx(IconButton, {
             "aria-label": getI18nString("hyperlink.remove_link"),
             onClick: onClickTrash,
             actionOnPointerDown: !0,

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Y9, r1, qj, jk, vo, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL } from "../905/911410";
 import { e as _$$e2 } from "../905/149844";
 import { VariableResolvedDataType, SharedStyle, StyleVariableOperation, CopyPasteType, NoneColor, GradientToolApi, Thumbnail, DesignGraphElements, NodePropertyCategory, VariableDataType, PropertyScope, EyedropperBindings } from "../figma_app/763686";
@@ -991,7 +991,7 @@ function tR({
         })
       }), jsx("div", {
         className: "gradient_stop_list--actions--seaVY",
-        children: h > 1 && jsx(_$$K, {
+        children: h > 1 && jsx(IconButton, {
           onClick: T,
           "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.delete_stop"),
           htmlAttributes: {
@@ -1146,7 +1146,7 @@ function tN({
     dropdownShown: g,
     recordingKey: generateRecordingKey(c, "gradientTypeSelect")
   });
-  let Y = jsx(_$$K, {
+  let Y = jsx(IconButton, {
     actionOnPointerDown: !0,
     onClick: GradientToolApi.rotateGradient90Degrees,
     "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
@@ -1212,7 +1212,7 @@ function tN({
             className: _()("gradient_editor--stopsHeaderAddButton--1MI-j", {
               "gradient_editor--stopsHeaderAddButtonNewUI--mNdDo": W
             }),
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               actionOnPointerDown: !0,
               onClick: M,
               "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.add_stop"),
@@ -1551,7 +1551,7 @@ function t9(e) {
           className: "pattern_settings_modal--sourceNodeName--toYi8",
           children: u.name
         })]
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("properties_panel.pattern.go_to_source"),
         onClick: y,
         children: jsx(_$$A3, {})
@@ -1884,7 +1884,7 @@ export let $$ii1 = forwardRef(function ({
   let eR = useAtomWithSubscription(TN).length > 0;
   let eN = es ? void 0 : jsx(it, {
     recordingKey: O,
-    rightButtons: !J && jsx(_$$K, {
+    rightButtons: !J && jsx(IconButton, {
       "aria-label": getI18nString("variables.binding_ui.create_style_or_variable_button_tooltip"),
       recordingKey: generateRecordingKey(O, "createVariable"),
       onClick: ew,
@@ -2276,7 +2276,7 @@ export function $$io0({
         allowOverflow: !0,
         children: [jsx(it, {
           rightButtons: function () {
-            if (b) return jsx(_$$K, {
+            if (b) return jsx(IconButton, {
               "aria-label": getI18nString("variables.binding_ui.create_variable_button_tooltip"),
               recordingKey: generateRecordingKey(h, "createVariable"),
               onClick: K,

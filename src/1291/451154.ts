@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import { Ay } from "@stylexjs/stylex";
 import d from "classnames";
@@ -539,7 +539,7 @@ export function $$v1(e) {
     title: selectedCategory.title,
     children: [e.extraContent, d ? jsx(O, {
       setPinned: e.setPinned
-    }) : jsx(K, {
+    }) : jsx(IconButton, {
       onClick: l,
       "aria-label": getI18nString("general.close"),
       children: jsx(A, {})

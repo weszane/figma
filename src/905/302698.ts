@@ -1,25 +1,66 @@
-import { jsx } from "react/jsx-runtime";
-import { createContext, useContext } from "react";
-function a(e) {
-  return e && Object.keys(e).length > 0 ? Object.fromEntries(Object.entries(e).map(([e, t]) => [`data-fpl-${e}`, t])) : {};
+import type { ReactNode } from 'react'
+import { createContext, useContext } from 'react'
+import { jsx } from 'react/jsx-runtime'
+
+/**
+ * Transforms an object into a set of data-fpl-* attributes.
+ * @param obj - The input object.
+ * @returns An object with keys prefixed by 'data-fpl-'.
+ * (Original function: a)
+ */
+function createFplDataAttributes(obj: Record<string, any> | undefined): Record<string, any> {
+  if (!obj || Object.keys(obj).length === 0)
+    return {}
+  return Object.fromEntries(
+    Object.entries(obj).map(([key, value]) => [`data-fpl-${key}`, value]),
+  )
 }
-function s(e) {
-  return {};
+
+/**
+ * Returns an empty object.
+ * (Original function: s)
+ */
+function emptyAttributes(_obj?: Record<string, any>): Record<string, any> {
+  return {}
 }
-let o = createContext(s);
-export function $$l0(e) {
-  return useContext(o)(e);
+
+/**
+ * Context for FPL debug attribute generation.
+ * (Original variable: o)
+ */
+const FplDebugContext = createContext<(obj?: Record<string, any>) => Record<string, any>>(emptyAttributes)
+
+/**
+ * Hook to access the FPL debug attribute generator.
+ * @param obj - The input object.
+ * @returns The generated attributes.
+ * (Original function: $$l0)
+ */
+export function useFplDebugAttributes(obj?: Record<string, any>): Record<string, any> {
+  return useContext(FplDebugContext)(obj)
 }
-export function $$d1({
-  children: e,
-  debug: t
+
+/**
+ * Provider for FPL debug attribute generation.
+ * @param children - React children.
+ * @param debug - Whether to enable debug attributes.
+ * (Original function: $$d1)
+ */
+export function FplDebugProvider({
+  children,
+  debug,
+}: {
+  children: ReactNode
+  debug?: boolean
 }) {
-  let i = t ? a : s;
-  return jsx(o.Provider, {
-    value: i,
-    children: e
-  });
+  const value = debug ? createFplDataAttributes : emptyAttributes
+  return jsx(FplDebugContext.Provider, {
+    value,
+    children,
+  })
 }
-$$d1.displayName = "FplDebugProvider";
-export const _ = $$l0;
-export const r = $$d1;
+FplDebugProvider.displayName = 'FplDebugProvider'
+
+// Export aliases for backward compatibility
+export const _ = useFplDebugAttributes
+export const r = FplDebugProvider

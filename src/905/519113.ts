@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNotNullish } from "../figma_app/95419";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
@@ -99,7 +99,7 @@ import { $8, Ni, md as _$$md, i4, $j, nw, Np } from "../905/737988";
 import { A as _$$A } from "../1617/316388";
 import { T as _$$T } from "../905/485734";
 import { throwTypeError } from "../figma_app/465776";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A2 } from "../905/24328";
 import { Z as _$$Z } from "../905/279476";
 import { e as _$$e2 } from "../905/916195";
@@ -950,7 +950,7 @@ function tF({
         }) : 1 === t ? jsx(Fragment, {
           children: jsx("div", {
             className: "library_item_row--libraryRowTargetWrapper--0IQr7",
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               "aria-label": getI18nString("design_systems.publishing_modal.select_component"),
               onClick: G,
               htmlAttributes: {
@@ -1043,7 +1043,7 @@ function tF({
       })
     }), e.type === PrimaryWorkflowEnum.VARIABLE_SET && $ && jsx("div", {
       className: "library_item_row--caretWrapper--O4uP5",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.publishing_modal.see_variables"),
         recordingKey: generateRecordingKey("libraryItemRow", "variableSetDrilldownButton", e.node_id),
         onClick: t => {
@@ -1131,7 +1131,7 @@ function tq({
     className: "variable_collection_header--variableCollectionHeader--lJGjZ",
     children: [jsxs("div", {
       className: "variable_collection_header--variableCollectionHeaderLeft--c6MTv",
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         "aria-label": getI18nString("design_systems.publishing_modal.back"),
         onClick: i,
         recordingKey: "variableCollectionHeader.backButton",
@@ -1582,12 +1582,12 @@ function tJ(e) {
       manager: g,
       width: "lg",
       height: "fixed",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: tN
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsx(_$$k, {})
         })]
       })
@@ -1711,16 +1711,16 @@ function tJ(e) {
         "data-testid": "publishing-modal",
         onKeyDown: tk
       },
-      children: [jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: [jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: tN
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           scrolling: "none",
           padding: 0,
           children: tz
-        }), !eW && jsx(wi, {
+        }), !eW && jsx(DialogFooter, {
           children: tV
         })]
       }), tR && jsx("div", {
@@ -1753,8 +1753,8 @@ function t0({
     "data-tooltip-show-above": !0,
     "data-tooltip-max-width": 205
   } : {};
-  return jsx(vo, {
-    children: jsx(nB, {
+  return jsx(DialogContents, {
+    children: jsx(DialogBody, {
       children: jsxs("div", {
         className: "x19y5rnk x78zum5 x1cy8zhl xkh2ocl x1v2ro7d x1tamke2",
         children: [jsxs("div", {

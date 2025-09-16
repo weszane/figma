@@ -83,7 +83,7 @@ import { NU } from "../figma_app/204891";
 import { A as _$$A5 } from "../905/567946";
 import { versionHandlerInstance } from "../905/985740";
 import { assertNotNullish } from "../figma_app/95419";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J as _$$J3 } from "../905/125993";
 import { c$ } from "../figma_app/236327";
 import { Um } from "../905/848862";
@@ -331,7 +331,7 @@ function eZ(e) {
   let c = d.current?.getBoundingClientRect();
   return jsxs("div", {
     className: "playground_file_row--playgroundFileIcon--1f0CR",
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ref: d,
       "aria-label": getI18nString("community.publishing.playground_file.tooltip"),
       onClick: () => {

@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { useAtomValue } from "../vendor/525001";
 import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
@@ -35,7 +35,7 @@ export function $$x0(e) {
   if ("loading" === E.status) return jsx(ModalRootComponent, {
     manager: T,
     width: 320,
-    children: jsx(vo, {
+    children: jsx(DialogContents, {
       children: jsx(AutoLayout, {
         direction: "vertical",
         width: "100%",
@@ -78,14 +78,14 @@ export function $$x0(e) {
     children: jsx(ModalRootComponent, {
       manager: T,
       width: 320,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: jsx(S, {
               overdueInvoice: x
             })
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsx(AutoLayout, {
             direction: "vertical",
             spacing: 16,
@@ -94,8 +94,8 @@ export function $$x0(e) {
               overdueInvoice: x
             }) : jsx(C, {})
           })
-        }), R.length > 0 ? jsx(wi, {
-          children: jsx(jk, {
+        }), R.length > 0 ? jsx(DialogFooter, {
+          children: jsx(DialogActionStrip, {
             children: R
           })
         }) : null]

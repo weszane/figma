@@ -2,7 +2,7 @@ import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, PureComponent, useState, useId, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { B as _$$B } from "../905/950875";
 import { L as _$$L } from "../905/704296";
 import { getFeatureFlags } from "../905/601108";
@@ -1390,7 +1390,7 @@ function e1() {
       })]
     }), jsx("div", {
       className: _$$s.flex.itemsCenter.$,
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.libraries_modal.dsa_missing_data_dismiss"),
         onClick: i,
         children: jsx(_$$L, {})

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { N } from "../905/438674";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { useSubscription } from "../figma_app/288654";
@@ -169,12 +169,12 @@ export let $$k0 = registerModal(function ({
     htmlAttributes: {
       "data-testid": "plugin-request-modal"
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: j
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         scrolling: "none",
         children: [jsxs("div", {
           className: _$$s.mb16.flex.itemsCenter.$,
@@ -223,8 +223,8 @@ export let $$k0 = registerModal(function ({
           },
           placeholder: getI18nString("extension_request_modal.request_placeholder")
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: E,

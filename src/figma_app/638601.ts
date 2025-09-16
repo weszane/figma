@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { customHistory } from "../905/612521";
 import { AUTH_INIT } from "../905/194276";
 import { showModalHandler } from "../905/156213";
-import { x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 export function $$u0(e) {
   trackEventAnalytics("show_auth_for_logged_out_file", {
     actionType: function (e) {
@@ -69,7 +69,7 @@ export function $$p1() {
       redirectUrl: customHistory.location.pathname
     }));
     e(showModalHandler({
-      type: x,
+      type: AuthModal,
       data: {
         actionOrTool: t
       }

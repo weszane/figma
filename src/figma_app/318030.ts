@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useCallback, useRef, useState, useEffect } from "react";
-import { i as _$$i } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { d as _$$d } from "../vendor/456530";
 import { P as _$$P } from "../vendor/348225";
 import { M as _$$M } from "../figma_app/548779";
@@ -149,7 +149,7 @@ function g({
   onDrag: s,
   recordingKey: o
 }) {
-  let [, l] = _$$i({
+  let [, l] = setupDragHandler({
     onDragStart: r,
     onDrag: s,
     onDragEnd: i

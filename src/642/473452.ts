@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { A } from "../905/920165";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -15,12 +15,12 @@ import { Id, nV } from "../figma_app/626177";
 export function $$x0(e) {
   return jsx(bL, {
     ...e,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("fullscreen.properties_panel.transform_panel.corner_smoothing")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(Id, {
           children: jsx("div", {

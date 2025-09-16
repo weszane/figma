@@ -1,19 +1,19 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useState, useMemo } from "react";
 import { A } from "../vendor/723372";
-import { i } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { ensureContext } from "../905/61417";
 import { toPercent } from "../905/893109";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
-import { qE, n$, RZ, jN, CP } from "../905/875826";
+import { clamp, roundToNearestMultiple, findMinBy, roundWithDirection, stepTowardsRange } from "../905/875826";
 import { isAppleDevice } from "../905/881471";
 import { useRecording } from "../905/959312";
 function h(e, t, i) {
-  return ((e = qE(e, t, i)) - t) / (i - t);
+  return ((e = clamp(e, t, i)) - t) / (i - t);
 }
 function g(e, t, i, n) {
-  return qE(n$(e, t), i, n);
+  return clamp(roundToNearestMultiple(e, t), i, n);
 }
 let f = createContext(null);
 let _ = createContext(null);
@@ -97,7 +97,7 @@ let $$A2 = forwardRef(function (e, t) {
       commit: !0
     }), U.current = !1);
   }
-  let [Y, q] = i({
+  let [Y, q] = setupDragHandler({
     disabled,
     onDragStart() {
       j(!0);
@@ -108,7 +108,7 @@ let $$A2 = forwardRef(function (e, t) {
       W(g(function (e, t, i, n) {
         if (!t || 0 === t.length) return e;
         let r = t.map(e => h(e, i, n));
-        let [a, s] = RZ(r, t => Math.abs(t - e));
+        let [a, s] = findMinBy(r, t => Math.abs(t - e));
         return s <= .02 ? a : e;
       }(function (e, t, i) {
         let n = t.getBoundingClientRect();
@@ -146,17 +146,17 @@ let $$A2 = forwardRef(function (e, t) {
             switch (e.code) {
               case "ArrowRight":
               case "ArrowUp":
-                t = jN(t, e.shiftKey ? bigStep : step, step);
+                t = roundWithDirection(t, e.shiftKey ? bigStep : step, step);
                 break;
               case "ArrowLeft":
               case "ArrowDown":
-                t = jN(t, -1 * (e.shiftKey ? bigStep : step), step);
+                t = roundWithDirection(t, -1 * (e.shiftKey ? bigStep : step), step);
                 break;
               case "PageUp":
-                t = jN(t, bigStep, step);
+                t = roundWithDirection(t, bigStep, step);
                 break;
               case "PageDown":
-                t = jN(t, -1 * bigStep, step);
+                t = roundWithDirection(t, -1 * bigStep, step);
                 break;
               case "Home":
                 t = min;
@@ -182,8 +182,8 @@ let $$A2 = forwardRef(function (e, t) {
                 return;
             }
             preventAndStopEvent(e);
-            loop && (t = CP(t, min, max, step));
-            W(t = qE(t, min, max), e, !0);
+            loop && (t = stepTowardsRange(t, min, max, step));
+            W(t = clamp(t, min, max), e, !0);
           },
           onKeyUp: function (e) {
             "KeyS" === e.code && (F.current = !1);

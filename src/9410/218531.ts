@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { h } from "../905/994594";
 import { getI18nString } from "../905/303541";
 import { KindEnum } from "../905/129884";
@@ -14,7 +14,7 @@ export function $$c0({
     t(i);
     e(i);
   }, [e, t]);
-  return jsx(K, {
+  return jsx(IconButton, {
     ref: i,
     onClick: c,
     recordingKey: "canvas_search.search_icon_button",

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { getI18nString } from "../905/303541";
 import { h as _$$h } from "../figma_app/275739";
 import { TI } from "../figma_app/318520";
@@ -21,7 +21,7 @@ export function $$u0({
     h(null);
   }, [m]);
   let g = () => i ? getI18nString("collaboration.voice.check_your_microphone_permissions_to_start_chatting") : m ? getI18nString("collaboration.voice.click_to_unmute") : getI18nString("collaboration.voice.click_to_mute");
-  return jsx(K, {
+  return jsx(IconButton, {
     onClick: f,
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": g(),

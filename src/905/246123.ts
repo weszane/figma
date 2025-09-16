@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useId, useRef, useCallback, useMemo } from "react";
 import { Q } from "../vendor/912394";
-import { VN, TX } from "../905/268491";
-import { S } from "../905/823680";
+import { getElementPosition, pointFromMouseEvent } from "../905/268491";
+import { setupRefUpdater } from "../905/823680";
 import { defaultComponentAttribute } from "../905/577641";
 import { isEventTargetOutside, preventAndStopEvent } from "../905/955878";
-import { F } from "../905/768014";
+import { defaultInputState } from "../905/768014";
 import { GB, Nd, uB, lg } from "../905/127493";
 import { k } from "../905/733611";
 class o {
@@ -60,7 +60,7 @@ class o {
   }
   getSourceClientOffset = e => function (e) {
     let t = 1 === e.nodeType ? e : e.parentElement;
-    return t ? VN(t) : null;
+    return t ? getElementPosition(t) : null;
   }(this.sourceNodes[e]);
   connectDragSource(e, t) {
     this.sourceNodes[e] = t;
@@ -93,7 +93,7 @@ class o {
   };
   handleWindowMoveStart = e => {
     if (!(e instanceof MouseEvent) || this.checkAndMarkEventSeen(this.seenMoveStartEvents, e)) return;
-    let t = TX(e);
+    let t = pointFromMouseEvent(e);
     t && (this.mouseClientOffset = t);
   };
   handleWindowMoveCapture = e => {
@@ -101,7 +101,7 @@ class o {
     let {
       moveStartSourceIds
     } = this;
-    let i = TX(e);
+    let i = pointFromMouseEvent(e);
     if (!i) return;
     let {
       x,
@@ -261,7 +261,7 @@ let $$f1 = forwardRef(({
       preventAndStopEvent(t);
     }, [onKeyDown, I, e]);
     let x = useCallback(e => {
-      if (onFocus?.(e), h.current && h.current.contains(e.target) && !h.current.contains(e.relatedTarget) && "Tab" === F.key) {
+      if (onFocus?.(e), h.current && h.current.contains(e.target) && !h.current.contains(e.relatedTarget) && "Tab" === defaultInputState.key) {
         v.current = !1;
         let e = h.current.querySelector(GB);
         e instanceof HTMLElement && lg(e);
@@ -293,7 +293,7 @@ let $$f1 = forwardRef(({
       ref: h
     };
   }(t);
-  let v = S(i, ref);
+  let v = setupRefUpdater(i, ref);
   return jsx(Q, {
     backend: l,
     children: jsxs(k.Provider, {

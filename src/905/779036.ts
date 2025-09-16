@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useCallback } from "react";
 import { EventShield } from "../905/821217";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { HiddenLabel } from "../905/270045";
 import { f as _$$f } from "../905/54715";
@@ -55,7 +55,7 @@ export function $$y0({
         value: o
       }), !!o && jsx("span", {
         className: hj,
-        children: jsx(K, {
+        children: jsx(IconButton, {
           "aria-label": getI18nString("search.search_bar.clear"),
           onClick: b,
           htmlAttributes: {

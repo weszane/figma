@@ -3,7 +3,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { t as _$$t } from "../905/150656";
 import { Button } from "../905/521428";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { T } from "../905/909590";
 import { E } from "../905/53857";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
@@ -81,7 +81,7 @@ export function $$b0({
           iconPrefix: jsx(_, {}),
           onClick: f,
           children: "Refresh"
-        }), jsx(K, {
+        }), jsx(IconButton, {
           "aria-label": getI18nString("general.close"),
           onClick: e,
           children: jsx(A, {})

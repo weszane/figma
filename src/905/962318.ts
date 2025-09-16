@@ -6,7 +6,7 @@ import { getLanguageDisplayName, getI18nResourceKey } from "../905/528121";
 import { throwError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
@@ -160,11 +160,11 @@ export let $$P0 = registerModal(function ({
           z(!0);
           W(B);
         },
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("settings.account_settings.change_languages")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsx(_$$b, {
             autofocus: !0,
             legend: jsx(_$$s, {
@@ -187,8 +187,8 @@ export let $$P0 = registerModal(function ({
               value: e.value
             }, e.value))
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               disabled: G,

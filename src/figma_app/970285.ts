@@ -8,7 +8,7 @@ import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { d as _$$d } from "../905/976845";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { s as _$$s2 } from "../905/403855";
 import { J as _$$J2 } from "../905/125993";
 import { O as _$$O } from "../905/487602";
@@ -636,7 +636,7 @@ let eF = forwardRef(function ({
   });
   let z = !!y && jsx(_$$E, {
     name: "remove_export_button",
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: y,
       "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
       recordingKey: L("removeButton"),

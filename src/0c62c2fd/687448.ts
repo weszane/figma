@@ -3,7 +3,7 @@ import { useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { R as _$$R } from "../905/256203";
 import { g as _$$g } from "../905/687265";
@@ -215,16 +215,16 @@ export function $$U0({
   return jsx(ModalRootComponent, {
     manager: F,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: e
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: L
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: T,

@@ -12,7 +12,7 @@ import { deepEqual } from "../905/382883";
 import { t as _$$t2 } from "../905/150656";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import b from "../vendor/241899";
@@ -754,22 +754,22 @@ function eM({
       onClose: u,
       width: "fit-content",
       height: "dynamic",
-      children: [jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: [jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("community.publishing.publish_your_file_to_community")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           scrolling: "none",
           children: t
-        }), jsxs(wi, {
+        }), jsxs(DialogFooter, {
           children: [jsx("span", {
             className: $o,
             "aria-live": "assertive",
             "aria-atomic": !0,
             children: es
-          }), jsx(jk, {
+          }), jsx(DialogActionStrip, {
             children: i
           })]
         })]
@@ -1737,22 +1737,22 @@ function td({
       onClose: m,
       width: "fit-content",
       height: "dynamic",
-      children: [jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: [jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("community.publishing.publish_your_file_to_community")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           scrolling: "none",
           children: i
-        }), jsxs(wi, {
+        }), jsxs(DialogFooter, {
           children: [jsx("span", {
             className: $o,
             "aria-live": "assertive",
             "aria-atomic": !0,
             children: eg
-          }), jsx(jk, {
+          }), jsx(DialogActionStrip, {
             children: s
           })]
         })]

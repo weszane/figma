@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/54715";
 import { LazyInputForwardRef } from "../905/408237";
 import { ne } from "../figma_app/563413";
@@ -36,7 +36,7 @@ export let $$c0 = forwardRef((e, t) => {
       spellCheck: !1,
       tabIndex: 0,
       value: e.query
-    }), !!e.query && jsx(_$$K, {
+    }), !!e.query && jsx(IconButton, {
       onClick: e.clearSearch,
       "aria-label": getI18nString("design_systems.assets_panel.clear_search"),
       htmlAttributes: {

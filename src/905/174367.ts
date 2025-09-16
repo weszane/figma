@@ -4,7 +4,7 @@ import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { L } from "../905/857916";
@@ -41,12 +41,12 @@ function E({
   return jsx(ModalRootComponent, {
     manager: _,
     width: 560,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("file_browser.file_import_view.import")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: _$$s.flex.flexColumn.p16.gap8.$,
           children: [A && jsx("div", {

@@ -4,7 +4,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getI18nString } from "../905/303541";
 import { mG } from "../figma_app/15924";
 import { getBuyOrSubscribeLabel } from "../figma_app/808294";
-import { v as _$$v } from "../905/581647";
+import { handleStripeManageSubscription } from "../905/581647";
 import { showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { a as _$$a } from "../figma_app/453187";
@@ -56,7 +56,7 @@ export function $$O0({
     }, [e, t, r, a]);
   }(publishedExtension);
   let G = useCallback(() => {
-    D(_$$v({}));
+    D(handleStripeManageSubscription({}));
   }, [D]);
   let V = Gt(extension.plugin_id, "quick-actions");
   let H = q8(extension);

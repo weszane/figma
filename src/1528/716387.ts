@@ -3,8 +3,8 @@ import { memo, useCallback, useMemo, useContext, useState, useRef, useLayoutEffe
 import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { lQ } from "../905/934246";
-import { i as _$$i } from "../905/718764";
-import { K as _$$K } from "../905/443068";
+import { TabLoop } from "../905/718764";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { T as _$$T } from "../905/745591";
 import { ScreenReaderOnly } from "../905/172252";
@@ -453,7 +453,7 @@ export let $$eF0 = memo(function ({
       editorType: FileKindEnum.DESIGN
     })]
   });
-  return jsx(_$$i, {
+  return jsx(TabLoop, {
     children: jsxs("div", {
       "data-testid": "search-sidebar",
       className: G$,
@@ -472,7 +472,7 @@ export let $$eF0 = memo(function ({
             shouldShowSearchCategories: !R,
             minWidth: getFeatureFlags().eu_fpl_migration_search_settings_menu ? 156 : void 0,
             recordingKey: "figma_design_search"
-          }), jsx(_$$K, {
+          }), jsx(IconButton, {
             onClick: e => {
               exit();
               er(e);
@@ -858,7 +858,7 @@ function eM({
         resultsOnOtherPages: o,
         allInstancesExpanded: R
       }), 0 !== ed.length && jsxs(Fragment, {
-        children: [jsx(_$$K, {
+        children: [jsx(IconButton, {
           onClick: t => {
             e(OP.PREV, "button");
           },
@@ -871,7 +871,7 @@ function eM({
             "data-tooltip-shortcut-key": "canvas-search-prev"
           },
           children: jsx(_$$l, {})
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           onClick: t => {
             e(OP.NEXT, "button");
           },

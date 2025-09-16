@@ -4,7 +4,7 @@ import { createContext, useContext } from 'react'
  * Provides context for dialog operations.
  */
 export const DialogContext = createContext<{
-  close?: () => void
+  close?: (value?: any) => void
 } | null>(null)
 
 /**
@@ -12,7 +12,7 @@ export const DialogContext = createContext<{
  * Custom hook to access the `close` function from DialogContext.
  * @returns {() => void | undefined} The close function from context, if available.
  */
-export function useDialogClose(): (() => void) | undefined {
+export function useDialogClose(): ((value?: any) => void) | undefined {
   const context = useContext(DialogContext)
   return context?.close
 }

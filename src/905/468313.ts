@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useRef, useCallback, useState, forwardRef, useImperativeHandle } from "react";
 import { useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { U as _$$U } from "../905/708285";
 import { RR } from "../figma_app/338442";
 import { VariableDataType, Command, VariableResolvedDataType, PropertyScope } from "../figma_app/763686";
@@ -98,7 +98,7 @@ let M = memo(function ({
   let G = T ? getI18nString("dakota.collection_selector.disconnect_submenu_title") : getI18nString("variables.binding_ui.detach_variable_tooltip");
   let z = jsx("span", {
     className: "text_content_variable_pill--detachButton--qEu-Y",
-    children: jsx(K, {
+    children: jsx(IconButton, {
       onClick: U,
       "aria-label": G,
       recordingKey: generateRecordingKey(i, "detachBindingButton"),
@@ -182,7 +182,7 @@ export function $$K0({
         })
       }), jsx("span", {
         className: Ds,
-        children: jsx(K, {
+        children: jsx(IconButton, {
           onClick: () => clearVariableConsumption(yesNoTrackingEnum.YES),
           "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
           htmlAttributes: {

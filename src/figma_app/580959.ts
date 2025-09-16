@@ -6,7 +6,7 @@ import { nearlyEqual } from "../figma_app/492908";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { T as _$$T } from "../905/68180";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { ButtonPrimitive } from "../905/632989";
 import { Button, ButtonWide } from "../905/521428";
@@ -880,7 +880,7 @@ export class $$tp1 extends PureComponent {
         className: zm,
         children: jsx(_$$T, {
           selected: t,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
             onClick: this.onDetachVariableClick,
             recordingKey: generateRecordingKey(this.props, "paint", "detachVariableButton"),
@@ -900,7 +900,7 @@ export class $$tp1 extends PureComponent {
     (this.props.onRemovePaint || r) && e.push({
       button: jsx(_$$T, {
         selected: t,
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           recordingKey: generateRecordingKey(this.props, "removeButton"),
           onClick: r ? () => {
             fullscreenValue.triggerActionEnumInUserEditScope(Command.UNBIND_SELECTION, {
@@ -1418,7 +1418,7 @@ function tf({
   });
   let ee = jsx("span", {
     className: `${v9} ${N4}`,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       actionOnPointerDown: !0,
       "aria-label": `Select ${formatCount(r, "item")} using this style`,
       recordingKey: generateRecordingKey(d, "selectSameStyleButton"),
@@ -1430,7 +1430,7 @@ function tf({
       children: jsx(_$$A, {})
     })
   });
-  let et = jsx(_$$K, {
+  let et = jsx(IconButton, {
     actionOnPointerDown: !0,
     recordingKey: generateRecordingKey(d, "detachButton"),
     "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_style"),
@@ -1760,7 +1760,7 @@ $$t_2.displayName = "Paint";
       if (this.boundColorVariableId()) e.push({
         button: jsx("span", {
           className: zm,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
             onClick: this.onDetachVariableClick,
             recordingKey: generateRecordingKey(this.props, "paint", "detachVariableButton"),
@@ -1779,7 +1779,7 @@ $$t_2.displayName = "Paint";
         e.push({
           button: jsx("span", {
             className: zm,
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               "aria-label": t ? getI18nString("slides.properties_panel.color_picker.theme_colors") : formatI18nMessage("style"),
               onClick: this.onStyleClick,
               recordingKey: generateRecordingKey(this.props, "paint", "styleButton"),
@@ -1797,7 +1797,7 @@ $$t_2.displayName = "Paint";
       null == this.props.uniqueNodesCount || this.props.hideSelectSamePaintButton || e.push({
         button: jsx("span", {
           className: zm,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: this.onSelectSamePaintMouseDown,
             "aria-label": getI18nString("fullscreen.properties_panel.select_item_using_this_color", {
               numItems: this.props.uniqueNodesCount

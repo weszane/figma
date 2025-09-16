@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { V } from "../1577/311426";
 import { Fullscreen, AppStateTsApi } from "../figma_app/763686";
@@ -185,7 +185,7 @@ function F(e) {
   }, action?.guid);
   let m = "FRAME" === _ ? getI18nString("inspect_panel.interactions.select_frame") : _ ? getI18nString("inspect_panel.interactions.select_layer") : void 0;
   let g = action?.value;
-  let E = action && onClick && action.hasAnimation ? jsx(K, {
+  let E = action && onClick && action.hasAnimation ? jsx(IconButton, {
     onClick: p,
     htmlAttributes: {
       "data-tooltip": m,
@@ -194,7 +194,7 @@ function F(e) {
     },
     "aria-label": m ?? getI18nString("proto.action"),
     children: jsx(_$$A, {})
-  }) : action?.type === "URL" && g ? jsx(K, {
+  }) : action?.type === "URL" && g ? jsx(IconButton, {
     onClick: () => u(RK({
       rawInput: g
     })),

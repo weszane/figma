@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { createContext, useContext, forwardRef, useCallback, useRef } from "react";
 import { lQ } from "../905/934246";
-import { i as _$$i } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { useHandlePointerEvent } from "../figma_app/878298";
 import l from "classnames";
 import { P } from "../vendor/348225";
@@ -91,7 +91,7 @@ function f({
   onDragEnd: l,
   recordingKey: c
 }) {
-  let [, u] = _$$i({
+  let [, u] = setupDragHandler({
     onDragStart: r,
     onDrag: i,
     onDragEnd: l

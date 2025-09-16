@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { I as _$$I } from "../905/932503";
 import { memo } from "react";
 import { O as _$$O } from "../905/587457";
@@ -81,7 +81,7 @@ export function $$D1({
 }) {
   let r = selectCurrentFile();
   let s = $$P2(t);
-  return r?.canEdit ? jsx(K, {
+  return r?.canEdit ? jsx(IconButton, {
     "aria-label": getI18nString("sites.metadata.modal_button_site"),
     onClick: s,
     recordingKey: generateRecordingKey(e, "websiteSettingsButton"),

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { N as _$$N } from "../905/438674";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { h as _$$h } from "../905/207101";
 import { KeyCodes } from "../905/63728";
@@ -137,7 +137,7 @@ export function $$O1({
       })
     }), jsx("div", {
       className: "subscription_file_view_header--backButton--0M3NV",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         onClick: G,
         "aria-label": getI18nString("design_systems.libraries_modal.back"),
         children: jsx(_$$C, {})

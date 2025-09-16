@@ -3,7 +3,7 @@ import { memo, useCallback, useEffect, useMemo, useReducer } from 'react';
 import { jsx, jsxs } from 'react/jsx-runtime';
 import { H } from '../905/203408';
 import { getI18nString } from '../905/303541';
-import { K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k } from '../905/443820';
 import { g as _$$g } from '../905/687265';
 import { K as _$$K2 } from '../905/851274';
@@ -322,7 +322,7 @@ let $$T1 = memo(({
   return jsx('div', {
     className: 'x67bb7w x78zum5 x6s0dn4 xl56j7k',
     className: Uu,
-    children: jsx(K, {
+    children: jsx(IconButton, {
       'size': r ? 'md' : n,
       'ref': u,
       'onClick': _,

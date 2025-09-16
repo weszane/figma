@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { t as _$$t } from "../905/150656";
 import { S } from "../905/711470";
 import { i as _$$i } from "../905/708784";
@@ -74,7 +74,7 @@ function T() {
     children: [jsx(N, {
       value: n,
       onChange: i
-    }), jsx("div", {}), jsx(K, {
+    }), jsx("div", {}), jsx(IconButton, {
       "aria-label": getI18nString("sites.code_component.console.clear"),
       htmlAttributes: {
         "data-tooltip": getI18nString("sites.code_component.console.clear"),
@@ -146,7 +146,7 @@ export function $$S0({
           })
         }), jsxs("div", {
           className: "devtools_code_console--headerRowIcons--fc3Yi",
-          children: ["console" === S.activeTab && jsx(T, {}), jsx(K, {
+          children: ["console" === S.activeTab && jsx(T, {}), jsx(IconButton, {
             "aria-label": w,
             htmlAttributes: {
               "data-tooltip": w,

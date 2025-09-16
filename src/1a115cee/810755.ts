@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { renderI18nText } from "../905/303541";
 import { rf } from "../1a115cee/533320";
 export function $$c0(e) {
@@ -15,20 +15,20 @@ export function $$c0(e) {
   return jsx(ModalRootComponent, {
     manager: a,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("autosave.learn_more.title")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           children: renderI18nText("autosave.learn_more.body_save_pending_changes")
         }), jsx("div", {
           className: rf,
           children: renderI18nText("autosave.learn_more.body_use_version_history")
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: s
         })
       })]

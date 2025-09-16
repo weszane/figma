@@ -8,7 +8,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { BaseLinkComponent } from "../905/551536";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -125,22 +125,22 @@ let y = registerModal(function ({
   return jsx(ModalRootComponent, {
     manager: s,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("templates.limit_modal.title", {
             templateLimit: 5
           })
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           children: renderI18nText("templates.limit_modal.description", {
             templateLimit: 5,
             planName: n
           })
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(BaseLinkComponent, {
             href: "https://www.figma.com/pricing#figjam",
             target: "_blank",
@@ -763,22 +763,22 @@ function ta({
       onClose: C,
       width: "fit-content",
       height: "dynamic",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("community.publishing.org_template_modal.header")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           scrolling: "none",
           children: a
-        }), jsxs(wi, {
+        }), jsxs(DialogFooter, {
           children: [jsx("span", {
             className: $o,
             "aria-live": "assertive",
             "aria-atomic": !0,
             children: P
-          }), jsx(jk, {
+          }), jsx(DialogActionStrip, {
             children: s
           })]
         })]
@@ -1320,11 +1320,11 @@ function tO({
             }
           })) : ej();
         },
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: o ? getI18nString("templates.publishing.header.updates") : getI18nString("templates.publishing.header")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           scrolling: "none",
           children: [jsx("div", {
@@ -1369,7 +1369,7 @@ function tO({
               onChange: eu
             })]
           }), t && (!o || o?.publishScope === ContainerTypeMap.TEAM) && ec === ContainerTypeMap.ORG && e_ && jsx(eo, {})]
-        }), jsxs(wi, {
+        }), jsxs(DialogFooter, {
           children: [jsx("div", {
             children: !!$W(tk, es) && jsxs("div", {
               className: T()("template_publish_modal--footerText--dB9b6 publish_modal--footerText--2Sv9Q publish_modal--_userSelectNone--sP-aW", "template_publish_modal--footerError--AkcLv publish_modal--footerError--06reN text--fontPos11--2LvXf text--_fontBase--QdLsd"),
@@ -1378,7 +1378,7 @@ function tO({
                 svg: _$$A1
               }), renderI18nText("community.publish.fix_errors")]
             })
-          }), jsxs(jk, {
+          }), jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               disabled: k,

@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import l from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -119,7 +119,7 @@ function k() {
             })]
           }), jsx("div", {
             className: "no_figma_basics_panning_and_zooming_step--closeButton--UAV5m",
-            children: jsx(K, {
+            children: jsx(IconButton, {
               onClick: () => {
                 e(postUserFlag({
                   dismissed_no_figma_basics_panning_and_zooming_tooltip: !0

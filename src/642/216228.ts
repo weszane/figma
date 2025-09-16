@@ -52,7 +52,7 @@ import { u as _$$u3 } from '../905/389684';
 import { debugState } from '../905/407919';
 import { Y as _$$Y2 } from '../905/411989';
 import { rq as _$$rq } from '../905/425180';
-import { K as _$$K4 } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { x as _$$x2 } from '../905/453561';
@@ -3839,7 +3839,7 @@ function nc({
   return y ? null : jsx(Fragment, {
     children: currentView !== S5.Search && jsxs('div', {
       className: 'asset_panel_header--breadcrumbWrapper--NC2Ps asset_panel_header--horizontalFlex--k99PA',
-      children: [_ && jsx(_$$K4, {
+      children: [_ && jsx(IconButton, {
         'aria-label': getI18nString('design_systems.assets_panel.back'),
         'onClick': f,
         'ref': setBackButtonKeyboardItem,
@@ -8052,7 +8052,7 @@ function l4({
       })
     }), l && jsx('div', {
       className: 'x1ms6mhf x1k3v4rp',
-      children: jsx(_$$K4, {
+      children: jsx(IconButton, {
         'aria-label': getI18nString('design_systems.assets_panel.close_inserts'),
         'onClick': closeOverlay,
         'children': jsx(_$$L, {})

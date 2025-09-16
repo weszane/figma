@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useId, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deepEqual } from "../905/382883";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { getFeatureFlags } from "../905/601108";
 import c from "../vendor/223926";
@@ -338,7 +338,7 @@ export function $$W1(e) {
     "data-testid": "variableModeEntry",
     children: variableSetName
   });
-  let eE = jsx(_$$K, {
+  let eE = jsx(IconButton, {
     "aria-label": getI18nString("general.remove"),
     onClick: () => en("INHERIT", !0),
     actionOnPointerDown: !0,

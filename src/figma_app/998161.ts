@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Y9, hE, jk, vo, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/911410";
@@ -53,7 +53,7 @@ let $$W2 = {
 };
 var K = (e => (e[e.COLOR = 0] = "COLOR", e[e.GRADIENT = 1] = "GRADIENT", e))(K || {});
 function Y() {
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     actionOnPointerDown: !0,
     onClick: GradientToolApi?.rotateGradient90Degrees,
     "aria-label": getI18nString("fullscreen.properties_panel.gradient_picker.rotate_90"),
@@ -70,7 +70,7 @@ function $({
   let t = useCallback(() => permissionScopeHandler.user("slides-delete-theme-color", () => {
     e && VariablesBindings?.deleteVariable(e.varId);
   }), [e]);
-  return e ? jsx(_$$K, {
+  return e ? jsx(IconButton, {
     onClick: t,
     "aria-label": getI18nString("slides.properties_panel.color_picker.delete_template_color"),
     children: jsx(_$$i, {})

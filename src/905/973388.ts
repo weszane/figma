@@ -3,7 +3,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
@@ -25,12 +25,12 @@ export let $$g0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("resource_connection.revoke_modal.revoke_connection_invite")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           scrolling: "none",
           children: jsx("div", {
             children: renderI18nText("resource_connection.revoke_modal.this_will_end_the_connection_request", {
@@ -44,8 +44,8 @@ export let $$g0 = registerModal(function (e) {
               })
             })
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: () => {

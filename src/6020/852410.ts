@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { A as _$$A } from "../905/24328";
 import { r as _$$r } from "../905/857502";
@@ -54,7 +54,7 @@ function V({
 }) {
   return jsx(_$$k2, {
     isVisible: !0,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       ...e,
       children: t
     })

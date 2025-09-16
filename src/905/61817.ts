@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
@@ -60,7 +60,7 @@ export function $$p0({
           children: ["@", t]
         })]
       })]
-    }), i && jsx(K, {
+    }), i && jsx(IconButton, {
       "aria-label": getI18nString("general.close"),
       onClick: i,
       children: jsx(L, {})

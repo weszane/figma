@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../905/521428";
 import { useModal } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { up } from "../figma_app/692987";
 import { C8 } from "../figma_app/920435";
@@ -74,12 +74,12 @@ export function $$j0(e) {
     children: [jsx(ModalRootComponent, {
       manager: R,
       width: "fit-content",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("resubscribe_modal.title")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           className: "x1dc814f",
           children: jsx("p", {
             children: renderI18nText("resubscribe_modal.body", {
@@ -88,8 +88,8 @@ export function $$j0(e) {
               nextBillDate
             })
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(y, {
               variant: "secondary",
               onClick: () => {

@@ -3,7 +3,7 @@ import { memo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { SM } from "../figma_app/153916";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -74,11 +74,11 @@ let y = memo(function ({
     manager: C,
     children: jsxs(ModalFormContents, {
       onSubmit: L,
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("team_view.settings_table.update_invoice_details.modal_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: _$$s.mt12.$,
           children: [jsx("div", {
@@ -96,8 +96,8 @@ let y = memo(function ({
             updateLegalCompanyName: j ? R : null
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "secondary",
             onClick: () => w(),

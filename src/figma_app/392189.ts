@@ -15,7 +15,7 @@ import { I as _$$I } from "../905/342732";
 import { Cn } from "../905/225265";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { r6 } from "../905/542608";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { analyticsEventManager } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -129,7 +129,7 @@ function P({
   }, [e, s?.key, s?.parentOrgId, s?.teamId, a]);
   return jsx("div", {
     className: "ui_kit_select--addButton--ahHMr",
-    children: jsx(K, {
+    children: jsx(IconButton, {
       onClick: o,
       "aria-label": getI18nString("design_systems.assets_panel.add_library"),
       ref: setKeyboardNavigationElement,

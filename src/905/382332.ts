@@ -24,7 +24,7 @@ import { F_ } from "../905/858282";
 import { SAW } from "../figma_app/6204";
 import { yl } from "../figma_app/947348";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Fullscreen, DistributionType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -304,15 +304,15 @@ function ee(e) {
       ...positioningProps,
       modalWidth: 240
     }),
-    children: jsxs(vo, {
+    children: jsxs(DialogContents, {
       className: c()(g5, {
         [gW]: k
       }),
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("fullscreen.properties_panel.brushes")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         scrolling: "none",
         padding: 0,
         children: jsx("div", {

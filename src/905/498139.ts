@@ -21,7 +21,7 @@ import { NF, oz } from "../figma_app/406976";
 import { Ao } from "../905/748636";
 import { i as _$$i } from "../905/649519";
 import { WB } from "../figma_app/394327";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { U as _$$U } from "../905/708285";
 import { h as _$$h } from "../905/207101";
 import { LazyInputForwardRef } from "../905/408237";
@@ -86,7 +86,7 @@ function D({
             contextType: $.FORM,
             onChange: l,
             recordingKey: generateRecordingKey(e, "variableValueInput")
-          }), c && jsx(K, {
+          }), c && jsx(IconButton, {
             type: "button",
             "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
             onClick: () => l(c),

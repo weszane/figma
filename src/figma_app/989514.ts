@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import s from "classnames";
 import { $z } from "../figma_app/617427";
@@ -109,7 +109,7 @@ export function $$b2(e) {
         primaryCtaProps: e.primaryCtaProps
       }), r && jsx("div", {
         className: b,
-        children: jsx(K, {
+        children: jsx(IconButton, {
           onClick: e.dismissModal,
           "aria-label": getI18nString("general.close"),
           htmlAttributes: {
@@ -139,7 +139,7 @@ export function $$T5(e) {
         primaryCtaProps: e.primaryCtaProps
       }), jsx("div", {
         className: b,
-        children: jsx(K, {
+        children: jsx(IconButton, {
           onClick: e.dismissModal,
           "aria-label": getI18nString("general.close"),
           htmlAttributes: {
@@ -183,7 +183,7 @@ export function $$I1(e) {
         primaryCtaProps: e.primaryCtaProps
       }), jsx("div", {
         className: b,
-        children: jsx(K, {
+        children: jsx(IconButton, {
           onClick: e.dismissModal,
           "aria-label": getI18nString("general.close"),
           htmlAttributes: {

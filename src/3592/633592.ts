@@ -3,9 +3,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, nB, hE } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogBody, DialogTitle } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { k as _$$k } from "../905/443820";
 import { Button } from "../905/521428";
@@ -495,8 +495,8 @@ export default App
       children: jsx(ModalRootComponent, {
         manager: t,
         width: 1300,
-        children: jsxs(vo, {
-          children: [jsx(Y9, {
+        children: jsxs(DialogContents, {
+          children: [jsx(DialogHeader, {
             children: jsx("div", {
               role: "button",
               tabIndex: 0,
@@ -506,7 +506,7 @@ export default App
               className: _$$s.cursorPointer.wFull.$,
               children: jsx(ec, {})
             })
-          }), jsx(nB, {
+          }), jsx(DialogBody, {
             padding: 0,
             scrolling: "none",
             children: jsxs(eA, {
@@ -522,7 +522,7 @@ function ec() {
   let e = selectCurrentFile()?.name || getI18nString("dev_handoff.dev_handoff_view_selector.untitled");
   let t = uQ();
   let s = Fk((e, t) => e?.get(t ?? "")?.name, t);
-  return jsx(hE, {
+  return jsx(DialogTitle, {
     children: jsxs("div", {
       className: _$$s.flex.itemsCenter.fontSemiBold.$,
       children: [e, jsx(_$$R, {}), jsx(_$$q, {}), s]
@@ -632,7 +632,7 @@ function eu() {
             right: 8,
             bottom: 8
           },
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             type: "submit",
             "aria-label": getI18nString("dev_handoff.mc.chat_send"),
             children: jsx(_$$W, {})
@@ -1013,7 +1013,7 @@ function ej() {
     selectedFileIndex
   } = U();
   let s = chat.codegen?.files[selectedFileIndex]?.contents;
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     disabled: chat.isLoading || !s,
     "aria-label": getI18nString("dev_handoff.mc.copy"),
     onClick: () => {

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { languageCodes } from "../905/816253";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
@@ -22,7 +22,7 @@ function g(e) {
         children: [jsx("div", {
           className: "xmjk8bn xuxw1ft xb3r6kr xlyipyv",
           children: e.id
-        }), jsx(K, {
+        }), jsx(IconButton, {
           "aria-label": getI18nString("string_inspector.copy_id"),
           onClick: () => {
             navigator.clipboard.writeText(e.id);

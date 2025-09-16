@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { LinkPrimitive } from "../figma_app/496441";
 import { ButtonPrimitive } from "../905/632989";
 import { SvgComponent } from "../905/714743";
@@ -63,7 +63,7 @@ export function $$h0({
               action: h
             })
           })]
-        }), _ && jsx(K, {
+        }), _ && jsx(IconButton, {
           "aria-label": getI18nString("general.close"),
           onClick: _,
           children: jsx(SvgComponent, {
@@ -104,7 +104,7 @@ export function $$h0({
             variant: i,
             action: h
           })]
-        }), _ && jsx(K, {
+        }), _ && jsx(IconButton, {
           "aria-label": getI18nString("general.close"),
           onClick: _,
           children: jsx(SvgComponent, {

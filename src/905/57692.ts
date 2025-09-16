@@ -3,8 +3,8 @@ import { forwardRef, useRef, useMemo } from "react";
 import { useExposedRef } from "../905/581092";
 import { defaultComponentAttribute } from "../905/577641";
 import { isEventTargetOutside, preventAndStopEvent } from "../905/955878";
-import { C7 } from "../905/117474";
-import { F } from "../905/768014";
+import { setupFocusNavigator } from "../905/117474";
+import { defaultInputState } from "../905/768014";
 import { mergeProps } from "../905/475481";
 import { y } from "../905/658036";
 function p(e) {
@@ -21,7 +21,7 @@ let $$h0 = forwardRef(({
 }, h) => {
   let g = useExposedRef(h);
   let f = useRef(null);
-  let _ = useMemo(() => C7(g, {
+  let _ = useMemo(() => setupFocusNavigator(g, {
     criteria: "focusable"
   }), []);
   return jsx("div", {
@@ -33,7 +33,7 @@ let $$h0 = forwardRef(({
         let t = g.current;
         if (!t) return;
         let i = !t.contains(e.relatedTarget);
-        if (i && "pointer" === F.type) {
+        if (i && "pointer" === defaultInputState.type) {
           f.current = null;
           return;
         }

@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
@@ -60,12 +60,12 @@ export let $$b0 = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: P,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: C === aJ ? renderI18nText("file_browser.request_access_modal.request_to_join_team") : renderI18nText("file_browser.team.request_to_edit_team")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           "data-testid": "subtitle",
           className: "request_access_modal--subtitle--7AzpO",
@@ -98,8 +98,8 @@ export let $$b0 = registerModal(function (e) {
             })
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: g,
             variant: "secondary",

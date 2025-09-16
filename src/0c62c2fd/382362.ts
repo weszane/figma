@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { z as _$$z } from "../vendor/999105";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { xf } from "../figma_app/416935";
 import { KeyCodes } from "../905/63728";
@@ -381,12 +381,12 @@ export function $$ee0(e) {
     children: jsx(ModalRootComponent, {
       manager: ey,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: eb()
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: t
         })]
       })

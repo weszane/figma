@@ -15,7 +15,7 @@ import { Dy } from "../figma_app/165422";
 import { useDispatch, useSelector } from "react-redux";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
 import { Point } from "../905/736624";
-import { I as _$$I } from "../figma_app/4253";
+import { getCommunityResourcePayment } from "../figma_app/4253";
 import { getViewerWidth } from "../figma_app/471982";
 import { wB } from "../figma_app/12220";
 import { lS } from "../figma_app/242565";
@@ -26,7 +26,7 @@ import { VL } from "../figma_app/112055";
 import { jJ } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { lQ } from "../905/934246";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { O as _$$O } from "../905/487602";
 import { e as _$$e } from "../905/149844";
@@ -309,7 +309,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let d = Math.round(100 * t.currentZoomScale);
     let c = d.toString().length;
     return jsxs(Fragment, {
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         "aria-label": getI18nString("fullscreen_actions.zoom-out"),
         onClick: adjustZoomOutFactory("clickFromViewerButtons"),
         htmlAttributes: {
@@ -345,7 +345,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
             role: "img"
           })
         })]
-      }), jsx(e.Divider, {}), jsx(_$$K, {
+      }), jsx(e.Divider, {}), jsx(IconButton, {
         "aria-label": getI18nString("fullscreen_actions.zoom-in"),
         onClick: adjustZoomInFactory("clickFromViewerButtons"),
         htmlAttributes: {
@@ -813,7 +813,7 @@ function ex(e) {
   }, [$, H]);
   let X = $ ? `/community/file/${hubFile.id}/embed` : `/embed?embed_host=hub_file_detail_view&community_viewer=true&hub_file_id=${hubFile.id}&hide_ui=true`;
   let q = hasMonetizedResourceMetadata(hubFile);
-  let J = _$$I(hubFile);
+  let J = getCommunityResourcePayment(hubFile);
   let Z = isSubscriptionActive(J);
   return jsxs("div", {
     className: "hub_file_viewer--iframeViewerAndSidebarContainer--8cmiH",

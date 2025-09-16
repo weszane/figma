@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB, Y9, hE, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogBody, DialogHeader, DialogTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -130,8 +130,8 @@ function G(e) {
   if ("loaded" !== h.status) return jsx(ModalRootComponent, {
     manager: i,
     width: "sm",
-    children: jsx(vo, {
-      children: jsx(nB, {
+    children: jsx(DialogContents, {
+      children: jsx(DialogBody, {
         children: jsx(LoadingOverlay, {})
       })
     })
@@ -184,15 +184,15 @@ function z(e) {
     children: jsx(ModalRootComponent, {
       manager: r,
       width: "md",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: e.isFileInTeamWithProFeatures ? E : I
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: x
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               onClick: i,
               trackingProperties: {

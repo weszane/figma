@@ -1,291 +1,307 @@
-import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAssociatedUserProfiles } from '../905/11536';
-import { showModal, showModalHandler } from '../905/156213';
-import { h as _$$h } from '../905/193918';
-import { AUTH_INIT } from '../905/194276';
-import { SubscriptionStatus } from '../905/272080';
-import { getI18nString } from '../905/303541';
-import { selectCurrentUser } from '../905/372672';
-import { debugState } from '../905/407919';
-import { trackEventAnalytics } from '../905/449184';
-import { FlashActions } from '../905/573154';
-import { v as _$$v } from '../905/581647';
-import { getFeatureFlags } from '../905/601108';
-import { customHistory } from '../905/612521';
-import { logger } from '../905/651849';
-import { getStorage } from '../905/657224';
-import { x as _$$x } from '../905/749159';
-import { I as _$$I2 } from '../905/750915';
-import { FreemiumApiPreCheckoutModal, ModalType } from '../905/837980';
-import { I as _$$I } from '../figma_app/4253';
-import { hasClientMeta, hasFreemiumCode, hasMonetizedResourceMetadata, isPlugin, isThirdPartyMonetized, isWidget } from '../figma_app/45218';
-import { fR } from '../figma_app/147952';
-import { isMigratingPlugin, manifestContainsWidget } from '../figma_app/155287';
-import { getPluginMetadata, getPluginVersion } from '../figma_app/300692';
-import { mapResourceType } from '../figma_app/471982';
-import { isResourcePendingPublishing } from '../figma_app/777551';
-import { isSubscriptionActive, isPaymentFailed, partitionUsersByPurchaseEligibility, isStatus } from '../figma_app/808294';
-import { cW, ZT } from '../figma_app/844435';
+import { useCallback, useMemo } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAssociatedUserProfiles } from '../905/11536'
+import { showModal, showModalHandler } from '../905/156213'
+import { CommunityCheckoutModal } from '../905/193918'
+import { AUTH_INIT } from '../905/194276'
+import { SubscriptionStatus } from '../905/272080'
+import { getI18nString } from '../905/303541'
+import { selectCurrentUser } from '../905/372672'
+import { debugState } from '../905/407919'
+import { trackEventAnalytics } from '../905/449184'
+import { FlashActions } from '../905/573154'
+import { handleStripeManageSubscription } from '../905/581647'
+import { getFeatureFlags } from '../905/601108'
+import { customHistory } from '../905/612521'
+import { logger } from '../905/651849'
+import { getStorage } from '../905/657224'
+import { AuthModal } from '../905/749159'
+import { PrePurchaseUserSelectorModal } from '../905/750915'
+import { FreemiumApiPreCheckoutModal, ModalType } from '../905/837980'
+import { getCommunityResourcePayment } from '../figma_app/4253'
+import { hasClientMeta, hasFreemiumCode, hasMonetizedResourceMetadata, isPlugin, isThirdPartyMonetized, isWidget } from '../figma_app/45218'
+import { fR } from '../figma_app/147952'
+import { isMigratingPlugin, manifestContainsWidget } from '../figma_app/155287'
+import { getPluginMetadata, getPluginVersion } from '../figma_app/300692'
+import { mapResourceType } from '../figma_app/471982'
+import { isResourcePendingPublishing } from '../figma_app/777551'
+import { isPaymentFailed, isStatus, isSubscriptionActive, partitionUsersByPurchaseEligibility } from '../figma_app/808294'
+import { cW, ZT } from '../figma_app/844435'
+
 function P(e, t, r, n) {
-  return i => {
+  return (i) => {
     i(showModal({
-      type: _$$h.type,
+      type: CommunityCheckoutModal.type,
       data: {
         userId: e.id,
         resource: t,
         onSuccess: () => {
-          i(r => {
-            (isPlugin(t) || isWidget(t)) && r(fR(t, e.id));
-          });
-          r && r();
+          i((r) => {
+            (isPlugin(t) || isWidget(t)) && r(fR(t, e.id))
+          })
+          r && r()
         },
-        onCancel: n
-      }
-    }));
-  };
+        onCancel: n,
+      },
+    }))
+  }
 }
 export let $$D12 = _$$n((e, t, r, n, i, s) => {
-  let o = getFeatureFlags().community_hub_admin && r && isResourcePendingPublishing(r);
-  return new Promise(a => {
+  let o = getFeatureFlags().community_hub_admin && r && isResourcePendingPublishing(r)
+  return new Promise((a) => {
     let d = () => {
       if (t) {
         if (n || o) {
-          let i;
+          let i
           e((i = () => {
             $$$4({
-              type: 'PAID'
-            });
-            a();
-          }, e => {
+              type: 'PAID',
+            })
+            a()
+          }, (e) => {
             e(showModal({
-              type: _$$h.type,
+              type: CommunityCheckoutModal.type,
               data: {
                 userId: t.id,
                 resource: r,
                 localResource: n,
                 onSuccess: i,
                 onCancel: a,
-                noInteractionMode: !0
-              }
-            }));
-          }));
-          return;
+                noInteractionMode: !0,
+              },
+            }))
+          }))
+          return
         }
-        hasMonetizedResourceMetadata(r) ? e(P(t, r, () => a(), () => a())) : logger.error('Can only initiate checkout for a monetized or local resource.');
-      } else {
-        e(e => {
+        hasMonetizedResourceMetadata(r) ? e(P(t, r, () => a(), () => a())) : logger.error('Can only initiate checkout for a monetized or local resource.')
+      }
+      else {
+        e((e) => {
           e(AUTH_INIT({
             origin: 'freemium_checkout_modal_in_open_session',
             redirectUrl: customHistory.location.pathname,
-            signedUpFromOpenSession: !0
-          }));
+            signedUpFromOpenSession: !0,
+          }))
           e(showModalHandler({
-            type: _$$x,
+            type: AuthModal,
             data: {
-              headerText: getI18nString('fullscreen.toolbar.log_in_to_do_more_with_figjam')
-            }
-          }));
-        });
+              headerText: getI18nString('fullscreen.toolbar.log_in_to_do_more_with_figjam'),
+            },
+          }))
+        })
       }
-    };
-    s === ModalType.SKIP ? d() : e(showModal({
-      type: FreemiumApiPreCheckoutModal.type,
-      data: {
-        type: t ? s || ModalType.PAID_FEATURE : ModalType.LOGGED_OUT,
-        onContinue: d,
-        onClose: a,
-        plugin: r && getPluginVersion(r) || n || i,
-        monetizedResourceMetadata: r?.monetized_resource_metadata
-      }
-    }));
-  });
-});
+    }
+    s === ModalType.SKIP
+      ? d()
+      : e(showModal({
+          type: FreemiumApiPreCheckoutModal.type,
+          data: {
+            type: t ? s || ModalType.PAID_FEATURE : ModalType.LOGGED_OUT,
+            onContinue: d,
+            onClose: a,
+            plugin: r && getPluginVersion(r) || n || i,
+            monetizedResourceMetadata: r?.monetized_resource_metadata,
+          },
+        }))
+  })
+})
 export function $$k10(e) {
-  let t = useDispatch();
-  let r = useSelector(e => e.authedActiveCommunityProfile);
-  let a = useSelector(e => e.authedUsers);
-  let s = _$$I(e);
+  let t = useDispatch()
+  let r = useSelector(e => e.authedActiveCommunityProfile)
+  let a = useSelector(e => e.authedUsers)
+  let s = getCommunityResourcePayment(e)
   return useCallback(() => {
-    if (!e) return;
-    let n = isSubscriptionActive(s);
-    let i = hasMonetizedResourceMetadata(e);
+    if (!e)
+      return
+    let n = isSubscriptionActive(s)
+    let i = hasMonetizedResourceMetadata(e)
     if (trackEventAnalytics('cmty_resource_usage_action', {
       resourceType: mapResourceType(e),
       resourceId: e.id,
       profileId: r?.id,
       hasActiveCommunityResourcePayment: n,
-      isMonetizedResource: i
+      isMonetizedResource: i,
     }), !i || n || !1 === $$M8(r, a, e)) {
-      return;
+      return
     }
     let l = getAssociatedUserProfiles({
       authedActiveCommunityProfile: r,
-      authedUsers: a
-    });
+      authedUsers: a,
+    })
     let {
       usersCanPurchase,
-      publishers
-    } = partitionUsersByPurchaseEligibility(l, e);
+      publishers,
+    } = partitionUsersByPurchaseEligibility(l, e)
     if (trackEventAnalytics('Checkout Flow Entered', {
       resourceType: mapResourceType(e),
       resourceId: e.id,
       numLoggedInAssociatedUsersThatCanPurchase: usersCanPurchase.length,
-      numLoggedInAssociatedPublishers: publishers.length
+      numLoggedInAssociatedPublishers: publishers.length,
     }), usersCanPurchase.length === 1 && publishers.length === 0) {
-      t(P(usersCanPurchase[0], e));
-      return;
+      t(P(usersCanPurchase[0], e))
+      return
     }
     t(showModalHandler({
-      type: _$$I2,
+      type: PrePurchaseUserSelectorModal,
       data: {
-        onUserSelect: r => {
+        onUserSelect: (r) => {
           trackEventAnalytics('Pre Purchase User Selector Modal - User Selected', {
             resourceType: mapResourceType(e),
             resourceId: e.id,
-            userIdForPurchase: r.id
-          });
-          t(P(r, e));
+            userIdForPurchase: r.id,
+          })
+          t(P(r, e))
         },
-        resource: e
-      }
-    }));
-  }, [e, s, r, a, t]);
+        resource: e,
+      },
+    }))
+  }, [e, s, r, a, t])
 }
 export function $$M8(e, t, r) {
-  if (!hasMonetizedResourceMetadata(r)) return !1;
+  if (!hasMonetizedResourceMetadata(r))
+    return !1
   let n = getAssociatedUserProfiles({
     authedActiveCommunityProfile: e,
-    authedUsers: t
-  });
+    authedUsers: t,
+  })
   let {
     usersCanPurchase,
-    publishers
-  } = partitionUsersByPurchaseEligibility(n, r);
-  return (usersCanPurchase.length !== 0 || publishers.length !== 0) && (usersCanPurchase.length !== 0 || publishers.length === 0);
+    publishers,
+  } = partitionUsersByPurchaseEligibility(n, r)
+  return (usersCanPurchase.length !== 0 || publishers.length !== 0) && (usersCanPurchase.length !== 0 || publishers.length === 0)
 }
 export function $$F5(e) {
-  let t = useDispatch();
-  let r = _$$I(e);
+  let t = useDispatch()
+  let r = getCommunityResourcePayment(e)
   return useCallback(() => {
-    e && isSubscriptionActive(r) && (t(FlashActions.flash(getI18nString('community.buyer.redirecting_to_stripe'))), t(_$$v({})));
-  }, [e, r, t]);
+    e && isSubscriptionActive(r) && (t(FlashActions.flash(getI18nString('community.buyer.redirecting_to_stripe'))), t(handleStripeManageSubscription({})))
+  }, [e, r, t])
 }
 export function $$j16(e, t) {
-  let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment;
-  return isSubscriptionActive(r);
+  let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment
+  return isSubscriptionActive(r)
 }
 export function $$U17(e, t) {
   let {
-    publishers
-  } = partitionUsersByPurchaseEligibility([t], e);
-  return publishers.length > 0;
+    publishers,
+  } = partitionUsersByPurchaseEligibility([t], e)
+  return publishers.length > 0
 }
 function B(e, t, r) {
-  return !(!e || !hasMonetizedResourceMetadata(e) || hasFreemiumCode(e) || !hasClientMeta(e) && (isMigratingPlugin(e) || isThirdPartyMonetized(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !function (e, t) {
-    let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment;
-    return r && isPaymentFailed(r);
-  }(e, t));
+  return !(!e || !hasMonetizedResourceMetadata(e) || hasFreemiumCode(e) || !hasClientMeta(e) && (isMigratingPlugin(e) || isThirdPartyMonetized(e)) || r && $$U17(e, r)) && !($$j16(e, t) && !(function (e, t) {
+    let r = t?.[e.monetized_resource_metadata.id] || e.community_resource_payment
+    return r && isPaymentFailed(r)
+  }(e, t)))
 }
 export function $$G1() {
-  return useSelector(e => e.communityPayments);
+  return useSelector(e => e.communityPayments)
 }
 export function $$V0(e) {
-  return B(e, $$G1(), selectCurrentUser() || void 0);
+  return B(e, $$G1(), selectCurrentUser() || void 0)
 }
 export function $$H3(e) {
-  let t = $$G1();
-  return hasMonetizedResourceMetadata(e) && $$j16(e, t);
+  let t = $$G1()
+  return hasMonetizedResourceMetadata(e) && $$j16(e, t)
 }
 export function $$z6(e) {
-  return B(e, debugState && debugState.getState().communityPayments, debugState && debugState.getState().user || void 0);
+  return B(e, debugState && debugState.getState().communityPayments, debugState && debugState.getState().user || void 0)
 }
-let W = 'local-resource-payment';
-export var $$K20 = (e => (e.PAID = 'PAID', e.UNPAID = 'UNPAID', e.NOT_SUPPORTED = 'NOT_SUPPORTED', e))($$K20 || {});
+let W = 'local-resource-payment'
+export var $$K20 = (e => (e.PAID = 'PAID', e.UNPAID = 'UNPAID', e.NOT_SUPPORTED = 'NOT_SUPPORTED', e))($$K20 || {})
 export function $$Y19() {
-  return getStorage().get(W);
+  return getStorage().get(W)
 }
 export function $$$4(e) {
-  getStorage().set(W, e);
+  getStorage().set(W, e)
 }
 function X(e, t) {
-  if (t && hasMonetizedResourceMetadata(t)) return e?.[t.monetized_resource_metadata.id] || t.community_resource_payment;
+  if (t && hasMonetizedResourceMetadata(t))
+    return e?.[t.monetized_resource_metadata.id] || t.community_resource_payment
 }
 export function $$q13(e) {
-  return X($$G1(), e);
+  return X($$G1(), e)
 }
 export function $$J18(e) {
-  let t = useSelector(t => getPluginMetadata(e, t.publishedPlugins));
-  let r = $$q13(t);
-  return useMemo(() => t ? {
-    ...t,
-    community_resource_payment: r
-  } : t, [r, t]);
+  let t = useSelector(t => getPluginMetadata(e, t.publishedPlugins))
+  let r = $$q13(t)
+  return useMemo(() => t
+    ? {
+        ...t,
+        community_resource_payment: r,
+      }
+    : t, [r, t])
 }
 export function $$Z7({
   extension: e,
   publishedPlugins: t,
   publishedWidgets: r,
-  communityPaymentsState: n
+  communityPaymentsState: n,
 }) {
-  let i = (manifestContainsWidget(e) ? r : t)[e.plugin_id];
-  if (!i) return;
-  let a = X(n, i);
+  let i = (manifestContainsWidget(e) ? r : t)[e.plugin_id]
+  if (!i)
+    return
+  let a = X(n, i)
   return {
     ...i,
-    community_resource_payment: a
-  };
+    community_resource_payment: a,
+  }
 }
 export function $$Q15(e) {
-  let t = cW()[e];
-  let r = $$q13(t);
-  return useMemo(() => t ? {
-    ...t,
-    community_resource_payment: r
-  } : t, [r, t]);
+  let t = cW()[e]
+  let r = $$q13(t)
+  return useMemo(() => t
+    ? {
+        ...t,
+        community_resource_payment: r,
+      }
+    : t, [r, t])
 }
 export function $$ee9(e) {
-  let t = useSelector(t => t.publishedWidgets[e]);
-  let r = $$q13(t);
-  return useMemo(() => t ? {
-    ...t,
-    community_resource_payment: r
-  } : t, [r, t]);
+  let t = useSelector(t => t.publishedWidgets[e])
+  let r = $$q13(t)
+  return useMemo(() => t
+    ? {
+        ...t,
+        community_resource_payment: r,
+      }
+    : t, [r, t])
 }
 export function $$et2(e) {
-  let t = ZT()[e];
-  let r = $$q13(t);
-  return useMemo(() => t ? {
-    ...t,
-    community_resource_payment: r
-  } : t, [r, t]);
+  let t = ZT()[e]
+  let r = $$q13(t)
+  return useMemo(() => t
+    ? {
+        ...t,
+        community_resource_payment: r,
+      }
+    : t, [r, t])
 }
 export function $$er11(e) {
-  let t = $$q13(e);
-  return !!t && isPaymentFailed(t);
+  let t = $$q13(e)
+  return !!t && isPaymentFailed(t)
 }
 export function $$en14(e) {
-  let t = $$q13(e);
-  return !!t && isStatus(t, SubscriptionStatus.PENDING);
+  let t = $$q13(e)
+  return !!t && isStatus(t, SubscriptionStatus.PENDING)
 }
-export const EO = $$V0;
-export const FP = $$G1;
-export const J$ = $$et2;
-export const OY = $$H3;
-export const Qj = $$$4;
-export const R$ = $$F5;
-export const Rm = $$z6;
-export const Y8 = $$Z7;
-export const Zk = $$M8;
-export const aQ = $$ee9;
-export const ej = $$k10;
-export const gn = $$er11;
-export const kA = $$D12;
-export const lt = $$q13;
-export const tw = $$en14;
-export const ul = $$Q15;
-export const vT = $$j16;
-export const vl = $$U17;
-export const xp = $$J18;
-export const y1 = $$Y19;
-export const zH = $$K20;
+export const EO = $$V0
+export const FP = $$G1
+export const J$ = $$et2
+export const OY = $$H3
+export const Qj = $$$4
+export const R$ = $$F5
+export const Rm = $$z6
+export const Y8 = $$Z7
+export const Zk = $$M8
+export const aQ = $$ee9
+export const ej = $$k10
+export const gn = $$er11
+export const kA = $$D12
+export const lt = $$q13
+export const tw = $$en14
+export const ul = $$Q15
+export const vT = $$j16
+export const vl = $$U17
+export const xp = $$J18
+export const y1 = $$Y19
+export const zH = $$K20

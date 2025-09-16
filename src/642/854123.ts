@@ -3,7 +3,7 @@ import { createRef, useState, useEffect, memo, useCallback } from "react";
 import { AppStateTsApi, ViewType } from "../figma_app/763686";
 import { tH, H4 } from "../905/751457";
 import { tt, iT } from "../figma_app/74165";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { qw } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
 import { R as _$$R } from "../figma_app/941983";
@@ -27,7 +27,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { hasTeamPaidAccess } from "../figma_app/345997";
 import { mapFileTypeToEditorTypeNullable } from "../figma_app/53721";
 import { DF } from "../figma_app/861252";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { A5, FI, Yj, J9, Zf, QU, iM, yx, Jm, tL } from "../figma_app/274104";
 import { Button } from "../905/521428";
@@ -50,7 +50,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { C as _$$C } from "../905/520159";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo } from "../figma_app/272243";
+import { DialogContents } from "../figma_app/272243";
 import ey from "../vendor/197638";
 import { clamp } from "../figma_app/492908";
 import { V as _$$V } from "../905/506207";
@@ -107,7 +107,7 @@ function D() {
     children: [jsx("p", {
       className: _$$s2.font16.colorText.fpl__textHeadingLargeFontWeight.$,
       children: getI18nString("in_product_help_and_learning.first_level_header.title")
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       onClick: () => {
         hideInProductHelpView();
       },
@@ -507,7 +507,7 @@ function em() {
       "aria-label": getI18nString("general.back"),
       className: _$$s2.flex.flexRow.itemsCenter.justifyCenter.font11.colorText.fpl__textBodyMediumStrongFontWeight.cursorPointer.$,
       children: [jsx(_$$C, {}), renderI18nText("general.back")]
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       onClick: () => {
         hideInProductHelpView();
       },
@@ -638,7 +638,7 @@ function ej({
     width: "fit-content",
     children: jsx("div", {
       className: "third_level_resources--enlargedImageContainer--EqCOz",
-      children: jsx(vo, {
+      children: jsx(DialogContents, {
         children: jsx(oW, {
           src: e?.src,
           alt: e?.alt,
@@ -846,7 +846,7 @@ export function $$eO0({
   let x = selectCurrentUser();
   let y = s ? _$$R.topLevelMode : f;
   let _ = TY();
-  let b = _$$k();
+  let b = isUserNotLoggedInAndEditorSupported();
   let C = y === ViewType.LAYOUT || y === ViewType.BRANCHING || _ || !!x && y === ViewType.PREVIEW || y === ViewType.HISTORY;
   let j = qw();
   tt();

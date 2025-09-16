@@ -69,7 +69,7 @@ import { m as _$$m } from '../905/701558';
 import { compareLibraryKeyWithString } from '../905/709171';
 import { Yt } from '../905/712714';
 import { IT } from '../905/713695';
-import { i as _$$i3 } from '../905/718764';
+import { TabLoop } from '../905/718764';
 import { gB, Xm } from '../905/723791';
 import { W as _$$W2 } from '../905/729905';
 import { G as _$$G } from '../905/750789';
@@ -3276,7 +3276,7 @@ function ny({
       className: _$$s2.hFull.$,
       children: ei
     })
-  }) : jsx(_$$i3, {
+  }) : jsx(TabLoop, {
     children: ei
   });
 }

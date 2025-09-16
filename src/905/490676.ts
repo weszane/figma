@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { customHistory } from "../905/612521";
@@ -23,12 +23,12 @@ export function $$h0({
       manager: h,
       width: "lg",
       height: "dynamic",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: e
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsxs("div", {
             className: "x1v877vn x78zum5 xdt5ytf x167g77z x6s0dn4 xl56j7k",
             children: [renderI18nText("general.root_error_boundary_title"), jsx(Button, {

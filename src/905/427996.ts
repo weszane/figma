@@ -1,13 +1,13 @@
 import { useRef, useEffect, useCallback, useLayoutEffect } from "react";
 import { SKIP_RECORDING, useRecording } from "../905/959312";
 import { executeEventHandler, preventAndStopEvent, markEventAsProcessed } from "../905/955878";
-import { ar } from "../905/117474";
+import { isActiveElement } from "../905/117474";
 import { F } from "../905/658036";
 import { QT, _L, Hl, iL, Fi, R2 } from "../905/687992";
 import { A } from "../vendor/723372";
-import { f5 } from "../905/914656";
+import { hasTextSelection } from "../905/914656";
 function l(e, t) {
-  ar(e) && (t?.select ? t.select(e) : e.select());
+  isActiveElement(e) && (t?.select ? t.select(e) : e.select());
 }
 function c(e, t, i) {
   if (t && QT(e) && e.getSelection) {
@@ -133,7 +133,7 @@ let m = function (...e) {
   }, [i]);
   let g = useCallback(() => {
     let i = e.current;
-    if (i && ar(i) && l(i, p), !m.current) return;
+    if (i && isActiveElement(i) && l(i, p), !m.current) return;
     let n = i.value;
     n !== t && (i.value = t, h?.(n));
     m.current = !1;
@@ -143,7 +143,7 @@ let m = function (...e) {
   }, [p, g]);
   useLayoutEffect(() => {
     let i = e.current;
-    !m.current && (i.value = t ?? "", ar(i) && l(i, p));
+    !m.current && (i.value = t ?? "", isActiveElement(i) && l(i, p));
   }, [t]);
   return {
     ...u,
@@ -200,7 +200,7 @@ let m = function (...e) {
       let t = d.current;
       if (d.current = !1, executeEventHandler(e, i)) return;
       let n = e.currentTarget;
-      !t || f5(n) || l(n, o);
+      !t || hasTextSelection(n) || l(n, o);
     },
     className: A(r, "inputs__text__FIVwi")
   };

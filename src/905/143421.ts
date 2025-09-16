@@ -1,279 +1,459 @@
-import { jsx, jsxs } from "react/jsx-runtime";
-import { forwardRef, useRef, useState, useLayoutEffect, useCallback, useEffect } from "react";
-import { flushSync } from "react-dom";
-import { A as _$$A } from "../vendor/723372";
-import { i as _$$i } from "../905/97346";
-import { useExposedRef } from "../905/581092";
-import { identity, toPixels, toPercent } from "../905/893109";
-import { defaultComponentAttribute } from "../905/577641";
-var n = {};
-require.d(n, {
-  both: () => y,
-  content: () => I,
-  dragging: () => S,
-  fill: () => v,
-  noScroll: () => b,
-  pinBottom: () => T,
-  pinBottomAnchor: () => k,
-  root: () => g,
-  scroll: () => f,
-  scrollBar: () => x,
-  scrollBars: () => E,
-  scrolling: () => C,
-  specificityHack: () => w,
-  x: () => _,
-  y: () => A
-});
-function p(e, t, i) {
-  return t <= i ? "none" : e <= 0 ? "start" : e >= t - i ? "end" : "middle";
+import classNames from 'classnames'
+import { forwardRef, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { jsx, jsxs } from 'react/jsx-runtime'
+import { setupDragHandler } from '../905/97346'
+import { defaultComponentAttribute } from '../905/577641'
+import { useExposedRef } from '../905/581092'
+import { identity, toPercent, toPixels } from '../905/893109'
+
+/**
+ * CSS class names for ScrollContainer (original: n)
+ */
+export const scrollContainerClasses = {
+  both: 'scroll-container__both__D9TzF',
+  content: 'scroll-container__content__OKxPs',
+  dragging: 'scroll-container__dragging__NUd6f',
+  fill: 'scroll-container__fill__qOryJ',
+  noScroll: 'scroll-container__noScroll__6yNJu',
+  pinBottom: 'scroll-container__pinBottom__RQoSX',
+  pinBottomAnchor: 'scroll-container__pinBottomAnchor__kxzWs',
+  root: 'scroll-container__root__2RmsE',
+  scroll: 'scroll-container__scroll__8Q3Cb',
+  scrollBar: 'scroll-container__scrollBar__5Nut9',
+  scrollBars: 'scroll-container__scrollBars__qxWAs',
+  scrolling: 'scroll-container__scrolling__XpT9A',
+  specificityHack: 'scroll-container__specificity-hack__vgVtm',
+  x: 'scroll-container__x__3bIVO',
+  y: 'scroll-container__y__WrBOK',
 }
-function m(e, t, i) {
-  return e <= t ? 0 : Math.max(24, t / e * (t - i));
+
+/**
+ * Determines scroll position (original: p)
+ * @param pos Current scroll position
+ * @param max Maximum scrollable size
+ * @param view Viewport size
+ * @returns 'none' | 'start' | 'end' | 'middle'
+ */
+function getScrollPosition(pos: number, max: number, view: number): 'none' | 'start' | 'end' | 'middle' {
+  if (max <= view)
+    return 'none'
+  if (pos <= 0)
+    return 'start'
+  if (pos >= max - view)
+    return 'end'
+  return 'middle'
 }
-function h(e, t, i, n, r, a, s, o) {
-  let l = n / s;
-  let d = s - o - (e ? 11 : 0);
-  let c = r - s;
-  let u = t - i;
-  let p = d * l * (a / c);
-  let m = null;
-  u >= p && u <= p + o * l || (m = (u - o * l / 2) / l / d * c);
-  return [(m ?? a) / c, m];
+
+/**
+ * Calculates scrollbar size (original: m)
+ * @param total Total scrollable size
+ * @param view Viewport size
+ * @param offset Offset for both scrollbars
+ * @returns Scrollbar size in pixels
+ */
+function getScrollBarSize(total: number, view: number, offset: number): number {
+  if (total <= view)
+    return 0
+  return Math.max(24, view / total * (view - offset))
 }
-var g = "scroll-container__root__2RmsE";
-var f = "scroll-container__scroll__8Q3Cb";
-var _ = "scroll-container__x__3bIVO";
-var A = "scroll-container__y__WrBOK";
-var y = "scroll-container__both__D9TzF";
-var b = "scroll-container__noScroll__6yNJu";
-var v = "scroll-container__fill__qOryJ";
-var I = "scroll-container__content__OKxPs";
-var E = "scroll-container__scrollBars__qxWAs";
-var x = "scroll-container__scrollBar__5Nut9";
-var S = "scroll-container__dragging__NUd6f";
-var w = "scroll-container__specificity-hack__vgVtm";
-var C = "scroll-container__scrolling__XpT9A";
-var T = "scroll-container__pinBottom__RQoSX";
-var k = "scroll-container__pinBottomAnchor__kxzWs";
-export let $$R0 = forwardRef(({
-  children: e,
-  theme: t = {},
-  scroll: i = "y",
-  fill: c = !1,
-  defaultScrollTop: _,
-  defaultScrollLeft: A,
-  overscroll: y,
-  pinBottom: x,
-  onScroll: w,
-  ...R
-}, P) => {
-  let O = useExposedRef(P);
-  let D = useRef(null);
-  let L = "x" === i || "both" === i;
-  let F = "y" === i || "both" === i;
-  let M = useRef(0);
-  let j = useRef(0);
-  let U = useRef(null);
-  let B = useRef(0);
-  let [V, G] = useState(0);
-  let [z, H] = useState(!1);
-  let [W, K] = useState(L ? 1 : 0);
-  let [Y, q] = useState(F ? 1 : 0);
-  let [$, Z] = useState(0);
-  let [X, Q] = useState(0);
-  let [J, ee] = useState("none");
-  let [et, ei] = useState("none");
-  let en = "both" === i && !!Y && !!W;
-  let er = (!L || !W) && (!F || !Y);
+
+/**
+ * Calculates scroll percent and position for drag (original: h)
+ * @returns [scrollPercent, scrollPosition]
+ */
+function getDragScroll(
+  both: boolean,
+  pointer: number,
+  containerStart: number,
+  containerSize: number,
+  scrollSize: number,
+  scrollPos: number,
+  viewSize: number,
+  barSize: number,
+): [number, number | null] {
+  const ratio = containerSize / viewSize
+  const dragArea = viewSize - barSize - (both ? 11 : 0)
+  const scrollRange = scrollSize - viewSize
+  const pointerOffset = pointer - containerStart
+  const dragOffset = dragArea * ratio * (scrollPos / scrollRange)
+  let scrollPosition: number | null = null
+  if (pointerOffset < dragOffset || pointerOffset > dragOffset + barSize * ratio) {
+    scrollPosition = (pointerOffset - barSize * ratio / 2) / ratio / dragArea * scrollRange
+  }
+  return [((scrollPosition ?? scrollPos) / scrollRange), scrollPosition]
+}
+
+// Exported CSS class names (original: var declarations)
+export const SCROLL_CONTAINER_ROOT = scrollContainerClasses.root
+export const SCROLL_CONTAINER_SCROLL = scrollContainerClasses.scroll
+export const SCROLL_CONTAINER_X = scrollContainerClasses.x
+export const SCROLL_CONTAINER_Y = scrollContainerClasses.y
+export const SCROLL_CONTAINER_BOTH = scrollContainerClasses.both
+export const SCROLL_CONTAINER_NO_SCROLL = scrollContainerClasses.noScroll
+export const SCROLL_CONTAINER_FILL = scrollContainerClasses.fill
+export const SCROLL_CONTAINER_CONTENT = scrollContainerClasses.content
+export const SCROLL_CONTAINER_SCROLL_BARS = scrollContainerClasses.scrollBars
+export const SCROLL_CONTAINER_SCROLL_BAR = scrollContainerClasses.scrollBar
+export const SCROLL_CONTAINER_DRAGGING = scrollContainerClasses.dragging
+export const SCROLL_CONTAINER_SPECIFICITY_HACK = scrollContainerClasses.specificityHack
+export const SCROLL_CONTAINER_SCROLLING = scrollContainerClasses.scrolling
+export const SCROLL_CONTAINER_PIN_BOTTOM = scrollContainerClasses.pinBottom
+export const SCROLL_CONTAINER_PIN_BOTTOM_ANCHOR = scrollContainerClasses.pinBottomAnchor
+
+/**
+ * ScrollContainer component (original: $$R0)
+ */
+/**
+ * Props for ScrollContainer (original: $$R0)
+ */
+export interface ScrollContainerProps {
+  children: React.ReactNode
+  theme?: {
+    root?: string
+    rootStyle?: React.CSSProperties
+    scroll?: string
+    scrollStyle?: React.CSSProperties
+    content?: string
+    contentStyle?: React.CSSProperties
+  }
+  scroll?: 'x' | 'y' | 'both'
+  fill?: boolean
+  defaultScrollTop?: number
+  defaultScrollLeft?: number
+  overscroll?: boolean
+  pinBottom?: boolean
+  onScroll?: (e: React.UIEvent<HTMLDivElement>) => void
+  [key: string]: any // For additional props
+}
+
+/**
+ * ScrollContainer component (original: $$R0)
+ * @param props ScrollContainerProps
+ * @param ref React ref
+ */
+export const ScrollContainer = forwardRef<HTMLDivElement, ScrollContainerProps>(({
+  children,
+  theme = {},
+  scroll = 'y',
+  fill = false,
+  defaultScrollTop,
+  defaultScrollLeft,
+  overscroll,
+  pinBottom,
+  onScroll,
+  ...rest
+}, ref) => {
+  const exposedRef = useExposedRef(ref)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const isHorizontal = scroll === 'x' || scroll === 'both'
+  const isVertical = scroll === 'y' || scroll === 'both'
+  const lastScrollTop = useRef<number>(0)
+  const scrollFlags = useRef<number>(0)
+  const rafId = useRef<number | null>(null)
+  const dragStartPercent = useRef<number>(0)
+  const [overscrollHeight, setOverscrollHeight] = useState<number>(0)
+  const [isScrolling, setIsScrolling] = useState<boolean>(false)
+  const [scrollBarWidth, setScrollBarWidth] = useState<number>(isHorizontal ? 1 : 0)
+  const [scrollBarHeight, setScrollBarHeight] = useState<number>(isVertical ? 1 : 0)
+  const [scrollBarLeft, setScrollBarLeft] = useState<number>(0)
+  const [scrollBarTop, setScrollBarTop] = useState<number>(0)
+  const [scrollXPos, setScrollXPos] = useState<'none' | 'start' | 'end' | 'middle'>('none')
+  const [scrollYPos, setScrollYPos] = useState<'none' | 'start' | 'end' | 'middle'>('none')
+  const hasBothScroll = scroll === 'both' && !!scrollBarHeight && !!scrollBarWidth
+  const isNoScroll = (!isHorizontal || !scrollBarWidth) && (!isVertical || !scrollBarHeight)
+  // Set initial scroll positions
   useLayoutEffect(() => {
-    let e = O.current;
-    null != _ && (e.scrollTop = _);
-    null != A && (e.scrollLeft = A);
-    M.current = e.scrollTop;
-  }, []);
-  let ea = useCallback(() => {
-    let e = O.current;
-    let t = F ? p(e.scrollTop, e.scrollHeight, e.clientHeight) : "none";
-    let i = L ? p(e.scrollLeft, e.scrollWidth, e.clientWidth) : "none";
-    let n = "none" !== t && "none" !== i ? 11 : 0;
-    F && (q(m(e.scrollHeight, e.clientHeight, n)), ei(t));
-    L && (K(m(e.scrollWidth, e.clientWidth, n)), ee(i));
-  }, [L, F]);
-  useLayoutEffect(ea, []);
-  let [es, eo] = _$$i({
-    onBeforeDrag(e) {
-      let t = e.target;
-      return !!t.hasAttribute("data-fpl-orientation") && t;
+    const el = exposedRef.current
+    if (!el)
+      return
+    if (defaultScrollTop != null)
+      el.scrollTop = defaultScrollTop
+    if (defaultScrollLeft != null)
+      el.scrollLeft = defaultScrollLeft
+    lastScrollTop.current = el.scrollTop
+  }, [])
+
+  /**
+   * Updates scrollbar sizes and positions (original: ea)
+   */
+  const updateScrollBars = useCallback(() => {
+    const el = exposedRef.current
+    if (!el)
+      return
+    const verticalPos = isVertical ? getScrollPosition(el.scrollTop, el.scrollHeight, el.clientHeight) : 'none'
+    const horizontalPos = isHorizontal ? getScrollPosition(el.scrollLeft, el.scrollWidth, el.clientWidth) : 'none'
+    const offset = verticalPos !== 'none' && horizontalPos !== 'none' ? 11 : 0
+    if (isVertical) {
+      setScrollBarHeight(getScrollBarSize(el.scrollHeight, el.clientHeight, offset))
+      setScrollYPos(verticalPos)
+    }
+    if (isHorizontal) {
+      setScrollBarWidth(getScrollBarSize(el.scrollWidth, el.clientWidth, offset))
+      setScrollXPos(horizontalPos)
+    }
+  }, [isHorizontal, isVertical])
+
+  useLayoutEffect(updateScrollBars, [])
+
+  // Drag handler setup (original: setupDragHandler)
+  const [isDragging, dragProps] = setupDragHandler({
+    onBeforeDrag(e: PointerEvent & { target: EventTarget }) {
+      const target = e.target as HTMLElement
+      return !!target.hasAttribute('data-fpl-orientation') && target
     },
-    onDragStart(e) {
-      let t = e.target;
-      let i = O.current;
-      let n = i.getBoundingClientRect();
-      if ("vertical" === t.getAttribute("data-fpl-orientation")) {
-        let [t, r] = h(en, e.clientY, n.top, n.height, i.scrollHeight, i.scrollTop, i.clientHeight, Y);
-        B.current = t;
-        null != r && (i.scrollTop = r);
-      } else {
-        let [t, r] = h(en, e.clientX, n.left, n.width, i.scrollWidth, i.scrollLeft, i.clientWidth, W);
-        B.current = t;
-        null != r && (i.scrollLeft = r);
+    onDragStart(e: PointerEvent & { target: EventTarget, clientX: number, clientY: number }) {
+      const target = e.target as HTMLElement
+      const el = exposedRef.current
+      if (!el)
+        return
+      const rect = el.getBoundingClientRect()
+      if (target.getAttribute('data-fpl-orientation') === 'vertical') {
+        const [percent, scrollPos] = getDragScroll(
+          hasBothScroll,
+          e.clientY,
+          rect.top,
+          rect.height,
+          el.scrollHeight,
+          el.scrollTop,
+          el.clientHeight,
+          scrollBarHeight,
+        )
+        dragStartPercent.current = percent
+        if (scrollPos != null)
+          el.scrollTop = scrollPos
+      }
+      else {
+        const [percent, scrollPos] = getDragScroll(
+          hasBothScroll,
+          e.clientX,
+          rect.left,
+          rect.width,
+          el.scrollWidth,
+          el.scrollLeft,
+          el.clientWidth,
+          scrollBarWidth,
+        )
+        dragStartPercent.current = percent
+        if (scrollPos != null)
+          el.scrollLeft = scrollPos
       }
     },
-    onDrag(e) {
-      var t;
-      var i;
-      var n;
-      var r;
-      var a;
-      var s;
-      var o;
-      var l;
-      let d = e.target;
-      let c = O.current;
-      let u = c.getBoundingClientRect();
-      "vertical" === d.getAttribute("data-fpl-orientation") ? c.scrollTop = (t = u.height, i = c.scrollHeight, n = c.clientHeight, r = e.delta.y, (B.current + r / (t / n * (n - Y - (en ? 11 : 0)))) * (i - n)) : c.scrollLeft = (a = u.width, s = c.scrollWidth, o = c.clientWidth, l = e.delta.x, (B.current + l / (a / o * (o - W - (en ? 11 : 0)))) * (s - o));
-    }
-  });
-  let el = useRef(null);
-  let ed = useCallback(() => {
-    clearTimeout(el.current);
-    H(!0);
-    el.current = window.setTimeout(() => {
-      H(!1);
-    }, 200);
-  }, []);
-  let ec = useCallback(e => {
-    j.current |= e;
-    U.current || (U.current = requestAnimationFrame(() => {
-      let e = O.current;
-      let t = D.current;
-      if (e && t) {
-        let {
-          clientWidth,
-          clientHeight,
-          scrollWidth,
-          scrollHeight
-        } = e;
-        let s = () => {
-          if (!y) return;
-          let i = e.matches(":hover");
-          let r = M.current >= t.clientHeight;
-          G(Math.max(!i || r || 0 === M.current ? 0 : Math.ceil(M.current) + clientHeight, t.clientHeight));
-        };
-        let o = en ? 11 : 0;
-        let l = F ? m(scrollHeight, clientHeight, o) : 0;
-        let d = L ? m(scrollWidth, clientWidth, o) : 0;
-        if (1 & j.current && (s(), F && q(l), L && K(d)), 2 & j.current) {
-          let {
-            scrollTop,
-            scrollLeft
-          } = e;
-          let m = scrollTop < M.current;
-          M.current = scrollTop;
-          F && (Q(scrollTop / (scrollHeight - clientHeight) * ((clientHeight - o - l) / clientHeight)), ei(p(scrollTop, scrollHeight, clientHeight)));
-          L && (Z(scrollLeft / (scrollWidth - clientWidth) * ((clientWidth - o - d) / clientWidth)), ee(p(scrollLeft, scrollWidth, clientWidth)));
-          y && m && V > t.clientHeight && s();
+    onDrag(e: { target: EventTarget, delta: { x: number, y: number } }) {
+      const target = e.target as HTMLElement
+      const el = exposedRef.current
+      if (!el)
+        return
+      const rect = el.getBoundingClientRect()
+      if (target.getAttribute('data-fpl-orientation') === 'vertical') {
+        el.scrollTop = (
+          dragStartPercent.current
+          + e.delta.y / (rect.height / el.clientHeight * (el.clientHeight - scrollBarHeight - (hasBothScroll ? 11 : 0)))
+        ) * (el.scrollHeight - el.clientHeight)
+      }
+      else {
+        el.scrollLeft = (
+          dragStartPercent.current
+          + e.delta.x / (rect.width / el.clientWidth * (el.clientWidth - scrollBarWidth - (hasBothScroll ? 11 : 0)))
+        ) * (el.scrollWidth - el.clientWidth)
+      }
+    },
+  })
+
+  // Show/hide scrolling state (original: ed)
+  const scrollTimeout = useRef<number | null>(null)
+  const handleWheel = useCallback(() => {
+    if (scrollTimeout.current)
+      clearTimeout(scrollTimeout.current)
+    setIsScrolling(true)
+    scrollTimeout.current = window.setTimeout(() => setIsScrolling(false), 200)
+  }, [])
+
+  /**
+   * Handles scroll and resize events (original: ec)
+   */
+  const handleScrollResize = useCallback((flags: number) => {
+    scrollFlags.current |= flags
+    if (!rafId.current) {
+      rafId.current = requestAnimationFrame(() => {
+        const el = exposedRef.current
+        const contentEl = contentRef.current
+        if (el && contentEl) {
+          const { clientWidth, clientHeight, scrollWidth, scrollHeight } = el
+          // Overscroll logic
+          const updateOverscroll = () => {
+            if (!overscroll)
+              return
+            const isHovered = el.matches(':hover')
+            const isAtBottom = lastScrollTop.current >= contentEl.clientHeight
+            setOverscrollHeight(Math.max(
+              !isHovered || isAtBottom || lastScrollTop.current === 0
+                ? 0
+                : Math.ceil(lastScrollTop.current) + clientHeight,
+              contentEl.clientHeight,
+            ))
+          }
+          const offset = hasBothScroll ? 11 : 0
+          const verticalBar = isVertical ? getScrollBarSize(scrollHeight, clientHeight, offset) : 0
+          const horizontalBar = isHorizontal ? getScrollBarSize(scrollWidth, clientWidth, offset) : 0
+          if (scrollFlags.current & 1) {
+            updateOverscroll()
+            if (isVertical)
+              setScrollBarHeight(verticalBar)
+            if (isHorizontal)
+              setScrollBarWidth(horizontalBar)
+          }
+          if (scrollFlags.current & 2) {
+            const { scrollTop, scrollLeft } = el
+            const isScrollingUp = scrollTop < lastScrollTop.current
+            lastScrollTop.current = scrollTop
+            if (isVertical) {
+              setScrollBarTop(
+                scrollTop / (scrollHeight - clientHeight)
+                * ((clientHeight - offset - verticalBar) / clientHeight),
+              )
+              setScrollYPos(getScrollPosition(scrollTop, scrollHeight, clientHeight))
+            }
+            if (isHorizontal) {
+              setScrollBarLeft(
+                scrollLeft / (scrollWidth - clientWidth)
+                * ((clientWidth - offset - horizontalBar) / clientWidth),
+              )
+              setScrollXPos(getScrollPosition(scrollLeft, scrollWidth, clientWidth))
+            }
+            if (overscroll && isScrollingUp && overscrollHeight > contentEl.clientHeight) {
+              updateOverscroll()
+            }
+          }
         }
-      }
-      U.current = null;
-      j.current = 0;
-    }));
-  }, [en, F, L, y, V]);
-  useEffect(() => {
-    let e = new ResizeObserver(() => ec(3));
-    e.observe(O.current);
-    e.observe(D.current);
-    return () => {
-      clearTimeout(el.current);
-      cancelAnimationFrame(U.current);
-      U.current = null;
-      e.disconnect();
-    };
-  }, [ec]);
-  useEffect(() => {
-    let e = new MutationObserver(() => flushSync(ea));
-    e.observe(O.current, {
-      subtree: !0,
-      childList: !0
-    });
-    return () => e.disconnect();
-  }, [ea]);
-  let eu = jsx("div", {
-    ref: D,
-    role: "none",
-    className: _$$A(I, t.content),
-    style: t.contentStyle,
-    children: e
-  });
-  let ep = y ? jsx("div", {
-    role: "none",
-    style: {
-      minHeight: V
-    },
-    children: eu
-  }) : eu;
-  return jsxs("div", {
-    role: "none",
-    className: _$$A(g, t.root, {
-      [v]: c,
-      [C]: z
-    }),
-    style: t.rootStyle,
-    onWheel: ed,
-    "data-fpl-scroll-x": J,
-    "data-fpl-scroll-y": et,
-    children: [jsxs("div", {
-      ref: O,
-      role: "none",
-      ...R,
-      ...defaultComponentAttribute,
-      className: _$$A(f, t.scroll, n[i], {
-        [b]: er,
-        [T]: x
-      }),
-      style: t.scrollStyle,
-      onScroll: e => {
-        ec(2);
-        w?.(e);
-      },
-      children: [ep, x && jsx("div", {
-        "aria-hidden": !0,
-        className: k
-      })]
-    }), jsxs("div", {
-      "aria-hidden": !0,
-      hidden: er,
-      onWheel: ed,
-      ...eo({
-        className: _$$A(E, {
-          [S]: es
-        })
-      }),
-      children: [L && jsx(N, {
-        orientation: "horizontal",
-        scrollSize: W,
-        scrollPercent: $
-      }), F && jsx(N, {
-        orientation: "vertical",
-        scrollSize: Y,
-        scrollPercent: X
-      })]
-    })]
-  });
-});
-function N({
-  orientation: e,
-  scrollSize: t,
-  scrollPercent: i
-}) {
-  return jsx("div", {
-    "data-fpl-orientation": e,
-    className: x,
-    style: {
-      [identity("--scroll-size")]: toPixels(t),
-      [identity("--scroll-percent")]: toPercent(i)
+        rafId.current = null
+        scrollFlags.current = 0
+      })
     }
-  });
+  }, [hasBothScroll, isVertical, isHorizontal, overscroll, overscrollHeight])
+
+  // Resize observer
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => handleScrollResize(3))
+    if (exposedRef.current)
+      resizeObserver.observe(exposedRef.current)
+    if (contentRef.current)
+      resizeObserver.observe(contentRef.current)
+    return () => {
+      if (scrollTimeout.current)
+        clearTimeout(scrollTimeout.current)
+      if (rafId.current)
+        cancelAnimationFrame(rafId.current)
+      rafId.current = null
+      resizeObserver.disconnect()
+    }
+  }, [handleScrollResize])
+
+  // Mutation observer for children
+  useEffect(() => {
+    if (!exposedRef.current)
+      return
+    const mutationObserver = new MutationObserver(() => flushSync(updateScrollBars))
+    mutationObserver.observe(exposedRef.current, { subtree: true, childList: true })
+    return () => mutationObserver.disconnect()
+  }, [updateScrollBars])
+
+  // Content element
+  const contentElement = jsx('div', {
+    ref: contentRef,
+    role: 'none',
+    className: classNames(SCROLL_CONTAINER_CONTENT, theme.content),
+    style: theme.contentStyle,
+    children,
+  })
+
+  // Overscroll wrapper
+  const overscrollWrapper = overscroll
+    ? jsx('div', {
+        role: 'none',
+        style: { minHeight: overscrollHeight },
+        children: contentElement,
+      })
+    : contentElement
+
+  // Main render
+  return jsxs('div', {
+    'role': 'none',
+    'className': classNames(SCROLL_CONTAINER_ROOT, theme.root, {
+      [SCROLL_CONTAINER_FILL]: fill,
+      [SCROLL_CONTAINER_SCROLLING]: isScrolling,
+    }),
+    'style': theme.rootStyle,
+    'onWheel': handleWheel,
+    'data-fpl-scroll-x': scrollXPos,
+    'data-fpl-scroll-y': scrollYPos,
+    'children': [
+      jsxs('div', {
+        ref: exposedRef,
+        role: 'none',
+        ...rest,
+        ...defaultComponentAttribute,
+        className: classNames(SCROLL_CONTAINER_SCROLL, theme.scroll, scrollContainerClasses[scroll], {
+          [SCROLL_CONTAINER_NO_SCROLL]: isNoScroll,
+          [SCROLL_CONTAINER_PIN_BOTTOM]: pinBottom,
+        }),
+        style: theme.scrollStyle,
+        onScroll: (e: React.UIEvent<HTMLDivElement>) => {
+          handleScrollResize(2)
+          onScroll?.(e)
+        },
+        children: [
+          overscrollWrapper,
+          pinBottom && jsx('div', { 'aria-hidden': true, 'className': SCROLL_CONTAINER_PIN_BOTTOM_ANCHOR }),
+        ],
+      }),
+      jsxs('div', {
+        'aria-hidden': true,
+        'hidden': isNoScroll,
+        'onWheel': handleWheel,
+        ...dragProps({
+          className: classNames(SCROLL_CONTAINER_SCROLL_BARS, {
+            [SCROLL_CONTAINER_DRAGGING]: isDragging,
+          }),
+        }),
+        'children': [
+          isHorizontal && jsx(ScrollBar, {
+            orientation: 'horizontal',
+            scrollSize: scrollBarWidth,
+            scrollPercent: scrollBarLeft,
+          }),
+          isVertical && jsx(ScrollBar, {
+            orientation: 'vertical',
+            scrollSize: scrollBarHeight,
+            scrollPercent: scrollBarTop,
+          }),
+        ],
+      }),
+    ],
+  })
+})
+
+/**
+ * ScrollBar component (original: N)
+ */
+export function ScrollBar({
+  orientation,
+  scrollSize,
+  scrollPercent,
+}: {
+  orientation: 'horizontal' | 'vertical'
+  scrollSize: number
+  scrollPercent: number
+}) {
+  return jsx('div', {
+    'data-fpl-orientation': orientation,
+    'className': SCROLL_CONTAINER_SCROLL_BAR,
+    'style': {
+      [identity('--scroll-size')]: toPixels(scrollSize),
+      [identity('--scroll-percent')]: toPercent(scrollPercent),
+    },
+  })
 }
-$$R0.displayName = "ScrollContainer";
-export const P = $$R0;
+
+ScrollContainer.displayName = 'ScrollContainer'
+export const P = ScrollContainer

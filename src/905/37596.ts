@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { ButtonPrimitive } from "../905/632989";
 import { E as _$$E2 } from "../905/53857";
 import { B as _$$B } from "../905/950875";
@@ -18,7 +18,7 @@ import { wR } from "../905/346715";
 import { y as _$$y } from "../905/76789";
 import { Lg, Lq } from "../figma_app/392626";
 import { B as _$$B3 } from "../905/900597";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { N as _$$N } from "../905/438674";
 import { Button } from "../905/521428";
 import { C as _$$C } from "../905/520159";
@@ -129,12 +129,12 @@ let Y = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: h,
       width: "md",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: jsxs("div", {
               className: g2,
-              children: [jsx(_$$K, {
+              children: [jsx(IconButton, {
                 onClick: () => {
                   m(popModalStack());
                 },
@@ -143,7 +143,7 @@ let Y = registerModal(function (e) {
               }), renderI18nText("resource_connection.manage_connection")]
             })
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           scrolling: "none",
           padding: {
             top: i ? 0 : 16,
@@ -283,7 +283,7 @@ let Y = registerModal(function (e) {
               })
             })]
           })]
-        }), jsx(wi, {
+        }), jsx(DialogFooter, {
           children: jsxs("div", {
             className: Vr,
             children: [jsx("a", {
@@ -604,12 +604,12 @@ let $$el0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("file_browser.folder_settings_modal.settings")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           scrolling: "none",
           children: A && (t = !1, A.slice().reverse().filter(e => (t || e.separator || (t = !0), t || !e.separator)).reverse().filter((e, t, i) => !e.separator || 0 === t || !i[t - 1]?.separator)).map((e, t) => {
             let i = e.disabled && !e.noDisabledStyling;

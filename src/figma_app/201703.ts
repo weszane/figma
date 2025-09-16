@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, createContext, useContext } from "react";
 import { useSelector } from "react-redux";
 import { assertNotNullish } from "../figma_app/95419";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { parsePxInt } from "../figma_app/783094";
@@ -79,7 +79,7 @@ export function $$B4({
   } = $$j5();
   let i = F() ? jsx(O, {
     setPinned: pinModal
-  }) : jsx(K, {
+  }) : jsx(IconButton, {
     "aria-label": getI18nString("general.close"),
     onClick: closeModal,
     children: jsx(A, {})

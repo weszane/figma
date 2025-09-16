@@ -34,7 +34,7 @@ import { registerModal } from '../905/102752';
 import { t as _$$t3 } from '../905/117577';
 import { KindEnum } from '../905/129884';
 import { M as _$$M } from '../905/130634';
-import { P as _$$P } from '../905/143421';
+import { ScrollContainer } from '../905/143421';
 import { Ey, To } from '../905/148137';
 import { showModalHandler, hideModal, popModalStack } from '../905/156213';
 import { p as _$$p2 } from '../905/185998';
@@ -131,7 +131,7 @@ import { FPlanNameType, FOrganizationLevelType, FCostCenterType } from '../figma
 import { Zx } from '../figma_app/217457';
 import { Bg } from '../figma_app/246699';
 import { T as _$$T } from '../figma_app/257703';
-import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { isResourceHubEnabled } from '../figma_app/275462';
 import { useSubscription } from '../figma_app/288654';
 import { t4 as _$$t2 } from '../figma_app/297957';
@@ -593,17 +593,17 @@ let te = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: s,
     width: 364,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('settings_tab.delete_org_modal.are_you_sure_you_d_like_to_delete_figma')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText('settings_tab.delete_org_modal.please_confirm_that_you_wish_to_permanently_delete_the_org', {
           orgName: a.name
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: () => {
               t(popModalStack());
@@ -641,12 +641,12 @@ let tt = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: r,
     width: 364,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('settings_tab.delete_org_modal.delete_users_from_this_organization')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [renderI18nText('settings_tab.delete_org_modal.enter_names_or_emails_of_users_that_you_d_like_to_delete'), jsx('div', {
           className: 'delete_org_modal_autocomplete--autocompleteDiv--XcvHs',
           children: jsx(_$$g, {
@@ -655,8 +655,8 @@ let tt = registerModal(e => {
             onAutocompleteChange: d
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: () => {
               t(popModalStack());
@@ -689,12 +689,12 @@ let ta = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: s,
     width: 364,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('settings_tab.delete_org_modal.delete_users_and_their_data')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('p', {
           children: renderI18nText('settings_tab.delete_org_modal.you_re_deleting_figma_data_and_access_for_the_following_user')
         }), jsx('ul', {
@@ -705,8 +705,8 @@ let ta = registerModal(e => {
         }), jsx('br', {}), jsx('p', {
           children: renderI18nText('settings_tab.delete_org_modal.this_action_can_t_be_undone')
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: () => {
               t(popModalStack());
@@ -961,7 +961,7 @@ function tk(e) {
       className: 'xh8yej3 x1yjdb4r xmkeg23 x1y0btm7 x7z60cl x19y5rnk x16fy0r8 x7wgvq7',
       anchorEl: l,
       ...d.getListProps(),
-      children: jsx(_$$P, {
+      children: jsx(ScrollContainer, {
         children: jsx('div', {
           style: {
             maxHeight: 400
@@ -1088,12 +1088,12 @@ let tS = registerModal(e => {
     manager: r,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('org_settings.ai_controls.ai_features')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(tA, {
           resource: 'org',
           aiControlsSetting: o,
@@ -1107,8 +1107,8 @@ let tS = registerModal(e => {
           workspaceSubText: p,
           hasCustomSettings: tR
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: onClose,
@@ -1155,27 +1155,27 @@ let tN = registerModal(({
     manager: _,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsxs(ButtonPrimitive, {
             onClick: t,
             ...Ay.props(tg.goBackButton),
             children: [jsx(_$$t3, {}), a.name]
           })
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsx(tA, {
           resource: 'workspace',
           aiControlsSetting: o,
           setAiControlsSetting: d
         })
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [tR(a) && jsx(ButtonPrimitive, {
           onClick: c,
           ...Ay.props(tg.removeCustomSettingsButton),
           children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
-        }), jsxs(jk, {
+        }), jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: t,
@@ -1214,17 +1214,17 @@ let tI = registerModal(({
     manager: r,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('org_settings.export_controls.remove_workspace_export_controls_title')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText('org_settings.ai_controls.remove_workspace_ai_controls_body', {
           workspaceName: t.name
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: e,
@@ -2740,12 +2740,12 @@ let a3 = registerModal(e => {
     manager: d,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('org_settings.export_controls.title')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('div', {
           style: {
             padding: '4px'
@@ -2770,8 +2770,8 @@ let a3 = registerModal(e => {
             org: r
           })]
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: e.onClose,
@@ -2822,9 +2822,9 @@ let a8 = registerModal(({
     manager: u,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsxs(ButtonPrimitive, {
             onClick: t,
             ...Ay.props(tg.goBackButton),
@@ -2835,7 +2835,7 @@ let a8 = registerModal(({
             })]
           })
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('div', {
           style: {
             padding: '4px'
@@ -2846,7 +2846,7 @@ let a8 = registerModal(({
           exportControlSetting: d,
           setExportControlSetting: c
         })]
-      }), jsx(wi, {
+      }), jsx(DialogFooter, {
         children: jsxs('div', {
           className: 'x78zum5 x6s0dn4 x1qughib xh8yej3',
           children: [jsx('div', {
@@ -2900,12 +2900,12 @@ let a6 = registerModal(({
     manager: o,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('org_settings.export_controls.remove_workspace_export_controls_title')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('div', {
           style: {
             padding: '4px'
@@ -2919,8 +2919,8 @@ let a6 = registerModal(({
             padding: '4px'
           }
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: t,
@@ -3711,15 +3711,15 @@ let nL = registerModal(({
     manager: u,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsx(nO, {
             workspace: a,
             goBack: e
           })
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsxs('div', {
           className: 'xipvkqc',
           children: [jsx(kJ, {
@@ -3744,12 +3744,12 @@ let nL = registerModal(({
             currentTimeScale: formState.isTimeMeasuredInDays ? 'days' : 'hours'
           })]
         })
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null && jsx(ButtonPrimitive, {
           onClick: _,
           ...xk(tg.removeCustomSettingsButton),
           children: renderI18nText('org_settings.workspace_controls.remove_custom_settings')
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(Ym, {
             cancel: e,
             canSave: formState.canSave,
@@ -3789,20 +3789,20 @@ let nD = registerModal(({
     manager: s,
     height: 'dynamic',
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('settings_tab.public_sharing.remove_custom_workspace_settings')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsx('div', {
           className: 'x1mzt3pk xeaf4i8 x13faqbe',
           children: renderI18nText('setting_tab.remove_custom_workspace_setting_warning', {
             workspaceName: e.name
           })
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: t,
             variant: 'secondary',
@@ -3880,12 +3880,12 @@ let nU = registerModal(() => {
     manager: m,
     width: 'lg',
     height: 'dynamic',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('settings_tab.public_sharing_title')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsxs('div', {
           className: 'x78zum5 xdt5ytf',
           children: [jsx('div', {
@@ -3944,8 +3944,8 @@ let nU = registerModal(() => {
             org: t
           })]
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Ym, {
             cancel: o,
             canSave: formState.canSave,
@@ -4008,15 +4008,15 @@ let nF = registerModal(e => {
     manager: o,
     width: 'lg',
     height: 'dynamic',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: t
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: s
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: l,
@@ -4281,12 +4281,12 @@ let n9 = registerModal(e => {
     children: jsx(ModalRootComponent, {
       width: 'lg',
       manager: u,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('settings_tab.sites_publishing_toggle_label')
           })
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           children: [c && c !== d && jsx(BannerInsetModal, {
             variant: 'danger',
             children: jsx(BannerMessage, {
@@ -4311,8 +4311,8 @@ let n9 = registerModal(e => {
               })
             })]
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: 'secondary',
               onClick: o,
@@ -4365,12 +4365,12 @@ let se = registerModal(e => {
     children: jsx(ModalRootComponent, {
       width: 'lg',
       manager: u,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('settings_tab.supabase_toggle_label')
           })
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           children: [c && c !== d && jsx(BannerInsetModal, {
             variant: 'danger',
             children: jsx(BannerMessage, {
@@ -4402,8 +4402,8 @@ let se = registerModal(e => {
               })
             })]
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: 'secondary',
               onClick: o,

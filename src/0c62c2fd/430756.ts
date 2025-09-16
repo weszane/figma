@@ -3,7 +3,7 @@ import { useState, useMemo, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk, Wk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogCustomContents } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
 import { U as _$$U } from "../0c62c2fd/547944";
 import { getFeatureFlags } from "../905/601108";
@@ -292,26 +292,26 @@ export function $$er0(e) {
       width: "lg",
       children: jsxs("div", {
         className: "folder_creation_modal--multiContents--U8sJ8",
-        children: [jsxs(vo, {
-          children: [jsx(Y9, {
-            children: jsx(hE, {
+        children: [jsxs(DialogContents, {
+          children: [jsx(DialogHeader, {
+            children: jsx(DialogTitle, {
               children: 0 === G ? getI18nString("project_creation.create_project") : getI18nString("project_creation.add_people_to_project_name", {
                 projectName: r
               })
             })
-          }), jsx(nB, {
+          }), jsx(DialogBody, {
             children: eo ? eS : jsx("div", {
               className: "folder_creation_modal--loading--9KmQd",
               children: jsx(LoadingOverlay, {})
             })
-          }), eo && jsxs(wi, {
+          }), eo && jsxs(DialogFooter, {
             children: [jsx("div", {
               className: "folder_creation_modal--footer--9Hie8 folder_creation_modal--subtitle--H3qLc text--fontPos11--2LvXf text--_fontBase--QdLsd",
               children: renderI18nText("project_creation.step_number_of_max_steps", {
                 currentStep: G + 1,
                 maxSteps: 2
               })
-            }), jsxs(jk, {
+            }), jsxs(DialogActionStrip, {
               children: [jsx($z, {
                 onClick: ew,
                 variant: "secondary",
@@ -329,7 +329,7 @@ export function $$er0(e) {
               })]
             })]
           })]
-        }), em && jsx(Wk, {
+        }), em && jsx(DialogCustomContents, {
           children: jsx(_$$_, {
             color: _$$S.INFORMATION,
             icon: jsx(_$$U, {}),

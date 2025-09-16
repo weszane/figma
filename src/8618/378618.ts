@@ -12,7 +12,7 @@ import { selectCurrentUser } from "../905/372672";
 import { VF } from "../figma_app/679183";
 import { nl as _$$nl } from "../figma_app/359943";
 import { useState, useEffect, useMemo, memo, useCallback } from "react";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL } from "../905/246123";
 import { fI } from "../905/201252";
 import { fh } from "../905/127493";
@@ -115,7 +115,7 @@ import { r as _$$r2 } from "../figma_app/17220";
 import { yc, T0, gv, XS, sE } from "../figma_app/386160";
 import { ServiceCategories as _$$e3 } from "../905/165054";
 import { reportError } from "../905/11";
-import { i as _$$i2 } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { Y as _$$Y2 } from "../a88a4c5a/416715";
 var F = v;
 function D() {
@@ -136,7 +136,7 @@ function D() {
         nodeCount: 1,
         nodeType: "GRID_TRACKS",
         nodeTypeString: "Grid tracks"
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("common.close"),
         onClick: () => {
           n && SceneGraphHelpers?.replaceSelection([n], !0);
@@ -187,7 +187,7 @@ function K({
       children: [jsx("span", {
         className: "xiuzu7u xwq5hk xfc7a33 x1j61x8r x8j8v4g x11tzhbd xqp8s7e",
         children: t
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         "aria-label": "ROWS" === e ? getI18nString("fullscreen.properties_panel.grid.add_row") : getI18nString("fullscreen.properties_panel.grid.add_column"),
         onClick: () => {
           permissionScopeHandler.user("add-grid-track-edit-scope", () => {
@@ -225,7 +225,7 @@ function L({
   let p = useMemo(() => new _$$K2({
     maximumFractionDigits: 2
   }), []);
-  let u = jsx(_$$K, {
+  let u = jsx(IconButton, {
     "aria-label": "ROWS" === n ? getI18nString("fullscreen.properties_panel.grid.delete_row") : getI18nString("fullscreen.properties_panel.grid.delete_column"),
     onClick: () => {
       permissionScopeHandler.user("delete-grid-track-edit-scope", () => {
@@ -985,7 +985,7 @@ function tw({
   let D = SJ();
   let K = o3(nt.designSelectionActionsPanel);
   let L = !tx() && K;
-  return jsxs(_$$i2, {
+  return jsxs(TabLoop, {
     children: [0 === Object.keys(j).length && jsx(Mw, {
       panelName: ON.DESIGN
     }), K ? jsx(tS, {}) : jsx(_i, {

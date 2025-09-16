@@ -31,7 +31,7 @@ import { S as _$$S } from "../905/148017";
 import { eT as _$$eT } from "../figma_app/580959";
 import { flushSync } from "react-dom";
 import { nearlyEqual, clamp } from "../figma_app/492908";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { scopeAwareFunction } from "../905/189185";
 import { useLatestRef } from "../figma_app/922077";
@@ -362,7 +362,7 @@ function ey(e) {
     !v && (r || t) && eE();
   }, [v]);
   let ev = jsx($4, {
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: () => {
         eE();
         trackScaleToolDismissed({
@@ -535,7 +535,7 @@ let eI = memo(function ({
     };
   }();
   let b = jsx($4, {
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: () => {
         eT();
       },

@@ -4,7 +4,7 @@ import _require2 from "../9410/795595";
 import _require from "../9410/947615";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useState, forwardRef, useMemo } from "react";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
 import { C as _$$C } from "../905/520159";
@@ -138,14 +138,14 @@ function P({
       className: h()("slides_insert_embed_modal--headerContainer--5xFbR", i ? _$$s.pl8.$ : _$$s.pl16.$),
       children: [jsxs("div", {
         className: _$$s.textBodyMediumStrong.flex.itemsCenter.$,
-        children: [i ? jsx(_$$K, {
+        children: [i ? jsx(IconButton, {
           onClick: n,
           "aria-label": getI18nString("general.back"),
           children: jsx(_$$C, {})
         }) : null, jsx("p", {
           children: t
         })]
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("common.close"),
         onClick: s,
         children: jsx(A, {})

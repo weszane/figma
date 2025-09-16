@@ -72,7 +72,7 @@ import { KindEnum } from "../905/129884";
 import { R as _$$R2 } from "../figma_app/522082";
 import { h as _$$h } from "../905/142086";
 import { A6 } from "../905/350234";
-import { _ as _$$_ } from "../figma_app/4253";
+import { isCommunityResourceSubscriptionActive } from "../figma_app/4253";
 import { useIsSelectedViewFullscreenCooper, isCooperFeatureEnabled } from "../figma_app/828186";
 import { u1 } from "../figma_app/91703";
 import { WX } from "../figma_app/482142";
@@ -1375,17 +1375,17 @@ let t3 = {
 function t6({
   hubFile: e
 }) {
-  return _$$_(e) ? renderI18nText("banner.freemium_preview.this_is_just_a_preview") : renderI18nText("banner.freemium_preview.get_the_full_file_on_community");
+  return isCommunityResourceSubscriptionActive(e) ? renderI18nText("banner.freemium_preview.this_is_just_a_preview") : renderI18nText("banner.freemium_preview.get_the_full_file_on_community");
 }
 function t8({
   hubFile: e
 }) {
-  return _$$_(e) ? renderI18nText("banner.freemium_preview.you_purchased_this_file_already") : renderI18nText("banner.freemium_preview.this_is_just_a_preview_of_the_file_you_can_buy_on_community");
+  return isCommunityResourceSubscriptionActive(e) ? renderI18nText("banner.freemium_preview.you_purchased_this_file_already") : renderI18nText("banner.freemium_preview.this_is_just_a_preview_of_the_file_you_can_buy_on_community");
 }
 function t9({
   hubFile: e
 }) {
-  let t = _$$_(e);
+  let t = isCommunityResourceSubscriptionActive(e);
   let n = t ? "" : `?${Tb}`;
   return jsx(A6, {
     to: `/community/file/${e.id}${n}`,

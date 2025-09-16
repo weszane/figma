@@ -111,7 +111,7 @@ import { HiddenLabel } from '../905/270045';
 import { Cj } from '../905/270084';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { Tf } from '../905/280919';
-import { G as _$$G3 } from '../905/289770';
+import { useTheme } from '../905/289770';
 import { $ as _$$$5 } from '../905/293658';
 import { e as _$$e6 } from '../905/295932';
 import { $ as _$$$8 } from '../905/302575';
@@ -162,7 +162,7 @@ import { N as _$$N3 } from '../905/438674';
 import { DefaultGroups, GroupType, UserGroupRole } from '../905/441038';
 import { $ as _$$$7 } from '../905/442144';
 import { W as _$$W6 } from '../905/442612';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k3 } from '../905/443820';
 import { H as _$$H } from '../905/444904';
 import { NN, w4, y1 } from '../905/445814';
@@ -482,7 +482,7 @@ import { p as _$$p4 } from '../figma_app/243977';
 import { T as _$$T5 } from '../figma_app/257703';
 import { ZF } from '../figma_app/258114';
 import { N as _$$N } from '../figma_app/268271';
-import { nB as _$$nB, r1 as _$$r5, Y9 as _$$Y3, vo } from '../figma_app/272243';
+import { DialogBody, DialogHiddenTitle, DialogHeader, DialogContents } from '../figma_app/272243';
 import { isMakeDiscoveryEnabled, isResourceHubEnabled, isResourceHubInternalSearchEnabled, isResourceHubProfilesEnabled, isTntSavingEnabled } from '../figma_app/275462';
 import { DesignToolType } from '../figma_app/277543';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
@@ -2580,7 +2580,7 @@ function rq(e) {
 function rX(e) {
   return jsx('div', {
     className: tz,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       'aria-label': getI18nString('favorited_resources.create_a_new_section_tooltip'),
       'htmlAttributes': {
         'data-tooltip': getI18nString('favorited_resources.create_a_new_section_tooltip'),
@@ -4053,7 +4053,7 @@ function sZ(e) {
       children: [jsx('div', {
         className: 'sidebar--betaAnnouncementHeaderTitle--AyDjm',
         children: renderI18nText('favorited_resources.custom_sections_banner_header')
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         'aria-label': getI18nString('common.close'),
         'onClick': j,
         'children': jsx(_$$A, {})
@@ -5306,9 +5306,9 @@ let nD = registerModal(e => {
     manager: t,
     width: 'lg',
     height: 'fixed',
-    children: jsxs(vo, {
-      children: [jsxs(_$$Y3, {
-        children: [jsx(_$$r5, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogHiddenTitle, {
           children: getI18nString('workspace_view.members_modal.title')
         }), jsxs(_$$t5.TabStrip, {
           manager: l,
@@ -5320,7 +5320,7 @@ let nD = registerModal(e => {
             children: getI18nString('workspace_view.members_modal.admins')
           })]
         })]
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         scrolling: 'none',
         padding: 0,
         children: [(n.MEMBERS.display ? d : c).length > 0 && jsx(nF, {
@@ -5422,7 +5422,7 @@ function nB(e) {
     if (e && e !== 'unset') return isColorDarkByLuminance(e) ? 'dark' : 'light';
   }(f);
   let h = (workspace?.members || []).length;
-  let x = _$$G3();
+  let x = useTheme();
   let b = iX(workspace.id);
   let v = useCallback((e, r, a) => {
     if (workspace) {
@@ -8493,7 +8493,7 @@ function dd({
   let t;
   let {
     color
-  } = _$$G3();
+  } = useTheme();
   t = e === FPlanNameType.ORG || e === FPlanNameType.ENTERPRISE ? color === 'dark' ? buildUploadUrl('156640b467fc94700549db25a70310582e3ef24b') : buildUploadUrl('923655d3d7ad0e0261946e6b8175911e0daceff3') : color === 'dark' ? buildUploadUrl('199fc5fd43ab7b8cdb2208db7a7a1c8b4f039119') : buildUploadUrl('363ceafa11ccd8ba7b2d9fe2b9aba1f8f8477596');
   let s = dn({
     newFileFrom: _$$f3.RESOURCE_HUB_FEW_TEMPLATES_UPSELL,
@@ -8553,7 +8553,7 @@ function du({
   let i = useResourceFuid();
   let {
     color
-  } = _$$G3();
+  } = useTheme();
   r = e === FPlanNameType.ORG || e === FPlanNameType.ENTERPRISE ? t ? buildUploadUrl('ceafb20933e03362e3d3f6c8191e892c8321d3db') : color === 'dark' ? buildUploadUrl('156640b467fc94700549db25a70310582e3ef24b') : buildUploadUrl('923655d3d7ad0e0261946e6b8175911e0daceff3') : color === 'dark' ? buildUploadUrl('199fc5fd43ab7b8cdb2208db7a7a1c8b4f039119') : buildUploadUrl('363ceafa11ccd8ba7b2d9fe2b9aba1f8f8477596');
   let o = dn({
     newFileFrom: _$$f3.RESOURCE_HUB_NO_RESOURCES_UPSELL,
@@ -8635,7 +8635,7 @@ function dp({
   let s = useResourceFuid();
   let {
     color
-  } = _$$G3();
+  } = useTheme();
   let o = new ResourceHubHomeRouteClass({
     ...r,
     tab: N$.COMMUNITY
@@ -9964,7 +9964,7 @@ function cv() {
   let e;
   let {
     color
-  } = _$$G3();
+  } = useTheme();
   e = color === 'dark' ? buildUploadUrl('7ab53d43da451ec79f8b986fd66e173285e8f890') : buildUploadUrl('09318ceb86318f7b9246ee48a8634ef0d126c06f');
   return jsxs('div', {
     className: 'x78zum5 xdt5ytf x6s0dn4 xh8yej3 x16g6g8t xgqmno8 x1sjmt1f xl56j7k',
@@ -15378,7 +15378,7 @@ function pu(e) {
         className: 'templates_bar--headerRightOld--j-Via',
         children: jsx('div', {
           className: 'templates_bar--closeButton--XeG8e',
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             'onClick': e.onClose,
             'aria-label': getI18nString('general.close'),
             'children': jsx(_$$A, {})
@@ -17953,12 +17953,12 @@ function gy() {
           children: getI18nString('community.home_shelf.title')
         }), jsxs('div', {
           className: 'x78zum5 x1n2onr6 xncym2f x167g77z x6s0dn4',
-          children: [jsx(_$$K, {
+          children: [jsx(IconButton, {
             'aria-label': getI18nString('community.home_shelf.refresh_label'),
             'onClick': m,
             'disabled': o === 'loading',
             'children': jsx(_$$_9, {})
-          }), jsx(_$$K, {
+          }), jsx(IconButton, {
             'aria-label': getI18nString('community.home_shelf.dismiss_label'),
             'onClick': () => e(postUserFlag({
               dismissed_community_home_shelf_v2_recommendations: !0
@@ -18289,7 +18289,7 @@ let gR = {
           children: [jsx('div', {
             className: 'x78zum5 x6s0dn4 x1qughib x1iyjqo2 x1i71x30 x1rt4tut',
             children: e.children
-          }), jsx(_$$K, {
+          }), jsx(IconButton, {
             'aria-label': getI18nString('general.close'),
             'onClick': () => r(e.userFlag),
             'children': jsx(_$$A, {})

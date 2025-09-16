@@ -1,74 +1,140 @@
-import { jsx } from "react/jsx-runtime";
-import { forwardRef, useRef, useEffect } from "react";
-import { useSelectionProvider, useSelectionContext } from "../905/751750";
-import { setupAutofocusHandler } from "../905/128376";
-import { useExposedRef } from "../905/581092";
-import { defaultComponentAttribute } from "../905/577641";
-import { bq, ae } from "../905/117474";
-import { F } from "../905/768014";
-export let $$u1 = forwardRef(({
-  children: e,
-  htmlAttributes: t,
-  ...i
-}, s) => {
-  let u = useExposedRef(s);
-  let [p, m] = useSelectionProvider();
-  let h = function (e, t = {}) {
-    let i = useRef(void 0);
+import type { FocusEvent, HTMLAttributes, ReactNode } from 'react'
+import { forwardRef, useEffect, useRef } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { closestFocusableAncestor, containsActiveElement } from '../905/117474'
+import { setupAutofocusHandler } from '../905/128376'
+import { defaultComponentAttribute } from '../905/577641'
+import { useExposedRef } from '../905/581092'
+import { useSelectionContext, useSelectionProvider } from '../905/751750'
+import { defaultInputState } from '../905/768014'
+
+/**
+ * Props for DialogRoot component
+ */
+interface DialogRootProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode
+  htmlAttributes?: HTMLAttributes<HTMLDivElement>
+}
+
+/**
+ * DialogRoot - Refactored from $$u1
+ * Provides a dialog container with focus management and selection context.
+ */
+export const DialogRoot = forwardRef<HTMLDivElement, DialogRootProps>(({
+  children,
+  htmlAttributes,
+  ...restProps
+}, ref) => {
+  // Expose ref for focus management
+  const exposedRef = useExposedRef(ref)
+
+  // Selection context provider
+  const [selectionValue, SelectionProvider] = useSelectionProvider()
+
+  /**
+   * useDialogFocusHandler - Handles focus logic for dialog
+   * @param dialogRef - Ref to dialog element
+   * @param options - Optional event handlers
+   * @returns Focus event handlers
+   */
+  function useDialogFocusHandler(
+    dialogRef: React.RefObject<HTMLDivElement>,
+    options: { onBlur?: (event: FocusEvent<HTMLDivElement>) => void } = {},
+  ) {
+    const focusableAncestorRef = useRef<HTMLElement | undefined>(undefined)
+
     useEffect(() => {
-      let t = e.current;
-      if (void 0 === i.current) {
-        let e = bq(F.element);
-        i.current = e;
+      const dialogElement = dialogRef.current
+      if (focusableAncestorRef.current === undefined) {
+        // Find closest focusable ancestor for keyboard navigation
+        const ancestor = closestFocusableAncestor(defaultInputState.element) as HTMLElement
+        focusableAncestorRef.current = ancestor
       }
-      ae(t) || (t.querySelector("[autofocus]") || t).focus();
+      // Focus dialog if it doesn't already contain the active element
+      if (dialogElement && !containsActiveElement(dialogElement)) {
+        (dialogElement.querySelector('[autofocus]') as HTMLElement | null || dialogElement).focus()
+      }
+      // Restore focus to ancestor on unmount if keyboard type
       return () => {
-        let e = i.current;
-        e && "keyboard" === F.type && e.focus();
-      };
-    }, []);
-    return {
-      onBlur(i) {
-        i.relatedTarget || "Tab" === F.key || e.current?.focus();
-        t.onBlur?.(i);
+        const ancestor = focusableAncestorRef.current
+        if (ancestor && defaultInputState.type === 'keyboard') {
+          ancestor.focus()
+        }
       }
-    };
-  }(u, {
-    onBlur: t?.onBlur
-  });
-  return jsx(m, {
-    value: p,
-    children: jsx("div", {
+    }, [dialogRef])
+
+    return {
+      /**
+       * onBlur - Handles blur event for dialog
+       * @param event - Focus event
+       */
+      onBlur(event: FocusEvent<HTMLDivElement>) {
+        if (!event.relatedTarget && defaultInputState.key !== 'Tab') {
+          dialogRef.current?.focus()
+        }
+        options.onBlur?.(event)
+      },
+    }
+  }
+
+  // Setup focus handler for dialog
+  const focusHandlers = useDialogFocusHandler(exposedRef, {
+    onBlur: htmlAttributes?.onBlur,
+  })
+
+  return jsx(SelectionProvider, {
+    value: selectionValue,
+    children: jsx('div', {
       ...defaultComponentAttribute,
-      ...t,
-      ...i,
-      ...h,
-      ref: u,
-      role: "dialog",
-      "aria-labelledby": p,
-      tabIndex: -1,
-      children: e
-    })
-  });
-});
-$$u1.displayName = "DialogPrimitive.Root";
-export let $$p0 = forwardRef(({
-  children: e,
-  autofocus: t = !1,
-  htmlAttributes: i,
-  ...r
-}, o) => {
-  let l = useSelectionContext();
-  let d = setupAutofocusHandler(o, t);
-  return jsx("h2", {
-    ...i,
-    ...r,
-    ref: d,
-    id: l,
-    tabIndex: t ? -1 : void 0,
-    children: e
-  });
-});
-$$p0.displayName = "DialogPrimitive.Label";
-export const J = $$p0;
-export const b = $$u1;
+      ...htmlAttributes,
+      ...restProps,
+      ...focusHandlers,
+      'ref': exposedRef,
+      'role': 'dialog',
+      'aria-labelledby': selectionValue,
+      'tabIndex': -1,
+      children,
+    }),
+  })
+})
+DialogRoot.displayName = 'DialogPrimitive.Root'
+
+/**
+ * Props for DialogLabel component
+ */
+interface DialogLabelProps extends HTMLAttributes<HTMLHeadingElement> {
+  children: ReactNode
+  autofocus?: boolean
+  htmlAttributes?: HTMLAttributes<HTMLHeadingElement>
+}
+
+/**
+ * DialogLabel - Refactored from $$p0
+ * Provides a label for the dialog, with optional autofocus.
+ */
+export const DialogLabel = forwardRef<HTMLHeadingElement, DialogLabelProps>(({
+  children,
+  autofocus = false,
+  htmlAttributes,
+  ...restProps
+}, ref) => {
+  // Get selection context for aria-labelledby
+  const selectionId = useSelectionContext()
+
+  // Setup autofocus handler for label
+  const labelRef = setupAutofocusHandler(ref, autofocus)
+
+  return jsx('h2', {
+    ...htmlAttributes,
+    ...restProps,
+    ref: labelRef,
+    id: selectionId,
+    tabIndex: autofocus ? -1 : undefined,
+    children,
+  })
+})
+DialogLabel.displayName = 'DialogPrimitive.Label'
+
+// Export with refactored names
+export const J = DialogLabel
+export const b = DialogRoot

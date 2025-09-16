@@ -5,7 +5,7 @@ import { languageCodes } from "../905/816253";
 import { assertNotNullish } from "../figma_app/465776";
 import { mapRange } from "../figma_app/492908";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { StyleVariableOperation, CopyPasteType, VariableResolvedDataType } from "../figma_app/763686";
@@ -242,12 +242,12 @@ export function $$el2({
       modalWidth: 240,
       offset: new Point(ei, 0)
     }),
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: F
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: j
       })]

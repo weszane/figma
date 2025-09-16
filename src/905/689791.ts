@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createElement, forwardRef, useCallback } from "react";
-import { r1, jk, vo, Y9, nB } from "../figma_app/272243";
+import { DialogHiddenTitle, DialogActionStrip, DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/911410";
 import { DesignGraphElements } from "../figma_app/763686";
@@ -19,7 +19,7 @@ function p({
     tabs
   } = o;
   return tabs.length <= 1 ? null : jsxs(Fragment, {
-    children: [e ?? jsx(r1, {
+    children: [e ?? jsx(DialogHiddenTitle, {
       children: e
     }), jsx(_$$t.TabStrip, {
       manager: t,
@@ -28,7 +28,7 @@ function p({
         key: e.name + "Tab",
         recordingKey: e.recordingKey ? generateRecordingKey(l, e.recordingKey) : void 0
       }, e.displayText))
-    }), c && jsx(jk, {
+    }), c && jsx(DialogActionStrip, {
       children: c
     })]
   });
@@ -74,8 +74,8 @@ export let $$h0 = forwardRef(function ({
       width: r,
       ref: c,
       recordingKey: l,
-      children: jsxs(vo, {
-        children: [tabs.length > 1 && jsx(Y9, {
+      children: jsxs(DialogContents, {
+        children: [tabs.length > 1 && jsx(DialogHeader, {
           children: jsx(p, {
             tabManager: A,
             tabPropsMap: f,
@@ -83,7 +83,7 @@ export let $$h0 = forwardRef(function ({
             rightButtons: e.headerRightButtons,
             hiddenTitle: e.headerHiddenTitle
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsx(m, {
             tabProps: e,

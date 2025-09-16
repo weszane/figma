@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { YJ, bL, UC } from "../figma_app/57171";
 import { Y9, JU } from "../figma_app/322555";
 import { ButtonPrimitive } from "../905/632989";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import c, { F as _$$F } from "../905/172964";
 import { DeviceType, AppStateTsApi, Fullscreen, SideType, PrototypingTsApi, ContainerType } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -646,7 +646,7 @@ export class $$eE1 extends RecordingPureComponent {
 export function $$ey0(e) {
   return jsx("span", {
     className: e.className,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: () => {
         fullscreenValue.triggerActionInUserEditScope("resize-to-fit");
       },

@@ -56,7 +56,7 @@ import { r6 } from "../905/542608";
 import { T as _$$T } from "../figma_app/472024";
 import { hP, CM } from "../905/144598";
 import { A as _$$A3 } from "../6828/70690";
-import { K as _$$K4 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { Ax } from "../figma_app/616261";
@@ -524,7 +524,7 @@ function eO(e) {
           spellCheck: "false"
         }), !!u && jsx("div", {
           className: "connected_projects_flyout--clearButton--A48Fo",
-          children: jsx(_$$K4, {
+          children: jsx(IconButton, {
             onClick: () => {
               m("");
             },

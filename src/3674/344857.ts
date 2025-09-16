@@ -35,7 +35,7 @@ import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx as _$$sx2 } from "../905/941192";
-import { J as _$$J2 } from "../905/799737";
+import { DialogLabel } from "../905/799737";
 import { buildUploadUrl, isGovCluster } from "../figma_app/169182";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { c as _$$c2 } from "../905/370443";
@@ -110,7 +110,7 @@ import { A as _$$A4 } from "../vendor/648136";
 import { _m } from "../vendor/891888";
 import { useExposedRef } from "../905/581092";
 import { ensureContext } from "../905/61417";
-import { P as _$$P } from "../905/143421";
+import { ScrollContainer } from "../905/143421";
 import { defaultComponentAttribute } from "../905/577641";
 import { preventAndStopEvent } from "../905/955878";
 import { ScreenReaderOnly } from "../905/172252";
@@ -161,8 +161,8 @@ import { b as _$$b2, W as _$$W2 } from "../b2835def/91751";
 import { oA as _$$oA2, uj as _$$uj, vy } from "../figma_app/856806";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo as _$$vo, Y9, hE as _$$hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
-import { K as _$$K2 } from "../905/443068";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
+import { IconButton } from "../905/443068";
 import { bL as _$$bL, c$ as _$$c$ } from "../905/575478";
 import { q as _$$q2 } from "../905/932270";
 import { A as _$$A5 } from "../905/251970";
@@ -344,7 +344,7 @@ import { iT as _$$iT } from "../figma_app/74165";
 import { qs } from "../469e6e40/556776";
 import { d as _$$d9 } from "../905/480825";
 import { iA as _$$iA } from "../3674/705006";
-import { i as _$$i3 } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { s4 as _$$s6 } from "../figma_app/276332";
 import { BannerInline } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
@@ -540,7 +540,7 @@ function Q() {
   });
   let l = n.data?.file.status !== "error" && n.data?.file.data?.hasPermission && o.data?.file?.hasPermission === !1;
   let s = jsxs(Fragment, {
-    children: [jsx(_$$J2, {
+    children: [jsx(DialogLabel, {
       className: DD,
       children: l ? renderI18nText("dev_handoff.paywall.pending_modal.grace_period_end.title") : renderI18nText("dev_handoff.paywall.pending_modal.no_grace_period.title")
     }), jsx("div", {
@@ -572,7 +572,7 @@ function Y() {
   return jsx(_$$I, {
     imgSrc: q,
     content: jsxs(Fragment, {
-      children: [jsx(_$$J2, {
+      children: [jsx(DialogLabel, {
         className: DD,
         children: renderI18nText("dev_handoff.paywall.success_modal.youre_all_set")
       }), jsx("div", {
@@ -2033,7 +2033,7 @@ function nw({
       outerElementType: ({
         style: e,
         ...t
-      }) => jsx(_$$P, {
+      }) => jsx(ScrollContainer, {
         fill: !0,
         theme: {
           rootStyle: {
@@ -4515,7 +4515,7 @@ function iq() {
       children: jsx(ModalRootComponent, {
         manager: d,
         width: 800,
-        children: jsx(_$$vo, {
+        children: jsx(DialogContents, {
           children: jsx(iZ, {
             dismissModal: complete
           })
@@ -4561,7 +4561,7 @@ function iZ({
     ref: d,
     children: [jsx("div", {
       className: "configuration_wizard--closeButton--pv-0K",
-      children: jsx(_$$K2, {
+      children: jsx(IconButton, {
         onClick: function () {
           c();
           t("dev_handoff.config_wizard.closed", {
@@ -5021,7 +5021,7 @@ function o8({
   let A = g ? getI18nString("dev_handoff.developer_related_links.main_component_tooltip") : getI18nString("dev_handoff.developer_related_links.additional_options");
   let C = jsx("div", {
     ref: dropdownTargetRef,
-    children: jsx(_$$K2, {
+    children: jsx(IconButton, {
       actionOnPointerDown: !0,
       onClick: e => {
         toggleDropdown();
@@ -5252,7 +5252,7 @@ function lk({
       url: s.data.link
     })) : (t(hideModalHandler()), Fullscreen.goToSymbolOrStateGroupById(e.guid, !1)));
   }, [e, t, c, s.data]);
-  return !e || u || c && (!s.data?.link || s.data?.type === "community") ? null : jsx(_$$K2, {
+  return !e || u || c && (!s.data?.link || s.data?.type === "community") ? null : jsx(IconButton, {
     onClick: p,
     "aria-label": e.isState ? getI18nString("design_systems.playground.open_variant_in_library") : getI18nString("design_systems.playground.open_component_in_library"),
     htmlAttributes: {
@@ -5379,7 +5379,7 @@ let lD = memo(({
     theme
   });
   let B = atomStoreManager.get(figmaItemsAtom);
-  B.length > 1 && (n = jsx(_$$K2, {
+  B.length > 1 && (n = jsx(IconButton, {
     onClick: () => {
       let e = B[B.length - 2];
       Fullscreen.setPlaygroundSceneFromGuid(e);
@@ -5398,12 +5398,12 @@ let lD = memo(({
     children: jsx(ModalRootComponent, {
       manager: m,
       width: "fit-content",
-      children: jsxs(_$$vo, {
-        children: [jsx(Y9, {
-          children: jsx(_$$hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("design_systems.playground.component_playground")
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           children: jsxs("div", {
             className: lC,
             children: [jsxs("div", {
@@ -5448,7 +5448,7 @@ let lD = memo(({
                   })]
                 }), jsxs("div", {
                   className: "playground_modal--propsContainerHeaderButtons--MPFZ-",
-                  children: ["INSTANCE" === d.type && jsx(lN, {}), jsx(_$$K2, {
+                  children: ["INSTANCE" === d.type && jsx(lN, {}), jsx(IconButton, {
                     onClick: E,
                     "aria-label": getI18nString("design_systems.playground.reset_properties"),
                     disabled: !g.hasChangesToReset,
@@ -5516,12 +5516,12 @@ function lO({
     children: jsx(ModalRootComponent, {
       manager: e,
       width: "fit-content",
-      children: jsxs(_$$vo, {
-        children: [jsx(Y9, {
-          children: jsx(_$$hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("design_systems.playground.component_playground")
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           children: jsxs("div", {
             className: lC,
             children: [jsx("div", {
@@ -6127,12 +6127,12 @@ let sf = registerModal(function ({
   return jsx(ModalRootComponent, {
     manager: n,
     width: "md",
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("dev_handoff.developer_related_links.edit_link")
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsxs("div", {
           className: sp,
           children: [jsx("p", {
@@ -6185,8 +6185,8 @@ let sf = registerModal(function ({
             })]
           })]
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: () => v(hideModal()),
@@ -6403,7 +6403,7 @@ function sy({
         children: jsx(_$$k2, {})
       }), et && Y && !N && jsx("span", {
         className: "developer_related_links_panel--addButton--0Fv7K draggable_list--addButton--D0q--",
-        children: jsx(_$$K2, {
+        children: jsx(IconButton, {
           "aria-label": getI18nString("dev_handoff.developer_related_links.add_link_button"),
           onClick: J,
           recordingKey: "addDevRelatedLink",
@@ -6576,7 +6576,7 @@ function sO() {
     className: ek()({
       "component_panel--instanceNavigationButton--4ANaC": h.current
     }),
-    children: jsx(_$$K2, {
+    children: jsx(IconButton, {
       "aria-label": j ? getI18nString("design_systems.instance_panel.view_library_in_community") : getI18nString("dev_handoff.instance_navigation.go_to_main_component"),
       onClick: b,
       disabled: w,
@@ -8236,7 +8236,7 @@ function r4({
             children: e.name
           })]
         })
-      }), jsx(_$$K2, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("dev_handoff.plugin_panel.close_plugin"),
         onClick: () => {
           (function (e) {
@@ -9122,7 +9122,7 @@ function ca({
   } = _$$b4();
   let A = f ? jsxs(_$$bL2, {
     manager,
-    children: [jsx(_$$K2, {
+    children: [jsx(IconButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("collaboration.feedback.more_options"),
       children: jsx(_$$J5, {})
@@ -9559,7 +9559,7 @@ let c9 = memo(({
                   })
                 })]
               })]
-            }) : jsx(_$$K2, {
+            }) : jsx(IconButton, {
               onClick: M,
               "aria-label": f ? getI18nString("fullscreen.properties_panel.export_disabled") : getI18nString("fullscreen.export.export"),
               disabled: f,
@@ -9586,7 +9586,7 @@ let c9 = memo(({
                 children: J ? "GIF" : "MP4"
               })
             })]
-          }), f ? jsx(_$$K2, {
+          }), f ? jsx(IconButton, {
             "aria-label": getI18nString("fullscreen.properties_panel.export_disabled"),
             disabled: !0,
             htmlAttributes: {
@@ -9615,7 +9615,7 @@ let c9 = memo(({
           }) : jsx(ut, {
             assetInfo: e
           })]
-        }), U && (!getFeatureFlags().dt_insp_impr_assets || n) && jsx(_$$K2, {
+        }), U && (!getFeatureFlags().dt_insp_impr_assets || n) && jsx(IconButton, {
           onClick: F,
           "aria-label": et ? getI18nString("design_systems.instance_panel.view_library_in_community") : ee ? getI18nString("dev_handoff.library.view") : getI18nString("design_systems.instance_panel.go_to_main_component"),
           htmlAttributes: {
@@ -9932,7 +9932,7 @@ function ur({
   let u = !ua() || c || isLocalExporting;
   let p = ul(e);
   let h = useMemo(() => u ? getI18nString("fullscreen.properties_panel.export_disabled") : tooManyMediaToExport ? getI18nString("dev_handoff.assets.too_many_image_sources_disabled") : nothingToExport ? getI18nString("dev_handoff.assets.nothing_to_export") : void 0, [tooManyMediaToExport, nothingToExport, u]);
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     onClick: onExportAll,
     "aria-label": h ?? p,
     disabled: tooManyMediaToExport || nothingToExport || u,
@@ -10007,12 +10007,12 @@ function uc({
     onClose: n,
     defaultPosition: t.current ? _$$cn(t.current, 248) : void 0,
     width: "sm",
-    children: jsxs(_$$vo, {
-      children: [jsx(Y9, {
-        children: jsx(_$$hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: b
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         padding: 0,
         children: [jsx(_$$df, {
           addProperty: v,
@@ -10110,7 +10110,7 @@ function up({
   return jsxs(Fragment, {
     children: [jsxs(_$$bL2, {
       manager,
-      children: [jsx(_$$K2, {
+      children: [jsx(IconButton, {
         "aria-label": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
         htmlAttributes: {
           "data-tooltip": x ? getI18nString("fullscreen.properties_panel.export_disabled") : m,
@@ -11260,7 +11260,7 @@ function pf() {
   }].filter(e => e.visible);
   return 0 === b.length ? null : jsxs(_$$bL2, {
     manager,
-    children: [jsx(_$$K2, {
+    children: [jsx(IconButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("dev_handoff.mcp.configure"),
       children: jsx(_$$J5, {})
@@ -11362,7 +11362,7 @@ function pj(e) {
           containerId: INSPECT_PANEL,
           children: jsx(TrackingProvider, {
             name: _$$e5.CODE_PANEL,
-            children: jsx(_$$i3, {
+            children: jsx(TabLoop, {
               children: jsx("div", {
                 className: g ? "inspect_panel--inspectPanelContentsBottomAligned--MOK20" : "inspect_panel--inspectPanelContents--iYf8P",
                 children: jsxs(_$$L3, {
@@ -12010,12 +12010,12 @@ function hc({
       onClose: d,
       defaultPosition: position,
       recordingKey: "style_details_modal",
-      children: jsxs(_$$vo, {
-        children: [jsx(Y9, {
-          children: jsx(_$$hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: c
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           style: {
             width: VariableDetailModalWidth
@@ -12075,7 +12075,7 @@ function hu({
           children: [jsx(hp, {
             name,
             isDeleted
-          }), jsx(_$$K2, {
+          }), jsx(IconButton, {
             onClick: r,
             "aria-label": getI18nString("dev_handoff.styles.details_button_close_aria_label"),
             children: jsx(_$$L6, {})
@@ -12646,7 +12646,7 @@ function hH() {
         }, t.title))
       }), jsxs("div", {
         className: "inspect_tabs--rightButtons--HeXhW",
-        children: [d && jsx(_$$K2, {
+        children: [d && jsx(IconButton, {
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,
             "data-tooltip": getI18nString("dev_handoff.inspect_panel.close_plugin")

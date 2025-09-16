@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, memo, useMemo, useCallback, Fragment as _$$Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { YJ, hE, Ov, rm, g8, MJ, r1, mc, b as _$$b, bL } from "../figma_app/860955";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/969533";
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
@@ -10,7 +10,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { generateRecordingKey } from "../figma_app/878298";
 import { WN } from "../figma_app/638601";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { isZoomIntegration } from "../figma_app/469876";
 import { Um } from "../905/848862";
 import { c as _$$c } from "../figma_app/740884";
@@ -870,7 +870,7 @@ export function $$tr0(e) {
   let i = Um();
   let c = i?.type === _$$eg;
   let v = useSelector(e => e.isRenaming);
-  let E = _$$k2();
+  let E = isUserNotLoggedInAndEditorSupported();
   let T = WN();
   let w = useCallback(() => !E || (T("LEFT_PANEL_FILE_NAME_CHEVRON"), !1), [E, T]);
   let {
@@ -896,7 +896,7 @@ export function $$tr0(e) {
         targetKey: O0
       }), N ? jsxs(bL, {
         manager,
-        children: [jsx(_$$K, {
+        children: [jsx(IconButton, {
           ...k,
           recordingKey: generateRecordingKey(e.recordingKey, "chevron"),
           "aria-label": getI18nString("fullscreen.filename_view.edit_file_menu"),

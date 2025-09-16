@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { h as _$$h } from "../figma_app/58251";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -38,7 +38,7 @@ export function $$_0({
     style: g ? {
       borderBottomWidth: "1px"
     } : void 0,
-    children: [u && jsx(K, {
+    children: [u && jsx(IconButton, {
       onClick: onClickWithFocus,
       "aria-label": getI18nString("design_systems.libraries_modal.back"),
       ref: setKeyboardNavigationElement,

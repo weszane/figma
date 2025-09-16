@@ -59,7 +59,7 @@ import { n6 } from "../905/234821";
 import { Dm } from "../figma_app/8833";
 import { d as _$$d } from "../9410/847929";
 import { xn } from "../figma_app/644079";
-import { k as _$$k4 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { hasRootPathOptional } from "../figma_app/528509";
 import { fullscreenValue } from "../figma_app/455680";
 import { aV } from "../figma_app/722362";
@@ -387,7 +387,7 @@ function e3(e) {
     };
   }, []);
   let N = !!selectCurrentUser();
-  let w = _$$k4();
+  let w = isUserNotLoggedInAndEditorSupported();
   let R = e => jsx(_$$N2, {
     toolId: DesignGraphElements.TYPE,
     icon: jsx(_$$B2, {}),

@@ -18,7 +18,7 @@ import { T as _$$T } from "../7021/675372";
 import { wo } from "../figma_app/753501";
 import { useDispatch } from "react-redux";
 import { CH, g4 } from "../figma_app/770359";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { X } from "../905/736922";
 import { lW } from "../figma_app/11182";
 import { DP } from "../905/640017";
@@ -149,7 +149,7 @@ function M({
       theme: "dark" === t ? "dark" : "light",
       readOnly: !0
     }), jsx(y, {
-      children: jsx(K, {
+      children: jsx(IconButton, {
         onClick: () => {
           n(lW({
             stringToCopy: e

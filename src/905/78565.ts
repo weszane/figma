@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { SvgComponent } from "../905/714743";
@@ -37,7 +37,7 @@ export function $$A0(e) {
         children: e.buttonText
       }), e.dismissable && jsx("span", {
         className: "library_updates_banner--libraryUpdatesBannerActionsXIcon--TbBLj",
-        children: jsx(K, {
+        children: jsx(IconButton, {
           onClick: () => {
             t(JV({
               libraryUpdatesBannerDismissed: !0

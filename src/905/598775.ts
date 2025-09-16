@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useState, useCallback, useEffect, useId } from "react";
 import { A } from "../vendor/723372";
 import { ButtonPrimitive } from "../905/632989";
-import { S } from "../905/823680";
+import { setupRefUpdater } from "../905/823680";
 import { ensureContext } from "../905/61417";
 import { LinkPrimitive } from "../figma_app/496441";
 import { defaultComponentAttribute } from "../905/577641";
@@ -89,7 +89,7 @@ export let $$f4 = forwardRef((e, t) => {
     registerMainElRef
   } = ensureContext(u, "CardPrimitive.Main", "CardPrimitive.Root");
   let a = useId();
-  let s = S(t, registerMainElRef);
+  let s = setupRefUpdater(t, registerMainElRef);
   return jsx("span", {
     "aria-hidden": "true",
     id: a,

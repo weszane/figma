@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../905/521428";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { y as _$$y } from "../905/37128";
 import { getFeatureFlags } from "../905/601108";
 import { atom, atomStoreManager, useAtomValueAndSetter } from "../figma_app/27355";
@@ -203,7 +203,7 @@ export function $$L0({
           gap: 4,
           children: [jsx("div", {
             className: R,
-            children: jsx(K, {
+            children: jsx(IconButton, {
               recordingKey: generateRecordingKey(P, "thumbsUp"),
               "aria-label": x ?? getI18nString("qa.thumbs_up"),
               onClick: () => j("positive"),
@@ -213,7 +213,7 @@ export function $$L0({
             })
           }), jsx("div", {
             className: R,
-            children: jsx(K, {
+            children: jsx(IconButton, {
               recordingKey: generateRecordingKey(P, "thumbsDown"),
               "aria-label": S ?? getI18nString("qa.thumbs_down"),
               onClick: () => j("negative"),

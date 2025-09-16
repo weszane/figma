@@ -6,7 +6,7 @@ import { Button } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/443820";
 import { _L } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { AppStateTsApi } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -189,15 +189,15 @@ export function $$I0({
     defaultPosition: e,
     defaultWidth: $$N2,
     defaultHeight: $$T1,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: jsxs("div", {
           className: "x78zum5 x1qughib x6s0dn4 xh8yej3 xmzs88n",
-          children: [jsx(hE, {
+          children: [jsx(DialogTitle, {
             children: P || getI18nString("slides.charts.charts")
           }), $]
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: K ? jsx(function () {
           return K ? jsxs("div", {
             className: "x78zum5",

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, Fragment as _$$Fragment, useCallback, useMemo, useState } from "react";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { S as _$$S } from "../905/711470";
 import { L as _$$L } from "../905/704296";
@@ -632,7 +632,7 @@ function G({
         children: getI18nString("people_table_filters.popover_header")
       }), jsx("span", {
         ...xk(F.headerSpacing),
-        children: jsx(K, {
+        children: jsx(IconButton, {
           "aria-label": getI18nString("people_table_filters.close_button_aria_label"),
           onClick: u,
           children: jsx(_$$L, {})

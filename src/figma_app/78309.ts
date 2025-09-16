@@ -7,7 +7,7 @@ import { scopeAwareFunction } from '../905/189185';
 import { isValidValue } from '../905/216495';
 import { E as _$$E2 } from '../905/277716';
 import { getI18nString } from '../905/303541';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/582200';
 import { ButtonPrimitive } from '../905/632989';
 import { z5 } from '../905/713722';
@@ -258,7 +258,7 @@ function Y({
 }) {
   let r = s1();
   let i = kO(r);
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('slides.properties_panel.color_picker.add_template_color_tooltip'),
     'onClick': e,
     'recordingKey': t,

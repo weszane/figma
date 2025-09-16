@@ -1,6 +1,6 @@
 import { createContext, useContext, useRef, useState, useCallback } from "react";
 import { loadFeatureFlags } from "../905/586361";
-import { F } from "../905/768014";
+import { defaultInputState } from "../905/768014";
 import { useRecording } from "../905/959312";
 export let $$o1 = createContext(!1);
 export function $$l0({
@@ -71,7 +71,7 @@ export function $$l0({
     l?.(e);
   }, [l]);
   let k = useCallback(e => {
-    v("keyboard" === F.type);
+    v("keyboard" === defaultInputState.type);
     d?.(e);
   }, [d]);
   return f || !i ? {

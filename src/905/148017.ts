@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, PureComponent, createRef } from "react";
 import { d as _$$d } from "../905/976845";
 import { EventShield } from "../905/821217";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { E as _$$E } from "../905/375716";
 import { m as _$$m } from "../905/148147";
 import { Y as _$$Y } from "../905/762765";
@@ -405,7 +405,7 @@ class es extends PureComponent {
     });
     let v = jsx(_$$E2, {
       name: "remove_grid_button",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         recordingKey: generateRecordingKey(this.props, "removeButton"),
         onClick: this.props.onRemoveGrid,
         "aria-label": getI18nString("fullscreen.grid_panel.remove_layout_guide"),

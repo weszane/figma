@@ -9,7 +9,7 @@ import { nt, o3 } from '../905/226610';
 import { A as _$$A } from '../905/251970';
 import { y as _$$y } from '../905/263077';
 import { getI18nString } from '../905/303541';
-import { K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { formatI18nMessage } from '../905/482208';
 import { C as _$$C } from '../905/504203';
 import { $P, qc, Rt } from '../905/590676';
@@ -27,7 +27,7 @@ function w({
   onClear: e,
   focus: t
 }) {
-  return jsx(K, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('search.search_bar.clear'),
     'onClick': r => {
       r.stopPropagation();
@@ -205,7 +205,7 @@ let $$D0 = forwardRef(({
           children: s
         })
       }) : null]
-    }), jsx(K, {
+    }), jsx(IconButton, {
       'onClick': close,
       'aria-label': getI18nString('common.close'),
       'children': jsx(_$$A, {

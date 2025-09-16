@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { i as _$$i } from "../905/22844";
 import { n3, VariableStyleId } from "../905/859698";
 import { Fullscreen } from "../figma_app/763686";
@@ -69,7 +69,7 @@ export function $$w1() {
             children: [jsx(hE, {
               children: renderI18nText("slides.properties_panel.text_style.edit_text_style")
             }), jsx(jk, {
-              children: jsx(K, {
+              children: jsx(IconButton, {
                 htmlAttributes: {
                   "data-tooltip-type": KindEnum.TEXT,
                   "data-tooltip": getI18nString("slides.properties_panel.text_style.delete_style")

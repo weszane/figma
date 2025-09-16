@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O } from "../905/487602";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -32,7 +32,7 @@ export function $$g0({
   let T = s === MIXED_MARKER;
   let N = !T && !s;
   null == _ && (_ = !0 === s ? "-" : "+");
-  let I = "+" === _ ? jsx(K, {
+  let I = "+" === _ ? jsx(IconButton, {
     recordingKey: generateRecordingKey(x, "addButton"),
     onClick: e,
     disabled: f,
@@ -44,7 +44,7 @@ export function $$g0({
       "data-tooltip": S ?? ""
     },
     children: jsx(_$$e, {})
-  }) : jsx(K, {
+  }) : jsx(IconButton, {
     recordingKey: generateRecordingKey(x, "removeButton"),
     onClick: y,
     disabled: g,

@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { EventShield } from "../905/821217";
 import { e as _$$e } from "../905/149844";
@@ -172,7 +172,7 @@ export function $$F1(t) {
       children: S
     })
   });
-  let ti = jsx(_$$K, {
+  let ti = jsx(IconButton, {
     onClick: () => {
       F(!0);
     },
@@ -198,7 +198,7 @@ export function $$F1(t) {
         children: renderI18nText("proto.starting_points.flow_starting_point_title")
       }), jsx("span", {
         className: "prototype_starting_point_panel--fadeOutOnUnhover--6-o5B",
-        children: !te && jsx(_$$K, {
+        children: !te && jsx(IconButton, {
           disabled: !Y,
           onClick: () => function (t) {
             let e = PrototypingTsApi.currentDeviceType();
@@ -224,7 +224,7 @@ export function $$F1(t) {
         })
       }), jsx("span", {
         className: "prototype_starting_point_panel--rightIconButton--ID6ZQ",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick: W,
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,
@@ -264,7 +264,7 @@ export function $$F1(t) {
         children: jsx(EventShield, {
           eventListeners: ["onMouseDown"],
           display: "contents",
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: tt,
             htmlAttributes: {
               "data-tooltip-type": KindEnum.TEXT,

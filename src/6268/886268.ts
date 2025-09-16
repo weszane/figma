@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, Fragment as _$$Fragment, forwardRef, useState, useMemo, useCallback } from "react";
 import { E as _$$E } from "../905/53857";
 import { Button } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { L as _$$L } from "../905/704296";
 import { h as _$$h } from "../905/994594";
 import { UI3ConditionalWrapper } from "../905/341359";
@@ -67,7 +67,7 @@ import { bL as _$$bL, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { n as _$$n } from "../1250/647011";
@@ -105,7 +105,7 @@ function T({
   }];
   return jsxs(bL, {
     manager,
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("dev_handoff.component_browser.sort_by"),
       htmlAttributes: {
@@ -747,7 +747,7 @@ function ep({
                   })]
                 }), jsx("div", {
                   className: ed,
-                  children: jsx(_$$K, {
+                  children: jsx(IconButton, {
                     "aria-label": getI18nString("dev_handoff.component_browser.bulk_icon_connect.close_notification"),
                     onClick: () => m("initial"),
                     children: jsx(_$$A2, {})
@@ -1135,9 +1135,9 @@ let nn = registerModal(function (e) {
       manager: n,
       width: "lg",
       height: "dynamic",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: jsxs("div", {
               className: "codebase_suggestions_onboarding_modal--title--xqlCj",
               children: [getI18nString("dev_handoff.codebase_suggestions.onboarding_title"), jsx(_$$E, {
@@ -1145,7 +1145,7 @@ let nn = registerModal(function (e) {
               })]
             })
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsxs("div", {
             className: "codebase_suggestions_onboarding_modal--body--vuR62",
@@ -1166,7 +1166,7 @@ let nn = registerModal(function (e) {
               onContinue: () => e.onClose()
             })]
           })
-        }), jsx(wi, {
+        }), jsx(DialogFooter, {
           children: jsx("div", {
             className: "codebase_suggestions_onboarding_modal--actionStrip--sGI6V",
             children: jsx(_$$n, {})
@@ -1229,12 +1229,12 @@ let np = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: n,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("dev_handoff.codebase_suggestions.delete_all_visual_codebase_suggestions")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("p", {
           className: nm,
           children: getI18nString("dev_handoff.codebase_suggestions.are_you_sure_you_want_to_delete_all_the_visual_codebase_suggestions_that_have_been_collected_so_far")
@@ -1245,8 +1245,8 @@ let np = registerModal(function (e) {
           className: nm,
           children: getI18nString("dev_handoff.codebase_suggestions.this_will_not_delete_any_explicit_code_connect_mappings_you_have_made_with_those_suggestions")
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: e.onClose,
@@ -1671,7 +1671,7 @@ function nR({
         connectedComponents: l,
         onDeleteMapping: d,
         entrypoint: b
-      }), "file" === e && jsx(_$$K, {
+      }), "file" === e && jsx(IconButton, {
         "aria-label": getI18nString("dev_handoff.component_browser.close_component_browser"),
         onClick: _,
         children: jsx(_$$L, {})
@@ -1911,7 +1911,7 @@ function nM({
       className: "component_browser_library_view--searchInput--tzNk- text--fontPos11--2LvXf text--_fontBase--QdLsd",
       spellCheck: !1
     }), !!e && jsx("div", {
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         onClick: () => n(""),
         "aria-label": getI18nString("dev_handoff.component_browser.clear_search"),
         htmlAttributes: {

@@ -4,11 +4,11 @@ import { useRecording } from "../905/959312";
 import { preventAndStopEvent } from "../905/955878";
 import { mergeProps } from "../905/475481";
 import { jsx } from "react/jsx-runtime";
-import { S as _$$S } from "../905/823680";
+import { setupRefUpdater } from "../905/823680";
 import { useExposedRef } from "../905/581092";
 import { ensureContext } from "../905/61417";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
-import { P } from "../905/143421";
+import { ScrollContainer } from "../905/143421";
 import { defaultComponentAttribute } from "../905/577641";
 import { ButtonPrimitive } from "../905/632989";
 let l = "[role=option]";
@@ -85,7 +85,7 @@ let y = forwardRef(({
   }), [e, r, s, o, A, l, u, p, f, g]);
   return jsx(_.Provider, {
     value: I,
-    children: jsx(P, {
+    children: jsx(ScrollContainer, {
       ...a,
       ...b,
       role: "listbox",
@@ -96,7 +96,7 @@ let y = forwardRef(({
         root: i,
         rootStyle: y
       },
-      ref: _$$S(v, m.scroll),
+      ref: setupRefUpdater(v, m.scroll),
       onPointerLeave: u,
       children: t
     })

@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { b, bL } from "../figma_app/860955";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J } from "../905/125993";
 import { generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
@@ -17,7 +17,7 @@ export function $$_0(e) {
   } = b();
   return jsxs(bL, {
     manager,
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       recordingKey: generateRecordingKey(e, "toggleOverflowMenu"),
       "aria-label": getI18nString("fullscreen.properties_panel.tooltip_moreActions"),
       htmlAttributes: {

@@ -45,7 +45,7 @@ import { DomainOrgAdminsToRemove, OrgDomainManagementPage, UnclaimedDomainUserVi
 import { JR, Wi } from '../figma_app/162641';
 import { FOrganizationLevelType, FPlanFeatureType } from '../figma_app/191312';
 import { hK } from '../figma_app/211706';
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
 import { z as _$$z2 } from '../figma_app/369596';
 import { IU } from '../figma_app/421401';
@@ -118,14 +118,14 @@ let F = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             children: renderI18nText('domain_management.domain_capture_modal.title')
           })
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(hK, {
           height: 8
         }), jsx(AutoLayout, {
@@ -154,8 +154,8 @@ let F = registerModal(e => {
             })]
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: e.onClose,
             variant: 'secondary',
@@ -355,16 +355,16 @@ let Y = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             children: renderI18nText(e.actionType === 'VERIFY' ? 'domain_management.error_modal.header_verifying' : 'domain_management.error_modal.header_adding', {
               domainCount: e.failedDomains.length
             })
           })
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(hK, {
           height: 8
         }), jsxs(AutoLayout, {
@@ -399,8 +399,8 @@ let Y = registerModal(e => {
             domains: e.failedDomains
           })]
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             onClick: e.onClose,
             variant: 'secondary',
@@ -514,14 +514,14 @@ let Q = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: l,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             children: renderI18nText('domain_management.add_domain_modal.title')
           })
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(hK, {
           height: 8
         }), jsxs(AutoLayout, {
@@ -565,8 +565,8 @@ let Q = registerModal(e => {
             })
           })]
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: e.onClose,
             variant: 'secondary',
@@ -964,9 +964,9 @@ let eO = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: l,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             fontWeight: 'bold',
             children: renderI18nText('domain_management.remove_domain_modal.modal_body_title', {
@@ -974,7 +974,7 @@ let eO = registerModal(e => {
             })
           })
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(hK, {
           height: 8
         }), jsx(AutoLayout, {
@@ -1014,8 +1014,8 @@ let eO = registerModal(e => {
             }, e.id))
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: e.onClose,
             variant: 'secondary',
@@ -1046,12 +1046,12 @@ let eL = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('domain_management.verify_domain')
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(hK, {
           height: 8
         }), jsxs(AutoLayout, {
@@ -1085,8 +1085,8 @@ let eL = registerModal(e => {
             })]
           })]
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: e.onClose,
             variant: 'secondary',

@@ -9,7 +9,7 @@ import { e as _$$e } from "../905/579755";
 import { QP, op } from "../figma_app/487970";
 import { X as _$$X } from "../figma_app/514836";
 import { W as _$$W } from "../905/841666";
-import { I as _$$I } from "../figma_app/4253";
+import { getCommunityResourcePayment } from "../figma_app/4253";
 import { Jm, BY } from "../figma_app/387599";
 import { buildCommunityPath, buildCarouselMedia, getCurrentVersion, buildCommunityPathById, TransparentGifDataUri, buildProfileRouteState } from "../figma_app/471982";
 import { isResourceHubProfilesEnabled } from "../figma_app/275462";
@@ -305,7 +305,7 @@ export function $$ea0({
   let W = getCurrentVersion(e);
   let G = hasMonetizedResourceMetadata(e);
   let $ = hasFreemiumCode(e);
-  let z = _$$I(e);
+  let z = getCommunityResourcePayment(e);
   let Q = isSubscriptionActive(z);
   let ea = isOrgPrivatePluginOrWidget(e);
   let el = useRef(null);

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { t as _$$t } from "../905/117577";
 import { a as _$$a } from "../905/964520";
 import l from "classnames";
@@ -24,7 +24,7 @@ export function $$$$f0(e) {
     let t = isColorDarkByLuminance(e.parentBackgroundColor);
     return jsxs("div", {
       className: _$$s.flex.flexRow.$,
-      children: [jsx(K, {
+      children: [jsx(IconButton, {
         "aria-label": getI18nString("file_browser.navigation.desktop_back_to_previous"),
         disabled: !e.isLeftEnabled,
         onClick: e.onLeftClick,
@@ -33,7 +33,7 @@ export function $$$$f0(e) {
             [m]: !e.isLeftEnabled
           })
         })
-      }), jsx(K, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("file_browser.navigation.desktop_forward_in_browser"),
         disabled: !e.isRightEnabled,
         onClick: e.onRightClick,
@@ -47,12 +47,12 @@ export function $$$$f0(e) {
   }
   return jsxs("div", {
     className: _$$s.flex.flexRow.$,
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       "aria-label": getI18nString("file_browser.navigation.desktop_back_to_previous"),
       disabled: !e.isLeftEnabled,
       onClick: e.onLeftClick,
       children: jsx(_$$t, {})
-    }), jsx(K, {
+    }), jsx(IconButton, {
       "aria-label": getI18nString("file_browser.navigation.desktop_forward_in_browser"),
       disabled: !e.isRightEnabled,
       onClick: e.onRightClick,

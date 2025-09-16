@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect, useContext, useRef, useMemo, memo, useState } from "react";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { U1 } from "../figma_app/343967";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { L as _$$L } from "../905/704296";
@@ -299,7 +299,7 @@ let $$ei0 = memo(function () {
         children: renderI18nText("slides.properties_panel.rewrite_text.adjust_tone")
       }), jsx(_$$v, {
         location: "SLIDES_REWRITE_MODAL"
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("common.close"),
         onClick: () => {
           e(!1);
@@ -490,7 +490,7 @@ function eo({
   return jsxs("div", {
     children: [jsxs("div", {
       className: _$$s.flex.justifyBetween.itemsCenter.mb16.textBodyMedium.colorTextSecondary.$,
-      children: [g ? renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset_or_rewrite") : renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset"), g && jsx(_$$K, {
+      children: [g ? renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset_or_rewrite") : renderI18nText("slides.properties_panel.rewrite_text.or_pick_a_preset"), g && jsx(IconButton, {
         "aria-label": getI18nString("slides.properties_panel.rewrite_text.rewrite_redirect"),
         onClick: () => {
           s || (c(), $I({

@@ -75,7 +75,7 @@ import { debugState } from '../905/407919';
 import { $ as _$$$2 } from '../905/411599';
 import { loadPluginFont } from '../905/426868';
 import { N as _$$N2 } from '../905/438674';
-import { K as _$$K3 } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V4 } from '../905/453354';
@@ -126,7 +126,7 @@ import { y as _$$y } from '../905/705736';
 import { liveStoreInstance } from '../905/713695';
 import { logInfo, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
-import { i as _$$i } from '../905/718764';
+import { TabLoop } from '../905/718764';
 import { E as _$$E5, x as _$$x5 } from '../905/719609';
 import { A as _$$A2 } from '../905/721854';
 import { Point } from '../905/736624';
@@ -2126,7 +2126,7 @@ function n7({
     className: _$$s3.flex.pr16.pl16.pt8.pb4.flexRow.justifyCenter.itemsEnd.flexGrow1.gap16.$,
     children: [jsxs('div', {
       className: _$$s3.flex.flexRow.justifyCenter.itemsCenter.flexGrow1.gap8.$,
-      children: [jsx(_$$K3, {
+      children: [jsx(IconButton, {
         'aria-label': getI18nString('first_draft.theme_tool.close_panel'),
         'onClick': () => r(),
         'recordingKey': 'closeSectionEditor',
@@ -2532,7 +2532,7 @@ function as({
   kz(KeyCodes.BACKSPACE, pop);
   return jsx('div', {
     className: _$$s3.h24.$,
-    children: jsx(_$$K3, {
+    children: jsx(IconButton, {
       'recordingKey': generateRecordingKey(e, 'backButton'),
       'onClick': pop,
       'aria-label': getI18nString('qa.go_back'),
@@ -3985,7 +3985,7 @@ function aP(e) {
               className: _$$s3.wFull.flex.gap4.$,
               children: [jsx('div', {
                 className: _$$s3.h24.$,
-                children: jsx(_$$K3, {
+                children: jsx(IconButton, {
                   'recordingKey': generateRecordingKey(e.recordingKey, 'backButton'),
                   'onClick': e.onBack,
                   'aria-label': getI18nString('qa.go_back'),
@@ -4665,7 +4665,7 @@ function sc({
           className: rB()('kit_picker_view--navContainer--JHIEY', Dm),
           children: [jsx('div', {
             className: _$$s3.h24.$,
-            children: jsx(_$$K3, {
+            children: jsx(IconButton, {
               'recordingKey': generateRecordingKey('firstDraftKitSelection', 'backButton'),
               'onClick': pop,
               'aria-label': getI18nString('qa.go_back'),
@@ -7640,7 +7640,7 @@ function oC({
           className: 'banner--subtitle--8K4pM',
           children: t
         })]
-      }), r ? jsx(_$$K3, {
+      }), r ? jsx(IconButton, {
         'onClick': r,
         'aria-label': getI18nString('qa.dismiss'),
         'htmlAttributes': {
@@ -10919,7 +10919,7 @@ export function $$dG0(e) {
     },
     team: _$$e.AI_FOR_PRODUCTION,
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,
-    children: jsx(_$$i, {
+    children: jsx(TabLoop, {
       children: jsx(QT, {
         value: Ct(e),
         children: jsx(dK, {})

@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { hE } from "../figma_app/272243";
+import { DialogTitle } from "../figma_app/272243";
 import { N } from "../905/438674";
 import { ModalCloseButton } from "../905/17223";
 import { $z } from "../figma_app/617427";
@@ -39,7 +39,7 @@ export let $$b0 = registerModal(function ({
   return jsxs(ModalRootComponent, {
     width: "sm",
     manager: b,
-    children: [jsx(hE, {
+    children: [jsx(DialogTitle, {
       children: e
     }), jsx(ModalCloseButton, {
       dispatch: v

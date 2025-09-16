@@ -2,8 +2,8 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, useMemo, useId, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
-import { K as _$$K } from "../905/443068";
-import { i as _$$i } from "../905/97346";
+import { IconButton } from "../905/443068";
+import { setupDragHandler } from "../905/97346";
 import { O as _$$O } from "../905/487602";
 import { A as _$$A } from "../905/24328";
 import { StateHierarchy, Fullscreen, PrototypingTsApi } from "../figma_app/763686";
@@ -1191,7 +1191,7 @@ let e7 = memo(function ({
   });
   let tv = selectedInteractions.some(e => void 0 !== e.actions && e.actions?.length > 1);
   let tI = !X.isConditional() && !tv;
-  let tC = jsx(_$$K, {
+  let tC = jsx(IconButton, {
     onClick: () => tp(X),
     "aria-label": getI18nString("proto.prototype_panel.delete"),
     disabled: tI,
@@ -1246,7 +1246,7 @@ let e7 = memo(function ({
     })
   }) : null;
   let tT = useRef(e5);
-  let [, tS] = _$$i({
+  let [, tS] = setupDragHandler({
     disabled: !Y,
     onDragStart() {
       eC.current && (tT.current = eC.current.getBoundingClientRect().width);
@@ -1461,7 +1461,7 @@ function te({
     };
     return (PrototypingTsApi?.getMatchingInteractions(_$$d(t)) ?? []).length;
   })();
-  let h = getFeatureFlags().prototype_hide_matching_noodles && 1 === selectedInteractions.length && c > 1 && jsx(_$$K, {
+  let h = getFeatureFlags().prototype_hide_matching_noodles && 1 === selectedInteractions.length && c > 1 && jsx(IconButton, {
     actionOnPointerDown: !0,
     onClick: () => {
       if (1 !== selectedInteractions.length) return;

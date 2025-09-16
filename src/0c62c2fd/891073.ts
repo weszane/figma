@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -44,12 +44,12 @@ export function $$f0(e) {
     children: jsx(ModalRootComponent, {
       manager: h,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("revoke_transfer_modal.header_title")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           scrolling: "none",
           children: [jsx("div", {
             className: _$$s.py8.$,
@@ -67,8 +67,8 @@ export function $$f0(e) {
             className: _$$s.py8.$,
             children: renderI18nText("revoke_transfer_modal.function_explanation")
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: e.onClose,

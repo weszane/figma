@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
@@ -18,7 +18,7 @@ export let $$g2 = withTrackedClick(({
   emphasized: d,
   "aria-label": u = getI18nString("general.close"),
   ...p
-}) => jsx(K, {
+}) => jsx(IconButton, {
   "aria-label": u,
   disabled: t,
   onClick: e,

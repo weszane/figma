@@ -5,10 +5,10 @@ import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { Label } from "../905/270045";
 import { Checkbox } from "../905/274480";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { t as _$$t } from "../905/117577";
 import { useSubscription } from "../figma_app/288654";
@@ -112,7 +112,7 @@ function N({
 }) {
   return jsxs("div", {
     className: _$$s2.wFull.flex.itemsCenter.gap4.$,
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       "aria-label": getI18nString("general.go_back"),
       onClick: e,
       children: jsx(_$$t, {})
@@ -150,15 +150,15 @@ export let $$I0 = registerModal(function (e) {
     manager: l,
     height: hasBackButton ? "fixed" : "dynamic",
     width: 320,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: hasBackButton ? jsx(N, {
             text: g.title,
             goBack: () => x(popModalStack())
           }) : g.title
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx(S, {
           modalCopy: g,
           extensionsAllowed: k ?? A,
@@ -166,8 +166,8 @@ export let $$I0 = registerModal(function (e) {
           extensionRequestsAllowed: I ?? R,
           setExtensionRequestsAllowed: T
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: v,
             variant: "secondary",

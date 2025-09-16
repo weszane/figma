@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { ColorStateTsApi } from "../figma_app/763686";
 import { b2 } from "../vendor/284505";
 import { A } from "../vendor/382731";
@@ -18,7 +18,7 @@ export function $$y0() {
   let e = _$$g();
   let {
     addThemeListener
-  } = G();
+  } = useTheme();
   let r = getSelectedEditorType();
   let n = useRef(r);
   useEffect(() => {

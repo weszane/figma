@@ -40,7 +40,7 @@ import { SectionType } from "../figma_app/858344";
 import { hubFileAndPresetKeysSetAtom, resourceDataAndPresetKeysV2SetAtom } from "../905/72677";
 import { Hj, A3, tD, FO } from "../905/682977";
 import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
-import { K as _$$K2 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { S as _$$S2 } from "../905/711470";
@@ -184,7 +184,7 @@ function X(e) {
                 color: "brand",
                 children: renderI18nText("resources_tab.libraries.clear_all")
               })
-            }), jsx(_$$K2, {
+            }), jsx(IconButton, {
               onClick: () => c(!d),
               "aria-label": getI18nString("general.close"),
               children: jsx(_$$A, {})

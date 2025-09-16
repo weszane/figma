@@ -8,7 +8,7 @@ import { assertNotNullish } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/49800";
 import { HiddenLabel } from "../905/270045";
 import { A as _$$A } from "../905/920165";
@@ -113,7 +113,7 @@ function eO({
     children: f && h && !E ? jsx(_$$f, {
       containingInstanceGUID: m,
       propDefId: f?.explicitDefId
-    }) : jsx(_$$K, {
+    }) : jsx(IconButton, {
       onClick: () => u(v),
       recordingKey: generateRecordingKey(p, "detachButton"),
       "aria-label": getI18nString("design_systems.component_properties.detach_property"),
@@ -429,7 +429,7 @@ function eU(e) {
       leftInput: ep,
       rightLabel: null,
       rightInput: e_,
-      icon: (ey && eb ? jsx(_$$K, {
+      icon: (ey && eb ? jsx(IconButton, {
         onClick: e => {
           e.stopPropagation();
           ef();

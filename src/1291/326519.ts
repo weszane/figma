@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import o from "classnames";
 import { A as _$$A2 } from "../vendor/850789";
@@ -213,7 +213,7 @@ export function $$z0({
       className: pG,
       children: m ? jsx(O, {
         setPinned: t
-      }) : jsx(K, {
+      }) : jsx(IconButton, {
         onClick: l,
         "aria-label": getI18nString("general.close"),
         children: jsx(_$$A, {})

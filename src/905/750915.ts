@@ -1,170 +1,279 @@
-import { registerModal } from "../905/102752";
-import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { useState, useMemo, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { lQ } from "../905/934246";
-import { trackEventAnalytics } from "../905/449184";
-import { h as _$$h } from "../905/207101";
-import { getI18nString, renderI18nText } from "../905/303541";
-import { e as _$$e } from "../905/579755";
-import { V6 } from "../figma_app/487970";
-import { mapResourceType } from "../figma_app/471982";
-import { partitionUsersByPurchaseEligibility, isSubscriptionActive } from "../figma_app/808294";
-import { c as _$$c } from "../figma_app/11961";
-import { getAssociatedUserProfiles } from "../905/11536";
-import { KindEnum } from "../905/129884";
-import { BuyerAPIHandler } from "../905/180";
-import A from "classnames";
-import { SvgComponent } from "../905/714743";
-import { YE, Aq, sw, tW, pV, a_, Bi, iG, z_, lf, dS } from "../905/427932";
-import { A as _$$A } from "../6828/718668";
-import { A as _$$A2 } from "../figma_app/122760";
-import { workspaceTitleWrapper, avatar, genericSelectorModal, genericSelectorInner, genericSelectorModalCancel } from "../figma_app/727769";
-import { hideModal } from "../905/156213";
-var y = A;
-function E(e) {
+import classNames from 'classnames'
+import { useCallback, useMemo, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { BuyerAPIHandler } from '../905/180'
+import { getAssociatedUserProfiles } from '../905/11536'
+import { registerModal } from '../905/102752'
+import { KindEnum } from '../905/129884'
+import { hideModal } from '../905/156213'
+import { h as _$$h } from '../905/207101'
+import { getI18nString, renderI18nText } from '../905/303541'
+import { a_, Aq, Bi, dS, iG, lf, pV, sw, tW, YE, z_ } from '../905/427932'
+import { trackEventAnalytics } from '../905/449184'
+import { e as _$$e } from '../905/579755'
+import { SvgComponent } from '../905/714743'
+import { lQ } from '../905/934246'
+import { A as _$$A } from '../6828/718668'
+import { c as _$$c } from '../figma_app/11961'
+import { A as _$$A2 } from '../figma_app/122760'
+import { mapResourceType } from '../figma_app/471982'
+import { V6 } from '../figma_app/487970'
+import { avatar, genericSelectorInner, genericSelectorModal, genericSelectorModalCancel, workspaceTitleWrapper } from '../figma_app/727769'
+import { isSubscriptionActive, partitionUsersByPurchaseEligibility } from '../figma_app/808294'
+
+/**
+ * Renders the options for user selection in the modal.
+ * Original function name: E
+ */
+function UserSelectionOptions({
+  title,
+  description,
+  options,
+}: {
+  title: React.ReactNode
+  description: React.ReactNode
+  options: Array<{
+    id: string
+    title: React.ReactNode
+    Avatar: React.ReactNode
+    description: React.ReactNode
+    onClick: () => void
+    disabledText?: {
+      displayText: string
+      tooltipText?: string
+    }
+  }>
+}) {
   return jsxs(Fragment, {
-    children: [jsx("div", {
-      className: YE,
-      children: e.title
-    }), jsx("div", {
-      className: Aq,
-      children: e.description
-    }), jsx("div", {
-      className: sw,
-      children: e.options.map(e => {
-        let t = !!e.disabledText;
-        return jsxs("button", {
-          className: tW,
-          onClick: t => {
-            t.stopPropagation();
-            e.onClick();
-          },
-          disabled: t,
-          children: [jsx("div", {
-            className: y()({
-              [pV]: !0,
-              [a_]: t
-            }),
-            children: e.Avatar
-          }), jsxs("div", {
-            className: Bi,
-            children: [jsx("span", {
-              className: iG,
-              children: e.title
-            }), jsx("span", {
-              className: z_,
-              children: e.description
-            })]
-          }), e.disabledText ? jsx("div", {
-            className: lf,
-            "data-tooltip": e.disabledText.tooltipText,
-            "data-tooltip-type": KindEnum.TEXT,
-            children: e.disabledText.displayText
-          }) : jsx(SvgComponent, {
-            className: dS,
-            svg: _$$A
-          })]
-        }, e.id);
-      })
-    })]
-  });
+    children: [
+      jsx('div', { className: YE, children: title }),
+      jsx('div', { className: Aq, children: description }),
+      jsx('div', {
+        className: sw,
+        children: options.map((option) => {
+          const isDisabled = !!option.disabledText
+          return jsxs(
+            'button',
+            {
+              className: tW,
+              onClick: (event) => {
+                event.stopPropagation()
+                option.onClick()
+              },
+              disabled: isDisabled,
+              children: [
+                jsx('div', {
+                  className: classNames({
+                    [pV]: true,
+                    [a_]: isDisabled,
+                  }),
+                  children: option.Avatar,
+                }),
+                jsxs('div', {
+                  className: Bi,
+                  children: [
+                    jsx('span', {
+                      className: iG,
+                      children: option.title,
+                    }),
+                    jsx('span', {
+                      className: z_,
+                      children: option.description,
+                    }),
+                  ],
+                }),
+                option.disabledText
+                  ? jsx('div', {
+                      'className': lf,
+                      'data-tooltip': option.disabledText.tooltipText,
+                      'data-tooltip-type': KindEnum.TEXT,
+                      'children': option.disabledText.displayText,
+                    })
+                  : jsx(SvgComponent, {
+                      className: dS,
+                      svg: _$$A,
+                    }),
+              ],
+            },
+            option.id,
+          )
+        }),
+      }),
+    ],
+  })
 }
-function w(e) {
-  let t = useSelector(e => e.authedActiveCommunityProfile);
-  let i = useSelector(e => e.authedUsers);
-  let [o, p] = useState({});
+
+/**
+ * Modal content for selecting a user to purchase.
+ * Original function name: w
+ */
+function PrePurchaseUserSelectorContent({
+  onUserSelect,
+  resource,
+}: {
+  onUserSelect: (user: any) => void
+  resource: any
+}) {
+  const authedActiveCommunityProfile = useSelector<ObjectOf>(
+    state => state.authedActiveCommunityProfile,
+  )
+  const authedUsers: any = useSelector<ObjectOf>(state => state.authedUsers)
+  const [purchaseMeta, setPurchaseMeta] = useState<Record<string, any>>({})
+
+  // Fetch buyer associated purchases on mount
   _$$h(() => {
     BuyerAPIHandler.getBuyerAssociatedPurchases({
-      id: e.resource.monetized_resource_metadata.id
-    }).then(e => {
-      p(e.data.meta);
-    }).catch(() => {});
-  });
-  let A = useMemo(() => getAssociatedUserProfiles({
-    authedActiveCommunityProfile: t,
-    authedUsers: i
-  }), [t, i]);
-  let {
-    usersCanPurchase,
-    publishers
-  } = useMemo(() => partitionUsersByPurchaseEligibility(A, e.resource), [A, e.resource]);
-  let v = usersCanPurchase.map(i => {
-    let r = o[i.id] && isSubscriptionActive(o[i.id]);
+      id: resource.monetized_resource_metadata.id,
+    })
+      .then((res) => {
+        setPurchaseMeta(res.data.meta)
+      })
+      .catch(() => {})
+  })
+
+  // Get associated user profiles
+  const associatedProfiles = useMemo(
+    () =>
+      getAssociatedUserProfiles({
+        authedActiveCommunityProfile,
+        authedUsers,
+      }),
+    [authedActiveCommunityProfile, authedUsers],
+  )
+
+  // Partition users by purchase eligibility
+  const { usersCanPurchase, publishers } = useMemo(
+    () => partitionUsersByPurchaseEligibility(associatedProfiles, resource),
+    [associatedProfiles, resource],
+  )
+
+  // Build options for users who can purchase
+  let options = usersCanPurchase.map((user) => {
+    const hasActiveSubscription
+      = purchaseMeta[user.id] && isSubscriptionActive(purchaseMeta[user.id])
     return {
-      id: i.id,
-      title: jsxs("div", {
+      id: user.id,
+      title: jsxs('div', {
         className: workspaceTitleWrapper,
-        children: [i.name, !_$$c(t) && r && jsx("div", {
-          "data-tooltip": getI18nString("community.buyer.this_account_has_already_purchased"),
-          "data-tooltip-type": KindEnum.TEXT,
-          children: jsx(V6, {})
-        })]
+        children: [
+          user.name,
+          !_$$c(authedActiveCommunityProfile)
+          && hasActiveSubscription
+          && jsx('div', {
+            'data-tooltip': getI18nString(
+              'community.buyer.this_account_has_already_purchased',
+            ),
+            'data-tooltip-type': KindEnum.TEXT,
+            'children': jsx(V6, {}),
+          }),
+        ],
       }),
       Avatar: jsx(_$$e, {
-        entity: i,
-        adtlClassName: avatar
+        entity: user,
+        adtlClassName: avatar,
       }),
-      description: i.email,
+      description: user.email,
       onClick: () => {
-        r || e.onUserSelect(i);
+        if (!hasActiveSubscription)
+          onUserSelect(user)
       },
-      disabledText: r ? {
-        displayText: ""
-      } : void 0
-    };
-  });
-  v = v.concat(publishers.map(e => ({
-    id: e.id,
-    title: e.name,
-    Avatar: jsx(_$$e, {
-      entity: e,
-      adtlClassName: avatar
-    }),
-    description: e.email,
-    onClick: lQ,
-    disabledText: {
-      displayText: getI18nString("community.try.not_allowed"),
-      tooltipText: getI18nString("community.buyer.user_is_a_publisher")
+      disabledText: hasActiveSubscription
+        ? {
+            displayText: '',
+          }
+        : undefined,
     }
-  })));
-  return jsx(E, {
-    title: getI18nString("community.buyer.confirm_account"),
-    description: getI18nString("community.buyer.this_resource_will_only_be_accesible"),
-    options: v
-  });
+  })
+
+  // Add publisher options (always disabled)
+  options = options.concat(
+    publishers.map(publisher => ({
+      id: publisher.id,
+      title: publisher.name,
+      Avatar: jsx(_$$e, {
+        entity: publisher,
+        adtlClassName: avatar,
+      }),
+      description: publisher.email,
+      onClick: lQ,
+      disabledText: {
+        displayText: getI18nString('community.try.not_allowed'),
+        tooltipText: getI18nString('community.buyer.user_is_a_publisher'),
+      },
+    })),
+  )
+
+  return jsx(UserSelectionOptions, {
+    title: getI18nString('community.buyer.confirm_account'),
+    description: getI18nString(
+      'community.buyer.this_resource_will_only_be_accesible',
+    ),
+    options,
+  })
 }
-export let $$T0 = registerModal(function (e) {
-  let t = useDispatch();
-  let i = useCallback(() => {
-    t(hideModal());
-  }, [t]);
-  let s = useMemo(() => function (e) {
-    _$$h(() => {
-      trackEventAnalytics("Pre Purchase User Selector Modal - Opened", {
-        resourceType: mapResourceType(e.resource),
-        resourceId: e.resource.id
-      });
-    });
-    return jsx(_$$A2, {
-      className: genericSelectorModal,
-      onCloseModal: i,
-      children: jsxs("div", {
-        className: genericSelectorInner,
-        children: [jsx(w, {
-          onUserSelect: e.onUserSelect,
-          resource: e.resource
-        }), jsx("button", {
-          className: genericSelectorModalCancel,
-          onClick: i,
-          children: renderI18nText("community.try.pick_workspace.cancel")
-        })]
-      })
-    });
-  }, [i]);
-  return jsx(s, {
-    onUserSelect: e.onUserSelect,
-    resource: e.resource
-  });
-}, "PrePurchaseUserSelectorModal");
-export const I = $$T0;
+
+/**
+ * Modal registration for pre-purchase user selector.
+ * Original export: $$T0
+ */
+export const PrePurchaseUserSelectorModal = registerModal(
+  (props: { onUserSelect: (user: any) => void, resource: any }) => {
+    const dispatch = useDispatch()
+    const handleClose = useCallback(() => {
+      dispatch(hideModal())
+    }, [dispatch])
+
+    /**
+     * Renders the modal content and tracks analytics.
+     * Original inline function in $$T0
+     */
+    const ModalContent = useMemo(
+      () =>
+        function ModalContentInner({
+          onUserSelect,
+          resource,
+        }: {
+          onUserSelect: (user: any) => void
+          resource: any
+        }) {
+          _$$h(() => {
+            trackEventAnalytics('Pre Purchase User Selector Modal - Opened', {
+              resourceType: mapResourceType(resource),
+              resourceId: resource.id,
+            })
+          })
+          return jsx(_$$A2, {
+            className: genericSelectorModal,
+            onCloseModal: handleClose,
+            children: jsxs('div', {
+              className: genericSelectorInner,
+              children: [
+                jsx(PrePurchaseUserSelectorContent, {
+                  onUserSelect,
+                  resource,
+                }),
+                jsx('button', {
+                  className: genericSelectorModalCancel,
+                  onClick: handleClose,
+                  children: renderI18nText(
+                    'community.try.pick_workspace.cancel',
+                  ),
+                }),
+              ],
+            }),
+          })
+        },
+      [handleClose],
+    )
+
+    return jsx(ModalContent, {
+      onUserSelect: props.onUserSelect,
+      resource: props.resource,
+    })
+  },
+  'PrePurchaseUserSelectorModal',
+)
+
+// Refactored export name for modal
+export const I = PrePurchaseUserSelectorModal

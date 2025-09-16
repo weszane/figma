@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, r1, nB, wi, jk, Y9, hE } from "../figma_app/272243";
+import { DialogContents, DialogHiddenTitle, DialogBody, DialogFooter, DialogActionStrip, DialogHeader, DialogTitle } from "../figma_app/272243";
 import { w as _$$w } from "../905/770105";
 import { J } from "../469e6e40/577626";
 import { a as _$$a } from "../905/676930";
@@ -371,10 +371,10 @@ function B(e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(r1, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHiddenTitle, {
         children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: "x1apfuft x78zum5 xdt5ytf",
           children: [jsx("p", {
@@ -429,8 +429,8 @@ function B(e) {
             })]
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "link",
             onClick: e.onClose,
@@ -482,10 +482,10 @@ function G(e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(r1, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHiddenTitle, {
         children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: "x1apfuft x78zum5 xdt5ytf",
           children: [jsx("p", {
@@ -516,8 +516,8 @@ function G(e) {
             }, e))
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "link",
             onClick: e.onClose,
@@ -582,12 +582,12 @@ function z(e) {
   return jsx(ModalRootComponent, {
     manager: n,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.title")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("p", {
           children: getI18nString("org_admin_settings.schedule_cancellation_modal.cancel_organization_plan.body", {
             scheduledCancellationDate: e.scheduledCancellationDate
@@ -605,8 +605,8 @@ function z(e) {
             })
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "secondary",
             onClick: e.onClose,
@@ -706,17 +706,17 @@ function W(e) {
     children: jsx(ModalRootComponent, {
       manager: i,
       width: "md",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("org_admin_settings.unschedule_cancellation_modal.title")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: getI18nString("org_admin_settings.unschedule_cancellation_modal.body", {
             scheduledCancellationDate: r
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               onClick: e.onClose,

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useCallback, useEffect, useReducer, useLayoutEffect, Fragment as _$$Fragment, memo, useContext } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
-import { G as _$$G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { Multiplayer, PaintTools, SnapshotLevel, AppStateTsApi, DesignGraphElements, LayoutTabType, Fullscreen } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import c from "classnames";
@@ -911,7 +911,7 @@ function eG(e) {
   }) : R;
 }
 function ez() {
-  let e = _$$G();
+  let e = useTheme();
   let t = _$$K();
   let r = useSelector(({
     multiplayer: {
@@ -1400,7 +1400,7 @@ let $$tu0 = memo(function ({
   isStaticView: A,
   isHoveringWidgetWithHiddenCursors: x
 }) {
-  let N = _$$G();
+  let N = useTheme();
   let [C, w] = useState(1);
   let L = useMemo(() => getTextColorForBackground(t), [t]);
   let P = getFeatureFlags().fpl_enhanced_contrast_toggle && N.enhancedContrast ? getDarkerShade(t) : t;

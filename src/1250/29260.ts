@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { bL, DZ, mc, c$ } from "../905/493196";
@@ -176,7 +176,7 @@ function W({
     className: "github_settings_modal--background--3ihGt",
     children: [jsx("div", {
       className: "github_settings_modal--closeButton--alk3G",
-      children: jsx(K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("dev_handoff.component_browser_onboarding.close"),
         onClick: t,
         children: jsx(_$$A, {})

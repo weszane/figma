@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { getStorage } from "../905/657224";
 import u from "classnames";
 import { debugState } from "../905/407919";
@@ -29,7 +29,7 @@ import { BI } from "../figma_app/546509";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { generateAnnomousPrefill } from "../905/301652";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { A as _$$A, Uw, bO, JD } from "../905/219868";
 import { V as _$$V } from "../905/670859";
 import { D as _$$D2 } from "../905/347702";
@@ -57,7 +57,7 @@ function V({
         redirectUrl: customHistory.location.pathname
       }));
       r(showModalHandler({
-        type: _$$x,
+        type: AuthModal,
         data: {
           headerText: "Log In"
         }
@@ -304,7 +304,7 @@ export function $$W0(e) {
       children: jsx(vo, {
         children: jsx(nB, {
           padding: 40,
-          children: jsx(_$$i, {
+          children: jsx(TabLoop, {
             children: i ? jsx(H, {
               file: r
             }) : jsx(z, {

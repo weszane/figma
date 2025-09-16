@@ -22,7 +22,7 @@ import { gy, fc } from "../figma_app/646357";
 import { T as _$$T } from "../905/486858";
 import { kc, Co } from "../figma_app/141508";
 import { er as _$$er } from "../905/753512";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ManuallyLabeledCheckbox } from "../905/909715";
 import { q9 } from "../905/865071";
 import { C as _$$C } from "../905/520159";
@@ -279,7 +279,7 @@ function eu({
     children: [jsxs("div", {
       className: "replace_libraries_modal--fileMapHeaderRow--LYff7 replace_libraries_modal--_fileMapRowBase--agNce",
       children: [jsx("div", {
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick: i,
           "aria-label": getI18nString("design_systems.libraries_modal.back_to_library"),
           children: jsx(_$$C, {})

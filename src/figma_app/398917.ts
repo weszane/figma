@@ -6,7 +6,7 @@ import { d as _$$d } from "../905/976845";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { T as _$$T } from "../figma_app/300269";
 import { d as _$$d2 } from "../figma_app/844319";
@@ -347,7 +347,7 @@ function et({
         onClick: () => p.toggle(() => cn(c.current, s + 240 - 50)),
         children: jsx(_$$A, {})
       }),
-      rightIcon: jsx(_$$K, {
+      rightIcon: jsx(IconButton, {
         "aria-label": getI18nString("sites.panel.responsive_text_style.settings"),
         onClick: () => {
           permissionScopeHandler.user("delete-responsive-text-style-variant", () => {

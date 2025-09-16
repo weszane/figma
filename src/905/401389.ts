@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { arraysEqual } from "../figma_app/656233";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { setupToggleButton } from "../905/167712";
 import { O as _$$O } from "../905/487602";
@@ -77,7 +77,7 @@ function $(e) {
   }, [getSelectedIndicesAsSet, getSelectedIndices, propertyList, onDeleteProperty, setSelectedIndices, onChange]);
   let p = q();
   let m = Number(isValidValue(propertyList) && valueOrFallback(propertyList, []).length);
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     recordingKey: generateRecordingKey(e, "removeButton"),
     disabled: 0 === m,
     "aria-label": getI18nString("fullscreen.draggable_list.remove"),
@@ -115,7 +115,7 @@ function Z(e) {
   }) : null;
 }
 function X(e) {
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     recordingKey: generateRecordingKey(e, "resetInteractionsButton"),
     "aria-label": getI18nString("proto.prototype_panel.reset_interactions"),
     onClick: e.onResetInteractions,
@@ -129,7 +129,7 @@ function X(e) {
 function Q(e) {
   return jsx("span", {
     className: c9,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       actionOnPointerDown: !0,
       recordingKey: generateRecordingKey(e, "addButton"),
       "aria-label": e.overrideAddPropertyTooltip ?? getI18nString("fullscreen.draggable_list.add"),
@@ -148,7 +148,7 @@ function J(e) {
   let t = q();
   return jsx("span", {
     className: kG,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       recordingKey: generateRecordingKey(e, "scrollBehaviorButton"),
       "aria-label": getI18nString("fullscreen.draggable_list.scroll_behavior"),
       onClick: e.toggleScrollBehaviorPicker,

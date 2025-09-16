@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useLayoutEffect } from "react";
-import { Kr } from "../vendor/111975";
+import { tabbable } from "tabbable";
 import { f as _$$f, h } from "../905/693155";
 import { KeyCodes } from "../905/63728";
 import { e as _$$e } from "../905/810168";
@@ -79,7 +79,7 @@ function E(e) {
   -1 !== t && p.splice(t, 1);
 }
 export function $$y9(e) {
-  return e ? Kr(e, {
+  return e ? tabbable(e, {
     getShadowRoot: !0
   })[0] : null;
 }

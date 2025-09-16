@@ -11,7 +11,7 @@ import { isReduxDeprecationShadowreadOrCutover, ConfigGroups } from "../figma_ap
 import { FFileType, FResourceCategoryType, FProductAccessType } from "../figma_app/191312";
 import { TeamFileLimitsInfo, FileCanEditIgnorePaidStatus, TeamById } from "../figma_app/43951";
 import { aW, sK, cD, FQ } from "../figma_app/598018";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { useLatestRef } from "../figma_app/922077";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
@@ -116,7 +116,7 @@ import { K as _$$K } from "../905/276259";
 import { J as _$$J2, q as _$$q } from "../905/202542";
 import { E as _$$E } from "../905/53857";
 import { f as _$$f3 } from "../905/54715";
-import { G as _$$G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { F_ } from "../905/748636";
 import { NJ } from "../figma_app/419216";
 import { L as _$$L } from "../9864/861465";
@@ -136,7 +136,7 @@ import { C as _$$C } from "../905/520159";
 import { ScreenReaderOnly } from "../905/172252";
 import { useModalManager, ModalRoot } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { Wk } from "../figma_app/272243";
+import { DialogCustomContents } from "../figma_app/272243";
 import { wY } from "../figma_app/708845";
 import { getI18nResourceKey } from "../905/528121";
 import { b as _$$b3, bL as _$$bL2, mc, q7 } from "../figma_app/860955";
@@ -185,7 +185,7 @@ function v({
   return jsx(_$$M, {
     isShowing: r,
     testId: i,
-    children: jsx(_$$i, {
+    children: jsx(TabLoop, {
       children: jsx(TrackingProvider, {
         name: t,
         children: jsx("div", {
@@ -211,7 +211,7 @@ function S({
   return jsx(_$$M, {
     isShowing: e,
     testId: t,
-    children: jsx(_$$i, {
+    children: jsx(TabLoop, {
       children: jsx(TrackingProvider, {
         name: r,
         children: jsx("div", {
@@ -2109,7 +2109,7 @@ function r5({
   let [i, l] = useState(F_.RIGHT_BODY);
   let {
     color
-  } = _$$G();
+  } = useTheme();
   let a = "dark" === color;
   if (!e) return null;
   let d = a ? r6[t] : r3[t];
@@ -2182,7 +2182,7 @@ function r4({
 }) {
   let {
     color
-  } = _$$G();
+  } = useTheme();
   let h = l ? function (e, r) {
     switch (e) {
       case "design":
@@ -4411,7 +4411,7 @@ function im(e) {
         manager: l,
         width: "fit-content",
         height: "fixed",
-        children: jsx(Wk, {
+        children: jsx(DialogCustomContents, {
           children: jsxs("div", {
             className: "x78zum5 x1q0g3np x9h44rk xdpfuu1 x1egiwwb",
             "data-testid": u_,

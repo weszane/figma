@@ -5,7 +5,7 @@ import s from "classnames";
 import { ButtonSecondary } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { v } from "../905/581647";
+import { handleStripeManageSubscription } from "../905/581647";
 import { KindEnum } from "../905/129884";
 import { x6, Jp, qS, QW, cI, hI, JL } from "../figma_app/522242";
 import { A } from "../5724/267849";
@@ -14,7 +14,7 @@ var m = (e => (e.AUTO = "auto", e.CONSTRAINED = "constrained", e))(m || {});
 export function $$g0(e) {
   let t = useDispatch();
   let r = useCallback(() => {
-    t(v({}));
+    t(handleStripeManageSubscription({}));
   }, [t]);
   let s = e.width || "constrained";
   let d = o()(x6, {
@@ -33,7 +33,7 @@ export function $$f2() {
   let e = useDispatch();
   let t = useCallback(t => {
     t.stopPropagation();
-    e(v({}));
+    e(handleStripeManageSubscription({}));
   }, [e]);
   return jsx("button", {
     className: qS,

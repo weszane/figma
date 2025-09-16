@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
 import { R as _$$R } from "../905/256203";
 import { A as _$$A } from "../905/251970";
@@ -153,12 +153,12 @@ function q(e) {
   return jsx(ModalRootComponent, {
     manager: m,
     width: 480,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: N
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: fileImport && jsx(_$$P, {
           innerClassName: _$$s.flex.flexColumn.$,
           className: J,
@@ -166,7 +166,7 @@ function q(e) {
             file: e
           }, `file-import-${e.id}`))
         })
-      }), jsx(wi, {
+      }), jsx(DialogFooter, {
         children: jsxs("div", {
           className: _$$s.flex.flexRow.wFull.justifyBetween.py8.gap16.bt1.bSolid.colorBorder.$,
           children: [jsxs("div", {
@@ -329,12 +329,12 @@ export function $$ee2({
   return jsx(ModalRootComponent, {
     manager: P,
     width: 480,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: j
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(_$$P, {
           className: "x78zum5 xdt5ytf x1mhq5o4",
@@ -343,7 +343,7 @@ export function $$ee2({
             file: e
           }, `file-import-${e.id}`))
         })
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [jsxs("div", {
           className: "x78zum5 x6s0dn4 x167g77z",
           children: [statusIcon, statusMessage && jsx("span", {
@@ -353,7 +353,7 @@ export function $$ee2({
             className: "xet2fuk",
             children: statusMessageSecondary
           })]
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: F
         })]
       })]

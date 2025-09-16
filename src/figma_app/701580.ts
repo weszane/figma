@@ -44,7 +44,7 @@ import { i as _$$i } from "../figma_app/566312";
 import { a as _$$a } from "../905/925868";
 import { _3 } from "../figma_app/502363";
 import { A as _$$A } from "../6828/44395";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { IW } from "../figma_app/563413";
 import { yB } from "../figma_app/359152";
@@ -470,7 +470,7 @@ function eo({
 }
 function eu(e) {
   return jsx(Y9, {
-    children: e.previewTemplateId ? jsx(_$$K, {
+    children: e.previewTemplateId ? jsx(IconButton, {
       "aria-label": getI18nString("general.back"),
       onClick: e.goBack,
       children: jsx(_$$C, {})

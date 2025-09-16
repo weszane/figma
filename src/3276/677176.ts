@@ -5,7 +5,7 @@ import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
 import { hY, bB, UU } from "../figma_app/770088";
 import { I_ } from "../905/234821";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { rN } from "../figma_app/12220";
 import { MP } from "../figma_app/936061";
 import { Z } from "../905/104740";
@@ -73,7 +73,7 @@ export function $$P0(e, t, n, s, m, u) {
     let m = I_();
     let u = _$$s();
     let f = Z("comments_navigate");
-    let _ = _$$k();
+    let _ = isUserNotLoggedInAndEditorSupported();
     let v = WN();
     return useCallback(o => {
       if (_) {

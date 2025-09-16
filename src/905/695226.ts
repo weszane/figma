@@ -1,7 +1,7 @@
 import { useRef } from "react";
-import { y } from "../905/987614";
+import { compareElementPosition } from "../905/987614";
 import { SI } from "../905/705398";
-import { fh, c7 } from "../905/914656";
+import { setSelectionToStart, setSelectionToEnd } from "../905/914656";
 export function $$$$o0(e) {
   let t = useRef(0);
   return function (i) {
@@ -16,7 +16,7 @@ export function $$$$o0(e) {
       o.focus();
       o.removeAttribute("data-faux-focus");
     });
-    0 > y(n, o) ? fh(o) : c7(o);
+    0 > compareElementPosition(n, o) ? setSelectionToStart(o) : setSelectionToEnd(o);
     let l = Date.now();
     l - t.current < 500 && o.select();
     t.current = l;

@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { createElement, useState, useCallback, useEffect } from "react";
 import { ButtonPrimitive } from "../905/632989";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { a as _$$a } from "../905/462280";
 import { J } from "../905/129695";
@@ -367,7 +367,7 @@ function k({
 }) {
   return t && 0 !== e ? jsx("div", {
     className: "x8x9d4c x10l6tqk x13vifvy x3m8u43 x1gskr33 x1cmmqis xi5j7vn xc1rnzj",
-    children: jsx(K, {
+    children: jsx(IconButton, {
       "aria-label": getI18nString("buzz.bulk_create.unbind_field"),
       onClick: l,
       children: jsx(_$$f, {})

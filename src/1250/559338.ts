@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch, useStore } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { LayoutTabType, FullscreenPerfMetrics, AppStateTsApi, CorePerfInfo } from "../figma_app/763686";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
@@ -289,7 +289,7 @@ function D(e) {
           children: renderI18nText("fullscreen.pages_panel.memory_usage")
         }), jsx("div", {
           className: "memory_warning--memoryUsageCloseIcon--6rw0p",
-          children: !h && jsx(K, {
+          children: !h && jsx(IconButton, {
             "aria-label": getI18nString("common.close"),
             onClick: () => {
               trackEventAnalytics("manage_memory_modal_closed", {

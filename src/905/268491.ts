@@ -1,149 +1,292 @@
-import { toPixels } from "../905/893109";
-import { n$, qE as _$$qE } from "../905/875826";
-export let $$a13 = {
+// /Users/allen/sigma-main/src/905/268491.ts
+
+import { clamp, roundToNearestMultiple } from '../905/875826'
+import { toPixels } from '../905/893109'
+
+/**
+ * Represents a 2D point with x and y coordinates.
+ */
+interface Point {
+  x: number
+  y: number
+}
+
+/**
+ * Represents a bounding box with top, left, bottom, right.
+ */
+interface Bounds {
+  top: number
+  left: number
+  right: number
+  bottom: number
+}
+
+// Original: $$a13
+/**
+ * Default origin point at (0, 0).
+ */
+export const originPoint: Point = {
   x: 0,
-  y: 0
-};
-export function $$s18(e, t) {
+  y: 0,
+}
+
+// Original: $$s18
+/**
+ * Creates a new point with given x and y coordinates.
+ * @param x - The x-coordinate.
+ * @param y - The y-coordinate.
+ * @returns A new Point object.
+ */
+export function createPoint(x: number, y: number): Point {
+  return { x, y }
+}
+
+// Original: $$o2
+/**
+ * Checks if two points are equal.
+ * @param p1 - First point.
+ * @param p2 - Second point.
+ * @returns True if points are equal, false otherwise.
+ */
+export function arePointsEqual(p1: Point, p2: Point): boolean {
+  return p1.x === p2.x && p1.y === p2.y
+}
+
+// Original: $$l6
+/**
+ * Extracts point from a mouse event's client coordinates.
+ * @param event - The mouse event.
+ * @returns A point with clientX and clientY.
+ */
+export function pointFromMouseEvent(event: MouseEvent): Point {
+  return { x: event.clientX, y: event.clientY }
+}
+
+// Original: $$d7
+/**
+ * Extracts point from a mouse event's movement deltas.
+ * @param event - The mouse event.
+ * @returns A point with movementX and movementY.
+ */
+export function pointFromMovement(event: MouseEvent): Point {
+  return { x: event.movementX, y: event.movementY }
+}
+
+// Original: $$c10
+/**
+ * Gets the window's inner dimensions as a point.
+ * @returns A point with innerWidth and innerHeight.
+ */
+export function getWindowSize(): Point {
+  return { x: window.innerWidth, y: window.innerHeight }
+}
+
+// Original: $$u8
+/**
+ * Gets the top-left position of an element's bounding rect as a point.
+ * @param element - The DOM element.
+ * @returns A point with the element's x and y position.
+ */
+export function getElementPosition(element: Element): Point {
+  const rect = element.getBoundingClientRect()
+  return { x: rect.x, y: rect.y }
+}
+
+// Original: $$p0
+/**
+ * Converts a point to a CSS translate string.
+ * @param point - The point to translate.
+ * @returns A CSS transform string.
+ */
+export function toTranslateString(point: Point): string {
+  return `translate(${point.x}px, ${point.y}px)`
+}
+
+// Original: $$m14
+/**
+ * Converts a point to CSS position styles (top and left).
+ * @param point - The point.
+ * @returns An object with top and left in pixels.
+ */
+export function toPositionStyles(point: Point): { top: string, left: string } {
   return {
-    x: e,
-    y: t
-  };
+    top: toPixels(point.y),
+    left: toPixels(point.x),
+  }
 }
-export function $$o2(e, t) {
-  return e.x === t.x && e.y === t.y;
+
+// Original: $$h3
+/**
+ * Rounds a point's coordinates to the nearest integers.
+ * @param point - The point to round.
+ * @returns A new point with rounded coordinates.
+ */
+export function roundPoint(point: Point): Point {
+  return { x: Math.round(point.x), y: Math.round(point.y) }
 }
-export function $$l6(e) {
+
+// Original: $$g16
+/**
+ * Rounds a point's coordinates to the nearest multiple of the device pixel ratio inverse.
+ * @param point - The point to round.
+ * @returns A new point with rounded coordinates.
+ */
+export function roundToDevicePixel(point: Point): Point {
+  const ratio = 1 / (window.devicePixelRatio || 1)
   return {
-    x: e.clientX,
-    y: e.clientY
-  };
+    x: roundToNearestMultiple(point.x, ratio),
+    y: roundToNearestMultiple(point.y, ratio),
+  }
 }
-export function $$d7(e) {
+
+// Original: $$f11
+/**
+ * Adds two points component-wise.
+ * @param p1 - First point.
+ * @param p2 - Second point.
+ * @returns The sum of the points.
+ */
+export function addPoints(p1: Point, p2: Point): Point {
+  return { x: p1.x + p2.x, y: p1.y + p2.y }
+}
+
+// Original: $$_4
+/**
+ * Subtracts the second point from the first component-wise.
+ * @param p1 - First point.
+ * @param p2 - Second point to subtract.
+ * @returns The difference of the points.
+ */
+export function subtractPoints(p1: Point, p2: Point): Point {
+  return { x: p1.x - p2.x, y: p1.y - p2.y }
+}
+
+// Original: $$A9
+/**
+ * Calculates the Euclidean distance from origin to the point.
+ * @param point - The point.
+ * @returns The distance.
+ */
+export function distanceFromOrigin(point: Point): number {
+  return Math.hypot(point.x, point.y)
+}
+
+// Original: $$y1
+/**
+ * Calculates the Euclidean distance between two points.
+ * @param p1 - First point.
+ * @param p2 - Second point.
+ * @returns The distance between the points.
+ */
+export function distanceBetweenPoints(p1: Point, p2: Point): number {
+  return distanceFromOrigin(subtractPoints(p1, p2))
+}
+
+// Helper function (original: b)
+/**
+ * Calculates the squared distance between two points.
+ * @param p1 - First point.
+ * @param p2 - Second point.
+ * @returns The squared distance.
+ */
+function squaredDistance(p1: Point, p2: Point): number {
+  return (p1.x - p2.x) ** 2 + (p1.y - p2.y) ** 2
+}
+
+// Original: $$v15
+/**
+ * Multiplies a point by a scalar or another point component-wise.
+ * @param point - The point to multiply.
+ * @param factor - Scalar or point multiplier.
+ * @returns The scaled point.
+ */
+export function multiplyPoint(point: Point, factor: number | Point): Point {
+  if (typeof factor === 'number') {
+    return { x: point.x * factor, y: point.y * factor }
+  }
+  return { x: point.x * factor.x, y: point.y * factor.y }
+}
+
+// Original: $$I5
+/**
+ * Normalizes a point to a unit vector, optionally scaled.
+ * @param point - The point to normalize.
+ * @param scale - Optional scale factor (default 1).
+ * @returns The normalized point.
+ */
+export function normalizePoint(point: Point, scale: number = 1): Point {
+  return multiplyPoint(point, scale / distanceFromOrigin(point))
+}
+
+// Original: $$E17
+/**
+ * Clamps a point's coordinates within min and max bounds.
+ * @param point - The point to clamp.
+ * @param min - Minimum bounds.
+ * @param max - Maximum bounds.
+ * @returns The clamped point.
+ */
+export function clampPoint(point: Point, min: Point, max: Point): Point {
   return {
-    x: e.movementX,
-    y: e.movementY
-  };
+    x: clamp(point.x, min.x, max.x),
+    y: clamp(point.y, min.y, max.y),
+  }
 }
-export function $$c10() {
-  return {
-    x: window.innerWidth,
-    y: window.innerHeight
-  };
+
+// Helper function (original: S)
+/**
+ * Checks if a point is inside the given bounds.
+ * @param point - The point to check.
+ * @param bounds - The bounds.
+ * @returns True if inside, false otherwise.
+ */
+function isPointInBounds(point: Point, bounds: Bounds): boolean {
+  return point.x > bounds.left && point.x < bounds.right && point.y > bounds.top && point.y < bounds.bottom
 }
-export function $$u8(e) {
-  let t = e.getBoundingClientRect();
-  return {
-    x: t.x,
-    y: t.y
-  };
+
+// Original: $$x12
+/**
+ * Calculates the intersection point of a line segment with bounds.
+ * @param start - Start point of the line.
+ * @param end - End point of the line.
+ * @param bounds - The bounds to intersect with.
+ * @returns The intersection point or null if none.
+ */
+export function lineBoundsIntersection(start: Point, end: Point, bounds: Bounds): Point | null {
+  if (!isPointInBounds(start, bounds) && isPointInBounds(end, bounds))
+    return null
+  const dx = end.x - start.x
+  const dy = end.y - start.y
+  const right = dx >= 0 ? bounds.right : bounds.left
+  const bottom = dy >= 0 ? bounds.bottom : bounds.top
+  if (dx === 0)
+    return { x: start.x, y: bottom }
+  if (dy === 0)
+    return { x: right, y: start.y }
+  const slope = dy / dx
+  const intercept = start.y - slope * start.x
+  const candidateX = { x: right, y: slope * right + intercept }
+  const candidateY = { x: (bottom - intercept) / slope, y: bottom }
+  return squaredDistance(candidateX, start) < squaredDistance(candidateY, start) ? candidateX : candidateY
 }
-export function $$p0(e) {
-  return `translate(${e.x}px, ${e.y}px)`;
-}
-export function $$m14(e) {
-  return {
-    top: toPixels(e.y),
-    left: toPixels(e.x)
-  };
-}
-export function $$h3(e) {
-  return {
-    x: Math.round(e.x),
-    y: Math.round(e.y)
-  };
-}
-export function $$g16(e) {
-  let t = 1 / (window.devicePixelRatio || 1);
-  return {
-    x: n$(e.x, t),
-    y: n$(e.y, t)
-  };
-}
-export function $$f11(e, t) {
-  return {
-    x: e.x + t.x,
-    y: e.y + t.y
-  };
-}
-export function $$_4(e, t) {
-  return {
-    x: e.x - t.x,
-    y: e.y - t.y
-  };
-}
-export function $$A9(e) {
-  return Math.hypot(e.x, e.y);
-}
-export function $$y1(e, t) {
-  return $$A9($$_4(e, t));
-}
-function b(e, t) {
-  return (e.x - t.x) ** 2 + (e.y - t.y) ** 2;
-}
-export function $$v15(e, t) {
-  return "number" == typeof t ? {
-    x: e.x * t,
-    y: e.y * t
-  } : {
-    x: e.x * t.x,
-    y: e.y * t.y
-  };
-}
-export function $$I5(e, t = 1) {
-  return $$v15(e, t / $$A9(e));
-}
-export function $$E17(e, t, i) {
-  return {
-    x: _$$qE(e.x, t.x, i.x),
-    y: _$$qE(e.y, t.y, i.y)
-  };
-}
-export function $$x12(e, t, i) {
-  if (!S(e, i) || S(t, i)) return null;
-  let n = t.x - e.x;
-  let r = t.y - e.y;
-  let a = n >= 0 ? i.right : i.left;
-  let s = r >= 0 ? i.bottom : i.top;
-  if (0 === n) return {
-    x: e.x,
-    y: s
-  };
-  if (0 === r) return {
-    x: a,
-    y: e.y
-  };
-  let o = r / n;
-  let l = e.y - o * e.x;
-  let d = {
-    x: a,
-    y: o * a + l
-  };
-  let c = {
-    x: (s - l) / o,
-    y: s
-  };
-  return b(d, e) < b(c, e) ? d : c;
-}
-function S(e, t) {
-  return e.x > t.left && e.x < t.right && e.y > t.top && e.y < t.bottom;
-}
-export const BB = $$p0;
-export const Io = $$y1;
-export const LC = $$o2;
-export const LI = $$h3;
-export const Re = $$_4;
-export const S8 = $$I5;
-export const TX = $$l6;
-export const T_ = $$d7;
-export const VN = $$u8;
-export const VO = $$A9;
-export const Vu = $$c10;
-export const WQ = $$f11;
-export const bl = $$x12;
-export const f2 = $$a13;
-export const gU = $$m14;
-export const hs = $$v15;
-export const i_ = $$g16;
-export const qE = $$E17;
-export const t6 = $$s18;
+
+// Updated exports to match refactored names
+export const BB = toTranslateString
+export const Io = distanceBetweenPoints
+export const LC = arePointsEqual
+export const LI = roundPoint
+export const Re = subtractPoints
+export const S8 = normalizePoint
+export const TX = pointFromMouseEvent
+export const T_ = pointFromMovement
+export const VN = getElementPosition
+export const VO = distanceFromOrigin
+export const Vu = getWindowSize
+export const WQ = addPoints
+export const bl = lineBoundsIntersection
+export const f2 = originPoint
+export const gU = toPositionStyles
+export const hs = multiplyPoint
+export const i_ = roundToDevicePixel
+export const qE = clampPoint
+export const t6 = createPoint

@@ -38,7 +38,7 @@ import { C as _$$C2 } from "../642/110459";
 import { r as _$$r } from "../642/58913";
 import { m as _$$m } from "../642/871982";
 import { b as _$$b } from "../642/94505";
-import { K as _$$K2 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { bL, mc } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
@@ -101,7 +101,7 @@ function eo(e) {
     renderInput: ({
       onMouseDown: e,
       props: t
-    }) => jsx(_$$K2, {
+    }) => jsx(IconButton, {
       recordingKey: generateRecordingKey(t.recordingKey, "blendMode"),
       "aria-label": getI18nString("properties.dropdown.apply_blend_mode"),
       onClick: e,
@@ -228,7 +228,7 @@ function eh({
         })
       })]
     })
-  }) : jsx(_$$K2, {
+  }) : jsx(IconButton, {
     "aria-label": getI18nString("properties.dropdown.remove_blend_mode"),
     htmlAttributes: {
       "data-tooltip": getI18nString("properties.dropdown.remove_blend_mode"),

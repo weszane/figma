@@ -16,7 +16,7 @@ import { PopoverPrimitiveContainer, usePopoverPrimitive } from '../905/691059';
 import { N as _$$N } from '../905/696319';
 import { getSingletonSceneGraph } from '../905/700578';
 import { SvgComponent } from '../905/714743';
-import { i as _$$i } from '../905/718764';
+import { TabLoop } from '../905/718764';
 import { lQ } from '../905/934246';
 import { o as _$$o } from '../8826/796619';
 import { getObservableOrFallback } from '../figma_app/84367';
@@ -208,7 +208,7 @@ function W({
         }
         e.key === 'Enter' && (S(null), r(!1));
       },
-      children: jsxs(_$$i, {
+      children: jsxs(TabLoop, {
         children: [jsx(q, {
           recordingKey: e,
           value: a,

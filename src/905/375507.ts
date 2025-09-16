@@ -3,7 +3,7 @@ import { useMemo, createRef, PureComponent, useState, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { HiddenLabel, Label } from "../905/270045";
 import { Button } from "../905/521428";
@@ -48,7 +48,7 @@ import { registerModal } from "../905/102752";
 import { A as _$$A2 } from "../svg/562672";
 import { A as _$$A3 } from "../svg/57540";
 import { throwTypeError } from "../figma_app/465776";
-import { K as _$$K2 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { EventShield } from "../905/821217";
 import { J as _$$J2 } from "../905/614223";
 import { useSubscription } from "../figma_app/288654";
@@ -608,7 +608,7 @@ function eR(e) {
           children: renderI18nText("design_systems.shared_fonts.sample")
         }), jsx(A3, {
           className: eI,
-          children: j && jsx(_$$K2, {
+          children: j && jsx(IconButton, {
             "aria-label": getI18nString("design_systems.shared_fonts.upload_new_shared_font"),
             onClick: onUploadClick,
             htmlAttributes: {
@@ -1204,17 +1204,17 @@ let eU = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("design_systems.shared_fonts.replacing_fonts_modal_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx(el, {
           uploaded: collision.uploaded,
           overwritten_fonts: overwrittenFonts
         })
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [jsx("div", {
           className: "shared_fonts--control--W-DlW",
           children: v.collisions.length > 1 && jsx("div", {
@@ -1263,12 +1263,12 @@ let eB = registerModal(function (e) {
   return g.length ? jsx(ModalRootComponent, {
     manager: i,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("design_systems.shared_fonts.team_fonts_will_be_overridden")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           className: eO,
           children: renderI18nText("design_systems.shared_fonts.team_fonts_override_warning_1", {
@@ -1283,8 +1283,8 @@ let eB = registerModal(function (e) {
           className: eO,
           children: renderI18nText("design_systems.shared_fonts.team_fonts_override_warning_3")
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             onClick: h,
             children: renderI18nText("design_systems.shared_fonts.okay")
@@ -1308,17 +1308,17 @@ let eV = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "md",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("design_systems.shared_fonts.confirm_delete")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText("design_systems.shared_fonts.are_you_sure_you_want_to_delete", {
           numFonts: d
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: p,
@@ -1377,12 +1377,12 @@ let eG = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("design_systems.shared_fonts.you_already_have_a_font_with_this_name")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsxs(Hj, {
           className: "shared_fonts--existingRow--DA9eV shared_fonts--collisionRow--pNU7g shared_fonts--row--qJMqt multi_select_list--row--nfio-",
           children: [jsx("div", {
@@ -1432,8 +1432,8 @@ let eG = registerModal(function (e) {
             })
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: x,

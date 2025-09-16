@@ -2,9 +2,9 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, createContext, useContext, useRef, useEffect, useState, useCallback, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
-import { Kr } from "../vendor/111975";
+import { tabbable } from "tabbable";
 import { useLatestRef } from "../figma_app/922077";
 import { KeyCodes } from "../905/63728";
 import { P as _$$P } from "../905/347284";
@@ -246,7 +246,7 @@ function H({
         })]
       }), v ? jsx(_$$O, {
         setPinned
-      }) : n ? jsx(_$$K, {
+      }) : n ? jsx(IconButton, {
         onClick: onClose,
         "aria-label": getI18nString("general.close"),
         htmlAttributes: {
@@ -323,7 +323,7 @@ function K({
   useEffect(() => {
     !isTransitioning && t && r.current && setTimeout(() => {
       if (!r.current) return;
-      let e = Kr(r.current, {
+      let e = tabbable(r.current, {
         getShadowRoot: !0,
         displayCheck: "none"
       });

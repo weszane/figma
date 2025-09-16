@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useId, useContext, useRef, useCallback, memo } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { m as _$$m } from "../905/886380";
 import { o as _$$o } from "../905/949628";
@@ -272,7 +272,7 @@ function O({
   handleClearOverride: e,
   recordingKey: t
 }) {
-  return jsx(K, {
+  return jsx(IconButton, {
     "aria-label": getI18nString("variables.authoring_modal.table.clear_override"),
     actionOnPointerDown: !0,
     onClick: e,

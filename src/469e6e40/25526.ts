@@ -87,7 +87,7 @@ import { y as _$$y } from "../905/129046";
 import { y as _$$y2 } from "../905/375507";
 import { lQ } from "../905/934246";
 import { isEmptyObject } from "../figma_app/493477";
-import { K as _$$K3 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { v as _$$v } from "../469e6e40/843735";
 import e2 from "classnames";
 import e5 from "../vendor/128080";
@@ -142,7 +142,7 @@ import { IU } from "../figma_app/421401";
 import { hideModal, showModalHandler, showModal, popModalStack } from "../905/156213";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { Y9, hE, nB as _$$nB, wi, jk, vo } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip, DialogContents } from "../figma_app/272243";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { Button } from "../905/521428";
@@ -1521,7 +1521,7 @@ class tZ extends PureComponent {
     return jsxs(Fragment, {
       children: [this.state.emails.tokens.length > 0 && jsx(t1, {}), !this.props.hideHeader && jsx(_$$K2, {
         title: _$$O(DashboardSection.ACTIVITY),
-        rightActions: jsx(_$$K3, {
+        rightActions: jsx(IconButton, {
           "aria-label": getI18nString("activity_log.table.get_csv"),
           variant: "secondary",
           onClick: this.onRequestCSV,
@@ -1848,13 +1848,13 @@ let aw = registerModal(function (e) {
             }));
           });
         } : lQ,
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("billing_groups_table.delete_n_billing_groups", {
               licenseGroupsCount: e.licenseGroups.length
             })
           })
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           children: [jsxs(AutoLayout, {
             direction: "vertical",
             spacing: 16,
@@ -1882,8 +1882,8 @@ let aw = registerModal(function (e) {
               onChange: () => u(!_)
             })
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: e.onClose,
@@ -4404,12 +4404,12 @@ let sy = registerModal(function ({
     htmlAttributes: {
       "data-testid": "decline-extension-request-modal"
     },
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: m
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         scrolling: "none",
         children: [jsxs("div", {
           className: _$$s.mb16.flex.itemsCenter.$,
@@ -4434,8 +4434,8 @@ let sy = registerModal(function ({
             _(e.target.value);
           }
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: l,

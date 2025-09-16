@@ -3,7 +3,7 @@ import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
 import { x } from "../905/404412";
 import { memo, useRef, useCallback, useEffect, useMemo, createContext } from "react";
@@ -149,7 +149,7 @@ export function $$S2({
     ...e,
     ...t,
     className: _$$A(b, "toast__dismissButton__SYFiF"),
-    children: jsx(K, {
+    children: jsx(IconButton, {
       "aria-label": o,
       onClick: u,
       children: jsx(L, {})

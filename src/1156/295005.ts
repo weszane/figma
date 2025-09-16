@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
 import { m4, H5 } from "../figma_app/617606";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { k as _$$k } from "../905/443820";
 import { _ as _$$_ } from "../905/410717";
 import { A as _$$A } from "../905/126947";
@@ -173,7 +173,7 @@ export function $$w0(e) {
     })
   });
   let F = _$$N3(u);
-  let O = "progress" === type ? null : L ? jsx(K, {
+  let O = "progress" === type ? null : L ? jsx(IconButton, {
     "aria-label": getI18nString("figmake.chat.artifact.restore"),
     "aria-description": getI18nString("figmake.chat.artifact.aria_restore_description", {
       version: T,

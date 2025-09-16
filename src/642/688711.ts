@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useRef, useContext } from "react";
 import { useSelector } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { r as _$$r } from "../905/784543";
 import { StateHierarchy } from "../figma_app/763686";
 import d from "classnames";
@@ -72,7 +72,7 @@ function A(e) {
     let e = selectWithShallowEqual(Lg);
     return g0(e);
   }();
-  return t && ("SYMBOL" === t.type && !t.isState || t.isStateGroup) ? jsx(K, {
+  return t && ("SYMBOL" === t.type && !t.isState || t.isStateGroup) ? jsx(IconButton, {
     recordingKey: generateRecordingKey(e.recordingKey, "goToParent"),
     "aria-label": getI18nString("design_systems.component_panel.select_component"),
     onClick: () => {

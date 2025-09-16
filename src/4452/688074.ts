@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, forwardRef, useMemo, Fragment, useEffect } from "react";
-import { i as _$$i } from "../905/718764";
-import { b as _$$b, J } from "../905/799737";
-import { K } from "../905/443068";
+import { TabLoop } from "../905/718764";
+import { DialogRoot, DialogLabel } from "../905/799737";
+import { IconButton } from "../905/443068";
 import { r1 } from "../figma_app/272243";
 import { A } from "../905/251970";
 import c from "classnames";
@@ -27,7 +27,7 @@ function j() {
   let e = y();
   return jsx("div", {
     className: u()(_$$s.absolute.flex.itemsCenter.justifyCenter.$, "flyout--close--SKgKT"),
-    children: jsx(K, {
+    children: jsx(IconButton, {
       onClick: () => e("button"),
       "aria-label": getI18nString("modal.close"),
       children: jsx(A, {})
@@ -79,8 +79,8 @@ export let $$I0 = {
         clearTimeout(e);
       };
     }, [d]);
-    return jsx(_$$i, {
-      children: jsx(_$$b, {
+    return jsx(TabLoop, {
+      children: jsx(DialogRoot, {
         ...t,
         className: u()(_$$s.fixed.top0.right0.bottom0.left0.zIndexModal.colorText.eventsNone.$, t.zIndexOverrideClassName),
         ref: o,
@@ -114,7 +114,7 @@ export let $$I0 = {
   },
   HiddenTitle: r1,
   Title: function (e) {
-    return jsx(J, {
+    return jsx(DialogLabel, {
       className: _$$s.textBodyMediumStrong.pl16.pr4.wFull.noWrap.ellipsis.overflowHidden.$,
       children: e.children
     });

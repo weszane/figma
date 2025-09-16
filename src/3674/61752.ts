@@ -27,7 +27,7 @@ import { UpsellModalType } from "../905/165519";
 import { FEditorType } from "../figma_app/53721";
 import { UpsellSourceType } from "../figma_app/831101";
 import { q, J as _$$J } from "../905/202542";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { R as _$$R2 } from "../905/300969";
 import { U as _$$U2 } from "../figma_app/65327";
 import { i as _$$i } from "../905/46262";
@@ -77,7 +77,7 @@ export function $$z0({
             redirectUrl: customHistory.location.pathname
           }));
           C(showModalHandler({
-            type: _$$x,
+            type: AuthModal,
             data: {}
           }));
         } else if (x) C(VisualBellActions.enqueue({

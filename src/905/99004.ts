@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { OC, jL } from "../figma_app/290668";
 import { c } from "../905/814434";
 export function $$o0({
@@ -7,7 +7,7 @@ export function $$o0({
   ...t
 }) {
   let i = OC();
-  return jsx(_$$i, {
+  return jsx(TabLoop, {
     children: jsx("div", {
       ...t,
       className: c,
@@ -22,7 +22,7 @@ export function $$l1({
   ...i
 }) {
   let o = jL(!e);
-  return jsx(_$$i, {
+  return jsx(TabLoop, {
     children: jsx("div", {
       ...i,
       className: c,

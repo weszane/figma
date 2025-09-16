@@ -23,7 +23,7 @@ import { sw, tW } from "../905/427932";
 import { A as _$$A2 } from "../6828/718668";
 import { A as _$$A3 } from "../svg/310324";
 import { Rr, Cc } from "../5430/664984";
-import { I as _$$I } from "../figma_app/4253";
+import { getCommunityResourcePayment } from "../figma_app/4253";
 import { isSubscriptionActive } from "../figma_app/808294";
 import { getResourceActionText, isApplePublisherAccepted, isResourceBlocked } from "../figma_app/777551";
 import { mapVtToFileTypeEnum } from "../figma_app/427318";
@@ -182,7 +182,7 @@ export function $$Q0({
   useEffect(() => {
     p && u(!1);
   }, [p]);
-  let h = _$$I(e);
+  let h = getCommunityResourcePayment(e);
   let x = IE(e);
   let f = Rr(c);
   let v = _$$A(e);

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { w4, Z9 } from "../figma_app/770359";
 import { lV, lr } from "../figma_app/617606";
 import { lQ } from "../905/934246";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { k as _$$k } from "../905/443820";
 import { R as _$$R } from "../905/256203";
 import { m as _$$m } from "../905/375522";
@@ -74,7 +74,7 @@ function $({
       readOnly: QK(e, lV.FIGMAKE),
       path: e?.codeFileFullPathWithoutScheme ?? null
     }),
-    children: [T && jsx(_$$K, {
+    children: [T && jsx(IconButton, {
       "aria-label": getI18nString("sites.panel.code_component_multiplayer_warning"),
       onClick: lQ,
       htmlAttributes: {
@@ -82,7 +82,7 @@ function $({
         "data-tooltip-type": KindEnum.TEXT
       },
       children: jsx(_$$R, {})
-    }), a && i && jsx(_$$K, {
+    }), a && i && jsx(IconButton, {
       "aria-label": getI18nString("sites.panel.format_code_tooltip"),
       htmlAttributes: {
         "data-tooltip": getI18nString("sites.panel.format_code_tooltip"),
@@ -91,7 +91,7 @@ function $({
       onClick: h,
       disabled: !!f,
       children: jsx(_$$m, {})
-    }), s && jsx(_$$K, {
+    }), s && jsx(IconButton, {
       "aria-label": getI18nString("figmake.code_editor.download_code"),
       onClick: s,
       disabled: y,

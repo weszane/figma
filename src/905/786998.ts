@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f } from "../905/335032";
 import { x } from "../905/587214";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -27,7 +27,7 @@ export function $$u0({
   }, [t]);
   return jsxs("div", {
     className: _$$s.flex.itemsCenter.wFitContent.colorBorder.b1.bRadius5.$,
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       "aria-label": getI18nString("billing_modals.decrement_aria_label"),
       disabled: e <= 0,
       onClick: p,
@@ -41,7 +41,7 @@ export function $$u0({
       value: e,
       onChange: u,
       onFocus: e => e.target.select()
-    }), jsx(K, {
+    }), jsx(IconButton, {
       "aria-label": getI18nString("billing_modals.increment_aria_label"),
       onClick: m,
       disabled: !!i && e >= i,

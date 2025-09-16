@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState, useCallback, Fragment as _$$Fragment, useRef, useMemo, useEffect } from "react";
 import { lQ } from "../905/934246";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { Button } from "../905/521428";
 import { k as _$$k } from "../905/44647";
@@ -148,7 +148,7 @@ function U({
           className: L
         })]
       }, s);
-    }), e.length === t && !i && jsx(K, {
+    }), e.length === t && !i && jsx(IconButton, {
       "aria-label": getI18nString("dev_handoff.component_browser.clear_input"),
       onClick: l,
       children: jsx(_$$f, {})
@@ -210,7 +210,7 @@ let G = forwardRef(({
               0 === _.length && d.length > 0 && (i(d.length - 1), e.preventDefault());
           }
         }
-      }), v && d.length < t && !x && jsx(K, {
+      }), v && d.length < t && !x && jsx(IconButton, {
         "aria-label": getI18nString("dev_handoff.component_browser.clear_input"),
         onClick: () => s(),
         children: jsx(_$$f, {})

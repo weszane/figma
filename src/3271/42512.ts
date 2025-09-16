@@ -41,7 +41,7 @@ import { Q as _$$Q } from "../figma_app/904819";
 import { LL, Cc } from "../figma_app/270091";
 import { m as _$$m } from "../figma_app/60940";
 import { NF, gC, Kr, Ix, Ex, IT, kB, B6, Xo, Zm, ff, np, dQ } from "../figma_app/201703";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J as _$$J } from "../905/125993";
 import { W as _$$W } from "../905/865092";
 import { getFeatureFlags } from "../905/601108";
@@ -547,7 +547,7 @@ function eG(e) {
               }), o && isValidForSelectedViewAndWhitelist(W, E, P) ? jsxs(Fragment, {
                 children: [jsx("div", {
                   className: "detail_view--dotsContainer--JdwCt",
-                  children: jsx(_$$K, {
+                  children: jsx(IconButton, {
                     "aria-label": getI18nString("universal_insert.more_options"),
                     htmlAttributes: {
                       "data-tooltip-type": KindEnum.TEXT,
@@ -561,7 +561,7 @@ function eG(e) {
                   plugin: W,
                   resourceType: r ? ResourceTypeNoComment.PLUGIN : ResourceTypeNoComment.WIDGET
                 })]
-              }) : jsx(_$$K, {
+              }) : jsx(IconButton, {
                 "aria-label": getI18nString("universal_insert.copy_link"),
                 htmlAttributes: {
                   "data-tooltip-type": KindEnum.TEXT,
@@ -961,7 +961,7 @@ function tM(e) {
       children: [renderI18nText("universal_insert.approved_from_figma_community"), jsx("a", {
         href,
         target: "_blank",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick,
           "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
@@ -995,7 +995,7 @@ function tM(e) {
       children: [renderI18nText("universal_insert.saved_from_community"), jsx("a", {
         href,
         target: "_blank",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,
@@ -1018,7 +1018,7 @@ function tM(e) {
       children: [renderI18nText("universal_insert.saved_from_community"), jsx("a", {
         href,
         target: "_blank",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick,
           "aria-label": getI18nString("universal_insert.go_to_community"),
           htmlAttributes: {

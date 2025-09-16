@@ -47,7 +47,7 @@ import { fq, Jn, NG, m4, S7 } from "../7222/396421";
 import { useMemoStable } from "../905/19536";
 import { B4 } from "../figma_app/385215";
 import { WN } from "../figma_app/638601";
-import { k as _$$k3 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { Um, BK } from "../905/848862";
 import { dR as _$$dR } from "../figma_app/440875";
 import { m as _$$m2 } from "../9410/532216";
@@ -58,7 +58,7 @@ import { Lx, v7 } from "../9410/896213";
 import { w as _$$w } from "../9410/519056";
 import { xG } from "../figma_app/121043";
 import { Button, ButtonLarge, ButtonWide } from "../905/521428";
-import { P as _$$P } from "../905/143421";
+import { ScrollContainer } from "../905/143421";
 import { x as _$$x } from "../905/764527";
 import { Xr, useAtomValueAndSetter, useAtomWithSubscription, um, atomStoreManager } from "../figma_app/27355";
 import { G1 } from "../figma_app/691470";
@@ -88,7 +88,7 @@ import { ol as _$$ol } from "../figma_app/598018";
 import { D as _$$D2 } from "../7222/938408";
 import { nv, Ci, qm, Ji } from "../figma_app/553488";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB as _$$nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { q as _$$q } from "../9410/847736";
 import { DM, bY, Vf } from "../figma_app/60023";
 import { bL as _$$bL, l9 as _$$l4, mc, c$, wv } from "../905/493196";
@@ -111,7 +111,7 @@ import { g2 } from "../9410/341455";
 import { u as _$$u2 } from "../441/357009";
 import { K as _$$K2, SG } from "../6388/64652";
 import { Gu } from "../figma_app/262240";
-import { K as _$$K3 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { z as _$$z } from "../940032c6/265110";
 import { defaultSessionLocalIDString, isValidSessionLocalID, parseSessionLocalID, sessionLocalIDToString } from "../905/871411";
 import { generateRecordingKey, SKIP_RECORDING, useHandleFocusEvent, useHandleGenericEvent } from "../figma_app/878298";
@@ -214,7 +214,7 @@ import { zF } from "../figma_app/297822";
 import { x as _$$x3 } from "../905/719609";
 import { y as _$$y } from "../figma_app/13082";
 import { ap as _$$ap, B_, k8 as _$$k6, ud, Hk, lq as _$$lq } from "../9410/548825";
-import { i as _$$i2 } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { mergeProps } from "../905/475481";
 import { gv } from "../9410/172674";
 import { O as _$$O } from "../9410/301359";
@@ -250,7 +250,7 @@ import { tZ as _$$tZ } from "../figma_app/960196";
 import { j as _$$j } from "../642/671529";
 import { S as _$$S } from "../figma_app/316019";
 import { B as _$$B3 } from "../905/946243";
-import { i as _$$i3 } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { l as _$$l8 } from "../905/241412";
 import { E as _$$E5 } from "../905/277716";
 import { k as _$$k7 } from "../905/582200";
@@ -904,7 +904,7 @@ function eE() {
   let p = useCallback(t => {
     Lx(t, o?.sessionID, e, !1, i, c, u);
   }, [o?.sessionID, e, i, c, u]);
-  let x = _$$k3();
+  let x = isUserNotLoggedInAndEditorSupported();
   let h = WN();
   return jsx("div", {
     ...xk(ef.rightHeaderPositioner),
@@ -1341,12 +1341,12 @@ function tc() {
       width: 456,
       onClose: t,
       draggable: "header",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: "Templates"
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           children: jsx("div", {
             className: "x4zv5z4 xh8yej3 x5yr21d",
             children: jsx(_$$q, {
@@ -2633,7 +2633,7 @@ function ih({
 }) {
   return jsx("div", {
     ...xk(io.mainContainer, e ? io.mainContainerExpanded : io.mainContainerCollapsed),
-    children: jsx(_$$P, {
+    children: jsx(ScrollContainer, {
       fill: !0,
       children: t
     })
@@ -3479,7 +3479,7 @@ function nH({
     className: "x1cmmqis",
     children: jsx(EventShield, {
       eventListeners: ["onPointerDown", "onMouseDown"],
-      children: jsx(_$$K3, {
+      children: jsx(IconButton, {
         onClick: _$$nc.user("delete-slide-object-animation", () => {
           let i = n.get(t);
           let r = Gu(e.action.transitionNodeID);
@@ -3550,12 +3550,12 @@ function nq({
     },
     width: 208,
     defaultPosition: n,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("slides.properties_panel.object_animations.multiedit_modal.title")
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: _$$s5.flex.flexColumn.$,
           children: [jsx(nR, {
@@ -3826,7 +3826,7 @@ function nQ({
     n.objectAnimations = l;
     fullscreenValue.commit();
   }, [a, e, t, i, s]);
-  return jsx(_$$K3, {
+  return jsx(IconButton, {
     "aria-label": getI18nString("slides.properties_panel.object_animations.bulk_delete_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": getI18nString("slides.properties_panel.object_animations.bulk_delete_button.tooltip"),
@@ -3849,7 +3849,7 @@ function nX({
     });
     n(i);
   }, [e, i, n]);
-  return jsx(_$$K3, {
+  return jsx(IconButton, {
     "aria-label": getI18nString("slides.properties_panel.object_animations.play_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": getI18nString("slides.properties_panel.object_animations.play_button.tooltip"),
@@ -3871,7 +3871,7 @@ function nZ({
   let o = Object.keys(l).filter(e => !a.includes(e)).length;
   let d = useSelector(e => Yh(e.mirror.appModel, "add-slide-object-animation"));
   t = d ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_valid_selection") : n ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_already_animated") : o > 0 ? 1 === o ? getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_singular") : getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_multiple") : getI18nString("slides.properties_panel.object_animations.plus_button.tooltip_invalid_selection");
-  return jsx(_$$K3, {
+  return jsx(IconButton, {
     "aria-label": getI18nString("slides.properties_panel.object_animations.plus_button.aria_label"),
     htmlAttributes: {
       "data-tooltip": t,
@@ -4468,7 +4468,7 @@ function lk({
     onKeyLeftOrRight: t,
     ...i
   }) {
-    let [n, r] = _$$i2({
+    let [n, r] = setupDragHandler({
       ...i
     });
     let [s, a] = useState(!1);
@@ -5201,7 +5201,7 @@ function sP({
     className: "x1cmmqis",
     children: jsx(EventShield, {
       eventListeners: ["onPointerDown", "onMouseDown"],
-      children: jsx(_$$K3, {
+      children: jsx(IconButton, {
         onClick: e,
         "aria-label": getI18nString("slides.properties_panel.slide_transitions.delete_button.aria_label"),
         htmlAttributes: {
@@ -5478,7 +5478,7 @@ function sK({
 }) {
   let t = e[ItemType.SLIDES_ANIMATION] || e[ItemType.SLIDES_OBJECT_ANIMATION];
   useSelector(e => e.mirror.selectionProperties);
-  return jsxs(_$$i3, {
+  return jsxs(TabLoop, {
     children: [jsx(VF, {
       isVisible: t,
       children: () => jsx(sR, {
@@ -5803,14 +5803,14 @@ function a_({
   let A = Gt("stateGroupSelectionInfo");
   let L = SJ();
   let P = _$$s("currentPage", "currentSelectedProperty");
-  return y[ItemType.FRAME_PRESETS] ? jsx(_$$i3, {
+  return y[ItemType.FRAME_PRESETS] ? jsx(TabLoop, {
     children: jsx(VF, {
       isVisible: !0,
       children: () => jsx(_$$nl, {
         recordingKey: "framePresetPanel"
       }, "frame-presets")
     })
-  }) : y[ItemType.PENCIL_TOOL] ? jsx(_$$i3, {
+  }) : y[ItemType.PENCIL_TOOL] ? jsx(TabLoop, {
     children: jsx(VF, {
       isVisible: !0,
       children: () => jsx(_$$q4, {
@@ -5819,7 +5819,7 @@ function a_({
         openFile: c
       }, "pencilToolPanel")
     })
-  }) : jsxs(_$$i3, {
+  }) : jsxs(TabLoop, {
     children: [0 === Object.keys(g).length && jsx(Mw, {
       panelName: ON.DESIGN
     }), jsx(_i, {
@@ -6044,7 +6044,7 @@ function ay({
     stateGroupSelectionInfo
   } = fC("stateGroupSelectionInfo");
   let D = SJ();
-  return jsxs(_$$i3, {
+  return jsxs(TabLoop, {
     children: [0 === Object.keys(g).length && jsx(Mw, {
       panelName: ON.DESIGN
     }), jsx(_i, {
@@ -6361,12 +6361,12 @@ function oN({
       },
       recordingKey: t,
       draggable: "header",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString("design_systems.create_style.text")
           })
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [jsx(_f, {
             type: d.styleType,
@@ -8022,7 +8022,7 @@ function dV({
         children: e
       })
     }) : renderI18nText("slides.properties_panel.embeddable_prototype.default_title"),
-    icon: jsx(_$$K3, {
+    icon: jsx(IconButton, {
       "aria-label": getI18nString("slides.properties_panel.embeddable_prototype.open_prototype_label"),
       onClick: n,
       htmlAttributes: {
@@ -8606,7 +8606,7 @@ function cb({
   } = BK("RESET_INTERACTIVE_WIDGET_ICON_DROPDOWN_ID");
   let s = useRef(null);
   return jsxs(Fragment, {
-    children: [jsx(_$$K3, {
+    children: [jsx(IconButton, {
       "aria-label": getI18nString("slides.properties_panel.interactive_widget.reset_label"),
       disabled: !e,
       onClick: () => toggle(),
@@ -8886,7 +8886,7 @@ function cM({
       recordingKey: "pencilToolPanel",
       openFile: p
     }, "pencilToolPanel")
-  }) : jsxs(_$$i3, {
+  }) : jsxs(TabLoop, {
     children: [jsx(VF, {
       isVisible: _$$d4(d) && !(numSelectedByType && vx(numSelectedByType, "SLIDE")) && !jsxNodeId,
       children: () => jsx(dr, {

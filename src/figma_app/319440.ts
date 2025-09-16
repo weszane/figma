@@ -16,7 +16,7 @@ import { kl, lJ } from '../905/275640';
 import { E as _$$E } from '../905/277716';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { z as _$$z } from '../905/454433';
 import { U as _$$U2 } from '../905/492359';
 import { useIsFullscreenSitesView } from '../905/561485';
@@ -924,7 +924,7 @@ export function $$to1({
         },
         'children': e.icon
       })
-    }) : jsx(_$$K, {
+    }) : jsx(IconButton, {
       'aria-label': e.getTitle(),
       'onClick': e.onClick,
       'recordingKey': generateRecordingKey($$e90, e.recordingKey),

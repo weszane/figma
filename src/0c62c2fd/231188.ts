@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { c as _$$c } from "../905/640510";
 import { _ as _$$_ } from "../905/465535";
 import { Tj } from "../figma_app/342207";
@@ -31,7 +31,7 @@ export function $$_0({
   });
   return "loaded" !== b.status ? jsx("div", {
     ...Ay.props(f && p.monochromePlaceholder),
-    children: jsx(K, {
+    children: jsx(IconButton, {
       variant: "secondary",
       disabled: !0,
       size: h,
@@ -47,7 +47,7 @@ export function $$_0({
       })
     })
   }) : jsxs(Fragment, {
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       ref: v.buttonRef,
       "aria-label": v.tooltip,
       "aria-pressed": !!b.favorite,

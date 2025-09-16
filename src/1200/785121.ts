@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { J } from "../905/799737";
-import { K } from "../905/443068";
-import { wi, jk, vo, Y9, nB } from "../figma_app/272243";
+import { DialogLabel } from "../905/799737";
+import { IconButton } from "../905/443068";
+import { DialogFooter, DialogActionStrip, DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { t } from "../905/117577";
 import { N as _$$N } from "../905/865305";
@@ -124,7 +124,7 @@ export function $$A1({
 }) {
   return jsxs("div", {
     className: gn,
-    children: [jsx(J, {
+    children: [jsx(DialogLabel, {
       className: DD,
       children: getI18nString("dev_handoff.component_browser.title")
     }), jsx(z, {
@@ -139,7 +139,7 @@ export function $$B0({
 }) {
   return jsx("div", {
     className: gn,
-    children: jsx(K, {
+    children: jsx(IconButton, {
       "aria-label": getI18nString("dev_handoff.component_browser.close_component_browser"),
       onClick: () => e(null),
       children: jsx(t, {})
@@ -158,7 +158,7 @@ function E({
 }) {
   let g = _$$e();
   let _ = getFeatureFlags().dt_component_browser_bulk_mapping && n.length > 0 ? "bulk_suggestions" : d === kt.NotSetup ? "github" : null;
-  return "bulk_suggestions" === _ ? jsxs(wi, {
+  return "bulk_suggestions" === _ ? jsxs(DialogFooter, {
     children: [jsxs("div", {
       className: KB,
       children: [jsx(_$$N, {}), jsx("span", {
@@ -166,7 +166,7 @@ function E({
           count: n.length
         })
       })]
-    }), jsx(jk, {
+    }), jsx(DialogActionStrip, {
       children: jsx(Button, {
         variant: "secondary",
         onClick: () => {
@@ -184,11 +184,11 @@ function E({
         children: getI18nString("dev_handoff.component_browser.confirm_all_matches")
       })
     })]
-  }) : "github" === _ ? jsxs(wi, {
+  }) : "github" === _ ? jsxs(DialogFooter, {
     children: [jsxs("div", {
       className: I7,
       children: [jsx(B, {}), getI18nString("dev_handoff.component_browser.github_footer_cta")]
-    }), jsx(jk, {
+    }), jsx(DialogActionStrip, {
       children: jsx(Button, {
         variant: "primary",
         onClick: () => g(),
@@ -236,14 +236,14 @@ export function $$I2({
   let P = useOpenFileLibraryKey();
   let W = P ?? _$$l("");
   let z = T_(W ?? _$$l(""));
-  return "list" == (displayedComponent && !0 === z ? "detail" : "list") ? jsxs(vo, {
-    children: [jsx(Y9, {
+  return "list" == (displayedComponent && !0 === z ? "detail" : "list") ? jsxs(DialogContents, {
+    children: [jsx(DialogHeader, {
       children: jsx($$A1, {
         componentCounts,
         dropdownFilter,
         setDropdownFilter
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       padding: 0,
       className: O,
       children: jsx(C, {
@@ -279,12 +279,12 @@ export function $$I2({
       githubStatus: n,
       entrypoint: e
     })]
-  }) : displayedComponent ? jsxs(vo, {
-    children: [jsx(Y9, {
+  }) : displayedComponent ? jsxs(DialogContents, {
+    children: [jsx(DialogHeader, {
       children: jsx($$B0, {
         onSelectComponent: r
       })
-    }), jsx(nB, {
+    }), jsx(DialogBody, {
       padding: 0,
       className: O,
       children: jsx(N, {

@@ -28,7 +28,7 @@ import { postUserFlag } from "../905/985254";
 import { oW } from "../figma_app/297957";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { _Z, eC, $1 } from "../905/539601";
 import { ck as _$$ck } from "../905/87821";
 import { NE } from "../3276/373312";
@@ -495,7 +495,7 @@ export function $$ex0(e) {
   let C = useSelector(e => e.selectedView);
   let w = x?.created_at;
   let j = _$$A(w).add(14, "day").isSameOrAfter(_$$A());
-  let k = _$$k2();
+  let k = isUserNotLoggedInAndEditorSupported();
   let P = WN();
   let T = useMemo(() => "prototype" === C.view ? void 0 : AppStateTsApi, [C.view]);
   let M = getObservableValue(T?.uiState().isRecovery, !1);

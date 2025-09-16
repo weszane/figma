@@ -6,7 +6,7 @@ import { debug, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNullish } from "../figma_app/95419";
 import { Button } from "../905/521428";
 import { d as _$$d } from "../905/976845";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { k as _$$k } from "../905/443820";
 import { F as _$$F } from "../905/634016";
 import { D as _$$D } from "../905/555681";
@@ -751,7 +751,7 @@ function eG({
                 },
                 children: jsx(_$$l, {}),
                 "aria-label": getI18nString("design_systems.styles.tooltips.library")
-              }), ("FILL" === r || "STROKE" === r) && N && jsx(_$$K, {
+              }), ("FILL" === r || "STROKE" === r) && N && jsx(IconButton, {
                 "aria-label": S ? getI18nString("design_systems.styles.tooltips.show_as_grid") : getI18nString("design_systems.styles.tooltips.show_as_list"),
                 recordingKey: generateRecordingKey(e, "toggleStylePickerListLayout"),
                 onClick: N,
@@ -763,7 +763,7 @@ function eG({
                 children: S ? jsx(_$$E, {}) : jsx(_$$Z, {})
               }), !O && jsx("span", {
                 className: "style_picker--createStyleButton--UcGo9",
-                children: jsx(_$$K, {
+                children: jsx(IconButton, {
                   "aria-label": getI18nString("design_systems.styles.tooltips.create"),
                   recordingKey: generateRecordingKey(e, "addStyleButton"),
                   disabled: !L || eb && !eT,
@@ -775,7 +775,7 @@ function eG({
                   },
                   children: jsx(_$$e, {})
                 })
-              }), jsx(_$$K, {
+              }), jsx(IconButton, {
                 "aria-label": getI18nString("common.close"),
                 onClick: () => ef?.(),
                 children: jsx(_$$L, {})

@@ -5,7 +5,7 @@ import { isNotNullish, isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
-import { nB, r1, wi, jk } from "../figma_app/272243";
+import { DialogBody, DialogHiddenTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
 import m from "classnames";
@@ -170,7 +170,7 @@ function J(e) {
           onFailure: ei
         });
       },
-      children: [jsxs(nB, {
+      children: [jsxs(DialogBody, {
         padding: {
           top: 40,
           left: 24,
@@ -193,7 +193,7 @@ function J(e) {
                 imgUrl: p.imgUrl
               }
             })
-          }), jsx(r1, {
+          }), jsx(DialogHiddenTitle, {
             children: Q
           }), jsx("div", {
             className: _$$s.textHeadingMedium.$,
@@ -291,8 +291,8 @@ function J(e) {
             children: X
           })
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "secondary",
             onClick: e.onClose,

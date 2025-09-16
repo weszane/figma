@@ -63,7 +63,7 @@ import { Be } from "../figma_app/920435";
 import { FRequestsStr } from "../905/384551";
 import { DashboardSection } from "../figma_app/650409";
 import { DashboardSections } from "../905/548208";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { t as _$$t2 } from "../905/117577";
 import { Wi } from "../figma_app/162641";
 import { Xg } from "../1556/751556";
@@ -340,7 +340,7 @@ function eC() {
   let a = getI18nString("admin_settings.sidebar.back_to_files");
   return jsx("span", {
     "data-onboarding-key": lR,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: t,
       htmlAttributes: {
         "data-tooltip": a,

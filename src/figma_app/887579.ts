@@ -2,7 +2,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { k } from "../905/443820";
 import { LinkPrimitive } from "../figma_app/496441";
@@ -118,7 +118,7 @@ function N({
     children: r
   });
   let b = t ?? getI18nString("common.loading");
-  return "icon" === a ? jsx(K, {
+  return "icon" === a ? jsx(IconButton, {
     onClick: f,
     disabled: p,
     "aria-label": getI18nString("inspect_panel.images.download_with_type", {

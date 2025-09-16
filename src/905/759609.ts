@@ -3,7 +3,7 @@ import { useCallback, useMemo, memo, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ButtonLarge } from "../905/521428";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { l as _$$l } from "../905/479687";
 import c, { C as _$$C } from "../905/520159";
 import { m as _$$m } from "../905/367152";
@@ -266,7 +266,7 @@ function q({
     className: "review_updates_modal--headerContainer--jSwdB",
     children: [jsx("div", {
       className: "review_updates_modal--left--W88Yj",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("design_systems.updates.back_to_all_updates"),
         onClick: () => {
           o(UX(LibraryTabEnum.UPDATES, s));
@@ -352,12 +352,12 @@ function Z({
             children: [jsx("div", {
               children: jsxs("div", {
                 className: "review_updates_modal--instanceNavigationWrapper--bNZTc",
-                children: [jsx(_$$K, {
+                children: [jsx(IconButton, {
                   "aria-label": getI18nString("design_systems.updates.previous_instance"),
                   disabled: !previousHandler,
                   onClick: previousHandler ?? void 0,
                   children: jsx(_$$C, {})
-                }), jsx(_$$K, {
+                }), jsx(IconButton, {
                   "aria-label": getI18nString("design_systems.updates.next_instance"),
                   disabled: !nextHandler,
                   onClick: nextHandler ?? void 0,
@@ -370,7 +370,7 @@ function Z({
                 totalNumItems: numCurrentAssetInstances
               })
             }), jsx("div", {
-              children: jsx(_$$K, {
+              children: jsx(IconButton, {
                 disabled: !navigateToCurrentInstance,
                 "aria-label": getI18nString("design_systems.updates.go_to_current_instance"),
                 onClick: navigateToCurrentInstance ?? void 0,

@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo, useState, useCallback, useRef, PureComponent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clamp } from "../figma_app/492908";
-import { i as _$$i } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { SceneGraphHelpers, PluginHelpers, figmaScopeBindings } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
@@ -138,7 +138,7 @@ function I({
   useEffect(() => {
     B(Y);
   }, [B, Y]);
-  let [, U] = _$$i({
+  let [, U] = setupDragHandler({
     onDrag(e) {
       K(e.clientY);
     }

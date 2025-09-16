@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef } from "react";
 import { A as _$$A } from "../vendor/648136";
 import { Y1 } from "../vendor/891888";
-import { i as _$$i } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { atom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { dP } from "../figma_app/119475";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -127,7 +127,7 @@ export function $$A0({
   let [p, _] = useAtomValueAndSetter($$T1);
   let m = Xr(y);
   let [S, A] = useState(200);
-  let [, x] = _$$i({
+  let [, x] = setupDragHandler({
     onDrag(e) {
       A(window.innerHeight - e.clientY);
     }

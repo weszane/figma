@@ -4,7 +4,7 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { t as _$$t } from "../905/150656";
 import { d as _$$d } from "../905/976845";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J as _$$J } from "../905/125993";
 import { A as _$$A } from "../905/891805";
 import { A as _$$A2 } from "../905/251970";
@@ -55,7 +55,7 @@ import { ButtonWide, Button } from "../905/521428";
 import { A as _$$A3 } from "../905/920165";
 import { hE, oq, r1, qj, vo, Y9, nB } from "../figma_app/272243";
 import { bL as _$$bL } from "../905/911410";
-import { P as _$$P } from "../905/143421";
+import { ScrollContainer } from "../905/143421";
 import { f as _$$f } from "../905/335032";
 import { h as _$$h } from "../905/513745";
 import { N as _$$N } from "../905/568293";
@@ -1003,7 +1003,7 @@ function tW({
     })]
   }) : jsxs("div", {
     className: l ? "type_settings_tab_header--tabsHeader--HybJs type_settings--tabsHeader--AWpX1" : tB,
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       htmlAttributes: {
         "data-tooltip": getI18nString("general.back"),
         "data-tooltip-type": KindEnum.TEXT
@@ -2739,7 +2739,7 @@ function t6(e) {
           flexDirection: "column"
         },
         scrolling: getFeatureFlags().fpl_window_scroll_container ? void 0 : "none",
-        children: getFeatureFlags().fpl_window_scroll_container ? ii : jsx(_$$P, {
+        children: getFeatureFlags().fpl_window_scroll_container ? ii : jsx(ScrollContainer, {
           children: ii
         })
       })]
@@ -3364,7 +3364,7 @@ class iS extends PureComponent {
               textContentBoundAsset: this.props.textContentBoundAsset,
               recordingKey: this.props.recordingKey
             }), this.renderAdvancedTypePicker(this.getIsStyleConsumer()), u && jsx(oE, {
-              closeButton: jsx(_$$K, {
+              closeButton: jsx(IconButton, {
                 onClick: this.dismissFontAgentPrompt,
                 "aria-label": getI18nString("general.close"),
                 children: jsx(_$$A2, {})

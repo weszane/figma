@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { J } from "../905/614223";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
@@ -115,7 +115,7 @@ let $$L0 = registerModal(function (e) {
   let [t, i] = useState("");
   let {
     color
-  } = G();
+  } = useTheme();
   let c = useDispatch();
   let u = U("nux_seat_request_confirmation_modal");
   let A = selectCurrentFile();

@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, Jn, nB, Wk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogCloseButton, DialogBody, DialogCustomContents } from "../figma_app/272243";
 import { bL as _$$bL } from "../905/246123";
 import { fI } from "../905/201252";
 import { fh } from "../905/127493";
@@ -465,12 +465,12 @@ function ei({
   });
   let s = jsx(_$$bL2, {
     manager,
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: getI18nString("figmake.design_system_imports.library_extraction_theming_progress.re_extract.title")
-        }), jsx(Jn, {})]
-      }), jsx(nB, {
+        }), jsx(DialogCloseButton, {})]
+      }), jsx(DialogBody, {
         children: jsxs("div", {
           className: "x78zum5 xdt5ytf x1usb9k9 xw5ewwj x1m7nem5",
           children: [jsx("span", {
@@ -739,7 +739,7 @@ let $$ep0 = registerModal(function (e) {
     manager: t,
     width: "lg",
     height: "fullscreen",
-    children: jsx(Wk, {
+    children: jsx(DialogCustomContents, {
       children: jsx(_$$bL, {
         style: {
           height: "100%"

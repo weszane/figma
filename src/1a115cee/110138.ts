@@ -6,7 +6,7 @@ import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { useModalManager } from "../905/437088";
 import x from "../vendor/656470";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -227,15 +227,15 @@ function V({
   return jsx(ModalRootComponent, {
     manager: e,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: m
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: r
-      }), (k || L || F) && jsxs(wi, {
-        children: [k, (L || F) && jsxs(jk, {
+      }), (k || L || F) && jsxs(DialogFooter, {
+        children: [k, (L || F) && jsxs(DialogActionStrip, {
           children: [L, F]
         })]
       })]
@@ -292,15 +292,15 @@ function z(e) {
     return jsx(ModalRootComponent, {
       width: "md",
       manager: a,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: s
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: t
-        }), jsx(wi, {
-          children: jsx(jk, {
+        }), jsx(DialogFooter, {
+          children: jsx(DialogActionStrip, {
             children: n
           })
         })]
@@ -350,15 +350,15 @@ function z(e) {
     return jsx(ModalRootComponent, {
       manager: a,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: o
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: r
-        }), jsxs(wi, {
-          children: [t, jsxs(jk, {
+        }), jsxs(DialogFooter, {
+          children: [t, jsxs(DialogActionStrip, {
             children: [n, i]
           })]
         })]

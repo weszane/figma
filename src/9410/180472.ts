@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, memo, useRef, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A } from "../905/251970";
 import { WhiteboardVotingCppBindings, SessionStatus } from "../figma_app/763686";
 import { x as _$$x } from "../vendor/194682";
@@ -320,7 +320,7 @@ let F = memo(function ({
             initial: !1,
             animate: i,
             variants: J,
-            children: "selected" === i && jsx(_$$K, {
+            children: "selected" === i && jsx(IconButton, {
               onClick: e => {
                 e.stopPropagation();
                 p();

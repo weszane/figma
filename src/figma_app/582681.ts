@@ -8,7 +8,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { d as _$$d } from "../905/49800";
 import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
-import { G as _$$G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { f as _$$f, h as _$$h } from "../905/693155";
@@ -38,7 +38,7 @@ export let $$C0 = registerModal(function ({
     enhancedContrast,
     color,
     brand
-  } = _$$G();
+  } = useTheme();
   let j = useCallback(() => {
     D === FFileType.WHITEBOARD && F2.focusCustomCanvasFocusElement();
     t();

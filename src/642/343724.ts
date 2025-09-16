@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { bL, Y9, JU, X0, UC } from "../figma_app/57171";
 import { ButtonPrimitive } from "../905/632989";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/257420";
 import { _ as _$$_ } from "../905/821768";
 import { _ as _$$_2 } from "../905/862468";
@@ -139,7 +139,7 @@ function A(e) {
       recordingKey: e.recordingKey
     });
   }
-  return s ? jsx(K, {
+  return s ? jsx(IconButton, {
     "aria-label": formatI18nMessage(i),
     onClick: l,
     recordingKey: generateRecordingKey(e.recordingKey, i),

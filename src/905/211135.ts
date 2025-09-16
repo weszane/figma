@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
-import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
 import { h as _$$h } from "../905/207101";
@@ -33,12 +33,12 @@ export let $$y0 = registerModal(function (e) {
   }), f) ? jsx(ModalRootComponent, {
     manager: v,
     width: "lg",
-    children: hasPasswordOrSSO(f) ? jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: hasPasswordOrSSO(f) ? jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("auth.two-factor-setup.two_factor_recovery_codes")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: (() => {
           if (!f.backup_codes) return jsx("div", {
             children: renderI18nText("auth.two-factor-setup.please_wait")
@@ -56,7 +56,7 @@ export let $$y0 = registerModal(function (e) {
             });
           }
         })()
-      }), jsx(wi, {
+      }), jsx(DialogFooter, {
         children: jsxs("div", {
           className: Hx,
           children: [jsx(Button, {

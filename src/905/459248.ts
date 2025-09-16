@@ -7,7 +7,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { Button, ButtonWide } from "../905/521428";
 import { k as _$$k } from "../905/443820";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
 import { O as _$$O } from "../905/969533";
@@ -108,7 +108,7 @@ function ev(e) {
         children: e.content
       }), jsx("div", {
         className: "missing_fonts_modal_secondary_banner_modal--closeButtonContainer--1Wt9U",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick: e.onClose,
           "aria-label": getI18nString("general.close"),
           "data-testid": "modal-close-button",
@@ -658,7 +658,7 @@ function eX({
   });
   let O = useMemo(() => jsx("div", {
     className: "missing_fonts_modal--selectWithSameFamilyIcon--BvyA9",
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: e => {
         e.stopPropagation();
         b(x?.family, m.missingFonts.filter(e => e.family === x?.family).map(e => e.style));
@@ -751,7 +751,7 @@ function eX({
               })
             }), !E && jsx("div", {
               className: "missing_fonts_modal--selectWithSameStyleIcon--mXfcb",
-              children: jsx(_$$K, {
+              children: jsx(IconButton, {
                 onClick: t => {
                   t.stopPropagation();
                   b(e.family, e.style);

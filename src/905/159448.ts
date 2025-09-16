@@ -1,7 +1,7 @@
 import { rw } from "../905/54367";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f } from "../905/54715";
 import { H } from "../905/222445";
 import { J } from "../905/125993";
@@ -28,7 +28,7 @@ export function $$p0(e) {
       className: g,
       children: [jsxs("div", {
         className: "mobile_tool_bar--toolBarMobileLeftSide--nGw8A",
-        children: [jsx(K, {
+        children: [jsx(IconButton, {
           onClick: () => {
             i ? t(_I()) : t(PY());
           },
@@ -47,7 +47,7 @@ export function $$p0(e) {
         children: e.center
       }), p > 1 && !e.hideToolBarOnMobile && jsxs("div", {
         className: "mobile_tool_bar--toolBarRightSideMobile--uQfL9",
-        children: [jsx(K, {
+        children: [jsx(IconButton, {
           onClick: e => e.preventDefault(),
           "aria-label": getI18nString("mobile_tool_bar.more_options"),
           htmlAttributes: {

@@ -4,7 +4,7 @@ import { xw, TU } from "../905/585727";
 import { y1 } from "../905/869092";
 import { lQ } from "../905/934246";
 import { b as _$$b, bL, mc, hE, q7 } from "../figma_app/860955";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { bL as _$$bL, c$ } from "../905/575478";
 import { q as _$$q } from "../905/932270";
@@ -109,7 +109,7 @@ export function $$ec2({
     await Promise.allSettled(n.map(e => _$$z(e, i)));
     e.current && (e.current.value = "");
   }, [e, a]);
-  let m = jsx(_$$K, {
+  let m = jsx(IconButton, {
     onClick: () => e.current?.click(),
     "aria-label": r,
     "data-tooltip-show-above": !0,

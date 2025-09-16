@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
 import { ButtonSecondary } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
@@ -15,12 +15,12 @@ export function $$c0() {
   return jsx(ModalRootComponent, {
     manager: e,
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("collaboration.branching.file_out_of_memory")
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("div", {
           children: renderI18nText("collaboration.branching.closing_other_tabs_and_reloading_figma_may_reduce_browser_memory_and_allow_you_to_continue_reviewing_and_merging_this_branch")
         }), jsx("div", {
@@ -34,8 +34,8 @@ export function $$c0() {
             })
           })
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(ButtonSecondary, {
             className: "memory_warning--reloadButton---KrxB",
             onClick: () => customHistory.reload("BranchMemoryWarning"),

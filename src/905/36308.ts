@@ -186,7 +186,7 @@ import { j6 } from '../figma_app/243025';
 import { W7 } from '../figma_app/251115';
 import { Sd } from '../figma_app/253220';
 import { qd, YQ } from '../figma_app/257779';
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { gn } from '../figma_app/322845';
 import { tz as _$$tz, Kx, lk, Lw, pe, Pq, rx, SV } from '../figma_app/342355';
 import { toggleFigmentDebugger } from '../figma_app/347406';
@@ -3332,12 +3332,12 @@ function iY(e) {
     manager: t,
     width: 'lg',
     height: 'dynamic',
-    children: [jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: [jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('auto_suggest.eval.title')
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsxs('div', {
           children: [jsx(Label, {
             htmlFor: 'config',
@@ -3352,8 +3352,8 @@ function iY(e) {
             disabled: b
           })]
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             onClick: g,
             disabled: b,
@@ -3361,12 +3361,12 @@ function iY(e) {
           })
         })
       })]
-    }), jsx('br', {}), s !== 0 && jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    }), jsx('br', {}), s !== 0 && jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('auto_suggest.eval.results.title')
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsxs('div', {
           children: [jsxs('div', {
             className: 'x78zum5 x1q0g3np x167g77z x6xwguf',
@@ -3404,8 +3404,8 @@ function iY(e) {
             })]
           })]
         }), jsx('br', {})]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: f,
             disabled: b || !u,
@@ -3579,11 +3579,11 @@ function no(e) {
     manager: l,
     children: jsxs(ModalFormContents, {
       onSubmit: c,
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: 'Set missing font on selected text'
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('p', {
           children: 'Font family'
         }), jsx(jT, {
@@ -3606,8 +3606,8 @@ function no(e) {
           placeholder: 'Font style',
           required: !0
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: 'primary',
             type: 'submit',
@@ -3790,15 +3790,15 @@ let nS = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: n,
     width: 'md',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('cms_file_operations_import_export.save_without_cms')
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText('cms_file_operations_import_export.local_copies_of_sites_files')
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: onClose,

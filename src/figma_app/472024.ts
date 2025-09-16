@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, memo, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
@@ -174,7 +174,7 @@ function j({
     width: i,
     title: jsxs("div", {
       className: _$$s.pl4.flex.flexRow.justifyBetween.itemsCenter.gap4.$,
-      children: [jsx(K, {
+      children: [jsx(IconButton, {
         onClick: () => {
           r(popModalStack());
         },

@@ -7,7 +7,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { B as _$$B, N as _$$N } from "../figma_app/659940";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { v as _$$v } from "../figma_app/354567";
-import { F as _$$F } from "../figma_app/564183";
+import { isUserNotLoggedInAndDesignEditor } from "../figma_app/564183";
 import { getRepoByIdAlt, isBranchAlt } from "../905/760074";
 import { ck } from "../905/87821";
 import { Kx } from "../figma_app/546509";
@@ -664,7 +664,7 @@ export function $$ek0() {
   let I = !b && r.enabled;
   let S = Kx();
   let v = _$$v();
-  let A = _$$F();
+  let A = isUserNotLoggedInAndDesignEditor();
   let x = useIsSelectedFigmakeFullscreen();
   return (useEffect(() => {
     v();

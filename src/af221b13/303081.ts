@@ -128,7 +128,7 @@ import { rO } from "../figma_app/530167";
 import { A as _$$A12 } from "../svg/927263";
 import { u as _$$u2 } from "../5430/521178";
 import { $ as _$$$2 } from "../905/302575";
-import { G as _$$G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { oW } from "../905/675859";
 import { n as _$$n2 } from "../5430/496973";
 import { T as _$$T } from "../5430/373013";
@@ -3252,7 +3252,7 @@ function i7({
   title: t,
   subtitle: i
 }) {
-  let n = _$$G();
+  let n = useTheme();
   let r = useRef(null);
   let o = e === FileTypeEnum.SITES;
   let c = e === FileTypeEnum.COOPER;

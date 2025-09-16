@@ -1,142 +1,306 @@
-import { useRef, useState } from "react";
-import { A as _$$A } from "../vendor/723372";
-import { preventEvent, isEventTargetCurrent, stopEventPropagation, EVENT_CAPTURE_CLASS } from "../905/955878";
-import { l as _$$l } from "../905/490996";
-import { mergeProps } from "../905/475481";
-import { eB, GC } from "../905/914656";
-import { f2, Re, TX, VO, bl, S8, WQ } from "../905/268491";
-let c = {
+import classNames from 'classnames'
+import { useRef, useState } from 'react'
+import {
+  addPoints,
+  distanceFromOrigin,
+  lineBoundsIntersection,
+  normalizePoint,
+  originPoint,
+  pointFromMouseEvent,
+  subtractPoints,
+} from '../905/268491'
+import { mergeProps } from '../905/475481'
+import { l as noop } from '../905/490996'
+import { hasSelection, isTextInputWithSelection } from '../905/914656'
+import {
+  EVENT_CAPTURE_CLASS,
+  isEventTargetCurrent,
+  preventEvent,
+  stopEventPropagation,
+} from '../905/955878'
+
+/**
+ * Pointer dead zone distances by pointer type.
+ * @original c
+ */
+const POINTER_DEAD_ZONE: Record<string, number> = {
   mouse: 8,
   pen: 16,
-  touch: 16
-};
-function u(e) {
-  return c[e] ?? c.mouse;
+  touch: 16,
 }
-var p = "use-drag__draggingBody__Nz68k";
-export let $$m1 = $$h0;
-export function $$h0(e) {
-  let t = useRef(f2);
-  let i = useRef(null);
-  let c = useRef(null);
-  let m = useRef(null);
-  let h = useRef(0);
-  let g = useRef(_$$l);
-  let [f, _] = useState(!1);
-  if (e.disabled) return [!1, (...e) => mergeProps(...e)];
-  function A(e) {
-    t.current = e(t.current);
+
+/**
+ * Returns the dead zone distance for a given pointer type.
+ * @param pointerType
+ * @returns number
+ * @original u
+ */
+function getDeadZoneDistance(pointerType: string): number {
+  return POINTER_DEAD_ZONE[pointerType] ?? POINTER_DEAD_ZONE.mouse
+}
+
+const DRAGGING_BODY_CLASS = 'use-drag__draggingBody__Nz68k'
+
+/**
+ * Hook for drag handling logic.
+ * @param props
+ * @returns [isDragging, getDragProps]
+ * @original $$h0
+ */
+export function setupDragHandler(props: {
+  disabled?: boolean
+  deadZone?: boolean
+  customButtonCheck?: boolean
+  onBeforeDrag?: (event: PointerEvent) => boolean | Element | void
+  onDragStart?: (event: PointerEvent, helpers: { registerAbortSignal: (signal: AbortSignal) => void }) => void
+  onDrag?: (event: PointerEvent & { delta: { x: number, y: number } }, helpers: { updateStart: (fn: (pt: { x: number, y: number }) => void) => void }) => void
+  onDragEnd?: (event: Partial<PointerEvent> & { delta?: { x: number, y: number }, cancelled?: boolean }) => void
+}) {
+  // Drag start point
+  const startPointRef = useRef(originPoint)
+  // Current pointer id
+  const pointerIdRef = useRef<number | null>(null)
+  // Element with pointer capture
+  const pointerCaptureRef = useRef<Element | null>(null)
+  // Element for dead zone logic
+  const deadZoneElementRef = useRef<Element | null>(null)
+  // Drag start timestamp
+  const dragStartTimeRef = useRef(0)
+  // Drag end handler reference
+  const dragEndHandlerRef = useRef<(event?: PointerEvent | null, cancelled?: boolean) => void>(noop)
+  // Dragging state
+  const [isDragging, setDragging] = useState(false)
+
+  if (props.disabled) {
+    return [false, (...args: any[]) => mergeProps(...args)] as const
   }
-  function y(e) {
-    e.addEventListener("abort", () => g.current(null, !0));
+
+  /**
+   * Updates the drag start point.
+   * @param updater
+   * @original A
+   */
+  const updateStartPoint = (updater: (pt: { x: number, y: number }) => any) => {
+    startPointRef.current = updater(startPointRef.current)
   }
-  function b(e) {
-    return Re(TX(e), t.current);
+
+  /**
+   * Registers an abort signal for drag cancellation.
+   * @param signal
+   * @original y
+   */
+  const registerAbortSignal = (signal: AbortSignal) => {
+    signal.addEventListener('abort', () => dragEndHandlerRef.current(null, true))
   }
-  function v(t, i) {
-    _(!0);
-    c.current = i;
-    i.setPointerCapture(t.pointerId);
-    i.setAttribute("data-pointer-capture", "");
-    document.body.classList.add(p);
-    "mouse" !== t.pointerType && document.addEventListener("touchmove", preventEvent, {
-      passive: !1
-    });
-    e.onDragStart?.(t, {
-      registerAbortSignal: y
-    });
-    let n = b(t);
-    e.onDrag?.(Object.assign(t, {
-      delta: n
-    }), {
-      updateStart: A
-    });
+
+  /**
+   * Calculates the drag delta from the start point.
+   * @param event
+   * @returns delta point
+   * @original b
+   */
+  const getDragDelta = (event: PointerEvent) =>
+    subtractPoints(pointFromMouseEvent(event), startPointRef.current)
+
+  /**
+   * Initiates drag logic.
+   * @param event
+   * @param target
+   * @original v
+   */
+  const startDrag = (event: PointerEvent, target: Element) => {
+    setDragging(true)
+    pointerCaptureRef.current = target
+    target.setPointerCapture(event.pointerId)
+    target.setAttribute('data-pointer-capture', '')
+    document.body.classList.add(DRAGGING_BODY_CLASS)
+    if (event.pointerType !== 'mouse') {
+      document.addEventListener('touchmove', preventEvent, { passive: false })
+    }
+    props.onDragStart?.(event, { registerAbortSignal })
+    const delta = getDragDelta(event)
+    props.onDrag?.(Object.assign(event, { delta }), { updateStart: updateStartPoint })
   }
-  function I(t, n) {
-    if (!t || t.pointerId === i.current) {
-      if (n && m.current) {
-        m.current = null;
-        i.current = null;
-        return;
+
+  /**
+   * Ends drag logic.
+   * @param event
+   * @param cancelled
+   * @original I
+   */
+  const endDrag = (event?: PointerEvent | null, cancelled?: boolean) => {
+    if (!event || event.pointerId === pointerIdRef.current) {
+      if (cancelled && deadZoneElementRef.current) {
+        deadZoneElementRef.current = null
+        pointerIdRef.current = null
+        return
       }
-      if (c.current?.removeAttribute("data-pointer-capture"), c.current = null, document.removeEventListener("touchmove", preventEvent), document.body.classList.remove(p), n || window.getSelection()?.empty(), _(!1), i.current = null, n && !t) e.onDragEnd?.({
-        cancelled: n
-      });else {
-        let i = b(t);
-        e.onDragEnd?.(Object.assign(t, {
-          delta: i,
-          cancelled: n
-        }));
+      pointerCaptureRef.current?.removeAttribute('data-pointer-capture')
+      pointerCaptureRef.current = null
+      document.removeEventListener('touchmove', preventEvent)
+      document.body.classList.remove(DRAGGING_BODY_CLASS)
+      if (!cancelled)
+        window.getSelection()?.empty()
+      setDragging(false)
+      pointerIdRef.current = null
+      if (cancelled && !event) {
+        props.onDragEnd?.({ cancelled })
+      }
+      else {
+        const delta = event ? getDragDelta(event) : undefined
+        props.onDragEnd?.(Object.assign(event ?? {}, { delta, cancelled }))
       }
     }
   }
-  function E(i) {
-    if (!e.deadZone || !m.current) return !1;
-    let n = "pointermove" === i.type;
-    let r = b(i);
-    let a = VO(r) < u(i.pointerType);
-    if (n && a) return !0;
-    if (0 === i.buttons || "mouse" !== i.pointerType && performance.now() - h.current > 900 || eB(i.currentTarget) || GC(i.target)) {
-      I(i, !0);
-      return !0;
+
+  /**
+   * Handles dead zone logic and drag initiation.
+   * @param event
+   * @returns boolean
+   * @original E
+   */
+  const handleDeadZone = (event: PointerEvent): boolean => {
+    if (!props.deadZone || !deadZoneElementRef.current)
+      return false
+    const isPointerMove = event.type === 'pointermove'
+    const delta = getDragDelta(event)
+    const isInDeadZone = distanceFromOrigin(delta) < getDeadZoneDistance(event.pointerType)
+    if (isPointerMove && isInDeadZone)
+      return true
+    if (
+      event.buttons === 0
+      || (event.pointerType !== 'mouse' && performance.now() - dragStartTimeRef.current > 900)
+      || hasSelection(event.currentTarget as HTMLElement)
+      || isTextInputWithSelection(event.target as HTMLElement)
+    ) {
+      endDrag(event, true)
+      return true
     }
-    if (a) {
-      let e = bl(t.current, TX(i), i.currentTarget.getBoundingClientRect());
-      if (!e) return !0;
-      t.current = e;
-    } else {
-      let e = S8(r, u(i.pointerType));
-      t.current = WQ(t.current, e);
+    if (isInDeadZone) {
+      const intersection = lineBoundsIntersection(
+        startPointRef.current,
+        pointFromMouseEvent(event),
+        (event.currentTarget as Element).getBoundingClientRect(),
+      )
+      if (!intersection)
+        return true
+      startPointRef.current = intersection
     }
-    v(i, m.current);
-    m.current = null;
-    return !0;
+    else {
+      const normalized = normalizePoint(delta, getDeadZoneDistance(event.pointerType))
+      startPointRef.current = addPoints(startPointRef.current, normalized)
+    }
+    startDrag(event, deadZoneElementRef.current)
+    deadZoneElementRef.current = null
+    return true
   }
-  g.current = I;
-  let x = {
-    onPointerDown(n) {
-      if (null != i.current || !e.customButtonCheck && 0 !== n.button || n.target.hasAttribute("data-temporary-fpl-no-drag")) return;
-      let r = e.onBeforeDrag?.(n);
-      if (!1 === r) return;
-      n.stopPropagation();
-      t.current = TX(n);
-      i.current = n.pointerId;
-      h.current = performance.now();
-      let s = r instanceof Element ? r : n.currentTarget;
-      if (e.deadZone && !isEventTargetCurrent(n) && !n.target.hasAttribute("data-no-dead-zone")) {
-        m.current = s;
-        return;
+
+  dragEndHandlerRef.current = endDrag
+
+  /**
+   * Drag event handlers and props.
+   * @original x
+   */
+  const dragProps = {
+    /**
+     * Pointer down event handler.
+     * @original onPointerDown
+     */
+    onPointerDown(event: PointerEvent) {
+      if (
+        pointerIdRef.current != null
+        || (!props.customButtonCheck && event.button !== 0)
+        || (event.target as Element).hasAttribute('data-temporary-fpl-no-drag')
+      ) {
+        return
       }
-      window.getSelection()?.empty();
-      v(n, s);
+      const beforeDragResult = props.onBeforeDrag?.(event)
+      if (beforeDragResult === false)
+        return
+      event.stopPropagation()
+      startPointRef.current = pointFromMouseEvent(event)
+      pointerIdRef.current = event.pointerId
+      dragStartTimeRef.current = performance.now()
+      const dragTarget
+        = beforeDragResult instanceof Element ? beforeDragResult : (event.currentTarget as Element)
+      if (
+        props.deadZone
+        && !isEventTargetCurrent(event)
+        && !(event.target as Element).hasAttribute('data-no-dead-zone')
+      ) {
+        deadZoneElementRef.current = dragTarget
+        return
+      }
+      window.getSelection()?.empty()
+      startDrag(event, dragTarget)
     },
-    onPointerMove(t) {
-      if (t.pointerId !== i.current || E(t)) return;
-      let n = b(t);
-      e.onDrag?.(Object.assign(t, {
-        delta: n
-      }), {
-        updateStart: A
-      });
+    /**
+     * Pointer move event handler.
+     * @original onPointerMove
+     */
+    onPointerMove(event: PointerEvent) {
+      if (event.pointerId !== pointerIdRef.current || handleDeadZone(event))
+        return
+      const delta = getDragDelta(event)
+      props.onDrag?.(Object.assign(event, { delta }), { updateStart: updateStartPoint })
     },
-    onPointerLeave(e) {
-      e.pointerId === i.current && E(e);
+    /**
+     * Pointer leave event handler.
+     * @original onPointerLeave
+     */
+    onPointerLeave(event: PointerEvent) {
+      if (event.pointerId === pointerIdRef.current)
+        handleDeadZone(event)
     },
-    onPointerUp(t) {
-      I(t, !!(e.deadZone && m.current));
+    /**
+     * Pointer up event handler.
+     * @original onPointerUp
+     */
+    onPointerUp(event: PointerEvent) {
+      endDrag(event, !!(props.deadZone && deadZoneElementRef.current))
     },
-    onLostPointerCapture(t) {
-      "touch" !== t.pointerType && document.pointerLockElement !== t.target && I(t, !!(e.deadZone && m.current));
+    /**
+     * Lost pointer capture event handler.
+     * @original onLostPointerCapture
+     */
+    onLostPointerCapture(event: PointerEvent) {
+      if (
+        event.pointerType !== 'touch'
+        && document.pointerLockElement !== event.target
+      ) {
+        endDrag(event, !!(props.deadZone && deadZoneElementRef.current))
+      }
     },
-    onPointerCancel(e) {
-      I(e, !0);
+    /**
+     * Pointer cancel event handler.
+     * @original onPointerCancel
+     */
+    onPointerCancel(event: PointerEvent) {
+      endDrag(event, true)
     },
+    /**
+     * Mouse down event handler (stops propagation).
+     * @original onMouseDown
+     */
     onMouseDown: stopEventPropagation,
-    className: _$$A("use-drag__base__YCEp1", EVENT_CAPTURE_CLASS, {
-      "use-drag__dragging__ZATZH": f
-    })
-  };
-  return [f, (...e) => mergeProps(x, ...e)];
+    /**
+     * Drag class names.
+     * @original className
+     */
+    className: classNames(
+      'use-drag__base__YCEp1',
+      EVENT_CAPTURE_CLASS,
+      { 'use-drag__dragging__ZATZH': isDragging },
+    ),
+  }
+
+  return [
+    isDragging,
+    (...args: any[]) => mergeProps(dragProps, ...args),
+  ] as const
 }
-export const M = $$h0;
-export const i = $$m1;
+
+// Export aliases for backward compatibility
+export const YJ = setupDragHandler // $$h0
+export const M = setupDragHandler // M
+export const i = setupDragHandler // i

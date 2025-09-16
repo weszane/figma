@@ -70,6 +70,7 @@
     "sentry-javascript": "^1.0.3",
     "statsig-js": "^5.1.0",
     "statsig-react": "^2.1.0",
+    "tabbable": "^6.2.0",
     "use-debounce": "^10.0.6",
     "uuid": "^13.0.0",
     "zod": "^3.0.0"

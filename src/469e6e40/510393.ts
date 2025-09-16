@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { xf } from "../figma_app/416935";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -44,12 +44,12 @@ let $$w0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: t,
       width: 341,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString(e.isOrg ? "payments.org_change_billing_contact" : "payments.pro_change_billing_contact")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           children: [jsx("div", {
             className: _$$s.colorTextSecondary.mb8.font11.$,
             children: renderI18nText(e.isOrg ? "payments.org_enter_an_email_address" : "payments.pro_enter_an_email_address")
@@ -64,8 +64,8 @@ let $$w0 = registerModal(function (e) {
             value: a,
             onChange: e => d(e.target.value)
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               variant: "secondary",
               onClick: e.onClose,

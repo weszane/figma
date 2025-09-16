@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { getI18nString } from "../905/303541";
 import { hideDropdownAction, showDropdownThunk } from "../905/929976";
@@ -23,7 +23,7 @@ export function $$m0(e) {
     }));
   }, [t, m]);
   return jsxs(Fragment, {
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       "aria-label": f,
       htmlAttributes: {
         "data-tooltip-type": KindEnum.TEXT,

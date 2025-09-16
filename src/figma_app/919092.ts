@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { q7 } from "../figma_app/860955";
-import { G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { J } from "../905/614223";
 import { xk } from "@stylexjs/stylex";
 import { getI18nString } from "../905/303541";
@@ -16,7 +16,7 @@ function c({
 }
 export var $$u0 = (e => (e.REQUEST_UPGRADE = "REQUEST_UPGRADE", e.REQUEST_SENT = "REQUEST_SENT", e.ALPHA = "ALPHA", e.BETA = "BETA", e))($$u0 || {});
 export function $$p1(e) {
-  let t = G();
+  let t = useTheme();
   let r = e.isDisabled || e.isLoading;
   return jsx(J, {
     brand: e.brand,

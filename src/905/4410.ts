@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, forwardRef, useContext, useLayoutEffect } from "react";
 import { QT } from "../905/687992";
-import { S } from "../905/823680";
+import { setupRefUpdater } from "../905/823680";
 import { p as _$$p } from "../905/185998";
 import { E } from "../905/427996";
 import { l as _$$l } from "../905/490996";
@@ -35,7 +35,7 @@ let g = forwardRef((e, t) => {
   let {
     inputProps
   } = a;
-  let c = S(t, inputProps.ref);
+  let c = setupRefUpdater(t, inputProps.ref);
   return jsx(_$$p, {
     ...inputProps,
     ref: c

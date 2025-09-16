@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { on } from "../905/420347";
@@ -12,7 +12,7 @@ import { IT, liveStoreInstance } from "../905/713695";
 import { H as _$$H } from "../905/216861";
 import { NO_TEAM, getDraftsSidebarString, isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { l as _$$l } from "../905/716947";
 import { selectWithShallowEqual } from "../905/103090";
@@ -178,7 +178,7 @@ function K(e) {
       children: jsxs("div", {
         children: [!C && jsxs("div", {
           className: "figjam_subscription_file_view--header--cDFWN",
-          children: [jsx(_$$K, {
+          children: [jsx(IconButton, {
             onClick: e.backToList,
             "aria-label": getI18nString("general.back"),
             children: jsx(_$$C, {})
@@ -429,12 +429,12 @@ let $$eu0 = registerModal(function (e) {
     manager: f,
     width: v,
     height: "dynamic",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("design_systems.libraries_modal.manage_libraries")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsxs("div", {
           className: "figjam_library_modal--slidingPaneContainer--ZuLV1 sliding_pane--slidingPaneContainer--RQkXf",

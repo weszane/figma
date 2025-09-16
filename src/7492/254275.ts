@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { k } from "../7492/749199";
 import { y } from "../7492/736516";
 import { T } from "../7492/468457";
@@ -50,7 +50,7 @@ function j(e) {
   }, [e.parentView]);
   return jsx("div", {
     className: i,
-    children: jsx(K, {
+    children: jsx(IconButton, {
       onClick: e.onClick,
       "aria-label": e.isSaved ? getI18nString("community.saves.remove_from_saves") : getI18nString("community.saves.save"),
       "aria-pressed": e.isSaved,

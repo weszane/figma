@@ -33,7 +33,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { JU, ks } from "../figma_app/626177";
 import { d as _$$d } from "../905/976845";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { O as _$$O } from "../905/487602";
 import { KindEnum } from "../905/129884";
@@ -415,7 +415,7 @@ function ee({
           onBlur: () => {
             g?.();
           }
-        }), _ && jsx(_$$K, {
+        }), _ && jsx(IconButton, {
           type: "button",
           "aria-label": getI18nString("variables.edit_modal.remove_code_syntax"),
           recordingKey: generateRecordingKey(s, "removeButton"),
@@ -555,7 +555,7 @@ function ed(e) {
     ref: u,
     children: [t, y && !e.isInaccessible && jsxs("span", {
       className: "variables_modal_mode_value--iconVisibleOnHover--5Plc4",
-      children: [e.variableOverride && e.variableOverride.overrideValues?.[modeID] && e.clearVariableOverride && jsx(_$$K, {
+      children: [e.variableOverride && e.variableOverride.overrideValues?.[modeID] && e.clearVariableOverride && jsx(IconButton, {
         "aria-label": getI18nString("variables.authoring_modal.table.clear_override"),
         actionOnPointerDown: !0,
         onClick: e.clearVariableOverride,
@@ -565,7 +565,7 @@ function ed(e) {
           "data-tooltip": getI18nString("variables.authoring_modal.table.clear_override")
         },
         children: jsx(_$$m, {})
-      }), b && jsx(_$$K, {
+      }), b && jsx(IconButton, {
         "aria-label": getI18nString("variables.authoring_modal.table.detach_alias"),
         actionOnPointerDown: !0,
         onClick: () => {
@@ -1368,7 +1368,7 @@ function tx({
   }, []);
   let I = jsx("div", {
     className: "variables_sets_reorder_modal--sortButtonContainer----th1",
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       "aria-label": getI18nString("variables.authoring_modal.reorder_collections_modal.sort_button"),
       onClick: f,
       children: jsx(_$$S2, {})
@@ -2752,7 +2752,7 @@ function it({
           noBorderOnFocus: !0,
           children: jsx("div", {
             className: "variables_modal_table--newModeButton--HXURD",
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               disabled: en,
               "aria-label": en ? getI18nString("variables.authoring_modal.reached_hard_mode_limit", {
                 modeLimit

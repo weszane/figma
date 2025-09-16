@@ -18,7 +18,7 @@ import { showDropdownThunk } from "../905/929976";
 import { qN } from "../905/234821";
 import { Z7 } from "../figma_app/8833";
 import { U6 } from "../figma_app/591738";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { Zz } from "../figma_app/12220";
 import { E as _$$E } from "../905/617605";
 import { sT } from "../figma_app/740163";
@@ -132,7 +132,7 @@ let er = memo(function (e) {
   } = e;
   let [ef, e_] = useState(!1);
   let eg = qN();
-  let ev = _$$k();
+  let ev = isUserNotLoggedInAndEditorSupported();
   let ex = WN();
   let [eb, ey] = useState(void 0);
   let [eC, ew] = useState(!1);

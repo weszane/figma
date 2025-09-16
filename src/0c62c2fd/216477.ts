@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useModalManager } from "../905/437088";
 import { N } from "../905/438674";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { useSubscription } from "../figma_app/288654";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
@@ -21,14 +21,14 @@ export function $$p0(e) {
     children: jsx(ModalRootComponent, {
       manager: t,
       width: "md",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: p ? renderI18nText("resource_connection.block_file_move.unable_to_move_out_of_project_name", {
               projectName: p
             }) : renderI18nText("resource_connection.block_file_move.unable_to_move_out_of_this_project")
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           className: Yw,
           children: jsx("div", {
             className: _$$s.mt4.mb4.$,

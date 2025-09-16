@@ -9,7 +9,7 @@ import { Y as _$$Y } from '../905/193977';
 import { h as _$$h } from '../905/207101';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { B as _$$B2 } from '../905/388732';
-import { K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { O8, ov, rj, yh } from '../905/462694';
@@ -506,7 +506,7 @@ function $({
         return jsxs(Fragment, {
           children: [jsx('div', {
             className: _$$s.ml4.h24.$,
-            children: jsx(K, {
+            children: jsx(IconButton, {
               'onClick': pop,
               'aria-label': getI18nString('qa.go_back'),
               'children': jsx(_$$C, {})

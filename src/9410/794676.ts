@@ -99,8 +99,8 @@ import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { QL } from "../905/609392";
 import { isUIHiddenOrLocked } from "../905/868547";
 import { generateAnonymouseName } from "../905/301652";
-import { x as _$$x3 } from "../905/749159";
-import { K as _$$K3 } from "../905/443068";
+import { AuthModal } from "../905/749159";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/866991";
 import { A as _$$A2 } from "../905/251970";
 import { yl } from "../figma_app/639088";
@@ -384,7 +384,7 @@ function tu(e) {
             children: renderI18nText("whiteboard.open_sessions.expiry_banner_title")
           })
         })]
-      }), jsx(_$$K3, {
+      }), jsx(IconButton, {
         onClick: onDismiss,
         "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
@@ -488,7 +488,7 @@ function tm(e) {
         redirectUrl: customHistory.location.pathname
       }));
       r(showModalHandler({
-        type: _$$x3,
+        type: AuthModal,
         data: {
           headerText: getI18nString("whiteboard.open_sessions.expiry_modal_title", {
             file_name: l || ""

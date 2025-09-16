@@ -36,7 +36,7 @@ import { vx } from '../905/91038';
 import { combineWithHyphen, ShareContext } from '../905/91820';
 import { UserAPIHandlers } from '../905/93362';
 import { batchPutPlan, setLastVisitedPlan } from '../905/93909';
-import { i as _$$i5 } from '../905/97346';
+import { setupDragHandler } from '../905/97346';
 import { bE as _$$bE4, uo as _$$uo5, yH as _$$yH3, yJ as _$$yJ5 } from '../905/98702';
 import { useSprigWithSampling } from '../905/99656';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
@@ -92,7 +92,7 @@ import { dK as _$$dK, TE, v9 } from '../905/266289';
 import { createReduxSubscriptionAtomWithState } from '../905/270322';
 import { datadogRum } from '../905/270963';
 import { parentOrgIdAtom, teamOrOrgIdAtom } from '../905/276025';
-import { A as _$$A } from '../905/289770';
+import { ThemeProvider2 } from '../905/289770';
 import { L as _$$L } from '../905/293182';
 import { Q8, R9 } from '../905/294085';
 import { initializeIntegrationEnvironment, sendMessageToParent } from '../905/298920';
@@ -100,7 +100,7 @@ import { setLastUsedEditorType } from '../905/298923';
 import { E as _$$E3, ie as _$$ie, nM as _$$nM, Nu, SL } from '../905/300250';
 import { F as _$$F5 } from '../905/300562';
 import { p as _$$p2 } from '../905/300815';
-import { r as _$$r } from '../905/302698';
+import { FplDebugProvider } from '../905/302698';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, loadI18nState, renderI18nText } from '../905/303541';
 import { T as _$$T3, v as _$$v4 } from '../905/309844';
@@ -250,7 +250,7 @@ import { Point } from '../905/736624';
 import { uM as _$$uM, HO } from '../905/738636';
 import { extractOriginalTextMap } from '../905/744769';
 import { l as _$$l1 } from '../905/745972';
-import { x as _$$x4 } from '../905/749159';
+import { AuthModal } from '../905/749159';
 import { k as _$$k6 } from '../905/749197';
 import { f as _$$f3 } from '../905/749689';
 import { StatsigContext } from '../905/749933';
@@ -586,7 +586,7 @@ function m({
   }, [i]);
   return jsx(ThemeProvider, {
     value: o,
-    children: jsx(_$$A, {
+    children: jsx(ThemeProvider2, {
       value: h,
       children: e
     })
@@ -13798,7 +13798,7 @@ let hc = e => t => function (i) {
 };
 let hm = _$$ck4();
 let hh = e => e => hm ? function (t) {
-  return showModal.matches(t) && t.payload.type === _$$x4 ? window.self.origin !== window.parent.origin ? e(t) : void sendMessageToParent({
+  return showModal.matches(t) && t.payload.type === AuthModal ? window.self.origin !== window.parent.origin ? e(t) : void sendMessageToParent({
     action: 'showAuthModal',
     payload: {
       type: 'auth'
@@ -13926,7 +13926,7 @@ function hk(e) {
       top: 0,
       bottom: 0
     });
-    let [, r] = _$$i5({
+    let [, r] = setupDragHandler({
       onDragStart(e) {
         let {
           clientX,
@@ -15265,7 +15265,7 @@ export async function $$hz0(e, t, d = {
               children: jsx(AtomProvider, {
                 children: jsx(m, {
                   initialVersion: uiVariantName,
-                  children: jsx(_$$r, {
+                  children: jsx(FplDebugProvider, {
                     debug: !1,
                     children: jsxs(RecordingProvider, {
                       children: [jsx(hV, {}), jsxs(e5, {

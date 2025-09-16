@@ -7,7 +7,7 @@ import { ButtonWide } from "../905/521428";
 import { u as _$$u } from "../905/65923";
 import { ButtonPrimitive } from "../905/632989";
 import { bL } from "../905/163832";
-import { vo } from "../figma_app/272243";
+import { DialogContents } from "../figma_app/272243";
 import { l as _$$l } from "../905/479687";
 import { X } from "../905/319582";
 import { A as _$$A } from "../905/891805";
@@ -707,7 +707,7 @@ export function $$ei4({
     style: {
       width: 180
     },
-    children: jsx(vo, {
+    children: jsx(DialogContents, {
       children: l
     })
   });

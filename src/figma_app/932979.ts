@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { X } from "../905/736922";
 import { Z } from "../905/279476";
 import { createLocalStorageAtom, useAtomWithSubscription } from "../figma_app/27355";
@@ -75,7 +75,7 @@ function C() {
             children: "http://127.0.0.1:3845/sse"
           }), jsxs("div", {
             className: v,
-            children: [getI18nString("dev_handoff.mcp.sse_deprecation_modal.body.new_url"), jsx(K, {
+            children: [getI18nString("dev_handoff.mcp.sse_deprecation_modal.body.new_url"), jsx(IconButton, {
               htmlAttributes: eventHandlers,
               onClick: a,
               "aria-label": getI18nString("inspect_panel.copy"),

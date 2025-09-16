@@ -9,7 +9,7 @@ import { k as _$$k } from "../905/443820";
 import { ButtonPrimitive } from "../905/632989";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { P as _$$P } from "../905/537307";
 import { getFeatureFlags } from "../905/601108";
 import { c$, ms, MM } from "../figma_app/236327";
@@ -255,15 +255,15 @@ registerModal(function (e) {
   return jsx(ModalRootComponent, {
     width: "md",
     manager: r,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("team_join_links.reset_invite_links")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText("team_join_links.modal_description")
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             variant: "secondary",
             onClick: () => t(popModalStack()),

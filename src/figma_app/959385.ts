@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { N as _$$N } from "../905/301843";
 import { W as _$$W } from "../905/865092";
@@ -160,7 +160,7 @@ function ee({
       className: _$$s.flex.h32.px4.itemsCenter.justifyBetween.$,
       children: [jsxs("div", {
         className: _$$s.flex.flexRow.$,
-        children: [jsx(_$$K, {
+        children: [jsx(IconButton, {
           onClick: t,
           "aria-label": getI18nString("qa.go_back"),
           children: jsx(_$$C, {})
@@ -170,7 +170,7 @@ function ee({
         })]
       }), jsxs("div", {
         className: _$$s.flex.flexRow.itemsCenter.gap8.$,
-        children: [jsx(_$$K, {
+        children: [jsx(IconButton, {
           onClick: _,
           "aria-label": getI18nString("qa.extensions.open_in_community"),
           htmlAttributes: {
@@ -178,7 +178,7 @@ function ee({
             "data-tooltip-type": KindEnum.TEXT
           },
           children: jsx(_$$N, {})
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           onClick: m,
           "aria-label": getI18nString("qa.copy_link"),
           htmlAttributes: {

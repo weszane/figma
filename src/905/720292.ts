@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { _ } from "../905/410717";
 import { j } from "../905/519202";
 import o from "classnames";
@@ -113,7 +113,7 @@ export function $$v2(e) {
   } = e;
   return jsxs("div", {
     className: "comparison_container--overlayOptionsContainer--JOrMq",
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       "aria-label": isAfterImageShown ? getI18nString("collaboration.branching.overlay_hide_after_image") : getI18nString("collaboration.branching.overlay_show_after_image"),
       onClick: onToggleClick,
       children: isAfterImageShown ? jsx(_, {}) : jsx(j, {})

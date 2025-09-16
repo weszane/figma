@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect, forwardRef } from "react";
 import { I as _$$I } from "../905/494625";
-import { _ as _$$_ } from "../905/302698";
+import { useFplDebugAttributes } from "../905/302698";
 import { useExposedRef } from "../905/581092";
 import { defaultComponentAttribute } from "../905/577641";
 import { au } from "../905/336566";
@@ -21,7 +21,7 @@ function u({
   className: y,
   ...b
 }, v) {
-  let I = _$$_({
+  let I = useFplDebugAttributes({
     descendant: "tab"
   });
   let E = _$$I({

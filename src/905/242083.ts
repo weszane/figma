@@ -173,7 +173,7 @@ import { qG, Qx } from '../905/742325';
 import { c as _$$c3, s as _$$s7 } from '../905/744710';
 import { l as _$$l4 } from '../905/745972';
 import { Ao } from '../905/748636';
-import { x as _$$x } from '../905/749159';
+import { AuthModal } from '../905/749159';
 import { y as _$$y5 } from '../905/749689';
 import { pluginState, handlePluginError, generateRandomID } from '../905/753206';
 import { L6 } from '../905/755627';
@@ -298,7 +298,7 @@ import { fT as _$$fT } from '../figma_app/260703';
 import { n as _$$n3 } from '../figma_app/264395';
 import { z4 } from '../figma_app/266084';
 import { $W } from '../figma_app/268172';
-import { nB as _$$nB, wi as _$$wi, hE, jk, vo, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogFooter, DialogTitle, DialogActionStrip, DialogContents, DialogHeader } from '../figma_app/272243';
 import { Dl as _$$Dl, DK, Nd } from '../figma_app/291892';
 import { pN } from '../figma_app/292212';
 import { e3 as _$$e4 } from '../figma_app/298277';
@@ -1060,12 +1060,12 @@ function ik(e) {
     onClose: e.onClose,
     recordingKey: 'slotPreferredContentPicker',
     defaultPosition: r,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('design_systems.slots.content_picker.title_add')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         'padding': 0,
         'style': {
           height: 320
@@ -1153,15 +1153,15 @@ let i0 = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: i,
     width: 'md',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.import_from_sketch')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: renderI18nText('fullscreen.fullscreen_view.attempted_sketch_import.to_import_your_sketch_files_please_drag_them_into_your_file_space')
-      }), jsx(_$$wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: () => {
               t(hideModal());
@@ -1879,12 +1879,12 @@ function nJ() {
     defaultPosition: new Point(0.7 * window.innerWidth, 0.5 * window.innerHeight),
     onClose: n0,
     width: 300,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: 'TSMER Config'
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx(Label, {
           children: renderI18nText('tsmer_config.modal.levers_label')
         }), jsx(j5, {
@@ -1931,8 +1931,8 @@ function nJ() {
             svg: _$$A3
           })
         })]
-      }), jsx(_$$wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(ButtonBaseReversedContainer, {
             className: nD,
             children: jsx(Button, {
@@ -2865,12 +2865,12 @@ let aO = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: o,
     width: 'md',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: T
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [l && jsx(cS, {
           label: jsx(JU, {
             className: hD,
@@ -2899,7 +2899,7 @@ let aO = registerModal(e => {
           }),
           appendedClassName: aN
         }), l ? p === 'pdf' ? w : C : w]
-      }), jsxs(_$$wi, {
+      }), jsxs(DialogFooter, {
         children: [jsxs('div', {
           className: rg()('pdf_export_settings_modal--exportModalFooterLoader--tW0h6', {
             'pdf_export_settings_modal--exportModalFooterLoaderError--lXi8-': n
@@ -2911,7 +2911,7 @@ let aO = registerModal(e => {
           }), !t && n && jsxs(Fragment, {
             children: [jsx(_$$R2, {}), renderI18nText('fullscreen.export.unable_to_export')]
           })]
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(Button, {
             'variant': 'primary',
             'onClick': E,
@@ -3211,11 +3211,11 @@ class aZ extends PureComponent {
         width: 'lg',
         children: jsxs(ModalFormContents, {
           onSubmit: this.onSubmit,
-          children: [jsx(Y9, {
-            children: jsx(hE, {
+          children: [jsx(DialogHeader, {
+            children: jsx(DialogTitle, {
               children: e
             })
-          }), jsx(_$$nB, {
+          }), jsx(DialogBody, {
             children: jsxs('div', {
               className: 'rename_modal--body--bg5OQ',
               children: [jsx('div', {
@@ -3226,8 +3226,8 @@ class aZ extends PureComponent {
                 children: this.renderFormInputs()
               })]
             })
-          }), jsxs(_$$wi, {
-            children: [this.renderLink(), jsx(jk, {
+          }), jsxs(DialogFooter, {
+            children: [this.renderLink(), jsx(DialogActionStrip, {
               children: this.renderFormButtons()
             })]
           })]
@@ -7070,7 +7070,7 @@ let lX = class e extends sP(sN(sR)) {
       signedUpFromOpenSession: this.isInWorkshopMode()
     }));
     this.dispatch(showModalHandler({
-      type: _$$x,
+      type: AuthModal,
       data: {
         headerText: this.isInWorkshopMode() ? getI18nString('bindings.create_a_figjam_account') : void 0,
         actionOrTool: t

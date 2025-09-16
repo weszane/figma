@@ -6,7 +6,7 @@ import { BannerInset } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/438674";
 import { k as _$$k } from "../905/443820";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { t as _$$t } from "../905/150656";
 import { k as _$$k2 } from "../905/44647";
 import { v as _$$v } from "../4452/513456";
@@ -14,7 +14,7 @@ import { _ as _$$_ } from "../7021/243271";
 import { S as _$$S } from "../5132/525530";
 import { O as _$$O } from "../905/666679";
 import { o as _$$o } from "../905/89370";
-import { G as _$$G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { J as _$$J } from "../905/614223";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -331,7 +331,7 @@ function H({
     }, [e, n]);
     return o;
   }(e.component.node_id, o);
-  let r = _$$G();
+  let r = useTheme();
   return jsxs("div", {
     children: [jsx("div", {
       className: "component_browser_detail_view--mcpTabInfoText--cp8bE",
@@ -347,7 +347,7 @@ var Y = (e => (e.Info = "Info", e.SourceCode = "SourceCode", e.Mcp = "Mcp", e))(
 function V({
   data: e
 }) {
-  let n = _$$G();
+  let n = useTheme();
   let [o, c] = useState(n.color);
   useEffect(() => {
     c(n.color);
@@ -358,7 +358,7 @@ function V({
       className: "component_browser_detail_view--componentThumbnailPanel--tlaYl",
       children: [jsx("div", {
         className: "component_browser_detail_view--themeToggle--kLZt7",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           size: "lg",
           variant: "secondary",
           "aria-label": getI18nString("dev_handoff.component_browser.change_theme"),
@@ -536,7 +536,7 @@ export function $$Z0({
         className: "component_browser_detail_view--titleContainer--uEBHQ",
         children: [jsxs("div", {
           className: "component_browser_detail_view--titleContainerLeft--ilpvY",
-          children: [!w && jsx(_$$K, {
+          children: [!w && jsx(IconButton, {
             "aria-label": getI18nString("dev_handoff.component_browser.close_component_browser"),
             onClick: () => o(),
             children: jsx(_$$O, {})

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { getI18nString } from "../905/303541";
 import { cq } from "../905/794154";
@@ -10,7 +10,7 @@ export function $$l0({
   let {
     pop
   } = cq();
-  return jsx(K, {
+  return jsx(IconButton, {
     onClick: function () {
       e?.();
       pop();

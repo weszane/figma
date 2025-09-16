@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { sha1HexFromBytes } from "../905/125019";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/920165";
 import { p as _$$p } from "../905/951634";
 import { K as _$$K } from "../905/851274";
@@ -83,7 +83,7 @@ export function $$E0(e) {
       });
     }
   };
-  let j = (t, i) => i ? jsx(K, {
+  let j = (t, i) => i ? jsx(IconButton, {
     disabled,
     onClick: () => {
       setPlaying(!1);
@@ -92,7 +92,7 @@ export function $$E0(e) {
     "aria-label": getI18nString("fullscreen.properties_panel.pause"),
     recordingKey: generateRecordingKey(e, "pauseVideo"),
     children: jsx(_$$p, {})
-  }) : jsx(K, {
+  }) : jsx(IconButton, {
     disabled,
     onClick: () => {
       t && (setPlaying(!0), F("play"));

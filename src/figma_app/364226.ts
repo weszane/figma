@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { a as _$$a } from "../905/5627";
 import { BrowserInfo } from "../figma_app/778880";
@@ -58,7 +58,7 @@ export let $$y0 = registerModal(function (e) {
               fontFamily: "monospace",
               children: error.text
             })
-          }), jsx(_$$K, {
+          }), jsx(IconButton, {
             onClick: () => {
               r(lW({
                 stringToCopy: error.text

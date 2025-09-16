@@ -3,10 +3,10 @@ import { memo, createContext, useState, useRef, useMemo, useContext, useCallback
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { r as _$$r } from "../905/840133";
+import { TabsPrimitiveTabStrip } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
 import { H as _$$H } from "../905/56919";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { N as _$$N } from "../905/130112";
 import { ButtonPrimitive } from "../905/632989";
 import { DesignGraphElements, Fullscreen, SourceType } from "../figma_app/763686";
@@ -197,7 +197,7 @@ function e_({
     className: i,
     children: jsx("div", {
       className: ee,
-      children: jsxs(_$$r, {
+      children: jsxs(TabsPrimitiveTabStrip, {
         manager: t,
         children: [jsx(_$$r2, {
           ...r.REACTION,
@@ -252,7 +252,7 @@ function eh({
     }[e],
     children: jsx("div", {
       className: ee,
-      children: jsxs(_$$r, {
+      children: jsxs(TabsPrimitiveTabStrip, {
         manager: t,
         children: [jsx(_$$r2, {
           ...r.REACTION,
@@ -424,7 +424,7 @@ function eg({
       onMouseLeave: () => f(!1),
       "data-fullscreen-intercept": !0,
       "data-testid": "emoji-wheel",
-      children: jsxs(_$$i, {
+      children: jsxs(TabLoop, {
         children: [J.tabs.map(e => jsx(ef, {
           dialPosition: B,
           setDialPosition: V,

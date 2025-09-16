@@ -116,7 +116,7 @@ import { getResourceWithMeta } from "../figma_app/45218";
 import { Cv, cS, bN } from "../figma_app/795938";
 import { A6 } from "../905/350234";
 import { CurrencyFormatter } from "../figma_app/514043";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J as _$$J2 } from "../905/125993";
 import { N9 } from "../figma_app/188152";
 import { Um } from "../905/848862";
@@ -1502,7 +1502,7 @@ function rP(e) {
     window.removeEventListener("scroll", l, !1);
   }), [l]);
   return jsxs("div", {
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ref: r,
       onClick: s => {
         s.stopPropagation();

@@ -8,7 +8,7 @@ import { e as _$$e } from '../905/149844';
 import { showModal } from '../905/156213';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P2 } from '../905/347284';
-import { K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { P as _$$P } from '../905/537307';
 import { findTeamById } from '../905/613917';
 import { adminPermissionConfig } from '../905/654645';
@@ -153,7 +153,7 @@ function W(e) {
       teamName: e.teamName
     }) : getI18nString('whiteboard.color_palettes.color_palette_picker.team_palettes_no_name'), a && jsxs('div', {
       className: 'color_palette_picker--header__rightHand--z-7ux',
-      children: [jsx(K, {
+      children: [jsx(IconButton, {
         'onClick': () => {
           t(showModal({
             type: dV.type,
@@ -172,7 +172,7 @@ function W(e) {
         'children': jsx(_$$e, {
           className: V
         })
-      }), jsx(K, {
+      }), jsx(IconButton, {
         'onClick': () => {
           t(showModal({
             type: _$$j.type,

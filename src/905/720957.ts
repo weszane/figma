@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { h as _$$h } from "../905/994594";
 import { A as _$$A } from "../905/251970";
 import { useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
@@ -175,7 +175,7 @@ export function $$P0({
     }), (!!L || es) && jsx("div", {
       className: "faceted_search_bar--leftFadeContainer--r39DL faceted_search_bar--_fadeContainer--DiQLS",
       "data-testid": "facetedSearchClear",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("search.search_bar.clear"),
         onClick: en,
         htmlAttributes: {

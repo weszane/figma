@@ -31,7 +31,7 @@ import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } fr
 import { useDebouncedCallback } from "use-debounce";
 import { showDropdownThunk } from "../905/929976";
 import { Z7, Dm, Uu } from "../figma_app/8833";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { getViewportZoom, getViewportInfo, getVisibleArea, roundedDivision, useViewportWithDelta, viewportToScreen, addRectOffset, applyOffsetToViewport, memoizedRect, getBasicViewportRect } from "../figma_app/62612";
 import { getObservableValue } from "../figma_app/84367";
 import { n as _$$n } from "../3276/582222";
@@ -124,7 +124,7 @@ import { W as _$$W } from "../905/569454";
 import { CloseButton } from "../905/17223";
 import { yo, k3, U6 } from "../figma_app/591738";
 import { Z as _$$Z2 } from "../905/104740";
-import { K as _$$K3 } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { postUserFlag } from "../905/985254";
@@ -139,7 +139,7 @@ import { A as _$$A6 } from "../6828/249455";
 import { H as _$$H2 } from "../905/620380";
 import { R3, Dr, QQ, Vm } from "../figma_app/728075";
 import { lQ } from "../905/934246";
-import { i as _$$i2 } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { D as _$$D } from "../3276/853301";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { AU, on } from "../figma_app/242565";
@@ -1078,7 +1078,7 @@ let eU = memo(function (e) {
       height: 0
     });
   }, [setActivePinSize, ep, x, eh]);
-  let e_ = _$$k2();
+  let e_ = isUserNotLoggedInAndEditorSupported();
   return jsx(_$$p2, {
     children: jsx(eL, {
       clientConfig: s,
@@ -1435,7 +1435,7 @@ function t6(e) {
     properties: {
       isPinned: s
     },
-    children: jsx(_$$K3, {
+    children: jsx(IconButton, {
       disabled: !s && r || t,
       htmlAttributes: {
         "data-onboarding-key": s ? "unpin-comment-icon" : "pin-comment-icon",
@@ -2517,7 +2517,7 @@ function nP(e) {
           style: {
             maxHeight: q
           },
-          children: jsx(_$$i2, {
+          children: jsx(TabLoop, {
             children: jsx(_$$C2, {
               allowAttachments,
               attachments: e.thread.attachments,

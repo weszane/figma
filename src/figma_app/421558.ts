@@ -61,7 +61,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
 import { n6 } from "../905/234821";
-import { k as _$$k3 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { wg } from "../figma_app/101956";
 import { fullscreenValue } from "../figma_app/455680";
 import { isVsCodeEnvironment } from "../905/858738";
@@ -524,7 +524,7 @@ export function $$e00(e) {
   let d = n6();
   let c = function () {
     let e = XZ();
-    let t = _$$k3();
+    let t = isUserNotLoggedInAndEditorSupported();
     let r = WN();
     return useCallback(n => {
       if (null !== n && t) {
@@ -556,7 +556,7 @@ export function $$e00(e) {
   };
   let A = uh(h);
   let x = AE();
-  let N = _$$k3();
+  let N = isUserNotLoggedInAndEditorSupported();
   let C = useCanUseDevModeDemoFile();
   let w = AP();
   let O = useIsSelectedViewFullscreenCooper();

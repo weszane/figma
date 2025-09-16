@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { Label } from "../905/270045";
@@ -173,7 +173,7 @@ let G = registerModal(function (e) {
     width: 394,
     children: jsxs(vo, {
       children: [jsxs(Y9, {
-        children: [a && jsx(_$$K, {
+        children: [a && jsx(IconButton, {
           "aria-label": getI18nString("figmake.supabase.pause_project_modal.back"),
           onClick: () => {
             e.onClose();

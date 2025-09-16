@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { h1 } from "../905/986103";
@@ -82,12 +82,12 @@ export let $$E0 = registerModal(function (e) {
     manager: t,
     height: "dynamic",
     width: "lg",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: x
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: jsx("div", {
           className: "x1ib1h6n",
           children: g ? jsx("div", {

@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useLayoutEffect, useCallback, useMemo, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button, ButtonLarge } from "../905/521428";
 import { K as _$$K2 } from "../905/851274";
 import { O as _$$O } from "../905/969533";
@@ -55,7 +55,7 @@ import { e as _$$e2 } from "../1528/93111";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { isPrototypeView } from "../figma_app/976749";
 import { getWorkshopModeStatus } from "../figma_app/789";
-import { k as _$$k4 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { isIntegrationContext } from "../figma_app/469876";
 import { dR } from "../figma_app/440875";
 import { selectCurrentUser } from "../905/372672";
@@ -834,7 +834,7 @@ function eF(e) {
   let R = isIntegrationContext();
   let D = useRef(null);
   let O = Xr($$eP1);
-  let j = _$$k4();
+  let j = isUserNotLoggedInAndEditorSupported();
   let k = _$$e2();
   let A = _$$G();
   let w = useCanUseDevModeDemoFile();
@@ -884,11 +884,11 @@ function eF(e) {
             numUnreadComments: 0
           }), j && !I && !A && jsxs("div", {
             className: _$$s.flex.flexRow.$,
-            children: [jsx(_$$K, {
+            children: [jsx(IconButton, {
               "aria-label": getI18nString("fullscreen_actions.present-as-prototype"),
               onClick: () => F(Command.PRESENT_AS_PROTOTYPE),
               children: jsx(_$$K2, {})
-            }), jsx(_$$K, {
+            }), jsx(IconButton, {
               "aria-label": getI18nString("fullscreen.flyout.prototype_view"),
               onClick: () => F(Command.PRESENT_AS_PROTOTYPE),
               children: jsx(_$$O, {})

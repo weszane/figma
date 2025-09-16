@@ -57,7 +57,7 @@ import { BuyerAPIHandler } from "../905/180";
 import { D as _$$D } from "../905/17527";
 import { H as _$$H } from "../905/473998";
 import { z as _$$z } from "../905/931953";
-import { x as _$$x2 } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { Y as _$$Y } from "../905/582047";
 import { UM, F4 } from "../figma_app/60023";
 import { Dl } from "../905/58274";
@@ -79,7 +79,7 @@ let ey = e => {
     origin
   }));
   e.dispatch(showModalHandler({
-    type: _$$x2,
+    type: AuthModal,
     data: {
       headerText: t
     }

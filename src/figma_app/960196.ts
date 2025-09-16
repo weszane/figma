@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useMemo, useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { VariableDataType, VariableResolvedDataType, VariablesBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
@@ -64,7 +64,7 @@ function P({
     setControlRightButtons: function () {
       if (void 0 === r || "fields" !== _ && "prop-assignment" !== _) return;
       let e = A ? getI18nString("variables.binding_ui.create_variable_property_button_tooltip") : getI18nString("variables.binding_ui.create_variable_button_tooltip");
-      return jsx(K, {
+      return jsx(IconButton, {
         "aria-label": e,
         recordingKey: generateRecordingKey(m, "createVariable"),
         onClick: N,

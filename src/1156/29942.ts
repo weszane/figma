@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { lV, U1, MK } from "../figma_app/617606";
 import l, { Hg, W as _$$W } from "../figma_app/304955";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { H as _$$H } from "../905/999677";
 import { T as _$$T } from "../905/2124";
 import { D as _$$D } from "../1156/759811";
@@ -67,7 +67,7 @@ import { tc as _$$tc } from "../905/15667";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { yy } from "../figma_app/543529";
 import { y as _$$y } from "../1250/295724";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { B as _$$B } from "../905/969273";
 import { A0, sZ, Ay as _$$Ay } from "../figma_app/948389";
 import { selectCurrentFile, openFileTeamAtom, useCurrentFileKey } from "../figma_app/516028";
@@ -281,7 +281,7 @@ function eB({
     ...Ay.props(eD.chatBoxMessageRow, "primary" === t && eD.chatBoxMessageRowPrimary, "error" === t && eD.chatBoxMessageRowError, "warning" === t && eD.chatBoxMessageRowWarning, "community" === t && eD.chatBoxMessageRowCommunity, "info" === t && eD.chatBoxMessageRowInfo, n && eD.chatBoxMessageRowWithClose),
     children: [e, n && jsx("div", {
       className: "x10l6tqk xclnmbr",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         onClick: n,
         "aria-label": getI18nString("living_designs.chat.errors.close"),
         children: jsx(_$$L, {})
@@ -487,7 +487,7 @@ function tr({
     }), jsx("div", {
       className: "xb3r6kr xlyipyv xuxw1ft xazcve0",
       children: t
-    }), "prompt" === n && i ? jsx(_$$K, {
+    }), "prompt" === n && i ? jsx(IconButton, {
       "aria-label": getI18nString("figmake.chat.click_to_inspect.remove"),
       onClick: i,
       children: jsx(_$$f2, {
@@ -1523,7 +1523,7 @@ let tQ = forwardRef((e, t) => {
   }, [H, k, J, V]);
   let Z = _$$ry();
   let Q = useAtomWithSubscription(Ng);
-  let ee = _$$k2();
+  let ee = isUserNotLoggedInAndEditorSupported();
   let et = useIsSelectedFigmakeFullscreen();
   let en = et ? FProductAccessType.FIGMAKE : FProductAccessType.SITES;
   let er = Xu();
@@ -3952,7 +3952,7 @@ function rH({
         visible: e.length > 0
       }), jsx(_$$N, {
         mode: "wait",
-        children: e.map((e, t) => jsx(_$$K, {
+        children: e.map((e, t) => jsx(IconButton, {
           "aria-label": e.name,
           "data-tooltip-show-above": !0,
           children: jsx(_$$P.div, {
@@ -4622,7 +4622,7 @@ function iv({
         duration: .2,
         ease: "easeInOut"
       },
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("figmake.chat_box.undo_enhance_prompt"),
         "data-tooltip-show-above": !0,
         disabled: e,
@@ -4646,7 +4646,7 @@ function iv({
         duration: .2,
         ease: "easeInOut"
       },
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("figmake.chat_box.enhance_prompt"),
         "data-tooltip-show-above": !0,
         disabled: e,
@@ -4699,7 +4699,7 @@ function ik({
   useEffect(() => {
     F && "" === A && (O(!1), R(""));
   }, [A, F]);
-  let U = e ? jsx(_$$K, {
+  let U = e ? jsx(IconButton, {
     onClick: () => {
       k(showModalHandler({
         type: _$$H2,
@@ -4725,7 +4725,7 @@ function ik({
       ref: N,
       accept: xp.join(","),
       onChange: D
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       "aria-label": l.length >= qQ ? getI18nString("sites.panel.make.attach_limit_reached", {
         limit: qQ
       }) : getI18nString("sites.panel.make.attach_image"),

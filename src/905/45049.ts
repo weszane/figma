@@ -15,7 +15,7 @@ import { cq } from "../905/794154";
 import { M$ } from "../figma_app/297822";
 import { dd, TT, Bw } from "../figma_app/604494";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { generateRecordingKey } from "../figma_app/878298";
 import E from "classnames";
@@ -309,7 +309,7 @@ let K = registerModal(function ({
             top: "13px",
             right: "13px"
           }).$,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: u,
             "aria-label": getI18nString("fragment_search.close_modal"),
             recordingKey: generateRecordingKey(Y, "closeButton"),

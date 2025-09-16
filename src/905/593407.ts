@@ -20,7 +20,7 @@ import { hib } from "../figma_app/6204";
 import { useState, useCallback } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { Wk, hE } from "../figma_app/272243";
+import { DialogCustomContents, DialogTitle } from "../figma_app/272243";
 import { LinkPrimitive } from "../figma_app/496441";
 import { g as _$$g } from "../905/687265";
 import { Ay as _$$Ay } from "@stylexjs/stylex";
@@ -66,10 +66,10 @@ function L({
     manager: r,
     width: "md",
     "data-testid": "tos_agreement_modal",
-    children: jsxs(Wk, {
+    children: jsxs(DialogCustomContents, {
       children: [jsx("div", {
         className: "x78zum5 x6s0dn4 x1ilnypm x8rdmch x1eqcisn",
-        children: jsx(hE, {
+        children: jsx(DialogTitle, {
           children: jsx(TextWithTruncation, {
             fontSize: 11,
             fontWeight: "bold",

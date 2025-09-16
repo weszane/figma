@@ -7,10 +7,10 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { r as _$$r } from "../905/857502";
 import { V as _$$V } from "../1577/311426";
 import { UI3ConditionalWrapper } from "../905/341359";
@@ -76,7 +76,7 @@ function z({
     placement: "bottom"
   });
   return jsxs("div", {
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ...getTriggerProps(),
       onClick: () => {
         copyToClipboard(e);
@@ -224,9 +224,9 @@ let Z = registerModal(function (e) {
           manager: et,
           width: 1048,
           height: "full",
-          children: jsxs(vo, {
-            children: [jsxs(Y9, {
-              children: [jsx(hE, {
+          children: jsxs(DialogContents, {
+            children: [jsxs(DialogHeader, {
+              children: [jsx(DialogTitle, {
                 children: J && getResourceName(J)
               }), jsxs("div", {
                 className: "x78zum5 x1v2ro7d x8x9d4c xnuq7ks",
@@ -234,7 +234,7 @@ let Z = registerModal(function (e) {
                   rdpUrl: ee
                 }), ea]
               })]
-            }), jsx(nB, {
+            }), jsx(DialogBody, {
               children: J && K ? jsxs(Fragment, {
                 children: [eo ? jsx(_$$Y, {
                   resource: J,

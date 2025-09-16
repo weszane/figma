@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { N } from "../905/438674";
 import { ButtonPrimitive } from "../905/632989";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { l as _$$l } from "../905/479687";
 import { N as _$$N } from "../905/670143";
 import { g as _$$g } from "../905/125190";
@@ -108,7 +108,7 @@ export function $$E5({
     onClick: S,
     className: "x78zum5 xjwf9q1 x87zv9k x6s0dn4 xxhr3t x1a33sea x19y5rnk x1r7xphn",
     children: T
-  }) : "borderless" === o ? jsx(K, {
+  }) : "borderless" === o ? jsx(IconButton, {
     onClick: S,
     "aria-label": getI18nString("community.publishing.copy_link"),
     children: T

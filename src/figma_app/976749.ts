@@ -113,7 +113,7 @@ export function selectEditorType(state: { selectedView: { view: string, editorTy
  * Original: $$y10
  */
 export function getEditorTypeOrNull() {
-  return useSelector<ObjectOf>(state => getEditorTypeIfFullscreen(state.selectedView))
+  return useSelector<ObjectOf>(state => getEditorTypeIfFullscreen(state.selectedView)) as FEditorType | null
 }
 
 /**

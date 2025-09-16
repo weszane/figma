@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { U } from "../905/708285";
 import { convertKiwiToVariableIdString } from "../905/805904";
 import { getFeatureFlags } from "../905/601108";
@@ -70,7 +70,7 @@ export function $$x1({
 }) {
   return jsx("span", {
     className: zm,
-    children: jsx(K, {
+    children: jsx(IconButton, {
       "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_variable"),
       onClick: e,
       recordingKey: generateRecordingKey(t, "paint", "detachVariableButton"),

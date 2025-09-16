@@ -23,7 +23,7 @@ import { sD, P8 } from "../1250/807901";
 import { i7, yO, oE, yS, LU, jU, RA, T$, sp, of, f_, v6, Kk, I$, V3, TQ, b0, IO, fI, $M, WD, fo, AT, YS, MO, K4, WX, Gh, t5, OC, dg, L3, hP, YQ, Gd, xw, SR, dl } from "../6268/430335";
 import { Wi, JR } from "../figma_app/162641";
 import { b as _$$b2, bL, mc, YJ, q7 } from "../figma_app/860955";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J } from "../905/125993";
 import { b as _$$b3 } from "../905/946806";
 import { d as _$$d } from "../6658/928537";
@@ -211,7 +211,7 @@ function A({
   });
   return jsxs(bL, {
     manager,
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ...g,
       "aria-label": getI18nString("dev_handoff.component_browser.more_actions"),
       children: jsx(J, {})

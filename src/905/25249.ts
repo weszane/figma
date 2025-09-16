@@ -7,7 +7,7 @@ import { useModalManager } from "../905/437088";
 import { BannerFullWidth } from "../figma_app/59509";
 import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/438674";
-import { oq, vo, Y9, nB, wi, jk } from "../figma_app/272243";
+import { DialogBackButton, DialogContents, DialogHeader, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
 import { L as _$$L } from "../905/857916";
@@ -642,7 +642,7 @@ export let $$eK0 = registerModal(function (e) {
     projectName: en.name
   });
   let tn = (e, t) => {
-    let i = t?.goBackAction ? jsx(oq, {
+    let i = t?.goBackAction ? jsx(DialogBackButton, {
       onClick: t.goBackAction
     }) : null;
     return jsxs("div", {
@@ -664,8 +664,8 @@ export let $$eK0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: t,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
           children: (() => {
             if (!eg) return jsx("div", {
               className: DA
@@ -721,7 +721,7 @@ export let $$eK0 = registerModal(function (e) {
                 throwTypeError(el);
             }
           })()
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: eg ? {
             0: (() => {
               let e = [];
@@ -856,8 +856,8 @@ export let $$eK0 = registerModal(function (e) {
             "data-testid": "loading-spinner",
             children: jsx(LoadingOverlay, {})
           })
-        }), (1 === el || 3 === el) && jsx(wi, {
-          children: jsxs(jk, {
+        }), (1 === el || 3 === el) && jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               onClick: eq,
               variant: "secondary",

@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import { UD, KQ, LV } from "../figma_app/360163";
 import { lQ } from "../905/934246";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { Label, HiddenLabel } from "../905/270045";
 import { bL, l9, mc, c$ } from "../905/493196";
@@ -145,7 +145,7 @@ export function $$A0({
   return jsxs(Zk, {
     children: [jsxs(Wv, {
       titleTx: renderI18nText("fullscreen.properties_panel.jsx_debug.title"),
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         "aria-label": "Copy JSX",
         onClick: () => {
           navigator.clipboard.writeText(p);

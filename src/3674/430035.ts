@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { J } from "../905/799737";
+import { DialogLabel } from "../905/799737";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -20,7 +20,7 @@ function y() {
   let t = M();
   let n = useAtomWithSubscription(_$$R);
   e = t ? renderI18nText("dev_handoff.paywall.blocking_modal.title.starter") : n ? renderI18nText("dev_handoff.paywall.blocking_modal.title.direct_link") : renderI18nText("dev_handoff.paywall.blocking_modal.title.dev_onboarding");
-  return jsx(J, {
+  return jsx(DialogLabel, {
     className: DD,
     children: e
   });

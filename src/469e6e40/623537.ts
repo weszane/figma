@@ -121,7 +121,7 @@ import { Zx } from '../figma_app/217457';
 import { c$, gw } from '../figma_app/236327';
 import { Bg } from '../figma_app/246699';
 import { N as _$$N } from '../figma_app/268271';
-import { hE, jk, nB, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogTitle, DialogActionStrip, DialogBody, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useSubscription } from '../figma_app/288654';
 import { Z5 } from '../figma_app/297957';
 import { V as _$$V2 } from '../figma_app/312987';
@@ -2005,18 +2005,18 @@ let a$ = registerModal(e => {
     children: jsx(ModalRootComponent, {
       manager: u,
       width: 'lg',
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: getI18nString('members_table.confirm_bulk_seat_change_title')
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: getI18nString('members_table.confirm_bulk_seat_change_body', {
             seatType: c,
             userCount: _
           })
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx($z, {
               disabled: p,
               onClick: onClose,
@@ -2298,12 +2298,12 @@ let a1 = registerModal(e => {
     width: 'lg',
     height: 'dynamic',
     manager: t,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('members_table.org_user_menu.view_guest_access')
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         children: a ? jsx(aZ, {
           user: e.user,
           orgUser: e.orgUser,
@@ -2314,8 +2314,8 @@ let a1 = registerModal(e => {
           className: 'xrvj5dj x1ku5rj1 x5mc7k8',
           children: jsx(_$$k3, {})
         })
-      }), o.view === 'orgAdminSettings' && a && jsx(wi, {
-        children: jsx(jk, {
+      }), o.view === 'orgAdminSettings' && a && jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx($z, {
             variant: 'secondary',
             onClick: e.onRemoveUser,

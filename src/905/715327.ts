@@ -20,7 +20,7 @@ import { NO_TEAM, getDraftsSidebarString, isCommunityLibraryFile, initialLibrary
 import { e0 as _$$e } from "../905/696396";
 import { r as _$$r, F as _$$F } from "../905/336143";
 import { I as _$$I } from "../905/423735";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { E as _$$E } from "../905/128063";
 import { Yt } from "../905/712714";
@@ -129,7 +129,7 @@ function O({
     properties: {
       libraryKey: i
     },
-    children: jsxs(_$$i, {
+    children: jsxs(TabLoop, {
       children: [a ? jsx(_$$C, {
         libraryStat: a,
         libraryKey: i,

@@ -1,6 +1,6 @@
 import { useState, useId, useMemo, useCallback, useEffect } from "react";
 import { preventAndStopEvent } from "../905/955878";
-import { sj } from "../905/875826";
+import { positiveModulo } from "../905/875826";
 import { getObjectKeys } from "../905/36803";
 import { nD, Kq, aM, eR } from "../905/336566";
 let l = {
@@ -39,7 +39,7 @@ export function $$c0(e, t, i, d) {
     let i = p.indexOf(t);
     let n = l[e.key]?.(i, c) ?? i;
     let s = p.length;
-    e.repeat && (n > s - 1 || n < 0) || m(p[sj(n, s)]);
+    e.repeat && (n > s - 1 || n < 0) || m(p[positiveModulo(n, s)]);
   }, [t, p, c, m]);
   return [useMemo(() => getObjectKeys(e).reduce((t, i) => (t[i] = {
     id: i,

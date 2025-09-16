@@ -44,7 +44,7 @@ import { SubscriptionStatus } from '../905/272080';
 import { Checkbox } from '../905/274480';
 import { C as _$$C2 } from '../905/283236';
 import { A as _$$A } from '../905/289352';
-import { G as _$$G2 } from '../905/289770';
+import { useTheme } from '../905/289770';
 import { orgSubscriptionAtom } from '../905/296690';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
@@ -64,7 +64,7 @@ import { useModalManager } from '../905/437088';
 import { N as _$$N } from '../905/438674';
 import { ConfirmationModal } from '../905/441305';
 import { D as _$$D } from '../905/443020';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { a as _$$a2 } from '../905/462280';
@@ -81,7 +81,7 @@ import { Button } from '../905/521428';
 import { xQ } from '../905/535224';
 import { r6 } from '../905/542608';
 import { FlashActions, handlePromiseError } from '../905/573154';
-import { v as _$$v } from '../905/581647';
+import { handleStripeManageSubscription } from '../905/581647';
 import p, { getFeatureFlags } from '../905/601108';
 import { ButtonPrimitive } from '../905/632989';
 import { m as _$$m } from '../905/636019';
@@ -101,7 +101,7 @@ import { tH as _$$tH, H4 } from '../905/751457';
 import { t as _$$t3 } from '../905/751495';
 import { _ as _$$_ } from '../905/799322';
 import { d as _$$d } from '../905/811033';
-import { S as _$$S3 } from '../905/823680';
+import { setupRefUpdater } from '../905/823680';
 import { z as _$$z2 } from '../905/825185';
 import { u as _$$u } from '../905/834238';
 import { Hl, hM } from '../905/840929';
@@ -148,7 +148,7 @@ import { createNoOpValidator } from '../figma_app/181241';
 import { FDomainVerificationStatusType, FMemberRoleType, FOrganizationLevelType, FPlanNameType } from '../figma_app/191312';
 import { Zx } from '../figma_app/217457';
 import { c$, MM, ms, wv } from '../figma_app/236327';
-import l, { nB as _$$nB, hE, jk, r1, vo, wi, Y9 } from '../figma_app/272243';
+import l, { DialogBody, DialogTitle, DialogActionStrip, DialogHiddenTitle, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { useMultiSubscription, useSubscription } from '../figma_app/288654';
 import { logAndTrackCTA } from '../figma_app/314264';
 import { kA, yK } from '../figma_app/336853';
@@ -439,7 +439,7 @@ function e_(e) {
     }), jsx('div', {
       className: 'profile_connections--email--UbNlG',
       children: e.email
-    }), !e.isPrimary && !e.can_sell_on_community && jsx(_$$K, {
+    }), !e.isPrimary && !e.can_sell_on_community && jsx(IconButton, {
       'aria-label': getI18nString('general.remove'),
       'htmlAttributes': {
         'data-tooltip-type': KindEnum.TEXT,
@@ -847,7 +847,7 @@ function eG(e) {
     }, 'cta_clicked');
     o(!1);
     n(FlashActions.flash(getI18nString('community.buyer.redirecting_to_stripe')));
-    n(_$$v({}));
+    n(handleStripeManageSubscription({}));
   };
   let f = c === 'subscription';
   let _ = f ? 'Stripe Subscription Management' : 'Stripe Invoice';
@@ -1759,11 +1759,11 @@ let tJ = registerModal(e => {
           passwordRetype: i.passwordRetype.value
         }));
       },
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('settings.account_setting.change_password_modal_header')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('input', {
           name: 'passwordOld',
           type: 'password',
@@ -1783,14 +1783,14 @@ let tJ = registerModal(e => {
           className: _Z,
           placeholder: getI18nString('settings.account_setting.change_password_confirm_password_placeholder')
         })]
-      }), jsxs(wi, {
+      }), jsxs(DialogFooter, {
         children: [jsx(Button, {
           onClick: () => {
             t(BD());
           },
           variant: 'link',
           children: renderI18nText('settings.account_setting.forgot_password')
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(Button, {
             type: 'submit',
             children: renderI18nText('settings.account_setting.submit_button')
@@ -1944,12 +1944,12 @@ let iv = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: g,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('tokens.settings.generate_new_token')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsxs(AutoLayout, {
           direction: 'vertical',
           spacing: 16,
@@ -2059,8 +2059,8 @@ let iv = registerModal(e => {
             })]
           })]
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             onClick: () => _(popModalStack()),
             variant: 'secondary',
@@ -3342,7 +3342,7 @@ let nQ = forwardRef(({
     ref,
     ...g
   } = p;
-  let f = _$$S3(s, ref);
+  let f = setupRefUpdater(s, ref);
   return jsx(_$$p3, {
     ...n,
     'htmlAttributes': i,
@@ -3398,12 +3398,12 @@ let n1 = registerModal(e => {
         }));
         i(popModalStack());
       },
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('settings.account_settings.change_name_modal_title')
           })
-        }), jsx(_$$nB, {
+        }), jsx(DialogBody, {
           children: jsx(n$.Row, {
             name: 'name',
             label: jsx(n$.Label, {
@@ -3418,8 +3418,8 @@ let n1 = registerModal(e => {
               }
             })
           })
-        }), jsx(wi, {
-          children: jsx(jk, {
+        }), jsx(DialogFooter, {
+          children: jsx(DialogActionStrip, {
             children: jsx(Button, {
               type: 'submit',
               htmlAttributes: {
@@ -3446,11 +3446,11 @@ let n1 = registerModal(e => {
         }));
         i(popModalStack());
       },
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('settings.account_settings.change_name_modal_title')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: jsx(BigTextInputForwardRef, {
           ref: f,
           name: 'name',
@@ -3466,8 +3466,8 @@ let n1 = registerModal(e => {
           },
           dataTestId: 'change-name-input'
         })
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(ButtonBasePrimary, {
             type: 'submit',
             className: pL,
@@ -3621,11 +3621,11 @@ let rt = registerModal(e => {
           });
           e.onClose();
         },
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText('settings.account_settings.file_view_history_modal.title')
           })
-        }), jsxs(_$$nB, {
+        }), jsxs(DialogBody, {
           children: [jsxs(_$$b2, {
             autofocus: !0,
             legend: jsx(_$$q, {
@@ -3655,8 +3655,8 @@ let rt = registerModal(e => {
               text: n === 'true' ? renderI18nText('settings.account_settings.file_view_history_modal.turn_off.change_only_applies_moving_forward') : renderI18nText('settings.account_settings.file_view_history_modal.turn_on.change_only_applies_moving_forward')
             })
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: 'secondary',
               onClick: e.onClose,
@@ -3683,12 +3683,12 @@ function rs({
   return jsx(ModalRootComponent, {
     manager: i,
     width: 'lg',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('fullscreen.font_settings.what_s_going_on')
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx('div', {
           className: jE,
           children: renderI18nText('fullscreen.font_settings.local_font_explainer')
@@ -3702,8 +3702,8 @@ function rs({
           className: jE,
           children: renderI18nText('fullscreen.font_settings.if_you_ever_change_your_mind_you_can_easily_uninstall_the_process')
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx(Button, {
             variant: 'primary',
             onClick: t,
@@ -4215,7 +4215,7 @@ function rF({
   let i = am();
   let {
     enhancedContrast
-  } = _$$G2();
+  } = useTheme();
   let a = selectWithShallowEqual(e => ({
     orgById: e.orgById,
     teams: e.teams,
@@ -4776,13 +4776,13 @@ let $$rB0 = registerModal(e => {
   }, {
     defaultActive: tab
   });
-  let S = useMemo(() => g.activeSubView ? jsx(Y9, {
-    children: jsx(hE, {
+  let S = useMemo(() => g.activeSubView ? jsx(DialogHeader, {
+    children: jsx(DialogTitle, {
       children: jsxs('div', {
         className: 'account_settings_modal--backButton--miMJn text--fontPos13--xW8hS text--_fontBase--QdLsd',
         children: [jsx('span', {
           className: _$$s.mr2.$,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             'aria-label': getI18nString('general.back'),
             'onClick': v,
             'children': jsx(u, {})
@@ -4792,8 +4792,8 @@ let $$rB0 = registerModal(e => {
         }(g)]
       })
     })
-  }) : jsxs(Y9, {
-    children: [jsx(r1, {
+  }) : jsxs(DialogHeader, {
+    children: [jsx(DialogHiddenTitle, {
       children: getI18nString('general.settings')
     }), jsx(_$$t.TabStrip, {
       manager: x,
@@ -4809,8 +4809,8 @@ let $$rB0 = registerModal(e => {
       manager: t,
       width: 650,
       height: 'full',
-      children: jsxs(vo, {
-        children: [S, jsx(_$$nB, {
+      children: jsxs(DialogContents, {
+        children: [S, jsx(DialogBody, {
           children: Object.values($$rM1).map(e => createElement(_$$t.TabPanel, {
             ...E[e],
             key: e

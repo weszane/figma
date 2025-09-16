@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { ModalFormContents } from "../905/38914";
-import { Y9, hE, nB, wi } from "../figma_app/272243";
+import { DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { popModalStack } from "../905/156213";
@@ -36,11 +36,11 @@ export function $$m0(e) {
   };
   return e.fplModal ? jsxs(ModalFormContents, {
     onSubmit: h,
-    children: [jsx(Y9, {
-      children: jsx(hE, {
+    children: [jsx(DialogHeader, {
+      children: jsx(DialogTitle, {
         children: e.title
       })
-    }), jsxs(nB, {
+    }), jsxs(DialogBody, {
       children: [jsx("div", {
         children: renderI18nText("settings.require_password.for_security_purposes_please_re_enter_your_password_below")
       }), jsx("input", {
@@ -53,7 +53,7 @@ export function $$m0(e) {
         className: z3,
         children: e.twoFactorAuth.currentError || "\xa0"
       })]
-    }), jsx(wi, {
+    }), jsx(DialogFooter, {
       children: jsxs("div", {
         className: Hx,
         children: [jsx(Button, {

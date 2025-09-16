@@ -45,7 +45,7 @@ import { J as _$$J4 } from '../905/125483';
 import { J as _$$J3 } from '../905/125993';
 import { KindEnum } from '../905/129884';
 import { A as _$$A7 } from '../905/139173';
-import { P as _$$P8 } from '../905/143421';
+import { ScrollContainer } from '../905/143421';
 import { _ as _$$_5 } from '../905/144222';
 import { e as _$$e9 } from '../905/149844';
 import { t as _$$t5 } from '../905/150656';
@@ -104,7 +104,7 @@ import { UV } from '../905/438367';
 import { N as _$$N4 } from '../905/438674';
 import { I as _$$I } from '../905/439783';
 import { w as _$$w2 } from '../905/442596';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k7 } from '../905/443820';
 import { w4, y1 } from '../905/445814';
 import { trackEventAnalytics } from '../905/449184';
@@ -359,7 +359,7 @@ import { p as _$$p7, vo as _$$vo, xn as _$$xn2, MM } from '../figma_app/246831';
 import { PE } from '../figma_app/251115';
 import { G as _$$G, h as _$$h2 } from '../figma_app/257072';
 import { S7 } from '../figma_app/259578';
-import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
+import { DialogBody, DialogTitle, DialogActionStrip, DialogContents, DialogFooter, DialogHeader } from '../figma_app/272243';
 import { cZ as _$$cZ } from '../figma_app/272902';
 import { rgbToNormalized, packNormalizedRgb, colorsEqual } from '../figma_app/273493';
 import { isBuzzTemplatePickerCmtyShelvesEnabled, isBuzzImportFromDesignEnabled } from '../figma_app/275462';
@@ -1326,7 +1326,7 @@ function td({
       placeholder: getI18nString('cooper.templates.search_figma_design_files'),
       query: e,
       withUI3Icon: !0
-    }), c != null && jsx(_$$K, {
+    }), c != null && jsx(IconButton, {
       'aria-label': getI18nString('common.close'),
       'onClick': c,
       'children': jsx(_$$L, {})
@@ -2482,7 +2482,7 @@ function nB() {
             ...Ay.props(n$.text),
             children: t ? renderI18nText('cooper.templates.internal.banner_left_rail') : renderI18nText('cooper.templates.internal.banner')
           })]
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           'aria-label': getI18nString('banner.shared.close_banner'),
           'onClick': () => {
             e(postUserFlag({
@@ -3071,7 +3071,7 @@ function n8({
         })]
       }), n && jsx('div', {
         className: 'x10l6tqk x19up5dg xfr5jun x78zum5 x6s0dn4',
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           'aria-label': getI18nString('banner.shared.close_banner'),
           'onClick': () => {
             l(postUserFlag({
@@ -5781,19 +5781,19 @@ function o6({
     },
     width: 240,
     ref: i,
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: renderI18nText('cooper.inline_menu.fill_panel.library_text_style_picker.title')
-        }), jsx(jk, {
-          children: jsx(_$$K, {
+        }), jsx(DialogActionStrip, {
+          children: jsx(IconButton, {
             'aria-label': getI18nString('design_systems.styles.tooltips.library'),
             'onClick': onToggleLibraryModal,
             'variant': 'ghost',
             'children': jsx(_$$l3, {})
           })
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(o7, {
           onClose: t,
@@ -8158,7 +8158,7 @@ function sz({
   }) : null;
 }
 function sN() {
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     'actionOnPointerDown': !0,
     'onClick': GradientToolApi?.rotateGradient90Degrees,
     'aria-label': getI18nString('fullscreen.properties_panel.gradient_picker.rotate_90'),
@@ -8256,7 +8256,7 @@ function sM({
   } = _$$b4();
   return t ? jsxs(_$$bL2, {
     manager,
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ...getTriggerProps(),
       'variant': e === 'buzz-fields-panel' ? 'secondary' : 'ghost',
       'data-tooltip-show-above': !0,
@@ -9245,15 +9245,15 @@ let dh = registerModal(e => {
   return jsx(ModalRootComponent, {
     manager: t,
     width: 'md',
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString('cooper.properties_panel.remove_restrictions.modal_title')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         children: getI18nString('cooper.properties_panel.remove_restrictions.modal_description')
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: 'secondary',
             onClick: onClose,
@@ -11292,7 +11292,7 @@ function uR({
             className: 'x1i1rx1s xkh2ocl xadz4q5'
           }), jsx('div', {
             className: 'x19phtnz xw4jnvo x78zum5 x6s0dn4 xl56j7k',
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               'aria-label': n,
               'onClick': l,
               'children': jsx('span', {
@@ -11713,7 +11713,7 @@ function u4({
           name: 'cooper_media_upload',
           children: [isImage && jsx('div', {
             className: 'x19y5rnk x16v0e3u',
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               'variant': 'secondary',
               'data-tooltip-show-above': !0,
               'aria-label': getI18nString('cooper.properties_panel.adjust_image'),
@@ -11937,7 +11937,7 @@ function xl() {
             className: 'x1aue78i xcr9a89 x19y5rnk',
             onMouseEnter: () => B(!0),
             onMouseLeave: () => B(!1),
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               'aria-label': getI18nString('cooper.inline_menu.remove_guidelines'),
               'onClick': () => {
                 e(showModalHandler({
@@ -12380,7 +12380,7 @@ let xN = memo(({
       })
     }), jsx('div', {
       ...Ay.props(xw.iconContainer, (r || s) && xw.iconContainerVisible),
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         'onClick': l,
         'aria-label': getI18nString('buzz.stock_photos.more_details'),
         'htmlAttributes': {
@@ -13304,7 +13304,7 @@ function x4() {
                 className: 'x78zum5 x6s0dn4 xg2d0mh xeuugli',
                 children: [!!g && jsx('div', {
                   className: 'x1bawvfr',
-                  children: jsx(_$$K, {
+                  children: jsx(IconButton, {
                     'aria-label': getI18nString('cooper.templates.header.back'),
                     'onClick': g,
                     'children': jsx(_$$C2, {})
@@ -13316,7 +13316,7 @@ function x4() {
                 className: 'x78zum5 x6s0dn4 x1nfngrj x8x9d4c',
                 children: [jsx(x3, {
                   activeTab: l
-                }), jsx(_$$K, {
+                }), jsx(IconButton, {
                   'aria-label': getI18nString('cooper.left_rail.close_panel'),
                   'onClick': () => {
                     f({
@@ -13422,7 +13422,7 @@ function x3({
   activeTab: e
 }) {
   let t = uW();
-  return e === _$$x.PLUGINS && t ? jsx(_$$K, {
+  return e === _$$x.PLUGINS && t ? jsx(IconButton, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
       e?.switchContainer(_$$Wh.MODAL);
@@ -13905,12 +13905,12 @@ function pL({
     },
     width: 240,
     ref: r,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText('cooper.inline_menu.fill_panel.custom_color_picker_header')
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(pR, {
           paint: e,
@@ -13981,17 +13981,17 @@ function pB({
     },
     width: 240,
     ref: r,
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: renderI18nText('cooper.inline_menu.fill_panel.library_color_picker.title')
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: jsx(ButtonPrimitive, {
             onClick: onToggleLibraryModal,
             children: jsx(_$$l3, {})
           })
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx(Rp, {
           selectedItem: x,
@@ -14040,14 +14040,14 @@ function pK({
   useEffect(() => {
     n?.panel === eC.COLOR_PICKER && n.args?.openCustomColorPicker && d(pw, l, 240);
   }, [n, l, d]);
-  return jsxs(vo, {
+  return jsxs(DialogContents, {
     'data-testid': 'cooper-floating-color-picker',
-    'children': [jsxs(Y9, {
-      children: [jsx(hE, {
+    'children': [jsxs(DialogHeader, {
+      children: [jsx(DialogTitle, {
         children: jsx(pW, {
           paint: e
         })
-      }), jsx(jk, {
+      }), jsx(DialogActionStrip, {
         children: jsx(_$$E2, {
           name: _$$_2.LibraryColorPicker,
           children: jsx(_$$d3, {
@@ -14063,7 +14063,7 @@ function pK({
           })
         })
       })]
-    }), jsx(_$$nB, {
+    }), jsx(DialogBody, {
       padding: 0,
       children: jsxs('div', {
         className: _$$s.flex.flexColumn.$,
@@ -14421,7 +14421,7 @@ let p7 = {
       return jsx(_$$k4, {
         name: _$$$2.VariantSwapPanel,
         children: jsx(aD, {
-          children: jsx(_$$P8, {
+          children: jsx(ScrollContainer, {
             children: jsx('div', {
               ..._$$xk(rL.effectsContainer),
               children: jsx(p5, {})
@@ -14460,14 +14460,14 @@ function p8({
     },
     width: 240,
     ref: n,
-    children: 'entireContentsOverride' in t ? t.entireContentsOverride : jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: 'entireContentsOverride' in t ? t.entireContentsOverride : jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: t.headerLeft
-        }), jsx(jk, {
+        }), jsx(DialogActionStrip, {
           children: t.headerRight
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: t.body
       })]

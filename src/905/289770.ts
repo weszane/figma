@@ -1,15 +1,56 @@
-import { createContext, useContext } from "react";
-import { lQ } from "../905/266289";
-let a = createContext(null);
-let s = {
-  color: "light",
-  brand: "design",
-  enhancedContrast: !1,
-  addThemeListener: () => lQ
-};
-let $$o0 = a.Provider;
-export function $$l1() {
-  return useContext(a) || (globalThis.process?.env?.NODE_ENV !== "test" && console.debug("No theme provider exists currently, returning defaults, but switching modes is disabled"), s);
+import { noop } from 'lodash-es'
+
+import { createContext, useContext } from 'react'
+
+/**
+ * ThemeContext provides theme-related values and functions.
+ * Original variable: a
+ */
+const ThemeContext = createContext<ThemeContextValue | null>(null)
+
+/**
+ * Default theme values used when no provider is present.
+ * Original variable: s
+ */
+const defaultTheme: ThemeContextValue = {
+  color: 'light',
+  brand: 'design',
+  enhancedContrast: false,
+  addThemeListener: () => noop,
 }
-export const A = $$o0;
-export const G = $$l1;
+
+/**
+ * ThemeContextValue defines the shape of theme context.
+ */
+export interface ThemeContextValue {
+  color: string
+  brand: string
+  enhancedContrast: boolean
+  addThemeListener: () => typeof noop
+}
+
+/**
+ * ThemeProvider component for supplying theme context.
+ * Original variable: $$o0
+ */
+export const ThemeProvider2 = ThemeContext.Provider
+
+/**
+ * useTheme returns the current theme context or defaults if none exists.
+ * Original function: $$l1
+ */
+export function useTheme(): ThemeContextValue {
+  const context = useContext(ThemeContext)
+  if (context)
+    return context
+  if (process?.env?.NODE_ENV !== 'test') {
+    console.debug(
+      'No theme provider exists currently, returning defaults, but switching modes is disabled',
+    )
+  }
+  return defaultTheme
+}
+
+// Refactored exports for compatibility with original names
+export const A = ThemeProvider2
+export const G = useTheme

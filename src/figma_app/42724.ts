@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { showModalHandler } from "../905/156213";
 import { selectCurrentFile } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
-import { x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 export function $$_1(e) {
   let t = selectCurrentFile()?.name;
   let r = _6();
@@ -25,7 +25,7 @@ export function $$_1(e) {
       redirectUrl: customHistory.location.pathname
     }));
     n(showModalHandler({
-      type: x,
+      type: AuthModal,
       data: {
         headerText: c
       }

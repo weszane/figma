@@ -1,6 +1,6 @@
 import { u } from '../905/65923';
 import { setupToggleButton } from '../905/167712';
-import { K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { Button, ButtonWide, ButtonLargeWide, ButtonLarge } from '../905/521428';
 import { ButtonPrimitive } from '../905/632989';
 import { d as _$$d } from '../905/976845';
@@ -13,7 +13,7 @@ let $$h3 = withTrackedClick(ButtonLarge);
 let $$m1 = withTrackedClick(ButtonWide);
 let $$g6 = withTrackedClick(ButtonLargeWide);
 let $$f5 = withTrackedClick(_$$d);
-let $$E2 = withTrackedClick(K);
+let $$E2 = withTrackedClick(IconButton);
 withTrackedClick(setupToggleButton);
 export const $z = $$c0;
 export const Ih = $$m1;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
@@ -37,7 +37,7 @@ export function $$f0({
       recordingKey: generateRecordingKey(s, "blendMode"),
       willShowDropdown: () => (trackEventAnalytics("editor-blend-mode-dropdown-show"), Promise.resolve())
     }),
-    icon: f && qg(y, "PASS_THROUGH") ? null : jsx(K, {
+    icon: f && qg(y, "PASS_THROUGH") ? null : jsx(IconButton, {
       htmlAttributes: {
         "data-tooltip": getI18nString("general.remove"),
         "data-tooltip-type": KindEnum.TEXT

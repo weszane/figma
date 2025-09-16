@@ -4,7 +4,7 @@ import { debounce } from "../905/915765";
 import { deepEqual } from "../905/382883";
 import { c$, bL, l9, mc, wv } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { W } from "../905/63398";
 import { J as _$$J } from "../905/614223";
 import { AppStateTsApi, Thumbnail, Fullscreen, Command, DistributionType } from "../figma_app/763686";
@@ -293,7 +293,7 @@ function z(e) {
 export function $$H0(e) {
   let t = !il();
   let [i, r] = lJ("variableWidthPoints");
-  return jsx(K, {
+  return jsx(IconButton, {
     recordingKey: e.recordingKey,
     "aria-label": getI18nString("fullscreen.properties_panel.width_profile.flip_horizonal"),
     disabled: t || isInvalidValue(i) || !i || function (e) {

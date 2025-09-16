@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { b as _$$b, q7, bL, mc } from "../figma_app/860955";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { PopoverOutlet } from "../905/691059";
 import { ButtonPrimitive } from "../905/632989";
 import { I } from "../905/932503";
@@ -62,7 +62,7 @@ export function $$R1(e) {
     children: [jsx("h1", {
       className: C,
       children: getI18nString("user_notification.all_notifications")
-    }), e.displaySettings && S?.length === 1 && jsx(K, {
+    }), e.displaySettings && S?.length === 1 && jsx(IconButton, {
       "aria-label": getI18nString("user_notifications.settings"),
       htmlAttributes: {
         "data-dropdown-tooltip": getI18nString("user_notifications.settings"),
@@ -133,7 +133,7 @@ export function $$R1(e) {
           })
         })]
       })
-    }), e.displaySettings && jsx(K, {
+    }), e.displaySettings && jsx(IconButton, {
       "aria-label": getI18nString("user_notifications.settings"),
       htmlAttributes: {
         "data-dropdown-tooltip": getI18nString("user_notifications.settings"),

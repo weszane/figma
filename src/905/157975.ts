@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { k as _$$k } from "../905/443820";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { getI18nString } from "../905/303541";
 import { Tn, fv } from "../figma_app/933328";
@@ -211,12 +211,12 @@ let $$B0 = registerModal(function (e) {
   return f ? jsx(ModalRootComponent, {
     manager: c,
     width: "fit-content",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: _?.name ?? getI18nString("fullscreen.fullscreen_view_selector.untitled")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: "loading" === I.status ? jsx("div", {
           className: "dsa_file_view_modal--loadingSpinnerContainer--aSSip",

@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, forwardRef, useLayoutEffect, Fragment as _$$Fragment, memo, useMemo } from "react";
 import { useStore, useSelector, useDispatch } from "react-redux";
 import { PopoverPrimitiveContainer, usePopoverPrimitive } from "../905/691059";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { D as _$$D } from "../905/555681";
 import { O as _$$O } from "../905/969533";
 import { J as _$$J } from "../905/614223";
@@ -33,7 +33,7 @@ import { hideDropdownAction } from "../905/929976";
 import { J4 } from "../figma_app/91703";
 import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { hx } from "../figma_app/290668";
 import { isIntegrationContext } from "../figma_app/469876";
 import { Zr } from "../figma_app/678782";
@@ -599,7 +599,7 @@ function ek({
   });
   return jsx(PopoverPrimitiveContainer, {
     ...h(Ay.props(eN.popoverContainer(q, eT))),
-    children: jsx(_$$i, {
+    children: jsx(TabLoop, {
       children: eb
     })
   });
@@ -651,7 +651,7 @@ let $$eO0 = memo(function (e) {
   let j = useRef(null);
   let I = wF();
   let k = ZO();
-  let N = _$$k2();
+  let N = isUserNotLoggedInAndEditorSupported();
   let O = WN();
   let M = useDispatch();
   let [P, G] = useState(!1);

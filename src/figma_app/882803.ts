@@ -3,7 +3,7 @@ import { memo, useState, useEffect, useRef, useCallback } from "react";
 import { clamp } from "../figma_app/492908";
 import { ButtonPrimitive } from "../905/632989";
 import { k as _$$k } from "../905/443820";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { p as _$$p } from "../905/673591";
 import { O as _$$O } from "../905/301080";
 import { P as _$$P } from "../905/547523";
@@ -275,7 +275,7 @@ function w({
         setIsScrubbing: b
       }), jsxs("div", {
         className: yG,
-        children: [jsx(K, {
+        children: [jsx(IconButton, {
           onClick: r,
           "aria-label": z,
           htmlAttributes: {
@@ -308,7 +308,7 @@ function O({
   return jsxs("div", {
     onPointerMove: () => a(!0),
     onPointerOut: () => a(!1),
-    children: [jsx(K, {
+    children: [jsx(IconButton, {
       onClick: s,
       "aria-label": d,
       htmlAttributes: {

@@ -3,7 +3,7 @@ import { useMemo, useContext, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { R as _$$R } from "../905/57445";
 import { EventShield } from "../905/821217";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { U as _$$U } from "../905/708285";
 import { RR } from "../figma_app/338442";
@@ -193,7 +193,7 @@ export function $$z1(e) {
       propDefId
     })));
   }, [c, propDefId, o]);
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     onClick: u,
     "aria-label": getI18nString("design_systems.component_properties.go_to_property"),
     recordingKey: "selectContainingInstance",
@@ -211,7 +211,7 @@ function W(e) {
   let r = useCallback(() => {
     permissionScopeHandler.user("delete-prop-ref", () => Fullscreen.deleteComponentPropRef(nodeField));
   }, [nodeField]);
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     onClick: r,
     "aria-label": getI18nString("design_systems.component_properties.detach_property"),
     recordingKey: "deleteComponentPropRef",

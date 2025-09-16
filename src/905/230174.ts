@@ -3,7 +3,7 @@ import { useMemo, useCallback } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { bL, l9, mc, wv, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { t as _$$t } from "../905/947268";
 import { Z as _$$Z } from "../905/498136";
 import { VariableResolvedDataType } from "../figma_app/763686";
@@ -138,7 +138,7 @@ function P({
           return getI18nString("variables.binding_ui.show_as_list_tooltip");
       }
     }(t.layout);
-    return jsx(K, {
+    return jsx(IconButton, {
       "aria-label": i,
       recordingKey: e,
       onClick: r,

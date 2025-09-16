@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
@@ -14,7 +14,7 @@ import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { registerModal } from "../905/102752";
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { A as _$$A } from "../vendor/850789";
 import { r as _$$r } from "../905/520829";
 import { LazyInputForwardRef } from "../905/408237";
@@ -257,7 +257,7 @@ let z = registerModal(function (e) {
         spellCheck: "false"
       }), !!_ && jsx("div", {
         className: mt,
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick: Z,
           "aria-label": getI18nString("search.search_bar.clear"),
           children: jsx(In, {
@@ -313,12 +313,12 @@ let z = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: d,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("resource_connection.select_a_project_to_connect_an_external_team_to")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [ei, jsx("div", {
             className: _$$s.h400.$,
@@ -333,8 +333,8 @@ let z = registerModal(function (e) {
               fetchMore
             })
           })]
-        }), jsx(wi, {
-          children: jsxs(jk, {
+        }), jsx(DialogFooter, {
+          children: jsxs(DialogActionStrip, {
             children: [jsx(Button, {
               variant: "secondary",
               onClick: i,
@@ -361,12 +361,12 @@ export let $$W0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       manager: i,
       width: "lg",
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: renderI18nText("resource_connection.connect_an_external_team")
           })
-        }), jsxs(nB, {
+        }), jsxs(DialogBody, {
           padding: 0,
           children: [A && jsx("div", {
             className: _$$s.mb12.$,
@@ -388,7 +388,7 @@ export let $$W0 = registerModal(function (e) {
               })
             })
           })]
-        }), jsx(wi, {
+        }), jsx(DialogFooter, {
           children: jsxs("div", {
             className: kA,
             children: [jsx("div", {

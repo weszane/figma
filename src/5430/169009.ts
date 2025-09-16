@@ -31,7 +31,7 @@ import { p as _$$p } from "../905/927118";
 import { j as _$$j } from "../905/834956";
 import { T as _$$T } from "../5132/203178";
 import { Link } from "react-router-dom";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { J as _$$J } from "../905/125993";
 import H from "classnames";
 import { h1 } from "../905/986103";
@@ -634,7 +634,7 @@ function eI(e) {
               svg: _$$A
             }), jsx("div", {
               className: "comment_tile--iconButton--MZmz1",
-              children: jsx(_$$K, {
+              children: jsx(IconButton, {
                 ref: p,
                 onClick: e => {
                   let t = p.current;

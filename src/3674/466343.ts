@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { capitalize } from "../figma_app/930338";
@@ -588,8 +588,8 @@ export function $$X0({
     children: jsxs(ModalRootComponent, {
       width: 392,
       manager: x,
-      children: [jsx(vo, {
-        children: jsx(nB, {
+      children: [jsx(DialogContents, {
+        children: jsx(DialogBody, {
           children: jsx($$K1, {
             content: u,
             hideImgBorder: r,
@@ -601,9 +601,9 @@ export function $$X0({
             secondaryButtonProps: f
           })
         })
-      }), _ && jsx(vo, {
+      }), _ && jsx(DialogContents, {
         className: "x1xmf6yo xh8yej3",
-        children: jsx(nB, {
+        children: jsx(DialogBody, {
           padding: 0,
           children: getFeatureFlags().is_extended_social_proof_enabled ? null !== m ? jsx(_$$w, {
             seatType: ProductAccessTypeEnum.DEVELOPER,

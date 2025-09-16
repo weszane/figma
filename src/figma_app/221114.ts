@@ -5,7 +5,7 @@ import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ButtonPrimitive } from "../905/632989";
 import { b as _$$b, bL, mc, r1 } from "../figma_app/860955";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { u as _$$u } from "../905/65923";
 import { z6, CU, H_ } from "../905/963340";
 import { z as _$$z } from "../905/252950";
@@ -568,7 +568,7 @@ function eP({
   let a = _$$D2(t);
   return a ? jsxs(bL, {
     manager,
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       "aria-label": getI18nString("collaboration.feedback.more_options"),
       "data-tooltip-type": KindEnum.TEXT,
       "data-tooltip": getI18nString("collaboration.feedback.more_options"),
@@ -1214,7 +1214,7 @@ export function $$ej5(e) {
         setShowOnlyUserVersionHistory: filterOptions.setShowOnlyUserVersionHistory,
         isViewOnly,
         buttonRef: l
-      }), !isViewOnly && jsx(_$$K, {
+      }), !isViewOnly && jsx(IconButton, {
         onClick: addSavepoint,
         "aria-label": getI18nString("collaboration.feedback.add_to_version_history_tooltip"),
         "data-tooltip-type": KindEnum.TEXT,
@@ -1223,7 +1223,7 @@ export function $$ej5(e) {
         recordingKey: generateRecordingKey(e, "plusVersion"),
         ref: l,
         children: jsx(_$$x, {})
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         onClick: onClose,
         "aria-label": getI18nString("collaboration.feedback.close_tooltip"),
         "data-tooltip-type": KindEnum.TEXT,

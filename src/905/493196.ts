@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef } from "react";
-import { G as _$$G } from "../905/289770";
+import { useTheme } from "../905/289770";
 import { J } from "../905/614223";
 import { getThemeContextOrDefault } from "../905/158740";
 import { A as _$$A } from "../vendor/723372";
@@ -63,7 +63,7 @@ export let $$U0 = forwardRef(({
   let n = _$$S();
   let {
     color
-  } = _$$G();
+  } = useTheme();
   return jsx(SelectPrimitiveContainer, {
     className: _$$A(w, "light" === ("dark" === n ? "dark" : color) ? S : E),
     ...t,

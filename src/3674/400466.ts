@@ -82,7 +82,7 @@ import { useMenu, MenuRoot, MenuContainer, MenuItemPrimitive } from "../905/4658
 import { bL as _$$bL, mc as _$$mc, YJ, q7 as _$$q } from "../figma_app/860955";
 import { d as _$$d2 } from "../905/976845";
 import { N as _$$N } from "../905/438674";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ButtonPrimitive } from "../905/632989";
 import { J as _$$J2 } from "../905/125993";
 import { A as _$$A11 } from "../905/251970";
@@ -107,7 +107,7 @@ import { vL } from "../905/826900";
 import { B as _$$B2 } from "../figma_app/539422";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Button } from "../905/521428";
 import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow } from "../905/691059";
 import { x as _$$x } from "../905/587214";
@@ -2160,7 +2160,7 @@ function nk({
       })
     }), jsxs("div", {
       className: "annotation_categories_edit_window--removeButtonContainer--PPynD",
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         "aria-label": getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_button_label", {
           category: s ?? ""
         }),
@@ -2179,15 +2179,15 @@ function nk({
         }),
         children: [jsx(PopoverPrimitiveArrow, {
           ...getArrowProps()
-        }), jsxs(vo, {
-          children: [jsx(Y9, {
-            children: jsx(hE, {
+        }), jsxs(DialogContents, {
+          children: [jsx(DialogHeader, {
+            children: jsx(DialogTitle, {
               children: getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_dialog_title")
             })
-          }), jsx(_$$nB, {
+          }), jsx(DialogBody, {
             children: getI18nString("dev_handoff.annotations.categories_edit_window.remove_category_dialog_body")
-          }), jsx(wi, {
-            children: jsxs(jk, {
+          }), jsx(DialogFooter, {
+            children: jsxs(DialogActionStrip, {
               children: [jsx(Button, {
                 variant: "secondary",
                 recordingKey: generateRecordingKey(e, "removeCategoryCancel"),
@@ -2400,19 +2400,19 @@ let nA = registerModal(function (e) {
     htmlAttributes: {
       "data-testid": "annotation-categories-edit-window-root"
     },
-    children: jsxs(vo, {
-      children: [jsxs(Y9, {
-        children: [jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsxs(DialogHeader, {
+        children: [jsx(DialogTitle, {
           children: renderI18nText("dev_handoff.annotations.categories_edit_window.title")
-        }), jsx(jk, {
-          children: jsx(_$$K, {
+        }), jsx(DialogActionStrip, {
+          children: jsx(IconButton, {
             recordingKey: generateRecordingKey(recordingKey, "addCategory"),
             "aria-label": getI18nString("dev_handoff.annotations.categories_edit_window.add_category_button"),
             onClick: M,
             children: jsx(_$$x, {})
           })
         })]
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0 === u.length ? void 0 : 0,
         children: u.length > 0 ? jsx(hh, {
           children: jsx("div", {
@@ -2447,8 +2447,8 @@ let nA = registerModal(function (e) {
           className: "annotation_categories_edit_window--noCategoriesMessage--haAE-",
           children: renderI18nText("dev_handoff.annotations.categories_edit_window.no_categories_message")
         })
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(Button, {
             variant: "secondary",
             onClick: W,
@@ -3360,7 +3360,7 @@ function n5({
             })
           }), jsxs("div", {
             className: "annotation--headerRowRight--5h3Tr",
-            children: [eO, jsx(_$$K, {
+            children: [eO, jsx(IconButton, {
               "aria-label": getI18nString("general.close"),
               recordingKey: "closeAnnotationDialog",
               onClick: eN,
@@ -3498,7 +3498,7 @@ function n4({
         }) : renderI18nText("dev_handoff.annotations.no_value")
       }), jsx("span", {
         className: "annotation--selectedPropertyDelete--DMdrA",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           recordingKey: `removeAnnotation${n.type}`,
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,

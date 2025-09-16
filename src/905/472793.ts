@@ -16,7 +16,7 @@ import { FigmaSchema } from '../905/125137';
 import { hideSpecificModal, showModalHandler } from '../905/156213';
 import { ServiceCategories as _$$e } from '../905/165054';
 import { permissionScopeHandler } from '../905/189185';
-import { h as _$$h } from '../905/193918';
+import { CommunityCheckoutModal } from '../905/193918';
 import { isInvalidValue, isValidValue } from '../905/216495';
 import { isPluginConfigMatching } from '../905/240440';
 import { widgetErrorTracker } from '../905/250412';
@@ -5371,7 +5371,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       this.options.addShutdownAction(() => {
         if (isActive) {
           fullscreenValue.dispatch(hideSpecificModal(FreemiumApiPreCheckoutModal));
-          fullscreenValue.dispatch(hideSpecificModal(_$$h));
+          fullscreenValue.dispatch(hideSpecificModal(CommunityCheckoutModal));
         }
       });
 

@@ -28,7 +28,7 @@ import { b as _$$b } from "../905/376877";
 import { UpgradeRequestSetting } from "../figma_app/482728";
 import { J as _$$J, q as _$$q } from "../905/202542";
 import { R as _$$R } from "../905/712060";
-import { x as _$$x } from "../905/749159";
+import { AuthModal } from "../905/749159";
 import { D as _$$D } from "../905/261307";
 import { $ as _$$$ } from "../905/724765";
 import { t as _$$t2 } from "../905/789267";
@@ -633,7 +633,7 @@ export function $$z2({
       formState: AuthFlowStep.JOIN_ORG,
       redirectUrl: customHistory.location.pathname
     })), t(showModalHandler({
-      type: _$$x,
+      type: AuthModal,
       data: {}
     }))) : l ? l(e) : t(VisualBellActions.enqueue({
       message: e.data?.message || "Encountered an error",

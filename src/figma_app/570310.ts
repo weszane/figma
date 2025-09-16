@@ -65,7 +65,7 @@ import { useModalManager } from "../905/437088";
 import { H as _$$H } from "../905/56919";
 import { ModalRootComponent } from "../905/38914";
 import { Wk } from "../figma_app/272243";
-import { r as _$$r } from "../905/840133";
+import { TabsPrimitiveTabStrip } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
 import { trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { lW } from "../figma_app/11182";
@@ -668,7 +668,7 @@ let eC = registerModal(function (e) {
           }), jsx("h2", {
             className: J$,
             children: renderI18nText("dev_handoff.code_connect.modal_text")
-          }), jsxs(_$$r, {
+          }), jsxs(TabsPrimitiveTabStrip, {
             manager: _,
             className: gy,
             children: [jsx(_$$r2, {

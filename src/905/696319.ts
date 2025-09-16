@@ -3,16 +3,16 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useState, useEffect, createContext, useContext, useRef, useCallback, useLayoutEffect } from "react";
 import { A as _$$A2 } from "../vendor/723372";
 import { mb, ql, Jq, iL, Fi, QT } from "../905/687992";
-import { S as _$$S } from "../905/823680";
+import { setupRefUpdater } from "../905/823680";
 import { p as _$$p } from "../905/185998";
 import { addEventlistenerWithCleanup, preventAndStopEvent, createCleanupExecutor } from "../905/955878";
 import { mergeProps } from "../905/475481";
-import { hs, f2, WQ, T_, i_, TX } from "../905/268491";
+import { multiplyPoint, originPoint, addPoints, pointFromMovement, roundToDevicePixel, pointFromMouseEvent } from "../905/268491";
 import { createPortal } from "react-dom";
-import { sj, qE } from "../905/875826";
+import { positiveModulo, clamp } from "../905/875826";
 import { isSafari } from "../905/881471";
-import { M as _$$M } from "../905/97346";
-import { ae, pW } from "../905/117474";
+import { setupDragHandler } from "../905/97346";
+import { containsActiveElement, focusAndSelect } from "../905/117474";
 import { N as _$$N } from "../905/427996";
 import { l as _$$l } from "../905/490996";
 import { C as _$$C } from "../905/294086";
@@ -51,11 +51,11 @@ function A() {
             };
           };
         case !1:
-          return e => hs(e, .2);
+          return e => multiplyPoint(e, .2);
       }
     }(t.current);
     let n = null;
-    let r = f2;
+    let r = originPoint;
     return addEventlistenerWithCleanup(e, "wheel", a => {
       let s = i(function (e) {
         let t = -e.deltaX;
@@ -83,15 +83,15 @@ function A() {
         })) return;
         t.current.onScrubStart?.({
           target: e,
-          delta: f2,
-          movement: f2,
+          delta: originPoint,
+          movement: originPoint,
           shiftKey: a.shiftKey,
           source: "wheel"
         });
         r = s;
       } else {
         clearTimeout(n);
-        r = WQ(r, s);
+        r = addPoints(r, s);
       }
       preventAndStopEvent(a);
       let o = {
@@ -125,8 +125,8 @@ async function S(e) {
 var C = "use-scrub__scrubbing__3D3dS";
 function T(e, t, i) {
   if (!e) return;
-  let n = sj(t.x + i.x, window.innerWidth);
-  let r = sj(t.y + i.y, window.innerHeight);
+  let n = positiveModulo(t.x + i.x, window.innerWidth);
+  let r = positiveModulo(t.y + i.y, window.innerHeight);
   let a = n > window.innerWidth / 2 ? -100 : 0;
   let s = r > window.innerHeight / 2 ? -100 : 0;
   e.style.transform = `translate(calc(${a}% + ${n}px), calc(${s}% + ${r}px))`;
@@ -270,18 +270,18 @@ let H = forwardRef(({
     } = function (e) {
       let [t, i, a] = function (e) {
         let t = useRef();
-        let i = useRef(f2);
-        let a = useRef(f2);
+        let i = useRef(originPoint);
+        let a = useRef(originPoint);
         let s = useRef();
         let [o, l] = useState(1);
         let [c, p] = function ({
           onPointerLockPermissionChange: e,
           ...t
         }) {
-          let i = useRef(f2);
+          let i = useRef(originPoint);
           let n = useRef();
           let a = useRef();
-          return _$$M({
+          return setupDragHandler({
             ...t,
             onDragStart(r, {
               registerAbortSignal: s
@@ -306,12 +306,12 @@ let H = forwardRef(({
                   l();
                 });
               } else l();
-              i.current = f2;
+              i.current = originPoint;
               t.onDragStart?.(r);
             },
             onDrag(e) {
-              let n = T_(e);
-              i.current = WQ(i.current, n);
+              let n = pointFromMovement(e);
+              i.current = addPoints(i.current, n);
               t.onDrag(Object.assign(e, {
                 delta: i.current,
                 movement: n
@@ -326,7 +326,7 @@ let H = forwardRef(({
               }
               t.onDragEnd?.(Object.assign(e, {
                 delta: i.current,
-                movement: f2
+                movement: originPoint
               }));
             }
           });
@@ -346,11 +346,11 @@ let H = forwardRef(({
             let r = n.currentTarget;
             document.documentElement.classList.add(C);
             t.current = r;
-            i.current = i_(TX(n));
+            i.current = roundToDevicePixel(pointFromMouseEvent(n));
             e.onScrubStart?.({
               target: r,
-              delta: f2,
-              movement: f2,
+              delta: originPoint,
+              movement: originPoint,
               shiftKey: n.shiftKey,
               source: "pointer"
             });
@@ -368,14 +368,14 @@ let H = forwardRef(({
           },
           onDragEnd(n) {
             document.documentElement.classList.remove(C);
-            i.current = f2;
-            a.current = f2;
+            i.current = originPoint;
+            a.current = originPoint;
             let r = t.current;
             t.current = void 0;
             e.onScrubEnd?.(n.cancelled ? {
               target: r,
-              delta: f2,
-              movement: f2,
+              delta: originPoint,
+              movement: originPoint,
               shiftKey: !1,
               source: "pointer",
               cancelled: !0
@@ -471,7 +471,7 @@ let H = forwardRef(({
       singleAxis: "x",
       onBeforeScrub: e => !!e.target.classList.contains(R) || "pointer" !== e.source,
       onScrubStart(n) {
-        if (ae(n.target) && (L.current = document.activeElement, L.current.blur()), t) {
+        if (containsActiveElement(n.target) && (L.current = document.activeElement, L.current.blur()), t) {
           let n = t();
           let r = iL(i, n, e, "scrub", null);
           r?.callback ? j.current = r.callback : N.current = r?.value ?? e;
@@ -486,7 +486,7 @@ let H = forwardRef(({
           if ("wheel" === e.source) return [1, 1];
           let i = (t = function (e) {
             let t = window.innerHeight;
-            return qE(e / t, -1, 1);
+            return clamp(e / t, -1, 1);
           }(e.delta.y)) < -.5 ? 8 : t < -.25 ? 4 : t < -.125 ? 2 : t > .5 ? -8 : t > .25 ? -4 : t > .125 ? -2 : 1;
           return [i > 0 ? i : -(1 / i), i];
         }(t);
@@ -524,7 +524,7 @@ let H = forwardRef(({
         if (L.current) {
           let e = L.current;
           L.current = null;
-          setTimeout(() => pW(e));
+          setTimeout(() => focusAndSelect(e));
         }
       }
     });
@@ -562,7 +562,7 @@ let H = forwardRef(({
   let {
     inputProps
   } = p;
-  let O = _$$S(i, inputProps.ref);
+  let O = setupRefUpdater(i, inputProps.ref);
   return jsx(_$$p, {
     ...inputProps,
     ref: O,

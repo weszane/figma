@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useRef, useState, useCallback } from "react";
 import { useStore } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { A as _$$A } from "../905/593436";
 import { C as _$$C } from "../905/520159";
@@ -221,7 +221,7 @@ export function $$H3({
         className: _$$s.h24.flex.flexRow.relative.justifyBetween.$,
         children: [jsx("div", {
           className: _$$s.flex.flexRow.gap4.$,
-          children: eo && jsx(_$$K, {
+          children: eo && jsx(IconButton, {
             recordingKey: generateRecordingKey(g, "backButton"),
             onClick: y || pop,
             "aria-label": getI18nString("qa.go_back"),
@@ -282,7 +282,7 @@ export function $$H3({
           },
           children: [jsx(_$$y2, {
             helpUrlVariant: e
-          }), K && jsx(_$$K, {
+          }), K && jsx(IconButton, {
             recordingKey: generateRecordingKey(g, "closeButton"),
             onClick: y || pop,
             "aria-label": getI18nString("common.close"),

@@ -70,7 +70,7 @@ import { yZ } from '../905/407352';
 import { debugState } from '../905/407919';
 import { browserCapabilities } from '../905/409121';
 import { N as _$$N2 } from '../905/438674';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
 import { y as _$$y5 } from '../905/461685';
@@ -126,7 +126,7 @@ import { EventShield } from '../905/821217';
 import { zi } from '../905/824449';
 import { vL } from '../905/826900';
 import { j as _$$j2 } from '../905/834956';
-import { r as _$$r4 } from '../905/840133';
+import { TabsPrimitiveTabStrip } from '../905/840133';
 import { Um } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { VariableStyleId } from '../905/859698';
@@ -6741,7 +6741,7 @@ function sn() {
           appModelKeyboardShortcuts: d
         }), jsx('span', {
           className: 'keyboard_shortcut_panel_custom_tab--deleteButton--xf9nN',
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             'onClick': () => C4(t === 'FULLSCREEN' ? FullscreenMode.FULLSCREEN : FullscreenMode.NON_FULLSCREEN, e),
             'aria-label': getI18nString('whiteboard.keyboard_shortcuts.delete.shortcut'),
             'htmlAttributes': {
@@ -8100,7 +8100,7 @@ function sH({
       className: el()('keyboard_shortcut_panel--tabsContainer--PbGsu', {
         'keyboard_shortcut_panel--tabsContainerWithReplay--US6bY': T
       }),
-      children: [jsx(_$$r4, {
+      children: [jsx(TabsPrimitiveTabStrip, {
         className: P,
         ref: o,
         manager: y,

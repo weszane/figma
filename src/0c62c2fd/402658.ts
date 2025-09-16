@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
 import { useModalManager } from "../905/437088";
-import { nB, vo, Y9, hE, wi, jk } from "../figma_app/272243";
+import { DialogBody, DialogContents, DialogHeader, DialogTitle, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { k } from "../905/443820";
 import { ModalRootComponent } from "../905/38914";
 import { setupAutofocusHandler } from "../905/128376";
@@ -29,7 +29,7 @@ export function $$T0(e) {
     ...e,
     numFiles: s.data.fileCount,
     hasPublishedSite: s.data.publishedSiteCount > 0
-  }) : jsx(nB, {
+  }) : jsx(DialogBody, {
     padding: {
       top: "1rem",
       bottom: "1rem"
@@ -44,9 +44,9 @@ export function $$T0(e) {
     manager: r,
     width: "lg",
     height: "fixed",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: getI18nString("file_browser.trash_project.move_project_to_trash")
         })
       }), i]
@@ -113,7 +113,7 @@ function E(e) {
     t(hideModal());
   };
   return jsxs(Fragment, {
-    children: [jsxs(nB, {
+    children: [jsxs(DialogBody, {
       children: [e.folderState && jsx("div", {
         className: _$$s.mb12.$,
         children: jsx(_$$_, {
@@ -143,8 +143,8 @@ function E(e) {
           trashStyled: j
         })
       })]
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: () => {

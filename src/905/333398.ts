@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
 import { A as _$$A } from "../vendor/723372";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { L } from "../905/704296";
 import { useFplStrings } from "../figma_app/415899";
 import { defaultComponentAttribute } from "../905/577641";
@@ -39,7 +39,7 @@ export let $$m0 = forwardRef(({
       })
     }), t && jsx("div", {
       className: YE,
-      children: jsx(K, {
+      children: jsx(IconButton, {
         "aria-label": A,
         onClick: t,
         children: jsx(L, {})

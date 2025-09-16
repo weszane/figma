@@ -1,10 +1,10 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useCallback } from "react";
 import { lQ } from "../905/934246";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { parsePxInt } from "../figma_app/783094";
 import { Point } from "../905/736624";
 import { l as _$$l } from "../905/30301";
@@ -326,7 +326,7 @@ export class $$R0 extends Component {
               className: qg
             }), jsx(P, {
               onDismissModal: this.props.dismissModal,
-              children: jsx(_$$i, {
+              children: jsx(TabLoop, {
                 children: r
               })
             })]
@@ -401,8 +401,8 @@ function N({
   return jsx(ModalRootComponent, {
     manager: u,
     width: t ?? "fit-content",
-    children: jsx(vo, {
-      children: jsx(nB, {
+    children: jsx(DialogContents, {
+      children: jsx(DialogBody, {
         padding: 0,
         children: e
       })
@@ -421,8 +421,8 @@ function P({
   return jsx(ModalRootComponent, {
     manager: i,
     width: "fit-content",
-    children: jsx(vo, {
-      children: jsx(nB, {
+    children: jsx(DialogContents, {
+      children: jsx(DialogBody, {
         padding: 0,
         children: e
       })

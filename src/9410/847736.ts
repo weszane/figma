@@ -45,7 +45,7 @@ import { NH, gp } from "../figma_app/973927";
 import { A as _$$A } from "../6828/625002";
 import { me, Tn, GM, HE, m_, qr, Vg, Fj, eg as _$$eg } from "../9410/148230";
 import { IT as _$$IT } from "../905/713695";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e3 } from "../905/165054";
@@ -508,7 +508,7 @@ function em({
     className: c()(_$$s.borderBox.flex.flexRow.itemsCenter.p8.minH48.$, {
       [me]: o
     }),
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       "aria-label": getI18nString("slides.templates.back"),
       onClick: t,
       children: jsx(_$$C, {

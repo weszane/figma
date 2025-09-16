@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useMemo, useRef, useEffect, useReducer, useCallback } from "react";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
+import { DialogBody, DialogFooter, DialogActionStrip, DialogContents, DialogHeader, DialogTitle } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { liveStoreInstance, IT } from "../905/713695";
 import { m as _$$m } from "../905/325034";
@@ -178,7 +178,7 @@ function F(e) {
     })]
   });
   return jsxs(Fragment, {
-    children: [jsx(nB, {
+    children: [jsx(DialogBody, {
       ref: T,
       padding: {
         top: 0
@@ -189,8 +189,8 @@ function F(e) {
         className: _$$s.flex.flexColumn.gap8.$,
         children: N
       })
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(_$$N.Button, {
           newTab: !0,
           variant: "secondary",
@@ -264,7 +264,7 @@ function V(e) {
     0 === h && customHistory.reload("feature flag override refresh");
   }, [h]);
   return jsxs(Fragment, {
-    children: [jsx(nB, {
+    children: [jsx(DialogBody, {
       children: jsxs("div", {
         className: _$$s.flex.flexColumn.gap8.$,
         children: [m ? renderI18nText("feature_flag_overrides.waiting_for_changes_to_propagate") : renderI18nText("feature_flag_overrides.review_changes_description"), i.map(i => jsx(D, {
@@ -275,8 +275,8 @@ function V(e) {
           errorMessage: B(i, d)
         }, i))]
       })
-    }), jsx(wi, {
-      children: jsxs(jk, {
+    }), jsx(DialogFooter, {
+      children: jsxs(DialogActionStrip, {
         children: [jsx(Button, {
           variant: "secondary",
           onClick: e.onBack,
@@ -336,9 +336,9 @@ let $$W0 = registerModal(function (e) {
     manager: t,
     width: "lg",
     height: "dynamic",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("feature_flag_overrides.view_and_change_feature_flags")
         })
       }), 0 === g ? jsx(F, {

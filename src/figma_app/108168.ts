@@ -3,7 +3,7 @@ import { useState, useCallback, useEffect, useId } from "react";
 import { useSelector } from "react-redux";
 import { b as _$$b, bL, mc, r1, Q$, Ov, rm } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { e as _$$e } from "../905/428849";
 import { ButtonPrimitive } from "../905/632989";
 import { V as _$$V } from "../905/291719";
@@ -224,7 +224,7 @@ function V(e) {
     disabled
   });
   let w = null;
-  return getFeatureFlags().ui3p_flyout_menu_fpl_migration ? (w = jsx(_$$K, {
+  return getFeatureFlags().ui3p_flyout_menu_fpl_migration ? (w = jsx(IconButton, {
     actionOnPointerDown: !0,
     "aria-label": I,
     "data-onboarding-key": item.onboardingKey,

@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterNotNullish } from "../figma_app/656233";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { ScreenReaderOnly } from "../905/172252";
 import { X } from "../905/736922";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
@@ -76,7 +76,7 @@ export function $$U1({
     },
     trackingProperties: _,
     children: jsx(X, {})
-  }) : jsx(K, {
+  }) : jsx(IconButton, {
     ...u,
     "aria-label": u["aria-label"] ?? r,
     htmlAttributes: {

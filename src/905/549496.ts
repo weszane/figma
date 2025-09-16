@@ -3,7 +3,7 @@ import { useContext, Component } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, r1, nB } from "../figma_app/272243";
+import { DialogContents, DialogHiddenTitle, DialogBody } from "../figma_app/272243";
 import { A as _$$A } from "../905/920165";
 import { trackEventAnalytics } from "../905/449184";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -210,10 +210,10 @@ class w extends Component {
     return this.state.hasImageLoaded ? jsx(ModalRootComponent, {
       manager: this.props.fplModalManager,
       width: 296,
-      children: jsxs(vo, {
-        children: [jsx(r1, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHiddenTitle, {
           children: renderI18nText("avatar_editor.modal_title")
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           children: jsx(x, {
             isLoading: this.props.avatarEditorState.status !== hv.POSITIONING,
             children: () => jsxs("div", {

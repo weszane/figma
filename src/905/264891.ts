@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { F } from "../905/427107";
 import { getI18nString } from "../905/303541";
 import { dG } from "../figma_app/753501";
@@ -11,7 +11,7 @@ export function $$p0({
   gradientPaint: e,
   onChange: t
 }) {
-  return jsx(K, {
+  return jsx(IconButton, {
     actionOnPointerDown: !0,
     onClick: () => {
       if (!e) return;

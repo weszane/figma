@@ -1,21 +1,21 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, forwardRef, useState, useRef, useLayoutEffect, useEffect, useImperativeHandle, useCallback, useMemo } from "react";
 import { DialogContext } from "../905/749786";
-import { b as _$$b } from "../905/799737";
+import { DialogRoot } from "../905/799737";
 import { m as _$$m } from "../905/494625";
-import { i as _$$i } from "../905/97346";
+import { setupDragHandler } from "../905/97346";
 import { useRecording, useIsRecording } from "../905/959312";
-import { bq } from "../905/117474";
-import { F as _$$F } from "../905/768014";
-import { i as _$$i2 } from "../905/718764";
+import { closestFocusableAncestor } from "../905/117474";
+import { defaultInputState } from "../905/768014";
+import { TabLoop } from "../905/718764";
 import { identity } from "../905/893109";
 import { addEventlistenerWithCleanup, preventAndStopEvent } from "../905/955878";
-import { qE, KY } from "../905/875826";
-import { LI, t6, LC, f2, TX, Io, WQ, gU, VN, Vu, Re, BB, qE as _$$qE } from "../905/268491";
+import { clamp, clampWithBounds } from "../905/875826";
+import { roundPoint, createPoint, arePointsEqual, originPoint, pointFromMouseEvent, distanceBetweenPoints, addPoints, toPositionStyles, getElementPosition, getWindowSize, subtractPoints, toTranslateString, clampPoint } from "../905/268491";
 import { Kg, DX, PU, U1 } from "../figma_app/343967";
-import { w as _$$w } from "../905/937416";
+import { setupResizeObserver } from "../905/937416";
 import { useExposedRef } from "../905/581092";
-import { R as _$$R } from "../905/987614";
+import { findClosestAncestor } from "../905/987614";
 import { mergeObjects } from "../905/36803";
 var n = {};
 require.d(n, {
@@ -41,17 +41,17 @@ let w = 'dialog,[role="dialog"]';
 function C(e, t) {
   let i = e.getBoundingClientRect();
   let n = P(window);
-  let r = i.width > n.x ? 0 : qE(t.x, 0, n.x - i.width);
+  let r = i.width > n.x ? 0 : clamp(t.x, 0, n.x - i.width);
   let a = t.y;
-  a = i.height > n.y - 16 ? 0 : i.height === n.y - 16 ? qE(t.y, 0, 8) : qE(t.y, 0, n.y - i.height - 16);
-  let s = LI(t6(r, a));
-  return LC(t, s) ? t : s;
+  a = i.height > n.y - 16 ? 0 : i.height === n.y - 16 ? clamp(t.y, 0, 8) : clamp(t.y, 0, n.y - i.height - 16);
+  let s = roundPoint(createPoint(r, a));
+  return arePointsEqual(t, s) ? t : s;
 }
 function T(e, t, i) {
   let n = e.getBoundingClientRect();
   let r = P(window);
-  let a = LI(t6(qE(t.x, 40 - n.width, r.x - 40), qE(t.y, i ? 0 : 40 - n.height, r.y - 40)));
-  return LC(t, a) ? t : a;
+  let a = roundPoint(createPoint(clamp(t.x, 40 - n.width, r.x - 40), clamp(t.y, i ? 0 : 40 - n.height, r.y - 40)));
+  return arePointsEqual(t, a) ? t : a;
 }
 function k(e) {
   let {
@@ -75,10 +75,10 @@ function R(e, t) {
   return "string" == typeof e ? Math.floor(parseFloat(e) / 100 * t) : e;
 }
 function N(e) {
-  return !!_$$R(e.target, e => e.hasAttribute("data-fpl-header") || e.hasAttribute("data-fpl-close"), e.currentTarget);
+  return !!findClosestAncestor(e.target, e => e.hasAttribute("data-fpl-header") || e.hasAttribute("data-fpl-close"), e.currentTarget);
 }
 function P(e) {
-  return e === window ? t6(e.innerWidth, e.innerHeight) : t6(e.clientWidth, e.clientHeight);
+  return e === window ? createPoint(e.innerWidth, e.innerHeight) : createPoint(e.clientWidth, e.clientHeight);
 }
 function O(e, t, i, n) {
   return {
@@ -116,7 +116,7 @@ $$K1.displayName = "WindowPrimitive.Root";
 let Y = forwardRef(({
   className: e,
   style: t,
-  defaultPosition: i = f2,
+  defaultPosition: i = originPoint,
   onClose: n,
   draggable: h,
   onTransform: f,
@@ -153,12 +153,12 @@ let Y = forwardRef(({
         return {
           compute(t) {
             let i = e.current;
-            let n = TX(t);
+            let n = pointFromMouseEvent(t);
             let r = performance.now() / 1e3;
             return (e.current = {
               pos: n,
               ts: r
-            }, i) ? Io(i.pos, n) / (r - i.ts) : 0;
+            }, i) ? distanceBetweenPoints(i.pos, n) / (r - i.ts) : 0;
           },
           reset() {
             e.current = null;
@@ -204,7 +204,7 @@ let Y = forwardRef(({
             }
             l && null != s && null == o && 0 !== r && (r > 0 ? t.bottom <= l.bottom && a.bottom > l.bottom ? o = l.bottom - t.height : t.top <= l.top && a.top > l.top && (o = l.top) : t.bottom >= l.bottom && a.bottom < l.bottom ? o = l.bottom - t.height : t.top >= l.top && a.top < l.top && (o = l.top));
             l && null != o && null == s && 0 !== n && (n > 0 ? t.right <= l.right && a.right > l.right ? s = l.right - t.width : t.left <= l.left && a.left > l.left && (s = l.left) : t.right >= l.right && a.right < l.right ? s = l.right - t.width : t.left >= l.left && a.left < l.left && (s = l.left));
-            let d = f2;
+            let d = originPoint;
             (null != s || null != o) && (e = {
               x: s ?? e.x,
               y: o ?? e.y
@@ -214,7 +214,7 @@ let Y = forwardRef(({
             });
             return [e, d];
           }(n, i.currentTarget.getBoundingClientRect(), e.current);
-          r(e => WQ(e, o));
+          r(e => addPoints(e, o));
           return s;
         },
         end() {
@@ -223,9 +223,9 @@ let Y = forwardRef(({
         }
       };
     }();
-    let m = useRef(f2);
-    let h = o ?? f2;
-    let f = o ? gU(h) : function (e) {
+    let m = useRef(originPoint);
+    let h = o ?? originPoint;
+    let f = o ? toPositionStyles(h) : function (e) {
       let t = {};
       "x" in e ? "center" === e.x ? (t.left = "50%", t.transform = "translateX(-50%)") : t.left = e.x : "left" in e ? t.left = e.left : "right" in e && (t.right = e.right);
       "y" in e ? "center" === e.y ? (t.top = "50%", t.transform = [t.transform, "translateY(-50%)"].filter(Boolean).join(" ")) : t.top = e.y : "top" in e ? t.top = e.top : "bottom" in e && (t.bottom = e.bottom);
@@ -234,25 +234,25 @@ let Y = forwardRef(({
     useLayoutEffect(() => {
       if (i) return;
       let e = s.current;
-      let t = VN(e);
+      let t = getElementPosition(e);
       l(C(e, t));
     }, [i]);
-    _$$w(s, () => {
+    setupResizeObserver(s, () => {
       let e = s.current;
       if (!e) return;
-      let t = VN(e);
+      let t = getElementPosition(e);
       let i = C(e, t);
-      LC(t, i) || (Object.assign(e.style, gU(i)), l(i));
+      arePointsEqual(t, i) || (Object.assign(e.style, toPositionStyles(i)), l(i));
     }, !i && !c);
     useEffect(() => {
       let e;
       let t;
       let i;
-      t = Vu();
+      t = getWindowSize();
       i = null;
       let [n, r] = [function () {
-        let e = Vu();
-        let n = Re(e, t);
+        let e = getWindowSize();
+        let n = subtractPoints(e, t);
         t = e;
         i || (i = function (e) {
           let t = e.getBoundingClientRect();
@@ -295,14 +295,14 @@ let Y = forwardRef(({
         t && (Object.assign(s.current.style, {
           top: 0,
           left: 0,
-          transform: BB(t)
+          transform: toTranslateString(t)
         }), clearTimeout(e), e = window.setTimeout(() => {
           r();
-          s.current && (s.current.style.removeProperty("transform"), Object.assign(s.current.style, gU(t)), l(t));
+          s.current && (s.current.style.removeProperty("transform"), Object.assign(s.current.style, toPositionStyles(t)), l(t));
         }, 100));
       });
     }, []);
-    let [, y] = _$$i({
+    let [, y] = setupDragHandler({
       deadZone: !0,
       onBeforeDrag: n ? N : void 0,
       onDragStart(e) {
@@ -311,16 +311,16 @@ let Y = forwardRef(({
           top: 0,
           left: 0,
           willChange: "transform",
-          transform: BB(h)
+          transform: toTranslateString(h)
         });
       },
       onDrag(e, {
         updateStart: i
       }) {
-        let n = WQ(h, e.delta);
+        let n = addPoints(h, e.delta);
         n = p.check(e, n, i);
         m.current = n;
-        s.current.style.transform = BB(n);
+        s.current.style.transform = toTranslateString(n);
         t?.({
           position: n,
           event: e,
@@ -331,12 +331,12 @@ let Y = forwardRef(({
         p.end();
         let i = s.current.style;
         if (i.removeProperty("will-change"), i.removeProperty("transform"), e.cancelled) {
-          Object.assign(i, gU(h));
+          Object.assign(i, toPositionStyles(h));
           return;
         }
         u(!0);
         let r = T(e.currentTarget, m.current, n);
-        Object.assign(i, gU(r));
+        Object.assign(i, toPositionStyles(r));
         l(r);
         t?.({
           position: r,
@@ -380,7 +380,7 @@ let Y = forwardRef(({
     let i = useRef(void 0);
     useEffect(() => {
       if (void 0 === t.current) {
-        let n = bq(_$$F.element);
+        let n = closestFocusableAncestor(defaultInputState.element);
         t.current = n;
         i.current = e && n ? e(n) : null;
       }
@@ -449,8 +449,8 @@ let Y = forwardRef(({
       value: $,
       children: jsx(_$$m.Provider, {
         value: !0,
-        children: jsx(_$$i2, {
-          children: jsx(_$$b, {
+        children: jsx(TabLoop, {
+          children: jsx(DialogRoot, {
             ref: B,
             ...x,
             ...S,
@@ -518,8 +518,8 @@ export function $$q0({
         clientHeight
       } = e.current;
       l({
-        x: KY(clientWidth, a.minWidth, a.maxWidth),
-        y: KY(clientHeight, a.minHeight, a.maxHeight)
+        x: clampWithBounds(clientWidth, a.minWidth, a.maxWidth),
+        y: clampWithBounds(clientHeight, a.minHeight, a.maxHeight)
       });
       0 === clientWidth || 0 === clientHeight ? s(e => e > 5 ? 0 : e + 1) : s(0);
     }, [e, r]);
@@ -547,7 +547,7 @@ export function $$q0({
     eventName: "resize",
     recordingKey: u
   }, [s, pos]);
-  let [D, F] = _$$i({
+  let [D, F] = setupDragHandler({
     disabled: N,
     onBeforeDrag(e) {
       let t = e.target;
@@ -611,18 +611,18 @@ export function $$q0({
           let d = {
             ...i
           };
-          e.x && (d.x = KY(Math.round(i.x + e.x), r.minWidth, r.maxWidth), o = d.x - i.x);
-          e.y && (d.y = KY(Math.round(i.y + e.y), r.minHeight, r.maxHeight), l = d.y - i.y);
+          e.x && (d.x = clampWithBounds(Math.round(i.x + e.x), r.minWidth, r.maxWidth), o = d.x - i.x);
+          e.y && (d.y = clampWithBounds(Math.round(i.y + e.y), r.minHeight, r.maxHeight), l = d.y - i.y);
           let c = {
             ...t
           };
           n && (c.x = t.x - o);
           s && (c.y = t.y - l);
-          return [c, _$$qE(d, t6(240, 128), P(window))];
+          return [c, clampPoint(d, createPoint(240, 128), P(window))];
         }
       }(t, _pos, size, e.delta, C.current);
-      setPos(e => LC(e, r) ? e : r);
-      x(e => LC(e, a) ? e : a);
+      setPos(e => arePointsEqual(e, r) ? e : r);
+      x(e => arePointsEqual(e, a) ? e : a);
       setHasMoved(!0);
       s?.({
         size: a,
@@ -653,8 +653,8 @@ export function $$q0({
   useEffect(() => addEventlistenerWithCleanup(window, "resize", () => {
     let e = k(n);
     x(t => {
-      let i = t6(KY(t.x, e.minWidth, e.maxWidth), KY(t.y, e.minHeight, e.maxHeight));
-      return LC(t, i) ? t : i;
+      let i = createPoint(clampWithBounds(t.x, e.minWidth, e.maxWidth), clampWithBounds(t.y, e.minHeight, e.maxHeight));
+      return arePointsEqual(t, i) ? t : i;
     });
   }), [n, x]);
   return jsxs("div", {
@@ -694,13 +694,13 @@ export function $$Z3({
   let i = useRef(null);
   return useMemo(() => ({
     get position() {
-      return t.current?.pos ?? f2;
+      return t.current?.pos ?? originPoint;
     },
     setPosition(e) {
       t.current?.setPos(e);
     },
     get size() {
-      return i.current?.size ?? f2;
+      return i.current?.size ?? originPoint;
     },
     setSize(e) {
       i.current?.setSize(e);

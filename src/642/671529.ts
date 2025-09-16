@@ -51,7 +51,7 @@ import { IW, Gj } from "../figma_app/646357";
 import { VF } from "../figma_app/679183";
 import { Button } from "../905/521428";
 import { bL } from "../905/911410";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { getSingletonSceneGraph } from "../905/700578";
 import { AutoLayout } from "../figma_app/947482";
 import { ButtonBasePrimary } from "../figma_app/637027";
@@ -74,7 +74,7 @@ import { S as _$$S } from "../figma_app/552746";
 import { vq } from "../905/8732";
 import { ft } from "../figma_app/753501";
 import { isDevHandoffEditorType } from "../figma_app/976749";
-import { k as _$$k3 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
 import { Xo } from "../figma_app/482495";
@@ -215,12 +215,12 @@ function ef({
       defaultPosition: e,
       draggable: "header",
       recordingKey: generateRecordingKey("createStyleModal"),
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: N(p.styleType)
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: I
         })]
@@ -465,7 +465,7 @@ function eK({
     shouldRenderInspectTab: E
   };
   0 === Children.toArray(t).length && logError("PropertiesPanel", "Rendering empty properties panel", d);
-  let M = _$$k3();
+  let M = isUserNotLoggedInAndEditorSupported();
   let P = S && !(u && !v) && !w;
   let L = jsx(_$$S.div, {
     className: g()({
@@ -656,7 +656,7 @@ function eZ({
   tabInfo: e,
   recordingKey: t
 }) {
-  let s = _$$k3();
+  let s = isUserNotLoggedInAndEditorSupported();
   let n = WN();
   let l = e.reduce((e, t) => (e[t.tab] = !0, e), {});
   let a = e.find(e => e.active);

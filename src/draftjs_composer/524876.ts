@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useEffect } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { throwTypeError } from "../figma_app/465776";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { N as _$$N } from "../905/7587";
 import { A as _$$A } from "../905/744692";
@@ -27,7 +27,7 @@ import { RI, We, uz, i4 } from "../figma_app/770088";
 import { postUserFlag } from "../905/985254";
 import { y as _$$y } from "../figma_app/297957";
 import { getCurrentFileType, isPrototypeView } from "../figma_app/976749";
-import { k as _$$k2 } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { trackUserEvent } from "../figma_app/314264";
 import { xS, JZ } from "../905/901964";
 import { eR as _$$eR } from "../figma_app/12220";
@@ -106,7 +106,7 @@ function J(e) {
 let es = [];
 export function $$er0(e) {
   let t = getI18nString("comments.submit");
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     recordingKey: generateRecordingKey(e, "submit"),
     disabled: e.disabled,
     onClick: e.onClick,
@@ -308,7 +308,7 @@ export function $$em1(e) {
     e1(n);
     e.current && (e.current.value = "");
   }, [e1]);
-  let e4 = _$$k2();
+  let e4 = isUserNotLoggedInAndEditorSupported();
   let e3 = () => e.isDisabled || eQ || e8(e.messageMeta) || _$$q(e.messageMeta) || e4;
   let e8 = e => _$$I(e);
   let e7 = e3();
@@ -428,7 +428,7 @@ export function $$em1(e) {
       className: o1,
       children: [!e6 && jsxs("div", {
         className: xu,
-        children: [_$$Y2 && jsx(_$$K, {
+        children: [_$$Y2 && jsx(IconButton, {
           onClick: t => {
             trackEventAnalytics("Emoji Picker Opened");
             let n = h.current?.getBoundingClientRect();
@@ -457,7 +457,7 @@ export function $$em1(e) {
           recordingKey: "emojiPicker",
           disabled: e6,
           children: jsx(_$$A, {})
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           onClick: eq,
           "data-tooltip-type": KindEnum.TEXT,
           "data-tooltip": getI18nString("comments.add_mention"),

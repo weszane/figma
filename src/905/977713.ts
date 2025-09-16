@@ -6,7 +6,7 @@ import { getI18nString } from '../905/303541';
 import { _Z, LI, ox, wr, Yt } from '../905/319777';
 import { LazyInputForwardRef } from '../905/408237';
 import { A9 } from '../905/414242';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { Button } from '../905/521428';
 import { W as _$$W } from '../905/592530';
 import { DP } from '../905/640017';
@@ -166,7 +166,7 @@ function R({
     name: C.MATCH_WHOLE_WORDS
   }];
   let q = jsxs(Fragment, {
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       'ref': O,
       'aria-expanded': !1,
       'aria-label': getI18nString('sites.code_component.search.search_options'),
@@ -221,15 +221,15 @@ function R({
           totalMatches: j
         })
       })]
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('sites.code_component.search.find_previous'),
       'onClick': Z,
       'children': jsx(_$$N, {})
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('sites.code_component.search.find_next'),
       'onClick': $,
       'children': jsx(_$$W, {})
-    }), q, jsx(_$$K, {
+    }), q, jsx(IconButton, {
       'aria-label': getI18nString('common.close'),
       'onClick': t,
       'children': jsx(_$$L, {})
@@ -289,7 +289,7 @@ function R({
       className: 'x78zum5 x1q0g3np x19y5rnk x1yjdb4r x1bamp8i x10l6tqk x9ri80z x1y1aw1k xwib8y2 xy13l1i x163pfp x1jnr06f',
       children: [jsx('div', {
         className: 'xvijh9v',
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           'aria-label': getI18nString('sites.code_component.search.replace'),
           'onClick': () => R(!u),
           'children': u ? jsx(_$$k, {}) : jsx(_$$a, {})

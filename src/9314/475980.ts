@@ -15,7 +15,7 @@ import { getDirname, splitPath, getBasename } from '../905/309735';
 import { n as _$$n } from '../905/317686';
 import { x as _$$x2 } from '../905/346809';
 import { E as _$$E2 } from '../905/375716';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
 import { Cf } from '../905/504727';
 import { k as _$$k } from '../905/582200';
@@ -314,7 +314,7 @@ function en({
       })
     }),
     childRight: A && jsx($4, {
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         'recordingKey': generateRecordingKey(k, 'addButton'),
         'aria-label': getI18nString('design_systems.styles.tooltips.create'),
         'onClick': q,
@@ -538,7 +538,7 @@ function em({
       style: {
         opacity: r ? 1 : 0
       },
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         'recordingKey': generateRecordingKey(l, 'addButton'),
         'aria-label': getI18nString('design_systems.styles.tooltips.create_style_from_section', {
           kind: XV(e).toLowerCase()

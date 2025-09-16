@@ -5,7 +5,7 @@ import { usePopoverPrimitive, PopoverPrimitiveContainer } from "../905/691059";
 import { u as _$$u } from "../905/65923";
 import { ButtonPrimitive } from "../905/632989";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { Label } from "../905/270045";
 import { p as _$$p } from "../905/185998";
 import { useModalManager } from "../905/437088";
@@ -198,13 +198,13 @@ function Q({
     width: "fit-content",
     height: "dynamic",
     manager: s,
-    children: jsxs(vo, {
+    children: jsxs(DialogContents, {
       allowOverflow: !0,
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: ed
         })
-      }), jsxs(nB, {
+      }), jsxs(DialogBody, {
         style: {
           overflow: "visible"
         },
@@ -265,8 +265,8 @@ function Q({
             })]
           })]
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx(TextWithTruncation, {
             color: "secondary",
             children: renderI18nText("whiteboard.color_palettes.modal.palettes_visible_to_everyone")

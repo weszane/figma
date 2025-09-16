@@ -17,7 +17,7 @@ import { nt, o3 } from '../905/226610';
 import { HiddenLabel } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { getBasename } from '../905/309735';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { O as _$$O2 } from '../905/487602';
 import { t7 } from '../905/508367';
 import { RecordableButton, RecordableInput } from '../905/511649';
@@ -188,7 +188,7 @@ function eb({
       clientY: n.y + n.height / 2
     }));
   }, [r, position, state, targetRect]);
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     'aria-label': e,
     'data-tooltip-type': KindEnum.TEXT,
     'data-tooltip': e,
@@ -500,7 +500,7 @@ function eO({
       'data-tooltip': getI18nString('design_systems.component_properties.edit_property')
     },
     'children': jsx(_$$A, {})
-  }), jsx(_$$K, {
+  }), jsx(IconButton, {
     'onClick': $,
     'recordingKey': 'componentPropDeleteButton',
     'aria-label': getI18nString('design_systems.component_properties.delete_property', {
@@ -971,7 +971,7 @@ function $$e6(e) {
         }),
         iconButton: jsx('span', {
           className: c6,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             'onClick': H,
             'aria-label': getI18nString('design_systems.component_properties.detach_property'),
             'recordingKey': generateRecordingKey(e.recordingKey, 'detachVariantProp'),

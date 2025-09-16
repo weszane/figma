@@ -52,7 +52,7 @@ import { v as _$$v } from "../9410/916286";
 import { V as _$$V } from "../905/506207";
 import { lQ as _$$lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { f as _$$f2 } from "../905/54715";
 import { A as _$$A2 } from "../905/251970";
@@ -384,7 +384,7 @@ import { $isAtNodeEnd } from "@lexical/selection";
 import { isCommandEvent, isExactModifier, ModifierKeyCodes, KeyCodes, isModifierMatch, isCommandModifier } from "../905/63728";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo as _$$vo2, Y9, nB as _$$nB, wi } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogBody, DialogFooter } from "../figma_app/272243";
 import { customHistory } from "../905/612521";
 import { sendUrlToParent } from "../figma_app/564528";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -441,7 +441,7 @@ import { trackFileEvent, logAndTrackCTA } from "../figma_app/314264";
 import { z as _$$z5 } from "../905/654860";
 import { y as _$$y4 } from "../905/263077";
 import { y as _$$y5 } from "../figma_app/13082";
-import { i as _$$i8 } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { N as _$$N3 } from "../905/57692";
 import { Zr } from "../figma_app/678782";
 import { lJ as _$$lJ2, kl, A5 } from "../905/275640";
@@ -2145,7 +2145,7 @@ function tY({
   let t = Xr(_$$ah);
   return jsxs("div", {
     className: "x78zum5 x1q0g3np xe8ttls x9f619 xh8yej3",
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       htmlAttributes: {
         "data-testid": Jg
       },
@@ -2171,7 +2171,7 @@ function tX({
     children: [jsx("div", {
       className: "xmzs88n xv1l7n4",
       children: e
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       htmlAttributes: {
         "data-testid": _$$m2
       },
@@ -2250,7 +2250,7 @@ function tQ({
         children: getI18nString("whiteboard.shapes_sidebar.title")
       }), jsx("div", {
         className: _$$s.flexGrow0.flex.flexRow.gap8.$,
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           "aria-label": getI18nString("whiteboard.shapes_sidebar.close"),
           onClick: () => {
             s();
@@ -3883,7 +3883,7 @@ let av = forwardRef((e, t) => {
         className: "browse_plugins_universal_modal_tiles--developmentTileRightSide----HW6",
         children: [jsx(_$$T2, {
           selected: x ?? void 0,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             ref: f,
             onClick: e => {
               let t = e.currentTarget.getBoundingClientRect();
@@ -4143,7 +4143,7 @@ function aH(e) {
           className: aF,
           children: [jsx(_$$T2, {
             selected: c ?? void 0,
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               onClick: t => {
                 let i = t.currentTarget.getBoundingClientRect();
                 n(showDropdownThunk({
@@ -4238,7 +4238,7 @@ let aV = forwardRef((e, t) => {
         className: aF,
         children: [jsx(_$$T2, {
           selected: g ?? void 0,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: t => {
               let i = t.currentTarget.getBoundingClientRect();
               r(showDropdownThunk({
@@ -6173,7 +6173,7 @@ function ln(e) {
         children: buttonCta
       }), y ? jsx(_$$O, {
         setPinned: e.setPinned
-      }) : jsx(_$$K, {
+      }) : jsx(IconButton, {
         onClick: g,
         "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
@@ -6727,7 +6727,7 @@ function lk(e) {
         parentView: _$$nN2.DETAIL
       }), y ? jsx(_$$O, {
         setPinned: e.setPinned
-      }) : jsx(_$$K, {
+      }) : jsx(IconButton, {
         onClick: v,
         "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
@@ -6887,7 +6887,7 @@ function lD(e) {
         })
       }), k ? jsx(_$$O, {
         setPinned: e.setPinned
-      }) : jsx(_$$K, {
+      }) : jsx(IconButton, {
         onClick: R,
         "aria-label": getI18nString("general.close"),
         children: jsx(_$$A2, {})
@@ -7787,8 +7787,8 @@ let dJ = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     manager: t,
     width: "fit-content",
-    children: jsxs(_$$vo2, {
-      children: [jsx(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: jsx("div", {
           className: ex()(_$$s.absolute.h18.$, "ai_announcement_modal--aiBadge--DSi1-"),
           children: jsx(_$$v2, {
@@ -7798,7 +7798,7 @@ let dJ = registerModal(function (e) {
             }
           })
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         padding: 0,
         children: [jsx(d$, {}), jsx("div", {
           className: "ai_announcement_modal--morePromptsModalBody--8TEvg",
@@ -7807,7 +7807,7 @@ let dJ = registerModal(function (e) {
             selectedPrompt: i
           })
         })]
-      }), jsx(wi, {
+      }), jsx(DialogFooter, {
         children: jsx(dq, {
           dismissModal: e.onClose,
           selectedPromptKey: i
@@ -16943,7 +16943,7 @@ let gm = memo(function ({
       className: ex()(gu, {
         [gc]: L && isIpadDevice
       }),
-      children: jsx(_$$i8, {
+      children: jsx(TabLoop, {
         children: jsx(W, {
           children: jsxs(W1, {
             ariaHidden: w,
@@ -17052,7 +17052,7 @@ let g_ = memo(function ({
     properties: n,
     children: jsx("div", {
       className: M,
-      children: jsx(_$$i8, {
+      children: jsx(TabLoop, {
         children: jsx(_$$bo, {
           children: jsx(_$$N3, {
             "aria-hidden": T,
@@ -17352,7 +17352,7 @@ function gP() {
   }, [next]);
   let C = U1();
   let T = !x?.shouldOptimizeForIpadApp;
-  return jsx(_$$i8, {
+  return jsx(TabLoop, {
     children: jsxs("div", {
       ref: C,
       className: ex()(Dm, "figjam_search--container--p-leE", {
@@ -17383,7 +17383,7 @@ function gP() {
           })
         }) : jsxs(Fragment, {
           children: [!!query && jsx(gU, {}), !navDisabled && jsxs(Fragment, {
-            children: [jsx(_$$K, {
+            children: [jsx(IconButton, {
               disabled: navDisabled,
               onClick: e => {
                 next(_$$OP.PREV, "button");
@@ -17397,7 +17397,7 @@ function gP() {
                 "data-tooltip-shortcut-key": "canvas-search-prev"
               },
               children: jsx(_$$l2, {})
-            }), jsx(_$$K, {
+            }), jsx(IconButton, {
               disabled: navDisabled,
               onClick: e => {
                 next(_$$OP.NEXT, "button");
@@ -17418,7 +17418,7 @@ function gP() {
           minWidth: getFeatureFlags().eu_fpl_migration_search_settings_menu ? 160 : 116,
           recordingKey: gM,
           shouldShowSearchCategories: !1
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           onClick: () => {
             setHidden(!0);
           },
@@ -19666,7 +19666,7 @@ function ju() {
           children: getI18nString("whiteboard.timer.music_volume_hint_prompt_question")
         })
       })
-    }), jsx(_$$K, {
+    }), jsx(IconButton, {
       onClick: () => {
         a(postUserFlag({
           dismissed_figjam_music_volume_hint: !0
@@ -21538,7 +21538,7 @@ function bH(e) {
         className: "create_new_vote_view--voteLimitControls--7D-Fi",
         children: [jsx("div", {
           className: bP,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: () => {
               isLimitDisabled || b(-1);
             },
@@ -21561,7 +21561,7 @@ function bH(e) {
           value: userVoteLimitInput
         }), jsx("div", {
           className: bP,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: () => {
               isLimitDisabled || b(1);
             },
@@ -22117,7 +22117,7 @@ let yr = memo(e => {
   return jsx(Fragment, {
     children: jsxs("div", {
       className: "meetings_panel_header--meetingsPanelHeader--6cBGV",
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         "aria-label": getI18nString("general.back"),
         onClick: goBack,
         actionOnPointerDown: BrowserInfo.isIpad,
@@ -22147,7 +22147,7 @@ let yr = memo(e => {
           showPoint: !0,
           minWidth: 135,
           recordingKey: generateRecordingKey(recordingKey, "expandMenuItems")
-        }), onMinimize && jsx(_$$K, {
+        }), onMinimize && jsx(IconButton, {
           onClick: onMinimize,
           "aria-label": getI18nString("common.close"),
           children: jsx(_$$A2, {})
@@ -23629,7 +23629,7 @@ function vE({
     offset: 8,
     children: jsx("div", {
       className: "mindmap_quick_add_buttons--button--iRZL8",
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         "aria-label": getI18nString("whiteboard.mindmaps.add-child-tooltip"),
         onClick: e => {
           e.preventDefault();
@@ -24211,7 +24211,7 @@ function vB({
         onMouseEnter: () => {
           u.current && (WhiteboardStarterKitCppBindings.rotateFigjamStarterKitStrings(), u.current = !1);
         },
-        children: jsxs(_$$i8, {
+        children: jsxs(TabLoop, {
           children: [jsx(ButtonPrimitive, {
             className: "starter_kit_ui--closeButton--f40J9",
             onClick: () => s(!0),

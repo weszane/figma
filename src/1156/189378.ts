@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { b as _$$b, q7, Q$, bL, mc } from "../figma_app/860955";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { s as _$$s } from "../905/551945";
 import { e as _$$e } from "../905/149844";
 import { getI18nString } from "../905/303541";
@@ -83,7 +83,7 @@ export function $$y0({
     manager,
     children: [j ? jsx(j, {
       ...getTriggerProps()
-    }) : jsx(K, {
+    }) : jsx(IconButton, {
       ...getTriggerProps(),
       "aria-label": getI18nString("sites.panel.make.attach_design"),
       "data-tooltip-show-above": !0,

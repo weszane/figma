@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useId } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { languageCodes } from "../905/816253";
-import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { bL, DZ, mc, c$, wv } from "../905/493196";
 import { A as _$$A } from "../905/891805";
 import { getFeatureFlags } from "../905/601108";
@@ -388,12 +388,12 @@ export function $$Z0(e) {
       windowTrackableName: "stack_layout_details_modal",
       icon: jsx(_$$A, {}),
       recordingKey: e.recordingKey,
-      children: jsxs(vo, {
-        children: [jsx(Y9, {
-          children: jsx(hE, {
+      children: jsxs(DialogContents, {
+        children: [jsx(DialogHeader, {
+          children: jsx(DialogTitle, {
             children: r
           })
-        }), jsx(nB, {
+        }), jsx(DialogBody, {
           padding: 0,
           children: jsx(q, {
             hoveredSetting: t,

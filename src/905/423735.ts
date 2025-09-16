@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { i as _$$i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { l as _$$l } from "../905/716947";
 import l from "../vendor/523035";
 import { useSubscription } from "../figma_app/288654";
@@ -179,7 +179,7 @@ export function $$F0({
     properties: {
       libraryKey: e
     },
-    children: jsxs(_$$i, {
+    children: jsxs(TabLoop, {
       children: [jsx(_$$C, {
         libraryStat: null,
         libraryKey: e,

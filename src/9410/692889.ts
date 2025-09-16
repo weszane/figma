@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Button } from "../905/521428";
 import { g as _$$g } from "../905/757007";
 import { W } from "../905/569454";
@@ -58,7 +58,7 @@ export function $$g0({
   let L = useMemo(() => hasReadyStatus ? getI18nString("dev_handoff.status.mark_as_completed") : hasCompletedStatus ? getI18nString("dev_handoff.status.mark_as_ready") : k ? getI18nString("dev_handoff.status.mark_as_ready_for_first_time") : getI18nString("dev_handoff.workflows.focus_view.complete_button.status_removed"), [hasCompletedStatus, hasReadyStatus, k]);
   let R = useMemo(() => hasReadyStatus ? getI18nString("dev_handoff.overview_mode.tooltip.upgrade_mark_completed") : hasCompletedStatus ? getI18nString("dev_handoff.overview_mode.tooltip.upgrade_mark_incomplete") : k ? getI18nString("dev_handoff.overview_mode.tooltip.upgrade_mark_ready") : getI18nString("dev_handoff.workflows.focus_view.complete_button.status_removed"), [hasCompletedStatus, hasReadyStatus, k]);
   if (!e) return null;
-  if (g) return hasReadyStatus || hasCompletedStatus ? jsx(K, {
+  if (g) return hasReadyStatus || hasCompletedStatus ? jsx(IconButton, {
     onClick: N,
     disabled: !b,
     "aria-label": L,

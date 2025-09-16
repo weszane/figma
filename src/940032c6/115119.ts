@@ -142,7 +142,7 @@ import { b as _$$b } from '../905/275748';
 import { E as _$$E11 } from '../905/277716';
 import { j4 as _$$j9, G5 } from '../905/278499';
 import { Z as _$$Z5 } from '../905/279476';
-import { G as _$$G4 } from '../905/289770';
+import { useTheme } from '../905/289770';
 import { createSavepoint } from '../905/294113';
 import { a as _$$a8, G as _$$G5 } from '../905/298663';
 import { $ as _$$$ } from '../905/302575';
@@ -180,7 +180,7 @@ import { v as _$$v10 } from '../905/439487';
 import { ConfirmationModal } from '../905/441305';
 import { v as _$$v7 } from '../905/442517';
 import { W as _$$W3 } from '../905/442612';
-import { K as _$$K2 } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k7 } from '../905/443820';
 import { J as _$$J0 } from '../905/445197';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
@@ -256,7 +256,7 @@ import { liveStoreInstance } from '../905/713695';
 import { logError } from '../905/714362';
 import { pn as _$$pn } from '../905/714538';
 import { SvgComponent } from '../905/714743';
-import { i as _$$i7 } from '../905/718764';
+import { TabLoop } from '../905/718764';
 import { h4 as _$$h11, Nz as _$$Nz2 } from '../905/720338';
 import { N as _$$N1 } from '../905/720559';
 import { Point } from '../905/736624';
@@ -276,7 +276,7 @@ import { c$ as _$$c$6, l6 as _$$l1, sK as _$$sK, tV as _$$tV } from '../905/7948
 import { X as _$$X7 } from '../905/797503';
 import { W as _$$W9 } from '../905/798224';
 import { K as _$$K7 } from '../905/799615';
-import { J as _$$J4 } from '../905/799737';
+import { DialogLabel } from '../905/799737';
 import { f as _$$f3 } from '../905/809171';
 import { e as _$$e15 } from '../905/810361';
 import { x as _$$x3 } from '../905/811596';
@@ -675,7 +675,7 @@ import { useIsSelectedFigmakeFullscreen, useToggleFigmakeMode } from '../figma_a
 import { hl as _$$hl } from '../figma_app/553024';
 import { A as _$$A, b as _$$b2 } from '../figma_app/556971';
 import { td as _$$td, EB, FX } from '../figma_app/558805';
-import { k as _$$k6 } from '../figma_app/564183';
+import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
 import { $h, Tu as _$$Tu, uE as _$$uE, Mo, QM, VC } from '../figma_app/565242';
 import { i as _$$i6 } from '../figma_app/566312';
 import { getAtomMutate, setupMemoizedAtomSubscription, setupResourceAtomHandler } from '../figma_app/566371';
@@ -2250,7 +2250,7 @@ function iD({
     constraints: p.constraints,
     children: jsxs(_$$vo, {
       children: [jsxs(Y9, {
-        children: [jsx(_$$J4, {
+        children: [jsx(DialogLabel, {
           ref: A,
           ..._$$Ay.props(iA.windowTitle),
           htmlAttributes: {
@@ -2838,7 +2838,7 @@ function nq() {
       t(PanelType.FILE);
     };
   }();
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('left_rail.back_to_canvas'),
     'htmlAttributes': {
       'data-tooltip': getI18nString('left_rail.back_to_canvas'),
@@ -3677,7 +3677,7 @@ function aD({
       'data-tooltip-show-below': !0
     })]
   });
-  let r = n ? jsx(_$$K2, {
+  let r = n ? jsx(IconButton, {
     'onClick': () => {
       t(_$$lW2({
         stringToCopy: _$$uw(n),
@@ -3766,7 +3766,7 @@ function aX({
   });
 }
 function aV() {
-  let e = _$$G4();
+  let e = useTheme();
   let {
     codeLibraryInstance
   } = _$$oA2();
@@ -4456,7 +4456,7 @@ function sm({
         children: [a, s]
       });
     case 'page-selection':
-      return jsxs(_$$J4, {
+      return jsxs(DialogLabel, {
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
@@ -4470,7 +4470,7 @@ function sm({
         })]
       });
     case 'review-issues':
-      return jsxs(_$$J4, {
+      return jsxs(DialogLabel, {
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
@@ -4484,7 +4484,7 @@ function sm({
         })]
       });
     case 'publish-history':
-      return jsxs(_$$J4, {
+      return jsxs(DialogLabel, {
         className: _$$s4.flex.itemsCenter.gap4.textBodyMediumStrong.$,
         children: [jsx(ButtonPrimitive, {
           'onClick': () => t('main'),
@@ -5014,7 +5014,7 @@ function s5({
   return jsxs(s1, {
     children: [jsxs('div', {
       className: 'x78zum5 x6s0dn4 x98rzlu x1iyjqo2 x1r8uery x1nhvcw1 x1jnr06f',
-      children: [i && jsx(_$$K2, {
+      children: [i && jsx(IconButton, {
         'aria-label': getI18nString('figmake.fullscreen_preview_back_to_files_tooltip'),
         'onClick': () => {
           p(selectViewAction({
@@ -5105,7 +5105,7 @@ function s2() {
     className: 'x78zum5 x195vfkc',
     children: [jsx(_$$o3, {}), jsxs(_$$bL3, {
       manager,
-      children: [jsx(_$$K2, {
+      children: [jsx(IconButton, {
         ...getTriggerProps(),
         'aria-label': getI18nString('fullscreen.filename_view.edit_file_menu'),
         'data-tooltip': void 0,
@@ -5126,7 +5126,7 @@ function s4() {
     className: 'x78zum5 x6s0dn4 x167g77z x98rzlu x1iyjqo2 x1r8uery x13a6bvl',
     children: [e ? jsx(Fragment, {
       children: jsx(s8, {})
-    }) : null, getFeatureFlags().switch_canvas_mode ? jsx(_$$K2, {
+    }) : null, getFeatureFlags().switch_canvas_mode ? jsx(IconButton, {
       'onClick': t,
       'aria-label': getI18nString('sites.panel.exit_make_mode'),
       'children': jsx(_$$A7, {})
@@ -5158,7 +5158,7 @@ function s3() {
 }
 function s8() {
   let e = selectCurrentFile();
-  let t = _$$k6();
+  let t = isUserNotLoggedInAndEditorSupported();
   let i = e?.canView && !e?.canEdit;
   return t ? jsx(s6, {}) : i ? jsx(s7, {}) : jsx(re, {});
 }
@@ -5345,7 +5345,7 @@ function ru() {
           variant: 'primary',
           onClick: i,
           children: getI18nString('figmake.settings.auth_expired.button')
-        }), jsx(_$$K2, {
+        }), jsx(IconButton, {
           'aria-label': getI18nString('figmake.settings.auth_expired.delete_label'),
           'htmlAttributes': {
             'data-tooltip': getI18nString('figmake.settings.auth_expired.delete_label'),
@@ -6133,7 +6133,7 @@ function r5({
   fontName: t
 }) {
   let i = useDispatch();
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.metadata.fonts.delete_font'),
     'onClick': () => i(showModalHandler({
       type: rQ,
@@ -7539,7 +7539,7 @@ function oY({
             children: o
           })]
         })
-      }), jsx(_$$K2, {
+      }), jsx(IconButton, {
         'aria-label': getI18nString('sites.metadata.domains.generate_new_subdomain'),
         'onClick': () => {
           h(null);
@@ -8528,7 +8528,7 @@ function dS({
           'size': 'sm'
         })]
       })]
-    }), !x && jsx(_$$K2, {
+    }), !x && jsx(IconButton, {
       'onClick': h,
       'aria-label': getI18nString('sites.metadata.domain.refresh'),
       'data-tooltip': getI18nString('sites.metadata.domain.refresh'),
@@ -9008,7 +9008,7 @@ function dz({
               'recordingKey': generateRecordingKey(e, 'password')
             }), jsx('span', {
               className: 'x10l6tqk xibut22 x78zum5 x6s0dn4',
-              children: y.length > 0 && jsx(_$$K2, {
+              children: y.length > 0 && jsx(IconButton, {
                 'aria-label': getI18nString('sites.settings.password_protection.copy_password'),
                 'onClick': A,
                 'children': jsx(_$$a6, {})
@@ -10703,7 +10703,7 @@ ${x}
 function cB() {
   let {
     color
-  } = _$$G4();
+  } = useTheme();
   return jsxs('div', {
     className: 'x10l6tqk x1vazsj0 x16v0e3u xb3r6kr',
     children: [jsxs('div', {
@@ -11094,7 +11094,7 @@ function ur({
   let n = GQ();
   let {
     color
-  } = _$$G4();
+  } = useTheme();
   let d = Xr(FX);
   let c = useDispatch();
   let p = Xr(EB);
@@ -12039,7 +12039,7 @@ function uW({
         })
       }), jsx('div', {
         className: 'xtc4nxu x1ydjwli',
-        children: jsx(_$$K2, {
+        children: jsx(IconButton, {
           'onClick': () => s(!1),
           'aria-label': getI18nString('general.close'),
           'children': jsx(_$$A7, {})
@@ -12098,7 +12098,7 @@ function uJ({
   let [n, s] = useState(!1);
   let [r, o] = useState(!1);
   let d = _$$Y();
-  let c = _$$k6();
+  let c = isUserNotLoggedInAndEditorSupported();
   let u = useCallback(() => {
     UK('DOWNLOAD_CODE_BUTTON');
     d({
@@ -12751,25 +12751,25 @@ function xa({
       'onChange': () => {
         n.dispatchCommand(FORMAT_TEXT_COMMAND, 'strikethrough');
       }
-    }), jsx(xn, {}), jsx(_$$K2, {
+    }), jsx(xn, {}), jsx(IconButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignLeft'),
       'onClick': () => {
         n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'left');
       },
       'children': jsx(_$$h9, {})
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignCenter'),
       'onClick': () => {
         n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'center');
       },
       'children': jsx(_$$N9, {})
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignRight'),
       'onClick': () => {
         n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'right');
       },
       'children': jsx(_$$K5, {})
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('dakota.rich_text_editor.toolbar.alignJustify'),
       'onClick': () => {
         n.dispatchCommand(FORMAT_ELEMENT_COMMAND, 'justify');
@@ -12784,7 +12784,7 @@ function xa({
         style: {
           display: 'none'
         }
-      }), jsx(_$$K2, {
+      }), jsx(IconButton, {
         'aria-label': getI18nString('dakota.rich_text_editor.toolbar.insertImage'),
         'onClick': () => b.current?.click(),
         'children': jsx(_$$s7, {})
@@ -13990,7 +13990,7 @@ function x7({
             className: 'x78zum5 x2lah0s x8x9d4c',
             children: [jsx('div', {
               className: 'x2lah0s',
-              children: jsx(_$$K2, {
+              children: jsx(IconButton, {
                 'size': 'md',
                 'aria-label': getI18nString('dakota.date_picker.navigate_previous_month'),
                 'onClick': n.focusPreviousPage,
@@ -13998,7 +13998,7 @@ function x7({
               })
             }), jsx('div', {
               className: 'x2lah0s',
-              children: jsx(_$$K2, {
+              children: jsx(IconButton, {
                 'size': 'md',
                 'aria-label': getI18nString('dakota.date_picker.navigate_next_month'),
                 'onClick': n.focusNextPage,
@@ -14119,7 +14119,7 @@ function mt({
           onBlur: o,
           onOpenChange: e => d.setOpen(e)
         })
-      }), jsx(_$$K2, {
+      }), jsx(IconButton, {
         'size': 'md',
         'aria-label': getI18nString('dakota.date_picker.open_calendar'),
         'onClick': () => d.setOpen(!d.isOpen),
@@ -14364,7 +14364,7 @@ function mp({
         children: [jsx(_$$hE, {
           children: getI18nString('dakota.image_detail_modal.image')
         }), jsx(_$$jk, {
-          children: jsx(_$$K2, {
+          children: jsx(IconButton, {
             'onClick': e.deleteImage,
             'aria-label': getI18nString('dakota.image_detail_modal.delete_image_tooltip'),
             'children': jsx(_$$z7, {})
@@ -14939,7 +14939,7 @@ function mT() {
     children: [jsxs(_$$e10, {
       'variant': 'secondary',
       'aria-label': getI18nString('dakota.table_view.aria_label.navigate_items'),
-      'children': [jsx(_$$K2, {
+      'children': [jsx(IconButton, {
         'disabled': a === 0,
         'onClick': () => {
           r('previous');
@@ -14947,7 +14947,7 @@ function mT() {
         'variant': 'secondary',
         'aria-label': getI18nString('dakota.table_view.aria_label.previous_item'),
         'children': jsx(_$$l0, {})
-      }), jsx(_$$K2, {
+      }), jsx(IconButton, {
         'disabled': s,
         'onClick': () => {
           r('next');
@@ -14956,7 +14956,7 @@ function mT() {
         'aria-label': getI18nString('dakota.table_view.aria_label.next_item'),
         'children': jsx(_$$k9, {})
       })]
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'onClick': () => {
         t(new Set());
       },
@@ -16650,7 +16650,7 @@ function hf() {
       children: renderI18nText('dakota.ai.generate_collection')
     }), jsx('div', {
       className: 'x10l6tqk x3m8u43 x13vifvy',
-      children: jsx(_$$K2, {
+      children: jsx(IconButton, {
         'onClick': () => {
           e(!1);
         },
@@ -16777,7 +16777,7 @@ function hb() {
       })]
     }), jsx('div', {
       ..._$$Ay.props(hv.submitButton, y && hv.submitButtonEnabled, !y && hv.submitButtonDisabled),
-      children: jsx(_$$K2, {
+      children: jsx(IconButton, {
         'aria-label': getI18nString('dakota.ai.generate_collection'),
         'disabled': !y,
         'type': 'submit',
@@ -17388,7 +17388,7 @@ function h1(e) {
         children: [isOpen ? jsx(_$$O4, {}) : jsx(_$$k0, {}), title]
       }), addButtonProps && fileInEditableState && jsx('div', {
         className: _$$s4.flex.gap8.itemsCenter.$,
-        children: jsx(_$$K2, {
+        children: jsx(IconButton, {
           'recordingKey': generateRecordingKey(e.recordingKey, addButtonProps.recordingKey ?? ''),
           'aria-label': addButtonProps.label,
           'onClick': addButtonProps.onClick,
@@ -17813,7 +17813,7 @@ function ga() {
       }), jsx('div', {
         ref: dropdownTargetRef,
         children: w ? jsxs(Fragment, {
-          children: [jsx(_$$K2, {
+          children: [jsx(IconButton, {
             'recordingKey': 'newDakotaCollection',
             'aria-label': getI18nString('sites.panel.pages_panel.add_new_dakota_collection'),
             'onClick': e => {
@@ -18871,7 +18871,7 @@ function gU({
 function gK() {
   let e = Xr(sitesViewSetterAtomFamily);
   let t = Xr(_$$j4);
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.metadata.domain.warning_icon_indicating_that_the_custom_domain_has_not_been_verified'),
     'data-tooltip': getI18nString('sites.metadata.domains.unverified_custom_domain'),
     'data-tooltip-type': KindEnum.TEXT,
@@ -19855,7 +19855,7 @@ function fD({
   let t = useAtomWithSubscription(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
   let i = useAtomWithSubscription(t.history.currentAtom);
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.modal.back'),
     'onClick': () => {
       t.history.back();
@@ -19871,7 +19871,7 @@ function fz({
   let t = useAtomWithSubscription(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
   let i = useAtomWithSubscription(t.history.currentAtom);
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.modal.forward'),
     'onClick': () => {
       t.history.forward();
@@ -19886,7 +19886,7 @@ function fB({
 }) {
   let t = useAtomWithSubscription(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.modal.reload'),
     'onClick': () => {
       t.history.refresh();
@@ -20006,7 +20006,7 @@ function fq(e) {
     dispatch: d,
     lean: 'left'
   });
-  let f = jsx(_$$K2, {
+  let f = jsx(IconButton, {
     'aria-label': getI18nString('inline_preview.overflow_menu'),
     'ref': n,
     'htmlAttributes': {
@@ -20214,7 +20214,7 @@ function f8({
   let n = getFeatureFlags().sts_runtime_debug_tools;
   return jsxs('div', {
     className: 'sites_full_page_preview--rightControlGroup--x3yAk sites_full_page_preview--controlGroup--vHfcT',
-    children: [n && jsx(_$$K2, {
+    children: [n && jsx(IconButton, {
       'aria-label': getI18nString('sites.modal.open-debug-tools'),
       'onClick': t,
       'recordingKey': generateRecordingKey(e, 'open-debug-tools'),
@@ -20225,7 +20225,7 @@ function f8({
       recordingKey: e
     }), jsx(fz, {
       recordingKey: e
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('sites.modal.restart'),
       'onClick': () => {
         i.history.restart();
@@ -20243,7 +20243,7 @@ function f6({
   let n = selectCurrentFile();
   return jsxs('div', {
     className: 'sites_full_page_preview--leftControlGroup--tfTiF sites_full_page_preview--controlGroup--vHfcT',
-    children: [jsx(_$$K2, {
+    children: [jsx(IconButton, {
       'aria-label': getI18nString('sites.modal.close'),
       'onClick': e,
       'recordingKey': generateRecordingKey(i, 'close'),
@@ -21286,7 +21286,7 @@ function _B({
           recordingKey: e
         }), h.showOverflow && jsx('div', {
           ref: _,
-          children: jsx(_$$K2, {
+          children: jsx(IconButton, {
             'aria-label': getI18nString('inline_preview.overflow_menu'),
             'htmlAttributes': {
               'data-tooltip-type': KindEnum.TEXT,
@@ -21323,7 +21323,7 @@ function _$({
 }) {
   let [t, i] = useAtomValueAndSetter(_$$_b);
   assert(!!t, 'sitePreviewState should not be null');
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.modal.open-full-preview'),
     'onClick': () => {
       i({
@@ -21896,7 +21896,7 @@ function bf() {
         className: 'site_templates_view--templateTitleText--DXgwN text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa',
         children: getI18nString('sites.onboarding.template_picker.title')
       })
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('common.close'),
       'onClick': () => {
         t('sites_template_picker_dismissed');
@@ -21987,7 +21987,7 @@ function bS({
     className: v()('sites_template_view--headerContainer--9-w3Q', 'sites_template_view--separator--takJY'),
     children: [jsxs('div', {
       className: 'sites_template_view--titleTextContainer--YjnHM',
-      children: [jsx(_$$K2, {
+      children: [jsx(IconButton, {
         'aria-label': getI18nString('slides.templates.back'),
         'onClick': p,
         'children': jsx(_$$C6, {
@@ -22010,7 +22010,7 @@ function bS({
           publisherName: t
         })
       })]
-    }), jsx(_$$K2, {
+    }), jsx(IconButton, {
       'aria-label': getI18nString('common.close'),
       'onClick': () => {
         n('sites_template_picker_dismissed');
@@ -22296,7 +22296,7 @@ function bF() {
 }
 function bH() {
   let e = KH();
-  return jsx(_$$i7, {
+  return jsx(TabLoop, {
     children: jsx(VF, {
       isVisible: !0,
       children: () => jsx(mw, {
@@ -22630,7 +22630,7 @@ function yy(e) {
     currentCollection: e.currentCollection,
     collectionList: e.collectionList
   });
-  let n = jsx(_$$K2, {
+  let n = jsx(IconButton, {
     'recordingKey': generateRecordingKey(e.recordingKey, 'removeCollectionButton'),
     'onClick': () => t(null),
     'aria-label': getI18nString('dakota.collection_selector.disconnect_submenu_title'),
@@ -24104,7 +24104,7 @@ function jo({
   disabled: i,
   recordingKey: n
 }) {
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.panel.add_tooltip'),
     'ref': e,
     'onClick': t,
@@ -24121,7 +24121,7 @@ function jd({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.panel.remove_tooltip'),
     'onClick': e,
     'recordingKey': generateRecordingKey(t, 'minus_button'),
@@ -24136,7 +24136,7 @@ function jc({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.panel.reset_tooltip'),
     'onClick': e,
     'recordingKey': generateRecordingKey(t, 'reset_button'),
@@ -24151,7 +24151,7 @@ function ju({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.panel.edit_cms_accessibility_label_tooltip'),
     'onClick': e,
     'recordingKey': generateRecordingKey(t, 'edit_accessible_label_button'),
@@ -25455,7 +25455,7 @@ function ku({
   } = zj('exportSettings', 'maskType');
   let D = _$$Gt('stateGroupSelectionInfo');
   let z = _$$SJ();
-  return jsxs(_$$i7, {
+  return jsxs(TabLoop, {
     children: [jsx(_$$_i, {
       recordingKey: 'toolbarView',
       shouldShowCodeInstancePanel: _$$jd(i),
@@ -28862,7 +28862,7 @@ function To({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.panel.interactions_panel.back_tooltip'),
     'onClick': e,
     'recordingKey': t,
@@ -29361,7 +29361,7 @@ function Tm({
   onClick: e,
   recordingKey: t
 }) {
-  return jsx(_$$K2, {
+  return jsx(IconButton, {
     'aria-label': getI18nString('sites.panel.interactions_panel.remove_tooltip'),
     'onClick': e,
     'recordingKey': t,
@@ -30620,7 +30620,7 @@ function TY({
   let x = Object.keys(i).length > 0 && _$$Yh(p, 'create-code-layer-from-design');
   let m = (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) && x;
   let h = !x && !_$$jd(n) && !n[ItemType.SITES_LINK_ITEM] && !n[ItemType.SITES_INTERACTIONS_ITEM] && !n[ItemType.FRAME_PRESETS] && !n[ItemType.PENCIL_TOOL];
-  return jsxs(_$$i7, {
+  return jsxs(TabLoop, {
     children: [jsx(VF, {
       isVisible: x,
       children: () => jsx(_$$k10, {

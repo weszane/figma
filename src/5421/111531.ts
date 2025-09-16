@@ -10,7 +10,7 @@ import { bL, l9, mc, c$ } from "../905/493196";
 import { HiddenLabel } from "../905/270045";
 import { Button } from "../905/521428";
 import { setupToggleButton } from "../905/167712";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/365108";
 import { x as _$$x } from "../905/149501";
 import { a as _$$a } from "../5421/219397";
@@ -2046,7 +2046,7 @@ function ny({
   });
   let F = O ? jsx("div", {
     ...Ay.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       "aria-label": getI18nString("living_designs.chat.stop_button.alt_text"),
       onClick: () => {
         V && V.abort();
@@ -2058,7 +2058,7 @@ function ny({
     })
   }) : jsx("div", {
     ...Ay.props(ng.buttonContainer, M ? ng.buttonBrand : ng.buttonDisabled),
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       type: "submit",
       "aria-label": getI18nString("living_designs.chat.send_button.alt_text"),
       onClick: () => {
@@ -3430,7 +3430,7 @@ function nU({
         openText: getI18nString("sites.code_component.drawer.open"),
         hideText: getI18nString("sites.code_component.drawer.hide"),
         children: jsx(y, {})
-      }), jsx(_$$K, {
+      }), jsx(IconButton, {
         "aria-label": getI18nString("sites.code_component.code_view_reload"),
         htmlAttributes: {
           "data-tooltip": getI18nString("sites.code_component.code_view_reload"),
@@ -3438,7 +3438,7 @@ function nU({
         },
         onClick: n,
         children: jsx(_$$x, {})
-      }), getFeatureFlags().bake_m2d && jsx(_$$K, {
+      }), getFeatureFlags().bake_m2d && jsx(IconButton, {
         "aria-label": getI18nString("figmake.m2d.paste_to_canvas_as_design_layers"),
         htmlAttributes: {
           "data-tooltip": getI18nString("figmake.m2d.paste_to_canvas_as_design_layers"),

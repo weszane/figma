@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { a as _$$a } from "../905/5627";
@@ -503,7 +503,7 @@ function G({
       event: t
     })));
   }, [E, N, e]);
-  let w = () => !e || isInvalidValue(e) || e?.type !== "url" ? null : jsx(_$$K, {
+  let w = () => !e || isInvalidValue(e) || e?.type !== "url" ? null : jsx(IconButton, {
     onClick: A,
     children: N ? jsx(_$$a, {}) : jsx(_$$V, {}),
     "aria-label": N ? getI18nString("sites.panel.copy_link") : getI18nString("sites.panel.open_link_new_tab")

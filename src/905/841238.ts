@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { lQ } from "../905/934246";
-import { i } from "../905/718764";
+import { TabLoop } from "../905/718764";
 import { Button } from "../905/521428";
 import { ComponentPropType, Fullscreen, VariableResolvedDataType } from "../figma_app/763686";
 import { resolveVariableValue } from "../905/929949";
@@ -33,7 +33,7 @@ import { uS, c9, DD, _I } from "../905/211095";
 import { bq, dl as _$$dl, Kn, i0 } from "../figma_app/65182";
 import { D as _$$D2 } from "../905/589275";
 import { bL } from "../905/911410";
-import { vo, Y9, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { p as _$$p } from "../905/185998";
 import { Label } from "../905/270045";
 import { A as _$$A } from "../vendor/850789";
@@ -56,13 +56,13 @@ function W({
     onClose: s,
     width: 304,
     defaultPosition: e,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: jsx("div", {
           className: "x78zum5 x6s0dn4 x1qughib x1iyjqo2 x1s688f x1j6dyjg x163pfp",
           children: renderI18nText("design_systems.component_properties.slot_create_modal.create_slot_title")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: {
           left: 0,
           right: 0
@@ -313,7 +313,7 @@ let $$X0 = registerModal(function (e) {
       }), jsx(CloseButton, {
         onClick: eu
       })]
-    }), jsxs(i, {
+    }), jsxs(TabLoop, {
       children: [jsxs("div", {
         className: $,
         children: [jsx("p", {

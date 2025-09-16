@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useRef } from "react";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { X as _$$X } from "../905/736922";
 import { VariableDataType, VariableResolvedDataType } from "../figma_app/763686";
 import { useAtomValueAndSetter } from "../figma_app/27355";
@@ -84,7 +84,7 @@ function A({
       recordingKey: "content_panel"
     }), jsx("div", {
       className: cL,
-      children: jsx(K, {
+      children: jsx(IconButton, {
         htmlAttributes: eventHandlers,
         onClick: O,
         "aria-label": getI18nString("inspect_panel.copy"),

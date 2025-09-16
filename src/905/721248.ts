@@ -5,7 +5,7 @@ import { deepEqual } from "../905/382883";
 import o, { lQ } from "../905/934246";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, Y9, hE, nB as _$$nB, wi, jk } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { N as _$$N } from "../905/438674";
 import { ButtonWide, Button } from "../905/521428";
 import { LibraryUpdateStatus, VariablesBindings, GitReferenceType, PropertyScope, FileAndBranchTipType, SceneGraphHelpers, PreviewStage, ViewType, SchemaJoinStatus, DocumentMode } from "../figma_app/763686";
@@ -41,7 +41,7 @@ import { SourceDirection, BranchType, CPPEventType } from "../905/535806";
 import { AccessLevelEnum } from "../905/557142";
 import { e0 as _$$e2 } from "../905/696396";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { t as _$$t2 } from "../905/117577";
 import { a as _$$a } from "../905/964520";
 import { sessionLocalIDToString, areSessionLocalIDsEqual } from "../905/871411";
@@ -2287,12 +2287,12 @@ let iW = registerModal(function (e) {
     manager: b,
     width: "lg",
     height: "fixed",
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: renderI18nText("collaboration.branching_reviews.finish_your_review")
         })
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         children: [jsx("form", {
           className: "branching_reviews_modals--radioGroup--eWuSc",
           children: jsxs(_$$b, {
@@ -2335,8 +2335,8 @@ let iW = registerModal(function (e) {
           }) : getI18nString("collaboration.branching_reviews.leave_a_comment")),
           value: o
         })]
-      }), jsx(wi, {
-        children: jsxs(jk, {
+      }), jsx(DialogFooter, {
+        children: jsxs(DialogActionStrip, {
           children: [jsx($z, {
             recordingKey: "leaveReviewModal",
             onClick: () => {
@@ -2368,10 +2368,10 @@ let iK = registerModal(function (e) {
   return jsx(ModalRootComponent, {
     width: "md",
     manager: a,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: getI18nString("collaboration.branching_reviews.request_review")
-      }), jsxs(_$$nB, {
+      }), jsxs(DialogBody, {
         scrolling: "none",
         children: [jsx("div", {
           className: "branching_reviews_modals--subtitle--bjYCq",
@@ -2386,8 +2386,8 @@ let iK = registerModal(function (e) {
             i(e.currentTarget.value);
           }
         })]
-      }), jsx(wi, {
-        children: jsx(jk, {
+      }), jsx(DialogFooter, {
+        children: jsx(DialogActionStrip, {
           children: jsx($z, {
             variant: "primary",
             recordingKey: "requestReviewModal",
@@ -2505,7 +2505,7 @@ function nm(e) {
 function nh(e) {
   let t = jsx("div", {
     className: no,
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: e.onClickRemove,
       "aria-label": getI18nString("collaboration.branching_to_source.remove"),
       children: jsx(SvgComponent, {
@@ -2534,7 +2534,7 @@ function ng(e) {
   return jsx(nc, {
     button: e.archivedBranch ? void 0 : i && (e.reviewer.approved_at || e.reviewer.changes_requested_at) ? jsxs(_$$bL2, {
       manager,
-      children: [jsx(_$$K, {
+      children: [jsx(IconButton, {
         ...getTriggerProps(),
         "aria-label": getI18nString("collaboration.branching_to_source.more_options_label"),
         children: jsx(_$$J3, {})
@@ -2914,7 +2914,7 @@ function ny(e) {
           children: renderI18nText("collaboration.branching_to_source.reviewers")
         }), g && jsx("div", {
           className: no,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: e => {
               e.stopPropagation();
               A(e => !e);
@@ -2996,7 +2996,7 @@ function nv(e) {
         manager,
         children: [jsx("div", {
           className: no,
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             "aria-label": getI18nString("collaboration.branching_to_source.more_options_label"),
             ...c,
             ref: e => {
@@ -3724,7 +3724,7 @@ let nw = memo(function (e) {
                     className: ho,
                     children: [jsx("div", {
                       className: j2,
-                      children: jsx(_$$K, {
+                      children: jsx(IconButton, {
                         "aria-label": getI18nString("collaboration.branching_to_source.back_to_summary_view"),
                         onClick: () => {
                           i.view === tN.AFFECTED_DETAIL ? v({
@@ -3811,7 +3811,7 @@ let nw = memo(function (e) {
               className: G9,
               children: [jsx("div", {
                 className: ai,
-                children: jsx(_$$K, {
+                children: jsx(IconButton, {
                   "aria-label": getI18nString("collaboration.branching_to_source.view_previous_detail"),
                   onClick: () => eT(i.displayGroup.index - 1),
                   disabled: 0 === i.displayGroup.index,
@@ -3825,7 +3825,7 @@ let nw = memo(function (e) {
                 })
               }), jsx("div", {
                 className: ai,
-                children: jsx(_$$K, {
+                children: jsx(IconButton, {
                   "aria-label": getI18nString("collaboration.branching_to_source.view_next_detail"),
                   onClick: () => eT(i.displayGroup.index + 1),
                   disabled: i.displayGroup.index === allDisplayGroups.length - 1,
@@ -5599,12 +5599,12 @@ function rO({
     width: 1056,
     height: "fixed",
     manager: o,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
-        children: jsx(hE, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
+        children: jsx(DialogTitle, {
           children: u
         })
-      }), jsx(_$$nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: jsx("div", {
           className: jT,

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bL, c$, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { bL as _$$bL } from "../905/911410";
-import { vo, Y9, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { t as _$$t } from "../905/398894";
 import { h as _$$h } from "../905/104000";
 import { a as _$$a } from "../905/361302";
@@ -1008,13 +1008,13 @@ export function $$ez0(e) {
     },
     recordingKey: er,
     width: eF,
-    children: jsxs(vo, {
-      children: [jsx(Y9, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: jsx("h2", {
           className: "stroke_settings--settingsHeading--Pvgy-",
           children: getI18nString("fullscreen.properties_panel.stroke_settings")
         })
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         padding: 0,
         children: ea
       })]

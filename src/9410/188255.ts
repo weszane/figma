@@ -15,7 +15,7 @@ import { N as _$$N, D as _$$D } from "../figma_app/268271";
 import { e0 as _$$e2 } from "../905/696396";
 import { M as _$$M } from "../905/152487";
 import { RSb, B14, y4J, t_E, qnr, kmj, hsL, JGK, XAb, Ttn, Nwg, BrS, v75, Smd, H2x, DKg, wRI, Kze, MJs, zoI, lLk, kp0, Njd, jRE, Byv, Y2_, KTt, HU3, g4U, uPw, Fq3, a9B, ENg, CVA, IQ, K_h, Fff, uTW, sJD, _5$ } from "../figma_app/6204";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { N as _$$N2 } from "../905/438674";
 import { ButtonLargeWide, Button } from "../905/521428";
 import { A as _$$A } from "../905/251970";
@@ -167,8 +167,8 @@ import { getCurrentFileType, isDevHandoffEditorType, isDesignFileType } from "..
 import { FFileType } from "../figma_app/191312";
 import { GoogleClassroomIntegrationView, UserForRcs, TeamCanAdmin } from "../figma_app/43951";
 import { w as _$$w5, tX as _$$tX2, l5, aG as _$$aG } from "../figma_app/728657";
-import { b as _$$b4 } from "../905/799737";
-import { i as _$$i2 } from "../905/718764";
+import { DialogRoot } from "../905/799737";
+import { TabLoop } from "../905/718764";
 import { ButtonPrimitive } from "../905/632989";
 import { Q as _$$Q3 } from "../1250/220026";
 import { useLatestRef } from "../figma_app/922077";
@@ -456,7 +456,7 @@ function q({
           children: renderI18nText("whiteboard.ai_summary.nudge.title")
         }), jsx("div", {
           className: "ai_summary_nudge--closeButton--2Lr8q",
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             onClick: e,
             "aria-label": getI18nString("general.close"),
             htmlAttributes: {
@@ -1776,7 +1776,7 @@ class iX extends PureComponent {
         })]
       }), jsx("div", {
         className: "onboard_figjam_viewer--closeButton--hm43f",
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick: this.props.onDismiss,
           "aria-label": getI18nString("modal.close"),
           children: jsx(_$$A, {
@@ -4474,14 +4474,14 @@ function ns(e) {
   }
   return canInsert ? jsx("div", {
     className: _$$s.flex.justifyCenter.$,
-    children: jsx(_$$b4, {
+    children: jsx(DialogRoot, {
       className: "browse_templates_make_something_onboarding--modalContainer--tYRC4",
       htmlAttributes: {
         onKeyDown(t) {
           e.onEscapeDown(t, onClickCloseButton);
         }
       },
-      children: jsxs(_$$i2, {
+      children: jsxs(TabLoop, {
         children: [jsx("div", {
           className: iy()("browse_templates_make_something_onboarding--closeHeader--tGUaS", {
             [r6]: s
@@ -4637,7 +4637,7 @@ function no(e) {
     className: iy()("browse_templates_make_something_onboarding--popupBackground--qUE9z", {
       "browse_templates_make_something_onboarding--popupBackgroundAboveDlt--3VTFo": shiftPopupUp
     }),
-    children: jsx(_$$b4, {
+    children: jsx(DialogRoot, {
       className: "browse_templates_make_something_onboarding--popupModal--y2117",
       ref: popupRef,
       htmlAttributes: {
@@ -4645,7 +4645,7 @@ function no(e) {
           e.onEscapeDown(t, onClickCloseButton);
         }
       },
-      children: jsxs(_$$i2, {
+      children: jsxs(TabLoop, {
         children: [jsxs("div", {
           className: "browse_templates_make_something_onboarding--popupHeader--gqTTZ",
           children: [jsx("div", {

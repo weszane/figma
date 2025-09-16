@@ -8,7 +8,7 @@ import { rM } from "../figma_app/241541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { isDevHandoffEditorType, isIllustrationEditorType, getSelectedEditorType } from "../figma_app/976749";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
 import { p8 } from "../figma_app/722362";
@@ -34,7 +34,7 @@ export function $$v0(e) {
   return void 0 !== t && t !== e;
 }
 export function $$A3() {
-  let e = _$$k();
+  let e = isUserNotLoggedInAndEditorSupported();
   let t = useCanAccessFullDevMode();
   let r = !!hA() && t;
   return !e && (r || isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev);

@@ -40,7 +40,7 @@ import { Z as _$$Z2 } from '../905/104740';
 import { Ef } from '../905/107436';
 import { y as _$$y2 } from '../905/129046';
 import { KindEnum } from '../905/129884';
-import { P as _$$P2 } from '../905/143421';
+import { ScrollContainer } from '../905/143421';
 import { M as _$$M } from '../905/152487';
 import { ox as _$$ox } from '../905/163832';
 import { ServiceCategories } from '../905/165054';
@@ -77,7 +77,7 @@ import { _ as _$$_3 } from '../905/410717';
 import { F as _$$F2 } from '../905/422355';
 import { rq as _$$rq } from '../905/425180';
 import { useModalManager } from '../905/437088';
-import { K as _$$K } from '../905/443068';
+import { IconButton } from '../905/443068';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { E as _$$E } from '../905/453826';
@@ -124,7 +124,7 @@ import { l as _$$l5 } from '../905/745972';
 import { F_ as _$$F_ } from '../905/748636';
 import { G as _$$G } from '../905/750789';
 import { tH as _$$tH, H4 } from '../905/751457';
-import { J as _$$J8 } from '../905/799737';
+import { DialogLabel } from '../905/799737';
 import { G as _$$G2 } from '../905/800369';
 import { Ih } from '../905/820169';
 import { EventShield } from '../905/821217';
@@ -302,7 +302,7 @@ import { eF as _$$eF, iS as _$$iS, Op as _$$Op, rT as _$$rT, KV, ky, L2, yd, zZ 
 import { userFlagExistsAtomFamily, userFlagAtomFamily } from '../figma_app/545877';
 import { BI } from '../figma_app/546509';
 import { _9, Dm as _$$Dm, fR, gx, p6 } from '../figma_app/548615';
-import { k as _$$k4 } from '../figma_app/564183';
+import { isUserNotLoggedInAndEditorSupported } from '../figma_app/564183';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { Fy, NT } from '../figma_app/579169';
 import { l2 as _$$l2, rL as _$$rL, _i, bk, Hl, mr, PM, VK, vP } from '../figma_app/584405';
@@ -2015,7 +2015,7 @@ function lw({
             })
           }), jsx('div', {
             className: 'starting_points_templates_modal--closeButton--io-14',
-            children: jsx(_$$K, {
+            children: jsx(IconButton, {
               'onClick': e,
               'aria-label': getI18nString('general.close'),
               'htmlAttributes': {
@@ -4748,7 +4748,7 @@ function i0({
   libraryData: e,
   hasLoaded: t
 }) {
-  return jsx(_$$P2, {
+  return jsx(ScrollContainer, {
     theme: {
       rootStyle: {
         height: 168,
@@ -4970,7 +4970,7 @@ let rn = memo(() => {
   let r = getFeatureFlags().aip_flower_garden_auto_library_select ? 520 : 435;
   let s = l ? l.y - 40 : r;
   let o = useRef(null);
-  return jsx(_$$P2, {
+  return jsx(ScrollContainer, {
     ref: o,
     children: jsxs('div', {
       className: 'x8rdmch xctkrei x78zum5 xdt5ytf',
@@ -6725,7 +6725,7 @@ function sv(e) {
 function sk({
   ignoreViolationRow: e
 }) {
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     'htmlAttributes': {
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('design_linter.penalty_box.ignore_suggestion_tooltip')
@@ -6739,7 +6739,7 @@ function sE({
   applyFixToRow: e,
   hasFix: t
 }) {
-  return jsx(_$$K, {
+  return jsx(IconButton, {
     'htmlAttributes': t ? {
       'data-tooltip-type': KindEnum.TEXT,
       'data-tooltip': getI18nString('design_linter.penalty_box.apply_suggestion_tooltip')
@@ -7177,7 +7177,7 @@ function sF({
         actionType: 'ignore'
       });
     },
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       'recordingKey': generateRecordingKey(o, `ignore-${a}`),
       'onClick': r,
       'data-tooltip': getI18nString('design_linter.suggestion_block.ignore_tooltip', {
@@ -7197,7 +7197,7 @@ function sF({
         actionType: 'apply'
       });
     },
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       'recordingKey': generateRecordingKey(o, `apply-${a}`),
       'onClick': i,
       'data-tooltip': getI18nString('design_linter.suggestion_block.apply_tooltip', {
@@ -9583,7 +9583,7 @@ let oR = memo(() => {
       'children': renderI18nText('general.next')
     }) : null]
   }) : jsxs(Fragment, {
-    children: [jsx(_$$P2, {
+    children: [jsx(ScrollContainer, {
       children: jsx('div', {
         className: 'x78zum5 xdt5ytf x5yr21d xp6roeo x1iyjqo2',
         onScroll: l,
@@ -9934,7 +9934,7 @@ function oP() {
     type: 'tooltip'
   });
   return jsxs(Fragment, {
-    children: [jsx(_$$K, {
+    children: [jsx(IconButton, {
       ...getTriggerProps(),
       'onClick': () => {
         l && s(!1);
@@ -9976,7 +9976,7 @@ function oV() {
   }, [e]);
   return jsx('div', {
     className: 'x1n2onr6 x1rg5ohu',
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       'onClick': l,
       'aria-label': getI18nString('design_linter.modal.penalty_box.refresh_button_tooltip'),
       'disabled': t,
@@ -10116,7 +10116,7 @@ function ah({
   ...l
 }) {
   S2();
-  let i = _$$k4();
+  let i = isUserNotLoggedInAndEditorSupported();
   let r = l.propertiesPanelTab;
   let s = p8('topLevelMode');
   let a = Dj(l.user);
@@ -10220,7 +10220,7 @@ let a_ = memo(() => {
   let $ = d4(e => e.userEduGracePeriods);
   let P = d4(e => e.licenseGroups);
   let V = getEditorTypeOrNull() === FEditorType.Design;
-  let D = _$$k4();
+  let D = isUserNotLoggedInAndEditorSupported();
   let H = VP(l, 'edit_button_upgrading_to_edit');
   let G = t || H;
   let U = getObservableValue(getPropertiesPanelTab(), DesignWorkspace.DESIGN);
@@ -10483,7 +10483,7 @@ function dh({
 }) {
   return jsxs('div', {
     className: 'x1kzcg16 xlup9mm x1yjdb4r x1n5zjp5 x78zum5 x1nfngrj xkh2ocl',
-    children: [jsx(_$$J8, {
+    children: [jsx(DialogLabel, {
       ...Ay.props(dx.nameInfoText),
       htmlAttributes: {
         'data-tooltip': e,

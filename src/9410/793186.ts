@@ -10,7 +10,7 @@ import { l7, ZO } from "../figma_app/88239";
 import { mV } from "../905/837497";
 import { gI } from "../figma_app/399472";
 import { showModalHandler, hideModal } from "../905/156213";
-import { k as _$$k } from "../figma_app/564183";
+import { isUserNotLoggedInAndEditorSupported } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -322,7 +322,7 @@ function et() {
   let f = e => {
     var t;
     let r = (t = (t = e).trim().toLowerCase(), "auto".startsWith(t) || "fill".startsWith(t)) ? LayoutSizingType.FLEX : "hug".startsWith(t) && getFeatureFlags().ce_tv_grid_hug ? LayoutSizingType.HUG : "fixed".startsWith(t) ? LayoutSizingType.FIXED : null;
-    if (null != r) a(r); else {
+    if (null != r) a(r);else {
       let t = parseFloat(e);
       if (isNaN(t)) return;
       i(t);
@@ -919,7 +919,7 @@ export function $$eU1({
   let p = l7();
   let h = _$$e();
   let f = ZO();
-  let x = _$$k();
+  let x = isUserNotLoggedInAndEditorSupported();
   let y = useCanUseDevModeDemoFile();
   let b = u.activeThread?.id || null;
   let C = u.showOnlyParticipating;

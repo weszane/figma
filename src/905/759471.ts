@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, forwardRef, PureComponent, useCallback, useContext, useRef, useState } from "react";
 import { d as _$$d } from "../905/976845";
 import { T as _$$T } from "../905/68180";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/487602";
 import { TransformModifierBindingsCpp, Axis, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -774,7 +774,7 @@ function eB(e) {
     });
     let m = Y ? void 0 : jsx(_$$T, {
       selected: e,
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         recordingKey: generateRecordingKey(q, "removeButton"),
         onClick: onRemoveTransformModifier,
         "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
@@ -910,7 +910,7 @@ function eB(e) {
           visible: transformModifier.visible,
           onChange: ed,
           recordingKey: generateRecordingKey(q, "visibleToggle")
-        }), jsx(_$$K, {
+        }), jsx(IconButton, {
           recordingKey: generateRecordingKey(q, "removeButton"),
           onClick: onRemoveTransformModifier,
           "aria-label": getI18nString("properties_panel.transform_modifiers.remove_transform_modifier"),

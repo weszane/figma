@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { Label } from "../905/270045";
 import { d as _$$d } from "../905/976845";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { u as _$$u } from "../905/65923";
 import { Z as _$$Z } from "../905/279476";
 import { O as _$$O } from "../905/487602";
@@ -96,7 +96,7 @@ function eu() {
   return jsx("span", {
     className: "magic_link--magicLinkButton--CWefW",
     "data-testid": "magic-link-entry",
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       recordingKey: generateRecordingKey("prototypeInteractionList", "magicLinkButton"),
       "aria-label": i,
       onClick: () => {
@@ -627,7 +627,7 @@ function eA({
       }),
       rightIcon: jsx("div", {
         hidden: !en,
-        children: jsx(_$$K, {
+        children: jsx(IconButton, {
           onClick: ez,
           "aria-label": getI18nString("proto.prototype_panel.remove_interaction_tooltip"),
           recordingKey: generateRecordingKey(B, "removeButton"),
@@ -673,7 +673,7 @@ function eA({
   });
   let e6 = jsx("span", {
     className: "prototype_interaction_list--removeButton--g6aiQ",
-    children: jsx(_$$K, {
+    children: jsx(IconButton, {
       onClick: ez,
       "aria-label": getI18nString("proto.prototype_panel.remove_interaction_tooltip"),
       recordingKey: generateRecordingKey(B, "removeButton"),

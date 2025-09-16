@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { forwardRef } from "react";
 import { A } from "../vendor/723372";
 import { defaultComponentAttribute } from "../905/577641";
-import { C7, Jc } from "../905/117474";
+import { setupFocusNavigator, getTabbableElements } from "../905/117474";
 export let $$l0 = forwardRef(({
   children: e,
   ...t
@@ -36,7 +36,7 @@ export let $$d1 = '[role="gridcell"]';
 export function $$c3(e, t) {
   let i = h(e);
   if (t ? 2 !== i : 0 === i) {
-    let i = C7({
+    let i = setupFocusNavigator({
       current: e
     });
     "reverse" === t ? i.focusLast() : i.focusFirst();
@@ -50,13 +50,13 @@ export function $$u4(e = "forward", t) {
     p(r, e);
     return !0;
   }
-  let a = Jc(r);
+  let a = getTabbableElements(r);
   if (0 === a.length) return !1;
   let s = a.indexOf(n);
   return !(s < 0) && ("forward" === e && s < a.length - 1 || "reverse" === e && s > 0 ? (p(r, e), !0) : !!t(e) || ("reverse" === e && r.focus(), !1));
 }
 function p(e, t) {
-  let i = C7({
+  let i = setupFocusNavigator({
     current: e
   });
   "forward" === t ? i.focusNext({
@@ -73,7 +73,7 @@ export function $$m2(e) {
   return 0 === e ? !r : 1 === e ? r : r && 0 !== h(n);
 }
 function h(e) {
-  let t = Jc(e);
+  let t = getTabbableElements(e);
   if (1 === t.length) {
     let e = t[0];
     let i = e.tagName.toLowerCase();

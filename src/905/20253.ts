@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
-import { vo, nB } from "../figma_app/272243";
+import { DialogContents, DialogBody } from "../figma_app/272243";
 import { buildUploadUrl } from "../figma_app/169182";
 import { k } from "../905/585996";
 import { lR } from "../figma_app/617427";
@@ -22,8 +22,8 @@ export let $$f0 = registerModal(function (e) {
     children: jsx(ModalRootComponent, {
       width: 420,
       manager: i,
-      children: jsx(vo, {
-        children: jsxs(nB, {
+      children: jsx(DialogContents, {
+        children: jsxs(DialogBody, {
           padding: 32,
           children: [jsx("div", {
             className: Dg,

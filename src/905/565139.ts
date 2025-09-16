@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { C } from "../905/520159";
 import { getI18nString } from "../905/303541";
 export function $$o0({
@@ -11,7 +11,7 @@ export function $$o0({
     className: "asset_file_view_header--header--vxOMP",
     children: [jsx("div", {
       className: "asset_file_view_header--backCaret--4RyfR",
-      children: jsx(K, {
+      children: jsx(IconButton, {
         onClick: i,
         "aria-label": getI18nString("design_systems.libraries_modal.back"),
         children: jsx(C, {})

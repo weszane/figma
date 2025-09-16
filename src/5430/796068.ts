@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { I } from "../figma_app/4253";
+import { getCommunityResourcePayment } from "../figma_app/4253";
 import { isSubscriptionActive, isRecentActivePurchase } from "../figma_app/808294";
 import { getResourceName } from "../figma_app/777551";
 import { hasContent, getMainContent } from "../figma_app/427318";
@@ -28,7 +28,7 @@ export function $$h0({
     }));
   }, [t, x]);
   let g = hasMonetizedResourceMetadata(x);
-  let v = I(x);
+  let v = getCommunityResourcePayment(x);
   let b = selectCurrentUser();
   return jsxs(Fragment, {
     children: [f && jsx(_$$d, {

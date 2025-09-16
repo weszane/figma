@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, memo, useCallback, useEffect, useMemo } from "react";
-import i, { i as _$$i } from "../905/97346";
+import i, { setupDragHandler } from "../905/97346";
 import { atom, setupCustomAtom, useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { l as _$$l } from "../905/745972";
@@ -1089,13 +1089,13 @@ function e9({
   } = _$$l();
   let [m, j] = useAtomValueAndSetter(e7);
   let [b, y] = useAtomValueAndSetter(te);
-  let [v, w] = _$$i({
+  let [v, w] = setupDragHandler({
     onDrag(e) {
       let t = e.clientX / windowInnerWidth;
       j(`${(100 * t).toFixed(2)}%`);
     }
   });
-  let [N, I] = _$$i({
+  let [N, I] = setupDragHandler({
     onDrag(e) {
       let t = x.current;
       if (!t) return;

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { U } from "../905/708285";
 import { getI18nString } from "../905/303541";
 import { u as _$$u, BQ } from "../figma_app/852050";
@@ -36,7 +36,7 @@ export function $$$$m0() {
     }),
     icon: jsx("div", {
       className: "component_bound_vibisility_row--detachVisibilityIcon--FcjEN",
-      children: jsx(K, {
+      children: jsx(IconButton, {
         onClick: () => clearVariableConsumption(),
         "aria-label": getI18nString("variables.binding_ui.detach_variable_tooltip"),
         recordingKey: "detachVisibilityVariable",

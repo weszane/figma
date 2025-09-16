@@ -2,7 +2,7 @@ import { l as _$$l } from "../5430/795130";
 import { U } from "../5430/189384";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { throwTypeError } from "../figma_app/465776";
-import { I } from "../figma_app/4253";
+import { getCommunityResourcePayment } from "../figma_app/4253";
 import { isViewerModeResource, isSlideTemplateResource } from "../figma_app/471982";
 import { isResourceEligibleForPurchase } from "../figma_app/808294";
 import { hasContent, getHubFile, getPluginOrWidgetContent, getViewerModeType } from "../figma_app/427318";
@@ -32,7 +32,7 @@ export function $$y0({
   enableWideButtonForStickyFooter: r,
   enableCondensedWideButtonForStickyFooter: x
 }) {
-  let y = I(t);
+  let y = getCommunityResourcePayment(t);
   return isResourceEligibleForPurchase(t, y) ? jsx(_$$I, {
     resource: t,
     context: ShelfViewType.DETAIL,

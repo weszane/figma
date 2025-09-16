@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
 import { useDispatch } from "react-redux";
 import { Label } from "../905/270045";
-import { K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { v as _$$v } from "../905/442517";
 import { N as _$$N } from "../905/438674";
 import { B } from "../905/950875";
@@ -137,7 +137,7 @@ function R(e) {
       htmlFor: t,
       children: [jsxs("div", {
         className: "manage_memory--toggleMemoryStatsText--zpxbz",
-        children: [renderI18nText("manage_memory_modal.show_memory_in_layers_panel"), jsx(K, {
+        children: [renderI18nText("manage_memory_modal.show_memory_in_layers_panel"), jsx(IconButton, {
           "aria-label": getI18nString("manage_memory_modal.show_memory_in_layers_panel_warning"),
           htmlAttributes: {
             "data-tooltip-type": KindEnum.TEXT,

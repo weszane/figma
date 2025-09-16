@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useRef, Children, cloneElement, useContext, useId, useMemo, useState, useEffect, createRef, forwardRef, PureComponent } from "react";
 import { d as _$$d } from "../905/976845";
 import { T as _$$T } from "../905/68180";
-import { K as _$$K } from "../905/443068";
+import { IconButton } from "../905/443068";
 import { O as _$$O } from "../905/487602";
 import { StyleVariableOperation, CopyPasteType, VariableResolvedDataType, AppStateTsApi, ProcessStage, PropertyScope, AccessLevel, LayoutTabType, NodePropertyCategory } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -50,7 +50,7 @@ import { MH } from "../figma_app/394327";
 import { oz } from "../figma_app/406976";
 import { E as _$$E } from "../905/53857";
 import { bL as _$$bL } from "../905/911410";
-import { vo, Y9 as _$$Y, nB } from "../figma_app/272243";
+import { DialogContents, DialogHeader, DialogBody } from "../figma_app/272243";
 import { Point } from "../905/736624";
 import { dG } from "../figma_app/753501";
 import { Rk } from "../figma_app/844696";
@@ -67,8 +67,8 @@ import { clamp, roundToMultiple, nearlyEqual } from "../figma_app/492908";
 import { R as _$$R } from "../905/987929";
 import { Z as _$$Z2 } from "../905/557139";
 import { N as _$$N } from "../905/696319";
-import { i as _$$i } from "../905/97346";
-import { G as _$$G } from "../905/289770";
+import { setupDragHandler } from "../905/97346";
+import { useTheme } from "../905/289770";
 import { logError } from "../905/714362";
 import { Checkbox } from "../905/274480";
 import { m as _$$m } from "../905/357539";
@@ -640,7 +640,7 @@ function eq({
     step: a,
     containerRef: s
   });
-  let [c, u] = _$$i({
+  let [c, u] = setupDragHandler({
     onDragStart: handleDragStart,
     onDrag: handleDrag,
     onDragEnd: handleDragEnd
@@ -676,7 +676,7 @@ function e$() {
 function eZ({
   intensity: e = 0
 }) {
-  let t = _$$G();
+  let t = useTheme();
   let [i, a, s, o] = [useId(), useId(), useId(), useId()];
   (e < 0 || e > 1) && logError("GlassEffectsSettings", "Light intensity value outside valid range", {
     component: "LightIntensityIndicator",
@@ -1821,7 +1821,7 @@ function th(e) {
           })
         }), jsx("span", {
           className: "ui3_effects_settings_picker--colorVariableUnbindButton---TaIC",
-          children: jsx(_$$K, {
+          children: jsx(IconButton, {
             "aria-label": getI18nString("fullscreen.properties_panel.fill.detach_style"),
             onClick: h,
             children: jsx(_$$U, {})
@@ -2023,10 +2023,10 @@ function tA(e) {
       "outside" === e && t && t.closest("#fullscreen-root") || l();
     },
     recordingKey: h,
-    children: jsxs(vo, {
-      children: [jsx(_$$Y, {
+    children: jsxs(DialogContents, {
+      children: [jsx(DialogHeader, {
         children: p
-      }), jsx(nB, {
+      }), jsx(DialogBody, {
         scrolling: "none",
         padding: 0,
         children: tf(e, g)
@@ -2473,7 +2473,7 @@ class tV extends PureComponent {
     });
     let b = jsx(_$$T, {
       selected: p,
-      children: jsx(_$$K, {
+      children: jsx(IconButton, {
         recordingKey: generateRecordingKey(this.props, "removeButton"),
         onClick: this.props.onRemoveEffect,
         "aria-label": getI18nString("fullscreen.properties_panel.tooltip_remove"),
