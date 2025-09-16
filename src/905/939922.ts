@@ -5,9 +5,9 @@ import { N7, QV } from "../905/508367";
 import { OpenTarget, desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { BrowserInfo } from "../figma_app/778880";
-import { oB, sf } from "../905/929976";
+import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { NA } from "../905/738636";
-import { c5 } from "../905/93909";
+import { setLastVisitedPlan } from "../905/93909";
 import { isBranchAlt, findBranchById, isBranch } from "../905/760074";
 import { z4 } from "../905/37051";
 import { Tf, nb } from "../figma_app/543100";
@@ -28,7 +28,7 @@ export function $$S0() {
   let s = useDispatch();
   let l = useSelector(e => e.selectedBranchKeyByRepoId);
   return useCallback(async (n, r) => {
-    s(oB());
+    s(hideDropdownAction());
     let u = BrowserInfo.mac ? r.metaKey : r.ctrlKey;
     let p = null;
     if (u && r.shiftKey ? p = OpenTarget.FOCAL_TAB : u ? p = OpenTarget.BACKGROUND_TAB : r.shiftKey && (p = OpenTarget.NEW_WINDOW), desktopAPIInstance) {
@@ -153,7 +153,7 @@ let T = async ({
   user: l
 }) => {
   let d = "recentsAndSharing" === r.view || "folder" === r.view ? r : void 0;
-  i(c5({
+  i(setLastVisitedPlan({
     planId: n || o,
     planType: n ? OrganizationType.ORG : OrganizationType.TEAM
   }));
@@ -170,7 +170,7 @@ let T = async ({
           key: e.file.key,
           editorType: e.file.editorType || void 0
         }
-      }, f) : i(sf({
+      }, f) : i(selectViewAction({
         view: "fullscreen",
         fileKey: e.file.key,
         editorType: z4.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
@@ -184,7 +184,7 @@ let T = async ({
           key: e.file.key,
           editorType: e.file.editorType
         }
-      }, f) : i(sf({
+      }, f) : i(selectViewAction({
         view: "fullscreen",
         fileKey: e.file.key,
         editorType: mapFileTypeToEditorType(e.file.editorType),
@@ -200,7 +200,7 @@ let T = async ({
           editorType: A.editor_type || void 0
         },
         nodeId: e.prototype.page_id
-      }, f) : i(sf({
+      }, f) : i(selectViewAction({
         view: "prototype",
         file: A,
         nodeId: e.prototype.page_id,
@@ -214,7 +214,7 @@ let T = async ({
         file: {
           key: b.key
         }
-      }, f) : i(sf({
+      }, f) : i(selectViewAction({
         view: "fullscreen",
         fileKey: b.key,
         editorType: FEditorType.Design,

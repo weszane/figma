@@ -149,7 +149,7 @@ export function mapFileLinkExpirationConfig(e: any, t: string, r: any): Record<s
  * Maps file summary properties.
  * Original: $$x24
  */
-export function mapFileSummary(e: any): Record<string, any> {
+export function mapFileSummary(e: any) {
   return {
     key: e.key,
     name: e.name,
@@ -675,7 +675,7 @@ export function mapProjectProperties(e: any): Record<string, any> {
  */
 export function mapProjectSummary(e: any): Record<string, any> {
   const t = getResourceDataOrFallback<any[]>(e.activeProjectResourceConnections) ?? null
-  const r = getResourceDataOrFallback<{name: string}>(e.teamV2) ?? null
+  const r = getResourceDataOrFallback<{ name: string }>(e.teamV2) ?? null
   return {
     id: e.id,
     path: e.path,

@@ -1,6 +1,6 @@
 import { FontSourceType } from "../figma_app/763686";
 import { addFontFamily } from "../905/240327";
-import { Ts } from "../905/929976";
+import { initAction } from "../905/929976";
 import { nN } from "../figma_app/91703";
 import { X } from "../905/784599";
 function l(e) {
@@ -94,7 +94,7 @@ function g(e, t) {
   e[t.family][i].styles[t.style] = m(t);
 }
 export function $$f2(e = {}, t) {
-  if (Ts.matches(t)) return Object.create(null);
+  if (initAction.matches(t)) return Object.create(null);
   if (nN.matches(t)) {
     let i = {
       ...e

@@ -15,7 +15,7 @@ import { Fk } from "../905/125333";
 import { b as _$$b } from "../figma_app/556971";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
 import { Z } from "../905/104740";
 import { aq } from "../figma_app/412189";
@@ -38,7 +38,7 @@ export function $$I0({
   let {
     total
   } = useAtomWithSubscription(Fk);
-  let D = "whiteboard" === lg();
+  let D = "whiteboard" === getCurrentFileType();
   let [M, P] = useState(!1);
   let F = _$$b();
   let B = e.toLocaleLowerCase() !== t.toLocaleLowerCase();

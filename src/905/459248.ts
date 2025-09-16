@@ -34,10 +34,10 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { sx as _$$sx, XE } from "../figma_app/91703";
 import { TrackingProvider } from "../figma_app/831799";
-import { XE as _$$XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { J as _$$J2 } from "../905/445197";
 import { fullscreenValue } from "../figma_app/455680";
 import { h_, Ie, qG, jb, _D, Cj } from "../905/291654";
@@ -235,7 +235,7 @@ export let $$eZ0 = registerModal(function (e) {
   let k = useIsFullscreenSitesView();
   let Z = useSelector(e => e.userFlags);
   let ee = useSelector(e => e.selectedView);
-  let en = _$$XE(ee);
+  let en = getEditorTypeFromView(ee);
   _$$h(() => {
     E("missing_fonts_modal_opened", {
       missing_font_families: [...new Set(e.missingFonts.map(e => e.family))]
@@ -451,7 +451,7 @@ export let $$eZ0 = registerModal(function (e) {
     setReplacements(t);
   }, [replacements, setReplacements, missingFontsInfoForCurrentScope.missingFonts, v]);
   let eT = useCallback(() => {
-    f && f.type === eB ? g(oB()) : g(j7({
+    f && f.type === eB ? g(hideDropdownAction()) : g(showDropdownThunk({
       type: eB
     }));
   }, [g, f]);
@@ -480,7 +480,7 @@ export let $$eZ0 = registerModal(function (e) {
   }();
   let eU = useSelector(e => e.mirror.appModel.pagesList);
   let ez = useCallback(function () {
-    g(oB());
+    g(hideDropdownAction());
     g(XE());
   }, [g]);
   let e$ = useSelector(e => e.mirror.sceneGraphSelection);
@@ -600,7 +600,7 @@ export let $$eZ0 = registerModal(function (e) {
             dropdownTriggerRef: eM,
             scope,
             setScope: e => {
-              g(oB());
+              g(hideDropdownAction());
               setScope(e);
             }
           })]
@@ -651,7 +651,7 @@ function eX({
   let S = [...new Set(e.map(e => i[eY(e)]?.newName.family))];
   let w = useSelector(e => e.userFlags);
   let C = useSelector(e => e.selectedView);
-  let k = _$$XE(C);
+  let k = getEditorTypeFromView(C);
   let R = jb(x.family, d, w) && !_D(x.family, k);
   let N = getI18nString("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {
     numItems: T()(m.missingFonts.map((e, t) => e.family === x.family ? m.counts?.[t] : 0))

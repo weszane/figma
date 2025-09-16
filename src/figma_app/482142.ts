@@ -6,11 +6,11 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { _l, V3 } from "../figma_app/976345";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { handleErrorWithToast } from "../figma_app/345997";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { SubscriptionType, mapUpsellModalTypeToSource, UpgradeSteps } from "../figma_app/831101";
 import { UpgradeAction, TeamType } from "../figma_app/707808";
 import { createOptimistThunk } from "../905/350402";
@@ -22,7 +22,7 @@ let $$I15 = createOptimistThunk((e, {
   showBreadcrumbs: r,
   onCloseOrComplete: n
 }) => {
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "eduReview",
     teamId: t,
     showBreadcrumbs: r,
@@ -59,7 +59,7 @@ let $$L11 = createOptimistThunk((e, t) => {
       view: {
         view: "allProjects"
       }
-    })) : e.dispatch(sf({
+    })) : e.dispatch(selectViewAction({
       view: "team",
       teamId: t.teamId
     }));
@@ -141,7 +141,7 @@ let $$W3 = createOptimistThunk((e, t) => {
   });
   if (openInNewTab && !hasDesktopAPI()) {
     let t = e.getState();
-    let r = new URL(Np(t, {
+    let r = new URL(selectedViewToPath(t, {
       view: "orgSelfServe",
       upsellSource,
       entryPoint: o
@@ -151,7 +151,7 @@ let $$W3 = createOptimistThunk((e, t) => {
     }));
   } else {
     e.dispatch(hideModal());
-    e.dispatch(sf({
+    e.dispatch(selectViewAction({
       view: "orgSelfServe",
       newTeamProps,
       upsellSource,
@@ -192,7 +192,7 @@ let $$Y17 = createOptimistThunk((e, t) => {
   };
   if (t.openInNewTab && !hasDesktopAPI()) {
     let t = e.getState();
-    let r = new URL(Np(t, d), document.baseURI).href;
+    let r = new URL(selectedViewToPath(t, d), document.baseURI).href;
     e.dispatch(V3({
       url: r
     }));
@@ -200,7 +200,7 @@ let $$Y17 = createOptimistThunk((e, t) => {
     let r = t.openInNewTab ? void 0 : t.selectedView;
     e.dispatch(hideModal());
     d.previousView = r;
-    e.dispatch(sf(d));
+    e.dispatch(selectViewAction(d));
   }
   e.dispatch($$K23({
     newTeam: t.newTeam,

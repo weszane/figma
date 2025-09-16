@@ -8,11 +8,11 @@ import { v4, xv as _$$xv } from "../figma_app/655139";
 import { WEB } from "../905/359509";
 import { t as _$$t2 } from "../905/241707";
 import { sQ } from "../905/191741";
-import { Em, qM } from "../figma_app/120227";
+import { isCodegenSupportedForLanguage, getScaledValueWithUnit } from "../figma_app/120227";
 import { v as _$$v } from "../905/50227";
 import { OX } from "../905/232489";
 import { lW } from "../figma_app/11182";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku } from "../figma_app/740163";
 import { isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
@@ -83,10 +83,10 @@ export function $$M1(e, t) {
   return e ? n : void 0;
 }
 export function $$F0(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = v4();
   let n = _$$u(e ?? void 0);
-  let i = m0();
+  let i = isDevHandoffEditorType();
   let a = useAtomWithSubscription(_$$v);
   if (!n) return;
   if (!i || !a) return n.name;
@@ -94,7 +94,7 @@ export function $$F0(e) {
   return _$$xv(n, s) ?? n.name;
 }
 export function $$j12(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = v4();
   let n = sQ();
   let i = useAtomWithSubscription(_$$v);
@@ -326,11 +326,11 @@ export function $$B8({
   value: e,
   isTextProperty: t
 }) {
-  let r = m0();
+  let r = isDevHandoffEditorType();
   let n = v4();
-  let i = Em();
+  let i = isCodegenSupportedForLanguage();
   let a = "number" == typeof e ? e : 0;
-  let s = qM(n, a, U, {
+  let s = getScaledValueWithUnit(n, a, U, {
     isTextProperty: t
   });
   return r && i && 0 !== a ? s : void 0;

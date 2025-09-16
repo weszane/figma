@@ -6,7 +6,7 @@ import o from "classnames";
 import { G } from "../905/750789";
 import { Yq, J3, $Q } from "../figma_app/315578";
 import { wf } from "../figma_app/975811";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue } from "../905/216495";
 import { Gt } from "../905/275640";
 import { u as _$$u, t8 } from "../figma_app/852050";
@@ -78,7 +78,7 @@ export function $$k21(e) {
 export function $$M0(e) {
   let [t, r] = useState(!1);
   let a = e.label || e.defaultLabel;
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let o = l()({
     [x]: !!e.label,
     "inspection_property--propertyValueDefault--ZVb-O ellipsis--ellipsis--Tjyfa": !e.label,
@@ -153,7 +153,7 @@ export function $$B19({
   let o = _$$u(variableId);
   let c = uV(o) ?? "";
   let u = t8(variableId);
-  let _ = m0();
+  let _ = isDevHandoffEditorType();
   if ("mixed" === e.format) {
     let a = e.value.some(e => !!e?.variableId);
     return jsx("div", {
@@ -213,7 +213,7 @@ export let $$V9 = memo(e => {
   let g = X(e.name);
   let f = X(t);
   let E = useRef(null);
-  let T = m0();
+  let T = isDevHandoffEditorType();
   let I = T && !e.disableDetailModalEntry;
   let S = Yq(E);
   let A = e.accessoryButton || I;

@@ -10,7 +10,7 @@ import { uF } from "../9410/398228";
 import { generateRecordingKey } from "../figma_app/878298";
 import { l7 } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { _ as _$$_ } from "../9410/218531";
 import { i as _$$i } from "../9410/799000";
 import { t as _$$t2 } from "../9410/254335";
@@ -59,7 +59,7 @@ function C({
 }) {
   let E = dh();
   let T = nn();
-  let w = m0();
+  let w = isDevHandoffEditorType();
   let S = l7();
   let j = a || getFeatureFlags().interop_pages;
   let I = (e || w || S) && !!d;
@@ -118,7 +118,7 @@ function W({
   let i = selectCurrentFile();
   let a = FC();
   let s = p8("pagesList").length;
-  let o = m0();
+  let o = isDevHandoffEditorType();
   let l = Fr();
   let u = _$$h.useTrackingContext({
     trigger: UpsellModalType.PAGE_TRACKER_UPSELL

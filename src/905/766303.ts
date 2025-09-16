@@ -1,78 +1,77 @@
-import type { Team, UserState } from '../figma_app/345997'
-import { FFileType } from '../figma_app/191312'
-import { U2 } from '../figma_app/193867'
-import { hasFolderRestrictions } from '../figma_app/345997'
-import { getPermissionsState } from '../figma_app/642025'
-
+import type { Team, UserState } from '../figma_app/345997';
+import { FFileType } from '../figma_app/191312';
+import { getFileKeyFromSelectedView } from '../figma_app/193867';
+import { hasFolderRestrictions } from '../figma_app/345997';
+import { getPermissionsState } from '../figma_app/642025';
 interface AppState extends UserState {
   selectedView: {
-    view: string
-    fileKey?: string
-    folderId?: string
-  }
-  fileByKey: Record<string, any>
-  folders: Record<string, any>
-  currentUserOrgId: string | null
+    view: string;
+    fileKey?: string;
+    folderId?: string;
+  };
+  fileByKey: Record<string, any>;
+  folders: Record<string, any>;
+  currentUserOrgId: string | null;
   orgById: Record<string, {
-    id: string
-  }>
-  currentTeamId: string | null
-  teams: Record<string, Team>
+    id: string;
+  }>;
+  currentTeamId: string | null;
+  teams: Record<string, Team>;
 }
 interface NewFileConfigParams {
-  state: AppState
-  openNewFileIn: string
+  state: AppState;
+  openNewFileIn: string;
   folderOverride: {
-    folderId: string
-  } | 'drafts' | null
-  trackingInfo?: any
-  editorType?: FFileType
-  fileName?: string
-  callback?: () => void
-  figjamAiNewFileData?: any
-  slidesAiNewFileData?: any
-  figjamMakeSomethingUseCase?: string
-  newFileDataLocalStorageKey?: string
-  figmakeInitialMessage?: string
+    folderId: string;
+  } | 'drafts' | null;
+  trackingInfo?: any;
+  editorType?: FFileType;
+  fileName?: string;
+  callback?: () => void;
+  figjamAiNewFileData?: any;
+  slidesAiNewFileData?: any;
+  figjamMakeSomethingUseCase?: string;
+  newFileDataLocalStorageKey?: string;
+  figmakeInitialMessage?: string;
 }
 interface NewFileConfig {
-  folder_id: string | null
-  org_id: string | null
-  openNewFileIn: string
-  trackingInfo: any | null
-  editorType: FFileType
-  fileName?: string
-  figjamAiNewFileData?: any
-  slidesAiNewFileData?: any
-  figjamMakeSomethingUseCase?: string
-  newFileDataLocalStorageKey?: string
-  figmakeInitialMessage?: string
-  callback?: () => void
-  team_id: string | null
+  folder_id: string | null;
+  org_id: string | null;
+  openNewFileIn: string;
+  trackingInfo: any | null;
+  editorType: FFileType;
+  fileName?: string;
+  figjamAiNewFileData?: any;
+  slidesAiNewFileData?: any;
+  figjamMakeSomethingUseCase?: string;
+  newFileDataLocalStorageKey?: string;
+  figmakeInitialMessage?: string;
+  callback?: () => void;
+  team_id: string | null;
 }
 export function getFullscreenFile(state: AppState): any | null {
   if (state.selectedView.view === 'fullscreen') {
-    const fileKey = state.selectedView.fileKey
-    return fileKey ? state.fileByKey[fileKey] ?? null : null
+    const fileKey = state.selectedView.fileKey;
+    return fileKey ? state.fileByKey[fileKey] ?? null : null;
   }
-  return null
+  return null;
 }
 export function getSelectedFile(state: AppState): any | null {
-  const fileKey = U2(state.selectedView)
-  return fileKey ? state.fileByKey[fileKey] ?? null : null
+  const fileKey = getFileKeyFromSelectedView(state.selectedView);
+  return fileKey ? state.fileByKey[fileKey] ?? null : null;
 }
 export function getSelectedFolder(state: AppState): any | null {
-  return state.selectedView.view === 'folder' ? state.folders[state.selectedView.folderId] : null
+  return state.selectedView.view === 'folder' ? state.folders[state.selectedView.folderId] : null;
 }
 export function getPermissionsAndView(state: AppState): {
-  selectedView: AppState['selectedView']
-  currentOrgId: string | null
+  selectedView: AppState['selectedView'];
+  currentOrgId: string | null;
 } & ReturnType<typeof getPermissionsState> {
   return {
     ...getPermissionsState(state),
     selectedView: state.selectedView,
-    currentOrgId: state.currentUserOrgId,
-  }
+    currentOrgId: state.currentUserOrgId
+  };
 }
 export function getNewFileConfig({
   state,
@@ -86,22 +85,21 @@ export function getNewFileConfig({
   slidesAiNewFileData,
   figjamMakeSomethingUseCase,
   newFileDataLocalStorageKey,
-  figmakeInitialMessage,
+  figmakeInitialMessage
 }: NewFileConfigParams): NewFileConfig {
-  let folderId: string | null = null
+  let folderId: string | null = null;
   if (folderOverride === null) {
-    const selectedFolder = getSelectedFolder(state)
+    const selectedFolder = getSelectedFolder(state);
     if (selectedFolder && !hasFolderRestrictions(selectedFolder, state)) {
-      folderId = selectedFolder.id
+      folderId = selectedFolder.id;
     }
+  } else if (folderOverride !== 'drafts') {
+    folderId = folderOverride.folderId;
   }
-  else if (folderOverride !== 'drafts') {
-    folderId = folderOverride.folderId
-  }
-  const organization = state.currentUserOrgId ? state.orgById[state.currentUserOrgId] : null
-  const orgId = organization?.id ?? null
-  const team = state.currentTeamId ? state.teams[state.currentTeamId] : null
-  const teamId = team?.id ?? null
+  const organization = state.currentUserOrgId ? state.orgById[state.currentUserOrgId] : null;
+  const orgId = organization?.id ?? null;
+  const team = state.currentTeamId ? state.teams[state.currentTeamId] : null;
+  const teamId = team?.id ?? null;
   return {
     folder_id: folderId,
     org_id: orgId,
@@ -115,18 +113,18 @@ export function getNewFileConfig({
     newFileDataLocalStorageKey,
     figmakeInitialMessage,
     callback,
-    team_id: teamId,
-  }
+    team_id: teamId
+  };
 }
 export function removeOptimist(state: AppState) {
   return {
     ...state,
-    optimist: undefined,
-  }
+    optimist: undefined
+  };
 }
-export const Kl = getPermissionsAndView
-export const d1 = getSelectedFile
-export const e9 = getSelectedFolder
-export const l$ = removeOptimist
-export const xA = getNewFileConfig
-export const yt = getFullscreenFile
+export const Kl = getPermissionsAndView;
+export const d1 = getSelectedFile;
+export const e9 = getSelectedFolder;
+export const l$ = removeOptimist;
+export const xA = getNewFileConfig;
+export const yt = getFullscreenFile;

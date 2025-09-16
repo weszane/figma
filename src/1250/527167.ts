@@ -11,7 +11,7 @@ import { TextWithTruncation } from "../905/984674";
 import { Oe } from "../905/34809";
 import { E as _$$E } from "../7021/427161";
 import { SidebarRow } from "../451de8f0/94979";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { j0 } from "../1250/524544";
 if (443 == require.j) {}
@@ -83,7 +83,7 @@ export function $$w1(e) {
   return w > 0 || T ? jsx(SidebarRow, {
     isSelected: T,
     onClick: e => {
-      e.metaKey || e.ctrlKey || 0 !== e.button || (t(sf({
+      e.metaKey || e.ctrlKey || 0 !== e.button || (t(selectViewAction({
         view: "draftsToMove"
       })), t(Oe({
         clickedResourceType: "draftsToMove"

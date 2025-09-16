@@ -13,7 +13,7 @@ import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { generateUUIDv4 } from "../905/871474";
 import { c$, wv } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { XE, u1 } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { wP } from "../9410/845608";
@@ -316,7 +316,7 @@ export function $$eg0({
   let J = useRef(null);
   let Z = useCallback(e => {
     F && s(XE());
-    m ? s(oB()) : s(j7({
+    m ? s(hideDropdownAction()) : s(showDropdownThunk({
       type: C4
     }));
   }, [s, F, m]);

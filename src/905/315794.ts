@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
 import { ButtonSecondaryNegative, ButtonSecondary } from "../figma_app/637027";
 import { getI18nString } from "../905/303541";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { lT } from "../figma_app/494261";
 import { GR } from "../figma_app/330108";
@@ -29,7 +29,7 @@ export function $$v0(e) {
   let S = t => {
     t.stopPropagation();
     t.preventDefault();
-    s(oB());
+    s(hideDropdownAction());
     null != x && $$E2({
       type: x,
       team: e.team,

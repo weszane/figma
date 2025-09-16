@@ -114,7 +114,7 @@ import { bU as _$$bU } from "../1250/506456";
 import { g as _$$g2 } from "../9410/153133";
 import { a as _$$a } from "../9410/306437";
 import { W as _$$W3 } from "../905/95038";
-import { oB as _$$oB, j7 as _$$j } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { vg as _$$vg } from "../figma_app/91703";
 import { Um, BK } from "../905/848862";
 import { Z as _$$Z } from "../905/521211";
@@ -194,7 +194,7 @@ import { G7 } from "../figma_app/336853";
 import { n as _$$n4 } from "../905/79930";
 import { Vq, Rt } from "../figma_app/979658";
 import { ResourceTypeNoComment, hasMonetizedResourceMetadata, HubTypeEnum, CommunityPageType, ShelfViewType } from "../figma_app/45218";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { cd as _$$cd } from "../905/381612";
 import { yD as _$$yD } from "../905/92359";
 import { p as _$$p2 } from "../905/42189";
@@ -232,9 +232,9 @@ import { WZ, e2 as _$$e6, PE } from "../3591/130069";
 import { _W as _$$_W, nN as _$$nN2 } from "../7492/254275";
 import { ButtonBasePrimary, ButtonSecondary } from "../figma_app/637027";
 import { t as _$$t4 } from "../469e6e40/489933";
-import { lg as _$$lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Gt, dR as _$$dR, RK, cK as _$$cK, hN as _$$hN } from "../figma_app/248118";
-import { zg } from "../figma_app/193867";
+import { isWorkshopModeActive } from "../figma_app/193867";
 import { b as _$$b4 } from "../905/635568";
 import { F5, oM as _$$oM } from "../905/192343";
 import { NY, lI as _$$lI, sD as _$$sD, wE, XV as _$$XV, kb, Gv, uV as _$$uV, uA as _$$uA, B6, fc as _$$fc, N9, pG as _$$pG } from "../1291/616526";
@@ -2628,10 +2628,10 @@ function iN({
         },
         onContextMenu: e => {
           if (e.preventDefault(), r) {
-            i(_$$oB());
+            i(hideDropdownAction());
             return;
           }
-          i(_$$j({
+          i(showDropdownThunk({
             type: _$$eg,
             data: {
               targetRect: x
@@ -3736,7 +3736,7 @@ function ad(e) {
   let t = useDispatch();
   let i = useRef(null);
   let n = Um();
-  let r = "whiteboard" === _$$lg();
+  let r = "whiteboard" === getCurrentFileType();
   let a = F5();
   let {
     tabManager,
@@ -3764,7 +3764,7 @@ function ad(e) {
           query: searchQuery
         }
       }), _) {
-        x ? t(_$$oB()) : t(_$$j({
+        x ? t(hideDropdownAction()) : t(showDropdownThunk({
           type: LO,
           data: {
             pluginId: e.pluginId,
@@ -3783,7 +3783,7 @@ function ad(e) {
     buttonCta,
     isNotInHeader
   } = e;
-  let T = useSelector(e => zg(e.selectedView) && !e.user);
+  let T = useSelector(e => isWorkshopModeActive(e.selectedView) && !e.user);
   let [E, S] = useState(T);
   useEffect(() => {
     S(T);
@@ -3887,7 +3887,7 @@ let av = forwardRef((e, t) => {
             ref: f,
             onClick: e => {
               let t = e.currentTarget.getBoundingClientRect();
-              i(_$$j({
+              i(showDropdownThunk({
                 type: _$$lD,
                 data: {
                   localFileId,
@@ -4146,7 +4146,7 @@ function aH(e) {
             children: jsx(_$$K, {
               onClick: t => {
                 let i = t.currentTarget.getBoundingClientRect();
-                n(_$$j({
+                n(showDropdownThunk({
                   type: _$$lD,
                   data: {
                     localFileId: r,
@@ -4241,7 +4241,7 @@ let aV = forwardRef((e, t) => {
           children: jsx(_$$K, {
             onClick: t => {
               let i = t.currentTarget.getBoundingClientRect();
-              r(_$$j({
+              r(showDropdownThunk({
                 type: _$$lD,
                 data: {
                   localFileId: a.localFileId,
@@ -5051,10 +5051,10 @@ function sD() {
   });
 }
 function sP() {
-  let e = _$$eE($A.FigJam);
+  let e = _$$eE(FDocumentType.FigJam);
   let t = _$$ik(e, "templates", (e, t) => !t.some(t => t.type === _$$n4.HubFile && t.template.id === e.id), 4);
   let i = _$$mk(t, [_$$mC(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   })), _$$mC(_$$fC)]);
   return jsx(_$$g3, {
     templates: i,
@@ -5091,11 +5091,11 @@ function sW() {
   let t = Gi();
   let i = _$$oh(_$$fC);
   let n = _$$oh(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }));
   let r = _$$oh(_$$fi);
   let a = _$$oh(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }));
   let s = useSelector(e => e.figjamDefaultInserts.useCases);
   let l = !!e && 0 === s.length;
@@ -5759,11 +5759,11 @@ function oF() {
   useEffect(() => {
     function e(e) {
       e.key === S7 && debugState.dispatch(HQ({
-        storeInRecentsKey: $A.FigJam
+        storeInRecentsKey: FDocumentType.FigJam
       }));
     }
     debugState.dispatch(HQ({
-      storeInRecentsKey: $A.FigJam
+      storeInRecentsKey: FDocumentType.FigJam
     }));
     window.addEventListener("storage", e, !1);
     return () => {
@@ -6105,7 +6105,7 @@ function ln(e) {
   let _ = Vq(tabManager.activeTab);
   let x = LR();
   let g = useCallback(() => x(), [x]);
-  let j = "whiteboard" === _$$lg();
+  let j = "whiteboard" === getCurrentFileType();
   let b = F5();
   let y = _$$F3();
   let v = r.community_publishers?.accepted || [];
@@ -6565,11 +6565,11 @@ function lT() {
   useEffect(() => {
     function e(e) {
       e.key === _$$xk2 && debugState.dispatch(_$$aF({
-        storeInRecentsKey: $A.FigJam
+        storeInRecentsKey: FDocumentType.FigJam
       }));
     }
     debugState.dispatch(_$$aF({
-      storeInRecentsKey: $A.FigJam
+      storeInRecentsKey: FDocumentType.FigJam
     }));
     window.addEventListener("storage", e, !1);
     return () => {
@@ -6585,7 +6585,7 @@ function lT() {
   let r = _$$oh(getWidgetAllowListKey(t, n));
   let a = _$$oh(_$$a3.loadingKeyForPayload(t));
   let s = _$$mC(_$$cd.fetchWidgetsMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }));
   return i || r || a || !s ? jsx(_$$i2, {}) : jsx(TrackingProvider, {
     name: "widgets",
@@ -6634,7 +6634,7 @@ function lk(e) {
   let r = _$$xp(resourceId);
   let a = !!r.id;
   let s = Be().plugins[resourceId] || getPluginVersion(r);
-  let c = useSelector(e => zg(e.selectedView) && !e.user);
+  let c = useSelector(e => isWorkshopModeActive(e.selectedView) && !e.user);
   let p = r.community_publishers?.accepted || [];
   let m = useDispatch();
   let f = LR();
@@ -6757,7 +6757,7 @@ function lD(e) {
     searchQuery
   } = _$$cX();
   let v = Vq(tabManager.activeTab);
-  let C = "whiteboard" === _$$lg();
+  let C = "whiteboard" === getCurrentFileType();
   let T = F5();
   let E = Object.values($1()).find(t => String(t.plugin_id) === e.resourceId);
   let S = useCurrentUserOrg();
@@ -6798,9 +6798,9 @@ function lD(e) {
   if (!n) return null;
   let M = _ ? e => {
     if (_) {
-      if (e.preventDefault(), e.stopPropagation(), g) a(_$$oB());else {
+      if (e.preventDefault(), e.stopPropagation(), g) a(hideDropdownAction());else {
         let i = e.target.getBoundingClientRect();
-        a(_$$j({
+        a(showDropdownThunk({
           type: lP,
           data: {
             targetRect: i,
@@ -7025,11 +7025,11 @@ function lF({
   } = _$$C4(lB, setModalPosition, universalInsertModal.pinned, _$$t$, initialModalPosition, universalInsertModal.showing);
   useEffect(() => {
     $(_$$cd.fetchTemplatesMetadata({
-      key: $A.FigJam,
+      key: FDocumentType.FigJam,
       orgId: m?.parentOrgId
     }));
     $(_$$cd.fetchWidgetsMetadata({
-      key: $A.FigJam
+      key: FDocumentType.FigJam
     }));
     $(qR({}));
   }, [$, m?.parentOrgId]);
@@ -15190,7 +15190,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
         item: e,
         instanceGUIDs: r,
         sourceForTracking: "FigJam Instance Swapper",
-        storeInRecentsKey: $A.FigJam,
+        storeInRecentsKey: FDocumentType.FigJam,
         usedSwapInstanceKeyboardShortcut: !1
       }));
     });
@@ -15504,7 +15504,7 @@ let xI = new Map([[WhiteboardFeatures.WHITEBOARD_COLOR, function () {
     }));
   };
   let g = e => {
-    "Enter" === e.key ? (j(parseInt(e.currentTarget?.value)), t(_$$oB())) : "ArrowUp" !== e.key || e.shiftKey ? "ArrowDown" !== e.key || e.shiftKey || j(parseInt(e.currentTarget?.value) - 1) : j(parseInt(e.currentTarget?.value) + 1);
+    "Enter" === e.key ? (j(parseInt(e.currentTarget?.value)), t(hideDropdownAction())) : "ArrowUp" !== e.key || e.shiftKey ? "ArrowDown" !== e.key || e.shiftKey || j(parseInt(e.currentTarget?.value) - 1) : j(parseInt(e.currentTarget?.value) + 1);
     let i = ["ArrowUp", "ArrowDown"].includes(e.key);
     i && (!i || e.shiftKey) || e.stopPropagation();
   };

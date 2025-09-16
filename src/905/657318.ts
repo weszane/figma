@@ -24,12 +24,12 @@ import { E as _$$E2 } from "../905/277716";
 import { Point } from "../905/736624";
 import { c$ } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Uv, XE, bS } from "../figma_app/91703";
 import { AV, Qn } from "../figma_app/933328";
 import { showModalHandler } from "../905/156213";
 import { sw } from "../figma_app/914957";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { fullscreenValue } from "../figma_app/455680";
 import { MIXED_MARKER, normalizeValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
@@ -120,7 +120,7 @@ class eA extends RecordingPureComponent {
       }
     };
     this.detachStyle = () => {
-      this.props.dispatch(jD());
+      this.props.dispatch(hideTooltip());
       permissionScopeHandler.user("detach-style", () => {
         _$$f(StyleVariableOperation.STYLE_DETACH, CopyPasteType.DIRECT, () => {
           Fullscreen.applyStyleToSelection(this.props.inheritStyleKeyField, defaultSessionLocalIDString, !0);
@@ -180,7 +180,7 @@ class eA extends RecordingPureComponent {
     }
   }
   toggleDropdown(e) {
-    this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID ? this.props.dispatch(oB()) : (this.stopPropagation(e), this.props.dispatch(j7({
+    this.props.dropdownShown?.type === this.STYLE_UPDATE_DROPDOWN_ID ? this.props.dispatch(hideDropdownAction()) : (this.stopPropagation(e), this.props.dispatch(showDropdownThunk({
       type: this.STYLE_UPDATE_DROPDOWN_ID
     })));
   }

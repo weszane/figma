@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Fullscreen } from "../figma_app/763686";
 import { V3 } from "../figma_app/976345";
 import { K } from "../905/621769";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { b as _$$b } from "../905/217163";
 import { eY } from "../figma_app/722362";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
@@ -88,7 +88,7 @@ export function $$y0() {
       url: t
     }));
   } : () => {
-    "fullscreen" === t.view && e(sf({
+    "fullscreen" === t.view && e(selectViewAction({
       ...t,
       showDevModeComponentBrowser: !0,
       componentKey: y

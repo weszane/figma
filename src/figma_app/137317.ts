@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { _y, vV } from "../figma_app/755395";
 import { a9 } from "../905/191741";
-import { Em, ie } from "../figma_app/120227";
+import { isCodegenSupportedForLanguage, getUnitForLanguage } from "../figma_app/120227";
 import { v as _$$v } from "../905/50227";
 import { yt } from "../figma_app/451499";
 import { z4 } from "../905/37051";
@@ -167,8 +167,8 @@ function R({
   let {
     codeLanguage
   } = t;
-  let s = Em();
-  let o = ie();
+  let s = isCodegenSupportedForLanguage();
+  let o = getUnitForLanguage();
   let l = useAtomWithSubscription(_$$v);
   if ("first-party" !== codeLanguage.type) return null;
   let d = l ? getI18nString("dev_handoff.variables.panel_display_code_syntax") : getI18nString("dev_handoff.variables.panel_display_figma_name");

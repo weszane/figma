@@ -24,7 +24,7 @@ import { bL as _$$bL } from "../905/911410";
 import { useLatestRef } from "../figma_app/922077";
 import { k as _$$k3 } from "../905/582200";
 import { u1 } from "../figma_app/91703";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { fullscreenValue } from "../figma_app/455680";
 import { kG } from "../figma_app/482495";
 import { qo } from "../905/959568";
@@ -82,7 +82,7 @@ function T({
         recordingKey: h,
         htmlAttributes: {
           onPointerMove: () => {
-            o.showing && a(jD());
+            o.showing && a(hideTooltip());
           },
           "data-testid": h
         },

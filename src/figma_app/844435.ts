@@ -1,42 +1,40 @@
-import { useMemo, useEffect, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { deepEqual } from "../905/382883";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { getFeatureFlags } from "../905/601108";
-import l from "../vendor/805353";
-import { trackEventAnalytics } from "../905/449184";
-import { selectWithShallowEqual } from "../905/103090";
-import { useSubscription, useMultiSubscription } from "../figma_app/288654";
-import { PerfTimer } from "../905/609396";
-import { reportError } from "../905/11";
-import { logError } from "../905/714362";
-import { getI18nString } from "../905/303541";
-import { P as _$$P, o as _$$o } from "../905/717906";
-import { VisualBellActions } from "../905/302958";
-import { isResourcePendingPublishing } from "../figma_app/777551";
-import { ResourceTypes } from "../905/178090";
-import { Vl, mV } from "../905/837497";
-import { f1, O8, Qi } from "../figma_app/559491";
-import { my, E3, m0, pQ } from "../figma_app/976749";
-import { dN } from "../figma_app/564095";
-import { CR, kA } from "../figma_app/684168";
-import { p8 } from "../figma_app/722362";
-import { BI } from "../figma_app/546509";
-import { useCurrentFileKey } from "../figma_app/516028";
-import { useCurrentUserOrg } from "../905/845253";
-import { getUserId } from "../905/372672";
-import { FPublicationStatusType, FPublisherType, FPinStatusType, FUserRoleType } from "../figma_app/191312";
-import { InstalledPlugins, Plugin } from "../figma_app/43951";
-import { mn, oh } from "../905/18797";
-import { canPerformAction, canRunExtensions } from "../figma_app/12796";
-import { filterEntriesByPluginVersionEditorType, filterPublishedResources, sortResourcesByCreatedAt, filterResourcesByMatch, filterEntriesByEditorType, canRunPlugin, convertEditorTypeToFileType, isEditorTypeMatch, isDevModePlugin, getCurrentPluginVersion, getPluginByFileId, getPluginVersion } from "../figma_app/300692";
-import { FEditorType } from "../figma_app/53721";
-import { manifestContainsWidget, ManifestSchema, ManifestEditorType, getPluginAllowListKey, getWidgetAllowListKey, hasLocalFileId, isPublicPlugin } from "../figma_app/155287";
-import { $W } from "../905/144933";
-import { $A } from "../905/782918";
-import { xy, Ol } from "../figma_app/279454";
-import { o as _$$o2 } from "../905/808775";
-var d = l;
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { reportError } from '../905/11';
+import { mn, oh } from '../905/18797';
+import { selectWithShallowEqual } from '../905/103090';
+import { $W } from '../905/144933';
+import { ServiceCategories as _$$e } from '../905/165054';
+import { ResourceTypes } from '../905/178090';
+import { VisualBellActions } from '../905/302958';
+import { getI18nString } from '../905/303541';
+import { getUserId } from '../905/372672';
+import { deepEqual } from '../905/382883';
+import { trackEventAnalytics } from '../905/449184';
+import { getFeatureFlags } from '../905/601108';
+import { PerfTimer } from '../905/609396';
+import { logError } from '../905/714362';
+import { setPluginAllowlisted, setWidgetsAllowlisted } from '../905/717906';
+import { isFullscreenDevHandoffView } from '../905/782918';
+import { useMappedEditorTypeA } from '../905/808775';
+import { mV, Vl } from '../905/837497';
+import { useCurrentUserOrg } from '../905/845253';
+import { canPerformAction, canRunExtensions } from '../figma_app/12796';
+import { InstalledPlugins, Plugin } from '../figma_app/43951';
+import { FEditorType } from '../figma_app/53721';
+import { getPluginAllowListKey, getWidgetAllowListKey, hasLocalFileId, isPublicPlugin, manifestContainsWidget, ManifestEditorType, ManifestSchema } from '../figma_app/155287';
+import { FPinStatusType, FPublicationStatusType, FPublisherType, FUserRoleType } from '../figma_app/191312';
+import { Ol, xy } from '../figma_app/279454';
+import { useMultiSubscription, useSubscription } from '../figma_app/288654';
+import { canRunPlugin, convertEditorTypeToFileType, filterEntriesByEditorType, filterEntriesByPluginVersionEditorType, filterPublishedResources, filterResourcesByMatch, getCurrentPluginVersion, getPluginByFileId, getPluginVersion, isDevModePlugin, isEditorTypeMatch, sortResourcesByCreatedAt } from '../figma_app/300692';
+import { useCurrentFileKey } from '../figma_app/516028';
+import { BI as getFigmaMobile } from '../figma_app/546509';
+import { f1, O8, Qi } from '../figma_app/559491';
+import { isPendingPublisher } from '../figma_app/564095';
+import { CR, kA } from '../figma_app/684168';
+import { p8 } from '../figma_app/722362';
+import { isResourcePendingPublishing } from '../figma_app/777551';
+import { getEditorTypeOrNull, getSelectedEditorType, isDevHandoffEditorType, selectEditorType } from '../figma_app/976749';
 export function $$V0(e) {
   let t = useSelector(e => e.localPlugins);
   return xy(t, e);
@@ -82,7 +80,7 @@ export function $$Y37() {
 }
 export function $$$32() {
   let e = useSelector(e => e.publishedPlugins);
-  let t = my();
+  let t = getEditorTypeOrNull();
   return useMemo(() => filterEntriesByPluginVersionEditorType(t, e), [e, t]);
 }
 export function $$X27() {
@@ -151,15 +149,15 @@ export function $$ee5() {
 export function $$et33() {
   let e = getUserId();
   let t = $$J38();
-  return null != e ? t.filter(t => dN(t, e)) : [];
+  return e != null ? t.filter(t => isPendingPublisher(t, e)) : [];
 }
 export function $$er30(e) {
   let t = getUserId();
   let r = $$$32()[e];
   let n = $$X27();
-  if (r) return dN(r, t ?? "");
+  if (r) return isPendingPublisher(r, t ?? '');
   let i = n[e];
-  return dN(i, t ?? "");
+  return isPendingPublisher(i, t ?? '');
 }
 export function $$en31({
   includePendingPublishers: e = !0
@@ -214,7 +212,7 @@ export function $$es6() {
 export function $$eo51() {
   let e = getUserId();
   let t = $$en31();
-  return null != e ? t.filter(t => dN(t, e)) : [];
+  return e != null ? t.filter(t => isPendingPublisher(t, e)) : [];
 }
 export function $$el2(e) {
   return Object.values($$J38({
@@ -228,11 +226,11 @@ export function $$ed20(e) {
 }
 export function $$ec45(e) {
   try {
-    let t = "string" == typeof e ? JSON.parse(e) : e;
-    "dynamic-page" !== t.documentAccess && delete t.documentAccess;
+    let t = typeof e == 'string' ? JSON.parse(e) : e;
+    t.documentAccess !== 'dynamic-page' && delete t.documentAccess;
     let r = ManifestSchema.safeParse(t);
     if (!r.success) {
-      reportError(_$$e.EXTENSIBILITY, Error("manifest schema parse error"), {
+      reportError(_$$e.EXTENSIBILITY, new Error('manifest schema parse error'), {
         extra: {
           jsonParsedResult: JSON.stringify(t, null, 2),
           rawManifest: JSON.stringify(e, null, 2),
@@ -243,16 +241,15 @@ export function $$ec45(e) {
     }
     return r.data;
   } catch (t) {
-    reportError(_$$e.EXTENSIBILITY, Error("manifest JSON parse error"), {
+    reportError(_$$e.EXTENSIBILITY, new Error('manifest JSON parse error'), {
       extra: {
         rawManifest: e
       }
     });
-    return;
   }
 }
 export function $$eu13(e, t) {
-  if (null === e.current_plugin_version_id) return null;
+  if (e.current_plugin_version_id === null) return null;
   let r = e.versions[e.current_plugin_version_id];
   if (!r) return null;
   let n = {
@@ -279,8 +276,8 @@ export function $$eu13(e, t) {
     playgroundFigFileKey: r.playground_fig_file?.key ?? null,
     hasPlaygroundFile: !!r.playground_file_version_id,
     playgroundFileVersionId: r.playground_file_version_id ?? null,
-    userId: "",
-    snapshotPath: ""
+    userId: '',
+    snapshotPath: ''
   };
   let i = {
     id: e.id,
@@ -288,8 +285,8 @@ export function $$eu13(e, t) {
     publishingStatus: e.publishing_status,
     isWidget: e.is_widget,
     orgId: e.org_id,
-    thumbnailUrl: "",
-    userId: "",
+    thumbnailUrl: '',
+    userId: '',
     updatedAt: new Date(Date.now()),
     createdAt: new Date(e.created_at),
     unpublishedAt: null,
@@ -299,11 +296,11 @@ export function $$eu13(e, t) {
     likeCount: 0,
     viewCount: e.view_count,
     blockedAt: null,
-    profileId: "",
+    profileId: '',
     commentCount: e.comment_count,
     hideRelatedContentByOthers: e.hide_related_content_by_others ?? null,
     isPublic: e.publishing_status === FPublicationStatusType.APPROVED_PUBLIC,
-    isInspect: "inspect" === e.editor_type,
+    isInspect: e.editor_type === 'inspect',
     isSlides: r?.manifest.editorType?.includes(ManifestEditorType.SLIDES) || !1,
     widgetsWhitelistEnforced: null,
     pluginsWhitelistEnforced: null,
@@ -311,13 +308,13 @@ export function $$eu13(e, t) {
     thirdPartyM10nStatus: e.third_party_m10n_status ?? null,
     monetizationStatus: e.monetization_status ?? null,
     canRead: !0,
-    categoryId: "",
+    categoryId: '',
     uniqueRunCount: 0,
     pluginEditorType: 0,
-    commentsSetting: "",
-    currentUserFirstRanAt: "",
+    commentsSetting: '',
+    currentUserFirstRanAt: '',
     profileInstallStatus: 2,
-    redirectThumbnailUrl: "",
+    redirectThumbnailUrl: '',
     communityPublishers: e.community_publishers?.accepted.map(t => ({
       id: t.id,
       isPending: !1,
@@ -329,21 +326,21 @@ export function $$eu13(e, t) {
       profile: {
         id: t.id,
         profileHandle: t.profile_handle,
-        team: "team" === t.entity_type ? {
+        team: t.entity_type === 'team' ? {
           id: t.id,
           name: t.name
         } : null,
-        org: "org" === t.entity_type ? {
+        org: t.entity_type === 'org' ? {
           id: t.id,
           name: t.name
         } : null,
-        user: "user" === t.entity_type ? {
+        user: t.entity_type === 'user' ? {
           id: t.primary_user_id,
           name: t.name
         } : null,
-        teamId: "team" === t.entity_type ? t.id : null,
-        orgId: "org" === t.entity_type ? t.id : null,
-        primaryUserId: "user" === t.entity_type ? t.primary_user_id : null,
+        teamId: t.entity_type === 'team' ? t.id : null,
+        orgId: t.entity_type === 'org' ? t.id : null,
+        primaryUserId: t.entity_type === 'user' ? t.primary_user_id : null,
         publicAt: new Date(Date.now()),
         website: null,
         description: null,
@@ -388,14 +385,14 @@ export function $$ep40(e, t, r, n) {
   let i = e.currentPluginVersion;
   if (!i) return;
   if (!i.manifest) {
-    reportError(_$$e.EXTENSIBILITY, Error("manifest missing"), {
+    reportError(_$$e.EXTENSIBILITY, new Error('manifest missing'), {
       extra: {
         plugin: e
       }
     });
     return;
   }
-  let a = e.isWidget ? "widget" : "plugin";
+  let a = e.isWidget ? 'widget' : 'plugin';
   let l = $$ec45(i.manifest);
   if (!l) return;
   let d = `?resource_type=${a}&resource_id=${e.id}`;
@@ -403,16 +400,16 @@ export function $$ep40(e, t, r, n) {
   let c = {
     id: i.id,
     plugin_id: e.id,
-    name: i.name || "",
+    name: i.name || '',
     current_plugin_version_id: i.plugin?.currentPluginVersionId || void 0,
-    version: i.version || "",
-    release_notes: i.releaseNotes || "",
+    version: i.version || '',
+    release_notes: i.releaseNotes || '',
     is_private: !!e.orgId,
-    description: i.description || "",
-    creator_policy: i.creatorPolicy ?? "",
+    description: i.description || '',
+    creator_policy: i.creatorPolicy ?? '',
     manifest: l,
     installed_by: n,
-    tagline: i.tagline || "",
+    tagline: i.tagline || '',
     created_at: i.createdAt.toString(),
     redirect_icon_url: `/community/icon${d}`,
     redirect_cover_image_url: `/community/thumbnail${d}`,
@@ -430,33 +427,37 @@ let e_ = (e, t, r) => {
   let s = {};
   let o = {};
   let l = {};
-  if ("loaded" !== e.status) return {
-    plugins: {},
-    widgets: {},
-    orgPlugins: {},
-    orgWidgets: {},
-    userPlugins: {},
-    userWidgets: {}
-  };
+  if (e.status !== 'loaded') {
+    return {
+      plugins: {},
+      widgets: {},
+      orgPlugins: {},
+      orgWidgets: {},
+      userPlugins: {},
+      userWidgets: {}
+    };
+  }
   let d = e.data;
   for (let e of [{
-    source: "org",
+    source: 'org',
     savedExtensions: d.org?.installedPlugins
   }, {
-    source: "user",
+    source: 'user',
     savedExtensions: d.currentUser?.installedPlugins
   }]) {
     let {
       source,
       savedExtensions
     } = e;
-    if (savedExtensions) for (let e of savedExtensions) {
-      let {
-        plugin
-      } = e;
-      if (!plugin || !plugin.viewableInEditor) continue;
-      let u = $$ep40(plugin, t, r, source);
-      u && (plugin.isWidget ? (i[e.pluginId] = u, "org" === source ? s[e.pluginId] = u : "user" === source && (l[e.pluginId] = u)) : (n[e.pluginId] = u, "org" === source ? a[e.pluginId] = u : "user" === source && (o[e.pluginId] = u)));
+    if (savedExtensions) {
+      for (let e of savedExtensions) {
+        let {
+          plugin
+        } = e;
+        if (!plugin || !plugin.viewableInEditor) continue;
+        let u = $$ep40(plugin, t, r, source);
+        u && (plugin.isWidget ? (i[e.pluginId] = u, source === 'org' ? s[e.pluginId] = u : source === 'user' && (l[e.pluginId] = u)) : (n[e.pluginId] = u, source === 'org' ? a[e.pluginId] = u : source === 'user' && (o[e.pluginId] = u)));
+      }
     }
   }
   return {
@@ -470,7 +471,7 @@ let e_ = (e, t, r) => {
 };
 let eh = new Set();
 let em = new Set();
-let eg = d()(e => {
+let eg = debounce(e => {
   eh.size > 0 && (e(f1({
     pluginIds: Array.from(eh)
   })), eh.clear());
@@ -487,15 +488,17 @@ export function $$ef4() {
   let a = getUserId();
   let s = $$eq15();
   return useMemo(() => {
-    if ("loaded" !== r.status) return {
-      loaded: !1,
-      plugins: {},
-      widgets: {},
-      orgWidgets: {},
-      orgPlugins: {},
-      userWidgets: {},
-      userPlugins: {}
-    };
+    if (r.status !== 'loaded') {
+      return {
+        loaded: !1,
+        plugins: {},
+        widgets: {},
+        orgWidgets: {},
+        orgPlugins: {},
+        userWidgets: {},
+        userPlugins: {}
+      };
+    }
     let {
       plugins,
       widgets,
@@ -523,7 +526,7 @@ export function $$ef4() {
   }, [e, r, t, a, s]);
 }
 export function $$eE44() {
-  let e = E3();
+  let e = getSelectedEditorType();
   return function (e) {
     let t = $$ef4();
     let {
@@ -552,7 +555,7 @@ export function $$eE44() {
   }(t => filterEntriesByEditorType(e, t));
 }
 export function $$ey43(e) {
-  let t = E3();
+  let t = getSelectedEditorType();
   return useMemo(() => function (e, {
     editorType: t
   }) {
@@ -597,7 +600,7 @@ export function $$eb28(e, t) {
   });
   let s = a.data?.plugin;
   let o = a.status;
-  return useMemo(() => "loaded" !== o ? {
+  return useMemo(() => o !== 'loaded' ? {
     loaded: !1,
     plugin: null
   } : {
@@ -620,7 +623,7 @@ export function $$eT49(e, {
   let o = [];
   s.forEach(e => {
     let t = e.result;
-    if ("loaded" !== t.status) return;
+    if (t.status !== 'loaded') return;
     let n = t.data?.plugin;
     if (!n) return;
     let a = $$ep40(n, r, i, null);
@@ -638,12 +641,12 @@ let eS = {
 export function $$ev50() {
   let e = useSelector(e => e.selectedView);
   let t = useSelector(e => e.installedPluginVersions);
-  if ("fullscreen" !== e.view) return eS;
+  if (e.view !== 'fullscreen') return eS;
   let r = convertEditorTypeToFileType(e.editorType);
   if (!t.loaded) return t;
   let n = {};
-  for (let i of Object.values(t.plugins)) isEditorTypeMatch(r, i.manifest.editorType) ? n[i.plugin_id] = i : ($A(e) && isDevModePlugin(i) || "figma" === r && isDevModePlugin(i)) && (n[i.plugin_id] = i);
-  let a = "fullscreen" === e.view ? e.editorType : null;
+  for (let i of Object.values(t.plugins)) isEditorTypeMatch(r, i.manifest.editorType) ? n[i.plugin_id] = i : (isFullscreenDevHandoffView(e) && isDevModePlugin(i) || r === 'figma' && isDevModePlugin(i)) && (n[i.plugin_id] = i);
+  let a = e.view === 'fullscreen' ? e.editorType : null;
   return {
     loaded: !0,
     plugins: filterEntriesByEditorType(a, n)
@@ -653,14 +656,14 @@ export function $$eA14() {
   let {
     widgets
   } = $$ef4();
-  let t = useSelector(e => "fullscreen" === e.selectedView.view);
+  let t = useSelector(e => e.selectedView.view === 'fullscreen');
   let r = xy(widgets);
   return useMemo(() => t ? r : {}, [t, r]);
 }
 export function $$ex1() {
   let e = useSelector(e => e.recentlyUsed.widgets);
   let t = $$z53();
-  let r = _$$o2();
+  let r = useMappedEditorTypeA();
   let a = getUserId();
   let s = $$eq15();
   return useMemo(() => {
@@ -674,7 +677,6 @@ export function $$ex1() {
       }
       if (t[r.id]) {
         n.push(t[r.id]);
-        return;
       }
     });
     return n;
@@ -686,7 +688,7 @@ export function $$eN46() {
 export function $$eC8() {
   let e = useSelector(e => e.recentlyUsed.plugins);
   let t = $$H41();
-  let r = _$$o2();
+  let r = useMappedEditorTypeA();
   let a = getUserId();
   let s = useMemo(() => {
     let n = [];
@@ -699,7 +701,6 @@ export function $$eC8() {
       }
       if (t[r.id]) {
         n.push(t[r.id]);
-        return;
       }
     });
     return n;
@@ -733,7 +734,7 @@ export function $$eP48() {
   let e = useSelector(e => e.recentlyUsed.plugins);
   let t = useSelector(e => e.recentlyUsed.widgets);
   let r = getUserId();
-  let a = _$$o2();
+  let a = useMappedEditorTypeA();
   return useMemo(() => {
     let n = {};
     a && r && (e[a].forEach(e => {
@@ -759,15 +760,15 @@ function eD(e, t, r) {
   return filterEntriesByEditorType(r, n);
 }
 function ek(e) {
-  let t = useCurrentUserOrg()?.id ?? "";
+  let t = useCurrentUserOrg()?.id ?? '';
   let r = useDispatch();
-  let n = useSelector(t => "plugin" === e ? t.whitelistedPlugins : t.whitelistedWidgets);
+  let n = useSelector(t => e === 'plugin' ? t.whitelistedPlugins : t.whitelistedWidgets);
   let s = !!t;
   let o = function (e, t = !0) {
-    let r = useCurrentUserOrg()?.id ?? "";
+    let r = useCurrentUserOrg()?.id ?? '';
     let n = useCurrentFileKey();
     let i = CR(e, t && !!n);
-    let a = kA(r ?? "", e, t && !!r && !n);
+    let a = kA(r ?? '', e, t && !!r && !n);
     return n ? i : a;
   }(e, s);
   let l = o.loaded ? o.data : [];
@@ -777,18 +778,18 @@ function ek(e) {
   l.forEach(e => {
     e && (d[e] = !0);
   });
-  deepEqual(d, n) || r(("plugin" === e ? _$$P : _$$o)(d));
+  deepEqual(d, n) || r((e === 'plugin' ? setPluginAllowlisted : setWidgetsAllowlisted)(d));
   return d;
 }
 export function $$eM39() {
-  let e = my();
+  let e = getEditorTypeOrNull();
   let t = useCurrentUserOrg();
   let r = $$$32();
   let a = !!(t && t.plugins_whitelist_enforced);
-  let s = ek("plugin");
+  let s = ek('plugin');
   let o = useDispatch();
   let l = useCurrentFileKey();
-  let d = getPluginAllowListKey(t?.id ?? "", l);
+  let d = getPluginAllowListKey(t?.id ?? '', l);
   let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
     a && !c && o(Vl({}));
@@ -796,14 +797,14 @@ export function $$eM39() {
   return useMemo(() => eD(s, r, e), [e, s, r]);
 }
 export function $$eF19() {
-  let e = my();
+  let e = getEditorTypeOrNull();
   let t = useCurrentUserOrg();
   let r = $$X27();
   let a = !!(t && t.widgets_whitelist_enforced);
-  let s = ek("widget");
+  let s = ek('widget');
   let o = useDispatch();
   let l = useCurrentFileKey();
-  let d = getWidgetAllowListKey(t?.id ?? "", l);
+  let d = getWidgetAllowListKey(t?.id ?? '', l);
   let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
     a && !c && o(mV({}));
@@ -813,8 +814,8 @@ export function $$eF19() {
   let _ = useMemo(() => ({}), []);
   return p ? u : _;
 }
-let ej = "plugin_search_duration";
-let eU = "widget_search_duration";
+let ej = 'plugin_search_duration';
+let eU = 'widget_search_duration';
 function eB(e, t) {
   t.elapsedMs && trackEventAnalytics(e, t, {
     forwardToDatadog: !0
@@ -829,9 +830,9 @@ export function $$eG9(e) {
   let p = useSelector(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST));
   let h = useDispatch();
   let f = $$ev50().plugins;
-  let y = BI();
-  let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? "free" : "all";
-  let v = m0();
+  let y = getFigmaMobile();
+  let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? 'free' : 'all';
+  let v = isDevHandoffEditorType();
   return {
     pluginServerSideSearch: useCallback((t, n, i, a) => {
       let o = new PerfTimer(ej, {});
@@ -846,7 +847,7 @@ export function $$eG9(e) {
         let _ = c ? c.map(e => (u.push(e.model), e.model.id)) : [];
         h(Qi({
           publishedPlugins: u,
-          src: "universalInsert"
+          src: 'universalInsert'
         }));
         let m = p.filter(e => f[e]);
         let g = p.filter(e => !f[e]);
@@ -867,17 +868,17 @@ export function $$eG9(e) {
       }).catch(r => {
         let n = {
           query: t,
-          current_org_id: u || "",
+          current_org_id: u || '',
           resource_type: ResourceTypes.BrowseResourceTypes.PLUGINS,
           editor_type: e,
           did_org_search: p,
           error: r?.message,
           status: r?.status
         };
-        logError("search", "Search error for Community resources in inserts modal", n, {
+        logError('search', 'Search error for Community resources in inserts modal', n, {
           reportAsSentryError: !0
         });
-        let i = getI18nString("community.actions.an_error_occurred_while_searching_for_plugins");
+        let i = getI18nString('community.actions.an_error_occurred_while_searching_for_plugins');
         h(VisualBellActions.enqueue({
           error: !0,
           message: i
@@ -899,8 +900,8 @@ export function $$eV17(e) {
   let p = useSelector(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST));
   let h = $$eA14();
   let f = useDispatch();
-  let y = BI();
-  let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? "free" : "all";
+  let y = getFigmaMobile();
+  let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? 'free' : 'all';
   return {
     widgetServerSideSearch: useCallback((t, n, i, a) => {
       let o = new PerfTimer(eU, {});
@@ -915,7 +916,7 @@ export function $$eV17(e) {
         let _ = c.map(e => (u.push(e.model), e.model.id));
         f(Qi({
           publishedPlugins: u,
-          src: "universalInsert"
+          src: 'universalInsert'
         }));
         let m = p.filter(e => h[e]);
         let g = p.filter(e => !h[e]);
@@ -936,17 +937,17 @@ export function $$eV17(e) {
       }).catch(r => {
         let n = {
           query: t,
-          current_org_id: u || "",
+          current_org_id: u || '',
           resource_type: ResourceTypes.BrowseResourceTypes.WIDGETS,
           editor_type: e,
           did_org_search: p,
           error: r?.message,
           status: r?.status
         };
-        logError("search", "Search error for Community resources in inserts modal", n, {
+        logError('search', 'Search error for Community resources in inserts modal', n, {
           reportAsSentryError: !0
         });
-        let i = getI18nString("community.actions.an_error_occurred_while_searching_for_widgets");
+        let i = getI18nString('community.actions.an_error_occurred_while_searching_for_widgets');
         f(VisualBellActions.enqueue({
           error: !0,
           message: i
@@ -1005,7 +1006,7 @@ function eK(e) {
   return t;
 }
 export function $$eY23() {
-  let e = E3();
+  let e = getSelectedEditorType();
   let t = eK($$eM39());
   let r = eK($$eF19());
   let i = selectWithShallowEqual(e => ({
@@ -1014,7 +1015,7 @@ export function $$eY23() {
     selectedView: e.selectedView,
     openFile: e.openFile
   }));
-  let a = p8("isReadOnly");
+  let a = p8('isReadOnly');
   return useCallback(n => {
     let {
       canRun
@@ -1042,11 +1043,11 @@ export function $$eX21() {
   return useSelector(canRunExtensions);
 }
 export function $$eq15() {
-  let e = E3();
+  let e = getSelectedEditorType();
   return e !== FEditorType.Slides && e !== FEditorType.Sites && e !== FEditorType.Figmake && e !== FEditorType.Cooper;
 }
 export function $$eJ3(e) {
-  let t = pQ(e);
+  let t = selectEditorType(e);
   return t !== FEditorType.Slides && t !== FEditorType.Sites && t !== FEditorType.Figmake && t !== FEditorType.Cooper;
 }
 export function $$eZ26(e) {
@@ -1073,7 +1074,7 @@ export function $$eQ34(e) {
   let u = !s && !c;
   return {
     validatePublishedPluginInOrgAllowlist: useCallback(() => !u || (t(VisualBellActions.enqueue({
-      message: getI18nString("universal_insert.plugin_not_in_allowlist"),
+      message: getI18nString('universal_insert.plugin_not_in_allowlist'),
       error: !0
     })), !1), [u, t]),
     isPluginBlockedByAllowlist: u
@@ -1088,7 +1089,7 @@ export function $$e036(e) {
   let o = $$eF19();
   let l = e ? o : s;
   let d = e ? i : r;
-  let c = t?.id ?? "";
+  let c = t?.id ?? '';
   let u = useCurrentFileKey();
   let p = oh(e ? getWidgetAllowListKey(c, u) : getPluginAllowListKey(c, u));
   let _ = useCallback(e => d ? e.filter(e => !isPublicPlugin(e) || !!l[e.plugin_id]) : e, [l, d]);

@@ -5,7 +5,7 @@ import { customHistory } from "../905/612521";
 import { postUserFlag } from "../905/985254";
 import { FFileType } from "../figma_app/191312";
 import { UserPreferences } from "../figma_app/43951";
-import { YP } from "../figma_app/193867";
+import { getNormalizedPath } from "../figma_app/193867";
 import { e as _$$e } from "../905/859735";
 import { GZ } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -36,7 +36,7 @@ function y(e) {
   })].some(t => e.startsWith(t));
 }
 function b(e) {
-  let t = YP(e);
+  let t = getNormalizedPath(e);
   return t.length >= 4 && "files" === t[1] && "feed-posts" === t[2] && !!t[3];
 }
 let T = "autoOpenInDesktopApp";

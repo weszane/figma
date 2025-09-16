@@ -6,11 +6,11 @@ import { trackEventAnalytics } from "../905/449184";
 import { debugState } from "../905/407919";
 import { XHR } from "../905/910117";
 import { eN } from "../figma_app/401061";
-import { $o } from "../905/762943";
+import { getUnitForEntry } from "../905/762943";
 import { isInteractiveInspectionAndRollbackEnabled } from "../figma_app/544649";
 import { L } from "../figma_app/53571";
 import { wz } from "../figma_app/879363";
-import { j7, sf } from "../905/929976";
+import { showDropdownThunk, selectViewAction } from "../905/929976";
 import { WJ, AM, XX } from "../figma_app/8833";
 import { sendAsset } from "../figma_app/415217";
 import { FEditorType } from "../figma_app/53721";
@@ -121,7 +121,7 @@ export function $$I1() {
       });
     },
     showStatusContextMenu(e, t) {
-      debugState.dispatch(j7({
+      debugState.dispatch(showDropdownThunk({
         type: WJ,
         data: {
           targetInViewport: e,
@@ -130,7 +130,7 @@ export function $$I1() {
       }));
     },
     showLinterContextMenu(e) {
-      debugState.dispatch(j7({
+      debugState.dispatch(showDropdownThunk({
         type: AM,
         data: {
           targetInViewport: e
@@ -140,7 +140,7 @@ export function $$I1() {
     isStatusContextMenuShowing: () => debugState.getState().dropdownShown?.type === WJ,
     isLinterContextMenuShowing: () => debugState.getState().dropdownShown?.type === AM,
     showAnnotationsButtonContextMenu(e, t) {
-      debugState.dispatch(j7({
+      debugState.dispatch(showDropdownThunk({
         type: XX,
         data: {
           targetInViewport: e,
@@ -166,7 +166,7 @@ export function $$I1() {
         devModeFocusId: e,
         overviewBackButtonTargetNodeId: t
       };
-      debugState.dispatch(sf(n));
+      debugState.dispatch(selectViewAction(n));
       trackEventAnalytics("Dev Mode II Focus Entry Clicked");
     },
     exitDevModeFocusOrOverview() {
@@ -175,7 +175,7 @@ export function $$I1() {
         showOverview: !1,
         devModeFocusId: void 0
       };
-      debugState.dispatch(sf(e));
+      debugState.dispatch(selectViewAction(e));
     },
     isInteractiveInspectionEnabled: () => isInteractiveInspectionAndRollbackEnabled(),
     isChangingInspectionValues: eN,
@@ -185,7 +185,7 @@ export function $$I1() {
         ...e,
         type: e.type === PluginSource.FIRST_PARTY ? "first-party" : e.type === PluginSource.LOCAL_PLUGIN ? "local-plugin" : "published-plugin"
       };
-      return $o(i, t);
+      return getUnitForEntry(i, t);
     }
   };
 }

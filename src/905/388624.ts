@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector } from "react-redux";
 import { s as _$$s } from "../cssbuilder/589278";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxInt } from "../figma_app/783094";
@@ -338,7 +338,7 @@ export function $$H0(e) {
       className: _$$s.colorTextBrand.cursorPointer.selectNone.$,
       onClick: e => {
         let n = e.currentTarget.getBoundingClientRect();
-        i ? t(oB()) : n && t(j7({
+        i ? t(hideDropdownAction()) : n && t(showDropdownThunk({
           type: F,
           data: {
             targetRect: n

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { Button } from "../905/521428";
 import { renderI18nText } from "../905/303541";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { NJ } from "../figma_app/419216";
 import { Ro } from "../figma_app/598952";
 export let $$d0 = "ACCOUNT_SWITCHING_ADD_ACCOUNT_ONBOARDING_KEY";
@@ -42,7 +42,7 @@ export function $$h1(e) {
     children: [renderI18nText("rcs.account_switching.this_is_where_you_access_account_settings_add_or_remove_accounts_and_see_your_figma_profiles"), jsx($$u3, {
       step: e.step,
       onClick: () => {
-        t(oB());
+        t(hideDropdownAction());
         e.onClickPrimaryCta();
       },
       totalSteps: e.totalSteps

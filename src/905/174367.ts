@@ -5,8 +5,8 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { Cs } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { L } from "../905/857916";
 import { Y } from "../905/506207";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -51,10 +51,10 @@ function E({
           className: _$$s.flex.flexColumn.p16.gap8.$,
           children: [A && jsx("div", {
             className: "file_import_options--inlineBannerContainer--WepYV",
-            children: jsx(Cs, {
+            children: jsx(BannerFullWidth, {
               variant: "default",
               icon: jsx(L, {}),
-              children: jsx(Q, {
+              children: jsx(BannerMessage, {
                 children: getI18nString("resource_connection.when_you_import_files_anyone_in_the_connected_project_can_access_them")
               })
             })

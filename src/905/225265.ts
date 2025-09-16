@@ -12,7 +12,7 @@ import { asyncExecutorSubscription } from "../905/888985";
 import { WebLoggerTimer } from "../905/485103";
 import { yZ } from "../figma_app/476572";
 import { getExperimentConfigAsync } from "../figma_app/594947";
-import { XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { compareLibraryKeyWithString } from "../905/709171";
 import { V as _$$V } from "../figma_app/473391";
@@ -115,7 +115,7 @@ let es = createReduxSubscriptionAtomWithState(e => {
 });
 let eo = createReduxSubscriptionAtomWithState(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
 let el = createReduxSubscriptionAtomWithState(e => e.search.sessionId);
-let ed = selectAtom(OC, e => XE(e) === FEditorType.Design);
+let ed = selectAtom(OC, e => getEditorTypeFromView(e) === FEditorType.Design);
 let ec = selectAtom(openFileAtom, f$, deepEqual);
 let eu = createRemovableAtomFamily(e => atom(void 0));
 let ep = createRemovableAtomFamily(e => atom(t => {

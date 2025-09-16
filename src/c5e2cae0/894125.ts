@@ -6,7 +6,7 @@ import { clearPaymentFlowData } from "../figma_app/169182";
 import { On } from "../9420/975542";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { _l } from "../figma_app/976345";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { c as _$$c } from "../905/370443";
 import { TrackedButton } from "../figma_app/831799";
 import { Al } from "../9420/394825";
@@ -127,9 +127,9 @@ export function $$b1(e) {
           view: {
             view: "recentsAndSharing"
           }
-        })) : _(sf(selectedView.previousView || {
+        })) : _(selectViewAction(selectedView.previousView || {
           view: "recentsAndSharing"
-        })) : _(sf(selectedView.previousView || (teamId ? {
+        })) : _(selectViewAction(selectedView.previousView || (teamId ? {
           view: "team",
           teamId
         } : {
@@ -151,7 +151,7 @@ export function $$b1(e) {
           isCampfireCart: !!e.isCampfireCart,
           teamId: teamId ?? void 0
         });
-        _(sf({
+        _(selectViewAction({
           ...selectedView,
           paymentStep: r.step,
           billingPeriod: u === SubscriptionType.UNSPECIFIED ? void 0 : u,

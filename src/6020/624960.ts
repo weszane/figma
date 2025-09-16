@@ -20,7 +20,7 @@ import { normalizeValue, valueOrFallback } from "../905/216495";
 import { lJ } from "../905/275640";
 import { useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
-import { vp } from "../figma_app/831696";
+import { serializeFullViewerQueryParams } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
 import { uQ, Tv } from "../figma_app/151869";
 import { Q as _$$Q } from "../905/346809";
@@ -202,7 +202,7 @@ export function $$F1(t) {
           disabled: !Y,
           onClick: () => function (t) {
             let e = PrototypingTsApi.currentDeviceType();
-            let o = vp({
+            let o = serializeFullViewerQueryParams({
               scalingInfo: {
                 viewportScalingMode: qb(e),
                 contentScalingMode: Rv(e)

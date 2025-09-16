@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent, createRef } from "react";
 import { SvgComponent } from "../905/714743";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { KindEnum } from "../905/129884";
 import { eh, Gb, ai } from "../905/749493";
 import { A } from "../6828/364616";
@@ -10,7 +10,7 @@ export class $$c0 extends PureComponent {
     super(...arguments);
     this.ref = createRef();
     this.toggleDropdown = e => {
-      if (e.preventDefault(), e.stopPropagation(), this.props.showingDropdown) this.props.dispatch(oB());else {
+      if (e.preventDefault(), e.stopPropagation(), this.props.showingDropdown) this.props.dispatch(hideDropdownAction());else {
         let e;
         let t = this.ref.current.getBoundingClientRect();
         let r = t.top >= window.innerHeight - 200;
@@ -24,7 +24,7 @@ export class $$c0 extends PureComponent {
             right: this.props.isRightAligned ? window.innerWidth - Math.max(t.right, 180) : "auto"
           }
         };
-        this.props.dispatch(j7({
+        this.props.dispatch(showDropdownThunk({
           type: this.props.type,
           data: e
         }));

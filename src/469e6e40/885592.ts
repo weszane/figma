@@ -13,7 +13,7 @@ import { o as _$$o, Ph, pW } from '../905/160095';
 import { ScreenReaderOnly } from '../905/172252';
 import { h as _$$h } from '../905/207101';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { Q as _$$Q } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { c as _$$c } from '../905/370443';
 import { b as _$$b2 } from '../905/484176';
 import { DashboardSections } from '../905/548208';
@@ -21,7 +21,7 @@ import { getFeatureFlags } from '../905/601108';
 import { A3, Hj } from '../905/682977';
 import { g as _$$g } from '../905/687265';
 import { A as _$$A } from '../905/920142';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { sx } from '../905/941192';
 import { a as _$$a } from '../905/964520';
 import { I as _$$I } from '../4452/82228';
@@ -31,7 +31,7 @@ import { B as _$$B } from '../4452/541264';
 import { v as _$$v } from '../4452/562448';
 import { m as _$$m } from '../4452/688074';
 import { s as _$$s } from '../cssbuilder/589278';
-import { $y, Yy } from '../figma_app/59509';
+import { BannerInsetModal, BannerInset } from '../figma_app/59509';
 import { isNotNullish } from '../figma_app/95419';
 import { FBillingPeriodType, FOrganizationLevelType } from '../figma_app/191312';
 import { AG } from '../figma_app/217457';
@@ -427,10 +427,10 @@ function er(e) {
     },
     children: getI18nString('plan_invoices.monthly_to_annual_cta.discount')
   });
-  return jsx($y, {
+  return jsx(BannerInsetModal, {
     'variant': 'brand',
     'data-testid': 'invoice-flyout-footer-banner',
-    'children': jsx(_$$Q, {
+    'children': jsx(BannerMessage, {
       children: e.renderMessage(t)
     })
   });
@@ -469,7 +469,7 @@ function el(e) {
     content: c && o && l === FOrganizationLevelType.TEAM && a && jsx(lR, {
       variant: 'secondary',
       onClick: () => {
-        t(sf({
+        t(selectViewAction({
           view: 'teamAdminConsole',
           teamId: o,
           teamAdminConsoleViewTab: DashboardSections.MEMBERS
@@ -485,7 +485,7 @@ function el(e) {
     content: c && o && l === FOrganizationLevelType.ORG && a && jsx(lR, {
       variant: 'secondary',
       onClick: () => {
-        t(sf({
+        t(selectViewAction({
           view: 'orgAdminSettings',
           orgAdminSettingsViewTab: DashboardSection.MEMBERS,
           orgAdminMembersTabFilters: {
@@ -729,9 +729,9 @@ function ef(e) {
   } : void 0;
   return jsx('div', {
     className: 'x1np1o9n',
-    children: jsxs(Yy, {
+    children: jsxs(BannerInset, {
       variant: t ? 'danger' : 'brand',
-      children: [jsx(_$$Q, {
+      children: [jsx(BannerMessage, {
         title: t ? getI18nString('plan_invoices.invoice_flyout.overdue_invoice_notice') : getI18nString('plan_invoices.invoice_flyout.open_invoice_notice'),
         children: null
       }), e.invoice.hosted_invoice_url && jsx(pW, {
@@ -989,7 +989,7 @@ export function $$eI0(e) {
   });
   _$$h(() => {
     let e = o.getState().selectedView;
-    (e.view === 'orgAdminSettings' || e.view === 'teamAdminConsole') && e.initialHighlightedInvoiceId && (setHighlightedItemId(e.initialHighlightedInvoiceId), c(sf({
+    (e.view === 'orgAdminSettings' || e.view === 'teamAdminConsole') && e.initialHighlightedInvoiceId && (setHighlightedItemId(e.initialHighlightedInvoiceId), c(selectViewAction({
       ...e,
       initialHighlightedInvoiceId: null
     })));

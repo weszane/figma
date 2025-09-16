@@ -11,7 +11,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { uQ } from "../figma_app/311375";
-import { qM } from "../figma_app/120227";
+import { getScaledValueWithUnit } from "../figma_app/120227";
 import { d as _$$d } from "../905/758967";
 import { UK } from "../figma_app/740163";
 import { currentSessionLocalIDString, clearSelection, addToSelection, setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
@@ -35,7 +35,7 @@ import { A as _$$A } from "../9410/188255";
 import { TrackingProvider } from "../figma_app/831799";
 import { e as _$$e2 } from "../905/621515";
 import { selectCurrentUser, getUserId } from "../905/372672";
-import { QF } from "../figma_app/502247";
+import { getUserPlan } from "../figma_app/502247";
 import { N as _$$N } from "../figma_app/268271";
 import { Ypw } from "../figma_app/6204";
 import { useAtomWithSubscription, useAtomValueAndSetter, Xr } from "../figma_app/27355";
@@ -45,7 +45,7 @@ import { buildUploadUrl } from "../figma_app/169182";
 import { c as _$$c } from "../905/370443";
 import { Z as _$$Z } from "../905/104740";
 import { getViewportInfo, viewportToScreen } from "../figma_app/62612";
-import { Y as _$$Y } from "../figma_app/80938";
+import { INSPECT_PANEL } from "../figma_app/80938";
 import { _o } from "../figma_app/701001";
 import { GQ } from "../figma_app/32128";
 import { gn, eN as _$$eN, zU } from "../figma_app/202626";
@@ -146,7 +146,7 @@ let R = e => e.toLocaleString("en", {
 });
 function B(e, t = 0) {
   let n = v4();
-  let o = qM(n, t, R);
+  let o = getScaledValueWithUnit(n, t, R);
   let {
     variable,
     variableDisplayName
@@ -444,7 +444,7 @@ function e_(e) {
         centerY: u.absoluteBoundingBox.y + 50,
         scale: 1.2
       }), function (e) {
-        let t = document.getElementById(_$$Y);
+        let t = document.getElementById(INSPECT_PANEL);
         t.style.transition = "scroll 0.3s ease-in-out";
         setTimeout(() => {
           t.scrollTop = e;
@@ -762,7 +762,7 @@ function eI() {
     priority: _$$N.DEFAULT_MODAL
   });
   let n = getUserId();
-  let [r, a] = QF(n || "") || [];
+  let [r, a] = getUserPlan(n || "") || [];
   return (useEffect(() => {
     let n = getFeatureFlags().dev_mode_demo_file || getFeatureFlags().logged_out_dev_mode_demo_file;
     !isShowing && n && show();

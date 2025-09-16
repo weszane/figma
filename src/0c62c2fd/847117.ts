@@ -34,7 +34,7 @@ import { buildFileUrl } from "../905/612685";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { FileByKey } from "../figma_app/43951";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { K as _$$K } from "../figma_app/193867";
+import { isRecentsAndSharingView } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
 import { Bi, vL } from "../905/652992";
 import { Y5, mO, kI, NU } from "../905/163189";
@@ -264,7 +264,7 @@ export function $$ee2({
   let g = 0 === m.remainingFiles;
   let h = useSelector(e => "folder" === e.selectedView.view ? e.folders[e.selectedView.folderId] : null);
   let b = isRootPath(h);
-  let v = _$$K(_);
+  let v = isRecentsAndSharingView(_);
   $$el6(!g);
   let y = h?.name || getI18nString("file_browser.tool_bar.drafts");
   let j = g ? getI18nString("file_browser.file_import_view.imported_to_folder", {

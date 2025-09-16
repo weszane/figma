@@ -10,7 +10,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { lk, u3 } from "../figma_app/109538";
 import { B } from "../905/380801";
 import { b as _$$b, A as _$$A } from "../905/723768";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { FPlanNameType } from "../figma_app/191312";
@@ -33,12 +33,12 @@ export let $$v0 = registerModal(function (e) {
     href: "#",
     onClick: () => {
       v();
-      plan.tier === FPlanNameType.PRO ? i(sf({
+      plan.tier === FPlanNameType.PRO ? i(selectViewAction({
         view: "teamAdminConsole",
         teamId: plan.key?.parentId || "",
         teamAdminConsoleViewTab: DashboardSections.CONTENT,
         teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
-      })) : i(sf({
+      })) : i(selectViewAction({
         view: "orgAdminSettings",
         orgAdminSettingsViewTab: DashboardSection.CONTENT,
         orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS

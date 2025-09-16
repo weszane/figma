@@ -54,7 +54,7 @@ import { rgbToHsl } from "../figma_app/273493";
 import { d as _$$d } from "../vendor/456530";
 import { N as _$$N } from "../vendor/930821";
 import { P as _$$P2 } from "../vendor/348225";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { oW } from "../figma_app/247611";
 import { getViewportZoom } from "../figma_app/62612";
 import { $R, X as _$$X2, iT as _$$iT, p3, pZ, Xc } from "../figma_app/765161";
@@ -498,7 +498,7 @@ let ef = memo(function ({
             source: fK
           });
           oW.trigger("action", TransactionCommand.CLEAR);
-          v(jD());
+          v(hideTooltip());
           let n = F.current;
           if (n) {
             let e = n.getBoundingClientRect();

@@ -1,14 +1,14 @@
 import { createActionCreator } from "../905/73481";
 import { logWarning } from "../905/714362";
-import { P, o as _$$o } from "../905/717906";
+import { setPluginAllowlisted, setWidgetsAllowlisted } from "../905/717906";
 import { createOptimistThunk } from "../905/350402";
 import { loadingStatePutLoading, loadingStatePutSuccess, loadingStatePutFailure } from "../figma_app/714946";
 import { getPluginAllowListKey, getWidgetAllowListKey } from "../figma_app/155287";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
 import { Qi } from "../figma_app/559491";
-let $$p1 = P;
-let $$m7 = _$$o;
+let $$p1 = setPluginAllowlisted;
+let $$m7 = setWidgetsAllowlisted;
 let $$h3 = createOptimistThunk((e, t) => {
   let i = t.orgId || e.getState().currentUserOrgId;
   if (!i) return;

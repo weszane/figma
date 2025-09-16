@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { debug } from "../figma_app/465776";
 import { lQ } from "../905/934246";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { jv } from "../figma_app/357047";
 import { Sn } from "../905/946805";
 import { r as _$$r } from "../905/924231";
@@ -56,7 +56,7 @@ export function $$p0(e, t, i) {
     });
     return;
   }
-  i(j7({
+  i(showDropdownThunk({
     type: jv,
     data: {
       parameterEntryArgs: p

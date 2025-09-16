@@ -8,7 +8,7 @@ import { cr } from "../905/879323";
 import { ts, zo, gR } from "../figma_app/120210";
 import { selectCurrentFile } from "../figma_app/516028";
 import { Sc } from "../905/18797";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { yD } from "../905/92359";
 import { wR } from "../figma_app/293326";
 import { b as _$$b } from "../1291/451154";
@@ -271,7 +271,7 @@ export function $$F0() {
       showLeftPinBound,
       children: jsx(FN, {
         query: searchQuery,
-        recentlyUsedItemsKey: $A.Slides,
+        recentlyUsedItemsKey: FDocumentType.Slides,
         hideRecentsIfEmpty: !0,
         showLocalComponents: !0,
         toggleLibraryModalType: "editor",

@@ -11,7 +11,7 @@ import { hideModal } from "../905/156213";
 import { lo, wn, dl } from "../9420/795870";
 import { jL } from "../figma_app/658324";
 import { FOrganizationLevelType } from "../figma_app/191312";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { DashboardSections } from "../905/548208";
 import { OJ } from "../905/519092";
 import { S } from "../9420/724099";
@@ -26,7 +26,7 @@ function w({
   canSeeBillingAddressExp: j
 }) {
   let T = w ? getI18nString("change_payment.success.successfully_reactivated_subscription") : getI18nString("change_payment.success.successfully_updated_your_payment_method");
-  let E = useSelector(e => Np(e, {
+  let E = useSelector(e => selectedViewToPath(e, {
     view: "teamAdminConsole",
     teamId: t.teamId,
     teamAdminConsoleViewTab: DashboardSections.SETTINGS

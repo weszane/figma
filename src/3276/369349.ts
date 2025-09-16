@@ -4,7 +4,7 @@ import { useAtomWithSubscription } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { E } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { E6 } from "../3276/240191";
@@ -19,7 +19,7 @@ let $$b = () => getI18nString("collaboration.spotlight.nudge_spotlight.title");
 export function $$y0() {
   let e = useAtomWithSubscription(PD);
   let t = useAtomWithSubscription(E6);
-  let n = m0();
+  let n = isDevHandoffEditorType();
   let r = useCanAccessFullDevMode();
   let y = n && !r;
   let C = _$$e({

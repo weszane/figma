@@ -47,7 +47,7 @@ import { Fullscreen, SceneGraphHelpers, StateGroupErrorType, VariableErrorType, 
 import { Ez } from '../figma_app/766708';
 import { memoizeByArgs } from '../figma_app/815945';
 import { isSelectedViewFullscreenCooper } from '../figma_app/828186';
-import { V_ } from '../figma_app/841351';
+import { CURRENT_VERSION_ID } from '../figma_app/841351';
 import { formatList } from '../figma_app/930338';
 import m from '../vendor/260986';
 let g = m;
@@ -512,7 +512,7 @@ export function $$e$89(e, t, r, n, i, a, s, o, l, d) {
 }
 export function $$eX24(e) {
   let t = e.getState();
-  if (t.versionHistory.activeId && t.versionHistory.activeId !== V_ || !t.mirror?.sceneGraph) return;
+  if (t.versionHistory.activeId && t.versionHistory.activeId !== CURRENT_VERSION_ID || !t.mirror?.sceneGraph) return;
   let r = getSelectedFile(t);
   let n = r ? r.key : '';
   let i = r?.library_key ? _$$l(r.library_key) : _$$l('');

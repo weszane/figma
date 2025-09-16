@@ -28,7 +28,7 @@ import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { VisualBellActions } from "../905/302958";
 import { nl, Pf } from "../905/590952";
 import { h as _$$h } from "../905/973388";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack, showModalHandler } from "../905/156213";
 import { TrackingProvider, useTracking } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FPermissionDenialReason } from "../figma_app/191312";
@@ -265,12 +265,12 @@ let Y = registerModal(function (e) {
               children: jsx(Button, {
                 variant: "link",
                 onClick: () => {
-                  t && (t.key.type === FOrganizationLevelType.ORG ? m(sf({
+                  t && (t.key.type === FOrganizationLevelType.ORG ? m(selectViewAction({
                     view: "orgAdminSettings",
                     orgAdminSettingsViewTab: DashboardSection.CONTENT,
                     orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS,
                     showResourceConnectionFlyout: e.resourceConnection.id
-                  })) : t.key.type === FOrganizationLevelType.TEAM && m(sf({
+                  })) : t.key.type === FOrganizationLevelType.TEAM && m(selectViewAction({
                     view: "teamAdminConsole",
                     teamId: t.key.parentId,
                     isProTeam: t.tier === FPlanNameType.PRO,

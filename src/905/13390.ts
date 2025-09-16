@@ -36,7 +36,7 @@ import { BK } from '../905/848862';
 import { n as _$$n, g4, m8, SW, Ul, v_ } from '../905/864644';
 import { F as _$$F3 } from '../905/915030';
 import { $S, mu } from '../905/918620';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { fileEntityDataMapper } from '../905/943101';
 import { nk } from '../figma_app/2023';
 import { S as _$$S } from '../figma_app/11182';
@@ -174,7 +174,7 @@ export function $$ek0(e) {
   let eX = e => {
     if (e.file.folderId != null) {
       if (currentUserOrgId === e.file.parentOrgId) {
-        i(sf({
+        i(selectViewAction({
           view: 'folder',
           folderId: e.file.folderId
         }));
@@ -190,7 +190,7 @@ export function $$ek0(e) {
     }
   };
   let eQ = e => {
-    i(sf({
+    i(selectViewAction({
       view: 'folder',
       folderId: e.repo.folder_id
     }));

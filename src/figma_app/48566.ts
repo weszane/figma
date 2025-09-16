@@ -7,7 +7,7 @@ import { parsePxNumber } from "../figma_app/783094";
 import { wY } from "../figma_app/708845";
 import { usePrefersReducedMotion } from "../figma_app/469468";
 import { Vn } from "../figma_app/795674";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { L } from "../figma_app/717083";
 import { fRM } from "../figma_app/27776";
 var l = o;
@@ -69,7 +69,7 @@ export function $$T1(e) {
   }, [e.activeRowIndex]);
   let A = usePrefersReducedMotion();
   return (useEffect(() => {
-    t(jD());
+    t(hideTooltip());
   }, [t, e.activeRowIndex]), o) ? jsx("div", {
     className: l()("toolbelt_left_side--leftSideCarouselContainer--8qu6Z", {
       "toolbelt_left_side--hideOverflowY--gGCIT": S

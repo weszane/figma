@@ -10,7 +10,7 @@ import { A as _$$A3 } from "../vendor/782559";
 import { A as _$$A4 } from "../vendor/947527";
 import { reportError, captureMessage } from "../905/11";
 import { camelToKebab } from "../figma_app/930338";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { g as _$$g } from "../figma_app/115586";
 let n;
@@ -19,7 +19,7 @@ export function $$y0() {
   let {
     addThemeListener
   } = G();
-  let r = E3();
+  let r = getSelectedEditorType();
   let n = useRef(r);
   useEffect(() => {
     n.current = r;

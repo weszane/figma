@@ -11,7 +11,7 @@ import { s as _$$s2 } from "../figma_app/576667";
 import { f as _$$f } from "../figma_app/882858";
 import { A as _$$A } from "../905/484713";
 import { G } from "../figma_app/119843";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { an } from "../905/81009";
 import { Um } from "../905/848862";
 import { CreatorResourceType, InputType } from "../figma_app/162807";
@@ -68,7 +68,7 @@ export function $$I0({
     onMouseDown: r => {
       r.stopPropagation();
       v(an());
-      C ? (v(oB()), R(L, t)) : x.current && (r.preventDefault(), v(j7({
+      C ? (v(hideDropdownAction()), R(L, t)) : x.current && (r.preventDefault(), v(showDropdownThunk({
         type: e,
         data: {
           facetType: t,

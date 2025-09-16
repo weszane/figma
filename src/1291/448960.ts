@@ -12,7 +12,7 @@ import { IW } from "../figma_app/563413";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getI18nState } from "../figma_app/363242";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { jy } from "../905/116101";
 import { TrackingProvider } from "../figma_app/831799";
 import { VU } from "../905/625959";
@@ -181,7 +181,7 @@ function O({
             className: "browse_all_resources_modal_container--slidingPaneContainer--0TVUA sliding_pane--slidingPaneContainer--RQkXf",
             onClick: e => {
               e.stopPropagation();
-              A && $(oB());
+              A && $(hideDropdownAction());
             },
             children: m
           })

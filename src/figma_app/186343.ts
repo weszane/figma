@@ -24,7 +24,7 @@ import { hasPageLimitations, hasReachedPageLimit, FILE_TYPE_PAGE_LIMITS } from "
 import { F as _$$F2 } from "../905/258517";
 import { Fk } from "../figma_app/167249";
 import { UpsellModalType } from "../905/165519";
-import { vw, yH } from "../figma_app/841351";
+import { getActiveVersion, loadVersionIncrementally } from "../figma_app/841351";
 import { vL } from "../905/652992";
 import { fileActionEnum } from "../figma_app/630077";
 import { ob, kh } from "../figma_app/571341";
@@ -137,14 +137,14 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
   requestAnimationFrame(() => {
     J(async () => {
       if (await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), t !== e) {
-        let i = vw(r);
+        let i = getActiveVersion(r);
         let a = P3() >= 75;
         let d = a ? new Set() : r.fetchedPageIds || new Set();
         if (i && (a && n(UPDATE_FETCHED_PAGE_IDS({
           fetchedPageIds: d
         })), n(VERSION_HISTORY_PAGE_LOADING({
           isLoadingPage: !0
-        })), n(yH({
+        })), n(loadVersionIncrementally({
           version: i,
           currentPageNodeId: e,
           fetchedPageIds: d,

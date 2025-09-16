@@ -17,7 +17,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { XHR } from "../905/910117";
 import { pI } from "../figma_app/770088";
 import { pf } from "../905/201151";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { Mu, QG } from "../905/901964";
 import { gj } from "../figma_app/12220";
 import { W9, gu, Hu } from "../figma_app/936061";
@@ -557,7 +557,7 @@ export function $$H0(e) {
     children
   } = e;
   let g = useRef({});
-  let f = E3() === FEditorType.Whiteboard;
+  let f = getSelectedEditorType() === FEditorType.Whiteboard;
   let y = !!getFeatureFlags().xr_debounce_threshold;
   let S = file?.key;
   let v = !!S;

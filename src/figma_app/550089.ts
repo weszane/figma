@@ -9,7 +9,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import { trackEventAnalytics } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
 import { Point } from "../905/736624";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { useFullscreenReady } from "../905/924253";
@@ -97,7 +97,7 @@ function L(e, t, r) {
 function P(e) {
   let t = getObservableOrFallback(UK().renderRulers);
   let r = useSelector(e => e.mirror.appModel.showUi);
-  let c = lg();
+  let c = getCurrentFileType();
   let u = useRef(fullscreenValue.getViewportInfo());
   let [p, _] = useState(fullscreenValue.getViewportInfo());
   !function (e) {

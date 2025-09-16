@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSubscription } from "../figma_app/288654";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { TeamCanView } from "../figma_app/43951";
 export function $$o0(e) {
   let t = useSubscription(TeamCanView, {
@@ -11,7 +11,7 @@ export function $$o0(e) {
   });
   let a = useDispatch();
   useLayoutEffect(() => {
-    "loaded" !== t.status || t.data.team || a(sf({
+    "loaded" !== t.status || t.data.team || a(selectViewAction({
       view: "recentsAndSharing"
     }));
   }, [t, a]);
@@ -24,7 +24,7 @@ export function $$d1(e) {
   });
   let a = useDispatch();
   useLayoutEffect(() => {
-    "loaded" !== t.status || t.data.team?.hasPermission || a(sf({
+    "loaded" !== t.status || t.data.team?.hasPermission || a(selectViewAction({
       view: "recentsAndSharing"
     }));
   }, [t, a]);

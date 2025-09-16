@@ -1,3 +1,4 @@
-import { atom } from "../figma_app/27355";
-export let $$n0 = atom(null);
-export const D = $$n0;
+import { atom } from '../figma_app/27355'
+
+export let $$n0 = atom(null)
+export const D = $$n0

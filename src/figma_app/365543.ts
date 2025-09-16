@@ -11,7 +11,7 @@ import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { Q } from "../905/346809";
 import { nV, fI, hl } from "../figma_app/626177";
 import { $E, Cj, FQ, L4, Q as _$$Q, zD, hq, Ms, z_, eO } from "../905/553729";
@@ -112,7 +112,7 @@ class T extends RecordingPureComponent {
 export let $$I0 = connect((e, t) => ({
   ...t,
   userFlags: e.userFlags,
-  isDevHandoff: $A(e.selectedView)
+  isDevHandoff: isFullscreenDevHandoffView(e.selectedView)
 }), e => ({
   dispatch: e
 }))(T);

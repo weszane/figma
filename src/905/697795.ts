@@ -11,12 +11,12 @@ import { UN, V3 } from "../figma_app/976345";
 import { wr } from "../figma_app/387599";
 import { OE } from "../figma_app/930386";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { VB } from "../figma_app/91703";
 import { hideModal } from "../905/156213";
-import { c5, p4 } from "../905/93909";
+import { setLastVisitedPlan, setLastVisitedId } from "../905/93909";
 import { NR } from "../905/977218";
-import { XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { isBranch } from "../905/760074";
 import { fullscreenValue } from "../figma_app/455680";
 import { FEditorType, mapFileTypeToEditorType } from "../figma_app/53721";
@@ -27,7 +27,7 @@ import { getFullscreenFile } from "../905/766303";
 import { GT } from "../figma_app/840917";
 import { AE, Nn } from "../905/225144";
 import { getUserId } from "../905/372672";
-import { Iu, vU } from "../figma_app/193867";
+import { getSelectedViewName, mapPathToSelectedView } from "../figma_app/193867";
 let n;
 export function $$D3() {
   return getInitialOptions().release_manifest_git_commit;
@@ -69,7 +69,7 @@ export function $$F6(e, t = null, i = "") {
   L(`${i}${e}${n}`, e, i);
 }
 export function $$M2(e, t) {
-  let i = Iu(e, t);
+  let i = getSelectedViewName(e, t);
   if (!i) {
     L("Figma", null);
     return;
@@ -103,7 +103,7 @@ export function $$M2(e, t) {
     L(`\u2325 ${i}`, `${i}`);
     return;
   }
-  $$F6(i, XE(t));
+  $$F6(i, getEditorTypeFromView(t));
 }
 export let $$j1 = createOptimistThunk(e => customHistory.listen(t => {
   "POP" === t && function (t) {
@@ -138,7 +138,7 @@ export let $$j1 = createOptimistThunk(e => customHistory.listen(t => {
             sessionId: t
           }));
         }
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           ...s,
           fromPopstate: !0
         }));
@@ -148,8 +148,8 @@ export let $$j1 = createOptimistThunk(e => customHistory.listen(t => {
   }(customHistory.location.state);
   hasViewProperty(customHistory.location.state) || function () {
     let t = e.getState();
-    let i = vU(t, customHistory.location.pathname, customHistory.location.search, customHistory.location.hash, null);
-    null !== i && e.dispatch(sf({
+    let i = mapPathToSelectedView(t, customHistory.location.pathname, customHistory.location.search, customHistory.location.hash, null);
+    null !== i && e.dispatch(selectViewAction({
       ...i,
       fromPopstate: !0
     }));
@@ -161,13 +161,13 @@ export function $$U4(e, t, i, n) {
   }));
   let r = i || n;
   let a = i ? OrganizationType.ORG : OrganizationType.TEAM;
-  e(r ? c5({
+  e(r ? setLastVisitedPlan({
     planId: r,
     planType: a
-  }) : p4({
+  }) : setLastVisitedId({
     planId: i || _$$P
   }));
-  e(sf({
+  e(selectViewAction({
     view: "fullscreen",
     fileKey: t.key,
     editorType: t.editorType ? mapFileTypeToEditorType(t.editorType) : FEditorType.Design

@@ -1,77 +1,197 @@
-import { PanelType } from "../figma_app/763686";
-import { SceneGraphUnavailableError } from "../figma_app/518682";
-import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { getSingletonSceneGraph } from "../905/700578";
-import { getFeatureFlags } from "../905/601108";
-import { customHistory } from "../905/612521";
-import { serializeQuery } from "../905/634134";
-import { buildUrlPath } from "../905/760074";
-import { replaceColonWithDash } from "../905/691205";
-export function $$p4(e, t) {
-  (e = e ? e.slice(1) : "") && ("commentPreferences" === e ? t.showCommentPreferencesPicker = !0 : t.commentThreadId = e);
-}
-export function $$m8(e, t) {
-  e["node-id"] && (t.nodeId = e["node-id"]);
-  e["version-id"] && (t.versionId = e["version-id"]);
-  e["try-plugin-id"] && (t.tryPluginId = e["try-plugin-id"]);
-  e["try-plugin-version-id"] && (t.tryPluginVersionId = e["try-plugin-version-id"]);
-  e["try-plugin-name"] && (t.tryPluginName = e["try-plugin-name"]);
-  "1" === e["is-playground-file"] && (t.isPlaygroundFile = !0);
-}
-export function $$h7(e = !1) {
-  return e ? `/test/eval/view${customHistory.location.search}` : `/test/interactions${customHistory.location.search}`;
-}
-export function $$g3(e, t, i, n, r, a = !1) {
-  if (n) return buildUrlPath(n, r || null, e);
-  let s = `/${e}/${t}`;
-  a || (i ? s += `/${i}` : s += "/Untitled");
-  return s;
-}
-export function $$f6(e, t) {
-  t && isValidSessionLocalID(parseSessionLocalID(t)) && (e["node-id"] = replaceColonWithDash(t));
-}
-export function $$_2(e, t) {
-  t && (e["version-id"] = t);
-}
-export function $$A9(e, t) {
-  t && (e += `#${t}`);
-  return e;
-}
-export function $$y10(e, t) {
-  Object.keys(t).length > 0 && (e += `?${serializeQuery(t)}`);
-  return e;
-}
-export function $$b0(e, t) {
-  if (t && isValidSessionLocalID(parseSessionLocalID(t))) try {
-    let i = getSingletonSceneGraph().get(t)?.type;
-    i && ["CANVAS", "DOCUMENT"].includes(i || "") && (e.p = "f");
-  } catch (e) {
-    if (!(e instanceof SceneGraphUnavailableError)) throw e;
+import type { BranchEntity, FileEntity } from '../905/760074'
+import { getFeatureFlags } from '../905/601108'
+import { customHistory } from '../905/612521'
+import { serializeQuery } from '../905/634134'
+import { replaceColonWithDash } from '../905/691205'
+import { getSingletonSceneGraph } from '../905/700578'
+import { buildUrlPath } from '../905/760074'
+import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411'
+import { SceneGraphUnavailableError } from '../figma_app/518682'
+import { PanelType } from '../figma_app/763686'
+
+/**
+ * Parses the comment preferences or thread ID from the given string.
+ * Original: $$p4
+ */
+export function parseCommentPreferencesOrThreadId(input: string | undefined, target: any): void {
+  const value = input ? input.slice(1) : ''
+  if (value) {
+    if (value === 'commentPreferences') {
+      target.showCommentPreferencesPicker = true
+    }
+    else {
+      target.commentThreadId = value
+    }
   }
 }
-export function $$v1(e) {
-  switch (e) {
+
+/**
+ * Extracts node, version, plugin, and playground info from the query object.
+ * Original: $$m8
+ */
+export function extractQueryParams(query: Record<string, string>, target: any): void {
+  if (query['node-id'])
+    target.nodeId = query['node-id']
+  if (query['version-id'])
+    target.versionId = query['version-id']
+  if (query['try-plugin-id'])
+    target.tryPluginId = query['try-plugin-id']
+  if (query['try-plugin-version-id'])
+    target.tryPluginVersionId = query['try-plugin-version-id']
+  if (query['try-plugin-name'])
+    target.tryPluginName = query['try-plugin-name']
+  if (query['is-playground-file'] === '1')
+    target.isPlaygroundFile = true
+}
+
+/**
+ * Returns the test view or interactions path based on the flag.
+ * Original: $$h7
+ */
+export function getTestPath(isEvalView: boolean = false): string {
+  return isEvalView
+    ? `/test/eval/view${customHistory.location.search}`
+    : `/test/interactions${customHistory.location.search}`
+}
+
+/**
+ * Builds a URL path for a file or named resource.
+ * Original: $$g3
+ */
+export function buildResourcePath(
+  fileId: string,
+  versionId: string,
+  name: string | undefined,
+  path: FileEntity,
+  extra: BranchEntity,
+  skipName: boolean = false,
+): string {
+  if (path) {
+    return buildUrlPath(path, extra || null, fileId)
+  }
+  let url = `/${fileId}/${versionId}`
+  if (!skipName) {
+    url += name ? `/${name}` : '/Untitled'
+  }
+  return url
+}
+
+/**
+ * Adds a valid session local ID to the query object.
+ * Original: $$f6
+ */
+export function addSessionLocalIdToQuery(query: Record<string, string>, sessionId: string | undefined): void {
+  if (
+    sessionId
+    && isValidSessionLocalID(parseSessionLocalID(sessionId))
+  ) {
+    query['node-id'] = replaceColonWithDash(sessionId)
+  }
+}
+
+/**
+ * Adds a version ID to the query object.
+ * Original: $$_2
+ */
+export function addVersionIdToQuery(query: Record<string, string>, versionId: string | undefined): void {
+  if (versionId) {
+    query['version-id'] = versionId
+  }
+}
+
+/**
+ * Appends a hash fragment to the URL if provided.
+ * Original: $$A9
+ */
+export function appendHashToUrl(url: string, hash: string | undefined): string {
+  return hash ? `${url}#${hash}` : url
+}
+
+/**
+ * Appends a serialized query string to the URL if the query object is not empty.
+ * Original: $$y10
+ */
+export function appendQueryToUrl(url: string, query: Record<string, string>): string {
+  return Object.keys(query).length > 0
+    ? `${url}?${serializeQuery(query)}`
+    : url
+}
+
+/**
+ * Sets the 'p' property to 'f' if the session local ID is valid and type is CANVAS or DOCUMENT.
+ * Original: $$b0
+ */
+export function setPageTypeIfCanvasOrDocument(
+  target: { p?: string },
+  sessionId: string | undefined,
+): void {
+  if (
+    sessionId
+    && isValidSessionLocalID(parseSessionLocalID(sessionId))
+  ) {
+    try {
+      const type = getSingletonSceneGraph().get(sessionId)?.type
+      if (type && ['CANVAS', 'DOCUMENT'].includes(type)) {
+        target.p = 'f'
+      }
+    }
+    catch (err) {
+      if (!(err instanceof SceneGraphUnavailableError)) {
+        throw err
+      }
+    }
+  }
+}
+
+/**
+ * Maps PanelType enum to string representation.
+ * Original: $$v1
+ */
+export function panelTypeToString(panelType: PanelType): string | null {
+  switch (panelType) {
     case PanelType.CODE:
-      return "code";
+      return 'code'
     case PanelType.DAKOTA:
-      return "cms";
+      return 'cms'
     case PanelType.SETTINGS:
-      return "settings";
+      return 'settings'
     case PanelType.FILE:
-      return null;
+      return null
+    default:
+      return null
   }
 }
-export function $$I5(e) {
-  return "code" === e && (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) ? PanelType.CODE : "cms" === e && getFeatureFlags().dakota ? PanelType.DAKOTA : "settings" === e ? PanelType.SETTINGS : PanelType.FILE;
+
+/**
+ * Maps string to PanelType enum, considering feature flags.
+ * Original: $$I5
+ */
+export function stringToPanelType(panel: string): PanelType {
+  if (
+    panel === 'code'
+    && (getFeatureFlags().sts_code_authoring
+      || getFeatureFlags().sts_code_authoring_by_plan)
+  ) {
+    return PanelType.CODE
+  }
+  if (panel === 'cms' && getFeatureFlags().dakota) {
+    return PanelType.DAKOTA
+  }
+  if (panel === 'settings') {
+    return PanelType.SETTINGS
+  }
+  return PanelType.FILE
 }
-export const H_ = $$b0;
-export const Hz = $$v1;
-export const Wi = $$_2;
-export const ZH = $$g3;
-export const d8 = $$p4;
-export const eE = $$I5;
-export const gR = $$f6;
-export const oU = $$h7;
-export const qi = $$m8;
-export const qr = $$A9;
-export const sR = $$y10;
+
+// Exported aliases for refactored functions
+export const H_ = setPageTypeIfCanvasOrDocument
+export const Hz = panelTypeToString
+export const Wi = addVersionIdToQuery
+export const ZH = buildResourcePath
+export const d8 = parseCommentPreferencesOrThreadId
+export const eE = stringToPanelType
+export const gR = addSessionLocalIdToQuery
+export const oU = getTestPath
+export const qi = extractQueryParams
+export const qr = appendHashToUrl
+export const sR = appendQueryToUrl

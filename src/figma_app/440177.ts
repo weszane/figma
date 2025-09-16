@@ -20,7 +20,7 @@ import { uQ, Wf, T4, Vr, jY } from "../figma_app/151869";
 import { Af, DP, aj, x5, ZN } from "../figma_app/803932";
 import N from "classnames";
 import { LN } from "../figma_app/975811";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku } from "../figma_app/740163";
 import { G as _$$G } from "../figma_app/194673";
 import { vG } from "../905/210945";
@@ -155,7 +155,7 @@ function H({
 }
 function z(e) {
   let t = useRef(null);
-  let r = m0();
+  let r = isDevHandoffEditorType();
   let a = sD(getI18nString("inspect_panel.effects.size"));
   let s = sD(getI18nString("inspect_panel.effects.density"));
   let l = sD(getI18nString("inspect_panel.effects.opacity"));

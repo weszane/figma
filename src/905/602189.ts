@@ -4,8 +4,8 @@ import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
 import { O6, bL } from "../905/598775";
 import { N as _$$N } from "../905/438674";
-import { $y } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInsetModal } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { D as _$$D } from "../905/198083";
 import p from "classnames";
 import { analyticsEventManager } from "../905/449184";
@@ -398,9 +398,9 @@ function z({
   return jsx("div", {
     className: "xpgiz1h xh8yej3",
     "data-testid": "downgrade-context-banner",
-    children: jsx($y, {
+    children: jsx(BannerInsetModal, {
       variant: "brand",
-      children: jsx(Q, {
+      children: jsx(BannerMessage, {
         children: u
       })
     })

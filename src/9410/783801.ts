@@ -14,7 +14,7 @@ import { getI18nString } from "../905/303541";
 import { NotificationType } from "../905/170564";
 import { notificationActions } from "../905/463586";
 import { hx } from "../905/292918";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { handleModalError, isDefaultFileAlt, handleError, isBranchAlt } from "../905/760074";
 import { RepoFiles, MergeStatusRepoFiles } from "../figma_app/43951";
 import { SourceDirection, CPPEventType } from "../905/535806";
@@ -44,7 +44,7 @@ function S(e) {
   return Number.isNaN(t) ? (handleModalError(Error("Invalid checkpoint id found in repo data")), null) : t;
 }
 function j(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let {
     openFile,
     modalShown,

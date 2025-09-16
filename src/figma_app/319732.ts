@@ -11,7 +11,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { sx as _$$sx } from "../905/941192";
 import { RK } from "../figma_app/815170";
 import { Dm, Uu } from "../figma_app/8833";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { PluginModalTypeEnum } from "../figma_app/671547";
 import { fullscreenValue } from "../figma_app/455680";
 import { isFigmaDomain } from "../905/691205";
@@ -362,7 +362,7 @@ export function $$U1(e) {
   } = e;
   let r = useSelector(e => e.hyperlinkPopup);
   let s = useSelector(e => e.mirror.appModel.isReadOnly);
-  let l = lg();
+  let l = getCurrentFileType();
   let d = useCallback(() => {
     r && Fullscreen.showHyperlinkEditor(r.position.x, r.position.y + r.size.y / 2, r.guid);
   }, [r]);

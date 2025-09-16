@@ -18,7 +18,7 @@ import { DA, $$ as _$$$$, Qw, RO, X9, Q1, SO, Zy, zS, UJ, qT, Lh } from "../905/
 import { KindEnum } from "../905/129884";
 import { cn } from "../figma_app/141320";
 import { a as _$$a } from "../905/925868";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { trackContextViewed } from "../figma_app/314264";
 import { In } from "../905/672640";
 import { lk } from "../figma_app/109538";
@@ -493,7 +493,7 @@ export function $$em0({
     isProCurrent: i,
     subscriptionPlan: n
   }) {
-    let s = m0();
+    let s = isDevHandoffEditorType();
     let o = useSelector(e => !!e.user && cn(e.user));
     let l = useSelector(e => e.payment);
     return useMemo(() => F({

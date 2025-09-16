@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { useModalManager } from "../905/437088";
-import { Cs } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/438674";
 import { oq, vo, Y9, nB, wi, jk } from "../figma_app/272243";
 import { Button } from "../905/521428";
@@ -734,10 +734,10 @@ export let $$eK0 = registerModal(function (e) {
                 }) : jsxs(Fragment, {
                   children: [resourceConnection && jsx("div", {
                     className: KN,
-                    children: jsx(Cs, {
+                    children: jsx(BannerFullWidth, {
                       variant: "brand",
                       icon: jsx(_$$L, {}),
-                      children: jsx(_$$Q, {
+                      children: jsx(BannerMessage, {
                         children: renderI18nText("folder_permissions_modal.this_is_a_connected_project_banner", {
                           hostPlanName: jsx("span", {
                             className: _$$s.fontSemiBold.$,

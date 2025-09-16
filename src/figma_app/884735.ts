@@ -18,7 +18,7 @@ import { a as _$$a } from "../905/632329";
 import { n as _$$n } from "../905/734251";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { n0 } from "../figma_app/389091";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { o3, nt } from "../905/226610";
 import { Sh } from "../figma_app/889655";
@@ -68,7 +68,7 @@ export function $$H0(e) {
   });
   let V = useDispatch();
   let H = useCallback(e => {
-    containingProductComponentGUID && def && V(j7({
+    containingProductComponentGUID && def && V(showDropdownThunk({
       type: G,
       data: {
         position: {
@@ -82,7 +82,7 @@ export function $$H0(e) {
   let X = sD.concat("-", nodeField);
   let q = useRef(null);
   let J = useHandleMouseEvent(`propPill.${nodeField}`, "click", () => {
-    !selectionHasInstanceSublayer && def && q.current && (q.current && (nodeField === RR.TEXT || nodeField === RR.VISIBLE) ? _?.showBindingUI(q.current) : V(j7({
+    !selectionHasInstanceSublayer && def && q.current && (q.current && (nodeField === RR.TEXT || nodeField === RR.VISIBLE) ? _?.showBindingUI(q.current) : V(showDropdownThunk({
       type: X,
       data: {
         nodeField,

@@ -11,7 +11,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atom, atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { AssetAtomMap } from "../figma_app/31188";
 import { R9 } from "../905/977824";
 import { f9 } from "../figma_app/722362";
@@ -22,7 +22,7 @@ import { getObservableOrFallback, subscribeObservable } from "../figma_app/84367
 import { Fk } from "../figma_app/167249";
 import { PrimaryWorkflowEnum } from "../905/497152";
 import { sM, pS } from "../figma_app/346422";
-import { s0 } from "../figma_app/115923";
+import { sitesViewSetterAtomFamily } from "../figma_app/115923";
 import { jT as _$$jT, K8 } from "../figma_app/108909";
 import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { YD, Vo, KL, TJ } from "../figma_app/690664";
@@ -174,7 +174,7 @@ export function $$X20(e) {
   return (i ? t.get(i) : null) ?? t.get(e ?? "");
 }
 export function $$q3() {
-  let [e, t] = useAtomValueAndSetter(s0);
+  let [e, t] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
   return useCallback(e => {
     e && (t(PanelType.FILE), UM(), permissionScopeHandler.user("sites-add-code-instance-to-canvas", () => {
       Fullscreen.startInsertingCodeComponentOnCanvas(e.guid);
@@ -202,11 +202,11 @@ function ee(e) {
     ...debugState.getState().selectedView,
     codeNodeId: e
   };
-  debugState.dispatch(sf(t));
+  debugState.dispatch(selectViewAction(t));
 }
 export function $$et10() {
   let e = useIsSelectedFigmakeFullscreen();
-  let t = useAtomWithSubscription(s0);
+  let t = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let r = useRef(!0);
   let i = useRef(!1);
   let [a, s] = useState(null);
@@ -273,7 +273,7 @@ export function $$en5(e) {
 }
 export function $$ei11(e, t) {
   let r = getSingletonSceneGraph();
-  let i = useAtomWithSubscription(s0);
+  let i = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let a = $$en5(e);
   let s = function (e) {
     let t = $$G4($$en5(e));

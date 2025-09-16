@@ -8,7 +8,7 @@ import { generateUUIDv4 } from "../905/871474";
 import { getI18nString } from "../905/303541";
 import { notificationActions } from "../905/851662";
 import { NotificationType } from "../905/170564";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { FDeviceType } from "../figma_app/191312";
 import { LatestClipboardData } from "../figma_app/43951";
 import { trackFileEvent } from "../figma_app/314264";
@@ -19,7 +19,7 @@ export function $$E0(e, t) {
 export function $$y1() {
   let e = useDispatch();
   let t = useRef("");
-  let r = "whiteboard" === lg();
+  let r = "whiteboard" === getCurrentFileType();
   let a = aq();
   let E = isIpadDevice ? FDeviceType.DESKTOP : FDeviceType.IPAD;
   let y = useSubscription(LatestClipboardData, {

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { PanelType } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { s0 } from "../figma_app/115923";
+import { sitesViewSetterAtomFamily } from "../figma_app/115923";
 import { cI, Qe, Xq } from "../figma_app/114522";
 export function $$l2(e) {
   return useMemo(() => e ? {
@@ -11,7 +11,7 @@ export function $$l2(e) {
   } : null, [e]);
 }
 export function $$d0() {
-  let e = useAtomWithSubscription(s0);
+  let e = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let t = useAtomWithSubscription(cI);
   let r = useAtomWithSubscription(Qe);
   return e === PanelType.CODE ? r : t;

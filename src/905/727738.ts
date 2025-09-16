@@ -20,7 +20,7 @@ import { getDisplayNameAlt } from '../905/760074';
 import { WB } from '../905/761735';
 import { handleOptimistTransaction } from '../905/842794';
 import { XHR } from '../905/910117';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { t as _$$t2 } from '../figma_app/32680';
 import { ConfigGroups, isReduxDeprecationCutover } from '../figma_app/121751';
 import { FResourceCategoryType } from '../figma_app/191312';
@@ -83,7 +83,7 @@ let v = createOptimistThunk(async (e, {
     data: {
       fileSeenState: t,
       onConfirmRemove: () => {
-        user && t.user_id === user.id ? e.dispatch(sf({
+        user && t.user_id === user.id ? e.dispatch(selectViewAction({
           view: 'recentsAndSharing'
         })) : modalShown && e.dispatch(showModalHandler(modalShown));
         e.dispatch(b({
@@ -368,7 +368,7 @@ function Y(e, t) {
     data: {
       roleToRemove: t,
       onConfirmRemove: () => {
-        user && t.user_id === user.id ? e.dispatch(sf({
+        user && t.user_id === user.id ? e.dispatch(selectViewAction({
           view: 'recentsAndSharing'
         })) : modalShown && e.dispatch(showModalHandler(modalShown));
         e.dispatch(G({

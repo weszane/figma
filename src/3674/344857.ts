@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { HandoffBindingsCpp, DesignGraphElements, ColorFormatEnum, LayoutTabType, IAssertResource, SceneGraphHelpers, Fullscreen, FileSourceType, Thumbnail, ComponentPropType, VariableDataType, OperationType, AppStateTsApi, LayoutSizingMode, BuildStatus, UIVisibilitySetting, NodePropertyCategory, Fonts, FitMode, DesignWorkspace, ViewType } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomValueAndSetter, useAtomWithSubscription, atom, atomStoreManager, Xr, AY, createLocalStorageAtom } from "../figma_app/27355";
-import { D as _$$D } from "../905/882262";
+import { useHasParentOrgId } from "../905/882262";
 import { si as _$$si, wS, g$, iX as _$$iX, Bv, x9 } from "../figma_app/221240";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { tH as _$$tH, H4 } from "../905/751457";
@@ -80,7 +80,7 @@ import { v4, QN, AC, Pt } from "../figma_app/655139";
 import { fk, B7, Qm, g6, vI, $R, yP, p2 as _$$p2, cZ as _$$cZ, Vx } from "../figma_app/883490";
 import { gP, Ck, $L, W7, F9, yV, jt, lK as _$$lK, u9 as _$$u2, Fr, EN, Tk, Qz, tr as _$$tr, B5 } from "../figma_app/655717";
 import { $h, sQ as _$$sQ } from "../905/191741";
-import { QO, Em, RH, wQ, Bs, gc, ie as _$$ie, fb, qM, $Q } from "../figma_app/120227";
+import { applyScaleToValue, isCodegenSupportedForLanguage, getMeasurementUnit, getLanguageUnitLabel, useUpdateCodeExtensionPreferences, getCodeExtensionPreferences, getUnitForLanguage, getScaleFactor, getScaledValueWithUnit, useScaleFactorCallback } from "../figma_app/120227";
 import { KindEnum } from "../905/129884";
 import { Cj, jY, Tv as _$$Tv } from "../figma_app/151869";
 import { VZ } from "../figma_app/727192";
@@ -143,7 +143,7 @@ import { X_ } from "../figma_app/78725";
 import { notificationAPI } from "../905/894881";
 import { p as _$$p4 } from "../figma_app/353099";
 import { uh as _$$uh } from "../figma_app/370763";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { E as _$$E3 } from "../905/453826";
 import { e as _$$e3 } from "../905/621515";
 import { mp } from "../figma_app/579169";
@@ -168,8 +168,8 @@ import { q as _$$q2 } from "../905/932270";
 import { A as _$$A5 } from "../905/251970";
 import { trackFileEventWithUser, trackFileEventWithStore, trackDefinedFileEventWithStore } from "../figma_app/901889";
 import { userFlagAtomFamily, userFlagExistsAtomFamily } from "../figma_app/545877";
-import { xb } from "../figma_app/910914";
-import { VR } from "../figma_app/545541";
+import { DEV_HAND } from "../figma_app/910914";
+import { setupUserPluginPreferences } from "../figma_app/545541";
 import { b as _$$b3 } from "../905/22449";
 import { c as _$$c3 } from "../905/34525";
 import { N as _$$N2 } from "../905/438674";
@@ -192,7 +192,7 @@ import { A as _$$A8 } from "../svg/145768";
 import { A as _$$A9 } from "../svg/117783";
 import { A as _$$A0 } from "../svg/8369";
 import { useDebouncedCallback } from "use-debounce";
-import { oB as _$$oB, j7, sf as _$$sf } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
 import { RK } from "../figma_app/815170";
 import { Um } from "../905/848862";
 import { j as _$$j } from "../905/834956";
@@ -213,7 +213,7 @@ import { yh } from "../9410/974031";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Bf } from "../figma_app/249941";
 import { g as _$$g } from "../9410/28544";
-import { M as _$$M3, Y as _$$Y } from "../figma_app/80938";
+import { hasSingleSceneGraphSelection, INSPECT_PANEL } from "../figma_app/80938";
 import { o as _$$o } from "../9410/925362";
 import { i as _$$i2, s as _$$s4 } from "../figma_app/553327";
 import { isNotNullish } from "../figma_app/95419";
@@ -289,7 +289,7 @@ import { z4 as _$$z3 } from "../figma_app/95266";
 import { rL as _$$rL, lz as _$$lz, XI, qn, gY, xT as _$$xT } from "../figma_app/212767";
 import { J as _$$J7 } from "../905/273120";
 import { isPublishedLibraryWithAssets, isCommunityLibrary } from "../figma_app/633080";
-import { LS, $A } from "../905/782918";
+import { isSingleSceneGraphSelectionInDevHandoff, isFullscreenDevHandoffView } from "../905/782918";
 import { $ as _$$$4 } from "../905/330495";
 import { fI, nV as _$$nV } from "../figma_app/626177";
 import { X as _$$X3 } from "../905/606795";
@@ -346,8 +346,8 @@ import { d as _$$d9 } from "../905/480825";
 import { iA as _$$iA } from "../3674/705006";
 import { i as _$$i3 } from "../905/718764";
 import { s4 as _$$s6 } from "../figma_app/276332";
-import { cV as _$$cV } from "../figma_app/59509";
-import { Q as _$$Q2 } from "../905/363675";
+import { BannerInline } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N as _$$N3 } from "../905/572042";
 import ds from "../vendor/805353";
 import dd from "../vendor/961736";
@@ -364,7 +364,7 @@ import { WZ } from "../905/893645";
 import { Y6 } from "../figma_app/91703";
 import { wg } from "../figma_app/101956";
 import { _6 } from "../figma_app/386952";
-import { Eg, V_, Nb } from "../figma_app/841351";
+import { exitVersionHistoryMode, CURRENT_VERSION_ID, setActiveVersion } from "../figma_app/841351";
 import { lF as _$$lF } from "../figma_app/915202";
 import { jP, YL, s3 as _$$s8, yU } from "../figma_app/221114";
 import { S as _$$S3 } from "../905/262176";
@@ -376,7 +376,7 @@ import { Yo } from "../figma_app/543529";
 import { FEditorType } from "../figma_app/53721";
 import { Q as _$$Q3 } from "../1528/190444";
 import { L as _$$L3 } from "../469e6e40/302359";
-import { Nh, b6, xX, vl as _$$vl, E6 } from "../905/560959";
+import { InspectState, VariableDetailModalWidth, ModalMaxHeight, StyleDetailModal, ModalWindowType } from "../905/560959";
 import { g as _$$g3 } from "../905/246147";
 import { useFullscreenReady } from "../905/924253";
 import { e0 as _$$e5 } from "../905/696396";
@@ -481,7 +481,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { hn as _$$hn, xX as _$$xX } from "../figma_app/401061";
 import { p as _$$p6 } from "../9410/692889";
 import { QV } from "../9410/608002";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { M as _$$M6 } from "../figma_app/339170";
 import { P as _$$P3 } from "../3271/828600";
 import { E as _$$E9 } from "../905/277716";
@@ -1331,7 +1331,7 @@ function ty({
 }) {
   let t = Fr(e);
   let n = v4();
-  let o = QO(n, t);
+  let o = applyScaleToValue(n, t);
   let l = useMemo(() => {
     switch (e) {
       case Ck.TOP_LEFT:
@@ -1502,7 +1502,7 @@ function tk() {
 }
 function tA(e) {
   let t = v4();
-  let n = QO(t, e, B5);
+  let n = applyScaleToValue(t, e, B5);
   return void 0 === e ? "-" : n;
 }
 function tI(e) {
@@ -2797,7 +2797,7 @@ function n$(e) {
 }
 function a_() {
   let e = useAtomWithSubscription(mp);
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let n = _$$aV();
   let {
     uniqueId,
@@ -3071,14 +3071,14 @@ let ib = new KD({
 });
 function ij() {
   let e = v4();
-  let t = Em();
-  let n = RH();
-  let o = wQ();
-  let l = Bs();
+  let t = isCodegenSupportedForLanguage();
+  let n = getMeasurementUnit();
+  let o = getLanguageUnitLabel();
+  let l = useUpdateCodeExtensionPreferences();
   let s = useCallback(t => l(e, null, {
     unit: t
   }), [e, l]);
-  let r = gc(e.id);
+  let r = getCodeExtensionPreferences(e.id);
   let d = useCallback(t => {
     t && l(e, null, {
       scaleFactor: t
@@ -3323,7 +3323,7 @@ function iT({
     pinnedPlugins,
     pinPlugin,
     unpinPlugin
-  } = VR();
+  } = setupUserPluginPreferences();
   let l = e.id;
   let s = useMemo(() => !!pinnedPlugins.find(e => e.plugin_id === l), [pinnedPlugins, l]);
   let [r, d] = useState(s);
@@ -3431,7 +3431,7 @@ function iM({}) {
       children: jsx(Button, {
         variant: "primary",
         onClick: () => {
-          s ? e(_$$oB()) : e(j7({
+          s ? e(hideDropdownAction()) : e(showDropdownThunk({
             type: t
           }));
         },
@@ -4527,7 +4527,7 @@ function iq() {
 let iY = () => {
   let {
     pinnedPlugins
-  } = VR();
+  } = setupUserPluginPreferences();
   return pinnedPlugins.length > 0;
 };
 function iZ({
@@ -4544,7 +4544,7 @@ function iZ({
       [aL]: !0
     }));
     r && s(postUserFlag({
-      [xb]: !0
+      [DEV_HAND]: !0
     }));
   }, [s, r, e]);
   let u = useCallback(() => {
@@ -5106,7 +5106,7 @@ function o8({
         pluginId: k.plugin.plugin_id
       });
       c(postUserFlag({
-        [xb]: !0
+        [DEV_HAND]: !0
       }));
       return;
     }
@@ -6306,7 +6306,7 @@ function sy({
   let h = useSelector(e => e.mirror.appModel.currentPage);
   let f = u.get(p ?? h);
   let g = wS();
-  let x = LS();
+  let x = isSingleSceneGraphSelectionInDevHandoff();
   let m = function () {
     let e = oA();
     let t = selectCurrentFile();
@@ -7379,7 +7379,7 @@ function rf({
       clientX,
       clientY
     } = e;
-    d(j7({
+    d(showDropdownThunk({
       type: _$$i,
       data: {
         clientX,
@@ -7552,7 +7552,7 @@ function rN(e) {
       clientX,
       clientY
     } = e;
-    x && b(j7({
+    x && b(showDropdownThunk({
       type: _$$i,
       data: {
         clientX,
@@ -7601,7 +7601,7 @@ let rk = memo(function (e) {
   let [c, u] = useState(!1);
   let p = function (e) {
     _$$uQ();
-    let t = selectWithShallowEqual(e => !_$$M3(e));
+    let t = selectWithShallowEqual(e => !hasSingleSceneGraphSelection(e));
     return n => updateHoveredNode(n && t ? e : "");
   }(guid);
   let h = useAtomWithSubscription(_$$d7);
@@ -7653,7 +7653,7 @@ let rk = memo(function (e) {
       clientX,
       clientY
     } = e;
-    S(j7({
+    S(showDropdownThunk({
       type: _$$i,
       data: {
         clientX,
@@ -8534,8 +8534,8 @@ function dw({
     })
   }) : jsx("div", {
     className: dv,
-    children: jsx(_$$cV, {
-      children: jsx(_$$Q2, {
+    children: jsx(BannerInline, {
+      children: jsx(BannerMessage, {
         children: renderI18nText("fullscreen.properties_panel.this_file_s_editor_has_disabled_exporting_copying_and_sharing.seat_rename")
       })
     })
@@ -8553,8 +8553,8 @@ function dN({
   padded: u,
   dataTestId: p
 }) {
-  let h = _$$ie();
-  let f = fb();
+  let h = getUnitForLanguage();
+  let f = getScaleFactor();
   let g = useSelector(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
   let x = trackFileEventWithStore();
   let [m, _] = useState(!1);
@@ -8568,7 +8568,7 @@ function dN({
       scaleFactor: f
     });
   }, [e.id, e.type, f, x, h]);
-  let b = gc() || {};
+  let b = getCodeExtensionPreferences() || {};
   let j = QN();
   let w = "first-party" === e.type;
   let {
@@ -8637,8 +8637,8 @@ function dN({
   let D = jsx("div", {
     className: dv,
     "data-testid": "dev-handoff-code-update-prompt",
-    children: jsxs(_$$cV, {
-      children: [jsx(_$$Q2, {
+    children: jsxs(BannerInline, {
+      children: [jsx(BannerMessage, {
         title: renderI18nText("dev_handoff.code.update_prompt_title"),
         children: renderI18nText("dev_handoff.code.update_prompt")
       }), jsx(Button, {
@@ -8651,8 +8651,8 @@ function dN({
   return !L && hasRun && error ? j ? jsx("div", {
     className: dv,
     "data-testid": "codegen-error-message",
-    children: jsxs(_$$cV, {
-      children: [jsx(_$$Q2, {
+    children: jsxs(BannerInline, {
+      children: [jsx(BannerMessage, {
         title: renderI18nText("inspect_panel.code.error", {
           plugin: j.name ?? getI18nString("inspect_panel.code.error_this_plugin")
         }),
@@ -8913,11 +8913,11 @@ function d3({
 function d4() {
   let e = useDispatch();
   return () => {
-    e(Eg());
+    e(exitVersionHistoryMode());
   };
 }
 function d7() {
-  return useSelector(e => e.versionHistory.activeId === V_);
+  return useSelector(e => e.versionHistory.activeId === CURRENT_VERSION_ID);
 }
 function d8(e, t) {
   return e.metadata?.status !== FBuildStatusType.NONE ? n => jsx(d3, {
@@ -8929,7 +8929,7 @@ function d8(e, t) {
 function d6() {
   let e = useDispatch();
   return t => {
-    e(Eg());
+    e(exitVersionHistoryMode());
     HandoffBindingsCpp.focusOnNode(t, !1);
   };
 }
@@ -8987,7 +8987,7 @@ function d9({
     } : void 0,
     onSelect: s ? void 0 : r,
     userUrl: null,
-    versionId: V_,
+    versionId: CURRENT_VERSION_ID,
     view: null
   });
 }
@@ -9087,7 +9087,7 @@ function ca({
         c("Dev Mode Activity Load Version", {
           entrypoint: o
         });
-        s(_$$sf({
+        s(selectViewAction({
           ...r,
           versionId: t
         }));
@@ -9096,7 +9096,7 @@ function ca({
           type: _$$lF.SPINNER
         }));
         requestAnimationFrame(() => {
-          s(Nb({
+          s(setActiveVersion({
             id: t,
             nodeId: a ?? void 0,
             eventType: "LOAD_NEW_VERSION",
@@ -9238,7 +9238,7 @@ let cu = memo(function (e) {
 });
 function cf() {
   let e = _$$g3({
-    entryPoint: Nh.InspectNoSelection
+    entryPoint: InspectState.InspectNoSelection
   });
   let t = Rb().length;
   let n = generateRecordingKey("fullVarsTable", "panelEntry");
@@ -10688,10 +10688,10 @@ function uW({
   numberOfFonts: i,
   localCodeLanguage: o
 }) {
-  let l = qM(o, e.lineHeightInPx, uK, {
+  let l = getScaledValueWithUnit(o, e.lineHeightInPx, uK, {
     isTextProperty: !0
   });
-  let s = qM(o, e.fontSizeInPx, uK, {
+  let s = getScaledValueWithUnit(o, e.fontSizeInPx, uK, {
     isTextProperty: !0
   });
   let r = e.textStyleNodeId || f$(n);
@@ -11119,12 +11119,12 @@ function pu() {
   let n = useDispatch();
   return e || t ? null : jsx("div", {
     className: pt,
-    children: jsx(_$$cV, {
+    children: jsx(BannerInline, {
       variant: "default",
       onDismiss: () => n(postUserFlag({
         dev_mode_mcp_has_dismissed_client_setup_banner: !0
       })),
-      children: jsx(_$$Q2, {
+      children: jsx(BannerMessage, {
         title: getI18nString("dev_handoff.mcp.find_instructions_title"),
         children: jsx("span", {
           className: pa,
@@ -11328,7 +11328,7 @@ function pb() {
 }
 function pj(e) {
   let t = useFullscreenReady();
-  let n = LS();
+  let n = isSingleSceneGraphSelectionInDevHandoff();
   let o = _$$ro();
   let l = _$$uQ();
   let d = Fk((e, t) => e?.get(t ?? "")?.type === "SECTION", l);
@@ -11359,7 +11359,7 @@ function pj(e) {
           onContextMenu: _$$lQ,
           scrollingDisabled: !!p,
           enableOverscroll: !0,
-          containerId: _$$Y,
+          containerId: INSPECT_PANEL,
           children: jsx(TrackingProvider, {
             name: _$$e5.CODE_PANEL,
             children: jsx(_$$i3, {
@@ -11499,7 +11499,7 @@ function pA({
         isActive: t,
         onSelect: () => {
           d ? c(d) : (r(VERSION_HISTORY_SET_ACTIVE({
-            id: V_
+            id: CURRENT_VERSION_ID
           })), pN());
         },
         focusNodeId: d
@@ -11557,7 +11557,7 @@ let pL = memo(function () {
     }
     setSelectedDevModePropertiesPanelTab(t);
     e === r5[IAssertResource.PLUGIN] && d(postUserFlag({
-      [xb]: !0
+      [DEV_HAND]: !0
     }));
   }, {
     recordingKey: "devHandoffPanelTabs"
@@ -11690,7 +11690,7 @@ function pV({
       className: "dev_handoff_breadcrumbs--pathElementSelected--w9aeS dev_handoff_breadcrumbs--pathElement--AKgt0",
       onClick: function () {
         l();
-        d || t(j7({
+        d || t(showDropdownThunk({
           type: pO,
           data: {
             hasOwnEscKeyHandler: !1
@@ -11753,7 +11753,7 @@ function pW({
       className: "dev_handoff_breadcrumbs--pathElementCollapsed--uY2eU dev_handoff_breadcrumbs--pathElement--AKgt0",
       onClick: function () {
         l();
-        r || t(j7({
+        r || t(showDropdownThunk({
           type: pM,
           data: {
             hasOwnEscKeyHandler: !1
@@ -12005,8 +12005,8 @@ function hc({
       resourceType: styleType
     },
     children: jsx(_$$bL4, {
-      width: b6,
-      maxHeight: xX + 120,
+      width: VariableDetailModalWidth,
+      maxHeight: ModalMaxHeight + 120,
       onClose: d,
       defaultPosition: position,
       recordingKey: "style_details_modal",
@@ -12018,7 +12018,7 @@ function hc({
         }), jsx(_$$nB, {
           padding: 0,
           style: {
-            width: b6
+            width: VariableDetailModalWidth
           },
           children: jsx(hu, {
             styleId,
@@ -12280,10 +12280,10 @@ function h_({
 }
 registerModal(function () {
   let e = useSelector(e => e.modalShown);
-  return e && e.type === _$$vl && e.data.styleNodeId ? jsx(hc, {
+  return e && e.type === StyleDetailModal && e.data.styleNodeId ? jsx(hc, {
     ...e
   }) : null;
-}, _$$vl);
+}, StyleDetailModal);
 let hj = "inspect_tabs--column--6BLEt";
 let hw = "inspect_tabs--settingImage--VEeXo";
 let hN = "inspect_tabs--codeContainer--G3I2n";
@@ -12314,7 +12314,7 @@ function hS() {
   let e = _6();
   let t = useDispatch();
   return useCallback(() => {
-    "fullscreen" === e.view && t(_$$sf({
+    "fullscreen" === e.view && t(selectViewAction({
       ...e,
       styleForDetailsPanel: void 0,
       variableIdForDetailsPanel: void 0
@@ -12331,7 +12331,7 @@ function hP({
     inlineCloseButton: !0,
     onClose: t,
     surface: "modal",
-    entryPoint: E6.CodeWell,
+    entryPoint: ModalWindowType.CodeWell,
     canOpenLibrary: !1
   });
 }
@@ -12526,7 +12526,7 @@ function hV({
       ref: s,
       children: jsx(_$$d3, {
         onClick: function () {
-          g ? t(_$$oB()) : t(j7({
+          g ? t(hideDropdownAction()) : t(showDropdownThunk({
             type: hC
           }));
         },
@@ -12572,7 +12572,7 @@ function hV({
 }
 function hH() {
   let e = getObservableValue(getSelectedDevModePropertiesPanelTab(), IAssertResource.PRIMARY);
-  let t = LS();
+  let t = isSingleSceneGraphSelectionInDevHandoff();
   let n = NM();
   let s = _$$ro();
   let d = useAtomWithSubscription(be);
@@ -12580,7 +12580,7 @@ function hH() {
     let t = useDispatch();
     useEffect(() => {
       let e = debugState.getState().selectedView;
-      e.variableIdForDetailsPanel && t(_$$sf({
+      e.variableIdForDetailsPanel && t(selectViewAction({
         ...e,
         variableIdForDetailsPanel: void 0
       }));
@@ -12845,8 +12845,8 @@ let fs = memo(function (e) {
         hasHug: !1
       };
     }, e, t);
-    let u = QO(void 0, pxValue);
-    let p = $Q();
+    let u = applyScaleToValue(void 0, pxValue);
+    let p = useScaleFactorCallback();
     let h = trackDefinedFileEventWithStore();
     return {
       value: u,
@@ -13007,7 +13007,7 @@ function fh() {
   let d = _$$uQ();
   let c = _$$hA();
   let u = _6();
-  let p = $A(u) ? u.focusViewBackNavigation : void 0;
+  let p = isFullscreenDevHandoffView(u) ? u.focusViewBackNavigation : void 0;
   let h = TP(p?.toEditorType);
   let f = _$$U("focus_view_show_on_page");
   let g = TQ(p?.toEditorType);
@@ -13016,7 +13016,7 @@ function fh() {
     recordingKey: "dev_handoff.focus.show_on_page",
     callback: function () {
       "editorType" in h && h.editorType === FEditorType.Design && f("design");
-      t.activeId && t.activeId !== V_ && e(Eg());
+      t.activeId && t.activeId !== CURRENT_VERSION_ID && e(exitVersionHistoryMode());
       g("Dev Mode Focus View Go To Canvas Clicked", c);
     }
   }, {
@@ -13080,14 +13080,14 @@ function ff() {
   let [, y] = useAtomValueAndSetter(_o);
   let [b] = useAtomValueAndSetter(wz);
   let j = useCanUseDevModeDemoFile();
-  let N = useSelector(e => $A(e.selectedView) ? {
+  let N = useSelector(e => isFullscreenDevHandoffView(e.selectedView) ? {
     ...e.selectedView,
     editorType: e.selectedView.focusViewBackNavigation?.toEditorType ?? e.selectedView.editorType,
     showOverview: e.selectedView.focusViewBackNavigation?.toOverview ?? !0,
     focusViewBackNavigation: void 0,
     devModeFocusId: void 0
   } : e.selectedView);
-  let k = useSelector(e => Np(e, N));
+  let k = useSelector(e => selectedViewToPath(e, N));
   let I = N.showOverview ? getI18nString("dev_handoff.workflows.focus_view.back_to_rfd_tooltip") : getI18nString("dev_handoff.workflows.focus_view.back_to_page_tooltip");
   if (_$$h(() => {
     n && HandoffBindingsCpp.focusOnNode(n, !1);
@@ -13101,7 +13101,7 @@ function ff() {
       forwardToDatadog: !0
     });
   }), !n) return null;
-  let C = p.activeId && p.activeId !== V_;
+  let C = p.activeId && p.activeId !== CURRENT_VERSION_ID;
   return jsxs("div", {
     className: ek()("focus_canvas_ui--container--YwKdJ", fc),
     style: isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev ? {
@@ -13127,8 +13127,8 @@ function ff() {
             t.preventDefault();
             let n = "editorType" in N && N.editorType === FEditorType.Design;
             !("showOverview" in N && N.showOverview) && n && x("design");
-            e(_$$sf(N));
-            p.activeId && p.activeId !== V_ && e(Eg());
+            e(selectViewAction(N));
+            p.activeId && p.activeId !== CURRENT_VERSION_ID && e(exitVersionHistoryMode());
             let a = "unknown";
             "fullscreen" === N.view && (a = N.showOverview ? "overview" : N.editorType === FEditorType.Design ? "design_canvas" : "dev_mode_canvas");
             y("focus_close_clicked");
@@ -13262,7 +13262,7 @@ let f_ = memo(function () {
   }, []);
   _$$W4(1700);
   !function () {
-    let e = _$$D();
+    let e = useHasParentOrgId();
     let t = _$$f2("dev_mode_notified_of_approved_org_request");
     let n = useDispatch();
     useEffect(() => {

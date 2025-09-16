@@ -21,7 +21,7 @@ import { P as _$$P } from "../vendor/348225";
 import { P as _$$P2 } from "../905/347284";
 import { TextWithTruncation } from "../905/984674";
 import { SidebarRow } from "../451de8f0/94979";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { a9 } from "../figma_app/741211";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { useSubscription } from "../figma_app/288654";
@@ -225,7 +225,7 @@ function ef(e) {
     onClick: () => {
       if (e.isOrgAdmin) {
         let e = DashboardSection.DASHBOARD;
-        t(sf({
+        t(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: e
         }));
@@ -233,7 +233,7 @@ function ef(e) {
           clickedResourceType: "orgAdminSettings"
         }));
       } else {
-        t(sf({
+        t(selectViewAction({
           view: "billingGroupDashboard",
           selectedTab: FRequestsStr.REQUESTS
         }));
@@ -305,7 +305,7 @@ function ey(e) {
   let c = _6();
   let _ = "workspace" !== c.view && "licenseGroup" !== c.view && c.view === e.selectViewArgs.view && ("orgAdminSettings" === c.view && "orgAdminSettings" === e.selectViewArgs.view ? c.orgAdminSettingsViewTab === e.selectViewArgs.orgAdminSettingsViewTab : "teamAdminConsole" === c.view && "teamAdminConsole" === e.selectViewArgs.view ? c.teamAdminConsoleViewTab === e.selectViewArgs.teamAdminConsoleViewTab : void 0);
   let u = useCallback(() => {
-    !_ && (preNavAction && preNavAction(), d(sf(selectViewArgs)), webEventId && handleAtomEvent({
+    !_ && (preNavAction && preNavAction(), d(selectViewAction(selectViewArgs)), webEventId && handleAtomEvent({
       id: webEventId
     }));
   }, [_, d, preNavAction, selectViewArgs, webEventId]);
@@ -333,7 +333,7 @@ function ey(e) {
 function eC() {
   let e = useDispatch();
   let t = useCallback(() => {
-    e(sf({
+    e(selectViewAction({
       view: "recentsAndSharing"
     }));
   }, [e]);
@@ -422,7 +422,7 @@ function eT(e) {
   let t = useDispatch();
   let a = _6();
   let s = useCallback(e => {
-    t(sf({
+    t(selectViewAction({
       view: "licenseGroup",
       licenseGroupId: e,
       subView: UserGroupRole.ADMIN,
@@ -455,7 +455,7 @@ function eA(e) {
   let t = useDispatch();
   let a = _6();
   let s = useCallback(e => {
-    t(sf({
+    t(selectViewAction({
       view: "workspace",
       workspaceId: e,
       subView: DUserRole.ADMIN,

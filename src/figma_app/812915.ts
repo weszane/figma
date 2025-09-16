@@ -11,7 +11,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { reportError } from "../905/11";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { eY } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
 import { _6 } from "../figma_app/386952";
@@ -68,7 +68,7 @@ export function $$C2() {
       let t = _6();
       let r = useIsSelectedFigmakeFullscreen();
       return useCallback(() => {
-        r && "fullscreen" === t.view && e(sf({
+        r && "fullscreen" === t.view && e(selectViewAction({
           ...t,
           figmakeView: AppView.FILE
         }));
@@ -96,7 +96,7 @@ export function $$R0() {
       ...e,
       figmakeView: n
     };
-    t(sf(i));
+    t(selectViewAction(i));
   };
 }
 export function $$L1() {

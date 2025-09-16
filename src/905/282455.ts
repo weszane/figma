@@ -1,7 +1,7 @@
-import { debugState } from '../905/407919'
-import { $A } from '../905/782918'
-import { PluginIframeMode } from '../905/968269'
-import { isCooperSelectedView, isValidForCooper, isValidForCooperSelectedView } from '../figma_app/300692'
+import { debugState } from '../905/407919';
+import { isFullscreenDevHandoffView } from '../905/782918';
+import { PluginIframeMode } from '../905/968269';
+import { isCooperSelectedView, isValidForCooper, isValidForCooperSelectedView } from '../figma_app/300692';
 
 /**
  * Determines the appropriate PluginIframeMode based on the input event.
@@ -35,13 +35,14 @@ export function getPluginIframeMode(event: any): PluginIframeMode {
       case 'linkpreview':
         // No specific mode for these cases, fall through to default
         break;
-      default: {
-        const selectedView = debugState.getState().selectedView;
-        if (isCooperSelectedView(selectedView)) {
-          return PluginIframeMode.BUZZ_LEFT_PANEL;
+      default:
+        {
+          const selectedView = debugState.getState().selectedView;
+          if (isCooperSelectedView(selectedView)) {
+            return PluginIframeMode.BUZZ_LEFT_PANEL;
+          }
+          return isFullscreenDevHandoffView(selectedView) ? PluginIframeMode.INSPECT : PluginIframeMode.MODAL;
         }
-        return $A(selectedView) ? PluginIframeMode.INSPECT : PluginIframeMode.MODAL;
-      }
     }
   }
 

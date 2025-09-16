@@ -5,7 +5,7 @@ import a from "classnames";
 import { BaseLinkComponent } from "../905/551536";
 import { h1 } from "../905/986103";
 import { H8, Pf } from "../905/590952";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { dG } from "../figma_app/753501";
 import { InterProfileType } from "../905/895626";
 var d = a;
@@ -38,7 +38,7 @@ export function $$h0(e) {
   let t = useDispatch();
   let n = useCallback(n => {
     n.stopPropagation();
-    e.user.id && t(sf({
+    e.user.id && t(selectViewAction({
       view: "user",
       userId: e.user.id,
       userViewTab: InterProfileType.INTERNAL_PROFILE_POSTS

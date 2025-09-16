@@ -23,7 +23,7 @@ import { d as _$$d } from "../905/14910";
 import { w as _$$w, tX } from "../figma_app/728657";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { selectWithShallowEqual } from "../905/103090";
-import { oB, ho, j7 } from "../905/929976";
+import { hideDropdownAction, updateDropdownSelectionAction, showDropdownThunk } from "../905/929976";
 import { useFullscreenReady } from "../905/924253";
 import { Um } from "../905/848862";
 import { TY, pi } from "../figma_app/357047";
@@ -48,21 +48,21 @@ function M({
   let c = useFullscreenReady();
   let u = useCallback(() => {
     e();
-    i(oB());
+    i(hideDropdownAction());
   }, [e, i]);
   useEffect(() => {
     d.current && !TY(l) && e();
   }, [e, l]);
   useEffect(() => {
     if (c && !d.current) {
-      if (TY(l)) i(ho({
+      if (TY(l)) i(updateDropdownSelectionAction({
         type: pi,
         data: {
           selectionToUpdate: SettingsAction.PREFERENCES
         }
       }));else {
         let e = s ? 42 : 0;
-        i(j7({
+        i(showDropdownThunk({
           type: pi,
           data: {
             targetRect: {

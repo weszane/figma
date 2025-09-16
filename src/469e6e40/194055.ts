@@ -59,7 +59,7 @@ import { hasExternalRestrictedOrgId } from "../figma_app/12796";
 import { mapToEditorType } from "../figma_app/300692";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { Um } from "../905/848862";
 import { UK } from "../figma_app/764679";
 import { Cf, it } from "../905/504727";
@@ -725,7 +725,7 @@ function ed({
       o(VisualBellActions.enqueue({
         message: `Copied ${t}`
       }));
-    }).catch(() => { });
+    }).catch(() => {});
   }, [o]);
   try {
     r = JSON.parse(e.metadata);
@@ -1166,12 +1166,12 @@ function eq(e) {
       dropdownIsShown: c,
       toggleSwitchEditorDropdown: (e, t) => {
         let a = e.current?.getBoundingClientRect();
-        a && ((void 0 !== t ? t : !c) ? o(j7({
+        a && ((void 0 !== t ? t : !c) ? o(showDropdownThunk({
           type: eU,
           data: {
             targetRect: a
           }
-        })) : o(oB()));
+        })) : o(hideDropdownAction()));
       },
       ExtensionAllowlistTryEditorDropdown: function ({
         manifestEditorTypes: s
@@ -1188,7 +1188,7 @@ function eq(e) {
             onClick: n => {
               n.preventDefault();
               n.stopPropagation();
-              o(oB());
+              o(hideDropdownAction());
               let i = mapToEditorType(s);
               "community" === l ? o(aI({
                 resource: _,

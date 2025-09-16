@@ -50,7 +50,7 @@ import { i4, RI, uz, We } from '../figma_app/770088';
 import { BrowserInfo } from '../figma_app/778880';
 import { generateRecordingKey, useSetupPlayback } from '../figma_app/878298';
 import { I as _$$I, q as _$$q } from '../figma_app/819288';
-import { HW, lg } from '../figma_app/976749';
+import { isPrototypeView, getCurrentFileType } from '../figma_app/976749';
 import { dN } from '../vendor/291472';
 let c = memo(e => {
   return jsx('svg', {
@@ -164,8 +164,8 @@ export function $$ed1(e) {
   let ev = !!_$$f('has_mentioned_pending_user_invite_twice');
   let eC = Xr(_$$H);
   let [ek, eE] = useState(!1);
-  let eS = lg();
-  let ew = HW();
+  let eS = getCurrentFileType();
+  let ew = isPrototypeView();
   let eR = useSelector(e => e.comments.activeDragTarget);
   let eL = _$$y();
   let eT = useAtomWithSubscription(_$$H);

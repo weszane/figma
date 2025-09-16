@@ -8,7 +8,7 @@ import { useWebLoggerTimer } from "../905/485103";
 import { EH } from "../905/985374";
 import { wu } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
-import { iq } from "../figma_app/976749";
+import { isFullscreenView } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { ProductAccessTypeMap } from "../905/513035";
 import { NT } from "../figma_app/579169";
@@ -168,7 +168,7 @@ export function $$v0(e) {
 }
 function A(e) {
   let t = DP();
-  let r = iq();
+  let r = isFullscreenView();
   let o = wu({
     licenseType: e.licenseType,
     entryPoint: e.entryPoint,

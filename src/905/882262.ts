@@ -1,14 +1,27 @@
-import { n as _$$n } from "../905/347702";
-import { useSelector } from "react-redux";
-import { selectOpenFile } from "../figma_app/516028";
-export let $$a1 = _$$n(e => {
-  let t = selectOpenFile({
-    openFile: e.openFile
-  });
-  return !!t?.parentOrgId;
-});
-export function $$s0() {
-  return useSelector($$a1);
+import { useSelector } from 'react-redux'
+
+import { selectOpenFile } from '../figma_app/516028'
+
+/**
+ * Checks if the open file has a parent organization ID.
+ * Original function name: $$a1
+ * @param state - The Redux state containing openFile.
+ * @returns True if parentOrgId exists, false otherwise.
+ */
+export function hasParentOrgId(state: { openFile: any }) {
+  const file = selectOpenFile({ openFile: state.openFile })
+  return !!file?.parentOrgId
 }
-export const D = $$s0;
-export const o = $$a1;
+
+/**
+ * Selector hook for checking if the open file has a parent organization ID.
+ * Original function name: $$s0
+ * @returns True if parentOrgId exists, false otherwise.
+ */
+export function useHasParentOrgId() {
+  return useSelector(hasParentOrgId)
+}
+
+// Exported aliases for compatibility with original exports
+export const D = useHasParentOrgId
+export const o = hasParentOrgId

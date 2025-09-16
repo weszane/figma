@@ -10,7 +10,7 @@ import { oW } from "../905/675859";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Tw } from "../figma_app/755939";
 import { yB } from "../figma_app/334505";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { DP } from "../905/640017";
@@ -40,7 +40,7 @@ export function $$N2() {
   let E = EI();
   let w = useAtomWithSubscription(LZ);
   let S = () => {
-    y?.(sf({
+    y?.(selectViewAction({
       view: "recentsAndSharing"
     }));
   };

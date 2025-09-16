@@ -12,7 +12,7 @@ import { handleAtomEvent } from "../905/502364";
 import { getI18nString } from "../905/303541";
 import { AutoLayout } from "../905/470281";
 import { TextWithTruncation } from "../905/984674";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { TrackedDiv, useTracking } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { g1 } from "../905/504727";
@@ -86,7 +86,7 @@ export function $$O1({
         onClick: r => {
           r.stopPropagation();
           i || o(t.key);
-          e(oB());
+          e(hideDropdownAction());
         },
         trackingProperties: {
           ...l,
@@ -169,7 +169,7 @@ export function $$R0({
       onClick: c ? void 0 : r => {
         r.stopPropagation();
         r.preventDefault();
-        t && t.type === l ? e(oB()) : a.length && !c && (e(j7({
+        t && t.type === l ? e(hideDropdownAction()) : a.length && !c && (e(showDropdownThunk({
           type: l,
           data: {
             ...p,

@@ -104,7 +104,7 @@ import { registerModal } from "../905/102752";
 import { A as _$$A3 } from "../svg/219958";
 import { A as _$$A4 } from "../svg/638742";
 import { FlashActions } from "../905/573154";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { cw, g_ } from "../5885/925885";
 import { nl as _$$nl } from "../905/590952";
 import { P as _$$P3 } from "../905/566881";
@@ -1695,7 +1695,7 @@ let na = registerModal(function () {
         teamType: i,
         features: Array.from(s)
       }
-    })) : (g(sf({
+    })) : (g(selectViewAction({
       view: "recentsAndSharing"
     })), g(FlashActions.error(b)));
     h();
@@ -1791,7 +1791,7 @@ function ns(e) {
   let o = jsx(BigButtonPrimaryTracked, {
     onClick: () => {
       hideModal();
-      r(sf({
+      r(selectViewAction({
         view: "team",
         teamId
       }));

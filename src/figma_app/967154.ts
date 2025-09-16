@@ -2,7 +2,7 @@ import { useMemo, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { StateHierarchy } from "../figma_app/763686";
 import { selectWithShallowEqual } from "../905/103090";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
 import { qo, cn } from "../905/959568";
@@ -73,7 +73,7 @@ export function $$T5(e) {
   let d = pickerShown?.id === Wv;
   let c = $$I2(e);
   return useCallback(e => {
-    s && t(oB());
+    s && t(hideDropdownAction());
     d ? t(XE()) : c(e, Wv, Im);
   }, [d, s, t, c]);
 }

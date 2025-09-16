@@ -5,7 +5,7 @@ import { o as _$$o } from "../c5e2cae0/371580";
 import { x as _$$x } from "../905/211326";
 import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Ay } from "../figma_app/482142";
 import { S_ } from "../5885/925885";
 import { TrackingProvider } from "../figma_app/831799";
@@ -25,7 +25,7 @@ export function $$g0(e) {
     g(Ay({
       promo: null
     }));
-    g(sf(e.selectedView.previousView || {
+    g(selectViewAction(e.selectedView.previousView || {
       view: "team",
       teamId: selectedView.teamId
     }));

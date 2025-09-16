@@ -17,12 +17,12 @@ import { tH } from "../905/751457";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Vg } from "../figma_app/147952";
 import { IN } from "../905/116101";
 import { p as _$$p } from "../469e6e40/489933";
 import { dG } from "../figma_app/753501";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Gt } from "../figma_app/248118";
 import { x as _$$x } from "../figma_app/844435";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
@@ -30,14 +30,14 @@ import { Um } from "../905/848862";
 import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
 import { be } from "../figma_app/474636";
-import { VR } from "../figma_app/545541";
+import { setupUserPluginPreferences } from "../figma_app/545541";
 import { V as _$$V } from "../905/480825";
 import { j as _$$j } from "../905/834956";
 import { Cf } from "../905/504727";
 import { s as _$$s2 } from "../figma_app/504088";
 import { yG, dr } from "../7492/487492";
 export function $$$1() {
-  let e = VR();
+  let e = setupUserPluginPreferences();
   let t = _$$x();
   return jsx($$B0, {
     ...e,
@@ -188,7 +188,7 @@ function V({
   let p = trackFileEventWithStore();
   let h = useRef(null);
   let x = useCanAccessFullDevMode();
-  let b = m0() && !x;
+  let b = isDevHandoffEditorType() && !x;
   let f = useDispatch();
   let w = Um();
   let C = _$$p(e.plugin_id, o);
@@ -196,7 +196,7 @@ function V({
   let R = yG(e.plugin_id, "pinned") && I;
   let D = useCallback(t => {
     if (I) {
-      R ? f(oB()) : f(dr({
+      R ? f(hideDropdownAction()) : f(dr({
         pluginId: e.plugin_id,
         tileType: "pinned"
       }));
@@ -222,7 +222,7 @@ function V({
   let G = useCallback(t => {
     t.stopPropagation();
     t.preventDefault();
-    B ? f(oB()) : f(j7({
+    B ? f(hideDropdownAction()) : f(showDropdownThunk({
       type: X,
       data: {
         targetRect: t.currentTarget.getBoundingClientRect(),

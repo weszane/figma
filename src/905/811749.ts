@@ -8,7 +8,7 @@ import { V as _$$V } from "../905/453937";
 import { e as _$$e } from "../905/311297";
 import { M as _$$M } from "../905/269719";
 import { useDispatch } from "react-redux";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Tf } from "../figma_app/543100";
 import { InterProfileType } from "../905/895626";
 import { az } from "../figma_app/805373";
@@ -39,7 +39,7 @@ function _(e) {
       size: 24,
       showIsMe: !1,
       onClick: () => {
-        t(sf({
+        t(selectViewAction({
           view: "user",
           userId: i.id,
           userViewTab: InterProfileType.INTERNAL_PROFILE,

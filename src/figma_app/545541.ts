@@ -11,7 +11,7 @@ import { postUserFlag } from '../905/985254'
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355'
 import { PluginPreferencesView } from '../figma_app/43951'
 import { isNotNullish } from '../figma_app/95419'
-import { Bs } from '../figma_app/120227'
+import { useUpdateCodeExtensionPreferences } from '../figma_app/120227'
 import { FOverrideType, FPluginType, FPublicationStatusType, FUnitType } from '../figma_app/191312'
 import { x as _$$x } from '../figma_app/256637'
 import { useSubscription } from '../figma_app/288654'
@@ -25,10 +25,13 @@ import { updateDevHandoffCodeLanguage } from '../figma_app/741237'
 import { MeasurementUnit } from '../figma_app/763686'
 import { _P, mf, uf, YN } from '../figma_app/844435'
 import { trackFileEventWithStore, trackOrgEventWithStore } from '../figma_app/901889'
-import { xb } from '../figma_app/910914'
-import { m0 } from '../figma_app/976749'
+import { DEV_HAND } from '../figma_app/910914'
+import { isDevHandoffEditorType } from '../figma_app/976749'
 
-let L = {
+/**
+ * Default codegen settings (L)
+ */
+const DEFAULT_CODEGEN_SETTINGS = {
   language: {
     type: 'first-party',
     id: 'WEB',
@@ -40,240 +43,289 @@ let L = {
   },
   behavior: FOverrideType.INHERIT,
 }
-class P {
-  constructor(e, t, r) {
-    this.workingPreferences = e
-    this.parentPreferences = t
-    this.parentEnabledPreferences = r
-    if (!t || !r)
+
+/**
+ * PluginPreferences class (P)
+ * Handles plugin pinning, codegen settings, and serialization.
+ */
+class PluginPreferences {
+  workingPreferences: any
+  parentPreferences: any
+  parentEnabledPreferences: any
+
+  constructor(workingPreferences, parentPreferences, parentEnabledPreferences) {
+    this.workingPreferences = workingPreferences
+    this.parentPreferences = parentPreferences
+    this.parentEnabledPreferences = parentEnabledPreferences
+    if (!parentPreferences || !parentEnabledPreferences)
       return
-    let {
-      codegenEnabled,
-      pinnedPluginsEnabled,
-    } = {
-      ...r,
+
+    const { codegenEnabled, pinnedPluginsEnabled } = { ...parentEnabledPreferences }
+    let parentPrefsCopy = { ...parentPreferences }
+    if (!codegenEnabled)
+      parentPrefsCopy.codegenSettings = null
+    if (
+      !pinnedPluginsEnabled
+      && getFeatureFlags().dev_mode_org_pinned_plugins_ent
+    ) {
+      parentPrefsCopy.pins = []
+      parentPrefsCopy.removedInheritedPins = []
     }
-    let a = {
-      ...t,
-    }
-    codegenEnabled || (a.codegenSettings = null)
-    !pinnedPluginsEnabled && getFeatureFlags().dev_mode_org_pinned_plugins_ent && (a.pins = [], a.removedInheritedPins = [])
-    this.parentPreferences = a
+    this.parentPreferences = parentPrefsCopy
   }
 
-  orgPinsNotInUserPins() {
-    let e = []
-    for (let t of this.parentPreferences?.pins ?? []) this.workingPreferences.pins.find(e => e.pluginId === t.pluginId) || e.push(t)
-    return e
+  /**
+   * Returns org pins not present in user pins.
+   */
+  orgPinsNotInUserPins(): any[] {
+    const orgPins = this.parentPreferences?.pins ?? []
+    return orgPins.filter(
+      orgPin =>
+        !this.workingPreferences.pins.find(userPin => userPin.pluginId === orgPin.pluginId),
+    )
   }
 
-  get pinnedPluginIDs() {
-    let e = [...this.workingPreferences.pins, ...this.orgPinsNotInUserPins()]
-    let t = new Set(this.workingPreferences.removedInheritedPins)
-    return e.filter(e => !t.has(e.pluginId) && (!e.inherited || D(this.parentPreferences, e.pluginId))).map(e => e.pluginId)
+  /**
+   * Returns all pinned plugin IDs, filtering out removed inherited pins.
+   */
+  get pinnedPluginIDs(): string[] {
+    const allPins = [...this.workingPreferences.pins, ...this.orgPinsNotInUserPins()]
+    const removedSet = new Set(this.workingPreferences.removedInheritedPins)
+    return allPins
+      .filter(
+        pin =>
+          !removedSet.has(pin.pluginId)
+          && (!pin.inherited || isPluginPinned(this.parentPreferences, pin.pluginId)),
+      )
+      .map(pin => pin.pluginId)
   }
 
+  /**
+   * Returns effective codegen settings.
+   */
   get codegenSettings() {
-    return this.parentPreferences && this.workingPreferences.codegenSettings?.behavior !== FOverrideType.OVERRIDE ? this.parentPreferences?.codegenSettings ?? null : this.workingPreferences.codegenSettings
+    if (
+      this.parentPreferences
+      && this.workingPreferences.codegenSettings?.behavior !== FOverrideType.OVERRIDE
+    ) {
+      return this.parentPreferences?.codegenSettings ?? null
+    }
+    return this.workingPreferences.codegenSettings
   }
 
-  update(e) {
-    return new P(produce(this.workingPreferences, e), this.parentPreferences, this.parentEnabledPreferences)
+  /**
+   * Returns a new PluginPreferences instance with updated workingPreferences.
+   */
+  update(updater: any) {
+    return new PluginPreferences(
+      produce(this.workingPreferences, updater),
+      this.parentPreferences,
+      this.parentEnabledPreferences,
+    )
   }
 
-  pinPlugin(e) {
-    let t
-    t = this.workingPreferences
-    let r = t?.pins.findIndex(t => t.pluginId === e && t.inherited)
-    return r != null && r !== -1
-      ? this.update((t) => {
-          t.pins[r].inherited = !1
-          t.removedInheritedPins = t.removedInheritedPins.filter(t => t !== e)
-        })
-      : D(this.workingPreferences, e)
-        ? this
-        : this.update((t) => {
-            t.pins.push({
-              pluginId: e,
-              inherited: !1,
-            })
-            t.removedInheritedPins = t.removedInheritedPins.filter(t => t !== e)
-          })
-  }
-
-  unpinPlugin(e) {
-    return this.update((t) => {
-      t.pins = t.pins.filter(t => t.pluginId !== e)
-      D(this.parentPreferences, e) && t.removedInheritedPins.push(e)
+  /**
+   * Pins a plugin by ID.
+   */
+  pinPlugin(pluginId: string) {
+    const working = this.workingPreferences
+    const idx = working?.pins.findIndex(pin => pin.pluginId === pluginId && pin.inherited)
+    if (idx != null && idx !== -1) {
+      return this.update((draft) => {
+        draft.pins[idx].inherited = false
+        draft.removedInheritedPins = draft.removedInheritedPins.filter(id => id !== pluginId)
+      })
+    }
+    if (isPluginPinned(this.workingPreferences, pluginId))
+      return this
+    return this.update((draft) => {
+      draft.pins.push({ pluginId, inherited: false })
+      draft.removedInheritedPins = draft.removedInheritedPins.filter(id => id !== pluginId)
     })
   }
 
-  movePin(e, t) {
-    return t.type === 'after' && e === t.id || t.type === 'begin' && this.pinnedPluginIDs[0] === e
-      ? this
-      : this.update((r) => {
-          let n = D(this.workingPreferences, e)
-          let i = D(this.parentPreferences, e)
-          let a = !!(!n && i)
-          switch (r.pins = r.pins.filter(t => t.pluginId !== e), t.type) {
-            case 'begin':
-              r.pins.unshift({
-                pluginId: e,
-                inherited: a,
-              })
-              break
-            case 'after':
-            {
-              let n = r.pins.findIndex(e => e.pluginId === t.id)
-              if (n !== -1) {
-                r.pins.splice(n + 1, 0, {
-                  pluginId: e,
-                  inherited: a,
-                })
-              }
-              else {
-                let n = this.orgPinsNotInUserPins()
-                let i = n.findIndex(e => e.pluginId === t.id)
-                if (i === -1)
-                  throw new Error('Invalid pin to move after')
-                r.pins.push(...n.slice(0, i + 1).map(e => ({
-                  ...e,
-                  inherited: !0,
-                })), {
-                  pluginId: e,
-                  inherited: a,
-                })
-              }
-            }
-          }
-        })
+  /**
+   * Unpins a plugin by ID.
+   */
+  unpinPlugin(pluginId: string) {
+    return this.update((draft) => {
+      draft.pins = draft.pins.filter(pin => pin.pluginId !== pluginId)
+      if (isPluginPinned(this.parentPreferences, pluginId)) {
+        draft.removedInheritedPins.push(pluginId)
+      }
+    })
   }
 
+  /**
+   * Moves a pin to a new position.
+   */
+  movePin(pluginId: string, position: { type: string, id: string }) {
+    const { type, id } = position
+    if ((type === 'after' && pluginId === id) || (type === 'begin' && this.pinnedPluginIDs[0] === pluginId)) {
+      return this
+    }
+    return this.update((draft) => {
+      const inUserPins = isPluginPinned(this.workingPreferences, pluginId)
+      const inOrgPins = isPluginPinned(this.parentPreferences, pluginId)
+      const inherited = !inUserPins && inOrgPins
+      draft.pins = draft.pins.filter(pin => pin.pluginId !== pluginId)
+      switch (type) {
+        case 'begin':
+          draft.pins.unshift({ pluginId, inherited })
+          break
+        case 'after': {
+          const idx = draft.pins.findIndex(pin => pin.pluginId === id)
+          if (idx !== -1) {
+            draft.pins.splice(idx + 1, 0, { pluginId, inherited })
+          }
+          else {
+            const orgPins = this.orgPinsNotInUserPins()
+            const orgIdx = orgPins.findIndex(pin => pin.pluginId === id)
+            if (orgIdx === -1)
+              throw new Error('Invalid pin to move after')
+            draft.pins.push(
+              ...orgPins.slice(0, orgIdx + 1).map(pin => ({ ...pin, inherited: true })),
+              { pluginId, inherited },
+            )
+          }
+          break
+        }
+      }
+    })
+  }
+
+  /**
+   * Returns local codegen settings.
+   */
   get localCodegenSettings() {
     if (!this.codegenSettings)
       return null
-    let e = this.codegenSettings?.language
-    let t = this.lgLanguageToLocalLanguage(e)
-    if (!t)
+    const lang = this.codegenSettings?.language
+    const localLang = this.lgLanguageToLocalLanguage(lang)
+    if (!localLang)
       return null
-    let r = this.codegenSettings.preferences
-    let n = this.lgUnitToLocalUnit(r.unit)
+    const prefs = this.codegenSettings.preferences
+    const localUnit = this.lgUnitToLocalUnit(prefs.unit)
     return {
-      language: t,
+      language: localLang,
       preferences: {
-        scaleFactor: r.scaleFactor ?? void 0,
-        customSettings: r.customSettings ?? void 0,
-        unit: n,
+        scaleFactor: prefs.scaleFactor ?? undefined,
+        customSettings: prefs.customSettings ?? undefined,
+        unit: localUnit,
       },
       behavior: this.codegenSettings.behavior,
     }
   }
 
-  setCodegenSettingLanguage(e) {
-    return this.update((t) => {
-      let r = this.localLanguageTypeToLgLanguageType(e.type)
-      if (!r)
+  /**
+   * Sets codegen language.
+   */
+  setCodegenSettingLanguage(language: any) {
+    return this.update((draft) => {
+      const lgType = this.localLanguageTypeToLgLanguageType(language.type)
+      if (!lgType)
         throw new Error('Invalid language type')
-      let n = {
-        ...e,
-        type: r,
-        pluginLanguage: e.pluginLanguage ?? null,
+      const langObj = {
+        ...language,
+        type: lgType,
+        pluginLanguage: language.pluginLanguage ?? null,
       }
-      t.codegenSettings = {
-        language: n,
-        preferences: this.codegenSettings?.preferences || L.preferences,
-        behavior: this.codegenSettings?.behavior || L.behavior,
+      draft.codegenSettings = {
+        language: langObj,
+        preferences: this.codegenSettings?.preferences || DEFAULT_CODEGEN_SETTINGS.preferences,
+        behavior: this.codegenSettings?.behavior || DEFAULT_CODEGEN_SETTINGS.behavior,
       }
     })
   }
 
-  setCodegenSettingUnit(e) {
-    return this.update((t) => {
+  /**
+   * Sets codegen unit.
+   */
+  setCodegenSettingUnit(unit: any) {
+    return this.update((draft) => {
       if (!this.codegenSettings)
         return
-      let r = this.localUnitToLgUnit(e)
-      if (!r)
+      const lgUnit = this.localUnitToLgUnit(unit)
+      if (!lgUnit)
         throw new Error('Invalid unit')
-      let n = this.codegenSettings.preferences
-        ? {
-            ...this.codegenSettings.preferences,
-            unit: r,
-          }
-        : {
-            scaleFactor: null,
-            unit: r,
-            customSettings: null,
-          }
-      t.codegenSettings = {
+      const prefs = this.codegenSettings.preferences
+        ? { ...this.codegenSettings.preferences, unit: lgUnit }
+        : { scaleFactor: null, unit: lgUnit, customSettings: null }
+      draft.codegenSettings = {
         language: this.codegenSettings.language,
-        preferences: n,
+        preferences: prefs,
         behavior: this.codegenSettings.behavior,
       }
     })
   }
 
-  setCodegenSettingCustomSettings(e, t) {
-    return this.update((r) => {
+  /**
+   * Sets custom codegen settings.
+   */
+  setCodegenSettingCustomSettings(language: any, custom: any) {
+    return this.update((draft) => {
       if (!this.codegenSettings)
         return
-      let n = this.localLanguageTypeToLgLanguageType(e.type)
-      if (!n)
+      const lgType = this.localLanguageTypeToLgLanguageType(language.type)
+      if (!lgType)
         throw new Error('Invalid language type')
-      let i = {
-        ...e,
-        type: n,
-        pluginLanguage: e.pluginLanguage ?? null,
+      const langObj = {
+        ...language,
+        type: lgType,
+        pluginLanguage: language.pluginLanguage ?? null,
       }
-      let a = {
+      const prefs = {
         scaleFactor: this.codegenSettings.preferences?.scaleFactor ?? null,
         unit: this.codegenSettings.preferences?.unit ?? null,
         customSettings: {
           ...this.codegenSettings.preferences?.customSettings,
-          ...t.customSettings,
+          ...custom.customSettings,
         },
       }
-      r.codegenSettings = {
-        language: i,
-        preferences: a,
+      draft.codegenSettings = {
+        language: langObj,
+        preferences: prefs,
         behavior: this.codegenSettings.behavior,
       }
     })
   }
 
-  setCodegenSetting(e) {
-    return this.update((t) => {
-      if (!e) {
-        t.codegenSettings = null
+  /**
+   * Sets full codegen settings.
+   */
+  setCodegenSetting(settings: any) {
+    return this.update((draft) => {
+      if (!settings) {
+        draft.codegenSettings = null
         return
       }
-      let {
-        behavior,
-        language,
-        preferences,
-      } = e
-      let a = this.localLanguageTypeToLgLanguageType(language.type)
-      if (!a)
+      const { behavior, language, preferences } = settings
+      const lgType = this.localLanguageTypeToLgLanguageType(language.type)
+      if (!lgType)
         throw new Error('Invalid language type')
-      let s = {
+      const langObj = {
         ...language,
-        type: a,
+        type: lgType,
         pluginLanguage: language.pluginLanguage ?? null,
       }
-      let o = {
+      const prefs = {
         unit: this.localUnitToLgUnit(preferences.unit),
         customSettings: preferences.customSettings ?? null,
         scaleFactor: preferences.scaleFactor ?? null,
       }
-      t.codegenSettings = {
+      draft.codegenSettings = {
         behavior,
-        language: s,
-        preferences: o,
+        language: langObj,
+        preferences: prefs,
       }
     })
   }
 
-  localUnitToLgUnit(e) {
-    switch (e) {
+  /**
+   * Converts local unit to LG unit.
+   */
+  localUnitToLgUnit(unit: any) {
+    switch (unit) {
       case MeasurementUnit.PIXEL:
         return FUnitType.PIXEL
       case MeasurementUnit.SCALED:
@@ -283,18 +335,25 @@ class P {
     }
   }
 
-  lgUnitToLocalUnit(e) {
-    switch (e) {
+  /**
+   * Converts LG unit to local unit.
+   */
+  lgUnitToLocalUnit(unit: any) {
+    switch (unit) {
       case FUnitType.PIXEL:
         return MeasurementUnit.PIXEL
       case FUnitType.SCALED:
         return MeasurementUnit.SCALED
       default:
+        return undefined
     }
   }
 
-  localLanguageTypeToLgLanguageType(e) {
-    switch (e) {
+  /**
+   * Converts local language type to LG language type.
+   */
+  localLanguageTypeToLgLanguageType(type: string) {
+    switch (type) {
       case 'first-party':
         return FPluginType.FIRST_PARTY
       case 'published-plugin':
@@ -304,52 +363,66 @@ class P {
     }
   }
 
-  lgLanguageToLocalLanguage(e) {
-    let t
-    switch (e.type) {
+  /**
+   * Converts LG language to local language.
+   */
+  lgLanguageToLocalLanguage(language: any) {
+    switch (language.type) {
       case FPluginType.FIRST_PARTY:
-        t = {
-          id: e.id,
-          type: e.type,
-          pluginLanguage: e.pluginLanguage ?? void 0,
+        return {
+          id: language.id,
+          type: language.type,
+          pluginLanguage: language.pluginLanguage ?? undefined,
         }
-        break
       case FPluginType.PUBLISHED_PLUGIN:
-        if (!e.pluginLanguage)
+        if (!language.pluginLanguage)
           return null
-        t = {
-          id: e.id,
-          type: e.type,
-          pluginLanguage: e.pluginLanguage,
+        return {
+          id: language.id,
+          type: language.type,
+          pluginLanguage: language.pluginLanguage,
         }
-        break
       default:
-        throwTypeError(e.type)
+        throwTypeError(language.type)
     }
-    return t
   }
 
+  /**
+   * Serializes preferences for API.
+   */
   serialize() {
     return {
-      pins: this.workingPreferences.pins.map(e => ({
-        pluginId: e.pluginId,
-        inherited: e.inherited,
+      pins: this.workingPreferences.pins.map(pin => ({
+        pluginId: pin.pluginId,
+        inherited: pin.inherited,
       })),
       removedInheritedPins: Array.from(new Set(this.workingPreferences.removedInheritedPins)),
       codegenSettings: this.workingPreferences.codegenSettings,
     }
   }
 }
-function D(e, t) {
-  return e?.pins.some(e => e.pluginId === t)
+
+/**
+ * Checks if a plugin is pinned in preferences (D)
+ */
+function isPluginPinned(preferences: any, pluginId: string): boolean {
+  return preferences?.pins.some(pin => pin.pluginId === pluginId)
 }
-let k = {
+
+/**
+ * Default preferences (k)
+ */
+const DEFAULT_PREFERENCES = {
   pins: [],
   removedInheritedPins: [],
   codegenSettings: null,
 }
-let M = {
-  ...k,
+
+/**
+ * Default preferences with codegen settings (M)
+ */
+const DEFAULT_PREFERENCES_WITH_CODEGEN = {
+  ...DEFAULT_PREFERENCES,
   codegenSettings: {
     language: {
       id: qZ.CSS,
@@ -364,274 +437,323 @@ let M = {
     behavior: FOverrideType.INHERIT,
   },
 }
-export function $$F0() {
-  let {
-    loaded,
-    preferences,
-  } = (function () {
-    let e = getUserId()
-    let {
-      loaded: _loaded,
-      preferences: _preferences,
-    } = V(useSubscription(PluginPreferencesView, {
-      targetOrgId: null,
-      targetUserId: e,
-    }))
-    return {
-      loaded: _loaded,
-      preferences: _preferences,
-    }
-  }())
-  let {
-    loaded: _loaded2,
-    preferences: _preferences2,
+
+/**
+ * useUserPluginPreferences hook ($$F0)
+ * Handles user plugin preferences and codegen settings.
+ */
+export function setupUserPluginPreferences() {
+  const { loaded, preferences } = (() => {
+    const userId = getUserId()
+    const { loaded: loadedStatus, preferences: userPrefs } = getSubscriptionStatus(
+      useSubscription(PluginPreferencesView, {
+        targetOrgId: null,
+        targetUserId: userId,
+      }),
+    )
+    return { loaded: loadedStatus, preferences: userPrefs }
+  })()
+
+  const {
+    loaded: orgLoaded,
+    preferences: orgPreferences,
     codegenEnabled,
     pinnedPluginsEnabled,
-  } = G()
-  let u = useDispatch()
-  let h = trackFileEventWithStore()
-  let m = m0()
-  let y = useCanAccessFullDevMode()
-  let b = m && !y
+  } = getOrgPreferences()
+  const dispatch = useDispatch()
+  const trackFileEvent = trackFileEventWithStore()
+  const isEditorType = isDevHandoffEditorType()
+  const canAccessFullDevMode = useCanAccessFullDevMode()
+  const isLimitedDevMode = isEditorType && !canAccessFullDevMode
+
+  const [state, setState] = useState(null)
   useEffect(() => {
-    preferences && N(null)
+    preferences && setState(null)
   }, [preferences])
-  let T = useMemo(() => new P(preferences ?? k, _preferences2 ?? null, {
-    codegenEnabled,
-    pinnedPluginsEnabled,
-  }), [preferences, _preferences2, codegenEnabled, pinnedPluginsEnabled])
-  let [x, N] = useState(null)
-  let C = useMemo(() => {
-    let e = new Map()
-    for (let r of [...(preferences?.pins ?? []), ...(_preferences2?.pins ?? [])]) r.plugin && e.set(r.pluginId, r.plugin)
-    return e
-  }, [_preferences2?.pins, preferences?.pins])
-  let w = useMemo(() => x?.pinnedPluginIDs ?? T.pinnedPluginIDs, [T, x])
-  let O = useCurrentPublicPlan('usePluginPreferences').unwrapOr(null)
-  let R = getParentOrgIdIfOrgLevel(O) ?? null
-  let L = getUserId()
-  let D = YN()
-  let M = useMemo(() => w.map((e) => {
-    let t = C.get(e)
-    if (!t || !t.publishingStatus || t.publishingStatus !== FPublicationStatusType.APPROVED_PUBLIC && t.publishingStatus !== FPublicationStatusType.ORG_PRIVATE)
-      return null
-    let r = mf(t, R, L, null)
-    return r && (b || D(r)) ? r : null
-  }).filter(isNotNullish), [w, C, R, L, b, D])
-  let F = (e) => {
-    N(e)
-    B(e.serialize()).catch(() => {
-      N(null)
-    })
-  }
-  return {
-    pinnedPlugins: M,
-    unpinPlugin(e) {
-      F(T.unpinPlugin(e))
-      h('Dev Handoff Unpin Plugin', {
-        pluginID: e,
-      })
-    },
-    pinPlugin(e) {
-      u(postUserFlag({
-        [xb]: !0,
-      }))
-      F(T.pinPlugin(e))
-      h('Dev Handoff Pin Plugin', {
-        pluginID: e,
-      })
-    },
-    movePin(e, t) {
-      F(T.movePin(e, t))
-      h('Dev Handoff Moved Plugin', {
-        pluginID: e,
-      })
-    },
-    localCodegenSettings: T.localCodegenSettings,
-    setCodegenSettings(e) {
-      F(T.setCodegenSetting(e))
-    },
-    setCodegenSettingsLanguage(e) {
-      F(T.setCodegenSettingLanguage(e))
-    },
-    setCodegenSettingsUnit(e) {
-      F(T.setCodegenSettingUnit(e))
-    },
-    setCodegenSettingsCustomSettings(e, t) {
-      F(T.setCodegenSettingCustomSettings(e, t))
-    },
-    loaded: loaded && _loaded2,
-  }
-}
-export function $$j1() {
-  let {
-    loaded,
-    preferences,
-  } = G()
-  let [r, i] = useState(!1)
-  let [a, l] = useState(new P({
-    ...M,
-    codegenSettings: null,
-  }, null, null))
-  let d = trackOrgEventWithStore()
-  let [c, p] = useAtomValueAndSetter(_$$D)
-  let _ = useCallback((e) => {
-    l(e)
-    p(e.localCodegenSettings?.language ?? null)
-  }, [p])
-  useEffect(() => {
-    loaded && (preferences != null && _(new P({
-      ...preferences,
-      codegenSettings: preferences.codegenSettings ?? M.codegenSettings,
-    }, null, null)), i(!0))
-  }, [preferences, loaded, p, _])
-  let h = useMemo(() => a?.pinnedPluginIDs ?? [], [a])
-  return {
-    pinnedPlugins: uf(h, {
-      enabled: !0,
-    }),
-    unpinPlugin(e) {
-      _(a.unpinPlugin(e))
-      d('Dev Handoff Org Unpin Plugin', {
-        pluginID: e,
-      })
-    },
-    pinPlugin(e) {
-      _(a.pinPlugin(e))
-      d('Dev Handoff Org Pin Plugin', {
-        pluginID: e,
-      })
-    },
-    movePin(e, t) {
-      _(a.movePin(e, t))
-      d('Dev Handoff Org Move Plugin', {
-        pluginID: e,
-      })
-    },
-    localCodegenSettings: a.localCodegenSettings,
-    setCodegenSettings(e) {
-      _(a.setCodegenSetting(e))
-      d('Dev Handoff Org Set codegenSettings', {
-        codeLanguage: e?.language.id,
-      })
-    },
-    setCodegenSettingsLanguage(e) {
-      _(a.setCodegenSettingLanguage(e))
-      d('Dev Handoff Org Set codegenSettingsLanguage', {
-        codeLanguage: e.id,
-      })
-    },
-    setCodegenSettingsUnit(e) {
-      _(a.setCodegenSettingUnit(e))
-      d('Dev Handoff Org Set codegenSettings Unit in preferences', {
-        unit: e,
-      })
-    },
-    setCodegenSettingsCustomSettings(e, t) {
-      _(a.setCodegenSettingCustomSettings(e, t))
-    },
-    serialize: () => a.serialize(),
-    updatePrefs(e) {
-      l(new P({
-        pins: e.map(e => ({
-          pluginId: e.plugin_id,
-          inherited: !1,
-        })),
-        removedInheritedPins: [],
-        codegenSettings: a.codegenSettings,
-      }, null, null))
-    },
-    loaded: r,
-  }
-}
-export function $$U2() {
-  let e
-  let [t, r] = useState(!1)
-  let {
-    localCodegenSettings,
-    loaded,
-  } = $$F0()
-  let {
-    loaded: _loaded3,
-    plugin,
-  } = (function () {
-    let e = useCurrentFileKey()
-    let t = useAtomWithSubscription(_$$x)
-    let r = useSelector(e => e.figFileDuplicatedFromHubFile)
-    let a = useMemo(() => {
-      if (!e)
-        return null
-      let t = r[e]
-      return t && t.hubFileId ? getMappedPluginId(t.hubFileId) : null
-    }, [r, e])
-    let o = !!a
-    let d = _P(a ?? '', o)
-    return t
-      ? a && o
-        ? d
-        : {
-            loaded: !0,
-            plugin: null,
+
+  const pluginPrefs = useMemo(
+    () =>
+      new PluginPreferences(preferences ?? DEFAULT_PREFERENCES, orgPreferences ?? null, {
+        codegenEnabled,
+        pinnedPluginsEnabled,
+      }),
+    [preferences, orgPreferences, codegenEnabled, pinnedPluginsEnabled],
+  )
+
+  const pluginMap = useMemo(() => {
+    const map = new Map()
+    for (const pin of [...(preferences?.pins ?? []), ...(orgPreferences?.pins ?? [])]) {
+      if (pin.plugin)
+        map.set(pin.pluginId, pin.plugin)
+    }
+    return map
+  }, [orgPreferences?.pins, preferences?.pins])
+
+  const pinnedPluginIDs = useMemo(
+    () => state?.pinnedPluginIDs ?? pluginPrefs.pinnedPluginIDs,
+    [pluginPrefs, state],
+  )
+
+  const publicPlan = useCurrentPublicPlan('usePluginPreferences').unwrapOr(null)
+  const parentOrgId = getParentOrgIdIfOrgLevel(publicPlan) ?? null
+  const userId = getUserId()
+  const isPluginAllowed = YN()
+
+  const pinnedPlugins = useMemo(
+    () =>
+      pinnedPluginIDs
+        .map((id) => {
+          const plugin = pluginMap.get(id)
+          if (
+            !plugin
+            || !plugin.publishingStatus
+            || (plugin.publishingStatus !== FPublicationStatusType.APPROVED_PUBLIC
+              && plugin.publishingStatus !== FPublicationStatusType.ORG_PRIVATE)
+          ) {
+            return null
           }
-      : {
-          loaded: !1,
-          plugin: null,
-        }
-  }())
-  let u = Bs()
-  let p = localCodegenSettings?.language
-  let _ = p?.type === 'published-plugin' && loaded
-  let g = _P(p?.id ?? '', _)
-  if (!t) {
-    if (_loaded3 && plugin) {
-      if (!isDevModeWithCodegen(plugin) || !(e = getCodegenLanguagePreference(plugin)))
+          const pluginObj = mf(plugin, parentOrgId, userId, null)
+          return pluginObj && (isLimitedDevMode || isPluginAllowed(pluginObj)) ? pluginObj : null
+        })
+        .filter(isNotNullish),
+    [pinnedPluginIDs, pluginMap, parentOrgId, userId, isLimitedDevMode, isPluginAllowed],
+  )
+
+  const updatePreferences = (prefs: PluginPreferences) => {
+    setState(prefs)
+    saveUserPreferences(prefs.serialize()).catch(() => setState(null))
+  }
+
+  return {
+    pinnedPlugins,
+    unpinPlugin(pluginId: string) {
+      updatePreferences(pluginPrefs.unpinPlugin(pluginId))
+      trackFileEvent('Dev Handoff Unpin Plugin', { pluginID: pluginId })
+    },
+    pinPlugin(pluginId: string) {
+      dispatch(postUserFlag({ [DEV_HAND]: true }))
+      updatePreferences(pluginPrefs.pinPlugin(pluginId))
+      trackFileEvent('Dev Handoff Pin Plugin', { pluginID: pluginId })
+    },
+    movePin(pluginId: string, position: any) {
+      updatePreferences(pluginPrefs.movePin(pluginId, position))
+      trackFileEvent('Dev Handoff Moved Plugin', { pluginID: pluginId })
+    },
+    localCodegenSettings: pluginPrefs.localCodegenSettings,
+    setCodegenSettings(settings: any) {
+      updatePreferences(pluginPrefs.setCodegenSetting(settings))
+    },
+    setCodegenSettingsLanguage(language: any) {
+      updatePreferences(pluginPrefs.setCodegenSettingLanguage(language))
+    },
+    setCodegenSettingsUnit(unit: any) {
+      updatePreferences(pluginPrefs.setCodegenSettingUnit(unit))
+    },
+    setCodegenSettingsCustomSettings(language: any, custom: any) {
+      updatePreferences(pluginPrefs.setCodegenSettingCustomSettings(language, custom))
+    },
+    loaded: loaded && orgLoaded,
+  }
+}
+
+/**
+ * useOrgPluginPreferences hook ($$j1)
+ * Handles org plugin preferences and codegen settings.
+ */
+export function setupOrgPluginPreferences() {
+  const { loaded, preferences } = getOrgPreferences()
+  const [isLoaded, setLoaded] = useState(false)
+  const [pluginPrefs, setPluginPrefs] = useState(
+    new PluginPreferences({ ...DEFAULT_PREFERENCES_WITH_CODEGEN, codegenSettings: null }, null, null),
+  )
+  const trackOrgEvent = trackOrgEventWithStore()
+  const [, setAtomValue] = useAtomValueAndSetter(_$$D)
+
+  const updatePrefs = useCallback(
+    (prefs: PluginPreferences) => {
+      setPluginPrefs(prefs)
+      setAtomValue(prefs.localCodegenSettings?.language ?? null)
+    },
+    [setAtomValue],
+  )
+
+  useEffect(() => {
+    if (loaded && preferences != null) {
+      updatePrefs(
+        new PluginPreferences(
+          { ...preferences, codegenSettings: preferences.codegenSettings ?? DEFAULT_PREFERENCES_WITH_CODEGEN.codegenSettings },
+          null,
+          null,
+        ),
+      )
+      setLoaded(true)
+    }
+  }, [preferences, loaded, setAtomValue, updatePrefs])
+
+  const pinnedPluginIDs = useMemo(() => pluginPrefs?.pinnedPluginIDs ?? [], [pluginPrefs])
+
+  return {
+    pinnedPlugins: uf(pinnedPluginIDs, { enabled: true }),
+    unpinPlugin(pluginId: string) {
+      updatePrefs(pluginPrefs.unpinPlugin(pluginId))
+      trackOrgEvent('Dev Handoff Org Unpin Plugin', { pluginID: pluginId })
+    },
+    pinPlugin(pluginId: string) {
+      updatePrefs(pluginPrefs.pinPlugin(pluginId))
+      trackOrgEvent('Dev Handoff Org Pin Plugin', { pluginID: pluginId })
+    },
+    movePin(pluginId: string, position: any) {
+      updatePrefs(pluginPrefs.movePin(pluginId, position))
+      trackOrgEvent('Dev Handoff Org Move Plugin', { pluginID: pluginId })
+    },
+    localCodegenSettings: pluginPrefs.localCodegenSettings,
+    setCodegenSettings(settings: any) {
+      updatePrefs(pluginPrefs.setCodegenSetting(settings))
+      trackOrgEvent('Dev Handoff Org Set codegenSettings', { codeLanguage: settings?.language.id })
+    },
+    setCodegenSettingsLanguage(language: any) {
+      updatePrefs(pluginPrefs.setCodegenSettingLanguage(language))
+      trackOrgEvent('Dev Handoff Org Set codegenSettingsLanguage', { codeLanguage: language.id })
+    },
+    setCodegenSettingsUnit(unit: any) {
+      updatePrefs(pluginPrefs.setCodegenSettingUnit(unit))
+      trackOrgEvent('Dev Handoff Org Set codegenSettings Unit in preferences', { unit })
+    },
+    setCodegenSettingsCustomSettings(language: any, custom: any) {
+      updatePrefs(pluginPrefs.setCodegenSettingCustomSettings(language, custom))
+    },
+    serialize: () => pluginPrefs.serialize(),
+    updatePrefsFromList(list: any[]) {
+      setPluginPrefs(
+        new PluginPreferences(
+          {
+            pins: list.map(item => ({
+              pluginId: item.plugin_id,
+              inherited: false,
+            })),
+            removedInheritedPins: [],
+            codegenSettings: pluginPrefs.codegenSettings,
+          },
+          null,
+          null,
+        ),
+      )
+    },
+    loaded: isLoaded,
+  }
+}
+
+/**
+ * useCodegenLanguageSync hook ($$U2)
+ * Syncs codegen language preferences for published plugins.
+ */
+export function setupCodegenLanguageSync() {
+  let selectedLanguage
+  const [synced, setSynced] = useState(false)
+  const { localCodegenSettings, loaded } = setupUserPluginPreferences()
+  const {
+    loaded: pluginLoaded,
+    plugin,
+  } = (() => {
+    const fileKey = useCurrentFileKey()
+    const atom = useAtomWithSubscription(_$$x)
+    const duplicatedFiles = useSelector<ObjectOf>(state => state.figFileDuplicatedFromHubFile)
+    const mappedPluginId = useMemo(() => {
+      if (!fileKey)
+        return null
+      const duplicated = duplicatedFiles[fileKey]
+      return duplicated && duplicated.hubFileId ? getMappedPluginId(duplicated.hubFileId) : null
+    }, [duplicatedFiles, fileKey])
+    const isMapped = !!mappedPluginId
+    const pluginObj = _P(mappedPluginId ?? '', isMapped)
+    return atom
+      ? mappedPluginId && isMapped
+        ? pluginObj
+        : { loaded: true, plugin: null }
+      : { loaded: false, plugin: null }
+  })()
+  const updatePreferences = useUpdateCodeExtensionPreferences()
+  const language = localCodegenSettings?.language
+  const isPublishedPlugin = language?.type === 'published-plugin' && loaded
+  const pluginObj = _P(language?.id ?? '', isPublishedPlugin)
+
+  if (!synced) {
+    if (pluginLoaded && plugin) {
+      selectedLanguage = getCodegenLanguagePreference(plugin)
+      if (!isDevModeWithCodegen(plugin) || !selectedLanguage)
         return
     }
-    else if (_ && g.loaded && localCodegenSettings) {
-      if (p?.type === 'published-plugin' && !g.plugin || g.plugin && !isDevModeWithCodegen(g.plugin))
+    else if (isPublishedPlugin && pluginObj.loaded && localCodegenSettings) {
+      if (
+        language?.type === 'published-plugin'
+        && !pluginObj.plugin
+      ) {
         return
-      e = p
+      }
+      if (pluginObj.plugin && !isDevModeWithCodegen(pluginObj.plugin))
+        return
+      selectedLanguage = language
     }
     else {
-      localCodegenSettings?.language.type === 'first-party' && (e = p)
+      if (localCodegenSettings?.language.type === 'first-party')
+        selectedLanguage = language
     }
-    e && (!plugin && localCodegenSettings && u(e, g.plugin ?? null, localCodegenSettings.preferences), updateDevHandoffCodeLanguage(e), r(!0))
+    if (
+      selectedLanguage
+      && !plugin
+      && localCodegenSettings
+    ) {
+      updatePreferences(selectedLanguage, pluginObj.plugin ?? null, localCodegenSettings.preferences)
+      updateDevHandoffCodeLanguage(selectedLanguage)
+      setSynced(true)
+    }
   }
 }
-async function B(e) {
-  await XHR.post('/api/plugin_preferences/user', {
-    preferences: e,
-  })
+
+/**
+ * Saves user preferences to API (B)
+ */
+async function saveUserPreferences(preferences: any) {
+  await XHR.post('/api/plugin_preferences/user', { preferences })
 }
-function G() {
-  let e = useCurrentPublicPlan('useLGOrgPluginPreferences').unwrapOr(null)
-  let t = getParentOrgIdIfOrgLevel(e) ?? null
-  return V(useSubscription(PluginPreferencesView, {
-    targetOrgId: t,
-    targetUserId: null,
-  }))
+
+/**
+ * Gets org plugin preferences (G)
+ */
+function getOrgPreferences() {
+  const orgPlan = useCurrentPublicPlan('useLGOrgPluginPreferences').unwrapOr(null)
+  const orgId = getParentOrgIdIfOrgLevel(orgPlan) ?? null
+  return getSubscriptionStatus(
+    useSubscription(PluginPreferencesView, {
+      targetOrgId: orgId,
+      targetUserId: null,
+    }),
+  )
 }
-function V(e) {
-  if (e.status !== 'loaded') {
+
+/**
+ * Gets subscription status (V)
+ */
+function getSubscriptionStatus(subscription: any) {
+  if (subscription.status !== 'loaded') {
     return {
-      loaded: !1,
+      loaded: false,
       preferences: null,
-      codegenEnabled: !1,
-      pinnedPluginsEnabled: !1,
+      codegenEnabled: false,
+      pinnedPluginsEnabled: false,
     }
   }
-  let t = e.data.pluginPreferences
-  let {
-    codegenEnabled,
-    pinnedPluginsEnabled,
-  } = t || {}
+  const pluginPrefs = subscription.data.pluginPreferences
+  const { codegenEnabled, pinnedPluginsEnabled } = pluginPrefs || {}
   return {
-    loaded: !0,
-    preferences: t?.preferences,
-    codegenEnabled: codegenEnabled ?? !1,
-    pinnedPluginsEnabled: pinnedPluginsEnabled ?? !1,
+    loaded: true,
+    preferences: pluginPrefs?.preferences,
+    codegenEnabled: codegenEnabled ?? false,
+    pinnedPluginsEnabled: pinnedPluginsEnabled ?? false,
   }
 }
-export const VR = $$F0
-export const IE = $$j1
-export const iA = $$U2
+
+// Export refactored names for imports
+export const VR = setupUserPluginPreferences
+export const IE = setupOrgPluginPreferences
+export const iA = setupCodegenLanguageSync

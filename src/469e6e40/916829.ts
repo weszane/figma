@@ -15,7 +15,7 @@ import { _k, tB } from "../figma_app/934005";
 import { o0 } from "../469e6e40/616503";
 import { MX, cI } from "../figma_app/684446";
 import { CurrencyFormatter } from "../figma_app/514043";
-import { xS } from "../figma_app/193867";
+import { getSelectedViewUrl } from "../figma_app/193867";
 import { UserGroupRole, GroupType } from "../905/441038";
 import { registerModal } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
@@ -95,7 +95,7 @@ export let $$E0 = registerModal(function (e) {
     m.forEach(({
       id: a
     }) => {
-      t[a] = xS(e, {
+      t[a] = getSelectedViewUrl(e, {
         view: "licenseGroup",
         subView: UserGroupRole.ADMIN,
         selectedTab: GroupType.MEMBERS,

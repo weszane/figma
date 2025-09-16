@@ -9,8 +9,8 @@ import { E as _$$E } from "../905/53857";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
 import { nB, r1, wi, jk } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { Yy } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { S as _$$S } from "../905/794163";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
@@ -331,9 +331,9 @@ function Q(e) {
   let t = e.monthlyRenewalDate ? renderI18nText("billing_modals.team_add_seats.footer.banner.these_changes_will_appear_on_your_x_invoice", {
     date: e.monthlyRenewalDate
   }) : renderI18nText("billing_modals.team_add_seats.footer.banner.these_changes_will_appear_on_your_next_invoice");
-  return e.shouldShowEstimatedCost ? e.totalAdditionalAnnualSeatCount <= 0 ? null : jsx(Yy, {
+  return e.shouldShowEstimatedCost ? e.totalAdditionalAnnualSeatCount <= 0 ? null : jsx(BannerInset, {
     icon: jsx(_$$S, {}),
-    children: jsx(_$$Q, {
+    children: jsx(BannerMessage, {
       "data-testid": "team-new-add-seats-disclaimer",
       title: jsxs(Fragment, {
         children: [t, " ", jsx($, {})]

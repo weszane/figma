@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { getI18nString } from "../905/303541";
 import { n as _$$n } from "../897/929006";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { _P } from "../figma_app/2590";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { KindEnum } from "../905/129884";
@@ -622,7 +622,7 @@ function X(e) {
 }
 export let $$Y0 = memo(function (e) {
   let t = useDispatch();
-  let n = cJ();
+  let n = isSitesFileType();
   let r = t => {
     e.updateSelectionProperties({
       easingFunction: t

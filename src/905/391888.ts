@@ -4,20 +4,20 @@ import { OpenTarget } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { isCommandEvent } from "../905/63728";
 import { gN } from "../figma_app/976345";
-import { oB } from "../905/929976";
-import { xS } from "../figma_app/193867";
+import { hideDropdownAction } from "../905/929976";
+import { getSelectedViewUrl } from "../figma_app/193867";
 export function $$u0() {
   let e = useDispatch();
   let t = useStore();
   return useCallback(async (i, n) => {
-    e(oB());
+    e(hideDropdownAction());
     let r = isCommandEvent(n);
     let u = null;
     if (r && n.shiftKey ? u = OpenTarget.FOCAL_TAB : r ? u = OpenTarget.BACKGROUND_TAB : n.shiftKey && (u = OpenTarget.NEW_WINDOW), null != u) {
       n.preventDefault();
       let e = gN(i);
       let r = t.getState();
-      let a = xS(r, e.payload);
+      let a = getSelectedViewUrl(r, e.payload);
       customHistory.redirect(a, "_blank");
       return;
     }

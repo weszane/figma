@@ -3,11 +3,11 @@ import { PanelType } from "../figma_app/763686";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { O1, KD } from "../figma_app/317394";
 import { _4 } from "../figma_app/32128";
-import { s0, Nl, bP, $e } from "../figma_app/115923";
+import { sitesViewSetterAtomFamily, Nl, booleanAtomFamily, ViewActionType } from "../figma_app/115923";
 export function $$d0() {
-  let e = Xr(s0);
+  let e = Xr(sitesViewSetterAtomFamily);
   let [t, r] = useAtomValueAndSetter(Nl);
-  let [d, c] = useAtomValueAndSetter(bP);
+  let [d, c] = useAtomValueAndSetter(booleanAtomFamily);
   let u = useRef(null);
   let p = useCallback(() => {
     c(!0);
@@ -19,14 +19,14 @@ export function $$d0() {
   let _ = _4();
   let h = e => {
     u.current && (clearTimeout(u.current), c(!1));
-    e === $e.FIND && _();
+    e === ViewActionType.FIND && _();
     r(e);
   };
   let m = () => {
-    h($e.INSERT);
+    h(ViewActionType.INSERT);
   };
   let g = () => {
-    h($e.FIND);
+    h(ViewActionType.FIND);
   };
   useEffect(() => {
     t && e(PanelType.FILE);
@@ -40,13 +40,13 @@ export function $$d0() {
     inserts: {
       open: m,
       toggle: () => {
-        t !== $e.INSERT || d ? m() : p();
+        t !== ViewActionType.INSERT || d ? m() : p();
       }
     },
     search: {
       open: g,
       toggle: () => {
-        t !== $e.FIND || d ? g() : p();
+        t !== ViewActionType.FIND || d ? g() : p();
       }
     }
   };

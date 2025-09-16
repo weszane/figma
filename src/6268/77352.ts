@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { CH, g4 } from "../figma_app/770359";
 import { Button } from "../905/521428";
-import { Yy } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/438674";
 import { k as _$$k } from "../905/443820";
 import { K as _$$K } from "../905/443068";
@@ -90,9 +90,9 @@ function $({
   });
 }
 function U() {
-  return jsx(Yy, {
+  return jsx(BannerInset, {
     variant: "warn",
-    children: jsxs(_$$Q, {
+    children: jsxs(BannerMessage, {
       title: getI18nString("dev_handoff.component_browser.cli_only_title"),
       children: [getI18nString("dev_handoff.component_browser.cli_only_message"), jsx(_$$N, {
         href: "https://www.figma.com/code-connect-docs/",

@@ -51,7 +51,7 @@ import { G$, FF } from "../figma_app/588092";
 import { c as _$$c } from "../figma_app/11961";
 import { W as _$$W, B as _$$B } from "../905/841666";
 import { w as _$$w } from "../5430/495667";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { j as _$$j } from "../905/834956";
 import { W as _$$W2, C as _$$C } from "../5430/92864";
 import { s as _$$s2 } from "../cssbuilder/589278";
@@ -694,7 +694,7 @@ function eb({
       onClick: () => {
         c(!l);
         let e = a.current?.getBoundingClientRect();
-        e && o(j7({
+        e && o(showDropdownThunk({
           type: eg,
           data: {
             targetRect: e
@@ -754,7 +754,7 @@ function eL({
       onClick: e => {
         if (0 === Object.keys(x).length) return onUserSaveActionClick(e);
         let t = f.current?.getBoundingClientRect();
-        t && m(j7({
+        t && m(showDropdownThunk({
           type: eC,
           data: {
             targetRect: t

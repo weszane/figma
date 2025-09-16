@@ -12,7 +12,7 @@ import { r } from "../905/571562";
 import { SV } from "../figma_app/272902";
 import m from "classnames";
 import { L } from "../figma_app/819472";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { KindEnum } from "../905/129884";
 import { Yq, wK, OT, Tp, fW } from "../figma_app/769863";
 import { sg } from "../figma_app/48566";
@@ -39,7 +39,7 @@ function $$I(e) {
   let N = disabled || x;
   let C = L();
   useEffect(() => {
-    isSelected && (b(jD()), C());
+    isSelected && (b(hideTooltip()), C());
   }, [isSelected, b, C]);
   return jsx(ButtonPrimitive, {
     ref: A,

@@ -1,10 +1,10 @@
 import { debug } from "../figma_app/465776";
 import { hV, Si } from "../figma_app/387100";
-import { Ts } from "../905/929976";
+import { initAction } from "../905/929976";
 import { p5 } from "../figma_app/91703";
 import { a as _$$a } from "../905/541060";
 export function $$l2(e = Object.create(null), t) {
-  if (Ts.matches(t) || _$$a.matches(t)) return Object.create(null);
+  if (initAction.matches(t) || _$$a.matches(t)) return Object.create(null);
   if (p5.matches(t) && t.payload.selection) {
     let {
       add,

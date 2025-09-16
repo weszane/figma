@@ -15,7 +15,7 @@ import { buildFileUrl } from "../905/612685";
 import { FMemberRoleType, FUserTypeClassification } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser } from "../figma_app/465071";
-import { lD } from "../figma_app/831696";
+import { buildViewerQueryParams } from "../figma_app/831696";
 import { ThreadType } from "../905/380385";
 import { cM } from "../905/530837";
 import { iw } from "../905/222884";
@@ -35,7 +35,7 @@ export function $$k2({
   fileKey: t,
   startingNodeId: i
 }, n) {
-  let r = lD({
+  let r = buildViewerQueryParams({
     startingPointNodeId: i,
     versionId: e
   });

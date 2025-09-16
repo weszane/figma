@@ -5,7 +5,7 @@ import { B4 } from "../figma_app/385215";
 import { $ } from "../905/532878";
 import { KP } from "../figma_app/31103";
 import { hA } from "../figma_app/88239";
-import { oB, sf } from "../905/929976";
+import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
 export function $$m0({
@@ -21,11 +21,11 @@ export function $$m0({
   let A = KP("full_table", t);
   return useCallback(() => {
     h();
-    g(oB());
+    g(hideDropdownAction());
     e?.();
     _(t);
     A();
-    g(sf({
+    g(selectViewAction({
       ...m,
       view: "fullscreen",
       editorType: FEditorType.DevHandoff,

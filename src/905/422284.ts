@@ -8,12 +8,12 @@ import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
-import { b as _$$b } from "../905/898378";
-import { Nh } from "../905/560959";
+import { canAccessDevModeWithOrg } from "../905/898378";
+import { InspectState } from "../905/560959";
 import { $ as _$$$ } from "../905/532878";
 import { createOptimistThunk } from "../905/350402";
 import { $ as _$$$2 } from "../905/489647";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { kq } from "../905/292918";
 import { Ad } from "../905/300250";
 import { Nf } from "../figma_app/864378";
@@ -36,9 +36,9 @@ import { qp } from "../905/977779";
 import { getFullscreenViewFile } from "../figma_app/516028";
 import { mapToEditorType } from "../figma_app/300692";
 import { jr } from "../905/792802";
-import { vU } from "../figma_app/193867";
+import { mapPathToSelectedView } from "../figma_app/193867";
 import { mapViewTypeToMainfestEditorType, parsePluginParams } from "../905/327571";
-import { Nb, _b } from "../figma_app/841351";
+import { setActiveVersion, enterVersionHistoryMode } from "../figma_app/841351";
 let $$H = createOptimistThunk((e, t, {
   liveStore: i
 }) => {
@@ -58,27 +58,27 @@ let $$H = createOptimistThunk((e, t, {
     let H = f.selectedView;
     let W = "inspect" === V || "dev" === V;
     H.editorType === FEditorType.Design && W ? fullscreenValue.requestEditorType(WorkspaceType.DEV_HANDOFF) : H.editorType !== FEditorType.DevHandoff || W || "auto" === V || fullscreenValue.requestEditorType(WorkspaceType.DESIGN);
-    E["version-id"] && (e.dispatch(Nb({
+    E["version-id"] && (e.dispatch(setActiveVersion({
       id: E["version-id"]
-    })), e.dispatch(_b()));
+    })), e.dispatch(enterVersionHistoryMode()));
     let K = !1;
-    let Y = _$$b(f);
+    let Y = canAccessDevModeWithOrg(f);
     if ("1" === E.vars) {
-      atomStoreManager.set(_$$$, Nh.DirectUrl);
-      e.dispatch(sf({
+      atomStoreManager.set(_$$$, InspectState.DirectUrl);
+      e.dispatch(selectViewAction({
         ...H,
         showDevModeVariablesTable: !0,
         devModeVariablesTableSelectedVariable: E["var-id"]
       }));
     } else if (Y) {
       let t = e.getState().selectedView;
-      if ("1" === E["ready-for-dev"]) e.dispatch(sf({
+      if ("1" === E["ready-for-dev"]) e.dispatch(selectViewAction({
         ...t,
         showOverview: !0,
         devModeFocusId: void 0
       }));else if (W && E["focus-id"]) {
         K = !0;
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           ...t,
           showOverview: !1,
           devModeFocusId: E["focus-id"]
@@ -86,7 +86,7 @@ let $$H = createOptimistThunk((e, t, {
       } else if ("1" === E["component-browser"]) {
         let i = SelectorType.NONE;
         "repo" === E["gh-settings"] ? i = SelectorType.REPO_SELECTOR : "dirs" === E["gh-settings"] ? i = SelectorType.DIRECTORY_SELECTOR : "1" === E["gh-repo-selector"] && (i = SelectorType.REPO_SELECTOR);
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           ...t,
           showDevModeComponentBrowser: !0,
           componentKey: E["component-key"] || void 0,
@@ -144,7 +144,7 @@ let $$H = createOptimistThunk((e, t, {
       e && q(e);
     })(), F) {
       let t = F.slice(1);
-      "fullscreen" === f.selectedView.view && f.mirror.appModel.topLevelMode !== ViewType.BRANCHING && "commentPreferences" !== t && f.selectedView?.commentThreadId !== t && e.dispatch(sf({
+      "fullscreen" === f.selectedView.view && f.mirror.appModel.topLevelMode !== ViewType.BRANCHING && "commentPreferences" !== t && f.selectedView?.commentThreadId !== t && e.dispatch(selectViewAction({
         ...f.selectedView,
         commentThreadId: t
       }));
@@ -225,8 +225,8 @@ let W = createOptimistThunk((e, t) => {
   } = e.getState();
   if ("prototype" === selectedView.view) {
     let n = selectedView.isPresenterView ? "presenter" : "slides" === selectedView.file.editor_type ? "deck" : "proto";
-    let r = vU(e.getState(), `/${n}/${selectedView.file.key}`, t.params, t.hash);
-    r && (r.nodeId !== selectedView.nodeId || r.startingPointNodeId !== selectedView.startingPointNodeId) && (on(), e.dispatch(sf(r)));
+    let r = mapPathToSelectedView(e.getState(), `/${n}/${selectedView.file.key}`, t.params, t.hash);
+    r && (r.nodeId !== selectedView.nodeId || r.startingPointNodeId !== selectedView.startingPointNodeId) && (on(), e.dispatch(selectViewAction(r)));
   }
 });
 let K = createOptimistThunk((e, t) => {

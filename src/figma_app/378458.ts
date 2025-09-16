@@ -16,8 +16,8 @@ import { wv } from "../figma_app/236327";
 import { L as _$$L } from "../figma_app/942671";
 import { getI18nString } from "../905/303541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { oB } from "../905/929976";
-import { E3 } from "../figma_app/976749";
+import { hideDropdownAction } from "../905/929976";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
@@ -31,7 +31,7 @@ import { FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { KindEnum } from "../905/129884";
 import { c1 } from "../figma_app/357047";
 import { q } from "../figma_app/57000";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { XR, uA, FQ } from "../figma_app/781512";
 import { A as _$$A } from "../905/79603";
 import { j as _$$j } from "../905/834956";
@@ -49,14 +49,14 @@ function z({
   useEffect(() => {
     l("View Menu Opened");
   }, [l]);
-  let u = E3();
+  let u = getSelectedEditorType();
   let p = getObservableOrFallback(_$$d().activeCanvasCurrentZoom);
   let _ = getObservableOrFallback(UK().activeCanvasPixelPreview);
   let g = getObservableOrFallback(_$$d().activeCanvasRetinaMode);
   let f = selectWithShallowEqual(e => e.mirror.appModel.keyboardShortcuts);
   let E = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = useSelector(e => !!e.user);
-  let b = useSelector(e => $A(e.selectedView));
+  let b = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let I = useCanAccessFullDevMode();
   let v = XR();
   let R = getObservableOrFallback(AppStateTsApi.uiState().filterAnnotationCategoryId);
@@ -416,7 +416,7 @@ export function $$W1({
   onSubmitCustomZoom: p
 }) {
   let _ = useDispatch();
-  let h = useSelector(e => $A(e.selectedView));
+  let h = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let m = XR();
   let y = useMemo(() => ({
     ZOOM_IN: getI18nString("fullscreen_actions.zoom-in"),
@@ -504,7 +504,7 @@ export function $$W1({
     }), jsx("div", {
       className: zj,
       onKeyDown: e => {
-        (e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.ESCAPE) && t && _(oB());
+        (e.keyCode === KeyCodes.ENTER || e.keyCode === KeyCodes.ESCAPE) && t && _(hideDropdownAction());
       },
       children: jsx(_$$A, {
         className: hF,

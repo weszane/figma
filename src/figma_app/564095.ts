@@ -1,28 +1,58 @@
-import { XHR } from "../905/910117";
-import { getResourceTypeLabel } from "../figma_app/471982";
-export function $$a1(e, t) {
-  return !!e && !!e.plugin_publishers?.pending?.some(e => e.id === t);
+import { XHR } from '../905/910117'
+import { getResourceTypeLabel } from '../figma_app/471982'
+/**
+ * Checks if a user is a pending plugin publisher.
+ * @param plugin - The plugin object.
+ * @param userId - The user ID to check.
+ * @returns True if the user is a pending publisher, false otherwise.
+ * (Original: $$isPendingPublisher)
+ */
+export function isPendingPublisher(plugin: any, userId: string): boolean {
+  return !!plugin && !!plugin.plugin_publishers?.pending?.some((publisher: any) => publisher.id === userId)
 }
-export function $$s0(e, t) {
-  return !!e && !!e.plugin_publishers?.accepted?.some(e => e.id === t);
+
+/**
+ * Checks if a user is an accepted plugin publisher.
+ * @param plugin - The plugin object.
+ * @param userId - The user ID to check.
+ * @returns True if the user is an accepted publisher, false otherwise.
+ * (Original: $$isAcceptedPublisher)
+ */
+export function isAcceptedPublisher(plugin: any, userId: string): boolean {
+  return !!plugin && !!plugin.plugin_publishers?.accepted?.some((publisher: any) => publisher.id === userId)
 }
-export function $$o2(e, t) {
-  return $$a1(e, t) || $$s0(e, t);
+
+/**
+ * Checks if a user is either a pending or accepted plugin publisher.
+ * @param plugin - The plugin object.
+ * @param userId - The user ID to check.
+ * @returns True if the user is a publisher, false otherwise.
+ * (Original: $$isAnyPublisher)
+ */
+export function isAnyPublisher(plugin: any, userId: string): boolean {
+  return isPendingPublisher(plugin, userId) || isAcceptedPublisher(plugin, userId)
 }
-export async function $$l3(e, t) {
-  let {
-    data
-  } = await XHR.post(`/api/${getResourceTypeLabel(e, {
-    pluralized: !0
-  })}/${e.id}/publisher_invites`, {
-    emails: t
-  });
+
+/**
+ * Sends publisher invites for a plugin.
+ * @param plugin - The plugin object.
+ * @param emails - Array of emails to invite.
+ * @returns An object containing the updated plugin resource and any errors.
+ * (Original: $$sendPublisherInvites)
+ */
+export async function sendPublisherInvites(plugin: any, emails: string[]): Promise<{ resource: any, errors: any }> {
+  const { data } = await XHR.post(
+    `/api/${getResourceTypeLabel(plugin, { pluralized: true })}/${plugin.id}/publisher_invites`,
+    { emails },
+  )
   return {
     resource: data.meta.plugin,
-    errors: data.meta.errors
-  };
+    errors: data.meta.errors,
+  }
 }
-export const Ro = $$s0;
-export const dN = $$a1;
-export const jY = $$o2;
-export const o0 = $$l3;
+
+// Export aliases for backward compatibility
+export const Ro = isAcceptedPublisher // (Original: Ro)
+export const dN = isPendingPublisher // (Original: dN)
+export const jY = isAnyPublisher // (Original: jY)
+export const o0 = sendPublisherInvites// (Original: o0)

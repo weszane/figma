@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon, VisualBellShape } from "../905/576487";
 import { hideModal, showModalHandler } from "../905/156213";
-import { vF, HF } from "../figma_app/841351";
+import { startCompareChanges, findVersionById } from "../figma_app/841351";
 import { jsx } from "react/jsx-runtime";
 import { lQ } from "../905/934246";
 import { HISTORY_DOCUMENT_INDEX } from "../figma_app/518682";
@@ -41,7 +41,7 @@ let b = registerModal(function (e) {
     c && x && C && versionsQueryLoaded && u(!1);
   }, [c, x, C, versionsQueryLoaded]);
   let T = useCallback(e => {
-    e.id !== o && (E(void 0), i(vF({
+    e.id !== o && (E(void 0), i(startCompareChanges({
       fromVersionId: e.id
     })));
   }, [i, o, E]);
@@ -97,7 +97,7 @@ let b = registerModal(function (e) {
 export function $$v1() {
   let e = useDispatch();
   let t = useSelector(e => e.versionHistory.compareId);
-  let i = useSelector(e => HF(t, e.versionHistory));
+  let i = useSelector(e => findVersionById(t, e.versionHistory));
   let a = useSelector(e => e.modalShown);
   return useCallback(t => {
     $$I0(t, e, i, a);

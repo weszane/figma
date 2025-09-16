@@ -1,19 +1,19 @@
-import { mapUserRoleToOrgUserRole } from '../905/66460'
-import { getI18nString } from '../905/303541'
-import { AccessLevelEnum } from '../905/557142'
-import { isFullscreenSitesView } from '../905/561485'
-import { getFeatureFlags } from '../905/601108'
-import { getEntityType } from '../905/760074'
-import { $A as isFullscreenDevHandoff } from '../905/782918'
-import { isValidWorkshopModeExpiration } from '../figma_app/789'
-import { FAccessLevelType, FPermissionLevelType, FPlanNameType, FUserRoleType } from '../figma_app/191312'
-import { getFeatureTypeLabel } from '../figma_app/326667'
-import { isZoomIntegration } from '../figma_app/469876'
-import { canAccessFullDevMode } from '../figma_app/473493'
-import { isFigmakeFullscreenView } from '../figma_app/552876'
-import { teamVisibilityEnum } from '../figma_app/630077'
-import { isFullscreenCooper } from '../figma_app/828186'
-import { isInteractionPathCheck } from '../figma_app/897289'
+import { mapUserRoleToOrgUserRole } from '../905/66460';
+import { getI18nString } from '../905/303541';
+import { AccessLevelEnum } from '../905/557142';
+import { isFullscreenSitesView } from '../905/561485';
+import { getFeatureFlags } from '../905/601108';
+import { getEntityType } from '../905/760074';
+import { isFullscreenDevHandoffView } from '../905/782918';
+import { isValidWorkshopModeExpiration } from '../figma_app/789';
+import { FAccessLevelType, FPermissionLevelType, FPlanNameType, FUserRoleType } from '../figma_app/191312';
+import { getFeatureTypeLabel } from '../figma_app/326667';
+import { isZoomIntegration } from '../figma_app/469876';
+import { canAccessFullDevMode } from '../figma_app/473493';
+import { isFigmakeFullscreenView } from '../figma_app/552876';
+import { teamVisibilityEnum } from '../figma_app/630077';
+import { isFullscreenCooper } from '../figma_app/828186';
+import { isInteractionPathCheck } from '../figma_app/897289';
 
 // Original code from $$E7 - Checks if Zoom integration allows running widgets/plugins
 /**
@@ -21,14 +21,12 @@ import { isInteractionPathCheck } from '../figma_app/897289'
  * @returns {Object} An object with canRun boolean and optional message.
  */
 export function checkZoomWidgetAccess() {
-  return isZoomIntegration() && !getFeatureFlags().integ_zoom_allow_extensions
-    ? {
-      canRun: false,
-      message: getI18nString('widgets.no_zoom_widgets_plugins'),
-    }
-    : {
-      canRun: true,
-    };
+  return isZoomIntegration() && !getFeatureFlags().integ_zoom_allow_extensions ? {
+    canRun: false,
+    message: getI18nString('widgets.no_zoom_widgets_plugins')
+  } : {
+    canRun: true
+  };
 }
 
 // Original code from $$y10 - Checks if copy/export is not restricted
@@ -38,7 +36,9 @@ export function checkZoomWidgetAccess() {
  * @param {Object} params.copyExportRestrictedArgs - Arguments for copy/export restriction check.
  * @returns {boolean} True if not restricted, false otherwise.
  */
-export function isCopyExportAllowed({ copyExportRestrictedArgs: e }) {
+export function isCopyExportAllowed({
+  copyExportRestrictedArgs: e
+}) {
   return !(e && isExportRestricted(e));
 }
 
@@ -49,20 +49,12 @@ export function isCopyExportAllowed({ copyExportRestrictedArgs: e }) {
  * @returns {boolean} True if allowed, false otherwise.
  */
 export function canPerformAction(e) {
-  if (isFullscreenDevHandoff(e.selectedView)) {
-    return canAccessFullDevMode(e) && isCopyExportAllowed({ copyExportRestrictedArgs: e.openFile });
+  if (isFullscreenDevHandoffView(e.selectedView)) {
+    return canAccessFullDevMode(e) && isCopyExportAllowed({
+      copyExportRestrictedArgs: e.openFile
+    });
   }
-  return !(
-    (isZoomIntegration() && !getFeatureFlags().integ_zoom_allow_extensions) ||
-    (isFullscreenSitesView(e.selectedView) && !getFeatureFlags().sites_plugin_api) ||
-    (isFullscreenCooper(e.selectedView) && !getFeatureFlags().buzz_plugins) ||
-    isFigmakeFullscreenView(e.selectedView)
-  ) &&
-    (!getFeatureFlags().ext_require_appropriate_seat ||
-      !!isInteractionPathCheck() ||
-      !!e.openFile?.teamId ||
-      !!e.openFile?.parentOrgId) &&
-    !e.mirror.appModel.isReadOnly;
+  return !(isZoomIntegration() && !getFeatureFlags().integ_zoom_allow_extensions || isFullscreenSitesView(e.selectedView) && !getFeatureFlags().sites_plugin_api || isFullscreenCooper(e.selectedView) && !getFeatureFlags().buzz_plugins || isFigmakeFullscreenView(e.selectedView)) && (!getFeatureFlags().ext_require_appropriate_seat || !!isInteractionPathCheck() || !!e.openFile?.teamId || !!e.openFile?.parentOrgId) && !e.mirror.appModel.isReadOnly;
 }
 
 // Original code from $$T15 - Checks if extensions can run
@@ -81,8 +73,11 @@ export function canRunExtensions(e) {
   if (!e.openFile) {
     return false;
   }
-  const { canRunExtensions, canAccessFullDevMode } = e.openFile;
-  return isFullscreenDevHandoff(e.selectedView) ? canAccessFullDevMode : canRunExtensions;
+  const {
+    canRunExtensions,
+    canAccessFullDevMode
+  } = e.openFile;
+  return isFullscreenDevHandoffView(e.selectedView) ? canAccessFullDevMode : canRunExtensions;
 }
 
 // Original code from $$I9 - Checks if export is restricted
@@ -155,10 +150,10 @@ export function hasExternalRestrictedOrgId(e) {
 export function getOrgAccessLevelLabels(e) {
   return {
     [FAccessLevelType.PUBLIC]: getI18nString('org_access_strings.anyone_at', {
-      orgName: e,
+      orgName: e
     }),
     [FAccessLevelType.PRIVATE]: getI18nString('org_access_strings.invite_only'),
-    [FAccessLevelType.SECRET]: getI18nString('org_access_strings.hidden'),
+    [FAccessLevelType.SECRET]: getI18nString('org_access_strings.hidden')
   };
 }
 
@@ -171,7 +166,7 @@ export function getAccessLevelLabels() {
   return {
     [FAccessLevelType.PUBLIC]: getI18nString('org_access_strings.open'),
     [FAccessLevelType.PRIVATE]: getI18nString('org_access_strings.closed'),
-    [FAccessLevelType.SECRET]: getI18nString('org_access_strings.secret'),
+    [FAccessLevelType.SECRET]: getI18nString('org_access_strings.secret')
   };
 }
 
@@ -183,7 +178,7 @@ export function getAccessLevelLabels() {
 export function getTeamVisibilityLabels() {
   return {
     [teamVisibilityEnum.ORG_BROWSABLE]: getI18nString('team_creation.visible'),
-    [teamVisibilityEnum.HIDDEN]: getI18nString('team_creation.hidden'),
+    [teamVisibilityEnum.HIDDEN]: getI18nString('team_creation.hidden')
   };
 }
 
@@ -267,66 +262,88 @@ export function getViewerPermissionMessage({
   role: e,
   file: t,
   folder: r = null,
-  isInDraftsFolder: n = false,
+  isInDraftsFolder: n = false
 }) {
   if (e.level !== AccessLevelEnum.VIEWER && e.level !== AccessLevelEnum.VIEW_PROTOTYPES) {
     return null;
   }
   const i = getEntityType(t);
   switch (e.level) {
-    case AccessLevelEnum.VIEWER: {
-      if (t.link_access === FPermissionLevelType.EDIT) {
-        return getI18nString('permissions.can_still_edit_anybody_with_the_link', { noun: i });
+    case AccessLevelEnum.VIEWER:
+      {
+        if (t.link_access === FPermissionLevelType.EDIT) {
+          return getI18nString('permissions.can_still_edit_anybody_with_the_link', {
+            noun: i
+          });
+        }
+        if (t.link_access === FPermissionLevelType.ORG_EDIT && e.org_user && e.org_user.permission !== FUserRoleType.GUEST) {
+          return getI18nString('permissions.can_still_edit_org_member_with_link', {
+            noun: i
+          });
+        }
+        if (e.pending) {
+          break;
+        }
+        const s = !!r && !r.is_invite_only && !r.is_view_only;
+        return getCombinedPermissionMessage(!!e.teamLevel && !n && e.teamLevel > AccessLevelEnum.VIEWER && (!r || s), !!e.folderLevel && e.folderLevel > AccessLevelEnum.VIEWER, !!e.repoLevel && e.repoLevel > AccessLevelEnum.VIEWER);
       }
-      if (t.link_access === FPermissionLevelType.ORG_EDIT && e.org_user && e.org_user.permission !== FUserRoleType.GUEST) {
-        return getI18nString('permissions.can_still_edit_org_member_with_link', { noun: i });
+    case AccessLevelEnum.VIEW_PROTOTYPES:
+      {
+        if (t.link_access === FPermissionLevelType.EDIT) {
+          return getI18nString('permissions.can_still_see_and_edit_anybody_with_the_link_noun', {
+            noun: i
+          });
+        }
+        if (t.link_access === FPermissionLevelType.ORG_EDIT && e.org_user && e.org_user.permission !== FUserRoleType.GUEST) {
+          return getI18nString('permissions.can_still_see_and_edit_allow_editing_by_org_members_with_link', {
+            noun: i
+          });
+        }
+        if (e.pending) {
+          break;
+        }
+        const n = r && !r.is_invite_only && !r.is_view_only;
+        if (e.teamLevel && e.teamLevel > AccessLevelEnum.VIEWER && (!r || n)) {
+          return getI18nString('permissions.can_still_see_and_edit_permission_team_file_is_in', {
+            noun: i
+          });
+        }
+        if (e.folderLevel && e.folderLevel > AccessLevelEnum.VIEWER) {
+          return getI18nString('permissions.can_still_see_and_edit_permission_team_project_is_in', {
+            noun: i
+          });
+        }
+        if (e.repoLevel && e.repoLevel > AccessLevelEnum.VIEWER) {
+          return getI18nString('permissions.can_still_see_and_edit_permission_main_file', {
+            noun: i
+          });
+        }
+        if (t.link_access === FPermissionLevelType.VIEW) {
+          return getI18nString('permissions.can_still_edit_allow_view_anybody_with_link', {
+            noun: i
+          });
+        }
+        if (t.link_access === FPermissionLevelType.ORG_VIEW && e.org_user && e.org_user.permission !== FUserRoleType.GUEST) {
+          return getI18nString('permissions.can_still_edit_allow_edit_anybody_with_link', {
+            noun: i
+          });
+        }
+        if (e.teamLevel && e.teamLevel >= AccessLevelEnum.VIEWER && (!r || n)) {
+          return getI18nString('permissions.can_still_see_permission_team_file_is_on', {
+            noun: i
+          });
+        }
+        if (e.folderLevel && e.folderLevel >= AccessLevelEnum.VIEWER) {
+          return getI18nString('permissions.can_still_see_permission_project_file_is_on', {
+            noun: i
+          });
+        }
+        if (e.repoLevel && e.repoLevel >= AccessLevelEnum.VIEWER) {
+          return getI18nString('permissions.can_still_see_edit_permission_on_main_file', {
+            noun: i
+          });
+        }
       }
-      if (e.pending) {
-        break;
-      }
-      const s = !!r && !r.is_invite_only && !r.is_view_only;
-      return getCombinedPermissionMessage(
-        !!e.teamLevel && !n && e.teamLevel > AccessLevelEnum.VIEWER && (!r || s),
-        !!e.folderLevel && e.folderLevel > AccessLevelEnum.VIEWER,
-        !!e.repoLevel && e.repoLevel > AccessLevelEnum.VIEWER
-      );
-    }
-    case AccessLevelEnum.VIEW_PROTOTYPES: {
-      if (t.link_access === FPermissionLevelType.EDIT) {
-        return getI18nString('permissions.can_still_see_and_edit_anybody_with_the_link_noun', { noun: i });
-      }
-      if (t.link_access === FPermissionLevelType.ORG_EDIT && e.org_user && e.org_user.permission !== FUserRoleType.GUEST) {
-        return getI18nString('permissions.can_still_see_and_edit_allow_editing_by_org_members_with_link', { noun: i });
-      }
-      if (e.pending) {
-        break;
-      }
-      const n = r && !r.is_invite_only && !r.is_view_only;
-      if (e.teamLevel && e.teamLevel > AccessLevelEnum.VIEWER && (!r || n)) {
-        return getI18nString('permissions.can_still_see_and_edit_permission_team_file_is_in', { noun: i });
-      }
-      if (e.folderLevel && e.folderLevel > AccessLevelEnum.VIEWER) {
-        return getI18nString('permissions.can_still_see_and_edit_permission_team_project_is_in', { noun: i });
-      }
-      if (e.repoLevel && e.repoLevel > AccessLevelEnum.VIEWER) {
-        return getI18nString('permissions.can_still_see_and_edit_permission_main_file', { noun: i });
-      }
-      if (t.link_access === FPermissionLevelType.VIEW) {
-        return getI18nString('permissions.can_still_edit_allow_view_anybody_with_link', { noun: i });
-      }
-      if (t.link_access === FPermissionLevelType.ORG_VIEW && e.org_user && e.org_user.permission !== FUserRoleType.GUEST) {
-        return getI18nString('permissions.can_still_edit_allow_edit_anybody_with_link', { noun: i });
-      }
-      if (e.teamLevel && e.teamLevel >= AccessLevelEnum.VIEWER && (!r || n)) {
-        return getI18nString('permissions.can_still_see_permission_team_file_is_on', { noun: i });
-      }
-      if (e.folderLevel && e.folderLevel >= AccessLevelEnum.VIEWER) {
-        return getI18nString('permissions.can_still_see_permission_project_file_is_on', { noun: i });
-      }
-      if (e.repoLevel && e.repoLevel >= AccessLevelEnum.VIEWER) {
-        return getI18nString('permissions.can_still_see_edit_permission_on_main_file', { noun: i });
-      }
-    }
   }
   return null;
 }
@@ -341,18 +358,16 @@ export function getPermissionMessageForSeenState({
   file: e,
   seenState: t,
   folder: r = null,
-  isInDraftsFolder: n,
+  isInDraftsFolder: n
 }) {
   const i = getEntityType(e);
   if (e.link_access === FPermissionLevelType.EDIT) {
-    return getI18nString('permissions.can_still_edit_anybody_with_the_link', { noun: i });
+    return getI18nString('permissions.can_still_edit_anybody_with_the_link', {
+      noun: i
+    });
   }
   const s = !!r && !r.is_invite_only && !r.is_view_only;
-  return getCombinedPermissionMessage(
-    !!t.teamLevel && !n && t.teamLevel > AccessLevelEnum.VIEWER && (!r || s),
-    !!t.folderLevel && t.folderLevel > AccessLevelEnum.VIEWER,
-    !!t.repoLevel && t.repoLevel > AccessLevelEnum.VIEWER
-  );
+  return getCombinedPermissionMessage(!!t.teamLevel && !n && t.teamLevel > AccessLevelEnum.VIEWER && (!r || s), !!t.folderLevel && t.folderLevel > AccessLevelEnum.VIEWER, !!t.repoLevel && t.repoLevel > AccessLevelEnum.VIEWER);
 }
 
 // Original helper function M - Combines permission messages
@@ -364,13 +379,7 @@ export function getPermissionMessageForSeenState({
  * @returns {string|null} The combined message or null.
  */
 function getCombinedPermissionMessage(e, t, r) {
-  return e
-    ? getI18nString('permissions.can_still_edit_team_permissions')
-    : t
-      ? getI18nString('permissions.can_still_edit_folder_permissions')
-      : r
-        ? getI18nString('permissions.can_still_edit_edit_permissions')
-        : null;
+  return e ? getI18nString('permissions.can_still_edit_team_permissions') : t ? getI18nString('permissions.can_still_edit_folder_permissions') : r ? getI18nString('permissions.can_still_edit_edit_permissions') : null;
 }
 
 // Original code from $$F8 - Checks if can perform action based on level

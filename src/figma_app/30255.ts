@@ -10,7 +10,7 @@ import { N as _$$N } from "../vendor/930821";
 import { P as _$$P } from "../vendor/348225";
 import { SKIP_RECORDING } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { F as _$$F } from "../905/989956";
 import { oW } from "../figma_app/247611";
 import { getViewportZoom } from "../figma_app/62612";
@@ -182,7 +182,7 @@ export let $$x0 = memo(function ({
             source: fK
           });
           oW.trigger("action", TransactionCommand.CLEAR);
-          G(jD());
+          G(hideTooltip());
           let n = et.current;
           if (n) {
             let e = n.getBoundingClientRect();

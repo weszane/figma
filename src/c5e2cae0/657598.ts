@@ -13,7 +13,7 @@ import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { lo, wn, Ix } from "../9420/795870";
 import { _6 } from "../figma_app/386952";
 import { getUserIsoCodeIfNonUsd } from "../figma_app/514043";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 let v = withTrackedClick(Button);
 let y = withTrackedClick(Button);
 export function $$j0(e) {
@@ -30,7 +30,7 @@ export function $$j0(e) {
   } = e;
   let w = useDispatch();
   let E = _6();
-  let A = useSelector(e => Np(e, E));
+  let A = useSelector(e => selectedViewToPath(e, E));
   let [I, k] = useState(!1);
   let {
     saveWithPaymentMethod,

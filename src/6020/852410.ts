@@ -17,7 +17,7 @@ import { k as _$$k2 } from "../6020/640789";
 import { getI18nString } from "../905/303541";
 import { lW } from "../figma_app/11182";
 import { K as _$$K2 } from "../905/987240";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { VU } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
@@ -25,7 +25,7 @@ import { kl } from "../905/275640";
 import { eY } from "../figma_app/722362";
 import { selectOpenFileKey, selectCurrentFile, useOpenFileObjectWithSinatraType } from "../figma_app/516028";
 import { qb, Rv } from "../figma_app/2590";
-import { vp } from "../figma_app/831696";
+import { serializeFullViewerQueryParams } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
 import { QZ } from "../figma_app/727192";
 import { e as _$$e } from "../figma_app/905311";
@@ -127,7 +127,7 @@ function F({
           disabled: !a,
           onClick: () => function (t) {
             let e = PrototypingTsApi.currentDeviceType();
-            let o = vp({
+            let o = serializeFullViewerQueryParams({
               scalingInfo: {
                 viewportScalingMode: qb(e),
                 contentScalingMode: Rv(e)
@@ -176,7 +176,7 @@ export let $$L0 = function (t) {
   });
   let p = useSelector(t => t.mirror.appModel.currentSelectedProperty);
   let d = eY();
-  let c = m0();
+  let c = isDevHandoffEditorType();
   let [m, f] = useState(null);
   let w = useDispatch();
   let v = c || t.viewOnly;

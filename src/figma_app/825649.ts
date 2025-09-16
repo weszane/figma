@@ -16,7 +16,7 @@ import { Dl } from "../figma_app/601682";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { ju } from "../figma_app/88239";
 import { qP, Fb } from "../figma_app/909778";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { $m } from "../figma_app/78808";
 import { Rh } from "../905/844322";
 import { U1, kj } from "../905/191601";
@@ -51,7 +51,7 @@ import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } f
 import { fA, p9, F9 } from "../figma_app/803787";
 import { jB, Cp, Px, zS } from "../figma_app/722141";
 import { UpsellModalType } from "../905/165519";
-import { Eg, _b } from "../figma_app/841351";
+import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
 import { TeamOrgType } from "../figma_app/10554";
 import { Yh, c1 } from "../figma_app/357047";
@@ -339,8 +339,8 @@ export function $$eO1({
     recordingKey: "toggleVersionHistory",
     displayText: Ah(eL.activeCanvasEditModeType) ? getI18nString("fullscreen.filename_view.version-history-hide") : getI18nString("fullscreen.filename_view.version-history-show"),
     callback: () => {
-      z(oB());
-      Ah(eL.activeCanvasEditModeType) ? z(Eg()) : z(_b({
+      z(hideDropdownAction());
+      Ah(eL.activeCanvasEditModeType) ? z(exitVersionHistoryMode()) : z(enterVersionHistoryMode({
         source: _$$e.EDITOR_TOOLBAR
       }));
     }
@@ -482,14 +482,14 @@ export function $$eO1({
     recordingKey: "rename",
     displayText: tj ? getI18nString("fullscreen.filename_view.rename-branch") : getI18nString("fullscreen.filename_view.rename"),
     callback: () => {
-      z(oB());
+      z(hideDropdownAction());
       z(vg());
     }
   }]), ...ri(ez && !eC && tK, [{
     disabled: !tz,
     displayText: "Restore",
     callback: () => {
-      z(oB());
+      z(hideDropdownAction());
       eU && z(Rh({
         fileKeys: {
           [eM.key]: eU
@@ -521,7 +521,7 @@ export function $$eO1({
     recordingKey: "delete",
     displayText: tj ? getI18nString("fullscreen.filename_view.archive-branch") : getI18nString("fullscreen.filename_view.move_to_trash"),
     callback: tj ? () => {
-      z(oB());
+      z(hideDropdownAction());
       eU && (z(VK({
         fileKeys: {
           [eM.key]: eU
@@ -532,7 +532,7 @@ export function $$eO1({
         fileRepoId: eM.fileRepoId
       }));
     } : () => {
-      if (z(oB()), !eM || !eU) return;
+      if (z(hideDropdownAction()), !eM || !eU) return;
       let e = getRepoByIdAlt(eM, eB);
       e && isDefaultFile(eM, e) ? eM.repo?.canEdit && !e.trashed_at && z(U1({
         filesByKey: {},
@@ -552,7 +552,7 @@ export function $$eO1({
     disabled: !tz,
     displayText: getI18nString("fullscreen.filename_view.delete-branch"),
     callback: () => {
-      z(oB());
+      z(hideDropdownAction());
       z(showModalHandler({
         type: _$$e2,
         data: {

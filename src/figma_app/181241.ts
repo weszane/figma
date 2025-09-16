@@ -254,7 +254,7 @@ export namespace APIParameterUtils {
 }
 
 // Default validator instance
-const defaultValidator = createNoOpValidator()
+export const defaultValidator = createNoOpValidator()
 
 // Legacy exports for backward compatibility
 export const Rq = createPaginatedValidator

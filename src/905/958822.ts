@@ -18,7 +18,7 @@ import { Tf, nb, hi, c_, Y6, YC } from "../figma_app/543100";
 import { useCurrentUserOrgId } from "../905/845253";
 import { _6 } from "../figma_app/386952";
 import { fileEntityDataMapper } from "../905/943101";
-import { K as _$$K } from "../figma_app/193867";
+import { isRecentsAndSharingView } from "../figma_app/193867";
 import { yH } from "../figma_app/722141";
 import { ViewTypeEnum } from "../figma_app/471068";
 import { SortOrder } from "../figma_app/756995";
@@ -54,7 +54,7 @@ import { ac } from "../905/930279";
 import { liveStoreInstance } from "../905/713695";
 import { e0 } from "../905/696396";
 import { generateUUIDv4 } from "../905/871474";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { noop } from "../905/834956";
 import { kE } from "../905/466026";
 import { i as _$$i } from "../905/977961";
@@ -227,7 +227,7 @@ function ef(e) {
   let i = useMemo(() => e.dropdownId || generateUUIDv4(), [e.dropdownId]);
   let s = useSelector(e => e.dropdownShown?.type === i);
   let o = () => {
-    s ? t(oB()) : t(j7({
+    s ? t(hideDropdownAction()) : t(showDropdownThunk({
       type: i
     }));
   };
@@ -614,7 +614,7 @@ export function $$eT0({
       hideBranchIndicator: $,
       isHovered: i,
       isSelected: r,
-      showPlanIcon: _$$K(M) || "search" === M.view,
+      showPlanIcon: isRecentsAndSharingView(M) || "search" === M.view,
       checksForViewOnlyLabels: R,
       interactiveThumbnailsEnabled: P,
       onChildFocusChange: t

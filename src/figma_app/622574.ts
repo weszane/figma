@@ -18,17 +18,17 @@ import { G7 } from "../figma_app/336853";
 import { useCurrentPlanUser, useCurrentPrivilegedPlan, useCurrentPublicPlan } from "../figma_app/465071";
 import { AC, tz } from "../figma_app/803787";
 import { ol } from "../figma_app/598018";
-import { ke } from "../figma_app/841351";
+import { checkForVisibleChanges } from "../figma_app/841351";
 import { n as _$$n } from "../905/79930";
 import { s as _$$s } from "../905/82276";
 import { UNASSIGNED } from "../905/247093";
 import { q as _$$q } from "../figma_app/446378";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { ar } from "../figma_app/741211";
 import { j } from "../905/521149";
 var $$R13 = (e => (e.NOT_ENABLED = "NOT_ENABLED", e.CAN_PUBLISH = "CAN_PUBLISH", e.FILE_IN_DRAFTS = "FILE_IN_DRAFTS", e.FILE_IN_DRAFTS_CANNOT_MOVE = "FILE_IN_DRAFTS_CANNOT_MOVE", e.DISABLED_IN_SETTINGS = "DISABLED_IN_SETTINGS", e.CANNOT_PUBLISH = "CANNOT_PUBLISH", e))($$R13 || {});
 function L() {
-  let e = lg();
+  let e = getCurrentFileType();
   let t = useCurrentPlanUser("useCustomTemplatesAllowed").unwrapOr(null);
   let r = useCurrentPrivilegedPlan("useCustomTemplatesAllowed").unwrapOr(null);
   return useMemo(() => r?.key.type === FOrganizationLevelType.ORG ? ar(!!r?.customTemplatesAllowed, !!t) : r?.key.type === FOrganizationLevelType.TEAM && !!r && !!e && r.tier !== FPlanNameType.STARTER && (e === FFileType.SLIDES || (e === FFileType.WHITEBOARD ? !!getFeatureFlags().pro_templates_figjam : e === FFileType.COOPER || e === FFileType.FIGMAKE)), [t, r, e]);
@@ -574,7 +574,7 @@ export function $$ee9() {
   let e = $$U12()?.fileVersionId ?? "";
   let t = useStore();
   let [r, a] = useAtomValueAndSetter($$Q10);
-  let s = lg();
+  let s = getCurrentFileType();
   let o = selectWithShallowEqual(e => s === FFileType.SLIDES ? AC(e) : []);
   let d = selectWithShallowEqual(e => s === FFileType.COOPER ? tz(e) : []);
   let u = o.length;
@@ -592,7 +592,7 @@ export function $$ee9() {
       a(!1);
       return;
     }
-    e && null === r && ke(e, t).then(({
+    e && null === r && checkForVisibleChanges(e, t).then(({
       numPagesWithChanges: e
     }) => {
       a(e > 0);

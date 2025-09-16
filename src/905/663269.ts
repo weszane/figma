@@ -1,4 +1,5 @@
 import { ViewDefinition } from '../905/119879'
+import { createSessionRef } from '../905/552287'
 import { SchemaHandler } from '../905/578699'
 import { CodedError, deepEqual, INTERNAL_SYMBOL, ResourceStatus } from '../905/957591'
 import { FigmaAppClient } from '../figma_app/28817'
@@ -139,8 +140,7 @@ export class OptimisticMutationHandler extends FigmaAppClient {
 
 // Re-exported modules and variables with updated names
 export { getResourceDataOrFallback as oA } from '../905/419236'
-export { dZ } from '../905/552287'
-export { CodedError, deepEqual, ResourceStatus }
+export { CodedError, createSessionRef, deepEqual, ResourceStatus, SchemaHandler }
 export const tT = CodedError
 export const lw = deepEqual
 // export const CodedError = ResourceStatus
@@ -149,3 +149,5 @@ export const YJ = ViewRegistry // $$l0 -> ViewRegistry -> YJ
 export const Oh = OptimisticMutationHandler // $$u1 -> OptimisticMutationHandler -> Oh
 export const Sj = SchemaHandler // S -> Sj
 export const bu = hasInternalSymbol // $$c5 -> hasInternalSymbol -> bu
+export const iO = ViewRegistry
+export const dZ = createSessionRef

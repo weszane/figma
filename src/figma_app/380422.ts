@@ -18,7 +18,7 @@ import { selectOpenFile } from "../figma_app/516028";
 import { U as _$$U } from "../905/506188";
 import { getBasename } from "../905/309735";
 import { oh } from "../905/18797";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { I as _$$I } from "../figma_app/130633";
 import { F as _$$F } from "../905/84606";
 import { Y } from "../905/411989";
@@ -56,7 +56,7 @@ export function $$W0({
     currentSearch
   } = useAtomWithSubscription(WP);
   let G = useSelector(selectOpenFile);
-  let V = g5($A.Design).productComponents;
+  let V = g5(FDocumentType.Design).productComponents;
   let H = useMemoStable(() => V.map(e => e.library_key), [V]);
   let z = _$$U(H);
   let W = oh(fi) || "loading" === z.status;

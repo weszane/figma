@@ -30,10 +30,10 @@ import { eS as _$$eS } from "../figma_app/33126";
 import { $B } from "../figma_app/545877";
 import { _6 } from "../figma_app/386952";
 import { Aj } from "../figma_app/336853";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { usePreventScrollOnIOS } from "../905/772711";
 import { getUserId, selectCurrentUser } from "../905/372672";
-import { k as _$$k } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 import { shuffle } from "../figma_app/656233";
 import { getI18nString, renderI18nText, getLocalizedPath, loadI18nLocale } from "../905/303541";
 import { CR } from "../7021/854265";
@@ -57,7 +57,7 @@ import { getRumLoggingConfig } from "../905/16237";
 import { tc as _$$tc } from "../905/15667";
 import { yJ } from "../figma_app/24841";
 import { c as _$$c2 } from "../905/370443";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { WX, Bq, Vm } from "../figma_app/482142";
 import { UpsellModalType } from "../905/165519";
 import { UpgradeSteps, UpsellSourceType } from "../figma_app/831101";
@@ -345,7 +345,7 @@ function J() {
     isStudent: r
   });
   let p = useCallback(async r => {
-    Object.keys(r).length && e && (await _$$k.setOnboardingSignal({
+    Object.keys(r).length && e && (await UserAPIHandlers.setOnboardingSignal({
       id: e,
       onboarding_signals: r
     }));
@@ -387,7 +387,7 @@ function ey() {
   let r = useSelector(e => e.selectedView);
   let t = useSelector(e => null !== e.user && cn(e.user));
   let i = t => {
-    desktopAPIInstance ? e(sf({
+    desktopAPIInstance ? e(selectViewAction({
       view: "teamUpgrade",
       teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
       teamId: t.id,
@@ -402,7 +402,7 @@ function ey() {
     }));
   };
   let s = () => {
-    desktopAPIInstance ? e(sf({
+    desktopAPIInstance ? e(selectViewAction({
       view: "orgSelfServe",
       upsellSource: UpsellModalType.TEAM_WELCOME,
       entryPoint: UpsellSourceType.NUX
@@ -803,7 +803,7 @@ function eJ(e) {
       }
       l ? isCommandOrShift(o) ? r.dispatch(V3({
         url: l.url
-      })) : r.dispatch(sf({
+      })) : r.dispatch(selectViewAction({
         view: "fullscreen",
         fileKey: l.key,
         editorType: FEditorType.Design
@@ -3772,7 +3772,7 @@ function t7({
     try {
       if (s === t) return;
       await loadI18nLocale(s);
-      c && (await _$$k.putUser({
+      c && (await UserAPIHandlers.putUser({
         user: {
           id: c,
           locale: s
@@ -4479,7 +4479,7 @@ function iE({
     let l = useAtomWithSubscription(_$$eS);
     let a = useAtomWithSubscription($B);
     let d = _6();
-    let c = null !== U2(d);
+    let c = null !== getFileKeyFromSelectedView(d);
     let [u, x] = useAtomValueAndSetter(S0);
     let [h, _] = useAtomValueAndSetter(bk);
     let p = fr();

@@ -4,7 +4,7 @@ import { UserInterfaceElements } from "../figma_app/763686";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { localStorageRef } from "../905/657224";
 import { FP } from "../figma_app/91703";
-import { Em } from "../figma_app/976749";
+import { isDesignFileType } from "../figma_app/976749";
 import { isStarterUserAtom } from "../figma_app/864723";
 import { d4 } from "../figma_app/202626";
 import { D } from "../905/347702";
@@ -42,7 +42,7 @@ export function $$T2() {
     hasAnyUiKit
   } = I7();
   let p = useAtomWithSubscription(isStarterUserAtom);
-  let g = Em();
+  let g = isDesignFileType();
   let f = selectCurrentFile()?.canEdit;
   useEffect(() => {
     if (g && f && r && !t) {

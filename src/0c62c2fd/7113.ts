@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { customHistory } from "../905/612521";
 import { isCommandEvent } from "../905/63728";
 import { kg } from "../figma_app/976345";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { useCurrentUserOrgId } from "../905/845253";
 import { DUserRole, TGroupType } from "../figma_app/858344";
 import { UNASSIGNED } from "../905/247093";
@@ -20,7 +20,7 @@ export function $$m0() {
       let t = `/files/${e}/workspace/${r ?? UNASSIGNED}/directory/teams`;
       customHistory.redirect(t, "_blank");
       a.preventDefault();
-    } else t(sf({
+    } else t(selectViewAction({
       view: "workspace",
       subView: DUserRole.DIRECTORY,
       workspaceId: r,

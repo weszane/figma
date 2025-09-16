@@ -18,16 +18,16 @@ import { l as _$$l } from "../905/997221";
 import { YG } from "../905/921418";
 import { withParsedMeta } from "../905/405710";
 import { Sc, D2, VP } from "../905/18797";
-import { zg } from "../figma_app/193867";
+import { isWorkshopModeActive } from "../figma_app/193867";
 import { kb } from "../figma_app/502247";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { PrimaryWorkflowEnum, NO_TEAM } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { Z } from "../905/939602";
 import { yD } from "../905/92359";
 let O = new Map();
 async function R(e, t) {
-  let r = zg(e.getState().selectedView);
+  let r = isWorkshopModeActive(e.getState().selectedView);
   let n = !getInitialOptions().user_data;
   if (n && !r) return;
   if ((O.get(t) || 0) > 20) {
@@ -176,7 +176,7 @@ let $$M3 = createOptimistThunk(e => {
   let r = !!t.user;
   if (!t.openFile?.key) return;
   let n = e.getState().selectedView;
-  n && "fullscreen" === n.view && (n.editorType === FEditorType.Whiteboard || n.editorType === FEditorType.Slides || n.editorType === FEditorType.Cooper ? L(e) : kG(), r && j(e, n.editorType === FEditorType.Whiteboard ? $A.FigJam : $A.Design));
+  n && "fullscreen" === n.view && (n.editorType === FEditorType.Whiteboard || n.editorType === FEditorType.Slides || n.editorType === FEditorType.Cooper ? L(e) : kG(), r && j(e, n.editorType === FEditorType.Whiteboard ? FDocumentType.FigJam : FDocumentType.Design));
   r && (e.dispatch(tg()), xZ(e));
 });
 let $$F1 = "FETCH_RECENTLY_USED_LIBRARY_ITEMS";

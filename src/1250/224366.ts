@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { HandoffBindingsCpp, Fullscreen } from "../figma_app/763686";
 import { trackFileEventWithStore } from "../figma_app/901889";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
 import { n0 } from "../figma_app/32128";
@@ -63,7 +63,7 @@ export function $$h1(e) {
   });
   return async (e, r, o) => {
     o && (await u(o));
-    n(sf(t));
+    n(selectViewAction(t));
     let l = "unknown";
     "fullscreen" === t.view && (HandoffBindingsCpp.addToSelectionNoAnimation([r]), Fullscreen.panToNode(r, !1), l = t.editorType === FEditorType.Design ? "design_canvas" : "dev_mode_canvas");
     a(e, {

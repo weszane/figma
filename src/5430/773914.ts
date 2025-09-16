@@ -47,7 +47,7 @@ import { jd } from "../figma_app/106207";
 import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { getCurrentPluginVersion, pluginMetadata } from "../figma_app/300692";
 import { FEditorType } from "../figma_app/53721";
-import { vt as _$$vt } from "../905/862883";
+import { ITemplateType } from "../905/862883";
 import { noop } from "../5430/262192";
 import { H as _$$H } from "../5430/992445";
 import { to as _$$to } from "../figma_app/764679";
@@ -436,7 +436,7 @@ function em(e, t) {
   if (r && s) {
     e(jd({
       templateIdentifier: {
-        type: _$$vt.TeamTemplate,
+        type: ITemplateType.TeamTemplate,
         file_key: r
       },
       templateName: s,
@@ -499,7 +499,7 @@ function ep(e, t) {
   if (r && s) {
     e(jd({
       templateIdentifier: {
-        type: _$$vt.TeamTemplate,
+        type: ITemplateType.TeamTemplate,
         file_key: r
       },
       templateName: s,

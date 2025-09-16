@@ -9,7 +9,7 @@ import { useHandleKeyboardEvent } from "../figma_app/878298";
 import { Point } from "../905/736624";
 import { ms, gw, OR } from "../figma_app/236327";
 import { P } from "../905/347284";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { vL } from "../905/826900";
 var c = d;
 let _ = "pointing_dropdown--chevron--eYKwT";
@@ -29,7 +29,7 @@ class b extends PureComponent {
   constructor(e) {
     super(e);
     this.onKeyDownFromFullscreen = e => {
-      "Escape" === e.event.key && this.props.dispatch && (e.accept(), this.props.dispatch(oB()));
+      "Escape" === e.event.key && this.props.dispatch && (e.accept(), this.props.dispatch(hideDropdownAction()));
     };
     this.getContentLocation = () => {
       let e = this.props.lean || "center";

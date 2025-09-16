@@ -19,7 +19,7 @@ import { w as _$$w2 } from '../905/281010';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { N_ } from '../905/332483';
-import { Q as _$$Q } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { c as _$$c } from '../905/370443';
 import { getUserId } from '../905/372672';
 import { FRequestsStr } from '../905/384551';
@@ -35,13 +35,13 @@ import { getFeatureFlags } from '../905/601108';
 import { EM, QL } from '../905/609392';
 import { e as _$$e3 } from '../905/621515';
 import { ResourceStatus, getResourceDataOrFallback } from '../905/663269';
-import { $ as _$$$ } from '../905/692618';
+import { BannerButton } from '../905/692618';
 import { e0 as _$$e2 } from '../905/696396';
 import { G as _$$G } from '../905/750789';
 import { AutoLayout } from '../905/470281';
 import { OrganizationType } from '../905/833838';
 import { useCurrentUserOrg } from '../905/845253';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { O as _$$O2 } from '../905/936515';
 import { sx } from '../905/941192';
@@ -67,7 +67,7 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { TaD } from '../figma_app/6204';
 import { useAtomValueAndSetter, useAtomWithSubscription } from '../figma_app/27355';
 import { AdminRequestDashboardView, AdminRequestDashOrgInfo, UserFlagByName } from '../figma_app/43951';
-import { Yy } from '../figma_app/59509';
+import { BannerInset } from '../figma_app/59509';
 import { hY } from '../figma_app/80683';
 import { Pn, Yo } from '../figma_app/84966';
 import { ER } from '../figma_app/102449';
@@ -148,9 +148,9 @@ function U({
 }
 function J(e) {
   let t = useDispatch();
-  return jsx(_$$$, {
+  return jsx(BannerButton, {
     onClick: () => {
-      t(sf({
+      t(selectViewAction({
         view: 'orgAdminSettings',
         orgAdminSettingsViewTab: DashboardSection.BILLING,
         orgAdminSettingsViewSecondaryTab: BillingSectionEnum.INVOICES,
@@ -162,9 +162,9 @@ function J(e) {
 }
 function K() {
   let e = useDispatch();
-  return jsx(_$$$, {
+  return jsx(BannerButton, {
     onClick: () => {
-      e(sf({
+      e(selectViewAction({
         view: 'orgAdminSettings',
         orgAdminSettingsViewTab: DashboardSection.BILLING,
         orgAdminSettingsViewSecondaryTab: BillingSectionEnum.OVERVIEW
@@ -244,10 +244,10 @@ function X(e) {
       e.dashboardBillingNotice;
       return null;
   }
-  return jsxs(Yy, {
+  return jsxs(BannerInset, {
     'data-testid': 'billing-notice-banner',
     'icon': jsx(_$$A, {}),
-    'children': [jsx(_$$Q, {
+    'children': [jsx(BannerMessage, {
       title: t,
       children: a
     }), s]
@@ -677,14 +677,14 @@ function tr({
 let tl = 'approving-all-requests';
 let to = 'RequestFlyout';
 let td = (e, t, a) => {
-  e(sf({
+  e(selectViewAction({
     view: 'seatRequests',
     adminPlanType: t,
     planId: a
   }));
 };
 let tc = e => {
-  e(sf({
+  e(selectViewAction({
     view: 'billingGroupDashboard',
     selectedTab: FRequestsStr.ALL_REQUESTS
   }));
@@ -1444,12 +1444,12 @@ export function $$tg0({
               className: _$$s.mb16.$
             }), jsx(_$$k3, {
               openConnectedProjects: () => {
-                q?.key.type === FOrganizationLevelType.TEAM ? a(sf({
+                q?.key.type === FOrganizationLevelType.TEAM ? a(selectViewAction({
                   view: 'teamAdminConsole',
                   teamId: q?.key.parentId ?? '',
                   teamAdminConsoleViewTab: DashboardSections.CONTENT,
                   teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
-                })) : a(sf({
+                })) : a(selectViewAction({
                   view: 'orgAdminSettings',
                   orgAdminSettingsViewTab: DashboardSection.CONTENT,
                   orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS
@@ -1487,11 +1487,11 @@ export function $$tg0({
                 onManage: () => {
                   q.key.type === FOrganizationLevelType.TEAM ? (q.key.parentId && a(m$({
                     teamId: q.key.parentId
-                  })), a(sf({
+                  })), a(selectViewAction({
                     view: 'teamAdminConsole',
                     teamId: q.key.parentId ?? '',
                     teamAdminConsoleViewTab: DashboardSections.MEMBERS
-                  }))) : a(sf({
+                  }))) : a(selectViewAction({
                     view: 'orgAdminSettings',
                     orgAdminSettingsViewTab: DashboardSection.MEMBERS
                   }));

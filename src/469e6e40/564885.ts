@@ -12,7 +12,7 @@ import { h1 } from "../905/986103";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { FFileType } from "../figma_app/191312";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
@@ -147,7 +147,7 @@ function S(e) {
           children: e.activity?.file_key ? jsx(Button, {
             variant: "link",
             onClick: () => {
-              e.activity && e.activity.file_key && (t(sf({
+              e.activity && e.activity.file_key && (t(selectViewAction({
                 view: "fullscreen",
                 fileKey: e.activity.file_key,
                 editorType: mapFileTypeToEditorType(e.editorType)

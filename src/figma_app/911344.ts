@@ -13,7 +13,7 @@ import { isVsCodeEnvironment } from "../905/858738";
 import { p as _$$p, H } from "../905/216429";
 import { INTERNAL_RERUN_PLUGIN_IDENTIFIER, PARENT_WINDOW_REFERENCE, PLUGIN_TIMEOUT_MS, PLUGIN_RETRY_DELAY_MS } from "../905/968269";
 import { applyContentSecurityPolicy } from "../905/544659";
-import { Y } from "../905/696438";
+import { PluginInstanceManager } from "../905/696438";
 let y = !!desktopAPIInstance || isVsCodeEnvironment();
 let b = `
  document.close();
@@ -289,8 +289,8 @@ export class $$S0 extends Component {
     let {
       iframeId
     } = this.props;
-    Y.instance[iframeId] = this;
-    let t = Y.instanceLoading[iframeId];
+    PluginInstanceManager.instance[iframeId] = this;
+    let t = PluginInstanceManager.instanceLoading[iframeId];
     if (t) {
       this.instanceLoadingResolve = t.resolve;
       this.instanceLoadingReject = t.reject;
@@ -299,7 +299,7 @@ export class $$S0 extends Component {
         this.instanceLoadingResolve = e;
         this.instanceLoadingReject = t;
       });
-      Y.instanceLoading[iframeId] = {
+      PluginInstanceManager.instanceLoading[iframeId] = {
         resolve: this.instanceLoadingResolve,
         reject: this.instanceLoadingReject,
         promise: t
@@ -310,8 +310,8 @@ export class $$S0 extends Component {
     let {
       iframeId
     } = this.props;
-    delete Y.instance[iframeId];
-    delete Y.instanceLoading[iframeId];
+    delete PluginInstanceManager.instance[iframeId];
+    delete PluginInstanceManager.instanceLoading[iframeId];
   }
   updateState(e) {
     this.setState(e);

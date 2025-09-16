@@ -11,7 +11,7 @@ import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { n as _$$n } from "../905/734251";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { NY } from "../figma_app/646357";
 import { VP } from "../905/18797";
@@ -105,7 +105,7 @@ function M({
       tooltipForScreenReadersOnly: !0,
       onClick: () => {
         t(e);
-        o(oB());
+        o(hideDropdownAction());
       },
       onMouseDown: e => e.stopPropagation()
     })]
@@ -225,7 +225,7 @@ function J({
       recordingKey: generateRecordingKey(...t, "remove"),
       onClick: () => {
         e(i.data.component);
-        r(oB());
+        r(hideDropdownAction());
       },
       children: renderI18nText("design_systems.component_properties.remove_value")
     })
@@ -299,7 +299,7 @@ export function $$ei0({
   let R = useCallback((e, t) => {
     e.preventDefault();
     e.stopPropagation();
-    k(j7({
+    k(showDropdownThunk({
       type: Q,
       data: {
         component: t,

@@ -186,10 +186,10 @@ import { M as _$$M2 } from '../905/771870';
 import { b as _$$b2, eM as _$$eM, gg, LQ, M9, Nz, PE, yF } from '../905/777093';
 import { O4 } from '../905/777187';
 import { s as _$$s5 } from '../905/780421';
-import { $A as _$$$A } from '../905/782918';
+import { isFullscreenDevHandoffView } from '../905/782918';
 import { cq } from '../905/794154';
 import { x as _$$x3 } from '../905/797453';
-import { B as _$$B6 } from '../905/808775';
+import { mapEditorTypeTo } from '../905/808775';
 import { defaultLanguage } from '../905/816253';
 import { EventShield } from '../905/821217';
 import { F as _$$F5 } from '../905/827944';
@@ -202,7 +202,7 @@ import { s2 as _$$s3, A9, bT, E9, mK } from '../905/851937';
 import { m as _$$m3 } from '../905/852057';
 import { y as _$$y2 } from '../905/855374';
 import { n3 as _$$n, F7, Rf } from '../905/859698';
-import { $A, ds as _$$ds, vt } from '../905/862883';
+import { FDocumentType, isSupportedBlockType, ITemplateType } from '../905/862883';
 import { parseSessionLocalID, defaultSessionLocalIDString } from '../905/871411';
 import { B as _$$B5 } from '../905/872019';
 import { Bn } from '../905/879323';
@@ -220,7 +220,7 @@ import { debounce } from '../905/915765';
 import { a7 as _$$a4 } from '../905/917898';
 import { sZ as _$$sZ, J5, jd, K8, O8, Vq } from '../905/920793';
 import { hD } from '../905/921139';
-import { oB as _$$oB, sf as _$$sf, ho, j7 } from '../905/929976';
+import { hideDropdownAction, selectViewAction, updateDropdownSelectionAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { c as _$$c5 } from '../905/932790';
 import { lQ } from '../905/934246';
@@ -263,7 +263,7 @@ import { s4 as _$$s2, Wl } from '../figma_app/88239';
 import { aK as _$$aK, CN as _$$CN, eH as _$$eH, lz as _$$lz, nN as _$$nN, re as _$$re, Bs, fk, FP, fy, Jt, pj, R5, u1, XE, XQ } from '../figma_app/91703';
 import { tO as _$$tO } from '../figma_app/98072';
 import { zs } from '../figma_app/106634';
-import { s0 as _$$s9, Nl } from '../figma_app/115923';
+import { sitesViewSetterAtomFamily, Nl } from '../figma_app/115923';
 import { Ed } from '../figma_app/139113';
 import { h8 } from '../figma_app/144974';
 import { ay as _$$ay, RH } from '../figma_app/147952';
@@ -282,7 +282,7 @@ import { Ht, j5 } from '../figma_app/178475';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
 import { parseHex } from '../figma_app/191804';
 import { LC } from '../figma_app/192142';
-import { zg } from '../figma_app/193867';
+import { isWorkshopModeActive } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { Nh } from '../figma_app/201703';
 import { kJ } from '../figma_app/204937';
@@ -416,11 +416,11 @@ import { Ym } from '../figma_app/806075';
 import { isRecordingEnabled } from '../figma_app/878298';
 import { RK } from '../figma_app/815170';
 import { G_h } from '../figma_app/822011';
-import { Ik } from '../figma_app/831696';
+import { isProtoViewerUrl } from '../figma_app/831696';
 import { TrackingProvider } from '../figma_app/831799';
 import { bi } from '../figma_app/836943';
 import { mu, Ww, ZG } from '../figma_app/840917';
-import { _b, Eg, HF } from '../figma_app/841351';
+import { enterVersionHistoryMode, exitVersionHistoryMode, findVersionById } from '../figma_app/841351';
 import { z6 } from '../figma_app/846841';
 import { qb } from '../figma_app/857454';
 import { LoadingSpinner } from '../figma_app/858013';
@@ -449,7 +449,7 @@ import { x0, Zk } from '../figma_app/963341';
 import { c as _$$c } from '../figma_app/968727';
 import { e4 as _$$e7 } from '../figma_app/968938';
 import { KD, Lk } from '../figma_app/975811';
-import { XE as _$$XE } from '../figma_app/976749';
+import { getEditorTypeFromView } from '../figma_app/976749';
 import { gH } from '../figma_app/985200';
 import _require from '../vendor/89702';
 import { produce } from 'immer';
@@ -3848,7 +3848,7 @@ class oo {
         break;
       case 'toggle-bold':
         let n = this._state.mirror.appModel.currentTool;
-        _$$XE(this._store.getState().selectedView) === FEditorType.Whiteboard && _$$BG(n) ? this._applyDrawingToolStylingAction(n) : this._applyTextStylingAction(TextEditAction.TOGGLE_BOLD);
+        getEditorTypeFromView(this._store.getState().selectedView) === FEditorType.Whiteboard && _$$BG(n) ? this._applyDrawingToolStylingAction(n) : this._applyTextStylingAction(TextEditAction.TOGGLE_BOLD);
         break;
       case 'show-prototype-interaction-edit-modal':
         let {
@@ -4986,7 +4986,7 @@ class lV {
     if (e && !this.canInteractWithWidget(t, e)) return;
     let i = debugState.getState().selectedView.editorType;
     if (void 0 !== i) {
-      let n = _$$B6(i);
+      let n = mapEditorTypeTo(i);
       debugState?.dispatch(RH({
         storeInRecentsKey: n,
         id: t,
@@ -5374,7 +5374,7 @@ let lX = class e extends sP(sN(sR)) {
     this.triggerActionEnum = (e, t) => {
       if (e === Command.ENTER_LAYOUT_MODE) {
         let e = this._store.getState().selectedView;
-        this._store.dispatch(_$$sf({
+        this._store.dispatch(selectViewAction({
           ...e,
           versionId: void 0
         }));
@@ -5388,7 +5388,7 @@ let lX = class e extends sP(sN(sR)) {
     this.triggerAction = (e, t) => {
       if (e === 'enter-layout-mode') {
         let e = this._store.getState().selectedView;
-        this._store.dispatch(_$$sf({
+        this._store.dispatch(selectViewAction({
           ...e,
           versionId: void 0
         }));
@@ -5460,7 +5460,7 @@ let lX = class e extends sP(sN(sR)) {
       }
       if (e === SettingsAction.PREFERENCES) {
         if (TY(this._state.dropdownShown)) {
-          this.dispatch(ho({
+          this.dispatch(updateDropdownSelectionAction({
             type: _$$pi,
             data: {
               selectionToUpdate: SettingsAction.PREFERENCES
@@ -5468,7 +5468,7 @@ let lX = class e extends sP(sN(sR)) {
           }));
         } else {
           let t = this._state.mirror.appModel.showUi ? 42 : 0;
-          this.dispatch(j7({
+          this.dispatch(showDropdownThunk({
             type: _$$pi,
             data: {
               targetRect: {
@@ -5489,7 +5489,7 @@ let lX = class e extends sP(sN(sR)) {
           selectedView,
           mirror
         } = debugState.getState();
-        mirror.appModel.showUi && (this.dispatch(_$$oB()), Jf(this._state.dropdownShown) && jD(this.dispatch, this._state.dropdownShown, {
+        mirror.appModel.showUi && (this.dispatch(hideDropdownAction()), Jf(this._state.dropdownShown) && jD(this.dispatch, this._state.dropdownShown, {
           forceClose: t === 'toolbar'
         }));
         selectedView.view === 'fullscreen' && selectedView.editorType === FEditorType.DevHandoff && handlePluginError();
@@ -6742,7 +6742,7 @@ let lX = class e extends sP(sN(sR)) {
           d = getI18nString('sites.fullscreen_actions.external_url_copied');
           break;
         case FigmaSite.FIGMA:
-          let p = _$$$A(this._state.selectedView);
+          let p = isFullscreenDevHandoffView(this._state.selectedView);
           let m = Wl(this._state.selectedView);
           let h = _$$s2(this._state.selectedView);
           l = buildFileUrl({
@@ -6875,7 +6875,7 @@ let lX = class e extends sP(sN(sR)) {
       currentAllocatedBytes: CorePerfInfo?.getTotalUsedHeapMemory(),
       maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
       fileKey: i.fileKey
-    })) : e.dispatch(_$$sf({
+    })) : e.dispatch(selectViewAction({
       ...i,
       isRecoveryMode: !1
     }));
@@ -7057,7 +7057,7 @@ let lX = class e extends sP(sN(sR)) {
     this._readyPromiseResolve && this._readyPromiseResolve();
   }
   isInWorkshopMode() {
-    return zg(this._store.getState().selectedView);
+    return isWorkshopModeActive(this._store.getState().selectedView);
   }
   handleSignedOutEditAttempt(e, t) {
     if (!e && this.isInWorkshopMode()) return;
@@ -7095,7 +7095,7 @@ let lX = class e extends sP(sN(sR)) {
       t.editorType === FEditorType.DevHandoff && delete t.devModeFocusId;
       t.editorType = this._jsEditorType(e);
     });
-    i !== t && this.dispatch(_$$sf(i));
+    i !== t && this.dispatch(selectViewAction(i));
   }
   logEnterMode(e, t) {
     let i = this._jsEditorType(e);
@@ -7280,7 +7280,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showCanvasContextMenu(e, t) {
-    this.dispatch(j7({
+    this.dispatch(showDropdownThunk({
       type: W_,
       data: {
         clientX: e,
@@ -7289,7 +7289,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showSelectionContextMenu(e, t) {
-    this.dispatch(j7({
+    this.dispatch(showDropdownThunk({
       type: K9,
       data: {
         clientX: e,
@@ -7298,7 +7298,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showSelectLayerContextMenu(e, t) {
-    this.dispatch(j7({
+    this.dispatch(showDropdownThunk({
       type: wi,
       data: {
         clientX: e,
@@ -7307,7 +7307,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showTextEditModeContextMenu(e, t) {
-    this.dispatch(j7({
+    this.dispatch(showDropdownThunk({
       type: ku,
       data: {
         clientX: e,
@@ -7316,7 +7316,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   showRulerGuideContextMenu(e, t, i, n) {
-    this.dispatch(j7({
+    this.dispatch(showDropdownThunk({
       type: _$$t2,
       data: {
         clientX: e,
@@ -7559,11 +7559,11 @@ let lX = class e extends sP(sN(sR)) {
     alert(e);
   }
   toggleHistoryMode() {
-    this._state.mirror.appModel.topLevelMode === ViewType.HISTORY ? this.dispatch(Eg()) : this.dispatch(_b());
+    this._state.mirror.appModel.topLevelMode === ViewType.HISTORY ? this.dispatch(exitVersionHistoryMode()) : this.dispatch(enterVersionHistoryMode());
   }
   showViewChangesNotification(e) {
     let t = this._store.getState();
-    let i = HF(t.versionHistory.compareId, t.versionHistory);
+    let i = findVersionById(t.versionHistory.compareId, t.versionHistory);
     let n = t.modalShown;
     _$$z2(e, this.dispatch, i, n);
   }
@@ -7943,7 +7943,7 @@ let lX = class e extends sP(sN(sR)) {
         if (t.match((e.startsWith('^') ? '' : '^(?:www.)?') + e)) return !0;
       }
       return !1;
-    }(e) ? !!Ik(e) && (fullscreenValue.triggerActionInUserEditScope('insert-interactive-element-into-active-slide', {
+    }(e) ? !!isProtoViewerUrl(e) && (fullscreenValue.triggerActionInUserEditScope('insert-interactive-element-into-active-slide', {
       type: 'EMBED',
       url: e,
       canvasFallbackEnabled: !0
@@ -8081,16 +8081,16 @@ let lX = class e extends sP(sN(sR)) {
     })));
   }
   addWhiteboardToolToRecents(e) {
-    if (!_$$ds(e)) return;
+    if (!isSupportedBlockType(e)) return;
     let {
       user
     } = this._store.getState();
     user && this.dispatch(_$$ay({
       currentUserId: user.id,
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       item: {
         id: e,
-        type: vt.WhiteboardTool
+        type: ITemplateType.WhiteboardTool
       }
     }));
   }
@@ -8323,13 +8323,13 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   setSitesViewFile() {
-    isSitesFeatureEnabled() && (atomStoreManager.set(_$$s9, PanelType.FILE), this.closeLeftRailOverlay());
+    isSitesFeatureEnabled() && (atomStoreManager.set(sitesViewSetterAtomFamily, PanelType.FILE), this.closeLeftRailOverlay());
   }
   setSitesViewCode() {
-    isSitesFeatureEnabled() && (atomStoreManager.set(_$$s9, PanelType.CODE), this.closeLeftRailOverlay());
+    isSitesFeatureEnabled() && (atomStoreManager.set(sitesViewSetterAtomFamily, PanelType.CODE), this.closeLeftRailOverlay());
   }
   setSitesViewCms() {
-    isSitesFeatureEnabled() && (atomStoreManager.set(_$$s9, PanelType.DAKOTA), this.closeLeftRailOverlay());
+    isSitesFeatureEnabled() && (atomStoreManager.set(sitesViewSetterAtomFamily, PanelType.DAKOTA), this.closeLeftRailOverlay());
   }
   closeLeftRailOverlay() {
     atomStoreManager.set(Nl, void 0);

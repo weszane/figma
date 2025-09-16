@@ -22,7 +22,7 @@ import { AppView } from "../figma_app/707808";
 import { KindEnum } from "../905/129884";
 import { q as _$$q } from "../905/202542";
 import { C5, h5 } from "../figma_app/812915";
-import { s0 } from "../figma_app/115923";
+import { sitesViewSetterAtomFamily } from "../figma_app/115923";
 import { j } from "../figma_app/397127";
 import { p as _$$p } from "../figma_app/952952";
 import { h as _$$h } from "../figma_app/935454";
@@ -55,7 +55,7 @@ let l = memo(function (e) {
   });
 });
 export function $$P2(e) {
-  let [t, r] = useAtomValueAndSetter(s0);
+  let [t, r] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
   let n = C5();
   let i = q();
   let {

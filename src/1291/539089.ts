@@ -26,7 +26,7 @@ import { Ow } from "../905/921418";
 import { oh, mC, D2, Sc } from "../905/18797";
 import { MH } from "../figma_app/803787";
 import { Rt } from "../figma_app/979658";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { D as _$$D } from "../figma_app/268271";
 import { PI, rp } from "../figma_app/703988";
 import { r6 } from "../905/542608";
@@ -38,7 +38,7 @@ import { ZA } from "../1291/533467";
 import { throwTypeError } from "../figma_app/465776";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { lW } from "../figma_app/850075";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { qp } from "../905/977779";
 import { lX } from "../figma_app/588397";
 import { b as _$$b } from "../905/635568";
@@ -78,7 +78,7 @@ function Z(e) {
   let x = _$$b();
   let h = sO();
   let f = useIsSelectedViewFullscreenCooper();
-  let y = ow();
+  let y = isWhiteboardFileType();
   let [j, S] = useState(!1);
   let [v, w] = useState(width);
   let [N, T] = useState(height);
@@ -275,7 +275,7 @@ let er = {
 };
 export function $$eo1({
   query: e,
-  recentlyUsedItemsKey: t = $A.FigJam,
+  recentlyUsedItemsKey: t = FDocumentType.FigJam,
   hideRecentsIfEmpty: s,
   showLocalComponents: r = !1,
   addLibraryButtonType: l = "large",
@@ -493,7 +493,7 @@ export function $$ec0() {
   }, [e, o]);
   let {
     productComponents
-  } = g5($A.FigJam);
+  } = g5(FDocumentType.FigJam);
   let d = ik(productComponents, "components", (e, t) => !t.some(t => t.id === e.id), 10);
   let c = mk(d, [mC(fi), mC(fC)]);
   return jsx(lU, {

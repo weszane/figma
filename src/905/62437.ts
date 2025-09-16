@@ -21,7 +21,7 @@ import { vL } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { fileActionEnum } from "../figma_app/630077";
 import { isBranchView } from "../905/218608";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -145,7 +145,7 @@ export function $$B0(e) {
   return useMemo(() => {
     if (!C || !t || "fullscreen" !== T.view) return null;
     let e = [];
-    let r = (e, t, i) => $A(T) && ("savepoint-restore" === e || "savepoint-clear" === e) ? null : jsx(q7, {
+    let r = (e, t, i) => isFullscreenDevHandoffView(T) && ("savepoint-restore" === e || "savepoint-clear" === e) ? null : jsx(q7, {
       onClick: t,
       disabled: i,
       "data-test-id": `savepoint-menu-item-${e}`,
@@ -234,7 +234,7 @@ export function $$B0(e) {
       }));
     });
     i ? isBranchView(C) ? "branch_child_merge" === C.view ? (e.push(A, y, b, O), getFeatureFlags().branching_undo_merge && e.push(D)) : e.push(y, b, O) : e.push(A, y, b, P, O) : e.push(b, O);
-    getFeatureFlags().version_diffing && T.editorType !== FEditorType.Whiteboard && !$A(T) && e.push(u);
+    getFeatureFlags().version_diffing && T.editorType !== FEditorType.Whiteboard && !isFullscreenDevHandoffView(T) && e.push(u);
     return e;
   }, [T, C, i, t, R, N, k]);
 }

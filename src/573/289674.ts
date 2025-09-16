@@ -19,7 +19,7 @@ import { lQ } from "../905/934246";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { uQ, NM } from "../figma_app/311375";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { sF } from "../figma_app/193952";
 import { r as _$$r } from "../905/955316";
@@ -562,7 +562,7 @@ export function $$X0() {
   let t = Xr(mC("0:1"));
   let s = selectCurrentUser();
   let n = Td();
-  let o = lg();
+  let o = getCurrentFileType();
   let l = trackDefinedFileEventWithStore();
   let d = useTeamPlanPublicInfo().unwrapOr(null);
   let c = uQ();

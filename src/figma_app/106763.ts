@@ -6,7 +6,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { trackFileEvent } from "../figma_app/314264";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { selectCurrentFile } from "../figma_app/516028";
 let _ = null;
 export function $$h1(e) {
@@ -24,7 +24,7 @@ export function $$h1(e) {
     fileKey
   } = selectWithShallowEqual(e => {
     let r = Object.keys(e.mirror.sceneGraphSelection);
-    let n = $A(e.selectedView) ? Ql(e.mirror.sceneGraph, r?.[0] ?? "") : null;
+    let n = isFullscreenDevHandoffView(e.selectedView) ? Ql(e.mirror.sceneGraph, r?.[0] ?? "") : null;
     return {
       isTeamFile: !!t?.teamId,
       topLevelMode: e.mirror.appModel.topLevelMode,

@@ -97,7 +97,7 @@ import { m as _$$m } from "../642/720139";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { Bk, RN, Sg, $1, oV, Mt, mZ } from "../figma_app/76115";
 import { g5 } from "../figma_app/178752";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { isBranchAlt } from "../905/760074";
 import { qp, oE } from "../905/977779";
 import { O as _$$O2 } from "../905/221694";
@@ -112,7 +112,7 @@ import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { NG } from "../figma_app/709893";
 import { SvgComponent } from "../905/714743";
 import { AutoLayout } from "../905/470281";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { hasResourcePresetKey, hasResourcePresetKeyStatic, isKeyInQNOrR9 } from "../figma_app/255679";
 import { getBasename } from "../905/309735";
 import { $z } from "../figma_app/297733";
@@ -492,7 +492,7 @@ function tS({
   let z = useLatestRef(U);
   let D = !p;
   useEffect(() => {
-    U && !z && f(jD());
+    U && !z && f(hideTooltip());
   }, [U, f, z]);
   let $ = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, _).join("-") : e.node_id;
   let B = "Local components" === u || "Local private components" === u || e.isLocal;
@@ -1176,7 +1176,7 @@ function t9({
     }();
     let {
       productComponents
-    } = g5($A.Design);
+    } = g5(FDocumentType.Design);
     let {
       query: _query
     } = _$$I(Cn.AssetsPanel);

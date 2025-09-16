@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { kg } from "../figma_app/976345";
 import { m3 } from "../905/315794";
 import { a as _$$a } from "../905/332662";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { trackTeamEvent } from "../figma_app/314264";
 import { FC } from "../figma_app/212807";
 import { ViewTypeEnum } from "../figma_app/471068";
@@ -28,7 +28,7 @@ function x(e) {
       clickedResourceType: "team",
       resourceIdOrKey: x.id
     }));
-    i(sf({
+    i(selectViewAction({
       view: "team",
       teamId: x.id
     }));

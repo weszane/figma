@@ -11,18 +11,18 @@ import { W as _$$W } from "../905/200727";
 import { d as _$$d } from "../905/692836";
 import { t as _$$t, c as _$$c } from "../905/722657";
 import { r as _$$r } from "../905/12476";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
 import { IN, pM, KE } from "../905/116101";
 import { postUserFlag } from "../905/985254";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab, getSelectedDevModePropertiesPanelTab, setPropertiesPanelTab } from "../figma_app/741237";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { FileCanEdit } from "../figma_app/43951";
 import { getPluginMetadata, getPluginVersion, isDevModePlugin } from "../figma_app/300692";
-import { Nb, V_, Eg } from "../figma_app/841351";
+import { setActiveVersion, CURRENT_VERSION_ID, exitVersionHistoryMode } from "../figma_app/841351";
 import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { ManifestEditorType } from "../figma_app/155287";
@@ -45,7 +45,7 @@ export function $$k0(e, t) {
   let K = useSelector(e => e.selectedView);
   let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
   let $ = !selectCurrentUser();
-  let X = E3();
+  let X = getSelectedEditorType();
   let q = X === FEditorType.DevHandoff;
   let J = X === FEditorType.Illustration;
   let Z = q ? "handoff" : J ? "illustration" : "design";
@@ -70,7 +70,7 @@ export function $$k0(e, t) {
           type: _$$s.PLUGIN
         });
       }
-      r(sf({
+      r(selectViewAction({
         ...K,
         view: "fullscreen",
         editorType: FEditorType.DevHandoff
@@ -78,7 +78,7 @@ export function $$k0(e, t) {
       "fullscreen" === K.view && K.compareVersionId && (r(Y6({
         mode: UIVisibilitySetting.KEEP_UI,
         type: lF.SPINNER
-      })), r(Nb({
+      })), r(setActiveVersion({
         id: K.compareVersionId
       })));
       Y && fullscreenValue.triggerAction("toggle-prototyping-info");
@@ -93,7 +93,7 @@ export function $$k0(e, t) {
       globalPerfTimer.start("switch_to_illustration_mode.right_panel_tti");
       globalPerfTimer.start("switch_to_illustration_mode.toolbelt_animation");
       let n = Q.getState();
-      r(sf({
+      r(selectViewAction({
         ...K,
         view: "fullscreen",
         editorType: FEditorType.Illustration
@@ -113,8 +113,8 @@ export function $$k0(e, t) {
           isWidget: !1
         }));
       }
-      "fullscreen" === K.view && K.devModeFocusId && n.versionHistory.activeId && n.versionHistory.activeId !== V_ && r(Eg());
-      r(sf({
+      "fullscreen" === K.view && K.devModeFocusId && n.versionHistory.activeId && n.versionHistory.activeId !== CURRENT_VERSION_ID && r(exitVersionHistoryMode());
+      r(selectViewAction({
         ...K,
         view: "fullscreen",
         editorType: FEditorType.Design,

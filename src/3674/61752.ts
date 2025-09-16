@@ -11,7 +11,7 @@ import { VisualBellActions } from "../905/302958";
 import { V as _$$V } from "../905/223767";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { i$ } from "../905/15667";
@@ -139,7 +139,7 @@ export function $$z0({
       l("design");
     }, [l]);
     let p = useCallback(() => {
-      s(sf(d));
+      s(selectViewAction(d));
     }, [d, s]);
     return e ? {
       label: renderI18nText("dev_handoff.paywall.blocking_modal.button.not_now"),

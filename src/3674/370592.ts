@@ -12,7 +12,7 @@ import { v4, AC, P0, QN } from "../figma_app/655139";
 import { c as _$$c } from "../469e6e40/927162";
 import { NH } from "../figma_app/755395";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
-import { YE, Em, Bs, RH, wQ, SF } from "../figma_app/120227";
+import { useApplyCodeExtensionPreferences, isCodegenSupportedForLanguage, useUpdateCodeExtensionPreferences, getMeasurementUnit, getLanguageUnitLabel, useCodegenPreferencesSettings } from "../figma_app/120227";
 import { BK } from "../905/848862";
 import { AF } from "../figma_app/212807";
 import { KindEnum } from "../905/129884";
@@ -27,8 +27,8 @@ export function $$E0({
   onlyShowFirstPartyLanguages: e,
   disabled: t
 }) {
-  YE();
-  let n = Em();
+  useApplyCodeExtensionPreferences();
+  let n = isCodegenSupportedForLanguage();
   let i = AF();
   return jsx(VZ, {
     title: getI18nString("dev_handoff.code.settings"),
@@ -88,9 +88,9 @@ function S({
   disabled: e
 }) {
   let t = v4();
-  let n = Bs();
+  let n = useUpdateCodeExtensionPreferences();
   let o = QN();
-  let l = RH();
+  let l = getMeasurementUnit();
   let r = useCallback(e => n(t, o, {
     unit: e
   }), [t, n, o]);
@@ -115,7 +115,7 @@ export function $$P2({
   disabled: n,
   dropdownId: o
 }) {
-  let l = wQ();
+  let l = getLanguageUnitLabel();
   let s = useMemo(() => new $$L3(l), [l]);
   let d = s.format(e);
   let {
@@ -158,7 +158,7 @@ export class $$L3 {
   }
 }
 function R(e) {
-  let t = SF({
+  let t = useCodegenPreferencesSettings({
     includeActions: !1
   });
   return 0 === t.length ? null : jsx(Fragment, {

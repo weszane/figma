@@ -17,7 +17,7 @@ import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { r as _$$r } from "../905/571562";
 import E from "../vendor/239910";
 import { ms, MM, rr } from "../figma_app/236327";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { h as _$$h } from "../905/589458";
 import { o as _$$o } from "../905/918279";
 import { k as _$$k2 } from "../905/443820";
@@ -114,7 +114,7 @@ function R({
   let g = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
-    k(m) ? u(oB()) : u(j7({
+    k(m) ? u(hideDropdownAction()) : u(showDropdownThunk({
       type: T
     }));
   }, [u, m]);

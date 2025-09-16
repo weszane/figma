@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
 import { VisualBellActions } from "../905/302958";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 export function $$l1({
   activeToolIdAtom: e,
   readOnlyOverlayInfoAtom: t,
@@ -43,11 +43,11 @@ export function $$d0() {
   return useCallback(t => {
     var r;
     if (!t?.overlayId) {
-      e(oB());
+      e(hideDropdownAction());
       return;
     }
     let n = t.anchorClientRect;
-    e(j7({
+    e(showDropdownThunk({
       type: (r = t.overlayId, `TOOLBAR_STATE_OVERLAY_DROPDOWN_TYPE_${String(r)}`),
       data: {
         targetRect: {

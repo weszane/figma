@@ -34,7 +34,7 @@ import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { C as _$$C } from "../905/758411";
 import { LibraryTabEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { I as _$$I } from "../figma_app/130633";
 import { N2, Ee } from "../figma_app/392189";
@@ -374,7 +374,7 @@ export function $$eR6({
     })]
   });
   let tO = oh(fi);
-  let tR = g5($A.Design).productComponents;
+  let tR = g5(FDocumentType.Design).productComponents;
   let tL = !currentSearch && !tO && (!tR.length || kK());
   let tP = !Q || tL;
   let tD = recentFragments ? recentFragments.length : 0;

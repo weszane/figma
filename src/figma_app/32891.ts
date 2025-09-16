@@ -1,24 +1,39 @@
-import { useSelector } from "react-redux";
-import { PanelType, ViewType } from "../figma_app/763686";
-import { T } from "../905/868547";
-import { R } from "../905/105002";
-let $$o2 = [PanelType.CODE, PanelType.SETTINGS];
-let l = [...$$o2.map(e => R(e)), "INSERT"];
-export function $$d0() {
-  let e = useSelector(e => T(e.progressBarState.mode));
-  let t = useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === ViewType.HISTORY);
+import { useSelector } from 'react-redux'
+import { getPanelTypeString } from '../905/105002'
+import { isUIHiddenOrLocked } from '../905/868547'
+import { PanelType, ViewType } from '../figma_app/763686'
+// Original: let $$o2 = [PanelType.CODE, PanelType.SETTINGS];
+export const DISABLED_PANEL_TYPES = [PanelType.CODE, PanelType.SETTINGS]
+
+// Original: let l = [...$$o2.map(e => getPanelTypeString(e)), 'INSERT'];
+export const DISABLED_PANEL_STRINGS = [...DISABLED_PANEL_TYPES.map(panelType => getPanelTypeString(panelType)), 'INSERT']
+
+/**
+ * Retrieves the loading and read-only state from the Redux store.
+ * Original function: $$d0
+ * @returns {object} An object containing fileLoading and readOnlyUser flags.
+ */
+export function getLoadingAndReadOnlyState() {
+  const fileLoading = useSelector<ObjectOf>(state => isUIHiddenOrLocked(state.progressBarState.mode))
+  const readOnlyUser = useSelector<ObjectOf>(state => state.mirror.appModel.isReadOnly || state.mirror.appModel.topLevelMode === ViewType.HISTORY)
   return {
-    fileLoading: e,
-    readOnlyUser: e ? void 0 : t
-  };
-}
-export function $$c1(e) {
-  let {
     fileLoading,
-    readOnlyUser
-  } = $$d0();
-  return !!fileLoading || !!readOnlyUser && l.includes(e.toUpperCase());
+    readOnlyUser: fileLoading ? undefined : readOnlyUser,
+  }
 }
-export const Sn = $$d0;
-export const hM = $$c1;
-export const ou = $$o2;
+
+/**
+ * Checks if a given panel type should be disabled based on loading and read-only state.
+ * Original function: $$c1
+ * @param {string} panelType - The panel type to check.
+ * @returns {boolean} True if the panel should be disabled, false otherwise.
+ */
+export function isPanelDisabled(panelType: string) {
+  const { fileLoading, readOnlyUser } = getLoadingAndReadOnlyState()
+  return !!fileLoading || (!!readOnlyUser && DISABLED_PANEL_STRINGS.includes(panelType.toUpperCase()))
+}
+
+// Original exports: export const Sn = $$d0; export const hM = $$c1; export const ou = $$o2;
+export const Sn = getLoadingAndReadOnlyState
+export const hM = isPanelDisabled
+export const ou = DISABLED_PANEL_TYPES

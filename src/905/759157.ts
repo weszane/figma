@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { getPluginVersion } from "../figma_app/300692";
 import { ho } from "../figma_app/870683";
 export function $$c0() {
@@ -14,7 +14,7 @@ export function $$c0() {
       return;
     }
     i?.preventDefault();
-    e(sf({
+    e(selectViewAction({
       view: "communityHub",
       subView: "plugin",
       publishedPluginId: t.id

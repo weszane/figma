@@ -10,17 +10,17 @@ import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { vv } from "../905/890368";
+import { putUser } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { q0 } from "../figma_app/976345";
 import { U2 } from "../figma_app/545293";
-import { os } from "../905/929976";
+import { setSessionState } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { clearAnalytics } from "../figma_app/314264";
 import { z$ } from "../figma_app/840917";
 import { d9 } from "../figma_app/740025";
 import { y as _$$y, J } from "../905/235145";
-import { H } from "../905/202181";
+import { sessionApiInstance } from "../905/202181";
 import { createOptimistThunk } from "../905/350402";
 let $$A1 = createOptimistThunk(async () => {
   try {
@@ -57,7 +57,7 @@ let N = createOptimistThunk(e => {
     return;
   }
   let t = d9(e.getState().selectedView);
-  H.logoutAllUsers().then(() => {
+  sessionApiInstance.logoutAllUsers().then(() => {
     clearAnalytics();
     U2.clear();
     new P().sendToAllTabs(_$$y, J);
@@ -99,8 +99,8 @@ let w = () => {
   } catch (e) {}
 };
 let O = createOptimistThunk((e, t) => {
-  H.logoutOneUser(t.user.id).then(r => {
-    e.dispatch(os(r.data.meta));
+  sessionApiInstance.logoutOneUser(t.user.id).then(r => {
+    e.dispatch(setSessionState(r.data.meta));
     e.dispatch(q0(r.data.meta));
     r.data?.meta?.users?.length === 0 && (clearAnalytics(), U2.clear());
     let n = r.data?.meta?.redirect_url;
@@ -122,7 +122,7 @@ let O = createOptimistThunk((e, t) => {
 let $$R4 = createActionCreator("DELETE_USER_LOADING");
 let $$L3 = createActionCreator("USER_ERASE_SECRETS");
 let $$P0 = createActionCreator("USER_TOGGLE_TWO_FACTOR");
-let $$D6 = vv;
+let $$D6 = putUser;
 export const C$ = $$P0;
 export const FY = $$A1;
 export const S5 = $$x2;

@@ -5,7 +5,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { hideModal, showModalHandler } from "../905/156213";
 import { getSelectedFile } from "../905/766303";
@@ -522,7 +522,7 @@ let $$eh4 = createOptimistThunk((e, {
   let i = e.getState().openFile;
   if (!i || !i.sourceFile) return;
   let n = i.sourceFile;
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "fullscreen",
     fileKey: n.key,
     editorType: FEditorType.Design

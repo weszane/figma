@@ -1,38 +1,39 @@
-import { jsx } from "react/jsx-runtime";
-import { forwardRef } from "react";
-import { b } from "../905/333398";
-export let $$s1 = forwardRef((e, t) => jsx(b, {
+import { forwardRef } from 'react'
+import { jsx } from 'react/jsx-runtime'
+import { b } from '../905/333398'
+
+export let BannerFullWidth = forwardRef((e, t) => jsx(b, {
   ref: t,
-  type: "full-width",
-  ...e
-}));
-$$s1.displayName = "Banner.FullWidth";
-export let $$o4 = forwardRef((e, t) => jsx(b, {
+  type: 'full-width',
+  ...e,
+}))
+BannerFullWidth.displayName = 'Banner.FullWidth'
+export let BannerInline = forwardRef((e, t) => jsx(b, {
   ref: t,
-  type: "inline",
-  ...e
-}));
-$$o4.displayName = "Banner.Inline";
-export let $$l3 = forwardRef((e, t) => jsx(b, {
+  type: 'inline',
+  ...e,
+}))
+BannerInline.displayName = 'Banner.Inline'
+export let BannerInformational = forwardRef((e, t) => jsx(b, {
   ref: t,
-  type: "informational",
-  ...e
-}));
-$$l3.displayName = "Banner.Informational";
-export let $$d0 = forwardRef((e, t) => jsx(b, {
+  type: 'informational',
+  ...e,
+}))
+BannerInformational.displayName = 'Banner.Informational'
+export let BannerInsetModal = forwardRef((e, t) => jsx(b, {
   ref: t,
-  type: "inset-modal",
-  ...e
-}));
-$$d0.displayName = "Banner.InsetModal";
-export let $$c2 = forwardRef((e, t) => jsx(b, {
+  type: 'inset-modal',
+  ...e,
+}))
+BannerInsetModal.displayName = 'Banner.InsetModal'
+export let BannerInset = forwardRef((e, t) => jsx(b, {
   ref: t,
-  type: "inset",
-  ...e
-}));
-$$c2.displayName = "Banner.Inset";
-export const $y = $$d0;
-export const Cs = $$s1;
-export const Yy = $$c2;
-export const aq = $$l3;
-export const cV = $$o4;
+  type: 'inset',
+  ...e,
+}))
+BannerInset.displayName = 'Banner.Inset'
+export const $y = BannerInsetModal
+export const Cs = BannerFullWidth
+export const Yy = BannerInset
+export const aq = BannerInformational
+export const cV = BannerInline

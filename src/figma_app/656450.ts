@@ -7,7 +7,7 @@ import { loadingStatePutLoading, loadingStateDelete, loadingStatePutFailure } fr
 import { yJ, uW, Z } from "../905/618921";
 import { selectCurrentUser } from "../905/372672";
 import { VP, aF } from "../905/18797";
-import { k } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 let h = new class {
   constructor() {
@@ -136,7 +136,7 @@ export function $$T3(e) {
     hasError: loadingKeys.some(e => aF(o, e))
   };
 }
-let I = e => k.getUser({
+let I = e => UserAPIHandlers.getUser({
   userId: e
 }).then(e => e.data.meta).catch(e => {
   getFalseValue() || console.warn("Failed to get public user");

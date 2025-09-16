@@ -27,7 +27,7 @@ import { Sb } from "../905/359847";
 import { m as _$$m } from "../905/909123";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { d6 } from "../figma_app/530167";
-import { oB, sf } from "../905/929976";
+import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { u as _$$u } from "../905/747030";
 import { showModalHandler } from "../905/156213";
@@ -50,7 +50,7 @@ import { AC, x6, jO } from "../figma_app/803787";
 import { rR, sK } from "../figma_app/598018";
 import { UploadStatusEnum } from "../figma_app/10554";
 import { LibrarySourceEnum } from "../figma_app/633080";
-import { $A, vt } from "../905/862883";
+import { FDocumentType, ITemplateType } from "../905/862883";
 import { PreviewMode } from "../figma_app/707808";
 import { fileActionEnum } from "../figma_app/630077";
 import { BuyerAPIHandler } from "../905/180";
@@ -113,9 +113,9 @@ let $$eb16 = createOptimistThunk((e, t, {
       searchSessionId: wr(n)
     });
     "whiteboard" === i.editor_type && e.dispatch(Hx({
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       id: t.hubFileId,
-      type: vt.CommunityResource
+      type: ITemplateType.CommunityResource
     }));
     let a = getDesignFileUrlWithOptions(i);
     a = dR(a, {
@@ -123,7 +123,7 @@ let $$eb16 = createOptimistThunk((e, t, {
       fuid: t.workspace.userId
     });
     customHistory.redirect(a, isMobileUA ? void 0 : "_blank");
-    e.dispatch(oB());
+    e.dispatch(hideDropdownAction());
   }).catch(t => {
     e.dispatch(VisualBellActions.enqueue({
       error: !0,
@@ -184,9 +184,9 @@ let $$eT18 = createOptimistThunk((e, t) => {
     });
     t.callback && t.callback(i?.key);
     "whiteboard" === i.editor_type && e.dispatch(Hx({
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       id: t.hubFileId,
-      type: vt.CommunityResource
+      type: ITemplateType.CommunityResource
     }));
     let a = {};
     t.isDrawMode && (a = {
@@ -749,7 +749,7 @@ let $$eV19 = createOptimistThunk((e, t) => {
     fullscreenState: t
   };
   t === PreviewMode.FULLSCREEN && r.commentThreadId && delete r.commentThreadId;
-  e.dispatch(sf(r));
+  e.dispatch(selectViewAction(r));
 });
 export { D3, L1, Sb } from "../905/359847";
 export const Af = $$eh0;

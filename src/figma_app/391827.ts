@@ -6,11 +6,11 @@ import { WhiteboardTsApi, AppStateTsApi } from "../figma_app/763686";
 import { getThemeBackgroundColor } from "../figma_app/191804";
 import { selectWithShallowEqual } from "../905/103090";
 import { F } from "../905/989956";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { sO } from "../figma_app/21029";
 import { DP as _$$DP } from "../905/640017";
 export function $$h0() {
-  let e = ow();
+  let e = isWhiteboardFileType();
   let t = sO();
   let r = useSelector(e => e.mirror.appModel.currentPage);
   let a = selectWithShallowEqual(e => e.mirror.sceneGraph?.get(r)?.backgroundColor);

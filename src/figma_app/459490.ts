@@ -1,13 +1,13 @@
-import { useSelector } from 'react-redux'
-import { orgSubscriptionAtom } from '../905/296690'
-import { debugState } from '../905/407919'
-import { canvasEditDisabledAtom, useIsCanvasEditDisabled } from '../905/595131'
-import { getFeatureFlags } from '../905/601108'
-import { useCurrentUserOrg } from '../905/845253'
-import { getInitialDynamicConfig } from '../3973/389215'
-import { atomStoreManager } from '../figma_app/27355'
-import { zg } from '../figma_app/193867'
-import { Me, ol } from '../figma_app/598018'
+import { useSelector } from 'react-redux';
+import { orgSubscriptionAtom } from '../905/296690';
+import { debugState } from '../905/407919';
+import { canvasEditDisabledAtom, useIsCanvasEditDisabled } from '../905/595131';
+import { getFeatureFlags } from '../905/601108';
+import { useCurrentUserOrg } from '../905/845253';
+import { getInitialDynamicConfig } from '../3973/389215';
+import { atomStoreManager } from '../figma_app/27355';
+import { isWorkshopModeActive } from '../figma_app/193867';
+import { Me, ol } from '../figma_app/598018';
 
 /**
  * Checks if AI features are disabled for the current org or team.
@@ -19,20 +19,18 @@ export function isAIFeaturesDisabled({
   currentOrg,
   currentTeam,
   isViewer,
-  isDisabledForViewers = true,
+  isDisabledForViewers = true
 }: {
-  currentOrg: any
-  currentTeam: any
-  isViewer: boolean
-  isDisabledForViewers?: boolean
+  currentOrg: any;
+  currentTeam: any;
+  isViewer: boolean;
+  isDisabledForViewers?: boolean;
 }): boolean {
-  const orgOrTeamExists = !!currentOrg || !!currentTeam
-  const viewerDisabled = !!isDisabledForViewers && !!isViewer
-  const orgDisabled = !(currentOrg && isLlamaEnabledForOrg(currentOrg))
-  const aiFeaturesDisabled
-    = !!(currentOrg ? currentOrg?.ai_features_disabled : currentTeam?.ai_features_disabled)
-
-  return orgOrTeamExists && (viewerDisabled || orgDisabled) && !!aiFeaturesDisabled
+  const orgOrTeamExists = !!currentOrg || !!currentTeam;
+  const viewerDisabled = !!isDisabledForViewers && !!isViewer;
+  const orgDisabled = !(currentOrg && isLlamaEnabledForOrg(currentOrg));
+  const aiFeaturesDisabled = !!(currentOrg ? currentOrg?.ai_features_disabled : currentTeam?.ai_features_disabled);
+  return orgOrTeamExists && (viewerDisabled || orgDisabled) && !!aiFeaturesDisabled;
 }
 
 /**
@@ -42,21 +40,17 @@ export function isAIFeaturesDisabled({
  * @returns boolean
  */
 export function isEditDisabled({
-  isDisabledForViewers,
+  isDisabledForViewers
 }: {
-  isDisabledForViewers: boolean
+  isDisabledForViewers: boolean;
 }): boolean {
-  const state = debugState.getState()
-  return (
-    !!zg(state.selectedView)
-    || !state.user
-    || isAIFeaturesDisabled({
-      currentOrg: atomStoreManager.get(orgSubscriptionAtom),
-      currentTeam: atomStoreManager.get(Me),
-      isViewer: atomStoreManager.get(canvasEditDisabledAtom),
-      isDisabledForViewers,
-    })
-  )
+  const state = debugState.getState();
+  return !!isWorkshopModeActive(state.selectedView) || !state.user || isAIFeaturesDisabled({
+    currentOrg: atomStoreManager.get(orgSubscriptionAtom),
+    currentTeam: atomStoreManager.get(Me),
+    isViewer: atomStoreManager.get(canvasEditDisabledAtom),
+    isDisabledForViewers
+  });
 }
 
 /**
@@ -68,12 +62,9 @@ export function isAIFeaturesEnabledForCurrentUser(): boolean {
   const enabled = !isAIFeaturesDisabled({
     currentOrg: useCurrentUserOrg() || null,
     currentTeam: ol(),
-    isViewer: useIsCanvasEditDisabled(),
-  })
-
-  return (
-    !!useSelector((state: any) => zg(state.selectedView) || !state.user) || !enabled
-  )
+    isViewer: useIsCanvasEditDisabled()
+  });
+  return !!useSelector((state: any) => isWorkshopModeActive(state.selectedView) || !state.user) || !enabled;
 }
 
 /**
@@ -83,7 +74,7 @@ export function isAIFeaturesEnabledForCurrentUser(): boolean {
  * @returns string | undefined
  */
 export function getOrgLlamaConfig(orgId: string): string | undefined {
-  return getInitialDynamicConfig('ai_org_use_llama').get(orgId, undefined)
+  return getInitialDynamicConfig('ai_org_use_llama').get(orgId, undefined);
 }
 
 /**
@@ -93,17 +84,15 @@ export function getOrgLlamaConfig(orgId: string): string | undefined {
  * @returns boolean
  */
 export function isLlamaEnabledForOrg(org: any): boolean {
-  if (!org || org.k12_google_org)
-    return false
-  const config = getOrgLlamaConfig(org.id)
-  const gatedEnabled
-    = config === 'enabled_for_gated_users' && !!getFeatureFlags().ai_user_use_llama
-  return config === 'enabled_for_all_users' || gatedEnabled
+  if (!org || org.k12_google_org) return false;
+  const config = getOrgLlamaConfig(org.id);
+  const gatedEnabled = config === 'enabled_for_gated_users' && !!getFeatureFlags().ai_user_use_llama;
+  return config === 'enabled_for_all_users' || gatedEnabled;
 }
 
 // Export refactored names for external usage
-export const BF = getOrgLlamaConfig
-export const dZ = isLlamaEnabledForOrg
-export const lt = isAIFeaturesDisabled
-export const q8 = isAIFeaturesEnabledForCurrentUser
-export const y8 = isEditDisabled
+export const BF = getOrgLlamaConfig;
+export const dZ = isLlamaEnabledForOrg;
+export const lt = isAIFeaturesDisabled;
+export const q8 = isAIFeaturesEnabledForCurrentUser;
+export const y8 = isEditDisabled;

@@ -90,7 +90,7 @@ import { qG } from '../905/742325';
 import { l as _$$l3 } from '../905/745972';
 import { G as _$$G2 } from '../905/750789';
 import { tH as _$$tH } from '../905/751457';
-import { jD } from '../905/765855';
+import { hideTooltip } from '../905/765855';
 import { K as _$$K3 } from '../905/770444';
 import { R as _$$R } from '../905/782411';
 import { EventShield } from '../905/821217';
@@ -100,14 +100,14 @@ import { Um } from '../905/848862';
 import { t as _$$t4 } from '../905/851577';
 import { X as _$$X2 } from '../905/853613';
 import { F_ } from '../905/858282';
-import { $A as _$$$A } from '../905/862883';
+import { FDocumentType } from '../905/862883';
 import { bL, RT } from '../905/867927';
 import { generateUUIDv4 } from '../905/871474';
 import { A as _$$A5 } from '../905/891805';
 import { n as _$$n } from '../905/913636';
 import { e as _$$e2 } from '../905/916195';
 import { A as _$$A3 } from '../905/925160';
-import { j7, oB } from '../905/929976';
+import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { q as _$$q2 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
 import { sD as _$$sD } from '../905/937198';
@@ -141,7 +141,7 @@ import { _9, $1, Bk, mZ, oV, Sg } from '../figma_app/76115';
 import { getObservableValue } from '../figma_app/84367';
 import { isNotNullish } from '../figma_app/95419';
 import { tz as _$$tz, fM } from '../figma_app/112055';
-import { s0 as _$$s2 } from '../figma_app/115923';
+import { sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { eT as _$$eT } from '../figma_app/116234';
 import { M3, q_ } from '../figma_app/119475';
 import { LR } from '../figma_app/120210';
@@ -247,7 +247,7 @@ import { jR } from '../figma_app/933328';
 import { h as _$$h5 } from '../figma_app/935454';
 import { r6 as _$$r3, P3, ZX } from '../figma_app/950074';
 import { T as _$$T3 } from '../figma_app/962636';
-import { lg as _$$lg, cJ } from '../figma_app/976749';
+import { getCurrentFileType, isSitesFileType } from '../figma_app/976749';
 import { O as _$$O, tM as _$$tM3, gb } from '../figma_app/984498';
 import { useDebouncedCallback } from 'use-debounce';
 import iw from '../vendor/239910';
@@ -630,7 +630,7 @@ function e2({
   let P = _$$n2(e);
   let L = useLatestRef(P);
   useEffect(() => {
-    P && !L && f(jD());
+    P && !L && f(hideTooltip());
   }, [P, f, L]);
   let R = e.isLocal && isInteractionOrEvalMode() ? _$$eT(e.node_id, y).join('-') : e.node_id;
   let O = o === 'Local components' || o === 'Local private components' || e.isLocal;
@@ -2887,7 +2887,7 @@ function rB() {
           } = _$$y();
           return {
             isLoaded: _isLoaded,
-            assets: g5(_$$$A.Design).productComponents.map(e => ({
+            assets: g5(FDocumentType.Design).productComponents.map(e => ({
               ...e,
               suggestionSource: Ou.RECENTS
             }))
@@ -3518,8 +3518,8 @@ let ns = forwardRef(({
   let o = Um();
   let d = o?.type === nt;
   let c = useDispatch();
-  let u = useCallback(() => c(oB()), [c]);
-  let h = useCallback(() => c(j7({
+  let u = useCallback(() => c(hideDropdownAction()), [c]);
+  let h = useCallback(() => c(showDropdownThunk({
     type: nt,
     data: {
       position: s()
@@ -3793,7 +3793,7 @@ function nd() {
   let d = libraries.length === 0;
   let c = presets.length === 0;
   let u = librariesForConnectedProject.length === 0;
-  let p = cJ();
+  let p = isSitesFileType();
   let [h] = useAtomValueAndSetter(aK);
   return useMemo(() => p ? h !== 'Blocks' && o && d && c && u : o && d && c && u && siteLibraries.status === 'disabled', [o, d, c, u, siteLibraries, p, h]);
 }
@@ -3855,7 +3855,7 @@ function n_() {
   let {
     closeOverlay
   } = _$$h5();
-  let [t, s] = useAtomValueAndSetter(_$$s2);
+  let [t, s] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
   let i = useCallback(() => {
     s(PanelType.DAKOTA);
     closeOverlay();
@@ -4416,7 +4416,7 @@ function nV({
       });
     }, [e.libraryKey, s]);
     return useCallback(s => {
-      e.type !== yW.SITE && (s.preventDefault(), s.stopPropagation(), r(j7({
+      e.type !== yW.SITE && (s.preventDefault(), s.stopPropagation(), r(showDropdownThunk({
         type: sZ,
         data: {
           libraryHref: p,
@@ -6136,7 +6136,7 @@ function ii({
     }, [e, s?.key, s?.parentOrgId, s?.teamId, t]);
     let m = hasResourcePresetKey(e);
     return useCallback(e => {
-      l && !m && (e.preventDefault(), e.stopPropagation(), r(j7({
+      l && !m && (e.preventDefault(), e.stopPropagation(), r(showDropdownThunk({
         type: s4,
         data: {
           libraryPageHref: d,
@@ -6455,7 +6455,7 @@ function iE() {
 function iM() {
   let {
     productComponents
-  } = g5(_$$$A.Design);
+  } = g5(FDocumentType.Design);
   let t = iE();
   let {
     getLibrary
@@ -6552,7 +6552,7 @@ let iz = new KH({
 });
 function iW() {
   let e;
-  let t = _$$lg() === FFileType.SITES;
+  let t = getCurrentFileType() === FFileType.SITES;
   let s = _$$ce();
   let r = s.data?.assetsByLibraryKey;
   let i = useMemo(() => _$$u2(), []);
@@ -7311,7 +7311,7 @@ function lb({
   } = wV();
   let c = currentView === S5.Search;
   let p = _m();
-  let m = cJ();
+  let m = isSitesFileType();
   let {
     inputRef,
     focusSearchBar
@@ -7474,7 +7474,7 @@ function lL({
   let o = l?.type === lP;
   let d = useDispatch();
   let c = useCallback(() => {
-    o ? d(oB()) : (d(j7({
+    o ? d(hideDropdownAction()) : (d(showDropdownThunk({
       type: lP,
       data: {
         position: {
@@ -7518,12 +7518,12 @@ function lR({
 }) {
   let i = useDispatch();
   let o = useCallback(() => {
-    i(oB());
+    i(hideDropdownAction());
   }, [i]);
   let d = R2(typeof e?.top == 'number' ? e.top : void 0);
   let {
     productComponents
-  } = g5(_$$$A.Design);
+  } = g5(FDocumentType.Design);
   let u = iE();
   let [m] = ye();
   let {
@@ -7538,7 +7538,7 @@ function lR({
   let [j] = MA();
   let v = !!setupStarterUserCallback()() && currentView === S5.Libraries;
   let S = v ? $H.LIST : j;
-  let k = cJ() || v;
+  let k = isSitesFileType() || v;
   let w = useMemo(() => currentView !== S5.Search && (productComponents.length > 0 || u.length > 0), [currentView, productComponents.length, u.length]);
   let N = useMemo(() => b && C ? getLibrary(C) : void 0, [getLibrary, b, C]);
   let I = N?.type === yW.DESIGN && (N.numComponents > 0 || N.numTemplates > 0);

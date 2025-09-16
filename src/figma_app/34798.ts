@@ -3,7 +3,7 @@ import { LayoutTabType, HandoffBindingsCpp, AppStateTsApi, DesignGraphElements }
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
 import { isDevModeFocusViewActive } from "../figma_app/544649";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { p8, dH } from "../figma_app/722362";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FileCanViewAnnotations, FileCanEditAnnotations, FileCanViewAnnotationsMegadot } from "../figma_app/43951";
@@ -51,7 +51,7 @@ export function $$g0() {
 }
 export function $$f3() {
   let e = dH();
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = $$_2();
   let n = getObservableValue(AppStateTsApi?.uiState().showAnnotationsInDevMode, !0);
   let s = getObservableValue(AppStateTsApi?.uiState().alwaysExpandAnnotations, !0);

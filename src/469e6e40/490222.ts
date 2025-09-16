@@ -1,8 +1,8 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
 import { useDispatch } from "react-redux";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/572042";
 import { getFeatureFlags } from "../905/601108";
 import { useSubscription } from "../figma_app/288654";
@@ -14,7 +14,7 @@ import { p as _$$p } from "../905/597320";
 import { b as _$$b } from "../905/168239";
 import { K } from "../905/628118";
 import { L as _$$L } from "../905/16143";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { TrackingProvider } from "../figma_app/831799";
 import { PaginatedAbandonedDraftsView } from "../figma_app/43951";
 import { O as _$$O } from "../figma_app/809387";
@@ -34,7 +34,7 @@ function R(e) {
   let t = e.abandonedDraftFolder;
   let a = useDispatch();
   let r = useCallback(() => {
-    a(sf({
+    a(selectViewAction({
       view: "abandonedDraftFiles",
       abandonedDraftFolderId: t.id,
       planId: e.planId,
@@ -79,7 +79,7 @@ function L({
   return 0 === e.length ? null : jsxs(Fragment, {
     children: [jsx(IU, {
       onClick: () => {
-        s(sf({
+        s(selectViewAction({
           view: "abandonedDraftFiles",
           abandonedDraftFolderId: e[0].id,
           adminPlanType: t,
@@ -146,7 +146,7 @@ export function $$U0(e) {
   }))) ?? [], [F]);
   let B = "loaded" === F.status && F.data.abandonedDraftFolders.hasNextPage() ? () => F.data?.abandonedDraftFolders.loadNext(30) : void 0;
   let G = useCallback(a => {
-    t(sf({
+    t(selectViewAction({
       view: "abandonedDraftFiles",
       abandonedDraftFolderId: a.id,
       planId: I,
@@ -263,9 +263,9 @@ export function $$U0(e) {
             padding: {
               top: 8
             },
-            children: jsxs(Yy, {
+            children: jsxs(BannerInset, {
               variant: "brand",
-              children: [jsxs(Q, {
+              children: [jsxs(BannerMessage, {
                 title: t,
                 children: [a, " ", s]
               }), jsx(_$$N, {

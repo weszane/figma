@@ -9,7 +9,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Rh } from "../905/844322";
 import { showModalHandler } from "../905/156213";
 import { i as _$$i } from "../905/182187";
@@ -200,7 +200,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
       let i = t => t && t.editor_type ? {
         text: getI18nString("general.open"),
         action: () => {
-          e.dispatch(sf({
+          e.dispatch(selectViewAction({
             view: "fullscreen",
             fileKey: t.key,
             editorType: mapFileTypeToEditorType(t.editor_type)
@@ -218,7 +218,7 @@ let $$U3 = createOptimistThunk(async (e, t) => {
         r = s ? i(t[0].resolve?.data?.meta) : {
           text: getI18nString("general.show"),
           action: () => {
-            o && e.dispatch(sf({
+            o && e.dispatch(selectViewAction({
               view: "folder",
               folderId: o
             }));

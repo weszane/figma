@@ -19,7 +19,7 @@ import { n as _$$n } from "../905/734251";
 import { getI18nString } from "../905/303541";
 import { e as _$$e } from "../905/716094";
 import { F as _$$F } from "../905/989956";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { getAssetBackgroundColor } from "../figma_app/80990";
 import { fullscreenValue } from "../figma_app/455680";
@@ -263,7 +263,7 @@ let en = memo(forwardRef(function (e, t) {
   });
 }));
 function ei(e) {
-  let t = "whiteboard" === lg();
+  let t = "whiteboard" === getCurrentFileType();
   let r = J(e.displayType);
   let i = null != e.cmsCollectionMappings;
   let a = cx(e.item);

@@ -7,7 +7,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { yJ } from "../905/466026";
 import { b4 } from "../figma_app/937413";
 import { f as _$$f } from "../905/509236";
@@ -105,7 +105,7 @@ let $$b4 = createOptimistThunk((e, {
   let a = e.getState();
   if (a.user) {
     let i = a.openFile;
-    i && i.fileRepoId && t[i.fileRepoId] && e.dispatch(sf({
+    i && i.fileRepoId && t[i.fileRepoId] && e.dispatch(selectViewAction({
       view: "recentsAndSharing"
     }));
   } else customHistory.reload("Repo deleted");

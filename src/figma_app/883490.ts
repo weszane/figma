@@ -5,7 +5,7 @@ import { getI18nString } from '../905/303541';
 import { createOptimistThunk } from '../905/350402';
 import { debugState } from '../905/407919';
 import { VisualBellIcon } from '../905/576487';
-import { gc } from '../figma_app/120227';
+import { getCodeExtensionPreferences } from '../figma_app/120227';
 import { assetTypeEnum } from '../figma_app/198712';
 import { mJ } from '../figma_app/311375';
 import { replaceSelection } from '../figma_app/741237';
@@ -32,7 +32,7 @@ export function $$b10({
 }) {
   let {
     unit
-  } = gc();
+  } = getCodeExtensionPreferences();
   let s = unit === MeasurementUnit.SCALED;
   let o = e => (e ?? 0).toLocaleString('en', {
     maximumFractionDigits: 2

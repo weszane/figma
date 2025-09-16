@@ -8,7 +8,7 @@ import { memoizeByArgs } from "../figma_app/815945";
 import { RecordingPureComponent } from "../figma_app/878298";
 import { n as _$$n } from "../figma_app/339971";
 import { canAccessFullDevMode } from "../figma_app/473493";
-import { ho, oB } from "../905/929976";
+import { updateDropdownSelectionAction, hideDropdownAction } from "../905/929976";
 import { Dm } from "../figma_app/8833";
 import { k$, gN, id, Dz } from "../figma_app/847915";
 import { formatI18nMessage } from "../905/482208";
@@ -20,7 +20,7 @@ import { jr, W0 } from "../figma_app/896988";
 import { FEditorType } from "../figma_app/53721";
 import { pi } from "../figma_app/357047";
 import { e0 } from "../905/696396";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { j as _$$j } from "../905/834956";
 import { getFeatureFlags } from "../905/601108";
 import { isDevEnvironment } from "../figma_app/169182";
@@ -373,12 +373,12 @@ class e_ extends RecordingPureComponent {
   componentDidUpdate(e, t) {
     if (super.componentDidUpdate(e, t), this.props.selectionToUpdate && this.props.selectionToUpdate === SettingsAction.PREFERENCES) {
       let e = this.multilevelDropdown && this.multilevelDropdown.getActiveItemAtDepth(0);
-      !e || k$(e) || gN(e) || id(e) || !e.name || e.name !== ep ? (this.selectPreferencesMenu(), this.props.dispatch(ho({
+      !e || k$(e) || gN(e) || id(e) || !e.name || e.name !== ep ? (this.selectPreferencesMenu(), this.props.dispatch(updateDropdownSelectionAction({
         type: pi,
         data: {
           selectionToUpdate: null
         }
-      }))) : this.props.dispatch(oB());
+      }))) : this.props.dispatch(hideDropdownAction());
     }
   }
   render() {
@@ -417,7 +417,7 @@ export function $$eh0(e) {
   let r = useSelector(e => e.mirror.appModel);
   let i = useSelector(e => e.selectedView);
   let a = useSelector(e => e.dropdownShown?.data?.selectionToUpdate);
-  let o = useSelector(e => $A(e.selectedView) && !canAccessFullDevMode(e));
+  let o = useSelector(e => isFullscreenDevHandoffView(e.selectedView) && !canAccessFullDevMode(e));
   let l = ec();
   let d = d$({
     debugMenuItems: l
@@ -480,7 +480,7 @@ export class $$em1 extends Component {
     return e.length > 0 && e.some(e => !e.separator && (this.props.allowDisabledOnly || !e.disabled));
   }
   closeIfNoItems() {
-    this.hasMenuValidItems() || this.props.dispatch(oB());
+    this.hasMenuValidItems() || this.props.dispatch(hideDropdownAction());
   }
   render() {
     let e = this.transformMenuItems(this.props.menuItems);

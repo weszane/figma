@@ -13,7 +13,7 @@ import { Pg } from "../905/149328";
 import { Point } from "../905/736624";
 import { ms, wv } from "../figma_app/236327";
 import { LoadingSpinner } from "../figma_app/858013";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { vL } from "../905/826900";
 import { W as _$$W } from "../905/187396";
 import { lQ } from "../905/934246";
@@ -395,13 +395,13 @@ let er = class e extends RecordingPureComponent {
             (n = null != this.state.activeItem ? t[this.state.activeItem.index] : null) && (n.children ? this.setState({
               activeItemSubmenuShown: !0,
               activeItemSubmenuShouldAutofocus: !0
-            }) : (this.props.dispatch(oB()), this.props.onSelectItem(n, e)));
+            }) : (this.props.dispatch(hideDropdownAction()), this.props.onSelectItem(n, e)));
             break;
           case KeyCodes.TAB:
           case KeyCodes.ESCAPE:
             e.preventDefault();
             this.props.onDismissMenu && this.props.onDismissMenu();
-            i || this.props.dispatch(oB());
+            i || this.props.dispatch(hideDropdownAction());
             break;
           case KeyCodes.LEFT_ARROW:
             1 === this.state.submenuPosition ? this.showSubmenu(!0) : i && this.props.onDismissMenu && this.props.onDismissMenu();
@@ -516,7 +516,7 @@ let er = class e extends RecordingPureComponent {
       })) : (e.preventDismissOnSelected ? e.allowClickThrough && this.state.activeItemSubmenuShown && this.setState({
         activeItem: null,
         activeItemSubmenuShown: !1
-      }) : this.props.dispatch(oB()), this.props.onSelectItem(e, i), !e.preventDismissOnSelected && this.props.onDropdownHidden && this.props.onDropdownHidden());
+      }) : this.props.dispatch(hideDropdownAction()), this.props.onSelectItem(e, i), !e.preventDismissOnSelected && this.props.onDropdownHidden && this.props.onDropdownHidden());
       e.disabled || e.visuallyDisabledWithSelection?.();
     };
     this.onClickMenu = e => {

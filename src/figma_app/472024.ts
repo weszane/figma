@@ -15,7 +15,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { FC } from "../figma_app/212807";
 import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useCurrentPlanUser, checkOrgUserPermission } from "../figma_app/465071";
-import { IE } from "../figma_app/193867";
+import { isAccountSettingsModalShown } from "../figma_app/193867";
 import { p as _$$p } from "../905/763242";
 import { FEditorType } from "../figma_app/53721";
 import { LIBRARY_PREFERENCES_MODAL, SHARED_FONTS_MODAL, LibraryTabEnum } from "../figma_app/633080";
@@ -48,7 +48,7 @@ let P = memo(function ({
 }) {
   L(LIBRARY_PREFERENCES_MODAL);
   let c = useSelector(e => e.selectedView);
-  let u = useSelector(e => IE(e));
+  let u = useSelector(e => isAccountSettingsModalShown(e));
   let p = selectCurrentFile();
   let _ = useCurrentPublicPlan("LibraryPreferencesModal").unwrapOr(null);
   let f = getParentOrgIdIfOrgLevel(_);

@@ -1,4 +1,4 @@
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { si } from "../figma_app/8833";
 import { gY } from "../figma_app/973927";
 import { fullscreenValue } from "../figma_app/455680";
@@ -25,7 +25,7 @@ export function $$u0(e, t) {
   let a = e.sectionPresetTemplateId;
   let o = e.name;
   let l = e.hasSectionPresetWithEdits;
-  return !!o && (t(j7({
+  return !!o && (t(showDropdownThunk({
     type: si,
     data: {
       sectionId: e.guid,

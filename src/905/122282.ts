@@ -94,7 +94,7 @@ import { q as _$$q } from "../figma_app/446378";
 import { n as _$$n2 } from "../905/341791";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { SS, WX } from "../figma_app/350203";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { liveStoreInstance } from "../905/713695";
 import { B3, $o } from "../905/54042";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
@@ -102,7 +102,7 @@ import { HiddenLabel } from "../905/270045";
 import { c$ as _$$c$ } from "../figma_app/236327";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { n as _$$n3 } from "../figma_app/537817";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { A as _$$A9 } from "../905/794518";
 import { Cf, it } from "../905/504727";
@@ -597,7 +597,7 @@ function ta({
   let s;
   let o = useDispatch();
   let l = selectCurrentFile();
-  let u = lg();
+  let u = getCurrentFileType();
   let {
     trackEvent
   } = useTracking();
@@ -892,7 +892,7 @@ function tI({
     return -1 === i ? 0 : i;
   });
   let a = (e, t) => {
-    t(e ? oB() : j7({
+    t(e ? hideDropdownAction() : showDropdownThunk({
       type: tA
     }));
   };

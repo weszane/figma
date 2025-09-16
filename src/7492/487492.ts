@@ -24,11 +24,11 @@ import { L as _$$L } from "../3591/956338";
 import { w5 } from "../figma_app/15924";
 import { getProductPriceString, hasTrialAvailable } from "../figma_app/808294";
 import { getResourceTaglineOrDescription, isResourcePendingPublishing } from "../figma_app/777551";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { useTracking } from "../figma_app/831799";
 import { t as _$$t3 } from "../469e6e40/489933";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { dR, Gt, RK } from "../figma_app/248118";
 import { $1, b4, cW, Be, j1, nl, kd, ll, YO, ZT, Ud, WK, Ys, yQ, jg, bh, U6, x as _$$x } from "../figma_app/844435";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -306,7 +306,7 @@ function eC(e) {
   let i = cW()[e.pluginId];
   let t = useDispatch();
   let r = useCallback(() => {
-    t(oB());
+    t(hideDropdownAction());
   }, [t]);
   if (!i) return null;
   let d = getPluginVersion(i);
@@ -368,7 +368,7 @@ let eF = memo(function (e) {
   } = ew();
   let a = useCallback(t => {
     t.stopPropagation();
-    dropdownIsShown ? r(oB()) : r(j7({
+    dropdownIsShown ? r(hideDropdownAction()) : r(showDropdownThunk({
       type: _n,
       data: {
         pluginId: e.pluginId,
@@ -391,7 +391,7 @@ let eF = memo(function (e) {
   let j = useCallback(i => {
     if (i?.stopPropagation(), validatePublishedPluginInOrgAllowlist()) {
       if (g) {
-        p ? r(oB()) : r($$eU3({
+        p ? r(hideDropdownAction()) : r($$eU3({
           pluginId: e.pluginId,
           tileType: e.type
         }));
@@ -463,9 +463,9 @@ function eN(e) {
   } = ew();
   let g = u?.type === lD && u?.data.localFileId === e.localFileId && u?.data.pluginId === d;
   let p = useCallback(t => {
-    if (t.stopPropagation(), g) i(oB());else {
+    if (t.stopPropagation(), g) i(hideDropdownAction());else {
       let n = t.currentTarget.getBoundingClientRect();
-      i(j7({
+      i(showDropdownThunk({
         type: lD,
         data: {
           localFileId: e.localFileId,
@@ -484,7 +484,7 @@ function eN(e) {
   let y = $$eG6(d, e.isRecentTile ? "recent_development" : "development") && x;
   let _ = useCallback(() => {
     if (x) {
-      y ? i(oB()) : d && i($$eU3({
+      y ? i(hideDropdownAction()) : d && i($$eU3({
         pluginId: d,
         tileType: e.isRecentTile ? "recent_development" : "development"
       }));
@@ -669,10 +669,10 @@ function eP(e) {
     })]
   });
   let Q = function (e, i) {
-    if (m0()) ;else if (e && i) return !0;
+    if (isDevHandoffEditorType()) ;else if (e && i) return !0;
     return !1;
   }(e.showEditorTypeIcon, r);
-  let X = m0();
+  let X = isDevHandoffEditorType();
   i = Q ? jsxs(li.IconAndBadgeContainer, {
     children: [jsx(eB, {
       pluginId: e.pluginId,
@@ -775,9 +775,9 @@ function eA(e) {
   } = Ys(e.widgetId);
   let _ = useCallback(t => {
     if (j) {
-      if (t.preventDefault(), t.stopPropagation(), f) i(oB());else {
+      if (t.preventDefault(), t.stopPropagation(), f) i(hideDropdownAction());else {
         let n = t.currentTarget.getBoundingClientRect();
-        i(j7({
+        i(showDropdownThunk({
           type: cH,
           data: {
             targetRect: n,
@@ -802,7 +802,7 @@ function eA(e) {
   }, [b, _, j]);
   let C = useCallback(t => {
     t.stopPropagation();
-    g ? i(oB()) : i(j7({
+    g ? i(hideDropdownAction()) : i(showDropdownThunk({
       type: _n,
       data: {
         widgetId: e.widgetId,
@@ -875,9 +875,9 @@ function eS(e) {
   } = ej();
   let v = g?.type === jZ.DEVELOPMENT_WIDGET_DROPDOWN && g?.data.isRecentTile === e.isRecentTile && g?.data.localFileId === e.localFileId && g?.data.pluginId === a && g?.data.targetRect;
   let I = useCallback(t => {
-    if (t.stopPropagation(), v) i(oB());else {
+    if (t.stopPropagation(), v) i(hideDropdownAction());else {
       let n = t.currentTarget.getBoundingClientRect();
-      i(j7({
+      i(showDropdownThunk({
         type: jZ.DEVELOPMENT_WIDGET_DROPDOWN,
         data: {
           localFileId: e.localFileId,
@@ -1135,7 +1135,7 @@ export function $$ez5(e) {
   let t = useRef(null);
   let r = Um();
   let d = _$$x();
-  let a = m0();
+  let a = isDevHandoffEditorType();
   let o = dR(e.pluginId, "universal-insert");
   let u = Gt(e.pluginId, "universal-insert");
   let c = _$$t3(e.pluginId, u, o);
@@ -1150,7 +1150,7 @@ export function $$ez5(e) {
   let w = useCallback(t => {
     if (t.stopPropagation(), validatePublishedPluginInOrgAllowlist()) {
       if (g) {
-        I ? i(oB()) : (e.dropdownShownType && i(j7({
+        I ? i(hideDropdownAction()) : (e.dropdownShownType && i(showDropdownThunk({
           type: e.dropdownShownType,
           data: {
             pluginId: e.pluginId
@@ -1208,7 +1208,7 @@ export function $$ez5(e) {
 }
 let eW = "DROPDOWN_TYPE_RUN_PLUGIN_SUBMENU";
 export function $$eU3(e) {
-  return j7({
+  return showDropdownThunk({
     type: eW,
     data: e
   });
@@ -1229,9 +1229,9 @@ export function $$eH1(e) {
   let p = useRef(null);
   let I = useCallback(t => {
     if (o) {
-      if (t.preventDefault(), t.stopPropagation(), g) i(oB());else {
+      if (t.preventDefault(), t.stopPropagation(), g) i(hideDropdownAction());else {
         let n = t.currentTarget.getBoundingClientRect();
-        i(j7({
+        i(showDropdownThunk({
           type: cH,
           data: {
             targetRect: n,

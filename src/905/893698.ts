@@ -15,7 +15,7 @@ import { Zl } from "../905/211621";
 import { X3, MM } from "../figma_app/236327";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { fG } from "../figma_app/91703";
 import { Dm } from "../figma_app/8833";
 import { Um } from "../905/848862";
@@ -39,7 +39,7 @@ let $$k2 = forwardRef(function ({
   let _ = g?.type === h;
   let y = useDispatch();
   let v = useCallback(() => {
-    _ ? y(oB()) : y(j7({
+    _ ? y(hideDropdownAction()) : y(showDropdownThunk({
       type: h,
       data: {
         position: {
@@ -93,7 +93,7 @@ function R({
   let m = _$$S.useOpenFileProperties();
   let h = useDispatch();
   let f = useCallback(() => {
-    h(oB());
+    h(hideDropdownAction());
   }, [h]);
   let E = R2("number" == typeof e?.top ? e.top : void 0);
   let C = useSelector(e => e.instanceSwapPickerListLayout);

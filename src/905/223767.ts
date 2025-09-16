@@ -12,7 +12,7 @@ import { dR } from "../figma_app/109538";
 import { w as _$$w } from "../figma_app/527262";
 import { sx } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { popModalStack, hideModal, showModalHandler } from "../905/156213";
 import { Bq, WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
@@ -123,7 +123,7 @@ function O(e) {
               parentRef: O,
               updateCurrency: e => {
                 h(e);
-                t(oB());
+                t(hideDropdownAction());
               },
               upsellSource: e.upsellSource
             })

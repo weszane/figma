@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { sortWithCollator } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { Gj } from "../figma_app/646357";
@@ -159,7 +159,7 @@ export function $$D1(e) {
   let l = async (t, n) => {
     n.preventDefault();
     n.stopPropagation();
-    i(j7({
+    i(showDropdownThunk({
       type: K.LIBRARY_MODAL,
       data: {
         component: t,

@@ -7,10 +7,10 @@ import { reportError } from "../905/11";
 import { gB } from "../905/294543";
 import { getCodegenLanguagePreference } from "../905/515076";
 import { Ym } from "../figma_app/806075";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { c as _$$c } from "../905/882587";
 import { Im } from "../905/608145";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { EL } from "../figma_app/740025";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { canPerformAction, canRunExtensions } from "../figma_app/12796";
@@ -20,7 +20,7 @@ import { hasLocalFileId, manifestContainsWidget } from "../figma_app/155287";
 import { b as _$$b } from "../905/635568";
 import { $1, Be, cW } from "../figma_app/844435";
 function v() {
-  let e = E3();
+  let e = getSelectedEditorType();
   let {
     orgEntity,
     org,
@@ -153,7 +153,7 @@ function P(e) {
   let {
     selectedView
   } = e.getState();
-  "fullscreen" === selectedView.view && selectedView.editorType === FEditorType.Design && (e.dispatch(sf({
+  "fullscreen" === selectedView.view && selectedView.editorType === FEditorType.Design && (e.dispatch(selectViewAction({
     ...selectedView,
     view: "fullscreen",
     editorType: FEditorType.DevHandoff

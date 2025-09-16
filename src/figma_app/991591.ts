@@ -4,14 +4,14 @@ import { atomStoreManager, atom, Xr } from "../figma_app/27355";
 import { ResourceStatus } from "../905/663269";
 import { useSubscription } from "../figma_app/288654";
 import { isAIFeaturesEnabledForCurrentUser, isLlamaEnabledForOrg } from "../figma_app/459490";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseSlidesAi } from "../figma_app/43951";
 import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { PE } from "../figma_app/251115";
 export function $$h0() {
-  let e = lg();
+  let e = getCurrentFileType();
   let t = PE();
   let {
     isSlidesAiEnabled

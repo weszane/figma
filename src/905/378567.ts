@@ -11,7 +11,7 @@ import { h1 } from "../905/986103";
 import { f as _$$f } from "../905/671470";
 import { C as _$$C } from "../905/196436";
 import { renderI18nText } from "../905/303541";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { r } from "../905/620668";
 import { FFileType } from "../figma_app/191312";
 import { XG } from "../figma_app/350203";
@@ -176,7 +176,7 @@ export function $$F1(e, t) {
   t.displayName = "PluginListRow";
   e.ConnectedPluginListRow = connect(null, (e, t) => ({
     onPluginListRowClick: () => {
-      e(sf({
+      e(selectViewAction({
         view: "communityHub",
         subView: "plugin",
         publishedPluginId: t.plugin.id

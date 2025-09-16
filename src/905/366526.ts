@@ -34,8 +34,8 @@ import { cY as _$$cY, fk as _$$fk, lg as _$$lg, n$ as _$$n$2, rf as _$$rf, rj as
 import { ck as _$$ck4 } from '../905/87821';
 import { vx } from '../905/91038';
 import { combineWithHyphen, ShareContext } from '../905/91820';
-import { k as _$$k5 } from '../905/93362';
-import { c5 as _$$c4, uo as _$$uo8 } from '../905/93909';
+import { UserAPIHandlers } from '../905/93362';
+import { batchPutPlan, setLastVisitedPlan } from '../905/93909';
 import { i as _$$i5 } from '../905/97346';
 import { bE as _$$bE4, uo as _$$uo5, yH as _$$yH3, yJ as _$$yJ5 } from '../905/98702';
 import { useSprigWithSampling } from '../905/99656';
@@ -71,10 +71,10 @@ import { permissionScopeHandler as _$$l3 } from '../905/189185';
 import { l as _$$l10 } from '../905/190247';
 import { t as _$$t9 } from '../905/192333';
 import { mC as _$$mC, X7 as _$$X5, zq } from '../905/193529';
-import { AUTH_EMAIL_ONLY, redirectAfterRedeem, changeAuthFormState, AUTH_SEND_PASSWORD_RESET, AUTH_GOOGLE_SIGNUP, AUTH_SAML_START_FROM_SESSION, startSamlEmailVerification, AUTH_SIGN_UP, AUTH_SIGN_IN, AUTH_SET_AUTH_LOADING, AUTH_SEND_EMAIL_SAML_START, AUTH_COMPLETE, AUTH_SHOW_ERROR, AUTH_INIT, AUTH_SET_REDIRECT_URL, AUTH_RESET_PASSWORD } from '../905/194276';
+import { AUTH_COMPLETE, AUTH_EMAIL_ONLY, AUTH_GOOGLE_SIGNUP, AUTH_INIT, AUTH_RESET_PASSWORD, AUTH_SAML_START_FROM_SESSION, AUTH_SEND_EMAIL_SAML_START, AUTH_SEND_PASSWORD_RESET, AUTH_SET_AUTH_LOADING, AUTH_SET_REDIRECT_URL, AUTH_SHOW_ERROR, AUTH_SIGN_IN, AUTH_SIGN_UP, changeAuthFormState, redirectAfterRedeem, startSamlEmailVerification } from '../905/194276';
 import { j as _$$j4 } from '../905/200237';
 import { px as _$$px2 } from '../905/201014';
-import { H as _$$H4 } from '../905/202181';
+import { sessionApiInstance } from '../905/202181';
 import { h as _$$h } from '../905/207101';
 import { x as _$$x3 } from '../905/209285';
 import { createMixedArray, MIXED_MARKER } from '../905/216495';
@@ -259,13 +259,13 @@ import { handlePluginError } from '../905/753206';
 import { getRepoById, getRepoByIdAlt, isBranch, isBranchAlt } from '../905/760074';
 import { m as _$$m } from '../905/760316';
 import { MV, WB } from '../905/761735';
-import { pP as _$$pP, fW } from '../905/765855';
+import { setTargetRef, updateTooltip } from '../905/765855';
 import { getNewFileConfig, getSelectedFile } from '../905/766303';
 import { handlePropertyState } from '../905/770460';
 import { gD } from '../905/775298';
 import { pw as _$$pw, q5 as _$$q3 } from '../905/776312';
 import { M as _$$M } from '../905/777093';
-import { $A } from '../905/782918';
+import { isFullscreenDevHandoffView } from '../905/782918';
 import { UPDATE_FETCHED_PAGE_IDS, VERSION_HISTORY_APPEND, VERSION_HISTORY_COMPARE_CHANGES, VERSION_HISTORY_LOADING, VERSION_HISTORY_PAGE_LOADING, VERSION_HISTORY_RESET, VERSION_HISTORY_RESET_VERSIONS, VERSION_HISTORY_SET_ACTIVE, VERSION_HISTORY_SET_DOC_HAS_CHANGED, VERSION_HISTORY_SET_FILE_LAST_SEEN_AT, VERSION_HISTORY_SET_LINKED_VERSION } from '../905/784363';
 import { X as _$$X3 } from '../905/784599';
 import { FullscreenMenu, PluginMenu } from '../905/791556';
@@ -292,7 +292,7 @@ import { D as _$$D2 } from '../905/852057';
 import { n0 as _$$n4, oI as _$$oI3, QA as _$$QA2, uQ as _$$uQ, Lh, Mc, Xp } from '../905/854717';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n2, Rf, VariableStyleId } from '../905/859698';
-import { AuthAction, SIGNED_UP_FROM_OPEN_SESSIONS, AuthErrorCode, AuthFlowStep, AuthField, AuthProvider } from '../905/862321';
+import { AuthAction, AuthErrorCode, AuthField, AuthFlowStep, AuthProvider, SIGNED_UP_FROM_OPEN_SESSIONS } from '../905/862321';
 import { RD } from '../905/862913';
 import { w as _$$w2 } from '../905/863010';
 import { xH as _$$xH2 } from '../905/869282';
@@ -301,9 +301,9 @@ import { generateUUIDv4 } from '../905/871474';
 import { createDeferredPromise } from '../905/874553';
 import { $I as _$$$I, ay as _$$ay, cr as _$$cr, dC as _$$dC, iE as _$$iE2, lx as _$$lx, ow as _$$ow, ru as _$$ru, uo as _$$uo3, yH as _$$yH2, B2, Bn, Cp, gP, Ho, HV, I0, JV, KQ, ku, Ty, U$, UA, WE, xI, Y1 } from '../905/879323';
 import { P6, VK, YF, YK } from '../905/880488';
-import { D as _$$D4 } from '../905/882262';
+import { useHasParentOrgId } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
-import { cR as _$$cR2, hG as _$$hG2, HZ as _$$HZ2, os as _$$os2, Qv as _$$Qv2, vv as _$$vv, b1, KW, L_, Nh, Nr, RF } from '../905/890368';
+import { addAuthedCommunityProfileToHub, clearCommunityProfile, deleteTeam, hydrateFileBrowser, patchOrgs, putCommunityProfile, putOrgs, putTeam, putUser, setCommunityAuthedActiveProfile, setSessionStateAction, setUserInOrgs } from '../905/890368';
 import { iz as _$$iz, oo as _$$oo, r_ as _$$r_ } from '../905/895600';
 import { p as _$$p4 } from '../905/895920';
 import { t as _$$t } from '../905/897919';
@@ -314,7 +314,7 @@ import { A as _$$A5 } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { cr as _$$cr2, Oo as _$$Oo } from '../905/926523';
 import { E as _$$E5, v as _$$v2 } from '../905/928543';
-import { ab as _$$ab, ho as _$$ho, o7 as _$$o2, oB as _$$oB, os as _$$os, sf as _$$sf, Ts as _$$Ts, Qv } from '../905/929976';
+import { hideDropdownAction, initAction, selectViewAction, showDropdownAction, updateDropdownSelectionAction, userStateLoadedAction } from '../905/929976';
 import { A7, EL, H_ } from '../905/932769';
 import { b as _$$b3 } from '../905/937225';
 import { o as _$$o3 } from '../905/938553';
@@ -328,7 +328,7 @@ import { Dk as _$$Dk, O9, qG, qS, W$, XG } from '../905/970170';
 import { S as _$$S6 } from '../905/970585';
 import { ej as _$$ej, eK as _$$eK2, hS as _$$hS3, Je as _$$Je, KQ as _$$KQ, Ns as _$$Ns, pY as _$$pY, qv as _$$qv, r0 as _$$r8, _z, Dy, H7, HI, ky, NR, PI, Pj, PP, qr, R7, Rz, vK, W0, w2, Z6, zy } from '../905/977218';
 import { qp } from '../905/977779';
-import { setAllUserFlags, postUserFlag } from '../905/985254';
+import { postUserFlag, setAllUserFlags } from '../905/985254';
 import { Y as _$$Y4 } from '../905/986107';
 import { Q as _$$Q2 } from '../905/986450';
 import { a6 as _$$a3, cb as _$$cb, oI as _$$oI, rO as _$$rO, t7 as _$$t3, yF as _$$yF, jT, Kh, LV, Pp, Zq } from '../905/989765';
@@ -357,7 +357,7 @@ import { CommentTabType, ResourceTypeNoComment } from '../figma_app/45218';
 import { eq as _$$eq, FO as _$$FO, Ri as _$$Ri, D3, L1, QA, Sb, wO, yh } from '../figma_app/49598';
 import { FEditorType, mapEditorTypeToString, mapEditorTypeToStringWithObfuscated, mapEditorTypeToWorkspaceType, mapFileTypeToEditorType } from '../figma_app/53721';
 import { o as _$$o6 } from '../figma_app/54816';
-import { clearActiveFileUsersAction, copyShareLinkOptimistic, filePermissionsPutAction, batchPutFileAction, postFileAction, hasFileRepo, setActiveFileUsersAction, renameFileOptimistic, batchSubscribeToRealtimeAction, fileRestoreAction, moveFileAction, filePutAction, removeFileFromProjectAction } from '../figma_app/78808';
+import { batchPutFileAction, batchSubscribeToRealtimeAction, clearActiveFileUsersAction, copyShareLinkOptimistic, filePermissionsPutAction, filePutAction, fileRestoreAction, hasFileRepo, moveFileAction, postFileAction, removeFileFromProjectAction, renameFileOptimistic, setActiveFileUsersAction } from '../figma_app/78808';
 import { revokeThumbnailUrl, teamLibraryCache } from '../figma_app/80990';
 import { executeDeferredCallbacks, subscribeObservable } from '../figma_app/84367';
 import { nm as _$$nm, kQ, Yb } from '../figma_app/86921';
@@ -365,14 +365,14 @@ import { Wl } from '../figma_app/88239';
 import { aK as _$$aK, ho as _$$ho2, il as _$$il, lz as _$$lz, p5 as _$$p3, pj as _$$pj, PQ as _$$PQ, re as _$$re, Uv as _$$Uv, bO, Bs, CN, D9, fG, fk, FP, fy, Gm, JM, Jt, kP, Kx, OB, Qm, R5, Rw, U8, UC, UM, vg, Wk, XE, XQ, Y6, yv, Z1, Z_ } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
 import { Ob } from '../figma_app/111825';
-import { lX as _$$lX } from '../figma_app/120227';
+import { getCurrentCodeExtensionPreferences } from '../figma_app/120227';
 import { au as _$$au, cx as _$$cx, hL as _$$hL, Ho as _$$Ho, rT as _$$rT, D6, gA, H1, U6, Vw, w9 } from '../figma_app/124493';
 import { cn as _$$cn } from '../figma_app/141320';
 import { dK as _$$dK2, xt } from '../figma_app/149304';
 import { iO as _$$iO } from '../figma_app/149367';
 import { hV as _$$hV2, Dc } from '../figma_app/151766';
 import { p as _$$p5 } from '../figma_app/160942';
-import { SpaceAccessType, PublicModelType, ModelTypeConfigs, SearchTypeMode } from '../figma_app/162807';
+import { ModelTypeConfigs, PublicModelType, SearchTypeMode, SpaceAccessType } from '../figma_app/162807';
 import { v2 } from '../figma_app/164260';
 import { xZ } from '../figma_app/165422';
 import { qV } from '../figma_app/165623';
@@ -382,7 +382,7 @@ import { c0 as _$$c5 } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
 import { Ni } from '../figma_app/188152';
 import { FAccessLevelType, FBasicPermissionType, FFeatureAdoptionStatusType, FFileType, FOrganizationLevelType, FPaymentHealthStatusType, FPermissionLevelType, FPlanAccessType, FPlanRestrictionType, FProductAccessType, FPublicationStatusType, FResourceCategoryType, FTeamAccessPermissionType, FUserRoleType } from '../figma_app/191312';
-import { K as _$$K3, U2 as _$$U2, bW, Iu, Np, vU, yn } from '../figma_app/193867';
+import { getFileIdFromPath, getFileKeyFromSelectedView, getSelectedViewName, getTeamIdFromPath, isRecentsAndSharingView, mapPathToSelectedView, selectedViewToPath } from '../figma_app/193867';
 import { P0 } from '../figma_app/198387';
 import { iT as _$$iT, Q3, xT } from '../figma_app/199513';
 import { FC } from '../figma_app/212807';
@@ -420,7 +420,7 @@ import { _6, z3 } from '../figma_app/386952';
 import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as _$$n3, N9 as _$$N7, oI as _$$oI2, ot as _$$ot, Pg as _$$Pg, A3, bA, CE, Cs, HS, I4, Ir, k1, ks, NL, OC, Ox, UX, V9, WA, wk } from '../figma_app/389091';
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
-import { relatedLinkRemoved, selectedLayerGuid, sendText, pageLoaded, selectedPageGuid, relatedLinkCreated, sendLayers, sendCssProperties, sendHtmlSkeleton, sendFileName, configureAutocomplete, sendThumbnail, sendMappingSuggestion, messageWithCallbackManager, messageWithResponseManager } from '../figma_app/415217';
+import { configureAutocomplete, messageWithCallbackManager, messageWithResponseManager, pageLoaded, relatedLinkCreated, relatedLinkRemoved, selectedLayerGuid, selectedPageGuid, sendCssProperties, sendFileName, sendHtmlSkeleton, sendLayers, sendMappingSuggestion, sendText, sendThumbnail } from '../figma_app/415217';
 import { iE as _$$iE, Ng, xf } from '../figma_app/416935';
 import { b4 as _$$b5, _V } from '../figma_app/421886';
 import { viewKeys } from '../figma_app/422062';
@@ -439,7 +439,7 @@ import { Cg, Ug, v7 } from '../figma_app/475303';
 import { $h, Ay as _$$Ay4, eK as _$$eK, Lo as _$$Lo, pv as _$$pv, Qg as _$$Qg, Ts as _$$Ts2, Az, Ef, i, I2, Je, js, M2, MN, Mv, Qe, qU, WG, XS, yy } from '../figma_app/482142';
 import { clamp, randomBetween } from '../figma_app/492908';
 import { isEmptyObject } from '../figma_app/493477';
-import { I2 as _$$I, pk as _$$pk, tb as _$$tb, tp as _$$tp, _X, Il, kb, Um, yk } from '../figma_app/502247';
+import { tb as _$$tb, getOrgId, getRecentUserData, getSessionUserState, getTeamId, getUserState, kb, persistCommunityProfileId, setCommunityProfileId } from '../figma_app/502247';
 import { ih as _$$ih, l7 as _$$l } from '../figma_app/504640';
 import { up as _$$up2 } from '../figma_app/506364';
 import { getUserCurrency } from '../figma_app/514043';
@@ -463,7 +463,7 @@ import { Fy } from '../figma_app/623300';
 import { getDraftsSidebarString, initialLibraryStats, LIBRARY_PREFERENCES_MODAL, LibraryAgeEnum, LibraryPublishStatusEnum, NO_TEAM, PrimaryWorkflowEnum, PublishStatusEnum, SubscriptionStatusEnum } from '../figma_app/633080';
 import { canViewFolder_DEPRECATED, canViewTeam, getPermissionsStateMemoized, hasViewerRoleAccessOnTeam } from '../figma_app/642025';
 import { J1 as _$$J3, bd, f2, UB } from '../figma_app/646357';
-import { FigResourceType, DashboardSection } from '../figma_app/650409';
+import { DashboardSection, FigResourceType } from '../figma_app/650409';
 import { PAGINATION_NEXT, PAGINATION_PREV } from '../figma_app/661371';
 import { bp } from '../figma_app/678300';
 import { fl, ye, zw } from '../figma_app/682945';
@@ -472,7 +472,7 @@ import { kE as _$$kE, mH as _$$mH, QA as _$$QA, tG as _$$tG2, TW as _$$TW, HF, z
 import { y as _$$y5 } from '../figma_app/705249';
 import { AppView, isIncludedView } from '../figma_app/707808';
 import { cL as _$$cL5, DI as _$$DI, dY as _$$dY, sV as _$$sV, NY, V2, zx } from '../figma_app/712525';
-import { loadingStatePutFailure, loadingStatePutFailureReason, loadingStateDelete, loadingStatePutLoading, loadingStatePutSuccess } from '../figma_app/714946';
+import { loadingStateDelete, loadingStatePutFailure, loadingStatePutFailureReason, loadingStatePutLoading, loadingStatePutSuccess } from '../figma_app/714946';
 import { aV as _$$aV2 } from '../figma_app/722362';
 import { tG as _$$tG } from '../figma_app/723183';
 import { LP } from '../figma_app/728005';
@@ -499,8 +499,8 @@ import { L4 as _$$L3 } from '../figma_app/819288';
 import { pz as _$$pz, jz } from '../figma_app/825489';
 import { wH } from '../figma_app/828908';
 import { SubscriptionType } from '../figma_app/831101';
-import { withTrackedClick, TrackingProvider } from '../figma_app/831799';
-import { V_ } from '../figma_app/841351';
+import { TrackingProvider, withTrackedClick } from '../figma_app/831799';
+import { CURRENT_VERSION_ID } from '../figma_app/841351';
 import { Ay as _$$Ay5 } from '../figma_app/846003';
 import { hV as _$$hV, id as _$$id, lW as _$$lW, pn as _$$pn, rH as _$$rH2, u2 as _$$u, _p, Dz, gN, k$, M3, MH, TV } from '../figma_app/847915';
 import { r5 as _$$r3, r$ as _$$r$, ZH } from '../figma_app/855490';
@@ -1548,7 +1548,7 @@ let t_ = e => t => async function (i) {
   }
   if (AUTH_SAML_START_FROM_SESSION.matches(i)) {
     trackAuthEvent('saml_gate_redirect_attempt', n.auth.origin);
-    _$$H4.getSsoConfig().then(({
+    sessionApiInstance.getSsoConfig().then(({
       data: t
     }) => {
       t.meta.org_saml_config ? (trackAuthEvent('saml_gate_redirect_success', n.auth.origin), vr({
@@ -1565,7 +1565,7 @@ let t_ = e => t => async function (i) {
     trackAuthEvent('email_only_attempt', n.auth.origin);
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
-    _$$H4.getSsoConfig(a).then(({
+    sessionApiInstance.getSsoConfig(a).then(({
       data: t
     }) => {
       trackAuthEvent('email_only_success', n.auth.origin);
@@ -1654,7 +1654,7 @@ let t8 = {
   },
   selectView(e, t) {
     xK.start('editorPreloaded');
-    e.dispatch(_$$sf(t));
+    e.dispatch(selectViewAction(t));
   },
   setRealtimeToken(e, t) {
     desktopAPIInstance?.setRealtimeToken({
@@ -1707,7 +1707,7 @@ async function t9(e, t) {
     return;
   }
   let s = {
-    ...vU(i, a, t.params, t.hash),
+    ...mapPathToSelectedView(i, a, t.params, t.hash),
     canNavigateDesktopNewTab: !0
   };
   if (s.view !== 'fullscreen') return;
@@ -2038,7 +2038,7 @@ let iz = e => t => function (i) {
   return t(i);
 };
 let iK = e => t => function (i) {
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     e.getState().creatingNewFolder && (e.dispatch(hideModal()), e.dispatch(bx()));
   } else if (yH.matches(i)) {
     let n = e.getState();
@@ -2191,7 +2191,7 @@ let i2 = e => t => function (i) {
     });
     setupLoadingStateHandler(n, e, `TEAM_GET_ACTION_${t}`);
   } else {
-    _$$sf.matches(i) && i.payload.view === 'team' && e.getState().teams[i.payload.teamId] == null && e.dispatch(_$$Jt({
+    selectViewAction.matches(i) && i.payload.view === 'team' && e.getState().teams[i.payload.teamId] == null && e.dispatch(_$$Jt({
       teamId: i.payload.teamId,
       shouldLoadFolders: !0
     }));
@@ -2202,7 +2202,7 @@ let i6 = e => t => function (i) {
   if (_$$yJ.matches(i)) {
     if (i.payload.userInitiated) {
       return _$$Q3({
-        requestPromise: _$$k5.putUser({
+        requestPromise: UserAPIHandlers.putUser({
           user: i.payload.user
         }),
         fallbackError: getI18nString('api_user.error.an_error_occurred_while_updating_your_information'),
@@ -2272,7 +2272,7 @@ let na = async e => {
     authedProfilesById,
     selectedView
   } = e.getState();
-  let r = yk();
+  let r = getRecentUserData();
   let a = null;
   if (user) {
     if (r.communityProfileId && _$$d3(selectedView)) {
@@ -2287,17 +2287,17 @@ let na = async e => {
       profileId: user.community_profile_id,
       userId: user.id
     }));
-    a && (Il(a.id), e.dispatch(_$$cR(a)));
+    a && (persistCommunityProfileId(a.id), e.dispatch(_$$cR(a)));
   }
 };
 let ns = e => t => function (i) {
-  if (Qv.matches(i)) {
+  if (hydrateFileBrowser.matches(i)) {
     let n = t(i);
     _$$F3.clearCache();
     na(e);
     return n;
   }
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let t = e.getState();
     let {
       selectedView,
@@ -2308,13 +2308,13 @@ let ns = e => t => function (i) {
     let o = modalShown?.type && nr.includes(modalShown.type);
     if (selectedView.view === 'communityHub' && o && !s && e.dispatch(hideModal()), i.payload.view === 'communityHub') {
       if (e.dispatch(Ad(i.payload)), e.dispatch(AUTH_SET_REDIRECT_URL({
-        redirectUrl: Np(t, i.payload)
+        redirectUrl: selectedViewToPath(t, i.payload)
       })), i.payload.subView === 'hubFile' || i.payload.subView === 'plugin' || i.payload.subView === 'widget') {
         let t = !1;
         i.payload.subView === 'hubFile' ? t = selectedView.view === 'communityHub' && selectedView.subView === 'hubFile' && i.payload.hubFileId === selectedView.hubFileId : i.payload.subView === 'plugin' ? t = selectedView.view === 'communityHub' && selectedView.subView === 'plugin' && i.payload.publishedPluginId === selectedView.publishedPluginId : i.payload.subView === 'widget' && (t = selectedView.view === 'communityHub' && selectedView.subView === 'widget' && i.payload.widgetId === selectedView.widgetId);
         t || (e.dispatch(Zj(CommentTabType.ALL)), e.dispatch(_F()));
       }
-      user && _$$I(user.id);
+      user && setCommunityProfileId(user.id);
     } else {
       selectedView.view === 'communityHub' && e.dispatch(AUTH_SET_REDIRECT_URL({
         redirectUrl: getInitialOptions().redirect_url || null
@@ -2324,7 +2324,7 @@ let ns = e => t => function (i) {
   return t(i);
 };
 let ng = e => t => function (i) {
-  if (!_$$sf.matches(i)) return t(i);
+  if (!selectViewAction.matches(i)) return t(i);
   {
     let n = e.getState();
     let {
@@ -2376,18 +2376,18 @@ let nx = new class {
   }
 }();
 let nS = e => t => function (i) {
-  if (_$$ce() && _$$sf.matches(i)) {
+  if (_$$ce() && selectViewAction.matches(i)) {
     let n = e.getState();
     if (n.selectedView === _$$o4 || i.payload === _$$o4) return t(i);
-    let r = Np(n, n.selectedView);
-    let a = Np(n, i.payload);
+    let r = selectedViewToPath(n, n.selectedView);
+    let a = selectedViewToPath(n, i.payload);
     if (_$$cm(r) !== _$$cm(a)) {
       customHistory.unsafeRedirectWithLocationHref(a);
       return;
     }
   }
   if (!desktopAPIInstance) return t(i);
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let n = e.getState();
     let r = i.payload;
     if (r.view === 'fullscreen' && r.mode == null && (r = {
@@ -2400,9 +2400,9 @@ let nS = e => t => function (i) {
         thumbnail: _$$pf(e)
       });
     }
-    let a = vU(n, new URL(customHistory.location.href).pathname);
+    let a = mapPathToSelectedView(n, new URL(customHistory.location.href).pathname);
     if (r.view === 'communityHub' && a.view !== 'communityHub') {
-      desktopAPIInstance.openCommunity(Np(n, r), n.user?.id ?? '');
+      desktopAPIInstance.openCommunity(selectedViewToPath(n, r), n.user?.id ?? '');
       return;
     }
     if (r.view === 'fullscreen' && n.selectedView.view === 'fullscreen') {
@@ -2431,13 +2431,13 @@ let nS = e => t => function (i) {
         let i;
         let a;
         let s;
-        let o = new URL(Np(n, r), document.baseURI);
+        let o = new URL(selectedViewToPath(n, r), document.baseURI);
         if (r.view === 'fullscreen') {
           let o = r.fileKey ? n.fileByKey[r.fileKey] : void 0;
           e = r.editorType ? mapEditorTypeToStringWithObfuscated(r.editorType) : void 0;
           o && (t = o.name, i = isBranch(o), a = !!o.last_published_at, s = !!(o.is_team_template && LQ(n)));
         } else {
-          r.view === 'prototype' && (t = Iu(n, r));
+          r.view === 'prototype' && (t = getSelectedViewName(n, r));
         }
         desktopAPIInstance.openFileFromNewTab({
           url: o.href,
@@ -2451,9 +2451,9 @@ let nS = e => t => function (i) {
       return;
     }
     if (r.view === 'fullscreen' || desktopAPIInstance.isFileBrowserTab() && r.view === 'prototype') {
-      let t = _$$U2(r);
+      let t = getFileKeyFromSelectedView(r);
       if (desktopAPIInstance.isFileBrowserTab() || n.selectedView && n.selectedView.view === 'prototype' || n.openFile && n.openFile?.key !== t) {
-        let t = Np(n, r);
+        let t = selectedViewToPath(n, r);
         let i = e.getState().user?.id;
         i && (t = NQ(t, 'fuid', i));
         r.view === 'fullscreen' && (t = NQ(t, 'editor_type', mapEditorTypeToStringWithObfuscated(r.editorType)));
@@ -2463,7 +2463,7 @@ let nS = e => t => function (i) {
     }
     if (!desktopAPIInstance.isFileBrowserTab() && r.view !== 'communityHub') {
       if (!r || r.view !== 'fullscreen' && r.view !== 'prototype' && r.view !== 'desktopNewTab') {
-        let e = Np(n, r);
+        let e = selectedViewToPath(n, r);
         e && customHistory.unsafeRedirectWithLocationHref(e);
         return;
       }
@@ -2479,7 +2479,7 @@ let nS = e => t => function (i) {
     let t = e.getState();
     let n = i.payload.file;
     let r = n.key ? t.fileByKey[n.key] : void 0;
-    if ((_$$K3(t.selectedView) && !desktopAPIInstance.isFileBrowserTab() || t.selectedView.view === 'fullscreen' && t.selectedView.fileKey === n.key) && (n.thumbnail_url !== r?.thumbnail_url || n.touched_at !== r?.touched_at || n.client_meta !== r?.client_meta || n.thumbnail_guid !== r?.thumbnail_guid)) {
+    if ((isRecentsAndSharingView(t.selectedView) && !desktopAPIInstance.isFileBrowserTab() || t.selectedView.view === 'fullscreen' && t.selectedView.fileKey === n.key) && (n.thumbnail_url !== r?.thumbnail_url || n.touched_at !== r?.touched_at || n.client_meta !== r?.client_meta || n.thumbnail_guid !== r?.thumbnail_guid)) {
       let e = {
         editedAt: n.touched_at,
         thumbnail: _$$pf(n)
@@ -2530,7 +2530,7 @@ let nS = e => t => function (i) {
   } else if (OB.matches(i)) {
     t(i);
     let n = e.getState();
-    let r = new URL(Np(n, n.selectedView), document.baseURI);
+    let r = new URL(selectedViewToPath(n, n.selectedView), document.baseURI);
     desktopAPIInstance.setLoading(!1);
     desktopAPIInstance.setUrl({
       url: r.href,
@@ -2542,7 +2542,7 @@ let nS = e => t => function (i) {
       thumbnail: _$$pf(a)
     });
     return;
-  } else if (Qv.matches(i) || _$$os.matches(i) || DE.matches(i)) {
+  } else if (hydrateFileBrowser.matches(i) || setSessionStateAction.matches(i) || DE.matches(i)) {
     t(i);
     let n = e.getState();
     let r = n.currentUserOrgId ?? getInitialOptions().org_id;
@@ -2607,7 +2607,7 @@ function nX(e) {
   e.view === 'fullscreen' && e.showDevModeComponentBrowser ? HandoffBindingsCpp?.setDevComponentBrowser(!0) : HandoffBindingsCpp?.setDevComponentBrowser(!1);
 }
 let nQ = e => t => function (i) {
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let n = e.getState();
     let r = n.selectedView;
     let a = i.payload;
@@ -2631,7 +2631,7 @@ let nQ = e => t => function (i) {
       e.dispatch(_$$V2());
     } else if (r.view !== 'fullscreen' && a.view === 'fullscreen') {
       if (_$$dK2() !== xt.SUCCESS) {
-        n.user && !desktopAPIInstance && e.dispatch(_$$sf({
+        n.user && !desktopAPIInstance && e.dispatch(selectViewAction({
           view: 'recentsAndSharing'
         }));
         e.dispatch(showModalHandler({
@@ -2757,13 +2757,13 @@ let nQ = e => t => function (i) {
     if (t.user) {
       if (t.openFile && t.openFile.key in i.payload.fileKeys) {
         let n = t.openFile != null ? getRepoByIdAlt(t.openFile, t.repos) : null;
-        isBranchAlt(t.openFile) && n?.default_file_key ? e.dispatch(_$$sf({
+        isBranchAlt(t.openFile) && n?.default_file_key ? e.dispatch(selectViewAction({
           view: 'fullscreen',
           fileKey: n.default_file_key,
           editorType: FEditorType.Design
         })) : desktopAPIInstance ? i.payload.userInitiated || customHistory.reload('File deleted', {
           key: t.openFile?.key || null
-        }) : atomStoreManager.get(_$$_) || e.dispatch(_$$sf({
+        }) : atomStoreManager.get(_$$_) || e.dispatch(selectViewAction({
           view: 'recentsAndSharing'
         }));
       }
@@ -3420,7 +3420,7 @@ let as = registerModal(e => {
   let c = useIsOrgAdminUser(l).unwrapOr(!1);
   let u = useIsOrgMemberOrAdminUser(l);
   if (useEffect(() => {
-    c && e.tab === _$$X2.FONTS && (t(hideModal()), t(_$$sf({
+    c && e.tab === _$$X2.FONTS && (t(hideModal()), t(selectViewAction({
       view: 'orgAdminSettings',
       orgAdminSettingsViewTab: DashboardSection.RESOURCES,
       orgAdminSettingsViewSecondaryTab: FigResourceType.SHARED_FONTS
@@ -3433,7 +3433,7 @@ let as = registerModal(e => {
     return null;
   }
   let p = e => {
-    t(_$$sf({
+    t(selectViewAction({
       view: 'org',
       orgId: r.id,
       orgViewTab: e
@@ -3467,7 +3467,7 @@ let as = registerModal(e => {
       })(),
       onClose: () => {
         t(hideModal());
-        i.view === 'org' && t(_$$sf({
+        i.view === 'org' && t(selectViewAction({
           view: 'org',
           orgId: r.id,
           orgViewTab: _$$X2.HOME
@@ -3502,7 +3502,7 @@ let as = registerModal(e => {
   });
 }, _$$C3, ModalSupportsBackground.YES);
 let ao = e => t => function (i) {
-  if (Qv.matches(i)) {
+  if (hydrateFileBrowser.matches(i)) {
     t(i);
     e.dispatch(UK({
       force: !1
@@ -3515,7 +3515,7 @@ let ao = e => t => function (i) {
     }));
     return;
   }
-  _$$sf.matches(i) && (i.payload.view === 'org' ? (i.payload.orgViewTab === 'libraries' && e.dispatch(showModalHandler({
+  selectViewAction.matches(i) && (i.payload.view === 'org' ? (i.payload.orgViewTab === 'libraries' && e.dispatch(showModalHandler({
     type: as,
     data: {
       tab: _$$X2.LIBRARIES
@@ -3535,7 +3535,7 @@ let ao = e => t => function (i) {
 };
 let ac = e => t => function (i) {
   let n = e.getState();
-  if (_$$sf.matches(i) && (i.payload.view === 'teamUpgrade' || i.payload.view === 'promoReview' || i.payload.view === 'eduReview')) {
+  if (selectViewAction.matches(i) && (i.payload.view === 'teamUpgrade' || i.payload.view === 'promoReview' || i.payload.view === 'eduReview')) {
     let r = i.payload.teamId;
     if (!r) {
       _$$p5(n.selectedView, n.payment) ? e.dispatch(_$$Ts2({
@@ -3572,8 +3572,8 @@ let ac = e => t => function (i) {
   return t(i);
 };
 let am = e => t => function (i) {
-  if (_$$sf.matches(i)) {
-    let t = $A(e.getState().selectedView);
+  if (selectViewAction.matches(i)) {
+    let t = isFullscreenDevHandoffView(e.getState().selectedView);
     let n = i.payload.view === 'fullscreen' && i.payload.editorType === FEditorType.DevHandoff;
     _$$hM() && t !== n && handlePluginError();
   }
@@ -5626,8 +5626,8 @@ async function sB(e, t) {
   sU = !0;
   let i = Math.floor(3e5 * Math.random());
   getInitialOptions().cluster_name === 'test' && (i = 0);
-  av(i).then(() => _X(e, 10)).then(e => {
-    t.dispatch(Qv({
+  av(i).then(() => getUserState(e, 10)).then(e => {
+    t.dispatch(hydrateFileBrowser({
       ...e.data.meta,
       fromRealtime: !0
     }));
@@ -5763,11 +5763,11 @@ let sH = (e, t) => {
 };
 let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function (i) {
   let n = t(i);
-  if (_$$os.matches(i)) {
+  if (setSessionStateAction.matches(i)) {
     let t = i.payload.users.filter(e => e.realtime_token_inactive).map(e => parseMessage(e.realtime_token_inactive));
     e.dispatch(iZ(t));
   }
-  if (Qv.matches(i)) {
+  if (hydrateFileBrowser.matches(i)) {
     realtimeClient.setCallback(t => {
       !function (e, t) {
         if (sj.shimLogger.logMessages([t], {
@@ -5831,9 +5831,9 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
     for (let t of i.payload) t && t.realtime_token && e.dispatch(i$(parseMessage(t.realtime_token).channel));
   } else if (L1.matches(i)) {
     for (let t of i.payload) t && t.realtime_token && e.dispatch(i$(parseMessage(t.realtime_token).channel));
-  } else if (_$$sf.matches(i)) {
+  } else if (selectViewAction.matches(i)) {
     if (i.payload.view === 'fullscreen' || i.payload.view === 'prototype') {
-      let t = _$$U2(i.payload);
+      let t = getFileKeyFromSelectedView(i.payload);
       t && !e.getState().realtime.subscriptions[`/file-${t}`] && fileApiHandler.getRealtimeToken({
         fileKey: t
       }).then(n => {
@@ -5894,13 +5894,13 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
   return n;
 };
 let sK = e => t => function (i) {
-  _$$sf.matches(i) && e.dispatch(Z8({
+  selectViewAction.matches(i) && e.dispatch(Z8({
     selectedView: i.payload
   }));
   return t(i);
 };
 let sq = e => t => function (i) {
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let n;
     let r;
     t(i);
@@ -6173,7 +6173,7 @@ function oi(e, t) {
   };
 }
 function on(e = ot, t) {
-  if (Qv.matches(t)) {
+  if (hydrateFileBrowser.matches(t)) {
     return function () {
       let e = localStorageRef != null ? localStorageRef.getItem(s9) : null;
       if (e) {
@@ -6329,7 +6329,7 @@ let or = e => {
 let oa = !1;
 let os = !1;
 let oo = e => t => function (i) {
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let n = e.getState().selectedView;
     let {
       view
@@ -6410,7 +6410,7 @@ let oo = e => t => function (i) {
 };
 var ol = (e => (e.NOTIFICATION = 'notification', e.SUBSCRIPTION = 'subscription', e.LINK_UNFURL = 'link-unfurl', e))(ol || {});
 let od = e => e => function (t) {
-  if (_$$sf.matches(t)) {
+  if (selectViewAction.matches(t)) {
     let e = new URLSearchParams(customHistory.location.search);
     let i = e.get('utm_source');
     if (i === 'notification') {
@@ -6510,9 +6510,9 @@ function og(e, t) {
   return e;
 }
 let of = e => t => function (i) {
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let t = e.getState().selectedView;
-    !(t.view === 'folder' && i.payload.view === 'folder' && t.folderId === i.payload.folderId || _$$K3(t) && _$$K3(i.payload)) && function (e) {
+    !(t.view === 'folder' && i.payload.view === 'folder' && t.folderId === i.payload.folderId || isRecentsAndSharingView(t) && isRecentsAndSharingView(i.payload)) && function (e) {
       let t = 0;
       if (e) {
         for (let i of Object.keys(e)) t += Object.keys(e[i]).length;
@@ -6523,7 +6523,7 @@ let of = e => t => function (i) {
   return t(i);
 };
 let oA = e => t => function (i) {
-  if (_$$os.matches(i)) {
+  if (setSessionStateAction.matches(i)) {
     let t = e.getState().loadingState;
     if (!isIntegrationContext() && i.payload.orgs.length > 0) {
       let i = _$$au2.loadingKeyForPayload();
@@ -6533,12 +6533,12 @@ let oA = e => t => function (i) {
   return t(i);
 };
 let ob = e => t => function (i) {
-  if (_$$sf.matches(i)) {
+  if (selectViewAction.matches(i)) {
     let n = e.getState();
-    let r = n.selectedView && _$$U2(n.selectedView);
+    let r = n.selectedView && getFileKeyFromSelectedView(n.selectedView);
     let a = t(i);
     let s = e.getState();
-    (s.selectedView && _$$U2(s.selectedView)) !== r && e.dispatch(VERSION_HISTORY_RESET());
+    (s.selectedView && getFileKeyFromSelectedView(s.selectedView)) !== r && e.dispatch(VERSION_HISTORY_RESET());
     return a;
   }
   return t(i);
@@ -6585,14 +6585,14 @@ let ok = {
 };
 let oR = HY({
   byId(e = ok.byId, t) {
-    if (_$$os2.matches(t)) {
+    if (setSessionStateAction.matches(t)) {
       let e = {};
       t.payload.users.forEach(t => {
         e[t.id] = t;
       });
       return e;
     }
-    if (L_.matches(t)) {
+    if (putCommunityProfile.matches(t)) {
       let i = t.payload;
       let {
         associated_users
@@ -6617,7 +6617,7 @@ let oR = HY({
         ...r
       };
     }
-    if (Nr.matches(t)) {
+    if (clearCommunityProfile.matches(t)) {
       let i = t.payload;
       let n = Object.keys(e).reduce((t, n) => {
         let r = e[n];
@@ -6635,7 +6635,7 @@ let oR = HY({
         ...n
       };
     }
-    if (_$$vv.matches(t)) {
+    if (putUser.matches(t)) {
       let i = t.payload.user.id;
       if (i in e) {
         let n = e[i];
@@ -6651,7 +6651,7 @@ let oR = HY({
     return e;
   },
   orderedIds(e = ok.orderedIds, t) {
-    return _$$os2.matches(t) ? t.payload.users.map(e => e.id) : e;
+    return setSessionStateAction.matches(t) ? t.payload.users.map(e => e.id) : e;
   }
 });
 let oO = {
@@ -6997,7 +6997,7 @@ function oH(e) {
       delete e[i.payload.id];
       return e;
     }
-    return Qv.matches(i) ? {} : t;
+    return hydrateFileBrowser.matches(i) ? {} : t;
   };
 }
 let oW = CommentTabType.ALL;
@@ -7634,7 +7634,7 @@ function lp(e, t) {
   return e;
 }
 let lg = Oi((e = {}, t) => {
-  if (Qv.matches(t)) {
+  if (hydrateFileBrowser.matches(t)) {
     let t = {
       ...e
     };
@@ -8555,7 +8555,7 @@ let lY = _$$oB2((e, t) => _$$yJ7.matches(t) || _$$CN.matches(t) ? t.payload && t
   shouldIgnoreAction: e => !(_$$yJ7.matches(e) || _$$CN.matches(e))
 });
 let lq = Oi((e = {}, t) => {
-  if (Qv.matches(t)) {
+  if (hydrateFileBrowser.matches(t)) {
     let t = {
       ...e
     };
@@ -8752,7 +8752,7 @@ function lX(e = {}, t) {
   return kE.matches(t) ? {
     ...e,
     [t.payload.repoId]: t.payload.branchKey
-  } : _$$sf.matches(t) || Qv.matches(t) ? {} : e;
+  } : selectViewAction.matches(t) || hydrateFileBrowser.matches(t) ? {} : e;
 }
 let lQ = _$$oB2((e, t) => {
   let i = lY(e.repo, t);
@@ -8860,7 +8860,7 @@ function l5(e = {}, t) {
   return _$$r5.matches(t) ? {
     ...e,
     loading: t.payload.loading
-  } : _$$sf.matches(t) && t.payload.view === 'teamCreation' ? {
+  } : selectViewAction.matches(t) && t.payload.view === 'teamCreation' ? {
     ...e,
     loading: !1,
     isEduTeam: t.payload.isEduTeam
@@ -9095,7 +9095,7 @@ function dc(e = {}, t) {
   return e;
 }
 function du(e = !1, t) {
-  return !(_$$sf.matches(t) || showModal.matches(t) || _$$Ts.matches(t)) && (!!PY.matches(t) || !_I.matches(t) && e);
+  return !(selectViewAction.matches(t) || showModal.matches(t) || initAction.matches(t)) && (!!PY.matches(t) || !_I.matches(t) && e);
 }
 function dp(e = null, t) {
   return _$$sf2.matches(t) ? t.payload : bx.matches(t) ? null : e;
@@ -9342,7 +9342,7 @@ function dj(e = {
   } : e;
 }
 let dB = {
-  activeId: V_,
+  activeId: CURRENT_VERSION_ID,
   versions: [],
   docHasChanged: !0,
   loading: !1,
@@ -9982,7 +9982,7 @@ let cy = new _$$Y4();
 let cE = HY({
   appModel: fj,
   selectionProperties(e = {}, t) {
-    if (_$$Ts.matches(t)) return Object.create(null);
+    if (initAction.matches(t)) return Object.create(null);
     if (_$$p3.matches(t) && t.payload.selectionProperties) {
       let i = t.payload.selectionProperties;
       let n = i.message;
@@ -10031,7 +10031,7 @@ let cE = HY({
     } : e;
   },
   sceneGraph(e = cy, t) {
-    return _$$Ts.matches(t) || _$$a4.matches(t) ? (X0(), cy) : _$$p3.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new SingletonSceneGraph()) : e;
+    return initAction.matches(t) || _$$a4.matches(t) ? (X0(), cy) : _$$p3.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new SingletonSceneGraph()) : e;
   },
   sceneGraphSelection: bp,
   objectsPanelRowRebuildCounter(e = 0, t) {
@@ -10108,10 +10108,10 @@ function cN(e = cR, t) {
   return e;
 }
 function cP(e = !1, t) {
-  return !_$$Ts.matches(t) && (!!vg.matches(t) || !Wk.matches(t) && e);
+  return !initAction.matches(t) && (!!vg.matches(t) || !Wk.matches(t) && e);
 }
 function cO(e = null, t) {
-  return _$$Ts.matches(t) ? function (e = {}) {
+  return initAction.matches(t) ? function (e = {}) {
     let t = getInitialOptions().editing_file;
     if (!t) return null;
     let i = t.folder ? {
@@ -10151,7 +10151,7 @@ function cO(e = null, t) {
   } : e;
 }
 function cD(e = !1, t) {
-  return !(_$$Ts.matches(t) || _$$ho2.matches(t)) && !_$$a4.matches(t) && (UC.matches(t) && !!t.payload.isLiveGraphSync || e);
+  return !(initAction.matches(t) || _$$ho2.matches(t)) && !_$$a4.matches(t) && (UC.matches(t) && !!t.payload.isLiveGraphSync || e);
 }
 function cL(e = !1, t) {
   return !_$$a4.matches(t) && (!!_$$o8.matches(t) || e);
@@ -10160,7 +10160,7 @@ function cF(e = [], t) {
   return _$$o7.matches(t) ? t.payload : e;
 }
 function cM(e = null, t) {
-  return _$$Ts.matches(t) ? Ob : XQ.matches(t) ? t.payload.fileVersion : e;
+  return initAction.matches(t) ? Ob : XQ.matches(t) ? t.payload.fileVersion : e;
 }
 function cj(e = !1, t) {
   return kP.matches(t) ? t.payload.needsUpgrade : e;
@@ -10170,7 +10170,7 @@ function cU(e = {
   type: _$$lF2.BAR
 }, t) {
   let i = e;
-  _$$Ts.matches(t) ? i = {
+  initAction.matches(t) ? i = {
     mode: getInitialOptions().editing_file ? UIVisibilitySetting.HIDE_UI : UIVisibilitySetting.OFF
   } : HO.matches(t) ? i = {
     mode: t.payload.progressBarMode
@@ -10188,7 +10188,7 @@ function cU(e = {
 function cB(e = !1, t) {
   if (HO.matches(t)) {
     if (t.payload.openNewFileIn === _$$ai.SAME_TAB) return !1;
-  } else if (_$$Ts.matches(t) || _$$ho2.matches(t) || Qm.matches(t) || _$$o8.matches(t)) {
+  } else if (initAction.matches(t) || _$$ho2.matches(t) || Qm.matches(t) || _$$o8.matches(t)) {
     return !1;
   } else if (yv.matches(t)) {
     return !0;
@@ -10199,7 +10199,7 @@ function cV(e = _$$kF.NONE, t) {
   return _$$aK.matches(t) ? t.payload : Z1.matches(t) ? _$$kF.NONE : e;
 }
 function cG(e = null, t) {
-  return _$$Ts.matches(t) ? null : _$$v5.matches(t) ? t.payload : e;
+  return initAction.matches(t) ? null : _$$v5.matches(t) ? t.payload : e;
 }
 let cz = {
   sessionID: -1,
@@ -10211,7 +10211,7 @@ let cz = {
   sessionsNominatingCurrentUser: []
 };
 function cH(e = cz, t) {
-  return _$$Ts.matches(t) || bO.matches(t) ? cz : UM.matches(t) ? t.payload : Z_.matches(t) ? {
+  return initAction.matches(t) || bO.matches(t) ? cz : UM.matches(t) ? t.payload : Z_.matches(t) ? {
     ...e,
     observingSessionID: -1
   } : e;
@@ -10443,7 +10443,7 @@ let uA = HY({
 });
 let ub = uy;
 function uv(e = {}, t) {
-  if (_$$hG2.matches(t)) {
+  if (setUserInOrgs.matches(t)) {
     let i = {
       ...e
     };
@@ -10460,7 +10460,7 @@ function uv(e = {}, t) {
 }
 function uI(e) {
   return function (t = {}, i) {
-    if (_$$Qv2.matches(i)) {
+    if (hydrateFileBrowser.matches(i)) {
       let e = {
         ...t
       };
@@ -10473,7 +10473,7 @@ function uI(e) {
       }
       return e;
     }
-    if (_$$os2.matches(i)) {
+    if (setSessionStateAction.matches(i)) {
       let e = {
         ...t
       };
@@ -10724,7 +10724,7 @@ let uj = {
 };
 let uB = HY({
   byId(e = {}, t) {
-    if (_$$os.matches(t)) {
+    if (setSessionStateAction.matches(t)) {
       let i = {
         ...e
       };
@@ -10784,7 +10784,7 @@ let uB = HY({
 });
 let uV = HY({
   subscriptions(e = {}, t) {
-    if (_$$Ts.matches(t)) return {};
+    if (initAction.matches(t)) return {};
     if (iZ.matches(t)) {
       let i = t.payload;
       let n = null;
@@ -10940,7 +10940,7 @@ let uQ = Oi((e = {}, t) => {
       };
     }), teamId);
   }
-  if (Qv.matches(t)) {
+  if (hydrateFileBrowser.matches(t)) {
     let {
       team_users
     } = t.payload;
@@ -10955,7 +10955,7 @@ let uQ = Oi((e = {}, t) => {
   return e;
 }, uZ.reducer);
 let u0 = Oi((e = {}, t) => {
-  if (Qv.matches(t)) {
+  if (hydrateFileBrowser.matches(t)) {
     let i = {
       ...e
     };
@@ -11189,7 +11189,7 @@ let pg = {
     } : e;
   },
   dropdownShown(e = null, t) {
-    return _$$ab.matches(t) ? t.payload : _$$oB.matches(t) ? null : _$$ho.matches(t) ? {
+    return showDropdownAction.matches(t) ? t.payload : hideDropdownAction.matches(t) ? null : updateDropdownSelectionAction.matches(t) ? {
       ...e,
       ...t.payload,
       data: {
@@ -11315,32 +11315,32 @@ let pg = {
   authedUsers: oR,
   publicUsers: uB,
   authedProfilesById(e = oC, t) {
-    if (_$$os2.matches(t)) {
+    if (setSessionStateAction.matches(t)) {
       let e = {};
       t.payload.profiles.forEach(t => e[t.id] = t);
       return e;
     }
-    return _$$HZ2.matches(t) ? {
+    return addAuthedCommunityProfileToHub.matches(t) ? {
       ...e,
       [t.payload.id]: t.payload
-    } : L_.matches(t) ? t.payload.id in e ? {
+    } : putCommunityProfile.matches(t) ? t.payload.id in e ? {
       ...e,
       [t.payload.id]: {
         ...e[t.payload.id],
         ...t.payload
       }
-    } : e : Nr.matches(t) ? Object.keys(e).reduce((i, n) => e[n].profile_handle === t.payload ? i : {
+    } : e : clearCommunityProfile.matches(t) ? Object.keys(e).reduce((i, n) => e[n].profile_handle === t.payload ? i : {
       ...i,
       [n]: e[n]
     }, {}) : e;
   },
   authedTeamsById(e = oT, t) {
-    if (_$$os2.matches(t)) {
+    if (setSessionStateAction.matches(t)) {
       let e = {};
       t.payload.teams.forEach(t => e[t.id] = t);
       return e;
     }
-    if (RF.matches(t)) {
+    if (putTeam.matches(t)) {
       let i = e[t.payload.team.id];
       return {
         ...e,
@@ -11350,7 +11350,7 @@ let pg = {
         }
       };
     }
-    if (Nh.matches(t)) {
+    if (deleteTeam.matches(t)) {
       let i = {
         ...e
       };
@@ -11360,10 +11360,10 @@ let pg = {
     return e;
   },
   authedActiveCommunityProfile(e = null, t) {
-    return _$$cR2.matches(t) ? t.payload : e;
+    return setCommunityAuthedActiveProfile.matches(t) ? t.payload : e;
   },
   teamAdminRolesForAuthedUsers(e = {}, t) {
-    if (_$$os.matches(t)) {
+    if (setSessionStateAction.matches(t)) {
       let e = {};
       t.payload.team_admin_roles_for_authed_users.forEach(t => {
         e[t.user_id] || (e[t.user_id] = []);
@@ -11400,7 +11400,7 @@ let pg = {
     return e;
   },
   userTeamFlags(e = {}, t) {
-    if (Qv.matches(t)) {
+    if (hydrateFileBrowser.matches(t)) {
       let i = {
         ...e
       };
@@ -11461,7 +11461,7 @@ let pg = {
     return e;
   },
   userEduGracePeriods(e = {}, t) {
-    if (Qv.matches(t)) {
+    if (hydrateFileBrowser.matches(t)) {
       let i = {
         ...e
       };
@@ -11584,7 +11584,7 @@ let pg = {
       i[t.payload.folderId] = t.payload.state;
       return i;
     }
-    return Qv.matches(t) ? {} : e;
+    return hydrateFileBrowser.matches(t) ? {} : e;
   },
   realtime: uV,
   selectedView: NG,
@@ -11594,7 +11594,7 @@ let pg = {
     byFolderId: {},
     byTeamId: {}
   }, t) {
-    if (Qv.matches(t)) return su(e, t.payload.roles || []);
+    if (hydrateFileBrowser.matches(t)) return su(e, t.payload.roles || []);
     if (IU.matches(t)) {
       let i = {
         ...e
@@ -11606,10 +11606,10 @@ let pg = {
   },
   twoFactorAuth: Wm,
   tooltip(e = u6, t) {
-    return BrowserInfo.isIpadNative || BrowserInfo.isMeetDevice ? e : fW.matches(t) ? {
+    return BrowserInfo.isIpadNative || BrowserInfo.isMeetDevice ? e : updateTooltip.matches(t) ? {
       ...e,
       ...t.payload.tooltip
-    } : _$$Ts.matches(t) ? u6 : (_$$pP.matches(t) && (e.targetRefMap ||= {}, e.targetRefMap[t.payload.targetKey] = t.payload.targetRef), e);
+    } : initAction.matches(t) ? u6 : (setTargetRef.matches(t) && (e.targetRefMap ||= {}, e.targetRefMap[t.payload.targetKey] = t.payload.targetRef), e);
   },
   comments: oG,
   appWindow(e = oS, t) {
@@ -11622,7 +11622,7 @@ let pg = {
     } : e;
   },
   orgById(e = uw, t) {
-    if (_$$Qv2.matches(t) || _$$os2.matches(t)) {
+    if (hydrateFileBrowser.matches(t) || setSessionStateAction.matches(t)) {
       let i = {};
       return ((t.payload.orgs ?? []).forEach(e => {
         i[e.id] = e;
@@ -11631,14 +11631,14 @@ let pg = {
         ...i
       };
     }
-    if (KW.matches(t)) {
+    if (putOrgs.matches(t)) {
       let i = t.payload.org;
       return {
         ...e,
         [i.id]: i
       };
     }
-    if (b1.matches(t) && t.payload.id in e) {
+    if (patchOrgs.matches(t) && t.payload.id in e) {
       let i = t.payload;
       return {
         ...e,
@@ -11663,7 +11663,7 @@ let pg = {
     return e;
   },
   currentUserOrgId(e = null, t) {
-    return _$$Ts.matches(t) || Qv.matches(t) ? _$$pk() : _P.matches(t) ? t.payload.orgId : e;
+    return initAction.matches(t) || hydrateFileBrowser.matches(t) ? getOrgId() : _P.matches(t) ? t.payload.orgId : e;
   },
   lockedOrgIds(e = new Set(), t) {
     if (_$$tJ.matches(t)) {
@@ -11673,7 +11673,7 @@ let pg = {
       });
       return i;
     }
-    if (Qv.matches(t)) return new Set(t.payload.locked_orgs);
+    if (hydrateFileBrowser.matches(t)) return new Set(t.payload.locked_orgs);
     if (K5.matches(t)) {
       let i = new Set(e);
       t.payload.orgIds.forEach(e => {
@@ -11684,10 +11684,10 @@ let pg = {
     return e;
   },
   isAccountLockedDuringOrgOperation(e = !1, t) {
-    return _$$dH.matches(t) ? t.payload.is_account_locked_during_org_operation : Qv.matches(t) ? !!t.payload.is_account_locked_during_org_operation : e;
+    return _$$dH.matches(t) ? t.payload.is_account_locked_during_org_operation : hydrateFileBrowser.matches(t) ? !!t.payload.is_account_locked_during_org_operation : e;
   },
   hasPersonalSpace(e = !0, t) {
-    return Qv.matches(t) ? !t.payload.disable_personal : e;
+    return hydrateFileBrowser.matches(t) ? !t.payload.disable_personal : e;
   },
   dragState(e = o3, t) {
     return _$$v4.matches(t) ? {
@@ -11696,7 +11696,7 @@ let pg = {
     } : _$$T3.matches(t) ? o3 : e;
   },
   userFavoriteFonts(e = [], t) {
-    Qv.matches(t) && (e = t.payload.user_favorite_fonts || []);
+    hydrateFileBrowser.matches(t) && (e = t.payload.user_favorite_fonts || []);
     return e;
   },
   sharedFonts(e = uz, t) {
@@ -12018,7 +12018,7 @@ let pg = {
     }
   },
   userStateLoaded(e = !1, t) {
-    return !!_$$o2.matches(t) || e;
+    return !!userStateLoadedAction.matches(t) || e;
   },
   autosave(e = oO, t) {
     return Y3.matches(t) ? {
@@ -12445,7 +12445,7 @@ let pg = {
     themePreference: null,
     enhancedContrast: !1
   }, t) {
-    if (Qv.matches(t)) {
+    if (hydrateFileBrowser.matches(t)) {
       let e = FB();
       let t = Q5();
       return {
@@ -12479,13 +12479,13 @@ let pg = {
     } : e;
   },
   sharingAttributionContextKey(e = null, t) {
-    return Qv.matches(t) && t.payload.attribution_context_key ? t.payload.attribution_context_key : e;
+    return hydrateFileBrowser.matches(t) && t.payload.attribution_context_key ? t.payload.attribution_context_key : e;
   },
   screenreader(e = {
     enabled: !1,
     errorType: null
   }, t) {
-    if (_$$Qv2.matches(t)) {
+    if (hydrateFileBrowser.matches(t)) {
       let t = localStorageRef?.getItem(pm);
       let i = getInitialOptions().user_data?.screenreader_enabled;
       let n = {
@@ -12851,7 +12851,7 @@ let pg = {
   lastVisitedPlan(e = null, t) {
     let i = e?.planId || null;
     let n = e?.planType || null;
-    _$$c4.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : _P.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = OrganizationType.ORG);
+    setLastVisitedPlan.matches(t) ? (i = t.payload.planId, n = t.payload.planType) : _P.matches(t) && e === null && t.payload.orgId && (i = t.payload.orgId, n = OrganizationType.ORG);
     return i && n ? {
       planId: i,
       planType: n
@@ -12859,11 +12859,11 @@ let pg = {
   },
   plans(e = [], t) {
     let i = e;
-    _$$uo8.matches(t) && (i = t.payload.plans);
+    batchPutPlan.matches(t) && (i = t.payload.plans);
     return i;
   },
   currentTeamId(e = null, t) {
-    return _$$Ts.matches(t) || Qv.matches(t) ? Um() : e;
+    return initAction.matches(t) || hydrateFileBrowser.matches(t) ? getTeamId() : e;
   }
 };
 let pA = 'desktop_app_interstitial--logo--OqEk7';
@@ -13305,7 +13305,7 @@ let md = createOptimistThunk((e, {
           ...r
         };
         n && (t.nodeId = n);
-        e.dispatch(_$$sf(t));
+        e.dispatch(selectViewAction(t));
       }
     }
   }
@@ -13575,7 +13575,7 @@ function mB() {
   let i = useCurrentUserOrg();
   let n = RR();
   let r = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig');
-  let a = _$$D4();
+  let a = useHasParentOrgId();
   let o = useCurrentPlanUser('TrackEnterDevHandoffModeWithSprig').unwrapOr(null);
   let l = o?.devModePaidStatus === FPlanAccessType.FULL;
   (n ? r.data?.seatTypeLicenseTypes?.includes(FProductAccessType.DEV_MODE) : l) && a && (e = i?.bigma_enabled ? 'dev_mode_ent_full' : 'dev_mode_org_full');
@@ -13774,7 +13774,7 @@ function m3() {
 }
 let hl = !0;
 let hd = e => t => function (i) {
-  if (getFeatureFlags().contentful_paint_performance_monitor && _$$sf.matches(i)) {
+  if (getFeatureFlags().contentful_paint_performance_monitor && selectViewAction.matches(i)) {
     if (hl) {
       hl = !1;
       Fi();
@@ -13785,7 +13785,7 @@ let hd = e => t => function (i) {
   return t(i);
 };
 let hc = e => t => function (i) {
-  if (getFeatureFlags().datadog_rum_selected_view && _$$sf.matches(i)) {
+  if (getFeatureFlags().datadog_rum_selected_view && selectViewAction.matches(i)) {
     let t = e.getState().selectedView.view;
     let n = i.payload.view;
     datadogRum?.setViewContextProperty('selectedView', n);
@@ -13803,7 +13803,7 @@ let hh = e => e => hm ? function (t) {
     payload: {
       type: 'auth'
     }
-  }) : _$$sf.matches(t) && (_$$K3(t.payload) || t.payload.view === 'folder') || Pp.matches(t) ? void 0 : e(t);
+  }) : selectViewAction.matches(t) && (isRecentsAndSharingView(t.payload) || t.payload.view === 'folder') || Pp.matches(t) ? void 0 : e(t);
 } : function (t) {
   return e(t);
 };
@@ -14288,7 +14288,7 @@ export async function $$hz0(e, t, d = {
     }
     await hH();
     let T = null;
-    let k = vU(b.getState(), customHistory.location.pathname).view;
+    let k = mapPathToSelectedView(b.getState(), customHistory.location.pathname).view;
     let R = window.sessionStateXHR;
     let P = window.userStateXHR;
     !function (e, t) {
@@ -14370,21 +14370,21 @@ export async function $$hz0(e, t, d = {
       let t = getWAFChallengeType(R);
       if (t && (await wafManager.waitForWAFValidation(t)), t || XHR.retryStrategyForStatusCode(R.status) !== XHR.RetryStrategy.NO_RETRY) {
         delete window.sessionStateXHR;
-        e = (await _$$tp(10)).data.meta || null;
+        e = (await getSessionUserState(10)).data.meta || null;
       } else {
         let t = R.responseText;
         e = JSON.parse(t)?.meta || null;
         delete window.sessionStateXHR;
       }
       if (e && !isIntegrationContext() && !_$$l()) {
-        b.dispatch(_$$os(e));
+        b.dispatch(setSessionStateAction(e));
         b.dispatch(q0(e));
         let t = new _$$P2();
         isInteractionPathCheck() || t.register(_$$y, e => {
           let t = getInitialOptions().user_data?.id;
           let i = e.users.some(e => e.id === t);
           if (t && i) {
-            b.dispatch(_$$os(e));
+            b.dispatch(setSessionStateAction(e));
           } else if (t) {
             if (desktopAPIInstance && !desktopAPIInstance.isFileBrowserTab()) {
               b.getState().selectedView.view !== 'desktopNewTab' && desktopAPIInstance.close({
@@ -14408,16 +14408,16 @@ export async function $$hz0(e, t, d = {
       let t = null;
       let i = getWAFChallengeType(P);
       i && (await wafManager.waitForWAFValidation(i));
-      i || XHR.retryStrategyForStatusCode(P.status) !== XHR.RetryStrategy.NO_RETRY ? (delete window.userStateXHR, t = (await _X('onUserStateLoaded', 10)).response) : (t = P.responseText, delete window.userStateXHR);
+      i || XHR.retryStrategyForStatusCode(P.status) !== XHR.RetryStrategy.NO_RETRY ? (delete window.userStateXHR, t = (await getUserState('onUserStateLoaded', 10)).response) : (t = P.responseText, delete window.userStateXHR);
       performanceMetricsTracker.jsonParseDurationMs = Math.round(measureSyncDuration('apiUserStateJsonParse', _$$e.APPLICATION_PLATFORM, () => {
         e = JSON.parse(t);
       }));
       T ? xK.time('hydrateActionWithUserState', () => {
-        b.dispatch(Qv(e.meta));
+        b.dispatch(hydrateFileBrowser(e.meta));
         b.dispatch(_$$Xc());
       }) : j(e.meta);
       kb.resolve();
-      b.dispatch(_$$o2());
+      b.dispatch(userStateLoadedAction());
       await my(b);
     }
     function j(c) {
@@ -14426,17 +14426,17 @@ export async function $$hz0(e, t, d = {
         initializeFileImporter();
         b.dispatch(_$$De());
         b.dispatch(_$$S6());
-        b.dispatch(_$$Ts());
+        b.dispatch(initAction());
       }));
       d.loadBlank ? U_(b, FEditorType.Design).catch(e => reportError(_$$e.SCENEGRAPH_AND_SYNC, e)) : d.newFileInfo && $N(b, d.newFileInfo, !0);
       performanceMetricsTracker.hydrateDurationMs = Math.round(measureSyncDuration('fileBrowserHydrate', _$$e.WAYFINDING, () => {
         trackEventAnalytics('file-browser-hydrate', {
           location: 'app_entry'
         });
-        b.dispatch(Qv(c));
+        b.dispatch(hydrateFileBrowser(c));
         b.dispatch(_$$Xc());
       }) || 0);
-      b.getState().selectedView === _$$o4 && b.dispatch(_$$sf({
+      b.getState().selectedView === _$$o4 && b.dispatch(selectViewAction({
         view: 'recentsAndSharing'
       }));
       b.dispatch(FlashActions.init());
@@ -14492,17 +14492,17 @@ export async function $$hz0(e, t, d = {
             let n = t.path.startsWith('/files/');
             let r = i.get('fuid');
             let a = r && r !== e.user?.id;
-            let s = bW(t.path);
+            let s = getFileIdFromPath(t.path);
             let o = n && s !== e.currentUserOrgId;
-            let l = yn(t.path);
+            let l = getTeamIdFromPath(t.path);
             let d = n && l && l !== e.currentTeamId;
             if (a || o || d) {
               b.dispatch(qj());
               customHistory.redirect(`${t.path}${t.params}`);
               return;
             }
-            let c = vU(e, t.path, t.params);
-            c && (b.dispatch(_$$sf(c)), c.view === 'search' && b.dispatch(_$$H5({
+            let c = mapPathToSelectedView(e, t.path, t.params);
+            c && (b.dispatch(selectViewAction(c)), c.view === 'search' && b.dispatch(_$$H5({
               params: t.params
             })));
           } else if (e === 'handleUrlParams') {
@@ -14584,7 +14584,7 @@ export async function $$hz0(e, t, d = {
               let n = i.openFile;
               if (!n) return;
               let r = i.selectedView.view === 'prototype';
-              if (!$A(i.selectedView) && !r) {
+              if (!isFullscreenDevHandoffView(i.selectedView) && !r) {
                 let t = parseQuery(customHistory.location.search);
                 delete t.t;
                 delete t.viewport;
@@ -14861,7 +14861,7 @@ export async function $$hz0(e, t, d = {
                 var n;
                 i = t.data.fileKey;
                 n = t.data.nodeId;
-                e.dispatch(_$$sf({
+                e.dispatch(selectViewAction({
                   view: 'fullscreen',
                   fileKey: i,
                   editorType: FEditorType.DevHandoff,
@@ -14871,10 +14871,10 @@ export async function $$hz0(e, t, d = {
               case 'OPEN_FIGMA_FILE_URL':
                 (function (t) {
                   let i = new URL(`https://figma.com/file/${t}`);
-                  let n = vU(e.getState(), i.pathname, i.search, i.hash);
+                  let n = mapPathToSelectedView(e.getState(), i.pathname, i.search, i.hash);
                   'editorType' in n && (n.editorType = FEditorType.DevHandoff);
                   let r = e.getState().mirror.sceneGraphSelection;
-                  e.dispatch(_$$sf(n));
+                  e.dispatch(selectViewAction(n));
                   let a = i.searchParams.get('node-id');
                   if (a) {
                     let t = e.subscribe(() => {
@@ -14961,7 +14961,7 @@ export async function $$hz0(e, t, d = {
           let r = null;
           let a = null;
           let o = null;
-          let l = _$$lX();
+          let l = getCurrentCodeExtensionPreferences();
           let d = !1;
           let c = async () => {
             let c;
@@ -15092,7 +15092,7 @@ export async function $$hz0(e, t, d = {
           c = (l = o?.parentNode || null) ? l.childrenGuids.indexOf(t) : null;
           u = (d = l?.parentGuid ? m(l.parentGuid) : null) ? d.childrenGuids.indexOf(l.guid) : null;
           p = l?.childrenDisplayOrder === _$$k6.DESIGN;
-          await A(t, _$$lX());
+          await A(t, getCurrentCodeExtensionPreferences());
           sendText(e.getState().mirror.selectionProperties.nodeText);
         }
         function _() {

@@ -13,7 +13,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
 import { d as _$$d } from "../c5e2cae0/841217";
 import { J } from "../9420/278106";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Az, js, Nj } from "../figma_app/482142";
 import { Xw } from "../905/584989";
 import { TrackingProvider } from "../figma_app/831799";
@@ -70,7 +70,7 @@ export function $$b0({
       children: jsxs(O, {
         menu: jsx(X, {
           onClick: () => {
-            r(sf({
+            r(selectViewAction({
               view: "team",
               teamId
             }));

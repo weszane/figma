@@ -19,8 +19,8 @@ import { TextWithTruncation } from "../905/984674";
 import { registerModal } from "../905/102752";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { $y } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInsetModal } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { s as _$$s } from "../cssbuilder/589278";
 import { createOptimistThunk } from "../905/350402";
 import { vv } from "../figma_app/435872";
@@ -100,9 +100,9 @@ function k({
   });
   if (1 === t) {
     if ("published_assets" === e[0]) return getFeatureFlags().dse_library_deletion_warning ? jsxs(Fragment, {
-      children: [jsx($y, {
+      children: [jsx(BannerInsetModal, {
         variant: "danger",
-        children: jsx(Q, {
+        children: jsx(BannerMessage, {
           children: renderI18nText("file_browser.confirm_file_trash_modal.about_to_trash_library_banner_warning")
         })
       }), jsx(TextWithTruncation, {

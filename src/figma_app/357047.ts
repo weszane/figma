@@ -1,13 +1,13 @@
 import { NoneColor } from "../figma_app/763686";
 import { BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
-import { Ts } from "../905/929976";
+import { initAction } from "../905/929976";
 import { p5 } from "../figma_app/91703";
 import { defaultAppState } from "../figma_app/198712";
 export function $$d7(e = {
   ...defaultAppState
 }, t) {
-  return Ts.matches(t) ? defaultAppState : (p5.matches(t) && t.payload.appModelChanges && -1 === (e = {
+  return initAction.matches(t) ? defaultAppState : (p5.matches(t) && t.payload.appModelChanges && -1 === (e = {
     ...e,
     ...t.payload.appModelChanges,
     isInitialized: !0

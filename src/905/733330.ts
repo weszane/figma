@@ -1,62 +1,152 @@
-import { parseQuery, serializeQuery } from "../905/634134";
-import { getI18nString } from "../905/303541";
-import { UpsellModalType } from "../905/165519";
-import { X1 } from "../figma_app/736948";
-import { UpgradeSteps } from "../figma_app/831101";
-import { UpgradeAction } from "../figma_app/707808";
-export class $$d0 {
-  pathToSelectedView(e, t, i) {
-    if ("purchase-organization" === t[1]) {
-      let e = {
-        view: "orgSelfServe",
+import { UpsellModalType } from '../905/165519'
+import { getI18nString } from '../905/303541'
+import { parseQuery, serializeQuery } from '../905/634134'
+import { UpgradeAction } from '../figma_app/707808'
+import { X1 } from '../figma_app/736948'
+import { UpgradeSteps } from '../figma_app/831101'
+/**
+ * Organization Self-Serve View Path Handler
+ * Refactored from $$d0
+ */
+export class OrgSelfServePathHandler {
+  /**
+   * Maps route parameters to a selected view object.
+   * @param e - Unused parameter (original: e)
+   * @param routeParts - Array of route segments (original: t)
+   * @param queryString - Query string (original: i)
+   * @returns Selected view object or null
+   */
+  pathToSelectedView(e: unknown, routeParts: string[], queryString?: string) {
+    if (routeParts[1] === 'purchase-organization') {
+      const selectedView: any = {
+        view: 'orgSelfServe',
         step: X1.Initial,
-        orgMigrated: !1,
-        upsellSource: UpsellModalType.UNSET
-      };
-      if (i) {
-        let t = parseQuery(i);
-        t.ds && (e.initialDesignEditors = parseInt(t.ds));
+        orgMigrated: false,
+        upsellSource: UpsellModalType.UNSET,
       }
-      let r = new URLSearchParams(i);
-      if (r.get("team_flow_type")) {
-        let t = r.get("team_flow_type");
-        if (t === UpgradeAction.CREATE) return {
-          view: "teamUpgrade",
-          teamFlowType: t,
-          teamId: null,
-          paymentStep: UpgradeSteps.CREATE_TEAM
-        };
-        e.newTeamProps = {
-          teamFlowType: t
-        };
-      } else "create-team" === t[2] && (e.newTeamProps = {
-        teamFlowType: UpgradeAction.CREATE_AND_UPGRADE
-      });
-      r.get("entryPoint") && (e.entryPoint = parseInt(r.get("entryPoint")));
-      return e;
+
+      if (queryString) {
+        const queryObj = parseQuery(queryString)
+        if (queryObj.ds) {
+          selectedView.initialDesignEditors = parseInt(queryObj.ds)
+        }
+      }
+
+      const params = new URLSearchParams(queryString)
+
+      const teamFlowType = params.get('team_flow_type')
+      if (teamFlowType) {
+        if (teamFlowType === UpgradeAction.CREATE) {
+          return {
+            view: 'teamUpgrade',
+            teamFlowType,
+            teamId: null,
+            paymentStep: UpgradeSteps.CREATE_TEAM,
+          }
+        }
+        selectedView.newTeamProps = { teamFlowType }
+      }
+      else if (routeParts[2] === 'create-team') {
+        selectedView.newTeamProps = {
+          teamFlowType: UpgradeAction.CREATE_AND_UPGRADE,
+        }
+      }
+
+      const entryPoint = params.get('entryPoint')
+      if (entryPoint) {
+        selectedView.entryPoint = parseInt(entryPoint)
+      }
+
+      return selectedView
     }
-    return null;
+    return null
   }
-  selectedViewToPath(e) {
-    if ("orgSelfServe" === e.view) {
-      let t = "/purchase-organization";
-      e.step === X1.CreateTeam || !e.step && e.newTeamProps ? t += "/create-team" : e.step !== X1.TeamSelect && e.step ? e.step === X1.Details ? t += "/details" : e.step === X1.Payment ? t += "/payment" : e.step === X1.Review ? t += "/review" : e.step && e.step !== X1.Initial || (e.newTeamProps ? t += "/create-team" : t += "/team-select") : t += "/team-select";
-      let i = {};
-      e.newTeamProps && (i.team_flow_type = e.newTeamProps.teamFlowType);
-      e.entryPoint && (i.entryPoint = e.entryPoint);
-      Object.keys(i).length > 0 && (t += `?${serializeQuery(i)}`);
-      return t;
+
+  /**
+   * Converts a selected view object to a route path.
+   * @param selectedView - Selected view object (original: e)
+   * @returns Route path string or null
+   */
+  selectedViewToPath(selectedView: any): string | null {
+    if (selectedView.view === 'orgSelfServe') {
+      let path = '/purchase-organization'
+      const { step, newTeamProps } = selectedView
+
+      if (step === X1.CreateTeam || (!step && newTeamProps)) {
+        path += '/create-team'
+      }
+      else if (step !== X1.TeamSelect && step) {
+        if (step === X1.Details) {
+          path += '/details'
+        }
+        else if (step === X1.Payment) {
+          path += '/payment'
+        }
+        else if (step === X1.Review) {
+          path += '/review'
+        }
+        else if (step && step !== X1.Initial) {
+          // No path change
+        }
+        else if (newTeamProps) {
+          path += '/create-team'
+        }
+        else {
+          path += '/team-select'
+        }
+      }
+      else {
+        path += '/team-select'
+      }
+
+      const query: Record<string, any> = {}
+      if (newTeamProps)
+        query.team_flow_type = newTeamProps.teamFlowType
+      if (selectedView.entryPoint)
+        query.entryPoint = selectedView.entryPoint
+
+      if (Object.keys(query).length > 0) {
+        path += `?${serializeQuery(query)}`
+      }
+      return path
     }
-    return null;
+    return null
   }
-  requireHistoryChange(e, t) {
-    return "orgSelfServe" === e.view != ("orgSelfServe" === t.view) || "orgSelfServe" === e.view && "orgSelfServe" === t.view && e.step !== t.step;
+
+  /**
+   * Determines if a history change is required between two views.
+   * @param prevView - Previous selected view (original: e)
+   * @param nextView - Next selected view (original: t)
+   * @returns True if history change is required
+   */
+  requireHistoryChange(prevView: any, nextView: any): boolean {
+    const isOrgSelfServePrev = prevView.view === 'orgSelfServe'
+    const isOrgSelfServeNext = nextView.view === 'orgSelfServe'
+    return isOrgSelfServePrev !== isOrgSelfServeNext
+      || (isOrgSelfServePrev && isOrgSelfServeNext && prevView.step !== nextView.step)
   }
-  selectedViewName(e) {
-    return "orgSelfServe" !== e.view ? null : getI18nString("org_view.view_selector.upgrade_to_organization");
+
+  /**
+   * Gets the display name for the selected view.
+   * @param selectedView - Selected view object (original: e)
+   * @returns Display name string or null
+   */
+  selectedViewName(selectedView: any): string | null {
+    if (selectedView.view !== 'orgSelfServe')
+      return null
+    return getI18nString('org_view.view_selector.upgrade_to_organization')
   }
-  selectedViewHasMissingResources(e, t) {
-    return !1;
+
+  /**
+   * Checks if the selected view has missing resources.
+   * @param selectedView - Selected view object (original: e)
+   * @param resources - Resources object (original: t)
+   * @returns Always false
+   */
+  selectedViewHasMissingResources(_selectedView: any, _resources: any): boolean {
+    return false
   }
 }
-export const _ = $$d0;
+
+// Export with original variable name for compatibility
+export const _ = OrgSelfServePathHandler

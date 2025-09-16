@@ -7,7 +7,7 @@ import { NX } from "../figma_app/243213";
 import { Point } from "../905/736624";
 import { s1, uR, d6 } from "../figma_app/304207";
 import { KE } from "../905/116101";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { T9 } from "../figma_app/740025";
 import { Tc } from "../905/797478";
 import { t } from "../905/192333";
@@ -19,7 +19,7 @@ export function $$b5(e, t = 552, r = 320) {
   let [i, s] = useState();
   let [l, c] = useState();
   let [u, _] = useState(!1);
-  let m = ow();
+  let m = isWhiteboardFileType();
   useLayoutEffect(() => {
     let n = () => {
       let n;

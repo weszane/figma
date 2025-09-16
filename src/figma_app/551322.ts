@@ -20,11 +20,11 @@ import { VisualBellActions } from "../905/302958";
 import { BellId } from "../905/576487";
 import { H8, Pf, nl } from "../905/590952";
 import { U as _$$U } from "../905/566881";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { z as _$$z2 } from "../905/404751";
 import { showModalHandler, hideModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { F as _$$F2 } from "../905/224";
 import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -108,7 +108,7 @@ export function $$Q0(e) {
       dismissModal();
       return;
     }
-    t(j7({
+    t(showDropdownThunk({
       type: eg,
       data: {
         targetRect: Lh.current?.getBoundingClientRect(),
@@ -116,7 +116,7 @@ export function $$Q0(e) {
       }
     }));
     return () => {
-      t(oB());
+      t(hideDropdownAction());
     };
   }, [t, dismissModal]);
   return jsx("div", {
@@ -148,7 +148,7 @@ export function $$ee2({
   var r;
   let d = useDispatch();
   let u = Um();
-  let p = lg();
+  let p = getCurrentFileType();
   let h = selectCurrentFile();
   let x = et();
   let [w, M] = useState(void 0);

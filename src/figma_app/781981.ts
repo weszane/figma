@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { vn } from "../figma_app/976749";
+import { isIllustrationEditorType } from "../figma_app/976749";
 import { KH } from "../figma_app/722362";
 import { Fk } from "../figma_app/167249";
 import { ZU, uo, IF, gc, Xz } from "../figma_app/986347";
@@ -148,7 +148,7 @@ let g = {
   }
 };
 export function $$f6() {
-  let e = vn();
+  let e = isIllustrationEditorType();
   let t = KH();
   let r = useMemo(() => Object.keys(t), [t]);
   return Fk((t, r) => {

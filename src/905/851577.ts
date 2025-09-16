@@ -4,7 +4,7 @@ import { h as _$$h } from "../905/207101";
 import { BrowserInfo } from "../figma_app/778880";
 import { useHandlePointerEvent, generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { O1, KD } from "../figma_app/317394";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection } from "../figma_app/741237";
@@ -86,7 +86,7 @@ export function $$b0(e, t) {
       dragPosition: a,
       isDraggingOverCanvas: s
     };
-    I.current && r.dragPosition && E.current && E.current.distanceTo(a) > Nq && (n && o && (clearSelection(), fullscreenValue.commit(), b(jD())), e.onDragStart?.(), I.current = !1);
+    I.current && r.dragPosition && E.current && E.current.distanceTo(a) > Nq && (n && o && (clearSelection(), fullscreenValue.commit(), b(hideTooltip())), e.onDragStart?.(), I.current = !1);
     C(e => ({
       ...e,
       ...c

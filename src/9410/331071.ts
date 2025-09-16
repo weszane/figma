@@ -167,7 +167,7 @@ import { Ow, Wg, YG } from '../905/921418';
 import { $ as _$$$ } from '../905/922405';
 import { r as _$$r4 } from '../905/924231';
 import { A as _$$A0 } from '../905/929620';
-import { oB as _$$oB2, j7 } from '../905/929976';
+import { hideDropdownAction, showDropdownThunk } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { lQ as _$$lQ } from '../905/934246';
 import { f as _$$f7 } from '../905/940356';
@@ -324,7 +324,7 @@ import { c as _$$c, lc as _$$lc, G4, Hl, T1, UF } from '../figma_app/545293';
 import { S as _$$S3 } from '../figma_app/552746';
 import { Qi } from '../figma_app/559491';
 import { B as _$$B3, t as _$$t2 } from '../figma_app/560453';
-import { Ro } from '../figma_app/564095';
+import { isAcceptedPublisher } from '../figma_app/564095';
 import { setupResourceAtomHandler } from '../figma_app/566371';
 import { xF } from '../figma_app/566517';
 import { TW } from '../figma_app/567902';
@@ -391,7 +391,7 @@ import { mD } from '../figma_app/955528';
 import { O as _$$O5 } from '../figma_app/959385';
 import { fJ, x0 } from '../figma_app/963341';
 import { oy as _$$oy, LZ } from '../figma_app/964367';
-import { E3 as _$$E2, lg as _$$lg, ow as _$$ow, m0, my, XE } from '../figma_app/976749';
+import { getSelectedEditorType, getCurrentFileType, isWhiteboardFileType, isDevHandoffEditorType, getEditorTypeOrNull, getEditorTypeFromView } from '../figma_app/976749';
 import { gH } from '../figma_app/985200';
 import { ah as _$$ah, EG, Hr, J8 } from '../figma_app/995580';
 import { A as _$$A7 } from '../svg/499035';
@@ -830,7 +830,7 @@ async function tb(e) {
   let a = {
     type: _$$I2.ALL
   };
-  let s = isDesignOrIllustration(XE(_$$h4(t)));
+  let s = isDesignOrIllustration(getEditorTypeFromView(_$$h4(t)));
   let o = atomStoreManager.get(qp);
   t = debugState.getState();
   let l = {
@@ -7506,7 +7506,7 @@ let oi = [{
 function or() {
   let e = PE();
   let t = !isAIFeaturesEnabledForCurrentUser();
-  let i = _$$ow();
+  let i = isWhiteboardFileType();
   let r = e || getFeatureFlags().figjam_ai_menu_items_all_access && i && t;
   let s = GM();
   let o = _$$V4();
@@ -7676,7 +7676,7 @@ function ov() {
       let p = t ? !i?.seatTypeLicenseTypes?.includes(FProductAccessType.DESIGN) : !u;
       let m = !!r;
       let f = m && !!i;
-      let g = _$$E2();
+      let g = getSelectedEditorType();
       if (s || g !== FEditorType.Design) return e;
       if (!$7('useDisabledReasons')) return ['ROLLING_OUT'];
       let _ = [];
@@ -8187,7 +8187,7 @@ function oB({
         let e = wo();
         let t = cW();
         let i = ZT();
-        let r = _$$E2();
+        let r = getSelectedEditorType();
         let n = [];
         let a = [];
         e.forEach(e => {
@@ -8347,7 +8347,7 @@ function oB({
         let r = ig();
         let n = t.map(e);
         let o = function () {
-          let e = m0();
+          let e = isDevHandoffEditorType();
           let t = _$$e3();
           let i = ZO();
           let r = selectCurrentFile()?.canEdit;
@@ -8549,7 +8549,7 @@ function oB({
     let p = i !== '';
     let m = useMemo(() => i === '' ? [] : t.search(e, i).slice(0, 25), [e, t, i]);
     let f = function (e, t) {
-      let i = my() === FEditorType.Design;
+      let i = getEditorTypeOrNull() === FEditorType.Design;
       let r = selectCurrentFile();
       let o = _$$V4();
       let l = _$$s4();
@@ -8999,10 +8999,10 @@ function ly(e) {
   let i = lx(e);
   return useCallback(r => {
     if (i) {
-      t(_$$oB2());
+      t(hideDropdownAction());
     } else {
       let i = r.getBoundingClientRect();
-      t(j7({
+      t(showDropdownThunk({
         type: l_,
         data: {
           extensionId: e.plugin_id,
@@ -9092,7 +9092,7 @@ function lE(e) {
   let h = _$$rH(augmentedExtension);
   let m = xZ(augmentedExtension);
   let f = getUserId();
-  let g = !!publishedExtension && !!f && (Ro(publishedExtension, f) || Dd(publishedExtension, f));
+  let g = !!publishedExtension && !!f && (isAcceptedPublisher(publishedExtension, f) || Dd(publishedExtension, f));
   let _ = lx(extension);
   let x = _$$O5({
     extension: augmentedExtension,
@@ -9271,7 +9271,7 @@ function lj({
   });
   let h = useCallback(() => {
     if (d) {
-      r(_$$oB2());
+      r(hideDropdownAction());
       return;
     }
     onAction();
@@ -9358,7 +9358,7 @@ function lI({
     text: actionText,
     onAction: () => {
       if (u) {
-        l(_$$oB2());
+        l(hideDropdownAction());
         return;
       }
       onAction();
@@ -9857,7 +9857,7 @@ function ds({
       extensions: _extensions
     } = function () {
       let e = useDispatch();
-      let t = _$$lg();
+      let t = getCurrentFileType();
       let [i, r] = useState([]);
       let [n, o] = useState(!1);
       let l = useMemo(() => {
@@ -10127,7 +10127,7 @@ function dv({
           default:
             throwTypeError(e);
         }
-      }(my());
+      }(getEditorTypeOrNull());
       let i = U5();
       let r = useCurrentUserOrgId() ?? void 0;
       let [{

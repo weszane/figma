@@ -9,7 +9,7 @@ import { SupportedPlatforms, WEB } from "../905/359509";
 import { isCodegenSupported, CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { $h, OQ } from "../905/191741";
 import { Z } from "../905/820720";
-import { aq, wA } from "../figma_app/120227";
+import { getPluginInfo, getUnitLabelForLanguage } from "../figma_app/120227";
 export function $$g0() {
   let [e] = $h();
   let [t, i] = useState(e);
@@ -17,7 +17,7 @@ export function $$g0() {
   let [f, _] = useState({
     ...g
   });
-  let A = aq(f);
+  let A = getPluginInfo(f);
   let y = isCodegenSupported(f, A);
   let b = useCallback(e => {
     i(e);
@@ -32,7 +32,7 @@ export function $$g0() {
   let [I, E] = useState({
     ...v
   });
-  let x = wA(f);
+  let x = getUnitLabelForLanguage(f);
   let S = useMemo(() => I.codeExtensionPreferences?.[f.id] ?? {}, [I, f]);
   let w = useMemo(() => {
     let e = [];

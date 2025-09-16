@@ -2,8 +2,8 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { U1 } from "../figma_app/343967";
-import { Cs } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { AppStateTsApi } from "../figma_app/763686";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import u from "classnames";
@@ -184,9 +184,9 @@ export function $$w0(e) {
     className: p()(D, e.containerClassName),
     "data-testid": dataTestId,
     className: "xh8yej3",
-    children: jsxs(Cs, {
+    children: jsxs(BannerFullWidth, {
       variant: r,
-      children: [jsx(Q, {
+      children: [jsx(BannerMessage, {
         title: content.mainText,
         children: content.description
       }), content?.button?.type === MA.CUSTOM && content.button?.element, content?.button?.type === void 0 || content?.button?.type === MA.STRUCTURED && k]

@@ -6,7 +6,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { getRequest, XHRError, XHR } from "../905/910117";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { n as _$$n } from "../905/347702";
 import { Q$ } from "../9410/483857";
 export function $$m0(e) {
@@ -105,7 +105,7 @@ async function f(e, t, i) {
   }
 }
 let g = _$$n(async function (e, t) {
-  let i = U2(debugState?.getState().selectedView);
+  let i = getFileKeyFromSelectedView(debugState?.getState().selectedView);
   let r = await XHR.post(`/api/first_draft/kit_contents/${e.key}`, {
     jsx_names: t,
     file_key: i

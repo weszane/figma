@@ -1,7 +1,7 @@
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 export function $$s1() {
   return useSelector(e => e.dropdownShown);
 }
@@ -15,10 +15,10 @@ export function $$o0(e) {
     } = i || {};
     let s = type === e;
     function o() {
-      t(oB());
+      t(hideDropdownAction());
     }
     function l(i = {}) {
-      t(j7({
+      t(showDropdownThunk({
         ...i,
         type: e
       }));

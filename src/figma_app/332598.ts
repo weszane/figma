@@ -21,7 +21,7 @@ import { kt, j5, Gj } from "../figma_app/711907";
 import { bv } from "../905/49095";
 import { G6, P1 } from "../905/246310";
 import { lW } from "../figma_app/11182";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Sl } from "../figma_app/8833";
 import { KindEnum } from "../905/129884";
 import { VZ } from "../figma_app/727192";
@@ -182,7 +182,7 @@ export function $$G4(e) {
       clientX,
       clientY
     } = e;
-    F(j7({
+    F(showDropdownThunk({
       type: Sl,
       data: {
         clientX,

@@ -14,7 +14,7 @@ import { findTeamById } from '../905/613917';
 import { adminPermissionConfig } from '../905/654645';
 import { e0 } from '../905/696396';
 import { z5 } from '../905/713722';
-import { eB } from '../905/765855';
+import { showTooltip } from '../905/765855';
 import { G as _$$G } from '../905/865520';
 import { F as _$$F } from '../905/989956';
 import { j as _$$j } from '../1577/266226';
@@ -275,7 +275,7 @@ function Y({
       isNewSubmenu: r,
       onClick: t ? e => {
         let t = e.target.closest('button');
-        t && d(eB({
+        t && d(showTooltip({
           target: {
             kind: ElementTypeEnum.TEXT,
             text: getI18nString('whiteboard.color_palettes.tooltip.move_to_team')

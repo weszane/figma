@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { Xr, useAtomValueAndSetter } from "../figma_app/27355";
 import { useSubscription } from "../figma_app/288654";
 import { popModalStack, showModalHandler } from "../905/156213";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { mf, YN } from "../figma_app/844435";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -219,7 +219,7 @@ export function $$O3(e) {
   let r = e?.name ?? "";
   let o = L();
   let c = D();
-  let u = m0();
+  let u = isDevHandoffEditorType();
   let p = u && o.plugin?.plugin_id === t;
   let h = Xr(Lx);
   let m = P();
@@ -363,7 +363,7 @@ async function M(e, t, r) {
   });
 }
 export function $$F1() {
-  let e = m0();
+  let e = isDevHandoffEditorType();
   let t = useCurrentFileKey();
   let r = YN();
   let n = L();

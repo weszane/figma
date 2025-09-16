@@ -3,8 +3,8 @@ import { useState, useRef, useMemo, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { K } from "../905/443068";
-import { Cs } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { bL, DZ, mc, c$ } from "../905/493196";
 import { ButtonLargeWide, Button } from "../905/521428";
 import { k as _$$k } from "../905/443820";
@@ -190,9 +190,9 @@ function W({
           children: v
         })
       }), x && jsx("div", {
-        children: jsx(Cs, {
+        children: jsx(BannerFullWidth, {
           variant: "brand",
-          children: jsx(Q, {
+          children: jsx(BannerMessage, {
             title: getI18nString("dev_handoff.component_browser_onboarding.github_repo_limit_banner_title", {
               repo_max_count: 100
             }),

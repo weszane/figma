@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import s from "classnames";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { We, xe } from "../figma_app/481857";
 import { VZ, x0 } from "../figma_app/727192";
 import { rh, _p, QG, NJ, zp, wy, KY, zG, fY, cK, kI } from "../figma_app/826998";
@@ -500,7 +500,7 @@ function H(e, {
     setCopyValue,
     hasCopyAllContent
   } = We();
-  let h = m0();
+  let h = isDevHandoffEditorType();
   let {
     substring,
     startPos,

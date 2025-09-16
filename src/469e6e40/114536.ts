@@ -30,7 +30,7 @@ import { H4, tH } from '../905/751457';
 import { x as _$$x } from '../905/811596';
 import { o0 } from '../905/844131';
 import { Um } from '../905/848862';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { b as _$$b } from '../905/946806';
 import { a as _$$a } from '../905/964520';
@@ -1584,7 +1584,7 @@ export function $$ez0() {
   let g = m?.name;
   let h = m?.key.type === FOrganizationLevelType.ORG;
   return (useEffect(() => {
-    a && h || e(sf(o0));
+    a && h || e(selectViewAction(o0));
   }, [e, a, h]), p && g) ? jsx(_$$r, {
     containerClass: 'org_domain_management_page_view--fileBrowserContentContainer--1aYu8',
     scrollableContainerClass: 'org_domain_management_page_view--fileBrowserScrollableContainer--PSb8-',

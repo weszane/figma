@@ -7,7 +7,7 @@ import { f as _$$f } from "../905/24905";
 import { formatList } from "../figma_app/930338";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { FEditorType } from "../figma_app/53721";
 import { rs } from "../figma_app/440994";
 import { IA, vS, nC } from "../905/748956";
@@ -94,7 +94,7 @@ class T {
       buildString: ({
         targetNodeType: e
       }) => {
-        let t = XE(this.store.getState().selectedView);
+        let t = getEditorTypeFromView(this.store.getState().selectedView);
         if (e !== NodeType.STAMP) {
           if (e === NodeType.NONE) return getI18nString("fullscreen.accessibility.tool_unselected");
           {
@@ -316,7 +316,7 @@ class T {
     return _$$f(normalizedToRgb(e), normalizedToRgb(t));
   }
   getNodeTypeName(e) {
-    let t = XE(this.store.getState().selectedView);
+    let t = getEditorTypeFromView(this.store.getState().selectedView);
     let r = NodeType[e];
     return rs(r, t);
   }

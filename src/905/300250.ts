@@ -10,7 +10,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Nf } from "../figma_app/864378";
 import { hideModal, showModalHandler } from "../905/156213";
 import { rY, XA } from "../905/985490";
@@ -80,7 +80,7 @@ let $$R3 = createOptimistThunk(async (e, t) => {
       userInitiated: !1,
       reason: "switching_files_in_desktop"
     })) : await abandonBranchingChanges(!1);
-    e.dispatch(sf({
+    e.dispatch(selectViewAction({
       view: "fullscreen",
       fileKey: mergeParams.direction === SourceDirection.TO_SOURCE ? mergeParams.sourceKey : mergeParams.branchKey,
       editorType: FEditorType.Design,

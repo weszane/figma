@@ -17,7 +17,7 @@ import { E as _$$E } from "../905/277716";
 import { k as _$$k2 } from "../905/582200";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { sT } from "../figma_app/740163";
 import { isInvalidValue, MIXED_MARKER, isValidValue, normalizeValue } from "../905/216495";
@@ -3147,7 +3147,7 @@ export function $$r51(e) {
   let u = kl("isSection");
   let p = !!(i || s);
   let _ = kl("isWidgetSelected");
-  let m = cJ();
+  let m = isSitesFileType();
   let g = kl("stackMode");
   let E = I9();
   let y = null != E && E.some(e => e.type !== E[0].type);
@@ -3198,7 +3198,7 @@ export function $$r48(e) {
   let t = kl("nodesAreAllInsideStacks");
   let r = kl("stackPositioning");
   let o = useDispatch();
-  let l = cJ();
+  let l = isSitesFileType();
   let d = rE() && e.canEditConstraints;
   let c = useRef(null);
   let u = useSelector(e => e.dropdownShown);

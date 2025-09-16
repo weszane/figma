@@ -3,7 +3,7 @@ import { lQ } from "../905/934246";
 import { getI18nString } from "../905/303541";
 import { PY } from "../905/34809";
 import { U6, to, pS } from "../figma_app/909778";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { Fp } from "../905/148074";
 export function $$c0({
   currentOrgId: e,
@@ -20,7 +20,7 @@ export function $$c0({
   let A = useSelector(e => e.mobileNavShown);
   let y = useSelector(e => e.favorites.collapsedCustomSections);
   let b = (t, n) => {
-    _(oB());
+    _(hideDropdownAction());
     (!f || !t) && (i(t, n), t && n && (y.$$delete(n), _(U6({
       collapsedCustomSections: y
     })), Fp({
@@ -52,7 +52,7 @@ export function $$c0({
     _(pS({
       newCustomSectionIndex: e
     }));
-    _(oB());
+    _(hideDropdownAction());
   })];
   let x = [{
     displayText: "",

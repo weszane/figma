@@ -1,111 +1,213 @@
 import { useSelector } from 'react-redux';
 import { getI18nString } from '../905/303541';
-import { d8, gR, H_, oU, qi, qr, sR, Wi, ZH } from '../905/366346';
+import { addSessionLocalIdToQuery, addVersionIdToQuery, appendHashToUrl, appendQueryToUrl, buildResourcePath, extractQueryParams, getTestPath, parseCommentPreferencesOrThreadId, setPageTypeIfCanvasOrDocument } from '../905/366346';
 import { $ } from '../905/532878';
-import { Nh } from '../905/560959';
+import { InspectState } from '../905/560959';
 import { parseAndNormalizeQuery } from '../905/634134';
-import { replaceColonWithDash, normalizeVariableId } from '../905/691205';
+import { normalizeVariableId, replaceColonWithDash } from '../905/691205';
 import { getDisplayName, getRepoById } from '../905/760074';
-import { b } from '../905/898378';
+import { canAccessDevModeWithOrg } from '../905/898378';
 import { atomStoreManager } from '../figma_app/27355';
 import { FEditorType } from '../figma_app/53721';
-import { M } from '../figma_app/80938';
-import { Zt } from '../figma_app/617727';
+import { hasSingleSceneGraphSelection } from '../figma_app/80938';
+import { INTERACTION_FAKE_FILE_KEY } from '../figma_app/617727';
 import { SelectorType } from '../figma_app/707808';
 import { DesignGraphElements } from '../figma_app/763686';
 import { encodeUri } from '../figma_app/930338';
-export function $$y0(e) {
-  return e?.view === 'fullscreen' && e?.editorType === FEditorType.DevHandoff;
+/**
+ * Checks if the selected view is in fullscreen DevHandoff mode.
+ * Original: $$y0
+ */
+export function isFullscreenDevHandoffView(view?: {
+  view?: string;
+  editorType?: FEditorType;
+}) {
+  return view?.view === 'fullscreen' && view?.editorType === FEditorType.DevHandoff;
 }
-export function $$b1() {
-  return useSelector(e => $$y0(e.selectedView) && M(e) && (e.mirror.appModel.currentTool === DesignGraphElements.SELECT || e.mirror.appModel.currentTool === DesignGraphElements.DROPPER_COLOR || e.mirror.appModel.currentTool === DesignGraphElements.ANNOTATE || e.mirror.appModel.currentTool === DesignGraphElements.MEASURE));
+
+/**
+ * Determines if the current selection is a single scene graph selection in fullscreen DevHandoff mode.
+ * Original: $$b1
+ */
+export function isSingleSceneGraphSelectionInDevHandoff() {
+  return useSelector<ObjectOf>(state => isFullscreenDevHandoffView(state.selectedView) && hasSingleSceneGraphSelection(state) && (state.mirror.appModel.currentTool === DesignGraphElements.SELECT || state.mirror.appModel.currentTool === DesignGraphElements.DROPPER_COLOR || state.mirror.appModel.currentTool === DesignGraphElements.ANNOTATE || state.mirror.appModel.currentTool === DesignGraphElements.MEASURE));
 }
-export class $$v2 {
-  pathToSelectedView(e, t, i, n) {
-    let r = i ? parseAndNormalizeQuery(i) : {};
-    let o = t[1];
-    if ((o === 'design' || o === 'file') && (r['ready-for-dev'] === '1' || (r.mode === 'dev' || r.m === 'dev') && r.m !== 'auto')) {
-      let i = t[3] === 'branch' && t[4] ? t[4] : t[2];
-      let s = {
+
+/**
+ * Handles path and view logic for DevHandoff and Design views.
+ * Original: $$v2
+ */
+export class SelectedViewPathHandler {
+  /**
+   * Builds the selected view object from path segments and query.
+   * Original: pathToSelectedView
+   */
+  pathToSelectedView(appState: any, pathSegments: string[], queryString?: string, hash?: string): Record<string, any> | null {
+    const query = queryString ? parseAndNormalizeQuery(queryString) : {};
+    const viewType = pathSegments[1];
+    if ((viewType === 'design' || viewType === 'file') && (query['ready-for-dev'] === '1' || (query.mode === 'dev' || query.m === 'dev') && query.m !== 'auto')) {
+      const fileKey = pathSegments[3] === 'branch' && pathSegments[4] ? pathSegments[4] : pathSegments[2];
+      const selectedView: any = {
         view: 'fullscreen',
-        editorType: e?.user ? FEditorType.DevHandoff : FEditorType.Design,
-        fileKey: i
+        editorType: appState?.user ? FEditorType.DevHandoff : FEditorType.Design,
+        fileKey
       };
-      d8(n, s);
-      qi(r, s);
-      let o = e?.openFile?.canAccessFullDevMode;
-      r['cc-version-id'] && (r['node-id'] || r['cc-node-id']) && !r.vars && o && (s.compareChangesVersionId = r['cc-version-id']);
-      r['cc-activity-id'] && (r['node-id'] || r['cc-node-id']) && !r.vars && o && (s.compareChangesActivityId = r['cc-activity-id']);
-      r['cc-filter-status'] && (r['cc-version-id'] || r['cc-activity-id']) && (r['node-id'] || r['cc-node-id']) && !r.vars && o && (s.filterStatusVersions = r['cc-filter-status'] === '1');
-      r['cc-node-id'] && r['cc-version-id'] && !r.vars && o && (s.compareChangesNodeId = r['cc-node-id']);
-      let l = b(e);
-      if (r.vars === '1') {
-        s.showDevModeVariablesTable = !0;
-        atomStoreManager.set($, Nh.DirectUrl);
-        r['var-id'] && (s.devModeVariablesTableSelectedVariable = r['var-id']);
-      } else if (l && r['ready-for-dev'] === '1') {
-        s.showOverview = !0;
-      } else if (l && r['component-browser'] === '1') {
-        s.showDevModeComponentBrowser = !0;
-        s.componentKey = r['component-key'] || void 0;
-        let e = SelectorType.NONE;
-        r['gh-settings'] === 'repo' ? e = SelectorType.REPO_SELECTOR : r['gh-settings'] === 'dirs' ? e = SelectorType.DIRECTORY_SELECTOR : r['gh-repo-selector'] === '1' && (e = SelectorType.REPO_SELECTOR);
-        s.githubRepositorySelectorMode = e;
+      parseCommentPreferencesOrThreadId(hash, selectedView);
+      extractQueryParams(query, selectedView);
+      const canAccessFullDevMode = appState?.openFile?.canAccessFullDevMode;
+      if (query['cc-version-id'] && (query['node-id'] || query['cc-node-id']) && !query.vars && canAccessFullDevMode) {
+        selectedView.compareChangesVersionId = query['cc-version-id'];
       }
-      s.showDevModeVariablesTable || atomStoreManager.set($, null);
-      $$y0(s) && (r.mode === 'dev' || r.m === 'dev') && (s.mode = 'dev', !l || !r['focus-id'] || s.showOverview || r.vars || (s.devModeFocusId = r['focus-id'], r['node-id'] || (s.nodeId = r['focus-id'])));
-      return s;
-    }
-    return null;
-  }
-  requireHistoryChange(e, t) {
-    return !1;
-  }
-  selectedViewToPath(e, t) {
-    if ($$y0(e) || e.view === 'fullscreen' && !0 === e.showOverview) {
-      let i;
-      if (e.fileKey === Zt) return oU();
-      let n = this.selectedViewName(e, t);
-      let r = n ? encodeUri(n) : '';
-      let a = {};
-      let s = e.fileKey;
-      let l = e.fileKey && t.fileByKey[e.fileKey];
-      let d = 'design';
-      l ? i = ZH(d, s || '', r, l, getRepoById(l, t.repos)) : (i = `/${d}/${s}`, r ? i += `/${r}` : i += '/Untitled');
-      gR(a, e.nodeId);
-      H_(a, e.nodeId);
-      Wi(a, e.versionId);
-      e.compareChangesVersionId && (a['cc-version-id'] = e.compareChangesVersionId);
-      e.filterStatusVersions && (a['cc-filter-status'] = 1);
-      e.compareChangesNodeId && (a['cc-node-id'] = replaceColonWithDash(e.compareChangesNodeId));
-      e.devModeFocusId && (a['focus-id'] = replaceColonWithDash(e.devModeFocusId));
-      e.showOverview && (a['ready-for-dev'] = '1');
-      e.showDevModeVariablesTable && (a.vars = '1', e.devModeVariablesTableSelectedVariable && (a['var-id'] = normalizeVariableId(e.devModeVariablesTableSelectedVariable)));
-      e.showDevModeComponentBrowser && (a['component-browser'] = '1', e.componentKey && (a['component-key'] = e.componentKey), e.githubRepositorySelectorMode === SelectorType.REPO_SELECTOR ? a['gh-settings'] = 'repo' : e.githubRepositorySelectorMode === SelectorType.DIRECTORY_SELECTOR && (a['gh-settings'] = 'dirs'));
-      a.m = 'dev';
-      i = sR(i, a);
-      return i = qr(i, e.commentThreadId);
-    }
-    return null;
-  }
-  selectedViewName(e, t) {
-    if ($$y0(e)) {
-      let i = null;
-      if (e.fileKey) {
-        let n = t.fileByKey[e.fileKey];
-        if (n) {
-          let e = getRepoById(n, t.repos);
-          i = e ? getDisplayName(n, e) : n.name;
+      if (query['cc-activity-id'] && (query['node-id'] || query['cc-node-id']) && !query.vars && canAccessFullDevMode) {
+        selectedView.compareChangesActivityId = query['cc-activity-id'];
+      }
+      if (query['cc-filter-status'] && (query['cc-version-id'] || query['cc-activity-id']) && (query['node-id'] || query['cc-node-id']) && !query.vars && canAccessFullDevMode) {
+        selectedView.filterStatusVersions = query['cc-filter-status'] === '1';
+      }
+      if (query['cc-node-id'] && query['cc-version-id'] && !query.vars && canAccessFullDevMode) {
+        selectedView.compareChangesNodeId = query['cc-node-id'];
+      }
+      const canAccessDevMode = canAccessDevModeWithOrg(appState);
+      if (query.vars === '1') {
+        selectedView.showDevModeVariablesTable = true;
+        atomStoreManager.set($, InspectState.DirectUrl);
+        if (query['var-id']) {
+          selectedView.devModeVariablesTableSelectedVariable = query['var-id'];
+        }
+      } else if (canAccessDevMode && query['ready-for-dev'] === '1') {
+        selectedView.showOverview = true;
+      } else if (canAccessDevMode && query['component-browser'] === '1') {
+        selectedView.showDevModeComponentBrowser = true;
+        selectedView.componentKey = query['component-key'] || undefined;
+        let selectorMode = SelectorType.NONE;
+        if (query['gh-settings'] === 'repo') {
+          selectorMode = SelectorType.REPO_SELECTOR;
+        } else if (query['gh-settings'] === 'dirs') {
+          selectorMode = SelectorType.DIRECTORY_SELECTOR;
+        } else if (query['gh-repo-selector'] === '1') {
+          selectorMode = SelectorType.REPO_SELECTOR;
+        }
+        selectedView.githubRepositorySelectorMode = selectorMode;
+      }
+      if (!selectedView.showDevModeVariablesTable) {
+        atomStoreManager.set($, null);
+      }
+      if (isFullscreenDevHandoffView(selectedView) && (query.mode === 'dev' || query.m === 'dev')) {
+        selectedView.mode = 'dev';
+        if (canAccessDevMode && query['focus-id'] && !selectedView.showOverview && !query.vars) {
+          selectedView.devModeFocusId = query['focus-id'];
+          if (!query['node-id']) {
+            selectedView.nodeId = query['focus-id'];
+          }
         }
       }
-      return i ?? getI18nString('dev_handoff.dev_handoff_view_selector.untitled');
+      return selectedView;
     }
     return null;
   }
-  selectedViewHasMissingResources(e, t) {
-    return !!$$y0(t) && !!t.fileKey && !(t.fileKey in e.fileByKey);
+
+  /**
+   * Determines if a history change is required.
+   * Original: requireHistoryChange
+   */
+  requireHistoryChange(_appState: any, _nextState: any): boolean {
+    return false;
+  }
+
+  /**
+   * Converts a selected view object to a URL path.
+   * Original: selectedViewToPath
+   */
+  selectedViewToPath(selectedView: any, appState: any): string | null {
+    if (isFullscreenDevHandoffView(selectedView) || selectedView.view === 'fullscreen' && selectedView.showOverview === true) {
+      let path: string;
+      if (selectedView.fileKey === INTERACTION_FAKE_FILE_KEY) {
+        return getTestPath();
+      }
+      const viewName = this.selectedViewName(selectedView, appState);
+      const encodedViewName = viewName ? encodeUri(viewName) : '';
+      const query: Record<string, any> = {};
+      const fileKey = selectedView.fileKey;
+      const file = fileKey && appState.fileByKey[fileKey];
+      const resourceType = 'design';
+      if (file) {
+        path = buildResourcePath(resourceType, fileKey || '', encodedViewName, file, getRepoById(file, appState.repos));
+      } else {
+        path = `/${resourceType}/${fileKey}`;
+        path += encodedViewName ? `/${encodedViewName}` : '/Untitled';
+      }
+      addSessionLocalIdToQuery(query, selectedView.nodeId);
+      setPageTypeIfCanvasOrDocument(query, selectedView.nodeId);
+      addVersionIdToQuery(query, selectedView.versionId);
+      if (selectedView.compareChangesVersionId) {
+        query['cc-version-id'] = selectedView.compareChangesVersionId;
+      }
+      if (selectedView.filterStatusVersions) {
+        query['cc-filter-status'] = 1;
+      }
+      if (selectedView.compareChangesNodeId) {
+        query['cc-node-id'] = replaceColonWithDash(selectedView.compareChangesNodeId);
+      }
+      if (selectedView.devModeFocusId) {
+        query['focus-id'] = replaceColonWithDash(selectedView.devModeFocusId);
+      }
+      if (selectedView.showOverview) {
+        query['ready-for-dev'] = '1';
+      }
+      if (selectedView.showDevModeVariablesTable) {
+        query.vars = '1';
+        if (selectedView.devModeVariablesTableSelectedVariable) {
+          query['var-id'] = normalizeVariableId(selectedView.devModeVariablesTableSelectedVariable);
+        }
+      }
+      if (selectedView.showDevModeComponentBrowser) {
+        query['component-browser'] = '1';
+        if (selectedView.componentKey) {
+          query['component-key'] = selectedView.componentKey;
+        }
+        if (selectedView.githubRepositorySelectorMode === SelectorType.REPO_SELECTOR) {
+          query['gh-settings'] = 'repo';
+        } else if (selectedView.githubRepositorySelectorMode === SelectorType.DIRECTORY_SELECTOR) {
+          query['gh-settings'] = 'dirs';
+        }
+      }
+      query.m = 'dev';
+      path = appendQueryToUrl(path, query);
+      path = appendHashToUrl(path, selectedView.commentThreadId);
+      return path;
+    }
+    return null;
+  }
+
+  /**
+   * Gets the display name for the selected view.
+   * Original: selectedViewName
+   */
+  selectedViewName(selectedView: any, appState: any): string | null {
+    if (isFullscreenDevHandoffView(selectedView)) {
+      let name: string | null = null;
+      if (selectedView.fileKey) {
+        const file = appState.fileByKey[selectedView.fileKey];
+        if (file) {
+          const repo = getRepoById(file, appState.repos);
+          name = repo ? getDisplayName(file, repo) : file.name;
+        }
+      }
+      return name ?? getI18nString('dev_handoff.dev_handoff_view_selector.untitled');
+    }
+    return null;
+  }
+
+  /**
+   * Checks if the selected view references missing resources.
+   * Original: selectedViewHasMissingResources
+   */
+  selectedViewHasMissingResources(appState: any, selectedView: any): boolean {
+    return !!isFullscreenDevHandoffView(selectedView) && !!selectedView.fileKey && !(selectedView.fileKey in appState.fileByKey);
   }
 }
-export const $A = $$y0;
-export const LS = $$b1;
-export const YY = $$v2;
+
+// Export refactored names
+export const $A = isFullscreenDevHandoffView;
+export const LS = isSingleSceneGraphSelectionInDevHandoff;
+export const YY = SelectedViewPathHandler;

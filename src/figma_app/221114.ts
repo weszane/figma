@@ -40,7 +40,7 @@ import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
 import { V as _$$V } from "../905/223767";
 import { D0 } from "../figma_app/867292";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Y6 } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/852057";
@@ -56,14 +56,14 @@ import { FPlanNameType } from "../figma_app/191312";
 import { MAX_USERS } from "../figma_app/345997";
 import { hM } from "../905/851937";
 import { UpsellModalType } from "../905/165519";
-import { V_, Nb, Eg, vF, _h } from "../figma_app/841351";
+import { CURRENT_VERSION_ID, setActiveVersion, exitVersionHistoryMode, startCompareChanges, fetchVersionHistory } from "../figma_app/841351";
 import { Bi } from "../905/652992";
 import { FEditorType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
 import { KindEnum } from "../905/129884";
 import { shouldShowView, isBranchView } from "../905/218608";
-import { $A } from "../905/782918";
-import { C as _$$C2 } from "../905/870666";
+import { isFullscreenDevHandoffView } from "../905/782918";
+import { isFullscreenWhiteboard } from "../905/870666";
 import { xX, $_ } from "../figma_app/597338";
 import { rb } from "../figma_app/151869";
 import { DV } from "../905/739964";
@@ -182,7 +182,7 @@ export class $$eR4 extends RecordingComponent {
     });
     this.onBranchClick = handleMouseEvent(this, "click", e => {
       e.stopPropagation();
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         view: "fullscreen",
         fileKey: this.props.branchFileKey,
         editorType: FEditorType.Design
@@ -260,7 +260,7 @@ export class $$eR4 extends RecordingComponent {
     let t;
     let r = this.descriptionRef.current;
     let i = !!(r && (this.state.expandedDescription || r.scrollHeight > r.clientHeight || this.state.hovered) && !this.props.isActive);
-    let a = this.props.versionId === V_;
+    let a = this.props.versionId === CURRENT_VERSION_ID;
     let s = !a && !shouldShowView({
       view: this.props.view ?? "file_default",
       label: this.props.label
@@ -693,7 +693,7 @@ class eM extends RecordingComponent {
       return !1;
     };
     this.startLoadingVersion = e => {
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         ...this.props.selectedView,
         versionId: e.id
       }));
@@ -738,9 +738,9 @@ class eM extends RecordingComponent {
     };
     this.loadVersionById = e => {
       if (e === this.props.versionHistory.activeId) return;
-      if (e === V_) {
-        this.props.dispatch(Nb({
-          id: V_
+      if (e === CURRENT_VERSION_ID) {
+        this.props.dispatch(setActiveVersion({
+          id: CURRENT_VERSION_ID
         }));
         return;
       }
@@ -749,7 +749,7 @@ class eM extends RecordingComponent {
     };
     this.loadVersion = e => {
       e.id !== this.props.versionHistory.activeId && (this.startLoadingVersion(e), requestAnimationFrame(() => {
-        this.props.dispatch(Nb({
+        this.props.dispatch(setActiveVersion({
           id: e.id,
           eventType: "LOAD_NEW_VERSION"
         }));
@@ -758,7 +758,7 @@ class eM extends RecordingComponent {
     this.isAllowedToChangeVersion = () => null === this.props.modalShown && !hM();
     this.onKeyDown = handleKeyboardEvent(this, "keydown", e => {
       if (!this.props.dropdownShown && !this.props.modalShown && !this.props.versionHistory.compareId) {
-        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(Eg());else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
+        if (e.keyCode === KeyCodes.ESCAPE) this.props.modalShown || 0 !== Object.keys(this.props.mirror.sceneGraphSelection).length || this.props.dispatch(exitVersionHistoryMode());else if (e.keyCode === KeyCodes.UP_ARROW || e.keyCode === KeyCodes.DOWN_ARROW) {
           if (!this.isAllowedToChangeVersion()) return;
           let t = this.props.versionHistory.versions.length;
           this.setState({
@@ -766,13 +766,13 @@ class eM extends RecordingComponent {
           });
           this.autoExpandGroupId = "";
           let r = -1;
-          if (this.props.versionHistory.activeId === V_) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0);else {
+          if (this.props.versionHistory.activeId === CURRENT_VERSION_ID) e.keyCode === KeyCodes.DOWN_ARROW && (r = 0);else {
             let t = this.props.versionHistory.versions.findIndex(e => e.id === this.props.versionHistory.activeId);
             -1 !== t && (r = e.keyCode === KeyCodes.UP_ARROW ? t - 1 : t + 1);
           }
           if (r < 0) {
-            this.props.dispatch(Nb({
-              id: V_
+            this.props.dispatch(setActiveVersion({
+              id: CURRENT_VERSION_ID
             }));
             return;
           }
@@ -828,9 +828,9 @@ class eM extends RecordingComponent {
       }));
     };
     this.compareChangesById = e => {
-      if (e === V_) return;
+      if (e === CURRENT_VERSION_ID) return;
       if (e === this.props.versionHistory.compareId) {
-        this.props.dispatch(vF({
+        this.props.dispatch(startCompareChanges({
           fromVersionId: e
         }));
         return;
@@ -842,20 +842,20 @@ class eM extends RecordingComponent {
       let e = this.props.versionHistory.activeId;
       if (!e) return;
       let t = this.getVersionByID(e);
-      t && (this.props.dispatch(Nb({
-        id: V_
+      t && (this.props.dispatch(setActiveVersion({
+        id: CURRENT_VERSION_ID
       })), this.compareChanges(t));
     };
     this.compareChanges = e => {
       e.id !== this.props.versionHistory.compareId && (this.startComparingChanges(e), requestAnimationFrame(() => {
-        this.props.dispatch(vF({
+        this.props.dispatch(startCompareChanges({
           fromVersionId: e.id
         }));
       }));
     };
     this.loadMore = () => {
       this.expandLast = !0;
-      this.props.dispatch(_h({
+      this.props.dispatch(fetchVersionHistory({
         direction: PAGINATION_NEXT
       }));
     };
@@ -912,8 +912,8 @@ class eM extends RecordingComponent {
     this.onDoneComparingClick = handleMouseEvent(this, "click", e => {
       e.stopPropagation();
       setTimeout(() => {
-        this.isAllowedToChangeVersion() && this.props.versionHistory.compareId && (this.props.dispatch(Nb({
-          id: V_
+        this.isAllowedToChangeVersion() && this.props.versionHistory.compareId && (this.props.dispatch(setActiveVersion({
+          id: CURRENT_VERSION_ID
         })), SceneGraphHelpers.clearSelection(), this.props.dispatch(VisualBellActions.dequeue({
           matchType: "comparing"
         })), this.props.dispatch(VisualBellActions.dequeue({
@@ -942,7 +942,7 @@ class eM extends RecordingComponent {
         isBranchingVersion: isBranchView(e),
         isComparing: this.props.versionHistory.compareId === e.id,
         isComparingLoading: this.state.loadingCompareId === e.id,
-        isCurrentVersionActive: this.props.versionHistory.activeId === V_,
+        isCurrentVersionActive: this.props.versionHistory.activeId === CURRENT_VERSION_ID,
         isStarterTeam: i,
         label: e.label,
         last: r,
@@ -969,7 +969,7 @@ class eM extends RecordingComponent {
         this.props.onClose();
         return;
       }
-      this.props.dispatch(Eg());
+      this.props.dispatch(exitVersionHistoryMode());
     };
     this.state = {
       isLoadingVersion: !1,
@@ -1025,8 +1025,8 @@ class eM extends RecordingComponent {
   }
   componentDidMount() {
     super.componentDidMount();
-    this.props.versionHistory.activeId || this.props.dispatch(Nb({
-      id: V_
+    this.props.versionHistory.activeId || this.props.dispatch(setActiveVersion({
+      id: CURRENT_VERSION_ID
     }));
     document.addEventListener("keydown", this.onKeyDown);
     fullscreenValue.fromFullscreen.on("sceneGraphMirrorUpdate", this.finishedLoadingVersion);
@@ -1078,8 +1078,8 @@ class eM extends RecordingComponent {
     let _ = this.props.versionHistory.linkedVersion;
     let h = _ && i.some(e => _.id === e.id);
     let m = !this.state.showOnlyUserVersionHistory || _?.user.id === this.props.user?.id;
-    let g = $A(this.props.selectedView);
-    let f = _$$C2(this.props.selectedView);
+    let g = isFullscreenDevHandoffView(this.props.selectedView);
+    let f = isFullscreenWhiteboard(this.props.selectedView);
     let E = !this.canEditFile();
     let y = i.map(e => shouldShowView(e) ? 1 : 0).reduce((e, t) => e + t, 0);
     return jsx("div", {
@@ -1136,7 +1136,7 @@ class eM extends RecordingComponent {
                 isBranchingVersion: isBranchView(_),
                 isComparing: this.props.versionHistory.compareId === _.id,
                 isComparingLoading: this.state.loadingCompareId === _.id,
-                isCurrentVersionActive: this.props.versionHistory.activeId === V_,
+                isCurrentVersionActive: this.props.versionHistory.activeId === CURRENT_VERSION_ID,
                 isLinked: !0,
                 label: _.label,
                 last: !0,
@@ -1160,11 +1160,11 @@ class eM extends RecordingComponent {
                 editorType: e.editorType,
                 first: !0,
                 hideLine: 0 === i.length || !this.state.showAutosaves && 0 === y,
-                isActive: this.props.versionHistory.activeId === V_,
+                isActive: this.props.versionHistory.activeId === CURRENT_VERSION_ID,
                 isAllowedToChangeVersion: this.isAllowedToChangeVersion,
                 isComparing: !!this.props.versionHistory.compareId,
-                isComparingLoading: this.state.loadingCompareId === V_,
-                isCurrentVersionActive: this.props.versionHistory.activeId === V_,
+                isComparingLoading: this.state.loadingCompareId === CURRENT_VERSION_ID,
+                isCurrentVersionActive: this.props.versionHistory.activeId === CURRENT_VERSION_ID,
                 last: !1,
                 onCompareChanges: this.compareChangesById,
                 onCompareChangesFromCurrent: this.compareChangesFromCurrent,
@@ -1175,7 +1175,7 @@ class eM extends RecordingComponent {
                 showAutosaves: this.state.showAutosaves,
                 showCompareChanges: this.showCompareChanges(),
                 userUrl: this.props.user.img_url,
-                versionId: V_,
+                versionId: CURRENT_VERSION_ID,
                 view: null
               }), this.drawRows(i, 0 === a.length, !p), this.drawRows(a, !0, !1, c)]
             }), s, 0 === a.length && u]

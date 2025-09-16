@@ -1,14 +1,14 @@
-import { atom } from 'jotai'
-import { useEffect } from 'react'
-import { LS } from '../905/782918'
-import { useAtomValueAndSetter } from '../figma_app/27355'
-import { isInteractionOrEvalMode } from '../figma_app/897289'
+import { atom } from 'jotai';
+import { useEffect } from 'react';
+import { isSingleSceneGraphSelectionInDevHandoff } from '../905/782918';
+import { useAtomValueAndSetter } from '../figma_app/27355';
+import { isInteractionOrEvalMode } from '../figma_app/897289';
 
 /**
  * Atom to track whether the timeout has completed.
  * Original name: o
  */
-export const interactionTimeoutAtom = atom(false)
+export const interactionTimeoutAtom = atom(false);
 
 /**
  * Sets the interaction timeout and updates the atom when completed.
@@ -16,21 +16,17 @@ export const interactionTimeoutAtom = atom(false)
  * @param timeoutMs - Timeout duration in milliseconds
  */
 export function useSetupInteractionTimeout(timeoutMs: number): void {
-  const [, setTimeoutComplete] = useAtomValueAndSetter(interactionTimeoutAtom)
-
+  const [, setTimeoutComplete] = useAtomValueAndSetter(interactionTimeoutAtom);
   useEffect(() => {
-    if (isInteractionOrEvalMode())
-      return
-
+    if (isInteractionOrEvalMode()) return;
     const timer = setTimeout(() => {
-      setTimeoutComplete(true)
-    }, timeoutMs)
-
+      setTimeoutComplete(true);
+    }, timeoutMs);
     return () => {
-      clearTimeout(timer)
-      setTimeoutComplete(false)
-    }
-  }, [timeoutMs, setTimeoutComplete])
+      clearTimeout(timer);
+      setTimeoutComplete(false);
+    };
+  }, [timeoutMs, setTimeoutComplete]);
 }
 
 /**
@@ -39,11 +35,11 @@ export function useSetupInteractionTimeout(timeoutMs: number): void {
  * @returns boolean
  */
 export function isInteractionReady(): boolean {
-  const lsValue = LS()
-  const [isTimeoutComplete] = useAtomValueAndSetter(interactionTimeoutAtom)
-  return isTimeoutComplete && !!lsValue
+  const lsValue = isSingleSceneGraphSelectionInDevHandoff();
+  const [isTimeoutComplete] = useAtomValueAndSetter(interactionTimeoutAtom);
+  return isTimeoutComplete && !!lsValue;
 }
 
 // Refactored exports for clarity and traceability
-export const W = useSetupInteractionTimeout
-export const e = isInteractionReady
+export const W = useSetupInteractionTimeout;
+export const e = isInteractionReady;

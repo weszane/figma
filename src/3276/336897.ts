@@ -13,10 +13,10 @@ import { c$ } from "../figma_app/236327";
 import { h1 } from "../905/986103";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { H8 } from "../905/590952";
-import { oB } from "../905/929976";
-import { jD } from "../905/765855";
+import { hideDropdownAction } from "../905/929976";
+import { hideTooltip } from "../905/765855";
 import { dG } from "../figma_app/753501";
-import { T as _$$T } from "../905/868547";
+import { isUIHiddenOrLocked } from "../905/868547";
 import { Py, AD } from "../figma_app/578768";
 import { selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
@@ -207,7 +207,7 @@ function V(e) {
                   t.preventDefault();
                   e.onClick(t);
                   z(!1);
-                  $(oB());
+                  $(hideDropdownAction());
                 },
                 disabled: e.disabled,
                 children: e.text
@@ -288,7 +288,7 @@ function V(e) {
 }
 function q(e) {
   let t = useSelector(e => e.multiplayer);
-  let n = useSelector(e => "prototype" === e.selectedView.view ? e.prototype.showProgressBar : _$$T(e?.progressBarState?.mode));
+  let n = useSelector(e => "prototype" === e.selectedView.view ? e.prototype.showProgressBar : isUIHiddenOrLocked(e?.progressBarState?.mode));
   let a = t.allUsers.length > 1;
   Av();
   let {
@@ -370,7 +370,7 @@ export function $$z0(e) {
   let _ = onUserClick && (e => {
     e.stopPropagation();
     e.preventDefault();
-    AD(user) && (onUserClick(user), isOverflow ? (h(oB()), hidePopover && hidePopover()) : h(jD()));
+    AD(user) && (onUserClick(user), isOverflow ? (h(hideDropdownAction()), hidePopover && hidePopover()) : h(hideTooltip()));
   });
   return isOverflow || isCurrentUserHeaderRow ? jsx(V, {
     user,

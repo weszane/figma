@@ -14,7 +14,7 @@ import { E as _$$E } from "../905/391888";
 import { B as _$$B } from "../905/799228";
 import { Z as _$$Z } from "../905/406205";
 import { A as _$$A } from "../905/351112";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { Ct } from "../figma_app/199513";
 import { _6 } from "../figma_app/386952";
@@ -322,7 +322,7 @@ export function $$ea0(e) {
         width: 1,
         height: 1
       };
-      s(j7({
+      s(showDropdownThunk({
         type: _$$B,
         data: {
           folder: {

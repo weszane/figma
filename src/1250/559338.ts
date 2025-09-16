@@ -11,8 +11,8 @@ import { SvgComponent } from "../905/714743";
 import { Ih } from "../figma_app/617427";
 import { o as _$$o } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sf } from "../905/929976";
-import { E3 } from "../figma_app/976749";
+import { selectViewAction } from "../905/929976";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { TY, Ht } from "../figma_app/701001";
 import { Wy, xk, P3, Zz, Tm, Vu, eE, pl, im } from "../figma_app/952446";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
@@ -163,7 +163,7 @@ export function $$P1(e) {
   }({
     warningLevel: m
   });
-  let g = E3();
+  let g = getSelectedEditorType();
   let f = TY();
   let [y, v] = useState(f);
   !function ({
@@ -265,7 +265,7 @@ function D(e) {
       maxAllocatedBytes: CorePerfInfo?.getMaxUsedHeapMemory(),
       fileKey: e.fileKey
     });
-    e.dispatch(sf(n));
+    e.dispatch(selectViewAction(n));
     customHistory.reload("Memory warning panel");
   };
   let {

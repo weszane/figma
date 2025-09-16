@@ -34,7 +34,7 @@ import { n3, VariableStyleId } from '../905/859698';
 import { ay, Bn } from '../905/879323';
 import { A as _$$A } from '../905/891805';
 import { debounce } from '../905/915765';
-import { j7, oB } from '../905/929976';
+import { showDropdownThunk, hideDropdownAction } from '../905/929976';
 import { O as _$$O } from '../905/969533';
 import { d as _$$d } from '../905/976845';
 import { A7, i4 } from '../9314/278494';
@@ -720,10 +720,10 @@ function eP({
   let g = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let h = useMemo(() => y || (u && d ? d.getBoundingClientRect() : null), [y, d, u]);
   let w = () => {
-    t(oB());
+    t(hideDropdownAction());
   };
   let k = () => {
-    t(j7({
+    t(showDropdownThunk({
       type: eA
     }));
   };
@@ -1042,7 +1042,7 @@ function eY({
   let U = useCallback((e, t) => {
     t.preventDefault();
     t.stopPropagation();
-    a(j7({
+    a(showDropdownThunk({
       type: eS,
       data: {
         uiList: e,

@@ -4,7 +4,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { vU } from "../figma_app/193867";
+import { mapPathToSelectedView } from "../figma_app/193867";
 export function $$c1(e, t) {
   let i = "";
   let a = "";
@@ -20,7 +20,7 @@ export function $$c1(e, t) {
       let e = t.selectedView;
       if ("fullscreen" === e.view && e.fileKey) {
         try {
-          l = vU(t, c.pathname, c.search, c.hash);
+          l = mapPathToSelectedView(t, c.pathname, c.search, c.hash);
         } catch (e) {}
         l && "fullscreen" === l.view && e.fileKey === l.fileKey && (isValidSessionLocalID(parseSessionLocalID(l.nodeId)) && (i = l.nodeId), l.commentThreadId && (a = l.commentThreadId), l.versionId && (s = l.versionId), getFeatureFlags().dakota && l.cmsItemId && (o = l.cmsItemId));
       }

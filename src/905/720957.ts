@@ -11,7 +11,7 @@ import { M3 } from "../figma_app/119475";
 import { LazyInputForwardRef } from "../905/408237";
 import { getI18nString } from "../905/303541";
 import { hO } from "../figma_app/545293";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { _z, W0 } from "../905/977218";
 import { _6 } from "../figma_app/386952";
@@ -101,7 +101,7 @@ export function $$P0({
     F("");
     t(_z({}));
     W();
-    M && isSearchView(i) && t(sf(i.previousView ?? {
+    M && isSearchView(i) && t(selectViewAction(i.previousView ?? {
       view: "recentsAndSharing"
     }));
   }, [W, t, i, M, F]);

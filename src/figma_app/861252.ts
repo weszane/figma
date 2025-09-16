@@ -30,7 +30,7 @@ import { S as _$$S } from "../5132/724052";
 import { customHistory } from "../905/612521";
 import { m as _$$m } from "../figma_app/694193";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { cJ, Em } from "../figma_app/976749";
+import { isSitesFileType, isDesignFileType } from "../figma_app/976749";
 import { Yk } from "../figma_app/644079";
 import { DP } from "../905/640017";
 import { getSelectedFile } from "../905/766303";
@@ -48,7 +48,7 @@ import { e6 } from "../figma_app/617427";
 import { c as _$$c } from "../905/370443";
 import { gh } from "../figma_app/598952";
 import { Px, Bl, go, HO, aN } from "../figma_app/57551";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { useIsFigmakeFullscreenPreview } from "../figma_app/552876";
 import { sO } from "../figma_app/21029";
 import { TH } from "../figma_app/751648";
@@ -182,7 +182,7 @@ function es() {
 let e_ = parsePxNumber(if6);
 let $$eh0 = memo(function () {
   let e = useDispatch();
-  let t = cJ();
+  let t = isSitesFileType();
   let r = useCanUseDevModeDemoFile();
   let i = _$$C()?.setBottomRightToolsNode || lQ;
   let u = U1(i);
@@ -199,7 +199,7 @@ let $$eh0 = memo(function () {
     unsortedTeams
   } = $$em2();
   let v = _$$D();
-  let A = Em();
+  let A = isDesignFileType();
   let x = _$$U();
   let N = sO();
   let C = useIsSelectedViewFullscreenCooper();
@@ -251,7 +251,7 @@ export function $$em2() {
   return selectWithShallowEqual(e => ({
     keyboardShortcuts: e.mirror.appModel.keyboardShortcuts,
     isEditingFile: !!getSelectedFile(e),
-    isDevHandoff: $A(e.selectedView),
+    isDevHandoff: isFullscreenDevHandoffView(e.selectedView),
     modalShown: e.modalShown,
     orgUser: hasOrgUsersForUser(e),
     user: e.user,

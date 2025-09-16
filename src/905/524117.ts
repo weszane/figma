@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { createPortal } from "react-dom";
 import s from "classnames";
 import { Point } from "../905/736624";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { M5 } from "../figma_app/817077";
 import { dx } from "../figma_app/646357";
@@ -13,7 +13,7 @@ import { cx } from "../figma_app/76115";
 import { au, bO, Hx, Wy, Pl, ce } from "../figma_app/357202";
 var o = s;
 export function $$_0(e) {
-  let t = "whiteboard" === lg();
+  let t = "whiteboard" === getCurrentFileType();
   let i = e.dragState;
   let s = cx(i?.draggingResource);
   let p = i ? function (e, t, i) {

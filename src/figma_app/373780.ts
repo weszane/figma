@@ -45,7 +45,7 @@ import { g as _$$g } from "../905/88169";
 import { x as _$$x } from "../905/97817";
 import { g as _$$g2 } from "../905/388772";
 import { x as _$$x2 } from "../905/520155";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { K9 } from "../figma_app/8833";
 import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
@@ -55,7 +55,7 @@ import { rp, d2, Dm } from "../905/845277";
 import { l7, hA } from "../figma_app/88239";
 import { of, Gl } from "../figma_app/297733";
 import { logger } from "../905/651849";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { IM } from "../905/687477";
 import { kL, Qg } from "../figma_app/404319";
 var l = o;
@@ -451,7 +451,7 @@ function eE({
   }, [e, n, l]);
   let _ = useCallback(e => {
     e.preventDefault();
-    s(j7({
+    s(showDropdownThunk({
       type: K9,
       data: {
         clientX: e.clientX,
@@ -1329,7 +1329,7 @@ function e6({
     subscribeToUpdates_expensive: !0
   });
   !function () {
-    let e = E3();
+    let e = getSelectedEditorType();
     let t = p8("activeCanvasEditModeType");
     let r = KH();
     let n = Object.keys(r);

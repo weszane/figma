@@ -12,7 +12,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { CZ } from "../905/294085";
 import { hO, d3 } from "../figma_app/545293";
 import { l1 } from "../figma_app/502363";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { QB } from "../905/143890";
 import { CreatorResourceType } from "../figma_app/162807";
@@ -66,7 +66,7 @@ function C({
       key: KeyCodes.ENTER
     }],
     onAction: () => {
-      !d && s.current && o(j7({
+      !d && s.current && o(showDropdownThunk({
         type: e,
         data: {
           facetType: t,

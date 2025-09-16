@@ -10,7 +10,7 @@ import { popModalStack, hideModal } from "../905/156213";
 import { z3, sp, r1, Yu } from "../905/355291";
 import { WJ, yJ, C$, hz, S5 } from "../figma_app/24841";
 import { yV, r6 } from "../905/990455";
-import { k } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 export let $$f5 = createOptimistThunk((e, t) => {
   t.passwordNew !== t.passwordRetype ? e.dispatch(FlashActions.error(getI18nString("api_user.error.please_retype_your_new_password_they_don_t_match"))) : XHR.post("/api/password/change", {
     password_old: t.passwordOld,
@@ -123,7 +123,7 @@ let $$v11 = createOptimistThunk(e => {
   e.dispatch(r1());
 });
 let $$I4 = createOptimistThunk((e, t) => {
-  k.getBackupCodes({
+  UserAPIHandlers.getBackupCodes({
     passwordVerifyToken: t.token
   }).then(({
     data: t

@@ -8,7 +8,7 @@ import { Spacing, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { kR } from "../c5e2cae0/894125";
 import { Dw } from "../figma_app/976345";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
@@ -157,7 +157,7 @@ export function $$z0(e) {
     e.onDone?.();
   };
   let k = t => {
-    "teamUpgrade" === b.view ? N(sf({
+    "teamUpgrade" === b.view ? N(selectViewAction({
       ...b,
       teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
       teamId: t.id,

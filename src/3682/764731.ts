@@ -26,7 +26,7 @@ import { I as _$$I } from "../905/932503";
 import { buildUploadUrl } from "../figma_app/169182";
 import { JL, We } from "../figma_app/165623";
 import { XHR } from "../905/910117";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { trackFileEvent } from "../figma_app/314264";
 import { W as _$$W } from "../905/236903";
@@ -941,7 +941,7 @@ function e6(e) {
       children: [jsxs("div", {
         className: "device_controls--header---h3P-",
         children: [getI18nString("collaboration.voice.audio_settings"), jsx(CloseButton, {
-          onClick: () => _(oB())
+          onClick: () => _(hideDropdownAction())
         })]
       }), jsxs("div", {
         className: "device_controls--container--VR8KK",
@@ -1231,7 +1231,7 @@ remote: ${s}`);
         fileKey
       }));
       tn?.play();
-      en && ed(oB());
+      en && ed(hideDropdownAction());
       ed(Pp(!1));
     } catch {
       ev.$$in();
@@ -1247,7 +1247,7 @@ remote: ${s}`);
     e ? await call.unmute() : await call.mute();
   };
   let eO = () => {
-    en ? ed(oB()) : (trackFileEvent("voice_widget_open_settings", fileKey, v.getState()), ed(j7({
+    en ? ed(hideDropdownAction()) : (trackFileEvent("voice_widget_open_settings", fileKey, v.getState()), ed(showDropdownThunk({
       type: ts
     })));
   };

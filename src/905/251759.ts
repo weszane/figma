@@ -5,7 +5,7 @@ import s from "classnames";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { withTrackedClick } from "../figma_app/831799";
 import { Cf } from "../905/504727";
 import { A } from "../svg/763165";
@@ -60,7 +60,7 @@ export function $$A0(e) {
     className: "currency_switcher--dropdownContainer--HANwa text--fontPos11--2LvXf text--_fontBase--QdLsd",
     onClick: e => {
       e.stopPropagation();
-      l ? i(oB()) : t?.current && i(j7({
+      l ? i(hideDropdownAction()) : t?.current && i(showDropdownThunk({
         type: g,
         data: {
           targetRect: t.current.getBoundingClientRect()

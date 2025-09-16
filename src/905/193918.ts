@@ -29,7 +29,7 @@ import { logError, logWarning } from '../905/714362';
 import { SvgComponent } from '../905/714743';
 import { n as _$$n } from '../905/861286';
 import { XHR } from '../905/910117';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { s as _$$s2 } from '../905/932270';
 import { _5, AA, AG, Be, C_, Cd, ck, DU, fI, h6, HC, IC, Ie, jH, JS, lA, Mt, nv, Oz, Ph, Pl, PX, r9, rb, SU, t$, TF, u7, UI, us, w1, Wz, xc, Yf, yu, yV } from '../905/941408';
 import { G as _$$G } from '../905/971006';
@@ -1028,7 +1028,7 @@ export const CommunityCheckoutModal = registerModal(props => {
       dispatch(hideModal());
       onCancel?.();
       if (new URLSearchParams(customHistory.location.search).has(Tb)) {
-        dispatch(sf({
+        dispatch(selectViewAction({
           ...selectedView,
           triggerCheckout: undefined
         }));

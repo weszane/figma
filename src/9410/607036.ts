@@ -23,7 +23,7 @@ import { Dm } from "../figma_app/8833";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { Tc } from "../905/797478";
 import { fullscreenValue } from "../figma_app/455680";
-import { pb, zU, Ik, qS } from "../figma_app/831696";
+import { extractProtoFileId, extractValidNodeIdFromProtoUrl, isProtoViewerUrl, getProtoViewerBaseUrl } from "../figma_app/831696";
 import { KindEnum } from "../905/129884";
 import { R } from "../figma_app/53049";
 import { Y } from "../905/1768";
@@ -55,8 +55,8 @@ export function $$R2() {
   });
   let [o, l] = useState(0);
   let d = useCallback(async t => {
-    let i = pb(t);
-    let r = zU(t);
+    let i = extractProtoFileId(t);
+    let r = extractValidNodeIdFromProtoUrl(t);
     if (!i) return;
     let n = await L({
       fileKey: i,
@@ -241,7 +241,7 @@ function G({
   prototypeUrl: e,
   onClick: t
 }) {
-  let i = Ik(e);
+  let i = isProtoViewerUrl(e);
   let n = i || !e ? void 0 : getI18nString("slides.flapp.embed.add_button_invalid_link_tooltip");
   return jsx("div", {
     "data-tooltip-type": KindEnum.TEXT,
@@ -274,7 +274,7 @@ function z({
 }) {
   let [t, i] = useState();
   let a = getI18nString("slides.flapp.embed.add_prototype_link_hint", {
-    prototype_link_prefix: qS()
+    prototype_link_prefix: getProtoViewerBaseUrl()
   });
   return jsxs("div", {
     children: [jsx("div", {
@@ -295,7 +295,7 @@ function z({
         onClick: () => {
           t && (logAndTrackCTA({
             name: "slides.flapps.embed.add_prototype_link_button_clicked",
-            fileKey: pb(t),
+            fileKey: extractProtoFileId(t),
             productType: "slides"
           }), e(t));
         }

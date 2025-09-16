@@ -1,9 +1,9 @@
 import { selectCurrentUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
-import { my } from "../figma_app/976749";
+import { getEditorTypeOrNull } from "../figma_app/976749";
 export function $$s1() {
   let e = !selectCurrentUser();
-  let t = my();
+  let t = getEditorTypeOrNull();
   let r = t === FEditorType.Design;
   let s = t === FEditorType.Slides;
   let o = t === FEditorType.Sites;
@@ -13,7 +13,7 @@ export function $$s1() {
 }
 export function $$o0() {
   let e = !selectCurrentUser();
-  let t = my() === FEditorType.Design;
+  let t = getEditorTypeOrNull() === FEditorType.Design;
   return e && t;
 }
 export const F = $$o0;

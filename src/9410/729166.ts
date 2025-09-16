@@ -27,7 +27,7 @@ import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { wG } from '../905/331989';
 import { P as _$$P2 } from '../905/347284';
-import { Q as _$$Q } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { O as _$$O4 } from '../905/365108';
 import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
@@ -48,7 +48,7 @@ import { C as _$$C } from '../905/520159';
 import { Button } from '../905/521428';
 import { $ as _$$$ } from '../905/532878';
 import { subscribeAndAwaitData } from '../905/553831';
-import { E6 } from '../905/560959';
+import { ModalWindowType } from '../905/560959';
 import { N as _$$N2 } from '../905/572042';
 import { H8 } from '../905/590952';
 import { getFeatureFlags } from '../905/601108';
@@ -73,10 +73,10 @@ import { j as _$$j } from '../905/834956';
 import { BK, Um } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
 import { e as _$$e4, y as _$$y } from '../905/871724';
-import { D as _$$D2 } from '../905/882262';
+import { useHasParentOrgId } from '../905/882262';
 import { A as _$$A9 } from '../905/891805';
 import { e as _$$e6 } from '../905/916195';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { f as _$$f4 } from '../905/940356';
 import { postUserFlag } from '../905/985254';
@@ -124,7 +124,7 @@ import { DevModeActivity } from '../figma_app/43951';
 import { H as _$$H } from '../figma_app/47866';
 import { y as _$$y2 } from '../figma_app/53571';
 import { FEditorType } from '../figma_app/53721';
-import { Yy } from '../figma_app/59509';
+import { BannerInset } from '../figma_app/59509';
 import { getViewportX, computeFullscreenViewportForNode, getViewportY } from '../figma_app/62612';
 import { U as _$$U2 } from '../figma_app/65327';
 import { getObservableOrFallback, getObservableValue } from '../figma_app/84367';
@@ -137,7 +137,7 @@ import { Fk } from '../figma_app/167249';
 import { buildUploadUrl, isDevEnvironment } from '../figma_app/169182';
 import { is as _$$is, BX, Ho } from '../figma_app/170018';
 import { FEventType } from '../figma_app/191312';
-import { Np, xS } from '../figma_app/193867';
+import { selectedViewToPath, getSelectedViewUrl } from '../figma_app/193867';
 import { Vc } from '../figma_app/211694';
 import { _ as _$$_3 } from '../figma_app/214121';
 import { fQ } from '../figma_app/238665';
@@ -162,7 +162,7 @@ import { clamp } from '../figma_app/492908';
 import { LinkPrimitive } from '../figma_app/496441';
 import { useCurrentFileKey, useOpenFileLibraryKey, selectCurrentFile } from '../figma_app/516028';
 import { uv } from '../figma_app/518364';
-import { iA as _$$iA } from '../figma_app/545541';
+import { setupCodegenLanguageSync } from '../figma_app/545541';
 import { BI } from '../figma_app/546509';
 import { Yp } from '../figma_app/578768';
 import { Dl } from '../figma_app/601682';
@@ -194,7 +194,7 @@ import { _6 as _$$_2, _o, c7, oz, wz, zz } from '../figma_app/879363';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
 import { trackFileEventWithStore, trackDefinedFileEventWithStore } from '../figma_app/901889';
 import { fq, Ou } from '../figma_app/953049';
-import { Em, m0, ow } from '../figma_app/976749';
+import { isDesignFileType, isDevHandoffEditorType, isWhiteboardFileType } from '../figma_app/976749';
 import { A as _$$A7 } from '../svg/236983';
 import { A as _$$A6 } from '../svg/674356';
 import { useDebouncedCallback } from 'use-debounce';
@@ -1232,7 +1232,7 @@ function tu() {
                   variableId: selectedVariable,
                   onClose: x,
                   surface: 'full_table_sidebar',
-                  entryPoint: E6.FullTable
+                  entryPoint: ModalWindowType.FullTable
                 })]
               })]
             }) : jsx(fQ, {
@@ -1286,7 +1286,7 @@ function th({
   let p = Xr(_$$$);
   let m = useCallback(() => {
     p(null);
-    c(sf({
+    c(selectViewAction({
       ...d,
       view: 'fullscreen',
       editorType: FEditorType.DevHandoff,
@@ -1340,14 +1340,14 @@ function t9() {
     properties: {
       severity: _$$c.EVENT
     },
-    children: jsxs(Yy, {
+    children: jsxs(BannerInset, {
       variant: 'success',
       onDismiss: () => {
         e(postUserFlag({
           dismissed_dev_mode_overview_banner: !0
         }));
       },
-      children: [jsx(_$$Q, {
+      children: [jsx(BannerMessage, {
         title: getI18nString('dev_handoff.workflows.overview.banner.title'),
         children: renderI18nText('dev_handoff.workflows.overview.banner.subtitle')
       }), jsx(_$$N2, {
@@ -1686,7 +1686,7 @@ function iZ() {
   let s = e || i?.nodeId || t?.nodeId;
   let o = ZJ();
   let d = TP(void 0, s);
-  let c = useSelector(e => Np(e, d));
+  let c = useSelector(e => selectedViewToPath(e, d));
   let u = n0();
   let p = VS({
     pagesList: u,
@@ -2170,8 +2170,8 @@ function i2({
     pageId
   } = e;
   let f = VW(nodeId, pageId);
-  let g = useSelector(e => Np(e, f));
-  let _ = useSelector(e => xS(e, f));
+  let g = useSelector(e => selectedViewToPath(e, f));
+  let _ = useSelector(e => getSelectedViewUrl(e, f));
   let y = Cj(_);
   let b = TQ();
   let C = function (e, t) {
@@ -2257,7 +2257,7 @@ function i3({
     hasBeenEditedSinceLastStatusChange
   } = e;
   let l = VW(e.nodeId);
-  let d = useSelector(e => Np(e, l));
+  let d = useSelector(e => selectedViewToPath(e, l));
   return jsx(Fragment, {
     children: jsx('div', {
       className: 'overview--overviewAvatarRowMediaQueryHeader--nigbr',
@@ -2298,7 +2298,7 @@ function i5({
     updatedAt
   } = e;
   let p = VW(nodeId);
-  let h = useSelector(e => Np(e, p));
+  let h = useSelector(e => selectedViewToPath(e, p));
   let [m] = useAtomValueAndSetter(iX);
   let f = m === _$$_2.RECENT && updatedAt > 1;
   let [, g] = useAtomValueAndSetter(wz);
@@ -2311,7 +2311,7 @@ function i5({
     });
     g('overview');
     t();
-    o(sf(p));
+    o(selectViewAction(p));
   }
   return jsxs('article', {
     className: 'overview--overviewNodeCard--NsmYU',
@@ -3408,12 +3408,12 @@ function r5() {
   useEffect(() => {
     f?.updateMultiplayerUserInfo && !deepEqual(M, D) && f.updateMultiplayerUserInfo(D);
   }, [f, D, M]);
-  _$$iA();
+  setupCodegenLanguageSync();
   !function (e, t) {
     let i = useCanAccessDevModeEntryPoint();
     let r = useCanAccessFullDevMode();
     let a = useCanUseDevModeDemoFile();
-    let s = _$$D2();
+    let s = useHasParentOrgId();
     let o = _$$U2('permission', !0);
     let d = e && !r && !i && !isVsCodeEnvironment();
     useEffect(() => {
@@ -3422,7 +3422,7 @@ function r5() {
     useEffect(() => {
       d && o('design');
     }, [o, d]);
-  }(m0(), ow());
+  }(isDevHandoffEditorType(), isWhiteboardFileType());
   _$$J3();
   return null;
 }
@@ -3434,8 +3434,8 @@ export function $$r40({
   let n = l7();
   let s = _$$e3();
   let l = ZO();
-  let d = Em();
-  let c = m0();
+  let d = isDesignFileType();
+  let c = isDevHandoffEditorType();
   let u = useSelector(e => e.isFullscreenDocumentLoaded);
   return jsxs(Fragment, {
     children: [e ?? null, jsx(r5, {}), t && jsx(r$, {

@@ -16,7 +16,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { rq } from "../905/425180";
 import { EL } from "../905/858282";
 import { hoH } from "../figma_app/6204";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { b as _$$b } from "../905/388233";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
@@ -91,7 +91,7 @@ export function $$O0({
   let A = q(nj, !0);
   let y = useCallback(t => {
     (t === FigResourceType.SHARED_FONTS || t === FigResourceType.APPROVED_PLUGINS || t === FigResourceType.APPROVED_WIDGETS) && A();
-    s(sf({
+    s(selectViewAction({
       view: "orgAdminSettings",
       orgAdminSettingsViewTab: e,
       orgAdminSettingsViewSecondaryTab: t

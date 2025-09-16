@@ -15,7 +15,7 @@ import { RL, S6, K5, LO, _E, bV, t2 } from "../1250/51387";
 import { I as _$$I } from "../6658/358099";
 import { I as _$$I2 } from "../6658/286262";
 import { A as _$$A2 } from "../6658/341273";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { selectCurrentUser } from "../905/372672";
 import { mO } from "../figma_app/410317";
@@ -837,7 +837,7 @@ export function $$E2({
         ...N,
         componentKey: void 0
       };
-      A(sf(e));
+      A(selectViewAction(e));
       return;
     }
     if (K(-1), "componentBrowserLibrary" === N.view) {
@@ -845,7 +845,7 @@ export function $$E2({
         ...N,
         componentKey: o && _$$I(o) || void 0
       };
-      A(sf(e));
+      A(selectViewAction(e));
     } else if ("fullscreen" === N.view) {
       let e = {
         ...N,
@@ -853,7 +853,7 @@ export function $$E2({
         devModeComponentBrowserBackButtonTargetNodeId: o?.node_id,
         componentKey: o && _$$I(o) || void 0
       };
-      A(sf(e));
+      A(selectViewAction(e));
     }
   }, [N, A, e?.assetKey]);
   let eo = useCallback(() => {

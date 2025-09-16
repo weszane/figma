@@ -3,7 +3,7 @@ import { getI18nString, getTranslatedDynamicContent } from '../905/303541';
 import { selectCurrentUser } from '../905/372672';
 import { deepEqual } from '../905/382883';
 import { trackEventAnalytics } from '../905/449184';
-import { $A } from '../905/862883';
+import { FDocumentType } from '../905/862883';
 import { UploadStatusEnum } from '../figma_app/10554';
 import { c as _$$c } from '../figma_app/11961';
 import { OrgUserRoleEnum } from '../figma_app/35887';
@@ -81,19 +81,19 @@ export let $$O37 = memoizeByArgs((e, t, r) => {
   let i = t.plugins.fetchedResources;
   switch (e) {
     case FEditorType.Design:
-      n = $A.Design;
+      n = FDocumentType.Design;
       break;
     case FEditorType.DevHandoff:
-      n = $A.Handoff;
+      n = FDocumentType.Handoff;
       break;
     case FEditorType.Slides:
-      n = $A.Slides;
+      n = FDocumentType.Slides;
       break;
     case FEditorType.Cooper:
-      n = $A.Cooper;
+      n = FDocumentType.Cooper;
       break;
     default:
-      n = $A.FigJam;
+      n = FDocumentType.FigJam;
   }
   let a = [];
   for (let e of t.plugins[n]) {

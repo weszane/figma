@@ -24,7 +24,7 @@ import { getI18nString } from "../905/303541";
 import { b as _$$b } from "../905/620668";
 import { Lm, mF } from "../figma_app/755939";
 import { Ym } from "../figma_app/806075";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { kP, OB, Y6, FP, JM } from "../figma_app/91703";
 import { am } from "../figma_app/430563";
@@ -591,7 +591,7 @@ export function $$eN8(e, t, i) {
         }
         await yn();
         e.dispatch(FlashActions.error(l));
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "recentsAndSharing"
         }));
         let i = e.getState().teams[e.getState().currentTeamId ?? ""];
@@ -618,7 +618,7 @@ export function $$eN8(e, t, i) {
     logInfo("new file", "finished creating new file");
   });
   let l = e.getState().selectedView;
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "fullscreen",
     fileKey: void 0,
     framePresetName: t.framePresetName,

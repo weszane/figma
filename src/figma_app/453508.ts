@@ -12,8 +12,8 @@ import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sf } from "../905/929976";
-import { XE } from "../figma_app/976749";
+import { selectViewAction } from "../905/929976";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { FEditorType } from "../figma_app/53721";
 import { registerLegacyModal } from "../905/102752";
@@ -38,7 +38,7 @@ export function $$C2(e) {
   });
   let r = useSelector(e => e.mirror.appModel.isReadOnly);
   let u = useSelector(e => e.selectedView);
-  let T = XE(u) === FEditorType.Design;
+  let T = getEditorTypeFromView(u) === FEditorType.Design;
   let x = useCurrentFileKey() || getInitialOptions().editing_file?.source_file?.key || "";
   let N = useDispatch();
   let C = {
@@ -134,7 +134,7 @@ export function $$C2(e) {
                 }, {
                   isReadOnly: r
                 });
-                ("showRecoveryMode" === O || r) && N(sf(C));
+                ("showRecoveryMode" === O || r) && N(selectViewAction(C));
                 ("showReload" === O || "showRecoveryMode" === O) && customHistory.reload("Memory warning panel");
               },
               children: L.buttonCTA

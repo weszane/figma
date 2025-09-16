@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { userStateLoadedAtom } from "../figma_app/864723";
 import { useFullscreenReady } from "../905/924253";
 import { aV } from "../figma_app/722362";
@@ -10,7 +10,7 @@ import { g as _$$g } from "../figma_app/391708";
 import { z } from "../figma_app/849005";
 export function $$$$_0() {
   let e = useSelector(e => e.mirror?.appModel.showUi);
-  let t = ow() && e;
+  let t = isWhiteboardFileType() && e;
   let r = L();
   let _ = aV();
   let h = selectCurrentUser();

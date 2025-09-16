@@ -28,7 +28,7 @@ import { FOrganizationLevelType } from "../figma_app/191312";
 import { VP } from "../905/18797";
 import { useCurrentPublicPlan } from "../figma_app/465071";
 import { n as _$$n2 } from "../905/79930";
-import { vt, $A } from "../905/862883";
+import { ITemplateType, FDocumentType } from "../905/862883";
 import { q } from "../figma_app/446378";
 let k = (e, t) => {
   switch (e.type) {
@@ -70,17 +70,17 @@ let j = ({
   switch (t) {
     case _$$n2.HubFile:
       return {
-        type: vt.CommunityResource,
+        type: ITemplateType.CommunityResource,
         id: e.id
       };
     case _$$n2.TeamTemplate:
       return {
-        type: vt.TeamTemplate,
+        type: ITemplateType.TeamTemplate,
         file_key: e.file_key
       };
     case _$$n2.TeamTemplateLg:
       return {
-        type: vt.TeamTemplate,
+        type: ITemplateType.TeamTemplate,
         file_key: e.fileKey
       };
     default:
@@ -127,7 +127,7 @@ export async function $$U2({
       }), s) && (t(postUserFlag({
         inserted_figjam_template: !0
       })), n.type === _$$n2.TeamTemplate && t(_$$D([n.template])), "section-preset" !== d && "sites-templates-modal" !== d && t(Hx({
-        storeInRecentsKey: $A.FigJam,
+        storeInRecentsKey: FDocumentType.FigJam,
         ...j(n)
       })));
     }, {
@@ -233,12 +233,12 @@ export function $$z6(e) {
       type
     } = e;
     switch (type) {
-      case vt.CommunityResource:
+      case ITemplateType.CommunityResource:
         return {
           type: _$$n2.HubFile,
           template: r[e.id]
         };
-      case vt.TeamTemplate:
+      case ITemplateType.TeamTemplate:
         return {
           type: _$$n2.TeamTemplate,
           template: s[e.key]
@@ -271,7 +271,7 @@ async function W({
     r();
     e(_$$D([template]));
     e(Hx({
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       ...t
     }));
     customHistory.redirect(getDesignFileUrlWithOptions(fig_file), a ? "_blank" : void 0);

@@ -1,117 +1,173 @@
-import { createActionCreator } from '../905/73481';
-import { StatusEnum, PositionEnum } from '../905/129884';
-import { createOptimistThunk } from '../905/350402';
-import { Y } from '../905/696438';
-import { PluginIframeMode } from '../905/968269';
-let $$l5 = createActionCreator('TOOLTIP_SET_TARGET_REF');
-let $$d2 = createActionCreator('TOOLTIP_UPDATE');
-let c = createOptimistThunk((e, t) => {
-  let i = e.getState();
-  i.tooltip.timeoutID !== null && i.tooltip.timeoutID != t.tooltip.timeoutID && clearTimeout(i.tooltip.timeoutID);
-  e.dispatch($$d2(t));
-});
-let $$u4 = createOptimistThunk(e => {
-  let t = e.getState();
-  e.dispatch(c({
-    tooltip: {
-      ...t.tooltip,
-      timeoutID: null
-    }
-  }));
-});
-let $$p0 = createOptimistThunk((e, t) => {
-  let i = e.getState();
-  if (i.tooltip.timeoutID === null) {
-    let n = setTimeout(() => {
-      e.dispatch($$m3());
-    }, t.timeoutDelay);
-    e.dispatch(c({
-      tooltip: {
-        ...i.tooltip,
-        timeoutID: n
-      }
-    }));
+import { createActionCreator } from '../905/73481'
+import { PositionEnum, StatusEnum } from '../905/129884'
+import { createOptimistThunk } from '../905/350402'
+import { PluginInstanceManager } from '../905/696438'
+import { PluginIframeMode } from '../905/968269'
+
+// Action creators for tooltip management
+export const setTargetRef = createActionCreator('TOOLTIP_SET_TARGET_REF')
+export const updateTooltip = createActionCreator('TOOLTIP_UPDATE')
+
+/**
+ * Updates the tooltip state by dispatching the update action.
+ * Original: c
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param tooltipState - The new tooltip state to update
+ */
+export const updateTooltipState = createOptimistThunk((context, tooltipState) => {
+  const state = context.getState()
+  if (state.tooltip.timeoutID !== null && state.tooltip.timeoutID !== tooltipState.tooltip.timeoutID) {
+    clearTimeout(state.tooltip.timeoutID)
   }
-});
-let $$m3 = createOptimistThunk(e => {
-  g(!1);
-  e.dispatch(c({
+  context.dispatch(updateTooltip(tooltipState))
+})
+
+/**
+ * Clears the timeout ID in the tooltip state.
+ * Original: $$u4
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ */
+export const clearTimeoutID = createOptimistThunk(({ dispatch, getState }) => {
+  const state = getState()
+  dispatch(updateTooltipState({
+    tooltip: {
+      ...state.tooltip,
+      timeoutID: null,
+    },
+  }))
+})
+
+/**
+ * Sets a timeout to hide the tooltip if no timeout is active.
+ * Original: $$p0
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param timeoutDelay - Delay in milliseconds
+ */
+export const setTimeoutID = createOptimistThunk(({ dispatch, getState }, { timeoutDelay }) => {
+  const state = getState()
+  if (state.tooltip.timeoutID === null) {
+    const timeoutID = setTimeout(() => {
+      dispatch(hideTooltip())
+    }, timeoutDelay)
+    dispatch(updateTooltipState({
+      tooltip: {
+        ...state.tooltip,
+        timeoutID,
+      },
+    }))
+  }
+})
+
+/**
+ * Hides the tooltip and resets its state.
+ * Original: $$m3
+ * @param dispatch - Redux dispatch function
+ */
+export const hideTooltip = createOptimistThunk(({ dispatch }) => {
+  updatePluginState(false)
+  dispatch(updateTooltipState({
     tooltip: {
       state: StatusEnum.NONE,
       position: PositionEnum.BELOW,
       target: null,
-      targetRect: void 0,
+      targetRect: undefined,
       timeoutID: null,
-      interactive: !1
-    }
-  }));
-});
-let $$h1 = createOptimistThunk((e, t) => {
-  g(!0);
-  e.dispatch(c({
+      interactive: false,
+    },
+  }))
+})
+
+/**
+ * Shows the tooltip with the provided parameters.
+ * Original: $$h1
+ * @param dispatch - Redux dispatch function
+ * @param tooltipParams - Parameters for the tooltip
+ */
+export const showTooltip = createOptimistThunk(({ dispatch }, tooltipParams) => {
+  updatePluginState(true)
+  dispatch(updateTooltipState({
     tooltip: {
       state: StatusEnum.SHOWING,
-      position: t.position,
-      target: t.target,
-      tipAlign: t.tipAlign,
-      targetRect: t.targetRect,
+      position: tooltipParams.position,
+      target: tooltipParams.target,
+      tipAlign: tooltipParams.tipAlign,
+      targetRect: tooltipParams.targetRect,
       timeoutID: null,
-      maxWidth: t.maxWidth,
-      maxLines: t.maxLines,
-      interactive: t.interactive,
-      lightMode: t.lightMode,
-      textAlign: t.textAlign,
-      hideImmediately: t.hideImmediately,
-      hideAfterDelay: t.hideAfterDelay
-    }
-  }));
-});
-function g(e) {
-  Y.instance[PluginIframeMode.INSPECT]?.updateState({
-    stopPointerEvents: e
-  });
-  Y.instance[PluginIframeMode.MODAL]?.updateState({
-    stopPointerEvents: e
-  });
+      maxWidth: tooltipParams.maxWidth,
+      maxLines: tooltipParams.maxLines,
+      interactive: tooltipParams.interactive,
+      lightMode: tooltipParams.lightMode,
+      textAlign: tooltipParams.textAlign,
+      hideImmediately: tooltipParams.hideImmediately,
+      hideAfterDelay: tooltipParams.hideAfterDelay,
+    },
+  }))
+})
+
+/**
+ * Updates the plugin state for pointer events.
+ * Original: g
+ * @param stopPointerEvents - Whether to stop pointer events
+ */
+export function updatePluginState(stopPointerEvents: boolean) {
+  PluginInstanceManager.instance[PluginIframeMode.INSPECT]?.updateState({
+    stopPointerEvents,
+  })
+  PluginInstanceManager.instance[PluginIframeMode.MODAL]?.updateState({
+    stopPointerEvents,
+  })
 }
-export let $$f6 = createOptimistThunk((e, t) => {
-  let i = setTimeout(() => {
-    e.dispatch($$h1({
-      target: t.target,
-      targetRect: t.targetRect,
-      position: t.position,
-      tipAlign: t.tipAlign,
-      maxWidth: t.maxWidth,
-      maxLines: t.maxLines,
-      interactive: t.interactive,
-      lightMode: t.lightMode,
-      textAlign: t.textAlign,
-      hideImmediately: t.hideImmediately,
-      hideAfterDelay: t.hideAfterDelay
-    }));
-  }, t.timeoutDelay);
-  e.dispatch(c({
+
+/**
+ * Shows the tooltip after a delay.
+ * Original: $$f6
+ * @param dispatch - Redux dispatch function
+ * @param getState - Redux getState function
+ * @param tooltipParams - Parameters including timeoutDelay
+ */
+export const showTooltipWithDelay = createOptimistThunk(({ dispatch }, tooltipParams) => {
+  const timeoutID = setTimeout(() => {
+    dispatch(showTooltip({
+      target: tooltipParams.target,
+      targetRect: tooltipParams.targetRect,
+      position: tooltipParams.position,
+      tipAlign: tooltipParams.tipAlign,
+      maxWidth: tooltipParams.maxWidth,
+      maxLines: tooltipParams.maxLines,
+      interactive: tooltipParams.interactive,
+      lightMode: tooltipParams.lightMode,
+      textAlign: tooltipParams.textAlign,
+      hideImmediately: tooltipParams.hideImmediately,
+      hideAfterDelay: tooltipParams.hideAfterDelay,
+    }))
+  }, tooltipParams.timeoutDelay)
+  dispatch(updateTooltipState({
     tooltip: {
       state: StatusEnum.PENDING,
-      position: t.position,
-      tipAlign: t.tipAlign,
-      target: t.target,
-      targetRect: t.targetRect,
-      timeoutID: i,
-      maxWidth: t.maxWidth,
-      maxLines: t.maxLines,
-      interactive: t.interactive,
-      lightMode: t.lightMode,
-      textAlign: t.textAlign,
-      hideImmediately: t.hideImmediately,
-      hideAfterDelay: t.hideAfterDelay
-    }
-  }));
-});
-export const ac = $$p0;
-export const eB = $$h1;
-export const fW = $$d2;
-export const jD = $$m3;
-export const kA = $$u4;
-export const pP = $$l5;
-export const xE = $$f6;
+      position: tooltipParams.position,
+      tipAlign: tooltipParams.tipAlign,
+      target: tooltipParams.target,
+      targetRect: tooltipParams.targetRect,
+      timeoutID,
+      maxWidth: tooltipParams.maxWidth,
+      maxLines: tooltipParams.maxLines,
+      interactive: tooltipParams.interactive,
+      lightMode: tooltipParams.lightMode,
+      textAlign: tooltipParams.textAlign,
+      hideImmediately: tooltipParams.hideImmediately,
+      hideAfterDelay: tooltipParams.hideAfterDelay,
+    },
+  }))
+})
+
+// Exported constants with meaningful names (refactored from originals)
+export const ac = setTimeoutID
+export const eB = showTooltip
+export const fW = updateTooltip
+export const jD = hideTooltip
+export const kA = clearTimeoutID
+export const pP = setTargetRef
+export const xE = showTooltipWithDelay

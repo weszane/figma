@@ -8,7 +8,7 @@ import { aV, ax, dH } from "../figma_app/722362";
 import { getObservableOrFallback, getObservableValue } from "../figma_app/84367";
 import { Ye } from "../figma_app/32128";
 import { sO } from "../figma_app/21029";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 export function $$h1() {
   !function (e) {
     let t = sO();
@@ -54,7 +54,7 @@ export function $$m0() {
   };
 }
 export function $$g2() {
-  let e = ow();
+  let e = isWhiteboardFileType();
   let t = Ye();
   let r = aV();
   let n = ax();

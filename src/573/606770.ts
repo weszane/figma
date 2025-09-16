@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { UserInterfaceElements } from "../figma_app/763686";
-import { Em, cJ } from "../figma_app/976749";
+import { isDesignFileType, isSitesFileType } from "../figma_app/976749";
 import { _ } from "../9410/218531";
 import { b } from "../642/502017";
 import { M } from "../905/540025";
@@ -14,8 +14,8 @@ export function $$h0({
   ...h
 }) {
   let p = M();
-  let g = Em();
-  let y = cJ();
+  let g = isDesignFileType();
+  let y = isSitesFileType();
   let m = e === UserInterfaceElements.LAYERS;
   let f = p && (g || y) && (e === UserInterfaceElements.ASSETS || m);
   return jsxs(_$$y, {

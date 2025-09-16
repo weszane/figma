@@ -5,7 +5,7 @@ import { isEmptyObject } from "../figma_app/493477";
 import { FileSourceType } from "../figma_app/763686";
 import { ReduxSceneGraph } from "../905/700578";
 import { selectWithShallowEqual } from "../905/103090";
-import { T } from "../905/868547";
+import { isUIHiddenOrLocked } from "../905/868547";
 let u = e => e?.mirror?.sceneGraph;
 let p = () => useStore();
 export function $$_7() {
@@ -45,7 +45,7 @@ export function $$b6() {
   return useSelector(e => e?.mirror?.appModel?.currentTool);
 }
 export function $$T4() {
-  return useSelector(e => T(e?.progressBarState?.mode));
+  return useSelector(e => isUIHiddenOrLocked(e?.progressBarState?.mode));
 }
 export function $$I10(e) {
   return useSelector(t => t.mirror.appModel[e]);

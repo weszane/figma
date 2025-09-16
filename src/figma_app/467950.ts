@@ -3,12 +3,12 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { selectWithShallowEqual } from "../905/103090";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
 import { QZ, VZ } from "../figma_app/727192";
 import { hD, LI } from "../figma_app/970285";
 export function $$p0() {
-  let e = m0();
+  let e = isDevHandoffEditorType();
   let {
     openFile,
     sceneGraphSelection,

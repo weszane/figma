@@ -36,7 +36,7 @@ import { W as _$$W2, T as _$$T } from "../905/336482";
 import { allCategoriesQuery } from "../figma_app/188671";
 import { cO } from "../figma_app/530167";
 import { i9, N4, VS, oO, bk } from "../figma_app/49598";
-import { oB, sf } from "../905/929976";
+import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { M3 } from "../figma_app/91703";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/350203";
@@ -51,7 +51,7 @@ import { FTemplateCategoryType } from "../figma_app/191312";
 import { liveStoreInstance } from "../905/713695";
 import { getExplicitRoleForUserAndFile, getPermissionsState } from "../figma_app/642025";
 import { Ef } from "../905/81982";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { FileInputType, ResourceTypeNoComment, HubTypeEnum } from "../figma_app/45218";
 import { CanvasSourceEnum } from "../905/71785";
 import { PageTypeEnum, UploadStatusEnum } from "../figma_app/10554";
@@ -1351,7 +1351,7 @@ let to = connect((e, t) => {
     }));
   },
   hideDropdown: () => {
-    e(oB());
+    e(hideDropdownAction());
   },
   dispatch: e
 }))(ts);
@@ -1384,7 +1384,7 @@ let $$tl0 = registerModal(function (e) {
 (n || (n = {})).PublishModalSuccessScreen = function (e) {
   let t = useDispatch();
   let i = UP();
-  let n = useSelector(t => e.hubFile && Np(t, {
+  let n = useSelector(t => e.hubFile && selectedViewToPath(t, {
     view: "communityHub",
     subView: "hubFile",
     hubFileId: e.hubFile.id
@@ -1518,7 +1518,7 @@ let $$tl0 = registerModal(function (e) {
       }),
       primaryButton: {
         onClick: () => {
-          n && (desktopAPIInstance && i && e.hubFile ? t(sf({
+          n && (desktopAPIInstance && i && e.hubFile ? t(selectViewAction({
             view: "communityHub",
             subView: "hubFile",
             hubFileId: e.hubFile.id

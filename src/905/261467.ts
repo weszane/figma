@@ -10,11 +10,11 @@ import { debugState } from '../905/407919';
 import { dequeuePluginStatus, formatPluginName, notifyPluginStatus } from '../905/571565';
 import { VisualBellIcon } from '../905/576487';
 import { getLocalStorage } from '../905/657224';
-import { Y } from '../905/696438';
+import { PluginInstanceManager } from '../905/696438';
 import { Point } from '../905/736624';
 import { uF } from '../905/748636';
 import { D as _$$D } from '../905/771179';
-import { $A } from '../905/782918';
+import { isFullscreenDevHandoffView } from '../905/782918';
 import { PLUGIN_TIMEOUT_MS, PluginIframeMode, PLUGIN_RETRY_DELAY_MS } from '../905/968269';
 import { A as _$$A } from '../1617/568132';
 import { W_ } from '../figma_app/8833';
@@ -250,7 +250,7 @@ export class PluginUIManager {
     this._destroyIframe();
     this.innerIframeHtml = html;
     this.iframeId = iframeId;
-    this.outerIframe = Y.getInstance(this.iframeId);
+    this.outerIframe = PluginInstanceManager.getInstance(this.iframeId);
     if (this.iframeId === BUZZ_LEFT_PANEL_ID) atomStoreManager.set(FP, this.iframeId);
     this.outerIframe.removeAllChildren();
     this.innerIframe = this.outerIframe.createInnerIframe(this.innerIframeHtml, this.messageHandler, {
@@ -650,7 +650,7 @@ export class PluginUIManager {
    * (Original: terminateInspectPluginIfNoIframe)
    */
   terminateInspectPluginIfNoIframe(): void {
-    if (!this.timeout && hasInspectOrPanelCapability(this.capabilities) && !this.capabilities?.includes('codegen') && $A(debugState.getState().selectedView) && this.triggeredFrom !== 'related-link-preview') {
+    if (!this.timeout && hasInspectOrPanelCapability(this.capabilities) && !this.capabilities?.includes('codegen') && isFullscreenDevHandoffView(debugState.getState().selectedView) && this.triggeredFrom !== 'related-link-preview') {
       this.timeout = setTimeout(() => {
         if (!this.showingInnerIframe) {
           this.cancelCallback({

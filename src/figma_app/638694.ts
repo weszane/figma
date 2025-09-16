@@ -10,7 +10,7 @@ import { AutoLayout } from "../905/470281";
 import { _I, PY } from "../905/34809";
 import { E as _$$E, J } from "../figma_app/953812";
 import { A5, J5 } from "../figma_app/623414";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
 import { FRequestsStr } from "../905/384551";
@@ -37,7 +37,7 @@ function C(e) {
     children: [jsx(J5, {
       text: _$$O(DashboardSection.CONTENT),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.CONTENT
         }));
@@ -46,7 +46,7 @@ function C(e) {
     }), jsx(J5, {
       text: _$$O(DashboardSection.CONTENT, WorkspaceTab.WORKSPACES),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.CONTENT,
           orgAdminSettingsViewSecondaryTab: WorkspaceTab.WORKSPACES
@@ -62,7 +62,7 @@ function w(e) {
     children: jsx(J5, {
       text: _$$O(DashboardSection.BILLING),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.BILLING
         }));
@@ -76,7 +76,7 @@ function O(e) {
     children: jsx(J5, {
       text: _$$O(DashboardSection.SETTINGS),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.SETTINGS
         }));
@@ -90,7 +90,7 @@ function R(e) {
     children: jsx(J5, {
       text: _$$O(DashboardSection.SETTINGS),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.SETTINGS
         }));
@@ -104,7 +104,7 @@ function L(e) {
     children: [jsx(J5, {
       text: _$$O(DashboardSection.CONTENT),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.CONTENT
         }));
@@ -113,7 +113,7 @@ function L(e) {
     }), jsx(J5, {
       text: getI18nString("org_admin_tab.abandoned_drafts"),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.CONTENT,
           orgAdminSettingsViewSecondaryTab: WorkspaceTab.ABANDONED_DRAFTS
@@ -125,7 +125,7 @@ function L(e) {
     children: jsx(J5, {
       text: getI18nString("org_admin_tab.abandoned_drafts"),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "teamAdminConsole",
           teamId: e.selectedView.planId,
           teamAdminConsoleViewTab: DashboardSections.DRAFTS
@@ -140,7 +140,7 @@ function P(e) {
     children: jsx(J5, {
       text: getI18nString("team_view.toolbar.dashboard"),
       onClick: () => {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "billingGroupDashboard",
           selectedTab: FRequestsStr.REQUESTS
         }));
@@ -154,7 +154,7 @@ function D(e) {
     children: jsx(J5, {
       text: getI18nString("team_view.toolbar.dashboard"),
       onClick: () => {
-        e.dispatch(sf(e.selectedView.adminPlanType === OrganizationType.ORG ? {
+        e.dispatch(selectViewAction(e.selectedView.adminPlanType === OrganizationType.ORG ? {
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: DashboardSection.DASHBOARD
         } : {

@@ -1,233 +1,362 @@
-import { useMemo, useCallback, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { MeasurementUnit } from "../figma_app/763686";
-import s from "../vendor/3757";
-import { debugState } from "../905/407919";
-import { trackFileEventWithStore } from "../figma_app/901889";
-import { getI18nString } from "../905/303541";
-import { v4, AC, QN } from "../figma_app/655139";
-import { FIGMA_PROPERTIES, WEB, ANDROID, ANDROID_XML, IOS as _$$p, IOS_UIKIT } from "../905/359509";
-import { updateCodeExtensionPreferences, isCodegenSupported, getPluginUniqueId, filterCodegenPreferences, applyCodeExtensionPreferences } from "../905/515076";
-import { S0 } from "../figma_app/844435";
-import { d1 } from "../figma_app/603466";
-import { isActionSchema, isSelectSchema } from "../figma_app/155287";
-import { findCodegenLanguage } from "../905/661977";
-import { ip, kn, Uh } from "../905/762943";
-var o = s;
-export function $$y13(e) {
-  let t = v4().id;
-  let r = useSelector(e => e.mirror.appModel.devHandoffPreferences);
-  let a = e ?? t;
-  return useMemo(() => r.codeExtensionPreferences?.[a] ?? {}, [r, a]);
+import { isEmpty } from 'lodash-es'
+import { useCallback, useEffect, useMemo } from 'react'
+import { useSelector } from 'react-redux'
+import { getI18nString } from '../905/303541'
+import { ANDROID, ANDROID_XML, FIGMA_PROPERTIES, IOS, IOS_UIKIT, WEB } from '../905/359509'
+import { debugState } from '../905/407919'
+import { applyCodeExtensionPreferences, filterCodegenPreferences, getPluginUniqueId, isCodegenSupported, updateCodeExtensionPreferences } from '../905/515076'
+import { findCodegenLanguage } from '../905/661977'
+import { getUnit, resolveUnit, unitMapping } from '../905/762943'
+import { isActionSchema, isSelectSchema } from '../figma_app/155287'
+import { d1 } from '../figma_app/603466'
+import { AC, QN, v4 } from '../figma_app/655139'
+import { MeasurementUnit } from '../figma_app/763686'
+import { S0 } from '../figma_app/844435'
+import { trackFileEventWithStore } from '../figma_app/901889'
+
+/**
+ * Retrieves code extension preferences for a given language ID.
+ * @param languageId - The language ID or fallback.
+ * @returns Code extension preferences object.
+ * (Original: $$y13)
+ */
+export function getCodeExtensionPreferences(languageId?: string) {
+  const defaultId = v4().id
+  const devHandoffPreferences: any = useSelector<ObjectOf>(state => state.mirror.appModel.devHandoffPreferences)
+  const id = languageId ?? defaultId
+  return useMemo(() => devHandoffPreferences.codeExtensionPreferences?.[id] ?? {}, [devHandoffPreferences, id])
 }
-export function $$b15() {
-  let e = debugState.getState()?.mirror?.appModel;
-  let t = e?.devHandoffCodeLanguage?.id ?? "";
-  return e?.devHandoffPreferences?.codeExtensionPreferences?.[t] ?? {};
+
+/**
+ * Gets code extension preferences for the current dev handoff code language.
+ * (Original: $$b15)
+ */
+export function getCurrentCodeExtensionPreferences() {
+  const appModel = debugState.getState()?.mirror?.appModel
+  const languageId = appModel?.devHandoffCodeLanguage?.id ?? ''
+  return appModel?.devHandoffPreferences?.codeExtensionPreferences?.[languageId] ?? {}
 }
-export function $$T2() {
-  let e = useSelector(e => e.mirror.appModel.devHandoffPreferences);
-  let t = trackFileEventWithStore();
-  return useCallback((r, n, i) => {
-    let {
-      customSettings,
-      ...s
-    } = i;
-    o()(s) || (void 0 !== s.unit && (s.unit = ip(r, n, s.unit)), t("Dev Mode Preference Changed", {
-      languageType: r.type,
-      languageId: r.id,
-      ...s
-    }));
-    updateCodeExtensionPreferences(e, r, i);
-  }, [e, t]);
+
+/**
+ * Returns a callback to update code extension preferences and track events.
+ * (Original: $$T2)
+ */
+export function useUpdateCodeExtensionPreferences() {
+  const devHandoffPreferences = useSelector<ObjectOf>(state => state.mirror.appModel.devHandoffPreferences)
+  const trackEvent = trackFileEventWithStore()
+  return useCallback((language, plugin, preferences) => {
+    const { customSettings, ...rest } = preferences
+    if (!isEmpty(rest)) {
+      if (rest.unit !== undefined) {
+        rest.unit = getUnit(language, plugin, rest.unit)
+      }
+      trackEvent('Dev Mode Preference Changed', {
+        languageType: language.type,
+        languageId: language.id,
+        ...rest,
+      })
+    }
+    updateCodeExtensionPreferences(devHandoffPreferences, language, preferences)
+  }, [devHandoffPreferences, trackEvent])
 }
-export function $$I7(e) {
-  let t = v4();
-  let r = e ?? t;
-  let n = $$y13(r.id)?.unit ?? MeasurementUnit.PIXEL;
-  return "first-party" === r.type && r.id === FIGMA_PROPERTIES ? MeasurementUnit.PIXEL : n;
+
+/**
+ * Gets the measurement unit for a language.
+ * (Original: $$I7)
+ */
+export function getMeasurementUnit(language?: any) {
+  const defaultLang = v4()
+  const lang = language ?? defaultLang
+  const unit = getCodeExtensionPreferences(lang.id)?.unit ?? MeasurementUnit.PIXEL
+  return lang.type === 'first-party' && lang.id === FIGMA_PROPERTIES ? MeasurementUnit.PIXEL : unit
 }
-export function $$S12(e) {
-  let t = v4();
-  let r = e ?? t;
-  let {
-    unit = MeasurementUnit.PIXEL,
-    scaleFactor = 1
-  } = $$y13(r.id);
-  return "first-party" === r.type && r.id === FIGMA_PROPERTIES ? 1 : unit === MeasurementUnit.SCALED ? scaleFactor : 1;
+
+/**
+ * Gets the scale factor for a language.
+ * (Original: $$S12)
+ */
+export function getScaleFactor(language?: any) {
+  const defaultLang = v4()
+  const lang = language ?? defaultLang
+  const { unit = MeasurementUnit.PIXEL, scaleFactor = 1 } = getCodeExtensionPreferences(lang.id)
+  return lang.type === 'first-party' && lang.id === FIGMA_PROPERTIES ? 1 : unit === MeasurementUnit.SCALED ? scaleFactor : 1
 }
-let v = ({
-  preferences: e,
-  options: t = {}
-}) => e.customSettings?.onlyText === "true" && !t?.isTextProperty;
-function A(e, t, r = e => e, n) {
-  let i = v4();
-  let a = e ?? i;
-  let s = $$S12(a);
-  let o = $$y13(a.id);
-  return 1 === s || 0 === s || v({
-    preferences: o,
-    options: n
-  }) ? t.map(e => void 0 === e ? void 0 : r(e)) : t.map(e => void 0 === e ? void 0 : r(e / s));
+
+/**
+ * Checks if only text should be used based on preferences and options.
+ * (Original: v)
+ */
+function shouldUseOnlyText({
+  preferences,
+  options = {},
+}: {
+  preferences: any
+  options?: any
+}) {
+  return preferences.customSettings?.onlyText === 'true' && !options?.isTextProperty
 }
-export function $$x6(e, t, r = e => e, n) {
-  return A(e, [t], r, n)[0];
+
+/**
+ * Applies scale factor to an array of values.
+ * (Original: A)
+ */
+function applyScaleFactor(language: any, values: number[], transform: (v: number) => number = v => v, options?: any) {
+  const defaultLang = v4()
+  const lang = language ?? defaultLang
+  const scale = getScaleFactor(lang)
+  const preferences = getCodeExtensionPreferences(lang.id)
+  if (scale === 1 || scale === 0 || shouldUseOnlyText({ preferences, options })) {
+    return values.map(v => v === undefined ? undefined : transform(v))
+  }
+  return values.map(v => v === undefined ? undefined : transform(v / scale))
 }
-export function $$N0(e, t) {
-  let r = v4();
-  let i = e ?? r;
-  let a = $$S12(i);
-  let s = $$y13(i.id);
-  return useCallback(e => 1 === a || 0 === a || void 0 === e || v({
-    preferences: s,
-    options: t
-  }) ? void 0 === e ? void 0 : e : e * a, [t, s, a]);
+
+/**
+ * Applies scale factor to a single value.
+ * (Original: $$x6)
+ */
+export function applyScaleToValue(language: any, value: number, transform: (v: number) => number = v => v, options?: any) {
+  return applyScaleFactor(language, [value], transform, options)[0]
 }
-export function $$C4(e, t, r, n) {
-  let i = v4();
-  let a = e ?? i;
-  let s = A(a, t, r, n);
-  let o = $$M14(a, n);
-  return v({
-    preferences: $$y13(a.id),
-    options: n
-  }) ? s.map(e => `${e}${kn.pixel}`) : s.map(e => `${e}${o}`);
+
+/**
+ * Returns a callback to apply scale factor to values.
+ * (Original: $$N0)
+ */
+export function useScaleFactorCallback(language?: any, options?: any) {
+  const defaultLang = v4()
+  const lang = language ?? defaultLang
+  const scale = getScaleFactor(lang)
+  const preferences = getCodeExtensionPreferences(lang.id)
+  return useCallback((value: number) =>
+    scale === 1 || scale === 0 || value === undefined || shouldUseOnlyText({ preferences, options })
+      ? value === undefined ? undefined : value
+      : value * scale, [options, preferences, scale])
 }
-export function $$w16(e, t, r, n) {
-  let i = $$C4(e, [t], r, n);
-  if (void 0 !== t) return i[0];
+
+/**
+ * Applies scale factor and returns values with units.
+ * (Original: $$C4)
+ */
+export function getScaledValuesWithUnit(language: any, values: number[], transform: (v: number) => number, options?: any) {
+  const defaultLang = v4()
+  const lang = language ?? defaultLang
+  const scaledValues = applyScaleFactor(lang, values, transform, options)
+  const unit = getUnitForLanguage(lang, options)
+  return shouldUseOnlyText({ preferences: getCodeExtensionPreferences(lang.id), options })
+    ? scaledValues.map(v => `${v}${unitMapping.pixel}`)
+    : scaledValues.map(v => `${v}${unit}`)
 }
-export function $$O10(e) {
-  let {
-    id,
-    type
-  } = e;
+
+/**
+ * Applies scale factor and returns a single value with unit.
+ * (Original: $$w16)
+ */
+export function getScaledValueWithUnit(language: any, value: number, transform: (v: number) => number, options?: any) {
+  const result = getScaledValuesWithUnit(language, [value], transform, options)
+  if (value !== undefined)
+    return result[0]
+}
+
+/**
+ * Gets plugin info for a language.
+ * (Original: $$O10)
+ */
+export function getPluginInfo(language: any) {
+  const { id, type } = language
   return S0(id, {
-    searchLocalPlugins: "local-plugin" === type,
-    searchPublishedPlugins: "published-plugin" === type
-  });
+    searchLocalPlugins: type === 'local-plugin',
+    searchPublishedPlugins: type === 'published-plugin',
+  })
 }
-export function $$R3(e) {
-  let t = v4();
-  let r = $$O10(e ?? t);
-  return isCodegenSupported(e ?? t, r);
+
+/**
+ * Checks if codegen is supported for a language.
+ * (Original: $$R3)
+ */
+export function isCodegenSupportedForLanguage(language: any) {
+  const defaultLang = v4()
+  const plugin = getPluginInfo(language ?? defaultLang)
+  return isCodegenSupported(language ?? defaultLang, plugin)
 }
-export function $$L1(e, t) {
-  let r = $$O10(e);
-  return Uh(e, r, t);
+
+/**
+ * Resolves unit for a language and plugin.
+ * (Original: $$L1)
+ */
+export function resolveLanguageUnit(language: any, plugin?: any) {
+  const pluginInfo = getPluginInfo(language)
+  return resolveUnit(language, pluginInfo, plugin)
 }
-export function $$P11(e) {
-  switch (e) {
+
+/**
+ * Gets i18n string for a unit type.
+ * (Original: $$P11)
+ */
+export function getUnitLabel(unitType: string) {
+  switch (unitType) {
     case WEB:
-      return getI18nString("dev_handoff.alternative_units.rem_unit");
+      return getI18nString('dev_handoff.alternative_units.rem_unit')
     case ANDROID:
     case ANDROID_XML:
-      return getI18nString("dev_handoff.alternative_units.dp_unit");
-    case _$$p:
+      return getI18nString('dev_handoff.alternative_units.dp_unit')
+    case IOS:
     case IOS_UIKIT:
-      return getI18nString("dev_handoff.alternative_units.pt_unit");
+      return getI18nString('dev_handoff.alternative_units.pt_unit')
     default:
-      return getI18nString("dev_handoff.alternative_units.rem_unit");
+      return getI18nString('dev_handoff.alternative_units.rem_unit')
   }
 }
-export function $$D18(e) {
-  let t = v4();
-  return $$k17(e ?? t);
+
+/**
+ * Gets unit label for a language.
+ * (Original: $$D18)
+ */
+export function getLanguageUnitLabel(language: any) {
+  const defaultLang = v4()
+  return getUnitLabelForLanguage(language ?? defaultLang)
 }
-export function $$k17(e) {
-  let t = $$L1(e);
-  return "first-party" === e.type ? $$P11(e.id) : t;
+
+/**
+ * Gets unit label for a language, considering first-party.
+ * (Original: $$k17)
+ */
+export function getUnitLabelForLanguage(language: any) {
+  const unit = resolveLanguageUnit(language)
+  return language.type === 'first-party' ? getUnitLabel(language.id) : unit
 }
-export function $$M14(e, t) {
-  let r = v4();
-  let n = e ?? r;
-  let i = $$I7(n);
-  let s = $$L1(n, t);
-  return i === MeasurementUnit.PIXEL ? kn.pixel : s;
+
+/**
+ * Gets unit for a language and options.
+ * (Original: $$M14)
+ */
+export function getUnitForLanguage(language: any, options?: any) {
+  const defaultLang = v4()
+  const lang = language ?? defaultLang
+  const unit = getMeasurementUnit(lang)
+  const resolvedUnit = resolveLanguageUnit(lang, options)
+  return unit === MeasurementUnit.PIXEL ? unitMapping.pixel : resolvedUnit
 }
-export function $$F8({
-  localCodeLanguage: e,
-  includeActions: t = !0,
-  includeSelectSettings: r = !0
+
+/**
+ * Returns codegen preferences settings for a language and plugin.
+ * (Original: $$F8)
+ */
+export function useCodegenPreferencesSettings({
+  localCodeLanguage,
+  includeActions = true,
+  includeSelectSettings = true,
+}: {
+  localCodeLanguage?: any
+  includeActions?: boolean
+  includeSelectSettings?: boolean
 } = {}) {
-  let i = v4();
-  let a = e ?? i;
-  let s = AC(a);
-  let o = $$y13(a.id);
-  let l = $$T2();
-  return useMemo(() => $$j5({
-    includeActions: t,
-    includeSelectSettings: r,
-    codeLanguage: a,
-    plugin: s,
-    codeExtensionPreferences: o,
-    onChangePreferences: l
-  }), [t, r, a, s, o, l]);
+  const defaultLang = v4()
+  const language = localCodeLanguage ?? defaultLang
+  const plugin = AC(language)
+  const preferences = getCodeExtensionPreferences(language.id)
+  const onChangePreferences = useUpdateCodeExtensionPreferences()
+  return useMemo(() => getCodegenPreferencesSettings({
+    includeActions,
+    includeSelectSettings,
+    codeLanguage: language,
+    plugin,
+    codeExtensionPreferences: preferences,
+    onChangePreferences,
+  }), [includeActions, includeSelectSettings, language, plugin, preferences, onChangePreferences])
 }
-export function $$j5({
-  includeActions: e = !1,
-  includeSelectSettings: t = !0,
-  codeLanguage: r,
-  plugin: n,
-  codeExtensionPreferences: i,
-  onChangePreferences: a
+
+/**
+ * Returns codegen preferences settings for a language and plugin.
+ * (Original: $$j5)
+ */
+export function getCodegenPreferencesSettings({
+  includeActions = false,
+  includeSelectSettings = true,
+  codeLanguage,
+  plugin,
+  codeExtensionPreferences,
+  onChangePreferences,
+}: {
+  includeActions?: boolean
+  includeSelectSettings?: boolean
+  codeLanguage: any
+  plugin: any
+  codeExtensionPreferences: any
+  onChangePreferences: any
 }) {
-  let s = [];
-  if (!n || "first-party" === r.type || getPluginUniqueId(n) !== r.id) return s;
-  for (let o of filterCodegenPreferences(n, findCodegenLanguage(n, r.pluginLanguage))) {
-    e && isActionSchema(o) && s.push({
-      name: o.propertyName,
-      displayText: o?.label || o.propertyName,
-      callback: () => d1.codegenPreferencesChange({
-        propertyName: o.propertyName
-      }),
-      recordingKey: o.propertyName
-    });
-    t && isSelectSchema(o) && s.push({
-      name: o.propertyName,
-      recordingKey: o.propertyName,
-      displayText: o?.label ?? o.propertyName,
-      children: o.options.map((e, t) => ({
-        name: e.value,
-        displayText: e.label,
-        isChecked: i?.customSettings?.[o.propertyName] ? i?.customSettings?.[o.propertyName] === e.value : 0 === t,
-        callback: () => a(r, n, {
-          customSettings: {
-            ...i?.customSettings,
-            [o.propertyName]: e.value
-          }
-        }),
-        recordingKey: e.value
-      }))
-    });
+  const settings = []
+  if (!plugin || codeLanguage.type === 'first-party' || getPluginUniqueId(plugin) !== codeLanguage.id) {
+    return settings
   }
-  return s;
+  for (const pref of filterCodegenPreferences(plugin, findCodegenLanguage(plugin, codeLanguage.pluginLanguage))) {
+    if (includeActions && isActionSchema(pref)) {
+      settings.push({
+        name: pref.propertyName,
+        displayText: pref?.label || pref.propertyName,
+        callback: () => d1.codegenPreferencesChange({ propertyName: pref.propertyName }),
+        recordingKey: pref.propertyName,
+      })
+    }
+    if (includeSelectSettings && isSelectSchema(pref)) {
+      settings.push({
+        name: pref.propertyName,
+        recordingKey: pref.propertyName,
+        displayText: pref?.label ?? pref.propertyName,
+        children: pref.options.map((option, idx) => ({
+          name: option.value,
+          displayText: option.label,
+          isChecked: codeExtensionPreferences?.customSettings?.[pref.propertyName]
+            ? codeExtensionPreferences?.customSettings?.[pref.propertyName] === option.value
+            : idx === 0,
+          callback: () => onChangePreferences(codeLanguage, plugin, {
+            customSettings: {
+              ...codeExtensionPreferences?.customSettings,
+              [pref.propertyName]: option.value,
+            },
+          }),
+          recordingKey: option.value,
+        })),
+      })
+    }
+  }
+  return settings
 }
-export function $$U9() {
-  let e = v4();
-  let t = QN();
+
+/**
+ * Applies code extension preferences when plugin language changes.
+ * (Original: $$U9)
+ */
+export function useApplyCodeExtensionPreferences() {
+  const language = v4()
+  const plugin = QN()
   useEffect(() => {
-    if (!t) return;
-    let r = e.pluginLanguage;
-    r && applyCodeExtensionPreferences(t, findCodegenLanguage(t, r));
-  }, [e, t]);
+    if (!plugin)
+      return
+    const pluginLanguage = language.pluginLanguage
+    if (pluginLanguage) {
+      applyCodeExtensionPreferences(plugin, findCodegenLanguage(plugin, pluginLanguage))
+    }
+  }, [language, plugin])
 }
-export const $Q = $$N0;
-export const $s = $$L1;
-export const Bs = $$T2;
-export const Em = $$R3;
-export const Fm = $$C4;
-export const Ke = $$j5;
-export const QO = $$x6;
-export const RH = $$I7;
-export const SF = $$F8;
-export const YE = $$U9;
-export const aq = $$O10;
-export const b1 = $$P11;
-export const fb = $$S12;
-export const gc = $$y13;
-export const ie = $$M14;
-export const lX = $$b15;
-export const qM = $$w16;
-export const wA = $$k17;
-export const wQ = $$D18;
+
+// Exported variable names refactored to match new function names
+export const $Q = useScaleFactorCallback
+export const $s = resolveLanguageUnit
+export const Bs = useUpdateCodeExtensionPreferences
+export const Em = isCodegenSupportedForLanguage
+export const Fm = getScaledValuesWithUnit
+export const Ke = getCodegenPreferencesSettings
+export const QO = applyScaleToValue
+export const RH = getMeasurementUnit
+export const SF = useCodegenPreferencesSettings
+export const YE = useApplyCodeExtensionPreferences
+export const aq = getPluginInfo
+export const b1 = getUnitLabel
+export const fb = getScaleFactor
+export const gc = getCodeExtensionPreferences
+export const ie = getUnitForLanguage
+export const lX = getCurrentCodeExtensionPreferences
+export const qM = getScaledValueWithUnit
+export const wA = getUnitLabelForLanguage
+export const wQ = getLanguageUnitLabel

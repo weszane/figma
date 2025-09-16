@@ -5,7 +5,7 @@ import { EmojiCppBindings } from "../figma_app/763686";
 import { permissionScopeHandler } from "../905/189185";
 import { useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { _Q } from "../figma_app/67099";
 import { getViewportInfo, scaleRect, isRectInside } from "../figma_app/62612";
 import { j as _$$j } from "../905/214564";
@@ -20,7 +20,7 @@ export function $$_0() {
     subscribeToUpdates_expensive: !0
   });
   let [g, j] = useState(null);
-  let b = "whiteboard" === lg();
+  let b = "whiteboard" === getCurrentFileType();
   let y = useCallback(() => {
     if (e) {
       let {

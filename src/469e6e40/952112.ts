@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
-import { $ } from "../905/692618";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
+import { BannerButton } from "../905/692618";
 import { I } from "../469e6e40/329965";
 import { UI3ConditionalWrapper } from "../905/341359";
 import { getI18nString, renderI18nText } from "../905/303541";
@@ -17,7 +17,7 @@ export function $$u0({
     }));
   };
   return jsx(UI3ConditionalWrapper, {
-    children: jsxs(Yy, {
+    children: jsxs(BannerInset, {
       variant: "brand",
       icon: jsx(I, {
         style: {
@@ -25,7 +25,7 @@ export function $$u0({
         }
       }),
       onDismiss: a,
-      children: [jsx(Q, {
+      children: [jsx(BannerMessage, {
         title: getI18nString("project_creation.introducing_connected_projects"),
         children: jsx("div", {
           className: "connected_projects_admin_banner--onboardingBannerDescription--beviJ",
@@ -38,7 +38,7 @@ export function $$u0({
             })
           })
         })
-      }), jsx($, {
+      }), jsx(BannerButton, {
         onClick: () => {
           e();
           a();

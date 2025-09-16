@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { BadgeColor } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { l as _$$l } from "../905/152724";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentUser } from "../905/372672";
 import { Ro } from "../figma_app/805373";
@@ -24,7 +24,7 @@ export function $$h0(e) {
     children: [jsxs("div", {
       className: "profile_tile--profileRowTileProfileInfoClickTarget--yOlvx",
       onClick: () => {
-        h(sf({
+        h(selectViewAction({
           view: "communityHub",
           subView: "handle",
           handle: profile.profile_handle
@@ -76,7 +76,7 @@ export function $$g1(e) {
     onClick: e => {
       e.stopPropagation();
       trackingProperties && logAndTrackCTA(trackingProperties, trackingEventName);
-      g(sf({
+      g(selectViewAction({
         view: "communityHub",
         subView: "handle",
         handle: profile.profile_handle

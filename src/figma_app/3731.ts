@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useSelector } from "react-redux";
 import { t as _$$t } from "../905/331623";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Ro } from "../figma_app/805373";
 import { oi, YV, D8, zc, VT, t7, kL } from "../905/498633";
 import { A } from "../6041/915738";
@@ -13,7 +13,7 @@ export function $$p0(e) {
   let p = useSelector(t => e.profileId ? t.authedProfilesById[e.profileId] : null);
   let _ = useSelector(t => e.orgId ? t.orgById[e.orgId] : null);
   let h = useSelector(t => e.teamId ? t.teams[e.teamId] : null);
-  let m = "whiteboard" === lg();
+  let m = "whiteboard" === getCurrentFileType();
   let g = !e.forceAvatar;
   let f = 16 === e.size ? oi : 32 === e.size ? YV : D8;
   e.skipExternalTeamsIcon || (t = 16 === e.size ? jsx(_$$t, {

@@ -11,7 +11,7 @@ import { a as _$$a } from "../905/332662";
 import { Y as _$$Y } from "../905/347011";
 import { H as _$$H } from "../905/474029";
 import { DN, ox } from "../figma_app/909778";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { trackTeamEvent } from "../figma_app/314264";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
@@ -128,7 +128,7 @@ export function $$O2(e) {
         clickedResourceType: "team",
         resourceIdOrKey: e.team.id
       }));
-      i(sf({
+      i(selectViewAction({
         view: "team",
         teamId: e.team.id
       }));

@@ -7,7 +7,7 @@ import { uh as _$$uh, Kh } from "../figma_app/370763";
 import { rM } from "../figma_app/241541";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
-import { m0, vn, E3 } from "../figma_app/976749";
+import { isDevHandoffEditorType, isIllustrationEditorType, getSelectedEditorType } from "../figma_app/976749";
 import { k as _$$k } from "../figma_app/564183";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
@@ -40,8 +40,8 @@ export function $$A3() {
   return !e && (r || isVsCodeEnvironment() && getFeatureFlags().dt_vscode_ready_for_dev);
 }
 export function $$x4() {
-  let e = m0();
-  let t = vn();
+  let e = isDevHandoffEditorType();
+  let t = isIllustrationEditorType();
   return e ? "handoff" : t ? "illustration" : "design";
 }
 function N(e, t) {
@@ -56,7 +56,7 @@ export function $$C2() {
   let e = useAtomWithSubscription(w4);
   let t = useAtomWithSubscription(Fj);
   let r = useAtomWithSubscription(go);
-  let i = E3();
+  let i = getSelectedEditorType();
   let a = useLatestRef(i);
   let [l, d] = useState(null);
   let c = p8("isReadOnly");

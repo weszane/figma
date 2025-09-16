@@ -5,7 +5,7 @@ import { hO, Hl, G4 } from "../figma_app/545293";
 import { CZ, l4 } from "../905/124270";
 import { jN } from "../905/171315";
 import { Hv } from "../905/61477";
-import { oB, sf } from "../905/929976";
+import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
 import { nG, qr, Je, PP, PI } from "../905/977218";
 import { CreatorResourceType, $L, PublicModelType, SearchTypeMode } from "../figma_app/162807";
@@ -30,7 +30,7 @@ export function $$A0(e, t, i) {
   let I = useAtomWithSubscription(hO.currentSearchAtom);
   let E = useAtomWithSubscription(hO.sortByAtom);
   return useCallback((n, r, a, o, f, _, x = !1) => {
-    if (d(oB()), "fragment_search_modal" === e) {
+    if (d(hideDropdownAction()), "fragment_search_modal" === e) {
       if (!I) throw Error("currentFragmentSearch not set");
       Hl(I.input, "input-text" === I.input.type ? G4.ACTIONS_ASSETS_TAB_DETAIL : G4.ACTIONS_VISUAL_SEARCH_VIEW, a, E);
       return;
@@ -46,7 +46,7 @@ export function $$A0(e, t, i) {
         entryPoint: e
       }))), d(PP({
         top: 0
-      })), d(sf({
+      })), d(selectViewAction({
         view: "search",
         entryPoint: e,
         previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0
@@ -65,7 +65,7 @@ export function $$A0(e, t, i) {
     }
     o || x || (d(PP({
       top: 0
-    })), d(sf({
+    })), d(selectViewAction({
       view: "search",
       entryPoint: e,
       previousView: v && (isIncludedView(v) || isOrgView(v)) ? v : void 0

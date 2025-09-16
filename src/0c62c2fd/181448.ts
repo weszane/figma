@@ -18,7 +18,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { Yh } from "../figma_app/888478";
 import { $ as _$$$ } from "../0c62c2fd/637169";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { pr } from "../figma_app/952446";
 import { Fy } from "../figma_app/623300";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -151,7 +151,7 @@ export function $$U1({
   shouldUseButtonRow: ee
 }) {
   let et = useDispatch();
-  let er = "whiteboard" === lg();
+  let er = "whiteboard" === getCurrentFileType();
   let [ea, es] = useState(!1);
   let ei = useAtomWithSubscription(_$$l2);
   let en = useAtomWithSubscription(Yh);

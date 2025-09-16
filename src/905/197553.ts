@@ -1,5 +1,5 @@
 import { PluginIframeMode } from "../905/968269";
-import { Y } from "../905/696438";
+import { PluginInstanceManager } from "../905/696438";
 let a = `
   <body>
   <script>
@@ -38,7 +38,7 @@ let s = class e {
       let t = e.data;
       t.id in this.messageCallbacks && (this.messageCallbacks[t.id](t), delete this.messageCallbacks[t.id]);
     };
-    this.outerIframe = Y.getInstance(PluginIframeMode.FETCH);
+    this.outerIframe = PluginInstanceManager.getInstance(PluginIframeMode.FETCH);
     this.allowedDomains = t.allowedDomains;
     this.isLocal = t.isLocal;
   }

@@ -11,7 +11,7 @@ import p from "classnames";
 import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { formatI18nMessage } from "../905/482208";
-import { T as _$$T } from "../905/868547";
+import { isUIHiddenOrLocked } from "../905/868547";
 import { z4 } from "../905/37051";
 import { Um } from "../905/848862";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -173,7 +173,7 @@ export let $$j1 = memo(function ({
   let i = $$U3();
   let o = useSelector(e => e.progressBarState.mode);
   let l = selectCurrentFile();
-  let d = _$$T(o);
+  let d = isUIHiddenOrLocked(o);
   if (!i(e)) return null;
   let c = e.dontChainRecordingKeys ? e.recordingKey : generateRecordingKey(r, e.recordingKey);
   switch (e.type) {
@@ -218,7 +218,7 @@ export function $$U3() {
   let t = useSelector(e => e.mirror.appModel.currentTool);
   let r = selectCurrentFile();
   let n = useSelector(e => e.progressBarState.mode);
-  let s = _$$T(n);
+  let s = isUIHiddenOrLocked(n);
   let o = useSelector(e => s ? !r?.canEdit : e.mirror.appModel.isReadOnly);
   let l = useSelector(e => e.mirror.appModel.isSceneReadOnly);
   let d = useSelector(e => !!e.user);

@@ -10,7 +10,7 @@ import { UI3ConditionalWrapper } from "../905/341359";
 import { getFeatureFlags } from "../905/601108";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -44,7 +44,7 @@ export function $$R1(e) {
   let O = useSelector(selectTeams);
   let q = useSelector(e => e.orgById);
   let U = () => {
-    R(oB());
+    R(hideDropdownAction());
     logAndTrackCTA({
       userId: B?.id,
       fileKey: E?.key,

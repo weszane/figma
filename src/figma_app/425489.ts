@@ -5,7 +5,7 @@ import { um, atomStoreManager } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { fullscreenValue } from "../figma_app/455680";
 import { replaceSelection } from "../figma_app/741237";
-import { yw } from "../figma_app/617727";
+import { interactionTestAtom } from "../figma_app/617727";
 import { Zh } from "../figma_app/2590";
 import { s as _$$s } from "../905/291518";
 import { Ew } from "../figma_app/170018";
@@ -76,7 +76,7 @@ let $$S1 = um(T, (e, t) => {
         } = t.payload;
         _$$A.navigateTo(requestedNodeId);
         _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
-        atomStoreManager.set(yw, !0);
+        atomStoreManager.set(interactionTestAtom, !0);
         let l = sceneGraph.get(requestedNodeId);
         assert(!!l, "expected selectedNode to exist");
         let d = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);
@@ -122,7 +122,7 @@ let $$S1 = um(T, (e, t) => {
         };
         _$$A.navigateTo(requestedNodeId);
         _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
-        atomStoreManager.set(yw, !0);
+        atomStoreManager.set(interactionTestAtom, !0);
         let d = sceneGraph.get(requestedNodeId);
         assert(!!d, "expected selectedNode to exist");
         let u = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);

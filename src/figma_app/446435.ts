@@ -6,7 +6,7 @@ import { isCommandOrShift } from "../905/63728";
 import { getTranslatedDynamicContent, getI18nString } from "../905/303541";
 import { sz } from "../figma_app/216696";
 import { rL } from "../figma_app/49598";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { _ as _$$_ } from "../905/793009";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
@@ -137,7 +137,7 @@ export function $$N2(e) {
         left: e.clientX
       }
     };
-    t(j7({
+    t(showDropdownThunk({
       type: $$x0,
       data: n
     }));

@@ -34,7 +34,7 @@ import { d as _$$d } from "../vendor/456530";
 import { P as _$$P } from "../vendor/348225";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { getViewportZoom } from "../figma_app/62612";
 import { $J } from "../figma_app/634656";
 import { s as _$$s3 } from "../figma_app/666387";
@@ -426,7 +426,7 @@ function ep({
           T.set((i.point.y - e.y) / e.height);
         }
         onDragStart(e);
-        h(jD());
+        h(hideTooltip());
       },
       onPointerDown: L,
       style: {

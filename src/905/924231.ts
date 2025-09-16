@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { h as _$$h } from "../905/207101";
 import { SvgComponent } from "../905/714743";
 import { Rw } from "../figma_app/91703";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { cW, $1 } from "../figma_app/844435";
 import { selectCurrentFile } from "../figma_app/516028";
 import { getPluginVersion, canRunPlugin } from "../figma_app/300692";
@@ -32,7 +32,7 @@ export function $$E0({
   let C = cW();
   let T = useSelector(e => e.installedPluginVersions.plugins);
   let k = $1();
-  let R = E3();
+  let R = getSelectedEditorType();
   let N = selectCurrentFile();
   let P = useDispatch();
   let O = useCallback(async () => {

@@ -57,8 +57,8 @@ import { A as _$$A4 } from "../5724/600086";
 import { FlashActions } from "../905/573154";
 import { A as _$$A5 } from "../1617/720259";
 import { NQ } from "../905/508367";
-import { H as _$$H } from "../905/202181";
-import { k as _$$k4 } from "../905/93362";
+import { sessionApiInstance } from "../905/202181";
+import { UserAPIHandlers } from "../905/93362";
 var y = A;
 function v(e) {
   let t = useRef(!1);
@@ -2034,7 +2034,7 @@ function ts() {
   });
   let p = useCallback(() => {
     trackAuthEvent("send_validation_email_attempt", s);
-    _$$H.sendValidationEmail().then(t => {
+    sessionApiInstance.sendValidationEmail().then(t => {
       trackAuthEvent("send_validation_email_success", s);
       let i = resolveMessage(t);
       if (i) return e(FlashActions.flash(i));
@@ -2047,7 +2047,7 @@ function ts() {
   useEffect(() => {
     let e = null;
     let t = () => {
-      _$$k4.getUnverified().then(n => {
+      UserAPIHandlers.getUnverified().then(n => {
         if (n?.data?.meta?.email_validated_at) {
           let e = NQ(i, "fuid", n?.data?.meta?.id);
           setTimeout(() => {

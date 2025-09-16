@@ -6,7 +6,7 @@ import { ViewPathManager } from "../figma_app/422062";
 import { getTabTitle } from "../figma_app/471982";
 import { Af } from "../figma_app/49598";
 import { l5 } from "../figma_app/559491";
-import { Qv, sf } from "../905/929976";
+import { hydrateFileBrowser, selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { yJ as _$$yJ, bE } from "../figma_app/598926";
 import { OB } from "../figma_app/91703";
@@ -17,9 +17,9 @@ import { getRepoById } from "../905/760074";
 import { Qr, hL, OR } from "../905/697795";
 import { B8 } from "../figma_app/682945";
 import { isTeamInGracePeriod } from "../figma_app/345997";
-import { $Z, vU, Np, Mo } from "../figma_app/193867";
+import { $Z, mapPathToSelectedView, selectedViewToPath, isResourceOrCommunityHubView } from "../figma_app/193867";
 import { w } from "../figma_app/119601";
-import { YH, _X } from "../figma_app/502247";
+import { YH, getUserState } from "../figma_app/502247";
 import { mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { NavigationRoutes } from "../905/548208";
 import { o0 } from "../905/844131";
@@ -36,9 +36,9 @@ let $$P0 = e => t => function (r) {
   let o = e.getState().selectedView;
   t(r);
   let P = e.getState();
-  if (Qv.matches(r)) {
+  if (hydrateFileBrowser.matches(r)) {
     let t = P.selectedView;
-    if (t === o0 && (t = getInitialOptions().selected_view || vU(P, customHistory.location.pathname, customHistory.location.search, customHistory.location.hash)), "fullscreen" === t.view && t.fileKey) {
+    if (t === o0 && (t = getInitialOptions().selected_view || mapPathToSelectedView(P, customHistory.location.pathname, customHistory.location.search, customHistory.location.hash)), "fullscreen" === t.view && t.fileKey) {
       let {
         fileKey
       } = t;
@@ -56,10 +56,10 @@ let $$P0 = e => t => function (r) {
         teamViewTab: NavigationRoutes.SETTINGS
       });
     }
-    t !== o0 ? e.dispatch(sf(t)) : P.user?.drafts_folder_id ? e.dispatch(sf({
+    t !== o0 ? e.dispatch(selectViewAction(t)) : P.user?.drafts_folder_id ? e.dispatch(selectViewAction({
       view: "folder",
       folderId: P.user.drafts_folder_id
-    })) : e.dispatch(sf({
+    })) : e.dispatch(selectViewAction({
       view: "recentsAndSharing"
     }));
   } else if (OB.matches(r)) {
@@ -68,14 +68,14 @@ let $$P0 = e => t => function (r) {
       fileKey: r.payload.file.key,
       editorType: r.payload.fullscreenEditorType
     };
-    let t = Np(P, e);
+    let t = selectedViewToPath(P, e);
     customHistory.replace(t, {
       ...e,
       jsCommitHash: Qr()
     });
-  } else if (sf.matches(r)) {
+  } else if (selectViewAction.matches(r)) {
     if ("prototype" !== o.view && "prototype" === r.payload.view && q()) {
-      let e = Np(P, r.payload);
+      let e = selectedViewToPath(P, r.payload);
       customHistory.redirect(e);
     }
     "fullscreen" === r.payload.view && ("fullscreen" !== o.view || r.payload.editorType !== o.editorType) && B8(r.payload.editorType);
@@ -83,10 +83,10 @@ let $$P0 = e => t => function (r) {
       selectedView
     } = e.getState();
     if (!("inlinePreview" in selectedView && selectedView.inlinePreview) && !r.payload.fromPopstate) {
-      let t = Np(P, r.payload);
-      customHistory.location.pathname + customHistory.location.search !== t ? (("fullscreen" !== r.payload.view || r.payload.fileKey !== getInitialOptions().editing_file?.key) && !YH && w() && _X("fileBrowserHistory middleware selectView").then(t => {
-        e.dispatch(Qv(t.data.meta));
-      }), !r.payload.forceReplaceState && (customHistory.location.state || Mo(o)) && $$w1(o, r.payload) ? customHistory.push(t, {
+      let t = selectedViewToPath(P, r.payload);
+      customHistory.location.pathname + customHistory.location.search !== t ? (("fullscreen" !== r.payload.view || r.payload.fileKey !== getInitialOptions().editing_file?.key) && !YH && w() && getUserState("fileBrowserHistory middleware selectView").then(t => {
+        e.dispatch(hydrateFileBrowser(t.data.meta));
+      }), !r.payload.forceReplaceState && (customHistory.location.state || isResourceOrCommunityHubView(o)) && $$w1(o, r.payload) ? customHistory.push(t, {
         ...r.payload,
         previousSelectedView: o,
         jsCommitHash: Qr()
@@ -115,7 +115,7 @@ let $$P0 = e => t => function (r) {
     let a = t && "communityHub" === t.view && "plugin" === t.subView && t.publishedPluginId;
     if (a && n && n.some(e => e.id === a)) {
       if (customHistory) {
-        let e = Np(P, t);
+        let e = selectedViewToPath(P, t);
         customHistory.replace(e);
       }
       OR(P, t);
@@ -129,7 +129,7 @@ let $$P0 = e => t => function (r) {
     let t = e.getState().selectedView;
     if ("folder" === t.view && t.folderId === r.payload.id) {
       getFeatureFlags().folder_page_fix_tab_titles || OR(P, t);
-      let e = Np(P, t);
+      let e = selectedViewToPath(P, t);
       customHistory.replace(e, {
         ...t,
         jsCommitHash: Qr()
@@ -143,7 +143,7 @@ let $$P0 = e => t => function (r) {
         let n = getRepoById(e, P.repos);
         if (n && n.id === r.payload.repo.id) {
           OR(P, t);
-          let e = Np(P, t);
+          let e = selectedViewToPath(P, t);
           customHistory && customHistory.replace(e, {
             ...t,
             jsCommitHash: Qr()
@@ -155,7 +155,7 @@ let $$P0 = e => t => function (r) {
     let t = e.getState().selectedView;
     if ("fullscreen" === t.view && r.payload.file.key === t.fileKey || "prototype" === t.view && r.payload.file.key === t.file.key) {
       OR(P, t);
-      let e = Np(P, t);
+      let e = selectedViewToPath(P, t);
       customHistory && customHistory.replace(e, {
         ...t,
         jsCommitHash: Qr()
@@ -163,7 +163,7 @@ let $$P0 = e => t => function (r) {
     }
   } else if (Rz.matches(r)) {
     let t = e.getState().selectedView;
-    t?.view === "search" && (customHistory.replace(Np(P, t), {
+    t?.view === "search" && (customHistory.replace(selectedViewToPath(P, t), {
       ...t,
       jsCommitHash: Qr()
     }), OR(P, t));
@@ -172,7 +172,7 @@ let $$P0 = e => t => function (r) {
     resourceIdOrKey: r.payload.resourceIdOrKey
   }) : 0 === L && (L = setTimeout(function () {
     L = 0;
-    null === e.getState().selectedView && e.dispatch(sf({
+    null === e.getState().selectedView && e.dispatch(selectViewAction({
       view: "recentsAndSharing"
     }));
   }, 0));

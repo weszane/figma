@@ -5,7 +5,7 @@ import s from "../vendor/675871";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { T1 } from "../figma_app/545293";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { getVisibleArea } from "../figma_app/62612";
 import { p8 } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -291,7 +291,7 @@ export function $$P14() {
   let t = C7();
   let r = selectCurrentFile()?.canEdit;
   let i = p8("topLevelMode") === ViewType.LAYOUT;
-  let s = cJ();
+  let s = isSitesFileType();
   return e && t && r && i && !!Fullscreen && !s;
 }
 var D = (e => (e.ASSET_NOT_FOUND = "asset_not_found", e.STATE_TO_STATE_GROUP = "state_to_state_group", e))(D || {});

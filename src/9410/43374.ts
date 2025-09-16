@@ -6,7 +6,7 @@ import { DiagramElementType, InteractionCpp, HideMode, Positioning } from "../fi
 import { parsePxInt } from "../figma_app/783094";
 import { isIpadDevice } from "../figma_app/778880";
 import { jw } from "../figma_app/327588";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Ty8 } from "../figma_app/27776";
 let h = parsePxInt(Ty8);
 export function $$m4() {
@@ -29,7 +29,7 @@ export function $$m4() {
       selectionProperties: e
     }
   }) => e.nodeSelectedValidForQuickAdd);
-  let n = lg();
+  let n = getCurrentFileType();
   return "whiteboard" === n ? t ? 40 : i && isIpadDevice ? 40 : r ? 20 + h / 2 : InteractionCpp?.shouldRenderTableUiForSelection() !== HideMode.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
 }
 export function $$f3() {

@@ -8,10 +8,10 @@ import { debugState } from "../905/407919";
 import { generateUUIDv4 } from "../905/871474";
 import { VisualBellActions } from "../905/302958";
 import { q4 } from "../905/294085";
-import { j7, oB } from "../905/929976";
-import { JV } from "../figma_app/976749";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
+import { getEditorTypeIfFullscreen } from "../figma_app/976749";
 import { getProductType } from "../figma_app/314264";
-import { T as _$$T } from "../905/868547";
+import { isUIHiddenOrLocked } from "../905/868547";
 import { l as _$$l } from "../905/202425";
 import { FEditorType } from "../figma_app/53721";
 import { jv } from "../figma_app/357047";
@@ -44,7 +44,7 @@ export function $$M0({
   moduleToOpen: t
 }) {
   let r = debugState.dispatch;
-  if (_$$T(debugState.getState().progressBarState.mode) || "fullscreen" !== debugState.getState().selectedView.view) return;
+  if (isUIHiddenOrLocked(debugState.getState().progressBarState.mode) || "fullscreen" !== debugState.getState().selectedView.view) return;
   let n = $$W9(t);
   Fi({
     isQAV2: n,
@@ -78,7 +78,7 @@ export function $$M0({
     r(VisualBellActions.dequeue({
       matchTimeout: "ephemeral"
     }));
-  } else r(j7({
+  } else r(showDropdownThunk({
     type: jv,
     hasOwnEscKeyHandler: !0,
     data: {
@@ -101,7 +101,7 @@ export function $$F12(e, t, r) {
     atomStoreManager.set(dd, null);
     _$$R();
     _$$b();
-  } else t?.type === jv && e(oB());
+  } else t?.type === jv && e(hideDropdownAction());
   return !0;
 }
 export function $$j1(e) {
@@ -156,7 +156,7 @@ export function $$z8() {
 export function $$W9(e) {
   let t = AppStateTsApi.uiState().isUI3.getCopy();
   let r = debugState.getState().selectedView;
-  let n = JV(r);
+  let n = getEditorTypeIfFullscreen(r);
   let a = [FEditorType.Figmake];
   getFeatureFlags().figjam_quick_actions_v2 || a.push(FEditorType.Whiteboard);
   return !!(n && !a.includes(n) && (t || e));
@@ -164,7 +164,7 @@ export function $$W9(e) {
 export let $$K4 = n((e, t) => {
   let r = t?.isUI3 ?? AppStateTsApi.uiState().isUI3.getCopy();
   let n = debugState.getState().selectedView;
-  let a = t?.editorType ?? JV(n);
+  let a = t?.editorType ?? getEditorTypeIfFullscreen(n);
   return !!(a && (a === FEditorType.Design || a === FEditorType.Illustration || a === FEditorType.Slides) && (r || e));
 });
 class Y {

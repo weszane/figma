@@ -18,7 +18,7 @@ import { ServiceCategories as _$$e } from '../905/165054';
 import { p as _$$p2 } from '../905/185998';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
-import { Q as _$$Q } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { N as _$$N2 } from '../905/438674';
 import { a as _$$a3 } from '../905/462280';
 import { AutoLayout } from '../905/470281';
@@ -40,7 +40,7 @@ import { B as _$$B } from '../4452/541264';
 import { v as _$$v } from '../4452/562448';
 import { m as _$$m } from '../4452/688074';
 import { OrgIdpManagementPageView } from '../figma_app/43951';
-import { Yy } from '../figma_app/59509';
+import { BannerInset } from '../figma_app/59509';
 import { JR, Wi } from '../figma_app/162641';
 import { useSubscription } from '../figma_app/288654';
 import { setupDynamicConfigHandler } from '../figma_app/594947';
@@ -1143,9 +1143,9 @@ function ek(e) {
     className: 'xh8yej3 x78zum5',
     children: jsx('div', {
       className: 'x98rzlu x1vqgdyp x1cc5qun',
-      children: jsx(Yy, {
+      children: jsx(BannerInset, {
         variant: 'warn',
-        children: jsx(_$$Q, {
+        children: jsx(BannerMessage, {
           title: getI18nString('idp_management.sso_only_warning_banner.title'),
           children: a
         })

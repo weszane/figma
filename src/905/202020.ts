@@ -18,7 +18,7 @@ import { VisualBellActions } from "../905/302958";
 import { trackFileBrowserFileClick, trackFileArrayEvent } from "../figma_app/314264";
 import { restoreFiles, generateUrlAlt } from "../905/760074";
 import { createOptimistThunk } from "../905/350402";
-import { oB, j7, sf } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
 import { copyShareLinkOptimistic } from "../figma_app/78808";
 import { kj } from "../905/191601";
 import { showModalHandler, hideModal } from "../905/156213";
@@ -217,7 +217,7 @@ export function $$V0(e) {
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
     onContextMenu: e => {
-      if (e.preventDefault(), e.stopPropagation(), m) t(oB());else {
+      if (e.preventDefault(), e.stopPropagation(), m) t(hideDropdownAction());else {
         let n = {
           top: e.clientY,
           right: e.clientX,
@@ -226,7 +226,7 @@ export function $$V0(e) {
           width: 0,
           height: 0
         };
-        t(j7({
+        t(showDropdownThunk({
           type: i,
           data: {
             targetRect: n,
@@ -296,7 +296,7 @@ export function $$V0(e) {
         variant: "ghost",
         onClick: () => {
           t(hideModal());
-          t(sf({
+          t(selectViewAction({
             view: "fullscreen",
             fileKey: e.branch.key,
             editorType: FEditorType.Design
@@ -313,9 +313,9 @@ export function $$V0(e) {
       className: "branch_row--menuColumn--XSWVZ",
       children: jsx(_$$d, {
         onClick: e => {
-          if (e.stopPropagation(), e.preventDefault(), m) t(oB());else {
+          if (e.stopPropagation(), e.preventDefault(), m) t(hideDropdownAction());else {
             let e = A.current;
-            t(j7({
+            t(showDropdownThunk({
               type: i,
               data: {
                 targetRect: e?.getBoundingClientRect() || null,

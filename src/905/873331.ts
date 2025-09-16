@@ -8,7 +8,7 @@ import { trackFileEventWithStore } from "../figma_app/901889";
 import { generateRecordingKey } from "../figma_app/878298";
 import { MM, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { sT } from "../figma_app/740163";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
@@ -45,7 +45,7 @@ export function $$N0({
   });
   let g = u?.type === R;
   let f = useCallback(() => {
-    g ? l(oB()) : l(j7({
+    g ? l(hideDropdownAction()) : l(showDropdownThunk({
       type: R
     }));
   }, [g, l]);

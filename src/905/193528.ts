@@ -3,7 +3,7 @@ import { findContainingResponsiveSet } from "../905/26360";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { fullscreenValue } from "../figma_app/455680";
 import { j } from "../905/881708";
 import { b } from "../figma_app/193046";
@@ -63,7 +63,7 @@ export class $$m0 extends j {
     } else r && c && function (e, t) {
       if (!e || !e.isResponsiveSet || !e.getDakotaItemData() || !fullscreenValue.isReady()) return;
       let i = e.guid;
-      t(j7({
+      t(showDropdownThunk({
         type: "DAKOTA_ITEM_DROPDOWN",
         data: {
           layoutSetId: i,

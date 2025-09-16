@@ -15,7 +15,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { Lk, x as _$$x } from "../figma_app/639711";
 import { RH, gU } from "../figma_app/147952";
-import { B as _$$B } from "../905/808775";
+import { mapEditorTypeTo } from "../905/808775";
 import { fullscreenValue } from "../figma_app/455680";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { isVsCodeEnvironment } from "../905/858738";
@@ -558,7 +558,7 @@ export let $$eo4 = _$$n(async e => {
           }, pluginState.currentPluginRunID !== n) return;
           let _ = debugState.getState().selectedView.editorType;
           let y = {
-            storeInRecentsKey: _$$B(_),
+            storeInRecentsKey: mapEditorTypeTo(_),
             id: e.plugin_id,
             version: e.version,
             currentUserId: getSelectedView()
@@ -719,7 +719,7 @@ async function ec({
     } : {});
   }
   let _ = {
-    storeInRecentsKey: _$$B(f),
+    storeInRecentsKey: mapEditorTypeTo(f),
     id: String(e.localFileId),
     isDevelopment: !0,
     version: "",

@@ -1,14 +1,14 @@
 import { FlashActions } from "../905/573154";
 import { G } from "../905/134161";
 import { showModalHandler } from "../905/156213";
-import { W } from "../905/985740";
+import { versionHandlerInstance } from "../905/985740";
 import { y } from "../figma_app/504415";
 import { createOptimistThunk } from "../905/350402";
 let $$d0 = createOptimistThunk((e, {
   fileKey: t,
   versionId: r
 }) => {
-  W.getVersion({
+  versionHandlerInstance.getVersion({
     fileKey: t,
     versionId: r
   }).then(({
@@ -36,7 +36,7 @@ let $$c1 = createOptimistThunk(async (e, {
   try {
     let {
       data
-    } = await W.getVersions({
+    } = await versionHandlerInstance.getVersions({
       fileKey: t,
       pageSize: 100
     });

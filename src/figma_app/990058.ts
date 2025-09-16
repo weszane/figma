@@ -6,7 +6,7 @@ import { AUTH_INIT } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
-import { hG } from "../905/890368";
+import { setUserInOrgs } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistAction, createOptimistThunk } from "../905/350402";
 import { showModalHandler } from "../905/156213";
@@ -16,7 +16,7 @@ import { setupLoadingStateHandler } from "../905/696711";
 import { G } from "../figma_app/124713";
 import { Eh } from "../figma_app/617654";
 import { x } from "../905/749159";
-let $$T6 = hG;
+let $$T6 = setUserInOrgs;
 let $$I8 = createOptimistAction("ORG_USER_PUT", async (e, t, {
   optimistId: r
 }) => {

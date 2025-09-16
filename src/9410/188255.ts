@@ -163,7 +163,7 @@ import { g_ } from "../905/646788";
 import { aA as _$$aA, pb as _$$pb, Ij } from "../figma_app/877449";
 import { resourceUtils } from "../905/989992";
 import { useSubscription } from "../figma_app/288654";
-import { lg, m0, Em } from "../figma_app/976749";
+import { getCurrentFileType, isDevHandoffEditorType, isDesignFileType } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
 import { GoogleClassroomIntegrationView, UserForRcs, TeamCanAdmin } from "../figma_app/43951";
 import { w as _$$w5, tX as _$$tX2, l5, aG as _$$aG } from "../figma_app/728657";
@@ -282,7 +282,7 @@ import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { sO as _$$sO } from "../figma_app/21029";
 import { i as _$$i3 } from "../9410/16707";
 import { Kt, wl, uM, w1 } from "../figma_app/835688";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { hX } from "../figma_app/644079";
 import { U as _$$U3 } from "../figma_app/446378";
 import { Nr as _$$Nr } from "../figma_app/524655";
@@ -1934,7 +1934,7 @@ function ra({
   skipAccountCreationDateCheck: e = !1
 }) {
   let t = _$$aV();
-  let i = lg();
+  let i = getCurrentFileType();
   let r = selectCurrentFile();
   let a = useAtomWithSubscription(_$$mp);
   let o = useSubscription(GoogleClassroomIntegrationView, {
@@ -7441,8 +7441,8 @@ function sB() {
     let i = p8("showUi");
     let r = useMemo(() => e, [i]);
     let a = useMemo(() => t, [i]);
-    let s = m0();
-    let o = Em();
+    let s = isDevHandoffEditorType();
+    let o = isDesignFileType();
     let l = PE();
     let d = function () {
       let e = LC();
@@ -7461,7 +7461,7 @@ function sB() {
   let c = useAtomWithSubscription(d);
   let u = userFlagExistsAtomFamily(_$$af);
   let p = useAtomWithSubscription(u);
-  let h = Em();
+  let h = isDesignFileType();
   let m = l7();
   let g = hA();
   let _ = _$$e3();
@@ -8287,7 +8287,7 @@ function o2({
   }, [h, d, c, show, b]);
   useEffect(() => T(), [T]);
   useEffect(() => {
-    isShowing && t(j7({
+    isShowing && t(showDropdownThunk({
       type: _$$eg,
       data: {
         targetRect: d,

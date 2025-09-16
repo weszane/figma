@@ -29,7 +29,7 @@ import { s as _$$s } from "../905/518538";
 import { hh } from "../figma_app/42945";
 import { DesignGraphElements, AppStateTsApi, LayoutTabType, UserActionState } from "../figma_app/763686";
 import { useDebouncedCallback } from "use-debounce";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Z7, Dm, Uu } from "../figma_app/8833";
 import { k as _$$k2 } from "../figma_app/564183";
 import { getViewportZoom, getViewportInfo, getVisibleArea, roundedDivision, useViewportWithDelta, viewportToScreen, addRectOffset, applyOffsetToViewport, memoizedRect, getBasicViewportRect } from "../figma_app/62612";
@@ -981,7 +981,7 @@ let eU = memo(function (e) {
       width: 0
     };
     let r = addRectOffset(s, a);
-    m(j7({
+    m(showDropdownThunk({
       type: Z7,
       data: {
         thread: o,

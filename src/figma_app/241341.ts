@@ -33,7 +33,7 @@ import { $8, f as _$$f, rb as _$$rb, S as _$$S, _H, b6, bV, dp, gO, Ik, K9, Kk, 
 import { styleIdMapping, activeVisualAttributes, ProjectDevelopmentPhases } from '../905/869235';
 import { defaultSessionLocalIDString, sessionLocalIDToString } from '../905/871411';
 import { dF, Dx, mH } from '../905/917193';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { q as _$$q } from '../905/932270';
 import { lE, mf, NI, X$ } from '../905/945781';
 import { kF, zg } from '../905/993733';
@@ -49,7 +49,7 @@ import { HISTORY_DOCUMENT_INDEX } from '../figma_app/518682';
 import { _W, DS, q0, Q4, Qp, R$, t$ } from '../figma_app/571341';
 import { eY } from '../figma_app/722362';
 import { DiffImpl, SceneGraphHelpers, Fullscreen, FileSourceType, UIVisibilitySetting } from '../figma_app/763686';
-import { _t, Ht, Nb, tP, V_, w_ } from '../figma_app/841351';
+import { loadCanvasForVersion, canvasCache, setActiveVersion, versionHistoryKeyAtom, CURRENT_VERSION_ID, invalidateCanvasCache } from '../figma_app/841351';
 import { lF } from '../figma_app/915202';
 import { Ib } from '../figma_app/955484';
 import { useSelector, useDispatch } from 'react-redux';
@@ -329,7 +329,7 @@ function eu({
 }
 export function $$ep1(e, t, r, n) {
   let i = debugState.getState().selectedView;
-  t(sf({
+  t(selectViewAction({
     ...i,
     compareChangesVersionId: e,
     filterStatusVersions: r,
@@ -1030,7 +1030,7 @@ function eb({
           let r = await _$$_(debugState, getFeatureFlags(), fileImporter, n);
           let i = debugState.getState().mirror.appModel.currentPage;
           let a = `${e}-${i}-debug`;
-          Ht.set(a, Promise.resolve({
+          canvasCache.set(a, Promise.resolve({
             key: a,
             canvas: r.bytes
           }));
@@ -1065,11 +1065,11 @@ let $$eT0 = registerModal(e => {
   let v = useSelector(e => e.selectedView.compareChangesActivityId ?? null);
   let N = useMemo(() => y ? versions.find(e => e.id === y) ?? null : v ? versions.find(e => e.dev_mode_activity?.some(e => e.id === v)) ?? null : null, [versions, y, v]);
   let C = useCallback(e => {
-    !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== V_ && (s(Y6({
+    !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== CURRENT_VERSION_ID && (s(Y6({
       mode: UIVisibilitySetting.KEEP_UI,
       type: lF.SPINNER
     })), requestAnimationFrame(() => {
-      s(Nb({
+      s(setActiveVersion({
         id: d,
         nodeId: nodeId ?? void 0,
         eventType: 'LOAD_NEW_VERSION',
@@ -1078,14 +1078,14 @@ let $$eT0 = registerModal(e => {
     })));
     e !== y && (z(void 0), function (e, t) {
       let r = debugState.getState().selectedView;
-      t(sf({
+      t(selectViewAction({
         ...r,
         compareChangesVersionId: e,
         compareChangesActivityId: void 0
       }));
     }(e, s));
   }, [s, y, d, versions, nodeId]);
-  let [O, R] = useAtomValueAndSetter(tP);
+  let [O, R] = useAtomValueAndSetter(versionHistoryKeyAtom);
   let [M, F] = useState(!0);
   let [j, B] = useState(!1);
   let [H, z] = useState(void 0);
@@ -1133,7 +1133,7 @@ let $$eT0 = registerModal(e => {
   useEffect(() => {
     if (X || !N) return;
     let e = performance.now();
-    _t(N, nodeId)?.then(({
+    loadCanvasForVersion(N, nodeId)?.then(({
       canvas: t,
       key: r
     }) => {
@@ -1155,7 +1155,7 @@ let $$eT0 = registerModal(e => {
       });
     }).catch(e => {
       reportError(_$$e.DEVELOPER_TOOLS, new Error(`Error fetching history canvas: ${e}`));
-      w_(N);
+      invalidateCanvasCache(N);
       B(!0);
     });
   }, [X, N, O, R, o, u, nodeId]);

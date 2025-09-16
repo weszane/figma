@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N } from "../905/572042";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
@@ -30,10 +30,10 @@ let _ = registerModal(function (e) {
 }, "EnableAiFeaturesModal");
 export function $$$$p0(e) {
   let t = useDispatch();
-  return jsxs(Yy, {
+  return jsxs(BannerInset, {
     variant: "brand",
     "data-testid": e.testId,
-    children: [jsx(Q, {
+    children: [jsx(BannerMessage, {
       title: getI18nString("admin_settings.ai.banner.title"),
       children: jsx("span", {
         style: {

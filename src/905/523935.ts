@@ -12,7 +12,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
 import { Point } from "../905/736624";
 import { b$, FU, Bs, jR, a9, D6 } from "../figma_app/933328";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { teamLibraryCache } from "../figma_app/80990";
 import { o as _$$o } from "../figma_app/915774";
 import { X as _$$X } from "../905/853613";
@@ -24,7 +24,7 @@ import { N as _$$N } from "../905/645480";
 import { td } from "../figma_app/646357";
 import { u2 } from "../figma_app/807786";
 import { hasAssetId, PrimaryWorkflowEnum, hasComponentKey } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { r as _$$r } from "../905/632622";
 import { r6 } from "../figma_app/517115";
 import { tM, k1 } from "../figma_app/984498";
@@ -46,16 +46,16 @@ export function $$$$j0(e) {
   let z = G ? "LIBRARY" !== V.subscriptionStatus : V.isLocal;
   let H = Kl();
   let W = !G && H.has(V.library_key);
-  let K = "whiteboard" === lg();
+  let K = "whiteboard" === getCurrentFileType();
   let Y = function (e) {
-    let t = "whiteboard" === lg();
-    let i = "slides" === lg();
-    let n = "cooper" === lg();
+    let t = "whiteboard" === getCurrentFileType();
+    let i = "slides" === getCurrentFileType();
+    let n = "cooper" === getCurrentFileType();
     if (t) {
       if (e) return;
-      return $A.FigJam;
+      return FDocumentType.FigJam;
     }
-    return i ? $A.Slides : n ? $A.Cooper : $A.Design;
+    return i ? FDocumentType.Slides : n ? FDocumentType.Cooper : FDocumentType.Design;
   }(W);
   let q = F5();
   let $ = useCallback(async n => {

@@ -23,7 +23,7 @@ import { Fk } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { ei as _$$ei } from "../figma_app/795674";
 import { c as _$$c } from "../905/370443";
-import { Em } from "../figma_app/976749";
+import { isDesignFileType } from "../figma_app/976749";
 import { e } from "../905/621515";
 import { UK } from "../figma_app/740163";
 import { selectCurrentUser } from "../905/372672";
@@ -43,7 +43,7 @@ import { bL, c$ } from "../905/575478";
 import { Ay } from "@stylexjs/stylex";
 let B = () => {
   let e = _$$V2();
-  let t = Em();
+  let t = isDesignFileType();
   let r = "1" === localStorage.getItem("property-labels-visible");
   let n = _$$f(pN);
   let a = _$$f("did_sign_up_as_ui3_user");

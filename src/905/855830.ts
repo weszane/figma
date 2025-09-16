@@ -51,7 +51,7 @@ import { AutoLayout } from "../905/470281";
 import { $ as _$$$ } from "../905/355181";
 import { TextWithTruncation } from "../905/984674";
 import { e as _$$e2 } from "../905/579755";
-import { iq } from "../figma_app/976749";
+import { isFullscreenView } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { i_ } from "../905/187165";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
@@ -159,7 +159,7 @@ function eh(e) {
   let A = iS(licenseType);
   let y = useCurrentFileKey();
   let v = F2(licenseType);
-  let I = iq();
+  let I = isFullscreenView();
   let x = DP();
   let w = licenseType === FProductAccessType.WHITEBOARD && I ? "light" : i_(x);
   let C = _$$R({

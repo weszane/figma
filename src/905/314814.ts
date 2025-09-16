@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { useModalManager } from "../905/437088";
 import { E as _$$E } from "../905/53857";
 import { ModalRootComponent, ModalFormContents } from "../905/38914";
@@ -73,9 +73,9 @@ function G() {
   });
 }
 function z(e) {
-  return jsx(Yy, {
+  return jsx(BannerInset, {
     icon: jsx(_$$S, {}),
-    children: jsx(Q, {
+    children: jsx(BannerMessage, {
       "data-testid": "team-start-annual-plan-disclaimer",
       title: jsxs(Fragment, {
         children: [renderI18nText("billing_modals.start_annual_plan.banner.your_annual_subscription_starts", {

@@ -1,5 +1,5 @@
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { u8 } from "../figma_app/976749";
+import { editorTypeAtom } from "../figma_app/976749";
 import { OC } from "../figma_app/386952";
 import { FEditorType } from "../figma_app/53721";
 import { isIncludedView } from "../figma_app/707808";
@@ -7,7 +7,7 @@ var $$n0;
 (e => {
   function t() {
     let e = useAtomWithSubscription(OC);
-    let t = useAtomWithSubscription(u8);
+    let t = useAtomWithSubscription(editorTypeAtom);
     return isIncludedView(e) ? {
       monetization_surface: "file_browser"
     } : t === FEditorType.Whiteboard ? {

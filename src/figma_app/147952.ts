@@ -11,10 +11,10 @@ import { Vi } from "../figma_app/364284";
 import { getPluginVersion, resolveFrameworkType } from "../figma_app/300692";
 import { gJ, ul } from "../figma_app/190980";
 import { HubTypeEnum, isWidget } from "../figma_app/45218";
-import { dB, Lx } from "../905/862883";
+import { FaceToolType, FetchStatus } from "../905/862883";
 let $$f3 = createActionCreator("SET_RECENT_WHITEBOARD_TOOLS");
 let $$E25 = createOptimistThunk((e, t) => {
-  let r = gJ(t.storeInRecentsKey, dB.WHITEBOARD_TOOL);
+  let r = gJ(t.storeInRecentsKey, FaceToolType.WHITEBOARD_TOOL);
   e.dispatch($$f3({
     storeInRecentsKey: t.storeInRecentsKey,
     recentWhiteboardTools: r
@@ -23,7 +23,7 @@ let $$E25 = createOptimistThunk((e, t) => {
 let $$y13 = createActionCreator("ADD_WHITEBOARD_TOOL_TO_RECENTS");
 let $$b24 = createActionCreator("SET_RECENT_FACE_STAMPS");
 let $$T18 = createOptimistThunk((e, t) => {
-  let r = gJ(t.storeInRecentsKey, dB.FACE_STAMP);
+  let r = gJ(t.storeInRecentsKey, FaceToolType.FACE_STAMP);
   e.dispatch($$b24({
     storeInRecentsKey: t.storeInRecentsKey,
     recentFaceStamps: r
@@ -137,17 +137,17 @@ export function $$H8(e, t) {
       n({
         id: a,
         version: s,
-        status: Lx.FETCHED
+        status: FetchStatus.FETCHED
       });
       return;
     }
     let o = t.resourceType === HubTypeEnum.PLUGIN ? e.getState().recentlyUsed.plugins.fetchedResources[a] : e.getState().recentlyUsed.widgets.fetchedResources[a];
-    o && o.status !== Lx.NOT_FETCHED && o.status !== Lx.FETCHING && (o.status !== Lx.FETCHED || o.version) ? o.version && (r[a] = o.version) : i.push(a);
+    o && o.status !== FetchStatus.NOT_FETCHED && o.status !== FetchStatus.FETCHING && (o.status !== FetchStatus.FETCHED || o.version) ? o.version && (r[a] = o.version) : i.push(a);
   }), !i.length) return Promise.resolve(r);
   i.forEach(e => {
     n({
       id: e,
-      status: Lx.FETCHING
+      status: FetchStatus.FETCHING
     });
   });
   let s = {
@@ -168,12 +168,12 @@ export function $$H8(e, t) {
     n({
       id: e,
       version: r,
-      status: Lx.FETCHED
+      status: FetchStatus.FETCHED
     });
   }), r)).catch(() => (i.forEach(e => {
     n({
       id: e,
-      status: Lx.NOT_FETCHED
+      status: FetchStatus.NOT_FETCHED
     });
   }), {}));
 }

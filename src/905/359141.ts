@@ -92,7 +92,7 @@ import { LH } from '../905/872904';
 import { $z } from '../905/909811';
 import { XHR } from '../905/910117';
 import { n as _$$n } from '../905/913636';
-import { oB } from '../905/929976';
+import { hideDropdownAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { Xm as _$$Xm } from '../905/935570';
 import { sx as _$$sx } from '../905/941192';
@@ -238,7 +238,7 @@ function ea({
     let e = Um();
     let t = useDispatch();
     return useCallback(() => {
-      e && e.type === _$$K.LIBRARY_MODAL && t(oB());
+      e && e.type === _$$K.LIBRARY_MODAL && t(hideDropdownAction());
     }, [t, e]);
   }();
   let p = mq.useTabContentsWidth();

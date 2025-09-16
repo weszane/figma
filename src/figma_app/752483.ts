@@ -14,7 +14,7 @@ import { QF } from "../figma_app/696043";
 import { Qi } from "../figma_app/559491";
 import { s as _$$s } from "../905/58247";
 import { hideModal } from "../905/156213";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { M as _$$M } from "../figma_app/170366";
 import { pS } from "../905/588985";
 import { getFullscreenViewEditorType, generatePluginId } from "../figma_app/300692";
@@ -24,7 +24,7 @@ import { FEditorType } from "../figma_app/53721";
 import { ManifestEditorType } from "../figma_app/155287";
 import { KindEnum } from "../905/129884";
 import { registerModal } from "../905/102752";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { p as _$$p } from "../905/42189";
 import { s as _$$s2 } from "../figma_app/504088";
 import { ModalContainer } from "../figma_app/918700";
@@ -92,7 +92,7 @@ function V({
   selectedTemplate: e,
   setSelectedTemplate: t
 }) {
-  let r = useSelector(e => $A(e.selectedView));
+  let r = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   return jsx(Fragment, {
     children: r ? jsxs(Fragment, {
       children: [jsx(z, {
@@ -197,7 +197,7 @@ export let $$W0 = registerModal(function ({
   resourceType: e
 }) {
   let t = useDispatch();
-  let r = useSelector(e => $A(e.selectedView));
+  let r = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let [b, C] = useState("");
   let [F, U] = useState(-1);
   let [z, W] = _$$l(r ? "choose_template_step" : "choose_editor_type_step", `${e}_create_flow_change_step`, {
@@ -289,7 +289,7 @@ export let $$W0 = registerModal(function ({
     j.openExtensionDirectory(F);
   };
   let ea = useSelector(e => "fullscreen" === e.selectedView.view);
-  let es = E3();
+  let es = getSelectedEditorType();
   let eo = es === FEditorType.Design || es === FEditorType.DevHandoff;
   let el = es === FEditorType.Whiteboard;
   let ed = es === FEditorType.Slides;
@@ -407,7 +407,7 @@ export let $$W0 = registerModal(function ({
           className: fY,
           children: jsxs("div", {
             className: pn,
-            children: [!$A(debugState.getState().selectedView) && jsxs(ButtonSecondary, {
+            children: [!isFullscreenDevHandoffView(debugState.getState().selectedView) && jsxs(ButtonSecondary, {
               className: x6,
               onClick: () => W("choose_editor_type_step"),
               children: [jsx(SvgComponent, {

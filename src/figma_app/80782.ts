@@ -13,7 +13,7 @@ import { ms, c$ } from "../figma_app/236327";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { S as _$$S } from "../figma_app/11182";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { fG } from "../figma_app/973927";
 import { Cn } from "../905/862913";
@@ -69,7 +69,7 @@ function k({
     },
     children: [jsx(c$, {
       onClick: () => {
-        r(oB());
+        r(hideDropdownAction());
         r(_$$S({
           url: duplicateLink
         }));
@@ -77,7 +77,7 @@ function k({
       children: renderI18nText("browse_templates_modal.context_menu.copy_link")
     }), viewSourceFileUrl && d && jsx(c$, {
       onClick: () => {
-        r(oB());
+        r(hideDropdownAction());
         customHistory.redirect(viewSourceFileUrl, "_blank");
       },
       disabled: "loading" === c.status || "disabled" === c.status || !c.data?.file?.hasPermission,

@@ -9,9 +9,9 @@ import { TabLoop, TabLoopDisplayAs } from "../905/64217";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { $ } from "../905/355181";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { popModalStack } from "../905/156213";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { Dm, DT } from "../figma_app/8833";
 import { O1, KD } from "../figma_app/317394";
 import { KindEnum } from "../905/129884";
@@ -123,7 +123,7 @@ export let $$k0 = registerModal(function (e) {
   let z = (e, i) => {
     e.preventDefault();
     e.stopPropagation();
-    t(j7({
+    t(showDropdownThunk({
       type: DT,
       data: {
         id: "comment_attachment_context_menu",
@@ -138,7 +138,7 @@ export let $$k0 = registerModal(function (e) {
     if (N.current && !k) {
       let e = N.current.getBoundingClientRect();
       let i = new Point(e.left + e.width / 2, e.top);
-      t(jD());
+      t(hideTooltip());
       R(i);
     } else R(null);
   }, [t, k]);

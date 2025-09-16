@@ -28,7 +28,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { XE, u1 } from "../figma_app/91703";
 import { AO, o$ } from "../figma_app/8833";
 import { JV, Eq, sX, cP, js, mj } from "../figma_app/451499";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { isInvalidValue } from "../905/216495";
 import { e7, av } from "../figma_app/316316";
@@ -172,7 +172,7 @@ let $$eT0 = memo(function ({
   }();
   let j = selectCurrentFile();
   let N = trackFileEventWithStore();
-  let S = cJ();
+  let S = isSitesFileType();
   let A = useMemo(() => new cP(d), [d]);
   let D = useCallback(e => A.format(e), [A]);
   let R = useRef(null);

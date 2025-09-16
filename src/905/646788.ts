@@ -38,13 +38,13 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { isFullFilePublishingEnabled, isMakePublishingEnabled, isMakePublishingUpdatesEnabled, canAdminPublish, isTemplatePublishingEnabled } from "../figma_app/275462";
 import { W as _$$W } from "../905/336482";
 import { JT } from "../figma_app/173838";
-import { HW, iq as _$$iq, lg, m0 } from "../figma_app/976749";
+import { isPrototypeView, isFullscreenView, getCurrentFileType, isDevHandoffEditorType } from "../figma_app/976749";
 import { Hz, Of, Yw, Pb } from "../905/201596";
 import { selectCurrentFile } from "../figma_app/516028";
 import { FilePublishSitePermissions, PublishedHubFileForFile } from "../figma_app/43951";
 import { td as _$$td } from "../figma_app/558805";
 import { Wl, l7, hA, ZO, NZ } from "../figma_app/88239";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { o as _$$o } from "../905/382697";
 import { r as _$$r } from "../905/857502";
 import { combineWithHyphen, ShareContext } from "../905/91820";
@@ -57,8 +57,8 @@ import { copyShareLinkOptimistic, copyEmbedCodeOptimistic, startWorkshopSessionO
 import { generateUrl, isBranch, isDefaultFile } from "../905/760074";
 import { buildFileUrl } from "../905/612685";
 import { replaceColonWithDash, normalizeVariableId } from "../905/691205";
-import { lD, qI } from "../figma_app/831696";
-import { Hz as _$$Hz } from "../905/366346";
+import { buildViewerQueryParams, replaceProtoWithDeck } from "../figma_app/831696";
+import { panelTypeToString } from "../905/366346";
 import { wD, B1, mu, $Y, $S, h1 } from "../905/918620";
 import { wN as _$$wN, XR, aL as _$$aL, Xh, SV, G2, Ke, Ah, By, py, W2, Em } from "../905/959395";
 import { c as _$$c } from "../905/144429";
@@ -169,8 +169,8 @@ import { Um } from "../905/848862";
 import { l6, c$ as _$$c$, sK } from "../905/794875";
 import { HU } from "../figma_app/926061";
 import { h1 as _$$h4 } from "../905/986103";
-import { $y, Cs } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerInsetModal, BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { sx as _$$sx } from "../905/941192";
 import { t as _$$t4 } from "../905/833100";
 import { A as _$$A6 } from "../905/563377";
@@ -190,13 +190,13 @@ import { Pf } from "../905/590952";
 import { Eh } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
 import { ax as _$$ax, ts as _$$ts2 } from "../figma_app/49598";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { oH, b as _$$b4 } from "../figma_app/740025";
 import { getPublisherDisplayName } from "../figma_app/690075";
 import { $T } from "../figma_app/12535";
 import { HF, a6 as _$$a2, ow, M3 as _$$M3 } from "../figma_app/198840";
 import { getPermissionsState } from "../figma_app/642025";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { qG } from "../figma_app/803787";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 import { Jd } from "../905/71785";
@@ -306,7 +306,7 @@ function X() {
   return useSelector(e => {
     var t;
     t = e.selectedView;
-    return Wl(t) || $A(t);
+    return Wl(t) || isFullscreenDevHandoffView(t);
   });
 }
 function Q(e) {
@@ -316,11 +316,11 @@ function J() {
   return useSelector(e => Q(e.selectedView));
 }
 function ee(e) {
-  let t = HW();
+  let t = isPrototypeView();
   return "design" === e.editor_type && t;
 }
 function et(e) {
-  let t = HW();
+  let t = isPrototypeView();
   return "slides" === e.editor_type && t;
 }
 function en({
@@ -356,7 +356,7 @@ function eA({
     return t?.sitesView;
   });
   let o = wD()?.id;
-  let l = HW();
+  let l = isPrototypeView();
   let d = X();
   let c = l7();
   let u = hA();
@@ -378,14 +378,14 @@ function eA({
     let b = !(getFeatureFlags().show_copy_link_to_editor && A) && (l || a);
     let v = {};
     o && (v["node-id"] = replaceColonWithDash(o));
-    !o && b && _ && Object.assign(v, lD({
+    !o && b && _ && Object.assign(v, buildViewerQueryParams({
       ..._,
       nodeId: void 0,
       startingPointNodeId: void 0
     }));
     let I = d || r === _$$iO.DEV_MODE;
     let E = r === _$$iO.AUTO;
-    if (y = t ? generateUrl(e, t, b ? "proto" : "file") : b ? qI(e.prototype_url, e.editor_type || FFileType.DESIGN) : buildFileUrl({
+    if (y = t ? generateUrl(e, t, b ? "proto" : "file") : b ? replaceProtoWithDeck(e.prototype_url, e.editor_type || FFileType.DESIGN) : buildFileUrl({
       file: e,
       isDevHandoff: I,
       allowDefaulting: E,
@@ -395,7 +395,7 @@ function eA({
       e && (v.t = e);
     }
     p ? (v.vars = 1, f && (v["var-id"] = normalizeVariableId(f))) : c ? v["ready-for-dev"] = 1 : u ? v["focus-id"] = replaceColonWithDash(u) : m && (v["component-browser"] = 1, g && (v["component-key"] = g));
-    s && (v.view = _$$Hz(s));
+    s && (v.view = panelTypeToString(s));
     n && (v["code-node-id"] = replaceColonWithDash(n));
     return dR(y, v);
   }, [i, g, o, n, s, e, t, l, d, p, f, c, u, _, m]);
@@ -1332,7 +1332,7 @@ function t9({
   file: e
 }) {
   let t = J3();
-  let i = _$$iq();
+  let i = isFullscreenView();
   let n = X();
   return e.canEdit && i && !n && !getInitialOptions().integration_host && !BrowserInfo.isIpadNative && JU(t);
 }
@@ -1439,7 +1439,7 @@ function is({
     team: t,
     isInDraftsFolder: i
   }) {
-    let r = _$$iq();
+    let r = isFullscreenView();
     let a = X();
     let s = _$$o();
     let o = isFullFilePublishingEnabled();
@@ -1533,7 +1533,7 @@ function is({
     file: e,
     repo: t
   }) {
-    let i = _$$iq();
+    let i = isFullscreenView();
     let r = X();
     let a = ey({
       file: e,
@@ -1563,7 +1563,7 @@ function is({
   }) {
     let s = tY({
       file: e,
-      isFullscreenView: _$$iq(),
+      isFullscreenView: isFullscreenView(),
       nodeID: i
     });
     let o = ey({
@@ -1604,7 +1604,7 @@ function is({
       file: e,
       repo: t
     });
-    return _$$iq() && e.editor_type === FFileType.SLIDES ? jsx(tK, {
+    return isFullscreenView() && e.editor_type === FFileType.SLIDES ? jsx(tK, {
       onClick: () => s({
         linkQueryMode: _$$iO.SLIDES,
         skipVisualBell: !0,
@@ -1636,7 +1636,7 @@ function is({
     let o = e.key;
     let l = e.editor_type;
     let d = useDispatch();
-    let c = _$$iq();
+    let c = isFullscreenView();
     let u = _$$o();
     let p = tn(o);
     let m = useCallback(() => {
@@ -2517,7 +2517,7 @@ function na({
   let g = trackFileEventWithStore();
   let _ = _$$L();
   let b = _$$o();
-  let v = HW();
+  let v = isPrototypeView();
   let I = selectCurrentUser();
   let E = mapFileTypeToEditorType(e.editor_type);
   let x = t ? t.canEdit : e.hasEditRole;
@@ -3036,9 +3036,9 @@ function nc(e) {
               children: renderI18nText("file_permissions_modal.google_confirmation_modal.here")
             })
           })
-        }), jsx($y, {
+        }), jsx(BannerInsetModal, {
           variant: "brand",
-          children: jsx(_$$Q, {
+          children: jsx(BannerMessage, {
             title: renderI18nText("file_permissions_modal.google_confirmation_modal.subtitle"),
             children: renderI18nText("file_permissions_modal.google_confirmation_modal.description")
           })
@@ -3604,7 +3604,7 @@ class rt extends Component {
     this.onHubFileClick = ignoreCommandOrShift(e => {
       e.preventDefault();
       e.stopPropagation();
-      this.props.editingHubFile && this.props.dispatch(sf({
+      this.props.editingHubFile && this.props.dispatch(selectViewAction({
         view: "communityHub",
         subView: "hubFile",
         hubFileId: this.props.editingHubFile.id
@@ -3973,7 +3973,7 @@ let ri = connect((e, t) => {
       subView: "hubFile",
       hubFileId: n?.id
     };
-    l = Np(e, t);
+    l = selectedViewToPath(e, t);
   }
   return {
     publishingState: o,
@@ -4099,7 +4099,7 @@ function rg({
   template: t
 }) {
   let i = yy();
-  let s = lg();
+  let s = getCurrentFileType();
   let o = useDispatch();
   let l = {
     name: t.publishedByUser?.name || i?.name,
@@ -4480,10 +4480,10 @@ function rD({
 }) {
   return e.hostPlanName && e.connectedPlanName ? jsx("div", {
     className: KN,
-    children: jsx(Cs, {
+    children: jsx(BannerFullWidth, {
       variant: "brand",
       icon: jsx(_$$L4, {}),
-      children: jsx(_$$Q, {
+      children: jsx(BannerMessage, {
         children: renderI18nText("resource_connection.file_is_in_a_connected_project", {
           hostPlanName: jsx("span", {
             className: Cr,
@@ -4999,8 +4999,8 @@ function au({
   team: r,
   folder: a
 }) {
-  let s = HW();
-  let o = _$$iq();
+  let s = isPrototypeView();
+  let o = isFullscreenView();
   let l = "slides" === e.editor_type;
   let d = ac(e);
   let c = t || e;
@@ -5171,7 +5171,7 @@ function ab({
   numProjectTeamMembers: c,
   resourceConnectionSharingGroupUsers: u
 }) {
-  let p = HW();
+  let p = isPrototypeView();
   let m = p && e.canViewPrototype && !e.canViewPrototypeLinks;
   let h = function ({
     file: e,
@@ -5352,7 +5352,7 @@ function aB({
   isPrototypeInvite: e
 }) {
   let t = useSelector(e => e.mirror?.appModel.currentPage);
-  let i = HW();
+  let i = isPrototypeView();
   let n = useSelector(e => e.prototype);
   return e ? i ? n?.currentPageId || void 0 : t : void 0;
 }
@@ -5375,7 +5375,7 @@ function aY({
 }) {
   return !function (e) {
     let t = selectCurrentUser();
-    let i = HW();
+    let i = isPrototypeView();
     if (t?.sharing_restricted) return !1;
     let n = !e.canView && e.canViewPrototype;
     return (n && debug(i, "How did a prototype viewer sneak into non-prototype mode?!"), i) ? !n && !Ir(e) : !Ir(e);
@@ -5400,7 +5400,7 @@ function aq({
   }) {
     let n = useDispatch();
     let s = aB({
-      isPrototypeInvite: HW()
+      isPrototypeInvite: isPrototypeView()
     });
     return useCallback(r => {
       let {
@@ -5487,7 +5487,7 @@ function a$({
     inviteLevel: c
   }) {
     let u = useDispatch();
-    let p = HW();
+    let p = isPrototypeView();
     let g = $Y(e);
     let f = useCurrentPublicPlan("useHandleSendInvitesSubmit");
     let _ = useIsStarterPlan(f).unwrapOr(!1);
@@ -5500,7 +5500,7 @@ function a$({
       fileRoles: n,
       inviteLevel: s
     }) {
-      let o = HW();
+      let o = isPrototypeView();
       let l = X();
       let d = useDispatch();
       let [c, u] = useAtomValueAndSetter(_$$H2);
@@ -5785,7 +5785,7 @@ function a0({
     isInDraftsFolder: l,
     isStarterTier: S
   });
-  let D = m0() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(editor_type);
+  let D = isDevHandoffEditorType() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(editor_type);
   let {
     getHasProvisionalAccess
   } = wH({
@@ -5844,9 +5844,9 @@ function a2({
   team: t
 }) {
   let i = useDispatch();
-  return jsx(Cs, {
+  return jsx(BannerFullWidth, {
     variant: "warn",
-    children: jsxs(_$$Q, {
+    children: jsxs(BannerMessage, {
       children: [getI18nString("prototype_sharing_banner.to_share_prototypes_only_youll_need_to"), jsx(_$$N4, {
         href: "#",
         onClick: n => {
@@ -5894,7 +5894,7 @@ function a5({
 }) {
   let C = J();
   let T = useDispatch();
-  let k = HW();
+  let k = isPrototypeView();
   let R = tv(S === FPlanNameType.STARTER && k);
   switch (C) {
     case ShareAction.PUBLISH_COMMUNITY:
@@ -6089,14 +6089,14 @@ function a9({
   });
   let s = mapFileTypeToEditorType(e.editor_type);
   let o = X();
-  let l = _$$iq();
+  let l = isFullscreenView();
   let d = function ({
     file: e,
     repo: t
   }) {
     let i = mapFileTypeToEditorType(e.editor_type);
-    let n = _$$iq();
-    let a = HW();
+    let n = isFullscreenView();
+    let a = isPrototypeView();
     let s = X();
     let o = wD();
     let l = o?.id;
@@ -6118,7 +6118,7 @@ function a9({
     file: e,
     repo: t
   });
-  let c = HW();
+  let c = isPrototypeView();
   return jsxs("div", {
     className: v7,
     children: [jsx("div", {
@@ -6525,7 +6525,7 @@ export let $$sm0 = registerModal(function ({
     fileKey: e
   });
   return (!function () {
-    let e = HW();
+    let e = isPrototypeView();
     let t = useDispatch();
     useEffect(() => {
       e && t(_P({

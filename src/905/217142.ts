@@ -8,7 +8,7 @@ import { B } from "../905/759157";
 import { r as _$$r } from "../figma_app/896657";
 import { le } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
-import { Ro } from "../figma_app/564095";
+import { isAcceptedPublisher } from "../figma_app/564095";
 import { BK } from "../905/848862";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
@@ -64,7 +64,7 @@ export function $$C1(e) {
       publishedResource.is_widget ? customHistory.redirect(YW(publishedResource.id), "_blank") : customHistory.redirect(ho(publishedResource.id), "_blank");
     }
   }), T.push(_$$w));
-  g.unwrapOr(!1) && ((Ro(publishedResource, h ?? "") || publishedResource.creator.id === h) && (C.push(KM.PUBLISH), T.push({
+  g.unwrapOr(!1) && ((isAcceptedPublisher(publishedResource, h ?? "") || publishedResource.creator.id === h) && (C.push(KM.PUBLISH), T.push({
     displayText: publishedResource.is_widget ? getI18nString("community.plugins.edit_resource_details.widget") : getI18nString("community.plugins.edit_resource_details.plugin"),
     callback: (e, t, i, n) => k(KM.PUBLISH, n)
   })), T.push({

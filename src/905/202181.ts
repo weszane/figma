@@ -1,54 +1,89 @@
-import { createNoOpValidator } from "../figma_app/181241";
-import { r as _$$r } from "../905/324611";
-export let $$a0 = new class {
-  constructor() {
-    this.StateSchemaValidator = createNoOpValidator();
-    this.SsoConfigSchemaValidator = createNoOpValidator();
-    this.LogoutAllUsersValidator = createNoOpValidator();
-    this.LogoutOneUserValidator = createNoOpValidator();
-    this.getSessionsValidator = createNoOpValidator();
-    this.deleteSessionsValidator = createNoOpValidator();
-    this.sendValidationEmailValidator = createNoOpValidator();
+import { r as _$$r } from '../905/324611'
+import { createNoOpValidator } from '../figma_app/181241'
+
+/**
+ * SessionApi provides methods for session-related API calls.
+ * Original class name: $$a0
+ */
+export class SessionApi {
+  public stateSchemaValidator = createNoOpValidator()
+  public ssoConfigSchemaValidator = createNoOpValidator()
+  public logoutAllUsersValidator = createNoOpValidator()
+  public logoutOneUserValidator = createNoOpValidator()
+  public getSessionsValidator = createNoOpValidator()
+  public deleteSessionsValidator = createNoOpValidator()
+  public sendValidationEmailValidator = createNoOpValidator()
+
+  /**
+   * Retrieves session state.
+   * @param retryCount Optional retry count for the request.
+   */
+  getState(retryCount?: number) {
+    _$$r()
+    const params = retryCount && retryCount > 0 ? { retryCount } : {}
+    return this.stateSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/session/state', undefined, params),
+    )
   }
-  getState(e) {
-    _$$r();
-    let t = {};
-    e && e > 0 && (t = {
-      retryCount: e
-    });
-    return this.StateSchemaValidator.validate(async ({
-      xr: e
-    }) => await e.get("/api/session/state", void 0, t));
+
+  /**
+   * Retrieves SSO configuration.
+   * @param params Optional parameters for the request.
+   */
+  getSsoConfig(params?: any) {
+    return this.ssoConfigSchemaValidator.validate(async ({ xr }) =>
+      await xr.get('/api/session/sso_config', params),
+    )
   }
-  getSsoConfig(e) {
-    return this.SsoConfigSchemaValidator.validate(async ({
-      xr: t
-    }) => await t.get("/api/session/sso_config", e));
-  }
+
+  /**
+   * Logs out all users.
+   */
   logoutAllUsers() {
-    return this.LogoutAllUsersValidator.validate(async ({
-      xr: e
-    }) => await e.post("/api/session/logout"));
+    return this.logoutAllUsersValidator.validate(async ({ xr }) =>
+      await xr.post('/api/session/logout'),
+    )
   }
-  logoutOneUser(e) {
-    return this.LogoutOneUserValidator.validate(async ({
-      xr: t
-    }) => await t.post(`/api/session/logout/${e}`));
+
+  /**
+   * Logs out a single user by ID.
+   * @param userId The ID of the user to log out.
+   */
+  logoutOneUser(userId: string) {
+    return this.logoutOneUserValidator.validate(async ({ xr }) =>
+      await xr.post(`/api/session/logout/${userId}`),
+    )
   }
+
+  /**
+   * Retrieves all sessions.
+   */
   getSessions() {
-    return this.getSessionsValidator.validate(async ({
-      xr: e
-    }) => await e.get("/api/session/sessions"));
+    return this.getSessionsValidator.validate(async ({ xr }) =>
+      await xr.get('/api/session/sessions'),
+    )
   }
-  deleteSession(e) {
-    return this.deleteSessionsValidator.validate(async ({
-      xr: t
-    }) => await t.del(`/api/session/sessions/${e}`));
+
+  /**
+   * Deletes a session by ID.
+   * @param sessionId The ID of the session to delete.
+   */
+  deleteSession(sessionId: string) {
+    return this.deleteSessionsValidator.validate(async ({ xr }) =>
+      await xr.del(`/api/session/sessions/${sessionId}`),
+    )
   }
+
+  /**
+   * Sends a validation email.
+   */
   sendValidationEmail() {
-    return this.sendValidationEmailValidator.validate(async ({
-      xr: e
-    }) => await e.post("/api/validation/email/send"));
+    return this.sendValidationEmailValidator.validate(async ({ xr }) =>
+      await xr.post('/api/validation/email/send'),
+    )
   }
-}();
-export const H = $$a0;
+}
+
+// Export with original variable name for compatibility
+export const sessionApiInstance = new SessionApi()
+export const H = sessionApiInstance

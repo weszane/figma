@@ -21,7 +21,7 @@ import { Hb, tH as _$$tH } from "../905/751457";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { notificationActions } from "../905/463586";
 import { VisualBellActions } from "../905/302958";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { ov, S2 } from "../905/300250";
 import { TrackingProvider } from "../figma_app/831799";
 import { rY } from "../905/985490";
@@ -3544,7 +3544,7 @@ let nw = memo(function (e) {
       direction: SourceDirection.FROM_SOURCE,
       backFileKey: branch.key
     };
-    t(sf({
+    t(selectViewAction({
       view: "fullscreen",
       fileKey: branch.key,
       editorType: FEditorType.Design,
@@ -5767,7 +5767,7 @@ function rM(e) {
     i(notificationActions.clearAll());
   }, [i]);
   useEffect(() => {
-    K && i(sf({
+    K && i(selectViewAction({
       view: "fullscreen",
       editorType: FEditorType.Design,
       fileKey: e.branchKey,
@@ -5847,11 +5847,11 @@ function rM(e) {
       userInitiated: !0,
       reason: c.reason
     }));
-    c.navigationKey && c.navigationKey !== I ? i(sf({
+    c.navigationKey && c.navigationKey !== I ? i(selectViewAction({
       view: "fullscreen",
       fileKey: c.navigationKey,
       editorType: FEditorType.Design
-    })) : i(sf({
+    })) : i(selectViewAction({
       view: "fullscreen",
       editorType: FEditorType.Design,
       fileKey: e.branchKey,

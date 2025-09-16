@@ -9,9 +9,9 @@ import { Xr } from "../figma_app/27355";
 import u from "classnames";
 import { BrowserInfo } from "../figma_app/778880";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { K9 } from "../figma_app/8833";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
@@ -215,7 +215,7 @@ export function $$j2({
   let et = useSelector(e => e.mirror.appModel.showComments);
   let er = Q.getState().mirror.sceneGraph;
   let en = iT(H) ? s + 1 : s;
-  let ei = E3();
+  let ei = getSelectedEditorType();
   let ea = _$$E({
     type: H,
     shapeType: G,
@@ -275,7 +275,7 @@ export function $$j2({
   }(k, er);
   !function (e, t, r, n, a, s, o, l, d) {
     let u = Xr(_$$f);
-    let p = E3();
+    let p = getSelectedEditorType();
     useEffect(() => {
       e && u({
         type: "SET_CURRENTLY_SELECTED_NODE",
@@ -314,7 +314,7 @@ export function $$j2({
       "data-guid": W ? k : void 0,
       id: W ? void 0 : k,
       onContextMenu: e => {
-        Q.dispatch(j7({
+        Q.dispatch(showDropdownThunk({
           type: K9,
           data: {
             clientX: e.clientX,

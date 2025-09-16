@@ -8,7 +8,7 @@ import { mC, oh } from "../905/18797";
 import { n as _$$n } from "../905/79930";
 import { Rt } from "../figma_app/979658";
 import { CommunityPageType, HubTypeEnum } from "../figma_app/45218";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { cd } from "../905/381612";
 import { K } from "../1291/825015";
 import { i8 } from "../1291/533467";
@@ -81,9 +81,9 @@ function C() {
   }) : null : null;
 }
 function $() {
-  let e = eE($A.FigJam).slice(0, 4);
+  let e = eE(FDocumentType.FigJam).slice(0, 4);
   let t = mk(e, [mC(cd.fetchTemplatesMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }))]);
   return jsx(Fragment, {
     children: t.length > 0 ? jsxs(Fragment, {
@@ -110,7 +110,7 @@ export function $$I0(e) {
     shelfType: CommunityPageType.FIGJAM_TEMPLATES_PICKER
   }));
   let b = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }));
   return f || b ? jsx(i8, {}) : jsx("div", {
     ref: s,

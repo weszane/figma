@@ -7,7 +7,7 @@ import { renderI18nText, getI18nString } from "../905/303541";
 import { qR, JZ } from "../figma_app/696043";
 import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { NV, OX, x2, qu, qi } from "../figma_app/33586";
 import { ZT, WK, Ud, ll, $1, B7 } from "../figma_app/844435";
 import { j } from "../905/813868";
@@ -18,7 +18,7 @@ import { getPluginVersion, isValidForSelectedViewAndWhitelist } from "../figma_a
 import { HubTypeEnum, ResourceTypeNoComment } from "../figma_app/45218";
 import { ManifestErrorType } from "../figma_app/155287";
 import { bE, aY } from "../figma_app/78725";
-import { VR } from "../figma_app/545541";
+import { setupUserPluginPreferences } from "../figma_app/545541";
 import { r as _$$r } from "../905/319631";
 import { ab, ox } from "../figma_app/870683";
 import { j as _$$j } from "../905/834956";
@@ -117,8 +117,8 @@ function R({
 export function $$L1(e) {
   let t = useDispatch();
   let r = Um();
-  let s = m0();
-  let o = VR();
+  let s = isDevHandoffEditorType();
+  let o = setupUserPluginPreferences();
   let d = useCurrentUserOrg();
   let u = ll();
   let _ = R({
@@ -152,8 +152,8 @@ export function $$L1(e) {
 export let $$P4 = "DROPDOWN_TYPE_SAVED_AND_RECENT_ACTIONS_DROPDOWN";
 export function $$D0(e) {
   let t = Um();
-  let r = VR();
-  let i = m0();
+  let r = setupUserPluginPreferences();
+  let i = isDevHandoffEditorType();
   let a = useCurrentUserOrg();
   let s = ll();
   let o = R({
@@ -182,11 +182,11 @@ export function $$D0(e) {
 export let $$k7 = "DROPDOWN_TYPE_PLUGIN_USER_OPTIONS_DROPDOWN";
 export function $$M3(e) {
   if (!e.localResource && !e.publishedResource) throw Error("Either localResource or publishedResource is required");
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = useDispatch();
   let i = Um();
   let s = Object.values($1()).find(t => t.plugin_id === e.publishedResource?.id);
-  let o = VR();
+  let o = setupUserPluginPreferences();
   let c = R({
     plugin: e.publishedResource ? getPluginVersion(e.publishedResource) : null
   });

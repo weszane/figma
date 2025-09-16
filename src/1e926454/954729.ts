@@ -21,8 +21,8 @@ import { F5, Z as _$$Z } from "../figma_app/761870";
 import { e as _$$e2 } from "../905/393279";
 import { _u, rG } from "../1881/125927";
 import { Ay } from "../905/865071";
-import { $y } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerInsetModal } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N as _$$N2 } from "../905/572042";
 import { trackEventAnalytics } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -309,9 +309,9 @@ function et({
     properties: n,
     children: jsx("div", {
       className: "x1y1aw1k",
-      children: jsxs($y, {
+      children: jsxs(BannerInsetModal, {
         variant: "default",
-        children: [jsx(_$$Q, {
+        children: [jsx(BannerMessage, {
           title: getI18nString("plan_invite_modal.cost_messaging.title"),
           children: e
         }), jsx(_$$N2, {

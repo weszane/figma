@@ -17,7 +17,7 @@ import { sO } from "../figma_app/21029";
 import { useRef, useMemo } from "react";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { j } from "../905/834956";
 import { _ as _$$_ } from "../figma_app/636641";
 import { r as _$$r } from "../figma_app/201095";
@@ -39,7 +39,7 @@ function N({
       ref: a,
       "aria-expanded": s,
       onClick: () => {
-        s ? r(oB()) : r(j7({
+        s ? r(hideDropdownAction()) : r(showDropdownThunk({
           type: x
         }));
       },
@@ -103,7 +103,7 @@ export function $$R1() {
         icon: VisualBellIcon.STACK_SELECTION,
         type: "slides_remove_auto_layout_via_ungroup",
         messageComponentKey: VisualBellType.SLIDES_REMOVE_AUTO_LAYOUT,
-        onDismiss: () => { }
+        onDismiss: () => {}
       }));
     },
     icon: jsx(_$$A, {}),

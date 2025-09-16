@@ -6,10 +6,10 @@ import { updateDevHandoffPreferences } from '../figma_app/741237'
 import { MeasurementUnit } from '../figma_app/763686'
 
 // Measurement units used for codegen preferences (original: $$d8)
-const CODEGEN_MEASUREMENT_UNITS = [MeasurementUnit.PIXEL, MeasurementUnit.SCALED]
+export const CODEGEN_MEASUREMENT_UNITS = [MeasurementUnit.PIXEL, MeasurementUnit.SCALED]
 
 // List of Figma properties (original: c)
-const FIGMA_PROPERTIES_LIST = [FIGMA_PROPERTIES]
+export const FIGMA_PROPERTIES_LIST = [FIGMA_PROPERTIES]
 
 /**
  * Returns the unique plugin id for a given plugin object.
@@ -17,7 +17,7 @@ const FIGMA_PROPERTIES_LIST = [FIGMA_PROPERTIES]
  * @returns The local file id or published plugin id.
  * (original: $$u2)
  */
-function getPluginUniqueId(plugin: any): string {
+export function getPluginUniqueId(plugin: any): string {
   return hasLocalFileId(plugin) ? `${plugin.localFileId}` : `${plugin.plugin_id}`
 }
 
@@ -58,7 +58,7 @@ export function getCodegenLanguagePreference(plugin: any, language?: any): any {
  * @returns Filtered codegen preferences.
  * (original: $$m7)
  */
-function filterCodegenPreferences(plugin: any, language?: any): any[] {
+export function filterCodegenPreferences(plugin: any, language?: any): any[] {
   return plugin
     ? (plugin.manifest?.codegenPreferences ?? []).filter(pref =>
         !language?.value
@@ -75,7 +75,7 @@ function filterCodegenPreferences(plugin: any, language?: any): any[] {
  * @returns The unit schema or null.
  * (original: $$h3)
  */
-function findUnitSchema(plugin: any, language?: any): any | null {
+export function findUnitSchema(plugin: any, language?: any): any | null {
   return filterCodegenPreferences(plugin, language).find(isUnitSchema) ?? null
 }
 
@@ -86,7 +86,7 @@ function findUnitSchema(plugin: any, language?: any): any | null {
  * @returns True if supported, false otherwise.
  * (original: $$g4)
  */
-function isCodegenSupported(codegenLanguage: any, plugin: any): boolean {
+export function isCodegenSupported(codegenLanguage: any, plugin: any): boolean {
   if (!codegenLanguage)
     return false
   if (codegenLanguage.type === 'first-party')
@@ -104,7 +104,7 @@ function isCodegenSupported(codegenLanguage: any, plugin: any): boolean {
  * @param updates - The updates to apply.
  * (original: $$f1)
  */
-function updateCodeExtensionPreferences(preferences: any, codegenLanguage: any, updates: any): void {
+export function updateCodeExtensionPreferences(preferences: any, codegenLanguage: any, updates: any): void {
   const updatedPreferences = {
     ...preferences,
     codeExtensionPreferences: {
@@ -202,7 +202,7 @@ export function computeCodeExtensionPreferences(plugin: any, language?: any): an
  * @returns The updated preferences.
  * (original: $$A5)
  */
-function applyCodeExtensionPreferences(plugin: any, language?: any): any {
+export function applyCodeExtensionPreferences(plugin: any, language?: any): any {
   let altPreferences = null
   let {
     shouldUpdateCustomSettings,

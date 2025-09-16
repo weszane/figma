@@ -15,7 +15,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { isInteractionPathCheck } from "../figma_app/897289";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { _r, el } from "../figma_app/451499";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { EU } from "../figma_app/740163";
 import { isValidValue, normalizeValue, valueOrFallback, isInvalidValue } from "../905/216495";
 import { Um as _$$Um } from "../905/848862";
@@ -280,7 +280,7 @@ export function $$q2({
   let G = normalizeValue(n);
   let K = "NAVIGATE" === G;
   let k = "INSTANT" !== e.behavior && "DISSOLVE" !== e.behavior && "SMART_ANIMATE" !== e.behavior && "SCROLL_ANIMATE" !== e.behavior;
-  let q = cJ();
+  let q = isSitesFileType();
   let Z = "INSTANT" !== e.behavior && W(t, G, normalizeValue(e.behavior), q);
   let J = Z && !w;
   let Q = !e.isSpringTransition || "INSTANT" === e.behavior;

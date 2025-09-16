@@ -9,7 +9,7 @@ import { A } from "../905/920142";
 import { LoadingOverlay } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { cU } from "../figma_app/841351";
+import { resetCompareMode } from "../figma_app/841351";
 import { KindEnum } from "../905/129884";
 import { Ro } from "../figma_app/805373";
 import { K0 } from "../figma_app/778125";
@@ -88,14 +88,14 @@ export function $$S0({
   let L = useCallback(t => {
     t.stopPropagation();
     setTimeout(() => {
-      r(cU());
+      r(resetCompareMode());
       trackEventAnalytics("Version History Compare Stop", {
         fromVersionId: e
       });
     }, 300);
   }, [r, e]);
   let P = useCallback(t => {
-    A || "Escape" !== t.key || (r(cU()), trackEventAnalytics("Version History Compare Stop", {
+    A || "Escape" !== t.key || (r(resetCompareMode()), trackEventAnalytics("Version History Compare Stop", {
       fromVersionId: e
     }));
   }, [r, A, e]);

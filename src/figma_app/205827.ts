@@ -7,7 +7,7 @@ import { hasEditableLockedTeams, hasTeamPaidAccess } from "../figma_app/345997";
 import { canEditTeam } from "../figma_app/642025";
 import { a as _$$a } from "../905/692930";
 import { w } from "../905/863010";
-import { K } from "../figma_app/193867";
+import { isRecentsAndSharingView } from "../figma_app/193867";
 var $$n3;
 let h = "pro_trials_v3";
 let $$m0 = 14;
@@ -79,7 +79,7 @@ let $$T2 = "dismissed_pro_trials_v3_unlocked_expiry_banner";
     return r(w.toSinatra(e));
   };
   e.isEligibleTrialEntryView = function (e) {
-    return "folder" === e.view || "team" === e.view || K(e);
+    return "folder" === e.view || "team" === e.view || isRecentsAndSharingView(e);
   };
   e.canSeeProTrialUx = n;
   e.canSeeProTrialUxInFile = function (e, t) {

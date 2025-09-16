@@ -2,7 +2,7 @@ import { HandoffBindingsCpp } from "../figma_app/763686";
 import { normalizedToRgb } from "../figma_app/273493";
 import { debugState } from "../905/407919";
 import { Ym } from "../figma_app/806075";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { F } from "../905/989956";
 import { trackFileEvent } from "../figma_app/314264";
 import { FEditorType } from "../figma_app/53721";
@@ -14,14 +14,14 @@ export function $$p3(e, t, r) {
     pageId: t.nodeId
   });
   "editorType" in t && t.editorType === FEditorType.Design && Ym(n, FEditorType.Design, r);
-  e(sf({
+  e(selectViewAction({
     ...t,
     showOverview: !1,
     overviewBackButtonTargetNodeId: void 0
   }));
 }
 export function $$_0(e, t) {
-  "fullscreen" === t.view && e(sf({
+  "fullscreen" === t.view && e(selectViewAction({
     ...t,
     showDevModeComponentBrowser: !1,
     componentKey: void 0,

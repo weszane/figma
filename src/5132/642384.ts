@@ -15,9 +15,9 @@ import { nm } from "../905/352022";
 import { F as _$$F } from "../905/504462";
 import { getDesignFileUrlWithOptions } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
-import { Y9 } from "../figma_app/502247";
+import { setRecentUserData } from "../figma_app/502247";
 import { hasMonetizedResourceMetadata } from "../figma_app/45218";
-import { $A, vt } from "../905/862883";
+import { FDocumentType, ITemplateType } from "../905/862883";
 import { H } from "../905/548668";
 async function j(e, l, i, t, a, r) {
   let s = [];
@@ -82,9 +82,9 @@ let $$T1 = (e, l = {
         file_folder_id: d.folder_id
       });
       "whiteboard" === d.editor_type && n(Hx({
-        storeInRecentsKey: $A.FigJam,
+        storeInRecentsKey: FDocumentType.FigJam,
         id: i.id,
-        type: vt.CommunityResource
+        type: ITemplateType.CommunityResource
       }));
       let g = getDesignFileUrlWithOptions(d);
       g = dR(g, {
@@ -106,7 +106,7 @@ let $$A2 = (e, l = {
   let n = c();
   function o(e) {
     let t = H(FFileType.SLIDES, i.library_key);
-    e ? (Y9(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = dR(t, {
+    e ? (setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = dR(t, {
       fuid: e.userId
     })) : l.userId && (t = dR(t, {
       fuid: l.userId
@@ -122,7 +122,7 @@ let $$S0 = (e, l = {
   let n = c();
   function o(e) {
     let t = `/file/new?initial-library-key=${i.library_key}`;
-    e ? (Y9(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = dR(t, {
+    e ? (setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = dR(t, {
       fuid: e.userId
     })) : l.userId && (t = dR(t, {
       fuid: l.userId

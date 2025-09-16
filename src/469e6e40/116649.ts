@@ -11,7 +11,7 @@ import { ps, oc, ZY } from "../figma_app/845611";
 import { l as _$$l } from "../4452/447644";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { useCurrentUserOrg } from "../905/845253";
 import { getGroupOrDefault } from "../905/817247";
 import { MX, EQ } from "../figma_app/684446";
@@ -78,15 +78,15 @@ export function $$D0({
     groupsUserIsAdminOf: []
   };
   useEffect(() => {
-    T ? t(sf({
+    T ? t(selectViewAction({
       view: "orgAdminSettings",
       orgAdminSettingsViewTab: DashboardSection.DASHBOARD
-    })) : !D && A && R ? t(sf(o0)) : P || (groupsUserIsAdminOf.length > 0 ? t(sf({
+    })) : !D && A && R ? t(selectViewAction(o0)) : P || (groupsUserIsAdminOf.length > 0 ? t(selectViewAction({
       view: "licenseGroup",
       subView: UserGroupRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
       selectedTab: getGroupOrDefault(GroupType.MEMBERS)
-    })) : t(sf(o0)));
+    })) : t(selectViewAction(o0)));
   });
   let $ = _$$s.wFull.flex.justifyBetween.px16.py24.$;
   if (!a || !D || T) return null;

@@ -4,7 +4,7 @@ import { isGovCluster } from "../figma_app/169182";
 import { getPlanFeaturesAtomFamily } from "../905/276025";
 import { FEditorType } from "../figma_app/53721";
 import { n as _$$n } from "../905/347702";
-import { u8 } from "../figma_app/976749";
+import { editorTypeAtom } from "../figma_app/976749";
 let $$u1 = _$$n((e, t, r) => {
   let n = m(r);
   let i = e?.figma_provided_libraries_disabled || t?.figma_provided_libraries_disabled;
@@ -20,7 +20,7 @@ export function $$_3() {
 }
 export let $$h0 = atom(e => {
   let t = e(getPlanFeaturesAtomFamily(!0));
-  let r = e(u8);
+  let r = e(editorTypeAtom);
   return $$p2(t.data, r);
 });
 function m(e) {

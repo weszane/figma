@@ -8,7 +8,7 @@ import { useSubscription } from "../figma_app/288654";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 import { g as _$$g } from "../figma_app/618031";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { Em } from "../figma_app/976749";
+import { isDesignFileType } from "../figma_app/976749";
 import { y as _$$y } from "../905/461685";
 import { FOrganizationLevelType, FPlanNameType, FFileType, FVisibilityType, FProductAccessType } from "../figma_app/191312";
 import { useCurrentPrivilegedPlan, useTeamPlanPublicInfo, useIsStarterOrStudentPlan, useTeamPlanUser, useCurrentPublicPlan, getParentOrgIdIfOrgLevel, useTeamPlanFeatures, useIsTeamAdminUser } from "../figma_app/465071";
@@ -405,7 +405,7 @@ export function $$eu34() {
     getConfig
   } = selectExperimentConfigHook("exp_send_to_make");
   let t = function () {
-    let e = Em();
+    let e = isDesignFileType();
     let t = _$$y().transform(e => e?.canCreateFigmakeFileWithReasons.result ?? !1).unwrapOr(!1);
     let r = useSelector(vD);
     let n = Fk((e, t) => e.get(t)?.isTopLevelFrame() ?? !1, r);

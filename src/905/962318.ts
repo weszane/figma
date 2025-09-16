@@ -26,7 +26,7 @@ import { aq } from "../figma_app/412189";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
 import { T as _$$T, e as _$$e } from "../905/949616";
 import { getUserId } from "../905/372672";
-import { k as _$$k2 } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 export let $$P0 = registerModal(function ({
   open: e,
   onClose: t,
@@ -118,7 +118,7 @@ export let $$P0 = registerModal(function ({
         t();
         return;
       }
-      _$$k2.putUser({
+      UserAPIHandlers.putUser({
         user: {
           id: i,
           locale: n

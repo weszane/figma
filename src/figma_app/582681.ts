@@ -18,7 +18,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
 import { fK } from "../905/469533";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { y as _$$y } from "../905/810168";
 import { FFileType } from "../figma_app/191312";
 import { registerModal, ModalSupportsBackground } from "../905/102752";
@@ -33,7 +33,7 @@ export let $$C0 = registerModal(function ({
   let R = setupAutofocusHandler();
   let L = useDispatch();
   let P = useSelector(e => e.screenreader.errorType);
-  let D = lg();
+  let D = getCurrentFileType();
   let {
     enhancedContrast,
     color,

@@ -1,97 +1,320 @@
-import { isEmptyObject } from "../figma_app/493477";
-import { PrototypingTsApi } from "../figma_app/763686";
-import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
-import { getFeatureFlags } from "../905/601108";
-import { customHistory } from "../905/612521";
-import { parseQuery, serializeQuery } from "../905/634134";
-import { replaceColonWithDash } from "../905/691205";
-import { FFileType } from "../figma_app/191312";
-export function $$u3(e, t, r, n, s) {
-  let c = {};
-  let u = parseQuery(customHistory.location.search);
-  for (let e in u) "" !== e && (c[e] = u[e]);
-  e.scalingInfo?.viewportScalingMode && (c.scaling = e.scalingInfo.viewportScalingMode);
-  e.scalingInfo?.contentScalingMode && (c["content-scaling"] = e.scalingInfo?.contentScalingMode);
-  e.pageId && isValidSessionLocalID(parseSessionLocalID(e.pageId)) && (c["page-id"] = e.pageId);
-  e.nodeId && isValidSessionLocalID(parseSessionLocalID(e.nodeId)) && (c["node-id"] = replaceColonWithDash(e.nodeId));
-  e.startingPointNodeId && isValidSessionLocalID(parseSessionLocalID(e.startingPointNodeId)) && (c["starting-point-node-id"] = e.startingPointNodeId);
-  t && r && (c["prev-plan-id"] = t, c["prev-plan-type"] = r);
-  e.prevSelectedView && (c["prev-selected-view"] = e.prevSelectedView.view, "recentsAndSharing" === e.prevSelectedView.view ? c["prev-tab"] = e.prevSelectedView.tab : "folder" === e.prevSelectedView.view && (c["folder-id"] = e.prevSelectedView.folderId));
-  e.share && (c.share = "1");
-  e.disableDefaultKeyboardNav ? c["disable-default-keyboard-nav"] = "1" : delete c["disable-default-keyboard-nav"];
-  e.hideUI ? c["hide-ui"] = "1" : delete c["hide-ui"];
-  e.showProtoSidebar || void 0 === e.showProtoSidebar && PrototypingTsApi?.isViewerSidebarShownByDefault() ? c["show-proto-sidebar"] = "1" : delete c["show-proto-sidebar"];
-  null == e.showHotspots || e.showHotspots ? delete c["hotspot-hints"] : c["hotspot-hints"] = "0";
-  null == e.showDeviceFrame || e.showDeviceFrame ? delete c["device-frame"] : c["device-frame"] = "0";
-  e.inlinePreview ? c["inline-viewer"] = "1" : delete c["inline-viewer"];
-  e.versionId && (c["version-id"] = e.versionId);
-  e.isAudienceViewPopout && (c.popout = !0);
-  delete c.mode;
-  delete c.fuid;
-  n && (c.t = n);
-  s && (c["open-popout"] = "true");
-  return c;
-}
-export function $$p1(e, t, r) {
-  var i;
-  let a = $$u3(e, t, r);
-  let o = [];
-  (t || r) && (o.push("prev-plan-id"), o.push("prev-plan-type"));
-  e.prevSelectedView && (o.push("prev-selected-view"), "recentsAndSharing" === e.prevSelectedView.view ? o.push("prev-tab") : "folder" === e.prevSelectedView.view && o.push("folder-id"));
-  (getFeatureFlags().slides_pv_av_refresh ? !window.opener : e.isAudienceViewPopout) && o.push("popout");
-  e.share && o.push("share");
-  i = a;
-  o.forEach(e => {
-    delete i[e];
-  });
-  a = i;
-  return isEmptyObject(a) ? "" : `?${serializeQuery(a)}`;
-}
-export function $$_7(e, t, r, i, a) {
-  let s = $$u3(e, t, r, i, a);
-  return isEmptyObject(s) ? "" : `?${serializeQuery(s)}`;
-}
-export function $$h2(e) {
-  return e ? `#${encodeURIComponent(e)}` : "";
-}
-export function $$m5(e, t) {
-  return t === FFileType.SLIDES ? e.replace(/proto/, "deck") : e;
-}
-export function $$g0(e) {
-  if (!e) return !1;
-  try {
-    new URL(e);
-  } catch (e) {
-    return !1;
+import { getFeatureFlags } from '../905/601108'
+import { customHistory } from '../905/612521'
+import { parseQuery, serializeQuery } from '../905/634134'
+import { replaceColonWithDash } from '../905/691205'
+import { isValidSessionLocalID, parseSessionLocalID } from '../905/871411'
+import { FFileType } from '../figma_app/191312'
+import { isEmptyObject } from '../figma_app/493477'
+import { PrototypingTsApi } from '../figma_app/763686'
+
+/**
+ * Builds a query object for viewer URL parameters.
+ * Original: $$u3
+ */
+export function buildViewerQueryParams(
+  params: {
+    scalingInfo?: { viewportScalingMode?: string, contentScalingMode?: string }
+    pageId?: string
+    nodeId?: string
+    startingPointNodeId?: string
+    prevSelectedView?: { view: string, tab?: string, folderId?: string }
+    share?: boolean
+    disableDefaultKeyboardNav?: boolean
+    hideUI?: boolean
+    showProtoSidebar?: boolean
+    showHotspots?: boolean
+    showDeviceFrame?: boolean
+    inlinePreview?: boolean
+    versionId?: string
+    isAudienceViewPopout?: boolean
+  },
+  prevPlanId?: string,
+  prevPlanType?: string,
+  timestamp?: string,
+  openPopout?: boolean,
+): Record<string, any> {
+  /** Parse current query params */
+  const queryParams = parseQuery(customHistory.location.search)
+  const result: Record<string, any> = {}
+
+  // Copy existing query params except empty keys
+  for (const key in queryParams) {
+    if (key !== '')
+      result[key] = queryParams[key]
   }
-  var t = window.location.origin;
-  return e.startsWith(t + "/proto");
+
+  // Add scaling info
+  if (params.scalingInfo?.viewportScalingMode) {
+    result.scaling = params.scalingInfo.viewportScalingMode
+  }
+  if (params.scalingInfo?.contentScalingMode) {
+    result['content-scaling'] = params.scalingInfo.contentScalingMode
+  }
+
+  // Add page/node/starting point IDs if valid
+  if (
+    params.pageId
+    && isValidSessionLocalID(parseSessionLocalID(params.pageId))
+  ) {
+    result['page-id'] = params.pageId
+  }
+  if (
+    params.nodeId
+    && isValidSessionLocalID(parseSessionLocalID(params.nodeId))
+  ) {
+    result['node-id'] = replaceColonWithDash(params.nodeId)
+  }
+  if (
+    params.startingPointNodeId
+    && isValidSessionLocalID(parseSessionLocalID(params.startingPointNodeId))
+  ) {
+    result['starting-point-node-id'] = params.startingPointNodeId
+  }
+
+  // Previous plan info
+  if (prevPlanId && prevPlanType) {
+    result['prev-plan-id'] = prevPlanId
+    result['prev-plan-type'] = prevPlanType
+  }
+
+  // Previous selected view
+  if (params.prevSelectedView) {
+    result['prev-selected-view'] = params.prevSelectedView.view
+    if (params.prevSelectedView.view === 'recentsAndSharing') {
+      result['prev-tab'] = params.prevSelectedView.tab
+    }
+    else if (params.prevSelectedView.view === 'folder') {
+      result['folder-id'] = params.prevSelectedView.folderId
+    }
+  }
+
+  // Share
+  if (params.share) {
+    result.share = '1'
+  }
+
+  // Keyboard navigation
+  if (params.disableDefaultKeyboardNav) {
+    result['disable-default-keyboard-nav'] = '1'
+  }
+  else {
+    delete result['disable-default-keyboard-nav']
+  }
+
+  // Hide UI
+  if (params.hideUI) {
+    result['hide-ui'] = '1'
+  }
+  else {
+    delete result['hide-ui']
+  }
+
+  // Proto sidebar
+  if (
+    params.showProtoSidebar
+    || params.showProtoSidebar === undefined
+    && PrototypingTsApi?.isViewerSidebarShownByDefault()
+  ) {
+    result['show-proto-sidebar'] = '1'
+  }
+  else {
+    delete result['show-proto-sidebar']
+  }
+
+  // Hotspot hints
+  if (params.showHotspots == null || params.showHotspots) {
+    delete result['hotspot-hints']
+  }
+  else {
+    result['hotspot-hints'] = '0'
+  }
+
+  // Device frame
+  if (params.showDeviceFrame == null || params.showDeviceFrame) {
+    delete result['device-frame']
+  }
+  else {
+    result['device-frame'] = '0'
+  }
+
+  // Inline preview
+  if (params.inlinePreview) {
+    result['inline-viewer'] = '1'
+  }
+  else {
+    delete result['inline-viewer']
+  }
+
+  // Version ID
+  if (params.versionId) {
+    result['version-id'] = params.versionId
+  }
+
+  // Audience view popout
+  if (params.isAudienceViewPopout) {
+    result.popout = true
+  }
+
+  // Remove mode/fuid
+  delete result.mode
+  delete result.fuid
+
+  // Timestamp
+  if (timestamp) {
+    result.t = timestamp
+  }
+
+  // Open popout
+  if (openPopout) {
+    result['open-popout'] = 'true'
+  }
+
+  return result
 }
-export function $$f4(e) {
-  if (!$$g0(e)) return null;
-  let t = e.match(/\/proto\/([^/]+)\/?/);
-  return t ? t[1] : null;
+
+/**
+ * Serializes viewer query params, omitting certain keys.
+ * Original: $$p1
+ */
+export function serializeViewerQueryParams(
+  params: Parameters<typeof buildViewerQueryParams>[0],
+  prevPlanId?: string,
+  prevPlanType?: string,
+): string {
+  let query = buildViewerQueryParams(params, prevPlanId, prevPlanType)
+  const omitKeys: string[] = []
+
+  if (prevPlanId || prevPlanType) {
+    omitKeys.push('prev-plan-id', 'prev-plan-type')
+  }
+  if (params.prevSelectedView) {
+    omitKeys.push('prev-selected-view')
+    if (params.prevSelectedView.view === 'recentsAndSharing') {
+      omitKeys.push('prev-tab')
+    }
+    else if (params.prevSelectedView.view === 'folder') {
+      omitKeys.push('folder-id')
+    }
+  }
+  if (
+    getFeatureFlags().slides_pv_av_refresh
+      ? !window.opener
+      : params.isAudienceViewPopout
+  ) {
+    omitKeys.push('popout')
+  }
+  if (params.share) {
+    omitKeys.push('share')
+  }
+
+  // Remove omitted keys
+  for (const key of omitKeys) {
+    delete query[key]
+  }
+
+  return isEmptyObject(query) ? '' : `?${serializeQuery(query)}`
 }
-export function $$E8(e) {
+
+/**
+ * Serializes viewer query params with all keys.
+ * Original: $$_7
+ */
+export function serializeFullViewerQueryParams(
+  params: Parameters<typeof buildViewerQueryParams>[0],
+  prevPlanId?: string,
+  prevPlanType?: string,
+  timestamp?: string,
+  openPopout?: boolean,
+): string {
+  const query = buildViewerQueryParams(
+    params,
+    prevPlanId,
+    prevPlanType,
+    timestamp,
+    openPopout,
+  )
+  return isEmptyObject(query) ? '' : `?${serializeQuery(query)}`
+}
+
+/**
+ * Encodes a hash fragment.
+ * Original: $$h2
+ */
+export function encodeHashFragment(fragment?: string): string {
+  return fragment ? `#${encodeURIComponent(fragment)}` : ''
+}
+
+/**
+ * Replaces 'proto' with 'deck' for slides file type.
+ * Original: $$m5
+ */
+export function replaceProtoWithDeck(path: string, fileType: FFileType): string {
+  return fileType === FFileType.SLIDES ? path.replace(/proto/, 'deck') : path
+}
+
+/**
+ * Checks if a URL is a valid proto viewer URL.
+ * Original: $$g0
+ */
+export function isProtoViewerUrl(url?: string): boolean {
+  if (!url)
+    return false
   try {
-    let t = new URL(e).searchParams.get("node-id");
-    if (!t) return null;
-    let r = decodeURIComponent(t).replace("-", ":");
-    if (!isValidSessionLocalID(parseSessionLocalID(r))) return null;
-    return r;
-  } catch {
-    return null;
+    // eslint-disable-next-line no-new
+    new URL(url)
+  }
+  catch {
+    return false
+  }
+  const origin = window.location.origin
+  return url.startsWith(`${origin}/proto`)
+}
+
+/**
+ * Extracts the file ID from a proto viewer URL.
+ * Original: $$f4
+ */
+export function extractProtoFileId(url?: string): string | null {
+  if (!isProtoViewerUrl(url))
+    return null
+  const match = url.match(/\/proto\/([^/]+)\/?/)
+  return match ? match[1] : null
+}
+
+/**
+ * Extracts and validates node ID from a proto viewer URL.
+ * Original: $$E8
+ */
+export function extractValidNodeIdFromProtoUrl(url: string): string | null {
+  try {
+    const nodeId = new URL(url).searchParams.get('node-id')
+    if (!nodeId)
+      return null
+    const decoded = decodeURIComponent(nodeId).replace('-', ':')
+    if (!isValidSessionLocalID(parseSessionLocalID(decoded)))
+      return null
+    return decoded
+  }
+  catch {
+    return null
   }
 }
-export function $$y6() {
-  return `${window.location.origin}/proto/`;
+
+/**
+ * Returns the base proto viewer URL for the current origin.
+ * Original: $$y6
+ */
+export function getProtoViewerBaseUrl(): string {
+  return `${window.location.origin}/proto/`
 }
-export const Ik = $$g0;
-export const LT = $$p1;
-export const ZK = $$h2;
-export const lD = $$u3;
-export const pb = $$f4;
-export const qI = $$m5;
-export const qS = $$y6;
-export const vp = $$_7;
-export const zU = $$E8;
+
+// Exported aliases for backward compatibility
+export const Ik = isProtoViewerUrl
+export const LT = serializeViewerQueryParams
+export const ZK = encodeHashFragment
+export const lD = buildViewerQueryParams
+export const pb = extractProtoFileId
+export const qI = replaceProtoWithDeck
+export const qS = getProtoViewerBaseUrl
+export const vp = serializeFullViewerQueryParams
+export const zU = extractValidNodeIdFromProtoUrl

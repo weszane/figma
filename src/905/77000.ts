@@ -4,7 +4,7 @@ import { Button } from "../905/521428";
 import { useSubscription } from "../figma_app/288654";
 import { _, S } from "../figma_app/490799";
 import { renderI18nText } from "../905/303541";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { SharingGroupsByLibraryKey } from "../figma_app/43951";
 import { useTeamPlanFeatures, useTeamPlanUser, useIsAdminUser } from "../figma_app/465071";
@@ -40,12 +40,12 @@ export function $$f0({
   let s = useDispatch();
   let u = useTeamPlanFeatures().unwrapOr(null);
   let g = e => {
-    u && (u.key.type === FOrganizationLevelType.ORG ? s(sf({
+    u && (u.key.type === FOrganizationLevelType.ORG ? s(selectViewAction({
       view: "orgAdminSettings",
       orgAdminSettingsViewTab: DashboardSection.CONTENT,
       orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS,
       showResourceConnectionFlyout: e
-    })) : u.key.type === FOrganizationLevelType.TEAM && s(sf({
+    })) : u.key.type === FOrganizationLevelType.TEAM && s(selectViewAction({
       view: "teamAdminConsole",
       teamId: u.key.parentId,
       isProTeam: u.tier === FPlanNameType.PRO,

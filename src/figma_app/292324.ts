@@ -5,7 +5,7 @@ import { O5 } from "../figma_app/632319";
 import { mt } from "../figma_app/102712";
 import { getI18nString } from "../905/303541";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _P } from "../figma_app/2590";
 export var $$p7 = (e => (e[e.PRESENTATION = 0] = "PRESENTATION", e[e.CUSTOM = 1] = "CUSTOM", e[e.LARGE = 2] = "LARGE", e[e.SMALL = 3] = "SMALL", e[e.DEFAULT = 4] = "DEFAULT", e))($$p7 || {});
 function _(e, t, r) {
@@ -17,7 +17,7 @@ function _(e, t, r) {
     }
   })));
 }
-export function $$h8() { }
+export function $$h8() {}
 export function $$m6(e, t = !1) {
   let [r, i] = useState(0);
   let [a, o] = useState(0);
@@ -72,7 +72,7 @@ createOptimistThunk((e, {
   forceReplaceState: n
 }) => {
   let i = e.getState().selectedView;
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     ...i,
     nodeId: t,
     startingPointNodeId: r,

@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { l as _$$l } from "../905/767868";
 import { C as _$$C } from "../905/226458";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { fA } from "../figma_app/543100";
 import { _6 } from "../figma_app/386952";
 import { DUserRole, TGroupType } from "../figma_app/858344";
@@ -253,7 +253,7 @@ export function $$W1(e, t) {
     ("workspace" !== a.view || a.subView !== DUserRole.DIRECTORY) && (i = {
       text: getI18nString("file_browser.pinning.pin_modal.confirmation_bell.view_workspace"),
       action: () => {
-        r(sf({
+        r(selectViewAction({
           view: "workspace",
           subView: DUserRole.DIRECTORY,
           workspaceId: s,

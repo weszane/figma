@@ -46,7 +46,7 @@ import { Av, dx } from "../figma_app/646357";
 import { H as _$$H } from "../905/216861";
 import { e_ as _$$e_ } from "../figma_app/803787";
 import { PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { registerModal } from "../905/102752";
 import { CK } from "../figma_app/517115";
 import { tM as _$$tM, k1 } from "../figma_app/984498";
@@ -738,7 +738,7 @@ export function $$tu1({
       },
       insertAsChildOfCanvas: !0,
       percentageOffset: new Point(.5, .5),
-      storeInRecentsKey: $A.Design,
+      storeInRecentsKey: FDocumentType.Design,
       useSmartPositioning: !0,
       fromPlayground: K.data
     };

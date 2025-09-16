@@ -18,7 +18,7 @@ import { FFileType } from "../figma_app/191312";
 import { ju } from "../905/187165";
 import { mapEditorTypeToFileType } from "../figma_app/53721";
 import { lF } from "../figma_app/915202";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { uj0 } from "../figma_app/27776";
 import { DT, A7, BT, cE, AV, Wn, ZT, dV, Dn, k1, Mf, mb, Dg, cu, oQ, pm, BL, pn, Ts, n1, xo, Ag, iI, OU, Uo, v0, uq, wn, hj, nR, Rp, CU, U0, A6, QT, WH, y6, Pd, fb, $8, Zu, _M, BM, On, pT } from "../905/32836";
 import { A as _$$A } from "../1617/426430";
@@ -72,7 +72,7 @@ export function $$L2(e) {
   }
 }
 function P(e) {
-  let t = useSelector(e => $A(e.selectedView) ? 0 : parsePxNumber(uj0));
+  let t = useSelector(e => isFullscreenDevHandoffView(e.selectedView) ? 0 : parsePxNumber(uj0));
   return jsxs("div", {
     className: A7,
     children: [jsx("div", {

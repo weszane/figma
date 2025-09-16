@@ -10,7 +10,7 @@ import { nl, Pf } from "../905/590952";
 import { tc } from "../905/15667";
 import { Xt } from "../figma_app/297957";
 import { TrackingProvider } from "../figma_app/831799";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { yF } from "../figma_app/386952";
 import { ViewerRestrictedDraftAccessLog } from "../figma_app/43951";
@@ -64,7 +64,7 @@ export function $$N0({
   target: t
 }) {
   let n = Bj(500);
-  let a = m0();
+  let a = isDevHandoffEditorType();
   let l = useSubscription(ViewerRestrictedDraftAccessLog, {
     fileKey: e.key,
     orgId: e.parentOrgId || null,

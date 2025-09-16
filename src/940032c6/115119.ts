@@ -76,7 +76,7 @@ import { useSprigWithSampling } from '../905/99656';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { h as _$$h } from '../905/104000';
 import { Z as _$$Z7 } from '../905/104740';
-import { R as _$$R9 } from '../905/105002';
+import { getPanelTypeString } from '../905/105002';
 import { E as _$$E2 } from '../905/105281';
 import { t as _$$t6 } from '../905/117577';
 import { m as _$$m } from '../905/118468';
@@ -155,7 +155,7 @@ import { f as _$$f11 } from '../905/335032';
 import { Q as _$$Q0 } from '../905/346809';
 import { P as _$$P2 } from '../905/347284';
 import { a as _$$a18 } from '../905/361302';
-import { Q as _$$Q5 } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { O as _$$O0 } from '../905/365108';
 import { c as _$$c8 } from '../905/370443';
 import { selectCurrentUser, selectUser } from '../905/372672';
@@ -313,7 +313,7 @@ import { A as _$$A21 } from '../905/920165';
 import { X as _$$X4 } from '../905/924044';
 import { A as _$$A16 } from '../905/925160';
 import { a as _$$a11 } from '../905/925868';
-import { j7 as _$$j2, oB as _$$oB, sf as _$$sf } from '../905/929976';
+import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { z as _$$z8 } from '../905/931953';
 import { q as _$$q2 } from '../905/932270';
 import { I as _$$I4 } from '../905/932503';
@@ -494,7 +494,7 @@ import { mg as _$$mg, atom, atomStoreManager, createRemovableAtomFamily, useAtom
 import { MGP } from '../figma_app/27776';
 import { AssetAtomMap } from '../figma_app/31188';
 import { bi as _$$bi, cT as _$$cT, g_ as _$$g_, TU as _$$TU, vr as _$$vr, GQ } from '../figma_app/32128';
-import { hM as _$$hM, Sn as _$$Sn } from '../figma_app/32891';
+import { isPanelDisabled, getLoadingAndReadOnlyState } from '../figma_app/32891';
 import { Y9 as _$$Y } from '../figma_app/42724';
 import { pO as _$$pO } from '../figma_app/42945';
 import { c as _$$c7 } from '../figma_app/43065';
@@ -506,7 +506,7 @@ import { kF as _$$kF2 } from '../figma_app/48566';
 import { rH as _$$rH } from '../figma_app/49598';
 import { R as _$$R7 } from '../figma_app/53049';
 import { FEditorType, mapFileTypeToEditorType } from '../figma_app/53721';
-import { $y, Cs as _$$Cs, cV as _$$cV } from '../figma_app/59509';
+import { BannerInsetModal, BannerFullWidth, BannerInline } from '../figma_app/59509';
 import { cF as _$$cF2, Az } from '../figma_app/61758';
 import { addViewportOffset, getViewportInfo, computeFullscreenViewportForNode } from '../figma_app/62612';
 import { Q as _$$Q13 } from '../figma_app/67145';
@@ -525,7 +525,7 @@ import { Fz } from '../figma_app/106207';
 import { S as _$$S9 } from '../figma_app/106763';
 import { om as _$$om, ON } from '../figma_app/109413';
 import { b5 as _$$b4, hi as _$$hi, iI as _$$iI, T_ as _$$T_, wh as _$$wh, xB as _$$xB, yq as _$$yq, zl as _$$zl, DW, Jl, LS, OY, UM, US, Wn, Xq, Y3, ZY, Zy } from '../figma_app/114522';
-import { $e, bP as _$$bP, s0 as _$$s3, Nl } from '../figma_app/115923';
+import { ViewActionType, booleanAtomFamily, sitesViewSetterAtomFamily, Nl } from '../figma_app/115923';
 import { bm as _$$bm, g$ as _$$g$, Lc } from '../figma_app/116234';
 import { _9 as _$$_6, qQ } from '../figma_app/119420';
 import { n8 as _$$n7, Py as _$$Py, xG as _$$xG } from '../figma_app/121043';
@@ -804,7 +804,7 @@ import { zY } from '../figma_app/973219';
 import { Lk, LN, X9, z7 } from '../figma_app/975811';
 import { a2 as _$$a16, Ay as _$$Ay9, Cy as _$$Cy, n9 as _$$n12, HS } from '../figma_app/976110';
 import { V3 } from '../figma_app/976345';
-import { lg as _$$lg } from '../figma_app/976749';
+import { getCurrentFileType } from '../figma_app/976749';
 import { kk as _$$kk, Hb } from '../figma_app/986594';
 import { Mq } from '../figma_app/991591';
 import { bA as _$$bA, j$ as _$$j$2, oD as _$$oD, tE as _$$tE, F8 } from '../figma_app/991782';
@@ -2021,7 +2021,7 @@ function iF({
   let C = getSingletonSceneGraph().get(S);
   let T = useAtomWithSubscription(_$$T_);
   let I = getSingletonSceneGraph().get(T);
-  let E = (useAtomWithSubscription(_$$s3) === PanelType.CODE ? I : C) ?? x;
+  let E = (useAtomWithSubscription(sitesViewSetterAtomFamily) === PanelType.CODE ? I : C) ?? x;
   let N = useMemo(() => {
     let e = x?.codeFilePath || void 0;
     return jsx(_$$S, {
@@ -2097,10 +2097,10 @@ let iM = ({
   let t = [];
   let i = useAtomWithSubscription(_$$hi);
   let [, n] = useAtomValueAndSetter(_$$zl);
-  let [, l] = useAtomValueAndSetter(_$$s3);
+  let [, l] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
   let {
     readOnlyUser
-  } = _$$Sn();
+  } = getLoadingAndReadOnlyState();
   let d = _$$cu();
   let c = d.length > 0 && d[0];
   let p = Fk(e => !!c && !!e.get(c)?.canBeRestoredToDesignNode(), c);
@@ -2821,7 +2821,7 @@ function nH({
   let t = useIsSelectedFigmakeFullscreen();
   let {
     fileLoading
-  } = _$$Sn();
+  } = getLoadingAndReadOnlyState();
   return fileLoading || !e ? null : jsx('div', {
     ..._$$Ay.props(nX.fullscreenPanel, nX.leftOffset(!t)),
     children: e
@@ -2830,7 +2830,7 @@ function nH({
 function nq() {
   let e = function () {
     let e = useIsSelectedFigmakeFullscreen();
-    let t = Xr(_$$s3);
+    let t = Xr(sitesViewSetterAtomFamily);
     let i = _$$C4();
     return e ? () => {
       i(AppView.FILE);
@@ -3377,7 +3377,7 @@ function am({
         }), f && h.current && jsx(Jz, {
           options: j,
           hideDropdown: () => {
-            x(_$$oB());
+            x(hideDropdownAction());
           },
           targetRect: h.current.getBoundingClientRect(),
           lean: 'left'
@@ -3389,7 +3389,7 @@ function am({
             user: e.actor?.handle ?? getI18nString('sites.toolbar.publish_modal.unknown_user')
           }),
           'onClick': e => {
-            x(_$$j2({
+            x(showDropdownThunk({
               type: g,
               data: {
                 targetRect: e.currentTarget.getBoundingClientRect()
@@ -5017,7 +5017,7 @@ function s5({
       children: [i && jsx(_$$K2, {
         'aria-label': getI18nString('figmake.fullscreen_preview_back_to_files_tooltip'),
         'onClick': () => {
-          p(_$$sf({
+          p(selectViewAction({
             view: 'recentsAndSharing'
           }));
         },
@@ -6606,7 +6606,7 @@ function ob() {
       };
     }();
     let [c, x] = useAtomValueAndSetter(_$$j4);
-    let [m, h] = useAtomValueAndSetter(_$$s3);
+    let [m, h] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
     let g = useCallback((e, t) => {
       e.stopPropagation();
       d.setUploadTarget(t);
@@ -7769,9 +7769,9 @@ function o2({
     message: renderI18nText('sites.metadata.domain.awaiting_ssl_cert_message')
   }), t) ? jsx('div', {
     className: 'x1fzhlzt',
-    children: jsx($y, {
+    children: jsx(BannerInsetModal, {
       variant: t.variant,
-      children: jsx(_$$Q5, {
+      children: jsx(BannerMessage, {
         title: t.title,
         children: t.message
       })
@@ -7999,7 +7999,7 @@ function dl({
   let c = useTeamPlanFeatures();
   let p = useIsStarterPlan(c);
   let x = _$$ol();
-  let m = _$$lg();
+  let m = getCurrentFileType();
   let h = i.status === 'loading';
   let g = i.status === 'loaded' && i.data.limitReached;
   if (o && !h && !g) {
@@ -8129,7 +8129,7 @@ function dc({
   let n = Um();
   let r = n?.type === dd;
   let o = useCallback(() => {
-    r ? i(_$$oB()) : i(_$$j2({
+    r ? i(hideDropdownAction()) : i(showDropdownThunk({
       type: dd
     }));
   }, [i, r]);
@@ -8159,7 +8159,7 @@ function du({
   let n = !!getFeatureFlags().apex_domain_support;
   let a = t.customDomainType === 'apex' || t.customDomainType === 'subdomain' && qg(t.customDomain).subdomain === 'www';
   return jsxs(_$$gw, {
-    closeDropdown: () => i(_$$oB()),
+    closeDropdown: () => i(hideDropdownAction()),
     positionAbsolute: !0,
     id: dd,
     style: {
@@ -8667,9 +8667,9 @@ function dN({
     }), jsx(dk, {
       fileKey: e,
       domainInfo: t
-    }), Object.keys(combinedActivationStatus).length === 0 && jsx($y, {
+    }), Object.keys(combinedActivationStatus).length === 0 && jsx(BannerInsetModal, {
       variant: 'default',
-      children: jsx(_$$Q5, {
+      children: jsx(BannerMessage, {
         children: renderI18nText('sites.metadata.domain.it_can_take_up_to_24_hours_for_dns_settings_to_propagate_with_learn_more_link', {
           learnMoreLink: jsx(_$$N6, {
             href: 'https://help.figma.com/hc/articles/31414274019863',
@@ -8803,7 +8803,7 @@ function dz({
   }), {
     enabled: !0
   });
-  let n = _$$lg();
+  let n = getCurrentFileType();
   let r = mapFileToProductType({
     editorType: n
   });
@@ -9016,9 +9016,9 @@ function dz({
             })]
           }), y.length > 0 && jsx('div', {
             className: 'x7hzu26',
-            children: jsx($y, {
+            children: jsx(BannerInsetModal, {
               variant: 'warn',
-              children: jsx(_$$Q5, {
+              children: jsx(BannerMessage, {
                 children: getI18nString('sites.settings.password_protection.store_password_warning')
               })
             })
@@ -11419,12 +11419,12 @@ function uT() {
     return figmakeInFullscreen && !e;
   }() ? null : jsx('div', {
     className: 'xh8yej3 x1rfw5dq',
-    children: jsxs(_$$Cs, {
+    children: jsxs(BannerFullWidth, {
       variant: 'warn',
       onDismiss: () => {
         e(!0);
       },
-      children: [jsx(_$$Q5, {
+      children: [jsx(BannerMessage, {
         title: getI18nString('figmake.fullscreen_preview.unsafe_content_warning'),
         children: jsx(Fragment, {})
       }), jsx(_$$N7, {
@@ -14869,7 +14869,7 @@ function mj({
   focusedFieldSchemaId: i
 }) {
   let n;
-  n = useAtomWithSubscription(_$$s3) === PanelType.DAKOTA ? 'connect_mode' : 'properties_panel';
+  n = useAtomWithSubscription(sitesViewSetterAtomFamily) === PanelType.DAKOTA ? 'connect_mode' : 'properties_panel';
   return jsx(TrackingProvider, {
     name: 'CMS View',
     properties: {
@@ -17230,7 +17230,7 @@ function h0(e) {
       buildCodeInteractionsRows: () => v(f)
     }), [v, x, m, f]);
   }();
-  let P = Xr(_$$s3);
+  let P = Xr(sitesViewSetterAtomFamily);
   let O = e => {
     let t = getSingletonSceneGraph().get(e);
     t && _$$xB(t);
@@ -17242,7 +17242,7 @@ function h0(e) {
       clientX,
       clientY
     } = t;
-    d(_$$j2({
+    d(showDropdownThunk({
       type: _$$jQ,
       data: {
         clientX,
@@ -17611,7 +17611,7 @@ function h7() {
 }
 function h9() {
   let e = _$$b2();
-  let t = Xr(_$$s3);
+  let t = Xr(sitesViewSetterAtomFamily);
   let i = !!Object.values(useAtomWithSubscription(AssetAtomMap[PrimaryWorkflowEnum.CODE_FILE].local)).filter(h4).length;
   let n = function () {
     let e = useAtomWithSubscription(Y3);
@@ -18540,7 +18540,7 @@ function gL(e) {
       clientX,
       clientY
     } = t;
-    g(_$$j2({
+    g(showDropdownThunk({
       type: J7,
       data: {
         clientX,
@@ -18733,7 +18733,7 @@ function gO() {
     })
   });
   let C = jsx(cI, {});
-  let T = useAtomWithSubscription(_$$s3);
+  let T = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let I = _$$q8();
   let E = (() => {
     if (I) return j;
@@ -18869,7 +18869,7 @@ function gU({
   });
 }
 function gK() {
-  let e = Xr(_$$s3);
+  let e = Xr(sitesViewSetterAtomFamily);
   let t = Xr(_$$j4);
   return jsx(_$$K2, {
     'aria-label': getI18nString('sites.metadata.domain.warning_icon_indicating_that_the_custom_domain_has_not_been_verified'),
@@ -18923,7 +18923,7 @@ function g6({
   iconProps: e,
   ...t
 }) {
-  let i = _$$hM(e.key);
+  let i = isPanelDisabled(e.key);
   return jsx(_$$A18.IconButton, {
     ...e,
     ...t,
@@ -18956,7 +18956,7 @@ function g7() {
       closeOverlay
     } = _$$h13();
     let x = hasOverlay && !overlayClosing;
-    let [h, g] = useAtomValueAndSetter(_$$s3);
+    let [h, g] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
     let f = useDispatch();
     let _ = useCallback(t => {
       getFeatureFlags().sts_sprig_targeted_feedback && i && h === PanelType.CODE && t === PanelType.FILE && Sprig('track', 'sites_code_layer_edit');
@@ -18972,7 +18972,7 @@ function g7() {
     let j = [{
       active: h === PanelType.FILE && !x,
       hide: !1,
-      key: _$$R9(PanelType.FILE),
+      key: getPanelTypeString(PanelType.FILE),
       label: getI18nString('sites.side_rail.file'),
       icon: _$$g3,
       onClick: () => {
@@ -18983,12 +18983,12 @@ function g7() {
       },
       shortcut: 'set-sites-view-file'
     }, {
-      active: t === $e.INSERT && x,
+      active: t === ViewActionType.INSERT && x,
       key: 'insert',
       label: getI18nString('sites.side_rail.insert'),
       icon: _$$s1,
       onClick: () => {
-        t !== $e.INSERT && analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
+        t !== ViewActionType.INSERT && analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'insert'
         });
         _toggle();
@@ -18996,12 +18996,12 @@ function g7() {
       shortcut: 'set-sites-inserts-overlay',
       dataOnboardingKey: _$$we
     }, {
-      active: t === $e.FIND && x,
+      active: t === ViewActionType.FIND && x,
       key: 'search',
       label: getI18nString('sites.side_rail.search'),
       icon: _$$h12,
       onClick: () => {
-        t !== $e.FIND && analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
+        t !== ViewActionType.FIND && analyticsEventManager.trackDefinedEvent('sites.left_rail_tab_selected', {
           name: 'find'
         });
         toggle();
@@ -19012,7 +19012,7 @@ function g7() {
       active: h === PanelType.CODE,
       disabled: !y,
       hide: !b,
-      key: _$$R9(PanelType.CODE),
+      key: getPanelTypeString(PanelType.CODE),
       label: getI18nString('sites.side_rail.code'),
       icon: _$$t2,
       onClick: () => _(PanelType.CODE),
@@ -19025,7 +19025,7 @@ function g7() {
     }, {
       active: h === PanelType.DAKOTA,
       disabled: !v,
-      key: _$$R9(PanelType.DAKOTA),
+      key: getPanelTypeString(PanelType.DAKOTA),
       label: getI18nString('sites.side_rail.cms'),
       icon: _$$i5,
       onClick: () => _(PanelType.DAKOTA),
@@ -19037,7 +19037,7 @@ function g7() {
       }
     }, {
       active: h === PanelType.SETTINGS,
-      key: _$$R9(PanelType.SETTINGS),
+      key: getPanelTypeString(PanelType.SETTINGS),
       label: getI18nString('sites.side_rail.settings'),
       icon: _$$I4,
       onClick: () => {
@@ -19082,7 +19082,7 @@ function g7() {
       fullViews: k
     };
   }();
-  let [n, d] = useAtomValueAndSetter(_$$s3);
+  let [n, d] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
   let c = canvasViews.map(e => jsx(g6, {
     iconProps: e
   }, e.key));
@@ -19122,12 +19122,12 @@ function g7() {
   });
 }
 let g9 = memo(() => {
-  let e = useAtomWithSubscription(_$$s3);
+  let e = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let t = useAtomWithSubscription(Nl);
-  let i = useAtomWithSubscription(_$$bP);
+  let i = useAtomWithSubscription(booleanAtomFamily);
   let n = useDispatch();
   useEffect(() => {
-    let i = _$$R9(e);
+    let i = getPanelTypeString(e);
     t && (i = t);
     setTagGlobal('sites-area', i);
     return () => setTagGlobal('sites-area', void 0);
@@ -19155,12 +19155,12 @@ let g9 = memo(() => {
   let g = GQ();
   if (!_$$p2('showUi')) return null;
   let f = null;
-  if (t === $e.FIND ? f = jsx(EA.Provider, {
+  if (t === ViewActionType.FIND ? f = jsx(EA.Provider, {
     value: !0,
     children: jsx(_$$f10, {
       showFilter: !0
     })
-  }) : t === $e.INSERT && (f = jsx(_$$g7, {
+  }) : t === ViewActionType.INSERT && (f = jsx(_$$g7, {
     width: g
   })), isLeftPanelCollapsed) {
     return jsx('div', {
@@ -19412,7 +19412,7 @@ function fy() {
   let g = e => {
     e === 'close_button_clicked' && (n(postUserFlag({
       [Vc]: !1
-    })), n(_$$sf({
+    })), n(selectViewAction({
       view: 'recentsAndSharing'
     })));
   };
@@ -22651,7 +22651,7 @@ function yv({
   currentCollection: e,
   recordingKey: t
 }) {
-  let [, i] = useAtomValueAndSetter(_$$s3);
+  let [, i] = useAtomValueAndSetter(sitesViewSetterAtomFamily);
   let [, n] = useAtomValueAndSetter(_$$iO);
   let a = jsx('div', {
     className: yu,
@@ -24940,10 +24940,10 @@ function jW(e) {
       input: v
     }), y && errorMessage && jsx('div', {
       className: 'x1gcgh60 x1jwbysl x1vi7shn xp6roeo',
-      children: jsx(_$$cV, {
+      children: jsx(BannerInline, {
         'variant': 'default',
         'data-testid': 'generic-embed-error-banner',
-        'children': jsx(_$$Q5, {
+        'children': jsx(BannerMessage, {
           children: errorMessage
         })
       })
@@ -30813,7 +30813,7 @@ let T2 = memo(({
   let f = selectCurrentFile();
   let _ = f ? f.key : '';
   let y = _$$p2('showUi');
-  let v = useAtomWithSubscription(_$$s3);
+  let v = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let j = v === PanelType.DAKOTA;
   let k = _$$U();
   let S = useDispatch();

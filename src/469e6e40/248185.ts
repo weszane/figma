@@ -2,7 +2,7 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { AutoLayout, Spacer } from "../905/470281";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { throwTypeError } from "../figma_app/465776";
 import { getI18nString } from "../905/303541";
@@ -17,7 +17,7 @@ export function $$$$m0({
   let p = "workspace" === m.view && m.subView === DUserRole.ADMIN ? m.workspaceId : null;
   let g = "workspace" === m.view && m.subView === DUserRole.ADMIN ? m.orgAdminOriginTab : void 0;
   let h = useCallback(e => {
-    p && a(sf({
+    p && a(selectViewAction({
       view: "workspace",
       subView: DUserRole.ADMIN,
       selectedTab: e,

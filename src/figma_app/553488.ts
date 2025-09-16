@@ -9,7 +9,7 @@ import { k8 } from "../figma_app/49598";
 import { Bs } from "../figma_app/933328";
 import { Hx } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
-import { $A, vt } from "../905/862883";
+import { FDocumentType, ITemplateType } from "../905/862883";
 import { Y } from "../figma_app/526287";
 import { q } from "../figma_app/446378";
 import { Xi } from "../figma_app/634146";
@@ -108,13 +108,13 @@ export function $$A8(e, t) {
     fileKey: b(t)
   }));
   e(Hx({
-    storeInRecentsKey: $A.Slides,
+    storeInRecentsKey: FDocumentType.Slides,
     ...(t.isHubFile ? {
       id: b(t),
-      type: vt.CommunityResource
+      type: ITemplateType.CommunityResource
     } : {
       file_key: b(t),
-      type: vt.TeamTemplate
+      type: ITemplateType.TeamTemplate
     })
   }));
 }

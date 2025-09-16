@@ -27,7 +27,7 @@ import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { FEventType } from "../figma_app/191312";
 import { DevModeActivity } from "../figma_app/43951";
 import { IT } from "../905/713695";
-import { cn, tP, kT } from "../figma_app/841351";
+import { generateCanvasKey, versionHistoryKeyAtom, fileVersionsQuery } from "../figma_app/841351";
 import { ViewType } from "../905/535806";
 import { NK } from "../figma_app/111825";
 import { compareChangesModalPadding } from "../figma_app/786175";
@@ -47,7 +47,7 @@ export function $$V13(e, t) {
   let n = useSelector(e => e.mirror.appModel.currentPage);
   let i = t ?? n;
   let s = useSelector(e => e.fileVersion);
-  return !!r && !!i && !!e && cn(r, i, e, NK(s)) === atomStoreManager.get(tP);
+  return !!r && !!i && !!e && generateCanvasKey(r, i, e, NK(s)) === atomStoreManager.get(versionHistoryKeyAtom);
 }
 export function $$H7(e) {
   let t = new Map();
@@ -62,7 +62,7 @@ export function $$z8(e) {
   let t = useCurrentFileKey();
   let r = $$K1(e ?? "");
   let n = e ? ("loading" === r ? null : r)?.map(e => e.version?.id).filter(_$$t) : void 0;
-  let a = kT({
+  let a = fileVersionsQuery({
     fileKey: t,
     pageSize: 200,
     versionIds: n

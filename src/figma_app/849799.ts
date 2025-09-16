@@ -1,8 +1,8 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { Label } from "../905/270045";
-import { $y } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInsetModal } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { N as _$$N } from "../905/438674";
 import { p as _$$p } from "../905/185998";
@@ -154,9 +154,9 @@ export let $$L0 = function (e) {
     children: jsx(UI3ConditionalWrapper, {
       children: jsxs(_$$J2, {
         brand: "design",
-        children: [null !== W && jsx($y, {
+        children: [null !== W && jsx(BannerInsetModal, {
           variant: W ? "success" : "danger",
-          children: jsx(Q, {
+          children: jsx(BannerMessage, {
             title: W ? renderI18nText("report_abuse.submission_successful_title") : renderI18nText("report_abuse.submission_failed_title"),
             children: W ? renderI18nText("report_abuse.submission_successful_description") : renderI18nText("report_abuse.submission_failed_description")
           })

@@ -13,7 +13,7 @@ import { l as _$$l } from "../905/745972";
 import { P8 } from "../905/270781";
 import { Bn } from "../905/879323";
 import { Dm } from "../figma_app/8833";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Z } from "../905/224161";
 import { dB } from "../905/640017";
 import { UK } from "../figma_app/740163";
@@ -128,7 +128,7 @@ function I({
   let M = dB();
   let F = useRef(null);
   Z("legacy" === M ? "light" : M, F, c);
-  let I = lg();
+  let I = getCurrentFileType();
   let {
     windowInnerHeight
   } = _$$l();

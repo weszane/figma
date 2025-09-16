@@ -10,7 +10,7 @@ import { formatNumber } from "../figma_app/930338";
 import { Point } from "../905/736624";
 import { getI18nString } from "../905/303541";
 import { g as _$$g } from "../figma_app/777171";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { z4 } from "../905/37051";
 import { getBasicViewportRect } from "../figma_app/62612";
 import { t as _$$t2 } from "../905/192333";
@@ -36,7 +36,7 @@ export function $$M8(e) {
     let e = getBasicViewportRect();
     return useMemo(() => new Point(e.x + C, e.y + C), [e.x, e.y]);
   }();
-  let r = m0();
+  let r = isDevHandoffEditorType();
   let n = useSelector(e => e.universalInsertModal.pinned);
   let s = useAtomWithSubscription(_$$g);
   if (z4.getIsExtension()) return s - C - e;

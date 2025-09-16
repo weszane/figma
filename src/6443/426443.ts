@@ -12,7 +12,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { We, UU, Qe } from "../figma_app/770088";
 import { Hx } from "../figma_app/530167";
-import { pP, jD } from "../905/765855";
+import { setTargetRef, hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 import { Ty, pP as _$$pP, yO, I2 } from "../905/331019";
 import { FFileType } from "../figma_app/191312";
@@ -1460,7 +1460,7 @@ export class $$tA0 extends Component {
         }
       }
     }
-    this.props.editorRef && this.props.editorType && this.props.dispatch(pP({
+    this.props.editorRef && this.props.editorType && this.props.dispatch(setTargetRef({
       targetKey: this.props.editorType,
       targetRef: this.props.editorRef
     }));
@@ -1525,7 +1525,7 @@ export class $$tA0 extends Component {
       i = n || "";
       r = t;
       s = e;
-    }), !i)), this.props.dispatch(jD()), "" === i) return;
+    }), !i)), this.props.dispatch(hideTooltip()), "" === i) return;
     let o = this.state.editorState.getSelection().merge({
       anchorKey: i,
       focusKey: i,

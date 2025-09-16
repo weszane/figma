@@ -52,7 +52,7 @@ import { v as _$$v2 } from '../905/318279';
 import { N_ as _$$N_2, Oq } from '../905/332483';
 import { createOptimistThunk } from '../905/350402';
 import { $ as _$$$ } from '../905/355181';
-import { Q as _$$Q } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { c as _$$c } from '../905/370443';
 import { selectUser } from '../905/372672';
 import { useModalManager } from '../905/437088';
@@ -94,10 +94,10 @@ import { AutoLayout } from '../905/470281';
 import { useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { n as _$$n } from '../905/861286';
-import { $A } from '../905/862883';
+import { FDocumentType } from '../905/862883';
 import { XHR } from '../905/910117';
 import { A as _$$A } from '../905/920142';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { q as _$$q3 } from '../905/932270';
 import { sx as _$$sx } from '../905/941192';
 import { B as _$$B } from '../905/950875';
@@ -118,10 +118,10 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { atom, useAtomValueAndSetter, useAtomWithSubscription, Xr } from '../figma_app/27355';
 import { useLatestRef } from '../figma_app/922077';
 import { IpAllowlistRangesView, OrgAdminSettingsPage, OrgMfaGuestInfoView, Plugin, OrgWorkspacesWithControlSettingsView, OrgMfaMemberInfoView, OrgSharedSettingView, ToggledDevModeSettingsView } from '../figma_app/43951';
-import { $y } from '../figma_app/59509';
+import { BannerInsetModal } from '../figma_app/59509';
 import { $$ as _$$$$, nR as _$$nR2 } from '../figma_app/60079';
 import { aY as _$$aY, JA } from '../figma_app/78725';
-import { Ke as _$$Ke, Em } from '../figma_app/120227';
+import { getCodegenPreferencesSettings, isCodegenSupportedForLanguage } from '../figma_app/120227';
 import { G as _$$G } from '../figma_app/124713';
 import { gU, HQ } from '../figma_app/147952';
 import { I2, Xf } from '../figma_app/153916';
@@ -148,7 +148,7 @@ import { range } from '../figma_app/492908';
 import { $w, hi, Hq, KA, Kc, NL, OT, q4, Sl, Tf, vs, xP, Xw, Y4, ye, yo } from '../figma_app/494261';
 import { getUserIsoCode } from '../figma_app/514043';
 import { c4 } from '../figma_app/518077';
-import { IE } from '../figma_app/545541';
+import { setupOrgPluginPreferences } from '../figma_app/545541';
 import { isFigmakeSitesEnabled } from '../figma_app/552876';
 import { handleSuspenseRetainRelease } from '../figma_app/566371';
 import { p3 } from '../figma_app/588582';
@@ -368,9 +368,9 @@ function e_(e) {
       })
     }), !d && c && jsx('div', {
       className: _$$s.mt16.$,
-      children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx($y, {
+      children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx(BannerInsetModal, {
         variant: 'warn',
-        children: jsxs(_$$Q, {
+        children: jsxs(BannerMessage, {
           title: renderI18nText('org_settings.mfa_for_members.warning_title', {
             numMembers: e.nonMfaMemberCount
           }),
@@ -1885,7 +1885,7 @@ function aj({
   let _ = jsx(SecureLink, {
     onClick: () => {
       if (desktopAPIInstance) {
-        c(sf({
+        c(selectViewAction({
           view: 'org',
           orgId: o ?? '',
           orgViewTab: _$$X.PLUGINS
@@ -2249,7 +2249,7 @@ function a$({
   currentUnit: e,
   onCodeLanguageUnitChange: t
 }) {
-  return Em() ? jsxs('div', {
+  return isCodegenSupportedForLanguage() ? jsxs('div', {
     'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
     'data-testid': 'org-admin-codegen-unit-row',
     'children': [jsx(TextWithTruncation, {
@@ -2270,7 +2270,7 @@ function aB({
 }) {
   let a = v4();
   let s = QN();
-  let i = _$$Ke({
+  let i = getCodegenPreferencesSettings({
     codeLanguage: a,
     plugin: s,
     codeExtensionPreferences: e,
@@ -2312,7 +2312,7 @@ function az({
   let [h, x] = useState(void 0);
   useEffect(() => {
     e?.loaded && e?.localCodegenSettings && !c && _(() => (e.localCodegenSettings?.language.type === 'published-plugin' && (x(e.localCodegenSettings.language), a(gU({
-      storeInRecentsKey: $A.Handoff,
+      storeInRecentsKey: FDocumentType.Handoff,
       id: e.localCodegenSettings.language.id,
       version: void 0,
       currentUserId: void 0,
@@ -2321,7 +2321,7 @@ function az({
   }, [e?.loaded, e?.localCodegenSettings, c, a]);
   useEffect(() => {
     a(HQ({
-      storeInRecentsKey: $A.Handoff
+      storeInRecentsKey: FDocumentType.Handoff
     }));
   }, [a]);
   let b = useSelector(e => e.whitelistedPlugins);
@@ -2363,7 +2363,7 @@ function az({
                 let t = getCodegenLanguagePreference(n);
                 e?.setCodegenSettingsLanguage(t);
                 a(gU({
-                  storeInRecentsKey: $A.Handoff,
+                  storeInRecentsKey: FDocumentType.Handoff,
                   id: n.plugin_id,
                   version: n.version,
                   currentUserId: void 0,
@@ -2506,7 +2506,7 @@ function aW() {
 let aH = registerModal(() => {
   let e = useCurrentUserOrg() || null;
   let t = useDispatch();
-  let a = IE();
+  let a = setupOrgPluginPreferences();
   let [r, l] = useAtomValueAndSetter(aC);
   let [o, d] = useAtomValueAndSetter(aE);
   let [_, u] = useAtomValueAndSetter(aS);
@@ -2530,7 +2530,7 @@ let aH = registerModal(() => {
   useEffect(() => {
     f.status === 'loaded' && (d(f.data?.pluginPreferences?.pinnedPluginsEnabled || !1), l(f.data?.pluginPreferences?.autoRunEnabled || !1), u(f.data?.pluginPreferences?.codegenEnabled || !1));
   }, [f.status, f.data, d, l, u]);
-  let y = IE().serialize();
+  let y = setupOrgPluginPreferences().serialize();
   let k = JA();
   let C = useMemo(() => ({
     preferences: y,
@@ -3095,9 +3095,9 @@ function n_(e) {
       })
     }), !d && c && jsx('div', {
       className: _$$s.mb10.$,
-      children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx($y, {
+      children: e.isLoading ? jsx(LoadingOverlay, {}) : jsx(BannerInsetModal, {
         variant: 'warn',
-        children: jsxs(_$$Q, {
+        children: jsxs(BannerMessage, {
           title: renderI18nText('org_settings.guest_control_revamp.mfa_for_guests_warning.title', {
             numGuests: e.nonMfaGuestCount
           }),
@@ -4287,9 +4287,9 @@ let n9 = registerModal(e => {
             children: renderI18nText('settings_tab.sites_publishing_toggle_label')
           })
         }), jsxs(_$$nB, {
-          children: [c && c !== d && jsx($y, {
+          children: [c && c !== d && jsx(BannerInsetModal, {
             variant: 'danger',
-            children: jsx(_$$Q, {
+            children: jsx(BannerMessage, {
               children: renderI18nText('org_settings.sites_publishing_toggle.banner')
             })
           }), jsxs(_$$b, {
@@ -4371,9 +4371,9 @@ let se = registerModal(e => {
             children: renderI18nText('settings_tab.supabase_toggle_label')
           })
         }), jsxs(_$$nB, {
-          children: [c && c !== d && jsx($y, {
+          children: [c && c !== d && jsx(BannerInsetModal, {
             variant: 'danger',
-            children: jsx(_$$Q, {
+            children: jsx(BannerMessage, {
               children: renderI18nText('org_settings.supabase_toggle.banner_link', {
                 learnMoreLink: jsx(SecureLink, {
                   target: '_blank',
@@ -4600,7 +4600,7 @@ export function $$sr0(e) {
     });
   }, [J, $, org]);
   let ef = useCallback(() => {
-    $(sf({
+    $(selectViewAction({
       view: 'orgDomainManagement'
     }));
   }, [$]);
@@ -4851,7 +4851,7 @@ export function $$sr0(e) {
     label: getI18nString('settings_tab.idp_label'),
     description: getI18nString('settings_tab.idp_description'),
     onClick: () => {
-      $(sf({
+      $(selectViewAction({
         view: 'orgIdpManagement'
       }));
     }

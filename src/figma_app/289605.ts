@@ -22,7 +22,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { X as _$$X } from "../905/99316";
 import { J as _$$J } from "../905/45438";
-import { Nh } from "../905/560959";
+import { InspectState } from "../905/560959";
 import { g as _$$g } from "../905/246147";
 import { gs, ON, KP } from "../figma_app/31103";
 import { b as _$$b } from "../905/217163";
@@ -261,7 +261,7 @@ function es({
   onClose: i,
   canOpenLibrary: a
 }) {
-  let o = KP("full_table", Nh.VariableDetailsModal);
+  let o = KP("full_table", InspectState.VariableDetailsModal);
   let l = _$$b({
     libraryKey: t,
     isDevHandoff: !0,
@@ -275,7 +275,7 @@ function es({
   });
   let c = _$$g({
     onShow: i,
-    entryPoint: Nh.VariableDetailsModal,
+    entryPoint: InspectState.VariableDetailsModal,
     variableId: e
   });
   return r || "loaded" === l.status && "loaded" === d.status ? a ? jsx(tH, {
@@ -427,7 +427,7 @@ function ep({
   let c = a?.subscriptionStatus === "LOCAL";
   let _ = a?.subscriptionStatus === "LOCAL" && a.isSoftDeleted;
   let h = a?.subscriptionStatus === "SUBSCRIBED" ? a.library_key : void 0;
-  let m = KP("full_table", Nh.VariableDetailsModal);
+  let m = KP("full_table", InspectState.VariableDetailsModal);
   let g = _$$b({
     libraryKey: h,
     isDevHandoff: !0,
@@ -439,7 +439,7 @@ function ep({
   let f = g.data?.link;
   let y = _$$g({
     onShow: t,
-    entryPoint: Nh.VariableDetailsModal,
+    entryPoint: InspectState.VariableDetailsModal,
     variableId: e
   });
   let b = useCallback(() => {

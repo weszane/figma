@@ -1,54 +1,96 @@
-import { PanelType, ViewType } from "../figma_app/763686";
-import { getFeatureFlags } from "../905/601108";
-import { atom } from "../figma_app/27355";
-import { debugState } from "../905/407919";
-import { sf } from "../905/929976";
-import { T } from "../905/868547";
-import { setupRemovableAtomFamily } from "../figma_app/615482";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { ou } from "../figma_app/32891";
-let $$p3 = setupRemovableAtomFamily(() => atom(e => e(_), (e, t, r) => {
-  let a = debugState.getState().selectedView;
-  if (!a) return;
-  if (r === PanelType.DAKOTA && !getFeatureFlags().dakota) {
-    console.error("A sites view was accessed that a user did not have permission to access", r);
-    return;
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { debugState } from '../905/407919'
+import { getFeatureFlags } from '../905/601108'
+import { isUIHiddenOrLocked } from '../905/868547'
+import { selectViewAction } from '../905/929976'
+import { atom } from '../figma_app/27355'
+import { DISABLED_PANEL_TYPES } from '../figma_app/32891'
+import { setupRemovableAtomFamily } from '../figma_app/615482'
+import { PanelType, ViewType } from '../figma_app/763686'
+
+// Original: $$p3
+// Refactored: sitesViewSetterAtomFamily
+// Atom family for setting the sites view, with permission checks and error handling.
+export const sitesViewSetterAtomFamily = setupRemovableAtomFamily(() => atom(
+  get => get(currentSitesViewAtom), // Getter for current sites view
+  (get, set, newSitesView: PanelType) => {
+    const selectedView = debugState.getState().selectedView
+    if (!selectedView)
+      return
+
+    // Permission check for DAKOTA panel
+    if (newSitesView === PanelType.DAKOTA && !getFeatureFlags().dakota) {
+      console.error('A sites view was accessed that a user did not have permission to access', newSitesView)
+      return
+    }
+
+    const updatedView = {
+      ...selectedView,
+      sitesView: newSitesView,
+    }
+    debugState.dispatch(selectViewAction(updatedView))
+  },
+))
+
+// Original: currentSitesViewAtom
+// Refactored: currentSitesViewAtom (kept name for clarity, but added types and comments)
+// Redux subscription atom that computes the current sites view based on state,
+// handling UI locks, read-only modes, disabled panels, and permissions.
+const currentSitesViewAtom = createReduxSubscriptionAtomWithState((state) => {
+  const selectedView = state.selectedView
+  const isUIHiddenOrLockedFlag = isUIHiddenOrLocked(state?.progressBarState?.mode)
+  const isReadOnly = state.mirror.appModel.isReadOnly || state.mirror.appModel.topLevelMode === ViewType.HISTORY
+
+  // Early return if UI is hidden/locked or no selected view
+  if (isUIHiddenOrLockedFlag || !selectedView || !selectedView.sitesView) {
+    return PanelType.FILE
   }
-  let l = {
-    ...a,
-    sitesView: r
-  };
-  debugState.dispatch(sf(l));
-}));
-let _ = createReduxSubscriptionAtomWithState(e => {
-  let t = e.selectedView;
-  let r = T(e?.progressBarState?.mode);
-  let a = e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === ViewType.HISTORY;
-  if (r || !t || !t.sitesView) return PanelType.FILE;
-  if (a && ou.includes(t.sitesView)) {
-    console.error(`'Requested sites view is not available for read-only users. Redirecting to the file view. Tried to access view=${t.sitesView}`);
-    let e = {
-      ...t,
-      sitesView: void 0
-    };
-    debugState.dispatch(sf(e));
-    return PanelType.FILE;
+
+  // Handle disabled panels for read-only users
+  if (isReadOnly && DISABLED_PANEL_TYPES.includes(selectedView.sitesView)) {
+    console.error(`Requested sites view is not available for read-only users. Redirecting to the file view. Tried to access view=${selectedView.sitesView}`)
+    const updatedView = {
+      ...selectedView,
+      sitesView: undefined,
+    }
+    debugState.dispatch(selectViewAction(updatedView))
+    return PanelType.FILE
   }
-  if (t.sitesView === PanelType.DAKOTA && !getFeatureFlags().dakota) {
-    console.error("A sites view was accessed that a user did not have permission to access", t.sitesView);
-    let e = {
-      ...t,
-      sitesView: void 0
-    };
-    debugState.dispatch(sf(e));
-    return PanelType.FILE;
+
+  // Permission check for DAKOTA panel
+  if (selectedView.sitesView === PanelType.DAKOTA && !getFeatureFlags().dakota) {
+    console.error('A sites view was accessed that a user did not have permission to access', selectedView.sitesView)
+    const updatedView = {
+      ...selectedView,
+      sitesView: undefined,
+    }
+    debugState.dispatch(selectViewAction(updatedView))
+    return PanelType.FILE
   }
-  return t.sitesView ?? PanelType.FILE;
-});
-export var $$h0 = (e => (e.FIND = "find", e.INSERT = "insert", e))($$h0 || {});
-let $$m1 = setupRemovableAtomFamily(() => atom(void 0));
-let $$g2 = setupRemovableAtomFamily(() => atom(!1));
-export const $e = $$h0;
-export const Nl = $$m1;
-export const bP = $$g2;
-export const s0 = $$p3;
+
+  return selectedView.sitesView ?? PanelType.FILE
+})
+
+// Original: $$h0
+// Refactored: ViewActionType
+// Enum-like object for view action types (e.g., FIND, INSERT).
+const ViewActionType = {
+  FIND: 'find',
+  INSERT: 'insert',
+} as const
+
+// Original: $$m1
+// Refactored: genericAtomFamily1
+// Removable atom family for generic state (initially undefined).
+export const genericAtomFamily1 = setupRemovableAtomFamily(() => atom(undefined))
+
+// Original: $$g2
+// Refactored: booleanAtomFamily
+// Removable atom family for boolean state (initially false).
+export const booleanAtomFamily = setupRemovableAtomFamily(() => atom(false))
+
+// Exports with meaningful names (refactored from original obfuscated names)
+export const $e = ViewActionType
+export const N1 = genericAtomFamily1
+export const bP = booleanAtomFamily
+export const s0 = sitesViewSetterAtomFamily

@@ -14,7 +14,7 @@ import { teamLibraryCache } from "../figma_app/80990";
 import { Ay as _$$Ay } from "../figma_app/432652";
 import { computeFullscreenViewportForNode } from "../figma_app/62612";
 import { openFileLibraryKeyAtom } from "../figma_app/516028";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { Gh } from "../figma_app/707567";
 import { n as _$$n } from "../905/347702";
 import { __ } from "../figma_app/257655";
@@ -588,7 +588,7 @@ export function $$$6({
   });
 }
 let X = _$$n(async function (e, t) {
-  let r = U2(debugState?.getState().selectedView);
+  let r = getFileKeyFromSelectedView(debugState?.getState().selectedView);
   let n = await XHR.post(`/api/first_draft/kit_contents/${e.key}/detach_info`, {
     keys: t,
     file_key: r

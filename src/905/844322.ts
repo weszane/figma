@@ -6,7 +6,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { filePutAction, moveFileAction } from "../figma_app/78808";
 import { yJ as _$$yJ } from "../figma_app/240735";
 import { trackFileCopyEvent, trackMultipleFileEvent } from "../figma_app/314264";
@@ -74,7 +74,7 @@ let $$E2 = createOptimistThunk((e, t) => {
         t && "folder" === t.view && t.folderId === o || (s = {
           text: `Show in ${i.user?.drafts_folder_id === o ? getDraftsSidebarString() : "project"}`,
           action: () => {
-            null != o && e.dispatch(sf({
+            null != o && e.dispatch(selectViewAction({
               view: "folder",
               folderId: o
             }));

@@ -84,7 +84,7 @@ import { nr as _$$nr, Op } from '../905/337355';
 import { L as _$$L2 } from '../905/348758';
 import { X as _$$X4 } from '../905/350405';
 import { V as _$$V4 } from '../905/355181';
-import { Q as _$$Q5 } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { n as _$$n } from '../905/366526';
 import { c as _$$c5 } from '../905/370443';
 import { selectCurrentUser, getUserId } from '../905/372672';
@@ -170,8 +170,8 @@ import { Z as _$$Z4 } from '../905/658753';
 import { oW as _$$oW } from '../905/675859';
 import { u as _$$u4 } from '../905/684425';
 import { IM } from '../905/687477';
-import { $ as _$$$3 } from '../905/692618';
-import { E as _$$E3 } from '../905/694285';
+import { BannerButton } from '../905/692618';
+import { isFigmascopeView } from '../905/694285';
 import { e0 as _$$e9, qo } from '../905/696396';
 import { getSingletonSceneGraph } from '../905/700578';
 import { IT as _$$IT, liveStoreInstance } from '../905/713695';
@@ -198,7 +198,7 @@ import { Bm } from '../905/755627';
 import { isDefaultFile } from '../905/760074';
 import { D as _$$D2 } from '../905/771179';
 import { X as _$$X3 } from '../905/776923';
-import { LS } from '../905/782918';
+import { isSingleSceneGraphSelectionInDevHandoff } from '../905/782918';
 import { useSingleEffect } from '../905/791079';
 import { cq as _$$cq } from '../905/794154';
 import { B as _$$B } from '../905/797453';
@@ -215,7 +215,7 @@ import { o0 as _$$o3 } from '../905/844131';
 import { d2 as _$$d5, rp as _$$rp } from '../905/845277';
 import { a as _$$a0 } from '../905/847494';
 import { notificationActions } from '../905/851662';
-import { V as _$$V3 } from '../905/856857';
+import { isCommunityHubSubView } from '../905/856857';
 import { isVsCodeEnvironment } from '../905/858738';
 import { n3 as _$$n3, sg as _$$sg } from '../905/859698';
 import { AuthFlowStep } from '../905/862321';
@@ -237,7 +237,7 @@ import { F as _$$F6 } from '../905/915030';
 import { A as _$$A6 } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
 import { Jn } from '../905/927294';
-import { sf as _$$sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { J as _$$J2 } from '../905/931050';
 import { q as _$$q2, s as _$$s6 } from '../905/932270';
 import { I as _$$I2 } from '../905/932503';
@@ -302,7 +302,7 @@ import { ts as _$$ts } from '../figma_app/49598';
 import { AS } from '../figma_app/50271';
 import { I as _$$I4 } from '../figma_app/51637';
 import { FEditorType, isDesignOrIllustration } from '../figma_app/53721';
-import { cV as _$$cV } from '../figma_app/59509';
+import { BannerInline } from '../figma_app/59509';
 import { h as _$$h } from '../figma_app/61485';
 import { useFullscreenViewportUpdates, scaleRect } from '../figma_app/62612';
 import { jm } from '../figma_app/67099';
@@ -320,7 +320,7 @@ import { Cg as _$$Cg } from '../figma_app/99436';
 import { xo } from '../figma_app/106634';
 import { b as _$$b2 } from '../figma_app/108592';
 import { u as _$$u6 } from '../figma_app/110635';
-import { s0 as _$$s2 } from '../figma_app/115923';
+import { sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { dP as _$$dP, M3 as _$$M3 } from '../figma_app/119475';
 import { yB } from '../figma_app/120294';
 import { $ as _$$$2, E as _$$E5 } from '../figma_app/126651';
@@ -340,7 +340,7 @@ import { i1 as _$$i, Dq, q0, TN } from '../figma_app/177697';
 import { FFileType, FPlanFeatureType, FBillingEntityType, FProductAccessType, FPlanTierType, FOrganizationLevelType, FPlanLimitationType } from '../figma_app/191312';
 import { getThemeBackgroundColor, isColorDarkByLuminance } from '../figma_app/191804';
 import { zT } from '../figma_app/192142';
-import { CR, Np } from '../figma_app/193867';
+import { isMainView, selectedViewToPath } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { a6 as _$$a6, M3 } from '../figma_app/198840';
 import { LK } from '../figma_app/199513';
@@ -558,7 +558,7 @@ import { nP as _$$nP } from '../figma_app/957070';
 import { mn } from '../figma_app/968938';
 import { e2 as _$$e4, C$, Ml } from '../figma_app/971485';
 import { C7, Dj, RH } from '../figma_app/976345';
-import { cJ as _$$cJ, lg as _$$lg, ow as _$$ow, E3, Em, m0, my, vn, XE } from '../figma_app/976749';
+import { isSitesFileType, getCurrentFileType, isWhiteboardFileType, getSelectedEditorType, isDesignFileType, isDevHandoffEditorType, getEditorTypeOrNull, isIllustrationEditorType, getEditorTypeFromView } from '../figma_app/976749';
 import { ZU } from '../figma_app/986347';
 import { gY } from '../figma_app/991245';
 import { A as _$$A11 } from '../svg/95997';
@@ -631,7 +631,7 @@ function ec(e) {
     onMouseMove: _$$lQ,
     onRemove: _$$lQ,
     inDesktopTray: !0,
-    toggleQuickReply: (e, t, r) => (o(_$$sf({
+    toggleQuickReply: (e, t, r) => (o(selectViewAction({
       view: 'feed',
       quickReplyInfo: AS(t) || void 0
     })), !0)
@@ -727,7 +727,7 @@ function eu() {
   let [d, c] = useState(_$$td);
   return (useEffect(() => {
     let t = () => {
-      bellFeedAPIInstance && a && e(_$$sf({
+      bellFeedAPIInstance && a && e(selectViewAction({
         view: 'feed'
       }));
     };
@@ -779,7 +779,7 @@ function eu() {
         children: a && a.threadId && a.fileKey ? jsx(_$$d3, {
           quickReplyInfo: a,
           onClose: () => {
-            e(_$$sf({
+            e(selectViewAction({
               view: 'feed'
             }));
           }
@@ -1679,10 +1679,10 @@ let rW = new class {
 }();
 let rq = new class {
   setSitesViewState(e) {
-    atomStoreManager.set(_$$s2, e);
+    atomStoreManager.set(sitesViewSetterAtomFamily, e);
   }
   getSitesViewState() {
-    return atomStoreManager.get(_$$s2);
+    return atomStoreManager.get(sitesViewSetterAtomFamily);
   }
 }();
 let ni = nn;
@@ -1824,10 +1824,10 @@ let nB = document.documentElement.style;
 let nG = memo(e => {
   let t;
   let r;
-  let n = _$$ow();
-  let i = Em();
+  let n = isWhiteboardFileType();
+  let i = isDesignFileType();
   let a = useIsSelectedFigmakeFullscreen();
-  let s = _$$cJ();
+  let s = isSitesFileType();
   let o = Ye();
   let d = DP();
   let c = yM().colorBg;
@@ -2135,7 +2135,7 @@ function iL() {
 let iP = [FEditorType.Cooper];
 function iD() {
   let e = debugState.getState().selectedView;
-  let t = XE(e);
+  let t = getEditorTypeFromView(e);
   return iP.includes(t) ? jsx(_$$K2, {
     'onClick': () => {
       let e = PluginUIManager.getInstance();
@@ -2219,7 +2219,7 @@ function iq() {
       locale: r,
       name: i
     }).then(r => {
-      e() && (t(_$$sf({
+      e() && (t(selectViewAction({
         view: 'fullscreen',
         fileKey: r.data.meta.file_key,
         editorType: FEditorType.Whiteboard
@@ -3422,7 +3422,7 @@ function si() {
   let e = _6();
   let t = useDispatch();
   let r = useCallback(e => {
-    t(_$$sf({
+    t(selectViewAction({
       view: 'figmascope',
       urlParams: {
         type: 'server_file',
@@ -3432,7 +3432,7 @@ function si() {
     }));
   }, [t]);
   let n = useCallback(() => {
-    t(_$$sf({
+    t(selectViewAction({
       view: 'figmascope',
       urlParams: null
     }));
@@ -3440,7 +3440,7 @@ function si() {
   let i = _$$dB();
   let a = useRef(null);
   _$$Z2(i === 'legacy' ? 'light' : i, a, e);
-  let s = _$$E3(e);
+  let s = isFigmascopeView(e);
   let o = useStableMemo(s ? e.urlParams : null);
   return s ? jsx('div', {
     ref: a,
@@ -5522,7 +5522,7 @@ function l4({
 }
 function l8() {
   let e = useDispatch();
-  let t = useSelector(e => Np(e, {
+  let t = useSelector(e => selectedViewToPath(e, {
     view: 'recentsAndSharing'
   }));
   let {
@@ -5538,7 +5538,7 @@ function l8() {
       onClick(t) {
         trackEventAnalytics('Desktop New Tab Browse More Recents');
         t.preventDefault();
-        e(_$$sf({
+        e(selectViewAction({
           view: 'recentsAndSharing'
         }));
       },
@@ -6050,7 +6050,7 @@ function dV() {
 function dH() {
   !function () {
     let e = useDispatch();
-    let t = _$$lg();
+    let t = getCurrentFileType();
     let r = useSelector(e => e.library.publishProgress);
     let [n, i] = useState(0);
     let [a, s] = useState(void 0);
@@ -6276,13 +6276,13 @@ function d1({
   let t = Hb();
   return jsx('div', {
     className: 'x1mg88bx x1gcgh60 x1jwbysl',
-    children: jsxs(_$$cV, {
+    children: jsxs(BannerInline, {
       variant: 'warn',
-      children: [jsx(_$$Q5, {
+      children: [jsx(BannerMessage, {
         children: getI18nString('general.root_error_boundary_title')
-      }), jsx(_$$Q5, {
+      }), jsx(BannerMessage, {
         children: t.error?.message
-      }), e && jsx(_$$$3, {
+      }), e && jsx(BannerButton, {
         onClick: e,
         children: getI18nString('auth.try_again')
       })]
@@ -6691,7 +6691,7 @@ function cX() {
   let n = useCanUseDevModeDemoFile();
   let i = useIsLoggedOutDevModeDemoFile();
   let a = useSelector(e => e.selectedView);
-  let s = my();
+  let s = getEditorTypeOrNull();
   let o = s === FEditorType.Design;
   let l = s === FEditorType.DevHandoff;
   let d = s === FEditorType.Illustration;
@@ -6699,21 +6699,21 @@ function cX() {
     r === _$$n5.NO_ACCESS && (DrawBindingsCpp.setCanAccessDrawMode(!1), DrawBindingsCpp.setCanEnterDrawMode(!1));
   }, [r]);
   useEffect(() => {
-    !t || o || i || e(_$$sf({
+    !t || o || i || e(selectViewAction({
       ...a,
       view: 'fullscreen',
       editorType: FEditorType.Design
     }));
   }, [t, o, e, a, i]);
   useEffect(() => {
-    r === _$$n5.NO_ACCESS && d && e(_$$sf({
+    r === _$$n5.NO_ACCESS && d && e(selectViewAction({
       ...a,
       view: 'fullscreen',
       editorType: FEditorType.Design
     }));
   }, [r, d, e, a]);
   useEffect(() => {
-    (n || i) && !l && e(_$$sf({
+    (n || i) && !l && e(selectViewAction({
       ...a,
       view: 'fullscreen',
       editorType: FEditorType.DevHandoff
@@ -6743,9 +6743,9 @@ function c2() {
     return t && !0 === a && e?.canAccessFullDevMode && e?.canEdit === !1;
   }();
   let a = useAtomWithSubscription(_$$FP);
-  let s = Em();
-  let o = m0();
-  let l = vn();
+  let s = isDesignFileType();
+  let o = isDevHandoffEditorType();
+  let l = isIllustrationEditorType();
   let d = useSelector(e => e.selectedView);
   let [, c] = useAtomValueAndSetter(c0);
   let u = !!t && !!r;
@@ -6769,7 +6769,7 @@ function c2() {
   let I = d.view === 'fullscreen' && !o && (s || l) && !m && !hasDesktopAPI() && h && _ && !a && b && i;
   useEffect(() => {
     I && queueMicrotask(() => {
-      e(_$$sf({
+      e(selectViewAction({
         ...d,
         commentThreadId: g.current,
         view: 'fullscreen',
@@ -6907,7 +6907,7 @@ function ue({
 function ut({
   onClick_UI3_DO_NOT_REUSE: e
 }) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = useCurrentFileKey();
   let n = selectCurrentFile();
   let i = useCanAccessDevModeEntryPoint();
@@ -6920,7 +6920,7 @@ function ut({
     let t = useCurrentFileKey();
     let r = useCanUseDevModeDemoFile();
     let n = getFilteredFeatureFlags().ce_il_root;
-    let i = my();
+    let i = getEditorTypeOrNull();
     let a = useRef(i);
     let s = i === FEditorType.DevHandoff;
     let o = i === FEditorType.Illustration;
@@ -6992,7 +6992,7 @@ function ud(e) {
   } = e;
   let a = _$$k3();
   let s = WN();
-  let o = m0();
+  let o = isDevHandoffEditorType();
   let d = getFilteredFeatureFlags().ce_il_root && textureModeAccess === _$$n5.HAS_ACCESS;
   let c = useMemo(() => d ? ['handoff', 'design', 'illustration'] : ['design', 'handoff'], [d]);
   let u = _$$ub2();
@@ -7545,7 +7545,7 @@ let u7 = memo(e => {
   });
 });
 function p_(e) {
-  let t = vn();
+  let t = isIllustrationEditorType();
   let r = jsx(Ig, {
     children: jsx(pm, {
       ...e
@@ -7622,7 +7622,7 @@ function pm(e) {
     let t = getObservableValue(AppStateTsApi?.propertiesPanelState().shownPropertiesPanels, []);
     let r = _$$M5(t);
     let n = gT(r, e);
-    let i = vn();
+    let i = isIllustrationEditorType();
     let a = jw();
     let s = useMemo(() => i ? Yd(n, a) : n, [i, n, a]);
     let {
@@ -7803,7 +7803,7 @@ function pP({
     }();
     let e = getObservableValue(AppStateTsApi?.devHandoffState()?.focusAnimationIsRunning, !1);
     let t = _$$uQ() ?? defaultSessionLocalIDString;
-    let r = LS();
+    let r = isSingleSceneGraphSelectionInDevHandoff();
     let n = useCanAccessFullDevMode();
     let i = _$$eY();
     let [a, s] = useState(!1);
@@ -7992,7 +7992,7 @@ function pV(e) {
   } = _$$LH();
   let u = useAtomWithSubscription(Bu);
   let p = _$$uh(s);
-  let _ = vn();
+  let _ = isIllustrationEditorType();
   let h = _$$T2();
   let g = _ && getFilteredFeatureFlags().ce_il_root && h === DesignGraphElements.VECTOR_PEN;
   return (useEffect(() => {
@@ -8044,7 +8044,7 @@ function pz() {
     activateTool,
     topLevelMode
   } = _$$rM(_$$u6);
-  let n = E3();
+  let n = getSelectedEditorType();
   let i = _$$aV();
   let a = function () {
     let e = _$$l6();
@@ -8714,7 +8714,7 @@ loadFeatureFlags().fpl_sentry_reporting;
 let _x = memo(() => {
   let e = _6();
   let t = _$$N4();
-  if (CR(e) && t) return jsx(_I, {});
+  if (isMainView(e) && t) return jsx(_I, {});
   if (e.view === 'fullscreen') {
     return jsx(_v, {
       editorType: e.editorType,
@@ -8732,7 +8732,7 @@ let _x = memo(() => {
     return jsx(t, {});
   } else if (_$$e6(e)) {
     return jsx(Sm, {});
-  } else if (_$$V3(e)) {
+  } else if (isCommunityHubSubView(e)) {
     return jsx(nQ, {});
   } else if (e.view === 'abuseReportForm') {
     return jsx(ij, {

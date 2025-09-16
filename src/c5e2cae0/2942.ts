@@ -8,7 +8,7 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { sx as _$$sx } from "../figma_app/307841";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { loadingStateDelete } from "../figma_app/714946";
 import { eK, i as _$$i, M2, Lo, $h, yy, Ef, qU, Je, js, Az } from "../figma_app/482142";
 import { Xw } from "../905/584989";
@@ -64,7 +64,7 @@ let $$b2 = D(({
         }));
       } catch (e) {
         a(FlashActions.error(getI18nString("payments.errors.estimate_calculation_error")));
-        a(sf({
+        a(selectViewAction({
           ...y,
           paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
         }));

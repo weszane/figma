@@ -17,7 +17,7 @@ import { P as _$$P } from "../905/347284";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { UN } from "../figma_app/976345";
-import { oB, sf } from "../905/929976";
+import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { Ow } from "../figma_app/297957";
 import { trackContextViewed, trackFileBrowserPlanFilterSelected, logAndTrackCTA, trackFolderEvent, trackTeamEvent } from "../figma_app/314264";
 import { H as _$$H } from "../905/422284";
@@ -25,7 +25,7 @@ import { selectCurrentFile } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { FC } from "../figma_app/212807";
 import { selectUser } from "../905/372672";
-import { vU } from "../figma_app/193867";
+import { mapPathToSelectedView } from "../figma_app/193867";
 import { gN, X2, Zo, td } from "../figma_app/273118";
 import { notificationAPI } from "../905/894881";
 import { fD } from "../905/807385";
@@ -863,7 +863,7 @@ export function $$eY4(e, t) {
           type: "user-notification",
           error: !0
         }));
-        i(oB());
+        i(hideDropdownAction());
       })) : (Zo(!1, td, a), notificationAPI.getServerDrivenPlan({
         currentPlanId: t,
         currentView: u,
@@ -878,7 +878,7 @@ export function $$eY4(e, t) {
           type: "user-notification",
           error: !0
         }));
-        i(oB());
+        i(hideDropdownAction());
       }));
     }, 800, !0);
     h(!0);
@@ -1076,15 +1076,15 @@ function eW(e, t) {
           }
         }));
       }
-      d(oB());
+      d(hideDropdownAction());
       let r = !!_ && _.key === zv(n.pathname);
       if (!desktopAPIInstance && r) d(_$$H({
         params: n.searchParams.toString(),
         hash: n.hash
       }));else if (t.deeplink.use_unsafe) customHistory.unsafeRedirect(n.href, desktopAPIInstance ? void 0 : "_blank");else if (e.inDesktopTray) customHistory.redirect(n.href);else try {
-        let e = vU(s.getState(), o);
+        let e = mapPathToSelectedView(s.getState(), o);
         if ("teamFeed" === e.view) {
-          m && t.plan?.id.toString() === m.id ? d(sf(e)) : customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
+          m && t.plan?.id.toString() === m.id ? d(selectViewAction(e)) : customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");
           return;
         }
         customHistory.redirect(n.href, desktopAPIInstance ? void 0 : "_blank");

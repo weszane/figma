@@ -20,7 +20,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { In } from "../905/672640";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { jr, W0 } from "../figma_app/896988";
 import { KindEnum } from "../905/129884";
 import { vq, rk, qc, mn, $7, W1, p3, Rt, mh, Gh, r3, nP, lm, sb, vs, Ck, HD, RT, qX, Cs, nk, CC, Vl, ZG, MU, uD, ax, JU, Qm, S_, nA, tL, i3 } from "../905/956371";
@@ -137,7 +137,7 @@ let $$D1 = forwardRef((e, t) => {
     onSearchKeyDown,
     onSearchChange
   } = $$P7(e, t);
-  let _ = m0();
+  let _ = isDevHandoffEditorType();
   let h = _ ? vq : rk;
   return jsxs("div", {
     "data-onboarding-key": e["data-onboarding-key"],
@@ -188,7 +188,7 @@ let $$k4 = forwardRef((e, t) => {
     onSearchKeyDown,
     onSearchChange
   } = $$P7(e, t);
-  let p = m0();
+  let p = isDevHandoffEditorType();
   let _ = p ? vq : rk;
   return jsxs("div", {
     "data-onboarding-key": e["data-onboarding-key"],

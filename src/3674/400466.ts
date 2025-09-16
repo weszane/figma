@@ -48,7 +48,7 @@ import { W as _$$W } from "../905/592530";
 import { permissionScopeHandler, scopeAwareFunction as _$$nc } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { v4 } from "../figma_app/655139";
-import { qM, Fm } from "../figma_app/120227";
+import { getScaledValueWithUnit, getScaledValuesWithUnit } from "../figma_app/120227";
 import { fullscreenValue } from "../figma_app/455680";
 import { u as _$$u, hg } from "../figma_app/852050";
 import { m3, nd as _$$nd } from "../figma_app/826998";
@@ -100,7 +100,7 @@ import { useSprigWithSampling } from "../905/99656";
 import { n } from "../905/734251";
 import { showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { m0, Em } from "../figma_app/976749";
+import { isDevHandoffEditorType, isDesignFileType } from "../figma_app/976749";
 import { userFlagAtomFamily } from "../figma_app/545877";
 import { KindEnum } from "../905/129884";
 import { vL } from "../905/826900";
@@ -134,7 +134,7 @@ import { PrimaryWorkflowEnum } from "../905/497152";
 import { A as _$$A17 } from "../1617/954184";
 import { defaultSessionLocalIDString } from "../905/871411";
 import { copyTextToClipboard } from "../figma_app/623293";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { i as _$$i } from "../figma_app/85949";
 import { f7 } from "../figma_app/896988";
 import { RHC } from "../figma_app/27776";
@@ -262,7 +262,7 @@ function eF({
   isPreview: n = !1
 }) {
   let i = v4();
-  let o = qM(i, e?.stackSpacing, eB);
+  let o = getScaledValueWithUnit(i, e?.stackSpacing, eB);
   return t ? n ? jsx(Fragment, {
     children: t.name
   }) : jsx(wG, {
@@ -299,7 +299,7 @@ function eV({
   isTextProperty: i = !1
 }) {
   let o = v4();
-  let l = Fm(o, e, eB, {
+  let l = getScaledValuesWithUnit(o, e, eB, {
     isTextProperty: i
   });
   if (e.length !== t.length) throw Error("<ManySidedProperty /> must have the same number of rawValues and variables");
@@ -864,7 +864,7 @@ function th({
   let i = _$$u(t?.id);
   let o = v4();
   let l = "mixed" !== e && "PIXELS" === e.units ? e.value : void 0;
-  let s = qM(o, l, tp, {
+  let s = getScaledValueWithUnit(o, l, tp, {
     isTextProperty: !0
   });
   return "mixed" === e ? renderI18nText("fullscreen.mixed") : i && n ? jsx(Fragment, {
@@ -1822,7 +1822,7 @@ function tL({
 }) {
   let o = _$$u(t?.id);
   let l = v4();
-  let s = qM(l, "number" == typeof e ? e : void 0, tP, {
+  let s = getScaledValueWithUnit(l, "number" == typeof e ? e : void 0, tP, {
     isTextProperty: i
   });
   return null === e ? null : "mixed" === e ? renderI18nText("fullscreen.mixed") : o && n ? jsx(Fragment, {
@@ -1843,7 +1843,7 @@ function tR({
 }) {
   let o = _$$u(t?.id);
   let l = v4();
-  let s = qM(l, "mixed" === e ? void 0 : e.value, tP, {
+  let s = getScaledValueWithUnit(l, "mixed" === e ? void 0 : e.value, tP, {
     isTextProperty: i
   });
   return "mixed" === e ? renderI18nText("fullscreen.mixed") : o && n ? jsx(Fragment, {
@@ -2596,7 +2596,7 @@ let nK = {
   type: nE.MANAGED_STRING,
   useSharedHooksContext() {
     let e = useSelector(e => e.mirror.appModel.currentPage);
-    let t = m0();
+    let t = isDevHandoffEditorType();
     return _$$wA((e, t, n) => getFeatureFlags().cheddar && getFeatureFlags().cheddar_annotations && n ? (e.get(t) ? qT(e, t) : []).reduce((e, t) => {
       let n = function e(t) {
         return t.childrenNodes.flatMap(t => {
@@ -2908,8 +2908,8 @@ function n2({
       Sprig
     } = useSprigWithSampling();
     let n = !!hA();
-    let a = m0();
-    let o = Em();
+    let a = isDevHandoffEditorType();
+    let o = isDesignFileType();
     let l = XR();
     return useCallback((i, s, r, d) => {
       permissionScopeHandler.user(r ? "edit-annotation" : "create-annotation", () => {
@@ -3019,9 +3019,9 @@ function n5({
     Sprig
   } = useSprigWithSampling();
   let y = trackFileEventWithPage();
-  let b = Em();
+  let b = isDesignFileType();
   let j = !!hA();
-  let w = m0();
+  let w = isDevHandoffEditorType();
   let {
     Dropdown,
     isDropdownShown,
@@ -3657,7 +3657,7 @@ let aa = memo(function ({
   let H = useCallback(t => {
     t.preventDefault();
     t.stopPropagation();
-    D(j7({
+    D(showDropdownThunk({
       type: tM,
       data: {
         position: {

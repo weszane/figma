@@ -5,7 +5,7 @@ import { UserInterfaceElements } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { generateRecordingKey } from "../figma_app/878298";
 import { renderI18nText } from "../905/303541";
-import { ow, Em } from "../figma_app/976749";
+import { isWhiteboardFileType, isDesignFileType } from "../figma_app/976749";
 import { _6 } from "../figma_app/386952";
 import { pk, Qr } from "../figma_app/598952";
 import { isFullscreenSitesView } from "../905/561485";
@@ -56,8 +56,8 @@ export function $$y4(e, t) {
   } = U();
   let y = isFullscreenSitesView(s);
   let j = !!getFeatureFlags().sts_code;
-  let S = ow();
-  let v = Em();
+  let S = isWhiteboardFileType();
+  let v = isDesignFileType();
   let w = getFeatureFlags().ai_assistant || !1;
   let N = useCallback(e => {
     switch (parseInt(e)) {

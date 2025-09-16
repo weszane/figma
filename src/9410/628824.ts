@@ -13,10 +13,10 @@ import { kD, tS } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
 import { aV } from "../figma_app/722362";
 import { selectCurrentFile } from "../figma_app/516028";
-import { vt } from "../905/862883";
+import { ITemplateType } from "../905/862883";
 import { RJ } from "../figma_app/869006";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { h8 } from "../figma_app/478006";
 import { TrackingProvider } from "../figma_app/831799";
 import { useState } from "react";
@@ -36,11 +36,11 @@ function T({
     children: jsx("div", {
       className: "whiteboard_banner--root--fw3hW banner--root--0lk16 banner--banner--fgRdl",
       "data-testid": t,
-      children: jsx(Yy, {
+      children: jsx(BannerInset, {
         variant: "brand",
         icon: null,
         onDismiss: n ?? void 0,
-        children: jsx(Q, {
+        children: jsx(BannerMessage, {
           children: jsx("div", {
             className: "whiteboard_banner--contentWrapper--uU9Yv banner--contentWrapper--NMmQM",
             children: e
@@ -75,7 +75,7 @@ function w() {
         onClick: () => {
           t && n && i({
             templateIdentifier: {
-              type: vt.TeamTemplate,
+              type: ITemplateType.TeamTemplate,
               file_key: t.fileKey
             },
             templateName: t.name

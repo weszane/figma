@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Gq } from "../figma_app/361662";
 import { K } from "../905/770444";
 export function $$l0(e, t, i, l) {
@@ -13,7 +13,7 @@ export function $$l0(e, t, i, l) {
   return useCallback(n => {
     n.preventDefault();
     n.stopPropagation();
-    d(j7({
+    d(showDropdownThunk({
       type: t,
       data: {
         component: e,

@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { useTeamPlanUser, useIsOrgAdminUser } from "../figma_app/465071";
@@ -243,11 +243,11 @@ function ee(e) {
   let U = useSubscription(ProjectNameById, {
     projectId: e.abandonedDraftFolderId
   });
-  ("errors" === p.status || "errors" === U.status) && (e.planType === OrganizationType.TEAM ? t(sf({
+  ("errors" === p.status || "errors" === U.status) && (e.planType === OrganizationType.TEAM ? t(selectViewAction({
     view: "teamAdminConsole",
     teamId: e.planId,
     teamAdminConsoleViewTab: DashboardSections.DRAFTS
-  })) : t(sf({
+  })) : t(selectViewAction({
     view: "orgAdminSettings",
     orgAdminSettingsViewTab: DashboardSection.CONTENT,
     orgAdminSettingsViewSecondaryTab: WorkspaceTab.ABANDONED_DRAFTS
@@ -394,7 +394,7 @@ export function $$et0(e) {
   });
   let f = vS(a);
   return (useEffect(() => {
-    v && t(sf({
+    v && t(selectViewAction({
       view: "resourceUnavailable",
       resourceType: f
     }));

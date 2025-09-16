@@ -17,7 +17,7 @@ import { encodeUri } from '../figma_app/930338'
 // Grouped by functionality: Type Checks, Comparisons, URL Generation, Data Manipulation, Async Operations, Error Handling, and Utilities.
 
 // Type definitions for clarity
-interface FileEntity {
+export interface FileEntity {
   default_file_key?: string
   defaultFileKey?: string
   file_repo_id?: string
@@ -34,7 +34,7 @@ interface FileEntity {
   id?: string
 }
 
-interface BranchEntity {
+export interface BranchEntity {
   touched_at: any
   key: string
   name?: string
@@ -105,7 +105,6 @@ export const matchesSourceKey = (e: FileEntity, t: string): boolean => isBranch(
  */
 export const compareWithKey = (e: FileEntity, t: any): boolean => matchesSourceKey(e, t.key)
 
-
 /**
  * Matches source library key (original: $$b9).
  * @param e - The file entity.
@@ -138,8 +137,7 @@ export const isDefaultFileAlt = (e: BranchEntity, t: FileEntity): boolean => e.k
  * @param t - The file entity.
  * @returns The display name.
  */
-export const getDisplayName = (e: BranchEntity, t: FileEntity): string => isDefaultFile(e, t) ? t.name || 'Untitled' : e.name || 'Untitled'
-
+export const getDisplayName = (e: any, t: any): string => isDefaultFile(e, t) ? t.name || 'Untitled' : e.name || 'Untitled'
 
 /**
  * Builds URL path (original: $$R18).
@@ -275,7 +273,6 @@ export function findBestBranch(e: FileEntity, t: BranchEntity[], i: string): Bra
   }
   return t.find(branch => isDefaultFile(branch, e)) || t.reduce((prev, curr) => prev.touched_at > curr.touched_at ? prev : curr, t[0])
 }
-
 
 /**
  * Gets display name alternative (original: $$C22).

@@ -34,9 +34,9 @@ import { n as _$$n } from "../905/502036";
 import { Z as _$$Z } from "../905/622097";
 import { i as _$$i } from "../905/610691";
 import { L as _$$L } from "../905/13390";
-import { sf, j7 } from "../905/929976";
+import { selectViewAction, showDropdownThunk } from "../905/929976";
 import { zE as _$$zE } from "../905/738636";
-import { p4 } from "../905/93909";
+import { setLastVisitedId } from "../905/93909";
 import { an, y$ } from "../905/81009";
 import { trackFolderEvent } from "../figma_app/314264";
 import { eU } from "../figma_app/863319";
@@ -128,7 +128,7 @@ function em(e) {
       fileKey: e.key,
       entrypoint: "folder list card"
     }));
-    t(p4({
+    t(setLastVisitedId({
       planId: d || _$$P
     }));
     let n = "recentsAndSharing" === o.view || "folder" === o.view ? o : void 0;
@@ -142,7 +142,7 @@ function em(e) {
       teamId: u,
       orgId: d,
       selectedView: o
-    }) : t(sf({
+    }) : t(selectViewAction({
       view: "fullscreen",
       fileKey: e.key,
       editorType: mapFileTypeToEditorType(e.editor_type),
@@ -184,7 +184,7 @@ function em(e) {
         width: 1,
         height: 1
       };
-      t(j7({
+      t(showDropdownThunk({
         type: _$$B2,
         data: {
           folder: {

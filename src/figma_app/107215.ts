@@ -3,7 +3,7 @@ import { getStorage } from "../905/657224";
 import { createActionCreator } from "../905/73481";
 import { copyTextToClipboard } from "../figma_app/623293";
 import { createOptimistThunk } from "../905/350402";
-import { xS } from "../figma_app/193867";
+import { getSelectedViewUrl } from "../figma_app/193867";
 import { Vv } from "../905/32091";
 let $$c3 = "seen_try_onboarding";
 let $$u9 = createActionCreator("SET_WORKSHOP_USER_NAME");
@@ -24,7 +24,7 @@ let $$g6 = createActionCreator("SET_WORKSHOP_MODE_UNTIL");
 let $$f0 = createActionCreator("CLEAR_TRY_PLUGIN");
 let $$E8 = createOptimistThunk((e, t) => {
   let r = e.getState();
-  return copyTextToClipboard(xS(r, t));
+  return copyTextToClipboard(getSelectedViewUrl(r, t));
 });
 export function $$y2(e) {
   Multiplayer?.setName(e);

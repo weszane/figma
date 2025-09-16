@@ -18,7 +18,7 @@ import { Me } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
 import { hA } from "../figma_app/88239";
 import { lW } from "../figma_app/11182";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { selectOpenFileKey } from "../figma_app/516028";
 import { setupRemovableAtomFamily } from "../figma_app/615482";
 import { FEditorType } from "../figma_app/53721";
@@ -194,7 +194,7 @@ export function $$U1(e) {
   } = e;
   let I = $$j2("inspection_panel_copy_all_click", useContext(F));
   let A = useDispatch();
-  let x = m0();
+  let x = isDevHandoffEditorType();
   let N = useHandleMouseEvent(recordingKey, "click", useCallback(() => {
     if (!copyAllValue) return;
     let e = "string" == typeof copyAllValue ? copyAllValue : copyAllValue();
@@ -313,7 +313,7 @@ export function $$V0(e, t = !1) {
     return useMemo(() => e ? atom(r => r(B)[e] ?? t, (e, t, n) => {
       r(t, n);
     }) : null, [e, r, t]);
-  }(m0() ? e : void 0, t);
+  }(isDevHandoffEditorType() ? e : void 0, t);
   let n = !!r;
   return {
     collapsedInspectionPanelAtom: n ? r : G,

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, useState, Fragment as _$$Fragment } from "react";
-import { $y } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInsetModal } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { KeyCodes } from "../905/63728";
 import { XHR } from "../905/910117";
 import { BigTextInputForwardRef, ButtonSecondary, ButtonBasePrimary } from "../figma_app/637027";
@@ -443,9 +443,9 @@ function A(e) {
                 children: l.map(e => e.domain).join(", ")
               }), d > 0 && jsx("div", {
                 className: "configure_saml--bannerContainer--8wuvK",
-                children: jsx($y, {
+                children: jsx(BannerInsetModal, {
                   variant: "warn",
-                  children: jsx(Q, {
+                  children: jsx(BannerMessage, {
                     title: renderI18nText("idp_management.unmapped_domains_warning.title", {
                       membersCount: d
                     }),

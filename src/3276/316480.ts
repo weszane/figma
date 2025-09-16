@@ -16,10 +16,10 @@ import { getPluginVersion } from "../figma_app/300692";
 import { Ph, T0 } from "../figma_app/455620";
 import { X2 } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { mk } from "../figma_app/920333";
 import { qK } from "../9410/353422";
-import { o as _$$o } from "../905/808775";
+import { useMappedEditorTypeA } from "../905/808775";
 import { d as _$$d } from "../905/751443";
 var r = s;
 var d = l;
@@ -36,14 +36,14 @@ export function $$D1() {
   let e = function () {
     let {
       productComponents
-    } = g5($A.FigJam);
+    } = g5(FDocumentType.FigJam);
     let t = op();
-    let n = eE($A.FigJam);
+    let n = eE(FDocumentType.FigJam);
     let i = qr();
     let s = qK();
     let l = function () {
       let e = useSelector(e => e.recentlyUsed.whiteboardTools);
-      let t = _$$o();
+      let t = useMappedEditorTypeA();
       return useMemo(() => t ? e.figjam.map(e => e.id) : [], [t, e]);
     }();
     let c = useSelector(_$$s);

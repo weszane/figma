@@ -7,7 +7,7 @@ import { r as _$$r } from "../905/249071";
 import { useAtomValueAndSetter } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/850789";
 import { FQ } from "../9410/571209";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { kl } from "../905/275640";
 import { getViewportInfo, scaleRect, applyOffsetToViewport, isRectInside } from "../figma_app/62612";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -105,7 +105,7 @@ function b({
   let [w, I] = useAtomValueAndSetter(_$$f);
   let L = w.positionRelativeToSelection;
   let N = useRef(null);
-  let A = lg();
+  let A = getCurrentFileType();
   let O = v2();
   let k = a ? 0 : O;
   let R = useRef(null);

@@ -4,8 +4,8 @@ import { connect, useDispatch, useSelector } from "react-redux";
 import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
 import { ProfileRouteState } from "../905/934145";
-import { sf } from "../905/929976";
-import { Np } from "../figma_app/193867";
+import { selectViewAction } from "../905/929976";
+import { selectedViewToPath } from "../figma_app/193867";
 import { Ro } from "../figma_app/805373";
 import { ah, HU, Du, fh, oY, M2 } from "../905/167803";
 let _ = {
@@ -21,7 +21,7 @@ class h extends PureComponent {
         return;
       }
       let t = m(this.props);
-      this.props.dispatch(sf(t));
+      this.props.dispatch(selectViewAction(t));
     };
   }
   render() {
@@ -65,7 +65,7 @@ let m = e => ({
 let $$g0 = connect((e, t) => {
   let r = m(t);
   return {
-    hrefPath: Np(e, r),
+    hrefPath: selectedViewToPath(e, r),
     authorLinkStyle: _.underline
   };
 })(h);
@@ -76,7 +76,7 @@ export function $$f1(e) {
     subView: "handle",
     handle: e.profile.profile_handle
   };
-  let i = useSelector(e => Np(e, r));
+  let i = useSelector(e => selectedViewToPath(e, r));
   return jsx("a", {
     href: new ProfileRouteState({
       profileHandle: e.profile.profile_handle
@@ -87,14 +87,14 @@ export function $$f1(e) {
         customHistory.redirect(i || "", "_blank");
         return;
       }
-      t(sf(r));
+      t(selectViewAction(r));
     },
     children: e.children
   });
 }
 connect((e, t) => ({
   hrefView: m(t),
-  hrefPath: Np(e, m(t)),
+  hrefPath: selectedViewToPath(e, m(t)),
   authorLinkStyle: _.underline
 }))(h);
 export const Qi = $$g0;

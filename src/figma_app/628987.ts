@@ -27,7 +27,7 @@ import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { XE, Uv, u1 } from "../figma_app/91703";
 import { showModalHandler } from "../905/156213";
 import { J6 } from "../figma_app/8833";
-import { XE as _$$XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { O as _$$O } from "../905/291654";
 import { Kk } from "../905/777093";
@@ -123,7 +123,7 @@ export function $$em2({
   let eb = sO() && ey === SelfDesignType.SELF;
   let eT = useIsSelectedViewFullscreenCooper();
   let eI = useSelector(e => e.selectedView);
-  let eS = _$$XE(eI);
+  let eS = getEditorTypeFromView(eI);
   let ev = useSelector(e => e.userFlags);
   let eA = _$$f("completed_font_installer_modal");
   let ex = useSelector(e => e.localFontAgentVersion);

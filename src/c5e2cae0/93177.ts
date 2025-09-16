@@ -41,7 +41,7 @@ import { UR } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
 import { _l } from "../figma_app/976345";
 import { q as _$$q } from "../figma_app/712384";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN, Lo, Je, I2, Vm, Bq, Nj, Ay as _$$Ay, qU } from "../figma_app/482142";
 import { S_, gk } from "../5885/925885";
@@ -65,7 +65,7 @@ import { getEditableTeamsWithoutPaidAccess, getBillingCycleFromSubscriptionType,
 import { Ud, OI } from "../c5e2cae0/2942";
 import { isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
 import { useCurrentPlanUser } from "../figma_app/465071";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { UpsellModalType } from "../905/165519";
 import { Ju } from "../905/712921";
 import { UpgradeSteps, BillingCycle, SubscriptionType } from "../figma_app/831101";
@@ -501,11 +501,11 @@ function eY(e) {
     ignoreCurrentPlan
   } = e.selectedView;
   let eP = e.selectedView.teamId;
-  let eM = useSelector(t => Np(t, {
+  let eM = useSelector(t => selectedViewToPath(t, {
     ...e.selectedView,
     paymentStep: UpgradeSteps.CONFIRM_PAY
   }));
-  let eR = useSelector(t => Np(t, {
+  let eR = useSelector(t => selectedViewToPath(t, {
     ...e.selectedView,
     paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
   }));
@@ -613,7 +613,7 @@ function eY(e) {
   }, [tm]);
   let tp = td || x.submitPending;
   let th = useCallback(() => {
-    to(sf({
+    to(selectViewAction({
       ...e.selectedView,
       paymentStep: UpgradeSteps.CHOOSE_PLAN,
       previousView: e.selectedView.previousView,
@@ -705,7 +705,7 @@ function eY(e) {
     let r = a.get("onCompleteRedirectNodeId");
     t.currentTarget && t.currentTarget.blur();
     let i = kR(e.selectedView.paymentStep, e.selectedView.teamFlowType, eA, x.promo, e.selectedView.planType || TeamType.UNDETERMINED);
-    R === UpgradeSteps.CREATE_TEAM && ($(V.trim()), to(sf({
+    R === UpgradeSteps.CREATE_TEAM && ($(V.trim()), to(selectViewAction({
       ...e.selectedView,
       teamId: null,
       paymentStep: i,
@@ -714,20 +714,20 @@ function eY(e) {
     })));
     R === UpgradeSteps.ADD_COLLABORATORS && (tP.length ? to(FlashActions.error(getI18nString("pro_cart.add_collaborators.error.email_is_invalid", {
       string: tP[0]
-    }))) : tM ? to(FlashActions.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(sf({
+    }))) : tM ? to(FlashActions.error(getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself"))) : to(selectViewAction({
       ...e.selectedView,
       paymentStep: i,
       ignoreCurrentPlan,
       billingPeriod: eA
     })));
-    R === UpgradeSteps.CHOOSE_PLAN ? tI ? to(sf({
+    R === UpgradeSteps.CHOOSE_PLAN ? tI ? to(selectViewAction({
       ...e.selectedView,
       paymentStep: i,
       billingPeriod: SubscriptionType.STUDENT,
       ignoreCurrentPlan
     })) : (to(Je({
       editorStatusChanges
-    })), to(sf({
+    })), to(selectViewAction({
       ...e.selectedView,
       paymentStep: i,
       billingPeriod: x.billingPeriod,
@@ -759,7 +759,7 @@ function eY(e) {
   [UpgradeAction.CREATE_AND_UPGRADE, UpgradeAction.UPGRADE_EXISTING_TEAM].includes(e.selectedView.teamFlowType) && (1 === ee.length ? t = t => {
     t = t || e.selectedView.billingPeriod;
     let a = UpgradeAction.UPGRADE_EXISTING_TEAM;
-    to(sf({
+    to(selectViewAction({
       ...e.selectedView,
       teamFlowType: a,
       teamId: ee[0].id,
@@ -826,7 +826,7 @@ function eY(e) {
               billingPeriod: t
             }));
             let a = isCreateOrUpgrade(e.selectedView.teamFlowType) ? e.selectedView.teamFlowType : UpgradeAction.CREATE_AND_UPGRADE;
-            to(sf({
+            to(selectViewAction({
               ...e.selectedView,
               teamFlowType: a,
               paymentStep: kR(e.selectedView.paymentStep, a, t, x.promo, TeamType.TEAM),
@@ -874,7 +874,7 @@ function eY(e) {
                 newCollaborators: kt
               });
             }
-            to(sf({
+            to(selectViewAction({
               ...e.selectedView,
               paymentStep: UpgradeSteps.PLAN_COMPARISON,
               ignoreCurrentPlan
@@ -897,7 +897,7 @@ function eY(e) {
             isRequestPending: x.submitPending,
             legalName: x.legalName,
             navigateToEditDetails: () => {
-              to(sf({
+              to(selectViewAction({
                 ...e.selectedView,
                 paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS,
                 previousView: e.selectedView.previousView,
@@ -926,7 +926,7 @@ function eY(e) {
                     to(_$$Ay({
                       promo: null
                     }));
-                    l ? e.selectedView.previousView ? sf(e.selectedView.previousView) : _l({
+                    l ? e.selectedView.previousView ? selectViewAction(e.selectedView.previousView) : _l({
                       workspace: {
                         userId: l,
                         orgId: null,
@@ -935,7 +935,7 @@ function eY(e) {
                       view: {
                         view: "allProjects"
                       }
-                    }) : to(sf(e.selectedView.previousView || {
+                    }) : to(selectViewAction(e.selectedView.previousView || {
                       view: "team",
                       teamId: a
                     }));
@@ -945,7 +945,7 @@ function eY(e) {
                     to(_$$Ay({
                       promo: null
                     }));
-                    to(sf({
+                    to(selectViewAction({
                       ...e.selectedView,
                       paymentStep: UpgradeSteps.PLAN_COMPARISON,
                       ignoreCurrentPlan

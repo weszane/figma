@@ -25,7 +25,7 @@ import { ZI } from "../figma_app/328825";
 import { h as _$$h } from "../905/78925";
 import { XE } from "../figma_app/91703";
 import { Yl } from "../905/232641";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { Ep } from "../figma_app/504823";
 import { Ku } from "../figma_app/740163";
 import { sb, bn, c4, x$, aT, JX, OO, Ou, iC, y7, XE as _$$XE, Z3 } from "../figma_app/385874";
@@ -143,7 +143,7 @@ let eA = userFlagExistsAtomFamily(e_);
 function ey({
   selectVideoFill: e
 }) {
-  let t = cJ();
+  let t = isSitesFileType();
   let i = getFeatureFlags().sts_video;
   let r = useAtomWithSubscription(eA);
   let {
@@ -1811,7 +1811,7 @@ export let $$ii1 = forwardRef(function ({
     showDakotaFieldPicker,
     filteredFieldTypes
   } = ZI();
-  let em = cJ();
+  let em = isSitesFileType();
   let eh = s6("currentPage", "currentSelectedProperty").currentSelectedProperty.type === NodePropertyCategory.STROKE;
   let [eg, ef, e_] = _$$t.useTabs({
     custom_color: !0,

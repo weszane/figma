@@ -28,13 +28,13 @@ import { xd, uO, qy } from "../905/972515";
 import { Zl, iN, Z4, YU, ez as _$$ez, TQ } from "../905/211621";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { U8, fG } from "../figma_app/91703";
 import { vq, qX } from "../905/8732";
 import { fi } from "../figma_app/913823";
 import { loadingStateDelete } from "../figma_app/714946";
 import { showModalHandler } from "../905/156213";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
 import { n1 } from "../figma_app/657017";
@@ -61,7 +61,7 @@ import { Oe } from "../figma_app/336853";
 import { Fk } from "../figma_app/167249";
 import { He } from "../figma_app/155728";
 import { PrimaryWorkflowEnum, LibraryTabEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { _A } from "../figma_app/65182";
 import { CK } from "../figma_app/517115";
@@ -209,7 +209,7 @@ function eW(e) {
     libraryMetadataMap,
     flattenSubpaths: eq
   });
-  let ta = g5($A.Design).productComponents.map(Kk);
+  let ta = g5(FDocumentType.Design).productComponents.map(Kk);
   let ts = useMemo(() => preferredItems ? preferredItems.map(Kk) : [], [preferredItems]);
   let [to, tl, td] = useMemo(() => {
     if (e9 && (rootDrilldownItemsByLibraryKey[e9]?.length ?? 0) > 0) return [e9, rootDrilldownItemsByLibraryKey[e9], publishedLibraryItemsByLibraryKey[e9]];
@@ -302,7 +302,7 @@ function eW(e) {
   let tb = useCallback((e, t) => {
     e.preventDefault();
     e.stopPropagation();
-    e8(j7({
+    e8(showDropdownThunk({
       type: _$$j2,
       data: {
         component: t.item,
@@ -420,7 +420,7 @@ function eW(e) {
   });
   let tD = n1();
   let tk = useCallback(() => {
-    pickerType !== Zl.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(jD()), e8(vq())) : pickerType === Zl.RESOURCE_INSERT_MODAL && e5 && (e8(postUserFlag({
+    pickerType !== Zl.PREFERRED_VALUES_PICKER && (instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal ? (instanceSwapPickerShown.returnFocusToToggle && pickerToggleRef?.current && pickerToggleRef.current.focus(), e8(hideTooltip()), e8(vq())) : pickerType === Zl.RESOURCE_INSERT_MODAL && e5 && (e8(postUserFlag({
       seen_component_onboarding_modal: !0
     })), tP()));
   }, [instanceSwapPickerShown, pickerToggleRef, e8, pickerType, tP, e5]);
@@ -951,7 +951,7 @@ export function $$eY2(e) {
   let [m, g] = useState(generateUUIDv4());
   let f = instanceSwapPickerShown.isShown ? new Point(instanceSwapPickerShown.initialX, instanceSwapPickerShown.initialY) : new Point(0, 0);
   let E = useCallback(() => {
-    dropdownShown?.type === YU(pickerType) && _(oB());
+    dropdownShown?.type === YU(pickerType) && _(hideDropdownAction());
   }, [_, dropdownShown, pickerType]);
   let y = useCallback(() => {
     instanceSwapPickerShown.isShown && instanceSwapPickerShown.modal && _(qX({
@@ -1004,7 +1004,7 @@ export function $$eY2(e) {
     })
   });
   let W = useCallback(() => {
-    dropdownShown?.type.includes(fn) && _(oB());
+    dropdownShown?.type.includes(fn) && _(hideDropdownAction());
   }, [_, dropdownShown?.type]);
   return jsx(Ao, {
     ref: A,

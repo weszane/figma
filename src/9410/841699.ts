@@ -19,11 +19,11 @@ import { nT, o5 } from "../figma_app/433401";
 import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
 import { xjb } from "../figma_app/6204";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { bx } from "../figma_app/8833";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { n as _$$n } from "../figma_app/848232";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { KindEnum } from "../905/129884";
 import { p as _$$p } from "../figma_app/353099";
 import { y as _$$y } from "../9410/598921";
@@ -94,14 +94,14 @@ export function $$M1({
   let i = !useCanAccessDevModeEntryPoint();
   let l = useDispatch();
   let u = U0();
-  let p = useSelector(e => i ? void 0 : Np(e, u));
+  let p = useSelector(e => i ? void 0 : selectedViewToPath(e, u));
   let g = l7();
   let x = ZI();
   let y = useAtomWithSubscription(hv)?.data;
   let [b, v] = useAtomValueAndSetter(cR);
   let E = useCanUseDevModeDemoFile();
   let T = useAtomWithSubscription(_$$d);
-  let M = ow();
+  let M = isWhiteboardFileType();
   let P = _$$n();
   let F = Xd();
   let B = useCallback(e => {
@@ -110,7 +110,7 @@ export function $$M1({
       clientX,
       clientY
     } = e;
-    l(j7({
+    l(showDropdownThunk({
       type: bx,
       data: {
         clientX,

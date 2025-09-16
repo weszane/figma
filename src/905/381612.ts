@@ -15,7 +15,7 @@ import { getCurrentPluginVersionId } from "../figma_app/300692";
 import { gJ, Jl, SO, JG } from "../figma_app/190980";
 import { HubTypeEnum } from "../figma_app/45218";
 import { NO_TEAM } from "../figma_app/633080";
-import { vt, $A, dB } from "../905/862883";
+import { ITemplateType, FDocumentType, FaceToolType } from "../905/862883";
 import { q } from "../figma_app/446378";
 var s = a;
 var l = o;
@@ -33,8 +33,8 @@ let T = createOptimistThunk(async (e, t, {
   } = t;
   if (!orgId && !teamId) return;
   let s = n.recentlyUsed.templates[t.key];
-  let o = s.filter(e => e.type === vt.CommunityResource);
-  let l = s.filter(e => e.type === vt.TeamTemplate);
+  let o = s.filter(e => e.type === ITemplateType.CommunityResource);
+  let l = s.filter(e => e.type === ITemplateType.TeamTemplate);
   let d = new Set();
   for (let e of o) n.hubFiles[e.id] || d.add(e.id);
   if (0 === d.size && 0 === l.length) return;
@@ -77,7 +77,7 @@ let T = createOptimistThunk(async (e, t, {
   if (0 !== c.length || A) {
     let i = new Set();
     for (let e of c) i.add(e);
-    let n = s.filter(e => e.type === vt.TeamTemplate ? !m && !_.has(e.key) : !i.has(e.id));
+    let n = s.filter(e => e.type === ITemplateType.TeamTemplate ? !m && !_.has(e.key) : !i.has(e.id));
     e.dispatch(nM({
       storeInRecentsKey: t.key,
       recentTemplates: n
@@ -131,48 +131,48 @@ if (localStorageRef) {
   } catch (e) {}
 }
 let D = {
-  [$A.Design]: R,
-  [$A.FigJam]: N,
-  [$A.Handoff]: [],
-  [$A.Slides]: P,
-  [$A.Cooper]: O
+  [FDocumentType.Design]: R,
+  [FDocumentType.FigJam]: N,
+  [FDocumentType.Handoff]: [],
+  [FDocumentType.Slides]: P,
+  [FDocumentType.Cooper]: O
 };
 let L = {
-  [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, HubTypeEnum.WIDGET),
-  [$A.Handoff]: [],
-  [$A.Slides]: [],
-  [$A.Cooper]: [],
+  [FDocumentType.Design]: [],
+  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, HubTypeEnum.WIDGET),
+  [FDocumentType.Handoff]: [],
+  [FDocumentType.Slides]: [],
+  [FDocumentType.Cooper]: [],
   fetchedResources: {}
 };
 let F = {
-  [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, HubTypeEnum.PLUGIN),
-  [$A.Handoff]: gJ($A.Handoff, HubTypeEnum.PLUGIN),
-  [$A.Slides]: [],
-  [$A.Cooper]: [],
+  [FDocumentType.Design]: [],
+  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, HubTypeEnum.PLUGIN),
+  [FDocumentType.Handoff]: gJ(FDocumentType.Handoff, HubTypeEnum.PLUGIN),
+  [FDocumentType.Slides]: [],
+  [FDocumentType.Cooper]: [],
   fetchedResources: {}
 };
 let M = {
-  [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, HubTypeEnum.HUB_FILE),
-  [$A.Handoff]: [],
-  [$A.Slides]: gJ($A.Slides, HubTypeEnum.HUB_FILE),
-  [$A.Cooper]: []
+  [FDocumentType.Design]: [],
+  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, HubTypeEnum.HUB_FILE),
+  [FDocumentType.Handoff]: [],
+  [FDocumentType.Slides]: gJ(FDocumentType.Slides, HubTypeEnum.HUB_FILE),
+  [FDocumentType.Cooper]: []
 };
 let j = {
-  [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, dB.FACE_STAMP),
-  [$A.Handoff]: [],
-  [$A.Slides]: [],
-  [$A.Cooper]: []
+  [FDocumentType.Design]: [],
+  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, FaceToolType.FACE_STAMP),
+  [FDocumentType.Handoff]: [],
+  [FDocumentType.Slides]: [],
+  [FDocumentType.Cooper]: []
 };
 let U = {
-  [$A.Design]: [],
-  [$A.FigJam]: gJ($A.FigJam, dB.WHITEBOARD_TOOL),
-  [$A.Handoff]: [],
-  [$A.Slides]: [],
-  [$A.Cooper]: []
+  [FDocumentType.Design]: [],
+  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, FaceToolType.WHITEBOARD_TOOL),
+  [FDocumentType.Handoff]: [],
+  [FDocumentType.Slides]: [],
+  [FDocumentType.Cooper]: []
 };
 function B(e) {
   return e.filter(e => !!e.library_key);
@@ -185,7 +185,7 @@ function V(e) {
     editorKey,
     resourceKey
   } = e;
-  let [[d], c] = s()(gJ(editorKey, resourceKey), e => e.type === vt.CommunityResource && e.id === resourceId);
+  let [[d], c] = s()(gJ(editorKey, resourceKey), e => e.type === ITemplateType.CommunityResource && e.id === resourceId);
   let u = [{
     id: resourceId,
     version: currentVersionId,
@@ -196,7 +196,7 @@ function V(e) {
         [currentUserId]: Date.now()
       } : {})
     },
-    type: vt.CommunityResource
+    type: ITemplateType.CommunityResource
   }, ...c].slice(0, resourceKey === HubTypeEnum.PLUGIN ? 21 : 12);
   let p = Jl(editorKey, resourceKey);
   p && localStorageRef?.setItem(p, JSON.stringify(u));
@@ -240,13 +240,13 @@ let $$H0 = HY({
       }, ...d].slice(0, 21);
       localStorageRef?.setItem(function (e) {
         switch (e) {
-          case $A.Design:
+          case FDocumentType.Design:
             return x;
-          case $A.Slides:
+          case FDocumentType.Slides:
             return w;
-          case $A.FigJam:
+          case FDocumentType.FigJam:
             return S;
-          case $A.Cooper:
+          case FDocumentType.Cooper:
             return C;
           default:
             return S;
@@ -341,7 +341,7 @@ let $$H0 = HY({
         [storeInRecentsKey]: r
       };
     }
-    return WR.matches(t) ? t.payload.storeInRecentsKey === $A.Design ? e : {
+    return WR.matches(t) ? t.payload.storeInRecentsKey === FDocumentType.Design ? e : {
       ...e,
       [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
     } : cu.matches(t) ? {
@@ -375,10 +375,10 @@ let $$H0 = HY({
           type: _type
         } = e;
         switch (_type) {
-          case vt.CommunityResource:
-            return payload.type === vt.CommunityResource && e.id === payload.id;
-          case vt.TeamTemplate:
-            return payload.type === vt.TeamTemplate && e.key === payload.file_key;
+          case ITemplateType.CommunityResource:
+            return payload.type === ITemplateType.CommunityResource && e.id === payload.id;
+          case ITemplateType.TeamTemplate:
+            return payload.type === ITemplateType.TeamTemplate && e.key === payload.file_key;
           default:
             throwTypeError(_type);
         }
@@ -390,17 +390,17 @@ let $$H0 = HY({
         } : {})
       };
       switch (type) {
-        case vt.CommunityResource:
+        case ITemplateType.CommunityResource:
           i = {
             id: payload.id,
-            type: vt.CommunityResource,
+            type: ITemplateType.CommunityResource,
             last_added_at_by_user_id: m
           };
           break;
-        case vt.TeamTemplate:
+        case ITemplateType.TeamTemplate:
           i = {
             key: payload.file_key,
-            type: vt.TeamTemplate,
+            type: ITemplateType.TeamTemplate,
             last_added_at_by_user_id: m
           };
           break;
@@ -421,11 +421,11 @@ let $$H0 = HY({
   },
   faceStamps: function (e = j, t) {
     if (F9.matches(t)) {
-      if (t.payload.storeInRecentsKey !== $A.FigJam) throw Error("Recently used facestamps currently only implemented for Figjam.");
+      if (t.payload.storeInRecentsKey !== FDocumentType.FigJam) throw Error("Recently used facestamps currently only implemented for Figjam.");
       let [[i], n] = s()(e[t.payload.storeInRecentsKey], e => e.user.id === t.payload.item.user.id);
       let a = [{
         id: t.payload.item.user.id,
-        type: vt.FaceStamp,
+        type: ITemplateType.FaceStamp,
         user: t.payload.item.user,
         last_added_at_by_user_id: {
           ...(i?.last_added_at_by_user_id || {}),
@@ -447,11 +447,11 @@ let $$H0 = HY({
   },
   whiteboardTools: function (e = U, t) {
     if (ay.matches(t)) {
-      if (t.payload.storeInRecentsKey !== $A.FigJam) throw Error("Recently used whiteboard tools currently only implemented for Figjam.");
+      if (t.payload.storeInRecentsKey !== FDocumentType.FigJam) throw Error("Recently used whiteboard tools currently only implemented for Figjam.");
       let [[i], n] = s()(e[t.payload.storeInRecentsKey], e => e.id === t.payload.item.id);
       let a = [{
         id: t.payload.item.id,
-        type: vt.WhiteboardTool,
+        type: ITemplateType.WhiteboardTool,
         last_added_at_by_user_id: {
           ...(i?.last_added_at_by_user_id || {}),
           ...(t.payload.currentUserId ? {

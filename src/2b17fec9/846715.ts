@@ -52,7 +52,7 @@ import { V as _$$V } from "../905/355181";
 import { c as _$$c } from "../905/370443";
 import { kD, tS as _$$tS2 } from "../figma_app/622574";
 import { b4 } from "../figma_app/106207";
-import { vt } from "../905/862883";
+import { ITemplateType } from "../905/862883";
 import { RJ } from "../figma_app/869006";
 import { _ as _$$_ } from "../905/410717";
 import { n3, Tc } from "../905/797478";
@@ -197,7 +197,7 @@ let eo = memo(function () {
       onCopyClick: () => {
         t && r && i({
           templateIdentifier: {
-            type: vt.TeamTemplate,
+            type: ITemplateType.TeamTemplate,
             file_key: t.fileKey
           },
           templateName: t.name

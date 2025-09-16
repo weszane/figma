@@ -121,7 +121,7 @@ import { zE } from '../905/738636';
 import { Ao } from '../905/748636';
 import { H4 as _$$H, tH as _$$tH } from '../905/751457';
 import { getPermissionsAndView } from '../905/766303';
-import { $A } from '../905/782918';
+import { isFullscreenDevHandoffView } from '../905/782918';
 import { EventShield } from '../905/821217';
 import { zi } from '../905/824449';
 import { vL } from '../905/826900';
@@ -133,7 +133,7 @@ import { VariableStyleId } from '../905/859698';
 import { ud } from '../905/862913';
 import { defaultSessionLocalIDString } from '../905/871411';
 import { generateUUIDv4 } from '../905/871474';
-import { D as _$$D3 } from '../905/882262';
+import { useHasParentOrgId } from '../905/882262';
 import { ManuallyLabeledCheckbox } from '../905/909715';
 import { XHR } from '../905/910117';
 import { bL } from '../905/911410';
@@ -141,7 +141,7 @@ import { Y as _$$Y2 } from '../905/912236';
 import { debounce } from '../905/915765';
 import { A as _$$A6 } from '../905/920142';
 import { useFullscreenReady } from '../905/924253';
-import { oB as _$$oB, sf as _$$sf } from '../905/929976';
+import { hideDropdownAction, selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { sx as _$$sx2 } from '../905/941192';
 import { dL, qz } from '../905/944871';
@@ -224,7 +224,7 @@ import { O as _$$O2 } from '../figma_app/185954';
 import { dh } from '../figma_app/186343';
 import { FFileType, FPermissionLevelType } from '../figma_app/191312';
 import { areColorsEqual, getThemeBackgroundColor, parseColor, whiteColor } from '../figma_app/191804';
-import { U2 } from '../figma_app/193867';
+import { getFileKeyFromSelectedView } from '../figma_app/193867';
 import { yesNoTrackingEnum } from '../figma_app/198712';
 import { AN } from '../figma_app/201703';
 import { Cg } from '../figma_app/216057';
@@ -361,7 +361,7 @@ import { Uc as _$$Uc, C4, L3 } from '../figma_app/968444';
 import { r as _$$r } from '../figma_app/968727';
 import { fG, gY } from '../figma_app/973927';
 import { mz } from '../figma_app/975811';
-import { ow as _$$ow, E3, Em, lg, m0 } from '../figma_app/976749';
+import { isWhiteboardFileType, getSelectedEditorType, isDesignFileType, getCurrentFileType, isDevHandoffEditorType } from '../figma_app/976749';
 import { ix as _$$ix, fA, Gz } from '../figma_app/991227';
 import { EG } from '../figma_app/995580';
 import { A as _$$A0 } from '../svg/56834';
@@ -1517,7 +1517,7 @@ function tG({
   let t = getViewportInfo({
     subscribeToUpdates_expensive: e
   });
-  let i = _$$ow();
+  let i = isWhiteboardFileType();
   let r = Ye();
   let a = Pg();
   let s = _o();
@@ -1932,7 +1932,7 @@ function ib({
     let n = useSelector(e => e.mirror.selectionProperties.numSelected);
     return e || t || i || r.type !== NodePropertyCategory.NONE || n !== 0;
   }();
-  let h = E3();
+  let h = getSelectedEditorType();
   let m = Ep();
   let g = useAtomWithSubscription(wg);
   let y = useAtomWithSubscription(t5);
@@ -2665,7 +2665,7 @@ function iq(e) {
   let t = useDispatch();
   let i = I_();
   let n = useSelector(e => e.mirror.appModel);
-  if (!useSelector(e => U2(e.selectedView))) return null;
+  if (!useSelector(e => getFileKeyFromSelectedView(e.selectedView))) return null;
   let {
     thread
   } = e;
@@ -2790,7 +2790,7 @@ function r0(e) {
   return !atomStoreManager.get(Tm) && e;
 }
 function r8() {
-  let e = Em();
+  let e = isDesignFileType();
   let t = _$$y5().transform(e => e?.canCreateSitesFileWithReasons.result).unwrapOr(!1);
   let i = useIsCurrentUserCreator();
   let r = Vr();
@@ -2870,7 +2870,7 @@ class ni extends PureComponent {
     let u = this.props.selectedView.editorType === FEditorType.Sites;
     let p = this.props.selectedView.editorType === FEditorType.Figmake;
     let h = this.props.selectedView.editorType === FEditorType.Cooper;
-    let m = $A(this.props.selectedView);
+    let m = isFullscreenDevHandoffView(this.props.selectedView);
     let g = BrowserInfo.windows ? 'Ctrl+' : '\u2318';
     let x = {
       action: 'paste-here',
@@ -2985,7 +2985,7 @@ let nr = connect((e, t) => ({
   org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
   isJoinedToActiveVotingSession: gR(e),
   hasSelection: Object.keys(e.mirror.sceneGraphSelection).length > 0,
-  isDevHandoff: $A(e.selectedView)
+  isDevHandoff: isFullscreenDevHandoffView(e.selectedView)
 }))(ni);
 function nn(e) {
   let t = _$$op();
@@ -3257,7 +3257,7 @@ let ns = class e extends PureComponent {
       callback: () => {
         let e;
         if (!this.props.openFile) return;
-        let t = !$A(this.props.selectedView) && this.props.attributionContextKey;
+        let t = !isFullscreenDevHandoffView(this.props.selectedView) && this.props.attributionContextKey;
         let i = Wl(this.props.selectedView);
         let r = _$$s(this.props.selectedView);
         let n = _$$P3(this.props.selectedView);
@@ -3267,7 +3267,7 @@ let ns = class e extends PureComponent {
         let u = buildFileUrl({
           file: this.props.openFile,
           nodeId: this.getSelectionGuid(),
-          isDevHandoff: $A(this.props.selectedView),
+          isDevHandoff: isFullscreenDevHandoffView(this.props.selectedView),
           isReadOnly: this.props.appModel.isReadOnly,
           isFigJam: this.isFigjam(),
           isDevModeOverview: i,
@@ -4292,7 +4292,7 @@ function nl(e) {
       attributionContextKey: e.sharingAttributionContextKey,
       editorType: a,
       isDevHandoff: a === FEditorType.DevHandoff,
-      isLimitedDevMode: $A(e.selectedView) && !canAccessFullDevMode(e)
+      isLimitedDevMode: isFullscreenDevHandoffView(e.selectedView) && !canAccessFullDevMode(e)
     };
   });
   let x = PE();
@@ -4385,7 +4385,7 @@ function nc(e) {
       attributionContextKey: e.sharingAttributionContextKey,
       editorType: n,
       isDevHandoff: n === FEditorType.DevHandoff,
-      isLimitedDevMode: $A(e.selectedView) && !canAccessFullDevMode(e)
+      isLimitedDevMode: isFullscreenDevHandoffView(e.selectedView) && !canAccessFullDevMode(e)
     };
   });
   let x = PE();
@@ -4825,7 +4825,7 @@ function nk({
     _$$u({
       source: MenuType.RFD_INITIAL_NUDGE
     });
-    i(_$$oB());
+    i(hideDropdownAction());
   }, [i]);
   KV(MenuType.RFD_INITIAL_NUDGE, !0);
   let p = useMemo(() => [{
@@ -4852,7 +4852,7 @@ function nk({
       name: getI18nString('dev_handoff.linter.menu_skip_button'),
       variant: 'secondary',
       recordingKey: 'skipLinting',
-      onClick: () => i(_$$oB())
+      onClick: () => i(hideDropdownAction())
     }),
     preventDismissOnSelected: !0,
     preventSelectOnMouseEnter: !0,
@@ -4932,7 +4932,7 @@ function nV({
   let c = useCallback(e => {
     i(e.target.value);
   }, [i]);
-  let u = useSelector(e => $A(e.selectedView));
+  let u = useSelector(e => isFullscreenDevHandoffView(e.selectedView));
   let p = useCallback(() => {
     e(t);
     i('');
@@ -4996,27 +4996,27 @@ function nY({
   let m = !!h?.hasReadyStatus;
   let f = !!h?.hasCompletedStatus;
   let g = m || f;
-  let x = _$$D3() && !!h?.hasBeenEditedSinceLastStatusChange;
+  let x = useHasParentOrgId() && !!h?.hasBeenEditedSinceLastStatusChange;
   let y = h?.type === 'SECTION';
   let b = selectCurrentFile();
   let C = _$$U3('status_label_menu');
   let v = getBasicViewportRect();
   let E = useCanAccessFullDevMode();
   let T = useCanAccessDevModeEntryPoint();
-  let S = _$$D3();
+  let S = useHasParentOrgId();
   let j = E && S;
   let I = Yh(u, 'set-selection-completed-status');
   let k = Yh(u, 'mark-incomplete');
   let N = qZ();
   let A = trackFileEventWithStore();
-  let O = E3();
+  let O = getSelectedEditorType();
   let [, L] = useAtomValueAndSetter(wz);
   let R = dh();
   let D = A0(ActionType.READY_FOR_DEV);
   let M = useCanUseDevModeDemoFile();
   let P = useMemo(() => HandoffBindingsCpp.isReadOnly(SessionOrigin.NODE_STATUS), []);
   let F = HandoffBindingsCpp.canEditNodeStatus();
-  let B = m0();
+  let B = isDevHandoffEditorType();
   let U = T && P && !E;
   let G = selectWithShallowEqual(e => e.selectedView.view === 'fullscreen' ? {
     ...e.selectedView,
@@ -5119,7 +5119,7 @@ function nY({
         });
         C('handoff');
         L(O === FEditorType.DevHandoff ? 'dev_mode_canvas' : 'design_canvas');
-        s(_$$sf(G));
+        s(selectViewAction(G));
       },
       flags: ['design', 'dev_handoff']
     }, E] : p;
@@ -5144,7 +5144,7 @@ function nY({
         onResult: e => {
           z4.setNodesReady(!0, [t], 'canvas', e ?? null);
           D && R4([t]);
-          s(_$$oB());
+          s(hideDropdownAction());
         }
       }),
       preventDismissOnSelected: !0,
@@ -5161,7 +5161,7 @@ function nY({
         onResult: e => {
           z4.setNodesReady(!0, [t], 'canvas', e ?? null);
           D && R4([t]);
-          s(_$$oB());
+          s(hideDropdownAction());
         }
       }),
       flags: ['design', 'dev_handoff'],
@@ -6652,7 +6652,7 @@ function sn() {
   let [e, t] = useState({
     step: 'NOT_CURRENTLY_ADDING'
   });
-  let i = lg();
+  let i = getCurrentFileType();
   let s = _$$Zj();
   let l = useSelector(e => e.usedKeyboardShortcuts);
   let d = useSelector(e => e.mirror.appModel.keyboardShortcuts);
@@ -8474,7 +8474,7 @@ class ow extends RecordingPureComponent {
         case KeyCodes.ESCAPE:
           e.preventDefault();
           this.cancelDelayedClose();
-          this.props.dispatch(_$$oB());
+          this.props.dispatch(hideDropdownAction());
           break;
         case KeyCodes.N:
         case KeyCodes.DOWN_ARROW:
@@ -8547,11 +8547,11 @@ class ow extends RecordingPureComponent {
         }), oT(e) && !isInteractionOrEvalMode()) {
           this.cancelDelayedClose();
           this.delayedCloseTimerID = setTimeout(() => {
-            this.props.dispatch(_$$oB());
+            this.props.dispatch(hideDropdownAction());
           }, 300);
           return;
         }
-        this.props.dispatch(_$$oB());
+        this.props.dispatch(hideDropdownAction());
       }
     };
     this.renderResult = (e, t) => {

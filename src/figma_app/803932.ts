@@ -18,7 +18,7 @@ import { Fj } from "../figma_app/793429";
 import { Q } from "../905/217916";
 import { rb } from "../905/711212";
 import { ro } from "../figma_app/451499";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku, UK } from "../figma_app/740163";
 import { isInvalidValue } from "../905/216495";
 import { eY } from "../figma_app/722362";
@@ -64,7 +64,7 @@ function X(e) {
 let J = new Set(["SOLID", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND", "GRADIENT_LINEAR", "GRADIENT_RADIAL"]);
 let Z = new ro();
 export function $$Q0(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let {
     blendMode,
     onError
@@ -327,7 +327,7 @@ function ea(e) {
   });
 }
 function es(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let {
     format
   } = e;
@@ -430,7 +430,7 @@ function eo(e) {
   });
 }
 function el(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let {
     encodedPaint,
     paint,
@@ -536,7 +536,7 @@ let e_ = () => {
   let t = uQ();
   let r = Q();
   let n = v4();
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let o = useSelector(e => $u(e) > 1 ? e.mirror.selectionPaints.paints : e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
   let l = Ig();
   let d = useMemo(() => o.filter(e => $$ec9(e.paint)).map(e => dc(e.paint, l)), [o, l]);
@@ -587,7 +587,7 @@ function em(e) {
 }
 export function $$eg7(e) {
   let t = useDispatch();
-  let r = m0();
+  let r = isDevHandoffEditorType();
   let o = Fj(e.color.dsStyle.value.key);
   let l = e.color.dsStyle.kind;
   let d = e.color.dsStyle.value.node_id;
@@ -664,7 +664,7 @@ export function $$eE6({
   noPadding: t,
   isSubsection: r
 }) {
-  let i = m0();
+  let i = isDevHandoffEditorType();
   let a = uQ();
   let s = eY().get(a ?? "")?.type;
   let o = $$eu10();
@@ -708,7 +708,7 @@ let eb = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.HSL, ColorFo
 let eT = [ColorFormatEnum.HEX, ColorFormatEnum.RGB, ColorFormatEnum.CSS, ColorFormatEnum.HSL, ColorFormatEnum.HSB];
 export function $$eI1() {
   let e = Ku();
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = SV("inspection_panel_color_format_change");
   let a = useCallback(e => {
     UK().colorFormat.set(+e);
@@ -745,7 +745,7 @@ function eS(e = {}) {
   return h()(i, a, o, s);
 }
 function ev(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let {
     gradientStop,
     paint,

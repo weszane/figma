@@ -5,7 +5,7 @@ import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
 import { logError } from "../905/714362";
 import { getFalseValue } from "../figma_app/897289";
-import { my, u8 } from "../figma_app/976749";
+import { getEditorTypeOrNull, editorTypeAtom } from "../figma_app/976749";
 import { N } from "../905/482239";
 import { getUserId } from "../905/372672";
 import { FrecencyHistoryView } from "../figma_app/43951";
@@ -172,7 +172,7 @@ function S(e, t) {
 export function $$v1() {
   let [e, t] = useAtomValueAndSetter(b);
   let r = getUserId();
-  let i = my();
+  let i = getEditorTypeOrNull();
   let s = useMemo(() => new I({
     json: e,
     setJson: t,
@@ -185,14 +185,14 @@ export function $$v1() {
       let r = _$$n(e);
       s.addUsage(r, t);
     }, [s]),
-    frecencyByAction: S(useAtomWithSubscription(T), my()) || s.getActions(),
+    frecencyByAction: S(useAtomWithSubscription(T), getEditorTypeOrNull()) || s.getActions(),
     frecencyByQuery: s.getQueries()
   };
 }
 let A = null;
 export function $$x2() {
   let e = atomStoreManager.get(N).data;
-  let t = atomStoreManager.get(u8);
+  let t = atomStoreManager.get(editorTypeAtom);
   A && A.userId === e && A.fullscreenEditorType === t || (A = new I({
     json: atomStoreManager.get(b),
     setJson: e => atomStoreManager.set(b, e),
@@ -200,7 +200,7 @@ export function $$x2() {
     fullscreenEditorType: t
   }));
   return {
-    actions: S(atomStoreManager.get(T), atomStoreManager.get(u8)) || A.getActions(),
+    actions: S(atomStoreManager.get(T), atomStoreManager.get(editorTypeAtom)) || A.getActions(),
     queries: A.getQueries()
   };
 }

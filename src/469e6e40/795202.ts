@@ -10,7 +10,7 @@ import { G as _$$G } from "../469e6e40/623116";
 import { g as _$$g } from "../figma_app/638694";
 import { K } from "../905/628118";
 import { r as _$$r } from "../905/398386";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Tn } from "../figma_app/933328";
 import { NJ } from "../figma_app/518077";
 import { WorkspaceAdminSettingsView, WorkspaceInfoView } from "../figma_app/43951";
@@ -233,7 +233,7 @@ export function $$z0({
   let c = useMemo(() => !o && !d, [d, o]);
   let _ = useMemo(() => o || c, [o, c]);
   return (useEffect(() => {
-    c && a(sf({
+    c && a(selectViewAction({
       view: "resourceUnavailable",
       resourceType: EntityType.WORKSPACE
     }));

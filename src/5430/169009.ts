@@ -24,7 +24,7 @@ import { zn } from "../figma_app/350203";
 import { t0 } from "../figma_app/198840";
 import { CommentTabType, ResourceTypeNoComment } from "../figma_app/45218";
 import { E as _$$E, d as _$$d } from "../5430/165157";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { mH, BV, eG, Tu } from "../figma_app/703138";
 import { Um } from "../905/848862";
 import { p as _$$p } from "../905/927118";
@@ -145,7 +145,7 @@ let M = function ({
       onClick: e => {
         e.stopPropagation();
         let t = d.current;
-        p ? n(oB()) : t && (_(t.getBoundingClientRect()), n(j7({
+        p ? n(hideDropdownAction()) : t && (_(t.getBoundingClientRect()), n(showDropdownThunk({
           type: A
         })));
       },
@@ -539,7 +539,7 @@ function eI(e) {
   let [f, v] = useState(!1);
   let [b, j] = useState(null);
   let w = useCallback(() => {
-    h?.type === _$$Ng && x(oB());
+    h?.type === _$$Ng && x(hideDropdownAction());
   }, [h, x]);
   useEffect(() => (window.addEventListener("scroll", w, !1), () => {
     window.removeEventListener("scroll", w, !1);
@@ -638,7 +638,7 @@ function eI(e) {
                 ref: p,
                 onClick: e => {
                   let t = p.current;
-                  h ? w() : t && (j(t.getBoundingClientRect()), x(j7({
+                  h ? w() : t && (j(t.getBoundingClientRect()), x(showDropdownThunk({
                     type: _$$Ng,
                     data: {
                       commentId: comment.id

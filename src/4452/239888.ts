@@ -2,8 +2,8 @@ import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { N as _$$N } from "../905/438674";
-import { Cs } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { Button } from "../905/521428";
 import { L } from "../905/857916";
 import { getFeatureFlags } from "../905/601108";
@@ -48,7 +48,7 @@ export function $$w0() {
   let q = useMemo(() => "loaded" !== k.status || !!k.data?.currentUser?.userFlagByName, [k]);
   let M = getFeatureFlags().fc_initial_onboarding_enabled && !q ? jsx("div", {
     className: _()(_$$s.pt10.$, $$A),
-    children: jsx(Cs, {
+    children: jsx(BannerFullWidth, {
       variant: "brand",
       icon: jsx(L, {
         style: {
@@ -60,7 +60,7 @@ export function $$w0() {
           seen_connected_projects_org_member_banner: !0
         }));
       },
-      children: jsx(Q, {
+      children: jsx(BannerMessage, {
         children: renderI18nText("resource_connection.connected_projects_tab.connected_projects_help_you_collaborate", {
           learnMore: C
         })

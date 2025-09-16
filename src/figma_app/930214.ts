@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { tB, ll, U6, cW, ZT, $1 } from "../figma_app/844435";
-import { Ro } from "../figma_app/564095";
+import { isAcceptedPublisher } from "../figma_app/564095";
 import { Dd } from "../figma_app/599979";
 import { FP, Y8 } from "../figma_app/86989";
 import { useCurrentUserOrg } from "../905/845253";
@@ -147,7 +147,7 @@ export function $$T8(e) {
           publishedExtension,
           localPublishedExtension
         } = e;
-        return !!publishedExtension && !!t && (Ro(publishedExtension, t) || Dd(publishedExtension, t)) && !localPublishedExtension;
+        return !!publishedExtension && !!t && (isAcceptedPublisher(publishedExtension, t) || Dd(publishedExtension, t)) && !localPublishedExtension;
       }(e, t);
     default:
       throwTypeError(e);

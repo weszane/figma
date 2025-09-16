@@ -1,6 +1,6 @@
 import { CustomPosition } from "../figma_app/763686";
 import { generateRecordingKey } from "../figma_app/878298";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Fz } from "../figma_app/106207";
 import { fG } from "../figma_app/973927";
 import { t } from "../905/851577";
@@ -11,7 +11,7 @@ export function $$u0(e) {
   let {
     insertTemplate
   } = Fz();
-  let n = "whiteboard" === lg();
+  let n = "whiteboard" === getCurrentFileType();
   let u = F5();
   let {
     primaryKey,

@@ -13,7 +13,7 @@ import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { RK } from "../figma_app/815170";
 import { el, VG, js, _r, mj, cP } from "../figma_app/451499";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { clearSelection, addToSelection } from "../figma_app/741237";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { Fk } from "../figma_app/167249";
@@ -172,7 +172,7 @@ function F(e) {
     action,
     onClick
   } = e;
-  let c = m0();
+  let c = isDevHandoffEditorType();
   let u = useDispatch();
   let p = useCallback(e => {
     e.stopPropagation();
@@ -225,7 +225,7 @@ function j(e) {
     phrase,
     action
   } = e.interaction;
-  let o = m0();
+  let o = isDevHandoffEditorType();
   return jsxs("div", {
     className: p()({
       [L]: !e.isLast,

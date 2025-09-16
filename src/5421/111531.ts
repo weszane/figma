@@ -27,7 +27,7 @@ import { Ct } from "../figma_app/205280";
 import { LE } from "../figma_app/427737";
 import { q as _$$q, y as _$$y } from "../5421/145480";
 import { jD, fj } from "../figma_app/263905";
-import { s0 } from "../figma_app/115923";
+import { sitesViewSetterAtomFamily } from "../figma_app/115923";
 import { f3, TJ, YD, Vo } from "../figma_app/690664";
 import { df } from "../figma_app/202307";
 import { Py } from "../figma_app/251814";
@@ -3349,7 +3349,7 @@ function nU({
   let F = wE(U);
   let K = useAtomWithSubscription(ZY);
   let $ = !F || K;
-  let z = useAtomWithSubscription(s0);
+  let z = useAtomWithSubscription(sitesViewSetterAtomFamily);
   let [W, Z] = useAtomValueAndSetter(qQ);
   let G = K && (F || W);
   let Y = useCallback(() => {

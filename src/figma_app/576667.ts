@@ -6,7 +6,7 @@ import { hO } from "../figma_app/545293";
 import { l4 } from "../905/124270";
 import { L } from "../905/713563";
 import { Q8, sC, R9 } from "../905/61477";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { PublicModelType, CreatorResourceType } from "../figma_app/162807";
 import { q } from "../905/801222";
 import { m as _$$m } from "../905/424666";
@@ -26,7 +26,7 @@ export function $$g0({
   let S = L(I ? "fragment_search_modal" : "file_browser", E, !0);
   let v = useCallback((e, t, r) => {
     e.preventDefault();
-    g(oB());
+    g(hideDropdownAction());
     b(t);
     T(r?.searchModelType ?? null);
     S(f, PublicModelType.FILES, r, y, !1, !1);

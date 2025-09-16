@@ -10,7 +10,7 @@ import { getUserId } from "../905/372672";
 import { s as _$$s } from "../905/506024";
 import { getPluginByFileId } from "../figma_app/300692";
 import { hasLocalFileId } from "../figma_app/155287";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { XP } from "../figma_app/655139";
 function _(e) {
   let t = XP(e);
@@ -26,7 +26,7 @@ export let $$A0 = createOptimistThunk((e, t) => {
   let a = _$$s(i);
   let s = _(codeLanguage);
   "published-plugin" === s.type && plugin && !hasLocalFileId(plugin) && e.dispatch(gU({
-    storeInRecentsKey: $A.Handoff,
+    storeInRecentsKey: FDocumentType.Handoff,
     id: plugin.plugin_id,
     version: plugin.version,
     currentUserId: a
@@ -50,7 +50,7 @@ export function $$y1() {
         publishedExtensions: t
       });
       e && !hasLocalFileId(e) && i(gU({
-        storeInRecentsKey: $A.Handoff,
+        storeInRecentsKey: FDocumentType.Handoff,
         id: e.plugin_id,
         version: e.version,
         currentUserId: s

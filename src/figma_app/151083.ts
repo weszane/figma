@@ -11,7 +11,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { generateRecordingKey } from "../figma_app/878298";
 import { c$, wv } from "../figma_app/236327";
 import { getI18nString } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { userAtom } from "../figma_app/864723";
 import { fullscreenValue } from "../figma_app/455680";
@@ -308,7 +308,7 @@ export function $$$2(e) {
   let n = W();
   let s = useCallback(i => {
     i.stopPropagation();
-    r ? t(oB()) : (t(j7({
+    r ? t(hideDropdownAction()) : (t(showDropdownThunk({
       type: G,
       data: {
         guids: e

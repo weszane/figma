@@ -1,14 +1,14 @@
 import { throwTypeError } from "../figma_app/465776";
 import { localStorageRef } from "../905/657224";
-import { my } from "../figma_app/976749";
+import { getEditorTypeOrNull } from "../figma_app/976749";
 import { FPublisherType } from "../figma_app/191312";
 import { HubTypeEnum } from "../figma_app/45218";
 import { FEditorType, isDesignOrIllustration } from "../figma_app/53721";
-import { $A, dB, vt } from "../905/862883";
+import { FDocumentType, FaceToolType, ITemplateType } from "../905/862883";
 import { getPluginVersion } from "../figma_app/300692";
 export function $$u5() {
-  let e = my();
-  return e === FEditorType.Whiteboard ? $A.FigJam : isDesignOrIllustration(e) ? $A.Design : e === FEditorType.DevHandoff ? $A.Handoff : e === FEditorType.Slides ? $A.Slides : e === FEditorType.Cooper ? $A.Cooper : null;
+  let e = getEditorTypeOrNull();
+  return e === FEditorType.Whiteboard ? FDocumentType.FigJam : isDesignOrIllustration(e) ? FDocumentType.Design : e === FEditorType.DevHandoff ? FDocumentType.Handoff : e === FEditorType.Slides ? FDocumentType.Slides : e === FEditorType.Cooper ? FDocumentType.Cooper : null;
 }
 let $$p12 = "recent-widgets-figjam";
 let $$_2 = "recent-plugins-figjam";
@@ -18,21 +18,21 @@ let $$g8 = "recent-plugins-slides";
 let $$f3 = "recent-face-stamps-figjam";
 let $$E0 = "recent-whiteboard-tools-figjam";
 export function $$y1(e, t) {
-  if (e === $A.FigJam) switch (t) {
+  if (e === FDocumentType.FigJam) switch (t) {
     case HubTypeEnum.PLUGIN:
       return $$_2;
     case HubTypeEnum.WIDGET:
       return $$p12;
     case HubTypeEnum.HUB_FILE:
       return "recent-templates-figjam";
-    case dB.FACE_STAMP:
+    case FaceToolType.FACE_STAMP:
       return $$f3;
-    case dB.WHITEBOARD_TOOL:
+    case FaceToolType.WHITEBOARD_TOOL:
       return $$E0;
     default:
       return null;
   }
-  if (e === $A.Design) switch (t) {
+  if (e === FDocumentType.Design) switch (t) {
     case HubTypeEnum.PLUGIN:
       return $$m11;
     case HubTypeEnum.WIDGET:
@@ -40,8 +40,8 @@ export function $$y1(e, t) {
     default:
       return null;
   }
-  if (e === $A.Handoff) return t === HubTypeEnum.PLUGIN ? "recent-plugins-handoff" : null;
-  if (e === $A.Slides) switch (t) {
+  if (e === FDocumentType.Handoff) return t === HubTypeEnum.PLUGIN ? "recent-plugins-handoff" : null;
+  if (e === FDocumentType.Slides) switch (t) {
     case HubTypeEnum.HUB_FILE:
       return "recent-templates-piper";
     case HubTypeEnum.PLUGIN:
@@ -49,7 +49,7 @@ export function $$y1(e, t) {
     default:
       return null;
   }
-  return e === $A.Cooper && t === HubTypeEnum.PLUGIN ? "recent-plugins-cooper" : null;
+  return e === FDocumentType.Cooper && t === HubTypeEnum.PLUGIN ? "recent-plugins-cooper" : null;
 }
 export function $$b9(e, t) {
   if (!localStorageRef) return [];
@@ -61,7 +61,7 @@ export function $$b9(e, t) {
   } catch (e) {}
   return r.map(e => ({
     ...e,
-    type: e.type || vt.CommunityResource
+    type: e.type || ITemplateType.CommunityResource
   }));
 }
 export function $$T10(e) {
@@ -85,9 +85,9 @@ export function $$T10(e) {
 }
 export function $$I6(e) {
   switch (e.type) {
-    case vt.CommunityResource:
+    case ITemplateType.CommunityResource:
       return e.id;
-    case vt.TeamTemplate:
+    case ITemplateType.TeamTemplate:
       return e.key;
     default:
       throwTypeError(e);

@@ -12,7 +12,7 @@ import { g as _$$g } from "../figma_app/115586";
 import { getViewportInfo, getVisibleArea } from "../figma_app/62612";
 import { selectCurrentFile } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
-import { i1 } from "../figma_app/193867";
+import { isTryPluginModalShown } from "../figma_app/193867";
 import { J } from "../905/61366";
 import { x } from "../figma_app/59886";
 function _() {
@@ -37,7 +37,7 @@ export function $$I5() {
   let e = _$$g();
   let t = useSelector(e => e.mirror.appModel.showUi);
   let r = useSelector(e => e.mirror.appModel.topLevelMode === ViewType.LAYOUT);
-  let o = useSelector(e => i1(e.selectedView));
+  let o = useSelector(e => isTryPluginModalShown(e.selectedView));
   let l = useMemo(() => new Date(), []);
   let {
     createdAt,

@@ -1,68 +1,150 @@
-import { useSelector } from "react-redux";
-import { createReduxSubscriptionAtomWithState } from "../905/270322";
-import { FFileType } from "../figma_app/191312";
-import { mapEditorTypeToFileType, FEditorType } from "../figma_app/53721";
-export function $$o8() {
-  return useSelector(e => {
-    var t;
-    return (t = e.selectedView) && "fullscreen" === t.view ? mapEditorTypeToFileType(t.editorType) : FFileType.DESIGN;
-  });
+import { useSelector } from 'react-redux'
+import { createReduxSubscriptionAtomWithState } from '../905/270322'
+import { FEditorType, mapEditorTypeToFileType } from '../figma_app/53721'
+import { FFileType } from '../figma_app/191312'
+/**
+ * Returns the current file type based on the selected view in Redux.
+ * Original: $$o8
+ */
+export function getCurrentFileType() {
+  return useSelector<ObjectOf>((state) => {
+    const selectedView = state.selectedView
+    return selectedView && selectedView.view === 'fullscreen'
+      ? mapEditorTypeToFileType(selectedView.editorType)
+      : FFileType.DESIGN
+  })
 }
-export function $$l5(e) {
-  return e && "fullscreen" === e.view ? e.editorType : FEditorType.Design;
+
+/**
+ * Maps a view object to its editor type, defaults to Design.
+ * Original: $$l5
+ */
+export function getEditorTypeFromView(view?: { view: string, editorType: FEditorType }) {
+  return view && view.view === 'fullscreen' ? view.editorType : FEditorType.Design
 }
-export function $$d3() {
-  return useSelector(e => "prototype" === e.selectedView.view);
+
+/**
+ * Checks if the selected view is prototype.
+ * Original: $$d3
+ */
+export function isPrototypeView() {
+  return useSelector<ObjectOf>(state => state.selectedView.view === 'prototype')
 }
-export function $$c7() {
-  return useSelector(e => "fullscreen" === e.selectedView.view);
+
+/**
+ * Checks if the selected view is fullscreen.
+ * Original: $$c7
+ */
+export function isFullscreenView() {
+  return useSelector<ObjectOf>(state => state.selectedView.view === 'fullscreen')
 }
-export function $$u11() {
-  return $$o8() === FFileType.WHITEBOARD;
+
+/**
+ * Checks if the current file type is WHITEBOARD.
+ * Original: $$u11
+ */
+export function isWhiteboardFileType() {
+  return getCurrentFileType() === FFileType.WHITEBOARD
 }
-export function $$p2() {
-  let e = $$u11();
-  let t = useSelector(e => !!e.openFile?.isTryFile);
-  return e && t;
+
+/**
+ * Checks if the current file is a try file and is a whiteboard.
+ * Original: $$p2
+ */
+export function isTryWhiteboardFile() {
+  const isWhiteboard = isWhiteboardFileType()
+  const isTryFile = useSelector<ObjectOf>(state => !!state.openFile?.isTryFile)
+  return isWhiteboard && isTryFile
 }
-export function $$_1() {
-  return $$o8() === FFileType.DESIGN;
+
+/**
+ * Checks if the current file type is DESIGN.
+ * Original: $$_1
+ */
+export function isDesignFileType() {
+  return getCurrentFileType() === FFileType.DESIGN
 }
-export function $$h6() {
-  return $$o8() === FFileType.SITES;
+
+/**
+ * Checks if the current file type is SITES.
+ * Original: $$h6
+ */
+export function isSitesFileType() {
+  return getCurrentFileType() === FFileType.SITES
 }
-export function $$m9() {
-  return $$f0() === FEditorType.DevHandoff;
+
+/**
+ * Checks if the current editor type is DevHandoff.
+ * Original: $$m9
+ */
+export function isDevHandoffEditorType() {
+  return getSelectedEditorType() === FEditorType.DevHandoff
 }
-export function $$g14() {
-  return $$f0() === FEditorType.Illustration;
+
+/**
+ * Checks if the current editor type is Illustration.
+ * Original: $$g14
+ */
+export function isIllustrationEditorType() {
+  return getSelectedEditorType() === FEditorType.Illustration
 }
-export function $$f0() {
-  return useSelector($$E12);
+
+/**
+ * Returns the current editor type from Redux.
+ * Original: $$f0
+ */
+export function getSelectedEditorType() {
+  return useSelector(selectEditorType)
 }
-export function $$E12(e) {
-  let t = e.selectedView;
-  return "fullscreen" !== t.view ? FEditorType.Design : t.editorType;
+
+/**
+ * Selector for editor type based on selected view.
+ * Original: $$E12
+ */
+export function selectEditorType(state: { selectedView: { view: string, editorType: FEditorType } }) {
+  const selectedView = state.selectedView
+  return selectedView.view !== 'fullscreen'
+    ? FEditorType.Design
+    : selectedView.editorType
 }
-export function $$y10() {
-  return useSelector(e => $$b4(e.selectedView));
+
+/**
+ * Returns the editor type from the selected view, or null if not fullscreen.
+ * Original: $$y10
+ */
+export function getEditorTypeOrNull() {
+  return useSelector<ObjectOf>(state => getEditorTypeIfFullscreen(state.selectedView))
 }
-export function $$b4(e) {
-  return "fullscreen" !== e.view ? null : e.editorType;
+
+/**
+ * Returns editor type if view is fullscreen, otherwise null.
+ * Original: $$b4
+ */
+export function getEditorTypeIfFullscreen(view: { view: string, editorType: FEditorType }) {
+  return view.view !== 'fullscreen' ? null : view.editorType
 }
-export let $$T13 = createReduxSubscriptionAtomWithState(e => $$b4(e.selectedView));
-export const E3 = $$f0;
-export const Em = $$_1;
-export const Fn = $$p2;
-export const HW = $$d3;
-export const JV = $$b4;
-export const XE = $$l5;
-export const cJ = $$h6;
-export const iq = $$c7;
-export const lg = $$o8;
-export const m0 = $$m9;
-export const my = $$y10;
-export const ow = $$u11;
-export const pQ = $$E12;
-export const u8 = $$T13;
-export const vn = $$g14;
+
+/**
+ * Atom for subscribing to editor type changes in fullscreen view.
+ * Original: $$T13
+ */
+export const editorTypeAtom = createReduxSubscriptionAtomWithState(
+  state => getEditorTypeIfFullscreen(state.selectedView),
+)
+
+// Exported aliases for refactored functions
+export const E3 = getSelectedEditorType
+export const Em = isDesignFileType
+export const Fn = isTryWhiteboardFile
+export const HW = isPrototypeView
+export const JV = getEditorTypeIfFullscreen
+export const XE = getEditorTypeFromView
+export const cJ = isSitesFileType
+export const iq = isFullscreenView
+export const lg = getCurrentFileType
+export const m0 = isDevHandoffEditorType
+export const my = getEditorTypeOrNull
+export const ow = isWhiteboardFileType
+export const pQ = selectEditorType
+export const u8 = editorTypeAtom
+export const vn = isIllustrationEditorType

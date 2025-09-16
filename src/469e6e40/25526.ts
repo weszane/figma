@@ -38,8 +38,8 @@ import { N as _$$N2 } from "../figma_app/268271";
 import { X as _$$X } from "../905/482718";
 import { Q as _$$Q } from "../905/11928";
 import { M as _$$M } from "../469e6e40/490222";
-import { Yy } from "../figma_app/59509";
-import { Q as _$$Q2 } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { k as _$$k3 } from "../905/443820";
 import { AutoLayout } from "../905/470281";
 import { b as _$$b } from "../905/168239";
@@ -55,7 +55,7 @@ import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
 import { r as _$$r } from "../905/398386";
 import { Jt } from "../figma_app/401069";
 import { Vl, mV } from "../905/837497";
-import { sf as _$$sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Tn } from "../figma_app/933328";
 import { w4, yo, Jt as _$$Jt } from "../figma_app/28323";
 import { UK } from "../905/898493";
@@ -406,9 +406,9 @@ function eo(e) {
         padding: {
           top: 8
         },
-        children: jsx(Yy, {
+        children: jsx(BannerInset, {
           variant: "brand",
-          children: jsx(_$$Q2, {
+          children: jsx(BannerMessage, {
             title: "This file list report report is updated once a day.",
             children: "It is available in beta status. As Figma rolls out improved enterprise analytics, this report may move to another part of the product."
           })
@@ -472,9 +472,9 @@ function ed(e) {
         padding: {
           top: 8
         },
-        children: jsx(Yy, {
+        children: jsx(BannerInset, {
           variant: "brand",
-          children: jsx(_$$Q2, {
+          children: jsx(BannerMessage, {
             title: "This access insight report is updated once a day.",
             children: "This access insight report is updated once a day. As Figma rolls out improved enterprise analytics, this report may move to another part of the product."
           })
@@ -2117,7 +2117,7 @@ function aN({
         label: getI18nString("billing_groups_table.edit_details")
       }), jsx(IU, {
         onClick: () => {
-          t(_$$sf({
+          t(selectViewAction({
             view: "licenseGroup",
             subView: UserGroupRole.ADMIN,
             licenseGroupId: e[0].id,
@@ -2157,7 +2157,7 @@ function aR({
       children: getI18nString("billing_groups_table.edit_details")
     }, "license-group-edit-action"), jsx(_$$p3, {
       onClick: () => {
-        t(_$$sf({
+        t(selectViewAction({
           view: "licenseGroup",
           subView: UserGroupRole.ADMIN,
           licenseGroupId: e.id,
@@ -2338,7 +2338,7 @@ function aU(e) {
       items: b,
       minContentWidth: aD,
       onRowClick: e => {
-        e.id && t(_$$sf({
+        e.id && t(selectViewAction({
           licenseGroupId: e.id,
           view: "licenseGroup",
           subView: UserGroupRole.ADMIN,
@@ -2575,14 +2575,14 @@ function a3(e) {
     return t;
   }), [o]);
   let u = useCallback(() => {
-    t(_$$sf({
+    t(selectViewAction({
       view: "orgAdminSettings",
       orgAdminSettingsViewTab: DashboardSection.BILLING,
       orgAdminSettingsViewSecondaryTab: BillingSectionEnum.INVOICES
     }));
   }, [t]);
   let m = useCallback(e => {
-    t(_$$sf({
+    t(selectViewAction({
       view: "orgAdminSettings",
       orgAdminSettingsViewTab: DashboardSection.BILLING,
       orgAdminSettingsViewSecondaryTab: BillingSectionEnum.INVOICES,
@@ -2590,7 +2590,7 @@ function a3(e) {
     }));
   }, [t]);
   let p = useCallback(() => {
-    t(_$$sf({
+    t(selectViewAction({
       view: "orgAdminSettings",
       orgAdminSettingsViewTab: DashboardSection.MEMBERS
     }));
@@ -3232,7 +3232,7 @@ function nD({
         label: getI18nString("workspace_table.edit_details")
       }), jsx(IU, {
         onClick: () => {
-          a(_$$sf({
+          a(selectViewAction({
             view: "workspace",
             subView: DUserRole.ADMIN,
             workspaceId: n.id,
@@ -3269,7 +3269,7 @@ function nM({
     }));
   }, [a, t, e]);
   let o = useCallback(() => {
-    a(_$$sf({
+    a(selectViewAction({
       view: "workspace",
       subView: DUserRole.ADMIN,
       workspaceId: n.id,
@@ -3502,7 +3502,7 @@ function nz(e) {
   }, ..._];
   a && (nG.set(m), m = nG.search(a));
   let p = useCallback(e => {
-    t(_$$sf({
+    t(selectViewAction({
       view: "workspace",
       subView: DUserRole.ADMIN,
       workspaceId: e,
@@ -4975,7 +4975,7 @@ export function $$s$0(e) {
     permissions: a
   });
   return (useEffect(() => {
-    c && t(_$$sf({
+    c && t(selectViewAction({
       view: "resourceUnavailable"
     }));
   }, [t, c]), "loading" === l.status || "loading" === d.status) ? jsx(_$$p2, {
@@ -5046,21 +5046,21 @@ function sB(e) {
     let t = e.workspacesCanAdminViewResult.data?.[0];
     let s = !!t;
     let i = s && I.membersTabOrgJoinRequest;
-    !O || L || i ? s && !L ? a(_$$sf({
+    !O || L || i ? s && !L ? a(selectViewAction({
       view: "workspace",
       subView: DUserRole.ADMIN,
       workspaceId: t.id,
       selectedTab: findMatchingValue(SectionType, e.selectedTab) || defaultSectionKey,
       membersTabOrgJoinRequest: I.membersTabOrgJoinRequest
-    })) : L || a(_$$sf(o0)) : groupsUserIsAdminOf.length > 0 ? V ? a(_$$sf({
+    })) : L || a(selectViewAction(o0)) : groupsUserIsAdminOf.length > 0 ? V ? a(selectViewAction({
       view: "billingGroupDashboard",
       selectedTab: FRequestsStr.REQUESTS
-    })) : a(_$$sf({
+    })) : a(selectViewAction({
       view: "licenseGroup",
       subView: UserGroupRole.ADMIN,
       licenseGroupId: groupsUserIsAdminOf[0].id,
       selectedTab: getGroupOrDefault(e.selectedTab)
-    })) : D2(y, EO(n.id)) && a(_$$sf(o0));
+    })) : D2(y, EO(n.id)) && a(selectViewAction(o0));
   }, [a, groupsUserIsAdminOf, O, e.workspacesCanAdminViewResult, L, n.id, y, e.selectedTab, I.membersTabOrgJoinRequest, I.view, V]);
   let [H, Y] = useState(0);
   let [J, Q] = useState("");

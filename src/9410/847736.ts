@@ -35,7 +35,7 @@ import { oh } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
 import { TI } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { cd } from "../905/381612";
 import { ZW } from "../figma_app/861982";
 import { _ as _$$_2, Q as _$$Q2 } from "../7222/460441";
@@ -301,8 +301,8 @@ function ee() {
   }) : null;
 }
 function et() {
-  let e = _$$eE($A.Slides);
-  let t = TI($A.Slides);
+  let e = _$$eE(FDocumentType.Slides);
+  let t = TI(FDocumentType.Slides);
   let i = fK();
   let r = useDispatch();
   let a = selectCurrentFile();
@@ -311,7 +311,7 @@ function et() {
   let d = s === kN.FILE_IN_DRAFTS;
   let c = 0 === getObservableValue(AppStateTsApi?.canvasGrid()?.canvasGridArray, []).length;
   let u = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
-    key: $A.Slides
+    key: FDocumentType.Slides
   }));
   return 0 === t ? null : u || !a ? jsx(kM, {
     numSections: 1,
@@ -1679,7 +1679,7 @@ function tN() {
   let [{
     data: o
   }] = setupResourceAtomHandler(_$$_2());
-  let d = _$$eE($A.Slides);
+  let d = _$$eE(FDocumentType.Slides);
   let {
     scrollPosition,
     scrollRef,
@@ -1762,7 +1762,7 @@ function tA({
   initialScrollTop: t,
   onScroll: i
 }) {
-  let r = _$$eE($A.Slides);
+  let r = _$$eE(FDocumentType.Slides);
   return 0 === r.length ? null : jsx(_$$P, {
     className: _$$s.px8.hFull.$,
     scrollContainerRef: e,

@@ -11,7 +11,7 @@ import { isInteractionPathCheck } from "../figma_app/897289";
 import { tH } from "../905/751457";
 import { getI18nString } from "../905/303541";
 import { Fj } from "../figma_app/793429";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModalHandler, showModal } from "../905/156213";
 import { isVsCodeEnvironment } from "../905/858738";
 import { _6 } from "../figma_app/386952";
@@ -19,7 +19,7 @@ import { Fk } from "../figma_app/167249";
 import { KindEnum } from "../905/129884";
 import { cn } from "../905/959568";
 import { P } from "../905/647955";
-import { WP, W8, iB, wR, E6, Gw, vl, b6 } from "../905/560959";
+import { VariableDetailModal, MatchingVariablesModal, StyleDetailModalWidth, ModalPadding, ModalWindowType, MatchingVariablesModalWidth, StyleDetailModal, VariableDetailModalWidth } from "../905/560959";
 import { Zh, g_, _o } from "../905/729876";
 function x({
   toggled: e,
@@ -107,8 +107,8 @@ function C({
 }
 export function $$w2(e) {
   let t = useSelector(e => e.modalShown);
-  let r = !!t && t.type === WP && t.data?.rowRef && t.data.rowRef.current === e?.current;
-  let n = !!t && t.type === W8 && t.data?.rowRef && t.data.rowRef.current === e?.current;
+  let r = !!t && t.type === VariableDetailModal && t.data?.rowRef && t.data.rowRef.current === e?.current;
+  let n = !!t && t.type === MatchingVariablesModal && t.data?.rowRef && t.data.rowRef.current === e?.current;
   return r || n;
 }
 function O() {
@@ -151,31 +151,31 @@ export function $$L1({
     let n = useDispatch();
     let s = useSelector(e => e.modalShown);
     let o = _6();
-    let l = !!s && s.type === WP;
+    let l = !!s && s.type === VariableDetailModal;
     let d = l && s.data.variableId === t && s.data.rowRef.current === (r?.current ?? e?.current) || !!o.variableIdForDetailsPanel && o.variableIdForDetailsPanel === t;
     return {
       toggleDetailModal: useCallback(i => {
         if (i.stopPropagation(), e?.current && t && "fullscreen" === o.view) {
           if (d) {
-            isVsCodeEnvironment() ? n(sf({
+            isVsCodeEnvironment() ? n(selectViewAction({
               ...o,
               variableIdForDetailsPanel: void 0
             })) : n(hideModalHandler());
             return;
           }
-          if (isVsCodeEnvironment()) n(sf({
+          if (isVsCodeEnvironment()) n(selectViewAction({
             ...o,
             variableIdForDetailsPanel: t
           }));else {
             l && n(hideModalHandler());
-            let i = cn(e?.current, iB + wR);
+            let i = cn(e?.current, StyleDetailModalWidth + ModalPadding);
             n(showModal({
-              type: WP,
+              type: VariableDetailModal,
               data: {
                 position: i,
                 variableId: t,
                 rowRef: r ?? e,
-                entryPoint: E6.Properties
+                entryPoint: ModalWindowType.Properties
               },
               optOutOfPrevModal: !0
             }));
@@ -191,7 +191,7 @@ export function $$L1({
   } = function (e, t, r) {
     let n = useDispatch();
     let s = useSelector(e => e.modalShown);
-    let o = !!s && s.type === W8;
+    let o = !!s && s.type === MatchingVariablesModal;
     let l = o && s.data?.rowRef && s.data.rowRef.current === (r?.current ?? e?.current);
     return {
       toggleMatchingVarsModal: useCallback(i => {
@@ -201,14 +201,14 @@ export function $$L1({
           return;
         }
         o && n(hideModalHandler());
-        let a = cn(e?.current, Gw + wR);
+        let a = cn(e?.current, MatchingVariablesModalWidth + ModalPadding);
         n(showModal({
-          type: W8,
+          type: MatchingVariablesModal,
           data: {
             vars: t,
             position: a,
             rowRef: r ?? e,
-            entryPoint: E6.Properties
+            entryPoint: ModalWindowType.Properties
           },
           optOutOfPrevModal: !0
         }));
@@ -223,7 +223,7 @@ export function $$L1({
     let o = useDispatch();
     let l = useSelector(e => e.modalShown);
     let d = _6();
-    let u = !!l && l.type === vl;
+    let u = !!l && l.type === StyleDetailModal;
     let p = u && l.data?.rowRef && l.data.rowRef.current === (s?.current ?? e?.current) || d.styleForDetailsPanel?.styleId === t;
     let {
       key,
@@ -239,13 +239,13 @@ export function $$L1({
       toggleStyleDetailModal: useCallback(r => {
         if (r.stopPropagation(), e?.current && t && A && n) {
           if (p) {
-            isVsCodeEnvironment() ? o(sf({
+            isVsCodeEnvironment() ? o(selectViewAction({
               ...d,
               styleForDetailsPanel: void 0
             })) : o(hideModalHandler());
             return;
           }
-          if (Fullscreen?.selectStyleByGuid(A), isVsCodeEnvironment()) o(sf({
+          if (Fullscreen?.selectStyleByGuid(A), isVsCodeEnvironment()) o(selectViewAction({
             ...d,
             styleForDetailsPanel: {
               styleId: t,
@@ -254,9 +254,9 @@ export function $$L1({
             }
           }));else {
             u && o(hideModalHandler());
-            let r = cn(e.current, b6 + wR);
+            let r = cn(e.current, VariableDetailModalWidth + ModalPadding);
             o(showModal({
-              type: vl,
+              type: StyleDetailModal,
               data: {
                 styleId: t,
                 styleNodeId: A,

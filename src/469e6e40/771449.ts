@@ -10,7 +10,7 @@ import { KX } from "../469e6e40/623537";
 import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminSettingsResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Jt } from "../figma_app/28323";
 import { MX, EO } from "../figma_app/684446";
 import { VP, mn, D2 } from "../905/18797";
@@ -55,7 +55,7 @@ export function $$C0(e) {
   });
   let F = vS(I);
   useEffect(() => {
-    U && A(sf({
+    U && A(selectViewAction({
       view: "resourceUnavailable",
       resourceType: F
     }));
@@ -71,7 +71,7 @@ export function $$C0(e) {
   let z = VP(S, EO(N?.id ?? ""));
   let V = !G && mn(S, L) && D2(S, L);
   if (useEffect(() => {
-    V && A(sf(o0));
+    V && A(selectViewAction(o0));
   }, [A, V]), "loaded" !== M.status) return null;
   let W = null;
   if (selectedTab === GroupType.MEMBERS) {

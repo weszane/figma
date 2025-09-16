@@ -174,7 +174,7 @@ import { W1 } from "../figma_app/439493";
 import { Z as _$$Z4 } from "../6401/653234";
 import { H as _$$H3 } from "../905/821118";
 import { _ as _$$_4 } from "../9410/16707";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { c as _$$c2 } from "../905/370443";
 import { hX, xn } from "../figma_app/644079";
@@ -4142,7 +4142,7 @@ function rM({
       type: "button",
       label: l > 1 ? renderI18nText("general.next") : renderI18nText("general.done"),
       onClick: () => {
-        l > 1 ? (a(j7({
+        l > 1 ? (a(showDropdownThunk({
           type: _$$eg,
           data: {
             targetRect: o,

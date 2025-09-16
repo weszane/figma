@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Multiplayer } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { HW } from "../figma_app/976749";
+import { isPrototypeView } from "../figma_app/976749";
 import { T as _$$T, N } from "../905/847283";
 import { trackEventAnalytics } from "../905/449184";
 import { hk } from "../figma_app/632319";
@@ -27,34 +27,34 @@ function p(e) {
 }
 export function $$_5() {
   let e = _$$T();
-  let t = HW();
+  let t = isPrototypeView();
   return useCallback(() => {
     e(N.START);
     t ? hk()?.startPresenting() : Multiplayer.startPresenting();
   }, [t, e]);
 }
 export function $$h1() {
-  let e = HW();
+  let e = isPrototypeView();
   return useCallback(() => {
     e ? hk()?.stopPresenting() : Multiplayer.stopPresenting();
   }, [e]);
 }
 export function $$m9() {
-  let e = HW();
+  let e = isPrototypeView();
   let t = useDispatch();
   return useCallback((r, n) => {
     e ? y(r, n, hk(), t) : y(r, n, null, t);
   }, [e, t]);
 }
 export function $$g8() {
-  let e = HW();
+  let e = isPrototypeView();
   let t = useDispatch();
   return useCallback((r, n) => {
     e ? T(r, n, hk(), t) : T(r, n, null, t);
   }, [e, t]);
 }
 export function $$f0() {
-  let e = HW();
+  let e = isPrototypeView();
   let t = useDispatch();
   return useCallback(r => {
     e ? v(r, hk()) : v(r, null);
@@ -65,7 +65,7 @@ export function $$f0() {
   }, [e, t]);
 }
 export function $$E10() {
-  let e = HW();
+  let e = isPrototypeView();
   return useCallback(t => {
     e ? I(t, hk()) : I(t, null);
   }, [e]);

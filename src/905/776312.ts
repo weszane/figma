@@ -1,6 +1,6 @@
 import { localStorageRef } from "../905/657224";
 import { uV, ZR } from "../905/34809";
-import { Qv } from "../905/929976";
+import { hydrateFileBrowser } from "../905/929976";
 import { P } from "../905/77553";
 let o = {
   [P.VIEW_MODE]: "view-bar-view-mode-option",
@@ -22,7 +22,7 @@ function d(e, t) {
   return t;
 }
 export function $$c1(e = {}, t) {
-  if (Qv.matches(t)) return l(o[P.VIEW_MODE]);
+  if (hydrateFileBrowser.matches(t)) return l(o[P.VIEW_MODE]);
   if (uV.matches(t)) {
     let i = {
       ...e,
@@ -33,7 +33,7 @@ export function $$c1(e = {}, t) {
   return e;
 }
 export function $$u0(e = {}, t) {
-  if (Qv.matches(t)) return l(o[P.SORT_MODE]);
+  if (hydrateFileBrowser.matches(t)) return l(o[P.SORT_MODE]);
   if (ZR.matches(t)) {
     let i = {
       ...e,

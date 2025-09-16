@@ -13,7 +13,7 @@ import { XM } from "../905/486443";
 import { useCurrentUserOrg } from "../905/845253";
 import { getUserId } from "../905/372672";
 import { oh } from "../905/18797";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { cd } from "../905/381612";
 import { p as _$$p } from "../905/42189";
@@ -218,20 +218,20 @@ function H({
   let A = _$$r(S, c?.stage !== "FULL" ? _$$p.MORE : void 0);
   useEffect(() => {
     l(cd.fetchTemplatesMetadata({
-      key: $A.FigJam,
+      key: FDocumentType.FigJam,
       orgId: b?.id
     }));
     l(cd.fetchWidgetsMetadata({
-      key: $A.FigJam
+      key: FDocumentType.FigJam
     }));
     o(!0);
   }, [l, b?.id]);
   let R = oh(fC);
   let P = oh(cd.fetchTemplatesMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }));
   let F = oh(cd.fetchWidgetsMetadata.loadingKeyForPayload({
-    key: $A.FigJam
+    key: FDocumentType.FigJam
   }));
   let G = $$K1(!i || R || P || F, d.map(e => _$$h(e, I, t ?? void 0))) ? d.map(e => e.id || "").sort((e, t) => e.localeCompare(t)).join("") : "loading";
   let H = u && c?.stage === "MINIMIZED_ZERO" || c?.stage === "MINIMIZED" || c?.stage === "CUT_OFF";

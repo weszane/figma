@@ -35,14 +35,14 @@ import { y as _$$y } from "../905/461685";
 import { FFileType } from "../figma_app/191312";
 import { COOPER_STRING } from "../figma_app/53721";
 import { f6 } from "../figma_app/915202";
-import { cV } from "../figma_app/59509";
-import { Q as _$$Q2 } from "../905/363675";
+import { BannerInline } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { Button } from "../905/521428";
 import { camelToSnake } from "../figma_app/930338";
 import { postUserFlag } from "../905/985254";
 import { TrackingProvider } from "../figma_app/831799";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { Em } from "../figma_app/976749";
+import { isDesignFileType } from "../figma_app/976749";
 import { useIsCurrentUserCreator } from "../figma_app/516028";
 import { f as _$$f } from "../905/940356";
 import { J as _$$J } from "../5132/948584";
@@ -71,7 +71,7 @@ function $(e) {
     name: `${productName} ${presetType} presets entrypoint`,
     children: jsx("div", {
       className: "frame_presets_entrypoint--bannerContainer--HnBeT",
-      children: jsx(cV, {
+      children: jsx(BannerInline, {
         variant: "default",
         icon,
         onDismiss: () => {
@@ -86,7 +86,7 @@ function $(e) {
         },
         children: jsxs("div", {
           className: "frame_presets_entrypoint--bannerContent--Ob5tN",
-          children: [jsx(_$$Q2, {
+          children: [jsx(BannerMessage, {
             title,
             children: description
           }), jsx("div", {
@@ -123,7 +123,7 @@ function er(e) {
   }
 }
 function en() {
-  let e = Em();
+  let e = isDesignFileType();
   let t = useIsCurrentUserCreator();
   let r = _$$f(Z);
   let n = _$$f(Q);

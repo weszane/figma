@@ -2,7 +2,7 @@ import { copyTextToClipboard } from "../figma_app/623293";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { showModalHandler } from "../905/156213";
-import { Np } from "../figma_app/193867";
+import { selectedViewToPath } from "../figma_app/193867";
 import { tileCopyLinkModalId } from "../905/721794";
 import { createOptimistThunk } from "../905/350402";
 let $$c3 = createOptimistThunk((e, t) => {
@@ -43,7 +43,7 @@ export function $$p2(e) {
   })(e);
 }
 let $$_4 = createOptimistThunk((e, t) => {
-  let r = new URL(Np(e.getState(), t), document.baseURI).href;
+  let r = new URL(selectedViewToPath(e.getState(), t), document.baseURI).href;
   let n = (() => {
     if ("folder" === t.view) return "project";
   })();

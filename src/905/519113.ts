@@ -28,7 +28,7 @@ import { O as _$$O } from "../905/257139";
 import { oz, zq } from "../figma_app/782261";
 import { IW } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { TS, ZS, iA } from "../figma_app/519839";
 import { hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
@@ -353,7 +353,7 @@ function eW(e) {
     })
   }) : jsxs("div", {
     onClick: () => {
-      dropdownShown && dropdownShown.type === ez ? c(oB()) : c(j7({
+      dropdownShown && dropdownShown.type === ez ? c(hideDropdownAction()) : c(showDropdownThunk({
         type: ez
       }));
     },
@@ -722,7 +722,7 @@ function tF({
   }, [i, e.node_id, s]);
   let N = `move_options_dropdown_${e.node_id}`;
   let D = useCallback(() => {
-    A && A.type === N ? x(oB()) : x(j7({
+    A && A.type === N ? x(hideDropdownAction()) : x(showDropdownThunk({
       type: N
     }));
   }, [x, A, N]);
@@ -777,10 +777,10 @@ function tF({
   let B = A?.type === U;
   let V = useCallback(e => {
     if (e.preventDefault(), e.stopPropagation(), m) {
-      x(oB());
+      x(hideDropdownAction());
       return;
     }
-    x(j7({
+    x(showDropdownThunk({
       type: U,
       data: {
         position: {
@@ -1175,7 +1175,7 @@ function tZ({
   let c = useCallback(e => {
     e.preventDefault();
     e.stopPropagation();
-    d(j7({
+    d(showDropdownThunk({
       type: o,
       data: {
         position: {
@@ -1345,7 +1345,7 @@ function tJ(e) {
   let [eV, eG] = useState(eB);
   let ez = useCallback(e => {
     eG(e);
-    h(oB());
+    h(hideDropdownAction());
   }, [h]);
   let eH = useSubscription(PublishingModalView({
     fileKey: ef

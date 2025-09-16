@@ -5,7 +5,7 @@ import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { bx } from "../905/34809";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { trackFolderEvent } from "../figma_app/314264";
 import { validateFolderName, generateTempId } from "../figma_app/528509";
@@ -131,7 +131,7 @@ let $$w11 = createOptimistThunk((e, t) => {
           role: r
         }));
       });
-      t.shouldRedirect && e.dispatch(sf({
+      t.shouldRedirect && e.dispatch(selectViewAction({
         view: "folder",
         folderId: r.id
       }));

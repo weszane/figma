@@ -9,7 +9,7 @@ import { qf } from "../4452/780544";
 import { getRumLoggingConfig } from "../905/16237";
 import { S as _$$S, d as _$$d } from "../4452/304860";
 import { ps } from "../figma_app/845611";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { c as _$$c } from "../905/370443";
 import { z3 } from "../figma_app/386952";
 import { FVisibilityType } from "../figma_app/191312";
@@ -23,7 +23,7 @@ export function $$b2() {
   return "orgAdminSettings" !== t && "seatRequests" !== t ? jsx(Fragment, {}) : jsx($z, {
     variant: "secondary",
     onClick: () => {
-      e(sf({
+      e(selectViewAction({
         view: "orgAdminSettings",
         orgAdminSettingsViewTab: DashboardSection.ACTIVITY,
         activityTabInitialEventOptionId: "activity_log.filter.upgrade_requests_and_activity"

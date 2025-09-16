@@ -15,7 +15,7 @@ import { isWhitespace } from "../figma_app/930338";
 import { Fk } from "../905/125333";
 import { getI18nString } from "../905/303541";
 import { NY } from "../figma_app/712525";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { r as _$$r } from "../figma_app/860474";
 import { jr, W0, VA } from "../figma_app/896988";
 import { handleLoadAllPagesWithVersionCheck } from "../905/807667";
@@ -212,7 +212,7 @@ function H() {
   } = useSelector(e => e.canvasSearch);
   let r = p8("currentPage");
   let l = trackFileEventWithUser();
-  let d = lg();
+  let d = getCurrentFileType();
   let c = useSelector(e => e.mirror.appModel.pagesList);
   let u = iW();
   return useCallback(async (n, a = !0, p) => {

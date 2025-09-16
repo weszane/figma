@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { H_, vW } from "../figma_app/287316";
 import { L } from "../905/453756";
 import { _ } from "../figma_app/91620";
@@ -13,7 +13,7 @@ export function $$$$u0() {
     hasMobileNativeToolbarTopLevel: e,
     LazyWebToolbarComponent: t
   }) {
-    let i = ow();
+    let i = isWhiteboardFileType();
     let r = useRef(!1);
     r.current || !i || e || (t.preload(), r.current = !0);
   }({

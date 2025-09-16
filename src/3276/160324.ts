@@ -1,7 +1,7 @@
 import { permissionScopeHandler } from "../905/189185";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Point } from "../905/736624";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { ZT } from "../figma_app/844435";
 import { EO } from "../figma_app/86989";
 import { j } from "../905/813868";
@@ -16,7 +16,7 @@ import { J } from "../469e6e40/985095";
 import { F5, oM } from "../905/192343";
 export function $$x0(e) {
   let t = useCurrentUserOrgId() || void 0;
-  let n = "whiteboard" === lg();
+  let n = "whiteboard" === getCurrentFileType();
   let i = F5();
   let x = ZT();
   let y = EO(x[e.resource.plugin_id]);

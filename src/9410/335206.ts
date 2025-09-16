@@ -13,7 +13,7 @@ import { M as _$$M } from "../9410/228122";
 import { kg } from "../9410/139332";
 import { AE, Ik } from "../9410/36414";
 import { Vq } from "../figma_app/979658";
-import { ds, $A, vt } from "../905/862883";
+import { isSupportedBlockType, FDocumentType, ITemplateType } from "../905/862883";
 import { fM, mn, Qp, G$, mO, NI, V6, YA, v8, Bo } from "../9410/183049";
 import { cX } from "../figma_app/920333";
 import { t as _$$t2 } from "../9410/47995";
@@ -136,14 +136,14 @@ function B(e) {
   } = cX();
   kg(e.resourceType) && (t = e.resourceType);
   let h = !!AE(e.resourceType);
-  let y = t && ds(t) && h;
+  let y = t && isSupportedBlockType(t) && h;
   let E = () => {
     y && t && a(ay({
       currentUserId: d,
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       item: {
         id: t,
-        type: vt.WhiteboardTool
+        type: ITemplateType.WhiteboardTool
       }
     }));
     i();

@@ -21,7 +21,7 @@ import { uQ } from "../figma_app/311375";
 import { Q } from "../905/217916";
 import { hA } from "../figma_app/88239";
 import { showModalHandler } from "../905/156213";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { trackDefinedFileEvent } from "../figma_app/314264";
 import { MIXED_MARKER, normalizeValue, isValidValue, isInvalidValue } from "../905/216495";
 import { b as _$$b } from "../figma_app/755529";
@@ -404,7 +404,7 @@ export function $$eI16(e, t, r, n) {
 export function $$eS25(e, t, r, n) {
   let i = uQ();
   let a = Q();
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let l = v4();
   let {
     variableConsumptionMap
@@ -466,7 +466,7 @@ export function $$eA14(e, t) {
   let r = uQ();
   let n = Q();
   let i = v4();
-  let a = m0();
+  let a = isDevHandoffEditorType();
   let {
     boundVar,
     matchingVars

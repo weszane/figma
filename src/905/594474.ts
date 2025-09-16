@@ -43,10 +43,10 @@ import { A as _$$A5 } from "../905/554063";
 import { A as _$$A6 } from "../905/425801";
 import { $ as _$$$ } from "../905/410306";
 import { A as _$$A7 } from "../905/813387";
-import { Yy } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { N as _$$N } from "../905/572042";
-import { $ as _$$$2 } from "../905/692618";
+import { BannerButton } from "../905/692618";
 import { N as _$$N2 } from "../905/438674";
 import { _ as _$$_ } from "../905/574895";
 import { Vq, EX, Wh, Rc, nT, J9, Fh, Kc, bo, Gl } from "../905/448740";
@@ -91,7 +91,7 @@ import { J as _$$J5 } from "../905/896954";
 import { trackGenericEvent } from "../figma_app/314264";
 import { getUserId, selectUser } from "../905/372672";
 import { IT as _$$IT, liveStoreInstance } from "../905/713695";
-import { W as _$$W } from "../905/985740";
+import { versionHandlerInstance } from "../905/985740";
 import { $ as _$$$3 } from "../905/668315";
 import { dn } from "../figma_app/994403";
 import { O as _$$O } from "../905/483217";
@@ -101,7 +101,7 @@ import { S as _$$S3 } from "../905/60183";
 import { lQ } from "../905/934246";
 import { $ as _$$$4 } from "../905/379902";
 import { Y as _$$Y } from "../905/185567";
-import { jY, Ro } from "../figma_app/564095";
+import { isAnyPublisher, isAcceptedPublisher } from "../figma_app/564095";
 import { PublisherType } from "../figma_app/155287";
 import { v as _$$v } from "../905/318279";
 import { Q as _$$Q2 } from "../905/978641";
@@ -325,10 +325,10 @@ function eh({
 }) {
   return jsx(_$$A3, {
     label: getI18nString("universal_insert.manifest_error_title"),
-    children: jsxs(Yy, {
+    children: jsxs(BannerInset, {
       variant: "danger",
       "data-testid": t,
-      children: [jsx(_$$Q, {
+      children: [jsx(BannerMessage, {
         children: e
       }), i]
     })
@@ -370,7 +370,7 @@ function eA({
   });
   return jsx(eh, {
     message: i,
-    children: jsx(_$$$2, {
+    children: jsx(BannerButton, {
       onClick: () => {
         t(showModalHandler({
           type: _$$K,
@@ -414,13 +414,13 @@ function ey({
       })
     }),
     dataTestId: "idCodeSuggestion"
-  }) : jsxs(Yy, {
+  }) : jsxs(BannerInset, {
     variant: "danger",
-    children: [jsx(_$$Q, {
+    children: [jsx(BannerMessage, {
       children: renderI18nText("community.publishing.invalid_id_in_manifest", {
         filename: "manifest.json"
       })
-    }), jsx(_$$$2, {
+    }), jsx(BannerButton, {
       onClick: l,
       children: getI18nString("community.publishing.generate_id")
     })]
@@ -437,9 +437,9 @@ function eb({
       isWidget: e
     }), i.allowedDomains.includes("*") && null == i.reasoning && jsx("div", {
       className: "x1xmf6yo",
-      children: jsx(Yy, {
+      children: jsx(BannerInset, {
         variant: "danger",
-        children: jsx(_$$Q, {
+        children: jsx(BannerMessage, {
           children: getI18nString("community.publishing.allowed_domains_reasoning_not_specified")
         })
       })
@@ -586,10 +586,10 @@ function eF({
     default:
       throwTypeError(e);
   }
-  return jsx(Yy, {
+  return jsx(BannerInset, {
     variant: r,
     "data-testid": "extension-security-form-banner",
-    children: jsx(_$$Q, {
+    children: jsx(BannerMessage, {
       title: t,
       children: i
     })
@@ -1119,7 +1119,7 @@ function tp({
   });
 }
 let tm = liveStoreInstance.Query({
-  fetch: async e => (await _$$W.getVersions({
+  fetch: async e => (await versionHandlerInstance.getVersions({
     fileKey: e
   })).data.meta.versions[0],
   enabled: e => "" !== e
@@ -1132,7 +1132,7 @@ function tv(e, t) {
   return tI(e) ? J9(existingExtension) && t.is_public ? {
     key: "EXTENSION_IS_PAID_RESOURCE",
     data: {}
-  } : existingExtension && jY(existingExtension, user?.id) ? {
+  } : existingExtension && isAnyPublisher(existingExtension, user?.id) ? {
     key: "USER_IS_NOT_EXTENSION_OWNER",
     data: {}
   } : void 0 : {
@@ -1312,8 +1312,8 @@ let tP = forwardRef(function ({
   return Zc(e) ? jsx(_$$A3, {
     label: getI18nString("community.publishing.set_a_widget_snapshot"),
     error: o,
-    afterErrorContent: v && jsx(Yy, {
-      children: jsx(_$$Q, {
+    afterErrorContent: v && jsx(BannerInset, {
+      children: jsx(BannerMessage, {
         children: getI18nString("community.publishing.you_can_right_click_a_widget_and_select_set_as_widget_thumbnail")
       })
     }),
@@ -1585,7 +1585,7 @@ async function is(e) {
   assertNotNullish(y);
   let b = !!c_(price).currentValue;
   let v = function (e, t, i, n) {
-    if (t && Ro(t, n.id)) return;
+    if (t && isAcceptedPublisher(t, n.id)) return;
     let r = c_(e).currentValue;
     if (r) {
       if (i && f7(i, r) && !Fh(t)) return;

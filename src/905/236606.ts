@@ -24,11 +24,11 @@ import { registerModal } from "../905/102752";
 import { Cj } from "../figma_app/151869";
 import { Hr } from "../figma_app/394327";
 import { wG } from "../905/331989";
-import { Gw, xX, W8, WP, iB, wR, E6, vl, b6 } from "../905/560959";
+import { MatchingVariablesModalWidth, ModalMaxHeight, MatchingVariablesModal, VariableDetailModal, StyleDetailModalWidth, ModalPadding, ModalWindowType, StyleDetailModal, VariableDetailModalWidth } from "../905/560959";
 import { parsePxNumber } from "../figma_app/783094";
 import { a as _$$a } from "../figma_app/289605";
 import { ZGX } from "../figma_app/27776";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { isVsCodeEnvironment } from "../905/858738";
 import { _6 } from "../figma_app/386952";
 import { Fk } from "../figma_app/167249";
@@ -143,8 +143,8 @@ let L = registerModal(function (e) {
       trackingProps: d,
       children: jsx(bL, {
         defaultPosition: e.position,
-        width: Gw,
-        maxHeight: xX,
+        width: MatchingVariablesModalWidth,
+        maxHeight: ModalMaxHeight,
         onClose: i,
         recordingKey: "variableDetailsWindow",
         children: jsxs(vo, {
@@ -166,7 +166,7 @@ let L = registerModal(function (e) {
       })
     })
   });
-}, W8);
+}, MatchingVariablesModal);
 let U = parsePxNumber(ZGX);
 let B = registerModal(function (e) {
   eT();
@@ -185,7 +185,7 @@ let B = registerModal(function (e) {
     children: jsx(bL, {
       defaultPosition: e.position,
       width: U,
-      maxHeight: xX,
+      maxHeight: ModalMaxHeight,
       onClose: o,
       recordingKey: "variableDetailsWindow",
       children: jsxs(vo, {
@@ -206,7 +206,7 @@ let B = registerModal(function (e) {
       })
     })
   });
-}, WP);
+}, VariableDetailModal);
 let q = /Color\((0x[0-9a-fA-F]{8})\)/gi;
 let $ = /(Color\(red: (\d*\.?\d*), green: (\d*\.?\d*), blue: (\d*\.?\d*)\)(\.opacity\((\d*\.?\d*)\))?)/gi;
 let Z = /(#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})|rgba?\(\d+,\s*\d+,\s*\d+,\s*\d+(?:\.\d+)?\)|color\(\s*(srgb|srgb-linear|display-p3|a98-rgb|prophoto-rgb|rec2020|xyz|xyz-d50|xyz-d65)\s+((\d+|\d*\.\d+|%|none)\s*){3}(\/\s*(\d+|\d*\.\d+|%|none)\s*)?\))/gi;
@@ -336,18 +336,18 @@ function ee({
   let h = useRef(null);
   let g = useCallback(() => {
     if (ref?.current && h?.current && "fullscreen" === m.view) {
-      if (isVsCodeEnvironment()) d(sf({
+      if (isVsCodeEnvironment()) d(selectViewAction({
         ...m,
         variableIdForDetailsPanel: t
       }));else {
-        let e = cn(ref.current, iB + wR);
+        let e = cn(ref.current, StyleDetailModalWidth + ModalPadding);
         d(showModal({
           type: B.type,
           data: {
             position: e,
             variableId: t,
             rowRef: h,
-            entryPoint: E6.CodeWell
+            entryPoint: ModalWindowType.CodeWell
           },
           optOutOfPrevModal: !0
         }));
@@ -393,7 +393,7 @@ function et({
   let h = _6();
   let f = useDispatch();
   let _ = useSelector(e => e.modalShown);
-  let A = !!_ && _.type === vl;
+  let A = !!_ && _.type === StyleDetailModal;
   let y = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : A && _.data?.rowRef && _.data.rowRef.current === m?.current;
   let {
     key,
@@ -408,13 +408,13 @@ function et({
   let w = useCallback(e => {
     if (e.stopPropagation(), m?.current && t && S && ref?.current) {
       if (y) {
-        isVsCodeEnvironment() ? f(sf({
+        isVsCodeEnvironment() ? f(selectViewAction({
           ...h,
           styleForDetailsPanel: void 0
         })) : f(hideModalHandler());
         return;
       }
-      if (Fullscreen?.selectStyleByGuid(S), isVsCodeEnvironment()) f(sf({
+      if (Fullscreen?.selectStyleByGuid(S), isVsCodeEnvironment()) f(selectViewAction({
         ...h,
         styleForDetailsPanel: {
           styleId: t,
@@ -423,9 +423,9 @@ function et({
         }
       }));else {
         A && f(hideModalHandler());
-        let e = cn(ref.current, b6 + wR);
+        let e = cn(ref.current, VariableDetailModalWidth + ModalPadding);
         f(showModal({
-          type: vl,
+          type: StyleDetailModal,
           data: {
             styleId: t,
             styleType: style_type,
@@ -441,7 +441,7 @@ function et({
   if (u || isVsCodeEnvironment() || !i) return jsx(Fragment, {
     children: e
   });
-  let C = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : _?.type === vl && _.data?.styleNodeId === S && _.data?.rowRef === m;
+  let C = isVsCodeEnvironment() ? t === h.styleForDetailsPanel?.styleId : _?.type === StyleDetailModal && _.data?.styleNodeId === S && _.data?.rowRef === m;
   return jsx(tH, {
     boundaryKey: "styleDetails_codeEntry",
     fallback: jsx(Fragment, {
@@ -473,14 +473,14 @@ function ei({
   let d = useRef(null);
   let u = useCallback(() => {
     if (!ref?.current || !d?.current) return;
-    let e = cn(ref.current, Gw + wR);
+    let e = cn(ref.current, MatchingVariablesModalWidth + ModalPadding);
     i(showModal({
       type: L.type,
       data: {
         vars: t,
         position: e,
         rowRef: d,
-        entryPoint: E6.CodeWell
+        entryPoint: ModalWindowType.CodeWell
       },
       optOutOfPrevModal: !0
     }));

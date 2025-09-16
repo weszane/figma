@@ -14,14 +14,14 @@ import { y as _$$y } from "../905/444931";
 import { createOptimistThunk } from "../905/350402";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { RH, gU } from "../figma_app/147952";
-import { B as _$$B } from "../905/808775";
+import { mapEditorTypeTo } from "../905/808775";
 import { hb, VT } from "../905/551193";
 import { nm } from "../905/352022";
 import { HE } from "../905/967587";
 import { F as _$$F2 } from "../905/504462";
 import { canMemberOrg } from "../figma_app/642025";
 import { hasOrgRole, getCurrentPluginVersion, getPluginVersion } from "../figma_app/300692";
-import { Y9 } from "../figma_app/502247";
+import { setRecentUserData } from "../figma_app/502247";
 import { isWidget, hasMonetizedResourceMetadata } from "../figma_app/45218";
 import { mapFileTypeToEditorType, FEditorType, mapEditorTypeToFileType } from "../figma_app/53721";
 import { OrganizationType } from "../905/833838";
@@ -160,11 +160,11 @@ createOptimistThunk((e, t) => {
     fuid: r.id,
     tryPluginParams: void 0
   };
-  Y9(r.id, !1, null);
+  setRecentUserData(r.id, !1, null);
   _$$j(l, null, null, r.id);
   (() => {
     let s = {
-      storeInRecentsKey: _$$B(t.fullscreenEditorType),
+      storeInRecentsKey: mapEditorTypeTo(t.fullscreenEditorType),
       id: n.id,
       version: a.id,
       currentUserId: r.id
@@ -181,7 +181,7 @@ let $$H0 = createOptimistThunk((e, t) => {
   if (!o || !n) return;
   let l = () => {
     let r = {
-      storeInRecentsKey: _$$B(t.fullscreenEditorType),
+      storeInRecentsKey: mapEditorTypeTo(t.fullscreenEditorType),
       id: i.id,
       version: o.id,
       currentUserId: n.id
@@ -210,19 +210,19 @@ let $$H0 = createOptimistThunk((e, t) => {
   });
   if (0 === p.length) {
     e.dispatch(B(o.name, r.orgById[r.currentUserOrgId].name, e => {
-      Y9(n.id, !1, null, void 0, e.id);
+      setRecentUserData(n.id, !1, null, void 0, e.id);
       _$$j(u, null, e.id, n.id);
       l();
     }));
     return;
   }
-  1 === p.length ? (Y9(n.id, !1, null, void 0, p[0].teamId ?? null), _$$j(u, null, p[0].teamId ?? null, n.id), l()) : e.dispatch(showModalHandler({
+  1 === p.length ? (setRecentUserData(n.id, !1, null, void 0, p[0].teamId ?? null), _$$j(u, null, p[0].teamId ?? null, n.id), l()) : e.dispatch(showModalHandler({
     type: _$$_,
     data: {
       payload: {
         workspaces: p,
         onSelectWorkspace: e => {
-          Y9(n.id, !1, null, void 0, e?.teamId ?? null);
+          setRecentUserData(n.id, !1, null, void 0, e?.teamId ?? null);
           _$$j(u, null, e?.teamId ?? null, n.id);
           l();
         },
@@ -251,11 +251,11 @@ let $$z3 = createOptimistThunk((e, t) => {
     tryPluginParams: void 0
   };
   let c = r.plans.find(e => e.plan_type === OrganizationType.ORG && e.plan_id === r.currentUserOrgId);
-  Y9(n.id, !1, c.plan_id, void 0, null);
+  setRecentUserData(n.id, !1, c.plan_id, void 0, null);
   _$$j(d, c.plan_id, null, n.id);
   (() => {
     let r = {
-      storeInRecentsKey: _$$B(t.fullscreenEditorType),
+      storeInRecentsKey: mapEditorTypeTo(t.fullscreenEditorType),
       id: i.id,
       version: s.id,
       currentUserId: n.id
@@ -280,7 +280,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
   }
   let _ = () => {
     let r = {
-      storeInRecentsKey: _$$B(t.fullscreenEditorType),
+      storeInRecentsKey: mapEditorTypeTo(t.fullscreenEditorType),
       id: t.resource.id,
       version: p.id,
       currentUserId: user.id
@@ -332,7 +332,7 @@ let $$W1 = createOptimistThunk(async (e, t) => {
       resource: t.resource,
       editorType: mapEditorTypeToFileType(t.fullscreenEditorType),
       onSelectWorkspace: e => {
-        e ? (v.fuid = e.userId, Y9(e.userId, !1, e.orgId, void 0, e.teamId ?? null), _$$j(v, e.orgId, e.teamId ?? null, e.userId)) : _$$j(v, null, null, user.id);
+        e ? (v.fuid = e.userId, setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), _$$j(v, e.orgId, e.teamId ?? null, e.userId)) : _$$j(v, null, null, user.id);
         _();
       }
     }));
@@ -349,19 +349,19 @@ let $$W1 = createOptimistThunk(async (e, t) => {
       }));
       return;
     }
-    Y9(user.id, !1, t.orgId);
+    setRecentUserData(user.id, !1, t.orgId);
     _$$j(v, t.orgId, null, user.id);
   } else if (1 === m.length) {
     let n = m[0];
     if (n.orgId && !VT(t.resource, r.orgById[n.orgId]) && !(await hb(t.resource, r.orgById[n.orgId]))) {
       e.dispatch(B(p.name, HE(r, n), e => {
-        Y9(user.id, !1, null, void 0, e.id);
+        setRecentUserData(user.id, !1, null, void 0, e.id);
         _$$j(v, null, e.id, user.id);
         _();
       }));
       return;
     }
-    Y9(n.userId, !1, n.orgId, void 0, n.teamId ?? null);
+    setRecentUserData(n.userId, !1, n.orgId, void 0, n.teamId ?? null);
     _$$j(v, n.orgId, n.teamId ?? null, n.userId);
   } else {
     reportError(_$$e.COMMUNITY, Error("No workspaces found"));

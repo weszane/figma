@@ -6,11 +6,11 @@ import { qy, uk } from '../figma_app/216057';
 import { openFileKeyAtom } from '../figma_app/516028';
 import { setupRemovableAtomFamily } from '../figma_app/615482';
 import { td } from '../figma_app/827216';
-import { XE } from '../figma_app/976749';
+import { getEditorTypeFromView } from '../figma_app/976749';
 export function $$p17() {
   if (!getFeatureFlags().aip_flower_garden) return !1;
   let e = debugState?.getState()?.selectedView;
-  return e.view === 'fullscreen' && XE(e) === FEditorType.Design;
+  return e.view === 'fullscreen' && getEditorTypeFromView(e) === FEditorType.Design;
 }
 let $$_6 = setupRemovableAtomFamily(() => atom(new Map()));
 let $$h13 = setupRemovableAtomFamily(() => atom(new Map(new Map())));

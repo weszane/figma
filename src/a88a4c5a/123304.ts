@@ -362,7 +362,7 @@ import { U as _$$U } from '../figma_app/964810';
 import { aW as _$$aW, iO as _$$iO, rg as _$$rg, jV, Ue, uw } from '../figma_app/965653';
 import { LI, Wd } from '../figma_app/970285';
 import { t6 as _$$t3 } from '../figma_app/975811';
-import { lg as _$$lg, ow as _$$ow, m0, my } from '../figma_app/976749';
+import { getCurrentFileType, isWhiteboardFileType, isDevHandoffEditorType, getEditorTypeOrNull } from '../figma_app/976749';
 import { P as _$$P3 } from '../figma_app/979374';
 import { qh } from '../figma_app/990334';
 import { BE } from '../figma_app/991591';
@@ -457,7 +457,7 @@ function z(e, t) {
 }
 function $() {
   getFeatureFlags().ai_assistant;
-  _$$lg();
+  getCurrentFileType();
   BE();
   let e = !1;
   let t = getFeatureFlags().ai_assistant_canvas_entrypoint || !1;
@@ -10042,7 +10042,7 @@ function ai({
   let a = p8('currentPage');
   let d = p8('isReadOnly');
   let u = p8('currentSelectedProperty');
-  let c = m0();
+  let c = isDevHandoffEditorType();
   let p = d && !c;
   let h = Gt('numSelected');
   let {
@@ -10152,7 +10152,7 @@ function ag(e) {
       setPropertiesPanelCollapsed
     } = _$$iT();
     let l = Ye();
-    let n = _$$ow();
+    let n = isWhiteboardFileType();
     let s = _$$ax();
     let a = dH();
     let d = a === DesignGraphElements.FRAME || a === DesignGraphElements.COMMENTS || a === DesignGraphElements.VECTOR_PENCIL;
@@ -10219,7 +10219,7 @@ let a_ = memo(() => {
   let F = d4(e => e.orgUsersByOrgId);
   let $ = d4(e => e.userEduGracePeriods);
   let P = d4(e => e.licenseGroups);
-  let V = my() === FEditorType.Design;
+  let V = getEditorTypeOrNull() === FEditorType.Design;
   let D = _$$k4();
   let H = VP(l, 'edit_button_upgrading_to_edit');
   let G = t || H;

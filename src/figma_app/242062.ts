@@ -10,7 +10,7 @@ import { getTextColorForBackground, textOnDarkCanvas, getDarkerShade, textOnLigh
 import { usePrefersReducedMotion } from "../figma_app/469468";
 import { selectWithShallowEqual } from "../905/103090";
 import { tH, H4 } from "../905/751457";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { x as _$$x } from "../figma_app/943271";
 import { d as _$$d } from "../905/758967";
 import { zw } from "../figma_app/682945";
@@ -462,7 +462,7 @@ function el(e, t, r, n, i) {
   return !("editor" !== e.deviceName || t?.mouse?.canvasSpacePosition == null || isNaN(t?.mouse?.canvasSpacePosition.x) || t.mouse.pageId !== r || (-1 === t.lastMouseMoveMs || window.performance.now() - t.lastMouseMoveMs > 6e4) && n !== e.sessionID) && e.sessionID !== i;
 }
 function ed() {
-  let e = lg();
+  let e = getCurrentFileType();
   let t = XM();
   return "whiteboard" === e && !t;
 }
@@ -745,7 +745,7 @@ function eG(e) {
   let {
     color
   } = e;
-  let o = "whiteboard" === lg();
+  let o = "whiteboard" === getCurrentFileType();
   let d = useRef(null);
   let c = useRef(null);
   let u = useDispatch();
@@ -1869,7 +1869,7 @@ function tm({
   }) => t.find(t => t.sessionID === e));
   let l = p8("currentPage");
   let c = usePrefersReducedMotion();
-  let u = lg();
+  let u = getCurrentFileType();
   let p = getObservableOrFallback(_$$d().showOutlines);
   let _ = _$$S();
   let m = useSelector(({

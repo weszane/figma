@@ -15,7 +15,7 @@ import { Dd, OJ } from '../905/519092';
 import { ex } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
 import { SvgComponent } from '../905/714743';
-import { eB } from '../905/765855';
+import { showTooltip } from '../905/765855';
 import { sx } from '../905/941192';
 import { TextWithTruncation } from '../905/984674';
 import { s as _$$s } from '../c5e2cae0/341232';
@@ -317,7 +317,7 @@ function W({
     if (t(r), r.newVal && a < 3) {
       l(e => e + 1);
       let t = s ? getI18nString('checkout.switch_seat_from_design_to_devmode') : getI18nString('checkout.enabled_devmode');
-      n(eB({
+      n(showTooltip({
         target: {
           kind: Alignment.TEXT,
           text: t

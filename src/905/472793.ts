@@ -85,7 +85,7 @@ import { kA, Qj, vl, vT, y1, zH } from '../figma_app/86989';
 import { P$ } from '../figma_app/152368';
 import { hasLocalFileId, ManifestEditorType } from '../figma_app/155287';
 import { getInitialOptions } from '../figma_app/169182';
-import { zg } from '../figma_app/193867';
+import { isWorkshopModeActive } from '../figma_app/193867';
 import { VariableIdHandler, VariableSetIdCompatHandler } from '../figma_app/243058';
 import { nM as _$$nM, M7 } from '../figma_app/276332';
 import { PluginPermissions } from '../figma_app/300692';
@@ -3889,7 +3889,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   getCurrentUserInfo() {
     const userState = debugState.getState().user;
     const selectedView = debugState.getState().selectedView;
-    const isWorkshopMode = zg(selectedView);
+    const isWorkshopMode = isWorkshopModeActive(selectedView);
     const isFullscreenWorkshop = selectedView.view === 'fullscreen' && selectedView.workshopModeInfo;
     let name: string | null = null;
     let photoUrl = null;
@@ -3963,7 +3963,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     const vm = this.vm;
     const userState = debugState.getState().user;
     const selectedView = debugState.getState().selectedView;
-    const isWorkshopMode = zg(selectedView);
+    const isWorkshopMode = isWorkshopModeActive(selectedView);
 
     // Return null if no user and not in workshop mode
     if (userState === null && !isWorkshopMode) {

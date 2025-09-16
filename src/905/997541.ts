@@ -1,8 +1,8 @@
 import { getFeatureFlags } from "../905/601108";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { fileImporter } from "../905/642505";
-import { K } from "../figma_app/193867";
+import { isRecentsAndSharingView } from "../figma_app/193867";
 import { z } from "../905/875422";
 import { mK } from "../figma_app/681697";
 let $$c0 = createOptimistThunk((e, {
@@ -16,10 +16,10 @@ let $$c0 = createOptimistThunk((e, {
   n.style.display = "none";
   n.onchange = t => {
     let i = e.getState().selectedView;
-    if (!("folder" === i.view || K(i))) {
+    if (!("folder" === i.view || isRecentsAndSharingView(i))) {
       let t = e.getState();
       let i = t.user?.drafts_folder_id;
-      i && e.dispatch(sf({
+      i && e.dispatch(selectViewAction({
         view: "folder",
         folderId: i
       }));

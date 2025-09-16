@@ -53,10 +53,10 @@ export function createOptimistThunk<P = any, R = any>(
    * The actual thunk action creator.
    * @param payload - The payload for the thunk.
    */
-  const optimistThunkAction = (payload: P) => {
+  const optimistThunkAction = (payload?: P) => {
     const loadingKey = getLoadingKey(payload)
 
-    return (dispatch: Dispatch, getState: () => any, extra?: Record<string, any>) => {
+    return (dispatch: OptimistThunkContext['dispatch'], getState: () => any, extra?: Record<string, any>) => {
       // For testing: dispatch a test action if getFalseValue() returns true
       if (getFalseValue()) {
         dispatch(thunkTestAction({

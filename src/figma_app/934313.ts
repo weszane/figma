@@ -4,7 +4,7 @@ import { LayoutSizingMode } from "../figma_app/763686";
 import { getI18nString } from "../905/303541";
 import { xj, Cs, Dq, Qz, gP, W7, tr } from "../figma_app/655717";
 import { oc } from "../figma_app/451499";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { Gt, kl } from "../905/275640";
 import { Fk } from "../figma_app/167249";
@@ -18,13 +18,13 @@ import { VZ } from "../figma_app/727192";
 let b = new SQ();
 let T = new oc();
 function I() {
-  let e = m0();
+  let e = isDevHandoffEditorType();
   let t = Gt("stackMode");
   let r = Gt("inferredAutoLayoutResult");
   return e ? xj(t, r) : Cs(t);
 }
 function S() {
-  let e = m0();
+  let e = isDevHandoffEditorType();
   let t = Gt("stackMode");
   let r = Gt("inferredAutoLayoutResult");
   return e ? Dq(t, r) : Cs(t);
@@ -64,7 +64,7 @@ function A() {
   let r = Qz(gP.BOTTOM);
   let i = Qz(gP.LEFT);
   let a = kl("dashPattern");
-  let l = m0();
+  let l = isDevHandoffEditorType();
   return jsxs(Fragment, {
     children: [jsx(bh, {
       expandedCopyName0: "border-top-width",

@@ -35,7 +35,7 @@ import { serializeQuery } from "../905/634134";
 import { selectCurrentUser, getUserId } from "../905/372672";
 import { FPlanNameType } from "../figma_app/191312";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { k as _$$k2 } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 import { F as _$$F } from "../5132/756360";
 import { S as _$$S } from "../figma_app/420927";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -43,7 +43,7 @@ import { getI18nState } from "../figma_app/363242";
 import { FU } from "../905/26824";
 import { yJ } from "../figma_app/24841";
 import { postUserFlag } from "../905/985254";
-import { Fn } from "../figma_app/976749";
+import { isTryWhiteboardFile } from "../figma_app/976749";
 import { hx } from "../figma_app/290668";
 import { fullscreenValue } from "../figma_app/455680";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -184,7 +184,7 @@ function q({
   _$$h(() => {
     (async () => {
       try {
-        let e = await _$$k2.getChatbotMeta();
+        let e = await UserAPIHandlers.getChatbotMeta();
         c(e.data.meta);
       } catch (e) {}
     })();
@@ -2741,7 +2741,7 @@ export function $$t60(e) {
   let _ = !!_$$f("collective_upsell_first_file_created");
   let h = u && _;
   let m = Xr(aG);
-  let g = Fn();
+  let g = isTryWhiteboardFile();
   let f = useSelector(e => e.userFlags);
   let y = selectCurrentFile();
   let I = useRef(null);

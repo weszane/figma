@@ -5,7 +5,7 @@ import { useSubscription } from "../figma_app/288654";
 import { canCreateFileType } from "../figma_app/687776";
 import { getI18nString } from "../905/303541";
 import { c$ } from "../figma_app/618433";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { duplicateFileOptimistic } from "../figma_app/78808";
 import { showModalHandler } from "../905/156213";
 import { isBranchAlt } from "../905/760074";
@@ -117,7 +117,7 @@ export function $$k1() {
   return {
     duplicateFile: () => {
       if (!e) return;
-      t(oB());
+      t(hideDropdownAction());
       let n = xp(e, e.project, r);
       if (n) {
         e?.editorType === FFileType.SITES && _$$M ? t(showModalHandler({

@@ -53,7 +53,7 @@ import { Hk, lK, fu, pu } from "../figma_app/123994";
 import { Y as _$$Y } from "../905/438063";
 import { e as _$$e2 } from "../1528/93111";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
-import { HW } from "../figma_app/976749";
+import { isPrototypeView } from "../figma_app/976749";
 import { getWorkshopModeStatus } from "../figma_app/789";
 import { k as _$$k4 } from "../figma_app/564183";
 import { isIntegrationContext } from "../figma_app/469876";
@@ -824,7 +824,7 @@ function eF(e) {
   let f = sO();
   let v = useIsFullscreenSitesView();
   let I = useIsSelectedViewFullscreenCooper() && isCooperFeatureEnabled();
-  let N = HW();
+  let N = isPrototypeView();
   let y = dR();
   let b = useSelector(e => e.multiplayer);
   let C = useMemo(() => b.allUsers.find(e => e.sessionID === b.sessionID) || null, [b.allUsers, b.sessionID]);

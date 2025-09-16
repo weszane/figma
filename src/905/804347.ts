@@ -27,7 +27,7 @@ import { C as _$$C } from "../905/196436";
 import { NU } from "../figma_app/204891";
 import { y as _$$y } from "../905/171275";
 import { UN, dm } from "../figma_app/976345";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { filePutAction } from "../figma_app/78808";
 import { useCurrentUserOrgId } from "../905/845253";
 import { getDesignFileUrlWithOptions } from "../905/612685";
@@ -140,14 +140,14 @@ function z(e, t) {
       i(filePutAction({
         file: e
       }));
-      i(sf({
+      i(selectViewAction({
         view: "fullscreen",
         fileKey: e.key,
         editorType: mapFileTypeToEditorType(e.editor_type)
       }));
     },
     onClickOwner: () => {
-      i(sf({
+      i(selectViewAction({
         view: "user",
         userId: e.creator_id,
         userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -452,7 +452,7 @@ function eg(e) {
     let i = useDispatch();
     return ignoreCommandOrShift(n => {
       n.preventDefault();
-      i(sf({
+      i(selectViewAction({
         view: "user",
         userId: e,
         orgId: t || null,
@@ -718,7 +718,7 @@ function e0() {
       return;
     }
     r?.preventDefault();
-    e(sf({
+    e(selectViewAction({
       view: "user",
       userId: n.id,
       orgId: n.org_id || null,

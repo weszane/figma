@@ -73,7 +73,7 @@ import { logError } from "../905/714362";
 import { S as _$$S } from "../figma_app/552746";
 import { vq } from "../905/8732";
 import { ft } from "../figma_app/753501";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { k as _$$k3 } from "../figma_app/564183";
 import { fullscreenValue } from "../figma_app/455680";
 import { Um } from "../905/848862";
@@ -452,7 +452,7 @@ function eK({
     _ && (y([]), Fullscreen?.setSelectedInteractions([]));
   });
   let j = se();
-  let v = m0();
+  let v = isDevHandoffEditorType();
   let S = e === DesignWorkspace.COMMENT;
   let w = sO();
   let T = !s || !b;
@@ -584,7 +584,7 @@ function eJ({
   let a = useSelector(e => e.mirror.appModel.topLevelMode);
   let d = dH();
   let c = p8("isReadOnly");
-  let u = m0();
+  let u = isDevHandoffEditorType();
   let p = c && !u;
   let h = sO();
   let m = useIsFullscreenSitesView();

@@ -15,7 +15,7 @@ import { BaseLinkComponent } from "../905/551536";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Dm } from "../figma_app/8833";
 import { z5 } from "../905/713722";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { x as _$$x } from "../905/239551";
 import { Vi, kZ } from "../figma_app/364284";
 import { Um } from "../905/848862";
@@ -30,7 +30,7 @@ let B = "widget_controls--label--YWqiO text--fontNeg12--2PWcg text--_fontBase--Q
 let L = "widget_controls--img--bNdQj";
 let A = memoizeLRU(e => e.includes("xmlns") ? "data:image/svg+xml;utf8," + encodeURIComponent(e.trim()) : (logger.warn("Your widget must include the xmlns property on any SVGs used in the property menu. See https://developer.mozilla.org/en-US/docs/Web/SVG/Element/svg for more info"), null), 1e3);
 function M(e) {
-  let t = E3();
+  let t = getSelectedEditorType();
   let n = e.icon ? A(e.icon) : null;
   let i = void 0 !== t && t === FEditorType.Design;
   return n ? jsx(P, {
@@ -104,7 +104,7 @@ function S({
   widgetInfo: e,
   item: t
 }) {
-  let n = E3();
+  let n = getSelectedEditorType();
   let l = scopeAwareFunction.user("widget-select-color", n => {
     let o = colorToHex(n.option);
     _$$x.runPropertyMenuCallback(e.pluginID, e.widgetID, t.propertyName, f[o] ?? o);
@@ -166,7 +166,7 @@ function R({
   item: e,
   widgetInfo: t
 }) {
-  let n = E3();
+  let n = getSelectedEditorType();
   let i = useDispatch();
   let r = Um();
   let a = e.options.find(t => t.option === e.selectedOption);

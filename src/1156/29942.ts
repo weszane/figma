@@ -44,9 +44,9 @@ import { useIsSelectedFigmakeFullscreen } from "../figma_app/552876";
 import { H as _$$H2 } from "../1156/461363";
 import { throwTypeError } from "../figma_app/465776";
 import { N as _$$N2 } from "../905/438674";
-import { $ as _$$$ } from "../905/692618";
-import { Yy } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
+import { BannerButton } from "../905/692618";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { Button, ButtonLarge } from "../905/521428";
 import { ButtonPrimitive } from "../905/632989";
 import { f as _$$f } from "../905/949464";
@@ -958,7 +958,7 @@ function tF({
     })
   });
 }
-let tO = withTrackedClick(_$$$);
+let tO = withTrackedClick(BannerButton);
 function tD({
   licenseType: e,
   onClose: t
@@ -987,11 +987,11 @@ function tD({
     children: jsx("div", {
       className: "xyorhqc",
       "data-testid": "provisional-access-banner",
-      children: jsxs(Yy, {
+      children: jsxs(BannerInset, {
         variant: "brand",
         icon: null,
         onDismiss: t,
-        children: [jsx(_$$Q, {
+        children: [jsx(BannerMessage, {
           children: u
         }), shouldShowCurf && jsx(tO, {
           onClick: curfCtaHandler,
@@ -1023,11 +1023,11 @@ function tB({
     children: jsx("div", {
       className: "xyorhqc",
       "data-testid": "chat-soft-limit-banner",
-      children: jsx(Yy, {
+      children: jsx(BannerInset, {
         variant: "brand",
         icon: null,
         onDismiss: e,
-        children: jsx(_$$Q, {
+        children: jsx(BannerMessage, {
           title: i,
           children: s
         })
@@ -1228,14 +1228,14 @@ function tW() {
     children: jsx("div", {
       className: "xyorhqc",
       "data-testid": "chat-box-toast",
-      children: jsx(Yy, {
+      children: jsx(BannerInset, {
         variant: "brand",
         icon: l.icon,
         children: jsxs("div", {
           className: "x78zum5 x1q0g3np x1qughib xou54vl x6s0dn4 xh8yej3",
           children: [jsx("div", {
             className: "x78zum5 x1q0g3np xkh2ocl x6s0dn4",
-            children: jsx(_$$Q, {
+            children: jsx(BannerMessage, {
               title: l.title,
               children: l.content?.()
             })

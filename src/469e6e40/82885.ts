@@ -1,8 +1,8 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { getFeatureFlags } from "../905/601108";
 import { Xf } from "../figma_app/153916";
 import { A } from "../905/920142";
@@ -48,10 +48,10 @@ function v({
   });
   return jsx(TrackingProvider, {
     name: "contract_start_banner",
-    children: jsxs(Yy, {
+    children: jsxs(BannerInset, {
       "data-testid": "contract-start-banner",
       variant: "brand",
-      children: [jsx(Q, {
+      children: [jsx(BannerMessage, {
         title: y,
         children: w
       }), jsx(pW, {

@@ -1,6 +1,5 @@
 export type Fn = (...args: any[]) => any
 
-
 export interface EarlyArgs {
   api_user_state_path: null
   api_session_state_path: null
@@ -16,6 +15,7 @@ export interface MultiplayerPreconnectOptions {
   targetFileVersion: null
   tagForLogging: null
   multiplayerPreload: boolean
+  forceIncrementalForEditors: ObjectOf
 }
 
 export interface Fig {
@@ -1327,7 +1327,7 @@ export interface DaysAllowedToSeeNux {
 }
 
 export interface FeatureFlagRules {
-  
+
 }
 export interface LivegraphPreloadViews {
   [key: string]: {

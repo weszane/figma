@@ -12,7 +12,7 @@ import { getExperimentConfigAsync } from "../figma_app/594947";
 import { generateUUIDv4 } from "../905/871474";
 import { Point } from "../905/736624";
 import { yt, m1, SW, T1 } from "../figma_app/545293";
-import { XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { qp } from "../905/977779";
 import { selectOpenFile } from "../figma_app/516028";
@@ -101,7 +101,7 @@ export async function $$H1(e, t) {
       ...e,
       openFile: selectOpenFile(i),
       selectedView: _$$h(i),
-      inDesignEditor: XE(_$$h(i)) === FEditorType.Design,
+      inDesignEditor: getEditorTypeFromView(_$$h(i)) === FEditorType.Design,
       fileVersion: d,
       currentOrgId: eD(i),
       fileByKey: t_(i),

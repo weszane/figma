@@ -14,7 +14,7 @@ import { dR } from "../figma_app/109538";
 import { I as _$$I } from "../905/641938";
 import { getRumLoggingConfig } from "../905/16237";
 import { q } from "../figma_app/712384";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { WX, Bq, Vm } from "../figma_app/482142";
 import { TrackingProvider } from "../figma_app/831799";
@@ -90,7 +90,7 @@ export function $$D0({
         currency: M ?? V,
         updateCurrency: F ?? (e => {
           H(e);
-          G(oB());
+          G(hideDropdownAction());
         }),
         chooseStarterPlan: c,
         chooseProPlan: x ?? (t => {

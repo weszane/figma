@@ -33,7 +33,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { handleAtomEvent } from "../905/502364";
 import { c as _$$c } from "../figma_app/617427";
 import { getI18nString } from "../905/303541";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { showModalHandler, hideSpecificModal } from "../905/156213";
 import { n6 } from "../905/234821";
 import { formatI18nMessage } from "../905/482208";
@@ -466,7 +466,7 @@ let $$eU7 = memo(function (e) {
               _("LEFT_PANEL_FIGMA_LOGO");
               return;
             }
-            r(j7({
+            r(showDropdownThunk({
               type: _$$G,
               data: {
                 targetRect: e.getBoundingClientRect()
@@ -478,7 +478,7 @@ let $$eU7 = memo(function (e) {
       }
       if (modalShown?.type && ex.includes(modalShown?.type) && r(hideSpecificModal({
         type: modalShown.type
-      })), TY(dropdownShown)) r(oB());else if (e) {
+      })), TY(dropdownShown)) r(hideDropdownAction());else if (e) {
         let t = {
           type: pi,
           data: {
@@ -486,7 +486,7 @@ let $$eU7 = memo(function (e) {
           },
           hasOwnEscKeyHandler: !0
         };
-        r(j7(t));
+        r(showDropdownThunk(t));
       }
     },
     onboardingKey: _$$tO,

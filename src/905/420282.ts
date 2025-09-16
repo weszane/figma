@@ -27,7 +27,7 @@ import { In } from "../905/672640";
 import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
 import { k as _$$k } from "../figma_app/618031";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { H3 } from "../figma_app/920435";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
@@ -328,7 +328,7 @@ function ee(e) {
           backgroundColor: "unset"
         }).$,
         onClick: function () {
-          ("teamAdminConsole" !== i.view || i.teamAdminConsoleViewTab !== DashboardSections.MEMBERS) && t(sf({
+          ("teamAdminConsole" !== i.view || i.teamAdminConsoleViewTab !== DashboardSections.MEMBERS) && t(selectViewAction({
             view: "teamAdminConsole",
             teamAdminConsoleViewTab: DashboardSections.MEMBERS,
             teamId: e.teamId

@@ -4,13 +4,13 @@ import { atomStoreManager } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
 import { debugState } from "../905/407919";
 import { logError, logInfo } from "../905/714362";
-import { u8 } from "../figma_app/976749";
+import { editorTypeAtom } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { openFileKeyAtom } from "../figma_app/516028";
 import { $p } from "../figma_app/155728";
 import { FEditorType } from "../figma_app/53721";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { z } from "../905/150554";
 import { qd } from "../figma_app/257779";
 import { k1, OD, x_, ay, ZU, w3 } from "../figma_app/407767";
@@ -28,7 +28,7 @@ async function v({
 }) {
   if (getFeatureFlags().anticipation_suggestions_shadow) try {
     let r = atomStoreManager.get(openFileKeyAtom) ?? void 0;
-    let l = atomStoreManager.get(u8);
+    let l = atomStoreManager.get(editorTypeAtom);
     if (!r || l !== FEditorType.Design) return;
     let E = atomStoreManager.get($p);
     if (!E) return;
@@ -38,7 +38,7 @@ async function v({
     let C = !!w && x.has(w);
     let T = w && t.publishID;
     if (!S || !C || !T) return;
-    let k = debugState.getState().recentlyUsed.libraryItems[$A.Design].findIndex(e => e.key === S);
+    let k = debugState.getState().recentlyUsed.libraryItems[FDocumentType.Design].findIndex(e => e.key === S);
     let R = k1();
     R.numResults = null;
     let N = new _$$O({

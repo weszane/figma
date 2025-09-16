@@ -8,7 +8,7 @@ import { useLatestRef } from "../figma_app/922077";
 import { generateRecordingKey } from "../figma_app/878298";
 import { e as _$$e } from "../905/713353";
 import { getI18nString } from "../905/303541";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { KindEnum } from "../905/129884";
 import { ZU, Wg } from "../figma_app/986347";
@@ -104,7 +104,7 @@ export function $$T1() {
 function I(e) {
   let t = useDispatch();
   return useCallback(() => {
-    e.current && t(j7({
+    e.current && t(showDropdownThunk({
       type: R,
       data: {
         targetRect: e.current.getBoundingClientRect()

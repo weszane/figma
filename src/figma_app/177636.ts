@@ -10,7 +10,7 @@ import { fetchDynamicConfig } from "../figma_app/594947";
 import { processSelector } from "../3973/697935";
 import { OperationStatus } from "../3973/473379";
 import { Lg, isInteractionPathCheck } from "../figma_app/897289";
-import { u8 } from "../figma_app/976749";
+import { editorTypeAtom } from "../figma_app/976749";
 import { U } from "../905/506188";
 import { getBasename } from "../905/309735";
 import { FComponentType } from "../figma_app/191312";
@@ -37,7 +37,7 @@ let C = z.object({
 });
 let w = [];
 let O = atom(async e => {
-  let t = e(u8) === FEditorType.Sites;
+  let t = e(editorTypeAtom) === FEditorType.Sites;
   let r = !!(Lg() || isInteractionPathCheck()) || e(processSelector).status === OperationStatus.COMPLETED;
   if (!t || !r) return {
     libraryKeys: w,

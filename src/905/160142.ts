@@ -6,13 +6,13 @@ import { BrowserInfo } from "../figma_app/778880";
 import { reportNullOrUndefined } from "../905/11";
 import { XHR } from "../905/910117";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Q9 } from "../905/70982";
 import { z4 } from "../905/37051";
 import { m as _$$m } from "../905/575846";
 import { mapFileSummary } from "../figma_app/349248";
 import { _P, Zh, qb, Rv } from "../figma_app/2590";
-import { vp } from "../figma_app/831696";
+import { serializeFullViewerQueryParams } from "../figma_app/831696";
 import { s6 } from "../905/91038";
 import { openInBrowser } from "../figma_app/415217";
 let $$y0 = _$$n(createOptimistThunk(async (e, t, {
@@ -54,7 +54,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
     contentScalingMode: scalingInfo?.contentScalingMode ?? Rv(P)
   };
   let D = C.lastVisitedPlanId || null;
-  let L = vp({
+  let L = serializeFullViewerQueryParams({
     scalingInfo: O,
     nodeId,
     pageId: T,
@@ -78,7 +78,7 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
     }).catch(e => {});
     let n = await i.fetchFile(fileKey);
     if (_$$m) {
-      e.dispatch(sf({
+      e.dispatch(selectViewAction({
         view: "prototype",
         file: mapFileSummary(n),
         scalingInfo: O,

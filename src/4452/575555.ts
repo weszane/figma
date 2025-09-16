@@ -47,7 +47,7 @@ import { Um } from '../905/848862';
 import { h as _$$h2 } from '../905/857431';
 import { h as _$$h } from '../905/864281';
 import { InterProfileType } from '../905/895626';
-import { j7, oB, sf } from '../905/929976';
+import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { B as _$$B2 } from '../905/950875';
 import { ck } from '../905/952832';
 import { TextWithTruncation } from '../905/984674';
@@ -145,13 +145,13 @@ function ea(e) {
   let u = () => l && l.type === et && l.data.roleId === e.teamRole.id;
   let m = a => {
     if (u()) {
-      t(oB());
+      t(hideDropdownAction());
     } else {
       if (!d.current) return;
       let s = d.current?.getBoundingClientRect();
       let n = s.bottom + a > window.innerHeight;
       let r = window.innerHeight - s.bottom;
-      t(j7({
+      t(showDropdownThunk({
         type: et,
         data: {
           roleId: e.teamRole.id,
@@ -188,7 +188,7 @@ function ea(e) {
   };
   let g = (a, s) => {
     e.isModal && t(hideModal());
-    t(sf({
+    t(selectViewAction({
       view: 'user',
       userId: s.id,
       userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -337,12 +337,12 @@ function el(e) {
   };
   let _ = s => {
     if (a) {
-      t(oB());
+      t(hideDropdownAction());
     } else {
       let a = i && i.current && i.current.getBoundingClientRect();
       let n = a?.bottom ?? 0 + s > window.innerHeight;
       let r = window.innerHeight - (a?.bottom ?? 0);
-      t(j7({
+      t(showDropdownThunk({
         type: er,
         data: {
           requestId: e.request.id,
@@ -358,7 +358,7 @@ function el(e) {
   };
   let p = e => {
     o(e);
-    t(oB());
+    t(hideDropdownAction());
   };
   let g = useMemo(() => -24 * Math.max(0, u.indexOf(l)), [l, u]);
   let h = useMemo(() => {
@@ -369,7 +369,7 @@ function el(e) {
     return e;
   }, [a, g]);
   let x = (e, a) => {
-    t(sf({
+    t(selectViewAction({
       view: 'user',
       userId: a.id,
       userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -1166,7 +1166,7 @@ function tf(e) {
       }), jsx('button', {
         className: ti,
         onClick: () => {
-          t(sf({
+          t(selectViewAction({
             view: 'teamAdminConsole',
             teamId: e.team.id,
             teamAdminConsoleViewTab: DashboardSections.BILLING
@@ -1363,7 +1363,7 @@ function tI(e) {
 }
 let tE = 'TEAM_SETTINGS_MODAL';
 let tS = (e, t, a) => {
-  e(sf(a));
+  e(selectViewAction(a));
 };
 let $$tT0 = registerModal(e => {
   let t = useDispatch();
@@ -1440,7 +1440,7 @@ let $$tT0 = registerModal(e => {
             teamId: x.id,
             teamViewTab: e === 'SETTINGS' ? NavigationRoutes.SETTINGS : NavigationRoutes.MEMBERS
           } : entryView;
-          t(sf(s));
+          t(selectViewAction(s));
           let n = a.current;
           n && (n.scrollTop = 0);
         },

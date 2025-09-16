@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
 import { generateRecordingKey } from "../figma_app/878298";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { LO } from "../figma_app/8833";
 import { t as _$$t } from "../469e6e40/489933";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Gt, dR } from "../figma_app/248118";
 import { cW, j1 } from "../figma_app/844435";
 import { EO } from "../figma_app/86989";
@@ -21,7 +21,7 @@ export function $$y0(e) {
   let n = getParentOrgIdIfOrgLevel(t);
   let y = Gt(e.resource.plugin_id, e.triggeredFrom);
   let C = dR(e.resource.plugin_id, e.triggeredFrom);
-  let w = "whiteboard" === lg();
+  let w = "whiteboard" === getCurrentFileType();
   let j = F5();
   let k = _$$t(e.resource.plugin_id, y, C);
   let P = useDispatch();
@@ -44,7 +44,7 @@ export function $$y0(e) {
         let {
           e
         } = t;
-        I ? P(j7({
+        I ? P(showDropdownThunk({
           type: LO,
           data: {
             pluginId: e.resource.plugin_id,

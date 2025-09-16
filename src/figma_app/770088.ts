@@ -17,13 +17,13 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { O as _$$O } from "../905/963222";
 import { trackFileEvent } from "../figma_app/314264";
 import { LO, Mu } from "../905/901964";
 import { E as _$$E } from "../905/617605";
 import { fullscreenValue } from "../figma_app/455680";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { getAttachmentChanges, NEW_COMMENT_ID, BusyReadyState } from "../905/380385";
 import { m as _$$m } from "../905/70820";
 import { WE } from "../905/29425";
@@ -32,7 +32,7 @@ import { R as _$$R } from "../905/780757";
 import { VB } from "../905/431747";
 import { showModalHandler } from "../905/156213";
 import { zq } from "../905/193529";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 export async function $$U4(e, t, r, n, i) {
   await G(i.messageMeta, e, t, r, n).then(t => {
@@ -463,7 +463,7 @@ let $$J3 = createOptimistThunk(async (e, t) => {
   !l && o && (l = [o]);
   let d = t.thread.id;
   let u = t.source;
-  a.client_meta?.page_id && "communityHub" === s.selectedView.view && (d !== s.selectedView.commentThreadId && e.dispatch(sf({
+  a.client_meta?.page_id && "communityHub" === s.selectedView.view && (d !== s.selectedView.commentThreadId && e.dispatch(selectViewAction({
     ...s.selectedView,
     commentThreadId: d
   })), s.selectedView.commentThreadId && trackEventAnalytics("Comment Thread Read", {
@@ -635,7 +635,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
     uuid: t.uuid
   });
   let r = e.getState();
-  let i = U2(r.selectedView);
+  let i = getFileKeyFromSelectedView(r.selectedView);
   if (!i) return Promise.resolve();
   let o = t.newCommentState || r.comments.newComment;
   let {
@@ -730,7 +730,7 @@ let $$ei26 = createOptimistThunk((e, t) => {
     let {
       data
     } = p;
-    if (U2(e.getState().selectedView) !== i) return;
+    if (getFileKeyFromSelectedView(e.getState().selectedView) !== i) return;
     if (data.message?.warning_message && 0 !== data.message.warning_message.length && e.dispatch(VisualBellActions.enqueue({
       type: "at-mention-error",
       message: data.message.warning_message
@@ -839,12 +839,12 @@ let $$ea23 = createOptimistThunk((e, t) => {
   let _ = r.comments.editingComment;
   return !a && _ ? (e.dispatch(eS(_.id)), !1) : ("fullscreen" === r.selectedView.view && Fullscreen.setActiveCommentAnchorData({
     stablePath: defaultSessionLocalIDArrayString
-  }), "communityHub" === r.selectedView.view && e.dispatch(sf({
+  }), "communityHub" === r.selectedView.view && e.dispatch(selectViewAction({
     ...r.selectedView,
     commentThreadId: void 0
   })), atomStoreManager.set(_$$R, !1), e.dispatch($$eK30()), e.dispatch($$eY36()), e.dispatch($$ew1({
     resetStatusOnly: !1
-  })), r.tooltip && e.dispatch(jD()), !0);
+  })), r.tooltip && e.dispatch(hideTooltip()), !0);
 });
 let $$es0 = createActionCreator("COMMENTS_SET_NEW_COMMENT_ACTIVE");
 let $$eo5 = createOptimistThunk((e, t) => {

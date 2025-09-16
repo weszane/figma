@@ -7,10 +7,10 @@ import { H_ } from "../905/963340";
 import { J } from "../905/125993";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
-import { gc } from "../figma_app/120227";
+import { getCodeExtensionPreferences } from "../figma_app/120227";
 import { FOverrideType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
-import { VR } from "../figma_app/545541";
+import { setupUserPluginPreferences } from "../figma_app/545541";
 export function $$g1() {
   let {
     getTriggerProps,
@@ -43,9 +43,9 @@ export function $$f0() {
   let {
     setCodegenSettings,
     localCodegenSettings
-  } = VR();
+  } = setupUserPluginPreferences();
   let r = v4();
-  let n = gc();
+  let n = getCodeExtensionPreferences();
   let s = useMemo(() => localCodegenSettings?.behavior === FOverrideType.OVERRIDE && ignoreUndefinedEqual(localCodegenSettings?.language, r) && ignoreUndefinedEqual(localCodegenSettings?.preferences, n), [r, n, localCodegenSettings]);
   return {
     updateDefaultCodegenSettings: useCallback(() => {

@@ -11,7 +11,7 @@ import { processSelector } from "../3973/697935";
 import { OperationStatus } from "../3973/473379";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
 import { z } from "../905/239603";
-import { u8 } from "../figma_app/976749";
+import { editorTypeAtom } from "../figma_app/976749";
 import { teamLibraryCache } from "../figma_app/80990";
 import { FComponentType } from "../figma_app/191312";
 import { CodeComponentsInLibrary, LibraryAssetDataOfType } from "../figma_app/43951";
@@ -30,7 +30,7 @@ let S = z.object({
 });
 let v = [];
 let A = atom(async e => {
-  let t = e(u8) === FEditorType.Sites;
+  let t = e(editorTypeAtom) === FEditorType.Sites;
   let r = !!(getFalseValue() || isInteractionPathCheck()) || e(processSelector).status === OperationStatus.COMPLETED;
   return t && r ? {
     libraryConfigs: (await fetchDynamicConfig("1p_code_presets_sts")).get("libraries", v, e => Array.isArray(e) && e.every(e => S.safeParse(e).success)),

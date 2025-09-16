@@ -42,7 +42,7 @@ import { f as _$$f } from "../c5e2cae0/279252";
 import { W as _$$W } from "../c5e2cae0/300137";
 import { UR } from "../figma_app/307841";
 import { getRumLoggingConfig } from "../905/16237";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { MN } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
@@ -381,7 +381,7 @@ export class $$eM2 extends Component {
     this.canSeeTeamAndSeatSelectionSteps = () => Object.keys(this.state.eligibleTeamsByTeamId).length > 0 || this.state.loading || !!this.props.newTeamProps;
     this.effectiveStep = () => this.props.step === X1.Initial || this.props.step === X1.ChoosePlan ? this.props.newTeamProps?.teamFlowType === UpgradeAction.CREATE_AND_UPGRADE ? X1.CreateTeam : this.canSeeTeamAndSeatSelectionSteps() ? X1.TeamSelect : X1.Payment : this.props.step;
     this.setStep = e => {
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         view: "orgSelfServe",
         step: e,
         orgMigrated: !1,
@@ -677,7 +677,7 @@ export class $$eM2 extends Component {
   fetchTeamEligibleUpgrades() {
     return Eh.getEligibleUpgrades().catch(e => {
       let t = e.data.message;
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         view: "recentsAndSharing"
       }));
       this.props.dispatch(FlashActions.error(t || getI18nString("org_self_serve.confirmation_step.sorry_there_was_an_error_processing_your_request_refresh_and_try_again")));
@@ -1075,7 +1075,7 @@ export class $$eM2 extends Component {
           onFileBrowserClick: this.onFileBrowserClick,
           newTeamProps: this.props.newTeamProps,
           onSelectTeamUpgradeStep: e => {
-            this.props.dispatch(sf({
+            this.props.dispatch(selectViewAction({
               teamId: null,
               ...this.props.newTeamProps?.previousView,
               view: "teamUpgrade",

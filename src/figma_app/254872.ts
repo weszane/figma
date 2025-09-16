@@ -6,7 +6,7 @@ import { O } from "../905/969533";
 import { reportError } from "../905/11";
 import { s as _$$s } from "../cssbuilder/589278";
 import { sx } from "../905/941192";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { z } from "../905/905430";
 import { aS, Im } from "../905/608145";
 import { c4 } from "../figma_app/805925";
@@ -58,9 +58,9 @@ export function $$v0({
 }) {
   let n = useDispatch();
   return useCallback(i => {
-    if (e) n(oB()); else if (i) {
+    if (e) n(hideDropdownAction());else if (i) {
       let e = i.getBoundingClientRect();
-      n(j7({
+      n(showDropdownThunk({
         type: b,
         data: {
           extensionId: t.plugin_id,

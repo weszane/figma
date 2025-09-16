@@ -25,10 +25,10 @@ import { DP } from "../905/640017";
 import { k as _$$k } from "../905/443820";
 import { g as _$$g } from "../905/125190";
 import { VisualBellActions } from "../905/302958";
-import { k as _$$k2 } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 import { sy } from "../905/37362";
-import { Cs } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 function h({
   index: e,
   complete: t
@@ -177,7 +177,7 @@ function U({
     onAction
   } = x();
   let m = useDispatch();
-  let p = () => (d(!0), _$$k2.createDevToken({
+  let p = () => (d(!0), UserAPIHandlers.createDevToken({
     desc: "Code Connect",
     expiration: 7776e3,
     scopes: [sy.FILE_CODE_CONNECT_WRITE]
@@ -246,9 +246,9 @@ function U({
   });
 }
 function z() {
-  return jsx(Cs, {
+  return jsx(BannerFullWidth, {
     variant: "warn",
-    children: jsx(Q, {
+    children: jsx(BannerMessage, {
       children: getI18nString("dev_handoff.codebase_suggestions.keep_your_api_token_secure_by_storing_it_in_a_secret_manager_never_hard_code_it_into_your_source_code")
     })
   });

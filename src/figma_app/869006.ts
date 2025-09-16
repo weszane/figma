@@ -8,7 +8,7 @@ import { LoadingSpinner } from "../figma_app/858013";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { V as _$$V, $ as _$$$ } from "../905/355181";
 import { tc } from "../905/15667";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { BI } from "../figma_app/546509";
 import { useCurrentFile, selectCurrentFile } from "../figma_app/516028";
@@ -310,7 +310,7 @@ export function $$et3(e) {
   let N = t.editorType === FFileType.SITES && (!!t.org?.isSitesDisabled || !!t?.team?.studentTeamAt);
   let C = t.editorType === FFileType.COOPER && !!t.org?.isCooperDisabled;
   let w = A || x || N || C;
-  let O = m0();
+  let O = isDevHandoffEditorType();
   let {
     handleUpgrade,
     getUpgradeEligibility,

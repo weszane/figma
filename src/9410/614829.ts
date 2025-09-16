@@ -7,7 +7,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { l7 } from "../figma_app/88239";
 import { jo } from "../figma_app/753501";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { dh, nn } from "../figma_app/186343";
 import { _ as _$$_ } from "../9410/218531";
 import { B } from "../9410/966396";
@@ -33,7 +33,7 @@ export function $$v0({
 }) {
   let N = dh();
   let A = nn();
-  let O = m0();
+  let O = isDevHandoffEditorType();
   let L = l7();
   let R = O || L;
   let D = o || getFeatureFlags().interop_pages;

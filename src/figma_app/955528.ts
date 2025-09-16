@@ -23,7 +23,7 @@ import { Tv } from "../figma_app/311375";
 import { u1, XE } from "../figma_app/91703";
 import { vu } from "../figma_app/8833";
 import { Gc, nl, fN } from "../figma_app/456871";
-import { Em, ow } from "../figma_app/976749";
+import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { TJ } from "../figma_app/482495";
 import { Fk, wA as _$$wA } from "../figma_app/167249";
@@ -47,8 +47,8 @@ export function $$$12() {
   let e = BE();
   let t = useSelector(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   let r = sO();
-  let n = Em();
-  let a = ow();
+  let n = isDesignFileType();
+  let a = isWhiteboardFileType();
   let s = r || !!getFeatureFlags().aip_tone_dial_fd && n || a;
   return Fk((e, t, r, n) => {
     if (!t || !r || !n) return !1;
@@ -93,9 +93,9 @@ export function $$q1(e) {
   });
 }
 export function $$J13(e, t, r, i) {
-  let a = Em();
+  let a = isDesignFileType();
   let s = !!getFeatureFlags().aip_tone_dial_fd && a;
-  let l = ow();
+  let l = isWhiteboardFileType();
   let d = useCallback(({
     texts: t,
     parameters: r,

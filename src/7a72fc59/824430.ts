@@ -199,7 +199,7 @@ import { q as _$$q } from '../905/838985';
 import { useCurrentUserOrgId, useCurrentUserOrg } from '../905/845253';
 import { Um } from '../905/848862';
 import { isVsCodeEnvironment } from '../905/858738';
-import { $A } from '../905/862883';
+import { FDocumentType } from '../905/862883';
 import { u as _$$u8 } from '../905/866761';
 import { bL as _$$bL4, RT } from '../905/867927';
 import { vu } from '../905/870778';
@@ -10268,7 +10268,7 @@ function cL({
           layoutOverride: _$$rp.THIN_2_COL,
           positionerRef: e,
           query: searchQuery,
-          recentlyUsedItemsKey: $A.Cooper,
+          recentlyUsedItemsKey: FDocumentType.Cooper,
           recentsLayoutOverride: _$$rp.THIN_3_COL,
           showLocalComponents: !1,
           showOrgLibraryLoadingState: !1,
@@ -10469,7 +10469,7 @@ function cG({
             layoutOverride: _$$rp.THIN_2_COL,
             positionerRef: e,
             query: t,
-            recentlyUsedItemsKey: $A.Cooper,
+            recentlyUsedItemsKey: FDocumentType.Cooper,
             recentsLayoutOverride: _$$rp.THIN_3_COL,
             showLocalComponents: !1,
             showOrgLibraryLoadingState: !1,
@@ -10609,7 +10609,7 @@ function cX({
           layoutOverride: _$$rp.THIN_2_COL,
           positionerRef: e,
           query: '',
-          recentlyUsedItemsKey: $A.Cooper,
+          recentlyUsedItemsKey: FDocumentType.Cooper,
           recentsLayoutOverride: _$$rp.THIN_3_COL,
           showLocalComponents: !1,
           showOrgLibraryLoadingState: !1,

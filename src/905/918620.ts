@@ -7,7 +7,7 @@ import { getResourceDataOrFallback } from "../905/723791";
 import { getRepoById } from "../905/760074";
 import { Ad } from "../figma_app/2023";
 import { FileShareModalPermissionsV3, FileShareModalCurrentUserPermissions, TeamCanEdit, ResourceConnectionSharingGroupUsersByFile } from "../figma_app/43951";
-import { s5 } from "../figma_app/193867";
+import { getFullscreenNodeId } from "../figma_app/193867";
 import { Nf } from "../figma_app/357047";
 export function $$h0({
   fileKey: e,
@@ -67,7 +67,7 @@ export function $$_2() {
 }
 export function $$A5() {
   return selectWithShallowEqual(e => {
-    let t = s5(e.selectedView);
+    let t = getFullscreenNodeId(e.selectedView);
     if (t && t !== defaultSessionLocalIDString) {
       let i = e.mirror?.sceneGraph.get(t);
       return {

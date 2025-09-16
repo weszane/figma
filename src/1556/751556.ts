@@ -43,11 +43,11 @@ import { customHistory } from "../905/612521";
 import { reportError } from "../905/11";
 import { _l, rq } from "../figma_app/976345";
 import { e as _$$e2 } from "../905/579755";
-import { sf, j7, oB } from "../905/929976";
+import { selectViewAction, showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { ql, S5 } from "../figma_app/24841";
 import { T$, w3 } from "../figma_app/865646";
-import { tO, QF, I2 } from "../figma_app/502247";
+import { setFileBrowserUserId, getUserPlan, setCommunityProfileId } from "../figma_app/502247";
 import { OrganizationType } from "../905/833838";
 import { s as _$$s2, c as _$$c } from "../905/744710";
 import { G$, FF } from "../figma_app/588092";
@@ -230,7 +230,7 @@ function eT({
         subView: "handle",
         handle: c.profile_handle
       }
-    })) : (o && tO(t.id), e(sf({
+    })) : (o && setFileBrowserUserId(t.id), e(selectViewAction({
       view: "user",
       userId: t.id,
       userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -425,7 +425,7 @@ function eU({
 }
 let eH = (e, t) => e.map(e => {
   let n = () => {
-    t(sf({
+    t(selectViewAction({
       view: "communityHub",
       subView: "handle",
       handle: e.profile_handle
@@ -720,12 +720,12 @@ function eX() {
       items: S()([function (e, t, n, l) {
         let o = t => {
           if (t === e.id) {
-            l(sf({
+            l(selectViewAction({
               view: "recentsAndSharing"
             }));
             return;
           }
-          let n = QF(t) || [];
+          let n = getUserPlan(t) || [];
           let i = null;
           let o = null;
           let s = n[0];
@@ -738,7 +738,7 @@ function eX() {
               teamId: o
             }
           }));
-          I2(t);
+          setCommunityProfileId(t);
         };
         let s = S()(t.orderedIds.filter(t => t !== e.id).map(e => {
           let n = t.byId[e];
@@ -1138,7 +1138,7 @@ export function $$th1() {
       },
       onClick: () => {
         let e = o.current?.getBoundingClientRect();
-        e && !l && (t(j7({
+        e && !l && (t(showDropdownThunk({
           type: tu,
           data: {
             targetRect: e
@@ -1156,7 +1156,7 @@ export function $$th1() {
       })
     }), l && jsxs(Fragment, {
       children: [jsx(X9, {
-        closeDropdown: () => t(oB())
+        closeDropdown: () => t(hideDropdownAction())
       }), jsx(ue, {
         registrationOrigin: iX.NOTIFICATION_BELL
       }), jsx(IP, {

@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { FOrganizationLevelType } from "../figma_app/191312";
 import { useTeamPlanUser, useIsOrgAdminUser, useTeamPlanFeatures, getParentOrgIdIfOrgLevel } from "../figma_app/465071";
 import { o0 } from "../905/844131";
@@ -18,7 +18,7 @@ export function $$p0() {
   let h = p?.name;
   let x = p?.key.type === FOrganizationLevelType.ORG;
   return (useEffect(() => {
-    a && x || e(sf(o0));
+    a && x || e(selectViewAction(o0));
   }, [e, a, x]), g && h) ? jsx(_$$r, {
     containerClass: "org_idp_management_page_view--fileBrowserContentContainer--8172L",
     scrollableContainerClass: "org_idp_management_page_view--fileBrowserScrollableContainer--RnNUM",

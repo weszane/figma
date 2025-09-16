@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent, Children } from "react";
 import a from "classnames";
 import { generateRecordingKey } from "../figma_app/878298";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { normalizeValue } from "../905/216495";
 import { yesNoTrackingEnum } from "../figma_app/198712";
 import { b } from "../905/181535";
@@ -98,7 +98,7 @@ export class $$b1 extends PureComponent {
     this.props.disabled && (g = Qz);
     let _ = this.props.isTokenizable ? $ : p_;
     let y = e => {
-      this.props.disableSelectFocus && "ArrowDown" === e.key && e.metaKey ? (e.preventDefault(), this.props.dispatch(j7({
+      this.props.disableSelectFocus && "ArrowDown" === e.key && e.metaKey ? (e.preventDefault(), this.props.dispatch(showDropdownThunk({
         type: this.props.id
       }))) : this.props.onKeyDown?.(e);
     };
@@ -110,7 +110,7 @@ export class $$b1 extends PureComponent {
       onMouseEnter: this.props.onMouseEnterNonPropagating,
       "data-onboarding-key": this.props.onboardingKey,
       onKeyDown: e => {
-        this.props.disableSelectFocus && this.props.dropdownShown?.type === this.props.id && "ArrowUp" === e.key && e.metaKey && (this.props.dispatch(oB()), this.props.forwardedRef?.current?.focus(), this.props.forwardedRef?.current?.select());
+        this.props.disableSelectFocus && this.props.dropdownShown?.type === this.props.id && "ArrowUp" === e.key && e.metaKey && (this.props.dispatch(hideDropdownAction()), this.props.forwardedRef?.current?.focus(), this.props.forwardedRef?.current?.select());
       },
       children: [jsxs(OverridableComponent, {
         ariaLabel: this.props.ariaLabel,

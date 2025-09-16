@@ -7,7 +7,7 @@ import l from "classnames";
 import { KeyCodes } from "../905/63728";
 import { RecordingPureComponent, handleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { RecordableDiv } from "../905/511649";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Vl } from "../figma_app/8833";
 import { F } from "../905/989956";
 import { dG } from "../figma_app/753501";
@@ -383,7 +383,7 @@ class k extends RecordingPureComponent {
           isNewUI: this.isNewUI,
           left: this.stopPositionToLeft(e.position),
           onContextMenu: e => {
-            this.contextMenuEnabled && !(this.props.paint.stops.length <= 1) && (this.props.dispatch(j7({
+            this.contextMenuEnabled && !(this.props.paint.stops.length <= 1) && (this.props.dispatch(showDropdownThunk({
               type: Vl,
               data: {
                 clientX: e.clientX,

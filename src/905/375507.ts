@@ -39,7 +39,7 @@ import { DashboardSection, FigResourceType } from "../figma_app/650409";
 import { Cj } from "../905/270084";
 import { hP } from "../figma_app/527041";
 import { A as _$$A } from "../6828/493300";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler, popModalStack } from "../905/156213";
 import { oN } from "../905/777093";
 import { FC } from "../figma_app/212807";
@@ -1004,11 +1004,11 @@ let eM = class e extends RecordingComponent {
     };
     this.onViewOrgFontsClick = () => {
       let e = this.getOrgForTeam();
-      e && ("team" === this.props.resourceType && this.props.canAdminOrg ? this.props.dispatch(sf({
+      e && ("team" === this.props.resourceType && this.props.canAdminOrg ? this.props.dispatch(selectViewAction({
         view: "orgAdminSettings",
         orgAdminSettingsViewTab: DashboardSection.RESOURCES,
         orgAdminSettingsViewSecondaryTab: FigResourceType.SHARED_FONTS
-      })) : this.props.dispatch(sf({
+      })) : this.props.dispatch(selectViewAction({
         view: "org",
         orgId: e.id,
         orgViewTab: _$$X2.FONTS

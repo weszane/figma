@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { R } from "../9410/46722";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { B as _$$B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
@@ -79,7 +79,7 @@ function I({
 }
 let N = ["Arabic", "Urdu"];
 export function $$A0() {
-  let e = ow();
+  let e = isWhiteboardFileType();
   let t = [{
     name: "Arabic",
     label: getI18nString("ai_text_tools.translate.language.arabic")

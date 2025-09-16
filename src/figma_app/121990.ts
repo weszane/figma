@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { Yy } from "../figma_app/59509";
-import { Q } from "../905/363675";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
 import { O } from "../905/969533";
 import { e6 } from "../figma_app/617427";
 import { Ph } from "../905/160095";
@@ -39,9 +39,9 @@ export function $$h0({
     seatType: JT(e),
     learnMoreLink: E
   });
-  return jsx(Yy, {
+  return jsx(BannerInset, {
     variant: "default",
-    children: h ? jsxs(Q, {
+    children: h ? jsxs(BannerMessage, {
       children: [jsxs(e6, {
         onClick: f,
         trackingProperties: {
@@ -61,7 +61,7 @@ export function $$h0({
         trackingDescriptor: _$$c.SEAT_COST_MESSAGING
       },
       className: "x78zum5 x1q0g3np x1qughib xh8yej3",
-      children: [jsx(Q, {
+      children: [jsx(BannerMessage, {
         children: g
       }), jsx(O, {})]
     })

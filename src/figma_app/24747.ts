@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { TrackingProvider } from "../figma_app/831799";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { p8 } from "../figma_app/722362";
 import { C } from "../figma_app/198698";
 import { om } from "../figma_app/465413";
@@ -16,7 +16,7 @@ export function $$c0({
 }) {
   let h = p8("showUi");
   let [m, g] = useState(!1);
-  let f = E3();
+  let f = getSelectedEditorType();
   if (useEffect(() => t(r), [t, r]), useEffect(() => {
     e && g(!1);
   }, [e]), !e || m || !h) return null;

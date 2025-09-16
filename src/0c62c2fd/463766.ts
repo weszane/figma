@@ -8,7 +8,7 @@ import { RR } from "../figma_app/307841";
 import { g as _$$g } from "../figma_app/638694";
 import { isSelectedViewMissingOrgAdminResources } from "../figma_app/422062";
 import { r as _$$r } from "../905/398386";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { _6 } from "../figma_app/386952";
 import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -38,20 +38,20 @@ export function $$T0() {
   let k = vS(E);
   let R = "loaded" === t.status && "loaded" === r.status && r.data.permission !== FMemberRoleType.ADMIN;
   return (useEffect(() => {
-    S ? e(sf({
+    S ? e(selectViewAction({
       view: "resourceUnavailable",
       resourceType: k
-    })) : R && e(sf(o0));
+    })) : R && e(selectViewAction(o0));
   }, [e, k, R, S]), "loaded" !== t.status || "loaded" !== r.status || R || S) ? jsx("div", {
     className: _$$s.wFull.pl32.py24.bb1.colorBorder.bSolid.$,
     children: jsx(Wi, {
       className: _$$s.w200.h32.$,
       dataTestId: "srpv-loading"
     })
-  }) : (T || (t.data.key.type === FOrganizationLevelType.ORG ? e(sf({
+  }) : (T || (t.data.key.type === FOrganizationLevelType.ORG ? e(selectViewAction({
     view: "orgAdminSettings",
     orgAdminSettingsViewTab: DashboardSection.DASHBOARD
-  })) : e(sf({
+  })) : e(selectViewAction({
     view: "teamAdminConsole",
     teamId: t.data.key.parentId ?? "",
     teamAdminConsoleViewTab: DashboardSections.DASHBOARD

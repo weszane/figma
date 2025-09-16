@@ -22,7 +22,7 @@ import { hh } from "../figma_app/42945";
 import { u as _$$u } from "../figma_app/365543";
 import { A as _$$A2 } from "../svg/910223";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { xb, FO } from "../figma_app/910914";
+import { DEV_HAND, DevHandoffInspectPanelPluginsHint } from "../figma_app/910914";
 import { $ as _$$$ } from "../figma_app/61705";
 import { postUserFlag } from "../905/985254";
 import { oW } from "../figma_app/297957";
@@ -40,7 +40,7 @@ import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { getObservableValue } from "../figma_app/84367";
 import { useTeamPlanFeatures } from "../figma_app/465071";
 import { f6 } from "../figma_app/915202";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { U as _$$U } from "../figma_app/65327";
 import { A as _$$A3 } from "../905/251970";
 import { resourceUtils } from "../905/989992";
@@ -282,7 +282,7 @@ let eg = [{
     userAnalyticsData: e,
     userFlags: t,
     selectedView: n
-  }) => !getFeatureFlags().mobile_download_proto_sidebar || e?.is_active_mobile_user || !!t.seen_mobile_proto_download_modal_prompt || $A(n)
+  }) => !getFeatureFlags().mobile_download_proto_sidebar || e?.is_active_mobile_user || !!t.seen_mobile_proto_download_modal_prompt || isFullscreenDevHandoffView(n)
 }, {
   userFlagName: "seen_mobile_comment_announcement",
   AnnouncementComponent: function () {
@@ -319,7 +319,7 @@ let eg = [{
     userAnalyticsData: e,
     userFlags: t,
     selectedView: n
-  }) => !getFeatureFlags().mobile_download_comment_sidebar || e?.is_active_mobile_user || !!t.seen_mobile_comment_download_modal_prompt || $A(n)
+  }) => !getFeatureFlags().mobile_download_comment_sidebar || e?.is_active_mobile_user || !!t.seen_mobile_comment_download_modal_prompt || isFullscreenDevHandoffView(n)
 }, {
   userFlagName: "dev_mode_dismissed_properties_panel_announcement",
   AnnouncementComponent: function ({
@@ -388,7 +388,7 @@ let eg = [{
   }) {
     return !t && n && !o && !e;
   }({
-    isDevHandoffView: $A(e),
+    isDevHandoffView: isFullscreenDevHandoffView(e),
     isRecovery: t,
     isReadOnly: n,
     canAccessDevMode: o
@@ -424,10 +424,10 @@ let eg = [{
   panelName: "Comments",
   additionalDisplayBlocker: ({
     selectedView: e
-  }) => !$A(e)
+  }) => !isFullscreenDevHandoffView(e)
 }, {
-  userFlagName: xb,
-  AnnouncementComponent: FO,
+  userFlagName: DEV_HAND,
+  AnnouncementComponent: DevHandoffInspectPanelPluginsHint,
   panelName: "Handoff",
   additionalDisplayBlocker: ({
     userFlags: e

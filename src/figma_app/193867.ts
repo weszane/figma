@@ -1,91 +1,230 @@
 import { addBreadcrumb } from '@sentry/browser'
 import { BaseViewManager } from '../905/27038'
-import { B } from '../905/122726'
-import { y as _$$y } from '../905/289978'
+import { CommunityHubNavigator } from '../905/122726'
+import { IllustrationFullscreenViewHandler } from '../905/289978'
 import { ViewSelectorGroup } from '../905/560883'
-import { N } from '../905/694285'
-import { _ as _$$_ } from '../905/733330'
-import { u as _$$u } from '../905/778192'
-import { YY } from '../905/782918'
-import { v as _$$v } from '../905/832475'
+import { FigmascopeNavigator } from '../905/694285'
+import { OrgSelfServePathHandler } from '../905/733330'
+import { FigjamTryViewHandler } from '../905/778192'
+import { SelectedViewPathHandler } from '../905/782918'
+import { AbuseReportFormRouter } from '../905/832475'
 import { OrganizationType } from '../905/833838'
-import { i as _$$i } from '../905/838114'
-import { G } from '../905/855105'
-import { V } from '../905/856857'
-import { a as _$$a } from '../905/870666'
-import { m as _$$m } from '../905/931569'
-import { f as _$$f } from '../905/992906'
+import { DesktopNewTabViewHandler } from '../905/838114'
+import { OrgViewHandler } from '../905/855105'
+import { isCommunityHubSubView } from '../905/856857'
+import { SelectedViewPathManager } from '../905/870666'
+import { TeamRestoreViewHandler } from '../905/931569'
+import { SelectedViewHandler } from '../905/992906'
 import { FEditorType } from '../figma_app/53721'
 import { ViewPathManager, viewSlugs } from '../figma_app/422062'
 import { throwTypeError } from '../figma_app/465776'
 import { ViewTypeEnum } from '../figma_app/471068'
-import { pk } from '../figma_app/502247'
+import { getOrgId } from '../figma_app/502247'
 
-export let $$A0 = new ViewSelectorGroup([new ViewPathManager(), new _$$f(), new YY(), new _$$y(), new _$$a(), new _$$m(), new B(), new G(), new _$$_(), new N(), new _$$u(), new _$$i(), new BaseViewManager(), new _$$v()])
-export function $$x14(e, t) {
-  return new URL($$N6(e, t), document.baseURI).href
+/**
+ * ViewSelectorGroup instance containing all view handlers and managers.
+ * Original: $$A0
+ */
+export const viewSelectorGroup = new ViewSelectorGroup([
+  new ViewPathManager(),
+  new SelectedViewHandler(),
+  new SelectedViewPathHandler(),
+  new IllustrationFullscreenViewHandler(),
+  new SelectedViewPathManager(),
+  new TeamRestoreViewHandler(),
+  new CommunityHubNavigator(),
+  new OrgViewHandler(),
+  new OrgSelfServePathHandler(),
+  new FigmascopeNavigator(),
+  new FigjamTryViewHandler(),
+  new DesktopNewTabViewHandler(),
+  new BaseViewManager(),
+  new AbuseReportFormRouter(),
+])
+
+/**
+ * Returns the absolute URL for a selected view.
+ * Original: $$x14
+ * @param orgId
+ * @param view
+ */
+export function getSelectedViewUrl(orgId: string, view: any): string {
+  return new URL(selectedViewToPath(orgId, view), document.baseURI).href
 }
-export function $$N6(e, t) {
-  return $$A0.selectedViewToPath(t, e)
+
+/**
+ * Converts selected view to path.
+ * Original: $$N6
+ * @param orgId
+ * @param view
+ */
+export function selectedViewToPath(orgId: string, view: any): string {
+  return viewSelectorGroup.selectedViewToPath(view, orgId)
 }
-let C = ['drafts', 'fonts', 'libraries', 'search', 'settings', 'plugins', 'widgets', 'user'].concat(viewSlugs)
-let w = new RegExp(`^/files/([0-9]+)/(?:${C.join('|')})(.*)$`)
-let O = new RegExp('^/files/(\\d+)/?$')
-let R = new RegExp(`^/files/team/([0-9]+)/(?:${C.join('|')})(.*)$`)
-let L = (e, t, r) => {
-  let n = e.split('/')
-  n[1] && n[1] === 'files' && (n.length !== 6 || n[1] !== 'files' || n[2] !== 'team' || n[5] !== 'restore') && (e.match(w) ? n.splice(2, 1) : e.match(R) ? n.splice(2, 2) : (n.length >= 3 && t && n[2] === t && n.splice(2, 1), n.length >= 3 && r && n[3] === r && n.splice(2, 2)))
-  return n
-}
-let P = (e, t) => {
-  let r = e.split('/')
-  r[1] && r[1] === 'files' && (e.match(w) ? r.splice(2, 1) : r.length >= 3 && t && r[2] === t && r.splice(2, 1))
-  return r
-}
-export function $$D10(e) {
-  let t = e.match(w)
-  if (t)
-    return t[1]
-  let r = e.match(O)
-  return r ? r[1] : null
-}
-export function $$k15(e) {
-  let t = e.match(R)
-  return t ? t[1] : null
-}
-export function $$M9(e) {
-  let t = P(e, pk())
-  t[t.length - 1] === '' && t.splice(t.length - 1, 1)
-  return t
-}
-export function $$F13(e, t, r, n, i = {
-  view: 'recentsAndSharing',
-}) {
-  let a = [](a = L(t, e.currentUserOrgId, e.currentTeamId))[a.length - 1] === '' && a.splice(a.length - 1, 1)
-  return $$A0.pathToSelectedView(e, a, r, n) || i
-}
-export function $$j7(e, t, r, n, i) {
-  if (t === n && r === i)
-    return e
-  let a = t === OrganizationType.ORG ? r : `team/${r}`
-  let s = n === OrganizationType.ORG ? i : `team/${i}`
-  return e.replace(a, s)
-}
-export function $$U3(e, t) {
-  return $$A0.selectedViewName(t, e)
-}
-export function $$B2(e) {
-  let t = e.modalShown
-  for (; t;) {
-    if (t.type === 'ACCOUNT_SETTINGS_MODAL')
-      return !0
-    t = t.prevModal
+
+const viewSlugList = [
+  'drafts',
+  'fonts',
+  'libraries',
+  'search',
+  'settings',
+  'plugins',
+  'widgets',
+  'user',
+  ...viewSlugs,
+]
+const fileViewRegex = new RegExp(`^/files/([0-9]+)/(?:${viewSlugList.join('|')})(.*)$`)
+const fileRootRegex = /^\/files\/(\d+)\/?$/
+const teamFileViewRegex = new RegExp(`^/files/team/([0-9]+)/(?:${viewSlugList.join('|')})(.*)$`)
+
+/**
+ * Splits and normalizes a path for view selection.
+ * Original: L
+ */
+function normalizePath(path: string, orgId?: string, teamId?: string): string[] {
+  const segments = path.split('/')
+  if (segments[1] && segments[1] === 'files') {
+    if (
+      segments.length !== 6
+      || segments[1] !== 'files'
+      || segments[2] !== 'team'
+      || segments[5] !== 'restore'
+    ) {
+      if (path.match(fileViewRegex)) {
+        segments.splice(2, 1)
+      }
+      else if (path.match(teamFileViewRegex)) {
+        segments.splice(2, 2)
+      }
+      else {
+        if (segments.length >= 3 && orgId && segments[2] === orgId) {
+          segments.splice(2, 1)
+        }
+        if (segments.length >= 3 && teamId && segments[3] === teamId) {
+          segments.splice(2, 2)
+        }
+      }
+    }
   }
-  return !1
+  return segments
 }
-export function $$G1(e) {
-  let t = e.view
-  switch (t) {
+
+/**
+ * Splits and normalizes a path for organization.
+ * Original: P
+ */
+function normalizeOrgPath(path: string, orgId?: string): string[] {
+  const segments = path.split('/')
+  if (segments[1] && segments[1] === 'files') {
+    if (path.match(fileViewRegex)) {
+      segments.splice(2, 1)
+    }
+    else if (segments.length >= 3 && orgId && segments[2] === orgId) {
+      segments.splice(2, 1)
+    }
+  }
+  return segments
+}
+
+/**
+ * Extracts file id from path.
+ * Original: $$D10
+ */
+export function getFileIdFromPath(path: string): string | null {
+  const match = path.match(fileViewRegex)
+  if (match)
+    return match[1]
+  const rootMatch = path.match(fileRootRegex)
+  return rootMatch ? rootMatch[1] : null
+}
+
+/**
+ * Extracts team id from team file path.
+ * Original: $$k15
+ */
+export function getTeamIdFromPath(path: string): string | null {
+  const match = path.match(teamFileViewRegex)
+  return match ? match[1] : null
+}
+
+/**
+ * Normalizes path and removes trailing empty segments.
+ * Original: $$M9
+ */
+export function getNormalizedPath(path: string): string[] {
+  const segments = normalizeOrgPath(path, getOrgId())
+  if (segments[segments.length - 1] === '') {
+    segments.splice(segments.length - 1, 1)
+  }
+  return segments
+}
+
+/**
+ * Maps a path to a selected view object.
+ * Original: $$F13
+ */
+export function mapPathToSelectedView(
+  appState: any,
+  path: string,
+  arg3: any,
+  arg4: any,
+  fallback: any = { view: 'recentsAndSharing' },
+): any {
+  // Normalize path and remove trailing empty segments
+  let segments = normalizePath(path, appState.currentUserOrgId, appState.currentTeamId)
+  if (segments[segments.length - 1] === '') {
+    segments.splice(segments.length - 1, 1)
+  }
+  return viewSelectorGroup.pathToSelectedView(appState, segments, arg3, arg4) || fallback
+}
+
+/**
+ * Replaces organization/team id in a path.
+ * Original: $$j7
+ */
+export function replaceOrgOrTeamId(
+  path: string,
+  orgType: string,
+  orgId: string,
+  newOrgType: string,
+  newOrgId: string,
+): string {
+  if (orgType === newOrgType && orgId === newOrgId)
+    return path
+  const current = orgType === OrganizationType.ORG ? orgId : `team/${orgId}`
+  const replacement = newOrgType === OrganizationType.ORG ? newOrgId : `team/${newOrgId}`
+  return path.replace(current, replacement)
+}
+
+/**
+ * Gets the selected view name.
+ * Original: $$U3
+ */
+export function getSelectedViewName(orgId: string, view: any): string {
+  return viewSelectorGroup.selectedViewName(view, orgId)
+}
+
+/**
+ * Checks if account settings modal is shown.
+ * Original: $$B2
+ */
+export function isAccountSettingsModalShown(state: any): boolean {
+  let modal = state.modalShown
+  while (modal) {
+    if (modal.type === 'ACCOUNT_SETTINGS_MODAL')
+      return true
+    modal = modal.prevModal
+  }
+  return false
+}
+
+/**
+ * Checks if a view is a main view.
+ * Original: $$G1
+ */
+export function isMainView(state: any): boolean {
+  const { view } = state
+  switch (view) {
     case 'deletedFiles':
     case 'folder':
     case 'team':
@@ -113,7 +252,7 @@ export function $$G1(e) {
     case 'trashedFolders':
     case 'seatRequests':
     case 'resourceHub':
-      return !0
+      return true
     case 'teamCreation':
     case 'teamUpgrade':
     case 'teamRestore':
@@ -131,57 +270,101 @@ export function $$G1(e) {
     case 'litmus-standalone':
     case 'componentBrowserLibrary':
     case 'abuseReportForm':
-      return !1
+      return false
     default:
-      throwTypeError(t)
+      throwTypeError(view)
   }
 }
-export function $$V16(e) {
-  return e.view === 'fullscreen' && e.workshopModeInfoLoaded && e.workshopModeInfo && e.editorType === FEditorType.Whiteboard && new Date() < e.workshopModeInfo.until || !1
+
+/**
+ * Checks if workshop mode is active.
+ * Original: $$V16
+ */
+export function isWorkshopModeActive(state: any): boolean {
+  return (
+    state.view === 'fullscreen'
+    && state.workshopModeInfoLoaded
+    && state.workshopModeInfo
+    && state.editorType === FEditorType.Whiteboard
+    && new Date() < state.workshopModeInfo.until
+  ) || false
 }
-export function $$H11(e) {
-  return !!(e.view === 'fullscreen' && e.tryPluginId && e.tryPluginName && e.tryPluginVersionId)
+
+/**
+ * Checks if try plugin modal is shown.
+ * Original: $$H11
+ */
+export function isTryPluginModalShown(state: any): boolean {
+  return !!(
+    state.view === 'fullscreen'
+    && state.tryPluginId
+    && state.tryPluginName
+    && state.tryPluginVersionId
+  )
 }
-export function $$z12(e) {
-  return e.view === 'fullscreen' && e.nodeId || null
+
+/**
+ * Gets node id if view is fullscreen.
+ * Original: $$z12
+ */
+export function getFullscreenNodeId(state: any): string | null {
+  return state.view === 'fullscreen' && state.nodeId ? state.nodeId : null
 }
-export function $$W8(e) {
-  switch (e.view) {
+
+/**
+ * Gets file key from selected view.
+ * Original: $$W8
+ */
+export function getFileKeyFromSelectedView(state: any): string | null {
+  switch (state.view) {
     case 'fullscreen':
-      return e.fileKey || null
+      return state.fileKey || null
     case 'mobileViewer':
-      return e.file?.key || null
+      return state.file?.key || null
     case 'prototype':
-      e.file == null && addBreadcrumb({
-        data: {
-          selectedView: e,
-        },
-      })
-      return e.file.key
+      if (state.file == null) {
+        addBreadcrumb({ data: { selectedView: state } })
+      }
+      return state.file.key
     default:
       return null
   }
 }
-export function $$$$K4(e) {
-  return e.view === 'recentsAndSharing' && (void 0 === e.tab || e.tab === ViewTypeEnum.RECENTLY_VIEWED)
+
+/**
+ * Checks if view is recentsAndSharing and tab is recently viewed.
+ * Original: $$$$K4
+ */
+export function isRecentsAndSharingView(state: any): boolean {
+  return (
+    state.view === 'recentsAndSharing'
+    && (state.tab === undefined || state.tab === ViewTypeEnum.RECENTLY_VIEWED)
+  )
 }
-export function $$Y5(e) {
-  return e.view === 'resourceHub' || V(e)
+
+/**
+ * Checks if view is resource hub or community hub subview.
+ * Original: $$Y5
+ */
+export function isResourceOrCommunityHubView(state: any): boolean {
+  return state.view === 'resourceHub' || isCommunityHubSubView(state)
 }
-export const $Z = $$A0
-export const CR = $$G1
-export const IE = $$B2
-export const Iu = $$U3
-export const K = $$$$K4
-export const Mo = $$Y5
-export const Np = $$N6
-export const Tk = $$j7
-export const U2 = $$W8
-export const YP = $$M9
-export const bW = $$D10
-export const i1 = $$H11
-export const s5 = $$z12
-export const vU = $$F13
-export const xS = $$x14
-export const yn = $$k15
-export const zg = $$V16
+
+// Export aliases for backward compatibility and refactored names
+export const YJ = viewSelectorGroup
+export const CR = isMainView
+export const IE = isAccountSettingsModalShown
+export const Iu = getSelectedViewName
+export const K = isRecentsAndSharingView
+export const Mo = isResourceOrCommunityHubView
+export const Np = selectedViewToPath
+export const Tk = replaceOrgOrTeamId
+export const U2 = getFileKeyFromSelectedView
+export const YP = getNormalizedPath
+export const bW = getFileIdFromPath
+export const i1 = isTryPluginModalShown
+export const s5 = getFullscreenNodeId
+export const vU = mapPathToSelectedView
+export const xS = getSelectedViewUrl
+export const yn = getTeamIdFromPath
+export const zg = isWorkshopModeActive

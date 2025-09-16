@@ -1,6 +1,6 @@
 import { getStorage } from "../905/657224";
 import { globalPerfTimer } from "../905/542194";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { filePutAction, postFileAction, filePermissionsPutAction } from "../figma_app/78808";
 import { OB, M3, ST } from "../figma_app/91703";
 import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
@@ -11,7 +11,7 @@ export let $$p1 = {
   view: "recentsAndSharing"
 };
 export function $$m0(e = $$p1, t) {
-  if (sf.matches(t)) {
+  if (selectViewAction.matches(t)) {
     globalPerfTimer.start("page_selected_view");
     let {
       fromPopstate,

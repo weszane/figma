@@ -3,7 +3,7 @@ import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { h } from "../905/662353";
 import { wI, JI, kl, OL, Gc } from "../figma_app/840917";
 import { hp, c6, ec, m6 } from "../905/725909";
@@ -47,7 +47,7 @@ export function $$E3(e) {
     r && t.includes(r) && (desktopAPIInstance ? desktopAPIInstance.close({
       suppressReopening: !0,
       shouldForceClose: !0
-    }) : e.dispatch(sf({
+    }) : e.dispatch(selectViewAction({
       view: "recentsAndSharing"
     })));
     e.dispatch($$h0());

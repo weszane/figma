@@ -156,7 +156,7 @@ import { r as _$$r } from '../905/857502';
 import { u as _$$u } from '../905/866761';
 import { b as _$$b2 } from '../905/874849';
 import { $ as _$$$2 } from '../905/922405';
-import { oB } from '../905/929976';
+import { hideDropdownAction } from '../905/929976';
 import { I as _$$I } from '../905/932503';
 import { lQ } from '../905/934246';
 import { O as _$$O4 } from '../905/936515';
@@ -174,7 +174,7 @@ import { atomStoreManager } from '../figma_app/27355';
 import { $t, HZ } from '../figma_app/29287';
 import { eH as _$$eH } from '../figma_app/91703';
 import { isNotNullish } from '../figma_app/95419';
-import { b1 } from '../figma_app/120227';
+import { getUnitLabel } from '../figma_app/120227';
 import { Dc, hV, mU } from '../figma_app/151766';
 import { He } from '../figma_app/155728';
 import { conditionalFeatureFlag, getInitialOptions } from '../figma_app/169182';
@@ -3870,7 +3870,7 @@ export function $$nN0(e) {
           hasKey(debugState.getState().folders, t) ? Wq(getProjectUrl(t, e?.parentOrgId ?? null), i) : Wq('/', i);
         } else {
           i(_$$eH());
-          i(oB());
+          i(hideDropdownAction());
         }
       }
     },
@@ -5652,7 +5652,7 @@ export function $$nN0(e) {
       children: nT(function (e) {
         let t = e.devHandoffCodeLanguage;
         return t.type !== 'first-party' ? [] : [tB('dev-handoff-code-settings-unit-pixel', 'dev-handoff-code-settings-unit-pixel-quick-command', MeasurementUnit.PIXEL, e), tB('dev-handoff-code-settings-unit-scaled', 'dev-handoff-code-settings-unit-scaled-quick-command', MeasurementUnit.SCALED, e, {
-          scaledUnit: b1(t.id)
+          scaledUnit: getUnitLabel(t.id)
         }), {
           name: 'dev-handoff-code-settings-unit-settings',
           callback: (e, t, i) => {

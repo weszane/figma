@@ -3,7 +3,7 @@ import { g8, MJ } from "../figma_app/860955";
 import { getI18nString } from "../905/303541";
 import { jd } from "../figma_app/106207";
 import { x } from "../905/619833";
-import { vt } from "../905/862883";
+import { ITemplateType } from "../905/862883";
 import { Pu, Qq } from "../figma_app/4616";
 import { yz } from "../905/784221";
 import { i$, YM } from "../905/122282";
@@ -21,7 +21,7 @@ export function $$h3({
     callback() {
       e(jd({
         templateIdentifier: {
-          type: vt.TeamTemplate,
+          type: ITemplateType.TeamTemplate,
           file_key: t
         },
         templateName: r
@@ -38,7 +38,7 @@ export function $$m1({
     onClick: () => {
       e(jd({
         templateIdentifier: {
-          type: vt.TeamTemplate,
+          type: ITemplateType.TeamTemplate,
           file_key: t
         },
         templateName: r

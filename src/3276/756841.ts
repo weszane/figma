@@ -71,7 +71,7 @@ import { globalPerfTimer } from "../905/542194";
 import { Point } from "../905/736624";
 import { VisualBellActions } from "../905/302958";
 import { S as _$$S } from "../figma_app/11182";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { Z as _$$Z } from "../905/104740";
 import { dh } from "../figma_app/186343";
 import { Fy } from "../figma_app/623300";
@@ -97,7 +97,7 @@ import { trackFileEventWithUser } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { WB } from "../905/761735";
 import { XHR } from "../905/910117";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { c1 } from "../figma_app/357047";
 import { notificationAPI } from "../905/894881";
 import { Z as _$$Z2 } from "../905/438683";
@@ -764,7 +764,7 @@ let e0 = memo(function (e) {
       onCommentSelect: U,
       onChangeResolveState: useCallback(e => {
         e.stopPropagation();
-        o(oB());
+        o(hideDropdownAction());
         n && n(m, !r);
       }, [m, o, n, r]),
       onCanvasMentionCopyLink: S,
@@ -1087,7 +1087,7 @@ function tp() {
   let s = I_();
   let r = fr();
   let l = n6();
-  let d = m0();
+  let d = isDevHandoffEditorType();
   let c = useDispatch();
   let m = useSelector(e => e.mirror.appModel.showComments);
   let h = useCallback(() => {

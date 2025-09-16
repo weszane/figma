@@ -11,7 +11,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Cr, cP, js, Z6, Od } from "../figma_app/451499";
-import { Em, cJ } from "../figma_app/976749";
+import { isDesignFileType, isSitesFileType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback, normalizeValue, isValidValue, isInvalidValue, MIXED_MARKER } from "../905/216495";
 import { Um } from "../905/848862";
@@ -1063,7 +1063,7 @@ function te({
   selectedInteractions: p
 }) {
   let h = useDispatch();
-  let x = Em();
+  let x = isDesignFileType();
   let y = useContext(_$$c);
   let _ = YT() === Oz.TWO_COL && y === _$$P2.LEFT;
   let v = iv({
@@ -1639,7 +1639,7 @@ export function $$tv0({
   } = selectWithShallowEqual(e => ({
     scene: e.mirror.sceneGraph
   }));
-  let k = cJ();
+  let k = isSitesFileType();
   let P = YT();
   let O = P === Oz.SINGLE_COL;
   let L = P === Oz.TWO_COL;

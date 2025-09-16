@@ -4,7 +4,7 @@ import { renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
 import { TextWithTruncation } from "../905/984674";
 import { L3 } from "../figma_app/806075";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { E as _$$E2 } from "../905/453826";
 import { e as _$$e } from "../905/621515";
 import { selectCurrentFile } from "../figma_app/516028";
@@ -90,7 +90,7 @@ export function $$O0() {
     priority: _$$N.SECONDARY_MODAL
   });
   let t = selectCurrentFile();
-  let r = E3();
+  let r = getSelectedEditorType();
   return (_$$E2(e.uniqueId, $$A1, () => {
     t?.canEdit && e.show();
   }), _$$E2(e.uniqueId, [Vc, "open-playground-file-click-event", "action_open_universal_insert_collage_modal", L3], () => {

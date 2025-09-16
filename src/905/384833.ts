@@ -32,7 +32,7 @@ import { Pf } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
 import { T as _$$T } from "../905/292816";
 import { zz } from "../figma_app/80683";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { Y$ } from "../905/84777";
@@ -347,7 +347,7 @@ function es(e) {
           backgroundColor: "unset"
         }).$,
         onClick: function () {
-          ("orgAdminSettings" !== i.view || i.orgAdminSettingsViewTab !== DashboardSection.MEMBERS) && t(sf({
+          ("orgAdminSettings" !== i.view || i.orgAdminSettingsViewTab !== DashboardSection.MEMBERS) && t(selectViewAction({
             view: "orgAdminSettings",
             orgAdminSettingsViewTab: DashboardSection.MEMBERS
           }));

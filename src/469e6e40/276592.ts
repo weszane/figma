@@ -3,14 +3,14 @@ import { useDispatch } from "react-redux";
 import { SecureLink } from "../figma_app/637027";
 import { T } from "../figma_app/257703";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { getGroupOrDefault } from "../905/817247";
 import { UserGroupRole, GroupType } from "../905/441038";
 function _(e) {
   let t = useDispatch();
   return jsx(SecureLink, {
     onClick: () => {
-      t(sf({
+      t(selectViewAction({
         view: "licenseGroup",
         subView: UserGroupRole.ADMIN,
         licenseGroupId: e.billingGroupId,

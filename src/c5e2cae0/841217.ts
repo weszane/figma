@@ -10,7 +10,7 @@ import { V8, $c, Wy, Um } from "../figma_app/681712";
 import { sx } from "../figma_app/307841";
 import { Ik } from "../figma_app/297957";
 import { s as _$$s } from "../cssbuilder/589278";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { L } from "../c5e2cae0/262856";
 import { isAddressEmpty, UpgradeSteps, SubscriptionType } from "../figma_app/831101";
@@ -86,7 +86,7 @@ function j(e) {
       value: N(e.shippingAddress)
     }), jsx(clickableBaseLinkTracked, {
       onClick: e.canSeeBillingAddressExp ? () => {
-        t(sf({
+        t(selectViewAction({
           ...a,
           paymentStep: UpgradeSteps.PAYMENT_AND_ADDRESS
         }));

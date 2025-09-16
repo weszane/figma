@@ -6,15 +6,15 @@ import o from "../vendor/523035";
 import { trackFileEventWithStore } from "../figma_app/901889";
 import { selectWithShallowEqual } from "../905/103090";
 import { useCanAccessDevModeEntryPoint } from "../figma_app/473493";
-import { D } from "../905/882262";
+import { useHasParentOrgId } from "../905/882262";
 import { Ym } from "../figma_app/806075";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { subscribeToGuidsAndTrack } from "../figma_app/582924";
 import { aV } from "../figma_app/722362";
 import { getObservableOrFallback } from "../figma_app/84367";
 import { FEditorType } from "../figma_app/53721";
 import { SelectorType } from "../figma_app/707808";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { gk } from "../figma_app/715641";
 import { _o } from "../figma_app/879363";
 var l = o;
@@ -45,7 +45,7 @@ export function $$w9() {
   return useSelector(e => $$O13(e.selectedView) ?? null);
 }
 export function $$O13(e) {
-  if (e) return $A(e) ? e.devModeFocusId : void 0;
+  if (e) return isFullscreenDevHandoffView(e) ? e.devModeFocusId : void 0;
 }
 export function $$R3() {
   let e = aV();
@@ -71,7 +71,7 @@ export function $$L7() {
   return useMemo(() => l()([...e.values(), ...t.values()]), [e, t]);
 }
 export function $$P5() {
-  let e = D();
+  let e = useHasParentOrgId();
   let t = $$L7();
   return e && t > 0;
 }
@@ -98,7 +98,7 @@ export function $$k6() {
     "editorType" in n.selectedView && n.selectedView.editorType === FEditorType.Design && Ym(n, FEditorType.DevHandoff, "overview_entry");
     a("entry_clicked");
     c(void 0);
-    o(sf(p));
+    o(selectViewAction(p));
   }, [r, o, p, c, a, e, t]);
 }
 export function $$M10(e) {
@@ -113,14 +113,14 @@ export function $$M10(e) {
     } : r.selectedView);
   }(e);
   return useCallback(() => {
-    t(sf(r));
+    t(selectViewAction(r));
   }, [t, r]);
 }
 export function $$F0() {
   let e = useDispatch();
   let t = useSelector(e => e.selectedView);
   return useCallback(r => {
-    "fullscreen" === t.view && e(sf({
+    "fullscreen" === t.view && e(selectViewAction({
       ...t,
       githubRepositorySelectorMode: r
     }));

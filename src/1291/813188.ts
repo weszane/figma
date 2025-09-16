@@ -10,8 +10,8 @@ import { getFileKey } from "../905/412913";
 import { sx } from "../905/941192";
 import { lW } from "../figma_app/850075";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { j7, oB } from "../905/929976";
-import { ow } from "../figma_app/976749";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { Um } from "../905/848862";
 import { liveStoreInstance } from "../905/713695";
 import { Du, Vq, Rt } from "../figma_app/979658";
@@ -73,7 +73,7 @@ export function $$I0(e) {
   let m = _$$b();
   let h = cX().tabManager;
   let f = sO();
-  let $ = ow();
+  let $ = isWhiteboardFileType();
   let I = useIsSelectedViewFullscreenCooper();
   let L = t === rp.THIN_2_COL || t === rp.THIN_3_COL ? 4 : 8;
   let A = useDispatch();
@@ -104,7 +104,7 @@ export function $$I0(e) {
       let n = jsx(lX, {
         buttonProps: {
           onContextMenu: s => {
-            e.showContextMenu && (s.preventDefault(), A(j7({
+            e.showContextMenu && (s.preventDefault(), A(showDropdownThunk({
               type: B,
               data: {
                 fileKey: E(t),
@@ -202,7 +202,7 @@ export function $$P1() {
     style: sx.add(e?.data?.position).add(sx.fixed).$,
     children: jsx(A, {
       onClick: () => {
-        a(oB());
+        a(hideDropdownAction());
         s({
           id: r,
           title: t.name,

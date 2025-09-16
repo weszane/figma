@@ -16,7 +16,7 @@ import { UN } from "../figma_app/976345";
 import { l as _$$l } from "../905/767868";
 import { A as _$$A } from "../905/100919";
 import { K } from "../905/226178";
-import { c5 } from "../905/93909";
+import { setLastVisitedPlan } from "../905/93909";
 import { I4 } from "../figma_app/840917";
 import { i4 } from "../905/862913";
 import { fA } from "../figma_app/543100";
@@ -134,7 +134,7 @@ export function $$P0(e) {
           e.onClick(t);
           return;
         }
-        if (p(c5({
+        if (p(setLastVisitedPlan({
           planId: i || r,
           planType: i ? OrganizationType.ORG : OrganizationType.TEAM
         })), isCommandOrShift(t)) {

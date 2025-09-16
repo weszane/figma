@@ -30,7 +30,7 @@ import { useCurrentPrivilegedPlan } from "../figma_app/465071";
 import { Sh } from "../figma_app/803787";
 import { l as _$$l } from "../905/202425";
 import { LibraryTabEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { I as _$$I } from "../figma_app/130633";
 import { N2, Ee } from "../figma_app/392189";
 import { b as _$$b } from "../figma_app/598297";
@@ -81,7 +81,7 @@ export function $$ef1({
   } = cq();
   let f = useAtomWithSubscription(dd);
   let b = oh(fi);
-  let I = g5($A.Design).productComponents;
+  let I = g5(FDocumentType.Design).productComponents;
   let {
     recentFragments
   } = cN(!r);
@@ -439,7 +439,7 @@ export function $$eE0({
     });
     mX(atomStoreManager.get(Q8), lQ, d, c, ek, G4.ACTIONS_ASSETS_TAB_DETAIL);
   });
-  let eB = g5($A.Design).productComponents.length;
+  let eB = g5(FDocumentType.Design).productComponents.length;
   let eG = recentFragments ? recentFragments.length : 0;
   let eV = useMemo(() => eU.activeTab === xA.COMPONENTS ? eB : eU.activeTab === xA.FRAGMENTS ? eG : (eU.activeTab, xA.COMMUNITY, 0), [eB, eG, eU.activeTab]);
   !function ({

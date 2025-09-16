@@ -23,7 +23,7 @@ import { getResourceType } from "../figma_app/427318";
 import { getProfileRouteHref } from "../905/934145";
 import { C as _$$C2 } from "../figma_app/382445";
 import { s1, uR, oj } from "../figma_app/304207";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { withTrackedClick } from "../figma_app/831799";
 import { cs, zp } from "../figma_app/740025";
@@ -666,7 +666,7 @@ function eT(e, t) {
   e.ConnectedPluginTile = connect(null, (e, t) => ({
     onClick: () => {
       t.onClick?.();
-      e(sf({
+      e(selectViewAction({
         view: "communityHub",
         subView: "plugin",
         publishedPluginId: t.pluginId
@@ -753,7 +753,7 @@ $$ev7.defaultProps = {
   t.displayName = "PublicProfileHubFileTile";
   e.PublicProfileHubFileTile = connect(null, (e, t) => ({
     onHubFileClick: () => {
-      e(sf({
+      e(selectViewAction({
         view: "communityHub",
         subView: "hubFile",
         hubFileId: t.hubFile.id
@@ -799,11 +799,11 @@ $$ev7.defaultProps = {
   t.displayName = "PublicProfilePluginTile";
   e.PublicProfileBasePluginTile = connect(null, (e, t) => ({
     onResourceClick: () => {
-      isWidget(t.resource) ? e(sf({
+      isWidget(t.resource) ? e(selectViewAction({
         view: "communityHub",
         subView: "widget",
         widgetId: t.resource.id
-      })) : e(sf({
+      })) : e(selectViewAction({
         view: "communityHub",
         subView: "plugin",
         publishedPluginId: t.resource.id
@@ -927,7 +927,7 @@ $$ev7.defaultProps = {
   let n = (e, t) => ({
     onPublicProfileClick: () => {
       t.onClick && t.onClick();
-      e(sf({
+      e(selectViewAction({
         view: "communityHub",
         subView: "handle",
         handle: t.publicProfile.profile_handle

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createLocalStorageAtom, atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { useLatestRef } from "../figma_app/922077";
 import { uQ } from "../figma_app/311375";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModalHandler } from "../905/156213";
 import { u as _$$u, Rb, L5, rW } from "../figma_app/852050";
 import { _6 } from "../figma_app/386952";
@@ -28,7 +28,7 @@ export function $$E6() {
   let e = _6();
   let t = useDispatch();
   return useCallback(r => {
-    t(sf({
+    t(selectViewAction({
       ...e,
       devModeVariablesTableSelectedVariable: r || void 0
     }));

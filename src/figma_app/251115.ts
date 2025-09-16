@@ -6,7 +6,7 @@ import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { getOrgLlamaConfig, isLlamaEnabledForOrg } from "../figma_app/459490";
-import { lg, u8 } from "../figma_app/976749";
+import { getCurrentFileType, editorTypeAtom } from "../figma_app/976749";
 import { useCurrentUserOrg } from "../905/845253";
 import { FFileType } from "../figma_app/191312";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFigmaAi, FileCanUseFigmakeAi } from "../figma_app/43951";
@@ -33,8 +33,8 @@ export function $$b1(e, t) {
   }, [_, u.data?.file, u.status]);
 }
 let T = _$$n(() => atomStoreManager.get(E));
-let $$I2 = _$$n(() => !!((lg() !== FFileType.WHITEBOARD || getFeatureFlags().figjam_quick_actions_v2) && $7("useHasPermission")) && T());
-let $$S4 = _$$n(() => !!((atomStoreManager.get(u8) !== FEditorType.Whiteboard || getFeatureFlags().figjam_quick_actions_v2) && $7("getHasPermission")) && T());
+let $$I2 = _$$n(() => !!((getCurrentFileType() !== FFileType.WHITEBOARD || getFeatureFlags().figjam_quick_actions_v2) && $7("useHasPermission")) && T());
+let $$S4 = _$$n(() => !!((atomStoreManager.get(editorTypeAtom) !== FEditorType.Whiteboard || getFeatureFlags().figjam_quick_actions_v2) && $7("getHasPermission")) && T());
 export function $$v3(e) {
   let t = e?.editorType === FFileType.FIGMAKE;
   let r = e?.key ?? "";
@@ -56,7 +56,7 @@ export function $$v3(e) {
 export function $$A5() {
   let e = useAtomWithSubscription(E);
   let t = useAtomWithSubscription(y);
-  let r = lg();
+  let r = getCurrentFileType();
   return r === FFileType.DESIGN || r === FFileType.SITES ? !!$7("useHasCodeChatPermission") && e : r === FFileType.FIGMAKE && t;
 }
 export function $$x0() {

@@ -8,7 +8,7 @@ import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportError } from "../905/11";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { d as _$$d } from "../905/531325";
 import { notificationAPI } from "../905/894881";
 import { sL } from "../figma_app/50271";
@@ -60,7 +60,7 @@ function S(e, t, r, n) {
     }).then(async t => {
       if (r?.includes("/email/link_redirect") && (r = await I(r)), bellFeedAPIInstance) {
         let t = sL(r || "") || void 0;
-        e(sf({
+        e(selectViewAction({
           view: "feed",
           quickReplyInfo: t
         }));

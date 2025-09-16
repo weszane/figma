@@ -1,7 +1,7 @@
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import { getSupportEmail, isProdCluster, isDevEnvironment } from "../figma_app/169182";
-import { m0, ow, lg } from "../figma_app/976749";
+import { isDevHandoffEditorType, isWhiteboardFileType, getCurrentFileType } from "../figma_app/976749";
 import { selectCurrentFile, useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrgId, useCurrentUserOrg } from "../905/845253";
 import { n as _$$n } from "../1577/959155";
@@ -50,9 +50,9 @@ import { wA as _$$wA, kA } from "../figma_app/336853";
 import { Ju, IX } from "../905/712921";
 import { C as _$$C } from "../figma_app/198698";
 import { x1, MA, om } from "../figma_app/465413";
-import { Cs } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
-import { $ as _$$$ } from "../905/692618";
+import { BannerFullWidth } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
+import { BannerButton } from "../905/692618";
 import { ny } from "../figma_app/819458";
 import { F as _$$F2 } from "../5132/756360";
 import { Az } from "../5132/863145";
@@ -64,7 +64,7 @@ import { useCurrentPlanUser, isOrgGuestUser, useCurrentPublicPlan } from "../fig
 import { G as _$$G } from "../figma_app/124713";
 import { w as _$$w2 } from "../7021/108292";
 import { filterNotNullish } from "../figma_app/656233";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Ti } from "../figma_app/658324";
 import { cD, ol } from "../figma_app/598018";
 import { DashboardSections } from "../905/548208";
@@ -104,7 +104,7 @@ import { FlashActions } from "../905/573154";
 import { useCanUseDevModeDemoFile } from "../figma_app/473493";
 import { hA } from "../figma_app/88239";
 import { buildFileUrl } from "../905/612685";
-import { QF } from "../figma_app/502247";
+import { getUserPlan } from "../figma_app/502247";
 import { fileApiHandler } from "../figma_app/787550";
 import { f as _$$f2 } from "../figma_app/24747";
 import { throwError } from "../1250/559338";
@@ -112,7 +112,7 @@ import { k as _$$k2 } from "../905/443820";
 import { Q as _$$Q2 } from "../1250/220026";
 import { kD, tS as _$$tS2, ac, J3, kN } from "../figma_app/622574";
 import { b4, WS } from "../figma_app/106207";
-import { vt } from "../905/862883";
+import { ITemplateType } from "../905/862883";
 import { H as _$$H } from "../905/548668";
 import { useIsCanvasEditDisabled } from "../905/595131";
 import { YM } from "../905/122282";
@@ -163,7 +163,7 @@ function ek({
   };
   return jsx($z, {
     onClick: () => {
-      t.length > 1 ? n(sf({
+      t.length > 1 ? n(selectViewAction({
         view: "teamAdminConsole",
         teamId: e.id,
         teamAdminConsoleViewTab: DashboardSections.BILLING
@@ -505,7 +505,7 @@ let tz = {
           type: MA.CUSTOM,
           element: jsx(Button, {
             onClick: () => {
-              t?.(sf({
+              t?.(selectViewAction({
                 view: "teamAdminConsole",
                 teamId: r.id,
                 teamAdminConsoleViewTab: DashboardSections.BILLING
@@ -609,7 +609,7 @@ let tq = {
           type: MA.CUSTOM,
           element: jsx(Button, {
             onClick: () => {
-              t?.(sf({
+              t?.(selectViewAction({
                 view: "teamAdminConsole",
                 teamId: r.id,
                 teamAdminConsoleViewTab: DashboardSections.BILLING
@@ -660,7 +660,7 @@ let tV = {
         button: s ? {
           buttonText: getI18nString("banner.pro_team_no_monthly_sub.manage_plan"),
           onClick: () => {
-            t?.(sf({
+            t?.(selectViewAction({
               view: "teamAdminConsole",
               teamId: n,
               teamAdminConsoleViewTab: DashboardSections.SETTINGS
@@ -780,8 +780,8 @@ let tK = {
     let n = cD();
     let r = useSelector(e => n ? e.teams[n] : null);
     let i = FC();
-    let l = m0();
-    let d = ow();
+    let l = isDevHandoffEditorType();
+    let d = isWhiteboardFileType();
     let _ = useStore();
     let u = selectCurrentFile()?.canEdit;
     let m = n && canEditTeam(n, i);
@@ -993,7 +993,7 @@ let tZ = {
         }),
         button: {
           buttonText: getI18nString("banner.personal_projects.back_to_files"),
-          onClick: () => o?.(sf({
+          onClick: () => o?.(selectViewAction({
             view: "recentsAndSharing"
           }))
         }
@@ -1456,7 +1456,7 @@ let nt = {
     let d = _$$tS2();
     let _ = ac();
     let u = useIsCanvasEditDisabled();
-    let m = lg();
+    let m = getCurrentFileType();
     let g = sO();
     let f = useIsSelectedViewFullscreenCooper();
     let h = selectCurrentUser();
@@ -1494,7 +1494,7 @@ let nt = {
             customHistory.redirect(e, "_blank");
           } else i({
             templateIdentifier: {
-              type: vt.TeamTemplate,
+              type: ITemplateType.TeamTemplate,
               file_key: r.fileKey
             },
             templateName: r.name
@@ -1795,7 +1795,7 @@ let no = {
       } : null;
     }();
     let [o, l] = useState(!1);
-    let [d, u] = QF(r || "") || [];
+    let [d, u] = getUserPlan(r || "") || [];
     let m = async () => {
       i && (l(!0), await i(), l(!1));
     };
@@ -1876,18 +1876,18 @@ let ns = {
         style: _$$sx.add({
           zIndex: 2
         }).$,
-        children: [jsxs(Cs, {
+        children: [jsxs(BannerFullWidth, {
           variant,
           onDismiss,
           "data-testid": "near-renewal-warning-banner",
-          children: [jsx(_$$Q, {
+          children: [jsx(BannerMessage, {
             title: renderI18nText("order_form_billing_terms.headline_banner_text.danger"),
             children: jsx("p", {
               children: renderI18nText("order_form_billing_terms.description_banner_text.warn", {
                 renewalDate: renewalDate.toDate()
               })
             })
-          }), jsx(_$$$, {
+          }), jsx(BannerButton, {
             onClick: () => {
               ny({
                 name: t?.name || null,
@@ -1984,7 +1984,7 @@ let nl = {
         orgId: t?.id,
         emails: admin_emails?.join(", ")
       },
-      children: jsxs(Cs, {
+      children: jsxs(BannerFullWidth, {
         variant: "warn",
         onDismiss: () => {
           trackEventAnalytics("CTA Clicked", {
@@ -1997,7 +1997,7 @@ let nl = {
             orgUserId: g
           });
         },
-        children: [jsx(_$$Q, {
+        children: [jsx(BannerMessage, {
           children: renderI18nText("non_admin_billing_terms.banner_description", {
             name: t.name,
             renewalDate: w.toDate()
@@ -2099,7 +2099,7 @@ let nf = [na, nr, ns, nl];
 let nh = [ni];
 export function $$nb0() {
   let e = selectCurrentFile();
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let n = e?.teamId;
   let r = useSelector(e => n ? e.teams[n] : null);
   return e ? n && !r ? np : t ? nu : n_ : nm;

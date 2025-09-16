@@ -5,12 +5,12 @@ import { produce } from "immer";
 import { KeyCodes } from "../905/63728";
 import { reportError } from "../905/11";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hY, qt } from "../figma_app/349969";
 import { trackFileEvent, trackDefinedFileEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { valueOrFallback } from "../905/216495";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 export function $$g9(e) {
   switch (e) {
     case "NONE":
@@ -129,7 +129,7 @@ let $$x2 = createOptimistThunk((e, t) => {
       t.hasOwnProperty("viewportScalingMode") && (e.scalingInfo.viewportScalingMode = t.viewportScalingMode);
       t.hasOwnProperty("contentScalingMode") && (e.scalingInfo.contentScalingMode = t.contentScalingMode);
     });
-    e.dispatch(sf(n));
+    e.dispatch(selectViewAction(n));
   }
 });
 createOptimistThunk((e, {
@@ -141,7 +141,7 @@ createOptimistThunk((e, {
       ...r,
       showHotspots: t
     };
-    e.dispatch(sf(n));
+    e.dispatch(selectViewAction(n));
   }
 });
 createOptimistThunk((e, {
@@ -154,7 +154,7 @@ createOptimistThunk((e, {
     ...r,
     showDeviceFrame: t
   };
-  e.dispatch(sf(i));
+  e.dispatch(selectViewAction(i));
 });
 createOptimistThunk((e, {
   newDevice: t
@@ -167,7 +167,7 @@ createOptimistThunk((e, {
     initialDevice: t,
     overrideDevice: void 0
   };
-  e.dispatch(sf(i));
+  e.dispatch(selectViewAction(i));
 });
 createOptimistThunk((e, {
   newDevice: t
@@ -179,19 +179,19 @@ createOptimistThunk((e, {
     ...r,
     overrideDevice: t
   };
-  e.dispatch(sf(i));
+  e.dispatch(selectViewAction(i));
 });
 let $$N8 = createOptimistThunk((e, t) => {
   let r = e.getState();
   let n = t.params || {};
-  let i = U2(r.selectedView);
+  let i = getFileKeyFromSelectedView(r.selectedView);
   trackFileEvent(t.name, i, r, n);
 });
 let $$C7 = (() => {
   let e = createOptimistThunk((e, t) => {
     let r = e.getState();
     let n = t.params || {};
-    let a = U2(r.selectedView);
+    let a = getFileKeyFromSelectedView(r.selectedView);
     if (!a) {
       reportError(_$$e.PROTOTYPING, Error("No file key for prototype event"));
       return;

@@ -19,7 +19,7 @@ import { l as _$$l } from "../905/728491";
 import { useSubscription } from "../figma_app/288654";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Rh } from "../905/844322";
 import { BranchOpenMergeRequest, FileCanView, FileCanManage } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
@@ -43,7 +43,7 @@ import { lR, $z } from "../figma_app/617427";
 import { f as _$$f } from "../figma_app/908415";
 import { hideModalHandler, hideModal, showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { H as _$$H } from "../figma_app/423008";
 import { _6 } from "../figma_app/386952";
 import { C as _$$C } from "../figma_app/198698";
@@ -148,7 +148,7 @@ function k() {
     message: renderI18nText("collaboration.branching_archived_footer.can_restore_branch"),
     buttonText: h ? renderI18nText("collaboration.branching_archived_footer.back_to_main_file") : void 0,
     buttonOnClick: h ? () => {
-      e(sf({
+      e(selectViewAction({
         view: "fullscreen",
         fileKey: c,
         editorType: FEditorType.Design
@@ -369,7 +369,7 @@ function ex({
   let t = useCurrentFileWorkshopModeStatus();
   let r = _6();
   let i = I4(e, t);
-  let a = E3();
+  let a = getSelectedEditorType();
   let s = BrowserInfo.isMeetDevice;
   let o = getI18nString("footer_banner.welcome_to_figma");
   let d = "DUPLICATE" === r.landingState ? getI18nString("footer_banner.create_an_account_to_get_your_own_copy_of_this_file") : getI18nString("footer_banner.create_an_account_to_edit_and_collaborate_on_this_file");

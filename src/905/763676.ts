@@ -35,7 +35,7 @@ import { useHandleMouseEvent } from "../figma_app/878298";
 import { NG } from "../figma_app/709893";
 import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { n1 } from "../figma_app/657017";
 import { t as _$$t2 } from "../905/511388";
 import { hasResourcePresetKey } from "../figma_app/255679";
@@ -214,7 +214,7 @@ function ec({
   let P = d && d.type === s;
   let O = useHandleMouseEvent("replace_libraries_modal.toggleDropdown", "mousedown", e => {
     N(e.currentTarget.getBoundingClientRect());
-    P ? l(oB()) : l(j7({
+    P ? l(hideDropdownAction()) : l(showDropdownThunk({
       type: s
     }));
   }, {

@@ -7,7 +7,7 @@ import { o as _$$o } from "../figma_app/29593";
 import { s as _$$s2 } from "../905/411990";
 import { RI, _S } from "../905/315794";
 import { S as _$$S } from "../figma_app/11182";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
 import { isReduxDeprecationCutover, ConfigGroups } from "../figma_app/121751";
@@ -36,7 +36,7 @@ export function $$C0() {
     team: C
   }) => {
     let w = () => {
-      n(oB());
+      n(hideDropdownAction());
       n(showModalHandler({
         type: _$$p,
         data: {
@@ -55,7 +55,7 @@ export function $$C0() {
       }));
     };
     let P = () => {
-      n(oB());
+      n(hideDropdownAction());
       let e = !!C.org_id;
       let t = e => {
         n(showModalHandler({
@@ -119,14 +119,14 @@ export function $$C0() {
     v.canAdmin && U.push({
       displayText: getI18nString("team_view.toolbar.rename"),
       onClick: () => {
-        n(oB());
+        n(hideDropdownAction());
         i && i(C);
       }
     });
     v.canAdmin && d && U.push({
       displayText: getI18nString("team_view.toolbar.change_icon"),
       onClick: () => {
-        n(oB());
+        n(hideDropdownAction());
         d && d(C);
       }
     });

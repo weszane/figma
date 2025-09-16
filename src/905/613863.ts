@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getI18nString } from "../905/303541";
 import { jU } from "../figma_app/544879";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { kK } from "../figma_app/863319";
 export function $$c0({
   subscription: e,
@@ -33,7 +33,7 @@ export function $$c0({
     b && b.length <= 1 ? y() : I();
   };
   let I = () => {
-    m.current && u(j7({
+    m.current && u(showDropdownThunk({
       type: jU,
       data: {
         targetRect: m.current.getBoundingClientRect(),

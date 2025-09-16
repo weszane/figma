@@ -94,7 +94,7 @@ import { p as _$$p3 } from "../905/195198";
 import { Lg, Lq } from "../figma_app/392626";
 import { dm } from "../figma_app/976345";
 import { h as _$$h2 } from "../905/857431";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { lT } from "../figma_app/494261";
 import { WC } from "../figma_app/240735";
 import { NavigationRoutes } from "../905/548208";
@@ -609,7 +609,7 @@ function e7(e, t, a, n) {
       });
     },
     onViewTeamMembers: e => {
-      s(sf({
+      s(selectViewAction({
         teamId: e,
         view: "team",
         teamViewTab: NavigationRoutes.MEMBERS

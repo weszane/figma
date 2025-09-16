@@ -26,7 +26,7 @@ import { kA } from "../figma_app/336853";
 import { hasTeamStatePaidAccess, isTeamLocked } from "../figma_app/345997";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { AccessLevelEnum } from "../905/557142";
-import { k as _$$k } from "../905/93362";
+import { UserAPIHandlers } from "../905/93362";
 import { registerModal } from "../905/102752";
 import { fZ } from "../figma_app/805373";
 import { Dd, OJ } from "../905/519092";
@@ -253,7 +253,7 @@ export let $$en0 = registerModal(function (e) {
   }) : getI18nString("file_browser.draft_move_modal.header_single_file_move", {
     fileName: e_[0]
   });
-  let ey = e => _$$k.migrateAllPersonalDrafts(e).then(() => em(VisualBellActions.enqueue({
+  let ey = e => UserAPIHandlers.migrateAllPersonalDrafts(e).then(() => em(VisualBellActions.enqueue({
     message: getI18nString("file_browser.draft_move_modal.async_draft_move_scheduled")
   }))).catch(() => em(VisualBellActions.enqueue({
     message: getI18nString("file_browser.draft_move_modal.async_draft_move_scheduling_error")

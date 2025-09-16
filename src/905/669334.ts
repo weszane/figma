@@ -8,7 +8,7 @@ import { getFeatureFlags } from "../905/601108";
 import { analyticsEventManager } from "../905/449184";
 import { c$, ms } from "../figma_app/236327";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { selectCurrentUser } from "../905/372672";
 import { LibraryAgeEnum } from "../figma_app/633080";
 import { n as _$$n } from "../905/402643";
@@ -56,14 +56,14 @@ let $$k0 = memo(({
   let U = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
-    M ? O(oB()) : O(j7({
+    M ? O(hideDropdownAction()) : O(showDropdownThunk({
       type: v
     }));
   }, [O, M]);
   let B = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
-    j ? O(oB()) : O(j7({
+    j ? O(hideDropdownAction()) : O(showDropdownThunk({
       type: I
     }));
     analyticsEventManager.trackDefinedEvent("design_systems_analytics.dsa_asset_filter_clicked", {

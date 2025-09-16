@@ -15,7 +15,7 @@ import { s as _$$s2 } from "../cssbuilder/589278";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../905/941192";
 import { sx as _$$sx } from "../figma_app/307841";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
@@ -214,7 +214,7 @@ function ea(e) {
   let d = useMemo(() => [getI18nString("org_upgrade.multi_team.plan_items.shared_design_libraries"), getI18nString("org_upgrade.multi_team.plan_items.shared_fonts_and_styles"), getI18nString("org_upgrade.multi_team.plan_items.centralized_billing_and_admin_controls"), getI18nString("org_upgrade.multi_team.plan_items.single_sign_on_sso_integrations")], []);
   let _ = () => {
     a();
-    t(sf({
+    t(selectViewAction({
       view: "orgSelfServe",
       upsellSource: e.upsellSource
     }));

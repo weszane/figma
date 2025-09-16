@@ -18,9 +18,9 @@ import { Dy, ky } from "../figma_app/925970";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { N as _$$N } from "../3271/584206";
 import { RB } from "../figma_app/69680";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { TrackingProvider } from "../figma_app/831799";
-import { m0, lg } from "../figma_app/976749";
+import { isDevHandoffEditorType, getCurrentFileType } from "../figma_app/976749";
 import { cW, ZT, x as _$$x, ll, U6, $1, nl, yQ, sp, Be, pR, YW, jA, op, qr, I5, SG, Tg, f6, wW } from "../figma_app/844435";
 import { z4 } from "../905/37051";
 import { LR } from "../figma_app/120210";
@@ -91,7 +91,7 @@ import { Y1 } from "../905/143116";
 import { TextWithTruncation } from "../905/984674";
 import { kt as _$$kt, Pq } from "../3591/828414";
 import { A as _$$A7 } from "../svg/4102";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { W as _$$W2 } from "../2b17fec9/950005";
 import { bT, Ol } from "../figma_app/279454";
 import { h as _$$h } from "../9410/146161";
@@ -349,7 +349,7 @@ function eH({
   onBack: e,
   text: t
 }) {
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let r = useIsSelectedViewFullscreenCooper();
   return jsxs("div", {
     className: "browse_resource_modal_tab_header--header--MQQB5 text--fontPos11--2LvXf text--_fontBase--QdLsd",
@@ -400,7 +400,7 @@ function eG(e) {
   } = IT();
   let r = activeTab === _$$s2.PLUGIN;
   let l = useDispatch();
-  let o = m0();
+  let o = isDevHandoffEditorType();
   let d = useIsSelectedViewFullscreenCooper();
   let c = _$$x();
   let u = Um();
@@ -437,7 +437,7 @@ function eG(e) {
   let Z = r && u?.type === yW && u.data.pluginId === e.resourceId && u.data.targetRect;
   let F = useCallback(t => {
     t.stopPropagation();
-    r && (Z ? l(oB()) : l(j7({
+    r && (Z ? l(hideDropdownAction()) : l(showDropdownThunk({
       type: yW,
       data: {
         pluginId: e.resourceId,
@@ -446,7 +446,7 @@ function eG(e) {
     })));
   }, [r, Z, l, e.resourceId]);
   let U = useCallback(() => {
-    l(oB());
+    l(hideDropdownAction());
   }, [l]);
   if (!resource) return null;
   resource.community_resource_payment = g;
@@ -692,7 +692,7 @@ function e8() {
   let t = Um();
   let s = t?.type === _$$kt;
   let r = useCallback(t => {
-    s ? e(oB()) : e(j7({
+    s ? e(hideDropdownAction()) : e(showDropdownThunk({
       type: _$$kt,
       data: {
         targetRect: t.currentTarget?.getBoundingClientRect()
@@ -725,7 +725,7 @@ function e7() {
   let {
     activeTab
   } = IT();
-  let t = $A(useSelector(e => e.selectedView));
+  let t = isFullscreenDevHandoffView(useSelector(e => e.selectedView));
   let s = nl({
     allowNonVsCodePluginsInVsCode: !0
   });
@@ -776,7 +776,7 @@ function tf() {
     activeTab
   } = IT();
   let t = BI();
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let {
     href,
     onClick
@@ -1097,7 +1097,7 @@ function tJ({
     activeTab
   } = IT();
   let l = activeTab === _$$s2.WIDGET;
-  let o = m0();
+  let o = isDevHandoffEditorType();
   let d = useAtomWithSubscription(RB) && o;
   let [u, _] = useState(!1);
   let {
@@ -1326,10 +1326,10 @@ function st(e) {
     activeTab
   } = IT();
   let r = activeTab === _$$s2.WIDGET;
-  let i = m0();
+  let i = isDevHandoffEditorType();
   let l = useIsSelectedViewFullscreenCooper();
   let o = e.query.trim();
-  let d = lg();
+  let d = getCurrentFileType();
   let c = _$$k3.getApiEditorType(d);
   let {
     pluginServerSideSearch,
@@ -1597,7 +1597,7 @@ export function $$so0() {
     currentView,
     setCurrentViewOrTab
   } = IT();
-  let u = m0();
+  let u = isDevHandoffEditorType();
   let _ = useIsSelectedViewFullscreenCooper();
   let m = u || _ ? "fd_browse_resource_modal--slidingPaneContainerAdjustable--ge7kl sliding_pane--slidingPaneContainer--RQkXf" : "fd_browse_resource_modal--slidingPaneContainer--sW-oK sliding_pane--slidingPaneContainer--RQkXf";
   let [p, h] = useState(initialFdView ? "" : r || "");
@@ -1713,7 +1713,7 @@ function sd({
     r(ky());
   }, [r]);
   let H = useCallback(() => {
-    h ? r(oB()) : r(j7({
+    h ? r(hideDropdownAction()) : r(showDropdownThunk({
       type: sl
     }));
   }, [r, h]);
@@ -1727,7 +1727,7 @@ function sd({
     role: "menuitemcheckbox",
     children: getI18nString("dev_handoff.inspect_panel.search_bar_filter_codegen_option")
   }));
-  let O = m0();
+  let O = isDevHandoffEditorType();
   let Z = useIsSelectedViewFullscreenCooper();
   let F = Z ? jsx(_$$N, {
     searchQuery: e,
@@ -1793,7 +1793,7 @@ function sd({
 }
 function sc(e) {
   let t = useRef(null);
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let r = useIsSelectedViewFullscreenCooper();
   let l = z4.getIsExtension() ? Ix + gC + 48 : s ? gC + Kr + Ix + ff : gC + Kr + Ix;
   let {
@@ -1804,7 +1804,7 @@ function sc(e) {
   let u = useRef(null);
   let m = useDispatch();
   let x = useCallback(e => {
-    t.current && (e > 0 ? t.current.className = _()("fd_browse_resource_modal--mainViewHeaderScrolled--RPI7X fd_browse_resource_modal--mainViewHeader--AZpur", tm) : t.current.className = _()(t_, r ? tx : tm), m(oB()));
+    t.current && (e > 0 ? t.current.className = _()("fd_browse_resource_modal--mainViewHeaderScrolled--RPI7X fd_browse_resource_modal--mainViewHeader--AZpur", tm) : t.current.className = _()(t_, r ? tx : tm), m(hideDropdownAction()));
   }, [t, m, r]);
   useEffect(() => {
     u.current?.scrollToTop();

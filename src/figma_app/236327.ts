@@ -10,7 +10,7 @@ import { RecordingPureComponent, handleMouseEvent, SKIP_RECORDING } from "../fig
 import { isInteractionOrEvalMode } from "../figma_app/897289";
 import { SvgComponent } from "../905/714743";
 import { S } from "../905/339549";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { s4, Dm } from "../figma_app/8833";
 import { TrackingProvider, withTrackedClick } from "../figma_app/831799";
 import { ft, dG, wo } from "../figma_app/753501";
@@ -453,7 +453,7 @@ export class $$B6 extends RecordingPureComponent {
     this.mouseMotionSinceMouseDown = 0;
     this.MENU_CLOSE_MOUSE_MOVE_SENSITIVITY = 5;
     this.closeDropdown = () => {
-      U(this.props) ? this.props.closeDropdown() : this.props.dispatch(oB());
+      U(this.props) ? this.props.closeDropdown() : this.props.dispatch(hideDropdownAction());
     };
     this.onMouseDown = handleMouseEvent(this, "mousedown", e => {
       this.mouseMotionSinceMouseDown = 0;

@@ -7,7 +7,7 @@ import { C8 } from '../905/216495';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString } from '../905/303541';
 import { debugState } from '../905/407919';
-import { pluginManifestPropType, capabilitiesPropType, editorTypePropType, widgetManifestPropType } from '../905/488349';
+import { capabilitiesPropType, editorTypePropType, pluginManifestPropType, widgetManifestPropType } from '../905/488349';
 import { isStrippedHtmlEmpty } from '../905/491152';
 import { validateNetworkAccess } from '../905/544659';
 import { dequeuePluginStatus } from '../905/571565';
@@ -15,13 +15,13 @@ import { getFeatureFlags } from '../905/601108';
 import { logger } from '../905/651849';
 import { logInfo } from '../905/714362';
 import { getArrayLength, hasKey } from '../905/764747';
-import { $A as _$$$A } from '../905/782918';
+import { isFullscreenDevHandoffView } from '../905/782918';
 import { validateWithNoOpVm } from '../905/816730';
 import { isVsCodeEnvironment } from '../905/858738';
-import { $A } from '../905/862883';
+import { FDocumentType } from '../905/862883';
 import { J as _$$J } from '../905/896954';
 import { XHR } from '../905/910117';
-import { UploadStatusEnum, TeamOrgType } from '../figma_app/10554';
+import { TeamOrgType, UploadStatusEnum } from '../figma_app/10554';
 import { Eh } from '../figma_app/12796';
 import { FEditorType } from '../figma_app/53721';
 import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from '../figma_app/155287';
@@ -30,21 +30,21 @@ import { Ni } from '../figma_app/188152';
 import { FFileType } from '../figma_app/191312';
 import { DK } from '../figma_app/291892';
 import { xf } from '../figma_app/416935';
-import { isTrustedPluginId, getPluginDomain, getPluginPermissions } from '../figma_app/455620';
+import { getPluginDomain, getPluginPermissions, isTrustedPluginId } from '../figma_app/455620';
 import { Y5 } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
 import { buildCarouselMedia } from '../figma_app/471982';
-import { jY, Ro } from '../figma_app/564095';
+import { isAnyPublisher, isAcceptedPublisher } from '../figma_app/564095';
 import { Dd, En, Ii, l8, vC, Wl, xw } from '../figma_app/599979';
 import { sortByCreatedAt } from '../figma_app/656233';
 import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from '../figma_app/740025';
 import { Rs } from '../figma_app/761870';
 import { isResourcePendingPublishing } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
-import { isNotInteger, isRatioHigh, MIN_PRICE, centsToDollars, isGreater, isPriceOutOfRange } from '../figma_app/808294';
+import { centsToDollars, isGreater, isNotInteger, isPriceOutOfRange, isRatioHigh, MIN_PRICE } from '../figma_app/808294';
 import { isInteractionPathCheck, Lg } from '../figma_app/897289';
 import { gU, YH } from '../figma_app/930338';
-import { XE } from '../figma_app/976749';
+import { getEditorTypeFromView } from '../figma_app/976749';
 
 /**
  * Error types for plugin operations
@@ -457,18 +457,18 @@ export function mapToFileType(fwType: string): FFileType {
 export function resolveFrameworkType(fwType: string) {
   switch (fwType) {
     case FW.FIGMA:
-      return $A.Design;
+      return FDocumentType.Design;
     case FW.FIGJAM:
-      return $A.FigJam;
+      return FDocumentType.FigJam;
     case FW.DEV:
     case FW.INSPECT:
-      return $A.Handoff;
+      return FDocumentType.Handoff;
     case FW.SLIDES:
-      return $A.Slides;
+      return FDocumentType.Slides;
     case FW.SITES:
-      return $A.Design;
+      return FDocumentType.Design;
     case FW.BUZZ:
-      return $A.Cooper;
+      return FDocumentType.Cooper;
     default:
       throwTypeError(fwType);
   }
@@ -727,7 +727,7 @@ export function getLocalPluginManifest(fileId: string, manifestSource: PluginMan
         // EditorType validation
         (function validateEditorType(manifest: PluginManifest) {
           if (!('editorType' in manifest)) throw new ManifestValidationError(getMissingEditorTypeError(), manifest);
-          if (manifest.editorType!.some(e => !Ye.includes(e)) || manifest.editorType!.length < 1 || manifest.editorType!.length > Ye.length) {
+          if (manifest.editorType!.some((e: any) => !Ye.includes(e)) || manifest.editorType!.length < 1 || manifest.editorType!.length > Ye.length) {
             throw new Error(`Invalid editorType in manifest.  ${getEditorTypeHint()}`);
           }
         })(manifest);
@@ -870,7 +870,7 @@ function formatManifestErrorMessage(message: string): string {
  * Formats a PluginError object to string.
  * @param error - The PluginError object.
  */
-function formatPluginError(error: PluginError) {
+function formatPluginError(error: any) {
   return am(error);
 }
 
@@ -1143,7 +1143,7 @@ export function filterResourcesByMatch(resources: Record<string, any>, value: an
   const result: Record<string, any> = {};
   Object.keys(resources).forEach(key => {
     const resource = resources[key];
-    const matcher = useJY ? jY : Ro;
+    const matcher = useJY ? isAnyPublisher : isAcceptedPublisher;
     if (Dd(resource, value) || matcher(resource, value)) {
       result[key] = resource;
     }
@@ -1972,7 +1972,7 @@ export function hasTextReviewCapability(plugin: any): boolean {
  * @param options - Options.
  * @returns Filtered object.
  */
-export function filterEntriesByEditorType(editorType: string, obj: Record<string, any>, options?: any): Record<string, any> {
+export function filterEntriesByEditorType(editorType: any, obj: Record<string, any>, options?: any): Record<string, any> {
   return Object.fromEntries(Object.entries(obj).filter(([_, value]) => editorTypeFilter(editorType, value, options)));
 }
 
@@ -1994,7 +1994,7 @@ export function filterArrayByEditorType(editorType: string, arr: any[]): any[] {
  * @param obj - Object to filter.
  * @returns Filtered object.
  */
-export function filterEntriesByPluginVersionEditorType(editorType: string, obj: Record<string, any>): Record<string, any> {
+export function filterEntriesByPluginVersionEditorType(editorType: any, obj: Record<string, any>): Record<string, any> {
   return Object.fromEntries(Object.entries(obj).filter(([_, value]) => editorTypeFilter(editorType, getPluginVersion(value))));
 }
 
@@ -2056,7 +2056,7 @@ export function isBuzzPlugin(plugin: any): boolean {
 export function isValidForCooper(pluginType: string): boolean {
   if (!isValidPluginType(pluginType)) return false;
   const view = debugState.getState().selectedView;
-  return _$$$A(view);
+  return isFullscreenDevHandoffView(view);
 }
 
 /**
@@ -2076,7 +2076,7 @@ export function isValidForCooperSelectedView(pluginType: string): boolean {
  * @returns True if Cooper.
  */
 export function isCooperSelectedView(view: any): boolean {
-  return XE(view) === FEditorType.Cooper;
+  return getEditorTypeFromView(view) === FEditorType.Cooper;
 }
 
 /**
@@ -2128,7 +2128,7 @@ export function isDevWithOnlyCodegen(plugin: any): boolean {
  */
 export function isValidForCooperDevCodegen(plugin: any): boolean {
   const view = debugState.getState().selectedView;
-  return _$$$A(view) && isDevWithOnlyCodegen(plugin);
+  return isFullscreenDevHandoffView(view) && isDevWithOnlyCodegen(plugin);
 }
 
 /**
@@ -2144,7 +2144,7 @@ export function isValidForSelectedViewAndWhitelist(plugin: any, org: any, whitel
   const whitelistEnforced = org?.plugins_whitelist_enforced;
   const isWhitelisted = whitelistEnforced && whitelist && !!whitelist[plugin.plugin_id];
   const allowed = isWhitelisted || !whitelistEnforced;
-  return _$$$A(view) && !isSingleDevWithCodegen(plugin) && allowed;
+  return isFullscreenDevHandoffView(view) && !isSingleDevWithCodegen(plugin) && allowed;
 }
 
 /**

@@ -5,7 +5,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { CloseButton } from "../905/17223";
 import { ButtonSecondaryTracked, ButtonLinkTracked, linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal, popModalStack } from "../905/156213";
 import { WX } from "../figma_app/482142";
 import { c as _$$c } from "../905/370443";
@@ -98,7 +98,7 @@ function T(e) {
           className: pL,
           onClick: () => {
             r();
-            e.dispatch(sf({
+            e.dispatch(selectViewAction({
               view: "teamAdminConsole",
               teamId: i.id,
               teamAdminConsoleViewTab: DashboardSections.SETTINGS

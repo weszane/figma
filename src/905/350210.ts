@@ -8,7 +8,7 @@ import { TeamOrgType } from "../figma_app/10554";
 import { A as _$$A } from "../905/61817";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { Cf, it } from "../905/504727";
 import { A as _$$A2 } from "../905/972270";
@@ -29,13 +29,13 @@ function A({
   let A = Um();
   let b = A?.type === o;
   let v = useCallback(() => {
-    b ? f(oB()) : f(j7({
+    b ? f(hideDropdownAction()) : f(showDropdownThunk({
       type: o
     }));
   }, [f, b, o]);
   let I = useCallback(e => {
     s(e);
-    f(oB());
+    f(hideDropdownAction());
   }, [f, s]);
   let E = useRef(null);
   return jsxs("div", {
@@ -47,7 +47,7 @@ function A({
       onKeyDown: e => {
         "Tab" !== e.key && e.preventDefault();
         e.stopPropagation();
-        "Enter" !== e.key || b || f(j7({
+        "Enter" !== e.key || b || f(showDropdownThunk({
           type: o
         }));
       },

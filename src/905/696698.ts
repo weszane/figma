@@ -9,7 +9,7 @@ import { Au, g5, iR } from "../figma_app/193952";
 import { debugState } from "../905/407919";
 import { au, pX, _ as _$$_, LQ } from "../figma_app/445976";
 import { rZ } from "../905/971098";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { D as _$$D2 } from "../905/629114";
 import { getNodeParentPath, getNestedImageNodes, IMAGE_NAME_FORMAT, extractModifiersFromProp, getComponentInfoById } from "../figma_app/664063";
 import { lS } from "../905/296461";
@@ -122,7 +122,7 @@ let v = {
     kitKey: e,
     buildingBlocks: t
   }) => {
-    let i = U2(debugState.getState().selectedView);
+    let i = getFileKeyFromSelectedView(debugState.getState().selectedView);
     if (!i) return {
       guids: []
     };

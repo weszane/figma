@@ -11,8 +11,8 @@ import { ignoreCommandOrShift } from "../905/63728";
 import { tu, oJ } from "../figma_app/385215";
 import { hk } from "../figma_app/632319";
 import { renderI18nText } from "../905/303541";
-import { j7 } from "../905/929976";
-import { jD } from "../905/765855";
+import { showDropdownThunk } from "../905/929976";
+import { hideTooltip } from "../905/765855";
 import { postUserFlag } from "../905/985254";
 import { HG } from "../figma_app/440875";
 import { T as _$$T, N as _$$N } from "../905/847283";
@@ -62,10 +62,10 @@ function O(e) {
   } = e;
   let c = useCallback(e => {
     linkCallback(e);
-    t(jD());
+    t(hideTooltip());
   }, [linkCallback, t]);
   let u = useCallback(e => {
-    buttonCallback && (buttonCallback(e), t(jD()));
+    buttonCallback && (buttonCallback(e), t(hideTooltip()));
   }, [buttonCallback, t]);
   let p = jsxs(ButtonPrimitive, {
     onClick: c,
@@ -105,7 +105,7 @@ let L = {
       actionCallback: e => {
         e.stopPropagation();
         e.preventDefault();
-        t(j7({
+        t(showDropdownThunk({
           type: "multiplayer-nickname-dropdown"
         }));
       },

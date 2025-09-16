@@ -60,8 +60,8 @@ import { n as _$$n5 } from '../905/79930';
 import { an as _$$an, y$ as _$$y$, PW } from '../905/81009';
 import { jv as _$$jv, vu } from '../905/84777';
 import { combineWithHyphen, ShareContext } from '../905/91820';
-import { k as _$$k6 } from '../905/93362';
-import { c5 as _$$c6 } from '../905/93909';
+import { UserAPIHandlers } from '../905/93362';
+import { setLastVisitedPlan } from '../905/93909';
 import { W as _$$W } from '../905/95038';
 import { ModalSupportsBackground, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
@@ -138,7 +138,7 @@ import { z as _$$z6 } from '../905/353894';
 import { V as _$$V6 } from '../905/355181';
 import { LogLevelStr } from '../905/361972';
 import { Yg } from '../905/362959';
-import { Q as _$$Q2 } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { c as _$$c3 } from '../905/370443';
 import { getUserId, selectCurrentUser, selectUser } from '../905/372672';
 import { S as _$$S1 } from '../905/373189';
@@ -285,7 +285,7 @@ import { XHR } from '../905/910117';
 import { F as _$$F2 } from '../905/915030';
 import { A as _$$A3 } from '../905/920142';
 import { a as _$$a } from '../905/925868';
-import { oB as _$$oB, sf as _$$sf, j7 } from '../905/929976';
+import { hideDropdownAction, selectViewAction, showDropdownThunk } from '../905/929976';
 import { J as _$$J8 } from '../905/931050';
 import { I as _$$I2 } from '../905/932503';
 import { ProfileRouteState, ResourceHubProfileRouteState } from '../905/934145';
@@ -439,7 +439,7 @@ import { rL as _$$rL } from '../figma_app/49598';
 import { c as _$$c8 } from '../figma_app/52714';
 import { FEditorType, mapFileTypeToEditorType, SITES_STRING } from '../figma_app/53721';
 import { t as _$$t9 } from '../figma_app/55043';
-import { cV as _$$cV, Cs } from '../figma_app/59509';
+import { BannerInline, BannerFullWidth } from '../figma_app/59509';
 import { $$, nR as _$$nR, vd } from '../figma_app/60079';
 import { $ as _$$$2, E as _$$E4 } from '../figma_app/61705';
 import { batchPutFileAction, copyShareLinkOptimistic, filePutAction, setActiveFileUsersAction } from '../figma_app/78808';
@@ -465,7 +465,7 @@ import { createNoOpValidator } from '../figma_app/181241';
 import { categoryBySlugQuery } from '../figma_app/188671';
 import { FAccessLevelType, FEntityType, FFileType, FMemberRoleType, FOrganizationLevelType, FOrganizationRoleType, FPaymentHealthStatusType, FPlanLimitationType, FPlanNameType, FProductAccessType, FResourceCategoryType, FStudentTeamStatusType, FTemplateCategoryType, FUserRoleType } from '../figma_app/191312';
 import { areColorsEqual, isColorDarkByLuminance, parseColor, whiteColor } from '../figma_app/191804';
-import { K as _$$K5, xS as _$$xS } from '../figma_app/193867';
+import { isRecentsAndSharingView, getSelectedViewUrl } from '../figma_app/193867';
 import { a6 as _$$a11 } from '../figma_app/198840';
 import { o as _$$o6 } from '../figma_app/198885';
 import { BU, jl, LK, SX, Xg } from '../figma_app/199513';
@@ -535,7 +535,7 @@ import { _ as _$$_7, S as _$$S9 } from '../figma_app/490799';
 import { clamp, range } from '../figma_app/492908';
 import { lT as _$$lT } from '../figma_app/494261';
 import { LinkPrimitive } from '../figma_app/496441';
-import { Y9 } from '../figma_app/502247';
+import { setRecentUserData } from '../figma_app/502247';
 import { $c, g2 as _$$g4, gr as _$$gr, lI as _$$lI, lV as _$$lV, mc as _$$mc, bS, FU, KH, qD, ye, Zn } from '../figma_app/502363';
 import { FC as _$$FC, BN } from '../figma_app/502422';
 import { getUserCurrency } from '../figma_app/514043';
@@ -736,7 +736,7 @@ function eO() {
   let t = z3();
   return jsx(SidebarRow, {
     onClick: () => {
-      e(_$$sf({
+      e(selectViewAction({
         view: 'recentsAndSharing'
       }));
       e(_$$Oe({
@@ -835,12 +835,12 @@ function e4(e) {
   return jsxs(Fragment, {
     children: [getFeatureFlags().file_browser_sidebar_semantic_html ? _ : m, l && jsx(e0, {
       openConnectedProjectsTab: () => {
-        r?.type === FOrganizationLevelType.TEAM ? t(_$$sf({
+        r?.type === FOrganizationLevelType.TEAM ? t(selectViewAction({
           view: 'teamAdminConsole',
           teamId: r?.key.parentId ?? '',
           teamAdminConsoleViewTab: DashboardSections.CONTENT,
           teamAdminConsoleViewSecondaryTab: MemberSections.CONNECTED_PROJECTS
-        })) : t(_$$sf({
+        })) : t(selectViewAction({
           view: 'orgAdminSettings',
           orgAdminSettingsViewTab: DashboardSection.CONTENT,
           orgAdminSettingsViewSecondaryTab: WorkspaceTab.CONNECTED_PROJECTS
@@ -911,7 +911,7 @@ function tt(e) {
       let e = c && _$$hX(c);
       if (r) {
         let e = DashboardSection.DASHBOARD;
-        t(_$$sf({
+        t(selectViewAction({
           view: 'orgAdminSettings',
           orgAdminSettingsViewTab: e
         }));
@@ -919,17 +919,17 @@ function tt(e) {
           clickedResourceType: 'orgAdminSettings'
         }));
       } else {
-        _ ? g ? t(_$$sf({
+        _ ? g ? t(selectViewAction({
           view: 'billingGroupDashboard',
           selectedTab: FRequestsStr.REQUESTS
-        })) : (t(_$$sf({
+        })) : (t(selectViewAction({
           view: 'licenseGroup',
           subView: UserGroupRole.ADMIN,
           licenseGroupId: e && groupsToReview.length > 0 ? groupsToReview[0].id : m,
           selectedTab: getGroupOrDefault(e && groupsToReview.length > 0 ? GroupType.MEMBERS : DefaultGroups[0])
         })), t(_$$Oe({
           clickedResourceType: 'licenseGroupAdminSettings'
-        }))) : f && (t(_$$sf({
+        }))) : f && (t(selectViewAction({
           view: 'workspace',
           subView: DUserRole.ADMIN,
           workspaceId: p[0].id,
@@ -1217,7 +1217,7 @@ function tH(e) {
     role: 'link',
     tabIndex: 0,
     onClick: () => {
-      t(_$$sf({
+      t(selectViewAction({
         view: 'org',
         orgId: r.id,
         orgViewTab: _$$X.HOME
@@ -1257,7 +1257,7 @@ function rp(e, t, r, a) {
       repo: a
     }));
   }
-  r(j7({
+  r(showDropdownThunk({
     type: a,
     data: {
       resource: {
@@ -1316,7 +1316,7 @@ function rh(e) {
       }),
       source: ShareContext.FAVORITED_FILE_CONTEXT_MENU
     }));
-    t(_$$oB());
+    t(hideDropdownAction());
   }), ...rf(!_, () => getI18nString('sidebar.share'), () => {
     DF('share');
     t(showModalHandler({
@@ -1327,7 +1327,7 @@ function rh(e) {
       }
     }));
   }), ...rf(!0, () => getI18nString('tile.dropdown.show_in_project'), () => {
-    if (DF('show_in_project'), t(_$$sf({
+    if (DF('show_in_project'), t(selectViewAction({
       view: 'folder',
       folderId: e.folderId
     })), t(_$$an()), n.fileRepoId) {
@@ -1372,7 +1372,7 @@ function rx(e) {
     t(_$$S({
       url: r
     }));
-    t(_$$oB());
+    t(hideDropdownAction());
   })];
   return jsx(noop, {
     items: s,
@@ -1397,7 +1397,7 @@ function rb(e) {
         url: r
       }));
     }
-    t(_$$oB());
+    t(hideDropdownAction());
   })];
   return jsx(noop, {
     items: s,
@@ -1420,7 +1420,7 @@ function rv(e) {
     t(_$$S({
       url: r
     }));
-    t(_$$oB());
+    t(hideDropdownAction());
   })];
   return jsx(noop, {
     items: s,
@@ -1443,7 +1443,7 @@ function ry(e) {
     t(_$$S({
       url: r
     }));
-    t(_$$oB());
+    t(hideDropdownAction());
   })];
   return jsx(noop, {
     items: s,
@@ -1480,7 +1480,7 @@ function rj(e) {
       width: 1,
       height: 1
     };
-    t(j7({
+    t(showDropdownThunk({
       type: rm.FAVORITED_TEAM_CONTEXT_MENU,
       data: {
         teamId: o.id,
@@ -1588,7 +1588,7 @@ function rR(e) {
       width: 1,
       height: 1
     };
-    t(j7({
+    t(showDropdownThunk({
       type: rm.FAVORITED_FILE_CONTEXT_MENU,
       data: {
         fileKey: d.key,
@@ -1745,7 +1745,7 @@ function rL(e) {
       width: 1,
       height: 1
     };
-    t(j7({
+    t(showDropdownThunk({
       type: rm.FAVORITED_PROJECT_CONTEXT_MENU,
       data: {
         projectId: r.id,
@@ -1945,7 +1945,7 @@ function rV(e) {
   let c = useCallback((e, r) => {
     let a = r.workspace;
     LP(a?.id, FEntityType.WORKSPACE, r.sidebarSectionId ?? void 0, _$$vg);
-    a && t(_$$sf({
+    a && t(selectViewAction({
       view: 'workspace',
       subView: DUserRole.DIRECTORY,
       workspaceId: a.id,
@@ -1963,7 +1963,7 @@ function rV(e) {
       width: 1,
       height: 1
     };
-    t(j7({
+    t(showDropdownThunk({
       type: rm.FAVORITED_WORKSPACE_CONTEXT_MENU,
       data: {
         workspaceId: l.id,
@@ -2476,7 +2476,7 @@ function rq(e) {
             width: 1,
             height: 1
           };
-          t(j7({
+          t(showDropdownThunk({
             type: tk,
             data: {
               customSection: e.section,
@@ -2529,7 +2529,7 @@ function rq(e) {
               'aria-expanded': !!k,
               'aria-label': getI18nString('favorited_resources.settings_tooltip'),
               'onClick': r => {
-                k ? t(_$$oB()) : S.current && t(j7({
+                k ? t(hideDropdownAction()) : S.current && t(showDropdownThunk({
                   type: tk,
                   data: {
                     targetRect: S.current.getBoundingClientRect(),
@@ -2968,7 +2968,7 @@ function ad({
   return n && r && l ? jsx(SidebarRow, {
     isSelected: o,
     onClick: () => {
-      t(_$$sf({
+      t(selectViewAction({
         view: 'org',
         orgId: r,
         orgViewTab: _$$X.HOME
@@ -3061,7 +3061,7 @@ function ag(e) {
       dataTestId: 'admin-settings-link',
       dataOnboardingKey: af,
       onClick: () => {
-        t(_$$sf({
+        t(selectViewAction({
           view: 'teamAdminConsole',
           teamId: r,
           isProTeam: c.isProTeam,
@@ -3832,7 +3832,7 @@ function sL() {
     name: _$$e7.COMMUNITY_MOVED_TO_RESOURCE_HUB_BANNER,
     children: jsx('div', {
       className: 'x15dj09p',
-      children: jsxs(_$$cV, {
+      children: jsxs(BannerInline, {
         icon: jsx(_$$U4, {}),
         variant: 'default',
         onDismiss: () => {
@@ -3840,7 +3840,7 @@ function sL() {
             [w3]: !0
           }));
         },
-        children: [jsx(_$$Q2, {
+        children: [jsx(BannerMessage, {
           title: getI18nString('community.resource_hub.a_new_place_to_explore_community'),
           children: jsx('div', {
             className: 'x1n0bwc9',
@@ -3875,7 +3875,7 @@ function sU() {
   let e = useDispatch();
   let t = () => {
     trackEventAnalytics('community_browser_sidebar_action_clicked');
-    e(_$$sf({
+    e(selectViewAction({
       view: 'communityHub',
       subView: 'searchAndBrowse',
       data: getDefaultBrowseOptions()
@@ -3938,7 +3938,7 @@ function sH(e) {
   let l = r.view === 'teamFeed';
   return jsx(SidebarRow, {
     onClick: () => {
-      t(_$$sf({
+      t(selectViewAction({
         view: 'teamFeed'
       }));
       t(_$$Oe({
@@ -3990,7 +3990,7 @@ function sJ() {
     children: jsx(SidebarRow, {
       isSelected: t,
       onClick: () => {
-        e(_$$sf({
+        e(selectViewAction({
           view: 'deletedFiles'
         }));
         e(_$$Oe({
@@ -4486,7 +4486,7 @@ function iN(e) {
       let t = e.getState();
       let r = getPermissionsState(t);
       let a = vp(r.user, r.currentUserOrgId, r.currentTeamId);
-      a && Y9(a.userId, _$$d5(t.selectedView), a.orgId, void 0, a.teamId);
+      a && setRecentUserData(a.userId, _$$d5(t.selectedView), a.orgId, void 0, a.teamId);
     }, [e]);
   }();
   let _ = _$$n() || r.view === 'litmus';
@@ -4933,10 +4933,10 @@ function nn(e) {
       'onClick': () => {
         if (r.current) {
           if (n) {
-            t(_$$oB());
+            t(hideDropdownAction());
             return;
           }
-          t(j7({
+          t(showDropdownThunk({
             type: e.dropdownKey,
             data: {
               targetRect: r.current.getBoundingClientRect()
@@ -5012,7 +5012,7 @@ function nf() {
       items: [{
         displayText: getI18nString('workspace_view.toolbar.admin_settings'),
         onClick: () => {
-          e(_$$sf({
+          e(selectViewAction({
             view: 'workspace',
             subView: DUserRole.ADMIN,
             workspaceId: r.workspace.id,
@@ -5367,7 +5367,7 @@ function nM({
 }) {
   let n = useDispatch();
   let o = useCallback((e, t) => {
-    n(_$$sf({
+    n(selectViewAction({
       view: 'user',
       userId: t.id,
       userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -5610,7 +5610,7 @@ function nU(e) {
       removeHeader: !0,
       members: n.map(e => e.baseOrgUser?.user).filter(e => !!e),
       onMemberClick: (e, r) => {
-        t(_$$sf({
+        t(selectViewAction({
           view: 'user',
           userId: r.id,
           userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -10290,10 +10290,10 @@ function cF({
 }) {
   return jsx('div', {
     className: 'x19y5rnk xb3r6kr',
-    children: jsxs(Cs, {
+    children: jsxs(BannerFullWidth, {
       variant: 'brand',
       icon: jsx(_$$U4, {}),
-      children: [jsx(_$$Q2, {
+      children: [jsx(BannerMessage, {
         title: getI18nString('community.search.search_in_community_banner.title'),
         children: getI18nString('community.search.search_in_community_banner.description')
       }), jsx(_$$N4, {
@@ -10411,7 +10411,7 @@ function cD() {
       tab: e
     }, r);
   }, [t, r, n]);
-  return n.status !== 'loading' && t ? (m || e(_$$sf({
+  return n.status !== 'loading' && t ? (m || e(selectViewAction({
     view: 'recentsAndSharing'
   })), jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB,
@@ -11359,7 +11359,7 @@ function uy({
     deletedFiles: !0,
     trashedFolders: !0
   }, e.view, useCallback(e => {
-    t(_$$sf({
+    t(selectViewAction({
       view: e
     }));
   }, [t]));
@@ -11666,7 +11666,7 @@ function uJ(e) {
     }), !!o && jsx('div', {
       className: _$$s.flex.justifyEnd.wFull.$,
       children: jsx(ButtonWide, {
-        onClick: () => t(_$$sf({
+        onClick: () => t(selectViewAction({
           view: 'teamAdminConsole',
           teamId: e.team.id,
           teamAdminConsoleViewTab: DashboardSections.BILLING
@@ -11706,7 +11706,7 @@ function u1({
     currentPlanFilter: s,
     currentSharedByFilter: i,
     viewMode: void 0 !== n ? n ? 'list' : 'grid' : void 0
-  })), _$$K5(a) && r(T5({
+  })), isRecentsAndSharingView(a) && r(T5({
     index: t
   })), desktopAPIInstance && trackEventAnalytics('Open File Click', {
     fileKey: e.file.key,
@@ -11997,7 +11997,7 @@ function me({
         return;
       }
       if (l != null) {
-        if (r(_$$oB()), e.type === _$$nb.OFFLINE_FILE) {
+        if (r(hideDropdownAction()), e.type === _$$nb.OFFLINE_FILE) {
           r(NA({
             file: e.file,
             openNewFileIn: _$$ai.NEW_TAB,
@@ -12020,7 +12020,7 @@ function me({
       let m = s.currentUserOrgId;
       let _ = s.currentTeamId;
       let p = a.view === 'recentsAndSharing' || a.view === 'folder' ? a : void 0;
-      r(_$$c6({
+      r(setLastVisitedPlan({
         planId: m || _,
         planType: m ? OrganizationType.ORG : OrganizationType.TEAM
       }));
@@ -12037,7 +12037,7 @@ function me({
               key: e.file.key,
               editorType: e.file.editorType || void 0
             }
-          }, f) : r(_$$sf({
+          }, f) : r(selectViewAction({
             view: 'fullscreen',
             fileKey: e.file.key,
             editorType: _$$z0.getIsExtension() ? FEditorType.DevHandoff : e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
@@ -12050,7 +12050,7 @@ function me({
               key: e.file.key,
               editorType: e.file.editorType
             }
-          }, f) : r(_$$sf({
+          }, f) : r(selectViewAction({
             view: 'fullscreen',
             fileKey: e.file.key,
             editorType: e.file.editorType ? mapFileTypeToEditorType(e.file.editorType) : FEditorType.Design,
@@ -12066,7 +12066,7 @@ function me({
               editorType: g.editor_type || void 0
             },
             nodeId: e.prototype.page_id
-          }, f) : r(_$$sf({
+          }, f) : r(selectViewAction({
             view: 'prototype',
             file: g,
             nodeId: e.prototype.page_id,
@@ -12082,7 +12082,7 @@ function me({
               file: {
                 key: a
               }
-            }, f) : r(_$$sf({
+            }, f) : r(selectViewAction({
               view: 'fullscreen',
               fileKey: a,
               editorType: FEditorType.Design,
@@ -13204,7 +13204,7 @@ function m3(e, t, r) {
     i = r ? n.billing === EZ.CHARGE_IMMEDIATELY ? renderI18nText('payments.org_past_due_on_payment', {
       invoice: jsx('a', {
         onClick: () => {
-          t?.(_$$sf({
+          t?.(selectViewAction({
             view: 'orgAdminSettings',
             orgAdminSettingsViewTab: DashboardSection.BILLING
           }));
@@ -13367,7 +13367,7 @@ function m9(e, t, r, i, n, l) {
         }),
         cta: y ? getI18nString('payments.manage_plan') : null,
         onClickCta: y ? () => {
-          i?.(_$$sf({
+          i?.(selectViewAction({
             view: 'teamAdminConsole',
             teamId: r,
             teamAdminConsoleViewTab: DashboardSections.SETTINGS
@@ -14144,7 +14144,7 @@ let _b = registerModal(e => {
       userInitiated: !0
     })));
   };
-  let v = () => _$$k6.deleteAllPersonalDrafts().then(() => n(VisualBellActions.enqueue({
+  let v = () => UserAPIHandlers.deleteAllPersonalDrafts().then(() => n(VisualBellActions.enqueue({
     message: getI18nString('file_browser.draft_delete_modal.async_delete_drafts_scheduled')
   }))).catch(() => n(VisualBellActions.enqueue({
     message: getI18nString('file_browser.draft_delete_modal.async_delete_drafts_scheduled_error')
@@ -14260,9 +14260,9 @@ let _b = registerModal(e => {
 }, 'DraftDeleteModal');
 function _j() {
   return jsx('div', {
-    children: jsxs(Cs, {
+    children: jsxs(BannerFullWidth, {
       variant: 'warn',
-      children: [jsx(_$$Q2, {
+      children: [jsx(BannerMessage, {
         title: renderI18nText('file_browser.drafts_to_move.move_your_drafts_by_august_21'),
         children: renderI18nText('file_browser.drafts_to_move.pre_migration_banner_description')
       }), jsx(_$$N4, {
@@ -14275,9 +14275,9 @@ function _j() {
 }
 function _T() {
   return jsx('div', {
-    children: jsxs(Cs, {
+    children: jsxs(BannerFullWidth, {
       variant: 'warn',
-      children: [jsx(_$$Q2, {
+      children: [jsx(BannerMessage, {
         title: renderI18nText('file_browser.drafts_to_move.migration_will_begin_shortly'),
         children: renderI18nText('file_browser.drafts_to_move.last_chance_to_move_any_files')
       }), jsx(_$$N4, {
@@ -14838,7 +14838,7 @@ function _B({
   return jsx(J5, {
     text: e.name,
     onClick: r => {
-      s(_$$sf({
+      s(selectViewAction({
         view: 'org',
         orgId: e.id,
         orgViewTab: _$$X.HOME
@@ -14879,7 +14879,7 @@ function _$({
   return jsx(J5, {
     text: e.name,
     onClick: a => {
-      n(_$$sf({
+      n(selectViewAction({
         view: 'team',
         teamId: e.id
       }));
@@ -15870,7 +15870,7 @@ function p$(e) {
     }),
     onClick: a => {
       a.stopPropagation();
-      r.current && t(j7({
+      r.current && t(showDropdownThunk({
         type: jU,
         data: {
           targetRect: _.getBoundingClientRect(),
@@ -15885,7 +15885,7 @@ function p$(e) {
       className: U()(_$$s.flex.itemsCenter.colorIcon.$, HM),
       ref: r,
       onClick: r => {
-        e.dropdownKey && _ && t(j7({
+        e.dropdownKey && _ && t(showDropdownThunk({
           type: e.dropdownKey,
           data: {
             targetRect: _?.getBoundingClientRect()
@@ -16225,22 +16225,22 @@ function p8({
     if (h || x) {
       if (c?.team) {
         let e = c.team.id;
-        u(_$$sf({
+        u(selectViewAction({
           view: 'team',
           teamId: e
         }));
       } else {
-        u(_$$sf({
+        u(selectViewAction({
           view: 'recentsAndSharing'
         }));
       }
     }
-    b && c.plan && c.plan.key.parentId && (c.plan.tier === FPlanNameType.PRO ? u(_$$sf({
+    b && c.plan && c.plan.key.parentId && (c.plan.tier === FPlanNameType.PRO ? u(selectViewAction({
       view: 'abandonedDraftFiles',
       abandonedDraftFolderId: c.id,
       planId: c.plan.key.parentId,
       adminPlanType: OrganizationType.TEAM
-    })) : c.plan.key.type === FOrganizationLevelType.ORG && u(_$$sf({
+    })) : c.plan.key.type === FOrganizationLevelType.ORG && u(selectViewAction({
       view: 'abandonedDraftFiles',
       abandonedDraftFolderId: c.id,
       planId: c.plan.key.parentId,
@@ -16420,7 +16420,7 @@ function p3({
       key: iq.VIEW_LIBRARIES,
       displayText: getI18nString('org_view.view_libraries'),
       onClick: () => {
-        t(_$$sf({
+        t(selectViewAction({
           view: 'org',
           orgId: e,
           orgViewTab: _$$X.LIBRARIES
@@ -16566,7 +16566,7 @@ function fu({
     }).href,
     className: _$$Be,
     onClick: r => {
-      r.metaKey || (r.preventDefault(), t(_$$sf({
+      r.metaKey || (r.preventDefault(), t(selectViewAction({
         view: 'communityHub',
         subView: 'handle',
         handle: e
@@ -16587,7 +16587,7 @@ function fm({
     label: getI18nString('org_home_view_meta.admins'),
     members: t,
     onMemberClick: (e, t) => {
-      r(_$$sf({
+      r(selectViewAction({
         view: 'user',
         userId: t.id,
         userViewTab: InterProfileType.INTERNAL_PROFILE
@@ -16717,7 +16717,7 @@ function fv(e) {
     [_$$X.CONNECTED_PROJECTS]: !0
   };
   let l = e => {
-    t(_$$sf({
+    t(selectViewAction({
       view: 'org',
       orgId: n ?? '',
       orgViewTab: e
@@ -17233,7 +17233,7 @@ function fD() {
       kind: _$$A9.BUTTON,
       key: iq.VIEW_COMMUNITY_PROFILE,
       onClick: () => {
-        e(_$$sf({
+        e(selectViewAction({
           view: 'communityHub',
           subView: 'handle',
           handle: t.community_profile_handle
@@ -19173,7 +19173,7 @@ function ha(e) {
   }, [t, l]);
   let g = e => {
     e === ViewTypeEnum.SHARED_FILES ? trackEventAnalytics('file_browser_shared_files') : e === ViewTypeEnum.SHARED_PROJECTS && trackEventAnalytics('file_browser_shared_projects');
-    r(_$$sf({
+    r(selectViewAction({
       view: 'recentsAndSharing',
       tab: e
     }));
@@ -19278,7 +19278,7 @@ function hi(e) {
       data: {
         tab: hs(accountModalTab)
       }
-    })), t(_$$sf({
+    })), t(selectViewAction({
       view: 'recentsAndSharing'
     }))) : emailPolicyToUnsubscribeFrom && emailPolicyToUnsubscribeFrom !== m && (_$$z12.updateUserCommunicationPreference({
       channelType: 'email',
@@ -19299,7 +19299,7 @@ function hi(e) {
         }
       }));
       t(VisualBellActions.dequeue({}));
-    }), t(_$$sf({
+    }), t(selectViewAction({
       view: 'recentsAndSharing'
     })));
   }, [accountModalTab, u, emailPolicyToUnsubscribeFrom, m, t]);
@@ -19478,7 +19478,7 @@ function hf(e) {
     }),
     onClick: a => {
       a.stopPropagation();
-      r.current && t(j7({
+      r.current && t(showDropdownThunk({
         type: jU,
         data: {
           targetRect: _.getBoundingClientRect(),
@@ -19493,7 +19493,7 @@ function hf(e) {
       className: U()(_$$s.flex.itemsCenter.colorIcon.$, HM),
       ref: r,
       onClick: r => {
-        e.dropdownKey && _ && t(j7({
+        e.dropdownKey && _ && t(showDropdownThunk({
           type: e.dropdownKey,
           data: {
             targetRect: _?.getBoundingClientRect()
@@ -19781,7 +19781,7 @@ function hD({
     let a = r === FProductAccessType.WHITEBOARD ? FFileType.WHITEBOARD : FFileType.DESIGN;
     a === FFileType.DESIGN ? e = C.designAccountTypeRequest?.status === 'pending' : a === FFileType.WHITEBOARD && (e = C.whiteboardAccountTypeRequest?.status === 'pending');
     !0 === e && _(FlashActions.flash(getI18nString('team_view.request_upgrade.request_already_sent')));
-    _(_$$sf({
+    _(selectViewAction({
       view: 'team',
       teamId: l.id,
       teamViewTab: t
@@ -19856,7 +19856,7 @@ function hM({
       teamId: e ? e.id : '',
       teamViewTab: t
     };
-    C(_$$sf(r));
+    C(selectViewAction(r));
   }, [C, e]);
   let R = useSelector(e => e.avatarEditorState);
   let A = useSelector(e => e.teamRoleRequests);
@@ -19897,7 +19897,7 @@ function hM({
     }));
   };
   let D = () => {
-    C(_$$oB());
+    C(hideDropdownAction());
     G();
     k(NavigationRoutes.SETTINGS);
   };
@@ -20143,7 +20143,7 @@ function hM({
         return u;
       }(e, C, o, P, t, A, e => {
         e.stopPropagation();
-        C(_$$oB());
+        C(hideDropdownAction());
         $();
         k(NavigationRoutes.MEMBERS);
       }, B, !!y && w || T),
@@ -20195,7 +20195,7 @@ function hq(e, t = {}) {
   let a = useStore();
   let n = useMemo(() => ({
     metaKey: e => {
-      let t = _$$xS(a.getState(), e);
+      let t = getSelectedViewUrl(a.getState(), e);
       r(V3({
         url: t
       }));
@@ -20213,7 +20213,7 @@ function hq(e, t = {}) {
         return;
       }
     }
-    r(_$$sf(s));
+    r(selectViewAction(s));
   }, [n, r, e]);
 }
 let h0 = 'org_user_meta_content--teamsHeader--1p4jT org_user_meta_content--sectionHeader--snmkw text--fontPos13--xW8hS text--_fontBase--QdLsd';
@@ -20436,7 +20436,7 @@ let h3 = connect((e, t) => ({
 }))(e => {
   let [t, r] = useState(null);
   useEffect(() => {
-    _$$k6.getTeams({
+    UserAPIHandlers.getTeams({
       userId: e.userId,
       orgId: e.orgId || void 0
     }).then(e => {
@@ -20718,7 +20718,7 @@ let xr = e => {
     [InterProfileType.INTERNAL_PROFILE]: !0,
     [InterProfileType.INTERNAL_PROFILE_POSTS]: !0
   }, V, e => {
-    r(_$$sf({
+    r(selectViewAction({
       view: 'user',
       userId: t,
       userViewTab: e
@@ -20871,7 +20871,7 @@ let xs = {
     $$css: !0
   }
 };
-let xi = (e, t, r) => e && e.id === r ? Promise.resolve(e) : _$$k6.getUser({
+let xi = (e, t, r) => e && e.id === r ? Promise.resolve(e) : UserAPIHandlers.getUser({
   userId: r
 }).then(e => e.data.meta).catch(e => {
   t(FlashActions.error('Failed to get user', 5e3));
@@ -20923,7 +20923,7 @@ function xd(e) {
     orgUser: a,
     profileHandle: r.community_profile_handle || null,
     on404Redirect: a ? () => {
-      t(_$$sf({
+      t(selectViewAction({
         view: 'user',
         userId: e.userId,
         orgId: l,
@@ -20992,7 +20992,7 @@ function xm({
     text: e.name,
     parentBackgroundColor: r,
     onClick: r => {
-      s(_$$sf({
+      s(selectViewAction({
         view: 'org',
         orgId: e.id,
         orgViewTab: _$$X.HOME
@@ -21200,7 +21200,7 @@ function x_({
           children: [jsx(J5, {
             text: getI18nString('general.admin'),
             onClick: () => {
-              e(_$$sf({
+              e(selectViewAction({
                 view: 'orgAdminSettings',
                 orgAdminSettingsViewTab: DashboardSection.DASHBOARD
               }));
@@ -21209,7 +21209,7 @@ function x_({
           }), jsx(J5, {
             text: getI18nString('org_dashboard.settings'),
             onClick: () => {
-              e(_$$sf({
+              e(selectViewAction({
                 view: 'orgAdminSettings',
                 orgAdminSettingsViewTab: DashboardSection.SETTINGS
               }));
@@ -21333,7 +21333,7 @@ function x_({
             children: jsx(J5, {
               text: getI18nString('fig_feed.feed'),
               onClick: () => {
-                e(_$$sf({
+                e(selectViewAction({
                   view: 'teamFeed'
                 }));
               },
@@ -21360,7 +21360,7 @@ function x_({
           children: [jsx(J5, {
             text: getI18nString('general.admin'),
             onClick: () => {
-              e(_$$sf({
+              e(selectViewAction({
                 view: 'orgAdminSettings',
                 orgAdminSettingsViewTab: DashboardSection.DASHBOARD
               }));
@@ -21369,7 +21369,7 @@ function x_({
           }), jsx(J5, {
             text: getI18nString('org_dashboard.settings'),
             onClick: () => {
-              e(_$$sf({
+              e(selectViewAction({
                 view: 'orgAdminSettings',
                 orgAdminSettingsViewTab: DashboardSection.SETTINGS
               }));
@@ -21449,7 +21449,7 @@ function xT({
   let l = useSelector(e => e.payment);
   let d = useDispatch();
   let c = useCallback(() => {
-    n && d(_$$sf({
+    n && d(selectViewAction({
       view: 'team',
       teamId: n.id
     }));
@@ -21475,7 +21475,7 @@ function xT({
     })) : e ? d(Vm({
       teamId: n.id,
       showBreadcrumbs: !0
-    })) : d(_$$sf({
+    })) : d(selectViewAction({
       view: 'teamUpgrade',
       teamFlowType: UpgradeAction.UPGRADE_EXISTING_TEAM,
       teamId: n.id,
@@ -21663,7 +21663,7 @@ function xM(e) {
       onClick: e => {
         e.stopPropagation();
         e.preventDefault();
-        r ? t(_$$oB()) : t(j7({
+        r ? t(hideDropdownAction()) : t(showDropdownThunk({
           type: xD
         }));
       },
@@ -21739,14 +21739,14 @@ function xU({
       orgAccess: f,
       dontRedirect: !!n.onSubmitReturnToPrevView,
       ignoreCurrentPlan: h
-    })), n.onSubmitReturnToPrevView && m(_$$sf(getPreviousSelectedView() || {
+    })), n.onSubmitReturnToPrevView && m(selectViewAction(getPreviousSelectedView() || {
       view: 'recentsAndSharing'
     }))) : m(FlashActions.error(getI18nString('team_creation.your_team_name_cannot_be_empty')));
   };
   let w = !(t && !h) && !n.onSubmitReturnToPrevView;
   let j = b ? null : jsx(_$$X7, {
     onClick: () => {
-      m(_$$sf(getPreviousSelectedView() || {
+      m(selectViewAction(getPreviousSelectedView() || {
         view: 'recentsAndSharing'
       }));
     },
@@ -21875,14 +21875,14 @@ function xz({
       }));
       l(!1);
     }).catch(e => {
-      e.status !== 400 && (n(_$$sf({
+      e.status !== 400 && (n(selectViewAction({
         view: 'recentsAndSharing'
       })), n(FlashActions.error(`${e.data.message}`)));
       l(!1);
     });
   }, [n, d]);
   let u = () => {
-    n(_$$sf({
+    n(selectViewAction({
       view: 'recentsAndSharing'
     }));
   };
@@ -21992,7 +21992,7 @@ function xq(e) {
         }
       }));
     } else {
-      l(_$$sf({
+      l(selectViewAction({
         view: 'team',
         teamId: e.selectedView.teamId
       }));
@@ -22006,7 +22006,7 @@ function xq(e) {
   };
   let _ = e => {
     n(e);
-    l(_$$oB());
+    l(hideDropdownAction());
   };
   let p = e.selectedView.teamId;
   let f = useRef(null);
@@ -22033,7 +22033,7 @@ function xq(e) {
                 orgId: null
               },
               view: e.selectedView.previousView || s
-            })) : l(_$$sf(e.selectedView.previousView || s));
+            })) : l(selectViewAction(e.selectedView.previousView || s));
           },
           children: jsx(SvgComponent, {
             svg: _$$A16,
@@ -22430,7 +22430,7 @@ export function $$bo0() {
         view: {
           view: 'allProjects'
         }
-      })) : t(_$$sf({
+      })) : t(selectViewAction({
         view: 'team',
         teamId: a
       })));

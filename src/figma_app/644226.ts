@@ -7,23 +7,23 @@ import { v4, AC, Pt } from "../figma_app/655139";
 import { CODEGEN_MEASUREMENT_UNITS } from "../905/515076";
 import { sQ } from "../905/191741";
 import { j6 } from "../figma_app/243025";
-import { SF, wQ, Em, gc, Bs } from "../figma_app/120227";
+import { useCodegenPreferencesSettings, getLanguageUnitLabel, isCodegenSupportedForLanguage, getCodeExtensionPreferences, useUpdateCodeExtensionPreferences } from "../figma_app/120227";
 import { showModalHandler } from "../905/156213";
 import { z4 } from "../905/37051";
 import { Q } from "../figma_app/152461";
 import { v as _$$v } from "../905/50227";
 export function $$f0(e) {
-  let t = SF();
+  let t = useCodegenPreferencesSettings();
   let r = sQ();
   let f = z4.getIsExtension();
   let E = function (e) {
     let t = v4();
     let r = e ?? t;
     let s = AC(r);
-    let c = wQ(r);
-    let h = Em(r);
-    let m = gc(r.id);
-    let g = Bs();
+    let c = getLanguageUnitLabel(r);
+    let h = isCodegenSupportedForLanguage(r);
+    let m = getCodeExtensionPreferences(r.id);
+    let g = useUpdateCodeExtensionPreferences();
     let f = useDispatch();
     return useMemo(() => {
       let e = [];

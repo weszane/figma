@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import { useSelector } from "react-redux";
-import { o as _$$o } from "../905/808775";
+import { useMappedEditorTypeA } from "../905/808775";
 import { selectCurrentFile } from "../figma_app/516028";
-import { zg } from "../figma_app/193867";
-import { $A } from "../905/862883";
+import { isWorkshopModeActive } from "../figma_app/193867";
+import { FDocumentType } from "../905/862883";
 export function $$d1() {
   let e = !!selectCurrentFile()?.org;
-  let t = useSelector(e => zg(e.selectedView) && !e.user);
+  let t = useSelector(e => isWorkshopModeActive(e.selectedView) && !e.user);
   return !!(e && !t);
 }
 export function $$c0(e, t = 20) {
@@ -25,13 +25,13 @@ export function $$c0(e, t = 20) {
 }
 let u = (e, t) => (e.name || "").toLowerCase().includes(t.toLowerCase()) || (e.handle || "").toLowerCase().includes(t.toLowerCase()) || (e.email || "").toLowerCase().split("@")[0].includes(t.toLowerCase());
 export function $$p2(e) {
-  let t = useSelector(e => e.recentlyUsed.faceStamps[$A.FigJam]);
+  let t = useSelector(e => e.recentlyUsed.faceStamps[FDocumentType.FigJam]);
   return useMemo(() => t.map(e => e.user).filter(t => !e || u(t, e)), [t, e]);
 }
 export function $$h3() {
   let e = useSelector(e => e.recentlyUsed.faceStamps);
   let t = $$d1();
-  let i = _$$o();
+  let i = useMappedEditorTypeA();
   return useMemo(() => i && t ? e.figjam.map(e => e.user) : [], [i, e, t]);
 }
 export const U5 = $$c0;

@@ -14,7 +14,7 @@ import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { SvgComponent } from "../905/714743";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { Rw } from "../figma_app/91703";
 import { BE } from "../figma_app/844435";
 import { fullscreenValue } from "../figma_app/455680";
@@ -239,11 +239,11 @@ class K extends RecordingPureComponent {
           break;
         case KeyCodes.ESCAPE:
           e.preventDefault();
-          this.props.dispatch(oB());
+          this.props.dispatch(hideDropdownAction());
           break;
         case KeyCodes.P:
         case KeyCodes.FORWARD_SLASH:
-          i && (e.preventDefault(), this.props.dispatch(oB()));
+          i && (e.preventDefault(), this.props.dispatch(hideDropdownAction()));
           break;
         case KeyCodes.EQUALS:
         case KeyCodes.DASH:
@@ -478,7 +478,7 @@ class K extends RecordingPureComponent {
       C3(t);
     }
     this.ranWithParameters = !0;
-    this.props.dispatch(oB());
+    this.props.dispatch(hideDropdownAction());
   }
   renderResults() {
     if ("middle" === this.state.activeParameterIndex) return jsxs("div", {

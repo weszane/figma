@@ -6,7 +6,7 @@ import { ButtonSecondary, ButtonBasePrimary, ButtonBasePrimaryTracked } from "..
 import { v as _$$v } from "../905/755077";
 import { renderI18nText } from "../905/303541";
 import { aP, vQ } from "../figma_app/530167";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { popModalStack, hideModal } from "../905/156213";
 import { s0, ZO } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
@@ -1484,7 +1484,7 @@ let w = class e extends Component {
       this.props.dispatch(popModalStack());
     };
     this.navigateToProfileWithHandle = e => {
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         view: "communityHub",
         subView: "handle",
         handle: this.state.newProfileHandle

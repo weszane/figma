@@ -1,4 +1,4 @@
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { parsePxNumber } from "../figma_app/783094";
 import { tui, LdP, IuL, MJh } from "../figma_app/27776";
 let s = parsePxNumber(tui);
@@ -6,10 +6,10 @@ let $$o1 = parsePxNumber(LdP);
 let l = parsePxNumber(IuL);
 let d = parsePxNumber(MJh);
 export function $$c0() {
-  return "whiteboard" === lg() ? s : $$o1;
+  return "whiteboard" === getCurrentFileType() ? s : $$o1;
 }
 export function $$u2() {
-  return "whiteboard" === lg() ? l : d;
+  return "whiteboard" === getCurrentFileType() ? l : d;
 }
 export function $$p3() {
   return "whiteboard" === document.body.getAttribute("data-editor-theme") ? s : $$o1;

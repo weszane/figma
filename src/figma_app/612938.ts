@@ -11,7 +11,7 @@ import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { selectCurrentFile } from "../figma_app/516028";
 import { f$, n4, hY } from "../figma_app/603466";
 import { wH } from "../figma_app/680166";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { i as _$$i } from "../905/46262";
 import { getCurrentGRAtom, handlePluginError, pluginState } from "../905/753206";
 let y = class e {
@@ -37,7 +37,7 @@ let y = class e {
     let {
       plugin
     } = t;
-    if (!$A(debugState.getState().selectedView)) return bT(runPluginArgs);
+    if (!isFullscreenDevHandoffView(debugState.getState().selectedView)) return bT(runPluginArgs);
     if (plugin.manifest.containsWidget) throw Error("Cannot enqueue a plugin that contains a widget");
     let o = this.createTask(onStart);
     let l = this.findExistingRunState(e);

@@ -19,7 +19,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { useCurrentUserOrg } from "../905/845253";
 import { getObservableValue } from "../figma_app/84367";
 import { CommunityPageType } from "../figma_app/45218";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { cd } from "../905/381612";
 import { Ye } from "../figma_app/32128";
 import { JT } from "../figma_app/632248";
@@ -76,7 +76,7 @@ export function $$V1() {
     ignore: [g, Tc("slides-template-button"), Tc(_$$G), Tc(_$$l)]
   }), useEffect(() => {
     m(cd.fetchTemplatesMetadata({
-      key: $A.Slides,
+      key: FDocumentType.Slides,
       orgId: f?.id
     }));
     m(sz({

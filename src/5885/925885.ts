@@ -13,7 +13,7 @@ import { H as _$$H } from "../5885/54359";
 import { VB } from "../figma_app/361035";
 import { _l } from "../figma_app/976345";
 import { createOptimistThunk } from "../905/350402";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { trackTeamEvent } from "../figma_app/314264";
 import { P8 } from "../figma_app/475472";
@@ -31,7 +31,7 @@ let $$R2 = createOptimistThunk((e, {
   teamName: i,
   previousView: a
 }) => {
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "promoReview",
     teamId: t,
     teamName: i,
@@ -76,7 +76,7 @@ let $$k1 = createOptimistThunk((e, t) => {
       view: {
         view: "allProjects"
       }
-    })) : e.dispatch(sf({
+    })) : e.dispatch(selectViewAction({
       view: "team",
       teamId
     }));
@@ -92,7 +92,7 @@ let $$k1 = createOptimistThunk((e, t) => {
       view: {
         view: "recentsAndSharing"
       }
-    })) : e.dispatch(sf({
+    })) : e.dispatch(selectViewAction({
       view: "recentsAndSharing"
     }));
     e.dispatch(FlashActions.error(getI18nString("payments.pro_trial.start_pro_trial_error")));
@@ -218,7 +218,7 @@ let $$D3 = createOptimistThunk((e, {
           }
         }));
       } else {
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           view: "team",
           teamId: a.id
         }));
@@ -280,7 +280,7 @@ let $$D3 = createOptimistThunk((e, {
             nodeId: i
           } : {})
         };
-        e.dispatch(sf({
+        e.dispatch(selectViewAction({
           ...r,
           teamToMoveFileToOnNavigate: a.id,
           editorType: FEditorType.Design
@@ -298,7 +298,7 @@ let $$D3 = createOptimistThunk((e, {
           nodeId: i
         } : {})
       };
-      e.dispatch(sf({
+      e.dispatch(selectViewAction({
         ...r,
         teamToMoveFileToOnNavigate: a.id,
         editorType: FEditorType.Design
@@ -311,7 +311,7 @@ let $$D3 = createOptimistThunk((e, {
       let a = new URLSearchParams(customHistory.location.search);
       let r = a.get("onCompleteRedirectFileKey");
       let o = a.get("onCompleteRedirectNodeId");
-      e.dispatch(sf({
+      e.dispatch(selectViewAction({
         ...X,
         view: "teamUpgrade",
         teamFlowType: t ? UpgradeAction.UPGRADE_EXISTING_TEAM : UpgradeAction.CREATE_AND_UPGRADE,

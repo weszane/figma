@@ -103,7 +103,7 @@ import { i as _$$i } from "../905/542104";
 import { generateRecordingKey } from "../figma_app/878298";
 import { fullscreenValue } from "../figma_app/455680";
 import { z as _$$z } from "../905/454433";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { rb } from "../figma_app/151869";
 import { GV } from "../figma_app/159296";
 import { P as _$$P2 } from "../figma_app/223272";
@@ -515,7 +515,7 @@ function tr(e) {
 }
 function to() {
   let e = rb();
-  let t = lg();
+  let t = getCurrentFileType();
   let n = useCallback(() => {
     fullscreenValue.triggerAction("edit-make-from-design");
   }, []);

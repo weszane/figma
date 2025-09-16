@@ -5,7 +5,7 @@ import { T as _$$T } from "../905/2124";
 import { useAtomWithSubscription, useAtomValueAndSetter, createLocalStorageAtom } from "../figma_app/27355";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { Ay } from "../figma_app/432652";
 import { B } from "../905/969273";
 import { sZ } from "../figma_app/948389";
@@ -106,7 +106,7 @@ export function $$M0() {
         return;
     }
   }, [slidesTextResizeCallback, shiftAllNodesOutOfSlideMargins]);
-  let W = ow();
+  let W = isWhiteboardFileType();
   let {
     longRunningAction,
     onRun,

@@ -1,12 +1,12 @@
 import { createActionCreator } from "../905/73481";
-import { b1, KW } from "../905/890368";
+import { patchOrgs, putOrgs } from "../905/890368";
 let $$a5 = createActionCreator("ORGS_BATCH_PUT");
 let $$s3 = createActionCreator("ORGS_LOCK_ACCOUNT");
 let $$o1 = createActionCreator("ORGS_UNLOCK_ORGS");
 let $$l4 = createActionCreator("ORGS_LOCK_ORGS");
 let $$d2 = createActionCreator("ORGS_SET_ORG_ID");
-let $$c0 = b1;
-let $$u6 = KW;
+let $$c0 = patchOrgs;
+let $$u6 = putOrgs;
 export const F6 = $$c0;
 export const K5 = $$o1;
 export const _P = $$d2;

@@ -13,7 +13,7 @@ import { VisualBellActions } from "../905/302958";
 import { sf } from "../905/34809";
 import { p as _$$p } from "../905/282607";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
-import { sf as _$$sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { batchPutFileAction } from "../figma_app/78808";
 import { yJ, bE, Kc } from "../figma_app/598926";
 import { showModalHandler } from "../905/156213";
@@ -263,7 +263,7 @@ let $$Z10 = createOptimistThunk(async (e, {
         folderData: r
       }));
     } catch (r) {
-      404 === r.status || 403 === r.status ? e.dispatch(_$$sf({
+      404 === r.status || 403 === r.status ? e.dispatch(selectViewAction({
         view: "resourceUnavailable",
         resourceType: EntityType.PROJECT
       })) : r.status >= 400 && r.status < 500 ? e.dispatch(Kc({
@@ -368,10 +368,10 @@ let $$er11 = liveStoreInstance.Mutation(({
           destination: t?.name ?? "Recents"
         }),
         action: () => {
-          t ? n.dispatch(_$$sf({
+          t ? n.dispatch(selectViewAction({
             view: "team",
             teamId: t.id
-          })) : n.dispatch(_$$sf({
+          })) : n.dispatch(selectViewAction({
             view: "recentsAndSharing"
           }));
         }

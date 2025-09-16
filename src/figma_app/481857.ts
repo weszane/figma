@@ -1,9 +1,9 @@
 import { useState, useCallback, useMemo, createContext, useContext, useEffect } from "react";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { T4 } from "../figma_app/151869";
 export function $$s0() {
   let [e, t] = useState({});
-  let r = m0();
+  let r = isDevHandoffEditorType();
   let s = useCallback((e, r) => {
     t(t => ({
       ...(t || {}),
@@ -22,7 +22,7 @@ export function $$s0() {
 export let $$o2 = createContext({});
 export function $$l1(e, t, r) {
   let a = useContext($$o2)?.setCopyValue;
-  let s = m0() ? t : r;
+  let s = isDevHandoffEditorType() ? t : r;
   useEffect(() => {
     if (a && s) {
       a(s, e);

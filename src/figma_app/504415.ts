@@ -17,7 +17,7 @@ import { fk } from "../figma_app/618433";
 import { popModalStack } from "../905/156213";
 import { D, m as _$$m } from "../905/852057";
 import { selectCurrentFile } from "../figma_app/516028";
-import { _b } from "../figma_app/841351";
+import { enterVersionHistoryMode } from "../figma_app/841351";
 import { registerModal } from "../905/102752";
 import { B } from "../905/867899";
 import { u as _$$u, R } from "../905/375517";
@@ -84,7 +84,7 @@ let x = class e extends RecordingComponent {
       this.onDescriptionChange(e.target.value);
     };
     this.goHistoryMode = () => {
-      this.props.isHistoryMode || (this.props.dispatch(_b()), this.saveHistoryInputs(), this.hideModal());
+      this.props.isHistoryMode || (this.props.dispatch(enterVersionHistoryMode()), this.saveHistoryInputs(), this.hideModal());
     };
     this.state = {
       label: "",

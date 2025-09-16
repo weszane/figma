@@ -1,7 +1,7 @@
 import { DE, pB, pg } from '../905/34809';
 import { hideModal } from '../905/156213';
 import { V } from '../905/190576';
-import { H } from '../905/202181';
+import { sessionApiInstance } from '../905/202181';
 import { y as _$$y } from '../905/235145';
 import { delay } from '../905/236856';
 import { sendMessageToParent } from '../905/298920';
@@ -20,13 +20,13 @@ import { liveStoreInstance } from '../905/713695';
 import { P as _$$P } from '../905/724705';
 import { isVsCodeEnvironment } from '../905/858738';
 import { XHR } from '../905/910117';
-import { j7, oB, os, sf } from '../905/929976';
-import { Np, xS } from '../figma_app/193867';
+import { showDropdownThunk, hideDropdownAction, setSessionState, selectViewAction } from '../905/929976';
+import { selectedViewToPath, getSelectedViewUrl } from '../figma_app/193867';
 import { e5, Mk } from '../figma_app/297957';
 import { trackFileBrowserFileClicked, trackUserEvent } from '../figma_app/314264';
 import { openInBrowser } from '../figma_app/415217';
 import { isIntegrationContext } from '../figma_app/469876';
-import { Y9 } from '../figma_app/502247';
+import { setRecentUserData } from '../figma_app/502247';
 import { allViews, UpgradeAction } from '../figma_app/707808';
 import { d9 } from '../figma_app/740025';
 import { UpgradeSteps } from '../figma_app/831101';
@@ -34,7 +34,7 @@ import { desktopAPIInstance } from '../figma_app/876459';
 import { q_ } from '../figma_app/997907';
 let $$F24 = createOptimistThunk((e, t) => {
   e.getState().modalShown?.type != null && e.dispatch(hideModal());
-  e.getState().dropdownShown?.type != null && e.dispatch(oB());
+  e.getState().dropdownShown?.type != null && e.dispatch(hideDropdownAction());
   e.dispatch(DE({
     show: !0
   }));
@@ -46,8 +46,8 @@ let $$F24 = createOptimistThunk((e, t) => {
   q_.addDependency('FILE_BROWSER_SET_LOADING', t?.until || 'pending');
 });
 let $$j18 = createOptimistThunk(e => {
-  H.getState().then(t => {
-    e.dispatch(os(t.data.meta));
+  sessionApiInstance.getState().then(t => {
+    e.dispatch(setSessionState(t.data.meta));
     e.dispatch($$U23(t.data.meta));
   }).catch(t => {
     let r = t.data?.message || getI18nString('file_browser.file_browser_actions.error_on_data_update');
@@ -65,7 +65,7 @@ let $$B11 = createOptimistThunk((e, t) => {
   let n = t.view || {
     view: 'recentsAndSharing'
   };
-  let i = Np({
+  let i = selectedViewToPath({
     ...r,
     currentUserOrgId: t.workspace.orgId,
     currentTeamId: t.workspace.teamId || null
@@ -77,7 +77,7 @@ let $$B11 = createOptimistThunk((e, t) => {
   }
   function d() {
     let e = d9(r.selectedView) && !d9(n);
-    desktopAPIInstance && e && customHistory.redirect(dR(Np({
+    desktopAPIInstance && e && customHistory.redirect(dR(selectedViewToPath({
       ...r,
       currentUserOrgId: t.workspace.orgId,
       currentTeamId: t.workspace.teamId || null
@@ -110,7 +110,7 @@ let $$B11 = createOptimistThunk((e, t) => {
     newTeamId: t.workspace.teamId,
     teamId: r.currentTeamId
   });
-  (t.workspace.orgId && !i.includes(t.workspace.orgId) || t.workspace.teamId && !i.includes(t.workspace.teamId) || d9(n) && !t.workspace.orgId && r.currentUserOrgId) && Y9(t.workspace.userId, d9(n), t.workspace.orgId, void 0, t.workspace.teamId);
+  (t.workspace.orgId && !i.includes(t.workspace.orgId) || t.workspace.teamId && !i.includes(t.workspace.teamId) || d9(n) && !t.workspace.orgId && r.currentUserOrgId) && setRecentUserData(t.workspace.userId, d9(n), t.workspace.orgId, void 0, t.workspace.teamId);
   isIntegrationContext() ? sendMessageToParent({
     action: 'reloadPage',
     payload: {
@@ -143,24 +143,24 @@ let $$G26 = createOptimistThunk(e => {
   });
 });
 let $$V21 = createOptimistThunk((e, t) => {
-  e.getState().dropdownShown || e.dispatch(j7(t));
+  e.getState().dropdownShown || e.dispatch(showDropdownThunk(t));
 });
 let $$H16 = createOptimistThunk((e, t) => {
   let r = e.getState().dropdownShown;
-  r?.type === t.type ? e.dispatch(oB()) : e.dispatch(j7(t));
+  r?.type === t.type ? e.dispatch(hideDropdownAction()) : e.dispatch(showDropdownThunk(t));
 });
 let $$z9 = createOptimistThunk((e, t) => {
   isVsCodeEnvironment() ? openInBrowser(t.url) : customHistory.redirect(t.url, '_blank');
 });
 export function $$W15(e, t = {}) {
-  return sf({
+  return selectViewAction({
     view: 'folder',
     folderId: e,
     ...t
   });
 }
 export function $$K13(e, t = {}, r) {
-  return sf({
+  return selectViewAction({
     view: 'team',
     teamId: e,
     ...t,
@@ -168,7 +168,7 @@ export function $$K13(e, t = {}, r) {
   });
 }
 export function $$Y14() {
-  return sf({
+  return selectViewAction({
     view: 'limitedTeamSharedProjects'
   });
 }
@@ -258,7 +258,7 @@ let $$et3 = createOptimistThunk((e, {
 }) => {
   let o = e.getState();
   if (r) {
-    let t = xS(o, {
+    let t = getSelectedViewUrl(o, {
       view: 'teamCreation',
       ignoreCurrentPlan: s
     });
@@ -272,7 +272,7 @@ let $$et3 = createOptimistThunk((e, {
     teams: Object.values(o.teams),
     rolesByTeamId: o.roles.byTeamId
   })) {
-    e.dispatch(sf({
+    e.dispatch(selectViewAction({
       view: 'teamUpgrade',
       teamFlowType: UpgradeAction.CREATE_AND_UPGRADE,
       teamId: null,
@@ -283,7 +283,7 @@ let $$et3 = createOptimistThunk((e, {
     }));
     return;
   }
-  o.user && Mk(o.user.id, Object.values(o.teams), o.roles.byTeamId) ? e.dispatch(sf({
+  o.user && Mk(o.user.id, Object.values(o.teams), o.roles.byTeamId) ? e.dispatch(selectViewAction({
     view: 'teamUpgrade',
     teamFlowType: UpgradeAction.CREATE,
     teamId: null,
@@ -291,7 +291,7 @@ let $$et3 = createOptimistThunk((e, {
     previousView: t,
     isEduTeam: a,
     ignoreCurrentPlan: s
-  })) : e.dispatch(sf({
+  })) : e.dispatch(selectViewAction({
     view: 'teamCreation',
     previousView: t,
     onSubmitReturnToPrevView: i,
@@ -326,7 +326,7 @@ let $$ec2 = createOptimistThunk(async (e, t) => {
 });
 let $$eu1 = createOptimistThunk((e, t) => {
   let r = e.getState().selectedView;
-  r.view === 'orgSelfServe' ? e.dispatch(sf({
+  r.view === 'orgSelfServe' ? e.dispatch(selectViewAction({
     view: r.view,
     step: r.step,
     orgMigrated: !0,

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { K } from "../905/498709";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { q } from "../1556/198651";
 let $$a0 = "FILE_BROWSER_ACCOUNT_SWITCHER_DROPDOWN";
 let {
@@ -12,12 +12,12 @@ export function $$u1() {
   let e = useDispatch();
   return {
     open: () => {
-      q() ? open() : e(j7({
+      q() ? open() : e(showDropdownThunk({
         type: $$a0
       }));
     },
     close: () => {
-      q() ? close() : e(oB());
+      q() ? close() : e(hideDropdownAction());
     }
   };
 }

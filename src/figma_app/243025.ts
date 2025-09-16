@@ -12,7 +12,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { IOS as _$$p, IOS_UIKIT, ANDROID, ANDROID_XML, WEB, CSSBUILDER } from "../905/359509";
 import { V0, ls } from "../figma_app/755395";
-import { $s, aq, gc, Bs } from "../figma_app/120227";
+import { resolveLanguageUnit, getPluginInfo, getCodeExtensionPreferences, useUpdateCodeExtensionPreferences } from "../figma_app/120227";
 import { KD } from "../figma_app/975811";
 import { Um } from "../905/848862";
 import { registerModal } from "../905/102752";
@@ -64,7 +64,7 @@ export function $$N1({
 export function $$C0({
   codeLanguage: e
 }) {
-  let t = $s(e);
+  let t = resolveLanguageUnit(e);
   switch (e.id) {
     case _$$p:
     case IOS_UIKIT:
@@ -82,9 +82,9 @@ export function $$C0({
 export let $$w2 = registerModal(function (e) {
   let t = v4();
   let [r, a] = useState(t);
-  let E = aq(r);
-  let y = gc(r.id);
-  let b = Bs();
+  let E = getPluginInfo(r);
+  let y = getCodeExtensionPreferences(r.id);
+  let b = useUpdateCodeExtensionPreferences();
   let I = useModalManager(e);
   let A = useCallback(e => {
     e && b(r, E, {

@@ -71,7 +71,7 @@ import { handleAtomEvent } from "../905/502364";
 import { l as _$$l } from "../905/152724";
 import { t as _$$t2 } from "../5430/535653";
 import { tx as _$$tx2 } from "../figma_app/395505";
-import { oB, j7, sf } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
 import { selectCurrentUser } from "../905/372672";
 import { KindEnum } from "../905/129884";
 import { H as _$$H } from "../5430/997712";
@@ -1496,7 +1496,7 @@ function rP(e) {
   let s = !!(t && t.type === N9);
   let a = useDispatch();
   let l = useCallback(() => {
-    a(oB());
+    a(hideDropdownAction());
   }, [a]);
   useEffect(() => (window.addEventListener("scroll", l, !1), () => {
     window.removeEventListener("scroll", l, !1);
@@ -1507,7 +1507,7 @@ function rP(e) {
       onClick: s => {
         s.stopPropagation();
         let i = r.current;
-        t ? l() : i && a(j7({
+        t ? l() : i && a(showDropdownThunk({
           type: N9,
           data: {
             profile: e.profile,
@@ -2078,7 +2078,7 @@ function se({
         customHistory.push(getProfileRouteHref(this.props.profile.profile_handle, UserProfileTab.SAVES));
       };
       this.showFollowsModal = e => {
-        this.props.dispatch(sf({
+        this.props.dispatch(selectViewAction({
           ...this.props.currentSelectedView,
           profileTab: e
         }));

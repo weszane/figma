@@ -6,7 +6,7 @@ import { atom, useAtomValueAndSetter } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { jm } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
-import { my } from "../figma_app/976749";
+import { getEditorTypeOrNull } from "../figma_app/976749";
 import { selectUser } from "../905/372672";
 import { FEditorType } from "../figma_app/53721";
 let h = atom("hidden");
@@ -19,7 +19,7 @@ let $$b10 = 320;
 export function $$T0() {
   let [e, t] = useAtomValueAndSetter(h);
   let r = getFeatureFlags().in_product_help_and_learning;
-  let i = my() === FEditorType.Design;
+  let i = getEditorTypeOrNull() === FEditorType.Design;
   let l = !!r && i;
   let d = l ? e : "hidden";
   let c = useCallback(() => {

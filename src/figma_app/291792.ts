@@ -42,7 +42,7 @@ import { cD } from "../figma_app/598018";
 import { f6, ai } from "../figma_app/915202";
 import { Yh } from "../figma_app/357047";
 import { C as _$$C } from "../figma_app/444297";
-import { E3, lg } from "../figma_app/976749";
+import { getSelectedEditorType, getCurrentFileType } from "../figma_app/976749";
 import { $ as _$$$ } from "../905/47975";
 import { c4, fS, TJ } from "../figma_app/805925";
 export function $$J1({
@@ -86,7 +86,7 @@ export function $$Z2() {
     let r = _$$d();
     let a = selectCurrentFile();
     let s = FC();
-    let o = E3();
+    let o = getSelectedEditorType();
     let l = useSelector(e => e.mirror.appModel.topLevelMode);
     let d = useSelector(e => e.mirror.appModel.multiplayerSessionState);
     let c = cD() || null;
@@ -130,7 +130,7 @@ function Q({
   let h = function ({
     from: e
   }) {
-    let t = lg();
+    let t = getCurrentFileType();
     let r = useDispatch();
     let h = selectCurrentFile();
     let g = h?.currentPlanUser?.draftsFolderId ?? void 0;

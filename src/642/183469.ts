@@ -29,10 +29,10 @@ import { Point } from "../905/736624";
 import { V as _$$V2 } from "../905/506207";
 import { P as _$$P } from "../905/347284";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { Rb } from "../figma_app/8833";
 import { i as _$$i } from "../figma_app/85949";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { E as _$$E } from "../905/95280";
@@ -604,7 +604,7 @@ class ez extends RecordingPureComponent {
         clientX,
         clientY
       } = t;
-      this.props.dispatch(j7({
+      this.props.dispatch(showDropdownThunk({
         type: Rb,
         data: {
           clientX,
@@ -1268,7 +1268,7 @@ function eW(e) {
   let y = useSelector(e => e.mirror.objectsPanelRowRebuildCounter);
   let b = useSelector(e => e.mirror.appModel.temporarilyExpandedInstanceLayers);
   let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
-  let j = m0();
+  let j = isDevHandoffEditorType();
   let v = useCanAccessFullDevMode();
   let S = _$$E();
   let k = getSingletonSceneGraph();

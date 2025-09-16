@@ -88,7 +88,7 @@ import { vG } from '../figma_app/938628';
 import { L as _$$L } from '../figma_app/940186';
 import { dP, m9 } from '../figma_app/947348';
 import { T as _$$T } from '../figma_app/962636';
-import { Em, ow, vn } from '../figma_app/976749';
+import { isDesignFileType, isWhiteboardFileType, isIllustrationEditorType } from '../figma_app/976749';
 import { Wg, ZU } from '../figma_app/986347';
 import { kk, OU } from '../figma_app/986594';
 import { f$, LF } from '../figma_app/998062';
@@ -664,7 +664,7 @@ function tr({
   let v = _$$s2(!1);
   let A = useRef(null);
   let x = useSetAtom(_$$h);
-  let N = vn();
+  let N = isIllustrationEditorType();
   let C = jw();
   useEffect(() => {
     x(A);
@@ -699,11 +699,11 @@ function tr({
   let Q = selectCurrentFile();
   let ea = aV();
   let es = isIntegrationContext();
-  let eo = Em();
+  let eo = isDesignFileType();
   let el = sO();
   let ed = useIsFullscreenSitesView();
   let ep = editMode === LayoutTabType.COMMENTS || editMode === LayoutTabType.PREVIEW || editMode === LayoutTabType.BRANCHING || topLevelMode === ViewType.HISTORY || topLevelMode === ViewType.PREVIEW || topLevelMode === ViewType.DEV_HANDOFF || topLevelMode === ViewType.BRANCHING;
-  let em = ow();
+  let em = isWhiteboardFileType();
   let eg = !!Q?.isTryFile && !q && !ea && es;
   let ef = $$ta8(O, U);
   let eE = ef.reduce((e, t) => e + t.length, 0);
@@ -861,7 +861,7 @@ export function $$ti7(e, t) {
   let {
     showTransformModifiersSelectionActions
   } = useContext(_$$Q);
-  let x = vn();
+  let x = isIllustrationEditorType();
   let N = useMemo(() => JQ({
     isIllustrationMode: x,
     resetSubmenu: r,
@@ -889,7 +889,7 @@ export function $$ta8(e, t) {
   return useMemo(() => e.map(e => e.reduce((e, r) => t.includes(r) ? e : r.type === ZU.CUSTOM_ACTION && r.dataTestId === e5 ? (r.getTitle = () => getI18nString('fullscreen_actions.create-symbol'), e.concat(r)) : r.type === ZU.FLYOUT ? e.concat(r.actions) : e.concat(r), [])), [e, t]);
 }
 export function $$ts6(e) {
-  let t = vn();
+  let t = isIllustrationEditorType();
   let r = jw();
   return useMemo(() => {
     let n = !1;

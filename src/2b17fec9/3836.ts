@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { getI18nString } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { HubTypeEnum } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
@@ -15,7 +15,7 @@ export function $$m0(e) {
   let m = i?.type === kt;
   let f = e.resourceType === HubTypeEnum.WIDGET ? getI18nString("community.plugins.create_new_widget") : getI18nString("community.plugins.create_new_plugin");
   let _ = useCallback(e => {
-    m ? t(oB()) : t(j7({
+    m ? t(hideDropdownAction()) : t(showDropdownThunk({
       type: kt,
       data: {
         targetRect: e.currentTarget?.getBoundingClientRect()

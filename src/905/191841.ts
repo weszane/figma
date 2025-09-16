@@ -13,7 +13,7 @@ import { A as _$$A } from "../905/351112";
 import { W as _$$W } from "../figma_app/101188";
 import { C as _$$C } from "../905/314082";
 import { mc } from "../905/820960";
-import { sf, oB } from "../905/929976";
+import { selectViewAction, hideDropdownAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { GR } from "../figma_app/330108";
 import { trackTeamEvent } from "../figma_app/314264";
@@ -106,7 +106,7 @@ export function $$P0(e) {
       clickedResourceType: "team",
       resourceIdOrKey: n.id
     }));
-    D(sf({
+    D(selectViewAction({
       view: "team",
       teamId: n.id
     }));
@@ -117,7 +117,7 @@ export function $$P0(e) {
     if (1 !== e.length) return;
     let t = e[0];
     if (!H.teams.data?.[t.id]?.canAdmin) return;
-    D(oB());
+    D(hideDropdownAction());
     let i = !!t.org_id;
     let n = e => {
       D(showModalHandler({

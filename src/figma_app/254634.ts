@@ -8,7 +8,7 @@ import { b as _$$b } from "../figma_app/517135";
 import { getI18nString } from "../905/303541";
 import { v4 } from "../figma_app/655139";
 import { Q } from "../905/217916";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { isInvalidValue, isValidValue } from "../905/216495";
 import { kl } from "../905/275640";
 import { Gp } from "../figma_app/646357";
@@ -28,7 +28,7 @@ export function $$$$N1() {
   let r = uQ();
   let n = Q();
   let c = v4();
-  let b = m0();
+  let b = isDevHandoffEditorType();
   let v = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKeyForStroke"));
   let A = useSelector(e => e.mirror.selectionProperties.styleIdForStrokeFill);
   let x = Fk((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
@@ -139,7 +139,7 @@ export function $$P0({
   noPadding: t,
   isSubsection: r
 }) {
-  let i = m0();
+  let i = isDevHandoffEditorType();
   let s = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
   let o = $$$$N1();
   let l = T4.useCopyAllStrokes(o);

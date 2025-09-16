@@ -14,7 +14,7 @@ import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
 import { getI18nString } from "../905/303541";
 import { wg, RP } from "../figma_app/770088";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { qN } from "../905/234821";
 import { Z7 } from "../figma_app/8833";
 import { U6 } from "../figma_app/591738";
@@ -204,7 +204,7 @@ let er = memo(function (e) {
       width: 0
     };
     let r = addRectOffset(s, o);
-    P(j7({
+    P(showDropdownThunk({
       type: Z7,
       data: {
         thread: n,

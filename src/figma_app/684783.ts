@@ -40,7 +40,7 @@ import { VisualBellActions } from "../905/302958";
 import { mT } from "../figma_app/976345";
 import { A as _$$A } from "../5132/237216";
 import { UU } from "../figma_app/770088";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { KindEnum } from "../905/129884";
 import { e0 } from "../905/696396";
 import { j as _$$j } from "../905/834956";
@@ -247,10 +247,10 @@ let ef = "hub_file_viewer--caret--LG-MD";
       tabIndex: 0,
       onClick: e => {
         if (e.stopPropagation(), s) {
-          t(oB());
+          t(hideDropdownAction());
           return;
         }
-        t(j7({
+        t(showDropdownThunk({
           type: r
         }));
       },
@@ -326,10 +326,10 @@ let ef = "hub_file_viewer--caret--LG-MD";
         tabIndex: 0,
         onClick: e => {
           if (e.stopPropagation(), a) {
-            r(oB());
+            r(hideDropdownAction());
             return;
           }
-          r(j7({
+          r(showDropdownThunk({
             type: s
           }));
         },
@@ -403,7 +403,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
           placeholderValue: `${Math.round(100 * t)}%`,
           submit: e => {
             m(e);
-            d(oB());
+            d(hideDropdownAction());
           },
           cancel: lQ
         })
@@ -455,10 +455,10 @@ let ef = "hub_file_viewer--caret--LG-MD";
       className: _$$s.bgTransparent.h100.$,
       onClick: e => {
         if (e.stopPropagation(), r) {
-          t(oB());
+          t(hideDropdownAction());
           return;
         }
-        t(j7({
+        t(showDropdownThunk({
           type: ec
         }));
       },

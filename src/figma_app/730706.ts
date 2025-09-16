@@ -6,7 +6,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { useLatestRef } from "../figma_app/922077";
 import { getI18nString } from "../905/303541";
-import { Em, ow } from "../figma_app/976749";
+import { isDesignFileType, isWhiteboardFileType } from "../figma_app/976749";
 import { YH } from "../figma_app/604494";
 import { ZU, Wg } from "../figma_app/986347";
 import { sO } from "../figma_app/21029";
@@ -18,12 +18,12 @@ export function $$f3() {
   if (e) return t;
 }
 export function $$E1() {
-  let e = Em();
+  let e = isDesignFileType();
   let t = b();
   if (getFeatureFlags().aip_tone_dial_fd && e) return t;
 }
 export function $$y0() {
-  let e = ow();
+  let e = isWhiteboardFileType();
   let t = b();
   if (e) return t;
 }

@@ -17,7 +17,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { L as _$$L } from "../3591/956338";
 import { isResourcePendingPublishing, getResourceTaglineOrDescription } from "../figma_app/777551";
 import { JZ, qR } from "../figma_app/696043";
-import { j7, oB, sf } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction, selectViewAction } from "../905/929976";
 import { showModalHandler, hideModal } from "../905/156213";
 import { Q7 } from "../905/15667";
 import { KE } from "../905/116101";
@@ -145,7 +145,7 @@ let eu = class e extends PureComponent {
     };
     this.tileDropdownType = this.isWidget ? e.DEVELOPMENT_PLUGIN_DROPDOWN : e.DEVELOPMENT_WIDGET_DROPDOWN;
     this.onContextMenu = e => {
-      this.props.dispatch(j7({
+      this.props.dispatch(showDropdownThunk({
         type: this.tileDropdownType,
         data: {
           type: "context",
@@ -158,7 +158,7 @@ let eu = class e extends PureComponent {
     this.shouldShowContextMenu = () => this.props.dropdownShown && this.props.dropdownShown.type === this.tileDropdownType && this.props.dropdownShown.data.localFileId === this.props.plugin.localFileId && "context" === this.props.dropdownShown.data.type;
     this.shouldShowPointingDropdown = () => null != this.props.dropdownShown && this.props.dropdownShown.type === this.tileDropdownType && this.props.dropdownShown.data.localFileId === this.props.plugin.localFileId && "pointing" === this.props.dropdownShown.data.type;
     this.onDotsClick = () => {
-      this.props.dispatch(j7({
+      this.props.dispatch(showDropdownThunk({
         type: this.tileDropdownType,
         data: {
           type: "pointing",
@@ -347,11 +347,11 @@ function eg(e) {
       onClick: e.onClick,
       onOptionsClick: i => {
         if (i.stopPropagation(), t) {
-          n(oB());
+          n(hideDropdownAction());
           return;
         }
         let l = s.current;
-        n(j7({
+        n(showDropdownThunk({
           type: lD,
           data: {
             localFileId: e.plugin.localFileId,
@@ -421,11 +421,11 @@ function eg(e) {
         onClick: e.onClick,
         onOptionsClick: () => {
           if (n) {
-            s(oB());
+            s(hideDropdownAction());
             return;
           }
           let i = l.current;
-          s(j7({
+          s(showDropdownThunk({
             type: lD,
             data: {
               pluginId: e.plugin.id,
@@ -447,7 +447,7 @@ function eg(e) {
       }), n && jsx(T9, {
         publishedResource: e.plugin,
         viewResource: () => {
-          s(sf({
+          s(selectViewAction({
             view: "communityHub",
             subView: "plugin",
             publishedPluginId: e.plugin.id
@@ -495,7 +495,7 @@ withTrackedClick(function ({
     className: i || m6,
     "data-plugin-id": e.id,
     onClick: i => {
-      i.metaKey || (i.preventDefault(), t?.(), s(sf({
+      i.metaKey || (i.preventDefault(), t?.(), s(selectViewAction({
         view: "communityHub",
         subView: "plugin",
         publishedPluginId: e.id

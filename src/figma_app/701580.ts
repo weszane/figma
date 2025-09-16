@@ -18,7 +18,7 @@ import { useCurrentFileKey } from "../figma_app/516028";
 import { a6, Ve, RD } from "../figma_app/198840";
 import { n as _$$n } from "../905/79930";
 import { CommunityPageType } from "../figma_app/45218";
-import { vt } from "../905/862883";
+import { ITemplateType } from "../905/862883";
 import { registerModal } from "../905/102752";
 import { Button } from "../905/521428";
 import { fG } from "../figma_app/973927";
@@ -567,7 +567,7 @@ function em(e) {
         case _$$n.TeamTemplate:
           J({
             templateIdentifier: {
-              type: vt.TeamTemplate,
+              type: ITemplateType.TeamTemplate,
               file_key: t.template.file_key
             },
             templateName: t.template.name,
@@ -577,7 +577,7 @@ function em(e) {
         case _$$n.TeamTemplateLg:
           J({
             templateIdentifier: {
-              type: vt.TeamTemplate,
+              type: ITemplateType.TeamTemplate,
               file_key: t.template.fileKey
             },
             templateName: t.template.name,

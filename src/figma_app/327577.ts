@@ -5,14 +5,14 @@ import { ce } from "../figma_app/347146";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { S as _$$S } from "../905/539306";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { uM } from "../905/738636";
 import { getNewFileConfig } from "../905/766303";
 import { ZG } from "../figma_app/840917";
 import { FFileType } from "../figma_app/191312";
 import { mapFileSummary } from "../figma_app/349248";
 import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
-import { xS } from "../figma_app/193867";
+import { getSelectedViewUrl } from "../figma_app/193867";
 import { w2 } from "../905/187165";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { ai, f6 } from "../figma_app/915202";
@@ -28,7 +28,7 @@ let x = createOptimistThunk((e, {
     selectedView
   } = e.getState();
   if ("fullscreen" === selectedView.view) {
-    e.dispatch(sf({
+    e.dispatch(selectViewAction({
       ...selectedView,
       viewport: t
     }));
@@ -48,7 +48,7 @@ let $$N6 = createOptimistThunk(e => {
     entryPoint: "desktop_new_tab"
   }));
   t = e.getState();
-  let n = xS(t, {
+  let n = getSelectedViewUrl(t, {
     view: "search",
     entryPoint: "desktop_new_tab",
     previousView: t.selectedView && (isIncludedView(t.selectedView) || isOrgView(t.selectedView)) ? t.selectedView : void 0
@@ -76,7 +76,7 @@ let $$R0 = createOptimistThunk((e, t) => {
     action: t.clickAction
   });
   e.dispatch(ky());
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "fullscreen",
     fileKey: i.key,
     editorType: mapFileTypeToEditorType(i.editor_type ?? FFileType.DESIGN)
@@ -90,7 +90,7 @@ let $$L2 = createOptimistThunk(async (e, t, {
     itemType: "prototype",
     fileKey: n.key
   });
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "prototype",
     file: mapFileSummary(n),
     nodeId: t.pageId,
@@ -105,7 +105,7 @@ let $$P1 = createOptimistThunk(async (e, t, {
     itemType: "file",
     fileKey: n.key
   });
-  e.dispatch(sf({
+  e.dispatch(selectViewAction({
     view: "fullscreen",
     fileKey: n.key,
     editorType: mapFileTypeToEditorType(n.editor_type ?? FFileType.DESIGN)

@@ -11,7 +11,7 @@ import { Fj } from "../figma_app/793429";
 import { Q } from "../905/217916";
 import { $Q } from "../figma_app/315578";
 import { LN } from "../figma_app/975811";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { Ku } from "../figma_app/740163";
 import { u as _$$u, hg } from "../figma_app/852050";
 import { useOpenFileLibraryKey } from "../figma_app/516028";
@@ -146,7 +146,7 @@ export function $$G1(e) {
   });
 }
 export function $$V3(e) {
-  let t = m0();
+  let t = isDevHandoffEditorType();
   let r = t && !e.disableDetailModalEntry;
   let a = useRef(null);
   let s = Ku();
@@ -352,7 +352,7 @@ export function $$H5(e, t, r) {
   let n = uQ();
   let i = Q();
   let a = v4();
-  let s = m0();
+  let s = isDevHandoffEditorType();
   let l = Ig();
   return e.map(e => {
     if (!e.color) return {

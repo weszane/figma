@@ -4,7 +4,7 @@ import { debugState } from "../905/407919";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { tf, Rd, Q6, $5 } from "../905/295427";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { n as _$$n } from "../905/347702";
 let u = z.object({
   userPromptRaw: z.string(),
@@ -40,7 +40,7 @@ export let $$_0 = new class {
     }) => this.FirstDraftKitKeyFromLibraryKeySchemaValidator.validate(async ({
       xr: t
     }) => await t.get("/api/first_draft/kit_key_from_library_key", APIParameterUtils.toAPIParameters({
-      file_key: U2(debugState?.getState().selectedView),
+      file_key: getFileKeyFromSelectedView(debugState?.getState().selectedView),
       library_key: e
     }), {
       headers: this.buildHeaders()
@@ -60,7 +60,7 @@ export let $$_0 = new class {
     };
   }
   getFirstDraftKitStatus() {
-    let e = U2(debugState?.getState().selectedView);
+    let e = getFileKeyFromSelectedView(debugState?.getState().selectedView);
     return this.FirstDraftKitStatusSchemaValidator.validate(async ({
       xr: t
     }) => await t.get(`/api/first_draft/kit_status/${e}`, null, {
@@ -75,7 +75,7 @@ export let $$_0 = new class {
     publishType: s,
     kitKey: o
   }) {
-    let c = U2(debugState?.getState().selectedView);
+    let c = getFileKeyFromSelectedView(debugState?.getState().selectedView);
     return this.FirstDraftPublishStatusSchemaValidator.validate(async ({
       xr: a
     }) => await a.post("/api/first_draft/kit_status", {
@@ -93,7 +93,7 @@ export let $$_0 = new class {
     }));
   }
   getFirstDraftAllKits() {
-    let e = U2(debugState?.getState().selectedView);
+    let e = getFileKeyFromSelectedView(debugState?.getState().selectedView);
     let t = debugState?.getState().currentUserOrgId;
     let r = debugState?.getState().currentTeamId;
     let i = {
@@ -111,7 +111,7 @@ export let $$_0 = new class {
     }));
   }
   getFirstDraftMatchGroup(e) {
-    let t = U2(debugState?.getState().selectedView);
+    let t = getFileKeyFromSelectedView(debugState?.getState().selectedView);
     return this.FirstDraftMatchGroupSchemaValidator.validate(async ({
       xr: r
     }) => await r.get("/api/first_draft/match_group", APIParameterUtils.toAPIParameters({
@@ -122,7 +122,7 @@ export let $$_0 = new class {
     }));
   }
   postFirstDraftMatchPresetModes(e) {
-    let t = U2(debugState?.getState().selectedView);
+    let t = getFileKeyFromSelectedView(debugState?.getState().selectedView);
     return this.FirstDraftMatchPresetModesSchemaValidator.validate(async ({
       xr: r
     }) => await r.post("/api/first_draft/match_preset_modes", {
@@ -165,7 +165,7 @@ export let $$_0 = new class {
     isLocal: t,
     kitKey: r
   }) {
-    let n = U2(debugState?.getState().selectedView);
+    let n = getFileKeyFromSelectedView(debugState?.getState().selectedView);
     return this.FirstDraftGenerateThemeV5SchemaValidator.validate(async ({
       xr: i
     }) => await i.post("/api/first_draft/generate_theme", {

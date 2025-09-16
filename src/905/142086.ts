@@ -5,7 +5,7 @@ import { PE } from '../905/15667';
 import { i as _$$i2 } from '../905/46262';
 import { B as _$$B } from '../905/55104';
 import { vb } from '../905/86266';
-import { k as _$$k3 } from '../905/93362';
+import { UserAPIHandlers } from '../905/93362';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
 import { f as _$$f2, r as _$$r2 } from '../905/136283';
@@ -19,7 +19,7 @@ import { f as _$$f } from '../905/287602';
 import { VisualBellActions } from '../905/302958';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { P as _$$P } from '../905/347284';
-import { Q as _$$Q } from '../905/363675';
+import { BannerMessage } from '../905/363675';
 import { F2 } from '../905/389382';
 import { z as _$$z } from '../905/404751';
 import { LazyInputForwardRef } from '../905/408237';
@@ -44,14 +44,14 @@ import { i as _$$i } from '../905/718764';
 import { s as _$$s2 } from '../905/761565';
 import { h as _$$h } from '../905/864281';
 import { K as _$$K2 } from '../905/899124';
-import { sf } from '../905/929976';
+import { selectViewAction } from '../905/929976';
 import { lQ } from '../905/934246';
 import { fileEntityDataMapper } from '../905/943101';
 import { TextWithTruncation } from '../905/984674';
 import { A as _$$A2 } from '../5724/142155';
 import { s as _$$s } from '../cssbuilder/589278';
 import { DestinationProjectsForTeam, MoveFileCurrentProject, MoveFileDestination, OrgUserDraftFolder, ProjectNameForFile } from '../figma_app/43951';
-import { $y } from '../figma_app/59509';
+import { BannerInsetModal } from '../figma_app/59509';
 import { $$, nR, vd } from '../figma_app/60079';
 import { Q as _$$Q2 } from '../figma_app/113686';
 import { APIParameterUtils, createNoOpValidator } from '../figma_app/181241';
@@ -608,7 +608,7 @@ let eR = registerModal(e => {
   let [te, tt] = useState(null);
   let [ti, tn] = useState(null);
   let tr = useCallback(async () => {
-    let e = await _$$k3.getPlans();
+    let e = await UserAPIHandlers.getPlans();
     e9(e.data.meta.teams);
     tt(e.data.meta.orgs);
     tn(e.data.meta.plans);
@@ -694,7 +694,7 @@ let eR = registerModal(e => {
     folderIdToOpen: n
   }) => {
     let r = () => {
-      n && t(sf({
+      n && t(selectViewAction({
         view: 'folder',
         folderId: n
       }));
@@ -800,9 +800,9 @@ let eR = registerModal(e => {
         minWidth: 400,
         disableClickOutsideToHide: !0,
         fixedTop: !0,
-        children: [eS?.isConnectedProject && jsx($y, {
+        children: [eS?.isConnectedProject && jsx(BannerInsetModal, {
           variant: 'default',
-          children: jsx(_$$Q, {
+          children: jsx(BannerMessage, {
             children: getI18nString('resource_connection.when_you_move_files_everyone_in_the_connected_project_can_access_them')
           })
         }), bannerToDisplay && jsx('div', {

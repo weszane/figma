@@ -8,7 +8,7 @@ import { sD, Xn } from '../905/429125';
 import { V } from '../905/735518';
 import { n as _$$n } from '../905/841238';
 import { Um } from '../905/848862';
-import { j7 } from '../905/929976';
+import { showDropdownThunk } from '../905/929976';
 import { cn } from '../905/959568';
 import { eM, Fv, Pp, wh, xb } from '../figma_app/164212';
 import { On, p1 } from '../figma_app/323320';
@@ -56,7 +56,7 @@ export function $$v3(e, t, r, n) {
   return useCallback(() => {
     if (t?.current) {
       if (hasExistingDefs && !n) {
-        s(j7({
+        s(showDropdownThunk({
           type: sD.concat('-', e),
           data: {
             nodeField: e,

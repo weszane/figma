@@ -18,7 +18,7 @@ import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { sV, DI, zx, dY } from "../figma_app/712525";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { BK } from "../905/848862";
 import { p8 } from "../figma_app/722362";
 import { b4, _V, kM } from "../figma_app/421886";
@@ -72,7 +72,7 @@ function D({
   let N = useAtomWithSubscription(yo);
   let A = useSelector(e => e.canvasSearch.filters);
   let L = useSelector(e => e.canvasSearch.mode);
-  let R = "whiteboard" === lg();
+  let R = "whiteboard" === getCurrentFileType();
   let D = useIsFullscreenSitesView();
   let F = useIsSelectedViewFullscreenCooper();
   let B = useMemo(() => {

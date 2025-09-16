@@ -17,7 +17,7 @@ import { SvgComponent } from "../905/714743";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModal, popModalStack } from "../905/156213";
 import { $$do, F1, Nw, ui, LN, Kq } from "../905/941249";
 import { S as _$$S } from "../1e926454/283343";
@@ -142,7 +142,7 @@ function D(e) {
         "aria-label": getI18nString("team_join_links.team_invite_link_settings"),
         onClick: () => {
           let e = n.current?.getBoundingClientRect();
-          o() ? t(oB()) : e && t(j7({
+          o() ? t(hideDropdownAction()) : e && t(showDropdownThunk({
             type: r,
             data: {
               targetRect: e
@@ -187,7 +187,7 @@ function M(e) {
       children: [jsxs(ButtonPrimitive, {
         onClick: a => {
           a.stopPropagation();
-          e.url && (e.dropdownShown ? t(oB()) : t(j7({
+          e.url && (e.dropdownShown ? t(hideDropdownAction()) : t(showDropdownThunk({
             type: r
           })));
         },

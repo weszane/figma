@@ -17,7 +17,7 @@ import { B as _$$B } from "../3276/578394";
 import { AE, Ik, E as _$$E } from "../9410/36414";
 import { FFileType } from "../figma_app/191312";
 import { Vq } from "../figma_app/979658";
-import { $A, vt } from "../905/862883";
+import { FDocumentType, ITemplateType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { WM } from "../905/838765";
 import { _ as _$$_ } from "../469e6e40/273550";
@@ -280,10 +280,10 @@ function G({
   let l = useCallback(() => {
     s(ay({
       currentUserId: r,
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       item: {
         id: e,
-        type: vt.WhiteboardTool
+        type: ITemplateType.WhiteboardTool
       }
     }));
   }, [r, s, e]);

@@ -32,7 +32,7 @@ import { J as _$$J2 } from "../905/896954";
 import { gH } from "../905/104173";
 import { allCategoriesQuery } from "../figma_app/188671";
 import { fy, wx, uX, Qi, Ij, gD, Dl, Vp, zn, R8, se, fd, pm } from "../figma_app/559491";
-import { oB, j7, sf } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
 import { s as _$$s2 } from "../905/58247";
 import { showModalHandler, popModalStack, hideModal } from "../905/156213";
 import { WX } from "../figma_app/350203";
@@ -40,7 +40,7 @@ import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { A as _$$A2 } from "../905/72153";
 import { trackGenericEvent } from "../figma_app/314264";
 import { D as _$$D, HN, oH } from "../figma_app/740025";
-import { o0, Ro, jY } from "../figma_app/564095";
+import { sendPublisherInvites, isAcceptedPublisher, isAnyPublisher } from "../figma_app/564095";
 import { j4, UU, of, f7, kN, Dd, $W, oB as _$$oB, xw } from "../figma_app/599979";
 import { D as _$$D2 } from "../905/274925";
 import { Ni } from "../figma_app/188152";
@@ -81,7 +81,7 @@ import { ConfirmationModal2 } from "../figma_app/918700";
 import { A as _$$A4 } from "../905/356410";
 import { NU } from "../figma_app/204891";
 import { A as _$$A5 } from "../905/567946";
-import { W as _$$W } from "../905/985740";
+import { versionHandlerInstance } from "../905/985740";
 import { assertNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
 import { J as _$$J3 } from "../905/125993";
@@ -335,7 +335,7 @@ function eZ(e) {
       ref: d,
       "aria-label": getI18nString("community.publishing.playground_file.tooltip"),
       onClick: () => {
-        l ? t(oB()) : t(j7({
+        l ? t(hideDropdownAction()) : t(showDropdownThunk({
           type: "PLAYGROUND_FILE_EDIT_DROPDOWN",
           data: {
             resourceId
@@ -362,7 +362,7 @@ function eZ(e) {
         children: renderI18nText("community.publishing.playground_file.dropdown.open_file")
       }), jsx(c$, {
         onClick: () => {
-          t(oB());
+          t(hideDropdownAction());
           e.removeFileCallback();
         },
         children: renderI18nText("community.publishing.playground_file.dropdown.remove")
@@ -375,7 +375,7 @@ let e0 = "plugin_publish_modal--successContentParagraph---3X81 publish_modal--su
 let e1 = liveStoreInstance.Query({
   fetch: async (e, {
     xr: t
-  }) => (await _$$W.getVersions({
+  }) => (await versionHandlerInstance.getVersions({
     fileKey: e
   })).data.meta.versions[0],
   enabled: e => "" !== e
@@ -492,7 +492,7 @@ function e5({
       }), p && jsx("button", {
         className: _$$s4.bgTransparent.cursorPointer.fontNormal.$,
         onClick: () => {
-          c(oB());
+          c(hideDropdownAction());
           o();
         },
         children: jsx(TextWithTruncation, {
@@ -507,7 +507,7 @@ function e5({
             undoButton: jsx("button", {
               className: _$$s4.bgTransparent.cursorPointer.$,
               onClick: () => {
-                c(oB());
+                c(hideDropdownAction());
                 l();
               },
               children: jsx(TextWithTruncation, {
@@ -1139,7 +1139,7 @@ function tM({
         } : e;
         let i = _$$Z(t);
         _(!0);
-        o0(d, i).then(({
+        sendPublisherInvites(d, i).then(({
           resource: e,
           errors: i
         }) => {
@@ -2405,7 +2405,7 @@ class iW extends Component {
           }));
         },
         hasFreemiumCode: e.hasPaymentsApi,
-        ...(!Ro(this.props.publishedPlugin, this.props.user.id) && (this.authorWillChange() || this.isFirstTimePublish()) ? {
+        ...(!isAcceptedPublisher(this.props.publishedPlugin, this.props.user.id) && (this.authorWillChange() || this.isFirstTimePublish()) ? {
           authorTeamId: "team_id" in e.author ? e.author.team_id : "",
           authorOrgId: "org_id" in e.author ? e.author.org_id : ""
         } : {})
@@ -2530,10 +2530,10 @@ class iW extends Component {
     this.resourceType = () => getPluginWidgetLabel(this.isWidget());
     this.hasChangedSubscriptionPrice = () => !!this.props.publishingState.metadata.isSubscription && !this.isFirstTimePublish() && this.state.originalPrice !== this.props.publishingState.metadata.price && null !== this.state.originalPrice;
     this.hideDropdownIfOpen = () => {
-      (this.props.dropdownShown?.type === _$$iu || this.props.dropdownShown?.type === Ql) && this.props.dispatch(oB());
+      (this.props.dropdownShown?.type === _$$iu || this.props.dropdownShown?.type === Ql) && this.props.dispatch(hideDropdownAction());
     };
     this.isAuthorSame = e => {
-      if (Ro(this.props.publishedPlugin, this.props.user.id)) return !0;
+      if (isAcceptedPublisher(this.props.publishedPlugin, this.props.user.id)) return !0;
       let t = e.metadata.author;
       if (!this.props.profile) {
         let e = of(this.props.permissionsState, this.props.publishedPlugin);
@@ -2905,7 +2905,7 @@ class iW extends Component {
       let e = [KM.PERMISSIONS];
       let t = this.props.user.id;
       let i = this.props.publishedPlugin;
-      (Ro(i, t ?? "") || i.creator?.id === t) && (e.push(KM.PUBLISH), e.push(KM.DATA_SECURITY));
+      (isAcceptedPublisher(i, t ?? "") || i.creator?.id === t) && (e.push(KM.PUBLISH), e.push(KM.DATA_SECURITY));
       this.state.allowedTabs !== e && this.setState({
         allowedTabs: e
       });
@@ -3144,7 +3144,7 @@ class iW extends Component {
           setRoleToPublishAs: this.onRoleChanged,
           publishedPlugin: this.props.publishedPlugin,
           isPaidResource: !!(this.isPaidResource() || this.props.publishingState.metadata.isPaid),
-          isUserPendingOrAcceptedPublisher: jY(this.props.publishedPlugin, this.props.user.id)
+          isUserPendingOrAcceptedPublisher: isAnyPublisher(this.props.publishedPlugin, this.props.user.id)
         }), jsx(_$$A16, {
           showToSCheckbox: xw(this.props.permissionsState),
           onOrgMsaChange: this.onOrgMsaChange,
@@ -3584,11 +3584,11 @@ let $$iq0 = registerModal(function (e) {
     }),
     primaryButton: {
       onClick: u ? () => {
-        e.plugin && (e.plugin.is_widget ? t(sf({
+        e.plugin && (e.plugin.is_widget ? t(selectViewAction({
           view: "communityHub",
           subView: "widget",
           widgetId: e.plugin.id
-        })) : t(sf({
+        })) : t(selectViewAction({
           view: "communityHub",
           subView: "plugin",
           publishedPluginId: e.plugin.id

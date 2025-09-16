@@ -1,9 +1,9 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, createElement, Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Yy } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
-import { $ as _$$$ } from "../905/692618";
+import { BannerInset } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
+import { BannerButton } from "../905/692618";
 import { jH } from "../figma_app/342207";
 import { Ay } from "@stylexjs/stylex";
 import { isDevEnvironment } from "../figma_app/169182";
@@ -65,7 +65,7 @@ import { b as _$$b2 } from "../905/946806";
 import eH from "../vendor/781591";
 import { RG } from "../figma_app/684446";
 import { returnSecond } from "../figma_app/465776";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { DashboardSection } from "../figma_app/650409";
 import { ColumnName } from "../figma_app/967319";
 import { H as _$$H } from "../469e6e40/325100";
@@ -290,10 +290,10 @@ function X() {
   }();
   if (!e || e.amount <= 0) return null;
   let t = new CurrencyFormatter(e.currency);
-  return jsx(Yy, {
+  return jsx(BannerInset, {
     variant: "brand",
     "data-testid": "account-credit-banner",
-    children: jsx(_$$Q, {
+    children: jsx(BannerMessage, {
       title: getI18nString("org_admin_settings.billing_banner_figjam.you_have_a_credit_amount", {
         accountCredit: t.formatMoney(e.amount, {
           showCents: !0
@@ -1030,7 +1030,7 @@ function eB(e) {
     }, eD()]
   });
 }
-let eG = withTrackedClick(_$$$);
+let eG = withTrackedClick(BannerButton);
 function ez(e) {
   let {
     onReactivateClick
@@ -1040,10 +1040,10 @@ function ez(e) {
   let o = useCallback(() => {
     onReactivateClick();
   }, [onReactivateClick]);
-  return jsxs(Yy, {
+  return jsxs(BannerInset, {
     variant: i ? "warn" : "danger",
     "data-testid": "plan-canceled-banner",
-    children: [jsx(_$$Q, {
+    children: [jsx(BannerMessage, {
       title: i ? getI18nString("plan_invoices.plan_canceled.title_v2", {
         planName: a?.name ?? "",
         expiresAt: e.expiresAt
@@ -1087,7 +1087,7 @@ function e3(e) {
     let a = RG();
     return useMemo(() => e.trueUpState === fx.LOCKED ? [] : e.trueUpState === fx.REVIEW && TV(e.invoice, !!e.orgHasAutomaticUpcomingInvoice) ? a ? [{
       key: "true_up_review_billing_groups",
-      renderContent: () => jsx(_$$$, {
+      renderContent: () => jsx(BannerButton, {
         onClick: () => {
           t(showModalHandler({
             type: _$$A2,
@@ -1101,9 +1101,9 @@ function e3(e) {
       })
     }] : [{
       key: "manage_seats",
-      renderContent: () => jsx(_$$$, {
+      renderContent: () => jsx(BannerButton, {
         onClick: () => {
-          t(sf({
+          t(selectViewAction({
             view: "orgAdminSettings",
             orgAdminSettingsViewTab: DashboardSection.MEMBERS,
             orgAdminMembersTabSort: {
@@ -1116,7 +1116,7 @@ function e3(e) {
       })
     }, {
       key: "true_up_review",
-      renderContent: () => jsx(_$$$, {
+      renderContent: () => jsx(BannerButton, {
         onClick: () => {
           t(showModalHandler({
             type: _$$H,
@@ -1178,9 +1178,9 @@ function e3(e) {
       trueUpState: e.trueUpState
     })
   };
-  return jsxs(Yy, {
+  return jsxs(BannerInset, {
     ...p,
-    children: [jsx(_$$Q, {
+    children: [jsx(BannerMessage, {
       "data-testid": "billing-banner-header",
       title: u,
       children: _
@@ -1212,11 +1212,11 @@ export function $$e80(e) {
     children: jsxs("div", {
       className: _$$s.flex.flexColumn.itemsStretch.gap24.$,
       "data-testid": "billing-overview-content",
-      children: [x && jsxs(Yy, {
-        children: [jsx(_$$Q, {
+      children: [x && jsxs(BannerInset, {
+        children: [jsx(BannerMessage, {
           title: "Development placeholder",
           children: "Development placeholder"
-        }), jsx(_$$$, {
+        }), jsx(BannerButton, {
           onClick: () => {
             d(showModalHandler({
               type: _$$e()

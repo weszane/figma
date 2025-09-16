@@ -7,14 +7,14 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
-import { cR as _$$cR } from "../905/890368";
+import { setCommunityAuthedActiveProfile } from "../905/890368";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
 import { HD, Co } from "../figma_app/471982";
 import { getDefaultBrowseOptions } from "../figma_app/640564";
 import { createOptimistThunk } from "../905/350402";
 import { UU } from "../figma_app/770088";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { kE } from "../figma_app/703138";
 import { F6 } from "../905/395917";
 import { yJ } from "../figma_app/240735";
@@ -22,7 +22,7 @@ import { c as _$$c } from "../905/289751";
 import { n as _$$n, HR, Cj } from "../figma_app/740025";
 import { mapUserRoleToOrgUserRoleAlias } from "../figma_app/12796";
 import { setupLoadingStateHandler } from "../905/696711";
-import { Il } from "../figma_app/502247";
+import { persistCommunityProfileId } from "../figma_app/502247";
 import { NEW_COMMENT_ID } from "../905/380385";
 import { CommentTabType } from "../figma_app/45218";
 import { OrgUserRoleEnum } from "../figma_app/35887";
@@ -30,7 +30,7 @@ import { s as _$$s2 } from "../905/608932";
 import { Oo, HZ, cr } from "../905/926523";
 let $$P2 = createActionCreator("COMMUNITY_HUB_SHOW_ADMIN_PROFILE_BANNER");
 let $$D27 = createActionCreator("COMMUNITY_HUB_HIDE_ADMIN_PROFILE_BANNER");
-let $$k14 = _$$cR;
+let $$k14 = setCommunityAuthedActiveProfile;
 let $$M3 = createOptimistThunk((e, t) => {
   let r;
   let {
@@ -54,7 +54,7 @@ let $$M3 = createOptimistThunk((e, t) => {
       message: getI18nString("community.actions.profile_not_found"),
       type: "COMMUNITY_PROFILE_ERROR"
     }));
-    e.dispatch(sf(f));
+    e.dispatch(selectViewAction(f));
     return;
   }
   let E = currentUserOrgId;
@@ -69,7 +69,7 @@ let $$M3 = createOptimistThunk((e, t) => {
     let t = teamAdminRolesForAuthedUsers[e];
     return t?.find(e => e.team_id === m.team_id)?.user_id;
   })) : r = m.primary_user_id === user?.id ? user?.id : authedUsers.orderedIds.find(e => m.associated_users?.find(t => t.user_id === e)?.user_id);
-  if (Il(m.id), trackEventAnalytics("Community profile IA switched", {
+  if (persistCommunityProfileId(m.id), trackEventAnalytics("Community profile IA switched", {
     profileId: m.id,
     view: selectedView.view
   }), e.dispatch($$k14(m)), e.dispatch($$P2()), r && (r !== user?.id || currentUserOrgId !== E)) {
@@ -81,7 +81,7 @@ let $$M3 = createOptimistThunk((e, t) => {
       workspace: t,
       view: f
     }));
-  } else e.dispatch(sf(f));
+  } else e.dispatch(selectViewAction(f));
 });
 let $$F6 = createActionCreator("COMMUNITY_HUB_ADD_FOLLOW");
 let $$j7 = createActionCreator("COMMUNITY_HUB_DELETE_FOLLOW");
@@ -205,7 +205,7 @@ createOptimistThunk((e, {
     data: t
   }) => {
     e.dispatch(Oo(t.meta.profile));
-    e.dispatch(sf(e.getState().selectedView));
+    e.dispatch(selectViewAction(e.getState().selectedView));
   }).catch(t => (404 === t.status && r ? r() : e.dispatch(FlashActions.error(getI18nString("community.actions.error_fetching_profile_information"))), null));
 });
 createOptimistThunk((e, {
@@ -364,7 +364,7 @@ let $$er12 = createOptimistThunk((e, t, {
       community_profile_handle: r.meta.profile_handle
     })), profileHandle) {
       let t = e.getState().selectedView;
-      Cj(t) && t?.handle === A && e.dispatch(sf({
+      Cj(t) && t?.handle === A && e.dispatch(selectViewAction({
         view: "communityHub",
         subView: "handle",
         handle: profileHandle

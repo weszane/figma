@@ -50,7 +50,7 @@ import { AccessLevelEnum } from "../905/557142";
 import { v as _$$v } from "../figma_app/899624";
 import { tb } from "../905/848667";
 import { II } from "../figma_app/11182";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { C3, UV } from "../figma_app/297957";
 import { useTracking } from "../figma_app/831799";
@@ -1124,7 +1124,7 @@ function e0(e) {
         disabled: 0 === o.length,
         onClick: () => {
           t(hideModal());
-          t(sf({
+          t(selectViewAction({
             view: "orgAdminSettings",
             orgAdminSettingsViewTab: DashboardSection.ACTIVITY,
             activityTabInitialEmail: e.orgUser.user.email

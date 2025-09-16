@@ -1,5 +1,5 @@
 import { atom } from "../figma_app/27355";
-import { T } from "../905/868547";
+import { isUIHiddenOrLocked } from "../905/868547";
 import { openFileAtom } from "../figma_app/516028";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { hasTeamPaidAccess } from "../figma_app/345997";
@@ -26,7 +26,7 @@ let $$g5 = mapAndAggregateResources([Hh], ([e], t) => {
 });
 let f = createReduxSubscriptionAtomWithState(({
   progressBarState: e
-}) => T(e?.mode));
+}) => isUIHiddenOrLocked(e?.mode));
 let $$E4 = atom(e => new Promise(t => {
   e(f) || t(!1);
 }));

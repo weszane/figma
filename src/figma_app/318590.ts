@@ -6,7 +6,7 @@ import { useSubscription } from "../figma_app/288654";
 import { tT } from "../905/723791";
 import { getExperimentConfigWithInit, selectExperimentConfigHook } from "../figma_app/594947";
 import { isLlamaEnabledForOrg } from "../figma_app/459490";
-import { JV } from "../figma_app/976749";
+import { getEditorTypeIfFullscreen } from "../figma_app/976749";
 import { orgSubscriptionAtom } from "../905/296690";
 import { FileCanUseFigmaAiIgnoreAiToggle, FileCanUseFragmentSearchAi } from "../figma_app/43951";
 import { FEditorType } from "../figma_app/53721";
@@ -75,7 +75,7 @@ export function $$R3() {
   let e = debugState.getState().selectedView;
   let t = P(e);
   let r = isFigmakeFullscreenView(e);
-  return JV(e) === FEditorType.Design || t || r;
+  return getEditorTypeIfFullscreen(e) === FEditorType.Design || t || r;
 }
 export function $$L7() {
   let e = PE();

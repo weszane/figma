@@ -1,9 +1,9 @@
 import { debugState } from "../905/407919";
 import { trackFileEvent } from "../figma_app/314264";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 export function $$s0(e, t) {
   let i = debugState.getState();
-  let s = U2(i.selectedView);
+  let s = getFileKeyFromSelectedView(i.selectedView);
   trackFileEvent(o, s, i, {
     actionName: e,
     ...t

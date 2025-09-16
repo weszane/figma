@@ -19,7 +19,7 @@ import { S as _$$S } from "../figma_app/11182";
 import { showModalHandler } from "../905/156213";
 import { TrackedButton } from "../figma_app/831799";
 import { xf } from "../3276/13008";
-import { my } from "../figma_app/976749";
+import { getEditorTypeOrNull } from "../figma_app/976749";
 import { getProductAccessTypeOrDefault } from "../figma_app/765689";
 import { nk } from "../figma_app/2023";
 import { aV } from "../figma_app/722362";
@@ -57,7 +57,7 @@ export function $$et0({
   appendedClassname: s
 }) {
   let o = l7();
-  let l = my();
+  let l = getEditorTypeOrNull();
   let f = getProductAccessTypeOrDefault(e.editorType);
   let {
     hasPendingRequest,

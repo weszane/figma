@@ -24,7 +24,7 @@ import { SvgComponent } from "../905/714743";
 import { t as _$$t } from "../905/331623";
 import { o as _$$o } from "../905/96108";
 import { getI18nString } from "../905/303541";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { dG } from "../figma_app/753501";
 import { fullscreenValue } from "../figma_app/455680";
 import { jr } from "../figma_app/896988";
@@ -255,7 +255,7 @@ class et extends RecordingPureComponent {
       this.startValue = this.props.property;
       (this.props.willShowDropdown ? this.props.willShowDropdown() : Promise.resolve()).then(() => {
         this.resizeDropdown();
-        this.props.onShowDropdownOverride ? this.props.onShowDropdownOverride() : this.props.dispatch(j7({
+        this.props.onShowDropdownOverride ? this.props.onShowDropdownOverride() : this.props.dispatch(showDropdownThunk({
           type: this.props.id
         }));
         null != this.state.focusedOptionValue && this.props.onOptionFocus?.(this.state.focusedOptionValue, "option");
@@ -267,7 +267,7 @@ class et extends RecordingPureComponent {
         currentDropdownAccepted: e
       });
       e || this.clearPreview();
-      this.props.onHideDropdownOverride ? this.props.onHideDropdownOverride() : this.props.dispatch(oB());
+      this.props.onHideDropdownOverride ? this.props.onHideDropdownOverride() : this.props.dispatch(hideDropdownAction());
       this.hiddenInput && !0 === this.state.wasOpenedOnMouseClick && (this.setState({
         wasOpenedOnMouseClick: !1
       }), this.hiddenInput.blur());

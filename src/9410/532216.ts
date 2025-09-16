@@ -33,7 +33,7 @@ import { ju } from "../figma_app/88239";
 import { n6 } from "../905/234821";
 import { TrackingProvider } from "../figma_app/831799";
 import { JT } from "../figma_app/173838";
-import { Em, m0 } from "../figma_app/976749";
+import { isDesignFileType, isDevHandoffEditorType } from "../figma_app/976749";
 import { h as _$$h } from "../905/864281";
 import { kD, J3, JU, kN } from "../figma_app/622574";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -91,7 +91,7 @@ import { getProjectUrl } from "../figma_app/528509";
 import { FC } from "../figma_app/212807";
 import { fileEntityDataMapper } from "../905/943101";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
-import { Eg, _b } from "../figma_app/841351";
+import { exitVersionHistoryMode, enterVersionHistoryMode } from "../figma_app/841351";
 import { Ay } from "../figma_app/86921";
 import { Q as _$$Q } from "../figma_app/113686";
 import { e as _$$e3 } from "../905/225961";
@@ -578,7 +578,7 @@ let ti = memo(function ({
       let e = useDispatch();
       let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
       return () => {
-        Ah(t) ? e(Eg()) : e(_b({
+        Ah(t) ? e(exitVersionHistoryMode()) : e(enterVersionHistoryMode({
           source: _$$e.EDITOR_TOOLBAR
         }));
       };
@@ -605,8 +605,8 @@ let ti = memo(function ({
   let ew = useIsSelectedFigmakeFullscreen();
   let eS = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);
   let ej = useIsSelectedViewFullscreenCooper();
-  let eA = Em();
-  let eO = m0();
+  let eA = isDesignFileType();
+  let eO = isDevHandoffEditorType();
   let eL = BI();
   let eU = _$$m2();
   let eK = o.user;

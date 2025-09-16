@@ -12,7 +12,7 @@ import { xH, eB } from "../905/546357";
 import { t } from "../905/150656";
 import { useLatestRef } from "../figma_app/922077";
 import { ModelTypeConfigs, getModelTypeHeaderI18n, FolderType, FileBrowserAction, Lk, PublicModelType, CreatorResourceType, convertModelTypeToSearchModelType, $L } from "../figma_app/162807";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { HI, vj, qv, c3, tw, MB } from "../905/977218";
 import { Um } from "../905/848862";
 import { SortOrder } from "../figma_app/756995";
@@ -94,7 +94,7 @@ function M({
   let p = useAtomWithSubscription(R9);
   let m = useCallback((t, i, n) => {
     t.stopPropagation();
-    u(oB());
+    u(hideDropdownAction());
     trackEventAnalytics("Sort Changed - Dropdown", {
       oldValueString: e,
       newValueString: i,
@@ -182,7 +182,7 @@ function er({
   let l = useDispatch();
   let d = useCallback(e => {
     e.stopPropagation();
-    l(oB());
+    l(hideDropdownAction());
   }, [l]);
   return jsxs("div", {
     children: [jsx("div", {
@@ -285,7 +285,7 @@ function eh(e) {
   return jsxs("div", {
     className: e.sortControlsDisabled && "ALL" === e.checkedValue ? es : ea,
     onMouseDown: n => {
-      o ? (t(oB()), e.onClickDropdown(FileBrowserAction.CLOSE)) : i.current && (t(j7({
+      o ? (t(hideDropdownAction()), e.onClickDropdown(FileBrowserAction.CLOSE)) : i.current && (t(showDropdownThunk({
         type: e.dropdownId,
         data: {
           targetRect: i.current.getBoundingClientRect()
@@ -356,12 +356,12 @@ function eT(e) {
     e.stopPropagation();
   };
   let u = () => {
-    o && t(oB());
+    o && t(hideDropdownAction());
   };
   return jsxs("div", {
     className: e.sortControlsDisabled && "ALL" === e.checkedValue ? es : ea,
     onMouseDown: n => {
-      o ? (t(oB()), e.onClickDropdown(FileBrowserAction.CLOSE)) : i.current && (t(j7({
+      o ? (t(hideDropdownAction()), e.onClickDropdown(FileBrowserAction.CLOSE)) : i.current && (t(showDropdownThunk({
         type: e.dropdownId,
         data: {
           targetRect: i.current.getBoundingClientRect()
@@ -680,7 +680,7 @@ function eL(e) {
   let o = n?.type === e.dropdownId;
   let c = n => {
     n.stopPropagation();
-    o ? t(oB()) : i.current && t(j7({
+    o ? t(hideDropdownAction()) : i.current && t(showDropdownThunk({
       type: e.dropdownId,
       data: {
         targetRect: i.current.getBoundingClientRect()

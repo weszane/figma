@@ -14,7 +14,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { Cp } from "../905/292918";
 import { Nu, ie, ov, E as _$$E } from "../905/300250";
 import { hideModal } from "../905/156213";
@@ -69,7 +69,7 @@ let D = async (e, t, i) => {
   });
 };
 let L = e => {
-  e.mergeParams.direction === SourceDirection.TO_SOURCE ? e.dispatch(sf({
+  e.mergeParams.direction === SourceDirection.TO_SOURCE ? e.dispatch(selectViewAction({
     view: "fullscreen",
     fileKey: e.mergeParams.branchKey,
     editorType: FEditorType.Design,

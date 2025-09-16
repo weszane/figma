@@ -8,7 +8,7 @@ import { generateRecordingKey } from "../figma_app/878298";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString } from "../905/303541";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { Te } from "../1250/12342";
 import { rE } from "../figma_app/186343";
 import { FFileType } from "../figma_app/191312";
@@ -26,7 +26,7 @@ export function $$v0({
     isDropdownShown,
     dropdownTargetRef
   } = _$$B("newPageDropdown");
-  let T = lg();
+  let T = getCurrentFileType();
   let w = Te();
   let S = rE();
   if (!w) return null;

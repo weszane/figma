@@ -46,7 +46,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { setPropertiesPanelTab } from "../figma_app/741237";
 import { xK } from "../905/125218";
 import { buildFileUrl } from "../905/612685";
-import { hZ } from "../figma_app/841351";
+import { maybeShowVersionDiffNotification } from "../figma_app/841351";
 import { mapEditorTypeToWorkspaceType, FEditorType, mapEditorTypeToFileType, mapFileTypeToEditorType } from "../figma_app/53721";
 import { A as _$$A } from "../figma_app/849666";
 import { ag, u6, p9, Jt, yf } from "../905/509613";
@@ -77,7 +77,7 @@ import { registerLegacyModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
 import { isEditorTypeEnabled, getLastUsedEditorType, setLastUsedEditorType } from "../905/298923";
 import { canAccessFullDevMode } from "../figma_app/473493";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { mapToEditorType } from "../figma_app/300692";
 import { z4 } from "../905/37051";
 import { Jr } from "../figma_app/624361";
@@ -158,7 +158,7 @@ async function ea(e, t, i) {
   (selectedView.versionId || selectedView.compareVersionId || selectedView.compareLatest) && t.dispatch(Y6({
     mode: UIVisibilitySetting.ON_AND_LOCKED
   }));
-  selectedView.compareLatest && t.dispatch(hZ({
+  selectedView.compareLatest && t.dispatch(maybeShowVersionDiffNotification({
     openFileKey: s.file_key
   }));
   selectedView.showPermissionsModalFromGoogleClassroomIntegration && selectedView.fileKey && t.dispatch(showModalHandler({
@@ -360,7 +360,7 @@ let $$ej0 = createOptimistThunk(async (e, {
     let r = n.openFile;
     let a = r && !r.parentOrgId && !r.teamId;
     if (!canAccessFullDevMode(n) && a && i === FEditorType.DevHandoff) {
-      t.dispatch(sf({
+      t.dispatch(selectViewAction({
         ...e,
         editorType: FEditorType.Design
       }));
@@ -369,7 +369,7 @@ let $$ej0 = createOptimistThunk(async (e, {
       return i;
     }
     if (e.tryPluginEditorType) {
-      t.dispatch(sf({
+      t.dispatch(selectViewAction({
         ...e,
         editorType: mapToEditorType(e.tryPluginEditorType)
       }));
@@ -378,7 +378,7 @@ let $$ej0 = createOptimistThunk(async (e, {
       return i;
     }
     if (i !== e.editorType) {
-      t.dispatch(sf({
+      t.dispatch(selectViewAction({
         ...e,
         editorType: i
       }));

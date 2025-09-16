@@ -23,7 +23,7 @@ import { u5, gE } from "../5132/642384";
 import { s as _$$s2 } from "../5430/913603";
 import { _ as _$$_ } from "../905/456042";
 import { ts as _$$ts, Sb } from "../figma_app/49598";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { YW, _O, s0, EX } from "../figma_app/350203";
 import { c as _$$c } from "../905/370443";
@@ -514,7 +514,7 @@ let $ = registerModal(function (e) {
     });
     d();
     i(t(n));
-    new URLSearchParams(customHistory.location.search).has(_O) && i(sf({
+    new URLSearchParams(customHistory.location.search).has(_O) && i(selectViewAction({
       ...c,
       triggerFreemiumPreview: void 0
     }));

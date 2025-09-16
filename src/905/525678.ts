@@ -14,7 +14,7 @@ import { ck } from "../905/87821";
 import { FEditorType } from "../figma_app/53721";
 import { Yh, c1 } from "../figma_app/357047";
 import { K3 } from "../figma_app/678300";
-import { $A } from "../905/782918";
+import { isFullscreenDevHandoffView } from "../905/782918";
 import { Bf } from "../figma_app/249941";
 export function $$v0(e, t) {
   if (!e || !t.isSearching && _o(e) && e.searchOnly) return !1;
@@ -26,7 +26,7 @@ export function $$v0(e, t) {
     if (e.flags.indexOf("recovery") > -1) {
       if (!t.selectedView.isRecoveryMode) return !1;
     } else if (e.flags.indexOf("!recovery") > -1 && t.selectedView.isRecoveryMode) return !1;
-    let i = !t.isReadOnly && !$A(t.selectedView) || isInteractionPathCheck();
+    let i = !t.isReadOnly && !isFullscreenDevHandoffView(t.selectedView) || isInteractionPathCheck();
     if (e.flags.indexOf("!edit") > -1) {
       if (i) return !1;
     } else if (e.flags.indexOf("edit") > -1 && !i) return !1;

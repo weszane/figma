@@ -17,7 +17,7 @@ import { getFeatureFlags } from '../905/601108';
 import { isFigmaDomain } from '../905/691205';
 import { Point } from '../905/736624';
 import { EE, EF, GQ, Hv, IA, IC, kb, LE, mG, Ox, pG, Qq, Qs, v5, W$, xU } from '../905/736956';
-import { ac, eB, jD, kA, xE } from '../905/765855';
+import { setTimeoutID, showTooltip, hideTooltip, clearTimeoutID, showTooltipWithDelay } from '../905/765855';
 import { debounce } from '../905/915765';
 import { sx as _$$sx } from '../905/941192';
 import { atomStoreManager } from '../figma_app/27355';
@@ -670,10 +670,10 @@ function q(e, t) {
   }()), i.tooltip)) {
     if (!s) {
       if (i.tooltip.state === StatusEnum.PENDING || i.tooltip.hideImmediately) {
-        t.dispatch(jD());
+        t.dispatch(hideTooltip());
       } else if (i.tooltip.state === StatusEnum.SHOWING) {
         let e = i.tooltip.hideAfterDelay ?? 300;
-        t.dispatch(ac({
+        t.dispatch(setTimeoutID({
           timeoutDelay: e
         }));
       }
@@ -689,7 +689,7 @@ function q(e, t) {
         case ElementTypeEnum.ELEMENT:
           return e.key === t.key;
       }
-    }(r.target, n.target)) : s.position === i.tooltip.position && t7(s.targetRect, i.tooltip.targetRect)) ? i.tooltip.state === StatusEnum.SHOWING && i.tooltip.timeoutID !== null && t.dispatch(kA()) : i.tooltip.state === StatusEnum.SHOWING || s.showImmediately ? t.dispatch(eB({
+    }(r.target, n.target)) : s.position === i.tooltip.position && t7(s.targetRect, i.tooltip.targetRect)) ? i.tooltip.state === StatusEnum.SHOWING && i.tooltip.timeoutID !== null && t.dispatch(clearTimeoutID()) : i.tooltip.state === StatusEnum.SHOWING || s.showImmediately ? t.dispatch(showTooltip({
       target: s.target,
       targetRect: s.targetRect,
       position: s.position,
@@ -700,7 +700,7 @@ function q(e, t) {
       maxWidth: s.maxWidth,
       maxLines: s.maxLines,
       hideImmediately: s.hideImmediately
-    })) : t.dispatch(xE({
+    })) : t.dispatch(showTooltipWithDelay({
       target: s.target,
       targetRect: s.targetRect,
       position: s.position,
@@ -721,29 +721,29 @@ export function $$J3(e) {
     return t.state === StatusEnum.SHOWING || t.state === StatusEnum.PENDING;
   };
   document.addEventListener('mousedown', r => {
-    t() && !$$X2(r, e.getState()) && e.dispatch(jD());
+    t() && !$$X2(r, e.getState()) && e.dispatch(hideTooltip());
   }, !!getFeatureFlags().fpl_tooltip);
   document.addEventListener('mouseleave', () => {
-    t() && e.dispatch(jD());
+    t() && e.dispatch(hideTooltip());
   });
   document.addEventListener('keydown', r => {
     if (t()) {
       if (getFeatureFlags().fpl_tooltip) {
         let n;
-        (n = r.key) === 'Control' || n === 'Shift' || n === 'Alt' || n === 'Meta' || e.dispatch(jD());
+        (n = r.key) === 'Control' || n === 'Shift' || n === 'Alt' || n === 'Meta' || e.dispatch(hideTooltip());
       } else {
-        e.dispatch(jD());
+        e.dispatch(hideTooltip());
       }
     }
   }, !0);
   getFeatureFlags().fpl_tooltip || document.addEventListener('keyup', () => {
-    t() && e.dispatch(jD());
+    t() && e.dispatch(hideTooltip());
   }, !0);
   document.addEventListener('wheel', () => {
-    t() && e.dispatch(jD());
+    t() && e.dispatch(hideTooltip());
   });
   document.addEventListener('pointerlockchange', () => {
-    t() && e.dispatch(jD());
+    t() && e.dispatch(hideTooltip());
   });
   let r = debounce(t => {
     q(t, e);

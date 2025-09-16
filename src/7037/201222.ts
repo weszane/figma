@@ -17,7 +17,7 @@ import { FlashActions } from "../905/573154";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { Pf, H8 } from "../905/590952";
 import { $M, nb } from "../figma_app/770088";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { gX } from "../905/504768";
 import { o8 } from "../figma_app/12220";
@@ -234,7 +234,7 @@ export let $$eb0 = registerModal(function (e) {
     };
   }, [e.inFileView, u]);
   useEffect(() => () => {
-    f.current.inFileView || "teamFeed" !== f.current.selectedView.view || t(sf({
+    f.current.inFileView || "teamFeed" !== f.current.selectedView.view || t(selectViewAction({
       ...f.current.selectedView,
       postUuid: void 0
     }));

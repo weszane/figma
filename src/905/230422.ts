@@ -6,7 +6,7 @@ import { isMobileUA } from "../figma_app/778880";
 import { LoadingSpinner } from "../figma_app/858013";
 import { FlashActions } from "../905/573154";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { TrackingProvider } from "../figma_app/831799";
 import { UserProfileTab } from "../figma_app/707808";
 import { registerModal } from "../905/102752";
@@ -144,7 +144,7 @@ class S extends Component {
       this.props.dispatch(FlashActions.error(getI18nString("community.error.an_error_has_occurred_please_refresh_the_page_and_try_again")));
     };
     this.onTabClick = e => {
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         ...this.props.currentSelectedView,
         profileTab: e
       }));
@@ -154,7 +154,7 @@ class S extends Component {
         ...this.props.currentSelectedView
       };
       delete e.profileTab;
-      this.props.dispatch(sf(e));
+      this.props.dispatch(selectViewAction(e));
     };
     this.getFollowsListHeightStyle = e => {
       let t = isMobileUA ? window.innerHeight : window.innerHeight - 128 - 48;
@@ -239,7 +239,7 @@ class S extends Component {
         })]
       });
     };
-    e.profile.primary_user_id || e.currentSelectedView.profileTab !== UserProfileTab.FOLLOWING || e.dispatch(sf({
+    e.profile.primary_user_id || e.currentSelectedView.profileTab !== UserProfileTab.FOLLOWING || e.dispatch(selectViewAction({
       ...e.currentSelectedView,
       profileTab: UserProfileTab.FOLLOWERS
     }));

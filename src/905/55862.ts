@@ -8,7 +8,7 @@ import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
-import { Qv } from "../905/929976";
+import { hydrateFileBrowser } from "../905/929976";
 import { n1 } from "../figma_app/657017";
 import { compareWithKey } from "../905/760074";
 import { NX, k9 } from "../figma_app/777207";
@@ -21,7 +21,7 @@ import { PG, Q_ } from "../905/570707";
 import { LibrariesViewFilterStatesView } from "../figma_app/43951";
 import { liveStoreInstance } from "../905/713695";
 import { useCurrentPlanUser, useIsOrgMemberOrAdminUser } from "../figma_app/465071";
-import { _X, YH } from "../figma_app/502247";
+import { getUserState, YH } from "../figma_app/502247";
 import { NO_TEAM } from "../figma_app/633080";
 import { ZO } from "../905/691188";
 export function $$k0({
@@ -232,8 +232,8 @@ export function $$L3(e, t = !1) {
   useEffect(() => {
     async function e() {
       try {
-        let e = await _X("useLibrariesViewFilterStates");
-        a(Qv(e.data.meta));
+        let e = await getUserState("useLibrariesViewFilterStates");
+        a(hydrateFileBrowser(e.data.meta));
       } catch (e) {}
     }
     YH || !p || g || (trackEventAnalytics("file-browser-hydrate", {

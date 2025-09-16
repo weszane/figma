@@ -5,7 +5,7 @@ import { BaseLinkComponent, ButtonBase } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { renderI18nText } from "../905/303541";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { getVsCodeLinkProps } from "../905/850671";
 import { Um } from "../905/848862";
 import { kt } from "../3591/828414";
@@ -70,7 +70,7 @@ export function $$v0({
   let v = s?.type === kt;
   let f = useRef(null);
   let C = useCallback(e => {
-    v ? t(oB()) : t(j7({
+    v ? t(hideDropdownAction()) : t(showDropdownThunk({
       type: kt,
       data: {
         type: "pointing",

@@ -17,7 +17,7 @@ import { OQ, Zp } from "../905/462076";
 import { m as _$$m } from "../905/561236";
 import { dp, DH } from "../905/508893";
 import { LoadingSpinner } from "../figma_app/858013";
-import { lD } from "../figma_app/831696";
+import { buildViewerQueryParams } from "../figma_app/831696";
 import { lQ } from "../905/934246";
 import { atom, useAtomValueAndSetter, useAtomWithSubscription } from "../figma_app/27355";
 import { useLatestRef } from "../figma_app/922077";
@@ -50,7 +50,7 @@ function P(e) {
   let [t, n] = useState();
   let [s, a] = useState(!0);
   useEffect(() => {
-    let t = lD({
+    let t = buildViewerQueryParams({
       hideUI: !0,
       disableDefaultKeyboardNav: !1,
       showProtoSidebar: !1,

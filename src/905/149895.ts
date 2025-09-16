@@ -8,7 +8,7 @@ import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
 import { ZS } from "../figma_app/519839";
-import { lg } from "../figma_app/976749";
+import { getCurrentFileType } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
 import { aB } from "../905/576221";
 import { AC, jO, FZ } from "../figma_app/803787";
@@ -38,7 +38,7 @@ export function $$I2() {
   let c = useSelector(e => AC(e));
   let u = Object.values(useSelector(e => jO(e, LibrarySourceEnum.LIBRARY)));
   let I = useSelector(e => FZ(e));
-  let E = lg() === FFileType.SLIDES;
+  let E = getCurrentFileType() === FFileType.SLIDES;
   return {
     initiateTemplatePublish: useCallback(t => {
       if (d || !E) return;

@@ -7,7 +7,7 @@ import { isInvalidValue } from '../905/216495';
 import { kl } from '../905/275640';
 import { trackEventAnalytics } from '../905/449184';
 import { getFeatureFlags } from '../905/601108';
-import { eB } from '../905/765855';
+import { showTooltip } from '../905/765855';
 import { getObservableOrFallback } from '../figma_app/84367';
 import { isNullish } from '../figma_app/95419';
 import { OU, vx } from '../figma_app/175258';
@@ -31,7 +31,7 @@ export function $$I3(e) {
     let i = `${r}${n}`;
     let a = e.currentTarget.closest('label') ?? e.currentTarget.closest('[data-tooltip]');
     let s = a?.getBoundingClientRect();
-    s && t(eB({
+    s && t(showTooltip({
       target: {
         kind: ElementTypeEnum.TEXT,
         text: i

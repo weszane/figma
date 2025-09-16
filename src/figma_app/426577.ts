@@ -16,7 +16,7 @@ import { N as _$$N2 } from "../figma_app/176280";
 import { C as _$$C } from "../figma_app/938538";
 import { X } from "../905/350405";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { vn } from "../figma_app/976749";
+import { isIllustrationEditorType } from "../figma_app/976749";
 import { mapEditorTypeToProductType } from "../figma_app/314264";
 import { AP } from "../figma_app/755783";
 import { il, w6 } from "../figma_app/789050";
@@ -161,7 +161,7 @@ export function $$z0({
   closeSecondaryToolbelt: i
 }) {
   let w = AP();
-  let O = vn();
+  let O = isIllustrationEditorType();
   let R = getFilteredFeatureFlags().ce_il_root ? () => {
     t(DesignGraphElements.SELECT);
   } : void 0;

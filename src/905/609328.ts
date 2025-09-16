@@ -8,7 +8,7 @@ import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { generateRecordingKey } from "../figma_app/878298";
 import { ms, c$ } from "../figma_app/236327";
 import { renderI18nText } from "../905/303541";
-import { j7, oB } from "../905/929976";
+import { showDropdownThunk, hideDropdownAction } from "../905/929976";
 import { sw, rk } from "../figma_app/914957";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { teamLibraryCache } from "../figma_app/80990";
@@ -32,7 +32,7 @@ export function $$I1() {
         dsStyle: t,
         position: i
       }) {
-        e(j7({
+        e(showDropdownThunk({
           type: $$v0,
           data: {
             dsStyle: t,
@@ -41,7 +41,7 @@ export function $$I1() {
         }));
       },
       hideStyleContextMenu: function () {
-        t?.type === $$v0 && e(oB());
+        t?.type === $$v0 && e(hideDropdownAction());
       }
     }), [e, t]);
   }();

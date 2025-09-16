@@ -28,7 +28,7 @@ import { ts, ax } from "../figma_app/49598";
 import { af } from "../figma_app/559491";
 import { t as _$$t2 } from "../905/833100";
 import { r as _$$r } from "../figma_app/896657";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { TrackingProvider } from "../figma_app/831799";
 import { x2, OX } from "../figma_app/33586";
@@ -249,7 +249,7 @@ function V(e) {
         has_carousel_media_nudge: y,
         trackingContext: f,
         searchSessionId: h
-      }), r(j7({
+      }), r(showDropdownThunk({
         type: Y
       })));
     },

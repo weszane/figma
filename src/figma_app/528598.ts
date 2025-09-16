@@ -37,7 +37,7 @@ import { n0 } from "../figma_app/389091";
 import { vq } from "../905/8732";
 import { Oe, uP } from "../figma_app/933328";
 import { KD } from "../figma_app/975811";
-import { cJ } from "../figma_app/976749";
+import { isSitesFileType } from "../figma_app/976749";
 import { A as _$$A2 } from "../905/639174";
 import { setHoveredComponentPropDef } from "../figma_app/741237";
 import { isValidValue, isInvalidValue } from "../905/216495";
@@ -1029,7 +1029,7 @@ function eJ({
     onKeyDown: x,
     onClick: N
   });
-  let O = cJ();
+  let O = isSitesFileType();
   let R = l || r.length > 1 || O;
   return jsxs("div", {
     className: w()(eB(e)),

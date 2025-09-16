@@ -10,7 +10,7 @@ import { PN } from "../figma_app/897289";
 import { zn, Ns } from "../figma_app/768070";
 import { fullscreenValue } from "../figma_app/455680";
 import { buildFileUrlInternal } from "../905/612685";
-import { yw, Bm } from "../figma_app/617727";
+import { interactionTestAtom, removeRegistryEntry } from "../figma_app/617727";
 import { FFileType } from "../figma_app/191312";
 import { $z } from "../figma_app/297733";
 import { O as _$$O } from "../905/208152";
@@ -31,7 +31,7 @@ let v = forwardRef(function ({
 }, I) {
   let k = Xr(hg);
   let [N, A] = useState(!1);
-  let O = useAtomWithSubscription(yw);
+  let O = useAtomWithSubscription(interactionTestAtom);
   let {
     isResizing,
     isDragging
@@ -104,7 +104,7 @@ let v = forwardRef(function ({
     return () => {
       e && (e.contentWindow?.removeEventListener("focus", T), e.contentWindow?.removeEventListener("blur", t));
     };
-  }, [I, E, T]), useEffect(() => () => Bm("inline_prototype_viewer"), []), !t) return null;
+  }, [I, E, T]), useEffect(() => () => removeRegistryEntry("inline_prototype_viewer"), []), !t) return null;
   let F = "/test/interactions/proto?secondary=1&inline-viewer=1";
   zn && (F += "&rolloutFlags=1");
   Ns && (F += `&additional-ffs=${Ns}`);

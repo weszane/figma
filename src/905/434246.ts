@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { oW } from "../905/675859";
 import { H8, Pf } from "../905/590952";
-import { iq } from "../figma_app/976749";
+import { isFullscreenView } from "../figma_app/976749";
 import { DP } from "../905/640017";
 import { FN, E2 } from "../905/389382";
 import { selectCurrentUser } from "../905/372672";
@@ -12,7 +12,7 @@ export function $$m0({
   licenseType: e
 }) {
   let t = selectCurrentUser();
-  let i = iq();
+  let i = isFullscreenView();
   let m = DP();
   let h = e === FProductAccessType.WHITEBOARD && i ? "light" : i_(m);
   let g = (() => {

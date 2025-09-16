@@ -8,7 +8,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { selectWithShallowEqual } from "../905/103090";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
 import { showModalHandler } from "../905/156213";
-import { ow } from "../figma_app/976749";
+import { isWhiteboardFileType } from "../figma_app/976749";
 import { F as _$$F } from "../905/224";
 import { isValidValue, MIXED_MARKER, normalizeValue } from "../905/216495";
 import { dq } from "../figma_app/316316";
@@ -274,7 +274,7 @@ export function $$es23() {
   let s = useSelector(e => a && a.teamId ? e.teams[a.teamId] : null);
   let d = useAtomWithSubscription(openFileTeamAtom);
   let c = sO();
-  let p = ow();
+  let p = isWhiteboardFileType();
   let h = useIsSelectedViewFullscreenCooper();
   let m = ea(Bi.PROTOTYPING_MULTIPLE_ACTIONS, s);
   let g = ea(Bi.PROTOTYPING_CONDITIONAL_ACTIONS, s);

@@ -1,9 +1,9 @@
-import { reportError } from '../905/11'
-import { ServiceCategories } from '../905/165054'
-import { debugState } from '../905/407919'
-import { loadAllPagesAndTrack } from '../figma_app/582924'
-import { PluginModalType } from '../figma_app/763686'
-import { un } from '../figma_app/841351'
+import { reportError } from '../905/11';
+import { ServiceCategories } from '../905/165054';
+import { debugState } from '../905/407919';
+import { loadAllPagesAndTrack } from '../figma_app/582924';
+import { PluginModalType } from '../figma_app/763686';
+import { loadActiveVersion } from '../figma_app/841351';
 
 // Original function name: $$d0
 // Original export name: q
@@ -15,19 +15,19 @@ import { un } from '../figma_app/841351'
  * @returns A promise resolving when the load is complete.
  */
 export function handleLoadAllPagesWithVersionCheck(modalType: PluginModalType) {
-  const state = debugState.getState()
+  const state = debugState.getState();
   if (state.versionHistory.activeId && state.versionHistory.activeId !== 'current_version') {
     switch (modalType) {
       case PluginModalType.SAVE_LOCAL_COPY:
       case PluginModalType.FIND_AND_REPLACE:
-        return un()
+        return loadActiveVersion();
       default:
-        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(`Unexpected reason for loading all pages from version history (${modalType})`))
-        return Promise.resolve()
+        reportError(ServiceCategories.SCENEGRAPH_AND_SYNC, new Error(`Unexpected reason for loading all pages from version history (${modalType})`));
+        return Promise.resolve();
     }
   }
-  return loadAllPagesAndTrack(modalType)
+  return loadAllPagesAndTrack(modalType);
 }
 
 // Refactored export name to match the new function name
-export const q = handleLoadAllPagesWithVersionCheck
+export const q = handleLoadAllPagesWithVersionCheck;

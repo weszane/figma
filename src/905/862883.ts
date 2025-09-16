@@ -1,12 +1,58 @@
-var $$n0 = (e => (e.Design = "design", e.FigJam = "figjam", e.Handoff = "handoff", e.Slides = "slides", e.Cooper = "cooper", e))($$n0 || {});
-var $$r1 = (e => (e[e.NOT_FETCHED = 0] = "NOT_FETCHED", e[e.FETCHED = 1] = "FETCHED", e[e.FETCHING = 2] = "FETCHING", e))($$r1 || {});
-var $$a4 = (e => (e.CommunityResource = "CommunityResource", e.TeamTemplate = "TeamTemplate", e.FaceStamp = "FaceStamp", e.WhiteboardTool = "WhiteboardTool", e))($$a4 || {});
-var $$s2 = (e => (e.FACE_STAMP = "FACE_STAMP", e.WHITEBOARD_TOOL = "WHITEBOARD_TOOL", e))($$s2 || {});
-export function $$o3(e) {
-  return ["CodeBlock", "MindMap"].includes(e);
+/**
+ * Enum for document types.
+ * Original: $$n0
+ */
+export enum FDocumentType {
+  Design = 'design',
+  FigJam = 'figjam',
+  Handoff = 'handoff',
+  Slides = 'slides',
+  Cooper = 'cooper',
 }
-export const $A = $$n0;
-export const Lx = $$r1;
-export const dB = $$s2;
-export const ds = $$o3;
-export const vt = $$a4;
+
+/**
+ * Enum for fetch status.
+ * Original: $$r1
+ */
+export enum FetchStatus {
+  NOT_FETCHED = 0,
+  FETCHED = 1,
+  FETCHING = 2,
+}
+
+/**
+ * Enum for resource types.
+ * Original: $$a4
+ */
+export enum ITemplateType {
+  CommunityResource = 'CommunityResource',
+  TeamTemplate = 'TeamTemplate',
+  FaceStamp = 'FaceStamp',
+  WhiteboardTool = 'WhiteboardTool',
+}
+
+/**
+ * Enum for tool types.
+ * Original: $$s2
+ */
+export enum FaceToolType {
+  FACE_STAMP = 'FACE_STAMP',
+  WHITEBOARD_TOOL = 'WHITEBOARD_TOOL',
+}
+
+/**
+ * Checks if the given type is a supported block type.
+ * Original: $$o3
+ * @param type - The type to check.
+ * @returns True if type is 'CodeBlock' or 'MindMap', false otherwise.
+ */
+export function isSupportedBlockType(type: string): boolean {
+  return ['CodeBlock', 'MindMap'].includes(type)
+}
+
+// Refactored exports to match new names
+export const $A = FDocumentType
+export const Lx = FetchStatus
+export const vt = ITemplateType
+export const dB = FaceToolType
+export const ds = isSupportedBlockType

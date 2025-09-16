@@ -10,7 +10,7 @@ import { Dy, pY } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
 import { xI, Y1 } from "../905/879323";
 import { eK, w2 } from "../905/977218";
-import { XE } from "../figma_app/976749";
+import { getEditorTypeFromView } from "../figma_app/976749";
 import { mapFileToProductType } from "../figma_app/314264";
 import { getSelectedFile } from "../905/766303";
 import { compareWithGeneratedKey } from "../905/709171";
@@ -233,7 +233,7 @@ let $$G0 = new class extends M {
         return;
       }
       let A = await Ci(!0);
-      let b = XE(i.selectedView) === FEditorType.Design;
+      let b = getEditorTypeFromView(i.selectedView) === FEditorType.Design;
       analyticsEventManager.trackDefinedEvent("assets_panel.component_search", {
         query: s,
         inDesignEditor: b,

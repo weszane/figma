@@ -41,7 +41,7 @@ import { ButtonPrimitive } from "../905/632989";
 import { Bs, Hg } from "../905/672745";
 import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { N as _$$N } from "../905/438674";
 import { _ as _$$_ } from "../7021/243271";
 import { A as _$$A2 } from "../905/920142";
@@ -575,7 +575,7 @@ function eO(e) {
           projectPageLink: jsx(ButtonPrimitive, {
             className: "connected_projects_flyout--projectLink--spvwE",
             onClick: () => {
-              o(sf({
+              o(selectViewAction({
                 view: "folder",
                 folderId: resourceId
               }));
@@ -708,7 +708,7 @@ let eM = {
               }), e.resourceConnection.status === eP.ACTIVE && x && jsx(ButtonPrimitive, {
                 className: _$$s.colorTextBrand.cursorPointer.$,
                 onClick: () => {
-                  l(sf({
+                  l(selectViewAction({
                     view: "folder",
                     folderId: resourceId
                   }));

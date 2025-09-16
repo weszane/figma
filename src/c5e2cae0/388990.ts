@@ -12,7 +12,7 @@ import { P as _$$P } from "../905/347284";
 import { SvgComponent } from "../905/714743";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { sx } from "../figma_app/307841";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { hideModal } from "../905/156213";
 import { c as _$$c } from "../905/370443";
 import { withTracking } from "../figma_app/831799";
@@ -236,7 +236,7 @@ function U(e) {
           }],
           onUpgrade: () => {
             B();
-            O(sf({
+            O(selectViewAction({
               view: "orgSelfServe",
               upsellSource: e.upsellSource
             }));

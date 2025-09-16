@@ -15,7 +15,7 @@ import { i as _$$i } from '../905/46262';
 import { d as _$$d2 } from '../905/49800';
 import { SubscriptionInterval } from '../905/54385';
 import { J as _$$J3 } from '../905/71895';
-import { k as _$$k3 } from '../905/93362';
+import { UserAPIHandlers } from '../905/93362';
 import { ModalSupportsBackground, registerLegacyModal, registerModal } from '../905/102752';
 import { selectWithShallowEqual } from '../905/103090';
 import { setupAutofocusHandler } from '../905/128376';
@@ -28,7 +28,7 @@ import { ServiceCategories as _$$e2 } from '../905/165054';
 import { UpsellModalType } from '../905/165519';
 import { ScreenReaderOnly } from '../905/172252';
 import { p as _$$p3 } from '../905/185998';
-import { H as _$$H } from '../905/202181';
+import { sessionApiInstance } from '../905/202181';
 import { h as _$$h } from '../905/207101';
 import { J as _$$J4 } from '../905/211135';
 import { A as _$$A8 } from '../905/215698';
@@ -115,7 +115,7 @@ import { iv as _$$iv, mc as _$$mc, UC, Uj } from '../905/872285';
 import { XHR, XHRError } from '../905/910117';
 import { A as _$$A6 } from '../905/920142';
 import { G0, Gu } from '../905/926523';
-import { j7, oB, sf } from '../905/929976';
+import { showDropdownThunk, hideDropdownAction, selectViewAction } from '../905/929976';
 import { q as _$$q } from '../905/932270';
 import { f as _$$f } from '../905/940356';
 import { sx as _$$sx } from '../905/941192';
@@ -465,7 +465,7 @@ function eA(e) {
       profileId: e.user.community_profile_id,
       userId: n
     }));
-    i(oB());
+    i(hideDropdownAction());
   };
   let o = jsx(ms, {
     children: n.map(t => {
@@ -482,7 +482,7 @@ function eA(e) {
     children: [jsxs('div', {
       onClick: e => {
         e.stopPropagation();
-        a && a.type === t ? i(oB()) : i(j7({
+        a && a.type === t ? i(hideDropdownAction()) : i(showDropdownThunk({
           type: t
         }));
       },
@@ -581,7 +581,7 @@ let eC = function (e) {
         return;
       }
       let i = getCommunityHubNavigation(resourceType, resourceId);
-      c(sf(i));
+      c(selectViewAction(i));
       c(hideModal());
     },
     children: [jsxs('div', {
@@ -1213,7 +1213,7 @@ function eJ(e) {
             className: 'community_view--lightText--g-hBB',
             children: [renderI18nText('community.community_account_settings.public_profile'), ' ', jsx(Button.Link, {
               onClick: () => {
-                O(sf({
+                O(selectViewAction({
                   view: 'communityHub',
                   subView: 'handle',
                   handle: e.profile.profile_handle
@@ -1850,7 +1850,7 @@ let ip = createOptimistThunk(async (e, t) => {
   if (!e.getState().user) return;
   let i = e.getState().user;
   try {
-    let n = (await _$$k3.createDevToken(t)).data.meta;
+    let n = (await UserAPIHandlers.createDevToken(t)).data.meta;
     let r = i.dev_tokens || [];
     e.dispatch(yJ({
       user: {
@@ -2373,7 +2373,7 @@ function iF({
   let o = useCallback(e => {
     s(VisualBellActions.clearAll());
     n(!0);
-    _$$H.deleteSession(e).then(() => {
+    sessionApiInstance.deleteSession(e).then(() => {
       s(VisualBellActions.enqueue({
         message: getI18nString('sessions.bell.success'),
         timeoutOverride: 5e3
@@ -2559,7 +2559,7 @@ function ij({
   let [n, s] = useState(!0);
   let [o, l] = useState(!1);
   useEffect(() => {
-    e != null && _$$H.getSessions().then(e => {
+    e != null && sessionApiInstance.getSessions().then(e => {
       i(e.data.meta.sessions.sort((e, t) => Number(t.is_current) - Number(e.is_current)));
       s(!1);
     }).catch(() => {
@@ -2639,7 +2639,7 @@ function iH({
   let o = useCallback(e => {
     s(VisualBellActions.clearAll());
     n(!0);
-    _$$H.deleteSession(e).then(() => {
+    sessionApiInstance.deleteSession(e).then(() => {
       s(VisualBellActions.enqueue({
         message: getI18nString('sessions.bell.success'),
         timeoutOverride: 5e3
@@ -2790,7 +2790,7 @@ function nr({
   let [c, u] = useState(null);
   useEffect(() => {
     (async () => {
-      u((await _$$k3.getEmailFeatures()).data.meta);
+      u((await UserAPIHandlers.getEmailFeatures()).data.meta);
     })();
   }, []);
   let p = setupAutofocusHandler();
@@ -3615,7 +3615,7 @@ let rt = registerModal(e => {
           analyticsEventManager.trackDefinedEvent('user.file_view_history_preference_changed', {
             disableFileViewHistory: r
           });
-          _$$k3.setFileViewHistoryPreference({
+          UserAPIHandlers.setFileViewHistoryPreference({
             id: i,
             disable_file_view_history: r
           });
@@ -4636,7 +4636,7 @@ let rj = {
     let [n, s] = useState(!0);
     let [o, l] = useState(!1);
     useEffect(() => {
-      e != null && _$$H.getSessions().then(e => {
+      e != null && sessionApiInstance.getSessions().then(e => {
         i(e.data.meta.sessions.sort((e, t) => Number(t.is_current) - Number(e.is_current)));
         s(!1);
       }).catch(() => {

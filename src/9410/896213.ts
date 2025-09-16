@@ -29,7 +29,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { W as _$$W } from "../3276/514864";
 import { gR } from "../figma_app/976345";
 import { ZO } from "../figma_app/88239";
-import { oB } from "../905/929976";
+import { hideDropdownAction } from "../905/929976";
 import { J4 } from "../figma_app/91703";
 import { postUserFlag } from "../905/985254";
 import { dG } from "../figma_app/753501";
@@ -280,12 +280,12 @@ function eI({
   }, [cancel, C]);
   let J = Vi();
   let q = useCallback(() => {
-    h || (J(), Y(), S(!0), B(oB()));
+    h || (J(), Y(), S(!0), B(hideDropdownAction()));
   }, [Y, B, S, J, h]);
   let Z = B4();
   let ee = useCallback(() => {
     Z();
-    B(oB());
+    B(hideDropdownAction());
   }, [B, Z]);
   let et = dR();
   let ei = et && i.sessionID === et.sessionID ? jsx(pz, {
@@ -373,7 +373,7 @@ function eI({
             label: getI18nString("fullscreen.toolbar.multiplayer.currently_viewing_users"),
             renderer: d,
             onSelect: e => {
-              e.length && (u(e[0]), B(oB()));
+              e.length && (u(e[0]), B(hideDropdownAction()));
             },
             initiallyNotSelected: !0,
             customClassName: aK,
@@ -453,12 +453,12 @@ function ek({
   }, [cancel, M]);
   let ei = Vi();
   let er = useCallback(() => {
-    d || (ei(), et(), F(!0), Y(oB()), S());
+    d || (ei(), et(), F(!0), Y(hideDropdownAction()), S());
   }, [et, Y, F, ei, d, S]);
   let en = B4();
   let ea = useCallback(() => {
     en();
-    Y(oB());
+    Y(hideDropdownAction());
     S();
   }, [Y, en, S]);
   let es = dR();
@@ -830,7 +830,7 @@ let $$eO0 = memo(function (e) {
     })
   });
   let eM = useCallback(() => {
-    M(oB());
+    M(hideDropdownAction());
     f.current?.focus();
   }, [M]);
   let [eP, eF] = useState(null);

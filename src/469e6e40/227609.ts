@@ -90,7 +90,7 @@ import { teamAPIClient } from '../905/834575';
 import { tb as _$$tb } from '../905/848667';
 import { EL, F_ } from '../905/858282';
 import { A as _$$A } from '../905/920142';
-import { oB, sf } from '../905/929976';
+import { hideDropdownAction, selectViewAction } from '../905/929976';
 import { sx } from '../905/941192';
 import { b as _$$b } from '../905/946806';
 import { B as _$$B2 } from '../905/950875';
@@ -219,7 +219,7 @@ function B({
         }), e.community_profile_handle && jsxs(TrackedDiv, {
           className: C()(_$$s.lh24.font13.cursorPointer.$, 'admin_dashboard_tab--communityHandle--uBlsg'),
           onClick: () => {
-            t(sf({
+            t(selectViewAction({
               view: 'communityHub',
               subView: 'handle',
               handle: e.community_profile_handle
@@ -230,7 +230,7 @@ function B({
       })]
     }), o && jsx(_$$k2, {
       openConnectedProjects: () => {
-        t(sf({
+        t(selectViewAction({
           view: 'teamAdminConsole',
           teamId: n?.key.parentId ?? '',
           teamAdminConsoleViewTab: DashboardSections.CONTENT,
@@ -856,7 +856,7 @@ let e5 = withTracking(e => {
         onRowClick: e => {
           R(e) && (highlightedItem?.member.email === e.member.email ? clearHighlightedItemId() : setHighlightedItemId(e.member.email));
         },
-        onScroll: () => e.dispatch(oB()),
+        onScroll: () => e.dispatch(hideDropdownAction()),
         onSetSortState: a,
         rightActionColumns: [{
           name: 'menu-cell',
@@ -1899,7 +1899,7 @@ function aA(e) {
     });
   }, [e.setActiveTab]);
   let v = useMemo(() => _ && n && s(_) ? () => {
-    t(sf({
+    t(selectViewAction({
       view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.MEMBERS,
@@ -1910,7 +1910,7 @@ function aA(e) {
   } : null, [_, t, s, e.team.id, n]);
   let f = useCallback(() => {
     if (!n && _) return null;
-    t(sf({
+    t(selectViewAction({
       view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.MEMBERS,
@@ -1920,7 +1920,7 @@ function aA(e) {
     }));
   }, [t, e.team.id, n, _, s]);
   let j = useCallback(() => {
-    t(sf({
+    t(selectViewAction({
       view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.MEMBERS
@@ -2001,7 +2001,7 @@ function aO(e) {
   let t = useDispatch();
   let a = _$$R3();
   let n = useCallback((a, n) => {
-    t(sf({
+    t(selectViewAction({
       view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.BILLING,
@@ -2099,7 +2099,7 @@ function aP(e) {
     'abandoned-drafts': !0,
     'connected-projects': !n
   }, e.activeTab, useCallback(a => {
-    t(sf({
+    t(selectViewAction({
       view: 'teamAdminConsole',
       teamId: e.team.id,
       teamAdminConsoleViewTab: DashboardSections.CONTENT,
@@ -2196,7 +2196,7 @@ export function $$aG0(e) {
   let S = _6();
   let N = vS(S);
   useEffect(() => {
-    C && a(sf({
+    C && a(selectViewAction({
       view: 'resourceUnavailable',
       resourceType: N
     }));

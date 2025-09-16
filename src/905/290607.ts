@@ -6,7 +6,7 @@ import { FU, b$, Bs } from "../figma_app/933328";
 import { fullscreenValue } from "../figma_app/455680";
 import { v9 } from "../figma_app/383828";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { r as _$$r } from "../905/632622";
 import { S } from "../905/459477";
 import { A as _$$A } from "../905/456912";
@@ -40,7 +40,7 @@ export function $$g0({
         },
         insertAsChildOfCanvas: i ?? !1,
         percentageOffset: new Point(.5, .5),
-        storeInRecentsKey: $A.Design,
+        storeInRecentsKey: FDocumentType.Design,
         useSmartPositioning: !0
       };
       r.type === PrimaryWorkflowEnum.COMPONENT ? v(FU({

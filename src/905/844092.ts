@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import { getI18nString } from "../905/303541";
-import { j7 } from "../905/929976";
+import { showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { DT } from "../figma_app/8833";
 import { l as _$$l } from "../905/348437";
@@ -33,7 +33,7 @@ export function $$h0(e) {
   let f = (e, i) => {
     e.preventDefault();
     e.stopPropagation();
-    t(j7({
+    t(showDropdownThunk({
       type: DT,
       data: {
         id: "comment_attachment_context_menu",

@@ -13,7 +13,7 @@ import { F9 } from "../figma_app/147952";
 import { fullscreenValue } from "../figma_app/455680";
 import { Z } from "../3276/966473";
 import { getUserId } from "../905/372672";
-import { $A, vt } from "../905/862883";
+import { FDocumentType, ITemplateType } from "../905/862883";
 import { KindEnum } from "../905/129884";
 import { $L, us } from "../figma_app/136698";
 import { LL, xG } from "../figma_app/565197";
@@ -56,11 +56,11 @@ export function $$j0({
   let O = useCallback(() => {
     j(F9({
       currentUserId: b ?? void 0,
-      storeInRecentsKey: $A.FigJam,
+      storeInRecentsKey: FDocumentType.FigJam,
       item: {
         id: e.id,
         user: e,
-        type: vt.FaceStamp
+        type: ITemplateType.FaceStamp
       }
     }));
   }, [b, j, e]);

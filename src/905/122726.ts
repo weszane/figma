@@ -1,160 +1,286 @@
-import { getCommunityHubNavigation } from '../905/428660';
-import { communityPagePaths } from '../905/528121';
-import { customHistory } from '../905/612521';
-import { parseQuery } from '../905/634134';
-import { languageCodes } from '../905/816253';
-import { getProfileRouteHref } from '../905/934145';
-import { StatusType, statusTypeToNumber } from '../figma_app/175992';
-import { M3 } from '../figma_app/198840';
-import { getPluginMetadata, getWidgetMetadata } from '../figma_app/300692';
-import { _O, E2, Tb } from '../figma_app/350203';
-import { ResourceType } from '../figma_app/354658';
-import { throwTypeError } from '../figma_app/465776';
-import { buildCommunityPath } from '../figma_app/471982';
-import { buildBrowseOrSearchUrl, setupBrowseRoute } from '../figma_app/640564';
-import { OnboardingStep, UserProfileTab, viewMappings } from '../figma_app/707808';
-import { getResourceName } from '../figma_app/777551';
-export class $$y0 {
-  pathToSelectedView(e, t, i) {
-    let a = {
-      view: 'communityHub'
-    };
-    let s = [...t];
-    let l = Object.keys(communityPagePaths).find(e => {
-      let i = communityPagePaths[e];
-      return i && t.join('/').startsWith(i);
-    });
-    if (l && l !== languageCodes.EN && (t = t.slice(3)).unshift('', 'community'), t[1] === 'community') {
-      let e = i ? parseQuery(i) : {};
-      if (t[2] === 'seller') {
+import { getCommunityHubNavigation } from '../905/428660'
+import { communityPagePaths } from '../905/528121'
+import { customHistory } from '../905/612521'
+import { parseQuery } from '../905/634134'
+import { languageCodes } from '../905/816253'
+import { getProfileRouteHref } from '../905/934145'
+import { StatusType, statusTypeToNumber } from '../figma_app/175992'
+import { M3 } from '../figma_app/198840'
+import { getPluginMetadata, getWidgetMetadata } from '../figma_app/300692'
+import { ResourceType } from '../figma_app/354658'
+import { throwTypeError } from '../figma_app/465776'
+import { buildCommunityPath } from '../figma_app/471982'
+import { buildBrowseOrSearchUrl, setupBrowseRoute } from '../figma_app/640564'
+import { OnboardingStep, UserProfileTab, viewMappings } from '../figma_app/707808'
+import { getResourceName } from '../figma_app/777551'
+
+/**
+ * Handles community hub navigation and view selection logic.
+ * Original class: $$y0
+ */
+export class CommunityHubNavigator {
+  /**
+   * Maps a path and query to a selected view object.
+   * @param context - Context object containing user info.
+   * @param pathSegments - Array of path segments.
+   * @param queryString - Query string.
+   * @returns Selected view object or null.
+   */
+  pathToSelectedView(context: any, pathSegments: string[], queryString?: string): any {
+    // Default view object
+    const defaultView = { view: 'communityHub' }
+    // Clone path segments for manipulation
+    const segments = [...pathSegments]
+
+    // Find matching community page path
+    const matchedKey = Object.keys(communityPagePaths).find((key) => {
+      const pagePath = communityPagePaths[key]
+      return pagePath && pathSegments.join('/').startsWith(pagePath)
+    })
+
+    // Handle language-specific community paths
+    pathSegments = pathSegments.slice(3)
+    pathSegments.unshift('', 'community')
+    if (
+      matchedKey
+      && matchedKey !== languageCodes.EN
+      && pathSegments[1] === 'community'
+    ) {
+      const query = queryString ? parseQuery(queryString) : {}
+
+      // Monetization redirect view
+      if (pathSegments[2] === 'seller') {
         return {
           view: 'communityHub',
           subView: 'monetizationRedirectView',
           interstitialType: OnboardingStep.ONBOARDING,
-          redirectUrl: e.redirect_url
-        };
-      }
-      if (t[2] === 'file' && t[3] && t.length > 4 && t[t.length - 1] === 'embed') {
-        return {
-          ...a,
-          subView: 'hubFileEmbed',
-          hubFileId: t[3]
-        };
-      }
-      if (['file', 'plugin', 'widget'].includes(t[2]) && t[3]) {
-        let [n, r] = [t[2], t[3]];
-        let a = e.comment;
-        let s = getCommunityHubNavigation(n, r);
-        let o = new URLSearchParams(i);
-        let l = {
-          ...s,
-          triggerCheckout: o.get(Tb) ?? null,
-          triggerFreemiumPreview: o.get(_O) === E2,
-          commentThreadId: a,
-          rating: e.rating
-        };
-        if (t[2] === 'file') {
-          let t = e.preview;
-          t && (l.fullscreenState = t);
+          redirectUrl: query.redirect_url,
         }
-        return l;
       }
-      if (t[2] === 'iframe_modal') {
-        let e = viewMappings.ACCOUNT_SETTINGS;
-        let i = t[t.length - 1];
-        i === 'settings' ? e = viewMappings.ACCOUNT_SETTINGS : i === 'publish' && (e = viewMappings.UNIVERSAL_PUBLISHING);
+
+      // Hub file embed view
+      if (
+        pathSegments[2] === 'file'
+        && pathSegments[3]
+        && pathSegments.length > 4
+        && pathSegments[pathSegments.length - 1] === 'embed'
+      ) {
+        return {
+          ...defaultView,
+          subView: 'hubFileEmbed',
+          hubFileId: pathSegments[3],
+        }
+      }
+
+      // File, plugin, or widget view
+      if (['file', 'plugin', 'widget'].includes(pathSegments[2]) && pathSegments[3]) {
+        const [resourceType, resourceId] = [pathSegments[2], pathSegments[3]]
+        const commentThreadId = query.comment
+        const nav = getCommunityHubNavigation(resourceType as 'file', resourceId)
+        const urlParams = new URLSearchParams(queryString)
+        const viewObj: ObjectOf = {
+          ...nav,
+          triggerCheckout: urlParams.get('checkout') ?? null,
+          triggerFreemiumPreview: urlParams.get('freemium_preview') === '1',
+          commentThreadId,
+          rating: query.rating,
+        }
+        if (resourceType === 'file') {
+          const previewState = query.preview
+          if (previewState)
+            viewObj.fullscreenState = previewState
+        }
+        return viewObj
+      }
+
+      // Iframe modal view
+      if (pathSegments[2] === 'iframe_modal') {
+        let modalType = viewMappings.ACCOUNT_SETTINGS
+        const lastSegment = pathSegments[pathSegments.length - 1]
+        if (lastSegment === 'settings') {
+          modalType = viewMappings.ACCOUNT_SETTINGS
+        }
+        else if (lastSegment === 'publish') {
+          modalType = viewMappings.UNIVERSAL_PUBLISHING
+        }
         return {
           view: 'modalInIFrame',
-          modalInIFrameType: e
-        };
+          modalInIFrameType: modalType,
+        }
       }
-      return t[2] === 'collections' ? {
-        view: 'communityHub',
-        subView: 'searchAndBrowse',
-        data: void 0
-      } : t[2] === 'templates' && t[3] ? {
-        view: 'communityHub',
-        subView: 'searchAndBrowse',
-        data: void 0
-      } : {
-        view: 'communityHub',
-        subView: 'searchAndBrowse',
-        data: setupBrowseRoute(s.join('/'), i)
-      };
-    }
-    if (t[1]?.startsWith('@')) {
-      let i = t[1].slice(1)?.toLowerCase();
-      let {
-        user
-      } = e;
-      if (!i) return null;
-      let r = t[2];
-      r === UserProfileTab.METRICS && statusTypeToNumber(user?.stripe_account_status) < statusTypeToNumber(StatusType.ACCEPTED) && (r = UserProfileTab.RESOURCES);
+
+      // Collections or templates view
+      if (pathSegments[2] === 'collections') {
+        return {
+          view: 'communityHub',
+          subView: 'searchAndBrowse',
+          data: undefined,
+        }
+      }
+      if (pathSegments[2] === 'templates' && pathSegments[3]) {
+        return {
+          view: 'communityHub',
+          subView: 'searchAndBrowse',
+          data: undefined,
+        }
+      }
+
+      // Default search and browse view
       return {
-        ...a,
+        view: 'communityHub',
+        subView: 'searchAndBrowse',
+        data: setupBrowseRoute(segments.join('/'), queryString),
+      }
+    }
+
+    // Handle user profile view
+    if (pathSegments[1]?.startsWith('@')) {
+      const handle = pathSegments[1].slice(1)?.toLowerCase()
+      const { user } = context
+      if (!handle)
+        return null
+      let profileTab = pathSegments[2]
+      if (
+        profileTab === UserProfileTab.METRICS
+        && statusTypeToNumber(user?.stripe_account_status) < statusTypeToNumber(StatusType.ACCEPTED)
+      ) {
+        profileTab = UserProfileTab.RESOURCES
+      }
+      return {
+        ...defaultView,
         subView: 'handle',
-        handle: i,
-        profileTab: r
-      };
+        handle,
+        profileTab,
+      }
     }
-    return null;
+
+    return null
   }
-  requireHistoryChange(e, t) {
-    return e.view !== 'communityHub' || t.view !== 'communityHub' ? e.view === 'communityHub' != (t.view === 'communityHub') : e.subView === 'handle' && t.subView === 'handle' ? e.handle !== t.handle || e.profileTab !== t.profileTab : e.subView === 'plugin' && t.subView === 'plugin' ? e.publishedPluginId !== t.publishedPluginId : e.subView === 'widget' && t.subView === 'widget' ? e.widgetId !== t.widgetId : e.subView === 'hubFile' && t.subView === 'hubFile' ? e.hubFileId !== t.hubFileId : e.subView !== t.subView;
+
+  /**
+   * Determines if a history change is required between two views.
+   * Original method: requireHistoryChange
+   */
+  requireHistoryChange(prevView: any, nextView: any): boolean {
+    if (prevView.view !== 'communityHub' || nextView.view !== 'communityHub') {
+      return prevView.view === 'communityHub' !== (nextView.view === 'communityHub')
+    }
+    if (prevView.subView === 'handle' && nextView.subView === 'handle') {
+      return prevView.handle !== nextView.handle || prevView.profileTab !== nextView.profileTab
+    }
+    if (prevView.subView === 'plugin' && nextView.subView === 'plugin') {
+      return prevView.publishedPluginId !== nextView.publishedPluginId
+    }
+    if (prevView.subView === 'widget' && nextView.subView === 'widget') {
+      return prevView.widgetId !== nextView.widgetId
+    }
+    if (prevView.subView === 'hubFile' && nextView.subView === 'hubFile') {
+      return prevView.hubFileId !== nextView.hubFileId
+    }
+    return prevView.subView !== nextView.subView
   }
-  selectedViewName(e, t) {
-    if (e.view !== 'communityHub') return null;
-    if (e.subView === 'plugin') {
-      let i = getPluginMetadata(e.publishedPluginId, t.publishedPlugins);
-      return getResourceName(i);
+
+  /**
+   * Gets the display name for the selected view.
+   * Original method: selectedViewName
+   */
+  selectedViewName(selectedView: any, publishedData: any): string | null {
+    if (selectedView.view !== 'communityHub')
+      return null
+    switch (selectedView.subView) {
+      case 'plugin': {
+        const pluginMeta = getPluginMetadata(selectedView.publishedPluginId, publishedData.publishedPlugins)
+        return getResourceName(pluginMeta)
+      }
+      case 'widget': {
+        const widgetMeta = getWidgetMetadata(selectedView.widgetId, publishedData.publishedWidgets)
+        return getResourceName(widgetMeta)
+      }
+      case 'hubFile': {
+        const fileMeta = M3(selectedView.hubFileId, publishedData.hubFiles)
+        return getResourceName(fileMeta)
+      }
+      case 'hubFileEmbed':
+      case 'searchAndBrowse':
+        return 'Community'
+      case 'handle':
+        return `@${selectedView.handle}`
+      case 'monetizationRedirectView':
+        return 'Stripe onboarding complete'
+      default:
+        throwTypeError(selectedView)
     }
-    if (e.subView === 'widget') {
-      let i = getWidgetMetadata(e.widgetId, t.publishedWidgets);
-      return getResourceName(i);
-    }
-    if (e.subView === 'hubFile') {
-      let i = M3(e.hubFileId, t.hubFiles);
-      return getResourceName(i);
-    }
-    if (e.subView === 'hubFileEmbed') return 'Community';
-    if (e.subView === 'handle') return `@${e.handle}`;
-    if (e.subView === 'searchAndBrowse') return 'Community';
-    if (e.subView === 'monetizationRedirectView') return 'Stripe onboarding complete';
-    throwTypeError(e);
   }
-  selectedViewToPath(e, t) {
-    if (e.view === 'modalInIFrame') return `/community/iframe_modal/${e.modalInIFrameType}`;
-    if (e.view !== 'communityHub') return null;
-    if (e.subView === 'monetizationRedirectView' && e.interstitialType === OnboardingStep.ONBOARDING) return '/community/seller/onboarding/completed';
-    if (e.subView === 'plugin' || e.subView === 'widget') {
-      let i = this.selectedViewName(e, t);
-      let n = buildCommunityPath({
-        path: e.subView,
-        id: e.subView === 'plugin' ? e.publishedPluginId : e.widgetId,
-        name: i
-      });
-      e.triggerCheckout !== null && void 0 !== e.triggerCheckout && (n += `?checkout=${e.triggerCheckout}`);
-      e.commentThreadId && (n += `${!n.includes('?') ? '?' : '&'}comment=${e.commentThreadId}`);
-      e.rating && (n += `${!n.includes('?') ? '?' : '&'}rating=${e.rating}`);
-      return n;
+
+  /**
+   * Converts a selected view object to a path string.
+   * Original method: selectedViewToPath
+   */
+  selectedViewToPath(selectedView: any, publishedData: any): string | null {
+    if (selectedView.view === 'modalInIFrame') {
+      return `/community/iframe_modal/${selectedView.modalInIFrameType}`
     }
-    if (e.subView === 'hubFile') {
-      let n = {};
-      e.commentThreadId && (n.comment = e.commentThreadId);
-      e.fullscreenState && (n.preview = e.fullscreenState);
-      e.triggerCheckout !== null && void 0 !== e.triggerCheckout && (n[Tb] = e.triggerCheckout);
-      e.triggerFreemiumPreview && (n[_O] = E2);
-      e.rating && (n.rating = e.rating);
-      let r = this.selectedViewName(e, t);
-      let i = buildCommunityPath({
+    if (selectedView.view !== 'communityHub') {
+      return null
+    }
+    if (
+      selectedView.subView === 'monetizationRedirectView'
+      && selectedView.interstitialType === OnboardingStep.ONBOARDING
+    ) {
+      return '/community/seller/onboarding/completed'
+    }
+    if (selectedView.subView === 'plugin' || selectedView.subView === 'widget') {
+      const resourceName = this.selectedViewName(selectedView, publishedData)
+      let path = buildCommunityPath({
+        path: selectedView.subView,
+        id: selectedView.subView === 'plugin' ? selectedView.publishedPluginId : selectedView.widgetId,
+        name: resourceName,
+      })
+      if (selectedView.triggerCheckout !== null && selectedView.triggerCheckout !== undefined) {
+        path += `?checkout=${selectedView.triggerCheckout}`
+      }
+      if (selectedView.commentThreadId) {
+        path += `${!path.includes('?') ? '?' : '&'}comment=${selectedView.commentThreadId}`
+      }
+      if (selectedView.rating) {
+        path += `${!path.includes('?') ? '?' : '&'}rating=${selectedView.rating}`
+      }
+      return path
+    }
+    if (selectedView.subView === 'hubFile') {
+      const params: Record<string, string> = {}
+      if (selectedView.commentThreadId)
+        params.comment = selectedView.commentThreadId
+      if (selectedView.fullscreenState)
+        params.preview = selectedView.fullscreenState
+      if (selectedView.triggerCheckout !== null && selectedView.triggerCheckout !== undefined) {
+        params.checkout = selectedView.triggerCheckout
+      }
+      if (selectedView.triggerFreemiumPreview)
+        params.freemium_preview = '1'
+      if (selectedView.rating)
+        params.rating = selectedView.rating
+      const resourceName = this.selectedViewName(selectedView, publishedData)
+      const basePath = buildCommunityPath({
         path: ResourceType.FILE,
-        id: e.hubFileId,
-        name: r
-      });
-      let a = new URLSearchParams(n).toString();
-      return `${i}${a && `?${a}`}`;
+        id: selectedView.hubFileId,
+        name: resourceName,
+      })
+      const queryString = new URLSearchParams(params).toString()
+      return `${basePath}${queryString ? `?${queryString}` : ''}`
     }
-    return e.subView === 'hubFileEmbed' ? `/community/file/${e.hubFileId}/embed` : e.subView === 'handle' ? getProfileRouteHref(e.handle, e.profileTab, t.user) : e.subView === 'searchAndBrowse' ? e.data ? buildBrowseOrSearchUrl(e.data) : customHistory.location.pathname : '/community';
+    if (selectedView.subView === 'hubFileEmbed') {
+      return `/community/file/${selectedView.hubFileId}/embed`
+    }
+    if (selectedView.subView === 'handle') {
+      return getProfileRouteHref(selectedView.handle, selectedView.profileTab, publishedData.user)
+    }
+    if (selectedView.subView === 'searchAndBrowse') {
+      return selectedView.data ? buildBrowseOrSearchUrl(selectedView.data) : customHistory.location.pathname
+    }
+    return '/community'
   }
 }
-export const B = $$y0;
+
+// Export with refactored name
+export const B = CommunityHubNavigator

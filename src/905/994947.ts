@@ -4,7 +4,7 @@ import { desktopAPIInstance } from "../figma_app/876459";
 import { PureComponent, createContext } from "react";
 import { useDispatch, useStore, useSelector } from "react-redux";
 import { getModifierBitmask } from "../905/63728";
-import { j7, sf, oB } from "../905/929976";
+import { showDropdownThunk, selectViewAction, hideDropdownAction } from "../905/929976";
 import { fileEntityDataMapper } from "../905/943101";
 import { PublicModelType } from "../figma_app/162807";
 import { G as _$$G } from "../905/186289";
@@ -18,13 +18,13 @@ import { nk } from "../figma_app/2023";
 import { fA } from "../figma_app/543100";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { F as _$$F2 } from "../905/915030";
-import { a as _$$a } from "../905/870666";
+import { SelectedViewPathManager } from "../905/870666";
 import { g_ } from "../905/646788";
 import { trackEventAnalytics } from "../905/449184";
 import { getViewState } from "../905/612521";
 import { V3, UN } from "../figma_app/976345";
 import { trackFileBrowserFileClicked } from "../figma_app/314264";
-import { xS } from "../figma_app/193867";
+import { getSelectedViewUrl } from "../figma_app/193867";
 import { W as _$$W } from "../905/25249";
 import { VisualBellActions } from "../905/302958";
 import { p7 } from "../figma_app/49598";
@@ -58,7 +58,7 @@ let y = (e, t) => class extends PureComponent {
         bottom: i.clientY < r / 2 ? "auto" : r - i.clientY
       };
       this.props.onContextClick && this.props.onContextClick(t, i);
-      this.props.dispatch(j7({
+      this.props.dispatch(showDropdownThunk({
         type: e,
         data: {
           selected: t,
@@ -121,7 +121,7 @@ function x(e) {
         }), trackFileBrowserFileClicked(n.fileKey, {
           selectedViewName: e.view
         }));
-        t(sf(n));
+        t(selectViewAction(n));
       },
       ...overrides
     };
@@ -185,7 +185,7 @@ function x(e) {
         }), t(UN({
           fileKey: r.fileKey
         })));
-        let n = xS(i.getState(), r);
+        let n = getSelectedViewUrl(i.getState(), r);
         t(V3({
           url: n
         }));
@@ -220,7 +220,7 @@ let V = e => ({
       id: "copy_view_link",
       text: getI18nString("file_browser.copy_link"),
       onClick: () => {
-        let n = new _$$a();
+        let n = new SelectedViewPathManager();
         t(TH({
           selector: n,
           selectedView: V(e),
@@ -258,7 +258,7 @@ let V = e => ({
       id: "show_in_folder",
       text: "Show in project",
       onClick: () => {
-        i(sf({
+        i(selectViewAction({
           view: "folder",
           folderId: e.folderId
         }));
@@ -287,7 +287,7 @@ let V = e => ({
           entrypoint: "search_dropdown",
           fileBrowserEntryPoint: !0
         }));
-        i(oB());
+        i(hideDropdownAction());
       }
     };
   };
@@ -311,7 +311,7 @@ let z = e => function (t) {
       id: "show_in_team",
       text: "Show team",
       onClick: () => {
-        t(sf({
+        t(selectViewAction({
           view: "team",
           teamId: team_id
         }));

@@ -13,7 +13,7 @@ import { AG } from "../figma_app/999312";
 import { Jm } from "../figma_app/387599";
 import { getCurrentVersion } from "../figma_app/471982";
 import { lx, aI, s0 } from "../figma_app/558929";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { Um } from "../905/848862";
 import { U3 } from "../figma_app/412189";
@@ -194,7 +194,7 @@ function G(e) {
         }(e),
         fileName: e.name,
         onClick: () => {
-          t(oB());
+          t(hideDropdownAction());
           e.can_run ? isThirdPartyMonetized(resource) ? s0(t, () => p(e)) : p(e) : e.requests_allowed && c(e);
         }
       }, e.key)) : jsx("div", {
@@ -221,7 +221,7 @@ function V({
       if (!e) {
         let e = !!(o.playground_file_version_id || r === FEditorType.DevHandoff);
         $$M2(i.id, e ? "playground" : "new_file", r, l);
-        s(oB());
+        s(hideDropdownAction());
         let t = () => {
           F(i, r, s, d, e);
         };
@@ -313,7 +313,7 @@ export function $$H1(e, t, r) {
         }(t),
         onClick: () => {
           $$M2(e.id, "new_file", t, A);
-          p(oB());
+          p(hideDropdownAction());
           F(e, t, p, y, !1);
         }
       })
@@ -342,7 +342,7 @@ export function $$H1(e, t, r) {
       })
     };
     U3("resize", () => {
-      f && p(oB());
+      f && p(hideDropdownAction());
     });
     let K = (() => {
       let t = [];
@@ -378,14 +378,14 @@ export function $$H1(e, t, r) {
     dropdownIsShown: f,
     toggleSwitchEditorDropdown: (t, n) => {
       let i = t.current?.getBoundingClientRect();
-      i && ((void 0 !== n ? n : !f) ? p(j7({
+      i && ((void 0 !== n ? n : !f) ? p(showDropdownThunk({
         type: z,
         data: {
           resourceId: e.id,
           viewContext: r,
           targetRect: i
         }
-      })) : p(oB()));
+      })) : p(hideDropdownAction()));
     },
     PluginTrySwitchEditorDropdown: A
   };

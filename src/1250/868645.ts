@@ -8,7 +8,7 @@ import { a as _$$a } from "../905/29104";
 import { Ph } from "../905/160095";
 import { renderI18nText } from "../905/303541";
 import { TextWithTruncation } from "../905/984674";
-import { sf } from "../905/929976";
+import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
 import { c as _$$c } from "../905/370443";
 import { e as _$$e } from "../905/621515";
@@ -36,7 +36,7 @@ export function $$C3(e) {
     e();
   }, [n, e]);
   let o = useCallback(() => {
-    t(sf({
+    t(selectViewAction({
       view: "recentsAndSharing"
     }));
   }, [t]);

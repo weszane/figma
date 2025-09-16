@@ -10,9 +10,9 @@ import { usePopoverPrimitive, PopoverPrimitiveContainer, PopoverPrimitiveArrow }
 import { E as _$$E } from "../905/53857";
 import { ButtonPrimitive } from "../905/632989";
 import { ButtonWide, Button, ButtonLarge } from "../905/521428";
-import { cV } from "../figma_app/59509";
-import { Q as _$$Q } from "../905/363675";
-import { $ as _$$$ } from "../905/692618";
+import { BannerInline } from "../figma_app/59509";
+import { BannerMessage } from "../905/363675";
+import { BannerButton } from "../905/692618";
 import { r } from "../905/784543";
 import { g as _$$g } from "../figma_app/479056";
 import { J as _$$J } from "../905/614223";
@@ -1191,14 +1191,14 @@ function eJ({
     name: "code_connect_get_started",
     children: jsx("div", {
       className: "figmadocs--hintContainer--NQVSC",
-      children: jsxs(cV, {
+      children: jsxs(BannerInline, {
         variant: "default",
         icon: jsx(_$$g, {}),
         onDismiss: l,
-        children: [jsx(_$$Q, {
+        children: [jsx(BannerMessage, {
           title: d.title,
           children: d.hintText
-        }), jsx(_$$$, {
+        }), jsx(BannerButton, {
           onClick: r,
           children: d.hintLinkText
         }), jsx("div", {

@@ -12,7 +12,7 @@ import { hL } from "../905/697795";
 import { d1 as _$$d } from "../figma_app/603466";
 import { mapFileTypeToEditorType } from "../figma_app/53721";
 import { N as _$$N } from "../905/949295";
-import { a as _$$a } from "../905/870666";
+import { SelectedViewPathManager } from "../905/870666";
 import { ym, qV as _$$qV } from "../figma_app/818609";
 import { _s, I8, om, c4, $_ } from "../figma_app/198387";
 import { YI, P$, FR } from "../figma_app/152368";
@@ -24,7 +24,7 @@ function S(e) {
 export function $$v43(e, t, r) {
   var n;
   if (!e) return;
-  let i = new _$$a().selectedViewNameHelper(e, t);
+  let i = new SelectedViewPathManager().selectedViewNameHelper(e, t);
   let a = r ? (n = function (e) {
     let t = Math.max(0, e);
     let r = t % 60;

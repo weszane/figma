@@ -25,7 +25,7 @@ import { SX, mq } from "../figma_app/199513";
 import { convertTeamToRaw } from "../905/628874";
 import { FolderViewType, getProjectUrl } from "../905/316062";
 import { f as _$$f } from "../0c62c2fd/277163";
-import { sf, j7 } from "../905/929976";
+import { selectViewAction, showDropdownThunk } from "../905/929976";
 import { iK, HK, CU, xH, OT, t3, Pb, Mi, w3, EN, Dp, hq, Ww, zv, TL, qb, YG, qM, Mn, JG } from "../905/586954";
 import { z as _$$z } from "../905/404751";
 import { hideModal, popModalStack, showModalHandler, hideSpecificModal } from "../905/156213";
@@ -38,7 +38,7 @@ import { AccessLevelEnum } from "../905/557142";
 import { hasRootPathOptional, findOwnerFolder, getSidebarPath, isTeamFolderV2 } from "../figma_app/528509";
 import { z as _$$z2 } from "../905/875422";
 import { MoveFileCurrentProject, AccessibleFoldersV2, TeamFileCountsByTeamId } from "../figma_app/43951";
-import { K as _$$K } from "../figma_app/193867";
+import { isRecentsAndSharingView } from "../figma_app/193867";
 import { n$, Cz, aW, sK } from "../figma_app/598018";
 import { b as _$$b, A as _$$A } from "../figma_app/965813";
 import { X as _$$X } from "../905/698965";
@@ -489,7 +489,7 @@ function eH(e) {
 let e0 = parsePxInt(eh);
 let e1 = "FileMoveModalContent";
 export function $$e48(e) {
-  return "folder" === e.view || _$$K(e) ? "_self" : "_blank";
+  return "folder" === e.view || isRecentsAndSharingView(e) ? "_self" : "_blank";
 }
 export function $$e29(e) {
   return !!e.subscription || hasRootPathOptional(e);
@@ -823,7 +823,7 @@ export class $$e32 extends PureComponent {
       this.props.fileMoveData.displayBanner ? this.props.dispatch(popModalStack()) : this.props.dispatch(hideModal());
     };
     this.openOrgView = e => {
-      this.props.dispatch(sf({
+      this.props.dispatch(selectViewAction({
         view: "org",
         orgId: e,
         orgViewTab: _$$X.HOME
@@ -960,7 +960,7 @@ export class $$e32 extends PureComponent {
     this.onFileMoveContextMenu = (e, t) => {
       e.stopPropagation();
       e.preventDefault();
-      this.props.fileMove.folderRenaming || this.props.dispatch(j7({
+      this.props.fileMove.folderRenaming || this.props.dispatch(showDropdownThunk({
         type: this.FILE_MOVE_DROPDOWN,
         data: {
           folderId: t.id,

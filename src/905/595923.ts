@@ -18,7 +18,7 @@ import { un, kI } from "../figma_app/457899";
 import { hY } from "../figma_app/80683";
 import { c as _$$c } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { m0 } from "../figma_app/976749";
+import { isDevHandoffEditorType } from "../figma_app/976749";
 import { ViewAccessTypeEnum } from "../905/513035";
 import { i as _$$i } from "../figma_app/127401";
 import { Ye } from "../905/332483";
@@ -43,7 +43,7 @@ import { WZ, ix } from "../figma_app/538002";
 export let $$W0 = atom(null);
 export function $$K1(e) {
   let t = useAtomWithSubscription($$W0);
-  let i = m0() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(e.editorType);
+  let i = isDevHandoffEditorType() ? FProductAccessType.DEV_MODE : getProductAccessTypeOrDefault(e.editorType);
   let a = F2(i);
   let s = !!e.org;
   let d = s ? {

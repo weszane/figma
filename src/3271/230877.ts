@@ -4,7 +4,7 @@ import n from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
 import { lz } from "../figma_app/212767";
 import { Dm } from "../figma_app/8833";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { iT } from "../figma_app/74165";
 import { qw, UK } from "../figma_app/740163";
 import { getObservableOrFallback } from "../figma_app/84367";
@@ -16,7 +16,7 @@ export function $$h0(e) {
   let t;
   let s = lz();
   let n = qw();
-  let h = E3();
+  let h = getSelectedEditorType();
   let {
     isPropertiesPanelCollapsed
   } = iT();

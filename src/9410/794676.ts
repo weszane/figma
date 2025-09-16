@@ -20,10 +20,10 @@ import { PQ, sx } from "../figma_app/91703";
 import { HQ, gr, vZ, aF } from "../figma_app/147952";
 import { NX } from "../figma_app/568591";
 import { TrackingProvider, wrapWithTracking } from "../figma_app/831799";
-import { o as _$$o } from "../905/808775";
+import { useMappedEditorTypeA } from "../905/808775";
 import { useDebouncedCallback } from "use-debounce";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { E3 } from "../figma_app/976749";
+import { getSelectedEditorType } from "../figma_app/976749";
 import { trackFileEvent, mapEditorTypeToProductType, getFileEditInfo } from "../figma_app/314264";
 import { i as _$$i } from "../1250/937941";
 import { Cn, e_ as _$$e_ } from "../figma_app/936061";
@@ -75,7 +75,7 @@ import eO from "../vendor/879378";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { useSubscription } from "../figma_app/288654";
 import { FileByKey } from "../figma_app/43951";
-import { U2 } from "../figma_app/193867";
+import { getFileKeyFromSelectedView } from "../figma_app/193867";
 import { K as _$$K } from "../905/12775";
 import { M as _$$M2 } from "../figma_app/333189";
 import { Button } from "../905/521428";
@@ -97,7 +97,7 @@ import { showModal, showModalHandler } from "../905/156213";
 import { cq, QA } from "../figma_app/107215";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
 import { QL } from "../905/609392";
-import { T as _$$T } from "../905/868547";
+import { isUIHiddenOrLocked } from "../905/868547";
 import { generateAnonymouseName } from "../905/301652";
 import { x as _$$x3 } from "../905/749159";
 import { K as _$$K3 } from "../905/443068";
@@ -428,7 +428,7 @@ function tm(e) {
     }, [m, o, u]);
     let f = useFullscreenViewFile();
     useEffect(() => {
-      if (s && !_$$T(c) && "loaded" === f.status) {
+      if (s && !isUIHiddenOrLocked(c) && "loaded" === f.status) {
         let t = localStorage.getItem(generateAnonymouseName(o));
         i ? t ? QA(t) : e(showModal({
           type: _$$e2
@@ -441,7 +441,7 @@ function tm(e) {
     let _ = g?.key;
     let x = g?.name;
     useEffect(() => {
-      if (s && !_$$T(c) && i && u && _ && x === getI18nString("fullscreen.fullscreen_view_selector.untitled")) {
+      if (s && !isUIHiddenOrLocked(c) && i && u && _ && x === getI18nString("fullscreen.fullscreen_view_selector.untitled")) {
         let t = localStorage.getItem(generateAnonymouseName(o));
         t && e(_$$S({
           userName: t,
@@ -537,7 +537,7 @@ let t5 = memo(({
   let u = useSelector(e => e.openFile?.canEdit ?? !1);
   let p = p8("isReadOnly");
   let h = useCurrentUserOrgId();
-  let f = E3();
+  let f = getSelectedEditorType();
   let g = useLatestRef(f);
   f !== g && g && d(PQ([]));
   G_(i, s);
@@ -669,7 +669,7 @@ export function $$t80({
   let R = function ({
     onCanvasExpired: e
   }) {
-    let t = useSelector(e => U2(e.selectedView));
+    let t = useSelector(e => getFileKeyFromSelectedView(e.selectedView));
     let i = getUserId();
     let r = useCurrentUserOrgId();
     let [s, o] = useState(!1);
@@ -796,7 +796,7 @@ export function $$t80({
     let r = useSelector(e => e.mirror.appModel.isReadOnly);
     let s = useSelector(e => e.openFile);
     let o = useSelector(e => e.localPlugins);
-    let l = E3();
+    let l = getSelectedEditorType();
     let d = op();
     let c = useSelector(e => e.installedPluginVersions.plugins);
     let u = useSelector(e => e.mirror.selectedStyleProperties?.selectedWidgetInfo);
@@ -841,7 +841,7 @@ export function $$t80({
   }();
   _$$x2();
   (function () {
-    let e = E3();
+    let e = getSelectedEditorType();
     let t = useCallback(() => {
       trackEventAnalytics("display_redline", {
         source: "keyboard_shortcut",
@@ -1109,7 +1109,7 @@ export function $$t80({
   useEffect(() => (h === FEditorType.Whiteboard && BrowserInfo.isMeetDevice && "undefined" != typeof document && document.addEventListener("visibilitychange", t7), () => {
     document.removeEventListener("visibilitychange", t7);
   }), [h]);
-  let Y = _$$o();
+  let Y = useMappedEditorTypeA();
   useEffect(() => {
     if (Y) {
       i(HQ({

@@ -8,7 +8,7 @@ import { memoizedProcessComponentsAndStateGroups, processLocalComponents } from 
 import { iP, nJ } from "../figma_app/646357";
 import { getBasename, splitPath, getDirname } from "../905/309735";
 import { PrimaryWorkflowEnum } from "../figma_app/633080";
-import { $A } from "../905/862883";
+import { FDocumentType } from "../905/862883";
 import { D } from "../figma_app/335489";
 import { cP, kz, zb } from "../figma_app/264776";
 import { compareWithGeneratedKey } from "../905/709171";
@@ -176,7 +176,7 @@ export function $$v4(e, t, r, n, a, s, d, c) {
       item: e,
       instanceGUIDs: n,
       sourceForTracking: a,
-      storeInRecentsKey: $A.Design,
+      storeInRecentsKey: FDocumentType.Design,
       usedSwapInstanceKeyboardShortcut: s,
       queryId: c ?? void 0
     }));

@@ -10,7 +10,7 @@ import { F2 } from '../905/826900';
 import { isEventProcessed } from '../905/955878';
 import { atomStoreManager } from '../figma_app/27355';
 import { FEditorType } from '../figma_app/53721';
-import { s0 } from '../figma_app/115923';
+import { sitesViewSetterAtomFamily } from '../figma_app/115923';
 import { hH, Q_, qG } from '../figma_app/119420';
 import { H as _$$H } from '../figma_app/358450';
 import { fullscreenValue } from '../figma_app/455680';
@@ -1234,7 +1234,7 @@ class W {
     };
     function t() {
       let e = debugState.getState().selectedView;
-      return e.view === 'fullscreen' && e.editorType === FEditorType.Sites && atomStoreManager.get(s0) === PanelType.CODE;
+      return e.view === 'fullscreen' && e.editorType === FEditorType.Sites && atomStoreManager.get(sitesViewSetterAtomFamily) === PanelType.CODE;
     }
     document.body.addEventListener('copy', G(i => {
       t() || e(i, ClipboardAction.COPY);

@@ -30,11 +30,11 @@ import { M3, dP } from "../figma_app/119475";
 import { Lp } from "../figma_app/563413";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { getFileKey } from "../905/412913";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Uv, XE, u1, bS } from "../figma_app/91703";
 import { hideModal, showModalHandler } from "../905/156213";
 import { sw, rk } from "../figma_app/914957";
-import { jD } from "../905/765855";
+import { hideTooltip } from "../905/765855";
 import { dG } from "../figma_app/753501";
 import { compareLibraryItemsAlias, compareWithGeneratedKey, compareLibraryItemWithKey } from "../905/709171";
 import { formatFontMetrics, teamLibraryCache } from "../figma_app/80990";
@@ -124,7 +124,7 @@ let eD = memo(function ({
   } = assertNotNullish(useContext(_$$G), "Must be inside <StylePickerActionsContext>");
   let L = bf(e);
   let D = useCallback(t => {
-    f && E(oB());
+    f && E(hideDropdownAction());
     t.stopPropagation();
     0 !== t.button || _$$i(t) || selectStyle(e);
   }, [e, selectStyle, f, E]);
@@ -649,7 +649,7 @@ function eG({
   let eh = e_.current?.getEl()?.getBoundingClientRect();
   let em = useMemo(() => !!modalShown && modalShown.type === LIBRARY_PREFERENCES_MODAL, [modalShown]);
   let eg = useMemo(() => {
-    let e = () => Y(jD());
+    let e = () => Y(hideTooltip());
     let r = () => Y(XE());
     let n = () => Y(Uv());
     let i = () => Y(sw());
@@ -680,7 +680,7 @@ function eG({
         }
       },
       showStyleContextMenu(e, t) {
-        Y(j7({
+        Y(showDropdownThunk({
           type: vG,
           data: {
             style: e,
@@ -704,7 +704,7 @@ function eG({
   }, [Y]);
   let eE = useCallback(e => {
     e.stopPropagation();
-    dropdownShown && Y(oB());
+    dropdownShown && Y(hideDropdownAction());
   }, [Y, dropdownShown]);
   let ey = useCallback(() => {
     t.modal && Y(u1({

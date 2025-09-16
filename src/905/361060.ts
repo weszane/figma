@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { c$ } from "../figma_app/236327";
 import { SvgComponent } from "../905/714743";
-import { oB, j7 } from "../905/929976";
+import { hideDropdownAction, showDropdownThunk } from "../905/929976";
 import { Um } from "../905/848862";
 import { Cf, it } from "../905/504727";
 import { A as _$$A } from "../6828/814452";
@@ -20,13 +20,13 @@ export function $$h2({
   let h = Um();
   let f = h?.type === e;
   let _ = useCallback(() => {
-    f ? m(oB()) : m(j7({
+    f ? m(hideDropdownAction()) : m(showDropdownThunk({
       type: e
     }));
   }, [m, f, e]);
   let A = useCallback(e => {
     i(e);
-    m(oB());
+    m(hideDropdownAction());
   }, [m, i]);
   let y = useRef(null);
   return jsxs("div", {
@@ -37,7 +37,7 @@ export function $$h2({
       onKeyDown: t => {
         "Tab" !== t.key && t.preventDefault();
         t.stopPropagation();
-        "Enter" !== t.key || f || m(j7({
+        "Enter" !== t.key || f || m(showDropdownThunk({
           type: e
         }));
       },

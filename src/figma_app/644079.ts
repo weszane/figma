@@ -9,7 +9,7 @@ import { P4 } from "../905/18800";
 import { r as _$$r } from "../figma_app/375550";
 import { isInteractionReady } from "../figma_app/433958";
 import { hA } from "../figma_app/88239";
-import { ow, m0 } from "../figma_app/976749";
+import { isWhiteboardFileType, isDevHandoffEditorType } from "../figma_app/976749";
 import { UX } from "../figma_app/740163";
 import { getViewportY } from "../figma_app/62612";
 import { isVsCodeEnvironment } from "../905/858738";
@@ -39,7 +39,7 @@ export function $$L2() {
   return useCallback(async () => e?.toastBottomInset ? await e.toastBottomInset() : Promise.reject(), [e]);
 }
 export function $$P0() {
-  let e = ow();
+  let e = isWhiteboardFileType();
   let t = useAtomWithSubscription(P4);
   let r = useAtomWithSubscription(O);
   let n = getObservableValue(AppStateTsApi?.editorPreferences()?.showFigmaScope, !1);
@@ -59,12 +59,12 @@ export function $$P0() {
 export function $$D3() {
   let e = _$$N();
   let t = isInteractionReady();
-  let r = m0();
+  let r = isDevHandoffEditorType();
   let n = useSelector(e => !!e.prototype?.isFooterVisible);
   let a = zm() && !r ? parsePxNumber(F6W) : 0;
   let s = useSelector(e => e.mirror?.appModel.showUi);
   let c = 64 + e + a;
-  let _ = ow();
+  let _ = isWhiteboardFileType();
   let m = L();
   let g = _$$_();
   let f = G();
