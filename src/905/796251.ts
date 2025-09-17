@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { lQ } from "../905/934246";
 import { getI18nString } from "../905/303541";
-import { PY } from "../905/34809";
+import { showMobileNav } from "../905/34809";
 import { U6, to, pS } from "../figma_app/909778";
 import { hideDropdownAction } from "../905/929976";
 import { Fp } from "../905/148074";
@@ -40,7 +40,7 @@ export function $$c0({
     separator: !0
   }), ...u(m, getI18nString("favorited_resources.remove_from_sidebar"), () => b(!1))];
   let E = [...u(!t, getI18nString("favorited_resources.create_a_new_section"), () => {
-    void 0 === A || A || _(PY());
+    void 0 === A || A || _(showMobileNav());
     let e = h ? g.findIndex(e => e.id === h) : 0;
     p && _(to({
       movingResource: {

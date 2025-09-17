@@ -56,7 +56,7 @@ import { userFlagExistsAtomFamily } from "../figma_app/545877";
 import { rq } from "../905/425180";
 import { Rb, qW, ZW, eC as _$$eC } from "../figma_app/982327";
 import { ps } from "../figma_app/845611";
-import { Oe } from "../905/34809";
+import { trackSidebarClick } from "../905/34809";
 import { Mn, e9 } from "../4452/961065";
 import { m$ } from "../figma_app/240735";
 import { Be } from "../figma_app/920435";
@@ -229,7 +229,7 @@ function ef(e) {
           view: "orgAdminSettings",
           orgAdminSettingsViewTab: e
         }));
-        t(Oe({
+        t(trackSidebarClick({
           clickedResourceType: "orgAdminSettings"
         }));
       } else {
@@ -237,7 +237,7 @@ function ef(e) {
           view: "billingGroupDashboard",
           selectedTab: FRequestsStr.REQUESTS
         }));
-        t(Oe({
+        t(trackSidebarClick({
           clickedResourceType: "licenseGroupAdminSettings"
         }));
       }

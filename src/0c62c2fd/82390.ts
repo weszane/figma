@@ -45,7 +45,7 @@ import { useMemoStable } from '../905/19536';
 import { editorUtilities as _$$k4 } from '../905/22009';
 import { W as _$$W5 } from '../905/25249';
 import { a as _$$a13 } from '../905/29104';
-import { Oe as _$$Oe, uV as _$$uV, JF, ZR } from '../905/34809';
+import { trackSidebarClick, setBrowserViewBarModeOptions, setBrowserTileSortView, setBrowserViewBarSortOptions } from '../905/34809';
 import { z4 as _$$z0 } from '../905/37051';
 import { l as _$$l8 } from '../905/37596';
 import { ModalRootComponent } from '../905/38914';
@@ -183,7 +183,7 @@ import { extractPropertyFromNestedObjects } from '../905/504360';
 import { Cf } from '../905/504727';
 import { Y9 as _$$Y6, yu } from '../905/504768';
 import { Y as _$$Y } from '../905/506207';
-import { E as _$$E8, FJ, N7, QV } from '../905/508367';
+import { createRect, openWindow, compareValues, navigateToFile } from '../905/508367';
 import { l as _$$l7 } from '../905/509505';
 import { z as _$$z11 } from '../905/510753';
 import { T as _$$T7 } from '../905/514205';
@@ -346,7 +346,7 @@ import { Xg as _$$Xg } from '../1556/751556';
 import { n as _$$n } from '../1577/959155';
 import { A as _$$A14 } from '../1617/505000';
 import { A as _$$A7 } from '../3850/824007';
-import { lb as _$$lb } from '../3973/538504';
+import { getJobRoleDisplay } from '../3973/538504';
 import { Z as _$$Z4 } from '../4452/80578';
 import { aN as _$$aN, EK, Fd, wT } from '../4452/90195';
 import { A as _$$A25 } from '../4452/239888';
@@ -452,7 +452,7 @@ import { j as _$$j3, FL } from '../figma_app/102449';
 import { u3 as _$$u, U6 as _$$U3, HS } from '../figma_app/109538';
 import { Q as _$$Q, v as _$$v } from '../figma_app/113686';
 import { ConfigGroups, isReduxDeprecationCutover, isReduxDeprecationShadowreadOrCutover } from '../figma_app/121751';
-import { cn as _$$cn, df as _$$df, eB as _$$eB, hP as _$$hP, Me as _$$Me, x$ as _$$x$, GU, qS, QS } from '../figma_app/141320';
+import { isStudentValidated, getGracePeriodAccessStatus, isTeamOwner, hasEditorAccess, getMinGracePeriodDays, getDaysUntilExpiration, getGracePeriodAccessForKey, getGracePeriodDaysOrZero, hasEditorAccessForAnyTeamMember } from '../figma_app/141320';
 import { bn as _$$bn, D1, H6, z1 } from '../figma_app/147337';
 import { uk as _$$uk } from '../figma_app/152745';
 import { BV, TS } from '../figma_app/153399';
@@ -505,7 +505,7 @@ import { ce as _$$ce, lH as _$$lH, Bb } from '../figma_app/347146';
 import { toggleFigmentDebugger } from '../figma_app/347406';
 import { aO as _$$aO } from '../figma_app/348887';
 import { convertCamelToSnakeWithLeading, generateProtoLinkUrl, mapProjectSummary } from '../figma_app/349248';
-import { l_ as _$$l_, u8 as _$$u2, Fx, N$, Yn, Z_ } from '../figma_app/350203';
+import { MAX_CAROUSEL_MEDIA, MAX_DESCRIPTION_LENGTH, MAX_WIDGETS, PublishSourceType, MAX_TAGS, MAX_BANNER_CLICKS } from '../figma_app/350203';
 import { ResourceHubResourceRoute } from '../figma_app/354658';
 import { s$ as _$$s$ } from '../figma_app/361035';
 import { z as _$$z1 } from '../figma_app/369596';
@@ -597,7 +597,7 @@ import { q as _$$q2 } from '../figma_app/712384';
 import { hJ as _$$hJ } from '../figma_app/713624';
 import { f4 as _$$f2, yH as _$$yH, Zm } from '../figma_app/722141';
 import { EZ, X1 } from '../figma_app/736948';
-import { d9 as _$$d5 } from '../figma_app/740025';
+import { isCommunityHubView } from '../figma_app/740025';
 import { a9 as _$$a3, LQ } from '../figma_app/741211';
 import { M as _$$M, s as _$$s4 } from '../figma_app/749682';
 import { FileType, FilterType, getFileTypeIndex, getResourceSortField, getSortFieldKey, getSortFieldProperty, getSortOrderKey, getViewModeKey, PermissionAction, PermissionType, SortField, SortOrder, ViewMode } from '../figma_app/756995';
@@ -653,7 +653,7 @@ import { o8 as _$$o4 } from '../figma_app/982327';
 import { yJ as _$$yJ2, I1, Pg } from '../figma_app/990058';
 import { L as _$$L7 } from '../figma_app/990299';
 import { dn as _$$dn } from '../figma_app/994403';
-import { q_ } from '../figma_app/997907';
+import { fileBrowserPageManager } from '../figma_app/997907';
 import { mk as _$$mk, Rj } from '../figma_app/999312';
 import { A as _$$A27 } from '../svg/68792';
 import { A as _$$A21 } from '../svg/128912';
@@ -739,7 +739,7 @@ function eO() {
       e(selectViewAction({
         view: 'recentsAndSharing'
       }));
-      e(_$$Oe({
+      e(trackSidebarClick({
         clickedResourceType: 'recentsAndSharing'
       }));
     },
@@ -915,7 +915,7 @@ function tt(e) {
           view: 'orgAdminSettings',
           orgAdminSettingsViewTab: e
         }));
-        t(_$$Oe({
+        t(trackSidebarClick({
           clickedResourceType: 'orgAdminSettings'
         }));
       } else {
@@ -927,14 +927,14 @@ function tt(e) {
           subView: UserGroupRole.ADMIN,
           licenseGroupId: e && groupsToReview.length > 0 ? groupsToReview[0].id : m,
           selectedTab: getGroupOrDefault(e && groupsToReview.length > 0 ? GroupType.MEMBERS : DefaultGroups[0])
-        })), t(_$$Oe({
+        })), t(trackSidebarClick({
           clickedResourceType: 'licenseGroupAdminSettings'
         }))) : f && (t(selectViewAction({
           view: 'workspace',
           subView: DUserRole.ADMIN,
           workspaceId: p[0].id,
           selectedTab: defaultSectionKey
-        })), t(_$$Oe({
+        })), t(trackSidebarClick({
           clickedResourceType: 'workspaceAdminSettings'
         })));
       }
@@ -951,7 +951,7 @@ function ta(e) {
     'isSelected': e.selectedView && e.selectedView.view === 'team',
     'onClick': () => {
       r(_$$dm(t));
-      r(_$$Oe({
+      r(trackSidebarClick({
         clickedResourceType: 'allProjects'
       }));
     },
@@ -1094,7 +1094,7 @@ function tv(e) {
       'isSelected': e.selectedView.view === 'folder' && e.selectedView.folderId === e.folder.id,
       'onClick': t => {
         let r = e.folder;
-        t.metaKey || t.ctrlKey || t.button !== 0 || (e.dispatch(_$$gN(r.id)), e.dispatch(_$$Oe({
+        t.metaKey || t.ctrlKey || t.button !== 0 || (e.dispatch(_$$gN(r.id)), e.dispatch(trackSidebarClick({
           clickedResourceType: 'drafts',
           resourceIdOrKey: r.id
         })));
@@ -2933,7 +2933,7 @@ function an(e) {
     isSelected: e.selectedView && e.selectedView.view === 'limitedTeamSharedProjects',
     onClick: () => {
       r(_$$eP());
-      r(_$$Oe({
+      r(trackSidebarClick({
         clickedResourceType: 'limitedTeamSharedProjects'
       }));
     },
@@ -2973,7 +2973,7 @@ function ad({
         orgId: r,
         orgViewTab: _$$X.HOME
       }));
-      t(_$$Oe({
+      t(trackSidebarClick({
         clickedResourceType: 'org',
         resourceIdOrKey: r
       }));
@@ -3067,7 +3067,7 @@ function ag(e) {
           isProTeam: c.isProTeam,
           teamAdminConsoleViewTab: c.isProTeam ? DashboardSections.DASHBOARD : DashboardSections.MEMBERS
         }));
-        t(_$$Oe({
+        t(trackSidebarClick({
           clickedResourceType: 'teamAdminSettings',
           resourceIdOrKey: r
         }));
@@ -3652,8 +3652,8 @@ function sj() {
     let o = useCurrentPlanUser('useEduUpgradeSectionProps');
     let l = useIsOrgUser(o).unwrapOr(!1);
     if (!e || a.status !== 'loaded') return null;
-    let d = _$$x$(s, _$$cn(e));
-    let c = d > 0 && d !== 1 / 0 && _$$cn(e) && t?.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_CURRENT;
+    let d = getDaysUntilExpiration(s, isStudentValidated(e));
+    let c = d > 0 && d !== 1 / 0 && isStudentValidated(e) && t?.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_CURRENT;
     let u = d === 0 && t?.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_EXPIRED && isTeamLocked(t.id, r);
     if (c || u) {
       return {
@@ -3663,7 +3663,7 @@ function sj() {
         }
       };
     }
-    if (!n.dismissed_edu_sidebar && _$$cn(e) && !l) {
+    if (!n.dismissed_edu_sidebar && isStudentValidated(e) && !l) {
       let e = getEditableUnpaidTeams(r).length > 0;
       return {
         type: so.EDU_UPGRADE,
@@ -3687,7 +3687,7 @@ function sj() {
     });
     let o = vt();
     let l = jn();
-    return e && r && n.status === 'loaded' && n.data.team?.hasPermission && s.status === 'loaded' && s.data ? !r || _$$cn(e) || hasTeamPaidAccess(t[r.id]) || o || l ? null : {
+    return e && r && n.status === 'loaded' && n.data.team?.hasPermission && s.status === 'loaded' && s.data ? !r || isStudentValidated(e) || hasTeamPaidAccess(t[r.id]) || o || l ? null : {
       type: so.UNIVERSAL,
       props: {
         onTeam: Object.keys(t).length > 0,
@@ -3734,7 +3734,7 @@ function sj() {
       enabled: !!r
     });
     let o = Mi();
-    return !e || !r || a.status !== 'loaded' || a.data || _$$cn(e) || hasTeamPaidAccess(t[r.id]) || n.status !== 'loaded' || !n.data.team?.hasPermission || !o() ? null : _$$gY2(s, a5, r.id, 7776e6) ? null : {
+    return !e || !r || a.status !== 'loaded' || a.data || isStudentValidated(e) || hasTeamPaidAccess(t[r.id]) || n.status !== 'loaded' || !n.data.team?.hasPermission || !o() ? null : _$$gY2(s, a5, r.id, 7776e6) ? null : {
       type: so.PAID_FREE_SPACE,
       props: {
         team: r
@@ -3852,7 +3852,7 @@ function sL() {
           'onClick': () => {
             customHistory.push(new ResourceHubHomeRouteClass({
               ...r,
-              tab: N$.COMMUNITY
+              tab: PublishSourceType.COMMUNITY
             }, s).href);
             _$$lz();
           },
@@ -3941,7 +3941,7 @@ function sH(e) {
       t(selectViewAction({
         view: 'teamFeed'
       }));
-      t(_$$Oe({
+      t(trackSidebarClick({
         clickedResourceType: 'teamFeed'
       }));
     },
@@ -3969,7 +3969,7 @@ function sK({
     'isSelected': e && e.view === 'folder' && e.folderId === t,
     'onClick': () => {
       s(_$$gN(t));
-      s(_$$Oe({
+      s(trackSidebarClick({
         clickedResourceType: 'folder'
       }));
     },
@@ -3993,7 +3993,7 @@ function sJ() {
         e(selectViewAction({
           view: 'deletedFiles'
         }));
-        e(_$$Oe({
+        e(trackSidebarClick({
           clickedResourceType: 'deletedFiles'
         }));
       },
@@ -4486,7 +4486,7 @@ function iN(e) {
       let t = e.getState();
       let r = getPermissionsState(t);
       let a = vp(r.user, r.currentUserOrgId, r.currentTeamId);
-      a && setRecentUserData(a.userId, _$$d5(t.selectedView), a.orgId, void 0, a.teamId);
+      a && setRecentUserData(a.userId, isCommunityHubView(t.selectedView), a.orgId, void 0, a.teamId);
     }, [e]);
   }();
   let _ = _$$n() || r.view === 'litmus';
@@ -6241,7 +6241,7 @@ function oy({
   let [c, u] = useState(!1);
   let m = useCallback(() => {
     if (!t.current) return;
-    let e = _$$E8(t.current.getBoundingClientRect());
+    let e = createRect(t.current.getBoundingClientRect());
     let r = window.innerWidth;
     let a = window.innerHeight;
     let s = a - e.top - 8;
@@ -6699,7 +6699,7 @@ function oq({
       children: getI18nString('community.resource_hub.browse_resources')
     }), jsx('div', {
       ..._$$xk(oX.subHeaderText),
-      children: e === N$.INTERNAL ? getI18nString('community.resource_hub.browse_resources_internal_subheader') : getI18nString('community.resource_hub.browse_resources_community_subheader')
+      children: e === PublishSourceType.INTERNAL ? getI18nString('community.resource_hub.browse_resources_internal_subheader') : getI18nString('community.resource_hub.browse_resources_community_subheader')
     })]
   });
 }
@@ -7215,7 +7215,7 @@ function lb() {
     })
   });
 }
-let lj = e => Math.ceil(e / Yn) * Yn;
+let lj = e => Math.ceil(e / MAX_TAGS) * MAX_TAGS;
 function lT({
   resourceCount: e,
   resourceType: t,
@@ -8290,7 +8290,7 @@ function lZ({
     resources,
     loading
   } = lT({
-    resourceCount: _$$l_,
+    resourceCount: MAX_CAROUSEL_MEDIA,
     resourceType: [ResourceTypeEnum.PLUGIN],
     category: t,
     caller: _$$z8.RESOURCE_HUB,
@@ -8315,7 +8315,7 @@ function lZ({
       onIntersectionChange: o,
       isOrgTeamBrowsing: !1,
       isLoading: loading,
-      loadingRowCount: _$$l_
+      loadingRowCount: MAX_CAROUSEL_MEDIA
     }),
     showSeeMore: !0
   }) : null;
@@ -8389,7 +8389,7 @@ function l5({
       className: 'x78zum5 xdt5ytf xh8yej3 x5yr21d x1665zp3',
       ref: r.sizeRef,
       children: [jsx(oq, {
-        tab: N$.COMMUNITY
+        tab: PublishSourceType.COMMUNITY
       }), jsx(lb, {}), jsx(lX, {
         sizingInfo: r
       })]
@@ -8562,7 +8562,7 @@ function du({
   });
   let l = new ResourceHubHomeRouteClass({
     ...s,
-    tab: N$.COMMUNITY
+    tab: PublishSourceType.COMMUNITY
   }, i);
   let d = t ? getI18nString('community.resource_hub.template_publishing_has_been_disabled') : getI18nString('community.resource_hub.streamline_your_work_with_custom');
   return jsx(TrackingProvider, {
@@ -8638,7 +8638,7 @@ function dp({
   } = useTheme();
   let o = new ResourceHubHomeRouteClass({
     ...r,
-    tab: N$.COMMUNITY
+    tab: PublishSourceType.COMMUNITY
   }, s);
   return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_UPGRADE_UPSELL,
@@ -8812,7 +8812,7 @@ function dv({
     loading,
     hasNextPage
   } = wO({
-    limit: Fx,
+    limit: MAX_WIDGETS,
     caller: _$$z8.RESOURCE_HUB,
     orgId: r,
     includeContent: !0
@@ -8943,7 +8943,7 @@ function dv({
     children: jsxs(TrackingProvider, {
       name: _$$e7.RESOURCE_HUB_INTERNAL_RESOURCES_HOME_PAGE,
       children: [jsx(oq, {
-        tab: N$.INTERNAL
+        tab: PublishSourceType.INTERNAL
       }), A.length > 1 && jsx('div', {
         className: 'x78zum5 x1qughib x6s0dn4 x1a02dak xou54vl',
         children: jsx(dx, {
@@ -9049,7 +9049,7 @@ function dI({
       onIntersectionChange: e,
       isOrgTeamBrowsing: !1,
       isLoading: !1,
-      loadingRowCount: Fx,
+      loadingRowCount: MAX_WIDGETS,
       layoutV1: 'twoColumn'
     }),
     showSeeMore: !!r
@@ -9106,7 +9106,7 @@ function dk({
     tab
   } = useSafeRouteParams(ResourceHubHomeRouteClass);
   switch (tab) {
-    case N$.INTERNAL:
+    case PublishSourceType.INTERNAL:
       n = jsx(dv, {
         planTier: e,
         currentOrgId: r ?? void 0,
@@ -9114,7 +9114,7 @@ function dk({
         isTemplatesPublishingDisabledForOrg: t
       });
       break;
-    case N$.COMMUNITY:
+    case PublishSourceType.COMMUNITY:
       n = jsx(l5, {
         currentOrgId: r ?? void 0,
         isCommunityTabDisabledForOrg: i
@@ -9193,7 +9193,7 @@ function dL({
   } = _$$e13({
     orgId: r,
     areWorkspacesEnabled: t === FPlanNameType.ENTERPRISE,
-    numTemplatesPerTeam: _$$u2 + 1,
+    numTemplatesPerTeam: MAX_DESCRIPTION_LENGTH + 1,
     editorType: l,
     filterByIds: null,
     enabled: !!l
@@ -9302,7 +9302,7 @@ function dM({
     isFetchingNextPage
   } = _$$yH2({
     resourceTypes: e,
-    limit: _$$u2,
+    limit: MAX_DESCRIPTION_LENGTH,
     caller: _$$z8.RESOURCE_HUB,
     orgId: t,
     teamId: r,
@@ -9320,7 +9320,7 @@ function dM({
     children: [jsx(_$$T4, {
       resources: resources ?? [],
       isLoading: loading,
-      loadingTileCount: m * Z_,
+      loadingTileCount: m * MAX_BANNER_CLICKS,
       resourceImpressionTracking: s
     }), jsx(_$$D4, {
       useInfiniteScroll: !0,
@@ -9562,7 +9562,7 @@ function dZ() {
   useEffect(() => {
     u && !_ && l(u);
   }, [u, _]);
-  let p = _$$V5(r, d, _$$u2);
+  let p = _$$V5(r, d, MAX_DESCRIPTION_LENGTH);
   let g = p.filterState;
   return jsx(TrackingProvider, {
     name: _$$e7.RESOURCE_HUB_CATEGORY,
@@ -9614,7 +9614,7 @@ function d2({
   isCommunityTabDisabledForOrg: e
 }) {
   let t = useAtomWithSubscription(d4);
-  let r = _$$P4() === N$.COMMUNITY;
+  let r = _$$P4() === PublishSourceType.COMMUNITY;
   let {
     show,
     isShowing,
@@ -9658,7 +9658,7 @@ function d8({
   let n = useSafeRouteStateInstance(ResourceHubHomeRouteClass);
   let o = useSelector(e => e.userFlags);
   let l = e => {
-    e !== N$.COMMUNITY || o[w3] || s(postUserFlag({
+    e !== PublishSourceType.COMMUNITY || o[w3] || s(postUserFlag({
       [w3]: !0
     }));
     _$$_K(e);
@@ -9667,33 +9667,33 @@ function d8({
     }).href);
   };
   let [d, c, m] = _$$t5.useManagedTabs({
-    [N$.INTERNAL]: !0,
-    [N$.COMMUNITY]: !0
+    [PublishSourceType.INTERNAL]: !0,
+    [PublishSourceType.COMMUNITY]: !0
   }, e, e => {
     l(e);
   });
-  let _ = Object.keys(N$).map(e => {
-    let r = N$[e] === N$.COMMUNITY;
+  let _ = Object.keys(PublishSourceType).map(e => {
+    let r = PublishSourceType[e] === PublishSourceType.COMMUNITY;
     return jsx(_$$t5.Tab, {
-      ...d[N$[e]],
+      ...d[PublishSourceType[e]],
       ...(r && {
         'data-onboarding-key': d5
       }),
       children: function (e, t) {
         switch (e) {
-          case N$.INTERNAL:
+          case PublishSourceType.INTERNAL:
             if (t) {
               return getI18nString('community.resource_hub.internal_tab', {
                 orgOrTeamName: t
               });
             }
             return getI18nString('community.resource_hub.internal_tab_default');
-          case N$.COMMUNITY:
+          case PublishSourceType.COMMUNITY:
             return getI18nString('community.resource_hub.community_tab');
           default:
             throwTypeError(e);
         }
-      }(N$[e], t)
+      }(PublishSourceType[e], t)
     }, e);
   });
   return jsxs('div', {
@@ -9726,7 +9726,7 @@ function cs({
         value: l,
         onChange: t => {
           if (t !== l && (d(t), e?.(t), r && i && n)) {
-            let e = new (t === N$.INTERNAL ? IQ : bP)(i, {
+            let e = new (t === PublishSourceType.INTERNAL ? IQ : bP)(i, {
               ...n,
               query: r.search.query,
               editor_type: r.search.editor_type,
@@ -9742,10 +9742,10 @@ function cs({
           })
         }), jsxs(_$$mc3, {
           children: [jsx(_$$c$2, {
-            value: N$.COMMUNITY,
+            value: PublishSourceType.COMMUNITY,
             children: getI18nString('community.community')
           }), jsx(_$$c$2, {
-            value: N$.INTERNAL,
+            value: PublishSourceType.INTERNAL,
             children: t
           })]
         })]
@@ -9761,7 +9761,7 @@ function ci() {
     let e = _$$P4();
     let t = useRouteParams(ResourceHubHomeRouteClass)?.tab || e;
     let [r, a] = useState(t);
-    let i = r === N$.INTERNAL ? IQ : bP;
+    let i = r === PublishSourceType.INTERNAL ? IQ : bP;
     let n = UX();
     let o = !!n;
     let l = useResourceRouteParams();
@@ -9872,14 +9872,14 @@ function co({
     tab
   } = useSafeRouteParams(ResourceHubHomeRouteClass);
   let s = !!useRouteStateInstance(ResourceHubResourceRoute);
-  let i = tab === N$.COMMUNITY && !t && !s && !isResourceHubInternalSearchEnabled();
+  let i = tab === PublishSourceType.COMMUNITY && !t && !s && !isResourceHubInternalSearchEnabled();
   let n = jsx('div', {
     className: 'xqyf9gi',
     children: jsx(ci, {}, 'resource-hub-search-bar')
   });
   return jsx(_$$g4, {
     leftSide: jsx(cl, {
-      selectedTab: tab || N$.INTERNAL,
+      selectedTab: tab || PublishSourceType.INTERNAL,
       orgOrTeamName: e,
       isCommunityTabDisabledForOrg: t
     }),
@@ -9907,7 +9907,7 @@ function cl({
     });
   }
   let c = '';
-  return s || n || o || l ? (s ? c = e === N$.INTERNAL ? t ? getI18nString('community.search.search_results_from_org_or_team', {
+  return s || n || o || l ? (s ? c = e === PublishSourceType.INTERNAL ? t ? getI18nString('community.search.search_results_from_org_or_team', {
     orgOrTeamName: t
   }) : getI18nString('community.search.search_results') : getI18nString('community.search.search_results_from_community') : o ? (c = _$$i_(o.params.resourceTypeSlug), o.params.templatesTeamId && (c = templatesByTeam?.teamName ? getI18nString('community.resource_hub.internal_tab', {
     orgOrTeamName: templatesByTeam.teamName
@@ -10064,7 +10064,7 @@ function cj({
     hasNextPage: _hasNextPage2
   } = lT({
     resourceType: getResourceTypesForBrowse(ResourceTypeSubset.PLUGINS),
-    resourceCount: Fx,
+    resourceCount: MAX_WIDGETS,
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: e,
     includeContent: !0,
@@ -10136,7 +10136,7 @@ function cT({
     resourceType: getResourceTypesForBrowse(e),
     caller: _$$z8.RESOURCE_HUB,
     savedByUserId: t,
-    pageSize: _$$u2,
+    pageSize: MAX_DESCRIPTION_LENGTH,
     includeContent: e === ResourceTypeSubset.PLUGINS
   }), {
     enabled: !!t
@@ -10206,7 +10206,7 @@ function cI({
       onIntersectionChange: r,
       isOrgTeamBrowsing: !1,
       isLoading: !1,
-      loadingRowCount: Fx,
+      loadingRowCount: MAX_WIDGETS,
       layoutV1: 'twoColumn'
     }),
     route: new _$$e11({
@@ -10222,7 +10222,7 @@ function cO({
   filtersControlState: r
 }) {
   let s = _$$e15();
-  let i = s instanceof bP ? N$.COMMUNITY : N$.INTERNAL;
+  let i = s instanceof bP ? PublishSourceType.COMMUNITY : PublishSourceType.INTERNAL;
   let n = useResourceFuid();
   let o = _$$v6(t);
   let l = (e, t) => {
@@ -10254,7 +10254,7 @@ function cO({
         children: function (e, t) {
           switch (e) {
             case ResourceTypeSubset.FILES:
-              if (t === N$.COMMUNITY) return getI18nString('community.view_bar.files_and_templates_tab');
+              if (t === PublishSourceType.COMMUNITY) return getI18nString('community.view_bar.files_and_templates_tab');
               return getI18nString('community.view_bar.templates_tab');
             case ResourceTypeSubset.PLUGINS:
               return getI18nString('community.view_bar.plugins');
@@ -10280,7 +10280,7 @@ function cO({
         filterState: r,
         showEditorFilter: !0,
         showResourceTypeFilter: !1,
-        showPriceFilter: i !== N$.INTERNAL
+        showPriceFilter: i !== PublishSourceType.INTERNAL
       }, 'filters')]
     })
   });
@@ -10404,8 +10404,8 @@ function cD() {
   let _ = n.data?.type !== FOrganizationLevelType.ORG || getResourceDataOrFallback(n.data.customTemplatesAllowed);
   let p = isTntSavingEnabled();
   let f = useMemo(() => {
-    let e = N$.INTERNAL;
-    n.status === 'loaded' && n.data?.tier === FPlanNameType.STARTER && (e = N$.COMMUNITY);
+    let e = PublishSourceType.INTERNAL;
+    n.status === 'loaded' && n.data?.tier === FPlanNameType.STARTER && (e = PublishSourceType.COMMUNITY);
     return new ResourceHubHomeRouteClass({
       ...t,
       tab: e
@@ -10507,8 +10507,8 @@ function cB({
     templatesByTeam
   } = dF();
   let m = [];
-  let _ = useRouteParams(ResourceHubHomeRouteClass)?.tab || N$.INTERNAL;
-  let p = _ === N$.COMMUNITY ? getI18nString('community.resource_hub.templates_and_tools_from_community') : getI18nString('sidebar.templates_and_tools');
+  let _ = useRouteParams(ResourceHubHomeRouteClass)?.tab || PublishSourceType.INTERNAL;
+  let p = _ === PublishSourceType.COMMUNITY ? getI18nString('community.resource_hub.templates_and_tools_from_community') : getI18nString('sidebar.templates_and_tools');
   m = [{
     text: p,
     to: new ResourceHubHomeRouteClass({
@@ -11308,7 +11308,7 @@ let ub = (e, t, r) => {
       trackEventAnalytics('file view toggle', {
         viewType: t === ViewMode.GRID ? 'grid' : 'list'
       });
-      e(JF({
+      e(setBrowserTileSortView({
         selectedView: r,
         config: {
           ...s.tileSortFilterConfig,
@@ -11334,14 +11334,14 @@ let uv = (e, t, r) => {
       trackEventAnalytics('folder view toggle', {
         viewType: t === ViewMode.GRID ? 'grid' : 'list'
       });
-      e(JF({
+      e(setBrowserTileSortView({
         selectedView: r,
         config: {
           ...s.tileSortFilterConfig,
           viewMode: t
         }
       }));
-      e(_$$uV({
+      e(setBrowserViewBarModeOptions({
         viewId: _$$l6,
         viewMode: t
       }));
@@ -12032,7 +12032,7 @@ function me({
       };
       switch (e.type) {
         case _$$nb.FILE:
-          N7(m, e.file.parentOrgId, _, e.file.teamId) ? QV({
+          compareValues(m, e.file.parentOrgId, _, e.file.teamId) ? navigateToFile({
             file: {
               key: e.file.key,
               editorType: e.file.editorType || void 0
@@ -12045,7 +12045,7 @@ function me({
           }));
           break;
         case _$$nb.PINNED_FILE:
-          N7(m, e.file.parentOrgId, _, e.file.teamId) ? QV({
+          compareValues(m, e.file.parentOrgId, _, e.file.teamId) ? navigateToFile({
             file: {
               key: e.file.key,
               editorType: e.file.editorType
@@ -12059,7 +12059,7 @@ function me({
           break;
         case _$$nb.PROTOTYPE:
           let g = e.prototype.fig_file;
-          N7(m, g.parent_org_id, _, g.team_id) ? QV({
+          compareValues(m, g.parent_org_id, _, g.team_id) ? navigateToFile({
             base: 'proto',
             file: {
               key: g.key,
@@ -12078,7 +12078,7 @@ function me({
             let t = findBranchById(e.repo, e.branches, i);
             if (!t) throw new Error(`Branch not found for repo ${e.repo.id}`);
             let a = t.key;
-            N7(m, t.parent_org_id, _, t.team_id) ? QV({
+            compareValues(m, t.parent_org_id, _, t.team_id) ? navigateToFile({
               file: {
                 key: a
               }
@@ -12277,7 +12277,7 @@ function me({
           sortBy: e => {
             let t = x.tileSortFilterConfig;
             let r = t.sort.dir === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
-            $(JF({
+            $(setBrowserTileSortView({
               selectedView: w,
               config: {
                 ...t,
@@ -12971,7 +12971,7 @@ function mv(e) {
         if (l) {
           let r = t.sortKey === FolderSortKey.NAME ? SortField.NAME : SortField.TOUCHED_AT;
           let a = t.sortDesc ? SortOrder.DESC : SortOrder.ASC;
-          n(JF({
+          n(setBrowserTileSortView({
             selectedView: e.selectedView,
             config: {
               ...m.team,
@@ -12982,7 +12982,7 @@ function mv(e) {
             }
           }));
         } else {
-          n(ZR({
+          n(setBrowserViewBarSortOptions({
             viewId: e.viewId,
             sortMode: {
               sortKey: t.sortKey,
@@ -13132,7 +13132,7 @@ let mW = registerModal(e => {
     }).then(({
       data: e
     }) => {
-      FJ(e.meta.hosted_invoice_url, '_blank', 'noopener');
+      openWindow(e.meta.hosted_invoice_url, '_blank', 'noopener');
     });
   }, [e.teamId]);
   useEffect(() => {
@@ -13304,9 +13304,9 @@ function m9(e, t, r, i, n, l) {
     if (s.user) {
       let t = n.hasEditRoleOnTeam;
       let a = ['folder', 'team'].includes(e) && t;
-      let i = _$$cn(s.user);
+      let i = isStudentValidated(s.user);
       let o = s.userEduGracePeriods;
-      C ? d && _$$hP(s.user.id, s.roles.byTeamId, s.teams[d]) && (I = _$$df(o, i), E = _$$Me(o)) : r && a && (I = GU(o, i, r, !!s.teams[r].student_team), E = qS(o, r));
+      C ? d && hasEditorAccess(s.user.id, s.roles.byTeamId, s.teams[d]) && (I = getGracePeriodAccessStatus(o, i), E = getMinGracePeriodDays(o)) : r && a && (I = getGracePeriodAccessForKey(o, i, r, !!s.teams[r].student_team), E = getGracePeriodDaysOrZero(o, r));
     }
     let k = l && !hasValidSubscription(l) && !l.student_team && T && !isRootPath(T);
     let R = k && T.is_invite_only;
@@ -13342,7 +13342,7 @@ function m9(e, t, r, i, n, l) {
     let G = isExternalRestricted(s.user, s.currentUserOrgId);
     let V = _$$ng2.canSeeExpiredProTrialBanner(s.userTeamFlags, l, s);
     let z = l && s.userTeamFlags[l.id]?.[_$$lg];
-    let H = s.user ? _$$x$(s.eduPeriodEnd, _$$cn(s.user)) : 1 / 0;
+    let H = s.user ? getDaysUntilExpiration(s.eduPeriodEnd, isStudentValidated(s.user)) : 1 / 0;
     let K = H > 0 && H !== 1 / 0;
     let Y = H === 0;
     let J = l && l.student_team_state === FStudentTeamStatusType.STUDENT_TEAM_CURRENT;
@@ -13518,9 +13518,9 @@ function m9(e, t, r, i, n, l) {
     } else if (s.user && ['team', 'folder'].includes(e) && I.showAccessRestricted) {
       let e;
       let t = getI18nString('banner.edu_grace_period.your_education_plan_has_expired');
-      l ? _$$eB(s.user.id, s.roles.byTeamId, l) ? e = getI18nString('banner.edu_grace_period.team_is_now_view_only_for_all_members', {
+      l ? isTeamOwner(s.user.id, s.roles.byTeamId, l) ? e = getI18nString('banner.edu_grace_period.team_is_now_view_only_for_all_members', {
         teamName: l.name
-      }) : QS(s.user.id, s.roles.byTeamId, l) ? e = getI18nString('banner.edu_grace_period.you_can_no_longer_edit_files_in_team', {
+      }) : hasEditorAccessForAnyTeamMember(s.user.id, s.roles.byTeamId, l) ? e = getI18nString('banner.edu_grace_period.you_can_no_longer_edit_files_in_team', {
         teamName: l.name
       }) : (t = getI18nString('banner.edu_grace_period.your_education_plan_has_expired.is_member', {
         teamName: l.name
@@ -13976,7 +13976,7 @@ function _o() {
       trackEventAnalytics('file view toggle', {
         viewType: e === ViewMode.GRID ? 'grid' : 'list'
       });
-      t(JF({
+      t(setBrowserTileSortView({
         selectedView: l,
         config: {
           ...d.tileSortFilterConfig,
@@ -16298,7 +16298,7 @@ function p8({
         trackEventAnalytics('file view toggle', {
           viewType: e === ViewMode.GRID ? 'grid' : 'list'
         });
-        u(JF({
+        u(setBrowserTileSortView({
           selectedView: _,
           config: {
             ...N.tileSortFilterConfig,
@@ -17789,7 +17789,7 @@ function gb() {
   let t = useResourceFuid();
   let r = e && t ? new ResourceHubHomeRouteClass({
     ...e,
-    tab: N$.COMMUNITY
+    tab: PublishSourceType.COMMUNITY
   }, t).href : '';
   return jsxs(LinkPrimitive, {
     'href': r,
@@ -19187,7 +19187,7 @@ function ha(e) {
           viewType: e === ViewMode.GRID ? 'grid' : 'list'
         });
         Object.keys(ViewTypeEnum).map(t => {
-          r(JF({
+          r(setBrowserTileSortView({
             selectedView: n,
             config: {
               ...f.tileSortFilterConfig,
@@ -19195,7 +19195,7 @@ function ha(e) {
             },
             tab: ViewTypeEnum[t]
           }));
-        }, r(_$$uV({
+        }, r(setBrowserViewBarModeOptions({
           viewId: 'shared-with-you-projects',
           viewMode: e
         })));
@@ -19565,7 +19565,7 @@ let hO = (e, t, r) => {
       trackEventAnalytics('team folder view toggle', {
         viewType: t === ViewMode.GRID ? 'grid' : 'list'
       });
-      e(JF({
+      e(setBrowserTileSortView({
         selectedView: r,
         config: {
           ...s.tileSortFilterConfig,
@@ -20244,7 +20244,7 @@ function h1(e) {
             className: 'org_user_meta_content--jobTitle--bWmsS text--fontPos11--2LvXf text--_fontBase--QdLsd',
             children: [jsx(Badge, {
               color: BadgeColor.INVERT,
-              text: _$$lb(e.user.profile?.job_title)
+              text: getJobRoleDisplay(e.user.profile?.job_title)
             }), e.userId === r?.id && jsx('span', {
               className: 'org_user_meta_content--blueLink--u44PB blue_link--blueLink--9rlnd',
               role: 'button',
@@ -22298,7 +22298,7 @@ export function $$bo0() {
   let r = Um();
   let E = selectCurrentUser();
   let I = getSelectedView();
-  let C = q_.useIsLoading();
+  let C = fileBrowserPageManager.useIsLoading();
   let S = useSelector(e => e.payment);
   let k = useSelector(e => e.currentTeamId);
   let R = _$$d2();

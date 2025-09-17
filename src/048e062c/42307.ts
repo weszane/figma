@@ -18,7 +18,7 @@ import { A as _$$A2 } from '../vendor/308491';
 import { A as _$$A4 } from '../vendor/520489';
 import { A as _$$A3 } from '../vendor/527842';
 import { DefaultEventPriority } from '../vendor/846192';
-import { useDebounce } fromuse-debounce89';
+import { useDebounce } from 'use-debounce';
 let p = new ReconciliationRuntime({
   resourceStatus: {
     loadedFonts: {},

@@ -5,7 +5,7 @@ import { FU } from "../905/26824";
 import { trackUserEvent } from "../figma_app/314264";
 import { fullscreenValue } from "../figma_app/455680";
 import { debugState } from "../905/407919";
-import { P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { XHR } from "../905/910117";
 let p = "keyboardLayoutPreference";
 let $$_4 = "keyboardLayoutPreference";
@@ -77,7 +77,7 @@ export function $$y6({
   if (!localStorageRef) return;
   let t = KeyboardLayout[e];
   localStorageRef.setItem(p, t);
-  new P().sendToOtherTabs($$_4, t);
+  new IpcStorageHandler().sendToOtherTabs($$_4, t);
   $$E1({
     layout: e,
     eventName: "user_manual_change"

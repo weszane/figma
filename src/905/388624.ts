@@ -12,7 +12,7 @@ import { n as _$$n } from "../figma_app/3731";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { _l } from "../figma_app/976345";
-import { cs, UP, T9, nR } from "../figma_app/740025";
+import { isOrgOrTeamExport, useIsCommunityHubView, findProfile, trackProfileAdminMenuOpen } from "../figma_app/740025";
 import { nm } from "../905/352022";
 import { O_ } from "../905/967587";
 import { selectPermissionsState } from "../figma_app/212807";
@@ -45,7 +45,7 @@ function P(e, t, i, r, a, s, o) {
         forceAvatar: !0
       })]
     }),
-    itemBadge: cs(e) ? jsx(Badge, {
+    itemBadge: isOrgOrTeamExport(e) ? jsx(Badge, {
       className: w,
       text: getI18nString("navbar.community.admin_label"),
       color: BadgeColor.INVERT,
@@ -80,7 +80,7 @@ function z() {
   let K = useSelector(e => e.orgById);
   let Y = useSelector(e => e.authedTeamsById);
   let q = useSelector(e => e.authedActiveCommunityProfile);
-  let $ = UP();
+  let $ = useIsCommunityHubView();
   let Z = useSelector(e => Object.keys(e.authedProfilesById).some(t => !!e.authedProfilesById[t].org_id || !!e.authedProfilesById[t].team_id));
   let X = useSelector(e => e.userNotifications.communityProfileBellStates);
   useEffect(() => {
@@ -170,7 +170,7 @@ function z() {
             }
             let p = l?.primary_user_id === a.id;
             let h = t && p;
-            let y = T9({
+            let y = findProfile({
               authedProfilesById: s,
               userId: a.id
             });
@@ -206,7 +206,7 @@ function z() {
               return;
             }
             let A = t && l?.org_id === a.id;
-            let b = T9({
+            let b = findProfile({
               authedProfilesById: s,
               orgId: a.id
             });
@@ -283,7 +283,7 @@ function z() {
                 fallbackSvg: _$$A3
               })]
             }),
-            onMouseEnter: () => nR("submenu", s.view),
+            onMouseEnter: () => trackProfileAdminMenuOpen("submenu", s.view),
             className: S,
             children: t.concat(i),
             activeClassName: T,

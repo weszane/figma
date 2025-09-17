@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { jm } from "../figma_app/416935";
+import { isFigmaEmail } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { useSubscription } from "../figma_app/288654";
 import { isIpadDevice } from "../figma_app/778880";
@@ -14,7 +14,7 @@ import { LatestClipboardData } from "../figma_app/43951";
 import { trackFileEvent } from "../figma_app/314264";
 import { aq } from "../figma_app/412189";
 export function $$E0(e, t) {
-  return !!(e?.is_ipad_user || jm(t));
+  return !!(e?.is_ipad_user || isFigmaEmail(t));
 }
 export function $$y1() {
   let e = useDispatch();

@@ -57,7 +57,7 @@ import { N as _$$N2 } from "../905/438674";
 import { e as _$$e2 } from "../905/295932";
 import { f as _$$f2 } from "../6268/481313";
 import { I as _$$I } from "../905/932503";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { buildUploadUrl } from "../figma_app/169182";
 import { H as _$$H } from "../figma_app/47866";
 import { oW } from "../905/675859";
@@ -1291,7 +1291,7 @@ function nw({
   };
   let h = async () => {
     let e = await _$$l2();
-    FJ(e.manage);
+    openWindow(e.manage);
   };
   let u = {
     [w6.Connected]: jsxs(Fragment, {

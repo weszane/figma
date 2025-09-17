@@ -7,7 +7,7 @@ import { atomStoreManager } from "../figma_app/27355";
 import { createOptimistCommitAction, createOptimistRevertAction } from "../905/676456";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { dR } from "../905/508367";
+import { appendSearchParams } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { x as _$$x } from "../figma_app/256637";
 import { getInitialOptions } from "../figma_app/169182";
@@ -33,10 +33,10 @@ import { u as _$$u } from "../905/747030";
 import { showModalHandler } from "../905/156213";
 import { Hx } from "../figma_app/147952";
 import { uo } from "../905/98702";
-import { M5 } from "../figma_app/350203";
+import { HubEventType } from "../figma_app/350203";
 import { N as _$$N } from "../figma_app/23271";
 import { trackFileObjEvent } from "../figma_app/314264";
-import { sD } from "../figma_app/740025";
+import { findPublishedProfileForUser } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { DI } from "../figma_app/557318";
 import { pt } from "../figma_app/198840";
@@ -107,7 +107,7 @@ let $$eb16 = createOptimistThunk((e, t, {
     data: r
   }) => {
     let i = r.meta;
-    trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
+    trackEventAnalytics(HubEventType.HUB_FILE_DUPLICATED, {
       hubFileId: t.hubFileId,
       figFileKey: i.key,
       searchSessionId: wr(n)
@@ -118,7 +118,7 @@ let $$eb16 = createOptimistThunk((e, t, {
       type: ITemplateType.CommunityResource
     }));
     let a = getDesignFileUrlWithOptions(i);
-    a = dR(a, {
+    a = appendSearchParams(a, {
       [pt.KEY]: pt.VALUE,
       fuid: t.workspace.userId
     });
@@ -607,11 +607,11 @@ let $$eD23 = createOptimistAction("OPTIMISTIC_DUPLICATE_HUB_FILE", (e, {
     e.dispatch(createOptimistCommitAction(n));
     let a = i.meta;
     let s = getDesignFileUrlWithOptions(a);
-    s = dR(s, {
+    s = appendSearchParams(s, {
       [pt.KEY]: pt.VALUE
     });
     customHistory.redirect(s, isMobileUA ? void 0 : "_blank");
-    trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
+    trackEventAnalytics(HubEventType.HUB_FILE_DUPLICATED, {
       hubFileId: t,
       figFileKey: a.key,
       viewContext: r,
@@ -659,7 +659,7 @@ let $$eM24 = createOptimistThunk((e, {
     }));
   });
   let i = e.getState().user;
-  let a = i && sD(i, e.getState().authedProfilesById);
+  let a = i && findPublishedProfileForUser(i, e.getState().authedProfilesById);
   i?.id && a && WB().optimisticallyCreate({
     CommunityHubLike: {
       [`optimistic-${t}-${a.id}`]: {
@@ -723,7 +723,7 @@ let $$eG14 = createOptimistThunk(async (e, {
 }) => {
   let r = e.getState();
   let n = r.user?.id;
-  n && (trackEventAnalytics(M5.SLIDE_TEMPLATE_USED, {
+  n && (trackEventAnalytics(HubEventType.SLIDE_TEMPLATE_USED, {
     hubFileId: t
   }), eB[n]?.includes(t) || (await BuyerAPIHandler.updateSlideTemplateCommunityUsageCount({
     hubFileId: t

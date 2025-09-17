@@ -7,7 +7,7 @@ import { FFileType } from "../figma_app/191312";
 import { UserPreferences } from "../figma_app/43951";
 import { getNormalizedPath } from "../figma_app/193867";
 import { e as _$$e } from "../905/859735";
-import { GZ } from "../905/508367";
+import { isIframe } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
@@ -20,7 +20,7 @@ let g = (() => {
   return customHistory.location.pathname;
 })();
 export function $$f2() {
-  return !GZ() && !desktopAPIInstance && !!((getInitialOptions().editing_file || getInitialOptions().link_password_input) && E(y) || E(b));
+  return !isIframe() && !desktopAPIInstance && !!((getInitialOptions().editing_file || getInitialOptions().link_password_input) && E(y) || E(b));
 }
 function E(e) {
   return e(g) && e(customHistory.location.pathname);

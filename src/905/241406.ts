@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { isStripePending } from "../figma_app/471982";
 import { n7 } from "../905/926523";
 import { popModalStack } from "../905/156213";
-import { kc, sD } from "../figma_app/740025";
+import { useAuthedActiveCommunityProfile, findPublishedProfileForUser } from "../figma_app/740025";
 import { registerModal } from "../905/102752";
 import { Ro } from "../figma_app/805373";
 import { EL } from "../905/748636";
@@ -90,7 +90,7 @@ function P(e) {
 export function $$O1(e) {
   let t = useSelector(e => e.authedUsers);
   let i = useSelector(e => e.authedProfilesById);
-  let s = kc();
+  let s = useAuthedActiveCommunityProfile();
   let [c, u] = useState(null);
   let {
     profilesOnly
@@ -342,7 +342,7 @@ class L extends Component {
     });
   }
   render() {
-    let e = this.state.selectedUser && sD(this.state.selectedUser, this.props.authedProfilesById);
+    let e = this.state.selectedUser && findPublishedProfileForUser(this.state.selectedUser, this.props.authedProfilesById);
     return jsxs(ModalContainer, {
       size: 560,
       className: "merge_profiles--modal--1x-5z modal--modal--fXC8G modal--modalShadow--d-rJf modal--modalBare--AlP7E",

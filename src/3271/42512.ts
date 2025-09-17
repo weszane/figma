@@ -57,7 +57,7 @@ import { selectCurrentUser } from "../905/372672";
 import { I4, QW, hI, JL } from "../figma_app/522242";
 import { A as _$$A2 } from "../5724/267849";
 import { I as _$$I2 } from "../5430/292815";
-import { Pk, Kj } from "../figma_app/740025";
+import { FUSE_CONFIG_DEFAULT, FUSE_KEYS_PROFILE } from "../figma_app/740025";
 import { A as _$$A3 } from "../svg/833198";
 import { A as _$$A4 } from "../svg/733948";
 import { isSubscriptionActive } from "../figma_app/808294";
@@ -1306,19 +1306,19 @@ function t8() {
   }), [t, s, r, a]);
 }
 let t6 = new Ef([], {
-  ...Pk,
-  keys: Kj
+  ...FUSE_CONFIG_DEFAULT,
+  keys: FUSE_KEYS_PROFILE
 });
 let t7 = new Ef([], {
-  ...Pk,
+  ...FUSE_CONFIG_DEFAULT,
   keys: [{
     name: "name",
     weight: 1
   }]
 });
 let se = new Ef([], {
-  ...Pk,
-  keys: Kj
+  ...FUSE_CONFIG_DEFAULT,
+  keys: FUSE_KEYS_PROFILE
 });
 function st(e) {
   let t;

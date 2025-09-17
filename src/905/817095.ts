@@ -5,7 +5,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogBody, DialogFooter, DialogActionStrip, DialogContents, DialogHeader, DialogTitle } from "../figma_app/272243";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { liveStoreInstance, IT } from "../905/713695";
-import { m as _$$m } from "../905/325034";
+import { StatsigAPI } from "../905/325034";
 import { registerModal } from "../905/102752";
 import { setupAutofocusHandler } from "../905/128376";
 import { setupToggleButton } from "../905/167712";
@@ -285,7 +285,7 @@ function V(e) {
           disabled: a || m,
           onClick: () => {
             s(!0);
-            _$$m.postStatsigUpdateOverrides(pendingChanges).then(e => {
+            StatsigAPI.postStatsigUpdateOverrides(pendingChanges).then(e => {
               s(!1);
               p(e.data.meta);
             }).catch(e => {
@@ -303,10 +303,10 @@ function V(e) {
 }
 var G = (e => (e[e.MAKE_CHANGES = 0] = "MAKE_CHANGES", e[e.REVIEW_CHANGES = 1] = "REVIEW_CHANGES", e))(G || {});
 let z = liveStoreInstance.Query({
-  fetch: async () => (await _$$m.getStatsigFlagStatusForUser()).data.meta
+  fetch: async () => (await StatsigAPI.getStatsigFlagStatusForUser()).data.meta
 });
 let H = liveStoreInstance.Query({
-  fetch: async () => (await _$$m.getStatsigFlagDescriptions()).data.meta ?? {}
+  fetch: async () => (await StatsigAPI.getStatsigFlagDescriptions()).data.meta ?? {}
 });
 let $$W0 = registerModal(function (e) {
   let t = useModalManager(e);

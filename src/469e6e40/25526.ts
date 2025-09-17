@@ -92,7 +92,7 @@ import { v as _$$v } from "../469e6e40/843735";
 import e2 from "classnames";
 import e5 from "../vendor/128080";
 import { A as _$$A2 } from "../905/920142";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { isMobileUA } from "../figma_app/778880";
 import { truncate, formatList } from "../figma_app/930338";
 import { XHR } from "../905/910117";
@@ -167,7 +167,7 @@ import { L as _$$L } from "../469e6e40/82885";
 import { p as _$$p4 } from "../469e6e40/470485";
 import { b as _$$b3 } from "../905/946806";
 import { Z as _$$Z } from "../905/279476";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { reportError } from "../905/11";
 import { aD as _$$aD, Sn } from "../469e6e40/875985";
 import { CurrencyFormatter } from "../figma_app/514043";
@@ -1627,7 +1627,7 @@ function t0(e) {
         placeholder: getI18nString("activity_log.table.member_email_addresses"),
         onChange: e.onEmailInputChange,
         validateToken: e => ({
-          state: xf(e) ? _$$d2.OK : _$$d2.ERROR,
+          state: isValidEmail(e) ? _$$d2.OK : _$$d2.ERROR,
           content: e
         }),
         TokenComponent: tQ
@@ -2696,7 +2696,7 @@ function ni(e) {
           differenceDays: t,
           payInvoiceLink: jsx("button", {
             onClick: () => {
-              e.hostedInvoiceUrl ? FJ(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PayBanner: missing hosted invoice url"), {
+              e.hostedInvoiceUrl ? openWindow(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PayBanner: missing hosted invoice url"), {
                 extra: {
                   orgId: e.orgId,
                   invoiceId: e.invoiceId
@@ -2734,7 +2734,7 @@ function nr(e) {
           }),
           payInvoiceLink: jsx("button", {
             onClick: () => {
-              e.hostedInvoiceUrl ? FJ(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PastDueBanner: missing hosted invoice url"), {
+              e.hostedInvoiceUrl ? openWindow(e.hostedInvoiceUrl, "_blank", "noopener") : reportError(_$$e.BILLING_EXPERIENCE, Error("PastDueBanner: missing hosted invoice url"), {
                 extra: {
                   orgId: e.orgId,
                   invoiceId: e.invoiceId

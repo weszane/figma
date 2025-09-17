@@ -1,61 +1,135 @@
-import { localStorageRef } from "../905/657224";
-let r = "ipc:";
-export class $$a0 {
+import { localStorageRef } from '../905/657224'
+
+const IPC_PREFIX = 'ipc:'
+
+/**
+ * Handles cross-tab communication using localStorage events.
+ * Original class name: $$a0
+ */
+export class IpcStorageHandler {
+  private storage: Storage
+  private callbacks: Record<string, Array<(payload: any) => void>>
+  private _onStorageEvent: (e: StorageEvent) => void
+
   constructor() {
-    this.storage = localStorageRef;
-    this._onStorageEvent = e => {
-      let t = e.key;
-      if (e.storageArea === this.storage && null !== e.newValue && t?.startsWith(r)) {
-        let i = null;
+    this.storage = localStorageRef
+    this.callbacks = {}
+
+    /**
+     * Handles the 'storage' event and dispatches messages to registered callbacks.
+     * Original method name: _onStorageEvent
+     */
+    this._onStorageEvent = (event: StorageEvent) => {
+      const key = event.key
+      if (
+        event.storageArea === this.storage
+        && event.newValue !== null
+        && key?.startsWith(IPC_PREFIX)
+      ) {
+        let payload: any = null
         try {
-          i = JSON.parse(e.newValue)[0];
-        } catch (e) {
-          return;
+          payload = JSON.parse(event.newValue)[0]
         }
-        let n = null;
-        for (let e of this.callbacks[t] || []) try {
-          e(i);
-        } catch (e) {
-          n = e;
+        catch {
+          // Ignore malformed JSON
+          return
         }
-        if (n) throw n;
+        let thrownError: any = null
+        for (const callback of this.callbacks[key] || []) {
+          try {
+            callback(payload)
+          }
+          catch (err) {
+            thrownError = err
+          }
+        }
+        if (thrownError)
+          throw thrownError
       }
-    };
-    let e = this.storage;
-    if (e) for (let t of Object.keys(e)) t.startsWith(r) && delete e[t];
-    this.callbacks = {};
-    window.addEventListener("storage", this._onStorageEvent, !1);
+    }
+
+    // Clean up any existing IPC messages in storage
+    if (this.storage) {
+      for (const key of Object.keys(this.storage)) {
+        if (key.startsWith(IPC_PREFIX)) {
+          delete this.storage[key]
+        }
+      }
+    }
+
+    window.addEventListener('storage', this._onStorageEvent, false)
   }
-  _callbacksForMessage(e) {
-    let t = r + e;
-    this.callbacks[t] || (this.callbacks[t] = []);
-    return this.callbacks[t];
+
+  /**
+   * Returns the callback array for a given message key, creating it if necessary.
+   * Original method name: _callbacksForMessage
+   */
+  private getCallbacksForMessage(message: string): Array<(payload: any) => void> {
+    const key = IPC_PREFIX + message
+    if (!this.callbacks[key]) {
+      this.callbacks[key] = []
+    }
+    return this.callbacks[key]
   }
-  sendToOtherTabs(e, t) {
-    if (this.storage) try {
-      this.storage[r + e] = JSON.stringify([t, Math.random()]);
-    } catch (e) {
-      console.error((e && e.stack || e) + "");
+
+  /**
+   * Sends a message to other tabs via localStorage.
+   * Original method name: sendToOtherTabs
+   */
+  sendToOtherTabs(message: string, payload: any): void {
+    if (this.storage) {
+      try {
+        this.storage[IPC_PREFIX + message] = JSON.stringify([payload, Math.random()])
+      }
+      catch (err: any) {
+        console.error(`${err && err.stack || err}`)
+      }
     }
   }
-  sendToAllTabs(e, t) {
-    let i = this._callbacksForMessage(e);
-    let n = null;
-    for (let e of i) try {
-      e(t);
-    } catch (e) {
-      n = e;
+
+  /**
+   * Sends a message to all registered callbacks and other tabs.
+   * Original method name: sendToAllTabs
+   */
+  sendToAllTabs(message: string, payload: any): void {
+    const callbacks = this.getCallbacksForMessage(message)
+    let thrownError: any = null
+    for (const callback of callbacks) {
+      try {
+        callback(payload)
+      }
+      catch (err) {
+        thrownError = err
+      }
     }
-    if (this.sendToOtherTabs(e, t), n) throw n;
+    this.sendToOtherTabs(message, payload)
+    if (thrownError)
+      throw thrownError
   }
-  register(e, t) {
-    let i = this._callbacksForMessage(e);
-    0 > i.indexOf(t) && i.push(t);
+
+  /**
+   * Registers a callback for a specific message.
+   * Original method name: register
+   */
+  register(message: string, callback: (payload: any) => void): void {
+    const callbacks = this.getCallbacksForMessage(message)
+    if (!callbacks.includes(callback)) {
+      callbacks.push(callback)
+    }
   }
-  unregister(e, t) {
-    let i = this._callbacksForMessage(e);
-    let n = i.indexOf(t);
-    n >= 0 && i.splice(n, 1);
+
+  /**
+   * Unregisters a callback for a specific message.
+   * Original method name: unregister
+   */
+  unregister(message: string, callback: (payload: any) => void): void {
+    const callbacks = this.getCallbacksForMessage(message)
+    const idx = callbacks.indexOf(callback)
+    if (idx >= 0) {
+      callbacks.splice(idx, 1)
+    }
   }
 }
-export const P = $$a0;
+
+// Export with original variable name for compatibility
+export const P = IpcStorageHandler

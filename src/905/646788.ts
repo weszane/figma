@@ -49,7 +49,7 @@ import { o as _$$o } from "../905/382697";
 import { r as _$$r } from "../905/857502";
 import { combineWithHyphen, ShareContext } from "../905/91820";
 import { iO as _$$iO, s5, t9 as _$$t2, yI } from "../905/915142";
-import { dR } from "../905/508367";
+import { appendSearchParams } from "../905/508367";
 import { selectWithShallowEqual } from "../905/103090";
 import { e as _$$e } from "../905/383776";
 import { A8 } from "../figma_app/617506";
@@ -191,7 +191,7 @@ import { Eh } from "../figma_app/617654";
 import { Ro } from "../figma_app/805373";
 import { ax as _$$ax, ts as _$$ts2 } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
-import { oH, b as _$$b4 } from "../figma_app/740025";
+import { getStatusOrDefault, defaultTemplate } from "../figma_app/740025";
 import { getPublisherDisplayName } from "../figma_app/690075";
 import { $T } from "../figma_app/12535";
 import { HF, a6 as _$$a2, ow, M3 as _$$M3 } from "../figma_app/198840";
@@ -269,7 +269,7 @@ import { cL } from "../905/748726";
 import { H_ } from "../figma_app/336853";
 import { Ef, rq as _$$rq2, kF } from "../905/351260";
 import { Z as _$$Z } from "../figma_app/761870";
-import { xf as _$$xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { H as _$$H2 } from "../905/674803";
 import { t as _$$t9 } from "../figma_app/32680";
 import { F as _$$F3 } from "../905/154112";
@@ -397,7 +397,7 @@ function eA({
     p ? (v.vars = 1, f && (v["var-id"] = normalizeVariableId(f))) : c ? v["ready-for-dev"] = 1 : u ? v["focus-id"] = replaceColonWithDash(u) : m && (v["component-browser"] = 1, g && (v["component-key"] = g));
     s && (v.view = panelTypeToString(s));
     n && (v["code-node-id"] = replaceColonWithDash(n));
-    return dR(y, v);
+    return appendSearchParams(y, v);
   }, [i, g, o, n, s, e, t, l, d, p, f, c, u, _, m]);
 }
 function ey({
@@ -3956,8 +3956,8 @@ let ri = connect((e, t) => {
   let s = !!e.user && !!e.authedUsers.byId[e.user.id].community_blocked_at;
   let o = e.publishingHubFiles[i.key];
   o && o.metadata || (o = {
-    status: oH(o),
-    metadata: t.canPublishError ? _$$b4 : ow({
+    status: getStatusOrDefault(o),
+    metadata: t.canPublishError ? defaultTemplate : ow({
       ...getPermissionsState(e),
       currentUserOrgId: e.currentUserOrgId,
       figFilePublishedAsHubFile: e.figFilePublishedAsHubFile,
@@ -5598,7 +5598,7 @@ function a$({
       }
       let d = i?.org_domains?.domains;
       if (i?.invite_whitelist_guest_invite_setting == null && d && d.length > 0) {
-        let e = _$$Z(r).filter(e => _$$xf(e) && !H_(d, e));
+        let e = _$$Z(r).filter(e => isValidEmail(e) && !H_(d, e));
         if (e.length > 0) {
           u(showModalHandler({
             type: _$$F3,

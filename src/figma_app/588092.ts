@@ -6,7 +6,7 @@ import { renderI18nText } from "../905/303541";
 import { h1 } from "../figma_app/530167";
 import { hideModal } from "../905/156213";
 import { postUserFlag } from "../905/985254";
-import { s0, ZO } from "../figma_app/350203";
+import { HubAction, FigmaResourceType } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { registerModal } from "../905/102752";
@@ -147,8 +147,8 @@ registerModal(function ({
     children: jsxs(TrackingProvider, {
       name: e0.PROFILE_CREATE_MODAL,
       properties: {
-        action: s0.COMMUNITY_OPT_IN,
-        communityHubEntity: ZO.USERS,
+        action: HubAction.COMMUNITY_OPT_IN,
+        communityHubEntity: FigmaResourceType.USERS,
         communityHubEntityId: e
       },
       children: [S(r, 1) && h ? jsx(v, {

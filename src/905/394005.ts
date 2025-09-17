@@ -1,5 +1,5 @@
 import { trackEventAnalytics } from '../905/449184';
-import { FJ } from '../905/508367';
+import { openWindow } from '../905/508367';
 import { customHistory } from '../905/612521';
 import { logDebug, logError } from '../905/714362';
 import { createDeferredPromise } from '../905/874553';
@@ -198,7 +198,7 @@ export class WAFManager {
         this.openRefreshModal();
         return;
       }
-      const popup = FJ(`${window.location.origin}/waf-validation-captcha`, '_blank', 'popup');
+      const popup = openWindow(`${window.location.origin}/waf-validation-captcha`, '_blank', 'popup');
       if (!popup) {
         this.openRefreshModal();
         return;

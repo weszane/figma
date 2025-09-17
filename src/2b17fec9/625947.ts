@@ -283,7 +283,7 @@ import { q as _$$q } from "../1291/18399";
 import { L as _$$L3 } from "../figma_app/520315";
 import { debugState } from "../905/407919";
 import { HQ, aF as _$$aF } from "../figma_app/147952";
-import { S7, xk as _$$xk2 } from "../figma_app/190980";
+import { RECENT_PLUGINS_FIGJAM, RECENT_WIDGETS_FIGJAM } from "../figma_app/190980";
 import { useCurrentPrivilegedPlan, useCurrentPlanUser, useIsOrgGuestUser } from "../figma_app/465071";
 import { n as _$$n7 } from "../2b17fec9/3836";
 import { K as _$$K2 } from "../1291/825015";
@@ -306,7 +306,7 @@ import { R as _$$R2 } from "../figma_app/313269";
 import { z as _$$z3 } from "../905/905430";
 import { q as _$$q2 } from "../905/276489";
 import { Im as _$$Im } from "../905/608145";
-import { EL as _$$EL } from "../figma_app/740025";
+import { getCurrentOrgAdminInfo } from "../figma_app/740025";
 import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { r as _$$r } from "../905/319631";
 import { jv as _$$jv } from "../905/525678";
@@ -5758,7 +5758,7 @@ function oU() {
 function oF() {
   useEffect(() => {
     function e(e) {
-      e.key === S7 && debugState.dispatch(HQ({
+      e.key === RECENT_PLUGINS_FIGJAM && debugState.dispatch(HQ({
         storeInRecentsKey: FDocumentType.FigJam
       }));
     }
@@ -5815,7 +5815,7 @@ function oQ(e) {
     pluginSubmenuDropdownTargetRect,
     activeTextReviewPlugin
   } = selectWithShallowEqual(e => ({
-    orgEntity: _$$EL(e),
+    orgEntity: getCurrentOrgAdminInfo(e),
     org: e.currentUserOrgId && e.orgById[e.currentUserOrgId] || null,
     appModel: e.mirror.appModel,
     selectedView: e.selectedView,
@@ -6564,7 +6564,7 @@ function lC() {
 function lT() {
   useEffect(() => {
     function e(e) {
-      e.key === _$$xk2 && debugState.dispatch(_$$aF({
+      e.key === RECENT_WIDGETS_FIGJAM && debugState.dispatch(_$$aF({
         storeInRecentsKey: FDocumentType.FigJam
       }));
     }

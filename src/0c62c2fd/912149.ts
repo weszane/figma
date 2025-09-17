@@ -1,10 +1,10 @@
-import { HB } from "../3973/538504";
+import { normalizeJobRole } from "../3973/538504";
 import { selectCurrentUser } from "../905/372672";
 export function $$i0({
   rolesToDefaultToOther: e
 } = {}) {
   let t = selectCurrentUser()?.profile.job_title;
-  let r = HB(t);
+  let r = normalizeJobRole(t);
   return e && e.includes(r) ? "other" : r;
 }
 export const w = $$i0;

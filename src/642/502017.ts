@@ -12,7 +12,7 @@ import { Lc } from "../figma_app/745458";
 import { LibraryTabEnum } from "../figma_app/633080";
 import { D } from "../figma_app/268271";
 import { KindEnum } from "../905/129884";
-import { c as _$$c } from "../905/606579";
+import { getFirstActiveProjectResourceConnection } from "../905/606579";
 import { Xm } from "../905/935570";
 import { Pf } from "../figma_app/435826";
 import { o5 } from "../figma_app/778125";
@@ -26,7 +26,7 @@ export function $$v1({
   let r = Xm();
   let i = useAtomWithSubscription(Lc);
   let o = useAtomWithSubscription(Xh(r));
-  let c = _$$c();
+  let c = getFirstActiveProjectResourceConnection();
   let {
     isLibraryModalShown,
     onToggleLibraryModal

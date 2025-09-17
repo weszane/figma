@@ -8,7 +8,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { TextWithTruncation } from "../905/984674";
-import { Oe } from "../905/34809";
+import { trackSidebarClick } from "../905/34809";
 import { E as _$$E } from "../7021/427161";
 import { SidebarRow } from "../451de8f0/94979";
 import { selectViewAction } from "../905/929976";
@@ -85,7 +85,7 @@ export function $$w1(e) {
     onClick: e => {
       e.metaKey || e.ctrlKey || 0 !== e.button || (t(selectViewAction({
         view: "draftsToMove"
-      })), t(Oe({
+      })), t(trackSidebarClick({
         clickedResourceType: "draftsToMove"
       })), t(postUserFlag({
         seen_drafts_to_move_notice_icon: !0

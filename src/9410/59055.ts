@@ -7,7 +7,7 @@ import { defaultSessionLocalIDString } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import u from "classnames";
-import { Cy } from "../figma_app/916560";
+import { isEmbedAllowed } from "../figma_app/916560";
 import { Wx } from "../figma_app/708845";
 import { getI18nString } from "../905/303541";
 import { Ho } from "../figma_app/308685";
@@ -107,7 +107,7 @@ let $$L0 = memo(function () {
   let i = useSelector(N);
   let n = useAtomWithSubscription(_$$n);
   let s = !!e && i?.guid === e.embedNodeId;
-  return e && e.embedNodeId && e.embedThumbnailNodeId && e.srcUrl && e.containingCanvasId && e.containingCanvasId === t ? getFeatureFlags().figjam_embeds_allowlist && !Cy(e.srcUrl) ? (console.error("Could not play embed; domain not on allow-list:", e.srcUrl), null) : jsx(R, {
+  return e && e.embedNodeId && e.embedThumbnailNodeId && e.srcUrl && e.containingCanvasId && e.containingCanvasId === t ? getFeatureFlags().figjam_embeds_allowlist && !isEmbedAllowed(e.srcUrl) ? (console.error("Could not play embed; domain not on allow-list:", e.srcUrl), null) : jsx(R, {
     isEmbedMaximized: n,
     nodeSelected: s,
     embedThumbnailNodeId: e.embedThumbnailNodeId,

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
-import { mc, vk, N7, QV } from "../905/508367";
+import { appendUserIdToUrl, appendNavigationContext, compareValues, navigateToFile } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { isCommandOrShift } from "../905/63728";
 import { h1, Ak } from "../905/986103";
@@ -144,14 +144,14 @@ export function $$P0(e) {
             viewMode: 0 === e.viewMode ? "list" : "grid"
           }));
           let t = `/file/${e.file.key}`;
-          t = mc(t, s);
-          t = vk(t, i, r, o);
+          t = appendUserIdToUrl(t, s);
+          t = appendNavigationContext(t, i, r, o);
           customHistory.redirect(t, "_blank");
-        } else N7(i, e.file.parent_org_id, r, e.file.team_id) ? (p(UN({
+        } else compareValues(i, e.file.parent_org_id, r, e.file.team_id) ? (p(UN({
           fileKey: e.file.key,
           entrypoint: "standalone file tile",
           viewMode: 0 === e.viewMode ? "list" : "grid"
-        })), QV({
+        })), navigateToFile({
           file: {
             key: e.file.key,
             editorType: e.file.editor_type || void 0

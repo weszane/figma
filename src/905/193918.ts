@@ -43,7 +43,7 @@ import { hasClientMeta, hasMonetizedResourceMetadata } from '../figma_app/45218'
 import { FDomainVerificationStatusType } from '../figma_app/191312';
 import { a6 } from '../figma_app/198840';
 import { getPluginVersion } from '../figma_app/300692';
-import { Tb } from '../figma_app/350203';
+import { CHECKOUT_ROUTE } from '../figma_app/350203';
 import { U3 } from '../figma_app/412189';
 import { getResourceType } from '../figma_app/427318';
 import { isEmptyAddress, getCurrentVersion } from '../figma_app/471982';
@@ -1027,7 +1027,7 @@ export const CommunityCheckoutModal = registerModal(props => {
       dispatch(VisualBellActions.clearAll());
       dispatch(hideModal());
       onCancel?.();
-      if (new URLSearchParams(customHistory.location.search).has(Tb)) {
+      if (new URLSearchParams(customHistory.location.search).has(CHECKOUT_ROUTE)) {
         dispatch(selectViewAction({
           ...selectedView,
           triggerCheckout: undefined
@@ -1096,7 +1096,7 @@ export const CommunityCheckoutModal = registerModal(props => {
 
   // Promo code UI
   const promoCodeUi = jsx(Z, {
-    initialValue: new URLSearchParams(customHistory.location.search).get(Tb),
+    initialValue: new URLSearchParams(customHistory.location.search).get(CHECKOUT_ROUTE),
     resource,
     disabled: isDisabled || !!localResource,
     onValidate: setPromoCode

@@ -93,7 +93,7 @@ import { renameFileOptimistic, filePutAction } from "../figma_app/78808";
 import { q as _$$q } from "../figma_app/446378";
 import { n as _$$n2 } from "../905/341791";
 import { useIsSelectedViewFullscreenCooper } from "../figma_app/828186";
-import { SS, WX } from "../figma_app/350203";
+import { INTERNAL_PUBLISH_MODAL, PublishModalState } from "../figma_app/350203";
 import { getCurrentFileType } from "../figma_app/976749";
 import { liveStoreInstance } from "../905/713695";
 import { B3, $o } from "../905/54042";
@@ -618,8 +618,8 @@ function ta({
     clearDraftSubmissionResult,
     submit
   } = _$$r2(_, useCallback(() => {
-    g.current(SS, {
-      step: WX.PUBLISH
+    g.current(INTERNAL_PUBLISH_MODAL, {
+      step: PublishModalState.PUBLISH
     });
   }, [g]));
   let S = function () {
@@ -634,8 +634,8 @@ function ta({
   let C = useCallback(() => {
     w && draftSubmissionResult?.result === "success" && S();
     o(hideModal());
-    g.current(SS, {
-      step: WX.CLOSED
+    g.current(INTERNAL_PUBLISH_MODAL, {
+      step: PublishModalState.CLOSED
     });
   }, [w, draftSubmissionResult?.result, o, g, S]);
   let {
@@ -683,7 +683,7 @@ function ta({
         ref: e,
         carouselMediaFieldManager: y,
         ...A.carouselMedia,
-        trackingEventName: SS,
+        trackingEventName: INTERNAL_PUBLISH_MODAL,
         showThumbnailWithLetterbox: !0
       })
     }), jsx(Mm, {
@@ -736,14 +736,14 @@ function ta({
     })();
   }, [_, draftSubmissionResult?.result, N]);
   useEffect(() => {
-    g.current(SS, {
-      step: WX.OPENED
+    g.current(INTERNAL_PUBLISH_MODAL, {
+      step: PublishModalState.OPENED
     });
   }, [g]);
   let O = Lz(_.fieldStates.name, "");
   let D = useDebouncedCallback(() => {
-    g.current(SS, {
-      step: WX.EDIT_NAME
+    g.current(INTERNAL_PUBLISH_MODAL, {
+      step: PublishModalState.EDIT_NAME
     });
   }, 2e3);
   useEffect(() => {
@@ -751,8 +751,8 @@ function ta({
   }, [O, D, A.name.touched]);
   let L = Lz(_.fieldStates.description, "");
   let M = useDebouncedCallback(() => {
-    g.current(SS, {
-      step: WX.EDIT_DESCRIPTION
+    g.current(INTERNAL_PUBLISH_MODAL, {
+      step: PublishModalState.EDIT_DESCRIPTION
     });
   }, 1e4);
   useEffect(() => {

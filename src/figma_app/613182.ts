@@ -11,7 +11,7 @@ import { x as _$$x } from '../905/439735';
 import { trackEventAnalytics } from '../905/449184';
 import { Sh } from '../905/470286';
 import { formatI18nMessage } from '../905/482208';
-import { E as _$$E, t7 } from '../905/508367';
+import { createRect, compareRects } from '../905/508367';
 import { $L, TN } from '../905/524523';
 import { getFeatureFlags } from '../905/601108';
 import { isFigmaDomain } from '../905/691205';
@@ -419,22 +419,22 @@ export function $$Y4(e, t, r, n) {
       for (let e = 0; e < r.length; e++) {
         let t = r[e];
         if (a === null) {
-          a = _$$E(t);
+          a = createRect(t);
         } else if (t.top === a.top && t.bottom === a.bottom) {
           a.left = Math.min(t.left, a.left);
           a.right = Math.max(t.right, a.right);
           a.width += t.width;
         } else {
           if (x >= a.left && x <= a.right && y >= a.top && y <= a.bottom) return a;
-          a = _$$E(t);
+          a = createRect(t);
         }
         let l = Math.max(a.left, Math.min(x, a.right));
         let d = Math.max(a.top, Math.min(y, a.bottom));
         let c = Math.sqrt((x - l) ** 2 + (y - d) ** 2);
         c < o && (o = c, s = a);
       }
-      return a !== null && x >= a.left && x <= a.right && y >= a.top && y <= a.bottom ? _$$E(a) : _$$E(s);
-    }(e, r) : _$$E(e.getBoundingClientRect()), j.left += v, j.right += v, j.bottom += A, j.top += A);
+      return a !== null && x >= a.left && x <= a.right && y >= a.top && y <= a.bottom ? createRect(a) : createRect(s);
+    }(e, r) : createRect(e.getBoundingClientRect()), j.left += v, j.right += v, j.bottom += A, j.top += A);
     return j;
   }
   if (t?.dropdownShown || M) {
@@ -601,7 +601,7 @@ function $(e, t) {
 }
 export function $$X2(e, t) {
   let r = $(e, t);
-  return !!r && r !== 'return' && r.position === t.tooltip.position && !!r.targetRect && t7(r.targetRect, t.tooltip.targetRect) && !!r.interactive;
+  return !!r && r !== 'return' && r.position === t.tooltip.position && !!r.targetRect && compareRects(r.targetRect, t.tooltip.targetRect) && !!r.interactive;
 }
 function q(e, t) {
   let r;
@@ -679,7 +679,7 @@ function q(e, t) {
       }
       return;
     }
-    (getFeatureFlags().fpl_tooltip ? (r = s, n = i.tooltip, r.position === n.position && t7(r.targetRect, n.targetRect) && function (e, t) {
+    (getFeatureFlags().fpl_tooltip ? (r = s, n = i.tooltip, r.position === n.position && compareRects(r.targetRect, n.targetRect) && function (e, t) {
       if (e === t) return !0;
       if (!e || !t || e.kind !== t.kind) return !1;
       switch (e.kind) {
@@ -689,7 +689,7 @@ function q(e, t) {
         case ElementTypeEnum.ELEMENT:
           return e.key === t.key;
       }
-    }(r.target, n.target)) : s.position === i.tooltip.position && t7(s.targetRect, i.tooltip.targetRect)) ? i.tooltip.state === StatusEnum.SHOWING && i.tooltip.timeoutID !== null && t.dispatch(clearTimeoutID()) : i.tooltip.state === StatusEnum.SHOWING || s.showImmediately ? t.dispatch(showTooltip({
+    }(r.target, n.target)) : s.position === i.tooltip.position && compareRects(s.targetRect, i.tooltip.targetRect)) ? i.tooltip.state === StatusEnum.SHOWING && i.tooltip.timeoutID !== null && t.dispatch(clearTimeoutID()) : i.tooltip.state === StatusEnum.SHOWING || s.showImmediately ? t.dispatch(showTooltip({
       target: s.target,
       targetRect: s.targetRect,
       position: s.position,

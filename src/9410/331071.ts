@@ -355,7 +355,7 @@ import { eY as _$$eY, f4, KH, p8 } from '../figma_app/722362';
 import { Ay as _$$Ay4, DI, Ti, Tu } from '../figma_app/724968';
 import { jR as _$$jR, k0 as _$$k5, N0, RO, Sb } from '../figma_app/728075';
 import { $L, mP, Sq } from '../figma_app/737746';
-import { Ih, zd } from '../figma_app/740025';
+import { FUSE_CONFIG_PROFILE, FUSE_CONFIG_COMMENT } from '../figma_app/740025';
 import { UK } from '../figma_app/740163';
 import { U as _$$U2 } from '../figma_app/751728';
 import { h as _$$h5 } from '../figma_app/752483';
@@ -10161,7 +10161,7 @@ function dv({
     let n = function (e) {
       let t = $1();
       let i = useMemo(() => Object.values(t), [t]);
-      let r = useMemo(() => new Ef(i, Ih), [i]);
+      let r = useMemo(() => new Ef(i, FUSE_CONFIG_PROFILE), [i]);
       return useMemo(() => r.search(e), [r, e]);
     }(e);
     return useMemo(() => {
@@ -10209,7 +10209,7 @@ function dv({
   }(p);
   let b = function (e, t) {
     let i = lk(t);
-    let r = useMemo(() => new Ef(i, zd), [i]);
+    let r = useMemo(() => new Ef(i, FUSE_CONFIG_COMMENT), [i]);
     return useMemo(() => r.search(e), [r, e]);
   }(p, t);
   useEffect(() => {

@@ -10,7 +10,7 @@ import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz, Zc } from "../905/497882";
 import { s as _$$s } from "../905/924751";
-import { jI, uS } from "../figma_app/740025";
+import { MAX_FEED_ITEMS, getDynamicContentTranslation } from "../figma_app/740025";
 import { A as _$$A } from "../905/567946";
 import { lN, Hs } from "../905/488777";
 var c = d;
@@ -36,7 +36,7 @@ let b = forwardRef(function ({
   } = e;
   let u = Lz(e.tagsV2Field, []);
   let p = useCallback(e => !!u.find(t => _$$s(t, e)), [u]);
-  let m = useCallback(t => !Zc(e.tagsV2Field) || !p(t) && u.length >= jI, [p, u.length, e.tagsV2Field]);
+  let m = useCallback(t => !Zc(e.tagsV2Field) || !p(t) && u.length >= MAX_FEED_ITEMS, [p, u.length, e.tagsV2Field]);
   let _ = useCallback(e => {
     setValue && (p(e) ? setValue(u.filter(t => !_$$s(t, e))) : setValue([...u, e]));
   }, [p, u, setValue]);
@@ -52,7 +52,7 @@ let b = forwardRef(function ({
     children: validV2Tags.map(e => {
       let i = p(e);
       let r = m(e);
-      let s = uS(e);
+      let s = getDynamicContentTranslation(e);
       return jsxs("span", {
         className: c()("tags_v2_select--tag--ukyQf", {
           "tags_v2_select--disabled--2jKbM": r
@@ -112,8 +112,8 @@ let $$v0 = forwardRef(function ({
   return jsxs(Fragment, {
     children: [jsx(a, {
       label: getI18nString("community.publishing.recommended_tags"),
-      subLabel: validV2Tags.length > jI ? getI18nString("community.publishing.select_up_to_n_tags_to_help_people_discover_your_resource", {
-        maxTagsPerResource: jI
+      subLabel: validV2Tags.length > MAX_FEED_ITEMS ? getI18nString("community.publishing.select_up_to_n_tags_to_help_people_discover_your_resource", {
+        maxTagsPerResource: MAX_FEED_ITEMS
       }) : getI18nString("community.publishing.select_tags_to_help_people_discover_your_resource"),
       error: x,
       afterErrorContent: !C && jsx(Button, {

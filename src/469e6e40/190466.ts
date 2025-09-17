@@ -16,7 +16,7 @@ import { xk } from "@stylexjs/stylex";
 import b from "classnames";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
-import { lb } from "../3973/538504";
+import { getJobRoleDisplay } from "../3973/538504";
 import { useSubscription } from "../figma_app/288654";
 import { getResourceDataOrFallback } from "../905/723791";
 import { reportError } from "../905/11";
@@ -41,7 +41,7 @@ import { I as _$$I } from "../4452/82228";
 import { m as _$$m } from "../4452/688074";
 import { S as _$$S } from "../4452/304860";
 import { d as _$$d } from "../469e6e40/490120";
-import { zN } from "../figma_app/416935";
+import { getEmailDomain } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { FSeatAssignmentReasonType, FOrganizationLevelType, FApprovalMethodType, FResourceCategoryType, FUserRoleType } from "../figma_app/191312";
 import { KindEnum } from "../905/129884";
@@ -400,7 +400,7 @@ function eU(e) {
     id: e.member.team_user?.id ?? "",
     userId: e.member.team_user?.user_id ?? "",
     eccUpgradingLocked: !!e.member.ecc_upgrading_locked,
-    eccDomain: (t = e.member, toTitleCase(zN(t.email ?? "") ?? "")),
+    eccDomain: (t = e.member, toTitleCase(getEmailDomain(t.email ?? "") ?? "")),
     scimLocked: !1,
     lastActiveAt: e.member.last_active ? new Date(1e3 * e.member.last_active) : void 0,
     upgradeReason: e.member.upgrade_reason,
@@ -804,7 +804,7 @@ function eW(e) {
   });
 }
 function eH(e) {
-  let t = lb(e.jobTitle ?? void 0);
+  let t = getJobRoleDisplay(e.jobTitle ?? void 0);
   let a = e.jobTitle && t ? {
     type: "option",
     key: e.jobTitle,

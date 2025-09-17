@@ -5,7 +5,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { Button } from "../905/521428";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { createNoOpValidator, APIParameterUtils } from "../figma_app/181241";
 import { XHR } from "../905/910117";
 import { TextWithTruncation } from "../905/984674";
@@ -61,7 +61,7 @@ let $$S0 = registerModal(function (e) {
       S(null);
       let e = Yr;
       K ? e += `?org_id=${encodeURIComponent(K)}` : Y?.id && (e += `?team_id=${encodeURIComponent(Y.id)}`);
-      let t = FJ(e, "_blank");
+      let t = openWindow(e, "_blank");
       await new Promise(e => {
         window.addEventListener("message", r => {
           r.data && "child-redirect-complete" === r.data.type && (t?.close(), e(!0));
@@ -354,7 +354,7 @@ let $$S0 = registerModal(function (e) {
                       children: z ? "..." : "Add secret"
                     }), jsx(Button, {
                       variant: "secondary",
-                      onClick: () => FJ(`https://supabase.com/dashboard/project/${B.id}/functions/secrets`),
+                      onClick: () => openWindow(`https://supabase.com/dashboard/project/${B.id}/functions/secrets`),
                       disabled: z,
                       children: z ? "..." : "View secrets \u2197\uFE0F"
                     })]
@@ -456,7 +456,7 @@ let $$S0 = registerModal(function (e) {
                   children: z ? "..." : "Deploy backend"
                 }), B && jsx(Button, {
                   variant: "secondary",
-                  onClick: () => FJ(`https://supabase.com/dashboard/project/${B.id}/functions/make-server-${r.substring(0, 5)}/logs`),
+                  onClick: () => openWindow(`https://supabase.com/dashboard/project/${B.id}/functions/make-server-${r.substring(0, 5)}/logs`),
                   disabled: z,
                   children: z ? "..." : "Server logs \u2197\uFE0F"
                 }), B && jsx(Button, {

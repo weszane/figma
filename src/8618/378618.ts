@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useAtomWithSubscription, useAtomValueAndSetter } from "../figma_app/27355";
-import { zp } from "../figma_app/740025";
+import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { b as _$$b } from "../figma_app/203891";
 import { sX, GR, F$, gc, B8, w5, tC as _$$tC } from "../figma_app/229710";
 import { isEmptyObject } from "../figma_app/493477";
@@ -1168,7 +1168,7 @@ export function $$tk0({
   ...t
 }) {
   let n = useAtomWithSubscription(_$$b);
-  let a = zp();
+  let a = useCurrentOrgAdminInfo();
   return n === GR.DEFAULT_EXPANDED ? jsx(tT, {
     ...t,
     orgEntity: a,

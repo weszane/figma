@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { getCookieValue } from "../905/657224";
 import { trackEventAnalytics } from "../905/449184";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { debugState } from "../905/407919";
 import { customHistory } from "../905/612521";
 import { logWarning } from "../905/714362";
@@ -20,7 +20,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { showModalHandler } from "../905/156213";
 import { D as _$$D } from "../905/347702";
-import { iE } from "../figma_app/416935";
+import { isWorkDomainType } from "../figma_app/416935";
 import { t as _$$t2 } from "../905/897919";
 import { qV } from "../figma_app/165623";
 let C = "google_sso_temp";
@@ -29,7 +29,7 @@ var $$O6 = (e => (e.LOGGED_OUT_FOOTER = "logged_out_footer", e.LOGGED_OUT_FOOTER
 let $$R5 = "/api/session/google_auth/signin";
 let L = _$$D(() => new Promise((e, t) => {
   document.cookie = C + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-  let r = FJ("/start_google_sso", "", "width=600,height=600");
+  let r = openWindow("/start_google_sso", "", "width=600,height=600");
   if (null === r) {
     trackEventAnalytics("GoogleSSOError", {
       step: "window-not-found"
@@ -125,7 +125,7 @@ export async function $$F3(e, {
       email: data.meta.email
     })));
     data.meta && data.meta.email_domain_type ? (trackEventAnalytics("Sign Up (GTM)", {
-      isWorkEmail: iE(data),
+      isWorkEmail: isWorkDomainType(data),
       sha256_email: await qV(data.meta.email)
     }), await _$$p("sign_up_google_sso")) : (trackEventAnalytics("google_sso", {
       eventSubtype: "google_sso_success_signin",

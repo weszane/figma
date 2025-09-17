@@ -130,7 +130,7 @@ import { L7 } from '../figma_app/329496';
 import { du } from '../figma_app/336853';
 import { p as _$$p2 } from '../figma_app/353099';
 import { m as _$$m } from '../figma_app/369596';
-import { xf } from '../figma_app/416935';
+import { isValidEmail } from '../figma_app/416935';
 import { bv, IV, uw, Vq } from '../figma_app/421401';
 import { e6 as _$$e3, Z as _$$Z, B7, hn, JB, O4, pv, RF, X_ } from '../figma_app/425283';
 import { useIsOrgAdminUser, useTeamPlanFeatures, useTeamPlanPublicInfo, useTeamPlanUser } from '../figma_app/465071';
@@ -3085,7 +3085,7 @@ function nn(e) {
 let ns = e => e9(e) ? e.orgUser.id : e.idpUser.email;
 let ni = /\s+|,\s*|;\s*/;
 export function $$nr1(e) {
-  return e ? e.length <= 75 || e.split(ni).every(xf) ? e : e.substring(0, 75) : '';
+  return e ? e.length <= 75 || e.split(ni).every(isValidEmail) ? e : e.substring(0, 75) : '';
 }
 let nl = new Ef([], {
   threshold: 0.1,

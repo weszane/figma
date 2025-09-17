@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setupAutofocusHandler } from "../905/128376";
 import { analyticsEventManager } from "../905/449184";
-import { HB, VA, ZS } from "../3973/538504";
+import { normalizeJobRole, JOB_ROLE_KEYS, getJobRoleDisplayWithEducation } from "../3973/538504";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { ConfirmationModal } from "../905/441305";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -28,12 +28,12 @@ function I(e) {
   let i = useSelector(e => e.user);
   let _ = Um();
   let b = i.profile?.job_title ?? "";
-  let I = "student" === b || "educator" === b ? b : HB(b);
+  let I = "student" === b || "educator" === b ? b : normalizeJobRole(b);
   let E = "unknown" === I ? "other" : I;
   let [x, S] = useState(E);
   let w = v(b) ? "" : b;
   let [C, T] = useState(w);
-  let k = VA;
+  let k = JOB_ROLE_KEYS;
   let R = () => {
     let e = x;
     let n = "change_job_modal_selection";
@@ -72,7 +72,7 @@ function I(e) {
       dropdownShown: _,
       fill: !0,
       formatter: {
-        format: ZS
+        format: getJobRoleDisplayWithEducation
       },
       id: "change-job-title-dropdown",
       inputClassName: Lt,
@@ -84,7 +84,7 @@ function I(e) {
       property: x,
       children: k.map(e => jsx(c$, {
         value: e,
-        children: ZS(e)
+        children: getJobRoleDisplayWithEducation(e)
       }, e))
     }), v(x) && jsx(BigTextInputForwardRef, {
       id: "other-job-title-input",

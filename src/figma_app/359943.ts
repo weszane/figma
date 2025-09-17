@@ -31,7 +31,7 @@ import { c$, l6, sK } from "../905/794875";
 import { Ad } from "../figma_app/811257";
 import { W as _$$W } from "../5132/887999";
 import { $ as _$$$ } from "../figma_app/61705";
-import { y as _$$y } from "../905/461685";
+import { useDraftsFolderProject } from "../905/461685";
 import { FFileType } from "../figma_app/191312";
 import { COOPER_STRING } from "../figma_app/53721";
 import { f6 } from "../figma_app/915202";
@@ -132,7 +132,7 @@ function en() {
 }
 function ei() {
   let e = en();
-  let t = _$$y().transform(e => e?.canCreateCooperFileWithReasons.result).unwrapOr(!1);
+  let t = useDraftsFolderProject().transform(e => e?.canCreateCooperFileWithReasons.result).unwrapOr(!1);
   let r = er(et.BUZZ);
   let i = _$$$({
     isDraftsFolder: !0,
@@ -157,7 +157,7 @@ function ei() {
 function es() {
   let e = en();
   let t = er(et.SITES);
-  let r = _$$y().transform(e => e?.canCreateSitesFileWithReasons.result).unwrapOr(!1);
+  let r = useDraftsFolderProject().transform(e => e?.canCreateSitesFileWithReasons.result).unwrapOr(!1);
   let i = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.SITES,
@@ -181,7 +181,7 @@ function es() {
 function el() {
   let e = en();
   let t = er(et.SLIDES);
-  let r = _$$y().transform(e => e?.canCreateSlidesFileWithReasons.result).unwrapOr(!1);
+  let r = useDraftsFolderProject().transform(e => e?.canCreateSlidesFileWithReasons.result).unwrapOr(!1);
   let i = _$$$({
     isDraftsFolder: !0,
     editorType: FFileType.SLIDES,

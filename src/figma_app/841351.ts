@@ -490,7 +490,7 @@ export const resetCompareMode = createOptimistThunk(({ dispatch }) => {
 /**
  * Thunk to set active version.
  */
-const setActiveVersion = createOptimistThunk(async ({ dispatch, getState }, { id, versions, eventType, nodeId }: { id: string, versions?: any[], eventType?: string, nodeId?: string }) => {
+export const setActiveVersion = createOptimistThunk(async ({ dispatch, getState }, { id, versions, eventType, nodeId }: { id: string, versions?: any[], eventType?: string, nodeId?: string }) => {
   if (id === CURRENT_VERSION_ID) {
     atomStoreManager.set(versionHistoryKeyAtom, '')
     Fullscreen.loadFigFileForPreview(new Uint8Array())
@@ -522,7 +522,7 @@ const setActiveVersion = createOptimistThunk(async ({ dispatch, getState }, { id
 /**
  * Thunk to load version incrementally.
  */
-const loadVersionIncrementally = createOptimistThunk(({ dispatch }, { version, currentPageNodeId, fetchedPageIds, eventType }: { version: any, currentPageNodeId: string, fetchedPageIds: Set<string>, eventType: string }) => {
+export const loadVersionIncrementally = createOptimistThunk(({ dispatch }, { version, currentPageNodeId, fetchedPageIds, eventType }: { version: any, currentPageNodeId: string, fetchedPageIds: Set<string>, eventType: string }) => {
   loadVersionIntoScene(version, dispatch, fetchedPageIds, currentPageNodeId, undefined, eventType).then(() => {
     dispatch(VERSION_HISTORY_SET_LINKED_VERSION({ version }))
   }).catch((error) => {
@@ -535,7 +535,7 @@ const loadVersionIncrementally = createOptimistThunk(({ dispatch }, { version, c
 /**
  * Thunk to start compare changes.
  */
-const startCompareChanges = createOptimistThunk(async ({ dispatch, getState }, { fromVersionId }: { fromVersionId?: string }) => {
+export const startCompareChanges = createOptimistThunk(async ({ dispatch, getState }, { fromVersionId }: { fromVersionId?: string }) => {
   if (!getFeatureFlags().version_diffing) {
     dispatch(VERSION_HISTORY_COMPARE_CHANGES({ fromVersionId }))
     return

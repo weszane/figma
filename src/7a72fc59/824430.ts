@@ -120,7 +120,7 @@ import { Z as _$$Z2 } from '../905/498136';
 import { C as _$$C } from '../905/504203';
 import { Y as _$$Y3 } from '../905/506207';
 import { r6 as _$$r2 } from '../905/507950';
-import { mc as _$$mc2, vk } from '../905/508367';
+import { appendUserIdToUrl, appendNavigationContext } from '../905/508367';
 import { l as _$$l3 } from '../905/509505';
 import { RecordableButton } from '../905/511649';
 import { h as _$$h3 } from '../905/513745';
@@ -1632,8 +1632,8 @@ function tV({
           viewMode: 'grid'
         }));
         let o = `/file/${e.key}`;
-        o = _$$mc2(o, t);
-        o = vk(o, r, i, a);
+        o = appendUserIdToUrl(o, t);
+        o = appendNavigationContext(o, r, i, a);
         customHistory.redirect(o, '_blank');
         l();
       },

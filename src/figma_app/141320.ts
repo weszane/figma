@@ -1,92 +1,190 @@
-import { A } from "../905/920142";
-import { AccessLevelEnum } from "../905/557142";
-export function $$a4(e) {
-  return e && !!e.student_validated_at;
+import { AccessLevelEnum } from '../905/557142'
+import { A as dayjs } from '../905/920142'
+
+/**
+ * Checks if the student has been validated.
+ * Original: $$a4
+ */
+export function isStudentValidated(student: { student_validated_at?: Date | string | null }): boolean {
+  return !!(student && student.student_validated_at)
 }
-export function $$s9(e, t) {
-  if (!e) return 1 / 0;
-  let r = Math.ceil(A(e).diff(A(), "days", !0));
-  return r > 12 ? 1 / 0 : r <= 0 ? t ? 1 : 0 : r;
+
+/**
+ * Calculates the number of days until expiration.
+ * Returns Infinity if no date is provided or if more than 12 days remain.
+ * Original: $$s9
+ */
+export function getDaysUntilExpiration(date: Date | string | null, fallback?: boolean): number {
+  if (!date)
+    return Infinity
+  const daysDiff = Math.ceil(dayjs(date).diff(dayjs(), 'days', true))
+  if (daysDiff > 12)
+    return Infinity
+  if (daysDiff <= 0)
+    return fallback ? 1 : 0
+  return daysDiff
 }
-export function $$o3(e, t) {
+
+/**
+ * Checks grace period status for a specific key.
+ * Original: $$o3
+ */
+export function getGracePeriodStatus(obj: Record<string, any>, key: string): {
+  hasGracePeriod: boolean
+  isInValidGracePeriod: boolean
+} {
   return {
-    hasGracePeriod: !!(e && t in e),
-    isInValidGracePeriod: $$c8(e, t) > 0
-  };
-}
-let l = (e, t) => Math.ceil(A(e[t].createdAt).add(7, "days").diff(A(), "days", !0));
-export function $$d10(e, t) {
-  if (!e || !e[t]?.createdAt) return new Date();
-  let r = new Date();
-  r.setDate(e[t]?.createdAt?.getDate() + 7);
-  return r;
-}
-export function $$c8(e, t) {
-  return e && e[t] ? l(e, t) : 0;
-}
-export function $$u1(e) {
-  if (!e) return 0;
-  let t = 1 / 0;
-  for (let r in e) {
-    let n = l(e, r);
-    n > 0 && n < t && (t = n);
+    hasGracePeriod: !!(obj && key in obj),
+    isInValidGracePeriod: getGracePeriodDays(obj, key) > 0,
   }
-  return t === 1 / 0 ? 0 : t;
 }
-export function $$p5(e, t) {
-  let r = function (e) {
-    let t = e && Object.keys(e).length > 0;
-    let r = !1;
-    for (let t in e) 0 >= l(e, t) && (r = !0);
+
+/**
+ * Calculates days left in grace period for a specific key.
+ * Original: l
+ */
+function getGracePeriodDays(obj: Record<string, any>, key: string): number {
+  return Math.ceil(dayjs(obj[key].createdAt).add(7, 'days').diff(dayjs(), 'days', true))
+}
+
+/**
+ * Returns the expiration date for a grace period.
+ * Original: $$d10
+ */
+export function getGracePeriodExpirationDate(obj: Record<string, any>, key: string): Date {
+  if (!obj || !obj[key]?.createdAt)
+    return new Date()
+  const expiration = new Date(obj[key].createdAt)
+  expiration.setDate(expiration.getDate() + 7)
+  return expiration
+}
+
+/**
+ * Returns days left in grace period for a specific key, or 0 if not applicable.
+ * Original: $$c8
+ */
+export function getGracePeriodDaysOrZero(obj: Record<string, any>, key: string): number {
+  return obj && obj[key] ? getGracePeriodDays(obj, key) : 0
+}
+
+/**
+ * Finds the minimum valid grace period days across all keys.
+ * Original: $$u1
+ */
+export function getMinGracePeriodDays(obj: Record<string, any>): number {
+  if (!obj)
+    return 0
+  let minDays = Infinity
+  for (const key in obj) {
+    const days = getGracePeriodDays(obj, key)
+    if (days > 0 && days < minDays)
+      minDays = days
+  }
+  return minDays === Infinity ? 0 : minDays
+}
+
+/**
+ * Determines reminder and access restriction status based on grace period.
+ * Original: $$p5
+ */
+export function getGracePeriodAccessStatus(obj: Record<string, any>, fallback?: boolean): {
+  showReminder: boolean
+  showAccessRestricted: boolean
+} {
+  const status = (() => {
+    const hasKeys = obj && Object.keys(obj).length > 0
+    let expired = false
+    for (const key in obj) {
+      if (getGracePeriodDays(obj, key) <= 0)
+        expired = true
+    }
     return {
-      hasGracePeriod: !!t,
-      isInValidGracePeriod: $$u1(e) > 0,
-      isInExpiredGracePeriod: r
-    };
-  }(e);
-  if (t || !r.hasGracePeriod) return {
-    showReminder: !1,
-    showAccessRestricted: !1
-  };
-  let n = !!r.isInExpiredGracePeriod;
-  return {
-    showReminder: r.isInValidGracePeriod && !n,
-    showAccessRestricted: n
-  };
-}
-export function $$_0(e, t, r, n) {
-  let i = $$o3(e, r);
-  if (t || !n || !i.hasGracePeriod) return {
-    showReminder: !1,
-    showAccessRestricted: !1
-  };
-  let a = i.isInValidGracePeriod;
-  return {
-    showReminder: a,
-    showAccessRestricted: !a
-  };
-}
-export function $$h6(e, t, r) {
-  return !!r?.student_team && t[r.id]?.[e]?.level === AccessLevelEnum.OWNER;
-}
-export function $$m2(e, t, r) {
-  for (let n in t) {
-    let a = t[n][e];
-    if (r?.student_team && a?.level >= AccessLevelEnum.EDITOR) return !0;
+      hasGracePeriod: !!hasKeys,
+      isInValidGracePeriod: getMinGracePeriodDays(obj) > 0,
+      isInExpiredGracePeriod: expired,
+    }
+  })()
+
+  if (fallback || !status.hasGracePeriod) {
+    return { showReminder: false, showAccessRestricted: false }
   }
-  return !1;
+  const expired = !!status.isInExpiredGracePeriod
+  return {
+    showReminder: status.isInValidGracePeriod && !expired,
+    showAccessRestricted: expired,
+  }
 }
-export function $$g7(e, t, r) {
-  return !!r?.student_team && t[r.id]?.[e]?.level >= AccessLevelEnum.EDITOR;
+
+/**
+ * Determines reminder and access restriction for a specific grace period key.
+ * Original: $$_0
+ */
+export function getGracePeriodAccessForKey(
+  obj: Record<string, any>,
+  fallback: boolean,
+  key: string,
+  hasAccess: boolean,
+): { showReminder: boolean, showAccessRestricted: boolean } {
+  const status = getGracePeriodStatus(obj, key)
+  if (fallback || !hasAccess || !status.hasGracePeriod) {
+    return { showReminder: false, showAccessRestricted: false }
+  }
+  return {
+    showReminder: status.isInValidGracePeriod,
+    showAccessRestricted: !status.isInValidGracePeriod,
+  }
 }
-export const GU = $$_0;
-export const Me = $$u1;
-export const QS = $$m2;
-export const SH = $$o3;
-export const cn = $$a4;
-export const df = $$p5;
-export const eB = $$h6;
-export const hP = $$g7;
-export const qS = $$c8;
-export const x$ = $$s9;
-export const zR = $$d10;
+
+/**
+ * Checks if the user is the owner of a team for a specific key.
+ * Original: $$h6
+ */
+export function isTeamOwner(
+  key: string,
+  teams: Record<string, Record<string, { level: AccessLevelEnum }>>,
+  user: { id: string, student_team?: boolean },
+): boolean {
+  return !!user?.student_team && teams[user.id]?.[key]?.level === AccessLevelEnum.OWNER
+}
+
+/**
+ * Checks if any team member has at least editor access for a specific key.
+ * Original: $$m2
+ */
+export function hasEditorAccessForAnyTeamMember(
+  key: string,
+  teams: Record<string, Record<string, { level: AccessLevelEnum }>>,
+  user: { student_team?: boolean },
+): boolean {
+  for (const memberId in teams) {
+    const access = teams[memberId][key]
+    if (user?.student_team && access?.level >= AccessLevelEnum.EDITOR)
+      return true
+  }
+  return false
+}
+
+/**
+ * Checks if the user has at least editor access for a specific key.
+ * Original: $$g7
+ */
+export function hasEditorAccess(
+  key: string,
+  teams: Record<string, Record<string, { level: AccessLevelEnum }>>,
+  user: { id: string, student_team?: boolean },
+): boolean {
+  return !!user?.student_team && teams[user.id]?.[key]?.level >= AccessLevelEnum.EDITOR
+}
+
+// Refactored exports
+export const GU = getGracePeriodAccessForKey
+export const Me = getMinGracePeriodDays
+export const QS = hasEditorAccessForAnyTeamMember
+export const SH = getGracePeriodStatus
+export const cn = isStudentValidated
+export const df = getGracePeriodAccessStatus
+export const eB = isTeamOwner
+export const hP = hasEditorAccess
+export const qS = getGracePeriodDaysOrZero
+export const x$ = getDaysUntilExpiration
+export const zR = getGracePeriodExpirationDate

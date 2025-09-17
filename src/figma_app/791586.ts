@@ -1,5 +1,5 @@
 import { useAtomWithSubscription } from "../figma_app/27355";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { useSubscription } from "../figma_app/288654";
 import { setupResourceAtomHandler } from "../figma_app/566371";
 import { useCurrentFileKey } from "../figma_app/516028";
@@ -17,7 +17,7 @@ export function $$m9() {
   return () => {
     let n = Yr;
     e ? n += `?org_id=${encodeURIComponent(e)}&file_key=${encodeURIComponent(r)}` : t?.id && (n += `?team_id=${encodeURIComponent(t.id)}&file_key=${encodeURIComponent(r)}`);
-    let a = FJ(n, "_blank");
+    let a = openWindow(n, "_blank");
     window.addEventListener("message", e => {
       e.data && "child-redirect-complete" === e.data.type && a?.close();
     });

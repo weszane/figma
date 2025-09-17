@@ -19,7 +19,7 @@ import { getI18nString, renderI18nText } from '../905/303541';
 import { getBasename } from '../905/309735';
 import { IconButton } from '../905/443068';
 import { O as _$$O2 } from '../905/487602';
-import { t7 } from '../905/508367';
+import { compareRects } from '../905/508367';
 import { RecordableButton, RecordableInput } from '../905/511649';
 import { ButtonWide } from '../905/521428';
 import { r as _$$r3 } from '../905/571562';
@@ -177,7 +177,7 @@ function eb({
     let t = e.currentTarget;
     if (state === StatusEnum.SHOWING || state === StatusEnum.PENDING) {
       let e = _$$eP(t);
-      if (e && e.position === position && e.targetRect && t7(e.targetRect, targetRect)) {
+      if (e && e.position === position && e.targetRect && compareRects(e.targetRect, targetRect)) {
         r(hideTooltip());
         return;
       }

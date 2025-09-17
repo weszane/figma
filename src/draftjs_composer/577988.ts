@@ -11,9 +11,9 @@ import { H8, Pf } from "../905/590952";
 import { i4 } from "../figma_app/770088";
 import { eT } from "../figma_app/703138";
 import { mz } from "../figma_app/12220";
-import { kc } from "../figma_app/740025";
+import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { j as _$$j } from "../draftjs_composer/390258";
-import { wT } from "../figma_app/188152";
+import { DROPDOWN_ACTION_TIMEOUT } from "../figma_app/188152";
 import { useCurrentFileKey, selectCurrentFile } from "../figma_app/516028";
 import { selectCurrentUser } from "../905/372672";
 import { NoUserProfileStatus } from "../figma_app/45218";
@@ -157,7 +157,7 @@ export function $$D1(e) {
       dispatch: n,
       editorOnClear: r.editorOnClear,
       editorOnInsert: r.editorOnInsert,
-      maxCommentLength: wT,
+      maxCommentLength: DROPDOWN_ACTION_TIMEOUT,
       mentionables: _$$j,
       messageMeta,
       mountInputFocused: e.focusOnMount || !1,
@@ -217,7 +217,7 @@ export function $$B0(e) {
     name: t?.handle,
     img_url: t?.img_url
   }), [t]);
-  let E = kc() || v;
+  let E = useAuthedActiveCommunityProfile() || v;
   let M = 0 === s.length || s.every(e => e.t?.trim().length === 0);
   return jsx("div", {
     ref: h,

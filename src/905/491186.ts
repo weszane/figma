@@ -1,16 +1,40 @@
-import { q42 } from "../figma_app/822011";
-export function $$r0(e, t, i) {
-  let r = function (e, t, i) {
-    if (e.openFile && null !== i) {
-      let n = e.fileByKey[e.openFile.key];
-      let r = n?.[t] ?? null;
-      if (null !== r) {
-        let e = "id";
-        if ("team_user" === t ? e = "team_id" : "org_user" === t && (e = "org_id"), r[e] === i) return r;
+import { q42 } from '../figma_app/822011'
+
+/**
+ * Retrieves a user or team/org object by key and id, or returns null if not found.
+ * Original function: $$r0
+ * @param context - The context object containing openFile and fileByKey
+ * @param type - The type of user ('team_user' or 'org_user')
+ * @param id - The id to match against
+ * @returns The matched object or null
+ */
+export function getUserOrTeamById(
+  context: { openFile?: { key: string }, fileByKey: Record<string, any> },
+  type: string,
+  id: any,
+): any | null {
+  if (context.openFile && id !== null) {
+    const fileData = context.fileByKey[context.openFile.key]
+    const userOrTeam = fileData?.[type] ?? null
+    if (userOrTeam !== null) {
+      // Determine the id field based on type
+      let idField = 'id'
+      if (type === 'team_user') {
+        idField = 'team_id'
+      }
+      else if (type === 'org_user') {
+        idField = 'org_id'
+      }
+      if (userOrTeam[idField] === id) {
+        return userOrTeam
       }
     }
-    return q42.PENDING_LOAD;
-  }(e, t, i);
-  return r === q42.PENDING_LOAD ? null : r || null;
+  }
+  return q42.PENDING_LOAD
 }
-export const J = $$r0;
+
+/**
+ * Returns the user or team/org object if found, otherwise null.
+ * Original export: J
+ */
+export const J = getUserOrTeamById

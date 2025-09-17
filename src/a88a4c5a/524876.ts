@@ -17,7 +17,7 @@ import { IconButton } from '../905/443068';
 import { trackEventAnalytics } from '../905/449184';
 import { MZ } from '../905/470594';
 import { Y as _$$Y } from '../905/506207';
-import { E as _$$E } from '../905/508367';
+import { createRect } from '../905/508367';
 import { Button } from '../905/521428';
 import { s as _$$s } from '../905/551945';
 import { getFeatureFlags } from '../905/601108';
@@ -179,7 +179,7 @@ export function $$ed1(e) {
   let eN = useCallback(e => {
     if (setHyperlinkLocation && setHyperlinkEditorRef) {
       if (e?.top === 0 && e?.bottom === 0 && e?.left === 0 && e?.right === 0 && e?.height === 0 && e?.width === 0 && K.current) {
-        let e = _$$E(K.current.getBoundingClientRect());
+        let e = createRect(K.current.getBoundingClientRect());
         setHyperlinkLocation({
           ...e,
           width: 32,

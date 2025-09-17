@@ -11,7 +11,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8 } from "../905/590952";
-import { JF } from "../905/34809";
+import { setBrowserTileSortView } from "../905/34809";
 import { isCooperFeatureEnabled } from "../figma_app/828186";
 import { trackFileBrowserSharerFilterSelected, trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
 import { wW } from "../figma_app/656450";
@@ -116,7 +116,7 @@ export function $$O3(e) {
           creator: t
         }
       };
-      e.dispatch(JF({
+      e.dispatch(setBrowserTileSortView({
         selectedView: e.selectedView,
         config: n
       }));
@@ -140,7 +140,7 @@ export function $$R1(e) {
           role: t
         }
       };
-      e.dispatch(JF({
+      e.dispatch(setBrowserTileSortView({
         selectedView: e.selectedView,
         config: n
       }));
@@ -181,7 +181,7 @@ export function $$L8(e) {
           fileType: n
         }
       };
-      t(JF({
+      t(setBrowserTileSortView({
         selectedView: r,
         config: i,
         tab: e.tab
@@ -204,7 +204,7 @@ export function $$P4(e) {
       };
       let a = "recentsAndSharing" === r.view ? r.tab || ViewTypeEnum.RECENTLY_VIEWED : r.view;
       trackFileBrowserSharerFilterSelected(n, a);
-      t(JF({
+      t(setBrowserTileSortView({
         selectedView: r,
         config: i,
         tab: e.tab
@@ -238,7 +238,7 @@ export function $$D0(e) {
           }
         }
       };
-      t(JF({
+      t(setBrowserTileSortView({
         selectedView: r,
         config: n,
         tab: e.tab
@@ -266,7 +266,7 @@ export function $$D0(e) {
       };
       let l = "recentsAndSharing" === r.view ? r.tab || ViewTypeEnum.RECENTLY_VIEWED : r.view;
       trackFileBrowserPlanFilterSelected(plan_id, l, plan_type);
-      t(JF({
+      t(setBrowserTileSortView({
         selectedView: r,
         config: o,
         tab: e.tab
@@ -305,7 +305,7 @@ export function $$M6(e) {
         dir: l
       }
     };
-    dispatch(JF({
+    dispatch(setBrowserTileSortView({
       selectedView,
       config: d,
       tab

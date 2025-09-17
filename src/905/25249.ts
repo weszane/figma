@@ -13,7 +13,7 @@ import { ModalRootComponent } from "../905/38914";
 import { L as _$$L } from "../905/857916";
 import { r as _$$r } from "../905/857502";
 import { trackEventAnalytics } from "../905/449184";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { reportError } from "../905/11";
@@ -489,7 +489,7 @@ export let $$eK0 = registerModal(function (e) {
   };
   let eB = e => {
     if (org && org.domain_capture && ek && ek.domains.length > 0) {
-      let t = _$$Z(e).filter(e => xf(e) && !H_(ek.domains, e));
+      let t = _$$Z(e).filter(e => isValidEmail(e) && !H_(ek.domains, e));
       if (null == org.invite_whitelist_guest_invite_setting && t.length > 0) {
         ep(showModalHandler({
           type: _$$F,

@@ -3,8 +3,8 @@ import { languageCodes } from "../905/816253";
 import { AppStateTsApi } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomValueAndSetter } from "../figma_app/27355";
-import { FJ } from "../905/508367";
-import { jm } from "../figma_app/416935";
+import { openWindow } from "../905/508367";
+import { isFigmaEmail } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
 import { getEditorTypeOrNull } from "../figma_app/976749";
 import { selectUser } from "../905/372672";
@@ -44,7 +44,7 @@ export function $$T0() {
   };
 }
 export function $$I7(e) {
-  return isDevEnvironment() || jm(e) || !!e?.endsWith("@dev.figma.com");
+  return isDevEnvironment() || isFigmaEmail(e) || !!e?.endsWith("@dev.figma.com");
 }
 export function $$S8({
   propertiesPanelWidth: e
@@ -78,7 +78,7 @@ export function $$x5() {
       if (!e.ok) throw Error(`Failed to fetch article ${t}: ${e.status} ${e.statusText}`);
       return (await e.json()).article;
     } catch (e) {
-      FJ(`https://help.figma.com/hc/en-us/articles/${t}`, "_blank", "noopener");
+      openWindow(`https://help.figma.com/hc/en-us/articles/${t}`, "_blank", "noopener");
     }
   };
 }

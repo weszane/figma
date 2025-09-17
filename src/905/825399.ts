@@ -23,7 +23,7 @@ import { je } from "../figma_app/155728";
 import { getCurrentTeam } from "../figma_app/598018";
 import { isTeamLibrary, isPublishedLibraryWithAssets } from "../figma_app/633080";
 import { n as _$$n } from "../905/347702";
-import { c as _$$c } from "../905/606579";
+import { getFirstActiveProjectResourceConnection } from "../905/606579";
 export function $$k10() {
   let e = getCurrentTeam();
   let t = yy();
@@ -148,7 +148,7 @@ export function $$B1(e, t, i) {
   }).filter(isNotNullish);
 }
 let $$V9 = _$$n(e => {
-  let t = _$$c();
+  let t = getFirstActiveProjectResourceConnection();
   let i = useSubscription(SharingGroupsByResourceConnection, {
     resourceConnectionId: t?.id ?? ""
   }, {
@@ -163,7 +163,7 @@ let $$V9 = _$$n(e => {
   }, [e, i, l]);
 });
 let $$G0 = _$$n(e => {
-  let t = _$$c();
+  let t = getFirstActiveProjectResourceConnection();
   let i = useSubscription(SharingGroupsByResourceConnection, {
     resourceConnectionId: t?.id ?? ""
   }, {

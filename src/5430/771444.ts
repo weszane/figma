@@ -7,7 +7,7 @@ import { I } from "../5132/515990";
 import { getResourceType } from "../figma_app/427318";
 import { showModalHandler } from "../905/156213";
 import { logAndTrackCTA } from "../figma_app/314264";
-import { Tm } from "../figma_app/740025";
+import { getOrgAdminAccess } from "../figma_app/740025";
 import { selectCurrentUser } from "../905/372672";
 import { isPlugin, isWidget } from "../figma_app/45218";
 import { KindEnum } from "../905/129884";
@@ -18,7 +18,7 @@ export function $$x0({
   let r = useDispatch();
   let x = selectCurrentUser();
   let f = I();
-  let y = Object.values(useSelector(e => Tm(e))).filter(t => isPlugin(e) && t.plugins_whitelist_enforced || isWidget(e) && t.widgets_whitelist_enforced);
+  let y = Object.values(useSelector(e => getOrgAdminAccess(e))).filter(t => isPlugin(e) && t.plugins_whitelist_enforced || isWidget(e) && t.widgets_whitelist_enforced);
   let g = (e, t) => {
     r(showModalHandler({
       type: W(),

@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
-import { dR } from "../905/508367";
+import { appendSearchParams } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { AUTH_INIT } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
@@ -87,7 +87,7 @@ function I({
             s(AUTH_INIT({
               origin: "figjam_try_share_modal",
               formState: AuthFlowStep.SIGN_UP,
-              redirectUrl: dR(customHistory.location.pathname, {
+              redirectUrl: appendSearchParams(customHistory.location.pathname, {
                 [ao.key]: ao.value
               }),
               signedUpFromOpenSession: !0

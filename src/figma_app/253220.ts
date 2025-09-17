@@ -6,7 +6,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { UK } from "../figma_app/740163";
 import { oi } from "../figma_app/598952";
 import { debugState } from "../905/407919";
-import { P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { XHR } from "../905/910117";
 var $$_4 = (e => (e.MouseScrollToZoom = "mouse-scroll-wheel-zoom", e.RightClickDragToPan = "right-click-drag-to-pan", e))($$_4 || {});
 var h = (e => (e.UserManualChange = "user_manual_change", e.Onboarding = "onboarding", e))(h || {});
@@ -22,7 +22,7 @@ function g({
   enabled: t,
   eventOrigin: r
 }) {
-  new P().sendToOtherTabs(e, JSON.stringify(t));
+  new IpcStorageHandler().sendToOtherTabs(e, JSON.stringify(t));
   (function (e) {
     try {
       let t = debugState.getState();
@@ -104,7 +104,7 @@ function v(e, t = !1) {
   null !== a ? n = E(a) : null != s && (n = s);
   r = n;
   "mouse-scroll-wheel-zoom" === e ? T(r) : I(r);
-  new P().sendToOtherTabs(e, JSON.stringify(n));
+  new IpcStorageHandler().sendToOtherTabs(e, JSON.stringify(n));
   s !== n && m(e, n);
 }
 export function $$A1() {

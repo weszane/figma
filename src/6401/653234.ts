@@ -35,7 +35,7 @@ import { g as _$$g } from "../905/125190";
 import { e as _$$e } from "../905/149844";
 import { FlashActions } from "../905/573154";
 import { ServiceCategories as _$$e2 } from "../905/165054";
-import { KJ } from "../figma_app/916560";
+import { parseEmbedInput } from "../figma_app/916560";
 import { logError } from "../905/714362";
 import { LoadingSpinner } from "../figma_app/858013";
 import { r as _$$r } from "../905/955316";
@@ -1144,7 +1144,7 @@ let eV = {
 };
 async function eR(e) {
   if (!e) return;
-  let t = KJ(e.trim());
+  let t = parseEmbedInput(e.trim());
   if (t) try {
     let l = (await linkMetadataHandlerInstance.getLinkMetadata({
       text: t.isFromIFrame ? e : t.url,

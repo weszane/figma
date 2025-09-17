@@ -8,7 +8,7 @@ import { Z } from "../905/909123";
 import { aP } from "../figma_app/530167";
 import { Ri } from "../figma_app/49598";
 import { HZ, Oo } from "../905/926523";
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 import { R1, Z2 } from "../figma_app/599979";
 import { liveStoreInstance } from "../905/713695";
 import { ProductStatus } from "../905/54385";
@@ -67,8 +67,8 @@ async function v({
 }) {
   let b = c_(t).currentValue.thumbnailMedium;
   return {
-    name: Yp(c_(i).currentValue),
-    description: Yp(c_(n).currentValue),
+    name: trimOrEmpty(c_(i).currentValue),
+    description: trimOrEmpty(c_(n).currentValue),
     category_id: (r && c_(r).currentValue?.id) ?? null,
     tags: [...c_(a).currentValue],
     tags_v2: (s && c_(s).currentValue.map(e => e.text)) ?? [],

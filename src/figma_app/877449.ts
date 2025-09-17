@@ -7,14 +7,14 @@ import { Label } from '../905/270045';
 import { getI18nString, renderI18nText } from '../905/303541';
 import { b as _$$b, c as _$$c } from '../905/308099';
 import { o as _$$o } from '../905/382697';
-import { FJ } from '../905/508367';
+import { openWindow } from '../905/508367';
 import { Button } from '../905/521428';
 import { buildFileUrl } from '../905/612685';
 import { s as _$$s } from '../905/932270';
 import { sR } from '../905/932881';
 import { sx } from '../905/941192';
 import { postUserFlag } from '../905/985254';
-import { HB } from '../3973/538504';
+import { normalizeJobRole } from '../3973/538504';
 import { s as _$$s2 } from '../cssbuilder/589278';
 import { buildUploadUrl } from '../figma_app/169182';
 import { selectCurrentFile } from '../figma_app/516028';
@@ -22,7 +22,7 @@ import { ShareAction } from '../figma_app/707808';
 import { TrackedButton, TrackingProvider, withTrackedClick } from '../figma_app/831799';
 import { fb, J4 } from '../figma_app/907616';
 export function $$x3(e) {
-  return HB(e) === 'education';
+  return normalizeJobRole(e) === 'education';
 }
 var N = (e => (e.EDIT = 'edit', e.DUPLICATE = 'duplicate', e))(N || {});
 let C = buildUploadUrl('cee072aec57608cbb49c64eb6cb3765896cea921');
@@ -151,7 +151,7 @@ export function $$F2(e) {
             }) : '';
             let n = a === 'duplicate' ? '/duplicate' : '';
             let i = t ? `?url=${t}${n}` : '';
-            FJ(`https://classroom.google.com/share${i}`, '_blank', 'popup,width=650,height=505');
+            openWindow(`https://classroom.google.com/share${i}`, '_blank', 'popup,width=650,height=505');
             e.closeModal();
           },
           trackingProperties: {

@@ -75,7 +75,7 @@ import { RAo, aIx } from "../figma_app/27776";
 import { PP as _$$PP, xx, v$ } from "../905/981129";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { reportError } from "../905/11";
-import { UP } from "../figma_app/740025";
+import { useIsCommunityHubView } from "../figma_app/740025";
 import { Q as _$$Q2 } from "../905/618914";
 import { FOrganizationLevelType, FMemberRoleType } from "../figma_app/191312";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
@@ -821,7 +821,7 @@ export function $$e53({
   let o = getSelectedView();
   let l = function () {
     let e = useDispatch();
-    let t = UP();
+    let t = useIsCommunityHubView();
     let r = useSelector(e => getPermissionsStateMemoized(e));
     let n = useCurrentPublicPlan("useUpdateSearchScope");
     let s = useRef(!1);

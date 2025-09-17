@@ -1,16 +1,31 @@
-import { createActionCreator } from "../905/73481";
-import { createOptimistThunk } from "../905/350402";
-import { s } from "../905/506024";
-let $$s2 = createActionCreator("ADD_TEMPLATE_TO_RECENTS_WITH_USER_ID");
-let $$o0 = createOptimistThunk((e, t) => {
-  let i = e.getState();
-  let n = s(i);
-  e.dispatch($$s2({
-    ...t,
-    userId: n
-  }));
-});
-let $$l1 = createActionCreator("SET_RECENT_TEMPLATES");
-export const Hx = $$o0;
-export const nM = $$l1;
-export const pj = $$s2;
+import { createActionCreator } from '../905/73481'
+import { createOptimistThunk } from '../905/350402'
+import { getUserOrAnonymousId } from '../905/506024'
+
+/**
+ * Action creator for adding a template to recents with user ID.
+ * (original: $$s2)
+ */
+export const addTemplateToRecentsWithUserId = createActionCreator('ADD_TEMPLATE_TO_RECENTS_WITH_USER_ID')
+
+/**
+ * Thunk for adding a template to recents, including user ID.
+ * (original: $$o0)
+ */
+export const addTemplateToRecentsThunk = createOptimistThunk(({ dispatch, getState }, payload) => {
+  const state = getState()
+  const userId = getUserOrAnonymousId(state)
+  dispatch(addTemplateToRecentsWithUserId({
+    ...payload,
+    userId,
+  }))
+})
+
+/**
+ * Action creator for setting recent templates.
+ * (original: $$l1)
+ */
+export const setRecentTemplates = createActionCreator('SET_RECENT_TEMPLATES')
+export const Hx = addTemplateToRecentsThunk
+export const nM = setRecentTemplates
+export const pj = addTemplateToRecentsWithUserId

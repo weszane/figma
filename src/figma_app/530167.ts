@@ -19,7 +19,7 @@ import { kE } from "../figma_app/703138";
 import { F6 } from "../905/395917";
 import { yJ } from "../figma_app/240735";
 import { c as _$$c } from "../905/289751";
-import { n as _$$n, HR, Cj } from "../figma_app/740025";
+import { getHubTypeString, mapCommentsAndAuthors, isHandleView } from "../figma_app/740025";
 import { mapUserRoleToOrgUserRoleAlias } from "../figma_app/12796";
 import { setupLoadingStateHandler } from "../905/696711";
 import { persistCommunityProfileId } from "../figma_app/502247";
@@ -98,7 +98,7 @@ let K = (e, t) => {
 };
 let $$Y24 = createOptimistThunk((e, t) => {
   if (!hasMorePages(t)) return;
-  let r = `/api/${_$$n(t.resourceType)}/${t.resourceId}/comments`;
+  let r = `/api/${getHubTypeString(t.resourceType)}/${t.resourceId}/comments`;
   t.selectedCommentId && t.selectedCommentId !== NEW_COMMENT_ID && !t.pagination?.selected_comment && (r = K(r, `selected_comment_id=${t.selectedCommentId}`));
   t.activeFeedType === CommentTabType.ME && (r = K(r, `feed_type=${t.activeFeedType}`), void 0 === t.numCommentsForResource && (r = K(r, "include_total_count=true")));
   fetchPaginatedData(r, t.pageSizeOverride ?? DEFAULT_PAGE_SIZE, t, PAGINATION_NEXT).then(e => {
@@ -107,7 +107,7 @@ let $$Y24 = createOptimistThunk((e, t) => {
       commentsById,
       authorsById,
       feed
-    } = HR(r ? e.comments : [...e.comments, e.selected_comment]);
+    } = mapCommentsAndAuthors(r ? e.comments : [...e.comments, e.selected_comment]);
     let s = e.pagination;
     e.selected_comment && (s.selected_comment = e.selected_comment);
     let o = {
@@ -364,7 +364,7 @@ let $$er12 = createOptimistThunk((e, t, {
       community_profile_handle: r.meta.profile_handle
     })), profileHandle) {
       let t = e.getState().selectedView;
-      Cj(t) && t?.handle === A && e.dispatch(selectViewAction({
+      isHandleView(t) && t?.handle === A && e.dispatch(selectViewAction({
         view: "communityHub",
         subView: "handle",
         handle: profileHandle

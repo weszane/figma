@@ -1,4 +1,4 @@
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 import { a6 } from "../figma_app/198840";
 import { getCurrentPluginVersion } from "../figma_app/300692";
 import { isWidgetOrPlugin } from "../figma_app/45218";
@@ -12,11 +12,11 @@ export let $$o0 = {
   validate: ({
     valueRequired: e
   }, t) => {
-    if (e && 0 === Yp(new DOMParser().parseFromString(t, "text/html").body.textContent || "").length) return [{
+    if (e && 0 === trimOrEmpty(new DOMParser().parseFromString(t, "text/html").body.textContent || "").length) return [{
       key: "DESCRIPTION_EMPTY",
       data: {}
     }];
-    let i = Yp(t);
+    let i = trimOrEmpty(t);
     if (i.length > 1e4) return [{
       key: "DESCRIPTION_TOO_LONG",
       data: {

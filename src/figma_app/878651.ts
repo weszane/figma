@@ -26,9 +26,9 @@ import { s1, uR, oj } from "../figma_app/304207";
 import { selectViewAction } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { withTrackedClick } from "../figma_app/831799";
-import { cs, zp } from "../figma_app/740025";
+import { isOrgOrTeamExport, useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { Cn } from "../905/862913";
-import { Ni } from "../figma_app/188152";
+import { DropdownEnableState } from "../figma_app/188152";
 import { selectCurrentUser } from "../905/372672";
 import { a6 } from "../figma_app/198840";
 import { getPluginVersion, getPluginMetadata } from "../figma_app/300692";
@@ -216,7 +216,7 @@ memo(function (e) {
     })
   });
 });
-let e_ = e => e !== Ni.ALL_DISABLED;
+let e_ = e => e !== DropdownEnableState.ALL_DISABLED;
 function eh(e) {
   return jsxs("div", {
     className: Z2,
@@ -347,7 +347,7 @@ export function $$eb5({
     resource: e
   });
   let u = useSelector(e => e.authedActiveCommunityProfile);
-  let p = cs(u);
+  let p = isOrgOrTeamExport(u);
   let _ = eT(e, s);
   let h = s ?? !!e.roles.is_public;
   let m = selectCurrentUser();
@@ -445,7 +445,7 @@ export function $$eb5({
 }
 function eT(e, t) {
   let r = useSelector(e => e.authedActiveCommunityProfile);
-  let n = zp();
+  let n = useCurrentOrgAdminInfo();
   return (void 0 === t || t) && e.roles.is_public ? r ? _$$a(r, e) : e.profile_install_status === PluginInstallStatus.PLUGIN_INSTALLED_FOR_USER : e.install_status === PluginInstallStatus.PLUGIN_INSTALLED_FOR_USER || !!n && e.install_status === PluginInstallStatus.PLUGIN_INSTALLED_FOR_ORG;
 }
 (e => {

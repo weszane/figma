@@ -25,7 +25,7 @@ import { _ as _$$_ } from "../905/456042";
 import { ts as _$$ts, Sb } from "../figma_app/49598";
 import { selectViewAction } from "../905/929976";
 import { postUserFlag } from "../905/985254";
-import { YW, _O, s0, EX } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH, FREEMIUM_PREVIEW, HubAction, COMMUNITY_HEIGHT } from "../figma_app/350203";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider, TrackedLink, TrackedDiv, TrackedButton } from "../figma_app/831799";
 import { QL } from "../905/609392";
@@ -123,7 +123,7 @@ import { S as _$$S2 } from "../5430/582465";
 import { setupBrowseRoute } from "../figma_app/640564";
 import { M as _$$M } from "../905/722875";
 import { f as _$$f } from "../figma_app/316722";
-import { kc } from "../figma_app/740025";
+import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { rO } from "../figma_app/530167";
 import { A as _$$A12 } from "../svg/927263";
 import { u as _$$u2 } from "../5430/521178";
@@ -473,7 +473,7 @@ let $ = registerModal(function (e) {
       hubFileId: e.hubFileId
     }));
   }, [i, n, e.hubFileId]);
-  let m = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let m = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   if (!n) return null;
   let p = m ? () => {
     i(showModalHandler({
@@ -514,7 +514,7 @@ let $ = registerModal(function (e) {
     });
     d();
     i(t(n));
-    new URLSearchParams(customHistory.location.search).has(_O) && i(selectViewAction({
+    new URLSearchParams(customHistory.location.search).has(FREEMIUM_PREVIEW) && i(selectViewAction({
       ...c,
       triggerFreemiumPreview: void 0
     }));
@@ -1376,7 +1376,7 @@ function tx({
   meta: i,
   showCTA: n = !0
 }) {
-  let s = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let s = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   let r = _$$C(t);
   let o = e_(t, i);
   let l = n ? jsx(_$$q, {
@@ -3052,7 +3052,7 @@ function iW({
 }
 function iQ() {
   let e = useDispatch();
-  let t = kc();
+  let t = useAuthedActiveCommunityProfile();
   return t?.primary_user_id ? jsx(Fragment, {}) : jsxs("div", {
     className: "admin_profile_banner--root--HDfDA",
     children: [jsx("span", {
@@ -3178,7 +3178,7 @@ function iZ({}) {
   let d = null;
   l = useSelector(e => e?.selectedView?.view === "search");
   c = useSelector(e => !!e?.communityHub?.showingCommunityAdminBanner);
-  d = kc();
+  d = useAuthedActiveCommunityProfile();
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: "navbar--navbarContainer--4keOh",
@@ -4341,7 +4341,7 @@ function nX() {
         className: "x5yr21d xh8yej3 x1hl2dhg",
         onClick: () => {
           logAndTrackCTA({
-            action: s0.MAKE_BANNER_CLICK,
+            action: HubAction.MAKE_BANNER_CLICK,
             viewContext: _$$e4.COMMUNITY_HUB_LANDING
           });
         },
@@ -4984,7 +4984,7 @@ function au() {
   });
   let i = () => {
     logAndTrackCTA({
-      action: s0.MAKE_SOMETHING_NEW,
+      action: HubAction.MAKE_SOMETHING_NEW,
       viewContext: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
       loggedIn: !0
     });
@@ -5639,7 +5639,7 @@ function aA(e) {
   });
   useEffect(() => {
     void 0 !== prevActiveTab && prevActiveTab !== tabManager.activeTab && logAndTrackCTA({
-      action: s0.FEATURED_RESOURCES_TAB_CLICK,
+      action: HubAction.FEATURED_RESOURCES_TAB_CLICK,
       viewContext: _$$e4.COMMUNITY_RESOURCE_LANDING_PAGE,
       tab: tabConfig[tabManager.activeTab]?.tabTitle
     });
@@ -5973,7 +5973,7 @@ function st() {
   let e = useAtomWithSubscription(se);
   let t = selectCurrentUser();
   let i = useSelector(e => e.authedActiveCommunityProfile);
-  let n = usePrefersMediaQuery(`(max-width: ${YW - 1}px)`);
+  let n = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH - 1}px)`);
   let {
     show,
     isShowing,
@@ -6105,7 +6105,7 @@ function so() {
     resourceId: getCommunityPathSegments()[1]
   });
   let n = useDispatch();
-  let o = usePrefersMediaQuery(`(max-width: ${YW - 1}px)`);
+  let o = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH - 1}px)`);
   useEffect(() => {
     let e = customHistory.listen(() => {
       let [e, t] = getCommunityPathSegments();
@@ -6170,7 +6170,7 @@ function so() {
           externalCommentScrollRef: _
         },
         children: [jsx(_$$Ay3, {
-          mediaQuery: `(min-width: ${EX}px)`,
+          mediaQuery: `(min-width: ${COMMUNITY_HEIGHT}px)`,
           children: jsx(ss, {
             resource: u,
             resourceContent: m,
@@ -6178,7 +6178,7 @@ function so() {
             category: p
           })
         }), jsx(_$$Ay3, {
-          mediaQuery: `(min-width: ${YW}px) and (max-width: ${EX - 1}px)`,
+          mediaQuery: `(min-width: ${COMMUNITY_MIN_WIDTH}px) and (max-width: ${COMMUNITY_HEIGHT - 1}px)`,
           children: jsx(ss, {
             resource: u,
             resourceContent: m,
@@ -6186,7 +6186,7 @@ function so() {
             category: p
           })
         }), jsx(_$$Ay3, {
-          mediaQuery: `(max-width: ${YW - 1}px)`,
+          mediaQuery: `(max-width: ${COMMUNITY_MIN_WIDTH - 1}px)`,
           children: jsx(sr, {
             resource: u,
             resourceContent: m,

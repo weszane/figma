@@ -4,7 +4,7 @@ import { localStorageRef } from "../905/657224";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { fullscreenValue } from "../figma_app/455680";
 import { n4, i_, ON, yt } from "../905/187165";
 import { D6, Nx } from "../905/345933";
@@ -36,7 +36,7 @@ let $$y2 = createOptimistThunk((e, t) => {
       theme: t.theme
     });
     localStorageRef.setItem(ON, t.theme || "");
-    new P().sendToOtherTabs(D6, t.theme);
+    new IpcStorageHandler().sendToOtherTabs(D6, t.theme);
     desktopAPIInstance?.setThemePreference(t.theme);
     "fullscreen" === n.view && fullscreenValue.isReady() && Fullscreen.setEditorTheme(i_(t.theme) || "");
   }
@@ -70,7 +70,7 @@ let $$C4 = createOptimistThunk((e, t) => {
   t.enhancedContrast !== i.enhancedContrast && (t.userInitiated && trackEventAnalytics("enhanced_contrast_preference_updated", {
     from: i.enhancedContrast,
     enhancedContrast: t.enhancedContrast
-  }), Qf(t.enhancedContrast), localStorageRef.setItem(yt, t.enhancedContrast ? "true" : "false"), new P().sendToOtherTabs(Nx, t.enhancedContrast), desktopAPIInstance?.setEnhancedContrast(t.enhancedContrast));
+  }), Qf(t.enhancedContrast), localStorageRef.setItem(yt, t.enhancedContrast ? "true" : "false"), new IpcStorageHandler().sendToOtherTabs(Nx, t.enhancedContrast), desktopAPIInstance?.setEnhancedContrast(t.enhancedContrast));
   e.dispatch($$w1(t));
 });
 export const FY = $$S0;

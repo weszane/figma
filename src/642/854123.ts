@@ -18,7 +18,7 @@ import { s as _$$s2 } from "../cssbuilder/589278";
 import { useDispatch } from "react-redux";
 import C from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { isGovCluster, buildUploadUrl } from "../figma_app/169182";
 import { Fb } from "../figma_app/819458";
 import { F as _$$F } from "../5132/756360";
@@ -80,7 +80,7 @@ function P() {
           editorType: a,
           source: "in-product-help-panel-button"
         }), isGovCluster()) {
-          FJ("mailto:support-figgov@figma.com", "_blank", "noopener");
+          openWindow("mailto:support-figgov@figma.com", "_blank", "noopener");
           return;
         }
         let e = 0 === unsortedTeams.filter(hasTeamPaidAccess).length;
@@ -131,7 +131,7 @@ function G() {
     let r = serializeQuery({
       query: s
     });
-    FJ(`https://help.figma.com/hc/${FI(t)}/search?${r}`, "_blank", "noopener");
+    openWindow(`https://help.figma.com/hc/${FI(t)}/search?${r}`, "_blank", "noopener");
   };
   useEffect(() => {
     if (d.current && o.current) {
@@ -219,7 +219,7 @@ let X = memo(function () {
     children: jsx($z, {
       variant: "link",
       onClick: () => {
-        FJ(e.href, "_blank", "noopener");
+        openWindow(e.href, "_blank", "noopener");
         e.onClick?.();
       },
       iconPrefix: jsx(SvgComponent, {
@@ -335,7 +335,7 @@ function ee({
       }), e.resource === Z.DESIGN_FIRST_BUTTON) {
         let t = await s(0xcce00915a97);
         t && (n(2), i(e), l(t));
-      } else e.resource === Z.VIDEO_TUTORIALS ? FJ("https://www.youtube.com/playlist?list=PLXDU_eVOJTx4iS4wLdfAcM1msnqZmVwC5", "_blank", "noopener") : (n(2), i(e));
+      } else e.resource === Z.VIDEO_TUTORIALS ? openWindow("https://www.youtube.com/playlist?list=PLXDU_eVOJTx4iS4wLdfAcM1msnqZmVwC5", "_blank", "noopener") : (n(2), i(e));
     },
     children: [jsx(oW, {
       src: e.image,

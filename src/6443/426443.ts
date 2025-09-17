@@ -25,7 +25,7 @@ import { il } from "../vendor/291472";
 import { xM, Lg as _$$Lg, wd, UF } from "../905/403166";
 import { F as _$$F2 } from "../905/241044";
 import B from "../vendor/426804";
-import { E as _$$E } from "../905/508367";
+import { createRect } from "../905/508367";
 import { splitIntoCharacters } from "../figma_app/930338";
 import { Vt, $x } from "../905/780715";
 function K(t) {
@@ -1374,7 +1374,7 @@ export class $$tA0 extends Component {
           let t = window.getSelection();
           if (t && t.rangeCount > 0) {
             let e = t.getRangeAt(0).getBoundingClientRect();
-            return _$$E(e);
+            return createRect(e);
           }
           return null;
         }();

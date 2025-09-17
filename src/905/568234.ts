@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { SecureLink } from "../figma_app/637027";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { aY } from "../figma_app/350203";
+import { ResourceLicenseUrl } from "../figma_app/350203";
 import { HubTypeEnum } from "../figma_app/45218";
 import { A as _$$A } from "../905/794518";
 import { Jm } from "../905/599844";
@@ -25,15 +25,15 @@ export function $$u0({
     children: jsx("div", {
       children: t ? renderI18nText("community.publishing.community_paid_resource_license", {
         learnMoreLink: jsx(c, {
-          link: aY.PAID_RESOURCE_LICENSE
+          link: ResourceLicenseUrl.PAID_RESOURCE_LICENSE
         })
       }) : e === HubTypeEnum.HUB_FILE ? renderI18nText("community.publishing.creative_commons_license", {
         learnMoreLink: jsx(c, {
-          link: aY.FREE_HUB_FILE_LICENSE
+          link: ResourceLicenseUrl.FREE_HUB_FILE_LICENSE
         })
       }) : renderI18nText("community.publishing.community_free_resource_license", {
         learnMoreLink: jsx(c, {
-          link: aY.FREE_PLUGIN_LICENSE
+          link: ResourceLicenseUrl.FREE_PLUGIN_LICENSE
         })
       })
     })

@@ -1,6 +1,6 @@
 import { LayoutTabType } from "../figma_app/763686";
 import { debugState } from "../905/407919";
-import { CR } from "../figma_app/740025";
+import { getSelectedViewPluginVersions } from "../figma_app/740025";
 import { updateActiveTextReviewPlugin } from "../figma_app/741237";
 import { Qx, IM, fS, It } from "../figma_app/603466";
 import { canRunPlugin } from "../figma_app/300692";
@@ -86,7 +86,7 @@ function f(e) {
       }
     }
   } = e;
-  let r = CR(e);
+  let r = getSelectedViewPluginVersions(e);
   if (!activeTextReviewPlugin) return null;
   let s = null;
   if ("local" === activeTextReviewPlugin.type ? s = Object.values(localPlugins).find(e => e.localFileId === activeTextReviewPlugin.localFileId) ?? null : "published" === activeTextReviewPlugin.type && (s = [...Object.values(installedPluginVersions.plugins), ...Object.values(r)].find(e => !hasLocalFileId(e) && e.plugin_id === activeTextReviewPlugin.pluginId) ?? null), !s || !s?.manifest.capabilities?.some(e => "textreview" === e)) return null;

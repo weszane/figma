@@ -1,8 +1,8 @@
 import { localStorageRef } from "../905/657224";
-import { P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { Qr } from "../905/690539";
 let s = "fontPickerFontSet";
-let o = new P();
+let o = new IpcStorageHandler();
 export function $$l0(e) {
   localStorageRef && (localStorageRef.setItem(s, e), o.sendToOtherTabs(s));
 }

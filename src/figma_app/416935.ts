@@ -1,65 +1,166 @@
-import { C } from "../905/306099";
-import { getInitialOptions } from "../figma_app/169182";
-import { f } from "../905/561988";
-export function $$s9(e) {
-  return /^[^<>\/\\:?*"|]*$/.test(e) && /^[\u0000-\u007F]+$/.test(e) && /^[^@\s]+@[^@\s]+\.[^@\s]+$/i.test(e);
+/* eslint-disable regexp/no-super-linear-backtracking */
+/* eslint-disable no-control-regex */
+import { jsonData } from '../905/306099'
+import { levenshteinDistance } from '../905/561988'
+import { getInitialOptions } from '../figma_app/169182'
+/**
+ * Checks if the given email string is valid.
+ * Original: $$s9
+ * @param email - The email string to validate.
+ * @returns True if valid, false otherwise.
+ */
+export function isValidEmail(email: string): boolean {
+  return (
+    /^[^<>/\\:?*"|]*$/.test(email)
+    && /^[\u0000-\u007F]+$/.test(email)
+    && /^[^@\s]+@[^\s@][^\s.@]*\.[^\s@]+$/.test(email)
+  )
 }
-export function $$o1(e) {
-  let t = [];
-  for (let r of e.split(/[;,\n]/g)) {
-    let e = r.match(/^.*<(.*)>$/);
-    e && (r = e[1]);
-    (r = r.trim()) && t.push(r);
+
+/**
+ * Parses a string of emails separated by ;, ,, or newlines.
+ * Original: $$o1
+ * @param input - The input string containing emails.
+ * @returns Array of trimmed email addresses.
+ */
+export function parseEmailList(input: string): string[] {
+  const result: string[] = []
+  for (const part of input.split(/[;,\n]/g)) {
+    const match = part.match(/^.*<(.*)>$/)
+    let email = match ? match[1] : part
+    email = email.trim()
+    if (email)
+      result.push(email)
   }
-  return t;
+  return result
 }
-let l = C;
-let d = {};
-l.forEach(e => d[e] = !0);
-let c = ["ge.com"];
-export function $$u3(e) {
-  if (e in d || c.includes(e)) return null;
-  for (let t of l) if (1 === f(e, t)) return t;
-  return null;
-}
-export function $$p10(e) {
-  return e.toLowerCase().split("@")[1] || null;
-}
-export function $$_7(e) {
-  return !!e && e.endsWith(getInitialOptions().figma_email_suffix);
-}
-export function $$h8(e) {
-  let t = $$p10(e);
-  return !!t && t in d;
-}
-export function $$m0(e) {
-  if (e) {
-    let t = $$p10(e);
-    if ($$h8(e)) return !1;
-    if (t) return !0;
+
+const emailDomainList = jsonData
+const emailDomainSet: Record<string, boolean> = {}
+emailDomainList.forEach((domain) => {
+  emailDomainSet[domain] = true
+})
+const allowedDomains = ['ge.com']
+
+/**
+ * Suggests a similar domain if the given domain is not allowed.
+ * Original: $$u3
+ * @param domain - The domain to check.
+ * @returns Suggested domain or null.
+ */
+export function suggestSimilarDomain(domain: string): string | null {
+  if (domain in emailDomainSet || allowedDomains.includes(domain))
+    return null
+  for (const knownDomain of emailDomainList) {
+    if (levenshteinDistance(domain, knownDomain) === 1)
+      return knownDomain
   }
-  return !1;
+  return null
 }
-export function $$g5(e) {
-  return "work" === (e.meta ? e.meta.email_domain_type : void 0);
+
+/**
+ * Extracts the domain part from an email.
+ * Original: $$p10
+ * @param email - The email address.
+ * @returns Domain string or null.
+ */
+export function getEmailDomain(email: string): string | null {
+  return email.toLowerCase().split('@')[1] || null
 }
-export function $$f6(e) {
-  return !!e && $$s9(e) && (e.endsWith("@figma.com") || e.endsWith("@test.figma.com") || e.endsWith("@dev.figma.com"));
+
+/**
+ * Checks if the email ends with the configured figma email suffix.
+ * Original: $$_7
+ * @param email - The email address.
+ * @returns True if matches, false otherwise.
+ */
+export function isFigmaEmailSuffix(email: string): boolean {
+  return !!email && email.endsWith(getInitialOptions().figma_email_suffix)
 }
-export function $$E2(e) {
-  return !!e && e.startsWith("synthetic-tester") && e.endsWith("@test.figma.com");
+
+/**
+ * Checks if the domain of the email is in the allowed set.
+ * Original: $$h8
+ * @param email - The email address.
+ * @returns True if domain is allowed, false otherwise.
+ */
+export function isAllowedDomain(email: string): boolean {
+  const domain = getEmailDomain(email)
+  return !!domain && domain in emailDomainSet
 }
-export function $$y4(e) {
-  return "support-share@figma.com" === e;
+
+/**
+ * Checks if the email is not in the allowed domain set and has a domain.
+ * Original: $$m0
+ * @param email - The email address.
+ * @returns True if not allowed and has domain, false otherwise.
+ */
+export function isNotAllowedEmail(email: string): boolean {
+  if (email) {
+    const domain = getEmailDomain(email)
+    if (isAllowedDomain(email))
+      return false
+    if (domain)
+      return true
+  }
+  return false
 }
-export const HS = $$m0;
-export const N0 = $$o1;
-export const Ng = $$E2;
-export const bs = $$u3;
-export const fT = $$y4;
-export const iE = $$g5;
-export const jm = $$f6;
-export const nD = $$_7;
-export const qe = $$h8;
-export const xf = $$s9;
-export const zN = $$p10;
+
+/**
+ * Checks if the email meta type is 'work'.
+ * Original: $$g5
+ * @param obj - Object with meta property.
+ * @returns True if meta.email_domain_type is 'work', false otherwise.
+ */
+export function isWorkDomainType(obj: { meta?: { email_domain_type?: string } }): boolean {
+  return (obj.meta ? obj.meta.email_domain_type : undefined) === 'work'
+}
+
+/**
+ * Checks if the email is a valid figma email.
+ * Original: $$f6
+ * @param email - The email address.
+ * @returns True if valid figma email, false otherwise.
+ */
+export function isFigmaEmail(email: string): boolean {
+  return (
+    !!email
+    && isValidEmail(email)
+    && (email.endsWith('@figma.com')
+      || email.endsWith('@test.figma.com')
+      || email.endsWith('@dev.figma.com'))
+  )
+}
+
+/**
+ * Checks if the email is a synthetic tester email.
+ * Original: $$E2
+ * @param email - The email address.
+ * @returns True if synthetic tester, false otherwise.
+ */
+export function isSyntheticTesterEmail(email: string): boolean {
+  return !!email && email.startsWith('synthetic-tester') && email.endsWith('@test.figma.com')
+}
+
+/**
+ * Checks if the email is the support share email.
+ * Original: $$y4
+ * @param email - The email address.
+ * @returns True if support share email, false otherwise.
+ */
+export function isSupportShareEmail(email: string): boolean {
+  return email === 'support-share@figma.com'
+}
+
+// Exported names refactored for clarity
+export const HS = isNotAllowedEmail
+export const N0 = parseEmailList
+export const Ng = isSyntheticTesterEmail
+export const bs = suggestSimilarDomain
+export const fT = isSupportShareEmail
+export const iE = isWorkDomainType
+export const jm = isFigmaEmail
+export const nD = isFigmaEmailSuffix
+export const qe = isAllowedDomain
+export const xf = isValidEmail
+export const zN = getEmailDomain

@@ -5,7 +5,7 @@ import { Xr, useAtomValueAndSetter, useAtomWithSubscription, atom } from "../fig
 import a from "classnames";
 import { useSubscription } from "../figma_app/288654";
 import { getIsAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
-import { cn } from "../figma_app/141320";
+import { isStudentValidated } from "../figma_app/141320";
 import { MS } from "../figma_app/797994";
 import { isReduxDeprecationShadowreadOrCutover, ConfigGroups } from "../figma_app/121751";
 import { FFileType, FResourceCategoryType, FProductAccessType } from "../figma_app/191312";
@@ -45,7 +45,7 @@ import { VD } from "../905/550523";
 import { languageCodes, defaultLanguage } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { desktopAPIInstance, hasDesktopAPI } from "../figma_app/876459";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { isGovCluster, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { isCommandOrShift } from "../905/63728";
@@ -385,7 +385,7 @@ function es() {
 function ey() {
   let e = useDispatch();
   let r = useSelector(e => e.selectedView);
-  let t = useSelector(e => null !== e.user && cn(e.user));
+  let t = useSelector(e => null !== e.user && isStudentValidated(e.user));
   let i = t => {
     desktopAPIInstance ? e(selectViewAction({
       view: "teamUpgrade",
@@ -816,7 +816,7 @@ function eJ(e) {
   let K = () => {
     if (e.currentQuestion === pu.INVITE_COLLABORATORS && d?.length) {
       let e = d.filter(e => e.trim().length > 0);
-      if (e.length && !e.some(e => !xf(e))) return getI18nString("rcs.team_welcome.send_invites");
+      if (e.length && !e.some(e => !isValidEmail(e))) return getI18nString("rcs.team_welcome.send_invites");
     } else if (Y()) return getI18nString("new_user_experience.finish");
     return getI18nString("new_user_experience.button.continue");
   };
@@ -892,7 +892,7 @@ function eJ(e) {
     if (!t || !e.team?.id) return;
     let i = d.filter(e => e.trim().length > 0);
     if (!(i.length < 1)) {
-      if (i.some(e => !xf(e))) {
+      if (i.some(e => !isValidEmail(e))) {
         trackEventAnalytics("NUX Dynamic Preview", {
           eventSubtype: "malformed_invite_input",
           malformedInput: d.toString(),
@@ -944,7 +944,7 @@ function eJ(e) {
       let [e] = h;
       return !e;
     }
-    return oC.includes(e.currentQuestion) ? ei(e.currentQuestion)?.size === 0 : e.currentQuestion === pu.INVITE_COLLABORATORS ? !!d && !!d.length && d.filter(e => e.trim().length > 0).some(e => !xf(e)) : e.currentQuestion === pu.CHOOSE_PLAN ? !u : e.currentQuestion === pu.CHOOSE_PRODUCT && !x;
+    return oC.includes(e.currentQuestion) ? ei(e.currentQuestion)?.size === 0 : e.currentQuestion === pu.INVITE_COLLABORATORS ? !!d && !!d.length && d.filter(e => e.trim().length > 0).some(e => !isValidEmail(e)) : e.currentQuestion === pu.CHOOSE_PLAN ? !u : e.currentQuestion === pu.CHOOSE_PRODUCT && !x;
   };
   let eo = () => {
     let r = {
@@ -2781,14 +2781,14 @@ function tE(e) {
     let s = [...i];
     let o = [...i];
     o.splice(t, 1);
-    o.every(e => xf(e.trim())) && (s.push(""), r.push(""));
+    o.every(e => isValidEmail(e.trim())) && (s.push(""), r.push(""));
     s[t] = e.target.value;
-    ("" === s[t] || xf(s[t].trim())) && (r[t] = "");
+    ("" === s[t] || isValidEmail(s[t].trim())) && (r[t] = "");
     l(s);
   };
   let _ = e => {
     let s = [...r];
-    s[e] = i[e] && !xf(i[e].trim()) ? getI18nString("rcs.team_welcome.not_a_valid_address") : "";
+    s[e] = i[e] && !isValidEmail(i[e].trim()) ? getI18nString("rcs.team_welcome.not_a_valid_address") : "";
     t(s);
   };
   let p = a ? {
@@ -4607,7 +4607,7 @@ export function $$ij0(e) {
     team: e
   }) => e), [E]);
   let j = useSelector(r => e.isGen1 || isReduxDeprecationShadowreadOrCutover(ConfigGroups.GROUP_7) && "loaded" !== b.status ? null : getAuthorizedTeam(r, b.data));
-  let C = useSelector(e => null !== e.user && cn(e.user));
+  let C = useSelector(e => null !== e.user && isStudentValidated(e.user));
   let w = useRef();
   let k = useIsSelectedFigmakeFullscreen();
   j && !w.current && (w.current = j);

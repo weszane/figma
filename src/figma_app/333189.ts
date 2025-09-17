@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { GZ } from "../905/508367";
+import { isIframe } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
 import { ButtonBasePrimaryTracked } from "../figma_app/637027";
@@ -18,7 +18,7 @@ let $$y0 = registerModal(function () {
   let {
     frame_context
   } = getInitialOptions();
-  let t = GZ() && frame_context?.type === "embed";
+  let t = isIframe() && frame_context?.type === "embed";
   let r = useCurrentUserOrg();
   return K() && r ? jsx(H, {
     org: r

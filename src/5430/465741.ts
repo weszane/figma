@@ -26,7 +26,7 @@ import { BrowseUtils } from "../905/942203";
 import { n6 } from "../figma_app/600006";
 import { selectEditorResource, syncEditorResourceWithHistory } from "../figma_app/773663";
 import { z } from "../5430/143080";
-import { Z_ } from "../figma_app/350203";
+import { MAX_BANNER_CLICKS } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { e0 } from "../905/696396";
 import { T as _$$T2 } from "../5430/126619";
@@ -138,7 +138,7 @@ export function $$U1({
   }) : u ? jsx(_$$T2, {
     resources: y,
     isLoading: i,
-    loadingTileCount: a * Z_
+    loadingTileCount: a * MAX_BANNER_CLICKS
   }) : jsx(_$$A2, {
     resources: y,
     maxGridDim: {

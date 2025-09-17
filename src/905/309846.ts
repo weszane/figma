@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Fullscreen, AppStateTsApi, DesignWorkspace, FontSourceType, UIVisibilitySetting, ColorStateTsApi } from "../figma_app/763686";
 import { isValidSessionLocalID, parseSessionLocalID } from "../905/871411";
 import { atomStoreManager } from "../figma_app/27355";
-import { Lb } from "../905/508367";
+import { waitForVisibility } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { jW } from "../figma_app/640683";
 import { customHistory } from "../905/612521";
@@ -13,7 +13,7 @@ import { BrowserInfo } from "../figma_app/778880";
 import { parseQuery } from "../905/634134";
 import { reportError, clearReportedErrors, setFileBranchingTags, SeverityLevel } from "../905/11";
 import { logInfo } from "../905/714362";
-import { SH } from "../figma_app/141320";
+import { getGracePeriodStatus } from "../figma_app/141320";
 import { dK, xt, x2 } from "../figma_app/149304";
 import { XHR } from "../905/910117";
 import { FileCreationPermissionsGenerator } from "../figma_app/687776";
@@ -409,7 +409,7 @@ let $$ej0 = createOptimistThunk(async (e, {
   let p = c.folders[u.folder_id || ""];
   let h = c.teams[u.team_id || ""];
   let g = c.repos[u.file_repo_id || ""];
-  let _ = SH(c.userEduGracePeriods, u.team_id || "");
+  let _ = getGracePeriodStatus(c.userEduGracePeriods, u.team_id || "");
   let y = u.source_file_key ? await i.fetchFile(u.source_file_key) : null;
   let b = {
     can_delete: !1,
@@ -578,7 +578,7 @@ let eH = createOptimistThunk(async (e, {
     BL(t, A, m);
     _$$b(mapEditorTypeToFileType(c));
     setLastUsedEditorType(c);
-    t && i && void 0 === parseQuery(customHistory.location.search).embed_host && Lb().then(() => {
+    t && i && void 0 === parseQuery(customHistory.location.search).embed_host && waitForVisibility().then(() => {
       setTimeout(() => {
         t.key === e.getState().openFile?.key && e.dispatch(markFileViewedOptimistic({
           fileKey: t.key

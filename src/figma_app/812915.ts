@@ -9,7 +9,7 @@ import { permissionScopeHandler } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, atomStoreManager, Xr } from "../figma_app/27355";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { reportError } from "../905/11";
 import { selectViewAction } from "../905/929976";
 import { eY } from "../figma_app/722362";
@@ -59,7 +59,7 @@ export function $$C2() {
         if (e) {
           let t;
           t = null;
-          null != (t = FJ(e)) && t.focus();
+          null != (t = openWindow(e)) && t.focus();
         } else reportError(_$$e.AI_FOR_PRODUCTION, Error("Failed to generate Rev preview link for navigation"));
       }, [r]);
     }(),

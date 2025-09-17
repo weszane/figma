@@ -26,5 +26,5 @@ dayjs.extend(c())
 dayjs.extend(p())
 dayjs.extend(h())
 dayjs.extend($$A())
-export let $$v0 = dayjs()
-export const A = $$v0
+export let day = dayjs()
+export const A = dayjs

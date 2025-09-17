@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import i from "classnames";
 import { A as _$$A } from "../905/920142";
-import { zN } from "../figma_app/416935";
+import { getEmailDomain } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { bv } from "../figma_app/421401";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -29,7 +29,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
 function T(e) {
-  return toTitleCase(zN(e ?? "") ?? "");
+  return toTitleCase(getEmailDomain(e ?? "") ?? "");
 }
 function A({
   columnClassName: e,

@@ -4,9 +4,9 @@ import _require2 from "../draftjs_composer/577988";
 import _require from "../draftjs_composer/577988";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useDispatch, useSelector, connect } from "react-redux";
-import { cs, e5, cV, LI } from "../figma_app/740025";
+import { isOrgOrTeamExport, isResourcePublicWithComments, getAcceptedPublisherProfile, isCommentingEnabled } from "../figma_app/740025";
 import { PR, MK, Cw } from "../figma_app/599979";
-import { nI, ej as _$$ej, Ng as _$$Ng, Ni } from "../figma_app/188152";
+import { DropdownReportAction, DropdownCommunityType, DROPDOWN_TYPE_GENERIC_COMMENT_MENU, DropdownEnableState } from "../figma_app/188152";
 import { selectCurrentUser } from "../905/372672";
 import { useRef, useEffect, useState, useCallback, cloneElement, useMemo } from "react";
 import { Button } from "../905/521428";
@@ -20,7 +20,7 @@ import { Jm } from "../figma_app/387599";
 import { Zl, getResourceType } from "../figma_app/427318";
 import { hJ, XY } from "../905/506641";
 import { Zj, _8, dL, e6, X2, p4, vr, cO } from "../figma_app/530167";
-import { zn } from "../figma_app/350203";
+import { COMMUNITY_TIMEOUT } from "../figma_app/350203";
 import { t0 } from "../figma_app/198840";
 import { CommentTabType, ResourceTypeNoComment } from "../figma_app/45218";
 import { E as _$$E, d as _$$d } from "../5430/165157";
@@ -215,7 +215,7 @@ let ee = {
   ANIMATION_LENGTH: 400
 };
 let ep = registerModal(function (e) {
-  let t = e.reportType === nI.REPORT_AND_HIDE;
+  let t = e.reportType === DropdownReportAction.REPORT_AND_HIDE;
   let r = t ? getI18nString("community.comments.report_and_hide_author_name_s_comment", {
     authorName: e.comment.author.name
   }) : getI18nString("community.comments.report_author_name_s_comment", {
@@ -391,7 +391,7 @@ function ef(e) {
       type: ep,
       data: {
         comment: e,
-        reportType: nI.REPORT_AND_HIDE,
+        reportType: DropdownReportAction.REPORT_AND_HIDE,
         onReport: g
       }
     }));
@@ -401,7 +401,7 @@ function ef(e) {
       type: ep,
       data: {
         comment: e,
-        reportType: nI.REPORT,
+        reportType: DropdownReportAction.REPORT,
         onReport: g
       }
     }));
@@ -467,8 +467,8 @@ function eb(e) {
   let o = useSelector(e => e.authedActiveCommunityProfile);
   let c = useSelector(t => t.communityHub.comments.commentsById[e.comment.id]);
   let d = useSelector(e => e.communityHub.comments.authorsById[c.author.id]);
-  t = _$$ej.COMMUNITY;
-  let u = !!r && t === _$$ej.COMMUNITY && !cs(o) && c.author.profile_handle === r.community_profile_handle;
+  t = DropdownCommunityType.COMMUNITY;
+  let u = !!r && t === DropdownCommunityType.COMMUNITY && !isOrgOrTeamExport(o) && c.author.profile_handle === r.community_profile_handle;
   let m = o?.id === e.profileIdToAdminResourceAs;
   return u ? jsx(ey, {
     comment: c,
@@ -539,7 +539,7 @@ function eI(e) {
   let [f, v] = useState(!1);
   let [b, j] = useState(null);
   let w = useCallback(() => {
-    h?.type === _$$Ng && x(hideDropdownAction());
+    h?.type === DROPDOWN_TYPE_GENERIC_COMMENT_MENU && x(hideDropdownAction());
   }, [h, x]);
   useEffect(() => (window.addEventListener("scroll", w, !1), () => {
     window.removeEventListener("scroll", w, !1);
@@ -582,7 +582,7 @@ function eI(e) {
   });
   let R = e.selected && !e.isCreatorReply;
   let k = comment.reply_count;
-  let A = !!(h && h.type === _$$Ng && h.data.commentId === comment.id);
+  let A = !!(h && h.type === DROPDOWN_TYPE_GENERIC_COMMENT_MENU && h.data.commentId === comment.id);
   let P = !!comment.hidden_at && !userIsAuthor;
   return jsxs("div", {
     className: U()(R ? "comment_tile--tempSelectedCommentTile--eo1zi comment_tile--selectedCommentTile--9xoJJ comment_tile--commentTile--Y-2jW comment_tile--commentContainer--alB5v" : "comment_tile--commentTile--Y-2jW comment_tile--commentContainer--alB5v", {
@@ -639,7 +639,7 @@ function eI(e) {
                 onClick: e => {
                   let t = p.current;
                   h ? w() : t && (j(t.getBoundingClientRect()), x(showDropdownThunk({
-                    type: _$$Ng,
+                    type: DROPDOWN_TYPE_GENERIC_COMMENT_MENU,
                     data: {
                       commentId: comment.id
                     }
@@ -785,7 +785,7 @@ function eE() {
 function eS(e) {
   let t = useSelector(e => e.communityHub.comments.commentsById);
   let r = useSelector(e => e.communityHub.comments.showResolved);
-  let l = useSelector(e => cs(e.authedActiveCommunityProfile));
+  let l = useSelector(e => isOrgOrTeamExport(e.authedActiveCommunityProfile));
   let {
     parentCommentIds,
     replies
@@ -807,7 +807,7 @@ function eS(e) {
   }(e.comments, t);
   let m = r ? parentCommentIds : parentCommentIds.reduce((e, r) => (t[r]?.resolved_at || e.push(r), e), []);
   let _ = getResourceType(e.resource);
-  if (0 === m.length && !e.hasSelectedComment && e.resource.comments_setting !== Ni.ALL_DISABLED) return jsx(eR, {
+  if (0 === m.length && !e.hasSelectedComment && e.resource.comments_setting !== DropdownEnableState.ALL_DISABLED) return jsx(eR, {
     isTeamOrOrgProfileActive: l
   });
   let p = [];
@@ -914,7 +914,7 @@ function eA(e) {
       pagination,
       activeFeedType: P,
       numCommentsForResource: G,
-      pageSizeOverride: zn
+      pageSizeOverride: COMMUNITY_TIMEOUT
     };
     r(p4({
       ...e,
@@ -929,7 +929,7 @@ function eA(e) {
       }
     }));
   };
-  let Z = void 0 === pagination && e5(resource);
+  let Z = void 0 === pagination && isResourcePublicWithComments(resource);
   useEffect(() => {
     Z && Q();
   }, [P, Z]);
@@ -951,7 +951,7 @@ function eA(e) {
   let J = feed.filter(e => e !== pagination?.selected_comment?.id);
   pagination?.selected_comment && J.unshift(pagination?.selected_comment.id);
   let K = Jm();
-  return e5(resource) ? jsx(Fragment, {
+  return isResourcePublicWithComments(resource) ? jsx(Fragment, {
     children: jsxs("div", {
       className: "comments_view--commentsViewWrapper--SURB9",
       ref: R,
@@ -1046,14 +1046,14 @@ export function $$eP0({
   resource: e
 }) {
   let t = selectCurrentUser();
-  let r = useSelector(t => MK(t, e)) >= Cw.ADMIN && (cV(e)?.id || t?.community_profile_id) || null;
+  let r = useSelector(t => MK(t, e)) >= Cw.ADMIN && (getAcceptedPublisherProfile(e)?.id || t?.community_profile_id) || null;
   let c = useSelector(e => e.authedActiveCommunityProfile);
   return jsx(eA, {
-    commentType: _$$ej.COMMUNITY,
+    commentType: DropdownCommunityType.COMMUNITY,
     resource: e,
     numCommentsForResource: e.comment_count,
     profileIdToAdminResourceAs: r,
-    commentingIsRestricted: !LI(t, e) || cs(c)
+    commentingIsRestricted: !isCommentingEnabled(t, e) || isOrgOrTeamExport(c)
   });
 }
 export const X = $$eP0;

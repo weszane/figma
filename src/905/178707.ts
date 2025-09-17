@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ButtonPrimitive } from "../905/632989";
 import { getSessionStorage } from "../905/657224";
 import l from "classnames";
-import { xf, bs } from "../figma_app/416935";
+import { isValidEmail, suggestSimilarDomain } from "../figma_app/416935";
 import { h as _$$h } from "../905/207101";
 import { d as _$$d } from "../905/884707";
 import { changeAuthFormState, AUTH_CHANGE_EMAIL, AUTH_SET_GOOGLE_ID_TOKEN } from "../905/194276";
@@ -85,7 +85,7 @@ export function $$w0(e) {
     trackEvent
   } = useTracking();
   _$$h(() => {
-    f && xf(f) && sT({
+    f && isValidEmail(f) && sT({
       email: f
     });
   });
@@ -97,7 +97,7 @@ export function $$w0(e) {
   let w = async e => {
     if (l(AUTH_CHANGE_EMAIL({
       value: e.trim()
-    })), !p && xf(e)) {
+    })), !p && isValidEmail(e)) {
       await sT({
         email: e
       });
@@ -145,7 +145,7 @@ export function $$w0(e) {
       onBlur: t => {
         if (e.onBlur?.(t, !0), e.showDomainSuggestions) {
           let e = f.split("@")[1];
-          i(bs(e));
+          i(suggestSimilarDomain(e));
         }
       },
       onChange: e => w(e.currentTarget.value),

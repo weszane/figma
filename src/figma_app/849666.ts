@@ -34,7 +34,7 @@ import { P as _$$P } from "../figma_app/650304";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../figma_app/769913";
 import { getFeatureFlags } from "../905/601108";
-import { dR, jM } from "../905/508367";
+import { appendSearchParams, getCurrentPath } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { AUTH_COMPLETE } from "../905/194276";
 import { AuthFlowStep } from "../905/862321";
@@ -53,7 +53,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody } from "../figma_app/272243";
 import ei from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { r as _$$r } from "../905/520829";
 import { k as _$$k2 } from "../905/585996";
 import { BigTextInput } from "../figma_app/637027";
@@ -217,7 +217,7 @@ let eE = registerModal(function (e) {
           }), jsx(lR, {
             type: "submit",
             onClick: n => {
-              if (n.preventDefault(), n.stopPropagation(), null == r || !1 === xf(r) || !c) {
+              if (n.preventDefault(), n.stopPropagation(), null == r || !1 === isValidEmail(r) || !c) {
                 d(!0);
                 return;
               }
@@ -489,8 +489,8 @@ function eC({
   let c = {
     [ao.key]: ao.value
   };
-  let u = dR(customHistory.location.pathname, c);
-  let p = e ? u : jM();
+  let u = appendSearchParams(customHistory.location.pathname, c);
+  let p = e ? u : getCurrentPath();
   return jsxs("div", {
     className: yp,
     children: [jsx(eS, {
@@ -545,8 +545,8 @@ function eD({
   let u = {
     [ao.key]: ao.value
   };
-  let p = dR(customHistory.location.pathname, u);
-  let _ = e ? p : jM();
+  let p = appendSearchParams(customHistory.location.pathname, u);
+  let _ = e ? p : getCurrentPath();
   let h = useCurrentFileWorkshopModeStatus(!0);
   let m = getSelectedView();
   let g = I4(e, h);

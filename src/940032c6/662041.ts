@@ -5,7 +5,7 @@ import { b as _$$b } from "../5430/872214";
 import { W, B } from "../905/841666";
 import { w } from "../5430/495667";
 import { getResourceType, hasContent } from "../figma_app/427318";
-import { cs } from "../figma_app/740025";
+import { isOrgOrTeamExport } from "../figma_app/740025";
 import { KindEnum } from "../905/129884";
 export function $$p0(e) {
   let {
@@ -14,7 +14,7 @@ export function $$p0(e) {
     removeButtonBorder
   } = e;
   let x = useSelector(e => e.authedActiveCommunityProfile);
-  let m = cs(x);
+  let m = isOrgOrTeamExport(x);
   let h = W(resource.id, getResourceType(resource), !hasContent(resource));
   let g = B(resource.id, hasContent(resource));
   let f = hasContent(resource) ? !!g.data?.[0] : !!h.data?.[0];

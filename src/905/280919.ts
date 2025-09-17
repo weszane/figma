@@ -12,7 +12,7 @@ import { entrypointVariant } from '../905/709735';
 import { getUserPlan } from '../905/912096';
 import { normalizeUrl } from '../3973/348894';
 import { getInitialOptions, getStaticDomain } from '../figma_app/169182';
-import { jm, Ng } from '../figma_app/416935';
+import { isFigmaEmail, isSyntheticTesterEmail } from '../figma_app/416935';
 import { getInitialDynamicConfig } from '../figma_app/594947';
 let I = ['api/web_logger', 'data:', '/api/figment-proxy/monitor'];
 let E = ['s3-alpha.figma.com', 's3-alpha-sig.figma.com', 's3-alpha-sig-oac.figma.com', 's3-staging-sig.staging.figma.com', 's3-figma-videos-production-sig.com', 'figma-fonts-private-production', getStaticDomain()];
@@ -192,8 +192,8 @@ function R(e) {
   if (t > 0) {
     let i = e.slice(t + 1);
     if (S.test(i)) return 'qa';
-    if (Ng(e)) return 'automation';
-    if (jm(e)) return 'user-employee';
+    if (isSyntheticTesterEmail(e)) return 'automation';
+    if (isFigmaEmail(e)) return 'user-employee';
   }
   return 'user';
 }

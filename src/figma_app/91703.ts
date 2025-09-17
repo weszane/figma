@@ -4,7 +4,7 @@ import { getI18nString } from '../905/303541';
 import { createOptimistThunk } from '../905/350402';
 import { trackEventAnalytics } from '../905/449184';
 import { handleAtomEvent } from '../905/502364';
-import { GZ } from '../905/508367';
+import { isIframe } from '../905/508367';
 import { getFeatureFlags } from '../905/601108';
 import { customHistory } from '../905/612521';
 import { OrganizationType } from '../905/833838';
@@ -175,7 +175,7 @@ let $$eA35 = createOptimistThunk((e, t) => {
     })) : desktopAPIInstance.showFileBrowser();
     return;
   }
-  if (GZ()) {
+  if (isIframe()) {
     if (getFeatureFlags().integ_zoom_allow_file_switching && sendBackToFilesAction()) return;
     customHistory.redirect('/', '_blank');
     return;

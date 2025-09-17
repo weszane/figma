@@ -17,7 +17,7 @@ import { Rj, RR, jJ, b_, _s, HE, Y1 } from "../905/820658";
 import { A as _$$A } from "../5132/237216";
 import { partitionUsersByPurchaseEligibility } from "../figma_app/808294";
 import { isResourceDelisted, isResourceBlocked } from "../figma_app/777551";
-import { cs } from "../figma_app/740025";
+import { isOrgOrTeamExport } from "../figma_app/740025";
 import { ej } from "../figma_app/86989";
 import { getAssociatedUserProfiles } from "../905/11536";
 import { getUserId } from "../905/372672";
@@ -101,7 +101,7 @@ export function $$P0({
   let x = useDispatch();
   if (!hasMonetizedResourceMetadata(e) && !isThirdPartyMonetized(e)) return null;
   let f = !1;
-  if (cs(_) && !isThirdPartyMonetized(e)) {
+  if (isOrgOrTeamExport(_) && !isThirdPartyMonetized(e)) {
     f = !0;
     u = getI18nString("community.buyer.cannot_make_purchase_on_behalf_of_team_or_org");
   } else {

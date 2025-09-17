@@ -5,7 +5,7 @@ import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/656470";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { fT, jm } from "../figma_app/416935";
+import { isSupportShareEmail, isFigmaEmail } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
@@ -256,13 +256,13 @@ async function P(e, t, r) {
   }));
   await K.zipPromise;
   let Y = await z.close();
-  if (fT(m.user?.email)) {
+  if (isSupportShareEmail(m.user?.email)) {
     let e = "";
     let t = m.authedUsers?.byId;
     if (t) {
       Object.values(t).forEach(t => {
         let r = t.email;
-        jm(r) && !fT(r) && (e = r);
+        isFigmaEmail(r) && !isSupportShareEmail(r) && (e = r);
       });
       let r = new FileReader();
       r.onloadend = () => {

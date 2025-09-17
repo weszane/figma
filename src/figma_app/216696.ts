@@ -3,7 +3,7 @@ import { logError } from "../905/714362";
 import { Sb } from "../905/359847";
 import { Qi } from "../905/172918";
 import { createOptimistThunk } from "../905/350402";
-import { x1 as _$$x } from "../figma_app/740025";
+import { getResourceTypeV2 } from "../figma_app/740025";
 import { setupLoadingStateHandler } from "../905/696711";
 import { ResourceTypeNoComment2 } from "../figma_app/45218";
 import { communityShelfService } from "../905/665703";
@@ -72,7 +72,7 @@ function m(e, t) {
   let n = [];
   let i = [];
   t.forEach(e => {
-    let t = _$$x(e);
+    let t = getResourceTypeV2(e);
     t === ResourceTypeNoComment2.HUB_FILE ? r.push(e) : t === ResourceTypeNoComment2.PLUGIN ? n.push(e) : t === ResourceTypeNoComment2.WIDGET && i.push(e);
   });
   e(Sb({

@@ -12,7 +12,7 @@ import { vQ } from "../5430/664984";
 import { getResourceActionText } from "../figma_app/777551";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { showModalHandler } from "../905/156213";
-import { YW } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
 import { IE } from "../5430/231178";
@@ -27,7 +27,7 @@ export function $$T0({
 }) {
   let r = IE(e);
   let T = useDispatch();
-  let I = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let I = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   let N = _$$T();
   let E = selectCurrentUser();
   let S = useCallback(() => {

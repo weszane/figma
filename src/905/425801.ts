@@ -3,7 +3,7 @@ import { Checkbox } from "../905/274480";
 import { Label } from "../905/270045";
 import { getI18nString } from "../905/303541";
 import { Zc } from "../905/497882";
-import { Ni } from "../figma_app/188152";
+import { DropdownEnableState } from "../figma_app/188152";
 import { A as _$$A } from "../905/567946";
 export function $$c0({
   commentsSettingField: e
@@ -16,11 +16,11 @@ export function $$c0({
       }),
       checked: u(e),
       onChange: () => {
-        Zc(e) && (u(e) ? e.setValue(Ni.ALL_DISABLED) : e.setValue(Ni.ENABLED));
+        Zc(e) && (u(e) ? e.setValue(DropdownEnableState.ALL_DISABLED) : e.setValue(DropdownEnableState.ENABLED));
       },
       disabled: !Zc(e)
     })
   });
 }
-let u = e => e.currentValue === Ni.ENABLED;
+let u = e => e.currentValue === DropdownEnableState.ENABLED;
 export const A = $$c0;

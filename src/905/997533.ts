@@ -1,12 +1,12 @@
 import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager } from "../figma_app/27355";
 import { trackEventAnalytics } from "../905/449184";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { t as _$$t } from "../905/897919";
 import { customHistory } from "../905/612521";
 import { Rg } from "../figma_app/827447";
 import { getInitialOptions } from "../figma_app/169182";
-import { P as _$$P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { parseQuery } from "../905/634134";
 import { stringToUint8Array } from "../figma_app/930338";
 import { XHR } from "../905/910117";
@@ -113,7 +113,7 @@ let $$R1 = createOptimistThunk((e, {
     e.dispatch(FlashActions.flash(getI18nString("auth.sign-in-success", {
       email: t.meta.email
     })));
-    new _$$P().sendToOtherTabs(Rg, t.meta.email);
+    new IpcStorageHandler().sendToOtherTabs(Rg, t.meta.email);
   }
 });
 export function $$N7(e, t) {
@@ -137,7 +137,7 @@ export function $$D10(e) {
 export function $$L8(e) {
   return F(e.email && e.email.trim());
 }
-let F = e => e ? xf(e) ? {
+let F = e => e ? isValidEmail(e) ? {
   message: "",
   invalidInput: null
 } : {

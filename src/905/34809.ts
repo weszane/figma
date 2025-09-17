@@ -1,25 +1,37 @@
-import { createActionCreator } from "../905/73481";
-let $$r2 = createActionCreator("BROWSER_SET_TILE_SORT_VIEW");
-let $$a11 = createActionCreator("BROWSER_SET_VIEW_BAR_VIEW_MODE_OPTIONS");
-let $$s5 = createActionCreator("BROWSER_SET_VIEW_BAR_SORT_OPTIONS");
-let $$o0 = createActionCreator("FILE_BROWSER_SET_LOADING");
-let $$l10 = createActionCreator("BEGIN_CREATE_NEW_FOLDER");
-let $$d7 = createActionCreator("STOP_CREATE_NEW_FOLDER");
-let $$c4 = createActionCreator("SHOW_MOBILE_NAV");
-let $$u6 = createActionCreator("HIDE_MOBILE_NAV");
-let $$p1 = createActionCreator("SEARCH_RESULT_CLICKED");
-let $$m3 = createActionCreator("TRACK_SIDEBAR_CLICK");
-let $$h8 = createActionCreator("SET_DELETED_FILES");
-let $$g9 = createActionCreator("SET_DELETED_REPOS");
-export const DE = $$o0;
-export const HZ = $$p1;
-export const JF = $$r2;
-export const Oe = $$m3;
-export const PY = $$c4;
-export const ZR = $$s5;
-export const _I = $$u6;
-export const bx = $$d7;
-export const pB = $$h8;
-export const pg = $$g9;
-export const sf = $$l10;
-export const uV = $$a11;
+import { createActionCreator } from '../905/73481'
+
+// Browser actions
+export const setBrowserTileSortView = createActionCreator('BROWSER_SET_TILE_SORT_VIEW')
+export const setBrowserViewBarModeOptions = createActionCreator('BROWSER_SET_VIEW_BAR_VIEW_MODE_OPTIONS')
+export const setBrowserViewBarSortOptions = createActionCreator('BROWSER_SET_VIEW_BAR_SORT_OPTIONS')
+export const setFileBrowserLoading = createActionCreator('FILE_BROWSER_SET_LOADING')
+
+// Folder actions
+export const beginCreateNewFolder = createActionCreator('BEGIN_CREATE_NEW_FOLDER')
+export const stopCreateNewFolder = createActionCreator('STOP_CREATE_NEW_FOLDER')
+
+// Navigation actions
+export const showMobileNav = createActionCreator('SHOW_MOBILE_NAV')
+export const hideMobileNav = createActionCreator('HIDE_MOBILE_NAV')
+
+// Search and tracking actions
+export const searchResultClicked = createActionCreator('SEARCH_RESULT_CLICKED')
+export const trackSidebarClick = createActionCreator('TRACK_SIDEBAR_CLICK')
+
+// Delete actions
+export const setDeletedFiles = createActionCreator('SET_DELETED_FILES')
+export const setDeletedRepos = createActionCreator('SET_DELETED_REPOS')
+
+// Exports with meaningful names mapped to internal constants
+export const DE = setFileBrowserLoading
+export const HZ = searchResultClicked
+export const JF = setBrowserTileSortView
+export const Oe = trackSidebarClick
+export const PY = showMobileNav
+export const ZR = setBrowserViewBarSortOptions
+export const _I = hideMobileNav
+export const bx = stopCreateNewFolder
+export const pB = setDeletedFiles
+export const pg = setDeletedRepos
+export const sf = beginCreateNewFolder
+export const uV = setBrowserViewBarModeOptions

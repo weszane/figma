@@ -12,7 +12,7 @@ import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import h from "classnames";
 import { dN } from "../vendor/291472";
 import { trackEventAnalytics } from "../905/449184";
-import { E as _$$E } from "../905/508367";
+import { createRect } from "../905/508367";
 import { q as _$$q, I as _$$I } from "../figma_app/819288";
 import { h as _$$h } from "../905/207101";
 import { BrowserInfo } from "../figma_app/778880";
@@ -179,7 +179,7 @@ export function $$em1(e) {
   let eA = useCallback(e => {
     if (setHyperlinkLocation && setHyperlinkEditorRef) {
       if (e?.top === 0 && e?.bottom === 0 && e?.left === 0 && e?.right === 0 && e?.height === 0 && e?.width === 0 && V.current) {
-        let e = _$$E(V.current.getBoundingClientRect());
+        let e = createRect(V.current.getBoundingClientRect());
         setHyperlinkLocation({
           ...e,
           width: 32,

@@ -2,7 +2,7 @@ import { debugState } from "../905/407919";
 import { mV } from "../905/837497";
 import { a8 } from "../figma_app/559491";
 import { gI } from "../figma_app/399472";
-import { T9 } from "../figma_app/740025";
+import { findProfile } from "../figma_app/740025";
 import { D2 } from "../905/18797";
 import { isWidget } from "../figma_app/45218";
 import { getWidgetAllowListKey, hasLocalFileId, PluginInstallStatus } from "../figma_app/155287";
@@ -14,7 +14,7 @@ async function p(e) {
     authedProfilesById,
     openFile
   } = debugState.getState();
-  let d = T9({
+  let d = findProfile({
     authedProfilesById,
     userId: user?.id
   });

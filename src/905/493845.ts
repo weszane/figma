@@ -15,7 +15,7 @@ import { U as _$$U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Zc, Lz } from "../905/497882";
 import { Vb, wj } from "../905/759470";
-import { WX } from "../figma_app/350203";
+import { PublishModalState } from "../figma_app/350203";
 import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
 import { VY, yj, Mr } from "../905/966582";
@@ -138,7 +138,7 @@ export let $$T0 = forwardRef(function ({
         id: X,
         onChange: async e => {
           !H && setThumbnailMediumFromInput && (i?.(), W(!0), await setThumbnailMediumFromInput(e.target), trackEvent(d, {
-            step: WX.ADD_CUSTOM_THUMBNAIL
+            step: PublishModalState.ADD_CUSTOM_THUMBNAIL
           }), W(!1));
         },
         type: "file"

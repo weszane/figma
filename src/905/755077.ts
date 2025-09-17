@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useEffect } from "react";
 import { debounce } from "../905/915765";
 import { BigTextInputForwardRef, BaseLinkComponent } from "../figma_app/637027";
 import { getI18nString, renderI18nText } from "../905/303541";
-import { vr } from "../figma_app/740025";
+import { validateProfileHandle } from "../figma_app/740025";
 import { s as _$$s2 } from "../905/608932";
 export function $$c0(e) {
   let {
@@ -15,7 +15,7 @@ export function $$c0(e) {
   let p = useRef("");
   let [m, h] = useState({});
   let g = useCallback(e => {
-    let n = vr(e);
+    let n = validateProfileHandle(e);
     if (n) {
       onProfileHandleValidationFailure && onProfileHandleValidationFailure();
       h({

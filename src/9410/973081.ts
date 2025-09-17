@@ -73,7 +73,7 @@ import { N as _$$N2 } from '../905/438674';
 import { IconButton } from '../905/443068';
 import { k as _$$k4 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
-import { y as _$$y5 } from '../905/461685';
+import { useDraftsFolderProject } from '../905/461685';
 import { AutoLayout, Spacer } from '../905/470281';
 import { V as _$$V3 } from '../905/480825';
 import { formatI18nMessage } from '../905/482208';
@@ -85,7 +85,7 @@ import { bL as _$$bL, c$, l9, mc, WL, YJ } from '../905/493196';
 import { G as _$$G } from '../905/496937';
 import { NO } from '../905/498139';
 import { handleAtomEvent } from '../905/502364';
-import { FJ } from '../905/508367';
+import { openWindow } from '../905/508367';
 import { a as _$$a } from '../905/518538';
 import { Button, ButtonLargeWide } from '../905/521428';
 import { globalPerfTimer } from '../905/542194';
@@ -314,7 +314,7 @@ import { t4 as _$$t6, Gm } from '../figma_app/675605';
 import { k1 } from '../figma_app/687767';
 import { _o } from '../figma_app/701001';
 import { U3 as _$$U4 } from '../figma_app/737746';
-import { EL } from '../figma_app/740025';
+import { getCurrentOrgAdminInfo } from '../figma_app/740025';
 import { dP, Ku, qw, UK, UX } from '../figma_app/740163';
 import { getPropertiesPanelTab, updateHoveredNode } from '../figma_app/741237';
 import { qZ, ui } from '../figma_app/761118';
@@ -2791,7 +2791,7 @@ function r0(e) {
 }
 function r8() {
   let e = isDesignFileType();
-  let t = _$$y5().transform(e => e?.canCreateSitesFileWithReasons.result).unwrapOr(!1);
+  let t = useDraftsFolderProject().transform(e => e?.canCreateSitesFileWithReasons.result).unwrapOr(!1);
   let i = useIsCurrentUserCreator();
   let r = Vr();
   if (!r || !r.isTopLevelFrame()) return !1;
@@ -2981,7 +2981,7 @@ let nr = connect((e, t) => ({
   appModel: e.mirror.appModel,
   openFile: e.openFile,
   editorType: e.selectedView.editorType,
-  orgEntity: EL(e),
+  orgEntity: getCurrentOrgAdminInfo(e),
   org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
   isJoinedToActiveVotingSession: gR(e),
   hasSelection: Object.keys(e.mirror.sceneGraphSelection).length > 0,
@@ -4271,7 +4271,7 @@ function nl(e) {
       library: e.library,
       masterSymbolGUID: e.mirror.selectionProperties.masterSymbolGUID,
       propertiesPanelShouldShowRemoveAutoLayout: e.mirror.selectionProperties.propertiesPanelShouldShowRemoveAutoLayout,
-      orgEntity: EL(e),
+      orgEntity: getCurrentOrgAdminInfo(e),
       org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
       user: e.user,
       fillPaints: e.mirror.selectionProperties.fillPaints,
@@ -4364,7 +4364,7 @@ function nc(e) {
       library: e.library,
       masterSymbolGUID: e.mirror.selectionProperties.masterSymbolGUID,
       propertiesPanelShouldShowRemoveAutoLayout: e.mirror.selectionProperties.propertiesPanelShouldShowRemoveAutoLayout,
-      orgEntity: EL(e),
+      orgEntity: getCurrentOrgAdminInfo(e),
       org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
       user: e.user,
       fillPaints: e.mirror.selectionProperties.fillPaints,
@@ -6717,7 +6717,7 @@ function sn() {
           className: _$$s3.mt4.$,
           text: 'Internal only - #feat-custom-keyboard-shortcuts',
           color: BadgeColor.WARNING,
-          onClick: () => FJ('https://figma.slack.com/archives/C055MQJ2E5P', '_blank')
+          onClick: () => openWindow('https://figma.slack.com/archives/C055MQJ2E5P', '_blank')
         })]
       })
     }), jsxs('div', {

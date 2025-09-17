@@ -61,7 +61,7 @@ import { v as _$$v } from '../905/442517';
 import { k as _$$k2 } from '../905/443820';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
 import { V as _$$V2 } from '../905/480825';
-import { FJ } from '../905/508367';
+import { openWindow } from '../905/508367';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { getCodegenLanguagePreference } from '../905/515076';
 import { Dd, OJ } from '../905/519092';
@@ -5443,7 +5443,7 @@ export function $$sr0(e) {
     onClick: () => {
       let e = '/conveyor/sso';
       isGovCluster() && (e = 'https://compliance.figma.com');
-      FJ(e, '_blank');
+      openWindow(e, '_blank');
     }
   }, 'compliance-hub')), eo && !isGovCluster()) {
     let e = async e => {

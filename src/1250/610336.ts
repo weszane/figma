@@ -6,7 +6,7 @@ import { isResourceHubEnabled } from "../figma_app/275462";
 import { ResourceTypeSubset } from "../905/178090";
 import { ResourceTypeEnum } from "../figma_app/306946";
 import { M } from "../1250/758461";
-import { YW } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
 import { selectCurrentUser } from "../905/372672";
 import { hasExternalRestrictedOrgId } from "../figma_app/12796";
@@ -17,7 +17,7 @@ export function $$f0() {
   let t = useTeamPlanUser();
   let n = useTeamPlanFeatures();
   let a = useIsOrgGuestUser(t).unwrapOr(!1);
-  let r = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let r = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   if ("loading" === n.status) return !1;
   let o = n.data?.type === FOrganizationLevelType.ORG ? n.data?.key.parentId : void 0;
   return !(!isResourceHubEnabled() || r || a || hasExternalRestrictedOrgId(e) && o !== e?.external_restricted_org_id);

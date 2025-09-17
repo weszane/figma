@@ -6,7 +6,7 @@ import { selectWithShallowEqual } from "../905/103090";
 import { getFilteredFeatureFlags } from "../905/717445";
 import { useCanAccessFullDevMode } from "../figma_app/473493";
 import { BE, Be, qr, QZ } from "../figma_app/844435";
-import { gS } from "../figma_app/740025";
+import { getPluginVersions } from "../figma_app/740025";
 import { UK } from "../figma_app/740163";
 import { e as _$$e, n as _$$n } from "../figma_app/48514";
 import { getOrgByCurrentUserId } from "../905/845253";
@@ -20,7 +20,7 @@ export function $$y1(e) {
     openFile: e.openFile,
     publishedPlugins: e.publishedPlugins,
     allSavedPlugins: E,
-    recentlyUsedPlugins: gS(mapFileTypeToEditorType(t), e.recentlyUsed, e.localPlugins),
+    recentlyUsedPlugins: getPluginVersions(mapFileTypeToEditorType(t), e.recentlyUsed, e.localPlugins),
     localExtensions: e.localPlugins,
     org: getOrgByCurrentUserId(e.currentUserOrgId, e.orgById) ?? null,
     isReadOnly: e.mirror.appModel.isReadOnly,

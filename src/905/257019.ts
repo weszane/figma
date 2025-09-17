@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
-import { T9 } from "../figma_app/740025";
+import { findProfile } from "../figma_app/740025";
 import { PluginType } from "../figma_app/155287";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
@@ -20,7 +20,7 @@ class c {
       user,
       authedProfilesById
     } = debugState.getState();
-    let n = T9({
+    let n = findProfile({
       authedProfilesById,
       userId: user?.id
     });

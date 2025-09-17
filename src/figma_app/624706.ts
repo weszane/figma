@@ -9,7 +9,7 @@ import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription, Xr, atomStoreManager } from "../figma_app/27355";
 import _ from "classnames";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { Tf } from "../905/280919";
 import { A as _$$A } from "../905/920142";
 import { customHistory } from "../905/612521";
@@ -2949,7 +2949,7 @@ let t7 = class e extends RecordingPureComponent {
               }));
             };
             window.addEventListener("message", i);
-            FJ(r.toString(), "cortex-trace", "height=420,width=520,left=20,top=20,,scrollbars=yes,menubar=no");
+            openWindow(r.toString(), "cortex-trace", "height=420,width=520,left=20,top=20,,scrollbars=yes,menubar=no");
           };
           r.onerror = function () {
             console.error("Error reading indexedDB data", e, n, this.error);

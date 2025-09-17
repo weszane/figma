@@ -1,6 +1,6 @@
 import { atom, createRemovableAtomFamily, mg } from "../figma_app/27355";
-import { jm, qe } from "../figma_app/416935";
-import { HB } from "../3973/538504";
+import { isFigmaEmail, isAllowedDomain } from "../figma_app/416935";
+import { normalizeJobRole } from "../3973/538504";
 import { createReduxSubscriptionAtomWithState } from "../905/270322";
 import { UserForRcs, EduOffboardingData } from "../figma_app/43951";
 import { hasTeamPaidAccess } from "../figma_app/345997";
@@ -21,7 +21,7 @@ let $$g1 = mapAndAggregateResources([rg, UserForRcs.Query({})], ([e, t], r) => {
 });
 transformAtom(UserForRcs.Query({}), e => {
   let t = e.currentUser.email;
-  return jm(t) || !!t?.endsWith("@dev.figma.com");
+  return isFigmaEmail(t) || !!t?.endsWith("@dev.figma.com");
 });
 let $$f15 = transformAtom(UserForRcs.Query({}), e => null != e.currentUser.studentValidatedAt);
 let $$E6 = transformAtom(EduOffboardingData.Query({}), e => e.currentUser.eduPeriodEnd);
@@ -38,11 +38,11 @@ let $$v13 = transformAtom(I, (e, t) => t(T));
 let $$A3 = transformAtom(rg, e => !!e?.length && e.length > 0);
 let $$x12 = transformAtom(UserForRcs.Query({}), e => {
   let t = e.currentUser.email;
-  return null != t ? qe(t) : void 0;
+  return null != t ? isAllowedDomain(t) : void 0;
 });
 let $$N4 = transformAtom(UserForRcs.Query({}), e => e.currentUser.profile?.jobTitle);
 transformAtom($$N4, e => {
-  let t = HB(e);
+  let t = normalizeJobRole(e);
   return "designer" !== t && "other" !== t && "unknown" !== t;
 });
 transformAtom(UserForRcs.Query({}), e => e.currentUser.profile?.usagePurpose);

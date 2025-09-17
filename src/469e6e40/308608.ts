@@ -64,7 +64,7 @@ import { Cj } from "../905/270084";
 import { CloseButton } from "../905/17223";
 import { registerModal } from "../905/102752";
 import { ModalContainer } from "../figma_app/918700";
-import { lb } from "../3973/538504";
+import { getJobRoleDisplay } from "../3973/538504";
 import { getResourceDataOrFallback } from "../905/723791";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -382,7 +382,7 @@ let eI = registerModal(function ({
         }), jsx(eS, {
           label: getI18nString("admin_dashboard.requests.details.job_title"),
           contents: e.jobTitle ? jsx("div", {
-            children: lb(e.jobTitle)
+            children: getJobRoleDisplay(e.jobTitle)
           }) : null
         }), jsx(eS, {
           label: getI18nString("admin_dashboard.requests.details.license_type"),

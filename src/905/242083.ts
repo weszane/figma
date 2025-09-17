@@ -437,7 +437,7 @@ import { i as _$$i3 } from '../figma_app/904127';
 import { h as _$$h2 } from '../figma_app/907304';
 import { fG } from '../figma_app/912411';
 import { kF as _$$kF } from '../figma_app/915202';
-import { CV } from '../figma_app/916560';
+import { handleEmbedPaste } from '../figma_app/916560';
 import { toWellFormed, truncate, uint8ArrayToBase64, escapeHtml, base64ToUint8Array } from '../figma_app/930338';
 import { l7 as _$$l3 } from '../figma_app/932601';
 import { FU as _$$FU, b$ } from '../figma_app/933328';
@@ -7931,7 +7931,7 @@ let lX = class e extends sP(sN(sR)) {
     return U2(e, t);
   }
   generateEmbed(e) {
-    return CV(this._store.dispatch, e, PluginModalTypeEnum.PASTE).valid;
+    return handleEmbedPaste(this._store.dispatch, e, PluginModalTypeEnum.PASTE).valid;
   }
   generateFlappFromPastedText(e) {
     return !function (e) {

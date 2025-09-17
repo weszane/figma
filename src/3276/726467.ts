@@ -15,7 +15,7 @@ import { h as _$$h2 } from "../905/284399";
 import { q3 } from "../figma_app/450829";
 import { aI5, ar0 } from "../figma_app/6204";
 import { trackEventAnalytics } from "../905/449184";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { ButtonBasePrimaryTracked, ButtonSecondaryTracked } from "../figma_app/637027";
 import { renderI18nText } from "../905/303541";
 let $$w = {
@@ -55,7 +55,7 @@ function k({
     title: renderI18nText("collaboration.spotlight.onboarding_spotlight.title"),
     content: t,
     secondaryCTA: renderI18nText("collaboration.voice.learn_more"),
-    secondaryCTAOnClick: () => FJ($$w.SPOTLIGHT_GUIDE, "_blank", "noopener"),
+    secondaryCTAOnClick: () => openWindow($$w.SPOTLIGHT_GUIDE, "_blank", "noopener"),
     primaryCTA: renderI18nText("collaboration.spotlight.onboarding.next"),
     primaryCTAOnClick: () => {
       e();
@@ -72,7 +72,7 @@ function P({
     title: renderI18nText("collaboration.spotlight.onboarding_observation.title"),
     content: renderI18nText("collaboration.spotlight.onboarding_observation.description"),
     secondaryCTA: renderI18nText("collaboration.voice.learn_more"),
-    secondaryCTAOnClick: () => FJ($$w.FOLLOW_GUIDE, "_blank", "noopener"),
+    secondaryCTAOnClick: () => openWindow($$w.FOLLOW_GUIDE, "_blank", "noopener"),
     primaryCTA: renderI18nText("collaboration.spotlight.onboarding.done"),
     primaryCTAOnClick: () => {
       e();

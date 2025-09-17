@@ -116,7 +116,7 @@ import { A as _$$A7 } from '../905/475480';
 import { sendHistogram } from '../905/485103';
 import { handleAtomEvent } from '../905/502364';
 import { Y as _$$Y } from '../905/506207';
-import { jM as _$$jM } from '../905/508367';
+import { getCurrentPath } from '../905/508367';
 import { hR, hW } from '../905/508457';
 import { ProductAccessTypeEnum } from '../905/513035';
 import { s as _$$s } from '../905/513506';
@@ -287,7 +287,7 @@ import { bN } from '../figma_app/16595';
 import { $t, lW as _$$lW, FC, JO, y7 } from '../figma_app/20203';
 import { H as _$$H5, U as _$$U } from '../figma_app/23564';
 import { atom, useAtomValueAndSetter, createRemovableAtomFamily, useAtomWithSubscription, mg, Xr, atomStoreManager } from '../figma_app/27355';
-import { h8, QH, Ze } from '../figma_app/27829';
+import { createSnapshotComponent, setupLoadablePageManager, hideElementById } from '../figma_app/27829';
 import { assetMirrorInstance } from '../figma_app/31188';
 import { Ye } from '../figma_app/32128';
 import { ZS } from '../figma_app/33126';
@@ -494,7 +494,7 @@ import { iC as _$$iC, nd as _$$nd, tP as _$$tP, TZ } from '../figma_app/722791';
 import { fm } from '../figma_app/723183';
 import { x as _$$x5 } from '../figma_app/731109';
 import { YN as _$$YN } from '../figma_app/738358';
-import { pK as _$$pK, uz as _$$uz } from '../figma_app/740025';
+import { isHubFileEmbedView, isMonetizationRedirectView } from '../figma_app/740025';
 import { D as _$$D4, UX } from '../figma_app/740163';
 import { C as _$$C } from '../figma_app/747354';
 import { K7 } from '../figma_app/749805';
@@ -1923,15 +1923,15 @@ let nY = new _$$b({
     }
   }
 });
-let nX = QH(atomStoreManager, 'Community');
+let nX = setupLoadablePageManager(atomStoreManager, 'Community');
 let nq = 'filebrowser-loading-page';
-let nJ = h8(nq, e => {
+let nJ = createSnapshotComponent(nq, e => {
   e.setAttribute('id', '');
   e.classList.remove('hidden');
   e.classList.remove('fadeOut');
 });
 function nZ() {
-  Ze(nq);
+  hideElementById(nq);
 }
 let nQ = nY.createLazyComponent(async () => {
   let {
@@ -2184,7 +2184,7 @@ function iW() {
   let r;
   let n;
   let i = getSelectedView();
-  if (!_$$uz(i)) return null;
+  if (!isMonetizationRedirectView(i)) return null;
   let {
     redirectUrl,
     interstitialType
@@ -7424,7 +7424,7 @@ function uY() {
             Rm({
               dispatch: n,
               origin: _$$ty.LOGGED_OUT_FOOTER_CONTINUE_WITH_GOOGLE,
-              redirectUrl: _$$jM()
+              redirectUrl: getCurrentPath()
             }).then(e => {
               e.type === 'login' && n(AUTH_COMPLETE({
                 userId: e.user.id
@@ -7437,7 +7437,7 @@ function uY() {
                 dispatch: n,
                 origin: _$$ty.LOGGED_OUT_FOOTER_CONTINUE_WITH_GOOGLE,
                 message: e.message,
-                redirectUrl: _$$jM()
+                redirectUrl: getCurrentPath()
               });
             });
           },
@@ -8880,9 +8880,9 @@ let _C = memo(() => {
     success: getI18nString('common.success'),
     warning: getI18nString('common.warning')
   });
-  return _$$d8() ? jsx(_$$O, {}) : _$$pK(r) ? jsx(sN, {
+  return _$$d8() ? jsx(_$$O, {}) : isHubFileEmbedView(r) ? jsx(sN, {
     hubFileId: r.hubFileId
-  }) : _$$uz(r) ? jsx(iW, {}) : jsx(_$$K3, {
+  }) : isMonetizationRedirectView(r) ? jsx(iW, {}) : jsx(_$$K3, {
     recordingKey: 'inAppPage',
     children: jsx(_N, {
       children: jsx(_$$w2, {

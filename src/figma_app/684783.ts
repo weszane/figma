@@ -23,7 +23,7 @@ import { U3 } from "../figma_app/412189";
 import { UG, _Q, qb, Jr, RL, Hs, fz } from "../figma_app/2590";
 import { defaultViewportState } from "../figma_app/298911";
 import { VL } from "../figma_app/112055";
-import { jJ } from "../905/508367";
+import { handleExternalRedirect } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { lQ } from "../905/934246";
 import { IconButton } from "../905/443068";
@@ -1057,7 +1057,7 @@ class eK extends PureComponent {
       e.on("sceneDidCompleteInitialLoad", this.handleSceneDidCompleteInitialLoad);
       e.on("documentIsLoaded", this.handleDocumentIsLoaded);
       e.on("canvasResize", this.updateViewportInfoIfNecessary);
-      e.on("urlClicked", jJ);
+      e.on("urlClicked", handleExternalRedirect);
       e.on("loadVideoJsLib", async () => {
         await Fe().then(t => {
           e && e.injectVideoJsLib(t);
@@ -1066,7 +1066,7 @@ class eK extends PureComponent {
     };
     this.unbindEventsToViewer = () => {
       let e = this.props.viewer;
-      e && (e.off("pagesChange", this.handlePageChange), e.off("viewportChanged", this.handleViewportChange), e.off("sceneDidCompleteInitialLoad", this.handleSceneDidCompleteInitialLoad), e.off("documentIsLoaded", this.handleDocumentIsLoaded), e.off("backgroundColorChange", this.setBackgroundColor), e.off("prototypeBackgroundColorChange", this.setBackgroundColor), e.off("canvasResize", this.updateViewportInfoIfNecessary), e.off("urlClicked", jJ), e.reset());
+      e && (e.off("pagesChange", this.handlePageChange), e.off("viewportChanged", this.handleViewportChange), e.off("sceneDidCompleteInitialLoad", this.handleSceneDidCompleteInitialLoad), e.off("documentIsLoaded", this.handleDocumentIsLoaded), e.off("backgroundColorChange", this.setBackgroundColor), e.off("prototypeBackgroundColorChange", this.setBackgroundColor), e.off("canvasResize", this.updateViewportInfoIfNecessary), e.off("urlClicked", handleExternalRedirect), e.reset());
     };
     this.setBackgroundColor = e => {
       e && this.setState({

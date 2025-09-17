@@ -7,7 +7,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz } from "../905/497882";
-import { HE, eL } from "../figma_app/740025";
+import { PUBLISHER_INPUT_KEYS, MAX_TAGS_LENGTH } from "../figma_app/740025";
 import { d as _$$d } from "../905/44199";
 import { BuyerAPIHandler } from "../905/180";
 import { P } from "../905/392438";
@@ -122,7 +122,7 @@ let $$y0 = forwardRef(function ({
           text: t,
           count: i
         })) : [], [E]),
-        newTokenKeyCodes: HE,
+        newTokenKeyCodes: PUBLISHER_INPUT_KEYS,
         onChange: t => {
           s?.();
           k(t.inputValue);
@@ -130,7 +130,7 @@ let $$y0 = forwardRef(function ({
           e.setValue?.(i);
         },
         placeholder: getI18nString(t.length > 0 ? "community.publishing.add_up_to_n_more_tags" : "community.publishing.add_up_to_n_tags", {
-          maxTagsPerResource: eL
+          maxTagsPerResource: MAX_TAGS_LENGTH
         }),
         unselectSearchResultOnPointerOut: !0,
         validateToken: t => {

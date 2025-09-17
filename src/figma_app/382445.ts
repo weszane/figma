@@ -4,7 +4,7 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk } from "../905/350402";
-import { n as _$$n, sD } from "../figma_app/740025";
+import { getHubTypeString, findPublishedProfileForUser } from "../figma_app/740025";
 import { setupLoadingStateHandler } from "../905/696711";
 import { ResourceTypeNoComment } from "../figma_app/45218";
 let $$p1 = createOptimistThunk((e, {
@@ -13,7 +13,7 @@ let $$p1 = createOptimistThunk((e, {
 }, {
   loadingKey: l
 }) => {
-  let p = XHR.post(`/api/${_$$n(r)}/${t}/like`, {
+  let p = XHR.post(`/api/${getHubTypeString(r)}/${t}/like`, {
     orgId: e.getState().currentUserOrgId
   });
   setupLoadingStateHandler(p, e, l);
@@ -29,7 +29,7 @@ let $$p1 = createOptimistThunk((e, {
     }));
   });
   let _ = e.getState().user;
-  let h = _ && sD(_, e.getState().authedProfilesById);
+  let h = _ && findPublishedProfileForUser(_, e.getState().authedProfilesById);
   _?.id && h && WB().optimisticallyCreate({
     CommunityHubLike: {
       [`optimistic-${t}-${h.id}`]: {
@@ -54,7 +54,7 @@ let $$_0 = createOptimistThunk((e, {
 }, {
   loadingKey: l
 }) => {
-  let p = XHR.del(`/api/${_$$n(r)}/${t}/like`, {
+  let p = XHR.del(`/api/${getHubTypeString(r)}/${t}/like`, {
     orgId: e.getState().currentUserOrgId
   });
   setupLoadingStateHandler(p, e, l);

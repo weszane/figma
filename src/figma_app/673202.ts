@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
 import { Xr, useAtomWithSubscription } from "../figma_app/27355";
 import s from "classnames";
-import { GZ } from "../905/508367";
+import { isIframe } from "../905/508367";
 import { wY, cU } from "../figma_app/708845";
 import { getInitialOptions } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
@@ -104,7 +104,7 @@ function I(e) {
 export function $$S1(e) {
   let t = useAtomWithSubscription(Dr);
   let r = !1;
-  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || GZ()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
+  return (t === S6.UNLOADED && (r = !0), t !== S6.YES || e.persistentMessage || (r = !0), V() && (r = !0), getInitialOptions().user_data?.id && (r = !0), (getInitialOptions().is_embed || isIframe()) && (r = !0), BrowserInfo.isMeetDevice && (r = !0), useEffect(() => {
     !r && BrowserInfo.isIpadNative && L3({
       consentRegion: "explicit",
       cookiesEnabled: !1

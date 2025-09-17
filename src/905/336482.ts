@@ -70,7 +70,7 @@ import { w as _$$w } from "../905/893785";
 import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
-import { $$in, WX } from "../figma_app/350203";
+import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Rv, mN } from "../figma_app/599979";
 import { useCurrentUserOrg } from "../905/845253";
@@ -491,7 +491,7 @@ function eM({
   let u = useCallback(() => {
     l(hideModal());
     c.current($$in, {
-      step: WX.CLOSED
+      step: PublishModalState.CLOSED
     });
   }, [l, c]);
   let p = _$$D(e.fieldStates);
@@ -558,7 +558,7 @@ function eM({
     submit
   } = _$$r2(e, useCallback(() => {
     c.current($$in, {
-      step: WX.PUBLISH
+      step: PublishModalState.PUBLISH
     });
   }, [c]));
   let [en, er] = useState(_$$X.STOPPED);
@@ -728,13 +728,13 @@ function eM({
   }, [e, draftSubmissionResult?.result, ea, stepWithErrors, Z.activeTab]);
   useEffect(() => {
     c.current($$in, {
-      step: WX.OPENED
+      step: PublishModalState.OPENED
     });
   }, [c]);
   let eo = Lz(e.fieldStates.name, "");
   let el = useDebouncedCallback(() => {
     c.current($$in, {
-      step: WX.EDIT_NAME
+      step: PublishModalState.EDIT_NAME
     });
   }, 2e3);
   useEffect(() => {
@@ -743,7 +743,7 @@ function eM({
   let ed = Lz(e.fieldStates.description, "");
   let ec = useDebouncedCallback(() => {
     c.current($$in, {
-      step: WX.EDIT_DESCRIPTION
+      step: PublishModalState.EDIT_DESCRIPTION
     });
   }, 1e4);
   useEffect(() => {
@@ -1357,7 +1357,7 @@ function td({
   let m = useCallback(() => {
     c(hideModal());
     p.current($$in, {
-      step: WX.CLOSED
+      step: PublishModalState.CLOSED
     });
   }, [c, p]);
   let y = useSelector(e => "mirror" in e ? e.mirror.appModel.pagesList : []);
@@ -1471,7 +1471,7 @@ function td({
     submit
   } = _$$r2(e, useCallback(() => {
     p.current($$in, {
-      step: WX.PUBLISH
+      step: PublishModalState.PUBLISH
     });
   }, [p]));
   let [ep, em] = useState(_$$X.STOPPED);
@@ -1711,13 +1711,13 @@ function td({
   }, [e, draftSubmissionResult?.result, eh, stepWithErrors, er.activeTab]);
   useEffect(() => {
     p.current($$in, {
-      step: WX.OPENED
+      step: PublishModalState.OPENED
     });
   }, [p]);
   let ef = Lz(e.fieldStates.name, "");
   let e_ = useDebouncedCallback(() => {
     p.current($$in, {
-      step: WX.EDIT_NAME
+      step: PublishModalState.EDIT_NAME
     });
   }, 2e3);
   useEffect(() => {
@@ -1726,7 +1726,7 @@ function td({
   let eA = Lz(e.fieldStates.description, "");
   let ey = useDebouncedCallback(() => {
     p.current($$in, {
-      step: WX.EDIT_DESCRIPTION
+      step: PublishModalState.EDIT_DESCRIPTION
     });
   }, 1e4);
   useEffect(() => {

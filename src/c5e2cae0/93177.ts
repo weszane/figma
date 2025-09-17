@@ -4,14 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { useLatestRef } from "../figma_app/922077";
 import { getPaymentFlowData, clearPaymentFlowData } from "../figma_app/169182";
 import { handleSuspenseRetainRelease, setupResourceAtomHandler } from "../figma_app/566371";
 import { _H } from "../figma_app/598111";
-import { cn } from "../figma_app/141320";
+import { isStudentValidated } from "../figma_app/141320";
 import { tH, H4 } from "../905/751457";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -676,7 +676,7 @@ function eY(e) {
       loadingPaidEditors: tc
     });
   }, [eD, eB, tc, R, eP]);
-  let tE = useSelector(e => !!e.user && cn(e.user));
+  let tE = useSelector(e => !!e.user && isStudentValidated(e.user));
   useEffect(() => {
     tE && e.selectedView.isEduTeam ? to(Lo({
       billingPeriod: SubscriptionType.STUDENT
@@ -696,7 +696,7 @@ function eY(e) {
   }, [eY, eQ, eN]);
   let tI = eA === SubscriptionType.STUDENT;
   let tk = z.filter(e => e && e.trim()).map(e => e.trim());
-  let tP = tk.filter(e => !xf(e));
+  let tP = tk.filter(e => !isValidEmail(e));
   let tM = !!a && tk.filter(e => e === a.email).length > 0;
   let tR = async t => {
     t.preventDefault();

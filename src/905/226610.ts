@@ -4,7 +4,7 @@ import { getFeatureFlags } from "../905/601108";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { createReduxSubscriptionAtom } from "../905/111321";
 import { y$ } from "../vendor/156872";
-import { jm } from "../figma_app/416935";
+import { isFigmaEmail } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { NU } from "../905/11";
@@ -174,7 +174,7 @@ let $$x0 = Object.freeze({
   trackableDebug: new b({
     name: "lab_trackable_debug_toggle",
     getDisplayName: () => getI18nString("lab.trackable_debug"),
-    getCanOverride: () => E || jm(getInitialOptions().user_data?.email),
+    getCanOverride: () => E || isFigmaEmail(getInitialOptions().user_data?.email),
     getDefaultValue: () => !1
   }),
   interopFiles: new b({

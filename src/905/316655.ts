@@ -8,8 +8,8 @@ import { $z } from "../figma_app/617427";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { X2, e6 } from "../figma_app/530167";
 import { showModalHandler } from "../905/156213";
-import { s0, ZO } from "../figma_app/350203";
-import { cs } from "../figma_app/740025";
+import { HubAction, FigmaResourceType } from "../figma_app/350203";
+import { isOrgOrTeamExport } from "../figma_app/740025";
 import { VP, GH, aF } from "../905/18797";
 import { KindEnum } from "../905/129884";
 import { l as _$$l } from "../905/690005";
@@ -53,7 +53,7 @@ export function $$v0({
     }));
   };
   let M = C && N;
-  return cs(x) ? jsx($z, {
+  return isOrgOrTeamExport(x) ? jsx($z, {
     "data-tooltip-type": KindEnum.TEXT,
     "data-tooltip": getI18nString("community.follow.org_and_team_profiles_cannot_follow_other_profiles"),
     "data-tooltip-show-immediately": !0,
@@ -78,8 +78,8 @@ export function $$v0({
     trackingProperties: {
       followerProfileId: S,
       followedProfileId: e.id,
-      action: s0.PROFILE_UNFOLLOW,
-      communityHubEntity: ZO.PROFILES,
+      action: HubAction.PROFILE_UNFOLLOW,
+      communityHubEntity: FigmaResourceType.PROFILES,
       ...(t || {})
     },
     children: k ? jsx("div", {
@@ -112,8 +112,8 @@ export function $$v0({
     trackingProperties: {
       followerProfileId: S,
       followedProfileId: e.id,
-      action: s0.PROFILE_FOLLOW,
-      communityHubEntity: ZO.PROFILES,
+      action: HubAction.PROFILE_FOLLOW,
+      communityHubEntity: FigmaResourceType.PROFILES,
       ...(t || {})
     },
     variant: "primary",

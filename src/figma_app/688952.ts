@@ -9,7 +9,7 @@ import { Label } from "../905/270045";
 import { Button } from "../905/521428";
 import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager } from "../figma_app/27355";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { F as _$$F } from "../905/422355";
 import { TextWithTruncation } from "../905/984674";
 import { Ay } from "../figma_app/432652";
@@ -338,7 +338,7 @@ export let $$y0 = registerModal(function (e) {
                 },
                 children: jsx(Button, {
                   variant: "secondary",
-                  onClick: () => FJ("/foundry/preview", "_blank"),
+                  onClick: () => openWindow("/foundry/preview", "_blank"),
                   children: "Open Foundry Preview"
                 })
               })]

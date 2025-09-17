@@ -24,3 +24,4 @@ export const o7 = userStateLoadedAction
 export const oB = hideDropdownAction
 export const os = setSessionStateAction
 export const sf = selectViewAction
+export { setSessionStateAction }

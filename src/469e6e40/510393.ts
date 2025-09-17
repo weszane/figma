@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { BigTextInputForwardRef } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { FlashActions } from "../905/573154";
@@ -22,7 +22,7 @@ function j(e) {
   });
 }
 let y = e => ({
-  state: xf(e.trim()) ? _$$d.OK : _$$d.ERROR,
+  state: isValidEmail(e.trim()) ? _$$d.OK : _$$d.ERROR,
   content: e
 });
 let $$w0 = registerModal(function (e) {

@@ -1,4 +1,4 @@
-import { dR } from "../905/508367";
+import { appendSearchParams } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { isAnyMobile } from "../figma_app/778880";
@@ -56,7 +56,7 @@ export async function $$c0(e, t, i, o) {
   e.fuid && (p.fuid = e.fuid);
   e.tryPluginEditorType && (p["try-plugin-editor-type"] = e.tryPluginEditorType);
   desktopAPIInstance && (p["time-opened"] = Date.now().toString());
-  let m = dR(u, p);
+  let m = appendSearchParams(u, p);
   customHistory.redirect(m, isAnyMobile ? void 0 : "_blank");
 }
 export const j = $$c0;

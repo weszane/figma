@@ -26,10 +26,10 @@ import { Eh } from '../figma_app/12796';
 import { FEditorType } from '../figma_app/53721';
 import { am, Av, bH, Dk, f5, FW, ho, k0, Kd, Lu, MP, Pe, pR, Q7, u8, UX, Wt, xg, XS, Ye, ZQ, ZV } from '../figma_app/155287';
 import { M as _$$M } from '../figma_app/170366';
-import { Ni } from '../figma_app/188152';
+import { DropdownEnableState } from '../figma_app/188152';
 import { FFileType } from '../figma_app/191312';
 import { DK } from '../figma_app/291892';
-import { xf } from '../figma_app/416935';
+import { isValidEmail } from '../figma_app/416935';
 import { getPluginDomain, getPluginPermissions, isTrustedPluginId } from '../figma_app/455620';
 import { Y5 } from '../figma_app/455680';
 import { throwTypeError } from '../figma_app/465776';
@@ -37,7 +37,7 @@ import { buildCarouselMedia } from '../figma_app/471982';
 import { isAnyPublisher, isAcceptedPublisher } from '../figma_app/564095';
 import { Dd, En, Ii, l8, vC, Wl, xw } from '../figma_app/599979';
 import { sortByCreatedAt } from '../figma_app/656233';
-import { Lg as _$$Lg, n as _$$n, Yp as _$$Yp, Hc, yO } from '../figma_app/740025';
+import { validateTaglineLength, getHubTypeString, trimOrEmpty, getValueOrDefault, MAX_RESOURCE_SIZE } from '../figma_app/740025';
 import { Rs } from '../figma_app/761870';
 import { isResourcePendingPublishing } from '../figma_app/777551';
 import { BrowserInfo } from '../figma_app/778880';
@@ -283,7 +283,7 @@ const defaultPublishedPlugin = {
     accepted: [],
     pending: []
   },
-  comments_setting: Ni.ENABLED,
+  comments_setting: DropdownEnableState.ENABLED,
   is_widget: false,
   editor_type: 'design_and_whiteboard',
   publishing_status: null,
@@ -319,7 +319,7 @@ const defaultPublishingData: PluginPublishingData = {
   emailNotVerifiedError: null,
   accountDetailsChangedError: null,
   freemiumRequiredForMigrating: null,
-  commentsSetting: Ni.ENABLED,
+  commentsSetting: DropdownEnableState.ENABLED,
   creators: [],
   publishers: {
     inputValue: '',
@@ -1052,7 +1052,7 @@ export function getPublishedResourceOrNull(plugins: any, widgets: any, localPlug
  * @returns Plugin metadata object.
  */
 export function getPluginMetadata(plugin: any, fallback: any): any {
-  return Hc(plugin, fallback, defaultPublishedPlugin);
+  return getValueOrDefault(plugin, fallback, defaultPublishedPlugin);
 }
 
 /**
@@ -1063,7 +1063,7 @@ export function getPluginMetadata(plugin: any, fallback: any): any {
  * @returns Widget metadata object.
  */
 export function getWidgetMetadata(widget: any, fallback: any): any {
-  return Hc(widget, fallback, defaultPublishedWidget);
+  return getValueOrDefault(widget, fallback, defaultPublishedWidget);
 }
 /**
  * Filters resources by org or public publisher.
@@ -1184,7 +1184,7 @@ export function hasRoleOrOrgChanged(resource: any, roleObj: any): boolean {
 export function validatePluginCodeSize(code: string): number {
   if (!code) throw new Error('Code string cannot be empty');
   const length = YH(code).length;
-  if (length > yO) throw new Error(`plugin code exceeds max size of ${Math.floor(yO / 1e6)}MB`);
+  if (length > MAX_RESOURCE_SIZE) throw new Error(`plugin code exceeds max size of ${Math.floor(MAX_RESOURCE_SIZE / 1e6)}MB`);
   return length;
 }
 
@@ -1311,7 +1311,7 @@ function isImageSizeValid(image: any, dimensions: {
  * @throws Error if cannot generate ID.
  */
 export async function generatePluginId(value: any): Promise<any> {
-  const meta = (await XHR.post(`/api/${_$$n(value)}`)).data.meta;
+  const meta = (await XHR.post(`/api/${getHubTypeString(value)}`)).data.meta;
   if (!meta.id) throw new Error('cannot generate plugin ID');
   return meta;
 }
@@ -1505,18 +1505,18 @@ export function getPublishingErrors(user: any, status: any, isWidget: boolean, i
 export function validatePublishingData(data: any, manifest: PluginManifest, isWidget: boolean, publishedResource: any): Record<string, any> {
   if (!data) return {};
   const errors: Record<string, any> = {};
-  if (_$$Yp(data.name).length === 0) errors.name = getI18nString('community.publishing.name_must_not_be_empty');
-  if (_$$Yp(data.tagline).length === 0) errors.tagline = getI18nString('community.publishing.add_a_tagline');
+  if (trimOrEmpty(data.name).length === 0) errors.name = getI18nString('community.publishing.name_must_not_be_empty');
+  if (trimOrEmpty(data.tagline).length === 0) errors.tagline = getI18nString('community.publishing.add_a_tagline');
   if (isStrippedHtmlEmpty(data.description)) errors.description = getI18nString('community.publishing.add_a_description');
-  const supportContact = _$$Yp(data.supportContact);
+  const supportContact = trimOrEmpty(data.supportContact);
   if (supportContact.length === 0) {
     errors.supportContact = getI18nString('community.publishing.support_contact_must_not_be_empty');
-  } else if (xf(supportContact) || gU(supportContact)) {
+  } else if (isValidEmail(supportContact) || gU(supportContact)) {
     // valid
   } else {
     errors.supportContact = getI18nString('community.publishing.support_contact_must_be_a_valid_email_or_url');
   }
-  if (_$$Yp(data.iconSrc).length === 0) errors.iconImageError = getI18nString('community.publishing.icon_cant_be_empty');
+  if (trimOrEmpty(data.iconSrc).length === 0) errors.iconImageError = getI18nString('community.publishing.icon_cant_be_empty');
   errors.carouselMedia = vC(data.carouselMedia);
   if (!data.categoryId) errors.categoryId = getI18nString('community.publishing.category_cant_be_empty');
   if (data.price === undefined || manifest.permissions?.includes('payments') || publishedResource?.third_party_m10n_status !== ProductStatus.FLAGGED) {
@@ -1536,7 +1536,7 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
       });
     }
   }
-  if (isWidget && _$$Yp(data.widgetSnapshotImageSrc).length === 0) errors.widgetSnapshotImageError = getI18nString('community.publishing.snapshot_must_not_be_empty');
+  if (isWidget && trimOrEmpty(data.widgetSnapshotImageSrc).length === 0) errors.widgetSnapshotImageError = getI18nString('community.publishing.snapshot_must_not_be_empty');
 
   // Price validation (inline from $$e147)
   const priceError = (() => {
@@ -1573,14 +1573,14 @@ export function validatePublishingData(data: any, manifest: PluginManifest, isWi
 export function validatePublishingDataLengths(data: any): Record<string, any> {
   if (!data) return {};
   const errors: Record<string, any> = {};
-  const nameLen = _$$Yp(data.name).length;
+  const nameLen = trimOrEmpty(data.name).length;
   if (nameLen < 4) errors.name = getI18nString('community.publishing.name_must_be_4_characters_long');else if (nameLen > 100) errors.name = getI18nString('community.publishing.name_must_be_at_most_100_characters_long');
-  if (_$$Yp(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
-  if (_$$Yp(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
-  if (_$$Yp(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');
-  const taglineError = _$$Lg(data.tagline);
+  if (trimOrEmpty(data.description).length > 1e4) errors.description = getI18nString('community.publishing.description_must_be_at_most_10000_characters_long');
+  if (trimOrEmpty(data.newVersionReleaseNotes).length > 1e4) errors.newVersionReleaseNotes = getI18nString('community.publishing.release_notes_must_be_at_most_10000_characters_long');
+  if (trimOrEmpty(data.creatorPolicy).length > 1e4) errors.creatorPolicy = getI18nString('community.publishing.creator_policy_must_be_at_most_10000_characters_long');
+  const taglineError = validateTaglineLength(data.tagline);
   if (taglineError) errors.tagline = taglineError;
-  if (_$$Yp(data.supportContact).length > 100) errors.supportContact = getI18nString('community.publishing.support_contact_must_be_at_most_100_characters_long');
+  if (trimOrEmpty(data.supportContact).length > 100) errors.supportContact = getI18nString('community.publishing.support_contact_must_be_at_most_100_characters_long');
   if (data.iconImageError) errors.iconImageError = data.iconImageError;
   if (data.coverImageError) errors.coverImageError = data.coverImageError;
   return errors;

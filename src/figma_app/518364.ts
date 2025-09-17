@@ -3,14 +3,14 @@ import _require2 from "../6268/886268";
 import _require from "../0c62c2fd/82390";
 import { NONE_SYMBOL } from "../905/992467";
 import { A } from "../905/658244";
-import { q_, m1, bG } from "../figma_app/997907";
+import { fileBrowserPageManager, fileBrowserLoadingSnapshot, hideFileBrowserLoadingPage } from "../figma_app/997907";
 let $$s0 = A.createLazyComponent(async () => {
   let {
     FileBrowserView
   } = await Promise.all([]).then(_require);
-  return q_.LoadablePage(FileBrowserView, m1, bG);
+  return fileBrowserPageManager.LoadablePage(FileBrowserView, fileBrowserLoadingSnapshot, hideFileBrowserLoadingPage);
 }, {
-  loading: m1,
+  loading: fileBrowserLoadingSnapshot,
   error: NONE_SYMBOL.NONE,
   componentName: "FileBrowserView"
 });

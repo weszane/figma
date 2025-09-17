@@ -39,12 +39,12 @@ import { i9, N4, VS, oO, bk } from "../figma_app/49598";
 import { hideDropdownAction, selectViewAction } from "../905/929976";
 import { M3 } from "../figma_app/91703";
 import { hideModal, popModalStack } from "../905/156213";
-import { WX } from "../figma_app/350203";
+import { PublishModalState } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
-import { Wi, sD, IZ, oH, EL, qA, UP } from "../figma_app/740025";
+import { MAX_PUBLISHERS_PER_RESOURCE, findPublishedProfileForUser, validatePublisherCount, getStatusOrDefault, getCurrentOrgAdminInfo, getAuthedPublisherProfile, useIsCommunityHubView } from "../figma_app/740025";
 import { Ii, vC, $x, nK, $W, j4, xw } from "../figma_app/599979";
 import { D as _$$D } from "../905/274925";
-import { Ni } from "../figma_app/188152";
+import { DropdownEnableState } from "../figma_app/188152";
 import { selectUser } from "../905/372672";
 import { bH, cp, HF, zv, yS, cU, vK, Rj, al, a6, ow } from "../figma_app/198840";
 import { FTemplateCategoryType } from "../figma_app/191312";
@@ -177,7 +177,7 @@ function eH({
     children: jsx(_$$P, {
       autocomplete: e,
       placeholder: getI18nString("community.publishing.give_up_to_n_creators_credit", {
-        maxCreatorsPerResource: Wi
+        maxCreatorsPerResource: MAX_PUBLISHERS_PER_RESOURCE
       }),
       onChange: t,
       validateToken: lQ,
@@ -456,8 +456,8 @@ class ts extends Component {
         }), this.props.updateHubFile(n, () => {
           if (!this.props.hubFile) return;
           this.hasSucceededToPublish = !0;
-          let t = this.props.hubFile.comments_setting === Ni.ENABLED && this.props.hubFile.viewer_mode !== FTemplateCategoryType.PROTOTYPE;
-          let i = metadata.commentsSetting === Ni.ENABLED && metadata.viewerMode !== FTemplateCategoryType.PROTOTYPE;
+          let t = this.props.hubFile.comments_setting === DropdownEnableState.ENABLED && this.props.hubFile.viewer_mode !== FTemplateCategoryType.PROTOTYPE;
+          let i = metadata.commentsSetting === DropdownEnableState.ENABLED && metadata.viewerMode !== FTemplateCategoryType.PROTOTYPE;
           (metadata.commentsSetting !== this.props.hubFile.comments_setting || t !== i) && this.props.dispatch(cO());
           this.props.isEditHubFilePageMode && customHistory.reload("Published hubfile updated");
           this.props.dispatch(VisualBellActions.enqueue({
@@ -488,7 +488,7 @@ class ts extends Component {
             userId: this.props.user.id,
             teamId: this.props.figFile.team_id,
             orgId: this.props.figFile.parent_org_id,
-            step: WX.ERROR,
+            step: PublishModalState.ERROR,
             errors: Object.values(n)
           });
           return;
@@ -509,7 +509,7 @@ class ts extends Component {
           userId: this.props.user.id,
           teamId: this.props.figFile.team_id,
           orgId: this.props.figFile.parent_org_id,
-          step: WX.PUBLISH,
+          step: PublishModalState.PUBLISH,
           isPaid: this.props.isPaid
         }), this.setState({
           step: 2
@@ -522,7 +522,7 @@ class ts extends Component {
     this.shouldPublishHubFileOnSubmit = () => {
       let e = this.props.publishingState.metadata.author;
       if ("org_id" in e || "team_id" in e) return !0;
-      let t = sD(this.props.user, this.props.authedProfilesById);
+      let t = findPublishedProfileForUser(this.props.user, this.props.authedProfilesById);
       return t && Ii(t, this.props.publishingState.metadata.author) || !1;
     };
     this.publishHubFile = () => {
@@ -550,7 +550,7 @@ class ts extends Component {
     };
     this.inputDebounce = debounce((e, t) => {
       if ("name" === e || "description" === e) {
-        let t = "name" === e ? WX.EDIT_NAME : WX.EDIT_DESCRIPTION;
+        let t = "name" === e ? PublishModalState.EDIT_NAME : PublishModalState.EDIT_DESCRIPTION;
         trackEventAnalytics("community_publish_modal", {
           userId: this.props.user.id,
           step: t,
@@ -1083,7 +1083,7 @@ class ts extends Component {
                 publishers: e
               });
               this.setFormErrors({
-                publisherIds: IZ(e.tokens.length) || void 0
+                publisherIds: validatePublisherCount(e.tokens.length) || void 0
               });
             },
             onChangeAuthor: this.onPublishingMetadataAuthorChange
@@ -1091,7 +1091,7 @@ class ts extends Component {
             isCommentsEnabled: !this.props.commentsDisabled,
             onChange: () => {
               this.updatePublishingMetadata({
-                commentsSetting: this.props.commentsDisabled ? Ni.ENABLED : Ni.ALL_DISABLED
+                commentsSetting: this.props.commentsDisabled ? DropdownEnableState.ENABLED : DropdownEnableState.ALL_DISABLED
               });
             }
           }), jsx(_$$A17, {
@@ -1283,7 +1283,7 @@ let to = connect((e, t) => {
   let d = isEditHubFilePageMode ? !!s?.valid_prototype : t.entryPoint !== PageTypeEnum.UNIVERSAL_POSTING && PrototypingTsApi.firstPagePrototypeStatus() === PresentationValidationStatus.VALID;
   let u = e.publishingHubFiles[fileKey];
   u && u.metadata || (u = {
-    status: oH(u),
+    status: getStatusOrDefault(u),
     metadata: ow({
       ...getPermissionsState(e),
       currentUserOrgId: e.currentUserOrgId,
@@ -1293,10 +1293,10 @@ let to = connect((e, t) => {
       authedProfilesById: e.authedProfilesById
     }, fileKey, isEditHubFilePageMode, isFullscreenOpen)
   });
-  let p = EL(e);
+  let p = getCurrentOrgAdminInfo(e);
   let m = p && e.orgById[p.id];
   let h = e.mirror?.appModel?.pagesList || [];
-  let g = a && qA(e, a);
+  let g = a && getAuthedPublisherProfile(e, a);
   let f = g && g.id in e.authedProfilesById && e.authedProfilesById[g.id] || null;
   return {
     pagesList: h,
@@ -1311,7 +1311,7 @@ let to = connect((e, t) => {
     validPrototype: d,
     scalingMode: u.metadata.scalingMode,
     teams: e.teams,
-    commentsDisabled: u.metadata.commentsSetting === Ni.ALL_DISABLED,
+    commentsDisabled: u.metadata.commentsSetting === DropdownEnableState.ALL_DISABLED,
     authedProfilesById: e.authedProfilesById,
     showToSCheckbox: xw(e),
     wasPrototypeRevertingToFile: a?.viewer_mode === FTemplateCategoryType.PROTOTYPE && u.metadata.viewerMode !== FTemplateCategoryType.PROTOTYPE,
@@ -1383,7 +1383,7 @@ let $$tl0 = registerModal(function (e) {
 }, "HubFilePublishModal", ModalSupportsBackground.YES);
 (n || (n = {})).PublishModalSuccessScreen = function (e) {
   let t = useDispatch();
-  let i = UP();
+  let i = useIsCommunityHubView();
   let n = useSelector(t => e.hubFile && selectedViewToPath(t, {
     view: "communityHub",
     subView: "hubFile",

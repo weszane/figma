@@ -1,16 +1,16 @@
 import { trackEventAnalytics } from "../905/449184";
-import { dR } from "../905/508367";
+import { appendSearchParams } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { isMobileUA } from "../figma_app/778880";
 import { XHR } from "../905/910117";
 import { getI18nString } from "../905/303541";
-import { Hx } from "../905/321397";
+import { addTemplateToRecentsThunk } from "../905/321397";
 import { VisualBellActions } from "../905/302958";
 import { wr } from "../figma_app/387599";
 import { mapTemplateCategoryToFileType } from "../figma_app/471982";
 import { shouldSkipWorkspaceSelection } from "../figma_app/275462";
 import { y as _$$y } from "../905/444931";
-import { M5 } from "../figma_app/350203";
+import { HubEventType } from "../figma_app/350203";
 import { nm } from "../905/352022";
 import { F as _$$F } from "../905/504462";
 import { getDesignFileUrlWithOptions } from "../905/612685";
@@ -71,7 +71,7 @@ let $$T1 = (e, l = {
       let d = c.meta;
       let h = hasMonetizedResourceMetadata(i);
       let f = !0 !== h ? "none" : !0 === l.isFreemiumPreview ? "trial" : "paid";
-      trackEventAnalytics(M5.HUB_FILE_DUPLICATED, {
+      trackEventAnalytics(HubEventType.HUB_FILE_DUPLICATED, {
         hubFileId: i.id,
         figFileKey: d.key,
         isMonetized: h,
@@ -81,17 +81,17 @@ let $$T1 = (e, l = {
         org_id: _.org_id,
         file_folder_id: d.folder_id
       });
-      "whiteboard" === d.editor_type && n(Hx({
+      "whiteboard" === d.editor_type && n(addTemplateToRecentsThunk({
         storeInRecentsKey: FDocumentType.FigJam,
         id: i.id,
         type: ITemplateType.CommunityResource
       }));
       let g = getDesignFileUrlWithOptions(d);
-      g = dR(g, {
+      g = appendSearchParams(g, {
         "is-community-duplicate": "1",
         fuid: e?.userId || l.userId || ""
       });
-      !0 === l.isFreemiumPreview && (g = dR(g, {
+      !0 === l.isFreemiumPreview && (g = appendSearchParams(g, {
         "is-freemium-preview": "1"
       }));
       customHistory.redirect(g, isMobileUA ? void 0 : "_blank");
@@ -106,9 +106,9 @@ let $$A2 = (e, l = {
   let n = c();
   function o(e) {
     let t = H(FFileType.SLIDES, i.library_key);
-    e ? (setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = dR(t, {
+    e ? (setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = appendSearchParams(t, {
       fuid: e.userId
-    })) : l.userId && (t = dR(t, {
+    })) : l.userId && (t = appendSearchParams(t, {
       fuid: l.userId
     }));
     customHistory.redirect(t, isMobileUA ? void 0 : "_blank");
@@ -122,9 +122,9 @@ let $$S0 = (e, l = {
   let n = c();
   function o(e) {
     let t = `/file/new?initial-library-key=${i.library_key}`;
-    e ? (setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = dR(t, {
+    e ? (setRecentUserData(e.userId, !1, e.orgId, void 0, e.teamId ?? null), t = appendSearchParams(t, {
       fuid: e.userId
-    })) : l.userId && (t = dR(t, {
+    })) : l.userId && (t = appendSearchParams(t, {
       fuid: l.userId
     }));
     customHistory.redirect(t, isMobileUA ? void 0 : "_blank");

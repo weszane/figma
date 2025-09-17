@@ -1,7 +1,7 @@
 import n from "../vendor/260986";
 import { A } from "../905/17894";
 import { Lz } from "../905/497882";
-import { Wi } from "../figma_app/740025";
+import { MAX_PUBLISHERS_PER_RESOURCE } from "../figma_app/740025";
 import { Ii } from "../figma_app/599979";
 import { wC } from "../905/448440";
 var r = n;
@@ -41,7 +41,7 @@ export let $$c0 = {
         duplicateCocreators: c.filter((e, t, i) => i.findIndex(t => t.id === e.id) !== t)
       }
     });
-    let m = Wi - 1;
+    let m = MAX_PUBLISHERS_PER_RESOURCE - 1;
     if (c.length > m && u.push({
       key: "TOO_MANY_COCREATORS",
       data: {

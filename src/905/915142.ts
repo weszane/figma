@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { reportError } from "../905/11";
 import { getI18nString } from "../905/303541";
 import { FMemberRoleType } from "../figma_app/191312";
@@ -18,7 +18,7 @@ export function $$h5(e, t, i) {
 export function $$g6(e, t, i, n, r, s = null) {
   let l;
   let d = "";
-  xf(e) ? i && eE(n, e) ? s ? (l = _$$d.ERROR, d = s) : l = _$$d.WARN : r && r === e ? (l = _$$d.ERROR, d = getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")) : l = _$$d.OK : l = _$$d.ERROR;
+  isValidEmail(e) ? i && eE(n, e) ? s ? (l = _$$d.ERROR, d = s) : l = _$$d.WARN : r && r === e ? (l = _$$d.ERROR, d = getI18nString("team_view.team_permissions_modal.youre_not_able_to_send_an_invite_to_yourself")) : l = _$$d.OK : l = _$$d.ERROR;
   return {
     state: l,
     content: t,

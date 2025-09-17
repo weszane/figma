@@ -1,4 +1,4 @@
-import { vk, mc, N7, QV } from "../905/508367";
+import { appendNavigationContext, appendUserIdToUrl, compareValues, navigateToFile } from "../905/508367";
 import { debugState } from "../905/407919";
 import { gN, dm } from "../figma_app/976345";
 import { selectViewAction } from "../905/929976";
@@ -25,7 +25,7 @@ export function $$_0(e, t, i, r, a) {
   let s = buildFileUrl({
     file: e
   });
-  return vk(mc(s, t), i, r, a);
+  return appendNavigationContext(appendUserIdToUrl(s, t), i, r, a);
 }
 export function $$A14(e) {
   return `/files/project/${e.id}`;
@@ -73,7 +73,7 @@ export function $$S2(e, t, i, r, a) {
   e(filePutAction({
     file: t
   }));
-  N7(i, t.parent_org_id, r, t.team_id) ? QV({
+  compareValues(i, t.parent_org_id, r, t.team_id) ? navigateToFile({
     file: {
       key: t.key,
       editorType: t.editor_type || void 0

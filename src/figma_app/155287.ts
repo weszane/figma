@@ -8,7 +8,7 @@ import { CommunityRatingStatsContainerSchema } from '../905/796201';
 import { BadgeSchema } from '../905/875063';
 import { AcceptedPendingUsersSchema, PublisherInfoSchema } from '../figma_app/10554';
 import { createContentFilterSchema } from '../figma_app/70618';
-import { Ni } from '../figma_app/188152';
+import { DropdownEnableState } from '../figma_app/188152';
 import { FPinStatusType, FPublicationStatusType, FPublisherType } from '../figma_app/191312';
 import { fE, Fy } from '../figma_app/809727';
 import { MM } from '../figma_app/979658';
@@ -302,7 +302,7 @@ export const PluginDetailsSchema = PluginVersionsRecordSchema.merge(zod.object({
   editor_type: zod.nativeEnum(EditorType),
   unpublished_at: zod.string().nullable(),
   support_contact: zod.string().nullable(),
-  comments_setting: zod.nativeEnum(Ni).nullable(),
+  comments_setting: zod.nativeEnum(DropdownEnableState).nullable(),
   related_content: createContentFilterSchema(zod.lazy(() => PluginDetailsSchema)),
   hide_related_content_by_others: zod.coerce.boolean().optional(),
   publishing_status: zod.nativeEnum(FPublicationStatusType).nullable(),

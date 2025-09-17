@@ -5,7 +5,7 @@ import { useCurrentUserOrg, useCurrentUserOrgId } from "../905/845253";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
 import { OrgHasSeatsManagedViaScimView } from "../figma_app/43951";
 import { useCurrentPublicPlan } from "../figma_app/465071";
-import { zp } from "../figma_app/740025";
+import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 export function $$u0() {
   let e = useCurrentUserOrg();
   return useSelector(t => {
@@ -35,6 +35,6 @@ export function $$h3() {
 }
 export const Cb = $$u0;
 export const U5 = $$p1;
-export const Yo = zp;
+export const Yo = useCurrentOrgAdminInfo;
 export const i6 = $$h3;
 export const yy = $$_4;

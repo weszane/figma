@@ -14,7 +14,7 @@ import { isTntSavingEnabled } from "../figma_app/275462";
 import { getResourceName } from "../figma_app/777551";
 import { getPluginOrWidgetContent, getResourceType, isOrgPrivatePluginOrWidget, hasContent, isPluginOrWidget, isPluginResource, isWidgetResource, getMainContent, hasResourceType, getTemplateType, isFigmakeTemplate } from "../figma_app/427318";
 import { $O, bK } from "../figma_app/701107";
-import { Tm, e5 } from "../figma_app/740025";
+import { getOrgAdminAccess, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasClientMeta, isPlugin, isWidget, isMonetizedWithClientMeta } from "../figma_app/45218";
 import { e0 } from "../905/696396";
 import { Q as _$$Q } from "../5430/662041";
@@ -48,7 +48,7 @@ import { ResourceSaveFromResourceId, ResourceSave, PluginInstall, AllowlistedPlu
 import { UserProfileTab } from "../figma_app/707808";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
-import { c as _$$c } from "../figma_app/11961";
+import { isOrgOrTeam } from "../figma_app/11961";
 import { W as _$$W, B as _$$B } from "../905/841666";
 import { w as _$$w } from "../5430/495667";
 import { showDropdownThunk } from "../905/929976";
@@ -437,7 +437,7 @@ function ea(e, t) {
 }
 function el(e, t, r) {
   let s = useDispatch();
-  let o = useSelector(e => Tm(e));
+  let o = useSelector(e => getOrgAdminAccess(e));
   let a = useSubscription(PluginInstall, {
     pluginId: t.id,
     orgIds: Object.keys(o)
@@ -555,7 +555,7 @@ function ev({
       viewContext
     } = e;
     let s = useSelector(e => e.authedActiveCommunityProfile);
-    let i = _$$c(s);
+    let i = isOrgOrTeam(s);
     let o = _$$W(resource.id, getResourceType(resource), !hasContent(resource));
     let a = _$$B(resource.id, hasContent(resource));
     let l = hasContent(resource) ? !!a.data?.[0] : !!o.data?.[0];
@@ -620,7 +620,7 @@ function ev({
     viewContext: r,
     allowOrgSaves: !0
   });
-  let b = useSelector(e => Tm(e));
+  let b = useSelector(e => getOrgAdminAccess(e));
   let j = [];
   if (0 !== Object.values(b).length && isPluginOrWidget(e)) {
     j.push({
@@ -800,7 +800,7 @@ function eT({
     savesByOrgId,
     onOrgSaveAction
   } = el(e, t, r);
-  let _ = useSelector(e => Tm(e));
+  let _ = useSelector(e => getOrgAdminAccess(e));
   if (!isPluginOrWidget(e)) return null;
   let p = [{
     displayText: getI18nString("community.saves.save_this_resource_for_yourself"),
@@ -916,7 +916,7 @@ export function $$eF0({
     };
   }();
   let c = getResourceName(e);
-  let d = useSelector(e => Tm(e));
+  let d = useSelector(e => getOrgAdminAccess(e));
   let x = isViewerModeResource(t) ? e0.COMMUNITY_HUB_FILE : isWidget(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let j = null;
   let w = jsx(_$$q, {
@@ -988,7 +988,7 @@ export function $$eF0({
           className: _$$eO,
           children: c
         }), jsx(eV, {
-          hasCommentsEnabled: e5(t),
+          hasCommentsEnabled: isResourcePublicWithComments(t),
           commentCount: t.comment_count
         })]
       }), jsxs("div", {
@@ -1079,7 +1079,7 @@ export function $$eU2({
 }) {
   let i = getResourceName(e);
   let n = e.community_publishers.accepted;
-  let o = e5(t);
+  let o = isResourcePublicWithComments(t);
   let a = t.comment_count;
   return r ? jsx("div", {
     className: QY,

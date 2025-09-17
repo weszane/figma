@@ -8,7 +8,7 @@ import { Point } from "../905/736624";
 import { s1, uR, d6 } from "../figma_app/304207";
 import { KE } from "../905/116101";
 import { isWhiteboardFileType } from "../figma_app/976749";
-import { T9 } from "../figma_app/740025";
+import { findProfile } from "../figma_app/740025";
 import { Tc } from "../905/797478";
 import { t } from "../905/192333";
 import { wR } from "../figma_app/293326";
@@ -102,7 +102,7 @@ export function $$S4(e) {
 }
 export function $$v2(e, t, r, a) {
   let s = useDispatch();
-  let o = useSelector(e => T9({
+  let o = useSelector(e => findProfile({
     authedProfilesById: e.authedProfilesById,
     userId: e.user?.id
   }));

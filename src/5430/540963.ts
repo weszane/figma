@@ -26,7 +26,7 @@ import { vb, _W, gM } from "../5430/823351";
 import { editorUtilities as _$$k } from "../905/22009";
 import { ResourceTypes } from "../905/178090";
 import { a as _$$a, z as _$$z } from "../figma_app/601188";
-import { N$, u8 } from "../figma_app/350203";
+import { PublishSourceType, MAX_DESCRIPTION_LENGTH } from "../figma_app/350203";
 import { X as _$$X } from "../5430/966412";
 import { Vq } from "../figma_app/342207";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -35,7 +35,7 @@ import { LoadingOverlay, LoadingSpinner } from "../figma_app/858013";
 import { SvgComponent } from "../905/714743";
 import { isResourceHubProfilesEnabled } from "../figma_app/275462";
 import { Ai, _8, dL, aP } from "../figma_app/530167";
-import { YU, M0, Zs, gZ, xj, si, E1 } from "../figma_app/740025";
+import { validateCoverImage, MAX_DESCRIPTION_LENGTH, MAX_TAGS_PER_RESOURCE, MAX_IMAGE_WIDTH, MAX_IMAGE_HEIGHT, hasUserAccessToProfile, isAuthedActiveProfile } from "../figma_app/740025";
 import { l8, kJ, Cw } from "../figma_app/599979";
 import { VP } from "../905/18797";
 import { Ro } from "../figma_app/805373";
@@ -118,7 +118,7 @@ import { A6 } from "../905/350234";
 import { CurrencyFormatter } from "../figma_app/514043";
 import { IconButton } from "../905/443068";
 import { J as _$$J2 } from "../905/125993";
-import { N9 } from "../figma_app/188152";
+import { DROPDOWN_TYPE_COMMUNITY_PROFILE_MORE_ACTIONS_MENU } from "../figma_app/188152";
 import { Um } from "../905/848862";
 import { lW } from "../figma_app/11182";
 import { TeamOrgType } from "../figma_app/10554";
@@ -229,15 +229,15 @@ let X = function ({
       let e = r.current?.files;
       if (!e || 0 === e.length || !e[0]) throw Error("File not found");
       let t = e[0];
-      YU(t);
+      validateCoverImage(t);
       let s = await l8(URL.createObjectURL(t));
-      if (s.width > M0 || s.height > Zs) throw Error(getI18nString("community.profiles.cover_image_must_be_less_than_dimensions", {
-        PROFILE_COVER_IMAGE_MAX_WIDTH: M0,
-        PROFILE_COVER_IMAGE_MAX_HEIGHT: Zs
+      if (s.width > MAX_DESCRIPTION_LENGTH || s.height > MAX_TAGS_PER_RESOURCE) throw Error(getI18nString("community.profiles.cover_image_must_be_less_than_dimensions", {
+        PROFILE_COVER_IMAGE_MAX_WIDTH: MAX_DESCRIPTION_LENGTH,
+        PROFILE_COVER_IMAGE_MAX_HEIGHT: MAX_TAGS_PER_RESOURCE
       }));
-      if (s.width < gZ || s.height < xj) throw Error(getI18nString("community.profiles.cover_image_must_be_at_least_dimensions", {
-        PROFILE_COVER_IMAGE_MIN_WIDTH: gZ,
-        PROFILE_COVER_IMAGE_MIN_HEIGHT: xj
+      if (s.width < MAX_IMAGE_WIDTH || s.height < MAX_IMAGE_HEIGHT) throw Error(getI18nString("community.profiles.cover_image_must_be_at_least_dimensions", {
+        PROFILE_COVER_IMAGE_MIN_WIDTH: MAX_IMAGE_WIDTH,
+        PROFILE_COVER_IMAGE_MIN_HEIGHT: MAX_IMAGE_HEIGHT
       }));
       u(t);
     } catch (e) {
@@ -267,7 +267,7 @@ function J({
 }) {
   let r = AG();
   let s = isResourceHubProfilesEnabled();
-  let o = si(e) && !r;
+  let o = hasUserAccessToProfile(e) && !r;
   let [a, l] = useState(generateUUIDv4());
   let c = useCallback(() => {
     l(generateUUIDv4());
@@ -470,7 +470,7 @@ function eI({
     let r = useResourceFuid() ?? void 0;
     return e && t ? new ResourceHubHomeRouteClass({
       ...t,
-      tab: N$.COMMUNITY
+      tab: PublishSourceType.COMMUNITY
     }, r) : new _$$_(r);
   }();
   return jsxs("div", {
@@ -602,7 +602,7 @@ function eA({
   } = A({
     profile: e,
     filterState,
-    pageSize: u8
+    pageSize: MAX_DESCRIPTION_LENGTH
   });
   return jsx("div", {
     className: "x78zum5 xdt5ytf x1fwvi78 xzc32ve xrsdzbr",
@@ -1493,7 +1493,7 @@ function rA() {
 function rP(e) {
   let t = Um();
   let r = useRef(null);
-  let s = !!(t && t.type === N9);
+  let s = !!(t && t.type === DROPDOWN_TYPE_COMMUNITY_PROFILE_MORE_ACTIONS_MENU);
   let a = useDispatch();
   let l = useCallback(() => {
     a(hideDropdownAction());
@@ -1508,7 +1508,7 @@ function rP(e) {
         s.stopPropagation();
         let i = r.current;
         t ? l() : i && a(showDropdownThunk({
-          type: N9,
+          type: DROPDOWN_TYPE_COMMUNITY_PROFILE_MORE_ACTIONS_MENU,
           data: {
             profile: e.profile,
             targetRect: i.getBoundingClientRect()
@@ -1823,7 +1823,7 @@ function r9(e) {
     updateProfile,
     isViewingCurrentUserProfile
   } = e;
-  let n = si(profile);
+  let n = hasUserAccessToProfile(profile);
   let o = e.profile.name;
   let a = profile.profile_handle || null;
   let l = e => s => {
@@ -1970,7 +1970,7 @@ function r6({
   } = useSafeRouteParams(ProfileRouteState);
   let r = selectCurrentUser();
   let n = useDispatch();
-  let a = useSelector(t => E1(e, t));
+  let a = useSelector(t => isAuthedActiveProfile(e, t));
   let l = useSelector(t => kJ(t, e));
   let c = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null);
   let d = useSelector(e => "selectedView" in e ? e.selectedView : null);

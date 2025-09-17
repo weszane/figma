@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isNullish } from "../figma_app/95419";
 import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";
-import { cn } from "../figma_app/141320";
+import { isStudentValidated } from "../figma_app/141320";
 import { linkWithTracking } from "../figma_app/637027";
 import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -93,7 +93,7 @@ export function $$P0({
   let v = useSelector(e => e.dropdownShown);
   let w = useSelector(e => e.user);
   let k = !!getFeatureFlags().edu_plan_comparison;
-  let N = w && cn(w) && k;
+  let N = w && isStudentValidated(w) && k;
   useLayoutEffect(() => {
     let e = document.getElementById("proPlanCard")?.offsetHeight;
     let t = document.getElementById("freePlanCard");

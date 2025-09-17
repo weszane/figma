@@ -51,7 +51,7 @@ import { Z as _$$Z } from "../905/801075";
 import { k as _$$k3 } from "../905/376839";
 import { handleAtomEvent } from "../905/502364";
 import { p as _$$p } from "../figma_app/353099";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { h as _$$h2 } from "../905/207101";
 import { buildUploadUrl } from "../figma_app/169182";
 import { UpgradeAction } from "../905/370443";
@@ -186,7 +186,7 @@ function ey({
       label: renderI18nText("general.learn_more"),
       type: "button",
       onClick: () => {
-        FJ("https://help.figma.com/hc/articles/33666207487767", "_blank");
+        openWindow("https://help.figma.com/hc/articles/33666207487767", "_blank");
         complete();
       },
       ctaTrackingDescriptor: UpgradeAction.LEARN_MORE,

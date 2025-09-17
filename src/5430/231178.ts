@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Jm } from "../figma_app/387599";
 import { mapTemplateCategoryToFileType } from "../figma_app/471982";
-import { YW } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { hasMonetizedResourceMetadata, hasClientMeta, isWidget } from "../figma_app/45218";
 import { e0 } from "../905/696396";
 export function $$c0(e) {
@@ -36,7 +36,7 @@ function u(e) {
     viewerMode: e.viewer_mode,
     editorType: mapTemplateCategoryToFileType(e.viewer_mode),
     isMonetized: hasMonetizedResourceMetadata(e),
-    isMobileView: window.innerWidth <= YW
+    isMobileView: window.innerWidth <= COMMUNITY_MIN_WIDTH
   };
 }
 export const Ay = $$c0;

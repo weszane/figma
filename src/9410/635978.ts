@@ -9,7 +9,7 @@ import { O as _$$O } from "../905/301080";
 import { P } from "../905/547523";
 import { L as _$$L } from "../905/473569";
 import h from "classnames";
-import { R7 } from "../905/508367";
+import { browserFeatures } from "../905/508367";
 import { trackFileEventWithUser } from "../figma_app/901889";
 import { M as _$$M } from "../figma_app/749682";
 import { BrowserInfo } from "../figma_app/778880";
@@ -98,7 +98,7 @@ export function $$j1({
       e.addEventListener("seeking", o);
       e.addEventListener("seeked", n);
       e.addEventListener("stalled", r);
-      t.addEventListener(R7.fullscreenChangeEventName, d);
+      t.addEventListener(browserFeatures.fullscreenChangeEventName, d);
       return () => {
         e?.removeEventListener("playing", s);
         e?.removeEventListener("canplay", i);
@@ -107,7 +107,7 @@ export function $$j1({
         e?.removeEventListener("seeking", o);
         e?.removeEventListener("seeked", n);
         e?.removeEventListener("stalled", r);
-        t?.removeEventListener(R7.fullscreenChangeEventName, d);
+        t?.removeEventListener(browserFeatures.fullscreenChangeEventName, d);
       };
     }
     function i() {
@@ -191,7 +191,7 @@ export function $$j1({
         children: [!R && jsx(I, {
           isMaximized: a,
           toggleFullscreen: function () {
-            a || document.fullscreenElement ? R7.exitFullscreenFunc() : BrowserInfo.isIpad ? e && e.webkitEnterFullscreen && e.webkitEnterFullscreen() : t && R7.requestFullscreenFunc.call(t);
+            a || document.fullscreenElement ? browserFeatures.exitFullscreenFunc() : BrowserInfo.isIpad ? e && e.webkitEnterFullscreen && e.webkitEnterFullscreen() : t && browserFeatures.requestFullscreenFunc.call(t);
           }
         }), jsx(k, {
           rerender: el,

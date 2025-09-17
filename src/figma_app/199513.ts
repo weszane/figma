@@ -10,7 +10,7 @@ import { getRequest, XHR } from "../905/910117";
 import { handlePromiseError, FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { sf } from "../905/34809";
+import { beginCreateNewFolder } from "../905/34809";
 import { p as _$$p } from "../905/282607";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { selectViewAction } from "../905/929976";
@@ -596,7 +596,7 @@ let $$ec6 = createOptimistThunk((e, t) => {
   if (!a) {
     if (s.canEdit) checkTeamFileRestrictions(s, {
       type: AddOperationType.ADD_PROJECT
-    }) ? (e.dispatch(sf({
+    }) ? (e.dispatch(beginCreateNewFolder({
       where: n,
       teamId: i
     })), e.dispatch(showModalHandler({

@@ -1,5 +1,6 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
+
 export function $$r0(e) {
-  return useSelector(t => t.userFlags[e]);
+  return useSelector(t => t.userFlags[e])
 }
-export const f = $$r0;
+export const f = $$r0

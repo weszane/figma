@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { analyticsEventManager, trackEventAnalytics } from "../905/449184";
-import { zN, qe } from "../figma_app/416935";
+import { getEmailDomain, isAllowedDomain } from "../figma_app/416935";
 import { customHistory } from "../905/612521";
 import { h as _$$h } from "../905/207101";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
@@ -744,7 +744,7 @@ export class $$eM2 extends Component {
     });
   }
   componentDidUpdate(e, t) {
-    zN(e.user.email) !== zN(this.props.user.email) && customHistory.redirect("/purchase-organization");
+    getEmailDomain(e.user.email) !== getEmailDomain(this.props.user.email) && customHistory.redirect("/purchase-organization");
   }
   getSubtotal() {
     let e = O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts) || N_.dict(e => 0);
@@ -934,7 +934,7 @@ export class $$eM2 extends Component {
           selectedTeamIds: gu(Array.from(this.state.selectedTeamIds)),
           selectedUserSeatTypes: Tj(this.state.selectedUserSeatTypes),
           countBySeatType: gS(O$(this.state.selectedUserSeatTypes, this.state.additionalSeatCounts)),
-          domain: zN(this.props.user.email),
+          domain: getEmailDomain(this.props.user.email),
           taxPercent: this.state.taxRate,
           subtotal: this.getSubtotal(),
           taxTotal: this.getTaxTotal(),
@@ -956,7 +956,7 @@ export class $$eM2 extends Component {
       children: [this.props.isOrgAdmin && jsx(wW, {
         onContactSales: this.contactSales,
         onFileBrowserClick: this.onFileBrowserClick
-      }), qe(this.props.user.email) && jsx(VE, {
+      }), isAllowedDomain(this.props.user.email) && jsx(VE, {
         onFileBrowserClick: this.onFileBrowserClick
       }), jsxs("div", {
         style: _$$sx.$$if(t === X1.CreateTeam, _$$sx.flex.justifyCenter, _$$sx.grid.add({

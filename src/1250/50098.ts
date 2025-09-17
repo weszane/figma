@@ -28,7 +28,7 @@ import { m as _$$m } from "../9864/958952";
 import { Xg } from "../7021/854265";
 import { CAe } from "../figma_app/6204";
 import { A as _$$A } from "../905/920142";
-import { HB } from "../3973/538504";
+import { normalizeJobRole } from "../3973/538504";
 import { useCurrentUserOrg } from "../905/845253";
 import { useCurrentPublicPlan, useIsStarterPlan } from "../figma_app/465071";
 import { A as _$$A2 } from "../svg/831814";
@@ -42,7 +42,7 @@ export function $$F0({
     let n = selectUser();
     let a = useCurrentUserOrg();
     let i = n.profile.job_title;
-    let o = HB(i);
+    let o = normalizeJobRole(i);
     return useCallback(() => !(a && a.k12_google_org || n.email.endsWith(".edu") || t || _$$A(n.email_validated_at).add(14, "day").isAfter(_$$A(Date.now()))) && (!i || ("something_else" === i ? !!_$$A(n.email_validated_at).isBefore(_$$A(new Date("2024-12-10"))) : "other" === o && (!a || !a.saml_sso_only))), [a, t, o, i, n.email, n.email_validated_at]);
   }();
   let n = Xr(bk);

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { z8, bb } from "../figma_app/399472";
-import { cs } from "../figma_app/740025";
+import { isOrgOrTeamExport } from "../figma_app/740025";
 import { MK, ot } from "../figma_app/599979";
 import { M3 } from "../figma_app/198840";
 import { getPluginMetadata } from "../figma_app/300692";
@@ -39,7 +39,7 @@ export function $$h0({
       message: getI18nString("community.detail_view.declined_creator_invite")
     }));
   }, [h, x]);
-  return !f || cs(f) || !ot.includes(y) ? null : jsx("div", {
+  return !f || isOrgOrTeamExport(f) || !ot.includes(y) ? null : jsx("div", {
     className: r,
     children: jsx(vR, {
       onClickAccept: g,

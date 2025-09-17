@@ -24,7 +24,7 @@ import { PF } from "../figma_app/930386";
 import { zj, bT, AS } from "../5430/438185";
 import { ProfileRouteState } from "../905/934145";
 import { eK, w2 } from "../905/977218";
-import { M5 } from "../figma_app/350203";
+import { HubEventType } from "../figma_app/350203";
 import { Ei } from "../905/574958";
 import { V as _$$V } from "../905/480825";
 import { I$ } from "../figma_app/940844";
@@ -416,7 +416,7 @@ export function $$K0(e) {
         idx: -1
       });
       let c = context === PF.LANDING ? "searchPreviewLanding" : "searchPreview";
-      trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
+      trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query,
         mixed: n.length,
         entry_point: "community",

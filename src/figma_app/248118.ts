@@ -11,7 +11,7 @@ import { selectViewAction } from "../905/929976";
 import { c as _$$c } from "../905/882587";
 import { Im } from "../905/608145";
 import { getSelectedEditorType } from "../figma_app/976749";
-import { EL } from "../figma_app/740025";
+import { getCurrentOrgAdminInfo } from "../figma_app/740025";
 import { setSelectedDevModePropertiesPanelTab } from "../figma_app/741237";
 import { canPerformAction, canRunExtensions } from "../figma_app/12796";
 import { getCurrentPluginVersion, isSingleDevEditorType, isValidForCooperDevCodegen } from "../figma_app/300692";
@@ -32,7 +32,7 @@ function v() {
     publishedPlugins,
     publishedWidgets
   } = selectWithShallowEqual(e => ({
-    orgEntity: EL(e),
+    orgEntity: getCurrentOrgAdminInfo(e),
     org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
     openFile: e.openFile,
     isReadOnly: e.mirror.appModel.isReadOnly,

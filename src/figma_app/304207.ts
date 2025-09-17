@@ -9,9 +9,9 @@ import { resolveMessage } from "../905/231762";
 import { VisualBellActions } from "../905/302958";
 import { createOptimistThunk, createOptimistAction } from "../905/350402";
 import { b6, Qi } from "../figma_app/559491";
-import { M5, ZO } from "../figma_app/350203";
+import { HubEventType, FigmaResourceType } from "../figma_app/350203";
 import { N3 } from "../figma_app/844435";
-import { n as _$$n } from "../figma_app/740025";
+import { getHubTypeString } from "../figma_app/740025";
 import { ResourceTypeNoComment, isWidget, HubTypeEnum } from "../figma_app/45218";
 import { pluginAPIService } from "../905/3209";
 import { U } from "../905/424668";
@@ -50,7 +50,7 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
   A.use_upgraded_version = !0;
   A.profile_id = e.getState().authedActiveCommunityProfile?.id;
   r === ResourceTypeNoComment.WIDGET && (A.current_org_id = void 0);
-  let x = `/api/${_$$n(r)}/${t}/install`;
+  let x = `/api/${getHubTypeString(r)}/${t}/install`;
   let N = XHR.post(x, A);
   if (v.user && I?.resource) {
     let e = `optimistic-plugin-install-${generateUUIDv4()}`;
@@ -96,8 +96,8 @@ let $$v0 = _$$n2(createOptimistAction("SAVE_EXTENSION", (e, {
         type: "plugin-installed"
       }));
     }
-    trackEventAnalytics(isWidget(i) ? M5.WIDGET_INSTALLED : M5.PLUGIN_INSTALLED, {
-      communityHubEntity: isWidget(i) ? ZO.WIDGETS : ZO.PLUGINS,
+    trackEventAnalytics(isWidget(i) ? HubEventType.WIDGET_INSTALLED : HubEventType.PLUGIN_INSTALLED, {
+      communityHubEntity: isWidget(i) ? FigmaResourceType.WIDGETS : FigmaResourceType.PLUGINS,
       communityHubEntityId: i.id,
       source: T
     });
@@ -136,7 +136,7 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
   E.use_upgraded_version = !0;
   E.profile_id = e.getState().authedActiveCommunityProfile?.id;
   r === ResourceTypeNoComment.WIDGET && (E.current_org_id = void 0);
-  let y = `/api/${_$$n(r)}/${t}/install`;
+  let y = `/api/${getHubTypeString(r)}/${t}/install`;
   let b = XHR.del(y, E);
   p?.pluginInstallId && WB().optimisticallyDelete({
     PluginInstall: {
@@ -189,8 +189,8 @@ let $$A3 = createOptimistAction("UNSAVE_EXTENSION", (e, {
       };
       e.dispatch(VisualBellActions.enqueue(n));
     }
-    trackEventAnalytics(isWidget(l) ? M5.WIDGET_UNINSTALLED : M5.PLUGIN_UNINSTALLED, {
-      communityHubEntity: isWidget(l) ? ZO.WIDGETS : ZO.PLUGINS,
+    trackEventAnalytics(isWidget(l) ? HubEventType.WIDGET_UNINSTALLED : HubEventType.PLUGIN_UNINSTALLED, {
+      communityHubEntity: isWidget(l) ? FigmaResourceType.WIDGETS : FigmaResourceType.PLUGINS,
       communityHubEntityId: l.id,
       source: c
     });

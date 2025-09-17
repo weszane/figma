@@ -8,7 +8,7 @@ import { PluginModalTypeEnum } from "../figma_app/671547";
 import { j } from "../905/813868";
 import { U } from "../905/424668";
 import { pasteEmbedThunk } from "../905/994901";
-import { KJ, LU } from "../figma_app/916560";
+import { parseEmbedInput, parseAsanaEmbed } from "../figma_app/916560";
 import { isInteractionPathCheck } from "../figma_app/897289";
 async function m(e, t) {
   let {
@@ -165,9 +165,9 @@ let x = {
 let S = e => e.includes("jira") || e.includes("atlassian");
 export function $$w0(e, t, i) {
   let r = t.trim().split("\n");
-  let a = r.map(e => KJ(e.trim()));
+  let a = r.map(e => parseEmbedInput(e.trim()));
   if (!a.every(e => !!e)) {
-    let e = LU(i, t);
+    let e = parseAsanaEmbed(i, t);
     if (!e) return [{
       valid: !1,
       reason: "At least one line of text was not a valid URL or IFrame"

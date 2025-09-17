@@ -12,7 +12,7 @@ import { D as _$$D } from "../905/775228";
 import { nM, QN, Vu, Kq, jS, f0, jX, Ks, lD, WR, cu, pj, F9, v8, ay, KA } from "../figma_app/147952";
 import { MF } from "../figma_app/646357";
 import { getCurrentPluginVersionId } from "../figma_app/300692";
-import { gJ, Jl, SO, JG } from "../figma_app/190980";
+import { getRecentItems, getRecentKey, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { HubTypeEnum } from "../figma_app/45218";
 import { NO_TEAM } from "../figma_app/633080";
 import { ITemplateType, FDocumentType, FaceToolType } from "../905/862883";
@@ -139,7 +139,7 @@ let D = {
 };
 let L = {
   [FDocumentType.Design]: [],
-  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, HubTypeEnum.WIDGET),
+  [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, HubTypeEnum.WIDGET),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: [],
   [FDocumentType.Cooper]: [],
@@ -147,29 +147,29 @@ let L = {
 };
 let F = {
   [FDocumentType.Design]: [],
-  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, HubTypeEnum.PLUGIN),
-  [FDocumentType.Handoff]: gJ(FDocumentType.Handoff, HubTypeEnum.PLUGIN),
+  [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, HubTypeEnum.PLUGIN),
+  [FDocumentType.Handoff]: getRecentItems(FDocumentType.Handoff, HubTypeEnum.PLUGIN),
   [FDocumentType.Slides]: [],
   [FDocumentType.Cooper]: [],
   fetchedResources: {}
 };
 let M = {
   [FDocumentType.Design]: [],
-  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, HubTypeEnum.HUB_FILE),
+  [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, HubTypeEnum.HUB_FILE),
   [FDocumentType.Handoff]: [],
-  [FDocumentType.Slides]: gJ(FDocumentType.Slides, HubTypeEnum.HUB_FILE),
+  [FDocumentType.Slides]: getRecentItems(FDocumentType.Slides, HubTypeEnum.HUB_FILE),
   [FDocumentType.Cooper]: []
 };
 let j = {
   [FDocumentType.Design]: [],
-  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, FaceToolType.FACE_STAMP),
+  [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, FaceToolType.FACE_STAMP),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: [],
   [FDocumentType.Cooper]: []
 };
 let U = {
   [FDocumentType.Design]: [],
-  [FDocumentType.FigJam]: gJ(FDocumentType.FigJam, FaceToolType.WHITEBOARD_TOOL),
+  [FDocumentType.FigJam]: getRecentItems(FDocumentType.FigJam, FaceToolType.WHITEBOARD_TOOL),
   [FDocumentType.Handoff]: [],
   [FDocumentType.Slides]: [],
   [FDocumentType.Cooper]: []
@@ -185,7 +185,7 @@ function V(e) {
     editorKey,
     resourceKey
   } = e;
-  let [[d], c] = s()(gJ(editorKey, resourceKey), e => e.type === ITemplateType.CommunityResource && e.id === resourceId);
+  let [[d], c] = s()(getRecentItems(editorKey, resourceKey), e => e.type === ITemplateType.CommunityResource && e.id === resourceId);
   let u = [{
     id: resourceId,
     version: currentVersionId,
@@ -198,15 +198,15 @@ function V(e) {
     },
     type: ITemplateType.CommunityResource
   }, ...c].slice(0, resourceKey === HubTypeEnum.PLUGIN ? 21 : 12);
-  let p = Jl(editorKey, resourceKey);
+  let p = getRecentKey(editorKey, resourceKey);
   p && localStorageRef?.setItem(p, JSON.stringify(u));
   return u;
 }
 function G(e, t, i) {
-  let n = gJ(e, t);
+  let n = getRecentItems(e, t);
   if (!i) return n;
   n = n.filter(e => e.id !== i);
-  let a = Jl(e, t);
+  let a = getRecentKey(e, t);
   a && localStorageRef?.setItem(a, JSON.stringify(n));
   return n;
 }
@@ -265,7 +265,7 @@ let $$H0 = HY({
         storeInRecentsKey
       } = t.payload;
       let n = HubTypeEnum.WIDGET;
-      if (!Jl(storeInRecentsKey, n)) return e;
+      if (!getRecentKey(storeInRecentsKey, n)) return e;
       let r = V({
         currentUserId: t.payload.currentUserId,
         resourceId: t.payload.id,
@@ -295,7 +295,7 @@ let $$H0 = HY({
     }
     return jS.matches(t) ? {
       ...e,
-      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, HubTypeEnum.WIDGET)
+      [t.payload.storeInRecentsKey]: getRecentItems(t.payload.storeInRecentsKey, HubTypeEnum.WIDGET)
     } : f0.matches(t) ? {
       ...e,
       fetchedResources: {
@@ -313,7 +313,7 @@ let $$H0 = HY({
         storeInRecentsKey
       } = t.payload;
       let n = HubTypeEnum.PLUGIN;
-      if (!Jl(storeInRecentsKey, n)) return e;
+      if (!getRecentKey(storeInRecentsKey, n)) return e;
       let r = V({
         currentUserId: t.payload.currentUserId,
         resourceId: t.payload.id,
@@ -343,7 +343,7 @@ let $$H0 = HY({
     }
     return WR.matches(t) ? t.payload.storeInRecentsKey === FDocumentType.Design ? e : {
       ...e,
-      [t.payload.storeInRecentsKey]: gJ(t.payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
+      [t.payload.storeInRecentsKey]: getRecentItems(t.payload.storeInRecentsKey, HubTypeEnum.PLUGIN)
     } : cu.matches(t) ? {
       ...e,
       fetchedResources: {
@@ -361,7 +361,7 @@ let $$H0 = HY({
       let {
         storeInRecentsKey
       } = t.payload;
-      let o = Jl(storeInRecentsKey, HubTypeEnum.HUB_FILE);
+      let o = getRecentKey(storeInRecentsKey, HubTypeEnum.HUB_FILE);
       if (!o) throw Error("Recently used templates currently only implemented for FigJam and Slides");
       let {
         payload
@@ -370,7 +370,7 @@ let $$H0 = HY({
         type,
         userId
       } = l;
-      let [[u], p] = s()(gJ(storeInRecentsKey, HubTypeEnum.HUB_FILE), e => {
+      let [[u], p] = s()(getRecentItems(storeInRecentsKey, HubTypeEnum.HUB_FILE), e => {
         let {
           type: _type
         } = e;
@@ -434,7 +434,7 @@ let $$H0 = HY({
           } : {})
         }
       }, ...n].slice(0, 20);
-      localStorageRef?.setItem(SO, JSON.stringify(a));
+      localStorageRef?.setItem(RECENT_FACE_STAMPS_FIGJAM, JSON.stringify(a));
       return {
         ...e,
         [t.payload.storeInRecentsKey]: a
@@ -459,7 +459,7 @@ let $$H0 = HY({
           } : {})
         }
       }, ...n];
-      localStorageRef?.setItem(JG, JSON.stringify(a));
+      localStorageRef?.setItem(RECENT_WHITEBOARD_TOOLS_FIGJAM, JSON.stringify(a));
       return {
         ...e,
         [t.payload.storeInRecentsKey]: a

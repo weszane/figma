@@ -16,7 +16,7 @@ import { PRICING_URL } from "../figma_app/345997";
 import { PlanType, SubscriptionType } from "../figma_app/831101";
 import { DA, $$ as _$$$$, Qw, RO, X9, Q1, SO, Zy, zS, UJ, qT, Lh } from "../905/472146";
 import { KindEnum } from "../905/129884";
-import { cn } from "../figma_app/141320";
+import { isStudentValidated } from "../figma_app/141320";
 import { a as _$$a } from "../905/925868";
 import { isDevHandoffEditorType } from "../figma_app/976749";
 import { trackContextViewed } from "../figma_app/314264";
@@ -494,7 +494,7 @@ export function $$em0({
     subscriptionPlan: n
   }) {
     let s = isDevHandoffEditorType();
-    let o = useSelector(e => !!e.user && cn(e.user));
+    let o = useSelector(e => !!e.user && isStudentValidated(e.user));
     let l = useSelector(e => e.payment);
     return useMemo(() => F({
       isProCurrent: i,

@@ -1,27 +1,57 @@
-import { useCallback } from "react";
-import { Xr, useAtomWithSubscription } from "../figma_app/27355";
-import { getInitialOptions } from "../figma_app/169182";
-import { a as _$$a } from "../905/425366";
-import { oo } from "../905/895600";
-import { tU } from "../905/683495";
-export function $$d1() {
-  let e = Xr(oo);
-  return useCallback(t => e(function (e) {
-    let t = getInitialOptions().user_data?.id;
-    let i = getInitialOptions().user_data?.org_id || null;
-    let n = e?.teamId || null;
-    let r = null;
-    return (tU() && (i ? r = `organization::${i}` : n && (r = `team::${n}`)), t) ? [{
-      userId: t,
-      teamId: n,
-      orgId: i,
-      planKey: r
-    }] : [];
-  }(t)), [e]);
+import type { IUser } from '../905/895600'
+import { useSetAtom } from 'jotai'
+import { useCallback } from 'react'
+import { StatsigAtom } from '../905/425366'
+import { isPlanKeyTargetingEnabled } from '../905/683495'
+import { prefetchAtom } from '../905/895600'
+import { useAtomWithSubscription, Xr } from '../figma_app/27355'
+import { getInitialOptions } from '../figma_app/169182'
+
+/**
+ * Returns a callback to prefetch user plan key data.
+ * Original function: $$d1
+ */
+export function getPrefetchPlanKeyHandler() {
+  const setPlanContext = useSetAtom(prefetchAtom)
+
+  return useCallback((teamContext) => {
+    const userData = getInitialOptions().user_data || {}
+    const userId = userData.id
+    const orgId = userData.org_id || null
+    const teamId = teamContext?.teamId || null
+
+    // 构建 planKey：优先组织，其次团队
+    let planKey: string | null = null
+    if (orgId) {
+      planKey = `organization::${orgId}`
+    }
+    else if (teamId) {
+      planKey = `team::${teamId}`
+    }
+
+    // 只有 userId 存在才设置上下文
+    const context: IUser[] = userId
+      ? [{
+          userId,
+          teamId,
+          orgId,
+          planKey,
+        }]
+      : []
+
+    setPlanContext(context)
+  }, [setPlanContext])
 }
-export function $$c0() {
-  let e = useAtomWithSubscription(_$$a);
-  return e?.evaluated_keys?.customIDs;
+
+/**
+ * Retrieves custom IDs from StatsigAtom.
+ * Original function: $$c0
+ */
+export function getCustomIDsFromStatsig(): any {
+  const statsig = useAtomWithSubscription(StatsigAtom)
+  return statsig?.evaluated_keys?.customIDs
 }
-export const kh = $$c0;
-export const vb = $$d1;
+
+// Exported names refactored for clarity
+export const kh = getCustomIDsFromStatsig
+export const vb = getPrefetchPlanKeyHandler

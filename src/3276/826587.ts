@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { CV, KJ } from "../figma_app/916560";
+import { handleEmbedPaste, parseEmbedInput } from "../figma_app/916560";
 import { Cg } from "../905/195479";
 import { buildUploadUrl } from "../figma_app/169182";
 import { BrowserInfo } from "../figma_app/778880";
@@ -67,14 +67,14 @@ export function $$g0(e) {
       onSuccess();
       return;
     }
-    CV(x, n, PluginModalTypeEnum.MODAL).valid ? (g(!1), onSuccess()) : (g(!0), y.current?.focus(), y.current?.select());
+    handleEmbedPaste(x, n, PluginModalTypeEnum.MODAL).valid ? (g(!1), onSuccess()) : (g(!0), y.current?.focus(), y.current?.select());
   }, [x, onSuccess, n]);
   let y = useRef(null);
   let C = useCallback(e => {
     l(e.currentTarget.value);
     g(!1);
   }, []);
-  let w = !KJ(n);
+  let w = !parseEmbedInput(n);
   let j = Kx();
   return jsxs("div", {
     className: Eu,

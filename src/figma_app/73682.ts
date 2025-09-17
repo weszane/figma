@@ -1,5 +1,5 @@
 import { um, atomStoreManager, atom } from "../figma_app/27355";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { VisualBellIcon } from "../905/576487";
@@ -40,7 +40,7 @@ let u = um({
           let d = `audience-view-${l}`;
           new URL(t);
           let c = .8 * window.screen.availHeight;
-          let p = FJ(t, d, `height=${c},width=${16 * c / 9},left=0,top=0,popup=yes`);
+          let p = openWindow(t, d, `height=${c},width=${16 * c / 9},left=0,top=0,popup=yes`);
           if (null === p) {
             let i = {
               text: getI18nString("slides.presenter_view.open_popup"),

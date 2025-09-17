@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { GZ } from "../905/508367";
+import { isIframe } from "../905/508367";
 import { bellFeedAPIInstance } from "../figma_app/876459";
 import { getInitialOptions } from "../figma_app/169182";
 import { F } from "../905/422355";
@@ -31,7 +31,7 @@ export function $$u0(e) {
     };
   }();
   let d = !(void 0 !== geofence.exclude && c(t, geofence.exclude)) && (void 0 === geofence.include || c(t, geofence.include));
-  return !GZ() && !isInteractionPathCheck() && !getInitialOptions().e2e_traffic && canUseCookieForAnalytics && d && getFeatureFlags().sprig_enabled && !bellFeedAPIInstance;
+  return !isIframe() && !isInteractionPathCheck() && !getInitialOptions().e2e_traffic && canUseCookieForAnalytics && d && getFeatureFlags().sprig_enabled && !bellFeedAPIInstance;
 }
 export const $z = $$u0;
 export const YZ = $$d1;

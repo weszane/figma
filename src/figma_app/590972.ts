@@ -57,7 +57,7 @@ import { J as _$$J3 } from "../905/296347";
 import { W as _$$W } from "../905/526272";
 import { lW } from "../figma_app/11182";
 import { hideModal } from "../905/156213";
-import { $$in, WX } from "../figma_app/350203";
+import { $$in, PublishModalState } from "../figma_app/350203";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { Yw, Of } from "../905/201596";
 import { Rv, mN } from "../figma_app/599979";
@@ -159,7 +159,7 @@ function eO({
   let q = useCallback(() => {
     Y(hideModal());
     X.current($$in, {
-      step: WX.CLOSED
+      step: PublishModalState.CLOSED
     });
   }, [Y, X]);
   let J = _$$D(e.fieldStates);
@@ -242,7 +242,7 @@ function eO({
     submit
   } = _$$r2(e, useCallback(() => {
     X.current($$in, {
-      step: WX.PUBLISH
+      step: PublishModalState.PUBLISH
     });
   }, [X]));
   let eT = useRef(r ? MQ(e) ? "ready" : "waiting_for_draft_to_stabilize" : "disabled");
@@ -478,13 +478,13 @@ function eO({
   }, [e, draftSubmissionResult?.result, ev, stepWithErrors, ea.activeTab]);
   useEffect(() => {
     X.current($$in, {
-      step: WX.OPENED
+      step: PublishModalState.OPENED
     });
   }, [X]);
   let ex = Lz(e.fieldStates.name, "");
   let eN = useDebouncedCallback(() => {
     X.current($$in, {
-      step: WX.EDIT_NAME
+      step: PublishModalState.EDIT_NAME
     });
   }, 2e3);
   useEffect(() => {
@@ -493,7 +493,7 @@ function eO({
   let eO = Lz(e.fieldStates.description, "");
   let eR = useDebouncedCallback(() => {
     X.current($$in, {
-      step: WX.EDIT_DESCRIPTION
+      step: PublishModalState.EDIT_DESCRIPTION
     });
   }, 1e4);
   useEffect(() => {
@@ -598,23 +598,23 @@ function eP({
   let [h, m] = useState();
   useEffect(() => {
     _.current($$in, {
-      step: WX.OPENED
+      step: PublishModalState.OPENED
     });
   }, [_]);
   useEffect(() => {
     r && !h && (async () => {
       if (e.submit) {
         _.current($$in, {
-          step: WX.PUBLISH
+          step: PublishModalState.PUBLISH
         });
         m({
           result: "pending"
         });
         let t = await e.submit();
         "failure" === t.result ? (_.current($$in, {
-          step: WX.ERROR
+          step: PublishModalState.ERROR
         }), d.current?.("failed_to_submit")) : _.current($$in, {
-          step: WX.SUCCESS
+          step: PublishModalState.SUCCESS
         });
         m(t);
       }
@@ -622,7 +622,7 @@ function eP({
   }, [e, h, r, d, _]);
   useEffect(() => {
     s && (_.current($$in, {
-      step: WX.ERROR,
+      step: PublishModalState.ERROR,
       errorType: "source_file_cannot_be_published",
       errorReason: s
     }), m({
@@ -631,7 +631,7 @@ function eP({
   }, [s, d, _]);
   useEffect(() => {
     !h && !e.submit && MQ(e) && (_.current($$in, {
-      step: WX.ERROR,
+      step: PublishModalState.ERROR,
       errorType: "errors_in_form"
     }), m({
       result: "failure"

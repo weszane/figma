@@ -1,4 +1,4 @@
-import { zU } from "../figma_app/740025";
+import { isCommunitySearchView } from "../figma_app/740025";
 import { canMemberOrg } from "../figma_app/642025";
 import { PublicModelType, ModelTypeConfigs, SpaceAccessType } from "../figma_app/162807";
 import { FileType } from "../figma_app/756995";
@@ -37,7 +37,7 @@ export function $$d1(e, t, i) {
   let u = FileType.ANY;
   isNaN(c) || (u = c);
   let p = SpaceAccessType.PERSONAL;
-  zU(i) ? p = SpaceAccessType.COMMUNITY : t.currentUserOrgId && (p = canMemberOrg(t.currentUserOrgId, t) ? SpaceAccessType.ORG : SpaceAccessType.ORG_GUEST);
+  isCommunitySearchView(i) ? p = SpaceAccessType.COMMUNITY : t.currentUserOrgId && (p = canMemberOrg(t.currentUserOrgId, t) ? SpaceAccessType.ORG : SpaceAccessType.ORG_GUEST);
   return {
     query: l,
     searchModelType: d,

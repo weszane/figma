@@ -33,7 +33,7 @@ import { logAndTrackCTA } from "../figma_app/314264";
 import { FFileType } from "../figma_app/191312";
 import { oh } from "../905/18797";
 import { getObservableValue } from "../figma_app/84367";
-import { TI } from "../figma_app/190980";
+import { getRecentTemplateCount } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
 import { FDocumentType } from "../905/862883";
 import { cd } from "../905/381612";
@@ -302,7 +302,7 @@ function ee() {
 }
 function et() {
   let e = _$$eE(FDocumentType.Slides);
-  let t = TI(FDocumentType.Slides);
+  let t = getRecentTemplateCount(FDocumentType.Slides);
   let i = fK();
   let r = useDispatch();
   let a = selectCurrentFile();

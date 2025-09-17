@@ -4,7 +4,7 @@ import { reportError } from "../905/11";
 import { N } from "../7222/898730";
 import { SortOptions } from "../figma_app/324237";
 import { ResourceTypeEnum } from "../figma_app/306946";
-import { u8 } from "../figma_app/350203";
+import { MAX_DESCRIPTION_LENGTH } from "../figma_app/350203";
 import { FFileType, FPlanNameType } from "../figma_app/191312";
 import { Pe } from "../1250/610336";
 import { a as _$$a, z } from "../figma_app/601188";
@@ -86,7 +86,7 @@ export function $$f0({
 }) {
   return $$p4({
     resourceTypes: [n],
-    limit: u8,
+    limit: MAX_DESCRIPTION_LENGTH,
     orgId: e,
     teamId: t,
     caller: z.RESOURCE_HUB,
@@ -95,7 +95,7 @@ export function $$f0({
     sortBy: r
   });
 }
-export function $$h2(e, t, n, a = u8) {
+export function $$h2(e, t, n, a = MAX_DESCRIPTION_LENGTH) {
   let {
     templatesByTeam,
     isLoading
@@ -159,7 +159,7 @@ export function $$h2(e, t, n, a = u8) {
     }
   };
 }
-export function $$b1(e, t, n, a = u8) {
+export function $$b1(e, t, n, a = MAX_DESCRIPTION_LENGTH) {
   let r = e === FPlanNameType.ENTERPRISE;
   let {
     teamTemplates,

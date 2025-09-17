@@ -51,7 +51,7 @@ import { TabLoop } from "../905/718764";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { logError } from "../905/714362";
 import { getFalseValue, isInteractionPathCheck } from "../figma_app/897289";
-import { zp } from "../figma_app/740025";
+import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { Ku } from "../figma_app/740163";
 import { isValidValue, getCommonFromArray, isInvalidValue, normalizeValue, valueOrFallback } from "../905/216495";
 import { Em, rC } from "../figma_app/385874";
@@ -657,7 +657,7 @@ function tP({
   let w = useSelector(e => e.openFile);
   let j = useSelector(e => e.publishedPlugins);
   let S = useSelector(e => e.saveAsState);
-  let k = zp();
+  let k = useCurrentOrgAdminInfo();
   let E = hD();
   let C = kl("exportSettings");
   let {

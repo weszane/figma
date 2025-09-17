@@ -14,7 +14,7 @@ import { renderI18nText } from "../905/303541";
 import { selectViewAction } from "../905/929976";
 import { r } from "../905/620668";
 import { FFileType } from "../figma_app/191312";
-import { XG } from "../figma_app/350203";
+import { HubResourceCategory } from "../figma_app/350203";
 import { getPluginVersion } from "../figma_app/300692";
 import { ShelfViewType } from "../figma_app/45218";
 import { WidgetSortField } from "../figma_app/162807";
@@ -155,14 +155,14 @@ export function $$F1(e, t) {
             resource: this.props.plugin,
             universalEditorTypeFallback: this.props.tab ? function (e) {
               switch (e) {
-                case XG.FIGJAM_PLUGINS:
-                case XG.FIGJAM_WIDGETS:
+                case HubResourceCategory.FIGJAM_PLUGINS:
+                case HubResourceCategory.FIGJAM_WIDGETS:
                   return FFileType.WHITEBOARD;
-                case XG.FIGMA_DESIGN_PLUGINS:
-                case XG.FIGMA_DESIGN_WIDGETS:
+                case HubResourceCategory.FIGMA_DESIGN_PLUGINS:
+                case HubResourceCategory.FIGMA_DESIGN_WIDGETS:
                   return FFileType.DESIGN;
-                case XG.PLUGINS:
-                case XG.WIDGETS:
+                case HubResourceCategory.PLUGINS:
+                case HubResourceCategory.WIDGETS:
                 default:
                   return r() || FFileType.DESIGN;
               }

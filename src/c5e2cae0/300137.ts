@@ -1,10 +1,10 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { b as _$$b } from "../905/946806";
 import { getFeatureFlags } from "../905/601108";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
-import { cn } from "../figma_app/141320";
+import { isStudentValidated } from "../figma_app/141320";
 import { s as _$$s } from "../cssbuilder/589278";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { sx } from "../905/941192";
@@ -56,7 +56,7 @@ function y({
     };
   }(!0);
   let T = getInitialOptions().analyze_data_flow_v2_until;
-  let N = cn(v) && t ? y?.edu_info.replace(/\[BILLING_REMODEL_GA_DATE\]/g, A(T).format("MMMM D, YYYY")) : y?.info.replace(/\[NEXT_RENEWAL_DATE\]/g, j(e));
+  let N = isStudentValidated(v) && t ? y?.edu_info.replace(/\[BILLING_REMODEL_GA_DATE\]/g, A(T).format("MMMM D, YYYY")) : y?.info.replace(/\[NEXT_RENEWAL_DATE\]/g, j(e));
   let b = getI18nString("checkout.banner.price_change", {
     date: j(e)
   });
@@ -77,7 +77,7 @@ function y({
           children: h ? b : N
         })]
       }), jsx(S, {
-        onClick: () => FJ("https://help.figma.com/hc/articles/27468498501527", "_blank"),
+        onClick: () => openWindow("https://help.figma.com/hc/articles/27468498501527", "_blank"),
         children: renderI18nText("campfire_banner.learn_more")
       })]
     })

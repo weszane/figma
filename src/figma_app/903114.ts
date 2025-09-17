@@ -8,7 +8,7 @@ import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogBody, DialogFooter, DialogActionStrip } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
 import { A as _$$A } from "../905/920142";
-import { HB, lb } from "../3973/538504";
+import { normalizeJobRole, getJobRoleDisplay } from "../3973/538504";
 import { handleSuspenseRetainRelease } from "../figma_app/566371";
 import { reportError } from "../905/11";
 import { tH, H4 } from "../905/751457";
@@ -366,7 +366,7 @@ function er({
   if (!U2()()) return null;
   let d = t && 7 >= _$$A().diff(_$$A(t), "days");
   let c = a ? tb(a.toISOString()) : null;
-  let u = l && "other" !== HB(l);
+  let u = l && "other" !== normalizeJobRole(l);
   return jsxs(AutoLayout, {
     direction: "vertical",
     spacing: 0,
@@ -378,7 +378,7 @@ function er({
           children: [jsx(TextWithTruncation, {
             color: "secondary",
             children: getI18nString("modify_plan_user_seat_modal.role", {
-              jobTitle: lb(l)
+              jobTitle: getJobRoleDisplay(l)
             })
           }), jsx("div", {
             className: "x2lah0s xuxw1ft xt9pc3i",

@@ -4,7 +4,7 @@ import { customHistory } from "../905/612521";
 import { getPaymentFlowData } from "../figma_app/169182";
 import { _H } from "../figma_app/598111";
 import { reportError } from "../905/11";
-import { cn } from "../figma_app/141320";
+import { isStudentValidated } from "../figma_app/141320";
 import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
@@ -169,7 +169,7 @@ let $$D3 = createOptimistThunk((e, {
   };
   if (null === h) {
     let e = F.payment.promo;
-    let a = !!F.user && cn(F.user);
+    let a = !!F.user && isStudentValidated(F.user);
     if (null != e) L = {
       ...V,
       team_name: t,

@@ -1,347 +1,424 @@
-import { Statsig } from "statsig-react";
-import { getInitialOptions } from "../figma_app/169182";
-import { liveStoreInstance } from "../905/713695";
-import { a as _$$a } from "../905/425366";
-import { m as _$$m } from "../905/325034";
-import { StatsigTimer, trackClientValuesNetworkCall, trackContextSwitchCacheMiss, trackClientUpdateUserTime, trackPrefetchCalls, trackStatsigClientInitTime } from "../3973/890507";
-import { ActionType, TimeoutError, OperationStatus, ProcessState, ErrorType, ProviderType, BootstrapType } from "../3973/473379";
-import { fU, wj, et, vl, nK, pF, Xu, l2, Cj, me } from "../905/683495";
-import { processAtom, isErroredTimeout, processSelector } from "../3973/697935";
-import { PerfTimer } from "../905/609396";
-import { createDeferredPromise } from "../905/874553";
-import { atom, atomStoreManager } from "../figma_app/27355";
-async function u(e, t, i, n) {
-  if (null == e) return null;
-  let a = n ?? fU(getInitialOptions().iso_code);
-  let s = new StatsigTimer("relay_proxy_request");
-  let u = _$$m.getStatsigRelayProxyBootstrap({
-    orgId: i.customIDs?.orgID,
-    teamId: i.customIDs?.teamID
+import { Statsig } from 'statsig-react'
+import { StatsigAPI } from '../905/325034'
+import { StatsigAtom } from '../905/425366'
+import { PerfTimer } from '../905/609396'
+import { getBootstrapValue, getStatsigConfig, getStatsigUser, getTimeoutForCountry, getUserKey, hasStatsigClientApiKey, shouldSkipPerfCheck, TIMEOUT_MS, withDelay, withTimeout } from '../905/683495'
+import { liveStoreInstance } from '../905/713695'
+import { createDeferredPromise } from '../905/874553'
+import { ActionType, BootstrapType, ErrorType, OperationStatus, ProcessState, ProviderType, TimeoutError } from '../3973/473379'
+import { isErroredTimeout, processAtom, processSelector } from '../3973/697935'
+import { StatsigTimer, trackClientUpdateUserTime, trackClientValuesNetworkCall, trackContextSwitchCacheMiss, trackPrefetchCalls, trackStatsigClientInitTime } from '../3973/890507'
+import { atom, atomStoreManager } from '../figma_app/27355'
+import { getInitialOptions } from '../figma_app/169182'
+
+export interface IUser {
+  teamId: string
+  orgId: string
+  userId: string
+
+  planKey: string
+}
+async function getRelayProxyBootstrap(sdkKey: string, action: ActionType, user: any, timeout?: number) {
+  if (sdkKey == null)
+    return null
+  const timeoutMs = timeout ?? getTimeoutForCountry(getInitialOptions().iso_code)
+  const timer = new StatsigTimer('relay_proxy_request')
+  const bootstrapPromise = StatsigAPI.getStatsigRelayProxyBootstrap({
+    orgId: user.customIDs?.orgID,
+    teamId: user.customIDs?.teamID,
   }, {
-    prefetch: t === ActionType.PREFETCH
-  }).then(e => e.data.meta ?? {});
-  let p = wj(u, a).catch(e => (s.setCaughtError(e), null)).$$finally(() => {
-    s.stopTimer();
-    trackClientValuesNetworkCall(s, "relay_proxy", t);
-  });
-  s.startTimer();
-  let m = await p;
-  if (s.getTimedOut()) throw new TimeoutError();
-  return m;
+    prefetch: action === ActionType.PREFETCH,
+  }).then(response => response.data.meta ?? {})
+  const timedPromise = withTimeout(bootstrapPromise, timeoutMs).catch((error) => {
+    timer.setCaughtError(error)
+    return null
+  }).finally(() => {
+    timer.stopTimer()
+    trackClientValuesNetworkCall(timer, 'relay_proxy', action)
+  })
+  timer.startTimer()
+  const result = await timedPromise
+  if (timer.getTimedOut()) {
+    throw new TimeoutError()
+  }
+  return result
 }
-async function p({
-  orgId: e,
-  teamIds: t,
-  timeout: i
+async function getBatchedRelayProxyBootstrap({
+  orgId,
+  teamIds,
+  timeout,
+}: {
+  orgId: string
+  teamIds: string[]
+  timeout?: number
 }) {
-  let n = i ?? fU(getInitialOptions().iso_code);
-  let a = new StatsigTimer("relay_proxy_batched_request");
-  let s = _$$m.getStatsigRelayProxyBootstrapV2({
-    orgId: e,
-    teamIds: t
-  }).then(e => e.data.meta);
-  let u = wj(s, n).catch(e => (a.setCaughtError(e), null)).$$finally(() => {
-    a.stopTimer();
-    trackClientValuesNetworkCall(a, "relay_proxy_v2_batched", ActionType.PREFETCH);
-  });
-  a.startTimer();
-  let p = await u;
-  if (a.getTimedOut()) throw new TimeoutError();
-  return p;
+  const timeoutMs = timeout ?? getTimeoutForCountry(getInitialOptions().iso_code)
+  const timer = new StatsigTimer('relay_proxy_batched_request')
+  const bootstrapPromise = StatsigAPI.getStatsigRelayProxyBootstrapV2({
+    orgId,
+    teamIds,
+  }).then(response => response.data.meta)
+  const timedPromise = withTimeout(bootstrapPromise, timeoutMs).catch((error) => {
+    timer.setCaughtError(error)
+    return null
+  }).finally(() => {
+    timer.stopTimer()
+    trackClientValuesNetworkCall(timer, 'relay_proxy_v2_batched', ActionType.PREFETCH)
+  })
+  timer.startTimer()
+  const result = await timedPromise
+  if (timer.getTimedOut()) {
+    throw new TimeoutError()
+  }
+  return result
 }
-let _ = atom(() => new Set());
-let A = liveStoreInstance.Query({
-  fetch: async e => {
-    let t = e.__IGNORE__overrideValues;
-    let {
+const userKeySetAtom = atom(() => new Set())
+const userValuesQuery = liveStoreInstance.Query({
+  fetch: async (params) => {
+    const overrideValues = params.__IGNORE__overrideValues
+    const {
       userId,
       teamId,
       orgId,
-      planKey
-    } = e;
-    let s = atomStoreManager.get(_);
-    let o = () => {
-      let e = et({
+      planKey,
+    } = params
+    const userKeySet = atomStoreManager.get(userKeySetAtom)
+    const addUserKey = () => {
+      const key = getUserKey({
         userId,
         teamId,
         orgId,
-        planKey
-      });
-      s.add(e);
-    };
-    if (null != t) {
-      o();
-      return t;
+        planKey,
+      })
+      userKeySet.add(key)
     }
-    let l = e.__IGNORE__reason;
-    let d = e.__IGNORE__sdkKey;
-    let p = e.__IGNORE__timeout;
-    let m = vl(userId, teamId, orgId, planKey);
-    let h = await u(d, l, m, p);
-    if (null == h) throw Error("Call to retrieve Statsig user values failed");
-    o();
-    return h;
+    if (overrideValues != null) {
+      addUserKey()
+      return overrideValues
+    }
+    const reason = params.__IGNORE__reason
+    const sdkKey = params.__IGNORE__sdkKey
+    const timeout = params.__IGNORE__timeout
+    const statsigUser = getStatsigUser(userId, teamId, orgId, planKey)
+    const values = await getRelayProxyBootstrap(sdkKey, reason, statsigUser, timeout)
+    if (values == null) {
+      throw new Error('Call to retrieve Statsig user values failed')
+    }
+    addUserKey()
+    return values
   },
-  key: "statsig_user_values",
-  stalenessPolicy: "never"
-});
-let y = liveStoreInstance.Query({
-  fetch: async e => {
-    let {
+  key: 'statsig_user_values',
+  stalenessPolicy: 'never',
+})
+const batchedUserValuesQuery = liveStoreInstance.Query({
+  fetch: async (params) => {
+    const {
       userId,
       teamIds,
-      orgId
-    } = e;
-    let r = e.__IGNORE__sdkKey;
-    let s = e.__IGNORE__timeout;
-    let o = await p({
+      orgId,
+    } = params
+    const sdkKey = params.__IGNORE__sdkKey
+    const timeout = params.__IGNORE__timeout
+    const results = await getBatchedRelayProxyBootstrap({
       orgId,
       teamIds,
-      timeout: s
-    });
-    if (null == o) throw Error("Call to retrieve Statsig batched user values failed");
-    let l = o.map(e => {
-      if (e.bootstrap_values) return function (e, t, i) {
-        let n = A({
-          __IGNORE__overrideValues: t,
-          __IGNORE__reason: ActionType.PREFETCH,
-          __IGNORE__sdkKey: i,
-          __IGNORE__timeout: nK,
-          ...e
-        });
-        return liveStoreInstance.fetch(n, {
-          policy: "networkOnly"
-        });
-      }({
-        userId,
-        teamId: e.team_id ?? "",
-        orgId: orgId ?? null,
-        planKey: e.bootstrap_values?.evaluated_keys?.customIDs?.planKey ?? null ?? null
-      }, e.bootstrap_values, r);
-    });
-    await Promise.all(l);
-    return o;
+      timeout,
+    })
+    if (results == null) {
+      throw new Error('Call to retrieve Statsig batched user values failed')
+    }
+    const fetchPromises = results.map((result) => {
+      if (result.bootstrap_values) {
+        return (function fetchUserValues(userParams, bootstrapValues, key) {
+          const query = userValuesQuery({
+            __IGNORE__overrideValues: bootstrapValues,
+            __IGNORE__reason: ActionType.PREFETCH,
+            __IGNORE__sdkKey: key,
+            __IGNORE__timeout: TIMEOUT_MS,
+            ...userParams,
+          })
+          return liveStoreInstance.fetch(query, {
+            policy: 'networkOnly',
+          })
+        }({
+          userId,
+          teamId: result.team_id ?? '',
+          orgId: orgId ?? null,
+          planKey: result.bootstrap_values?.evaluated_keys?.customIDs?.planKey ?? null,
+        }, result.bootstrap_values, sdkKey))
+      }
+      return null
+    })
+    await Promise.all(fetchPromises)
+    return results
   },
-  key: "statsig_batched_user_values",
-  stalenessPolicy: "never"
-});
-let $$b1 = atom(null, async (e, t, i, n, a) => {
-  if (!pF()) return;
-  let s = getInitialOptions().statsig_figma_app_client_api_key;
-  if (null == s) return;
-  let o = e(processAtom);
-  if (o.status === OperationStatus.IN_PROGRESS) {
-    await o.initCompletedPromise;
-    return;
+  key: 'statsig_batched_user_values',
+  stalenessPolicy: 'never',
+})
+const initializeAtom = atom(null, async (get, set, user, isProvider: any, options) => {
+  if (!hasStatsigClientApiKey())
+    return
+  const sdkKey = getInitialOptions().statsig_figma_app_client_api_key
+  if (sdkKey == null)
+    return
+  const processState = get(processAtom)
+  if (processState.status === OperationStatus.IN_PROGRESS) {
+    await processState.initCompletedPromise
+    return
   }
-  if (isErroredTimeout(o), o.status !== OperationStatus.NOT_STARTED) return;
-  let l = createDeferredPromise();
-  let u = Xu(E(s, i, n, a, () => e(processSelector))).then(async e => {
-    await l.promise;
-    t(processAtom, e);
-  });
-  t(processAtom, {
+  if (isErroredTimeout(processState))
+    return
+  if (processState.status !== OperationStatus.NOT_STARTED)
+    return
+  const deferred = createDeferredPromise()
+  const initPromise = withDelay(initializeStatsig(sdkKey, user, options, isProvider, () => get(processSelector))).then(async (result) => {
+    await deferred.promise
+    set(processAtom, result)
+  })
+  set(processAtom, {
     type: ProcessState.START,
     payload: {
-      initCompletedPromise: u,
-      sdkKey: s
-    }
-  });
-  l.resolve();
-  await u;
-});
-let $$v0 = atom(null, async (e, t, i) => {
-  if (!pF() || !l2()) return;
-  let o = e(processAtom);
-  if (o.status === OperationStatus.NOT_STARTED) return;
-  if (o.status === OperationStatus.IN_PROGRESS) {
-    await o.initCompletedPromise;
-    return;
+      initCompletedPromise: initPromise,
+      sdkKey,
+    },
+  })
+  deferred.resolve()
+  await initPromise
+})
+const contextSwitchAtom = atom<any, IUser[], any>(null, async (get, set, user) => {
+  if (!hasStatsigClientApiKey() || !shouldSkipPerfCheck())
+    return
+  const processState = get(processAtom)
+  if (processState.status === OperationStatus.NOT_STARTED)
+    return
+  if (processState.status === OperationStatus.IN_PROGRESS) {
+    await processState.initCompletedPromise
+    return
   }
-  let u = o.sdkKey;
-  let {
+  const sdkKey = processState.sdkKey
+  const {
     userId,
     teamId,
     orgId,
-    planKey
-  } = i;
-  let I = vl(userId, teamId, orgId, planKey);
-  let E = fU(getInitialOptions().iso_code);
-  let x = new PerfTimer("statsigContextSwitch", {});
-  let S = null;
-  let w = !1;
-  let C = !1;
-  async function T() {
-    let t = null;
-    let r = atomStoreManager.get(_);
-    let o = r.size;
-    let m = o > 20 ? null : [...r.values()];
-    let h = Cj(i);
+    planKey,
+  } = user
+  const statsigUser = getStatsigUser(userId, teamId, orgId, planKey)
+  const timeout = getTimeoutForCountry(getInitialOptions().iso_code)
+  const timer = new PerfTimer('statsigContextSwitch', {})
+  let errorMessage = null
+  let isCached = false
+  let isComplete = false
+  async function switchContext() {
+    let values = null
+    const userKeySet = atomStoreManager.get(userKeySetAtom)
+    const setSize = userKeySet.size
+    const userKeys = setSize > 20 ? null : [...userKeySet.values()]
+    const bootstrapValues = getBootstrapValue(user)
     try {
-      if (null != h) {
-        w = !0;
-        t = h;
-      } else {
-        let i = A({
+      if (bootstrapValues != null) {
+        isCached = true
+        values = bootstrapValues
+      }
+      else {
+        const query = userValuesQuery({
           __IGNORE__reason: ActionType.CONTEXT_SWITCH,
-          __IGNORE__sdkKey: u,
-          __IGNORE__timeout: E,
+          __IGNORE__sdkKey: sdkKey,
+          __IGNORE__timeout: timeout,
           userId,
           teamId,
           orgId,
-          planKey
-        });
-        let n = e(i);
-        t = (w = "loaded" === n.status) ? n.data : await liveStoreInstance.fetch(i, {
-          policy: "networkOnly"
-        });
+          planKey,
+        })
+        const queryResult: ObjectOf = get(query)
+        isCached = queryResult.status === 'loaded'
+        values = isCached
+          ? queryResult.data
+          : await liveStoreInstance.fetch(query, {
+              policy: 'networkOnly',
+            })
       }
-    } catch (t) {
-      S = `Failed to retrieve user values from relay proxy when context switching: ${t}`;
-      let e = t instanceof TimeoutError ? ErrorType.TIMEOUT : ErrorType.REQUEST_FAILED;
+    }
+    catch (error) {
+      errorMessage = `Failed to retrieve user values from relay proxy when context switching: ${error}`
+      const errorType = error instanceof TimeoutError ? ErrorType.TIMEOUT : ErrorType.REQUEST_FAILED
       return {
         type: ProcessState.ERROR,
         payload: {
-          cause: e
-        }
-      };
-    } finally {
-      w || trackContextSwitchCacheMiss([userId, teamId, orgId], m, o);
-    }
-    let g = !1;
-    try {
-      null != t && (atomStoreManager.set(_$$a, t), g = Statsig.updateUserWithValues(I, t));
-    } catch (e) {
-      S = `Failed to update user with new values when context switching: ${e}`;
-      g = !1;
-    }
-    return g ? {
-      type: ProcessState.COMPLETE
-    } : {
-      type: ProcessState.ERROR,
-      payload: {
-        cause: ErrorType.SDK_METHOD_FAILED
+          cause: errorType,
+        },
       }
-    };
-  }
-  x.start();
-  t(processAtom, {
-    type: ProcessState.RESET
-  });
-  let k = createDeferredPromise();
-  let R = Xu(T()).catch(e => (S = e instanceof Error ? e.message : null, {
-    type: ProcessState.ERROR,
-    payload: {
-      cause: ErrorType.UNKNOWN
     }
-  })).then(e => k.promise.then(() => e)).then(e => {
-    C = e.type === ProcessState.COMPLETE;
-    t(processAtom, e);
-  });
-  t(processAtom, {
-    type: ProcessState.START,
-    payload: {
-      initCompletedPromise: R,
-      sdkKey: u
+    finally {
+      if (!isCached) {
+        trackContextSwitchCacheMiss([userId, teamId, orgId], userKeys, setSize)
+      }
     }
-  });
-  k.resolve();
-  await R;
-  x.stop();
-  trackClientUpdateUserTime(x.getElapsedTime(), C, w, S);
-});
-let $$I2 = atom(null, async (e, t, i) => {
-  if (!pF() || 0 === i.length) return;
-  let n = getInitialOptions().statsig_figma_app_client_api_key;
-  if (null == n) return;
-  let s = null;
-  let o = atomStoreManager.get(_);
-  let d = i.filter(e => {
-    if (Cj(e)) return !1;
-    let t = et(e);
-    return !o.has(t);
-  });
-  try {
-    if (d.length > 0) {
-      let e = y({
-        __IGNORE__sdkKey: n,
-        __IGNORE__timeout: nK,
-        userId: i[0].userId,
-        teamIds: d.map(e => e.teamId),
-        orgId: i[0].orgId ?? void 0
-      });
-      await liveStoreInstance.fetch(e, {
-        policy: "networkOnly"
-      });
-    }
-  } catch (e) {
-    s = `Failed to prefetch users with relay proxy: ${e}`;
-  } finally {
-    let e = i.length - d.length;
-    trackPrefetchCalls(i.length, e, s);
-  }
-});
-async function E(e, t, i, o, u) {
-  let p;
-  let {
-    userId,
-    teamId,
-    orgId,
-    planKey
-  } = t;
-  let y = Cj(t);
-  let b = new StatsigTimer("statsigInitialize");
-  let v = null;
-  let I = !1;
-  function E(e, n, r) {
-    b.isTimerRunning() && b.stopTimer();
-    I || (trackStatsigClientInitTime(o === ProviderType.PROVIDER, null != y ? BootstrapType.BOOTSTRAP : BootstrapType.NETWORK, u().status, b.getElapsedTimeMs(), n && null === v, r, v, t, y, i), I = !0);
-  }
-  function x(e, t, i, r) {
+    let updateSuccess = false
     try {
-      null != t ? (Statsig.bootstrap(e, t, i, r), atomStoreManager.set(_$$a, t)) : Statsig.bootstrap(e, {}, i, r);
-      return {
-        type: ProcessState.COMPLETE
-      };
-    } catch (e) {
-      null === v && (v = ErrorType.SDK_METHOD_FAILED);
-      E(null, !1, null);
-      return {
-        type: ProcessState.ERROR,
-        payload: {
-          cause: v
-        }
-      };
+      if (values != null) {
+        atomStoreManager.set(StatsigAtom, values)
+        updateSuccess = Statsig.updateUserWithValues(statsigUser, values)
+      }
     }
+    catch (error) {
+      errorMessage = `Failed to update user with new values when context switching: ${error}`
+      updateSuccess = false
+    }
+    return updateSuccess
+      ? {
+          type: ProcessState.COMPLETE,
+        }
+      : {
+          type: ProcessState.ERROR,
+          payload: {
+            cause: ErrorType.SDK_METHOD_FAILED,
+          },
+        }
   }
-  let S = vl(userId, teamId, orgId, planKey);
-  let w = me(E);
-  let C = fU(getInitialOptions().iso_code);
-  if (b.startTimer(), null != y) p = y;else try {
-    let t = A({
-      __IGNORE__reason: ActionType.INITIALIZE,
-      __IGNORE__sdkKey: e,
-      __IGNORE__timeout: C,
-      userId,
-      teamId,
-      orgId,
-      planKey
-    });
-    p = await liveStoreInstance.fetch(t, {
-      policy: "networkOnly"
-    });
-  } catch (t) {
-    v = t instanceof TimeoutError ? ErrorType.TIMEOUT : ErrorType.REQUEST_FAILED;
-    x(e, {}, S, w);
+  timer.start()
+  set(processAtom, {
+    type: ProcessState.RESET,
+  })
+  const deferred = createDeferredPromise()
+  const switchPromise = withDelay(switchContext()).catch((error) => {
+    errorMessage = error instanceof Error ? error.message : null
     return {
       type: ProcessState.ERROR,
       payload: {
-        cause: v
-      }
-    };
+        cause: ErrorType.UNKNOWN,
+      },
+    }
+  }).then(result => deferred.promise.then(() => result)).then((result) => {
+    isComplete = result.type === ProcessState.COMPLETE
+    set(processAtom, result)
+  })
+  set(processAtom, {
+    type: ProcessState.START,
+    payload: {
+      initCompletedPromise: switchPromise,
+      sdkKey,
+    },
+  })
+  deferred.resolve()
+  await switchPromise
+  timer.stop()
+  trackClientUpdateUserTime(timer.getElapsedTime(), isComplete, isCached, errorMessage)
+})
+export const prefetchAtom = atom(null, async (get, set, users: IUser[]) => {
+  if (!hasStatsigClientApiKey() || users.length === 0)
+    return
+  const sdkKey = getInitialOptions().statsig_figma_app_client_api_key
+  if (sdkKey == null)
+    return
+  let errorMessage = null
+  const userKeySet = atomStoreManager.get(userKeySetAtom)
+  const usersToFetch = users.filter((user) => {
+    if (getBootstrapValue(user))
+      return false
+    const userKey = getUserKey(user)
+    return !userKeySet.has(userKey)
+  })
+  try {
+    if (usersToFetch.length > 0) {
+      const query = batchedUserValuesQuery({
+        __IGNORE__sdkKey: sdkKey,
+        __IGNORE__timeout: TIMEOUT_MS,
+        userId: users[0].userId,
+        teamIds: usersToFetch.map(user => user.teamId),
+        orgId: users[0].orgId ?? undefined,
+      })
+      await liveStoreInstance.fetch(query, {
+        policy: 'networkOnly',
+      })
+    }
   }
-  return x(e, p, S, w);
+  catch (error) {
+    errorMessage = `Failed to prefetch users with relay proxy: ${error}`
+  }
+  finally {
+    const cachedCount = users.length - usersToFetch.length
+    trackPrefetchCalls(users.length, cachedCount, errorMessage)
+  }
+})
+
+async function initializeStatsig(sdkKey: string, user: any, options: any, isProvider: any, getProcessState: () => any) {
+  let bootstrapData
+  const {
+    userId,
+    teamId,
+    orgId,
+    planKey,
+  } = user
+  const bootstrapValues = getBootstrapValue(user)
+  const timer = new StatsigTimer('statsigInitialize')
+  let error = null
+  let isTracked = false
+  function trackInitTime(result: any, success: boolean, errorMessage: string | null) {
+    if (timer.isTimerRunning()) {
+      timer.stopTimer()
+    }
+    if (!isTracked) {
+      trackStatsigClientInitTime(isProvider === ProviderType.PROVIDER, bootstrapValues != null ? BootstrapType.BOOTSTRAP : BootstrapType.NETWORK, getProcessState().status, timer.getElapsedTimeMs(),
+        // success && error === null,
+        errorMessage, error, user, bootstrapValues, options)
+      isTracked = true
+    }
+  }
+  function bootstrapStatsig(key: string, values: any, statsigUser: any, config: any) {
+    try {
+      if (values != null) {
+        Statsig.bootstrap(key, values, statsigUser, config)
+        atomStoreManager.set(StatsigAtom, values)
+      }
+      else {
+        Statsig.bootstrap(key, {}, statsigUser, config)
+      }
+      return {
+        type: ProcessState.COMPLETE,
+      }
+    }
+    catch {
+      if (error === null) {
+        error = ErrorType.SDK_METHOD_FAILED
+      }
+      trackInitTime(null, false, null)
+      return {
+        type: ProcessState.ERROR,
+        payload: {
+          cause: error,
+        },
+      }
+    }
+  }
+  const statsigUser = getStatsigUser(userId, teamId, orgId, planKey)
+  const config = getStatsigConfig(trackInitTime)
+  const timeout = getTimeoutForCountry(getInitialOptions().iso_code)
+  timer.startTimer()
+  if (bootstrapValues != null) {
+    bootstrapData = bootstrapValues
+  }
+  else {
+    try {
+      const query = userValuesQuery({
+        __IGNORE__reason: ActionType.INITIALIZE,
+        __IGNORE__sdkKey: sdkKey,
+        __IGNORE__timeout: timeout,
+        userId,
+        teamId,
+        orgId,
+        planKey,
+      })
+      bootstrapData = await liveStoreInstance.fetch(query, {
+        policy: 'networkOnly',
+      })
+    }
+    catch (e) {
+      error = e instanceof TimeoutError ? ErrorType.TIMEOUT : ErrorType.REQUEST_FAILED
+      return bootstrapStatsig(sdkKey, {}, statsigUser, config)
+    }
+  }
+  return bootstrapStatsig(sdkKey, bootstrapData, statsigUser, config)
 }
-export const iz = $$v0;
-export const r_ = $$b1;
-export const oo = $$I2;
+export const iz = contextSwitchAtom
+export const r_ = initializeAtom
+export const oo = prefetchAtom

@@ -9,7 +9,7 @@ import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { A as _$$A } from "../905/17894";
 import { Lz, Zc } from "../905/497882";
-import { Wi } from "../figma_app/740025";
+import { MAX_PUBLISHERS_PER_RESOURCE } from "../figma_app/740025";
 import { jr } from "../figma_app/599979";
 import { MH } from "../905/772425";
 import { Ef } from "../905/81982";
@@ -110,7 +110,7 @@ export function $$S0({
             return I ? t ? E.search(t).then(e => e.filter(D)) : [] : P.current.search(t);
           },
           placeholder: getI18nString("community.publishing.give_up_to_n_creators_credit", {
-            maxCreatorsPerResource: Wi
+            maxCreatorsPerResource: MAX_PUBLISHERS_PER_RESOURCE
           })
         })
       })

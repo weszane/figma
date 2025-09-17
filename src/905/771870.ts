@@ -3,7 +3,7 @@ import { PureComponent } from "react";
 import { connect } from "react-redux";
 import { ResponsiveSetIdHandler, CodeComponentIdHandler } from "../figma_app/243058";
 import { Fullscreen, StylesBindings } from "../figma_app/763686";
-import { NQ } from "../905/508367";
+import { appendSearchParam } from "../905/508367";
 import { T1 } from "../905/711212";
 import { generateThumbnailFromStyleMaster, generateNodeThumbnail, isValidThumbnail } from "../figma_app/80990";
 import { hasAssetId, PrimaryWorkflowEnum, SubscriptionStatusEnum } from "../figma_app/633080";
@@ -96,7 +96,7 @@ var n;
       } = this.props;
       let n = this.localThumbnail();
       let a = this.thumbnailUrl();
-      e = n && isValidThumbnail(n.url) ? n.url : a && this.props.user ? NQ(a, "fuid", this.props.user.id) : a;
+      e = n && isValidThumbnail(n.url) ? n.url : a && this.props.user ? appendSearchParam(a, "fuid", this.props.user.id) : a;
       return jsx(J, {
         className,
         style,

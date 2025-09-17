@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { qe } from "../figma_app/416935";
+import { isAllowedDomain } from "../figma_app/416935";
 import { selectExperimentConfigHook } from "../figma_app/594947";
 export let $$s2 = "https://help.figma.com/hc/articles/360039956774-Upload-custom-fonts-to-an-organization";
 export function $$o1({
@@ -13,7 +13,7 @@ let l = ({
   hasCurrentTeam: t,
   hasCurrentOrg: i,
   getConfig: n
-}) => !(!t || i || qe(e.email)) && n().get("isVariant", !1);
+}) => !(!t || i || isAllowedDomain(e.email)) && n().get("isVariant", !1);
 export function $$d0({
   enabled: e,
   user: t,

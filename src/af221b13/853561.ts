@@ -4,8 +4,8 @@ import { Button } from "../905/521428";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { showModalHandler } from "../905/156213";
-import { WX } from "../figma_app/350203";
-import { Tm } from "../figma_app/740025";
+import { PublishModalState } from "../figma_app/350203";
+import { getOrgAdminAccess } from "../figma_app/740025";
 import { getSelectedView } from "../figma_app/386952";
 import { selectUser } from "../905/372672";
 import { ComposerLocation } from "../figma_app/45218";
@@ -13,7 +13,7 @@ import { R } from "../figma_app/690591";
 export function $$h0() {
   let e = useDispatch();
   let t = selectUser();
-  let i = useSelector(e => !e.currentUserOrgId || !!Tm(e)[e.currentUserOrgId]);
+  let i = useSelector(e => !e.currentUserOrgId || !!getOrgAdminAccess(e)[e.currentUserOrgId]);
   let h = getSelectedView();
   let x = "subView" in h && ["hubFile", "plugin", "widget"].includes(h.subView) ? "secondary" : "primary";
   return jsx("div", {
@@ -29,7 +29,7 @@ export function $$h0() {
       onClick: () => {
         trackEventAnalytics("community_publish_modal", {
           user: t.id,
-          step: WX.OPENED
+          step: PublishModalState.OPENED
         });
         e(showModalHandler({
           type: R,

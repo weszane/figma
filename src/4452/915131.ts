@@ -8,7 +8,7 @@ import { HiddenLabel } from "../905/270045";
 import { Ay } from "../905/865071";
 import { getFeatureFlags } from "../905/601108";
 import { trackEventAnalytics } from "../905/449184";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { BigTextInputForwardRef, ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -361,7 +361,7 @@ export let $$K0 = registerModal(function (e) {
             }), jsx(ButtonBasePrimaryTracked, {
               onClick: function () {
                 if (0 === er) ei(1);else {
-                  let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => xf(e) && !H_(k.domains, e)) : [];
+                  let e = N && N.domain_capture && k.domains.length > 0 ? _$$Z(ef).filter(e => isValidEmail(e) && !H_(k.domains, e)) : [];
                   e.length > 0 ? function (e) {
                     if (N?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
                       t(showModalHandler({

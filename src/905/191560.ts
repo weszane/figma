@@ -21,7 +21,7 @@ import { UpgradeAction } from '../905/370443';
 import { N as _$$N } from '../905/438674';
 import { k as _$$k3 } from '../905/443820';
 import { trackEventAnalytics } from '../905/449184';
-import { NQ } from '../905/508367';
+import { appendSearchParam } from '../905/508367';
 import { ZD } from '../905/519092';
 import { Button } from '../905/521428';
 import { FlashActions } from '../905/573154';
@@ -49,7 +49,7 @@ import { atomStoreManager, useAtomValueAndSetter, useAtomWithSubscription, Xr } 
 import { getInitialOptions } from '../figma_app/169182';
 import { FResourceCategoryType } from '../figma_app/191312';
 import { _B, Bs, DT, Rm, W8, xI } from '../figma_app/320164';
-import { xf } from '../figma_app/416935';
+import { isValidEmail } from '../figma_app/416935';
 import { _ as _$$_2, S as _$$S } from '../figma_app/490799';
 import { LinkPrimitive } from '../figma_app/496441';
 import { selectOpenFileKey } from '../figma_app/516028';
@@ -581,7 +581,7 @@ function et(e) {
       multiple: 2
     }), jsx(k, {
       loading: e.auth.loading,
-      disabled: !xf(e.auth.email),
+      disabled: !isValidEmail(e.auth.email),
       children: getI18nString('auth.password-reset.reset-password-button')
     }), jsx(_$$k, {
       multiple: 2
@@ -1160,7 +1160,7 @@ function ej(e) {
       type: 'submit',
       className: eS,
       loading: e.auth.loading,
-      disabled: !xf(e.auth.email),
+      disabled: !isValidEmail(e.auth.email),
       children: getI18nString('auth.saml-start.log-in-plain')
     }), jsx(_$$k, {
       multiple: 2
@@ -2063,7 +2063,7 @@ function ts() {
     let t = () => {
       UserAPIHandlers.getUnverified().then(n => {
         if (n?.data?.meta?.email_validated_at) {
-          let e = NQ(i, 'fuid', n?.data?.meta?.id);
+          let e = appendSearchParam(i, 'fuid', n?.data?.meta?.id);
           setTimeout(() => {
             customHistory.redirect(e);
           }, 2e3);

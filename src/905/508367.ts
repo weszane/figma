@@ -1,193 +1,350 @@
-import { ServiceCategories as _$$e } from "../905/165054";
-import { customHistory } from "../905/612521";
-import { KeyCodes } from "../905/63728";
-import { reportError } from "../905/11";
-import { buildFileUrl } from "../905/612685";
-import { OrganizationType } from "../905/833838";
-import { trackEventAnalytics } from "../905/449184";
-import { fakePath, getInitialOptions } from "../figma_app/169182";
-export function $$u10(e, t) {
-  let i;
-  let r;
+import { reportError } from '../905/11'
+import { KeyCodes } from '../905/63728'
+import { ServiceCategories } from '../905/165054'
+import { trackEventAnalytics } from '../905/449184'
+import { customHistory } from '../905/612521'
+import { buildFileUrl } from '../905/612685'
+import { OrganizationType } from '../905/833838'
+import { fakePath, getInitialOptions } from '../figma_app/169182'
+
+// URL manipulation utilities
+export function appendSearchParams(url: string, params: Record<string, string>) {
   try {
-    i = new URL(e, fakePath);
-    r = new URLSearchParams(i.search);
-  } catch (i) {
-    reportError(_$$e.WAYFINDING, i, {
+    const urlObj = new URL(url, fakePath)
+    const searchParams = new URLSearchParams(urlObj.search)
+
+    Object.entries(params).forEach(([key, value]) => {
+      searchParams.set(key, value)
+    })
+
+    const searchString = searchParams.toString()
+    if (searchString) {
+      urlObj.search = `?${searchString}`
+    }
+
+    const finalUrl = urlObj.href
+    return finalUrl.startsWith(fakePath) ? finalUrl.substr(fakePath.length) : finalUrl
+  }
+  catch (error) {
+    reportError(ServiceCategories.WAYFINDING, error, {
       extra: {
-        ...t,
-        url: e
-      }
-    });
-    return i;
+        ...params,
+        url,
+      },
+    })
+    return error
   }
-  Object.entries(t).forEach(e => {
-    let [t, i] = e;
-    r.set(t, i);
-  });
-  let a = r.toString();
-  a && (i.search = `?${a}`);
-  let o = i.href;
-  return o.startsWith(fakePath) ? o.substr(fakePath.length) : o;
 }
-export function $$p6(e, t, i) {
-  let n = new URL(e, fakePath);
-  let r = new URLSearchParams(n.search);
-  r.has(t) || r.set(t, i);
-  let a = r.toString();
-  a && (n.search = `?${a}`);
-  let s = n.href;
-  return s.startsWith(fakePath) ? s.substr(fakePath.length) : s;
+
+export function appendSearchParam(url: string, key: string, value: string) {
+  const urlObj = new URL(url, fakePath)
+  const searchParams = new URLSearchParams(urlObj.search)
+
+  if (!searchParams.has(key)) {
+    searchParams.set(key, value)
+  }
+
+  const searchString = searchParams.toString()
+  if (searchString) {
+    urlObj.search = `?${searchString}`
+  }
+
+  const finalUrl = urlObj.href
+  return finalUrl.startsWith(fakePath) ? finalUrl.substr(fakePath.length) : finalUrl
 }
-export function $$m12() {
-  return customHistory.location.pathname + customHistory.location.search;
+
+export function getCurrentPath() {
+  return customHistory.location.pathname + customHistory.location.search
 }
-export function $$h11(e) {
-  var t = e.url;
-  if (null != t) {
-    if (t.startsWith("mailto:")) {
-      customHistory.unsafeRedirect(t, e.openInNewWindow ? "_blank" : "");
-      return;
+
+interface RedirectOptions {
+  url: string
+  openInNewWindow?: boolean
+}
+
+export function handleExternalRedirect(options: RedirectOptions) {
+  const { url } = options
+  if (url != null) {
+    if (url.startsWith('mailto:')) {
+      customHistory.unsafeRedirect(url, options.openInNewWindow ? '_blank' : '')
+      return
     }
-    t.startsWith("http://") || t.startsWith("https://") || (t = "http://" + t);
-    customHistory.postRedirect(`/exit?url=${encodeURIComponent(t)}`, e.openInNewWindow ? "_blank" : "");
+
+    const finalUrl = url.startsWith('http://') || url.startsWith('https://')
+      ? url
+      : `http://${url}`
+
+    customHistory.postRedirect(
+      `/exit?url=${encodeURIComponent(finalUrl)}`,
+      options.openInNewWindow ? '_blank' : '',
+    )
   }
 }
-export function $$g5(e, t, i, n) {
-  return e ? e !== t : i !== n;
+
+export function compareValues(a: any, b: any, c: any, d: any) {
+  return a ? a !== b : c !== d
 }
-export function $$f7(e, {
-  orgId: t,
-  teamId: i,
-  selectedView: n,
-  user: a
-}) {
-  let s = e.base ?? "file";
-  let c = $$A13(buildFileUrl({
-    ...e,
-    base: s
-  }), a);
-  c = $$y15(c, t, i, n);
-  (function (e, t, i, n = "file") {
-    trackEventAnalytics("file_browser_fresh_external_file_load", {
-      fileKey: e,
-      entryPlanId: t || i,
-      planType: t ? OrganizationType.ORG : OrganizationType.TEAM,
-      urlType: n
-    });
-  })(e.file.key, t, i, s);
-  customHistory.redirect(c);
+
+interface FileNavigationOptions {
+  orgId?: string
+  teamId?: string
+  selectedView?: {
+    view: string
+    folderId?: string
+    tab?: string
+  }
+  user?: {
+    id: string
+  }
 }
-export function $$_0(e, t, i = "file") {
-  trackEventAnalytics("file_browser_fresh_external_file_load", {
-    fileKey: e,
-    entryPlanId: t || "external-teams",
-    urlType: i
-  });
+
+export function navigateToFile(fileConfig: any, options: FileNavigationOptions) {
+  const base = fileConfig.base ?? 'file'
+  let url = appendUserIdToUrl(buildFileUrl({
+    ...fileConfig,
+    base,
+  }), options.user)
+
+  url = appendNavigationContext(url, options.orgId, options.teamId, options.selectedView)
+
+  trackFileLoad(fileConfig.file.key, options.orgId || options.teamId, base)
+  customHistory.redirect(url)
 }
-export function $$A13(e, t) {
-  return t ? $$p6(e, "fuid", t.id) : e;
+
+export function trackFileLoad(fileKey: string, orgId?: string, urlType: string = 'file') {
+  trackEventAnalytics('file_browser_fresh_external_file_load', {
+    fileKey,
+    entryPlanId: orgId || 'external-teams',
+    urlType,
+  })
 }
-export function $$y15(e, t, i, n) {
-  let r = "";
-  let a = t || i;
-  a && (r = $$p6(e, "prev-plan-id", a), r = $$p6(r, "prev-plan-type", t ? OrganizationType.ORG : OrganizationType.TEAM));
-  n && (r = $$p6(r, "prev-selected-view", n.view), r = "folder" === n.view ? $$p6(r, "prev-folder-id", n.folderId) : r, r = "recentsAndSharing" === n.view && n.tab ? $$p6(r, "prev-tab", n.tab) : r);
-  return r;
+
+export function appendUserIdToUrl(url: string, user?: { id: string }) {
+  return user ? appendSearchParam(url, 'fuid', user.id) : url
 }
-export function $$b2(e, t, i) {
-  return window.open(e, t, i);
+
+export function appendNavigationContext(url: string, orgId?: string, teamId?: string, selectedView?: any) {
+  let result = ''
+  const planId = orgId || teamId
+
+  if (planId) {
+    result = appendSearchParam(url, 'prev-plan-id', planId)
+    result = appendSearchParam(result, 'prev-plan-type', orgId ? OrganizationType.ORG : OrganizationType.TEAM)
+  }
+
+  if (selectedView) {
+    result = appendSearchParam(result, 'prev-selected-view', selectedView.view)
+
+    if (selectedView.view === 'folder') {
+      result = appendSearchParam(result, 'prev-folder-id', selectedView.folderId)
+    }
+
+    if (selectedView.view === 'recentsAndSharing' && selectedView.tab) {
+      result = appendSearchParam(result, 'prev-tab', selectedView.tab)
+    }
+  }
+
+  return result || url
 }
-export function $$v1(e) {
+
+export function openWindow(url: string, name?: string, features?: string) {
+  return window.open(url, name, features)
+}
+
+interface Rect {
+  top: number
+  right: number
+  bottom: number
+  left: number
+  width: number
+  height: number
+}
+
+export function createRect(rect?: Partial<Rect>): Rect {
   return {
-    top: e ? e.top : 0,
-    right: e ? e.right : 0,
-    bottom: e ? e.bottom : 0,
-    left: e ? e.left : 0,
-    width: e ? e.width : 0,
-    height: e ? e.height : 0
-  };
-}
-export function $$I14(e, t) {
-  return e && t ? JSON.stringify($$v1(e)) === JSON.stringify($$v1(t)) : e === t;
-}
-export function $$$$E3() {
-  return self !== top;
-}
-export function $$x9() {
-  try {
-    return self !== top && self.location.host !== top?.location.host;
-  } catch (e) {
-    return !0;
+    top: rect?.top ?? 0,
+    right: rect?.right ?? 0,
+    bottom: rect?.bottom ?? 0,
+    left: rect?.left ?? 0,
+    width: rect?.width ?? 0,
+    height: rect?.height ?? 0,
   }
 }
-let $$S8 = {};
-let w = document && document.documentElement;
-function C(e, t) {
-  Object.defineProperty($$S8, e, {
-    enumerable: !0,
-    configurable: !0,
+
+export function compareRects(rect1?: Rect, rect2?: Rect) {
+  return rect1 && rect2
+    ? JSON.stringify(createRect(rect1)) === JSON.stringify(createRect(rect2))
+    : rect1 === rect2
+}
+
+export function isIframe() {
+  return self !== top
+}
+
+export function isCrossDomain() {
+  try {
+    return self !== top && self.location.host !== top?.location.host
+  }
+  catch {
+    return true
+  }
+}
+
+// Browser capability detection
+const browserFeatures = {}
+const documentElement = document && document.documentElement
+
+function defineFeature(name: string, detector: () => any) {
+  Object.defineProperty(browserFeatures, name, {
+    enumerable: true,
+    configurable: true,
     get() {
-      let i = t();
-      Object.defineProperty($$S8, e, {
-        enumerable: !0,
-        value: i
-      });
-      return i;
+      const value = detector()
+      Object.defineProperty(browserFeatures, name, {
+        enumerable: true,
+        value,
+      })
+      return value
+    },
+  })
+}
+
+export function waitForVisibility() {
+  if (document.visibilityState == null || document.visibilityState === 'visible') {
+    return Promise.resolve()
+  }
+
+  return new Promise<void>((resolve) => {
+    function handler() {
+      if (document.visibilityState === 'visible') {
+        document.removeEventListener('visibilitychange', handler)
+        resolve()
+      }
     }
-  });
+    document.addEventListener('visibilitychange', handler)
+  })
 }
-export function $$T4() {
-  return null == document.visibilityState || "visible" === document.visibilityState ? Promise.resolve() : new Promise(e => {
-    document.addEventListener("visibilitychange", function t() {
-      "visible" === document.visibilityState && (document.removeEventListener("visibilitychange", t), e());
-    });
-  });
+
+export function attachUserIdToLinks(container?: HTMLElement) {
+  const userData = getInitialOptions().user_data
+  const userId = userData?.id
+
+  const handler = (event: MouseEvent | KeyboardEvent) => {
+    if (!userId || (event instanceof KeyboardEvent && event.keyCode !== KeyCodes.ENTER)) {
+      return
+    }
+
+    const target = event.target
+    if (!(target instanceof Element)) {
+      return
+    }
+
+    const link = target.closest('a')
+    if (!link || link.hostname !== window.location.hostname) {
+      return
+    }
+
+    const currentUrl = window.location.href
+    const linkBaseUrl = link.href.substr(0, link.href.indexOf('#'))
+    const hashIndex = currentUrl.indexOf('#')
+    const currentBaseUrl = currentUrl.substr(0, hashIndex)
+    const currentHash = currentUrl.substr(hashIndex + 1)
+
+    if (!linkBaseUrl || linkBaseUrl === (currentBaseUrl || currentHash)) {
+      return
+    }
+
+    link.href = appendSearchParam(link.href, 'fuid', userId)
+  }
+
+  const element = container ?? document
+  element.addEventListener('click', handler)
+  element.addEventListener('keydown', handler)
 }
-export function $$k16(e) {
-  let t = getInitialOptions().user_data;
-  let i = t && t.id;
-  let n = function (e) {
-    if (!i || e instanceof KeyboardEvent && e.keyCode !== KeyCodes.ENTER) return;
-    let t = e.target;
-    if (!(t instanceof Element)) return;
-    let n = t.closest("a");
-    if (!n || n.hostname !== window.location.hostname) return;
-    let r = window.location.href;
-    let s = n.href.substr(0, n.href.indexOf("#"));
-    let o = r.indexOf("#");
-    let l = r.substr(0, o);
-    let d = r.substr(o + 1);
-    s && s === (l || d) || (n.href = $$p6(n.href, "fuid", i));
-  };
-  let r = e ?? document;
-  r.addEventListener("click", n);
-  r.addEventListener("keydown", n);
-}
-C("pointerLock", () => !!(w && w.requestPointerLock));
-C("fullscreenChangeEventName", () => "onfullscreenchange" in document ? "fullscreenchange" : "onmozfullscreenchange" in document ? "mozfullscreenchange" : "onwebkitfullscreenchange" in document ? "webkitfullscreenchange" : "onMSFullscreenChange" in document ? "MSFullscreenChange" : "onmsfullscreenchange" in document ? "msfullscreenchange" : null);
-C("fullscreenErrorEventName", () => "onfullscreenerror" in document ? "fullscreenerror" : "onmozfullscreenerror" in document ? "mozfullscreenerror" : "onwebkitfullscreenerror" in document ? "webkitfullscreenerror" : "onMSFullscreenError" in document ? "MSFullscreenError" : "onmsfullscreenerror" in document ? "msfullscreenerror" : null);
-C("requestFullscreenFunc", () => w && (w.requestFullscreen || w.mozRequestFullScreen || w.webkitRequestFullscreen || w.msRequestFullscreen || null));
-C("exitFullscreenFunc", () => {
-  let e = document.exitFullscreen || document.mozExitFullscreen || document.mozCancelFullScreen || document.webkitExitFullscreen || document.msExitFullscreen || null;
-  return e ? e.bind(document) : null;
-});
-C("getFullscreenElement", () => document.fullscreenElement ? () => document.fullscreenElement : document.mozFullScreenElement ? () => document.mozFullScreenElement : document.webkitFullscreenElement ? () => document.webkitFullscreenElement : document.msFullscreenElement ? () => document.msFullscreenElement : () => null);
-C("fullscreen", () => null != $$S8.requestFullscreenFunc && null != $$S8.exitFullscreenFunc && (document.fullscreenEnabled || document.webkitFullscreenEnabled));
-export const $R = $$_0;
-export const E = $$v1;
-export const FJ = $$b2;
-export const GZ = $$$$E3;
-export const Lb = $$T4;
-export const N7 = $$g5;
-export const NQ = $$p6;
-export const QV = $$f7;
-export const R7 = $$S8;
-export const Up = $$x9;
-export const dR = $$u10;
-export const jJ = $$h11;
-export const jM = $$m12;
-export const mc = $$A13;
-export const t7 = $$I14;
-export const vk = $$y15;
-export const wy = $$k16;
+
+// Browser feature detection
+defineFeature('pointerLock', () => !!(documentElement && documentElement.requestPointerLock))
+
+defineFeature('fullscreenChangeEventName', () => {
+  if ('onfullscreenchange' in document)
+    return 'fullscreenchange'
+  if ('onmozfullscreenchange' in document)
+    return 'mozfullscreenchange'
+  if ('onwebkitfullscreenchange' in document)
+    return 'webkitfullscreenchange'
+  if ('onMSFullscreenChange' in document)
+    return 'MSFullscreenChange'
+  if ('onmsfullscreenchange' in document)
+    return 'msfullscreenchange'
+  return null
+})
+
+defineFeature('fullscreenErrorEventName', () => {
+  if ('onfullscreenerror' in document)
+    return 'fullscreenerror'
+  if ('onmozfullscreenerror' in document)
+    return 'mozfullscreenerror'
+  if ('onwebkitfullscreenerror' in document)
+    return 'webkitfullscreenerror'
+  if ('onMSFullscreenError' in document)
+    return 'MSFullscreenError'
+  if ('onmsfullscreenerror' in document)
+    return 'msfullscreenerror'
+  return null
+})
+
+defineFeature('requestFullscreenFunc', () => {
+  return documentElement && (
+    documentElement.requestFullscreen
+    || documentElement.mozRequestFullScreen
+    || documentElement.webkitRequestFullscreen
+    || documentElement.msRequestFullscreen
+    || null
+  )
+})
+
+defineFeature('exitFullscreenFunc', () => {
+  const func = document.exitFullscreen
+    || document.mozExitFullscreen
+    || document.mozCancelFullScreen
+    || document.webkitExitFullscreen
+    || document.msExitFullscreen
+    || null
+  return func ? func.bind(document) : null
+})
+
+defineFeature('getFullscreenElement', () => {
+  if (document.fullscreenElement)
+    return () => document.fullscreenElement
+  if (document.mozFullScreenElement)
+    return () => document.mozFullScreenElement
+  if (document.webkitFullscreenElement)
+    return () => document.webkitFullscreenElement
+  if (document.msFullscreenElement)
+    return () => document.msFullscreenElement
+  return () => null
+})
+
+defineFeature('fullscreen', () => {
+  return browserFeatures.requestFullscreenFunc != null
+    && browserFeatures.exitFullscreenFunc != null
+    && (document.fullscreenEnabled || document.webkitFullscreenEnabled)
+})
+
+export const $R = trackFileLoad
+export const E = createRect
+export const FJ = openWindow
+export const GZ = isIframe
+export const Lb = waitForVisibility
+export const N7 = compareValues
+export const NQ = appendSearchParam
+export const QV = navigateToFile
+export const R7 = browserFeatures
+export const Up = isCrossDomain
+export const dR = appendSearchParams
+export const jJ = handleExternalRedirect
+export const jM = getCurrentPath
+export const mc = appendUserIdToUrl
+export const t7 = compareRects
+export const vk = appendNavigationContext
+export const wy = attachUserIdToLinks

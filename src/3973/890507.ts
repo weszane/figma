@@ -261,7 +261,7 @@ export function trackClientValuesNetworkCall(timer: StatsigTimer, endpoint: stri
  * @param {string} cachedKeys - Cached keys.
  * @param {number} cachedKeyCount - Cached key count.
  */
-export function trackContextSwitchCacheMiss(keys: any[], cachedKeys: string, cachedKeyCount: number): void {
+export function trackContextSwitchCacheMiss(keys: any[], cachedKeys: any, cachedKeyCount: number): void {
   trackEventAnalytics('Statsig Client Context Switch Cache Miss', {
     keys: JSON.stringify(keys),
     cached_keys: cachedKeys,

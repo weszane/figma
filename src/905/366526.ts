@@ -17,7 +17,7 @@ import { W as _$$W } from '../905/25249';
 import { yu as _$$yu, FU } from '../905/26824';
 import { T as _$$T2 } from '../905/27228';
 import { iZ as _$$iZ } from '../905/29425';
-import { pB as _$$pB, pg as _$$pg, sf as _$$sf2, _I, bx, DE, HZ, JF, PY } from '../905/34809';
+import { setDeletedFiles, setDeletedRepos, beginCreateNewFolder, hideMobileNav, stopCreateNewFolder, setFileBrowserLoading, searchResultClicked, setBrowserTileSortView, showMobileNav } from '../905/34809';
 import { P as _$$P3 } from '../905/35881';
 import { p as _$$p } from '../905/36308';
 import { z4 } from '../905/37051';
@@ -161,7 +161,7 @@ import { G as _$$G2, j as _$$j2 } from '../905/496937';
 import { f as _$$f, r as _$$r2 } from '../905/501976';
 import { handleAtomEvent } from '../905/502364';
 import { au as _$$au2, hK as _$$hK, Y9 as _$$Y2, yu } from '../905/504768';
-import { $R, dR as _$$dR, mc as _$$mc, Lb, NQ, wy } from '../905/508367';
+import { trackFileLoad, appendSearchParams, appendUserIdToUrl, waitForVisibility, appendSearchParam, attachUserIdToLinks } from '../905/508367';
 import { TranslationErrors } from '../905/508408';
 import { vv } from '../905/508457';
 import { RecordingProvider } from '../905/511649';
@@ -175,7 +175,7 @@ import { UN } from '../905/525678';
 import { oU as _$$oU, B3, Sr } from '../905/535224';
 import { q as _$$q5 } from '../905/540614';
 import { a as _$$a4, V as _$$V2 } from '../905/541060';
-import { R as _$$R5 } from '../905/542113';
+import { pluginAddFirstRanAtAction } from '../905/542113';
 import { reactTimerGroup } from '../905/542194';
 import { xH } from '../905/546357';
 import { subscribeAndGetStatus } from '../905/553831';
@@ -220,7 +220,7 @@ import { sh as _$$sh, uA as _$$uA, xN, YO } from '../905/672897';
 import { oW as _$$oW } from '../905/675859';
 import { createOptimistCommitAction, createOptimistRevertAction } from '../905/676456';
 import { tD as _$$tD, FO, Hj } from '../905/682977';
-import { cZ as _$$cZ, oM as _$$oM, pF as _$$pF, tU as _$$tU } from '../905/683495';
+import { setEnvironmentFlag, RETRY_COUNT, hasStatsigClientApiKey, isPlanKeyTargetingEnabled } from '../905/683495';
 import { replaceColonWithDash } from '../905/691205';
 import { Hc } from '../905/694658';
 import { e0 as _$$e3 } from '../905/696396';
@@ -244,7 +244,7 @@ import { SvgComponent } from '../905/714743';
 import { H as _$$H6 } from '../905/715533';
 import { l as _$$l6 } from '../905/716947';
 import { I as _$$I2 } from '../905/717213';
-import { P as _$$P2 } from '../905/724705';
+import { IpcStorageHandler } from '../905/724705';
 import { y as _$$y2 } from '../905/725962';
 import { Point } from '../905/736624';
 import { uM as _$$uM, HO } from '../905/738636';
@@ -304,7 +304,7 @@ import { P6, VK, YF, YK } from '../905/880488';
 import { useHasParentOrgId } from '../905/882262';
 import { updateEnvironmentInfo } from '../905/883621';
 import { addAuthedCommunityProfileToHub, clearCommunityProfile, deleteTeam, hydrateFileBrowser, patchOrgs, putCommunityProfile, putOrgs, putTeam, putUser, setCommunityAuthedActiveProfile, setSessionStateAction, setUserInOrgs } from '../905/890368';
-import { iz as _$$iz, oo as _$$oo, r_ as _$$r_ } from '../905/895600';
+import { contextSwitchAtom, prefetchAtom, initializeAtom } from '../905/895600';
 import { p as _$$p4 } from '../905/895920';
 import { t as _$$t } from '../905/897919';
 import { Au, h8, UK } from '../905/898493';
@@ -367,7 +367,7 @@ import { isNotNullish } from '../figma_app/95419';
 import { Ob } from '../figma_app/111825';
 import { getCurrentCodeExtensionPreferences } from '../figma_app/120227';
 import { au as _$$au, cx as _$$cx, hL as _$$hL, Ho as _$$Ho, rT as _$$rT, D6, gA, H1, U6, Vw, w9 } from '../figma_app/124493';
-import { cn as _$$cn } from '../figma_app/141320';
+import { isStudentValidated } from '../figma_app/141320';
 import { dK as _$$dK2, xt } from '../figma_app/149304';
 import { iO as _$$iO } from '../figma_app/149367';
 import { hV as _$$hV2, Dc } from '../figma_app/151766';
@@ -380,7 +380,7 @@ import { buildUploadUrl, defaultUserConfig, getInitialOptions, isGovCluster, isL
 import { StatusType } from '../figma_app/175992';
 import { c0 as _$$c5 } from '../figma_app/176973';
 import { createNoOpValidator } from '../figma_app/181241';
-import { Ni } from '../figma_app/188152';
+import { DropdownEnableState } from '../figma_app/188152';
 import { FAccessLevelType, FBasicPermissionType, FFeatureAdoptionStatusType, FFileType, FOrganizationLevelType, FPaymentHealthStatusType, FPermissionLevelType, FPlanAccessType, FPlanRestrictionType, FProductAccessType, FPublicationStatusType, FResourceCategoryType, FTeamAccessPermissionType, FUserRoleType } from '../figma_app/191312';
 import { getFileIdFromPath, getFileKeyFromSelectedView, getSelectedViewName, getTeamIdFromPath, isRecentsAndSharingView, mapPathToSelectedView, selectedViewToPath } from '../figma_app/193867';
 import { P0 } from '../figma_app/198387';
@@ -421,7 +421,7 @@ import { e9 as _$$e4, h8 as _$$h5, he as _$$he, iy as _$$iy, lV as _$$lV, n0 as 
 import { adminPermissionConfig, setupShadowRead, setupShadowReadWithConfig } from '../figma_app/391338';
 import { ce as _$$ce2, cv as _$$cv, E as _$$E2, hZ } from '../figma_app/401069';
 import { configureAutocomplete, messageWithCallbackManager, messageWithResponseManager, pageLoaded, relatedLinkCreated, relatedLinkRemoved, selectedLayerGuid, selectedPageGuid, sendCssProperties, sendFileName, sendHtmlSkeleton, sendLayers, sendMappingSuggestion, sendText, sendThumbnail } from '../figma_app/415217';
-import { iE as _$$iE, Ng, xf } from '../figma_app/416935';
+import { isWorkDomainType, isSyntheticTesterEmail, isValidEmail } from '../figma_app/416935';
 import { b4 as _$$b5, _V } from '../figma_app/421886';
 import { viewKeys } from '../figma_app/422062';
 import { hg as _$$hg } from '../figma_app/425489';
@@ -478,7 +478,7 @@ import { tG as _$$tG } from '../figma_app/723183';
 import { LP } from '../figma_app/728005';
 import { ZG } from '../figma_app/736948';
 import { F as _$$F9 } from '../figma_app/738753';
-import { ax as _$$ax, d9 as _$$d3, oH as _$$oH, ou as _$$ou, T9 as _$$T, CR, HR } from '../figma_app/740025';
+import { mergeVersions, isCommunityHubView, getStatusOrDefault, isUserAssociatedWithProfile, findProfile, getSelectedViewPluginVersions, mapCommentsAndAuthors } from '../figma_app/740025';
 import { LQ } from '../figma_app/741211';
 import { consumeFullscreenEventState, setPropertiesPanelTab } from '../figma_app/741237';
 import { WJ as _$$WJ } from '../figma_app/745458';
@@ -528,7 +528,7 @@ import { cz as _$$cz, l7 as _$$l2, rg as _$$rg, _l, Dl, q0, qj, RH, Z8 } from '.
 import { hZ as _$$hZ, uo as _$$uo4, yJ as _$$yJ4, bu, IJ, Pg } from '../figma_app/990058';
 import { IK } from '../figma_app/991245';
 import { hZ as _$$hZ3, wc as _$$wc, yH as _$$yH5 } from '../figma_app/996356';
-import { q_ } from '../figma_app/997907';
+import { fileBrowserPageManager } from '../figma_app/997907';
 import { A as _$$A12 } from '../svg/433566';
 import { A as _$$A2 } from '../vendor/3029';
 import tC from '../vendor/3757';
@@ -1041,7 +1041,7 @@ function eJ({
     initialized,
     initCompleted
   } = e;
-  let s = !_$$pF() || initialized;
+  let s = !hasStatsigClientApiKey() || initialized;
   let [o, l] = useState(null);
   let c = useAtomWithSubscription(processSelector)?.initCompletedPromise;
   let u = getSelectedViewType();
@@ -1049,10 +1049,10 @@ function eJ({
   let m = useMemo(() => viewKeys.includes(u), [u]);
   let [h, g] = useState(!1);
   useEffect(() => {
-    o != null && h && (q_.addDependency(eQ, 'resolved'), g(!1));
+    o != null && h && (fileBrowserPageManager.addDependency(eQ, 'resolved'), g(!1));
   }, [o, h]);
   useEffect(() => {
-    c && !initialized && m && (q_.addDependency(eQ, 'pending'), g(!0));
+    c && !initialized && m && (fileBrowserPageManager.addDependency(eQ, 'pending'), g(!0));
   }, [c, initialized, m, g]);
   useEffect(() => {
     s ? l(t) : p && initCompleted ? l(jsx(Fragment, {
@@ -1076,7 +1076,7 @@ function e0(e) {
   } = e;
   useEffect(() => {
     let e = getInitialOptions().cluster_name;
-    getFeatureFlags().statsig_suspend_gremlin && _$$cZ(e);
+    getFeatureFlags().statsig_suspend_gremlin && setEnvironmentFlag(e);
   }, []);
   let l = function () {
     let e = useAtomWithSubscription(processSelector).status;
@@ -1105,7 +1105,7 @@ function e0(e) {
       callingHookLocation
     } = e;
     let s = useAtomWithSubscription(processSelector).status;
-    let o = Xr(_$$r_);
+    let o = Xr(initializeAtom);
     let l = Xr(numericAtom);
     let c = useRef(s !== OperationStatus.NOT_STARTED);
     let u = useCallback(() => {
@@ -1138,7 +1138,7 @@ function e0(e) {
       planKey: _planKey2
     } = e;
     let a = useAtomWithSubscription(processSelector).status;
-    let s = Xr(_$$iz);
+    let s = Xr(contextSwitchAtom);
     let o = Xr(numericAtom);
     let l = useRef(_userId2);
     let c = useRef(_teamId2);
@@ -1189,20 +1189,20 @@ function e1({
     if (!l && (c || u) && reportError(_$$e.APPLICATION_PLATFORM, new Error(`One of the plan keys is not set. This should never happen, and means that the server disagrees with the client on what the plan key should be.
           initialOptionsPlanKey: ${l}
           sidebarOrOpenFileOrgId: ${c}
-          sidebarOrOpenFileTeamId: ${u}`)), l && _$$tU()) {
+          sidebarOrOpenFileTeamId: ${u}`)), l && isPlanKeyTargetingEnabled()) {
       let e = parseOrgParentId(l);
       e?.type === FOrganizationLevelType.ORG && e.parentId ? (a = e.parentId, s = l) : e?.type === FOrganizationLevelType.TEAM && e.parentId && (s = l);
     }
   } else {
     a = getInitialOptions().org_id ?? null;
-    _$$tU() && (a ? s = `organization::${a}` : r && (s = `team::${r}`));
+    isPlanKeyTargetingEnabled() && (a ? s = `organization::${a}` : r && (s = `team::${r}`));
   }
   let p = getSelectedView();
   _$$h(() => {
     trackStatsigPlanKeyBootstrap(getFeatureFlags().statsig_plan_key_bootstrap ?? !1, getInitialOptions().statsig_plan_key ?? 'null', getInitialOptions().org_id ?? 'null', c ?? 'null', u ?? 'null', r ?? 'null', p?.view ?? 'null', s ?? 'null', a ?? 'null', i);
   });
   !function (e, t, i) {
-    let n = Xr(_$$oo);
+    let n = Xr(prefetchAtom);
     let r = function (e, t, i) {
       let n = useSubscription(StatsigTeamsOrderView, {
         currentOrgId: t
@@ -1220,9 +1220,9 @@ function e1({
         if (!a) return r;
         let s = a.filter(e => e.team?.orgId === t && !e.team?.deletedAt && !e.pending).map(e => e.team).filter(isNotNullish);
         let o = n.data.currentUser.fileBrowserPreferences?.orderedTeamIds;
-        sortItemsByOrder(s, o || []).slice(0, _$$oM - 1).forEach(n => {
+        sortItemsByOrder(s, o || []).slice(0, RETRY_COUNT - 1).forEach(n => {
           let a = i;
-          _$$tU() && (t == null || t === '') && (a = `team::${n}`);
+          isPlanKeyTargetingEnabled() && (t == null || t === '') && (a = `team::${n}`);
           r.push({
             userId: e,
             teamId: n,
@@ -1299,7 +1299,7 @@ let t_ = e => t => async function (i) {
     }, {
       forwardToDatadog: !0
     });
-    let n = new _$$P2();
+    let n = new IpcStorageHandler();
     getInitialOptions().user_data || n.register(_$$y, () => {
       e.dispatch(AUTH_COMPLETE());
     });
@@ -1342,7 +1342,7 @@ let t_ = e => t => async function (i) {
         });
         e.dispatch(AUTH_COMPLETE());
         trackEventAnalytics('Sign Up (GTM)', {
-          isWorkEmail: _$$iE(t),
+          isWorkEmail: isWorkDomainType(t),
           sha256_email: await qV(t.meta?.email)
         });
         o && getStorage().set(SIGNED_UP_FROM_OPEN_SESSIONS, !0);
@@ -1388,7 +1388,7 @@ let t_ = e => t => async function (i) {
           });
         }
         if (trackEventAnalytics('Sign Up (GTM)', {
-          isWorkEmail: _$$iE(t),
+          isWorkEmail: isWorkDomainType(t),
           sha256_email: await qV(n.auth.email)
         }), qF(t, n.auth.redirectUrl)) {
           let i = t.meta.id;
@@ -1442,7 +1442,7 @@ let t_ = e => t => async function (i) {
       });
       e.dispatch(AUTH_COMPLETE());
       trackEventAnalytics('Sign Up (GTM)', {
-        isWorkEmail: _$$iE(t),
+        isWorkEmail: isWorkDomainType(t),
         sha256_email: await qV(t.meta?.email)
       });
       r && getStorage().set(SIGNED_UP_FROM_OPEN_SESSIONS, !0);
@@ -1515,7 +1515,7 @@ let t_ = e => t => async function (i) {
     let r = document.getElementById(i.payload.formId);
     let a = _$$t(r);
     a.email = a.email.trim();
-    xf(a.email) && _$$k3.getSaml({
+    isValidEmail(a.email) && _$$k3.getSaml({
       email: a.email
     }).then(({
       data: e
@@ -1629,7 +1629,7 @@ let t_ = e => t => async function (i) {
     if (!AUTH_COMPLETE.matches(i)) return t(i);
     let r = e.getState().auth.fromMsTeams;
     if (i.payload && 'userId' in i.payload && i.payload.userId) {
-      let e = _$$dR(n.auth.redirectUrl, {
+      let e = appendSearchParams(n.auth.redirectUrl, {
         fuid: i.payload.userId
       });
       redirectAfterRedeem(e, r);
@@ -1649,7 +1649,7 @@ let t8 = {
     e.dispatch(_$$uM(t));
   },
   navigateToFile(e, t, i) {
-    $R(e, t);
+    trackFileLoad(e, t);
     customHistory.redirect(i);
   },
   selectView(e, t) {
@@ -1723,8 +1723,8 @@ async function t9(e, t) {
     if (i && (n.currentUserOrgId ?? null) !== (i.parent_org_id ?? null)) {
       t.isNewTabShown && o();
       let e = `${a}${t.params ?? ''}${t.hash ?? ''}`;
-      e = _$$mc(e, n.user);
-      i.editor_type && (e = NQ(e, 'editor_type', i.editor_type));
+      e = appendUserIdToUrl(e, n.user);
+      i.editor_type && (e = appendSearchParam(e, 'editor_type', i.editor_type));
       t8.navigateToFile(i.key, n.currentUserOrgId, e);
       return;
     }
@@ -2039,7 +2039,7 @@ let iz = e => t => function (i) {
 };
 let iK = e => t => function (i) {
   if (selectViewAction.matches(i)) {
-    e.getState().creatingNewFolder && (e.dispatch(hideModal()), e.dispatch(bx()));
+    e.getState().creatingNewFolder && (e.dispatch(hideModal()), e.dispatch(stopCreateNewFolder()));
   } else if (yH.matches(i)) {
     let n = e.getState();
     let r = [];
@@ -2275,14 +2275,14 @@ let na = async e => {
   let r = getRecentUserData();
   let a = null;
   if (user) {
-    if (r.communityProfileId && _$$d3(selectedView)) {
-      let t = _$$T({
+    if (r.communityProfileId && isCommunityHubView(selectedView)) {
+      let t = findProfile({
         authedProfilesById,
         profileId: r.communityProfileId
       });
-      t && _$$ou(t.id, e.getState()) && (a = t);
+      t && isUserAssociatedWithProfile(t.id, e.getState()) && (a = t);
     }
-    a || (a = _$$T({
+    a || (a = findProfile({
       authedProfilesById,
       profileId: user.community_profile_id,
       userId: user.id
@@ -2455,8 +2455,8 @@ let nS = e => t => function (i) {
       if (desktopAPIInstance.isFileBrowserTab() || n.selectedView && n.selectedView.view === 'prototype' || n.openFile && n.openFile?.key !== t) {
         let t = selectedViewToPath(n, r);
         let i = e.getState().user?.id;
-        i && (t = NQ(t, 'fuid', i));
-        r.view === 'fullscreen' && (t = NQ(t, 'editor_type', mapEditorTypeToStringWithObfuscated(r.editorType)));
+        i && (t = appendSearchParam(t, 'fuid', i));
+        r.view === 'fullscreen' && (t = appendSearchParam(t, 'editor_type', mapEditorTypeToStringWithObfuscated(r.editorType)));
         customHistory.unsafeRedirectWithLocationHref(t);
         return;
       }
@@ -2542,7 +2542,7 @@ let nS = e => t => function (i) {
       thumbnail: _$$pf(a)
     });
     return;
-  } else if (hydrateFileBrowser.matches(i) || setSessionStateAction.matches(i) || DE.matches(i)) {
+  } else if (hydrateFileBrowser.matches(i) || setSessionStateAction.matches(i) || setFileBrowserLoading.matches(i)) {
     t(i);
     let n = e.getState();
     let r = n.currentUserOrgId ?? getInitialOptions().org_id;
@@ -4345,7 +4345,7 @@ function a7(e, t) {
     unpublished_at: e.unpublishedAt,
     current_plugin_version_id: e.currentPluginVersionId,
     support_contact: e.supportContact,
-    comments_setting: e.commentsSetting || Ni.ENABLED,
+    comments_setting: e.commentsSetting || DropdownEnableState.ENABLED,
     hide_related_content_by_others: e.hideRelatedContentByOthers,
     publishing_status: e.publishingStatus,
     is_widget: e.isWidget,
@@ -5618,7 +5618,7 @@ sj.registerShim(sO, (e, t) => {
 });
 let sU = !1;
 async function sB(e, t) {
-  if (await Lb(), trackEventAnalytics('file-browser-hydrate', {
+  if (await waitForVisibility(), trackEventAnalytics('file-browser-hydrate', {
     location: 'realtime.tokenExpired'
   }), sU) {
     return;
@@ -6245,7 +6245,7 @@ function on(e = ot, t) {
       }(t) || null;
     }() || e;
   }
-  if (JF.matches(t)) {
+  if (setBrowserTileSortView.matches(t)) {
     let i = t.payload.selectedView;
     if (i.view === 'folder') {
       let n = {
@@ -6336,7 +6336,7 @@ let oo = e => t => function (i) {
     } = n;
     if (view === 'search' && i.payload.view !== 'search' && (e.dispatch(ky()), e.dispatch(_$$qv({
       sortState: s6.parameters.sortState
-    })), e.dispatch(HI({})), e.dispatch(vK({})), e.dispatch(JF({
+    })), e.dispatch(HI({})), e.dispatch(vK({})), e.dispatch(setBrowserTileSortView({
       selectedView: n,
       config: oe
     }))), view !== 'search' && i.payload.view === 'search') {
@@ -6383,7 +6383,7 @@ let oo = e => t => function (i) {
     }), oa = !1, os = !1);
     return;
   }
-  if (HZ.matches(i)) {
+  if (searchResultClicked.matches(i)) {
     trackEventAnalytics('Search Result Clicked', {
       index: i.payload.index
     });
@@ -6969,7 +6969,7 @@ function oH(e) {
         ...t,
         [i.payload.id]: {
           metadata: i.payload.metadata,
-          status: _$$oH(t[i.payload.id])
+          status: getStatusOrDefault(t[i.payload.id])
         }
       };
     }
@@ -7054,7 +7054,7 @@ let oQ = HY({
     if (_$$ig.matches(t)) {
       let {
         authorsById
-      } = HR(t.payload.replies);
+      } = mapCommentsAndAuthors(t.payload.replies);
       return {
         ...e,
         ...authorsById
@@ -7139,7 +7139,7 @@ let oQ = HY({
     if (_$$ig.matches(t)) {
       let {
         commentsById
-      } = HR(t.payload.replies);
+      } = mapCommentsAndAuthors(t.payload.replies);
       return {
         ...e,
         ...commentsById
@@ -7301,7 +7301,7 @@ let oQ = HY({
     } else if (_$$ig.matches(t)) {
       let {
         feed
-      } = HR(t.payload.replies);
+      } = mapCommentsAndAuthors(t.payload.replies);
       return {
         ...e,
         [t.payload.parentId]: {
@@ -7708,7 +7708,7 @@ let lg = Oi((e = {}, t) => {
       })) : n[t.key] = t;
     }
     return n;
-  } else if (_$$pB.matches(t)) {
+  } else if (setDeletedFiles.matches(t)) {
     let i = {
       ...e
     };
@@ -7716,7 +7716,7 @@ let lg = Oi((e = {}, t) => {
       i[e.key] = e;
     });
     return i;
-  } else if (_$$pg.matches(t)) {
+  } else if (setDeletedRepos.matches(t)) {
     let i = {
       ...e
     };
@@ -8655,7 +8655,7 @@ let lq = Oi((e = {}, t) => {
       });
     }
     return i || e;
-  } else if (_$$pg.matches(t)) {
+  } else if (setDeletedRepos.matches(t)) {
     let i = {
       ...e
     };
@@ -9095,10 +9095,10 @@ function dc(e = {}, t) {
   return e;
 }
 function du(e = !1, t) {
-  return !(selectViewAction.matches(t) || showModal.matches(t) || initAction.matches(t)) && (!!PY.matches(t) || !_I.matches(t) && e);
+  return !(selectViewAction.matches(t) || showModal.matches(t) || initAction.matches(t)) && (!!showMobileNav.matches(t) || !hideMobileNav.matches(t) && e);
 }
 function dp(e = null, t) {
-  return _$$sf2.matches(t) ? t.payload : bx.matches(t) ? null : e;
+  return beginCreateNewFolder.matches(t) ? t.payload : stopCreateNewFolder.matches(t) ? null : e;
 }
 function dm(e = {}, t) {
   if (clearActiveFileUsersAction.matches(t)) {
@@ -10567,7 +10567,7 @@ let uD = Oi((e = {}, t) => {
       i[n.id] = I$({
         ...e[n.id],
         ...n,
-        versions: _$$ax(e[n.id], n),
+        versions: mergeVersions(e[n.id], n),
         plugin_publishers: n.plugin_publishers ?? e[n.id]?.plugin_publishers
       });
     }
@@ -10629,7 +10629,7 @@ let uD = Oi((e = {}, t) => {
       });
       return t;
     }
-  } else if (_$$R5.matches(t)) {
+  } else if (pluginAddFirstRanAtAction.matches(t)) {
     let i = {
       ...e
     };
@@ -11486,7 +11486,7 @@ let pg = {
   fileMove: dA,
   fileByKey: lg,
   deletedFilesByKey(e = {}, t) {
-    if (_$$pB.matches(t)) {
+    if (setDeletedFiles.matches(t)) {
       let e = {};
       t.payload.deletedFiles.forEach(t => {
         e[t.key] = t;
@@ -11536,7 +11536,7 @@ let pg = {
     return e;
   },
   deletedReposById(e = {}, t) {
-    if (_$$pg.matches(t)) {
+    if (setDeletedRepos.matches(t)) {
       let e = {};
       t.payload.deletedRepos.forEach(t => {
         e[t.repo.id] = t;
@@ -12144,7 +12144,7 @@ let pg = {
         i[n.id] = {
           ...e[n.id],
           ...n,
-          versions: _$$ax(e[n.id], n)
+          versions: mergeVersions(e[n.id], n)
         };
       }
       return i;
@@ -12284,7 +12284,7 @@ let pg = {
         i[n.id] = I$({
           ...e[n.id],
           ...n,
-          versions: _$$ax(e[n.id], n),
+          versions: mergeVersions(e[n.id], n),
           plugin_publishers: n.plugin_publishers ?? e[n.id]?.plugin_publishers
         });
       }
@@ -12297,7 +12297,7 @@ let pg = {
       for (let e of t.payload) delete i[e.id];
       return i;
     }
-    if (_$$R5.matches(t)) {
+    if (pluginAddFirstRanAtAction.matches(t)) {
       let i = {
         ...e
       };
@@ -13744,7 +13744,7 @@ function m5() {
     Sprig
   } = useSprigWithSampling();
   let t = selectCurrentUser();
-  let i = t && !_$$cn(t);
+  let i = t && !isStudentValidated(t);
   let n = getSelectedViewType() === 'teamUpgrade';
   let r = _$$f4('entered_pro_cart_flow');
   let a = _$$f4('completed_pro_cart_flow');
@@ -14004,7 +14004,7 @@ function hP() {
     manifest_commit_sha_override_blocked_reason,
     user_data
   } = getInitialOptions();
-  let r = Ng(user_data?.email);
+  let r = isSyntheticTesterEmail(user_data?.email);
   let a = !!manifest_commit_sha_override_desired;
   let s = isNotNullish(manifest_commit_sha_override_blocked_reason);
   let o = !isInteractionPathCheck() && !s;
@@ -14324,7 +14324,7 @@ export async function $$hz0(e, t, d = {
         }
       });
     }(b.dispatch, () => b.getState().userFlags);
-    let O = new _$$P2();
+    let O = new IpcStorageHandler();
     if (O.register(_$$D5, e => {
       b.dispatch(_$$id2({
         theme: e
@@ -14379,7 +14379,7 @@ export async function $$hz0(e, t, d = {
       if (e && !isIntegrationContext() && !_$$l()) {
         b.dispatch(setSessionStateAction(e));
         b.dispatch(q0(e));
-        let t = new _$$P2();
+        let t = new IpcStorageHandler();
         isInteractionPathCheck() || t.register(_$$y, e => {
           let t = getInitialOptions().user_data?.id;
           let i = e.users.some(e => e.id === t);
@@ -14522,7 +14522,7 @@ export async function $$hz0(e, t, d = {
               openFile: e.openFile,
               allSavedPlugins: e.installedPluginVersions.plugins,
               localExtensions: e.localPlugins,
-              recentlyUsedPlugins: CR(e),
+              recentlyUsedPlugins: getSelectedViewPluginVersions(e),
               org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
               userCanViewPlugins: canPerformAction(e),
               userCanRunExtensions: canRunExtensions(e),
@@ -14737,7 +14737,7 @@ export async function $$hz0(e, t, d = {
       })();
       GH();
       _$$aZ2(b);
-      wy();
+      attachUserIdToLinks();
       (function (e) {
         let t = getI18nState()?.getPrimaryLocale(!1);
         if (!t || !desktopAPIInstance) return;

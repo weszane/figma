@@ -10,7 +10,7 @@ import { U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz, Zc } from "../905/497882";
 import { EM } from "../905/175462";
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 import { A as _$$A } from "../905/567946";
 import { Dq, _Z, z3 } from "../905/235660";
 var d = l;
@@ -41,7 +41,7 @@ let $$b0 = forwardRef(function ({
   let l = useRef(null);
   let b = _$$w(e, !t);
   let v = U(b, y);
-  let I = Yp(Lz(e, "")).length;
+  let I = trimOrEmpty(Lz(e, "")).length;
   let E = useId();
   let x = `${E}-input`;
   let S = `${E}-character-count`;

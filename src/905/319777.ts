@@ -5,7 +5,7 @@ import { fullscreenValue } from "../figma_app/455680";
 import { Ho, a5 } from "../figma_app/337924";
 import { UM } from "../figma_app/114522";
 import { Ac, c2, uH } from "../figma_app/346422";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 let u = /\b((?:https?):\/\/[^\s/$.?#].[^\s]*)\b/gi;
 let p = Pe.define();
 let m = sU.define({
@@ -68,7 +68,7 @@ let g = [m, Z9.fromClass(class {
       let n = t.posAtCoords(e);
       if (!n || (this.decorations.between(n, n, (e, t, n) => (i = n, !1)), !i)) return !1;
       let r = i.spec.attributes?.["data-href"];
-      r && FJ(r, "_blank", "noopener");
+      r && openWindow(r, "_blank", "noopener");
       t.dispatch({
         selection: {
           anchor: n

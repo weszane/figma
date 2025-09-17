@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { SlidePptxImporterBindings, Fullscreen, FontSourceType } from "../figma_app/763686";
 import { delay } from "../905/236856";
 import { trackEventAnalytics } from "../905/449184";
-import { jm } from "../figma_app/416935";
+import { isFigmaEmail } from "../figma_app/416935";
 import { getInitialOptions } from "../figma_app/169182";
 import { qW } from "../905/623179";
 import { reportError } from "../905/11";
@@ -1760,7 +1760,7 @@ async function eH(e, t, i, n, r, a, s) {
     return new lZ.NoBlob();
   }
   a.fileLength = u.size;
-  let m = jm(getInitialOptions()?.user_data?.email);
+  let m = isFigmaEmail(getInitialOptions()?.user_data?.email);
   ".pdf" === t.extension ? (a.pdf_source_selected = bT(s), trackEventAnalytics("pdf_import_started", a, {
     forwardToDatadog: !0
   }), c = await Lg(e, t.basename, u, s)) : c = ".pptx" === t.extension ? await eP(e, t.basename, u) : await n.convertFile({
@@ -1854,7 +1854,7 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
   }
 }
 export async function $$eY1(e, t, i, n) {
-  let r = jm(getInitialOptions()?.user_data?.email);
+  let r = isFigmaEmail(getInitialOptions()?.user_data?.email);
   let a = await i.convertFile({
     blob: n,
     featureFlags: t,

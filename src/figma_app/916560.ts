@@ -1,76 +1,227 @@
-import { getFeatureFlags } from "../905/601108";
-import { sanitize } from "../vendor/197638";
-import { pasteEmbedThunk } from "../905/994901";
-let s = new Set(["airtable.com", "asana.com", "calendly.com", "chorus.ai", "coda.io", "codepen.io", "docs.google.com", "drive.google.com", "paper.dropbox.com", "figma.com", "framer.com", "github.com", "gmail.com", "atlassian.com", "loom.com", "lottiefiles.com", "lucidchart.com", "maze.co", "office.com", "miro.com", "mode.com", "mural.co", "notion.so", "quip.com", "rollbar.com", "sentry.io", "slab.com", "slideshare.net", "surveymonkey.com", "tableau.com", "trello.com", "typeform.com", "usertesting.com", "whimsical.com", "behance.net", "dribbble.com", "facebook.com", "google.com", "maps.google.com ", "instagram.com", "linkedin.com", "medium.com", "pinterest.com", "soundcloud.com", "spotify.com", "open.spotify.com", "tiktok.com", "twitter.com", "vimeo.com", "youtu.be", "youtube.com"]);
-let o = RegExp("^<iframe[^>]+src\\s*=\\s*(?:(?:\"([^\">]+)\")|(?:'([^'>]+)')).*><\\/iframe>$");
-let l = RegExp("^(?:(?:(?:https?|ftp):)?\\/\\/)(?:\\S+(?::\\S*)?@)?(?:(?!(?:10|127)(?:\\.\\d{1,3}){3})(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z0-9\\u00a1-\\uffff][a-z0-9\\u00a1-\\uffff_-]{0,62})?[a-z0-9\\u00a1-\\uffff]\\.)+(?:[a-z\\u00a1-\\uffff]{2,}\\.?))(?::\\d{2,5})?(?:[/?#]\\S*)?$", "i");
-export function $$d3(e) {
-  let t = new URL(e).hostname;
-  0 === t.indexOf("www.") && (t = t.slice(4));
-  return t;
+import dompurify from 'dompurify'
+import { getFeatureFlags } from '../905/601108'
+import { pasteEmbedThunk } from '../905/994901'
+
+/**
+ * Allowed embed domains for FigJam.
+ * (original: s)
+ */
+const EMBED_DOMAIN_ALLOWLIST = new Set([
+  'airtable.com',
+  'asana.com',
+  'calendly.com',
+  'chorus.ai',
+  'coda.io',
+  'codepen.io',
+  'docs.google.com',
+  'drive.google.com',
+  'paper.dropbox.com',
+  'figma.com',
+  'framer.com',
+  'github.com',
+  'gmail.com',
+  'atlassian.com',
+  'loom.com',
+  'lottiefiles.com',
+  'lucidchart.com',
+  'maze.co',
+  'office.com',
+  'miro.com',
+  'mode.com',
+  'mural.co',
+  'notion.so',
+  'quip.com',
+  'rollbar.com',
+  'sentry.io',
+  'slab.com',
+  'slideshare.net',
+  'surveymonkey.com',
+  'tableau.com',
+  'trello.com',
+  'typeform.com',
+  'usertesting.com',
+  'whimsical.com',
+  'behance.net',
+  'dribbble.com',
+  'facebook.com',
+  'google.com',
+  'maps.google.com ',
+  'instagram.com',
+  'linkedin.com',
+  'medium.com',
+  'pinterest.com',
+  'soundcloud.com',
+  'spotify.com',
+  'open.spotify.com',
+  'tiktok.com',
+  'twitter.com',
+  'vimeo.com',
+  'youtu.be',
+  'youtube.com',
+])
+
+/**
+ * Regex to extract src from iframe HTML.
+ * (original: o)
+ */
+const IFRAME_SRC_REGEX = /^<iframe[^>]+src\s*=\s*(?:"([^">]+)"|'([^'>]+)').*><\/iframe>$/
+
+/**
+ * Regex to validate URLs.
+ * (original: l)
+ */
+const URL_VALIDATION_REGEX = /^(?:(?:https?|ftp):)?\/\/(?:\S+@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[01])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4])|(?:(?:[a-z0-9\u00A1-\uFFFF][\w\u00A1-\uFFFF-]{0,62})?[a-z0-9\u00A1-\uFFFF]\.)+[a-z\u00A1-\uFFFF]{2,}\.?)(?::\d{2,5})?(?:[/?#]\S*)?$/i
+
+/**
+ * Extracts the hostname from a URL string.
+ * @param url - The URL string.
+ * @returns The hostname without 'www.' prefix.
+ * (original: $$d3)
+ */
+export function extractHostname(url: string): string {
+  let hostname = new URL(url).hostname
+  if (hostname.startsWith('www.')) {
+    hostname = hostname.slice(4)
+  }
+  return hostname
 }
-export function $$c2(e) {
-  if (!getFeatureFlags().figjam_embeds_allowlist) return !0;
+
+/**
+ * Checks if a URL is allowed for embedding based on feature flags and allowlist.
+ * @param url - The URL string.
+ * @returns True if allowed, false otherwise.
+ * (original: $$c2)
+ */
+export function isEmbedAllowed(url: string): boolean {
+  if (!getFeatureFlags().figjam_embeds_allowlist) {
+    return true
+  }
   try {
-    let t = $$d3(e);
-    return s.has(t);
-  } catch (e) {
-    console.error("Invalid URL in embed");
-    return !1;
+    const hostname = extractHostname(url)
+    return EMBED_DOMAIN_ALLOWLIST.has(hostname)
+  }
+  catch {
+    console.error('Invalid URL in embed')
+    return false
   }
 }
-export function $$u1(e) {
-  if (!e.startsWith("<iframe")) return "";
-  let t = sanitize(e, {
-    ALLOWED_TAGS: ["iframe"],
-    ALLOWED_ATTR: ["src"]
-  });
-  let r = o.exec(t);
-  return r && r.length > 1 ? r[1] : "";
-}
-export function $$p4(e) {
-  let t = $$u1(e);
-  let r = t || e;
-  let n = r.startsWith("http://") || r.startsWith("https://") ? r : `https://${r}`;
-  return l.test(n) ? {
-    isFromIFrame: !!t,
-    url: n
-  } : null;
-}
-export function $$_0(e, t, r) {
-  let n = $$p4(t.trim());
-  return n ? (e(pasteEmbedThunk({
-    clipboardText: t,
-    url: n.url,
-    isTextIframe: n.isFromIFrame,
-    entrypoint: r
-  })), {
-    valid: !0
-  }) : {
-    valid: !1,
-    reason: "Text was not a valid URL or IFrame"
-  };
-}
-export function $$h5(e = "", t) {
-  if (!e.startsWith("<meta charset='utf-8'><div><a href='https://app.asana.com")) return null;
-  let r = sanitize(e, {
-    ALLOWED_TAGS: ["a"],
-    ALLOWED_ATTR: ["href"]
-  }).split("<a");
-  let n = /href="(https:\/\/app\.asana\.com[^"]*)"/;
-  let a = [];
-  for (let e of r) {
-    let t = e.match(n);
-    t && t[1] && a.push({
-      url: t[1],
-      isFromIFrame: !1
-    });
+
+/**
+ * Sanitizes and extracts the src attribute from an iframe HTML string.
+ * @param html - The HTML string.
+ * @returns The src URL or empty string.
+ * (original: $$u1)
+ */
+export function extractIFrameSrc(html: string): string {
+  if (!html.startsWith('<iframe')) {
+    return ''
   }
-  return a.length !== t.split("\n").length ? null : a;
+  const sanitized = dompurify.sanitize(html, {
+    ALLOWED_TAGS: ['iframe'],
+    ALLOWED_ATTR: ['src'],
+  })
+  const match = IFRAME_SRC_REGEX.exec(sanitized)
+  return match && match.length > 1 ? match[1] : ''
 }
-export const CV = $$_0;
-export const Cg = $$u1;
-export const Cy = $$c2;
-export const Js = $$d3;
-export const KJ = $$p4;
-export const LU = $$h5;
+
+/**
+ * Validates and parses a URL or iframe HTML string.
+ * @param input - The input string (URL or iframe HTML).
+ * @returns EmbedInfo object if valid, null otherwise.
+ * (original: $$p4)
+ */
+export interface EmbedInfo {
+  isFromIFrame: boolean
+  url: string
+}
+
+export function parseEmbedInput(input: string): EmbedInfo | null {
+  const iframeSrc = extractIFrameSrc(input)
+  const urlCandidate = iframeSrc || input
+  const normalizedUrl = urlCandidate.startsWith('http://') || urlCandidate.startsWith('https://')
+    ? urlCandidate
+    : `https://${urlCandidate}`
+  if (URL_VALIDATION_REGEX.test(normalizedUrl)) {
+    return {
+      isFromIFrame: Boolean(iframeSrc),
+      url: normalizedUrl,
+    }
+  }
+  return null
+}
+
+/**
+ * Handles embed paste logic and returns validation result.
+ * @param dispatch - Dispatch function.
+ * @param clipboardText - Clipboard text.
+ * @param entrypoint - Entrypoint string.
+ * @returns Validation result object.
+ * (original: $$_0)
+ */
+export interface EmbedValidationResult {
+  valid: boolean
+  reason?: string
+}
+
+export function handleEmbedPaste(
+  dispatch: (action: any) => void,
+  clipboardText: string,
+  entrypoint: string,
+): EmbedValidationResult {
+  const embedInfo = parseEmbedInput(clipboardText.trim())
+  if (embedInfo) {
+    dispatch(
+      pasteEmbedThunk({
+        clipboardText,
+        url: embedInfo.url,
+        isTextIframe: embedInfo.isFromIFrame,
+        entrypoint,
+      }),
+    )
+    return { valid: true }
+  }
+  return {
+    valid: false,
+    reason: 'Text was not a valid URL or IFrame',
+  }
+}
+
+/**
+ * Parses Asana embed HTML and returns array of embed info.
+ * @param html - The HTML string.
+ * @param originalText - The original clipboard text.
+ * @returns Array of EmbedInfo or null if mismatch.
+ * (original: $$h5)
+ */
+export function parseAsanaEmbed(
+  html: string = '',
+  originalText: string,
+): EmbedInfo[] | null {
+  if (!html.startsWith('<meta charset=\'utf-8\'><div><a href=\'https://app.asana.com')) {
+    return null
+  }
+  const sanitized = dompurify.sanitize(html, {
+    ALLOWED_TAGS: ['a'],
+    ALLOWED_ATTR: ['href'],
+  }).split('<a')
+  const hrefRegex = /href="(https:\/\/app\.asana\.com[^"]*)"/
+  const embeds: EmbedInfo[] = []
+  for (const part of sanitized) {
+    const match = part.match(hrefRegex)
+    if (match && match[1]) {
+      embeds.push({
+        url: match[1],
+        isFromIFrame: false,
+      })
+    }
+  }
+  return embeds.length !== originalText.split('\n').length ? null : embeds
+}
+
+// Exported names refactored for clarity and traceability
+export const CV = handleEmbedPaste
+export const Cg = extractIFrameSrc
+export const Cy = isEmbedAllowed
+export const Js = extractHostname
+export const KJ = parseEmbedInput
+export const LU = parseAsanaEmbed

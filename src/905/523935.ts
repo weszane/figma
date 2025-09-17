@@ -6,7 +6,7 @@ import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { NQ } from "../905/508367";
+import { appendSearchParam } from "../905/508367";
 import { getInitialOptions } from "../figma_app/169182";
 import { generateRecordingKey } from "../figma_app/878298";
 import { useSprigWithSampling } from "../905/99656";
@@ -208,7 +208,7 @@ export function $$$$j0(e) {
             throwTypeError(e, "Unhandled asset type");
         }
       }(e);
-      return i && t[i]?.url || (e.thumbnail_url && getInitialOptions().user_data?.id ? NQ(e.thumbnail_url, "fuid", getInitialOptions().user_data.id) : e.thumbnail_url || "");
+      return i && t[i]?.url || (e.thumbnail_url && getInitialOptions().user_data?.id ? appendSearchParam(e.thumbnail_url, "fuid", getInitialOptions().user_data.id) : e.thumbnail_url || "");
     }(e.resource, j.local.thumbnails),
     onPointerDownCallback: () => {
       _$$r();

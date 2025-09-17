@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import o from "classnames";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { SecureLink } from "../figma_app/637027";
 import { T as _$$T } from "../figma_app/257703";
@@ -111,7 +111,7 @@ export function $$U3({
     isSubmitting: j,
     submit: e => {
       if (T.length >= 1) {
-        let i = um(e).filter(e => xf(e) && !H_(T, e));
+        let i = um(e).filter(e => isValidEmail(e) && !H_(T, e));
         if ((i = [...new Set(i)]).length > 0) {
           p(showModalHandler({
             type: C,
@@ -128,8 +128,8 @@ export function $$U3({
       D(e);
     },
     onValidateToken: e => {
-      let i = xf(e) && H_(T, e) && G;
-      let t = xf(e) && P;
+      let i = isValidEmail(e) && H_(T, e) && G;
+      let t = isValidEmail(e) && P;
       return {
         state: i || t ? _$$d.OK : _$$d.ERROR,
         content: e

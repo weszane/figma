@@ -1,8 +1,8 @@
 import n from "../vendor/879378";
-import { P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { W6 } from "../905/327522";
 var r = n;
-let $$o5 = new P();
+let $$o5 = new IpcStorageHandler();
 let $$l2 = "restored-autosave";
 let $$d0 = "Autosave Commit Changes";
 let $$c4 = "autosave-new-files-update";

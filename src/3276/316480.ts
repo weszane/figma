@@ -10,11 +10,11 @@ import { op, qr } from "../figma_app/844435";
 import { eE } from "../figma_app/106207";
 import { gp } from "../figma_app/973927";
 import { g5 } from "../figma_app/178752";
-import { s as _$$s } from "../905/506024";
+import { getUserOrAnonymousId } from "../905/506024";
 import { liveStoreInstance, IT } from "../905/713695";
 import { getPluginVersion } from "../figma_app/300692";
 import { Ph, T0 } from "../figma_app/455620";
-import { X2 } from "../figma_app/190980";
+import { getTemplateId } from "../figma_app/190980";
 import { n as _$$n } from "../905/79930";
 import { FDocumentType } from "../905/862883";
 import { mk } from "../figma_app/920333";
@@ -46,10 +46,10 @@ export function $$D1() {
       let t = useMappedEditorTypeA();
       return useMemo(() => t ? e.figjam.map(e => e.id) : [], [t, e]);
     }();
-    let c = useSelector(_$$s);
+    let c = useSelector(getUserOrAnonymousId);
     let u = useSelector(e => e.recentlyUsed);
     return useMemo(() => function (e, t, n, o, a, i, s, l) {
-      let c = t.templates.figjam.reduce((e, t) => (e[X2(t)] = t, e), {});
+      let c = t.templates.figjam.reduce((e, t) => (e[getTemplateId(t)] = t, e), {});
       let u = {
         ...d()(t.libraryItems.figjam, "key"),
         ...d()(t.plugins.figjam, "id"),

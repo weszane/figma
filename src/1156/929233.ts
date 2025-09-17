@@ -1,4 +1,4 @@
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
@@ -24,7 +24,7 @@ export function $$u2() {
     button: {
       text: getI18nString("figmake.supabase.errors.project_creation_unsuccessful.need_to_pause.button"),
       action: () => {
-        FJ(v7, "_blank");
+        openWindow(v7, "_blank");
       }
     }
   }));

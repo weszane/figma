@@ -215,7 +215,7 @@ import { MR, qU, OO } from "../figma_app/913518";
 import { s2 as _$$s5, E$, WB as _$$WB, BC, Nr, yl } from "../figma_app/300024";
 import { L as _$$L } from "../905/453756";
 import { KX } from "../figma_app/89917";
-import { HS } from "../figma_app/416935";
+import { isNotAllowedEmail } from "../figma_app/416935";
 import { isOssSalesExperimentValueMatch, markOssSalesExperimentChecked } from "../figma_app/323326";
 import { AutoLayout } from "../905/470281";
 import { lk } from "../figma_app/109538";
@@ -7131,7 +7131,7 @@ function sa({
   }, [a, o]);
   let d = getInitialOptions().user_data;
   let c = d?.email;
-  let u = HS(c);
+  let u = isNotAllowedEmail(c);
   _$$h2(() => {
     l.show({
       canShow: (e, i) => !!(u && isOssSalesExperimentValueMatch(t) && !e && i.team?.hasPermission)

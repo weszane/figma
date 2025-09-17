@@ -6,7 +6,7 @@ import { useModalManager } from "../905/437088";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody } from "../figma_app/272243";
 import { trackEventAnalytics } from "../905/449184";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { KeyCodes } from "../905/63728";
 import { useWebLoggerTimerEffect } from "../905/485103";
 import { LoadingOverlay } from "../figma_app/858013";
@@ -293,7 +293,7 @@ export function $$ee0(e) {
             onInviteLevelChange: setInviteLevel,
             onSubmit: e => {
               if (er && er.domain_capture && en && en.domains.length > 0) {
-                let t = _$$Z(e).filter(e => xf(e) && !H_(en.domains, e));
+                let t = _$$Z(e).filter(e => isValidEmail(e) && !H_(en.domains, e));
                 if (er?.invite_whitelist_guest_invite_setting == null && t.length > 0) {
                   $(showModalHandler({
                     type: _$$F,

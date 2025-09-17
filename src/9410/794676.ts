@@ -64,7 +64,7 @@ import { YG, Wg } from "../905/921418";
 import { liveStoreInstance } from "../905/713695";
 import { x as _$$x2 } from "../figma_app/612938";
 import { a4 } from "../figma_app/457074";
-import { vY, S7, a7, YN, xk, SO, JG } from "../figma_app/190980";
+import { RECENT_PLUGINS_FIGMA_DESIGN, RECENT_PLUGINS_FIGJAM, RECENT_PLUGINS_SLIDES, RECENT_WIDGETS_FIGMA_DESIGN, RECENT_WIDGETS_FIGJAM, RECENT_FACE_STAMPS_FIGJAM, RECENT_WHITEBOARD_TOOLS_FIGJAM } from "../figma_app/190980";
 import { DW } from "../figma_app/578011";
 import { FEditorType, mapEditorTypeToStringWithObfuscated } from "../figma_app/53721";
 import { lM } from "../905/574958";
@@ -1130,25 +1130,25 @@ export function $$t80({
     }
     function e(e) {
       switch (e.key) {
-        case vY:
-        case S7:
-        case a7:
+        case RECENT_PLUGINS_FIGMA_DESIGN:
+        case RECENT_PLUGINS_FIGJAM:
+        case RECENT_PLUGINS_SLIDES:
           i(HQ({
             storeInRecentsKey: Y
           }));
           break;
-        case YN:
-        case xk:
+        case RECENT_WIDGETS_FIGMA_DESIGN:
+        case RECENT_WIDGETS_FIGJAM:
           i(aF({
             storeInRecentsKey: Y
           }));
           break;
-        case SO:
+        case RECENT_FACE_STAMPS_FIGJAM:
           i(gr({
             storeInRecentsKey: Y
           }));
           break;
-        case JG:
+        case RECENT_WHITEBOARD_TOOLS_FIGJAM:
           i(vZ({
             storeInRecentsKey: Y
           }));

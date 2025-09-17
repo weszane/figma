@@ -18,7 +18,7 @@ import { r as _$$r } from "../figma_app/896657";
 import { filePutAction } from "../figma_app/78808";
 import { hideModal } from "../905/156213";
 import { _z, ky } from "../905/977218";
-import { WX } from "../figma_app/350203";
+import { PublishModalState } from "../figma_app/350203";
 import { E$, LR, Im, CI, Dy } from "../figma_app/844435";
 import { Sz } from "../figma_app/12535";
 import { ud } from "../905/862913";
@@ -244,7 +244,7 @@ function q(e) {
       className: g8,
       dispatch: () => {
         trackEventAnalytics("community_publish_modal", {
-          step: WX.CLOSED
+          step: PublishModalState.CLOSED
         });
         t(hideModal());
       }
@@ -303,7 +303,7 @@ let $$Q0 = registerModal(function (e) {
     eo && r(ky());
     trackEventAnalytics("community_publish_modal", {
       user: t.id,
-      step: WX.CLOSED
+      step: PublishModalState.CLOSED
     });
     r(hideModal());
   };
@@ -389,7 +389,7 @@ let $$Q0 = registerModal(function (e) {
           onClick: () => {
             if (ea === gr.FILES) ee && (trackEventAnalytics("community_publish_modal", {
               user: t.id,
-              step: WX.DETAILS,
+              step: PublishModalState.DETAILS,
               resourceType: HubTypeEnum.HUB_FILE,
               fileKey: ee.key,
               fileName: ee.name
@@ -404,7 +404,7 @@ let $$Q0 = registerModal(function (e) {
               let n = e.localFileId;
               trackEventAnalytics("community_publish_modal", {
                 user: t.id,
-                step: WX.DETAILS,
+                step: PublishModalState.DETAILS,
                 resourceType: ea === gr.PLUGINS ? HubTypeEnum.PLUGIN : HubTypeEnum.WIDGET,
                 pluginId: e.plugin_id,
                 pluginName: e.name,

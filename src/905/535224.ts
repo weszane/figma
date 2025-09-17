@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { Up, GZ, dR } from "../905/508367";
+import { isCrossDomain, isIframe, appendSearchParams } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
@@ -80,10 +80,10 @@ let g = h && h.id;
 export var $$f0 = (e => (e.DESKTOP_INTERSTITIAL = "desktop_interstitial", e.OOM_MODAL = "oom_modal", e.OPEN_IN_DESKTOP_MODAL = "open_in_desktop_modal", e.UNIVERSAL_POSTING_MODAL = "universal_posting_modal", e.COMMUNITY_INTERSTITIAL = "community_interstitial", e.FULLSCREEN_MENU = "fullscreen_menu", e))($$f0 || {});
 let _ = () => BrowserInfo.mac && !BrowserInfo.isIpad || BrowserInfo.windows;
 export function $$A4(e, t) {
-  return Up() || !_() ? Promise.reject() : c(44950, 44960, `/figma${e}`, t);
+  return isCrossDomain() || !_() ? Promise.reject() : c(44950, 44960, `/figma${e}`, t);
 }
 export function $$y3(e, t, i) {
-  return GZ() || !_() ? Promise.reject() : u(44950, 44960, `/figma${e}`, t, i);
+  return isIframe() || !_() ? Promise.reject() : u(44950, 44960, `/figma${e}`, t, i);
 }
 export async function $$b1(e) {
   if (desktopAPIInstance) return !1;
@@ -105,7 +105,7 @@ export async function $$v6(e, t) {
         fuid: g
       };
       e === location.href && i && (t.editor_type = i);
-      e = dR(e, t);
+      e = appendSearchParams(e, t);
     }
     let {
       data

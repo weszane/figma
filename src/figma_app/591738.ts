@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { atom, useAtomWithSubscription } from "../figma_app/27355";
 import { desktopAPIInstance } from "../figma_app/876459";
-import { jm } from "../figma_app/416935";
+import { isFigmaEmail } from "../figma_app/416935";
 import { isDevEnvironment } from "../figma_app/169182";
 import { isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { selectExperimentConfigHook } from "../figma_app/594947";
@@ -23,7 +23,7 @@ export function $$f10({
   file: t,
   numPinnedCommentThreads: r
 } = {}) {
-  return !!$$g3() && !!e && !!t && t.editorType === FFileType.DESIGN && (!!r && r > 0 || !!(isDevEnvironment() && jm(e.email)) || !!t.team && !t.parentOrgId);
+  return !!$$g3() && !!e && !!t && t.editorType === FFileType.DESIGN && (!!r && r > 0 || !!(isDevEnvironment() && isFigmaEmail(e.email)) || !!t.team && !t.parentOrgId);
 }
 export function $$E7() {
   let {

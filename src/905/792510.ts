@@ -5,7 +5,7 @@ import { trackEventAnalytics } from "../905/449184";
 import { renderI18nText, getI18nString } from "../905/303541";
 import { A as _$$A } from "../905/776343";
 import { copyToClipboard } from "../figma_app/471982";
-import { s0 } from "../figma_app/350203";
+import { HubAction } from "../figma_app/350203";
 function l() {
   return jsx("svg", {
     className: "svg",
@@ -68,7 +68,7 @@ export function $$h0({
           A(!0);
           copyToClipboard(h);
           setTimeout(() => A(!1), 3e3);
-          y(s0.SHARE_LINK);
+          y(HubAction.SHARE_LINK);
         },
         children: [jsx(p, {
           show: _,
@@ -81,13 +81,13 @@ export function $$h0({
           publisherString: e
         }))}`,
         target: "_blank",
-        onClick: () => y(s0.SHARE_TWITTER),
+        onClick: () => y(HubAction.SHARE_TWITTER),
         children: jsx(_$$A, {})
       }), jsx("a", {
         className: m,
         href: `https://www.facebook.com/sharer/sharer.php?u=${h}`,
         target: "_blank",
-        onClick: () => y(s0.SHARE_FACEBOOK),
+        onClick: () => y(HubAction.SHARE_FACEBOOK),
         children: jsx(l, {})
       })]
     })]

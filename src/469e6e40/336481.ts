@@ -2,7 +2,7 @@ import _require from "react-redux";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { s as _$$s } from "../905/403855";
-import { zN } from "../figma_app/416935";
+import { getEmailDomain } from "../figma_app/416935";
 import { toTitleCase } from "../figma_app/930338";
 import { SvgComponent } from "../905/714743";
 import { getI18nString } from "../905/303541";
@@ -13,7 +13,7 @@ import { KindEnum } from "../905/129884";
 import { hz, cG } from "../469e6e40/123707";
 if (_require, 443 == require.j) {}
 export function $$g0(e) {
-  return toTitleCase(zN(e.user?.email ?? "") ?? "");
+  return toTitleCase(getEmailDomain(e.user?.email ?? "") ?? "");
 }
 export function $$h2(e) {
   let {

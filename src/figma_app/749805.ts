@@ -1,9 +1,9 @@
 import { getFeatureFlags } from "../905/601108";
 import i from "../vendor/879378";
-import { GZ } from "../905/508367";
+import { isIframe } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { P as _$$P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { XHR } from "../905/910117";
 import { U2 } from "../figma_app/545293";
 import { hideSpecificModal, showModalHandler } from "../905/156213";
@@ -24,12 +24,12 @@ function A(e, t, r, i, l, A) {
   if (isInFigmaMobile() || isMirrorOrMobileNoTripleTaps() || BrowserInfo.isIpadNative) return;
   let x = `last-active-at-${e.email}`;
   let N = "idle_timeout_last_active_at_change";
-  let C = GZ();
+  let C = isIframe();
   let w = C && "embed" === l;
   let O = C && "integration" === l;
   let R = .05 * t;
   let L = Math.min(60, t / 2);
-  let P = new _$$P();
+  let P = new IpcStorageHandler();
   let D = e => {
     localStorage.setItem(x, e.toString());
     P.sendToAllTabs(N);

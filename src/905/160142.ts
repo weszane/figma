@@ -1,7 +1,7 @@
 import { n as _$$n } from "../905/347702";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { PrototypingTsApi } from "../figma_app/763686";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { BrowserInfo } from "../figma_app/778880";
 import { reportNullOrUndefined } from "../905/11";
 import { XHR } from "../905/910117";
@@ -93,11 +93,11 @@ let $$y0 = _$$n(createOptimistThunk(async (e, t, {
   }
   setTimeout(() => {
     let e = null;
-    if (null != (e = BrowserInfo.safari && +BrowserInfo.version >= 12 ? FJ(F, M(), "menubar=yes") : FJ(F, M())) && (e.focus(), BrowserInfo.chrome)) try {
+    if (null != (e = BrowserInfo.safari && +BrowserInfo.version >= 12 ? openWindow(F, M(), "menubar=yes") : openWindow(F, M())) && (e.focus(), BrowserInfo.chrome)) try {
       e.location === e.href && console.log(" ");
     } catch (t) {
       b++;
-      e = FJ(F, M());
+      e = openWindow(F, M());
     }
   });
 }));

@@ -12,7 +12,7 @@ import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import f from "classnames";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { oW } from "../905/675859";
 import { Qp, JR, Wi } from "../figma_app/162641";
 import { A as _$$A } from "../905/615098";
@@ -530,7 +530,7 @@ export function $$er3({
 }) {
   return e ? jsx(ButtonWide, {
     variant: "secondary",
-    onClick: () => FJ($$G0, "_blank"),
+    onClick: () => openWindow($$G0, "_blank"),
     children: renderI18nText("cooper.templates.show_me_how")
   }) : jsx(_$$N.Button, {
     href: $$G0,

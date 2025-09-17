@@ -3,7 +3,7 @@ import { useEffect, useMemo, useCallback, Component } from "react";
 import { connect, useDispatch } from "react-redux";
 import { isMobileUA, BrowserInfo } from "../figma_app/778880";
 import { getI18nString } from "../905/303541";
-import { d9 } from "../figma_app/740025";
+import { isCommunityHubView } from "../figma_app/740025";
 import { W } from "../figma_app/4979";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { analyticsEventManager } from "../905/449184";
@@ -179,6 +179,6 @@ class x extends Component {
 }
 export let $$S0 = connect(e => ({
   searchScope: e.search.parameters.searchScope,
-  isCommunity: d9(e.selectedView)
+  isCommunity: isCommunityHubView(e.selectedView)
 }))(x);
 export const o = $$S0;

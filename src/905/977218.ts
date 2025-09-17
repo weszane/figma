@@ -9,7 +9,7 @@ import { resolveMessage } from "../905/231762";
 import { W0 as _$$W, Dy as _$$Dy, ky as _$$ky, NR as _$$NR, Pj as _$$Pj, r0 as _$$r, Je as _$$Je, pY as _$$pY } from "../figma_app/925970";
 import { createOptimistThunk } from "../905/350402";
 import { trackFileBrowserPlanFilterSelected } from "../figma_app/314264";
-import { zU } from "../figma_app/740025";
+import { isCommunitySearchView } from "../figma_app/740025";
 import { setupLoadingStateHandler } from "../905/696711";
 import { DEFAULT_PAGE_SIZE, Lk, Lr, PublicModelType, SortingCriteria, SearchTypeMode, SpaceAccessType } from "../figma_app/162807";
 import { vj as _$$vj, Ei } from "../905/574958";
@@ -37,7 +37,7 @@ let $$b22 = createOptimistThunk(async (e, t) => {
   let r = e.getState();
   let a = r.user?.id;
   let s = r.currentUserOrgId;
-  let o = zU(r.selectedView);
+  let o = isCommunitySearchView(r.selectedView);
   if (!a || o) return;
   let d = previousSearches.filter(e => e.query !== searchQuery);
   let c = {

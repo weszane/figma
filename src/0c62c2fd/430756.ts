@@ -7,7 +7,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { N as _$$N } from "../905/438674";
 import { U as _$$U } from "../0c62c2fd/547944";
 import { getFeatureFlags } from "../905/601108";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { useSubscription } from "../figma_app/288654";
 import { BigTextInputForwardRef, BUTTON_INTERNAL_CONST_Q33 } from "../figma_app/637027";
 import { _ as _$$_, S as _$$S } from "../figma_app/490799";
@@ -15,7 +15,7 @@ import { LoadingOverlay } from "../figma_app/858013";
 import { s as _$$s } from "../cssbuilder/589278";
 import { $z } from "../figma_app/617427";
 import { renderI18nText, getI18nString } from "../905/303541";
-import { bx } from "../905/34809";
+import { stopCreateNewFolder } from "../905/34809";
 import { vt } from "../figma_app/598926";
 import { popModalStack, showModalHandler } from "../905/156213";
 import { postUserFlag } from "../905/985254";
@@ -160,14 +160,14 @@ export function $$er0(e) {
     eb(ef());
   }, [ep, ef]);
   let ew = () => {
-    1 === G ? V(0) : (t(popModalStack()), t(bx()));
+    1 === G ? V(0) : (t(popModalStack()), t(stopCreateNewFolder()));
   };
   let ej = e => t9(e, ed, e_);
   let eT = e => {
     let t = getFeatureFlags().folder_creation_restricted_guests_err_ui && ed?.invite_whitelist_guest_invite_setting != null;
     return yI(e, K.usersByEmail[e] || e, ed, e_, er.email, t ? getI18nString("project_creation.restricted_against_adding_external_users") : null);
   };
-  let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => xf(e) && !H_(e_.domains, e)) : [];
+  let eE = () => ed && ed.domain_capture && e_.domains.length > 0 ? _$$Z(J).filter(e => isValidEmail(e) && !H_(e_.domains, e)) : [];
   let eI = e => {
     if (ed && ed?.invite_whitelist_guest_invite_setting == null && e.length > 0) {
       t(showModalHandler({

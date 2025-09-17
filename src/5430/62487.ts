@@ -11,7 +11,7 @@ import { ResourceTypes } from "../905/178090";
 import { mapEditorToType } from "../figma_app/277543";
 import { selectEditorResource } from "../figma_app/773663";
 import { w2, eK } from "../905/977218";
-import { M5 } from "../figma_app/350203";
+import { HubEventType } from "../figma_app/350203";
 import { Ei } from "../905/574958";
 import { $W } from "../905/144933";
 import { Jm } from "../figma_app/387599";
@@ -124,7 +124,7 @@ let R = async (e, t, r, s) => {
     I(s, e);
   } finally {
     let s = i.stop();
-    trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
+    trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
       elapsedMs: s,
       mixed: a?.resourcesResponse?.data.meta.results.length,
       profiles: a?.profilesResponse?.data.meta.results.length,
@@ -222,7 +222,7 @@ export function $$A0(e) {
         [ResourceTypes.SearchResourceTypes.FILES]: g,
         [ResourceTypes.SearchResourceTypes.PLUGINS]: w,
         [ResourceTypes.SearchResourceTypes.WIDGETS]: T
-      })), d(!1), trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
+      })), d(!1), trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query: e.query,
         mixed: o.resources.length,
         entry_point: "community",
@@ -293,7 +293,7 @@ export function $$P2(e, t) {
         files: !0,
         plugins: !0,
         widgets: !0
-      }), trackEventAnalytics(M5.SEARCH_QUERY_RESULT, {
+      }), trackEventAnalytics(HubEventType.SEARCH_QUERY_RESULT, {
         query: e.query,
         scope: mk.RESOURCE_HUB,
         entry_point: mk.RESOURCE_HUB,

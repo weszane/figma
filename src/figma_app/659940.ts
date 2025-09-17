@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { dR } from "../905/508367";
+import { appendSearchParams } from "../905/508367";
 import { customHistory } from "../905/612521";
 import { AUTH_INIT } from "../905/194276";
 import { getI18nString } from "../905/303541";
@@ -15,7 +15,7 @@ export function $$u0() {
     e(AUTH_INIT({
       origin: t,
       formState: r,
-      redirectUrl: dR(customHistory.location.pathname, {
+      redirectUrl: appendSearchParams(customHistory.location.pathname, {
         [ao.key]: ao.value
       }),
       signedUpFromOpenSession: !0

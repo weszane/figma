@@ -38,7 +38,7 @@ import { trackFileEventWithStore } from '../figma_app/901889';
 import { ky } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
 import { useSelector, useDispatch } from 'react-redux';
-import { useDebounce } fromuse-debounce89';
+import { useDebounce } from 'use-debounce';
 function $(e) {
   let t = new Map();
   let n = new Map();

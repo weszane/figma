@@ -1,11 +1,11 @@
-import { debugState } from '../905/407919'
-import { s as _$$s } from '../905/506024'
-import { logWarning } from '../905/714362'
-import { canPerformAction, canRunExtensions, isExportRestricted } from '../figma_app/12796'
-import { getInitialOptions } from '../figma_app/169182'
-import { canAccessFullDevMode } from '../figma_app/473493'
-import { isDevModeFocusViewCopyActive } from '../figma_app/544649'
-import { isInteractionPathCheck } from '../figma_app/897289'
+import { debugState } from '../905/407919';
+import { getUserOrAnonymousId } from '../905/506024';
+import { logWarning } from '../905/714362';
+import { canPerformAction, canRunExtensions, isExportRestricted } from '../figma_app/12796';
+import { getInitialOptions } from '../figma_app/169182';
+import { canAccessFullDevMode } from '../figma_app/473493';
+import { isDevModeFocusViewCopyActive } from '../figma_app/544649';
+import { isInteractionPathCheck } from '../figma_app/897289';
 
 /**
  * Original name: $$p6
@@ -14,13 +14,13 @@ import { isInteractionPathCheck } from '../figma_app/897289'
  * @returns The selected view or undefined.
  */
 export const getSelectedView = (): any => {
-  const state = debugState.getState()
-  const selectedView = _$$s(state)
+  const state = debugState.getState();
+  const selectedView = getUserOrAnonymousId(state);
   if (!selectedView && !state.selectedView) {
-    logWarning('plugins', 'selectedView is invalid')
+    logWarning('plugins', 'selectedView is invalid');
   }
-  return selectedView
-}
+  return selectedView;
+};
 
 /**
  * Original name: $$m3
@@ -28,9 +28,9 @@ export const getSelectedView = (): any => {
  * @returns The file key or undefined.
  */
 export const getOpenFileKey = (): string | undefined => {
-  const state = debugState.getState()
-  return state.openFile?.key
-}
+  const state = debugState.getState();
+  return state.openFile?.key;
+};
 
 /**
  * Original name: $$h1
@@ -39,8 +39,8 @@ export const getOpenFileKey = (): string | undefined => {
  * @returns True if extensions can be run.
  */
 export const checkCanRunExtensions = (state: any): boolean => {
-  return canRunExtensions(state)
-}
+  return canRunExtensions(state);
+};
 
 /**
  * Original name: $$g7
@@ -49,11 +49,11 @@ export const checkCanRunExtensions = (state: any): boolean => {
  */
 export const canPerformActionCheck = (): boolean => {
   if (getInitialOptions().e2e_traffic || isInteractionPathCheck()) {
-    return true
+    return true;
   }
-  const state = debugState.getState()
-  return canPerformAction(state) && canRunExtensions(state)
-}
+  const state = debugState.getState();
+  return canPerformAction(state) && canRunExtensions(state);
+};
 
 /**
  * Original name: $$f2
@@ -61,8 +61,8 @@ export const canPerformActionCheck = (): boolean => {
  * @returns The organization ID or undefined.
  */
 export const getCurrentUserOrgId = (): string | undefined => {
-  return debugState.getState().currentUserOrgId || undefined
-}
+  return debugState.getState().currentUserOrgId || undefined;
+};
 
 /**
  * Original name: $$_8
@@ -70,8 +70,8 @@ export const getCurrentUserOrgId = (): string | undefined => {
  * @returns 'realms' or 'cppvm'.
  */
 export const getPluginDevMode = (): 'realms' | 'cppvm' => {
-  return debugState.getState().mirror.appModel.useRealmsForPluginDev ? 'realms' : 'cppvm'
-}
+  return debugState.getState().mirror.appModel.useRealmsForPluginDev ? 'realms' : 'cppvm';
+};
 
 /**
  * Original name: $$A0
@@ -79,9 +79,9 @@ export const getPluginDevMode = (): 'realms' | 'cppvm' => {
  * @returns True if export is allowed.
  */
 export const canExportFile = (): boolean => {
-  const openFile = debugState.getState().openFile
-  return !!openFile && !isExportRestricted(openFile)
-}
+  const openFile = debugState.getState().openFile;
+  return !!openFile && !isExportRestricted(openFile);
+};
 
 /**
  * Original name: $$y4
@@ -89,17 +89,16 @@ export const canExportFile = (): boolean => {
  * @returns True if full dev mode is accessible.
  */
 export const accessFullDevMode = (): boolean => {
-  const state = debugState.getState()
-  return canAccessFullDevMode(state)
-}
-
-export const CQ = canExportFile
-export const Fr = checkCanRunExtensions
-export const I = getCurrentUserOrgId
-export const YR = getOpenFileKey
-export const fb = accessFullDevMode
-export const np = isDevModeFocusViewCopyActive
-export const o8 = getSelectedView
-export const op = canPerformActionCheck
-export const r_ = getPluginDevMode
-export { isDevModeFocusViewCopyActive }
+  const state = debugState.getState();
+  return canAccessFullDevMode(state);
+};
+export const CQ = canExportFile;
+export const Fr = checkCanRunExtensions;
+export const I = getCurrentUserOrgId;
+export const YR = getOpenFileKey;
+export const fb = accessFullDevMode;
+export const np = isDevModeFocusViewCopyActive;
+export const o8 = getSelectedView;
+export const op = canPerformActionCheck;
+export const r_ = getPluginDevMode;
+export { isDevModeFocusViewCopyActive };

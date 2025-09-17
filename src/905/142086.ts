@@ -4,7 +4,7 @@ import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { PE } from '../905/15667';
 import { i as _$$i2 } from '../905/46262';
 import { B as _$$B } from '../905/55104';
-import { vb } from '../905/86266';
+import { getPrefetchPlanKeyHandler } from '../905/86266';
 import { UserAPIHandlers } from '../905/93362';
 import { registerModal } from '../905/102752';
 import { KindEnum } from '../905/129884';
@@ -75,7 +75,7 @@ import { LoadingOverlay, LoadingSpinner } from '../figma_app/858013';
 import { ds, sb, t$, TF } from '../figma_app/863319';
 import { Badge, BadgeColor } from '../figma_app/919079';
 import { $V } from '../figma_app/990058';
-import { useDebounce } fromuse-debounce89';
+import { useDebounce } from 'use-debounce';
 var X = (e => (e.BASE_TAB = 'base_tab', e.ALL_TEAM = 'all_team', e.STARRED_TEAM = 'starred_team', e))(X || {});
 var Q = (e => (e.SUGGESTED = 'Suggested', e.STARRED = 'Starred', e.ALL = 'All', e))(Q || {});
 let en = new class {
@@ -719,7 +719,7 @@ let eR = registerModal(e => {
     onSuccessCallback && onSuccessCallback(e);
     tk();
   }, [t, tk, onSuccessCallback, eI]);
-  let tN = vb();
+  let tN = getPrefetchPlanKeyHandler();
   let tP = useCallback(() => {
     if (!tg || tg.id !== eS?.id) {
       t(VisualBellActions.enqueue({

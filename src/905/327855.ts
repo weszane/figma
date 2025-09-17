@@ -15,7 +15,7 @@ import { XHRError, XHR } from "../905/910117";
 import { serializeQuery } from "../905/634134";
 import { setTagGlobal } from "../905/11";
 import { logError, logInfo, logWarning } from "../905/714362";
-import { SH } from "../figma_app/141320";
+import { getGracePeriodStatus } from "../figma_app/141320";
 import { generateUUIDv4 } from "../905/871474";
 import { yp } from "../905/138461";
 import { FileCreationPermissionsGenerator } from "../figma_app/687776";
@@ -283,7 +283,7 @@ export async function $$ew5(e, t, i, n) {
   let _ = e.getState();
   let A = _.folders[f.folder_id || ""];
   let v = _.teams[f.team_id || ""];
-  let S = SH(_.userEduGracePeriods, f.team_id || "");
+  let S = getGracePeriodStatus(_.userEduGracePeriods, f.team_id || "");
   let w = _.repos[f.file_repo_id || ""];
   let T = _.fileByKey[f.source_file_key || ""];
   let k = A ? {

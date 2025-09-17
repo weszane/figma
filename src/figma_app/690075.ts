@@ -1,6 +1,6 @@
-import { getI18nString } from '../905/303541'
-import { cV as getPublisherDetails } from '../figma_app/740025'
-import { formatList } from '../figma_app/930338'
+import { getI18nString } from '../905/303541';
+import { getAcceptedPublisherProfile } from '../figma_app/740025';
+import { formatList } from '../figma_app/930338';
 
 /**
  * Formats a list of publisher names with internationalization support.
@@ -11,32 +11,20 @@ import { formatList } from '../figma_app/930338'
  * @returns Formatted string of publisher names
  */
 export function formatPublisherNames(publishers: any[], maxDisplay: number, nameMapper: (publisher: any) => string): string {
-  if (publishers.length === 0)
-    return ''
-
-  if (publishers.length === 1)
-    return nameMapper(publishers[0])
-
-  let displayed = publishers.slice(0, maxDisplay - 1)
-  let remaining = publishers.slice(maxDisplay - 1)
-
+  if (publishers.length === 0) return '';
+  if (publishers.length === 1) return nameMapper(publishers[0]);
+  let displayed = publishers.slice(0, maxDisplay - 1);
+  let remaining = publishers.slice(maxDisplay - 1);
   if (remaining.length === 0) {
-    remaining = [displayed[displayed.length - 1]]
-    displayed = displayed.slice(0, displayed.length - 1)
+    remaining = [displayed[displayed.length - 1]];
+    displayed = displayed.slice(0, displayed.length - 1);
   }
-
-  const othersLabel
-    = remaining.length === 1
-      ? nameMapper(remaining[0])
-      : getI18nString('community.resource.by_x_others', {
-          numPublishers: remaining.length,
-        })
-
-  const names = displayed.map(nameMapper)
-  if (othersLabel)
-    names.push(othersLabel)
-
-  return formatList(names)
+  const othersLabel = remaining.length === 1 ? nameMapper(remaining[0]) : getI18nString('community.resource.by_x_others', {
+    numPublishers: remaining.length
+  });
+  const names = displayed.map(nameMapper);
+  if (othersLabel) names.push(othersLabel);
+  return formatList(names);
 }
 
 /**
@@ -46,12 +34,10 @@ export function formatPublisherNames(publishers: any[], maxDisplay: number, name
  * @returns Publisher name or formatted publisher names
  */
 export function getPublisherDisplayName(resource: any): string {
-  const publisherDetails = getPublisherDetails(resource)
-  if (publisherDetails)
-    return publisherDetails.name
-
-  const acceptedPublishers = resource.community_publishers.accepted
-  return formatPublisherNames(acceptedPublishers, acceptedPublishers.length, p => p.name)
+  const publisherDetails = getAcceptedPublisherProfile(resource);
+  if (publisherDetails) return publisherDetails.name;
+  const acceptedPublishers = resource.community_publishers.accepted;
+  return formatPublisherNames(acceptedPublishers, acceptedPublishers.length, p => p.name);
 }
 
 /**
@@ -61,20 +47,18 @@ export function getPublisherDisplayName(resource: any): string {
  * @returns Array of user IDs
  */
 export function collectPublisherUserIds(resource: any): string[] {
-  let publishers = resource.community_publishers.accepted as any[] || []
+  let publishers = resource.community_publishers.accepted as any[] || [];
   if (resource.community_publishers.pending) {
-    publishers = publishers.concat(resource.community_publishers.pending)
+    publishers = publishers.concat(resource.community_publishers.pending);
   }
-
   return publishers.reduce<string[]>((userIds, publisher) => {
-    const associatedUserIds = publisher.associated_users?.map((u: any) => u.user_id) || []
-    if (publisher.primary_user_id)
-      userIds.push(publisher.primary_user_id)
-    return userIds.concat(associatedUserIds)
-  }, [])
+    const associatedUserIds = publisher.associated_users?.map((u: any) => u.user_id) || [];
+    if (publisher.primary_user_id) userIds.push(publisher.primary_user_id);
+    return userIds.concat(associatedUserIds);
+  }, []);
 }
 
 // Export refactored names for consistency
-export const D = collectPublisherUserIds
-export const VH = getPublisherDisplayName
-export const eg = formatPublisherNames
+export const D = collectPublisherUserIds;
+export const VH = getPublisherDisplayName;
+export const eg = formatPublisherNames;

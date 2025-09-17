@@ -7,7 +7,7 @@ import { f as _$$f } from "../905/940356";
 import { hasMultipleOwners } from "../figma_app/598018";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useLayoutEffect } from "react";
-import { qe, zN } from "../figma_app/416935";
+import { isAllowedDomain, getEmailDomain } from "../figma_app/416935";
 import { CloseButton } from "../905/17223";
 import { ButtonSecondaryTracked, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
@@ -73,7 +73,7 @@ function T(e) {
 function P({
   user: e
 }) {
-  let t = qe(e.email) ? null : zN(e.email)?.split(".")[0];
+  let t = isAllowedDomain(e.email) ? null : getEmailDomain(e.email)?.split(".")[0];
   t = t ? t.charAt(0).toUpperCase() + t.slice(1) : getI18nString("team_creation_speed_bump.placeholder.team_name", {
     userName: e.name
   });

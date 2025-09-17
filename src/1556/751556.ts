@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { BrowserInfo, isAndroidOrIphoneNotFigmaMobile } from "../figma_app/778880";
 import { s as _$$s } from "../cssbuilder/589278";
-import { UP, kc, s_, cs, gc, Tm, cJ } from "../figma_app/740025";
+import { useIsCommunityHubView, useAuthedActiveCommunityProfile, getActiveProfileUserOrOrg, isOrgOrTeamExport, getTeamAdminAccess, getOrgAdminAccess, isProfilePublished } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { MenuItemComp, MenuItemLead, MenuSubText, MenuSubMenu, MenuSubContainerComp, MenuSubTrigger, MenuHiddenTitleComp, MenuTitleComp, MenuGroupComp, setupMenu, MenuRootComp, MenuContainerComp } from "../figma_app/860955";
@@ -16,7 +16,7 @@ import { g as _$$g } from "../1556/359896";
 import { getI18nString, renderI18nText } from "../905/303541";
 import { H8, Pf } from "../905/590952";
 import { TextWithTruncation } from "../905/984674";
-import { YW } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { selectUser } from "../905/372672";
 import { E as _$$E3 } from "../1556/957507";
 import { w as _$$w } from "../figma_app/883622";
@@ -59,7 +59,7 @@ import { nT } from "../1556/690522";
 import { ScreenReaderOnly } from "../905/172252";
 import { SubTrigger, MenuItemPrimitive } from "../905/465888";
 import { g as _$$g3 } from "../905/687265";
-import { m as _$$m } from "../figma_app/11961";
+import { resolveDisplayName } from "../figma_app/11961";
 import { Dg } from "../figma_app/530167";
 import { K as _$$K } from "../1556/124168";
 import { logAndTrackCTA } from "../figma_app/314264";
@@ -197,13 +197,13 @@ function eT({
   let {
     close
   } = _$$S();
-  let o = UP();
-  let c = kc();
+  let o = useIsCommunityHubView();
+  let c = useAuthedActiveCommunityProfile();
   let d = o && !!c;
-  let u = s_();
+  let u = getActiveProfileUserOrOrg();
   let h = d && c.public_at;
   let x = _$$K(t) && !h;
-  let p = useSelector(e => _$$m(e, e.authedActiveCommunityProfile));
+  let p = useSelector(e => resolveDisplayName(e, e.authedActiveCommunityProfile));
   let f = d ? p : t.email;
   let [g, _] = useState(null);
   let w = g?.subText ?? f;
@@ -249,7 +249,7 @@ function eT({
       shape: "CIRCLE"
     }));
   };
-  let T = d && cs(c);
+  let T = d && isOrgOrTeamExport(c);
   let E = jsxs(Fragment, {
     children: [T ? jsx(H8, {
       user: u,
@@ -267,7 +267,7 @@ function eT({
       onMouseOver: () => k(!1),
       onMouseLeave: I,
       tabIndex: -1,
-      children: d && cs(c) ? c.name : t.handle
+      children: d && isOrgOrTeamExport(c) ? c.name : t.handle
     }), jsx(TextWithTruncation, {
       fontSize: 11,
       color: "desktopBackgrounded",
@@ -547,11 +547,11 @@ function eX() {
     let n = selectUser();
     let o = am();
     let a = useSelector(e => e.authedProfilesById);
-    let d = useSelector(e => gc(e), deepEqual);
-    let u = useSelector(e => Tm(e));
+    let d = useSelector(e => getTeamAdminAccess(e), deepEqual);
+    let u = useSelector(e => getOrgAdminAccess(e));
     let h = S()(Object.values(d).map(e => e.community_profile_id && a[e.community_profile_id]));
     let m = S()(Object.values(u).map(e => e.community_profile_id && a[e.community_profile_id]));
-    let x = UP();
+    let x = useIsCommunityHubView();
     let p = !desktopAPIInstance && (BrowserInfo.mac || BrowserInfo.windows);
     return [{
       key: "profile-settings",
@@ -866,12 +866,12 @@ function eX() {
       }(t, e, n)]
     }];
   }();
-  let t = UP();
+  let t = useIsCommunityHubView();
   let n = selectUser();
-  let a = kc();
+  let a = useAuthedActiveCommunityProfile();
   let d = t && !!a;
-  let u = s_();
-  let h = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let u = getActiveProfileUserOrOrg();
+  let h = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   let m = usePrefersMediaQuery(`(max-width: ${d8i})`);
   let x = getI18nString("navbar.settings_dropdown.button_label");
   let _ = jsxs("div", {
@@ -880,7 +880,7 @@ function eX() {
     children: [jsx("div", {
       className: _$$s.relative.inlineFlex.$,
       children: jsx(H8, {
-        user: d && cs(a) ? u : n,
+        user: d && isOrgOrTeamExport(a) ? u : n,
         size: Pf.MEDIUM
       })
     }), (t ? !m : !h) && jsx(TextWithTruncation, {
@@ -888,8 +888,8 @@ function eX() {
       fontWeight: "medium",
       color: "default",
       truncate: !0,
-      children: d && cs(a) ? a.name : n.name
-    }), d && cs(a) && jsx(Badge, {
+      children: d && isOrgOrTeamExport(a) ? a.name : n.name
+    }), d && isOrgOrTeamExport(a) && jsx(Badge, {
       className: p()("account_switcher--adminBadge--ys5HM", _$$s.mr0.$),
       color: BadgeColor.TERTIARY,
       text: getI18nString("navbar.community.admin_label")
@@ -1080,13 +1080,13 @@ let tu = "sidebar-user-notifications-dropdown";
 export function $$th1() {
   let e;
   let t = useDispatch();
-  let n = UP();
+  let n = useIsCommunityHubView();
   let l = useSelector(_$$E3(tu));
   let o = useRef(null);
   let c = _$$N2();
   let d = selectCurrentFile();
   let u = !!d;
-  let h = kc();
+  let h = useAuthedActiveCommunityProfile();
   let m = function () {
     let e = useSubscription(PersistentUserNotificationBellData, {});
     if ("loaded" !== e.status || e.data.persistentUserNotificationBells.status !== tT.Loaded) return {};
@@ -1169,9 +1169,9 @@ export function $$th1() {
 export function $$tm0({
   hideNotifications: e = !1
 }) {
-  let t = UP();
-  let n = kc();
-  let a = t && !cJ(n);
+  let t = useIsCommunityHubView();
+  let n = useAuthedActiveCommunityProfile();
+  let a = t && !isProfilePublished(n);
   let r = !e && !a && !isAndroidOrIphoneNotFigmaMobile;
   return jsxs("div", {
     className: _$$s.justifyBetween.flex.flexRow.itemsCenter.pt8.ml8.mr8.mb8.lh0.$,

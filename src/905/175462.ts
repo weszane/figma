@@ -1,4 +1,4 @@
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 import { a6 } from "../figma_app/198840";
 import { getCurrentPluginVersion } from "../figma_app/300692";
 import { isWidgetOrPlugin } from "../figma_app/45218";
@@ -14,7 +14,7 @@ let $$l1 = {
     return "name" in e ? e.name : isWidgetOrPlugin(e) ? getCurrentPluginVersion(e)?.name || "" : a6(e).name;
   }(t) || n || i?.manifest.name || e?.name || "",
   validate: ({}, e) => {
-    let t = Yp(e);
+    let t = trimOrEmpty(e);
     return 0 === t.length ? [{
       key: "NAME_EMPTY",
       data: {

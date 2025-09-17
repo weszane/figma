@@ -15,7 +15,7 @@ import { mH } from "../figma_app/703138";
 import { wq } from "../905/234821";
 import { F$ } from "../figma_app/12220";
 import { kC } from "../905/428519";
-import { UP } from "../figma_app/740025";
+import { useIsCommunityHubView } from "../figma_app/740025";
 import { getUserId } from "../905/372672";
 import { getObservableValue } from "../figma_app/84367";
 import { ThreadType } from "../905/380385";
@@ -91,7 +91,7 @@ export let $$G3 = createContext({});
 export function $$V5(e) {
   let t = wq();
   let r = useDispatch();
-  let d = UP();
+  let d = useIsCommunityHubView();
   let u = useSelector(e => e.comments.showResolved);
   let p = useSelector(e => e.comments.showOnlyParticipating);
   let v = useSelector(e => e.mirror.appModel.currentPage);

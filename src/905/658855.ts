@@ -15,7 +15,7 @@ import { getI18nString, renderI18nText } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
 import { I as _$$I } from "../905/343721";
 import { DM, en } from "../905/759470";
-import { WX } from "../figma_app/350203";
+import { PublishModalState } from "../figma_app/350203";
 import { N8, Gp, CW, nK } from "../figma_app/599979";
 import { VY } from "../905/966582";
 import { EL } from "../905/748636";
@@ -69,8 +69,8 @@ async function O(e, t, i, n, r, a, s, o, l, d) {
   trackEventAnalytics("community_publish_modal", {
     userId: s,
     orgId: d,
-    step: WX.ADD_CAROUSEL_MEDIA,
-    name: WX.ADD_CAROUSEL_MEDIA,
+    step: PublishModalState.ADD_CAROUSEL_MEDIA,
+    name: PublishModalState.ADD_CAROUSEL_MEDIA,
     resourceType: o,
     resourceId: l
   });
@@ -121,8 +121,8 @@ function D({
     trackEventAnalytics("community_publish_modal", {
       userId: D,
       orgId: L,
-      step: WX.ADD_CAROUSEL_MEDIA,
-      name: WX.ADD_CAROUSEL_MEDIA,
+      step: PublishModalState.ADD_CAROUSEL_MEDIA,
+      name: PublishModalState.ADD_CAROUSEL_MEDIA,
       resourceType: U,
       resourceId: B
     });
@@ -148,8 +148,8 @@ function D({
     trackEventAnalytics("community_publish_modal", {
       userId: D,
       orgId: L,
-      step: WX.ADD_CAROUSEL_MEDIA,
-      name: WX.ADD_CAROUSEL_MEDIA,
+      step: PublishModalState.ADD_CAROUSEL_MEDIA,
+      name: PublishModalState.ADD_CAROUSEL_MEDIA,
       resourceType: U,
       resourceId: B
     });
@@ -404,8 +404,8 @@ function B({
                 trackEventAnalytics("community_publish_modal", {
                   userId: t,
                   orgId: n,
-                  step: WX.DELETE_CAROUSEL_MEDIA,
-                  name: WX.DELETE_CAROUSEL_MEDIA,
+                  step: PublishModalState.DELETE_CAROUSEL_MEDIA,
+                  name: PublishModalState.DELETE_CAROUSEL_MEDIA,
                   resourceType: r,
                   resourceId: a
                 });

@@ -1,5 +1,5 @@
 import { Fullscreen } from "../figma_app/763686";
-import { Js } from "../figma_app/916560";
+import { extractHostname } from "../figma_app/916560";
 import { debugState } from "../905/407919";
 import { getI18nString } from "../905/303541";
 import { RK } from "../figma_app/815170";
@@ -174,7 +174,7 @@ export function $$A1({
       faviconDimension: 16,
       orientation: M
     });
-    let G = hasTitleOrDescription ? Js(url) : fullUrlProvider;
+    let G = hasTitleOrDescription ? extractHostname(url) : fullUrlProvider;
     let V = () => {
       $$h2(LinkMetadataEvent.OPEN_PREVIEW, url);
       debugState.dispatch(RK({

@@ -264,7 +264,7 @@ import { J5, w_ } from "../897/602108";
 import { A as _$$A8 } from "../figma_app/121266";
 import { e7 as _$$e3 } from "../figma_app/316316";
 import { isEmptyObject } from "../figma_app/493477";
-import { zp } from "../figma_app/740025";
+import { useCurrentOrgAdminInfo } from "../figma_app/740025";
 import { b as _$$b4 } from "../figma_app/203891";
 import { GR, F$, gc, B8, w5, tC as _$$tC } from "../figma_app/229710";
 import { u as _$$u3, j as _$$j2 } from "../figma_app/9104";
@@ -313,7 +313,7 @@ import { rB as _$$rB, bh } from "../figma_app/730706";
 import { X as _$$X } from "../905/647103";
 import { r6 as _$$r4 } from "../905/507950";
 import { V as _$$V } from "../1577/311426";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { Tv } from "../figma_app/151869";
 import { Ef, GQ, s$ as _$$s$ } from "../figma_app/29089";
 import { v as _$$v6 } from "../figma_app/339170";
@@ -6245,7 +6245,7 @@ function ay({
 }
 function af(e) {
   let t = useAtomWithSubscription(_$$b4);
-  let i = zp();
+  let i = useCurrentOrgAdminInfo();
   let n = _$$u3();
   useEffect(() => {
     if (isEmptyObject(e.shownPanels) || Object.keys(e.shownPanels).every(t => !e.shownPanels[parseInt(t)])) {
@@ -7532,7 +7532,7 @@ let dt = memo(() => {
         type: ZU.CUSTOM_ACTION,
         customActionType: Wg.DIALOG_TRIGGER_BUTTON,
         onClick: () => {
-          t.url && FJ(t.url, "_blank", "noopener");
+          t.url && openWindow(t.url, "_blank", "noopener");
         },
         icon: jsx(_$$V, {}),
         isSelected: !1,

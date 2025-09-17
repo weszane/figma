@@ -7,7 +7,7 @@ import { t as _$$t } from "../905/947268";
 import { Z } from "../905/498136";
 import { trackEventAnalytics } from "../905/449184";
 import { getI18nString } from "../905/303541";
-import { uV } from "../905/34809";
+import { setBrowserViewBarModeOptions } from "../905/34809";
 import { ViewMode } from "../figma_app/756995";
 function h({
   viewMode: e,
@@ -75,7 +75,7 @@ export function $$g1(e) {
   return jsx(h, {
     viewMode: r,
     onViewModeChange: r => {
-      t(uV({
+      t(setBrowserViewBarModeOptions({
         viewId: e.viewId,
         viewMode: r
       }));

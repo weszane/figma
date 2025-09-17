@@ -1,5 +1,5 @@
 import { A } from "../905/920142";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 export function $$a0(e) {
   let t = new Date();
   return {
@@ -14,7 +14,7 @@ export function $$o2(e, t, r) {
   if (t) for (let e of t) {
     let t = function (e) {
       let t = (e || "").trim();
-      return t && !xf(t) ? {
+      return t && !isValidEmail(t) ? {
         message: "An email is invalid",
         field: "email"
       } : null;

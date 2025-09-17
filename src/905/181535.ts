@@ -7,7 +7,7 @@ import d from "../vendor/879378";
 import { H } from "../figma_app/147959";
 import { BrowserInfo } from "../figma_app/778880";
 import { H as _$$H } from "react-dom";
-import { R7 } from "../905/508367";
+import { browserFeatures } from "../905/508367";
 import { isElementFocusable } from "../905/877503";
 import { KeyCodes } from "../905/63728";
 import { VisualBellActions } from "../905/302958";
@@ -273,7 +273,7 @@ let O = new class {
     };
     this.onPointerMove = e => {
       let t;
-      if (R7.pointerLock) t = {
+      if (browserFeatures.pointerLock) t = {
         x: e.movementX,
         y: e.movementY
       };else {
@@ -353,7 +353,7 @@ let O = new class {
     document.addEventListener("pointerdown", this._onPointerDown);
     document.addEventListener("pointerup", this.onPointerUp);
     document.addEventListener("pointercancel", this.onPointerCancel);
-    R7.pointerLock && (document.addEventListener("pointerlockchange", this.onPointerLockChange), document.addEventListener("pointerlockerror", this.onPointerLockFailure));
+    browserFeatures.pointerLock && (document.addEventListener("pointerlockchange", this.onPointerLockChange), document.addEventListener("pointerlockerror", this.onPointerLockFailure));
   }
   disable() {
     window.removeEventListener("blur", this.onWindowBlur);
@@ -363,7 +363,7 @@ let O = new class {
     document.removeEventListener("pointerdown", this._onPointerDown);
     document.removeEventListener("pointerup", this.onPointerUp);
     document.removeEventListener("pointercancel", this.onPointerCancel);
-    R7.pointerLock && (document.removeEventListener("pointerlockchange", this.onPointerLockChange), document.removeEventListener("pointerlockerror", this.onPointerLockFailure));
+    browserFeatures.pointerLock && (document.removeEventListener("pointerlockchange", this.onPointerLockChange), document.removeEventListener("pointerlockerror", this.onPointerLockFailure));
   }
   findTrackedElement(e) {
     let t = e;
@@ -450,7 +450,7 @@ let O = new class {
     e && (document.documentElement.style.cursor = e);
   }
   stopTracking(e, t) {
-    R7.pointerLock && document.exitPointerLock();
+    browserFeatures.pointerLock && document.exitPointerLock();
     null !== this.activeCapturedPointerId && this.activeElement && this.activeElement.releasePointerCapture(this.activeCapturedPointerId);
     this.customCursorContext?.remove();
     this.customCursorContext = null;
@@ -473,7 +473,7 @@ let O = new class {
       this.cancelPointerDownTimeout();
       this.customCursorContext = new E(n, this.startPosition);
       this.customCursorContext.create();
-      !this.options.disablePointerLock && R7.pointerLock ? this.activeElement.requestPointerLock()?.catch(() => {}) : this.onPointerLockFailure();
+      !this.options.disablePointerLock && browserFeatures.pointerLock ? this.activeElement.requestPointerLock()?.catch(() => {}) : this.onPointerLockFailure();
     };
     n.scrubStartDelay ? this.pointerDownTimeout = setTimeout(r, n.scrubStartDelay) : r();
   }

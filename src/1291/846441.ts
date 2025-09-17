@@ -9,7 +9,7 @@ import { yQ, nl, I5, SG } from "../figma_app/844435";
 import { tS } from "../figma_app/622574";
 import { Ou } from "../figma_app/106207";
 import { A as _$$A2 } from "../1291/23528";
-import { Ih } from "../figma_app/740025";
+import { FUSE_CONFIG_PROFILE } from "../figma_app/740025";
 import { useCurrentFileKey } from "../figma_app/516028";
 import { a6 } from "../figma_app/198840";
 import { I as _$$I } from "../905/342732";
@@ -29,8 +29,8 @@ let i;
 let k = new Ef([], {
   keys: ["name"]
 });
-let L = new Ef([], Ih);
-let A = new Ef([], Ih);
+let L = new Ef([], FUSE_CONFIG_PROFILE);
+let A = new Ef([], FUSE_CONFIG_PROFILE);
 let B = new Ef([], {
   threshold: .1,
   matchAllTokens: !0,

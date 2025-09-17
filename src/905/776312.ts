@@ -1,5 +1,5 @@
 import { localStorageRef } from "../905/657224";
-import { uV, ZR } from "../905/34809";
+import { setBrowserViewBarModeOptions, setBrowserViewBarSortOptions } from "../905/34809";
 import { hydrateFileBrowser } from "../905/929976";
 import { P } from "../905/77553";
 let o = {
@@ -23,7 +23,7 @@ function d(e, t) {
 }
 export function $$c1(e = {}, t) {
   if (hydrateFileBrowser.matches(t)) return l(o[P.VIEW_MODE]);
-  if (uV.matches(t)) {
+  if (setBrowserViewBarModeOptions.matches(t)) {
     let i = {
       ...e,
       [t.payload.viewId]: t.payload.viewMode
@@ -34,7 +34,7 @@ export function $$c1(e = {}, t) {
 }
 export function $$u0(e = {}, t) {
   if (hydrateFileBrowser.matches(t)) return l(o[P.SORT_MODE]);
-  if (ZR.matches(t)) {
+  if (setBrowserViewBarSortOptions.matches(t)) {
     let i = {
       ...e,
       [t.payload.viewId]: t.payload.sortMode

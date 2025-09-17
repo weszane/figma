@@ -1,4 +1,4 @@
-import { qe } from "../figma_app/416935";
+import { isAllowedDomain } from "../figma_app/416935";
 import { postUserFlag } from "../905/985254";
 import { w } from "../905/863010";
 import { hasValidSubscription, isTeamInGracePeriod } from "../figma_app/345997";
@@ -52,14 +52,14 @@ export function $$g3(e, t, r) {
   if (hasOrgUsersForUser(e) || e.userFlags.completed_org_cart_flow) return 0;
   let i = e.user?.email;
   let d = !!e.user?.email_validated_at;
-  if (!i || qe(i) || !d || function (e, t = 2592e6) {
+  if (!i || isAllowedDomain(i) || !d || function (e, t = 2592e6) {
     return _(e.userFlags, "completed_pro_cart_flow", t);
   }(e) || r && (!hasValidSubscription(r) || isTeamInGracePeriod(w.toSinatra(r)) || r.isStudentTeam || r.deletedAt || r.orgId || !r.canAdmin)) return 0;
   let c = Object.values(e.teams).filter(e => hasValidSubscription(e) && !isTeamInGracePeriod(e) && !e.student_team && !e.deleted_at && !e.org_id && canAdminTeam(e.id, t)).length;
   return c > 1 ? 2 : 1 === c ? 1 : 0;
 }
 export function $$f1(e) {
-  return !!e && !qe(e.email);
+  return !!e && !isAllowedDomain(e.email);
 }
 export const CJ = $$m0;
 export const Hw = $$f1;

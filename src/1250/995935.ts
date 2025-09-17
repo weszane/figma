@@ -19,14 +19,14 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { atomStoreManager, useAtomWithSubscription } from "../figma_app/27355";
 import { getResourceDataOrFallback } from "../905/663269";
 import { trackEventAnalytics, analyticsEventManager } from "../905/449184";
-import { FJ } from "../905/508367";
+import { openWindow } from "../905/508367";
 import { A as _$$A } from "../905/920142";
 import { getDeprecationDate, desktopAPIInstance, OpenTarget } from "../figma_app/876459";
 import { shouldShowDeprecationBannerAtom } from "../figma_app/369803";
 import { customHistory } from "../905/612521";
 import { R as _$$R } from "../7021/67076";
 import { BrowserInfo } from "../figma_app/778880";
-import { GU, cn, zR } from "../figma_app/141320";
+import { getGracePeriodAccessForKey, isStudentValidated, getGracePeriodExpirationDate } from "../figma_app/141320";
 import { BaseLinkComponent, SecureLink, ButtonSecondaryTracked } from "../figma_app/637027";
 import { s as _$$s2 } from "../cssbuilder/589278";
 import { $z, e6 as _$$e, c as _$$c } from "../figma_app/617427";
@@ -78,7 +78,7 @@ import { u1 } from "../figma_app/91703";
 import { WX } from "../figma_app/482142";
 import { postUserFlag } from "../905/985254";
 import { bE } from "../figma_app/375098";
-import { Tb } from "../figma_app/350203";
+import { CHECKOUT_ROUTE } from "../figma_app/350203";
 import { C9 } from "../figma_app/8833";
 import { UpgradeAction } from "../905/370443";
 import { useCurrentFileWorkshopModeStatus } from "../figma_app/789";
@@ -167,7 +167,7 @@ function ek({
         view: "teamAdminConsole",
         teamId: e.id,
         teamAdminConsoleViewTab: DashboardSections.BILLING
-      })) : FJ(t[0], "_blank", "noopener");
+      })) : openWindow(t[0], "_blank", "noopener");
     },
     variant: "secondary",
     htmlAttributes: r,
@@ -237,7 +237,7 @@ function th() {
 function tb() {
   return jsx(_$$e, {
     className: "x78zum5 xjwf9q1 xx99whi xl56j7k x6s0dn4 x19y5rnk xkq88pg x1tk3asg x1ypdohk",
-    onClick: () => FJ(qv, "_blank"),
+    onClick: () => openWindow(qv, "_blank"),
     trackingProperties: {
       trackingDescriptor: UpgradeAction.SHOW_ME_HOW,
       buttonContext: getI18nString("cooper.templates.show_me_how"),
@@ -1017,7 +1017,7 @@ let tX = {
     let o = useCurrentFileWorkshopModeStatus();
     let l = useSelector(e => e.userEduGracePeriods);
     if (!n || !i) return null;
-    if (r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && GU(l, cn(i), n, !!r.student_team).showAccessRestricted) {
+    if (r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && getGracePeriodAccessForKey(l, isStudentValidated(i), n, !!r.student_team).showAccessRestricted) {
       let t = {
         bannerType: x1.WARN,
         icon: _$$A6,
@@ -1049,8 +1049,8 @@ let tJ = {
     let o = useCurrentFileWorkshopModeStatus();
     let l = useSelector(e => e.userEduGracePeriods);
     if (n && i) {
-      let a = r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && GU(l, cn(i), n, !!r.student_team).showReminder;
-      let s = zR(l, n);
+      let a = r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && getGracePeriodAccessForKey(l, isStudentValidated(i), n, !!r.student_team).showReminder;
+      let s = getGracePeriodExpirationDate(l, n);
       if (a) {
         let t = {
           bannerType: x1.INFO,
@@ -1386,7 +1386,7 @@ function t9({
   hubFile: e
 }) {
   let t = isCommunityResourceSubscriptionActive(e);
-  let n = t ? "" : `?${Tb}`;
+  let n = t ? "" : `?${CHECKOUT_ROUTE}`;
   return jsx(A6, {
     to: `/community/file/${e.id}${n}`,
     children: jsx(ButtonSecondaryTracked, {
@@ -1634,7 +1634,7 @@ let na = {
         type: MA.CUSTOM,
         element: jsx(_$$V, {
           onClick: () => {
-            FJ("https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215", "_blank");
+            openWindow("https://help.figma.com/hc/requests/new?ticket_form_id=9707134248215", "_blank");
           },
           variant: "inverse",
           children: renderI18nText("banner.org_downgrade.reminder.contact_support")

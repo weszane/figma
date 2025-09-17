@@ -18,7 +18,7 @@ import { cx } from "../figma_app/558929";
 import { showModalHandler } from "../905/156213";
 import { Yo } from "../figma_app/543529";
 import { ll, U6 } from "../figma_app/844435";
-import { kc } from "../figma_app/740025";
+import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { k as _$$k2 } from "../905/882646";
 import { getUserId } from "../905/372672";
 import { U3 } from "../figma_app/412189";
@@ -45,7 +45,7 @@ export function $$M0({
   let H = Yo();
   let U = useCurrentPlanUser("PluginTryButton");
   let V = useIsOrgAdminUser(U).unwrapOr(!1);
-  let W = kc();
+  let W = useAuthedActiveCommunityProfile();
   let G = isWidget(e);
   let $ = getCurrentPluginVersion(e) || pluginMetadata;
   let z = _$$o(U.unwrapOr(null), M, $, t ? mapFileTypeToEditorType(t) : void 0);

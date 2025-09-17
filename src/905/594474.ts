@@ -110,7 +110,7 @@ import { gx, A_, Dg } from "../905/870778";
 import { a as _$$a } from "../905/482941";
 import { y as _$$y } from "../905/616507";
 import { ScreenReaderOnly } from "../905/172252";
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 import { Yv } from "../905/488777";
 import { vj as _$$vj } from "../905/652712";
 import { l as _$$l } from "../905/493845";
@@ -144,7 +144,7 @@ import { r as _$$r4 } from "../905/520829";
 import { useTracking, TrackingProvider } from "../figma_app/831799";
 import { i as _$$i2 } from "../905/810360";
 import { VisualBellActions } from "../905/302958";
-import { $$in, WX } from "../figma_app/350203";
+import { $$in, PublishModalState } from "../figma_app/350203";
 import { c as _$$c4 } from "../905/289751";
 import { J as _$$J7 } from "../905/296347";
 import { _e, gI } from "../905/277373";
@@ -1422,7 +1422,7 @@ let tB = forwardRef(function ({
   let o = useRef(null);
   let l = _$$w(e, !i);
   let d = _$$U(l, tU);
-  let c = Yp(Lz(e, "")).length;
+  let c = trimOrEmpty(Lz(e, "")).length;
   let u = useId();
   let p = `${u}-input`;
   let m = `${u}-character-count`;
@@ -1711,7 +1711,7 @@ let id = {
       existingResourceContent: e
     }) => e && getCurrentPluginVersion(e)?.tagline || "",
     validate: ({}, e) => {
-      let t = Yp(e);
+      let t = trimOrEmpty(e);
       return 0 === t.length ? [{
         key: "TAGLINE_EMPTY",
         data: {}
@@ -2604,7 +2604,7 @@ function iM({
         let [s, o] = await Promise.all([l8(URL.createObjectURL(r)), _$$c4(r)]);
         let l = new Uint8Array(o);
         i.current($$in, {
-          step: WX.UPLOAD_ICON,
+          step: PublishModalState.UPLOAD_ICON,
           src: t
         });
         a({
@@ -2988,13 +2988,13 @@ function iM({
     submit
   } = _$$r2(e, useCallback(() => {
     A.current($$in, {
-      step: WX.PUBLISH
+      step: PublishModalState.PUBLISH
     });
   }, [A]));
   let ec = useCallback(() => {
     l(hideModal());
     A.current($$in, {
-      step: WX.CLOSED
+      step: PublishModalState.CLOSED
     });
     t === PageTypeEnum.RESOURCE_PAGE && draftSubmissionResult?.result === "success" && customHistory.reload("Resource updated on community hub");
   }, [l, t, draftSubmissionResult, A]);
@@ -3294,13 +3294,13 @@ function iM({
   }, [e, draftSubmissionResult?.result, eA, stepWithErrors, J.activeTab]);
   useEffect(() => {
     A.current($$in, {
-      step: WX.OPENED
+      step: PublishModalState.OPENED
     });
   }, [A]);
   let eb = Lz(e.fieldStates.name, "");
   let ev = useDebouncedCallback(() => {
     A.current($$in, {
-      step: WX.EDIT_NAME
+      step: PublishModalState.EDIT_NAME
     });
   }, 2e3);
   useEffect(() => {
@@ -3309,7 +3309,7 @@ function iM({
   let eI = Lz(e.fieldStates.description, "");
   let eE = useDebouncedCallback(() => {
     A.current($$in, {
-      step: WX.EDIT_DESCRIPTION
+      step: PublishModalState.EDIT_DESCRIPTION
     });
   }, 1e4);
   useEffect(() => {

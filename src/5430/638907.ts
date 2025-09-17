@@ -6,7 +6,7 @@ import { A } from "../5430/728674";
 import { hasResourceType } from "../figma_app/427318";
 import { ResourceTypes } from "../905/178090";
 import { ResourceTypeEnum } from "../figma_app/306946";
-import { Z_ } from "../figma_app/350203";
+import { MAX_BANNER_CLICKS } from "../figma_app/350203";
 import { isPlugin } from "../figma_app/45218";
 import { r as _$$r } from "../5430/743964";
 import { T } from "../5430/126619";
@@ -54,7 +54,7 @@ export function $$f0(e) {
     return t ? jsx(T, {
       resources: e,
       isLoading: !customLoadingView && resourcesLoading,
-      loadingTileCount: numTilesPerRow && numTilesPerRow * Z_
+      loadingTileCount: numTilesPerRow && numTilesPerRow * MAX_BANNER_CLICKS
     }) : jsx(A, {
       resources: totalResources ?? [],
       maxGridDim: {

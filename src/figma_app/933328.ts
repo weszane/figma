@@ -30,7 +30,7 @@ import { Q as _$$Q } from '../905/477656';
 import { atomStoreManager } from '../905/490038';
 import { convertStringToFacetType } from '../905/497152';
 import { handleAtomEvent } from '../905/502364';
-import { s as _$$s2 } from '../905/506024';
+import { getUserOrAnonymousId } from '../905/506024';
 import { L as _$$L } from '../905/522457';
 import { e as _$$e3 } from '../905/545750';
 import { Nn, sj } from '../905/561897';
@@ -169,7 +169,7 @@ let $$eW48 = createOptimistThunk((e, t) => {
     key: l
   }));
   let c = e.getState();
-  let p = _$$s2(c);
+  let p = getUserOrAnonymousId(c);
   e.dispatch($$tG17({
     storeInRecentsKey,
     item,
@@ -255,7 +255,7 @@ let $$e$8 = createOptimistThunk((e, t) => {
   let I = e.getState();
   let S = atomStoreManager.get(resourceDataAndPresetKeysV2SetAtom).has(item.library_key);
   let v = async () => {
-    let t = _$$s2(I);
+    let t = getUserOrAnonymousId(I);
     e.dispatch($$tG17({
       storeInRecentsKey,
       item,
@@ -418,7 +418,7 @@ let $$eq32 = createOptimistThunk(async (e, t) => {
   let I = e.getState();
   let S = atomStoreManager.get(resourceDataAndPresetKeysV2SetAtom).has(item.library_key);
   let v = async () => {
-    let t = _$$s2(I);
+    let t = getUserOrAnonymousId(I);
     e.dispatch($$tG17({
       storeInRecentsKey,
       item,
@@ -551,7 +551,7 @@ let $$eJ4 = createOptimistThunk(async (e, t) => {
     errorCallback
   } = t;
   let E = e.getState();
-  let y = _$$s2(E);
+  let y = getUserOrAnonymousId(E);
   e.dispatch($$tG17({
     storeInRecentsKey,
     item,
@@ -619,7 +619,7 @@ let $$eZ54 = createOptimistThunk(async (e, t) => {
   } = t;
   if (modules.some(e => e.moduleSource !== TemplateType.SLIDES_TEMPLATE || !RX(e))) return;
   let m = e.getState();
-  let g = _$$s2(m);
+  let g = getUserOrAnonymousId(m);
   let f = (e, t) => permissionScopeHandler.user('insert-module', () => Fullscreen.insertModule(e, {
     x: canvasPosition.x,
     y: canvasPosition.y,

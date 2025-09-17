@@ -20,7 +20,7 @@ import { EG } from "../figma_app/972736";
 import { s as _$$s } from "../905/58247";
 import { showModalHandler } from "../905/156213";
 import { Q7 } from "../905/15667";
-import { s0 } from "../figma_app/350203";
+import { HubAction } from "../figma_app/350203";
 import { formatI18nMessage } from "../905/482208";
 import { nV } from "../905/625959";
 import { fullscreenValue } from "../figma_app/455680";
@@ -330,7 +330,7 @@ export function $$J0(e, t, i) {
         toolType: "plugin"
       })), fullscreenValue.triggerAction("clear-tool", {
         source: "menu"
-      }), trackEventAnalytics(s0.FIND_MORE_PLUGINS, {
+      }), trackEventAnalytics(HubAction.FIND_MORE_PLUGINS, {
         isWidget: !1,
         triggeredFrom: t
       }), "dev" === w || "inspect" === w) {
@@ -365,7 +365,7 @@ export function $$J0(e, t, i) {
       fullscreenValue.triggerAction("clear-tool", {
         source: "menu"
       });
-      trackEventAnalytics(s0.FIND_MORE_PLUGINS, {
+      trackEventAnalytics(HubAction.FIND_MORE_PLUGINS, {
         isWidget: !0,
         triggeredFrom: t
       });

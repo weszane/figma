@@ -1,23 +1,37 @@
-import { atom, useAtomWithSubscription } from "../figma_app/27355";
-import { resourceUtils } from "../905/989992";
-import { FileCreationPermissionsView } from "../figma_app/43951";
-import { getPlanUserAtomFamily } from "../905/276025";
-let o = atom(e => {
-  let t = e(getPlanUserAtomFamily(!0)).data?.draftsFolderId;
-  if (!t) {
-    let e = {
-      code: "nonNullableResult",
+import { getPlanUserAtomFamily } from '../905/276025'
+import { resourceUtils } from '../905/989992'
+import { atom, useAtomWithSubscription } from '../figma_app/27355'
+import { FileCreationPermissionsView } from '../figma_app/43951'
+
+/**
+ * Atom for fetching the user's drafts folder project permissions.
+ * Original variable: o
+ */
+export const draftsFolderProjectAtom = atom((get) => {
+  const draftsFolderId = get<ObjectOf>(getPlanUserAtomFamily(true)).data?.draftsFolderId
+  if (!draftsFolderId) {
+    const errorResource = {
+      code: 'nonNullableResult',
       path: [],
-      retriable: !1,
-      error: Error("No draft folder id")
-    };
-    return resourceUtils.error([e]);
+      retriable: false,
+      error: new Error('No draft folder id'),
+    }
+    return resourceUtils.error([errorResource])
   }
-  return e(FileCreationPermissionsView.Query({
-    projectId: t
-  })).transform(e => e.project);
-});
-export function $$l0() {
-  return useAtomWithSubscription(o);
+  return (get(
+    FileCreationPermissionsView.Query({
+      projectId: draftsFolderId,
+    }),
+  ) as any).transform(result => result.project)
+})
+
+/**
+ * Hook to subscribe to the draftsFolderProjectAtom.
+ * Original function: $$l0
+ */
+export function useDraftsFolderProject() {
+  return useAtomWithSubscription(draftsFolderProjectAtom)
 }
-export const y = $$l0;
+
+/** Alias for useDraftsFolderProject (original export: y) */
+export const y = useDraftsFolderProject

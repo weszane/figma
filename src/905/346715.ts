@@ -8,7 +8,7 @@ import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter, Di
 import { Button } from "../905/521428";
 import { IconButton } from "../905/443068";
 import { C as _$$C } from "../905/520159";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { isGovCluster, includesGovDomain, buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { BigTextInputForwardRef } from "../figma_app/637027";
@@ -137,7 +137,7 @@ let $$F0 = registerModal(function (e) {
       J(null);
       return;
     }
-    if (!xf(j)) {
+    if (!isValidEmail(j)) {
       J("email_format");
       return;
     }
@@ -348,7 +348,7 @@ let M = registerModal(function (e) {
       E(null);
       return;
     }
-    if (!xf(g)) {
+    if (!isValidEmail(g)) {
       E("email_format");
       return;
     }

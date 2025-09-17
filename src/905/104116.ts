@@ -14,7 +14,7 @@ import { U as _$$U } from "../905/331038";
 import { w as _$$w } from "../905/113805";
 import { Lz } from "../905/497882";
 import { en } from "../905/759470";
-import { $$in, WX, xP } from "../figma_app/350203";
+import { $$in, PublishModalState, FileInputDropType } from "../figma_app/350203";
 import { useTracking } from "../figma_app/831799";
 import { CW } from "../figma_app/599979";
 import { VY } from "../905/966582";
@@ -138,8 +138,8 @@ export let $$C0 = forwardRef(function ({
       multiple: !0,
       onChange: async e => {
         !j && addMediaFromInput && (i?.(), U(!0), await addMediaFromInput(e.target), trackEvent($$in, {
-          step: WX.ADD_CAROUSEL_MEDIA,
-          src: xP.FILE_INPUT
+          step: PublishModalState.ADD_CAROUSEL_MEDIA,
+          src: FileInputDropType.FILE_INPUT
         }), U(!1));
       },
       type: "file"
@@ -159,8 +159,8 @@ export let $$C0 = forwardRef(function ({
         if (e.currentTarget.removeAttribute("data-droppable"), j || !addMediaFromFiles) return;
         let t = u()(Array.from(e.dataTransfer.items).filter(e => V.includes(e.type)).map(e => e.getAsFile()));
         0 !== t.length && (e.preventDefault(), i?.(), U(!0), await addMediaFromFiles(t), trackEvent($$in, {
-          step: WX.ADD_CAROUSEL_MEDIA,
-          src: xP.DROP
+          step: PublishModalState.ADD_CAROUSEL_MEDIA,
+          src: FileInputDropType.DROP
         }), U(!1));
       },
       onScroll,

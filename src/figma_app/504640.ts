@@ -1,12 +1,12 @@
 import { DARK_THEME_MEDIA_QUERY } from "../905/658026";
 import { getFeatureFlags } from "../905/601108";
-import { GZ } from "../905/508367";
+import { isIframe } from "../905/508367";
 import { getInitialOptions } from "../figma_app/169182";
 export function $$o2() {
-  return GZ() && getInitialOptions().frame_context?.type === "embed";
+  return isIframe() && getInitialOptions().frame_context?.type === "embed";
 }
 export function $$l1() {
-  return GZ() && getInitialOptions().frame_context?.type === "integration";
+  return isIframe() && getInitialOptions().frame_context?.type === "integration";
 }
 export function $$d0() {
   if ($$o2() && getFeatureFlags().embedkit_v2) {

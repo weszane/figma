@@ -35,15 +35,15 @@ import { fy, wx, uX, Qi, Ij, gD, Dl, Vp, zn, R8, se, fd, pm } from "../figma_app
 import { hideDropdownAction, showDropdownThunk, selectViewAction } from "../905/929976";
 import { s as _$$s2 } from "../905/58247";
 import { showModalHandler, popModalStack, hideModal } from "../905/156213";
-import { WX } from "../figma_app/350203";
+import { PublishModalState } from "../figma_app/350203";
 import { withTrackedClick, TrackingProvider } from "../figma_app/831799";
 import { A as _$$A2 } from "../905/72153";
 import { trackGenericEvent } from "../figma_app/314264";
-import { D as _$$D, HN, oH } from "../figma_app/740025";
+import { MAX_TAGS_PER_FEED, MAX_TAGLINE_LENGTH, getStatusOrDefault } from "../figma_app/740025";
 import { sendPublisherInvites, isAcceptedPublisher, isAnyPublisher } from "../figma_app/564095";
 import { j4, UU, of, f7, kN, Dd, $W, oB as _$$oB, xw } from "../figma_app/599979";
 import { D as _$$D2 } from "../905/274925";
-import { Ni } from "../figma_app/188152";
+import { DropdownEnableState } from "../figma_app/188152";
 import { getUserId, selectUser } from "../905/372672";
 import { liveStoreInstance, IT } from "../905/713695";
 import { eE as _$$eE, Ts, wA as _$$wA } from "../figma_app/336853";
@@ -101,7 +101,7 @@ import { v as _$$v2 } from "../905/318279";
 import { jE } from "../figma_app/639088";
 import { A as _$$A9 } from "../5724/965092";
 import { A as _$$A0 } from "../905/562488";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { resolveMessage } from "../905/231762";
 import { AutoLayout } from "../905/470281";
 import { um } from "../905/14223";
@@ -838,7 +838,7 @@ function tx({
   publishedPlugin: n,
   org: r
 }) {
-  if (!xf(e)) return {
+  if (!isValidEmail(e)) return {
     state: _$$d.ERROR,
     content: e
   };
@@ -1132,7 +1132,7 @@ function tM({
         g(e);
       },
       onSubmit: function (e) {
-        let t = xf(e.inputValue) ? {
+        let t = isValidEmail(e.inputValue) ? {
           inputValue: "",
           tokens: [...e.tokens, y(e.inputValue)],
           errorMessage: e.errorMessage
@@ -1853,8 +1853,8 @@ function iO({
     label: getI18nString("community.general.tagline"),
     afterLabelContent: jsx(iP, {
       value: e,
-      warningLength: _$$D,
-      maxLength: HN
+      warningLength: MAX_TAGS_PER_FEED,
+      maxLength: MAX_TAGLINE_LENGTH
     }),
     error: n,
     required: a,
@@ -2022,7 +2022,7 @@ class iW extends Component {
     };
     this.inputDebounce = debounce((e, t) => {
       if ("name" === e || "description" === e) {
-        let t = "name" === e ? WX.EDIT_NAME : WX.EDIT_DESCRIPTION;
+        let t = "name" === e ? PublishModalState.EDIT_NAME : PublishModalState.EDIT_DESCRIPTION;
         trackEventAnalytics("community_publish_modal", {
           userId: this.props.user.id,
           orgId: this.getOrgIdFromPublisherOrRole(),
@@ -2126,7 +2126,7 @@ class iW extends Component {
         id: this.getLocalFileIdOrPluginId(),
         metadata: {
           ...this.props.publishingState.metadata,
-          commentsSetting: this.props.commentsDisabled ? Ni.ENABLED : Ni.ALL_DISABLED
+          commentsSetting: this.props.commentsDisabled ? DropdownEnableState.ENABLED : DropdownEnableState.ALL_DISABLED
         }
       }));
     };
@@ -2225,7 +2225,7 @@ class iW extends Component {
         this.isUniversalPosting() && trackEventAnalytics("community_publish_modal", {
           userId: this.props.user.id,
           orgId: this.getOrgIdFromPublisherOrRole(),
-          step: WX.ERROR,
+          step: PublishModalState.ERROR,
           errors: Object.values(e)
         });
         return;
@@ -2312,7 +2312,7 @@ class iW extends Component {
         this.isUniversalPosting() && trackEventAnalytics("community_publish_modal", {
           userId: this.props.user.id,
           orgId: this.getOrgIdFromPublisherOrRole(),
-          step: WX.PUBLISH,
+          step: PublishModalState.PUBLISH,
           isPaid: metadata.isPaid
         });
         let i = this.props.publishedPlugin.current_plugin_version_id || void 0;
@@ -3439,7 +3439,7 @@ let iY = connect((e, t) => {
   let u = d.id ? d.id : c?.id;
   let p = localFileId && e.publishingPlugins[localFileId] || e.publishingPlugins[d.id];
   localFileId && !p?.metadata && (p = {
-    status: oH(p),
+    status: getStatusOrDefault(p),
     metadata: getPublishingData({
       ...getPermissionsState(e),
       localPlugins: e.localPlugins,
@@ -3465,7 +3465,7 @@ let iY = connect((e, t) => {
     dropdownShown: e.dropdownShown,
     permissionsState: getPermissionsState(e),
     teams: e.teams,
-    commentsDisabled: p.metadata.commentsSetting === Ni.ALL_DISABLED,
+    commentsDisabled: p.metadata.commentsSetting === DropdownEnableState.ALL_DISABLED,
     authedActiveCommunityProfile: e.authedActiveCommunityProfile,
     isAdminOfPrivateOrgPlugin: d && canAdminOrg(d.org_id, e, e.user.id),
     isRepublishingUnpublishedPlugin: !d.id && !!c

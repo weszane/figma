@@ -4,7 +4,7 @@ import { lQ } from "../905/934246";
 import s from "classnames";
 import { useDebouncedCallback } from "use-debounce";
 import { trackEventAnalytics } from "../905/449184";
-import { N0 } from "../figma_app/416935";
+import { parseEmailList } from "../figma_app/416935";
 import { H as _$$H } from "../905/620380";
 import { useLatestRef } from "../figma_app/922077";
 import { LazyInputForwardRef } from "../905/408237";
@@ -334,7 +334,7 @@ export function $$E0({
           },
           onChange: e => {
             let n = e.currentTarget.value;
-            /[;,\n]/.test(n) ? eA(N0(n).reduce((e, n) => {
+            /[;,\n]/.test(n) ? eA(parseEmailList(n).reduce((e, n) => {
               let r = i(n, t.tokens);
               return r ? e.concat([r]) : e;
             }, [])) : ec(n);

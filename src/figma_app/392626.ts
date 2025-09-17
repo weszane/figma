@@ -7,7 +7,7 @@ import { Button } from "../905/521428";
 import { ModalRootComponent } from "../905/38914";
 import { DialogContents, DialogHeader, DialogTitle, DialogBody, DialogFooter } from "../figma_app/272243";
 import { getResourceDataOrFallback } from "../905/663269";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { isGovCluster } from "../figma_app/169182";
 import { useSubscription } from "../figma_app/288654";
 import { XHR } from "../905/910117";
@@ -127,7 +127,7 @@ function B(e) {
       V(2);
       return;
     }
-    if (H && !xf(H)) {
+    if (H && !isValidEmail(H)) {
       ei("email_format");
       return;
     }

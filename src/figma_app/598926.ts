@@ -4,7 +4,7 @@ import { XHR } from "../905/910117";
 import { FlashActions } from "../905/573154";
 import { getI18nString } from "../905/303541";
 import { VisualBellActions } from "../905/302958";
-import { bx } from "../905/34809";
+import { stopCreateNewFolder } from "../905/34809";
 import { selectViewAction } from "../905/929976";
 import { popModalStack } from "../905/156213";
 import { trackFolderEvent } from "../figma_app/314264";
@@ -64,7 +64,7 @@ let $$w11 = createOptimistThunk((e, t) => {
     e.dispatch(FlashActions.error(r));
     return null;
   }
-  if (e.dispatch(popModalStack()), e.dispatch(bx()), void 0 === t.isInviteOnly && void 0 === t.isViewOnly && void 0 === t.teamAccess) {
+  if (e.dispatch(popModalStack()), e.dispatch(stopCreateNewFolder()), void 0 === t.isInviteOnly && void 0 === t.isViewOnly && void 0 === t.teamAccess) {
     e.dispatch(FlashActions.error("inviteOnly and viewOnly fields or teamAccess field must be defined"));
     return null;
   }

@@ -6,7 +6,7 @@ import { f } from "../905/54715";
 import { H } from "../905/222445";
 import { J } from "../905/125993";
 import { getI18nString } from "../905/303541";
-import { _I, PY } from "../905/34809";
+import { hideMobileNav, showMobileNav } from "../905/34809";
 import { KindEnum } from "../905/129884";
 export function $$p0(e) {
   let t = useDispatch();
@@ -30,7 +30,7 @@ export function $$p0(e) {
         className: "mobile_tool_bar--toolBarMobileLeftSide--nGw8A",
         children: [jsx(IconButton, {
           onClick: () => {
-            i ? t(_I()) : t(PY());
+            i ? t(hideMobileNav()) : t(showMobileNav());
           },
           "aria-label": i ? getI18nString("mobile_tool_bar.hide_navigation") : getI18nString("mobile_tool_bar.show_navigation"),
           htmlAttributes: {

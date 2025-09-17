@@ -4,7 +4,7 @@ import { ButtonPrimitive } from "../905/632989";
 import o from "../vendor/197638";
 import { R } from "../5430/455826";
 import { renderI18nText } from "../905/303541";
-import { Ep, YW, dz, Un } from "../figma_app/350203";
+import { ALLOWED_HTML_TAGS, COMMUNITY_MIN_WIDTH, COMMUNITY_MODAL_HEIGHT, COMMUNITY_MODAL_WIDTH } from "../figma_app/350203";
 var a = o;
 let $$u = "truncated_description_view--blueLink--v3wsX blue_link--blueLink--9rlnd";
 export function $$m0({
@@ -15,7 +15,7 @@ export function $$m0({
     if (!t.current) return;
     let r = document.createElement("div");
     r.innerHTML = a().sanitize(e);
-    let s = Ep.map(e => `:not(${e})`).join("");
+    let s = ALLOWED_HTML_TAGS.map(e => `:not(${e})`).join("");
     for (let e of r.querySelectorAll(s)) e.parentNode?.removeChild(e);
     t.current.innerHTML = a().sanitize(r.innerHTML);
   }, [t, e]);
@@ -31,7 +31,7 @@ export function $$$$_1({
   let o = useRef(null);
   let [a, _] = useState(!1);
   let [p, h] = useState(!1);
-  let x = R(YW) ? dz : Un;
+  let x = R(COMMUNITY_MIN_WIDTH) ? COMMUNITY_MODAL_HEIGHT : COMMUNITY_MODAL_WIDTH;
   return (useEffect(() => {
     o.current && o.current.getBoundingClientRect().height > x && (_(!0), h(!0));
   }, [x]), e) ? jsxs(Fragment, {

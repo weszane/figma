@@ -27,10 +27,10 @@ import { getCommunityResourcePayment } from "../figma_app/4253";
 import { isSubscriptionActive } from "../figma_app/808294";
 import { getResourceActionText, isApplePublisherAccepted, isResourceBlocked } from "../figma_app/777551";
 import { mapVtToFileTypeEnum } from "../figma_app/427318";
-import { YW } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { UpgradeAction } from "../905/370443";
 import { TrackingProvider } from "../figma_app/831799";
-import { cs } from "../figma_app/740025";
+import { isOrgOrTeamExport } from "../figma_app/740025";
 import { IE } from "../5430/231178";
 import { hasHubFileOrPresetKey } from "../figma_app/255679";
 import { KindEnum } from "../905/129884";
@@ -176,7 +176,7 @@ export function $$Q0({
   let l = createRef();
   let c = useDispatch();
   let [d, u] = useState(!1);
-  let m = useSelector(e => cs(e.authedActiveCommunityProfile));
+  let m = useSelector(e => isOrgOrTeamExport(e.authedActiveCommunityProfile));
   let _ = useSelector(e => e.userFlags).apple_eula_accepted;
   let p = useSelector(e => !!e.modalShown);
   useEffect(() => {
@@ -187,7 +187,7 @@ export function $$Q0({
   let f = Rr(c);
   let v = _$$A(e);
   let b = _$$T();
-  let j = usePrefersMediaQuery(`(max-width: ${YW}px)`);
+  let j = usePrefersMediaQuery(`(max-width: ${COMMUNITY_MIN_WIDTH}px)`);
   let w = getResourceActionText(t);
   let {
     isDisabled

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { jsx } from 'react/jsx-runtime';
 import { reportError } from '../905/11';
 import { U as _$$U } from '../905/18613';
-import { HZ } from '../905/34809';
+import { searchResultClicked } from '../905/34809';
 import { tl as _$$tl } from '../905/70982';
 import { an, y$ } from '../905/81009';
 import { combineWithHyphen, ShareContext } from '../905/91820';
@@ -18,7 +18,7 @@ import { F as _$$F } from '../905/300562';
 import { getI18nString } from '../905/303541';
 import { getUserId } from '../905/372672';
 import { iC } from '../905/466026';
-import { NQ } from '../905/508367';
+import { appendSearchParam } from '../905/508367';
 import { I as _$$I } from '../905/531560';
 import { l as _$$l3 } from '../905/572910';
 import { FlashActions } from '../905/573154';
@@ -184,7 +184,7 @@ export function $$ek0(e) {
         }));
       } else {
         let t = e.file.parentOrgId ? `/files/${e.file.parentOrgId}/project/${e.file.folderId}` : `/files/project/${e.file.folderId}`;
-        t = user ? NQ(t, 'fuid', user.id) : t;
+        t = user ? appendSearchParam(t, 'fuid', user.id) : t;
         customHistory.redirect(t);
       }
     }
@@ -200,7 +200,7 @@ export function $$ek0(e) {
     }));
   };
   let eJ = t => {
-    switch (e.searchIndexToLog != null && i(HZ({
+    switch (e.searchIndexToLog != null && i(searchResultClicked({
       index: e.searchIndexToLog
     })), t.type) {
       case nb.FILE:

@@ -7,7 +7,7 @@ import { LinkPrimitive } from "../figma_app/496441";
 import { resourceUtils } from "../905/989992";
 import d from "classnames";
 import { trackEventAnalytics } from "../905/449184";
-import { N7, QV } from "../905/508367";
+import { compareValues, navigateToFile } from "../905/508367";
 import { IT } from "../905/864644";
 import { YO } from "../figma_app/672951";
 import { desktopAPIInstance } from "../figma_app/876459";
@@ -132,7 +132,7 @@ function em(e) {
       planId: d || _$$P
     }));
     let n = "recentsAndSharing" === o.view || "folder" === o.view ? o : void 0;
-    N7(d, e.parent_org_id, u, e.team_id) ? QV({
+    compareValues(d, e.parent_org_id, u, e.team_id) ? navigateToFile({
       file: {
         key: e.key,
         editorType: e.editor_type || void 0

@@ -4,7 +4,7 @@ import { E } from '../905/53857';
 import { renderI18nText } from '../905/303541';
 import { getCommunityResourcePayment } from '../figma_app/4253';
 import { hasFreemiumCode, hasMonetizedResourceMetadata, isThirdPartyMonetized } from '../figma_app/45218';
-import { cs } from '../figma_app/740025';
+import { isOrgOrTeamExport } from '../figma_app/740025';
 import { getProductPriceString, isSubscriptionActive } from '../figma_app/808294';
 function p(e) {
   let t = getProductPriceString(e.resource.monetized_resource_metadata);
@@ -19,7 +19,7 @@ export function $$_3({
   let t = useSelector(e => e.authedActiveCommunityProfile);
   let r = getCommunityResourcePayment(e);
   let c = isSubscriptionActive(r);
-  return !cs(t) && c ? jsx(E, {
+  return !isOrgOrTeamExport(t) && c ? jsx(E, {
     variant: 'defaultOutline',
     children: renderI18nText('community.buyer.purchased')
   }) : null;
@@ -73,7 +73,7 @@ export function $$b0({
   validBadges: r = Object.values($$E4),
   authedActiveCommunityProfile: i
 }) {
-  return e ? !(i && cs(i)) && hasMonetizedResourceMetadata(e) && e.community_resource_payment && isSubscriptionActive(e.community_resource_payment) ? r.includes('purchased') ? jsx($$h2, {
+  return e ? !(i && isOrgOrTeamExport(i)) && hasMonetizedResourceMetadata(e) && e.community_resource_payment && isSubscriptionActive(e.community_resource_payment) ? r.includes('purchased') ? jsx($$h2, {
     size: t
   }) : null : hasFreemiumCode(e) ? r.includes('freemium') ? jsx(g, {
     size: t

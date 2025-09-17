@@ -7,7 +7,7 @@ import { cW } from "../figma_app/844435";
 import { trackFileEvent } from "../figma_app/314264";
 import { updateDevHandoffCodeLanguage } from "../figma_app/741237";
 import { getUserId } from "../905/372672";
-import { s as _$$s } from "../905/506024";
+import { getUserOrAnonymousId } from "../905/506024";
 import { getPluginByFileId } from "../figma_app/300692";
 import { hasLocalFileId } from "../figma_app/155287";
 import { FDocumentType } from "../905/862883";
@@ -23,7 +23,7 @@ export let $$A0 = createOptimistThunk((e, t) => {
     plugin,
     codeLanguage
   } = t;
-  let a = _$$s(i);
+  let a = getUserOrAnonymousId(i);
   let s = _(codeLanguage);
   "published-plugin" === s.type && plugin && !hasLocalFileId(plugin) && e.dispatch(gU({
     storeInRecentsKey: FDocumentType.Handoff,

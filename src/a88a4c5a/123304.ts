@@ -172,7 +172,7 @@ import { L as _$$L } from '../3674/430035';
 import { E as _$$E2 } from '../3674/466343';
 import { S as _$$S } from '../3674/674644';
 import { s as _$$s5 } from '../3682/764731';
-import { HB } from '../3973/538504';
+import { normalizeJobRole } from '../3973/538504';
 import { NuxOnboardingOverlay } from '../4452/529989';
 import { m as _$$m4 } from '../5421/111531';
 import { Ay as _$$Ay5 } from '../5421/231229';
@@ -1248,7 +1248,7 @@ function e7() {
     });
   }(exportId, n => {
     show(n)({
-      canShow: n => !t && l && s && e && HB(n) === 'developer',
+      canShow: n => !t && l && s && e && normalizeJobRole(n) === 'developer',
       onShow: () => {
         _$$o();
       }
@@ -1325,7 +1325,7 @@ function th() {
   }, [p]);
   useEffect(() => {
     show({
-      canShow: l => h && d && !u && !e.loading && !e.hasPendingRequest && o && c && !t && HB(l) === 'developer',
+      canShow: l => h && d && !u && !e.loading && !e.hasPendingRequest && o && c && !t && normalizeJobRole(l) === 'developer',
       onShow: () => {
         _$$o();
       }

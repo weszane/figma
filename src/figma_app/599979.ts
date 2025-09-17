@@ -27,7 +27,7 @@ import { Bg } from '../figma_app/246699';
 import { isPluginOrWidget, hasHubFile } from '../figma_app/427318';
 import { canAdminOrg, hasAdminRoleAccessOnTeam } from '../figma_app/642025';
 import { A as _$$A, E3 } from '../figma_app/711113';
-import { cs, cV, Gg, Gq, qA, sD, Uc, Zi } from '../figma_app/740025';
+import { isOrgOrTeamExport, getAcceptedPublisherProfile, getAssociatedProfiles, MAX_PLUGIN_SIZE, getAuthedPublisherProfile, findPublishedProfileForUser, MAX_COVER_IMAGE_SIZE, getAdminUserForProfile } from '../figma_app/740025';
 import { isResourcePendingPublishing, isUserAcceptedPublisher } from '../figma_app/777551';
 import { getCurrentUserOrgUser } from '../figma_app/951233';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -38,10 +38,10 @@ export function $$U29(e) {
   return e >= 4;
 }
 export function $$B25(e, t) {
-  let r = Gg(e);
+  let r = getAssociatedProfiles(e);
   let n = !!(t.creator.id && r.some(e => e.id === t.creator.id));
-  if (n && cs(e.authedActiveCommunityProfile)) {
-    let r = cV(t);
+  if (n && isOrgOrTeamExport(e.authedActiveCommunityProfile)) {
+    let r = getAcceptedPublisherProfile(t);
     return r?.id === e.authedActiveCommunityProfile?.id;
   }
   return n;
@@ -56,17 +56,17 @@ export function $$G19(e) {
   return hasClientMeta(e) ? r && o : !!(isPlugin(e) || isWidget(e)) && (r || E3(i));
 }
 export function $$V13(e, t) {
-  let r = qA(e, t);
+  let r = getAuthedPublisherProfile(e, t);
   let n = !!(r?.org_id || r?.team_id);
-  let i = r && Zi(r, e);
+  let i = r && getAdminUserForProfile(r, e);
   let a = i && e.user && O_(e, i);
   return isPluginOrWidget(t) && (!i || i.userId === e.user?.id) && t.creator.id === e.user?.id ? 8 : t.community_publishers?.accepted.some(t => t.id === e.user?.community_profile_id) ? !n && hasHubFile(t) ? 8 : i ? a ? n ? 7 : 2 : 3 : 2 : t.community_publishers?.pending?.some(t => t.id === e.user?.community_profile_id) ? i && a ? 6 : 1 : i ? a ? 5 : 3 : 0;
 }
 export function $$H34(e, t) {
   if ('user' in e) {
     if (t.primary_user_id === e.user?.id) return 4;
-    if (cs(t)) {
-      let r = Zi(t, e);
+    if (isOrgOrTeamExport(t)) {
+      let r = getAdminUserForProfile(t, e);
       let n = r && e.user && O_(e, r);
       if (r && n) return 4;
       if (r && !n) return 3;
@@ -103,7 +103,7 @@ export function $$X6(e, t) {
 export function $$q22(e, t, r) {
   return e?.id && Object.keys(e.versions).length > 0 ? function (e, t, r) {
     if ((e.community_publishers?.accepted || []).length > 0) {
-      let n = cV(e);
+      let n = getAcceptedPublisherProfile(e);
       let i = n && t[n.id];
       return i?.team_id ? {
         team_id: i.team_id
@@ -156,7 +156,7 @@ export function $$en21(e, t, r, n) {
         user_id: t.user.id
       }];
     }
-    let i = r && cV(r);
+    let i = r && getAcceptedPublisherProfile(r);
     let a = i ? t.authedProfilesById[i.id] : null;
     if (a?.team_id) {
       return hasAdminRoleAccessOnTeam(a?.team_id, t) ? [{
@@ -264,7 +264,7 @@ export function $$ed35(e, t) {
   if ('org_id' in e) return t.orgById[e.org_id]?.name ?? null;
   if ('team_id' in e) return t.teams[e.team_id]?.name ?? null;
   {
-    let e = t.user && sD(t.user, t.authedProfilesById);
+    let e = t.user && findPublishedProfileForUser(t.user, t.authedProfilesById);
     return e?.public_at && e?.name ? e.name : e?.public_at && e?.profile_handle ? `@${e.profile_handle}` : t.user?.handle || null;
   }
 }
@@ -283,7 +283,7 @@ export function $$ec40(e, t) {
   }
   {
     let r = t.authedUsers.byId[e.user_id] ?? t.user;
-    let n = sD(r, t.authedProfilesById);
+    let n = findPublishedProfileForUser(r, t.authedProfilesById);
     return n ? n.name : r?.name || getI18nString('general.fallback_user_name');
   }
 }
@@ -298,7 +298,7 @@ export function $$eu37(e, t) {
   }
   {
     let r = t.authedUsers.byId[e.user_id] ?? t.user;
-    let n = sD(r, t.authedProfilesById);
+    let n = findPublishedProfileForUser(r, t.authedProfilesById);
     return n ? n.profile_handle : r?.handle || null;
   }
 }
@@ -315,10 +315,10 @@ export function $$e_26(e, t = 'Image') {
       filename: t
     }));
   }
-  if (e.size > Uc) {
+  if (e.size > MAX_COVER_IMAGE_SIZE) {
     throw new Error(getI18nString('community.publishing.error_thumbnail_image_too_large', {
       filename: t,
-      max_size: Math.floor(Uc / 1e6)
+      max_size: Math.floor(MAX_COVER_IMAGE_SIZE / 1e6)
     }));
   }
   return e.size;
@@ -360,10 +360,10 @@ export async function $$ef9(e, t, r = en) {
             filename: t
           }));
         }
-        if (e.size > Gq) {
+        if (e.size > MAX_PLUGIN_SIZE) {
           throw new Error(getI18nString('community.publishing.error_thumbnail_image_too_large', {
             filename: t,
-            max_size: Math.floor(Gq / 1e6)
+            max_size: Math.floor(MAX_PLUGIN_SIZE / 1e6)
           }));
         }
       }(i);

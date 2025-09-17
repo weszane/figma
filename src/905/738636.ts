@@ -3,7 +3,7 @@ import { UIVisibilitySetting } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
-import { N7 } from "../905/508367";
+import { compareValues } from "../905/508367";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { serializeQuery } from "../905/634134";
@@ -158,7 +158,7 @@ let V = createOptimistThunk((e, t) => {
   } else if (t.openNewFileIn === ai.NEW_TAB) {
     let e = serializeQuery(i);
     customHistory.redirect(`/file/new${e ? "?" + e : ""}`, "_blank");
-  } else if (N7(e.getState().currentUserOrgId, t.org_id)) {
+  } else if (compareValues(e.getState().currentUserOrgId, t.org_id)) {
     let e = serializeQuery(i);
     customHistory.redirect(`/file/new${e ? "?" + e : ""}`);
   } else $N(e, t, !1);

@@ -138,7 +138,7 @@ import { FPlanNameType } from "../figma_app/191312";
 import { _l, B$ } from "../figma_app/995208";
 import { C5 } from "../7021/95197";
 import { $ as _$$$ } from "../1250/770005";
-import { x$ } from "../figma_app/141320";
+import { getDaysUntilExpiration } from "../figma_app/141320";
 import { getCurrentTeam } from "../figma_app/598018";
 import { ZL } from "../1250/272654";
 import { Dw } from "../figma_app/976345";
@@ -2377,7 +2377,7 @@ function n6() {
   }, [e, t, n]);
   _$$h(() => {
     o.show({
-      canShow: (e, t, n) => !mW(e, "seen_edu_offboarding_modal") && x$(t, n) !== 1 / 0,
+      canShow: (e, t, n) => !mW(e, "seen_edu_offboarding_modal") && getDaysUntilExpiration(t, n) !== 1 / 0,
       onShow: () => {
         r(showModalHandler({
           type: ZL,

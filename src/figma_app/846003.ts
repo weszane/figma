@@ -1,7 +1,7 @@
 import { getFeatureFlags } from "../905/601108";
 import { customHistory } from "../905/612521";
 import { getInitialOptions } from "../figma_app/169182";
-import { Oe } from "../905/34809";
+import { trackSidebarClick } from "../905/34809";
 import { ViewPathManager } from "../figma_app/422062";
 import { getTabTitle } from "../figma_app/471982";
 import { Af } from "../figma_app/49598";
@@ -167,7 +167,7 @@ let $$P0 = e => t => function (r) {
       ...t,
       jsCommitHash: Qr()
     }), OR(P, t));
-  } else Oe.matches(r) ? trackUserEvent("File Browser Sidebar Clicked", e.getState(), {
+  } else trackSidebarClick.matches(r) ? trackUserEvent("File Browser Sidebar Clicked", e.getState(), {
     clickedResourceType: r.payload.clickedResourceType,
     resourceIdOrKey: r.payload.resourceIdOrKey
   }) : 0 === L && (L = setTimeout(function () {

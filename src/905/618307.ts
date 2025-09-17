@@ -4,12 +4,12 @@ import { getI18nString } from "../905/303541";
 import { resolveMessage } from "../905/231762";
 import { renameFileOptimistic, filePutAction } from "../figma_app/78808";
 import { q } from "../figma_app/446378";
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 export function $$c1(e) {
   let t = {};
-  let i = Yp(e.name || null).length;
+  let i = trimOrEmpty(e.name || null).length;
   0 === i ? t.name = getI18nString("community.publishing.name_must_not_be_empty") : i > 100 && (t.name = getI18nString("community.publishing.name_must_be_at_most_100_characters_long"));
-  Yp(e.description || null).length > 1e4 && (t.description = getI18nString("community.publishing.description_must_be_at_most_10000_characters_long"));
+  trimOrEmpty(e.description || null).length > 1e4 && (t.description = getI18nString("community.publishing.description_must_be_at_most_10000_characters_long"));
   return t;
 }
 export async function $$u0({

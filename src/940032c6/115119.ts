@@ -97,7 +97,7 @@ import { hideModal, hideModalHandler, popModalStack, showModal, showModalConditi
 import { pW as _$$pW } from '../905/160095';
 import { ServiceCategories as _$$e2 } from '../905/165054';
 import { R as _$$R6 } from '../905/165069';
-import { Of as _$$Of, ol as _$$ol2, w2 as _$$w6 } from '../905/165465';
+import { EmbedOption, EmbedProvider, EmbedParamKey } from '../905/165465';
 import { UpsellModalType } from '../905/165519';
 import { setupToggleButton } from '../905/167712';
 import { ScreenReaderOnly } from '../905/172252';
@@ -109,7 +109,7 @@ import { a3 as _$$a15, ow as _$$ow } from '../905/188421';
 import { d as _$$d10 } from '../905/189168';
 import { permissionScopeHandler as _$$l, zk } from '../905/189185';
 import { AUTH_COMPLETE } from '../905/194276';
-import { m as _$$m8 } from '../905/194327';
+import { googleMapsEmbedConfig } from '../905/194327';
 import { h as _$$h2 } from '../905/200386';
 import { Hz, Of, Yw } from '../905/201596';
 import { q as _$$q4 } from '../905/202542';
@@ -184,7 +184,7 @@ import { IconButton } from '../905/443068';
 import { k as _$$k7 } from '../905/443820';
 import { J as _$$J0 } from '../905/445197';
 import { analyticsEventManager, trackEventAnalytics } from '../905/449184';
-import { hK as _$$hK } from '../905/450589';
+import { EmbedProviderType } from '../905/450589';
 import { E as _$$E8 } from '../905/453826';
 import { z as _$$z13 } from '../905/454433';
 import { U as _$$U4 } from '../905/455766';
@@ -201,7 +201,7 @@ import { eventEmitterAtom, handleAtomEvent } from '../905/502364';
 import { C as _$$C8 } from '../905/504203';
 import { Cf as _$$Cf, it as _$$it, Jz } from '../905/504727';
 import { Y as _$$Y4 } from '../905/506207';
-import { FJ } from '../905/508367';
+import { openWindow } from '../905/508367';
 import { l as _$$l9 } from '../905/509505';
 import { RecordableDiv } from '../905/511649';
 import { h as _$$h9 } from '../905/513745';
@@ -523,7 +523,7 @@ import { Df, Jo, Xs } from '../figma_app/98483';
 import { wg as _$$wg, LZ } from '../figma_app/101956';
 import { Fz } from '../figma_app/106207';
 import { S as _$$S9 } from '../figma_app/106763';
-import { om as _$$om, ON } from '../figma_app/109413';
+import { YOUTUBE_EMBED_CONFIG_HTML, YOUTUBE_EMBED_CONFIG_URL } from '../figma_app/109413';
 import { b5 as _$$b4, hi as _$$hi, iI as _$$iI, T_ as _$$T_, wh as _$$wh, xB as _$$xB, yq as _$$yq, zl as _$$zl, DW, Jl, LS, OY, UM, US, Wn, Xq, Y3, ZY, Zy } from '../figma_app/114522';
 import { booleanAtomFamily, Nl, sitesViewSetterAtomFamily, ViewActionType } from '../figma_app/115923';
 import { bm as _$$bm, g$ as _$$g$, Lc } from '../figma_app/116234';
@@ -608,7 +608,7 @@ import { Jr as _$$Jr } from '../figma_app/338442';
 import { Tj as _$$Tj2 } from '../figma_app/342207';
 import { aV as _$$aV2, CQ as _$$CQ, lj as _$$lj, wc as _$$wc } from '../figma_app/346269';
 import { Sk as _$$Sk } from '../figma_app/348938';
-import { mv as _$$mv } from '../figma_app/350203';
+import { STREAMLINED_PUBLISH_INITIATED } from '../figma_app/350203';
 import { Ig } from '../figma_app/350332';
 import { p as _$$p3 } from '../figma_app/353099';
 import { u as _$$u8 } from '../figma_app/353758';
@@ -733,7 +733,7 @@ import { wY as _$$wY } from '../figma_app/708845';
 import { iE as _$$iE, r as _$$r8, Wv as _$$Wv } from '../figma_app/711157';
 import { y0 as _$$y0 } from '../figma_app/718307';
 import { aV as _$$aV, eY as _$$eY, f4 as _$$f2, p8 as _$$p2, s6 as _$$s2, KH, Mw } from '../figma_app/722362';
-import { zp } from '../figma_app/740025';
+import { useCurrentOrgAdminInfo } from '../figma_app/740025';
 import { sT as _$$sT, UK as _$$UK, EU, Ku, RU } from '../figma_app/740163';
 import { addToSelection, getPropertiesPanelTab, normalizeTrackingEnum, removeFromSelection, renameNode, replaceSelection, setPropertiesPanelTab, transferSelection, updateHoveredNode } from '../figma_app/741237';
 import { s as _$$s9 } from '../figma_app/749682';
@@ -783,7 +783,7 @@ import { j as _$$j1, k as _$$k1 } from '../figma_app/904944';
 import { cF as _$$cF, iG as _$$iG2, LS as _$$LS, ZH as _$$ZH, P4, PR } from '../figma_app/911880';
 import { z0 } from '../figma_app/914216';
 import { zy } from '../figma_app/915202';
-import { KJ } from '../figma_app/916560';
+import { parseEmbedInput } from '../figma_app/916560';
 import { utilityNoop } from '../figma_app/918700';
 import { Badge, BadgeColor, BadgeSize } from '../figma_app/919079';
 import { useLatestRef } from '../figma_app/922077';
@@ -4336,7 +4336,7 @@ function sp({
     let t = getSingletonSceneGraph();
     let n = t.getCurrentPage();
     n && su(e, t, n);
-    U ? (await doSetup()) && (trackEventAnalytics(_$$mv, {
+    U ? (await doSetup()) && (trackEventAnalytics(STREAMLINED_PUBLISH_INITIATED, {
       fileKey: e,
       userId: N?.id,
       orgId: R?.id,
@@ -5472,7 +5472,7 @@ function rw() {
         children: connectedProject && jsx(Button, {
           variant: 'primary',
           onClick: () => {
-            FJ(_$$kR(connectedProject.id));
+            openWindow(_$$kR(connectedProject.id));
           },
           children: getI18nString('figmake.settings.connected_project.generic_error.button')
         })
@@ -5527,7 +5527,7 @@ function rC() {
         children: [jsx(Button, {
           variant: 'primary',
           onClick: () => {
-            connectedProject?.id && FJ(_$$kR(connectedProject.id));
+            connectedProject?.id && openWindow(_$$kR(connectedProject.id));
           },
           children: getI18nString('figmake.settings.connected_project.paused.button')
         }), connectedProject && jsx(rN, {
@@ -5623,17 +5623,17 @@ function rN({
   }, {
     displayText: getI18nString('figmake.settings.connected_project.dropdown.manage_project'),
     callback: () => {
-      FJ(_$$kR(e.id));
+      openWindow(_$$kR(e.id));
     }
   }, {
     displayText: getI18nString('figmake.settings.connected_project.dropdown.manage_organization'),
     callback: () => {
-      FJ(_$$n4(e.organization_id));
+      openWindow(_$$n4(e.organization_id));
     }
   }, {
     displayText: getI18nString('figmake.settings.connected_project.dropdown.manage_secrets'),
     callback: () => {
-      FJ(_$$C7(e.id));
+      openWindow(_$$C7(e.id));
     }
   }], [r, e, t]);
   let d = useRef(null);
@@ -16914,7 +16914,7 @@ function hS() {
   });
 }
 function hE() {
-  FJ(_$$m6, '_blank');
+  openWindow(_$$m6, '_blank');
 }
 function hN(e) {
   return jsx(_$$Cf, {
@@ -24545,21 +24545,21 @@ function jT(e) {
 }
 function jL(e) {
   switch (e) {
-    case _$$Of.SHOW_UI:
+    case EmbedOption.SHOW_UI:
       return getI18nString('sites.panel.html_widget.youtube.show_ui');
-    case _$$Of.AUTOPLAY:
+    case EmbedOption.AUTOPLAY:
       return getI18nString('sites.panel.html_widget.youtube.autoplay');
-    case _$$Of.ALLOW_FULLSCREEN:
+    case EmbedOption.ALLOW_FULLSCREEN:
       return getI18nString('sites.panel.html_widget.youtube.allow_fullscreen');
-    case _$$Of.MAPS_ZOOM_LEVEL:
+    case EmbedOption.MAPS_ZOOM_LEVEL:
       return getI18nString('sites.panel.html_widget.google_map.zoom');
-    case _$$Of.MAPS_LOCATION:
+    case EmbedOption.MAPS_LOCATION:
       return getI18nString('sites.panel.html_widget.google_map.location');
-    case _$$Of.ALLOW_COOKIES:
+    case EmbedOption.ALLOW_COOKIES:
       return getI18nString('sites.panel.html_widget.youtube.allow_cookies');
   }
 }
-let jP = [ON, _$$om, _$$m8];
+let jP = [YOUTUBE_EMBED_CONFIG_URL, YOUTUBE_EMBED_CONFIG_HTML, googleMapsEmbedConfig];
 function jO(e, t) {
   let i = {};
   e.specialParameters.forEach(e => {
@@ -24594,7 +24594,7 @@ function jF({
     value: i,
     onChange: e => t(e.currentTarget.value),
     placeholder: function (e) {
-      if (e === _$$Of.MAPS_LOCATION) return getI18nString('sites.panel.html_widget.google_map.location_hint');
+      if (e === EmbedOption.MAPS_LOCATION) return getI18nString('sites.panel.html_widget.google_map.location_hint');
     }(e.parameterName),
     recordingKey: n
   });
@@ -24745,7 +24745,7 @@ function jU({
             recordingKey: r
           })
         })
-      }, t.parameterName) : void 0 === s || t.location === 'htmlAttribute' && e !== _$$w6.HTML ? null : jsx(DE, {
+      }, t.parameterName) : void 0 === s || t.location === 'htmlAttribute' && e !== EmbedParamKey.HTML ? null : jsx(DE, {
         icon: null,
         label: null,
         input: jsx('div', {
@@ -24837,11 +24837,11 @@ function jW(e) {
   useEffect(() => {
     jG(t) && i(t);
   }, [t, i]);
-  let g = useMemo(() => t === _$$w6.HTML ? jP.find(e => e.allowedEmbedTypes?.includes(t) && e.urlPatterns.some(e => e.test(function (e) {
+  let g = useMemo(() => t === EmbedParamKey.HTML ? jP.find(e => e.allowedEmbedTypes?.includes(t) && e.urlPatterns.some(e => e.test(function (e) {
     let t = new DOMParser().parseFromString(e, 'text/html').querySelector('iframe');
     return t ? t.getAttribute('src') ?? '' : '';
   }(p)))) : jP.find(e => e.allowedEmbedTypes?.includes(t) && e.urlPatterns.some(e => e.test(d))), [d, p, t]);
-  let f = useMemo(() => g ? t === _$$w6.HTML ? function (e, t) {
+  let f = useMemo(() => g ? t === EmbedParamKey.HTML ? function (e, t) {
     let i = {};
     try {
       let n = new DOMParser().parseFromString(t, 'text/html').querySelector('iframe');
@@ -24861,7 +24861,7 @@ function jW(e) {
   let {
     isValid,
     errorMessage
-  } = t === _$$w6.HTML ? function (e) {
+  } = t === EmbedParamKey.HTML ? function (e) {
     let t = new DOMParser().parseFromString(e, 'text/html');
     if (getFeatureFlags().sites_generic_html_embeds) {
       if (t.body.children.length === 0 && t.head.children.length === 0) {
@@ -24883,7 +24883,7 @@ function jW(e) {
       isValid: !0
     };
   }(r || '') : function (e) {
-    let t = e.length > 0 ? KJ(e)?.url : '';
+    let t = e.length > 0 ? parseEmbedInput(e)?.url : '';
     return isInvalidValue(e) || void 0 === t ? {
       isValid: !1,
       errorMessage: getI18nString('sites.panel.generic_embed.invalid_url_input_error')
@@ -24891,8 +24891,8 @@ function jW(e) {
       isValid: !0
     };
   }(n || '');
-  let y = t === _$$w6.HTML ? !isValid && (r || '').length > 0 : !isValid && (n || '').length > 0;
-  let v = t === _$$w6.HTML ? jsx('div', {
+  let y = t === EmbedParamKey.HTML ? !isValid && (r || '').length > 0 : !isValid && (n || '').length > 0;
+  let v = t === EmbedParamKey.HTML ? jsx('div', {
     className: 'x1gskr33',
     children: jsx(jK, {
       submitOnEnter: !0,
@@ -24925,10 +24925,10 @@ function jW(e) {
         value: t,
         onChange: i,
         options: [{
-          value: _$$w6.URL,
+          value: EmbedParamKey.URL,
           label: getI18nString('sites.panel.html_widget.generic.url_label')
         }, {
-          value: _$$w6.HTML,
+          value: EmbedParamKey.HTML,
           label: getI18nString('sites.panel.html_widget.generic.html_label')
         }],
         recordingKey: generateRecordingKey(e.recordingKey, 'genericEmbedTypeControl')
@@ -24950,9 +24950,9 @@ function jW(e) {
       children: [jsx(_$$r8, {
         titleTx: function (e) {
           switch (e) {
-            case _$$ol2.YOUTUBE:
+            case EmbedProvider.YOUTUBE:
               return renderI18nText('sites.panel.html_widget.youtube_settings.title');
-            case _$$ol2.GOOGLE_MAPS:
+            case EmbedProvider.GOOGLE_MAPS:
               return renderI18nText('sites.panel.html_widget.location_settings.title');
             default:
               return null;
@@ -24962,7 +24962,7 @@ function jW(e) {
         parameters: g.specialParameters,
         values: f,
         onChange(e, i) {
-          if (t === _$$w6.HTML) {
+          if (t === EmbedParamKey.HTML) {
             let t = typeof r == 'string' ? r : '';
             if (!t) return;
             let n = new DOMParser().parseFromString(t, 'text/html').querySelector('iframe');
@@ -25109,16 +25109,16 @@ function j0() {
   if (!e?.length || !t || isInvalidValue(t)) return null;
   let i = null;
   switch (t) {
-    case _$$hK.MAILCHIMP:
+    case EmbedProviderType.MAILCHIMP:
       i = jsx(jQ, {});
       break;
-    case _$$hK.GOOGLE_MAP:
+    case EmbedProviderType.GOOGLE_MAP:
       i = jsx(jY, {});
       break;
-    case _$$hK.YOUTUBE:
+    case EmbedProviderType.YOUTUBE:
       i = jsx(j1, {});
       break;
-    case _$$hK.GENERIC:
+    case EmbedProviderType.GENERIC:
       i = jsx(jW, {
         recordingKey: 'embedPanel'
       });
@@ -25434,7 +25434,7 @@ function ku({
   let v = useAtomWithSubscription(_$$b12);
   let j = selectCurrentFile();
   let k = _$$hD();
-  let w = zp();
+  let w = useCurrentOrgAdminInfo();
   let S = _$$s2('currentPage', 'currentSelectedProperty');
   let C = useSelector(e => e.saveAsState);
   let T = _$$kk(getSingletonSceneGraph().getDirectlySelectedNodes());

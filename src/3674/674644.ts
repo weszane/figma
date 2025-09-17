@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { useAtomWithSubscription } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
-import { HB } from "../3973/538504";
+import { normalizeJobRole } from "../3973/538504";
 import { renderI18nText } from "../905/303541";
 import { Pt, xJ } from "../figma_app/422471";
 import { useCanAccessFullDevMode, useCanAccessDevModeEntryPoint } from "../figma_app/473493";
@@ -47,7 +47,7 @@ export function $$E0() {
   useEffect(() => {
     show({
       canShow: (a, i, o, l) => {
-        let r = "developer" === HB(a);
+        let r = "developer" === normalizeJobRole(a);
         return !n && !o && !l && !t && i > new Date("2024-09-25") && C && (P && e || !P && !e && r) && r;
       },
       onShow: () => {

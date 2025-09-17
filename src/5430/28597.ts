@@ -18,8 +18,8 @@ import { isApplePublisherAccepted, isFigmaPublisherAccepted, getResourceName, ge
 import { hasContent, getMainContent, isUIKitLibrary, isPluginResource, isPluginOrWidget, isSiteTemplate, hasHubFile, getResourceType, getPluginOrWidgetContent, getHubFile, isFigmakeTemplate, isMonetizedFigJamTemplate, isSlideTemplate, isWidgetResource, hasResourceType, isCooperTemplateFile } from "../figma_app/427318";
 import { Ay } from "../905/506641";
 import { $O, bK } from "../figma_app/701107";
-import { w3, YW } from "../figma_app/350203";
-import { uS, CW, e5 as _$$e } from "../figma_app/740025";
+import { COMMUNITY_WIDTH, COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
+import { getDynamicContentTranslation, normalizeSearchString, isResourcePublicWithComments } from "../figma_app/740025";
 import { hasHubFileOrPresetKey } from "../figma_app/255679";
 import { Z4 } from "../figma_app/809727";
 import { e0 as _$$e2 } from "../905/696396";
@@ -48,7 +48,7 @@ import { zi, iL } from "../905/824449";
 import ed from "../svg/56418";
 import { Ay as _$$Ay, xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { h1 } from "../905/986103";
 import { getSubscriptionPriceString } from "../figma_app/808294";
 import { hasClientMeta, hasMonetizedResourceMetadata, hasFreemiumCode, isThirdPartyMonetized, isPlugin } from "../figma_app/45218";
@@ -742,7 +742,7 @@ function eq(e) {
   } = e;
   let [l, c] = useState(!1);
   let u = n;
-  supportContact && (xf(supportContact) ? u = `mailto:${supportContact}` : supportContact.startsWith("https://") || supportContact.startsWith("http://") || (u = `//${supportContact}`));
+  supportContact && (isValidEmail(supportContact) ? u = `mailto:${supportContact}` : supportContact.startsWith("https://") || supportContact.startsWith("http://") || (u = `//${supportContact}`));
   return jsxs(_$$z, {
     children: [jsx("div", {
       children: renderI18nText("community.detail_view.last_updated_at_time_stamp", {
@@ -1248,7 +1248,7 @@ function tR({
             tab: h,
             type: "v2"
           },
-          children: r ? uS(r) : e
+          children: r ? getDynamicContentTranslation(r) : e
         }, e);
       })
     }), m && jsx("div", {
@@ -1256,7 +1256,7 @@ function tR({
       children: c.map(e => jsx(TrackedLink, {
         className: AT,
         to: new n6({}, {
-          query: CW(e)
+          query: normalizeSearchString(e)
         }).to,
         trackingEventName: "Tag clicked",
         trackingProperties: {
@@ -1588,7 +1588,7 @@ export function $$tQ2({
   let a = getResourceDescription(e);
   let c = t.related_content;
   let d = isPluginOrWidget(e);
-  let m = usePrefersMediaQuery(`(min-width: ${w3}px)`);
+  let m = usePrefersMediaQuery(`(min-width: ${COMMUNITY_WIDTH}px)`);
   let {
     showTags,
     showSidebarPublisherDetailsContainer,
@@ -1611,7 +1611,7 @@ export function $$tQ2({
     }) : void 0,
     anchorTabs: showAnchorTabs && a ? jsx(tD, {
       commentCount: t.comment_count,
-      hasCommentsEnabled: _$$e(t)
+      hasCommentsEnabled: isResourcePublicWithComments(t)
     }) : void 0,
     descriptionView: jsx(_$$u2, {
       description: a,
@@ -1657,17 +1657,17 @@ export function $$tQ2({
     children: jsxs("div", {
       className: i ? lt : "",
       children: [jsx(Ay, {
-        mediaQuery: `(max-width: ${YW - 1}px)`,
+        mediaQuery: `(max-width: ${COMMUNITY_MIN_WIDTH - 1}px)`,
         children: jsx(tG, {
           ...N
         })
       }), jsx(Ay, {
-        mediaQuery: `(min-width: ${YW}px) and (max-width: ${w3 - 1}px)`,
+        mediaQuery: `(min-width: ${COMMUNITY_MIN_WIDTH}px) and (max-width: ${COMMUNITY_WIDTH - 1}px)`,
         children: jsx(tW, {
           ...N
         })
       }), jsx(Ay, {
-        mediaQuery: `(min-width: ${w3}px)`,
+        mediaQuery: `(min-width: ${COMMUNITY_WIDTH}px)`,
         children: jsx(tV, {
           ...N
         })

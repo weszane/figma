@@ -1,107 +1,217 @@
-import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { useRef, useLayoutEffect } from "react";
-import { atom, useAtomWithSubscription } from "../figma_app/27355";
-import { M } from "../905/28866";
-import { getFalseValue } from "../figma_app/897289";
-export function $$l1(e) {
-  d(document.getElementById(e));
+import { useLayoutEffect, useRef } from 'react'
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime'
+import { M } from '../905/28866'
+import { atom, useAtomWithSubscription } from '../figma_app/27355'
+import { getFalseValue } from '../figma_app/897289'
+
+/**
+ * Hides the DOM element with the given ID.
+ * @param elementId - The ID of the DOM element to hide.
+ * @see $$l1
+ */
+export function hideElementById(elementId: string): void {
+  hideElement(document.getElementById(elementId))
 }
-function d(e) {
-  e && (e.style.display = "none");
-}
-export function $$c2(e, t, r) {
-  let a = document.getElementById(e);
-  if (!a) {
-    getFalseValue() || console.warn("Expected to find DOM element to snapshot:  " + e);
-    return () => null;
-  }
-  let s = a.cloneNode(!0);
-  t?.(s);
-  let l = () => {
-    d(a);
-    l = null;
-  };
-  let c = r;
-  return function () {
-    let e = useRef(null);
-    useLayoutEffect(() => {
-      e.current && (e.current.appendChild(s), c?.(s), c = null);
-      l?.();
-    }, [e]);
-    return jsx("div", {
-      ref: e,
-      className: [...s.classList.values()].join(" ")
-    });
-  };
-}
-class u {
-  constructor(e) {
-    this.onStatusChange = e;
-    this.deps = {};
-    this.add = (e, t) => {
-      if ("pending" === t) {
-        let t = new Promise(e => {
-          setTimeout(() => {
-            e();
-          }, 5e3);
-        });
-        this.deps[e] = t;
-        return;
-      }
-      if ("resolved" === t) {
-        let t = Promise.resolve();
-        this.deps[e] = t;
-        this.onDependencyResolved(e, t);
-        return;
-      }
-      if ("rejected" === t) {
-        let t = Promise.reject();
-        this.deps[e] = t;
-        this.onDependencyRejected(e, t);
-        return;
-      }
-      this.onStatusChange("pending");
-      t.then(r => this.onDependencyResolved(e, t)).catch(r => this.onDependencyRejected(e, t));
-      this.deps[e] = t;
-    };
-    this.onDependencyResolved = (e, t) => {
-      this.deps[e] === t && (delete this.deps[e], Object.keys(this.deps).length > 0 || this.onStatusChange("resolved"));
-    };
-    this.onDependencyRejected = (e, t) => {
-      this.deps[e] === t && (delete this.deps[e], this.onStatusChange("rejected"));
-    };
+
+/**
+ * Hides the given DOM element by setting its display to 'none'.
+ * @param element - The DOM element to hide.
+ * @see d
+ */
+function hideElement(element: HTMLElement | null): void {
+  if (element) {
+    element.style.display = 'none'
   }
 }
-export function $$p0(e, t) {
-  let r = atom("pending");
-  r.debugLabel = `${t}:LoadingPageStatus`;
-  let o = new u(t => {
-    e.set(r, t);
-  });
-  return {
-    addDependency: o.add,
-    useIsLoading: function () {
-      return "pending" === useAtomWithSubscription(r);
-    },
-    LoadablePage: function (e, t, l) {
-      let d = !1;
-      function c(s) {
-        d || (d = !0, o.add("LoadablePage", "resolved"));
-        let c = "pending" !== useAtomWithSubscription(r);
-        useLayoutEffect(() => {
-          l?.();
-        }, []);
-        return jsxs(Fragment, {
-          children: [c && jsx(e, {
-            ...s
-          }), !c && jsx(t, {})]
-        });
-      }
-      c.displayName = M(e);
-      return c;
+
+/**
+ * Creates a React component that snapshots a DOM element and renders its clone.
+ * @param elementId - The ID of the DOM element to snapshot.
+ * @param onClone - Optional callback invoked with the cloned node.
+ * @param onMount - Optional callback invoked after mounting the clone.
+ * @see $$c2
+ */
+export function createSnapshotComponent(elementId: string, onClone?: (clone: HTMLElement) => void, onMount?: (clone: HTMLElement) => void) {
+  const originalElement = document.getElementById(elementId)
+  if (!originalElement) {
+    if (!getFalseValue()) {
+      console.warn(`Expected to find DOM element to snapshot:  ${elementId}`)
     }
-  };
+    return () => null
+  }
+  const clonedNode = originalElement.cloneNode(true) as HTMLElement
+  onClone?.(clonedNode)
+
+  let cleanup = () => {
+    hideElement(originalElement)
+    cleanup = null as any
+  }
+  let mountCallback = onMount
+
+  /**
+   * React component that renders the cloned node.
+   */
+  const SnapshotComponent = () => {
+    const ref = useRef<HTMLDivElement>(null)
+
+    useLayoutEffect(() => {
+      if (ref.current) {
+        ref.current.appendChild(clonedNode)
+        mountCallback?.(clonedNode)
+        mountCallback = null
+      }
+      cleanup?.()
+    }, [ref])
+
+    return jsx('div', {
+      ref,
+      className: [...Array.from(clonedNode.classList).values()].join(' '),
+    })
+  }
+
+  return SnapshotComponent
 }
-export const QH = $$p0;
-export const Ze = $$l1;
-export const h8 = $$c2;
+
+/**
+ * Manages dependencies and their loading status.
+ * @see u
+ */
+class DependencyManager {
+  private deps: Record<string, Promise<void>> = {}
+  private onStatusChange: (status: string) => void
+
+  constructor(onStatusChange: (status: string) => void) {
+    this.onStatusChange = onStatusChange
+  }
+
+  /**
+   * Adds a dependency with a given status.
+   * @param key - Dependency key.
+   * @param status - 'pending' | 'resolved' | 'rejected' | Promise<void>
+   */
+  add = (key: string, status: 'pending' | 'resolved' | 'rejected' | Promise<void>): void => {
+    if (status === 'pending') {
+      const promise = new Promise<void>((resolve) => {
+        setTimeout(resolve, 5000)
+      })
+      this.deps[key] = promise
+      return
+    }
+    if (status === 'resolved') {
+      const promise = Promise.resolve()
+      this.deps[key] = promise
+      this.onDependencyResolved(key, promise)
+      return
+    }
+    if (status === 'rejected') {
+      const promise = Promise.reject()
+      this.deps[key] = promise
+      this.onDependencyRejected(key, promise)
+      return
+    }
+    this.onStatusChange('pending');
+    (status as Promise<void>)
+      .then(() => this.onDependencyResolved(key, status as Promise<void>))
+      .catch(() => this.onDependencyRejected(key, status as Promise<void>))
+    this.deps[key] = status as Promise<void>
+  }
+
+  /**
+   * Called when a dependency is resolved.
+   * @param key - Dependency key.
+   * @param promise - The resolved promise.
+   */
+  onDependencyResolved = (key: string, promise: Promise<void>): void => {
+    if (this.deps[key] === promise) {
+      delete this.deps[key]
+      if (Object.keys(this.deps).length === 0) {
+        this.onStatusChange('resolved')
+      }
+    }
+  }
+
+  /**
+   * Called when a dependency is rejected.
+   * @param key - Dependency key.
+   * @param promise - The rejected promise.
+   */
+  onDependencyRejected = (key: string, promise: Promise<void>): void => {
+    if (this.deps[key] === promise) {
+      delete this.deps[key]
+      this.onStatusChange('rejected')
+    }
+  }
+}
+
+/**
+ * Creates a loadable page manager with dependency tracking.
+ * @param atomManager - Atom manager for state.
+ * @param label - Debug label for the atom.
+ * @see $$p0
+ */
+export function setupLoadablePageManager(atomManager: { set: (atom: any, value: string) => void }, label: string) {
+  const statusAtom = atom('pending')
+  statusAtom.debugLabel = `${label}:LoadingPageStatus`
+
+  const dependencyManager = new DependencyManager((status) => {
+    atomManager.set(statusAtom, status)
+  })
+
+  return {
+    /**
+     * Adds a dependency to the manager.
+     */
+    addDependency: dependencyManager.add,
+
+    /**
+     * Returns true if the page is loading.
+     */
+    useIsLoading(): boolean {
+      return useAtomWithSubscription(statusAtom) === 'pending'
+    },
+
+    /**
+     * Returns a React component that renders either the loaded page or a loading fallback.
+     * @param PageComponent - The main page component.
+     * @param LoadingComponent - The loading fallback component.
+     * @param onLoaded - Optional callback after loading.
+     */
+    LoadablePage(
+      PageComponent: React.ComponentType<any>,
+      LoadingComponent: React.ComponentType<any>,
+      onLoaded?: () => void,
+    ) {
+      let resolved = false
+
+      /**
+       * LoadablePage component.
+       */
+      function LoadablePageComponent(props: any) {
+        if (!resolved) {
+          resolved = true
+          dependencyManager.add('LoadablePage', 'resolved')
+        }
+        const isLoaded = useAtomWithSubscription(statusAtom) !== 'pending'
+
+        useLayoutEffect(() => {
+          onLoaded?.()
+        }, [])
+
+        return jsxs(Fragment, {
+          children: [
+            isLoaded && jsx(PageComponent, { ...props }),
+            !isLoaded && jsx(LoadingComponent, {}),
+          ],
+        })
+      }
+
+      LoadablePageComponent.displayName = M(PageComponent)
+      return LoadablePageComponent
+    },
+  }
+}
+
+// Exported names refactored for clarity and traceability
+export const QH = setupLoadablePageManager
+export const Ze = hideElementById
+export const h8 = createSnapshotComponent

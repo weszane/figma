@@ -5,7 +5,7 @@ import o from "classnames";
 import { getI18nString } from "../905/303541";
 import { getViewerWidth, getCurrentVersion } from "../figma_app/471982";
 import { Ay } from "../905/506641";
-import { YW } from "../figma_app/350203";
+import { COMMUNITY_MIN_WIDTH } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { trackContextViewed } from "../figma_app/314264";
 import { Cn } from "../905/862913";
@@ -136,7 +136,7 @@ function w({
   let [r, n] = useState(null);
   let o = e.viewer_mode === FTemplateCategoryType.WHITEBOARD;
   let l = !!e.thumbnail_is_set;
-  let m = t ? YW : 900;
+  let m = t ? COMMUNITY_MIN_WIDTH : 900;
   return jsx("div", {
     className: a()("canvas_viewer--canvasViewerWrapper--PEx4d", {
       "canvas_viewer--smallEmbed--1di1B": t

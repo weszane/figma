@@ -5,7 +5,7 @@ import { createActionCreator } from "../905/73481";
 import { trackEventAnalytics } from "../905/449184";
 import { desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
-import { P } from "../905/724705";
+import { IpcStorageHandler } from "../905/724705";
 import { reportError } from "../905/11";
 import { logInfo } from "../905/714362";
 import { XHR } from "../905/910117";
@@ -18,7 +18,7 @@ import { setSessionState } from "../905/929976";
 import { showModalHandler } from "../905/156213";
 import { clearAnalytics } from "../figma_app/314264";
 import { z$ } from "../figma_app/840917";
-import { d9 } from "../figma_app/740025";
+import { isCommunityHubView } from "../figma_app/740025";
 import { y as _$$y, J } from "../905/235145";
 import { sessionApiInstance } from "../905/202181";
 import { createOptimistThunk } from "../905/350402";
@@ -56,11 +56,11 @@ let N = createOptimistThunk(e => {
     customHistory.redirect("/logout");
     return;
   }
-  let t = d9(e.getState().selectedView);
+  let t = isCommunityHubView(e.getState().selectedView);
   sessionApiInstance.logoutAllUsers().then(() => {
     clearAnalytics();
     U2.clear();
-    new P().sendToAllTabs(_$$y, J);
+    new IpcStorageHandler().sendToAllTabs(_$$y, J);
     customHistory.redirect(`${t ? "/community" : ""}/?fuid=`);
   }).catch(t => {
     let r = t.data?.message || getI18nString("file_browser.file_browser_actions.logout_error_without_email");

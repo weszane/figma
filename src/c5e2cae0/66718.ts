@@ -2,7 +2,7 @@ import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debounce } from "../905/915765";
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { XHR } from "../905/910117";
 import { CloseButton } from "../905/17223";
 import { I as _$$I } from "../c5e2cae0/393403";
@@ -143,7 +143,7 @@ export function $$E0(e) {
   let A = debounce(() => {
     let e = {};
     let t = getI18nString("universal_upgrade.this_field_is_required");
-    if (g.email ? xf(g.email) || (e.email = getI18nString("universal_upgrade.please_provide_a_valid_email_address")) : e.email = t, g.name || (e.name = t), g.companyName || (e.companyName = t), g.topic || (e.topic = t), g.plan || (e.plan = t), S(t => ({
+    if (g.email ? isValidEmail(g.email) || (e.email = getI18nString("universal_upgrade.please_provide_a_valid_email_address")) : e.email = t, g.name || (e.name = t), g.companyName || (e.companyName = t), g.topic || (e.topic = t), g.plan || (e.plan = t), S(t => ({
       ...t,
       formErrors: e,
       result: void 0

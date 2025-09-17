@@ -127,7 +127,7 @@ import { TextWithTruncation } from '../905/984674';
 import { postUserFlag } from '../905/985254';
 import { h1 } from '../905/986103';
 import { PG } from '../905/997533';
-import { lb } from '../3973/538504';
+import { getJobRoleDisplay } from '../3973/538504';
 import { A as _$$A5 } from '../5724/501642';
 import { A as _$$A4 } from '../5724/663128';
 import { A as _$$A3 } from '../6041/209192';
@@ -154,7 +154,7 @@ import { logAndTrackCTA } from '../figma_app/314264';
 import { kA, yK } from '../figma_app/336853';
 import { tx as _$$tx2 } from '../figma_app/395505';
 import { useFplStrings } from '../figma_app/415899';
-import { zN } from '../figma_app/416935';
+import { getEmailDomain } from '../figma_app/416935';
 import { useCurrentPrivilegedPlan } from '../figma_app/465071';
 import { isEmptyAddress } from '../figma_app/471982';
 import { T as _$$T } from '../figma_app/472024';
@@ -169,7 +169,7 @@ import { AM } from '../figma_app/637336';
 import { _Z, jE, pL, v0, Vq, yl } from '../figma_app/639088';
 import { wH } from '../figma_app/680166';
 import { w as _$$w } from '../figma_app/705249';
-import { sD } from '../figma_app/740025';
+import { findPublishedProfileForUser } from '../figma_app/740025';
 import { BrowserInfo } from '../figma_app/778880';
 import { bX } from '../figma_app/792917';
 import { Ro } from '../figma_app/805373';
@@ -4238,7 +4238,7 @@ function rF({
   });
   let _ = () => {
     let t = Object.values(a.orgById).filter(e => e.domain_capture).map(e => e.id);
-    return a.orgDomains.domains.filter(e => t.includes(e.org_id)).filter(t => zN(e.email) === t.domain).length === 0;
+    return a.orgDomains.domains.filter(e => t.includes(e.org_id)).filter(t => getEmailDomain(e.email) === t.domain).length === 0;
   };
   let A = () => t(showModalHandler({
     type: _$$u,
@@ -4306,7 +4306,7 @@ function rF({
         }), e?.profile?.job_title ? jsxs(Fragment, {
           children: [jsx('div', {
             className: ee,
-            children: lb(e?.profile?.job_title)
+            children: getJobRoleDisplay(e?.profile?.job_title)
           }), jsx('div', {
             children: jsx(Button, {
               variant: 'link',
@@ -4621,7 +4621,7 @@ let rj = {
   },
   COMMUNITY() {
     let e = selectCurrentUser();
-    let t = useSelector(e => e.user && sD(e.user, e.authedProfilesById));
+    let t = useSelector(e => e.user && findPublishedProfileForUser(e.user, e.authedProfilesById));
     return e ? jsx(eJ, {
       user: e,
       profile: t
@@ -4731,7 +4731,7 @@ let rj = {
               user: e,
               last: !(() => {
                 let i = Object.values(t.orgById).filter(e => e.domain_capture).map(e => e.id);
-                return t.orgDomains.domains.filter(e => i.includes(e.org_id)).filter(t => zN(e.email) === t.domain).length === 0;
+                return t.orgDomains.domains.filter(e => i.includes(e.org_id)).filter(t => getEmailDomain(e.email) === t.domain).length === 0;
               })()
             })]
           })]

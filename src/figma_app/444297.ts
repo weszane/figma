@@ -2,14 +2,14 @@ import { useMemo } from "react";
 import { Tv } from "../figma_app/311375";
 import { isDesignFileType } from "../figma_app/976749";
 import { useIsCurrentUserCreator } from "../figma_app/516028";
-import { y } from "../905/461685";
+import { useDraftsFolderProject } from "../905/461685";
 import { n as _$$n } from "../905/347702";
 import { A } from "../905/556276";
 import { N } from "../figma_app/191390";
 export function $$u1() {
   let e = isDesignFileType();
   let t = useIsCurrentUserCreator();
-  let r = y().transform(e => e?.canCreateSlidesFileWithReasons.result).unwrapOr(!1);
+  let r = useDraftsFolderProject().transform(e => e?.canCreateSlidesFileWithReasons.result).unwrapOr(!1);
   return !!e && !!r && !!t;
 }
 export let $$p0 = _$$n(() => {

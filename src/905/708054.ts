@@ -8,7 +8,7 @@ import { renderI18nText } from "../905/303541";
 import { aP, vQ } from "../figma_app/530167";
 import { selectViewAction } from "../905/929976";
 import { popModalStack, hideModal } from "../905/156213";
-import { s0, ZO } from "../figma_app/350203";
+import { HubAction, FigmaResourceType } from "../figma_app/350203";
 import { TrackingProvider } from "../figma_app/831799";
 import { GH, aF } from "../905/18797";
 import { e0 } from "../905/696396";
@@ -1583,8 +1583,8 @@ let w = class e extends Component {
         className: x,
         disabled: this.state.submitDisabled,
         trackingProperties: {
-          action: s0.UPDATE_PROFILE_HANDLE,
-          communityHubEntity: ZO.PROFILES,
+          action: HubAction.UPDATE_PROFILE_HANDLE,
+          communityHubEntity: FigmaResourceType.PROFILES,
           communityHubEntityId: this.props.profileId
         },
         children: renderI18nText("community.change_profile_handle_modal.change_handle")
@@ -1599,8 +1599,8 @@ let w = class e extends Component {
         className: x,
         disabled: this.state.submitDisabled || this.props.communityBlockedAt,
         trackingProperties: {
-          action: s0.CREATE_PROFILE,
-          communityHubEntity: this.props.userId ? ZO.USERS : this.props.teamId ? ZO.TEAMS : ZO.ORGS,
+          action: HubAction.CREATE_PROFILE,
+          communityHubEntity: this.props.userId ? FigmaResourceType.USERS : this.props.teamId ? FigmaResourceType.TEAMS : FigmaResourceType.ORGS,
           communityHubEntityId: this.props.userId ?? this.props.teamId ?? this.props.orgId
         },
         children: this.props.emailValidatedAt ? renderI18nText("community.change_profile_handle_modal.create_profile") : renderI18nText("community.change_profile_handle_modal.resend_email")
@@ -1609,8 +1609,8 @@ let w = class e extends Component {
   }
   render() {
     let e = {};
-    e.type = this.props.profileId ? s0.UPDATE_PROFILE_HANDLE : s0.CREATE_PROFILE;
-    this.props.profileId ? (e.communityHubEntity = ZO.PROFILES, e.communityHubEntityId = this.props.profileId) : (e.communityHubEntity = this.props.userId ? ZO.USERS : this.props.teamId ? ZO.TEAMS : ZO.ORGS, e.communityHubEntityId = this.props.userId ?? this.props.teamId ?? this.props.orgId);
+    e.type = this.props.profileId ? HubAction.UPDATE_PROFILE_HANDLE : HubAction.CREATE_PROFILE;
+    this.props.profileId ? (e.communityHubEntity = FigmaResourceType.PROFILES, e.communityHubEntityId = this.props.profileId) : (e.communityHubEntity = this.props.userId ? FigmaResourceType.USERS : this.props.teamId ? FigmaResourceType.TEAMS : FigmaResourceType.ORGS, e.communityHubEntityId = this.props.userId ?? this.props.teamId ?? this.props.orgId);
     let t = this.props.emailValidatedAt ? jsxs(Fragment, {
       children: [this.renderTitle(), this.renderContent()]
     }) : this.renderUnvalidatedAccount(this.state.validateEmailSent, this.props.userEmail);

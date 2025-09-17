@@ -1,15 +1,15 @@
-import { z } from 'zod'
-import { ProductSource, ProductStatus } from '../905/54385'
-import { SubscriptionMetadataSchema } from '../905/272080'
-import { monetizedResourceMetadataSchema } from '../905/344937'
-import { CommunityRatingStatsContainerSchema } from '../905/796201'
-import { BadgeSchema, BadgeType } from '../905/875063'
-import { PublisherInfoSchema, TeamOrgType } from '../figma_app/10554'
-import { createContentFilterSchema } from '../figma_app/70618'
-import { Ni } from '../figma_app/188152'
-import { FFileType, FPublicationStatusType, FPublisherType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312'
-import * as Ip from '../figma_app/709165'
-import { fE, P1 } from '../figma_app/809727'
+import { z } from 'zod';
+import { ProductSource, ProductStatus } from '../905/54385';
+import { SubscriptionMetadataSchema } from '../905/272080';
+import { monetizedResourceMetadataSchema } from '../905/344937';
+import { CommunityRatingStatsContainerSchema } from '../905/796201';
+import { BadgeSchema, BadgeType } from '../905/875063';
+import { PublisherInfoSchema, TeamOrgType } from '../figma_app/10554';
+import { createContentFilterSchema } from '../figma_app/70618';
+import { DropdownEnableState } from '../figma_app/188152';
+import { FFileType, FPublicationStatusType, FPublisherType, FTemplateCategoryType, FUserVerificationStatusType } from '../figma_app/191312';
+import * as Ip from '../figma_app/709165';
+import { fE, P1 } from '../figma_app/809727';
 
 /**
  * FileTypeEnum - Refactored from $$h2
@@ -21,8 +21,8 @@ export const FileTypeEnum = {
   SLIDES: FFileType.SLIDES,
   SITES: FFileType.SITES,
   COOPER: FFileType.COOPER,
-  FIGMAKE: FFileType.FIGMAKE,
-} as const
+  FIGMAKE: FFileType.FIGMAKE
+} as const;
 
 /**
  * HubFileVersionSchema - Refactored from $$g5
@@ -39,8 +39,8 @@ export const HubFileVersionSchema = z.object({
   description: z.string(),
   created_at: z.string(),
   valid_prototype: z.boolean(),
-  thumbnail_guid: z.string().nullable(),
-})
+  thumbnail_guid: z.string().nullable()
+});
 
 /**
  * HubFileSchema - Refactored from $$f3
@@ -67,7 +67,7 @@ export const HubFileSchema = z.object({
   viewer_mode: z.nativeEnum(FTemplateCategoryType),
   scaling_mode: Ip.ignore(),
   thumbnail_is_set: z.boolean().nullable(),
-  comments_setting: z.nativeEnum(Ni).nullable(),
+  comments_setting: z.nativeEnum(DropdownEnableState).nullable(),
   category_id: z.string().nullable(),
   parent_category_slug: z.string().nullish(),
   category_slug: z.string().nullish(),
@@ -83,12 +83,8 @@ export const HubFileSchema = z.object({
   support_contact: z.string().nullish(),
   published_site_url: z.string().nullish(),
   library_key: z.custom().optional(),
-  third_party_m10n_status: z.nativeEnum(ProductStatus).nullish(),
-})
-  .and(PublisherInfoSchema)
-  .and(BadgeSchema)
-  .and(monetizedResourceMetadataSchema)
-  .and(CommunityRatingStatsContainerSchema)
+  third_party_m10n_status: z.nativeEnum(ProductStatus).nullish()
+}).and(PublisherInfoSchema).and(BadgeSchema).and(monetizedResourceMetadataSchema).and(CommunityRatingStatsContainerSchema);
 
 /**
  * getCurrentHubFileVersionName - Refactored from $$_7
@@ -97,13 +93,11 @@ export const HubFileSchema = z.object({
  * @returns string | null
  */
 export function getCurrentHubFileVersionName(file: z.infer<typeof HubFileSchema>): string | null {
-  if (!file)
-    return null
-  const versionId = file.current_hub_file_version_id as string
-  if (!versionId)
-    return null
-  const version = file.versions[versionId]
-  return version?.name ?? null
+  if (!file) return null;
+  const versionId = file.current_hub_file_version_id as string;
+  if (!versionId) return null;
+  const version = file.versions[versionId];
+  return version?.name ?? null;
 }
 
 /**
@@ -113,26 +107,25 @@ export function getCurrentHubFileVersionName(file: z.infer<typeof HubFileSchema>
  * @returns object | null
  */
 export function mapHubFileToProfile(file: z.infer<typeof HubFileSchema>) {
-  if (!file)
-    return null
-  const version = file.versions[file.current_hub_file_version_id as string]
+  if (!file) return null;
+  const version = file.versions[file.current_hub_file_version_id as string];
   return {
     id: file.id,
     unpublishedAt: file.unpublished_at ? new Date(file.unpublished_at as number) : null,
     profile: {
       id: file.publisher.id,
-      entityType: file.publisher.entity_type,
+      entityType: file.publisher.entity_type
     },
     verificationStatus: file.verification_status || FUserVerificationStatusType.VERIFIED,
     currentHubFileVersion: {
       id: version.id,
-      createdAt: new Date(version.created_at),
+      createdAt: new Date(version.created_at)
     },
     publishingStatus: file.publishing_status,
     libraryKey: file.library_key ?? '',
     publishingStatusUpdatedAt: null,
-    publishedByUser: null,
-  }
+    publishedByUser: null
+  };
 }
 
 /**
@@ -142,8 +135,8 @@ export function mapHubFileToProfile(file: z.infer<typeof HubFileSchema>) {
 export const CanvasSourceEnum = {
   USER_UPLOADED: 0,
   USER_CANVAS: 1,
-  DEFAULT_CANVAS: 2,
-} as const
+  DEFAULT_CANVAS: 2
+} as const;
 
 /**
  * mapProfileToHubFile - Refactored from $$b1
@@ -152,10 +145,9 @@ export const CanvasSourceEnum = {
  * @returns object | null
  */
 export function mapProfileToHubFile(profile: any) {
-  if (!profile)
-    return null
-  const version = profile.currentHubFileVersion
-  const versions: Record<string, any> = {}
+  if (!profile) return null;
+  const version = profile.currentHubFileVersion;
+  const versions: Record<string, any> = {};
   if (version) {
     versions[version.id] = {
       id: version.id,
@@ -167,10 +159,10 @@ export function mapProfileToHubFile(profile: any) {
       description: version.description,
       created_at: version.createdAt.toISOString(),
       valid_prototype: version.validPrototype,
-      thumbnail_guid: version.thumbnailGuid,
-    }
+      thumbnail_guid: version.thumbnailGuid
+    };
   }
-  const monetized = profile.hubFileMonetizedResourceMetadata
+  const monetized = profile.hubFileMonetizedResourceMetadata;
   return {
     id: profile.id,
     badges: profile.badges.map((b: any) => mapBadgeType(b.badgeType)),
@@ -180,27 +172,27 @@ export function mapProfileToHubFile(profile: any) {
     current_hub_file_version_id: profile.currentHubFileVersionId ?? '',
     thumbnail_url: profile.thumbnailUrl ?? '',
     viewer_mode: profile.viewerMode,
-    community_publishers: mapCommunityPublishers(profile)?.community_publishers ?? { accepted: [] },
+    community_publishers: mapCommunityPublishers(profile)?.community_publishers ?? {
+      accepted: []
+    },
     creator: {
       id: profile.publishedByUser?.id ?? '',
       handle: profile.publishedByUser?.handle ?? '',
       img_url: profile.publishedByUser?.imgUrl ?? '',
-      description: profile.publishedByUser?.description ?? '',
+      description: profile.publishedByUser?.description ?? ''
     },
     view_count: profile.viewCount,
     like_count: profile.likeCount,
     duplicate_count: profile.duplicateCount,
     versions,
-    ...(monetized
-      ? {
-          monetized_resource_metadata: {
-            id: monetized.id,
-            price: monetized.price,
-            is_subscription: monetized.isSubscription ?? false,
-          },
-        }
-      : {}),
-  }
+    ...(monetized ? {
+      monetized_resource_metadata: {
+        id: monetized.id,
+        price: monetized.price,
+        is_subscription: monetized.isSubscription ?? false
+      }
+    } : {})
+  };
 }
 
 /**
@@ -210,19 +202,19 @@ export function mapProfileToHubFile(profile: any) {
  * @returns object | null
  */
 export function mapCommunityPublishers(file: any) {
-  if (!file || !file.communityPublishers)
-    return null
-  const publishers = { accepted: [] as any[], pending: [] as any[] }
-  if (
-    file.publishingStatus === FPublicationStatusType.DELISTED
-    || file.publishingStatus === FPublicationStatusType.DELISTED_CREATOR_STRIPE_DISABLED
-  ) {
+  if (!file || !file.communityPublishers) return null;
+  const publishers = {
+    accepted: [] as any[],
+    pending: [] as any[]
+  };
+  if (file.publishingStatus === FPublicationStatusType.DELISTED || file.publishingStatus === FPublicationStatusType.DELISTED_CREATOR_STRIPE_DISABLED) {
     // No accepted publishers if delisted
-    return { community_publishers: publishers }
+    return {
+      community_publishers: publishers
+    };
   }
   file.communityPublishers.forEach((publisher: any) => {
-    if (!publisher.profile)
-      return
+    if (!publisher.profile) return;
     const profile = {
       id: publisher.profile.id,
       badges: publisher.profile.badges.map((b: any) => mapBadgeType(b.badgeType)),
@@ -239,19 +231,20 @@ export function mapCommunityPublishers(file: any) {
       following_count: publisher.profile.followingCount,
       isPending: publisher.isPending,
       description: publisher.profile.description,
-      is_restricted_by_current_user: false,
-    }
+      is_restricted_by_current_user: false
+    };
     if (publisher.role === FPublisherType.CREATOR) {
       if (publisher.isPending) {
-        publishers.pending = publishers.pending || []
-        publishers.pending.push(profile)
-      }
-      else {
-        publishers.accepted.push(profile)
+        publishers.pending = publishers.pending || [];
+        publishers.pending.push(profile);
+      } else {
+        publishers.accepted.push(profile);
       }
     }
-  })
-  return { community_publishers: publishers }
+  });
+  return {
+    community_publishers: publishers
+  };
 }
 
 /**
@@ -263,15 +256,15 @@ export function mapCommunityPublishers(file: any) {
 function mapBadgeType(badgeType: string): BadgeType {
   switch (badgeType) {
     case 'figma_partner':
-      return BadgeType.FIGMA_PARTNER
+      return BadgeType.FIGMA_PARTNER;
     case 'trusted':
-      return BadgeType.TRUSTED
+      return BadgeType.TRUSTED;
     case 'creator_fund':
-      return BadgeType.CREATOR_FUND
+      return BadgeType.CREATOR_FUND;
     case 'award_2023':
-      return BadgeType.AWARD_2023
+      return BadgeType.AWARD_2023;
     default:
-      throw new Error(`Failed to convert string to CommunityBadges enum str:${badgeType}`)
+      throw new Error(`Failed to convert string to CommunityBadges enum str:${badgeType}`);
   }
 }
 
@@ -283,22 +276,22 @@ function mapBadgeType(badgeType: string): BadgeType {
 function mapEntityType(entityType: string): TeamOrgType {
   switch (entityType) {
     case 'user':
-      return TeamOrgType.USER
+      return TeamOrgType.USER;
     case 'team':
-      return TeamOrgType.TEAM
+      return TeamOrgType.TEAM;
     case 'org':
-      return TeamOrgType.ORG
+      return TeamOrgType.ORG;
     default:
-      throw new Error(`Failed to convert string to CommunityProfileEntityType str:${entityType}`)
+      throw new Error(`Failed to convert string to CommunityProfileEntityType str:${entityType}`);
   }
 }
 
 // Exported names refactored for clarity and traceability
-export const YJ = mapHubFileToProfile
-export const ZD = mapProfileToHubFile
-export const LE = FileTypeEnum
-export const NS = HubFileSchema
-export const Se = mapCommunityPublishers
-export const V_ = HubFileVersionSchema
-export const mN = CanvasSourceEnum
-export const oA = getCurrentHubFileVersionName
+export const YJ = mapHubFileToProfile;
+export const ZD = mapProfileToHubFile;
+export const LE = FileTypeEnum;
+export const NS = HubFileSchema;
+export const Se = mapCommunityPublishers;
+export const V_ = HubFileVersionSchema;
+export const mN = CanvasSourceEnum;
+export const oA = getCurrentHubFileVersionName;

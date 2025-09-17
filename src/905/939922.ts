@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { debug, throwTypeError } from "../figma_app/465776";
-import { N7, QV } from "../905/508367";
+import { compareValues, navigateToFile } from "../905/508367";
 import { OpenTarget, desktopAPIInstance } from "../figma_app/876459";
 import { customHistory } from "../905/612521";
 import { BrowserInfo } from "../figma_app/778880";
@@ -165,7 +165,7 @@ let T = async ({
   };
   switch (e.type) {
     case nb.FILE:
-      N7(n, e.file.parentOrgId, o, e.file.teamId) ? QV({
+      compareValues(n, e.file.parentOrgId, o, e.file.teamId) ? navigateToFile({
         file: {
           key: e.file.key,
           editorType: e.file.editorType || void 0
@@ -179,7 +179,7 @@ let T = async ({
       break;
     case nb.PINNED_FILE:
       let _ = await liveStoreInstance.fetchFile(e.file.key);
-      N7(n, _.parent_org_id, o, _.team_id) ? QV({
+      compareValues(n, _.parent_org_id, o, _.team_id) ? navigateToFile({
         file: {
           key: e.file.key,
           editorType: e.file.editorType
@@ -193,7 +193,7 @@ let T = async ({
       break;
     case nb.PROTOTYPE:
       let A = e.prototype.fig_file;
-      N7(n, A.parent_org_id, o, A.team_id) ? QV({
+      compareValues(n, A.parent_org_id, o, A.team_id) ? navigateToFile({
         base: "proto",
         file: {
           key: A.key,
@@ -210,7 +210,7 @@ let T = async ({
     case nb.REPO:
       let b = findBranchById(e.repo, e.branches, t);
       if (!b) return;
-      N7(n, b.parent_org_id, o, b.team_id) ? QV({
+      compareValues(n, b.parent_org_id, o, b.team_id) ? navigateToFile({
         file: {
           key: b.key
         }

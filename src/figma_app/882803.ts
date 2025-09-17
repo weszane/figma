@@ -9,7 +9,7 @@ import { O as _$$O } from "../905/301080";
 import { P as _$$P } from "../905/547523";
 import { L as _$$L } from "../905/473569";
 import _ from "classnames";
-import { R7 } from "../905/508367";
+import { browserFeatures } from "../905/508367";
 import { logger } from "../905/651849";
 import { BrowserInfo } from "../figma_app/778880";
 import { _d } from "../figma_app/795674";
@@ -66,9 +66,9 @@ export let $$N0 = memo(({
       let t = () => {
         O(e => !e);
       };
-      e.addEventListener(R7.fullscreenChangeEventName, t);
+      e.addEventListener(browserFeatures.fullscreenChangeEventName, t);
       return () => {
-        e.removeEventListener(R7.fullscreenChangeEventName, t);
+        e.removeEventListener(browserFeatures.fullscreenChangeEventName, t);
       };
     }
   }, []);
@@ -120,12 +120,12 @@ export let $$N0 = memo(({
     I && e && k(e, I);
   }, [k, e, I]);
   let M = useCallback(() => {
-    if (C || document.fullscreenElement) R7.exitFullscreenFunc();else if (BrowserInfo.isIpad) {
+    if (C || document.fullscreenElement) browserFeatures.exitFullscreenFunc();else if (BrowserInfo.isIpad) {
       let e = T.current;
       e?.webkitEnterFullscreen?.();
     } else {
       let e = E.current;
-      e && R7.requestFullscreenFunc.call(e);
+      e && browserFeatures.requestFullscreenFunc.call(e);
     }
   }, [C]);
   return jsxs("div", {

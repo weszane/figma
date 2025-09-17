@@ -78,7 +78,7 @@ import { h as _$$h } from "../905/207101";
 import { generateUUIDv4 } from "../905/871474";
 import { P as _$$P } from "../905/347284";
 import { Kq } from "../figma_app/936061";
-import { kc } from "../figma_app/740025";
+import { useAuthedActiveCommunityProfile } from "../figma_app/740025";
 import { C_ as _$$C_ } from "../figma_app/290668";
 import { dP } from "../figma_app/740163";
 import { o3, nt as _$$nt } from "../905/226610";
@@ -94,7 +94,7 @@ import { K as _$$K } from "../905/663612";
 import { c as _$$c } from "../905/534105";
 import { K0 } from "../figma_app/778125";
 import { od, rk } from "../905/748636";
-import { E as _$$E } from "../905/508367";
+import { createRect } from "../905/508367";
 import { c as _$$c2 } from "../905/196462";
 import { iX } from "../905/415545";
 import { ym } from "../905/807385";
@@ -1138,7 +1138,7 @@ function th(e) {
   }, [editorRef]);
   let h = useMemo(() => {
     if (container.current) {
-      let e = _$$E(container.current.getBoundingClientRect());
+      let e = createRect(container.current.getBoundingClientRect());
       let t = initialLocation.left - e.left;
       let o = initialLocation.top - e.top;
       return new Point(t + initialLocation.width / 2, o);
@@ -1672,7 +1672,7 @@ function nr(e) {
       forwardToDatadog: !0
     });
   });
-  let W = kc();
+  let W = useAuthedActiveCommunityProfile();
   let [Q, X] = useState(e.thread.comments.length);
   let [Y, J] = useState(!1);
   let ee = "communityHub" === t ? W : e.user;
@@ -2226,7 +2226,7 @@ function np(e) {
     return rN(o, n);
   }, [s, t]);
   let d = selectCurrentUser();
-  let m = kc();
+  let m = useAuthedActiveCommunityProfile();
   let u = "communityHub" === useSelector(e => e.selectedView).view ? m : d;
   return jsx(nu, {
     active: !0,

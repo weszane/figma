@@ -1,111 +1,168 @@
-import { throwTypeError } from "../figma_app/465776";
-import { localStorageRef } from "../905/657224";
-import { getEditorTypeOrNull } from "../figma_app/976749";
-import { FPublisherType } from "../figma_app/191312";
-import { HubTypeEnum } from "../figma_app/45218";
-import { FEditorType, isDesignOrIllustration } from "../figma_app/53721";
-import { FDocumentType, FaceToolType, ITemplateType } from "../905/862883";
-import { getPluginVersion } from "../figma_app/300692";
-export function $$u5() {
-  let e = getEditorTypeOrNull();
-  return e === FEditorType.Whiteboard ? FDocumentType.FigJam : isDesignOrIllustration(e) ? FDocumentType.Design : e === FEditorType.DevHandoff ? FDocumentType.Handoff : e === FEditorType.Slides ? FDocumentType.Slides : e === FEditorType.Cooper ? FDocumentType.Cooper : null;
+import { localStorageRef } from '../905/657224'
+import { FaceToolType, FDocumentType, ITemplateType } from '../905/862883'
+import { HubTypeEnum } from '../figma_app/45218'
+import { FEditorType, isDesignOrIllustration } from '../figma_app/53721'
+import { FPublisherType } from '../figma_app/191312'
+import { getPluginVersion } from '../figma_app/300692'
+import { throwTypeError } from '../figma_app/465776'
+import { getEditorTypeOrNull } from '../figma_app/976749'
+
+/**
+ * Determines the document type based on the current editor type.
+ * Original: $$u5
+ */
+export function getCurrentDocumentType(): FDocumentType | null {
+  const editorType = getEditorTypeOrNull()
+  if (editorType === FEditorType.Whiteboard)
+    return FDocumentType.FigJam
+  if (isDesignOrIllustration(editorType))
+    return FDocumentType.Design
+  if (editorType === FEditorType.DevHandoff)
+    return FDocumentType.Handoff
+  if (editorType === FEditorType.Slides)
+    return FDocumentType.Slides
+  if (editorType === FEditorType.Cooper)
+    return FDocumentType.Cooper
+  return null
 }
-let $$p12 = "recent-widgets-figjam";
-let $$_2 = "recent-plugins-figjam";
-let $$h7 = "recent-widgets-figma-design";
-let $$m11 = "recent-plugins-figma-design";
-let $$g8 = "recent-plugins-slides";
-let $$f3 = "recent-face-stamps-figjam";
-let $$E0 = "recent-whiteboard-tools-figjam";
-export function $$y1(e, t) {
-  if (e === FDocumentType.FigJam) switch (t) {
-    case HubTypeEnum.PLUGIN:
-      return $$_2;
-    case HubTypeEnum.WIDGET:
-      return $$p12;
-    case HubTypeEnum.HUB_FILE:
-      return "recent-templates-figjam";
-    case FaceToolType.FACE_STAMP:
-      return $$f3;
-    case FaceToolType.WHITEBOARD_TOOL:
-      return $$E0;
-    default:
-      return null;
+
+// Storage keys for recent items
+const RECENT_WIDGETS_FIGJAM = 'recent-widgets-figjam' // $$p12
+const RECENT_PLUGINS_FIGJAM = 'recent-plugins-figjam' // $$_2
+const RECENT_WIDGETS_FIGMA_DESIGN = 'recent-widgets-figma-design' // $$h7
+const RECENT_PLUGINS_FIGMA_DESIGN = 'recent-plugins-figma-design' // $$m11
+const RECENT_PLUGINS_SLIDES = 'recent-plugins-slides' // $$g8
+const RECENT_FACE_STAMPS_FIGJAM = 'recent-face-stamps-figjam' // $$f3
+const RECENT_WHITEBOARD_TOOLS_FIGJAM = 'recent-whiteboard-tools-figjam' // $$E0
+
+/**
+ * Returns the localStorage key for recent items based on document and hub type.
+ * Original: $$y1
+ */
+export function getRecentKey(docType: FDocumentType, hubType: HubTypeEnum | FaceToolType): string | null {
+  if (docType === FDocumentType.FigJam) {
+    switch (hubType) {
+      case HubTypeEnum.PLUGIN:
+        return RECENT_PLUGINS_FIGJAM
+      case HubTypeEnum.WIDGET:
+        return RECENT_WIDGETS_FIGJAM
+      case HubTypeEnum.HUB_FILE:
+        return 'recent-templates-figjam'
+      case FaceToolType.FACE_STAMP:
+        return RECENT_FACE_STAMPS_FIGJAM
+      case FaceToolType.WHITEBOARD_TOOL:
+        return RECENT_WHITEBOARD_TOOLS_FIGJAM
+      default:
+        return null
+    }
   }
-  if (e === FDocumentType.Design) switch (t) {
-    case HubTypeEnum.PLUGIN:
-      return $$m11;
-    case HubTypeEnum.WIDGET:
-      return $$h7;
-    default:
-      return null;
+  if (docType === FDocumentType.Design) {
+    switch (hubType) {
+      case HubTypeEnum.PLUGIN:
+        return RECENT_PLUGINS_FIGMA_DESIGN
+      case HubTypeEnum.WIDGET:
+        return RECENT_WIDGETS_FIGMA_DESIGN
+      default:
+        return null
+    }
   }
-  if (e === FDocumentType.Handoff) return t === HubTypeEnum.PLUGIN ? "recent-plugins-handoff" : null;
-  if (e === FDocumentType.Slides) switch (t) {
-    case HubTypeEnum.HUB_FILE:
-      return "recent-templates-piper";
-    case HubTypeEnum.PLUGIN:
-      return $$g8;
-    default:
-      return null;
+  if (docType === FDocumentType.Handoff)
+    return hubType === HubTypeEnum.PLUGIN ? 'recent-plugins-handoff' : null
+  if (docType === FDocumentType.Slides) {
+    switch (hubType) {
+      case HubTypeEnum.HUB_FILE:
+        return 'recent-templates-piper'
+      case HubTypeEnum.PLUGIN:
+        return RECENT_PLUGINS_SLIDES
+      default:
+        return null
+    }
   }
-  return e === FDocumentType.Cooper && t === HubTypeEnum.PLUGIN ? "recent-plugins-cooper" : null;
+  if (docType === FDocumentType.Cooper && hubType === HubTypeEnum.PLUGIN)
+    return 'recent-plugins-cooper'
+  return null
 }
-export function $$b9(e, t) {
-  if (!localStorageRef) return [];
-  let r = [];
-  let n = $$y1(e, t);
-  let a = n && localStorageRef.getItem(n);
+
+/**
+ * Retrieves recent items from localStorage for the given document and hub type.
+ * Original: $$b9
+ */
+export function getRecentItems(docType: FDocumentType, hubType: HubTypeEnum | FaceToolType): Array<{ type: ITemplateType, [key: string]: any }> {
+  if (!localStorageRef)
+    return []
+  const key = getRecentKey(docType, hubType)
+  const raw = key && localStorageRef.getItem(key)
+  let items: any[] = []
   try {
-    r = a && JSON.parse(a) || [];
-  } catch (e) {}
-  return r.map(e => ({
-    ...e,
-    type: e.type || ITemplateType.CommunityResource
-  }));
+    items = (raw && JSON.parse(raw)) || []
+  }
+  catch {
+    // Ignore parse errors
+  }
+  return items.map(item => ({
+    ...item,
+    type: item.type || ITemplateType.CommunityResource,
+  }))
 }
-export function $$T10(e) {
-  let t = getPluginVersion(e);
-  let r = e.community_publishers.accepted.map(e => ({
-    isPending: !1,
+
+/**
+ * Converts plugin data to include publisher profiles.
+ * Original: $$T10
+ */
+export function enrichPluginWithPublishers(plugin: any): any {
+  const version = getPluginVersion(plugin)
+  const publishers = plugin.community_publishers.accepted.map((publisher: any) => ({
+    isPending: false,
     profile: {
-      id: e.id,
-      profileHandle: e.profile_handle,
+      id: publisher.id,
+      profileHandle: publisher.profile_handle,
       user: null,
       team: null,
       org: null,
-      [e.entity_type]: {
-        name: e.name
-      }
+      [publisher.entity_type]: {
+        name: publisher.name,
+      },
     },
-    role: FPublisherType.CREATOR
-  }));
-  t.community_publishers = r;
-  return t;
+    role: FPublisherType.CREATOR,
+  }))
+  version.community_publishers = publishers
+  return version
 }
-export function $$I6(e) {
-  switch (e.type) {
+
+/**
+ * Returns the unique identifier for a template.
+ * Original: $$I6
+ */
+export function getTemplateId(template: { type: ITemplateType, id?: string, key?: string }): string {
+  switch (template.type) {
     case ITemplateType.CommunityResource:
-      return e.id;
+      return template.id!
     case ITemplateType.TeamTemplate:
-      return e.key;
+      return template.key!
     default:
-      throwTypeError(e);
+      throwTypeError(template)
   }
 }
-export function $$S4(e) {
-  return $$b9(e, HubTypeEnum.HUB_FILE).length;
+
+/**
+ * Returns the count of recent templates for a document type.
+ * Original: $$S4
+ */
+export function getRecentTemplateCount(docType: FDocumentType): number {
+  return getRecentItems(docType, HubTypeEnum.HUB_FILE).length
 }
-export const JG = $$E0;
-export const Jl = $$y1;
-export const S7 = $$_2;
-export const SO = $$f3;
-export const TI = $$S4;
-export const U_ = $$u5;
-export const X2 = $$I6;
-export const YN = $$h7;
-export const a7 = $$g8;
-export const gJ = $$b9;
-export const ul = $$T10;
-export const vY = $$m11;
-export const xk = $$p12;
+
+// Exported constants (original variable names in comments)
+export const JG = RECENT_WHITEBOARD_TOOLS_FIGJAM // $$E0
+export const Jl = getRecentKey // $$y1
+export const S7 = RECENT_PLUGINS_FIGJAM // $$_2
+export const SO = RECENT_FACE_STAMPS_FIGJAM // $$f3
+export const TI = getRecentTemplateCount // $$S4
+export const U_ = getCurrentDocumentType // $$u5
+export const X2 = getTemplateId // $$I6
+export const YN = RECENT_WIDGETS_FIGMA_DESIGN // $$h7
+export const a7 = RECENT_PLUGINS_SLIDES // $$g8
+export const gJ = getRecentItems // $$b9
+export const ul = enrichPluginWithPublishers // $$T10
+export const vY = RECENT_PLUGINS_FIGMA_DESIGN // $$m11
+export const xk = RECENT_WIDGETS_FIGJAM // $$p12

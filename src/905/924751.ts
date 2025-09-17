@@ -1,7 +1,7 @@
 import n from "../vendor/116389";
 import a from "../vendor/260986";
 import { A } from "../905/17894";
-import { V4, jI } from "../figma_app/740025";
+import { getResourceTags, MAX_FEED_ITEMS } from "../figma_app/740025";
 import { Tn } from "../905/104173";
 var r = n;
 var $$s = a;
@@ -23,7 +23,7 @@ export let $$u0 = {
         existingResourceContent: e,
         localExtension: t.deps.localExtension
       });
-      let a = V4(n, t.currentValue.id);
+      let a = getResourceTags(n, t.currentValue.id);
       return r()(i.map(e => a.find(t => t.text === e)));
     }
     return [];
@@ -33,10 +33,10 @@ export let $$u0 = {
   }, t) => {
     if (0 === t.length) return;
     let i = [];
-    if (t.length > jI && i.push({
+    if (t.length > MAX_FEED_ITEMS && i.push({
       key: "TOO_MANY_TAGS",
       data: {
-        maxTags: jI
+        maxTags: MAX_FEED_ITEMS
       }
     }), $$s()(t, "text").length !== t.length && i.push({
       key: "DUPLICATE_TAGS",
@@ -51,7 +51,7 @@ export let $$u0 = {
       localExtension: e.deps.localExtension
     });
     if (void 0 !== e.currentValue && e.currentValue !== A) {
-      let r = V4(n, e.currentValue.id);
+      let r = getResourceTags(n, e.currentValue.id);
       let a = t.filter(e => !r.some(t => $$c1(e, t)));
       a.length > 0 && i.push({
         key: "INVALID_TAGS",

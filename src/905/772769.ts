@@ -1,8 +1,8 @@
-import { xf } from "../figma_app/416935";
+import { isValidEmail } from "../figma_app/416935";
 import { isValidUrl } from "../figma_app/930338";
 import { A } from "../905/17894";
 import { wC } from "../905/448440";
-import { Yp } from "../figma_app/740025";
+import { trimOrEmpty } from "../figma_app/740025";
 let $$l1 = 100;
 let $$d2 = {
   displayName: "SupportContactField",
@@ -15,7 +15,7 @@ let $$d2 = {
     priceField: e,
     valueRequired: t
   }, i) => {
-    let a = Yp(i || null);
+    let a = trimOrEmpty(i || null);
     if ($$c0(t, e) && 0 === a.length) return [{
       key: "SUPPORT_CONTACT_MISSING",
       data: {}
@@ -28,7 +28,7 @@ let $$d2 = {
         maxLength: $$l1
       }
     });
-    !(a.length > 0) || xf(a) || isValidUrl(a) || s.push({
+    !(a.length > 0) || isValidEmail(a) || isValidUrl(a) || s.push({
       key: "INVALID_SUPPORT_CONTACT",
       data: {
         sanitizedSupportContact: a

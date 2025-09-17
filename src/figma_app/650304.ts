@@ -3,7 +3,7 @@ import { useRef, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
-import { jM } from "../905/508367";
+import { getCurrentPath } from "../905/508367";
 import { V } from "../905/749397";
 import { W8, _B } from "../figma_app/320164";
 import { J } from "../905/931050";
@@ -50,7 +50,7 @@ function T({
     try {
       h(AUTH_SET_REDIRECT_URL({
         redirectUrl: function () {
-          let e = jM();
+          let e = getCurrentPath();
           try {
             window.origin === window.parent.origin && (e = window.parent.location.pathname + window.parent.location.search);
           } catch {}

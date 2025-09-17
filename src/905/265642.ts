@@ -1,4 +1,4 @@
-import { eL, z7 } from "../figma_app/740025";
+import { MAX_TAGS_LENGTH, validateTagString } from "../figma_app/740025";
 export let $$r0 = {
   displayName: "TagsV1Field",
   fetchInitialValue: ({
@@ -7,7 +7,7 @@ export let $$r0 = {
   validate: ({}, e) => {
     if (0 === e.length) return;
     let t = [];
-    let i = eL;
+    let i = MAX_TAGS_LENGTH;
     e.length > i && t.push({
       key: "TOO_MANY_TAGS",
       data: {
@@ -23,7 +23,7 @@ export let $$r0 = {
       }
     });
     let a = e.reduce((e, t, i) => {
-      let r = z7(t);
+      let r = validateTagString(t);
       r && e.push([i, r]);
       return e;
     }, []);

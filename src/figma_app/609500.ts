@@ -6,7 +6,7 @@ import { s as _$$s } from "../905/328136";
 import { A as _$$A } from "../905/351112";
 import { gI } from "../figma_app/399472";
 import { showModalHandler } from "../905/156213";
-import { EL } from "../figma_app/740025";
+import { getCurrentOrgAdminInfo } from "../figma_app/740025";
 import { getPluginVersion } from "../figma_app/300692";
 import { ViewMode } from "../figma_app/756995";
 import { aA, Ke } from "../905/636775";
@@ -16,7 +16,7 @@ import { S as _$$S } from "../figma_app/783597";
 import { p as _$$p } from "../figma_app/93911";
 export function $$y1() {
   let e = useDispatch();
-  let t = useSelector(e => EL(e));
+  let t = useSelector(e => getCurrentOrgAdminInfo(e));
   let r = useSelector(e => e.publishedWidgets);
   useEffect(() => {
     e(gI());

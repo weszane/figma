@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { useDispatch } from "react-redux";
 import i from "classnames";
 import { useSubscription } from "../figma_app/288654";
-import { x$, cn } from "../figma_app/141320";
+import { getDaysUntilExpiration, isStudentValidated } from "../figma_app/141320";
 import { linkWithTracking, ButtonBasePrimaryTracked } from "../figma_app/637027";
 import { SvgComponent } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -32,7 +32,7 @@ export let $$k0 = registerModal(function (e) {
   });
   let E = !!_$$f("edu_hide_verification");
   if ("loaded" !== w.status || "loaded" !== k.status || !t) return null;
-  let C = x$(w.data.currentUser?.eduPeriodEnd, cn(t));
+  let C = getDaysUntilExpiration(w.data.currentUser?.eduPeriodEnd, isStudentValidated(t));
   if (C === 1 / 0 || !k.data.team) return null;
   let I = k.data.team.isOwner;
   let A = C > 0 ? function (e) {

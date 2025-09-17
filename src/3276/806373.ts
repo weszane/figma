@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "classnames";
-import { NQ } from "../905/508367";
+import { appendSearchParam } from "../905/508367";
 import { parsePxNumber } from "../figma_app/783094";
 import { oW } from "../905/675859";
 import { O7 } from "../figma_app/578832";
@@ -69,7 +69,7 @@ export function $$z1(e, t, n) {
   if (!item) return null;
   switch (type) {
     case HD.LIBRARY_ITEM:
-      return (n && item.thumbnail_url ? NQ(item.thumbnail_url, "fuid", n) : item.thumbnail_url) || null;
+      return (n && item.thumbnail_url ? appendSearchParam(item.thumbnail_url, "fuid", n) : item.thumbnail_url) || null;
     case HD.WIDGET:
       return item.redirect_snapshot_url || J;
     case HD.PLUGIN:

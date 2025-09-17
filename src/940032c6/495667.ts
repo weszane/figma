@@ -11,7 +11,7 @@ import { Z } from "../905/909123";
 import { zm, Qi } from "../figma_app/49598";
 import { C, $ } from "../figma_app/382445";
 import { showModalHandler } from "../905/156213";
-import { s0, M5 } from "../figma_app/350203";
+import { HubAction, HubEventType } from "../figma_app/350203";
 import { logAndTrackCTA } from "../figma_app/314264";
 import { selectCurrentUser } from "../905/372672";
 import { liveStoreInstance } from "../905/713695";
@@ -69,7 +69,7 @@ export function $$k0(e, t, i, p) {
       }
     };
     let v = () => ({
-      action: hasHubFile(e) ? t ? s0.HUB_FILE_UNLIKE : s0.HUB_FILE_LIKE : isWidgetResource(e) ? t ? s0.WIDGET_UNLIKE : s0.WIDGET_LIKE : t ? s0.PLUGIN_UNLIKE : s0.PLUGIN_LIKE,
+      action: hasHubFile(e) ? t ? HubAction.HUB_FILE_UNLIKE : HubAction.HUB_FILE_LIKE : isWidgetResource(e) ? t ? HubAction.WIDGET_UNLIKE : HubAction.WIDGET_LIKE : t ? HubAction.PLUGIN_UNLIKE : HubAction.PLUGIN_LIKE,
       pluginId: e.id,
       profileId: e.publisher.id,
       viewContext: l,
@@ -162,7 +162,7 @@ export function $$k0(e, t, i, p) {
       });
     };
     let I = () => ({
-      action: t ? M5.RESOURCE_UNLIKE : M5.RESOURCE_LIKE,
+      action: t ? HubEventType.RESOURCE_UNLIKE : HubEventType.RESOURCE_LIKE,
       resourceId: e.id,
       resourceType: getResourceType(e),
       profileId: e.publisher.id,
